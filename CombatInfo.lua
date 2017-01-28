@@ -2259,7 +2259,7 @@ function CI.OnSlotsFullUpdate(eventCode)
 	
 	-- if this event was caused only by user manually changing the ultimate ability, then
 	-- force recalculation of percent value. Otherwise (weapons swap) this will be called by the game
-	if ( eventCode == EVENT_ACTION_SLOT_UPDATED and not setHidden ) then
+	if ( eventCode == EVENT_ACTION_SLOT_UPDATED or EVENT_ACTION_SLOTS_FULL_UPDATE and not setHidden ) then
 		CI.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, 'player', nil, POWERTYPE_ULTIMATE, g_ultimateCurrent, 0, 0)
 	end
 end
