@@ -1,0 +1,59 @@
+## APIVersion: 100016
+## Title: |cE12000L|cFFFFB0ui E|rxtended|
+## Author: |c00C000Upularity|r and SpellBuilder
+## Version: 4.40
+## Description: Provides UnitFrames, InfoPanel, CombatEvents, Buffs tracking, Damage Meter and Loot Chat Announcements.
+## OptionalDependsOn: LibStub LibAddonMenu-2.0 LibMediaProvider-1.0
+## SavedVariables: LUIESV
+
+; The MIT License (MIT)
+;
+; Copyright (c) 2015-2016, @SpellBuilder and Upularity at ESOUI.COM
+;
+; Permission is hereby granted, free of charge, to any person obtaining a copy
+; of this software and associated documentation files (the "Software"), to deal
+; in the Software without restriction, including without limitation the rights
+; to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+; copies of the Software, and to permit persons to whom the Software is
+; furnished to do so, subject to the following conditions:
+;
+; The above copyright notice and this permission notice shall be included in
+; all copies or substantial portions of the Software.
+;
+; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+; IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+; FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+; AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+; LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+; OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+; THE SOFTWARE.
+
+libs\LibStub.lua
+
+libs\LibAddonMenu-2.0\LibAddonMenu-2.0.lua
+libs\LibAddonMenu-2.0\controls\panel.lua
+libs\LibAddonMenu-2.0\controls\submenu.lua
+libs\LibAddonMenu-2.0\controls\button.lua
+libs\LibAddonMenu-2.0\controls\checkbox.lua
+libs\LibAddonMenu-2.0\controls\colorpicker.lua
+libs\LibAddonMenu-2.0\controls\description.lua
+libs\LibAddonMenu-2.0\controls\dropdown.lua
+libs\LibAddonMenu-2.0\controls\header.lua
+libs\LibAddonMenu-2.0\controls\slider.lua
+
+LuiExtended.lua
+
+bindings.xml
+
+UI.lua
+
+locale.lua
+
+Effects.lua
+
+InfoPanel.lua
+ChatAnnouncements.lua
+CombatInfo.lua
+DamageMeter.lua
+UnitFrames.lua
+SpellCastBuffs.lua
