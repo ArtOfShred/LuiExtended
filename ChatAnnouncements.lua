@@ -55,7 +55,7 @@ function CA.RegisterGroupEvents()
 	EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT)
 	if CA.SV.GroupChatMsg then
 		EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED, CA.OnGroupMemberJoined)
-		EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT,   CA.OnGroupMemberLeft)
+		EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT,	  CA.OnGroupMemberLeft)
 	end
 end
 
@@ -201,7 +201,7 @@ function CA.PrintGoldChange()
 	local currentMoney = CommaValue( GetCurrentMoney() )
 	local icon = CA.SV.LootIcons and ' |t16:16:/esoui/art/currency/currency_gold.dds|t' or '.'
 	if sumG > 0 then printToChat( "|c32DF41Received Gold: |cCCCC33" .. CommaValue(sumG) .. "|c32DF41" .. icon .. " New total: |cCCCC33" .. currentMoney .. "|c32DF41" .. icon .. "|r" ) end
-	if sumL > 0 then printToChat(    "|cDF3241Spent Gold: |cCCCC33" .. CommaValue(sumL) .. "|cDF3241" .. icon .. " New total: |cCCCC33" .. currentMoney .. "|cDF3241" .. icon .. "|r" ) end
+	if sumL > 0 then printToChat(	 "|cDF3241Spent Gold: |cCCCC33" .. CommaValue(sumL) .. "|cDF3241" .. icon .. " New total: |cCCCC33" .. currentMoney .. "|cDF3241" .. icon .. "|r" ) end
 end
 
 function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
@@ -261,28 +261,28 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
 	
 	-- List of items to blacklist
 	blacklistIDs = {
-		[64713]  = true,	-- [Laurel]
+		[64713]	 = true,	-- [Laurel]
 		[114427] = true,	-- [Undaunted Plunder]
 		[81180]	 = true,	-- [The Serpent's Egg-Tooth]
 		[74453]	 = true,	-- [The Rid-Thar's Moon Pearls]
 		[87701]	 = true,	-- [Star-Studded Champion's Baldric]
-		[87700]  = true, 	-- [Periapt of Elinhir]
-		[69432]	 = true, 	-- [Glass Style Motif Fragment]
+		[87700]	 = true,	-- [Periapt of Elinhir]
+		[69432]	 = true,	-- [Glass Style Motif Fragment]
 		-- Mercenary Motif Pages
-		[64716]  = true,	-- [Mercenary Motif]
-		[64717]  = true,	-- [Mercenary Motif]
-		[64718]  = true,	-- [Mercenary Motif]
-		[64719]  = true,	-- [Mercenary Motif]
-		[64720]  = true,	-- [Mercenary Motif]
-		[64721]  = true,	-- [Mercenary Motif]
-		[64722]  = true,	-- [Mercenary Motif]
-		[64723]  = true,	-- [Mercenary Motif]
-		[64724]  = true,	-- [Mercenary Motif]
-		[64725]  = true,	-- [Mercenary Motif]
-		[64726]  = true,	-- [Mercenary Motif]
-		[64727]  = true,	-- [Mercenary Motif]
-		[64728]  = true,	-- [Mercenary Motif]
-		[64729]  = true,	-- [Mercenary Motif]
+		[64716]	 = true,	-- [Mercenary Motif]
+		[64717]	 = true,	-- [Mercenary Motif]
+		[64718]	 = true,	-- [Mercenary Motif]
+		[64719]	 = true,	-- [Mercenary Motif]
+		[64720]	 = true,	-- [Mercenary Motif]
+		[64721]	 = true,	-- [Mercenary Motif]
+		[64722]	 = true,	-- [Mercenary Motif]
+		[64723]	 = true,	-- [Mercenary Motif]
+		[64724]	 = true,	-- [Mercenary Motif]
+		[64725]	 = true,	-- [Mercenary Motif]
+		[64726]	 = true,	-- [Mercenary Motif]
+		[64727]	 = true,	-- [Mercenary Motif]
+		[64728]	 = true,	-- [Mercenary Motif]
+		[64729]	 = true,	-- [Mercenary Motif]
 	}
 	
 	-- Check for Blacklisted loot
@@ -323,40 +323,40 @@ end
 
 function CA.LogItem( logPrefix, icon, itemName, itemType, quantity, receivedBy )
 	local formattedRecipient
-    local formattedQuantity = ""
-    local formattedTrait = ""
+	local formattedQuantity = ""
+	local formattedTrait = ""
  
-    if (receivedBy == "") then
+	if (receivedBy == "") then
 		-- Don't display yourself
 		-- TODO: Can maybe make a Setting or something
-        formattedRecipient = ""
-    else
-        -- Create a character link to make it easier to contact the recipient
-        formattedRecipient = strfmt("→ |c%06X|H0:character:%s|h%s|h|r",
-            HashString(receivedBy) % 0x1000000, -- Use the hash of the name for the color so that is random, but consistent
-            receivedBy,
-            receivedBy:gsub("%^%a+$", "", 1)
-        ) 
-    end
+		formattedRecipient = ""
+	else
+		-- Create a character link to make it easier to contact the recipient
+		formattedRecipient = strfmt("→ |c%06X|H0:character:%s|h%s|h|r",
+			HashString(receivedBy) % 0x1000000, -- Use the hash of the name for the color so that is random, but consistent
+			receivedBy,
+			receivedBy:gsub("%^%a+$", "", 1)
+		) 
+	end
  
-    if (quantity > 1) then
+	if (quantity > 1) then
 		formattedQuantity = strfmt("|cFFFFFFx%d|r", quantity)
-    end
+	end
  
-    local traitType = GetItemLinkTraitInfo(itemName)
-    if (CA.SV.LootShowTrait and traitType ~= ITEM_TRAIT_TYPE_NONE and itemType ~= ITEMTYPE_ARMOR_TRAIT and itemType ~= ITEMTYPE_WEAPON_TRAIT) then
-        formattedTrait = strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMTRAITTYPE", traitType))
-    end
+	local traitType = GetItemLinkTraitInfo(itemName)
+	if (CA.SV.LootShowTrait and traitType ~= ITEM_TRAIT_TYPE_NONE and itemType ~= ITEMTYPE_ARMOR_TRAIT and itemType ~= ITEMTYPE_WEAPON_TRAIT) then
+		formattedTrait = strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMTRAITTYPE", traitType))
+	end
    
-    printToChat(strfmt(
-        "%s%s%s%s%s %s",
-        logPrefix,
-        icon,
-        itemName:gsub("^|H0", "|H1", 1),
-        formattedQuantity,
-        formattedTrait,
-        formattedRecipient
-    ))
+	printToChat(strfmt(
+		"%s%s%s%s%s %s",
+		logPrefix,
+		icon,
+		itemName:gsub("^|H0", "|H1", 1),
+		formattedQuantity,
+		formattedTrait,
+		formattedRecipient
+	))
 end
 
 --[[

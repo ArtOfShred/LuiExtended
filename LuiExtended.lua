@@ -1,18 +1,18 @@
 ------------------
 -- LUIE namespace
-LUIE       = {}
+LUIE	   = {}
 LUIE.name  = "LuiExtended"
-LUIE.components  = {}
+LUIE.components	 = {}
 
 local g_Version = "4.40"
 
 -- Saved variables options
 LUIE.SVName = 'LUIESV'
-LUIE.SVVer  = 1
+LUIE.SVVer	= 1
 
 -- default settings
 LUIE.D = {
-	UnitFrames_Enabled      = true,
+	UnitFrames_Enabled		= true,
 	InfoPanel_Enabled		= true,
 	CombatInfo_Enabled		= true,
 	SpellCastBuff_Enable	= true,
@@ -39,7 +39,7 @@ LUIE.Fonts = {
 	["Fontin Italic"]			= "/LuiExtended/assets/fontin_sans_i.otf",
 	["Fontin Regular"]			= "/LuiExtended/assets/fontin_sans_r.otf",
 	["Fontin SmallCaps"]		= "/LuiExtended/assets/fontin_sans_sc.otf",
-	["EnigmaBold"]              = [[/LuiExtended/assets/EnigmaBold.ttf]],
+	["EnigmaBold"]				= [[/LuiExtended/assets/EnigmaBold.ttf]],
 	['Adventure']				= [[/LuiExtended/assets/adventure.ttf]],
 	['Bazooka']					= [[/LuiExtended/assets/bazooka.ttf]],
 	['Cooline']					= [[/LuiExtended/assets/cooline.ttf]],
@@ -2437,7 +2437,7 @@ function LUIE.DelayBuffer( key, buffer, currentTime )
 	if key == nil then return end
 
 	local buffer = buffer or 10
-	local now    = currentTime or GetFrameTimeMilliseconds()
+	local now	 = currentTime or GetFrameTimeMilliseconds()
 
 	if delayBuffer[key] == nil then
 		delayBuffer[key] = now
