@@ -230,6 +230,7 @@ E.AbilityIcon = {
 	[L.Passive_Invigorating_Bash]		= '/esoui/art/icons/ability_warrior_026.dds',
 	
 	
+--[[
 	
 	-- Temp Major/Minor Buffs before ZOS update adds them
 	
@@ -300,7 +301,7 @@ E.AbilityIcon = {
 	['Minor Uncertainty']				= 'esoui/art/icons/ability_debuff_minor_uncertainty.dds',
 	['Minor Vulnerability']				= 'esoui/art/icons/ability_debuff_minor_vulnerability.dds',
 
-	
+]]--	
 	
 }
 
