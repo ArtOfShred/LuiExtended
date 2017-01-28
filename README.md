@@ -14,6 +14,9 @@ CHANGELOG:
     - Changed printToChat() function (Still left old one commented out)
     - Fixed missing Timestamp on group join/leave events
     - Added a small Blacklist for LootLog to hide certain annoying items to prevent chat spam. (In the future we could create a setting for each one of them if needed)
+    
+- Minor update
+    - Fixed Ultimate % value not correctly updating outside of combat
 
 
 Lui code is intended to be open source. Feel free to suggest or make contributions!
