@@ -15,11 +15,15 @@ local moduleName	= LUIE.name .. '_ChatAnnouncements'
 
 CA.D = {
 	TimeStamp		= true,
+	TimeStampFormat = "HH:m",
 	GroupChatMsg	= true,
 	GoldChange		= true,
 	Loot			= true,
-	LootGroup		= true,
 	LootIcons		= true,
+	LootShowTrait	= true,
+	LootGroup		= true,
+	LootOnlyNotable = false,
+	LootBlacklist	= false,
 	Experience		= true,
 	Achievements	= false,
 	AchievementsStep = 2,
@@ -51,7 +55,7 @@ function CA.RegisterGroupEvents()
 	EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT)
 	if CA.SV.GroupChatMsg then
 		EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED, CA.OnGroupMemberJoined)
-		EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT,   CA.OnGroupMemberLeft)
+		EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT,	  CA.OnGroupMemberLeft)
 	end
 end
 
@@ -60,9 +64,7 @@ function CA.OnGroupMemberJoined(eventCode, memberName)
 		-- Can occur if event is before EVENT_PLAYER_ACTIVATED
 		local characterNameLink = ZO_LinkHandler_CreateCharacterLink( gsub(memberName,"%^%a+","") )
 		if CHAT_SYSTEM then
-			if CHAT_SYSTEM.primaryContainer then
-				CHAT_SYSTEM.primaryContainer:OnChatEvent(nil, strfmt('|cFEFEFE%s|r has joined your group.', characterNameLink), CHAT_CATEGORY_SYSTEM)
-			end
+			printToChat(strfmt('|cFEFEFE%s|r has joined your group.', characterNameLink))
 		end
 	end
 end
@@ -80,11 +82,48 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, wasLocalPlayer)
 	if msg then
 		-- Can occur if event is before EVENT_PLAYER_ACTIVATED
 		if CHAT_SYSTEM then
-			if CHAT_SYSTEM.primaryContainer then
-				CHAT_SYSTEM.primaryContainer:OnChatEvent(nil, strfmt(msg, characterNameLink), CHAT_CATEGORY_SYSTEM)
-			end
+			printToChat(strfmt(msg, characterNameLink))
 		end
 	end
+end
+
+--[[----------------------------------------------------------
+	Return a formatted time
+	(Stolen from pChat - thanks Ayantir)
+--]]----------------------------------------------------------
+function CreateTimestamp(timeStr, formatStr)
+	formatStr = formatStr or CA.SV.TimeStampFormat
+	
+	-- Split up default timestamp
+	local hours, minutes, seconds = timeStr:match("([^%:]+):([^%:]+):([^%:]+)")
+	local hoursNoLead = tonumber(hours) -- hours without leading zero
+	local hours12NoLead = (hoursNoLead - 1)%12 + 1
+	local hours12
+	if (hours12NoLead < 10) then
+		hours12 = "0" .. hours12NoLead
+	else
+		hours12 = hours12NoLead
+	end
+	local pUp = "AM"
+	local pLow = "am"
+	if (hoursNoLead >= 12) then
+		pUp = "PM"
+		pLow = "pm"
+	end
+	
+	-- Create new one
+	local timestamp = formatStr
+	timestamp = timestamp:gsub("HH", hours)
+	timestamp = timestamp:gsub("H", hoursNoLead)
+	timestamp = timestamp:gsub("hh", hours12)
+	timestamp = timestamp:gsub("h", hours12NoLead)
+	timestamp = timestamp:gsub("m", minutes)
+	timestamp = timestamp:gsub("s", seconds)
+	timestamp = timestamp:gsub("A", pUp)
+	timestamp = timestamp:gsub("a", pLow)
+	
+	return timestamp
+
 end
 
 --[[----------------------------------------------------------
@@ -102,7 +141,7 @@ function CA.FormatMessage(msg, doTimestamp)
 			msg = timeStamp .. msg
 		end
 		]]-- Instead just put gray timestamp
-		msg = '|c666666[' .. GetTimeString() .. ']|r ' .. msg
+		msg = '|c8F8F8F[' .. CreateTimestamp(GetTimeString()) .. ']|r ' .. msg
 	end
 	return msg
 end
@@ -110,6 +149,7 @@ end
 --[[----------------------------------------------------------
 	printToChat function used in next sections
 --]]----------------------------------------------------------
+--[[ Leaving the old code here for reference
 local function printToChat(msg)
 	local msg = CA.FormatMessage(msg or 'no message', CA.SV.TimeStamp)
 	-- We will print into first window of primary container
@@ -119,6 +159,16 @@ local function printToChat(msg)
 		pc:SyncScrollToBuffer()
 	end
 end
+]]--
+function printToChat(msg)
+	local msg = CA.FormatMessage(msg or 'no message', CA.SV.TimeStamp)
+	if (CHAT_SYSTEM.primaryContainer) then
+		-- If possible, post as a System message so that it can appear in multiple tabs.
+		CHAT_SYSTEM.primaryContainer:OnChatEvent(nil, msg, CHAT_CATEGORY_SYSTEM)
+	else
+		CHAT_SYSTEM:AddMessage(msg)
+	end
+end	
 
 --[[----------------------------------------------------------
 	Gold change into chat
@@ -151,7 +201,7 @@ function CA.PrintGoldChange()
 	local currentMoney = CommaValue( GetCurrentMoney() )
 	local icon = CA.SV.LootIcons and ' |t16:16:/esoui/art/currency/currency_gold.dds|t' or '.'
 	if sumG > 0 then printToChat( "|c32DF41Received Gold: |cCCCC33" .. CommaValue(sumG) .. "|c32DF41" .. icon .. " New total: |cCCCC33" .. currentMoney .. "|c32DF41" .. icon .. "|r" ) end
-	if sumL > 0 then printToChat(    "|cDF3241Spent Gold: |cCCCC33" .. CommaValue(sumL) .. "|cDF3241" .. icon .. " New total: |cCCCC33" .. currentMoney .. "|cDF3241" .. icon .. "|r" ) end
+	if sumL > 0 then printToChat(	 "|cDF3241Spent Gold: |cCCCC33" .. CommaValue(sumL) .. "|cDF3241" .. icon .. " New total: |cCCCC33" .. currentMoney .. "|cDF3241" .. icon .. "|r" ) end
 end
 
 function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
@@ -176,10 +226,7 @@ function CA.RegisterLootEvents()
 end
 
 function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound, lootType, lootedBySelf, isPickpocketLoot, questItemIcon, itemId)
-
 	local icon
-	local equipType = 1
-
 	-- fix Icon for missing quest items
 	if lootType == LOOT_TYPE_QUEST_ITEM then
 		icon = questItemIcon
@@ -188,23 +235,128 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
 		local _,_,collectibleIcon = GetCollectibleInfo(collectibleId)
 		icon = collectibleIcon
 	else
-		-- get Icon and Equipment Type
-		local itemIcon,_,_,itemEquipType,_ = GetItemLinkInfo(itemName)
+		-- Get Icon
+		local itemIcon,_,_,_,_ = GetItemLinkInfo(itemName)
 		icon = itemIcon
-		equipType = itemEquipType
 	end
+	-- Create Icon string if icon exists and corresponding setting is ON
+	icon = ( CA.SV.LootIcons and icon and icon ~= '' ) and ('|t16:16:' .. icon .. '|t ') or ''
 
-	-- create Icon string if icon exists and corresponding setting is ON
-	icon = ( CA.SV.LootIcons and icon and icon ~= '' ) and ('|t16:16:'..icon..'|t') or ''
-
+	local itemType, specializedItemType = GetItemLinkItemType(itemName)
+	local itemQuality = GetItemLinkQuality(itemName)
+	local itemIsSet = GetItemLinkSetInfo(itemName)
+	
+	-- Workaround for a ZOS bug: Daedric Embers are not flagged in-game as key fragments
+	if (itemId == 69059) then specializedItemType = SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT end
+	
+	local itemIsKeyFragment = (itemType == ITEMTYPE_TROPHY) and (specializedItemType == SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT)
+	local itemIsSpecial = (itemType == ITEMTYPE_TROPHY and not itemIsKeyFragment) or (itemType == ITEMTYPE_COLLECTIBLE) or IsItemLinkConsumable(itemName)
+	
+	-- List of items to whitelist as notable
+	notableIDs = {
+		[56862] = true,	-- [Fortified Nirncrux]
+		[56863] = true,	-- [Potent Nirncrux]
+		[68342] = true,	-- [Hakeijo]
+	}
+	
+	-- List of items to blacklist
+	blacklistIDs = {
+		[64713]	 = true,	-- [Laurel]
+		[114427] = true,	-- [Undaunted Plunder]
+		[81180]	 = true,	-- [The Serpent's Egg-Tooth]
+		[74453]	 = true,	-- [The Rid-Thar's Moon Pearls]
+		[87701]	 = true,	-- [Star-Studded Champion's Baldric]
+		[87700]	 = true,	-- [Periapt of Elinhir]
+		[69432]	 = true,	-- [Glass Style Motif Fragment]
+		-- Mercenary Motif Pages
+		[64716]	 = true,	-- [Mercenary Motif]
+		[64717]	 = true,	-- [Mercenary Motif]
+		[64718]	 = true,	-- [Mercenary Motif]
+		[64719]	 = true,	-- [Mercenary Motif]
+		[64720]	 = true,	-- [Mercenary Motif]
+		[64721]	 = true,	-- [Mercenary Motif]
+		[64722]	 = true,	-- [Mercenary Motif]
+		[64723]	 = true,	-- [Mercenary Motif]
+		[64724]	 = true,	-- [Mercenary Motif]
+		[64725]	 = true,	-- [Mercenary Motif]
+		[64726]	 = true,	-- [Mercenary Motif]
+		[64727]	 = true,	-- [Mercenary Motif]
+		[64728]	 = true,	-- [Mercenary Motif]
+		[64729]	 = true,	-- [Mercenary Motif]
+	}
+	
+	-- Check for Blacklisted loot
+	if ( CA.SV.LootBlacklist and blacklistIDs[itemId] ) then return end
+	
+	-- Set prefix based on Looted/Pickpocket/Received 
+	local logPrefix = "|c0B610B[Looted]|r "
+	if ( isPickpocketLoot ) then logPrefix = "|c0B610B[Pickpocket]|r " end
+	if ( receivedBy == nil ) then logPrefix = "|c0B610B[Received]|r " end
+	
 	if lootedBySelf then
-		printToChat( strformat("|c0B610B<<1>> [<<4>><<t:3>>|c0B610B]<<2[// x|cBEF781$d]>>|r", (receivedBy == nil) and "Received" or isPickpocketLoot and "Pickpocket" or "Looted", quantity, itemName, icon ) )
-	elseif CA.SV.LootGroup and lootType == LOOT_TYPE_ITEM then
-		local quality = GetItemLinkQuality(itemName)
-		if ( equipType ~= 0 ) and ( quality >= 3 ) then
-			printToChat( strformat("|c32CE41<<1>> Got: [<<4>><<t:3>>|c32CE41]<<2[// x|cBEF781$d]>>|r", receivedBy, quantity, itemName, icon ) )
+		if CA.SV.LootOnlyNotable then
+			-- Notable items are: any set items, any purple+ items, blue+ special items (e.g., treasure maps)
+			if ( (itemIsSet) or
+				 (itemQuality >= ITEM_QUALITY_ARCANE and itemIsSpecial) or
+				 (itemQuality >= ITEM_QUALITY_ARTIFACT and not itemIsKeyFragment) or
+				 (lootType == LOOT_TYPE_COLLECTIBLE) or
+				 (notableIDs[itemId]) ) then
+				
+				CA.LogItem(logPrefix, icon, itemName, itemType, quantity, lootedBySelf and "" or receivedBy)
+			end
+		else
+			CA.LogItem(logPrefix, icon, itemName, itemType, quantity, lootedBySelf and "" or receivedBy)
+		end
+	elseif CA.SV.LootGroup then
+		if ( lootType ~= LOOT_TYPE_ITEM and lootType ~= LOOT_TYPE_COLLECTIBLE ) then return end
+		local itemQuality = GetItemLinkQuality(itemName)
+		if ( (itemIsSet) or
+			 (itemQuality >= ITEM_QUALITY_ARCANE and itemIsSpecial) or
+			 (itemQuality >= ITEM_QUALITY_ARTIFACT and not itemIsKeyFragment) or
+			 (lootType == LOOT_TYPE_COLLECTIBLE) or
+			 (notableIDs[itemId]) ) then
+
+			CA.LogItem(logPrefix, icon, itemName, itemType, quantity, self and "" or receivedBy)
 		end
 	end
+end
+
+function CA.LogItem( logPrefix, icon, itemName, itemType, quantity, receivedBy )
+	local formattedRecipient
+	local formattedQuantity = ""
+	local formattedTrait = ""
+ 
+	if (receivedBy == "") then
+		-- Don't display yourself
+		-- TODO: Can maybe make a Setting or something
+		formattedRecipient = ""
+	else
+		-- Create a character link to make it easier to contact the recipient
+		formattedRecipient = strfmt("→ |c%06X|H0:character:%s|h%s|h|r",
+			HashString(receivedBy) % 0x1000000, -- Use the hash of the name for the color so that is random, but consistent
+			receivedBy,
+			receivedBy:gsub("%^%a+$", "", 1)
+		) 
+	end
+ 
+	if (quantity > 1) then
+		formattedQuantity = strfmt("|cFFFFFFx%d|r", quantity)
+	end
+ 
+	local traitType = GetItemLinkTraitInfo(itemName)
+	if (CA.SV.LootShowTrait and traitType ~= ITEM_TRAIT_TYPE_NONE and itemType ~= ITEMTYPE_ARMOR_TRAIT and itemType ~= ITEMTYPE_WEAPON_TRAIT) then
+		formattedTrait = strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMTRAITTYPE", traitType))
+	end
+   
+	printToChat(strfmt(
+		"%s%s%s%s%s %s",
+		logPrefix,
+		icon,
+		itemName:gsub("^|H0", "|H1", 1),
+		formattedQuantity,
+		formattedTrait,
+		formattedRecipient
+	))
 end
 
 --[[

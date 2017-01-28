@@ -1,18 +1,18 @@
 ------------------
 -- LUIE namespace
-LUIE       = {}
+LUIE	   = {}
 LUIE.name  = "LuiExtended"
-LUIE.components  = {}
+LUIE.components	 = {}
 
 local g_Version = "4.40"
 
 -- Saved variables options
 LUIE.SVName = 'LUIESV'
-LUIE.SVVer  = 1
+LUIE.SVVer	= 1
 
 -- default settings
 LUIE.D = {
-	UnitFrames_Enabled      = true,
+	UnitFrames_Enabled		= true,
 	InfoPanel_Enabled		= true,
 	CombatInfo_Enabled		= true,
 	SpellCastBuff_Enable	= true,
@@ -39,7 +39,7 @@ LUIE.Fonts = {
 	["Fontin Italic"]			= "/LuiExtended/assets/fontin_sans_i.otf",
 	["Fontin Regular"]			= "/LuiExtended/assets/fontin_sans_r.otf",
 	["Fontin SmallCaps"]		= "/LuiExtended/assets/fontin_sans_sc.otf",
-	["EnigmaBold"]              = [[/LuiExtended/assets/EnigmaBold.ttf]],
+	["EnigmaBold"]				= [[/LuiExtended/assets/EnigmaBold.ttf]],
 	['Adventure']				= [[/LuiExtended/assets/adventure.ttf]],
 	['Bazooka']					= [[/LuiExtended/assets/bazooka.ttf]],
 	['Cooline']					= [[/LuiExtended/assets/cooline.ttf]],
@@ -157,13 +157,13 @@ local function LUIE_CreateSettings()
 		type = 'panel',
 		name = LUIE.name,
 		displayName = "LUIE Settings",
-		author = "Upularity",
+		author = "Upularity & SpellBuilder",
 		version = g_Version,
 		slashCommand = "/luiset",
 		registerForRefresh = true,
 		registerForDefaults = true,
-	}
-
+	}	
+	
 	local optionsData = {
 		[1] = {
 			type = "button",
@@ -1291,11 +1291,21 @@ local function LUIE_CreateSettings()
 					default = LUIE.ChatAnnouncements.D.TimeStamp,
 				},
 				[2] = {
+					type = "editbox",
+					name = "Timestamp format",
+					tooltip = "FORMAT:\nHH: hours (24)\nhh: hours (12)\nH: hour (24, no leading 0)\nh: hour (12, no leading 0)\nA: AM/PM\na: am/pm\nm: minutes\ns: seconds",
+					getFunc = function() return LUIE.ChatAnnouncements.SV.TimeStampFormat end,
+					setFunc = function(value) LUIE.ChatAnnouncements.SV.TimeStampFormat = value end,
+					width = "full",
+					disabled = function() return not LUIE.ChatAnnouncements.SV.TimeStamp end,
+					default = LUIE.ChatAnnouncements.D.TimeStampFormat,
+				},			
+				[3] = {
 					type = "header",
 					name = "Group Announcements",
 					width = "full",
 				},
-				[3] = {
+				[4] = {
 					type = "checkbox",
 					name = "Enable group changes events in chat",
 					tooltip = "Print message to chat when player joins or leaves the group.",
@@ -1304,40 +1314,12 @@ local function LUIE_CreateSettings()
 					width = "full",
 					default = LUIE.ChatAnnouncements.D.GroupChatMsg,
 				},
-				[4] = {
+				[5] = {
 					type = "header",
 					name = "Loot Announcements",
 					width = "full",
 				},
-				[5] = {
-					type = "checkbox",
-					name = "Show Gold changes",
-					--tooltip = "",
-					getFunc = function() return LUIE.ChatAnnouncements.SV.GoldChange end,
-					setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldChange = value LUIE.ChatAnnouncements.RegisterGoldEvents() end,
-					width = "full",
-					default = LUIE.ChatAnnouncements.D.GoldChange,
-				},
 				[6] = {
-					type = "checkbox",
-					name = "Show looted items",
-					--tooltip = "",
-					getFunc = function() return LUIE.ChatAnnouncements.SV.Loot end,
-					setFunc = function(value) LUIE.ChatAnnouncements.SV.Loot = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
-					width = "full",
-					default = LUIE.ChatAnnouncements.D.Loot,
-				},
-				[7] = {
-					type = "checkbox",
-					name = "Include Group members loot",
-					tooltip = "Rare or better loot that you party loots. Show loot must be enabled.",
-					getFunc = function() return LUIE.ChatAnnouncements.SV.LootGroup end,
-					setFunc = function(value) LUIE.ChatAnnouncements.SV.LootGroup = value end,
-					width = "full",
-					disabled = function() return not LUIE.ChatAnnouncements.SV.Loot end,
-					default = LUIE.ChatAnnouncements.D.LootGroup,
-				},
-				[8] = {
 					type = "checkbox",
 					name = "Show looted items icons",
 					--tooltip = "",
@@ -1346,12 +1328,70 @@ local function LUIE_CreateSettings()
 					width = "full",
 					default = LUIE.ChatAnnouncements.D.LootIcons,
 				},
+				[7] = {
+					type = "checkbox",
+					name = "Show Gold changes",
+					--tooltip = "",
+					getFunc = function() return LUIE.ChatAnnouncements.SV.GoldChange end,
+					setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldChange = value LUIE.ChatAnnouncements.RegisterGoldEvents() end,
+					width = "full",
+					default = LUIE.ChatAnnouncements.D.GoldChange,
+				},
+				[8] = {
+					type = "checkbox",
+					name = "Show looted items",
+					--tooltip = "",
+					getFunc = function() return LUIE.ChatAnnouncements.SV.Loot end,
+					setFunc = function(value) LUIE.ChatAnnouncements.SV.Loot = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
+					width = "full",
+					default = LUIE.ChatAnnouncements.D.Loot,
+				},
 				[9] = {
+					type = "checkbox",
+					name = "\t\tShow only self notable Loot",
+					tooltip = "Don't show all looted items but only notable ones. (Any set items, any purple+ items, any blue+ special items).\nShow loot must be enabled.",
+					getFunc = function() return LUIE.ChatAnnouncements.SV.LootOnlyNotable end,
+					setFunc = function(value) LUIE.ChatAnnouncements.SV.LootOnlyNotable = value end,
+					width = "full",
+					disabled = function() return not LUIE.ChatAnnouncements.SV.Loot end,
+					default = LUIE.ChatAnnouncements.D.LootOnlyNotable,
+				},
+				[10] = {
+					type = "checkbox",
+					name = "\t\tShow Group members notable loot",
+					tooltip = "Also show the notable loot group members receive. Notable items are: any set items, any purple+ items, blue+ special items (e.g., treasure maps).\nShow loot must be enabled.",
+					getFunc = function() return LUIE.ChatAnnouncements.SV.LootGroup end,
+					setFunc = function(value) LUIE.ChatAnnouncements.SV.LootGroup = value end,
+					width = "full",
+					disabled = function() return not LUIE.ChatAnnouncements.SV.Loot end,
+					default = LUIE.ChatAnnouncements.D.LootGroup,
+				},
+				[11] = {
+					type = "checkbox",
+					name = "\t\tShow Item Trait",
+					tooltip = "Show the traits of gear items in the log, so there is no need to inspect links to determine their traits.\nShow loot must be enabled.",
+					getFunc = function() return LUIE.ChatAnnouncements.SV.LootShowTrait end,
+					setFunc = function(value) LUIE.ChatAnnouncements.SV.LootShowTrait = value end,
+					width = "full",
+					disabled = function() return not LUIE.ChatAnnouncements.SV.Loot end,
+					default = LUIE.ChatAnnouncements.D.LootShowTrait,
+				},
+				[12] = {
+					type = "checkbox",
+					name = "\t\tEnable Blacklist",
+					tooltip = "Don't show annoying items:\nLaurel\nUndaunted Plunder\nThe Serpent's Egg-Tooth\nThe Rid-Thar's Moon Pearls\nStar-Studded Champion's Baldric\nPeriapt of Elinhir\nGlass Style Motif Fragments\nMercenary Motif Pages",
+					getFunc = function() return LUIE.ChatAnnouncements.SV.LootBlacklist end,
+					setFunc = function(value) LUIE.ChatAnnouncements.SV.LootBlacklist = value end,
+					width = "full",
+					disabled = function() return not LUIE.ChatAnnouncements.SV.Loot end,
+					default = LUIE.ChatAnnouncements.D.LootBlacklist,
+				},
+				[13] = {
 					type = "header",
 					name = "Experience Announcements",
 					width = "full",
 				},
-				[10] = {
+				[14] = {
 					type = "checkbox",
 					name = "Show Experience gain",
 					tooltip = "Print changes in player experience for non-combat events.",
@@ -1361,12 +1401,12 @@ local function LUIE_CreateSettings()
 					width = "full",
 					default = LUIE.ChatAnnouncements.D.Experience,
 				},
-				[11] = {
+				[15] = {
 					type = "header",
 					name = "Achievements Announcements",
 					width = "full",
 				},
-				[12] = {
+				[16] = {
 					type = "checkbox",
 					name = "Enable Achievements Tracking",
 					tooltip = "Enables achievements tracking sub-module. Below you can select categories of achievements to be tracked.",
@@ -1375,7 +1415,7 @@ local function LUIE_CreateSettings()
 					width = "full",
 					default = LUIE.ChatAnnouncements.D.Achievements,
 				},
-				[13] = {
+				[17] = {
 					type = "slider",
 					name = "Achievements Step Size, %",
 					tooltip = "Display achievement update information every #% to completion. Setting this value to 0 means to print achievement information on every update event.",
@@ -1386,7 +1426,7 @@ local function LUIE_CreateSettings()
 					default = LUIE.ChatAnnouncements.D.AchievementsStep,
 					disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
 				},
-				[14] = {
+				[18] = {
 					type = "checkbox",
 					name = "Show Detailed achievement info",
 					--tooltip = "",
@@ -2339,7 +2379,7 @@ local function LUIE_LoadScreen()
 	EVENT_MANAGER:UnregisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED)
 
 	if not LUIE.SV.StartupInfo then
-		CHAT_SYSTEM:AddMessage("|ceeeeeeLUIE by |c00c000 Upularity and SpellBuilder|ceeeeee v"..g_Version.."|r")
+		CHAT_SYSTEM:AddMessage("|ceeeeeeLUIE by |c00c000 Upularity & SpellBuilder|ceeeeee v"..g_Version.."|r")
 	end
 end
 
@@ -2397,7 +2437,7 @@ function LUIE.DelayBuffer( key, buffer, currentTime )
 	if key == nil then return end
 
 	local buffer = buffer or 10
-	local now    = currentTime or GetFrameTimeMilliseconds()
+	local now	 = currentTime or GetFrameTimeMilliseconds()
 
 	if delayBuffer[key] == nil then
 		delayBuffer[key] = now
