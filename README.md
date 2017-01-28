@@ -1,2 +1,2 @@
-# LUI-Extended
-LUI Extended addon for ESO
+# Lui-Extended
+Lui Extended addon for ESO
