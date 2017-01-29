@@ -1,5 +1,11 @@
 # Lui-Extended
 
+Utilizing GitHub to attempt to keep a transparent and organized workflow. Feel free to contribute ideas on EsoUI and I'll add them into potential projects or issues!
+
+Current project goals:
+Short term - Clean up minor issues with the UI, add better customization options for size of custom unit frames, buff tracker, and combat text.
+Long term - Using custom overides, complete replacement of icons for abilities used in the game that currently do not have icons - as well as fixing placeholder or pointless buffs to no longer display and fixing buffs that currently do not have an aura to display. Integration with CombatCloud and plugin for CombatMetrics.
+
 CHANGELOG:
 
 1-28-17:
