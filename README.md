@@ -12,6 +12,13 @@ Massive spreadsheet tracking for Buff/Debuff issues present here. Goal is for th
 
 CHANGELOG:
 
+2-01-17: Minor update
+- Added Horizontal tiling method for Long Terms Effects container
+- Vertical Long Term Effects container can now be oriented from top/center/bottom just like Horizontal can be aligned to left/center/right. Note - unfortunately changing the sorting order to be different for individual bars is not possible, it would require a significant rewrite to do so, perhaps I will reach the potential to do so in the future.
+- Previous issue of Font Options being very limited resolved by updating to the latest version of LAM (thanks again psypanda!).
+- Updated version number to 4.99 BETA and updated API version to 100018 for Homestead
+- NOTE that I slightly changed the backdrop size for buffs and the thickness of the radial countdown that goes around buffs or debuffs to look better with DarkUI frames. This is temporary or will have a toggle option at some point, apologies if it looks iffy on default UI at the moment.
+
 1-28-17:
 - Initial Upload complete for BETA version 
 - LootLog update (by psypanda)
@@ -24,13 +31,6 @@ CHANGELOG:
     - Added a small Blacklist for LootLog to hide certain annoying items to prevent chat spam. (In the future we could create a setting for each one of them if needed)
 - Minor Update
     - Fixed Ultimate % value not correctly updating outside of combat
-    
-2-01-17: Minor update
-- Added Horizontal tiling method for Long Terms Effects container
-- Vertical Long Term Effects container can now be oriented from top/center/bottom just like Horizontal can be aligned to left/center/right. Note - unfortunately changing the sorting order to be different for individual bars is not possible, it would require a significant rewrite to do so, perhaps I will reach the potential to do so in the future.
-- Previous issue of Font Options being very limited resolved by updating to the latest version of LAM (thanks again psypanda!).
-- Updated version number to 4.99 BETA and updated API version to 100018 for Homestead
-- NOTE that I slightly changed the backdrop size for buffs and the thickness of the radial countdown that goes around buffs or debuffs to look better with DarkUI frames. This is temporary or will have a toggle option at some point, apologies if it looks iffy on default UI at the moment.
 
 
 Lui code is intended to be open source. Feel free to suggest or make contributions!
