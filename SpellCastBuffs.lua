@@ -27,7 +27,7 @@ local windowTitles = {
 	player	= "Effects on Player",
 	player1	= "Player Buffs",
 	player2	= "Player Debuffs",
-	player_long = 'E', --'Player Long Effects',
+	player_long = 'Player Long Term Effects', -- 'E'
 	target	= "Effects on Target",
 	target1	= "Target Buffs",
 	target2	= "Target Debuffs",
@@ -41,6 +41,7 @@ SCB.D = {
 	BuffFontStyle		= "outline",
 	BuffFontSize		= 16,
 	Alignment			= L.Setting_Center,
+	AlignmentVert		= L.Setting_Middle,
 	SortDirection       = L.Setting_OrderX[1],
 	GlowIcons			= true,
 	RemainingText			= true,
@@ -104,6 +105,7 @@ local buffsFont
 local g_padding = 0
 
 local g_horizAlign = CENTER
+local v_horizAlign = MIDDLE
 local g_horizSortInvert = false
 
 --[[ 
@@ -654,8 +656,13 @@ function SCB.Initialize( enabled )
 					SCB.SV.playerHOffsetY = self:GetTop()
 				end
 			end )
+		
 		-- TODO: implement change in vertical alignment
-		uiTlw.player_long.alignVertical = true
+		if SCB.SV.LongTermEffectsSeparateAlignment == 1 then
+			uiTlw.player_long.alignVertical = false
+		elseif SCB.SV.LongTermEffectsSeparateAlignment == 2 then
+			uiTlw.player_long.alignVertical = true
+		end	
 		uiTlw.player_long.skipUpdate = 0
 		containerRouting.player_long = "player_long"
 	else
@@ -747,8 +754,32 @@ function SCB.SetIconsAlignment( value )
 		if uiTlw[v].iconHolder then
 			uiTlw[v].iconHolder:ClearAnchors()
 			if uiTlw[v].alignVertical then
-				-- vertically-aligned icons are always bottom aligned
+				-- Might need to consolidate these two functions somehow, possibly consolidate all options so that Left = Top, Middle = Center, Right = Bottom
 				uiTlw[v].iconHolder:SetAnchor( BOTTOM )
+			else
+				uiTlw[v].iconHolder:SetAnchor( g_horizAlign )
+			end
+		end
+	end
+end
+
+function SCB.SetIconsAlignmentVert( value )
+	-- check correctness of argument value
+	if value ~= L.Setting_Top and value ~= L.Setting_Middle and value ~= L.Setting_Bottom then
+		value = SCB.D.AlignmentVert
+	end
+	SCB.SV.AlignmentVert = value
+
+	if not SCB.Enabled then return end
+
+	g_vertAlign = ( value == L.Setting_Top ) and TOP or ( value == L.Setting_Bottom ) and BOTTOM or MIDDLE
+
+	for _, v in pairs(containerRouting) do
+		if uiTlw[v].iconHolder then
+			uiTlw[v].iconHolder:ClearAnchors()
+			if uiTlw[v].alignVertical then
+				-- Might need to consolidate these two functions somehow, possibly consolidate all options so that Left = Top, Middle = Center, Right = Bottom
+				uiTlw[v].iconHolder:SetAnchor( g_vertAlign )
 			else
 				uiTlw[v].iconHolder:SetAnchor( g_horizAlign )
 			end
@@ -915,9 +946,10 @@ function SCB.Reset()
 			uiTlw.player_long:SetDimensions( 500, SCB.SV.IconSize + 6 )
 		end
 	end
-
+	
 	-- reset alignment and sort
 	SCB.SetIconsAlignment( SCB.SV.Alignment )
+	SCB.SetIconsAlignmentVert( SCB.SV.AlignmentVert )
 	SCB.SetSortDirection( SCB.SV.SortDirection )
 	
 	local needs_reset = {}
@@ -955,15 +987,15 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
 		buff.iconbg:SetHidden( not SCB.SV.RemainingCooldown ) -- we do not need black icon background when there is no Cooldown control present
 	end
 	
-	local inset = (SCB.SV.RemainingCooldown and buff.cd ~= nil) and 3 or 1
+	local inset = (SCB.SV.RemainingCooldown and buff.cd ~= nil) and 4 or 1
 
 	buff.icon:ClearAnchors()
 	buff.icon:SetAnchor( TOPLEFT, buff, TOPLEFT, inset, inset )
 	buff.icon:SetAnchor( BOTTOMRIGHT, buff, BOTTOMRIGHT, -inset, -inset )
 	if buff.iconbg ~= nil then
 		buff.iconbg:ClearAnchors()
-		buff.iconbg:SetAnchor( TOPLEFT, buff, TOPLEFT, inset, inset )
-		buff.iconbg:SetAnchor( BOTTOMRIGHT, buff, BOTTOMRIGHT, -inset, -inset )
+		buff.iconbg:SetAnchor( TOPLEFT, buff, TOPLEFT, inset -1, inset -1)
+		buff.iconbg:SetAnchor( BOTTOMRIGHT, buff, BOTTOMRIGHT, -inset +1, -inset +1)
 	end
 
 	-- position all items except first one to the right of it's neighbour

@@ -709,6 +709,9 @@ L.Potion_Essence                    = "Essence"
 L.Setting_Left                      = "Left"
 L.Setting_Center                    = "Centered"
 L.Setting_Right                     = "Right"
+L.Setting_Top						= "Top"
+L.Setting_Middle					= "Middle"
+L.Setting_Bottom					= "Bottom"
 L.Setting_OrderX                    = {'Left to Right', 'Right to Left'}
 
 -- ---------------------------------------------------

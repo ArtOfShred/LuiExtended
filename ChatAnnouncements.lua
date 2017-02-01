@@ -340,7 +340,7 @@ function CA.LogItem( logPrefix, icon, itemName, itemType, quantity, receivedBy )
 	end
  
 	if (quantity > 1) then
-		formattedQuantity = strfmt("|cFFFFFFx%d|r", quantity)
+		formattedQuantity = strfmt(" |cFFFFFFx%d|r", quantity)
 	end
  
 	local traitType = GetItemLinkTraitInfo(itemName)

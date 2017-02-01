@@ -4,7 +4,7 @@ LUIE	   = {}
 LUIE.name  = "LuiExtended"
 LUIE.components	 = {}
 
-local g_Version = "4.40"
+local g_Version = "4.99 BETA"
 
 -- Saved variables options
 LUIE.SVName = 'LUIESV'
@@ -151,7 +151,7 @@ local function LUIE_CreateSettings()
 	local rotationOptions = { "Horizontal", "Vertical" }
 	local rotationOptionsKeys = { ["Horizontal"] = 1, ["Vertical"] = 2 }
 	local hAlignOptions = { L.Setting_Left, L.Setting_Center, L.Setting_Right }
-	local vAlignOptions = { "Top", "Middle", "Bottom" }
+	local vAlignOptions = { L.Setting_Top, L.Setting_Middle, L.Setting_Bottom }
 
 	local panelData = {
 		type = 'panel',
@@ -1071,17 +1071,27 @@ local function LUIE_CreateSettings()
 				[27] = {
 					type = "dropdown",
 					name = "Container orientation",
-					--tooltip = "",
+					tooltip = "Change orientation of long-term effects to Horizontal or Vertical tiling method.",
 					choices = rotationOptions,
 					getFunc = function() return rotationOptions[LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment] end,
-					--setFunc = function(value) LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment = rotationOptionsKeys[value] LUIE.SpellCastBuffs.Reset() end,
-					setFunc = function() return false end, -- FIXME
+					setFunc = function(value) LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment = rotationOptionsKeys[value] LUIE.SpellCastBuffs.Reset() end,
 					width = "full",
+					warning = "Will need to reload the UI.",
 					default = rotationOptions[2],
-					--disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffects_Player and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparate ) end,
-					disabled = function() return true end, -- FIXME
+					disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffects_Player and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparate ) end,
 				},
 				[28] = {
+					type = "dropdown",
+					name = "Vertical Icons Alignment",
+					tooltip = "Vertical alignment of buff and debuff icons within container area.",
+					choices = vAlignOptions,
+					getFunc = function() return LUIE.SpellCastBuffs.SV.AlignmentVert end,
+					setFunc = LUIE.SpellCastBuffs.SetIconsAlignmentVert,
+					width = "full",
+					default = LUIE.SpellCastBuffs.D.AlignmentVert,
+					disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 2) end,
+				},
+				[29] = {
 					type = "header",
 					name = "Miscellaneous",
 					width = "full",
@@ -1097,7 +1107,7 @@ local function LUIE_CreateSettings()
 					default = LUIE.SpellCastBuffs.D.UltimateGeneration,
 					disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
 				},]]--
-				[29] = {
+				[30] = {
 					type = "checkbox",
 					name = "Show Stealth icon",
 					tooltip = "Display special buff icon when player is hidden or in stealth.",
@@ -2379,7 +2389,7 @@ local function LUIE_LoadScreen()
 	EVENT_MANAGER:UnregisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED)
 
 	if not LUIE.SV.StartupInfo then
-		CHAT_SYSTEM:AddMessage("|ceeeeeeLUIE by |c00c000 Upularity & SpellBuilder|ceeeeee v"..g_Version.."|r")
+		CHAT_SYSTEM:AddMessage("|ceeeeeeLui Extended by |c00c000Upularity, SpellBuilder & ArtOfShred|ceeeeee v"..g_Version.."|r")
 	end
 end
 
