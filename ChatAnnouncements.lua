@@ -489,7 +489,7 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
     if UpOrDown > alliancePoints then
         color = "|c0B610B"
         changetype = CommaValue ( difference )
-        message = ( "Received" )
+        message = ( "Earned" )
     else
         color = "|ca80700"
         changetype = CommaValue ( difference * -1 )
@@ -515,11 +515,11 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
     end
 
     -- Determines syntax based on whether icon is displayed or not, we use "ICON - ALLIANCE POINT CHANGE AMOUNT" if so, and "ALLIANCE POINT CHANGE AMOUNT - ALLIANCE POINT" if not
-    local syntax = CA.SV.CurrencyIcons and ( " |r|c20e713|t16:16:/esoui/art/currency/alliancepoints.dds|t " .. changetype .. formathelper .. CA.SV.AlliancePointName .. plural .. "|r" ) or ( " |r|c20e713" .. changetype .. formathelper .. CA.SV.AlliancePointName .. plural .. "|r" )
+    local syntax = CA.SV.CurrencyIcons and ( " |r|c20e713|t16:16:/esoui/art/currency/alliancepoints.dds|t " .. changetype .. formathelper .. CA.SV.AlliancePointName .. "|r" ) or ( " |r|c20e713" .. changetype .. formathelper .. CA.SV.AlliancePointName .. "|r" )
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
-    if CA.SV.TotalAlliancePointChange == true and CA.SV.CurrencyIcons == false then
+    if CA.SV.TotalAlliancePointChange and not CA.SV.CurrencyIcons then
         total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |c20e713" .. CommaValue (alliancePoints) ) or ''
-    elseif CA.SV.TotalAlliancePointChange == true and CA.SV.CurrencyIcons == true then
+    elseif CA.SV.TotalAlliancePointChange and CA.SV.CurrencyIcons then
         total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |c20e713|t16:16:/esoui/art/currency/alliancepoints.dds|t " .. CommaValue (alliancePoints) )
     else
         total = ''
