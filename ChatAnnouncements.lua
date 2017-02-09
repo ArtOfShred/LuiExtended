@@ -1092,9 +1092,9 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
     
     -- List of items to whitelist as notable
     notableIDs = {
-        [56862] = true, -- [Fortified Nirncrux]
-        [56863] = true, -- [Potent Nirncrux]
-        [68342] = true, -- [Hakeijo]
+        [56862]  = true,    -- [Fortified Nirncrux]
+        [56863]  = true,    -- [Potent Nirncrux]
+        [68342]  = true,    -- [Hakeijo]
     }
     
     -- List of items to blacklist
@@ -1195,39 +1195,40 @@ function CA.LogItem( logPrefix, icon, itemName, itemType, quantity, receivedBy, 
     local formattedQuantity  = ""
     local formattedTrait     = ""
     local formattedArmorType = ""
+    local arrowPointer       = ""
  
     if (receivedBy == "") then
         -- Don't display yourself
         -- TODO: Make a Setting to choose Character or Account name
         formattedRecipient = ""
     else
+        -- TODO: This change fixed the arrow on loot group members receive
+        --       Sadly it broke the arrow for trade >_>
         if gainorloss == "|c0B610B" then
-            -- Create a character link to make it easier to contact the recipient
-            formattedRecipient = strfmt("← |c%06X|H0:character:%s|h%s|h|r",
-                HashString(receivedBy) % 0x1000000, -- Use the hash of the name for the color so that is random, but consistent
-                receivedBy,
-                receivedBy:gsub("%^%a+$", "", 1)
-            ) 
+            arrowPointer = "→"
         else
-            -- Create a character link to make it easier to contact the recipient
-            formattedRecipient = strfmt("→ |c%06X|H0:character:%s|h%s|h|r",
-                HashString(receivedBy) % 0x1000000, -- Use the hash of the name for the color so that is random, but consistent
-                receivedBy,
-                receivedBy:gsub("%^%a+$", "", 1)
-            )
+            arrowPointer = "←"
         end
+        -- Create a character link to make it easier to contact the recipient
+        formattedRecipient = strfmt(
+            "%s |c%06X|H0:character:%s|h%s|h|r",
+            testme,
+            HashString(receivedBy) % 0x1000000, -- Use the hash of the name for the color so that is random, but consistent
+            receivedBy,
+            receivedBy:gsub("%^%a+$", "", 1)
+        )
     end
- 
+
     if (quantity > 1) then
         formattedQuantity = strfmt(" |cFFFFFFx%d|r", quantity)
     end
- 
-    local armorType = GetItemLinkArmorType(itemName) 
+
+    local armorType = GetItemLinkArmorType(itemName) -- Get Armor Type of item
     if (CA.SV.LootShowArmorType and armorType ~= ARMORTYPE_NONE) then
         formattedArmorType = strfmt(" |cFFFFFF(%s)|r", GetString("SI_ARMORTYPE", armorType))
     end
-    
-    local traitType = GetItemLinkTraitInfo(itemName)
+
+    local traitType = GetItemLinkTraitInfo(itemName) -- Get Trait type of item
     if (CA.SV.LootShowTrait and traitType ~= ITEM_TRAIT_TYPE_NONE and itemType ~= ITEMTYPE_ARMOR_TRAIT and itemType ~= ITEMTYPE_WEAPON_TRAIT) then
         formattedTrait = strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMTRAITTYPE", traitType))
     end
@@ -1257,18 +1258,14 @@ local TradeInvitee = ""
 
 -- These 2 functions help us get the name of the person we are trading with regardless of who initiated the trade
 function CA.TradeInviteWaiting(eventCode, inviteeCharacterName, inviteeDisplayName) 
-
-TradeInvitee = inviteeCharacterName
+    TradeInvitee = inviteeCharacterName
     -- printToChat (TradeInvitee) -- Debug
-
 end
 
 -- These 2 functions help us get the name of the person we are trading with regardless of who initiated the trade
 function CA.TradeInviteConsidering(eventCode, inviterCharacterName, inviterDisplayName) 
-
-TradeInviter = inviterCharacterName
+    TradeInviter = inviterCharacterName
     -- printToChat (TradeInviter) -- Debug
-
 end
 
 -- Adds item to index when they are added to the trade
