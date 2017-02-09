@@ -30,9 +30,9 @@ L.Skill_Ransack                  = 38256
 L.Skill_Low_Slash                = 28304
 L.Skill_Crippling_Slash          = 38264
 L.Skill_Deep_Slash               = 38268
-L.Skill_Absorb_Magic             = 41380
+L.Skill_Absorb_Magic          	 = 41380
 L.Skill_Defensive_Stance         = 38312
-L.Skill_Defensive_Posture        = 41351
+L.Skill_Defensive_Posture		 = 41351
 L.Skill_Shield_Charge            = 28719
 L.Skill_Invasion                 = 38405
 L.Skill_Shielded_Assault         = 38401
@@ -278,7 +278,7 @@ L.Skill_Efficient_Purge          = 40232
 -- ARDENT FLAME -------------
 L.Skill_Dragonknight_Standard    = 28988
 L.Skill_Shifting_Standard        = 32958
-L.Skill_Shift_Standard           = 33992
+L.Skill_Shift_Standard			 = 33992
 L.Skill_Standard_of_Might        = 32947
 L.Skill_Fiery_Grip               = 20492
 L.Skill_Extended_Chains          = 20496
@@ -449,8 +449,8 @@ L.Skill_Prolonged_Suffering      = 34721
 L.Skill_Cripple                  = 33326
 L.Skill_Crippling_Grasp          = 36957
 L.Skill_Debilitate               = 36943
-L.Skill_Siphoning_Strikes        = 37977
-L.Skill_Siphoning_Attacks        = 38050
+L.Skill_Siphoning_Strikes		 = 37977
+L.Skill_Siphoning_Attacks		 = 38050
 L.Skill_Drain_Power              = 33316
 L.Skill_Power_Extraction         = 36901
 L.Skill_Sap_Essence              = 36891
@@ -527,9 +527,9 @@ L.Toggled_Energy_Overload           = 24804
 L.Toggled_Power_Overload            = 24806
 L.Toggled_Leeching_Strikes          = 36908
 L.Toggled_Brace_Generic             = 14890
-L.Toggled_Guard                     = 63318 --Untested
-L.Toggled_Mystic_Guard              = 63335 --Untested
-L.Toggled_Stalwart_Guard            = 63351 --Untested
+L.Toggled_Guard						= 63318 --Untested
+L.Toggled_Mystic_Guard				= 63335 --Untested
+L.Toggled_Stalwart_Guard			= 63351 --Untested
 
 -- ---------------------------------------------------
 -- DAMAGE SHIELDS ------------------------------------
@@ -709,9 +709,9 @@ L.Potion_Essence                    = "Essence"
 L.Setting_Left                      = "Left"
 L.Setting_Center                    = "Centered"
 L.Setting_Right                     = "Right"
-L.Setting_Top                       = "Top"
-L.Setting_Middle                    = "Middle"
-L.Setting_Bottom                    = "Bottom"
+L.Setting_Top						= "Top"
+L.Setting_Middle					= "Middle"
+L.Setting_Bottom					= "Bottom"
 L.Setting_OrderX                    = {'Left to Right', 'Right to Left'}
 
 -- ---------------------------------------------------
@@ -754,9 +754,9 @@ DE.Setting_Right          = "Rechts"
 DE.Setting_OrderX         = {'Links nach Rechts', 'Rechts nach Links'}
 
 if (GetCVar('language.2') == 'de') then
-    for k,v in pairs(DE) do
-        L[k] = v
-    end
+	for k,v in pairs(DE) do
+		L[k] = v
+	end
 end
 
 -- ---------------------------------------------------
@@ -791,9 +791,9 @@ DE.Setting_OrderX         = {'De gauche à droite', 'De droite à gauche'}
 
 
 if (GetCVar('language.2') == 'fr') then
-    for k,v in pairs(FR) do
-        L[k] = v
-    end
+	for k,v in pairs(FR) do
+		L[k] = v
+	end
 end
 
 -- ---------------------------------------------------
