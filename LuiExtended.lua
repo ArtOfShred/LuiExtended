@@ -1589,7 +1589,26 @@ local function LUIE_CreateSettings()
 					disabled = function() return not LUIE.ChatAnnouncements.SV.AllowLootMenu end,
 					default = LUIE.ChatAnnouncements.D.LootCraft,
 				},
-				[31] = {
+                [31] = {
+					type = "checkbox",
+					tooltip = "Don't show all looted items but only notable ones. (Any set items, any purple+ items, any blue+ special items).\n Note that any transactional values - Vendor/Trade/Craft will still show all items",
+					getFunc = function() return LUIE.ChatAnnouncements.SV.LootOnlyNotable end,
+					setFunc = function(value) LUIE.ChatAnnouncements.SV.LootOnlyNotable = value end,
+					width = "full",
+					disabled = function() return not (LUIE.ChatAnnouncements.SV.Loot and LUIE.ChatAnnouncements.SV.AllowLootMenu) end,
+					default = LUIE.ChatAnnouncements.D.LootOnlyNotable,
+				},
+                [32] = {
+					type = "checkbox",
+					name = "Show Group members notable loot",
+					tooltip = "Also show the notable loot group members receive. Notable items are: any set items, any purple+ items, blue+ special items (e.g., treasure maps).\nShow loot must be enabled.",
+					getFunc = function() return LUIE.ChatAnnouncements.SV.LootGroup end,
+					setFunc = function(value) LUIE.ChatAnnouncements.SV.LootGroup = value end,
+					width = "full",
+					disabled = function() return not (LUIE.ChatAnnouncements.SV.Loot and LUIE.ChatAnnouncements.SV.AllowLootMenu) end,
+					default = LUIE.ChatAnnouncements.D.LootGroup,
+				},
+				[33] = {
 					type = "checkbox",
 					name = "Show Item Trait",
 					tooltip = "Show the traits of gear items in the log, so there is no need to inspect links to determine their traits.\nShow loot must be enabled.",
@@ -1599,7 +1618,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not LUIE.ChatAnnouncements.SV.AllowLootMenu end,
 					default = LUIE.ChatAnnouncements.D.LootShowTrait,
 				},
-				[32] = {
+				[34] = {
 					type = "checkbox",
 					name = "Show Item Style - SET LATER",
 					tooltip = "Show the traits of gear items in the log, so there is no need to inspect links to determine their traits.\nShow loot must be enabled.",
@@ -1609,7 +1628,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not LUIE.ChatAnnouncements.SV.AllowLootMenu end,
 					default = LUIE.ChatAnnouncements.D.LootShowTrait,
 				},
-				[33] = {
+				[35] = {
 					type = "checkbox",
 					name = "Show Item Type (Armor/Wep/Jewelry) - SET LATER",
 					tooltip = "Show the traits of gear items in the log, so there is no need to inspect links to determine their traits.\nShow loot must be enabled.",
@@ -1619,7 +1638,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not LUIE.ChatAnnouncements.SV.AllowLootMenu end,
 					default = LUIE.ChatAnnouncements.D.LootShowTrait,
 				},
-				[34] = {
+				[36] = {
 					type = "checkbox",
 					name = "Hide Trash Quality Items",
 					tooltip = "Don't show trash quality items!",
@@ -1629,35 +1648,15 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.Loot and LUIE.ChatAnnouncements.SV.AllowLootMenu) end,
 					default = LUIE.ChatAnnouncements.D.LootNotTrash,
 				},
-				[35] = {
+				[37] = {
 					type = "checkbox",
-					name = "Enable Blacklist",
-					tooltip = "Don't show annoying items:\nLaurel\nUndaunted Plunder\nThe Serpent's Egg-Tooth\nThe Rid-Thar's Moon Pearls\nStar-Studded Champion's Baldric\nPeriapt of Elinhir\nGlass Style Motif Fragments\nMercenary Motif Pages",
+					name = "Hide annoying Items (Prevent Chat Spam)",
+					tooltip = "Laurel\nUndaunted Plunder\nThe Serpent's Egg-Tooth\nThe Rid-Thar's Moon Pearls\nStar-Studded Champion's Baldric\nPeriapt of Elinhir\nGlass Style Motif Fragments\nMercenary Motif Pages",
 					getFunc = function() return LUIE.ChatAnnouncements.SV.LootBlacklist end,
 					setFunc = function(value) LUIE.ChatAnnouncements.SV.LootBlacklist = value end,
 					width = "full",
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.Loot and LUIE.ChatAnnouncements.SV.AllowLootMenu) end,
 					default = LUIE.ChatAnnouncements.D.LootBlacklist,
-				},
-				[36] = {
-					type = "checkbox",
-					name = "Show only self notable Loot",
-					tooltip = "Don't show all looted items but only notable ones. (Any set items, any purple+ items, any blue+ special items).\nShow loot must be enabled.\n Note that any transactional values - Vendor/Trade/Craft will still show all items",
-					getFunc = function() return LUIE.ChatAnnouncements.SV.LootOnlyNotable end,
-					setFunc = function(value) LUIE.ChatAnnouncements.SV.LootOnlyNotable = value end,
-					width = "full",
-					disabled = function() return not (LUIE.ChatAnnouncements.SV.Loot and LUIE.ChatAnnouncements.SV.AllowLootMenu) end,
-					default = LUIE.ChatAnnouncements.D.LootOnlyNotable,
-				},
-				[37] = {
-					type = "checkbox",
-					name = "Show Group members notable loot",
-					tooltip = "Also show the notable loot group members receive. Notable items are: any set items, any purple+ items, blue+ special items (e.g., treasure maps).\nShow loot must be enabled.",
-					getFunc = function() return LUIE.ChatAnnouncements.SV.LootGroup end,
-					setFunc = function(value) LUIE.ChatAnnouncements.SV.LootGroup = value end,
-					width = "full",
-					disabled = function() return not (LUIE.ChatAnnouncements.SV.Loot and LUIE.ChatAnnouncements.SV.AllowLootMenu) end,
-					default = LUIE.ChatAnnouncements.D.LootGroup,
 				},
 				[38] = {
 					type = "dropdown",
