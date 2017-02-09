@@ -1110,13 +1110,16 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
 	-- List of items to blacklist
 	blacklistIDs = {
 		[64713]	 = true,	-- [Laurel]
+        [64690]  = true,	-- [Malachite Shard]
+        [69432]	 = true,	-- [Glass Style Motif Fragment]
+        -- Trial Loot
 		[114427] = true,	-- [Undaunted Plunder]
 		[81180]	 = true,	-- [The Serpent's Egg-Tooth]
 		[74453]	 = true,	-- [The Rid-Thar's Moon Pearls]
 		[87701]	 = true,	-- [Star-Studded Champion's Baldric]
 		[87700]	 = true,	-- [Periapt of Elinhir]
-		[69432]	 = true,	-- [Glass Style Motif Fragment]
 		-- Mercenary Motif Pages
+        -- TODO: Find a better way than using IDs
 		[64716]	 = true,	-- [Mercenary Motif]
 		[64717]	 = true,	-- [Mercenary Motif]
 		[64718]	 = true,	-- [Mercenary Motif]
