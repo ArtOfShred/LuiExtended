@@ -120,7 +120,7 @@ function CA.OnGroupMemberJoined(eventCode, memberName)
         -- Can occur if event is before EVENT_PLAYER_ACTIVATED
         local characterNameLink = ZO_LinkHandler_CreateCharacterLink( gsub(memberName,"%^%a+","") )
         if CHAT_SYSTEM then
-            printToChat(strfmt('%s|r has joined your group.', characterNameLink))
+            printToChat(strfmt("%s|r has joined your group.", characterNameLink))
         end
     end
 end
@@ -129,12 +129,12 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, wasLocalPlayer)
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink( gsub(memberName,"%^%a+","") )
     local msg = nil
     if reason == GROUP_LEAVE_REASON_VOLUNTARY then
-        msg = g_playerName == memberName and 'You have left the group.' or '|%s|r has left your group.'
+        msg = g_playerName == memberName and "You have left the group." or "|%s|r has left your group."
     elseif reason == GROUP_LEAVE_REASON_KICKED then
         -- msg = g_playerName == memberName and 'You were kicked from the group.' or '|cFEFEFE%s|r was kicked from your group.' -- Don't want to have to fetch this color code again if I need it.
-        msg = g_playerName == memberName and 'You were kicked from the group.' or '%s|r was kicked from your group.'
+        msg = g_playerName == memberName and "You were kicked from the group." or "%s|r was kicked from your group."
     elseif reason == GROUP_LEAVE_REASON_DISBAND and g_playerName == memberName then
-        msg = 'Your group has been disbanded.'
+        msg = "Your group has been disbanded."
     end
     if msg then
         -- Can occur if event is before EVENT_PLAYER_ACTIVATED
@@ -171,13 +171,13 @@ function CreateTimestamp(timeStr, formatStr)
     -- Create new one
     local timestamp = formatStr
     timestamp = timestamp:gsub("HH", hours)
-    timestamp = timestamp:gsub("H", hoursNoLead)
+    timestamp = timestamp:gsub("H",  hoursNoLead)
     timestamp = timestamp:gsub("hh", hours12)
-    timestamp = timestamp:gsub("h", hours12NoLead)
-    timestamp = timestamp:gsub("m", minutes)
-    timestamp = timestamp:gsub("s", seconds)
-    timestamp = timestamp:gsub("A", pUp)
-    timestamp = timestamp:gsub("a", pLow)
+    timestamp = timestamp:gsub("h",  hours12NoLead)
+    timestamp = timestamp:gsub("m",  minutes)
+    timestamp = timestamp:gsub("s",  seconds)
+    timestamp = timestamp:gsub("A",  pUp)
+    timestamp = timestamp:gsub("a",  pLow)
     
     return timestamp
 
