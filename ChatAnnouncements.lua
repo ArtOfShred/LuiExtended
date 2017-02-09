@@ -48,6 +48,7 @@ CA.D = {
 	CurrencyContextMessageDown	= "",
 	CurrencyTotalMessage		= "[New Total]",
 	LootShowTrait				= true,
+    LootShowArmorType           = false,
 	LootGroup					= true,
 	LootOnlyNotable 			= false,
 	LootBlacklist				= false,
@@ -1202,23 +1203,24 @@ function CA.LogItem( logPrefix, icon, itemName, itemType, quantity, receivedBy, 
 	end
 
 	local formattedRecipient
-	local formattedQuantity = ""
-	local formattedTrait = ""
+	local formattedQuantity  = ""
+	local formattedTrait     = ""
+    local formattedArmorType = ""
  
 	if (receivedBy == "") then
 		-- Don't display yourself
-		-- TODO: Can maybe make a Setting or something
+		-- TODO: Make a Setting to choose Character or Account name
 		formattedRecipient = ""
 	else
-		-- Create a character link to make it easier to contact the recipient
-		
 		if gainorloss == "|c0B610B" then
+            -- Create a character link to make it easier to contact the recipient
 			formattedRecipient = strfmt("← |c%06X|H0:character:%s|h%s|h|r",
 				HashString(receivedBy) % 0x1000000, -- Use the hash of the name for the color so that is random, but consistent
 				receivedBy,
 				receivedBy:gsub("%^%a+$", "", 1)
 			) 
 		else
+            -- Create a character link to make it easier to contact the recipient
 			formattedRecipient = strfmt("→ |c%06X|H0:character:%s|h%s|h|r",
 				HashString(receivedBy) % 0x1000000, -- Use the hash of the name for the color so that is random, but consistent
 				receivedBy,
@@ -1231,13 +1233,18 @@ function CA.LogItem( logPrefix, icon, itemName, itemType, quantity, receivedBy, 
 		formattedQuantity = strfmt(" |cFFFFFFx%d|r", quantity)
 	end
  
+    local armorType = GetItemLinkArmorType(itemName) 
+	if (CA.SV.LootShowArmorType and armorType ~= ARMORTYPE_NONE) then
+		formattedArmorType = strfmt(" |cFFFFFF(%s)|r", GetString("SI_ARMORTYPE", armorType))
+	end
+    
 	local traitType = GetItemLinkTraitInfo(itemName)
 	if (CA.SV.LootShowTrait and traitType ~= ITEM_TRAIT_TYPE_NONE and itemType ~= ITEMTYPE_ARMOR_TRAIT and itemType ~= ITEMTYPE_WEAPON_TRAIT) then
 		formattedTrait = strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMTRAITTYPE", traitType))
 	end
    
 	printToChat(strfmt(
-		"%s%s%s%s|r %s%s%s%s %s%s",
+		"%s%s%s%s|r %s%s%s%s%s %s%s",
 		gainorloss,
 		bracket1,
 		logPrefix,
@@ -1245,6 +1252,7 @@ function CA.LogItem( logPrefix, icon, itemName, itemType, quantity, receivedBy, 
 		icon,
 		itemName:gsub("^|H0", "|H1", 1),
 		formattedQuantity,
+        formattedArmorType,
 		formattedTrait,
 		formattedRecipient,
 		combostring

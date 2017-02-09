@@ -1621,13 +1621,13 @@ local function LUIE_CreateSettings()
 				},
 				[34] = {
 					type = "checkbox",
-					name = "Show Item Style - SET LATER",
-					tooltip = "Show the traits of gear items in the log, so there is no need to inspect links to determine their traits.\nShow loot must be enabled.",
-					getFunc = function() return LUIE.ChatAnnouncements.SV.LootShowTrait end,
-					setFunc = function(value) LUIE.ChatAnnouncements.SV.LootShowTrait = value end,
+					name = "Show Armor Type",
+					tooltip = "Show the armor type of gear items in the log, so there is no need to inspect links to determine their armor type.\nShow loot must be enabled.",
+					getFunc = function() return LUIE.ChatAnnouncements.SV.LootShowArmorType end,
+					setFunc = function(value) LUIE.ChatAnnouncements.SV.LootShowArmorType = value end,
 					width = "full",
 					disabled = function() return not LUIE.ChatAnnouncements.SV.AllowLootMenu end,
-					default = LUIE.ChatAnnouncements.D.LootShowTrait,
+					default = LUIE.ChatAnnouncements.D.LootShowArmorType,
 				},
 				[35] = {
 					type = "checkbox",
