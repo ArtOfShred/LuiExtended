@@ -71,8 +71,8 @@ CA.D = {
     AchievementsStep              = 2,
     AchievementsDetails           = true,
     AchIgnoreList                 = {}, -- inverted list of achievements to be tracked
-    MiscBags                      = true,
-    MiscLockpick                  = true,
+    MiscBags                      = false,
+    MiscLockpick                  = false,
 }
 
 local g_playerName = nil
