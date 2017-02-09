@@ -1334,7 +1334,17 @@ local function LUIE_CreateSettings()
 					width = "full",
 					default = LUIE.ChatAnnouncements.D.AllowCurrencyMenu,
 				},
-				[5] = {
+                [5] = {
+					type = "checkbox",
+					name = "Show looted currency icons",
+					--tooltip = "",
+					getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyIcons end,
+					setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyIcons = value end,
+					width = "full",
+					disabled =  function() return not LUIE.ChatAnnouncements.SV.AllowCurrencyMenu end,
+					default = LUIE.ChatAnnouncements.D.CurrencyIcons,
+				},
+				[6] = {
 					type = "checkbox",
 					name = "\t\tShow Gold changes",
 					--tooltip = "",
@@ -1344,7 +1354,7 @@ local function LUIE_CreateSettings()
 					disabled =  function() return not LUIE.ChatAnnouncements.SV.AllowCurrencyMenu end,
 					default = LUIE.ChatAnnouncements.D.GoldChange,
 				},
-				[6] = {
+				[7] = {
 					type = "editbox",
 					name = "\t\t\t\t\t\tGold Name",
 					tooltip = "Name to display for Gold (If this is anything other than 'Gold' or blank then an 's' will be added onto the end for quantities > 1)",
@@ -1354,7 +1364,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.GoldChange and LUIE.ChatAnnouncements.SV.AllowCurrencyMenu) end,
 					default = LUIE.ChatAnnouncements.D.GoldName,
 				},
-				[7] = {
+				[8] = {
 					type = "checkbox",
 					name = "\t\t\t\t\t\tShow total amount of Gold",
 					tooltip = "Show total amount of Gold after changes are registered",
@@ -1364,7 +1374,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.GoldChange and LUIE.ChatAnnouncements.SV.AllowCurrencyMenu) end,
 					default = LUIE.ChatAnnouncements.D.TotalGoldChange,
 				},
-				[8] = {
+				[9] = {
 					type = "checkbox",
 					name = "\t\tShow Alliance Point changes",
 					--tooltip = "",
@@ -1374,7 +1384,7 @@ local function LUIE_CreateSettings()
 					disabled =  function() return not LUIE.ChatAnnouncements.SV.AllowCurrencyMenu end,
 					default = LUIE.ChatAnnouncements.D.AlliancePointChange,
 				},
-				[9] = {
+				[10] = {
 					type = "editbox",
 					name = "\t\t\t\t\t\tAlliance Point Name",
 					tooltip = "Name to display for Alliance Points (USE SINGULAR)",
@@ -1384,7 +1394,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.AlliancePointChange and LUIE.ChatAnnouncements.SV.AllowCurrencyMenu) end,
 					default = LUIE.ChatAnnouncements.D.TotalAlliancePointName,
 				},
-				[10] = {
+				[11] = {
 					type = "checkbox",
 					name = "\t\t\t\t\t\tShow total amount of Alliance Points",
 					tooltip = "Show total amount of Alliance Points after changes are registered",
@@ -1394,7 +1404,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.AlliancePointChange and LUIE.ChatAnnouncements.SV.AllowCurrencyMenu) end,
 					default = LUIE.ChatAnnouncements.D.TotalAlliancePointChange,
 				},
-				[11] = {
+				[12] = {
 					type = "checkbox",
 					name = "\t\tShow Tel Var Stone changes",
 					--tooltip = "",
@@ -1404,7 +1414,7 @@ local function LUIE_CreateSettings()
 					disabled =  function() return not LUIE.ChatAnnouncements.SV.AllowCurrencyMenu end,
 					default = LUIE.ChatAnnouncements.D.TelVarStoneChange,
 				},
-				[12] = {
+				[13] = {
 					type = "editbox",
 					name = "\t\t\t\t\t\tTel Var Stone Name",
 					tooltip = "Name to display for Tel Var Stones (USE SINGULAR)",
@@ -1414,7 +1424,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.TelVarStoneChange and LUIE.ChatAnnouncements.SV.AllowCurrencyMenu) end,
 					default = LUIE.ChatAnnouncements.D.TelVarStoneName,
 				},
-				[13] = {
+				[14] = {
 					type = "checkbox",
 					name = "\t\t\t\t\t\tShow total amount of Tel Var Stones",
 					tooltip = "Show total amount of Tel Var Stones after changes are registered",
@@ -1424,7 +1434,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.TelVarStoneChange and LUIE.ChatAnnouncements.SV.AllowCurrencyMenu) end,
 					default = LUIE.ChatAnnouncements.D.TotalTelVarStoneChange,
 				},
-				[14] = {
+				[15] = {
 					type = "checkbox",
 					name = "\t\tShow Writ Voucher changes",
 					--tooltip = "",
@@ -1434,7 +1444,7 @@ local function LUIE_CreateSettings()
 					disabled =  function() return not LUIE.ChatAnnouncements.SV.AllowCurrencyMenu end,
 					default = LUIE.ChatAnnouncements.D.WritVoucherChange,
 				},
-				[15] = {
+				[16] = {
 					type = "editbox",
 					name = "\t\t\t\t\t\tWrit Voucher Name",
 					tooltip = "Name to display for Writ Vouchers (USE SINGULAR)",
@@ -1444,7 +1454,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.WritVoucherChange and LUIE.ChatAnnouncements.SV.AllowCurrencyMenu) end,
 					default = LUIE.ChatAnnouncements.D.WritVoucherName,
 				},
-				[16] = {
+				[17] = {
 					type = "checkbox",
 					name = "\t\t\t\t\t\tShow total amount of Writ Vouchers",
 					tooltip = "Show total amount of Writ Vouchers after changes are registered",
@@ -1453,16 +1463,6 @@ local function LUIE_CreateSettings()
 					width = "full",
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.WritVoucherChange and LUIE.ChatAnnouncements.SV.AllowCurrencyMenu) end,
 					default = LUIE.ChatAnnouncements.D.TotalWritVoucherChange,
-				},
-				[17] = {
-					type = "checkbox",
-					name = "Show looted currency icons",
-					--tooltip = "",
-					getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyIcons end,
-					setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyIcons = value end,
-					width = "full",
-					disabled =  function() return not LUIE.ChatAnnouncements.SV.AllowCurrencyMenu end,
-					default = LUIE.ChatAnnouncements.D.CurrencyIcons,
 				},
 				[18] = {
 					type = "dropdown",
