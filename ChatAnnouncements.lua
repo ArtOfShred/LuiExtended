@@ -206,17 +206,6 @@ end
 --[[----------------------------------------------------------
 	printToChat function used in next sections
 --]]----------------------------------------------------------
---[[ Leaving the old code here for reference
-local function printToChat(msg)
-	local msg = CA.FormatMessage(msg or 'no message', CA.SV.TimeStamp)
-	-- We will print into first window of primary container
-	local pc = CHAT_SYSTEM.primaryContainer
-	pc.windows[1].buffer:AddMessage(msg)
-	if pc.windows[1].buffer == pc.currentBuffer then
-		pc:SyncScrollToBuffer()
-	end
-end
-]]--
 function printToChat(msg)
 	local msg = CA.FormatMessage(msg or 'no message', CA.SV.TimeStamp)
 	if (CHAT_SYSTEM.primaryContainer) then
