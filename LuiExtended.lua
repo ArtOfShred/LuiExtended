@@ -1631,16 +1631,6 @@ local function LUIE_CreateSettings()
 				},
 				[35] = {
 					type = "checkbox",
-					name = "Show Item Type (Armor/Wep/Jewelry) - SET LATER",
-					tooltip = "Show the traits of gear items in the log, so there is no need to inspect links to determine their traits.\nShow loot must be enabled.",
-					getFunc = function() return LUIE.ChatAnnouncements.SV.LootShowTrait end,
-					setFunc = function(value) LUIE.ChatAnnouncements.SV.LootShowTrait = value end,
-					width = "full",
-					disabled = function() return not LUIE.ChatAnnouncements.SV.AllowLootMenu end,
-					default = LUIE.ChatAnnouncements.D.LootShowTrait,
-				},
-				[36] = {
-					type = "checkbox",
 					name = "Hide Trash Quality Items",
 					tooltip = "Don't show trash quality items!",
 					getFunc = function() return LUIE.ChatAnnouncements.SV.LootNotTrash end,
@@ -1649,7 +1639,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.Loot and LUIE.ChatAnnouncements.SV.AllowLootMenu) end,
 					default = LUIE.ChatAnnouncements.D.LootNotTrash,
 				},
-				[37] = {
+				[36] = {
 					type = "checkbox",
 					name = "Hide annoying Items (Prevent Chat Spam)",
 					tooltip = "Laurel\nMalachite Shard\nUndaunted Plunder\nThe Serpent's Egg-Tooth\nThe Rid-Thar's Moon Pearls\nStar-Studded Champion's Baldric\nPeriapt of Elinhir\nGlass Style Motif Fragments\nMercenary Motif Pages",
@@ -1659,7 +1649,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.Loot and LUIE.ChatAnnouncements.SV.AllowLootMenu) end,
 					default = LUIE.ChatAnnouncements.D.LootBlacklist,
 				},
-				[38] = {
+				[37] = {
 					type = "dropdown",
 					name = "Bracket Settings for Item Context Specific Messages",
 					choices = itemBracketOptions,
@@ -1670,7 +1660,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not LUIE.ChatAnnouncements.SV.AllowLootMenu end,
 					default = itemBracketOptions[1]
 				},
-				[39] = {
+				[38] = {
 					type = "checkbox",
 					name = "Allow override Item Context specific messages",
 					tooltip = "When toggled on, allows you to enter a message in the field below to replace the default context based messages for items looted. Note that these changes will still recolor in green/red depending on whether currency was gained or lost.",
@@ -1680,7 +1670,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not LUIE.ChatAnnouncements.SV.AllowLootMenu end,
 					default = LUIE.ChatAnnouncements.D.ItemContextToggle,
 				},
-				[40] = {
+				[39] = {
 					type = "editbox",
 					name = "Context Specific Override Message - Loot",
 					tooltip = "Enter a string to replace the default context specific bracketed message displayed positive before item changes",
@@ -1690,7 +1680,7 @@ local function LUIE_CreateSettings()
 					disabled =  function() return not (LUIE.ChatAnnouncements.SV.ItemContextToggle and LUIE.ChatAnnouncements.SV.AllowLootMenu) end,
 					default = LUIE.ChatAnnouncements.D.ItemContextMessage,
 				},
-				[41] = {
+				[40] = {
 					type = "checkbox",
 					name = "MERGE LOOTLOG SALES WITH CURRENCY CHANGE",
 					tooltip = "Enabling this option will cause the 2 individual messages when you purchase/sell an item at a vendor to merge into one combined line",
@@ -1700,12 +1690,12 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.AllowCurrencyMenu and LUIE.ChatAnnouncements.SV.AllowLootMenu) end,
 					default = LUIE.ChatAnnouncements.D.LootCurrencyCombo,
 				},
-				[42] = {
+				[41] = {
 					type = "header",
 					name = "Experience Announcements",
 					width = "full",
 				},
-				[43] = {
+				[42] = {
 					type = "checkbox",
 					name = "Enable Experience Announcements",
 					--tooltip = "",
@@ -1714,7 +1704,7 @@ local function LUIE_CreateSettings()
 					width = "full",
 					default = LUIE.ChatAnnouncements.D.AllowExperienceMenu,
 				},
-				[44] = {
+				[43] = {
 					type = "checkbox",
 					name = "Display Level Up Message in Chat",
 					tooltip = "Displays a message in chat when the player levels up",
@@ -1724,7 +1714,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not LUIE.ChatAnnouncements.SV.AllowExperienceMenu end,
 					default = LUIE.ChatAnnouncements.D.ExperienceLevelUp,
 				},
-				[45] = {
+				[44] = {
 					type = "checkbox",
 					name = "Show Experience Gain",
 					tooltip = "Enable print experience gain to chat.",
@@ -1734,7 +1724,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not LUIE.ChatAnnouncements.SV.AllowExperienceMenu end,
 					default = LUIE.ChatAnnouncements.D.Experience,
 				},
-				[46] = {
+				[45] = {
 					type = "editbox",
 					name = "Context Name for Experience Gain",
 					tooltip = "Modify the message that appears before reporting the # of experience points gained. This option is intended to offer contrast from currency and loot messages since experience gain is not context sensitive. (DEFAULT: \"[Gained]\")",
@@ -1744,7 +1734,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.AllowExperienceMenu) end,
 					default = LUIE.ChatAnnouncements.D.ExperienceContextName,
 				},
-				[47] = {
+				[46] = {
 					type = "editbox",
 					name = "Display Name for Experience Gain",
 					tooltip = "Name to post in chat when experience is gained - can leave blank as well (DEFAULT: \"Experience\")",
@@ -1754,7 +1744,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.AllowExperienceMenu) end,
 					default = LUIE.ChatAnnouncements.D.ExperienceName,
 				},
-				[48] = {
+				[47] = {
 					type = "checkbox",
 					name = "Display Experience Icon",
 					tooltip = "Toggle the display of an icon with experience point gain",
@@ -1764,7 +1754,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.AllowExperienceMenu) end,
 					default = LUIE.ChatAnnouncements.D.ExperienceIcon,
 				},
-				[49] = {
+				[48] = {
 					type = "checkbox",
 					name = "Show Progress to next level",
 					tooltip = "When enabled, any XP gains will be amended with a display of your progress toward the next level",
@@ -1774,7 +1764,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.AllowExperienceMenu) end,
 					default = LUIE.ChatAnnouncements.D.ExperienceShowProgress,
 				},
-				[50] = {
+				[49] = {
 					type = "dropdown",
 					name = "Progress Display Method",
 					tooltip = "Choose the method in which Experience progress will be reported",
@@ -1785,7 +1775,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.AllowExperienceMenu and LUIE.ChatAnnouncements.SV.ExperienceShowProgress) end,
 					default = experienceDisplayOptions[1]
 				},
-				[51] = {
+				[50] = {
 					type = "checkbox",
 					name = "Show Color Experience Progress",
 					tooltip = "Enables color change for reported experience based off level of completion toward the next level",
@@ -1796,7 +1786,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.AllowExperienceMenu and LUIE.ChatAnnouncements.SV.ExperienceShowProgress) end,
 					default = LUIE.ChatAnnouncements.D.ExperienceProgressColor,
 				},
-				[52] = {
+				[51] = {
 					type = "checkbox",
 					name = "Show [x.xx] decimal format",
 					tooltip = "When using progress display method 2 or 3, this will display the XP percentage as x.xx% rather than x%",
@@ -1806,7 +1796,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.AllowExperienceMenu and LUIE.ChatAnnouncements.SV.ExperienceShowProgress) end,
 					default = LUIE.ChatAnnouncements.D.ExperienceShowDecimal,
 				},
-				[53] = {
+				[52] = {
 					type = "checkbox",
 					name = "Show [Progress] label",
 					tooltip = "Displays [Progress] label before reporting XP progress",
@@ -1817,7 +1807,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.AllowExperienceMenu and LUIE.ChatAnnouncements.SV.ExperienceShowProgress) end,
 					default = LUIE.ChatAnnouncements.D.ExperienceShowPBrackets,
 				},
-				[54] = {
+				[53] = {
 					type = "editbox",
 					name = "Display name for [Progress] label",
 					tooltip = "Modifier the spacer message displayed between XP amount gained and the progress to the next level",
@@ -1828,7 +1818,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.AllowExperienceMenu and LUIE.ChatAnnouncements.SV.ExperienceShowProgress and LUIE.ChatAnnouncements.SV.ExperienceShowPBrackets) end,
 					default = LUIE.ChatAnnouncements.D.ExperienceProgressName,
 				},
-				[55] = {
+				[54] = {
 					type = "checkbox",
 					name = "Show (Current Level) label",
 					tooltip = "Displays (Current Level) after reporting XP progress",
@@ -1838,7 +1828,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.AllowExperienceMenu) end,
 					default = LUIE.ChatAnnouncements.D.ExperienceShowLevel,
 				},
-				[56] = {
+				[55] = {
 					type = "checkbox",
 					name = "Hide Experience from Kills",
 					tooltip = "Toggle this option on to only report experience gain in chat from non-combat sources.",
@@ -1848,12 +1838,12 @@ local function LUIE_CreateSettings()
 					disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.AllowExperienceMenu) end,
 					default = LUIE.ChatAnnouncements.D.ExperienceHideCombat,
 				},
-				[57] = {
+				[56] = {
 					type = "header",
 					name = "Misc Announcements",
 					width = "full",
 				},
-				[58] = {
+				[57] = {
 					type = "checkbox",
 					name = "Enable group changes events in chat",
 					tooltip = "Print message to chat when player joins or leaves the group.",
@@ -1862,7 +1852,7 @@ local function LUIE_CreateSettings()
 					width = "full",
 					default = LUIE.ChatAnnouncements.D.GroupChatMsg,
 				},
-				[59] = {
+				[58] = {
 					type = "checkbox",
 					name = "Show Bag/Bank Upgrade Messages",
 					tooltip = "LOL I LIKE DINOSAURS",
@@ -1871,7 +1861,7 @@ local function LUIE_CreateSettings()
 					width = "full",
 					default = LUIE.ChatAnnouncements.D.MiscBags,
 				},
-				[60] = {
+				[59] = {
 					type = "checkbox",
 					name = "Show Lockpick Success/Failure Messages",
 					tooltip = "KEK AT ME BOY ONE MORE TIME",
@@ -1880,12 +1870,12 @@ local function LUIE_CreateSettings()
 					width = "full",
 					default = LUIE.ChatAnnouncements.D.MiscLockpick,
 				},
-				[61] = {
+				[60] = {
 					type = "header",
 					name = "Achievements Announcements",
 					width = "full",
 				},
-				[62] = {
+				[61] = {
 					type = "checkbox",
 					name = "Enable Achievements Tracking",
 					tooltip = "Enables achievements tracking sub-module. Below you can select categories of achievements to be tracked.",
@@ -1894,7 +1884,7 @@ local function LUIE_CreateSettings()
 					width = "full",
 					default = LUIE.ChatAnnouncements.D.Achievements,
 				},
-				[63] = {
+				[62] = {
 					type = "slider",
 					name = "Achievements Step Size, %",
 					tooltip = "Display achievement update information every #% to completion. Setting this value to 0 means to print achievement information on every update event.",
@@ -1905,7 +1895,7 @@ local function LUIE_CreateSettings()
 					default = LUIE.ChatAnnouncements.D.AchievementsStep,
 					disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
 				},
-				[64] = {
+				[63] = {
 					type = "checkbox",
 					name = "Show Detailed achievement info",
 					--tooltip = "",
