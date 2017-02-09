@@ -1102,7 +1102,7 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
         [64713]  = true,    -- [Laurel]
         [64690]  = true,    -- [Malachite Shard]
         [69432]  = true,    -- [Glass Style Motif Fragment]
-        -- Trial Loot
+        -- Trial non worthless junk
         [114427] = true,    -- [Undaunted Plunder]
         [81180]  = true,    -- [The Serpent's Egg-Tooth]
         [74453]  = true,    -- [The Rid-Thar's Moon Pearls]
@@ -1212,7 +1212,7 @@ function CA.LogItem( logPrefix, icon, itemName, itemType, quantity, receivedBy, 
         -- Create a character link to make it easier to contact the recipient
         formattedRecipient = strfmt(
             "%s |c%06X|H0:character:%s|h%s|h|r",
-            testme,
+            arrowPointer,
             HashString(receivedBy) % 0x1000000, -- Use the hash of the name for the color so that is random, but consistent
             receivedBy,
             receivedBy:gsub("%^%a+$", "", 1)
