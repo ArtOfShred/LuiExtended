@@ -1704,17 +1704,7 @@ local function LUIE_CreateSettings()
 					width = "full",
 					default = LUIE.ChatAnnouncements.D.AllowExperienceMenu,
 				},
-				[43] = {
-					type = "checkbox",
-					name = "Display Level Up Message in Chat",
-					tooltip = "Displays a message in chat when the player levels up",
-					getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceLevelUp end,
-					setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceLevelUp = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
-					width = "full",
-					disabled = function() return not LUIE.ChatAnnouncements.SV.AllowExperienceMenu end,
-					default = LUIE.ChatAnnouncements.D.ExperienceLevelUp,
-				},
-				[44] = {
+                [43] = {
 					type = "checkbox",
 					name = "Show Experience Gain",
 					tooltip = "Enable print experience gain to chat.",
@@ -1723,6 +1713,16 @@ local function LUIE_CreateSettings()
 					width = "full",
 					disabled = function() return not LUIE.ChatAnnouncements.SV.AllowExperienceMenu end,
 					default = LUIE.ChatAnnouncements.D.Experience,
+				},
+				[44] = {
+					type = "checkbox",
+					name = "Display Level Up Message in Chat",
+					tooltip = "Displays a message in chat when the player levels up",
+					getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceLevelUp end,
+					setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceLevelUp = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
+					width = "full",
+					disabled = function() return not LUIE.ChatAnnouncements.SV.AllowExperienceMenu end,
+					default = LUIE.ChatAnnouncements.D.ExperienceLevelUp,
 				},
 				[45] = {
 					type = "editbox",
