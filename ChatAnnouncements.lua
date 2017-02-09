@@ -1166,7 +1166,10 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
 			CA.LogItem(logPrefix, icon, itemName, itemType, quantity, lootedBySelf and "" or receivedBy, gainorloss)
 		end
 	elseif CA.SV.LootGroup then
-		if ( lootType ~= LOOT_TYPE_ITEM and lootType ~= LOOT_TYPE_COLLECTIBLE ) then return end
+		if ( (lootType ~= LOOT_TYPE_ITEM and lootType ~= LOOT_TYPE_COLLECTIBLE) or
+             (itemType == ITEMTYPE_CONTAINER ) ) then -- Don't show containers for group members
+            return
+        end
 		local itemQuality = GetItemLinkQuality(itemName)
 		if ( (itemIsSet) or
 			 (itemQuality >= ITEM_QUALITY_ARCANE and itemIsSpecial) or

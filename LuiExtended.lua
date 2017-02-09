@@ -1591,6 +1591,7 @@ local function LUIE_CreateSettings()
 				},
                 [31] = {
 					type = "checkbox",
+					name = "Show only notable Loot",
 					tooltip = "Don't show all looted items but only notable ones. (Any set items, any purple+ items, any blue+ special items).\n Note that any transactional values - Vendor/Trade/Craft will still show all items",
 					getFunc = function() return LUIE.ChatAnnouncements.SV.LootOnlyNotable end,
 					setFunc = function(value) LUIE.ChatAnnouncements.SV.LootOnlyNotable = value end,
@@ -1651,7 +1652,7 @@ local function LUIE_CreateSettings()
 				[37] = {
 					type = "checkbox",
 					name = "Hide annoying Items (Prevent Chat Spam)",
-					tooltip = "Laurel\nUndaunted Plunder\nThe Serpent's Egg-Tooth\nThe Rid-Thar's Moon Pearls\nStar-Studded Champion's Baldric\nPeriapt of Elinhir\nGlass Style Motif Fragments\nMercenary Motif Pages",
+					tooltip = "Laurel\nMalachite Shard\nUndaunted Plunder\nThe Serpent's Egg-Tooth\nThe Rid-Thar's Moon Pearls\nStar-Studded Champion's Baldric\nPeriapt of Elinhir\nGlass Style Motif Fragments\nMercenary Motif Pages",
 					getFunc = function() return LUIE.ChatAnnouncements.SV.LootBlacklist end,
 					setFunc = function(value) LUIE.ChatAnnouncements.SV.LootBlacklist = value end,
 					width = "full",
