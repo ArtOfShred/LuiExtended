@@ -924,11 +924,11 @@ end
 --------------------------------------------------------------
 
 function CA.MiscAlertLockBroke (eventCode, inactivityLengthMs)
-printToChat ("Lockpick broken, you're fucking terrible!!")
+    printToChat ("Lockpick broken, you're fucking terrible!!")
 end
 
 function CA.MiscAlertLockSuccess (eventCode)
-printToChat ("Lockpick successful!")
+    printToChat ("Lockpick successful!")
 end
 
 function CA.MiscAlertBags (eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
@@ -1256,7 +1256,7 @@ local TradeInvitee = ""
 function CA.TradeInviteWaiting(eventCode, inviteeCharacterName, inviteeDisplayName) 
 
 TradeInvitee = inviteeCharacterName
-printToChat (TradeInvitee)
+    -- printToChat (TradeInvitee) -- Debug
 
 end
 
@@ -1264,14 +1264,14 @@ end
 function CA.TradeInviteConsidering(eventCode, inviterCharacterName, inviterDisplayName) 
 
 TradeInviter = inviterCharacterName
-printToChat (TradeInviter)
+    -- printToChat (TradeInviter) -- Debug
 
 end
 
 -- Adds item to index when they are added to the trade
 function CA.OnTradeAdded (eventCode, who, tradeIndex, itemSoundCategory) 
 	
-	printToChat ( "tradeIndex: " .. tradeIndex .. " --- WHO: " .. who )
+	-- printToChat ( "tradeIndex: " .. tradeIndex .. " --- WHO: " .. who ) -- Debug
 	
 	if who == 0 then
 		local indexOut = tradeIndex
