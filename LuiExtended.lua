@@ -1529,7 +1529,17 @@ local function LUIE_CreateSettings()
 					width = "full",
 					default = LUIE.ChatAnnouncements.D.AllowLootMenu,
 				},
-				[25] = {
+                [25] = {
+					type = "checkbox",
+					name = "Show looted items icons",
+					--tooltip = "",
+					getFunc = function() return LUIE.ChatAnnouncements.SV.LootIcons end,
+					setFunc = function(value) LUIE.ChatAnnouncements.SV.LootIcons = value end,
+					width = "full",
+					disabled = function() return not LUIE.ChatAnnouncements.SV.AllowLootMenu end,
+					default = LUIE.ChatAnnouncements.D.LootIcons,
+				},
+				[26] = {
 					type = "checkbox",
 					name = "\t\tShow looted items",
 					--tooltip = "",
@@ -1539,7 +1549,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not LUIE.ChatAnnouncements.SV.AllowLootMenu end,
 					default = LUIE.ChatAnnouncements.D.Loot,
 				},
-				[26] = {
+				[27] = {
 					type = "checkbox",
 					name = "\t\tShow Vendor ",
 					--tooltip = "",
@@ -1549,7 +1559,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not LUIE.ChatAnnouncements.SV.AllowLootMenu end,
 					default = LUIE.ChatAnnouncements.D.LootVendor,
 				},
-				[27] = {
+				[28] = {
 					type = "checkbox",
 					name = "\t\tShow Mail",
 					--tooltip = "",
@@ -1559,7 +1569,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not LUIE.ChatAnnouncements.SV.AllowLootMenu end,
 					default = LUIE.ChatAnnouncements.D.LootMail,
 				},
-				[28] = {
+				[29] = {
 					type = "checkbox",
 					name = "\t\tShow Trade",
 					--tooltip = "",
@@ -1569,7 +1579,7 @@ local function LUIE_CreateSettings()
 					disabled = function() return not LUIE.ChatAnnouncements.SV.AllowLootMenu end,
 					default = LUIE.ChatAnnouncements.D.LootTrade,
 				},
-				[29] = {
+				[30] = {
 					type = "checkbox",
 					name = "\t\tShow Craft",
 					--tooltip = "",
@@ -1578,16 +1588,6 @@ local function LUIE_CreateSettings()
 					width = "full",
 					disabled = function() return not LUIE.ChatAnnouncements.SV.AllowLootMenu end,
 					default = LUIE.ChatAnnouncements.D.LootCraft,
-				},
-				[30] = {
-					type = "checkbox",
-					name = "Show looted items icons",
-					--tooltip = "",
-					getFunc = function() return LUIE.ChatAnnouncements.SV.LootIcons end,
-					setFunc = function(value) LUIE.ChatAnnouncements.SV.LootIcons = value end,
-					width = "full",
-					disabled = function() return not LUIE.ChatAnnouncements.SV.AllowLootMenu end,
-					default = LUIE.ChatAnnouncements.D.LootIcons,
 				},
 				[31] = {
 					type = "checkbox",
