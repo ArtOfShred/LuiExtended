@@ -14,14 +14,14 @@ local strformat     = string.format
 local zo_strformat  = zo_strformat
 
 local GetGameTimeMilliseconds = GetGameTimeMilliseconds
-local GetUnitName = GetUnitName
-local GetUnitReaction = GetUnitReaction
-local IsUnitAttackable = IsUnitAttackable
-local IsSlotUsed = IsSlotUsed
-local GetSlotAbilityCost = GetSlotAbilityCost
+local GetUnitName             = GetUnitName
+local GetUnitReaction         = GetUnitReaction
+local IsUnitAttackable        = IsUnitAttackable
+local IsSlotUsed              = IsSlotUsed
+local GetSlotAbilityCost      = GetSlotAbilityCost
 
 local moduleName    = LUIE.name .. '_CombatInfo'
-local fakeControl = {}
+local fakeControl   = {}
 
 --[[
  * FIFO Queue data structure
@@ -97,11 +97,11 @@ CI.Colours = {
     EXECUTE     = { r = 0.94 , g = 0.13 , b = 0.25 },
     MAGICKA     = { r = 0.14 , g = 0.59 , b = 0.78 },  --RGB(35, 150, 200)
     HEALTH      = { r = 0.80 , g = 0.07 , b = 0.10 },
-    --STAMINA       = { r = 0.24 , g = 0.78 , b = 0.31 },  --RGB(60, 200, 80)
+    --STAMINA     = { r = 0.24 , g = 0.78 , b = 0.31 },  --RGB(60, 200, 80)
     STAMINA     = { r = 0.82 , g = 0.80 , b = 0.49 },  --RGB(210, 205, 125)
     ULTIMATE    = { r = 0.86 , g = 1    , b = 0.31 },  --RGB(220, 255, 80)
     BLOCKED     = { r = 0.24 , g = 0.78 , b = 0.31 },  --RGB(60, 200, 80)
-    ABSORBED    = { r = 1    , g = 0.55 , b = 0.08 },         --RGB(255, 140, 20)
+    ABSORBED    = { r = 1    , g = 0.55 , b = 0.08 },  --RGB(255, 140, 20)
     DAMAGE_COLOURED = {
         [DAMAGE_TYPE_NONE]      = { r = 1, g = 1, b = 1 },                       --RGB(255, 255, 255)
         [DAMAGE_TYPE_GENERIC]   = { r = 1, g = 1, b = 1 },                       --RGB(255, 255, 255)
@@ -122,16 +122,16 @@ CI.Colours = {
  * List of all damage results to be coloured into damage-dependent colour
  ]]--
 local IsResultDamage = {
-    [ACTION_RESULT_DAMAGE]          = true,
-    [ACTION_RESULT_BLOCKED_DAMAGE]  = true,
-    [ACTION_RESULT_CRITICAL_DAMAGE] = true,
-    [ACTION_RESULT_DOT_TICK]        = true,
-    [ACTION_RESULT_DOT_TICK_CRITICAL]= true,
+    [ACTION_RESULT_DAMAGE]            = true,
+    [ACTION_RESULT_BLOCKED_DAMAGE]    = true,
+    [ACTION_RESULT_CRITICAL_DAMAGE]   = true,
+    [ACTION_RESULT_DOT_TICK]          = true,
+    [ACTION_RESULT_DOT_TICK_CRITICAL] = true,
 }
 
 local IsResultDot = {
-    [ACTION_RESULT_DOT_TICK]        = true,
-    [ACTION_RESULT_DOT_TICK_CRITICAL]= true,
+    [ACTION_RESULT_DOT_TICK]          = true,
+    [ACTION_RESULT_DOT_TICK_CRITICAL] = true,
 }
 
 local IsResultHeal = {
@@ -160,7 +160,7 @@ local IsResultCC = {
 -- Contains fonts for Combat Info module
 -- Has to be supplied with other fonts during game play
 local Font = {
-    FontinSCLarge   = "/LuiExtended/assets/fontin_sans_sc.otf|36|soft-shadow-thick",
+    FontinSCLarge = "/LuiExtended/assets/fontin_sans_sc.otf|36|soft-shadow-thick",
 }
 
 -- Used can select font face this families
@@ -2409,4 +2409,3 @@ function CI.CreatePotionAlert(abilityName)
     if not CI.Enabled then return end
     CI.FireCombatEvent( 0, 'custom', false, abilityName, '', 0, 'Potion Ready', COMBAT_UNIT_TYPE_PLAYER, '', 'combatTip', 1, POWERTYPE_ULTIMATE, 0, false, 0, 0, 0 )
 end
-

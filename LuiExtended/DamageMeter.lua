@@ -3,36 +3,36 @@
 LUIE.DamageMeter = {}
 
 -- Performance Enhancement
-local DM = LUIE.DamageMeter
-local UI = LUIE.UI
-local E  = LUIE.Effects
-local commaValue = LUIE.CommaValue
-local formatMessage = LUIE.ChatAnnouncements.FormatMessage
-local colours = LUIE.CombatInfo.Colours
-local strfmt = string.format
-local strformat = zo_strformat
+local DM             = LUIE.DamageMeter
+local UI             = LUIE.UI
+local E              = LUIE.Effects
+local commaValue     = LUIE.CommaValue
+local formatMessage  = LUIE.ChatAnnouncements.FormatMessage
+local colours        = LUIE.CombatInfo.Colours
+local strfmt         = string.format
+local strformat      = zo_strformat
 local IsUnitInCombat = IsUnitInCombat
-local tremove = table.remove
-local tinsert = table.insert
+local tremove        = table.remove
+local tinsert        = table.insert
 
-local moduleName = LUIE.name .. '_DamageMeter'
+local moduleName         = LUIE.name .. '_DamageMeter'
 local g_DamageMeterTitle = "LUIE Damage Meter"
 local g_DamageGraphTitle = "LUIE Damage Log"
-local g_NoRecord = "No Combat Recorded"
+local g_NoRecord         = "No Combat Recorded"
 
 local fakeControl = {}
 
 DM.Enabled = false
 DM.D = {
-    DamageTimeout = 5,
+    DamageTimeout      = 5,
     UpdateFullRealtime = false,
-    FightTime   = true,
-    Backdrop    = true,
-    CombatLog   = false,
-    LogTimeStamp= true,
-    CombatLogFocus = false,
-    CombatLogDebuff = false,
-    CombatLogFont = 0,
+    FightTime          = true,
+    Backdrop           = true,
+    CombatLog          = false,
+    LogTimeStamp       = true,
+    CombatLogFocus     = false,
+    CombatLogDebuff    = false,
+    CombatLogFont      = 0,
 }
 DM.DC = {
     LogSaveEnable = false,

@@ -3,63 +3,63 @@
 LUIE.SpellCastBuffs = {}
 
 -- Performance Enhancement
-local SCB   = LUIE.SpellCastBuffs
-local CI    = LUIE.CombatInfo
-local UI    = LUIE.UI
-local E     = LUIE.Effects
-local L     = LUIE.GetLocale()
-local strfmt = string.format
+local SCB       = LUIE.SpellCastBuffs
+local CI        = LUIE.CombatInfo
+local UI        = LUIE.UI
+local E         = LUIE.Effects
+local L         = LUIE.GetLocale()
+local strfmt    = string.format
 local strformat = zo_strformat
-local strfind = zo_plainstrfind
-local strlower = zo_strlower
-local tinsert = table.insert
-local tsort = table.sort
-local pairs = pairs
+local strfind   = zo_plainstrfind
+local strlower  = zo_strlower
+local tinsert   = table.insert
+local tsort     = table.sort
+local pairs     = pairs
 
 local moduleName = LUIE.name .. '_SpellCastBuffs'
 
 local testEffectPrefix = 'testEffect:'
-local testEffectList = { 22, 44, 55, 1800000 }
+local testEffectList   = { 22, 44, 55, 1800000 }
 
 local playerName = zo_strformat(SI_UNIT_NAME, GetUnitName('player'))
 
 local windowTitles = {
-    player  = "Effects on Player",
-    player1 = "Player Buffs",
-    player2 = "Player Debuffs",
+    player      = "Effects on Player",
+    player1     = "Player Buffs",
+    player2     = "Player Debuffs",
     player_long = 'Player Long Term Effects', -- 'E'
-    target  = "Effects on Target",
-    target1 = "Target Buffs",
-    target2 = "Target Debuffs",
+    target      = "Effects on Target",
+    target1     = "Target Buffs",
+    target2     = "Target Debuffs",
 }
 local containerRouting = {}
 
 SCB.Enabled = false
 SCB.D = {
-    IconSize            = 40,
-    BuffFontFace        = "Fontin Regular",
-    BuffFontStyle       = "outline",
-    BuffFontSize        = 16,
-    Alignment           = L.Setting_Center,
-    AlignmentVert       = L.Setting_Middle,
-    SortDirection       = L.Setting_OrderX[1],
-    GlowIcons           = true,
-    RemainingText           = true,
-    RemainingTextColoured   = false,
-    RemainingTextMillis = true,
-    RemainingCooldown   = true,
-    FadeOutIcons        = false,
+    IconSize                 = 40,
+    BuffFontFace             = "Fontin Regular",
+    BuffFontStyle            = "outline",
+    BuffFontSize             = 16,
+    Alignment                = L.Setting_Center,
+    AlignmentVert            = L.Setting_Middle,
+    SortDirection            = L.Setting_OrderX[1],
+    GlowIcons                = true,
+    RemainingText            = true,
+    RemainingTextColoured    = false,
+    RemainingTextMillis      = true,
+    RemainingCooldown        = true,
+    FadeOutIcons             = false,
     lockPositionToUnitFrames = true,
-    LongTermEffects_Player  = true,
-    LongTermEffects_Target  = true,
-    IgnoreDisguise      = false,
-    IgnoreMundus        = false,
-    IgnoreEquipment     = false,
-    IgnoreVampLycan     = false,
-    IgnoreCyrodiil      = false,
-    LongTermEffectsSeparate = true,
+    LongTermEffects_Player   = true,
+    LongTermEffects_Target   = true,
+    IgnoreDisguise           = false,
+    IgnoreMundus             = false,
+    IgnoreEquipment          = false,
+    IgnoreVampLycan          = false,
+    IgnoreCyrodiil           = false,
+    LongTermEffectsSeparate  = true,
     LongTermEffectsSeparateAlignment = 2,
-    StealthState        = true,
+    StealthState             = true,
 }
 SCB.SV = nil
 
@@ -153,15 +153,15 @@ local Effects = {
     [L.Skill_Arrow_Barrage]         = { false, false, true, 2 },
 
     -- Destro Staff
-    [L.Skill_Wall_of_Fire]          = { false, false, 6.4, nil },
-    [L.Skill_Wall_Of_Storms]        = { false, false, 6.4, nil },
-    [L.Skill_Wall_of_Frost]         = { false, false, 6.4, nil },
-    [L.Skill_Unstable_Wall_of_Fire] = { false, false, 6.4, nil },
-    [L.Skill_Unstable_Wall_of_Frost]    = { false, false, 6.4, nil },
-    [L.Skill_Unstable_Wall_of_Storms]   = { false, false, 6.4, nil }, --Tested these values manually to make them as close to accurate as possible
-    [L.Skill_Blockade_of_Fire]      = { false, false, 8.3, nil },
-    [L.Skill_Blockade_of_Frost]     = { false, false, 8.3, nil },
-    [L.Skill_Blockade_of_Storms]    = { false, false, 8.3, nil },
+    [L.Skill_Wall_of_Fire]            = { false, false, 6.4, nil },
+    [L.Skill_Wall_Of_Storms]          = { false, false, 6.4, nil },
+    [L.Skill_Wall_of_Frost]           = { false, false, 6.4, nil },
+    [L.Skill_Unstable_Wall_of_Fire]   = { false, false, 6.4, nil },
+    [L.Skill_Unstable_Wall_of_Frost]  = { false, false, 6.4, nil },
+    [L.Skill_Unstable_Wall_of_Storms] = { false, false, 6.4, nil }, --Tested these values manually to make them as close to accurate as possible
+    [L.Skill_Blockade_of_Fire]        = { false, false, 8.3, nil },
+    [L.Skill_Blockade_of_Frost]       = { false, false, 8.3, nil },
+    [L.Skill_Blockade_of_Storms]      = { false, false, 8.3, nil },
     
     -- Resto Staff
     [L.Skill_Grand_Healing]         = { true, false, false, nil },
@@ -182,9 +182,9 @@ local Effects = {
     [L.Skill_Daedric_Tomb]          = { false, false, 36, 0.5 },    -- Decent timer otherwise
 
     -- Daedric Summoning
-    [L.Skill_Summon_Storm_Atronach] = { false, false, true, 0.8 },      -- Values here are completely accurate
-    [L.Skill_Greater_Storm_Atronach]    = { false, false, true, 0.8 },  -- Don't absolutely have to have this, player already gets a buff on them, but this gives us more feedback
-    [L.Skill_Summon_Charged_Atronach]   = { false, false, true, 0.8 },
+    [L.Skill_Summon_Storm_Atronach]   = { false, false, true, 0.8 },  -- Values here are completely accurate
+    [L.Skill_Greater_Storm_Atronach]  = { false, false, true, 0.8 },  -- Don't absolutely have to have this, player already gets a buff on them, but this gives us more feedback
+    [L.Skill_Summon_Charged_Atronach] = { false, false, true, 0.8 },
     
     -- Storm Calling
     [L.Skill_Lightning_Splash]      = { false, false, true, nil },
@@ -349,17 +349,17 @@ local IsAbilityCustomToggle = {
     [L.Skill_Dragon_Fire_Scale]     = true,
     
     --Dragonknight Skills (Earthen Heart)
-    [L.Skill_Molten_Weapons]        = true,
-    [L.Skill_Igneous_Weapons]       = true,
-    [L.Skill_Molten_Armaments]      = true,
-    [L.DamageShield_Obsidian_Shield]    = true,
-    [L.DamageShield_Fragmented_Shield]  = true,
-    [L.DamageShield_Igneous_Shield] = true,
+    [L.Skill_Molten_Weapons]           = true,
+    [L.Skill_Igneous_Weapons]          = true,
+    [L.Skill_Molten_Armaments]         = true,
+    [L.DamageShield_Obsidian_Shield]   = true,
+    [L.DamageShield_Fragmented_Shield] = true,
+    [L.DamageShield_Igneous_Shield]    = true,
     
     --Templar Skills (Aedric Spear)
-    [L.DamageShield_Sun_Shield]            = true, --These seem to fade on dodge roll, unlike other shields, I have no idea why
-    [L.DamageShield_Radiant_Ward]          = true, --These seem to fade on dodge roll, unlike other shields, I have no idea why
-    [L.DamageShield_Blazing_Shield]        = true, --These seem to fade on dodge roll, unlike other shields, I have no idea why
+    [L.DamageShield_Sun_Shield]     = true, --These seem to fade on dodge roll, unlike other shields, I have no idea why
+    [L.DamageShield_Radiant_Ward]   = true, --These seem to fade on dodge roll, unlike other shields, I have no idea why
+    [L.DamageShield_Blazing_Shield] = true, --These seem to fade on dodge roll, unlike other shields, I have no idea why
     
     --Nightblade Skills (Assassination)
     [L.Skill_Blur]                  = true,
@@ -392,10 +392,10 @@ local IsAbilityCustomToggle = {
     
     --One Hand and Shield
     -- IF POSSIBLE - ADD HEROIC SLASH MINOR HEROISM
-    [L.Skill_Defensive_Posture]     = true,
-    [L.Skill_Defensive_Stance]      = true,
-    [L.Skill_Absorb_Magic]          = true,
-    [L.DamageShield_Shielded_Assault]   = true,
+    [L.Skill_Defensive_Posture]       = true,
+    [L.Skill_Defensive_Stance]        = true,
+    [L.Skill_Absorb_Magic]            = true,
+    [L.DamageShield_Shielded_Assault] = true,
     
     --Dual Wield
     [L.Skill_Blade_Cloak]            = true,

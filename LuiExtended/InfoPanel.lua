@@ -19,17 +19,17 @@ local DelayBuffer   = LUIE.DelayBuffer
 local strformat     = string.format
 
 local moduleName    = LUIE.name .. '_InfoPanel'
-local fakeControl = {}
+local fakeControl   = {}
 
 PNL.Enabled = false
-PNL.SV = nil
+PNL.SV      = nil
 
 PNL.panelUnlocked = false
 
 -- UI elements
 local g_infoPanelFont = '/LuiExtended/assets/ProFontWindows.ttf|9|soft-shadow-thin'
 
-local uiPanel = nil
+local uiPanel  = nil
 local uiTopRow = nil
 local uiBotRow = nil
 
@@ -64,7 +64,7 @@ local uiWeapons = {
     colour = {
         [1] = { charges = 5,  colour = colors.RED },
         [2] = { charges = 33, colour = colors.YELLOW },
-        [3] = {              colour = colors.WHITE },
+        [3] = {               colour = colors.WHITE },
     },
 }
 local uiGems = {}
