@@ -36,6 +36,7 @@
 ; THE SOFTWARE.
 
 libs\LibStub\LibStub.lua
+libs\LibCustomTitles\LibCustomTitles.lua
 libs\LibAnnyoingUpdateNotificationInGame\LibAnnyoingUpdateNotificationInGame.lua
 
 libs\LibAddonMenu-2.0\LibAddonMenu-2.0.lua
