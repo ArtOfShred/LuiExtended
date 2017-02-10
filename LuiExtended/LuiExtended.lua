@@ -167,16 +167,17 @@ local function LUIE_CreateSettings()
     local vAlignOptions = { L.Setting_Top, L.Setting_Middle, L.Setting_Bottom }
 
     local panelData = {
-        type = 'panel',
+        type = "panel",
         name = LUIE.name,
-        displayName = "LUIE Settings",
-        author = "Upularity & SpellBuilder",
+        displayName = "LUI Extended Settings",
+        author = "ArtOfShred, Upularity & SpellBuilder",
         version = g_Version,
+        website = "http://www.esoui.com/downloads/info818-LuiExtended.html",
         slashCommand = "/luiset",
         registerForRefresh = true,
         registerForDefaults = true,
-    }   
-    
+    }
+
     local optionsData = {
         [1] = {
             type = "button",
@@ -1981,11 +1982,12 @@ local function LUIE_CreateSettings()
     end
 
     local panelDataUnitFrames = {
-        type = 'panel',
-        name = LUIE.name .. ' - Unit Frames',
-        displayName = "LUIE Unit Frames Settings",
-        author = "SpellBuilder",
+        type = "panel",
+        name = LUIE.name .. " - Unit Frames",
+        displayName = "LUI Extended Unit Frames Settings",
+        author = "ArtOfShred, Upularity & SpellBuilder",
         version = g_Version,
+        website = "http://www.esoui.com/downloads/info818-LuiExtended.html",
         slashCommand = "/luiframes",
         registerForRefresh = true,
         registerForDefaults = true,
