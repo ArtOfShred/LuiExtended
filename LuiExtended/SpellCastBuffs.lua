@@ -106,7 +106,7 @@ local recallIconFilename = '/esoui/art/icons/ability_rogue_053.dds'
 
 -- font to be used on icons
 -- 'ZoFontWindowSubtitle' or ours:
---local buffsFont = '/LuiExtended/assets/fontin_sans_r.otf|16|outline'
+--local buffsFont = '/LuiExtended/fonts/fontin_sans_r.otf|16|outline'
 --local buffsFont = "$(MEDIUM_FONT)|17|outline"
 local buffsFont
 

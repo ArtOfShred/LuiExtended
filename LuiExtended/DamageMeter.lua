@@ -53,7 +53,7 @@ local g_TimelineCur
 
 local g_CombatLogActivated = false
 
-local fontPanelLabel = '/LuiExtended/assets/fontin_sans_r.otf|14|soft-shadow-thin'
+local fontPanelLabel = '/LuiExtended/fonts/fontin_sans_r.otf|14|soft-shadow-thin'
 
 ZO_CreateStringId("SI_BINDING_NAME_LUIE_DISPLAY_DAMAGE_METER", "Display Damage Meter")
 ZO_CreateStringId("SI_BINDING_NAME_LUIE_DISPLAY_DAMAGE_LOG", "Display Damage Log")

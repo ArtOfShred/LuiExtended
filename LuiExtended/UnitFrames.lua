@@ -139,7 +139,7 @@ local g_targetThreshold
 local g_powerError = {}
 
 -- font to be used on default UI overlay labels
-local defaultLabelFont = '/LuiExtended/assets/fontin_sans_sc.otf|15|outline'
+local defaultLabelFont = '/LuiExtended/fonts/fontin_sans_sc.otf|15|outline'
 
 -- keet this value in local constant
 local g_MaxChampionPoint = GetChampionPointsPlayerProgressionCap()
