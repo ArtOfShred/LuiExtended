@@ -1715,8 +1715,12 @@ function CA.MailCODChanged (eventCode, codAmount)
     
 end
 
-function CA.MailRemoved (eventCode)
-    printToChat ("Mail deleted!")
+function CA.MailRemoved(eventCode)
+
+    if CA.SV.MiscMail then
+        printToChat ("Mail deleted!")
+    end
+    
 end
 
 function CA.OnMailReadable(eventCode, mailId)
