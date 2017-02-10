@@ -42,6 +42,7 @@ CA.D = {
     LootOnlyNotable               = false,
     LootShowTrait                 = true,
     LootShowArmorType             = false,
+    LootShowStyle                 = false,
     LootNotTrash                  = true,
     LootBlacklist                 = false,
     LootCurrencyCombo             = false,
@@ -71,12 +72,19 @@ CA.D = {
     AchievementsStep              = 2,
     AchievementsDetails           = true,
     AchIgnoreList                 = {}, -- inverted list of achievements to be tracked
+    ChatPlayerDisplayOptions      = 2,
     MiscBags                      = false,
     MiscLockpick                  = false,
+    MiscGuild                     = false,
+    MiscTrade                     = false,
+    MiscMail                      = false,
 }
 
 local g_playerName = nil
 local combostring = "" -- String is filled by the EVENT_CURRENCY_CHANGE events and ammended onto the end of purchase/sales from LootLog component if toggled on!
+local mailCOD = 0
+local mailMoney = 0
+local postageAmount = 0
 
 function CA.Initialize()
     -- load settings
@@ -84,6 +92,7 @@ function CA.Initialize()
 
     -- Read current player toon name
     g_playerName = GetRawUnitName('player')
+    g_playerNameFormatted = zo_strformat(SI_UNIT_NAME, GetUnitName('player'))
 
     -- register events
     CA.RegisterGroupEvents()
@@ -100,6 +109,7 @@ function CA.Initialize()
     CA.RegisterAchievementsEvent()
     CA.RegisterBagEvents()
     CA.RegisterLockpickEvents()
+    CA.RegisterGuildEvents()
 
 end
 
@@ -109,37 +119,141 @@ end
 function CA.RegisterGroupEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RESPONSE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LEADER_UPDATE)
     if CA.SV.GroupChatMsg then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED, CA.OnGroupMemberJoined)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT,   CA.OnGroupMemberLeft)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED, CA.OnGroupInviteReceived)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RESPONSE, CA.OnGroupInviteResponse)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEADER_UPDATE, CA.OnGroupLeaderUpdate)
     end
 end
 
-function CA.OnGroupMemberJoined(eventCode, memberName)
-    if g_playerName ~= memberName then
-        -- Can occur if event is before EVENT_PLAYER_ACTIVATED
-        local characterNameLink = ZO_LinkHandler_CreateCharacterLink( gsub(memberName,"%^%a+","") )
+-- Prints a message to chat when another player sends us a group invite
+function CA.OnGroupInviteReceived (eventCode, inviterName, inviterDisplayName)
+
+    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(inviterName)
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
+    local displayBothString = ( strfmt("%s%s", inviterName, inviterDisplayName) )
+    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
+    
         if CHAT_SYSTEM then
-            printToChat(strfmt("%s|r has joined your group.", characterNameLink))
+            if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r has invited you to join a group.", displayNameLink) ) end
+            if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has invited you to join a group.", characterNameLink) ) end
+            if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has invited you to join a group.", displayBoth) ) end
+            EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED) -- On receiving a group invite, it fires 2 events, we disable the event handler temporarily for this then recall it after.
+        end
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED, CA.OnGroupInviteReceived)
+end
+
+-- Prints a message to chat when invites are declined or failed. Currently broken as of 2/9/2017 so we have to omit any names from this function until it returns the correct InviteeName and InviteeDisplayName instead
+function CA.OnGroupInviteResponse (eventCode, inviterName, response, inviterDisplayName)
+
+    if response == 1  then -- Note that this response only triggers when a group is formed by inviting someone. Once there are 2+ members in the party, it will no longer trigger, allowing us to use it as our "party opened" message
+            printToChat("You have formed a group.")
+    elseif response == 2 then
+            printToChat("Your group invitation was declined.")
+    elseif response == 3 then
+            printToChat("You cannot extend a group invitation to a player that is ignoring you.")
+    elseif response == 5 then -- Add some kind of override here if you try to invite yourself
+            printToChat("You cannot extend a group invitation to a player that is already in a group.")
+    elseif response == 7 then
+            printToChat("You cannot invite yourself to a group.")
+    elseif response == 8 then
+            printToChat("Failed to extend a group invitation, only the group leader can invite.")
+    elseif response == 9 then
+            printToChat("You cannot extend a group invitation to a player that is a member of the opposite faction.")
+ 
+    end
+end
+
+-- Prints a message to chat when the leader of the group is updated
+function CA.OnGroupLeaderUpdate (eventCode, leaderTag)
+
+    local groupLeaderName = GetUnitName(leaderTag)
+    local groupLeaderAccount = GetUnitDisplayName(leaderTag)
+    
+    
+    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(groupLeaderName)
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(groupLeaderAccount)
+    local displayBothString = ( strfmt("%s%s", groupLeaderName, groupLeaderAccount) )
+    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, groupLeaderAccount)
+    
+    if CHAT_SYSTEM then
+        if g_playerNameFormatted ~= groupLeaderName then -- If another player became the leader
+            if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r is now the group leader!", displayNameLink) ) end
+            if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r is now the group leader!", characterNameLink) ) end
+            if CA.SV.ChatPlayerDisplayOptions == 3 then  printToChat(strfmt("%s|r is now the group leader!", displayBoth) ) end
+        elseif g_playerNameFormatted == groupLeaderName then -- If the player character became the leader
+            printToChat(strfmt("You are now the group leader!") )
         end
     end
 end
 
-function CA.OnGroupMemberLeft(eventCode, memberName, reason, wasLocalPlayer)
+-- Prints a message to chat when a group member joins
+function CA.OnGroupMemberJoined(eventCode, memberName)
+
+    local g_partyStack = { }
+    local joinedMemberName = ""
+    local joinedMemberAccountName = ""
+
+    -- Iterate through group member indices to get the relevant UnitTags
+    for i = 1,40 do
+        local memberTag = GetGroupUnitTagByIndex(i)
+        if memberTag == nil then break end -- Once we reach a nil value (aka no party member there, stop the loop)
+        g_partyStack[i] = { memberTag=memberTag }
+    end
+    
+    -- Iterate through UnitTags to get the member who just joined
+    for i = 1, #g_partyStack do
+        local unitname = GetRawUnitName(g_partyStack[i].memberTag)
+        if unitname == memberName then
+            joinedMemberName = GetUnitName(g_partyStack[i].memberTag)
+            joinedMemberAccountName = GetUnitDisplayName(g_partyStack[i].memberTag)
+            break -- Break loop once we get the value we need
+        end
+    end
+    
+    if g_playerName ~= memberName then
+        -- Can occur if event is before EVENT_PLAYER_ACTIVATED
+        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(joinedMemberName)
+        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(joinedMemberAccountName)
+        local displayBothString = ( strfmt("%s%s", joinedMemberName, joinedMemberAccountName) )
+        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, joinedMemberAccountName)
+        if CHAT_SYSTEM then
+            if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r has joined the group.", displayNameLink) ) end
+            if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has joined the group.", characterNameLink) ) end
+            if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has joined the group.", displayBoth) ) end
+        end
+    end
+    
+    g_partyStack = { }
+    
+end
+
+-- Prints a message to chat when a group member leaves
+function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLeader, memberDisplayName, actionRequiredVote)
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink( gsub(memberName,"%^%a+","") )
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(memberDisplayName)
+    local displayBothString = ( strfmt("%s%s", gsub(memberName,"%^%a+",""), memberDisplayName) )
+    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, memberDisplayName)
     local msg = nil
     if reason == GROUP_LEAVE_REASON_VOLUNTARY then
-        msg = g_playerName == memberName and "You have left the group." or "|%s|r has left your group."
+        msg = g_playerName == memberName and "You have left the group." or "%s|r has left the group."
     elseif reason == GROUP_LEAVE_REASON_KICKED then
         -- msg = g_playerName == memberName and 'You were kicked from the group.' or '|cFEFEFE%s|r was kicked from your group.' -- Don't want to have to fetch this color code again if I need it.
-        msg = g_playerName == memberName and "You were kicked from the group." or "%s|r was kicked from your group."
+        msg = g_playerName == memberName and "You have been removed from the group." or "%s|r removed from the group."
     elseif reason == GROUP_LEAVE_REASON_DISBAND and g_playerName == memberName then
-        msg = "Your group has been disbanded."
+        msg = "The group has been disbanded."
     end
     if msg then
         -- Can occur if event is before EVENT_PLAYER_ACTIVATED
         if CHAT_SYSTEM then
-            printToChat(strfmt(msg, characterNameLink))
+            if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt(msg, displayNameLink)) end
+            if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt(msg, characterNameLink)) end
+            if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt(msg, displayBoth)) end
         end
     end
 end
@@ -297,7 +411,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     reason 66 = Bank Fee??? (Untested)
     reason 67 = Death??? (Untested)
     ]]--
-    
+
     local UpOrDown = newMoney - oldMoney
     local currentMoney = CommaValue ( GetCurrentMoney() )
     local color = ""
@@ -308,6 +422,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     local formathelper = " "
     local bracket1 = ""
     local bracket2 = ""
+    local mailHelper = false
     
     if CA.SV.CurrencyBracketDisplayOptions == 1 then
         bracket1 = "["
@@ -336,12 +451,12 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     end
     
     -- If we only recieve or lose 1 Gold, don't add an "s" onto the end of the name
-    if UpOrDown == 1 or UpOrDown == -1 or CA.SV.GoldName == "" or CA.SV.GoldName == "Gold" then
+    if UpOrDown == 1 or UpOrDown == -1 or CA.SV.GoldName == "" or CA.SV.GoldName == "Gold" or CA.SV.GoldName == "Currency" or CA.SV.GoldName == "GP" or CA.SV.GoldName == "gp" or CA.SV.GoldName == "G" or CA.SV.GoldName == "g" then
         plural = ""
     end
     
     -- If the name is blank, don't add an additional spacer before it after the change value
-    if CA.SV.GoldName == ( "" ) then
+    if CA.SV.GoldName == ( "" ) or CA.SV.GoldName == ( "G" ) or CA.SV.GoldName == ( "g" ) then
         formathelper = ( "" )
     end
     
@@ -349,9 +464,14 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     if reason == 1 and UpOrDown > 0 then message = ( "Received" )
     elseif reason == 1 and UpOrDown < 0 then message = ("Spent" )
 
-    -- Receieve/Send Money in the Mail
+    -- Receieve Money in the Mail
     elseif reason == 2 and UpOrDown > 0 then message = ( "Received" )
-    elseif reason == 2 and UpOrDown < 0 then message = ( "Sent" )
+    
+    -- Send money in the mail, values changed to compensate for COD!
+    elseif reason == 2 and UpOrDown < 0 then 
+        message = ( "Sent" )
+        changetype = CommaValue (oldMoney - newMoney - postageAmount)
+        mailHelper = true
     
     -- Receive/Give Money in a Trade (Likely consolidate this later)
     elseif reason == 3 and UpOrDown > 0 then message = ( "Traded" )
@@ -427,26 +547,67 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     -- Determines syntax based on whether icon is displayed or not, we use "ICON - GOLD CHANGE AMOUNT" if so, and "GOLD CHANGE AMOUNT - GOLD" if not
     local syntax = CA.SV.CurrencyIcons and ( " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. changetype .. formathelper .. CA.SV.GoldName .. plural .. "|r") or ( " |r" .. changetype .. formathelper .. CA.SV.GoldName .. plural .. "|r")
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
-    if CA.SV.TotalGoldChange == true and CA.SV.CurrencyIcons == false then
-        total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. currentMoney ) or ''
-    elseif CA.SV.TotalGoldChange == true and CA.SV.CurrencyIcons == true then
-        total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. currentMoney )
+    
+    if not mailHelper then
+        if CA.SV.TotalGoldChange == true and CA.SV.CurrencyIcons == false then
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. currentMoney ) or ''
+        elseif CA.SV.TotalGoldChange == true and CA.SV.CurrencyIcons == true then
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. currentMoney )
+        else
+            total = ''
+        end
+        -- Print a message to chat based off all the values we filled in above
+        if CA.SV.LootCurrencyCombo and UpOrDown < 0 and (reason == 1 or reason == 60 or reason == 63 or reason == 64) then
+            combostring = ( strfmt ( " → %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+        elseif CA.SV.LootCurrencyCombo and UpOrDown > 0 and (reason == 1 or reason == 60 or reason == 63 or reason == 64) then
+            combostring = ( strfmt ( " ← %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+        elseif CA.SV.LootCurrencyCombo and CA.SV.MiscBags and (reason == 8 or reason == 9) then
+            combostring = ( strfmt ( " → %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+        else
+            printToChat ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+        end
     else
-        total = ''
+        local totalwithoutpostage = 0
+        if postageAmount ~= 0 then 
+            totalWithoutPostage = CommaValue ( GetCurrentMoney() + postageAmount ) 
+        else
+            totalWithoutPostage = CommaValue ( GetCurrentMoney() )
+        end
+      
+        if CA.SV.TotalGoldChange == true and CA.SV.CurrencyIcons == false then
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. totalWithoutPostage ) or ''
+        elseif CA.SV.TotalGoldChange == true and CA.SV.CurrencyIcons == true then
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. totalWithoutPostage )
+        else
+            total = ''
+        end
+        
+        if CHAT_SYSTEM and CA.SV.MiscMail then printToChat ("Mail sent!") end
+        --if ( CHAT_SYSTEM and CA.SV.MiscMail and mailCOD ~= 0 ) then printToChat ("COD sent!") end
+        
+        if mailMoney ~= 0 then printToChat ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) ) end
+        
+        if postageAmount ~= 0 then
+            local postagesyntax = CA.SV.CurrencyIcons and ( " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. postageAmount .. formathelper .. CA.SV.GoldName .. plural .. "|r") or ( " |r" .. changetype .. postage .. CA.SV.GoldName .. plural .. "|r")
+                -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
+            if CA.SV.TotalGoldChange == true and CA.SV.CurrencyIcons == false then
+                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. currentMoney ) or ''
+            elseif CA.SV.TotalGoldChange == true and CA.SV.CurrencyIcons == true then
+                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. currentMoney )
+            else
+                total = ''
+            end
+            if CA.SV.CurrencyContextToggle then -- Override with custom string if enabled
+                message = ( CA.SV.CurrencyContextMessageDown )
+            else
+                message = ( "Postage" )
+            end
+            printToChat ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, postagesyntax, total ) )
+        end
+        
     end
     
-    -- Print a message to chat based off all the values we filled in above
-    if CA.SV.LootCurrencyCombo and UpOrDown < 0 and (reason == 1 or reason == 2 or reason == 60 or reason == 63 or reason == 64) then
-        combostring = ( strfmt ( " → %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
-    elseif  CA.SV.LootCurrencyCombo and UpOrDown > 0 and (reason == 1 or reason == 2 or reason == 60 or reason == 63 or reason == 64) then
-        combostring = ( strfmt ( " ← %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
-    elseif CA.SV.LootCurrencyCombo and CA.SV.MiscBags and (reason == 8 or reason == 9) then
-        combostring = ( strfmt ( " → %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
-    -- IMPORTANT INSERT MESSAGE HERE!!!
-    -- IMPORTANT AS FUCK ^^^^^^
-    else
-        printToChat ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
-    end
+    mailHelper = false
     
 end
 
@@ -497,12 +658,12 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
     end
     
     -- If we only recieve or lose 1 Alliance Point, don't add an "s" onto the end of the name
-    if UpOrDown == 1 or UpOrDown == -1 or CA.SV.AlliancePointName == "" then
+    if UpOrDown == 1 or UpOrDown == -1 or CA.SV.AlliancePointName == "" or CA.SV.AlliancePointName == "AP" or CA.SV.AlliancePointName == "ap" or CA.SV.AlliancePointName == "A" or CA.SV.AlliancePointName == "a" then
         plural = ""
     end
     
     -- If the name is blank, don't add an additional spacer before it after the change value
-    if CA.SV.AlliancePointName == ( "" ) then
+    if CA.SV.AlliancePointName == ( "" ) or CA.SV.AlliancePointName == ( "ap" ) or CA.SV.AlliancePointName == ( "a" ) then
         formathelper = ( "" )
     end
     
@@ -515,7 +676,7 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
     end
 
     -- Determines syntax based on whether icon is displayed or not, we use "ICON - ALLIANCE POINT CHANGE AMOUNT" if so, and "ALLIANCE POINT CHANGE AMOUNT - ALLIANCE POINT" if not
-    local syntax = CA.SV.CurrencyIcons and ( " |r|c20e713|t16:16:/esoui/art/currency/alliancepoints.dds|t " .. changetype .. formathelper .. CA.SV.AlliancePointName .. "|r" ) or ( " |r|c20e713" .. changetype .. formathelper .. CA.SV.AlliancePointName .. "|r" )
+    local syntax = CA.SV.CurrencyIcons and ( " |r|c20e713|t16:16:/esoui/art/currency/alliancepoints.dds|t " .. changetype .. formathelper .. CA.SV.AlliancePointName .. plural .. "|r" ) or ( " |r|c20e713" .. changetype .. formathelper .. CA.SV.AlliancePointName .. plural .. "|r" )
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if CA.SV.TotalAlliancePointChange and not CA.SV.CurrencyIcons then
         total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |c20e713" .. CommaValue (alliancePoints) ) or ''
@@ -623,12 +784,12 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
     end
     
     -- If we only recieve or lose 1 Tel Var Stone, don't add an "s" onto the end of the name
-    if UpOrDown == 1 or UpOrDown == -1 or CA.SV.TelVarStoneName == "" then
+    if UpOrDown == 1 or UpOrDown == -1 or CA.SV.TelVarStoneName == "" or CA.SV.TelVarStoneName == "TV" or CA.SV.TelVarStoneName == "tv" or CA.SV.TelVarStoneName == "TVS" or CA.SV.TelVarStoneName == "tvs" or CA.SV.TelVarStoneName == "T" or CA.SV.TelVarStoneName == "t" or CA.SV.TelVarStoneName == "TelVar" or CA.SV.TelVarStoneName == "Tel Var" then
         plural = ""
     end
     
     -- If the name is blank, don't add an additional spacer before it after the change value
-    if CA.SV.TelVarStoneName == ( "" ) then
+    if CA.SV.TelVarStoneName == ( "" ) or CA.SV.TelVarStoneName == ( "tv" ) or CA.SV.TelVarStoneName == ( "t" ) or CA.SV.TelVarStoneName == ( "tvs" ) then
         formathelper = ( "" )
     end
     
@@ -761,12 +922,12 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
     end
     
     -- If we only recieve or lose 1 Writ Voucher, don't add an "s" onto the end of the name
-    if UpOrDown == 1 or UpOrDown == -1 or CA.SV.WritVoucherName == "" then
+    if UpOrDown == 1 or UpOrDown == -1 or CA.SV.WritVoucherName == "" or CA.SV.WritVoucherName == "WV" or CA.SV.WritVoucherName == "wv" or CA.SV.WritVoucherName == "W" or CA.SV.WritVoucherName == "w" or CA.SV.WritVoucherName == "V" or CA.SV.WritVoucherName == "v" then
         plural = ""
     end
     
     -- If the name is blank, don't add an additional spacer before it after the change value
-    if CA.SV.WritVoucherName == ( "" ) then
+    if CA.SV.WritVoucherName == ( "" ) or CA.SV.WritVoucherNAme == ( "wv" ) or CA.SV.WritVoucherNAme == ( "w" ) or CA.SV.WritVoucherNAme == ( "v" ) then
         formathelper = ( "" )
     end
     
@@ -853,36 +1014,65 @@ function CA.RegisterVendorEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_SELL_RECEIPT, CA.OnSellItem)
     end
 end
-    
+
 function CA.RegisterTradeEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_SUCCEEDED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_CANCELED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_FAILED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED)
-    if CA.SV.LootTrade then
+    if CA.SV.MiscTrade and not CA.SV.LootTrade then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_SUCCEEDED, CA.OnTradeSuccess)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING, CA.TradeInviteWaiting)   
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING, CA.TradeInviteConsidering)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED, CA.TradeInviteAccepted)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_CANCELED, CA.TradeCancel)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_FAILED, CA.TradeFail)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED, CA.TradeInviteCancel)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED, CA.TradeInviteDecline)
+    elseif CA.SV.LootTrade then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED, CA.OnTradeAdded)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED, CA.OnTradeRemoved)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_SUCCEEDED, CA.OnTradeSuccess)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING, CA.TradeInviteWaiting)   
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING, CA.TradeInviteConsidering)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_CANCELED, CA.OnTradeCancel)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_FAILED, CA.OnTradeCancel)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED, CA.OnTradeCancel)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED, CA.OnTradeCancel)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED, CA.TradeInviteAccepted)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_CANCELED, CA.TradeCancel)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_FAILED, CA.TradeFail)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED, CA.TradeInviteCancel)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED, CA.TradeInviteDecline)
     end
 end
     
 function CA.RegisterMailEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_READABLE)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_TAKE_ATTACHED_ITEM_SUCCESS)
-    if CA.SV.LootMail then
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS)
+    
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED, CA.MailMoneyChanged)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED, CA.MailCODChanged)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_REMOVED, CA.MailRemoved)
+    
+    if CA.SV.MiscMail and not CA.SV.LootMail then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED, CA.OnMailFail) 
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS, CA.OnMailSuccess)
+    elseif CA.SV.LootMail then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_READABLE, CA.OnMailReadable)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_TAKE_ATTACHED_ITEM_SUCCESS, CA.OnMailTakeAttachedItem)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, CA.OnMailAttach)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, CA.OnMailAttachRemove)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, CA.OnMailCloseBox) 
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED, CA.OnMailFail) 
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS, CA.OnMailSuccess) 
     end
 end
 
@@ -909,6 +1099,10 @@ function CA.RegisterLockpickEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_BROKE, CA.MiscAlertLockBroke)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS, CA.MiscAlertLockSuccess)
     end
+end
+
+function CA.RegisterGuildEvents()
+    if CA.SV.MiscGuild then printToChat ("Guild Events Registered jot jot jort!") end
 end
 
 --------------------------------------------------------------
@@ -953,10 +1147,10 @@ local logPrefix = "Purchased"
     end
 
     if CA.SV.LootCurrencyCombo then
-        printToChat ( strfmt( "|c0B610B%sPurchased%s|r %s[Bag Space Upgrade] %s/8%s", bracket1, bracket2, icon, currentUpgrade, combostring) )
+        printToChat ( strfmt( "|c0B610B%s%s%s|r %s[Bag Space Upgrade] |cffffff%s/8|r%s", bracket1, logPrefix, bracket2, icon, currentUpgrade, combostring) )
         combostring = ""
     else
-        printToChat ( strfmt( "|c0B610B%sPurchased%s|r %s[Bag Space Upgrade] %s/8", bracket1, bracket2, icon, currentUpgrade) )
+        printToChat ( strfmt( "|c0B610B%s%s%s|r %s[Bag Space Upgrade] |cffffff%s/8|r", bracket1, logPrefix, bracket2, icon, currentUpgrade) )
     end
 
 end
@@ -993,10 +1187,10 @@ local logPrefix = "Purchased"
     end
 
     if CA.SV.LootCurrencyCombo then
-        printToChat ( strfmt( "|c0B610B%s%s%s|r %s[Bank Space Upgrade] %s/18%s", bracket1, logPrefix, bracket2, icon, currentUpgrade, combostring) )
+        printToChat ( strfmt( "|c0B610B%s%s%s|r %s[Bank Space Upgrade] |cffffff%s/18|r%s", bracket1, logPrefix, bracket2, icon, currentUpgrade, combostring) )
         combostring = ""
     else
-        printToChat ( strfmt( "|c0B610B%s%s%s|r %s[Bank Space Upgrade] %s/18", bracket1, logPrefix, bracket2, icon, currentUpgrade) )
+        printToChat ( strfmt( "|c0B610B%s%s%s|r %s[Bank Space Upgrade] |cffffff%s/18|r", bracket1, logPrefix, bracket2, icon, currentUpgrade) )
     end
 
 end
@@ -1172,7 +1366,7 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
     end
 end
 
-function CA.LogItem( logPrefix, icon, itemName, itemType, quantity, receivedBy, gainorloss )
+function CA.LogItem( logPrefix, icon, itemName, itemType, quantity, receivedBy, gainorloss, istrade )
 
     local bracket1 = ""
     local bracket2 = ""
@@ -1195,6 +1389,7 @@ function CA.LogItem( logPrefix, icon, itemName, itemType, quantity, receivedBy, 
     local formattedQuantity  = ""
     local formattedTrait     = ""
     local formattedArmorType = ""
+    local formattedStyle = ""
     local arrowPointer       = ""
  
     if (receivedBy == "") then
@@ -1202,12 +1397,15 @@ function CA.LogItem( logPrefix, icon, itemName, itemType, quantity, receivedBy, 
         -- TODO: Make a Setting to choose Character or Account name
         formattedRecipient = ""
     else
-        -- TODO: This change fixed the arrow on loot group members receive
-        --       Sadly it broke the arrow for trade >_>
-        if gainorloss == "|c0B610B" then
-            arrowPointer = "→"
+       -- Selects direction of pointer based on whether item is gained for lost, reversed for Trade purposes.
+        if gainorloss == "|c0B610B" and not istrade then
+            arrowPointer = " →"
+        elseif gainorloss == "|ca80700" and not istrade then
+            arrowPointer = " ←"
+        elseif gainorloss == "|c0B610B" and istrade then
+            arrowPointer = " ←"
         else
-            arrowPointer = "←"
+            arrowPointer = " →"
         end
         -- Create a character link to make it easier to contact the recipient
         formattedRecipient = strfmt(
@@ -1232,9 +1430,14 @@ function CA.LogItem( logPrefix, icon, itemName, itemType, quantity, receivedBy, 
     if (CA.SV.LootShowTrait and traitType ~= ITEM_TRAIT_TYPE_NONE and itemType ~= ITEMTYPE_ARMOR_TRAIT and itemType ~= ITEMTYPE_WEAPON_TRAIT) then
         formattedTrait = strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMTRAITTYPE", traitType))
     end
+    
+    local styleType = GetItemLinkItemStyle(itemName) -- Get Style of the item
+    if (CA.SV.LootShowStyle and styleType ~= ITEMSTYLE_NONE and styleType ~= ITEMSTYLE_UNIQUE and styleType ~= ITEMSTYLE_UNIVERSAL) then
+        formattedStyle = strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMSTYLE", styleType))
+    end
    
     printToChat(strfmt(
-        "%s%s%s%s|r %s%s%s%s%s %s%s",
+        "%s%s%s%s|r %s%s%s%s%s%s%s%s",
         gainorloss,
         bracket1,
         logPrefix,
@@ -1244,9 +1447,12 @@ function CA.LogItem( logPrefix, icon, itemName, itemType, quantity, receivedBy, 
         formattedQuantity,
         formattedArmorType,
         formattedTrait,
+        formattedStyle,
         formattedRecipient,
         combostring
     ))
+    
+    combostring = ""
     
 end
 
@@ -1259,13 +1465,55 @@ local TradeInvitee = ""
 -- These 2 functions help us get the name of the person we are trading with regardless of who initiated the trade
 function CA.TradeInviteWaiting(eventCode, inviteeCharacterName, inviteeDisplayName) 
     TradeInvitee = inviteeCharacterName
-    -- printToChat (TradeInvitee) -- Debug
+    local characterNameLink = ZO_LinkHandler_CreateCharacterLink( gsub(inviteeCharacterName,"%^%a+","") )
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviteeDisplayName)
+    local displayBothString = ( strfmt("%s%s", gsub(inviteeCharacterName,"%^%a+",""), inviteeDisplayName) )
+    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviteeDisplayName)
+    if CHAT_SYSTEM then
+        if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then printToChat ("You've invited " .. displayNameLink .. " to trade.") end
+        if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 2 then printToChat ("You've invited " .. characterNameLink .. " to trade.") end 
+        if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then printToChat ("You've invited " .. displayBoth .. " to trade.") end 
+    end
 end
 
 -- These 2 functions help us get the name of the person we are trading with regardless of who initiated the trade
 function CA.TradeInviteConsidering(eventCode, inviterCharacterName, inviterDisplayName) 
     TradeInviter = inviterCharacterName
-    -- printToChat (TradeInviter) -- Debug
+    local characterNameLink = ZO_LinkHandler_CreateCharacterLink( gsub(inviterCharacterName,"%^%a+","") )
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
+    local displayBothString = ( strfmt("%s%s", gsub(inviterCharacterName,"%^%a+",""), inviterDisplayName) )
+    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
+    if CHAT_SYSTEM then
+        if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then printToChat ( displayNameLink .. " has invited you to trade.") end
+        if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 2 then printToChat ( characterNameLink .. " has invited you to trade.") end 
+        if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then printToChat ( displayBoth .. " has invited you to trade.") end 
+    end
+end
+
+function CA.TradeInviteAccepted(eventCode)
+    
+    if CHAT_SYSTEM and CA.SV.MiscTrade then printToChat ("Trade invite accepted.") end
+    
+end
+
+function CA.TradeInviteDecline (eventCode)
+
+    if CHAT_SYSTEM and CA.SV.MiscTrade then printToChat ("Trade invite declined.") end
+    g_TradeStacksIn = {}
+    g_TradeStacksOut = {}
+    TradeInviter = ""
+    TradeInvitee = ""
+
+end
+
+function CA.TradeInviteCancel (eventCode)
+
+    if CHAT_SYSTEM and CA.SV.MiscTrade then printToChat ("Trade invite canceled.") end
+    g_TradeStacksIn = {}
+    g_TradeStacksOut = {}
+    TradeInviter = ""
+    TradeInvitee = ""
+
 end
 
 -- Adds item to index when they are added to the trade
@@ -1302,8 +1550,19 @@ function CA.OnTradeRemoved (eventCode, who, tradeIndex, itemSoundCategory)
 end 
 
 -- Cleanup if a Trade is canceled/exited
-function CA.OnTradeCancel (eventCode, cancelerName)
+function CA.TradeCancel (eventCode, cancelerName)
 
+    if CHAT_SYSTEM and CA.SV.MiscTrade then printToChat ("Trade canceled.") end
+    g_TradeStacksIn = {}
+    g_TradeStacksOut = {}
+    TradeInviter = ""
+    TradeInvitee = ""
+
+end
+
+function CA.TradeFail (eventCode, cancelerName)
+
+    if CHAT_SYSTEM and CA.SV.MiscTrade then printToChat ("Trade failed.") end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
     TradeInviter = ""
@@ -1316,18 +1575,23 @@ function CA.OnTradeSuccess (eventCode)
     
     combostring = ""
     
-    if TradeInviter == "" then tradetarget = TradeInvitee end
-    if TradeInvitee == "" then tradetarget = TradeInviter end
+    if CHAT_SYSTEM and CA.SV.MiscTrade then printToChat ("Trade complete.") end
+    
+    if CA.SV.LootTrade then
+    
+        if TradeInviter == "" then tradetarget = TradeInvitee end
+        if TradeInvitee == "" then tradetarget = TradeInviter end
     
         for indexOut = 1, #g_TradeStacksOut do
         local gainorloss = "|ca80700"
         local logPrefix = "Traded"
         if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
         local receivedBy = tradetarget
+        local istrade = true
         local item = g_TradeStacksOut[indexOut]
         icon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
-        --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue)
-        CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss)
+        --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
+        CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss, istrade)
         end
         
         for indexIn = 1, #g_TradeStacksIn do
@@ -1335,11 +1599,14 @@ function CA.OnTradeSuccess (eventCode)
         local logPrefix = "Traded"
         if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
         local receivedBy = tradetarget
+        local istrade = true
         local item = g_TradeStacksIn[indexIn]
         icon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
-        --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue)
-        CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss)
+        --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
+        CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss, istrade)
         end
+        
+    end
 
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
@@ -1352,6 +1619,8 @@ local g_CraftStacks = {}
 
 -- Temporary function that does an alright job of printing out Tradeskill item gain/loss to us. Can't get itemlinks currently which severely limits the functionality.
 function CA.OnCraftComplete (eventCode, craftSkill)
+    
+    combostring = ""
     
     local gainorloss = "|c0B610B"
     local receivedBy = ""
@@ -1384,7 +1653,8 @@ function CA.OnCraftComplete (eventCode, craftSkill)
     
     local colorprinter = color:Colorize(zo_strformat("[<<t:1>>]", item.name, item.itemstyle) )
     
-    if item.itemstyle ~= ITEMSTYLE_NONE then
+    
+    if (CA.SV.LootShowStyle and item.itemstyle ~= ITEMSTYLE_NONE and item.itemstyle ~= ITEMSTYLE_UNIQUE and item.itemstyle ~= ITEMSTYLE_UNIVERSAL) then
         style = strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMSTYLE", item.itemstyle))
     end
     
@@ -1428,7 +1698,26 @@ end
 --[[
  * Next two functions will track items in mail atachments
  ]]--
-local g_MailStacks
+local g_MailStacks = {}
+local g_MailStacksOut = {}
+
+function CA.MailMoneyChanged (eventCode, moneyAmount)
+
+    mailMoney = moneyAmount
+    mailCOD = 0
+    
+end
+
+function CA.MailCODChanged (eventCode, codAmount)
+
+    mailCOD = codAmount
+    mailMoney = 0
+    
+end
+
+function CA.MailRemoved (eventCode)
+    printToChat ("Mail deleted!")
+end
 
 function CA.OnMailReadable(eventCode, mailId)
 
@@ -1455,6 +1744,76 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
     end
 
     g_MailStacks = {}
+end
+
+function CA.OnMailAttach (eventCode, attachmentSlot) 
+    
+        -- printToChat (attachmentSlot) -- Debug
+        postageAmount = GetQueuedMailPostage()
+        local mailIndex = attachmentSlot
+        local _, _, icon, stack = GetQueuedItemAttachmentInfo(attachmentSlot)
+        local mailitemlink = GetMailQueuedAttachmentLink(attachmentSlot, LINK_STYLE_DEFAULT)
+        g_MailStacksOut[mailIndex] = {stack=stack, name=name, icon=icon, itemlink=mailitemlink}
+    
+end
+
+-- Removes items from index if they are removed from the trade
+function CA.OnMailAttachRemove (eventCode, attachmentSlot)
+
+        postageAmount = GetQueuedMailPostage()
+        local mailIndex = attachmentSlot
+        g_MailStacksOut[mailIndex] = nil
+    
+end 
+
+-- Cleanup if a Trade is canceled/exited
+function CA.OnMailCloseBox (eventCode)
+
+    g_MailStacksOut = {}
+
+end
+
+function CA.OnMailFail (eventCode, reason)
+
+    if CHAT_SYSTEM and CA.SV.MiscMail then
+        if reason == 2 then printToChat ("Cannot send mail: Unknown Player.") end
+        if reason == 3 then printToChat ("Cannot send mail: Recipient's Inbox is full.") end
+        if reason == 4 then printToChat ("You cannot send mail to that recipient.") end
+        if reason == 5 then printToChat ("Cannot send mail: Not enough gold.") end
+        if reason == 11 then printToChat ("You cannot send mail to yourself.") end
+        if reason == 7 then printToChat ("Cannot send mail: This mail is lacking a subject, body, or attachments.") end
+    end
+
+end
+
+-- Sends results of the trade to the Item Log print function and clears variables so they are reset for next trade interactions
+function CA.OnMailSuccess (eventCode)
+    
+    combostring = ""
+    
+    if ( CHAT_SYSTEM and CA.SV.MiscMail ) and not CA.SV.GoldChange then printToChat ("Mail sent!") end
+    --if ( CHAT_SYSTEM and CA.SV.MiscMail and mailCOD ~= 0 ) and not CA.SV.GoldChange then printToChat ("COD sent!") end
+
+    if CA.SV.LootMail then
+ 
+        for mailIndex = 1, #g_MailStacksOut do
+        local gainorloss = "|ca80700"
+        local logPrefix = "Sent"
+        if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
+        local receivedBy = ""
+        local item = g_MailStacksOut[mailIndex]
+        icon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
+        CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss)
+        end
+        
+    end
+
+    g_MailStacksOut = {}
+    mailCOD = 0
+    mailMoney = 0
+    postageAmount = 0
+    
 end
 
 function CA.RegisterXPEvents()
