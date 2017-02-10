@@ -1,6 +1,6 @@
 ## APIVersion: 100018
 ## Title: |cE12000L|cFFFFB0ui E|rxtended|
-## Author: |c00C000Upularity|r, SpellBuilder & ArtOfShred
+## Author: ArtOfShred, Upularity & SpellBuilder 
 ## Version: 4.99 BETA
 ## Description: Provides UnitFrames, InfoPanel, CombatEvents, Buffs tracking, Damage Meter and Loot Chat Announcements.
 ## OptionalDependsOn: LibStub LibAddonMenu-2.0 LibMediaProvider-1.0
