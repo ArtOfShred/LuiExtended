@@ -14,6 +14,7 @@
 
 ; The MIT License (MIT)
 ;
+; Copyright (c) 2017 @ArtOfShred at ESOUI.COM
 ; Copyright (c) 2015-2016, @SpellBuilder and Upularity at ESOUI.COM
 ;
 ; Permission is hereby granted, free of charge, to any person obtaining a copy
