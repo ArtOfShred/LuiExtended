@@ -166,7 +166,7 @@ local function LUIE_CreateSettings()
     local rotationOptionsKeys = { ["Horizontal"] = 1, ["Vertical"] = 2 }
     local hAlignOptions = { L.Setting_Left, L.Setting_Center, L.Setting_Right }
     local vAlignOptions = { L.Setting_Top, L.Setting_Middle, L.Setting_Bottom }
-
+    
     local panelData = {
         type = "panel",
         name = LUIE.name,
@@ -193,7 +193,7 @@ local function LUIE_CreateSettings()
 
     local optionsData = {}
     local optionsDataUnitFrames = {}
-    
+  
     optionsData[#optionsData + 1] = {
         type = "button",
         name = "Reload UI",
@@ -1326,6 +1326,103 @@ local function LUIE_CreateSettings()
         controls = {
             {
                 type = "header",
+                name = "Misc Announcements",
+                width = "full",
+            },
+            {
+                type = "dropdown",
+                name = "Player Name Display Method",
+                choices = chatnameDisplayOptions,
+                getFunc = function() return chatnameDisplayOptions[LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions] end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions = chatnameDisplayOptionsKeys[value] end,
+                width = "full",
+                default = chatnameDisplayOptions[2],
+            },
+            {
+                type = "checkbox",
+                name = "Print messages as System messages",
+                tooltip = "Print all messages as System message so that it can appear in multiple tabs",
+                getFunc = function() return LUIE.ChatAnnouncements.SV.ChatUseSystem end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatUseSystem = value end,
+                width = "full",
+                default = LUIE.ChatAnnouncements.D.ChatUseSystem,
+            },
+            {
+                type = "checkbox",
+                name = "Include Timestamp",
+                tooltip = "Where possible prepend printed text with current time label.",
+                getFunc = function() return LUIE.ChatAnnouncements.SV.TimeStamp end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.TimeStamp = value end,
+                width = "full",
+                disabled = function() return LUIE.ChatAnnouncements.SV.ChatUseSystem end,
+                default = LUIE.ChatAnnouncements.D.TimeStamp,
+            },
+            {
+                type = "editbox",
+                name = "Timestamp format",
+                tooltip = "FORMAT:\nHH: hours (24)\nhh: hours (12)\nH: hour (24, no leading 0)\nh: hour (12, no leading 0)\nA: AM/PM\na: am/pm\nm: minutes\ns: seconds",
+                getFunc = function() return LUIE.ChatAnnouncements.SV.TimeStampFormat end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.TimeStampFormat = value end,
+                width = "full",
+                disabled = function() return not LUIE.ChatAnnouncements.SV.TimeStamp end,
+                default = LUIE.ChatAnnouncements.D.TimeStampFormat,
+            },
+            {
+                type = "checkbox",
+                name = "Enable group changes events in chat",
+                tooltip = "Print message to chat when player joins or leaves the group.",
+                getFunc = function() return LUIE.ChatAnnouncements.SV.GroupChatMsg end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupChatMsg = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                width = "full",
+                default = LUIE.ChatAnnouncements.D.GroupChatMsg,
+            },
+            {
+                type = "checkbox",
+                name = "Print Trade Changes",
+                tooltip = "Print message to chat when player joins or leaves the group.",
+                getFunc = function() return LUIE.ChatAnnouncements.SV.MiscTrade end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscTrade = value LUIE.ChatAnnouncements.RegisterTradeEvents() end,
+                width = "full",
+                default = LUIE.ChatAnnouncements.D.MiscTrade,
+            },
+            {
+                type = "checkbox",
+                name = "Print Mail Changes",
+                tooltip = "Print message to chat when player joins or leaves the group.",
+                getFunc = function() return LUIE.ChatAnnouncements.SV.MiscMail end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscMail = value LUIE.ChatAnnouncements.RegisterMailEvents() end,
+                width = "full",
+                default = LUIE.ChatAnnouncements.D.MiscMail,
+            },
+            {
+                type = "checkbox",
+                name = "Print Guild event messages",
+                tooltip = "Print message to chat when player joins or leaves the group.",
+                getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuild end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuild = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
+                width = "full",
+                default = LUIE.ChatAnnouncements.D.MiscGuild,
+            },
+            {
+                type = "checkbox",
+                name = "Show Bag/Bank Upgrade Messages",
+                tooltip = "LOL I LIKE DINOSAURS",
+                getFunc = function() return LUIE.ChatAnnouncements.SV.MiscBags end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscBags = value LUIE.ChatAnnouncements.RegisterBagEvents() end,
+                width = "full",
+                default = LUIE.ChatAnnouncements.D.MiscBags,
+            },
+            {
+                type = "checkbox",
+                name = "Show Lockpick Success/Failure Messages",
+                tooltip = "KEK AT ME BOY ONE MORE TIME",
+                getFunc = function() return LUIE.ChatAnnouncements.SV.MiscLockpick end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscLockpick = value LUIE.ChatAnnouncements.RegisterLockpickEvents() end,
+                width = "full",
+                default = LUIE.ChatAnnouncements.D.MiscLockpick,
+            },
+            {
+                type = "header",
                 name = "Currency Announcements",
                 width = "full",
             },
@@ -1835,105 +1932,9 @@ local function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.AchievementsDetails,
                 disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
             },
-            {
-                type = "header",
-                name = "Misc Announcements",
-                width = "full",
-            },
-            {
-                type = "dropdown",
-                name = "Player Name Display Method",
-                choices = chatnameDisplayOptions,
-                getFunc = function() return chatnameDisplayOptions[LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions] end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions = chatnameDisplayOptionsKeys[value] end,
-                width = "full",
-                default = chatnameDisplayOptions[2],
-            },
-            {
-                type = "checkbox",
-                name = "Print messages as System messages",
-                tooltip = "Print all messages as System message so that it can appear in multiple tabs",
-                getFunc = function() return LUIE.ChatAnnouncements.SV.ChatUseSystem end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatUseSystem = value end,
-                width = "full",
-                default = LUIE.ChatAnnouncements.D.ChatUseSystem,
-            },
-            {
-                type = "checkbox",
-                name = "Include Timestamp",
-                tooltip = "Where possible prepend printed text with current time label.",
-                getFunc = function() return LUIE.ChatAnnouncements.SV.TimeStamp end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.TimeStamp = value end,
-                width = "full",
-                disabled = function() return LUIE.ChatAnnouncements.SV.ChatUseSystem end,
-                default = LUIE.ChatAnnouncements.D.TimeStamp,
-            },
-            {
-                type = "editbox",
-                name = "Timestamp format",
-                tooltip = "FORMAT:\nHH: hours (24)\nhh: hours (12)\nH: hour (24, no leading 0)\nh: hour (12, no leading 0)\nA: AM/PM\na: am/pm\nm: minutes\ns: seconds",
-                getFunc = function() return LUIE.ChatAnnouncements.SV.TimeStampFormat end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.TimeStampFormat = value end,
-                width = "full",
-                disabled = function() return not LUIE.ChatAnnouncements.SV.TimeStamp end,
-                default = LUIE.ChatAnnouncements.D.TimeStampFormat,
-            },
-            {
-                type = "checkbox",
-                name = "Enable group changes events in chat",
-                tooltip = "Print message to chat when player joins or leaves the group.",
-                getFunc = function() return LUIE.ChatAnnouncements.SV.GroupChatMsg end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupChatMsg = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
-                width = "full",
-                default = LUIE.ChatAnnouncements.D.GroupChatMsg,
-            },
-            {
-                type = "checkbox",
-                name = "Print Trade Changes",
-                tooltip = "Print message to chat when player joins or leaves the group.",
-                getFunc = function() return LUIE.ChatAnnouncements.SV.MiscTrade end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscTrade = value LUIE.ChatAnnouncements.RegisterTradeEvents() end,
-                width = "full",
-                default = LUIE.ChatAnnouncements.D.MiscTrade,
-            },
-            {
-                type = "checkbox",
-                name = "Print Mail Changes",
-                tooltip = "Print message to chat when player joins or leaves the group.",
-                getFunc = function() return LUIE.ChatAnnouncements.SV.MiscMail end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscMail = value LUIE.ChatAnnouncements.RegisterMailEvents() end,
-                width = "full",
-                default = LUIE.ChatAnnouncements.D.MiscMail,
-            },
-            {
-                type = "checkbox",
-                name = "Print Guild event messages",
-                tooltip = "Print message to chat when player joins or leaves the group.",
-                getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuild end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuild = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
-                width = "full",
-                default = LUIE.ChatAnnouncements.D.MiscGuild,
-            },
-            {
-                type = "checkbox",
-                name = "Show Bag/Bank Upgrade Messages",
-                tooltip = "LOL I LIKE DINOSAURS",
-                getFunc = function() return LUIE.ChatAnnouncements.SV.MiscBags end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscBags = value LUIE.ChatAnnouncements.RegisterBagEvents() end,
-                width = "full",
-                default = LUIE.ChatAnnouncements.D.MiscBags,
-            },
-            {
-                type = "checkbox",
-                name = "Show Lockpick Success/Failure Messages",
-                tooltip = "KEK AT ME BOY ONE MORE TIME",
-                getFunc = function() return LUIE.ChatAnnouncements.SV.MiscLockpick end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscLockpick = value LUIE.ChatAnnouncements.RegisterLockpickEvents() end,
-                width = "full",
-                default = LUIE.ChatAnnouncements.D.MiscLockpick,
-            },
         },
     }
+    
     --[[ STARTUP MESSAGE OPTIONS ]]-- 
     optionsData[#optionsData + 1] = {
         type = "checkbox",
@@ -1958,9 +1959,10 @@ local function LUIE_CreateSettings()
                     disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
                 }
         -- (!!!) hardcoded sub-panel index
+        -- THIS SUCKS!!!
         table.insert(optionsData[6].controls, checkbox)
     end
-
+    
     --[[  BEGIN UNIT FRAMES SETTING PANEL ]]--
     
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
