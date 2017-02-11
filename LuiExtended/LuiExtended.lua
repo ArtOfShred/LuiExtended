@@ -5,6 +5,7 @@ LUIE.name        = "LuiExtended"
 LUIE.components  = {}
 
 local g_Version  = "4.99 BETA"
+local g_Author   = "ArtOfShred, Upularity & SpellBuilder"
 
 -- Saved variables options
 LUIE.SVName = 'LUIESV'
@@ -170,7 +171,7 @@ local function LUIE_CreateSettings()
         type = "panel",
         name = LUIE.name,
         displayName = "LUI Extended Settings",
-        author = "ArtOfShred, Upularity & SpellBuilder",
+        author = g_Author,
         version = g_Version,
         website = "http://www.esoui.com/downloads/info818-LuiExtended.html",
         slashCommand = "/luiset",
@@ -1936,7 +1937,7 @@ local function LUIE_CreateSettings()
         type = "panel",
         name = LUIE.name .. " - Unit Frames",
         displayName = "LUI Extended Unit Frames Settings",
-        author = "ArtOfShred, Upularity & SpellBuilder",
+        author = g_Author,
         version = g_Version,
         website = "http://www.esoui.com/downloads/info818-LuiExtended.html",
         slashCommand = "/luiframes",
@@ -2901,7 +2902,7 @@ local function LUIE_LoadScreen()
     EVENT_MANAGER:UnregisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED)
 
     if not LUIE.SV.StartupInfo then
-        CHAT_SYSTEM:AddMessage("|ceeeeeeLui Extended by |c00c000Upularity, SpellBuilder & ArtOfShred|ceeeeee v"..g_Version.."|r")
+        CHAT_SYSTEM:AddMessage("|ceeeeee" .. LUIE.name .. " by |c00c000" .. g_Author .. " |ceeeeee v".. g_Version .. "|r")
     end
 end
 
