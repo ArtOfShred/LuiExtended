@@ -29,9 +29,6 @@ CA.D = {
     WritVoucherChange             = true,
     TotalWritVoucherChange        = true,
     WritVoucherName               = "Writ Voucher",
-    AllowCurrencyMenu             = true,
-    AllowLootMenu                 = true,
-    AllowExperienceMenu           = true,
     Loot                          = true,
     LootIcons                     = true,
     LootVendor                    = false,
@@ -81,10 +78,13 @@ CA.D = {
 }
 
 local g_playerName = nil
+local g_playerNameFormatted = nil
 local combostring = "" -- String is filled by the EVENT_CURRENCY_CHANGE events and ammended onto the end of purchase/sales from LootLog component if toggled on!
 local mailCOD = 0
 local mailMoney = 0
 local postageAmount = 0
+
+GroupJoinFudger = false -- Controls message for group join
 
 function CA.Initialize()
     -- load settings
@@ -117,12 +117,18 @@ end
     Display group join/leave in chat
 --]]----------------------------------------------------------
 function CA.RegisterGroupEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_REMOVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_UPDATE)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RESPONSE)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LEADER_UPDATE)
     if CA.SV.GroupChatMsg then
+        --EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_ROLES_CHANGED, CA.GMRC) -- Possibly re-enable later if solution is found.
+        --EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_CONNECTED_STATUS, CA.GMCS) -- Possibly re-enable later if solution is found.
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_REMOVED, CA.GroupInviteRemoved)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_UPDATE, CA.GroupUpdate)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED, CA.OnGroupMemberJoined)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT,   CA.OnGroupMemberLeft)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED, CA.OnGroupInviteReceived)
@@ -131,8 +137,112 @@ function CA.RegisterGroupEvents()
     end
 end
 
+-- Helper function called after receiving a group invite. This ensures we don't ever have any issues seeing the first group invite message by renabling the Event handler after the first message arrives.
+-- Otherwise we would see both messages broadcast as 2 events fire at the player when a group invite is received.
+function CA.RefreshGroupInviteEnable()
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED, CA.OnGroupInviteReceived)
+end
+
+-- Triggers when the player either accepts or declines an invite. We set GroupJoinFudger to true here, and if the next event is GroupUpdate then it plays a message, if not, the next invite event resets it.
+function CA.GroupInviteRemoved(eventCode)
+
+    GroupJoinFudger = true
+
+end
+
+-- Triggers when the group composition changes for a Party going from 2 people to 3+, we use this to display a message to the player joining the group.
+function CA.GroupUpdate(eventCode)
+
+    if GroupJoinFudger == true then printToChat ("You have joined a group.") end
+    GroupJoinFudger = false
+    
+end
+
+--[[ Would love to be able to use this function but its too buggy for now. Spams every single time someone updates their role, as well as when people join/leave group. If the player joins a large party for the first time then
+this broadcasts the role of every single player in the party. Too bad this doesn't only trigger when someone in group actually updates their role instead.
+function CA.GMRC(eventCode, unitTag, dps, healer, tank)
+
+local updatedRoleName = GetUnitName(unitTag)
+local updatedRoleAccountName = GetUnitDisplayName(unitTag)
+
+local characterNameLink = ZO_LinkHandler_CreateCharacterLink(updatedRoleName)
+local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(updatedRoleAccountName)
+local displayBothString = ( strfmt("%s%s", updatedRoleName, updatedRoleAccountName) )
+local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, updatedRoleAccountName)
+
+local rolestring1 = ""
+local rolestring2 = ""
+local rolestring3 = ""
+local message = ""
+
+    -- Return here in case something happens
+    if not (dps or healer or tank) then return end
+    
+    -- fill in strings for roles
+    if dps then rolestring3 = "DPS" end
+    if healer then rolestring2 = "Healer" end
+    if tank then rolestring1 = "Tank"end
+
+    -- Get appropriate 2nd string for role
+    if dps and not (healer or tank) then
+        message = (strfmt("%s", rolestring3) )
+    elseif healer and not (dps or tank) then
+        message = (strfmt("%s", rolestring2) )
+    elseif tank and not (dps or healer) then
+        message = (strfmt("%s", rolestring1) )
+    elseif dps and healer and not tank then
+        message = (strfmt("%s, %s", rolestring2, rolestring3) )
+    elseif dps and tank and not healer then
+        message = (strfmt("%s, %s", rolestring1, rolestring3) )
+    elseif healer and tank and not dps then
+        message = (strfmt("%s, %s", rolestring1, rolestring2) )
+    elseif dps and healer and tank then
+        message = (strfmt("%s, %s, %s", rolestring1, rolestring2, rolestring3) )
+    end
+    
+    if CHAT_SYSTEM then
+        if updatedRoleName ~= g_playerNameFormatted then
+            if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r has updated their role: %s", displayNameLink, message) ) end
+            if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has updated their role: %s", characterNameLink, message) ) end
+            if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has updated their role: %s", displayBoth, message) ) end
+        else
+            printToChat(strfmt("You have updated your role: %s", message) )
+        end
+    end
+
+end
+]]--
+
+--[[ Would love to be able to use this function but its too buggy for now. When a single player disconnects for the first time in the group, another player will see a message for the online/offline status of every other
+player in the group. Possibly reimplement and limit it to 2 player groups?
+function CA.GMCS(eventCode, unitTag, isOnline)
+
+    local onlineRoleName = GetUnitName(unitTag)
+    local onlineRoleDisplayName = GetUnitDisplayName(unitTag)
+
+    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(onlineRoleName)
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(onlineRoleDisplayName)
+    local displayBothString = ( strfmt("%s%s", onlineRoleName, onlineRoleDisplayName) )
+    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, onlineRoleDisplayName)
+    
+        if CHAT_SYSTEM then
+            if not isOnline and onlineRoleName ~=g_playerNameFormatted then
+                if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r has disconnected.", displayNameLink) ) end
+                if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has disconnected.", characterNameLink) ) end
+                if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has disconnected.", displayBoth) ) end
+            elseif isOnline and onlineRoleName ~=g_playerNameFormatted then
+                if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r has reconnected.", displayNameLink) ) end
+                if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has reconnected.", characterNameLink) ) end
+                if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has reconnected.", displayBoth) ) end
+            end
+        end
+end
+]]--
+
 -- Prints a message to chat when another player sends us a group invite
 function CA.OnGroupInviteReceived (eventCode, inviterName, inviterDisplayName)
+
+    GroupJoinFudger = false
 
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink(inviterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
@@ -144,16 +254,14 @@ function CA.OnGroupInviteReceived (eventCode, inviterName, inviterDisplayName)
             if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has invited you to join a group.", characterNameLink) ) end
             if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has invited you to join a group.", displayBoth) ) end
             EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED) -- On receiving a group invite, it fires 2 events, we disable the event handler temporarily for this then recall it after.
+            zo_callLater(CA.RefreshGroupInviteEnable, 100)
         end
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED, CA.OnGroupInviteReceived)
 end
 
 -- Prints a message to chat when invites are declined or failed. Currently broken as of 2/9/2017 so we have to omit any names from this function until it returns the correct InviteeName and InviteeDisplayName instead
 function CA.OnGroupInviteResponse (eventCode, inviterName, response, inviterDisplayName)
 
-    if response == 1  then -- Note that this response only triggers when a group is formed by inviting someone. Once there are 2+ members in the party, it will no longer trigger, allowing us to use it as our "party opened" message
-            printToChat("You have formed a group.")
-    elseif response == 2 then
+    if response == 2 then
             printToChat("Your group invitation was declined.")
     elseif response == 3 then
             printToChat("You cannot extend a group invitation to a player that is ignoring you.")
@@ -165,8 +273,8 @@ function CA.OnGroupInviteResponse (eventCode, inviterName, response, inviterDisp
             printToChat("Failed to extend a group invitation, only the group leader can invite.")
     elseif response == 9 then
             printToChat("You cannot extend a group invitation to a player that is a member of the opposite faction.")
- 
     end
+    
 end
 
 -- Prints a message to chat when the leader of the group is updated
@@ -227,6 +335,8 @@ function CA.OnGroupMemberJoined(eventCode, memberName)
             if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has joined the group.", characterNameLink) ) end
             if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has joined the group.", displayBoth) ) end
         end
+    elseif g_playerName == memberName then
+        printToChat ("You have joined a group.") -- Only prints on the initial group form between 2 players.
     end
     
     g_partyStack = { }
@@ -244,7 +354,7 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
         msg = g_playerName == memberName and "You have left the group." or "%s|r has left the group."
     elseif reason == GROUP_LEAVE_REASON_KICKED then
         -- msg = g_playerName == memberName and 'You were kicked from the group.' or '|cFEFEFE%s|r was kicked from your group.' -- Don't want to have to fetch this color code again if I need it.
-        msg = g_playerName == memberName and "You have been removed from the group." or "%s|r removed from the group."
+        msg = g_playerName == memberName and "You have been removed from the group." or "%s|r has been removed from the group."
     elseif reason == GROUP_LEAVE_REASON_DISBAND and g_playerName == memberName then
         msg = "The group has been disbanded."
     end
@@ -477,6 +587,8 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     elseif reason == 3 and UpOrDown > 0 then message = ( "Traded" )
     elseif reason == 3 and UpOrDown < 0 then message = ( "Traded" )
     
+    if reason == 3 and CHAT_SYSTEM and CA.SV.MiscTrade then printToChat ("Trade complete.") end
+    
     -- Receive from Quest Reward (4), Sell to Fence (63)
     elseif reason == 4 or reason == 63 then message = ( "Received" )
         
@@ -557,9 +669,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             total = ''
         end
         -- Print a message to chat based off all the values we filled in above
-        if CA.SV.LootCurrencyCombo and UpOrDown < 0 and (reason == 1 or reason == 60 or reason == 63 or reason == 64) then
+        if CA.SV.LootCurrencyCombo and UpOrDown < 0 and (reason == 1 or reason == 63 or reason == 64) then
             combostring = ( strfmt ( " → %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
-        elseif CA.SV.LootCurrencyCombo and UpOrDown > 0 and (reason == 1 or reason == 60 or reason == 63 or reason == 64) then
+        elseif CA.SV.LootCurrencyCombo and UpOrDown > 0 and (reason == 1 or reason == 63 or reason == 64) then
             combostring = ( strfmt ( " ← %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
         elseif CA.SV.LootCurrencyCombo and CA.SV.MiscBags and (reason == 8 or reason == 9) then
             combostring = ( strfmt ( " → %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
@@ -1057,22 +1169,20 @@ function CA.RegisterMailEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS)
-    
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED, CA.MailMoneyChanged)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED, CA.MailCODChanged)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_REMOVED, CA.MailRemoved)
-    
-    if CA.SV.MiscMail and not CA.SV.LootMail then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED, CA.OnMailFail) 
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS, CA.OnMailSuccess)
-    elseif CA.SV.LootMail then
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_REMOVED)
+    if CA.SV.MiscMail or CA.SV.LootMail then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_READABLE, CA.OnMailReadable)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_TAKE_ATTACHED_ITEM_SUCCESS, CA.OnMailTakeAttachedItem)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, CA.OnMailAttach)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, CA.OnMailAttachRemove)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, CA.OnMailCloseBox) 
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED, CA.OnMailFail) 
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS, CA.OnMailSuccess) 
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS, CA.OnMailSuccess)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED, CA.MailMoneyChanged)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED, CA.MailCODChanged)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_REMOVED, CA.MailRemoved)
     end
 end
 
@@ -1093,10 +1203,10 @@ function CA.RegisterBagEvents()
 end
 
 function CA.RegisterLockpickEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOCKPICK_BROKE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOCKPICK_FAILED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS)
     if CA.SV.MiscLockpick then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_BROKE, CA.MiscAlertLockBroke)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_FAILED, CA.MiscAlertLockFailed)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS, CA.MiscAlertLockSuccess)
     end
 end
@@ -1107,8 +1217,8 @@ end
 
 --------------------------------------------------------------
 
-function CA.MiscAlertLockBroke (eventCode, inactivityLengthMs)
-    printToChat ("Lockpick broken, you're fucking terrible!!")
+function CA.MiscAlertLockFailed (eventCode)
+    printToChat ("Lockpick failed, you're fucking terrible!!")
 end
 
 function CA.MiscAlertLockSuccess (eventCode)
@@ -1255,7 +1365,7 @@ end
 --------------------------------------------------------------
 
 function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound, lootType, lootedBySelf, isPickpocketLoot, questItemIcon, itemId)
-    
+
     combostring = ""
     
     local icon
@@ -1575,7 +1685,7 @@ function CA.OnTradeSuccess (eventCode)
     
     combostring = ""
     
-    if CHAT_SYSTEM and CA.SV.MiscTrade then printToChat ("Trade complete.") end
+    if (CHAT_SYSTEM and CA.SV.MiscTrade) and not CA.SV.GoldChange then printToChat ("Trade complete.") end
     
     if CA.SV.LootTrade then
     
@@ -1742,9 +1852,11 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
     
     local gainorloss = "|c0B610B"
     
-    for attachIndex = 1, #g_MailStacks do
-        local item = g_MailStacks[attachIndex]
-        CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, gainorloss)
+    if CA.SV.LootMail then
+        for attachIndex = 1, #g_MailStacks do
+            local item = g_MailStacks[attachIndex]
+            CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, gainorloss)
+        end
     end
 
     g_MailStacks = {}
@@ -1822,8 +1934,11 @@ end
 
 function CA.RegisterXPEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LEVEL_UPDATE)
     if CA.SV.Experience or CA.SV.ExperienceLevelUp then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN, CA.OnExperienceUpdate)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN, CA.OnExperienceGain)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEVEL_UPDATE, CA.OnLevelUpdate)
+        
         CA.LevelUpdateHelper()
     end
 end
@@ -1833,7 +1948,8 @@ function CA.LevelUpdateHelper()
     IsChampion = IsUnitChampion('player')
     
     if IsChampion then
-        CurrentLevel = GetUnitChampionPoints ('player')
+        CurrentLevel = GetPlayerChampionPointsEarned()
+        if CurrentLevel < 10 then CurrentLevel = 10 end -- Probably don't really need this here, but it's not going to hurt.
         XPLevel = GetNumChampionXPInChampionPoint(CurrentLevel)
         LevelContext = ( "Champion" )
     else
@@ -1848,11 +1964,42 @@ local function ExperiencePctToColour(xppct)
         return xppct == 100 and "71DE73" or xppct < 33.33 and "F27C7C" or xppct < 66.66 and "EDE858" or "CCF048"
 end
 
-function CA.OnExperienceUpdate( eventCode, reason, level, previousExperience, currentExperience, championPoints )
+-- When quest XP is gained during dialogue the player doesn't actually level up until exiting the dialogue. The variables get stored and saved to print on levelup if this is the case.
+local levelString1 = ""
+local levelString2 = ""
+local WeLeveled = 0
+local Crossover = 0
 
-    local weleveled = 0 -- Incremented and reset if we leveled up.
+function CA.OnLevelUpdate (eventCode, unitTag, level)
+
+    if unitTag == ('player') then
+    
+        CA.LevelUpdateHelper()
+        
+        if levelString1 ~= "" and CA.SV.Experience then
+            printToChat(levelString1)
+        end
+        if levelString2 ~= "" and CA.SV.Experience then
+            printToChat(levelString2)    
+        end
+        
+        if CA.SV.ExperienceLevelUp then printToChat ("You have reached " .. LevelContext .. " " .. CurrentLevel .. "!") end
+        
+    end
+    
+    levelString1 = ""
+    levelString2 = ""
+    WeLeveled = 0
+    Crossover = 0
+    
+end
+
+
+function CA.OnExperienceGain( eventCode, reason, level, previousExperience, currentExperience, championPoints )
+
+    printToChat ("Experience Gain) previousExperience: " .. previousExperience .. " --- " .. "currentExperience: " .. current Experience)
+
     local levelhelper = 0 -- Gives us the correct value of XP to use toward the next level when calculating progress after a level up
-    local crossover = 0
     
     if IsChampion then
         levelhelper = GetPlayerChampionXP()
@@ -1863,17 +2010,27 @@ function CA.OnExperienceUpdate( eventCode, reason, level, previousExperience, cu
     -- Determines if we leveled up - Needs to be functioning even if we don't printout progress or current level
     if currentExperience >= XPLevel then
         if not IsChampion and CurrentLevel == 49 then -- If we are level 49 and we level up that means we've reached Champion Level, this means we need to update these values!
-            crossover = 1 -- Variable incrementer to help us determine if we just reached Champion Level
+            Crossover = 1 -- Variable incrementer to help us determine if we just reached Champion Level
+            IsChampion = true
         end
-        weleveled = 1
-        CA.LevelUpdateHelper()
+        WeLeveled = 1
+        if IsChampion then
+            CurrentLevel = GetPlayerChampionPointsEarned()
+            if CurrentLevel < 10 then CurrentLevel = 10 end -- Very important, if this player has never hit Champion level before, set the minimum possible value when hitting level 50.
+            XPLevel = GetNumChampionXPInChampionPoint(CurrentLevel)
+            LevelContext = ( "Champion" )
+        else
+            CurrentLevel = CurrentLevel + 1
+            XPLevel = GetNumExperiencePointsInLevel(CurrentLevel)
+            LevelContext = ( "Level" )
+        end  
     end
     
         if CA.SV.Experience and ( not ( CA.SV.ExperienceHideCombat and reason == 0 ) or not reason == 0 ) then
             -- Change in Experience Points on gaining them
             local change = currentExperience - previousExperience
             local formathelper = " "
-    
+            
             -- Format Helper puts a space in if the player enters a value for Experience Name, this way they don't have to do this formatting themselves.
             if CA.SV.ExperienceName == ( "" ) then
                 formathelper = ( "" )
@@ -1893,12 +2050,6 @@ function CA.OnExperienceUpdate( eventCode, reason, level, previousExperience, cu
                         xppct = math.floor(10000*levelhelper/XPLevel) / 100
                 else
                         xppct = math.floor(100*levelhelper/XPLevel)
-                end
-            
-                --[[ Crossover from Normal XP --> Champion XP modifier ]] --
-                if crossover == 1 then -- Corrects values printed for the XP gain event that takes us from Normal XP --> Champion XP
-                    xppct = 0 -- Experience points that bring you above 49 don't carryover into champion XP
-                    levelhelper = 0 -- Reseting levelhelper to 0 for the [x/x] display option
                 end
                 
                 if CA.SV.ExperienceShowPBrackets then -- If [Progress] display brackets are hidden, then the XP numbers will just print on the end
@@ -1933,25 +2084,24 @@ function CA.OnExperienceUpdate( eventCode, reason, level, previousExperience, cu
                     progress = strfmt("%s|r (%s%%|r - %s/%s)|r", progressbrackets, decimal, CommaValue (levelhelper), CommaValue (XPLevel) )
                     end
                 end
-                
             end
 
             -- Displays current player level if option is toggled on
             local totallevel = CA.SV.ExperienceShowLevel and strfmt ( " (%s %s)", LevelContext, CurrentLevel) or ("")
-        
-            -- Prints out Experience gain message
-            printToChat( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
             
-        end
-    
-    -- Prints out level up message if its toggled on, then resets weleveled
-    if weleveled == 1 then
-        weleveled = 0
-        if CA.SV.ExperienceLevelUp then
-            printToChat ("You have reached " .. LevelContext .. " " .. CurrentLevel .. "!")
+            --[[ Crossover from Normal XP --> Champion XP modifier ]] --
+            if Crossover == 1 then -- Corrects values printed for the XP gain event that takes us from Normal XP --> Champion XP
+                progress = "(Champion Level attained!)"
+            end
+            
+        if WeLeveled == 1 and reason == 1 then
+            levelString1 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
+        elseif WeLeveled == 1 and reason == 2 then
+            levelString2 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
+        else
+            printToChat ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
         end
     end
-
 end
 
 --[[----------------------------------------------------------
