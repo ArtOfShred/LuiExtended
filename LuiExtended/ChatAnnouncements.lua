@@ -1997,7 +1997,7 @@ end
 
 function CA.OnExperienceGain( eventCode, reason, level, previousExperience, currentExperience, championPoints )
 
-    printToChat ("Experience Gain) previousExperience: " .. previousExperience .. " --- " .. "currentExperience: " .. current Experience)
+    printToChat ("Experience Gain) previousExperience: " .. previousExperience .. " --- " .. "currentExperience: " .. currentExperience)
 
     local levelhelper = 0 -- Gives us the correct value of XP to use toward the next level when calculating progress after a level up
     
