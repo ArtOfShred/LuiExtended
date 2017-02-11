@@ -4,10 +4,10 @@ LUIE.UI = {}
 
 local wm = WINDOW_MANAGER
 
---[[ 
+--[[
  * A handy chaining function for quickly setting up UI elements
  * Allows us to reference methods to set properties without calling the specific object
- ]]-- 
+ ]]--
 local function Chain( object )
 
     -- Setup the metatable
@@ -48,7 +48,7 @@ function LUIE.UI.TopLevel( anchors, dims )
     if anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         tlw:SetAnchor( anchors[1], anchors[5] or GuiRoot, anchors[2], anchors[3] or 0, anchors[4] or 0 )
     end
-    
+
     if dims ~= nil and #dims == 2 then
         tlw:SetDimensions( dims[1], dims[2] )
     end
@@ -64,19 +64,19 @@ function LUIE.UI.Control( parent, anchors, dims, hidden )
 
     local c = wm:CreateControl(nil, parent, CT_CONTROL)
     c:SetHidden( hidden )
-    
+
     if anchors == "fill" then
         c:SetAnchorFill()
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         c:SetAnchor( anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0 )
     end
-    
+
     if dims == "inherit" then
         c:SetDimensions( parent:GetWidth(), parent:GetHeight() )
     elseif dims ~= nil and #dims == 2 then
         c:SetDimensions( dims[1], dims[2] )
     end
-    
+
     return c
 end
 
@@ -88,27 +88,27 @@ function LUIE.UI.Texture( parent, anchors, dims, texture, drawlayer, hidden )
 
     local t = wm:CreateControl(nil, parent, CT_TEXTURE)
     t:SetHidden( hidden )
-    
+
     if anchors == "fill" then
         t:SetAnchorFill()
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         t:SetAnchor( anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0 )
     end
-    
+
     if dims == "inherit" then
         t:SetDimensions( parent:GetWidth(), parent:GetHeight() )
     elseif dims ~= nil and #dims == 2 then
         t:SetDimensions( dims[1], dims[2] )
     end
-    
+
     if texture then
         t:SetTexture( texture )
     end
-    
+
     if drawlayer then
         t:SetDrawLayer( drawlayer )
     end
-    
+
     return t
 end
 
@@ -134,13 +134,13 @@ function LUIE.UI.Backdrop( parent, anchors, dims, center, edge, hidden )
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         bg:SetAnchor( anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0 )
     end
-    
+
     if dims == "inherit" then
         bg:SetDimensions( parent:GetWidth(), parent:GetHeight() )
     elseif dims ~= nil and #dims == 2 then
         bg:SetDimensions( dims[1], dims[2] )
     end
-    
+
     return bg
 end
 
@@ -168,13 +168,13 @@ function LUIE.UI.ChatBackdrop( parent, anchors, dims, colour, edge_size, hidden 
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         bg:SetAnchor( anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0 )
     end
-    
+
     if dims == "inherit" then
         bg:SetDimensions( parent:GetWidth(), parent:GetHeight() )
     elseif dims ~= nil and #dims == 2 then
         bg:SetDimensions( dims[1], dims[2] )
     end
-    
+
     return bg
 end
 
@@ -186,13 +186,13 @@ function LUIE.UI.StatusBar( parent, anchors, dims, colour, hidden )
 
     local sb = wm:CreateControl(nil, parent, CT_STATUSBAR)
     sb:SetHidden( hidden )
-    
+
     if anchors == "fill" then
         sb:SetAnchorFill()
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         sb:SetAnchor( anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0 )
     end
-    
+
     if dims == "inherit" then
         sb:SetDimensions( parent:GetWidth(), parent:GetHeight() )
     elseif dims ~= nil and #dims == 2 then
@@ -227,7 +227,7 @@ function LUIE.UI.Label( parent, anchors, dims, align, font, text, hidden )
     elseif anchors ~= nil and #anchors >= 2 and #anchors <= 5 then
         label:SetAnchor( anchors[1], anchors[5] or parent, anchors[2], anchors[3] or 0, anchors[4] or 0 )
     end
-    
+
     if dims == "inherit" then
         label:SetDimensions( parent:GetWidth(), parent:GetHeight() )
     elseif dims ~= nil and #dims == 2 then

@@ -63,13 +63,13 @@ ZO_CreateStringId("SI_BINDING_NAME_LUIE_POST_HEALING_RESULTS", "Post Healing Res
 function DM.Initialize( enabled )
     -- load settings
     DM.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, 'DamageMeter', DM.D )
-    DM.SVC =           ZO_SavedVars:New( LUIE.SVName, LUIE.SVVer, 'DamageMeter', DM.DC ) 
+    DM.SVC =           ZO_SavedVars:New( LUIE.SVName, LUIE.SVVer, 'DamageMeter', DM.DC )
 
     -- check for valid saved variables
     if tonumber(DM.SV.CombatLogFont) ~= DM.SV.CombatLogFont or DM.SV.CombatLogFont > 3 or DM.SV.CombatLogFont < -3 then
         DM.SV.CombatLogFont = DM.D.CombatLogFont
     end
-    
+
     -- if User does not want the InfoPanel then exit right here
     if not enabled then return end
 
@@ -92,7 +92,7 @@ function DM.Initialize( enabled )
     uiPanel.dam.label:SetMouseEnabled( true )
     uiPanel.dam.label.OnMouseDown = function() DM.Post('Damage') end
     uiPanel.dam.label:SetHandler( 'OnMouseDown', uiPanel.dam.label.OnMouseDown )
-    
+
     uiPanel.heal = UI.Control( uiPanel, {LEFT,RIGHT,0,0,uiPanel.dam}, {70,30}, false )
     uiPanel.heal.icon = UI.Texture( uiPanel.heal, {LEFT,LEFT,1,0}, {16,16}, "/esoui/art/buttons/gamepad/gp_plus.dds", nil, false )
     uiPanel.heal.label = UI.Label( uiPanel.heal, {LEFT,LEFT,24,0}, {46,30}, {0,1}, fontPanelLabel, "heal", false )
@@ -125,7 +125,7 @@ function DM.Initialize( enabled )
     uiMeter.backdrop = UI.ChatBackdrop( uiMeter, nil, nil, {0,0,0,0.8}, 32, false )
     uiMeter.backdrop:SetAnchor( TOPLEFT, uiMeter, TOPLEFT, -16, -16 )
     uiMeter.backdrop:SetAnchor( BOTTOMRIGHT, uiMeter, BOTTOMRIGHT, 16, 16 )
-    
+
     uiMeter.title = UI.Label( uiMeter, {TOP,TOP,0,0}, {width,60}, {0,1}, "ZoFontWindowTitle", g_DamageMeterTitle, false )
 
     uiMeter.dam = UI.Control( uiMeter, {TOP,TOP,0,60}, {width,280}, false )
@@ -184,7 +184,7 @@ function DM.Initialize( enabled )
     uiGraph.backdrop = UI.ChatBackdrop( uiGraph, nil, nil, {0,0,0,1}, 32, false )
     uiGraph.backdrop:SetAnchor( TOPLEFT, uiGraph, TOPLEFT, -16, -16 )
     uiGraph.backdrop:SetAnchor( BOTTOMRIGHT, uiGraph, BOTTOMRIGHT, 16, 16 )
-    
+
     uiGraph.title = UI.Label( uiGraph, {TOPLEFT,TOPLEFT,80,0}, {width,60}, {0,1}, "ZoFontWindowTitle", g_DamageGraphTitle, false )
 
     uiGraph.graph = UI.Backdrop( uiGraph, {TOPLEFT,TOPLEFT,80,60}, {width,height}, {1,1,1,0}, {uiGraph.lineColour:UnpackRGBA()}, false )
@@ -251,7 +251,7 @@ function DM.Initialize( enabled )
     DM.SetTlwPosition()
 
     -- Add panel to global controls list, so it can be hidden
-    LUIE.components[ moduleName ] = uiPanel 
+    LUIE.components[ moduleName ] = uiPanel
     LUIE.components[ moduleName .. '_FakeControl' ] = fakeControl
 
     -- Reset meter
@@ -361,10 +361,10 @@ function fakeControl.SetHidden(self, hidden)
     end
 end
 
---[[ 
+--[[
  * Update values on mini-panel
  ]]--
-function DM.OnUpdate() 
+function DM.OnUpdate()
 
     -- Compute the fight time
     local record_time = ( g_Meter.endTime - g_Meter.startTime ) / 1000
@@ -377,21 +377,21 @@ function DM.OnUpdate()
     local hps = strfmt( "%d" , g_Meter.healing/fight_time )
     local ips = strfmt( "%d" , g_Meter.incoming/fight_time )
     local fts = strfmt( "%d:%.2d" , m, s )
-    
+
     -- Update the labels
     uiPanel.dam.label:SetText( dps )
     uiPanel.heal.label:SetText( hps )
     uiPanel.inc.label:SetText( ips )
     uiPanel.time.label:SetText( fts )
-    
+
     if DM.SV.UpdateFullRealtime and not uiMeter:IsHidden() then DM.Display() end
     if DM.SV.UpdateFullRealtime and not uiGraph:IsHidden() then DM.UpdateGraph() end
 end
 
---[[ 
+--[[
  * Update values on full statistics window
  ]]--
-function DM.Display() 
+function DM.Display()
 
     -- Compute the most damaged target
     local most_damaged_target = ""
@@ -419,7 +419,7 @@ function DM.Display()
         OUTGOING DAMAGE
       ]]----------------------------------
     local dps = g_Meter.damage/fight_time
-    
+
     -- Set Header
     local head  = ( g_Meter.damage > 0 ) and strfmt( "Total Damage - %s (%.1f DPS)", commaValue( g_Meter.damage ), dps ) or "No Outgoing Damage"
     uiMeter.dam.title:SetText( head )
@@ -427,12 +427,12 @@ function DM.Display()
     uiMeter.dam.hits:SetHidden( g_Meter.damage == 0 )
     uiMeter.dam.crit:SetHidden( g_Meter.damage == 0 )
     uiMeter.dam.dps:SetHidden( g_Meter.damage == 0 )
-    
+
     -- Sort damaging abilities
     local damages = {}
     for k,v in pairs( g_Damages ) do
         v.id = k
-        table.insert( damages , v ) 
+        table.insert( damages , v )
     end
     table.sort( damages , function(x,y) return x.total > y.total end )
 
@@ -455,7 +455,7 @@ function DM.Display()
         uiMeter.dam[i].crit:SetText( crit .. "%" )
         uiMeter.dam[i].right:SetText( "(" .. pdps .. "%) " .. adps )
     end
-    
+
     -- Hide unused lines
     for i = ndamage + 1 , 10 do
         uiMeter.dam[i]:SetHidden(true)
@@ -466,9 +466,9 @@ function DM.Display()
 
     --[[----------------------------------
         OUTGOING HEALING
-      ]]----------------------------------      
+      ]]----------------------------------
     local hps = g_Meter.healing/fight_time
-    
+
     -- Set Header
     local head  = ( g_Meter.healing > 0 ) and strfmt( "Total Healing - %s (%.1f HPS)", commaValue( g_Meter.healing ), hps ) or "No Outgoing Healing"
     uiMeter.heal.title:SetText( head )
@@ -481,13 +481,13 @@ function DM.Display()
     local heals = {}
     for k,v in pairs( g_Heals ) do
         v.id = k
-        table.insert( heals , v ) 
+        table.insert( heals , v )
     end
-    table.sort( heals , function(x,y) return x.total > y.total end )    
+    table.sort( heals , function(x,y) return x.total > y.total end )
 
     local nheals = math.min( #heals , 10 )
     for i = 1 , nheals do
-        
+
         -- Get data
         local total = commaValue( heals[i].total )
         local count = heals[i].count
@@ -504,33 +504,33 @@ function DM.Display()
         uiMeter.heal[i].crit:SetText( crit .. "%" )
         uiMeter.heal[i].right:SetText( "(" .. phps .. "%) " .. ahps )
     end
-    
+
     -- Hide unused lines
     for i = nheals + 1 , 10 do
-        uiMeter.heal[i]:SetHidden(true) 
-    end 
+        uiMeter.heal[i]:SetHidden(true)
+    end
 
     -- Change the element height
-    uiMeter.heal:SetHeight( 50 + ( #heals * 24 ) )      
+    uiMeter.heal:SetHeight( 50 + ( #heals * 24 ) )
 
     --[[----------------------------------
         INCOMING DAMAGE
-      ]]----------------------------------          
+      ]]----------------------------------
     local ips = g_Meter.incoming/fight_time
-    
+
     -- Set Header
     local head  = ( g_Meter.incoming > 0 ) and strfmt( "Incoming Damage - %s (%.1f IPS)", commaValue( g_Meter.incoming ), ips ) or "No Incoming Damage"
     uiMeter.inc.title:SetText( head )
-    
+
     --[[----------------------------------
         ADJUST DISPLAY
-      ]]----------------------------------       
+      ]]----------------------------------
     uiMeter:SetHeight( 60 + uiMeter.dam:GetHeight() + uiMeter.heal:GetHeight() + 60 )
     uiMeter.title:SetText(header)
 
 end
 
---[[ 
+--[[
  * Runs on the EVENT_COMBAT_EVENT listener.
  * This handler fires every time a combat effect is registered on a valid unitTag
  ]]--
@@ -538,7 +538,7 @@ function DM.OnCombatEvent( eventCode , result , isError , abilityName, abilityGr
 
     -- Filter out definitelly incorrect ones
     if isError then return end
-    
+
     -- Determine the context
     local damageOut = false
     if ( sourceType == COMBAT_UNIT_TYPE_PLAYER or sourceType == COMBAT_UNIT_TYPE_PLAYER_PET ) then damageOut = true
@@ -565,14 +565,14 @@ function DM.OnCombatEvent( eventCode , result , isError , abilityName, abilityGr
         ["heal"]    = ( result == ACTION_RESULT_HEAL or result == ACTION_RESULT_CRITICAL_HEAL or result == ACTION_RESULT_HOT_TICK or result == ACTION_RESULT_HOT_TICK_CRITICAL ) and true or false,
         ["multi"]   = 1,
     }
-    
+
     -- ACTION_RESULT_IMMUNE
     -- ACTION_RESULT_BLOCKED
     -- ACTION_RESULT_POWER_DRAIN
     -- ACTION_RESULT_POWER_ENERGIZE
 
     -- Damage Dealt
-    if ( hitValue > 0 and ( result == ACTION_RESULT_DAMAGE or result == ACTION_RESULT_CRITICAL_DAMAGE or result == ACTION_RESULT_BLOCKED_DAMAGE or result == ACTION_RESULT_DOT_TICK or result == ACTION_RESULT_DOT_TICK_CRITICAL ) ) then 
+    if ( hitValue > 0 and ( result == ACTION_RESULT_DAMAGE or result == ACTION_RESULT_CRITICAL_DAMAGE or result == ACTION_RESULT_BLOCKED_DAMAGE or result == ACTION_RESULT_DOT_TICK or result == ACTION_RESULT_DOT_TICK_CRITICAL ) ) then
 
         DM.LogDamage( damage )
         DM.UpdateMeter( damage )
@@ -597,7 +597,7 @@ function DM.OnCombatEvent( eventCode , result , isError , abilityName, abilityGr
     --elseif ( result == ACTION_RESULT_INTERRUPT or result == ACTION_RESULT_STUNNED or result == ACTION_RESULT_OFFBALANCE or result == ACTION_RESULT_DISORIENTED or result == ACTION_RESULT_STAGGERED or result == ACTION_RESULT_FEARED or result == ACTION_RESULT_SILENCED or result == ACTION_RESULT_ROOTED ) then
 
     -- Healing Dealt
-    elseif ( hitValue > 0 and ( result == ACTION_RESULT_HEAL or result == ACTION_RESULT_CRITICAL_HEAL or result == ACTION_RESULT_HOT_TICK or result == ACTION_RESULT_HOT_TICK_CRITICAL ) ) then 
+    elseif ( hitValue > 0 and ( result == ACTION_RESULT_HEAL or result == ACTION_RESULT_CRITICAL_HEAL or result == ACTION_RESULT_HOT_TICK or result == ACTION_RESULT_HOT_TICK_CRITICAL ) ) then
 
         DM.LogDamage( damage )
         if damageOut then DM.UpdateMeter( damage ) end
@@ -617,7 +617,7 @@ function DM.OnCombatEvent( eventCode , result , isError , abilityName, abilityGr
 
 end
 
---[[ 
+--[[
  * Reset the damage meter
  ]]--
 function DM.Reset(timeStamp)
@@ -636,13 +636,13 @@ function DM.Reset(timeStamp)
         ['startTime']   = timeStamp or 0,
         ['endTime']     = timeStamp or 0,
     }
-    
+
     -- Setup damaged target tracking
     g_Targets   = {}
-    
+
     -- Setup damage ability tracking
     g_Damages   = {}
-    
+
     -- Setup healing ability tracking
     g_Heals = {}
 
@@ -650,7 +650,7 @@ function DM.Reset(timeStamp)
     g_TimelineCur = {}
 end
 
- --[[ 
+ --[[
  * Process new combat events passed from the combat event handler
  * Called by OnCombatEvent()
  ]]--
@@ -658,29 +658,29 @@ function DM.UpdateMeter( newDamage )
 
     -- Do not register healing if player is not in combat
     if ( newDamage.heal and not IsUnitInCombat('player') ) then return end
-    
+
     -- If the meter has been inactive for over X seconds
     if ( ( newDamage.ms - g_Meter.endTime ) >= DM.SV.DamageTimeout * 1000 ) then
-        
+
         -- If it's a new source of damage, reset the meter, otherwise, bail out
         if newDamage.heal then
             return
         end
-        
+
         DM.Reset(newDamage.ms)
 
     end
-    
+
     -- Process outgoing healing events (Healing here can be only outgoing, because we filter it already)
     if ( newDamage.heal ) then -- and newDamage.out ) then
-        
+
         -- Update meter
         g_Meter.healing         = g_Meter.healing + newDamage.value
         if ( newDamage.value > g_Meter.maxHeal ) then
             g_Meter.maxHeal     = newDamage.value
-            g_Meter.maxHealName = newDamage.name            
+            g_Meter.maxHealName = newDamage.name
         end
-        
+
         -- Track ability
         if ( g_Heals[newDamage.id] ~= nil ) then
             g_Heals[newDamage.id].total     = g_Heals[newDamage.id].total + newDamage.value
@@ -696,7 +696,7 @@ function DM.UpdateMeter( newDamage )
                 ["crit"]            = newDamage.crit and 1 or 0,
             }
         end
-    
+
     -- Process outgoing damage events
     elseif ( newDamage.out ) then
 
@@ -705,17 +705,17 @@ function DM.UpdateMeter( newDamage )
 
         -- Current DPS - simply increase value inside current time bin
         g_TimelineCur[timeBin+1] = g_TimelineCur[timeBin+1] and g_TimelineCur[timeBin+1] + newDamage.value or newDamage.value
-            
+
         -- Update meter
         g_Meter.damage          = g_Meter.damage + newDamage.value
         if ( newDamage.value > g_Meter.maxDam ) then
             g_Meter.maxDam      = newDamage.value
-            g_Meter.maxDamName  = newDamage.name            
+            g_Meter.maxDamName  = newDamage.name
         end
 
         -- Special handling of absorbed damage. We do not want to print which enemy skill absorber our damage
         local id = (newDamage.result == ACTION_RESULT_DAMAGE_SHIELDED) and 1 or newDamage.id
-        
+
         -- Track ability
         if ( g_Damages[id] ~= nil ) then
             g_Damages[id].total     = g_Damages[id].total + newDamage.value
@@ -732,7 +732,7 @@ function DM.UpdateMeter( newDamage )
                 ["type"]            = newDamage.type,
             }
         end
-        
+
         -- Track target
         if g_Targets[newDamage.targetUnitId] then
             g_Targets[newDamage.targetUnitId].total = g_Targets[newDamage.targetUnitId].total + newDamage.value
@@ -742,17 +742,17 @@ function DM.UpdateMeter( newDamage )
 
     -- Process incoming damage events
     elseif ( not newDamage.out ) then
-    
+
         -- Update meter
         g_Meter.incoming    = g_Meter.incoming + newDamage.value
         if ( newDamage.value > g_Meter.maxInc ) then
-            g_Meter.maxInc  = newDamage.value       
-        end 
+            g_Meter.maxInc  = newDamage.value
+        end
     end
-    
+
     -- Stamp the time (but not for heals)
     if ( not newDamage.heal ) then g_Meter.endTime = newDamage.ms end
-    
+
 end
 
 function DM.UpdateGraph()
@@ -779,7 +779,7 @@ function DM.UpdateGraph()
         ( g_DamageGraphTitle ..  " - " .. g_NoRecord ) or
         strfmt( "%s - %s%s",  g_DamageGraphTitle, strformat("<<!aC:1>>", most_damaged_target), (total_targets > 0) and strfmt(" (+%d)", total_targets) or '' )
     uiGraph.title:SetText(header)
-    
+
     local maxBin = math.floor( fight_time )
     local maxValue = 0
 
@@ -812,7 +812,7 @@ function DM.UpdateGraph()
             break
         end
     end
-    
+
     -- DEBUG:
     if not scale then
         d( "LUIE Log: Something is wrong when drawing graph" )
@@ -842,7 +842,7 @@ function DM.UpdateGraph()
             break
         end
         local offset = i * xstep * xScale
-        
+
         uiGraph.xLabels[i]:ClearAnchors()
         uiGraph.xLabels[i]:SetAnchor( TOP, uiGraph.graph, BOTTOMLEFT, offset, 10 )
         uiGraph.xLabels[i]:SetText( strfmt( "%d", i * xstep ) )
@@ -852,7 +852,7 @@ function DM.UpdateGraph()
         uiGraph.xLines[i]:SetAnchor(TOP, uiGraph.graph, BOTTOMLEFT, offset, -6)
         uiGraph.xLines[i]:SetAnchor(BOTTOM, uiGraph.graph, BOTTOMLEFT, offset, 6)
         uiGraph.xLines[i]:SetHidden(false)
-        
+
         lastX = i
     end
     for i = lastX+1, 9 do
@@ -992,7 +992,7 @@ function DM.ShowLog()
     uiGraph:SetHidden( not uiGraph:IsHidden() )
 end
 
---[[ 
+--[[
  * Print damage output to chat
  ]]--
 function DM.Post( context )
@@ -1001,8 +1001,8 @@ function DM.Post( context )
     CHAT_SYSTEM:AddMessage(context)
 
     -- Make sure there's something to report
-    if ( g_Meter.damage + g_Meter.healing == 0 ) then 
-        CHAT_SYSTEM:AddMessage( "No damage to report!" ) 
+    if ( g_Meter.damage + g_Meter.healing == 0 ) then
+        CHAT_SYSTEM:AddMessage( "No damage to report!" )
         return
     end
 
@@ -1019,10 +1019,10 @@ function DM.Post( context )
             end
         end
     end
-    
+
     -- Sanitize the name
     local name = strformat("<<!aC:1>>", most_damaged_target) .. ( (total_targets > 0) and strfmt(" (+%d)", total_targets) or '' )
-    
+
     -- Compute the fight time
     local total = 0
     local metric = ""
@@ -1038,7 +1038,7 @@ function DM.Post( context )
     end
 
     local label = strfmt("%s (%.1fs) - %s Total %s (%.1f %s)" , name, fight_time, commaValue(total), context, total/fight_time, metric )
-    
+
     -- Determine appropriate channel
     local channel = IsUnitGrouped('player') and "/p " or "/say "
 
@@ -1056,7 +1056,7 @@ local function fixCombatLog(cc, window)
     cc:SetFontSize(tabIndex, GetChatFontSize() + DM.SV.CombatLogFont)
     cc:SetInteractivity(tabIndex, true)
     cc:SetLocked(tabIndex, true)
-    
+
     for category = 1, GetNumChatCategories() do
         cc:SetWindowFilterEnabled(tabIndex, category, false)
     end
@@ -1078,7 +1078,7 @@ local function getCombatLog()
     local cc = CHAT_SYSTEM.primaryContainer
     local window, key = cc.windowPool:AcquireObject()
     window.key = key
-    
+
     cc:AddRawWindow(window, 'CombatLog')
 
     fixCombatLog(cc, window)
@@ -1105,7 +1105,7 @@ function DM.AddMessage(message, doTimeStamp, category)
     end
 end
 
---[[ 
+--[[
  * Runs on the EVENT_PLAYER_COMBAT_STATE listener.
  * This handler fires every time player enters or leaves combat
  ]]--
@@ -1143,7 +1143,7 @@ function DM.OnPlayerActivated(eventCode)
 
         -- On each EVENT_PLAYER_ACTIVATED reset settings for Combat Log window
         fixCombatLog(getCombatLog())
-        
+
         if not g_CombatLogActivated and eventCode ~= nil then
             if DM.SVC.LogSaveEnable then
                 for _, message in ipairs(DM.SVC.LogSaved) do
@@ -1159,7 +1159,7 @@ function DM.OnPlayerActivated(eventCode)
     end
 end
 
---[[ 
+--[[
  * Runs on the EVENT_EFFECT_CHANGED listener.
  ]]--
 function DM.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId)
@@ -1171,7 +1171,7 @@ function DM.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
     local msg = strfmt("|c00AA00You|r received |cEEEEEE%s%s|r debuff.",
                         effectName ~= "" and strformat("<<t:1>>", effectName) or "Unknown",
                         (endTime-beginTime > 0) and strfmt(" (%.1fs)", endTime-beginTime) or "")
-    
+
     DM.AddMessage(msg, DM.SV.LogTimeStamp, CHAT_CATEGORY_COMBAT_GAINED_EFFECT)
 end
 
@@ -1217,7 +1217,7 @@ function DM.LogDamage(damage)
             msg = strfmt("%s %s %s for %s%s|r damage with %s.", subject, verb, object,
                         colours.DAMAGE_COLOURED[damage.type].hex, commaValue(damage.value), strformat("|cEEEEEE<<t:1>>|r", damage.name))
             category = CHAT_CATEGORY_COMBAT_DIRECT_DAMAGE
-            
+
         -- dot
         elseif damage.result == ACTION_RESULT_DOT_TICK or damage.result == ACTION_RESULT_DOT_TICK_CRITICAL then
             local subject   = damage.out and "|c00AA00You|r" or strformat("|cFF0000<<!aC:1>>|r", damage.source)
@@ -1229,7 +1229,7 @@ function DM.LogDamage(damage)
 
         end
     end
-        
+
     if not msg then return end
     DM.AddMessage(msg, DM.SV.LogTimeStamp, category)
 end

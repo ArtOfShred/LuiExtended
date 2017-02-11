@@ -975,7 +975,7 @@ local combatEvents = {
                     [POWERTYPE_MAGICKA]       = true,
                     [POWERTYPE_HEALTH]        = true,
                     [POWERTYPE_STAMINA]       = true,
-                    --[POWERTYPE_ULTIMATE]      = true,                 
+                    --[POWERTYPE_ULTIMATE]      = true,
                 },
                 target = 'PlayerDrainEnergize',
                 colour = {
@@ -1184,7 +1184,7 @@ function CI.Initialize( enabled )
     for _, v in pairs(CI.Colours.DAMAGE_COLOURED) do
         v.hex = "|c" .. ZO_ColorDef:New(v.r, v.g, v.b):ToHex()
     end
-    
+
     -- If User does not want the Combat Info then exit right here
     if not enabled then return end
     CI.Enabled = true
@@ -1276,15 +1276,15 @@ function CI.Initialize( enabled )
         local disp_h = GuiRoot:GetHeight()
         local scr_w = disp_w / 6
         local scr_h = disp_h * 2 / 3
-        
+
         g_scrollingAngle = math.asin( 2 * disp_h / 3 / disp_w )
         g_scrollingSpeed = g_scrollingAngle / 60
         g_scrollingRadius = disp_w / 2
-        
+
         for index, key in ipairs({ 'Incoming', 'Outgoing' }) do
-        
+
             local curve = (index==1) and (-1) or 1
-            
+
             -- create CT_CONTROL to hold labels
             local control = UI.Control( tlw, {CENTER,CENTER,curve*disp_w/4,0}, { scr_w, scr_h }, false )
             -- curve of labels
@@ -1294,14 +1294,14 @@ function CI.Initialize( enabled )
             -- create preview
             control.preview = UI.Texture( control, "fill", nil, "/esoui/art/miscellaneous/inset_bg.dds", DL_BACKGROUND, true )
             control.previewLabel = UI.Label( control.preview, {CENTER,CENTER}, nil, nil, 'ZoFontGameMedium', "Scrolling " .. key .. "\n(Fixed Position)", false )
-        
+
             -- create empty table where we will store all dynamically created labels
             control.floatingLabels = {}
             -- put initial number of last used dynamic label
             control.lastUsedLabel = 0
             -- maximum labels to create
             control.labelsMax = 40
-            
+
             -- events queue
             control.eventsQueue = fifoQueue.new()
             -- next slot ready
@@ -1391,13 +1391,13 @@ function CI.PrepareFonts(doPreview)
     -- this also usually called from menu, so we need to unhide control areas
     if doPreview then
         LUIE.components[ moduleName ]:SetHidden(false)
-        
+
         CI.OnCombatEvent( EVENT_COMBAT_EVENT, ACTION_RESULT_DAMAGE, false, 'Example', '', 0, 'Example Target', COMBAT_UNIT_TYPE_NONE, 'Your Name', COMBAT_UNIT_TYPE_PLAYER, 3456, 0, DAMAGE_TYPE_PHYSICAL, false, 0, 0, 1 )
 
         CI.OnCombatEvent( EVENT_COMBAT_EVENT, ACTION_RESULT_DAMAGE, false, 'Example', '', 0, 'Your Name', COMBAT_UNIT_TYPE_PLAYER, 'Example Target', COMBAT_UNIT_TYPE_NONE, 1234, 0, DAMAGE_TYPE_GENERIC, false, 0, 0, 1 )
         CI.OnCombatEvent( EVENT_COMBAT_EVENT, ACTION_RESULT_DOT_TICK, false, 'Example Dot', '', 0, 'Your Name', COMBAT_UNIT_TYPE_PLAYER, 'Example Target', COMBAT_UNIT_TYPE_NONE, 567, 0, DAMAGE_TYPE_FIRE, false, 0, 0, 1 )
         CI.OnCombatEvent( EVENT_COMBAT_EVENT, ACTION_RESULT_CRITICAL_DAMAGE, false, 'Example Crit', '', 0, 'Your Name', COMBAT_UNIT_TYPE_PLAYER, 'Example Target', COMBAT_UNIT_TYPE_NONE, 8900, 0, DAMAGE_TYPE_MAGIC, false, 0, 0, 1 )
-        
+
         CI.FireCombatEvent( eventCode, 'custom', false, '', '', 0, 'Combat Tip', COMBAT_UNIT_TYPE_PLAYER, '', 'combatTip', 1, POWERTYPE_INVALID, 0, false, 0, 0, 0 )
     end
 end
@@ -1524,7 +1524,7 @@ end
 function CI.RegisterCombatTipEvent()
     -- Clear event listener
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DISPLAY_ACTIVE_COMBAT_TIP )
-    
+
     -- If enabled, then
     if CI.SV.CombatTipsEnabled then
         -- Enable event listener
@@ -1668,9 +1668,9 @@ function CI.OnUpdate(currentTime)
                         --
                         -- * For some events the label can be set to increase in scale.
                         --   This process takes first 2/3 of live time (precomputed in label.settings.animateScaleUp[3]).
-                        
+
                         local currentAge = currentTime - label.settings.fixedAge
-                        
+
                         -- alpha fade
                         if ( label.settings.animateAlpha == true ) then
                             local fadeTime = label.settings.animateTime * 2 / 3
@@ -1750,15 +1750,15 @@ function CI.OnUpdateScrolling(currentTime)
                 end
             end
         end
-        
+
         local maxAngle = 0
 
         -- loop labels
         for labelnum, label in pairs(target.floatingLabels) do
 
-            
+
             if label.available then
-            
+
                 -- check if label reached border condition
                 if label.angle < - g_scrollingAngle  then
 
@@ -1793,7 +1793,7 @@ function CI.OnUpdateScrolling(currentTime)
                     --if abs_angle >= 0.8 * g_scrollingAngle and abs_angle <= g_scrollingAngle then
                     --  label:SetAlpha( E.easeInQuad( g_scrollingAngle-abs_angle, 0, 1, 0.2*g_scrollingAngle ) )
                     --end
-                    
+
                     label:ClearAnchors()
                     label:SetAnchor(CENTER, target, CENTER, g_scrollingRadius * target.curve * (math.cos(label.angle)-1), g_scrollingRadius * math.sin(label.angle))
                 end
@@ -1859,7 +1859,7 @@ function CI.OnXPUpdate( eventCode, unitTag, currentExp, maxExp, reason )
     -- PrintXP( reason, value, cxp )
     -- also send kill-xp information into Combat Log component ( via Damage Meter module )
     -- PROGRESS_REASON_KILL == 0
-    --if reason == 0 then LogKillXP(value) 
+    --if reason == 0 then LogKillXP(value)
     --end
 end
 
@@ -1907,11 +1907,11 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
     if CI.SV.CombatTipsEnabled and IsResultDot[result] and targetType == COMBAT_UNIT_TYPE_PLAYER then
         CI.FireCombatEvent( eventCode, 'custom', false, '', '', 0, 'Cleanse Now!', COMBAT_UNIT_TYPE_PLAYER, '', 'combatTip', 1, POWERTYPE_INVALID, 0, false, 0, 0, 0 )
     end
-    
+
     -- filter events by eventId, sourceType, targetType
     if ( not CI.FilterEvent( result, sourceType, targetType, powerType, hitValue ) ) then return end
 
-    
+
     -- 1: Fire cloud-text event
     CI.FireCombatEvent( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
 
@@ -1961,7 +1961,7 @@ local function setupIcon(showIcon, label, iconSettings, abilityName, abilityId)
     if showIcon and abilityId and abilityId > 0 then
         -- get ability texture
         local iconTexture = E.GetAbilityIcon(abilityName, abilityId)
-        
+
         -- DEBUG:
         --d(abilityName, abilityId)
         --d(iconTexture)
@@ -1988,7 +1988,7 @@ end
 function CI.FireCombatEvent( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
 
     local currentTime = GetGameTimeMilliseconds()
-    
+
     -- prepare names
     local sourceName = sourceName:gsub("%^%a+","")
     local targetName = targetName:gsub("%^%a+","")
@@ -2009,27 +2009,27 @@ function CI.FireCombatEvent( eventCode, result, isError, abilityName, abilityGra
     if deadtime then
         if not DelayBuffer( moduleName .. target .. labelText, 3000, currentTime ) then return end
     end
-        
+
     -- Prepare custom colour for outgoing damage is required
     -- Incoming damage has no information at all about damage type and or ability name, so we will not use this custom colour for it
     if CI.SV.DamageColoured and IsResultDamage[result] then
         colour = CI.Colours.DAMAGE_COLOURED[ damageType ]
     end
-    
+
     -- eventCode will be scrolling key if this is a queued event
     if scrollingControls[eventCode] then
 
         -- FIXME: after Update 2.1 this have to be rechecked
         if result == 'custom' and targetType == 'exp' then
             labelText = StringFormat("Experience gain: |cEEEEEE+%4$d|r %3$s", hitValue, sourceName, targetName, hitValue )
-        
+
         -- Override label for healing abilities
         elseif IsResultHeal[result] or result == ACTION_RESULT_POWER_ENERGIZE then
             labelText = StringFormat( "+%1$d (%2$s)", hitValue, (abilityName and abilityName ~= '') and zo_strformat("<<t:1>>", abilityName) or "Incoming Heal", '', hitValue )
-        
+
         -- For ourgoing damage
         elseif IsResultDamage[result] then
-            local str = 
+            local str =
                 ( IsResultDot[result] and "-" or
                   (result == ACTION_RESULT_BLOCKED_DAMAGE) and (CI.Colours.BLOCKED.hex .. "Blocked|r ") or
                 "" ) ..
@@ -2060,7 +2060,7 @@ function CI.FireCombatEvent( eventCode, result, isError, abilityName, abilityGra
         if result == ACTION_RESULT_POWER_ENERGIZE or result == ACTION_RESULT_POWER_DRAIN then
             font = "Regular"
         end
-    
+
         -- prepare proper font
         font = Font[ "Scroll" .. font ] or Font[ font ] or font
 
@@ -2073,7 +2073,7 @@ function CI.FireCombatEvent( eventCode, result, isError, abilityName, abilityGra
             label = WINDOW_MANAGER:CreateControl( nil, targetControl, CT_LABEL )
             label.icon = label:CreateControl( nil, CT_TEXTURE )
             targetControl.floatingLabels[ targetControl.lastUsedLabel ] = label
-        end     
+        end
 
         local iconSettings = {
             show            = true,
@@ -2103,10 +2103,10 @@ function CI.FireCombatEvent( eventCode, result, isError, abilityName, abilityGra
 
         setupIcon(CI.SV.ShowIconsScroll, label, iconSettings, abilityName, abilityId)
 
-    
+
     -- event is fired imemdiatelly into cloud-text areas
     else
-        
+
         -- prepare proper font
         font = Font[ "Cloud" .. font ] or Font[ font ] or font
 
@@ -2211,7 +2211,7 @@ function CI.FilterEvent( result, sourceType, targetType, powerType, hitValue )
     if hitValue == 0 and not IsResultCC[result] then
         return false
     end
-    
+
     -- only events from the combatEvents table with defined sourceType/targetType combination
     for k,v in pairs( combatEvents ) do
         if ( result == k ) then
@@ -2257,7 +2257,7 @@ function CI.OnSlotsFullUpdate(eventCode)
 
     g_ultimatAbilityName = GetSlotName( ULTIMATE_SLOT )
     g_ultimatAbilityId = GetSlotBoundId( ULTIMATE_SLOT )
-    
+
     -- if this event was caused only by user manually changing the ultimate ability, then
     -- force recalculation of percent value. Otherwise (weapons swap) this will be called by the game
     if ( eventCode == EVENT_ACTION_SLOT_UPDATED or EVENT_ACTION_SLOTS_FULL_UPDATE and not setHidden ) then
@@ -2296,7 +2296,7 @@ function CI.OnPowerUpdatePlayer( eventCode , unitTag, powerIndex, powerType, pow
                 uiUltimate.LabelVal:SetColor( unpack(uiUltimate.colour) )
             end
         end
-    
+
         -- Maybe fire an alert
         if ( CI.SV.UltimateAlert and pct >= 100 and g_ultimateNotReady ) then
             CI.OnCombatEvent( 0, 'custom', false, g_ultimatAbilityName, '', 0, 'Ultimate Ready', COMBAT_UNIT_TYPE_PLAYER, '', 'combatTip', 1, POWERTYPE_ULTIMATE, 0, false, 0, 0, g_ultimatAbilityId )
@@ -2366,7 +2366,7 @@ function CI.OnDisplayActiveCombatTip( eventCode, activeCombatTipId )
     end
 end
 
---[[ 
+--[[
  * Runs on the EVENT_UNIT_DEATH_STATE_CHANGED listener.
  * This handler fires every time a valid unitTag dies or is resurrected
  ]]--
@@ -2377,7 +2377,7 @@ function CI.OnDeath(eventCode, unitTag, isDead)
     end
 end
 
---[[ 
+--[[
  * Runs on the EVENT_PLAYER_COMBAT_STATE listener.
  * This handler fires every time player enters or leaves combat
  ]]--
@@ -2402,7 +2402,7 @@ function CI.ReportCombatXP()
     end
 end
 
---[[ 
+--[[
  * Used to create 'Potion Ready' alert. Called from SCB module
  ]]--
 function CI.CreatePotionAlert(abilityName)

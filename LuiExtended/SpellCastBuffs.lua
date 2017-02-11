@@ -117,7 +117,7 @@ local g_horizAlign = CENTER
 local v_horizAlign = MIDDLE
 local g_horizSortInvert = false
 
---[[ 
+--[[
  * Double check that the slot is actually eligible for use
  ]]--
 local function HasFailure( slotIndex )
@@ -140,7 +140,7 @@ end
     * Effects are listed as [name] = { self buff , self debuff , target debuff , cast time }
     * Of the cast time us "true" instead of number, the value will be read from API
 --]]----------------------------------------------------------
-    
+
 local Effects = {
 
     -----------------------------------
@@ -162,21 +162,21 @@ local Effects = {
     [L.Skill_Blockade_of_Fire]        = { false, false, 8.3, nil },
     [L.Skill_Blockade_of_Frost]       = { false, false, 8.3, nil },
     [L.Skill_Blockade_of_Storms]      = { false, false, 8.3, nil },
-    
+
     -- Resto Staff
     [L.Skill_Grand_Healing]         = { true, false, false, nil },
     [L.Skill_Healing_Springs]       = { true, false, false, nil }, --Possibly Hide later, hard to account for cast time, only cast time is the animation which can be anim cancelled
     [L.Skill_Illustrious_Healing]   = { true, false, false, nil },
-    
+
     -----------------------------------
     -- SORCERER
     -----------------------------------
-    
+
     -- Dark Magic
     [L.Skill_Negate_Magic]          = { false, false, true, nil },
     [L.Skill_Absorption_Field]      = { true , false, true, nil },  -- Values here are completely accurate
     [L.Skill_Suppression_Field]     = { false , false, true, nil },
-    
+
     [L.Skill_Daedric_Mines]         = { false, false, 36, 3.5 },
     [L.Skill_Daedric_Minefield]     = { false, false, 36, 3.5 },    -- Doesn't account for not having +20% duration passives, otherwise decently accurate
     [L.Skill_Daedric_Tomb]          = { false, false, 36, 0.5 },    -- Decent timer otherwise
@@ -185,7 +185,7 @@ local Effects = {
     [L.Skill_Summon_Storm_Atronach]   = { false, false, true, 0.8 },  -- Values here are completely accurate
     [L.Skill_Greater_Storm_Atronach]  = { false, false, true, 0.8 },  -- Don't absolutely have to have this, player already gets a buff on them, but this gives us more feedback
     [L.Skill_Summon_Charged_Atronach] = { false, false, true, 0.8 },
-    
+
     -- Storm Calling
     [L.Skill_Lightning_Splash]      = { false, false, true, nil },
     [L.Skill_Liquid_Lightning]      = { false, false, true, nil },
@@ -194,13 +194,13 @@ local Effects = {
     -----------------------------------
     -- DRAGONKNIGHT
     -----------------------------------
-    
-    -- Ardent Flame 
+
+    -- Ardent Flame
     [L.Skill_Dragonknight_Standard] = { false, false, true, nil },
     [L.Skill_Shifting_Standard]     = { false, false, true, nil }, -- This is the new standard effect fired when moving Shifting Standard
     [L.Skill_Shift_Standard]        = { false, false, true, nil }, -- Would be better to add these as a fake aura later - Standard doesn't go away when you cast shifting
     [L.Skill_Standard_of_Might]     = { true, false, true, nil }, -- Also if mob dies before banner ends, the banner stops but icon persists
-    
+
     -- Draonic Power
     -- Could add inhale here eventually, gonna need to do it with a fake aura however (2.5 sec duration timer before it explodes)
 
@@ -210,11 +210,11 @@ local Effects = {
     [L.Skill_Eruption]              = { false, false, true, nil },
 
     -- Draconic Power
-    
+
     -----------------------------------
     -- NIGHTBLADE
     -----------------------------------
-    
+
     -- Assassination
 
     -- Shadow
@@ -233,7 +233,7 @@ local Effects = {
     -----------------------------------
     -- TEMPLAR
     -----------------------------------
-    
+
     -- Aedric Spear
     [L.Skill_Spear_Shards]                  = { false, false, true, 1.6 },
     [L.Skill_Luminous_Shards]               = { false, false, true, 1.6 }, --This seems roughly accurate, trying to time it with the disorient, depends on latency
@@ -265,7 +265,7 @@ local Effects = {
     -- Mages Guild
     [L.Skill_Meteor]                = { false, false, 11.8, 0 },
     [L.Skill_Ice_Comet]             = { false, false, 11.8, 0 },    -- Might need some work on timer
-    [L.Skill_Shooting_Star]         = { false, false, 11.8, 0 },    
+    [L.Skill_Shooting_Star]         = { false, false, 11.8, 0 },
     -- Need to add Fire Rune here
 
     -- Undaunted
@@ -276,18 +276,18 @@ local Effects = {
     -----------------------------------
     -- WORLD
     -----------------------------------
-    
+
     -- Vampire
     [L.Skill_Bat_Swarm]             = { false, false, 5.5, 0.1 },
     [L.Skill_Clouding_Swarm]        = { false, false, 5.5, 0.1 }, -- These values are perfect. Also note, this isn't needed as this shows as a buff on the player as well.
     [L.Skill_Devouring_Swarm]       = { false, false, 5.5, 0.1 },
 
     -- Werewolf
-    
+
     -----------------------------------
     -- AVA
     -----------------------------------
-    
+
     -- AVA Assault
     --[L.Skill_Vigor]               = { 5, false, false, 0 },
     --[L.Skill_Echoing_Vigor]       = { 5, false, false, 0 },
@@ -295,10 +295,10 @@ local Effects = {
     [L.Skill_Caltrops]              = { false, false, true, nil },
     [L.Skill_Anti_Cavalry_Caltrops] = { false, false, true, nil },
     [L.Skill_Razor_Caltrops]        = { false, false, true, nil },
-    
+
     --AVA Support
     --Possibly add Siege shield here/remove active effect
-    
+
 }
 
 local abilityRouting = { "player1", "player2", "ground" }
@@ -318,12 +318,12 @@ local IsAbilityCustomToggle = {
 
     --Sorceror Skills (Dark Magic)
     --[L.Skill_Defensive_Rune]        = true, -- Doesn't work because of no aura, would be nice to have this highlight if possible.
-    
+
     -- Sorceror Skills (Daedric Summoning)
     [L.DamageShield_Conjured_Ward]  = true,
     [L.DamageShield_Empowered_Ward] = true,
     [L.DamageShield_Hardened_Ward]  = true,
-    
+
     -- Sorceror Skills (Storm Calling)
     [L.Skill_Lightning_Form]        = true,
     [L.Skill_Boundless_Storm]       = true,
@@ -331,12 +331,12 @@ local IsAbilityCustomToggle = {
     [L.Skill_Surge]                 = true,
     [L.Skill_Critical_Surge]        = true,
     [L.Skill_Power_Surge]           = true,
-    
+
     --Dragonknight Skills (Ardent Flame)
     [L.Skill_Inferno]               = true,
     [L.Skill_Flames_Of_Oblivion]    = true,
     [L.Skill_Cauterize]             = true,
-    
+
     --Dragonknight Skills (Draconic Power)
     [L.Skill_Spiked_Armor]          = true,
     [L.Skill_Volatile_Armor]        = true,
@@ -347,7 +347,7 @@ local IsAbilityCustomToggle = {
     [L.Skill_Reflective_Scale]      = true,
     [L.Skill_Reflective_Plate]      = true,
     [L.Skill_Dragon_Fire_Scale]     = true,
-    
+
     --Dragonknight Skills (Earthen Heart)
     [L.Skill_Molten_Weapons]           = true,
     [L.Skill_Igneous_Weapons]          = true,
@@ -355,12 +355,12 @@ local IsAbilityCustomToggle = {
     [L.DamageShield_Obsidian_Shield]   = true,
     [L.DamageShield_Fragmented_Shield] = true,
     [L.DamageShield_Igneous_Shield]    = true,
-    
+
     --Templar Skills (Aedric Spear)
     [L.DamageShield_Sun_Shield]     = true, --These seem to fade on dodge roll, unlike other shields, I have no idea why
     [L.DamageShield_Radiant_Ward]   = true, --These seem to fade on dodge roll, unlike other shields, I have no idea why
     [L.DamageShield_Blazing_Shield] = true, --These seem to fade on dodge roll, unlike other shields, I have no idea why
-    
+
     --Nightblade Skills (Assassination)
     [L.Skill_Blur]                  = true,
     [L.Skill_Double_Take]           = true,
@@ -369,19 +369,19 @@ local IsAbilityCustomToggle = {
     [L.Skill_Relentless_Focus]      = true,
     [L.Skill_Merciless_Resolve]     = true,
     -- Ambush Empower, possibly add here
-    
+
     --Nightblade Skills (Shadow)
     [L.Skill_Shadow_Cloak]          = true,
     [L.Skill_Shadowy_Disguise]      = true,
     [L.Skill_Dark_Cloak]            = true,
     -- If POSSIBLE - ADD SHADE ABILITIES HERE (Also add proc effect for Shadow Image potentially)
-    
+
     --Nightblade Skills (Siphoning)
     [L.Skill_Siphoning_Strikes]     = true,
     [L.Skill_Siphoning_Attacks]     = true,
     -- Cripple Major expedition, possibly add here
     -- Drain power Major Brutality, possibly add here
-    
+
     --Two Handed
     [L.DamageShield_Brawler]        = true,
     -- IF POSSIBLE - ADD CARVE MINOR HEROISM
@@ -389,22 +389,22 @@ local IsAbilityCustomToggle = {
     [L.Skill_Momentum]              = true,
     [L.Skill_Forward_Momentum]      = true,
     [L.Skill_Rally]                 = true,
-    
+
     --One Hand and Shield
     -- IF POSSIBLE - ADD HEROIC SLASH MINOR HEROISM
     [L.Skill_Defensive_Posture]       = true,
     [L.Skill_Defensive_Stance]        = true,
     [L.Skill_Absorb_Magic]            = true,
     [L.DamageShield_Shielded_Assault] = true,
-    
+
     --Dual Wield
     [L.Skill_Blade_Cloak]            = true,
     [L.Skill_Quick_Cloak]            = true,
     [L.Skill_Deadly_Cloak]           = true,
     -- IF POSSIBLE - ADD HIDDEN BLADE MAJOR BRUTALITY HERE
-    
+
     --Bow - Possibly scatter shot indicator?
-    
+
     --Resto Staff
     --[L.Skill_Grand_Healing]          = true, --Doesn't work, no effect related to it
     --[L.Skill_Healing_Springs]        = true, --Doesn't work, no effect related to it
@@ -416,12 +416,12 @@ local IsAbilityCustomToggle = {
     [L.DamageShield_Steadfast_Ward]  = true,
     [L.DamageShield_Ward_Ally]       = true,
     [L.DamageShield_Healing_Ward]    = true,
-    
+
     --Light Armor
     [L.DamageShield_Annulment]       = true,
     [L.DamageShield_Dampen_Magic]    = true,
     [L.DamageShield_Harness_Magicka] = true,
-    
+
     --Medium Armor
     --[L.Skill_Evasion]                = true,
     --[L.Skill_Elude]                  = true,      --NOT SURE WHY THESE DON'T WORK
@@ -431,16 +431,16 @@ local IsAbilityCustomToggle = {
     [L.Skill_Immovable]              = true,
     [L.Skill_Immovable_Brute]        = true,        -- Only shows the CC Immunity duration, need to figure a way to make other buffs display
     [L.Skill_Unstoppable]            = true,
-    
+
     --Werewolf
     [L.Skill_Hircines_Rage]          = true,        -- Breaks on dodge roll for some reason
     [L.Skill_Hircines_Fortitude]     = true,        -- Breaks on dodge roll for some reason
-    
+
     --Fighter's Guild
     [L.Skill_Expert_Hunter]          = true,
     [L.Skill_Evil_Hunter]            = true,
     [L.Skill_Camouflaged_Hunter]     = true,
-    
+
     --Mage's Guild
     [L.Skill_Magelight]              = true,
     [L.Skill_Inner_Light]            = true,
@@ -451,14 +451,14 @@ local IsAbilityCustomToggle = {
     [L.Skill_Equilibrium]            = true,    --Fades sooner than it should from other effects
     [L.Skill_Spell_Symmetry]         = true,    --Works
     [L.Skill_Balance]                = true,    --Fades sooner than it should from other effects
-    
+
     --Undaunted
     -- BLOOD ALTAR HERE (possibly GTAOE)
     [L.DamageShield_Bone_Shield]     = true,
     [L.DamageShield_Bone_Surge]      = true,
     [L.DamageShield_Spiked_Bone_Shield] = true,
     -- Necrotic Orb?? Can't decide what to do with this.
-    
+
     --AVA Assault
     [L.Skill_Rapid_Maneuver]         = true,
     [L.Skill_Charging_Maneuver]      = true,
@@ -467,7 +467,7 @@ local IsAbilityCustomToggle = {
     [L.Skill_Echoing_Vigor]          = true,    -- Drops after rolling for some reason
     [L.Skill_Resolving_Vigor]        = true,    -- Drops after rolling for some reason
     [L.Skill_Proximity_Detonation]   = true,
-    
+
     --AVA Support
     [L.Skill_Siege_Shield]           = true, --Behavior on Siege Shield's is kind of odd, only shows bar effect when standing inside it as it reapplies.
     [L.Skill_Propelling_Shield]      = true, --Still, you can only have one shield up, and it's pretty hard to miss the thing.
@@ -475,7 +475,7 @@ local IsAbilityCustomToggle = {
     [L.Skill_Purge]                  = true,
     [L.Skill_Cleanse]                = true,
     --[L.Skill_Efficient_Purge]      = true, --Doesn't work for some reason
-    
+
 }
 
 -- some optimization
@@ -665,13 +665,13 @@ function SCB.Initialize( enabled )
                     SCB.SV.playerHOffsetY = self:GetTop()
                 end
             end )
-        
+
         -- TODO: implement change in vertical alignment
         if SCB.SV.LongTermEffectsSeparateAlignment == 1 then
             uiTlw.player_long.alignVertical = false
         elseif SCB.SV.LongTermEffectsSeparateAlignment == 2 then
             uiTlw.player_long.alignVertical = true
-        end 
+        end
         uiTlw.player_long.skipUpdate = 0
         containerRouting.player_long = "player_long"
     else
@@ -831,7 +831,7 @@ end
 function SCB.SetTlwPosition()
     -- if icons are locked to custom frames, i.e. uiTlw[] is a CT_CONTROL of LUIE.UnitFrames.CustomFrames.player
     -- we do not have to do anything here. so just bail out
-    
+
     -- otherwise set position of uiTlw[] which are CT_TOPLEVELCONTROLs to saved or default positions
     if uiTlw.player and uiTlw.player:GetType() == CT_TOPLEVELCONTROL then
         uiTlw.player:ClearAnchors()
@@ -850,7 +850,7 @@ function SCB.SetTlwPosition()
             uiTlw.target:SetAnchor( TOP, ZO_TargetUnitFramereticleover, BOTTOM, 0, 60 )
         end
     end
-    
+
     if uiTlw.player_long then
         uiTlw.player_long:ClearAnchors()
         if uiTlw.player_long.alignVertical then
@@ -874,7 +874,7 @@ end
  ]]--
 function SCB.SetMovingState( state )
     if not SCB.Enabled then return end
-    
+
     -- set moving state
     if uiTlw.player and uiTlw.player:GetType() == CT_TOPLEVELCONTROL and not SCB.SV.lockPositionToUnitFrames then
         uiTlw.player:SetMouseEnabled( state )
@@ -923,7 +923,7 @@ function SCB.Reset()
 
     -- update padding between icons
     g_padding = math.floor(0.5 + SCB.SV.IconSize / 13)
-    
+
     -- set size of top level window
     -- player
     if uiTlw.player and uiTlw.player:GetType() == CT_TOPLEVELCONTROL then
@@ -946,7 +946,7 @@ function SCB.Reset()
         uiTlw.target1.firstAnchor = { TOPLEFT, TOP }
         uiTlw.target1.maxIcons = math.floor(  (uiTlw.target1:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
     end
-    
+
     -- player long buffs
     if uiTlw.player_long then
         if uiTlw.player_long.alignVertical then
@@ -955,12 +955,12 @@ function SCB.Reset()
             uiTlw.player_long:SetDimensions( 500, SCB.SV.IconSize + 6 )
         end
     end
-    
+
     -- reset alignment and sort
     SCB.SetIconsAlignment( SCB.SV.Alignment )
     SCB.SetIconsAlignmentVert( SCB.SV.AlignmentVert )
     SCB.SetSortDirection( SCB.SV.SortDirection )
-    
+
     local needs_reset = {}
     -- and reset sizes of already existing icons
     for _, container in pairs(containerRouting) do
@@ -974,7 +974,7 @@ function SCB.Reset()
         end
         needs_reset[container] = false
     end
-    
+
     if g_playerActive then
         SCB.ReloadEffects()
     end
@@ -987,7 +987,7 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
     buff:SetHidden( true )
     --buff:SetAlpha( 1 )
     buff:SetDimensions( buffSize, buffSize )
-    buff.frame:SetDimensions( frameSize, frameSize )        
+    buff.frame:SetDimensions( frameSize, frameSize )
     buff.back:SetHidden( SCB.SV.GlowIcons )
     buff.frame:SetHidden( not SCB.SV.GlowIcons )
     buff.label:SetHidden( not SCB.SV.RemainingText )
@@ -995,7 +995,7 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
         buff.cd:SetHidden(     not SCB.SV.RemainingCooldown )
         buff.iconbg:SetHidden( not SCB.SV.RemainingCooldown ) -- we do not need black icon background when there is no Cooldown control present
     end
-    
+
     local inset = (SCB.SV.RemainingCooldown and buff.cd ~= nil) and 4 or 1
 
     buff.icon:ClearAnchors()
@@ -1107,7 +1107,7 @@ function SCB.ApplyFont()
 
     local fontStyle = ( SCB.SV.BuffFontStyle and SCB.SV.BuffFontStyle ~= '' ) and SCB.SV.BuffFontStyle or 'outline'
     local fontSize = ( SCB.SV.BuffFontSize and SCB.SV.BuffFontSize > 0 ) and SCB.SV.BuffFontSize or 17
-    
+
     buffsFont = fontName .. '|' .. fontSize .. '|' .. fontStyle
 
     local needs_reset = {}
@@ -1123,10 +1123,10 @@ function SCB.ApplyFont()
         end
         needs_reset[container] = false
     end
-    
+
 end
 
---[[ 
+--[[
  * Check for whether a potion becomes available from cooldown
  * Runs OnUpdate - 200 ms buffer
  ]]--
@@ -1141,7 +1141,7 @@ function SCB.CheckPotion()
         -- Trigger an alert if the potion has just become available
         if ( usable and not g_quickslotLastUsable ) then
             CI.CreatePotionAlert(g_quickslotAbility) -- (g_quickslotAbility.name)
-        end 
+        end
 
     end
 
@@ -1150,7 +1150,7 @@ function SCB.CheckPotion()
     g_quickslotLastUsable = usable
 end
 
---[[ 
+--[[
  * Runs on the EVENT_ACTIVE_QUICKSLOT_CHANGED listener.
  * This handler fires every time the player make changes to quick slot.
  ]]--
@@ -1165,7 +1165,7 @@ function SCB.OnActiveQuickslotChanged(eventCode, slotNum)
     end
 end
 
---[[ 
+--[[
  * Runs on the EVENT_ACTION_UPDATE_COOLDOWNS listener.
  * This handler fires every time the player uses an active ability.
  ]]--
@@ -1179,7 +1179,7 @@ function SCB.OnUpdateCooldowns()
     end
 end
 
---[[ 
+--[[
  * Runs on the EVENT_EFFECT_CHANGED listener.
  * This handler fires every long-term effect added or removed:
  *   integer changeType,
@@ -1199,16 +1199,16 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     --CHAT_SYSTEM:AddMessage(strfmt('OnEffectChanged %d: %s[%s] / %d/%d/%d [%s-%d] %d', changeType, effectName, unitTag, effectType, abilityType, statusEffectType, unitName, unitId, abilityId ))
 
     --printToChat ( "On effect changed! --> " .. changeType)
-    
+
     -- track only effects on self or target debuffs
     if unitTag ~= 'player' and unitTag ~= 'reticleover' then return end
-    
+
     --if effectType == 2 and changeType == 2 and HideDebuffToggle[abilityId] then HideDebuffToggle[abilityId] = false end -- Alot of debuffs when reapplied don't refresh, they end then apply. This will reset if this happens.
-    
+
     if (effectType == 2 and HideDebuffToggle[abilityId]) and not (E.DebuffDisplayOverrideId[abilityId] or E.DebuffDisplayOverrideName[effectName]) then
             return
     end
-        
+
     -- Ignore some buffs (by abilityId or by effectName)
     if E.IsEffectIgnored[ effectName ] or E.IsAbilityIgnoredById[abilityId] or
         ( SCB.SV.IgnoreDisguise and abilityType == ABILITY_TYPE_CHANGEAPPEARANCE ) or
@@ -1222,19 +1222,19 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     if E.EffectTypeOverride[abilityId] then
         effectType = E.EffectTypeOverride[abilityId]
     end
-    
+
     -- Allows us to overwrite Ability Icons in one of two ways, by specific abilityId or by effectName
     iconName = E.EffectIconOverride[abilityId] or E.AbilityIcon[effectName or ''] or iconName
-    
+
     -- Allows us to overwrite Ability Names (Note that using this may break certain hidden icon functionality, should only be used when neccesary. Use base ability ID only for other modifications)
     effectName = E.EffectNameOverride[abilityId] or effectName
-    
+
     -- Where the new icon will go into
     local context = unitTag .. effectType
 
     -- Exit here if there is no container to hold this effect
     if not containerRouting[context] then return end
-    
+
     if changeType == EFFECT_RESULT_FADED then -- delete Effect
         g_effectsList[context][abilityId] = nil
 
@@ -1303,7 +1303,7 @@ local IsResultDamage = {
     [ACTION_RESULT_DOT_TICK_CRITICAL]= true,
 }
 
---[[ 
+--[[
  * Runs on the EVENT_COMBAT_EVENT listener.
  * This handler fires every time ANY combat activity happens. Very-very often.
  * We use it to remove mines from active target debuffs
@@ -1313,21 +1313,21 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
 
     -- ignore error events
     if isError then return end
-    
+
     buffSource = zo_strformat("<<t:1>>",sourceName)
     buffTarget = zo_strformat("<<t:1>>",targetName)
-    
+
     --printToChat ( "Ability ID: " .. abilityId .. ": " .. sourceName .. " --> " .. targetName)
 
     -- try to remove effect like Ground Runes and Traps
     if E.IsGroundMine[abilityName] and IsResultDamage[result]
-        and ( targetType == COMBAT_UNIT_TYPE_NONE or targetType == COMBAT_UNIT_TYPE_OTHER) 
+        and ( targetType == COMBAT_UNIT_TYPE_NONE or targetType == COMBAT_UNIT_TYPE_OTHER)
         then
         g_effectsList.ground[ abilityName ] = nil
     end
-    
+
 ------------------------------------------------------------------------------------
-    
+
     -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by target)
     if E.FakeExternalBuffs[abilityId] ~= nil then
         iconName = E.FakeExternalBuffs[abilityId].icon
@@ -1343,14 +1343,14 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
             id=abilityId, name=effectName, icon=iconName,
             dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
             forced = "short",
-            restart=true, iconNum=0 }   
+            restart=true, iconNum=0 }
         elseif source == "" and target == playerName then
             g_effectsList.player1[ abilityId ] = nil
         end
     end
-    
+
 ------------------------------------------------------------------------------------
-    
+
     -- Creatures fake debuff icons for debuffs without an aura - These refresh on reapplication/removal (Applied on player by target)
     if E.FakeExternalDebuffs[abilityId] ~= nil then
         iconName = E.FakeExternalDebuffs[abilityId].icon
@@ -1366,12 +1366,12 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
             id=abilityId, name=effectName, icon=iconName,
             dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
             forced = "short",
-            restart=true, iconNum=0 }   
+            restart=true, iconNum=0 }
         elseif source == "" and target == playerName then
             g_effectsList.player2[ abilityId ] = nil
         end
     end
-    
+
 ------------------------------------------------------------------------------------
 
     -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by player OR applied on target by player)
@@ -1401,9 +1401,9 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
             g_effectsList.player1[ abilityId ] = nil
         end
     end
-    
+
 ------------------------------------------------------------------------------------
-    
+
     -- Creates fake debuff icons for debuffs without an aura - These refresh on reapplication/removal (Applied on target by player)
     if E.FakePlayerDebuffs[abilityId] ~= nil then
         iconName = E.FakePlayerDebuffs[abilityId].icon
@@ -1420,10 +1420,10 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
             id=abilityId, name=effectName, icon=iconName,
             dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
             forced = "short",
-            restart=true, iconNum=0 }   
+            restart=true, iconNum=0 }
         end
     end
-    
+
 ------------------------------------------------------------------------------------
 
     -- Simulates fake debuff icons for stagger effects - works for both (target -> player) and (player -> target) - DOES NOT REFRESH - Only expiration condition is the timer
@@ -1441,7 +1441,7 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
             id=abilityId, name=effectName, icon=iconName,
             dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
             forced = "short",
-            restart=true, iconNum=0 }   
+            restart=true, iconNum=0 }
         elseif source == playerName and target ~= nil then
             g_effectsList.reticleover2[ abilityId ] = {
             type=EFFECT_TYPE_DEBUFF,
@@ -1451,7 +1451,7 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
             restart=true, iconNum=0 }
         end
     end
-    
+
     -- Simulates fake buffs/debuffs on the player frame for self applied buffs/debuffs that do not display correctly - DOES NOT REFRESH - Only expiration condition is the timer
     if E.FakeSelfAura[abilityId] ~= nil then
         iconName = E.FakeSelfAura[abilityId].icon
@@ -1478,24 +1478,24 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
             restart=true, iconNum=0 }
         end
     end
-    
+
     if result == 2250 then
         return
     else
         if buffSource == "" and buffTarget == "" then
             HideDebuffToggle[abilityId] = true
         end
-    
+
         if buffSource ~= "" and buffTarget ~= "" then
             HideDebuffToggle[abilityId] = false
         end
     end
 
 ------------------------------------------------------------------------------------
-    
+
 end
 
---[[ 
+--[[
  * Runs on the EVENT_UNIT_DEATH_STATE_CHANGED listener.
  * This handler fires every time a valid unitTag dies or is resurrected
  ]]--
@@ -1527,7 +1527,7 @@ function SCB.OnTargetChange(eventCode, unitTag)
     SCB.OnReticleTargetChanged(eventCode)
 end
 
---[[ 
+--[[
  * Runs on the EVENT_RETICLE_TARGET_CHANGED listener.
  * This handler fires every time the player's reticle target changes
  ]]--
@@ -1535,7 +1535,7 @@ function SCB.OnReticleTargetChanged(eventCode)
     SCB.ReloadEffects('reticleover')
 end
 
---[[ 
+--[[
  * Used to clear existing LET.effectsList.unitTag and to request game API to fill it again
  ]]--
 function SCB.ReloadEffects(unitTag)
@@ -1548,9 +1548,9 @@ function SCB.ReloadEffects(unitTag)
     g_effectsList[unitTag .. 2] = {}
 
     -- fill it again
-    
+
     --printToChat ( "refresh" )
-    
+
     for i = 1, GetNumBuffs(unitTag) do
         local unitName = GetRawUnitName(unitTag)
         local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
@@ -1575,7 +1575,7 @@ function SCB.ReloadEffects(unitTag)
 
 end
 
---[[ 
+--[[
  * Process new ability buff effects
  ]]--
 function SCB.NewEffects( ability )
@@ -1589,7 +1589,7 @@ function SCB.NewEffects( ability )
 
         for i = 1, 3 do
             local context = abilityRouting[i]
-            
+
             if effects[i] and effects[i] > 0 then
                 -- update or create new effect
                 if g_effectsList[context][ability.name] ~= nil then
@@ -1639,7 +1639,7 @@ function SCB.OnSlotAbilityUsed(eventCode, slotNum)
         if not HasFailure( slotNum ) and ( currentTime > g_lastCast + 250 ) then
 
             -- Don't process effects immediately for ground-target spells
-            if ability.ground then 
+            if ability.ground then
                 g_pendingGroundAbility = ability
 
             else
@@ -1713,7 +1713,7 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
             end
         end
     end
-    
+
     ActionBar[slotNum] = {
         id      = ability_id,
         name    = abilityName,
@@ -1766,7 +1766,7 @@ function SCB.PlayProcAnimations(slotNum)
         local procLoopTexture = WINDOW_MANAGER:CreateControl("$(parent)Loop_LUIE", actionButton.slot, CT_TEXTURE)
         procLoopTexture:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
         procLoopTexture:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"))
-        procLoopTexture:SetTexture("/esoui/art/actionbar/abilityhighlight_mage_med.dds") 
+        procLoopTexture:SetTexture("/esoui/art/actionbar/abilityhighlight_mage_med.dds")
         procLoopTexture:SetBlendMode(TEX_BLEND_MODE_ADD)
         procLoopTexture:SetDrawLevel(2)
         procLoopTexture:SetHidden(true)
@@ -1776,10 +1776,10 @@ function SCB.PlayProcAnimations(slotNum)
 
         procLoopTimeline.onPlay = function(self) self.procLoopTexture:SetHidden(false) end
         procLoopTimeline.onStop = function(self) self.procLoopTexture:SetHidden(true) end
-        
+
         procLoopTimeline:SetHandler("OnPlay", procLoopTimeline.onPlay)
         procLoopTimeline:SetHandler("OnStop", procLoopTimeline.onStop)
-        
+
         uiProcAnimation[slotNum] = procLoopTimeline
     end
     if uiProcAnimation[slotNum] then
@@ -1798,7 +1798,7 @@ function SCB.ShowCustomToggle(slotNum)
         local toggleTexture = WINDOW_MANAGER:CreateControl("$(parent)Toggle_LUIE", actionButton.slot, CT_TEXTURE)
         toggleTexture:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
         toggleTexture:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"))
-        toggleTexture:SetTexture("/esoui/art/actionbar/actionslot_toggledon.dds") 
+        toggleTexture:SetTexture("/esoui/art/actionbar/actionslot_toggledon.dds")
         toggleTexture:SetBlendMode(TEX_BLEND_MODE_ADD)
         toggleTexture:SetDrawLayer(0)
         toggleTexture:SetDrawLevel(0)
@@ -1831,7 +1831,7 @@ local function buffSort(x, y)
     end
 end
 
---[[ 
+--[[
  * Runs OnUpdate - 100 ms buffer
  ]]--
 function SCB.OnUpdate(currentTime)
@@ -1852,7 +1852,7 @@ function SCB.OnUpdate(currentTime)
     -- filter expired events. and build array for sorting
     for context, effectsList in pairs(g_effectsList) do
         local container = containerRouting[context]
-        
+
         for k, v in pairs(effectsList) do
 
             -- remove effect (that is not permanent and has duration)
@@ -1862,12 +1862,12 @@ function SCB.OnUpdate(currentTime)
                 if ToggledSlots[k] and uiCustomToggle[ToggledSlots[k]] then
                     uiCustomToggle[ToggledSlots[k]]:SetHidden(true)
                 end
-            
+
             -- or append to correct container
             elseif container then
                 -- add icons to to-be-sorted list only if effect already started
                 if v.starts < currentTime then
-                    -- Filter Long-Term effects:                    
+                    -- Filter Long-Term effects:
                     -- Always show debuffs and short-term buffs
                     if v.type == 2 or v.forced == "short" or not (v.forced == "long" or v.ends == nil or v.dur == 0 or v.ends-currentTime > 120000) then
                         tinsert(buffsSorted[container], v)
@@ -1888,7 +1888,7 @@ function SCB.OnUpdate(currentTime)
                     end
                 end
             end
-            
+
         end
     end
 
@@ -1954,7 +1954,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
 
         -- calculate remaining time
         local remain = ( effect.ends ~= nil ) and ( effect.ends - currentTime ) or nil
-        
+
         -- Deprecated
         -- manually adjust this value to constant one for vampirism stages, so we can print textual value
         --if E.IsVampStage(effect) then
@@ -1962,7 +1962,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
         --end
 
         local buff = uiTlw[container].icons[index]
-        
+
         -- perform manual alignment
         if not uiTlw[container].iconHolder then
             if iconsNum ~= uiTlw[container].prevIconsCount and index == next_row_break --[[ and horizontal orientation of container ]] then
@@ -2030,7 +2030,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
                 effect.restart = false
             end
         end
-        
+
         -- now possibly fade out expiring icon
         if SCB.SV.FadeOutIcons and remain ~= nil and remain < 2000 then
             --buff:SetAlpha( 0.05 + remain/2106 )
@@ -2047,7 +2047,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
     uiTlw[container].prevIconsCount = iconsNum
 end
 
---[[ 
+--[[
  * Runs on the EVENT_STEALTH_STATE_CHANGED listener.
  * Watches for changes in a stealth state to display custom buff icon
  ]]--
@@ -2074,7 +2074,7 @@ function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
     else
         g_effectsList.player1[ strHidden ] = nil
     end
-    
+
     -- Save the previous stealthed state
     g_stealth = stealthState
 end
@@ -2086,7 +2086,7 @@ function SCB.OnPlayerActivated(eventCode)
 
     g_playerActive = true
     g_playerResurectStage = nil
-    
+
     SCB.ReloadEffects( "player" )
 end
 
@@ -2107,7 +2107,7 @@ function SCB.OnPlayerAlive(eventCode)
 
     -- this is a good place to reload player buffs, as they were wiped on death
     SCB.ReloadEffects( "player" )
-    
+
     -- now let start sequence to determine how the player become alive
     g_playerResurectStage = 1
     --[[-- If it was self resurrection, then there will be 4 EVENT_VIBRATION:

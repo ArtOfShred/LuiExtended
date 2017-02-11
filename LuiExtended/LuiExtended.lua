@@ -89,14 +89,14 @@ local function LUIE_LoadMedia()
     if LibStub == nil then return end
     local LMP = LibStub:GetLibrary("LibMediaProvider-1.0", true)
     if LMP == nil then return end
-    
+
     -- Update Fonts
     for _, f in pairs(LMP:List(LMP.MediaType.FONT)) do
         if not LUIE.Fonts[f] then
             LUIE.Fonts[f] = LMP:Fetch(LMP.MediaType.FONT, f)
         end
     end
-    
+
     -- Update StatusBar textures
     for _, s in pairs(LMP:List(LMP.MediaType.STATUSBAR)) do
         if not LUIE.StatusbarTextures[s] then
@@ -107,7 +107,7 @@ end
 
 --[[
  * Create Settings menu
- ]]--       
+ ]]--
 local function LUIE_CreateSettings()
     if LibStub == nil then return end
     local LAM2 = LibStub("LibAddonMenu-2.0")
@@ -136,16 +136,16 @@ local function LUIE_CreateSettings()
     local styleOptions = {"normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline"}
     local nameDisplayOptions = {"@UserID", "Character Name", "Character Name @UserID"}
     local nameDisplayOptionsKeys = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
-    
+
     local chatnameDisplayOptions = {"@UserID", "Character Name", "Character Name @UserID"}
     local chatnameDisplayOptionsKeys = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
-    
+
     local currencyBracketOptions = {"[]", "()", "Hyphen", "No Brackets"}
     local currencyBracketOptionsKeys = { ["[]"] = 1, ["()"] = 2, ["Hyphen"] =3, ["No Brackets"] = 4 }
-    
+
     local itemBracketOptions = {"[]", "()", "Hyphen", "No Brackets"}
     local itemBracketOptionsKeys = { ["[]"] = 1, ["()"] = 2, ["Hyphen"] =3, ["No Brackets"] = 4 }
-    
+
     local experienceDisplayOptions = {"Value", "Percentage", "Both"}
     local experienceDisplayOptionsKeys = { ["Value"] = 1, ["Percentage"] = 2, ["Both"] = 3 }
 
@@ -166,7 +166,7 @@ local function LUIE_CreateSettings()
     local rotationOptionsKeys = { ["Horizontal"] = 1, ["Vertical"] = 2 }
     local hAlignOptions = { L.Setting_Left, L.Setting_Center, L.Setting_Right }
     local vAlignOptions = { L.Setting_Top, L.Setting_Middle, L.Setting_Bottom }
-    
+
     local panelData = {
         type = "panel",
         name = LUIE.name,
@@ -178,7 +178,7 @@ local function LUIE_CreateSettings()
         registerForRefresh = true,
         registerForDefaults = true,
     }
-    
+
     local panelDataUnitFrames = {
         type = "panel",
         name = LUIE.name .. " - Unit Frames",
@@ -193,15 +193,15 @@ local function LUIE_CreateSettings()
 
     local optionsData = {}
     local optionsDataUnitFrames = {}
-  
+
     optionsData[#optionsData + 1] = {
         type = "button",
         name = "Reload UI",
         tooltip = "This will reload UI",
         func = function() ReloadUI("ingame") end,
         width = "full",
-    }    
-    --[[ INFO PANEL OPTIONS ]]-- 
+    }
+    --[[ INFO PANEL OPTIONS ]]--
     optionsData[#optionsData + 1] = {
         type = "submenu",
         name = "Info Panel Options",
@@ -216,7 +216,7 @@ local function LUIE_CreateSettings()
                 warning = "Will need to reload the UI.",
                 default = LUIE.D.InfoPanel_Enabled,
             },
-            {   
+            {
                 type = "checkbox",
                 name = "Unlock panel",
                 tooltip = "Allow mouse dragging for Info Panel.",
@@ -227,7 +227,7 @@ local function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.InfoPanel_Enabled end,
                 resetFunc = LUIE.InfoPanel.ResetPosition,
             },
-            {                    
+            {
                 type = "button",
                 name = "Reset position",
                 tooltip = "This will reset position of Info Panel into screen top right corner.",
@@ -357,7 +357,7 @@ local function LUIE_CreateSettings()
             },
         },
     }
-    --[[ COMBAT INFO OPTIONS ]]-- 
+    --[[ COMBAT INFO OPTIONS ]]--
     optionsData[#optionsData + 1] = {
         type = "submenu",
         name = "Combat Info Options",
@@ -836,7 +836,7 @@ local function LUIE_CreateSettings()
             },
         },
     }
-    --[[ BUFFS AND DEBUFFS OPTIONS ]]-- 
+    --[[ BUFFS AND DEBUFFS OPTIONS ]]--
     optionsData[#optionsData + 1] = {
         type = "submenu",
         name = "Buffs and Debuffs Options",
@@ -1152,7 +1152,7 @@ local function LUIE_CreateSettings()
             },
         },
     }
-    --[[ DAMAGE METER & COMBAT LOG ]]-- 
+    --[[ DAMAGE METER & COMBAT LOG ]]--
     optionsData[#optionsData + 1] = {
         type = "submenu",
         name = "Damage Meter & Combat Log",
@@ -1317,9 +1317,9 @@ local function LUIE_CreateSettings()
                 text = "This component will create new chat tab 'CombatLog' and will send all combat related text into it. If you delete this tab it will be automatically recreated. If you wish to stop using this component, then first disable it here in menu and after it delete chat tab manually.",
             },
         },
-    
+
     }
-    --[[ CHAT ANNOUNCEMENTS OPTIONS ]]-- 
+    --[[ CHAT ANNOUNCEMENTS OPTIONS ]]--
     optionsData[#optionsData + 1] = {
         type = "submenu",
         name = "Chat Announcements Options",
@@ -1934,8 +1934,8 @@ local function LUIE_CreateSettings()
             },
         },
     }
-    
-    --[[ STARTUP MESSAGE OPTIONS ]]-- 
+
+    --[[ STARTUP MESSAGE OPTIONS ]]--
     optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = "Disable startup message",
@@ -1945,7 +1945,7 @@ local function LUIE_CreateSettings()
         width = "full",
         default = LUIE.D.StartupInfo,
     }
-    
+
     for i = 1, GetNumAchievementCategories() do
         local name = GetAchievementCategoryInfo(i)
         local checkbox = {
@@ -1962,9 +1962,9 @@ local function LUIE_CreateSettings()
         -- THIS SUCKS!!!
         table.insert(optionsData[6].controls, checkbox)
     end
-    
+
     --[[  BEGIN UNIT FRAMES SETTING PANEL ]]--
-    
+
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
         name = "Enable Unit Frames Module",
@@ -2100,7 +2100,7 @@ local function LUIE_CreateSettings()
         width = "full",
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.DefaultFontFace,
-    } 
+    }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Font Size",
@@ -2111,7 +2111,7 @@ local function LUIE_CreateSettings()
         width = "full",
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.DefaultFontSize,
-    }   
+    }
      optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = "Font Style",
@@ -2123,7 +2123,7 @@ local function LUIE_CreateSettings()
         width = "full",
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.DefaultFontStyle,
-    }    
+    }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
         name = "Colour of text labels",
@@ -2132,7 +2132,7 @@ local function LUIE_CreateSettings()
         width = "full",
         default = { r=LUIE.UnitFrames.D.DefaultTextColour[1], g=LUIE.UnitFrames.D.DefaultTextColour[2], b=LUIE.UnitFrames.D.DefaultTextColour[3] },
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-    }     
+    }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
         name = "Target class icon",
@@ -2207,7 +2207,7 @@ local function LUIE_CreateSettings()
         width = "full",
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.CustomFormatTwo,
-    }   
+    }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = "Font",
@@ -2345,7 +2345,7 @@ local function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.CustomShieldBarFull,
         warning = "Will need to reload the UI.",
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and not LUIE.UnitFrames.SV.CustomShieldBarSeparate ) end,
-    }  
+    }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
         name = "Use Smooth Bar Transition",
@@ -2653,7 +2653,7 @@ local function LUIE_CreateSettings()
         width = "full",
         default = not LUIE.UnitFrames.D.GroupDisableDefault,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
-    }  
+    }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
         name = "Include Player in Group Frame",
@@ -2903,7 +2903,7 @@ local function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = nameDisplayOptions[2]
     }
-    --[[    
+    --[[
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = "Font Style",
@@ -2917,7 +2917,7 @@ local function LUIE_CreateSettings()
         disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.RemainingText ) end,
     }
     ]]--
-    
+
     LAM2:RegisterAddonPanel('LUIEAddonOptions', panelData)
     LAM2:RegisterOptionControls('LUIEAddonOptions', optionsData)
 
@@ -2933,7 +2933,7 @@ local function LUIE_LoadScreen()
     end
 end
 
---[[ 
+--[[
  * Runs on the EVENT_ACTION_LAYER_POPPED and EVENT_ACTION_LAYER_PUSHED listeners.
  * This handler is used to hide and show all GUI elements when player opens any sort of menu.
  ]]--
@@ -2942,7 +2942,7 @@ local function LUIE_ToggleVisibility(eventCode, layerIndex, activeLayerIndex)
     for _, control in pairs( LUIE.components ) do
         control:SetHidden( hidden )
     end
-end 
+end
 
 local function LUIE_RegisterEvents()
     EVENT_MANAGER:RegisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED, LUIE_LoadScreen)
@@ -2959,7 +2959,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
     -- Load additional media from LMP and other addons
     LUIE_LoadMedia()
-    
+
     -- Load saved variables
     LUIE_LoadSavedVars()
 
@@ -3004,10 +3004,10 @@ end
     Helper and utility functions
 --]]----------------------------------------------------------
 
---[[ 
+--[[
  * Returns a formatted number with commas
  ]]--
- 
+
  --Function no comma to be added in a later date.
 function LUIE.CommaValue(number, shorten, noncomma)
     if number > 0 and shorten then
@@ -3025,7 +3025,7 @@ function LUIE.CommaValue(number, shorten, noncomma)
         else
             value = number
         end
-        
+
         -- if we could not conver even to 'G', return full number with commas
         if value >= 1000 then
             value = LUIE.CommaValue(number)
