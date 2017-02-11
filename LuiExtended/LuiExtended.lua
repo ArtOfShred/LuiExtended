@@ -1345,7 +1345,7 @@ local function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = "\t\tInclude Timestamp",
-                tooltip = "Where possible prepend printed text with current time label.",
+                tooltip = "Prepend printed text with current time label.",
                 getFunc = function() return LUIE.ChatAnnouncements.SV.TimeStamp end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.TimeStamp = value end,
                 width = "full",
@@ -1379,7 +1379,7 @@ local function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = "Print Trade Changes",
-                tooltip = "Print message to chat when player joins or leaves the group.",
+                --tooltip = "",
                 getFunc = function() return LUIE.ChatAnnouncements.SV.MiscTrade end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscTrade = value LUIE.ChatAnnouncements.RegisterTradeEvents() end,
                 width = "full",
@@ -1388,7 +1388,7 @@ local function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = "Print Mail Changes",
-                tooltip = "Print message to chat when player joins or leaves the group.",
+                --tooltip = "",
                 getFunc = function() return LUIE.ChatAnnouncements.SV.MiscMail end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscMail = value LUIE.ChatAnnouncements.RegisterMailEvents() end,
                 width = "full",
@@ -1397,7 +1397,7 @@ local function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = "Print Guild event messages",
-                tooltip = "Print message to chat when player joins or leaves the group.",
+                --tooltip = "",
                 getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuild end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuild = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
                 width = "full",
@@ -1406,7 +1406,7 @@ local function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = "Show Bag/Bank Upgrade Messages",
-                tooltip = "LOL I LIKE DINOSAURS",
+                --tooltip = "",
                 getFunc = function() return LUIE.ChatAnnouncements.SV.MiscBags end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscBags = value LUIE.ChatAnnouncements.RegisterBagEvents() end,
                 width = "full",
@@ -1415,7 +1415,7 @@ local function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = "Show Lockpick Success/Failure Messages",
-                tooltip = "KEK AT ME BOY ONE MORE TIME",
+                --tooltip = "",
                 getFunc = function() return LUIE.ChatAnnouncements.SV.MiscLockpick end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscLockpick = value LUIE.ChatAnnouncements.RegisterLockpickEvents() end,
                 width = "full",
