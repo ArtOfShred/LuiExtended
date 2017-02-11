@@ -14,6 +14,7 @@ local tinsert       = table.insert
 local moduleName    = LUIE.name .. '_ChatAnnouncements'
 
 CA.D = {
+    ChatUseSystem                 = false,
     TimeStamp                     = true,
     TimeStampFormat               = "HH:m",
     GroupChatMsg                  = true,
@@ -411,7 +412,7 @@ end
     printToChat function used in next sections
 --]]----------------------------------------------------------
 function printToChat(msg)
-    if CA.ChatUseSystem and CHAT_SYSTEM.primaryContainer then
+    if CA.SV.ChatUseSystem and CHAT_SYSTEM.primaryContainer then
         local msg = CA.FormatMessage(msg or "no message", CA.SV.TimeStamp)
         -- Post as a System message so that it can appear in multiple tabs.
         CHAT_SYSTEM.primaryContainer:OnChatEvent(nil, msg, CHAT_CATEGORY_SYSTEM)
