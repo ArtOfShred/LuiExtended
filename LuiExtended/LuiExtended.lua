@@ -1325,11 +1325,6 @@ local function LUIE_CreateSettings()
         name = "Chat Announcements Options",
         controls = {
             {
-                type = "header",
-                name = "Misc Announcements",
-                width = "full",
-            },
-            {
                 type = "dropdown",
                 name = "Player Name Display Method",
                 choices = chatnameDisplayOptions,
@@ -1366,6 +1361,11 @@ local function LUIE_CreateSettings()
                 width = "full",
                 disabled = function() return not LUIE.ChatAnnouncements.SV.TimeStamp end,
                 default = LUIE.ChatAnnouncements.D.TimeStampFormat,
+            },
+            {
+                type = "header",
+                name = "Misc Announcements",
+                width = "full",
             },
             {
                 type = "checkbox",
