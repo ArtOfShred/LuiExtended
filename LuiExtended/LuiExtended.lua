@@ -1559,6 +1559,13 @@ local function LUIE_CreateSettings()
                 getFunc = function() return currencyBracketOptions[LUIE.ChatAnnouncements.SV.CurrencyBracketDisplayOptions] end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyBracketDisplayOptions = currencyBracketOptionsKeys[value] end,
                 width = "full",
+                disabled = function() return not
+                    (
+                        LUIE.ChatAnnouncements.SV.GoldChange or
+                        LUIE.ChatAnnouncements.SV.AlliancePointChange or
+                        LUIE.ChatAnnouncements.SV.TelVarStoneChange or
+                        LUIE.ChatAnnouncements.SV.WritVoucherChange
+                    ) end,
                 default = currencyBracketOptions[1]
             },
             {
@@ -1568,6 +1575,13 @@ local function LUIE_CreateSettings()
                 getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyContextToggle end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyContextToggle = value end,
                 width = "full",
+                disabled = function() return not
+                    (
+                        LUIE.ChatAnnouncements.SV.GoldChange or
+                        LUIE.ChatAnnouncements.SV.AlliancePointChange or
+                        LUIE.ChatAnnouncements.SV.TelVarStoneChange or
+                        LUIE.ChatAnnouncements.SV.WritVoucherChange
+                    ) end,
                 default = LUIE.ChatAnnouncements.D.CurrencyContextToggle,
             },
             {
@@ -1597,6 +1611,13 @@ local function LUIE_CreateSettings()
                 getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyTotalMessage end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyTotalMessage = value end,
                 width = "full",
+                disabled = function() return not
+                    (
+                        LUIE.ChatAnnouncements.SV.GoldChange or
+                        LUIE.ChatAnnouncements.SV.AlliancePointChange or
+                        LUIE.ChatAnnouncements.SV.TelVarStoneChange or
+                        LUIE.ChatAnnouncements.SV.WritVoucherChange
+                    ) end,
                 default = LUIE.ChatAnnouncements.D.CurrencyTotalMessage,
             },
             {
@@ -1665,7 +1686,14 @@ local function LUIE_CreateSettings()
                 getFunc = function() return LUIE.ChatAnnouncements.SV.LootOnlyNotable end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.LootOnlyNotable = value end,
                 width = "full",
-                disabled = function() return not LUIE.ChatAnnouncements.SV.Loot end,
+                disabled = function() return not
+                    (
+                        LUIE.ChatAnnouncements.SV.Loot or
+                        LUIE.ChatAnnouncements.SV.LootCraft or
+                        LUIE.ChatAnnouncements.SV.LootTrade or
+                        LUIE.ChatAnnouncements.SV.LootMail or
+                        LUIE.ChatAnnouncements.SV.LootVendor
+                    ) end,
                 default = LUIE.ChatAnnouncements.D.LootOnlyNotable,
             },
             {
@@ -1685,6 +1713,14 @@ local function LUIE_CreateSettings()
                 getFunc = function() return LUIE.ChatAnnouncements.SV.LootShowArmorType end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.LootShowArmorType = value end,
                 width = "full",
+                disabled = function() return not
+                    (
+                        LUIE.ChatAnnouncements.SV.Loot or
+                        LUIE.ChatAnnouncements.SV.LootCraft or
+                        LUIE.ChatAnnouncements.SV.LootTrade or
+                        LUIE.ChatAnnouncements.SV.LootMail or
+                        LUIE.ChatAnnouncements.SV.LootVendor
+                    ) end,
                 default = LUIE.ChatAnnouncements.D.LootShowArmorType,
             },
             {
@@ -1694,6 +1730,14 @@ local function LUIE_CreateSettings()
                 getFunc = function() return LUIE.ChatAnnouncements.SV.LootShowTrait end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.LootShowTrait = value end,
                 width = "full",
+                disabled = function() return not
+                    (
+                        LUIE.ChatAnnouncements.SV.Loot or
+                        LUIE.ChatAnnouncements.SV.LootCraft or
+                        LUIE.ChatAnnouncements.SV.LootTrade or
+                        LUIE.ChatAnnouncements.SV.LootMail or
+                        LUIE.ChatAnnouncements.SV.LootVendor
+                    ) end,
                 default = LUIE.ChatAnnouncements.D.LootShowTrait,
             },
             {
@@ -1703,6 +1747,14 @@ local function LUIE_CreateSettings()
                 getFunc = function() return LUIE.ChatAnnouncements.SV.LootShowStyle end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.LootShowStyle = value end,
                 width = "full",
+                disabled = function() return not
+                    (
+                        LUIE.ChatAnnouncements.SV.Loot or
+                        LUIE.ChatAnnouncements.SV.LootCraft or
+                        LUIE.ChatAnnouncements.SV.LootTrade or
+                        LUIE.ChatAnnouncements.SV.LootMail or
+                        LUIE.ChatAnnouncements.SV.LootVendor
+                    ) end,
                 default = LUIE.ChatAnnouncements.D.LootShowStyle,
             },
             {
@@ -1712,7 +1764,14 @@ local function LUIE_CreateSettings()
                 getFunc = function() return LUIE.ChatAnnouncements.SV.LootNotTrash end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.LootNotTrash = value end,
                 width = "full",
-                disabled = function() return not LUIE.ChatAnnouncements.SV.Loot end,
+                disabled = function() return not
+                    (
+                        LUIE.ChatAnnouncements.SV.Loot or
+                        LUIE.ChatAnnouncements.SV.LootCraft or
+                        LUIE.ChatAnnouncements.SV.LootTrade or
+                        LUIE.ChatAnnouncements.SV.LootMail or
+                        LUIE.ChatAnnouncements.SV.LootVendor
+                    ) end,
                 default = LUIE.ChatAnnouncements.D.LootNotTrash,
             },
             {
@@ -1722,7 +1781,14 @@ local function LUIE_CreateSettings()
                 getFunc = function() return LUIE.ChatAnnouncements.SV.LootBlacklist end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.LootBlacklist = value end,
                 width = "full",
-                disabled = function() return not LUIE.ChatAnnouncements.SV.Loot end,
+                disabled = function() return not
+                    (
+                        LUIE.ChatAnnouncements.SV.Loot or
+                        LUIE.ChatAnnouncements.SV.LootCraft or
+                        LUIE.ChatAnnouncements.SV.LootTrade or
+                        LUIE.ChatAnnouncements.SV.LootMail or
+                        LUIE.ChatAnnouncements.SV.LootVendor
+                    ) end,
                 default = LUIE.ChatAnnouncements.D.LootBlacklist,
             },
             {
@@ -1733,6 +1799,14 @@ local function LUIE_CreateSettings()
                 getFunc = function() return itemBracketOptions[LUIE.ChatAnnouncements.SV.ItemBracketDisplayOptions] end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.ItemBracketDisplayOptions = itemBracketOptionsKeys[value] end,
                 width = "full",
+                disabled = function() return not
+                    (
+                        LUIE.ChatAnnouncements.SV.Loot or
+                        LUIE.ChatAnnouncements.SV.LootCraft or
+                        LUIE.ChatAnnouncements.SV.LootTrade or
+                        LUIE.ChatAnnouncements.SV.LootMail or
+                        LUIE.ChatAnnouncements.SV.LootVendor
+                    ) end,
                 default = itemBracketOptions[1]
             },
             {
@@ -1742,6 +1816,14 @@ local function LUIE_CreateSettings()
                 getFunc = function() return LUIE.ChatAnnouncements.SV.ItemContextToggle end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.ItemContextToggle = value end,
                 width = "full",
+                disabled = function() return not
+                    (
+                        LUIE.ChatAnnouncements.SV.Loot or
+                        LUIE.ChatAnnouncements.SV.LootCraft or
+                        LUIE.ChatAnnouncements.SV.LootTrade or
+                        LUIE.ChatAnnouncements.SV.LootMail or
+                        LUIE.ChatAnnouncements.SV.LootVendor
+                    ) end,
                 default = LUIE.ChatAnnouncements.D.ItemContextToggle,
             },
             {
@@ -1751,7 +1833,7 @@ local function LUIE_CreateSettings()
                 getFunc = function() return LUIE.ChatAnnouncements.SV.ItemContextMessage end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.ItemContextMessage = value end,
                 width = "full",
-                disabled =  function() return not LUIE.ChatAnnouncements.SV.ItemContextToggle end,
+                disabled = function() return not LUIE.ChatAnnouncements.SV.ItemContextToggle end,
                 default = LUIE.ChatAnnouncements.D.ItemContextMessage,
             },
             {
@@ -1761,6 +1843,14 @@ local function LUIE_CreateSettings()
                 getFunc = function() return LUIE.ChatAnnouncements.SV.LootCurrencyCombo end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.LootCurrencyCombo = value end,
                 width = "full",
+                disabled = function() return not
+                    (
+                        LUIE.ChatAnnouncements.SV.Loot or
+                        LUIE.ChatAnnouncements.SV.LootCraft or
+                        LUIE.ChatAnnouncements.SV.LootTrade or
+                        LUIE.ChatAnnouncements.SV.LootMail or
+                        LUIE.ChatAnnouncements.SV.LootVendor
+                    ) end,
                 default = LUIE.ChatAnnouncements.D.LootCurrencyCombo,
             },
             {
