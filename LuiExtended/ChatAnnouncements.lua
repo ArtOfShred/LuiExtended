@@ -200,16 +200,13 @@ local message = ""
         message = (strfmt("%s, %s, %s", rolestring1, rolestring2, rolestring3) )
     end
     
-    if CHAT_SYSTEM then
-        if updatedRoleName ~= g_playerNameFormatted then
-            if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r has updated their role: %s", displayNameLink, message) ) end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has updated their role: %s", characterNameLink, message) ) end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has updated their role: %s", displayBoth, message) ) end
-        else
-            printToChat(strfmt("You have updated your role: %s", message) )
-        end
+    if updatedRoleName ~= g_playerNameFormatted then
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r has updated their role: %s", displayNameLink, message) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has updated their role: %s", characterNameLink, message) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has updated their role: %s", displayBoth, message) ) end
+    else
+        printToChat(strfmt("You have updated your role: %s", message) )
     end
-
 end
 ]]--
 
@@ -225,17 +222,16 @@ function CA.GMCS(eventCode, unitTag, isOnline)
     local displayBothString = ( strfmt("%s%s", onlineRoleName, onlineRoleDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, onlineRoleDisplayName)
     
-        if CHAT_SYSTEM then
-            if not isOnline and onlineRoleName ~=g_playerNameFormatted then
-                if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r has disconnected.", displayNameLink) ) end
-                if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has disconnected.", characterNameLink) ) end
-                if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has disconnected.", displayBoth) ) end
-            elseif isOnline and onlineRoleName ~=g_playerNameFormatted then
-                if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r has reconnected.", displayNameLink) ) end
-                if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has reconnected.", characterNameLink) ) end
-                if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has reconnected.", displayBoth) ) end
-            end
-        end
+    
+    if not isOnline and onlineRoleName ~=g_playerNameFormatted then
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r has disconnected.", displayNameLink) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has disconnected.", characterNameLink) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has disconnected.", displayBoth) ) end
+    elseif isOnline and onlineRoleName ~=g_playerNameFormatted then
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r has reconnected.", displayNameLink) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has reconnected.", characterNameLink) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has reconnected.", displayBoth) ) end
+    end
 end
 ]]--
 
@@ -249,13 +245,12 @@ function CA.OnGroupInviteReceived (eventCode, inviterName, inviterDisplayName)
     local displayBothString = ( strfmt("%s%s", inviterName, inviterDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
     
-        if CHAT_SYSTEM then
-            if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r has invited you to join a group.", displayNameLink) ) end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has invited you to join a group.", characterNameLink) ) end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has invited you to join a group.", displayBoth) ) end
-            EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED) -- On receiving a group invite, it fires 2 events, we disable the event handler temporarily for this then recall it after.
-            zo_callLater(CA.RefreshGroupInviteEnable, 100)
-        end
+        
+    if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r has invited you to join a group.", displayNameLink) ) end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has invited you to join a group.", characterNameLink) ) end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has invited you to join a group.", displayBoth) ) end
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED) -- On receiving a group invite, it fires 2 events, we disable the event handler temporarily for this then recall it after.
+    zo_callLater(CA.RefreshGroupInviteEnable, 100)
 end
 
 -- Prints a message to chat when invites are declined or failed. Currently broken as of 2/9/2017 so we have to omit any names from this function until it returns the correct InviteeName and InviteeDisplayName instead
@@ -289,14 +284,12 @@ function CA.OnGroupLeaderUpdate (eventCode, leaderTag)
     local displayBothString = ( strfmt("%s%s", groupLeaderName, groupLeaderAccount) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, groupLeaderAccount)
     
-    if CHAT_SYSTEM then
-        if g_playerNameFormatted ~= groupLeaderName then -- If another player became the leader
-            if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r is now the group leader!", displayNameLink) ) end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r is now the group leader!", characterNameLink) ) end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then  printToChat(strfmt("%s|r is now the group leader!", displayBoth) ) end
-        elseif g_playerNameFormatted == groupLeaderName then -- If the player character became the leader
-            printToChat(strfmt("You are now the group leader!") )
-        end
+    if g_playerNameFormatted ~= groupLeaderName then -- If another player became the leader
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r is now the group leader!", displayNameLink) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r is now the group leader!", characterNameLink) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r is now the group leader!", displayBoth) ) end
+    elseif g_playerNameFormatted == groupLeaderName then -- If the player character became the leader
+        printToChat(strfmt("You are now the group leader!") )
     end
 end
 
@@ -330,11 +323,9 @@ function CA.OnGroupMemberJoined(eventCode, memberName)
         local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(joinedMemberAccountName)
         local displayBothString = ( strfmt("%s%s", joinedMemberName, joinedMemberAccountName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, joinedMemberAccountName)
-        if CHAT_SYSTEM then
-            if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r has joined the group.", displayNameLink) ) end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has joined the group.", characterNameLink) ) end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has joined the group.", displayBoth) ) end
-        end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r has joined the group.", displayNameLink) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has joined the group.", characterNameLink) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has joined the group.", displayBoth) ) end
     elseif g_playerName == memberName then
         printToChat ("You have joined a group.") -- Only prints on the initial group form between 2 players.
     end
@@ -360,11 +351,9 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
     end
     if msg then
         -- Can occur if event is before EVENT_PLAYER_ACTIVATED
-        if CHAT_SYSTEM then
-            if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt(msg, displayNameLink)) end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt(msg, characterNameLink)) end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt(msg, displayBoth)) end
-        end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt(msg, displayNameLink)) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt(msg, characterNameLink)) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt(msg, displayBoth)) end
     end
 end
 
@@ -413,16 +402,7 @@ end
 function CA.FormatMessage(msg, doTimestamp)
     local msg = msg or ""
     if doTimestamp then
-        --[[ Disabling this code, for now
-        -- We want to have timestamp of the same colour as the message
-        local timeStamp = '[' .. GetTimeString() .. '] '
-        if "|c" == strsub(msg, 0, 2) then
-            msg = strsub(msg, 0, 8) .. timeStamp .. strsub(msg, 9)
-        else
-            msg = timeStamp .. msg
-        end
-        ]]-- Instead just put gray timestamp
-        msg = '|c8F8F8F[' .. CreateTimestamp(GetTimeString()) .. ']|r ' .. msg
+        msg = "|c8F8F8F[" .. CreateTimestamp(GetTimeString()) .. "]|r " .. msg
     end
     return msg
 end
@@ -431,11 +411,12 @@ end
     printToChat function used in next sections
 --]]----------------------------------------------------------
 function printToChat(msg)
-    local msg = CA.FormatMessage(msg or 'no message', CA.SV.TimeStamp)
-    if (CHAT_SYSTEM.primaryContainer) then
-        -- If possible, post as a System message so that it can appear in multiple tabs.
+    if CA.ChatUseSystem and CHAT_SYSTEM.primaryContainer then
+        local msg = CA.FormatMessage(msg or "no message", CA.SV.TimeStamp)
+        -- Post as a System message so that it can appear in multiple tabs.
         CHAT_SYSTEM.primaryContainer:OnChatEvent(nil, msg, CHAT_CATEGORY_SYSTEM)
     else
+        -- Post as a normal message
         CHAT_SYSTEM:AddMessage(msg)
     end
 end 
@@ -587,7 +568,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     elseif reason == 3 and UpOrDown > 0 then message = ( "Traded" )
     elseif reason == 3 and UpOrDown < 0 then message = ( "Traded" )
     
-    if reason == 3 and CHAT_SYSTEM and CA.SV.MiscTrade then printToChat ("Trade complete.") end
+    if reason == 3 and CA.SV.MiscTrade then printToChat ("Trade complete.") end
     
     -- Receive from Quest Reward (4), Sell to Fence (63)
     elseif reason == 4 or reason == 63 then message = ( "Received" )
@@ -694,8 +675,8 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             total = ''
         end
         
-        if CHAT_SYSTEM and CA.SV.MiscMail then printToChat ("Mail sent!") end
-        --if ( CHAT_SYSTEM and CA.SV.MiscMail and mailCOD ~= 0 ) then printToChat ("COD sent!") end
+        if CA.SV.MiscMail then printToChat ("Mail sent!") end
+        --if ( CA.SV.MiscMail and mailCOD ~= 0 ) then printToChat ("COD sent!") end
         
         if mailMoney ~= 0 then printToChat ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) ) end
         
@@ -1578,11 +1559,9 @@ function CA.TradeInviteWaiting(eventCode, inviteeCharacterName, inviteeDisplayNa
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviteeDisplayName)
     local displayBothString = ( strfmt("%s%s", gsub(inviteeCharacterName,"%^%a+",""), inviteeDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviteeDisplayName)
-    if CHAT_SYSTEM then
-        if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then printToChat ("You've invited " .. displayNameLink .. " to trade.") end
-        if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 2 then printToChat ("You've invited " .. characterNameLink .. " to trade.") end 
-        if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then printToChat ("You've invited " .. displayBoth .. " to trade.") end 
-    end
+    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then printToChat ("You've invited " .. displayNameLink .. " to trade.") end
+    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 2 then printToChat ("You've invited " .. characterNameLink .. " to trade.") end
+    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then printToChat ("You've invited " .. displayBoth .. " to trade.") end
 end
 
 -- These 2 functions help us get the name of the person we are trading with regardless of who initiated the trade
@@ -1592,22 +1571,20 @@ function CA.TradeInviteConsidering(eventCode, inviterCharacterName, inviterDispl
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
     local displayBothString = ( strfmt("%s%s", gsub(inviterCharacterName,"%^%a+",""), inviterDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
-    if CHAT_SYSTEM then
-        if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then printToChat ( displayNameLink .. " has invited you to trade.") end
-        if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 2 then printToChat ( characterNameLink .. " has invited you to trade.") end 
-        if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then printToChat ( displayBoth .. " has invited you to trade.") end 
-    end
+    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then printToChat ( displayNameLink .. " has invited you to trade.") end
+    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 2 then printToChat ( characterNameLink .. " has invited you to trade.") end 
+    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then printToChat ( displayBoth .. " has invited you to trade.") end 
 end
 
 function CA.TradeInviteAccepted(eventCode)
     
-    if CHAT_SYSTEM and CA.SV.MiscTrade then printToChat ("Trade invite accepted.") end
+    if CA.SV.MiscTrade then printToChat ("Trade invite accepted.") end
     
 end
 
 function CA.TradeInviteDecline (eventCode)
 
-    if CHAT_SYSTEM and CA.SV.MiscTrade then printToChat ("Trade invite declined.") end
+    if CA.SV.MiscTrade then printToChat ("Trade invite declined.") end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
     TradeInviter = ""
@@ -1617,7 +1594,7 @@ end
 
 function CA.TradeInviteCancel (eventCode)
 
-    if CHAT_SYSTEM and CA.SV.MiscTrade then printToChat ("Trade invite canceled.") end
+    if CA.SV.MiscTrade then printToChat ("Trade invite canceled.") end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
     TradeInviter = ""
@@ -1661,7 +1638,7 @@ end
 -- Cleanup if a Trade is canceled/exited
 function CA.TradeCancel (eventCode, cancelerName)
 
-    if CHAT_SYSTEM and CA.SV.MiscTrade then printToChat ("Trade canceled.") end
+    if CA.SV.MiscTrade then printToChat ("Trade canceled.") end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
     TradeInviter = ""
@@ -1671,7 +1648,7 @@ end
 
 function CA.TradeFail (eventCode, cancelerName)
 
-    if CHAT_SYSTEM and CA.SV.MiscTrade then printToChat ("Trade failed.") end
+    if CA.SV.MiscTrade then printToChat ("Trade failed.") end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
     TradeInviter = ""
@@ -1684,7 +1661,7 @@ function CA.OnTradeSuccess (eventCode)
     
     combostring = ""
     
-    if (CHAT_SYSTEM and CA.SV.MiscTrade) and not CA.SV.GoldChange then printToChat ("Trade complete.") end
+    if CA.SV.MiscTrade and not CA.SV.GoldChange then printToChat ("Trade complete.") end
     
     if CA.SV.LootTrade then
     
@@ -1890,7 +1867,7 @@ end
 
 function CA.OnMailFail (eventCode, reason)
 
-    if CHAT_SYSTEM and CA.SV.MiscMail then
+    if CA.SV.MiscMail then
         if reason == 2 then printToChat ("Cannot send mail: Unknown Player.") end
         if reason == 3 then printToChat ("Cannot send mail: Recipient's Inbox is full.") end
         if reason == 4 then printToChat ("You cannot send mail to that recipient.") end
@@ -1906,8 +1883,8 @@ function CA.OnMailSuccess (eventCode)
     
     combostring = ""
     
-    if ( CHAT_SYSTEM and CA.SV.MiscMail ) and not CA.SV.GoldChange then printToChat ("Mail sent!") end
-    --if ( CHAT_SYSTEM and CA.SV.MiscMail and mailCOD ~= 0 ) and not CA.SV.GoldChange then printToChat ("COD sent!") end
+    if CA.SV.MiscMail and not CA.SV.GoldChange then printToChat ("Mail sent!") end
+    --if ( CA.SV.MiscMail and mailCOD ~= 0 ) and not CA.SV.GoldChange then printToChat ("COD sent!") end
 
     if CA.SV.LootMail then
  
