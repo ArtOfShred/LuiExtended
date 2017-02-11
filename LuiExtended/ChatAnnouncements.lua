@@ -1438,8 +1438,7 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
     
     if ( isPickpocketLoot ) then logPrefix = "Pickpocket" end
     if ( receivedBy == nil ) then logPrefix = "Received" end
-    if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
-    
+    if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end   
     
     local gainorloss = "|c0B610B"
     
@@ -1452,26 +1451,26 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
                  (lootType == LOOT_TYPE_COLLECTIBLE) or
                  (notableIDs[itemId]) ) then
                 
-                CA.LogItem(logPrefix, icon, itemName, itemType, quantity, lootedBySelf and "" or receivedBy, gainorloss)
+                CA.LogItem( logPrefix, icon, itemName, itemType, quantity, lootedBySelf and "" or receivedBy, gainorloss )
             end
         elseif CA.SV.LootNotTrash and ( itemQuality == ITEM_QUALITY_TRASH ) then
             return
         else
-            CA.LogItem(logPrefix, icon, itemName, itemType, quantity, lootedBySelf and "" or receivedBy, gainorloss)
+            CA.LogItem( logPrefix, icon, itemName, itemType, quantity, lootedBySelf and "" or receivedBy, gainorloss )
         end
     elseif CA.SV.LootGroup then
         if ( (lootType ~= LOOT_TYPE_ITEM and lootType ~= LOOT_TYPE_COLLECTIBLE) or
-             (itemType == ITEMTYPE_CONTAINER ) ) then -- Don't show containers for group members
+             (itemType == ITEMTYPE_CONTAINER) or -- Don't show containers for group members
+             (itemQuality == ITEM_QUALITY_ARCANE and itemType == ITEMTYPE_RACIAL_STYLE_MOTIF) ) then -- Don't show blue motifs for group members
             return
         end
-        local itemQuality = GetItemLinkQuality(itemName)
         if ( (itemIsSet) or
              (itemQuality >= ITEM_QUALITY_ARCANE and itemIsSpecial) or
              (itemQuality >= ITEM_QUALITY_ARTIFACT and not itemIsKeyFragment) or
              (lootType == LOOT_TYPE_COLLECTIBLE) or
              (notableIDs[itemId]) ) then
 
-            CA.LogItem(logPrefix, icon, itemName, itemType, quantity, self and "" or receivedBy, gainorloss)
+            CA.LogItem( logPrefix, icon, itemName, itemType, quantity, self and "" or receivedBy, gainorloss )
         end
     end
 end
