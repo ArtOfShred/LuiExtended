@@ -130,7 +130,7 @@ local function CreateUIControls()
     uiFeedTimer.icon = UI.Texture( uiFeedTimer.control, {LEFT,LEFT}, {28,28}, "/esoui/art/mounts/tabicon_mounts_up.dds", nil, false )
     uiFeedTimer.label = UI.Label( uiFeedTimer.control, {LEFT,RIGHT,0,0,uiFeedTimer.icon}, {56,20}, {0,1}, g_infoPanelFont, "Feed Now", false )
     --uiFeedTimer.bg = UI.Backdrop( uiFeedTimer.control, "fill", nil, nil, nil, false )
-    
+
     uiArmour.control = UI.Control( uiBotRow, nil, {55,20}, false )
     uiArmour.icon = UI.Texture( uiArmour.control, {LEFT,LEFT}, {24,24}, "/esoui/art/progression/progression_indexicon_armor_up.dds", nil, false )
     uiArmour.label = UI.Label( uiArmour.control, {LEFT,RIGHT,0,0,uiArmour.icon}, {31,20}, {0,1}, g_infoPanelFont, "100%", false )
@@ -174,7 +174,7 @@ function PNL.RearrangePanel()
 
     -- reset scale of panel
     uiPanel:SetScale(1)
-    
+
     -- top row
     local anchor = nil
     local size = 0
@@ -283,7 +283,7 @@ function PNL.RearrangePanel()
     if PNL.SV.ShowTrophy then
         --todo
     end
-    
+
     -- set size of panel
     uiPanel:SetWidth( math.max( uiTopRow:GetWidth(), uiBotRow:GetWidth(), 39*6 ) )
 
@@ -416,7 +416,7 @@ function PNL.DoBagUpdate()
     if icon == "/esoui/art/icons/icon_missing.dds" then icon = "/esoui/art/icons/soulgem_001_empty.dds" end
     uiGems.icon:SetTexture( icon )
     uiGems.label:SetText( ( fullCount > 9 ) and fullText or ( fullText .. "/" .. emptyCount ) )
-    
+
     -- scan for trophies
     if PNL.SV.ShowTrophy then
         local tro = {}
@@ -484,7 +484,7 @@ function PNL.OnUpdate60()
     if not PNL.SV.HideMountFeed and not uiFeedTimer.hideLocally then
         local mountFeedTimer, mountFeedTotalTime = GetTimeUntilCanBeTrained()
         local mountFeedMessage = 'Maxed'
-        if ( mountFeedTimer ~= nil ) then 
+        if ( mountFeedTimer ~= nil ) then
             if ( mountFeedTimer == 0 ) then
                 local inventoryBonus, maxInventoryBonus, staminaBonus, maxStaminaBonus, speedBonus, maxSpeedBonus = GetRidingStats()
                 if inventoryBonus ~= maxInventoryBonus or staminaBonus ~= maxStaminaBonus or speedBonus ~= maxSpeedBonus then

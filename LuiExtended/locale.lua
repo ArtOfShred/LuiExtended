@@ -112,7 +112,7 @@ L.Skill_Pulsar                   = 39161
 L.Skill_Fiery_Pulsar             = 39162
 L.Skill_Icy_Pulsar               = 39163
 L.Skill_Electric_Pulsar          = 39167
--- Unmorphed Wall of Element Variations 
+-- Unmorphed Wall of Element Variations
 L.Skill_Wall_of_Fire             = 41659
 L.Skill_Wall_Of_Storms           = 41668
 L.Skill_Wall_of_Frost            = 41663
@@ -214,7 +214,7 @@ L.Skill_Consuming_Trap           = 40317
 L.Skill_Soul_Splitting_Trap      = 40328
 
 -- WEREWOLF -----------------
-L.Skill_Hircines_Rage            = 58317 
+L.Skill_Hircines_Rage            = 58317
 L.Skill_Hircines_Fortitude       = 58325
 L.Skill_Roar                     = 32633
 L.Skill_Ferocious_Roar           = 39113
@@ -254,7 +254,7 @@ L.Skill_Resolving_Vigor          = 61507
 L.Skill_Caltrops                 = 33376
 L.Skill_Anti_Cavalry_Caltrops    = 40255
 L.Skill_Razor_Caltrops           = 40242
-L.Skill_Magicka_Detonation       = 61487  
+L.Skill_Magicka_Detonation       = 61487
 L.Skill_Inevitable_Detonation    = 61491
 L.Skill_Proximity_Detonation     = 61500
 
