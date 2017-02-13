@@ -12,8 +12,6 @@ local colours        = LUIE.CombatInfo.Colours
 local strfmt         = string.format
 local strformat      = zo_strformat
 local IsUnitInCombat = IsUnitInCombat
-local tremove        = table.remove
-local tinsert        = table.insert
 
 local moduleName         = LUIE.name .. '_DamageMeter'
 local g_DamageMeterTitle = "LUIE Damage Meter"
@@ -1099,9 +1097,9 @@ function DM.AddMessage(message, doTimeStamp, category)
     -- store up to 20 last entries in saved variables table
     if g_CombatLogActivated and DM.SVC.LogSaveEnable then
         while #DM.SVC.LogSaved > 20 do
-            tremove(DM.SVC.LogSaved, 1)
+            table.remove(DM.SVC.LogSaved, 1)
         end
-        tinsert(DM.SVC.LogSaved, message)
+        table.insert(DM.SVC.LogSaved, message)
     end
 end
 

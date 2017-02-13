@@ -9,10 +9,7 @@ local CommaValue          = LUIE.CommaValue
 local DelayBuffer         = LUIE.DelayBuffer
 local ParseLanguageString = LUIE.ParseLanguageString
 local strformat           = string.format
-local strsub              = string.sub
-local tinsert             = table.insert
-local tsort = table.sort
-local pairs = pairs
+local pairs               = pairs -- What does this do?
 
 local moduleName    = LUIE.name .. '_UnitFrames'
 
@@ -202,7 +199,7 @@ function UF.GetDefaultFramesOptions(frame)
     local retval = {}
     for k,v in pairs(g_DefaultFramesOptions) do
         if k ~= 1 or frame == 'Player' or frame == 'Target' then
-            tinsert( retval, v )
+            table.insert( retval, v )
         end
     end
     return retval
@@ -266,7 +263,7 @@ local function CreateDefaultFrames()
     -- when default Target frame is enabled set the threshold value to change colour of label and add label to default fade list
     if g_DefaultFrames.reticleover[POWERTYPE_HEALTH] then
         g_DefaultFrames.reticleover[POWERTYPE_HEALTH].threshold = g_targetThreshold
-        tinsert( g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover[POWERTYPE_HEALTH].label )
+        table.insert( g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover[POWERTYPE_HEALTH].label )
     end
 
     -- create classIcon and friendIcon: they should work even when default unit frames extender is disabled
@@ -274,8 +271,8 @@ local function CreateDefaultFrames()
     g_DefaultFrames.reticleover.friendIcon = UI.Texture(g_targetUnitFrame.frame, nil, {32,32}, nil, nil, true)
     g_DefaultFrames.reticleover.friendIcon:SetAnchor(TOPLEFT, ZO_TargetUnitFramereticleoverTextArea, TOPRIGHT, 30, -4)
     -- add those 2 icons to automatic fade list, so fading will be done automatically by game
-    tinsert( g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover.classIcon )
-    tinsert( g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover.friendIcon )
+    table.insert( g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover.classIcon )
+    table.insert( g_targetUnitFrame.fadeComponents, g_DefaultFrames.reticleover.friendIcon )
 
     -- when default Group frame in use, then create dummy boolean field, so this setting remain constant between /reloadui calls
     if UF.SV.DefaultFramesGroup then
@@ -1118,7 +1115,7 @@ function UF.OnUnitCreated(eventCode, unitTag)
     if UF.CustomFrames.SmallGroup1 ~= nil or UF.CustomFrames.RaidGroup1 ~= nil then
 
         -- make sure we do not try to update bars on this unitTag before full group update is complete
-        if "group" == strsub(unitTag, 0, 5) then
+        if "group" == string.sub(unitTag, 0, 5) then
             UF.CustomFrames[unitTag] = nil
         end
 
@@ -1142,7 +1139,7 @@ function UF.OnUnitDestroyed(eventCode, unitTag)
     --CHAT_SYSTEM:AddMessage( strformat('[%s] OnUnitDestroyed: %s (%s)', GetTimeString(), unitTag, GetUnitName(unitTag)) )
 
     -- make sure we do not try to update bars on this unitTag before full group update is complete
-    if "group" == strsub(unitTag, 0, 5) then
+    if "group" == string.sub(unitTag, 0, 5) then
         UF.CustomFrames[unitTag] = nil
     end
 
@@ -1159,8 +1156,8 @@ end
 function UF.DefaultFramesCreateUnitGroupControls(unitTag)
     -- first make preparation for "groupN" unitTag labels
     if g_DefaultFrames[unitTag] == nil then -- if unitTag is already in our list, then skip this
-        if "group" == strsub(unitTag, 0, 5) then -- if it is really a group member unitTag
-            local i = strsub(unitTag, 6)
+        if "group" == string.sub(unitTag, 0, 5) then -- if it is really a group member unitTag
+            local i = string.sub(unitTag, 6)
             if _G['ZO_GroupUnitFramegroup' .. i] then
                 local parentBar     = _G['ZO_GroupUnitFramegroup' .. i .. 'Hp']
                 local parentName    = _G['ZO_GroupUnitFramegroup' .. i .. 'Name']
@@ -1582,7 +1579,7 @@ function UF.UpdateStaticControls( unitFrame )
     end
 
     -- finally set transparency for group frames that has .control field
-    if "group" == strsub(unitFrame.unitTag, 0, 5) and unitFrame.control then
+    if "group" == string.sub(unitFrame.unitTag, 0, 5) and unitFrame.control then
         unitFrame.control:SetAlpha( IsUnitInGroupSupportRange(unitFrame.unitTag) and 1 or 0.5 )
     end
 end
@@ -1729,10 +1726,10 @@ function UF.UpdateStat(unitTag, statType, attributeType, powerType )
     local statControls = {}
 
     if ( UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag][powerType] and UF.CustomFrames[unitTag][powerType].stat and UF.CustomFrames[unitTag][powerType].stat[statType] ) then
-        tinsert(statControls, UF.CustomFrames[unitTag][powerType].stat[statType])
+        table.insert(statControls, UF.CustomFrames[unitTag][powerType].stat[statType])
     end
     if ( g_AvaCustFrames[unitTag] and g_AvaCustFrames[unitTag][powerType] and g_AvaCustFrames[unitTag][powerType].stat and g_AvaCustFrames[unitTag][powerType].stat[statType] ) then
-        tinsert(statControls, g_AvaCustFrames[unitTag][powerType].stat[statType])
+        table.insert(statControls, g_AvaCustFrames[unitTag][powerType].stat[statType])
     end
 
     -- if we have a control, proceed next
@@ -2145,7 +2142,7 @@ function UF.CustomFramesGroupUpdate()
         local unitTag = 'group' .. i
         if DoesUnitExist(unitTag) then
             -- save this member for later sorting
-            tinsert(groupList, { ["unitTag"] = unitTag, ["unitName"] = GetUnitName(unitTag) } )
+            table.insert(groupList, { ["unitTag"] = unitTag, ["unitName"] = GetUnitName(unitTag) } )
             -- CustomFrames
             n = n + 1
         else
@@ -2204,7 +2201,7 @@ function UF.CustomFramesGroupUpdate()
     -- now we have local list with valid units and we are ready to sort it
     -- FIXME: Sorting is again hardcoded to be done always
     --if not raid or UF.SV.RaidSort then
-        tsort( groupList, function(x,y) return x.unitName < y.unitName end )
+        table.sort( groupList, function(x,y) return x.unitName < y.unitName end )
     --end
 
     -- loop through sorted list and put unitTag references into CustomFrames table

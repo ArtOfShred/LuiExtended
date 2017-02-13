@@ -7,9 +7,7 @@ local CA            = LUIE.ChatAnnouncements
 local CommaValue    = LUIE.CommaValue
 local strformat     = zo_strformat
 local strfmt        = string.format
-local strsub        = string.sub
 local gsub          = string.gsub
-local tinsert       = table.insert
 
 local moduleName    = LUIE.name .. '_ChatAnnouncements'
 

@@ -11,10 +11,7 @@ local L         = LUIE.GetLocale()
 local strfmt    = string.format
 local strformat = zo_strformat
 local strfind   = zo_plainstrfind
-local strlower  = zo_strlower
-local tinsert   = table.insert
-local tsort     = table.sort
-local pairs     = pairs
+local pairs     = pairs -- What does this do?
 
 local moduleName = LUIE.name .. '_SpellCastBuffs'
 
@@ -1870,19 +1867,19 @@ function SCB.OnUpdate(currentTime)
                     -- Filter Long-Term effects:
                     -- Always show debuffs and short-term buffs
                     if v.type == 2 or v.forced == "short" or not (v.forced == "long" or v.ends == nil or v.dur == 0 or v.ends-currentTime > 120000) then
-                        tinsert(buffsSorted[container], v)
+                        table.insert(buffsSorted[container], v)
 
                     -- Show long-term target buffs in same container
                     elseif v.target == "reticleover" and SCB.SV.LongTermEffects_Target then
-                        tinsert(buffsSorted[container], v)
+                        table.insert(buffsSorted[container], v)
 
                     -- Show long-term player buffs
                     elseif v.target == "player" and SCB.SV.LongTermEffects_Player then
                         -- Choose container for long-term player buffs
                         if SCB.SV.LongTermEffectsSeparate then
-                            tinsert(buffsSorted.player_long, v)
+                            table.insert(buffsSorted.player_long, v)
                         else
-                            tinsert(buffsSorted[container], v)
+                            table.insert(buffsSorted[container], v)
                         end
 
                     end
@@ -1895,7 +1892,7 @@ function SCB.OnUpdate(currentTime)
     -- sort effects in container and draw them on screen
     for _, container in pairs(containerRouting) do
         if needs_update[container] then
-            tsort(buffsSorted[container], buffSort)
+            table.sort(buffsSorted[container], buffSort)
             SCB.updateIcons( currentTime, buffsSorted[container], container )
         end
         needs_update[container] = false
