@@ -7,15 +7,13 @@ local CA            = LUIE.ChatAnnouncements
 local CommaValue    = LUIE.CommaValue
 local strformat     = zo_strformat
 local strfmt        = string.format
-local strsub        = string.sub
 local gsub          = string.gsub
-local tinsert       = table.insert
 
 local moduleName    = LUIE.name .. '_ChatAnnouncements'
 
 CA.D = {
     ChatUseSystem                 = false,
-    TimeStamp                     = true,
+    TimeStamp                     = false,
     TimeStampFormat               = "HH:m",
     GroupChatMsg                  = true,
     GoldChange                    = true,
@@ -36,8 +34,8 @@ CA.D = {
     LootMail                      = true,
     LootTrade                     = false,
     LootCraft                     = false,
-    ShowCraftUse                  = true,
-    ShowDestroy                   = true,
+    ShowCraftUse                  = false,
+    ShowDestroy                   = false,
     LootGroup                     = true,
     LootOnlyNotable               = false,
     LootShowTrait                 = true,
