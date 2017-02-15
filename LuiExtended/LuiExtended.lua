@@ -57,21 +57,21 @@ LUIE.Fonts = {
 }
 
 LUIE.StatusbarTextures = {
-    ["Aluminium"]               = "/LuiExtended/media/unitframes/statusbar/Aluminium.dds",
-    ["Elder Scrolls Gradient"]  = "/LuiExtended/media/unitframes/statusbar/ElderScrollsGrad.dds",
-    ["Glass"]                   = "/LuiExtended/media/unitframes/statusbar/Glass.dds",
-    ["Glaze"]                   = "/LuiExtended/media/unitframes/statusbar/Glaze.dds",
-    ["Horizontal Gradient 1"]   = "/LuiExtended/media/unitframes/statusbar/HorizontalGrad.dds",
-    ["Horizontal Gradient 2"]   = "/LuiExtended/media/unitframes/statusbar/HorizontalGradV2.dds",
-    ["Inner Glow"]              = "/LuiExtended/media/unitframes/statusbar/InnerGlow.dds",
-    ["Inner Shadow"]            = "/LuiExtended/media/unitframes/statusbar/InnerShadow.dds",
-    ["Inner Shadow Glossy"]     = "/LuiExtended/media/unitframes/statusbar/InnerShadowGloss.dds",
-    ["Minimalistic"]            = "/LuiExtended/media/unitframes/statusbar/Minimalistic.dds",
-    ["Round"]                   = "/LuiExtended/media/unitframes/statusbar/Round.dds",
-    ["Sand Paper 1"]            = "/LuiExtended/media/unitframes/statusbar/SandPaper.dds",
-    ["Sand Paper 2"]            = "/LuiExtended/media/unitframes/statusbar/SandPaperV2.dds",
-    ["Shadow"]                  = "/LuiExtended/media/unitframes/statusbar/Shadow.dds",
-    ["Smooth"]                  = "/LuiExtended/media/unitframes/statusbar/Smooth.dds",
+    ["Aluminium"]               = "/LuiExtended/media/unitframes/textures/Aluminium.dds",
+    ["Elder Scrolls Gradient"]  = "/LuiExtended/media/unitframes/textures/ElderScrollsGrad.dds",
+    ["Glass"]                   = "/LuiExtended/media/unitframes/textures/Glass.dds",
+    ["Glaze"]                   = "/LuiExtended/media/unitframes/textures/Glaze.dds",
+    ["Horizontal Gradient 1"]   = "/LuiExtended/media/unitframes/textures/HorizontalGrad.dds",
+    ["Horizontal Gradient 2"]   = "/LuiExtended/media/unitframes/textures/HorizontalGradV2.dds",
+    ["Inner Glow"]              = "/LuiExtended/media/unitframes/textures/InnerGlow.dds",
+    ["Inner Shadow"]            = "/LuiExtended/media/unitframes/textures/InnerShadow.dds",
+    ["Inner Shadow Glossy"]     = "/LuiExtended/media/unitframes/textures/InnerShadowGloss.dds",
+    ["Minimalistic"]            = "/LuiExtended/media/unitframes/textures/Minimalistic.dds",
+    ["Round"]                   = "/LuiExtended/media/unitframes/textures/Round.dds",
+    ["Sand Paper 1"]            = "/LuiExtended/media/unitframes/textures/SandPaper.dds",
+    ["Sand Paper 2"]            = "/LuiExtended/media/unitframes/textures/SandPaperV2.dds",
+    ["Shadow"]                  = "/LuiExtended/media/unitframes/textures/Shadow.dds",
+    ["Smooth"]                  = "/LuiExtended/media/unitframes/textures/Smooth.dds",
 }
 
 --[[
