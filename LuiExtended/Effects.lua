@@ -747,25 +747,25 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [86740] = 'LuiExtended/media/icons/consumables/consumable_event_festival_grog.dds', -- Very Drunk (Sailor's Warning Festival Grog)
 
     -- Base Momentos
-    [26829] = 'LuiExtended/media/icons/momento_almalexias_enchanted_lantern.dds', -- Light of the Tribunal (Almalexia's Enchanted Lantern)
-    [41950] = 'LuiExtended/media/icons/momento_yokudan_totem.dds', -- Fetish of Anger (Fetish of Anger)
-    [21226] = 'LuiExtended/media/icons/momento_finvirs_trinket.dds', -- Finvir's Trinket (Finvir's Trinket)
-    [43700] = 'LuiExtended/media/icons/momento_lenas_wand_of_finding.dds', -- Wand of Finding (Lena's Wand of Finding)
+    [26829] = 'LuiExtended/media/icons/momentos/momento_almalexias_enchanted_lantern.dds', -- Light of the Tribunal (Almalexia's Enchanted Lantern)
+    [41950] = 'LuiExtended/media/icons/momentos/momento_yokudan_totem.dds', -- Fetish of Anger (Fetish of Anger)
+    [21226] = 'LuiExtended/media/icons/momentos/momento_finvirs_trinket.dds', -- Finvir's Trinket (Finvir's Trinket)
+    [43700] = 'LuiExtended/media/icons/momentos/momento_lenas_wand_of_finding.dds', -- Wand of Finding (Lena's Wand of Finding)
 
     -- DLC Momentos
-    [77786] = 'LuiExtended/media/icons/momento_coin_of_illusory_riches.dds', -- Stun (Coin of Illusory Riches)
-    [74232] = 'LuiExtended/media/icons/momento_malacaths_wrathful_flame.dds', -- Stun (Malacath's Wrathful Flame)
+    [77786] = 'LuiExtended/media/icons/momentos/momento_coin_of_illusory_riches.dds', -- Stun (Coin of Illusory Riches)
+    [74232] = 'LuiExtended/media/icons/momentos/momento_malacaths_wrathful_flame.dds', -- Stun (Malacath's Wrathful Flame)
 
     -- Seasonal Momentos
-    [77123] = 'LuiExtended/media/icons/momento_event_jubilee_cake.dds', -- 2017 Anniversary EXP Buff (2nd Annual Jubilee Cake)
+    [77123] = 'LuiExtended/media/icons/momentos/momento_event_jubilee_cake.dds', -- 2017 Anniversary EXP Buff (2nd Annual Jubilee Cake)
     [84369] = 'LuiExtended/media/icons/ability_event_witchmothers_brew.dds', -- Witchmother's Brew (Witchmother's Whistle)
-    [86774] = 'LuiExtended/media/icons/momento_event_mud_ball.dds', -- Mudball (Mud Ball Pouch)
-    [86777] = 'LuiExtended/media/icons/momento_event_mud_ball.dds', -- Mudball (Mud Ball Pouch)
-    [86775] = 'LuiExtended/media/icons/momento_event_mud_ball.dds', -- Covered in Mud (Mud Ball Pouch)
-    [86779] = 'LuiExtended/media/icons/momento_event_mud_ball.dds', -- Covered in Mud (Mud Ball Pouch)
+    [86774] = 'LuiExtended/media/icons/momentos/momento_event_mud_ball.dds', -- Mudball (Mud Ball Pouch)
+    [86777] = 'LuiExtended/media/icons/momentos/momento_event_mud_ball.dds', -- Mudball (Mud Ball Pouch)
+    [86775] = 'LuiExtended/media/icons/momentos/momento_event_mud_ball.dds', -- Covered in Mud (Mud Ball Pouch)
+    [86779] = 'LuiExtended/media/icons/momentos/momento_event_mud_ball.dds', -- Covered in Mud (Mud Ball Pouch)
 
     -- Crown Store Momentos
-    [85344] = 'LuiExtended/media/icons/momento_storm_atronach_aura.dds', -- Atronach Aura (Storm Atronach Aura)
+    [85344] = 'LuiExtended/media/icons/momentos/momento_storm_atronach_aura.dds', -- Atronach Aura (Storm Atronach Aura)
 
     -- Assistants
     [77645] = 'LuiExtended/media/icons/ability_innate_hidden.dds', -- Stealth (Pirharri the Smuggler)
@@ -1832,12 +1832,12 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [86075] = 'LuiExtended/media/icons/ability_event_bredas_magnificent_mead.dds', -- Breda's Magnificent Mead (Breda's Magnificent Mead)
     [83523] = 'LuiExtended/media/icons/ability_event_freezing.dds', -- Freezing (Snow Bear Plunge)
     [83522] = 'LuiExtended/media/icons/ability_event_warm.dds', -- Warm (Snow Bear Plunge)
-    [84330] = 'LuiExtended/media/icons/momento_event_mud_ball.dds', -- Mudball (Mud Ball Merriment)
-    [84378] = 'LuiExtended/media/icons/momento_event_mud_ball.dds', -- Mudball (Mud Ball Merriment)
-    [84335] = 'LuiExtended/media/icons/momento_event_mud_ball.dds', -- Covered in Mud (Mud Ball Merriment)
-    [85639] = 'LuiExtended/media/icons/momento_event_mud_ball.dds', -- Covered in Mud (Mud Ball Merriment)
-    [85351] = 'LuiExtended/media/icons/momento_event_mud_ball.dds', -- Self-Serve Mudbath (Mud Ball Merriment) (Seems to be unusued - added just in case)
-    [85352] = 'LuiExtended/media/icons/momento_event_mud_ball.dds', -- Covered in Mud (Mud Ball Merriment) (Seems to be unusued - added just in case)
+    [84330] = 'LuiExtended/media/icons/momentos/momento_event_mud_ball.dds', -- Mudball (Mud Ball Merriment)
+    [84378] = 'LuiExtended/media/icons/momentos/momento_event_mud_ball.dds', -- Mudball (Mud Ball Merriment)
+    [84335] = 'LuiExtended/media/icons/momentos/momento_event_mud_ball.dds', -- Covered in Mud (Mud Ball Merriment)
+    [85639] = 'LuiExtended/media/icons/momentos/momento_event_mud_ball.dds', -- Covered in Mud (Mud Ball Merriment)
+    [85351] = 'LuiExtended/media/icons/momentos/momento_event_mud_ball.dds', -- Self-Serve Mudbath (Mud Ball Merriment) (Seems to be unusued - added just in case)
+    [85352] = 'LuiExtended/media/icons/momentos/momento_event_mud_ball.dds', -- Covered in Mud (Mud Ball Merriment) (Seems to be unusued - added just in case)
 
     [89476] = 'LuiExtended/media/icons/ability_event_steamy_spring_pie.dds', -- Steamy Spring Pie (Steamy Spring Pie)
 
@@ -2931,22 +2931,22 @@ E.FakePlayerBuffs = { -- Fake buffs applied onto the player by self
     [85353] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_swallowable_sword.dds', name = 'Disposable Swallower\'s Sword', duration = 12000}, -- Sword Swallowing (Consumable Version)
 
     -- Base Momentos
-    [41988] = {icon = 'LuiExtended/media/icons/momento_bonesnap_binding_stone.dds', name = 'Bonesnap Binding Stone', duration = 10000}, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
-    [39245] = {icon = 'LuiExtended/media/icons/momento_discourse_amaranthine.dds', name = 'Discourse Amaranthine', duration = 10000}, -- Glimpse of the Forbidden (Discoure Amaranthine)
-    [42076] = {icon = 'LuiExtended/media/icons/momento_mezha-dros_sealing_amulet.dds', name = 'Mezha-dro\'s Sealing Amulet', duration = 8000}, -- Tear (Mezha-dro's Sealing Amulet)
-    [34578] = {icon = 'LuiExtended/media/icons/momento_nirnroot_wine.dds', name = 'Nirnroot Wine', duration = 8000}, -- Nirnroot Wine (Nirnroot Wine)
-    [26339] = {icon = 'LuiExtended/media/icons/momento_questionable_meat_sack.dds', name = 'Mystery Meat', duration = 5500}, -- Questionable Meat Sack (Questionable Meat Sack)
-    [25369] = {icon = 'LuiExtended/media/icons/momento_sanguines_goblet.dds', name = 'Sanguine\'s Goblet', duration = 10000}, -- Sanguine's Goblet (Sanguine's Goblet)
-    [42008] = {icon = 'LuiExtended/media/icons/momento_token_of_root_sunder.dds', name = 'Token of Root Sunder', duration = 10000}, -- Blessing of Root Sunder (Token of Root Sunder)
-    [42053] = {icon = 'LuiExtended/media/icons/momento_yokudan_totem.dds', name = 'Yokudan Totem', duration = 10000}, -- Yokudan Salute (Yokudan Totem)
+    [41988] = {icon = 'LuiExtended/media/icons/momentos/momento_bonesnap_binding_stone.dds', name = 'Bonesnap Binding Stone', duration = 10000}, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
+    [39245] = {icon = 'LuiExtended/media/icons/momentos/momento_discourse_amaranthine.dds', name = 'Discourse Amaranthine', duration = 10000}, -- Glimpse of the Forbidden (Discoure Amaranthine)
+    [42076] = {icon = 'LuiExtended/media/icons/momentos/momento_mezha-dros_sealing_amulet.dds', name = 'Mezha-dro\'s Sealing Amulet', duration = 8000}, -- Tear (Mezha-dro's Sealing Amulet)
+    [34578] = {icon = 'LuiExtended/media/icons/momentos/momento_nirnroot_wine.dds', name = 'Nirnroot Wine', duration = 8000}, -- Nirnroot Wine (Nirnroot Wine)
+    [26339] = {icon = 'LuiExtended/media/icons/momentos/momento_questionable_meat_sack.dds', name = 'Mystery Meat', duration = 5500}, -- Questionable Meat Sack (Questionable Meat Sack)
+    [25369] = {icon = 'LuiExtended/media/icons/momentos/momento_sanguines_goblet.dds', name = 'Sanguine\'s Goblet', duration = 10000}, -- Sanguine's Goblet (Sanguine's Goblet)
+    [42008] = {icon = 'LuiExtended/media/icons/momentos/momento_token_of_root_sunder.dds', name = 'Token of Root Sunder', duration = 10000}, -- Blessing of Root Sunder (Token of Root Sunder)
+    [42053] = {icon = 'LuiExtended/media/icons/momentos/momento_yokudan_totem.dds', name = 'Yokudan Totem', duration = 10000}, -- Yokudan Salute (Yokudan Totem)
 
     -- DLC Momentos
-    [79510] = {icon = 'LuiExtended/media/icons/momento_blade_of_the_blood_oath.dds', name = 'Blade of the Blood Oath', duration = 6500}, -- TROPHY Blood Oath (Blade of the Blood Oath)
-    [74151] = {icon = 'LuiExtended/media/icons/momento_hidden_pressure_vent.dds', name = 'Hidden Pressure Vent', duration = 2500}, -- Stun (Hidden Pressure Vent)
+    [79510] = {icon = 'LuiExtended/media/icons/momentos/momento_blade_of_the_blood_oath.dds', name = 'Blade of the Blood Oath', duration = 6500}, -- TROPHY Blood Oath (Blade of the Blood Oath)
+    [74151] = {icon = 'LuiExtended/media/icons/momentos/momento_hidden_pressure_vent.dds', name = 'Hidden Pressure Vent', duration = 2500}, -- Stun (Hidden Pressure Vent)
 
     -- Crown Store Momentos
-    [85349] = {icon = 'LuiExtended/media/icons/momento_storm_atronach_transform.dds', name = 'Storm Atronach Transform', duration = 180000}, -- Storm Atronach Transform (Atronach Transformation)
-    [85347] = {icon = 'LuiExtended/media/icons/momento_storm_atronach_juggle.dds', name = 'Storm Orb Juggle', duration = 12000}, -- Storm Orb Juggle (Atronach Juggling)
+    [85349] = {icon = 'LuiExtended/media/icons/momentos/momento_storm_atronach_transform.dds', name = 'Storm Atronach Transform', duration = 180000}, -- Storm Atronach Transform (Atronach Transformation)
+    [85347] = {icon = 'LuiExtended/media/icons/momentos/momento_storm_atronach_juggle.dds', name = 'Storm Orb Juggle', duration = 12000}, -- Storm Orb Juggle (Atronach Juggling)
 
     -- Enchants
     [21230] = {icon = 'LuiExtended/media/icons/glyph_weapon_damage.dds', name = 'Weapon Damage Enchantment', duration = 5000}, -- Berserker (Glyph of Weapon Damage)
