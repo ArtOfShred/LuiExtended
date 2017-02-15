@@ -194,6 +194,7 @@ local function LUIE_CreateSettings()
     local optionsData = {}
     local optionsDataUnitFrames = {}
 
+    --[[ RELOADUI BUTTON ]]--
     optionsData[#optionsData + 1] = {
         type = "button",
         name = "Reload UI",
@@ -201,6 +202,7 @@ local function LUIE_CreateSettings()
         func = function() ReloadUI("ingame") end,
         width = "full",
     }
+    
     --[[ INFO PANEL OPTIONS ]]--
     optionsData[#optionsData + 1] = {
         type = "submenu",
@@ -2120,7 +2122,6 @@ local function LUIE_CreateSettings()
     end
 
     --[[  BEGIN UNIT FRAMES SETTING PANEL ]]--
-
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
         name = "Enable Unit Frames Module",
