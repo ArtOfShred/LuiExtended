@@ -31,11 +31,13 @@ CA.D = {
     Loot                          = true,
     LootIcons                     = true,
     LootVendor                    = false,
+    LootBank                      = false,
     LootMail                      = true,
     LootTrade                     = false,
     LootCraft                     = false,
     ShowCraftUse                  = false,
     ShowDestroy                   = false,
+    ShowConfiscate                = false,
     LootGroup                     = true,
     LootOnlyNotable               = false,
     LootShowTrait                 = true,
@@ -76,11 +78,14 @@ CA.D = {
     MiscGuild                     = false,
     MiscTrade                     = false,
     MiscMail                      = false,
+    MiscConfiscate                = false,
+    MiscHorse                     = false,
 }
 
 local g_playerName = nil
 local g_playerNameFormatted = nil
 local combostring = "" -- String is filled by the EVENT_CURRENCY_CHANGE events and ammended onto the end of purchase/sales from LootLog component if toggled on!
+local stealstring = ""
 local LaunderCheck = false
 local laundergoldstring = ""
 local launderitemstring = ""
@@ -108,16 +113,17 @@ function CA.Initialize()
     CA.RegisterWritVoucherEvents()
     CA.RegisterLootEvents()
     CA.RegisterVendorEvents()
+    CA.RegisterBankEvents()
     CA.RegisterTradeEvents()
     CA.RegisterMailEvents()
-    -- CA.RegisterCraftEvents()
+    CA.RegisterCraftEvents()
+    CA.RegisterDestroyEvents()
     CA.RegisterXPEvents()
     CA.RegisterAchievementsEvent()
     CA.RegisterBagEvents()
     CA.RegisterLockpickEvents()
+    CA.RegisterHorseEvents()
     CA.RegisterGuildEvents()
-    
-    CA.RegisterInventoryEvents()
 
 end
 
@@ -581,9 +587,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     -- Receive from Quest Reward (4), Sell to Fence (63)
     elseif reason == 4 or reason == 63 then message = ( "Received" )
 
-    -- Spend - NPC Conversation (5), Bag Space (8), Bank Space (9), Wayshrine (19), Mount Feed (28), Repairs (29), Buy on AH (31), AH Listing Fee (33), Respec Skills (44), Respec Attributes (45), Pay to Guard (47),
+    -- Spend - NPC Conversation (5), Bag Space (8), Bank Space (9), Wayshrine (19), Mount Feed (28), Repairs (29), Buy on AH (31), AH Listing Fee (33), Respec Skills (44), Respec Attributes (45),
     -- Unstuck (48), Edit Guild Heraldry (49), Buy Guild Tabard (50), Respec Morphs (55), Pay Fence (56), Launder (60), Champion Respec (61), Buyback (64)
-    elseif reason == 5 or reason == 8 or reason == 9 or reason == 19 or reason == 28 or reason == 29 or reason == 31 or reason == 33 or reason == 44 or reason == 45 or reason == 47 or reason == 48 or reason == 49 or reason == 50 or reason == 55 or reason == 56 or reason == 60 or reason == 61 or reason == 64 then message = ( "Spent" )
+    elseif reason == 5 or reason == 8 or reason == 9 or reason == 19 or reason == 28 or reason == 29 or reason == 31 or reason == 33 or reason == 44 or reason == 45 or reason == 48 or reason == 49 or reason == 50 or reason == 55 or reason == 56 or reason == 60 or reason == 61 or reason == 64 then message = ( "Spent" )
     
     -- Desposit in Bank (42) or Guild Bank (51)
     elseif reason == 42 or reason == 51 then message = ( "Desposited" )
@@ -591,8 +597,8 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     -- Withdraw from Bank (43) or Guild Bank (52)
     elseif reason == 43 or reason == 52 then message = ( "Withdrew" )
 
-    -- Confiscated -- Killed by Guard (57)
-    elseif reason == 57 then message = ( "Lost" )
+    -- Confiscated -- Pay to Guard (47) or Killed by Guard (57)
+    elseif reason == 47 or reason == 57 then message = ( "Confiscated" )
 
     -- Pickpocketed (59)
     elseif reason == 59 then message = ( "Pickpocket" )
@@ -660,6 +666,14 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         -- Print a message to chat based off all the values we filled in above
         if CA.SV.LootCurrencyCombo and UpOrDown < 0 and (reason == 1 or reason == 63 or reason == 64) then
             combostring = ( strfmt ( " → %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+        elseif CA.SV.LootCurrencyCombo and reason == 28 then
+            combostring = ( strfmt ( " → %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+        elseif reason == 47 then
+            stealstring = ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+            zo_callLater(CA.JusticeStealRemove, 100)
+         elseif reason == 57 then
+            stealstring = ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+            zo_callLater(CA.JusticeStealRemove, 100)
         elseif CA.SV.LootCurrencyCombo and UpOrDown > 0 and (reason == 1 or reason == 63 or reason == 64) then
             combostring = ( strfmt ( " ← %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
         elseif CA.SV.LootCurrencyCombo and CA.SV.MiscBags and (reason == 8 or reason == 9) then
@@ -1111,10 +1125,33 @@ function CA.RegisterVendorEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_BUYBACK_RECEIPT)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_BUY_RECEIPT)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_SELL_RECEIPT)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_FENCE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_STORE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT)
     if CA.SV.LootVendor then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BUYBACK_RECEIPT, CA.OnBuybackItem)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BUY_RECEIPT, CA.OnBuyItem)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_SELL_RECEIPT, CA.OnSellItem)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_FENCE, CA.FenceOpen)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_STORE, CA.StoreClose)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT, CA.FenceSuccess)
+    end
+end
+
+function CA.RegisterBankEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_BANK)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_BANK)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_GUILD_BANK)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_GUILD_BANK)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_REMOVED)
+    if CA.SV.LootBank then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_BANK, CA.BankOpen)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_BANK, CA.BankClose)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_GUILD_BANK, CA.GuildBankOpen) 
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_GUILD_BANK, CA.GuildBankClose)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_ADDED, CA.GuildBankItemAdded)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_REMOVED, CA.GuildBankItemRemoved)
     end
 end
 
@@ -1177,17 +1214,52 @@ function CA.RegisterMailEvents()
     end
 end
 
---function CA.RegisterCraftEvents()
---    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CRAFT_COMPLETED)
---    if CA.SV.LootCraft then
---        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CRAFT_COMPLETED, CA.OnCraftComplete)
---    end
---end
+function CA.RegisterCraftEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CRAFTING_STATION_INTERACT, CA.CraftingOpen)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_END_CRAFTING_STATION_INTERACT, CA.CraftingClose)
+    if CA.SV.LootCraft then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CRAFTING_STATION_INTERACT, CA.CraftingOpen)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_END_CRAFTING_STATION_INTERACT, CA.CraftingClose)
+    end
+end
+
+function CA.RegisterDestroyEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED)
+    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT, CA.MiscAlertHorse)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, CA.MiscAlertBags)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, CA.MiscAlertBank)
+        g_InventoryStacks = {}
+        CA.IndexInventory()
+    elseif not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) and CA.SV.MiscHorse then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT, CA.MiscAlertHorse)
+    elseif not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) and CA.SV.MiscBags then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, CA.MiscAlertBags)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, CA.MiscAlertBank)
+    end
+    
+    if CA.SV.ShowDestroy then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED, CA.DestroyItem)
+    end
+    
+    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.MiscConfiscate then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED, CA.JusticeStealRemove)
+    end
+    
+    ItemWasDestroyed = false
+    
+end
 
 function CA.RegisterBagEvents()
         EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED)
         EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED)
-    if CA.SV.MiscBags then
+    if CA.SV.MiscBags or CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, CA.MiscAlertBags)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, CA.MiscAlertBank)
     end
@@ -1199,6 +1271,13 @@ function CA.RegisterLockpickEvents()
     if CA.SV.MiscLockpick then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_FAILED, CA.MiscAlertLockFailed)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS, CA.MiscAlertLockSuccess)
+    end
+end
+
+function CA.RegisterHorseEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT)
+    if CA.SV.MiscHorse or CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT, CA.MiscAlertHorse)
     end
 end
 
@@ -1216,84 +1295,165 @@ function CA.MiscAlertLockSuccess (eventCode)
     printToChat ("Lockpick successful!")
 end
 
+function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source)
+
+    if ridingSkillType == 2 then 
+        g_InventoryStacks = {} 
+        CA.IndexInventory() 
+    end
+    
+    if CA.SV.MiscHorse then
+        local bracket1 = ""
+        local bracket2 = ""
+        local icon = ""
+        local logPrefix = "Purchased"
+        local skillstring
+        
+        if source == 2 then logPrefix = "Learned" end
+
+        if CA.SV.ItemBracketDisplayOptions == 1 then
+            bracket1 = "["
+            bracket2 = "]"
+        elseif CA.SV.ItemBracketDisplayOptions == 2 then
+            bracket1 = "("
+            bracket2 = ")"
+        elseif CA.SV.ItemBracketDisplayOptions == 3 then
+            bracket1 = ""
+            bracket2 = " -"
+        elseif CA.SV.ItemBracketDisplayOptions == 4 then
+            bracket1 = ""
+            bracket2 = ""
+        end
+
+        if ridingSkillType == 1 and source == 1 then skillstring = "[Riding Speed Upgrade]"
+        elseif ridingSkillType == 2 and source == 1  then skillstring = "[Riding Capacity Upgrade]"
+        elseif ridingSkillType == 3 and source == 1  then skillstring = "[Riding Stamina Upgrade]"
+        elseif ridingSkillType == 1 and source == 2 then skillstring = "|H1:item:64700:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+        elseif ridingSkillType == 2 and source == 2  then skillstring = "|H1:item:64702:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+        elseif ridingSkillType == 3 and source == 2  then skillstring = "|H1:item:64701:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+        end
+        
+        if CA.SV.LootIcons then
+            if source == 1 then
+                if ridingSkillType == 1 then icon = "|t16:16:/esoui/art/mounts/ridingskill_speed.dds|t "
+                elseif ridingSkillType == 2 then icon = "|t16:16:/esoui/art/mounts/ridingskill_capacity.dds|t "
+                elseif ridingSkillType == 3 then icon = "|t16:16:/esoui/art/mounts/ridingskill_stamina.dds|t "
+                end
+            elseif source == 2 then
+                if ridingSkillType == 1 then icon = "|t16:16:/esoui/art/icons/store_ridinglessons_speed.dds|t "
+                elseif ridingSkillType == 2 then icon = "|t16:16:/esoui/art/icons/store_ridinglessons_capacity.dds|t "
+                elseif ridingSkillType == 3 then icon = "|t16:16:/esoui/art/icons/store_ridinglessons_stamina.dds|t "
+                end
+            end
+        else
+            icon = ""
+        end
+
+        if CA.SV.ItemContextToggle then
+            logPrefix = ( CA.SV.ItemContextMessage )
+        end
+
+        if CA.SV.LootCurrencyCombo then
+            printToChat ( strfmt( "|c0B610B%s%s%s|r %s%s |cffffff%s/60|r%s", bracket1, logPrefix, bracket2, icon, skillstring, current, combostring) )
+            combostring = ""
+        else
+            printToChat ( strfmt( "|c0B610B%s%s%s|r %s%s |cffffff%s/60|r", bracket1, logPrefix, bracket2, icon, skillstring, current) )
+        end
+    end
+    
+end
+
+
 function CA.MiscAlertBags (eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
 
-local bracket1 = ""
-local bracket2 = ""
-local icon = ""
-local logPrefix = "Purchased"
+    g_InventoryStacks = {}
+    g_BankStacks = {}
+    CA.IndexInventory()
+    CA.IndexBank()
+    if CA.SV.MiscBags then
+        local bracket1 = ""
+        local bracket2 = ""
+        local icon = ""
+        local logPrefix = "Purchased"
 
-    if CA.SV.ItemBracketDisplayOptions == 1 then
-        bracket1 = "["
-        bracket2 = "]"
-    elseif CA.SV.ItemBracketDisplayOptions == 2 then
-        bracket1 = "("
-        bracket2 = ")"
-    elseif CA.SV.ItemBracketDisplayOptions == 3 then
-        bracket1 = ""
-        bracket2 = " -"
-    elseif CA.SV.ItemBracketDisplayOptions == 4 then
-        bracket1 = ""
-        bracket2 = ""
-    end
+        if CA.SV.ItemBracketDisplayOptions == 1 then
+            bracket1 = "["
+            bracket2 = "]"
+        elseif CA.SV.ItemBracketDisplayOptions == 2 then
+            bracket1 = "("
+            bracket2 = ")"
+        elseif CA.SV.ItemBracketDisplayOptions == 3 then
+            bracket1 = ""
+            bracket2 = " -"
+        elseif CA.SV.ItemBracketDisplayOptions == 4 then
+            bracket1 = ""
+            bracket2 = ""
+        end
 
-    if CA.SV.LootIcons then
-        icon = "|t16:16:/esoui/art/icons/store_upgrade_bag.dds|t "
-    else
-        icon = ""
-    end
+        if CA.SV.LootIcons then
+            icon = "|t16:16:/esoui/art/icons/store_upgrade_bag.dds|t "
+        else
+            icon = ""
+        end
 
-    if CA.SV.ItemContextToggle then
-        logPrefix = ( CA.SV.ItemContextMessage )
-    end
+        if CA.SV.ItemContextToggle then
+            logPrefix = ( CA.SV.ItemContextMessage )
+        end
 
-    if CA.SV.LootCurrencyCombo then
-        printToChat ( strfmt( "|c0B610B%s%s%s|r %s[Bag Space Upgrade] |cffffff%s/8|r%s", bracket1, logPrefix, bracket2, icon, currentUpgrade, combostring) )
-        combostring = ""
-    else
-        printToChat ( strfmt( "|c0B610B%s%s%s|r %s[Bag Space Upgrade] |cffffff%s/8|r", bracket1, logPrefix, bracket2, icon, currentUpgrade) )
+        if CA.SV.LootCurrencyCombo then
+            printToChat ( strfmt( "|c0B610B%s%s%s|r %s[Bag Space Upgrade] |cffffff%s/8|r%s", bracket1, logPrefix, bracket2, icon, currentUpgrade, combostring) )
+            combostring = ""
+        else
+            printToChat ( strfmt( "|c0B610B%s%s%s|r %s[Bag Space Upgrade] |cffffff%s/8|r", bracket1, logPrefix, bracket2, icon, currentUpgrade) )
+        end
     end
 
 end
 
 function CA.MiscAlertBank (eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
 
-local bracket1 = ""
-local bracket2 = ""
-local icon = ""
-local logPrefix = "Purchased"
+    g_InventoryStacks = {}
+    g_BankStacks = {}
+    CA.IndexInventory()
+    CA.IndexBank()
+    if CA.SV.MiscBags then
+        local bracket1 = ""
+        local bracket2 = ""
+        local icon = ""
+        local logPrefix = "Purchased"
 
-    if CA.SV.ItemBracketDisplayOptions == 1 then
-        bracket1 = "["
-        bracket2 = "]"
-    elseif CA.SV.ItemBracketDisplayOptions == 2 then
-        bracket1 = "("
-        bracket2 = ")"
-    elseif CA.SV.ItemBracketDisplayOptions == 3 then
-        bracket1 = ""
-        bracket2 = " -"
-    elseif CA.SV.ItemBracketDisplayOptions == 4 then
-        bracket1 = ""
-        bracket2 = ""
+        if CA.SV.ItemBracketDisplayOptions == 1 then
+            bracket1 = "["
+            bracket2 = "]"
+        elseif CA.SV.ItemBracketDisplayOptions == 2 then
+            bracket1 = "("
+            bracket2 = ")"
+        elseif CA.SV.ItemBracketDisplayOptions == 3 then
+            bracket1 = ""
+            bracket2 = " -"
+        elseif CA.SV.ItemBracketDisplayOptions == 4 then
+            bracket1 = ""
+            bracket2 = ""
+        end
+
+        if CA.SV.LootIcons then
+            icon = "|t16:16:/esoui/art/icons/store_upgrade_bank.dds|t "
+        else
+            icon = ""
+        end
+
+        if CA.SV.ItemContextToggle then
+            logPrefix = ( CA.SV.ItemContextMessage )
+        end
+
+        if CA.SV.LootCurrencyCombo then
+            printToChat ( strfmt( "|c0B610B%s%s%s|r %s[Bank Space Upgrade] |cffffff%s/18|r%s", bracket1, logPrefix, bracket2, icon, currentUpgrade, combostring) )
+            combostring = ""
+        else
+            printToChat ( strfmt( "|c0B610B%s%s%s|r %s[Bank Space Upgrade] |cffffff%s/18|r", bracket1, logPrefix, bracket2, icon, currentUpgrade) )
+        end
     end
-
-    if CA.SV.LootIcons then
-        icon = "|t16:16:/esoui/art/icons/store_upgrade_bank.dds|t "
-    else
-        icon = ""
-    end
-
-    if CA.SV.ItemContextToggle then
-        logPrefix = ( CA.SV.ItemContextMessage )
-    end
-
-    if CA.SV.LootCurrencyCombo then
-        printToChat ( strfmt( "|c0B610B%s%s%s|r %s[Bank Space Upgrade] |cffffff%s/18|r%s", bracket1, logPrefix, bracket2, icon, currentUpgrade, combostring) )
-        combostring = ""
-    else
-        printToChat ( strfmt( "|c0B610B%s%s%s|r %s[Bank Space Upgrade] |cffffff%s/18|r", bracket1, logPrefix, bracket2, icon, currentUpgrade) )
-    end
-
+    
 end
 
 function CA.OnBuybackItem(eventCode, itemName, quantity, money, itemSound)
@@ -2143,49 +2303,30 @@ function CA.OnAchievementUpdated(eventCode, aId)
                 )
 end
 
-function CA.RegisterInventoryEvents()
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CRAFTING_STATION_INTERACT, CA.CraftingOpen)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_END_CRAFTING_STATION_INTERACT, CA.CraftingClose)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, CA.BankSizeUpdate)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_BANK, CA.BankOpen)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_BANK, CA.BankClose)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_GUILD_BANK, CA.BankOpen) 
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_GUILD_BANK, CA.BankClose) 
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED, CA.DestroyItem)
-        
-        
-        
-        -- test
-         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_STORE, CA.StoreClose)
-         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_FENCE, CA.FenceOpen)
-         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT, CA.FenceSuccess)
-         
-        -- test
-        
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_ADDED, CA.BankItemAdded) -- might not need
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_REMOVED, CA.BankItemRemoved) -- might not need
-        
-        
-        CA.IndexInventory() -- Note, once finalized, we only initialize this if show destroy/confiscated loot is on!!!
-end
-
 g_InventoryStacks = {} -- Called for indexing on init
 g_BankStacks = {} -- Called for indexing on opening crafting window (If the player decons an item from the bank - not needed for bank, since we don't care about items in the bank)
 OldItemLink = ""
 
 ItemWasDestroyed = false
 
-function CA.BankItemAdded(eventCode, slotId)
-printToChat ("added")
+local GuildBankCarry_logPrefix
+local GuildBankCarry_icon
+local GuildBankCarry_itemLink
+local GuildBankCarry_stackCount
+local GuildBankCarry_receivedBy
+local GuildBankCarry_gainorloss
+
+function CA.GuildBankItemAdded(eventCode, slotId)
+    CA.LogItem(GuildBankCarry_logPrefix, GuildBankCarry_icon, GuildBankCarry_itemLink, itemType, GuildBankCarry_stackCount or 1, GuildBankCarry_receivedBy, GuildBankCarry_gainorloss)
 end
 
-function CA.BankItemRemoved(eventCode, slotId) 
-printToChat ("removed")
+function CA.GuildBankItemRemoved(eventCode, slotId)
+    CA.LogItem(GuildBankCarry_logPrefix, GuildBankCarry_icon, GuildBankCarry_itemLink, itemType, GuildBankCarry_stackCount or 1, GuildBankCarry_receivedBy, GuildBankCarry_gainorloss)
 end
 
 function CA.IndexInventory()
 
+-- printToChat ("Debug - Inventory Indexed!") -- Debug
 local bagsize = GetBagSize(1)
 
     for i = 1,bagsize do
@@ -2193,7 +2334,6 @@ local bagsize = GetBagSize(1)
         local bagitemlink = GetItemLink(1, i, LINK_STYLE_DEFAULT)
         if bagitemlink ~= "" then
             g_InventoryStacks[i] = { icon=icon, stack=stack, itemlink=bagitemlink}
-            -- printToChat ("Item in slot " .. i .. " = " .. g_InventoryStacks[i].itemlink) -- keep this line to copy for Guild Bank indexing!
         end
     end
     
@@ -2201,6 +2341,7 @@ end
 
 function CA.IndexBank()
 
+printToChat ("Debug - Bank Indexed!")
 local bagsizebank = GetBagSize(2)
 
     for i = 1,bagsizebank do
@@ -2214,6 +2355,8 @@ local bagsizebank = GetBagSize(2)
 end
 
 function CA.CraftingOpen(eventCode, craftSkill, sameStation)
+    g_InventoryStacks = {}
+    g_BankStacks = {}
     CA.IndexInventory() -- Index Inventory
     CA.IndexBank() -- Index Bank
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
@@ -2222,19 +2365,14 @@ end
 
 function CA.CraftingClose(eventCode, craftSkill)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    if CA.SV.ShowDestroy then EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate) end
-    if not CA.SV.ShowDestroy then g_InventoryStacks = {} end
+    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate) end
+    if not CA.SV.ShowDestroy or CA.SV.ShowConfiscate then g_InventoryStacks = {} end
     g_BankStacks = {}
 end
 
-function CA.BankSizeUpdate(ventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade) 
-
-    printToChat ("BANK BAG INCREASED! - Bank reindexed!!!")
-    CA.IndexBank()
-
-end
-
 function CA.BankOpen(eventCode)
+    g_InventoryStacks = {}
+    g_BankStacks = {}
     CA.IndexInventory() -- Index Inventory
     CA.IndexBank() -- Index Bank
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
@@ -2243,12 +2381,26 @@ end
 
 function CA.BankClose(eventCode)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    if CA.SV.ShowDestroy then EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate) end
-    if not CA.SV.ShowDestroy then g_InventoryStacks = {} end
+    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate) end
+    if not CA.SV.ShowDestroy or CA.SV.ShowConfiscate then g_InventoryStacks = {} end
     g_BankStacks = {}
 end
 
+function CA.GuildBankOpen(eventCode)
+    g_InventoryStacks = {}
+    CA.IndexInventory() -- Index Inventory
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateGuildBank)
+end
+
+function CA.GuildBankClose(eventCode)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate) end
+    if not CA.SV.ShowDestroy or CA.SV.ShowConfiscate then g_InventoryStacks = {} end
+end
+
 function CA.FenceOpen(eventCode, allowSell, allowLaunder)
+    g_InventoryStacks = {}
     CA.IndexInventory() -- Index Inventory
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateFence)
@@ -2256,8 +2408,8 @@ end
 
 function CA.StoreClose(eventCode)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    if CA.SV.ShowDestroy then EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate) end
-    if not CA.SV.ShowDestroy then g_InventoryStacks = {} end
+    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate) end
+    if not CA.SV.ShowDestroy or CA.SV.ShowConfiscate then g_InventoryStacks = {} end
 end
 
 function CA.FenceSuccess(eventCode, result)
@@ -2275,7 +2427,7 @@ function CA.FenceHelper()
         printToChat (laundergoldstring)
         printToChat (launderitemstring)
     else
-        printToChat (strfmt("%s ← %s", launderitemstring, laundergoldstring))
+        printToChat (strfmt("%s → %s", launderitemstring, laundergoldstring))
     end
         
     laundergoldstring = ""
@@ -2636,7 +2788,6 @@ if bagId == 2 then --
            g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
            
         elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-            local itemtype = GetItemLinkItemType(g_BankStacks[slotId].itemlink)
             local gainorloss = ("|ca80700")
             local logPrefix = "Destroyed - Bank"
             local change = (stackCountChange * -1)
@@ -2657,6 +2808,76 @@ if bagId == 2 then --
     end
 ----------------------------------------------------------------------------------
     
+end
+
+ItemWasDestroyed = false
+
+end
+
+function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
+
+---------------------------------- INVENTORY ----------------------------------
+
+if bagId == 1 then -- 
+
+    local receivedBy = ""
+    
+    if not g_InventoryStacks[slotId] then -- NEW ITEM 
+        local icon, stack = GetItemInfo(bagId, slotId)
+        local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+        g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+        local item = g_InventoryStacks[slotId]
+        GuildBankCarry_icon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        GuildBankCarry_gainorloss = "|c0B610B"
+        GuildBankCarry_logPrefix = "Withdrew"
+        GuildBankCarry_receivedBy = ""
+        GuildBankCarry_itemLink = item.itemlink
+        GuildBankCarry_stackCount = stackCountChange or 1
+    --[[elseif g_InventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
+        local icon, stack = GetItemInfo(bagId, slotId)
+        local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+        g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+        local item = g_InventoryStacks[slotId]
+        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        local gainorloss = "|c0B610B"
+        local logPrefix = "Upgraded"
+        CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) -- Shouldn't need this for anything, but just in case. ]]-- Shouldn't be neccesary
+    elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
+        local item = g_InventoryStacks[slotId]
+        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        
+        if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
+           local icon, stack = GetItemInfo(bagId, slotId)
+           local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+           GuildBankCarry_icon = seticon
+           GuildBankCarry_gainorloss = "|c0B610B"
+           GuildBankCarry_logPrefix = "Withdrew"
+           GuildBankCarry_receivedBy = ""
+           GuildBankCarry_itemLink = item.itemlink
+           GuildBankCarry_stackCount = stackCountChange or 1
+           g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
+           
+        elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
+            local gainorloss = ("|ca80700")
+            local logPrefix = "Destroyed"
+            local change = (stackCountChange * -1)
+            local endcount = g_InventoryStacks[slotId].stack - change
+            GuildBankCarry_icon = seticon
+            GuildBankCarry_gainorloss = "|ca80700"
+            GuildBankCarry_logPrefix = "Despoited"
+            GuildBankCarry_receivedBy = ""
+            GuildBankCarry_itemLink = item.itemlink
+            GuildBankCarry_stackCount = change
+            if CA.SV.ShowDestroy and ItemWasDestroyed then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
+            if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index
+                g_InventoryStacks[slotId] = nil
+            else
+                local icon, stack = GetItemInfo(bagId, slotId)
+                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+            end
+        end  
+    end
 end
 
 ItemWasDestroyed = false
@@ -2747,8 +2968,54 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
 
 end
 
+
 -- Makes it so bank withdraw/deposit events only occur when we can confirm the item is crossing over.
 function CA.BankFixer()
     InventoryOn = false
     BankOn = false
+end
+
+g_JusticeStacks = {}
+
+function CA.JusticeStealRemove(eventCode)
+    printToChat (eventCode)
+    if stealstring == "" then return end
+    if CA.SV.MiscConfiscate and eventCode == 131555 then printToChat("Bounty and stolen items confiscated!") end
+    if CA.SV.MiscConfiscate and eventCode ~= 131555 then printToChat("Bounty confiscated!") end
+    printToChat(stealstring)
+    stealstring = ""
+    if CA.SV.ShowConfiscate or CA.SV.ShowDestroy then zo_callLater(CA.JusticeRemovePrint, 50) end
+end
+
+function CA.JusticeRemovePrint()
+
+local bagsize = GetBagSize(1)
+
+    for i = 1,bagsize do
+        local icon, stack = GetItemInfo(1, i)
+        local bagitemlink = GetItemLink(1, i, LINK_STYLE_DEFAULT)
+        if bagitemlink ~= "" then
+            g_JusticeStacks[i] = {icon=icon, stack=stack, itemlink=bagitemlink}
+        end
+    end
+    
+    for i = 1,bagsize do
+        local inventoryitem = g_InventoryStacks[i]
+        local justiceitem = g_JusticeStacks[i]
+        if inventoryitem ~= nil then
+            if justiceitem == nil then
+                local seticon = ( CA.SV.LootIcons and inventoryitem.icon and inventoryitem.icon ~= '' ) and ('|t16:16:' .. inventoryitem.icon .. '|t ') or ''
+                local stack = inventoryitem.stack
+                local receivedBy = ""
+                local gainorloss = (strfmt("|ca80700"))
+                local logPrefix = "Confiscated"
+                if CA.SV.ShowConfiscate then CA.LogItem(logPrefix, seticon, inventoryitem.itemlink, itemType, stack or 1, receivedBy, gainorloss) end
+            end
+        end
+    end
+   
+g_JusticeStacks = {} -- Clear the Justice Item Stacks since we don't need this for anything else!
+g_InventoryStacks = {}
+CA.IndexInventory() -- Reindex the inventory with the correct values!
+    
 end
