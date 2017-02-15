@@ -1664,7 +1664,7 @@ local function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = "\t\t\t\tShow only notable Loot",
-                tooltip = "Don't show all looted items but only notable ones. (Any set items, any purple+ items, any blue+ special items).\n Note that any transactional values - Vendor/Trade/Craft will still show all items",
+                tooltip = "Don't show all looted items but only notable ones. (Any set items, any purple+ items, any blue+ special items).",
                 getFunc = function() return LUIE.ChatAnnouncements.SV.LootOnlyNotable end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.LootOnlyNotable = value end,
                 width = "full",
@@ -1687,6 +1687,40 @@ local function LUIE_CreateSettings()
                 width = "full",
                 disabled = function() return not LUIE.ChatAnnouncements.SV.Loot end,
                 default = LUIE.ChatAnnouncements.D.LootGroup,
+            },
+            {
+                type = "checkbox",
+                name = "\t\t\t\tHide Trash Quality Items",
+                tooltip = "Don't show trash quality items!",
+                getFunc = function() return LUIE.ChatAnnouncements.SV.LootNotTrash end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.LootNotTrash = value end,
+                width = "full",
+                disabled = function() return not
+                    (
+                        LUIE.ChatAnnouncements.SV.Loot or
+                        LUIE.ChatAnnouncements.SV.LootCraft or
+                        LUIE.ChatAnnouncements.SV.LootTrade or
+                        LUIE.ChatAnnouncements.SV.LootMail or
+                        LUIE.ChatAnnouncements.SV.LootVendor
+                    ) end,
+                default = LUIE.ChatAnnouncements.D.LootNotTrash,
+            },
+            {
+                type = "checkbox",
+                name = "\t\t\t\tHide annoying notable Items (Prevent Chat Spam)",
+                tooltip = "Laurel\nMalachite Shard\nUndaunted Plunder\nThe Serpent's Egg-Tooth\nThe Rid-Thar's Moon Pearls\nStar-Studded Champion's Baldric\nPeriapt of Elinhir\nGlass Style Motif Fragments\nMercenary Motif Pages",
+                getFunc = function() return LUIE.ChatAnnouncements.SV.LootBlacklist end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.LootBlacklist = value end,
+                width = "full",
+                disabled = function() return not
+                    (
+                        LUIE.ChatAnnouncements.SV.Loot or
+                        LUIE.ChatAnnouncements.SV.LootCraft or
+                        LUIE.ChatAnnouncements.SV.LootTrade or
+                        LUIE.ChatAnnouncements.SV.LootMail or
+                        LUIE.ChatAnnouncements.SV.LootVendor
+                    ) end,
+                default = LUIE.ChatAnnouncements.D.LootBlacklist,
             },
             {
                 type = "checkbox",
@@ -1735,6 +1769,16 @@ local function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
+                name = "\t\t\t\tShow Items Destroy",
+                tooltip = "Will show when an item is destroyed",
+                getFunc = function() return LUIE.ChatAnnouncements.SV.ShowDestroy end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowDestroy = value LUIE.ChatAnnouncements.RegisterDestroyEvents() end,
+                disabled = function() return not LUIE.ChatAnnouncements.SV.LootCraft end,
+                width = "full",
+                default = LUIE.ChatAnnouncements.D.ShowDestroy,
+            },
+            {
+                type = "checkbox",
                 name = "\t\t\t\tShow Materials consumed when crafting",
                 tooltip = "Toggles whether or not the materials used by a crafting pattern will report to chat.",
                 getFunc = function() return LUIE.ChatAnnouncements.SV.ShowCraftUse end,
@@ -1742,15 +1786,6 @@ local function LUIE_CreateSettings()
                 disabled = function() return not LUIE.ChatAnnouncements.SV.LootCraft end,
                 width = "full",
                 default = LUIE.ChatAnnouncements.D.ShowCraftUse,
-            },
-            {
-                type = "checkbox",
-                name = "Show Items Destroy",
-                tooltip = "Will show when an item is destroyed",
-                getFunc = function() return LUIE.ChatAnnouncements.SV.ShowDestroy end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowDestroy = value LUIE.ChatAnnouncements.RegisterDestroyEvents() end,
-                width = "full",
-                default = LUIE.ChatAnnouncements.D.ShowDestroy,
             },
             {
                 type = "checkbox",
@@ -1804,40 +1839,6 @@ local function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.LootShowStyle,
             },
             {
-                type = "checkbox",
-                name = "Hide Trash Quality Items",
-                tooltip = "Don't show trash quality items!",
-                getFunc = function() return LUIE.ChatAnnouncements.SV.LootNotTrash end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.LootNotTrash = value end,
-                width = "full",
-                disabled = function() return not
-                    (
-                        LUIE.ChatAnnouncements.SV.Loot or
-                        LUIE.ChatAnnouncements.SV.LootCraft or
-                        LUIE.ChatAnnouncements.SV.LootTrade or
-                        LUIE.ChatAnnouncements.SV.LootMail or
-                        LUIE.ChatAnnouncements.SV.LootVendor
-                    ) end,
-                default = LUIE.ChatAnnouncements.D.LootNotTrash,
-            },
-            {
-                type = "checkbox",
-                name = "Hide annoying Items (Prevent Chat Spam)",
-                tooltip = "Laurel\nMalachite Shard\nUndaunted Plunder\nThe Serpent's Egg-Tooth\nThe Rid-Thar's Moon Pearls\nStar-Studded Champion's Baldric\nPeriapt of Elinhir\nGlass Style Motif Fragments\nMercenary Motif Pages",
-                getFunc = function() return LUIE.ChatAnnouncements.SV.LootBlacklist end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.LootBlacklist = value end,
-                width = "full",
-                disabled = function() return not
-                    (
-                        LUIE.ChatAnnouncements.SV.Loot or
-                        LUIE.ChatAnnouncements.SV.LootCraft or
-                        LUIE.ChatAnnouncements.SV.LootTrade or
-                        LUIE.ChatAnnouncements.SV.LootMail or
-                        LUIE.ChatAnnouncements.SV.LootVendor
-                    ) end,
-                default = LUIE.ChatAnnouncements.D.LootBlacklist,
-            },
-            {
                 type = "dropdown",
                 name = "Bracket Settings for Item Context Specific Messages",
                 choices = itemBracketOptions,
@@ -1884,11 +1885,12 @@ local function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "MERGE LOOTLOG SALES WITH CURRENCY CHANGE",
+                name = "Merge LootLog sale with currency change",
                 tooltip = "Enabling this option will cause the 2 individual messages when you purchase/sell an item at a vendor to merge into one combined line",
                 getFunc = function() return LUIE.ChatAnnouncements.SV.LootCurrencyCombo end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.LootCurrencyCombo = value end,
                 width = "full",
+                warning = "Enable this only if you know what you are doing.",
                 disabled = function() return not
                     (
                         LUIE.ChatAnnouncements.SV.Loot or
