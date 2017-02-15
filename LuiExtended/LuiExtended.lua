@@ -1432,7 +1432,7 @@ local function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Print Justice Confiscation Messages",
+                name = "Show Justice Confiscation Messages",
                 --tooltip = "",
                 getFunc = function() return LUIE.ChatAnnouncements.SV.MiscConfiscate end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscConfiscate = value LUIE.ChatAnnouncements.RegisterDestroyEvents() end,
@@ -1663,6 +1663,33 @@ local function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
+                name = "\t\t\t\tShow only notable Loot",
+                tooltip = "Don't show all looted items but only notable ones. (Any set items, any purple+ items, any blue+ special items).\n Note that any transactional values - Vendor/Trade/Craft will still show all items",
+                getFunc = function() return LUIE.ChatAnnouncements.SV.LootOnlyNotable end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.LootOnlyNotable = value end,
+                width = "full",
+                disabled = function() return not
+                    (
+                        LUIE.ChatAnnouncements.SV.Loot or
+                        LUIE.ChatAnnouncements.SV.LootCraft or
+                        LUIE.ChatAnnouncements.SV.LootTrade or
+                        LUIE.ChatAnnouncements.SV.LootMail or
+                        LUIE.ChatAnnouncements.SV.LootVendor
+                    ) end,
+                default = LUIE.ChatAnnouncements.D.LootOnlyNotable,
+            },
+            {
+                type = "checkbox",
+                name = "\t\t\t\tShow Group members notable loot",
+                tooltip = "Also show the notable loot group members receive. Notable items are: any set items, any purple+ items, blue+ special items (e.g., treasure maps).\nShow loot must be enabled.",
+                getFunc = function() return LUIE.ChatAnnouncements.SV.LootGroup end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.LootGroup = value end,
+                width = "full",
+                disabled = function() return not LUIE.ChatAnnouncements.SV.Loot end,
+                default = LUIE.ChatAnnouncements.D.LootGroup,
+            },
+            {
+                type = "checkbox",
                 name = "\t\tShow Vendor ",
                 --tooltip = "",
                 getFunc = function() return LUIE.ChatAnnouncements.SV.LootVendor end,
@@ -1708,7 +1735,7 @@ local function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "\t\t\t\t\t\t\t\t\t\t\t\tShow Materials consumed when crafting",
+                name = "\t\t\t\tShow Materials consumed when crafting",
                 tooltip = "Toggles whether or not the materials used by a crafting pattern will report to chat.",
                 getFunc = function() return LUIE.ChatAnnouncements.SV.ShowCraftUse end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowCraftUse = value end,
@@ -1718,48 +1745,12 @@ local function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "\t\tShow Items Destroy",
+                name = "Show Items Destroy",
                 tooltip = "Will show when an item is destroyed",
                 getFunc = function() return LUIE.ChatAnnouncements.SV.ShowDestroy end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowDestroy = value LUIE.ChatAnnouncements.RegisterDestroyEvents() end,
                 width = "full",
                 default = LUIE.ChatAnnouncements.D.ShowDestroy,
-            },
-            {
-                type = "checkbox",
-                name = "\t\tShow Items Confiscated",
-                tooltip = "Will show when an item is destroyed",
-                getFunc = function() return LUIE.ChatAnnouncements.SV.ShowConfiscate end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowConfiscate = value LUIE.ChatAnnouncements.RegisterDestroyEvents() end,
-                width = "full",
-                default = LUIE.ChatAnnouncements.D.ShowConfiscate,
-            },
-            {
-                type = "checkbox",
-                name = "Show only notable Loot",
-                tooltip = "Don't show all looted items but only notable ones. (Any set items, any purple+ items, any blue+ special items).\n Note that any transactional values - Vendor/Trade/Craft will still show all items",
-                getFunc = function() return LUIE.ChatAnnouncements.SV.LootOnlyNotable end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.LootOnlyNotable = value end,
-                width = "full",
-                disabled = function() return not
-                    (
-                        LUIE.ChatAnnouncements.SV.Loot or
-                        LUIE.ChatAnnouncements.SV.LootCraft or
-                        LUIE.ChatAnnouncements.SV.LootTrade or
-                        LUIE.ChatAnnouncements.SV.LootMail or
-                        LUIE.ChatAnnouncements.SV.LootVendor
-                    ) end,
-                default = LUIE.ChatAnnouncements.D.LootOnlyNotable,
-            },
-            {
-                type = "checkbox",
-                name = "Show Group members notable loot",
-                tooltip = "Also show the notable loot group members receive. Notable items are: any set items, any purple+ items, blue+ special items (e.g., treasure maps).\nShow loot must be enabled.",
-                getFunc = function() return LUIE.ChatAnnouncements.SV.LootGroup end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.LootGroup = value end,
-                width = "full",
-                disabled = function() return not LUIE.ChatAnnouncements.SV.Loot end,
-                default = LUIE.ChatAnnouncements.D.LootGroup,
             },
             {
                 type = "checkbox",
