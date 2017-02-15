@@ -660,91 +660,91 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     ----------------------------------------------------------------
 
     -- Crafted Food
-    [61259] = 'LuiExtended/media/icons/consumable_food_green.dds', -- Health Food
-    [61260] = 'LuiExtended/media/icons/consumable_food_green.dds', -- Magicka Food
-    [61261] = 'LuiExtended/media/icons/consumable_food_green.dds', -- Stamina Food
+    [61259] = 'LuiExtended/media/icons/consumables/consumable_food_green.dds', -- Health Food
+    [61260] = 'LuiExtended/media/icons/consumables/consumable_food_green.dds', -- Magicka Food
+    [61261] = 'LuiExtended/media/icons/consumables/consumable_food_green.dds', -- Stamina Food
 
-    [61294] = 'LuiExtended/media/icons/consumable_food_blue.dds', -- Magicka + Stamina Food
-    [61255] = 'LuiExtended/media/icons/consumable_food_blue.dds', -- Health + Stamina Food
-    [61257] = 'LuiExtended/media/icons/consumable_food_blue.dds', -- Health + Magicka Food
+    [61294] = 'LuiExtended/media/icons/consumables/consumable_food_blue.dds', -- Magicka + Stamina Food
+    [61255] = 'LuiExtended/media/icons/consumables/consumable_food_blue.dds', -- Health + Stamina Food
+    [61257] = 'LuiExtended/media/icons/consumables/consumable_food_blue.dds', -- Health + Magicka Food
 
-    [61218] = 'LuiExtended/media/icons/consumable_food_purple.dds', -- Triple Food
+    [61218] = 'LuiExtended/media/icons/consumables/consumable_food_purple.dds', -- Triple Food
 
-    [72819] = 'LuiExtended/media/icons/consumable_orzorga_tripe_trifle_pocket.dds', -- Orzorga's Tripe Trifle Pocket
-    [72822] = 'LuiExtended/media/icons/consumable_orzorga_blood_price_pie.dds', -- Orzorga's Blood Price Pie
-    [72824] = 'LuiExtended/media/icons/consumable_orzorga_bear_haunch.dds', -- Orzorga's Smoked Bear Haunch
+    [72819] = 'LuiExtended/media/icons/consumables/consumable_orzorga_tripe_trifle_pocket.dds', -- Orzorga's Tripe Trifle Pocket
+    [72822] = 'LuiExtended/media/icons/consumables/consumable_orzorga_blood_price_pie.dds', -- Orzorga's Blood Price Pie
+    [72824] = 'LuiExtended/media/icons/consumables/consumable_orzorga_bear_haunch.dds', -- Orzorga's Smoked Bear Haunch
 
     -- Crafted Drink
-    [61322] = 'LuiExtended/media/icons/consumable_drink_green.dds', -- Health Drink
-    [61325] = 'LuiExtended/media/icons/consumable_drink_green.dds', -- Magicka Drink
-    [61328] = 'LuiExtended/media/icons/consumable_drink_green.dds', -- Stamina Drink
+    [61322] = 'LuiExtended/media/icons/consumables/consumable_drink_green.dds', -- Health Drink
+    [61325] = 'LuiExtended/media/icons/consumables/consumable_drink_green.dds', -- Magicka Drink
+    [61328] = 'LuiExtended/media/icons/consumables/consumable_drink_green.dds', -- Stamina Drink
 
-    [61345] = 'LuiExtended/media/icons/consumable_drink_blue.dds', -- Magicka + Stamina Drink
-    [61340] = 'LuiExtended/media/icons/consumable_drink_blue.dds', -- Health + Stamina Drink
-    [61335] = 'LuiExtended/media/icons/consumable_drink_blue.dds', -- Health + Magicka Drink
+    [61345] = 'LuiExtended/media/icons/consumables/consumable_drink_blue.dds', -- Magicka + Stamina Drink
+    [61340] = 'LuiExtended/media/icons/consumables/consumable_drink_blue.dds', -- Health + Stamina Drink
+    [61335] = 'LuiExtended/media/icons/consumables/consumable_drink_blue.dds', -- Health + Magicka Drink
 
-    [61350] = 'LuiExtended/media/icons/consumable_drink_purple.dds', -- Triple Drink
+    [61350] = 'LuiExtended/media/icons/consumables/consumable_drink_purple.dds', -- Triple Drink
 
-    [72816] = 'LuiExtended/media/icons/consumable_orzorga_red_frothgar.dds', -- Orzorga's Red Frothgar
+    [72816] = 'LuiExtended/media/icons/consumables/consumable_orzorga_red_frothgar.dds', -- Orzorga's Red Frothgar
 
     -- Crafted Seasonal Food
-    [84681] = 'LuiExtended/media/icons/consumable_event_crisp_and_crunchy_pumpkin.dds', -- Crisp and Crunchy Pumpkin Snack Skewer (UNTESTED)
-    [84709] = 'LuiExtended/media/icons/consumable_event_crunchy_spider_skewer.dds', -- Crunchy Spider Skewer (UNTESTED)
-    [84725] = 'LuiExtended/media/icons/consumable_event_frosted_brains.dds', -- Frosted Brains (UNTESTED)
-    [84678] = 'LuiExtended/media/icons/consumable_event_sweet_sanguine_apples.dds', -- Sweet Sanguine Apples (UNTESTED)
-    [86789] = 'LuiExtended/media/icons/consumable_event_alcaire_festival_sword-pie.dds', -- Alcaire Festival Sword-Pie (UNTESTED)
-    [86749] = 'LuiExtended/media/icons/consumable_event_jagga-drenched_mud_ball.dds', -- Jagga-Drenched "Mud Ball" (UNTESTED)
-    [86673] = 'LuiExtended/media/icons/consumable_event_lava_foot_soup-and-saltrice.dds', -- Lava Foot Soup-and-Saltrice (UNTESTED)
-    [86560] = 'LuiExtended/media/icons/consumable_event_old_aldmeri_orphan_gruel.dds', -- Old Aldmeri Orphan Gruel (UNTESTED)
-    [86787] = 'LuiExtended/media/icons/consumable_event_rajhins_sugar_claws.dds', -- Rajhin's Sugar Claws
-    [89955] = 'LuiExtended/media/icons/consumable_event_candied_jesters_coins.dds', -- Candied Jester's Coins
-    [89956] = 'LuiExtended/media/icons/consumable_event_princess_delight.dds', -- Princess' Delight
+    [84681] = 'LuiExtended/media/icons/consumables/consumable_event_crisp_and_crunchy_pumpkin.dds', -- Crisp and Crunchy Pumpkin Snack Skewer (UNTESTED)
+    [84709] = 'LuiExtended/media/icons/consumables/consumable_event_crunchy_spider_skewer.dds', -- Crunchy Spider Skewer (UNTESTED)
+    [84725] = 'LuiExtended/media/icons/consumables/consumable_event_frosted_brains.dds', -- Frosted Brains (UNTESTED)
+    [84678] = 'LuiExtended/media/icons/consumables/consumable_event_sweet_sanguine_apples.dds', -- Sweet Sanguine Apples (UNTESTED)
+    [86789] = 'LuiExtended/media/icons/consumables/consumable_event_alcaire_festival_sword-pie.dds', -- Alcaire Festival Sword-Pie (UNTESTED)
+    [86749] = 'LuiExtended/media/icons/consumables/consumable_event_jagga-drenched_mud_ball.dds', -- Jagga-Drenched "Mud Ball" (UNTESTED)
+    [86673] = 'LuiExtended/media/icons/consumables/consumable_event_lava_foot_soup-and-saltrice.dds', -- Lava Foot Soup-and-Saltrice (UNTESTED)
+    [86560] = 'LuiExtended/media/icons/consumables/consumable_event_old_aldmeri_orphan_gruel.dds', -- Old Aldmeri Orphan Gruel (UNTESTED)
+    [86787] = 'LuiExtended/media/icons/consumables/consumable_event_rajhins_sugar_claws.dds', -- Rajhin's Sugar Claws
+    [89955] = 'LuiExtended/media/icons/consumables/consumable_event_candied_jesters_coins.dds', -- Candied Jester's Coins
+    [89956] = 'LuiExtended/media/icons/consumables/consumable_event_princess_delight.dds', -- Princess' Delight
 
     -- Crafted Seasonal Drink
-    [84700] = 'LuiExtended/media/icons/consumable_event_bowl_of_peeled_eyeballs.dds', -- Bowl of "Peeled Eyeballs"
-    [84735] = 'LuiExtended/media/icons/consumable_event_double_bloody_mara.dds', -- Double Bloody Mara
-    [84720] = 'LuiExtended/media/icons/consumable_event_ghastly_eye_bowl.dds', -- Ghastly Eye Bowl
-    [84704] = 'LuiExtended/media/icons/consumable_event_witchmothers_party_punch.dds', -- Witchmother's Party Punch
-    [84731] = 'LuiExtended/media/icons/consumable_event_witchmothers_potent_brew.dds', -- Witchmother's Potent Brew
-    [86677] = 'LuiExtended/media/icons/consumable_event_bergama_warning_fire.dds', -- Bergama Warning Fire
-    [86746] = 'LuiExtended/media/icons/consumable_event_betnikh_twice-spiked_ale.dds', -- Betnikh Twice-Spiked Ale
-    [86559] = 'LuiExtended/media/icons/consumable_event_hissmir_fish-eye_rye.dds', -- Hissmir Fish-Eye Rye
-    [86791] = 'LuiExtended/media/icons/consumable_event_snow_bear_glow-wine.dds', -- Snow Bear Glow-Wine
-    [89957] = 'LuiExtended/media/icons/consumable_event_dubious_camoran_throne.dds', -- Dubious Camoran Throne
-    [89971] = 'LuiExtended/media/icons/consumable_event_jewels_of_misrule.dds', -- Jewels of Misrule
+    [84700] = 'LuiExtended/media/icons/consumables/consumable_event_bowl_of_peeled_eyeballs.dds', -- Bowl of "Peeled Eyeballs"
+    [84735] = 'LuiExtended/media/icons/consumables/consumable_event_double_bloody_mara.dds', -- Double Bloody Mara
+    [84720] = 'LuiExtended/media/icons/consumables/consumable_event_ghastly_eye_bowl.dds', -- Ghastly Eye Bowl
+    [84704] = 'LuiExtended/media/icons/consumables/consumable_event_witchmothers_party_punch.dds', -- Witchmother's Party Punch
+    [84731] = 'LuiExtended/media/icons/consumables/consumable_event_witchmothers_potent_brew.dds', -- Witchmother's Potent Brew
+    [86677] = 'LuiExtended/media/icons/consumables/consumable_event_bergama_warning_fire.dds', -- Bergama Warning Fire
+    [86746] = 'LuiExtended/media/icons/consumables/consumable_event_betnikh_twice-spiked_ale.dds', -- Betnikh Twice-Spiked Ale
+    [86559] = 'LuiExtended/media/icons/consumables/consumable_event_hissmir_fish-eye_rye.dds', -- Hissmir Fish-Eye Rye
+    [86791] = 'LuiExtended/media/icons/consumables/consumable_event_snow_bear_glow-wine.dds', -- Snow Bear Glow-Wine
+    [89957] = 'LuiExtended/media/icons/consumables/consumable_event_dubious_camoran_throne.dds', -- Dubious Camoran Throne
+    [89971] = 'LuiExtended/media/icons/consumables/consumable_event_jewels_of_misrule.dds', -- Jewels of Misrule
 
     -- Vendor Food & Drink
-    [66551] = 'LuiExtended/media/icons/consumable_food_white.dds', -- Vendor Health Food
-    [66568] = 'LuiExtended/media/icons/consumable_food_white.dds', -- Vendor Magicka Food
-    [66576] = 'LuiExtended/media/icons/consumable_food_white.dds', -- Vendor Stamina Food
-    [66586] = 'LuiExtended/media/icons/consumable_drink_white.dds', -- Vendor Health Drink
-    [66590] = 'LuiExtended/media/icons/consumable_drink_white.dds', -- Vendor Magicka Drink
-    [66594] = 'LuiExtended/media/icons/consumable_drink_white.dds', -- Vendor Stamina Drink
+    [66551] = 'LuiExtended/media/icons/consumables/consumable_food_white.dds', -- Vendor Health Food
+    [66568] = 'LuiExtended/media/icons/consumables/consumable_food_white.dds', -- Vendor Magicka Food
+    [66576] = 'LuiExtended/media/icons/consumables/consumable_food_white.dds', -- Vendor Stamina Food
+    [66586] = 'LuiExtended/media/icons/consumables/consumable_drink_white.dds', -- Vendor Health Drink
+    [66590] = 'LuiExtended/media/icons/consumables/consumable_drink_white.dds', -- Vendor Magicka Drink
+    [66594] = 'LuiExtended/media/icons/consumables/consumable_drink_white.dds', -- Vendor Stamina Drink
 
     -- AVA Food & Drink
-    [72961] = 'LuiExtended/media/icons/consumable_ava_field_bar.dds', -- Cyrodilic Field Bar
-    [72956] = 'LuiExtended/media/icons/consumable_ava_field_tack.dds', -- Cyrodilic Field Tack
-    [72959] = 'LuiExtended/media/icons/consumable_ava_field_treat.dds', -- Cyrodilic Field Treat
-    [72971] = 'LuiExtended/media/icons/consumable_ava_field_tonic.dds', -- Cyrodilic Field Tonic
-    [72965] = 'LuiExtended/media/icons/consumable_ava_field_brew.dds', -- Cyrodilic Field Brew
-    [72968] = 'LuiExtended/media/icons/consumable_ava_field_tea.dds', -- Cyrodilic Field Tea
+    [72961] = 'LuiExtended/media/icons/consumables/consumable_ava_field_bar.dds', -- Cyrodilic Field Bar
+    [72956] = 'LuiExtended/media/icons/consumables/consumable_ava_field_tack.dds', -- Cyrodilic Field Tack
+    [72959] = 'LuiExtended/media/icons/consumables/consumable_ava_field_treat.dds', -- Cyrodilic Field Treat
+    [72971] = 'LuiExtended/media/icons/consumables/consumable_ava_field_tonic.dds', -- Cyrodilic Field Tonic
+    [72965] = 'LuiExtended/media/icons/consumables/consumable_ava_field_brew.dds', -- Cyrodilic Field Brew
+    [72968] = 'LuiExtended/media/icons/consumables/consumable_ava_field_tea.dds', -- Cyrodilic Field Tea
 
     -- Crown Food & Drink
-    [85484] = 'LuiExtended/media/icons/consumable_crown_crate_food.dds', -- Crown Crate Fortifying Meal
-    [68411] = 'LuiExtended/media/icons/consumable_crown_food.dds', -- Crown Fortifying Meal
-    [85497] = 'LuiExtended/media/icons/consumable_crown_crate_drink.dds', -- Crown Crate Refreshing Drink
-    [68416] = 'LuiExtended/media/icons/consumable_crown_drink.dds', -- Crown Refreshing Drink
+    [85484] = 'LuiExtended/media/icons/consumables/consumable_crown_crate_food.dds', -- Crown Crate Fortifying Meal
+    [68411] = 'LuiExtended/media/icons/consumables/consumable_crown_food.dds', -- Crown Fortifying Meal
+    [85497] = 'LuiExtended/media/icons/consumables/consumable_crown_crate_drink.dds', -- Crown Crate Refreshing Drink
+    [68416] = 'LuiExtended/media/icons/consumables/consumable_crown_drink.dds', -- Crown Refreshing Drink
 
     -- Experience Bonuses
-    [64210] = 'LuiExtended/media/icons/consumable_xp_psijic.dds', -- Psijic Ambrosia
-    [66776] = 'LuiExtended/media/icons/consumable_xp_scroll.dds', -- Crown Experience Scroll
-    [85501] = 'LuiExtended/media/icons/consumable_xp_cratescroll_1.dds', -- Crown Crate Experience Scroll
-    [85502] = 'LuiExtended/media/icons/consumable_xp_cratescroll_2.dds', -- Major Crown Crate Experience Scroll
-    [85503] = 'LuiExtended/media/icons/consumable_xp_cratescroll_3.dds', -- Grand Crown Crate Experience Scroll
+    [64210] = 'LuiExtended/media/icons/consumables/consumable_xp_psijic.dds', -- Psijic Ambrosia
+    [66776] = 'LuiExtended/media/icons/consumables/consumable_xp_scroll.dds', -- Crown Experience Scroll
+    [85501] = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_1.dds', -- Crown Crate Experience Scroll
+    [85502] = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_2.dds', -- Major Crown Crate Experience Scroll
+    [85503] = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_3.dds', -- Grand Crown Crate Experience Scroll
 
     -- Misc Consumables
-    [86794] = 'LuiExtended/media/icons/consumable_event_festival_mints.dds', -- Very Cold (High Hrothgar Festival Mints)
-    [86740] = 'LuiExtended/media/icons/consumable_event_festival_grog.dds', -- Very Drunk (Sailor's Warning Festival Grog)
+    [86794] = 'LuiExtended/media/icons/consumables/consumable_event_festival_mints.dds', -- Very Cold (High Hrothgar Festival Mints)
+    [86740] = 'LuiExtended/media/icons/consumables/consumable_event_festival_grog.dds', -- Very Drunk (Sailor's Warning Festival Grog)
 
     -- Base Momentos
     [26829] = 'LuiExtended/media/icons/momento_almalexias_enchanted_lantern.dds', -- Light of the Tribunal (Almalexia's Enchanted Lantern)
@@ -2926,9 +2926,9 @@ E.FakePlayerBuffs = { -- Fake buffs applied onto the player by self
     [86702] = {icon = 'esoui/art/icons/ability_rogue_067.dds', name = 'Hidden', duration = 0}, -- Clairvoyance Fx (Crown Survivor's Elixir)
 
     -- Misc Consumables
-    [85355] = {icon = 'LuiExtended/media/icons/consumable_event_jugglers_torch.dds', name = 'Fire-Breather\'s Oil Bun', duration = 12000}, -- Flame Juggling (Consumable Version)
-    [85354] = {icon = 'LuiExtended/media/icons/consumable_event_jugglers_knife.dds', name = 'Disposable Juggling Knives', duration = 12000}, -- Dagger Juggling (Consumable Verison)
-    [85353] = {icon = 'LuiExtended/media/icons/consumable_event_swallowable_sword.dds', name = 'Disposable Swallower\'s Sword', duration = 12000}, -- Sword Swallowing (Consumable Version)
+    [85355] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_jugglers_torch.dds', name = 'Fire-Breather\'s Oil Bun', duration = 12000}, -- Flame Juggling (Consumable Version)
+    [85354] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_jugglers_knife.dds', name = 'Disposable Juggling Knives', duration = 12000}, -- Dagger Juggling (Consumable Verison)
+    [85353] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_swallowable_sword.dds', name = 'Disposable Swallower\'s Sword', duration = 12000}, -- Sword Swallowing (Consumable Version)
 
     -- Base Momentos
     [41988] = {icon = 'LuiExtended/media/icons/momento_bonesnap_binding_stone.dds', name = 'Bonesnap Binding Stone', duration = 10000}, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
@@ -2971,9 +2971,9 @@ E.FakePlayerBuffs = { -- Fake buffs applied onto the player by self
     [84130] = {icon = 'LuiExtended/media/icons/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Altmer Male Dance (Lava Foot Stomp)
     [84131] = {icon = 'LuiExtended/media/icons/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Altmer Female Dance (Lava Foot Stomp)
     [84133] = {icon = 'LuiExtended/media/icons/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Nord Dance (Lava Foot Stomp)
-    [84528] = {icon = 'LuiExtended/media/icons/consumable_event_jugglers_torch.dds', name = 'Torch Juggling', duration = 12000}, -- Flame Juggling (Castle Charm Challenge)
-    [84506] = {icon = 'LuiExtended/media/icons/consumable_event_jugglers_knife.dds', name = 'Dagger Juggling', duration = 12000}, -- Dagger Juggling (Castle Charm Challenge)
-    [84533] = {icon = 'LuiExtended/media/icons/consumable_event_swallowable_sword.dds', name = 'Sword Swallowing', duration = 12000}, -- Sword Swallowing (Castle Charm Challenge)
+    [84528] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_jugglers_torch.dds', name = 'Torch Juggling', duration = 12000}, -- Flame Juggling (Castle Charm Challenge)
+    [84506] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_jugglers_knife.dds', name = 'Dagger Juggling', duration = 12000}, -- Dagger Juggling (Castle Charm Challenge)
+    [84533] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_swallowable_sword.dds', name = 'Sword Swallowing', duration = 12000}, -- Sword Swallowing (Castle Charm Challenge)
     [84847] = {icon = 'LuiExtended/media/icons/ability_event_celebratory_belch.dds', name = 'Celebratory Belch', duration = 5000}, -- Celebratory Belch (Stonetooth Bash)
 
     -- QUEST RELATED (CRAGLORN)
