@@ -758,7 +758,7 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
 
     -- Seasonal Momentos
     [77123] = 'LuiExtended/media/icons/momentos/momento_event_jubilee_cake.dds', -- 2017 Anniversary EXP Buff (2nd Annual Jubilee Cake)
-    [84369] = 'LuiExtended/media/icons/ability_event_witchmothers_brew.dds', -- Witchmother's Brew (Witchmother's Whistle)
+    [84369] = 'LuiExtended/media/icons/abilities/ability_event_witchmothers_brew.dds', -- Witchmother's Brew (Witchmother's Whistle)
     [86774] = 'LuiExtended/media/icons/momentos/momento_event_mud_ball.dds', -- Mudball (Mud Ball Pouch)
     [86777] = 'LuiExtended/media/icons/momentos/momento_event_mud_ball.dds', -- Mudball (Mud Ball Pouch)
     [86775] = 'LuiExtended/media/icons/momentos/momento_event_mud_ball.dds', -- Covered in Mud (Mud Ball Pouch)
@@ -768,7 +768,7 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [85344] = 'LuiExtended/media/icons/momentos/momento_storm_atronach_aura.dds', -- Atronach Aura (Storm Atronach Aura)
 
     -- Assistants
-    [77645] = 'LuiExtended/media/icons/ability_innate_hidden.dds', -- Stealth (Pirharri the Smuggler)
+    [77645] = 'LuiExtended/media/icons/abilities/ability_innate_hidden.dds', -- Stealth (Pirharri the Smuggler)
 
     ----------------------------------------------------------------
     -- ENCHANTS
@@ -798,37 +798,37 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     -- STATUS EFFECT PROCS --
     -------------------------------------
 
-    [18084] = 'LuiExtended/media/icons/ability_innate_proc_burning.dds', -- Burning (Fire Status Effect)
-    [21925] = 'LuiExtended/media/icons/ability_innate_proc_diseased.dds', -- Diseased (Disease Status Effect)
-    [21927] = 'LuiExtended/media/icons/ability_innate_proc_diseased.dds', -- Major Defile (Disease Status Effect)
-    [21481] = 'LuiExtended/media/icons/ability_innate_proc_chill.dds', -- Chill (Frost Status Effect)
-    [68368] = 'LuiExtended/media/icons/ability_innate_proc_chill.dds', -- Minor Maim (Frost Status Effect)
-    [21929] = 'LuiExtended/media/icons/ability_innate_proc_poisoned.dds', -- Poisoned (Poison Status Effect)
-    [21487] = 'LuiExtended/media/icons/ability_innate_proc_concussion.dds', -- Concussion (Shock Status Effect)
-    [68359] = 'LuiExtended/media/icons/ability_innate_proc_concussion.dds', -- Minor Vulnerability (Shock Status Effect)
+    [18084] = 'LuiExtended/media/icons/abilities/ability_innate_proc_burning.dds', -- Burning (Fire Status Effect)
+    [21925] = 'LuiExtended/media/icons/abilities/ability_innate_proc_diseased.dds', -- Diseased (Disease Status Effect)
+    [21927] = 'LuiExtended/media/icons/abilities/ability_innate_proc_diseased.dds', -- Major Defile (Disease Status Effect)
+    [21481] = 'LuiExtended/media/icons/abilities/ability_innate_proc_chill.dds', -- Chill (Frost Status Effect)
+    [68368] = 'LuiExtended/media/icons/abilities/ability_innate_proc_chill.dds', -- Minor Maim (Frost Status Effect)
+    [21929] = 'LuiExtended/media/icons/abilities/ability_innate_proc_poisoned.dds', -- Poisoned (Poison Status Effect)
+    [21487] = 'LuiExtended/media/icons/abilities/ability_innate_proc_concussion.dds', -- Concussion (Shock Status Effect)
+    [68359] = 'LuiExtended/media/icons/abilities/ability_innate_proc_concussion.dds', -- Minor Vulnerability (Shock Status Effect)
 
     -------------------------------------
     -- VULNERABILITY PROCS --
     -------------------------------------
 
-    [68448] = 'LuiExtended/media/icons/ability_innate_proc_explosion.dds', -- Explosion (Fire Vulnerability Proc)
-    [21480] = 'LuiExtended/media/icons/ability_innate_proc_explosion.dds', -- Explosion (Fire Vulnerability Proc)
-    [68463] = 'LuiExtended/media/icons/ability_innate_proc_venom.dds', -- Venom (Poison Vulnerability Proc)
-    [68464] = 'LuiExtended/media/icons/ability_innate_proc_venom.dds', -- Venom (Poison Vulnerability Proc)
-    [68462] = 'LuiExtended/media/icons/ability_innate_proc_pestilence.dds', -- Pestilence (Disease Vulnerability Proc)
-    [68461] = 'LuiExtended/media/icons/ability_innate_proc_pestilence.dds', -- Pestilence (Disease Vulnerability Proc)
-    [68451] = 'LuiExtended/media/icons/ability_innate_proc_disintegration.dds', -- Disintegration (Lightning Vulnerability Proc)
-    [68455] = 'LuiExtended/media/icons/ability_innate_proc_disintegration.dds', -- Disintegration (Lightning Vulnerability Proc)
-    [68458] = 'LuiExtended/media/icons/ability_innate_proc_deep_freeze.dds', -- Deep Freeze (Frost Vulnerability Proc)
-    [68457] = 'LuiExtended/media/icons/ability_innate_proc_deep_freeze.dds', -- Deep Freeze (Frost Vulnerability Proc)
+    [68448] = 'LuiExtended/media/icons/abilities/ability_innate_proc_explosion.dds', -- Explosion (Fire Vulnerability Proc)
+    [21480] = 'LuiExtended/media/icons/abilities/ability_innate_proc_explosion.dds', -- Explosion (Fire Vulnerability Proc)
+    [68463] = 'LuiExtended/media/icons/abilities/ability_innate_proc_venom.dds', -- Venom (Poison Vulnerability Proc)
+    [68464] = 'LuiExtended/media/icons/abilities/ability_innate_proc_venom.dds', -- Venom (Poison Vulnerability Proc)
+    [68462] = 'LuiExtended/media/icons/abilities/ability_innate_proc_pestilence.dds', -- Pestilence (Disease Vulnerability Proc)
+    [68461] = 'LuiExtended/media/icons/abilities/ability_innate_proc_pestilence.dds', -- Pestilence (Disease Vulnerability Proc)
+    [68451] = 'LuiExtended/media/icons/abilities/ability_innate_proc_disintegration.dds', -- Disintegration (Lightning Vulnerability Proc)
+    [68455] = 'LuiExtended/media/icons/abilities/ability_innate_proc_disintegration.dds', -- Disintegration (Lightning Vulnerability Proc)
+    [68458] = 'LuiExtended/media/icons/abilities/ability_innate_proc_deep_freeze.dds', -- Deep Freeze (Frost Vulnerability Proc)
+    [68457] = 'LuiExtended/media/icons/abilities/ability_innate_proc_deep_freeze.dds', -- Deep Freeze (Frost Vulnerability Proc)
 
     -------------------------------------
     -- CHAMPION POINTS --
     -------------------------------------
 
     -- The Steed
-    [60409] = 'LuiExtended/media/icons/ability_champion_invigorating_bash.dds', -- Invigorating Bash
-    [64068] = 'LuiExtended/media/icons/ability_champion_reinforced.dds', -- Reinforced
+    [60409] = 'LuiExtended/media/icons/abilities/ability_champion_invigorating_bash.dds', -- Invigorating Bash
+    [64068] = 'LuiExtended/media/icons/abilities/ability_champion_reinforced.dds', -- Reinforced
 
     -- The Lady
     [63110] = 'esoui/art/icons/ability_mage_013.dds', -- Spell Absorption
@@ -836,7 +836,7 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [59287] = 'esoui/art/icons/ability_warrior_031.dds', -- Unchained
 
     -- The Lord
-    [61015] = 'LuiExtended/media/icons/ability_champion_reinforced.dds', -- Determination
+    [61015] = 'LuiExtended/media/icons/abilities/ability_champion_reinforced.dds', -- Determination
 
     -- The Tower
     [62518] = 'esoui/art/icons/ability_healer_004.dds', -- Mara's Gift
@@ -847,7 +847,7 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
 
     -- The Apprentice
     [63152] = 'esoui/art/icons/ability_mage_058.dds', -- Vengeance
-    [63151] = 'LuiExtended/media/icons/ability_champion_vengeance.dds', -- Vengeance
+    [63151] = 'LuiExtended/media/icons/abilities/ability_champion_vengeance.dds', -- Vengeance
     --[59530] = 'esoui/art/icons/ability_mage_045.dds' -- Foresight (Reserved if need to add later)
     [63114] = 'esoui/art/icons/ability_mage_038.dds', -- Arcane Well
 
@@ -868,325 +868,325 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     -------------------------------
     -- Player Basic
     -------------------------------
-    [28549] = 'LuiExtended/media/icons/ability_innate_roll_dodge.dds', -- Roll Dodge
-    [69143] = 'LuiExtended/media/icons/ability_innate_dodge_fatigue.dds', -- Dodge Fatigue
-    --[20309] = 'LuiExtended/media/icons/ability_innate_hidden.dds', -- Hidden (Reserved here if it ever becomes visible)
-    [20301] = 'LuiExtended/media/icons/ability_innate_hidden.dds', -- Crouch Drain
-    [26245] = 'LuiExtended/media/icons/ability_innate_slam_stun.dds', -- Slam Stun (Stun from crouch attack)
-    --[973] = 'LuiExtended/media/icons/ability_innate_sprint.dds', -- Sprint (Reserved here if it ever becomes visible)
-    [15356] = 'LuiExtended/media/icons/ability_innate_sprint.dds', -- Sprint Drain
-    [10950] = 'LuiExtended/media/icons/ability_innate_fall_snare.dds', -- Fall Snare
-    [42514] = 'LuiExtended/media/icons/ability_innate_hard_dismount.dds', -- Hard Dismount
-    --[33439] = 'LuiExtended/media/icons/ability_innate_mount_sprint.dds', -- Mount Sprint (Generic) (Resevered here if it ever becomes visible)
-    [14890] = 'LuiExtended/media/icons/ability_innate_block.dds', -- Block
-    [16270] = 'LuiExtended/media/icons/ability_innate_block.dds', -- Brace Cost
-    [88724] = 'LuiExtended/media/icons/ability_innate_block.dds', -- Brace Cost
-    [86310] = 'LuiExtended/media/icons/ability_innate_block_stun.dds', -- Stagger (Player blocks NPC charged attack)
-    [86309] = 'LuiExtended/media/icons/ability_innate_block_stun.dds', -- Stun (Player blocks NPC charged attack)
-    [86312] = 'LuiExtended/media/icons/ability_innate_block_stun.dds', -- Stun (Player blocks Ogrim Body Slam)
+    [28549] = 'LuiExtended/media/icons/abilities/ability_innate_roll_dodge.dds', -- Roll Dodge
+    [69143] = 'LuiExtended/media/icons/abilities/ability_innate_dodge_fatigue.dds', -- Dodge Fatigue
+    --[20309] = 'LuiExtended/media/icons/abilities/ability_innate_hidden.dds', -- Hidden (Reserved here if it ever becomes visible)
+    [20301] = 'LuiExtended/media/icons/abilities/ability_innate_hidden.dds', -- Crouch Drain
+    [26245] = 'LuiExtended/media/icons/abilities/ability_innate_slam_stun.dds', -- Slam Stun (Stun from crouch attack)
+    --[973] = 'LuiExtended/media/icons/abilities/ability_innate_sprint.dds', -- Sprint (Reserved here if it ever becomes visible)
+    [15356] = 'LuiExtended/media/icons/abilities/ability_innate_sprint.dds', -- Sprint Drain
+    [10950] = 'LuiExtended/media/icons/abilities/ability_innate_fall_snare.dds', -- Fall Snare
+    [42514] = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', -- Hard Dismount
+    --[33439] = 'LuiExtended/media/icons/abilities/ability_innate_mount_sprint.dds', -- Mount Sprint (Generic) (Resevered here if it ever becomes visible)
+    [14890] = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', -- Block
+    [16270] = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', -- Brace Cost
+    [88724] = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', -- Brace Cost
+    [86310] = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', -- Stagger (Player blocks NPC charged attack)
+    [86309] = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', -- Stun (Player blocks NPC charged attack)
+    [86312] = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', -- Stun (Player blocks Ogrim Body Slam)
     [45902] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off-Balance (Standard block/power attack off-balance)
-    [21970] = 'LuiExtended/media/icons/ability_innate_bash.dds', -- Bash
+    [21970] = 'LuiExtended/media/icons/abilities/ability_innate_bash.dds', -- Bash
     [21973] = '', -- Bash (Hides icon for interrupt)
-    [21971] = 'LuiExtended/media/icons/ability_innate_block_stun.dds', -- Bash Stun (Stun from bashing cast)
-    [20172] = 'LuiExtended/media/icons/ability_innate_off-balance_exploit.dds', -- Off-Balance Exploit
-    [16566] = 'LuiExtended/media/icons/ability_innate_cc_immunity.dds', -- CC Immunity
+    [21971] = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', -- Bash Stun (Stun from bashing cast)
+    [20172] = 'LuiExtended/media/icons/abilities/ability_innate_off-balance_exploit.dds', -- Off-Balance Exploit
+    [16566] = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', -- CC Immunity
 
     -------------------------------
     -- DRAGONKNIGHT PASSIVES
     -------------------------------
 
     -- Ardent Flame
-    [29436] = 'LuiExtended/media/icons/ability_dragonknight_warmth.dds', -- Warmth (Warmth - Rank 1)
-    [45016] = 'LuiExtended/media/icons/ability_dragonknight_warmth.dds', -- Warmth (Warmth - Rank 2)
+    [29436] = 'LuiExtended/media/icons/abilities/ability_dragonknight_warmth.dds', -- Warmth (Warmth - Rank 1)
+    [45016] = 'LuiExtended/media/icons/abilities/ability_dragonknight_warmth.dds', -- Warmth (Warmth - Rank 2)
 
     -- Earthen Heart
-    [29465] = 'LuiExtended/media/icons/ability_dragonknight_battle_roar.dds', -- Battle Roar (Battle Roar - Rank 1)
-    [29466] = 'LuiExtended/media/icons/ability_dragonknight_battle_roar.dds', -- Battle Roar (Battle Roar - Rank 1)
-    [29467] = 'LuiExtended/media/icons/ability_dragonknight_battle_roar.dds', -- Battle Roar (Battle Roar - Rank 1)
-    [44986] = 'LuiExtended/media/icons/ability_dragonknight_battle_roar.dds', -- Battle Roar (Battle Roar - Rank 2)
-    [44987] = 'LuiExtended/media/icons/ability_dragonknight_battle_roar.dds', -- Battle Roar (Battle Roar - Rank 2)
-    [44988] = 'LuiExtended/media/icons/ability_dragonknight_battle_roar.dds', -- Battle Roar (Battle Roar - Rank 2)
+    [29465] = 'LuiExtended/media/icons/abilities/ability_dragonknight_battle_roar.dds', -- Battle Roar (Battle Roar - Rank 1)
+    [29466] = 'LuiExtended/media/icons/abilities/ability_dragonknight_battle_roar.dds', -- Battle Roar (Battle Roar - Rank 1)
+    [29467] = 'LuiExtended/media/icons/abilities/ability_dragonknight_battle_roar.dds', -- Battle Roar (Battle Roar - Rank 1)
+    [44986] = 'LuiExtended/media/icons/abilities/ability_dragonknight_battle_roar.dds', -- Battle Roar (Battle Roar - Rank 2)
+    [44987] = 'LuiExtended/media/icons/abilities/ability_dragonknight_battle_roar.dds', -- Battle Roar (Battle Roar - Rank 2)
+    [44988] = 'LuiExtended/media/icons/abilities/ability_dragonknight_battle_roar.dds', -- Battle Roar (Battle Roar - Rank 2)
 
-    [61798] = 'LuiExtended/media/icons/ability_dragonknight_mountains_blessing.dds', -- Minor Brutality (Mountain's Blessing - Rank 1)
-    [29474] = 'LuiExtended/media/icons/ability_dragonknight_mountains_blessing.dds', -- Mountain's Blessing (Mountain's Blessing - Rank 1)
-    [61799] = 'LuiExtended/media/icons/ability_dragonknight_mountains_blessing.dds', -- Minor Brutality (Mountain's Blessing - Rank 2)
-    [45005] = 'LuiExtended/media/icons/ability_dragonknight_mountains_blessing.dds', -- Mountain's Blessing (Mountain's Blessing - Rank 1)
+    [61798] = 'LuiExtended/media/icons/abilities/ability_dragonknight_mountains_blessing.dds', -- Minor Brutality (Mountain's Blessing - Rank 1)
+    [29474] = 'LuiExtended/media/icons/abilities/ability_dragonknight_mountains_blessing.dds', -- Mountain's Blessing (Mountain's Blessing - Rank 1)
+    [61799] = 'LuiExtended/media/icons/abilities/ability_dragonknight_mountains_blessing.dds', -- Minor Brutality (Mountain's Blessing - Rank 2)
+    [45005] = 'LuiExtended/media/icons/abilities/ability_dragonknight_mountains_blessing.dds', -- Mountain's Blessing (Mountain's Blessing - Rank 1)
 
-    [29476] = 'LuiExtended/media/icons/ability_dragonknight_helping_hands.dds', -- Kynareth's Blessing (Helping Hands - Rank 1)
-    [45010] = 'LuiExtended/media/icons/ability_dragonknight_helping_hands.dds', -- Kynareth's Blessing (Helping Hands - Rank 2)
+    [29476] = 'LuiExtended/media/icons/abilities/ability_dragonknight_helping_hands.dds', -- Kynareth's Blessing (Helping Hands - Rank 1)
+    [45010] = 'LuiExtended/media/icons/abilities/ability_dragonknight_helping_hands.dds', -- Kynareth's Blessing (Helping Hands - Rank 2)
 
     -------------------------------
     -- SORCERER PASSIVES
     -------------------------------
 
     -- Dark Magic
-    [31384] = 'LuiExtended/media/icons/ability_sorcerer_blood_magic.dds', -- Blood Magic (Blood Magic - Rank 1)
-    [45173] = 'LuiExtended/media/icons/ability_sorcerer_blood_magic.dds', -- Blood Magic (Blood Magic - Rank 2)
+    [31384] = 'LuiExtended/media/icons/abilities/ability_sorcerer_blood_magic.dds', -- Blood Magic (Blood Magic - Rank 1)
+    [45173] = 'LuiExtended/media/icons/abilities/ability_sorcerer_blood_magic.dds', -- Blood Magic (Blood Magic - Rank 2)
 
-    [62319] = 'LuiExtended/media/icons/ability_sorcerer_exploitation.dds', -- Minor Prophecy (Exploitation - Rank 1)
-    [62320] = 'LuiExtended/media/icons/ability_sorcerer_exploitation.dds', -- Minor Prophecy (Exploitation - Rank 2)
+    [62319] = 'LuiExtended/media/icons/abilities/ability_sorcerer_exploitation.dds', -- Minor Prophecy (Exploitation - Rank 1)
+    [62320] = 'LuiExtended/media/icons/abilities/ability_sorcerer_exploitation.dds', -- Minor Prophecy (Exploitation - Rank 2)
 
     -- Daedric Summoning
-    [64860] = 'LuiExtended/media/icons/ability_sorcerer_rebate.dds', -- Rebate Magic (Rebate - Rank 1)
-    [64861] = 'LuiExtended/media/icons/ability_sorcerer_rebate.dds', -- Rebate Magic (Rebate - Rank 2)
+    [64860] = 'LuiExtended/media/icons/abilities/ability_sorcerer_rebate.dds', -- Rebate Magic (Rebate - Rank 1)
+    [64861] = 'LuiExtended/media/icons/abilities/ability_sorcerer_rebate.dds', -- Rebate Magic (Rebate - Rank 2)
 
     -- Storm Calling
-    [31424] = 'LuiExtended/media/icons/ability_sorcerer_implosion.dds', -- Implosion (Implosion - Rank 1)
-    [82803] = 'LuiExtended/media/icons/ability_sorcerer_implosion.dds', -- Implosion (Implosion - Rank 1)
-    [45194] = 'LuiExtended/media/icons/ability_sorcerer_implosion.dds', -- Implosion (Implosion - Rank 2)
-    [82806] = 'LuiExtended/media/icons/ability_sorcerer_implosion.dds', -- Implosion (Implosion - Rank 2)
+    [31424] = 'LuiExtended/media/icons/abilities/ability_sorcerer_implosion.dds', -- Implosion (Implosion - Rank 1)
+    [82803] = 'LuiExtended/media/icons/abilities/ability_sorcerer_implosion.dds', -- Implosion (Implosion - Rank 1)
+    [45194] = 'LuiExtended/media/icons/abilities/ability_sorcerer_implosion.dds', -- Implosion (Implosion - Rank 2)
+    [82806] = 'LuiExtended/media/icons/abilities/ability_sorcerer_implosion.dds', -- Implosion (Implosion - Rank 2)
 
     -------------------------------
     -- NIGHTBLADE PASSIVES
     -------------------------------
 
     -- Assassination
-    [36633] = 'LuiExtended/media/icons/ability_nightblade_executioner.dds', -- Executioner (Executioner - Rank 1)
-    [45050] = 'LuiExtended/media/icons/ability_nightblade_executioner.dds', -- Executioner (Executioner - Rank 2)
+    [36633] = 'LuiExtended/media/icons/abilities/ability_nightblade_executioner.dds', -- Executioner (Executioner - Rank 1)
+    [45050] = 'LuiExtended/media/icons/abilities/ability_nightblade_executioner.dds', -- Executioner (Executioner - Rank 2)
 
-    [61882] = 'LuiExtended/media/icons/ability_nightblade_hemorrhage.dds', -- Minor Savagery (Hemorrhage - Rank 1)
-    [61898] = 'LuiExtended/media/icons/ability_nightblade_hemorrhage.dds', -- Minor Savagery (Hemorrhage - Rank 2)
+    [61882] = 'LuiExtended/media/icons/abilities/ability_nightblade_hemorrhage.dds', -- Minor Savagery (Hemorrhage - Rank 1)
+    [61898] = 'LuiExtended/media/icons/abilities/ability_nightblade_hemorrhage.dds', -- Minor Savagery (Hemorrhage - Rank 2)
 
     -- Shadow
-    [18868] = 'LuiExtended/media/icons/ability_nightblade_shadow_barrier.dds', -- Major Ward (Shadow Barrier - Rank 1)
-    [66075] = 'LuiExtended/media/icons/ability_nightblade_shadow_barrier.dds', -- Major Resolve (Shadow Barrier - Rank 1)
-    [45076] = 'LuiExtended/media/icons/ability_nightblade_shadow_barrier.dds', -- Major Ward (Shadow Barrier - Rank 2)
-    [66083] = 'LuiExtended/media/icons/ability_nightblade_shadow_barrier.dds', -- Major Resolve (Shadow Barrier - Rank 2)
+    [18868] = 'LuiExtended/media/icons/abilities/ability_nightblade_shadow_barrier.dds', -- Major Ward (Shadow Barrier - Rank 1)
+    [66075] = 'LuiExtended/media/icons/abilities/ability_nightblade_shadow_barrier.dds', -- Major Resolve (Shadow Barrier - Rank 1)
+    [45076] = 'LuiExtended/media/icons/abilities/ability_nightblade_shadow_barrier.dds', -- Major Ward (Shadow Barrier - Rank 2)
+    [66083] = 'LuiExtended/media/icons/abilities/ability_nightblade_shadow_barrier.dds', -- Major Resolve (Shadow Barrier - Rank 2)
 
     -- Siphoning
-    [63705] = 'LuiExtended/media/icons/ability_nightblade_catalyst.dds', -- Amphibious Regen (Catalyst - Rank 1)
-    [63707] = 'LuiExtended/media/icons/ability_nightblade_catalyst.dds', -- Amphibious Regen (Catalyst - Rank 2)
+    [63705] = 'LuiExtended/media/icons/abilities/ability_nightblade_catalyst.dds', -- Amphibious Regen (Catalyst - Rank 1)
+    [63707] = 'LuiExtended/media/icons/abilities/ability_nightblade_catalyst.dds', -- Amphibious Regen (Catalyst - Rank 2)
 
-    [36589] = 'LuiExtended/media/icons/ability_nightblade_transfer.dds', -- Transfer (Transfer - Rank 1)
-    [45146] = 'LuiExtended/media/icons/ability_nightblade_transfer.dds', -- Transfer (Transfer - Rank 2)
+    [36589] = 'LuiExtended/media/icons/abilities/ability_nightblade_transfer.dds', -- Transfer (Transfer - Rank 1)
+    [45146] = 'LuiExtended/media/icons/abilities/ability_nightblade_transfer.dds', -- Transfer (Transfer - Rank 2)
 
     -------------------------------
     -- TEMPLAR PASSIVES
     -------------------------------
 
     -- Aedric Spear
-    [31720] = 'LuiExtended/media/icons/ability_templar_burning_light.dds', -- Burning Light (Burning Light - Rank 1)
-    [80153] = 'LuiExtended/media/icons/ability_templar_burning_light.dds', -- Burning Light (Burning Light - Rank 1)
-    [44731] = 'LuiExtended/media/icons/ability_templar_burning_light.dds', -- Burning Light (Burning Light - Rank 2)
-    [80170] = 'LuiExtended/media/icons/ability_templar_burning_light.dds', -- Burning Light (Burning Light - Rank 2)
+    [31720] = 'LuiExtended/media/icons/abilities/ability_templar_burning_light.dds', -- Burning Light (Burning Light - Rank 1)
+    [80153] = 'LuiExtended/media/icons/abilities/ability_templar_burning_light.dds', -- Burning Light (Burning Light - Rank 1)
+    [44731] = 'LuiExtended/media/icons/abilities/ability_templar_burning_light.dds', -- Burning Light (Burning Light - Rank 2)
+    [80170] = 'LuiExtended/media/icons/abilities/ability_templar_burning_light.dds', -- Burning Light (Burning Light - Rank 2)
 
     -- Dawn's Wrath
-    [31746] = 'LuiExtended/media/icons/ability_templar_prism.dds', -- Prism (Prism - Rank 1)
-    [45217] = 'LuiExtended/media/icons/ability_templar_prism.dds', -- Prism (Prism - Rank 2)
+    [31746] = 'LuiExtended/media/icons/abilities/ability_templar_prism.dds', -- Prism (Prism - Rank 1)
+    [45217] = 'LuiExtended/media/icons/abilities/ability_templar_prism.dds', -- Prism (Prism - Rank 2)
 
-    [62799] = 'LuiExtended/media/icons/ability_templar_illuminate.dds', -- Minor Sorcery (Illuminate - Rank 1)
-    [62800] = 'LuiExtended/media/icons/ability_templar_illuminate.dds', -- Minor Sorcery (Illuminate - Rank 2)
+    [62799] = 'LuiExtended/media/icons/abilities/ability_templar_illuminate.dds', -- Minor Sorcery (Illuminate - Rank 1)
+    [62800] = 'LuiExtended/media/icons/abilities/ability_templar_illuminate.dds', -- Minor Sorcery (Illuminate - Rank 2)
 
     -- Restoring Light
-    [77082] = 'LuiExtended/media/icons/ability_templar_sacred_ground.dds', -- Major Mending (Sacred Ground - Rank 1 & 2)
-    [80230] = 'LuiExtended/media/icons/ability_templar_sacred_ground.dds', -- Sacred Ground (Sacred Ground - Rank 1 & 2)
+    [77082] = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', -- Major Mending (Sacred Ground - Rank 1 & 2)
+    [80230] = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', -- Sacred Ground (Sacred Ground - Rank 1 & 2)
 
-    [52703] = 'LuiExtended/media/icons/ability_templar_illuminate.dds', -- Light Weaver Ultimate (Light Weaver - Rank 1 & 2)
+    [52703] = 'LuiExtended/media/icons/abilities/ability_templar_illuminate.dds', -- Light Weaver Ultimate (Light Weaver - Rank 1 & 2)
 
     -------------------------------
     -- Player Weapon Attacks
     -------------------------------
-    [23604] = 'LuiExtended/media/icons/ability_unarmed_attacklight.dds', -- Light Attack
-    [18430] = 'LuiExtended/media/icons/ability_unarmed_attackmedium.dds', -- Heavy Attack
-    [18431] = 'LuiExtended/media/icons/ability_unarmed_attackheavy.dds', -- Heavy Attack
-    [60772] = 'LuiExtended/media/icons/ability_unarmed_attackrestore.dds', -- Heavy Attack (Unarmed)
+    [23604] = 'LuiExtended/media/icons/abilities/ability_unarmed_attacklight.dds', -- Light Attack
+    [18430] = 'LuiExtended/media/icons/abilities/ability_unarmed_attackmedium.dds', -- Heavy Attack
+    [18431] = 'LuiExtended/media/icons/abilities/ability_unarmed_attackheavy.dds', -- Heavy Attack
+    [60772] = 'LuiExtended/media/icons/abilities/ability_unarmed_attackrestore.dds', -- Heavy Attack (Unarmed)
 
-    [16037] = 'LuiExtended/media/icons/ability_weapon_melee_attacklight.dds', -- Light Attack
-    [17162] = 'LuiExtended/media/icons/ability_weapon_melee_attackmedium.dds', -- Heavy Attack
-    [17163] = 'LuiExtended/media/icons/ability_weapon_melee_attackheavy.dds', -- Heavy Attack
-    [60757] = 'LuiExtended/media/icons/ability_weapon_melee_attackrestore.dds', -- Heavy Attack (2H)
+    [16037] = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', -- Light Attack
+    [17162] = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackmedium.dds', -- Heavy Attack
+    [17163] = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds', -- Heavy Attack
+    [60757] = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackrestore.dds', -- Heavy Attack (2H)
 
-    [15435] = 'LuiExtended/media/icons/ability_weapon_melee_attacklight.dds', -- Light Attack
-    [15282] = 'LuiExtended/media/icons/ability_weapon_melee_attackmedium.dds', -- Heavy Attack
-    [15829] = 'LuiExtended/media/icons/ability_weapon_melee_attackheavy.dds', -- Heavy Attack
-    [60759] = 'LuiExtended/media/icons/ability_weapon_melee_attackrestore.dds', -- Heavy Attack (Shield)
+    [15435] = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', -- Light Attack
+    [15282] = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackmedium.dds', -- Heavy Attack
+    [15829] = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds', -- Heavy Attack
+    [60759] = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackrestore.dds', -- Heavy Attack (Shield)
 
-    [16499] = 'LuiExtended/media/icons/ability_weapon_melee_attacklight.dds', -- Light Attack
-    [17170] = 'LuiExtended/media/icons/ability_weapon_melee_attackmedium.dds', -- Heavy Attack
-    [17169] = 'LuiExtended/media/icons/ability_weapon_melee_attackheavy.dds', -- Heavy Attack
-    [18622] = 'LuiExtended/media/icons/ability_weapon_melee_attackheavy.dds', -- Heavy Attack (Dual Wield)
-    [60758] = 'LuiExtended/media/icons/ability_weapon_melee_attackrestore.dds', -- Heavy Attack (Dual Wield)
+    [16499] = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', -- Light Attack
+    [17170] = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackmedium.dds', -- Heavy Attack
+    [17169] = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds', -- Heavy Attack
+    [18622] = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds', -- Heavy Attack (Dual Wield)
+    [60758] = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackrestore.dds', -- Heavy Attack (Dual Wield)
 
-    [16688] = 'LuiExtended/media/icons/ability_bow_attacklight.dds', -- Light Attack
-    [17174] = 'LuiExtended/media/icons/ability_bow_attackmedium.dds', -- Heavy Attack
-    [17173] = 'LuiExtended/media/icons/ability_bow_attackheavy.dds', -- Heavy Attack
-    [60761] = 'LuiExtended/media/icons/ability_bow_attackrestore.dds', -- Heavy Attack (Bow)
+    [16688] = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds', -- Light Attack
+    [17174] = 'LuiExtended/media/icons/abilities/ability_bow_attackmedium.dds', -- Heavy Attack
+    [17173] = 'LuiExtended/media/icons/abilities/ability_bow_attackheavy.dds', -- Heavy Attack
+    [60761] = 'LuiExtended/media/icons/abilities/ability_bow_attackrestore.dds', -- Heavy Attack (Bow)
 
-    [16277] = 'LuiExtended/media/icons/ability_destructionstaff_frost_attacklight.dds', -- Light Attack
-    [18405] = 'LuiExtended/media/icons/ability_destructionstaff_frost_attackmedium.dds', -- Heavy Attack
-    [18406] = 'LuiExtended/media/icons/ability_destructionstaff_frost_attackheavy.dds', -- Heavy Attack
-    [60762] = 'LuiExtended/media/icons/ability_destructionstaff_attackrestore.dds', -- Heavy Attack (Frost)
+    [16277] = 'LuiExtended/media/icons/abilities/ability_destructionstaff_frost_attacklight.dds', -- Light Attack
+    [18405] = 'LuiExtended/media/icons/abilities/ability_destructionstaff_frost_attackmedium.dds', -- Heavy Attack
+    [18406] = 'LuiExtended/media/icons/abilities/ability_destructionstaff_frost_attackheavy.dds', -- Heavy Attack
+    [60762] = 'LuiExtended/media/icons/abilities/ability_destructionstaff_attackrestore.dds', -- Heavy Attack (Frost)
 
-    [16165] = 'LuiExtended/media/icons/ability_destructionstaff_flame_attacklight.dds', -- Light Attack
-    [15385] = 'LuiExtended/media/icons/ability_destructionstaff_flame_attackmedium.dds', -- Heavy Attack
-    [16321] = 'LuiExtended/media/icons/ability_destructionstaff_flame_attackheavy.dds', -- Heavy Attack
-    [60763] = 'LuiExtended/media/icons/ability_destructionstaff_attackrestore.dds', -- Heavy Attack (Fire)
+    [16165] = 'LuiExtended/media/icons/abilities/ability_destructionstaff_flame_attacklight.dds', -- Light Attack
+    [15385] = 'LuiExtended/media/icons/abilities/ability_destructionstaff_flame_attackmedium.dds', -- Heavy Attack
+    [16321] = 'LuiExtended/media/icons/abilities/ability_destructionstaff_flame_attackheavy.dds', -- Heavy Attack
+    [60763] = 'LuiExtended/media/icons/abilities/ability_destructionstaff_attackrestore.dds', -- Heavy Attack (Fire)
 
-    [18350] = 'LuiExtended/media/icons/ability_destructionstaff_lightning_attacklight.dds', -- Light Attack
-    [18396] = 'LuiExtended/media/icons/ability_destructionstaff_lightning_attackheavy.dds', -- Heavy Attack (Shock)
-    [19277] = 'LuiExtended/media/icons/ability_destructionstaff_lightning_attackheavypulse.dds', -- Shock Pulse
-    [60764] = 'LuiExtended/media/icons/ability_destructionstaff_attackrestore.dds', -- Heavy Attack (Shock)
+    [18350] = 'LuiExtended/media/icons/abilities/ability_destructionstaff_lightning_attacklight.dds', -- Light Attack
+    [18396] = 'LuiExtended/media/icons/abilities/ability_destructionstaff_lightning_attackheavy.dds', -- Heavy Attack (Shock)
+    [19277] = 'LuiExtended/media/icons/abilities/ability_destructionstaff_lightning_attackheavypulse.dds', -- Shock Pulse
+    [60764] = 'LuiExtended/media/icons/abilities/ability_destructionstaff_attackrestore.dds', -- Heavy Attack (Shock)
 
-    [16145] = 'LuiExtended/media/icons/ability_restorationstaff_attacklight.dds', -- Light Attack
-    [16212] = 'LuiExtended/media/icons/ability_restorationstaff_attackheavy.dds', -- Heavy Attack
-    [32760] = 'LuiExtended/media/icons/ability_destructionstaff_attackrestore.dds', -- Heavy Attack (Restoration)
-    [28469] = 'LuiExtended/media/icons/ability_restorationstaff_attackheavy.dds', -- Heavy Attack
-    [38591] = 'LuiExtended/media/icons/ability_restorationstaff_attackheavy.dds', -- Heavy Attack
+    [16145] = 'LuiExtended/media/icons/abilities/ability_restorationstaff_attacklight.dds', -- Light Attack
+    [16212] = 'LuiExtended/media/icons/abilities/ability_restorationstaff_attackheavy.dds', -- Heavy Attack
+    [32760] = 'LuiExtended/media/icons/abilities/ability_destructionstaff_attackrestore.dds', -- Heavy Attack (Restoration)
+    [28469] = 'LuiExtended/media/icons/abilities/ability_restorationstaff_attackheavy.dds', -- Heavy Attack
+    [38591] = 'LuiExtended/media/icons/abilities/ability_restorationstaff_attackheavy.dds', -- Heavy Attack
 
     -------------------------------
     -- Player Passives - Weapons
     -------------------------------
 
     -- Two Handed
-    [30821] = 'LuiExtended/media/icons/ability_2handed_forceful.dds', -- Forceful (Rank 1)
-    [45445] = 'LuiExtended/media/icons/ability_2handed_forceful.dds', -- Forceful (Rank 2)
-    [29383] = 'LuiExtended/media/icons/ability_2handed_heavy_weapons.dds', -- Heavy Weapons Bleed (Rank 1)
-    [45431] = 'LuiExtended/media/icons/ability_2handed_heavy_weapons.dds', -- Heavy Weapons Bleed (Rank 2)
-    [60860] = 'LuiExtended/media/icons/ability_2handed_follow_up.dds', -- Bonus Damage (Follow Up - Rank 1)
-    [60888] = 'LuiExtended/media/icons/ability_2handed_follow_up.dds', -- Bonus Damage (Follow Up - Rank 2)
-    [29392] = 'LuiExtended/media/icons/ability_2handed_battle_rush.dds', -- Battle Rush (Battle Rush - Rank 1)
-    [45450] = 'LuiExtended/media/icons/ability_2handed_battle_rush.dds', -- Battle Rush (Battle Rush - Rank 2)
+    [30821] = 'LuiExtended/media/icons/abilities/ability_2handed_forceful.dds', -- Forceful (Rank 1)
+    [45445] = 'LuiExtended/media/icons/abilities/ability_2handed_forceful.dds', -- Forceful (Rank 2)
+    [29383] = 'LuiExtended/media/icons/abilities/ability_2handed_heavy_weapons.dds', -- Heavy Weapons Bleed (Rank 1)
+    [45431] = 'LuiExtended/media/icons/abilities/ability_2handed_heavy_weapons.dds', -- Heavy Weapons Bleed (Rank 2)
+    [60860] = 'LuiExtended/media/icons/abilities/ability_2handed_follow_up.dds', -- Bonus Damage (Follow Up - Rank 1)
+    [60888] = 'LuiExtended/media/icons/abilities/ability_2handed_follow_up.dds', -- Bonus Damage (Follow Up - Rank 2)
+    [29392] = 'LuiExtended/media/icons/abilities/ability_2handed_battle_rush.dds', -- Battle Rush (Battle Rush - Rank 1)
+    [45450] = 'LuiExtended/media/icons/abilities/ability_2handed_battle_rush.dds', -- Battle Rush (Battle Rush - Rank 2)
 
     -- Dual Wield
-    [30894] = 'LuiExtended/media/icons/ability_dualwield_twin_blade_and_blunt.dds', -- Twin Blade and Blunt Bleed (Rank 1)
-    [45483] = 'LuiExtended/media/icons/ability_dualwield_twin_blade_and_blunt.dds', -- Twin Blade and Blunt Bleed (Rank 2)
+    [30894] = 'LuiExtended/media/icons/abilities/ability_dualwield_twin_blade_and_blunt.dds', -- Twin Blade and Blunt Bleed (Rank 1)
+    [45483] = 'LuiExtended/media/icons/abilities/ability_dualwield_twin_blade_and_blunt.dds', -- Twin Blade and Blunt Bleed (Rank 2)
 
     -- Bow
-    [78854] = 'LuiExtended/media/icons/ability_bow_hawk_eye.dds', -- Hawk Eye (Hawk Eye - Rank 1)
-    [78855] = 'LuiExtended/media/icons/ability_bow_hawk_eye.dds', -- Hawk Eye (Hawk Eye - Rank 2)
-    [68793] = 'LuiExtended/media/icons/ability_bow_hasty_retreat.dds', -- Major Expedition (Hasty Retreat - Rank 1)
-    [68795] = 'LuiExtended/media/icons/ability_bow_hasty_retreat.dds', -- Major Expedition (Hasty Retreat - Rank 2)
+    [78854] = 'LuiExtended/media/icons/abilities/ability_bow_hawk_eye.dds', -- Hawk Eye (Hawk Eye - Rank 1)
+    [78855] = 'LuiExtended/media/icons/abilities/ability_bow_hawk_eye.dds', -- Hawk Eye (Hawk Eye - Rank 2)
+    [68793] = 'LuiExtended/media/icons/abilities/ability_bow_hasty_retreat.dds', -- Major Expedition (Hasty Retreat - Rank 1)
+    [68795] = 'LuiExtended/media/icons/abilities/ability_bow_hasty_retreat.dds', -- Major Expedition (Hasty Retreat - Rank 2)
 
     -- Destruction Staff
-    [69774] = 'LuiExtended/media/icons/ability_destructionstaff_tri_focus.dds', -- Tri Focus (Tri Focus - Rank 1)
-    [69773] = 'LuiExtended/media/icons/ability_destructionstaff_tri_focus.dds', -- Tri Focus (Tri Focus - Rank 2)
-    [30951] = 'LuiExtended/media/icons/ability_destructionstaff_lightning_attackheavy.dds', -- Shock (Tri Focus - Rank 1)
-    [45505] = 'LuiExtended/media/icons/ability_destructionstaff_lightning_attackheavy.dds', -- Shock (Tri Focus - Rank 2)
-    [30966] = 'LuiExtended/media/icons/ability_destructionstaff_destruction_expert.dds', -- Magicka Restore (Destruction Expert - Rank 1)
-    [45515] = 'LuiExtended/media/icons/ability_destructionstaff_destruction_expert.dds', -- Magicka Restore (Destruction Expert - Rank 2)
+    [69774] = 'LuiExtended/media/icons/abilities/ability_destructionstaff_tri_focus.dds', -- Tri Focus (Tri Focus - Rank 1)
+    [69773] = 'LuiExtended/media/icons/abilities/ability_destructionstaff_tri_focus.dds', -- Tri Focus (Tri Focus - Rank 2)
+    [30951] = 'LuiExtended/media/icons/abilities/ability_destructionstaff_lightning_attackheavy.dds', -- Shock (Tri Focus - Rank 1)
+    [45505] = 'LuiExtended/media/icons/abilities/ability_destructionstaff_lightning_attackheavy.dds', -- Shock (Tri Focus - Rank 2)
+    [30966] = 'LuiExtended/media/icons/abilities/ability_destructionstaff_destruction_expert.dds', -- Magicka Restore (Destruction Expert - Rank 1)
+    [45515] = 'LuiExtended/media/icons/abilities/ability_destructionstaff_destruction_expert.dds', -- Magicka Restore (Destruction Expert - Rank 2)
 
     -- Restoration Staff
-    [30978] = 'LuiExtended/media/icons/ability_restorationstaff_essence_drain.dds', -- Essence Drain (Rank 1)
-    [45518] = 'LuiExtended/media/icons/ability_restorationstaff_essence_drain.dds', -- Essence Drain (Rank 2)
-    [77918] = 'LuiExtended/media/icons/ability_restorationstaff_essence_drain.dds', -- Major Mending (Essence Drain - Rank 1)
-    [77922] = 'LuiExtended/media/icons/ability_restorationstaff_essence_drain.dds', -- Major Mending (Essence Drain - Rank 2)
-    [30971] = 'LuiExtended/media/icons/ability_restorationstaff_absorb.dds', -- Absorb (Rank 1)
-    [45522] = 'LuiExtended/media/icons/ability_restorationstaff_absorb.dds', -- Absorb (Rank 2)
+    [30978] = 'LuiExtended/media/icons/abilities/ability_restorationstaff_essence_drain.dds', -- Essence Drain (Rank 1)
+    [45518] = 'LuiExtended/media/icons/abilities/ability_restorationstaff_essence_drain.dds', -- Essence Drain (Rank 2)
+    [77918] = 'LuiExtended/media/icons/abilities/ability_restorationstaff_essence_drain.dds', -- Major Mending (Essence Drain - Rank 1)
+    [77922] = 'LuiExtended/media/icons/abilities/ability_restorationstaff_essence_drain.dds', -- Major Mending (Essence Drain - Rank 2)
+    [30971] = 'LuiExtended/media/icons/abilities/ability_restorationstaff_absorb.dds', -- Absorb (Rank 1)
+    [45522] = 'LuiExtended/media/icons/abilities/ability_restorationstaff_absorb.dds', -- Absorb (Rank 2)
 
     -------------------------------
     -- Player Passives - Armor
     -------------------------------
 
     -- Heavy Armor
-    [58428] = 'LuiExtended/media/icons/ability_armor_constitution.dds', -- Constitution (Constitution - Rank 1)
-    [58503] = 'LuiExtended/media/icons/ability_armor_constitution.dds', -- Constitution (Constitution - Rank 1)
-    [58430] = 'LuiExtended/media/icons/ability_armor_constitution.dds', -- Constitution (Constitution - Rank 2)
-    [58431] = 'LuiExtended/media/icons/ability_armor_constitution.dds', -- Constitution (Constitution - Rank 2)
-    [80000] = 'LuiExtended/media/icons/ability_armor_wrath.dds', -- Wrath (Wrath - Rank 1)
-    [80012] = 'LuiExtended/media/icons/ability_armor_wrath.dds', -- Wrath (Wrath - Rank 2)
+    [58428] = 'LuiExtended/media/icons/abilities/ability_armor_constitution.dds', -- Constitution (Constitution - Rank 1)
+    [58503] = 'LuiExtended/media/icons/abilities/ability_armor_constitution.dds', -- Constitution (Constitution - Rank 1)
+    [58430] = 'LuiExtended/media/icons/abilities/ability_armor_constitution.dds', -- Constitution (Constitution - Rank 2)
+    [58431] = 'LuiExtended/media/icons/abilities/ability_armor_constitution.dds', -- Constitution (Constitution - Rank 2)
+    [80000] = 'LuiExtended/media/icons/abilities/ability_armor_wrath.dds', -- Wrath (Wrath - Rank 1)
+    [80012] = 'LuiExtended/media/icons/abilities/ability_armor_wrath.dds', -- Wrath (Wrath - Rank 2)
 
     -------------------------------
     -- Player Passives - World
     -------------------------------
 
     -- Soul Magic
-    [39267] = 'LuiExtended/media/icons/ability_otherclass_soul_shatter.dds', -- Soul Shatter (Soul Shatter - Rank 1)
-    [45584] = 'LuiExtended/media/icons/ability_otherclass_soul_shatter.dds', -- Soul Shatter (Soul Shatter - Rank 2)
+    [39267] = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_shatter.dds', -- Soul Shatter (Soul Shatter - Rank 1)
+    [45584] = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_shatter.dds', -- Soul Shatter (Soul Shatter - Rank 2)
 
     -- Vampire
-    [35771] = 'LuiExtended/media/icons/ability_vampire_vampirism_stage_1.dds', -- Stage 1 Vampirism (Vampire General)
-    [35776] = 'LuiExtended/media/icons/ability_vampire_vampirism_stage_2.dds', -- Stage 2 Vampirism (Vampire General)
-    [35783] = 'LuiExtended/media/icons/ability_vampire_vampirism_stage_3.dds', -- Stage 3 Vampirism (Vampire General)
-    [35792] = 'LuiExtended/media/icons/ability_vampire_vampirism_stage_4.dds', -- Stage 4 Vampirism (Vampire General)
+    [35771] = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_1.dds', -- Stage 1 Vampirism (Vampire General)
+    [35776] = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_2.dds', -- Stage 2 Vampirism (Vampire General)
+    [35783] = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_3.dds', -- Stage 3 Vampirism (Vampire General)
+    [35792] = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_4.dds', -- Stage 4 Vampirism (Vampire General)
 
     [33177] = 'esoui/art/icons/ability_vampire_002.dds', -- Feed
 
-    [33182] = 'LuiExtended/media/icons/ability_vampire_savage_feeding.dds', -- Uber Attack (Savage Feeding - Rank 1)
-    [33183] = 'LuiExtended/media/icons/ability_vampire_savage_feeding.dds', -- Off-Balance Self (Savage Feeding - Rank 2)
-    [46047] = 'LuiExtended/media/icons/ability_vampire_savage_feeding.dds', -- Uber Attack (Savage Feeding - Rank 1)
-    [46046] = 'LuiExtended/media/icons/ability_vampire_savage_feeding.dds', -- Off-Balance Self (Savage Feeding - Rank 2)
+    [33182] = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', -- Uber Attack (Savage Feeding - Rank 1)
+    [33183] = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', -- Off-Balance Self (Savage Feeding - Rank 2)
+    [46047] = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', -- Uber Attack (Savage Feeding - Rank 1)
+    [46046] = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', -- Off-Balance Self (Savage Feeding - Rank 2)
 
-    [40349] = 'LuiExtended/media/icons/ability_vampire_blood_ritual.dds', -- Feed (Blood Ritual - Rank 1)
-    [40351] = 'LuiExtended/media/icons/ability_vampire_blood_ritual.dds', -- Feed (Blood Ritual - Rank 1)
-    [40353] = 'LuiExtended/media/icons/ability_vampire_savage_feeding.dds', -- Uber Attack (Blood Ritual - Rank 1)
-    [40360] = 'LuiExtended/media/icons/ability_vampire_noxiphilic_sanguivoria.dds', -- Vampirism (Blood Ritual - Rank 1)
+    [40349] = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual.dds', -- Feed (Blood Ritual - Rank 1)
+    [40351] = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual.dds', -- Feed (Blood Ritual - Rank 1)
+    [40353] = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', -- Uber Attack (Blood Ritual - Rank 1)
+    [40360] = 'LuiExtended/media/icons/abilities/ability_vampire_noxiphilic_sanguivoria.dds', -- Vampirism (Blood Ritual - Rank 1)
 
     -- Werewolf
-    [35658] = 'LuiExtended/media/icons/ability_werewolf_lycanthrophy.dds', -- Lycanthrophy
-    [32464] = 'LuiExtended/media/icons/ability_werewolf_attacklight.dds', -- Light Attack
-    [89146] = 'LuiExtended/media/icons/ability_werewolf_attackbleed.dds', -- Werewolf Bleed
-    [32479] = 'LuiExtended/media/icons/ability_werewolf_attackmedium.dds', -- Heavy Attack
-    [32480] = 'LuiExtended/media/icons/ability_werewolf_attackheavy.dds', -- Heavy Attack Werewolf
-    [32494] = 'LuiExtended/media/icons/ability_werewolf_attackheavy.dds', -- Heavy Attack
-    [60773] = 'LuiExtended/media/icons/ability_werewolf_attackrestore.dds', -- Stamina Return
-    [33209] = 'LuiExtended/media/icons/ability_werewolf_devour.dds', -- Devour (Devour - Rank 1)
+    [35658] = 'LuiExtended/media/icons/abilities/ability_werewolf_lycanthrophy.dds', -- Lycanthrophy
+    [32464] = 'LuiExtended/media/icons/abilities/ability_werewolf_attacklight.dds', -- Light Attack
+    [89146] = 'LuiExtended/media/icons/abilities/ability_werewolf_attackbleed.dds', -- Werewolf Bleed
+    [32479] = 'LuiExtended/media/icons/abilities/ability_werewolf_attackmedium.dds', -- Heavy Attack
+    [32480] = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', -- Heavy Attack Werewolf
+    [32494] = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', -- Heavy Attack
+    [60773] = 'LuiExtended/media/icons/abilities/ability_werewolf_attackrestore.dds', -- Stamina Return
+    [33209] = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds', -- Devour (Devour - Rank 1)
 
     -------------------------------
     -- Player Passives - Guilds
     -------------------------------
 
     -- Dark Brotherhood
-    [76325] = 'LuiExtended/media/icons/ability_darkbrotherhood_blade_of_woe.dds', -- Blade of Woe
-    [79623] = 'LuiExtended/media/icons/ability_darkbrotherhood_padomaic_sprint.dds', -- Major Expedition (Padomaic Sprint - Rank 1) (Blade of Woe Kill)
-    [79624] = 'LuiExtended/media/icons/ability_darkbrotherhood_padomaic_sprint.dds', -- Major Expedition (Padomaic Sprint - Rank 2) (Blade of Woe Kill)
-    [79625] = 'LuiExtended/media/icons/ability_darkbrotherhood_padomaic_sprint.dds', -- Major Expedition (Padomaic Sprint - Rank 3) (Blade of Woe Kill)
-    [79877] = 'LuiExtended/media/icons/ability_darkbrotherhood_padomaic_sprint.dds', -- Major Expedition (Padomaic Sprint - Rank 4) (Blade of Woe Kill)
-    [80392] = 'LuiExtended/media/icons/ability_darkbrotherhood_padomaic_sprint.dds', -- Major Expedition (Padomaic Sprint - Rank 1) (Normal Kill)
-    [80394] = 'LuiExtended/media/icons/ability_darkbrotherhood_padomaic_sprint.dds', -- Major Expedition (Padomaic Sprint - Rank 2) (Normal Kill)
-    [80396] = 'LuiExtended/media/icons/ability_darkbrotherhood_padomaic_sprint.dds', -- Major Expedition (Padomaic Sprint - Rank 3) (Normal Kill)
-    [80398] = 'LuiExtended/media/icons/ability_darkbrotherhood_padomaic_sprint.dds', -- Major Expedition (Padomaic Sprint - Rank 4) (Normal Kill)
+    [76325] = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds', -- Blade of Woe
+    [79623] = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_padomaic_sprint.dds', -- Major Expedition (Padomaic Sprint - Rank 1) (Blade of Woe Kill)
+    [79624] = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_padomaic_sprint.dds', -- Major Expedition (Padomaic Sprint - Rank 2) (Blade of Woe Kill)
+    [79625] = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_padomaic_sprint.dds', -- Major Expedition (Padomaic Sprint - Rank 3) (Blade of Woe Kill)
+    [79877] = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_padomaic_sprint.dds', -- Major Expedition (Padomaic Sprint - Rank 4) (Blade of Woe Kill)
+    [80392] = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_padomaic_sprint.dds', -- Major Expedition (Padomaic Sprint - Rank 1) (Normal Kill)
+    [80394] = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_padomaic_sprint.dds', -- Major Expedition (Padomaic Sprint - Rank 2) (Normal Kill)
+    [80396] = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_padomaic_sprint.dds', -- Major Expedition (Padomaic Sprint - Rank 3) (Normal Kill)
+    [80398] = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_padomaic_sprint.dds', -- Major Expedition (Padomaic Sprint - Rank 4) (Normal Kill)
 
     -- Fighters Guild
-    [35801] = 'LuiExtended/media/icons/ability_fightersguild_banish_the_wicked.dds', -- Banish the Wicked (Banish the Wicked - Rank 1)
-    [45598] = 'LuiExtended/media/icons/ability_fightersguild_banish_the_wicked.dds', -- Banish the Wicked (Banish the Wicked - Rank 2)
-    [45600] = 'LuiExtended/media/icons/ability_fightersguild_banish_the_wicked.dds', -- Banish the Wicked (Banish the Wicked - Rank 3)
+    [35801] = 'LuiExtended/media/icons/abilities/ability_fightersguild_banish_the_wicked.dds', -- Banish the Wicked (Banish the Wicked - Rank 1)
+    [45598] = 'LuiExtended/media/icons/abilities/ability_fightersguild_banish_the_wicked.dds', -- Banish the Wicked (Banish the Wicked - Rank 2)
+    [45600] = 'LuiExtended/media/icons/abilities/ability_fightersguild_banish_the_wicked.dds', -- Banish the Wicked (Banish the Wicked - Rank 3)
 
     -- Mages Guild
-    [65507] = 'LuiExtended/media/icons/ability_mageguild_might_of_the_guild.dds', -- Empower (Might of the Guild - Rank 1)
-    [65541] = 'LuiExtended/media/icons/ability_mageguild_might_of_the_guild.dds', -- Empower (Might of the Guild - Rank 2)
+    [65507] = 'LuiExtended/media/icons/abilities/ability_mageguild_might_of_the_guild.dds', -- Empower (Might of the Guild - Rank 1)
+    [65541] = 'LuiExtended/media/icons/abilities/ability_mageguild_might_of_the_guild.dds', -- Empower (Might of the Guild - Rank 2)
 
     -- Undaunted
-    [55606] = 'LuiExtended/media/icons/ability_undaunted_undaunted_command.dds', -- Undaunted Command (Undaunted Command - Rank 1)
-    [55607] = 'LuiExtended/media/icons/ability_undaunted_undaunted_command.dds', -- Undaunted Command Magicka Rest (Undaunted Command - Rank 1)
-    [55608] = 'LuiExtended/media/icons/ability_undaunted_undaunted_command.dds', -- Undaunted Command Stamina Rest (Undaunted Command - Rank 1)
-    [55677] = 'LuiExtended/media/icons/ability_undaunted_undaunted_command.dds', -- Undaunted Command (Undaunted Command - Rank 2)
-    [55678] = 'LuiExtended/media/icons/ability_undaunted_undaunted_command.dds', -- Undaunted Command Stamina Rest (Undaunted Command - Rank 2)
-    [55679] = 'LuiExtended/media/icons/ability_undaunted_undaunted_command.dds', -- Undaunted Command Magicka Rest (Undaunted Command - Rank 2)
+    [55606] = 'LuiExtended/media/icons/abilities/ability_undaunted_undaunted_command.dds', -- Undaunted Command (Undaunted Command - Rank 1)
+    [55607] = 'LuiExtended/media/icons/abilities/ability_undaunted_undaunted_command.dds', -- Undaunted Command Magicka Rest (Undaunted Command - Rank 1)
+    [55608] = 'LuiExtended/media/icons/abilities/ability_undaunted_undaunted_command.dds', -- Undaunted Command Stamina Rest (Undaunted Command - Rank 1)
+    [55677] = 'LuiExtended/media/icons/abilities/ability_undaunted_undaunted_command.dds', -- Undaunted Command (Undaunted Command - Rank 2)
+    [55678] = 'LuiExtended/media/icons/abilities/ability_undaunted_undaunted_command.dds', -- Undaunted Command Stamina Rest (Undaunted Command - Rank 2)
+    [55679] = 'LuiExtended/media/icons/abilities/ability_undaunted_undaunted_command.dds', -- Undaunted Command Magicka Rest (Undaunted Command - Rank 2)
 
     -------------------------------
     -- Player Passives - Alliance War
     -------------------------------
 
-    [39249] = 'LuiExtended/media/icons/ability_ava_continuous_attack.dds', -- Continuous Attack (Continuous Attack - Rank 1)
-    [45617] = 'LuiExtended/media/icons/ability_ava_continuous_attack.dds', -- Continuous Attack (Continuous Attack - Rank 2)
+    [39249] = 'LuiExtended/media/icons/abilities/ability_ava_continuous_attack.dds', -- Continuous Attack (Continuous Attack - Rank 1)
+    [45617] = 'LuiExtended/media/icons/abilities/ability_ava_continuous_attack.dds', -- Continuous Attack (Continuous Attack - Rank 2)
 
-    [39253] = 'LuiExtended/media/icons/ability_ava_combat_frenzy.dds', -- Combat Frenzy (Combat Frenzy - Rank 1)
-    [45620] = 'LuiExtended/media/icons/ability_ava_combat_frenzy.dds', -- Combat Frenzy (Combat Frenzy - Rank 2)
+    [39253] = 'LuiExtended/media/icons/abilities/ability_ava_combat_frenzy.dds', -- Combat Frenzy (Combat Frenzy - Rank 1)
+    [45620] = 'LuiExtended/media/icons/abilities/ability_ava_combat_frenzy.dds', -- Combat Frenzy (Combat Frenzy - Rank 2)
 
     -------------------------------
     -- Player Passives - Racials
     -------------------------------
 
-    [36548] = 'LuiExtended/media/icons/ability_racial_adrenaline_rush.dds', -- Adrenaline Rush (Adrenaline Rush - Rank 1)
-    [45314] = 'LuiExtended/media/icons/ability_racial_adrenaline_rush.dds', -- Adrenaline Rush (Adrenaline Rush - Rank 2)
-    [45316] = 'LuiExtended/media/icons/ability_racial_adrenaline_rush.dds', -- Adrenaline Rush (Adrenaline Rush - Rank 3)
+    [36548] = 'LuiExtended/media/icons/abilities/ability_racial_adrenaline_rush.dds', -- Adrenaline Rush (Adrenaline Rush - Rank 1)
+    [45314] = 'LuiExtended/media/icons/abilities/ability_racial_adrenaline_rush.dds', -- Adrenaline Rush (Adrenaline Rush - Rank 2)
+    [45316] = 'LuiExtended/media/icons/abilities/ability_racial_adrenaline_rush.dds', -- Adrenaline Rush (Adrenaline Rush - Rank 3)
 
-    [63694] = 'LuiExtended/media/icons/ability_racial_resourceful.dds', -- Resourceful (Resourceful - Rank 1)
-    [63695] = 'LuiExtended/media/icons/ability_racial_resourceful.dds', -- Resourceful (Resourceful - Rank 1)
-    [63696] = 'LuiExtended/media/icons/ability_racial_resourceful.dds', -- Resourceful (Resourceful - Rank 1)
-    [63697] = 'LuiExtended/media/icons/ability_racial_resourceful.dds', -- Resourceful (Resourceful - Rank 2)
-    [63698] = 'LuiExtended/media/icons/ability_racial_resourceful.dds', -- Resourceful (Resourceful - Rank 2)
-    [63699] = 'LuiExtended/media/icons/ability_racial_resourceful.dds', -- Resourceful (Resourceful - Rank 2)
-    [63701] = 'LuiExtended/media/icons/ability_racial_resourceful.dds', -- Resourceful (Resourceful - Rank 3)
-    [63702] = 'LuiExtended/media/icons/ability_racial_resourceful.dds', -- Resourceful (Resourceful - Rank 3)
-    [63703] = 'LuiExtended/media/icons/ability_racial_resourceful.dds', -- Resourceful (Resourceful - Rank 3)
+    [63694] = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds', -- Resourceful (Resourceful - Rank 1)
+    [63695] = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds', -- Resourceful (Resourceful - Rank 1)
+    [63696] = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds', -- Resourceful (Resourceful - Rank 1)
+    [63697] = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds', -- Resourceful (Resourceful - Rank 2)
+    [63698] = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds', -- Resourceful (Resourceful - Rank 2)
+    [63699] = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds', -- Resourceful (Resourceful - Rank 2)
+    [63701] = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds', -- Resourceful (Resourceful - Rank 3)
+    [63702] = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds', -- Resourceful (Resourceful - Rank 3)
+    [63703] = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds', -- Resourceful (Resourceful - Rank 3)
 
-    [36214] = 'LuiExtended/media/icons/ability_racial_red_diamond.dds', -- Star of the West (Red Diamond - Rank 1)
-    [45292] = 'LuiExtended/media/icons/ability_racial_red_diamond.dds', -- Star of the West (Red Diamond - Rank 2)
-    [45294] = 'LuiExtended/media/icons/ability_racial_red_diamond.dds', -- Star of the West (Red Diamond - Rank 3)
+    [36214] = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds', -- Star of the West (Red Diamond - Rank 1)
+    [45292] = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds', -- Star of the West (Red Diamond - Rank 2)
+    [45294] = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds', -- Star of the West (Red Diamond - Rank 3)
 
     -- TRAPS
-    [44029] = 'LuiExtended/media/icons/ability_slaughterfish.dds', -- Slaughterfish Attack (Environmental)
+    [44029] = 'LuiExtended/media/icons/abilities/ability_slaughterfish.dds', -- Slaughterfish Attack (Environmental)
     [21941] = 'esoui/art/icons/death_recap_environmental.dds', -- Spike Trap Snare (Spike Trap)
     [21942] = 'esoui/art/icons/death_recap_environmental.dds', -- Trap Sprung (Spike Trap)
     [65854] = 'esoui/art/icons/death_recap_environmental.dds', -- Spike Trap Snare (Spike Trap) (Orsinium - To Save a Chief)
@@ -1197,39 +1197,39 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     -------------------------------
 
     -- SHARED NPC PASSIVES
-    [33097] = 'LuiExtended/media/icons/ability_innate_cc_immunity.dds', -- Scary Immunities
+    [33097] = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', -- Scary Immunities
     [13739] = 'esoui/art/icons/ability_rogue_046.dds', -- Backstabber
 
     -- SHARED NPC ACTIVE EVENTS
-    [8239] = 'LuiExtended/media/icons/ability_innate_hamstrung.dds', -- Hamstrung
+    [8239] = 'LuiExtended/media/icons/abilities/ability_innate_hamstrung.dds', -- Hamstrung
 
     -- SHARED NPC MISC
-    [38117] = 'LuiExtended/media/icons/ability_innate_cc_immunity.dds', -- CC Immunity
+    [38117] = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', -- CC Immunity
 
     -- HUMAN NPC ABILITIES
-    [10618] = 'LuiExtended/media/icons/ability_weapon_melee_attacklight.dds', -- Quick Strike (Shared Human NPC)
-    [12437] = 'LuiExtended/media/icons/ability_bow_attacklight.dds', -- Quick Shot (Shared Human NPC)
+    [10618] = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', -- Quick Strike (Shared Human NPC)
+    [12437] = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds', -- Quick Shot (Shared Human NPC)
     [12456] = 'esoui/art/icons/ability_mage_009.dds', -- Ice Arrow (Shared Human NPC)
-    [10639] = 'LuiExtended/media/icons/ability_mage_fire_ranged.dds', -- Flare (Shared Human NPC)
-    [39060] = 'LuiExtended/media/icons/ability_rogue_bear_trap.dds', -- Bear Trap (Shared Human NPC)
-    [39065] = 'LuiExtended/media/icons/ability_rogue_bear_trap.dds', -- Bear Trap (Shared Human NPC)
+    [10639] = 'LuiExtended/media/icons/abilities/ability_mage_fire_ranged.dds', -- Flare (Shared Human NPC)
+    [39060] = 'LuiExtended/media/icons/abilities/ability_rogue_bear_trap.dds', -- Bear Trap (Shared Human NPC)
+    [39065] = 'LuiExtended/media/icons/abilities/ability_rogue_bear_trap.dds', -- Bear Trap (Shared Human NPC)
 
-    [10648] = 'LuiExtended/media/icons/ability_warrior_throw_oil.dds', -- Throw Oil (Synergy)
-    [10650] = 'LuiExtended/media/icons/ability_warrior_oil_drenched.dds', -- Oil Drenched (Synergy)
-    [14068] = 'LuiExtended/media/icons/ability_warrior_ignite.dds', -- Ignite (Synergy)
-    [10813] = 'LuiExtended/media/icons/ability_warrior_ignite.dds', -- Ignite (Synergy)
-    [38260] = 'LuiExtended/media/icons/ability_warrior_ignite.dds', -- Ignite (Synergy)
+    [10648] = 'LuiExtended/media/icons/abilities/ability_warrior_throw_oil.dds', -- Throw Oil (Synergy)
+    [10650] = 'LuiExtended/media/icons/abilities/ability_warrior_oil_drenched.dds', -- Oil Drenched (Synergy)
+    [14068] = 'LuiExtended/media/icons/abilities/ability_warrior_ignite.dds', -- Ignite (Synergy)
+    [10813] = 'LuiExtended/media/icons/abilities/ability_warrior_ignite.dds', -- Ignite (Synergy)
+    [38260] = 'LuiExtended/media/icons/abilities/ability_warrior_ignite.dds', -- Ignite (Synergy)
 
-    [14096] = 'LuiExtended/media/icons/ability_weapon_melee_attackheavy.dds', -- Heavy Attack (Footsoldier)
-    [28499] = 'LuiExtended/media/icons/ability_warrior_throw_dagger.dds', -- Throw Dagger (Footsoldier)
-    [28502] = 'LuiExtended/media/icons/ability_warrior_throw_dagger.dds', -- Throw Dagger (Footsoldier)
-    [28504] = 'LuiExtended/media/icons/ability_warrior_throw_dagger.dds', -- Throw Dagger (Footsoldier)
+    [14096] = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds', -- Heavy Attack (Footsoldier)
+    [28499] = 'LuiExtended/media/icons/abilities/ability_warrior_throw_dagger.dds', -- Throw Dagger (Footsoldier)
+    [28502] = 'LuiExtended/media/icons/abilities/ability_warrior_throw_dagger.dds', -- Throw Dagger (Footsoldier)
+    [28504] = 'LuiExtended/media/icons/abilities/ability_warrior_throw_dagger.dds', -- Throw Dagger (Footsoldier)
 
     [29400] = 'esoui/art/icons/ability_1handed_005.dds', -- Power Bash (Guard)
     [29401] = 'esoui/art/icons/ability_1handed_005.dds', -- Power Bash (Guard)
     [29402] = 'esoui/art/icons/ability_1handed_005.dds', -- Power Bash (Guard)
-    [29765] = 'LuiExtended/media/icons/ability_innate_block_stun.dds', -- Uber Attack (Guard)
-    [84346] = 'LuiExtended/media/icons/ability_innate_block_stun.dds', -- Uber Attack (Guard)
+    [29765] = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', -- Uber Attack (Guard)
+    [84346] = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', -- Uber Attack (Guard)
 
     [14925] = 'esoui/art/icons/ability_warrior_011.dds', -- Charge (Brute)
     [14926] = 'esoui/art/icons/ability_warrior_011.dds', -- Charge (Brute)
@@ -1237,18 +1237,18 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [29379] = 'esoui/art/icons/ability_2handed_001.dds', -- Uppercut (Ravager)
     [29380] = 'esoui/art/icons/ability_2handed_001.dds', -- Uppercut (Ravager)
 
-    [29035] = 'LuiExtended/media/icons/ability_weapon_melee_attacklight.dds', -- Quick Strike (Rogue/Skirmisher)
+    [29035] = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', -- Quick Strike (Rogue/Skirmisher)
     [12381] = 'esoui/art/icons/ability_rogue_063.dds', -- Assassinate (Rogue/Skirmisher)
 
     [10735] = 'esoui/art/icons/ability_dualwield_001_b.dds', -- Blood Craze (Berserker)
     [49252] = 'esoui/art/icons/ability_dualwield_001_b.dds', -- Blood Craze (Berserker)
     [49254] = 'esoui/art/icons/ability_dualwield_001_b.dds', -- Blood Craze (Berserker)
-    [44206] = 'LuiExtended/media/icons/ability_weapon_heated_blades.dds', -- Minor Maim (formerly Heated Blades)
+    [44206] = 'LuiExtended/media/icons/abilities/ability_weapon_heated_blades.dds', -- Minor Maim (formerly Heated Blades)
 
     [74472] = 'esoui/art/icons/ability_dragonknight_010.dds', -- Dark Talons (Dragonknight)
 
-    [29511] = 'LuiExtended/media/icons/ability_sorcerer_thunder_hammer.dds', -- Thunder Hammer (Thundermaul)
-    [17867] = 'LuiExtended/media/icons/ability_sorcerer_shock_aura.dds', -- Shock Aura (Thundermaul)
+    [29511] = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_hammer.dds', -- Thunder Hammer (Thundermaul)
+    [17867] = 'LuiExtended/media/icons/abilities/ability_sorcerer_shock_aura.dds', -- Shock Aura (Thundermaul)
     [44408] = 'esoui/art/icons/ability_sorcerer_lightning_form.dds', -- Lightning Form (Thundermaul)
 
     [36471] = 'esoui/art/icons/ability_nightblade_002.dds', -- Veiled Strike (Nightblade)
@@ -1258,43 +1258,43 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [44350] = 'esoui/art/icons/ability_nightblade_018_a.dds', -- Soul Tether (Nightblade)
 
     [37109] = 'esoui/art/icons/ability_bow_005.dds', -- Arrow Spray (Archer)
-    [74978] = 'LuiExtended/media/icons/ability_bow_attackheavy.dds', -- Taking Aim (Archer)
-    [74980] = 'LuiExtended/media/icons/ability_bow_attackheavy.dds', -- Taking Aim (Archer)
+    [74978] = 'LuiExtended/media/icons/abilities/ability_bow_attackheavy.dds', -- Taking Aim (Archer)
+    [74980] = 'LuiExtended/media/icons/abilities/ability_bow_attackheavy.dds', -- Taking Aim (Archer)
 
     [44305] = 'esoui/art/icons/ability_fightersguild_004.dds', -- Trap Beast (Pet Ranger)
 
-    [16588] = 'LuiExtended/media/icons/ability_mage_heat_wave.dds', -- Heat Wave (Fire Mage)
-    [47102] = 'LuiExtended/media/icons/ability_mage_fire_runes.dds', -- Fire Runes (Fire Mage)
+    [16588] = 'LuiExtended/media/icons/abilities/ability_mage_heat_wave.dds', -- Heat Wave (Fire Mage)
+    [47102] = 'LuiExtended/media/icons/abilities/ability_mage_fire_runes.dds', -- Fire Runes (Fire Mage)
 
-    [14524] = 'LuiExtended/media/icons/ability_sorcerer_lightning_ranged.dds', -- Shock (Storm Mage)
-    [29470] = 'LuiExtended/media/icons/ability_sorcerer_thunder_thrall.dds', -- Thunder Thrall (Storm Mage)
+    [14524] = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_ranged.dds', -- Shock (Storm Mage)
+    [29470] = 'LuiExtended/media/icons/abilities/ability_sorcerer_thunder_thrall.dds', -- Thunder Thrall (Storm Mage)
 
     [14550] = 'esoui/art/icons/ability_mage_050.dds', -- Winter's Reach (Frost Mage)
 
     [37200] = 'esoui/art/icons/ability_mage_004.dds', -- Burden (Spirit Mage)
     [35142] = 'esoui/art/icons/ability_mage_004.dds', -- Burden (Spirit Mage)
 
-    [37150] = 'LuiExtended/media/icons/ability_mage_fire_ranged.dds', -- Flare (Battlemage)
-    [37028] = 'LuiExtended/media/icons/ability_mage_empower_weapon_flame_meleeattack.dds', -- Quick Strike (Battlemage)
-    [37029] = 'LuiExtended/media/icons/ability_mage_empower_weapon_flame_meleeattack.dds', -- Quick Strike (Battlemage)
-    [37030] = 'LuiExtended/media/icons/ability_mage_empower_weapon_flame_meleeattack.dds', -- Quick Strike (Battlemage)
-    [37021] = 'LuiExtended/media/icons/ability_mage_empower_weapon_flame.dds', -- Empower Weapon: Flame (Battlemage)
-    [37156] = 'LuiExtended/media/icons/ability_mage_lightning_onslaught.dds', -- Lightning Onslaught (Battlemage)
-    [37131] = 'LuiExtended/media/icons/ability_mage_ice_cage.dds', -- Ice Cage (Battlemage)
-    [37132] = 'LuiExtended/media/icons/ability_mage_ice_cage.dds', -- Ice Cage (Battlemage)
+    [37150] = 'LuiExtended/media/icons/abilities/ability_mage_fire_ranged.dds', -- Flare (Battlemage)
+    [37028] = 'LuiExtended/media/icons/abilities/ability_mage_empower_weapon_flame_meleeattack.dds', -- Quick Strike (Battlemage)
+    [37029] = 'LuiExtended/media/icons/abilities/ability_mage_empower_weapon_flame_meleeattack.dds', -- Quick Strike (Battlemage)
+    [37030] = 'LuiExtended/media/icons/abilities/ability_mage_empower_weapon_flame_meleeattack.dds', -- Quick Strike (Battlemage)
+    [37021] = 'LuiExtended/media/icons/abilities/ability_mage_empower_weapon_flame.dds', -- Empower Weapon: Flame (Battlemage)
+    [37156] = 'LuiExtended/media/icons/abilities/ability_mage_lightning_onslaught.dds', -- Lightning Onslaught (Battlemage)
+    [37131] = 'LuiExtended/media/icons/abilities/ability_mage_ice_cage.dds', -- Ice Cage (Battlemage)
+    [37132] = 'LuiExtended/media/icons/abilities/ability_mage_ice_cage.dds', -- Ice Cage (Battlemage)
     [50108] = 'esoui/art/icons/ability_sorcerer_monsoon.dds', -- Negate Magic (Battlemage)
 
-    [37126] = 'LuiExtended/media/icons/ability_mage_magic_ranged.dds', -- Entropic Flare (Timb Bomb Mage)
-    [36986] = 'LuiExtended/media/icons/ability_mage_magic_aoe.dds', -- Void (Time Bomb Mage)
+    [37126] = 'LuiExtended/media/icons/abilities/ability_mage_magic_ranged.dds', -- Entropic Flare (Timb Bomb Mage)
+    [36986] = 'LuiExtended/media/icons/abilities/ability_mage_magic_aoe.dds', -- Void (Time Bomb Mage)
 
-    [56828] = 'LuiExtended/media/icons/ability_nightblade_fright_force.dds', -- Fright Force (Fear Mage)
-    [14350] = 'LuiExtended/media/icons/ability_nightblade_aspect_of_terror.dds', -- Aspect of Terror (Fear Mage)
-    [37084] = 'LuiExtended/media/icons/ability_nightblade_aspect_of_terror.dds', -- Aspect of Terror (Fear Mage)
+    [56828] = 'LuiExtended/media/icons/abilities/ability_nightblade_fright_force.dds', -- Fright Force (Fear Mage)
+    [14350] = 'LuiExtended/media/icons/abilities/ability_nightblade_aspect_of_terror.dds', -- Aspect of Terror (Fear Mage)
+    [37084] = 'LuiExtended/media/icons/abilities/ability_nightblade_aspect_of_terror.dds', -- Aspect of Terror (Fear Mage)
     [35865] = 'esoui/art/icons/ability_nightblade_004.dds', -- Shadow Cloak (Fear Mage)
 
     [89017] = 'esoui/art/icons/ability_nightblade_001.dds', -- Dark Shade
-    [89010] = 'LuiExtended/media/icons/ability_nightblade_corrode.dds', -- Corrode
-    [89012] = 'LuiExtended/media/icons/ability_nightblade_corrode.dds', -- Minor Maim
+    [89010] = 'LuiExtended/media/icons/abilities/ability_nightblade_corrode.dds', -- Corrode
+    [89012] = 'LuiExtended/media/icons/abilities/ability_nightblade_corrode.dds', -- Minor Maim
 
     [44323] = 'esoui/art/icons/ability_armor_003_a.dds', -- Dampen Magic (Soulbrander)
     [44258] = 'esoui/art/icons/ability_mageguild_002_a.dds', -- Radiant Magelight (Soulbrander)
@@ -1304,16 +1304,16 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [5614] = 'esoui/art/icons/crafting_runecrafter_plug_sp_003.dds', -- Voice to Wake the Dead (Necromancer)
 
     [7590] = 'esoui/art/icons/ability_mage_027.dds', -- Entropic Bolt (Gravesinger)
-    [88322] = 'LuiExtended/media/icons/ability_mage_bone_cage.dds', -- Bone Cage (Gravesinger)
-    [35391] = 'LuiExtended/media/icons/ability_mage_bone_cage.dds', -- Defiled Grave (Gravesinger)
+    [88322] = 'LuiExtended/media/icons/abilities/ability_mage_bone_cage.dds', -- Bone Cage (Gravesinger)
+    [35391] = 'LuiExtended/media/icons/abilities/ability_mage_bone_cage.dds', -- Defiled Grave (Gravesinger)
 
-    [10601] = 'LuiExtended/media/icons/ability_healer_minor_wound.dds', -- Minor Wound (Healer)
+    [10601] = 'LuiExtended/media/icons/abilities/ability_healer_minor_wound.dds', -- Minor Wound (Healer)
     [57534] = 'esoui/art/icons/ability_healer_016.dds', -- Focused Healing (Healer)
     [57537] = 'esoui/art/icons/ability_healer_016.dds', -- Focused Healing (Healer)
     [57538] = 'esoui/art/icons/ability_healer_016.dds', -- Focused Healing (Healer)
 
-    [29669] = 'LuiExtended/media/icons/ability_healer_coiled_lash.dds', -- Coiled Lash (Shaman)
-    [29521] = 'LuiExtended/media/icons/ability_healer_aura_of_protection.dds', -- Aura of Protection (Shaman)
+    [29669] = 'LuiExtended/media/icons/abilities/ability_healer_coiled_lash.dds', -- Coiled Lash (Shaman)
+    [29521] = 'LuiExtended/media/icons/abilities/ability_healer_aura_of_protection.dds', -- Aura of Protection (Shaman)
 
     [68866] = 'esoui/art/icons/ability_ava_003.dds', -- Warhorn (Faction NPCs)
     [38119] = 'esoui/art/icons/ability_ava_001.dds', -- Caltrops  (Faction NPCs)
@@ -1323,14 +1323,14 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [69157] = 'esoui/art/icons/ability_warrior_014.dds', -- Retaliation (Winterborn Warrior)
     [69153] = 'esoui/art/icons/ability_warrior_014.dds', -- Retaliation (Winterborn Warrior)
     [1347] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off-Balance (Winterborn Warrior)
-    [70070] = 'LuiExtended/media/icons/ability_weapon_melee_attackheavy.dds', -- Heavy Strike (Winterborn Warrior)
-    [64980] = 'LuiExtended/media/icons/ability_warrior_javelin.dds', -- Javelin (Winterborn Warrior)
+    [70070] = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds', -- Heavy Strike (Winterborn Warrior)
+    [64980] = 'LuiExtended/media/icons/abilities/ability_warrior_javelin.dds', -- Javelin (Winterborn Warrior)
 
-    [54593] = 'LuiExtended/media/icons/ability_mage_fire_ranged.dds', -- Flare (Winterborn Mage)
-    [55911] = 'LuiExtended/media/icons/ability_mage_grasping_vines.dds', -- Grasping Vines (Winterborn Mage)
-    [55918] = 'LuiExtended/media/icons/ability_mage_grasping_vines.dds', -- Grasping Vines (Winterborn Mage)
-    [55916] = 'LuiExtended/media/icons/ability_mage_grasping_vineburst.dds', -- Grasping Vineburst (Winterborn Mage)
-    [64711] = 'LuiExtended/media/icons/ability_mage_hand_of_flame.dds', -- Flames (Winterborn Mage)
+    [54593] = 'LuiExtended/media/icons/abilities/ability_mage_fire_ranged.dds', -- Flare (Winterborn Mage)
+    [55911] = 'LuiExtended/media/icons/abilities/ability_mage_grasping_vines.dds', -- Grasping Vines (Winterborn Mage)
+    [55918] = 'LuiExtended/media/icons/abilities/ability_mage_grasping_vines.dds', -- Grasping Vines (Winterborn Mage)
+    [55916] = 'LuiExtended/media/icons/abilities/ability_mage_grasping_vineburst.dds', -- Grasping Vineburst (Winterborn Mage)
+    [64711] = 'LuiExtended/media/icons/abilities/ability_mage_hand_of_flame.dds', -- Flames (Winterborn Mage)
 
     [53987] = 'esoui/art/icons/ability_2handed_005_b.dds', -- Rally (Vosh Rakh Devoted)
     [65235] = 'esoui/art/icons/ability_warrior_025.dds', -- Enrage (Vosh Rakh Devoted)
@@ -1346,358 +1346,358 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [74483] = 'esoui/art/icons/ability_dragonknight_005.dds', -- Fiery Grip (Sentinel) (TG DLC)
 
     [72716] = 'esoui/art/icons/ability_rogue_043.dds', -- Uncanny Dodge (Archer) (TG DLC)
-    [72214] = 'LuiExtended/media/icons/ability_rogue_poisoned_arrow.dds', -- Poisoned Arrow (Archer) (TG DLC)
-    [72217] = 'LuiExtended/media/icons/ability_rogue_poisoned_arrow.dds', -- Poisoned Arrow (Archer) (TG DLC)
+    [72214] = 'LuiExtended/media/icons/abilities/ability_rogue_poisoned_arrow.dds', -- Poisoned Arrow (Archer) (TG DLC)
+    [72217] = 'LuiExtended/media/icons/abilities/ability_rogue_poisoned_arrow.dds', -- Poisoned Arrow (Archer) (TG DLC)
     [76089] = 'esoui/art/icons/ability_bow_001.dds', -- Snipe (Archer) (TG DLC)
     [72220] = 'esoui/art/icons/ability_bow_001.dds', -- Snipe (Archer) (TG DLC)
-    [74619] = 'LuiExtended/media/icons/ability_trap_flare_trap.dds', -- Flare Trap (Archer) (TG DLC)
+    [74619] = 'LuiExtended/media/icons/abilities/ability_trap_flare_trap.dds', -- Flare Trap (Archer) (TG DLC)
     [74621] = 'esoui/art/icons/ability_debuff_reveal.dds', -- Revealed (Archer) (TG DLC)
 
     [77472] = 'esoui/art/icons/ability_warrior_030.dds', -- 'Til Death (Bodyguard) (DB DLC)
     [79523] = 'esoui/art/icons/ability_warrior_030.dds', -- 'Til Death (Bodyguard) (DB DLC)
-    [77555] = 'LuiExtended/media/icons/ability_warrior_shard_shield.dds', -- Shard Shield (Bodyguard) (DB DLC)
-    [77562] = 'LuiExtended/media/icons/ability_warrior_shard_shield.dds', -- Shard Shield (Bodyguard) (DB DLC)
-    [77609] = 'LuiExtended/media/icons/ability_warrior_shard_shield.dds', -- Shard Shield (Bodyguard) (DB DLC)
+    [77555] = 'LuiExtended/media/icons/abilities/ability_warrior_shard_shield.dds', -- Shard Shield (Bodyguard) (DB DLC)
+    [77562] = 'LuiExtended/media/icons/abilities/ability_warrior_shard_shield.dds', -- Shard Shield (Bodyguard) (DB DLC)
+    [77609] = 'LuiExtended/media/icons/abilities/ability_warrior_shard_shield.dds', -- Shard Shield (Bodyguard) (DB DLC)
     [77815] = 'esoui/art/icons/ability_1handed_003.dds', -- Shield Charge (Bodyguard) (DB DLC)
 
     -- ANIMALS
-    [5451] = 'LuiExtended/media/icons/ability_alit_bite.dds', -- Bite (Alit)
-    [84356] = 'LuiExtended/media/icons/ability_alit_lacerate.dds', -- Lacerate (Alit)
-    [56984] = 'LuiExtended/media/icons/ability_alit_lacerate.dds', -- Laceration (Alit)
-    [56983] = 'LuiExtended/media/icons/ability_alit_lacerate.dds', -- Laceration (Alit)
+    [5451] = 'LuiExtended/media/icons/abilities/ability_alit_bite.dds', -- Bite (Alit)
+    [84356] = 'LuiExtended/media/icons/abilities/ability_alit_lacerate.dds', -- Lacerate (Alit)
+    [56984] = 'LuiExtended/media/icons/abilities/ability_alit_lacerate.dds', -- Laceration (Alit)
+    [56983] = 'LuiExtended/media/icons/abilities/ability_alit_lacerate.dds', -- Laceration (Alit)
 
-    [4413] = 'LuiExtended/media/icons/ability_bear_bite.dds', -- Swipe (Bear)
-    [38772] = 'LuiExtended/media/icons/ability_bear_crushing_swipe.dds', -- Crushing Swipe (Bear)
-    [18273] = 'LuiExtended/media/icons/ability_bear_crushing_swipe.dds', -- Crushing Swipe (Bear)
-    [4416] = 'LuiExtended/media/icons/ability_bear_savage_blows.dds', -- Savage Blows (Bear)
-    [12380] = 'LuiExtended/media/icons/ability_bear_savage_blows.dds', -- Savage Blows (Bear)
-    [61594] = 'LuiExtended/media/icons/ability_bear_savage_blows.dds', -- Savage Blows Bleeding (Bear)
-    [70355] = 'LuiExtended/media/icons/ability_bear_bite.dds', -- Bite (Bear)
-    [70357] = 'LuiExtended/media/icons/ability_bear_lunge.dds', -- Lunge (Bear)
-    [70359] = 'LuiExtended/media/icons/ability_bear_lunge.dds', -- Lunge (Bear)
-    [89189] = 'LuiExtended/media/icons/ability_bear_crushing_swipe.dds', -- Slam (Bear)
-    [69073] = 'LuiExtended/media/icons/ability_bear_crushing_swipe.dds', -- Knockdown (Bear)
+    [4413] = 'LuiExtended/media/icons/abilities/ability_bear_bite.dds', -- Swipe (Bear)
+    [38772] = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', -- Crushing Swipe (Bear)
+    [18273] = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', -- Crushing Swipe (Bear)
+    [4416] = 'LuiExtended/media/icons/abilities/ability_bear_savage_blows.dds', -- Savage Blows (Bear)
+    [12380] = 'LuiExtended/media/icons/abilities/ability_bear_savage_blows.dds', -- Savage Blows (Bear)
+    [61594] = 'LuiExtended/media/icons/abilities/ability_bear_savage_blows.dds', -- Savage Blows Bleeding (Bear)
+    [70355] = 'LuiExtended/media/icons/abilities/ability_bear_bite.dds', -- Bite (Bear)
+    [70357] = 'LuiExtended/media/icons/abilities/ability_bear_lunge.dds', -- Lunge (Bear)
+    [70359] = 'LuiExtended/media/icons/abilities/ability_bear_lunge.dds', -- Lunge (Bear)
+    [89189] = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', -- Slam (Bear)
+    [69073] = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', -- Knockdown (Bear)
 
-    [4583] = 'LuiExtended/media/icons/ability_crocodile_bite.dds', -- Bite (Crocodile)
-    [9642] = 'LuiExtended/media/icons/ability_crocodile_bite.dds', -- Bite (Crocodile)
-    [4587] = 'LuiExtended/media/icons/ability_crocodile_bite.dds', -- Crushing Chomp (Crocodile)
-    [32051] = 'LuiExtended/media/icons/ability_crocodile_sweep.dds', -- Sweeping (Crocodile)
+    [4583] = 'LuiExtended/media/icons/abilities/ability_crocodile_bite.dds', -- Bite (Crocodile)
+    [9642] = 'LuiExtended/media/icons/abilities/ability_crocodile_bite.dds', -- Bite (Crocodile)
+    [4587] = 'LuiExtended/media/icons/abilities/ability_crocodile_bite.dds', -- Crushing Chomp (Crocodile)
+    [32051] = 'LuiExtended/media/icons/abilities/ability_crocodile_sweep.dds', -- Sweeping (Crocodile)
 
-    [8971] = 'LuiExtended/media/icons/ability_duneripper_bite.dds', -- Bite (Duneripper)
-    [9643] = 'LuiExtended/media/icons/ability_duneripper_bite.dds', -- Bite (Duneripper)
-    [8972] =  'LuiExtended/media/icons/ability_duneripper_bite.dds', -- Crushing Chomp (Duneripper)
-    [32461] = 'LuiExtended/media/icons/ability_duneripper_sweep.dds', -- Sweep (Duneripper)
+    [8971] = 'LuiExtended/media/icons/abilities/ability_duneripper_bite.dds', -- Bite (Duneripper)
+    [9643] = 'LuiExtended/media/icons/abilities/ability_duneripper_bite.dds', -- Bite (Duneripper)
+    [8972] =  'LuiExtended/media/icons/abilities/ability_duneripper_bite.dds', -- Crushing Chomp (Duneripper)
+    [32461] = 'LuiExtended/media/icons/abilities/ability_duneripper_sweep.dds', -- Sweep (Duneripper)
 
-    [7214] = 'LuiExtended/media/icons/ability_durzog_bite.dds', -- Bite (Durzog)
-    [7221] = 'LuiExtended/media/icons/ability_durzog_bite.dds', -- Rend (Durzog)
-    [7227] = 'LuiExtended/media/icons/ability_durzog_rotbone.dds', -- Rotbone (Durzog)
-    [16878] = 'LuiExtended/media/icons/ability_durzog_rotbone.dds', -- Rotbone (Durzog)
+    [7214] = 'LuiExtended/media/icons/abilities/ability_durzog_bite.dds', -- Bite (Durzog)
+    [7221] = 'LuiExtended/media/icons/abilities/ability_durzog_bite.dds', -- Rend (Durzog)
+    [7227] = 'LuiExtended/media/icons/abilities/ability_durzog_rotbone.dds', -- Rotbone (Durzog)
+    [16878] = 'LuiExtended/media/icons/abilities/ability_durzog_rotbone.dds', -- Rotbone (Durzog)
 
-    [6304] = 'LuiExtended/media/icons/ability_dreugh_swipe.dds', -- Swipe (Dreugh)
-    [18002] = 'LuiExtended/media/icons/ability_dreugh_slash.dds', -- Slash (Dreugh)
-    [18003] = 'LuiExtended/media/icons/ability_dreugh_slash.dds', -- Slash (Dreugh)
-    [18005] = 'LuiExtended/media/icons/ability_dreugh_slash.dds', -- Slash (Dreugh)
-    [6308] = 'LuiExtended/media/icons/ability_dreugh_shocking_touch.dds', -- Shocking Touch (Dreugh)
-    [27100] = 'LuiExtended/media/icons/ability_dreugh_shocking_rake.dds', -- Shocking Rake (Dreugh)
+    [6304] = 'LuiExtended/media/icons/abilities/ability_dreugh_swipe.dds', -- Swipe (Dreugh)
+    [18002] = 'LuiExtended/media/icons/abilities/ability_dreugh_slash.dds', -- Slash (Dreugh)
+    [18003] = 'LuiExtended/media/icons/abilities/ability_dreugh_slash.dds', -- Slash (Dreugh)
+    [18005] = 'LuiExtended/media/icons/abilities/ability_dreugh_slash.dds', -- Slash (Dreugh)
+    [6308] = 'LuiExtended/media/icons/abilities/ability_dreugh_shocking_touch.dds', -- Shocking Touch (Dreugh)
+    [27100] = 'LuiExtended/media/icons/abilities/ability_dreugh_shocking_rake.dds', -- Shocking Rake (Dreugh)
 
-    [54374] = 'LuiExtended/media/icons/ability_echatere_tusks.dds', -- Tusks (Echatere)
-    [54378] = 'LuiExtended/media/icons/ability_echatere_shockwave.dds', -- Shockwave (Echatere)
-    [54382] = 'LuiExtended/media/icons/ability_echatere_headbutt.dds', -- Headbutt (Echatere)
-    [54381] = 'LuiExtended/media/icons/ability_echatere_headbutt.dds', -- Headbutt (Echatere)
+    [54374] = 'LuiExtended/media/icons/abilities/ability_echatere_tusks.dds', -- Tusks (Echatere)
+    [54378] = 'LuiExtended/media/icons/abilities/ability_echatere_shockwave.dds', -- Shockwave (Echatere)
+    [54382] = 'LuiExtended/media/icons/abilities/ability_echatere_headbutt.dds', -- Headbutt (Echatere)
+    [54381] = 'LuiExtended/media/icons/abilities/ability_echatere_headbutt.dds', -- Headbutt (Echatere)
 
-    [60920] = 'LuiExtended/media/icons/ability_bat_scrape.dds', -- Scrape (Giant Bat)
-    [47321] = 'LuiExtended/media/icons/ability_bat_screech.dds', -- Screech (Giant Bat)
-    [18319] = 'LuiExtended/media/icons/ability_bat_screech.dds', -- Screech (Giant Bat)
-    [4630] = 'LuiExtended/media/icons/ability_bat_draining_bite.dds', -- Draining Bite (Giant Bat)
+    [60920] = 'LuiExtended/media/icons/abilities/ability_bat_scrape.dds', -- Scrape (Giant Bat)
+    [47321] = 'LuiExtended/media/icons/abilities/ability_bat_screech.dds', -- Screech (Giant Bat)
+    [18319] = 'LuiExtended/media/icons/abilities/ability_bat_screech.dds', -- Screech (Giant Bat)
+    [4630] = 'LuiExtended/media/icons/abilities/ability_bat_draining_bite.dds', -- Draining Bite (Giant Bat)
 
-    [8540] = 'LuiExtended/media/icons/ability_snake_strike.dds', -- Strike (Giant Snake)
-    [30214] = 'LuiExtended/media/icons/ability_snake_lash.dds', -- Lash (Giant Snake)
-    [5242] = 'LuiExtended/media/icons/ability_snake_kiss_of_poison.dds', -- Kiss of Poison (Giant Snake)
-    [21826] = 'LuiExtended/media/icons/ability_snake_kiss_of_poison.dds', -- Kiss of Poison (Giant Snake)
+    [8540] = 'LuiExtended/media/icons/abilities/ability_snake_strike.dds', -- Strike (Giant Snake)
+    [30214] = 'LuiExtended/media/icons/abilities/ability_snake_lash.dds', -- Lash (Giant Snake)
+    [5242] = 'LuiExtended/media/icons/abilities/ability_snake_kiss_of_poison.dds', -- Kiss of Poison (Giant Snake)
+    [21826] = 'LuiExtended/media/icons/abilities/ability_snake_kiss_of_poison.dds', -- Kiss of Poison (Giant Snake)
 
-    [5440] = 'LuiExtended/media/icons/ability_guar_bite.dds', -- Bite (Guar)
-    [5443] = 'LuiExtended/media/icons/ability_guar_headbutt.dds', -- Headbutt (Guar)
-    [84359] = 'LuiExtended/media/icons/ability_guar_dive.dds', -- Dive (Guar)
+    [5440] = 'LuiExtended/media/icons/abilities/ability_guar_bite.dds', -- Bite (Guar)
+    [5443] = 'LuiExtended/media/icons/abilities/ability_guar_headbutt.dds', -- Headbutt (Guar)
+    [84359] = 'LuiExtended/media/icons/abilities/ability_guar_dive.dds', -- Dive (Guar)
 
-    [5363] = 'LuiExtended/media/icons/ability_kagouti_chomp.dds', -- Chomp (Kagouti)
-    [42889] = 'LuiExtended/media/icons/ability_kagouti_toss.dds', -- Toss (Kagouti)
-    [42888] = 'LuiExtended/media/icons/ability_kagouti_toss.dds', -- Toss (Kagouti)
-    [18198] = 'LuiExtended/media/icons/ability_kagouti_toss.dds', -- Toss (Kagouti)
+    [5363] = 'LuiExtended/media/icons/abilities/ability_kagouti_chomp.dds', -- Chomp (Kagouti)
+    [42889] = 'LuiExtended/media/icons/abilities/ability_kagouti_toss.dds', -- Toss (Kagouti)
+    [42888] = 'LuiExtended/media/icons/abilities/ability_kagouti_toss.dds', -- Toss (Kagouti)
+    [18198] = 'LuiExtended/media/icons/abilities/ability_kagouti_toss.dds', -- Toss (Kagouti)
 
-    [7170] = 'LuiExtended/media/icons/ability_lion_rend.dds', -- Rend (Lion)
-    [60630] = 'LuiExtended/media/icons/ability_lion_rend.dds', -- Rend (Lion)
-    [60641] = 'LuiExtended/media/icons/ability_lion_claw.dds', -- Claw (Lion)
-    [7158] = 'LuiExtended/media/icons/ability_lion_bite.dds', -- Bite (Lion)
-    [7161] = 'LuiExtended/media/icons/ability_lion_double_strike.dds', -- Double Strike (Lion)
-    [8705] = 'LuiExtended/media/icons/ability_lion_daunting_roar.dds', -- Weakness (Lion)
+    [7170] = 'LuiExtended/media/icons/abilities/ability_lion_rend.dds', -- Rend (Lion)
+    [60630] = 'LuiExtended/media/icons/abilities/ability_lion_rend.dds', -- Rend (Lion)
+    [60641] = 'LuiExtended/media/icons/abilities/ability_lion_claw.dds', -- Claw (Lion)
+    [7158] = 'LuiExtended/media/icons/abilities/ability_lion_bite.dds', -- Bite (Lion)
+    [7161] = 'LuiExtended/media/icons/abilities/ability_lion_double_strike.dds', -- Double Strike (Lion)
+    [8705] = 'LuiExtended/media/icons/abilities/ability_lion_daunting_roar.dds', -- Weakness (Lion)
 
-    [8596] = 'LuiExtended/media/icons/ability_mammoth_swipe.dds', -- Swipe (Mammoth)
-    [8604] = 'LuiExtended/media/icons/ability_mammoth_swipe.dds', -- Vigorous Swipe (Mammoth)
-    [23164] = 'LuiExtended/media/icons/ability_mammoth_stomp.dds', -- Stomp (Mammoth)
-    [23222] = 'LuiExtended/media/icons/ability_mammoth_charge.dds', -- Charge (Mammoth)
-    [23227] = 'LuiExtended/media/icons/ability_mammoth_charge.dds', -- Charge (Mammoth)
+    [8596] = 'LuiExtended/media/icons/abilities/ability_mammoth_swipe.dds', -- Swipe (Mammoth)
+    [8604] = 'LuiExtended/media/icons/abilities/ability_mammoth_swipe.dds', -- Vigorous Swipe (Mammoth)
+    [23164] = 'LuiExtended/media/icons/abilities/ability_mammoth_stomp.dds', -- Stomp (Mammoth)
+    [23222] = 'LuiExtended/media/icons/abilities/ability_mammoth_charge.dds', -- Charge (Mammoth)
+    [23227] = 'LuiExtended/media/icons/abilities/ability_mammoth_charge.dds', -- Charge (Mammoth)
 
-    [4192] = 'LuiExtended/media/icons/ability_mudcrab_pincer.dds', -- Pincer (Mudcrab)
-    [4224] = 'LuiExtended/media/icons/ability_mudcrab_double_claw_strike.dds', -- Double Claw Strike (Mudcrab)
-    [4226] = 'LuiExtended/media/icons/ability_mudcrab_double_claw_strike.dds', -- Double Claw Strike (Mudcrab)
-    [85082] = 'LuiExtended/media/icons/ability_mudcrab_unforgiving_claws.dds', -- Unforgiving Claws (Mudcrab)
+    [4192] = 'LuiExtended/media/icons/abilities/ability_mudcrab_pincer.dds', -- Pincer (Mudcrab)
+    [4224] = 'LuiExtended/media/icons/abilities/ability_mudcrab_double_claw_strike.dds', -- Double Claw Strike (Mudcrab)
+    [4226] = 'LuiExtended/media/icons/abilities/ability_mudcrab_double_claw_strike.dds', -- Double Claw Strike (Mudcrab)
+    [85082] = 'LuiExtended/media/icons/abilities/ability_mudcrab_unforgiving_claws.dds', -- Unforgiving Claws (Mudcrab)
 
-    [16667] = 'LuiExtended/media/icons/ability_netch_slap.dds', -- Slap (Netch)
-    [16690] = 'LuiExtended/media/icons/ability_netch_thrust.dds', -- Thrust (Netch)
-    [16698] = 'LuiExtended/media/icons/ability_netch_poisonbloom.dds', -- Poisonbloom (Netch)
+    [16667] = 'LuiExtended/media/icons/abilities/ability_netch_slap.dds', -- Slap (Netch)
+    [16690] = 'LuiExtended/media/icons/abilities/ability_netch_thrust.dds', -- Thrust (Netch)
+    [16698] = 'LuiExtended/media/icons/abilities/ability_netch_poisonbloom.dds', -- Poisonbloom (Netch)
 
-    [7266] = 'LuiExtended/media/icons/ability_nix-hound_strike.dds', -- Strike (Nix-Hound)
-    [13416] = 'LuiExtended/media/icons/ability_nix-hound_strike.dds', -- Strike (Nix-Hound)
-    [12303] = 'LuiExtended/media/icons/ability_nix-hound_leech.dds', -- Leech (Nix-Hound)
-    [38635] = 'LuiExtended/media/icons/ability_nix-hound_dampworm.dds', -- Dampworm (Nix-Hound)
-    [38640] = 'LuiExtended/media/icons/ability_nix-hound_dampworm.dds', -- Dampworm (Nix-Hound)
+    [7266] = 'LuiExtended/media/icons/abilities/ability_nix-hound_strike.dds', -- Strike (Nix-Hound)
+    [13416] = 'LuiExtended/media/icons/abilities/ability_nix-hound_strike.dds', -- Strike (Nix-Hound)
+    [12303] = 'LuiExtended/media/icons/abilities/ability_nix-hound_leech.dds', -- Leech (Nix-Hound)
+    [38635] = 'LuiExtended/media/icons/abilities/ability_nix-hound_dampworm.dds', -- Dampworm (Nix-Hound)
+    [38640] = 'LuiExtended/media/icons/abilities/ability_nix-hound_dampworm.dds', -- Dampworm (Nix-Hound)
 
-    [5362] = 'LuiExtended/media/icons/ability_skeever_slam.dds', -- Slam (Skeever)
-    [21904] = 'LuiExtended/media/icons/ability_skeever_rend.dds', -- Rend (Skeever)
+    [5362] = 'LuiExtended/media/icons/abilities/ability_skeever_slam.dds', -- Slam (Skeever)
+    [21904] = 'LuiExtended/media/icons/abilities/ability_skeever_rend.dds', -- Rend (Skeever)
 
-    [21947] = 'LuiExtended/media/icons/ability_wamasu_bite.dds', -- Bite (Wamasu)
-    [46833] = 'LuiExtended/media/icons/ability_wamasu_sweep.dds', -- Sweep (Wamasu)
-    [37178] = 'LuiExtended/media/icons/ability_wamasu_sweep.dds', -- Sweep (Wamasu)
-    [21952] = 'LuiExtended/media/icons/ability_wamasu_repulsion_shock.dds', -- Repulsion Shock (Wamasu)
-    [21961] = 'LuiExtended/media/icons/ability_wamasu_charge.dds', -- Charge (Wamasu)
-    [21967] = 'LuiExtended/media/icons/ability_wamasu_charge.dds', -- Charge (Wamasu)
+    [21947] = 'LuiExtended/media/icons/abilities/ability_wamasu_bite.dds', -- Bite (Wamasu)
+    [46833] = 'LuiExtended/media/icons/abilities/ability_wamasu_sweep.dds', -- Sweep (Wamasu)
+    [37178] = 'LuiExtended/media/icons/abilities/ability_wamasu_sweep.dds', -- Sweep (Wamasu)
+    [21952] = 'LuiExtended/media/icons/abilities/ability_wamasu_repulsion_shock.dds', -- Repulsion Shock (Wamasu)
+    [21961] = 'LuiExtended/media/icons/abilities/ability_wamasu_charge.dds', -- Charge (Wamasu)
+    [21967] = 'LuiExtended/media/icons/abilities/ability_wamasu_charge.dds', -- Charge (Wamasu)
 
-    [44781] = 'LuiExtended/media/icons/ability_welwa_swipe.dds', -- Swipe (Welwa)
-    [45937] = 'LuiExtended/media/icons/ability_welwa_cleave.dds', -- Cleave (Welwa)
-    [44792] = 'LuiExtended/media/icons/ability_welwa_rear_kick.dds', -- Rear Kick (Welwa)
-    [45986] = 'LuiExtended/media/icons/ability_welwa_charge.dds', -- Charge (Welwa)
-    [45991] = 'LuiExtended/media/icons/ability_welwa_charge.dds', -- Charge (Welwa)
+    [44781] = 'LuiExtended/media/icons/abilities/ability_welwa_swipe.dds', -- Swipe (Welwa)
+    [45937] = 'LuiExtended/media/icons/abilities/ability_welwa_cleave.dds', -- Cleave (Welwa)
+    [44792] = 'LuiExtended/media/icons/abilities/ability_welwa_rear_kick.dds', -- Rear Kick (Welwa)
+    [45986] = 'LuiExtended/media/icons/abilities/ability_welwa_charge.dds', -- Charge (Welwa)
+    [45991] = 'LuiExtended/media/icons/abilities/ability_welwa_charge.dds', -- Charge (Welwa)
 
-    [4022] = 'LuiExtended/media/icons/ability_wolf_bite.dds', -- Bite (Wolf)
-    [42844] = 'LuiExtended/media/icons/ability_wolf_rotbone.dds', -- Rotbone (Wolf)
-    [14523] = 'LuiExtended/media/icons/ability_wolf_helljoint.dds', -- Helljoint (Wolf)
-    [75818] = 'LuiExtended/media/icons/ability_wolf_helljoint.dds', -- Helljoint (Wolf)
+    [4022] = 'LuiExtended/media/icons/abilities/ability_wolf_bite.dds', -- Bite (Wolf)
+    [42844] = 'LuiExtended/media/icons/abilities/ability_wolf_rotbone.dds', -- Rotbone (Wolf)
+    [14523] = 'LuiExtended/media/icons/abilities/ability_wolf_helljoint.dds', -- Helljoint (Wolf)
+    [75818] = 'LuiExtended/media/icons/abilities/ability_wolf_helljoint.dds', -- Helljoint (Wolf)
 
     -- DAEDRA
-    [51265] = 'LuiExtended/media/icons/ability_air_atronach_flame.dds', -- Air Atronach Flame (Air Atronach - Flame)
-    [51270] = 'LuiExtended/media/icons/ability_air_atronach_storm.dds', -- Air Atronach Flame (Air Atronach - Storm)
-    [51267] = 'LuiExtended/media/icons/ability_air_atronach_frost.dds', -- Air Atronach Flame (Air Atronach - Frost)
-    [48092] = 'LuiExtended/media/icons/ability_airatronach_swipe.dds', -- Swipe (Air Atronach)
-    [48093] = 'LuiExtended/media/icons/ability_airatronach_swipe.dds', -- Swipe (Air Atronach)
-    [48096] = 'LuiExtended/media/icons/ability_airatronach_flare.dds', -- Flare (Air Atronach)
-    [48121] = 'LuiExtended/media/icons/ability_airatronach_heavy_attack.dds', -- Heavy Attack (Air Atronach)
-    [48137] = 'LuiExtended/media/icons/ability_airatronach_tornado.dds', -- Tornado (Air Atronach)
-    [51282] = 'LuiExtended/media/icons/ability_airatronach_flame_tornado.dds', -- Flame Tornado (Air Atronach)
-    [50023] = 'LuiExtended/media/icons/ability_airatronach_lightning_rod.dds', -- Lightning Rod (Air Atronach)
-    [88902] = 'LuiExtended/media/icons/ability_airatronach_lightning_rod.dds', -- Lightning Rod (Air Atronach)
-    [50026] = 'LuiExtended/media/icons/ability_mage_shock_pulse.dds', -- Lightning Rod (Air Atronach)
-    [50021] = 'LuiExtended/media/icons/ability_airatronach_ice_vortex.dds', -- Ice Vortex (Air Atronach)
-    [50022] = 'LuiExtended/media/icons/ability_airatronach_ice_vortex.dds', -- Ice Vortex (Air Atronach)
+    [51265] = 'LuiExtended/media/icons/abilities/ability_air_atronach_flame.dds', -- Air Atronach Flame (Air Atronach - Flame)
+    [51270] = 'LuiExtended/media/icons/abilities/ability_air_atronach_storm.dds', -- Air Atronach Flame (Air Atronach - Storm)
+    [51267] = 'LuiExtended/media/icons/abilities/ability_air_atronach_frost.dds', -- Air Atronach Flame (Air Atronach - Frost)
+    [48092] = 'LuiExtended/media/icons/abilities/ability_airatronach_swipe.dds', -- Swipe (Air Atronach)
+    [48093] = 'LuiExtended/media/icons/abilities/ability_airatronach_swipe.dds', -- Swipe (Air Atronach)
+    [48096] = 'LuiExtended/media/icons/abilities/ability_airatronach_flare.dds', -- Flare (Air Atronach)
+    [48121] = 'LuiExtended/media/icons/abilities/ability_airatronach_heavy_attack.dds', -- Heavy Attack (Air Atronach)
+    [48137] = 'LuiExtended/media/icons/abilities/ability_airatronach_tornado.dds', -- Tornado (Air Atronach)
+    [51282] = 'LuiExtended/media/icons/abilities/ability_airatronach_flame_tornado.dds', -- Flame Tornado (Air Atronach)
+    [50023] = 'LuiExtended/media/icons/abilities/ability_airatronach_lightning_rod.dds', -- Lightning Rod (Air Atronach)
+    [88902] = 'LuiExtended/media/icons/abilities/ability_airatronach_lightning_rod.dds', -- Lightning Rod (Air Atronach)
+    [50026] = 'LuiExtended/media/icons/abilities/ability_mage_shock_pulse.dds', -- Lightning Rod (Air Atronach)
+    [50021] = 'LuiExtended/media/icons/abilities/ability_airatronach_ice_vortex.dds', -- Ice Vortex (Air Atronach)
+    [50022] = 'LuiExtended/media/icons/abilities/ability_airatronach_ice_vortex.dds', -- Ice Vortex (Air Atronach)
 
-    [9743] = 'LuiExtended/media/icons/ability_banekin_entropic_touch.dds', -- Entropic Touch (Banekin)
-    [9747] = 'LuiExtended/media/icons/ability_banekin_dire_wound.dds', -- Dire Wound (Banekin)
-    [9749] = 'LuiExtended/media/icons/ability_banekin_envelop.dds', -- Envelop (Banekin)
+    [9743] = 'LuiExtended/media/icons/abilities/ability_banekin_entropic_touch.dds', -- Entropic Touch (Banekin)
+    [9747] = 'LuiExtended/media/icons/abilities/ability_banekin_dire_wound.dds', -- Dire Wound (Banekin)
+    [9749] = 'LuiExtended/media/icons/abilities/ability_banekin_envelop.dds', -- Envelop (Banekin)
 
-    [4798] = 'LuiExtended/media/icons/ability_clannfear_headbutt.dds', -- Headbutt (Clannfear)
-    [84443] = 'LuiExtended/media/icons/ability_clannfear_tail_spike.dds', -- Tail Spike (Clannfear)
-    [14825] = 'LuiExtended/media/icons/ability_clannfear_charge.dds', -- Charge (Clannfear)
-    [14828] = 'LuiExtended/media/icons/ability_clannfear_charge.dds', -- Charge (Clannfear)
+    [4798] = 'LuiExtended/media/icons/abilities/ability_clannfear_headbutt.dds', -- Headbutt (Clannfear)
+    [84443] = 'LuiExtended/media/icons/abilities/ability_clannfear_tail_spike.dds', -- Tail Spike (Clannfear)
+    [14825] = 'LuiExtended/media/icons/abilities/ability_clannfear_charge.dds', -- Charge (Clannfear)
+    [14828] = 'LuiExtended/media/icons/abilities/ability_clannfear_charge.dds', -- Charge (Clannfear)
 
-    [26551] = 'LuiExtended/media/icons/ability_daedrictitan_strike.dds', -- Strike (Daedric Titan)
-    [32852] = 'LuiExtended/media/icons/ability_innate_coldfire_ranged.dds', -- Scourge Bolt (Daedric Titan)
-    [32696] = 'LuiExtended/media/icons/ability_innate_coldfire_aoe.dds', -- Soul Flame (Daedric Titan)
-    [35280] = 'LuiExtended/media/icons/ability_innate_coldfire_aoe.dds', -- Soul Flame (Daedric Titan)
-    [73437] = 'LuiExtended/media/icons/ability_innate_coldfire_aoe.dds', -- Soul Flame (Daedric Titan)
-    [35278] = 'LuiExtended/media/icons/ability_innate_coldfire_aoe.dds', -- Soul Flame (Daedric Titan)
-    [26554] = 'LuiExtended/media/icons/ability_daedrictitan_wing_gust.dds', -- Wing Gust (Daedric Titan)
-    [33085] = 'LuiExtended/media/icons/ability_daedrictitan_wing_gust.dds', -- Wing Gust (Daedric Titan)
-    [33086] = 'LuiExtended/media/icons/ability_daedrictitan_wing_gust.dds', -- Wing Gust (Daedric Titan)
+    [26551] = 'LuiExtended/media/icons/abilities/ability_daedrictitan_strike.dds', -- Strike (Daedric Titan)
+    [32852] = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_ranged.dds', -- Scourge Bolt (Daedric Titan)
+    [32696] = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_aoe.dds', -- Soul Flame (Daedric Titan)
+    [35280] = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_aoe.dds', -- Soul Flame (Daedric Titan)
+    [73437] = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_aoe.dds', -- Soul Flame (Daedric Titan)
+    [35278] = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_aoe.dds', -- Soul Flame (Daedric Titan)
+    [26554] = 'LuiExtended/media/icons/abilities/ability_daedrictitan_wing_gust.dds', -- Wing Gust (Daedric Titan)
+    [33085] = 'LuiExtended/media/icons/abilities/ability_daedrictitan_wing_gust.dds', -- Wing Gust (Daedric Titan)
+    [33086] = 'LuiExtended/media/icons/abilities/ability_daedrictitan_wing_gust.dds', -- Wing Gust (Daedric Titan)
 
-    [4750] = 'LuiExtended/media/icons/ability_daedroth_jagged_claw.dds', -- Jagged Claw (Daedroth)
-    [4778] = 'LuiExtended/media/icons/ability_daedroth_fiery_jaws.dds', -- Fiery Jaws (Daedroth)
-    [4772] = 'LuiExtended/media/icons/ability_daedroth_fiery_breath.dds', -- Fiery Breath (Daedroth)
+    [4750] = 'LuiExtended/media/icons/abilities/ability_daedroth_jagged_claw.dds', -- Jagged Claw (Daedroth)
+    [4778] = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_jaws.dds', -- Fiery Jaws (Daedroth)
+    [4772] = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds', -- Fiery Breath (Daedroth)
 
-    [18471] = 'LuiExtended/media/icons/ability_mage_fire_ranged.dds', -- Flare (Flame Atronach)
-    [18472] = 'LuiExtended/media/icons/ability_mage_fire_ranged.dds', -- Flare (Flame Atronach)
-    [15157] = 'LuiExtended/media/icons/ability_mage_fire_ranged.dds', -- Flare (Flame Atronach)
-    [12254] = 'LuiExtended/media/icons/ability_mage_fire_ranged.dds', -- Flare (Flame Atronach)
-    [26325] = 'LuiExtended/media/icons/ability_flameatronach_lava_geyser.dds', -- Lava Geyser (Flame Atronach)
-    [4491] = 'LuiExtended/media/icons/ability_flameatronach_radiance.dds', -- Radiance (Flame Atronach)
-    [50215] = 'LuiExtended/media/icons/ability_mage_fire_aoe.dds', -- Combustion (Flame Atronach)
+    [18471] = 'LuiExtended/media/icons/abilities/ability_mage_fire_ranged.dds', -- Flare (Flame Atronach)
+    [18472] = 'LuiExtended/media/icons/abilities/ability_mage_fire_ranged.dds', -- Flare (Flame Atronach)
+    [15157] = 'LuiExtended/media/icons/abilities/ability_mage_fire_ranged.dds', -- Flare (Flame Atronach)
+    [12254] = 'LuiExtended/media/icons/abilities/ability_mage_fire_ranged.dds', -- Flare (Flame Atronach)
+    [26325] = 'LuiExtended/media/icons/abilities/ability_flameatronach_lava_geyser.dds', -- Lava Geyser (Flame Atronach)
+    [4491] = 'LuiExtended/media/icons/abilities/ability_flameatronach_radiance.dds', -- Radiance (Flame Atronach)
+    [50215] = 'LuiExtended/media/icons/abilities/ability_mage_fire_aoe.dds', -- Combustion (Flame Atronach)
 
-    [67123] = 'LuiExtended/media/icons/ability_fleshcolossus_tremor.dds', -- Tremor (Flesh Colossus)
-    [67636] = 'LuiExtended/media/icons/ability_fleshcolossus_falling_debris.dds', -- Falling Debris (Flesh Colossus)
-    [65709] = 'LuiExtended/media/icons/ability_fleshcolossus_pin.dds', -- Pin (Flesh Colossus)
-    [49820] = 'LuiExtended/media/icons/ability_fleshcolossus_pin.dds', -- Stunned (Flesh Colossus)
-    [53233] = 'LuiExtended/media/icons/ability_innate_snare_disease.dds', -- Miasma Pool (Flesh Colossus)
-    [67872] = 'LuiExtended/media/icons/ability_fleshcolossus_sweep.dds', -- Sweep (Flesh Colossus)
-    [68824] = 'LuiExtended/media/icons/ability_fleshcolossus_sweep.dds', -- Sweep (Flesh Colossus)
-    [68813] = 'LuiExtended/media/icons/ability_fleshcolossus_sweep.dds', -- Sweep Knockback (Flesh Colossus)
-    [67842] = 'LuiExtended/media/icons/ability_innate_shockwave.dds', -- Sweep Shockwave (Flesh Colossus)
-    [76129] = 'LuiExtended/media/icons/ability_fleshcolossus_stumble_forward.dds', -- Stumble Forward (Flesh Colossus)
+    [67123] = 'LuiExtended/media/icons/abilities/ability_fleshcolossus_tremor.dds', -- Tremor (Flesh Colossus)
+    [67636] = 'LuiExtended/media/icons/abilities/ability_fleshcolossus_falling_debris.dds', -- Falling Debris (Flesh Colossus)
+    [65709] = 'LuiExtended/media/icons/abilities/ability_fleshcolossus_pin.dds', -- Pin (Flesh Colossus)
+    [49820] = 'LuiExtended/media/icons/abilities/ability_fleshcolossus_pin.dds', -- Stunned (Flesh Colossus)
+    [53233] = 'LuiExtended/media/icons/abilities/ability_innate_snare_disease.dds', -- Miasma Pool (Flesh Colossus)
+    [67872] = 'LuiExtended/media/icons/abilities/ability_fleshcolossus_sweep.dds', -- Sweep (Flesh Colossus)
+    [68824] = 'LuiExtended/media/icons/abilities/ability_fleshcolossus_sweep.dds', -- Sweep (Flesh Colossus)
+    [68813] = 'LuiExtended/media/icons/abilities/ability_fleshcolossus_sweep.dds', -- Sweep Knockback (Flesh Colossus)
+    [67842] = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds', -- Sweep Shockwave (Flesh Colossus)
+    [76129] = 'LuiExtended/media/icons/abilities/ability_fleshcolossus_stumble_forward.dds', -- Stumble Forward (Flesh Colossus)
     [76134] = 'esoui/art/icons/ability_debuff_stagger.dds', -- Stumble Forward (Flesh Colossus)
     [65755] = 'esoui/art/icons/ability_debuff_stagger.dds', -- Staggered (Flesh Colossus)
     [76133] = 'esoui/art/icons/ability_debuff_stagger.dds', -- Stumble Forward (Flesh Colossus)
-    [49429] = 'LuiExtended/media/icons/ability_fleshcolossus_smash.dds', -- Smash (Flesh Colossus)
-    [65744] = 'LuiExtended/media/icons/ability_fleshcolossus_claw.dds', -- Claw (Flesh Colossus)
+    [49429] = 'LuiExtended/media/icons/abilities/ability_fleshcolossus_smash.dds', -- Smash (Flesh Colossus)
+    [65744] = 'LuiExtended/media/icons/abilities/ability_fleshcolossus_claw.dds', -- Claw (Flesh Colossus)
 
-    [63275] = 'LuiExtended/media/icons/ability_fleshatronach_claw.dds', -- Claw (Flesh Atronach)
-    [63276] = 'LuiExtended/media/icons/ability_fleshatronach_stomp.dds', -- Stomp (Flesh Atronach)
-    [35413] = 'LuiExtended/media/icons/ability_fleshatronach_fire_brand.dds', -- Fire Brand (Flesh Atronach)
-    [4817] = 'LuiExtended/media/icons/ability_fleshatronach_unyielding_mace.dds', -- Unyielding Mace (Flesh Atronach)
-    [20226] = 'LuiExtended/media/icons/ability_fleshatronach_unyielding_mace.dds', -- Stun (Flesh Atronach)
-    [27326] = 'LuiExtended/media/icons/ability_fleshatronach_unyielding_mace.dds', -- Unyielding Mace (Flesh Atronach)
-    [23077] = 'LuiExtended/media/icons/ability_fleshatronach_unyielding_mace.dds', -- Bleeding (Flesh Atronach)
+    [63275] = 'LuiExtended/media/icons/abilities/ability_fleshatronach_claw.dds', -- Claw (Flesh Atronach)
+    [63276] = 'LuiExtended/media/icons/abilities/ability_fleshatronach_stomp.dds', -- Stomp (Flesh Atronach)
+    [35413] = 'LuiExtended/media/icons/abilities/ability_fleshatronach_fire_brand.dds', -- Fire Brand (Flesh Atronach)
+    [4817] = 'LuiExtended/media/icons/abilities/ability_fleshatronach_unyielding_mace.dds', -- Unyielding Mace (Flesh Atronach)
+    [20226] = 'LuiExtended/media/icons/abilities/ability_fleshatronach_unyielding_mace.dds', -- Stun (Flesh Atronach)
+    [27326] = 'LuiExtended/media/icons/abilities/ability_fleshatronach_unyielding_mace.dds', -- Unyielding Mace (Flesh Atronach)
+    [23077] = 'LuiExtended/media/icons/abilities/ability_fleshatronach_unyielding_mace.dds', -- Bleeding (Flesh Atronach)
 
-    [17069] = 'LuiExtended/media/icons/ability_frostatronach_ice_spear.dds', -- Ice Spear (Frost Atronach)
-    [5009] = 'LuiExtended/media/icons/ability_frostatronach_ice_shards.dds', -- Ice Shards (Frost Atronach)
-    [33551] = 'LuiExtended/media/icons/ability_frostatronach_chilling_aura.dds', -- Chilling Aura (Frost Atronach)
-    [44906] = 'LuiExtended/media/icons/ability_frostatronach_hoarfrost_fist.dds', -- Hoarfrost Fist (Frost Atronach)
-    [44907] = 'LuiExtended/media/icons/ability_frostatronach_hoarfrost_fist.dds', -- Hoarfrost Fist (Frost Atronach)
-    [44908] = 'LuiExtended/media/icons/ability_frostatronach_hoarfrost_fist.dds', -- Hoarfrost Fist (Frost Atronach)
-    [51645] = 'LuiExtended/media/icons/ability_mage_snare_frost.dds', -- Frozen Ground (Frost Atronach)
-    [51646] = 'LuiExtended/media/icons/ability_mage_snare_frost.dds', -- Frozen Ground (Frost Atronach)
+    [17069] = 'LuiExtended/media/icons/abilities/ability_frostatronach_ice_spear.dds', -- Ice Spear (Frost Atronach)
+    [5009] = 'LuiExtended/media/icons/abilities/ability_frostatronach_ice_shards.dds', -- Ice Shards (Frost Atronach)
+    [33551] = 'LuiExtended/media/icons/abilities/ability_frostatronach_chilling_aura.dds', -- Chilling Aura (Frost Atronach)
+    [44906] = 'LuiExtended/media/icons/abilities/ability_frostatronach_hoarfrost_fist.dds', -- Hoarfrost Fist (Frost Atronach)
+    [44907] = 'LuiExtended/media/icons/abilities/ability_frostatronach_hoarfrost_fist.dds', -- Hoarfrost Fist (Frost Atronach)
+    [44908] = 'LuiExtended/media/icons/abilities/ability_frostatronach_hoarfrost_fist.dds', -- Hoarfrost Fist (Frost Atronach)
+    [51645] = 'LuiExtended/media/icons/abilities/ability_mage_snare_frost.dds', -- Frozen Ground (Frost Atronach)
+    [51646] = 'LuiExtended/media/icons/abilities/ability_mage_snare_frost.dds', -- Frozen Ground (Frost Atronach)
 
-    [65926] = 'LuiExtended/media/icons/ability_grevioustwilight_slash.dds', -- Slash (Grevious Twilight)
-    [65845] = 'LuiExtended/media/icons/ability_grevioustwilight_rend.dds', -- Rend (Grevious Twilight)
-    [66643] = 'LuiExtended/media/icons/ability_grevioustwilight_rend.dds', -- Rend (Grevious Twilight)
-    [50596] = 'LuiExtended/media/icons/ability_grevioustwilight_shadow_bolt.dds', -- Shadow Bolt (Grevious Twilight)
-    [50628] = 'LuiExtended/media/icons/ability_grevioustwilight_shadow_strike.dds', -- Shadow Strike (Grevious Twilight)
-    [65891] = 'LuiExtended/media/icons/ability_grevioustwilight_shadow_strike.dds', -- Shadow Strike (Grevious Twilight)
+    [65926] = 'LuiExtended/media/icons/abilities/ability_grevioustwilight_slash.dds', -- Slash (Grevious Twilight)
+    [65845] = 'LuiExtended/media/icons/abilities/ability_grevioustwilight_rend.dds', -- Rend (Grevious Twilight)
+    [66643] = 'LuiExtended/media/icons/abilities/ability_grevioustwilight_rend.dds', -- Rend (Grevious Twilight)
+    [50596] = 'LuiExtended/media/icons/abilities/ability_grevioustwilight_shadow_bolt.dds', -- Shadow Bolt (Grevious Twilight)
+    [50628] = 'LuiExtended/media/icons/abilities/ability_grevioustwilight_shadow_strike.dds', -- Shadow Strike (Grevious Twilight)
+    [65891] = 'LuiExtended/media/icons/abilities/ability_grevioustwilight_shadow_strike.dds', -- Shadow Strike (Grevious Twilight)
 
     [11076] = 'esoui/art/icons/ability_mage_029.dds', -- Chasten (Harvester)
-    [26008] = 'LuiExtended/media/icons/ability_harvester_black_winter.dds', -- Black Winter (Harvester)
-    [11083] = 'LuiExtended/media/icons/ability_harvester_the_feast.dds', -- The Feast (Harvester)
-    [26110] = 'LuiExtended/media/icons/ability_harvester_the_feast.dds', -- The Feast (Harvester)
+    [26008] = 'LuiExtended/media/icons/abilities/ability_harvester_black_winter.dds', -- Black Winter (Harvester)
+    [11083] = 'LuiExtended/media/icons/abilities/ability_harvester_the_feast.dds', -- The Feast (Harvester)
+    [26110] = 'LuiExtended/media/icons/abilities/ability_harvester_the_feast.dds', -- The Feast (Harvester)
 
-    [8204] = 'LuiExtended/media/icons/ability_ogrim_strike.dds', -- Strike (Ogrim)
-    [24693] = 'LuiExtended/media/icons/ability_ogrim_body_slam.dds', -- Body Slam (Ogrim)
-    [24700] = 'LuiExtended/media/icons/ability_ogrim_body_slam.dds', -- Body Slam (Ogrim)
+    [8204] = 'LuiExtended/media/icons/abilities/ability_ogrim_strike.dds', -- Strike (Ogrim)
+    [24693] = 'LuiExtended/media/icons/abilities/ability_ogrim_body_slam.dds', -- Body Slam (Ogrim)
+    [24700] = 'LuiExtended/media/icons/abilities/ability_ogrim_body_slam.dds', -- Body Slam (Ogrim)
 
-    [6158] = 'LuiExtended/media/icons/ability_mage_fire_ranged.dds', -- Flare (Scamp)
-    [6167] = 'LuiExtended/media/icons/ability_mage_heat_wave.dds', -- Heat Wave (Scamp)
-    [6162] = 'LuiExtended/media/icons/ability_mage_rain_of_fire.dds', -- Rain of Fire (Scamp)
+    [6158] = 'LuiExtended/media/icons/abilities/ability_mage_fire_ranged.dds', -- Flare (Scamp)
+    [6167] = 'LuiExtended/media/icons/abilities/ability_mage_heat_wave.dds', -- Heat Wave (Scamp)
+    [6162] = 'LuiExtended/media/icons/abilities/ability_mage_rain_of_fire.dds', -- Rain of Fire (Scamp)
 
-    [8778] = 'LuiExtended/media/icons/ability_spiderdaedra_strike.dds', -- Strike (Spider Daedra)
-    [8808] = 'LuiExtended/media/icons/ability_innate_poison_ranged.dds', -- Spit (Spider Daedra)
-    [38658] = 'LuiExtended/media/icons/ability_mage_lightning_onslaught.dds', -- Lightning Onslaught (Spider Daedra)
-    [20530] = 'LuiExtended/media/icons/ability_mage_lightning_storm.dds', -- Lightning Storm (Spider Daedra)
-    [89307] = 'LuiExtended/media/icons/ability_innate_web.dds', -- Web (Spider Daedra - Spiderling)
+    [8778] = 'LuiExtended/media/icons/abilities/ability_spiderdaedra_strike.dds', -- Strike (Spider Daedra)
+    [8808] = 'LuiExtended/media/icons/abilities/ability_innate_poison_ranged.dds', -- Spit (Spider Daedra)
+    [38658] = 'LuiExtended/media/icons/abilities/ability_mage_lightning_onslaught.dds', -- Lightning Onslaught (Spider Daedra)
+    [20530] = 'LuiExtended/media/icons/abilities/ability_mage_lightning_storm.dds', -- Lightning Storm (Spider Daedra)
+    [89307] = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', -- Web (Spider Daedra - Spiderling)
 
-    [4858] = 'LuiExtended/media/icons/ability_stormatronach_bash.dds', -- Bash (Storm Atronach)
-    [13898] = 'LuiExtended/media/icons/ability_stormatronach_strike.dds', -- Strike (Storm Atronach)
-    [35222] = 'LuiExtended/media/icons/ability_mage_impending_storm.dds', -- Impending Storm (Storm Atronach)
-    [4864] = 'LuiExtended/media/icons/ability_mage_storm_bound.dds', -- Storm Bound (Storm Atronach)
-    [35240] = 'LuiExtended/media/icons/ability_mage_storm_bound.dds', -- Storm Bound (Storm Atronach)
-    [12287] = 'LuiExtended/media/icons/ability_mage_storm_bound.dds', -- Storm Bound (Storm Atronach)
-    [12288] = 'LuiExtended/media/icons/ability_mage_storm_bound.dds', -- Storm Bound (Storm Atronach)
-    [12286] = 'LuiExtended/media/icons/ability_mage_storm_bound.dds', -- Storm Bound (Storm Atronach)
+    [4858] = 'LuiExtended/media/icons/abilities/ability_stormatronach_bash.dds', -- Bash (Storm Atronach)
+    [13898] = 'LuiExtended/media/icons/abilities/ability_stormatronach_strike.dds', -- Strike (Storm Atronach)
+    [35222] = 'LuiExtended/media/icons/abilities/ability_mage_impending_storm.dds', -- Impending Storm (Storm Atronach)
+    [4864] = 'LuiExtended/media/icons/abilities/ability_mage_storm_bound.dds', -- Storm Bound (Storm Atronach)
+    [35240] = 'LuiExtended/media/icons/abilities/ability_mage_storm_bound.dds', -- Storm Bound (Storm Atronach)
+    [12287] = 'LuiExtended/media/icons/abilities/ability_mage_storm_bound.dds', -- Storm Bound (Storm Atronach)
+    [12288] = 'LuiExtended/media/icons/abilities/ability_mage_storm_bound.dds', -- Storm Bound (Storm Atronach)
+    [12286] = 'LuiExtended/media/icons/abilities/ability_mage_storm_bound.dds', -- Storm Bound (Storm Atronach)
 
-    [7095] = 'LuiExtended/media/icons/ability_weapon_melee_attackheavy.dds', -- Heavy Attack (Xivilai)
-    [83072] = 'LuiExtended/media/icons/ability_mage_freezing_edge.dds', -- Freezing Edge (Xivilai)
-    [49203] = 'LuiExtended/media/icons/ability_mage_frozen_weapon.dds', -- Frozen Weapon (Xivilai)
-    [88949] = 'LuiExtended/media/icons/ability_mage_lightning_onslaught.dds', -- Lightning Grasp (Xivilai)
-    [25728] = 'LuiExtended/media/icons/ability_mage_hand_of_flame.dds', -- Hand of Flame (Xivilai)
+    [7095] = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds', -- Heavy Attack (Xivilai)
+    [83072] = 'LuiExtended/media/icons/abilities/ability_mage_freezing_edge.dds', -- Freezing Edge (Xivilai)
+    [49203] = 'LuiExtended/media/icons/abilities/ability_mage_frozen_weapon.dds', -- Frozen Weapon (Xivilai)
+    [88949] = 'LuiExtended/media/icons/abilities/ability_mage_lightning_onslaught.dds', -- Lightning Grasp (Xivilai)
+    [25728] = 'LuiExtended/media/icons/abilities/ability_mage_hand_of_flame.dds', -- Hand of Flame (Xivilai)
 
-    [4652] = 'LuiExtended/media/icons/ability_watcher_gaze.dds', -- Gaze (Watcher)
-    [4653] = 'LuiExtended/media/icons/ability_watcher_shockwave.dds', -- Shockwave (Watcher)
-    [43817] = 'LuiExtended/media/icons/ability_watcher_shockwave.dds', -- Shockwave Snare (Watcher)
-    [53880] = 'LuiExtended/media/icons/ability_watcher_shockwave.dds', -- Shockwave (Watcher)
-    [9220] = 'LuiExtended/media/icons/ability_watcher_doom-truths_gaze.dds', -- Doom-Truth's Gaze (Watcher)
-    [14518] = 'LuiExtended/media/icons/ability_watcher_doom-truths_gaze.dds', -- Doom-Truth's Gaze (Watcher)
-    [14461] = 'LuiExtended/media/icons/ability_watcher_doom-truths_gaze.dds', -- Doom-Truth's Gaze (Watcher)
-    [14547] = 'LuiExtended/media/icons/ability_watcher_doom-truths_gaze.dds', -- Doom-Truth's Gaze (Watcher)
-    [14426] = 'LuiExtended/media/icons/ability_watcher_doom-truths_gaze.dds', -- Doom-Truth's Gaze (Watcher)
-    [14546] = 'LuiExtended/media/icons/ability_watcher_doom-truths_gaze.dds', -- Doom-Truth's Gaze (Watcher)
+    [4652] = 'LuiExtended/media/icons/abilities/ability_watcher_gaze.dds', -- Gaze (Watcher)
+    [4653] = 'LuiExtended/media/icons/abilities/ability_watcher_shockwave.dds', -- Shockwave (Watcher)
+    [43817] = 'LuiExtended/media/icons/abilities/ability_watcher_shockwave.dds', -- Shockwave Snare (Watcher)
+    [53880] = 'LuiExtended/media/icons/abilities/ability_watcher_shockwave.dds', -- Shockwave (Watcher)
+    [9220] = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds', -- Doom-Truth's Gaze (Watcher)
+    [14518] = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds', -- Doom-Truth's Gaze (Watcher)
+    [14461] = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds', -- Doom-Truth's Gaze (Watcher)
+    [14547] = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds', -- Doom-Truth's Gaze (Watcher)
+    [14426] = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds', -- Doom-Truth's Gaze (Watcher)
+    [14546] = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds', -- Doom-Truth's Gaze (Watcher)
 
-    [12062] = 'LuiExtended/media/icons/ability_wingedtwilight_kick.dds', -- Kick (Winged Twilight)
-    [13690] = 'LuiExtended/media/icons/ability_wingedtwilight_kick.dds', -- Kick (Winged Twilight)
-    [63612] = 'LuiExtended/media/icons/ability_wingedtwilight_tail_clip.dds', -- Tail Clip (Winged Twilight)
-    [6412] = 'LuiExtended/media/icons/ability_wingedtwilight_dusks_howl.dds', -- Dusk's Howl (Winged Twilight)
+    [12062] = 'LuiExtended/media/icons/abilities/ability_wingedtwilight_kick.dds', -- Kick (Winged Twilight)
+    [13690] = 'LuiExtended/media/icons/abilities/ability_wingedtwilight_kick.dds', -- Kick (Winged Twilight)
+    [63612] = 'LuiExtended/media/icons/abilities/ability_wingedtwilight_tail_clip.dds', -- Tail Clip (Winged Twilight)
+    [6412] = 'LuiExtended/media/icons/abilities/ability_wingedtwilight_dusks_howl.dds', -- Dusk's Howl (Winged Twilight)
 
-    [00000] = 'LuiExtended/media/icons/ability_', --
-    [00000] = 'LuiExtended/media/icons/ability_', --
-    [00000] = 'LuiExtended/media/icons/ability_', --
-    [00000] = 'LuiExtended/media/icons/ability_', --
-    [00000] = 'LuiExtended/media/icons/ability_', --
-    [00000] = 'LuiExtended/media/icons/ability_', --
-    [00000] = 'LuiExtended/media/icons/ability_', --
-    [00000] = 'LuiExtended/media/icons/ability_', --
-    [00000] = 'LuiExtended/media/icons/ability_', --
-    [00000] = 'LuiExtended/media/icons/ability_', --
-    [00000] = 'LuiExtended/media/icons/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
 
     -- DWEMER
     [64508] = 'esoui/art/icons/ability_warrior_030.dds', -- Find Turret (Dwemer Sentry)
-    [27333] = 'LuiExtended/media/icons/ability_dwemer_overcharge.dds', -- Overcharge (Dwemer Spider)
-    [20206] = 'LuiExtended/media/icons/ability_dwemer_overcharge.dds', -- Overcharge (Dwemer Spider)
+    [27333] = 'LuiExtended/media/icons/abilities/ability_dwemer_overcharge.dds', -- Overcharge (Dwemer Spider)
+    [20206] = 'LuiExtended/media/icons/abilities/ability_dwemer_overcharge.dds', -- Overcharge (Dwemer Spider)
 
     -- INSECTS
-    [5278] = 'LuiExtended/media/icons/ability_assassinbeetle_bite.dds', -- Bite (Assassin Beetle)
-    [5268] = 'LuiExtended/media/icons/ability_assassinbeetle_collywobbles.dds', -- Collywobbles (Assassin Beetle)
-    [6137] = 'LuiExtended/media/icons/ability_assassinbeetle_laceration.dds', -- Laceration (Assassin Beetle)
-    [51736] = 'LuiExtended/media/icons/ability_assassinbeetle_laceration.dds', -- Bleeding (Assassin Beetle)
-    [51735] = 'LuiExtended/media/icons/ability_assassinbeetle_laceration.dds', -- Bleeding (Assassin Beetle)
-    [13680] = 'LuiExtended/media/icons/ability_innate_snare_poison.dds', -- Acid Blood (Assassin Beetle)
+    [5278] = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_bite.dds', -- Bite (Assassin Beetle)
+    [5268] = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_collywobbles.dds', -- Collywobbles (Assassin Beetle)
+    [6137] = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_laceration.dds', -- Laceration (Assassin Beetle)
+    [51736] = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_laceration.dds', -- Bleeding (Assassin Beetle)
+    [51735] = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_laceration.dds', -- Bleeding (Assassin Beetle)
+    [13680] = 'LuiExtended/media/icons/abilities/ability_innate_snare_poison.dds', -- Acid Blood (Assassin Beetle)
 
-    [6754] = 'LuiExtended/media/icons/ability_scorpion_pincer.dds', -- Pincer (Giant Scorpion)
-    [6755] = 'LuiExtended/media/icons/ability_scorpion_sting.dds', -- Sting (Giant Scorpion)
-    [13671] = 'LuiExtended/media/icons/ability_scorpion_sting.dds', -- Sting (Giant Scorpion)
-    [6757] = 'LuiExtended/media/icons/ability_scorpion_blurred_strike.dds', -- Blurred Strike (Giant Scorpion)
-    [9040] = 'LuiExtended/media/icons/ability_scorpion_blurred_strike.dds', -- Blurred Strike (Giant Scorpion)
-    [6756] = 'LuiExtended/media/icons/ability_scorpion_paralyze.dds', -- Paralyze (Giant Scorpion)
-    [12312] = 'LuiExtended/media/icons/ability_scorpion_paralyze.dds', -- Snare (Giant Scorpion)
+    [6754] = 'LuiExtended/media/icons/abilities/ability_scorpion_pincer.dds', -- Pincer (Giant Scorpion)
+    [6755] = 'LuiExtended/media/icons/abilities/ability_scorpion_sting.dds', -- Sting (Giant Scorpion)
+    [13671] = 'LuiExtended/media/icons/abilities/ability_scorpion_sting.dds', -- Sting (Giant Scorpion)
+    [6757] = 'LuiExtended/media/icons/abilities/ability_scorpion_blurred_strike.dds', -- Blurred Strike (Giant Scorpion)
+    [9040] = 'LuiExtended/media/icons/abilities/ability_scorpion_blurred_strike.dds', -- Blurred Strike (Giant Scorpion)
+    [6756] = 'LuiExtended/media/icons/abilities/ability_scorpion_paralyze.dds', -- Paralyze (Giant Scorpion)
+    [12312] = 'LuiExtended/media/icons/abilities/ability_scorpion_paralyze.dds', -- Snare (Giant Scorpion)
 
-    [4731] = 'LuiExtended/media/icons/ability_spider_bite.dds', -- Bite (Giant Spider)
-    [5790] = 'LuiExtended/media/icons/ability_innate_poison_aoe.dds', -- Poisonous Burst (Giant Spider)
-    [5685] = 'LuiExtended/media/icons/ability_spider_corrosive_bite.dds', -- Corrosive Bite (Giant Spider)
-    [8088] = 'LuiExtended/media/icons/ability_spider_poison_spray.dds', -- Poison Spray (Giant Spider)
-    [4730] = 'LuiExtended/media/icons/ability_innate_poison_ranged.dds', -- Spit (Giant Spider)
-    [47318] = 'LuiExtended/media/icons/ability_innate_web.dds', -- Encase (Giant Spider)
+    [4731] = 'LuiExtended/media/icons/abilities/ability_spider_bite.dds', -- Bite (Giant Spider)
+    [5790] = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds', -- Poisonous Burst (Giant Spider)
+    [5685] = 'LuiExtended/media/icons/abilities/ability_spider_corrosive_bite.dds', -- Corrosive Bite (Giant Spider)
+    [8088] = 'LuiExtended/media/icons/abilities/ability_spider_poison_spray.dds', -- Poison Spray (Giant Spider)
+    [4730] = 'LuiExtended/media/icons/abilities/ability_innate_poison_ranged.dds', -- Spit (Giant Spider)
+    [47318] = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', -- Encase (Giant Spider)
 
-    [9225] = 'LuiExtended/media/icons/ability_wasp_bite.dds', -- Bite (Giant Wasp)
-    [9226] = 'LuiExtended/media/icons/ability_wasp_sting.dds', -- Sting (Giant Wasp)
-    [9229] = 'LuiExtended/media/icons/ability_wasp_inject_larva.dds', -- Inject Larva (Giant Wasp)
-    [9237] = 'LuiExtended/media/icons/ability_wasp_inject_larva.dds', -- Larva Gestation (Giant Wasp)
-    [9238] = 'LuiExtended/media/icons/ability_wasp_larva_burst.dds', -- Larva Burst (Giant Wasp)
-    [25113] = 'LuiExtended/media/icons/ability_wasp_charge.dds', -- Charge (Giant Wasp)
-    [25120] = 'LuiExtended/media/icons/ability_wasp_charge.dds', -- Charge (Giant Wasp)
+    [9225] = 'LuiExtended/media/icons/abilities/ability_wasp_bite.dds', -- Bite (Giant Wasp)
+    [9226] = 'LuiExtended/media/icons/abilities/ability_wasp_sting.dds', -- Sting (Giant Wasp)
+    [9229] = 'LuiExtended/media/icons/abilities/ability_wasp_inject_larva.dds', -- Inject Larva (Giant Wasp)
+    [9237] = 'LuiExtended/media/icons/abilities/ability_wasp_inject_larva.dds', -- Larva Gestation (Giant Wasp)
+    [9238] = 'LuiExtended/media/icons/abilities/ability_wasp_larva_burst.dds', -- Larva Burst (Giant Wasp)
+    [25113] = 'LuiExtended/media/icons/abilities/ability_wasp_charge.dds', -- Charge (Giant Wasp)
+    [25120] = 'LuiExtended/media/icons/abilities/ability_wasp_charge.dds', -- Charge (Giant Wasp)
 
-    [6788] = 'LuiExtended/media/icons/ability_hoarvor_bite.dds', -- Bite (Hoarvor)
-    [42292] = 'LuiExtended/media/icons/ability_hoarvor_bloodletting.dds', -- Bloodletting (Hoarvor)
-    [13585] = 'LuiExtended/media/icons/ability_hoarvor_latch_on.dds', -- Latch On (Hoarvor)
-    [61243] = 'LuiExtended/media/icons/ability_hoarvor_vile_bite.dds', -- Vile Bite (Hoarvor DLC)
-    [69392] = 'LuiExtended/media/icons/ability_hoarvor_vile_bite.dds', -- Vile Bite Poison (Hoarvor DLC)
-    [61244] = 'LuiExtended/media/icons/ability_hoarvor_fevered_retch.dds', -- Fevered Retch (Hoarvor DLC)
-    [61245] = 'LuiExtended/media/icons/ability_hoarvor_fevered_retch.dds', -- Fevered Retch (Hoarvor DLC)
-    [61377] = 'LuiExtended/media/icons/ability_hoarvor_infectious_swarm.dds', -- Infectious Swarm (Hoarvor DLC)
-    [61372] = 'LuiExtended/media/icons/ability_hoarvor_infectious_swarm.dds', -- Infectious Swarm (Hoarvor DLC)
-    [61374] = 'LuiExtended/media/icons/ability_hoarvor_infectious_swarm.dds', -- Infectious Swarm (Hoarvor DLC)
-    [61249] = 'LuiExtended/media/icons/ability_hoarvor_necrotic_explosion.dds', -- Necrotic Explosion (Hoarvor DLC)
-    [61388] = 'LuiExtended/media/icons/ability_hoarvor_necrotic_explosion.dds', -- Necrotic Explosion Snare (Hoarvor DLC)
+    [6788] = 'LuiExtended/media/icons/abilities/ability_hoarvor_bite.dds', -- Bite (Hoarvor)
+    [42292] = 'LuiExtended/media/icons/abilities/ability_hoarvor_bloodletting.dds', -- Bloodletting (Hoarvor)
+    [13585] = 'LuiExtended/media/icons/abilities/ability_hoarvor_latch_on.dds', -- Latch On (Hoarvor)
+    [61243] = 'LuiExtended/media/icons/abilities/ability_hoarvor_vile_bite.dds', -- Vile Bite (Hoarvor DLC)
+    [69392] = 'LuiExtended/media/icons/abilities/ability_hoarvor_vile_bite.dds', -- Vile Bite Poison (Hoarvor DLC)
+    [61244] = 'LuiExtended/media/icons/abilities/ability_hoarvor_fevered_retch.dds', -- Fevered Retch (Hoarvor DLC)
+    [61245] = 'LuiExtended/media/icons/abilities/ability_hoarvor_fevered_retch.dds', -- Fevered Retch (Hoarvor DLC)
+    [61377] = 'LuiExtended/media/icons/abilities/ability_hoarvor_infectious_swarm.dds', -- Infectious Swarm (Hoarvor DLC)
+    [61372] = 'LuiExtended/media/icons/abilities/ability_hoarvor_infectious_swarm.dds', -- Infectious Swarm (Hoarvor DLC)
+    [61374] = 'LuiExtended/media/icons/abilities/ability_hoarvor_infectious_swarm.dds', -- Infectious Swarm (Hoarvor DLC)
+    [61249] = 'LuiExtended/media/icons/abilities/ability_hoarvor_necrotic_explosion.dds', -- Necrotic Explosion (Hoarvor DLC)
+    [61388] = 'LuiExtended/media/icons/abilities/ability_hoarvor_necrotic_explosion.dds', -- Necrotic Explosion Snare (Hoarvor DLC)
 
-    [83977] = 'LuiExtended/media/icons/ability_kwamascrib_bite.dds', -- Bite (Kwama Scrib)
-    [8272] = 'LuiExtended/media/icons/ability_innate_poison_ranged.dds', -- Spit (Kwama Scrib)
-    [47838] = 'LuiExtended/media/icons/ability_innate_poison_ranged.dds', -- Contagion (Kwama Scrib)
+    [83977] = 'LuiExtended/media/icons/abilities/ability_kwamascrib_bite.dds', -- Bite (Kwama Scrib)
+    [8272] = 'LuiExtended/media/icons/abilities/ability_innate_poison_ranged.dds', -- Spit (Kwama Scrib)
+    [47838] = 'LuiExtended/media/icons/abilities/ability_innate_poison_ranged.dds', -- Contagion (Kwama Scrib)
 
-    [9287] = 'LuiExtended/media/icons/ability_kwamaworker_bite.dds', -- Bite (Kwama Worker)
-    [83953] = 'LuiExtended/media/icons/ability_kwamaworker_pounce.dds', -- Pounce (Kwama Worker)
-    [18546] = 'LuiExtended/media/icons/ability_kwamaworker_shattered_ground.dds', -- Shattered Ground (Kwama Worker)
-    [18808] = 'LuiExtended/media/icons/ability_kwamaworker_charge.dds', -- Charge (Kwama Worker)
-    [18810] = 'LuiExtended/media/icons/ability_kwamaworker_charge.dds', -- Charge (Kwama Worker)
+    [9287] = 'LuiExtended/media/icons/abilities/ability_kwamaworker_bite.dds', -- Bite (Kwama Worker)
+    [83953] = 'LuiExtended/media/icons/abilities/ability_kwamaworker_pounce.dds', -- Pounce (Kwama Worker)
+    [18546] = 'LuiExtended/media/icons/abilities/ability_kwamaworker_shattered_ground.dds', -- Shattered Ground (Kwama Worker)
+    [18808] = 'LuiExtended/media/icons/abilities/ability_kwamaworker_charge.dds', -- Charge (Kwama Worker)
+    [18810] = 'LuiExtended/media/icons/abilities/ability_kwamaworker_charge.dds', -- Charge (Kwama Worker)
 
-    [15011] = 'LuiExtended/media/icons/ability_kwamawarrior_swipe.dds', -- Swipe -- Kwama Warrior
-    [9763] = 'LuiExtended/media/icons/ability_kwamawarrior_smash.dds', -- Smash -- Kwama Warrior
-    [9764] = 'LuiExtended/media/icons/ability_kwamawarrior_smash.dds', -- Smash -- Kwama Warrior
-    [27463] = 'LuiExtended/media/icons/ability_kwamawarrior_excavation.dds', -- Excavation -- Kwama Warrior
+    [15011] = 'LuiExtended/media/icons/abilities/ability_kwamawarrior_swipe.dds', -- Swipe -- Kwama Warrior
+    [9763] = 'LuiExtended/media/icons/abilities/ability_kwamawarrior_smash.dds', -- Smash -- Kwama Warrior
+    [9764] = 'LuiExtended/media/icons/abilities/ability_kwamawarrior_smash.dds', -- Smash -- Kwama Warrior
+    [27463] = 'LuiExtended/media/icons/abilities/ability_kwamawarrior_excavation.dds', -- Excavation -- Kwama Warrior
 
-    [6127] = 'LuiExtended/media/icons/ability_shalk_bite.dds', -- Bite (Shalk)
-    [10947] = 'LuiExtended/media/icons/ability_shalk_fiery_breath.dds', -- Fiery Breath (Shalk)
-    [5252] = 'LuiExtended/media/icons/ability_shalk_fire_bite.dds', -- Fire Bite (Shalk)
-    [6129] = 'LuiExtended/media/icons/ability_shalk_fire_bite.dds', -- Fire Bite (Shalk)
-    [5265] = 'LuiExtended/media/icons/ability_shalk_burning_ground.dds', -- Burning Ground (Shalk)
+    [6127] = 'LuiExtended/media/icons/abilities/ability_shalk_bite.dds', -- Bite (Shalk)
+    [10947] = 'LuiExtended/media/icons/abilities/ability_shalk_fiery_breath.dds', -- Fiery Breath (Shalk)
+    [5252] = 'LuiExtended/media/icons/abilities/ability_shalk_fire_bite.dds', -- Fire Bite (Shalk)
+    [6129] = 'LuiExtended/media/icons/abilities/ability_shalk_fire_bite.dds', -- Fire Bite (Shalk)
+    [5265] = 'LuiExtended/media/icons/abilities/ability_shalk_burning_ground.dds', -- Burning Ground (Shalk)
 
-    [5308] = 'LuiExtended/media/icons/ability_thunderbug_thunder_bite.dds', -- Thunder Bite (Thunderbug)
-    [8429] = 'LuiExtended/media/icons/ability_thunderbug_zap.dds', -- Zap (Thunderbug)
-    [65079] = 'LuiExtended/media/icons/ability_thunderbug_zap.dds', -- Zap (Thunderbug)
-    [26379] = 'LuiExtended/media/icons/ability_innate_shock_pulse.dds', -- Zap (Thunderbug)
-    [26382] = 'LuiExtended/media/icons/ability_innate_shock_ranged.dds', -- Bolt (Thunderbug)
-    [34980] = 'LuiExtended/media/icons/ability_thunderbug_thunderstrikes.dds', -- Thunderstrikes (Thunderbug)
+    [5308] = 'LuiExtended/media/icons/abilities/ability_thunderbug_thunder_bite.dds', -- Thunder Bite (Thunderbug)
+    [8429] = 'LuiExtended/media/icons/abilities/ability_thunderbug_zap.dds', -- Zap (Thunderbug)
+    [65079] = 'LuiExtended/media/icons/abilities/ability_thunderbug_zap.dds', -- Zap (Thunderbug)
+    [26379] = 'LuiExtended/media/icons/abilities/ability_innate_shock_pulse.dds', -- Zap (Thunderbug)
+    [26382] = 'LuiExtended/media/icons/abilities/ability_innate_shock_ranged.dds', -- Bolt (Thunderbug)
+    [34980] = 'LuiExtended/media/icons/abilities/ability_thunderbug_thunderstrikes.dds', -- Thunderstrikes (Thunderbug)
 
     -- MONSTERS
     [25716] = 'esoui/art/icons/ability_debuff_stun.dds', -- Stun (Gargoyle)
@@ -1705,95 +1705,95 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [43742] = 'esoui/art/icons/ability_debuff_knockback.dds', -- Obliterate (Giant)
     [32267] = 'esoui/art/icons/ability_debuff_levitate.dds', -- Grapple (Hag)
     [65027] = 'esoui/art/icons/ability_healer_028.dds', -- Briarheart Resurrection (Hag)
-    [17703] = 'LuiExtended/media/icons/ability_imp_flameray.dds', -- Flame Ray (Imp Fire Beam)
+    [17703] = 'LuiExtended/media/icons/abilities/ability_imp_flameray.dds', -- Flame Ray (Imp Fire Beam)
     [8884] = 'esoui/art/icons/ability_mage_016.dds', -- Zap (Imp Lightning Beam)
-    [24985] = 'LuiExtended/media/icons/ability_ogre_intimidating_roar.dds', -- Intimidating Roar (Ogre)
+    [24985] = 'LuiExtended/media/icons/abilities/ability_ogre_intimidating_roar.dds', -- Intimidating Roar (Ogre)
     [34385] = 'esoui/art/icons/ability_mage_050.dds', -- Generic AOE (Ogre Mage)
     [54327] = 'esoui/art/icons/ability_mage_050.dds', -- Winter's Reach (Ogre Mage)
     [9346] = 'esoui/art/icons/ability_healer_034.dds', -- Strangle (Strangler)
-    [9707] = 'LuiExtended/media/icons/ability_strangler_grapple.dds', -- Grapple (Strangler)
+    [9707] = 'LuiExtended/media/icons/abilities/ability_strangler_grapple.dds', -- Grapple (Strangler)
     [8926] = 'esoui/art/icons/ability_healer_033.dds', -- Regeneration (Troll)
-    [18040] = 'LuiExtended/media/icons/ability_wispmother_clone.dds', -- Clone (Wispmother)
-    [18049] = 'LuiExtended/media/icons/ability_wispmother_clone.dds', -- Clone (Wispmother)
+    [18040] = 'LuiExtended/media/icons/abilities/ability_wispmother_clone.dds', -- Clone (Wispmother)
+    [18049] = 'LuiExtended/media/icons/abilities/ability_wispmother_clone.dds', -- Clone (Wispmother)
 
     -- UNDEAD
-    [38834] = 'LuiExtended/media/icons/ability_innate_snare_defiled_ground.dds', -- Desecrated Ground Snare (Desecrated Ground - Undead Synergy)
-    [69950] = 'LuiExtended/media/icons/ability_innate_snare_defiled_ground.dds', -- Desecrated Ground (Desecrated Ground - Undead Synergy)
+    [38834] = 'LuiExtended/media/icons/abilities/ability_innate_snare_defiled_ground.dds', -- Desecrated Ground Snare (Desecrated Ground - Undead Synergy)
+    [69950] = 'LuiExtended/media/icons/abilities/ability_innate_snare_defiled_ground.dds', -- Desecrated Ground (Desecrated Ground - Undead Synergy)
 
-    [8569] = 'LuiExtended/media/icons/ability_zombie_pound.dds', -- Devastating Leap (Bloodfiend)
+    [8569] = 'LuiExtended/media/icons/abilities/ability_zombie_pound.dds', -- Devastating Leap (Bloodfiend)
 
-    [5028] = 'LuiExtended/media/icons/ability_bonecolossus_strike.dds', -- Strike (Bone Colossus)
-    [30590] = 'LuiExtended/media/icons/ability_bonecolossus_bone_saw.dds', -- Bone Saw (Bone Colossus)
-    [17221] = 'LuiExtended/media/icons/ability_boneflayer_rending_slash.dds', -- Slap (Bone Colossus - Risen Dead)
-    [88828] = 'LuiExtended/media/icons/ability_bonecolossus_necromantic_implosion.dds', -- Necromantic Implosion (Bone Colossus - Risen Dead)
+    [5028] = 'LuiExtended/media/icons/abilities/ability_bonecolossus_strike.dds', -- Strike (Bone Colossus)
+    [30590] = 'LuiExtended/media/icons/abilities/ability_bonecolossus_bone_saw.dds', -- Bone Saw (Bone Colossus)
+    [17221] = 'LuiExtended/media/icons/abilities/ability_boneflayer_rending_slash.dds', -- Slap (Bone Colossus - Risen Dead)
+    [88828] = 'LuiExtended/media/icons/abilities/ability_bonecolossus_necromantic_implosion.dds', -- Necromantic Implosion (Bone Colossus - Risen Dead)
 
-    [8550] = 'LuiExtended/media/icons/ability_boneflayer_slash.dds', -- Slash (Bone Flayer)
-    [8551] = 'LuiExtended/media/icons/ability_boneflayer_slash.dds', -- Slash (Bone Flayer)
-    [8564] = 'LuiExtended/media/icons/ability_boneflayer_rending_slash.dds', -- Rending Slash (Bone Flayer)
-    [9194] = 'LuiExtended/media/icons/ability_boneflayer_flurry.dds', -- Flurry (Bone Flayer)
+    [8550] = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds', -- Slash (Bone Flayer)
+    [8551] = 'LuiExtended/media/icons/abilities/ability_boneflayer_slash.dds', -- Slash (Bone Flayer)
+    [8564] = 'LuiExtended/media/icons/abilities/ability_boneflayer_rending_slash.dds', -- Rending Slash (Bone Flayer)
+    [9194] = 'LuiExtended/media/icons/abilities/ability_boneflayer_flurry.dds', -- Flurry (Bone Flayer)
 
-    [8812] = 'LuiExtended/media/icons/ability_ghost_double_strike.dds', -- Double Strike (Ghost)
-    [8813] = 'LuiExtended/media/icons/ability_ghost_double_strike.dds', -- Double Strike (Ghost)
+    [8812] = 'LuiExtended/media/icons/abilities/ability_ghost_double_strike.dds', -- Double Strike (Ghost)
+    [8813] = 'LuiExtended/media/icons/abilities/ability_ghost_double_strike.dds', -- Double Strike (Ghost)
     [18514] = 'esoui/art/icons/ability_mage_052.dds', -- Chill Touch (Ghost)
     [18515] = 'esoui/art/icons/ability_mage_052.dds', -- Chill Touch (Ghost)
-    [19138] = 'LuiExtended/media/icons/ability_mage_haunting_spectre.dds', -- Haunting Spectre (Ghost)
-    [19140] = 'LuiExtended/media/icons/ability_mage_haunting_spectre.dds', -- Haunting Spectre (Ghost)
+    [19138] = 'LuiExtended/media/icons/abilities/ability_mage_haunting_spectre.dds', -- Haunting Spectre (Ghost)
+    [19140] = 'LuiExtended/media/icons/abilities/ability_mage_haunting_spectre.dds', -- Haunting Spectre (Ghost)
 
     [9541] = 'esoui/art/icons/ability_mage_027.dds', -- Necrotic Spear (Lich)
-    [20812] = 'LuiExtended/media/icons/ability_mage_bone_cage.dds', -- Defiled Ground (Lich)
-    [22525] = 'LuiExtended/media/icons/ability_mage_bone_cage.dds', -- Defiled Ground (Lich)
-    [73929] = 'LuiExtended/media/icons/ability_lich_soul_cage.dds', -- Soul Cage (Lich)
-    [73931] = 'LuiExtended/media/icons/ability_lich_soul_rupture.dds', -- Soul Rupture (Lich)
-    [73926] = 'LuiExtended/media/icons/ability_lich_soul_rupture.dds', -- Soul Cage (Lich)
-    [73937] = 'LuiExtended/media/icons/ability_lich_soul_cage.dds', -- Soul Cage (Lich)
-    [73939] = 'LuiExtended/media/icons/ability_lich_soul_rupture.dds', -- Soul Rupture (Lich)
-    [73934] = 'LuiExtended/media/icons/ability_lich_soul_rupture.dds', -- Soul Cage (Lich)
+    [20812] = 'LuiExtended/media/icons/abilities/ability_mage_bone_cage.dds', -- Defiled Ground (Lich)
+    [22525] = 'LuiExtended/media/icons/abilities/ability_mage_bone_cage.dds', -- Defiled Ground (Lich)
+    [73929] = 'LuiExtended/media/icons/abilities/ability_lich_soul_cage.dds', -- Soul Cage (Lich)
+    [73931] = 'LuiExtended/media/icons/abilities/ability_lich_soul_rupture.dds', -- Soul Rupture (Lich)
+    [73926] = 'LuiExtended/media/icons/abilities/ability_lich_soul_rupture.dds', -- Soul Cage (Lich)
+    [73937] = 'LuiExtended/media/icons/abilities/ability_lich_soul_cage.dds', -- Soul Cage (Lich)
+    [73939] = 'LuiExtended/media/icons/abilities/ability_lich_soul_rupture.dds', -- Soul Rupture (Lich)
+    [73934] = 'LuiExtended/media/icons/abilities/ability_lich_soul_rupture.dds', -- Soul Cage (Lich)
 
-    [49702] = 'LuiExtended/media/icons/ability_mage_magic_ranged.dds', -- Entropic Flare (Spellfiend)
-    [50456] = 'LuiExtended/media/icons/ability_mage_magic_ranged.dds', -- Entropic Flare (Spellfiend)
-    [50183] = 'LuiExtended/media/icons/ability_mage_consuming_energy.dds', -- Consuming Energy (Spellfiend)
-    [52398] = 'LuiExtended/media/icons/ability_mage_consuming_energy.dds', -- Consuming Energy (Spellfiend)
+    [49702] = 'LuiExtended/media/icons/abilities/ability_mage_magic_ranged.dds', -- Entropic Flare (Spellfiend)
+    [50456] = 'LuiExtended/media/icons/abilities/ability_mage_magic_ranged.dds', -- Entropic Flare (Spellfiend)
+    [50183] = 'LuiExtended/media/icons/abilities/ability_mage_consuming_energy.dds', -- Consuming Energy (Spellfiend)
+    [52398] = 'LuiExtended/media/icons/abilities/ability_mage_consuming_energy.dds', -- Consuming Energy (Spellfiend)
 
-    [68735] = 'LuiExtended/media/icons/ability_vampire_vampiric_drain.dds', -- Vampiric Drain (Vampire)
-    [68750] = 'LuiExtended/media/icons/ability_vampire_vampiric_drain.dds', -- Vampiric Drain (Vampire)
+    [68735] = 'LuiExtended/media/icons/abilities/ability_vampire_vampiric_drain.dds', -- Vampiric Drain (Vampire)
+    [68750] = 'LuiExtended/media/icons/abilities/ability_vampire_vampiric_drain.dds', -- Vampiric Drain (Vampire)
 
-    [4323] = 'LuiExtended/media/icons/ability_mage_frost_ranged.dds', -- Ice Bolt (Wraith)
+    [4323] = 'LuiExtended/media/icons/abilities/ability_mage_frost_ranged.dds', -- Ice Bolt (Wraith)
     [4346] = 'esoui/art/icons/ability_mage_050.dds', -- Winter's Reach (Wraith)
     [43146] = 'esoui/art/icons/ability_mage_050.dds', -- Winter's Reach (Wraith)
 
-    [2954] = 'LuiExtended/media/icons/ability_zombie_swipe.dds', -- Swipe (Zombie)
-    [13972] = 'LuiExtended/media/icons/ability_zombie_swipe.dds', -- Swipe (Zombie)
-    [63614] = 'LuiExtended/media/icons/ability_zombie_swipe.dds', -- Swipe (Zombie)
-    [2969] = 'LuiExtended/media/icons/ability_zombie_pound.dds', -- Pound (Zombie)
-    [30347] = 'LuiExtended/media/icons/ability_zombie_vomit.dds', -- Vomit (Zombie)
+    [2954] = 'LuiExtended/media/icons/abilities/ability_zombie_swipe.dds', -- Swipe (Zombie)
+    [13972] = 'LuiExtended/media/icons/abilities/ability_zombie_swipe.dds', -- Swipe (Zombie)
+    [63614] = 'LuiExtended/media/icons/abilities/ability_zombie_swipe.dds', -- Swipe (Zombie)
+    [2969] = 'LuiExtended/media/icons/abilities/ability_zombie_pound.dds', -- Pound (Zombie)
+    [30347] = 'LuiExtended/media/icons/abilities/ability_zombie_vomit.dds', -- Vomit (Zombie)
 
-    [00000] = 'LuiExtended/media/icons/ability_', --
-    [00000] = 'LuiExtended/media/icons/ability_', --
-    [00000] = 'LuiExtended/media/icons/ability_', --
-    [00000] = 'LuiExtended/media/icons/ability_', --
-    [00000] = 'LuiExtended/media/icons/ability_', --
-    [00000] = 'LuiExtended/media/icons/ability_', --
-    [00000] = 'LuiExtended/media/icons/ability_', --
-    [00000] = 'LuiExtended/media/icons/ability_', --
-    [00000] = 'LuiExtended/media/icons/ability_', --
-    [00000] = 'LuiExtended/media/icons/ability_', --
-    [00000] = 'LuiExtended/media/icons/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
+    [00000] = 'LuiExtended/media/icons/abilities/ability_', --
 
     -- CYRODIIL
-    [47717] = 'LuiExtended/media/icons/ability_weapon_melee_attacklight.dds', -- Quick Strike (Cyrodiil Guard T1)
-    [46830] = 'LuiExtended/media/icons/ability_weapon_bleeding_strike.dds', -- Bleeding Strike (Cyrodiil Guard T2)
-    [46832] = 'LuiExtended/media/icons/ability_weapon_bleeding_strike.dds', -- Bleeding (Cyrodiil Guard T2)
-    [46831] = 'LuiExtended/media/icons/ability_weapon_bleeding_strike.dds', -- Bleeding (Cyrodiil Guard T2)
+    [47717] = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', -- Quick Strike (Cyrodiil Guard T1)
+    [46830] = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', -- Bleeding Strike (Cyrodiil Guard T2)
+    [46832] = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', -- Bleeding (Cyrodiil Guard T2)
+    [46831] = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', -- Bleeding (Cyrodiil Guard T2)
     [46834] = 'esoui/art/icons/ability_1handed_005.dds', -- Power Bash (Cyrodiil Guard T2)
     [72639] = 'esoui/art/icons/ability_1handed_005.dds', -- Power Bash (Cyrodiil Guard T2)
     [72641] = 'esoui/art/icons/ability_1handed_005.dds', -- Power Bash (Cyrodiil Guard T2)
 
-    [7880] = 'LuiExtended/media/icons/ability_mage_shock_torrent.dds', -- Light Attack (Cyrodiil Mage T1)
+    [7880] = 'LuiExtended/media/icons/abilities/ability_mage_shock_torrent.dds', -- Light Attack (Cyrodiil Mage T1)
     [21629] = 'esoui/art/icons/ability_mage_008.dds', -- Mage's Lifesteal (Cyrodiil Mage T1)
     [21632] = 'esoui/art/icons/ability_mage_008.dds', -- Lifesteal (Cyrodiil Mage T1)
     [21631] = 'esoui/art/icons/ability_mage_008.dds', -- Lifesteal (Cyrodiil Mage T1)
-    [46726] = 'LuiExtended/media/icons/ability_mage_shock_torrent.dds', -- Shock Torrent (Cyrodiil Mage T2)
-    [46730] = 'LuiExtended/media/icons/ability_mage_shock_torrent.dds', -- Shock Torrent (Cyrodiil Mage T2)
+    [46726] = 'LuiExtended/media/icons/abilities/ability_mage_shock_torrent.dds', -- Shock Torrent (Cyrodiil Mage T2)
+    [46730] = 'LuiExtended/media/icons/abilities/ability_mage_shock_torrent.dds', -- Shock Torrent (Cyrodiil Mage T2)
     [46819] = 'esoui/art/icons/ability_mage_068.dds', -- Storm Damage (Cyrodiil Mage T2)
     [46716] = 'esoui/art/icons/ability_mage_008.dds', -- Stolen Essence (Cyrodiil Mage T2)
     [46718] = 'esoui/art/icons/ability_mage_008.dds', -- Lifesteal (Cyrodiil Mage T2)
@@ -1801,27 +1801,27 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [46704] = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds', -- Crystal Blast (Cyrodiil Mage T2)
     [46706] = 'esoui/art/icons/ability_sorcerer_thunder_burst.dds', -- Crystal Shard Stun (Cyrodiil Mage T2)
 
-    [57962] = 'LuiExtended/media/icons/ability_healer_minor_wound.dds', -- Minor Wound (Cyrodiil Mender T1)
-    [21638] = 'LuiExtended/media/icons/ability_healer_telekinetic_disorient.dds', -- Telekinetic Disorient (Cyrodiil Mender T1)
-    [46839] = 'LuiExtended/media/icons/ability_healer_minor_wound.dds', -- Major Wound (Cyrodiil Mender T2)
+    [57962] = 'LuiExtended/media/icons/abilities/ability_healer_minor_wound.dds', -- Minor Wound (Cyrodiil Mender T1)
+    [21638] = 'LuiExtended/media/icons/abilities/ability_healer_telekinetic_disorient.dds', -- Telekinetic Disorient (Cyrodiil Mender T1)
+    [46839] = 'LuiExtended/media/icons/abilities/ability_healer_minor_wound.dds', -- Major Wound (Cyrodiil Mender T2)
     [46904] = 'esoui/art/icons/ability_templar_rune_focus.dds', -- Rune Focus (Cyrodiil Mender T2)
-    [46906] = 'LuiExtended/media/icons/ability_healer_telekinetic_disorient.dds', -- Telekinetic Disorient (Cyrodiil Mender T2)
-    [46910] = 'LuiExtended/media/icons/ability_healer_telekinetic_disorient.dds', -- Shattering Prison (Cyrodiil Mender T2)
+    [46906] = 'LuiExtended/media/icons/abilities/ability_healer_telekinetic_disorient.dds', -- Telekinetic Disorient (Cyrodiil Mender T2)
+    [46910] = 'LuiExtended/media/icons/abilities/ability_healer_telekinetic_disorient.dds', -- Shattering Prison (Cyrodiil Mender T2)
     [46847] = 'esoui/art/icons/ability_healer_016.dds', -- Potent Healing (Cyrodiil Mender T2)
     [51893] = 'esoui/art/icons/ability_sorcerer_monsoon.dds', -- Negate Magic (Cyrodiil Mender T1 + T2)
 
-    [52864] = 'LuiExtended/media/icons/ability_bow_attacklight.dds', -- Quick Shot (Cyrodiil Archer T1 + T2)
+    [52864] = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds', -- Quick Shot (Cyrodiil Archer T1 + T2)
     [54264] = 'esoui/art/icons/ability_bow_001_a.dds', -- Lethal Arrow (Cryodiil Archer T2)
     [54265] = 'esoui/art/icons/ability_bow_001_a.dds', -- Lethal Arrow (Cryodiil Archer T2)
     [54259] = 'esoui/art/icons/ability_bow_004_a.dds', -- Draining Shot (Cryodiil Archer T2)
     [54261] = 'esoui/art/icons/ability_bow_004_a.dds', -- Draining Shot (Cryodiil Archer T2)
 
-    [15780] = 'LuiExtended/media/icons/ability_basic_r_shock_aoe.dds', -- Honor Guard Rage (Cyrodiil Honor Guard T1)
+    [15780] = 'LuiExtended/media/icons/abilities/ability_basic_r_shock_aoe.dds', -- Honor Guard Rage (Cyrodiil Honor Guard T1)
     [35113] = 'esoui/art/icons/ability_dragonknight_005_a.dds', -- Extended Chains (Cyrodiil Honor Guard T1)
     [35115] = 'esoui/art/icons/ability_dragonknight_005_a.dds', -- Pull (Cyrodiil Honor Guard T1)
     [46991] = 'esoui/art/icons/ability_mage_011.dds', -- Fire Torrent Burning (Cryodiil Honor Guard T2)
-    [46992] = 'LuiExtended/media/icons/ability_basic_r_shock_aoe.dds', -- Cripping Rage (Cyrodiil Honor Guard T2)
-    [47001] = 'LuiExtended/media/icons/ability_basic_r_shock_aoe.dds', -- Cripping Rage (Cyrodiil Honor Guard T2)
+    [46992] = 'LuiExtended/media/icons/abilities/ability_basic_r_shock_aoe.dds', -- Cripping Rage (Cyrodiil Honor Guard T2)
+    [47001] = 'LuiExtended/media/icons/abilities/ability_basic_r_shock_aoe.dds', -- Cripping Rage (Cyrodiil Honor Guard T2)
     [47019] = 'esoui/art/icons/ability_dragonknight_005_a.dds', -- Puncturing Chains (Cyrodiil Honor Guard T2)
     [47023] = 'esoui/art/icons/ability_dragonknight_005_a.dds', -- Puncture (Cyrodiil Honor Guard T2)
     [47020] = 'esoui/art/icons/ability_dragonknight_005_a.dds', -- Pull (Cyrodiil Honor Guard T2)
@@ -1829,9 +1829,9 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [15782] = 'esoui/art/icons/ability_warrior_022.dds', -- Triple Strike (Cyrodiil Honor Guard T1 + T2)
 
     -- Seasonal Quests
-    [86075] = 'LuiExtended/media/icons/ability_event_bredas_magnificent_mead.dds', -- Breda's Magnificent Mead (Breda's Magnificent Mead)
-    [83523] = 'LuiExtended/media/icons/ability_event_freezing.dds', -- Freezing (Snow Bear Plunge)
-    [83522] = 'LuiExtended/media/icons/ability_event_warm.dds', -- Warm (Snow Bear Plunge)
+    [86075] = 'LuiExtended/media/icons/abilities/ability_event_bredas_magnificent_mead.dds', -- Breda's Magnificent Mead (Breda's Magnificent Mead)
+    [83523] = 'LuiExtended/media/icons/abilities/ability_event_freezing.dds', -- Freezing (Snow Bear Plunge)
+    [83522] = 'LuiExtended/media/icons/abilities/ability_event_warm.dds', -- Warm (Snow Bear Plunge)
     [84330] = 'LuiExtended/media/icons/momentos/momento_event_mud_ball.dds', -- Mudball (Mud Ball Merriment)
     [84378] = 'LuiExtended/media/icons/momentos/momento_event_mud_ball.dds', -- Mudball (Mud Ball Merriment)
     [84335] = 'LuiExtended/media/icons/momentos/momento_event_mud_ball.dds', -- Covered in Mud (Mud Ball Merriment)
@@ -1839,7 +1839,7 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [85351] = 'LuiExtended/media/icons/momentos/momento_event_mud_ball.dds', -- Self-Serve Mudbath (Mud Ball Merriment) (Seems to be unusued - added just in case)
     [85352] = 'LuiExtended/media/icons/momentos/momento_event_mud_ball.dds', -- Covered in Mud (Mud Ball Merriment) (Seems to be unusued - added just in case)
 
-    [89476] = 'LuiExtended/media/icons/ability_event_steamy_spring_pie.dds', -- Steamy Spring Pie (Steamy Spring Pie)
+    [89476] = 'LuiExtended/media/icons/abilities/ability_event_steamy_spring_pie.dds', -- Steamy Spring Pie (Steamy Spring Pie)
 
     ----------------------------------------------------------------
     -- WORLD EVENTS
@@ -1861,9 +1861,9 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     -- ORSINIUM EVENTS
     ----------------------------------------------------------------
 
-    [74104] = 'LuiExtended/media/icons/ability_mage_grasping_vines.dds', -- Grasping Vines (The Hidden Harvest)
-    [74105] = 'LuiExtended/media/icons/ability_mage_grasping_vines.dds', -- Grasping Vines (The Hidden Harvest)
-    [64316] = 'LuiExtended/media/icons/ability_frost_fortress.dds', -- Frost Fortress (For King and Glory - Urfon Ice-Heart)
+    [74104] = 'LuiExtended/media/icons/abilities/ability_mage_grasping_vines.dds', -- Grasping Vines (The Hidden Harvest)
+    [74105] = 'LuiExtended/media/icons/abilities/ability_mage_grasping_vines.dds', -- Grasping Vines (The Hidden Harvest)
+    [64316] = 'LuiExtended/media/icons/abilities/ability_frost_fortress.dds', -- Frost Fortress (For King and Glory - Urfon Ice-Heart)
     [64363] = 'esoui/art/icons/ability_wrothgar_bitingcold.dds', -- Savage Winds (For King and Glory - Urfon Ice-Heart)
     [66277] = 'LuiExtended/media/icons/equipment_disguise.dds', -- Vosh Rakh Recruit Disg (The Anger of a King)
     [66397] = 'esoui/art/icons/ability_healer_027.dds', -- Avalian's Speed (The Anger of a King)
@@ -2219,7 +2219,7 @@ E.EffectNameOverride = { --Force rename a buff (Note that if we rename a buff, w
     [89146] = 'Light Attack Bleed', -- Werewolf Bleed
     [32479] = 'Medium Attack', -- Heavy Attack
     [32480] = 'Heavy Attack', -- Heavy Attack Werewolf
-    --[32494] = 'LuiExtended/media/icons/ability_werewolf_attackheavy.dds', -- Heavy Attack
+    --[32494] = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds', -- Heavy Attack
     [60773] = 'Heavy Attack', -- Stamina Return
 
     -------------------------------
@@ -2856,44 +2856,44 @@ E.FakeExternalDebuffs = { -- Fake Debuffs applied onto the player by NPCs or Eve
     [67586] = {icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds', name = 'Avalanche', duration = 2500}, -- Avalanche (Orsinium - Sorrow's Kiss)
 
     -- Standard NPC Abilities
-    [42514] = {icon = 'LuiExtended/media/icons/ability_innate_hard_dismount.dds', name = 'Hard Dismount', duration = 3000}, -- Hard Dismount (Player knocked off horse)
+    [42514] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', name = 'Hard Dismount', duration = 3000}, -- Hard Dismount (Player knocked off horse)
 
     [29401] = {icon = 'esoui/art/icons/ability_1handed_005.dds', name = 'Power Bash', duration = 3000}, --Power Bash (NPC Disorient)
     [29379] = {icon = 'esoui/art/icons/ability_2handed_001.dds', name = 'Uppercut', duration = 2500}, --Uppercut (NPC)
     [14926] = {icon = 'esoui/art/icons/ability_warrior_011.dds', name ='Focused Charge', duration = 2000}, -- Charge (Human NPC)
     [63822] = {icon = 'esoui/art/icons/ability_nightblade_008.dds', name = 'Teleport Strike', duration = 1500}, -- Teleport Strike (Nightblade)
     [44229] = {icon = 'esoui/art/icons/ability_dragonknight_006.dds', name = 'Dragonknight Standard', duration = 1200}, -- Dragonknight Standard (Dragonknight)
-    [10650] = {icon = 'LuiExtended/media/icons/ability_warrior_oil_drenched.dds', name ='Oil Drenched', duration = 1100}, -- Oil Drenched
+    [10650] = {icon = 'LuiExtended/media/icons/abilities/ability_warrior_oil_drenched.dds', name ='Oil Drenched', duration = 1100}, -- Oil Drenched
 
     [74483] = {icon = 'esoui/art/icons/ability_dragonknight_005.dds', name = 'Fiery Grip', duration = 1000}, -- Fiery Grip (Sentinel) (TG DLC)
 
     -- Animals
-    [69073] = {icon = 'LuiExtended/media/icons/ability_bear_crushing_swipe.dds', name = 'Slam', duration = 2000}, -- Knockdown (Bear Orsinium)
+    [69073] = {icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', name = 'Slam', duration = 2000}, -- Knockdown (Bear Orsinium)
 
     -- Daedra
-    [50023] = {icon = 'LuiExtended/media/icons/ability_airatronach_lightning_rod.dds', name = 'Lightning Rod', duration = 4000}, -- Lightning Rod (Air Atronach)
-    [24700] = {icon = 'LuiExtended/media/icons/ability_ogrim_body_slam.dds', name = 'Body Slam', duration = 2000}, -- Body Slam (Ogrim)
-    [12287] = {icon = 'LuiExtended/media/icons/ability_mage_storm_bound.dds', name = 'Storm Bound', duration = 8000}, -- Storm Bound (Storm Atronach) (DOT)
-    [12288] = {icon = 'LuiExtended/media/icons/ability_mage_storm_bound.dds', name = 'Storm Bound', duration = 8000}, -- Storm Bound (Storm Atronach) (Snare)
+    [50023] = {icon = 'LuiExtended/media/icons/abilities/ability_airatronach_lightning_rod.dds', name = 'Lightning Rod', duration = 4000}, -- Lightning Rod (Air Atronach)
+    [24700] = {icon = 'LuiExtended/media/icons/abilities/ability_ogrim_body_slam.dds', name = 'Body Slam', duration = 2000}, -- Body Slam (Ogrim)
+    [12287] = {icon = 'LuiExtended/media/icons/abilities/ability_mage_storm_bound.dds', name = 'Storm Bound', duration = 8000}, -- Storm Bound (Storm Atronach) (DOT)
+    [12288] = {icon = 'LuiExtended/media/icons/abilities/ability_mage_storm_bound.dds', name = 'Storm Bound', duration = 8000}, -- Storm Bound (Storm Atronach) (Snare)
 
     -- Insects
-    [47318] = {icon = 'LuiExtended/media/icons/ability_innate_web.dds', name = 'Web', duration = 700}, -- Encase (Giant Spider)
-    [9237] = {icon = 'LuiExtended/media/icons/ability_wasp_inject_larva.dds', name = 'Inject Larva', duration = 10000}, -- Larva Gestation (Giant Wasp)
-    [8429] = {icon = 'LuiExtended/media/icons/ability_thunderbug_zap.dds', name = 'Zap', duration = 4000}, -- Zap (Thunderbug)
+    [47318] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', name = 'Web', duration = 700}, -- Encase (Giant Spider)
+    [9237] = {icon = 'LuiExtended/media/icons/abilities/ability_wasp_inject_larva.dds', name = 'Inject Larva', duration = 10000}, -- Larva Gestation (Giant Wasp)
+    [8429] = {icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_zap.dds', name = 'Zap', duration = 4000}, -- Zap (Thunderbug)
 
     -- Monsters
     [48287] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Consuming Omen', duration = 1500}, -- Consuming Omen (Troll - Ranged) (Fake aura to replace bugged aura)
 
     -- Undead
-    [38834] = {icon = 'LuiExtended/media/icons/ability_innate_snare_defiled_ground.dds', name = 'Desecrated Ground', duration = 2100}, -- Desecrated Ground Snare (Desecrated Ground)
-    [22525] = {icon = 'LuiExtended/media/icons/ability_mage_bone_cage.dds', name ='Defiled Ground', duration = 700}, -- Defiled Ground (Lich)
+    [38834] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_defiled_ground.dds', name = 'Desecrated Ground', duration = 2100}, -- Desecrated Ground Snare (Desecrated Ground)
+    [22525] = {icon = 'LuiExtended/media/icons/abilities/ability_mage_bone_cage.dds', name ='Defiled Ground', duration = 700}, -- Defiled Ground (Lich)
     [43146] = {icon = 'esoui/art/icons/ability_mage_050.dds', name = 'Winter\'s Reach', duration = 4000}, -- Winter's Reach (Wraith)
 
     -- CYRODIIL
     [72641] = {icon = 'esoui/art/icons/ability_1handed_005.dds', name = 'Power Bash', duration = 2000}, -- Power Bash (Cryodiil Guard T2)
 
-    [55862] = {icon = 'LuiExtended/media/icons/ability_stormbound.dds', name = 'Storm Bound', duration = 8000}, --Storm Bound --Used by Craglorn Boss Wamasu (DOT)
-    [55863] = {icon = 'LuiExtended/media/icons/ability_stormbound.dds', name = 'Storm Bound', duration = 8000}, --Storm Bound --Used by Craglorn Boss Wamasu (Snare)
+    [55862] = {icon = 'LuiExtended/media/icons/abilities/ability_stormbound.dds', name = 'Storm Bound', duration = 8000}, --Storm Bound --Used by Craglorn Boss Wamasu (DOT)
+    [55863] = {icon = 'LuiExtended/media/icons/abilities/ability_stormbound.dds', name = 'Storm Bound', duration = 8000}, --Storm Bound --Used by Craglorn Boss Wamasu (Snare)
 
     -- MAIN QUEST
     [61646] = {icon = 'esoui/art/icons/ability_debuff_fear.dds', name = 'Incapacitating Terror', duration = 0}, -- Incapacitating Terror - CH Tutorial - Fake aura to replace wierd one
@@ -2953,34 +2953,34 @@ E.FakePlayerBuffs = { -- Fake buffs applied onto the player by self
     [21578] = {icon = 'LuiExtended/media/icons/glyphs/glyph_hardening.dds', name = 'Hardening Enchantment', duration = 5000}, -- Hardening (Glyph of Hardening)
 
     -- Champion Points
-    [61015] = {icon = 'LuiExtended/media/icons/ability_champion_reinforced.dds', name = 'Determination', duration = 15000}, -- Determination
+    [61015] = {icon = 'LuiExtended/media/icons/abilities/ability_champion_reinforced.dds', name = 'Determination', duration = 15000}, -- Determination
     [77773] = {icon = 'esoui/art/icons/ability_rogue_067.dds', name = 'Hidden', duration = 0}, -- Clairvoyance Fx (Shadowstrike)
     [59530] = {icon = 'esoui/art/icons/ability_mage_045.dds', name = 'Foresight', duration = 7000}, -- Foresight
     [63106] = {icon = 'esoui/art/icons/ability_warrior_005.dds', name = 'Retaliation', duration = 7000}, -- Retaliation
     [63102] = {icon = 'esoui/art/icons/ability_warrior_018.dds', name = 'Opportunist', duration = 7000}, -- Opportunist
 
     -- Player (Basic)
-    [973] = {icon = 'LuiExtended/media/icons/ability_innate_sprint.dds', name = 'Sprint', duration = 0}, -- Sprint
-    [33439] = {icon = 'LuiExtended/media/icons/ability_innate_mount_sprint.dds', name = 'Gallop', duration = 0}, -- Mount Sprint (Generic)
+    [973] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_sprint.dds', name = 'Sprint', duration = 0}, -- Sprint
+    [33439] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mount_sprint.dds', name = 'Gallop', duration = 0}, -- Mount Sprint (Generic)
 
     -- Seasonal Quests (New Life Festival)
-    [84125] = {icon = 'LuiExtended/media/icons/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Breton Male Dance (Lava Foot Stomp)
-    [84126] = {icon = 'LuiExtended/media/icons/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Breton Female Dance (Lava Foot Stomp)
-    [84127] = {icon = 'LuiExtended/media/icons/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Dunmer Male Dance (Lava Foot Stomp)
-    [84128] = {icon = 'LuiExtended/media/icons/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Dunmer Female Dance (Lava Foot Stomp)
-    [84130] = {icon = 'LuiExtended/media/icons/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Altmer Male Dance (Lava Foot Stomp)
-    [84131] = {icon = 'LuiExtended/media/icons/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Altmer Female Dance (Lava Foot Stomp)
-    [84133] = {icon = 'LuiExtended/media/icons/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Nord Dance (Lava Foot Stomp)
+    [84125] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Breton Male Dance (Lava Foot Stomp)
+    [84126] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Breton Female Dance (Lava Foot Stomp)
+    [84127] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Dunmer Male Dance (Lava Foot Stomp)
+    [84128] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Dunmer Female Dance (Lava Foot Stomp)
+    [84130] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Altmer Male Dance (Lava Foot Stomp)
+    [84131] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Altmer Female Dance (Lava Foot Stomp)
+    [84133] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Nord Dance (Lava Foot Stomp)
     [84528] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_jugglers_torch.dds', name = 'Torch Juggling', duration = 12000}, -- Flame Juggling (Castle Charm Challenge)
     [84506] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_jugglers_knife.dds', name = 'Dagger Juggling', duration = 12000}, -- Dagger Juggling (Castle Charm Challenge)
     [84533] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_swallowable_sword.dds', name = 'Sword Swallowing', duration = 12000}, -- Sword Swallowing (Castle Charm Challenge)
-    [84847] = {icon = 'LuiExtended/media/icons/ability_event_celebratory_belch.dds', name = 'Celebratory Belch', duration = 5000}, -- Celebratory Belch (Stonetooth Bash)
+    [84847] = {icon = 'LuiExtended/media/icons/abilities/ability_event_celebratory_belch.dds', name = 'Celebratory Belch', duration = 5000}, -- Celebratory Belch (Stonetooth Bash)
 
     -- QUEST RELATED (CRAGLORN)
     [81807] = {icon = 'esoui/art/icons/achievement_104.dds', name = 'Power of the Stars', duration = 22000}, -- Power of the Stars (The Star-Gazers)
 
     -- ORSINIUM
-    [66453] = {icon = 'LuiExtended/media/icons/ability_innate_hidden.dds', name = 'Hiding', duration = 45000}, -- Hiding (A Question of Succession)
+    [66453] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_hidden.dds', name = 'Hiding', duration = 45000}, -- Hiding (A Question of Succession)
 
 }
 
@@ -2990,19 +2990,19 @@ E.FakePlayerDebuffs = { -- Fake debuffs applied onto a target by the player
     -- PLAYER ABILITIES
     ----------------------------------------------------------------
 
-    [86309] = {icon = 'LuiExtended/media/icons/ability_innate_block_stun.dds', name = 'Block Stun', duration = 3000}, -- Stun (Player blocks NPC charged attack)
-    [86312] = {icon = 'LuiExtended/media/icons/ability_innate_block_stun.dds', name = 'Block Stun', duration = 3000}, -- Stun (Player blocks Ogrim Body Slam)
+    [86309] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = 'Block Stun', duration = 3000}, -- Stun (Player blocks NPC charged attack)
+    [86312] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = 'Block Stun', duration = 3000}, -- Stun (Player blocks Ogrim Body Slam)
 
     [74483] = {icon = 'esoui/art/icons/ability_dragonknight_005.dds', name = 'Fiery Grip', duration = 1000}, -- Fiery Grip (Sentinel) (TG DLC) -- If the player reflects
 
     [17945] = {icon = 'LuiExtended/media/icons/glyphs/glyph_weakening.dds', name = 'Weakening Enchantment', duration = 5000}, -- Weakening (Glyph of Weakening)
     [17906] = {icon = 'LuiExtended/media/icons/glyphs/glyph_crushing.dds', name = 'Crushing Enchantment', duration = 5000}, -- Crusher (Glyph of Crushing)
 
-    [21480] = {icon = 'LuiExtended/media/icons/ability_innate_proc_explosion.dds', name = 'Explosion', duration = 3000}, -- Explosion (Fire Vulnerability Proc)
-    [68464] = {icon = 'LuiExtended/media/icons/ability_innate_proc_venom.dds', name = 'Venom', duration = 3000}, -- Venom (Poison Vulnerability Proc)
-    [68461] = {icon = 'LuiExtended/media/icons/ability_innate_proc_pestilence.dds', name = 'Pestilence', duration = 3000}, -- Pestilence (Disease Vulnerability Proc)
-    [68455] = {icon = 'LuiExtended/media/icons/ability_innate_proc_disintegration.dds', name = 'Disintegration', duration = 3000}, -- Disintegration (Lightning Vulnerability Proc)
-    [68457] = {icon = 'LuiExtended/media/icons/ability_innate_proc_deep_freeze.dds', name = 'Deep Freeze', duration = 3000}, -- Deep Freeze (Frost Vulnerability Proc)
+    [21480] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_explosion.dds', name = 'Explosion', duration = 3000}, -- Explosion (Fire Vulnerability Proc)
+    [68464] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_venom.dds', name = 'Venom', duration = 3000}, -- Venom (Poison Vulnerability Proc)
+    [68461] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_pestilence.dds', name = 'Pestilence', duration = 3000}, -- Pestilence (Disease Vulnerability Proc)
+    [68455] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_disintegration.dds', name = 'Disintegration', duration = 3000}, -- Disintegration (Lightning Vulnerability Proc)
+    [68457] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_deep_freeze.dds', name = 'Deep Freeze', duration = 3000}, -- Deep Freeze (Frost Vulnerability Proc)
 
 }
 
@@ -3037,8 +3037,8 @@ E.FakeStagger = {
 
     [52878] = {icon = 'esoui/art/icons/ability_dragonknight_005_b.dds', name = 'Empowering Chains', duration = 433}, -- Pull (Empowering Chains) (Rkindaleft - Sharga the Firestarter)
 
-    [33551] = {icon = 'LuiExtended/media/icons/ability_frostatronach_chilling_aura.dds', name = 'Chilling Aura', duration = 1100}, -- Chilling Aura (Frost Atronach) -- TEMPORARY FIX FOR THIS DEBUFF
-    [51646] = {icon = 'LuiExtended/media/icons/ability_mage_snare_frost.dds', name = 'Frozen Ground', duration = 1000}, -- Frozen Ground (Frost Atronach) -- TEMPORARY FIX FOR THIS DEBUFF
+    [33551] = {icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_chilling_aura.dds', name = 'Chilling Aura', duration = 1100}, -- Chilling Aura (Frost Atronach) -- TEMPORARY FIX FOR THIS DEBUFF
+    [51646] = {icon = 'LuiExtended/media/icons/abilities/ability_mage_snare_frost.dds', name = 'Frozen Ground', duration = 1000}, -- Frozen Ground (Frost Atronach) -- TEMPORARY FIX FOR THIS DEBUFF
     [48294] = {icon = 'esoui/art/icons/achievement_update11_dungeons_029.dds', name = 'Consuming Omen', duration = 10000}, -- Consuming Omen (Troll - Ranged) -- TEMPORARY FIX FOR THIS DEBUFF (Since it can't be removed by Purge)
     [64322] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Glacial Spikes', duration = 1000}, -- Glacial Spikes (For King and Glory - Urfon Ice-Heart) - TEMP FIX
     [72479] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Glacial Spikes', duration = 1000}, -- Glacial Spikes (For King and Glory - Urfon Ice-Heart) - TEMP FIX

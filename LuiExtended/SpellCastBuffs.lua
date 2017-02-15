@@ -2062,7 +2062,7 @@ function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
         -- Trigger a buff
         g_effectsList.player1[ strHidden ] = {
                         type=1,
-                        name=strHidden, icon='LuiExtended/media/icons/ability_innate_hidden.dds',
+                        name=strHidden, icon='LuiExtended/media/icons/abilities/ability_innate_hidden.dds',
                         dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                         forced = "short",
                         restart=true, iconNum=0 }
@@ -2130,7 +2130,7 @@ function SCB.OnVibration(eventCode, duration, coarseMotor, fineMotor, leftTrigge
         g_playerResurectStage = nil
         SCB.NewEffects( {
             name = 'Resurrection Immunity',
-            icon = 'LuiExtended/media/icons/ability_player_resurrection_immunity.dds',
+            icon = 'LuiExtended/media/icons/abilities/ability_player_resurrection_immunity.dds',
             effects = {10000, 0, 0, 0}
         } )
     else
