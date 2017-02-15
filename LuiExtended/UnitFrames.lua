@@ -148,7 +148,7 @@ local function CreateRegenAnimation(parent, anchors, dims, alpha, degen)
     if #dims ~= 2 then dims = { parent:GetDimensions() } end
 
     -- create regen control
-    local control = UI.Texture(parent, anchors, dims, "/LuiExtended/assets/regen.dds", 2, true)
+    local control = UI.Texture(parent, anchors, dims, "/LuiExtended/media/unitframes/regen.dds", 2, true)
     if alpha then control:SetAlpha(alpha) end
     if degen then control:SetTextureRotation(3.14159) end
     -- create animation

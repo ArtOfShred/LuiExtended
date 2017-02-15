@@ -57,21 +57,21 @@ LUIE.Fonts = {
 }
 
 LUIE.StatusbarTextures = {
-    ["Aluminium"]               = '/LuiExtended/assets/Aluminium.dds',
-    ["Elder Scrolls Gradient"]  = '/LuiExtended/assets/ElderScrollsGrad.dds',
-    ["Glass"]                   = '/LuiExtended/assets/Glass.dds',
-    ["Glaze"]                   = '/LuiExtended/assets/Glaze.dds',
-    ["Horizontal Gradient 1"]   = '/LuiExtended/assets/HorizontalGrad.dds',
-    ["Horizontal Gradient 2"]   = '/LuiExtended/assets/HorizontalGradV2.dds',
-    ["Inner Glow"]              = '/LuiExtended/assets/InnerGlow.dds',
-    ["Inner Shadow"]            = '/LuiExtended/assets/InnerShadow.dds',
-    ["Inner Shadow Glossy"]     = '/LuiExtended/assets/InnerShadowGloss.dds',
-    ["Minimalistic"]            = '/LuiExtended/assets/Minimalistic.dds',
-    ["Round"]                   = '/LuiExtended/assets/Round.dds',
-    ["Sand Paper 1"]            = '/LuiExtended/assets/SandPaper.dds',
-    ["Sand Paper 2"]            = '/LuiExtended/assets/SandPaperV2.dds',
-    ["Shadow"]                  = '/LuiExtended/assets/Shadow.dds',
-    ["Smooth"]                  = '/LuiExtended/assets/Smooth.dds',
+    ["Aluminium"]               = "/LuiExtended/media/unitframes/statusbar/Aluminium.dds",
+    ["Elder Scrolls Gradient"]  = "/LuiExtended/media/unitframes/statusbar/ElderScrollsGrad.dds",
+    ["Glass"]                   = "/LuiExtended/media/unitframes/statusbar/Glass.dds",
+    ["Glaze"]                   = "/LuiExtended/media/unitframes/statusbar/Glaze.dds",
+    ["Horizontal Gradient 1"]   = "/LuiExtended/media/unitframes/statusbar/HorizontalGrad.dds",
+    ["Horizontal Gradient 2"]   = "/LuiExtended/media/unitframes/statusbar/HorizontalGradV2.dds",
+    ["Inner Glow"]              = "/LuiExtended/media/unitframes/statusbar/InnerGlow.dds",
+    ["Inner Shadow"]            = "/LuiExtended/media/unitframes/statusbar/InnerShadow.dds",
+    ["Inner Shadow Glossy"]     = "/LuiExtended/media/unitframes/statusbar/InnerShadowGloss.dds",
+    ["Minimalistic"]            = "/LuiExtended/media/unitframes/statusbar/Minimalistic.dds",
+    ["Round"]                   = "/LuiExtended/media/unitframes/statusbar/Round.dds",
+    ["Sand Paper 1"]            = "/LuiExtended/media/unitframes/statusbar/SandPaper.dds",
+    ["Sand Paper 2"]            = "/LuiExtended/media/unitframes/statusbar/SandPaperV2.dds",
+    ["Shadow"]                  = "/LuiExtended/media/unitframes/statusbar/Shadow.dds",
+    ["Smooth"]                  = "/LuiExtended/media/unitframes/statusbar/Smooth.dds",
 }
 
 --[[
@@ -202,7 +202,7 @@ local function LUIE_CreateSettings()
         func = function() ReloadUI("ingame") end,
         width = "full",
     }
-    
+
     --[[ INFO PANEL OPTIONS ]]--
     optionsData[#optionsData + 1] = {
         type = "submenu",
@@ -1325,7 +1325,7 @@ local function LUIE_CreateSettings()
         },
 
     }
-    
+
     --[[ CHAT ANNOUNCEMENTS OPTIONS ]]--
     optionsData[#optionsData + 1] = {
         type = "submenu",
