@@ -205,6 +205,7 @@ local function LUIE_CreateSettings()
     optionsData[#optionsData + 1] = {
         type = "submenu",
         name = "Info Panel Options",
+        reference = "Info_Panel_Options_Submenu",
         controls = {
             {
                 type = "checkbox",
@@ -361,6 +362,7 @@ local function LUIE_CreateSettings()
     optionsData[#optionsData + 1] = {
         type = "submenu",
         name = "Combat Info Options",
+        reference = "Combat_Info_Options_Submenu",
         controls = {
             {
                 type = "checkbox",
@@ -840,6 +842,7 @@ local function LUIE_CreateSettings()
     optionsData[#optionsData + 1] = {
         type = "submenu",
         name = "Buffs and Debuffs Options",
+        reference = "Buffs_and_Debuffs_Options_Submenu",
         controls = {
             {
                 type = "checkbox",
@@ -1156,6 +1159,7 @@ local function LUIE_CreateSettings()
     optionsData[#optionsData + 1] = {
         type = "submenu",
         name = "Damage Meter & Combat Log",
+        reference = "Damage_Meter_and_Combat_Log_Submenu",
         controls = {
             {
                 type = "checkbox",
@@ -1319,10 +1323,12 @@ local function LUIE_CreateSettings()
         },
 
     }
+    
     --[[ CHAT ANNOUNCEMENTS OPTIONS ]]--
     optionsData[#optionsData + 1] = {
         type = "submenu",
         name = "Chat Announcements Options",
+        reference = "Chat_Announcements_Options_Submenu",
         controls = {
             {
                 type = "dropdown",
@@ -1335,11 +1341,21 @@ local function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
+                name = "Show group change events in chat",
+                tooltip = "Print message to chat when player joins or leaves the group.",
+                getFunc = function() return LUIE.ChatAnnouncements.SV.GroupChatMsg end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupChatMsg = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                width = "full",
+                default = LUIE.ChatAnnouncements.D.GroupChatMsg,
+            },
+            {
+                type = "checkbox",
                 name = "Print messages as System messages",
                 tooltip = "Print all messages as System message so that it can appear in multiple tabs",
                 getFunc = function() return LUIE.ChatAnnouncements.SV.ChatUseSystem end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatUseSystem = value end,
                 width = "full",
+                warning = "Enable this only if you know what you are doing.",
                 default = LUIE.ChatAnnouncements.D.ChatUseSystem,
             },
             {
@@ -1369,16 +1385,7 @@ local function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Enable group changes events in chat",
-                tooltip = "Print message to chat when player joins or leaves the group.",
-                getFunc = function() return LUIE.ChatAnnouncements.SV.GroupChatMsg end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupChatMsg = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
-                width = "full",
-                default = LUIE.ChatAnnouncements.D.GroupChatMsg,
-            },
-            {
-                type = "checkbox",
-                name = "Print Trade Changes",
+                name = "Show Trade Changes",
                 --tooltip = "",
                 getFunc = function() return LUIE.ChatAnnouncements.SV.MiscTrade end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscTrade = value LUIE.ChatAnnouncements.RegisterTradeEvents() end,
@@ -1387,7 +1394,7 @@ local function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Print Mail Changes",
+                name = "Show Mail Changes",
                 --tooltip = "",
                 getFunc = function() return LUIE.ChatAnnouncements.SV.MiscMail end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscMail = value LUIE.ChatAnnouncements.RegisterMailEvents() end,
@@ -1396,7 +1403,7 @@ local function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Print Guild event messages",
+                name = "Show Guild event messages",
                 --tooltip = "",
                 getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuild end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuild = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
