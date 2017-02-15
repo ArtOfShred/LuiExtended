@@ -2132,15 +2132,6 @@ local function LUIE_CreateSettings()
         default = LUIE.D.UnitFrames_Enabled,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = "Enable Unit Frames Module",
-        getFunc = function() return LUIE.SV.UnitFrames_Enabled end,
-        setFunc = function(value) LUIE.SV.UnitFrames_Enabled = value end,
-        width = "full",
-        warning = "Will need to reload the UI.",
-        default = LUIE.D.UnitFrames_Enabled,
-    }
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "description",
         text = "This module allows display of textual attributes information over default UI controls. It also creates custom frames for player and target. Many of the settings can be applied only after reload of UI.",
     }
