@@ -58,7 +58,7 @@ libs\LibAddonMenu-2.0\controls\divider.lua
 LuiExtended.lua
 bindings.xml
 UI.lua
-locale.lua
+i18n\locale.lua
 Effects.lua
 InfoPanel.lua
 ChatAnnouncements.lua
