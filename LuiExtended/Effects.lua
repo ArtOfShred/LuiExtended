@@ -774,25 +774,25 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     -- ENCHANTS
     ----------------------------------------------------------------
 
-    [28919] = 'LuiExtended/media/icons/glyph_absorb_health.dds', -- Life Drain (Glyph of Absorb Health)
-    [28921] = 'LuiExtended/media/icons/glyph_absorb_health.dds', -- Life Drain (Glyph of Absorb Health)
-    [46743] = 'LuiExtended/media/icons/glyph_absorb_magicka.dds', -- Absorb Magicka (Glyph of Absorb Magicka)
-    [46744] = 'LuiExtended/media/icons/glyph_absorb_magicka.dds', -- Absorb Magicka (Glyph of Absorb Magicka)
-    [46746] = 'LuiExtended/media/icons/glyph_absorb_stamina.dds', -- Absorb Stamina (Glyph of Absorb Stamina)
-    [46747] = 'LuiExtended/media/icons/glyph_absorb_stamina.dds', -- Absorb Stamina (Glyph of Absorb Stamina)
-    [17906] = 'LuiExtended/media/icons/glyph_crushing.dds', -- Crusher (Glyph of Crushing)
-    [46749] = 'LuiExtended/media/icons/glyph_decrease_health.dds', -- Damage Health (Glyph of Decrease Health)
-    [17895] = 'LuiExtended/media/icons/glyph_flame.dds', -- Fiery Weapon (Glyph of Flame)
-    [17904] = 'LuiExtended/media/icons/glyph_foulness.dds', -- Befouled Weapon (Glyph of Foulness)
-    [17897] = 'LuiExtended/media/icons/glyph_frost.dds', -- Frozen Weapon (Glyph of Frost)
-    --[17947] = 'LuiExtended/media/icons/glyph_hardening.dds', -- Hardening (Glyph of Hardening) (DUMMY EVENT, HERE JUST IN CASE)
-    [21578] = 'LuiExtended/media/icons/glyph_hardening.dds', -- Hardening (Glyph of Hardening)
-    [17902] = 'LuiExtended/media/icons/glyph_poison.dds', -- Poisoned Weapon (Glyph of Poison)
-    [40337] = 'LuiExtended/media/icons/glyph_prismatic.dds', -- Primatic Weapon (Glyph of Prismatic Onslaught)
-    [17899] = 'LuiExtended/media/icons/glyph_shock.dds', -- Charged Weapon (Glyph of Shock)
-    [17945] = 'LuiExtended/media/icons/glyph_weakening.dds', -- Weakening (Glyph of Weakening)
-    --[17910] = 'LuiExtended/media/icons/glyph_weapon_damage.dds', -- Weapon Damage (Glyph of Weapon Damage) (DUMMY EVENT, HERE JUST IN CASE)
-    --[21230] = 'LuiExtended/media/icons/glyph_weapon_damage.dds', -- Berserker (Glyph of Weapon Damage) (Added in case ever needed)
+    [28919] = 'LuiExtended/media/icons/glyphs/glyph_absorb_health.dds', -- Life Drain (Glyph of Absorb Health)
+    [28921] = 'LuiExtended/media/icons/glyphs/glyph_absorb_health.dds', -- Life Drain (Glyph of Absorb Health)
+    [46743] = 'LuiExtended/media/icons/glyphs/glyph_absorb_magicka.dds', -- Absorb Magicka (Glyph of Absorb Magicka)
+    [46744] = 'LuiExtended/media/icons/glyphs/glyph_absorb_magicka.dds', -- Absorb Magicka (Glyph of Absorb Magicka)
+    [46746] = 'LuiExtended/media/icons/glyphs/glyph_absorb_stamina.dds', -- Absorb Stamina (Glyph of Absorb Stamina)
+    [46747] = 'LuiExtended/media/icons/glyphs/glyph_absorb_stamina.dds', -- Absorb Stamina (Glyph of Absorb Stamina)
+    [17906] = 'LuiExtended/media/icons/glyphs/glyph_crushing.dds', -- Crusher (Glyph of Crushing)
+    [46749] = 'LuiExtended/media/icons/glyphs/glyph_decrease_health.dds', -- Damage Health (Glyph of Decrease Health)
+    [17895] = 'LuiExtended/media/icons/glyphs/glyph_flame.dds', -- Fiery Weapon (Glyph of Flame)
+    [17904] = 'LuiExtended/media/icons/glyphs/glyph_foulness.dds', -- Befouled Weapon (Glyph of Foulness)
+    [17897] = 'LuiExtended/media/icons/glyphs/glyph_frost.dds', -- Frozen Weapon (Glyph of Frost)
+    --[17947] = 'LuiExtended/media/icons/glyphs/glyph_hardening.dds', -- Hardening (Glyph of Hardening) (DUMMY EVENT, HERE JUST IN CASE)
+    [21578] = 'LuiExtended/media/icons/glyphs/glyph_hardening.dds', -- Hardening (Glyph of Hardening)
+    [17902] = 'LuiExtended/media/icons/glyphs/glyph_poison.dds', -- Poisoned Weapon (Glyph of Poison)
+    [40337] = 'LuiExtended/media/icons/glyphs/glyph_prismatic.dds', -- Primatic Weapon (Glyph of Prismatic Onslaught)
+    [17899] = 'LuiExtended/media/icons/glyphs/glyph_shock.dds', -- Charged Weapon (Glyph of Shock)
+    [17945] = 'LuiExtended/media/icons/glyphs/glyph_weakening.dds', -- Weakening (Glyph of Weakening)
+    --[17910] = 'LuiExtended/media/icons/glyphs/glyph_weapon_damage.dds', -- Weapon Damage (Glyph of Weapon Damage) (DUMMY EVENT, HERE JUST IN CASE)
+    --[21230] = 'LuiExtended/media/icons/glyphs/glyph_weapon_damage.dds', -- Berserker (Glyph of Weapon Damage) (Added in case ever needed)
 
     -------------------------------------
     -- STATUS EFFECT PROCS --
@@ -2949,8 +2949,8 @@ E.FakePlayerBuffs = { -- Fake buffs applied onto the player by self
     [85347] = {icon = 'LuiExtended/media/icons/momentos/momento_storm_atronach_juggle.dds', name = 'Storm Orb Juggle', duration = 12000}, -- Storm Orb Juggle (Atronach Juggling)
 
     -- Enchants
-    [21230] = {icon = 'LuiExtended/media/icons/glyph_weapon_damage.dds', name = 'Weapon Damage Enchantment', duration = 5000}, -- Berserker (Glyph of Weapon Damage)
-    [21578] = {icon = 'LuiExtended/media/icons/glyph_hardening.dds', name = 'Hardening Enchantment', duration = 5000}, -- Hardening (Glyph of Hardening)
+    [21230] = {icon = 'LuiExtended/media/icons/glyphs/glyph_weapon_damage.dds', name = 'Weapon Damage Enchantment', duration = 5000}, -- Berserker (Glyph of Weapon Damage)
+    [21578] = {icon = 'LuiExtended/media/icons/glyphs/glyph_hardening.dds', name = 'Hardening Enchantment', duration = 5000}, -- Hardening (Glyph of Hardening)
 
     -- Champion Points
     [61015] = {icon = 'LuiExtended/media/icons/ability_champion_reinforced.dds', name = 'Determination', duration = 15000}, -- Determination
@@ -2995,8 +2995,8 @@ E.FakePlayerDebuffs = { -- Fake debuffs applied onto a target by the player
 
     [74483] = {icon = 'esoui/art/icons/ability_dragonknight_005.dds', name = 'Fiery Grip', duration = 1000}, -- Fiery Grip (Sentinel) (TG DLC) -- If the player reflects
 
-    [17945] = {icon = 'LuiExtended/media/icons/glyph_weakening.dds', name = 'Weakening Enchantment', duration = 5000}, -- Weakening (Glyph of Weakening)
-    [17906] = {icon = 'LuiExtended/media/icons/glyph_crushing.dds', name = 'Crushing Enchantment', duration = 5000}, -- Crusher (Glyph of Crushing)
+    [17945] = {icon = 'LuiExtended/media/icons/glyphs/glyph_weakening.dds', name = 'Weakening Enchantment', duration = 5000}, -- Weakening (Glyph of Weakening)
+    [17906] = {icon = 'LuiExtended/media/icons/glyphs/glyph_crushing.dds', name = 'Crushing Enchantment', duration = 5000}, -- Crusher (Glyph of Crushing)
 
     [21480] = {icon = 'LuiExtended/media/icons/ability_innate_proc_explosion.dds', name = 'Explosion', duration = 3000}, -- Explosion (Fire Vulnerability Proc)
     [68464] = {icon = 'LuiExtended/media/icons/ability_innate_proc_venom.dds', name = 'Venom', duration = 3000}, -- Venom (Poison Vulnerability Proc)
