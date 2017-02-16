@@ -92,6 +92,9 @@ local launderitemstring = ""
 local mailCOD = 0
 local mailMoney = 0
 local postageAmount = 0
+local MailStop = false
+local MailStringPart1 = ""
+local MailCurrencyCheck = true
 
 local IsValidLaunder = false
 
@@ -440,7 +443,7 @@ end
 --]]----------------------------------------------------------
 function CA.RegisterGoldEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MONEY_UPDATE)
-    if CA.SV.GoldChange then
+    if CA.SV.GoldChange or CA.SV.MiscMail then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MONEY_UPDATE, CA.OnMoneyUpdate)
     end
 end
@@ -574,7 +577,11 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
 
     -- Send money in the mail, values changed to compensate for COD!
     elseif reason == 2 and UpOrDown < 0 then
+        if postageAmount == 0 and mailMoney == 0 and mailCOD == 0 then
+        message = ( "COD Payment" )
+        else
         message = ( "Sent" )
+        end
         changetype = CommaValue (oldMoney - newMoney - postageAmount)
         mailHelper = true
 
@@ -664,53 +671,71 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             total = ''
         end
         -- Print a message to chat based off all the values we filled in above
-        if CA.SV.LootCurrencyCombo and UpOrDown < 0 and (reason == 1 or reason == 63 or reason == 64) then
+        if CA.SV.GoldChange and CA.SV.LootCurrencyCombo and UpOrDown < 0 and (reason == 1 or reason == 63 or reason == 64) then
             combostring = ( strfmt ( " → %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
-        elseif CA.SV.LootCurrencyCombo and reason == 28 then
+        elseif CA.SV.MiscMail and reason == 2 then
+            if not MailStop and MailStringPart1 ~= "" then 
+                printToChat (strfmt("%s and gold.", MailStringPart1) )
+            elseif not MailStop then
+                printToChat ("Received mail with gold.")
+            end
+            if CA.SV.GoldChange then printToChat ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) ) end
+            MailStringPart1 = ""
+        elseif CA.SV.GoldChange and CA.SV.LootCurrencyCombo and reason == 28 then
             combostring = ( strfmt ( " → %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
-        elseif reason == 47 then
+        elseif CA.SV.GoldChange and reason == 47 then
+            stealstring = ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+            local latency = GetLatency()
+            latency = latency + 50
+            zo_callLater(CA.JusticeStealRemove, latency)
+         elseif CA.SV.GoldChange and reason == 57 then
             stealstring = ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
             zo_callLater(CA.JusticeStealRemove, 100)
-         elseif reason == 57 then
-            stealstring = ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
-            zo_callLater(CA.JusticeStealRemove, 100)
-        elseif CA.SV.LootCurrencyCombo and UpOrDown > 0 and (reason == 1 or reason == 63 or reason == 64) then
+        elseif CA.SV.GoldChange and CA.SV.LootCurrencyCombo and UpOrDown > 0 and (reason == 1 or reason == 63 or reason == 64) then
             combostring = ( strfmt ( " ← %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
-        elseif CA.SV.LootCurrencyCombo and CA.SV.MiscBags and (reason == 8 or reason == 9) then
+        elseif CA.SV.GoldChange and CA.SV.LootCurrencyCombo and CA.SV.MiscBags and (reason == 8 or reason == 9) then
             combostring = ( strfmt ( " → %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
-        elseif UpOrDown < 0 and reason == 60 then
+        elseif CA.SV.GoldChange and UpOrDown < 0 and reason == 60 then
             laundergoldstring = ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
         else
-            printToChat ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+            if CA.SV.GoldChange then printToChat ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) ) end
         end
+        --end
     else
+        MailCurrencyCheck = false
+        local valuesent = ""
         local totalwithoutpostage = 0
         if postageAmount ~= 0 then
-            totalWithoutPostage = CommaValue ( GetCurrentMoney() + postageAmount )
+            totalWithoutPostage = CommaValue ( oldMoney - postageAmount )
         else
-            totalWithoutPostage = CommaValue ( GetCurrentMoney() )
+            totalWithoutPostage = CommaValue ( oldMoney )
         end
 
         if CA.SV.TotalGoldChange == true and CA.SV.CurrencyIcons == false then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. totalWithoutPostage ) or ''
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. currentMoney ) or ''
         elseif CA.SV.TotalGoldChange == true and CA.SV.CurrencyIcons == true then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. totalWithoutPostage )
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. currentMoney )
         else
             total = ''
         end
 
-        if CA.SV.MiscMail then printToChat ("Mail sent!") end
-        --if ( CA.SV.MiscMail and mailCOD ~= 0 ) then printToChat ("COD sent!") end
+        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and not CA.SV.GoldChange then printToChat (strfmt("COD Payment of %s gold sent!", changetype) ) end
+        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and CA.SV.GoldChange then printToChat ("COD Payment sent!") end
+        if CA.SV.MiscMail and mailCOD == 0 and mailMoney == 0 and postageAmount >= 1 then printToChat ("Mail sent!") end
+        if CA.SV.MiscMail and mailMoney ~= 0 and not CA.SV.GoldChange then printToChat (strfmt("Mail sent with %s gold!", mailMoney) ) end
+        if CA.SV.MiscMail and mailMoney ~= 0 and CA.SV.GoldChange then printToChat ("Mail sent!") end
+        if CA.SV.MiscMail and mailCOD ~= 0 and not CA.SV.GoldChange  then printToChat (strfmt("COD sent for %s gold!", mailCOD) ) end
+        if CA.SV.MiscMail and mailCOD ~= 0 and CA.SV.GoldChange then printToChat ("COD sent!") end
 
-        if mailMoney ~= 0 then printToChat ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) ) end
+        valuesent = ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
 
         if postageAmount ~= 0 then
             local postagesyntax = CA.SV.CurrencyIcons and ( " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. postageAmount .. formathelper .. CA.SV.GoldName .. plural .. "|r") or ( " |r" .. changetype .. postage .. CA.SV.GoldName .. plural .. "|r")
                 -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
             if CA.SV.TotalGoldChange == true and CA.SV.CurrencyIcons == false then
-                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. currentMoney ) or ''
+                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. totalWithoutPostage ) or ''
             elseif CA.SV.TotalGoldChange == true and CA.SV.CurrencyIcons == true then
-                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. currentMoney )
+                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. totalWithoutPostage )
             else
                 total = ''
             end
@@ -719,12 +744,19 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             else
                 message = ( "Postage" )
             end
-            printToChat ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, postagesyntax, total ) )
+            if CA.SV.GoldChange then printToChat ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, postagesyntax, total ) ) end
         end
-
+        
+        if CA.SV.GoldChange and mailMoney ~= 0 then printToChat (valuesent) end
+        if CA.SV.GoldChange and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 then printToChat (valuesent) end -- All these values will be zero for a COD payment sent, since none of them are updated.
+        
     end
 
     mailHelper = false
+    postageAmount = 0
+    mailMoney = 0
+    mailCOD = 0
+    if MailCurrencyCheck == false then zo_callLater(CA.MailClearVariables, 500) end
 
 end
 
@@ -1211,6 +1243,9 @@ function CA.RegisterMailEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED, CA.MailMoneyChanged)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED, CA.MailCODChanged)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_REMOVED, CA.MailRemoved)
+    end
+    if CA.SV.MiscMail or CA.SV.GoldChange then
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MONEY_UPDATE, CA.OnMoneyUpdate)
     end
 end
 
@@ -1908,6 +1943,7 @@ function CA.MailMoneyChanged (eventCode, moneyAmount)
 
     mailMoney = moneyAmount
     mailCOD = 0
+    postageAmount = GetQueuedMailPostage()
 
 end
 
@@ -1915,6 +1951,7 @@ function CA.MailCODChanged (eventCode, codAmount)
 
     mailCOD = codAmount
     mailMoney = 0
+    postageAmount = GetQueuedMailPostage()
 
 end
 
@@ -1941,6 +1978,8 @@ end
 
 function CA.OnMailTakeAttachedItem(eventCode, mailId)
 
+    local NumMails = 0
+
     combostring = ""
 
     local gainorloss = "|c0B610B"
@@ -1948,12 +1987,25 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
     if CA.SV.LootMail then
         for attachIndex = 1, #g_MailStacks do
             local item = g_MailStacks[attachIndex]
-            CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, gainorloss)
+            NumMails = NumMails+1
+            zo_callLater(function() CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, gainorloss) end , 50)
         end
     end
+    
+    local plural = "s"
+    if NumMails == 1 then plural = "" end
 
+    MailStringPart1 = (strfmt("Received mail with %s attachment%s", NumMails, plural) )
+    zo_callLater(PrintMailAttachmentsIfNoGold, 25) -- We call this with a super short delay, it will return a string as long as a currency change event doesn't trigger beforehand!
+        
     g_MailStacks = {}
 end
+
+function PrintMailAttachmentsIfNoGold()
+    if CA.SV.MiscMail and MailStringPart1 ~= "" then printToChat(strfmt("%s.",MailStringPart1) ) end
+    MailStringPart1 = "" -- Important to clear this string, if we took a mail with only items attached, we don't want the next mail with gold to falsely show that attachments were taken!
+end
+
 
 function CA.OnMailAttach (eventCode, attachmentSlot)
 
@@ -1983,25 +2035,33 @@ function CA.OnMailCloseBox (eventCode)
 end
 
 function CA.OnMailFail (eventCode, reason)
-
+    
     if CA.SV.MiscMail then
         if reason == 2 then printToChat ("Cannot send mail: Unknown Player.") end
         if reason == 3 then printToChat ("Cannot send mail: Recipient's Inbox is full.") end
         if reason == 4 then printToChat ("You cannot send mail to that recipient.") end
         if reason == 5 then printToChat ("Cannot send mail: Not enough gold.") end
         if reason == 11 then printToChat ("You cannot send mail to yourself.") end
+        if reason == 9 then printToChat ("You must attach at least one item for Cash on Delivery mail.") end
         if reason == 7 then printToChat ("Cannot send mail: This mail is lacking a subject, body, or attachments.") end
+        MailStop = true
+        zo_callLater(CA.MailClearVariables, 500)
     end
 
+end
+
+function CA.MailClearVariables()
+    MailStop = false
+    MailCurrencyCheck = true
 end
 
 -- Sends results of the trade to the Item Log print function and clears variables so they are reset for next trade interactions
 function CA.OnMailSuccess (eventCode)
 
     combostring = ""
-
-    if CA.SV.MiscMail and not CA.SV.GoldChange then printToChat ("Mail sent!") end
-    --if ( CA.SV.MiscMail and mailCOD ~= 0 ) and not CA.SV.GoldChange then printToChat ("COD sent!") end
+    local latency = GetLatency()
+    latency = latency + 50
+    zo_callLater(CA.FunctionMailCurrencyCheck, latency)
 
     if CA.SV.LootMail then
 
@@ -2023,6 +2083,10 @@ function CA.OnMailSuccess (eventCode)
     mailMoney = 0
     postageAmount = 0
 
+end
+
+function CA.FunctionMailCurrencyCheck()
+    if MailCurrencyCheck == true then printToChat "Mail sent!" end
 end
 
 function CA.RegisterXPEvents()
@@ -2058,10 +2122,11 @@ local function ExperiencePctToColour(xppct)
 end
 
 -- When quest XP is gained during dialogue the player doesn't actually level up until exiting the dialogue. The variables get stored and saved to print on levelup if this is the case.
-local levelString1 = ""
-local levelString2 = ""
+local QuestString1 = ""
+local QuestString2 = ""
 local WeLeveled = 0
 local Crossover = 0
+local QuestCombiner = 0 -- When this is > 1, if quest XP is gained with Reason 1, this will merge a Reason 2 value that follows it if present. Allows us to merge the message for XP gain from quest turnins that also complete a POI into one printout. 
 
 function CA.OnLevelUpdate (eventCode, unitTag, level)
 
@@ -2069,29 +2134,31 @@ function CA.OnLevelUpdate (eventCode, unitTag, level)
 
         CA.LevelUpdateHelper()
 
-        if levelString1 ~= "" and CA.SV.Experience then
-            printToChat(levelString1)
-        end
-        if levelString2 ~= "" and CA.SV.Experience then
-            printToChat(levelString2)
+        if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then 
+            printToChat (QuestString2)
+        elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then 
+            printToChat(QuestString1)
+        elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then 
+            printToChat(QuestString2) 
         end
 
         if CA.SV.ExperienceLevelUp then printToChat ("You have reached " .. LevelContext .. " " .. CurrentLevel .. "!") end
 
     end
 
-    levelString1 = ""
-    levelString2 = ""
+    QuestString1 = ""
+    QuestString2 = ""
     WeLeveled = 0
     Crossover = 0
+    QuestCombiner = 0
 
 end
 
 
 function CA.OnExperienceGain( eventCode, reason, level, previousExperience, currentExperience, championPoints )
 
-    printToChat ("Experience Gain) previousExperience: " .. previousExperience .. " --- " .. "currentExperience: " .. currentExperience)
-
+    -- printToChat ("Experience Gain) previousExperience: " .. previousExperience .. " --- " .. "currentExperience: " .. currentExperience) -- DEBUG
+    
     local levelhelper = 0 -- Gives us the correct value of XP to use toward the next level when calculating progress after a level up
 
     if IsChampion then
@@ -2123,6 +2190,7 @@ function CA.OnExperienceGain( eventCode, reason, level, previousExperience, curr
             -- Change in Experience Points on gaining them
             local change = currentExperience - previousExperience
             local formathelper = " "
+            if QuestCombiner ~= 0 then change = QuestCombiner + change end -- Carries over if theres any immediate XP gain after a quest turnin.
 
             -- Format Helper puts a space in if the player enters a value for Experience Name, this way they don't have to do this formatting themselves.
             if CA.SV.ExperienceName == ( "" ) then
@@ -2183,18 +2251,40 @@ function CA.OnExperienceGain( eventCode, reason, level, previousExperience, curr
             local totallevel = CA.SV.ExperienceShowLevel and strfmt ( " (%s %s)", LevelContext, CurrentLevel) or ("")
 
             --[[ Crossover from Normal XP --> Champion XP modifier ]] --
-            if Crossover == 1 then -- Corrects values printed for the XP gain event that takes us from Normal XP --> Champion XP
-                progress = "(Champion Level attained!)"
+            if Crossover == 1 then
+                progress = "(Champion Level achieved!)"
             end
 
-        if WeLeveled == 1 and reason == 1 then
-            levelString1 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
-        elseif WeLeveled == 1 and reason == 2 then
-            levelString2 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
+        if reason == 1 then
+            QuestString1 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
+            QuestCombiner = change
+            zo_callLater(CA.PrintQuestExperienceHelper, 100)
+        elseif reason == 2 then
+            QuestString2 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
+            zo_callLater(CA.PrintQuestExperienceHelper, 100)
+            QuestCombiner = 0
         else
             printToChat ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
         end
     end
+end
+
+function CA.PrintQuestExperienceHelper()
+
+    if WeLeveled == 1 then return end
+    
+    if QuestString1 ~= "" and QuestString2 ~= "" then 
+        printToChat (QuestString2)
+    elseif QuestString1 ~= "" and QuestString2 == "" then 
+        printToChat(QuestString1)
+    elseif QuestString1 == "" and QuestString2 ~= "" then 
+        printToChat(QuestString2) 
+    end
+    
+    QuestString1 = ""
+    QuestString2 = ""
+    QuestCombiner = 0
+    
 end
 
 --[[----------------------------------------------------------
@@ -2977,13 +3067,15 @@ end
 
 g_JusticeStacks = {}
 
+local ConfiscateMessage = ("Bounty confiscated")
+
 function CA.JusticeStealRemove(eventCode)
-    printToChat (eventCode)
+    if CA.SV.MiscConfiscate and eventCode == 131555 then ConfiscateMessage = ("Bounty and stolen items confiscated!") end
     if stealstring == "" then return end
-    if CA.SV.MiscConfiscate and eventCode == 131555 then printToChat("Bounty and stolen items confiscated!") end
-    if CA.SV.MiscConfiscate and eventCode ~= 131555 then printToChat("Bounty confiscated!") end
+    if CA.SV.MiscConfiscate then printToChat(ConfiscateMessage) end
     printToChat(stealstring)
     stealstring = ""
+    ConfiscateMessage = ("Bounty confiscated")
     if CA.SV.ShowConfiscate or CA.SV.ShowDestroy then zo_callLater(CA.JusticeRemovePrint, 50) end
 end
 

@@ -20,3 +20,5 @@
 *.DDS binary
 *.png binary
 *.ico binary
+*.ttf binary
+*.otf binary

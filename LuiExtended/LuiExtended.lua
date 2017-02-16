@@ -2071,7 +2071,7 @@ local function LUIE_CreateSettings()
                         type = "slider",
                         name = "Achievements Step Size, %",
                         tooltip = "Display achievement update information every #% to completion. Setting this value to 0 means to print achievement information on every update event.",
-                        min = 0, max = 10, step = 1,
+                        min = 0, max = 25, step = 1,
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsStep end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsStep = value end,
                         width = "full",
