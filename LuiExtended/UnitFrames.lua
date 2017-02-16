@@ -148,7 +148,7 @@ local function CreateRegenAnimation(parent, anchors, dims, alpha, degen)
     if #dims ~= 2 then dims = { parent:GetDimensions() } end
 
     -- create regen control
-    local control = UI.Texture(parent, anchors, dims, "/LuiExtended/assets/regen.dds", 2, true)
+    local control = UI.Texture(parent, anchors, dims, "/LuiExtended/media/unitframes/regen.dds", 2, true)
     if alpha then control:SetAlpha(alpha) end
     if degen then control:SetTextureRotation(3.14159) end
     -- create animation
@@ -508,7 +508,7 @@ local function CreateCustomFrames()
             ["avaRankIcon"] = ari,
             ["avaRank"]     = UI.Label( botInfo, {RIGHT,LEFT,-1,0,ari}, nil, {2,3}, nil, 'ava', false ),
             ["dead"]        = UI.Label( thb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "Status", true ),
-            ["skull"]       = UI.Texture( target, {RIGHT,LEFT,-8,0}, nil, "LuiExtended/icons/unitframes_execute.dds", nil, true ),
+            ["skull"]       = UI.Texture( target, {RIGHT,LEFT,-8,0}, nil, "LuiExtended/media/unitframes/unitframes_execute.dds", nil, true ),
             ["buffs"]       = UI.Control( targetTlw, {TOP,BOTTOM,0,2,botInfo}, nil, false ),
             ["debuffs"]     = UI.Control( targetTlw, {BOTTOM,TOP,0,-2,topInfo}, nil, false ),
         }
@@ -1441,9 +1441,9 @@ function UF.UpdateStaticControls( unitFrame )
         if unitFrame.isPlayer then
             unitFrame.classIcon:SetTexture(classIcon)
         elseif unitDifficulty == 2 then
-            unitFrame.classIcon:SetTexture("LuiExtended/icons/unitframes_level_elite.dds")
+            unitFrame.classIcon:SetTexture("LuiExtended/media/unitframes/unitframes_level_elite.dds")
         elseif unitDifficulty >= 3 then
-            unitFrame.classIcon:SetTexture("LuiExtended/icons/unitframes_level_elite.dds")
+            unitFrame.classIcon:SetTexture("LuiExtended/media/unitframes/unitframes_level_elite.dds")
         end
         if unitFrame.unitTag == 'player' then
             unitFrame.classIcon:SetHidden( not UF.SV.PlayerEnableYourname )
@@ -1512,7 +1512,7 @@ function UF.UpdateStaticControls( unitFrame )
         if showLevel then
             unitFrame.levelIcon:ClearAnchors()
             unitFrame.levelIcon:SetAnchor( LEFT, unitFrame.topInfo, LEFT, unitFrame.name:GetTextWidth()+1, 0 )
-            unitFrame.levelIcon:SetTexture( unitFrame.isChampion and "LuiExtended/icons/unitframes_level_champion.dds" or "LuiExtended/icons/unitframes_level_normal.dds" )
+            unitFrame.levelIcon:SetTexture( unitFrame.isChampion and "LuiExtended/media/unitframes/unitframes_level_champion.dds" or "LuiExtended/media/unitframes/unitframes_level_normal.dds" )
             -- level label should be already anchored
             unitFrame.level:SetText( tostring( unitFrame.isChampion and GetUnitChampionPoints( unitFrame.unitTag ) or GetUnitLevel( unitFrame.unitTag ) ) )
         end
@@ -1942,7 +1942,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
     local hidden = false
 
     if UF.SV.PlayerEnableAltbarMSW and isWerewolf then
-        icon    = "LuiExtended/icons/unitframes_bar_werewolf.dds"
+        icon    = "LuiExtended/media/unitframes/unitframes_bar_werewolf.dds"
         center  = { 0.05, 0, 0, 0.9 }
         colour  = { 0.8,  0, 0, 0.9 }
 
@@ -1955,7 +1955,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.OnPowerUpdate(nil, 'player', nil, POWERTYPE_WEREWOLF, GetUnitPower('player', POWERTYPE_WEREWOLF))
 
     elseif UF.SV.PlayerEnableAltbarMSW and isSiege then
-        icon    = "LuiExtended/icons/unitframes_bar_siege.dds"
+        icon    = "LuiExtended/media/unitframes/unitframes_bar_siege.dds"
         center  = { 0.05, 0, 0, 0.9 }
         colour  = { 0.8,  0, 0, 0.9 }
 
@@ -1968,7 +1968,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.OnPowerUpdate(nil, 'controlledsiege', nil, POWERTYPE_HEALTH, GetUnitPower('controlledsiege', POWERTYPE_HEALTH))
 
     elseif UF.SV.PlayerEnableAltbarMSW and isMounted then
-        icon    = "LuiExtended/icons/unitframes_bar_mount.dds"
+        icon    = "LuiExtended/media/unitframes/unitframes_bar_mount.dds"
         center  = { 0.1*UF.SV.CustomColourStamina[1], 0.1*UF.SV.CustomColourStamina[2], 0.1*UF.SV.CustomColourStamina[3], 0.9 }
         colour  = { UF.SV.CustomColourStamina[1], UF.SV.CustomColourStamina[2], UF.SV.CustomColourStamina[3], 0.9 }
 
@@ -1993,7 +1993,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.ChampionXP.bar:SetValue( GetPlayerChampionXP() )
 
     elseif UF.SV.PlayerEnableAltbarXP then
-        icon    = "LuiExtended/icons/unitframes_bar_xp.dds"
+        icon    = "LuiExtended/media/unitframes/unitframes_bar_xp.dds"
         center  = { 0, 0.1, 0.1, 0.9 }
         colour  = { XP_BAR_COLOURS.r, XP_BAR_COLOURS.g, XP_BAR_COLOURS.b, 0.9 } -- { 0, 0.9, 0.9, 0.9 }
 
