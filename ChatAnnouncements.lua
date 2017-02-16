@@ -991,11 +991,11 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
 
     -- Print a message to chat based off all the values we filled in above
     if CA.SV.LootCurrencyCombo and UpOrDown < 0 and reason == 1 then
-        combostring = ( strfmt ( " → %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+        combostring = (strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total ) )
     elseif CA.SV.LootCurrencyCombo and UpOrDown > 0 and reason == 1 then
-        combostring = ( strfmt ( " ← %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+        combostring = (strformat(" ← <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total ) )
     else
-        printToChat ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+        printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
     end
 
 end
