@@ -256,9 +256,9 @@ function CA.OnGroupInviteReceived(eventCode, inviterName, inviterDisplayName)
     local displayBothString = ( strformat("<<1>><<2>>", inviterName, inviterDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
 
-    if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("<<1>>|r has invited you to join a group.", displayNameLink) ) end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("<<1>>|r has invited you to join a group.", characterNameLink) ) end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("<<1>>|r has invited you to join a group.", displayBoth) ) end
+    if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("<<1>> has invited you to join a group.", displayNameLink) ) end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("<<1>> has invited you to join a group.", characterNameLink) ) end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("<<1>> has invited you to join a group.", displayBoth) ) end
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED) -- On receiving a group invite, it fires 2 events, we disable the event handler temporarily for this then recall it after.
     zo_callLater(CA.RefreshGroupInviteEnable, 100)
 end
@@ -292,9 +292,9 @@ function CA.OnGroupLeaderUpdate(eventCode, leaderTag)
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, groupLeaderAccount)
 
     if g_playerNameFormatted ~= groupLeaderName then -- If another player became the leader
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("<<1>>|r is now the group leader!", displayNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("<<1>>|r is now the group leader!", characterNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("<<1>>|r is now the group leader!", displayBoth) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("<<1>> is now the group leader!", displayNameLink) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("<<1>> is now the group leader!", characterNameLink) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("<<1>> is now the group leader!", displayBoth) ) end
     elseif g_playerNameFormatted == groupLeaderName then -- If the player character became the leader
         printToChat("You are now the group leader!")
     end
@@ -329,9 +329,9 @@ function CA.OnGroupMemberJoined(eventCode, memberName)
         local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(joinedMemberAccountName)
         local displayBothString = ( strformat("<<1>><<2>>", joinedMemberName, joinedMemberAccountName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, joinedMemberAccountName)
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("<<1>>|r has joined the group.", displayNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("<<1>>|r has joined the group.", characterNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("<<1>>|r has joined the group.", displayBoth) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("<<1>> has joined the group.", displayNameLink) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("<<1>> has joined the group.", characterNameLink) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("<<1>> has joined the group.", displayBoth) ) end
     elseif g_playerName == memberName then
         printToChat("You have joined a group.") -- Only prints on the initial group form between 2 players.
     end
@@ -2246,7 +2246,7 @@ function CA.OnAchievementUpdated(eventCode, aId)
         return
     end
 
-    local link = strformat( GetAchievementLink(aId, LINK_STYLE_BRACKETS) )
+    local link = strformat(GetAchievementLink(aId, LINK_STYLE_BRACKETS))
     local catName = GetAchievementCategoryInfo(topLevelIndex)
 
     local totalCmp = 0
@@ -2457,7 +2457,7 @@ end
 -- Helper function for Craft Bag
 function CA.GetItemLinkFromItemId(itemId)
     local name = GetItemLinkName(ZO_LinkHandler_CreateLink("Test Trash", nil, ITEM_LINK_TYPE,itemId, 1, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 10000, 0))
-    return ZO_LinkHandler_CreateLink(strformat("<<t:1>>",name), nil, ITEM_LINK_TYPE,itemId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    return ZO_LinkHandler_CreateLink(strformat("<<t:1>>", name), nil, ITEM_LINK_TYPE,itemId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 end
 
 -- Only used if the option to see destroyed items or items lost from a guard is turned on
