@@ -253,12 +253,12 @@ function CA.OnGroupInviteReceived (eventCode, inviterName, inviterDisplayName)
 
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink(inviterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
-    local displayBothString = ( strfmt("%s%s", inviterName, inviterDisplayName) )
+    local displayBothString = ( strformat("<<1>><<2>>", inviterName, inviterDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
 
-    if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r has invited you to join a group.", displayNameLink) ) end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has invited you to join a group.", characterNameLink) ) end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has invited you to join a group.", displayBoth) ) end
+    if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("<<1>>|r has invited you to join a group.", displayNameLink) ) end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("<<1>>|r has invited you to join a group.", characterNameLink) ) end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("<<1>>|r has invited you to join a group.", displayBoth) ) end
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED) -- On receiving a group invite, it fires 2 events, we disable the event handler temporarily for this then recall it after.
     zo_callLater(CA.RefreshGroupInviteEnable, 100)
 end
@@ -288,15 +288,15 @@ function CA.OnGroupLeaderUpdate (eventCode, leaderTag)
 
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink(groupLeaderName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(groupLeaderAccount)
-    local displayBothString = ( strfmt("%s%s", groupLeaderName, groupLeaderAccount) )
+    local displayBothString = ( strformat("<<1>><<2>>", groupLeaderName, groupLeaderAccount) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, groupLeaderAccount)
 
     if g_playerNameFormatted ~= groupLeaderName then -- If another player became the leader
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r is now the group leader!", displayNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r is now the group leader!", characterNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r is now the group leader!", displayBoth) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("<<1>>|r is now the group leader!", displayNameLink) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("<<1>>|r is now the group leader!", characterNameLink) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("<<1>>|r is now the group leader!", displayBoth) ) end
     elseif g_playerNameFormatted == groupLeaderName then -- If the player character became the leader
-        printToChat(strfmt("You are now the group leader!") )
+        printToChat("You are now the group leader!")
     end
 end
 
@@ -327,11 +327,11 @@ function CA.OnGroupMemberJoined(eventCode, memberName)
         -- Can occur if event is before EVENT_PLAYER_ACTIVATED
         local characterNameLink = ZO_LinkHandler_CreateCharacterLink(joinedMemberName)
         local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(joinedMemberAccountName)
-        local displayBothString = ( strfmt("%s%s", joinedMemberName, joinedMemberAccountName) )
+        local displayBothString = ( strformat("<<1>><<2>>", joinedMemberName, joinedMemberAccountName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, joinedMemberAccountName)
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r has joined the group.", displayNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has joined the group.", characterNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has joined the group.", displayBoth) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("<<1>>|r has joined the group.", displayNameLink) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("<<1>>|r has joined the group.", characterNameLink) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("<<1>>|r has joined the group.", displayBoth) ) end
     elseif g_playerName == memberName then
         printToChat("You have joined a group.") -- Only prints on the initial group form between 2 players.
     end
@@ -343,7 +343,7 @@ end
 function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLeader, memberDisplayName, actionRequiredVote)
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink( gsub(memberName,"%^%a+","") )
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(memberDisplayName)
-    local displayBothString = ( strfmt("%s%s", gsub(memberName,"%^%a+",""), memberDisplayName) )
+    local displayBothString = ( strformat("<<1>><<2>>", gsub(memberName,"%^%a+",""), memberDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, memberDisplayName)
     local msg = nil
     if reason == GROUP_LEAVE_REASON_VOLUNTARY then
@@ -356,9 +356,9 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
     end
     if msg then
         -- Can occur if event is before EVENT_PLAYER_ACTIVATED
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt(msg, displayNameLink)) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt(msg, characterNameLink)) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt(msg, displayBoth)) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(msg, displayNameLink)) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(msg, characterNameLink)) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(msg, displayBoth)) end
     end
 end
 
