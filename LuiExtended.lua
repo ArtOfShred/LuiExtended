@@ -22,8 +22,6 @@ LUIE.D = {
 }
 LUIE.SV = nil
 
-local strformat = string.format
-
 -- Global fonts table to use in other parts of this addon
 LUIE.Fonts = {
     ["ProseAntique"]            = "/EsoUI/Common/Fonts/ProseAntiquePSMT.otf",
@@ -3176,11 +3174,11 @@ function LUIE.CommaValue(number, shorten, noncomma)
         if value >= 1000 then
             value = LUIE.CommaValue(number)
         elseif value >= 100 or suffix == nil then
-            value = strformat('%d', value)
+            value = string.format('%d', value)
         elseif value >= 10 then
-            value = strformat('%.1f', value)
+            value = string.format('%.1f', value)
         else
-            value = strformat('%.2f', value)
+            value = string.format('%.2f', value)
         end
 
         if suffix ~= nil then
