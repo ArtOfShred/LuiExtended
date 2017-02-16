@@ -86,8 +86,7 @@ end
  * Load additional fonts and status bar textures from LMP if it is present in environment
  ]]--
 local function LUIE_LoadMedia()
-    if LibStub == nil then return end
-    local LMP = LibStub:GetLibrary("LibMediaProvider-1.0", true)
+    local LMP = LibStub("LibMediaProvider-1.0")
     if LMP == nil then return end
 
     -- Update Fonts
@@ -109,7 +108,6 @@ end
  * Create Settings menu
  ]]--
 local function LUIE_CreateSettings()
-    if LibStub == nil then return end
     local LAM2 = LibStub("LibAddonMenu-2.0")
     if LAM2 == nil then return end
 
