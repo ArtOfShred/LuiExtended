@@ -248,7 +248,7 @@ end
 ]]--
 
 -- Prints a message to chat when another player sends us a group invite
-function CA.OnGroupInviteReceived (eventCode, inviterName, inviterDisplayName)
+function CA.OnGroupInviteReceived(eventCode, inviterName, inviterDisplayName)
     GroupJoinFudger = false
 
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink(inviterName)
@@ -265,7 +265,7 @@ end
 
 -- Prints a message to chat when invites are declined or failed.
 -- Currently broken as of 2/9/2017 so we have to omit any names from this function until it returns the correct InviteeName and InviteeDisplayName instead
-function CA.OnGroupInviteResponse (eventCode, inviterName, response, inviterDisplayName)
+function CA.OnGroupInviteResponse(eventCode, inviterName, response, inviterDisplayName)
     if response == 2 then
         printToChat("Your group invitation was declined.")
     elseif response == 3 then
@@ -282,7 +282,7 @@ function CA.OnGroupInviteResponse (eventCode, inviterName, response, inviterDisp
 end
 
 -- Prints a message to chat when the leader of the group is updated
-function CA.OnGroupLeaderUpdate (eventCode, leaderTag)
+function CA.OnGroupLeaderUpdate(eventCode, leaderTag)
     local groupLeaderName = GetUnitName(leaderTag)
     local groupLeaderAccount = GetUnitDisplayName(leaderTag)
 
@@ -860,8 +860,8 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
     combostring = ""
 
     --[[ Relevant Reason codes for Tel Var:
-    0 = Chest Loot
-    1 = Merchant Buy/Sell
+    0  = Chest Loot
+    1  = Merchant Buy/Sell
     42 = Deposit in Bank
     43 = Withdraw from Bank
     65 = PVP Kill Transfer (NPC or Player)
@@ -1292,16 +1292,18 @@ function CA.RegisterHorseEvents()
 end
 
 function CA.RegisterGuildEvents()
-    if CA.SV.MiscGuild then printToChat ("Guild Events Registered jot jot jort!") end
+    if CA.SV.MiscGuild then
+        printToChat ("Guild Events Registered jot jot jort!")
+    end
 end
 
 --------------------------------------------------------------
 
-function CA.MiscAlertLockFailed (eventCode)
+function CA.MiscAlertLockFailed(eventCode)
     printToChat ("Lockpick failed, you're fucking terrible!!")
 end
 
-function CA.MiscAlertLockSuccess (eventCode)
+function CA.MiscAlertLockSuccess(eventCode)
     printToChat ("Lockpick successful!")
 end
 
@@ -1374,7 +1376,7 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
 end
 
 
-function CA.MiscAlertBags (eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
+function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
 
     g_InventoryStacks = {}
     g_BankStacks = {}
@@ -1420,7 +1422,7 @@ function CA.MiscAlertBags (eventCode, previousCapacity, currentCapacity, previou
 
 end
 
-function CA.MiscAlertBank (eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
+function CA.MiscAlertBank(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
 
     g_InventoryStacks = {}
     g_BankStacks = {}
@@ -1635,7 +1637,7 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
     end
 end
 
-function CA.LogItem( logPrefix, icon, itemName, itemType, quantity, receivedBy, gainorloss, istrade )
+function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainorloss, istrade)
     local bracket1 = ""
     local bracket2 = ""
 
@@ -1783,7 +1785,7 @@ function CA.TradeInviteAccepted(eventCode)
     if CA.SV.MiscTrade then printToChat ("Trade invite accepted.") end
 end
 
-function CA.TradeInviteDecline (eventCode)
+function CA.TradeInviteDecline(eventCode)
     if CA.SV.MiscTrade then printToChat ("Trade invite declined.") end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
@@ -1791,7 +1793,7 @@ function CA.TradeInviteDecline (eventCode)
     TradeInvitee = ""
 end
 
-function CA.TradeInviteCancel (eventCode)
+function CA.TradeInviteCancel(eventCode)
     if CA.SV.MiscTrade then printToChat ("Trade invite canceled.") end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
@@ -1800,7 +1802,7 @@ function CA.TradeInviteCancel (eventCode)
 end
 
 -- Adds item to index when they are added to the trade
-function CA.OnTradeAdded (eventCode, who, tradeIndex, itemSoundCategory)
+function CA.OnTradeAdded(eventCode, who, tradeIndex, itemSoundCategory)
     -- d( "tradeIndex: " .. tradeIndex .. " --- WHO: " .. who ) -- Debug
 
     if who == 0 then
@@ -1818,7 +1820,7 @@ function CA.OnTradeAdded (eventCode, who, tradeIndex, itemSoundCategory)
 end
 
 -- Removes items from index if they are removed from the trade
-function CA.OnTradeRemoved (eventCode, who, tradeIndex, itemSoundCategory)
+function CA.OnTradeRemoved(eventCode, who, tradeIndex, itemSoundCategory)
     if who == 0 then
         local indexOut = tradeIndex
         g_TradeStacksOut[indexOut] = nil
@@ -1829,7 +1831,7 @@ function CA.OnTradeRemoved (eventCode, who, tradeIndex, itemSoundCategory)
 end
 
 -- Cleanup if a Trade is canceled/exited
-function CA.TradeCancel (eventCode, cancelerName)
+function CA.TradeCancel(eventCode, cancelerName)
     if CA.SV.MiscTrade then printToChat ("Trade canceled.") end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
@@ -1837,7 +1839,7 @@ function CA.TradeCancel (eventCode, cancelerName)
     TradeInvitee = ""
 end
 
-function CA.TradeFail (eventCode, cancelerName)
+function CA.TradeFail(eventCode, cancelerName)
     if CA.SV.MiscTrade then printToChat ("Trade failed.") end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
@@ -1846,7 +1848,7 @@ function CA.TradeFail (eventCode, cancelerName)
 end
 
 -- Sends results of the trade to the Item Log print function and clears variables so they are reset for next trade interactions
-function CA.OnTradeSuccess (eventCode)
+function CA.OnTradeSuccess(eventCode)
     combostring = ""
 
     if CA.SV.MiscTrade and not CA.SV.GoldChange then printToChat ("Trade complete.") end
@@ -1896,14 +1898,14 @@ local g_CraftStacks = {}
 local g_MailStacks = {}
 local g_MailStacksOut = {}
 
-function CA.MailMoneyChanged (eventCode, moneyAmount)
+function CA.MailMoneyChanged(eventCode, moneyAmount)
     mailMoney = moneyAmount
     mailCOD = 0
     postageAmount = GetQueuedMailPostage()
 
 end
 
-function CA.MailCODChanged (eventCode, codAmount)
+function CA.MailCODChanged(eventCode, codAmount)
     mailCOD = codAmount
     mailMoney = 0
     postageAmount = GetQueuedMailPostage()
@@ -1950,12 +1952,14 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
 end
 
 function PrintMailAttachmentsIfNoGold()
-    if CA.SV.MiscMail and MailStringPart1 ~= "" then printToChat(strfmt("%s.",MailStringPart1) ) end
+    if CA.SV.MiscMail and MailStringPart1 ~= "" then
+        printToChat(strfmt("%s.",MailStringPart1) )
+    end
     MailStringPart1 = "" -- Important to clear this string, if we took a mail with only items attached, we don't want the next mail with gold to falsely show that attachments were taken!
 end
 
 
-function CA.OnMailAttach (eventCode, attachmentSlot)
+function CA.OnMailAttach(eventCode, attachmentSlot)
     -- d(attachmentSlot) -- Debug
     postageAmount = GetQueuedMailPostage()
     local mailIndex = attachmentSlot
@@ -1965,18 +1969,18 @@ function CA.OnMailAttach (eventCode, attachmentSlot)
 end
 
 -- Removes items from index if they are removed from the trade
-function CA.OnMailAttachRemove (eventCode, attachmentSlot)
+function CA.OnMailAttachRemove(eventCode, attachmentSlot)
     postageAmount = GetQueuedMailPostage()
     local mailIndex = attachmentSlot
     g_MailStacksOut[mailIndex] = nil
 end
 
 -- Cleanup if a Trade is canceled/exited
-function CA.OnMailCloseBox (eventCode)
+function CA.OnMailCloseBox(eventCode)
     g_MailStacksOut = {}
 end
 
-function CA.OnMailFail (eventCode, reason)
+function CA.OnMailFail(eventCode, reason)
     if CA.SV.MiscMail then
         if reason == 2 then printToChat ("Cannot send mail: Unknown Player.") end
         if reason == 3 then printToChat ("Cannot send mail: Recipient's Inbox is full.") end
@@ -1996,7 +2000,7 @@ function CA.MailClearVariables()
 end
 
 -- Sends results of the trade to the Item Log print function and clears variables so they are reset for next trade interactions
-function CA.OnMailSuccess (eventCode)
+function CA.OnMailSuccess(eventCode)
     combostring = ""
     local latency = GetLatency()
     latency = latency + 50
@@ -2064,7 +2068,7 @@ local WeLeveled = 0
 local Crossover = 0
 local QuestCombiner = 0 -- When this is > 1, if quest XP is gained with Reason 1, this will merge a Reason 2 value that follows it if present. Allows us to merge the message for XP gain from quest turnins that also complete a POI into one printout.
 
-function CA.OnLevelUpdate (eventCode, unitTag, level)
+function CA.OnLevelUpdate(eventCode, unitTag, level)
     if unitTag == ('player') then
 
         CA.LevelUpdateHelper()
@@ -2090,7 +2094,7 @@ function CA.OnLevelUpdate (eventCode, unitTag, level)
 end
 
 
-function CA.OnExperienceGain( eventCode, reason, level, previousExperience, currentExperience, championPoints )
+function CA.OnExperienceGain(eventCode, reason, level, previousExperience, currentExperience, championPoints)
     -- d("Experience Gain) previousExperience: " .. previousExperience .. " --- " .. "currentExperience: " .. currentExperience)
     local levelhelper = 0 -- Gives us the correct value of XP to use toward the next level when calculating progress after a level up
 
@@ -2446,7 +2450,7 @@ function CA.FenceHelper()
 end
 
 -- Only active if destroyed items is enabled, flags the next time that is removed from inventory as destroyed.
-function CA.DestroyItem (eventCode, itemSoundCategory)
+function CA.DestroyItem(eventCode, itemSoundCategory)
     ItemWasDestroyed = true
 end
 
