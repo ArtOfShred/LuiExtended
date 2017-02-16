@@ -642,9 +642,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
 
     if not mailHelper then
-        if CA.SV.TotalGoldChange == true and CA.SV.CurrencyIcons == false then
+        if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
             total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. currentMoney ) or ''
-        elseif CA.SV.TotalGoldChange == true and CA.SV.CurrencyIcons == true then
+        elseif CA.SV.TotalGoldChange and CA.SV.CurrencyIcons then
             total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. currentMoney )
         else
             total = ''
@@ -690,9 +690,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             totalWithoutPostage = CommaValue ( oldMoney )
         end
 
-        if CA.SV.TotalGoldChange == true and CA.SV.CurrencyIcons == false then
+        if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
             total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. currentMoney ) or ''
-        elseif CA.SV.TotalGoldChange == true and CA.SV.CurrencyIcons == true then
+        elseif CA.SV.TotalGoldChange and CA.SV.CurrencyIcons then
             total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. currentMoney )
         else
             total = ''
@@ -711,9 +711,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         if postageAmount ~= 0 then
             local postagesyntax = CA.SV.CurrencyIcons and ( " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. postageAmount .. formathelper .. CA.SV.GoldName .. plural .. "|r") or ( " |r" .. changetype .. postage .. CA.SV.GoldName .. plural .. "|r")
                 -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
-            if CA.SV.TotalGoldChange == true and CA.SV.CurrencyIcons == false then
+            if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
                 total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. totalWithoutPostage ) or ''
-            elseif CA.SV.TotalGoldChange == true and CA.SV.CurrencyIcons == true then
+            elseif CA.SV.TotalGoldChange and CA.SV.CurrencyIcons then
                 total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. totalWithoutPostage )
             else
                 total = ''
@@ -735,8 +735,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     postageAmount = 0
     mailMoney = 0
     mailCOD = 0
-    if MailCurrencyCheck == false then zo_callLater(CA.MailClearVariables, 500) end
-
+    if not MailCurrencyCheck then
+        zo_callLater(CA.MailClearVariables, 500)
+    end
 end
 
 -- Alliance Point Change Announcements
@@ -980,9 +981,9 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
     -- Determines syntax based on whether icon is displayed or not, we use "ICON - TEL VAR CHANGE AMOUNT" if so, and "TEL VAR CHANGE AMOUNT - TEL VAR" if not
     local syntax = CA.SV.CurrencyIcons and ( " |r|c66a8ff|t16:16:/esoui/art/currency/currency_telvar.dds|t " .. changetype .. formathelper .. CA.SV.TelVarStoneName .. plural .. "|r" ) or ( " |r|c66a8ff" .. changetype .. formathelper .. CA.SV.TelVarStoneName .. plural .. "|r" )
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
-    if CA.SV.TotalTelVarStoneChange == true and CA.SV.CurrencyIcons == false then
+    if CA.SV.TotalTelVarStoneChange and not CA.SV.CurrencyIcons then
         total = CA.SV.TotalTelVarStoneChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |c66a8ff" .. currentTelvar ) or ''
-    elseif CA.SV.TotalTelVarStoneChange == true and CA.SV.CurrencyIcons == true then
+    elseif CA.SV.TotalTelVarStoneChange and CA.SV.CurrencyIcons then
         total = CA.SV.TotalTelVarStoneChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |c66a8ff|t16:16:/esoui/art/currency/currency_telvar.dds|t " .. currentTelvar )
     else
         total = ''
@@ -1102,9 +1103,9 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
     -- Determines syntax based on whether icon is displayed or not, we use "ICON - WRIT VOUCHER CHANGE AMOUNT" if so, and "WRIT VOUCHER CHANGE AMOUNT - WRIT VOUCHER" if not
     local syntax = CA.SV.CurrencyIcons and ( " |r|cffffff|t16:16:/esoui/art/currency/currency_writvoucher.dds|t " .. changetype .. formathelper .. CA.SV.WritVoucherName .. plural .. "|r") or ( " |r|cffffff" .. changetype .. formathelper .. CA.SV.WritVoucherName .. plural .. "|r" )
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
-    if CA.SV.TotalWritVoucherChange == true and CA.SV.CurrencyIcons == false then
+    if CA.SV.TotalWritVoucherChange and not CA.SV.CurrencyIcons then
         total = CA.SV.TotalWritVoucherChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |cffffff" .. currentWritVouchers ) or ''
-    elseif CA.SV.TotalWritVoucherChange == true and CA.SV.CurrencyIcons == true then
+    elseif CA.SV.TotalWritVoucherChange and CA.SV.CurrencyIcons then
         total = CA.SV.TotalWritVoucherChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |cffffff|t16:16:/esoui/art/currency/currency_writvoucher.dds|t " .. currentWritVouchers )
     else
         total = ''
@@ -2021,7 +2022,9 @@ function CA.OnMailSuccess (eventCode)
 end
 
 function CA.FunctionMailCurrencyCheck()
-    if MailCurrencyCheck == true then printToChat "Mail sent!" end
+    if MailCurrencyCheck then
+        printToChat("Mail sent!")
+    end
 end
 
 function CA.RegisterXPEvents()
