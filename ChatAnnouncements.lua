@@ -640,9 +640,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
 
     -- Determines syntax based on whether icon is displayed or not, we use "ICON - GOLD CHANGE AMOUNT" if so, and "GOLD CHANGE AMOUNT - GOLD" if not
     if CA.SV.CurrencyIcons then
-        syntax = strformat(" |r|t16:16:/esoui/art/currency/currency_gold.dds|t <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.GoldName, plural)
+        syntax = strformat(" |r|t16:16:/esoui/art/currency/currency_gold.dds|t |cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.GoldName, plural)
     else
-        syntax = strformat(" |r<<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.GoldName, plural)
+        syntax = strformat(" |r|cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.GoldName, plural)
     end
 
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
