@@ -638,7 +638,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     end
 
     -- Determines syntax based on whether icon is displayed or not, we use "ICON - GOLD CHANGE AMOUNT" if so, and "GOLD CHANGE AMOUNT - GOLD" if not
-    local syntax = CA.SV.CurrencyIcons and ( " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. changetype .. formathelper .. CA.SV.GoldName .. plural .. "|r") or ( " |r" .. changetype .. formathelper .. CA.SV.GoldName .. plural .. "|r")
+    local syntax = CA.SV.CurrencyIcons and (" |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. changetype .. formathelper .. CA.SV.GoldName .. plural) or (" |r" .. changetype .. formathelper .. CA.SV.GoldName .. plural)
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
 
     if not mailHelper then
@@ -651,35 +651,38 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         end
         -- Print a message to chat based off all the values we filled in above
         if CA.SV.GoldChange and CA.SV.LootCurrencyCombo and UpOrDown < 0 and (reason == 1 or reason == 63 or reason == 64) then
-            combostring = ( strfmt ( " → %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+            combostring = ( strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         elseif CA.SV.MiscMail and reason == 2 then
             if not MailStop and MailStringPart1 ~= "" then
-                printToChat (strfmt("%s and gold.", MailStringPart1) )
+                printToChat(strformat("<<1>> and gold.", MailStringPart1))
             elseif not MailStop then
-                printToChat ("Received mail with gold.")
+                printToChat("Received mail with gold.")
             end
-            if CA.SV.GoldChange then printToChat ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) ) end
+            if CA.SV.GoldChange then 
+                printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
+            end
             MailStringPart1 = ""
         elseif CA.SV.GoldChange and CA.SV.LootCurrencyCombo and reason == 28 then
-            combostring = ( strfmt ( " → %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+            combostring = ( strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         elseif CA.SV.GoldChange and reason == 47 then
-            stealstring = ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+            stealstring = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
             local latency = GetLatency()
             latency = latency + 50
             zo_callLater(CA.JusticeStealRemove, latency)
          elseif CA.SV.GoldChange and reason == 57 then
-            stealstring = ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+            stealstring = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) ) 
             zo_callLater(CA.JusticeStealRemove, 100)
         elseif CA.SV.GoldChange and CA.SV.LootCurrencyCombo and UpOrDown > 0 and (reason == 1 or reason == 63 or reason == 64) then
-            combostring = ( strfmt ( " ← %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+            combostring = ( strformat(" ← <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         elseif CA.SV.GoldChange and CA.SV.LootCurrencyCombo and CA.SV.MiscBags and (reason == 8 or reason == 9) then
-            combostring = ( strfmt ( " → %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+            combostring = ( strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         elseif CA.SV.GoldChange and UpOrDown < 0 and reason == 60 then
-            laundergoldstring = ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+            laundergoldstring = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         else
-            if CA.SV.GoldChange then printToChat ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) ) end
+            if CA.SV.GoldChange then
+                printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
+            end
         end
-        --end
     else
         MailCurrencyCheck = false
         local valuesent = ""
@@ -698,15 +701,15 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             total = ''
         end
 
-        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and not CA.SV.GoldChange then printToChat (strfmt("COD Payment of %s gold sent!", changetype) ) end
-        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and CA.SV.GoldChange then printToChat ("COD Payment sent!") end
-        if CA.SV.MiscMail and mailCOD == 0 and mailMoney == 0 and postageAmount >= 1 then printToChat ("Mail sent!") end
-        if CA.SV.MiscMail and mailMoney ~= 0 and not CA.SV.GoldChange then printToChat (strfmt("Mail sent with %s gold!", mailMoney) ) end
-        if CA.SV.MiscMail and mailMoney ~= 0 and CA.SV.GoldChange then printToChat ("Mail sent!") end
-        if CA.SV.MiscMail and mailCOD ~= 0 and not CA.SV.GoldChange  then printToChat (strfmt("COD sent for %s gold!", mailCOD) ) end
-        if CA.SV.MiscMail and mailCOD ~= 0 and CA.SV.GoldChange then printToChat ("COD sent!") end
+        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and not CA.SV.GoldChange then printToChat(strformat("COD Payment of <<1>> gold sent!", changetype)) end
+        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and CA.SV.GoldChange then printToChat("COD Payment sent!") end
+        if CA.SV.MiscMail and mailCOD == 0 and mailMoney == 0 and postageAmount >= 1 then printToChat("Mail sent!") end
+        if CA.SV.MiscMail and mailMoney ~= 0 and not CA.SV.GoldChange then printToChat (strformat("Mail sent with <<1>> gold!", mailMoney) ) end
+        if CA.SV.MiscMail and mailMoney ~= 0 and CA.SV.GoldChange then printToChat("Mail sent!") end
+        if CA.SV.MiscMail and mailCOD ~= 0 and not CA.SV.GoldChange  then printToChat(strformat("COD sent for <<1>> gold!", mailCOD) ) end
+        if CA.SV.MiscMail and mailCOD ~= 0 and CA.SV.GoldChange then printToChat("COD sent!") end
 
-        valuesent = ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+        valuesent = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
 
         if postageAmount ~= 0 then
             local postagesyntax = CA.SV.CurrencyIcons and ( " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. postageAmount .. formathelper .. CA.SV.GoldName .. plural .. "|r") or ( " |r" .. changetype .. postage .. CA.SV.GoldName .. plural .. "|r")
@@ -723,7 +726,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             else
                 message = ( "Postage" )
             end
-            if CA.SV.GoldChange then printToChat ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, postagesyntax, total ) ) end
+            if CA.SV.GoldChange then
+                printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, postagesyntax, total))
+            end
         end
 
         if CA.SV.GoldChange and mailMoney ~= 0 then printToChat (valuesent) end
