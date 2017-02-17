@@ -347,10 +347,10 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, memberDisplayName)
     local msg = nil
     if reason == GROUP_LEAVE_REASON_VOLUNTARY then
-        msg = g_playerName == memberName and "You have left the group." or "%s|r has left the group."
+        msg = g_playerName == memberName and "You have left the group." or "<<1>> has left the group."
     elseif reason == GROUP_LEAVE_REASON_KICKED then
         -- msg = g_playerName == memberName and 'You were kicked from the group.' or '|cFEFEFE%s|r was kicked from your group.' -- Don't want to have to fetch this color code again if I need it.
-        msg = g_playerName == memberName and "You have been removed from the group." or "%s|r has been removed from the group."
+        msg = g_playerName == memberName and "You have been removed from the group." or "<<1>> has been removed from the group."
     elseif reason == GROUP_LEAVE_REASON_DISBAND and g_playerName == memberName then
         msg = "The group has been disbanded."
     end
