@@ -102,11 +102,11 @@ GroupJoinFudger = false -- Controls message for group join
 
 function CA.Initialize()
     -- Load settings
-    CA.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, 'ChatAnnouncements', CA.D )
+    CA.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "ChatAnnouncements", CA.D )
 
     -- Read current player toon name
-    g_playerName = GetRawUnitName('player')
-    g_playerNameFormatted = strformat(SI_UNIT_NAME, GetUnitName('player'))
+    g_playerName = GetRawUnitName("player")
+    g_playerNameFormatted = strformat(SI_UNIT_NAME, GetUnitName("player"))
 
     -- Register events
     CA.RegisterGroupEvents()
@@ -256,9 +256,9 @@ function CA.OnGroupInviteReceived(eventCode, inviterName, inviterDisplayName)
     local displayBothString = ( strformat("<<1>><<2>>", inviterName, inviterDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
 
-    if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("<<1>> has invited you to join a group.", displayNameLink) ) end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("<<1>> has invited you to join a group.", characterNameLink) ) end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("<<1>> has invited you to join a group.", displayBoth) ) end
+    if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r has invited you to join a group.", displayNameLink)) end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r has invited you to join a group.", characterNameLink)) end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r has invited you to join a group.", displayBoth)) end
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED) -- On receiving a group invite, it fires 2 events, we disable the event handler temporarily for this then recall it after.
     zo_callLater(CA.RefreshGroupInviteEnable, 100)
 end
@@ -292,9 +292,9 @@ function CA.OnGroupLeaderUpdate(eventCode, leaderTag)
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, groupLeaderAccount)
 
     if g_playerNameFormatted ~= groupLeaderName then -- If another player became the leader
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("<<1>> is now the group leader!", displayNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("<<1>> is now the group leader!", characterNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("<<1>> is now the group leader!", displayBoth) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r is now the group leader!", displayNameLink)) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r is now the group leader!", characterNameLink)) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r is now the group leader!", displayBoth)) end
     elseif g_playerNameFormatted == groupLeaderName then -- If the player character became the leader
         printToChat("You are now the group leader!")
     end
@@ -329,9 +329,9 @@ function CA.OnGroupMemberJoined(eventCode, memberName)
         local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(joinedMemberAccountName)
         local displayBothString = ( strformat("<<1>><<2>>", joinedMemberName, joinedMemberAccountName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, joinedMemberAccountName)
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("<<1>> has joined the group.", displayNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("<<1>> has joined the group.", characterNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("<<1>> has joined the group.", displayBoth) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r has joined the group.", displayNameLink)) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r has joined the group.", characterNameLink)) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r has joined the group.", displayBoth)) end
     elseif g_playerName == memberName then
         printToChat("You have joined a group.") -- Only prints on the initial group form between 2 players.
     end
@@ -347,10 +347,9 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, memberDisplayName)
     local msg = nil
     if reason == GROUP_LEAVE_REASON_VOLUNTARY then
-        msg = g_playerName == memberName and "You have left the group." or "%s|r has left the group."
+        msg = g_playerName == memberName and "You have left the group." or "|cFEFEFE<<1>>|r has left the group."
     elseif reason == GROUP_LEAVE_REASON_KICKED then
-        -- msg = g_playerName == memberName and 'You were kicked from the group.' or '|cFEFEFE%s|r was kicked from your group.' -- Don't want to have to fetch this color code again if I need it.
-        msg = g_playerName == memberName and "You have been removed from the group." or "%s|r has been removed from the group."
+        msg = g_playerName == memberName and "You have been removed from the group." or "|cFEFEFE<<1>>|r has been removed from the group."
     elseif reason == GROUP_LEAVE_REASON_DISBAND and g_playerName == memberName then
         msg = "The group has been disbanded."
     end
@@ -402,6 +401,7 @@ end
 function CA.FormatMessage(msg, doTimestamp)
     local msg = msg or ""
     if doTimestamp then
+        -- Color Code to match pChat default
         msg = "|c8F8F8F[" .. CreateTimestamp(GetTimeString()) .. "]|r " .. msg
     end
     return msg
@@ -500,7 +500,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     ]]--
 
     local UpOrDown     = newMoney - oldMoney
-    local currentMoney = CommaValue ( GetCurrentMoney() )
+    local currentMoney = CommaValue(GetCurrentMoney())
     local color        = ""
     local changetype   = ""
     local message      = ""
@@ -509,6 +509,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     local formathelper = " "
     local bracket1     = ""
     local bracket2     = ""
+    local syntax       = ""
     local mailHelper   = false
 
     if CA.SV.CurrencyBracketDisplayOptions == 1 then
@@ -568,7 +569,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     elseif reason == 3 and UpOrDown > 0 then message = ( "Traded" )
     elseif reason == 3 and UpOrDown < 0 then message = ( "Traded" )
 
-    if reason == 3 and CA.SV.MiscTrade then printToChat ("Trade complete.") end
+    if reason == 3 and CA.SV.MiscTrade then printToChat("Trade complete.") end
 
     -- Receive from Quest Reward (4), Sell to Fence (63)
     elseif reason == 4 or reason == 63 then message = ( "Received" )
@@ -638,48 +639,55 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     end
 
     -- Determines syntax based on whether icon is displayed or not, we use "ICON - GOLD CHANGE AMOUNT" if so, and "GOLD CHANGE AMOUNT - GOLD" if not
-    local syntax = CA.SV.CurrencyIcons and ( " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. changetype .. formathelper .. CA.SV.GoldName .. plural .. "|r") or ( " |r" .. changetype .. formathelper .. CA.SV.GoldName .. plural .. "|r")
-    -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
+    if CA.SV.CurrencyIcons then
+        syntax = strformat(" |r|t16:16:/esoui/art/currency/currency_gold.dds|t |cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.GoldName, plural)
+    else
+        syntax = strformat(" |r|cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.GoldName, plural)
+    end
 
+    -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if not mailHelper then
         if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. currentMoney ) or ''
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|cFEFEFE" .. currentMoney .. "|r" ) or ""
         elseif CA.SV.TotalGoldChange and CA.SV.CurrencyIcons then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. currentMoney )
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t |cFEFEFE" .. currentMoney .. "|r" )
         else
-            total = ''
+            total = ""
         end
         -- Print a message to chat based off all the values we filled in above
         if CA.SV.GoldChange and CA.SV.LootCurrencyCombo and UpOrDown < 0 and (reason == 1 or reason == 63 or reason == 64) then
-            combostring = ( strfmt ( " → %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+            combostring = ( strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         elseif CA.SV.MiscMail and reason == 2 then
             if not MailStop and MailStringPart1 ~= "" then
-                printToChat (strfmt("%s and gold.", MailStringPart1) )
+                printToChat(strformat("<<1>> and gold.", MailStringPart1))
             elseif not MailStop then
-                printToChat ("Received mail with gold.")
+                printToChat("Received mail with gold.")
             end
-            if CA.SV.GoldChange then printToChat ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) ) end
+            if CA.SV.GoldChange then
+                printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
+            end
             MailStringPart1 = ""
         elseif CA.SV.GoldChange and CA.SV.LootCurrencyCombo and reason == 28 then
-            combostring = ( strfmt ( " → %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+            combostring = ( strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         elseif CA.SV.GoldChange and reason == 47 then
-            stealstring = ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+            stealstring = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
             local latency = GetLatency()
             latency = latency + 50
             zo_callLater(CA.JusticeStealRemove, latency)
          elseif CA.SV.GoldChange and reason == 57 then
-            stealstring = ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+            stealstring = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
             zo_callLater(CA.JusticeStealRemove, 100)
         elseif CA.SV.GoldChange and CA.SV.LootCurrencyCombo and UpOrDown > 0 and (reason == 1 or reason == 63 or reason == 64) then
-            combostring = ( strfmt ( " ← %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+            combostring = ( strformat(" ← <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         elseif CA.SV.GoldChange and CA.SV.LootCurrencyCombo and CA.SV.MiscBags and (reason == 8 or reason == 9) then
-            combostring = ( strfmt ( " → %s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+            combostring = ( strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         elseif CA.SV.GoldChange and UpOrDown < 0 and reason == 60 then
-            laundergoldstring = ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+            laundergoldstring = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         else
-            if CA.SV.GoldChange then printToChat ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) ) end
+            if CA.SV.GoldChange then
+                printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
+            end
         end
-        --end
     else
         MailCurrencyCheck = false
         local valuesent = ""
@@ -691,43 +699,45 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         end
 
         if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. currentMoney ) or ''
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|cFEFEFE" .. currentMoney .. "|r" ) or ""
         elseif CA.SV.TotalGoldChange and CA.SV.CurrencyIcons then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. currentMoney )
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t |cFEFEFE" .. currentMoney .. "|r" )
         else
-            total = ''
+            total = ""
         end
 
-        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and not CA.SV.GoldChange then printToChat (strfmt("COD Payment of %s gold sent!", changetype) ) end
-        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and CA.SV.GoldChange then printToChat ("COD Payment sent!") end
-        if CA.SV.MiscMail and mailCOD == 0 and mailMoney == 0 and postageAmount >= 1 then printToChat ("Mail sent!") end
-        if CA.SV.MiscMail and mailMoney ~= 0 and not CA.SV.GoldChange then printToChat (strfmt("Mail sent with %s gold!", mailMoney) ) end
-        if CA.SV.MiscMail and mailMoney ~= 0 and CA.SV.GoldChange then printToChat ("Mail sent!") end
-        if CA.SV.MiscMail and mailCOD ~= 0 and not CA.SV.GoldChange  then printToChat (strfmt("COD sent for %s gold!", mailCOD) ) end
-        if CA.SV.MiscMail and mailCOD ~= 0 and CA.SV.GoldChange then printToChat ("COD sent!") end
+        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and not CA.SV.GoldChange then printToChat(strformat("COD Payment of <<1>> gold sent!", changetype)) end
+        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and CA.SV.GoldChange then printToChat("COD Payment sent!") end
+        if CA.SV.MiscMail and mailCOD == 0 and mailMoney == 0 and postageAmount >= 1 then printToChat("Mail sent!") end
+        if CA.SV.MiscMail and mailMoney ~= 0 and not CA.SV.GoldChange then printToChat (strformat("Mail sent with <<1>> gold!", mailMoney) ) end
+        if CA.SV.MiscMail and mailMoney ~= 0 and CA.SV.GoldChange then printToChat("Mail sent!") end
+        if CA.SV.MiscMail and mailCOD ~= 0 and not CA.SV.GoldChange  then printToChat(strformat("COD sent for <<1>> gold!", mailCOD) ) end
+        if CA.SV.MiscMail and mailCOD ~= 0 and CA.SV.GoldChange then printToChat("COD sent!") end
 
-        valuesent = ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, syntax, total ) )
+        valuesent = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
 
         if postageAmount ~= 0 then
-            local postagesyntax = CA.SV.CurrencyIcons and ( " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. postageAmount .. formathelper .. CA.SV.GoldName .. plural .. "|r") or ( " |r" .. changetype .. postage .. CA.SV.GoldName .. plural .. "|r")
+            local postagesyntax = CA.SV.CurrencyIcons and ( " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. postageAmount .. formathelper .. CA.SV.GoldName .. plural) or ( " |r" .. changetype .. postage .. CA.SV.GoldName .. plural)
                 -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
             if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
-                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. totalWithoutPostage ) or ''
+                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|cFEFEFE" .. totalWithoutPostage .. "|r" ) or ""
             elseif CA.SV.TotalGoldChange and CA.SV.CurrencyIcons then
-                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. totalWithoutPostage )
+                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t |cFEFEFE" .. totalWithoutPostage .. "|r" )
             else
-                total = ''
+                total = ""
             end
             if CA.SV.CurrencyContextToggle then -- Override with custom string if enabled
                 message = ( CA.SV.CurrencyContextMessageDown )
             else
                 message = ( "Postage" )
             end
-            if CA.SV.GoldChange then printToChat ( strfmt ( "%s%s%s%s%s%s|r", color, bracket1, message, bracket2, postagesyntax, total ) ) end
+            if CA.SV.GoldChange then
+                printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, postagesyntax, total))
+            end
         end
 
-        if CA.SV.GoldChange and mailMoney ~= 0 then printToChat (valuesent) end
-        if CA.SV.GoldChange and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 then printToChat (valuesent) end -- All these values will be zero for a COD payment sent, since none of them are updated.
+        if CA.SV.GoldChange and mailMoney ~= 0 then printToChat(valuesent) end
+        if CA.SV.GoldChange and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 then printToChat(valuesent) end -- All these values will be zero for a COD payment sent, since none of them are updated.
 
     end
 
@@ -753,6 +763,7 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
     local formathelper = " "
     local bracket1     = ""
     local bracket2     = ""
+    local syntax       = ""
 
     if CA.SV.CurrencyBracketDisplayOptions == 1 then
         bracket1 = "["
@@ -800,15 +811,20 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
         end
     end
 
-    -- Determines syntax based on whether icon is displayed or not, we use "ICON - ALLIANCE POINT CHANGE AMOUNT" if so, and "ALLIANCE POINT CHANGE AMOUNT - ALLIANCE POINT" if not
-    local syntax = CA.SV.CurrencyIcons and ( " |r|c20e713|t16:16:/esoui/art/currency/alliancepoints.dds|t " .. changetype .. formathelper .. CA.SV.AlliancePointName .. plural .. "|r" ) or ( " |r|c20e713" .. changetype .. formathelper .. CA.SV.AlliancePointName .. plural .. "|r" )
+    -- Determines syntax based on whether icon is displayed or not
+    if CA.SV.CurrencyIcons then
+        syntax = strformat(" |r|t16:16:/esoui/art/currency/alliancepoints.dds|t |cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.AlliancePointName, plural)
+    else
+        syntax = strformat(" |r|cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.AlliancePointName, plural)
+    end
+
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if CA.SV.TotalAlliancePointChange and not CA.SV.CurrencyIcons then
-        total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |c20e713" .. CommaValue (alliancePoints) ) or ''
+        total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. "|r |cFEFEFE" .. CommaValue(alliancePoints) .. "|r" ) or ""
     elseif CA.SV.TotalAlliancePointChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |c20e713|t16:16:/esoui/art/currency/alliancepoints.dds|t " .. CommaValue (alliancePoints) )
+        total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. "|r |t16:16:/esoui/art/currency/alliancepoints.dds|t |cFEFEFE" .. CommaValue(alliancePoints) .. "|r" )
     else
-        total = ''
+        total = ""
     end
 
     -- ==============================================================================
@@ -868,16 +884,17 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
     67 = Death (Player Dies)
     ]]--
 
-    local UpOrDown = newTelvarStones - oldTelvarStones
-    local currentTelvar = CommaValue (newTelvarStones)
-    local color = ""
-    local changetype = ""
-    local message = ""
-    local total = ""
-    local plural = "s"
-    local formathelper = " "
-    local bracket1 = ""
-    local bracket2 = ""
+    local UpOrDown      = newTelvarStones - oldTelvarStones
+    local currentTelvar = CommaValue(newTelvarStones)
+    local color         = ""
+    local changetype    = ""
+    local message       = ""
+    local total         = ""
+    local plural        = "s"
+    local formathelper  = " "
+    local bracket1      = ""
+    local bracket2      = ""
+    local syntax        = ""
 
     if CA.SV.CurrencyBracketDisplayOptions == 1 then
         bracket1 = "["
@@ -978,15 +995,20 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
         end
     end
 
-    -- Determines syntax based on whether icon is displayed or not, we use "ICON - TEL VAR CHANGE AMOUNT" if so, and "TEL VAR CHANGE AMOUNT - TEL VAR" if not
-    local syntax = CA.SV.CurrencyIcons and ( " |r|c66a8ff|t16:16:/esoui/art/currency/currency_telvar.dds|t " .. changetype .. formathelper .. CA.SV.TelVarStoneName .. plural .. "|r" ) or ( " |r|c66a8ff" .. changetype .. formathelper .. CA.SV.TelVarStoneName .. plural .. "|r" )
+    -- Determines syntax based on whether icon is displayed or not
+    if CA.SV.CurrencyIcons then
+        syntax = strformat(" |r|t16:16:/esoui/art/currency/currency_telvar.dds|t |cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.TelVarStoneName, plural)
+    else
+        syntax = strformat(" |r|cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.TelVarStoneName, plural)
+    end
+
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if CA.SV.TotalTelVarStoneChange and not CA.SV.CurrencyIcons then
-        total = CA.SV.TotalTelVarStoneChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |c66a8ff" .. currentTelvar ) or ''
+        total = CA.SV.TotalTelVarStoneChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|cFEFEFE" .. currentTelvar .. "|r" ) or ""
     elseif CA.SV.TotalTelVarStoneChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalTelVarStoneChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |c66a8ff|t16:16:/esoui/art/currency/currency_telvar.dds|t " .. currentTelvar )
+        total = CA.SV.TotalTelVarStoneChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_telvar.dds|t |cFEFEFE" .. currentTelvar .. "|r" )
     else
-        total = ''
+        total = ""
     end
 
     -- Print a message to chat based off all the values we filled in above
@@ -1005,16 +1027,17 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
 
     combostring = ""
 
-    local UpOrDown = newWritVouchers - oldWritVouchers
+    local UpOrDown            = newWritVouchers - oldWritVouchers
     local currentWritVouchers = CommaValue (newWritVouchers)
-    local color = ""
-    local changetype = ""
-    local message = ""
-    local total = ""
-    local plural = "s"
-    local formathelper = " "
-    local bracket1 = ""
-    local bracket2 = ""
+    local color               = ""
+    local changetype          = ""
+    local message             = ""
+    local total               = ""
+    local plural              = "s"
+    local formathelper        = " "
+    local bracket1            = ""
+    local bracket2            = ""
+    local syntax              = ""
 
     if CA.SV.CurrencyBracketDisplayOptions == 1 then
         bracket1 = "["
@@ -1100,15 +1123,20 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
         end
     end
 
-    -- Determines syntax based on whether icon is displayed or not, we use "ICON - WRIT VOUCHER CHANGE AMOUNT" if so, and "WRIT VOUCHER CHANGE AMOUNT - WRIT VOUCHER" if not
-    local syntax = CA.SV.CurrencyIcons and ( " |r|cffffff|t16:16:/esoui/art/currency/currency_writvoucher.dds|t " .. changetype .. formathelper .. CA.SV.WritVoucherName .. plural .. "|r") or ( " |r|cffffff" .. changetype .. formathelper .. CA.SV.WritVoucherName .. plural .. "|r" )
+    -- Determines syntax based on whether icon is displayed or not
+    if CA.SV.CurrencyIcons then
+        syntax = strformat(" |r|t16:16:/esoui/art/currency/currency_writvoucher.dds|t |cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.WritVoucherName, plural)
+    else
+        syntax = strformat(" |r|cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.WritVoucherName, plural)
+    end
+
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if CA.SV.TotalWritVoucherChange and not CA.SV.CurrencyIcons then
-        total = CA.SV.TotalWritVoucherChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |cffffff" .. currentWritVouchers ) or ''
+        total = CA.SV.TotalWritVoucherChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|cFEFEFE" .. currentWritVouchers .. "|r" ) or ""
     elseif CA.SV.TotalWritVoucherChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalWritVoucherChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |cffffff|t16:16:/esoui/art/currency/currency_writvoucher.dds|t " .. currentWritVouchers )
+        total = CA.SV.TotalWritVoucherChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_writvoucher.dds|t |cFEFEFE" .. currentWritVouchers .. "|r" )
     else
-        total = ''
+        total = ""
     end
 
     -- Print a message to chat based off all the values we filled in above
@@ -1293,18 +1321,18 @@ end
 
 function CA.RegisterGuildEvents()
     if CA.SV.MiscGuild then
-        printToChat ("Guild Events Registered jot jot jort!")
+        printToChat("Guild Events Registered jot jot jort!")
     end
 end
 
 --------------------------------------------------------------
 
 function CA.MiscAlertLockFailed(eventCode)
-    printToChat ("Lockpick failed, you're fucking terrible!!")
+    printToChat("Lockpick failed, you're fucking terrible!!")
 end
 
 function CA.MiscAlertLockSuccess(eventCode)
-    printToChat ("Lockpick successful!")
+    printToChat("Lockpick successful!")
 end
 
 function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source)
@@ -1340,7 +1368,7 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
         if ridingSkillType == 1 and source == 1 then skillstring = "[Riding Speed Upgrade]"
         elseif ridingSkillType == 2 and source == 1  then skillstring = "[Riding Capacity Upgrade]"
         elseif ridingSkillType == 3 and source == 1  then skillstring = "[Riding Stamina Upgrade]"
-        elseif ridingSkillType == 1 and source == 2 then skillstring = "|H1:item:64700:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+        elseif ridingSkillType == 1 and source == 2  then skillstring = "|H1:item:64700:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
         elseif ridingSkillType == 2 and source == 2  then skillstring = "|H1:item:64702:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
         elseif ridingSkillType == 3 and source == 2  then skillstring = "|H1:item:64701:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
         end
@@ -1474,7 +1502,7 @@ function CA.OnBuybackItem(eventCode, itemName, quantity, money, itemSound)
     local itemIcon,_,_,_,_ = GetItemLinkInfo(itemName)
     icon = itemIcon
 
-    icon = ( CA.SV.LootIcons and icon and icon ~= '' ) and ('|t16:16:' .. icon .. '|t ') or ''
+    icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
 
     local logPrefix = "Buyback"
     if CA.SV.ItemContextToggle then
@@ -1493,7 +1521,7 @@ function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCu
     local itemIcon,_,_,_,_ = GetItemLinkInfo(itemName)
     icon = itemIcon
 
-    icon = ( CA.SV.LootIcons and icon and icon ~= '' ) and ('|t16:16:' .. icon .. '|t ') or ''
+    icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
 
     local logPrefix = "Purchased"
     if CA.SV.ItemContextToggle then
@@ -1512,7 +1540,7 @@ function CA.OnSellItem(eventCode, itemName, quantity, money)
     local itemIcon,_,_,_,_ = GetItemLinkInfo(itemName)
     icon = itemIcon
 
-    icon = ( CA.SV.LootIcons and icon and icon ~= '' ) and ('|t16:16:' .. icon .. '|t ') or ''
+    icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
 
     local logPrefix = "Sold"
     if CA.SV.ItemContextToggle then
@@ -1544,7 +1572,7 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
         icon = itemIcon
     end
     -- Create Icon string if icon exists and corresponding setting is ON
-    icon = ( CA.SV.LootIcons and icon and icon ~= '' ) and ('|t16:16:' .. icon .. '|t ') or ''
+    icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
 
     local itemType, specializedItemType = GetItemLinkItemType(itemName)
     local itemQuality = GetItemLinkQuality(itemName)
@@ -1764,9 +1792,9 @@ function CA.TradeInviteWaiting(eventCode, inviteeCharacterName, inviteeDisplayNa
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviteeDisplayName)
     local displayBothString = ( strfmt("%s%s", gsub(inviteeCharacterName,"%^%a+",""), inviteeDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviteeDisplayName)
-    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then printToChat ("You've invited " .. displayNameLink .. " to trade.") end
-    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 2 then printToChat ("You've invited " .. characterNameLink .. " to trade.") end
-    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then printToChat ("You've invited " .. displayBoth .. " to trade.") end
+    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("You've invited <<1>> to trade.", displayNameLink)) end
+    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("You've invited <<1>> to trade.", characterNameLink)) end
+    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("You've invited <<1>> to trade.", displayBoth)) end
 end
 
 -- These 2 functions help us get the name of the person we are trading with regardless of who initiated the trade
@@ -1776,17 +1804,21 @@ function CA.TradeInviteConsidering(eventCode, inviterCharacterName, inviterDispl
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
     local displayBothString = ( strfmt("%s%s", gsub(inviterCharacterName,"%^%a+",""), inviterDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
-    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then printToChat ( displayNameLink .. " has invited you to trade.") end
-    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 2 then printToChat ( characterNameLink .. " has invited you to trade.") end
-    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then printToChat ( displayBoth .. " has invited you to trade.") end
+    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("<<1>> has invited you to trade.", displayNameLink)) end
+    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("<<1>> has invited you to trade.", characterNameLink)) end
+    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("<<1>> has invited you to trade.", displayBoth)) end
 end
 
 function CA.TradeInviteAccepted(eventCode)
-    if CA.SV.MiscTrade then printToChat ("Trade invite accepted.") end
+    if CA.SV.MiscTrade then
+        printToChat("Trade invite accepted.")
+    end
 end
 
 function CA.TradeInviteDecline(eventCode)
-    if CA.SV.MiscTrade then printToChat ("Trade invite declined.") end
+    if CA.SV.MiscTrade then
+        printToChat("Trade invite declined.")
+    end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
     TradeInviter = ""
@@ -1794,7 +1826,9 @@ function CA.TradeInviteDecline(eventCode)
 end
 
 function CA.TradeInviteCancel(eventCode)
-    if CA.SV.MiscTrade then printToChat ("Trade invite canceled.") end
+    if CA.SV.MiscTrade then
+        printToChat("Trade invite canceled.")
+    end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
     TradeInviter = ""
@@ -1865,7 +1899,7 @@ function CA.OnTradeSuccess(eventCode)
         local receivedBy = tradetarget
         local istrade = true
         local item = g_TradeStacksOut[indexOut]
-        icon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
         --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
         CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss, istrade)
         end
@@ -1877,7 +1911,7 @@ function CA.OnTradeSuccess(eventCode)
         local receivedBy = tradetarget
         local istrade = true
         local item = g_TradeStacksIn[indexIn]
-        icon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
         --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
         CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss, istrade)
         end
@@ -2013,7 +2047,7 @@ function CA.OnMailSuccess(eventCode)
         if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
         local receivedBy = ""
         local item = g_MailStacksOut[mailIndex]
-        icon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
         --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
         CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss)
         end
@@ -2043,7 +2077,7 @@ function CA.RegisterXPEvents()
 end
 
 function CA.LevelUpdateHelper()
-    IsChampion = IsUnitChampion('player')
+    IsChampion = IsUnitChampion("player")
 
     if IsChampion then
         CurrentLevel = GetPlayerChampionPointsEarned()
@@ -2051,7 +2085,7 @@ function CA.LevelUpdateHelper()
         XPLevel = GetNumChampionXPInChampionPoint(CurrentLevel)
         LevelContext = ( "Champion" )
     else
-        CurrentLevel = GetUnitLevel ('player')
+        CurrentLevel = GetUnitLevel ("player")
         XPLevel = GetNumExperiencePointsInLevel(CurrentLevel)
         LevelContext = ( "Level" )
     end
@@ -2069,7 +2103,7 @@ local Crossover = 0
 local QuestCombiner = 0 -- When this is > 1, if quest XP is gained with Reason 1, this will merge a Reason 2 value that follows it if present. Allows us to merge the message for XP gain from quest turnins that also complete a POI into one printout.
 
 function CA.OnLevelUpdate(eventCode, unitTag, level)
-    if unitTag == ('player') then
+    if unitTag == ("player") then
 
         CA.LevelUpdateHelper()
 
@@ -2101,7 +2135,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
     if IsChampion then
         levelhelper = GetPlayerChampionXP()
     else
-        levelhelper = GetUnitXP ('player')
+        levelhelper = GetUnitXP ("player")
     end
 
     -- Determines if we leveled up - Needs to be functioning even if we don't printout progress or current level
@@ -2310,7 +2344,7 @@ function CA.OnAchievementUpdated(eventCode, aId)
                     cmpInfo[i] = strfmt( "%s |c%s%d|c87B7CC/|c71DE73%d", cmpInfo[i][1], AchievementPctToColour(pct), cmpInfo[i][2], cmpInfo[i][3] )
                 end
             end
-            details = ' > ' .. table.concat(cmpInfo, '|c87B7CC, ') .. '|c87B7CC.'
+            details = "" > "" .. table.concat(cmpInfo, "|c87B7CC, ") .. "|c87B7CC."
         end
     end
 
@@ -2320,7 +2354,7 @@ function CA.OnAchievementUpdated(eventCode, aId)
                             AchievementPctToColour(totalCmp/totalReq),
                             math.floor(100*totalCmp/totalReq),
                             catName,
-                            details or '.' )
+                            details or "." )
                 )
 end
 
@@ -2469,14 +2503,14 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
             g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_InventoryStacks[slotId]
-            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local gainorloss = "|c0B610B"
             local logPrefix = "Looted Item"
             -- CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
 
         elseif g_InventoryStacks[slotId] then -- EXISTING ITEM
             local item = g_InventoryStacks[slotId]
-            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
 
             if stackCountChange == 0 then return end -- Means item was modified (enchanted, etc)
 
@@ -2520,7 +2554,7 @@ if bagId == 1 then --
         local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
         g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
         local item = g_InventoryStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
         local gainorloss = "|c0B610B"
         local logPrefix = "Crafted"
         CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
@@ -2530,13 +2564,13 @@ if bagId == 1 then --
         local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
         g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
         local item = g_InventoryStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
         local gainorloss = "|c0B610B"
         local logPrefix = "Upgraded"
         CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
     elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
         local item = g_InventoryStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
 
         if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
            local gainorloss = "|c0B610B"
@@ -2602,7 +2636,7 @@ if bagId == 2 then --
         local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
         g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
         local item = g_BankStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
         local gainorloss = "|c0B610B"
         local logPrefix = "Crafted - Bank"
         CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
@@ -2612,13 +2646,13 @@ if bagId == 2 then --
         local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
         g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
         local item = g_BankStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
         local gainorloss = "|c0B610B"
         local logPrefix = "Upgraded - Bank"
         CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
     elseif g_BankStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
         local item = g_BankStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
 
         if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
            local gainorloss = "|c0B610B"
@@ -2678,7 +2712,7 @@ end
 
         local itemlink = CA.GetItemLinkFromItemId(slotId)
         local icon = GetItemLinkInfo(itemlink)
-        icon = ( CA.SV.LootIcons and icon and icon ~= '' ) and ('|t16:16:' .. icon .. '|t ') or ''
+        icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
         local receivedBy = ""
         local gainorloss = "|c0B610B"
         local logPrefix = "Received - Crafting Bag"
@@ -2713,7 +2747,7 @@ if bagId == 1 then --
         local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
         g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
         local item = g_InventoryStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
         local gainorloss = "|c0B610B"
         local logPrefix = "Withdrew"
         if InventoryOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) InventoryOn = false end
@@ -2722,13 +2756,13 @@ if bagId == 1 then --
         local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
         g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
         local item = g_InventoryStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
         local gainorloss = "|c0B610B"
         local logPrefix = "Upgraded"
         CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) -- Shouldn't need this for anything, but just in case. ]]-- Shouldn't be neccesary
     elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
         local item = g_InventoryStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
 
         if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
            local gainorloss = "|c0B610B"
@@ -2771,7 +2805,7 @@ if bagId == 2 then --
         local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
         g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
         local item = g_BankStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
         local gainorloss = "|ca80700"
         local logPrefix = "Deposited"
         if BankOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) BankOn = false end
@@ -2781,12 +2815,12 @@ if bagId == 2 then --
         local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
         g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
         local item = g_BankStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
         local gainorloss = "|c0B610B"
         local logPrefix = "Upgraded - Bank"]]--
     elseif g_BankStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
         local item = g_BankStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
 
         if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
            local gainorloss = "|ca80700"
@@ -2836,7 +2870,7 @@ if bagId == 1 then --
         local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
         g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
         local item = g_InventoryStacks[slotId]
-        GuildBankCarry_icon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        GuildBankCarry_icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
         GuildBankCarry_gainorloss = "|c0B610B"
         GuildBankCarry_logPrefix = "Withdrew"
         GuildBankCarry_receivedBy = ""
@@ -2847,13 +2881,13 @@ if bagId == 1 then --
         local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
         g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
         local item = g_InventoryStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
         local gainorloss = "|c0B610B"
         local logPrefix = "Upgraded"
         CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) -- Shouldn't need this for anything, but just in case. ]]-- Shouldn't be neccesary
     elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
         local item = g_InventoryStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
 
         if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
            local icon, stack = GetItemInfo(bagId, slotId)
@@ -2906,7 +2940,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
             g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_InventoryStacks[slotId]
-            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local gainorloss = "|c0B610B"
             local logPrefix = "Laundered"
             LaunderCheck = true
@@ -2917,14 +2951,14 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_InventoryStacks[slotId]
             local itemtype = GetItemLinkItemType(g_InventoryStacks[slotId].itemlink)
-            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local gainorloss = "|c0B610B"
             local logPrefix = "Laundered"
             LaunderCheck = true
             if itemtype == ITEMTYPE_WEAPON or itemtype == ITEMTYPE_ARMOR or itemtype == ITEMTYPE_JEWELRY then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) end
         elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_InventoryStacks[slotId]
-            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= '' ) and ('|t16:16:' .. item.icon .. '|t ') or ''
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                 local gainorloss = "|c0B610B"
@@ -2958,7 +2992,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
 
         local itemlink = CA.GetItemLinkFromItemId(slotId)
         local icon = GetItemLinkInfo(itemlink)
-        icon = ( CA.SV.LootIcons and icon and icon ~= '' ) and ('|t16:16:' .. icon .. '|t ') or ''
+        icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
         local receivedBy = ""
         local gainorloss = "|c0B610B"
         local logPrefix = "Laundered"
@@ -3024,12 +3058,14 @@ function CA.JusticeRemovePrint()
         local justiceitem = g_JusticeStacks[i]
         if inventoryitem ~= nil then
             if justiceitem == nil then
-                local seticon = ( CA.SV.LootIcons and inventoryitem.icon and inventoryitem.icon ~= '' ) and ('|t16:16:' .. inventoryitem.icon .. '|t ') or ''
+                local seticon = ( CA.SV.LootIcons and inventoryitem.icon and inventoryitem.icon ~= "" ) and ("|t16:16:" .. inventoryitem.icon .. "|t ") or ""
                 local stack = inventoryitem.stack
                 local receivedBy = ""
                 local gainorloss = (strfmt("|ca80700"))
                 local logPrefix = "Confiscated"
-                if CA.SV.ShowConfiscate then CA.LogItem(logPrefix, seticon, inventoryitem.itemlink, itemType, stack or 1, receivedBy, gainorloss) end
+                if CA.SV.ShowConfiscate then
+                    CA.LogItem(logPrefix, seticon, inventoryitem.itemlink, itemType, stack or 1, receivedBy, gainorloss)
+                end
             end
         end
     end
