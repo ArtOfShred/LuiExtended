@@ -509,6 +509,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     local formathelper = " "
     local bracket1     = ""
     local bracket2     = ""
+    local syntax       = ""
     local mailHelper   = false
 
     if CA.SV.CurrencyBracketDisplayOptions == 1 then
@@ -638,16 +639,20 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     end
 
     -- Determines syntax based on whether icon is displayed or not, we use "ICON - GOLD CHANGE AMOUNT" if so, and "GOLD CHANGE AMOUNT - GOLD" if not
-    local syntax = CA.SV.CurrencyIcons and (" |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. changetype .. formathelper .. CA.SV.GoldName .. plural) or (" |r" .. changetype .. formathelper .. CA.SV.GoldName .. plural)
-    -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
+    if CA.SV.CurrencyIcons then
+        syntax = strformat(" |r|t16:16:/esoui/art/currency/currency_gold.dds|t <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.GoldName, plural)
+    else
+        syntax = strformat(" |r<<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.GoldName, plural)
+    end
 
+    -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if not mailHelper then
         if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. currentMoney ) or ''
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|cFEFEFE" .. currentMoney .. "|r" ) or ""
         elseif CA.SV.TotalGoldChange and CA.SV.CurrencyIcons then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. currentMoney )
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t |cFEFEFE" .. currentMoney .. "|r" )
         else
-            total = ''
+            total = ""
         end
         -- Print a message to chat based off all the values we filled in above
         if CA.SV.GoldChange and CA.SV.LootCurrencyCombo and UpOrDown < 0 and (reason == 1 or reason == 63 or reason == 64) then
@@ -658,7 +663,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             elseif not MailStop then
                 printToChat("Received mail with gold.")
             end
-            if CA.SV.GoldChange then 
+            if CA.SV.GoldChange then
                 printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
             end
             MailStringPart1 = ""
@@ -670,7 +675,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             latency = latency + 50
             zo_callLater(CA.JusticeStealRemove, latency)
          elseif CA.SV.GoldChange and reason == 57 then
-            stealstring = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) ) 
+            stealstring = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
             zo_callLater(CA.JusticeStealRemove, 100)
         elseif CA.SV.GoldChange and CA.SV.LootCurrencyCombo and UpOrDown > 0 and (reason == 1 or reason == 63 or reason == 64) then
             combostring = ( strformat(" ← <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
@@ -694,11 +699,11 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         end
 
         if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. currentMoney ) or ''
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|cFEFEFE" .. currentMoney .. "|r" ) or ""
         elseif CA.SV.TotalGoldChange and CA.SV.CurrencyIcons then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. currentMoney )
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t |cFEFEFE" .. currentMoney .. "|r" )
         else
-            total = ''
+            total = ""
         end
 
         if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and not CA.SV.GoldChange then printToChat(strformat("COD Payment of <<1>> gold sent!", changetype)) end
@@ -715,11 +720,11 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             local postagesyntax = CA.SV.CurrencyIcons and ( " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. postageAmount .. formathelper .. CA.SV.GoldName .. plural) or ( " |r" .. changetype .. postage .. CA.SV.GoldName .. plural)
                 -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
             if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
-                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. totalWithoutPostage ) or ''
+                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|cFEFEFE" .. totalWithoutPostage .. "|r" ) or ""
             elseif CA.SV.TotalGoldChange and CA.SV.CurrencyIcons then
-                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. totalWithoutPostage )
+                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t |cFEFEFE" .. totalWithoutPostage .. "|r" )
             else
-                total = ''
+                total = ""
             end
             if CA.SV.CurrencyContextToggle then -- Override with custom string if enabled
                 message = ( CA.SV.CurrencyContextMessageDown )
@@ -807,18 +812,17 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
     end
 
     -- Determines syntax based on whether icon is displayed or not
-    
     if CA.SV.CurrencyIcons then
-        syntax = strformat(" |r|t16:16:/esoui/art/currency/alliancepoints.dds|t <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.AlliancePointName, plural)
+        syntax = strformat(" |r|t16:16:/esoui/art/currency/alliancepoints.dds|t |cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.AlliancePointName, plural)
     else
-        syntax = strformat(" |r<<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.AlliancePointName, plural)
+        syntax = strformat(" |r|cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.AlliancePointName, plural)
     end
-    
+
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if CA.SV.TotalAlliancePointChange and not CA.SV.CurrencyIcons then
-        total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. "|r " .. CommaValue(alliancePoints) ) or ""
+        total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. "|r |cFEFEFE" .. CommaValue(alliancePoints) .. "|r" ) or ""
     elseif CA.SV.TotalAlliancePointChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. "|r |t16:16:/esoui/art/currency/alliancepoints.dds|t " .. CommaValue(alliancePoints) )
+        total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. "|r |t16:16:/esoui/art/currency/alliancepoints.dds|t |cFEFEFE" .. CommaValue(alliancePoints) .. "|r" )
     else
         total = ""
     end
@@ -990,21 +994,21 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
             message = ( CA.SV.CurrencyContextMessageDown )
         end
     end
-    
+
     -- Determines syntax based on whether icon is displayed or not
     if CA.SV.CurrencyIcons then
-        syntax = strformat(" |r|t16:16:/esoui/art/currency/currency_telvar.dds|t <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.TelVarStoneName, plural)
+        syntax = strformat(" |r|t16:16:/esoui/art/currency/currency_telvar.dds|t |cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.TelVarStoneName, plural)
     else
-        syntax = strformat(" |r<<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.TelVarStoneName, plural)
+        syntax = strformat(" |r|cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.TelVarStoneName, plural)
     end
-    
+
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if CA.SV.TotalTelVarStoneChange and not CA.SV.CurrencyIcons then
-        total = CA.SV.TotalTelVarStoneChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. currentTelvar ) or ''
+        total = CA.SV.TotalTelVarStoneChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|cFEFEFE" .. currentTelvar .. "|r" ) or ""
     elseif CA.SV.TotalTelVarStoneChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalTelVarStoneChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_telvar.dds|t " .. currentTelvar )
+        total = CA.SV.TotalTelVarStoneChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_telvar.dds|t |cFEFEFE" .. currentTelvar .. "|r" )
     else
-        total = ''
+        total = ""
     end
 
     -- Print a message to chat based off all the values we filled in above
@@ -1121,18 +1125,18 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
 
     -- Determines syntax based on whether icon is displayed or not
     if CA.SV.CurrencyIcons then
-        syntax = strformat(" |r|t16:16:/esoui/art/currency/currency_writvoucher.dds|t <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.WritVoucherName, plural)
+        syntax = strformat(" |r|t16:16:/esoui/art/currency/currency_writvoucher.dds|t |cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.WritVoucherName, plural)
     else
-        syntax = strformat(" |r<<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.WritVoucherName, plural)
+        syntax = strformat(" |r|cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.WritVoucherName, plural)
     end
 
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if CA.SV.TotalWritVoucherChange and not CA.SV.CurrencyIcons then
-        total = CA.SV.TotalWritVoucherChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. currentWritVouchers ) or ""
+        total = CA.SV.TotalWritVoucherChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|cFEFEFE" .. currentWritVouchers .. "|r" ) or ""
     elseif CA.SV.TotalWritVoucherChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalWritVoucherChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_writvoucher.dds|t " .. currentWritVouchers )
+        total = CA.SV.TotalWritVoucherChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_writvoucher.dds|t |cFEFEFE" .. currentWritVouchers .. "|r" )
     else
-        total = ''
+        total = ""
     end
 
     -- Print a message to chat based off all the values we filled in above
@@ -1364,7 +1368,7 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
         if ridingSkillType == 1 and source == 1 then skillstring = "[Riding Speed Upgrade]"
         elseif ridingSkillType == 2 and source == 1  then skillstring = "[Riding Capacity Upgrade]"
         elseif ridingSkillType == 3 and source == 1  then skillstring = "[Riding Stamina Upgrade]"
-        elseif ridingSkillType == 1 and source == 2 then skillstring = "|H1:item:64700:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+        elseif ridingSkillType == 1 and source == 2  then skillstring = "|H1:item:64700:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
         elseif ridingSkillType == 2 and source == 2  then skillstring = "|H1:item:64702:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
         elseif ridingSkillType == 3 and source == 2  then skillstring = "|H1:item:64701:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
         end
