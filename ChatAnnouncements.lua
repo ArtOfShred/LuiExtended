@@ -256,9 +256,9 @@ function CA.OnGroupInviteReceived(eventCode, inviterName, inviterDisplayName)
     local displayBothString = ( strformat("<<1>><<2>>", inviterName, inviterDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
 
-    if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("<<1>> has invited you to join a group.", displayNameLink) ) end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("<<1>> has invited you to join a group.", characterNameLink) ) end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("<<1>> has invited you to join a group.", displayBoth) ) end
+    if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r has invited you to join a group.", displayNameLink)) end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r has invited you to join a group.", characterNameLink)) end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r has invited you to join a group.", displayBoth)) end
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED) -- On receiving a group invite, it fires 2 events, we disable the event handler temporarily for this then recall it after.
     zo_callLater(CA.RefreshGroupInviteEnable, 100)
 end
@@ -292,9 +292,9 @@ function CA.OnGroupLeaderUpdate(eventCode, leaderTag)
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, groupLeaderAccount)
 
     if g_playerNameFormatted ~= groupLeaderName then -- If another player became the leader
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("<<1>> is now the group leader!", displayNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("<<1>> is now the group leader!", characterNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("<<1>> is now the group leader!", displayBoth) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r is now the group leader!", displayNameLink)) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r is now the group leader!", characterNameLink)) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r is now the group leader!", displayBoth)) end
     elseif g_playerNameFormatted == groupLeaderName then -- If the player character became the leader
         printToChat("You are now the group leader!")
     end
@@ -329,9 +329,9 @@ function CA.OnGroupMemberJoined(eventCode, memberName)
         local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(joinedMemberAccountName)
         local displayBothString = ( strformat("<<1>><<2>>", joinedMemberName, joinedMemberAccountName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, joinedMemberAccountName)
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("<<1>> has joined the group.", displayNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("<<1>> has joined the group.", characterNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("<<1>> has joined the group.", displayBoth) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r has joined the group.", displayNameLink)) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r has joined the group.", characterNameLink)) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r has joined the group.", displayBoth)) end
     elseif g_playerName == memberName then
         printToChat("You have joined a group.") -- Only prints on the initial group form between 2 players.
     end
@@ -347,10 +347,9 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, memberDisplayName)
     local msg = nil
     if reason == GROUP_LEAVE_REASON_VOLUNTARY then
-        msg = g_playerName == memberName and "You have left the group." or "<<1>> has left the group."
+        msg = g_playerName == memberName and "You have left the group." or "|cFEFEFE<<1>>|r has left the group."
     elseif reason == GROUP_LEAVE_REASON_KICKED then
-        -- msg = g_playerName == memberName and 'You were kicked from the group.' or '|cFEFEFE%s|r was kicked from your group.' -- Don't want to have to fetch this color code again if I need it.
-        msg = g_playerName == memberName and "You have been removed from the group." or "<<1>> has been removed from the group."
+        msg = g_playerName == memberName and "You have been removed from the group." or "|cFEFEFE<<1>>|r has been removed from the group."
     elseif reason == GROUP_LEAVE_REASON_DISBAND and g_playerName == memberName then
         msg = "The group has been disbanded."
     end
@@ -402,6 +401,7 @@ end
 function CA.FormatMessage(msg, doTimestamp)
     local msg = msg or ""
     if doTimestamp then
+        -- Color Code to match pChat default
         msg = "|c8F8F8F[" .. CreateTimestamp(GetTimeString()) .. "]|r " .. msg
     end
     return msg
@@ -500,7 +500,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     ]]--
 
     local UpOrDown     = newMoney - oldMoney
-    local currentMoney = CommaValue ( GetCurrentMoney() )
+    local currentMoney = CommaValue(GetCurrentMoney())
     local color        = ""
     local changetype   = ""
     local message      = ""
@@ -568,7 +568,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     elseif reason == 3 and UpOrDown > 0 then message = ( "Traded" )
     elseif reason == 3 and UpOrDown < 0 then message = ( "Traded" )
 
-    if reason == 3 and CA.SV.MiscTrade then printToChat ("Trade complete.") end
+    if reason == 3 and CA.SV.MiscTrade then printToChat("Trade complete.") end
 
     -- Receive from Quest Reward (4), Sell to Fence (63)
     elseif reason == 4 or reason == 63 then message = ( "Received" )
@@ -712,7 +712,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         valuesent = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
 
         if postageAmount ~= 0 then
-            local postagesyntax = CA.SV.CurrencyIcons and ( " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. postageAmount .. formathelper .. CA.SV.GoldName .. plural .. "|r") or ( " |r" .. changetype .. postage .. CA.SV.GoldName .. plural .. "|r")
+            local postagesyntax = CA.SV.CurrencyIcons and ( " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. postageAmount .. formathelper .. CA.SV.GoldName .. plural) or ( " |r" .. changetype .. postage .. CA.SV.GoldName .. plural)
                 -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
             if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
                 total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. totalWithoutPostage ) or ''
@@ -731,8 +731,8 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             end
         end
 
-        if CA.SV.GoldChange and mailMoney ~= 0 then printToChat (valuesent) end
-        if CA.SV.GoldChange and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 then printToChat (valuesent) end -- All these values will be zero for a COD payment sent, since none of them are updated.
+        if CA.SV.GoldChange and mailMoney ~= 0 then printToChat(valuesent) end
+        if CA.SV.GoldChange and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 then printToChat(valuesent) end -- All these values will be zero for a COD payment sent, since none of them are updated.
 
     end
 
@@ -758,6 +758,7 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
     local formathelper = " "
     local bracket1     = ""
     local bracket2     = ""
+    local syntax       = ""
 
     if CA.SV.CurrencyBracketDisplayOptions == 1 then
         bracket1 = "["
@@ -805,15 +806,21 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
         end
     end
 
-    -- Determines syntax based on whether icon is displayed or not, we use "ICON - ALLIANCE POINT CHANGE AMOUNT" if so, and "ALLIANCE POINT CHANGE AMOUNT - ALLIANCE POINT" if not
-    local syntax = CA.SV.CurrencyIcons and ( " |r|c20e713|t16:16:/esoui/art/currency/alliancepoints.dds|t " .. changetype .. formathelper .. CA.SV.AlliancePointName .. plural .. "|r" ) or ( " |r|c20e713" .. changetype .. formathelper .. CA.SV.AlliancePointName .. plural .. "|r" )
+    -- Determines syntax based on whether icon is displayed or not
+    
+    if CA.SV.CurrencyIcons then
+        syntax = strformat(" |r|t16:16:/esoui/art/currency/alliancepoints.dds|t <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.AlliancePointName, plural)
+    else
+        syntax = strformat(" |r<<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.AlliancePointName, plural)
+    end
+    
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if CA.SV.TotalAlliancePointChange and not CA.SV.CurrencyIcons then
-        total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |c20e713" .. CommaValue (alliancePoints) ) or ''
+        total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. "|r " .. CommaValue(alliancePoints) ) or ""
     elseif CA.SV.TotalAlliancePointChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |c20e713|t16:16:/esoui/art/currency/alliancepoints.dds|t " .. CommaValue (alliancePoints) )
+        total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. "|r |t16:16:/esoui/art/currency/alliancepoints.dds|t " .. CommaValue(alliancePoints) )
     else
-        total = ''
+        total = ""
     end
 
     -- ==============================================================================
@@ -873,16 +880,17 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
     67 = Death (Player Dies)
     ]]--
 
-    local UpOrDown = newTelvarStones - oldTelvarStones
-    local currentTelvar = CommaValue (newTelvarStones)
-    local color = ""
-    local changetype = ""
-    local message = ""
-    local total = ""
-    local plural = "s"
-    local formathelper = " "
-    local bracket1 = ""
-    local bracket2 = ""
+    local UpOrDown      = newTelvarStones - oldTelvarStones
+    local currentTelvar = CommaValue(newTelvarStones)
+    local color         = ""
+    local changetype    = ""
+    local message       = ""
+    local total         = ""
+    local plural        = "s"
+    local formathelper  = " "
+    local bracket1      = ""
+    local bracket2      = ""
+    local syntax        = ""
 
     if CA.SV.CurrencyBracketDisplayOptions == 1 then
         bracket1 = "["
@@ -982,14 +990,19 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
             message = ( CA.SV.CurrencyContextMessageDown )
         end
     end
-
-    -- Determines syntax based on whether icon is displayed or not, we use "ICON - TEL VAR CHANGE AMOUNT" if so, and "TEL VAR CHANGE AMOUNT - TEL VAR" if not
-    local syntax = CA.SV.CurrencyIcons and ( " |r|c66a8ff|t16:16:/esoui/art/currency/currency_telvar.dds|t " .. changetype .. formathelper .. CA.SV.TelVarStoneName .. plural .. "|r" ) or ( " |r|c66a8ff" .. changetype .. formathelper .. CA.SV.TelVarStoneName .. plural .. "|r" )
+    
+    -- Determines syntax based on whether icon is displayed or not
+    if CA.SV.CurrencyIcons then
+        syntax = strformat(" |r|t16:16:/esoui/art/currency/currency_telvar.dds|t <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.TelVarStoneName, plural)
+    else
+        syntax = strformat(" |r<<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.TelVarStoneName, plural)
+    end
+    
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if CA.SV.TotalTelVarStoneChange and not CA.SV.CurrencyIcons then
-        total = CA.SV.TotalTelVarStoneChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |c66a8ff" .. currentTelvar ) or ''
+        total = CA.SV.TotalTelVarStoneChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. currentTelvar ) or ''
     elseif CA.SV.TotalTelVarStoneChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalTelVarStoneChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |c66a8ff|t16:16:/esoui/art/currency/currency_telvar.dds|t " .. currentTelvar )
+        total = CA.SV.TotalTelVarStoneChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_telvar.dds|t " .. currentTelvar )
     else
         total = ''
     end
@@ -1010,16 +1023,17 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
 
     combostring = ""
 
-    local UpOrDown = newWritVouchers - oldWritVouchers
+    local UpOrDown            = newWritVouchers - oldWritVouchers
     local currentWritVouchers = CommaValue (newWritVouchers)
-    local color = ""
-    local changetype = ""
-    local message = ""
-    local total = ""
-    local plural = "s"
-    local formathelper = " "
-    local bracket1 = ""
-    local bracket2 = ""
+    local color               = ""
+    local changetype          = ""
+    local message             = ""
+    local total               = ""
+    local plural              = "s"
+    local formathelper        = " "
+    local bracket1            = ""
+    local bracket2            = ""
+    local syntax              = ""
 
     if CA.SV.CurrencyBracketDisplayOptions == 1 then
         bracket1 = "["
@@ -1105,13 +1119,18 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
         end
     end
 
-    -- Determines syntax based on whether icon is displayed or not, we use "ICON - WRIT VOUCHER CHANGE AMOUNT" if so, and "WRIT VOUCHER CHANGE AMOUNT - WRIT VOUCHER" if not
-    local syntax = CA.SV.CurrencyIcons and ( " |r|cffffff|t16:16:/esoui/art/currency/currency_writvoucher.dds|t " .. changetype .. formathelper .. CA.SV.WritVoucherName .. plural .. "|r") or ( " |r|cffffff" .. changetype .. formathelper .. CA.SV.WritVoucherName .. plural .. "|r" )
+    -- Determines syntax based on whether icon is displayed or not
+    if CA.SV.CurrencyIcons then
+        syntax = strformat(" |r|t16:16:/esoui/art/currency/currency_writvoucher.dds|t <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.WritVoucherName, plural)
+    else
+        syntax = strformat(" |r<<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.WritVoucherName, plural)
+    end
+
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if CA.SV.TotalWritVoucherChange and not CA.SV.CurrencyIcons then
-        total = CA.SV.TotalWritVoucherChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |cffffff" .. currentWritVouchers ) or ''
+        total = CA.SV.TotalWritVoucherChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. currentWritVouchers ) or ""
     elseif CA.SV.TotalWritVoucherChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalWritVoucherChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |cffffff|t16:16:/esoui/art/currency/currency_writvoucher.dds|t " .. currentWritVouchers )
+        total = CA.SV.TotalWritVoucherChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_writvoucher.dds|t " .. currentWritVouchers )
     else
         total = ''
     end
@@ -1298,18 +1317,18 @@ end
 
 function CA.RegisterGuildEvents()
     if CA.SV.MiscGuild then
-        printToChat ("Guild Events Registered jot jot jort!")
+        printToChat("Guild Events Registered jot jot jort!")
     end
 end
 
 --------------------------------------------------------------
 
 function CA.MiscAlertLockFailed(eventCode)
-    printToChat ("Lockpick failed, you're fucking terrible!!")
+    printToChat("Lockpick failed, you're fucking terrible!!")
 end
 
 function CA.MiscAlertLockSuccess(eventCode)
-    printToChat ("Lockpick successful!")
+    printToChat("Lockpick successful!")
 end
 
 function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source)
