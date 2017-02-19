@@ -1470,6 +1470,16 @@ local function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.GoldChange,
                     },
                     {
+                    type    = "colorpicker",
+                    name    = "\t\tGold Change color",
+                    --tooltip = "",
+                    getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.GoldColor) end,
+                    setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.GoldColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterGoldEvents() end,
+                    width = "full",
+                    disabled = function() return not LUIE.ChatAnnouncements.SV.GoldChange end,
+                    default = {r=LUIE.ChatAnnouncements.D.GoldColor[1], g=LUIE.ChatAnnouncements.D.GoldColor[2], b=LUIE.ChatAnnouncements.D.GoldColor[3]}
+                    },
+                    {
                         type = "editbox",
                         name = "\t\t\t\t\t\tGold Name",
                         tooltip = "Name to display for Gold (If this is anything other than 'Gold' or blank then an 's' will be added onto the end for quantities > 1)",
@@ -1497,6 +1507,16 @@ local function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AlliancePointChange = value LUIE.ChatAnnouncements.RegisterAlliancePointEvents() end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AlliancePointChange,
+                    },
+                    {
+                    type    = "colorpicker",
+                    name    = "\t\tAlliance Point Change color",
+                    --tooltip = "",
+                    getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.AlliancePointColor) end,
+                    setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.AlliancePointColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterAlliancePointEvents() end,
+                    width = "full",
+                    disabled = function() return not LUIE.ChatAnnouncements.SV.AlliancePointChange end,
+                    default = {r=LUIE.ChatAnnouncements.D.AlliancePointColor[1], g=LUIE.ChatAnnouncements.D.AlliancePointColor[2], b=LUIE.ChatAnnouncements.D.AlliancePointColor[3]}
                     },
                     {
                         type = "editbox",
@@ -1528,6 +1548,16 @@ local function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.TelVarStoneChange,
                     },
                     {
+                    type    = "colorpicker",
+                    name    = "\t\tTel Var Stone Change color",
+                    --tooltip = "",
+                    getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.TelVarStoneColor) end,
+                    setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.TelVarStoneColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterTelVarStoneEvents() end,
+                    width = "full",
+                    disabled = function() return not LUIE.ChatAnnouncements.SV.TelVarStoneChange end,
+                    default = {r=LUIE.ChatAnnouncements.D.TelVarStoneColor[1], g=LUIE.ChatAnnouncements.D.TelVarStoneColor[2], b=LUIE.ChatAnnouncements.D.TelVarStoneColor[3]}
+                    },
+                    {
                         type = "editbox",
                         name = "\t\t\t\t\t\tTel Var Stone Name",
                         tooltip = "Name to display for Tel Var Stones (USE SINGULAR)",
@@ -1555,6 +1585,16 @@ local function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.WritVoucherChange = value LUIE.ChatAnnouncements.RegisterWritVoucherEvents() end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.WritVoucherChange,
+                    },
+                    {
+                    type    = "colorpicker",
+                    name    = "\t\tWrit Voucher Change color",
+                    --tooltip = "",
+                    getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.WritVoucherColor) end,
+                    setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.WritVoucherColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterWritVoucherEvents() end,
+                    width = "full",
+                    disabled = function() return not LUIE.ChatAnnouncements.SV.WritVoucherChange end,
+                    default = {r=LUIE.ChatAnnouncements.D.WritVoucherColor[1], g=LUIE.ChatAnnouncements.D.WritVoucherColor[2], b=LUIE.ChatAnnouncements.D.WritVoucherColor[3]}
                     },
                     {
                         type = "editbox",

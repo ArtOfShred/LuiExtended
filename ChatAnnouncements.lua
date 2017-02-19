@@ -17,15 +17,19 @@ CA.D = {
     TimeStampFormat               = "HH:m",
     GroupChatMsg                  = true,
     GoldChange                    = true,
+    GoldColor                     = { 0.933333, 0.933333, 0.305882, 1 },
     TotalGoldChange               = true,
     GoldName                      = "Gold",
     AlliancePointChange           = true,
+    AlliancePointColor            = { 0.164706, 0.862745, 0.133333, 1 },
     TotalAlliancePointChange      = true,
     AlliancePointName             = "Alliance Point",
     TelVarStoneChange             = true,
+    TelVarStoneColor              = { 0.368627, 0.643137, 1, 1 },
     TotalTelVarStoneChange        = true,
     TelVarStoneName               = "Tel Var Stone",
     WritVoucherChange             = true,
+    WritVoucherColor              = { 1, 1, 1, 1 },
     TotalWritVoucherChange        = true,
     WritVoucherName               = "Writ Voucher",
     Loot                          = true,
@@ -89,6 +93,8 @@ local stealstring = ""
 local LaunderCheck = false
 local laundergoldstring = ""
 local launderitemstring = ""
+local tradestring1 = ""
+local tradestring2 = ""
 local mailCOD = 0
 local mailMoney = 0
 local postageAmount = 0
@@ -107,6 +113,7 @@ function CA.Initialize()
     -- Read current player toon name
     g_playerName = GetRawUnitName("player")
     g_playerNameFormatted = strformat(SI_UNIT_NAME, GetUnitName("player"))
+    g_playerDisplayName = strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
 
     -- Register events
     CA.RegisterGroupEvents()
@@ -127,7 +134,248 @@ function CA.Initialize()
     CA.RegisterLockpickEvents()
     CA.RegisterHorseEvents()
     CA.RegisterGuildEvents()
+    CA.RegisterSocialEvents() -- NEED MENU OPTION STILL
 end
+
+function CA.RegisterSocialEvents()
+    --EVENT_MANAGER:UnregisterForEvent(moduleName, )
+    --EVENT_MANAGER:UnregisterForEvent(moduleName, )
+    --EVENT_MANAGER:UnregisterForEvent(moduleName, )
+    --EVENT_MANAGER:UnregisterForEvent(moduleName, )
+    --if SOME VARIABLE IS TRUE then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_ADDED, CA.FriendAdded)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_REMOVED, CA.FriendRemoved)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_ADDED, CA.FriendInviteAdded)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_REMOVED, CA.FriendInviteRemoved)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARED, CA.QuestShared)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARE_REMOVED, CA.QuestShareRemoved)
+end
+
+GuildRankData = {} -- Variable to store local player guild ranks, for guild rank changes.
+
+function CA.RegisterGuildEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_MEMBER_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_MEMBER_REMOVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_MEMBER_RANK_CHANGED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_INVITE_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_INVITE_REMOVED)
+        if CA.SV.MiscGuild then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_ADDED, CA.GuildMemberAdded)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_REMOVED, CA.GuildMemberRemoved)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_RANK_CHANGED, CA.GuildRank)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, CA.GuildAddedSelf)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD, CA.GuildRemovedSelf)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_INVITE_ADDED, CA.GuildInviteAdded)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_INVITE_REMOVED, CA.GuildInviteRemoved)
+        -- Index Guilds
+        GuildRankData = {}
+        for i = 1,5 do
+            local guildId = GetGuildId(i)
+            local memberIndex = GetPlayerGuildMemberIndex(guildId)
+            local _, _, rankIndex = GetGuildMemberInfo (guildId, memberIndex)
+            GuildRankData[guildId] = {rank=rankIndex}
+        end
+end
+
+function CA.GuildMemberAdded(eventCode, guildId, DisplayName)
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
+    local allianceIconSize = 16
+    local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
+    local guildName = GetGuildName(guildId)
+    local guildNameAlliance = zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName))
+    printToChat(strformat("|cFEFEFE<<1>>|r has joined |cFEFEFE<<2>>|r", displayNameLink, guildNameAlliance))
+end
+
+function CA.GuildMemberRemoved(eventCode, guildId, DisplayName, CharacterName)
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
+    local allianceIconSize = 16
+    local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
+    local guildName = GetGuildName(guildId)
+    local guildNameAlliance = zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName))
+    printToChat(strformat("|cFEFEFE<<1>>|r has left |cFEFEFE<<2>>|r", displayNameLink, guildNameAlliance))
+end
+
+function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
+    
+    local currentRank = GuildRankData[guildId].rank
+    
+    hasPermission1 = DoesGuildRankHavePermission(guildId, currentRank, 4)
+    hasPermission2 = DoesGuildRankHavePermission(guildId, currentRank, 5) 
+    if (hasPermission1 == true or hasPermission2 == true) and DisplayName ~= g_playerDisplayName then
+    
+        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
+        
+        local rankName
+        rankNameDefault = GetDefaultGuildRankName(guildId, newRank)
+        rankNameCustom = GetGuildRankCustomName(guildId, newRank)
+        if rankNameCustom == "" then rankName = rankNameDefault else rankName = rankNameCustom end
+        
+        local icon = GetGuildRankIconIndex(guildId, newRank)
+        local icon = GetGuildRankLargeIcon(icon)
+        local iconSize = 16
+        local rankSyntax = zo_iconTextFormat(icon, iconSize, iconSize, ZO_SELECTED_TEXT:Colorize(rankName))
+        
+        local guildName = GetGuildName(guildId)
+        local allianceIconSize = 16
+        local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
+        local guildNameAlliance = zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName))
+        
+        printToChat(strformat("|cFEFEFE<<1>>|r's rank has been changed to <<2>> in <<3>>", displayNameLink, rankSyntax, guildNameAlliance))
+    end
+    
+    if DisplayName == g_playerDisplayName then -- Cancel out if its not the player being promoted. It would be a little inefficient to index all guild members on initialize for this.
+        local rankName
+        rankNameDefault = GetDefaultGuildRankName(guildId, newRank)
+        rankNameCustom = GetGuildRankCustomName(guildId, newRank)
+        if rankNameCustom == "" then rankName = rankNameDefault else rankName = rankNameCustom end
+        
+        local icon = GetGuildRankIconIndex(guildId, newRank)
+        local icon = GetGuildRankLargeIcon(icon)
+        local iconSize = 16
+        local rankSyntax = zo_iconTextFormat(icon, iconSize, iconSize, ZO_SELECTED_TEXT:Colorize(rankName))
+        
+        local guildName = GetGuildName(guildId)
+        local allianceIconSize = 16
+        local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
+        local guildNameAlliance = zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName))
+        
+        if currentRank > newRank then changestring = "promoted" end
+        if currentRank < newRank then changestring = "demoted" end
+        
+        GuildRankData[guildId].rank = newRank
+        printToChat(strformat("You have been <<1>> to <<2>> in <<3>>", changestring, rankSyntax, guildNameAlliance))
+    end
+    
+end
+
+function CA.GuildAddedSelf(eventCode, guildId, guildName)
+    local allianceIconSize = 16
+    local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
+    local guildNameAlliance = zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName))
+    printToChat (strformat("You have joined <<1>>", guildNameAlliance))
+    GuildJoinFudger = true
+    
+        -- Reindex Guild Ranks
+        GuildRankData = {}
+        for i = 1,5 do
+            local guildId = GetGuildId(i)
+            local memberIndex = GetPlayerGuildMemberIndex(guildId)
+            local _, _, rankIndex = GetGuildMemberInfo (guildId, memberIndex)
+            GuildRankData[guildId] = {rank=rankIndex}
+        end
+    
+end
+
+function CA.GuildRemovedSelf(eventCode, guildId, guildName)
+    local allianceIconSize = 16
+    local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
+    local guildNameAlliance = zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName))
+    printToChat (strformat("You have left <<1>>", guildNameAlliance))
+    
+        -- Reindex Guild Ranks
+        GuildRankData = {}
+        for i = 1,5 do
+            local guildId = GetGuildId(i)
+            local memberIndex = GetPlayerGuildMemberIndex(guildId)
+            local _, _, rankIndex = GetGuildMemberInfo (guildId, memberIndex)
+            GuildRankData[guildId] = {rank=rankIndex}
+        end
+    
+end
+
+function CA.GuildInviteAdded(eventCode, guildId, guildName, guildAlliance, inviterName)
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
+    local allianceIconSize = 16
+    local guildNameAlliance = zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName))
+    printToChat (strformat("|cFEFEFE<<1>>|r has invited you to join <<2>>",displayNameLink, guildNameAlliance))
+end
+
+function CA.GuildInviteRemoved(eventCode, guildId)
+    zo_callLater(CA.GuildInviteFudger, 100)
+end
+
+function CA.GuildInviteFudger()
+    if not GuildJoinFudger then
+        printToChat("Guild invite declined.")
+    end
+    GuildJoinFudger = false
+end
+
+function CA.FriendInviteFudger()
+    if not FriendInviteFudger then
+        printToChat("Friend invite declined.")
+    end
+    FriendInviteFudger = false
+end
+
+function CA.FriendAdded(eventCode, DisplayName)
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
+    printToChat(strformat("|cFEFEFE<<1>>|r added to friends list.", displayNameLink))
+    FriendInviteFudger = true
+end
+
+function CA.FriendRemoved(eventCode, DisplayName)
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
+    printToChat(strformat("|cFEFEFE<<1>>|r removed from friends list.", displayNameLink))
+end
+
+function CA.FriendInviteAdded(eventCode, inviterName)
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
+    printToChat (strformat("|cFEFEFE<<1>>|r wants to be your friend.", displayNameLink))
+end
+
+function CA.FriendInviteRemoved(eventCode, inviterName)
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
+    zo_callLater(CA.FriendInviteFudger, 100)
+end
+
+function CA.QuestShared (eventCode, questId)
+        local questName, characterName, timeSinceRequestMs, displayName = GetOfferedQuestShareInfo(questId)
+        
+        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(characterName)
+        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+        local displayBothString = ( strformat("<<1>><<2>>", characterName, displayName) )
+        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat (strformat("|cFEFEFE<<1>>|r wants to share the quest: <<2>>", displayNameLink, questName)) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat (strformat("|cFEFEFE<<1>>|r wants to share the quest: <<2>>", characterNameLink, questName)) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat (strformat("|cFEFEFE<<1>>|r wants to share the quest: <<2>>", displayBoth, questName)) end
+end
+
+function CA.QuestShareRemoved(eventCode, questId)
+    printToChat ("Shared quest declined.")
+end
+
+-- Group Invite String Replacements
+SafeAddString(SI_GROUPINVITERESPONSE0, "Could not find a player named |cFEFEFE\"<<1>>\"|r to invite.", 1)
+SafeAddString(SI_GROUPINVITERESPONSE10, "You have invited |cFEFEFE\"<<1>>\"|r to join your group.", 1)
+SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GROUP, "<<1>> has invited you to join a group.", 1)
+SafeAddString(SI_GROUPLEAVEREASON1, "<<1>>(<<2>>) has been removed from the group.", 2)
+
+-- Trade String Replacements
+SafeAddString(SI_TRADE_INVITE_CONFIRM, "You have invited <<1>> to trade.", 1) -- Fixes default Trade messages to match our syntax.
+SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_TRADE, "<<1>> has invited you to trade.", 1) -- Fixes default Trade messages to match our syntax.
+
+-- Friend Invite String Replacements
+SafeAddString(SI_FRIENDS_LIST_IGNORE_ADDED, "|cFEFEFE<<1>>|r added to ignore list.", 1) -- Fixes default Ignore List messages to match our syntax.
+SafeAddString(SI_FRIENDS_LIST_IGNORE_REMOVED, "|cFEFEFE<<1>>|r removed from ignore list.", 1) -- Fixes default Ignore List messages to match our syntax.
+SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST, "<<1>> wants to be your friend.", 1) -- Default ZOS string was missing a period.
+
+
+SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_ON, "|cFEFEFE<<1>>|r has logged on.", 1)
+SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON, "|cFEFEFE<<1>>|r has logged on with |cFEFEFE<<2>>|r.", 1)
+SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_OFF, "|cFEFEFE<<1>>|r has logged off.", 1)
+SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF, "|cFEFEFE<<1>>|r has logged off with |cFEFEFE<<2>>|r.", 1)
+
+
+-- Guild Invite String Replacements
+SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, "<<1>> has invited you to join <<2>>", 1) -- Update syntax for guild invite message to match our chat syntax
+SafeAddString(SI_GUILD_ROSTER_INVITED_MESSAGE,  "You have invited \"|cffffff<<1>>|r\" to join |cffffff<<2>>|r", 1) -- Update syntax for guild invitation sent message to match group syntax.
+
+-- Quest Share String Replacements
+SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, "<<1>> wants to share the quest: <<2>>.", 3)
 
 -- Display group join/leave in chat
 function CA.RegisterGroupEvents()
@@ -270,14 +518,26 @@ function CA.OnGroupInviteResponse(eventCode, inviterName, response, inviterDispl
         printToChat("Your group invitation was declined.")
     elseif response == 3 then
         printToChat("You cannot extend a group invitation to a player that is ignoring you.")
+    elseif response == 4 then -- Add some kind of override here if you try to invite yourself
+        printToChat("You cannot extend a group invitation to a player that already has a pending group invite.")
     elseif response == 5 then -- Add some kind of override here if you try to invite yourself
         printToChat("You cannot extend a group invitation to a player that is already in a group.")
+    elseif response == 6 then
+        printToChat("The group is already full.")
     elseif response == 7 then
         printToChat("You cannot invite yourself to a group.")
     elseif response == 8 then
         printToChat("Failed to extend a group invitation, only the group leader can invite.")
     elseif response == 9 then
         printToChat("You cannot extend a group invitation to a player that is a member of the opposite faction.")
+    elseif response == 11 then
+        printToChat("Account type is not set to allow group creation.")
+    elseif response == 12 then
+        printToChat("Failed to join the group.")
+    elseif response == 13 then
+        printToChat("Unable to join - the group is full.") -- Not sure if this is even used, doesn't trigger when player tries to join a group already full of 24, response 6 does.
+    elseif response == 14 then
+        printToChat("Unable to join - you are already in a group.")
     end
 end
 
@@ -424,6 +684,7 @@ function CA.RegisterGoldEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MONEY_UPDATE)
     if CA.SV.GoldChange or CA.SV.MiscMail then -- Only register this event if the menu setting is true
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MONEY_UPDATE, CA.OnMoneyUpdate)
+        GoldColorize = ZO_ColorDef:New(unpack(CA.SV.GoldColor))
     end
 end
 
@@ -432,6 +693,7 @@ function CA.RegisterAlliancePointEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ALLIANCE_POINT_UPDATE)
     if CA.SV.AlliancePointChange then -- Only register this event if the menu setting is true
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ALLIANCE_POINT_UPDATE, CA.OnAlliancePointUpdate)
+        APColorize = ZO_ColorDef:New(unpack(CA.SV.AlliancePointColor))
     end
 end
 
@@ -440,6 +702,7 @@ function CA.RegisterTelVarStoneEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TELVAR_STONE_UPDATE)
     if CA.SV.TelVarStoneChange then -- Only register this event if the menu setting is true
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TELVAR_STONE_UPDATE, CA.OnTelVarStoneUpdate)
+        TVColorize = ZO_ColorDef:New(unpack(CA.SV.TelVarStoneColor))
     end
 end
 
@@ -448,6 +711,7 @@ function CA.RegisterWritVoucherEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_WRIT_VOUCHER_UPDATE)
     if CA.SV.WritVoucherChange then -- Only register this event if the menu setting is true
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_WRIT_VOUCHER_UPDATE, CA.OnWritVoucherUpdate)
+        WVColorize = ZO_ColorDef:New(unpack(CA.SV.WritVoucherColor))
     end
 end
 
@@ -566,10 +830,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         mailHelper = true
 
     -- Receive/Give Money in a Trade (Likely consolidate this later)
-    elseif reason == 3 and UpOrDown > 0 then message = ( "Traded" )
-    elseif reason == 3 and UpOrDown < 0 then message = ( "Traded" )
-
-    if reason == 3 and CA.SV.MiscTrade then printToChat("Trade complete.") end
+    elseif reason == 3 then message = ( "Traded" )
 
     -- Receive from Quest Reward (4), Sell to Fence (63)
     elseif reason == 4 or reason == 63 then message = ( "Received" )
@@ -640,17 +901,17 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
 
     -- Determines syntax based on whether icon is displayed or not, we use "ICON - GOLD CHANGE AMOUNT" if so, and "GOLD CHANGE AMOUNT - GOLD" if not
     if CA.SV.CurrencyIcons then
-        syntax = strformat(" |r|t16:16:/esoui/art/currency/currency_gold.dds|t |cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.GoldName, plural)
+        syntax = GoldColorize:Colorize(strformat(" |t16:16:/esoui/art/currency/currency_gold.dds|t <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.GoldName, plural))
     else
-        syntax = strformat(" |r|cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.GoldName, plural)
+        syntax = GoldColorize:Colorize(strformat(" <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.GoldName, plural))
     end
 
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if not mailHelper then
         if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|cFEFEFE" .. currentMoney .. "|r" ) or ""
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. GoldColorize:Colorize(currentMoney) )
         elseif CA.SV.TotalGoldChange and CA.SV.CurrencyIcons then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t |cFEFEFE" .. currentMoney .. "|r" )
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. GoldColorize:Colorize(currentMoney) )
         else
             total = ""
         end
@@ -667,6 +928,10 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
                 printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
             end
             MailStringPart1 = ""
+        elseif CA.SV.GoldChange and reason == 3 and CA.SV.MiscTrade and UpOrDown < 0 then 
+            tradestring1 = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
+        elseif CA.SV.GoldChange and reason == 3 and CA.SV.MiscTrade and UpOrDown > 0 then 
+            tradestring2 = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         elseif CA.SV.GoldChange and CA.SV.LootCurrencyCombo and reason == 28 then
             combostring = ( strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         elseif CA.SV.GoldChange and reason == 47 then
@@ -676,7 +941,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             zo_callLater(CA.JusticeStealRemove, latency)
          elseif CA.SV.GoldChange and reason == 57 then
             stealstring = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
-            zo_callLater(CA.JusticeStealRemove, 100)
+            local latency = GetLatency()
+            latency = latency + 50
+            zo_callLater(CA.JusticeStealRemove, latency)
         elseif CA.SV.GoldChange and CA.SV.LootCurrencyCombo and UpOrDown > 0 and (reason == 1 or reason == 63 or reason == 64) then
             combostring = ( strformat(" ← <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         elseif CA.SV.GoldChange and CA.SV.LootCurrencyCombo and CA.SV.MiscBags and (reason == 8 or reason == 9) then
@@ -699,9 +966,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         end
 
         if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|cFEFEFE" .. currentMoney .. "|r" ) or ""
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. GoldColorize:Colorize(currentMoney) )
         elseif CA.SV.TotalGoldChange and CA.SV.CurrencyIcons then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t |cFEFEFE" .. currentMoney .. "|r" )
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. GoldColorize:Colorize(currentMoney) )
         else
             total = ""
         end
@@ -717,12 +984,12 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         valuesent = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
 
         if postageAmount ~= 0 then
-            local postagesyntax = CA.SV.CurrencyIcons and ( " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. postageAmount .. formathelper .. CA.SV.GoldName .. plural) or ( " |r" .. changetype .. postage .. CA.SV.GoldName .. plural)
+            local postagesyntax = CA.SV.CurrencyIcons and GoldColorize:Colorize(strformat( " |t16:16:/esoui/art/currency/currency_gold.dds|t " .. postageAmount .. formathelper .. CA.SV.GoldName .. plural)) or GoldColorize:Colorize(strformat( " " .. changetype .. postage .. CA.SV.GoldName .. plural))
                 -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
             if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
-                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|cFEFEFE" .. totalWithoutPostage .. "|r" ) or ""
+                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. GoldColorize:Colorize(totalWithoutPostage) )
             elseif CA.SV.TotalGoldChange and CA.SV.CurrencyIcons then
-                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t |cFEFEFE" .. totalWithoutPostage .. "|r" )
+                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. GoldColorize:Colorize(totalWithoutPostage) )
             else
                 total = ""
             end
@@ -813,16 +1080,16 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
 
     -- Determines syntax based on whether icon is displayed or not
     if CA.SV.CurrencyIcons then
-        syntax = strformat(" |r|t16:16:/esoui/art/currency/alliancepoints.dds|t |cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.AlliancePointName, plural)
+        syntax = APColorize:Colorize(strformat(" |t16:16:/esoui/art/currency/alliancepoints.dds|t <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.AlliancePointName, plural))
     else
-        syntax = strformat(" |r|cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.AlliancePointName, plural)
+        syntax = APColorize:Colorize(strformat(" <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.AlliancePointName, plural))
     end
 
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if CA.SV.TotalAlliancePointChange and not CA.SV.CurrencyIcons then
-        total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. "|r |cFEFEFE" .. CommaValue(alliancePoints) .. "|r" ) or ""
+        total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. "|r " .. APColorize:Colorize(CommaValue(alliancePoints)) )
     elseif CA.SV.TotalAlliancePointChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. "|r |t16:16:/esoui/art/currency/alliancepoints.dds|t |cFEFEFE" .. CommaValue(alliancePoints) .. "|r" )
+        total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. "|r |t16:16:/esoui/art/currency/alliancepoints.dds|t " .. APColorize:Colorize(CommaValue(alliancePoints)) )
     else
         total = ""
     end
@@ -863,7 +1130,7 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
     -- ==============================================================================
 
     -- Print a message to chat based off all the values we filled in above
-    if CA.SV.LootCurrencyCombo and color ( "|ca80700" ) then
+    if CA.SV.LootCurrencyCombo and color == ( "|ca80700" ) then
         combostring = (strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
     else
         printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
@@ -997,16 +1264,16 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
 
     -- Determines syntax based on whether icon is displayed or not
     if CA.SV.CurrencyIcons then
-        syntax = strformat(" |r|t16:16:/esoui/art/currency/currency_telvar.dds|t |cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.TelVarStoneName, plural)
+        syntax = TVColorize:Colorize(strformat(" |t16:16:/esoui/art/currency/currency_telvar.dds|t <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.TelVarStoneName, plural))
     else
-        syntax = strformat(" |r|cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.TelVarStoneName, plural)
+        syntax = TVColorize:Colorize(strformat(" <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.TelVarStoneName, plural))
     end
 
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if CA.SV.TotalTelVarStoneChange and not CA.SV.CurrencyIcons then
-        total = CA.SV.TotalTelVarStoneChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|cFEFEFE" .. currentTelvar .. "|r" ) or ""
+        total = CA.SV.TotalTelVarStoneChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. TVColorize:Colorize(currentTelvar) )
     elseif CA.SV.TotalTelVarStoneChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalTelVarStoneChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_telvar.dds|t |cFEFEFE" .. currentTelvar .. "|r" )
+        total = CA.SV.TotalTelVarStoneChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_telvar.dds|t " .. TVColorize:Colorize(currentTelvar) )
     else
         total = ""
     end
@@ -1125,16 +1392,16 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
 
     -- Determines syntax based on whether icon is displayed or not
     if CA.SV.CurrencyIcons then
-        syntax = strformat(" |r|t16:16:/esoui/art/currency/currency_writvoucher.dds|t |cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.WritVoucherName, plural)
+        syntax = WVColorize:Colorize(strformat(" |t16:16:/esoui/art/currency/currency_writvoucher.dds|t <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.WritVoucherName, plural))
     else
-        syntax = strformat(" |r|cFEFEFE<<1>><<2>><<3>><<4>>|r", changetype, formathelper, CA.SV.WritVoucherName, plural)
+        syntax = WVColorize:Colorize(strformat(" <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.WritVoucherName, plural))
     end
 
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if CA.SV.TotalWritVoucherChange and not CA.SV.CurrencyIcons then
-        total = CA.SV.TotalWritVoucherChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|cFEFEFE" .. currentWritVouchers .. "|r" ) or ""
+        total = CA.SV.TotalWritVoucherChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. WVColorize:Colorize(currentWritVouchers) )
     elseif CA.SV.TotalWritVoucherChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalWritVoucherChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_writvoucher.dds|t |cFEFEFE" .. currentWritVouchers .. "|r" )
+        total = CA.SV.TotalWritVoucherChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_writvoucher.dds|t " .. WVColorize:Colorize(currentWritVouchers) )
     else
         total = ""
     end
@@ -1316,12 +1583,6 @@ function CA.RegisterHorseEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT)
     if CA.SV.MiscHorse or CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT, CA.MiscAlertHorse)
-    end
-end
-
-function CA.RegisterGuildEvents()
-    if CA.SV.MiscGuild then
-        printToChat("Guild Events Registered jot jot jort!")
     end
 end
 
@@ -1792,9 +2053,15 @@ function CA.TradeInviteWaiting(eventCode, inviteeCharacterName, inviteeDisplayNa
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviteeDisplayName)
     local displayBothString = ( strfmt("%s%s", gsub(inviteeCharacterName,"%^%a+",""), inviteeDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviteeDisplayName)
-    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("You've invited <<1>> to trade.", displayNameLink)) end
-    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("You've invited <<1>> to trade.", characterNameLink)) end
-    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("You've invited <<1>> to trade.", displayBoth)) end
+    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then
+        printToChat(strformat("You have invited |cFEFEFE<<1>>|r to trade.", displayNameLink))
+    end
+    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 2 then
+        printToChat(strformat("You have invited |cFEFEFE<<1>>|r to trade.", characterNameLink))
+    end
+    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then
+        printToChat(strformat("You have invited |cFEFEFE<<1>>|r to trade.", displayBoth))
+    end
 end
 
 -- These 2 functions help us get the name of the person we are trading with regardless of who initiated the trade
@@ -1804,9 +2071,15 @@ function CA.TradeInviteConsidering(eventCode, inviterCharacterName, inviterDispl
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
     local displayBothString = ( strfmt("%s%s", gsub(inviterCharacterName,"%^%a+",""), inviterDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
-    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("<<1>> has invited you to trade.", displayNameLink)) end
-    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("<<1>> has invited you to trade.", characterNameLink)) end
-    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("<<1>> has invited you to trade.", displayBoth)) end
+    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then
+        printToChat(strformat("|cFEFEFE<<1>>|r has invited you to trade.", displayNameLink))
+    end
+    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 2 then
+        printToChat(strformat("|cFEFEFE<<1>>|r has invited you to trade.", characterNameLink))
+    end
+    if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then
+        printToChat(strformat("|cFEFEFE<<1>>|r has invited you to trade.", displayBoth))
+    end
 end
 
 function CA.TradeInviteAccepted(eventCode)
@@ -1885,7 +2158,9 @@ end
 function CA.OnTradeSuccess(eventCode)
     combostring = ""
 
-    if CA.SV.MiscTrade and not CA.SV.GoldChange then printToChat ("Trade complete.") end
+    if CA.SV.MiscTrade then printToChat ("Trade complete.") end
+    if CA.SV.MiscTrade and tradestring1 ~= "" then printToChat (tradestring1) end
+    if CA.SV.MiscTrade and tradestring2 ~= "" then printToChat (tradestring2) end
 
     if CA.SV.LootTrade then
 
@@ -1922,6 +2197,8 @@ function CA.OnTradeSuccess(eventCode)
     g_TradeStacksOut = {}
     TradeInviter = ""
     TradeInvitee = ""
+    tradestring1 = ""
+    tradestring2 = ""
 end
 
 local g_CraftStacks = {}
@@ -2169,7 +2446,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
             end
 
             -- Displays an icon if enabled
-            local icon = CA.SV.ExperienceIcon and ("|r|t16:16:/esoui/art/icons/icon_experience.dds|t " .. CommaValue (change) .. formathelper .. CA.SV.ExperienceName .. "|r" ) or ( "|r" .. CommaValue (change) .. formathelper .. CA.SV.ExperienceName .. "|r" )
+            local icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. CommaValue (change) .. formathelper .. CA.SV.ExperienceName ) or ( CommaValue (change) .. formathelper .. CA.SV.ExperienceName )
 
             local xppct = 0             -- XP Percent
             local decimal = 0           -- If we're using a % value, this is the string that determines whether we have a decimal point or not.
@@ -2185,7 +2462,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                 end
 
                 if CA.SV.ExperienceShowPBrackets then -- If [Progress] display brackets are hidden, then the XP numbers will just print on the end
-                    progressbrackets = strfmt( " %s|r", CA.SV.ExperienceProgressName )
+                    progressbrackets = strfmt( " %s", CA.SV.ExperienceProgressName )
                 else
                     progressbrackets = ( "" )
                 end
@@ -2199,21 +2476,21 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 
                 if CA.SV.ExperienceDisplayOptions == 1 then
                     if CA.SV.ExperienceProgressColor then
-                    progress = strfmt( "%s|r (|c%s%s|r/|c71DE73%s|r)", progressbrackets, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevel) )
+                    progress = strfmt( "%s (|c%s%s|r/|c71DE73%s|r)", progressbrackets, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevel) )
                     else
-                    progress = strfmt( "%s|r (%s/%s)|r", progressbrackets, CommaValue (levelhelper), CommaValue (XPLevel) )
+                    progress = strfmt( "%s (%s/%s)|r", progressbrackets, CommaValue (levelhelper), CommaValue (XPLevel) )
                     end
                 elseif CA.SV.ExperienceDisplayOptions == 2 then
                     if CA.SV.ExperienceProgressColor then
-                    progress = strfmt("%s|r (%s%%|r)", progressbrackets, decimal)
+                    progress = strfmt("%s (%s%%|r)", progressbrackets, decimal)
                     else
-                    progress = strfmt("%s|r (%s%%|r)", progressbrackets, decimal)
+                    progress = strfmt("%s (%s%%|r)", progressbrackets, decimal)
                     end
                 elseif CA.SV.ExperienceDisplayOptions == 3 then
                     if CA.SV.ExperienceProgressColor then
-                    progress = strfmt("%s|r (%s%%|r - |c%s%s|r/|c71DE73%s|r)", progressbrackets, decimal, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevel) )
+                    progress = strfmt("%s (%s%%|r - |c%s%s|r/|c71DE73%s|r)", progressbrackets, decimal, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevel) )
                     else
-                    progress = strfmt("%s|r (%s%%|r - %s/%s)|r", progressbrackets, decimal, CommaValue (levelhelper), CommaValue (XPLevel) )
+                    progress = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, CommaValue (levelhelper), CommaValue (XPLevel) )
                     end
                 end
             end
@@ -2715,13 +2992,13 @@ end
         icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
         local receivedBy = ""
         local gainorloss = "|c0B610B"
-        local logPrefix = "Received - Crafting Bag"
+        local logPrefix = "Received"
         local stack = stackCountChange
         local itemtype = GetItemLinkItemType(itemlink)
 
         if stackCountChange < 1 then
             gainorloss = "|ca80700"
-            logPrefix = "Used - Crafting Bag"
+            logPrefix = "Used"
             stack = stackCountChange * -1
             if itemtype == itemtype == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL or itemtype == ITEMTYPE_CLOTHIER_RAW_MATERIAL or itemtype == ITEMTYPE_WOODWORKING_RAW_MATERIAL then logPrefix = "Refined" end
         end
@@ -3020,7 +3297,7 @@ end
 
 g_JusticeStacks = {}
 
-local ConfiscateMessage = ("Bounty confiscated")
+local ConfiscateMessage = ("Bounty confiscated!")
 
 function CA.JusticeStealRemove(eventCode)
     if CA.SV.MiscConfiscate and eventCode == 131555 then
@@ -3035,7 +3312,7 @@ function CA.JusticeStealRemove(eventCode)
 
     printToChat(stealstring)
     stealstring = ""
-    ConfiscateMessage = ("Bounty confiscated")
+    ConfiscateMessage = ("Bounty confiscated!")
 
     if CA.SV.ShowConfiscate or CA.SV.ShowDestroy then
         zo_callLater(CA.JusticeRemovePrint, 50)
