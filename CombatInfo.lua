@@ -160,14 +160,14 @@ local IsResultCC = {
 -- Contains fonts for Combat Info module
 -- Has to be supplied with other fonts during game play
 local Font = {
-    FontinSCLarge = "/LuiExtended/fonts/fontin_sans_sc.otf|36|soft-shadow-thick",
+    FontinSCLarge = "/LuiExtended/media/fonts/fontin_sans_sc.otf|36|soft-shadow-thick",
 }
 
 -- Used can select font face this families
 CI.FontFamilies = {
     ["Fontin"] = {
-        ["FontBold"]    = "/LuiExtended/fonts/fontin_sans_b.otf",
-        ["FontRegular"] = "/LuiExtended/fonts/fontin_sans_r.otf",
+        ["FontBold"]    = "/LuiExtended/media/fonts/fontin_sans_b.otf",
+        ["FontRegular"] = "/LuiExtended/media/fonts/fontin_sans_r.otf",
     },
     ["Futura Condensed"] = {
         ["FontBold"]    = "/EsoUi/Common/Fonts/FTN87.otf",
