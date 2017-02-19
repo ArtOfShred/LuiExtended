@@ -161,7 +161,7 @@ function CA.RegisterGuildEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_INVITE_ADDED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_INVITE_REMOVED)
-        if CA.SV.MiscGuild then
+    if CA.SV.MiscGuild then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_ADDED, CA.GuildMemberAdded)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_REMOVED, CA.GuildMemberRemoved)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_RANK_CHANGED, CA.GuildRank)
@@ -177,6 +177,7 @@ function CA.RegisterGuildEvents()
             local _, _, rankIndex = GetGuildMemberInfo (guildId, memberIndex)
             GuildRankData[guildId] = {rank=rankIndex}
         end
+    end
 end
 
 function CA.GuildMemberAdded(eventCode, guildId, DisplayName)

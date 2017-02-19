@@ -27,7 +27,7 @@ PNL.SV      = nil
 PNL.panelUnlocked = false
 
 -- UI elements
-local g_infoPanelFont = '/LuiExtended/fonts/ProFontWindows.ttf|9|soft-shadow-thin'
+local g_infoPanelFont = '/LuiExtended/media/fonts/ProFontWindows.ttf|9|soft-shadow-thin'
 
 local uiPanel  = nil
 local uiTopRow = nil
