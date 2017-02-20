@@ -188,8 +188,9 @@ end
 function LUIE.FormatMessage(msg, doTimestamp)
     local msg = msg or ""
     if doTimestamp then
+        local timestring = GetTimeString()
         -- Color Code to match pChat default
-        msg = zo_strformat("|c8F8F8F[<<1>>]|r <<2>>", LUIE.CreateTimestamp(GetTimeString()), msg)
+        msg = zo_strformat("|c8F8F8F[<<1>>]|r <<2>>", LUIE.CreateTimestamp(timestring), msg)
     end
     return msg
 end
@@ -208,7 +209,7 @@ end
 
 -- Delay Buffer
 local delayBuffer = {}
-function LUIE.DelayBuffer( key, buffer, currentTime )
+function LUIE.DelayBuffer(key, buffer, currentTime)
     if key == nil then return end
 
     local buffer = buffer or 10
