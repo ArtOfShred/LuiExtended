@@ -1,3 +1,5 @@
+local strformat = zo_strformat
+
 -- Create Settings Menu
 function LUIE_CreateSettings()
     local LAM2 = LibStub("LibAddonMenu-2.0")
@@ -2017,6 +2019,126 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.AchievementsDetails,
                         disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
                     },
+                    {
+                        type = "checkbox",
+                        name = GetAchievementCategoryInfo(1),
+                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(1)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        width = "full",
+                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                    },
+                    {
+                        type = "checkbox",
+                        name = GetAchievementCategoryInfo(2),
+                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(2)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        width = "full",
+                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                    },
+                    {
+                        type = "checkbox",
+                        name = GetAchievementCategoryInfo(3),
+                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(3)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        width = "full",
+                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                    },
+                    {
+                        type = "checkbox",
+                        name = GetAchievementCategoryInfo(4),
+                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(4)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        width = "full",
+                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                    },
+                    {
+                        type = "checkbox",
+                        name = GetAchievementCategoryInfo(5),
+                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(5)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        width = "full",
+                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                    },
+                    {
+                        type = "checkbox",
+                        name = GetAchievementCategoryInfo(6),
+                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(6)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        width = "full",
+                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                    },
+                    {
+                        type = "checkbox",
+                        name = GetAchievementCategoryInfo(7),
+                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(7)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        width = "full",
+                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                    },
+                    {
+                        type = "checkbox",
+                        name = GetAchievementCategoryInfo(8),
+                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(8)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        width = "full",
+                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                    },
+                    {
+                        type = "checkbox",
+                        name = GetAchievementCategoryInfo(9),
+                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(9)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        width = "full",
+                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                    },
+                    {
+                        type = "checkbox",
+                        name = GetAchievementCategoryInfo(10),
+                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(10)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        width = "full",
+                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                    },
+                    {
+                        type = "checkbox",
+                        name = GetAchievementCategoryInfo(11),
+                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(11)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        width = "full",
+                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                    },
+                    {
+                        type = "checkbox",
+                        name = GetAchievementCategoryInfo(12),
+                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(12)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        width = "full",
+                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                    },
                 },
             },
         },
@@ -2064,23 +2186,6 @@ function LUIE_CreateSettings()
         width = "full",
         default = LUIE.D.StartupInfo,
     }
-    
-    for i = 1, GetNumAchievementCategories() do
-        local name = GetAchievementCategoryInfo(i)
-        local checkbox = {
-                    type = "checkbox",
-                    name = name,
-                    tooltip = "Enables achievements tracking in '" .. name .. "' category.",
-                    getFunc = function() return not LUIE.ChatAnnouncements.SV.AchIgnoreList[i] end,
-                    setFunc = function(value) if value then LUIE.ChatAnnouncements.SV.AchIgnoreList[i] = nil else LUIE.ChatAnnouncements.SV.AchIgnoreList[i] = true end end,
-                    width = "full",
-                    default = not LUIE.ChatAnnouncements.D.AchIgnoreList[i],
-                    disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
-                }
-        -- (!!!) hardcoded sub-panel index
-        -- THIS SUCKS!!!
-        table.insert(optionsData[6].controls, checkbox)
-    end
 
     --[[  BEGIN UNIT FRAMES SETTING PANEL ]]--
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
