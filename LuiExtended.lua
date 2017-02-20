@@ -144,6 +144,9 @@ local function LUIE_CreateSettings()
 
     local experienceDisplayOptions = {"Value", "Percentage", "Both"}
     local experienceDisplayOptionsKeys = { ["Value"] = 1, ["Percentage"] = 2, ["Both"] = 3 }
+    
+    local guildrankDisplayOptions = { "Self Only", "Self + All w/ Permissions", "Display All Rank Changes"}
+    local guildrankDisplayOptionsKeys = { ["Self Only"] = 1, ["Self + All w/ Permissions"] = 2, ["Display All Rank Changes"] = 3 }
 
     local formatOptions = {
         "Nothing",
@@ -1384,7 +1387,7 @@ local function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "Show Trade Changes",
-                        --tooltip = "",
+                        tooltip = "Prints a notification to chat for trade invitations, cancellation, and success.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscTrade end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscTrade = value LUIE.ChatAnnouncements.RegisterTradeEvents() end,
                         width = "full",
@@ -1393,7 +1396,7 @@ local function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "Show Mail Changes",
-                        --tooltip = "",
+                        tooltip = "Prints a notification to chat when Mail is accepted, deleted, or sent",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscMail end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscMail = value LUIE.ChatAnnouncements.RegisterMailEvents() end,
                         width = "full",
@@ -1402,7 +1405,7 @@ local function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "Show Guild event messages",
-                        --tooltip = "",
+                        tooltip = "Prints notifications to chat for Guild Invites and members joining/leaving one of your guilds.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuild end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuild = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
                         width = "full",
@@ -1410,8 +1413,49 @@ local function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
+                        name = "Show Guild Icons",
+                        tooltip = "Displays the faction icon or guild rank icon for guild messages",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildIcon end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildIcon = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.MiscGuild end,
+                        default = LUIE.ChatAnnouncements.D.MiscGuildIcon,
+                    },
+                    {
+                        type = "checkbox",
+                        name = "Show Guild Rank Changes",
+                        tooltip = "Prints notifications to chat for player guild rank changes, options are determined by the dropdown menu below.",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildRank end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildRank = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.MiscGuild end,
+                        default = LUIE.ChatAnnouncements.D.MiscGuildRank,
+                    },
+                    {
+                        type = "dropdown",
+                        name = "Guild Rank Changes Display Options",
+                        tooltip = "Choose the method in which Guild Rank Changes will be reported. Self Only, Show all rank changes if you have the permissions to modify ranks, or show all rank changes regardless.",
+                        choices = guildrankDisplayOptions,
+                        getFunc = function() return guildrankDisplayOptions[LUIE.ChatAnnouncements.SV.GuildRankDisplayOptions] end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildRankDisplayOptions = guildrankDisplayOptionsKeys[value] LUIE.ChatAnnouncements.RegisterGuildEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.MiscGuild and LUIE.ChatAnnouncements.SV.MiscGuildRank) end,
+                        default = guildrankDisplayOptions[1],
+                    },
+                    {
+                        type = "checkbox",
+                        name = "Show Guild MOTD message changes",
+                        tooltip = "Print a message to chat when the Guild MOTD for one of your guilds is updated.",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildMOTD end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildMOTD = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.MiscGuild end,
+                        default = LUIE.ChatAnnouncements.D.MiscGuildMOTD,
+                    },
+                    {
+                        type = "checkbox",
                         name = "Show Bag/Bank Upgrade Messages",
-                        --tooltip = "",
+                        tooltip = "Print a message to chat when Bag or Bank space upgrades are purchased ingame or through the crown store. Note currency changes can be amended onto this statement.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscBags end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscBags = value LUIE.ChatAnnouncements.RegisterBagEvents() end,
                         width = "full",
@@ -1420,7 +1464,7 @@ local function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "Show Riding Skill Upgrade Messages",
-                        --tooltip = "",
+                        tooltip = "Print a message to chat when Riding upgrades are purchased or Crown Riding Skill books are used. Note currency changes can be amended onto this statement.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscHorse end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscHorse = value LUIE.ChatAnnouncements.RegisterHorseEvents() end,
                         width = "full",
@@ -1429,7 +1473,7 @@ local function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "Show Lockpick Success/Failure Messages",
-                        --tooltip = "",
+                        tooltip = "Print a notification when a lockpick attempt is failed or succeeds.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscLockpick end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscLockpick = value LUIE.ChatAnnouncements.RegisterLockpickEvents() end,
                         width = "full",
@@ -1438,7 +1482,7 @@ local function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "Show Justice Confiscation Messages",
-                        --tooltip = "",
+                        tooltip = "Print a notification to chat when Items or Gold are confiscated by a Guard through either dialogue or player death.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscConfiscate end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscConfiscate = value LUIE.ChatAnnouncements.RegisterDestroyEvents() end,
                         width = "full",
