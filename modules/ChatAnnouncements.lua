@@ -289,7 +289,7 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
             for i = 1,5 do
                 local guildId = GetGuildId(i)
                 local memberIndex = GetPlayerGuildMemberIndex(guildId)
-                local _, _, rankIndex = GetGuildMemberInfo (guildId, memberIndex)
+                local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
                 GuildRankData[guildId] = {rank=rankIndex}
             end
         end
@@ -307,7 +307,7 @@ function CA.GuildRemovedSelf(eventCode, guildId, guildName)
             for i = 1,5 do
                 local guildId = GetGuildId(i)
                 local memberIndex = GetPlayerGuildMemberIndex(guildId)
-                local _, _, rankIndex = GetGuildMemberInfo (guildId, memberIndex)
+                local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
                 GuildRankData[guildId] = {rank=rankIndex}
             end
         end
@@ -622,9 +622,9 @@ end
 function CA.VoteResult(eventCode, electionResult, descriptor)
     local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
     if descriptor == "[ZO_READY_CHECK]" then
-        if electionResult == 1 then printToChat ("Someone in your group is not ready.") end -- Timed out
-        if electionResult == 4 then printToChat ("Everyone in your group is ready!") end -- Ready
-        if electionResult == 5 then printToChat ("Someone in your group is not ready.") end -- Someone declined
+        if electionResult == 1 then printToChat("Someone in your group is not ready.") end -- Timed out
+        if electionResult == 4 then printToChat("Everyone in your group is ready!") end -- Ready
+        if electionResult == 5 then printToChat("Someone in your group is not ready.") end -- Someone declined
     end
     if descriptor == "[ZO_NONE]" then
             local KickCarry
