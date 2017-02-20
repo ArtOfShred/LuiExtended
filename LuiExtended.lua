@@ -195,7 +195,7 @@ function LUIE.FormatMessage(msg, doTimestamp)
 end
 
 -- Easy Print to Chat
-function printToChat(msg)
+function LUIE.PrintToChat(msg)
     if CA.SV.ChatUseSystem and CHAT_SYSTEM.primaryContainer then
         local msg = LUIE.FormatMessage(msg or "no message", CA.SV.TimeStamp)
         -- Post as a System message so that it can appear in multiple tabs.

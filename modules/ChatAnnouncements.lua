@@ -5,6 +5,7 @@ LUIE.ChatAnnouncements = {}
 -- Performance Enhancement
 local CA            = LUIE.ChatAnnouncements
 local CommaValue    = LUIE.CommaValue
+local printToChat   = LUIE.PrintToChat
 local strformat     = zo_strformat
 local strfmt        = string.format
 local gsub          = string.gsub
