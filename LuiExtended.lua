@@ -148,6 +148,64 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     LUIE_RegisterEvents()
 end
 
+-- Return a formatted time
+-- stolen from pChat.lua - thanks @Ayantir
+function LUIE.CreateTimestamp(timeStr, formatStr)
+    formatStr = formatStr or CA.SV.TimeStampFormat
+
+    -- Split up default timestamp
+    local hours, minutes, seconds = timeStr:match("([^%:]+):([^%:]+):([^%:]+)")
+    local hoursNoLead = tonumber(hours) -- hours without leading zero
+    local hours12NoLead = (hoursNoLead - 1)%12 + 1
+    local hours12
+    if (hours12NoLead < 10) then
+        hours12 = "0" .. hours12NoLead
+    else
+        hours12 = hours12NoLead
+    end
+    local pUp = "AM"
+    local pLow = "am"
+    if (hoursNoLead >= 12) then
+        pUp = "PM"
+        pLow = "pm"
+    end
+
+    -- Create new one
+    local timestamp = formatStr
+    timestamp = timestamp:gsub("HH", hours)
+    timestamp = timestamp:gsub("H",  hoursNoLead)
+    timestamp = timestamp:gsub("hh", hours12)
+    timestamp = timestamp:gsub("h",  hours12NoLead)
+    timestamp = timestamp:gsub("m",  minutes)
+    timestamp = timestamp:gsub("s",  seconds)
+    timestamp = timestamp:gsub("A",  pUp)
+    timestamp = timestamp:gsub("a",  pLow)
+
+    return timestamp
+end
+
+-- FormatMessage helper function
+function LUIE.FormatMessage(msg, doTimestamp)
+    local msg = msg or ""
+    if doTimestamp then
+        -- Color Code to match pChat default
+        msg = "|c8F8F8F[" .. LUIE.CreateTimestamp(GetTimeString()) .. "]|r " .. msg
+    end
+    return msg
+end
+
+-- Easy Print to Chat
+function printToChat(msg)
+    if CA.SV.ChatUseSystem and CHAT_SYSTEM.primaryContainer then
+        local msg = LUIE.FormatMessage(msg or "no message", CA.SV.TimeStamp)
+        -- Post as a System message so that it can appear in multiple tabs.
+        CHAT_SYSTEM.primaryContainer:OnChatEvent(nil, msg, CHAT_CATEGORY_SYSTEM)
+    else
+        -- Post as a normal message
+        CHAT_SYSTEM:AddMessage(msg)
+    end
+end
+
 -- Delay Buffer
 local delayBuffer = {}
 function LUIE.DelayBuffer( key, buffer, currentTime )
@@ -168,7 +226,7 @@ function LUIE.DelayBuffer( key, buffer, currentTime )
 end
 
 -- Returns a formatted number with commas
- --Function no comma to be added in a later date.
+--Function no comma to be added in a later date.
 function LUIE.CommaValue(number, shorten, noncomma)
     if number > 0 and shorten then
         local value, suffix

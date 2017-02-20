@@ -877,64 +877,6 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
     end
 end
 
--- Return a formatted time
--- stolen from pChat.lua - thanks @Ayantir
-function CreateTimestamp(timeStr, formatStr)
-    formatStr = formatStr or CA.SV.TimeStampFormat
-
-    -- Split up default timestamp
-    local hours, minutes, seconds = timeStr:match("([^%:]+):([^%:]+):([^%:]+)")
-    local hoursNoLead = tonumber(hours) -- hours without leading zero
-    local hours12NoLead = (hoursNoLead - 1)%12 + 1
-    local hours12
-    if (hours12NoLead < 10) then
-        hours12 = "0" .. hours12NoLead
-    else
-        hours12 = hours12NoLead
-    end
-    local pUp = "AM"
-    local pLow = "am"
-    if (hoursNoLead >= 12) then
-        pUp = "PM"
-        pLow = "pm"
-    end
-
-    -- Create new one
-    local timestamp = formatStr
-    timestamp = timestamp:gsub("HH", hours)
-    timestamp = timestamp:gsub("H",  hoursNoLead)
-    timestamp = timestamp:gsub("hh", hours12)
-    timestamp = timestamp:gsub("h",  hours12NoLead)
-    timestamp = timestamp:gsub("m",  minutes)
-    timestamp = timestamp:gsub("s",  seconds)
-    timestamp = timestamp:gsub("A",  pUp)
-    timestamp = timestamp:gsub("a",  pLow)
-
-    return timestamp
-end
-
--- FormatMessage helper function
-function CA.FormatMessage(msg, doTimestamp)
-    local msg = msg or ""
-    if doTimestamp then
-        -- Color Code to match pChat default
-        msg = "|c8F8F8F[" .. CreateTimestamp(GetTimeString()) .. "]|r " .. msg
-    end
-    return msg
-end
-
--- printToChat function used in next sections
-function printToChat(msg)
-    if CA.SV.ChatUseSystem and CHAT_SYSTEM.primaryContainer then
-        local msg = CA.FormatMessage(msg or "no message", CA.SV.TimeStamp)
-        -- Post as a System message so that it can appear in multiple tabs.
-        CHAT_SYSTEM.primaryContainer:OnChatEvent(nil, msg, CHAT_CATEGORY_SYSTEM)
-    else
-        -- Post as a normal message
-        CHAT_SYSTEM:AddMessage(msg)
-    end
-end
-
 -- Gold change into chat
 function CA.RegisterGoldEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MONEY_UPDATE)
@@ -2209,7 +2151,6 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
 
     if (receivedBy == "") then
         -- Don't display yourself
-        -- TODO: Make a Setting to choose Character or Account name
         formattedRecipient = ""
     else
        -- Selects direction of pointer based on whether item is gained for lost, reversed for Trade purposes.
@@ -3543,7 +3484,6 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
     LaunderCheck = false
 
 end
-
 
 -- Makes it so bank withdraw/deposit events only occur when we can confirm the item is crossing over.
 function CA.BankFixer()
