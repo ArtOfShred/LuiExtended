@@ -189,7 +189,7 @@ function LUIE.FormatMessage(msg, doTimestamp)
     local msg = msg or ""
     if doTimestamp then
         -- Color Code to match pChat default
-        msg = "|c8F8F8F[" .. LUIE.CreateTimestamp(GetTimeString()) .. "]|r " .. msg
+        msg = zo_strformat("|c8F8F8F[<<1>>]|r <<2>>", LUIE.CreateTimestamp(GetTimeString()), msg)
     end
     return msg
 end
@@ -226,7 +226,7 @@ function LUIE.DelayBuffer( key, buffer, currentTime )
 end
 
 -- Returns a formatted number with commas
---Function no comma to be added in a later date.
+-- Function no comma to be added in a later date.
 function LUIE.CommaValue(number, shorten, noncomma)
     if number > 0 and shorten then
         local value, suffix
