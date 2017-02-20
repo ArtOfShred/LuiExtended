@@ -57,8 +57,8 @@ libs\LibAddonMenu-2.0\controls\iconpicker.lua
 libs\LibAddonMenu-2.0\controls\divider.lua
 
 LuiExtended.lua
-;LuiExtendedSettings.lua
 LuiExtendedUI.lua
+LuiExtendedSettings.lua
 
 bindings.xml
 
