@@ -210,5 +210,14 @@ function LUIE.CommaValue(number, shorten, noncomma)
     return left..(num:reverse():gsub('(%d%d%d)','%1,'):reverse())..right
 end
 
+function LUIE.PortPrimaryHome()
+    primaryHouse = GetHousingPrimaryHouse()
+    RequestJumpToHouse(primaryHouse)
+    CHAT_SYSTEM:AddMessage("Porting to primary House")
+end
+
+-- Slash Commands
+SLASH_COMMANDS["/home"] = LUIE.PortPrimaryHome
+
 -- Hook initialization
 EVENT_MANAGER:RegisterForEvent(LUIE.name, EVENT_ADD_ON_LOADED, LUIE_OnAddOnLoaded)
