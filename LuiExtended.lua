@@ -273,9 +273,18 @@ function LUIE.CommaValue(number, shorten, noncomma)
 end
 
 function LUIE.PortPrimaryHome()
-    primaryHouse = GetHousingPrimaryHouse()
-    RequestJumpToHouse(primaryHouse)
-    LUIE.PrintToChat("Porting to primary House")
+    local primaryHouse = GetHousingPrimaryHouse()
+
+    if IsPlayerInAvAWorld() then
+        LUIE.PrintToChat("Cant port to your home while in AvA!")
+        return
+    end
+    if not primaryHouse then
+        LUIE.PrintToChat("You dont have a primary Home set!")
+    else
+        RequestJumpToHouse(primaryHouse)
+        LUIE.PrintToChat("Porting to primary House")
+    end
 end
 
 -- Slash Commands
