@@ -86,9 +86,8 @@ function LUIE_CreateSettings()
 
     local optionsData = {}
     local optionsDataUnitFrames = {}
-
-    --[[ RELOADUI BUTTON ]]--
-    optionsData[#optionsData + 1] = {
+    
+    optionsData[#optionsData + 1] = { -- ReloadUI Button
         type = "button",
         name = "Reload UI",
         tooltip = "This will reload UI",
@@ -96,8 +95,8 @@ function LUIE_CreateSettings()
         width = "full",
     }
 
-    --[[ INFO PANEL OPTIONS ]]--
-    optionsData[#optionsData + 1] = {
+    -- Info Panel Options
+    optionsData[#optionsData + 1] = { 
         type = "submenu",
         name = "Info Panel Options",
         reference = "Info_Panel_Options_Submenu",
@@ -1244,36 +1243,6 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.GroupChatMsg,
             },
             {
-                type = "checkbox",
-                name = "Print messages as System messages",
-                tooltip = "Print all messages as System message so that it can appear in multiple tabs",
-                getFunc = function() return LUIE.ChatAnnouncements.SV.ChatUseSystem end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatUseSystem = value end,
-                width = "full",
-                warning = "Enable this only if you know what you are doing.",
-                default = LUIE.ChatAnnouncements.D.ChatUseSystem,
-            },
-            {
-                type = "checkbox",
-                name = "\t\tInclude Timestamp",
-                tooltip = "Prepend printed text with current time label.",
-                getFunc = function() return LUIE.ChatAnnouncements.SV.TimeStamp end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.TimeStamp = value end,
-                width = "full",
-                disabled = function() return not LUIE.ChatAnnouncements.SV.ChatUseSystem end,
-                default = LUIE.ChatAnnouncements.D.TimeStamp,
-            },
-            {
-                type = "editbox",
-                name = "\t\tTimestamp format",
-                tooltip = "FORMAT:\nHH: hours (24)\nhh: hours (12)\nH: hour (24, no leading 0)\nh: hour (12, no leading 0)\nA: AM/PM\na: am/pm\nm: minutes\ns: seconds",
-                getFunc = function() return LUIE.ChatAnnouncements.SV.TimeStampFormat end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.TimeStampFormat = value end,
-                width = "full",
-                disabled = function() return not (LUIE.ChatAnnouncements.SV.ChatUseSystem and LUIE.ChatAnnouncements.SV.TimeStamp) end,
-                default = LUIE.ChatAnnouncements.D.TimeStampFormat,
-            },
-            {
                 type = "submenu",
                 name = "Misc Announcements",
                 reference = "Chat_Announcements_Options_Misc_Announcements_Submenu",
@@ -2066,9 +2035,41 @@ function LUIE_CreateSettings()
             },
         },
     }
+    
+    optionsData[#optionsData + 1] = { -- Use system for messages
+        type = "checkbox",
+        name = "Print messages as System messages",
+        tooltip = "Print all messages as System message so that it can appear in multiple tabs",
+        getFunc = function() return LUIE.SV.ChatUseSystem end,
+        setFunc = function(value) LUIE.SV.ChatUseSystem = value end,
+        width = "full",
+        warning = "Enable this only if you know what you are doing.",
+        default = LUIE.D.ChatUseSystem,
+    }
+    
+    optionsData[#optionsData + 1] = { -- Timestamp
+        type = "checkbox",
+        name = "\t\tInclude Timestamp",
+        tooltip = "Prepend printed text with current time label.",
+        getFunc = function() return LUIE.SV.TimeStamp end,
+        setFunc = function(value) LUIE.SV.TimeStamp = value end,
+        width = "full",
+        disabled = function() return not LUIE.SV.ChatUseSystem end,
+        default = LUIE.D.TimeStamp,
+    }
+    
+    optionsData[#optionsData + 1] = { -- Timestamp Format
+        type = "editbox",
+        name = "\t\tTimestamp format",
+        tooltip = "FORMAT:\nHH: hours (24)\nhh: hours (12)\nH: hour (24, no leading 0)\nh: hour (12, no leading 0)\nA: AM/PM\na: am/pm\nm: minutes\ns: seconds",
+        getFunc = function() return LUIE.SV.TimeStampFormat end,
+        setFunc = function(value) LUIE.SV.TimeStampFormat = value end,
+        width = "full",
+        disabled = function() return not (LUIE.SV.ChatUseSystem and LUIE.SV.TimeStamp) end,
+        default = LUIE.D.TimeStampFormat,
+    }
 
-    --[[ STARTUP MESSAGE OPTIONS ]]--
-    optionsData[#optionsData + 1] = {
+    optionsData[#optionsData + 1] = { -- Startup message options
         type = "checkbox",
         name = "Disable startup message",
         tooltip = "This setting will disable add-on startup message.",
@@ -2077,7 +2078,7 @@ function LUIE_CreateSettings()
         width = "full",
         default = LUIE.D.StartupInfo,
     }
-
+    
     for i = 1, GetNumAchievementCategories() do
         local name = GetAchievementCategoryInfo(i)
         local checkbox = {

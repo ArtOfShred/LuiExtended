@@ -18,6 +18,9 @@ LUIE.D = {
     CombatInfo_Enabled      = true,
     SpellCastBuff_Enable    = true,
     DamageMeter_Enable      = false,
+    ChatUseSystem           = false,
+    TimeStamp               = false,
+    TimeStampFormat         = "HH:m",
     StartupInfo             = false,
 }
 
@@ -149,13 +152,13 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 end
 
 -- Return a formatted time
--- stolen from pChat.lua - thanks @Ayantir
+-- Stolen from pChat, thanks @Ayantir
 function LUIE.CreateTimestamp(timeStr, formatStr)
-    formatStr = formatStr or CA.SV.TimeStampFormat
+    formatStr = formatStr or LUIE.D.TimeStampFormat
 
     -- Split up default timestamp
     local hours, minutes, seconds = timeStr:match("([^%:]+):([^%:]+):([^%:]+)")
-    local hoursNoLead = tonumber(hours) -- hours without leading zero
+    local hoursNoLead = tonumber(hours) -- Hours without leading zero
     local hours12NoLead = (hoursNoLead - 1)%12 + 1
     local hours12
     if (hours12NoLead < 10) then
@@ -197,8 +200,8 @@ end
 
 -- Easy Print to Chat
 function LUIE.PrintToChat(msg)
-    if CA.SV.ChatUseSystem and CHAT_SYSTEM.primaryContainer then
-        local msg = LUIE.FormatMessage(msg or "no message", CA.SV.TimeStamp)
+    if LUIE.D.ChatUseSystem and CHAT_SYSTEM.primaryContainer then
+        local msg = LUIE.FormatMessage(msg or "no message", LUIE.D.TimeStamp)
         -- Post as a System message so that it can appear in multiple tabs.
         CHAT_SYSTEM.primaryContainer:OnChatEvent(nil, msg, CHAT_CATEGORY_SYSTEM)
     else
