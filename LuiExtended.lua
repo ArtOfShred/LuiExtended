@@ -101,7 +101,7 @@ local function LUIE_LoadScreen()
     EVENT_MANAGER:UnregisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED)
 
     if not LUIE.SV.StartupInfo then
-        CHAT_SYSTEM:AddMessage(zo_strformat("|cEEEEEE<<1>>|r by |c00C000<<2>>|r |cEEEEEEv<<3>>|r", LUIE.name, LUIE.author, LUIE.version))
+        LUIE.PrintToChat(zo_strformat("|cEEEEEE<<1>>|r by |c00C000<<2>>|r |cEEEEEEv<<3>>|r", LUIE.name, LUIE.author, LUIE.version))
     end
 end
 
@@ -271,7 +271,7 @@ end
 function LUIE.PortPrimaryHome()
     primaryHouse = GetHousingPrimaryHouse()
     RequestJumpToHouse(primaryHouse)
-    CHAT_SYSTEM:AddMessage("Porting to primary House")
+    LUIE.PrintToChat("Porting to primary House")
 end
 
 -- Slash Commands
