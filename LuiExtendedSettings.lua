@@ -1,18 +1,3 @@
--- Saved variables options
-LUIE.SV = nil
-LUIE.SVVer  = 1
-LUIE.SVName = 'LUIESV'
-
--- Default Settings
-LUIE.D = {
-    UnitFrames_Enabled      = true,
-    InfoPanel_Enabled       = true,
-    CombatInfo_Enabled      = true,
-    SpellCastBuff_Enable    = true,
-    DamageMeter_Enable      = false,
-    StartupInfo             = false,
-}
-
 -- Create Settings Menu
 function LUIE_CreateSettings()
     local LAM2 = LibStub("LibAddonMenu-2.0")

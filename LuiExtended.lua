@@ -6,6 +6,21 @@ LUIE.author      = "ArtOfShred, Upularity & SpellBuilder"
 LUIE.version     = "4.99 BETA"
 LUIE.components  = {}
 
+-- Saved variables options
+LUIE.SV          = nil
+LUIE.SVVer       = 1
+LUIE.SVName      = 'LUIESV'
+
+-- Default Settings
+LUIE.D = {
+    UnitFrames_Enabled      = true,
+    InfoPanel_Enabled       = true,
+    CombatInfo_Enabled      = true,
+    SpellCastBuff_Enable    = true,
+    DamageMeter_Enable      = false,
+    StartupInfo             = false,
+}
+
 -- Global fonts table to use in other parts of this addon
 LUIE.Fonts = {
     ["ProseAntique"]            = "/EsoUI/Common/Fonts/ProseAntiquePSMT.otf",
