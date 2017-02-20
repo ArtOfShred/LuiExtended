@@ -1276,7 +1276,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "Show Guild Icons",
+                        name = "\t\t\t\tShow Guild Icons",
                         tooltip = "Displays the faction icon or guild rank icon for guild messages",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildIcon end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildIcon = value end,
@@ -1286,7 +1286,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "Show Guild Rank Changes",
+                        name = "\t\t\t\tShow Guild Rank Changes",
                         tooltip = "Prints notifications to chat for player guild rank changes, options are determined by the dropdown menu below.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildRank end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildRank = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
@@ -1296,7 +1296,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "dropdown",
-                        name = "Guild Rank Changes Display Options",
+                        name = "\t\t\t\tGuild Rank Changes Display Options",
                         tooltip = "Choose the method in which Guild Rank Changes will be reported. Self Only, Show all rank changes if you have the permissions to modify ranks, or show all rank changes regardless.",
                         choices = guildrankDisplayOptions,
                         getFunc = function() return guildrankDisplayOptions[LUIE.ChatAnnouncements.SV.GuildRankDisplayOptions] end,
@@ -1307,7 +1307,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "Show Guild MOTD message changes",
+                        name = "\t\t\t\tShow Guild MOTD message changes",
                         tooltip = "Print a message to chat when the Guild MOTD for one of your guilds is updated.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildMOTD end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildMOTD = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
@@ -1369,7 +1369,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "\t\tShow Gold changes",
+                        name = "Show Gold changes",
                         --tooltip = "",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GoldChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldChange = value LUIE.ChatAnnouncements.RegisterGoldEvents() end,
@@ -1377,18 +1377,18 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.GoldChange,
                     },
                     {
-                    type    = "colorpicker",
-                    name    = "\t\tGold Change color",
-                    --tooltip = "",
-                    getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.GoldColor) end,
-                    setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.GoldColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterGoldEvents() end,
-                    width = "full",
-                    disabled = function() return not LUIE.ChatAnnouncements.SV.GoldChange end,
-                    default = {r=LUIE.ChatAnnouncements.D.GoldColor[1], g=LUIE.ChatAnnouncements.D.GoldColor[2], b=LUIE.ChatAnnouncements.D.GoldColor[3]}
+                        type = "colorpicker",
+                        name = "\t\t\t\tGold Change color",
+                        --tooltip = "",
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.GoldColor) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.GoldColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterGoldEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.GoldChange end,
+                        default = {r=LUIE.ChatAnnouncements.D.GoldColor[1], g=LUIE.ChatAnnouncements.D.GoldColor[2], b=LUIE.ChatAnnouncements.D.GoldColor[3]}
                     },
                     {
                         type = "editbox",
-                        name = "\t\t\t\t\t\tGold Name",
+                        name = "\t\t\t\tGold Name",
                         tooltip = "Name to display for Gold (If this is anything other than 'Gold' or blank then an 's' will be added onto the end for quantities > 1)",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GoldName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldName = value end,
@@ -1398,7 +1398,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "\t\t\t\t\t\tShow total amount of Gold",
+                        name = "\t\t\t\tShow total amount of Gold",
                         tooltip = "Show total amount of Gold after changes are registered",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TotalGoldChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalGoldChange = value end,
@@ -1408,7 +1408,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "\t\tShow Alliance Point changes",
+                        name = "Show Alliance Point changes",
                         --tooltip = "",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AlliancePointChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AlliancePointChange = value LUIE.ChatAnnouncements.RegisterAlliancePointEvents() end,
@@ -1416,18 +1416,18 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.AlliancePointChange,
                     },
                     {
-                    type    = "colorpicker",
-                    name    = "\t\tAlliance Point Change color",
-                    --tooltip = "",
-                    getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.AlliancePointColor) end,
-                    setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.AlliancePointColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterAlliancePointEvents() end,
-                    width = "full",
-                    disabled = function() return not LUIE.ChatAnnouncements.SV.AlliancePointChange end,
-                    default = {r=LUIE.ChatAnnouncements.D.AlliancePointColor[1], g=LUIE.ChatAnnouncements.D.AlliancePointColor[2], b=LUIE.ChatAnnouncements.D.AlliancePointColor[3]}
+                        type = "colorpicker",
+                        name = "\t\t\t\tAlliance Point Change color",
+                        --tooltip = "",
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.AlliancePointColor) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.AlliancePointColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterAlliancePointEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.AlliancePointChange end,
+                        default = {r=LUIE.ChatAnnouncements.D.AlliancePointColor[1], g=LUIE.ChatAnnouncements.D.AlliancePointColor[2], b=LUIE.ChatAnnouncements.D.AlliancePointColor[3]}
                     },
                     {
                         type = "editbox",
-                        name = "\t\t\t\t\t\tAlliance Point Name",
+                        name = "\t\t\t\tAlliance Point Name",
                         tooltip = "Name to display for Alliance Points (USE SINGULAR)",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AlliancePointName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AlliancePointName = value end,
@@ -1437,7 +1437,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "\t\t\t\t\t\tShow total amount of Alliance Points",
+                        name = "\t\t\t\tShow total amount of Alliance Points",
                         tooltip = "Show total amount of Alliance Points after changes are registered",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TotalAlliancePointChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalAlliancePointChange = value end,
@@ -1447,7 +1447,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "\t\tShow Tel Var Stone changes",
+                        name = "Show Tel Var Stone changes",
                         --tooltip = "",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TelVarStoneChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TelVarStoneChange = value LUIE.ChatAnnouncements.RegisterTelVarStoneEvents() end,
@@ -1455,18 +1455,18 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.TelVarStoneChange,
                     },
                     {
-                    type    = "colorpicker",
-                    name    = "\t\tTel Var Stone Change color",
-                    --tooltip = "",
-                    getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.TelVarStoneColor) end,
-                    setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.TelVarStoneColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterTelVarStoneEvents() end,
-                    width = "full",
-                    disabled = function() return not LUIE.ChatAnnouncements.SV.TelVarStoneChange end,
-                    default = {r=LUIE.ChatAnnouncements.D.TelVarStoneColor[1], g=LUIE.ChatAnnouncements.D.TelVarStoneColor[2], b=LUIE.ChatAnnouncements.D.TelVarStoneColor[3]}
+                        type = "colorpicker",
+                        name = "\t\t\t\tTel Var Stone Change color",
+                        --tooltip = "",
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.TelVarStoneColor) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.TelVarStoneColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterTelVarStoneEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.TelVarStoneChange end,
+                        default = {r=LUIE.ChatAnnouncements.D.TelVarStoneColor[1], g=LUIE.ChatAnnouncements.D.TelVarStoneColor[2], b=LUIE.ChatAnnouncements.D.TelVarStoneColor[3]}
                     },
                     {
                         type = "editbox",
-                        name = "\t\t\t\t\t\tTel Var Stone Name",
+                        name = "\t\t\t\tTel Var Stone Name",
                         tooltip = "Name to display for Tel Var Stones (USE SINGULAR)",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TelVarStoneName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TelVarStoneName = value end,
@@ -1476,7 +1476,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "\t\t\t\t\t\tShow total amount of Tel Var Stones",
+                        name = "\t\t\t\tShow total amount of Tel Var Stones",
                         tooltip = "Show total amount of Tel Var Stones after changes are registered",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TotalTelVarStoneChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalTelVarStoneChange = value end,
@@ -1486,7 +1486,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "\t\tShow Writ Voucher changes",
+                        name = "Show Writ Voucher changes",
                         --tooltip = "",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.WritVoucherChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.WritVoucherChange = value LUIE.ChatAnnouncements.RegisterWritVoucherEvents() end,
@@ -1494,18 +1494,18 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.WritVoucherChange,
                     },
                     {
-                    type    = "colorpicker",
-                    name    = "\t\tWrit Voucher Change color",
-                    --tooltip = "",
-                    getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.WritVoucherColor) end,
-                    setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.WritVoucherColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterWritVoucherEvents() end,
-                    width = "full",
-                    disabled = function() return not LUIE.ChatAnnouncements.SV.WritVoucherChange end,
-                    default = {r=LUIE.ChatAnnouncements.D.WritVoucherColor[1], g=LUIE.ChatAnnouncements.D.WritVoucherColor[2], b=LUIE.ChatAnnouncements.D.WritVoucherColor[3]}
+                        type = "colorpicker",
+                        name = "\t\t\t\tWrit Voucher Change color",
+                        --tooltip = "",
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.WritVoucherColor) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.WritVoucherColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterWritVoucherEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.WritVoucherChange end,
+                        default = {r=LUIE.ChatAnnouncements.D.WritVoucherColor[1], g=LUIE.ChatAnnouncements.D.WritVoucherColor[2], b=LUIE.ChatAnnouncements.D.WritVoucherColor[3]}
                     },
                     {
                         type = "editbox",
-                        name = "\t\t\t\t\t\tWrit Voucher Name",
+                        name = "\t\t\t\tWrit Voucher Name",
                         tooltip = "Name to display for Writ Vouchers (USE SINGULAR)",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.WritVoucherName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.WritVoucherName = value end,
@@ -1515,7 +1515,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "\t\t\t\t\t\tShow total amount of Writ Vouchers",
+                        name = "\t\t\t\tShow total amount of Writ Vouchers",
                         tooltip = "Show total amount of Writ Vouchers after changes are registered",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TotalWritVoucherChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalWritVoucherChange = value end,
@@ -1610,7 +1610,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "\t\tShow looted items",
+                        name = "Show looted items",
                         --tooltip = "",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.Loot end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.Loot = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
@@ -1624,14 +1624,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootOnlyNotable end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootOnlyNotable = value end,
                         width = "full",
-                        disabled = function() return not
-                            (
-                                LUIE.ChatAnnouncements.SV.Loot or
-                                LUIE.ChatAnnouncements.SV.LootCraft or
-                                LUIE.ChatAnnouncements.SV.LootTrade or
-                                LUIE.ChatAnnouncements.SV.LootMail or
-                                LUIE.ChatAnnouncements.SV.LootVendor
-                            ) end,
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.Loot end,
                         default = LUIE.ChatAnnouncements.D.LootOnlyNotable,
                     },
                     {
@@ -1646,42 +1639,18 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "\t\t\t\tHide Trash Quality Items",
-                        tooltip = "Don't show trash quality items!",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootNotTrash end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootNotTrash = value end,
-                        width = "full",
-                        disabled = function() return not
-                            (
-                                LUIE.ChatAnnouncements.SV.Loot or
-                                LUIE.ChatAnnouncements.SV.LootCraft or
-                                LUIE.ChatAnnouncements.SV.LootTrade or
-                                LUIE.ChatAnnouncements.SV.LootMail or
-                                LUIE.ChatAnnouncements.SV.LootVendor
-                            ) end,
-                        default = LUIE.ChatAnnouncements.D.LootNotTrash,
-                    },
-                    {
-                        type = "checkbox",
                         name = "\t\t\t\tHide annoying notable Items",
                         tooltip = "Don't show:\nLaurel\nMalachite Shard\nUndaunted Plunder\nThe Serpent's Egg-Tooth\nThe Rid-Thar's Moon Pearls\nStar-Studded Champion's Baldric\nPeriapt of Elinhir\nGlass Style Motif Fragments\nMercenary Motif Pages",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootBlacklist end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootBlacklist = value end,
                         width = "full",
-                        warning = "This prevents chat spam in large groups",
-                        disabled = function() return not
-                            (
-                                LUIE.ChatAnnouncements.SV.Loot or
-                                LUIE.ChatAnnouncements.SV.LootCraft or
-                                LUIE.ChatAnnouncements.SV.LootTrade or
-                                LUIE.ChatAnnouncements.SV.LootMail or
-                                LUIE.ChatAnnouncements.SV.LootVendor
-                            ) end,
+                        warning = "This prevents chat spam in large groups (Trials)",
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.Loot end,
                         default = LUIE.ChatAnnouncements.D.LootBlacklist,
                     },
                     {
                         type = "checkbox",
-                        name = "\t\tShow Vendor ",
+                        name = "Show Vendor ",
                         --tooltip = "",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootVendor end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootVendor = value LUIE.ChatAnnouncements.RegisterVendorEvents() end,
@@ -1690,7 +1659,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "\t\tShow Bank ",
+                        name = "Show Bank ",
                         --tooltip = "",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootBank end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootBank = value LUIE.ChatAnnouncements.RegisterBankEvents() end,
@@ -1699,7 +1668,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "\t\tShow Mail",
+                        name = "Show Mail",
                         --tooltip = "",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootMail end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMail = value LUIE.ChatAnnouncements.RegisterMailEvents() end,
@@ -1708,7 +1677,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "\t\tShow Trade",
+                        name = "Show Trade",
                         --tooltip = "",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootTrade end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootTrade = value LUIE.ChatAnnouncements.RegisterTradeEvents() end,
@@ -1717,7 +1686,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "\t\tShow Craft",
+                        name = "Show Craft",
                         --tooltip = "",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootCraft end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootCraft = value LUIE.ChatAnnouncements.RegisterCraftEvents() end,
@@ -1794,6 +1763,23 @@ function LUIE_CreateSettings()
                                 LUIE.ChatAnnouncements.SV.LootVendor
                             ) end,
                         default = LUIE.ChatAnnouncements.D.LootShowStyle,
+                    },
+                    {
+                        type = "checkbox",
+                        name = "Hide Trash Quality Items",
+                        tooltip = "Don't show trash quality items!",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootNotTrash end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootNotTrash = value end,
+                        width = "full",
+                        disabled = function() return not
+                            (
+                                LUIE.ChatAnnouncements.SV.Loot or
+                                LUIE.ChatAnnouncements.SV.LootCraft or
+                                LUIE.ChatAnnouncements.SV.LootTrade or
+                                LUIE.ChatAnnouncements.SV.LootMail or
+                                LUIE.ChatAnnouncements.SV.LootVendor
+                            ) end,
+                        default = LUIE.ChatAnnouncements.D.LootNotTrash,
                     },
                     {
                         type = "dropdown",
