@@ -57,13 +57,17 @@ libs\LibAddonMenu-2.0\controls\iconpicker.lua
 libs\LibAddonMenu-2.0\controls\divider.lua
 
 LuiExtended.lua
+LuiExtendedUI.lua
+LuiExtendedSettings.lua
+
 bindings.xml
-UI.lua
+
 i18n\locale.lua
-Effects.lua
-InfoPanel.lua
-ChatAnnouncements.lua
-CombatInfo.lua
-DamageMeter.lua
-UnitFrames.lua
-SpellCastBuffs.lua
+
+modules\Effects.lua
+modules\InfoPanel.lua
+modules\ChatAnnouncements.lua
+modules\CombatInfo.lua
+modules\DamageMeter.lua
+modules\UnitFrames.lua
+modules\SpellCastBuffs.lua
