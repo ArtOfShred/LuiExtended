@@ -200,7 +200,7 @@ function CA.GuildMemberAdded(eventCode, guildId, DisplayName)
     local guildName = GetGuildName(guildId)
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
-    printToChat(strformat("|cFEFEFE<<1>>|r has joined |cFEFEFE<<2>>|r", displayNameLink, guildNameAlliance))
+    printToChat(strformat("|cFEFEFE<<1>>|r has joined <<2>>", displayNameLink, guildNameAlliance))
 end
 
 function CA.GuildMemberRemoved(eventCode, guildId, DisplayName, CharacterName)
@@ -210,7 +210,7 @@ function CA.GuildMemberRemoved(eventCode, guildId, DisplayName, CharacterName)
     local guildName = GetGuildName(guildId)
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
-    printToChat(strformat("|cFEFEFE<<1>>|r has left |cFEFEFE<<2>>|r", displayNameLink, guildNameAlliance))
+    printToChat(strformat("|cFEFEFE<<1>>|r has left <<2>>", displayNameLink, guildNameAlliance))
 end
 
 function CA.GuildMOTD(eventCode, guildId)
