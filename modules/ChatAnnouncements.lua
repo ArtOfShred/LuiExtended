@@ -165,6 +165,7 @@ function CA.RegisterSocialEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_REMOVED, CA.FriendInviteRemoved)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARED, CA.QuestShared)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARE_REMOVED, CA.QuestShareRemoved)
+    end
 end
 
 GuildRankData = {} -- Variable to store local player guild ranks, for guild rank changes.
