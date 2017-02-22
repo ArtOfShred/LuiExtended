@@ -1229,20 +1229,12 @@ function LUIE_CreateSettings()
             {
                 type = "dropdown",
                 name = "Player Name Display Method",
+                tooltip = "Determines the method used to display player names in Chat Announcements where applicable.\nDefault: Character Name",
                 choices = chatnameDisplayOptions,
                 getFunc = function() return chatnameDisplayOptions[LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions] end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions = chatnameDisplayOptionsKeys[value] end,
                 width = "full",
                 default = chatnameDisplayOptions[2],
-            },
-            {
-                type = "checkbox",
-                name = "Show group change events in chat",
-                tooltip = "Print message to chat when player joins or leaves the group.",
-                getFunc = function() return LUIE.ChatAnnouncements.SV.GroupChatMsg end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupChatMsg = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
-                width = "full",
-                default = LUIE.ChatAnnouncements.D.GroupChatMsg,
             },
             {
                 type = "submenu",
@@ -1251,7 +1243,16 @@ function LUIE_CreateSettings()
                 controls = {
                     {
                         type = "checkbox",
-                        name = "Show Trade Changes",
+                        name = "Show Group Event Messages",
+                        tooltip = "Print a notification to chat for group invites, group composition changes, and LFG features.",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupChatMsg end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupChatMsg = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        width = "full",
+                        default = LUIE.ChatAnnouncements.D.GroupChatMsg,
+                    },
+                    {
+                        type = "checkbox",
+                        name = "Show Trade Event Messages",
                         tooltip = "Prints a notification to chat for trade invitations, cancellation, and success.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscTrade end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscTrade = value LUIE.ChatAnnouncements.RegisterTradeEvents() end,
@@ -1260,8 +1261,8 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "Show Mail Changes",
-                        tooltip = "Prints a notification to chat when Mail is accepted, deleted, or sent",
+                        name = "Show Mail Event Messages",
+                        tooltip = "Prints a notification to chat when mail is accepted, deleted, or sent.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscMail end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscMail = value LUIE.ChatAnnouncements.RegisterMailEvents() end,
                         width = "full",
@@ -1269,8 +1270,8 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "Show Guild event messages",
-                        tooltip = "Prints notifications to chat for Guild Invites and members joining/leaving one of your guilds.",
+                        name = "Show Guild Event Messages",
+                        tooltip = "Prints a notification to chat for guild invites and members joining/leaving one of your guilds.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuild end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuild = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
                         width = "full",
@@ -1279,7 +1280,7 @@ function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "\t\t\t\tShow Guild Icons",
-                        tooltip = "Displays the faction icon or guild rank icon for guild messages",
+                        tooltip = "Displays the faction icon or guild rank icon for guild messages.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildIcon end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildIcon = value end,
                         width = "full",
@@ -1289,7 +1290,7 @@ function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "\t\t\t\tShow Guild Rank Changes",
-                        tooltip = "Prints notifications to chat for player guild rank changes, options are determined by the dropdown menu below.",
+                        tooltip = "Prints a notification to chat for player guild rank changes. Options are determined by the dropdown menu below.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildRank end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildRank = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
                         width = "full",
@@ -1299,7 +1300,7 @@ function LUIE_CreateSettings()
                     {
                         type = "dropdown",
                         name = "\t\t\t\tGuild Rank Changes Display Options",
-                        tooltip = "Choose the method in which Guild Rank Changes will be reported. Self Only, Show all rank changes if you have the permissions to modify ranks, or show all rank changes regardless.",
+                        tooltip = "Choose the method in which guild rank changes will be reported.\nDefault: Self Only",
                         choices = guildrankDisplayOptions,
                         getFunc = function() return guildrankDisplayOptions[LUIE.ChatAnnouncements.SV.GuildRankDisplayOptions] end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildRankDisplayOptions = guildrankDisplayOptionsKeys[value] LUIE.ChatAnnouncements.RegisterGuildEvents() end,
@@ -1309,8 +1310,8 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "\t\t\t\tShow Guild MOTD message changes",
-                        tooltip = "Print a message to chat when the Guild MOTD for one of your guilds is updated.",
+                        name = "\t\t\t\tShow Guild MOTD Message Changes",
+                        tooltip = "Print a notifcation to chat when the MOTD for one of your guilds is updated.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildMOTD end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildMOTD = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
                         width = "full",
@@ -1320,7 +1321,7 @@ function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "Show Bag/Bank Upgrade Messages",
-                        tooltip = "Print a message to chat when Bag or Bank space upgrades are purchased ingame or through the crown store. Note currency changes can be amended onto this statement.",
+                        tooltip = "Print a notification to chat when bag or bank space upgrades are purchased ingame or through the crown store.\nNOTE: Currency changes can be ammended onto this statement.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscBags end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscBags = value LUIE.ChatAnnouncements.RegisterBagEvents() end,
                         width = "full",
@@ -1329,7 +1330,7 @@ function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "Show Riding Skill Upgrade Messages",
-                        tooltip = "Print a message to chat when Riding upgrades are purchased or Crown Riding Skill books are used. Note currency changes can be amended onto this statement.",
+                        tooltip = "Print a notification to chat when riding upgrades are purchased or Crown Riding Skill books are used.\nNOTE: Currency changes can be ammended onto this statement.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscHorse end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscHorse = value LUIE.ChatAnnouncements.RegisterHorseEvents() end,
                         width = "full",
@@ -1337,8 +1338,8 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "Show Lockpick Success/Failure Messages",
-                        tooltip = "Print a notification when a lockpick attempt is failed or succeeds.",
+                        name = "Show Lockpick Failure/Success Messages",
+                        tooltip = "Print a notification to chat when for failed or successful lockpick attempts.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscLockpick end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscLockpick = value LUIE.ChatAnnouncements.RegisterLockpickEvents() end,
                         width = "full",
@@ -1347,7 +1348,7 @@ function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "Show Justice Confiscation Messages",
-                        tooltip = "Print a notification to chat when Items or Gold are confiscated by a Guard through either dialogue or player death.",
+                        tooltip = "Print a notification to chat when items or gold are confiscated by a guard through dialogue or player death.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscConfiscate end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscConfiscate = value LUIE.ChatAnnouncements.RegisterDestroyEvents() end,
                         width = "full",
@@ -1362,8 +1363,8 @@ function LUIE_CreateSettings()
                 controls = {
                     {
                         type = "checkbox",
-                        name = "Show looted currency icons",
-                        --tooltip = "",
+                        name = "Show Looted Currency Icons",
+                        tooltip = "Display an icon for the relative type of currency when a notification is printed.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyIcons end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyIcons = value end,
                         width = "full",
@@ -1371,8 +1372,8 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "Show Gold changes",
-                        --tooltip = "",
+                        name = "Show Gold Changes",
+                        tooltip = "Print a context sensitive notification to chat when gold is gained or lost.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GoldChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldChange = value LUIE.ChatAnnouncements.RegisterGoldEvents() end,
                         width = "full",
@@ -1380,7 +1381,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "colorpicker",
-                        name = "\t\t\t\tGold Change color",
+                        name = "\t\t\t\tGold Change Color",
                         --tooltip = "",
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.GoldColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.GoldColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterGoldEvents() end,
@@ -1391,7 +1392,7 @@ function LUIE_CreateSettings()
                     {
                         type = "editbox",
                         name = "\t\t\t\tGold Name",
-                        tooltip = "Name to display for Gold (If this is anything other than 'Gold' or blank then an 's' will be added onto the end for quantities > 1)",
+                        tooltip = "Name to display for Gold. \"s\" will be added onto plural quantities of this name unless using one of the special formats listed below.\nSPECIAL FORMATTING:\nUsing \"Gold\", \"Currency\", \"G\", or \"GP\" will bypass the plural addition.\nUsing \"g\" or \"gp\" will remove the spacing between the change amount and name as well as bypass the plural addition.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GoldName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldName = value end,
                         width = "full",
@@ -1401,7 +1402,7 @@ function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "\t\t\t\tShow total amount of Gold",
-                        tooltip = "Show total amount of Gold after changes are registered",
+                        tooltip = "Show total amount of Gold after change is displayed.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TotalGoldChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalGoldChange = value end,
                         width = "full",
@@ -1410,8 +1411,8 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "Show Alliance Point changes",
-                        --tooltip = "",
+                        name = "Show Alliance Point Changes",
+                        tooltip = "Print a context sensitive notification to chat when Alliance Points are earned or spent.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AlliancePointChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AlliancePointChange = value LUIE.ChatAnnouncements.RegisterAlliancePointEvents() end,
                         width = "full",
@@ -1419,7 +1420,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "colorpicker",
-                        name = "\t\t\t\tAlliance Point Change color",
+                        name = "\t\t\t\tAlliance Point Change Color",
                         --tooltip = "",
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.AlliancePointColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.AlliancePointColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterAlliancePointEvents() end,
@@ -1430,7 +1431,7 @@ function LUIE_CreateSettings()
                     {
                         type = "editbox",
                         name = "\t\t\t\tAlliance Point Name",
-                        tooltip = "Name to display for Alliance Points (USE SINGULAR)",
+                        tooltip = "Name to display for Alliance Points. \"s\" will be added onto plural quantities of this name unless using one of the special formats listed below.\nSPECIAL FORMATTING:\nUsing \"A\" or \"AP\" will bypass the plural addition.\nUsing \"a\" or \"ap\" will remove the spacing between the change amount and name as well as bypass the plural addition.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AlliancePointName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AlliancePointName = value end,
                         width = "full",
@@ -1440,7 +1441,7 @@ function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "\t\t\t\tShow total amount of Alliance Points",
-                        tooltip = "Show total amount of Alliance Points after changes are registered",
+                        tooltip = "Show total amount of Alliance Points after change is displayed.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TotalAlliancePointChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalAlliancePointChange = value end,
                         width = "full",
@@ -1449,8 +1450,8 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "Show Tel Var Stone changes",
-                        --tooltip = "",
+                        name = "Show Tel Var Stone Changes",
+                        tooltip = "Print a context sensitive notification to chat when Tel Var Stones are gained or lost.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TelVarStoneChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TelVarStoneChange = value LUIE.ChatAnnouncements.RegisterTelVarStoneEvents() end,
                         width = "full",
@@ -1458,7 +1459,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "colorpicker",
-                        name = "\t\t\t\tTel Var Stone Change color",
+                        name = "\t\t\t\tTel Var Stone Change Color",
                         --tooltip = "",
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.TelVarStoneColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.TelVarStoneColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterTelVarStoneEvents() end,
@@ -1469,7 +1470,7 @@ function LUIE_CreateSettings()
                     {
                         type = "editbox",
                         name = "\t\t\t\tTel Var Stone Name",
-                        tooltip = "Name to display for Tel Var Stones (USE SINGULAR)",
+                        tooltip = "Name to display for Tel Var Stones. \"s\" will be added onto plural quantities of this name unless using one of the special formats listed below.\nSPECIAL FORMATTING:\nUsing \"Tel Var\", \"TelVar\", \"T\", \"TV\", or \"TVS\" will bypass the plural addition.\nUsing \"t\", \"tv\", or \"tvs\" will remove the spacing between the change amount and name as well as bypass the plural addition.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TelVarStoneName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TelVarStoneName = value end,
                         width = "full",
@@ -1479,7 +1480,7 @@ function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "\t\t\t\tShow total amount of Tel Var Stones",
-                        tooltip = "Show total amount of Tel Var Stones after changes are registered",
+                        tooltip = "Show total amount of Tel Var Stones after change is displayed.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TotalTelVarStoneChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalTelVarStoneChange = value end,
                         width = "full",
@@ -1488,8 +1489,8 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "Show Writ Voucher changes",
-                        --tooltip = "",
+                        name = "Show Writ Voucher Changes",
+                        tooltip = "Print a context sensitive notification to chat when Writ Vouchers are rewarded or spent.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.WritVoucherChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.WritVoucherChange = value LUIE.ChatAnnouncements.RegisterWritVoucherEvents() end,
                         width = "full",
@@ -1497,7 +1498,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "colorpicker",
-                        name = "\t\t\t\tWrit Voucher Change color",
+                        name = "\t\t\t\tWrit Voucher Change Color",
                         --tooltip = "",
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.WritVoucherColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.WritVoucherColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterWritVoucherEvents() end,
@@ -1508,7 +1509,7 @@ function LUIE_CreateSettings()
                     {
                         type = "editbox",
                         name = "\t\t\t\tWrit Voucher Name",
-                        tooltip = "Name to display for Writ Vouchers (USE SINGULAR)",
+                        tooltip = "Name to display for Writ Vouchers. \"s\" will be added onto plural quantities of this name unless using one of the special formats listed below.\nSPECIAL FORMATTING:\nUsing \"WV\", \"W\", or \"V\" will bypass the plural addition.\nUsing \"wv\", \"w\", or \"v\" will remove the spacing between the change amount and name as well as bypass the plural addition.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.WritVoucherName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.WritVoucherName = value end,
                         width = "full",
@@ -1518,7 +1519,7 @@ function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "\t\t\t\tShow total amount of Writ Vouchers",
-                        tooltip = "Show total amount of Writ Vouchers after changes are registered",
+                        tooltip = "Show total amount of Writ Vouchers after change is displayed.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TotalWritVoucherChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalWritVoucherChange = value end,
                         width = "full",
@@ -1529,7 +1530,7 @@ function LUIE_CreateSettings()
                         type = "dropdown",
                         name = "Bracket Settings for Context Specific Messages",
                         choices = currencyBracketOptions,
-                        tooltip = "Allows you to customize the format of the Brackets present on Context Specific Messages.",
+                        tooltip = "Allows you to customize the format of the Brackets present on Context Specific Messages.\nDefault: []",
                         getFunc = function() return currencyBracketOptions[LUIE.ChatAnnouncements.SV.CurrencyBracketDisplayOptions] end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyBracketDisplayOptions = currencyBracketOptionsKeys[value] end,
                         width = "full",
@@ -1545,7 +1546,7 @@ function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "Allow override Context specific messages",
-                        tooltip = "When toggled on, allows you to enter a message in the field below to replace the default context based messages for currency changes. Note that these changes will still recolor in green/red depending on whether currency was gained or lost.",
+                        tooltip = "When toggled on, allows you to enter a message in the field below to replace the default context based messages for currency changes.\nNote: These changes will still recolor to green/red depending on the context of currency change.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyContextToggle end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyContextToggle = value end,
                         width = "full",
@@ -1561,7 +1562,7 @@ function LUIE_CreateSettings()
                     {
                         type = "editbox",
                         name = "Context Override Message - Currency Gain",
-                        tooltip = "Enter a string to replace the default context specific bracketed message displayed positive before currency changes",
+                        tooltip = "Enter a string to replace the default context specific bracketed message displayed before POSITIVE currency changes.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyContextMessageUp end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyContextMessageUp = value end,
                         width = "full",
@@ -1571,7 +1572,7 @@ function LUIE_CreateSettings()
                     {
                         type = "editbox",
                         name = "Context Override Message - Currency Loss",
-                        tooltip = "Enter a string to replace the default context specific bracketed message displayed before negative currency changes",
+                        tooltip = "Enter a string to replace the default context specific bracketed message displayed before NEGATIVE currency changes.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyContextMessageDown end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyContextMessageDown = value end,
                         width = "full",
@@ -1581,7 +1582,7 @@ function LUIE_CreateSettings()
                     {
                         type = "editbox",
                         name = "Total Currency Message",
-                        tooltip = "Change the message displayed before total currency listed. DEFAULT = (\"[New Total]\")",
+                        tooltip = "Change the message displayed before total currency listed.\nDefault = (\"[New Total]\")",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyTotalMessage end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyTotalMessage = value end,
                         width = "full",
@@ -1603,8 +1604,8 @@ function LUIE_CreateSettings()
                 controls = {
                     {
                         type = "checkbox",
-                        name = "Show looted items icons",
-                        --tooltip = "",
+                        name = "Show Looted Item Icons",
+                        tooltip = "Display an icon for looted items.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootIcons end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootIcons = value end,
                         width = "full",
@@ -1612,8 +1613,8 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "Show looted items",
-                        --tooltip = "",
+                        name = "Show Looted Items",
+                        tooltip = "Display items looted from corpses, containers, pickpocketing, and quest rewards.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.Loot end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.Loot = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
                         width = "full",
@@ -1621,7 +1622,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "\t\t\t\tShow only notable Loot",
+                        name = "\t\t\t\tShow Only Notable Loot",
                         tooltip = "Don't show all looted items but only notable ones. (Any set items, any purple+ items, any blue+ special items).",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootOnlyNotable end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootOnlyNotable = value end,
@@ -1631,8 +1632,8 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "\t\t\t\tShow Group members notable loot",
-                        tooltip = "Also show the notable loot group members receive. Notable items are: any set items, any purple+ items, blue+ special items (e.g., treasure maps).\nShow loot must be enabled.",
+                        name = "\t\t\t\tShow Group Members Notable Loot",
+                        tooltip = "Also show the notable loot group members receive. (Any set items, any purple+ items, any blue+ special items).",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootGroup end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootGroup = value end,
                         width = "full",
@@ -1641,7 +1642,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "\t\t\t\tHide annoying notable Items",
+                        name = "\t\t\t\tHide Annoying Notable Items",
                         tooltip = "Don't show:\nLaurel\nMalachite Shard\nUndaunted Plunder\nThe Serpent's Egg-Tooth\nThe Rid-Thar's Moon Pearls\nStar-Studded Champion's Baldric\nPeriapt of Elinhir\nGlass Style Motif Fragments\nMercenary Motif Pages",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootBlacklist end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootBlacklist = value end,
@@ -1652,8 +1653,8 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "Show Vendor ",
-                        --tooltip = "",
+                        name = "Show Vendor Inventory Changes",
+                        tooltip = "Display items purchased or sold at a vendor.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootVendor end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootVendor = value LUIE.ChatAnnouncements.RegisterVendorEvents() end,
                         width = "full",
@@ -1661,8 +1662,8 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "Show Bank ",
-                        --tooltip = "",
+                        name = "Show Bank Inventory Changes",
+                        tooltip = "Display items deposited or withdrawn from a bank or guild bank.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootBank end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootBank = value LUIE.ChatAnnouncements.RegisterBankEvents() end,
                         width = "full",
@@ -1670,8 +1671,8 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "Show Mail",
-                        --tooltip = "",
+                        name = "Show Mail Inventory Changes",
+                        tooltip = "Display items received or sent in the mail.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootMail end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMail = value LUIE.ChatAnnouncements.RegisterMailEvents() end,
                         width = "full",
@@ -1680,7 +1681,7 @@ function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "Show Trade",
-                        --tooltip = "",
+                        tooltip = "Display items received or lost in a trade.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootTrade end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootTrade = value LUIE.ChatAnnouncements.RegisterTradeEvents() end,
                         width = "full",
@@ -1689,21 +1690,11 @@ function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "Show Craft",
-                        --tooltip = "",
+                        tooltip = "Display items recieved, lost, or upgraded from crafting.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootCraft end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootCraft = value LUIE.ChatAnnouncements.RegisterCraftEvents() end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.LootCraft,
-                    },
-                    {
-                        type = "checkbox",
-                        name = "\t\t\t\tShow Items Destroy",
-                        tooltip = "Will show when an item is destroyed",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.ShowDestroy end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowDestroy = value LUIE.ChatAnnouncements.RegisterDestroyEvents() end,
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.LootCraft end,
-                        width = "full",
-                        default = LUIE.ChatAnnouncements.D.ShowDestroy,
                     },
                     {
                         type = "checkbox",
@@ -1717,8 +1708,18 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
+                        name = "Show Destroyed Items",
+                        tooltip = "Will show when an item is destroyed.",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.ShowDestroy end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowDestroy = value LUIE.ChatAnnouncements.RegisterDestroyEvents() end,
+                        disabled = function() return not LUIE.ChatAnnouncements.SV.LootCraft end,
+                        width = "full",
+                        default = LUIE.ChatAnnouncements.D.ShowDestroy,
+                    },
+                    {
+                        type = "checkbox",
                         name = "Show Armor Type",
-                        tooltip = "Show the armor type of gear items in the log, so there is no need to inspect links to determine their armor type.\nShow loot must be enabled.",
+                        tooltip = "Show the armor type of gear items in the log.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootShowArmorType end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootShowArmorType = value end,
                         width = "full",
@@ -1728,14 +1729,15 @@ function LUIE_CreateSettings()
                                 LUIE.ChatAnnouncements.SV.LootCraft or
                                 LUIE.ChatAnnouncements.SV.LootTrade or
                                 LUIE.ChatAnnouncements.SV.LootMail or
-                                LUIE.ChatAnnouncements.SV.LootVendor
+                                LUIE.ChatAnnouncements.SV.LootVendor or
+                                LUIE.ChatAnnouncements.Sv.LootBank
                             ) end,
                         default = LUIE.ChatAnnouncements.D.LootShowArmorType,
                     },
                     {
                         type = "checkbox",
                         name = "Show Item Trait",
-                        tooltip = "Show the traits of gear items in the log, so there is no need to inspect links to determine their traits.\nShow loot must be enabled.",
+                        tooltip = "Show the traits of gear items in the log.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootShowTrait end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootShowTrait = value end,
                         width = "full",
@@ -1745,14 +1747,15 @@ function LUIE_CreateSettings()
                                 LUIE.ChatAnnouncements.SV.LootCraft or
                                 LUIE.ChatAnnouncements.SV.LootTrade or
                                 LUIE.ChatAnnouncements.SV.LootMail or
-                                LUIE.ChatAnnouncements.SV.LootVendor
+                                LUIE.ChatAnnouncements.SV.LootVendor or
+                                LUIE.ChatAnnouncements.Sv.LootBank
                             ) end,
                         default = LUIE.ChatAnnouncements.D.LootShowTrait,
                     },
                     {
                         type = "checkbox",
                         name = "Show Item Style",
-                        tooltip = "Show the style of gear items in the log, so there is no need to inspect links to determine their traits.\nShow loot must be enabled.",
+                        tooltip = "Show the style of gear items in the log.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootShowStyle end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootShowStyle = value end,
                         width = "full",
@@ -1762,14 +1765,15 @@ function LUIE_CreateSettings()
                                 LUIE.ChatAnnouncements.SV.LootCraft or
                                 LUIE.ChatAnnouncements.SV.LootTrade or
                                 LUIE.ChatAnnouncements.SV.LootMail or
-                                LUIE.ChatAnnouncements.SV.LootVendor
+                                LUIE.ChatAnnouncements.SV.LootVendor or
+                                LUIE.ChatAnnouncements.Sv.LootBank
                             ) end,
                         default = LUIE.ChatAnnouncements.D.LootShowStyle,
                     },
                     {
                         type = "checkbox",
                         name = "Hide Trash Quality Items",
-                        tooltip = "Don't show trash quality items!",
+                        tooltip = "Don't show trash quality items.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootNotTrash end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootNotTrash = value end,
                         width = "full",
@@ -1779,7 +1783,8 @@ function LUIE_CreateSettings()
                                 LUIE.ChatAnnouncements.SV.LootCraft or
                                 LUIE.ChatAnnouncements.SV.LootTrade or
                                 LUIE.ChatAnnouncements.SV.LootMail or
-                                LUIE.ChatAnnouncements.SV.LootVendor
+                                LUIE.ChatAnnouncements.SV.LootVendor or
+                                LUIE.ChatAnnouncements.Sv.LootBank
                             ) end,
                         default = LUIE.ChatAnnouncements.D.LootNotTrash,
                     },
@@ -1797,14 +1802,15 @@ function LUIE_CreateSettings()
                                 LUIE.ChatAnnouncements.SV.LootCraft or
                                 LUIE.ChatAnnouncements.SV.LootTrade or
                                 LUIE.ChatAnnouncements.SV.LootMail or
-                                LUIE.ChatAnnouncements.SV.LootVendor
+                                LUIE.ChatAnnouncements.SV.LootVendor or
+                                LUIE.ChatAnnouncements.Sv.LootBank
                             ) end,
                         default = itemBracketOptions[1]
                     },
                     {
                         type = "checkbox",
-                        name = "Allow override Item Context specific messages",
-                        tooltip = "When toggled on, allows you to enter a message in the field below to replace the default context based messages for items looted. Note that these changes will still recolor in green/red depending on whether currency was gained or lost.",
+                        name = "Allow Override Item Context Specific Messages",
+                        tooltip = "When toggled on, allows you to enter a message in the field below to replace the default context based messages for items received or lost.\nNote: These changes will still recolor to green/red depending on context.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ItemContextToggle end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ItemContextToggle = value end,
                         width = "full",
@@ -1814,14 +1820,15 @@ function LUIE_CreateSettings()
                                 LUIE.ChatAnnouncements.SV.LootCraft or
                                 LUIE.ChatAnnouncements.SV.LootTrade or
                                 LUIE.ChatAnnouncements.SV.LootMail or
-                                LUIE.ChatAnnouncements.SV.LootVendor
+                                LUIE.ChatAnnouncements.SV.LootVendor or
+                                LUIE.ChatAnnouncements.Sv.LootBank
                             ) end,
                         default = LUIE.ChatAnnouncements.D.ItemContextToggle,
                     },
                     {
                         type = "editbox",
                         name = "Context Specific Override Message - Loot",
-                        tooltip = "Enter a string to replace the default context specific bracketed message displayed positive before item changes",
+                        tooltip = "Enter a string to replace the default context specific bracketed message displayed before item changes.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ItemContextMessage end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ItemContextMessage = value end,
                         width = "full",
@@ -1830,8 +1837,8 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "Merge LootLog sale with currency change",
-                        tooltip = "Enabling this option will cause the 2 individual messages when you purchase/sell an item at a vendor to merge into one combined line",
+                        name = "Merge LootLog Sales with Currency Changes",
+                        tooltip = "Enabling this option will cause the 2 individual messages when you purchase/sell an item at a vendor to merge into one combined line.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootCurrencyCombo end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootCurrencyCombo = value end,
                         width = "full",
@@ -1865,7 +1872,7 @@ function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "Display Level Up Message in Chat",
-                        tooltip = "Displays a message in chat when the player levels up",
+                        tooltip = "Displays a message in chat when the player levels up.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceLevelUp end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceLevelUp = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
@@ -1874,7 +1881,7 @@ function LUIE_CreateSettings()
                     {
                         type = "editbox",
                         name = "Context Name for Experience Gain",
-                        tooltip = "Modify the message that appears before reporting the # of experience points gained. This option is intended to offer contrast from currency and loot messages since experience gain is not context sensitive. (DEFAULT: \"[Gained]\")",
+                        tooltip = "Modify the message that appears before reporting the # of experience points gained. This option is intended to offer contrast from currency and loot messages since experience gain is not context sensitive.\nDefault: \"[Earned]\"",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceContextName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceContextName = value end,
                         width = "full",
@@ -1884,7 +1891,7 @@ function LUIE_CreateSettings()
                     {
                         type = "editbox",
                         name = "Display Name for Experience Gain",
-                        tooltip = "Name to post in chat when experience is gained - can leave blank as well (DEFAULT: \"Experience\")",
+                        tooltip = "Name to post in chat when experience is gained.\nDefault: \"XP\"",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceName = value end,
                         width = "full",
@@ -1894,7 +1901,7 @@ function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "Display Experience Icon",
-                        tooltip = "Toggle the display of an icon with experience point gain",
+                        tooltip = "Toggle the display of an icon with experience point gain.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceIcon end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceIcon = value end,
                         width = "full",
@@ -1904,7 +1911,7 @@ function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "Show Progress to next level",
-                        tooltip = "When enabled, any XP gains will be amended with a display of your progress toward the next level",
+                        tooltip = "When enabled, any XP gains will be amended with a display of your progress toward the next level.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceShowProgress end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceShowProgress = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
@@ -1914,7 +1921,7 @@ function LUIE_CreateSettings()
                     {
                         type = "dropdown",
                         name = "Progress Display Method",
-                        tooltip = "Choose the method in which Experience progress will be reported",
+                        tooltip = "Choose the method in which Experience progress will be reported.",
                         choices = experienceDisplayOptions,
                         getFunc = function() return experienceDisplayOptions[LUIE.ChatAnnouncements.SV.ExperienceDisplayOptions] end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceDisplayOptions = experienceDisplayOptionsKeys[value] end,
@@ -1925,7 +1932,7 @@ function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "Show Color Experience Progress",
-                        tooltip = "Enables color change for reported experience based off level of completion toward the next level",
+                        tooltip = "Enables color change for reported experience based off level of completion toward the next level.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceProgressColor end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceProgressColor = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
@@ -1935,7 +1942,7 @@ function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "Show [x.xx] decimal format",
-                        tooltip = "When using progress display method 2 or 3, this will display the XP percentage as x.xx% rather than x%",
+                        tooltip = "When using progress display method 2 or 3, this will display the XP percentage as x.xx% rather than x%.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceShowDecimal end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceShowDecimal = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
@@ -1945,7 +1952,7 @@ function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "Show [Progress] label",
-                        tooltip = "Displays [Progress] label before reporting XP progress",
+                        tooltip = "Displays [Progress] label before reporting XP progress.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceShowPBrackets end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceShowPBrackets = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
@@ -1955,7 +1962,7 @@ function LUIE_CreateSettings()
                     {
                         type = "editbox",
                         name = "Display name for [Progress] label",
-                        tooltip = "Modifier the spacer message displayed between XP amount gained and the progress to the next level",
+                        tooltip = "Modifier the spacer message displayed between XP amount gained and the progress to the next level.\nDefault: \"[Progress]\"",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceProgressName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceProgressName = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
@@ -1965,7 +1972,7 @@ function LUIE_CreateSettings()
                     {
                         type = "checkbox",
                         name = "Show (Current Level) label",
-                        tooltip = "Displays (Current Level) after reporting XP progress",
+                        tooltip = "Displays (Current Level) after reporting XP progress.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceShowLevel end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceShowLevel = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
@@ -2011,8 +2018,8 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
-                        name = "Show Detailed achievement info",
-                        --tooltip = "",
+                        name = "Show Detailed Achievement Info",
+                        tooltip = "Displays each subcategory required for achievement completion and completion of each subcategory.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
                         width = "full",
@@ -2023,120 +2030,120 @@ function LUIE_CreateSettings()
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(1),
                         tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(1)),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory1 end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory1 = value end,
                         width = "full",
-                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        default = LUIE.ChatAnnouncements.D.AchievementCategory1,
                         disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
                     },
                     {
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(2),
                         tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(2)),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory2 end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory2 = value end,
                         width = "full",
-                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        default = LUIE.ChatAnnouncements.D.AchievementCategory2,
                         disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
                     },
                     {
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(3),
                         tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(3)),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory3 end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory3 = value end,
                         width = "full",
-                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        default = LUIE.ChatAnnouncements.D.AchievementCategory3,
                         disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
                     },
                     {
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(4),
                         tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(4)),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory4 end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory4 = value end,
                         width = "full",
-                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        default = LUIE.ChatAnnouncements.D.AchievementCategory4,
                         disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
                     },
                     {
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(5),
                         tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(5)),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory5 end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory5 = value end,
                         width = "full",
-                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        default = LUIE.ChatAnnouncements.D.AchievementCategory5,
                         disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
                     },
                     {
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(6),
                         tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(6)),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory6 end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory6 = value end,
                         width = "full",
-                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        default = LUIE.ChatAnnouncements.D.AchievementCategory6,
                         disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
                     },
                     {
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(7),
                         tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(7)),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory7 end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory7 = value end,
                         width = "full",
-                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        default = LUIE.ChatAnnouncements.D.AchievementCategory7,
                         disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
                     },
                     {
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(8),
                         tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(8)),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory8 end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory8 = value end,
                         width = "full",
-                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        default = LUIE.ChatAnnouncements.D.AchievementCategory8,
                         disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
                     },
                     {
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(9),
                         tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(9)),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory9 end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory9 = value end,
                         width = "full",
-                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        default = LUIE.ChatAnnouncements.D.AchievementCategory9,
                         disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
                     },
                     {
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(10),
                         tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(10)),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory10 end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory10 = value end,
                         width = "full",
-                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        default = LUIE.ChatAnnouncements.D.AchievementCategory10,
                         disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
                     },
                     {
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(11),
                         tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(11)),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory11 end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory11 = value end,
                         width = "full",
-                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        default = LUIE.ChatAnnouncements.D.AchievementCategory11,
                         disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
                     },
                     {
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(12),
                         tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(12)),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory12 end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory12 = value end,
                         width = "full",
-                        default = LUIE.ChatAnnouncements.D.AchievementsDetails,
+                        default = LUIE.ChatAnnouncements.D.AchievementCategory12,
                         disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
                     },
                 },
@@ -3052,6 +3059,18 @@ function LUIE_CreateSettings()
         width = "full",
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "dropdown",
+        name = "Name Display Method",
+        warning = "Will need to reload the UI.",
+        tooltip = "Determines the method used to display other player names on unit frames. This setting does not effect the player frame.\nDefault: Character Name",
+        choices = nameDisplayOptions,
+        getFunc = function() return nameDisplayOptions[LUIE.UnitFrames.SV.DisplayOptions] end,
+        setFunc = function(value) LUIE.UnitFrames.SV.DisplayOptions = nameDisplayOptionsKeys[value] end,
+        width = "full",
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+        default = nameDisplayOptions[2]
+    }
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
         name = "Default Caption Colour",
         getFunc = function() return unpack(LUIE.UnitFrames.SV.Target_FontColour) end,
@@ -3105,17 +3124,6 @@ function LUIE_CreateSettings()
         width = "full",
         default = { r=LUIE.UnitFrames.D.ReticleColour_Interact[1], g=LUIE.UnitFrames.D.ReticleColour_Interact[2], b=LUIE.UnitFrames.D.ReticleColour_Interact[3] },
         disabled = function() return not (LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.ReticleColourByReaction) end,
-    }
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "dropdown",
-        name = "Target display name",
-        --tooltip = "",
-        choices = nameDisplayOptions,
-        getFunc = function() return nameDisplayOptions[LUIE.UnitFrames.SV.DisplayOptions] end,
-        setFunc = function(value) LUIE.UnitFrames.SV.DisplayOptions = nameDisplayOptionsKeys[value] LUIE.UnitFrames.ReloadValues() LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() LUIE.UnitFrames.CustomFramesApplyLayoutGroup() LUIE.UnitFrames.CustomFramesApplyLayoutRaid() end,
-        width = "full",
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-        default = nameDisplayOptions[2]
     }
     --[[
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {

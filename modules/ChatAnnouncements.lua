@@ -76,7 +76,18 @@ CA.D = {
     Achievements                  = false,
     AchievementsStep              = 2,
     AchievementsDetails           = true,
-    AchIgnoreList                 = {}, -- inverted list of achievements to be tracked
+    AchievementCategory1          = true,
+    AchievementCategory2          = true,
+    AchievementCategory3          = true,
+    AchievementCategory4          = true,
+    AchievementCategory5          = true,
+    AchievementCategory6          = true,
+    AchievementCategory7          = true,
+    AchievementCategory8          = true,
+    AchievementCategory9          = true,
+    AchievementCategory10         = true,
+    AchievementCategory11         = true,
+    AchievementCategory12         = true,
     ChatPlayerDisplayOptions      = 2,
     MiscBags                      = false,
     MiscLockpick                  = false,
@@ -1007,7 +1018,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     end
 
     -- If the name is blank, don't add an additional spacer before it after the change value
-    if CA.SV.GoldName == ( "" ) or CA.SV.GoldName == ( "G" ) or CA.SV.GoldName == ( "g" ) then
+    if CA.SV.GoldName == ( "" ) or CA.SV.GoldName == ( "g" ) or CA.SV.GoldName == ( "gp" )then
         formathelper = ( "" )
     end
 
@@ -2751,9 +2762,23 @@ function CA.OnAchievementUpdated(eventCode, aId)
     local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementId(aId)
 
     -- bail out if this achievement comes from unwanted category
-    if CA.SV.AchIgnoreList[topLevelIndex] then
+    if topLevelIndex == 1 and not CA.SV.AchievementCategory1 then return end
+    if topLevelIndex == 2 and not CA.SV.AchievementCategory2 then return end
+    if topLevelIndex == 3 and not CA.SV.AchievementCategory3 then return end
+    if topLevelIndex == 4 and not CA.SV.AchievementCategory4 then return end
+    if topLevelIndex == 5 and not CA.SV.AchievementCategory5 then return end
+    if topLevelIndex == 6 and not CA.SV.AchievementCategory6 then return end
+    if topLevelIndex == 7 and not CA.SV.AchievementCategory7 then return end
+    if topLevelIndex == 8 and not CA.SV.AchievementCategory8 then return end
+    if topLevelIndex == 9 and not CA.SV.AchievementCategory9 then return end
+    if topLevelIndex == 10 and not CA.SV.AchievementCategory10 then return end
+    if topLevelIndex == 11 and not CA.SV.AchievementCategory11 then return end
+    if topLevelIndex == 12 and not CA.SV.AchievementCategory12 then return end
+    
+    -- Old Function
+    --[[if CA.SV.AchIgnoreList[topLevelIndex] then
         return
-    end
+    end]]
 
     local link = strformat(GetAchievementLink(aId, LINK_STYLE_BRACKETS))
     local catName = GetAchievementCategoryInfo(topLevelIndex)

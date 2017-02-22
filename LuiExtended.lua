@@ -313,7 +313,6 @@ function LUIE.RegroupDisband()
         return
     end
     
-    -- If all the conditions above passed, we are now regrouping, set this variable to true to prevent spam /regroup during execution
     PendingRegroup = true
     
     for i = 1,groupSize do
@@ -340,7 +339,6 @@ function LUIE.RegroupDisband()
 end
 
 function LUIE.RegroupInvite()
-    -- Reinvite everyone
     CHAT_SYSTEM:AddMessage("Regroup: Reinviting group members:")
     for i = 1, #g_regroupStacks do
         local member = g_regroupStacks[i]
@@ -352,7 +350,6 @@ function LUIE.RegroupInvite()
     
     PendingRegroup = false -- Allow Regroup command to be used again
     g_regroupStacks = {} -- Allow index to be used again.
-    
 end
 
 function LUIE.SlashGuildInvite1(option)
@@ -514,7 +511,7 @@ end
 
 ]]
 
-function LUIE.SlashFriend(option)
+--[[function LUIE.SlashFriend(option)
     
     -- ZO_GetPrimaryPlayerName(displayName, characterName, useInternalFormat) Gets account name from string possibly? Could be useful when requests are sent to valid targets!
     
@@ -542,19 +539,16 @@ function LUIE.SlashFriend(option)
 
     RequestFriend(option)
     LUIE.PrintToChat (zo_strformat("You have sent a friend request to |cFEFEFE\"<<1>>\"|r", option))
-end
+end]]
     
-function LUIE.SlashIgnore(option)
+--[[function LUIE.SlashIgnore(option)
     AddIgnore(option)
-end
-    --AddIgnore(string charOrDisplayName)
-    --RemoveIgnore(string displayName) 
-   -- RemoveFriend(string displayName) 
-    --RequestFriend(string charOrDisplayName, string message) 
+end]]
 
 -- Slash Commands
 SLASH_COMMANDS["/regroup"] = LUIE.RegroupDisband
 SLASH_COMMANDS["/home"] = LUIE.PortPrimaryHome
+
 SLASH_COMMANDS["/ginvite1"] = LUIE.SlashGuildInvite1
 SLASH_COMMANDS["/ginvite2"] = LUIE.SlashGuildInvite2
 SLASH_COMMANDS["/ginvite3"] = LUIE.SlashGuildInvite3
@@ -568,11 +562,16 @@ SLASH_COMMANDS["/gquit3"] = LUIE.GQuit3
 SLASH_COMMANDS["/gquit4"] = LUIE.GQuit4
 SLASH_COMMANDS["/gquit5"] = LUIE.GQuit5
 
-SLASH_COMMANDS["/friend"] = LUIE.SlashFriend
-SLASH_COMMANDS["/ignore"] = LUIE.SlashIgnore
+-- TODO add these commands and various others later!
+--SLASH_COMMANDS["/friend"] = LUIE.SlashFriend
+--SLASH_COMMANDS["/ignore"] = LUIE.SlashIgnore
 --SLASH_COMMANDS["/disband"] = GroupDisband
 
--- SLASH_COMMANDS['/sdbadd'] = function(option) Srendarr.dbAdd(option) end
+-- NOTES:
+    --AddIgnore(string charOrDisplayName)
+    --RemoveIgnore(string displayName) 
+    -- RemoveFriend(string displayName) 
+    --RequestFriend(string charOrDisplayName, string message)
 
 -- Hook initialization
 EVENT_MANAGER:RegisterForEvent(LUIE.name, EVENT_ADD_ON_LOADED, LUIE_OnAddOnLoaded)
