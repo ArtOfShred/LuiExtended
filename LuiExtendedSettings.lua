@@ -2756,12 +2756,23 @@ function LUIE_CreateSettings()
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Display Power stat change",
-        tooltip = "Display additional icon on unit health bar when unit has its power affected.",
-        getFunc = function() return LUIE.UnitFrames.SV.PlayerEnablePower end,
-        setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnablePower = value end,
+        name = "Display Weapon Power stat change",
+        tooltip = "Display additional icon on unit health bar when unit has its weapon power affected.",
+        getFunc = function() return LUIE.UnitFrames.SV.PlayerEnableWeaponPower end,
+        setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableWeaponPower = value end,
         width = "full",
-        default = LUIE.UnitFrames.D.PlayerEnablePower,
+        default = LUIE.UnitFrames.D.PlayerEnableWeaponPower,
+        warning = "Will need to reload the UI.",
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
+    }
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = "Display Spell Power stat change",
+        tooltip = "Display additional icon on unit health bar when unit has its spell power affected.",
+        getFunc = function() return LUIE.UnitFrames.SV.PlayerEnableSpellPower end,
+        setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableSpellPower = value end,
+        width = "full",
+        default = LUIE.UnitFrames.D.PlayerEnableSpellPower,
         warning = "Will need to reload the UI.",
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }

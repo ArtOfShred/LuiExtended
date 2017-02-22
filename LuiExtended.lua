@@ -2,7 +2,7 @@
 -- LUIE namespace
 LUIE             = {}
 LUIE.name        = "LuiExtended"
-LUIE.author      = "ArtOfShred, Upularity & SpellBuilder"
+LUIE.author      = "ArtOfShred, psypanda, Upularity & SpellBuilder"
 LUIE.version     = "4.99 BETA"
 LUIE.components  = {}
 
@@ -104,7 +104,7 @@ local function LUIE_LoadScreen()
     EVENT_MANAGER:UnregisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED)
 
     if not LUIE.SV.StartupInfo then
-        LUIE.PrintToChat(zo_strformat("|cEEEEEE<<1>>|r by |c00C000<<2>>|r |cEEEEEEv<<3>>|r", LUIE.name, LUIE.author, LUIE.version))
+        LUIE.PrintToChat(zo_strformat("|cFEFEFE<<1>> by|r |c00C000<<2>>|r |cFEFEFEv<<3>>|r", LUIE.name, LUIE.author, LUIE.version))
     end
 end
 
@@ -352,6 +352,25 @@ function LUIE.RegroupInvite()
     g_regroupStacks = {} -- Allow index to be used again.
 end
 
+function LUIE.Disband()
+    GroupDisband()
+    
+    -- Check to make sure player is in a group
+    local groupSize = GetGroupSize()
+    if groupSize <= 1 then
+        CHAT_SYSTEM:AddMessage("You are not in a group.")
+        return
+    end
+    
+    -- Check to make sure player is the leader
+    local isLeader = IsUnitGroupLeader('player')
+    if not isLeader then
+        CHAT_SYSTEM:AddMessage("You must be the group leader to do that.")
+        return
+    end
+    
+end
+
 function LUIE.SlashGuildInvite1(option)
     if option ~= "" then    
         GuildInvite(1, option)
@@ -547,6 +566,7 @@ end]]
 
 -- Slash Commands
 SLASH_COMMANDS["/regroup"] = LUIE.RegroupDisband
+SLASH_COMMANDS["/disband"] = LUIE.Disband
 SLASH_COMMANDS["/home"] = LUIE.PortPrimaryHome
 
 SLASH_COMMANDS["/ginvite1"] = LUIE.SlashGuildInvite1

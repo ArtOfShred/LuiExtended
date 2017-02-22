@@ -14,7 +14,7 @@ local pairs               = pairs -- What does this do?
 local moduleName    = LUIE.name .. '_UnitFrames'
 
 local classIcons = {
-    [0] = '/esoui/art/progression/progression_indexicon_race_down.dds',
+    [0] = '/esoui/art/contacts/social_status_offline.dds',
     [1] = '/esoui/art/icons/class/class_dragonknight.dds',
     [2] = '/esoui/art/icons/class/class_sorcerer.dds',
     [3] = '/esoui/art/icons/class/class_nightblade.dds',
@@ -79,7 +79,8 @@ UF.D = {
     --PlayerEnableAltbarForceCXP     = false, -- Removed as of Removal of Veteran Ranks.
     PlayerChampionColour             = true,
     PlayerEnableArmor                = true,
-    PlayerEnablePower                = true,
+    PlayerEnableWeaponPower          = true,
+    PlayerEnableSpellPower           = true,
     TargetEnableClass                = false,
     TargetEnableSkull                = true,
     CustomFramesGroup                = true,
@@ -727,7 +728,7 @@ local function CreateCustomFrames()
 
     -- Create Raid leader icon only once, and later move it around different controls
     -- We will create this icon always. Even if group or raid frames are not used
-    g_customLeaderIcon = UI.Texture( ZO_UnitFramesGroups, nil, {24,24}, "/esoui/art/icons/mapkey_groupleader.dds", 2, true )
+    g_customLeaderIcon = UI.Texture( ZO_UnitFramesGroups, nil, {24,24}, "/esoui/art/icons/guildranks/guild_rankicon_misc01.dds", 2, true )
 
     -- Create DOT / HOT animations for all attributes bars
     -- we will use this ugly loop over too-many controls, but it will keep things clean and uni-style
@@ -767,7 +768,7 @@ local function CreateCustomFrames()
     end
 
     -- Create power stat change UI for player and target
-    if UF.SV.PlayerEnablePower then
+    if UF.SV.PlayerEnableWeaponPower then
         for _, baseName in pairs( { 'player', 'reticleover', 'boss' } ) do
             for i = 0, 6 do
                 local unitTag = (i==0) and baseName or ( baseName .. i )
@@ -775,8 +776,24 @@ local function CreateCustomFrames()
                     -- assume that unitTag DO have [POWERTYPE_HEALTH] field
                     if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {} end
                     local backdrop = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
-                    UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER] = {
+                    UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_WEAPON_POWER] = {
                         ["single"] = UI.Texture( backdrop, {CENTER,CENTER,-13,0}, {24,24}, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increaseweaponpower.dds", 2, true ),
+                    }
+                end
+            end
+        end
+    end
+    
+    if UF.SV.PlayerEnableSpellPower then
+        for _, baseName in pairs( { 'player', 'reticleover', 'boss' } ) do
+            for i = 0, 6 do
+                local unitTag = (i==0) and baseName or ( baseName .. i )
+                if UF.CustomFrames[unitTag] then
+                    -- assume that unitTag DO have [POWERTYPE_HEALTH] field
+                    if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {} end
+                    local backdrop = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
+                    UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_SPELL_POWER] = {
+                        ["single"] = UI.Texture( backdrop, {CENTER,CENTER,-36,0}, {24,24}, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasespellpower.dds", 2, true ),
                     }
                 end
             end
@@ -1396,7 +1413,8 @@ function UF.ReloadValues( unitTag )
 
     -- get initial stats
     UF.UpdateStat(unitTag, STAT_ARMOR_RATING, ATTRIBUTE_HEALTH, POWERTYPE_HEALTH)
-    UF.UpdateStat(unitTag, STAT_POWER,        ATTRIBUTE_HEALTH, POWERTYPE_HEALTH)
+    UF.UpdateStat(unitTag, STAT_WEAPON_POWER,        ATTRIBUTE_HEALTH, POWERTYPE_HEALTH)
+    UF.UpdateStat(unitTag, STAT_SPELL_POWER, ATTRIBUTE_HEALTH, POWERTYPE_HEALTH)
 
     if unitTag == 'player' then
         g_statFull[POWERTYPE_HEALTH] = ( g_savedHealth.player[1] == g_savedHealth.player[3] )
@@ -1472,7 +1490,7 @@ function UF.UpdateStaticControls( unitFrame )
         local isFriend = unitFrame.isPlayer and IsUnitFriend( unitFrame.unitTag )
         local isGuild = unitFrame.isPlayer and (not isFriend) and (not isIgnored) and UF.GetGuildDisplayNameInfo( GetUnitDisplayName( unitFrame.unitTag ) )
         if isIgnored or isFriend or isGuild then
-            unitFrame.friendIcon:SetTexture( isIgnored and "/esoui/art/contacts/tabicon_ignored_down.dds" or isFriend and "/esoui/art/campaign/campaignbrowser_friends.dds" or "/esoui/art/campaign/campaignbrowser_guild.dds" )
+            unitFrame.friendIcon:SetTexture( isIgnored and "LuiExtended/media/unitframes/unitframes_social_ignore.dds" or isFriend and "/esoui/art/campaign/campaignbrowser_friends.dds" or "/esoui/art/campaign/campaignbrowser_guild.dds" )
             unitFrame.friendIcon:SetHidden(false)
         else
             unitFrame.friendIcon:SetHidden(true)
@@ -2033,7 +2051,7 @@ end
  --]]
 local CHAMPION_ATTRIBUTE_HUD_ICONS =
 {
-    [ATTRIBUTE_NONE] = "/esoui/art/mainmenu/menubar_champion_up.dds",
+    [ATTRIBUTE_NONE] = "/esoui/art/champion/champion_icon_32.dds",
     [ATTRIBUTE_HEALTH] = "/esoui/art/champion/champion_points_health_icon-hud-32.dds",
     [ATTRIBUTE_MAGICKA] = "/esoui/art/champion/champion_points_magicka_icon-hud-32.dds",
     [ATTRIBUTE_STAMINA] = "/esoui/art/champion/champion_points_stamina_icon-hud-32.dds",
