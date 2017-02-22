@@ -88,7 +88,7 @@ function LUIE_CreateSettings()
 
     local optionsData = {}
     local optionsDataUnitFrames = {}
-    
+
     optionsData[#optionsData + 1] = { -- ReloadUI Button
         type = "button",
         name = "Reload UI",
@@ -98,7 +98,7 @@ function LUIE_CreateSettings()
     }
 
     -- Info Panel Options
-    optionsData[#optionsData + 1] = { 
+    optionsData[#optionsData + 1] = {
         type = "submenu",
         name = "Info Panel Options",
         reference = "Info_Panel_Options_Submenu",
@@ -2150,7 +2150,7 @@ function LUIE_CreateSettings()
             },
         },
     }
-    
+
     optionsData[#optionsData + 1] = { -- Use system for messages
         type = "checkbox",
         name = "Print messages as System messages",
@@ -2161,7 +2161,7 @@ function LUIE_CreateSettings()
         warning = "Enable this only if you know what you are doing.",
         default = LUIE.D.ChatUseSystem,
     }
-    
+
     optionsData[#optionsData + 1] = { -- Timestamp
         type = "checkbox",
         name = "\t\tInclude Timestamp",
@@ -2172,7 +2172,7 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.ChatUseSystem end,
         default = LUIE.D.TimeStamp,
     }
-    
+
     optionsData[#optionsData + 1] = { -- Timestamp Format
         type = "editbox",
         name = "\t\tTimestamp format",
