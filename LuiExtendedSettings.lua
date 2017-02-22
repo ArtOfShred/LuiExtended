@@ -2490,13 +2490,13 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
         name = "Display HoT / DoT Animations",
-        --tooltip = "",
+        tooltip = "DISABLED: Currently broken",
         getFunc = function() return LUIE.UnitFrames.SV.CustomEnableRegen end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomEnableRegen = value end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomEnableRegen,
         warning = "Will need to reload the UI.",
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+        disabled = function() return not LUIE.UnitFrames.SV.CustomEnableRegen end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
@@ -2754,7 +2754,7 @@ function LUIE_CreateSettings()
         warning = "Will need to reload the UI.",
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+    --[[optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
         name = "Display Weapon Power stat change",
         tooltip = "Display additional icon on unit health bar when unit has its weapon power affected.",
@@ -2764,8 +2764,8 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.PlayerEnableWeaponPower,
         warning = "Will need to reload the UI.",
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
-    }
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+    }]]--
+    --[[optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
         name = "Display Spell Power stat change",
         tooltip = "Display additional icon on unit health bar when unit has its spell power affected.",
@@ -2775,7 +2775,7 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.PlayerEnableSpellPower,
         warning = "Will need to reload the UI.",
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
-    }
+    }]]--
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Out-of-Combat frame opacity",

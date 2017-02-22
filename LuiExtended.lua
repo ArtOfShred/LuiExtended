@@ -8,7 +8,7 @@ LUIE.components  = {}
 
 -- Saved variables options
 LUIE.SV          = nil
-LUIE.SVVer       = 1
+LUIE.SVVer       = 2
 LUIE.SVName      = 'LUIESV'
 
 -- Default Settings
@@ -20,7 +20,7 @@ LUIE.D = {
     DamageMeter_Enable      = false,
     ChatUseSystem           = false,
     TimeStamp               = false,
-    TimeStampFormat         = "HH:m",
+    TimeStampFormat         = "HH:m:s",
     StartupInfo             = false,
 }
 
@@ -491,6 +491,7 @@ function LUIE.SlashGuildInvite5(option)
 	end
 end
 
+--[[
 function LUIE.GQuitNoContext(option)
     if option > 0 and option < 5 then GuildLeave(option) end
 end
@@ -514,6 +515,7 @@ end
 function LUIE.GQuit5()
     GuildLeave(1)
 end
+]]--
 
 --[[
 
@@ -575,12 +577,12 @@ SLASH_COMMANDS["/ginvite3"] = LUIE.SlashGuildInvite3
 SLASH_COMMANDS["/ginvite4"] = LUIE.SlashGuildInvite4
 SLASH_COMMANDS["/ginvite5"] = LUIE.SlashGuildInvite5
 
-SLASH_COMMANDS["/gquit"] = LUIE.GQuitNoContext
-SLASH_COMMANDS["/gquit1"] = LUIE.GQuit1
-SLASH_COMMANDS["/gquit2"] = LUIE.GQuit2
-SLASH_COMMANDS["/gquit3"] = LUIE.GQuit3
-SLASH_COMMANDS["/gquit4"] = LUIE.GQuit4
-SLASH_COMMANDS["/gquit5"] = LUIE.GQuit5
+-- SLASH_COMMANDS["/gquit"] = LUIE.GQuitNoContext
+-- SLASH_COMMANDS["/gquit1"] = LUIE.GQuit1
+-- SLASH_COMMANDS["/gquit2"] = LUIE.GQuit2
+-- SLASH_COMMANDS["/gquit3"] = LUIE.GQuit3
+-- SLASH_COMMANDS["/gquit4"] = LUIE.GQuit4
+-- SLASH_COMMANDS["/gquit5"] = LUIE.GQuit5
 
 -- TODO add these commands and various others later!
 --SLASH_COMMANDS["/friend"] = LUIE.SlashFriend
