@@ -205,13 +205,17 @@ E.AbilityIcon = {
     ['Alliance Points']                 = '/EsoUI/Art/Icons/Icon_AlliancePoints.dds',
     ['TelVar Stones']                   = '/EsoUI/Art/Icons/Icon_TelVarStone.dds',
 
+    -- Fix Cleave Bleed Icons
+    ['Cleave Bleed']                    = 'esoui/art/icons/ability_2handed_002.dds',
+    ['Carve Bleed']                     = 'esoui/art/icons/ability_2handed_002_a.dds',
+    ['Brawler Bleed']                   = 'esoui/art/icons/ability_2handed_002_b.dds',
 
+    -- Fix Twin Slashes Bleed Icons
+    ['Twin Slashes Bleed']              = 'esoui/art/icons/ability_dualwield_001.dds',
+    ['Rending Slashes Bleed']           = 'esoui/art/icons/ability_dualwield_001_a.dds',
+    ['Blood Craze Bleed']               = 'esoui/art/icons/ability_dualwield_001_b.dds',
 
-    ['Magicka Restore']                 = '/esoui/art/icons/consumable_potion_002_type_004.dds', -- EN, ?
-    ['Restore Magicka']                 = '/esoui/art/icons/consumable_potion_002_type_004.dds', -- EN, ?
-    ['Stamina Restore']                 = '/esoui/art/icons/consumable_potion_003_type_004.dds', -- EN, ?
-    ['Restore Stamina']                 = '/esoui/art/icons/consumable_potion_003_type_004.dds', -- EN, ?
-
+    -- Most of this other stuff should be deprecated!
     [L.Effect_Fall_Snare]               = '/esoui/art/icons/death_recap_fall_damage.dds',
 
     ['Feed']                            = '/esoui/art/icons/ability_vampire_002.dds', -- EN,FR

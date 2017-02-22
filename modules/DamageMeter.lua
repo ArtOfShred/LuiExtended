@@ -7,7 +7,6 @@ local DM             = LUIE.DamageMeter
 local UI             = LUIE.UI
 local E              = LUIE.Effects
 local commaValue     = LUIE.CommaValue
-local formatMessage  = LUIE.ChatAnnouncements.FormatMessage
 local colours        = LUIE.CombatInfo.Colours
 local strfmt         = string.format
 local strformat      = zo_strformat
@@ -1088,7 +1087,7 @@ end
  * Print combat log entry
  ]]--
 function DM.AddMessage(message, doTimeStamp, category)
-    local message = formatMessage(message, doTimeStamp)
+    local message = LUIE.FormatMessage(message, doTimeStamp)
     local category = category or CHAT_CATEGORY_COMBAT_OTHER
     local cc, window = getCombatLog()
 
