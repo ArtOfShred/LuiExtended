@@ -88,6 +88,7 @@ CA.D = {
     ChatPlayerDisplayOptions      = 2,
     MiscBags                      = false,
     MiscLockpick                  = false,
+    MiscSocial                    = false,
     MiscGuild                     = false,
     MiscGuildIcon                 = false,
     MiscGuildRank                 = false,
@@ -147,15 +148,17 @@ function CA.Initialize()
     CA.RegisterLockpickEvents()
     CA.RegisterHorseEvents()
     CA.RegisterGuildEvents()
-    CA.RegisterSocialEvents() -- NEED MENU OPTION STILL
+    CA.RegisterSocialEvents()
 end
 
 function CA.RegisterSocialEvents()
-    --EVENT_MANAGER:UnregisterForEvent(moduleName, )
-    --EVENT_MANAGER:UnregisterForEvent(moduleName, )
-    --EVENT_MANAGER:UnregisterForEvent(moduleName, )
-    --EVENT_MANAGER:UnregisterForEvent(moduleName, )
-    --if SOME VARIABLE IS TRUE then
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_FRIEND_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_FRIEND_REMOVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_REMOVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_SHARED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_SHARE_REMOVED)
+    if CA.SV.MiscSocial then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_ADDED, CA.FriendAdded)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_REMOVED, CA.FriendRemoved)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_ADDED, CA.FriendInviteAdded)

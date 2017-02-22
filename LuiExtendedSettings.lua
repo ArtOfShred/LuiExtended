@@ -1270,6 +1270,15 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "checkbox",
+                        name = "Show Social Event Messages",
+                        tooltip = "Prints a notification to chat for friend invites, friend list changes, and ignore list changes.",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscSocial end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscSocial = value LUIE.ChatAnnouncements.RegisterSocialEvents() end,
+                        width = "full",
+                        default = LUIE.ChatAnnouncements.D.MiscSocial,
+                    },
+                    {
+                        type = "checkbox",
                         name = "Show Guild Event Messages",
                         tooltip = "Prints a notification to chat for guild invites and members joining/leaving one of your guilds.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuild end,
