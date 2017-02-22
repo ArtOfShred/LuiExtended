@@ -1520,6 +1520,9 @@ function SCB.ReloadEffects(unitTag)
     for i = 1, GetNumBuffs(unitTag) do
         local unitName = GetRawUnitName(unitTag)
         local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
+        if effectType == 2 then
+            if castByPlayer == true then castByPlayer = 1 else castByPlayer = 5 end -- Fudge this value to send to SCB.OnEffectChanged if this is a debuff
+        end
         SCB.OnEffectChanged(0, 3, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0--[[unitId]], abilityId, castByPlayer)
     end
 

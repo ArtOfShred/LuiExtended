@@ -490,6 +490,8 @@ end
 
 function CA.ActivityStatusUpdate(eventCode, status)
 
+    --d("status update:" .. status)
+
     if ShowActivityStatus then
         if status == ACTIVITY_FINDER_STATUS_NONE and WeAreQueued == true then
             printToChat ("You are no longer queued in the group finder.")
@@ -568,7 +570,7 @@ function CA.ActivityStatusRefresh()
 end
 
 function CA.ReadyCheckUpdate(eventCode)
-    -- d("Ready check update!")
+    --d("Ready check update!")
 
     local activityType = GetLFGReadyCheckNotificationInfo()
     local _, tanksPending, _, healersPending, _, dpsPending = GetLFGReadyCheckCounts()

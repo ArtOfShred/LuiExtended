@@ -335,7 +335,7 @@ function LUIE.RegroupDisband()
     GroupDisband()
 
     -- Reinvite the group after 3 seconds (give the group interface time to update on server and client end for all group members)
-    zo_callLater(LUIE.RegroupInvite, 3000)
+    zo_callLater(LUIE.RegroupInvite, 5000)
 end
 
 function LUIE.RegroupInvite()
@@ -344,7 +344,7 @@ function LUIE.RegroupInvite()
         local member = g_regroupStacks[i]
         if member.memberName ~= playerName then -- Don't invite self!
             GroupInviteByName(member.memberName)
-            CHAT_SYSTEM:AddMessage(zo_strformat("Regroup: Invited → |cffffff<<1>>|r", memberLink))
+            CHAT_SYSTEM:AddMessage(zo_strformat("Regroup: Invited → |cffffff<<1>>|r", member.memberLink))
         end
     end
     
