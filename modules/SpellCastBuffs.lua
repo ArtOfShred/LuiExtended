@@ -59,6 +59,8 @@ SCB.D = {
     LongTermEffectsSeparate  = true,
     LongTermEffectsSeparateAlignment = 2,
     StealthState             = true,
+    ShowSprint               = true,
+    ShowGallop               = true,
 }
 SCB.SV = nil
 
@@ -1400,6 +1402,10 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
 
     -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by player OR applied on target by player)
     if E.FakePlayerBuffs[abilityId] ~= nil then
+    
+        if abilityId == 973 and not SCB.SV.ShowSprint then return end
+        if abilityId == 33439 and not SCB.SV.ShowGallop then return end
+    
         iconName = E.FakePlayerBuffs[abilityId].icon
         effectName = E.FakePlayerBuffs[abilityId].name
         duration = E.FakePlayerBuffs[abilityId].duration

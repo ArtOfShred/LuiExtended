@@ -1,8 +1,8 @@
-﻿## APIVersion: 100018
-## Title: |cE12000L|cFFFFB0ui E|rxtended|
+﻿## Title: |cE12000L|cFFFFB0ui E|rxtended|
 ## Author: ArtOfShred, psypanda, Upularity & SpellBuilder
-## Version: 4.99a BETA
-## Description: Provides UnitFrames, InfoPanel, CombatEvents, Buffs tracking, Damage Meter and Loot Chat Announcements.
+## Version: 4.99b BETA
+## APIVersion: 100018
+## Description: Provides UnitFrames, InfoPanel, CombatEvents, Buffs Tracking, Damage Meter and Chat Announcements.
 ## OptionalDependsOn: LibStub LibAddonMenu-2.0 LibMediaProvider-1.0
 ## SavedVariables: LUIESV
 ##

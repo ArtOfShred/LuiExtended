@@ -3,7 +3,7 @@
 LUIE             = {}
 LUIE.name        = "LuiExtended"
 LUIE.author      = "ArtOfShred, psypanda, Upularity & SpellBuilder"
-LUIE.version     = "4.99a BETA"
+LUIE.version     = "4.99b BETA"
 LUIE.components  = {}
 
 -- Saved variables options
@@ -13,15 +13,16 @@ LUIE.SVName      = 'LUIESV'
 
 -- Default Settings
 LUIE.D = {
-    UnitFrames_Enabled      = true,
-    InfoPanel_Enabled       = true,
-    CombatInfo_Enabled      = true,
-    SpellCastBuff_Enable    = true,
-    DamageMeter_Enable      = false,
-    ChatUseSystem           = false,
-    TimeStamp               = false,
-    TimeStampFormat         = "HH:m:s",
-    StartupInfo             = false,
+    UnitFrames_Enabled          = true,
+    InfoPanel_Enabled           = true,
+    CombatInfo_Enabled          = true,
+    SpellCastBuff_Enable        = true,
+    ChatAnnouncements_Enable    = true,
+    DamageMeter_Enable          = false,
+    ChatUseSystem               = false,
+    TimeStamp                   = false,
+    TimeStampFormat             = "HH:m:s",
+    StartupInfo                 = false,
 }
 
 -- Global fonts table to use in other parts of this addon
@@ -143,7 +144,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     LUIE.CombatInfo.Initialize( LUIE.SV.CombatInfo_Enabled )
     LUIE.SpellCastBuffs.Initialize( LUIE.SV.SpellCastBuff_Enable )
     LUIE.DamageMeter.Initialize(LUIE.SV.DamageMeter_Enable)
-    LUIE.ChatAnnouncements.Initialize()
+    LUIE.ChatAnnouncements.Initialize( LUIE.SV.ChatAnnouncements_Enable )
 
     -- Create settings menu for our addon
     LUIE_CreateSettings()

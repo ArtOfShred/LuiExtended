@@ -1049,6 +1049,26 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.StealthState,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
+            {
+                type = "checkbox",
+                name = "Show Sprint icon",
+                tooltip = "Display special buff icon when player is sprinting.",
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ShowSprint end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowSprint = value end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ShowSprint,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                type = "checkbox",
+                name = "Show Gallop icon",
+                tooltip = "Display special buff icon when player is mounted and galloping.",
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ShowGallop end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowGallop = value end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ShowGallop,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
         },
     }
     --[[ DAMAGE METER & COMBAT LOG ]]--
@@ -1227,6 +1247,16 @@ function LUIE_CreateSettings()
         reference = "Chat_Announcements_Options_Submenu",
         controls = {
             {
+                type = "checkbox",
+                name = "Enable Chat Announcements",
+                tooltip = "Print messages to chat for various events.",
+                getFunc = function() return LUIE.SV.ChatAnnouncements_Enable end,
+                setFunc = function(value) LUIE.SV.ChatAnnouncements_Enable = value end,
+                width = "full",
+                warning = "Will need to reload the UI.",
+                default = LUIE.D.ChatAnnouncements_Enable,
+            },
+            {
                 type = "dropdown",
                 name = "Player Name Display Method",
                 tooltip = "Determines the method used to display player names in Chat Announcements where applicable.\nDefault: Character Name",
@@ -1234,7 +1264,19 @@ function LUIE_CreateSettings()
                 getFunc = function() return chatnameDisplayOptions[LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions] end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions = chatnameDisplayOptionsKeys[value] end,
                 width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = chatnameDisplayOptions[2],
+            },
+            {
+                type = "checkbox",
+                name = "Enable Default String Enhancements",
+                tooltip = "Replaces a variety of default strings with enhanced syntax to match the Chat Announcements component. Disable this option if you are having compatibility issues with other addons. Highly recommend using it otherwise!\nNOTE: This is currently only localized in English.",
+                getFunc = function() return LUIE.ChatAnnouncements.SV.CustomStrings end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.CustomStrings = value LUIE.ChatAnnouncements.RegisterCustomStrings() end,
+                width = "full",
+                warning = "Will need to reload the UI.",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = LUIE.ChatAnnouncements.D.CustomStrings,
             },
             {
                 type = "submenu",
@@ -1248,6 +1290,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupChatMsg end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupChatMsg = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupChatMsg,
                     },
                     {
@@ -1257,6 +1300,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscTrade end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscTrade = value LUIE.ChatAnnouncements.RegisterTradeEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.MiscTrade,
                     },
                     {
@@ -1266,6 +1310,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscMail end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscMail = value LUIE.ChatAnnouncements.RegisterMailEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.MiscMail,
                     },
                     {
@@ -1275,6 +1320,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscSocial end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscSocial = value LUIE.ChatAnnouncements.RegisterSocialEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.MiscSocial,
                     },
                     {
@@ -1284,6 +1330,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuild end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuild = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.MiscGuild,
                     },
                     {
@@ -1293,7 +1340,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildIcon end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildIcon = value end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.MiscGuild end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.MiscGuild and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.MiscGuildIcon,
                     },
                     {
@@ -1303,7 +1350,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildRank end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildRank = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.MiscGuild end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.MiscGuild and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.MiscGuildRank,
                     },
                     {
@@ -1314,7 +1361,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return guildrankDisplayOptions[LUIE.ChatAnnouncements.SV.GuildRankDisplayOptions] end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildRankDisplayOptions = guildrankDisplayOptionsKeys[value] LUIE.ChatAnnouncements.RegisterGuildEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.MiscGuild and LUIE.ChatAnnouncements.SV.MiscGuildRank) end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.MiscGuild and LUIE.ChatAnnouncements.SV.MiscGuildRank and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = guildrankDisplayOptions[1],
                     },
                     {
@@ -1324,7 +1371,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildMOTD end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildMOTD = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.MiscGuild end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.MiscGuild and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.MiscGuildMOTD,
                     },
                     {
@@ -1334,6 +1381,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscBags end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscBags = value LUIE.ChatAnnouncements.RegisterBagEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.MiscBags,
                     },
                     {
@@ -1343,6 +1391,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscHorse end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscHorse = value LUIE.ChatAnnouncements.RegisterHorseEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.MiscHorse,
                     },
                     {
@@ -1352,6 +1401,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscLockpick end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscLockpick = value LUIE.ChatAnnouncements.RegisterLockpickEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.MiscLockpick,
                     },
                     {
@@ -1361,6 +1411,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscConfiscate end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscConfiscate = value LUIE.ChatAnnouncements.RegisterDestroyEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.MiscConfiscate,
                     },
                 },
@@ -1377,6 +1428,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyIcons end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyIcons = value end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.CurrencyIcons,
                     },
                     {
@@ -1386,6 +1438,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GoldChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldChange = value LUIE.ChatAnnouncements.RegisterGoldEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GoldChange,
                     },
                     {
@@ -1395,7 +1448,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.GoldColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.GoldColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterGoldEvents() end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.GoldChange end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.GoldChange and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = {r=LUIE.ChatAnnouncements.D.GoldColor[1], g=LUIE.ChatAnnouncements.D.GoldColor[2], b=LUIE.ChatAnnouncements.D.GoldColor[3]}
                     },
                     {
@@ -1405,7 +1458,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GoldName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldName = value end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.GoldChange end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.GoldChange and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.GoldName,
                     },
                     {
@@ -1415,7 +1468,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TotalGoldChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalGoldChange = value end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.GoldChange end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.GoldChange and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.TotalGoldChange,
                     },
                     {
@@ -1425,6 +1478,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AlliancePointChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AlliancePointChange = value LUIE.ChatAnnouncements.RegisterAlliancePointEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.AlliancePointChange,
                     },
                     {
@@ -1434,7 +1488,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.AlliancePointColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.AlliancePointColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterAlliancePointEvents() end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.AlliancePointChange end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AlliancePointChange and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = {r=LUIE.ChatAnnouncements.D.AlliancePointColor[1], g=LUIE.ChatAnnouncements.D.AlliancePointColor[2], b=LUIE.ChatAnnouncements.D.AlliancePointColor[3]}
                     },
                     {
@@ -1444,7 +1498,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AlliancePointName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AlliancePointName = value end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.AlliancePointChange end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AlliancePointChange and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.TotalAlliancePointName,
                     },
                     {
@@ -1454,7 +1508,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TotalAlliancePointChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalAlliancePointChange = value end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.AlliancePointChange end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AlliancePointChange and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.TotalAlliancePointChange,
                     },
                     {
@@ -1464,6 +1518,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TelVarStoneChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TelVarStoneChange = value LUIE.ChatAnnouncements.RegisterTelVarStoneEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.TelVarStoneChange,
                     },
                     {
@@ -1473,7 +1528,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.TelVarStoneColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.TelVarStoneColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterTelVarStoneEvents() end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.TelVarStoneChange end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.TelVarStoneChange and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = {r=LUIE.ChatAnnouncements.D.TelVarStoneColor[1], g=LUIE.ChatAnnouncements.D.TelVarStoneColor[2], b=LUIE.ChatAnnouncements.D.TelVarStoneColor[3]}
                     },
                     {
@@ -1483,7 +1538,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TelVarStoneName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TelVarStoneName = value end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.TelVarStoneChange end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.TelVarStoneChange and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.TelVarStoneName,
                     },
                     {
@@ -1493,7 +1548,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TotalTelVarStoneChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalTelVarStoneChange = value end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.TelVarStoneChange end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.TelVarStoneChange and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.TotalTelVarStoneChange,
                     },
                     {
@@ -1503,6 +1558,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.WritVoucherChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.WritVoucherChange = value LUIE.ChatAnnouncements.RegisterWritVoucherEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.WritVoucherChange,
                     },
                     {
@@ -1512,7 +1568,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.WritVoucherColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.WritVoucherColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterWritVoucherEvents() end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.WritVoucherChange end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.WritVoucherChange and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = {r=LUIE.ChatAnnouncements.D.WritVoucherColor[1], g=LUIE.ChatAnnouncements.D.WritVoucherColor[2], b=LUIE.ChatAnnouncements.D.WritVoucherColor[3]}
                     },
                     {
@@ -1522,7 +1578,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.WritVoucherName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.WritVoucherName = value end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.WritVoucherChange end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.WritVoucherChange and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.WritVoucherName,
                     },
                     {
@@ -1532,7 +1588,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TotalWritVoucherChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalWritVoucherChange = value end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.WritVoucherChange end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.WritVoucherChange and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.TotalWritVoucherChange,
                     },
                     {
@@ -1543,13 +1599,14 @@ function LUIE_CreateSettings()
                         getFunc = function() return currencyBracketOptions[LUIE.ChatAnnouncements.SV.CurrencyBracketDisplayOptions] end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyBracketDisplayOptions = currencyBracketOptionsKeys[value] end,
                         width = "full",
-                        disabled = function() return not
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
                             (
                                 LUIE.ChatAnnouncements.SV.GoldChange or
                                 LUIE.ChatAnnouncements.SV.AlliancePointChange or
                                 LUIE.ChatAnnouncements.SV.TelVarStoneChange or
-                                LUIE.ChatAnnouncements.SV.WritVoucherChange
-                            ) end,
+                                LUIE.ChatAnnouncements.SV.WritVoucherChange or
+                                LUIE.SV.ChatAnnouncements_Enable
+                            )) end,
                         default = currencyBracketOptions[1]
                     },
                     {
@@ -1559,13 +1616,14 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyContextToggle end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyContextToggle = value end,
                         width = "full",
-                        disabled = function() return not
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
                             (
                                 LUIE.ChatAnnouncements.SV.GoldChange or
                                 LUIE.ChatAnnouncements.SV.AlliancePointChange or
                                 LUIE.ChatAnnouncements.SV.TelVarStoneChange or
-                                LUIE.ChatAnnouncements.SV.WritVoucherChange
-                            ) end,
+                                LUIE.ChatAnnouncements.SV.WritVoucherChange or
+                                LUIE.SV.ChatAnnouncements_Enable
+                            )) end,
                         default = LUIE.ChatAnnouncements.D.CurrencyContextToggle,
                     },
                     {
@@ -1575,7 +1633,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyContextMessageUp end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyContextMessageUp = value end,
                         width = "full",
-                        disabled =  function() return not LUIE.ChatAnnouncements.SV.CurrencyContextToggle end,
+                        disabled =  function() return not (LUIE.ChatAnnouncements.SV.CurrencyContextToggle and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.CurrencyContextMessageUp,
                     },
                     {
@@ -1585,7 +1643,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyContextMessageDown end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyContextMessageDown = value end,
                         width = "full",
-                        disabled =  function() return not LUIE.ChatAnnouncements.SV.CurrencyContextToggle end,
+                        disabled =  function() return not (LUIE.ChatAnnouncements.SV.CurrencyContextToggle and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.CurrencyContextMessageDown,
                     },
                     {
@@ -1595,13 +1653,14 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyTotalMessage end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyTotalMessage = value end,
                         width = "full",
-                        disabled = function() return not
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
                             (
                                 LUIE.ChatAnnouncements.SV.GoldChange or
                                 LUIE.ChatAnnouncements.SV.AlliancePointChange or
                                 LUIE.ChatAnnouncements.SV.TelVarStoneChange or
-                                LUIE.ChatAnnouncements.SV.WritVoucherChange
-                            ) end,
+                                LUIE.ChatAnnouncements.SV.WritVoucherChange or
+                                LUIE.SV.ChatAnnouncements_Enable
+                            )) end,
                         default = LUIE.ChatAnnouncements.D.CurrencyTotalMessage,
                     },
                 },
@@ -1618,6 +1677,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootIcons end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootIcons = value end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.LootIcons,
                     },
                     {
@@ -1627,6 +1687,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.Loot end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.Loot = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.Loot,
                     },
                     {
@@ -1636,7 +1697,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootOnlyNotable end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootOnlyNotable = value end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Loot end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Loot and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.LootOnlyNotable,
                     },
                     {
@@ -1646,7 +1707,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootGroup end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootGroup = value end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Loot end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Loot and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.LootGroup,
                     },
                     {
@@ -1657,7 +1718,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootBlacklist = value end,
                         width = "full",
                         warning = "This prevents chat spam in large groups (Trials)",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Loot end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Loot and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.LootBlacklist,
                     },
                     {
@@ -1667,6 +1728,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootVendor end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootVendor = value LUIE.ChatAnnouncements.RegisterVendorEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.LootVendor,
                     },
                     {
@@ -1676,6 +1738,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootBank end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootBank = value LUIE.ChatAnnouncements.RegisterBankEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.LootBank,
                     },
                     {
@@ -1685,6 +1748,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootMail end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMail = value LUIE.ChatAnnouncements.RegisterMailEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.LootMail,
                     },
                     {
@@ -1694,6 +1758,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootTrade end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootTrade = value LUIE.ChatAnnouncements.RegisterTradeEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.LootTrade,
                     },
                     {
@@ -1703,6 +1768,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootCraft end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootCraft = value LUIE.ChatAnnouncements.RegisterCraftEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.LootCraft,
                     },
                     {
@@ -1713,6 +1779,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowCraftUse = value end,
                         disabled = function() return not LUIE.ChatAnnouncements.SV.LootCraft end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.ShowCraftUse,
                     },
                     {
@@ -1723,6 +1790,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowDestroy = value LUIE.ChatAnnouncements.RegisterDestroyEvents() end,
                         disabled = function() return not LUIE.ChatAnnouncements.SV.LootCraft end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.ShowDestroy,
                     },
                     {
@@ -1732,7 +1800,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootShowArmorType end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootShowArmorType = value end,
                         width = "full",
-                        disabled = function() return not
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
                             (
                                 LUIE.ChatAnnouncements.SV.Loot or
                                 LUIE.ChatAnnouncements.SV.LootCraft or
@@ -1740,7 +1808,7 @@ function LUIE_CreateSettings()
                                 LUIE.ChatAnnouncements.SV.LootMail or
                                 LUIE.ChatAnnouncements.SV.LootVendor or
                                 LUIE.ChatAnnouncements.SV.LootBank
-                            ) end,
+                            )) end,
                         default = LUIE.ChatAnnouncements.D.LootShowArmorType,
                     },
                     {
@@ -1750,7 +1818,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootShowTrait end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootShowTrait = value end,
                         width = "full",
-                        disabled = function() return not
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
                             (
                                 LUIE.ChatAnnouncements.SV.Loot or
                                 LUIE.ChatAnnouncements.SV.LootCraft or
@@ -1758,7 +1826,7 @@ function LUIE_CreateSettings()
                                 LUIE.ChatAnnouncements.SV.LootMail or
                                 LUIE.ChatAnnouncements.SV.LootVendor or
                                 LUIE.ChatAnnouncements.SV.LootBank
-                            ) end,
+                            )) end,
                         default = LUIE.ChatAnnouncements.D.LootShowTrait,
                     },
                     {
@@ -1768,7 +1836,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootShowStyle end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootShowStyle = value end,
                         width = "full",
-                        disabled = function() return not
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
                             (
                                 LUIE.ChatAnnouncements.SV.Loot or
                                 LUIE.ChatAnnouncements.SV.LootCraft or
@@ -1776,7 +1844,7 @@ function LUIE_CreateSettings()
                                 LUIE.ChatAnnouncements.SV.LootMail or
                                 LUIE.ChatAnnouncements.SV.LootVendor or
                                 LUIE.ChatAnnouncements.SV.LootBank
-                            ) end,
+                            )) end,
                         default = LUIE.ChatAnnouncements.D.LootShowStyle,
                     },
                     {
@@ -1786,7 +1854,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootNotTrash end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootNotTrash = value end,
                         width = "full",
-                        disabled = function() return not
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
                             (
                                 LUIE.ChatAnnouncements.SV.Loot or
                                 LUIE.ChatAnnouncements.SV.LootCraft or
@@ -1794,7 +1862,7 @@ function LUIE_CreateSettings()
                                 LUIE.ChatAnnouncements.SV.LootMail or
                                 LUIE.ChatAnnouncements.SV.LootVendor or
                                 LUIE.ChatAnnouncements.SV.LootBank
-                            ) end,
+                            )) end,
                         default = LUIE.ChatAnnouncements.D.LootNotTrash,
                     },
                     {
@@ -1805,7 +1873,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return itemBracketOptions[LUIE.ChatAnnouncements.SV.ItemBracketDisplayOptions] end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ItemBracketDisplayOptions = itemBracketOptionsKeys[value] end,
                         width = "full",
-                        disabled = function() return not
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
                             (
                                 LUIE.ChatAnnouncements.SV.Loot or
                                 LUIE.ChatAnnouncements.SV.LootCraft or
@@ -1813,7 +1881,7 @@ function LUIE_CreateSettings()
                                 LUIE.ChatAnnouncements.SV.LootMail or
                                 LUIE.ChatAnnouncements.SV.LootVendor or
                                 LUIE.ChatAnnouncements.SV.LootBank
-                            ) end,
+                            )) end,
                         default = itemBracketOptions[1]
                     },
                     {
@@ -1823,7 +1891,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ItemContextToggle end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ItemContextToggle = value end,
                         width = "full",
-                        disabled = function() return not
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
                             (
                                 LUIE.ChatAnnouncements.SV.Loot or
                                 LUIE.ChatAnnouncements.SV.LootCraft or
@@ -1831,7 +1899,7 @@ function LUIE_CreateSettings()
                                 LUIE.ChatAnnouncements.SV.LootMail or
                                 LUIE.ChatAnnouncements.SV.LootVendor or
                                 LUIE.ChatAnnouncements.SV.LootBank
-                            ) end,
+                            )) end,
                         default = LUIE.ChatAnnouncements.D.ItemContextToggle,
                     },
                     {
@@ -1841,7 +1909,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ItemContextMessage end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ItemContextMessage = value end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.ItemContextToggle end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.ItemContextToggle and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.ItemContextMessage,
                     },
                     {
@@ -1852,14 +1920,15 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootCurrencyCombo = value end,
                         width = "full",
                         warning = "Enable this only if you know what you are doing.",
-                        disabled = function() return not
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
                             (
                                 LUIE.ChatAnnouncements.SV.Loot or
                                 LUIE.ChatAnnouncements.SV.LootCraft or
                                 LUIE.ChatAnnouncements.SV.LootTrade or
                                 LUIE.ChatAnnouncements.SV.LootMail or
-                                LUIE.ChatAnnouncements.SV.LootVendor
-                            ) end,
+                                LUIE.ChatAnnouncements.SV.LootVendor or
+                                LUIE.ChatAnnouncements.SV.LootBank
+                            )) end,
                         default = LUIE.ChatAnnouncements.D.LootCurrencyCombo,
                     },
                 },
@@ -1876,6 +1945,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.Experience end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.Experience = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.Experience,
                     },
                     {
@@ -1885,6 +1955,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceLevelUp end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceLevelUp = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.ExperienceLevelUp,
                     },
                     {
@@ -1894,7 +1965,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceContextName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceContextName = value end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Experience end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.ExperienceContextName,
                     },
                     {
@@ -1904,7 +1975,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceName = value end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Experience end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.ExperienceName,
                     },
                     {
@@ -1914,7 +1985,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceIcon end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceIcon = value end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Experience end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.ExperienceIcon,
                     },
                     {
@@ -1924,7 +1995,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceShowProgress end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceShowProgress = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Experience end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.ExperienceShowProgress,
                     },
                     {
@@ -1935,7 +2006,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return experienceDisplayOptions[LUIE.ChatAnnouncements.SV.ExperienceDisplayOptions] end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceDisplayOptions = experienceDisplayOptionsKeys[value] end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.ExperienceShowProgress) end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.ExperienceShowProgress and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = experienceDisplayOptions[1],
                     },
                     {
@@ -1945,7 +2016,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceProgressColor end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceProgressColor = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.ExperienceShowProgress) end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.ExperienceShowProgress and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.ExperienceProgressColor,
                     },
                     {
@@ -1955,7 +2026,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceShowDecimal end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceShowDecimal = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.ExperienceShowProgress) end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.ExperienceShowProgress and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.ExperienceShowDecimal,
                     },
                     {
@@ -1965,7 +2036,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceShowPBrackets end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceShowPBrackets = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.ExperienceShowProgress) end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.ExperienceShowProgress and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.ExperienceShowPBrackets,
                     },
                     {
@@ -1975,7 +2046,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceProgressName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceProgressName = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.ExperienceShowProgress and LUIE.ChatAnnouncements.SV.ExperienceShowPBrackets) end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.ExperienceShowProgress and LUIE.ChatAnnouncements.SV.ExperienceShowPBrackets and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.ExperienceProgressName,
                     },
                     {
@@ -1985,7 +2056,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceShowLevel end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceShowLevel = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Experience end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.ExperienceShowLevel,
                     },
                     {
@@ -1995,7 +2066,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceHideCombat end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceHideCombat = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Experience end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.ExperienceHideCombat,
                     },
                 },
@@ -2012,6 +2083,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.Achievements end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.Achievements = value LUIE.ChatAnnouncements.RegisterAchievementsEvent() end,
                         width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.Achievements,
                     },
                     {
@@ -2023,7 +2095,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsStep = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementsStep,
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
                         type = "checkbox",
@@ -2033,7 +2105,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementsDetails,
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
                         type = "checkbox",
@@ -2043,7 +2115,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory1 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory1,
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
                         type = "checkbox",
@@ -2053,7 +2125,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory2 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory2,
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
                         type = "checkbox",
@@ -2063,7 +2135,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory3 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory3,
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
                         type = "checkbox",
@@ -2073,7 +2145,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory4 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory4,
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
                         type = "checkbox",
@@ -2083,7 +2155,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory5 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory5,
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
                         type = "checkbox",
@@ -2093,7 +2165,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory6 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory6,
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
                         type = "checkbox",
@@ -2103,7 +2175,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory7 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory7,
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
                         type = "checkbox",
@@ -2113,7 +2185,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory8 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory8,
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
                         type = "checkbox",
@@ -2123,7 +2195,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory9 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory9,
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
                         type = "checkbox",
@@ -2133,7 +2205,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory10 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory10,
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
                         type = "checkbox",
@@ -2143,7 +2215,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory11 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory11,
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
                         type = "checkbox",
@@ -2153,7 +2225,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory12 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory12,
-                        disabled = function() return not LUIE.ChatAnnouncements.SV.Achievements end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                 },
             },

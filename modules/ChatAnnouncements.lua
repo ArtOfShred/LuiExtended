@@ -12,7 +12,9 @@ local gsub          = string.gsub
 
 local moduleName    = LUIE.name .. '_ChatAnnouncements'
 
+CA.Enabled = false
 CA.D = {
+    CustomStrings                 = false,
     GroupChatMsg                  = false,
     GoldChange                    = true,
     GoldColor                     = { 1, 1, 0.2, 1 },
@@ -120,15 +122,20 @@ local IsValidLaunder = false
 
 GroupJoinFudger = false -- Controls message for group join
 
-function CA.Initialize()
+function CA.Initialize( enabled )
     -- Load settings
     CA.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "ChatAnnouncements", CA.D )
 
+    -- Disable if setting not toggled on!
+    if not enabled then return end
+    CA.Enabled = true
+    
     -- Read current player toon name
     g_playerName = GetRawUnitName("player")
     g_playerNameFormatted = strformat(SI_UNIT_NAME, GetUnitName("player"))
     g_playerDisplayName = strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
 
+    
     -- Register events
     CA.RegisterGroupEvents()
     CA.RegisterGoldEvents()
@@ -149,6 +156,8 @@ function CA.Initialize()
     CA.RegisterHorseEvents()
     CA.RegisterGuildEvents()
     CA.RegisterSocialEvents()
+    CA.RegisterCustomStrings()
+    
 end
 
 function CA.RegisterSocialEvents()
@@ -389,35 +398,41 @@ function CA.QuestShareRemoved(eventCode, questId)
     printToChat ("Shared quest declined.")
 end
 
---TODO: <https://github.com/ArtOfShred/LuiExtended/issues/29>
--- Group Invite String Replacements
-SafeAddString(SI_GROUPINVITERESPONSE0, "Could not find a player named |cFEFEFE\"<<1>>\"|r to invite.", 1)
-SafeAddString(SI_GROUPINVITERESPONSE10, "You have invited |cFEFEFE\"<<1>>\"|r to join your group.", 1)
-SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GROUP, "<<1>> has invited you to join a group.", 1)
-SafeAddString(SI_GROUPLEAVEREASON1, "<<1>>(<<2>>) has been removed from the group.", 2)
+function CA.RegisterCustomStrings()
 
--- Trade String Replacements
-SafeAddString(SI_TRADE_INVITE_CONFIRM, "You have invited <<1>> to trade.", 1) -- Fixes default Trade messages to match our syntax.
-SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_TRADE, "<<1>> has invited you to trade.", 1) -- Fixes default Trade messages to match our syntax.
+    if CA.SV.CustomStrings then
+        --TODO: <https://github.com/ArtOfShred/LuiExtended/issues/29>
+        -- Group Invite String Replacements
+        SafeAddString(SI_GROUPINVITERESPONSE0, "Could not find a player named |cFEFEFE\"<<1>>\"|r to invite.", 1)
+        SafeAddString(SI_GROUPINVITERESPONSE10, "You have invited |cFEFEFE\"<<1>>\"|r to join your group.", 1)
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GROUP, "<<1>> has invited you to join a group.", 1)
+        SafeAddString(SI_GROUPLEAVEREASON1, "<<1>>(<<2>>) has been removed from the group.", 2)
 
--- Friend Invite String Replacements
-SafeAddString(SI_FRIENDS_LIST_IGNORE_ADDED, "|cFEFEFE<<1>>|r added to ignore list.", 1) -- Fixes default Ignore List messages to match our syntax.
-SafeAddString(SI_FRIENDS_LIST_IGNORE_REMOVED, "|cFEFEFE<<1>>|r removed from ignore list.", 1) -- Fixes default Ignore List messages to match our syntax.
-SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST, "<<1>> wants to be your friend.", 1) -- Default ZOS string was missing a period.
+        -- Trade String Replacements
+        SafeAddString(SI_TRADE_INVITE_CONFIRM, "You have invited <<1>> to trade.", 1) -- Fixes default Trade messages to match our syntax.
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_TRADE, "<<1>> has invited you to trade.", 1) -- Fixes default Trade messages to match our syntax.
 
-
-SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_ON, "|cFEFEFE<<1>>|r has logged on.", 1)
-SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON, "|cFEFEFE<<1>>|r has logged on with |cFEFEFE<<2>>|r.", 1)
-SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_OFF, "|cFEFEFE<<1>>|r has logged off.", 1)
-SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF, "|cFEFEFE<<1>>|r has logged off with |cFEFEFE<<2>>|r.", 1)
+        -- Friend Invite String Replacements
+        SafeAddString(SI_FRIENDS_LIST_IGNORE_ADDED, "|cFEFEFE<<1>>|r added to ignore list.", 1) -- Fixes default Ignore List messages to match our syntax.
+        SafeAddString(SI_FRIENDS_LIST_IGNORE_REMOVED, "|cFEFEFE<<1>>|r removed from ignore list.", 1) -- Fixes default Ignore List messages to match our syntax.
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST, "<<1>> wants to be your friend.", 1) -- Default ZOS string was missing a period.
 
 
--- Guild Invite String Replacements
-SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, "<<1>> has invited you to join <<2>>", 1) -- Update syntax for guild invite message to match our chat syntax
-SafeAddString(SI_GUILD_ROSTER_INVITED_MESSAGE,  "You have invited \"|cffffff<<1>>|r\" to join |cffffff<<2>>|r", 1) -- Update syntax for guild invitation sent message to match group syntax.
+        SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_ON, "|cFEFEFE<<1>>|r has logged on.", 1)
+        SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON, "|cFEFEFE<<1>>|r has logged on with |cFEFEFE<<2>>|r.", 1)
+        SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_OFF, "|cFEFEFE<<1>>|r has logged off.", 1)
+        SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF, "|cFEFEFE<<1>>|r has logged off with |cFEFEFE<<2>>|r.", 1)
 
--- Quest Share String Replacements
-SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, "<<1>> wants to share the quest: <<2>>.", 3)
+
+        -- Guild Invite String Replacements
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, "<<1>> has invited you to join <<2>>", 1) -- Update syntax for guild invite message to match our chat syntax
+        SafeAddString(SI_GUILD_ROSTER_INVITED_MESSAGE,  "You have invited \"|cffffff<<1>>|r\" to join |cffffff<<2>>|r", 1) -- Update syntax for guild invitation sent message to match group syntax.
+
+        -- Quest Share String Replacements
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, "<<1>> wants to share the quest: <<2>>.", 3)
+    end
+    
+end
 
 -- Display group join/leave in chat
 function CA.RegisterGroupEvents()
@@ -494,7 +509,7 @@ end
 
 function CA.ActivityStatusUpdate(eventCode, status)
 
-    d("status update:" .. status)
+    --d("status update:" .. status)
 
     if ShowActivityStatus then
         if status == ACTIVITY_FINDER_STATUS_NONE and WeAreQueued == true then
@@ -520,7 +535,8 @@ function CA.ActivityStatusUpdate(eventCode, status)
 end
 
 function CA.ActivityQueueResult(eventCode, result)
-    d("ActivityQueueResult: " .. result)
+
+    --d("ActivityQueueResult: " .. result)
 
     if result == ACTIVITY_QUEUE_RESULT_INCOMPATIBLE_GROUP then
         printToChat("Cannot queue - the members of this group are role incompatible.")
@@ -574,7 +590,8 @@ function CA.ActivityStatusRefresh()
 end
 
 function CA.ReadyCheckUpdate(eventCode)
-    d("Ready check update!")
+
+    --d("Ready check update!")
 
     local activityType = GetLFGReadyCheckNotificationInfo()
     local _, tanksPending, _, healersPending, _, dpsPending = GetLFGReadyCheckCounts()
