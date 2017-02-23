@@ -847,7 +847,7 @@ function SCB.SetTlwPosition()
             uiTlw.playerb:SetAnchor( BOTTOM, ZO_PlayerAttributeHealth, TOP, 0, -10 )
         end
     end
-    
+
     if uiTlw.playerd and uiTlw.playerd:GetType() == CT_TOPLEVELCONTROL then
         uiTlw.playerd:ClearAnchors()
         if not SCB.SV.lockPositionToUnitFrames and SCB.SV.playerdOffsetX ~= nil and SCB.SV.playerdOffsetY ~= nil then
@@ -865,7 +865,7 @@ function SCB.SetTlwPosition()
             uiTlw.targetb:SetAnchor( TOP, ZO_TargetUnitFramereticleover, BOTTOM, 0, 60 )
         end
     end
-    
+
     if uiTlw.targetd and uiTlw.targetd:GetType() == CT_TOPLEVELCONTROL then
         uiTlw.targetd:ClearAnchors()
         if not SCB.SV.lockPositionToUnitFrames and SCB.SV.targetdOffsetX ~= nil and SCB.SV.targetdOffsetY ~= nil then
@@ -1402,10 +1402,10 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
 
     -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by player OR applied on target by player)
     if E.FakePlayerBuffs[abilityId] ~= nil then
-    
+
         if abilityId == 973 and not SCB.SV.ShowSprint then return end
         if abilityId == 33439 and not SCB.SV.ShowGallop then return end
-    
+
         iconName = E.FakePlayerBuffs[abilityId].icon
         effectName = E.FakePlayerBuffs[abilityId].name
         duration = E.FakePlayerBuffs[abilityId].duration

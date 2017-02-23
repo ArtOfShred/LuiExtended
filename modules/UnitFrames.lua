@@ -782,7 +782,7 @@ local function CreateCustomFrames()
             end
         end
     end
-    
+
     if UF.SV.PlayerEnableSpellPower then
         for _, baseName in pairs( { 'player', 'reticleover', 'boss' } ) do
             for i = 0, 6 do
@@ -2112,10 +2112,10 @@ end
 function UF.CustomFramesSetDeadLabel( unitFrame, newValue )
 
     unitFrame.dead:SetHidden( newValue == nil )
-    if newValue ~= nil then 
+    if newValue ~= nil then
         unitFrame.dead:SetText( newValue )
     end
-    
+
     if newValue == "Offline" then
         classIcon = classIcons[0]
         unitFrame.level:SetHidden( newValue ~= "Dead" or newValue ~= nil )

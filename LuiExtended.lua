@@ -306,7 +306,7 @@ function LUIE.RegroupDisband()
         LUIE.PrintToChat("Regroup: You are not in a group.")
         return
     end
-    
+
     local isLFG = IsInLFGGroup()
     if isLFG then
         LUIE.PrintToChat("Regroup: You cannot initiate a regroup while in an LFG activity.")
