@@ -2190,28 +2190,28 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
 
     local armorType = GetItemLinkArmorType(itemName) -- Get Armor Type of item
     if (CA.SV.LootShowArmorType and armorType ~= ARMORTYPE_NONE) then
-        formattedArmorType = strformat(" |cFFFFFF(<<1>>)|r", GetString("SI_ARMORTYPE", armorType))
+        formattedArmorType = strfmt(" |cFFFFFF(%s)|r", GetString("SI_ARMORTYPE", armorType))
     end
 
     local traitType = GetItemLinkTraitInfo(itemName) -- Get Trait type of item
     if (CA.SV.LootShowTrait and traitType ~= ITEM_TRAIT_TYPE_NONE and itemType ~= ITEMTYPE_ARMOR_TRAIT and itemType ~= ITEMTYPE_WEAPON_TRAIT) then
-        formattedTrait = strformat(" |cFFFFFF(<<1>>)|r", GetString("SI_ITEMTRAITTYPE", traitType))
+        formattedTrait = strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMTRAITTYPE", traitType))
     end
 
     local styleType = GetItemLinkItemStyle(itemName) -- Get Style of the item
     if (CA.SV.LootShowStyle and styleType ~= ITEMSTYLE_NONE and styleType ~= ITEMSTYLE_UNIQUE and styleType ~= ITEMSTYLE_UNIVERSAL) then
-        formattedStyle = strformat(" |cFFFFFF(<<1>>)|r", GetString("SI_ITEMSTYLE", styleType))
+        formattedStyle = strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMSTYLE", styleType))
     end
 
     if OldItemLink ~= "" then
-        itemName2 = (strformat("<<1>> → ", OldItemLink:gsub("^|H0", "|H1", 1)))
+        itemName2 = (strfmt("%s → ", OldItemLink:gsub("^|H0", "|H1", 1)))
         OldItemLink = ""
     else
         itemName2 = ""
     end
 
-    if not LaunderCheck then printToChat(strformat(
-        "<<1>><<2>><<3>><<4>>|r <<5>><<6>><<7>><<8>><<9>>",
+    if not LaunderCheck then printToChat(strfmt(
+        "%s%s%s%s|r %s%s%s%s%s",
         gainorloss,
         bracket1,
         logPrefix,
@@ -2227,8 +2227,8 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
         combostring
     )) end
 
-    if LaunderCheck then launderitemstring = (strformat(
-        "<<1>><<2>><<3>><<4>>|r <<5>><<6>><<7>><<8>><<9>><<10>><<11>><<12>>",
+    if LaunderCheck then launderitemstring = (strfmt(
+        "%s%s%s%s|r %s%s%s%s%s%s%s%s",
         gainorloss,
         bracket1,
         logPrefix,
