@@ -26,7 +26,7 @@ local g_playerAlliance
 UF.Enabled = false
 UF.D = {
     ShortenNumbers          = false,
-    RepositionFrames        = false,
+    RepositionFrames        = true,
     DefaultOocTransparency  = 85,
     DefaultIncTransparency  = 85,
     DefaultFramesPlayer     = nil, -- this 3 default settings HAS TO BE nil!!!

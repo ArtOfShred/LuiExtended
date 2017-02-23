@@ -21,11 +21,13 @@ local testEffectList   = { 22, 44, 55, 1800000 }
 local playerName = zo_strformat(SI_UNIT_NAME, GetUnitName('player'))
 
 local windowTitles = {
-    player      = "Effects on Player",
+    playerb     = "Player Buffs",
+    playerd     = "Player Debuffs",
     player1     = "Player Buffs",
     player2     = "Player Debuffs",
     player_long = 'Player Long Term Effects', -- 'E'
-    target      = "Effects on Target",
+    targetb     = "Target Buffs",
+    targetd     = "Target Debuffs",
     target1     = "Target Buffs",
     target2     = "Target Debuffs",
 }
@@ -615,13 +617,18 @@ function SCB.Initialize( enabled )
         containerRouting.player1 = "player1"
         containerRouting.player2 = "player2"
     else
-        uiTlw.player = UI.TopLevel( nil, nil )
-        uiTlw.player:SetHandler( 'OnMoveStop', function(self)
-                SCB.SV.playerOffsetX = self:GetLeft()
-                SCB.SV.playerOffsetY = self:GetTop()
+        uiTlw.playerb = UI.TopLevel( nil, nil )
+        uiTlw.playerb:SetHandler( 'OnMoveStop', function(self)
+                SCB.SV.playerbOffsetX = self:GetLeft()
+                SCB.SV.playerbOffsetY = self:GetTop()
             end )
-        containerRouting.player1 = "player"
-        containerRouting.player2 = "player"
+        uiTlw.playerd = UI.TopLevel( nil, nil )
+        uiTlw.playerd:SetHandler( 'OnMoveStop', function(self)
+                SCB.SV.playerdOffsetX = self:GetLeft()
+                SCB.SV.playerdOffsetY = self:GetTop()
+            end )
+        containerRouting.player1 = "playerb"
+        containerRouting.player2 = "playerd"
     end
 
     if SCB.SV.lockPositionToUnitFrames and LUIE.UnitFrames.CustomFrames.reticleover and LUIE.UnitFrames.CustomFrames.reticleover.buffs and LUIE.UnitFrames.CustomFrames.reticleover.debuffs then
@@ -631,14 +638,19 @@ function SCB.Initialize( enabled )
         containerRouting.reticleover2 = "target2"
         containerRouting.ground = "target2"
     else
-        uiTlw.target = UI.TopLevel( nil, nil )
-        uiTlw.target:SetHandler( 'OnMoveStop', function(self)
-                SCB.SV.targetOffsetX = self:GetLeft()
-                SCB.SV.targetOffsetY = self:GetTop()
+        uiTlw.targetb = UI.TopLevel( nil, nil )
+        uiTlw.targetb:SetHandler( 'OnMoveStop', function(self)
+                SCB.SV.targetbOffsetX = self:GetLeft()
+                SCB.SV.targetbOffsetY = self:GetTop()
             end )
-        containerRouting.reticleover1 = "target"
-        containerRouting.reticleover2 = "target"
-        containerRouting.ground = "target"
+        uiTlw.targetd = UI.TopLevel( nil, nil )
+        uiTlw.targetd:SetHandler( 'OnMoveStop', function(self)
+                SCB.SV.targetdOffsetX = self:GetLeft()
+                SCB.SV.targetdOffsetY = self:GetTop()
+            end )
+        containerRouting.reticleover1 = "targetb"
+        containerRouting.reticleover2 = "targetd"
+        containerRouting.ground = "targetd"
     end
 
     -- separate container for players long buffs
@@ -802,10 +814,14 @@ end
  ]]--
 function SCB.ResetTlwPosition()
     if not SCB.Enabled then return end
-    SCB.SV.playerOffsetX = nil
-    SCB.SV.playerOffsetY = nil
-    SCB.SV.targetOffsetX = nil
-    SCB.SV.targetOffsetX = nil
+    SCB.SV.playerbOffsetX = nil
+    SCB.SV.playerbOffsetY = nil
+    SCB.SV.playerdOffsetX = nil
+    SCB.SV.playerdOffsetY = nil
+    SCB.SV.targetbOffsetX = nil
+    SCB.SV.targetbOffsetY = nil
+    SCB.SV.targetdOffsetX = nil
+    SCB.SV.targetdOffsetY = nil
     SCB.SV.playerVOffsetX = nil
     SCB.SV.playerVOffsetY = nil
     SCB.SV.playerHOffsetX = nil
@@ -821,21 +837,39 @@ function SCB.SetTlwPosition()
     -- we do not have to do anything here. so just bail out
 
     -- otherwise set position of uiTlw[] which are CT_TOPLEVELCONTROLs to saved or default positions
-    if uiTlw.player and uiTlw.player:GetType() == CT_TOPLEVELCONTROL then
-        uiTlw.player:ClearAnchors()
-        if not SCB.SV.lockPositionToUnitFrames and SCB.SV.playerOffsetX ~= nil and SCB.SV.playerOffsetY ~= nil then
-            uiTlw.player:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SCB.SV.playerOffsetX, SCB.SV.playerOffsetY )
+    if uiTlw.playerb and uiTlw.playerb:GetType() == CT_TOPLEVELCONTROL then
+        uiTlw.playerb:ClearAnchors()
+        if not SCB.SV.lockPositionToUnitFrames and SCB.SV.playerbOffsetX ~= nil and SCB.SV.playerbOffsetY ~= nil then
+            uiTlw.playerb:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SCB.SV.playerbOffsetX, SCB.SV.playerbOffsetY )
         else
-            uiTlw.player:SetAnchor( BOTTOM, ZO_PlayerAttributeHealth, TOP, 0, -10 )
+            uiTlw.playerb:SetAnchor( BOTTOM, ZO_PlayerAttributeHealth, TOP, 0, -10 )
+        end
+    end
+    
+    if uiTlw.playerd and uiTlw.playerd:GetType() == CT_TOPLEVELCONTROL then
+        uiTlw.playerd:ClearAnchors()
+        if not SCB.SV.lockPositionToUnitFrames and SCB.SV.playerdOffsetX ~= nil and SCB.SV.playerdOffsetY ~= nil then
+            uiTlw.playerd:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SCB.SV.playerdOffsetX, SCB.SV.playerdOffsetY )
+        else
+            uiTlw.playerd:SetAnchor( BOTTOM, ZO_PlayerAttributeHealth, TOP, 0, -60 )
         end
     end
 
-    if uiTlw.target and uiTlw.target:GetType() == CT_TOPLEVELCONTROL then
-        uiTlw.target:ClearAnchors()
-        if not SCB.SV.lockPositionToUnitFrames and SCB.SV.targetOffsetX ~= nil and SCB.SV.targetOffsetY ~= nil then
-            uiTlw.target:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SCB.SV.targetOffsetX, SCB.SV.targetOffsetY )
+    if uiTlw.targetb and uiTlw.targetb:GetType() == CT_TOPLEVELCONTROL then
+        uiTlw.targetb:ClearAnchors()
+        if not SCB.SV.lockPositionToUnitFrames and SCB.SV.targetbOffsetX ~= nil and SCB.SV.targetbOffsetY ~= nil then
+            uiTlw.targetb:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SCB.SV.targetbOffsetX, SCB.SV.targetbOffsetY )
         else
-            uiTlw.target:SetAnchor( TOP, ZO_TargetUnitFramereticleover, BOTTOM, 0, 60 )
+            uiTlw.targetb:SetAnchor( TOP, ZO_TargetUnitFramereticleover, BOTTOM, 0, 60 )
+        end
+    end
+    
+    if uiTlw.targetd and uiTlw.targetd:GetType() == CT_TOPLEVELCONTROL then
+        uiTlw.targetd:ClearAnchors()
+        if not SCB.SV.lockPositionToUnitFrames and SCB.SV.targetdOffsetX ~= nil and SCB.SV.targetdOffsetY ~= nil then
+            uiTlw.targetd:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SCB.SV.targetdOffsetX, SCB.SV.targetdOffsetY )
+        else
+            uiTlw.targetd:SetAnchor( TOP, ZO_TargetUnitFramereticleover, BOTTOM, 0, 110 )
         end
     end
 
@@ -864,13 +898,21 @@ function SCB.SetMovingState( state )
     if not SCB.Enabled then return end
 
     -- set moving state
-    if uiTlw.player and uiTlw.player:GetType() == CT_TOPLEVELCONTROL and not SCB.SV.lockPositionToUnitFrames then
-        uiTlw.player:SetMouseEnabled( state )
-        uiTlw.player:SetMovable( state )
+    if uiTlw.playerb and uiTlw.playerb:GetType() == CT_TOPLEVELCONTROL and not SCB.SV.lockPositionToUnitFrames then
+        uiTlw.playerb:SetMouseEnabled( state )
+        uiTlw.playerb:SetMovable( state )
     end
-    if uiTlw.target and uiTlw.target:GetType() == CT_TOPLEVELCONTROL and not SCB.SV.lockPositionToUnitFrames then
-        uiTlw.target:SetMouseEnabled( state )
-        uiTlw.target:SetMovable( state )
+    if uiTlw.playerd and uiTlw.playerd:GetType() == CT_TOPLEVELCONTROL and not SCB.SV.lockPositionToUnitFrames then
+        uiTlw.playerd:SetMouseEnabled( state )
+        uiTlw.playerd:SetMovable( state )
+    end
+    if uiTlw.targetb and uiTlw.targetb:GetType() == CT_TOPLEVELCONTROL and not SCB.SV.lockPositionToUnitFrames then
+        uiTlw.targetb:SetMouseEnabled( state )
+        uiTlw.targetb:SetMovable( state )
+    end
+    if uiTlw.targetd and uiTlw.targetd:GetType() == CT_TOPLEVELCONTROL and not SCB.SV.lockPositionToUnitFrames then
+        uiTlw.targetd:SetMouseEnabled( state )
+        uiTlw.targetd:SetMovable( state )
     end
     if uiTlw.player_long then
         uiTlw.player_long:SetMouseEnabled( state )
@@ -914,8 +956,9 @@ function SCB.Reset()
 
     -- set size of top level window
     -- player
-    if uiTlw.player and uiTlw.player:GetType() == CT_TOPLEVELCONTROL then
-        uiTlw.player:SetDimensions( 500, SCB.SV.IconSize + 6 )
+    if uiTlw.playerb and uiTlw.playerb:GetType() == CT_TOPLEVELCONTROL then
+        uiTlw.playerb:SetDimensions( 500, SCB.SV.IconSize + 6 )
+        uiTlw.playerd:SetDimensions( 500, SCB.SV.IconSize + 6 )
     else
         uiTlw.player2:SetHeight( SCB.SV.IconSize )
 
@@ -925,8 +968,9 @@ function SCB.Reset()
     end
 
     -- target
-    if uiTlw.target and uiTlw.target:GetType() == CT_TOPLEVELCONTROL then
-        uiTlw.target:SetDimensions( 500, SCB.SV.IconSize + 6 )
+    if uiTlw.targetb and uiTlw.targetb:GetType() == CT_TOPLEVELCONTROL then
+        uiTlw.targetb:SetDimensions( 500, SCB.SV.IconSize + 6 )
+        uiTlw.targetd:SetDimensions( 500, SCB.SV.IconSize + 6 )
     else
         uiTlw.target2:SetHeight( SCB.SV.IconSize )
 
@@ -1190,7 +1234,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     if unitTag ~= 'player' and unitTag ~= 'reticleover' then return end
 
     -- If the source of the buff isn't the player or the buff is not on the AbilityId or AbilityName override list then we don't display it
-    if effectType == 2 and not (castByPlayer == 1 or castByPlayer == 2) and not (E.DebuffDisplayOverrideId[abilityId] or E.DebuffDisplayOverrideName[effectName]) then return end
+    if unitTag ~= 'player' then
+        if effectType == 2 and not (castByPlayer == 1 or castByPlayer == 2) and not (E.DebuffDisplayOverrideId[abilityId] or E.DebuffDisplayOverrideName[effectName]) then return end
+    end
 
     -- Ignore some buffs (by abilityId or by effectName)
     if E.IsEffectIgnored[ effectName ] or E.IsAbilityIgnoredById[abilityId] or
