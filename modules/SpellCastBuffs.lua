@@ -8,6 +8,7 @@ local CI        = LUIE.CombatInfo
 local UI        = LUIE.UI
 local E         = LUIE.Effects
 local L         = LUIE.GetLocale()
+local strformat = zo_strformat
 local strfmt    = string.format
 local strformat = zo_strformat
 local strfind   = zo_plainstrfind
@@ -15,17 +16,17 @@ local pairs     = pairs -- What does this do?
 
 local moduleName = LUIE.name .. '_SpellCastBuffs'
 
-local testEffectPrefix = 'testEffect:'
+local testEffectPrefix = "testEffect:"
 local testEffectList   = { 22, 44, 55, 1800000 }
 
-local playerName = zo_strformat(SI_UNIT_NAME, GetUnitName('player'))
+local playerName = strformat(SI_UNIT_NAME, GetUnitName("player"))
 
 local windowTitles = {
     playerb     = "Player Buffs",
     playerd     = "Player Debuffs",
     player1     = "Player Buffs",
     player2     = "Player Debuffs",
-    player_long = 'Player Long Term Effects', -- 'E'
+    player_long = "Player Long Term Effects", -- 'E'
     targetb     = "Target Buffs",
     targetd     = "Target Debuffs",
     target1     = "Target Buffs",
@@ -35,39 +36,39 @@ local containerRouting = {}
 
 SCB.Enabled = false
 SCB.D = {
-    IconSize                 = 40,
-    BuffFontFace             = "Fontin Regular",
-    BuffFontStyle            = "outline",
-    BuffFontSize             = 16,
-    Alignment                = L.Setting_Center,
-    AlignmentVert            = L.Setting_Top,
-    SortDirection            = L.Setting_OrderX[1],
-    GlowIcons                = false,
-    RemainingText            = true,
-    RemainingTextColoured    = false,
-    RemainingTextMillis      = true,
-    RemainingCooldown        = true,
-    FadeOutIcons             = false,
-    lockPositionToUnitFrames = true,
-    LongTermEffects_Player   = true,
-    LongTermEffects_Target   = true,
-    IgnoreDisguise           = false,
-    IgnoreMundus             = false,
-    IgnoreEquipment          = false,
-    IgnoreVampLycan          = false,
-    IgnoreCyrodiil           = false,
-    LongTermEffectsSeparate  = true,
+    IconSize                         = 40,
+    BuffFontFace                     = "Fontin Regular",
+    BuffFontStyle                    = "outline",
+    BuffFontSize                     = 16,
+    Alignment                        = L.Setting_Center,
+    AlignmentVert                    = L.Setting_Top,
+    SortDirection                    = L.Setting_OrderX[1],
+    GlowIcons                        = false,
+    RemainingText                    = true,
+    RemainingTextColoured            = false,
+    RemainingTextMillis              = true,
+    RemainingCooldown                = true,
+    FadeOutIcons                     = false,
+    lockPositionToUnitFrames         = true,
+    LongTermEffects_Player           = true,
+    LongTermEffects_Target           = true,
+    IgnoreDisguise                   = false,
+    IgnoreMundus                     = false,
+    IgnoreEquipment                  = false,
+    IgnoreVampLycan                  = false,
+    IgnoreCyrodiil                   = false,
+    LongTermEffectsSeparate          = true,
     LongTermEffectsSeparateAlignment = 2,
-    StealthState             = true,
-    ShowSprint               = true,
-    ShowGallop               = true,
+    StealthState                     = true,
+    ShowSprint                       = true,
+    ShowGallop                       = true,
 }
 SCB.SV = nil
 
--- gui
-local uiTlw     = {}
+-- GUI
+local uiTlw = {}
 
--- abilities and buffs
+-- Abilities and buffs
 local uiProcAnimation = {}
 local uiCustomToggle = {}
 local ActionBar = {}
@@ -79,26 +80,26 @@ local g_lastTarget = nil
 local g_effectsList = { player1 = {}, player2 = {}, reticleover1 = {}, reticleover2 = {}, ground = {} }
 local g_pendingGroundAbility = nil
 
--- potions
+-- Potions
 local g_quickslotAbility    = nil
 local g_quickslotLastSame   = false
 local g_quickslotLastUsable = false
 
--- self resurrection tracking
+-- Self resurrection tracking
 local g_playerActive = false
 local g_playerDead   = false
 local g_playerResurectStage = nil
 
--- stealth tracking
+-- Stealth tracking
 local g_stealth = nil
 
--- fast travel from any place in world
-local recallEffectName = 'Recall Cooldown'
-local recallIconFilename = '/esoui/art/icons/ability_rogue_053.dds'
+-- Fast travel from any place in world
+local recallEffectName = "Recall Cooldown"
+local recallIconFilename = "/esoui/art/icons/ability_rogue_053.dds"
 
--- font to be used on icons
+-- Font to be used on icons
 -- 'ZoFontWindowSubtitle' or ours:
---local buffsFont = '/LuiExtended/media/fonts/fontin_sans_r.otf|16|outline'
+--local buffsFont = "/LuiExtended/media/fonts/fontin_sans_r.otf|16|outline"
 --local buffsFont = "$(MEDIUM_FONT)|17|outline"
 local buffsFont
 
@@ -109,9 +110,7 @@ local g_horizAlign = CENTER
 local v_horizAlign = MIDDLE
 local g_horizSortInvert = false
 
---[[
- * Double check that the slot is actually eligible for use
- ]]--
+-- Double check that the slot is actually eligible for use
 local function HasFailure( slotIndex )
     if ( HasCostFailure( slotIndex ) ) then return true
     elseif ( HasRequirementFailure( slotIndex ) ) then return true
@@ -1361,8 +1360,8 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
         duration = E.FakeExternalBuffs[abilityId].duration
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
-        local source = zo_strformat("<<t:1>>",sourceName)
-        local target = zo_strformat("<<t:1>>",targetName)
+        local source = strformat("<<t:1>>",sourceName)
+        local target = strformat("<<t:1>>",targetName)
         if source ~= "" and target == playerName then
             g_effectsList.player1[ abilityId ] = {
             type=EFFECT_TYPE_DEBUFF,
@@ -1384,8 +1383,8 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
         duration = E.FakeExternalDebuffs[abilityId].duration
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
-        local source = zo_strformat("<<t:1>>",sourceName)
-        local target = zo_strformat("<<t:1>>",targetName)
+        local source = strformat("<<t:1>>",sourceName)
+        local target = strformat("<<t:1>>",targetName)
         if source ~= "" and target == playerName then
             g_effectsList.player2[ abilityId ] = {
             type=EFFECT_TYPE_DEBUFF,
@@ -1411,8 +1410,8 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
         duration = E.FakePlayerBuffs[abilityId].duration
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
-        local source = zo_strformat("<<t:1>>",sourceName)
-        local target = zo_strformat("<<t:1>>",targetName)
+        local source = strformat("<<t:1>>",sourceName)
+        local target = strformat("<<t:1>>",targetName)
         if source == playerName and target == playerName then
             g_effectsList.player1[ abilityId ] = {
             type=1,
@@ -1442,8 +1441,8 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
         effectType = EFFECT_TYPE_DEBUFF
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
-        local source = zo_strformat("<<t:1>>",sourceName)
-        local target = zo_strformat("<<t:1>>",targetName)
+        local source = strformat("<<t:1>>",sourceName)
+        local target = strformat("<<t:1>>",targetName)
         if source == playerName and target ~= nil then
             g_effectsList.reticleover2[ abilityId ] = {
             type=effectType,
@@ -1463,8 +1462,8 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
         duration = E.FakeStagger[abilityId].duration
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
-        local source = zo_strformat("<<t:1>>",sourceName)
-        local target = zo_strformat("<<t:1>>",targetName)
+        local source = strformat("<<t:1>>",sourceName)
+        local target = strformat("<<t:1>>",targetName)
         if source ~= "" and target == playerName then
             g_effectsList.player2[ abilityId ] = {
             type=EFFECT_TYPE_DEBUFF,
@@ -1490,8 +1489,8 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
         style = E.FakeSelfAura[abilityId].style
         local beginTime = GetGameTimeMilliseconds()
         local endTime = beginTime + duration
-        local source = zo_strformat("<<t:1>>",sourceName)
-        local target = zo_strformat("<<t:1>>",targetName)
+        local source = strformat("<<t:1>>",sourceName)
+        local target = strformat("<<t:1>>",targetName)
         if source == playerName and target == playerName and style == buff then -- Used for certain self applied buffs we need to simulate to fix incorrect display
             g_effectsList.player1[ abilityId ] = {
             type=1,
