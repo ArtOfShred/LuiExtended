@@ -214,6 +214,14 @@ E.AbilityIcon = {
     ['Twin Slashes Bleed']              = 'esoui/art/icons/ability_dualwield_001.dds',
     ['Rending Slashes Bleed']           = 'esoui/art/icons/ability_dualwield_001_a.dds',
     ['Blood Craze Bleed']               = 'esoui/art/icons/ability_dualwield_001_b.dds',
+    
+    -- Various misc abilities TEMP (until individual replacements can be done, a lot of these work regardless)
+    
+    
+    -- Bla bla add shit here for Rally, Dark Exchange, etc before release!
+    
+    
+    -- End various misc abilities TEMP
 
     -- Most of this other stuff should be deprecated!
     [L.Effect_Fall_Snare]               = '/esoui/art/icons/death_recap_fall_damage.dds',
@@ -311,7 +319,7 @@ E.AbilityIcon = {
 -- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY ID
 E.DebuffDisplayOverrideId = {
 
-    [2727] = true,
+    [2727] = true, -- Off-Balance
 
 }
 

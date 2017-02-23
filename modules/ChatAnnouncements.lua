@@ -13,33 +13,30 @@ local gsub          = string.gsub
 local moduleName    = LUIE.name .. '_ChatAnnouncements'
 
 CA.D = {
-    ChatUseSystem                 = false,
-    TimeStamp                     = false,
-    TimeStampFormat               = "HH:m",
-    GroupChatMsg                  = true,
+    GroupChatMsg                  = false,
     GoldChange                    = true,
     GoldColor                     = { 1, 1, 0.2, 1 },
-    TotalGoldChange               = true,
+    TotalGoldChange               = false,
     GoldName                      = "Gold",
     AlliancePointChange           = true,
     AlliancePointColor            = { 0.164706, 0.862745, 0.133333, 1 },
-    TotalAlliancePointChange      = true,
-    AlliancePointName             = "Alliance Point",
+    TotalAlliancePointChange      = false,
+    AlliancePointName             = "AP",
     TelVarStoneChange             = true,
     TelVarStoneColor              = { 0.368627, 0.643137, 1, 1 },
-    TotalTelVarStoneChange        = true,
-    TelVarStoneName               = "Tel Var Stone",
+    TotalTelVarStoneChange        = false,
+    TelVarStoneName               = "TV",
     WritVoucherChange             = true,
     WritVoucherColor              = { 1, 1, 1, 1 },
-    TotalWritVoucherChange        = true,
+    TotalWritVoucherChange        = false,
     WritVoucherName               = "Writ Voucher",
     Loot                          = true,
     LootIcons                     = true,
-    LootVendor                    = false,
-    LootBank                      = false,
+    LootVendor                    = true,
+    LootBank                      = true,
     LootMail                      = true,
-    LootTrade                     = false,
-    LootCraft                     = false,
+    LootTrade                     = true,
+    LootCraft                     = true,
     ShowCraftUse                  = false,
     ShowDestroy                   = false,
     ShowConfiscate                = false,
@@ -62,7 +59,7 @@ CA.D = {
     CurrencyTotalMessage          = "[New Total]",
     ExperienceLevelUp             = true,
     Experience                    = true,
-    ExperienceContextName         = "[Gained]",
+    ExperienceContextName         = "[Earned]",
     ExperienceName                = "XP",
     ExperienceIcon                = true,
     ExperienceShowProgress        = true,
@@ -74,7 +71,7 @@ CA.D = {
     ExperienceDisplayOptions      = 1,
     ExperiencexperienceHideCombat = false,
     Achievements                  = false,
-    AchievementsStep              = 2,
+    AchievementsStep              = 10,
     AchievementsDetails           = true,
     AchievementCategory1          = true,
     AchievementCategory2          = true,
@@ -91,6 +88,7 @@ CA.D = {
     ChatPlayerDisplayOptions      = 2,
     MiscBags                      = false,
     MiscLockpick                  = false,
+    MiscSocial                    = false,
     MiscGuild                     = false,
     MiscGuildIcon                 = false,
     MiscGuildRank                 = false,
@@ -150,21 +148,24 @@ function CA.Initialize()
     CA.RegisterLockpickEvents()
     CA.RegisterHorseEvents()
     CA.RegisterGuildEvents()
-    CA.RegisterSocialEvents() -- NEED MENU OPTION STILL
+    CA.RegisterSocialEvents()
 end
 
 function CA.RegisterSocialEvents()
-    --EVENT_MANAGER:UnregisterForEvent(moduleName, )
-    --EVENT_MANAGER:UnregisterForEvent(moduleName, )
-    --EVENT_MANAGER:UnregisterForEvent(moduleName, )
-    --EVENT_MANAGER:UnregisterForEvent(moduleName, )
-    --if SOME VARIABLE IS TRUE then
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_FRIEND_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_FRIEND_REMOVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_REMOVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_SHARED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_SHARE_REMOVED)
+    if CA.SV.MiscSocial then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_ADDED, CA.FriendAdded)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_REMOVED, CA.FriendRemoved)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_ADDED, CA.FriendInviteAdded)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_REMOVED, CA.FriendInviteRemoved)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARED, CA.QuestShared)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARE_REMOVED, CA.QuestShareRemoved)
+    end
 end
 
 GuildRankData = {} -- Variable to store local player guild ranks, for guild rank changes.
@@ -493,6 +494,8 @@ end
 
 function CA.ActivityStatusUpdate(eventCode, status)
 
+    --d("status update:" .. status)
+
     if ShowActivityStatus then
         if status == ACTIVITY_FINDER_STATUS_NONE and WeAreQueued == true then
             printToChat ("You are no longer queued in the group finder.")
@@ -571,7 +574,7 @@ function CA.ActivityStatusRefresh()
 end
 
 function CA.ReadyCheckUpdate(eventCode)
-    -- d("Ready check update!")
+    --d("Ready check update!")
 
     local activityType = GetLFGReadyCheckNotificationInfo()
     local _, tanksPending, _, healersPending, _, dpsPending = GetLFGReadyCheckCounts()

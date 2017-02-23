@@ -38,7 +38,7 @@ SCB.D = {
     BuffFontStyle            = "outline",
     BuffFontSize             = 16,
     Alignment                = L.Setting_Center,
-    AlignmentVert            = L.Setting_Middle,
+    AlignmentVert            = L.Setting_Top,
     SortDirection            = L.Setting_OrderX[1],
     GlowIcons                = false,
     RemainingText            = true,
@@ -87,15 +87,6 @@ local g_playerResurectStage = nil
 
 -- stealth tracking
 local g_stealth = nil
-
-local buffSource = ""
-local buffTarget = ""
-
-local PlayerCast = {}
-
-local bufftable = {}
-
-local HideDebuffToggle = {}
 
 -- fast travel from any place in world
 local recallEffectName = 'Recall Cooldown'
@@ -993,15 +984,15 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
         buff.iconbg:SetHidden( not SCB.SV.RemainingCooldown ) -- we do not need black icon background when there is no Cooldown control present
     end
 
-    local inset = (SCB.SV.RemainingCooldown and buff.cd ~= nil) and 4 or 1
+    local inset = (SCB.SV.RemainingCooldown and buff.cd ~= nil) and 3 or 1
 
     buff.icon:ClearAnchors()
     buff.icon:SetAnchor( TOPLEFT, buff, TOPLEFT, inset, inset )
     buff.icon:SetAnchor( BOTTOMRIGHT, buff, BOTTOMRIGHT, -inset, -inset )
     if buff.iconbg ~= nil then
         buff.iconbg:ClearAnchors()
-        buff.iconbg:SetAnchor( TOPLEFT, buff, TOPLEFT, inset -1, inset -1)
-        buff.iconbg:SetAnchor( BOTTOMRIGHT, buff, BOTTOMRIGHT, -inset +1, -inset +1)
+        buff.iconbg:SetAnchor( TOPLEFT, buff, TOPLEFT, inset, inset)
+        buff.iconbg:SetAnchor( BOTTOMRIGHT, buff, BOTTOMRIGHT, -inset, -inset)
     end
 
     -- position all items except first one to the right of it's neighbour
@@ -1046,7 +1037,7 @@ function SCB.CreateSingleIcon(container, AnchorItem)
     -- glow border
     buff.frame  = UI.Texture( buff, {CENTER,CENTER}, nil, nil, nil, false )
     -- background
-    if container ~= "player_long" and container ~= "target1" then
+    if container ~= "player_long" then
         buff.iconbg = UI.Texture( buff, nil, nil, '/esoui/art/actionbar/abilityinset.dds', DL_CONTROLS, true )
         buff.iconbg = UI.Backdrop( buff, nil, nil, {0,0,0,0.9}, {0,0,0,0.9}, false )
         buff.iconbg:SetDrawLevel(DL_CONTROLS)
@@ -1192,19 +1183,14 @@ end
  *   integer abilityType,
  *   integer statusEffectType
  ]]--
-function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId)
+function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
     --CHAT_SYSTEM:AddMessage(strfmt('OnEffectChanged %d: %s[%s] / %d/%d/%d [%s-%d] %d', changeType, effectName, unitTag, effectType, abilityType, statusEffectType, unitName, unitId, abilityId ))
-
-    --printToChat ( "On effect changed! --> " .. changeType)
 
     -- track only effects on self or target debuffs
     if unitTag ~= 'player' and unitTag ~= 'reticleover' then return end
 
-    --if effectType == 2 and changeType == 2 and HideDebuffToggle[abilityId] then HideDebuffToggle[abilityId] = false end -- Alot of debuffs when reapplied don't refresh, they end then apply. This will reset if this happens.
-
-    if (effectType == 2 and HideDebuffToggle[abilityId]) and not (E.DebuffDisplayOverrideId[abilityId] or E.DebuffDisplayOverrideName[effectName]) then
-            return
-    end
+    -- If the source of the buff isn't the player or the buff is not on the AbilityId or AbilityName override list then we don't display it
+    if effectType == 2 and not (castByPlayer == 1 or castByPlayer == 2) and not (E.DebuffDisplayOverrideId[abilityId] or E.DebuffDisplayOverrideName[effectName]) then return end
 
     -- Ignore some buffs (by abilityId or by effectName)
     if E.IsEffectIgnored[ effectName ] or E.IsAbilityIgnoredById[abilityId] or
@@ -1311,11 +1297,6 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
     -- ignore error events
     if isError then return end
 
-    buffSource = zo_strformat("<<t:1>>",sourceName)
-    buffTarget = zo_strformat("<<t:1>>",targetName)
-
-    --printToChat ( "Ability ID: " .. abilityId .. ": " .. sourceName .. " --> " .. targetName)
-
     -- try to remove effect like Ground Runes and Traps
     if E.IsGroundMine[abilityName] and IsResultDamage[result]
         and ( targetType == COMBAT_UNIT_TYPE_NONE or targetType == COMBAT_UNIT_TYPE_OTHER)
@@ -1412,7 +1393,7 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
         local source = zo_strformat("<<t:1>>",sourceName)
         local target = zo_strformat("<<t:1>>",targetName)
         if source == playerName and target ~= nil then
-            g_effectsList.ground[ abilityId ] = {
+            g_effectsList.reticleover2[ abilityId ] = {
             type=effectType,
             id=abilityId, name=effectName, icon=iconName,
             dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
@@ -1473,18 +1454,6 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
             dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
             forced = "short",
             restart=true, iconNum=0 }
-        end
-    end
-
-    if result == 2250 then
-        return
-    else
-        if buffSource == "" and buffTarget == "" then
-            HideDebuffToggle[abilityId] = true
-        end
-
-        if buffSource ~= "" and buffTarget ~= "" then
-            HideDebuffToggle[abilityId] = false
         end
     end
 
@@ -1551,9 +1520,10 @@ function SCB.ReloadEffects(unitTag)
     for i = 1, GetNumBuffs(unitTag) do
         local unitName = GetRawUnitName(unitTag)
         local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
-        if effectType == 2 and castByPlayer then HideDebuffToggle[abilityId] = false end
-        if effectType == 2 and not castByPlayer then  HideDebuffToggle[abilityId] = true end
-        SCB.OnEffectChanged(0, 3, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0--[[unitId]], abilityId)
+        if effectType == 2 then
+            if castByPlayer == true then castByPlayer = 1 else castByPlayer = 5 end -- Fudge this value to send to SCB.OnEffectChanged if this is a debuff
+        end
+        SCB.OnEffectChanged(0, 3, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0--[[unitId]], abilityId, castByPlayer)
     end
 
     -- create custom buff icon for Recall Cooldown effect
