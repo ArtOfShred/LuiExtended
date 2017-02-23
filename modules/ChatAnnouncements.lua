@@ -2211,7 +2211,7 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
     end
 
     if not LaunderCheck then printToChat(strfmt(
-        "%s%s%s%s|r %s%s%s%s%s",
+        "%s%s%s%s|r %s%s%s%s%s%s%s%s%s",
         gainorloss,
         bracket1,
         logPrefix,
