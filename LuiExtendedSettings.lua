@@ -1739,7 +1739,7 @@ function LUIE_CreateSettings()
                                 LUIE.ChatAnnouncements.SV.LootTrade or
                                 LUIE.ChatAnnouncements.SV.LootMail or
                                 LUIE.ChatAnnouncements.SV.LootVendor or
-                                LUIE.ChatAnnouncements.Sv.LootBank
+                                LUIE.ChatAnnouncements.SV.LootBank
                             ) end,
                         default = LUIE.ChatAnnouncements.D.LootShowArmorType,
                     },
@@ -1757,7 +1757,7 @@ function LUIE_CreateSettings()
                                 LUIE.ChatAnnouncements.SV.LootTrade or
                                 LUIE.ChatAnnouncements.SV.LootMail or
                                 LUIE.ChatAnnouncements.SV.LootVendor or
-                                LUIE.ChatAnnouncements.Sv.LootBank
+                                LUIE.ChatAnnouncements.SV.LootBank
                             ) end,
                         default = LUIE.ChatAnnouncements.D.LootShowTrait,
                     },
@@ -1775,7 +1775,7 @@ function LUIE_CreateSettings()
                                 LUIE.ChatAnnouncements.SV.LootTrade or
                                 LUIE.ChatAnnouncements.SV.LootMail or
                                 LUIE.ChatAnnouncements.SV.LootVendor or
-                                LUIE.ChatAnnouncements.Sv.LootBank
+                                LUIE.ChatAnnouncements.SV.LootBank
                             ) end,
                         default = LUIE.ChatAnnouncements.D.LootShowStyle,
                     },
@@ -1793,7 +1793,7 @@ function LUIE_CreateSettings()
                                 LUIE.ChatAnnouncements.SV.LootTrade or
                                 LUIE.ChatAnnouncements.SV.LootMail or
                                 LUIE.ChatAnnouncements.SV.LootVendor or
-                                LUIE.ChatAnnouncements.Sv.LootBank
+                                LUIE.ChatAnnouncements.SV.LootBank
                             ) end,
                         default = LUIE.ChatAnnouncements.D.LootNotTrash,
                     },
@@ -1812,7 +1812,7 @@ function LUIE_CreateSettings()
                                 LUIE.ChatAnnouncements.SV.LootTrade or
                                 LUIE.ChatAnnouncements.SV.LootMail or
                                 LUIE.ChatAnnouncements.SV.LootVendor or
-                                LUIE.ChatAnnouncements.Sv.LootBank
+                                LUIE.ChatAnnouncements.SV.LootBank
                             ) end,
                         default = itemBracketOptions[1]
                     },
@@ -1830,7 +1830,7 @@ function LUIE_CreateSettings()
                                 LUIE.ChatAnnouncements.SV.LootTrade or
                                 LUIE.ChatAnnouncements.SV.LootMail or
                                 LUIE.ChatAnnouncements.SV.LootVendor or
-                                LUIE.ChatAnnouncements.Sv.LootBank
+                                LUIE.ChatAnnouncements.SV.LootBank
                             ) end,
                         default = LUIE.ChatAnnouncements.D.ItemContextToggle,
                     },
