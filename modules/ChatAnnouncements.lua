@@ -102,40 +102,39 @@ CA.D = {
     MiscHorse                     = false,
 }
 
-local g_playerName = nil
+local g_playerName          = nil
 local g_playerNameFormatted = nil
-local combostring = "" -- String is filled by the EVENT_CURRENCY_CHANGE events and ammended onto the end of purchase/sales from LootLog component if toggled on!
-local stealstring = ""
-local LaunderCheck = false
-local laundergoldstring = ""
-local launderitemstring = ""
-local tradestring1 = ""
-local tradestring2 = ""
-local mailCOD = 0
-local mailMoney = 0
-local postageAmount = 0
-local MailStop = false
-local MailStringPart1 = ""
-local MailCurrencyCheck = true
-
-local IsValidLaunder = false
+local combostring           = "" -- String is filled by the EVENT_CURRENCY_CHANGE events and ammended onto the end of purchase/sales from LootLog component if toggled on!
+local stealstring           = ""
+local LaunderCheck          = false
+local laundergoldstring     = ""
+local launderitemstring     = ""
+local tradestring1          = ""
+local tradestring2          = ""
+local mailCOD               = 0
+local mailMoney             = 0
+local postageAmount         = 0
+local MailStop              = false
+local MailStringPart1       = ""
+local MailCurrencyCheck     = true
+local IsValidLaunder        = false
 
 GroupJoinFudger = false -- Controls message for group join
+GuildRankData = {} -- Variable to store local player guild ranks, for guild rank changes.
 
-function CA.Initialize( enabled )
+function CA.Initialize(enabled)
     -- Load settings
     CA.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "ChatAnnouncements", CA.D )
 
     -- Disable if setting not toggled on!
     if not enabled then return end
     CA.Enabled = true
-    
+
     -- Read current player toon name
     g_playerName = GetRawUnitName("player")
     g_playerNameFormatted = strformat(SI_UNIT_NAME, GetUnitName("player"))
     g_playerDisplayName = strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
 
-    
     -- Register events
     CA.RegisterGroupEvents()
     CA.RegisterGoldEvents()
@@ -157,7 +156,6 @@ function CA.Initialize( enabled )
     CA.RegisterGuildEvents()
     CA.RegisterSocialEvents()
     CA.RegisterCustomStrings()
-    
 end
 
 function CA.RegisterSocialEvents()
@@ -176,8 +174,6 @@ function CA.RegisterSocialEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARE_REMOVED, CA.QuestShareRemoved)
     end
 end
-
-GuildRankData = {} -- Variable to store local player guild ranks, for guild rank changes.
 
 function CA.RegisterGuildEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_MEMBER_ADDED)
@@ -305,16 +301,16 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
     printToChat(strformat("You have joined <<1>>", guildNameAlliance))
     GuildJoinFudger = true
 
-        -- Reindex Guild Ranks
-        GuildRankData = {}
-        if CA.SV.MiscGuildRank then
-            for i = 1,5 do
-                local guildId = GetGuildId(i)
-                local memberIndex = GetPlayerGuildMemberIndex(guildId)
-                local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
-                GuildRankData[guildId] = {rank=rankIndex}
-            end
+    -- Reindex Guild Ranks
+    GuildRankData = {}
+    if CA.SV.MiscGuildRank then
+        for i = 1,5 do
+            local guildId = GetGuildId(i)
+            local memberIndex = GetPlayerGuildMemberIndex(guildId)
+            local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
+            GuildRankData[guildId] = {rank=rankIndex}
         end
+    end
 end
 
 function CA.GuildRemovedSelf(eventCode, guildId, guildName)
@@ -323,16 +319,16 @@ function CA.GuildRemovedSelf(eventCode, guildId, guildName)
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
     printToChat(strformat("You have left <<1>>", guildNameAlliance))
 
-        -- Reindex Guild Ranks
-        GuildRankData = {}
-        if CA.SV.MiscGuildRank then
-            for i = 1,5 do
-                local guildId = GetGuildId(i)
-                local memberIndex = GetPlayerGuildMemberIndex(guildId)
-                local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
-                GuildRankData[guildId] = {rank=rankIndex}
-            end
+    -- Reindex Guild Ranks
+    GuildRankData = {}
+    if CA.SV.MiscGuildRank then
+        for i = 1,5 do
+            local guildId = GetGuildId(i)
+            local memberIndex = GetPlayerGuildMemberIndex(guildId)
+            local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
+            GuildRankData[guildId] = {rank=rankIndex}
         end
+    end
 end
 
 function CA.GuildInviteAdded(eventCode, guildId, guildName, guildAlliance, inviterName)
@@ -373,7 +369,7 @@ end
 
 function CA.FriendInviteAdded(eventCode, inviterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
-    printToChat (strformat("|cFEFEFE<<1>>|r wants to be your friend.", displayNameLink))
+    printToChat(strformat("|cFEFEFE<<1>>|r wants to be your friend.", displayNameLink))
 end
 
 function CA.FriendInviteRemoved(eventCode, inviterName)
@@ -395,7 +391,7 @@ function CA.QuestShared (eventCode, questId)
 end
 
 function CA.QuestShareRemoved(eventCode, questId)
-    printToChat ("Shared quest declined.")
+    printToChat("Shared quest declined.")
 end
 
 function CA.RegisterCustomStrings()
@@ -431,7 +427,7 @@ function CA.RegisterCustomStrings()
         -- Quest Share String Replacements
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, "<<1>> wants to share the quest: <<2>>.", 3)
     end
-    
+
 end
 
 -- Display group join/leave in chat
@@ -508,9 +504,7 @@ function CA.ActivityComplete(eventCode)
 end
 
 function CA.ActivityStatusUpdate(eventCode, status)
-
     --d("status update:" .. status)
-
     if ShowActivityStatus then
         if status == ACTIVITY_FINDER_STATUS_NONE and WeAreQueued == true then
             printToChat ("You are no longer queued in the group finder.")
@@ -535,9 +529,7 @@ function CA.ActivityStatusUpdate(eventCode, status)
 end
 
 function CA.ActivityQueueResult(eventCode, result)
-
     --d("ActivityQueueResult: " .. result)
-
     if result == ACTIVITY_QUEUE_RESULT_INCOMPATIBLE_GROUP then
         printToChat("Cannot queue - the members of this group are role incompatible.")
     end
@@ -564,7 +556,6 @@ function CA.ActivityQueueResult(eventCode, result)
 end
 
 function CA.ReadyCheckCancel(eventCode, reason)
-
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_MEMBER_CANCELED then
         printToChat("Ready check cancelled, group member cancelled.")
     end
@@ -590,9 +581,7 @@ function CA.ActivityStatusRefresh()
 end
 
 function CA.ReadyCheckUpdate(eventCode)
-
     --d("Ready check update!")
-
     local activityType = GetLFGReadyCheckNotificationInfo()
     local _, tanksPending, _, healersPending, _, dpsPending = GetLFGReadyCheckCounts()
     if ShowRCUpdates then
@@ -712,7 +701,7 @@ local updatedRoleAccountName = GetUnitDisplayName(unitTag)
 
 local characterNameLink = ZO_LinkHandler_CreateCharacterLink(updatedRoleName)
 local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(updatedRoleAccountName)
-local displayBothString = ( strfmt("%s%s", updatedRoleName, updatedRoleAccountName) )
+local displayBothString = ( strformat("<<1>><<2>>", updatedRoleName, updatedRoleAccountName) )
 local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, updatedRoleAccountName)
 
 local rolestring1 = ""
@@ -730,27 +719,27 @@ local message = ""
 
     -- Get appropriate 2nd string for role
     if dps and not (healer or tank) then
-        message = (strfmt("%s", rolestring3) )
+        message = (strformat("<<1>>", rolestring3) )
     elseif healer and not (dps or tank) then
-        message = (strfmt("%s", rolestring2) )
+        message = (strformat("<<1>>", rolestring2) )
     elseif tank and not (dps or healer) then
-        message = (strfmt("%s", rolestring1) )
+        message = (strformat("<<1>>", rolestring1) )
     elseif dps and healer and not tank then
-        message = (strfmt("%s, %s", rolestring2, rolestring3) )
+        message = (strformat("<<1>>, <<2>>", rolestring2, rolestring3) )
     elseif dps and tank and not healer then
-        message = (strfmt("%s, %s", rolestring1, rolestring3) )
+        message = (strformat("<<1>>, <<2>>", rolestring1, rolestring3) )
     elseif healer and tank and not dps then
-        message = (strfmt("%s, %s", rolestring1, rolestring2) )
+        message = (strformat("<<1>>, <<2>>", rolestring1, rolestring2) )
     elseif dps and healer and tank then
-        message = (strfmt("%s, %s, %s", rolestring1, rolestring2, rolestring3) )
+        message = (strformat("<<1>>, <<2>>, <<3>>", rolestring1, rolestring2, rolestring3) )
     end
 
     if updatedRoleName ~= g_playerNameFormatted then
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r has updated their role: %s", displayNameLink, message) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has updated their role: %s", characterNameLink, message) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has updated their role: %s", displayBoth, message) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r has updated their role: <<2>>", displayNameLink, message) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r has updated their role: <<2>>", characterNameLink, message) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r has updated their role: <<2>>", displayBoth, message) ) end
     else
-        printToChat(strfmt("You have updated your role: %s", message) )
+        printToChat(strformat("You have updated your role: <<1>>", message) )
     end
 end
 ]]--
@@ -764,18 +753,18 @@ function CA.GMCS(eventCode, unitTag, isOnline)
 
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink(onlineRoleName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(onlineRoleDisplayName)
-    local displayBothString = ( strfmt("%s%s", onlineRoleName, onlineRoleDisplayName) )
+    local displayBothString = ( strformat("<<1>><<2>>", onlineRoleName, onlineRoleDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, onlineRoleDisplayName)
 
 
     if not isOnline and onlineRoleName ~=g_playerNameFormatted then
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r has disconnected.", displayNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has disconnected.", characterNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has disconnected.", displayBoth) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r has disconnected.", displayNameLink) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r has disconnected.", characterNameLink) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r has disconnected.", displayBoth) ) end
     elseif isOnline and onlineRoleName ~=g_playerNameFormatted then
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strfmt("%s|r has reconnected.", displayNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strfmt("%s|r has reconnected.", characterNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strfmt("%s|r has reconnected.", displayBoth) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r has reconnected.", displayNameLink) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r has reconnected.", characterNameLink) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r has reconnected.", displayBoth) ) end
     end
 end
 ]]--
@@ -1521,7 +1510,6 @@ end
 
 -- Writ Voucher Change Announcements
 function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, reason)
-
     combostring = ""
 
     local UpOrDown            = newWritVouchers - oldWritVouchers
@@ -1788,7 +1776,6 @@ function CA.RegisterDestroyEvents()
     end
 
     ItemWasDestroyed = false
-
 end
 
 function CA.RegisterBagEvents()
@@ -1819,7 +1806,7 @@ end
 --------------------------------------------------------------
 
 function CA.MiscAlertLockFailed(eventCode)
-    printToChat("Lockpick failed, you're fucking terrible!!")
+    printToChat("Lockpick failed!")
 end
 
 function CA.MiscAlertLockSuccess(eventCode)
@@ -1827,7 +1814,6 @@ function CA.MiscAlertLockSuccess(eventCode)
 end
 
 function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source)
-
     if ridingSkillType == 2 then
         g_InventoryStacks = {}
         CA.IndexInventory()
@@ -1885,18 +1871,16 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
         end
 
         if CA.SV.LootCurrencyCombo then
-            printToChat ( strfmt( "|c0B610B%s%s%s|r %s%s |cffffff%s/60|r%s", bracket1, logPrefix, bracket2, icon, skillstring, current, combostring) )
+            printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>><<5>> |cFFFFFF<<6>>/60|r<<7>>", bracket1, logPrefix, bracket2, icon, skillstring, current, combostring) )
             combostring = ""
         else
-            printToChat ( strfmt( "|c0B610B%s%s%s|r %s%s |cffffff%s/60|r", bracket1, logPrefix, bracket2, icon, skillstring, current) )
+            printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>><<5>> |cFFFFFF<<6>>/60|r", bracket1, logPrefix, bracket2, icon, skillstring, current) )
         end
     end
-
 end
 
 
 function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
-
     g_InventoryStacks = {}
     g_BankStacks = {}
     CA.IndexInventory()
@@ -1932,17 +1916,15 @@ function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previous
         end
 
         if CA.SV.LootCurrencyCombo then
-            printToChat ( strfmt( "|c0B610B%s%s%s|r %s[Bag Space Upgrade] |cffffff%s/8|r%s", bracket1, logPrefix, bracket2, icon, currentUpgrade, combostring) )
+            printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>>[Bag Space Upgrade] |cFFFFFF<<5>>/8|r<<6>>", bracket1, logPrefix, bracket2, icon, currentUpgrade, combostring))
             combostring = ""
         else
-            printToChat ( strfmt( "|c0B610B%s%s%s|r %s[Bag Space Upgrade] |cffffff%s/8|r", bracket1, logPrefix, bracket2, icon, currentUpgrade) )
+            printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>>[Bag Space Upgrade] |cFFFFFF<<5>>/8|r", bracket1, logPrefix, bracket2, icon, currentUpgrade))
         end
     end
-
 end
 
 function CA.MiscAlertBank(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
-
     g_InventoryStacks = {}
     g_BankStacks = {}
     CA.IndexInventory()
@@ -1978,17 +1960,15 @@ function CA.MiscAlertBank(eventCode, previousCapacity, currentCapacity, previous
         end
 
         if CA.SV.LootCurrencyCombo then
-            printToChat ( strfmt( "|c0B610B%s%s%s|r %s[Bank Space Upgrade] |cffffff%s/18|r%s", bracket1, logPrefix, bracket2, icon, currentUpgrade, combostring) )
+            printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>>[Bank Space Upgrade] |cFFFFFF<<5>>/18|r<<6>>", bracket1, logPrefix, bracket2, icon, currentUpgrade, combostring))
             combostring = ""
         else
-            printToChat ( strfmt( "|c0B610B%s%s%s|r %s[Bank Space Upgrade] |cffffff%s/18|r", bracket1, logPrefix, bracket2, icon, currentUpgrade) )
+            printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>>[Bank Space Upgrade] |cFFFFFF<<6>>/18|r", bracket1, logPrefix, bracket2, icon, currentUpgrade))
         end
     end
-
 end
 
 function CA.OnBuybackItem(eventCode, itemName, quantity, money, itemSound)
-
     local icon
     local itemIcon,_,_,_,_ = GetItemLinkInfo(itemName)
     icon = itemIcon
@@ -2026,7 +2006,6 @@ function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCu
 end
 
 function CA.OnSellItem(eventCode, itemName, quantity, money)
-
     local icon
     local itemIcon,_,_,_,_ = GetItemLinkInfo(itemName)
     icon = itemIcon
@@ -2280,7 +2259,7 @@ function CA.TradeInviteWaiting(eventCode, inviteeCharacterName, inviteeDisplayNa
     TradeInvitee = inviteeCharacterName
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink( gsub(inviteeCharacterName,"%^%a+","") )
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviteeDisplayName)
-    local displayBothString = ( strfmt("%s%s", gsub(inviteeCharacterName,"%^%a+",""), inviteeDisplayName) )
+    local displayBothString = ( strformat("<<1>><<2>>", gsub(inviteeCharacterName,"%^%a+",""), inviteeDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviteeDisplayName)
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then
         printToChat(strformat("You have invited |cFEFEFE<<1>>|r to trade.", displayNameLink))
@@ -2298,7 +2277,7 @@ function CA.TradeInviteConsidering(eventCode, inviterCharacterName, inviterDispl
     TradeInviter = inviterCharacterName
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink( gsub(inviterCharacterName,"%^%a+","") )
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
-    local displayBothString = ( strfmt("%s%s", gsub(inviterCharacterName,"%^%a+",""), inviterDisplayName) )
+    local displayBothString = ( strformat("<<1><<<2>>", gsub(inviterCharacterName,"%^%a+",""), inviterDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then
         printToChat(strformat("|cFEFEFE<<1>>|r has invited you to trade.", displayNameLink))
@@ -2340,7 +2319,6 @@ end
 -- Adds item to index when they are added to the trade
 function CA.OnTradeAdded(eventCode, who, tradeIndex, itemSoundCategory)
     -- d( "tradeIndex: " .. tradeIndex .. " --- WHO: " .. who ) -- Debug
-
     if who == 0 then
         local indexOut = tradeIndex
         local name, icon, stack = GetTradeItemInfo (who, tradeIndex)
@@ -2485,7 +2463,7 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
     local plural = "s"
     if NumMails == 1 then plural = "" end
 
-    MailStringPart1 = (strfmt("Received mail with %s attachment%s", NumMails, plural) )
+    MailStringPart1 = (strformat("Received mail with <<1>> attachment<<2>>", NumMails, plural) )
     zo_callLater(PrintMailAttachmentsIfNoGold, 25) -- We call this with a super short delay, it will return a string as long as a currency change event doesn't trigger beforehand!
 
     g_MailStacks = {}
@@ -2493,7 +2471,7 @@ end
 
 function PrintMailAttachmentsIfNoGold()
     if CA.SV.MiscMail and MailStringPart1 ~= "" then
-        printToChat(strfmt("%s.",MailStringPart1) )
+        printToChat(strformat("<<1>>.", MailStringPart1) )
     end
     MailStringPart1 = "" -- Important to clear this string, if we took a mail with only items attached, we don't want the next mail with gold to falsely show that attachments were taken!
 end
@@ -2794,7 +2772,7 @@ function CA.OnAchievementUpdated(eventCode, aId)
     if topLevelIndex == 10 and not CA.SV.AchievementCategory10 then return end
     if topLevelIndex == 11 and not CA.SV.AchievementCategory11 then return end
     if topLevelIndex == 12 and not CA.SV.AchievementCategory12 then return end
-    
+
     -- Old Function
     --[[if CA.SV.AchIgnoreList[topLevelIndex] then
         return
@@ -2814,24 +2792,24 @@ function CA.OnAchievementUpdated(eventCode, aId)
 
         table.insert(cmpInfo, { strformat(name), numCompleted, numRequired })
 
-        -- collect the numbers to calculate the correct percentage
+        -- Collect the numbers to calculate the correct percentage
         totalCmp = totalCmp + numCompleted
         totalReq = totalReq + numRequired
 
-        -- show the achievement on every special achievement because it's a rare event
+        -- Show the achievement on every special achievement because it's a rare event
         if numRequired == 1 and numCompleted == 1 then
             showInfo = true
         end
     end
 
     if not showInfo then
-        -- achievement completed
-        -- this is the first numCompleted value
-        -- show every time
+        -- Achievement completed
+        -- This is the first numCompleted value
+        -- Show every time
         if ( totalCmp == totalReq ) or ( totalCmp == 1 ) or ( CA.SV.AchievementsStep == 0 ) then
             showInfo = true
         else
-            -- achievement step hit
+            -- Achievement step hit
             local percentage = math.floor( 100 / totalReq * totalCmp )
 
             if percentage > 0 and percentage % CA.SV.AchievementsStep == 0 and g_lastPercentage[aId] ~= percentage then
@@ -2841,12 +2819,12 @@ function CA.OnAchievementUpdated(eventCode, aId)
         end
     end
 
-    -- bail out here if this achievement update event is not going to be printed to chat
+    -- Bail out here if this achievement update event is not going to be printed to chat
     if not showInfo then
         return
     end
 
-    -- prepare details information
+    -- Prepare details information
     local details
     if CA.SV.AchievementsDetails then
         -- Skyshards needs separate treatment otherwise text become too long
@@ -2855,10 +2833,10 @@ function CA.OnAchievementUpdated(eventCode, aId)
             details = strfmt( " > |c%s%d|c87B7CC/|c71DE73%d|c87B7CC.", AchievementPctToColour(totalCmp/totalReq), totalCmp, totalReq )
         else
             for i = 1, #cmpInfo do
-                -- boolean achievement stage
+                -- Boolean achievement stage
                 if cmpInfo[i][3] == 1 then
                     cmpInfo[i] = strfmt( "|c%s%s", AchievementPctToColour(cmpInfo[i][2]), cmpInfo[i][1] )
-                -- others
+                -- Others
                 else
                     local pct = cmpInfo[i][2] / cmpInfo[i][3]
                     cmpInfo[i] = strfmt( "%s |c%s%d|c87B7CC/|c71DE73%d", cmpInfo[i][1], AchievementPctToColour(pct), cmpInfo[i][2], cmpInfo[i][3] )
@@ -2992,10 +2970,10 @@ end
 
 function CA.FenceHelper()
     if not CA.SV.LootCurrencyCombo then
-        printToChat (laundergoldstring)
-        printToChat (launderitemstring)
+        printToChat(laundergoldstring)
+        printToChat(launderitemstring)
     else
-        printToChat (strfmt("%s → %s", launderitemstring, laundergoldstring))
+        printToChat(strfmt("%s → %s", launderitemstring, laundergoldstring))
     end
 
     laundergoldstring = ""

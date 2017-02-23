@@ -8,10 +8,11 @@ local UI            = LUIE.UI
 local E             = LUIE.Effects
 local L             = LUIE.GetLocale()
 local DelayBuffer   = LUIE.DelayBuffer
+local strformat     = zo_strformat
+local strfmt        = string.format
+
 local PrintXP
 local LogKillXP
-local strformat     = string.format
-local zo_strformat  = zo_strformat
 
 local GetGameTimeMilliseconds = GetGameTimeMilliseconds
 local GetUnitName             = GetUnitName
@@ -23,9 +24,7 @@ local GetSlotAbilityCost      = GetSlotAbilityCost
 local moduleName    = LUIE.name .. '_CombatInfo'
 local fakeControl   = {}
 
---[[
- * FIFO Queue data structure
- ]]--
+-- FIFO Queue data structure
 local fifoQueue = {}
 
 function fifoQueue.new()
@@ -48,7 +47,7 @@ function fifoQueue.popLeft(list)
     local first = list.first
     if first > list.last then return nil end
     local value = list[first]
-    list[first] = nil        -- to allow garbage collection
+    list[first] = nil        -- To allow garbage collection
     list.first = first + 1
     return value
 end
@@ -57,7 +56,7 @@ function fifoQueue.popRight(list)
     local last = list.last
     if list.first > last then return nil end
     local value = list[last]
-    list[last] = nil         -- to allow garbage collection
+    list[last] = nil         -- To allow garbage collection
     list.last = last - 1
     return value
 end
@@ -97,7 +96,7 @@ CI.Colours = {
     EXECUTE     = { r = 0.94 , g = 0.13 , b = 0.25 },
     MAGICKA     = { r = 0.14 , g = 0.59 , b = 0.78 },  --RGB(35, 150, 200)
     HEALTH      = { r = 0.80 , g = 0.07 , b = 0.10 },
-    --STAMINA     = { r = 0.24 , g = 0.78 , b = 0.31 },  --RGB(60, 200, 80)
+  --STAMINA     = { r = 0.24 , g = 0.78 , b = 0.31 },  --RGB(60, 200, 80)
     STAMINA     = { r = 0.82 , g = 0.80 , b = 0.49 },  --RGB(210, 205, 125)
     ULTIMATE    = { r = 0.86 , g = 1    , b = 0.31 },  --RGB(220, 255, 80)
     BLOCKED     = { r = 0.24 , g = 0.78 , b = 0.31 },  --RGB(60, 200, 80)
@@ -118,9 +117,8 @@ CI.Colours = {
     },
 }
 
---[[
- * List of all damage results to be coloured into damage-dependent colour
- ]]--
+
+-- List of all damage results to be coloured into damage-dependent colour
 local IsResultDamage = {
     [ACTION_RESULT_DAMAGE]            = true,
     [ACTION_RESULT_BLOCKED_DAMAGE]    = true,
@@ -180,7 +178,6 @@ CI.FontFamilies = {
 }
 
 -- Config with variables for this module
-
 -- Definition for different areas with scrolling text
 local combatTargets = {
     Target = {
@@ -288,12 +285,12 @@ local combatTargets = {
         animateAlpha        = true,
         animateY            = 3,
         animateX            = 0,
-        animateTime         = 2250, --4000,
+        animateTime         = 2250, -- 4000,
         fixedTime           = 0,
         fixedScaleDown      = false,
         alignIcon           = LEFT,
         alignIconTarget     = RIGHT,
-        alignIconOffsetX    = 4, --10,
+        alignIconOffsetX    = 4, -- 10,
         alignIconOffsetY    = 0,
         grid                = {3,2},
         alignOffsetY        = 80,
@@ -304,12 +301,12 @@ local combatTargets = {
         animateAlpha        = true,
         animateY            = -3,
         animateX            = 0,
-        animateTime         = 2250, --4000,
+        animateTime         = 2250, -- 4000,
         fixedTime           = 0,
         fixedScaleDown      = false,
         alignIcon           = LEFT,
         alignIconTarget     = RIGHT,
-        alignIconOffsetX    = 4, --10,
+        alignIconOffsetX    = 4, -- 10,
         alignIconOffsetY    = 0,
         grid                = {3,2},
         alignOffsetY        = -80,
@@ -327,7 +324,7 @@ local combatTargets = {
         animateAlpha        = true,
         animateY            = 3,
         animateX            = 0,
-        animateTime         = 2250, --4000,
+        animateTime         = 2250, -- 4000,
         fixedTime           = 0,
         fixedScaleDown      = false,
         alignIcon           = RIGHT,
@@ -343,7 +340,7 @@ local combatTargets = {
         animateAlpha        = true,
         animateY            = -3,
         animateX            = 0,
-        animateTime         = 2250, --4000,
+        animateTime         = 2250, -- 4000,
         fixedTime           = 0,
         fixedScaleDown      = false,
         alignIcon           = RIGHT,
@@ -365,7 +362,7 @@ local lowAlertText = {
 -- Events routing definition
 local combatEvents = {
     ['custom'] = { -- Custom triggers
-        [COMBAT_UNIT_TYPE_PLAYER] = { -- source is always PLAYER
+        [COMBAT_UNIT_TYPE_PLAYER] = { -- Source is always PLAYER
             ['exp'] = { -- Experience gain
                 target = 'TargetInfo',
                 colour = CI.Colours.EXP,
@@ -391,12 +388,12 @@ local combatEvents = {
             ['combatTip'] = { -- Active Combat Tips
                 target = 'Alerts',
                 colour = {
-                    [POWERTYPE_HEALTH]      = CI.Colours.HEALTH,    -- low Health alert
-                    [POWERTYPE_MAGICKA]     = CI.Colours.MAGICKA,   -- low Magicka alert
-                    [POWERTYPE_STAMINA]     = CI.Colours.STAMINA,   -- low Stamina alert
-                    [POWERTYPE_ULTIMATE]    = CI.Colours.ULTIMATE,  -- low Ultimate Ready, Potion Ready alert
-                --  [POWERTYPE_COMBO]       = CI.Colours.EXECUTE,   -- low Execute Now alert
-                    [POWERTYPE_INVALID]     = CI.Colours.YELLOW,    -- default alert colour
+                    [POWERTYPE_HEALTH]      = CI.Colours.HEALTH,    -- Low Health alert
+                    [POWERTYPE_MAGICKA]     = CI.Colours.MAGICKA,   -- Low Magicka alert
+                    [POWERTYPE_STAMINA]     = CI.Colours.STAMINA,   -- Low Stamina alert
+                    [POWERTYPE_ULTIMATE]    = CI.Colours.ULTIMATE,  -- Low Ultimate Ready, Potion Ready alert
+                --  [POWERTYPE_COMBO]       = CI.Colours.EXECUTE,   -- Low Execute Now alert
+                    [POWERTYPE_INVALID]     = CI.Colours.YELLOW,    -- Default alert colour
                 },
                 font   = "FontinSCLarge",
                 strfmt = '%2$s', -- sourceName is actually text to display
@@ -674,7 +671,7 @@ local combatEvents = {
                 colour = CI.Colours.HEAL,
                 font   = "Regular",
                 strfmt = '%1$d',
-                --scrolling = 'Outgoing',
+              --scrolling = 'Outgoing',
             },
             [COMBAT_UNIT_TYPE_PLAYER] = {
                 savedVarsFilter = "HealingInEnabled",
@@ -690,7 +687,7 @@ local combatEvents = {
                 colour = CI.Colours.HEAL,
                 font   = "Regular",
                 strfmt = '%1$d',
-                --scrolling = 'Outgoing',
+              --scrolling = 'Outgoing',
             },
         },
         [COMBAT_UNIT_TYPE_PLAYER_PET] = {
@@ -700,7 +697,7 @@ local combatEvents = {
                 colour = CI.Colours.HEAL,
                 font   = "Regular",
                 strfmt = '%1$d pet',
-                --scrolling = 'Outgoing',
+              --scrolling = 'Outgoing',
             },
             [COMBAT_UNIT_TYPE_PLAYER] = {
                 savedVarsFilter = "HealingInEnabled",
@@ -716,7 +713,7 @@ local combatEvents = {
                 colour = CI.Colours.HEAL,
                 font   = "Regular",
                 strfmt = '%1$d pet',
-                --scrolling = 'Outgoing',
+              --scrolling = 'Outgoing',
             },
         },
     },
@@ -738,7 +735,7 @@ local combatEvents = {
                 colour = CI.Colours.HEALCRIT,
                 font   = "Regular",
                 strfmt = '%1$d',
-                --scrolling = 'Outgoing',
+              --scrolling = 'Outgoing',
             },
             [COMBAT_UNIT_TYPE_PLAYER] = {
                 savedVarsFilter = "HealingInEnabled",
@@ -755,7 +752,7 @@ local combatEvents = {
                 font   = "Regular",
                 strfmt = '%1$d',
                 animateScaleUp = {1, 1.1}, -- This have to be decided
-                --scrolling = 'Outgoing',
+              --scrolling = 'Outgoing',
             },
         },
         [COMBAT_UNIT_TYPE_PLAYER_PET] = {
@@ -765,7 +762,7 @@ local combatEvents = {
                 colour = CI.Colours.HEALCRIT,
                 font   = "Regular",
                 strfmt = '%1$d pet',
-                --scrolling = 'Outgoing',
+              --scrolling = 'Outgoing',
             },
             [COMBAT_UNIT_TYPE_PLAYER] = {
                 savedVarsFilter = "HealingInEnabled",
@@ -782,7 +779,7 @@ local combatEvents = {
                 font   = "Regular",
                 strfmt = '%1$d pet',
                 animateScaleUp = {1, 1.1}, -- This have to be decided
-                --scrolling = 'Outgoing',
+              --scrolling = 'Outgoing',
             },
         },
     },
@@ -804,7 +801,7 @@ local combatEvents = {
                 colour = CI.Colours.HEAL,
                 font   = "Regular",
                 strfmt = '+%1$d',
-                --scrolling = 'Outgoing',
+              --scrolling = 'Outgoing',
             },
             [COMBAT_UNIT_TYPE_PLAYER] = {
                 savedVarsFilter = "HealingInEnabled",
@@ -820,7 +817,7 @@ local combatEvents = {
                 colour = CI.Colours.HEAL,
                 font   = "Regular",
                 strfmt = '+%1$d',
-                --scrolling = 'Outgoing',
+              --scrolling = 'Outgoing',
             },
         },
         [COMBAT_UNIT_TYPE_PLAYER_PET] = {
@@ -830,7 +827,7 @@ local combatEvents = {
                 colour = CI.Colours.HEAL,
                 font   = "Regular",
                 strfmt = '+%1$d pet',
-                --scrolling = 'Outgoing',
+              --scrolling = 'Outgoing',
             },
             [COMBAT_UNIT_TYPE_PLAYER] = {
                 savedVarsFilter = "HealingInEnabled",
@@ -846,7 +843,7 @@ local combatEvents = {
                 colour = CI.Colours.HEAL,
                 font   = "Regular",
                 strfmt = '+%1$d pet',
-                --scrolling = 'Outgoing',
+              --scrolling = 'Outgoing',
             },
         },
     },
@@ -868,7 +865,7 @@ local combatEvents = {
                 colour = CI.Colours.HEALCRIT,
                 font   = "Regular",
                 strfmt = '+%1$d',
-                --scrolling = 'Outgoing',
+              --scrolling = 'Outgoing',
             },
             [COMBAT_UNIT_TYPE_PLAYER] = {
                 savedVarsFilter = "HealingInEnabled",
@@ -885,7 +882,7 @@ local combatEvents = {
                 font   = "Regular",
                 strfmt = '+%1$d',
                 animateScaleUp = {1, 1.1}, -- This have to be decided
-                --scrolling = 'Outgoing',
+              --scrolling = 'Outgoing',
             },
         },
         [COMBAT_UNIT_TYPE_PLAYER_PET] = {
@@ -895,7 +892,7 @@ local combatEvents = {
                 colour = CI.Colours.HEALCRIT,
                 font   = "Regular",
                 strfmt = '+%1$d pet',
-                --scrolling = 'Outgoing',
+              --scrolling = 'Outgoing',
             },
             [COMBAT_UNIT_TYPE_PLAYER] = {
                 savedVarsFilter = "HealingInEnabled",
@@ -912,7 +909,7 @@ local combatEvents = {
                 font   = "Regular",
                 strfmt = '+%1$d pet',
                 animateScaleUp = {1, 1.1}, -- This have to be decided
-                --scrolling = 'Outgoing',
+              --scrolling = 'Outgoing',
             },
         },
     },
@@ -975,7 +972,7 @@ local combatEvents = {
                     [POWERTYPE_MAGICKA]       = true,
                     [POWERTYPE_HEALTH]        = true,
                     [POWERTYPE_STAMINA]       = true,
-                    --[POWERTYPE_ULTIMATE]      = true,
+                  --[POWERTYPE_ULTIMATE]      = true,
                 },
                 target = 'PlayerDrainEnergize',
                 colour = {
@@ -1003,8 +1000,8 @@ local combatEvents = {
                     [POWERTYPE_MAGICKA]       = true,
                     [POWERTYPE_HEALTH]        = true,
                     [POWERTYPE_STAMINA]       = true,
-                    --[POWERTYPE_MOUNT_STAMINA] = true,
-                    --[POWERTYPE_ULTIMATE]      = true,
+                  --[POWERTYPE_MOUNT_STAMINA] = true,
+                  --[POWERTYPE_ULTIMATE]      = true,
                 },
                 target = 'PlayerDrainEnergize',
                 colour = {
@@ -1037,9 +1034,7 @@ local combatEvents = {
  * All outgoing healing towards group members - to central Target area
  ]]--
 
---[[
- * Used to parse formatted text out of previous definitions
- ]]--
+-- Used to parse formatted text out of previous definitions
 local function StringFormat( fmt, ... )
     local fmt, args, order = fmt, {...}, {}
     if args[1] > 1000000 then
@@ -1050,7 +1045,7 @@ local function StringFormat( fmt, ... )
         fmt = fmt:gsub("%%1%$d", "%%1$.1fk")
     end
     fmt = fmt:gsub('%%(%d+)%$', function( i ) table.insert( order, args[ tonumber( i ) ] ) return '%' end)
-    return strformat( fmt, unpack( order ) ) -- table.unpack for lua 5.2 / unpack for 5.1 or lower
+    return strfmt( fmt, unpack( order ) ) -- table.unpack for lua 5.2 / unpack for 5.1 or lower
 end
 
 -- Target areas controls
@@ -1070,7 +1065,7 @@ CI.Enabled  = false
 -- Saved player variables
 CI.D = {
     position            = {},
-    --HUDElements       = false,
+  --HUDElements         = false,
     CoolDown            = false,
     UltimateEnabled     = true,
     UltimateHideFull    = true,
@@ -1114,14 +1109,14 @@ CI.D = {
 }
 CI.SV       = nil
 
--- exp
+-- EXP
 local g_combatXP        = 0
 local g_lastExp         = 0
 local g_useChampionXP   = false
 local g_cxpEnlightenedPool = 0
 local g_cxpEnlightenedMultiplier = nil
 
--- cooldowns overlay
+-- Cooldowns overlay
 local uiCooldown    = {
     colour  = {0.941, 0.973, .957},
     timeColours = {
@@ -1130,7 +1125,7 @@ local uiCooldown    = {
         [3] = {remain = 200, colour = {0.941, 0.251, 0.125}},
     },
 }
--- quickslot
+-- Quickslot
 local uiQuickSlot   = {
     colour  = {0.941, 0.565, 0.251},
     timeColours = {
@@ -1150,7 +1145,7 @@ local uiUltimate = {
     NotFull = false,
 }
 
--- -- Low attribute tracker
+-- Low attribute tracker
 CI.thresholdAttribute   = 0
 CI.thresholdExecute     = 0
 local g_powerPools = {
@@ -1159,18 +1154,15 @@ local g_powerPools = {
     [POWERTYPE_STAMINA] = 0,
 }
 
-local ULTIMATE_SLOT = ACTION_BAR_ULTIMATE_SLOT_INDEX + 1
-local g_ultimateCost = 0
-local g_ultimateCurrent = 0
+local ULTIMATE_SLOT        = ACTION_BAR_ULTIMATE_SLOT_INDEX + 1
+local g_ultimateCost       = 0
+local g_ultimateCurrent    = 0
 local g_ultimatAbilityName = ''
-local g_ultimatAbilityId = 0
-local g_ultimateNotReady = false
+local g_ultimatAbilityId   = 0
+local g_ultimateNotReady   = false
+local g_lastExecuteAlert   = {}
 
-local g_lastExecuteAlert = {}
-
---[[
- * Module initialization
- ]]--
+-- Module initialization
 function CI.Initialize( enabled )
     -- Load settings
     CI.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, 'CombatInfo', CI.D )
@@ -1195,17 +1187,17 @@ function CI.Initialize( enabled )
     -- Prepare fonts to use in Combat Info
     CI.PrepareFonts(false)
 
-    -- set controls
+    -- Set controls
     local tlw = UI.TopLevel( {CENTER,CENTER}, nil )
 
-    -- add control to global list so it can be hidden
+    -- Add control to global list so it can be hidden
     LUIE.components[ moduleName ] = tlw
     LUIE.components[ moduleName .. '_FakeControl' ] = fakeControl
 
     --[[--
     LUIE_CombatInfo_HUDElements:SetHidden( not CI.SV.HUDElements )
 
-    -- set control defaults
+    -- Set control defaults
     LUIE_CombatInfo_Labels_PlayerDivider:SetAddressMode( TEX_MODE_CLAMP )
     LUIE_CombatInfo_Labels_PlayerDivider:SetBlendMode( TEX_BLEND_MODE_ADD )
     LUIE_CombatInfo_Labels_PlayerDivider:SetColor( CI.Colours.WHITE.r, CI.Colours.WHITE.g, CI.Colours.WHITE.b, LUIE_CombatInfo_Labels_PlayerDivider:GetAlpha() )
@@ -1214,41 +1206,38 @@ function CI.Initialize( enabled )
     LUIE_CombatInfo_Labels_OtherDivider:SetColor( CI.Colours.WHITE.r, CI.Colours.WHITE.g, CI.Colours.WHITE.b, LUIE_CombatInfo_Labels_OtherDivider:GetAlpha() )
     --]]--
 
-    -- iterate over combatTargets table to...
+    -- Iterate over combatTargets table to...
     for key, config in pairs(combatTargets) do
-
-        -- create controls only if requested or for required elements
+        -- Create controls only if requested or for required elements
         if config.allwaysPresent or CI.SV.CloudTextEnabled then
-
             local sizeX, sizeY
-
-            -- if this is main control window
+            -- If this is main control window
             if config.parent == nil then
                 sizeX = config.sizeX
                 sizeY = config.sizeY
-                -- create CT_CONTROL to hold labels
+                -- Create CT_CONTROL to hold labels
                 local control = UI.Control( tlw, nil, { sizeX, sizeY }, false )
-                -- save position
+                -- Save position
                 control:SetHandler( 'OnMoveStop', function(self) CI.SV.position[key] = { self:GetLeft(), self:GetTop() } end )
-                -- create preview
+                -- Create preview
                 control.preview = UI.ChatBackdrop( control, "fill", nil, nil, 20, true )
                 control.previewLabel = UI.Label( control.preview, {CENTER,CENTER}, nil, nil, 'ZoFontGameMedium', key, false )
 
-                -- create empty table where we will store all dynamically created labels
+                -- Create empty table where we will store all dynamically created labels
                 control.floatingLabels = {}
-                -- put initial number of last used dynamic label
+                -- Put initial number of last used dynamic label
                 control.lastUsedLabel = 0
-                -- store this control
+                -- Store this control
                 targetControls[ key ] = control
 
-            -- otherwise this is a subsection of other control and
-            -- we do not need to create any controls, we only need to define labels grid
+            -- Otherwise this is a subsection of other control and
+            -- We do not need to create any controls, we only need to define labels grid
             else
                 sizeX = combatTargets[config.parent].sizeX
                 sizeY = combatTargets[config.parent].sizeY
             end
 
-            -- define label grid
+            -- Define label grid
             local grid = ( config.grid ~= nil and #config.grid == 2 ) and config.grid or { 1, 1 }
             local gridSize = math.min( sizeX / grid[1], sizeY / grid[2] )
             config.grid = {
@@ -1268,7 +1257,7 @@ function CI.Initialize( enabled )
             end
         end
     end
-    -- now when target areas are created we have to position them
+    -- Now when target areas are created we have to position them
     CI.SetTlwPosition()
 
     if CI.SV.ScrollTextEnabled then
@@ -1285,33 +1274,33 @@ function CI.Initialize( enabled )
 
             local curve = (index==1) and (-1) or 1
 
-            -- create CT_CONTROL to hold labels
+            -- Create CT_CONTROL to hold labels
             local control = UI.Control( tlw, {CENTER,CENTER,curve*disp_w/4,0}, { scr_w, scr_h }, false )
-            -- curve of labels
+            -- Curve of labels
             control.curve = curve
-            -- save position
+            -- Save position
             --control:SetHandler( 'OnMoveStop', function(self) CI.SV.position["scrolling" .. key] = { self:GetLeft(), self:GetTop() } end )
-            -- create preview
+            -- Create preview
             control.preview = UI.Texture( control, "fill", nil, "/esoui/art/miscellaneous/inset_bg.dds", DL_BACKGROUND, true )
             control.previewLabel = UI.Label( control.preview, {CENTER,CENTER}, nil, nil, 'ZoFontGameMedium', "Scrolling " .. key .. "\n(Fixed Position)", false )
 
-            -- create empty table where we will store all dynamically created labels
+            -- Create empty table where we will store all dynamically created labels
             control.floatingLabels = {}
-            -- put initial number of last used dynamic label
+            -- Put initial number of last used dynamic label
             control.lastUsedLabel = 0
-            -- maximum labels to create
+            -- Maximum labels to create
             control.labelsMax = 40
 
-            -- events queue
+            -- Events queue
             control.eventsQueue = fifoQueue.new()
-            -- next slot ready
+            -- Next slot ready
             control.eventsQueueNext = true
 
             scrollingControls[ key ] = control
         end
     end
 
-    -- set ability cooldown controls
+    -- Set ability cooldown controls
     for actionButtonNum = 3, 7 do
         local parent = ZO_ActionBar_GetButton(actionButtonNum).slot
         local bg = UI.Texture( parent, nil, nil, nil, DL_OVERLAY, true )
@@ -1335,10 +1324,10 @@ function CI.Initialize( enabled )
     uiUltimate.LabelVal = UI.Label( ActionButton8, {BOTTOM,TOP,0,-3}, nil, {1,2}, "$(BOLD_FONT)|16|soft-shadow-thick", nil, true )
     uiUltimate.LabelPct = UI.Label( ActionButton8, {CENTER,CENTER}, nil, nil, "$(BOLD_FONT)|20|outline", nil, true )
     uiUltimate.LabelPct:SetColor( unpack(uiUltimate.colour) )
-    -- and buff texture
+    -- And buff texture
     uiUltimate.Texture = UI.Texture( ActionButton8, {CENTER,CENTER}, {160,160}, '/esoui/art/crafting/white_burst.dds', DL_BACKGROUND, true )
 
-    -- update function
+    -- Update function
     EVENT_MANAGER:RegisterForUpdate(moduleName, 40, CI.OnUpdate )
     EVENT_MANAGER:RegisterForUpdate(moduleName .. '_Scrolling', 20, CI.OnUpdateScrolling )
 
@@ -1366,13 +1355,11 @@ function CI.Initialize( enabled )
     CI.RegisterCombatTipEvent()
     CI.RegisterCombatStateEvent()
 
-    -- debug: Synergy Icons
+    -- Debug: Synergy Icons
     --EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_SYNERGY_ABILITY_CHANGED,  CI._PrintFirstSynergyIcon )
 end
 
---[[
- * Prepare fonts for Combat Info modules
- ]]--
+-- Prepare fonts for Combat Info modules
 function CI.PrepareFonts(doPreview)
     -- First make sure, that selected font family is known
     if CI.FontFamilies[ CI.SV.FontFamily ] == nil then
@@ -1387,8 +1374,8 @@ function CI.PrepareFonts(doPreview)
     Font.ScrollMedium  = CI.FontFamilies[ CI.SV.FontFamily ].FontRegular .. '|' .. CI.SV.FontScrollSizeMedium .. '|soft-shadow-thin'
     Font.ScrollRegular = CI.FontFamilies[ CI.SV.FontFamily ].FontRegular .. '|' .. CI.SV.FontScrollSizeSmall  .. '|soft-shadow-thin'
 
-    -- create several custom labels to show changes
-    -- this also usually called from menu, so we need to unhide control areas
+    -- Create several custom labels to show changes
+    -- This also usually called from menu, so we need to unhide control areas
     if doPreview then
         LUIE.components[ moduleName ]:SetHidden(false)
 
@@ -1402,16 +1389,13 @@ function CI.PrepareFonts(doPreview)
     end
 end
 
-
 function CI.ResetPosition()
     CI.SV.position = {}
     CI.SetTlwPosition()
 end
 
---[[
- * Set position of window. Called from .Initialize() and .ResetTlwPosition()
- * This affects only player buffs
- ]]--
+-- Set position of window. Called from .Initialize() and .ResetTlwPosition()
+-- This affects only player buffs
 function CI.SetTlwPosition()
     if not CI.Enabled then return end
 
@@ -1425,9 +1409,7 @@ function CI.SetTlwPosition()
     end
 end
 
---[[
- * Unlock panel for moving. Called from Settings Menu.
- ]]--
+-- Unlock panel for moving. Called from Settings Menu.
 function CI.SetMovingState( state )
     if not CI.Enabled then return end
     CI.panelUnlocked = state
@@ -1442,19 +1424,17 @@ function CI.SetMovingState( state )
     end
 end
 
---[[
- * Used to populate abilities icons after the used has logged on
- ]]--
+-- Used to populate abilities icons after the used has logged on
 function CI.OnPlayerActivated( eventCode )
     -- do not call this function for the second time
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED )
 
     -- Read all initial values
     g_useChampionXP = ( GetUnitChampionPoints( 'player' ) == 16 )
-    -- initial experience is read in RegisterXPEvent()
+    -- Initial experience is read in RegisterXPEvent()
     CI.OnEnlightenedState(nil)
 
-    -- manually trigger event to update stats
+    -- Manually trigger event to update stats
     CI.OnSlotsFullUpdate(nil)
     CI.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, 'player', nil, POWERTYPE_HEALTH, GetUnitPower('player', POWERTYPE_HEALTH))
     CI.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, 'player', nil, POWERTYPE_MAGICKA, GetUnitPower('player', POWERTYPE_MAGICKA))
@@ -1462,9 +1442,7 @@ function CI.OnPlayerActivated( eventCode )
     CI.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, 'player', nil, POWERTYPE_ULTIMATE, GetUnitPower('player', POWERTYPE_ULTIMATE))
 end
 
---[[
- * Clear and then (maybe) re-register event listener for combat event
- ]]--
+-- Clear and then (maybe) re-register event listener for combat event
 function CI.RegisterCombatEvent()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_COMBAT_EVENT )
     if CI.SV.CombatEventsEnabled then
@@ -1472,9 +1450,7 @@ function CI.RegisterCombatEvent()
     end
 end
 
---[[
- * Clear and then (maybe) re-register event listener for experience gain event
- ]]--
+-- Clear and then (maybe) re-register event listener for experience gain event
 function CI.RegisterXPEvent()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_EXPERIENCE_UPDATE )
     if CI.SV.ExperienceEnabled then
@@ -1483,9 +1459,7 @@ function CI.RegisterXPEvent()
     end
 end
 
---[[
- * Clear and then (maybe) re-register event listener for alliance points gain event
- ]]--
+-- Clear and then (maybe) re-register event listener for alliance points gain event
 function CI.RegisterAPEvent()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ALLIANCE_POINT_UPDATE )
     if CI.SV.AllianceEnabled then
@@ -1493,9 +1467,7 @@ function CI.RegisterAPEvent()
     end
 end
 
---[[
- * Clear and then (maybe) re-register event listener for telvar stones update event
- ]]--
+-- Clear and then (maybe) re-register event listener for telvar stones update event
 function CI.RegisterTSEvent()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TELVAR_STONE_UPDATE )
     if CI.SV.TelVarEnabled then
@@ -1503,28 +1475,20 @@ function CI.RegisterTSEvent()
     end
 end
 
---[[
- * Rregister event listener for low attribute and ultimate tracking. Should be called only once!
- ]]--
+-- Rregister event listener for low attribute and ultimate tracking. Should be called only once!
 function CI.RegisterPowerEvent()
-
-    -- register event
+    -- Register event
     EVENT_MANAGER:RegisterForEvent(moduleName .. "player", EVENT_POWER_UPDATE, CI.OnPowerUpdatePlayer)
     EVENT_MANAGER:RegisterForEvent(moduleName .."execute", EVENT_POWER_UPDATE, CI.OnPowerUpdateTarget)
-
-    -- those are only for ultimate tracking
+    -- Those are only for ultimate tracking
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE, CI.OnSlotsFullUpdate)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED, function(eventCode, slotNum) if slotNum == ULTIMATE_SLOT then CI.OnSlotsFullUpdate(eventCode) end end)
-
 end
 
---[[
- * Clear and then (maybe) re-register event listener for combat tips alerts
- ]]--
+-- Clear and then (maybe) re-register event listener for combat tips alerts
 function CI.RegisterCombatTipEvent()
     -- Clear event listener
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DISPLAY_ACTIVE_COMBAT_TIP )
-
     -- If enabled, then
     if CI.SV.CombatTipsEnabled then
         -- Enable event listener
@@ -1538,9 +1502,7 @@ function CI.RegisterCombatTipEvent()
     end
 end
 
---[[
- * Clear and then (maybe) re-register event listener for group member death alerts
- ]]--
+-- Clear and then (maybe) re-register event listener for group member death alerts
 function CI.RegisterDeathEvent()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED )
     if CI.SV.GroupDeathEnabled then
@@ -1548,9 +1510,7 @@ function CI.RegisterDeathEvent()
     end
 end
 
---[[
- * Clear and then (maybe) re-register event listener for in/out combat state event
- ]]--
+-- Clear and then (maybe) re-register event listener for in/out combat state event
 function CI.RegisterCombatStateEvent()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_PLAYER_COMBAT_STATE )
     if CI.SV.CombatStateEnabled then
@@ -1558,21 +1518,17 @@ function CI.RegisterCombatStateEvent()
     end
 end
 
---[[
- * Clear events queue for each field
- ]]--
+-- Clear events queue for each field
 function CI.ClearQueues()
     for _, control in pairs( scrollingControls ) do
-        -- create empty event queue tables
+        -- Create empty event queue tables
         control.eventsQueue = fifoQueue.new()
-        -- set next queue fire defaults
+        -- Set next queue fire defaults
         control.eventsQueueNext = true
     end
 end
 
---[[
- * Fake Component callback function used by main module
- ]]--
+-- Fake Component callback function used by main module
 function fakeControl.SetHidden(self, hidden)
     -- when elements are hidden, clear queues for combat events.
     if not hidden then
@@ -1580,12 +1536,9 @@ function fakeControl.SetHidden(self, hidden)
     end
 end
 
---[[
- * Updates all floating labels. Called every 40ms
- ]]--
+-- Updates all floating labels. Called every 40ms
 function CI.OnUpdate(currentTime)
-
-    -- ability cooldowns
+    -- Ability cooldowns
     if ( CI.SV.CoolDown ) then
         for actionButtonNum = 3, 7 do
             local bg    = uiCooldown[ actionButtonNum ].bg
@@ -1595,7 +1548,7 @@ function CI.OnUpdate(currentTime)
                 bg:SetHidden( false )
                 bg:SetAlpha( 0.001*remain )
                 label:SetHidden( false )
-                label:SetText( strformat( '%.1f', 0.001*remain ) )
+                label:SetText( strfmt( '%.1f', 0.001*remain ) )
                 --for i = #(uiCooldown.timeColours), 1, -1 do
                 --  if remain < uiCooldown.timeColours[i].remain then
                 --      label:SetColor( unpack( uiCooldown.timeColours[i].colour ) )
@@ -1607,12 +1560,12 @@ function CI.OnUpdate(currentTime)
                 --label:SetColor( unpack( uiCooldown.colour ) )
             end
         end
-        -- now same thing for quickslot
+        -- Now same thing for quickslot
         local slotIndex = GetCurrentQuickslot()
         local remain, duration, global = GetSlotCooldownInfo( slotIndex )
         if ( duration > 0 ) then
             uiQuickSlot.label:SetHidden( false )
-            uiQuickSlot.label:SetText( strformat( '%.1f', 0.001*remain ) )
+            uiQuickSlot.label:SetText( strfmt( '%.1f', 0.001*remain ) )
             for i = #(uiQuickSlot.timeColours), 1, -1 do
                 if remain < uiQuickSlot.timeColours[i].remain then
                     uiQuickSlot.label:SetColor( unpack( uiQuickSlot.timeColours[i].colour ) )
@@ -1625,37 +1578,37 @@ function CI.OnUpdate(currentTime)
         end
     end
 
-    -- hide Ultimate generation texture if it is time to do so
+    -- Hide Ultimate generation texture if it is time to do so
     if CI.SV.UltimateGeneration then
         if not uiUltimate.Texture:IsHidden() and uiUltimate.FadeTime < currentTime then
             uiUltimate.Texture:SetHidden(true)
         end
     end
 
-    -- loop label targets
+    -- Loop label targets
     --local currentTime = GetGameTimeMilliseconds()
     local isAlive = false
     for key, target in pairs(targetControls) do
 
-        -- loop labels
+        -- Loop labels
         for labelnum, label in pairs(target.floatingLabels) do
 
-            -- animate label
+            -- Animate label
             if ( label.settings.age ~= 0 ) then
                 if ( label.settings.age <= currentTime ) then
-                    -- remove label
+                    -- Remove label
                     label:SetHidden( true )
                     label.settings.age = 0
-                    -- and clear throttle labels cache, though this should already be done
+                    -- And clear throttle labels cache, though this should already be done
                     if label.throttleKey then
                         throttleLabels[label.throttleKey] = nil
                     end
                 else
-                    -- animation (movement) phase
+                    -- Animation (movement) phase
                     if ( label.settings.fixedAge <= currentTime ) then
 
-                        -- check if we need to clear throttle labels cache
-                        -- label is available for possible throttle for first quarter of animation time
+                        -- Check if we need to clear throttle labels cache
+                        -- Label is available for possible throttle for first quarter of animation time
                         if label.throttleKey and ( label.settings.age - currentTime < 0.75*label.settings.animateTime ) then
                             throttleLabels[label.throttleKey] = nil
                             label.throttleKey = nil
@@ -1671,7 +1624,7 @@ function CI.OnUpdate(currentTime)
 
                         local currentAge = currentTime - label.settings.fixedAge
 
-                        -- alpha fade
+                        -- Alpha fade
                         if ( label.settings.animateAlpha == true ) then
                             local fadeTime = label.settings.animateTime * 2 / 3
                             local currentAgeAdjusted = currentAge - label.settings.animateTime + fadeTime
@@ -1679,8 +1632,8 @@ function CI.OnUpdate(currentTime)
                             label:SetAlpha( alpha )
                         end
 
-                        -- growing scale
-                        -- the scale will grow from stored values in label.settings.animateScaleUp table
+                        -- Growing scale
+                        -- The scale will grow from stored values in label.settings.animateScaleUp table
                         if ( label.settings.animateScaleUp ~= nil and #label.settings.animateScaleUp == 3 ) then
                             local scale = (currentAge < label.settings.animateScaleUp[3])
                                     and E.easeOutQuad( currentAge, label.settings.animateScaleUp[1], label.settings.animateScaleUp[2]-label.settings.animateScaleUp[1], label.settings.animateScaleUp[3] )
@@ -1688,7 +1641,7 @@ function CI.OnUpdate(currentTime)
                             label:SetScale( scale )
                         end
 
-                        -- movement
+                        -- Movement
                         if ( label.settings.animateX ~= 0 or label.settings.animateY ~= 0 ) then
                             if ( label.settings.animateX ~= 0 ) then -- left / right
                                 label.settings.animateXoffset = label.settings.animateXoffset + label.settings.animateX
@@ -1699,9 +1652,9 @@ function CI.OnUpdate(currentTime)
                             label:ClearAnchors()
                             label:SetAnchor( label.settings.align, label.settings.targetControl, label.settings.alignTarget, label.settings.animateXoffset, label.settings.animateYoffset )
                         end
-                    -- fixed (label does not move) phase
+                    -- Fixed (label does not move) phase
                     else
-                        -- scale fade
+                        -- Scale fade
                         if ( label.settings.fixedScaleDown ) then
                             --local scale = ( ( label.settings.fixedAge - currentTime ) / label.settings.fixedTime )
                             --scale = 1.0 * scale * scale
@@ -1711,35 +1664,30 @@ function CI.OnUpdate(currentTime)
                         end
                     end
 
-                    -- keep HUD alive
+                    -- Keep HUD alive
                     isAlive = true
                 end
             end
         end
     end
 
-    -- keep HUD alive or hide it
+    -- Keep HUD alive or hide it
     --LUIE_CombatInfo_HUDElements:SetHidden( not CI.SV.HUDElements or not isAlive )
 end
 
---[[
- * Updates scrolling labels. Called every 20ms
- ]]--
+-- Updates scrolling labels. Called every 20ms
 function CI.OnUpdateScrolling(currentTime)
-
-    -- animate scrolling areas
+    -- Animate scrolling areas
     for key, target in pairs(scrollingControls) do
-
-        -- create label from queued event
+        -- Create label from queued event
         if fifoQueue.getLeft(target.eventsQueue) ~= nil then
             if target.eventsQueueNext then
                 local event = fifoQueue.popLeft(target.eventsQueue)
                 CI.FireCombatEvent( event.eventCode, event.result, event.isError, event.abilityName, event.abilityGraphic, event.abilityAST, event.sourceName, event.sourceType, event.targetName, event.targetType, event.hitValue, event.powerType, event.damageType, event.log, event.sourceUnitId, event.targetUnitId, event.abilityId )
                 target.eventsQueueNext = false
-
-            -- there are some events in queue, but we cannot yet pop them out
+            -- There are some events in queue, but we cannot yet pop them out
             elseif CI.SV.PurgeExpiredScroll then
-                -- so check if queued events are "important", and if not, purge them from queue if they expired
+                -- So check if queued events are "important", and if not, purge them from queue if they expired
                 while true do
                     local event = fifoQueue.getLeft(target.eventsQueue)
                     if event and currentTime - event.ms > 750 and event.result ~= ACTION_RESULT_DAMAGE and event.result ~= ACTION_RESULT_CRITICAL_DAMAGE then
@@ -1753,27 +1701,21 @@ function CI.OnUpdateScrolling(currentTime)
 
         local maxAngle = 0
 
-        -- loop labels
+        -- Loop labels
         for labelnum, label in pairs(target.floatingLabels) do
-
-
             if label.available then
-
-                -- check if label reached border condition
+                -- Check if label reached border condition
                 if label.angle < - g_scrollingAngle  then
-
                     label:SetHidden(true)
                     label.available = false
-                    -- and clear throttle labels cache, though this should already be done
+                    -- And clear throttle labels cache, though this should already be done
                     if label.throttleKey then
                         throttleLabels[label.throttleKey] = nil
                     end
-
-                -- move label
+                -- Move label
                 else
-
-                    -- check if we need to clear throttle labels cache
-                    -- label is available for possible throttle for first quarter of animation time
+                    -- Check if we need to clear throttle labels cache
+                    -- Label is available for possible throttle for first quarter of animation time
                     if label.throttleKey and ( label.angle < 0.5*g_scrollingAngle ) then
                         throttleLabels[label.throttleKey] = nil
                         label.throttleKey = nil
@@ -1806,19 +1748,16 @@ function CI.OnUpdateScrolling(currentTime)
     end
 end
 
---[[
- * Runs EVENT_ENLIGHTENED_STATE_GAINED and EVENT_ENLIGHTENED_STATE_LOST listeners
- ]]--
+-- Runs EVENT_ENLIGHTENED_STATE_GAINED and EVENT_ENLIGHTENED_STATE_LOST listeners
 function CI.OnEnlightenedState(eventCode)
-
     -- _STATE_LOST event does not seams to fire, so we will have to track remaining pool locally
     g_cxpEnlightenedPool = GetEnlightenedPool()
 
-    -- if pool is non-zero, save champion xp multiplier
+    -- If pool is non-zero, save champion xp multiplier
     g_cxpEnlightenedMultiplier = ( g_cxpEnlightenedPool > 0 ) and GetEnlightenedMultiplier() or nil
 
     --[[-- DEBUG: check what caused this event
-    CHAT_SYSTEM:AddMessage( "LUIE DEBUG: Enlightened - "
+   d("LUIE DEBUG: Enlightened - "
         .. ( ( eventCode == EVENT_ENLIGHTENED_STATE_GAINED ) and "Gained" or ( eventCode == EVENT_ENLIGHTENED_STATE_LOST ) and "Lost" or "Unknown" )
         .. "; pool: " .. GetEnlightenedPool()
     )
@@ -1831,14 +1770,14 @@ function CI.OnXPUpdate( eventCode, unitTag, currentExp, maxExp, reason )
     local value  = currentExp - g_lastExp
     g_lastExp = currentExp
 
-    -- abort if there is no gain
+    -- Abort if there is no gain
     if ( value < 1 ) then return end
 
-    -- calculate used pool amount and subtract it from local pool variable
+    -- Calculate used pool amount and subtract it from local pool variable
     local cxpUsedPool = ( g_cxpEnlightenedPool > value ) and value or g_cxpEnlightenedPool
     g_cxpEnlightenedPool = g_cxpEnlightenedPool - cxpUsedPool
 
-    -- if remaining pool became zero, but multiplier is still exists, reread it again
+    -- If remaining pool became zero, but multiplier is still exists, reread it again
     if ( g_cxpEnlightenedMultiplier ~= nil ) and ( g_cxpEnlightenedPool == 0 ) then
         CI.OnEnlightenedState(nil)
         -- if after this query our local pool is positive again, then for this event we will use full amount of it
@@ -1847,53 +1786,47 @@ function CI.OnXPUpdate( eventCode, unitTag, currentExp, maxExp, reason )
         end
     end
 
-    -- now we are ready to calculate champion xp gain
+    -- Now we are ready to calculate champion xp gain
     local cxp = ( g_useChampionXP and g_cxpEnlightenedMultiplier ) and ( value + cxpUsedPool * g_cxpEnlightenedMultiplier ) or nil
 
-    -- display floating text
+    -- Display floating text
     CI.OnCombatEvent( 0, 'custom', false, '', '', 0, '', COMBAT_UNIT_TYPE_PLAYER, cxp and 'CXP' or 'EXP', 'exp', cxp or value, 0, 0, false, 0, 0, 0)
     -- update in-combat xp gain
     g_combatXP = g_combatXP + ( cxp or value )
 
-    -- also announce XP to chat ( via ChatAnnouncements module )
+    -- Also announce XP to chat ( via ChatAnnouncements module )
     -- PrintXP( reason, value, cxp )
-    -- also send kill-xp information into Combat Log component ( via Damage Meter module )
+    -- Also send kill-xp information into Combat Log component ( via Damage Meter module )
     -- PROGRESS_REASON_KILL == 0
     --if reason == 0 then LogKillXP(value)
     --end
 end
 
---[[
- * Listens to EVENT_ALLIANCE_POINT_UPDATE
- ]]--
+-- Listens to EVENT_ALLIANCE_POINT_UPDATE
 function CI.OnAPUpdate( eventCode, alliancePoints, playSound, difference )
     if ( difference < 1 ) then return end
     -- send custom combat event
     CI.OnCombatEvent( 0, 'custom', false, 'Alliance Points', '', 0, '', COMBAT_UNIT_TYPE_PLAYER, '', 'ap', difference, 0, 0, false, 0, 0, 1)
 end
 
---[[
- * Listens to EVENT_TELVAR_STONE_UPDATE
- ]]--
+-- Listens to EVENT_TELVAR_STONE_UPDATE
 function CI.OnTSUpdate( eventCode, newTelvarStones, oldTelvarStones, reason )
     if ( newTelvarStones - oldTelvarStones < 1 ) then return end
     -- send custom combat event
     CI.OnCombatEvent( 0, 'custom', false, 'TelVar Stones', '', 0, '', COMBAT_UNIT_TYPE_PLAYER, '', 'telvar', newTelvarStones - oldTelvarStones, 0, 0, false, 0, 0, 1)
 end
 
---[[
- * Listens to EVENT_COMBAT_EVENT
- ]]--
+-- Listens to EVENT_COMBAT_EVENT
 function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
-    -- ignore error events
+    -- Ignore error events
     if isError then return end
 
-    -- we do not distinguish between NPC targets and Player targets
+    -- We do not distinguish between NPC targets and Player targets
     if targetType == COMBAT_UNIT_TYPE_OTHER then
         targetType = COMBAT_UNIT_TYPE_NONE
     end
 
-    -- manually track Ultimate generation -- same as in SCB module
+    -- Manually track Ultimate generation -- same as in SCB module
     if CI.SV.UltimateGeneration and uiUltimate.NotFull and (
         ( result == ACTION_RESULT_BLOCKED_DAMAGE and targetType == COMBAT_UNIT_TYPE_PLAYER ) or
         ( E.IsWeaponAttack[abilityName] and sourceType == COMBAT_UNIT_TYPE_PLAYER and targetType == COMBAT_UNIT_TYPE_NONE )
@@ -1908,7 +1841,7 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         CI.FireCombatEvent( eventCode, 'custom', false, '', '', 0, 'Cleanse Now!', COMBAT_UNIT_TYPE_PLAYER, '', 'combatTip', 1, POWERTYPE_INVALID, 0, false, 0, 0, 0 )
     end
 
-    -- filter events by eventId, sourceType, targetType
+    -- Filter events by eventId, sourceType, targetType
     if ( not CI.FilterEvent( result, sourceType, targetType, powerType, hitValue ) ) then return end
 
 
@@ -1916,16 +1849,16 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
     CI.FireCombatEvent( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
 
     -- 2: Prepare scrolling text event
-    -- get event config
+    -- Get event config
     local scrolling = ( type(combatEvents[ result ][ sourceType ][ targetType ].scrolling) == "table" ) and combatEvents[ result ][ sourceType ][ targetType ].scrolling[ powerType ] or combatEvents[ result ][ sourceType ][ targetType ].scrolling
 
-    -- add to queue or fire instant
+    -- Add to queue or fire instant
     if ( scrollingControls[ scrolling ] ) then
-        -- manually filter out some events
+        -- Manually filter out some events
         -- 1. No scrolling Alliance Points text for small amounts
         if result == 'custom' and sourceType == COMBAT_UNIT_TYPE_PLAYER and targetType == 'ap' and hitValue < 15 then return end
 
-        -- create event table
+        -- Create event table
         local combatEvent          = {}
         combatEvent.ms             = GetGameTimeMilliseconds()
         combatEvent.eventCode      = scrolling -- !!! -- eventCode
@@ -1946,27 +1879,24 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         combatEvent.targetUnitId   = targetUnitId
         combatEvent.abilityId      = abilityId
 
-        -- add event to queue
+        -- Add event to queue
         fifoQueue.pushRight( scrollingControls[ scrolling ].eventsQueue, combatEvent )
     end
 end
 
---[[
- * Helper function to setup icon used in next procedure
- ]]--
+-- Helper function to setup icon used in next procedure
 local function setupIcon(showIcon, label, iconSettings, abilityName, abilityId)
-
     local icon = label.icon
 
     if showIcon and abilityId and abilityId > 0 then
-        -- get ability texture
+        -- Get ability texture
         local iconTexture = E.GetAbilityIcon(abilityName, abilityId)
 
         -- DEBUG:
         --d(abilityName, abilityId)
         --d(iconTexture)
 
-        -- icon setup
+        -- Icon setup
         if ( iconSettings.show and iconTexture ~= '' and iconTexture ~= '/esoui/art/icons/ability_mage_065.dds' ) then
             local sizeY = label:GetTextHeight() * 0.8
             icon:SetDimensions( sizeY, sizeY )
@@ -1982,18 +1912,16 @@ local function setupIcon(showIcon, label, iconSettings, abilityName, abilityId)
     end
 end
 
---[[
- * Creates new label in cloud areas
- ]]--
+-- Creates new label in cloud areas
 function CI.FireCombatEvent( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
 
     local currentTime = GetGameTimeMilliseconds()
 
-    -- prepare names
+    -- Prepare names
     local sourceName = sourceName:gsub("%^%a+","")
     local targetName = targetName:gsub("%^%a+","")
 
-    -- get event config
+    -- Get event config
     local target    = ( type(combatEvents[ result ][ sourceType ][ targetType ].target) == "table" ) and combatEvents[ result ][ sourceType ][ targetType ].target[ powerType ] or combatEvents[ result ][ sourceType ][ targetType ].target
     local colour    = ( type(combatEvents[ result ][ sourceType ][ targetType ].colour) == "table" ) and combatEvents[ result ][ sourceType ][ targetType ].colour[ powerType ] or combatEvents[ result ][ sourceType ][ targetType ].colour
     local font      = ( type(combatEvents[ result ][ sourceType ][ targetType ].font) == "table" ) and combatEvents[ result ][ sourceType ][ targetType ].font[ powerType ] or combatEvents[ result ][ sourceType ][ targetType ].font
@@ -2002,10 +1930,10 @@ function CI.FireCombatEvent( eventCode, result, isError, abilityName, abilityGra
     local animateScaleUp = combatEvents[ result ][ sourceType ][ targetType ].animateScaleUp
     animateScaleUp = ( animateScaleUp and #animateScaleUp == 2 ) and animateScaleUp or nil
 
-    -- prepare now text for label right now to check if if requires deadtime
+    -- Prepare now text for label right now to check if if requires deadtime
     local labelText = StringFormat( strfmt, hitValue, sourceName, targetName, hitValue, CI.Colours.DAMAGECRIT.hex, CI.Colours.BLOCKED.hex )
 
-    -- if DeadTime for this label is True, then do not display identical icons within 3 seconds (simply ignore such labels)
+    -- If DeadTime for this label is True, then do not display identical icons within 3 seconds (simply ignore such labels)
     if deadtime then
         if not DelayBuffer( moduleName .. target .. labelText, 3000, currentTime ) then return end
     end
@@ -2025,7 +1953,7 @@ function CI.FireCombatEvent( eventCode, result, isError, abilityName, abilityGra
 
         -- Override label for healing abilities
         elseif IsResultHeal[result] or result == ACTION_RESULT_POWER_ENERGIZE then
-            labelText = StringFormat( "+%1$d (%2$s)", hitValue, (abilityName and abilityName ~= '') and zo_strformat("<<t:1>>", abilityName) or "Incoming Heal", '', hitValue )
+            labelText = StringFormat( "+%1$d (%2$s)", hitValue, (abilityName and abilityName ~= '') and strformat("<<t:1>>", abilityName) or "Incoming Heal", '', hitValue )
 
         -- For ourgoing damage
         elseif IsResultDamage[result] then
@@ -2036,22 +1964,22 @@ function CI.FireCombatEvent( eventCode, result, isError, abilityName, abilityGra
                 "%1$d " ..
                 ( IsResultCritical[result] and (CI.Colours.DAMAGECRIT.hex .. "Critical|r ") or "" ) ..
                 "(%2$s)"
-            labelText = StringFormat( str, hitValue, zo_strformat("<<t:1>>", abilityName), '', hitValue )
+            labelText = StringFormat( str, hitValue, strformat("<<t:1>>", abilityName), '', hitValue )
         end
 
-        -- now if we can try to throttle labels, there is a proper time to make a check
+        -- Now if we can try to throttle labels, there is a proper time to make a check
         local throttleKey
         if CI.SV.ThrottleEnabled then
-            -- fill the name of throttle key: we will throttle only completely identical abilities/results/values
+            -- Fill the name of throttle key: we will throttle only completely identical abilities/results/values
             throttleKey = "Scrolling: " .. target .. " a:" .. ( abilityName or '' ) .. " t:" .. ( damageType or '-' ) .. " r:" .. ( result or 0 ) .. " h:" .. hitValue
-            -- look for existing label
+            -- Look for existing label
             local throttle = throttleLabels[throttleKey]
             if throttle and throttle.label.throttleKey == throttleKey then
-                -- set new values for throttle hits
+                -- Set new values for throttle hits
                 throttle.hits = throttle.hits + 1
-                -- update label text
+                -- Update label text
                 throttle.label:SetText( labelText .. " |cFFFFFFx|r " .. throttle.hits )
-                -- there is nothing else to do as the label is already alive and we do not need to create new ones
+                -- There is nothing else to do as the label is already alive and we do not need to create new ones
                 return nil
             end
         end
@@ -2061,10 +1989,10 @@ function CI.FireCombatEvent( eventCode, result, isError, abilityName, abilityGra
             font = "Regular"
         end
 
-        -- prepare proper font
+        -- Prepare proper font
         font = Font[ "Scroll" .. font ] or Font[ font ] or font
 
-        -- control where label to be created
+        -- Control where label to be created
         local targetControl = scrollingControls[eventCode]
 
         targetControl.lastUsedLabel = ( targetControl.lastUsedLabel == targetControl.labelsMax ) and 1 or targetControl.lastUsedLabel + 1
@@ -2083,13 +2011,13 @@ function CI.FireCombatEvent( eventCode, result, isError, abilityName, abilityGra
             offsetY         = 0,
         }
 
-        -- set initial throttle value
+        -- Set initial throttle value
         label.throttleKey = throttleKey
         if throttleKey then
             throttleLabels[throttleKey] = { label = label, hits = 1, }
         end
 
-        -- label setup
+        -- Label setup
         label.angle = g_scrollingAngle
         label.available = true
         label:SetScale( 1 )
@@ -2104,37 +2032,37 @@ function CI.FireCombatEvent( eventCode, result, isError, abilityName, abilityGra
         setupIcon(CI.SV.ShowIconsScroll, label, iconSettings, abilityName, abilityId)
 
 
-    -- event is fired imemdiatelly into cloud-text areas
+    -- Event is fired imemdiatelly into cloud-text areas
     else
 
-        -- prepare proper font
+        -- Prepare proper font
         font = Font[ "Cloud" .. font ] or Font[ font ] or font
 
-        -- get target config
+        -- Get target config
         local targetConfig  = combatTargets[ target ]
         local targetControl = targetControls[ targetConfig.parent or target ]
 
-        -- if the control does not exists, then bail out here
+        -- If the control does not exists, then bail out here
         if targetControl == nil then return end
 
-        -- now if we can try to throttle labels, there is a proper time to make a check
+        -- Now if we can try to throttle labels, there is a proper time to make a check
         local throttleKey
         if CI.SV.ThrottleEnabled and targetConfig.throttleOption then
-            -- fill the name of throttle key: we will throttle only completely identical abilities/results/values
+            -- Fill the name of throttle key: we will throttle only completely identical abilities/results/values
             throttleKey = "Cloud: " .. target .. " a:" .. ( abilityName or '' ) .. " t:" .. ( damageType or '-' ) .. " r:" .. ( result or 0 ) .. " h:" .. hitValue
-            -- look for existing label
+            -- Look for existing label
             local throttle = throttleLabels[throttleKey]
             if throttle and throttle.label.throttleKey == throttleKey then
-                -- set new values for throttle hits
+                -- Set new values for throttle hits
                 throttle.hits = throttle.hits + 1
-                -- update label text
+                -- Update label text
                 throttle.label:SetText( labelText .. "|cFFFFFF*|cCCCCCC" .. throttle.hits .. "|r" )
-                -- there is nothing else to do as the label is already alive and we do not need to create new ones
+                -- There is nothing else to do as the label is already alive and we do not need to create new ones
                 return nil
             end
         end
 
-        -- get label
+        -- Get label
         targetControl.lastUsedLabel = ( targetControl.lastUsedLabel == targetConfig.labelsMax ) and 1 or targetControl.lastUsedLabel + 1
         local label = targetControl.floatingLabels[ targetControl.lastUsedLabel ]
         if  label == nil then
@@ -2144,10 +2072,10 @@ function CI.FireCombatEvent( eventCode, result, isError, abilityName, abilityGra
         end
 
         -- get previous label
-        --local previousNum   = ( targetControl.lastUsedLabel - 1 < 1 ) and targetConfig.labelsMax or targetControl.lastUsedLabel - 1
-        --local previousLabel = targetControl.floatingLabels[ previousNum ]
+        -- local previousNum   = ( targetControl.lastUsedLabel - 1 < 1 ) and targetConfig.labelsMax or targetControl.lastUsedLabel - 1
+        -- local previousLabel = targetControl.floatingLabels[ previousNum ]
 
-        -- label settings
+        -- Label settings
         label.settings = {
             target          = target,
             targetControl   = targetControl,
@@ -2183,13 +2111,13 @@ function CI.FireCombatEvent( eventCode, result, isError, abilityName, abilityGra
         label.settings.fixedAge         = currentTime + label.settings.fixedTime
         label.settings.age              = label.settings.fixedAge + label.settings.animateTime
 
-        -- set initial throttle value
+        -- Set initial throttle value
         label.throttleKey = throttleKey
         if throttleKey then
             throttleLabels[throttleKey] = { label = label, hits = 1, }
         end
 
-        -- label setup
+        -- Label setup
         label:SetScale( 1 )
         label:SetDrawLayer( DL_TEXT )
         label:SetColor( colour.r, colour.g, colour.b )
@@ -2266,17 +2194,12 @@ function CI.OnSlotsFullUpdate(eventCode)
 end
 
 function CI.OnPowerUpdatePlayer( eventCode , unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax )
-
     if unitTag ~= 'player' then return end
-
     if powerType == POWERTYPE_ULTIMATE then
-
         -- flag if ultimate is full - we'll need it for ultimate generation texture
         uiUltimate.NotFull = ( powerValue < powerMax )
-
         -- Calculate the percentage to activation old one and current
         local pct = ( g_ultimateCost > 0 ) and math.floor( ( powerValue / g_ultimateCost ) * 100 ) or 0
-
         -- Update the tooltip only when corresponding setting is enabled
         if CI.SV.UltimateEnabled then
             -- Values label: Set Value and assign colour
@@ -2304,7 +2227,7 @@ function CI.OnPowerUpdatePlayer( eventCode , unitTag, powerIndex, powerType, pow
 
         -- Update stored value
         g_ultimateCurrent = powerValue
-        -- this hack is needed to avoid erroneous alert fire
+        -- This hack is needed to avoid erroneous alert fire
         if g_ultimateCost > 0 then
             g_ultimateNotReady = pct < 100
         end
@@ -2333,9 +2256,7 @@ function CI.OnPowerUpdatePlayer( eventCode , unitTag, powerIndex, powerType, pow
 end
 
 function CI.OnPowerUpdateTarget( eventCode , unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax )
-
     if unitTag ~= 'reticleover' then return end
-
     if CI.SV.ExecuteEnabled and powerType == POWERTYPE_HEALTH and
             IsUnitAttackable('reticleover') and GetUnitReaction('reticleover') ~= UNIT_REACTION_NEUTRAL and not IsUnitDead('reticleover') and
             powerValue / powerMax < CI.thresholdExecute then
@@ -2362,14 +2283,12 @@ function CI.OnDisplayActiveCombatTip( eventCode, activeCombatTipId )
     elseif activeCombatTipId == 19 then
         CI.FireCombatEvent( eventCode, 'custom', false, '', '', 0, 'ROOTED', COMBAT_UNIT_TYPE_PLAYER, '', 'combatTip', 1, POWERTYPE_INVALID, 0, false, 0, 0, 0 )
     --else
-    --  CHAT_SYSTEM:AddMessage('DisplayActiveCombatTip : ' .. activeCombatTipId )
+        --d('DisplayActiveCombatTip : ' .. activeCombatTipId )
     end
 end
 
---[[
- * Runs on the EVENT_UNIT_DEATH_STATE_CHANGED listener.
- * This handler fires every time a valid unitTag dies or is resurrected
- ]]--
+-- Runs on the EVENT_UNIT_DEATH_STATE_CHANGED listener.
+-- This handler fires every time a valid unitTag dies or is resurrected
 function CI.OnDeath(eventCode, unitTag, isDead)
     -- Wipe self buffs
     if isDead and "group" == string.sub(unitTag, 0, 5) then -- when group member dies
@@ -2377,10 +2296,8 @@ function CI.OnDeath(eventCode, unitTag, isDead)
     end
 end
 
---[[
- * Runs on the EVENT_PLAYER_COMBAT_STATE listener.
- * This handler fires every time player enters or leaves combat
- ]]--
+-- Runs on the EVENT_PLAYER_COMBAT_STATE listener.
+-- This handler fires every time player enters or leaves combat
 function CI.OnPlayerCombatState(eventCode, inCombat)
     local stateText = inCombat and "In Combat" or "Out Of Combat"
     CI.FireCombatEvent( 0, 'custom', false, '', '', 0, '', COMBAT_UNIT_TYPE_PLAYER, stateText, 'combatState', 1, 0, 0, false, 0, 0, 0 )
@@ -2392,9 +2309,8 @@ function CI.OnPlayerCombatState(eventCode, inCombat)
     end
 end
 
---[[
- * Used to create total combat xp gain. Called from OnPlayerCombatState with delay.
- ]]--
+
+-- Used to create total combat xp gain. Called from OnPlayerCombatState with delay.
 function CI.ReportCombatXP()
     EVENT_MANAGER:UnregisterForUpdate( moduleName .. '_DelayedCombatXP' )
     if g_combatXP > 0 then
@@ -2402,9 +2318,7 @@ function CI.ReportCombatXP()
     end
 end
 
---[[
- * Used to create 'Potion Ready' alert. Called from SCB module
- ]]--
+-- Used to create 'Potion Ready' alert. Called from SCB module
 function CI.CreatePotionAlert(abilityName)
     if not CI.Enabled then return end
     CI.FireCombatEvent( 0, 'custom', false, abilityName, '', 0, 'Potion Ready', COMBAT_UNIT_TYPE_PLAYER, '', 'combatTip', 1, POWERTYPE_ULTIMATE, 0, false, 0, 0, 0 )

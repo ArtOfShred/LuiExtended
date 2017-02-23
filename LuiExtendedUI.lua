@@ -4,12 +4,9 @@ LUIE.UI = {}
 
 local wm = WINDOW_MANAGER
 
---[[
- * A handy chaining function for quickly setting up UI elements
- * Allows us to reference methods to set properties without calling the specific object
- ]]--
+-- A handy chaining function for quickly setting up UI elements
+-- Allows us to reference methods to set properties without calling the specific object
 local function Chain( object )
-
     -- Setup the metatable
     local T = {}
     setmetatable( T , { __index = function( self , func )
@@ -29,16 +26,11 @@ local function Chain( object )
     return T
 end
 
---[[
- * Export previous function to UI namespace
- ]]--
+-- Export previous function to UI namespace
 LUIE.UI.Chain = Chain
 
---[[
- * Creates empty CT_TOPLEVELCONTROL window
- ]]--
+-- Creates empty CT_TOPLEVELCONTROL window
 function LUIE.UI.TopLevel( anchors, dims )
-
     local tlw = wm:CreateTopLevelWindow()
     tlw:SetClampedToScreen( true )
     tlw:SetMouseEnabled( false )
@@ -56,9 +48,7 @@ function LUIE.UI.TopLevel( anchors, dims )
     return tlw
 end
 
---[[
- * Creates plain CT_CONTROL UI control element
- ]]--
+-- Creates plain CT_CONTROL UI control element
 function LUIE.UI.Control( parent, anchors, dims, hidden )
     if not parent then return end
 
@@ -80,9 +70,7 @@ function LUIE.UI.Control( parent, anchors, dims, hidden )
     return c
 end
 
---[[
- * Creates CT_TEXTURE UI control element
- ]]--
+-- Creates CT_TEXTURE UI control element
 function LUIE.UI.Texture( parent, anchors, dims, texture, drawlayer, hidden )
     if not parent then return end
 
@@ -112,9 +100,7 @@ function LUIE.UI.Texture( parent, anchors, dims, texture, drawlayer, hidden )
     return t
 end
 
---[[
- * Creates CT_BACKDROP UI control element
- ]]--
+-- Creates CT_BACKDROP UI control element
 function LUIE.UI.Backdrop( parent, anchors, dims, center, edge, hidden )
     if not parent then return end
 
@@ -144,9 +130,7 @@ function LUIE.UI.Backdrop( parent, anchors, dims, center, edge, hidden )
     return bg
 end
 
---[[
- * Creates CT_BACKDROP UI control element with Chat Window background style
- ]]--
+-- Creates CT_BACKDROP UI control element with Chat Window background style
 function LUIE.UI.ChatBackdrop( parent, anchors, dims, colour, edge_size, hidden )
     if not parent then return end
 
@@ -178,9 +162,7 @@ function LUIE.UI.ChatBackdrop( parent, anchors, dims, colour, edge_size, hidden 
     return bg
 end
 
---[[
- * Creates CT_STATUSBAR UI control element
- ]]--
+-- Creates CT_STATUSBAR UI control element
 function LUIE.UI.StatusBar( parent, anchors, dims, colour, hidden )
     if not parent then return end
 
@@ -206,9 +188,7 @@ function LUIE.UI.StatusBar( parent, anchors, dims, colour, hidden )
     return sb
 end
 
---[[
- * Creates CT_STATUSBAR UI control element
- ]]--
+-- Creates CT_STATUSBAR UI control element
 function LUIE.UI.Label( parent, anchors, dims, align, font, text, hidden )
     if not parent then return end
 
