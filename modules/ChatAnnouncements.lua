@@ -1806,7 +1806,7 @@ end
 --------------------------------------------------------------
 
 function CA.MiscAlertLockFailed(eventCode)
-    printToChat("Lockpick failed, you're fucking terrible!!")
+    printToChat("Lockpick failed!")
 end
 
 function CA.MiscAlertLockSuccess(eventCode)
