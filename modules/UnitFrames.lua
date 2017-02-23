@@ -2112,7 +2112,17 @@ end
 function UF.CustomFramesSetDeadLabel( unitFrame, newValue )
 
     unitFrame.dead:SetHidden( newValue == nil )
-    if newValue ~= nil then unitFrame.dead:SetText( newValue ) end
+    if newValue ~= nil then 
+        unitFrame.dead:SetText( newValue )
+    end
+    
+    if newValue == "Offline" then
+        classIcon = classIcons[0]
+        unitFrame.level:SetHidden( newValue ~= "Dead" or newValue ~= nil )
+        unitFrame.levelIcon:SetHidden( newValue ~= "Dead" or newValue ~= nil )
+        unitFrame.friendIcon:SetHidden( newValue ~= "Dead" or newValue ~= nil )
+        unitFrame.classIcon:SetTexture(classIcon)
+    end
 
     if unitFrame[POWERTYPE_HEALTH] then
         if unitFrame[POWERTYPE_HEALTH].bar ~= nil then unitFrame[POWERTYPE_HEALTH].bar:SetHidden( newValue ~= nil ) end

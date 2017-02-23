@@ -931,7 +931,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Long-term Effects for Targer",
+                name = "Show Long-term Effects for Target",
                 tooltip = "Show Target icons for effects with duration greater then 2 minutes.",
                 getFunc = function() return LUIE.SpellCastBuffs.SV.LongTermEffects_Target end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.LongTermEffects_Target = value end,

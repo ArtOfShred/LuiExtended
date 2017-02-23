@@ -494,7 +494,7 @@ end
 
 function CA.ActivityStatusUpdate(eventCode, status)
 
-    --d("status update:" .. status)
+    d("status update:" .. status)
 
     if ShowActivityStatus then
         if status == ACTIVITY_FINDER_STATUS_NONE and WeAreQueued == true then
@@ -520,7 +520,7 @@ function CA.ActivityStatusUpdate(eventCode, status)
 end
 
 function CA.ActivityQueueResult(eventCode, result)
-    --d("ActivityQueueResult: " .. result)
+    d("ActivityQueueResult: " .. result)
 
     if result == ACTIVITY_QUEUE_RESULT_INCOMPATIBLE_GROUP then
         printToChat("Cannot queue - the members of this group are role incompatible.")
@@ -574,7 +574,7 @@ function CA.ActivityStatusRefresh()
 end
 
 function CA.ReadyCheckUpdate(eventCode)
-    --d("Ready check update!")
+    d("Ready check update!")
 
     local activityType = GetLFGReadyCheckNotificationInfo()
     local _, tanksPending, _, healersPending, _, dpsPending = GetLFGReadyCheckCounts()

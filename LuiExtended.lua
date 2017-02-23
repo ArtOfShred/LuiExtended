@@ -305,6 +305,12 @@ function LUIE.RegroupDisband()
         LUIE.PrintToChat("Regroup: You are not in a group.")
         return
     end
+    
+    local isLFG = IsInLFGGroup()
+    if isLFG then
+        LUIE.PrintToChat("Regroup: You cannot initiate a regroup while in an LFG activity.")
+        return
+    end
 
     -- Check to make sure player is the leader
     local isLeader = IsUnitGroupLeader('player')
@@ -333,7 +339,7 @@ function LUIE.RegroupDisband()
 
     LUIE.PrintToChat("Regroup: Group saved!")
     GroupDisband()
-    -- Reinvite the group after 3 seconds (give the group interface time to update on server and client end for all group members)
+    -- Reinvite the group after 5 seconds (give the group interface time to update on server and client end for all group members)
     zo_callLater(LUIE.RegroupInvite, 5000)
 end
 
@@ -344,7 +350,7 @@ function LUIE.RegroupInvite()
         local member = g_regroupStacks[i]
         if member.memberName ~= playerName then -- Don't invite self!
             GroupInviteByName(member.memberName)
-            CHAT_SYSTEM:AddMessage(zo_strformat("Regroup: Invited → |cffffff<<1>>|r", member.memberLink))
+            LUIE.PrintToChat(zo_strformat("Regroup: Invited → |cffffff<<1>>|r", member.memberLink))
         end
     end
 
