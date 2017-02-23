@@ -1,23 +1,47 @@
-Version 4.99 BETA
-2-01-17: Minor update
-- Added Horizontal tiling method for Long Terms Effects container
-- Vertical Long Term Effects container can now be oriented from top/center/bottom just like Horizontal can be aligned to left/center/right. Note - unfortunately changing the sorting order to be different for individual bars is not possible, it would require a significant rewrite to do so, perhaps I will reach the potential to do so in the future.
-- Previous issue of Font Options being very limited resolved by updating to the latest version of LAM (thanks again psypanda!).
-- Updated version number to 4.99 BETA and updated API version to 100018 for Homestead
-- NOTE that I slightly changed the backdrop size for buffs and the thickness of the radial countdown that goes around buffs or debuffs to look better with DarkUI frames. This is temporary or will have a toggle option at some point, apologies if it looks iffy on default UI at the moment.
+Version 4.99b
+- Fixed MAJOR issue with debuffs not displaying on the player.
+- Added separate Player Buff, Player Debuff, Target Buff, and Target Debuff containers when you toggle the Hard-Lock position to Unit Frames option off. This allows you to have separate buff/debuff frames without using the LUI player & target frames.
+- Enhanced Party Frames to update more consistently when party members go offline.
+- Added a toggle option under Buffs and Debuffs to turn off the icon display for Sprint/Gallop
+- Added a toggle option in Chat Announcements to turn off default string enhancements. This was added as a request due to the lack of other localization support currently. I recommend using this setting otherwise unless you are experiencing some sort of conflict with another addon.
+- Added a toggle option to complete turn off the Chat Announcements component.
+- Fixed an issue that was causing an error to generate when editing settings in the Chat Announcements loot component.
 
-1-28-17:
-- Initial Upload complete for BETA version 
-- LootLog update (by psypanda)
-- Added Setting "Show only notable self Loot" (Idea and some code stolen from LootLog - thanks!)
-- Added Setting "Show Item Trait" (Idea and some code stolen from LootLog - thanks!)
-- Added Setting "Timestamp Format" (CreateTimestamp() function borrowed from pChats - thanks!)
-- Changed the color code of the Timestamp to match pChats default
-- Changed printToChat() function (Still left old one commented out)
-- Fixed missing Timestamp on group join/leave events
-- Added a small Blacklist for LootLog to hide certain annoying items to prevent chat spam. (In the future we could create a setting for each one of them if needed)
-- Minor Update
-- Fixed Ultimate % value not correctly updating outside of combat
+Version 4.99a
+- File size decreased significantly, previously I had accidentally included various GitHub repository files in the directory.
+- Fixed an issue with debuffs not refreshing correctly when changing targets.
+- Fixed an issue with the /regroup command not displaying names correctly and trying to reinvite before the group was disbanded. (Please let me know if you experience issues with this still!)
+- Added a toggle option for social notifications (friend/ignore list messages)
+
+Version 4.99
+- Tons of new icons for various player passives and NPC abilites
+    - Part of an ongoing effort to remove placeholder icons from the game, I've created a steadily growing set of new icons for various NPC abilities. Note that there are still MANY things to do here, this is just the start.
+- New icons for Potions, Poisons, Consumables and Momentos
+    - Potions and Poisons now have their own buff or debuff icons depending on context. Unique food and drink items now have unique icons. Standard food and drink types share the same buffs depending on quality and stats, the icons have now been updated to show the quality of the food buff.
+- Implementation of new Zenimax Major/Minor Buff & Debuff icons
+    - With the release of Homestead, Zenimax added new icons to game for major and minor buffs and debuffs. These will likely be used when Zenimax implements their own buff frames. LUI is now currently using these icons. If you prefer the old style icons, I'll be uploading a small override file you can use in a bit.
+- Overhaul of Chat Announcements
+    - Display notifications for Experience gain in and outside of combat.
+    - Display Gold, AP, TelVar, or Writ Voucher gains and losses with context sensitive messages
+    - Display items acquired via looting, mail, trading, crafting, vendoring, banking, and questing. With the option to display Trait, Armor Type, and Style as well.
+    - Option to display items consumed when crafting, items destroyed, and items confiscated by guards.
+    - Potential to combine vendor item purchase notifications with the relevant currency change.
+    - Display Group messages when players leave or enter a group, and LFG votekicks, ready checks, and queue status.
+    - Display Guild invitations, members joining or leaving, rank changes, and MOTD changes.
+    - Display Social notifications for friends invitations, friend list changes as well as ignore list changes.
+    - Display custom notifications for various activities such as receiving mail, upgrading bag/bank space, horse upgrades, lockpicking.
+    - Extensive control of formatting options for messages displayed to chat.
+- New Slash Command Features
+    - /home - Returns you to your primary home.
+    - /disband - Disbands your current group.
+    - /regroup - A simple single command for group leaders, will disband your current group and then reinvite all party members back shortly after.
+    - /ginvite1/2/3/4/5 "name" - Option to invite a player to a guild.
+    - Expect more slash commands to appear in future updates!
+- Additional Noteworthy Changes
+    - Ability to individually control the size of custom Stamina and Magicka bar.
+    - Ability to hide the resource label or entire Stamina or Magicka bar.
+    - Long Term Buffs container now supports horizontal orientation!
+    - Fixed ultimate % value not updating correctly when bar swapping outside of combat.
 
 Version 4.35
 - Buff: Added Magicka Bomb to Debuffs re-adjusted some vMOL debuffs and replaced rending slashes with the actual icon instead of the bleed tick icon.
