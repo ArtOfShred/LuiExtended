@@ -314,7 +314,7 @@ function LUIE.RegroupDisband()
     end
 
     -- Check to make sure player is the leader
-    local isLeader = IsUnitGroupLeader('player')
+    local isLeader = IsUnitGroupLeader("player")
     if not isLeader then
         LUIE.PrintToChat("Regroup: Only the party leader can initiate a regroup!")
         return
@@ -349,7 +349,8 @@ function LUIE.RegroupInvite()
     LUIE.PrintToChat("Regroup: Reinviting group members:")
     for i = 1, #g_regroupStacks do
         local member = g_regroupStacks[i]
-        if member.memberName ~= playerName then -- Don't invite self!
+        -- Don't invite self and offline members
+        if ((member.memberName ~= playerName) and (IsUnitOnline(member.memberName))) then
             GroupInviteByName(member.memberName)
             LUIE.PrintToChat(zo_strformat("Regroup: Invited → |cffffff<<1>>|r", member.memberLink))
         end
