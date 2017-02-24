@@ -1919,7 +1919,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
 
         UF.OnChampionPointGained() -- Setup bar colour and proper icon
 
-        UF.CustomFrames.player.ChampionXP.bar:SetMinMax( 0 , 400000 )
+        UF.CustomFrames.player.ChampionXP.bar:SetMinMax( 0 , GetNumChampionXPInChampionPoint(GetPlayerChampionPointsEarned()) )
         UF.CustomFrames.player.ChampionXP.bar:SetValue( GetPlayerChampionXP() )
 
     elseif UF.SV.PlayerEnableAltbarXP then
@@ -1934,7 +1934,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.Experience = UF.CustomFrames.player.alternative
 
         UF.CustomFrames.player.Experience.bar:SetMinMax( 0 , UF.CustomFrames.player.isChampion and GetNumChampionXPInChampionPoint('player')  or GetUnitXPMax('player') )
-        UF.CustomFrames.player.Experience.bar:SetValue( UF.CustomFrames.player.isChampion and GetUnitChampionPoints('player') or GetUnitXP('player') )
+        UF.CustomFrames.player.Experience.bar:SetValue( UF.CustomFrames.player.isChampion and GetPlayerChampionXP() or GetUnitXP('player') )
 
     -- Otherwise bar should be hidden and no tracking be done
     else
@@ -2023,10 +2023,10 @@ function UF.CustomFramesSetDeadLabel( unitFrame, newValue )
 
     if newValue == "Offline" then
         classIcon = classIcons[0]
-        unitFrame.level:SetHidden( newValue ~= "Dead" or newValue ~= nil )
-        unitFrame.levelIcon:SetHidden( newValue ~= "Dead" or newValue ~= nil )
-        unitFrame.friendIcon:SetHidden( newValue ~= "Dead" or newValue ~= nil )
-        unitFrame.classIcon:SetTexture(classIcon)
+        if unitFrame.level ~= nil then unitFrame.level:SetHidden( newValue ~= "Dead" or newValue ~= nil ) end
+        if unitFrame.levelIcon ~= nil then unitFrame.levelIcon:SetHidden( newValue ~= "Dead" or newValue ~= nil ) end
+        if unitFrame.friendIcon ~= nil then unitFrame.friendIcon:SetHidden( newValue ~= "Dead" or newValue ~= nil ) end
+        if unitFrame.classIcon ~= nil then unitFrame.classIcon:SetTexture(classIcon) end
     end
 
     if unitFrame[POWERTYPE_HEALTH] then
@@ -2749,7 +2749,8 @@ function UF.CustomFramesApplyLayoutRaid()
         unitFrame.control:SetAnchor( TOPLEFT, raid, TOPLEFT, UF.SV.RaidBarWidth*column, UF.SV.RaidBarHeight*(row-1) + (UF.SV.RaidSpacers and spacerHeight*(math.floor((i-1)/4)-math.floor(column*itemsPerColumn/4)) or 0) )
         unitFrame.control:SetDimensions( UF.SV.RaidBarWidth, UF.SV.RaidBarHeight )
 
-        unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-45, UF.SV.RaidBarHeight-2 )
+        -- Subtracted an additional additional 10 from dimensions here to correct for clipping into Offline label
+        unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-55, UF.SV.RaidBarHeight-2 )
         unitFrame.dead:SetDimensions( 75, UF.SV.RaidBarHeight-2 )
 
     end

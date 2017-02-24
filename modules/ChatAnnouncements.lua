@@ -1051,8 +1051,8 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     -- Receive/Give Money in a Trade (Likely consolidate this later)
     elseif reason == 3 then message = ( "Traded" )
 
-    -- Receive from Quest Reward (4), Sell to Fence (63)
-    elseif reason == 4 or reason == 63 then message = ( "Received" )
+    -- Receive from Quest Reward (4), AH Refund (32), Sell to Fence (63)
+    elseif reason == 4 or reason == 32 or reason == 63 then message = ( "Received" )
 
     -- Spend - NPC Conversation (5), Bag Space (8), Bank Space (9), Wayshrine (19), Mount Feed (28), Repairs (29), Buy on AH (31), AH Listing Fee (33), Respec Skills (44), Respec Attributes (45),
     -- Unstuck (48), Edit Guild Heraldry (49), Buy Guild Tabard (50), Respec Morphs (55), Pay Fence (56), Launder (60), Champion Respec (61), Buyback (64)
@@ -1091,7 +1091,6 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     elseif reason == 26 then message = "Currency Change Reason 26 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
     elseif reason == 27 then message = "Currency Change Reason 27 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
     elseif reason == 30 then message = "Currency Change Reason 30 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 32 then message = "Currency Change Reason 32 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
     elseif reason == 34 then message = "Currency Change Reason 34 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
     elseif reason == 36 then message = "Currency Change Reason 36 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
     elseif reason == 37 then message = "Currency Change Reason 37 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
@@ -1192,12 +1191,12 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             total = ""
         end
 
-        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and not CA.SV.GoldChange then printToChat(strformat("COD Payment of <<1>> gold sent!", changetype)) end
+        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and changetype > 0 and not CA.SV.GoldChange then printToChat(strformat("COD Payment of <<1>> gold sent!", changetype)) end
         if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and CA.SV.GoldChange then printToChat("COD Payment sent!") end
         if CA.SV.MiscMail and mailCOD == 0 and mailMoney == 0 and postageAmount >= 1 then printToChat("Mail sent!") end
         if CA.SV.MiscMail and mailMoney ~= 0 and not CA.SV.GoldChange then printToChat (strformat("Mail sent with <<1>> gold!", mailMoney) ) end
         if CA.SV.MiscMail and mailMoney ~= 0 and CA.SV.GoldChange then printToChat("Mail sent!") end
-        if CA.SV.MiscMail and mailCOD ~= 0 and not CA.SV.GoldChange  then printToChat(strformat("COD sent for <<1>> gold!", mailCOD) ) end
+        if CA.SV.MiscMail and mailCOD ~= 0 and not CA.SV.GoldChange then printToChat(strformat("COD sent for <<1>> gold!", mailCOD) ) end
         if CA.SV.MiscMail and mailCOD ~= 0 and CA.SV.GoldChange then printToChat("COD sent!") end
 
         valuesent = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
@@ -1331,7 +1330,6 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
     elseif reason == 26 then message = "Currency Change Reason 26 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
     elseif reason == 27 then message = "Currency Change Reason 27 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
     elseif reason == 30 then message = "Currency Change Reason 30 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 32 then message = "Currency Change Reason 32 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
     elseif reason == 34 then message = "Currency Change Reason 34 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
     elseif reason == 36 then message = "Currency Change Reason 36 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
     elseif reason == 37 then message = "Currency Change Reason 37 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
@@ -1454,7 +1452,6 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
     elseif reason == 26 then message = "Currency Change Reason 26 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
     elseif reason == 27 then message = "Currency Change Reason 27 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
     elseif reason == 30 then message = "Currency Change Reason 30 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 32 then message = "Currency Change Reason 32 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
     elseif reason == 34 then message = "Currency Change Reason 34 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
     elseif reason == 36 then message = "Currency Change Reason 36 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
     elseif reason == 37 then message = "Currency Change Reason 37 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
@@ -1583,7 +1580,6 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
     elseif reason == 26 then message = "Currency Change Reason 26 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
     elseif reason == 27 then message = "Currency Change Reason 27 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
     elseif reason == 30 then message = "Currency Change Reason 30 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 32 then message = "Currency Change Reason 32 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
     elseif reason == 34 then message = "Currency Change Reason 34 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
     elseif reason == 36 then message = "Currency Change Reason 36 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
     elseif reason == 37 then message = "Currency Change Reason 37 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
@@ -2109,11 +2105,13 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
                  (itemQuality >= ITEM_QUALITY_ARCANE and itemIsSpecial) or
                  (itemQuality >= ITEM_QUALITY_ARTIFACT and not itemIsKeyFragment) or
                  (lootType == LOOT_TYPE_COLLECTIBLE) or
+                 (itemType == ITEMTYPE_COSTUME) or 
+                 (itemType == ITEMTYPE_DISGUISE) or
                  (notableIDs[itemId]) ) then
 
                 CA.LogItem( logPrefix, icon, itemName, itemType, quantity, lootedBySelf and "" or receivedBy, gainorloss )
             end
-        elseif CA.SV.LootNotTrash and ( itemQuality == ITEM_QUALITY_TRASH ) then
+        elseif CA.SV.LootNotTrash and ( itemQuality == ITEM_QUALITY_TRASH ) and not ( ( itemType == ITEMTYPE_ARMOR) or (itemType == ITEMTYPE_DISGUISE) or (itemType == ITEMTYPE_DISGUISE) ) then
             return
         else
             CA.LogItem( logPrefix, icon, itemName, itemType, quantity, lootedBySelf and "" or receivedBy, gainorloss )
@@ -2451,12 +2449,17 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
     combostring = ""
     local NumMails = 0
     local gainorloss = "|c0B610B"
+    local logPrefix = "Received"
+    local receivedBy = ""
+    if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
 
     if CA.SV.LootMail then
         for attachIndex = 1, #g_MailStacks do
-            local item = g_MailStacks[attachIndex]
-            NumMails = NumMails+1
-            zo_callLater(function() CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, gainorloss) end , 50)
+        local item = g_MailStacks[attachIndex]
+        NumMails = NumMails+1
+        icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+        --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
+            zo_callLater(function() CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss) end , 50)
         end
     end
 
