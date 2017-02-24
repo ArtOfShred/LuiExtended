@@ -905,6 +905,16 @@ function CA.RegisterGoldEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MONEY_UPDATE, CA.OnMoneyUpdate)
         GoldColorize = ZO_ColorDef:New(unpack(CA.SV.GoldColor))
     end
+    if CA.SV.MiscMail or CA.SV.LootMail or CA.SV.GoldChange then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, CA.OnMailAttach)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, CA.OnMailAttachRemove)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, CA.OnMailCloseBox)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED, CA.OnMailFail)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS, CA.OnMailSuccess)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED, CA.MailMoneyChanged)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED, CA.MailCODChanged)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_REMOVED, CA.MailRemoved)
+    end
 end
 
 -- Alliance Points into chat
@@ -1041,9 +1051,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     -- Send money in the mail, values changed to compensate for COD!
     elseif reason == 2 and UpOrDown < 0 then
         if postageAmount == 0 and mailMoney == 0 and mailCOD == 0 then
-        message = ( "COD Payment" )
+            message = ( "COD Payment" )
         else
-        message = ( "Sent" )
+            message = ( "Sent" )
         end
         changetype = CommaValue (oldMoney - newMoney - postageAmount)
         mailHelper = true
@@ -1138,9 +1148,17 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             combostring = ( strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         elseif CA.SV.MiscMail and reason == 2 then
             if not MailStop and MailStringPart1 ~= "" then
-                printToChat(strformat("<<1>> and gold.", MailStringPart1))
+                if not CA.SV.GoldChange then
+                    printToChat(strformat("<<1>> and <<2>> gold.", MailStringPart1, changetype))
+                else
+                    printToChat(strformat("<<1>> and gold.", MailStringPart1))
+                end
             elseif not MailStop then
-                printToChat("Received mail with gold.")
+                if not CA.SV.GoldChange then
+                    printToChat(strformat("Received mail with <<1>> gold.", changetype))
+                else
+                    printToChat("Received mail with gold.")
+                end
             end
             if CA.SV.GoldChange then
                 printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
@@ -1191,7 +1209,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             total = ""
         end
 
-        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and changetype > 0 and not CA.SV.GoldChange then printToChat(strformat("COD Payment of <<1>> gold sent!", changetype)) end
+        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and not CA.SV.GoldChange then printToChat(strformat("COD Payment of <<1>> gold sent!", changetype)) end
         if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and CA.SV.GoldChange then printToChat("COD Payment sent!") end
         if CA.SV.MiscMail and mailCOD == 0 and mailMoney == 0 and postageAmount >= 1 then printToChat("Mail sent!") end
         if CA.SV.MiscMail and mailMoney ~= 0 and not CA.SV.GoldChange then printToChat (strformat("Mail sent with <<1>> gold!", mailMoney) ) end
@@ -1719,6 +1737,8 @@ function CA.RegisterMailEvents()
     if CA.SV.MiscMail or CA.SV.LootMail then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_READABLE, CA.OnMailReadable)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_TAKE_ATTACHED_ITEM_SUCCESS, CA.OnMailTakeAttachedItem)
+    end
+    if CA.SV.MiscMail or CA.SV.LootMail or CA.SV.GoldChange then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, CA.OnMailAttach)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, CA.OnMailAttachRemove)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, CA.OnMailCloseBox)
@@ -1729,7 +1749,7 @@ function CA.RegisterMailEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_REMOVED, CA.MailRemoved)
     end
     if CA.SV.MiscMail or CA.SV.GoldChange then
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MONEY_UPDATE, CA.OnMoneyUpdate)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MONEY_UPDATE, CA.OnMoneyUpdate)
     end
 end
 
@@ -2453,14 +2473,12 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
     local receivedBy = ""
     if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
 
-    if CA.SV.LootMail then
-        for attachIndex = 1, #g_MailStacks do
+    for attachIndex = 1, #g_MailStacks do
         local item = g_MailStacks[attachIndex]
         NumMails = NumMails+1
         icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
         --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
-            zo_callLater(function() CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss) end , 50)
-        end
+        if CA.SV.LootMail then zo_callLater(function() CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss) end , 50) end
     end
 
     local plural = "s"
@@ -2547,7 +2565,7 @@ function CA.OnMailSuccess(eventCode)
 end
 
 function CA.FunctionMailCurrencyCheck()
-    if MailCurrencyCheck then
+    if MailCurrencyCheck and CA.SV.MiscMail then
         printToChat("Mail sent!")
     end
 end
