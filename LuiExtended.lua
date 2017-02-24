@@ -350,7 +350,7 @@ function LUIE.RegroupInvite()
     for i = 1, #g_regroupStacks do
         local member = g_regroupStacks[i]
         -- Don't invite self and offline members
-        if ((member.memberName ~= playerName) and (IsUnitOnline(member.memberName))) then
+        if member.memberName ~= playerName then
             GroupInviteByName(member.memberName)
             LUIE.PrintToChat(zo_strformat("Regroup: Invited → |cffffff<<1>>|r", member.memberLink))
         end

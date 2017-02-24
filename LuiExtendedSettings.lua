@@ -2274,6 +2274,15 @@ function LUIE_CreateSettings()
         width = "full",
         default = LUIE.D.StartupInfo,
     }
+    optionsData[#optionsData + 1] = { -- 
+        type = "header",
+        name = "LUIE Slash Commands Overview",
+        width = "full",
+    }
+    optionsData[#optionsData + 1] = { -- 
+        type = "description",
+        text = "\"/home:\" Ports the user to their primary home.\n\"/disband:\" Disbands the current group if you are group leader.\n\"/regroup:\" Saves your current party configuration, disbands the group and reinvites them after 5 seconds. This command does not work in LFG.\n\"/ginvite1,2,3,4,5:\" Invites a player to one of your guilds based on their order in your Guild Menu. Example syntax: \"/ginvite1 @ArtOfShred\"",
+    }
 
     --[[  BEGIN UNIT FRAMES SETTING PANEL ]]--
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
