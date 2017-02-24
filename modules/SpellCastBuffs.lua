@@ -8,7 +8,6 @@ local CI        = LUIE.CombatInfo
 local UI        = LUIE.UI
 local E         = LUIE.Effects
 local L         = LUIE.GetLocale()
-local strformat = zo_strformat
 local strfmt    = string.format
 local strformat = zo_strformat
 local strfind   = zo_plainstrfind

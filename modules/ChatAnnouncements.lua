@@ -2475,8 +2475,8 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
 
     for attachIndex = 1, #g_MailStacks do
         local item = g_MailStacks[attachIndex]
+        local icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
         NumMails = NumMails+1
-        icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
         --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
         if CA.SV.LootMail then zo_callLater(function() CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss) end , 50) end
     end
