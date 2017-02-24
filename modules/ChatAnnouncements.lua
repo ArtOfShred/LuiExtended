@@ -1220,7 +1220,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         valuesent = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
 
         if postageAmount ~= 0 then
-            local postagesyntax = CA.SV.CurrencyIcons and GoldColorize:Colorize(strformat( " |t16:16:/esoui/art/currency/currency_gold.dds|t " .. postageAmount .. formathelper .. CA.SV.GoldName .. plural)) or GoldColorize:Colorize(strformat( " " .. changetype .. postage .. CA.SV.GoldName .. plural))
+            local postagesyntax = CA.SV.CurrencyIcons and GoldColorize:Colorize(strformat( " |t16:16:/esoui/art/currency/currency_gold.dds|t " .. postageAmount .. formathelper .. CA.SV.GoldName .. plural)) or GoldColorize:Colorize(strformat( " " .. postageAmount .. formathelper .. CA.SV.GoldName .. plural))
                 -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
             if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
                 total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. GoldColorize:Colorize(totalWithoutPostage) )
