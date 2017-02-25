@@ -2069,6 +2069,16 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.ExperienceHideCombat,
                     },
+                    {
+                        type = "checkbox",
+                        name = "Buffer Experience gained in combat",
+                        tooltip = "Toggle this option on to only report experience gain in chat from non-combat sources.",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceBuffer end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceBuffer = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.ExperienceBuffer,
+                    },
                 },
             },
             {

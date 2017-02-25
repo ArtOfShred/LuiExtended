@@ -71,7 +71,8 @@ CA.D = {
     ExperienceShowDecimal         = true,
     ExperienceShowLevel           = true,
     ExperienceDisplayOptions      = 1,
-    ExperiencexperienceHideCombat = false,
+    ExperienceHideCombat          = false,
+    ExperienceBuffer              = true,
     Achievements                  = false,
     AchievementsStep              = 10,
     AchievementsDetails           = true,
@@ -2607,6 +2608,27 @@ local WeLeveled = 0
 local Crossover = 0
 local QuestCombiner = 0 -- When this is > 1, if quest XP is gained with Reason 1, this will merge a Reason 2 value that follows it if present. Allows us to merge the message for XP gain from quest turnins that also complete a POI into one printout.
 
+
+-- WIP XP Buffer
+--[[
+local XPCombatBufferValid = true
+local XPCombatBufferValue = 0
+local XPCombatBufferString = ""
+local StopBufferPrint = false
+
+function CA.PrintBufferedXP()
+    if not StopBufferPrint then
+        printToChat (XPCombatBufferString) -- If we leveled up, then this variable will be true, and we want to smash all the buffered XP into the level up display!
+        XPCombatBufferValue = 0
+        XPCombatBufferString = ""
+        XPCombatBufferValid = true
+    end
+    if StopBufferPrint then
+        StopBufferPrint = false
+    end
+end
+]]--
+
 function CA.OnLevelUpdate(eventCode, unitTag, level)
     if unitTag == ("player") then
 
@@ -2624,14 +2646,12 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
             printToChat ("You have reached " .. LevelContext .. " " .. CurrentLevel .. "!")
         end
     end
-
     QuestString1 = ""
     QuestString2 = ""
     WeLeveled = 0
     Crossover = 0
     QuestCombiner = 0
 end
-
 
 function CA.OnExperienceGain(eventCode, reason, level, previousExperience, currentExperience, championPoints)
     -- d("Experience Gain) previousExperience: " .. previousExperience .. " --- " .. "currentExperience: " .. currentExperience)
@@ -2892,10 +2912,22 @@ local GuildBankCarry_gainorloss
 
 function CA.GuildBankItemAdded(eventCode, slotId)
     CA.LogItem(GuildBankCarry_logPrefix, GuildBankCarry_icon, GuildBankCarry_itemLink, itemType, GuildBankCarry_stackCount or 1, GuildBankCarry_receivedBy, GuildBankCarry_gainorloss)
+    GuildBankCarry_logPrefix = ""
+    GuildBankCarry_icon = ""
+    GuildBankCarry_itemLink = ""
+    GuildBankCarry_stackCount = ""
+    GuildBankCarry_receivedBy = ""
+    GuildBankCarry_gainorloss = ""
 end
 
 function CA.GuildBankItemRemoved(eventCode, slotId)
     CA.LogItem(GuildBankCarry_logPrefix, GuildBankCarry_icon, GuildBankCarry_itemLink, itemType, GuildBankCarry_stackCount or 1, GuildBankCarry_receivedBy, GuildBankCarry_gainorloss)
+    GuildBankCarry_logPrefix = ""
+    GuildBankCarry_icon = ""
+    GuildBankCarry_itemLink = ""
+    GuildBankCarry_stackCount = ""
+    GuildBankCarry_receivedBy = ""
+    GuildBankCarry_gainorloss = ""
 end
 
 function CA.IndexInventory()
@@ -3441,6 +3473,26 @@ if bagId == 1 then --
         end
     end
 end
+
+---------------------------------- CRAFTING BAG ----------------------------------
+
+    if bagId == 5 then --
+        local receivedBy = ""
+        local gainorloss = "|c0B610B"
+        local logPrefix = "Received"
+        local itemlink = CA.GetItemLinkFromItemId(slotId)
+        local icon = GetItemLinkInfo(itemlink)
+        local seticon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
+        
+        GuildBankCarry_icon = seticon
+        GuildBankCarry_gainorloss = "|c0B610B"
+        GuildBankCarry_logPrefix = "Withdrew"
+        GuildBankCarry_receivedBy = ""
+        GuildBankCarry_itemLink = itemlink
+        GuildBankCarry_stackCount = stackCountChange or 1
+    end
+
+----------------------------------------------------------------------------------
 
 ItemWasDestroyed = false
 
