@@ -34,6 +34,7 @@ Version 4.99a
 - Added a toggle option for social notifications (friend/ignore list messages)
 
 -------------------------------------------
+
 Version 4.99
 
 Overall Changes
@@ -95,6 +96,7 @@ Unit Frames
 - Added the ability to hide the Magicka or Stamina bar labels, or hide the bars entirely.
 - Updated the icons on unit frames to be more consistent, as well as replaced the execute skull texture. 
 - Added option to choose method of name display for player targets - Character Name, Display Name, or both.
+
 -------------------------------------------
 
 Version 4.35
