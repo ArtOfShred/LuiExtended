@@ -21,6 +21,7 @@ CA.D = {
     TotalGoldChange               = false,
     GoldName                      = "Gold",
     AlliancePointChange           = true,
+    AlliancePointFilter           = 0,
     AlliancePointColor            = { 0.164706, 0.862745, 0.133333, 1 },
     TotalAlliancePointChange      = false,
     AlliancePointName             = "AP",
@@ -72,6 +73,7 @@ CA.D = {
     ExperienceShowLevel           = true,
     ExperienceDisplayOptions      = 1,
     ExperienceHideCombat          = false,
+    ExperienceFilter              = 0,
     ExperienceBuffer              = true,
     Achievements                  = false,
     AchievementsStep              = 10,
@@ -1369,7 +1371,7 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
     if CA.SV.LootCurrencyCombo and color == ( "|ca80700" ) then
         combostring = (strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
     else
-        printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
+        if difference > CA.SV.AlliancePointFilter then printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total)) end
     end
 
 end
@@ -2154,7 +2156,27 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
     end
 end
 
+--local LoggedAnItem = false
+itemstring1 = ""
+itemstring2 = ""
+itemstring3 = ""
+remembercontext = ""
+
+newcontextstring = ""
+
+itemstring1gain = ""
+itemstring2gain = ""
+
+itemstring1loss = ""
+itemstring2loss = ""
+
+-- "|c0B610B" - GAIN
+-- "|ca80700" - LOSS
+
 function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainorloss, istrade)
+    
+    --LoggedAnItem = true -- Set this to true, allows buffer to start!
+
     local bracket1 = ""
     local bracket2 = ""
 
@@ -2179,7 +2201,7 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
     local formattedStyle = ""
     local arrowPointer       = ""
 
-    if (receivedBy == "") then
+    if (receivedBy == "" or receivedBy == "CRAFT") then
         -- Don't display yourself
         formattedRecipient = ""
     else
@@ -2228,44 +2250,111 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
     else
         itemName2 = ""
     end
+    
+    if receivedBy == "CRAFT"  and gainorloss == "|c0B610B" then
+        itemstring1gain = strfmt("%s%s%s%s|r ",gainorloss, bracket1, logPrefix, bracket2)
+     
+        if itemstring2gain ~= "" then itemstring2gain = strfmt("%s, %s%s%s%s%s%s%s%s%s", itemstring2gain, icon,
+            itemName2,
+            itemName:gsub("^|H0", "|H1", 1),
+            formattedQuantity,
+            formattedArmorType,
+            formattedTrait,
+            formattedStyle,
+            formattedRecipient,
+            combostring) end
 
-    if not LaunderCheck then printToChat(strfmt(
-        "%s%s%s%s|r %s%s%s%s%s%s%s%s%s",
-        gainorloss,
-        bracket1,
-        logPrefix,
-        bracket2,
-        icon,
-        itemName2,
-        itemName:gsub("^|H0", "|H1", 1),
-        formattedQuantity,
-        formattedArmorType,
-        formattedTrait,
-        formattedStyle,
-        formattedRecipient,
-        combostring
-    )) end
+        if itemstring2gain == "" then itemstring2gain = strfmt("%s%s%s%s%s%s%s%s%s", icon,
+            itemName2,
+            itemName:gsub("^|H0", "|H1", 1),
+            formattedQuantity,
+            formattedArmorType,
+            formattedTrait,
+            formattedStyle,
+            formattedRecipient,
+            combostring) end
+        zo_callLater(CA.PrintMultiLineGain, 50)
+    end
+    
+    if receivedBy == "CRAFT"  and gainorloss == "|ca80700" then
+        itemstring1loss = strfmt("%s%s%s%s|r ",gainorloss, bracket1, logPrefix, bracket2)
+     
+        if itemstring2loss ~= "" then itemstring2loss = strfmt("%s, %s%s%s%s%s%s%s%s%s", itemstring2loss, icon,
+            itemName2,
+            itemName:gsub("^|H0", "|H1", 1),
+            formattedQuantity,
+            formattedArmorType,
+            formattedTrait,
+            formattedStyle,
+            formattedRecipient,
+            combostring) end
 
-    if LaunderCheck then launderitemstring = (strfmt(
-        "%s%s%s%s|r %s%s%s%s%s%s%s%s",
-        gainorloss,
-        bracket1,
-        logPrefix,
-        bracket2,
-        icon,
-        itemName2,
-        itemName:gsub("^|H0", "|H1", 1),
-        formattedQuantity,
-        formattedArmorType,
-        formattedTrait,
-        formattedStyle,
-        formattedRecipient
-    )) end
+        if itemstring2loss == "" then itemstring2loss = strfmt("%s%s%s%s%s%s%s%s%s", icon,
+            itemName2,
+            itemName:gsub("^|H0", "|H1", 1),
+            formattedQuantity,
+            formattedArmorType,
+            formattedTrait,
+            formattedStyle,
+            formattedRecipient,
+            combostring) end
+        zo_callLater(CA.PrintMultiLineLoss, 50)
+    end
+    
+    if receivedBy ~= "CRAFT" then
+        if not LaunderCheck then printToChat(strfmt(
+            "%s%s%s%s|r %s%s%s%s%s%s%s%s%s",
+            gainorloss,
+            bracket1,
+            logPrefix,
+            bracket2,
+            icon,
+            itemName2,
+            itemName:gsub("^|H0", "|H1", 1),
+            formattedQuantity,
+            formattedArmorType,
+            formattedTrait,
+            formattedStyle,
+            formattedRecipient,
+            combostring
+        )) end
 
+        if LaunderCheck then launderitemstring = (strfmt(
+            "%s%s%s%s|r %s%s%s%s%s%s%s%s",
+            gainorloss,
+            bracket1,
+            logPrefix,
+            bracket2,
+            icon,
+            itemName2,
+            itemName:gsub("^|H0", "|H1", 1),
+            formattedQuantity,
+            formattedArmorType,
+            formattedTrait,
+            formattedStyle,
+            formattedRecipient
+        )) end
+    end
+    
     LaunderCheck = false
     combostring = ""
 
 end
+
+function CA.PrintMultiLineGain()
+    if itemstring1gain == "" then return end
+    printToChat (itemstring1gain .. itemstring2gain)
+    itemstring1gain = ""
+    itemstring2gain = ""
+end
+
+function CA.PrintMultiLineLoss()
+    if itemstring1loss == "" then return end
+    printToChat (itemstring1loss .. itemstring2loss)
+    itemstring1loss = ""
+    itemstring2loss = ""
+end
+
 
 -- Variables used for Trade Functions
 local g_TradeStacksIn = {}
@@ -2696,6 +2785,13 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
             -- Displays an icon if enabled
             local icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. CommaValue (change) .. formathelper .. CA.SV.ExperienceName ) or ( CommaValue (change) .. formathelper .. CA.SV.ExperienceName )
 
+            --[[ Combines XP when the buffer function is enabled.
+            if CA.SV.ExperienceBuffer then 
+                XPCombatBufferValue = XPCombatBufferValue + change 
+                icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. CommaValue (XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName ) or ( CommaValue (XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName )
+            end ]]--
+            
+            
             local xppct = 0             -- XP Percent
             local decimal = 0           -- If we're using a % value, this is the string that determines whether we have a decimal point or not.
             local progressbrackets = ""
@@ -2759,6 +2855,8 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
             QuestString2 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
             zo_callLater(CA.PrintQuestExperienceHelper, 100)
             QuestCombiner = 0
+        elseif reason == 0 then
+            if change > CA.SV.ExperienceFilter then printToChat ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) ) end
         else
             printToChat ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
         end
@@ -3098,7 +3196,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
 
 if bagId == 1 then --
 
-    local receivedBy = ""
+    local receivedBy = "CRAFT"
 
     if not g_InventoryStacks[slotId] then -- NEW ITEM
         local icon, stack = GetItemInfo(bagId, slotId)
@@ -3180,7 +3278,7 @@ end
 
 if bagId == 2 then --
 
-    local receivedBy = ""
+    local receivedBy = "CRAFT"
 
     if not g_BankStacks[slotId] then -- NEW ITEM
         local icon, stack = GetItemInfo(bagId, slotId)
@@ -3264,7 +3362,7 @@ end
         local itemlink = CA.GetItemLinkFromItemId(slotId)
         local icon = GetItemLinkInfo(itemlink)
         icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
-        local receivedBy = ""
+        local receivedBy = "CRAFT"
         local gainorloss = "|c0B610B"
         local logPrefix = "Received"
         local stack = stackCountChange
