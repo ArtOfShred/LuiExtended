@@ -93,7 +93,7 @@ Experience Announcements
 Unit Frames
 - Added the ability to individually control the size of custom Magic and Stamina bar.
 - Added the ability to hide the Magicka or Stamina bar labels, or hide the bars entirely.
-- Updated the icons on unit frames to be more consistent, as well as replaced the execute skull texture.
+- Updated the icons on unit frames to be more consistent, as well as replaced the execute skull texture. 
 - Added option to choose method of name display for player targets - Character Name, Display Name, or both.
 -------------------------------------------
 
