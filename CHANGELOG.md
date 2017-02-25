@@ -1,3 +1,23 @@
+Version 4.99e
+- Sending mail with Gold currency change announcements toggled on, but currency icons off will no longer throw a UI error from attempting to reference an invalid variable.
+- Added a description of the SLASH COMMANDS available in LUI to the main Addon settings window.
+- Fixed a minor issue where Costume items were being hidden by the Hide Trash chat announcements option.
+
+Version 4.99d
+- Fixed a silly oversight that caused groups of items looted from the mail to all share the icon of the first looted item. (Accidentally declared a variable as global instead of local).
+- Fixed a double declaration of a variable in SpellCastBuffs.lua (shouldn't have effected anything, but just in case).
+
+Version 4.99c
+- Fixed an issue with raid frames where players going offline was throwing UI errors.
+- Fixed a minor issue with raid frames that caused player names to clip into the OFFLINE label if present.
+- The Unit Frames Champion XP bar now shows the correct value for completion toward the next level.
+- Currency Change Reason 32 (AH Refund) now has a proper context message and will no longer display a debug message.
+- Lockpick failure message no longer insults you :-D
+- Grey quality clothing looted when stealing, as well as disguises looted are no longer considered trash when the filter option for hiding Trash items is toggled on.
+- Disguises have been added into the show prominent loot setting.
+- Show only prominent items option no longer unintentionally applies to items received in the mail.
+- Made some changes to further integrate the mail components with one another - this should hopefully stop UI errors from being thrown occasionally.
+
 Version 4.99b
 - Fixed MAJOR issue with debuffs not displaying on the player.
 - Added separate Player Buff, Player Debuff, Target Buff, and Target Debuff containers when you toggle the Hard-Lock position to Unit Frames option off. This allows you to have separate buff/debuff frames without using the LUI player & target frames.
@@ -13,35 +33,64 @@ Version 4.99a
 - Fixed an issue with the /regroup command not displaying names correctly and trying to reinvite before the group was disbanded. (Please let me know if you experience issues with this still!)
 - Added a toggle option for social notifications (friend/ignore list messages)
 
+-------------------------------------------
 Version 4.99
-- Tons of new icons for various player passives and NPC abilites
-    - Part of an ongoing effort to remove placeholder icons from the game, I've created a steadily growing set of new icons for various NPC abilities. Note that there are still MANY things to do here, this is just the start.
-- New icons for Potions, Poisons, Consumables and Momentos
-    - Potions and Poisons now have their own buff or debuff icons depending on context. Unique food and drink items now have unique icons. Standard food and drink types share the same buffs depending on quality and stats, the icons have now been updated to show the quality of the food buff.
-- Implementation of new Zenimax Major/Minor Buff & Debuff icons
-    - With the release of Homestead, Zenimax added new icons to game for major and minor buffs and debuffs. These will likely be used when Zenimax implements their own buff frames. LUI is now currently using these icons. If you prefer the old style icons, I'll be uploading a small override file you can use in a bit.
-- Overhaul of Chat Announcements
-    - Display notifications for Experience gain in and outside of combat.
-    - Display Gold, AP, TelVar, or Writ Voucher gains and losses with context sensitive messages
-    - Display items acquired via looting, mail, trading, crafting, vendoring, banking, and questing. With the option to display Trait, Armor Type, and Style as well.
-    - Option to display items consumed when crafting, items destroyed, and items confiscated by guards.
-    - Potential to combine vendor item purchase notifications with the relevant currency change.
-    - Display Group messages when players leave or enter a group, and LFG votekicks, ready checks, and queue status.
-    - Display Guild invitations, members joining or leaving, rank changes, and MOTD changes.
-    - Display Social notifications for friends invitations, friend list changes as well as ignore list changes.
-    - Display custom notifications for various activities such as receiving mail, upgrading bag/bank space, horse upgrades, lockpicking.
-    - Extensive control of formatting options for messages displayed to chat.
-- New Slash Command Features
-    - /home - Returns you to your primary home.
-    - /disband - Disbands your current group.
-    - /regroup - A simple single command for group leaders, will disband your current group and then reinvite all party members back shortly after.
-    - /ginvite1/2/3/4/5 "name" - Option to invite a player to a guild.
-    - Expect more slash commands to appear in future updates!
-- Additional Noteworthy Changes
-    - Ability to individually control the size of custom Stamina and Magicka bar.
-    - Ability to hide the resource label or entire Stamina or Magicka bar.
-    - Long Term Buffs container now supports horizontal orientation!
-    - Fixed ultimate % value not updating correctly when bar swapping outside of combat.
+Overall Changes
+- Added new Slash commands: /home, /disband, /regroup, ginvite1,2,3,4,5.
+- Updated options for any messages LUI prints to chat. By default messages are no longer printed to system chat by default. This functionality was intended to allow players using pChat to take advantage of pChat's feature to preserve messages in chat between sessions.
+- Timestamp now has more options and the color now matches that of pChat.
+- Reorganized the folder structure of the addon, as well as updated Addon libraries.
+
+Combat Info
+- Fixed an issue with Ultimate % values not correctly updating outside of combat when swapping weapons.
+
+Buffs and Debuffs
+- Adjusted buffs and debuffs component for the new API changes, now players will only be able to see self applied or pet applied debuffs, as well as major/minor category debuffs.
+- Updated Major and Minor debuffs to use the new Zenimax icons added to the game in Homestead.
+- Implemented horizontal container orientation for long term effects.
+- Updated a number of buffs that display a green highlight on the ability bar while their duration is active.
+- Updated the duration of ground tracking effects to be more accurate based on cast time. There is still some work to do here.
+- Added a significant amount of new icons for player effects - Potions, poisons, food, experience consumables, momentos, and weapon enchants.
+- Added a significant amount of new icons for NPC abilities, as well as updating icons for certain player passives, champion point passives with active components, etc..
+- Many placeholder icons used by abilities or NPC abilites have been updated.
+- Implemented new "fake" buff tracking to display a buff/debuff for effects that normally do not show one in the base game. This includes the weapon and spell damage weapon enchant procs.
+- Utilized new "fake" buff option to make a far more accurate display of Stagger effects on players and NPC's. Now for example, when a heavy attack from an NPC is blocked, the stagger effect should appear to smoothly transition into a stun as the mob staggers backwards.
+- Altered a significant amount of NPC abilities and quest based buffs and debuffs to correctly display as a buff or debuff if they were not previously, as well as hid multiple useless debuffs that provided no useful feedback to the player.
+- Corrected errors with various ability name inconsistency to provide a more polished experience. Renamed the Ability ID for weapon medium attacks so they now properly display as "Medium Attack."
+NOTE: Buffs and debuff changes will also apply to Combat Cloud in the future, as well as support Combat Metrics!
+
+Chat Announcements
+Misc Announcements
+- Added option to choose method of name display printed to chat for players - Character Name, Display Name, or both.
+- Added option to print Group Event messages to chat - Leaving/joining a group, disbanding, queueing, ready checks, votekicks.
+- Added option to print Trade Event messages to chat - Trade invitation and success/cancellation.
+- Added option to print Mail Event messages to chat - Mail sent, received, or deleted.
+- Added option to print Guild notifications to chat - Invites, members leaving, as well as rank changes.
+- Added option to display a message when Bag/Bank space upgrades are purchased, as well as Riding Skill Upgrades
+- Added option to display a notification when lockpick attempts succeed or fail.
+- Added option to display a message when gold or items are confiscated by a guard.
+Currency Announcements
+- Expanded option to display currency changes for Gold, AP, Tel Var Stones, and Writ Vouchers with multiple options for customization.
+- Multiple options for currency color, method of display, and syntax are available.
+Loot Announcements
+- Updated option to display items looted - with the option to filter certain items, as well as show notible items looted by group members.
+- Added option to display inventory changes from selling or buying at a vendor or laundering at a fence.
+- Added option to display inventory changes from depositing or withdrawing from the bank.
+- Added option to display inventory changes from sending and receiving mail.
+- Added option to display inventory changes from trading.
+- Added option to display inventory changes from crafting items - with an optional setting to show materials that are consumed.
+- Added option to display when items are destroyed.
+- Added option to display the Armor Type, Trait, and Style of an item.
+- New option to MERGE the results of inventory changes with currency changes where applicable.
+Experience Announcements
+- Significantly overhauled the experience component - now allows the display of experience gain and levelups. With options for formatting, and the ability to toggle the display of experience gain in combat.
+
+Unit Frames
+- Added the ability to individually control the size of custom Magic and Stamina bar.
+- Added the ability to hide the Magicka or Stamina bar labels, or hide the bars entirely.
+- Updated the icons on unit frames to be more consistent, as well as replaced the execute skull texture.
+- Added option to choose method of name display for player targets - Character Name, Display Name, or both.
+-------------------------------------------
 
 Version 4.35
 - Buff: Added Magicka Bomb to Debuffs re-adjusted some vMOL debuffs and replaced rending slashes with the actual icon instead of the bleed tick icon.
