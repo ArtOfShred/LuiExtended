@@ -35,6 +35,7 @@ Version 4.99a
 
 -------------------------------------------
 Version 4.99
+
 Overall Changes
 - Added new Slash commands: /home, /disband, /regroup, ginvite1,2,3,4,5.
 - Updated options for any messages LUI prints to chat. By default messages are no longer printed to system chat by default. This functionality was intended to allow players using pChat to take advantage of pChat's feature to preserve messages in chat between sessions.
@@ -60,6 +61,7 @@ Buffs and Debuffs
 NOTE: Buffs and debuff changes will also apply to Combat Cloud in the future, as well as support Combat Metrics!
 
 Chat Announcements
+
 Misc Announcements
 - Added option to choose method of name display printed to chat for players - Character Name, Display Name, or both.
 - Added option to print Group Event messages to chat - Leaving/joining a group, disbanding, queueing, ready checks, votekicks.
@@ -69,9 +71,11 @@ Misc Announcements
 - Added option to display a message when Bag/Bank space upgrades are purchased, as well as Riding Skill Upgrades
 - Added option to display a notification when lockpick attempts succeed or fail.
 - Added option to display a message when gold or items are confiscated by a guard.
+
 Currency Announcements
 - Expanded option to display currency changes for Gold, AP, Tel Var Stones, and Writ Vouchers with multiple options for customization.
 - Multiple options for currency color, method of display, and syntax are available.
+
 Loot Announcements
 - Updated option to display items looted - with the option to filter certain items, as well as show notible items looted by group members.
 - Added option to display inventory changes from selling or buying at a vendor or laundering at a fence.
@@ -82,6 +86,7 @@ Loot Announcements
 - Added option to display when items are destroyed.
 - Added option to display the Armor Type, Trait, and Style of an item.
 - New option to MERGE the results of inventory changes with currency changes where applicable.
+
 Experience Announcements
 - Significantly overhauled the experience component - now allows the display of experience gain and levelups. With options for formatting, and the ability to toggle the display of experience gain in combat.
 
