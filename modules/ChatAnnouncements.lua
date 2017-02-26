@@ -61,6 +61,7 @@ CA.D = {
     CurrencyContextMessageDown    = "",
     CurrencyTotalMessage          = "[New Total]",
     ExperienceLevelUp             = true,
+    LevelUpIcon                   = true,
     Experience                    = true,
     ExperienceContextName         = "[Earned]",
     ExperienceName                = "XP",
@@ -2254,7 +2255,7 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
     if receivedBy == "CRAFT"  and gainorloss == "|c0B610B" then
         itemstring1gain = strfmt("%s%s%s%s|r ",gainorloss, bracket1, logPrefix, bracket2)
      
-        if itemstring2gain ~= "" then itemstring2gain = strfmt("%s, %s%s%s%s%s%s%s%s%s", itemstring2gain, icon,
+        if itemstring2gain ~= "" then itemstring2gain = strfmt("%s%s,|r %s%s%s%s%s%s%s%s%s", itemstring2gain, gainorloss, icon,
             itemName2,
             itemName:gsub("^|H0", "|H1", 1),
             formattedQuantity,
@@ -2279,7 +2280,7 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
     if receivedBy == "CRAFT"  and gainorloss == "|ca80700" then
         itemstring1loss = strfmt("%s%s%s%s|r ",gainorloss, bracket1, logPrefix, bracket2)
      
-        if itemstring2loss ~= "" then itemstring2loss = strfmt("%s, %s%s%s%s%s%s%s%s%s", itemstring2loss, icon,
+        if itemstring2loss ~= "" then itemstring2loss = strfmt("%s%s,|r %s%s%s%s%s%s%s%s%s", itemstring2loss, gainorloss, icon,
             itemName2,
             itemName:gsub("^|H0", "|H1", 1),
             formattedQuantity,
@@ -2483,27 +2484,31 @@ function CA.OnTradeSuccess(eventCode)
         if TradeInvitee == "" then tradetarget = TradeInviter end
 
         for indexOut = 1, #g_TradeStacksOut do
-        local gainorloss = "|ca80700"
-        local logPrefix = "Traded"
-        if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
-        local receivedBy = tradetarget
-        local istrade = true
-        local item = g_TradeStacksOut[indexOut]
-        icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-        --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
-        CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss, istrade)
+            if g_TradeStacksOut[indexOut] ~= nil then
+                local gainorloss = "|ca80700"
+                local logPrefix = "Traded"
+                if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
+                local receivedBy = tradetarget
+                local istrade = true
+                local item = g_TradeStacksOut[indexOut]
+                icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+                --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
+                CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss, istrade)
+            end
         end
 
         for indexIn = 1, #g_TradeStacksIn do
-        local gainorloss = "|c0B610B"
-        local logPrefix = "Traded"
-        if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
-        local receivedBy = tradetarget
-        local istrade = true
-        local item = g_TradeStacksIn[indexIn]
-        icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-        --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
-        CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss, istrade)
+            if g_TradeStacksIn[indexIn] ~= nil then
+                local gainorloss = "|c0B610B"
+                local logPrefix = "Traded"
+                if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
+                local receivedBy = tradetarget
+                local istrade = true
+                local item = g_TradeStacksIn[indexIn]
+                icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+                --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
+                CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss, istrade)
+            end
         end
 
     end
@@ -2663,9 +2668,11 @@ end
 function CA.RegisterXPEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LEVEL_UPDATE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CHAMPION_POINT_UPDATE)
     if CA.SV.Experience or CA.SV.ExperienceLevelUp then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN, CA.OnExperienceGain)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEVEL_UPDATE, CA.OnLevelUpdate)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_UPDATE, CA.OnChampionUpdate)
 
         CA.LevelUpdateHelper()
     end
@@ -2722,7 +2729,9 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
     if unitTag == ("player") then
 
         CA.LevelUpdateHelper()
-
+        
+        local icon = CA.SV.LevelUpIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_normal.dds|t ") or ( "" )
+        
         if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
             printToChat (QuestString2)
         elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
@@ -2732,7 +2741,7 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
         end
 
         if CA.SV.ExperienceLevelUp then
-            printToChat ("You have reached " .. LevelContext .. " " .. CurrentLevel .. "!")
+            printToChat ("You have reached " .. icon .. LevelContext .. " " .. CurrentLevel .. "!")
         end
     end
     QuestString1 = ""
@@ -2741,6 +2750,37 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
     Crossover = 0
     QuestCombiner = 0
 end
+
+function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChampionPoints)
+    if unitTag == ("player") then
+    
+        CA.LevelUpdateHelper()
+    
+        local attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned()+1 )
+        local icon
+        if attribute == ATTRIBUTE_NONE then icon = CA.SV.LevelUpIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_champion.dds|t ") or ( "" ) end
+        if attribute == ATTRIBUTE_HEALTH then icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_health_icon-hud-32.dds|t ") or ( "" ) end
+        if attribute == ATTRIBUTE_MAGICKA then icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_magicka_icon-hud-32.dds|t ") or ( "" ) end
+        if attribute == ATTRIBUTE_STAMINA then icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.ddst ") or ( "" ) end
+        
+        if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
+            printToChat (QuestString2)
+        elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
+            printToChat(QuestString1)
+        elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
+            printToChat(QuestString2)
+        end
+
+        if CA.SV.ExperienceLevelUp then
+            printToChat ("You have reached " .. icon .. LevelContext .. " " .. CurrentLevel .. "!")
+        end
+    end
+    QuestString1 = ""
+    QuestString2 = ""
+    WeLeveled = 0
+    Crossover = 0
+    QuestCombiner = 0
+end     
 
 function CA.OnExperienceGain(eventCode, reason, level, previousExperience, currentExperience, championPoints)
     -- d("Experience Gain) previousExperience: " .. previousExperience .. " --- " .. "currentExperience: " .. currentExperience)
@@ -2844,7 +2884,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 
             --[[ Crossover from Normal XP --> Champion XP modifier ]] --
             if Crossover == 1 then
-                progress = "(Champion Level achieved!)"
+                progress = (progressBrackets .. " (Champion Level Achieved!)")
             end
 
         if reason == 1 then
@@ -3262,7 +3302,7 @@ if bagId == 1 then --
 
             local change = (stackCountChange * -1)
             local endcount = g_InventoryStacks[slotId].stack - change
-            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+            if logPrefix ~= "Used" or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
             if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
                 g_InventoryStacks[slotId] = nil
             else
@@ -3344,7 +3384,7 @@ if bagId == 2 then --
 
             local change = (stackCountChange * -1)
             local endcount = g_BankStacks[slotId].stack - change
-            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+            if logPrefix ~= "Used" or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
             if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
                 g_BankStacks[slotId] = nil
             else
@@ -3375,7 +3415,7 @@ end
             if itemtype == itemtype == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL or itemtype == ITEMTYPE_CLOTHIER_RAW_MATERIAL or itemtype == ITEMTYPE_WOODWORKING_RAW_MATERIAL then logPrefix = "Refined" end
         end
 
-        CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss)
+        if logPrefix ~= "Used" or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss) end
     end
 
 ----------------------------------------------------------------------------------
@@ -3500,6 +3540,29 @@ if bagId == 2 then --
     end
 ----------------------------------------------------------------------------------
 
+
+
+end
+
+-- POSSIBLY ADD MORE SUPPORT HERE FOR CRAFT BAG EXTENDED, RIGHT NOW STOWING OR RETRIEVING MATERIALS TO PLAYER BAG SHOWS DEPOSIT/WITHDRAW MESSAGE
+
+if bagId == 5 then --
+
+    local itemlink = CA.GetItemLinkFromItemId(slotId)
+    local icon = GetItemLinkInfo(itemlink)
+    icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
+    local receivedBy = ""
+    local gainorloss = "|c0B610B"
+    local logPrefix = "Withdrew"
+    local stack = stackCountChange
+
+    if stackCountChange < 1 then
+        gainorloss = "|ca80700"
+        logPrefix = "Deposited"
+        stack = stackCountChange * -1
+    end
+
+    CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss)
 end
 
 ItemWasDestroyed = false
@@ -3510,7 +3573,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
 
 ---------------------------------- INVENTORY ----------------------------------
 
-if bagId == 1 then --
+if bagId == 1 then
 
     local receivedBy = ""
 
@@ -3574,7 +3637,7 @@ end
 
 ---------------------------------- CRAFTING BAG ----------------------------------
 
-    if bagId == 5 then --
+    if bagId == 5 then
         local receivedBy = ""
         local gainorloss = "|c0B610B"
         local logPrefix = "Received"
@@ -3728,7 +3791,7 @@ function CA.JusticeRemovePrint()
             if justiceitem == nil then
                 local seticon = ( CA.SV.LootIcons and inventoryitem.icon and inventoryitem.icon ~= "" ) and ("|t16:16:" .. inventoryitem.icon .. "|t ") or ""
                 local stack = inventoryitem.stack
-                local receivedBy = ""
+                local receivedBy = "CRAFT"
                 local gainorloss = (strfmt("|ca80700"))
                 local logPrefix = "Confiscated"
                 if CA.SV.ShowConfiscate then

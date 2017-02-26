@@ -161,7 +161,7 @@ local PendingRegroup  = false
 -- Return a formatted time
 -- Stolen from pChat, thanks @Ayantir
 function LUIE.CreateTimestamp(timeStr, formatStr)
-    formatStr = formatStr or LUIE.D.TimeStampFormat
+    formatStr = formatStr or LUIE.SV.TimeStampFormat
 
     -- Split up default timestamp
     local hours, minutes, seconds = timeStr:match("([^%:]+):([^%:]+):([^%:]+)")
@@ -207,8 +207,8 @@ end
 
 -- Easy Print to Chat
 function LUIE.PrintToChat(msg)
-    if LUIE.D.ChatUseSystem and CHAT_SYSTEM.primaryContainer then
-        local msg = LUIE.FormatMessage(msg or "no message", LUIE.D.TimeStamp)
+    if LUIE.SV.ChatUseSystem and CHAT_SYSTEM.primaryContainer then
+        local msg = LUIE.FormatMessage(msg or "no message", LUIE.SV.TimeStamp)
         -- Post as a System message so that it can appear in multiple tabs.
         CHAT_SYSTEM.primaryContainer:OnChatEvent(nil, msg, CHAT_CATEGORY_SYSTEM)
     else
