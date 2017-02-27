@@ -51,6 +51,7 @@ ZO_CreateStringId("SI_LUIE_CA_XP_LVL_ANNOUNCE1",                        "You hav
 ZO_CreateStringId("SI_LUIE_CA_XP_LVL_ANNOUNCE2",                        "You have reached <<1>><<2>> <<3>>")
 ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE1",                        "Champion Level Achieved! <<1>><<2>>")
 ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE2",                        "Champion Level Achieved! <<1>><<2>> <<3>>")
+ZO_CreateStringId("SI_LUIE_CA_DEBUG_MSG_CURRENCY",                      "Currency Change Reason <<1>> Triggered - Please post on the LUI Extended comments section on ESOUI.com describing what caused this message. Thanks!")
 
 -- Default overwrites
 ZO_CreateStringId("SI_LUIE_GROUPINVITERESPONSE0",                       "Could not find a player named |cFEFEFE\"<<1>>\"|r to invite.")

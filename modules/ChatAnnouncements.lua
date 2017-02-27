@@ -1100,34 +1100,35 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
 
     -- ==============================================================================
     -- DEBUG EVENTS WE DON'T KNOW YET
-    elseif reason == 6 then message = "Currency Change Reason 6 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 7 then message = "Currency Change Reason 7 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 12 then message = "Currency Change Reason 12 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 14 then message = "Currency Change Reason 14 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 15 then message = "Currency Change Reason 15 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 16 then message = "Currency Change Reason 16 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 18 then message = "Currency Change Reason 18 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 20 then message = "Currency Change Reason 20 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 21 then message = "Currency Change Reason 21 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 22 then message = "Currency Change Reason 22 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 23 then message = "Currency Change Reason 23 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 24 then message = "Currency Change Reason 24 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 25 then message = "Currency Change Reason 25 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 26 then message = "Currency Change Reason 26 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 27 then message = "Currency Change Reason 27 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 30 then message = "Currency Change Reason 30 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 34 then message = "Currency Change Reason 34 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 36 then message = "Currency Change Reason 36 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 37 then message = "Currency Change Reason 37 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 38 then message = "Currency Change Reason 38 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 39 then message = "Currency Change Reason 39 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 40 then message = "Currency Change Reason 40 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 41 then message = "Currency Change Reason 41 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 46 then message = "Currency Change Reason 46 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 53 then message = "Currency Change Reason 53 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 54 then message = "Currency Change Reason 54 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 58 then message = "Currency Change Reason 58 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 66 then message = "Currency Change Reason 66 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
+    local dbgmessage = "Currency Change Reason <<1>> Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!" --SI_LUIE_CA_DEBUG_MSG_CURRENCY
+    elseif reason == 6 then message = strformat(dbgmessage, reason)
+    elseif reason == 7 then message = strformat(dbgmessage, reason)
+    elseif reason == 12 then message = strformat(dbgmessage, reason)
+    elseif reason == 14 then message = strformat(dbgmessage, reason)
+    elseif reason == 15 then message = strformat(dbgmessage, reason)
+    elseif reason == 16 then message = strformat(dbgmessage, reason)
+    elseif reason == 18 then message = strformat(dbgmessage, reason)
+    elseif reason == 20 then message = strformat(dbgmessage, reason)
+    elseif reason == 21 then message = strformat(dbgmessage, reason)
+    elseif reason == 22 then message = strformat(dbgmessage, reason)
+    elseif reason == 23 then message = strformat(dbgmessage, reason)
+    elseif reason == 24 then message = strformat(dbgmessage, reason)
+    elseif reason == 25 then message = strformat(dbgmessage, reason)
+    elseif reason == 26 then message = strformat(dbgmessage, reason)
+    elseif reason == 27 then message = strformat(dbgmessage, reason)
+    elseif reason == 30 then message = strformat(dbgmessage, reason)
+    elseif reason == 34 then message = strformat(dbgmessage, reason)
+    elseif reason == 36 then message = strformat(dbgmessage, reason)
+    elseif reason == 37 then message = strformat(dbgmessage, reason)
+    elseif reason == 38 then message = strformat(dbgmessage, reason)
+    elseif reason == 39 then message = strformat(dbgmessage, reason)
+    elseif reason == 40 then message = strformat(dbgmessage, reason)
+    elseif reason == 41 then message = strformat(dbgmessage, reason)
+    elseif reason == 46 then message = strformat(dbgmessage, reason)
+    elseif reason == 53 then message = strformat(dbgmessage, reason)
+    elseif reason == 54 then message = strformat(dbgmessage, reason)
+    elseif reason == 58 then message = strformat(dbgmessage, reason)
+    elseif reason == 66 then message = strformat(dbgmessage, reason)
     -- END DEBUG EVENTS
     -- ==============================================================================
 
@@ -1347,34 +1348,35 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
 
     -- ==============================================================================
     -- DEBUG EVENTS WE DON'T KNOW YET
-    if reason == 6 then message = "Currency Change Reason 6 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 7 then message = "Currency Change Reason 7 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 12 then message = "Currency Change Reason 12 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 14 then message = "Currency Change Reason 14 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 15 then message = "Currency Change Reason 15 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 16 then message = "Currency Change Reason 16 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 18 then message = "Currency Change Reason 18 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 20 then message = "Currency Change Reason 20 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 21 then message = "Currency Change Reason 21 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 22 then message = "Currency Change Reason 22 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 23 then message = "Currency Change Reason 23 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 24 then message = "Currency Change Reason 24 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 25 then message = "Currency Change Reason 25 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 26 then message = "Currency Change Reason 26 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 27 then message = "Currency Change Reason 27 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 30 then message = "Currency Change Reason 30 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 34 then message = "Currency Change Reason 34 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 36 then message = "Currency Change Reason 36 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 37 then message = "Currency Change Reason 37 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 38 then message = "Currency Change Reason 38 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 39 then message = "Currency Change Reason 39 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 40 then message = "Currency Change Reason 40 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 41 then message = "Currency Change Reason 41 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 46 then message = "Currency Change Reason 46 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 53 then message = "Currency Change Reason 53 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 54 then message = "Currency Change Reason 54 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 58 then message = "Currency Change Reason 58 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 66 then message = "Currency Change Reason 66 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
+    local dbgmessage = "Currency Change Reason <<1>> Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!" --SI_LUIE_CA_DEBUG_MSG_CURRENCY
+    if reason == 6 then message = strformat(dbgmessage, reason)
+    elseif reason == 7 then message = strformat(dbgmessage, reason)
+    elseif reason == 12 then message = strformat(dbgmessage, reason)
+    elseif reason == 14 then message = strformat(dbgmessage, reason)
+    elseif reason == 15 then message = strformat(dbgmessage, reason)
+    elseif reason == 16 then message = strformat(dbgmessage, reason)
+    elseif reason == 18 then message = strformat(dbgmessage, reason)
+    elseif reason == 20 then message = strformat(dbgmessage, reason)
+    elseif reason == 21 then message = strformat(dbgmessage, reason)
+    elseif reason == 22 then message = strformat(dbgmessage, reason)
+    elseif reason == 23 then message = strformat(dbgmessage, reason)
+    elseif reason == 24 then message = strformat(dbgmessage, reason)
+    elseif reason == 25 then message = strformat(dbgmessage, reason)
+    elseif reason == 26 then message = strformat(dbgmessage, reason)
+    elseif reason == 27 then message = strformat(dbgmessage, reason)
+    elseif reason == 30 then message = strformat(dbgmessage, reason)
+    elseif reason == 34 then message = strformat(dbgmessage, reason)
+    elseif reason == 36 then message = strformat(dbgmessage, reason)
+    elseif reason == 37 then message = strformat(dbgmessage, reason)
+    elseif reason == 38 then message = strformat(dbgmessage, reason)
+    elseif reason == 39 then message = strformat(dbgmessage, reason)
+    elseif reason == 40 then message = strformat(dbgmessage, reason)
+    elseif reason == 41 then message = strformat(dbgmessage, reason)
+    elseif reason == 46 then message = strformat(dbgmessage, reason)
+    elseif reason == 53 then message = strformat(dbgmessage, reason)
+    elseif reason == 54 then message = strformat(dbgmessage, reason)
+    elseif reason == 58 then message = strformat(dbgmessage, reason)
+    elseif reason == 66 then message = strformat(dbgmessage, reason)
     end
     -- END DEBUG EVENTS
     -- ==============================================================================
@@ -1469,34 +1471,35 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
 
     -- ==============================================================================
     -- DEBUG EVENTS WE DON'T KNOW YET
-    elseif reason == 6 then message = "Currency Change Reason 6 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 7 then message = "Currency Change Reason 7 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 12 then message = "Currency Change Reason 12 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 14 then message = "Currency Change Reason 14 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 15 then message = "Currency Change Reason 15 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 16 then message = "Currency Change Reason 16 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 18 then message = "Currency Change Reason 18 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 20 then message = "Currency Change Reason 20 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 21 then message = "Currency Change Reason 21 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 22 then message = "Currency Change Reason 22 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 23 then message = "Currency Change Reason 23 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 24 then message = "Currency Change Reason 24 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 25 then message = "Currency Change Reason 25 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 26 then message = "Currency Change Reason 26 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 27 then message = "Currency Change Reason 27 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 30 then message = "Currency Change Reason 30 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 34 then message = "Currency Change Reason 34 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 36 then message = "Currency Change Reason 36 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 37 then message = "Currency Change Reason 37 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 38 then message = "Currency Change Reason 38 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 39 then message = "Currency Change Reason 39 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 40 then message = "Currency Change Reason 40 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 41 then message = "Currency Change Reason 41 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 46 then message = "Currency Change Reason 46 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 53 then message = "Currency Change Reason 53 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 54 then message = "Currency Change Reason 54 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 58 then message = "Currency Change Reason 58 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 66 then message = "Currency Change Reason 66 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
+    local dbgmessage = "Currency Change Reason <<1>> Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!" --SI_LUIE_CA_DEBUG_MSG_CURRENCY
+    elseif reason == 6 then message = stformat(dbgmessage, reason)
+    elseif reason == 7 then message = stformat(dbgmessage, reason)
+    elseif reason == 12 then message = stformat(dbgmessage, reason)
+    elseif reason == 14 then message = stformat(dbgmessage, reason)
+    elseif reason == 15 then message = stformat(dbgmessage, reason)
+    elseif reason == 16 then message = stformat(dbgmessage, reason)
+    elseif reason == 18 then message = stformat(dbgmessage, reason)
+    elseif reason == 20 then message = stformat(dbgmessage, reason)
+    elseif reason == 21 then message = stformat(dbgmessage, reason)
+    elseif reason == 22 then message = stformat(dbgmessage, reason)
+    elseif reason == 23 then message = stformat(dbgmessage, reason)
+    elseif reason == 24 then message = stformat(dbgmessage, reason)
+    elseif reason == 25 then message = stformat(dbgmessage, reason)
+    elseif reason == 26 then message = stformat(dbgmessage, reason)
+    elseif reason == 27 then message = stformat(dbgmessage, reason)
+    elseif reason == 30 then message = stformat(dbgmessage, reason)
+    elseif reason == 34 then message = stformat(dbgmessage, reason)
+    elseif reason == 36 then message = stformat(dbgmessage, reason)
+    elseif reason == 37 then message = stformat(dbgmessage, reason)
+    elseif reason == 38 then message = stformat(dbgmessage, reason)
+    elseif reason == 39 then message = stformat(dbgmessage, reason)
+    elseif reason == 40 then message = stformat(dbgmessage, reason)
+    elseif reason == 41 then message = stformat(dbgmessage, reason)
+    elseif reason == 46 then message = stformat(dbgmessage, reason)
+    elseif reason == 53 then message = stformat(dbgmessage, reason)
+    elseif reason == 54 then message = stformat(dbgmessage, reason)
+    elseif reason == 58 then message = stformat(dbgmessage, reason)
+    elseif reason == 66 then message = stformat(dbgmessage, reason)
     -- END DEBUG EVENTS
     -- ==============================================================================
 
@@ -1597,34 +1600,36 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
 
     -- ==============================================================================
     -- DEBUG EVENTS WE DON'T KNOW YET
-    if reason == 6 then message = "Currency Change Reason 6 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 7 then message = "Currency Change Reason 7 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 12 then message = "Currency Change Reason 12 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 14 then message = "Currency Change Reason 14 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 15 then message = "Currency Change Reason 15 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 16 then message = "Currency Change Reason 16 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 18 then message = "Currency Change Reason 18 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 20 then message = "Currency Change Reason 20 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 21 then message = "Currency Change Reason 21 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 22 then message = "Currency Change Reason 22 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 23 then message = "Currency Change Reason 23 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 24 then message = "Currency Change Reason 24 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 25 then message = "Currency Change Reason 25 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 26 then message = "Currency Change Reason 26 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 27 then message = "Currency Change Reason 27 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 30 then message = "Currency Change Reason 30 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 34 then message = "Currency Change Reason 34 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 36 then message = "Currency Change Reason 36 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 37 then message = "Currency Change Reason 37 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 38 then message = "Currency Change Reason 38 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 39 then message = "Currency Change Reason 39 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 40 then message = "Currency Change Reason 40 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 41 then message = "Currency Change Reason 41 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 46 then message = "Currency Change Reason 46 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 53 then message = "Currency Change Reason 53 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 54 then message = "Currency Change Reason 54 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 58 then message = "Currency Change Reason 58 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 66 then message = "Currency Change Reason 66 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
+    local dbgmessage = "Currency Change Reason <<1>> Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!" --SI_LUIE_CA_DEBUG_MSG_CURRENCY
+
+    if reason == 6 then message = strformat(dbgmessage, reason)
+    elseif reason == 7 then message = strformat(dbgmessage, reason)
+    elseif reason == 12 then message = strformat(dbgmessage, reason)
+    elseif reason == 14 then message = strformat(dbgmessage, reason)
+    elseif reason == 15 then message = strformat(dbgmessage, reason)
+    elseif reason == 16 then message = strformat(dbgmessage, reason)
+    elseif reason == 18 then message = strformat(dbgmessage, reason)
+    elseif reason == 20 then message = strformat(dbgmessage, reason)
+    elseif reason == 21 then message = strformat(dbgmessage, reason)
+    elseif reason == 22 then message = strformat(dbgmessage, reason)
+    elseif reason == 23 then message = strformat(dbgmessage, reason)
+    elseif reason == 24 then message = strformat(dbgmessage, reason)
+    elseif reason == 25 then message = strformat(dbgmessage, reason)
+    elseif reason == 26 then message = strformat(dbgmessage, reason)
+    elseif reason == 27 then message = strformat(dbgmessage, reason)
+    elseif reason == 30 then message = strformat(dbgmessage, reason)
+    elseif reason == 34 then message = strformat(dbgmessage, reason)
+    elseif reason == 36 then message = strformat(dbgmessage, reason)
+    elseif reason == 37 then message = strformat(dbgmessage, reason)
+    elseif reason == 38 then message = strformat(dbgmessage, reason)
+    elseif reason == 39 then message = strformat(dbgmessage, reason)
+    elseif reason == 40 then message = strformat(dbgmessage, reason)
+    elseif reason == 41 then message = strformat(dbgmessage, reason)
+    elseif reason == 46 then message = strformat(dbgmessage, reason)
+    elseif reason == 53 then message = strformat(dbgmessage, reason)
+    elseif reason == 54 then message = strformat(dbgmessage, reason)
+    elseif reason == 58 then message = strformat(dbgmessage, reason)
+    elseif reason == 66 then message = strformat(dbgmessage, reason)
     end
     -- END DEBUG EVENTS
     -- ==============================================================================
