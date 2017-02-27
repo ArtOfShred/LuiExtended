@@ -242,7 +242,7 @@ function CA.GuildMOTD(eventCode, guildId)
     local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
-    printToChat (strformat("The message of the day for <<1>> has changed:\n<<2>>", guildNameAlliance, motd))
+    printToChat(strformat("The message of the day for <<1>> has changed:\n<<2>>", guildNameAlliance, motd))
 end
 
 function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
@@ -505,24 +505,24 @@ function CA.GroupReplacementFound(eventCode)
 end
 
 function CA.ActivityComplete(eventCode)
-    printToChat("Activity complete!")
+    printToChat(GetString(SI_ACTIVITY_FINDER_ACTIVITY_COMPLETE_ANNOUNCEMENT_TEXT)) -- "Activity complete!"
 end
 
 function CA.ActivityStatusUpdate(eventCode, status)
     --d("status update:" .. status)
     if ShowActivityStatus then
         if status == ACTIVITY_FINDER_STATUS_NONE and WeAreQueued == true then
-            printToChat ("You are no longer queued in the group finder.")
+            printToChat("You are no longer queued in the group finder.")
             WeAreQueued = false
             ShowStatusDropMember = false
         end
         if status == ACTIVITY_FINDER_STATUS_QUEUED then
-            printToChat ("You are now queued in the group finder.")
+            printToChat("You are now queued in the group finder.")
             WeAreQueued = true
             ShowStatusDropMember = true
         end
         if status == ACTIVITY_FINDER_STATUS_IN_PROGRESS and ShowStatusDropMember == true then
-            printToChat ("You are no longer queued in the group finder.")
+            printToChat("You are no longer queued in the group finder.")
             WeAreQueued = false
             ShowStatusDropMember = false
         end
@@ -536,23 +536,23 @@ end
 function CA.ActivityQueueResult(eventCode, result)
     --d("ActivityQueueResult: " .. result)
     if result == ACTIVITY_QUEUE_RESULT_INCOMPATIBLE_GROUP then
-        printToChat("Cannot queue - the members of this group are role incompatible.")
+        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT9))) -- "Not Queued - The members of this group are role incompatible."
     end
 
     if result == ACTIVITY_QUEUE_RESULT_MEMBERS_OFFLINE then
-        printToChat("Cannot queue - one or more members are offline.")
+        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT14))) -- "Not Queued - One or more members are offline"
     end
 
     if result == ACTIVITY_QUEUE_RESULT_ON_QUEUE_COOLDOWN then
-        printToChat("Cannot queue - you or a member of your group queued too recently.")
+        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT12))) -- "Not Queued - You or a member of your group queued too recently."
     end
 
     if result == ACTIVITY_QUEUE_RESULT_MEMBER_CANCELED_READY_CHECK then
-        printToChat("Cannot join - One or more members canceled Ready Check.")
+        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT19))) -- "Not Queued - One or more members canceled Ready Check."
     end
 
     if result == ACTIVITY_QUEUE_RESULT_DLC_LOCKED then
-        printToChat("Cannot queue - you or members of your group do not have the DLC unlocked for that activity.")
+        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT6))) -- "Not Queued - You or members of your group do not have the DLC unlocked for that activity."
     end
 
     ShowRCUpdates = true
@@ -562,13 +562,15 @@ end
 
 function CA.ReadyCheckCancel(eventCode, reason)
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_MEMBER_CANCELED then
-        printToChat("Ready check cancelled, group member cancelled.")
+        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON3)) -- Ready check canceled, group member canceled.
     end
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_NOT_VIABLE then
-        printToChat("Ready check canceled, group was not viable.")
+        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON2)) -- Ready check canceled, group was not viable.
+
     end
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_FORMED_SUCCESSFULLY then
-        printToChat("Ready check succeeded, group formed!")
+        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON4)) -- Ready check succeeded, group formed!
+
     end
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_READY then
         printToChat("Ready check canceled, group was not ready.")
@@ -605,7 +607,7 @@ function CA.ReadyCheckUpdate(eventCode)
     end
 
     if not ShowRCUpdates and (tanksPending == 0 and healersPending == 0 and dpsPending == 0) then
-        printToChat("Ready check cancelled, group member cancelled.")
+        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON3)) -- "Ready check cancelled, group member cancelled."
     end
 
     ShowRCUpdates = false
@@ -622,7 +624,7 @@ end
 function CA.VoteNotify(eventCode)
     local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
     if electionType == 2 then -- Ready Check
-        printToChat("Are you ready?")
+        printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_MESSAGE)) -- "Are you ready?"
     end
 
     if electionType == 3 then -- Vote Kick
@@ -648,9 +650,15 @@ end
 function CA.VoteResult(eventCode, electionResult, descriptor)
     local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
     if descriptor == "[ZO_READY_CHECK]" then
-        if electionResult == 1 then printToChat("Someone in your group is not ready.") end -- Timed out
-        if electionResult == 4 then printToChat("Everyone in your group is ready!") end -- Ready
-        if electionResult == 5 then printToChat("Someone in your group is not ready.") end -- Someone declined
+        if electionResult == 1 then
+            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED)) -- "Someone in your group is not ready."
+        end
+        if electionResult == 4 then
+            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_PASSED)) -- "Everyone in your group is ready!"
+        end
+        if electionResult == 5 then
+            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED)) -- "Someone in your group is not ready."
+        end
     end
     if descriptor == "[ZO_NONE]" then
             local KickCarry
@@ -666,16 +674,20 @@ function CA.VoteResult(eventCode, electionResult, descriptor)
             if CA.SV.ChatPlayerDisplayOptions == 2 then KickCarry = characterNameLink end
             if CA.SV.ChatPlayerDisplayOptions == 3 then KickCarry = displayBoth end
 
-            if electionResult == 1 then printToChat (strformat("A vote to kick |cFEFEFE<<1>>|r from the group has failed.", KickCarry)) end
-            if electionResult == 2 then printToChat (strformat("A vote to kick |cFEFEFE<<1>>|r from the group has failed.", KickCarry)) end
-            if electionResult == 4 then printToChat (strformat("A vote to kick |cFEFEFE<<1>>|r from the group has passed.", KickCarry)) end
-            if electionResult == 5 then printToChat (strformat("A vote to kick |cFEFEFE<<1>>|r from the group has failed.", KickCarry)) end
+            if electionResult == 1 then printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has failed.", KickCarry)) end
+            if electionResult == 2 then printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has failed.", KickCarry)) end
+            if electionResult == 4 then printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has passed.", KickCarry)) end
+            if electionResult == 5 then printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has failed.", KickCarry)) end
     end
 end
 
 function CA.VoteRequested(eventCode, descriptor)
-    if descriptor == "[ZO_READY_CHECK]" then printToChat("You have initiated a ready check...") end
-    if descriptor == "[ZO_NONE]" then printToChat("You have initiated a vote...") end
+    if descriptor == "[ZO_READY_CHECK]" then
+        printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_REQUESTED)) -- "You have initiated a ready check..."
+    end
+    if descriptor == "[ZO_NONE]" then
+        printToChat(GetString(SI_GROUP_ELECTION_REQUESTED)) -- "You have initiated a vote..."
+    end
 end
 
 -- Helper function called after receiving a group invite. This ensures we don't ever have any issues seeing the first group invite message by renabling the Event handler after the first message arrives.
@@ -1217,7 +1229,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and not CA.SV.GoldChange then printToChat(strformat("COD Payment of <<1>> gold sent!", changetype)) end
         if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and CA.SV.GoldChange then printToChat("COD Payment sent!") end
         if CA.SV.MiscMail and mailCOD == 0 and mailMoney == 0 and postageAmount >= 1 then printToChat("Mail sent!") end
-        if CA.SV.MiscMail and mailMoney ~= 0 and not CA.SV.GoldChange then printToChat (strformat("Mail sent with <<1>> gold!", mailMoney) ) end
+        if CA.SV.MiscMail and mailMoney ~= 0 and not CA.SV.GoldChange then printToChat(strformat("Mail sent with <<1>> gold!", mailMoney) ) end
         if CA.SV.MiscMail and mailMoney ~= 0 and CA.SV.GoldChange then printToChat("Mail sent!") end
         if CA.SV.MiscMail and mailCOD ~= 0 and not CA.SV.GoldChange then printToChat(strformat("COD sent for <<1>> gold!", mailCOD) ) end
         if CA.SV.MiscMail and mailCOD ~= 0 and CA.SV.GoldChange then printToChat("COD sent!") end
@@ -2345,14 +2357,14 @@ end
 
 function CA.PrintMultiLineGain()
     if itemstring1gain == "" then return end
-    printToChat (itemstring1gain .. itemstring2gain)
+    printToChat(itemstring1gain .. itemstring2gain)
     itemstring1gain = ""
     itemstring2gain = ""
 end
 
 function CA.PrintMultiLineLoss()
     if itemstring1loss == "" then return end
-    printToChat (itemstring1loss .. itemstring2loss)
+    printToChat(itemstring1loss .. itemstring2loss)
     itemstring1loss = ""
     itemstring2loss = ""
 end
@@ -2408,7 +2420,7 @@ end
 
 function CA.TradeInviteDecline(eventCode)
     if CA.SV.MiscTrade then
-        printToChat("Trade invite declined.")
+        printToChat(GetString(SI_TRADE_INVITE_DECLINE)) -- "Trade invite declined."
     end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
@@ -2418,7 +2430,7 @@ end
 
 function CA.TradeInviteCancel(eventCode)
     if CA.SV.MiscTrade then
-        printToChat("Trade invite canceled.")
+        printToChat(GetString(SI_TRADE_CANCEL_INVITE)) -- "Trade invitation canceled."
     end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
@@ -2456,7 +2468,9 @@ end
 
 -- Cleanup if a Trade is canceled/exited
 function CA.TradeCancel(eventCode, cancelerName)
-    if CA.SV.MiscTrade then printToChat ("Trade canceled.") end
+    if CA.SV.MiscTrade then
+        printToChat(GetString(SI_TRADE_CANCELED)) -- "Trade canceled."
+    end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
     TradeInviter = ""
@@ -2464,7 +2478,9 @@ function CA.TradeCancel(eventCode, cancelerName)
 end
 
 function CA.TradeFail(eventCode, cancelerName)
-    if CA.SV.MiscTrade then printToChat ("Trade failed.") end
+    if CA.SV.MiscTrade then
+        printToChat(GetString(SI_TRADE_FAILED)) -- "Trade failed."
+    end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
     TradeInviter = ""
@@ -2475,9 +2491,11 @@ end
 function CA.OnTradeSuccess(eventCode)
     combostring = ""
 
-    if CA.SV.MiscTrade then printToChat ("Trade complete.") end
-    if CA.SV.MiscTrade and tradestring1 ~= "" then printToChat (tradestring1) end
-    if CA.SV.MiscTrade and tradestring2 ~= "" then printToChat (tradestring2) end
+    if CA.SV.MiscTrade then
+        printToChat(GetString(SI_TRADE_COMPLETE)) -- "Trade complete."
+    end
+    if CA.SV.MiscTrade and tradestring1 ~= "" then printToChat(tradestring1) end
+    if CA.SV.MiscTrade and tradestring2 ~= "" then printToChat(tradestring2) end
 
     if CA.SV.LootTrade then
 
@@ -2545,7 +2563,7 @@ end
 
 function CA.MailRemoved(eventCode)
     if CA.SV.MiscMail then
-        printToChat ("Mail deleted!")
+        printToChat("Mail deleted!")
     end
 end
 
@@ -2617,13 +2635,13 @@ end
 
 function CA.OnMailFail(eventCode, reason)
     if CA.SV.MiscMail then
-        if reason == 2 then printToChat ("Cannot send mail: Unknown Player.") end
-        if reason == 3 then printToChat ("Cannot send mail: Recipient's Inbox is full.") end
-        if reason == 4 then printToChat ("You cannot send mail to that recipient.") end
-        if reason == 5 then printToChat ("Cannot send mail: Not enough gold.") end
-        if reason == 11 then printToChat ("You cannot send mail to yourself.") end
-        if reason == 9 then printToChat ("You must attach at least one item for Cash on Delivery mail.") end
-        if reason == 7 then printToChat ("Cannot send mail: This mail is lacking a subject, body, or attachments.") end
+        if reason == 2 then printToChat("Cannot send mail: Unknown Player.") end
+        if reason == 3 then printToChat("Cannot send mail: Recipient's Inbox is full.") end
+        if reason == 4 then printToChat("You cannot send mail to that recipient.") end
+        if reason == 5 then printToChat("Cannot send mail: Not enough gold.") end
+        if reason == 11 then printToChat("You cannot send mail to yourself.") end
+        if reason == 9 then printToChat("You must attach at least one item for Cash on Delivery mail.") end
+        if reason == 7 then printToChat("Cannot send mail: This mail is lacking a subject, body, or attachments.") end
         MailStop = true
         zo_callLater(CA.MailClearVariables, 500)
     end
@@ -2721,7 +2739,7 @@ local CP_BAR_COLORS = ZO_CP_BAR_GRADIENT_COLORS -- Color for Champion Levels
 
 function CA.PrintBufferedXP()
     if XPCombatBufferValue ~= 0 then
-        printToChat (XPCombatBufferString) -- If we leveled up, then this variable will be true, and we want to smash all the buffered XP into the level up display!
+        printToChat(XPCombatBufferString) -- If we leveled up, then this variable will be true, and we want to smash all the buffered XP into the level up display!
         XPCombatBufferValue = 0
         XPCombatBufferString = ""
     end
@@ -2747,8 +2765,8 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
         
         if not LevelChanged1 or Crossover == 1 then
             if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat (QuestString1)
-                printToChat (QuestString2)
+                printToChat(QuestString1)
+                printToChat(QuestString2)
             elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
                 printToChat(QuestString1)
             elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
@@ -2757,21 +2775,21 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
         
             if CA.SV.ExperienceLevelUp and Crossover == 0 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat ("You have reached " .. icon .. CurrentLevelFormatted)
+                    printToChat(strformat("You have reached <<1>><<2>>", icon, CurrentLevelFormatted))
                 else
-                    printToChat ("You have reached " .. icon .. LevelContext .. " " .. CurrentLevel)
+                    printToChat(strformat("You have reached <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel))
                 end
             end
             if CA.SV.ExperienceLevelUp and Crossover == 1 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat ("Champion Level Achieved! " .. icon .. CurrentLevelFormatted)
+                    printToChat(strformat("Champion Level Achieved! <<1>><<2>>", icon, CurrentLevelFormatted))
                 else
-                    printToChat ("Champion Level Achieved! " .. icon .. LevelContext .. " " .. CurrentLevel)
+                    printToChat(strformat("Champion Level Achieved! <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel))
                 end
             end
         else
             if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat (QuestString1)
+                printToChat(QuestString1)
             elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
                 printToChat(QuestString1)
             elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
@@ -2780,21 +2798,21 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
         
             if CA.SV.ExperienceLevelUp and Crossover == 0 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat ("You have reached " .. icon .. CurrentLevelFormatted)
+                    printToChat(strformat("You have reached <<1>><<2>>", icon, CurrentLevelFormatted))
                 else
-                    printToChat ("You have reached " .. icon .. LevelContext .. " " .. CurrentLevel)
+                    printToChat(strformat("You have reached <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel))
                 end
             end
             if CA.SV.ExperienceLevelUp and Crossover == 1 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat ("Champion Level Achieved! " .. icon .. CurrentLevelFormatted)
+                    printToChat(strformat("Champion Level Achieved! <<1>><<2>>", icon, CurrentLevelFormatted))
                 else
-                    printToChat ("Champion Level Achieved! " .. icon .. LevelContext .. " " .. CurrentLevel)
+                    printToChat(strformat("Champion Level Achieved! <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel))
                 end
             end
             
             if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat (QuestString2)
+                printToChat(QuestString2)
             end
         end
                 
@@ -2826,8 +2844,8 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
         
         if not LevelChanged1 or Crossover == 1 then
             if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat (QuestString1)
-                printToChat (QuestString2)
+                printToChat(QuestString1)
+                printToChat(QuestString2)
             elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
                 printToChat(QuestString1)
             elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
@@ -2836,14 +2854,14 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
         
             if CA.SV.ExperienceLevelUp then
                 if CA.SV.ExperienceColorLevel then 
-                    printToChat ("You have reached " .. icon .. CurrentLevelFormatted)
+                    printToChat(strformat("You have reached <<1>><<2>>", icon, CurrentLevelFormatted))
                 else
-                    printToChat ("You have reached " .. icon .. LevelContext .. " " .. CurrentLevel)
+                    printToChat(strformat("You have reached <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel))
                 end
             end
         else
             if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat (QuestString1)
+                printToChat(QuestString1)
             elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
                 printToChat(QuestString1)
             elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
@@ -2852,14 +2870,14 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
         
             if CA.SV.ExperienceLevelUp then
                 if CA.SV.ExperienceColorLevel then 
-                    printToChat ("You have reached " .. icon .. CurrentLevelFormatted)
+                    printToChat(strformat("You have reached <<1>><<2>>", icon, CurrentLevelFormatted))
                 else
-                    printToChat ("You have reached " .. icon .. LevelContext .. " " .. CurrentLevel)
+                    printToChat(strformat("You have reached <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel))
                 end
             end
             
             if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat (QuestString2)
+                printToChat(QuestString2)
             end
         end
         
@@ -3130,7 +3148,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
         -- If we gain experience from a non combat source, and our buffer function holds a value, then we need to immediately dump this value before the next XP update is processed.
         if reason ~= 0 and CA.SV.ExperienceThrottle > 0 and XPCombatBufferValue > 0 then 
             XPCombatBufferValue = 0
-            printToChat (XPCombatBufferString)
+            printToChat(XPCombatBufferString)
         end
             
         if reason == 1 then
@@ -3151,14 +3169,14 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
             zo_callLater(CA.PrintQuestExperienceHelper, 100)
         elseif reason == 0 then
             if change > CA.SV.ExperienceFilter and CA.SV.ExperienceThrottle == 0 then 
-                printToChat ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) ) 
+                printToChat(strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) ) 
             elseif CA.SV.ExperienceThrottle > 0 then
                 XPCombatBufferString = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
                 local timer = CA.SV.ExperienceThrottle
                 zo_callLater(CA.PrintBufferedXP, 5000)
             end
         else
-            printToChat ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
+            printToChat(strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
         end
     end
 end
@@ -3167,8 +3185,8 @@ function CA.PrintQuestExperienceHelper()
     if WeLeveled == 1 then return end
 
     if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-        printToChat (QuestString1)
-        printToChat (QuestString2)
+        printToChat(QuestString1)
+        printToChat(QuestString2)
     elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
         printToChat(QuestString1)
     elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
