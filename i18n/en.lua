@@ -26,6 +26,11 @@ ZO_CreateStringId("SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL",   "A vote to kick |cFE
 ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_RECEIVED",       "|cFEFEFE<<1>>|r has invited you to join a group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_LEADER_CHANGED",        "|cFEFEFE<<1>>|r is now the group leader!")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_JOIN",           "|cFEFEFE<<1>>|r has joined the group.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_LEAVE",          "|cFEFEFE<<1>>|r has left the group.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF",     "You have left the group.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_KICKED",         "|cFEFEFE<<1>>|r has been removed from the group.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF",    "You have been removed from the group.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_DISBAND_MSG",           "The group has been disbanded.")
 
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MSG_SELF",       "You have invited |cFEFEFE<<1>>|r to trade.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MSG",            "|cFEFEFE<<1>>|r has invited you to trade.")
@@ -42,9 +47,11 @@ ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_SUCCESS",           "Mail sent!")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_SENT_SUCCESS",       "COD sent!")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG",      "Mail sent with <<1>> gold!")
 
-ZO_CreateStringId("SI_LUIE_CA_XP_LVL_ANNOUNCE1",             "You have reached <<1>><<2>>")
-ZO_CreateStringId("SI_LUIE_CA_XP_LVL_ANNOUNCE2",             "You have reached <<1>><<2>> <<3>>")
+ZO_CreateStringId("SI_LUIE_CA_XP_LVL_ANNOUNCE1",            "You have reached <<1>><<2>>")
+ZO_CreateStringId("SI_LUIE_CA_XP_LVL_ANNOUNCE2",            "You have reached <<1>><<2>> <<3>>")
 
-ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE1",             "Champion Level Achieved! <<1>><<2>>")
-ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE2",             "Champion Level Achieved! <<1>><<2>> <<3>>")
+ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE1",            "Champion Level Achieved! <<1>><<2>>")
+ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE2",            "Champion Level Achieved! <<1>><<2>> <<3>>")
+
+
 

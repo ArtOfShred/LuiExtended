@@ -901,11 +901,11 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
     if g_playerName == memberName then ShowStatusDropMember = false end -- Resets variable for Group Finder events, just in case.
 
     if reason == GROUP_LEAVE_REASON_VOLUNTARY then
-        msg = g_playerName == memberName and "You have left the group." or "|cFEFEFE<<1>>|r has left the group."
+        msg = g_playerName == memberName and "You have left the group." or "|cFEFEFE<<1>>|r has left the group." -- SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF  SI_LUIE_CA_GROUP_MEMBER_LEAVE
     elseif reason == GROUP_LEAVE_REASON_KICKED then
-        msg = g_playerName == memberName and "You have been removed from the group." or "|cFEFEFE<<1>>|r has been removed from the group."
+        msg = g_playerName == memberName and "You have been removed from the group." or "|cFEFEFE<<1>>|r has been removed from the group." -- SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF  SI_LUIE_CA_GROUP_MEMBER_KICKED
     elseif reason == GROUP_LEAVE_REASON_DISBAND and g_playerName == memberName then
-        msg = "The group has been disbanded."
+        msg = "The group has been disbanded." -- SI_LUIE_CA_GROUP_DISBAND_MSG
     end
     if msg then
         -- Can occur if event is before EVENT_PLAYER_ACTIVATED
