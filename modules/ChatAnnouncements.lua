@@ -496,7 +496,6 @@ local ShowStatusDropMember = false
 function CA.GroupFindReplacementNew(eventCode)
     local activityType, activityIndex = GetLFGFindReplacementNotificationInfo()
     local name = GetLFGOption(activityType, activityIndex)
-    printToChat(strformat("A group member has left your |cffffff<<1>>|r group.", name))
 end
 
 function CA.GroupReplacementFound(eventCode)
