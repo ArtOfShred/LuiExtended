@@ -28,12 +28,16 @@ ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_LEAVE",                      "|cFEFEF
 ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF",                 "You have left the group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_KICKED",                     "|cFEFEFE<<1>>|r has been removed from the group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF",                "You have been removed from the group.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_REPLACEMENT_FOUND",          "A replacement party member has been found.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_DISBAND_MSG",                       "The group has been disbanded.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_QUEUE_START",                "You are now queued in the group finder.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_QUEUED_END",                 "You are no longer queued in the group finder.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MSG",                        "|cFEFEFE<<1>>|r has invited you to trade.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MSG_SELF",                   "You have invited |cFEFEFE<<1>>|r to trade.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_ACCEPTED",                   "Trade invite accepted.")
 ZO_CreateStringId("SI_LUIE_CA_CANT_THINK_OF_NAME_MSG1",                 "<<1>> and <<2>> gold.") -- TODO: Find proper ID name
 ZO_CreateStringId("SI_LUIE_CA_CANT_THINK_OF_NAME_MSG2",                 "<<1>> and gold.") -- TODO: Find proper ID name
+ZO_CreateStringId("SI_LUIE_CA_MAIL_DELETED_MSG",                        "Mail deleted!")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_GOLD_MSG",                  "Received mail with gold.")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_VAR_GOLD_MSG",              "Received mail with <<1>> gold.")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_GOLD_SENT",                      "COD Payment sent!")
@@ -54,6 +58,9 @@ ZO_CreateStringId("SI_LUIE_CA_XP_LVL_ANNOUNCE1",                        "You hav
 ZO_CreateStringId("SI_LUIE_CA_XP_LVL_ANNOUNCE2",                        "You have reached <<1>><<2>> <<3>>")
 ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE1",                        "Champion Level Achieved! <<1>><<2>>")
 ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE2",                        "Champion Level Achieved! <<1>><<2>> <<3>>")
+ZO_CreateStringId("SI_LUIE_CA_JUSTICE_CONFISCATED_MSG",                 "Bounty confiscated!")
+ZO_CreateStringId("SI_LUIE_CA_JUSTICE_CONFISCATED_BOUNTY_ITEMS_MSG",    "Bounty and stolen items confiscated!")
+
 ZO_CreateStringId("SI_LUIE_CA_DEBUG_MSG_CURRENCY",                      "Currency Change Reason <<1>> Triggered - Please post on the LUI Extended comments section on ESOUI.com describing what caused this message. Thanks!")
 
 -- Chat Announcement Component Default overwrites

@@ -498,7 +498,7 @@ function CA.GroupFindReplacementNew(eventCode)
 end
 
 function CA.GroupReplacementFound(eventCode)
-    printToChat("A replacement party member has been found.") -- Test function for now, not sure how or if this works.
+    printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_REPLACEMENT_FOUND)) -- Test function for now, not sure how or if this works.
     -- The idea is to differentiate party members found via queue or personally invited by the group leader.
 end
 
@@ -515,12 +515,12 @@ function CA.ActivityStatusUpdate(eventCode, status)
             ShowStatusDropMember = false
         end
         if status == ACTIVITY_FINDER_STATUS_QUEUED then
-            printToChat("You are now queued in the group finder.")
+            printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_QUEUE_START))
             WeAreQueued = true
             ShowStatusDropMember = true
         end
         if status == ACTIVITY_FINDER_STATUS_IN_PROGRESS and ShowStatusDropMember == true then
-            printToChat("You are no longer queued in the group finder.")
+            printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_QUEUED_END))
             WeAreQueued = false
             ShowStatusDropMember = false
         end
@@ -2556,7 +2556,7 @@ end
 
 function CA.MailRemoved(eventCode)
     if CA.SV.MiscMail then
-        printToChat("Mail deleted!")
+        printToChat(GetString(SI_LUIE_CA_MAIL_DELETED_MSG))
     end
 end
 
@@ -3990,7 +3990,7 @@ local ConfiscateMessage = ("Bounty confiscated!")
 
 function CA.JusticeStealRemove(eventCode)
     if CA.SV.MiscConfiscate and eventCode == 131555 then
-        ConfiscateMessage = ("Bounty and stolen items confiscated!")
+        ConfiscateMessage = (GetString(SI_LUIE_CA_JUSTICE_CONFISCATED_BOUNTY_ITEMS_MSG))
     end
 
     if stealstring == "" then return end
@@ -4001,7 +4001,7 @@ function CA.JusticeStealRemove(eventCode)
 
     printToChat(stealstring)
     stealstring = ""
-    ConfiscateMessage = ("Bounty confiscated!")
+    ConfiscateMessage = (GetString(SI_LUIE_CA_JUSTICE_CONFISCATED_MSG))
 
     if CA.SV.ShowConfiscate or CA.SV.ShowDestroy then
         zo_callLater(CA.JusticeRemovePrint, 50)
