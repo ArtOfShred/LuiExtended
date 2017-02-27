@@ -353,14 +353,14 @@ end
 
 function CA.GuildInviteFudger()
     if not GuildJoinFudger then
-        printToChat("Guild invite declined.")
+        printToChat(GetString(SI_LUIE_CA_GUILD_INVITE_DECLINED))
     end
     GuildJoinFudger = false
 end
 
 function CA.FriendInviteFudger()
     if not FriendInviteFudger then
-        printToChat("Friend invite declined.")
+        printToChat(GetString(SI_LUIE_CA_FRIEND_INVITE_DECLINED))
     end
     FriendInviteFudger = false
 end
@@ -399,7 +399,7 @@ function CA.QuestShared (eventCode, questId)
 end
 
 function CA.QuestShareRemoved(eventCode, questId)
-    printToChat("Shared quest declined.")
+    printToChat(GetString(SI_LUIE_CA_QUEST_SHARE_DECLINED))
 end
 
 function CA.RegisterCustomStrings()
