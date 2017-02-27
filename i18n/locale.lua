@@ -676,24 +676,6 @@ L.Effect_Unstable_Void              = 74488
 L.Effect_Curse_Duration             = 25000
 
 -- ---------------------------------------------------
--- POTION TYPES --------------------------------------
--- ---------------------------------------------------
-
-L.Potion_Sip                        = "Sip of"
-L.Potion_Tincture                   = "Tincture"
-L.Potion_Serum                      = "Serum"
-L.Potion_Dram                       = "Dram of"
-L.Potion_Effusion                   = "Effusion"
-L.Potion_Potion                     = "Potion"
-L.Potion_Draught                    = "Draught"
-L.Potion_Solution                   = "Solution"
-L.Potion_Philter                    = "Philter"
-L.Potion_Elixir                     = "Elixir"
-L.Potion_Panacea                    = "Panacea"
-L.Potion_Distillate                 = "Distillate"
-L.Potion_Essence                    = "Essence"
-
--- ---------------------------------------------------
 -- replace ability IDs with names --------------------
 -- ---------------------------------------------------
 for k, v in pairs(L) do
