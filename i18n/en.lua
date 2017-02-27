@@ -54,4 +54,22 @@ ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE1",            "Champion Level Achi
 ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE2",            "Champion Level Achieved! <<1>><<2>> <<3>>")
 
 
+-- Default overwrites
+ZO_CreateStringId("SI_LUIE_GROUPINVITERESPONSE0",                       "Could not find a player named |cFEFEFE\"<<1>>\"|r to invite.")
+ZO_CreateStringId("SI_LUIE_GROUPINVITERESPONSE10",                      "You have invited |cFEFEFE\"<<1>>\"|r to join your group.")
+ZO_CreateStringId("SI_LUIE_PLAYER_TO_PLAYER_INCOMING_GROUP",            "<<1>> has invited you to join a group.")
+ZO_CreateStringId("SI_LUIE_GROUPLEAVEREASON1",                          "<<1>>(<<2>>) has been removed from the group.")
+ZO_CreateStringId("SI_LUIE_TRADE_INVITE_CONFIRM",                       "You have invited <<1>> to trade.")
+ZO_CreateStringId("SI_LUIE_PLAYER_TO_PLAYER_INCOMING_TRADE",            "<<1>> has invited you to trade.")
+ZO_CreateStringId("SI_LUIE_FRIENDS_LIST_IGNORE_ADDED",                  "|cFEFEFE<<1>>|r added to ignore list.")
+ZO_CreateStringId("SI_LUIE_FRIENDS_LIST_IGNORE_REMOVED",                "|cFEFEFE<<1>>|r removed from ignore list.")
+ZO_CreateStringId("SI_LUIE_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST",   "<<1>> wants to be your friend.")
+ZO_CreateStringId("SI_LUIE_FRIENDS_LIST_FRIEND_LOGGED_ON",              "|cFEFEFE<<1>>|r has logged on.")
+ZO_CreateStringId("SI_LUIE_FRIENDS_LIST_FRIEND_LOGGED_OFF",             "|cFEFEFE<<1>>|r has logged off.")
+ZO_CreateStringId("SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON",    "|cFEFEFE<<1>>|r has logged on with |cFEFEFE<<2>>|r.")
+ZO_CreateStringId("SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF",   "|cFEFEFE<<1>>|r has logged off with |cFEFEFE<<2>>|r.")
+ZO_CreateStringId("SI_LUIE_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST",    "<<1>> has invited you to join <<2>>")
+ZO_CreateStringId("SI_LUIE_GUILD_ROSTER_INVITED_MESSAGE",               "You have invited \"|cffffff<<1>>|r\" to join |cffffff<<2>>|r")
+ZO_CreateStringId("SI_LUIE_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE",      "<<1>> wants to share the quest: <<2>>.")
+
 

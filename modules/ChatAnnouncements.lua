@@ -400,39 +400,36 @@ function CA.QuestShareRemoved(eventCode, questId)
 end
 
 function CA.RegisterCustomStrings()
-
     if CA.SV.CustomStrings then
-        --TODO: <https://github.com/ArtOfShred/LuiExtended/issues/29>
         -- Group Invite String Replacements
-        SafeAddString(SI_GROUPINVITERESPONSE0, "Could not find a player named |cFEFEFE\"<<1>>\"|r to invite.", 1)
-        SafeAddString(SI_GROUPINVITERESPONSE10, "You have invited |cFEFEFE\"<<1>>\"|r to join your group.", 1)
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GROUP, "<<1>> has invited you to join a group.", 1)
-        SafeAddString(SI_GROUPLEAVEREASON1, "<<1>>(<<2>>) has been removed from the group.", 2)
+        SafeAddString(SI_GROUPINVITERESPONSE0, "Could not find a player named |cFEFEFE\"<<1>>\"|r to invite.", 1) -- SI_LUIE_GROUPINVITERESPONSE0
+        SafeAddString(SI_GROUPINVITERESPONSE10, "You have invited |cFEFEFE\"<<1>>\"|r to join your group.", 1)  -- SI_LUIE_GROUPINVITERESPONSE10
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GROUP, "<<1>> has invited you to join a group.", 1) -- SI_LUIE_PLAYER_TO_PLAYER_INCOMING_GROUP
+        SafeAddString(SI_GROUPLEAVEREASON1, "<<1>>(<<2>>) has been removed from the group.", 2) -- SI_LUIE_GROUPLEAVEREASON1
 
         -- Trade String Replacements
-        SafeAddString(SI_TRADE_INVITE_CONFIRM, "You have invited <<1>> to trade.", 1) -- Fixes default Trade messages to match our syntax.
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_TRADE, "<<1>> has invited you to trade.", 1) -- Fixes default Trade messages to match our syntax.
+        SafeAddString(SI_TRADE_INVITE_CONFIRM, "You have invited <<1>> to trade.", 1) -- Fixes default Trade messages to match our syntax. -- SI_LUIE_TRADE_INVITE_CONFIRM
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_TRADE, "<<1>> has invited you to trade.", 1) -- Fixes default Trade messages to match our syntax. -- SI_LUIE_PLAYER_TO_PLAYER_INCOMING_TRADE
 
         -- Friend Invite String Replacements
-        SafeAddString(SI_FRIENDS_LIST_IGNORE_ADDED, "|cFEFEFE<<1>>|r added to ignore list.", 1) -- Fixes default Ignore List messages to match our syntax.
-        SafeAddString(SI_FRIENDS_LIST_IGNORE_REMOVED, "|cFEFEFE<<1>>|r removed from ignore list.", 1) -- Fixes default Ignore List messages to match our syntax.
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST, "<<1>> wants to be your friend.", 1) -- Default ZOS string was missing a period.
+        SafeAddString(SI_FRIENDS_LIST_IGNORE_ADDED, "|cFEFEFE<<1>>|r added to ignore list.", 1) -- Fixes default Ignore List messages to match our syntax. -- SI_LUIE_FRIENDS_LIST_IGNORE_ADDED
+        SafeAddString(SI_FRIENDS_LIST_IGNORE_REMOVED, "|cFEFEFE<<1>>|r removed from ignore list.", 1) -- Fixes default Ignore List messages to match our syntax. -- SI_LUIE_FRIENDS_LIST_IGNORE_REMOVED
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST, "<<1>> wants to be your friend.", 1) -- Default ZOS string was missing a period. -- SI_LUIE_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST
 
 
-        SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_ON, "|cFEFEFE<<1>>|r has logged on.", 1)
-        SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON, "|cFEFEFE<<1>>|r has logged on with |cFEFEFE<<2>>|r.", 1)
-        SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_OFF, "|cFEFEFE<<1>>|r has logged off.", 1)
-        SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF, "|cFEFEFE<<1>>|r has logged off with |cFEFEFE<<2>>|r.", 1)
+        SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_ON, "|cFEFEFE<<1>>|r has logged on.", 1) -- SI_LUIE_FRIENDS_LIST_FRIEND_LOGGED_ON
+        SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON, "|cFEFEFE<<1>>|r has logged on with |cFEFEFE<<2>>|r.", 1) -- SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON
+        SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_OFF, "|cFEFEFE<<1>>|r has logged off.", 1) -- SI_LUIE_FRIENDS_LIST_FRIEND_LOGGED_OFF
+        SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF, "|cFEFEFE<<1>>|r has logged off with |cFEFEFE<<2>>|r.", 1) -- SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF
 
 
         -- Guild Invite String Replacements
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, "<<1>> has invited you to join <<2>>", 1) -- Update syntax for guild invite message to match our chat syntax
-        SafeAddString(SI_GUILD_ROSTER_INVITED_MESSAGE,  "You have invited \"|cffffff<<1>>|r\" to join |cffffff<<2>>|r", 1) -- Update syntax for guild invitation sent message to match group syntax.
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, "<<1>> has invited you to join <<2>>", 1) -- Update syntax for guild invite message to match our chat syntax -- SI_LUIE_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST
+        SafeAddString(SI_GUILD_ROSTER_INVITED_MESSAGE,  "You have invited \"|cffffff<<1>>|r\" to join |cffffff<<2>>|r", 1) -- Update syntax for guild invitation sent message to match group syntax. -- SI_LUIE_GUILD_ROSTER_INVITED_MESSAGE
 
         -- Quest Share String Replacements
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, "<<1>> wants to share the quest: <<2>>.", 3)
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, "<<1>> wants to share the quest: <<2>>.", 3) -- SI_LUIE_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE
     end
-
 end
 
 -- Display group join/leave in chat
