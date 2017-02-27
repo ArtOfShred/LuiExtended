@@ -42,7 +42,7 @@ ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_GOLD_MSG",      "Received mail with 
 ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_VAR_GOLD_MSG",  "Received mail with <<1>> gold.")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_GOLD_SENT",          "COD Payment sent!")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT1",     "COD Payment of <<1>> gold sent!")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT2",     "COD sent for <<1>> gold!") 
+ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT2",     "COD sent for <<1>> gold!")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_SUCCESS",           "Mail sent!")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_SENT_SUCCESS",       "COD sent!")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG",      "Mail sent with <<1>> gold!")
