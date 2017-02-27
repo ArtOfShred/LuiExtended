@@ -222,7 +222,7 @@ function CA.GuildMemberAdded(eventCode, guildId, DisplayName)
     local guildName = GetGuildName(guildId)
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
-    printToChat(strformat("|cFEFEFE<<1>>|r has joined <<2>>", displayNameLink, guildNameAlliance))
+    printToChat(strformat("|cFEFEFE<<1>>|r has joined <<2>>", displayNameLink, guildNameAlliance)) -- SI_LUIE_CA_GUILD_MEMBER_ADDED
 end
 
 function CA.GuildMemberRemoved(eventCode, guildId, DisplayName, CharacterName)
@@ -232,7 +232,7 @@ function CA.GuildMemberRemoved(eventCode, guildId, DisplayName, CharacterName)
     local guildName = GetGuildName(guildId)
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
-    printToChat(strformat("|cFEFEFE<<1>>|r has left <<2>>", displayNameLink, guildNameAlliance))
+    printToChat(strformat("|cFEFEFE<<1>>|r has left <<2>>", displayNameLink, guildNameAlliance)) -- SI_LUIE_CA_GUILD_MEMBER_REMOVED
 end
 
 function CA.GuildMOTD(eventCode, guildId)
@@ -242,7 +242,7 @@ function CA.GuildMOTD(eventCode, guildId)
     local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
-    printToChat(strformat("The message of the day for <<1>> has changed:\n<<2>>", guildNameAlliance, motd))
+    printToChat(strformat("The message of the day for <<1>> has changed:\n<<2>>", guildNameAlliance, motd)) -- SI_LUIE_CA_GUILD_MOTD_CHANGED
 end
 
 function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
@@ -272,7 +272,7 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
         local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
         local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
-        printToChat(strformat("|cFEFEFE<<1>>|r's rank in <<2>> has been changed to <<3>>", displayNameLink, guildNameAlliance, rankSyntax))
+        printToChat(strformat("|cFEFEFE<<1>>|r's rank in <<2>> has been changed to <<3>>", displayNameLink, guildNameAlliance, rankSyntax)) -- SI_LUIE_CA_GUILD_RANK_CHANGED
     end
 
     if DisplayName == g_playerDisplayName then -- Cancel out if its not the player being promoted. It would be a little inefficient to index all guild members on initialize for this.
@@ -295,7 +295,7 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
         if currentRank < newRank then changestring = "demoted" end
 
         GuildRankData[guildId].rank = newRank
-        printToChat(strformat("You have been <<1>> to <<2>> in <<3>>", changestring, rankSyntax, guildNameAlliance))
+        printToChat(strformat("You have been <<1>> to <<2>> in <<3>>", changestring, rankSyntax, guildNameAlliance)) -- SI_LUIE_CA_GUILD_RANK_CHANGED_SELF
     end
 end
 
@@ -303,7 +303,7 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
     local allianceIconSize = 16
     local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-    printToChat(strformat("You have joined <<1>>", guildNameAlliance))
+    printToChat(strformat("You have joined <<1>>", guildNameAlliance)) -- SI_LUIE_CA_GUILD_JOIN_SELF
     GuildJoinFudger = true
 
     -- Reindex Guild Ranks
@@ -322,7 +322,7 @@ function CA.GuildRemovedSelf(eventCode, guildId, guildName)
     local allianceIconSize = 16
     local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-    printToChat(strformat("You have left <<1>>", guildNameAlliance))
+    printToChat(strformat("You have left <<1>>", guildNameAlliance)) -- SI_LUIE_CA_GUILD_LEAVE_SELF
 
     -- Reindex Guild Ranks
     GuildRankData = {}
@@ -340,7 +340,7 @@ function CA.GuildInviteAdded(eventCode, guildId, guildName, guildAlliance, invit
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
     local allianceIconSize = 16
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-    printToChat(strformat("|cFEFEFE<<1>>|r has invited you to join <<2>>", displayNameLink, guildNameAlliance))
+    printToChat(strformat("|cFEFEFE<<1>>|r has invited you to join <<2>>", displayNameLink, guildNameAlliance)) -- SI_LUIE_CA_GUILD_INVITE_SELF
 end
 
 function CA.GuildInviteRemoved(eventCode, guildId)
@@ -363,18 +363,18 @@ end
 
 function CA.FriendAdded(eventCode, DisplayName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
-    printToChat(strformat("|cFEFEFE<<1>>|r added to friends list.", displayNameLink))
+    printToChat(strformat("|cFEFEFE<<1>>|r added to friends list.", displayNameLink)) -- SI_LUIE_CA_FRIEND_ADDED
     FriendInviteFudger = true
 end
 
 function CA.FriendRemoved(eventCode, DisplayName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
-    printToChat(strformat("|cFEFEFE<<1>>|r removed from friends list.", displayNameLink))
+    printToChat(strformat("|cFEFEFE<<1>>|r removed from friends list.", displayNameLink)) -- SI_LUIE_CA_FRIEND_REMOVED
 end
 
 function CA.FriendInviteAdded(eventCode, inviterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
-    printToChat(strformat("|cFEFEFE<<1>>|r wants to be your friend.", displayNameLink))
+    printToChat(strformat("|cFEFEFE<<1>>|r wants to be your friend.", displayNameLink)) -- SI_LUIE_CA_FRIEND_INVITE_PENDING
 end
 
 function CA.FriendInviteRemoved(eventCode, inviterName)
@@ -390,9 +390,9 @@ function CA.QuestShared (eventCode, questId)
         local displayBothString = ( strformat("<<1>><<2>>", characterName, displayName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
 
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r wants to share the quest: <<2>>", displayNameLink, questName)) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r wants to share the quest: <<2>>", characterNameLink, questName)) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r wants to share the quest: <<2>>", displayBoth, questName)) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r wants to share the quest: <<2>>", displayNameLink, questName)) end -- SI_LUIE_CA_QUEST_SHARE_MSG
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r wants to share the quest: <<2>>", characterNameLink, questName)) end -- SI_LUIE_CA_QUEST_SHARE_MSG
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r wants to share the quest: <<2>>", displayBoth, questName)) end -- SI_LUIE_CA_QUEST_SHARE_MSG
 end
 
 function CA.QuestShareRemoved(eventCode, questId)
@@ -603,7 +603,7 @@ function CA.ReadyCheckUpdate(eventCode)
         if activityType == LFG_ACTIVITY_TRIAL then activityName = "Trial" end
         if activityType == 0 then return end
 
-        printToChat(strformat("|cffffff<<1>>|r ready.", activityName))
+        printToChat(strformat("|cffffff<<1>>|r ready.", activityName)) -- SI_LUIE_CA_READY_CHECK_ACTIVITY
     end
 
     if not ShowRCUpdates and (tanksPending == 0 and healersPending == 0 and dpsPending == 0) then
@@ -636,13 +636,13 @@ function CA.VoteNotify(eventCode)
         local displayBothString = ( strformat("<<1>><<2>>", kickMemberName, kickMemberAccountName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, kickMemberAccountName)
         if CA.SV.ChatPlayerDisplayOptions == 1 then
-            printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has started.", displayNameLink))
+            printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has started.", displayNameLink)) -- SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK
         end
         if CA.SV.ChatPlayerDisplayOptions == 2 then
-            printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has started.", characterNameLink))
+            printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has started.", characterNameLink)) -- SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK
         end
         if CA.SV.ChatPlayerDisplayOptions == 3 then
-            printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has started.", displayBoth))
+            printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has started.", displayBoth)) -- SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK
         end
     end
 end
