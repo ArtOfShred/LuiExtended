@@ -20,8 +20,25 @@ ZO_CreateStringId("SI_LUIE_CA_QUEST_SHARE_MSG",             "|cFEFEFE<<1>>|r wan
 
 ZO_CreateStringId("SI_LUIE_CA_READY_CHECK_ACTIVITY",        "|cFFFFFF<<1>>|r ready.")
 
-ZO_CreateStringId("SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK",        "A vote to kick |cFEFEFE<<1>>|r from the group has started.")
+ZO_CreateStringId("SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START",  "A vote to kick |cFEFEFE<<1>>|r from the group has started.")
+ZO_CreateStringId("SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL",   "A vote to kick |cFEFEFE<<1>>|r from the group has failed.")
 
+ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_RECEIVED",       "|cFEFEFE<<1>>|r has invited you to join a group.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_LEADER_CHANGED",        "|cFEFEFE<<1>>|r is now the group leader!")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_JOIN",           "|cFEFEFE<<1>>|r has joined the group.")
 
+ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MSG_SELF",       "You have invited |cFEFEFE<<1>>|r to trade.")
+ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MSG",            "|cFEFEFE<<1>>|r has invited you to trade.")
 
+ZO_CreateStringId("SI_LUIE_CA_CANT_THINK_OF_NAME_MSG1",     "<<1>> and <<2>> gold.")
+ZO_CreateStringId("SI_LUIE_CA_CANT_THINK_OF_NAME_MSG2",     "<<1>> and gold.")
+
+ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_GOLD_MSG",      "Received mail with gold.")
+ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_VAR_GOLD_MSG",  "Received mail with <<1>> gold.")
+ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_GOLD_SENT",          "COD Payment sent!")
+ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT1",     "COD Payment of <<1>> gold sent!")
+ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT2",     "COD sent for <<1>> gold!") 
+ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_SUCCESS",           "Mail sent!")
+ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_SENT_SUCCESS",       "COD sent!")
+ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG",      "Mail sent with <<1>> gold!")
 
