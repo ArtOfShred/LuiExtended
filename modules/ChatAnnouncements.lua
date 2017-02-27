@@ -72,10 +72,11 @@ CA.D = {
     ExperienceShowPBrackets       = true,
     ExperienceShowDecimal         = true,
     ExperienceShowLevel           = true,
+    ExperienceColorLevel          = true,
     ExperienceDisplayOptions      = 1,
     ExperienceHideCombat          = false,
     ExperienceFilter              = 0,
-    ExperienceBuffer              = true,
+    ExperienceThrottle            = 0,
     Achievements                  = false,
     AchievementsStep              = 10,
     AchievementsDetails           = true,
@@ -2698,32 +2699,33 @@ local function ExperiencePctToColour(xppct)
 end
 
 -- When quest XP is gained during dialogue the player doesn't actually level up until exiting the dialogue. The variables get stored and saved to print on levelup if this is the case.
-local QuestString1 = ""
-local QuestString2 = ""
 local WeLeveled = 0
 local Crossover = 0
-local QuestCombiner = 0 -- When this is > 1, if quest XP is gained with Reason 1, this will merge a Reason 2 value that follows it if present. Allows us to merge the message for XP gain from quest turnins that also complete a POI into one printout.
+
+-- Various fudge variables required for fixing display on levelup when turning in quests that give both XP completion and POI completion!
+local QuestString1 = ""
+local QuestString2 = ""
+local QuestCombiner1 = ""
+local QuestCombiner2 = ""
+local QuestCombiner2Alt = ""
+local LevelChanged1 = false
+local TotalLevelAdjust = ""
+local LevelCarryOverValue = 0
 
 
--- WIP XP Buffer
---[[
-local XPCombatBufferValid = true
 local XPCombatBufferValue = 0
 local XPCombatBufferString = ""
-local StopBufferPrint = false
+
+local XP_BAR_COLORS = ZO_XP_BAR_GRADIENT_COLORS[2] -- Color for Normal Levels
+local CP_BAR_COLORS = ZO_CP_BAR_GRADIENT_COLORS -- Color for Champion Levels
 
 function CA.PrintBufferedXP()
-    if not StopBufferPrint then
+    if XPCombatBufferValue ~= 0 then
         printToChat (XPCombatBufferString) -- If we leveled up, then this variable will be true, and we want to smash all the buffered XP into the level up display!
         XPCombatBufferValue = 0
         XPCombatBufferString = ""
-        XPCombatBufferValid = true
-    end
-    if StopBufferPrint then
-        StopBufferPrint = false
     end
 end
-]]--
 
 function CA.OnLevelUpdate(eventCode, unitTag, level)
     if unitTag == ("player") then
@@ -2731,24 +2733,82 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
         CA.LevelUpdateHelper()
         
         local icon = CA.SV.LevelUpIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_normal.dds|t ") or ( "" )
+        local attribute 
+        local CurrentLevelFormatted = XP_BAR_COLORS:Colorize(LevelContext .. " " .. CurrentLevel)
         
-        if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-            printToChat (QuestString2)
-        elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
-            printToChat(QuestString1)
-        elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
-            printToChat(QuestString2)
+        if IsChampion then
+            attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned()+1 )
+            if attribute == ATTRIBUTE_NONE then icon = CA.SV.LevelUpIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_champion.dds|t ") or ( "" ) end
+            if attribute == ATTRIBUTE_HEALTH then icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_health_icon-hud-32.dds|t ") or ( "" ) end
+            if attribute == ATTRIBUTE_MAGICKA then icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_magicka_icon-hud-32.dds|t ") or ( "" ) end
+            if attribute == ATTRIBUTE_STAMINA then icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.ddst ") or ( "" ) end
+            CurrentLevelFormatted = CP_BAR_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
         end
-
-        if CA.SV.ExperienceLevelUp then
-            printToChat ("You have reached " .. icon .. LevelContext .. " " .. CurrentLevel .. "!")
+        
+        if not LevelChanged1 or Crossover == 1 then
+            if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
+                printToChat (QuestString1)
+                printToChat (QuestString2)
+            elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
+                printToChat(QuestString1)
+            elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
+                printToChat(QuestString2)
+            end
+        
+            if CA.SV.ExperienceLevelUp and Crossover == 0 then
+                if CA.SV.ExperienceColorLevel then
+                    printToChat ("You have reached " .. icon .. CurrentLevelFormatted)
+                else
+                    printToChat ("You have reached " .. icon .. LevelContext .. " " .. CurrentLevel)
+                end
+            end
+            if CA.SV.ExperienceLevelUp and Crossover == 1 then
+                if CA.SV.ExperienceColorLevel then
+                    printToChat ("Champion Level Achieved! " .. icon .. CurrentLevelFormatted)
+                else
+                    printToChat ("Champion Level Achieved! " .. icon .. LevelContext .. " " .. CurrentLevel)
+                end
+            end
+        else
+            if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
+                printToChat (QuestString1)
+            elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
+                printToChat(QuestString1)
+            elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
+                printToChat(QuestString2)
+            end
+        
+            if CA.SV.ExperienceLevelUp and Crossover == 0 then
+                if CA.SV.ExperienceColorLevel then
+                    printToChat ("You have reached " .. icon .. CurrentLevelFormatted)
+                else
+                    printToChat ("You have reached " .. icon .. LevelContext .. " " .. CurrentLevel)
+                end
+            end
+            if CA.SV.ExperienceLevelUp and Crossover == 1 then
+                if CA.SV.ExperienceColorLevel then
+                    printToChat ("Champion Level Achieved! " .. icon .. CurrentLevelFormatted)
+                else
+                    printToChat ("Champion Level Achieved! " .. icon .. LevelContext .. " " .. CurrentLevel)
+                end
+            end
+            
+            if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
+                printToChat (QuestString2)
+            end
         end
+                
     end
-    QuestString1 = ""
-    QuestString2 = ""
     WeLeveled = 0
     Crossover = 0
-    QuestCombiner = 0
+    QuestString1 = ""
+    QuestString2 = ""
+    QuestCombiner1 = ""
+    QuestCombiner2 = ""
+    QuestCombiner2Alt = ""
+    LevelChanged1 = false
+    TotalLevelAdjust = ""
+    LevelCarryOverValue = 0
 end
 
 function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChampionPoints)
@@ -2762,35 +2822,64 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
         if attribute == ATTRIBUTE_HEALTH then icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_health_icon-hud-32.dds|t ") or ( "" ) end
         if attribute == ATTRIBUTE_MAGICKA then icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_magicka_icon-hud-32.dds|t ") or ( "" ) end
         if attribute == ATTRIBUTE_STAMINA then icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.ddst ") or ( "" ) end
+        local CurrentLevelFormatted = CP_BAR_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
         
-        if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-            printToChat (QuestString2)
-        elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
-            printToChat(QuestString1)
-        elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
-            printToChat(QuestString2)
+        if not LevelChanged1 or Crossover == 1 then
+            if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
+                printToChat (QuestString1)
+                printToChat (QuestString2)
+            elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
+                printToChat(QuestString1)
+            elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
+                printToChat(QuestString2)
+            end
+        
+            if CA.SV.ExperienceLevelUp then
+                if CA.SV.ExperienceColorLevel then 
+                    printToChat ("You have reached " .. icon .. CurrentLevelFormatted)
+                else
+                    printToChat ("You have reached " .. icon .. LevelContext .. " " .. CurrentLevel)
+                end
+            end
+        else
+            if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
+                printToChat (QuestString1)
+            elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
+                printToChat(QuestString1)
+            elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
+                printToChat(QuestString2)
+            end
+        
+            if CA.SV.ExperienceLevelUp then
+                if CA.SV.ExperienceColorLevel then 
+                    printToChat ("You have reached " .. icon .. CurrentLevelFormatted)
+                else
+                    printToChat ("You have reached " .. icon .. LevelContext .. " " .. CurrentLevel)
+                end
+            end
+            
+            if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
+                printToChat (QuestString2)
+            end
         end
-
-        if CA.SV.ExperienceLevelUp then
-            printToChat ("You have reached " .. icon .. LevelContext .. " " .. CurrentLevel .. "!")
-        end
+        
     end
-    QuestString1 = ""
-    QuestString2 = ""
     WeLeveled = 0
     Crossover = 0
-    QuestCombiner = 0
+    QuestString1 = ""
+    QuestString2 = ""
+    QuestCombiner1 = ""
+    QuestCombiner2 = ""
+    QuestCombiner2Alt = ""
+    LevelChanged1 = false
+    TotalLevelAdjust = ""
+    LevelCarryOverValue = 0
 end     
 
 function CA.OnExperienceGain(eventCode, reason, level, previousExperience, currentExperience, championPoints)
+
     -- d("Experience Gain) previousExperience: " .. previousExperience .. " --- " .. "currentExperience: " .. currentExperience)
     local levelhelper = 0 -- Gives us the correct value of XP to use toward the next level when calculating progress after a level up
-
-    if IsChampion then
-        levelhelper = GetPlayerChampionXP()
-    else
-        levelhelper = GetUnitXP ("player")
-    end
 
     -- Determines if we leveled up - Needs to be functioning even if we don't printout progress or current level
     if currentExperience >= XPLevel then
@@ -2810,12 +2899,25 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
             LevelContext = ( "Level" )
         end
     end
+    
+    if IsChampion then
+        levelhelper = GetPlayerChampionXP()
+    else
+        levelhelper = GetUnitXP ("player")
+    end
+    
+    if Crossover == 1 then 
+        levelhelper = GetNumExperiencePointsInLevel(49)
+        XPLevel = GetNumExperiencePointsInLevel(49)
+    end 
 
         if CA.SV.Experience and ( not ( CA.SV.ExperienceHideCombat and reason == 0 ) or not reason == 0 ) then
             -- Change in Experience Points on gaining them
             local change = currentExperience - previousExperience
             local formathelper = " "
-            if QuestCombiner ~= 0 then change = QuestCombiner + change end -- Carries over if theres any immediate XP gain after a quest turnin.
+            local totallevel = ""
+            local progressbrackets = ""
+            local progress = "" -- String returned depending on whether Progress Option is toggled on or off
 
             -- Format Helper puts a space in if the player enters a value for Experience Name, this way they don't have to do this formatting themselves.
             if CA.SV.ExperienceName == ( "" ) then
@@ -2825,18 +2927,21 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
             -- Displays an icon if enabled
             local icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. CommaValue (change) .. formathelper .. CA.SV.ExperienceName ) or ( CommaValue (change) .. formathelper .. CA.SV.ExperienceName )
 
-            --[[ Combines XP when the buffer function is enabled.
-            if CA.SV.ExperienceBuffer then 
-                XPCombatBufferValue = XPCombatBufferValue + change 
+            -- If quest turnin, we save the first part of this string to combine with another in case this is followed up by POI completion event too.
+            if reason == 1 then
+                LevelCarryOverValue = currentExperience
+                QuestCombiner1 = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. CommaValue (change) .. formathelper .. CA.SV.ExperienceName ) or ( CommaValue (change) .. formathelper .. CA.SV.ExperienceName )
+            end
+
+            -- Add to the throttled XP count if it is enabled
+            if CA.SV.ExperienceThrottle > 0 and reason == 0 then 
+                XPCombatBufferValue = XPCombatBufferValue + change
                 icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. CommaValue (XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName ) or ( CommaValue (XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName )
-            end ]]--
-            
+            end
             
             local xppct = 0             -- XP Percent
             local decimal = 0           -- If we're using a % value, this is the string that determines whether we have a decimal point or not.
-            local progressbrackets = ""
-            local progress = ""         -- String returned depending on whether Progress Option is toggled on or off
-
+            
             if CA.SV.ExperienceShowProgress then
 
                 if CA.SV.ExperienceShowDecimal then
@@ -2847,8 +2952,6 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 
                 if CA.SV.ExperienceShowPBrackets then -- If [Progress] display brackets are hidden, then the XP numbers will just print on the end
                     progressbrackets = strfmt( " %s", CA.SV.ExperienceProgressName )
-                else
-                    progressbrackets = ( "" )
                 end
 
                 -- Configures progress experience configuration options
@@ -2877,26 +2980,183 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                     progress = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, CommaValue (levelhelper), CommaValue (XPLevel) )
                     end
                 end
+                
+                --
+                -- Big ass bullshit duplicate to create alternate string for Reason 2 on quest turnin with POI completion too
+                if reason == 2 and QuestCombiner1 ~= "" then
+                
+                -- CALCULATION 1
+                    
+                    levelhelper = levelhelper - change
+                    
+                    if CA.SV.ExperienceShowDecimal then
+                            xppct = math.floor(10000*levelhelper/XPLevel) / 100
+                    else
+                            xppct = math.floor(100*levelhelper/XPLevel)
+                    end
+
+                    -- Configures progress experience configuration options
+                    if CA.SV.ExperienceProgressColor then
+                        decimal = strfmt( "|c%s%s", ExperiencePctToColour(xppct), xppct)
+                    else
+                        decimal = strfmt( "%s", xppct)
+                    end
+
+                    if CA.SV.ExperienceDisplayOptions == 1 then
+                        if CA.SV.ExperienceProgressColor then
+                        QuestCombiner2 = strfmt( "%s (|c%s%s|r/|c71DE73%s|r)", progressbrackets, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevel) )
+                        else
+                        QuestCombiner2 = strfmt( "%s (%s/%s)|r", progressbrackets, CommaValue (levelhelper), CommaValue (XPLevel) )
+                        end
+                    elseif CA.SV.ExperienceDisplayOptions == 2 then
+                        if CA.SV.ExperienceProgressColor then
+                        QuestCombiner2 = strfmt("%s (%s%%|r)", progressbrackets, decimal)
+                        else
+                        QuestCombiner2 = strfmt("%s (%s%%|r)", progressbrackets, decimal)
+                        end
+                    elseif CA.SV.ExperienceDisplayOptions == 3 then
+                        if CA.SV.ExperienceProgressColor then
+                        QuestCombiner2 = strfmt("%s (%s%%|r - |c%s%s|r/|c71DE73%s|r)", progressbrackets, decimal, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevel) )
+                        else
+                        QuestCombiner2 = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, CommaValue (levelhelper), CommaValue (XPLevel) )
+                        end
+                    end
+                    
+                -- CALCULATION 2
+
+                    local XPLevelAlt
+                
+                    if IsChampion then
+                        local AdjustLevel = GetPlayerChampionPointsEarned() -1
+                        if AdjustLevel < 10 then AdjustLevel = 10 end -- Very important, if this player has never hit Champion level before, set the minimum possible value when hitting level 50.
+                        XPLevelAlt = GetNumChampionXPInChampionPoint(AdjustLevel)
+                        if Crossover == 1 then
+                            XPLevelAlt = GetNumExperiencePointsInLevel(49)
+                        end
+                    else
+                        local AdjustLevel = CurrentLevel -1
+                        XPLevelAlt = GetNumExperiencePointsInLevel(AdjustLevel)
+                    end
+                    
+                    levelhelper = LevelCarryOverValue
+                    
+                    if CA.SV.ExperienceShowDecimal then
+                            xppct = math.floor(10000*levelhelper/XPLevelAlt) / 100
+                    else
+                            xppct = math.floor(100*levelhelper/XPLevelAlt)
+                    end
+
+                    -- Configures progress experience configuration options
+                    if CA.SV.ExperienceProgressColor then
+                        decimal = strfmt( "|c%s%s", ExperiencePctToColour(xppct), xppct)
+                    else
+                        decimal = strfmt( "%s", xppct)
+                    end
+
+                    if CA.SV.ExperienceDisplayOptions == 1 then
+                        if CA.SV.ExperienceProgressColor then
+                        QuestCombiner2Alt = strfmt( "%s (|c%s%s|r/|c71DE73%s|r)", progressbrackets, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevelAlt) )
+                        else
+                        QuestCombiner2Alt = strfmt( "%s (%s/%s)|r", progressbrackets, CommaValue (levelhelper), CommaValue (XPLevelAlt) )
+                        end
+                    elseif CA.SV.ExperienceDisplayOptions == 2 then
+                        if CA.SV.ExperienceProgressColor then
+                        QuestCombiner2Alt = strfmt("%s (%s%%|r)", progressbrackets, decimal)
+                        else
+                        QuestCombiner2Alt = strfmt("%s (%s%%|r)", progressbrackets, decimal)
+                        end
+                    elseif CA.SV.ExperienceDisplayOptions == 3 then
+                        if CA.SV.ExperienceProgressColor then
+                        QuestCombiner2Alt = strfmt("%s (%s%%|r - |c%s%s|r/|c71DE73%s|r)", progressbrackets, decimal, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevelAlt) )
+                        else
+                        QuestCombiner2Alt = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, CommaValue (levelhelper), CommaValue (XPLevelAlt) )
+                        end
+                    end
+                -- End big ass bullshit duplicate function
+                --
+
+                end
+                
+                
             end
 
-            -- Displays current player level if option is toggled on
-            local totallevel = CA.SV.ExperienceShowLevel and strfmt ( " (%s %s)", LevelContext, CurrentLevel) or ("")
-
+            if CA.SV.ExperienceShowLevel then 
+                local attribute
+                if CA.SV.ExperienceColorLevel then
+                    if IsChampion then
+                        attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned() +1)
+                        totallevel = CP_BAR_COLORS[attribute][2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel))
+                    else
+                        totallevel = XP_BAR_COLORS:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel))
+                    end
+                else
+                    totallevel = strfmt( " %s %s", LevelContext, CurrentLevel)
+                end
+                
+                if QuestCombiner1 ~= "" then
+                    if CA.SV.ExperienceColorLevel then
+                        if IsChampion then
+                            attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned() )
+                            TotalLevelAdjust = CP_BAR_COLORS[attribute][2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel -1))
+                        else
+                            TotalLevelAdjust = XP_BAR_COLORS:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel -1))
+                        end
+                    else
+                        TotalLevelAdjust = strfmt( " %s %s", LevelContext, CurrentLevel -1)
+                    end
+                end
+            else
+                if QuestCombiner1 ~= "" then
+                    TotalLevelAdjust = ""
+                end
+            end
+            
             --[[ Crossover from Normal XP --> Champion XP modifier ]] --
             if Crossover == 1 then
-                progress = (progressBrackets .. " (Champion Level Achieved!)")
+                -- progress = (progressbrackets .. " (Level 50)")
+                totallevel = XP_BAR_COLORS:Colorize(" (Level 50)")
+                if QuestCombiner1 ~= "" then
+                    -- QuestCombiner2 = (progressbrackets .. " (Level 50)")
+                    if CA.SV.ExperienceShowLevel then
+                        if CA.SV.ExperienceColorLevel then
+                            TotalLevelAdjust = XP_BAR_COLORS:Colorize( " Level 49")
+                        else
+                            TotalLevelAdjust = CA.SV.ExperienceShowLevel and (" Level 49")
+                        end
+                    end
+                end
             end
 
+        -- If we gain experience from a non combat source, and our buffer function holds a value, then we need to immediately dump this value before the next XP update is processed.
+        if reason ~= 0 and CA.SV.ExperienceThrottle > 0 and XPCombatBufferValue > 0 then 
+            XPCombatBufferValue = 0
+            printToChat (XPCombatBufferString)
+        end
+            
         if reason == 1 then
+            if WeLeveled == 1 then 
+                LevelChanged1 = true 
+            end
             QuestString1 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
-            QuestCombiner = change
             zo_callLater(CA.PrintQuestExperienceHelper, 100)
         elseif reason == 2 then
+            if QuestCombiner1 ~= "" then
+                if WeLeveled == 1 and not LevelChanged1 then
+                    QuestString1 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, QuestCombiner1, QuestCombiner2Alt, TotalLevelAdjust) )
+                else
+                    QuestString1 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, QuestCombiner1, QuestCombiner2, totallevel) )
+                end
+            end
             QuestString2 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
             zo_callLater(CA.PrintQuestExperienceHelper, 100)
-            QuestCombiner = 0
         elseif reason == 0 then
-            if change > CA.SV.ExperienceFilter then printToChat ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) ) end
+            if change > CA.SV.ExperienceFilter and CA.SV.ExperienceThrottle == 0 then 
+                printToChat ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) ) 
+            elseif CA.SV.ExperienceThrottle > 0 then
+                XPCombatBufferString = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
+                local timer = CA.SV.ExperienceThrottle
+                zo_callLater(CA.PrintBufferedXP, 5000)
+            end
         else
             printToChat ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
         end
@@ -2906,17 +3166,23 @@ end
 function CA.PrintQuestExperienceHelper()
     if WeLeveled == 1 then return end
 
-    if QuestString1 ~= "" and QuestString2 ~= "" then
+    if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
+        printToChat (QuestString1)
         printToChat (QuestString2)
-    elseif QuestString1 ~= "" and QuestString2 == "" then
+    elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
         printToChat(QuestString1)
-    elseif QuestString1 == "" and QuestString2 ~= "" then
+    elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
         printToChat(QuestString2)
     end
 
     QuestString1 = ""
     QuestString2 = ""
-    QuestCombiner = 0
+    QuestCombiner1 = ""
+    QuestCombiner2 = ""
+    QuestCombiner2Alt = ""
+    LevelChanged1 = false
+    TotalLevelAdjust = ""
+    LevelCarryOverValue = 0
 end
 
 -- Display achievements progress in chat
