@@ -222,7 +222,7 @@ function CA.GuildMemberAdded(eventCode, guildId, DisplayName)
     local guildName = GetGuildName(guildId)
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
-    printToChat(strformat("|cFEFEFE<<1>>|r has joined <<2>>", displayNameLink, guildNameAlliance)) -- SI_LUIE_CA_GUILD_MEMBER_ADDED
+    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MEMBER_ADDED), displayNameLink, guildNameAlliance))
 end
 
 function CA.GuildMemberRemoved(eventCode, guildId, DisplayName, CharacterName)
@@ -232,7 +232,7 @@ function CA.GuildMemberRemoved(eventCode, guildId, DisplayName, CharacterName)
     local guildName = GetGuildName(guildId)
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
-    printToChat(strformat("|cFEFEFE<<1>>|r has left <<2>>", displayNameLink, guildNameAlliance)) -- SI_LUIE_CA_GUILD_MEMBER_REMOVED
+    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MEMBER_REMOVED), displayNameLink, guildNameAlliance))
 end
 
 function CA.GuildMOTD(eventCode, guildId)
@@ -242,7 +242,7 @@ function CA.GuildMOTD(eventCode, guildId)
     local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
-    printToChat(strformat("The message of the day for <<1>> has changed:\n<<2>>", guildNameAlliance, motd)) -- SI_LUIE_CA_GUILD_MOTD_CHANGED
+    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MOTD_CHANGED), guildNameAlliance, motd))
 end
 
 function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
@@ -272,7 +272,7 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
         local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
         local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
-        printToChat(strformat("|cFEFEFE<<1>>|r's rank in <<2>> has been changed to <<3>>", displayNameLink, guildNameAlliance, rankSyntax)) -- SI_LUIE_CA_GUILD_RANK_CHANGED
+        printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED), displayNameLink, guildNameAlliance, rankSyntax))
     end
 
     if DisplayName == g_playerDisplayName then -- Cancel out if its not the player being promoted. It would be a little inefficient to index all guild members on initialize for this.
@@ -299,7 +299,7 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
         if currentRank < newRank then changestring = "demoted" end
 
         GuildRankData[guildId].rank = newRank
-        printToChat(strformat("You have been <<1>> to <<2>> in <<3>>", changestring, rankSyntax, guildNameAlliance)) -- SI_LUIE_CA_GUILD_RANK_CHANGED_SELF
+        printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_SELF), changestring, rankSyntax, guildNameAlliance))
     end
 end
 
@@ -307,7 +307,7 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
     local allianceIconSize = 16
     local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-    printToChat(strformat("You have joined <<1>>", guildNameAlliance)) -- SI_LUIE_CA_GUILD_JOIN_SELF
+    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_JOIN_SELF), guildNameAlliance))
     GuildJoinFudger = true
 
     -- Reindex Guild Ranks
@@ -326,7 +326,7 @@ function CA.GuildRemovedSelf(eventCode, guildId, guildName)
     local allianceIconSize = 16
     local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-    printToChat(strformat("You have left <<1>>", guildNameAlliance)) -- SI_LUIE_CA_GUILD_LEAVE_SELF
+    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_LEAVE_SELF), guildNameAlliance))
 
     -- Reindex Guild Ranks
     GuildRankData = {}
@@ -344,7 +344,7 @@ function CA.GuildInviteAdded(eventCode, guildId, guildName, guildAlliance, invit
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
     local allianceIconSize = 16
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-    printToChat(strformat("|cFEFEFE<<1>>|r has invited you to join <<2>>", displayNameLink, guildNameAlliance)) -- SI_LUIE_CA_GUILD_INVITE_SELF
+    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_INVITE_SELF), displayNameLink, guildNameAlliance)) 
 end
 
 function CA.GuildInviteRemoved(eventCode, guildId)
@@ -367,18 +367,18 @@ end
 
 function CA.FriendAdded(eventCode, DisplayName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
-    printToChat(strformat("|cFEFEFE<<1>>|r added to friends list.", displayNameLink)) -- SI_LUIE_CA_FRIEND_ADDED
+    printToChat(strformat(GetString(SI_LUIE_CA_FRIEND_ADDED), displayNameLink))
     FriendInviteFudger = true
 end
 
 function CA.FriendRemoved(eventCode, DisplayName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
-    printToChat(strformat("|cFEFEFE<<1>>|r removed from friends list.", displayNameLink)) -- SI_LUIE_CA_FRIEND_REMOVED
+    printToChat(strformat(GetString(SI_LUIE_CA_FRIEND_REMOVED), displayNameLink))
 end
 
 function CA.FriendInviteAdded(eventCode, inviterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
-    printToChat(strformat("|cFEFEFE<<1>>|r wants to be your friend.", displayNameLink)) -- SI_LUIE_CA_FRIEND_INVITE_PENDING
+    printToChat(strformat(GetString(SI_LUIE_CA_FRIEND_INVITE_PENDING), displayNameLink))
 end
 
 function CA.FriendInviteRemoved(eventCode, inviterName)
@@ -393,9 +393,9 @@ function CA.QuestShared (eventCode, questId)
         local displayBothString = ( strformat("<<1>><<2>>", characterName, displayName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
 
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r wants to share the quest: <<2>>", displayNameLink, questName)) end -- SI_LUIE_CA_QUEST_SHARE_MSG
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r wants to share the quest: <<2>>", characterNameLink, questName)) end -- SI_LUIE_CA_QUEST_SHARE_MSG
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r wants to share the quest: <<2>>", displayBoth, questName)) end -- SI_LUIE_CA_QUEST_SHARE_MSG
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), displayNameLink, questName)) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), characterNameLink, questName)) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), displayBoth, questName)) end
 end
 
 function CA.QuestShareRemoved(eventCode, questId)
@@ -405,31 +405,31 @@ end
 function CA.RegisterCustomStrings()
     if CA.SV.CustomStrings then
         -- Group Invite String Replacements
-        SafeAddString(SI_GROUPINVITERESPONSE0, "Could not find a player named |cFEFEFE\"<<1>>\"|r to invite.", 1) -- SI_LUIE_GROUPINVITERESPONSE0
-        SafeAddString(SI_GROUPINVITERESPONSE10, "You have invited |cFEFEFE\"<<1>>\"|r to join your group.", 1)  -- SI_LUIE_GROUPINVITERESPONSE10
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GROUP, "<<1>> has invited you to join a group.", 1) -- SI_LUIE_PLAYER_TO_PLAYER_INCOMING_GROUP
-        SafeAddString(SI_GROUPLEAVEREASON1, "<<1>>(<<2>>) has been removed from the group.", 2) -- SI_LUIE_GROUPLEAVEREASON1
+        SafeAddString(SI_GROUPINVITERESPONSE0, GetString(SI_LUIE_GROUPINVITERESPONSE0), 1)
+        SafeAddString(SI_GROUPINVITERESPONSE10, GetString(SI_LUIE_GROUPINVITERESPONSE10), 1)
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GROUP, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_GROUP), 1)
+        SafeAddString(SI_GROUPLEAVEREASON1, GetString(SI_LUIE_GROUPLEAVEREASON1), 2) 
 
         -- Trade String Replacements
-        SafeAddString(SI_TRADE_INVITE_CONFIRM, "You have invited <<1>> to trade.", 1) -- Fixes default Trade messages to match our syntax. -- SI_LUIE_TRADE_INVITE_CONFIRM
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_TRADE, "<<1>> has invited you to trade.", 1) -- Fixes default Trade messages to match our syntax. -- SI_LUIE_PLAYER_TO_PLAYER_INCOMING_TRADE
+        SafeAddString(SI_TRADE_INVITE_CONFIRM, GetString(SI_LUIE_TRADE_INVITE_CONFIRM), 1) -- Fixes default Trade messages to match our syntax.
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_TRADE, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_TRADE), 1) -- Fixes default Trade messages to match our syntax.
 
         -- Friend Invite String Replacements
-        SafeAddString(SI_FRIENDS_LIST_IGNORE_ADDED, "|cFEFEFE<<1>>|r added to ignore list.", 1) -- Fixes default Ignore List messages to match our syntax. -- SI_LUIE_FRIENDS_LIST_IGNORE_ADDED
-        SafeAddString(SI_FRIENDS_LIST_IGNORE_REMOVED, "|cFEFEFE<<1>>|r removed from ignore list.", 1) -- Fixes default Ignore List messages to match our syntax. -- SI_LUIE_FRIENDS_LIST_IGNORE_REMOVED
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST, "<<1>> wants to be your friend.", 1) -- Default ZOS string was missing a period. -- SI_LUIE_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST
+        SafeAddString(SI_FRIENDS_LIST_IGNORE_ADDED, GetString(SI_LUIE_FRIENDS_LIST_IGNORE_ADDED), 1) -- Fixes default Ignore List messages to match our syntax.
+        SafeAddString(SI_FRIENDS_LIST_IGNORE_REMOVED, GetString(SI_LUIE_FRIENDS_LIST_IGNORE_REMOVED), 1) -- Fixes default Ignore List messages to match our syntax.
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST), 1) -- Default ZOS string was missing a period.
 
-        SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_ON, "|cFEFEFE<<1>>|r has logged on.", 1) -- SI_LUIE_FRIENDS_LIST_FRIEND_LOGGED_ON
-        SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON, "|cFEFEFE<<1>>|r has logged on with |cFEFEFE<<2>>|r.", 1) -- SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON
-        SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_OFF, "|cFEFEFE<<1>>|r has logged off.", 1) -- SI_LUIE_FRIENDS_LIST_FRIEND_LOGGED_OFF
-        SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF, "|cFEFEFE<<1>>|r has logged off with |cFEFEFE<<2>>|r.", 1) -- SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF
+        SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_ON, GetString(SI_LUIE_FRIENDS_LIST_FRIEND_LOGGED_ON), 1)
+        SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON, GetString(SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON), 1)
+        SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_OFF, GetString(SI_LUIE_FRIENDS_LIST_FRIEND_LOGGED_OFF), 1)
+        SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF, GetString(SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF), 1)
 
         -- Guild Invite String Replacements
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, "<<1>> has invited you to join <<2>>", 1) -- Update syntax for guild invite message to match our chat syntax -- SI_LUIE_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST
-        SafeAddString(SI_GUILD_ROSTER_INVITED_MESSAGE,  "You have invited \"|cffffff<<1>>|r\" to join |cffffff<<2>>|r", 1) -- Update syntax for guild invitation sent message to match group syntax. -- SI_LUIE_GUILD_ROSTER_INVITED_MESSAGE
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST), 1) -- Update syntax for guild invite message to match our chat syntax
+        SafeAddString(SI_GUILD_ROSTER_INVITED_MESSAGE, GetString(SI_LUIE_GUILD_ROSTER_INVITED_MESSAGE), 1) -- Update syntax for guild invitation sent message to match group syntax.
 
         -- Quest Share String Replacements
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, "<<1>> wants to share the quest: <<2>>.", 3) -- SI_LUIE_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE), 3)
     end
 end
 
@@ -494,7 +494,7 @@ local ShowStatusDropMember = false
 function CA.GroupFindReplacementNew(eventCode)
     local activityType, activityIndex = GetLFGFindReplacementNotificationInfo()
     local name = GetLFGOption(activityType, activityIndex)
-    printToChat(strformat(GetString(SI_LFG_FIND_REPLACEMENT_TEXT), name)) -- "A group member has left your |cffffff<<1>>|r group."
+    printToChat(strformat(GetString(SI_LFG_FIND_REPLACEMENT_TEXT), name))
 end
 
 function CA.GroupReplacementFound(eventCode)
@@ -503,7 +503,7 @@ function CA.GroupReplacementFound(eventCode)
 end
 
 function CA.ActivityComplete(eventCode)
-    printToChat(GetString(SI_ACTIVITY_FINDER_ACTIVITY_COMPLETE_ANNOUNCEMENT_TEXT)) -- "Activity complete!"
+    printToChat(GetString(SI_ACTIVITY_FINDER_ACTIVITY_COMPLETE_ANNOUNCEMENT_TEXT))
 end
 
 function CA.ActivityStatusUpdate(eventCode, status)
@@ -534,23 +534,23 @@ end
 function CA.ActivityQueueResult(eventCode, result)
     --d("ActivityQueueResult: " .. result)
     if result == ACTIVITY_QUEUE_RESULT_INCOMPATIBLE_GROUP then
-        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT9))) -- "Not Queued - The members of this group are role incompatible."
+        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT9)))
     end
 
     if result == ACTIVITY_QUEUE_RESULT_MEMBERS_OFFLINE then
-        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT14))) -- "Not Queued - One or more members are offline"
+        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT14)))
     end
 
     if result == ACTIVITY_QUEUE_RESULT_ON_QUEUE_COOLDOWN then
-        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT12))) -- "Not Queued - You or a member of your group queued too recently."
+        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT12)))
     end
 
     if result == ACTIVITY_QUEUE_RESULT_MEMBER_CANCELED_READY_CHECK then
-        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT19))) -- "Not Queued - One or more members canceled Ready Check."
+        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT19)))
     end
 
     if result == ACTIVITY_QUEUE_RESULT_DLC_LOCKED then
-        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT6))) -- "Not Queued - You or members of your group do not have the DLC unlocked for that activity."
+        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT6)))
     end
 
     ShowRCUpdates = true
@@ -560,18 +560,18 @@ end
 
 function CA.ReadyCheckCancel(eventCode, reason)
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_MEMBER_CANCELED then
-        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON3)) -- Ready check canceled, group member canceled.
+        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON3))
     end
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_NOT_VIABLE then
-        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON2)) -- Ready check canceled, group was not viable.
+        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON2))
 
     end
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_FORMED_SUCCESSFULLY then
-        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON4)) -- Ready check succeeded, group formed!
+        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON4))
 
     end
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_READY then
-        printToChat("Ready check canceled, group was not ready.") -- SI_LUIE_CA_READY_CHECK_CANCELED
+        printToChat(GetString(SI_LUIE_CA_READY_CHECK_CANCELED)) 
     end
 
     ShowRCUpdates = true
@@ -601,11 +601,11 @@ function CA.ReadyCheckUpdate(eventCode)
         if activityType == LFG_ACTIVITY_TRIAL then activityName = GetString(SI_LFGACTIVITY4) end
         if activityType == 0 then return end
 
-        printToChat(strformat("|cffffff<<1>>|r ready.", activityName)) -- SI_LUIE_CA_READY_CHECK_ACTIVITY
+        printToChat(strformat(GetString(SI_LUIE_CA_READY_CHECK_ACTIVITY), activityName)) 
     end
 
     if not ShowRCUpdates and (tanksPending == 0 and healersPending == 0 and dpsPending == 0) then
-        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON3)) -- "Ready check cancelled, group member cancelled."
+        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON3))
     end
 
     ShowRCUpdates = false
@@ -622,7 +622,7 @@ end
 function CA.VoteNotify(eventCode)
     local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
     if electionType == 2 then -- Ready Check
-        printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_MESSAGE)) -- "Are you ready?"
+        printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_MESSAGE))
     end
 
     if electionType == 3 then -- Vote Kick
@@ -634,13 +634,13 @@ function CA.VoteNotify(eventCode)
         local displayBothString = ( strformat("<<1>><<2>>", kickMemberName, kickMemberAccountName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, kickMemberAccountName)
         if CA.SV.ChatPlayerDisplayOptions == 1 then
-            printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has started.", displayNameLink)) -- SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START
+            printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START), displayNameLink))
         end
         if CA.SV.ChatPlayerDisplayOptions == 2 then
-            printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has started.", characterNameLink)) -- SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START
+            printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START), characterNameLink))
         end
         if CA.SV.ChatPlayerDisplayOptions == 3 then
-            printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has started.", displayBoth)) -- SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START
+            printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START), displayBoth))
         end
     end
 end
@@ -649,13 +649,13 @@ function CA.VoteResult(eventCode, electionResult, descriptor)
     local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
     if descriptor == "[ZO_READY_CHECK]" then
         if electionResult == 1 then
-            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED)) -- "Someone in your group is not ready."
+            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED))
         end
         if electionResult == 4 then
-            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_PASSED)) -- "Everyone in your group is ready!"
+            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_PASSED))
         end
         if electionResult == 5 then
-            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED)) -- "Someone in your group is not ready."
+            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED))
         end
     end
     if descriptor == "[ZO_NONE]" then
@@ -672,19 +672,19 @@ function CA.VoteResult(eventCode, electionResult, descriptor)
             if CA.SV.ChatPlayerDisplayOptions == 2 then KickCarry = characterNameLink end
             if CA.SV.ChatPlayerDisplayOptions == 3 then KickCarry = displayBoth end
 
-            if electionResult == 1 then printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has failed.", KickCarry)) end -- SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL
-            if electionResult == 2 then printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has failed.", KickCarry)) end -- SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL
-            if electionResult == 4 then printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has passed.", KickCarry)) end -- SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL
-            if electionResult == 5 then printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has failed.", KickCarry)) end -- SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL
+            if electionResult == 1 then printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry)) end
+            if electionResult == 2 then printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry)) end
+            if electionResult == 4 then printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry)) end
+            if electionResult == 5 then printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry)) end
     end
 end
 
 function CA.VoteRequested(eventCode, descriptor)
     if descriptor == "[ZO_READY_CHECK]" then
-        printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_REQUESTED)) -- "You have initiated a ready check..."
+        printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_REQUESTED))
     end
     if descriptor == "[ZO_NONE]" then
-        printToChat(GetString(SI_GROUP_ELECTION_REQUESTED)) -- "You have initiated a vote..."
+        printToChat(GetString(SI_GROUP_ELECTION_REQUESTED))
     end
 end
 
@@ -702,7 +702,7 @@ end
 -- Triggers when the group composition changes for a Party going from 2 people to 3+, we use this to display a message to the player joining the group.
 function CA.GroupUpdate(eventCode)
     if GroupJoinFudger then
-        printToChat("You have joined a group.") -- SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF
+        printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF))
     end
     GroupJoinFudger = false
 end
@@ -793,9 +793,9 @@ function CA.OnGroupInviteReceived(eventCode, inviterName, inviterDisplayName)
     local displayBothString = ( strformat("<<1>><<2>>", inviterName, inviterDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
 
-    if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r has invited you to join a group.", displayNameLink)) end -- SI_LUIE_CA_GROUP_INVITE_RECEIVED
-    if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r has invited you to join a group.", characterNameLink)) end -- SI_LUIE_CA_GROUP_INVITE_RECEIVED
-    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r has invited you to join a group.", displayBoth)) end -- SI_LUIE_CA_GROUP_INVITE_RECEIVED
+    if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_RECEIVED), displayNameLink)) end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_RECEIVED), characterNameLink)) end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_RECEIVED), displayBoth)) end
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED) -- On receiving a group invite, it fires 2 events, we disable the event handler temporarily for this then recall it after.
     zo_callLater(CA.RefreshGroupInviteEnable, 100)
 end
@@ -804,7 +804,7 @@ end
 -- Currently broken as of 2/9/2017 so we have to omit any names from this function until it returns the correct InviteeName and InviteeDisplayName instead
 function CA.OnGroupInviteResponse(eventCode, inviterName, response, inviterDisplayName)
     if response == 2 then
-        printToChat("Your group invitation was declined.") -- SI_LUIE_CA_GROUP_INVITE_DECLINED
+        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_DECLINED))
     elseif response == 3 then
         printToChat("You cannot extend a group invitation to a player that is ignoring you.")
     elseif response == 4 then -- Add some kind of override here if you try to invite yourself
@@ -841,11 +841,11 @@ function CA.OnGroupLeaderUpdate(eventCode, leaderTag)
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, groupLeaderAccount)
 
     if g_playerNameFormatted ~= groupLeaderName then -- If another player became the leader
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r is now the group leader!", displayNameLink)) end -- SI_LUIE_CA_GROUP_LEADER_CHANGED
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r is now the group leader!", characterNameLink)) end -- SI_LUIE_CA_GROUP_LEADER_CHANGED
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r is now the group leader!", displayBoth)) end -- SI_LUIE_CA_GROUP_LEADER_CHANGED
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), displayNameLink)) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), characterNameLink)) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), displayBoth)) end
     elseif g_playerNameFormatted == groupLeaderName then -- If the player character became the leader
-        printToChat("You are now the group leader!") -- SI_LUIE_CA_GROUP_LEADER_CHANGED_SELF
+        printToChat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_SELF))
     end
 end
 
@@ -878,11 +878,11 @@ function CA.OnGroupMemberJoined(eventCode, memberName)
         local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(joinedMemberAccountName)
         local displayBothString = ( strformat("<<1>><<2>>", joinedMemberName, joinedMemberAccountName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, joinedMemberAccountName)
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r has joined the group.", displayNameLink)) end -- SI_LUIE_CA_GROUP_MEMBER_JOIN
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r has joined the group.", characterNameLink)) end -- SI_LUIE_CA_GROUP_MEMBER_JOIN
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r has joined the group.", displayBoth)) end -- SI_LUIE_CA_GROUP_MEMBER_JOIN
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), displayNameLink)) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), characterNameLink)) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), displayBoth)) end
     elseif g_playerName == memberName then
-        printToChat("You have joined a group.") -- Only prints on the initial group form between 2 players. -- SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF
+        printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF)) -- Only prints on the initial group form between 2 players.
     end
 
     g_partyStack = { }
@@ -899,11 +899,11 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
     if g_playerName == memberName then ShowStatusDropMember = false end -- Resets variable for Group Finder events, just in case.
 
     if reason == GROUP_LEAVE_REASON_VOLUNTARY then
-        msg = g_playerName == memberName and "You have left the group." or "|cFEFEFE<<1>>|r has left the group." -- SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF  SI_LUIE_CA_GROUP_MEMBER_LEAVE
+        msg = g_playerName == memberName and GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF) or GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE)
     elseif reason == GROUP_LEAVE_REASON_KICKED then
-        msg = g_playerName == memberName and "You have been removed from the group." or "|cFEFEFE<<1>>|r has been removed from the group." -- SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF  SI_LUIE_CA_GROUP_MEMBER_KICKED
+        msg = g_playerName == memberName and GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF) or GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED)  
     elseif reason == GROUP_LEAVE_REASON_DISBAND and g_playerName == memberName then
-        msg = "The group has been disbanded." -- SI_LUIE_CA_GROUP_DISBAND_MSG
+        msg = GetString(SI_LUIE_CA_GROUP_DISBAND_MSG)
     end
     if msg then
         -- Can occur if event is before EVENT_PLAYER_ACTIVATED
@@ -1171,9 +1171,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
                 end
             elseif not MailStop then
                 if not CA.SV.GoldChange then
-                    printToChat(strformat("Received mail with <<1>> gold.", changetype)) -- SI_LUIE_CA_MAIL_RECEIVED_GOLD_MSG
+                    printToChat(strformat(GetString(SI_LUIE_CA_MAIL_RECEIVED_GOLD_MSG), changetype))
                 else
-                    printToChat("Received mail with gold.") -- SI_LUIE_CA_MAIL_RECEIVED_VAR_GOLD_MSG
+                    printToChat(GetString(SI_LUIE_CA_MAIL_RECEIVED_VAR_GOLD_MSG))
                 end
             end
             if CA.SV.GoldChange then
@@ -1225,13 +1225,13 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             total = ""
         end
 
-        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and not CA.SV.GoldChange then printToChat(strformat("COD Payment of <<1>> gold sent!", changetype)) end -- SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT
-        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and CA.SV.GoldChange then printToChat("COD Payment sent!") end -- SI_LUIE_CA_MAIL_COD_GOLD_SENT1
-        if CA.SV.MiscMail and mailCOD == 0 and mailMoney == 0 and postageAmount >= 1 then printToChat("Mail sent!") end -- SI_LUIE_CA_MAIL_SENT_SUCCESS
-        if CA.SV.MiscMail and mailMoney ~= 0 and not CA.SV.GoldChange then printToChat(strformat("Mail sent with <<1>> gold!", mailMoney) ) end -- SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG
-        if CA.SV.MiscMail and mailMoney ~= 0 and CA.SV.GoldChange then printToChat("Mail sent!") end -- SI_LUIE_CA_MAIL_SENT_SUCCESS
-        if CA.SV.MiscMail and mailCOD ~= 0 and not CA.SV.GoldChange then printToChat(strformat("COD sent for <<1>> gold!", mailCOD) ) end -- SI_LUIE_CA_MAIL_COD_GOLD_SENT2
-        if CA.SV.MiscMail and mailCOD ~= 0 and CA.SV.GoldChange then printToChat("COD sent!") end -- SI_LUIE_CA_MAIL_COD_SENT_SUCCESS
+        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and not CA.SV.GoldChange then printToChat(strformat(GetString(SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT), changetype)) end
+        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and CA.SV.GoldChange then printToChat(GetString(SI_LUIE_CA_MAIL_COD_GOLD_SENT1)) end
+        if CA.SV.MiscMail and mailCOD == 0 and mailMoney == 0 and postageAmount >= 1 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_SUCCESS)) end
+        if CA.SV.MiscMail and mailMoney ~= 0 and not CA.SV.GoldChange then printToChat(strformat(GetString(SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG), mailMoney) ) end
+        if CA.SV.MiscMail and mailMoney ~= 0 and CA.SV.GoldChange then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_SUCCESS)) end
+        if CA.SV.MiscMail and mailCOD ~= 0 and not CA.SV.GoldChange then printToChat(strformat(GetString(SI_LUIE_CA_MAIL_COD_GOLD_SENT2), mailCOD) ) end
+        if CA.SV.MiscMail and mailCOD ~= 0 and CA.SV.GoldChange then printToChat(GetString(SI_LUIE_CA_MAIL_COD_SENT_SUCCESS)) end
 
         valuesent = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
 
@@ -2387,13 +2387,13 @@ function CA.TradeInviteWaiting(eventCode, inviteeCharacterName, inviteeDisplayNa
     local displayBothString = ( strformat("<<1>><<2>>", gsub(inviteeCharacterName,"%^%a+",""), inviteeDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviteeDisplayName)
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then
-        printToChat(strformat("You have invited |cFEFEFE<<1>>|r to trade.", displayNameLink)) -- SI_LUIE_CA_TRADE_INVITE_MSG_SELF
+        printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MSG_SELF), displayNameLink))
     end
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 2 then
-        printToChat(strformat("You have invited |cFEFEFE<<1>>|r to trade.", characterNameLink)) -- SI_LUIE_CA_TRADE_INVITE_MSG_SELF
+        printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MSG_SELF), characterNameLink))
     end
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then
-        printToChat(strformat("You have invited |cFEFEFE<<1>>|r to trade.", displayBoth)) -- SI_LUIE_CA_TRADE_INVITE_MSG_SELF
+        printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MSG_SELF), displayBoth))
     end
 end
 
@@ -2405,25 +2405,25 @@ function CA.TradeInviteConsidering(eventCode, inviterCharacterName, inviterDispl
     local displayBothString = ( strformat("<<1><<<2>>", gsub(inviterCharacterName,"%^%a+",""), inviterDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then
-        printToChat(strformat("|cFEFEFE<<1>>|r has invited you to trade.", displayNameLink)) -- SI_LUIE_CA_TRADE_INVITE_MSG
+        printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MSG), displayNameLink))
     end
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 2 then
-        printToChat(strformat("|cFEFEFE<<1>>|r has invited you to trade.", characterNameLink)) -- SI_LUIE_CA_TRADE_INVITE_MSG
+        printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MSG), characterNameLink))
     end
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then
-        printToChat(strformat("|cFEFEFE<<1>>|r has invited you to trade.", displayBoth)) -- SI_LUIE_CA_TRADE_INVITE_MSG
+        printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MSG), displayBoth)) 
     end
 end
 
 function CA.TradeInviteAccepted(eventCode)
     if CA.SV.MiscTrade then
-        printToChat("Trade invite accepted.") -- SI_LUIE_CA_TRADE_INVITE_ACCEPTED
+        printToChat(GetString(SI_LUIE_CA_TRADE_INVITE_ACCEPTED))
     end
 end
 
 function CA.TradeInviteDecline(eventCode)
     if CA.SV.MiscTrade then
-        printToChat(GetString(SI_TRADE_INVITE_DECLINE)) -- "Trade invite declined."
+        printToChat(GetString(SI_TRADE_INVITE_DECLINE))
     end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
@@ -2433,7 +2433,7 @@ end
 
 function CA.TradeInviteCancel(eventCode)
     if CA.SV.MiscTrade then
-        printToChat(GetString(SI_TRADE_CANCEL_INVITE)) -- "Trade invitation canceled."
+        printToChat(GetString(SI_TRADE_CANCEL_INVITE))
     end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
@@ -2471,7 +2471,7 @@ end
 -- Cleanup if a Trade is canceled/exited
 function CA.TradeCancel(eventCode, cancelerName)
     if CA.SV.MiscTrade then
-        printToChat(GetString(SI_TRADE_CANCELED)) -- "Trade canceled."
+        printToChat(GetString(SI_TRADE_CANCELED))
     end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
@@ -2481,7 +2481,7 @@ end
 
 function CA.TradeFail(eventCode, cancelerName)
     if CA.SV.MiscTrade then
-        printToChat(GetString(SI_TRADE_FAILED)) -- "Trade failed."
+        printToChat(GetString(SI_TRADE_FAILED))
     end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
@@ -2494,7 +2494,7 @@ function CA.OnTradeSuccess(eventCode)
     combostring = ""
 
     if CA.SV.MiscTrade then
-        printToChat(GetString(SI_TRADE_COMPLETE)) -- "Trade complete."
+        printToChat(GetString(SI_TRADE_COMPLETE))
     end
     if CA.SV.MiscTrade and tradestring1 ~= "" then printToChat(tradestring1) end
     if CA.SV.MiscTrade and tradestring2 ~= "" then printToChat(tradestring2) end
@@ -2596,7 +2596,7 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
     local plural = "s"
     if NumMails == 1 then plural = "" end
 
-    MailStringPart1 = (strformat("Received mail with <<1>> attachment<<2>>", NumMails, plural) ) -- SI_LUIE_CA_MAIL_RECEIVED_ATTACHMENT
+    MailStringPart1 = (strformat(GetString(SI_LUIE_CA_MAIL_RECEIVED_ATTACHMENT), NumMails, plural) )
     zo_callLater(PrintMailAttachmentsIfNoGold, 25) -- We call this with a super short delay, it will return a string as long as a currency change event doesn't trigger beforehand!
 
     g_MailStacks = {}
@@ -2632,13 +2632,13 @@ end
 
 function CA.OnMailFail(eventCode, reason)
     if CA.SV.MiscMail then
-        if reason == 2 then printToChat("Cannot send mail: Unknown Player.") end -- SI_LUIE_CA_MAIL_SENT_FAILED_UNKNOWN_PLAYER
-        if reason == 3 then printToChat("Cannot send mail: Recipient's Inbox is full.") end -- SI_LUIE_CA_MAIL_SENT_FAILED_RECIP_INBOX_FULL
-        if reason == 4 then printToChat("You cannot send mail to that recipient.") end -- SI_LUIE_CA_MAIL_SENT_FAILED_CANT_SEND_TO_RECIP
-        if reason == 5 then printToChat("Cannot send mail: Not enough gold.") end -- SI_LUIE_CA_MAIL_SENT_FAILED_NOT_ENOUGH_GOLD
-        if reason == 11 then printToChat("You cannot send mail to yourself.") end -- SI_LUIE_CA_MAIL_SENT_FAILED_CANT_SEND_TO_SELF
-        if reason == 9 then printToChat("You must attach at least one item for Cash on Delivery mail.") end -- SI_LUIE_CA_MAIL_SENT_FAILED_COD_NO_ATTACHMENT
-        if reason == 7 then printToChat("Cannot send mail: This mail is lacking a subject, body, or attachments.") end -- SI_LUIE_CA_MAIL_SENT_FAILED_NO_SUB_BODY_ATTACHMENT
+        if reason == 2 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_UNKNOWN_PLAYER)) end
+        if reason == 3 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_RECIP_INBOX_FULL)) end
+        if reason == 4 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_CANT_SEND_TO_RECIP)) end
+        if reason == 5 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_NOT_ENOUGH_GOLD)) end 
+        if reason == 11 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_CANT_SEND_TO_SELF)) end
+        if reason == 9 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_COD_NO_ATTACHMENT)) end
+        if reason == 7 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_NO_SUB_BODY_ATTACHMENT)) end
         MailStop = true
         zo_callLater(CA.MailClearVariables, 500)
     end
@@ -2679,7 +2679,7 @@ end
 
 function CA.FunctionMailCurrencyCheck()
     if MailCurrencyCheck and CA.SV.MiscMail then
-        printToChat("Mail sent!") -- SI_LUIE_CA_MAIL_SENT_SUCCESS
+        printToChat(GetString(SI_LUIE_CA_MAIL_SENT_SUCCESS)) 
     end
 end
 
@@ -2773,16 +2773,16 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
 
             if CA.SV.ExperienceLevelUp and Crossover == 0 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat("You have reached <<1>><<2>>", icon, CurrentLevelFormatted)) -- SI_LUIE_CA_XP_LVL_ANNOUNCE1
+                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat("You have reached <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel)) -- SI_LUIE_CA_XP_LVL_ANNOUNCE2
+                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel))
                 end
             end
             if CA.SV.ExperienceLevelUp and Crossover == 1 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat("Champion Level Achieved! <<1>><<2>>", icon, CurrentLevelFormatted)) -- SI_LUIE_CA_CP_LVL_ANNOUNCE1
+                    printToChat(strformat(GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat("Champion Level Achieved! <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel)) -- SI_LUIE_CA_CP_LVL_ANNOUNCE2
+                    printToChat(strformat(GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel))
                 end
             end
         else
@@ -2796,16 +2796,16 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
 
             if CA.SV.ExperienceLevelUp and Crossover == 0 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat("You have reached <<1>><<2>>", icon, CurrentLevelFormatted)) -- SI_LUIE_CA_XP_LVL_ANNOUNCE1
+                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat("You have reached <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel)) -- SI_LUIE_CA_XP_LVL_ANNOUNCE2
+                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel))
                 end
             end
             if CA.SV.ExperienceLevelUp and Crossover == 1 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat("Champion Level Achieved! <<1>><<2>>", icon, CurrentLevelFormatted)) -- SI_LUIE_CA_CP_LVL_ANNOUNCE1
+                    printToChat(strformat(GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat("Champion Level Achieved! <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel)) -- SI_LUIE_CA_CP_LVL_ANNOUNCE2
+                    printToChat(strformat(GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel))
                 end
             end
 
@@ -2852,9 +2852,9 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
 
             if CA.SV.ExperienceLevelUp then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat("You have reached <<1>><<2>>", icon, CurrentLevelFormatted)) -- SI_LUIE_CA_XP_LVL_ANNOUNCE1
+                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted)) 
                 else
-                    printToChat(strformat("You have reached <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel)) -- SI_LUIE_CA_XP_LVL_ANNOUNCE2
+                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel)) 
                 end
             end
         else
@@ -2868,9 +2868,9 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
 
             if CA.SV.ExperienceLevelUp then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat("You have reached <<1>><<2>>", icon, CurrentLevelFormatted)) -- SI_LUIE_CA_XP_LVL_ANNOUNCE1
+                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat("You have reached <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel)) -- SI_LUIE_CA_XP_LVL_ANNOUNCE2
+                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel))
                 end
             end
 
