@@ -2775,16 +2775,16 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
         
             if CA.SV.ExperienceLevelUp and Crossover == 0 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat("You have reached <<1>><<2>>", icon, CurrentLevelFormatted))
+                    printToChat(strformat("You have reached <<1>><<2>>", icon, CurrentLevelFormatted)) -- SI_LUIE_CA_XP_LVL_ANNOUNCE1
                 else
-                    printToChat(strformat("You have reached <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel))
+                    printToChat(strformat("You have reached <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel)) -- SI_LUIE_CA_XP_LVL_ANNOUNCE2
                 end
             end
             if CA.SV.ExperienceLevelUp and Crossover == 1 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat("Champion Level Achieved! <<1>><<2>>", icon, CurrentLevelFormatted))
+                    printToChat(strformat("Champion Level Achieved! <<1>><<2>>", icon, CurrentLevelFormatted)) -- SI_LUIE_CA_CP_LVL_ANNOUNCE1
                 else
-                    printToChat(strformat("Champion Level Achieved! <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel))
+                    printToChat(strformat("Champion Level Achieved! <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel)) -- SI_LUIE_CA_CP_LVL_ANNOUNCE2
                 end
             end
         else
@@ -2798,16 +2798,16 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
         
             if CA.SV.ExperienceLevelUp and Crossover == 0 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat("You have reached <<1>><<2>>", icon, CurrentLevelFormatted))
+                    printToChat(strformat("You have reached <<1>><<2>>", icon, CurrentLevelFormatted)) -- SI_LUIE_CA_XP_LVL_ANNOUNCE1
                 else
-                    printToChat(strformat("You have reached <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel))
+                    printToChat(strformat("You have reached <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel)) -- SI_LUIE_CA_XP_LVL_ANNOUNCE2
                 end
             end
             if CA.SV.ExperienceLevelUp and Crossover == 1 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat("Champion Level Achieved! <<1>><<2>>", icon, CurrentLevelFormatted))
+                    printToChat(strformat("Champion Level Achieved! <<1>><<2>>", icon, CurrentLevelFormatted)) -- SI_LUIE_CA_CP_LVL_ANNOUNCE1
                 else
-                    printToChat(strformat("Champion Level Achieved! <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel))
+                    printToChat(strformat("Champion Level Achieved! <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel)) -- SI_LUIE_CA_CP_LVL_ANNOUNCE2
                 end
             end
             
@@ -2854,9 +2854,9 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
         
             if CA.SV.ExperienceLevelUp then
                 if CA.SV.ExperienceColorLevel then 
-                    printToChat(strformat("You have reached <<1>><<2>>", icon, CurrentLevelFormatted))
+                    printToChat(strformat("You have reached <<1>><<2>>", icon, CurrentLevelFormatted)) -- SI_LUIE_CA_XP_LVL_ANNOUNCE1
                 else
-                    printToChat(strformat("You have reached <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel))
+                    printToChat(strformat("You have reached <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel)) -- SI_LUIE_CA_XP_LVL_ANNOUNCE2
                 end
             end
         else
@@ -2870,9 +2870,9 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
         
             if CA.SV.ExperienceLevelUp then
                 if CA.SV.ExperienceColorLevel then 
-                    printToChat(strformat("You have reached <<1>><<2>>", icon, CurrentLevelFormatted))
+                    printToChat(strformat("You have reached <<1>><<2>>", icon, CurrentLevelFormatted)) -- SI_LUIE_CA_XP_LVL_ANNOUNCE1
                 else
-                    printToChat(strformat("You have reached <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel))
+                    printToChat(strformat("You have reached <<1>><<2>> <<3>>", icon, LevelContext, CurrentLevel)) -- SI_LUIE_CA_XP_LVL_ANNOUNCE2
                 end
             end
             

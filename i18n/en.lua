@@ -42,3 +42,9 @@ ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_SUCCESS",           "Mail sent!")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_SENT_SUCCESS",       "COD sent!")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG",      "Mail sent with <<1>> gold!")
 
+ZO_CreateStringId("SI_LUIE_CA_XP_LVL_ANNOUNCE1",             "You have reached <<1>><<2>>")
+ZO_CreateStringId("SI_LUIE_CA_XP_LVL_ANNOUNCE2",             "You have reached <<1>><<2>> <<3>>")
+
+ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE1",             "Champion Level Achieved! <<1>><<2>>")
+ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE2",             "Champion Level Achieved! <<1>><<2>> <<3>>")
+
