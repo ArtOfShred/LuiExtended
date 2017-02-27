@@ -3454,10 +3454,9 @@ function CA.GetItemLinkFromItemId(itemId)
     local name = GetItemLinkName(ZO_LinkHandler_CreateLink("Test Trash", nil, ITEM_LINK_TYPE,itemId, 1, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 10000, 0))
     return ZO_LinkHandler_CreateLink(strformat("<<t:1>>", name), nil, ITEM_LINK_TYPE,itemId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 end
-
 -- Only used if the option to see destroyed items or items lost from a guard is turned on
 function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-    if bagId == 1 then
+    if bagId == BAG_BACKPACK then
         local receivedBy = ""
         if not g_InventoryStacks[slotId] then -- NEW ITEM
             local icon, stack = GetItemInfo(bagId, slotId)
@@ -3501,13 +3500,10 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
 
     ItemWasDestroyed = false
 end
-
 function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     ---------------------------------- INVENTORY ----------------------------------
-    if bagId == 1 then --
-
+    if bagId == BAG_BACKPACK then
         local receivedBy = "CRAFT"
-
         if not g_InventoryStacks[slotId] then -- NEW ITEM
             local icon, stack = GetItemInfo(bagId, slotId)
             local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
@@ -3585,10 +3581,8 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
     end
 
     ---------------------------------- BANK ----------------------------------
-    if bagId == 2 then --
-
+    if bagId == BAG_BANK then 
         local receivedBy = "CRAFT"
-
         if not g_BankStacks[slotId] then -- NEW ITEM
             local icon, stack = GetItemInfo(bagId, slotId)
             local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
@@ -3666,8 +3660,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
     end
 
     ---------------------------------- CRAFTING BAG ----------------------------------
-    if bagId == 5 then --
-
+    if bagId == BAG_VIRTUAL then
         local itemlink = CA.GetItemLinkFromItemId(slotId)
         local icon = GetItemLinkInfo(itemlink)
         icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
@@ -3692,7 +3685,7 @@ end
 
 function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     ---------------------------------- INVENTORY ----------------------------------
-    if bagId == 1 then --
+    if bagId == BAG_BACKPACK then
         local receivedBy = ""
         if not g_InventoryStacks[slotId] then -- NEW ITEM
             local icon, stack = GetItemInfo(bagId, slotId)
@@ -3747,7 +3740,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
     end
 
     ---------------------------------- BANK ----------------------------------
-    if bagId == 2 then --
+    if bagId == BAG_BANK then
         local receivedBy = ""
         if not g_BankStacks[slotId] then -- NEW ITEM
             local icon, stack = GetItemInfo(bagId, slotId)
@@ -3804,7 +3797,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
     POSSIBLY ADD MORE SUPPORT HERE FOR CRAFT BAG EXTENDED, RIGHT NOW STOWING OR RETRIEVING MATERIALS TO PLAYER BAG SHOWS DEPOSIT/WITHDRAW MESSAGE
     --]]
 
-    if bagId == 5 then --
+    if bagId == BAG_VIRTUAL then
         local itemlink = CA.GetItemLinkFromItemId(slotId)
         local icon = GetItemLinkInfo(itemlink)
         icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
@@ -3827,7 +3820,7 @@ end
 
 function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     ---------------------------------- INVENTORY ----------------------------------
-    if bagId == 1 then
+    if bagId == BAG_BACKPACK then
         local receivedBy = ""
         if not g_InventoryStacks[slotId] then -- NEW ITEM
             local icon, stack = GetItemInfo(bagId, slotId)
@@ -3888,7 +3881,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
     end
 
     ---------------------------------- CRAFTING BAG ----------------------------------
-    if bagId == 5 then
+    if bagId == BAG_VIRTUAL then
         local receivedBy = ""
         local gainorloss = "|c0B610B"
         local logPrefix = "Received"
@@ -3909,7 +3902,7 @@ end
 
 function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     ---------------------------------- INVENTORY ----------------------------------
-    if bagId == 1 then --
+    if bagId == BAG_BACKPACK then
         local receivedBy = ""
         if not g_InventoryStacks[slotId] and stackCountChange > 0 then -- NEW ITEM
             local icon, stack = GetItemInfo(bagId, slotId)
@@ -3964,7 +3957,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
     end
 
     ---------------------------------- CRAFTING BAG ----------------------------------
-    if bagId == 5 then --
+    if bagId == BAG_VIRTUAL then
         local itemlink = CA.GetItemLinkFromItemId(slotId)
         local icon = GetItemLinkInfo(itemlink)
         icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
