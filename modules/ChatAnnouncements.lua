@@ -636,13 +636,13 @@ function CA.VoteNotify(eventCode)
         local displayBothString = ( strformat("<<1>><<2>>", kickMemberName, kickMemberAccountName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, kickMemberAccountName)
         if CA.SV.ChatPlayerDisplayOptions == 1 then
-            printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has started.", displayNameLink)) -- SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK
+            printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has started.", displayNameLink)) -- SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START
         end
         if CA.SV.ChatPlayerDisplayOptions == 2 then
-            printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has started.", characterNameLink)) -- SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK
+            printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has started.", characterNameLink)) -- SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START
         end
         if CA.SV.ChatPlayerDisplayOptions == 3 then
-            printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has started.", displayBoth)) -- SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK
+            printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has started.", displayBoth)) -- SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START
         end
     end
 end
@@ -674,10 +674,10 @@ function CA.VoteResult(eventCode, electionResult, descriptor)
             if CA.SV.ChatPlayerDisplayOptions == 2 then KickCarry = characterNameLink end
             if CA.SV.ChatPlayerDisplayOptions == 3 then KickCarry = displayBoth end
 
-            if electionResult == 1 then printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has failed.", KickCarry)) end
-            if electionResult == 2 then printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has failed.", KickCarry)) end
-            if electionResult == 4 then printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has passed.", KickCarry)) end
-            if electionResult == 5 then printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has failed.", KickCarry)) end
+            if electionResult == 1 then printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has failed.", KickCarry)) end -- SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL
+            if electionResult == 2 then printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has failed.", KickCarry)) end -- SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL
+            if electionResult == 4 then printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has passed.", KickCarry)) end -- SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL
+            if electionResult == 5 then printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has failed.", KickCarry)) end -- SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL
     end
 end
 
