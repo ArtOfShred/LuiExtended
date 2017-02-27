@@ -1483,7 +1483,7 @@ function LUIE_CreateSettings()
                     },
                     {
                         type = "slider",
-                        name = "Alliance Point Gain - Filter Threshold",
+                        name = "\t\t\t\tAlliance Point Gain - Filter Threshold",
                         tooltip = "Alliance point gains under this threshold will not display in chat, this option is intended to reduce spam from group PVP combat.",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AlliancePointFilter end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AlliancePointFilter = value end,
@@ -2296,7 +2296,6 @@ function LUIE_CreateSettings()
         warning = "Enable this only if you know what you are doing.",
         default = LUIE.D.ChatUseSystem,
     }
-
     optionsData[#optionsData + 1] = { -- Timestamp
         type = "checkbox",
         name = "\t\tInclude Timestamp",
@@ -2307,7 +2306,6 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.ChatUseSystem end,
         default = LUIE.D.TimeStamp,
     }
-
     optionsData[#optionsData + 1] = { -- Timestamp Format
         type = "editbox",
         name = "\t\tTimestamp format",
@@ -2318,7 +2316,6 @@ function LUIE_CreateSettings()
         disabled = function() return not (LUIE.SV.ChatUseSystem and LUIE.SV.TimeStamp) end,
         default = LUIE.D.TimeStampFormat,
     }
-
     optionsData[#optionsData + 1] = { -- Startup message options
         type = "checkbox",
         name = "Disable startup message",
@@ -2328,12 +2325,12 @@ function LUIE_CreateSettings()
         width = "full",
         default = LUIE.D.StartupInfo,
     }
-    optionsData[#optionsData + 1] = { -- 
+    optionsData[#optionsData + 1] = {
         type = "header",
         name = "LUIE Slash Commands Overview",
         width = "full",
     }
-    optionsData[#optionsData + 1] = { -- 
+    optionsData[#optionsData + 1] = {
         type = "description",
         text = "\"/home:\" Ports the user to their primary home.\n\"/disband:\" Disbands the current group if you are group leader.\n\"/regroup:\" Saves your current party configuration, disbands the group and reinvites them after 5 seconds. This command does not work in LFG.\n\"/ginvite1,2,3,4,5:\" Invites a player to one of your guilds based on their order in your Guild Menu. Example syntax: \"/ginvite1 @ArtOfShred\"",
     }
