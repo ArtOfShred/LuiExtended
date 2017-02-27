@@ -39,9 +39,9 @@ SCB.D = {
     BuffFontFace                     = "Fontin Regular",
     BuffFontStyle                    = "outline",
     BuffFontSize                     = 16,
-    Alignment                        = L.Setting_Center,
-    AlignmentVert                    = L.Setting_Top,
-    SortDirection                    = L.Setting_OrderX[1],
+    Alignment                        = "Centered",
+    AlignmentVert                    = "Top",
+    SortDirection                    = "Left to Right",
     GlowIcons                        = false,
     RemainingText                    = true,
     RemainingTextColoured            = false,
@@ -470,8 +470,8 @@ local IsAbilityCustomToggle = {
 
 -- some optimization
 local strHidden = L.Effect_Hidden
-local strHomeKeep   = L.Passive_HomeKeepBonus
-local strEnemyKeep  = L.Passive_EnemyKeepBonus
+local strHomeKeep   = "Home Keep Bonus"
+local strEnemyKeep  = "Enemy Keep Bonus"
 
 --[[
  * Manually handled list of potion durations.
@@ -750,14 +750,14 @@ end
  ]]--
 function SCB.SetIconsAlignment( value )
     -- check correctness of argument value
-    if value ~= L.Setting_Left and value ~= L.Setting_Center and value ~= L.Setting_Right then
+    if value ~= "Left" and value ~= "Centered" and value ~= "Right" then
         value = SCB.D.Alignment
     end
     SCB.SV.Alignment = value
 
     if not SCB.Enabled then return end
 
-    g_horizAlign = ( value == L.Setting_Left ) and LEFT or ( value == L.Setting_Right ) and RIGHT or CENTER
+    g_horizAlign = ( value == "Left" ) and LEFT or ( value == "Right" ) and RIGHT or CENTER
 
     for _, v in pairs(containerRouting) do
         if uiTlw[v].iconHolder then
@@ -774,14 +774,14 @@ end
 
 function SCB.SetIconsAlignmentVert( value )
     -- check correctness of argument value
-    if value ~= L.Setting_Top and value ~= L.Setting_Middle and value ~= L.Setting_Bottom then
+    if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
         value = SCB.D.AlignmentVert
     end
     SCB.SV.AlignmentVert = value
 
     if not SCB.Enabled then return end
 
-    g_vertAlign = ( value == L.Setting_Top ) and TOP or ( value == L.Setting_Bottom ) and BOTTOM or MIDDLE
+    g_vertAlign = ( value == "Top" ) and TOP or ( value == "Bottom" ) and BOTTOM or MIDDLE
 
     for _, v in pairs(containerRouting) do
         if uiTlw[v].iconHolder then
@@ -801,12 +801,12 @@ end
  ]]--
 function SCB.SetSortDirection( value )
     -- check correctness of argument value
-    if value ~= L.Setting_OrderX[1] and value ~= L.Setting_OrderX[2] then
+    if value ~= "Left to Right" and value ~= "Right to Left" then
         value = SCB.D.SortDirection
     end
     SCB.SV.SortDirection = value
 
-    g_horizSortInvert = (value == L.Setting_OrderX[2])
+    g_horizSortInvert = (value == "Right to Left")
 end
 
 --[[
@@ -1737,7 +1737,7 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
         type    = mechanicType,
         cost    = abilityCost,
         icon    = GetSlotTexture(slotNum),
-        ground  = ( GetAbilityTargetDescription(ability_id) == L.Ability_Target_Description_Ground ),
+        ground  = ( GetAbilityTargetDescription(ability_id) == "Ground" ),
         effects = effects
     }
 

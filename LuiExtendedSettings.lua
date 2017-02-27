@@ -59,8 +59,8 @@ function LUIE_CreateSettings()
     }
     local rotationOptions = { "Horizontal", "Vertical" }
     local rotationOptionsKeys = { ["Horizontal"] = 1, ["Vertical"] = 2 }
-    local hAlignOptions = { L.Setting_Left, L.Setting_Center, L.Setting_Right }
-    local vAlignOptions = { L.Setting_Top, L.Setting_Middle, L.Setting_Bottom }
+    local hAlignOptions = { "Left", "Centered", "Right" }
+    local vAlignOptions = { "Top", "Middle", "Bottom" }
 
     local panelData = {
         type = "panel",
@@ -812,7 +812,7 @@ function LUIE_CreateSettings()
                 type = "dropdown",
                 name = "Descending sort direction",
                 --tooltip = "",
-                choices = L.Setting_OrderX,
+                choices = {"Left to Right", "Right to Left"},
                 getFunc = function() return LUIE.SpellCastBuffs.SV.SortDirection end,
                 setFunc = LUIE.SpellCastBuffs.SetSortDirection,
                 width = "full",

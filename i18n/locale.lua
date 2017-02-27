@@ -1,11 +1,4 @@
-
 local L = {}
-
--- ---------------------------------------------------
--- SKILLS DATA ---------------------------------------
--- ---------------------------------------------------
-
-L.Ability_Target_Description_Ground = "Ground"
 
 -- ---------------------------------------------------
 -- WEAPONS -------------------------------------------
@@ -348,7 +341,7 @@ L.Skill_Summon_Charged_Atronach  = 23495
 L.Effect_Atronach                = 23659
 L.Effect_Atronach_Zap            = 23428
 L.Skill_Daedric_Curse            = 24326
-L.Skill_Daedric_Prey             = 63210 --24328
+L.Skill_Daedric_Prey             = 63210 -- 24328
 L.Skill_Velocious_Curse          = 24330
 L.Skill_Conjured_Ward            = 28418
 L.Skill_Empowered_Ward           = 29482
@@ -527,9 +520,9 @@ L.Toggled_Energy_Overload           = 24804
 L.Toggled_Power_Overload            = 24806
 L.Toggled_Leeching_Strikes          = 36908
 L.Toggled_Brace_Generic             = 14890
-L.Toggled_Guard                     = 63318 --Untested
-L.Toggled_Mystic_Guard              = 63335 --Untested
-L.Toggled_Stalwart_Guard            = 63351 --Untested
+L.Toggled_Guard                     = 63318 -- Untested
+L.Toggled_Mystic_Guard              = 63335 -- Untested
+L.Toggled_Stalwart_Guard            = 63351 -- Untested
 
 -- ---------------------------------------------------
 -- DAMAGE SHIELDS ------------------------------------
@@ -621,20 +614,18 @@ L.Passive_Defensive_Scroll_Bonus_2  = 16350
 L.Passive_Emperorship               = 39671
 L.Passive_Blessing_of_War           = 66282
 L.Passive_BattleSpirit              = 12033
---L.Passive_Sanctuary                 = 64197
+--L.Passive_Sanctuary               = 64197
 
 -- ---------------------------------------------------
 -- PASSIVE COMPARE -----------------------------------
 -- ---------------------------------------------------
 
-L.Passive_HomeKeepBonus             = 'Home Keep Bonus'
-L.Passive_EnemyKeepBonus            = 'Enemy Keep Bonus'
 L.Passive_SoulSummons               = 39269
 --alchemy
 --champion points
 L.Passive_Invigorating_Bash         = 60407 --, 60409
 -- sorc
---L.Passive_Intercept                 = 23284
+--L.Passive_Intercept               = 23284
 --night blade
 L.Passive_SoulSiphoner              = 36603
 --light armor
@@ -703,96 +694,11 @@ L.Potion_Distillate                 = "Distillate"
 L.Potion_Essence                    = "Essence"
 
 -- ---------------------------------------------------
--- SETTINGS ------------------------------------------
--- ---------------------------------------------------
-
-L.Setting_Left                      = "Left"
-L.Setting_Center                    = "Centered"
-L.Setting_Right                     = "Right"
-L.Setting_Top                       = "Top"
-L.Setting_Middle                    = "Middle"
-L.Setting_Bottom                    = "Bottom"
-L.Setting_OrderX                    = {'Left to Right', 'Right to Left'}
-
--- ---------------------------------------------------
 -- replace ability IDs with names --------------------
 -- ---------------------------------------------------
 for k, v in pairs(L) do
     if type(v) == "number" then
         L[k] = GetAbilityName(v)
-    end
-end
-
--- ---------------------------------------------------
--- GERMAN OVERLAY DATA -------------------------------
--- ---------------------------------------------------
-
-local DE = {}
-
-DE.Ability_Target_Description_Ground = "Bodenziel"
-
-DE.Passive_HomeKeepBonus  = 'gesicherte Heimat'
-DE.Passive_EnemyKeepBonus = 'Eroberungseuphorie'
-
-DE.Potion_Sip             = "Schlückchen"
-DE.Potion_Tincture        = "Tinctur"
-DE.Potion_Serum           = "Serum"
-DE.Potion_Dram            = "Schluck"
-DE.Potion_Effusion        = "Erguss"
-DE.Potion_Potion          = "Trank"
-DE.Potion_Draught         = "Mundvoll"
-DE.Potion_Solution        = "Lösung"
-DE.Potion_Philter         = "Zaubertrank"
-DE.Potion_Elixir          = "Elixier"
-DE.Potion_Panacea         = "Panazee"
-DE.Potion_Distillate      = "Destillat"
-DE.Potion_Essence         = "Essenz"
-
-DE.Setting_Left           = "Links"
-DE.Setting_Center         = "Zentriert"
-DE.Setting_Right          = "Rechts"
-DE.Setting_OrderX         = {'Links nach Rechts', 'Rechts nach Links'}
-
-if (GetCVar('language.2') == 'de') then
-    for k,v in pairs(DE) do
-        L[k] = v
-    end
-end
-
--- ---------------------------------------------------
--- FRENCH OVERLAY DATA -------------------------------
--- ---------------------------------------------------
-
-local FR = {}
-
-FR.Ability_Target_Description_Ground = "Sol"
-
-FR.Passive_HomeKeepBonus  = 'Bonus des fort'
-FR.Passive_EnemyKeepBonus = 'Bonus de forts'
-
-FR.Potion_Sip             = 'Gorgée'
-FR.Potion_Tincture        = 'Teinture'
-FR.Potion_Serum           = 'Sérum'
-FR.Potion_Dram            = 'Goutte'
-FR.Potion_Effusion        = 'Effusion'
-FR.Potion_Potion          = 'Potion'
-FR.Potion_Draught         = 'Lampée'
-FR.Potion_Solution        = 'Solution'
-FR.Potion_Philter         = 'Philtre'
-FR.Potion_Elixir          = 'Élixir'
-FR.Potion_Panacea         = 'Panacée'
-FR.Potion_Distillate      = "Distillat"
-FR.Potion_Essence         = 'Essence'
-
-FR.Setting_Left           = "Gauche"
-FR.Setting_Center         = "Centré"
-FR.Setting_Right          = "Droite"
-DE.Setting_OrderX         = {'De gauche à droite', 'De droite à gauche'}
-
-
-if (GetCVar('language.2') == 'fr') then
-    for k,v in pairs(FR) do
-        L[k] = v
     end
 end
 
