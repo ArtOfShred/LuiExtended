@@ -39,9 +39,9 @@ SCB.D = {
     BuffFontFace                     = "Fontin Regular",
     BuffFontStyle                    = "outline",
     BuffFontSize                     = 16,
-    Alignment                        = L.Setting_Center,
-    AlignmentVert                    = L.Setting_Top,
-    SortDirection                    = L.Setting_OrderX[1],
+    Alignment                        = "Centered",
+    AlignmentVert                    = "Top",
+    SortDirection                    = "Left to Right",
     GlowIcons                        = false,
     RemainingText                    = true,
     RemainingTextColoured            = false,
@@ -470,8 +470,8 @@ local IsAbilityCustomToggle = {
 
 -- some optimization
 local strHidden = L.Effect_Hidden
-local strHomeKeep   = L.Passive_HomeKeepBonus
-local strEnemyKeep  = L.Passive_EnemyKeepBonus
+local strHomeKeep   = "Home Keep Bonus"
+local strEnemyKeep  = "Enemy Keep Bonus"
 
 --[[
  * Manually handled list of potion durations.
@@ -479,63 +479,63 @@ local strEnemyKeep  = L.Passive_EnemyKeepBonus
  ]]--
 local PotionDurations = {
     [1] = { --standard potions from loot or from vendor. Potions can be any level, so duration is just estimated.
-        [L.Potion_Sip]      = 4,    --lvl 1-5   3.3 + (1+5) / 2 * 0.257 = 4.071
-        [L.Potion_Tincture] = 5.3,  --lvl 6-10
-        [L.Potion_Serum]    = 6.6,  --lvl 11-15
-        [L.Potion_Dram]     = 7.8,  --lvl 16-20
-        [L.Potion_Effusion] = 9.1,  --lvl 21-35
-        [L.Potion_Potion]   = 10.4, --lvl 26-30
-        [L.Potion_Draught]  = 11.7, --lvl 31-35
-        [L.Potion_Solution] = 13,   --lvl 36-40
-        [L.Potion_Philter]  = 14.3, --lvl 41-45
-        [L.Potion_Elixir]   = 15.8, --lvl 46-51 3.3 + (46+51) / 2 * 0.257 = 15.7645
-        [L.Potion_Panacea]  = 18,   --VR 5      3.3 + 57.5 * 0.257 = 17.949
-        [L.Potion_Distillate]=20.3, --VR10      3.3 + 66 * 0.257 = 20.262
-        [L.Potion_Essence]  = 22.1, --VR15      3.3 + 73 * 0.257 = 22.061
+        ["Sip of"]      = 4,    --lvl 1-5   3.3 + (1+5) / 2 * 0.257 = 4.071
+        ["Tincture"]    = 5.3,  --lvl 6-10
+        ["Serum"]       = 6.6,  --lvl 11-15
+        ["Dram of"]     = 7.8,  --lvl 16-20
+        ["Effusion"]    = 9.1,  --lvl 21-35
+        ["Potion"]      = 10.4, --lvl 26-30
+        ["Draught"]     = 11.7, --lvl 31-35
+        ["Solution"]    = 13,   --lvl 36-40
+        ["Philter"]     = 14.3, --lvl 41-45
+        ["Elixir"]      = 15.8, --lvl 46-51 3.3 + (46+51) / 2 * 0.257 = 15.7645
+        ["Panacea"]     = 18,   --VR 5      3.3 + 57.5 * 0.257 = 17.949
+        ["Distillate"]  = 20.3, --VR10      3.3 + 66 * 0.257 = 20.262
+        ["Essence"]     = 22.1, --VR15      3.3 + 73 * 0.257 = 22.061
     },
     [2] = { --crafted 2 ingredients potions with long buff
-        [L.Potion_Sip]      = 10.5, --lvl 3      9 +  4 * 0.375 = 10.425  (9 + itemLevel * 0.375)
-        [L.Potion_Tincture] = 13.1, --lvl 10     9 + 11 * 0.375 = 13.125
-        [L.Potion_Dram]     = 16.8, --lvl 20     9 + 21 * 0.375 = 16.875
-        [L.Potion_Draught]  = 20.6, --lvl 30     9 + 31 * 0.375 = 20.625
-        [L.Potion_Solution] = 24.3, --lvl 40     9 + 41 * 0.375 = 24.375
-        [L.Potion_Elixir]   = 28.8, --VR 1       9 + 53 * 0.375 = 28.875
-        [L.Potion_Panacea]  = 31,   --VR 5       9 + 59 * 0.375 = 31.125
-        [L.Potion_Distillate]=33.8, --VR10       9 + 66 * 0.375 = 33.750
-        [L.Potion_Essence]  = 36.4, --VR15       9 + 73 * 0.375 = 36.375
+        ["Sip of"]      = 10.5, --lvl 3      9 +  4 * 0.375 = 10.425  (9 + itemLevel * 0.375)
+        ["Tincture"]    = 13.1, --lvl 10     9 + 11 * 0.375 = 13.125
+        ["Dram of"]     = 16.8, --lvl 20     9 + 21 * 0.375 = 16.875
+        ["Draught"]     = 20.6, --lvl 30     9 + 31 * 0.375 = 20.625
+        ["Solution"]    = 24.3, --lvl 40     9 + 41 * 0.375 = 24.375
+        ["Elixir"]      = 28.8, --VR 1       9 + 53 * 0.375 = 28.875
+        ["Panacea"]     = 31,   --VR 5       9 + 59 * 0.375 = 31.125
+        ["Distillate"]  = 33.8, --VR10       9 + 66 * 0.375 = 33.750
+        ["Essence"]     = 36.4, --VR15       9 + 73 * 0.375 = 36.375
     },
     [3] = {  --crafted 3 ingredients potions with long buff (+4 sec)
-        [L.Potion_Sip]      = 14.5, --lvl 3
-        [L.Potion_Tincture] = 17.1, --lvl 10
-        [L.Potion_Dram]     = 20.8, --lvl 20
-        [L.Potion_Draught]  = 24.6, --lvl 30
-        [L.Potion_Solution] = 28.3, --lvl 40
-        [L.Potion_Elixir]   = 32.8, --VR 1
-        [L.Potion_Panacea]  = 35,   --VR 5
-        [L.Potion_Distillate]=37.8, --VR10
-        [L.Potion_Essence]  = 40.4, --VR15
+        ["Sip of"]      = 14.5, --lvl 3
+        ["Tincture"]    = 17.1, --lvl 10
+        ["Dram of"]     = 20.8, --lvl 20
+        ["Draught"]     = 24.6, --lvl 30
+        ["Solution"]    = 28.3, --lvl 40
+        ["Elixir"]      = 32.8, --VR 1
+        ["Panacea"]     = 35,   --VR 5
+        ["Distillate"]  = 37.8, --VR10
+        ["Essence"]     = 40.4, --VR15
     },
     [4] = {  --crafted 2 ingredients potions with short buff
-        [L.Potion_Sip]      = 4.5,  --lvl 3     4 +  4 * 0.129 = 4.516
-        [L.Potion_Tincture] = 5.4,  --lvl 10    4 + 11 * 0.129 = 5.419
-        [L.Potion_Dram]     = 6.7,  --lvl 20    4 + 21 * 0.129 = 6.709
-        [L.Potion_Draught]  = 8,    --lvl 30    4 + 31 * 0.129 = 7.999
-        [L.Potion_Solution] = 9.3,  --lvl 40    4 + 41 * 0.129 = 9.289
-        [L.Potion_Elixir]   = 10.8, --VR 1      4 + 53 * 0.129 = 10.837
-        [L.Potion_Panacea]  = 11.6, --VR 5      4 + 59 * 0.129 = 11.611
-        [L.Potion_Distillate]=12.5, --VR10      4 + 66 * 0.129 = 12.514
-        [L.Potion_Essence]  = 13.4, --VR 5      4 + 73 * 0.129 = 13.417
+        ["Sip of"]      = 4.5,  --lvl 3     4 +  4 * 0.129 = 4.516
+        ["Tincture"]    = 5.4,  --lvl 10    4 + 11 * 0.129 = 5.419
+        ["Dram of"]     = 6.7,  --lvl 20    4 + 21 * 0.129 = 6.709
+        ["Draught"]     = 8,    --lvl 30    4 + 31 * 0.129 = 7.999
+        ["Solution"]    = 9.3,  --lvl 40    4 + 41 * 0.129 = 9.289
+        ["Elixir"]      = 10.8, --VR 1      4 + 53 * 0.129 = 10.837
+        ["Panacea"]     = 11.6, --VR 5      4 + 59 * 0.129 = 11.611
+        ["Distillate"]  = 12.5, --VR10      4 + 66 * 0.129 = 12.514
+        ["Essence"]     = 13.4, --VR 5      4 + 73 * 0.129 = 13.417
     },
     [5] = {  --crafted 3 ingredients potions with short buff (+2 sec)
-        [L.Potion_Sip]      = 6.5,  --lvl 3
-        [L.Potion_Tincture] = 7.4,  --lvl 10
-        [L.Potion_Dram]     = 8.7,  --lvl 20
-        [L.Potion_Draught]  = 10,   --lvl 30
-        [L.Potion_Solution] = 11.3, --lvl 40
-        [L.Potion_Elixir]   = 12.8, --VR 1
-        [L.Potion_Panacea]  = 13.6, --VR 5
-        [L.Potion_Distillate]=14.5, --VR10
-        [L.Potion_Essence]  = 15.4, --VR15
+        ["Sip of"]      = 6.5,  --lvl 3
+        ["Tincture"]    = 7.4,  --lvl 10
+        ["Dram of"]     = 8.7,  --lvl 20
+        ["Draught"]     = 10,   --lvl 30
+        ["Solution"]    = 11.3, --lvl 40
+        ["Elixir"]      = 12.8, --VR 1
+        ["Panacea"]     = 13.6, --VR 5
+        ["Distillate"]  = 14.5, --VR10
+        ["Essence"]     = 15.4, --VR15
     },
 }
 
@@ -750,14 +750,14 @@ end
  ]]--
 function SCB.SetIconsAlignment( value )
     -- check correctness of argument value
-    if value ~= L.Setting_Left and value ~= L.Setting_Center and value ~= L.Setting_Right then
+    if value ~= "Left" and value ~= "Centered" and value ~= "Right" then
         value = SCB.D.Alignment
     end
     SCB.SV.Alignment = value
 
     if not SCB.Enabled then return end
 
-    g_horizAlign = ( value == L.Setting_Left ) and LEFT or ( value == L.Setting_Right ) and RIGHT or CENTER
+    g_horizAlign = ( value == "Left" ) and LEFT or ( value == "Right" ) and RIGHT or CENTER
 
     for _, v in pairs(containerRouting) do
         if uiTlw[v].iconHolder then
@@ -774,14 +774,14 @@ end
 
 function SCB.SetIconsAlignmentVert( value )
     -- check correctness of argument value
-    if value ~= L.Setting_Top and value ~= L.Setting_Middle and value ~= L.Setting_Bottom then
+    if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
         value = SCB.D.AlignmentVert
     end
     SCB.SV.AlignmentVert = value
 
     if not SCB.Enabled then return end
 
-    g_vertAlign = ( value == L.Setting_Top ) and TOP or ( value == L.Setting_Bottom ) and BOTTOM or MIDDLE
+    g_vertAlign = ( value == "Top" ) and TOP or ( value == "Bottom" ) and BOTTOM or MIDDLE
 
     for _, v in pairs(containerRouting) do
         if uiTlw[v].iconHolder then
@@ -801,12 +801,12 @@ end
  ]]--
 function SCB.SetSortDirection( value )
     -- check correctness of argument value
-    if value ~= L.Setting_OrderX[1] and value ~= L.Setting_OrderX[2] then
+    if value ~= "Left to Right" and value ~= "Right to Left" then
         value = SCB.D.SortDirection
     end
     SCB.SV.SortDirection = value
 
-    g_horizSortInvert = (value == L.Setting_OrderX[2])
+    g_horizSortInvert = (value == "Right to Left")
 end
 
 --[[
@@ -1737,7 +1737,7 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
         type    = mechanicType,
         cost    = abilityCost,
         icon    = GetSlotTexture(slotNum),
-        ground  = ( GetAbilityTargetDescription(ability_id) == L.Ability_Target_Description_Ground ),
+        ground  = ( GetAbilityTargetDescription(ability_id) == "Ground" ),
         effects = effects
     }
 

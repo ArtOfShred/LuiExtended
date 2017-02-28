@@ -222,7 +222,7 @@ function CA.GuildMemberAdded(eventCode, guildId, DisplayName)
     local guildName = GetGuildName(guildId)
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
-    printToChat(strformat("|cFEFEFE<<1>>|r has joined <<2>>", displayNameLink, guildNameAlliance))
+    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MEMBER_ADDED), displayNameLink, guildNameAlliance))
 end
 
 function CA.GuildMemberRemoved(eventCode, guildId, DisplayName, CharacterName)
@@ -232,7 +232,7 @@ function CA.GuildMemberRemoved(eventCode, guildId, DisplayName, CharacterName)
     local guildName = GetGuildName(guildId)
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
-    printToChat(strformat("|cFEFEFE<<1>>|r has left <<2>>", displayNameLink, guildNameAlliance))
+    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MEMBER_REMOVED), displayNameLink, guildNameAlliance))
 end
 
 function CA.GuildMOTD(eventCode, guildId)
@@ -242,7 +242,7 @@ function CA.GuildMOTD(eventCode, guildId)
     local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
-    printToChat (strformat("The message of the day for <<1>> has changed:\n<<2>>", guildNameAlliance, motd))
+    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MOTD_CHANGED), guildNameAlliance, motd))
 end
 
 function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
@@ -272,14 +272,18 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
         local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
         local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
-        printToChat(strformat("|cFEFEFE<<1>>|r's rank in <<2>> has been changed to <<3>>", displayNameLink, guildNameAlliance, rankSyntax))
+        printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED), displayNameLink, guildNameAlliance, rankSyntax))
     end
 
     if DisplayName == g_playerDisplayName then -- Cancel out if its not the player being promoted. It would be a little inefficient to index all guild members on initialize for this.
         local rankName
         rankNameDefault = GetDefaultGuildRankName(guildId, newRank)
         rankNameCustom = GetGuildRankCustomName(guildId, newRank)
-        if rankNameCustom == "" then rankName = rankNameDefault else rankName = rankNameCustom end
+        if rankNameCustom == "" then
+            rankName = rankNameDefault
+        else
+            rankName = rankNameCustom
+        end
 
         local icon = GetGuildRankIconIndex(guildId, newRank)
         local icon = GetGuildRankLargeIcon(icon)
@@ -295,7 +299,7 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
         if currentRank < newRank then changestring = "demoted" end
 
         GuildRankData[guildId].rank = newRank
-        printToChat(strformat("You have been <<1>> to <<2>> in <<3>>", changestring, rankSyntax, guildNameAlliance))
+        printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_SELF), changestring, rankSyntax, guildNameAlliance))
     end
 end
 
@@ -303,7 +307,7 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
     local allianceIconSize = 16
     local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-    printToChat(strformat("You have joined <<1>>", guildNameAlliance))
+    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_JOIN_SELF), guildNameAlliance))
     GuildJoinFudger = true
 
     -- Reindex Guild Ranks
@@ -322,7 +326,7 @@ function CA.GuildRemovedSelf(eventCode, guildId, guildName)
     local allianceIconSize = 16
     local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-    printToChat(strformat("You have left <<1>>", guildNameAlliance))
+    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_LEAVE_SELF), guildNameAlliance))
 
     -- Reindex Guild Ranks
     GuildRankData = {}
@@ -340,7 +344,7 @@ function CA.GuildInviteAdded(eventCode, guildId, guildName, guildAlliance, invit
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
     local allianceIconSize = 16
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-    printToChat(strformat("|cFEFEFE<<1>>|r has invited you to join <<2>>", displayNameLink, guildNameAlliance))
+    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_INVITE_SELF), displayNameLink, guildNameAlliance)) 
 end
 
 function CA.GuildInviteRemoved(eventCode, guildId)
@@ -349,32 +353,32 @@ end
 
 function CA.GuildInviteFudger()
     if not GuildJoinFudger then
-        printToChat("Guild invite declined.")
+        printToChat(GetString(SI_LUIE_CA_GUILD_INVITE_DECLINED))
     end
     GuildJoinFudger = false
 end
 
 function CA.FriendInviteFudger()
     if not FriendInviteFudger then
-        printToChat("Friend invite declined.")
+        printToChat(GetString(SI_LUIE_CA_FRIEND_INVITE_DECLINED))
     end
     FriendInviteFudger = false
 end
 
 function CA.FriendAdded(eventCode, DisplayName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
-    printToChat(strformat("|cFEFEFE<<1>>|r added to friends list.", displayNameLink))
+    printToChat(strformat(GetString(SI_LUIE_CA_FRIEND_ADDED), displayNameLink))
     FriendInviteFudger = true
 end
 
 function CA.FriendRemoved(eventCode, DisplayName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
-    printToChat(strformat("|cFEFEFE<<1>>|r removed from friends list.", displayNameLink))
+    printToChat(strformat(GetString(SI_LUIE_CA_FRIEND_REMOVED), displayNameLink))
 end
 
 function CA.FriendInviteAdded(eventCode, inviterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
-    printToChat(strformat("|cFEFEFE<<1>>|r wants to be your friend.", displayNameLink))
+    printToChat(strformat(GetString(SI_LUIE_CA_FRIEND_INVITE_PENDING), displayNameLink))
 end
 
 function CA.FriendInviteRemoved(eventCode, inviterName)
@@ -384,55 +388,49 @@ end
 
 function CA.QuestShared (eventCode, questId)
         local questName, characterName, timeSinceRequestMs, displayName = GetOfferedQuestShareInfo(questId)
-
         local characterNameLink = ZO_LinkHandler_CreateCharacterLink(characterName)
         local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
         local displayBothString = ( strformat("<<1>><<2>>", characterName, displayName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
 
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r wants to share the quest: <<2>>", displayNameLink, questName)) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r wants to share the quest: <<2>>", characterNameLink, questName)) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r wants to share the quest: <<2>>", displayBoth, questName)) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), displayNameLink, questName)) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), characterNameLink, questName)) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), displayBoth, questName)) end
 end
 
 function CA.QuestShareRemoved(eventCode, questId)
-    printToChat("Shared quest declined.")
+    printToChat(GetString(SI_LUIE_CA_QUEST_SHARE_DECLINED))
 end
 
 function CA.RegisterCustomStrings()
-
     if CA.SV.CustomStrings then
-        --TODO: <https://github.com/ArtOfShred/LuiExtended/issues/29>
         -- Group Invite String Replacements
-        SafeAddString(SI_GROUPINVITERESPONSE0, "Could not find a player named |cFEFEFE\"<<1>>\"|r to invite.", 1)
-        SafeAddString(SI_GROUPINVITERESPONSE10, "You have invited |cFEFEFE\"<<1>>\"|r to join your group.", 1)
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GROUP, "<<1>> has invited you to join a group.", 1)
-        SafeAddString(SI_GROUPLEAVEREASON1, "<<1>>(<<2>>) has been removed from the group.", 2)
+        SafeAddString(SI_GROUPINVITERESPONSE0, GetString(SI_LUIE_GROUPINVITERESPONSE0), 1)
+        SafeAddString(SI_GROUPINVITERESPONSE10, GetString(SI_LUIE_GROUPINVITERESPONSE10), 1)
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GROUP, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_GROUP), 1)
+        SafeAddString(SI_GROUPLEAVEREASON1, GetString(SI_LUIE_GROUPLEAVEREASON1), 2) 
 
         -- Trade String Replacements
-        SafeAddString(SI_TRADE_INVITE_CONFIRM, "You have invited <<1>> to trade.", 1) -- Fixes default Trade messages to match our syntax.
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_TRADE, "<<1>> has invited you to trade.", 1) -- Fixes default Trade messages to match our syntax.
+        SafeAddString(SI_TRADE_INVITE_CONFIRM, GetString(SI_LUIE_TRADE_INVITE_CONFIRM), 1) -- Fixes default Trade messages to match our syntax.
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_TRADE, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_TRADE), 1) -- Fixes default Trade messages to match our syntax.
 
         -- Friend Invite String Replacements
-        SafeAddString(SI_FRIENDS_LIST_IGNORE_ADDED, "|cFEFEFE<<1>>|r added to ignore list.", 1) -- Fixes default Ignore List messages to match our syntax.
-        SafeAddString(SI_FRIENDS_LIST_IGNORE_REMOVED, "|cFEFEFE<<1>>|r removed from ignore list.", 1) -- Fixes default Ignore List messages to match our syntax.
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST, "<<1>> wants to be your friend.", 1) -- Default ZOS string was missing a period.
+        SafeAddString(SI_FRIENDS_LIST_IGNORE_ADDED, GetString(SI_LUIE_FRIENDS_LIST_IGNORE_ADDED), 1) -- Fixes default Ignore List messages to match our syntax.
+        SafeAddString(SI_FRIENDS_LIST_IGNORE_REMOVED, GetString(SI_LUIE_FRIENDS_LIST_IGNORE_REMOVED), 1) -- Fixes default Ignore List messages to match our syntax.
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST), 1) -- Default ZOS string was missing a period.
 
-
-        SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_ON, "|cFEFEFE<<1>>|r has logged on.", 1)
-        SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON, "|cFEFEFE<<1>>|r has logged on with |cFEFEFE<<2>>|r.", 1)
-        SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_OFF, "|cFEFEFE<<1>>|r has logged off.", 1)
-        SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF, "|cFEFEFE<<1>>|r has logged off with |cFEFEFE<<2>>|r.", 1)
-
+        SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_ON, GetString(SI_LUIE_FRIENDS_LIST_FRIEND_LOGGED_ON), 1)
+        SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON, GetString(SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON), 1)
+        SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_OFF, GetString(SI_LUIE_FRIENDS_LIST_FRIEND_LOGGED_OFF), 1)
+        SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF, GetString(SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF), 1)
 
         -- Guild Invite String Replacements
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, "<<1>> has invited you to join <<2>>", 1) -- Update syntax for guild invite message to match our chat syntax
-        SafeAddString(SI_GUILD_ROSTER_INVITED_MESSAGE,  "You have invited \"|cffffff<<1>>|r\" to join |cffffff<<2>>|r", 1) -- Update syntax for guild invitation sent message to match group syntax.
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST), 1) -- Update syntax for guild invite message to match our chat syntax
+        SafeAddString(SI_GUILD_ROSTER_INVITED_MESSAGE, GetString(SI_LUIE_GUILD_ROSTER_INVITED_MESSAGE), 1) -- Update syntax for guild invitation sent message to match group syntax.
 
         -- Quest Share String Replacements
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, "<<1>> wants to share the quest: <<2>>.", 3)
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE), 3)
     end
-
 end
 
 -- Display group join/leave in chat
@@ -496,33 +494,33 @@ local ShowStatusDropMember = false
 function CA.GroupFindReplacementNew(eventCode)
     local activityType, activityIndex = GetLFGFindReplacementNotificationInfo()
     local name = GetLFGOption(activityType, activityIndex)
-    printToChat(strformat("A group member has left your |cffffff<<1>>|r group.", name))
+    printToChat(strformat(GetString(SI_LFG_FIND_REPLACEMENT_TEXT), name))
 end
 
 function CA.GroupReplacementFound(eventCode)
-    printToChat("A replacement party member has been found.") -- Test function for now, not sure how or if this works.
+    printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_REPLACEMENT_FOUND)) -- Test function for now, not sure how or if this works.
     -- The idea is to differentiate party members found via queue or personally invited by the group leader.
 end
 
 function CA.ActivityComplete(eventCode)
-    printToChat("Activity complete!")
+    printToChat(GetString(SI_ACTIVITY_FINDER_ACTIVITY_COMPLETE_ANNOUNCEMENT_TEXT))
 end
 
 function CA.ActivityStatusUpdate(eventCode, status)
     --d("status update:" .. status)
     if ShowActivityStatus then
         if status == ACTIVITY_FINDER_STATUS_NONE and WeAreQueued == true then
-            printToChat ("You are no longer queued in the group finder.")
+            printToChat("You are no longer queued in the group finder.")
             WeAreQueued = false
             ShowStatusDropMember = false
         end
         if status == ACTIVITY_FINDER_STATUS_QUEUED then
-            printToChat ("You are now queued in the group finder.")
+            printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_QUEUE_START))
             WeAreQueued = true
             ShowStatusDropMember = true
         end
         if status == ACTIVITY_FINDER_STATUS_IN_PROGRESS and ShowStatusDropMember == true then
-            printToChat ("You are no longer queued in the group finder.")
+            printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_QUEUE_END))
             WeAreQueued = false
             ShowStatusDropMember = false
         end
@@ -536,23 +534,23 @@ end
 function CA.ActivityQueueResult(eventCode, result)
     --d("ActivityQueueResult: " .. result)
     if result == ACTIVITY_QUEUE_RESULT_INCOMPATIBLE_GROUP then
-        printToChat("Cannot queue - the members of this group are role incompatible.")
+        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT9)))
     end
 
     if result == ACTIVITY_QUEUE_RESULT_MEMBERS_OFFLINE then
-        printToChat("Cannot queue - one or more members are offline.")
+        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT14)))
     end
 
     if result == ACTIVITY_QUEUE_RESULT_ON_QUEUE_COOLDOWN then
-        printToChat("Cannot queue - you or a member of your group queued too recently.")
+        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT12)))
     end
 
     if result == ACTIVITY_QUEUE_RESULT_MEMBER_CANCELED_READY_CHECK then
-        printToChat("Cannot join - One or more members canceled Ready Check.")
+        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT19)))
     end
 
     if result == ACTIVITY_QUEUE_RESULT_DLC_LOCKED then
-        printToChat("Cannot queue - you or members of your group do not have the DLC unlocked for that activity.")
+        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT6)))
     end
 
     ShowRCUpdates = true
@@ -562,16 +560,18 @@ end
 
 function CA.ReadyCheckCancel(eventCode, reason)
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_MEMBER_CANCELED then
-        printToChat("Ready check cancelled, group member cancelled.")
+        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON3))
     end
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_NOT_VIABLE then
-        printToChat("Ready check canceled, group was not viable.")
+        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON2))
+
     end
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_FORMED_SUCCESSFULLY then
-        printToChat("Ready check succeeded, group formed!")
+        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON4))
+
     end
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_READY then
-        printToChat("Ready check canceled, group was not ready.")
+        printToChat(GetString(SI_LUIE_CA_READY_CHECK_CANCELED)) 
     end
 
     ShowRCUpdates = true
@@ -593,19 +593,19 @@ function CA.ReadyCheckUpdate(eventCode)
         local activityName
 
         if activityType == 0 then return end
-        if activityType == LFG_ACTIVITY_AVA then activityName = "Alliance War" end
-        if activityType == LFG_ACTIVITY_BATTLE_GROUND then activityName = "Battleground" end
-        if activityType == LFG_ACTIVITY_DUNGEON then activityName = "Normal Dungeon" end
-        if activityType == LFG_ACTIVITY_HOME_SHOW then activityName = "Home Show" end
-        if activityType == LFG_ACTIVITY_MASTER_DUNGEON then activityName = "Veteran Dungeon" end
-        if activityType == LFG_ACTIVITY_TRIAL then activityName = "Trial" end
+        if activityType == LFG_ACTIVITY_AVA then activityName = GetString(SI_LFGACTIVITY1) end
+        if activityType == LFG_ACTIVITY_BATTLE_GROUND then activityName = "Battleground" end -- Not yet implemented
+        if activityType == LFG_ACTIVITY_DUNGEON then activityName = GetString(SI_LFGACTIVITY2) end
+        if activityType == LFG_ACTIVITY_HOME_SHOW then activityName = GetString(SI_LFGACTIVITY6) end
+        if activityType == LFG_ACTIVITY_MASTER_DUNGEON then activityName = GetString(SI_LFGACTIVITY3) end
+        if activityType == LFG_ACTIVITY_TRIAL then activityName = GetString(SI_LFGACTIVITY4) end
         if activityType == 0 then return end
 
-        printToChat(strformat("|cffffff<<1>>|r ready.", activityName))
+        printToChat(strformat(GetString(SI_LUIE_CA_READY_CHECK_ACTIVITY), activityName)) 
     end
 
     if not ShowRCUpdates and (tanksPending == 0 and healersPending == 0 and dpsPending == 0) then
-        printToChat("Ready check cancelled, group member cancelled.")
+        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON3))
     end
 
     ShowRCUpdates = false
@@ -622,7 +622,7 @@ end
 function CA.VoteNotify(eventCode)
     local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
     if electionType == 2 then -- Ready Check
-        printToChat("Are you ready?")
+        printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_MESSAGE))
     end
 
     if electionType == 3 then -- Vote Kick
@@ -634,13 +634,13 @@ function CA.VoteNotify(eventCode)
         local displayBothString = ( strformat("<<1>><<2>>", kickMemberName, kickMemberAccountName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, kickMemberAccountName)
         if CA.SV.ChatPlayerDisplayOptions == 1 then
-            printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has started.", displayNameLink))
+            printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START), displayNameLink))
         end
         if CA.SV.ChatPlayerDisplayOptions == 2 then
-            printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has started.", characterNameLink))
+            printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START), characterNameLink))
         end
         if CA.SV.ChatPlayerDisplayOptions == 3 then
-            printToChat(strformat("A vote to kick |cFEFEFE<<1>>|r from the group has started.", displayBoth))
+            printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START), displayBoth))
         end
     end
 end
@@ -648,9 +648,15 @@ end
 function CA.VoteResult(eventCode, electionResult, descriptor)
     local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
     if descriptor == "[ZO_READY_CHECK]" then
-        if electionResult == 1 then printToChat("Someone in your group is not ready.") end -- Timed out
-        if electionResult == 4 then printToChat("Everyone in your group is ready!") end -- Ready
-        if electionResult == 5 then printToChat("Someone in your group is not ready.") end -- Someone declined
+        if electionResult == 1 then
+            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED))
+        end
+        if electionResult == 4 then
+            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_PASSED))
+        end
+        if electionResult == 5 then
+            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED))
+        end
     end
     if descriptor == "[ZO_NONE]" then
             local KickCarry
@@ -666,16 +672,20 @@ function CA.VoteResult(eventCode, electionResult, descriptor)
             if CA.SV.ChatPlayerDisplayOptions == 2 then KickCarry = characterNameLink end
             if CA.SV.ChatPlayerDisplayOptions == 3 then KickCarry = displayBoth end
 
-            if electionResult == 1 then printToChat (strformat("A vote to kick |cFEFEFE<<1>>|r from the group has failed.", KickCarry)) end
-            if electionResult == 2 then printToChat (strformat("A vote to kick |cFEFEFE<<1>>|r from the group has failed.", KickCarry)) end
-            if electionResult == 4 then printToChat (strformat("A vote to kick |cFEFEFE<<1>>|r from the group has passed.", KickCarry)) end
-            if electionResult == 5 then printToChat (strformat("A vote to kick |cFEFEFE<<1>>|r from the group has failed.", KickCarry)) end
+            if electionResult == 1 then printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry)) end
+            if electionResult == 2 then printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry)) end
+            if electionResult == 4 then printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry)) end
+            if electionResult == 5 then printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry)) end
     end
 end
 
 function CA.VoteRequested(eventCode, descriptor)
-    if descriptor == "[ZO_READY_CHECK]" then printToChat("You have initiated a ready check...") end
-    if descriptor == "[ZO_NONE]" then printToChat("You have initiated a vote...") end
+    if descriptor == "[ZO_READY_CHECK]" then
+        printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_REQUESTED))
+    end
+    if descriptor == "[ZO_NONE]" then
+        printToChat(GetString(SI_GROUP_ELECTION_REQUESTED))
+    end
 end
 
 -- Helper function called after receiving a group invite. This ensures we don't ever have any issues seeing the first group invite message by renabling the Event handler after the first message arrives.
@@ -692,7 +702,7 @@ end
 -- Triggers when the group composition changes for a Party going from 2 people to 3+, we use this to display a message to the player joining the group.
 function CA.GroupUpdate(eventCode)
     if GroupJoinFudger then
-        printToChat("You have joined a group.")
+        printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF))
     end
     GroupJoinFudger = false
 end
@@ -783,9 +793,9 @@ function CA.OnGroupInviteReceived(eventCode, inviterName, inviterDisplayName)
     local displayBothString = ( strformat("<<1>><<2>>", inviterName, inviterDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
 
-    if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r has invited you to join a group.", displayNameLink)) end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r has invited you to join a group.", characterNameLink)) end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r has invited you to join a group.", displayBoth)) end
+    if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_RECEIVED), displayNameLink)) end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_RECEIVED), characterNameLink)) end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_RECEIVED), displayBoth)) end
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED) -- On receiving a group invite, it fires 2 events, we disable the event handler temporarily for this then recall it after.
     zo_callLater(CA.RefreshGroupInviteEnable, 100)
 end
@@ -794,7 +804,7 @@ end
 -- Currently broken as of 2/9/2017 so we have to omit any names from this function until it returns the correct InviteeName and InviteeDisplayName instead
 function CA.OnGroupInviteResponse(eventCode, inviterName, response, inviterDisplayName)
     if response == 2 then
-        printToChat("Your group invitation was declined.")
+        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_DECLINED))
     elseif response == 3 then
         printToChat("You cannot extend a group invitation to a player that is ignoring you.")
     elseif response == 4 then -- Add some kind of override here if you try to invite yourself
@@ -831,11 +841,11 @@ function CA.OnGroupLeaderUpdate(eventCode, leaderTag)
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, groupLeaderAccount)
 
     if g_playerNameFormatted ~= groupLeaderName then -- If another player became the leader
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r is now the group leader!", displayNameLink)) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r is now the group leader!", characterNameLink)) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r is now the group leader!", displayBoth)) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), displayNameLink)) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), characterNameLink)) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), displayBoth)) end
     elseif g_playerNameFormatted == groupLeaderName then -- If the player character became the leader
-        printToChat("You are now the group leader!")
+        printToChat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_SELF))
     end
 end
 
@@ -868,11 +878,11 @@ function CA.OnGroupMemberJoined(eventCode, memberName)
         local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(joinedMemberAccountName)
         local displayBothString = ( strformat("<<1>><<2>>", joinedMemberName, joinedMemberAccountName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, joinedMemberAccountName)
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r has joined the group.", displayNameLink)) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r has joined the group.", characterNameLink)) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r has joined the group.", displayBoth)) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), displayNameLink)) end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), characterNameLink)) end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), displayBoth)) end
     elseif g_playerName == memberName then
-        printToChat("You have joined a group.") -- Only prints on the initial group form between 2 players.
+        printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF)) -- Only prints on the initial group form between 2 players.
     end
 
     g_partyStack = { }
@@ -889,11 +899,11 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
     if g_playerName == memberName then ShowStatusDropMember = false end -- Resets variable for Group Finder events, just in case.
 
     if reason == GROUP_LEAVE_REASON_VOLUNTARY then
-        msg = g_playerName == memberName and "You have left the group." or "|cFEFEFE<<1>>|r has left the group."
+        msg = g_playerName == memberName and GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF) or GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE)
     elseif reason == GROUP_LEAVE_REASON_KICKED then
-        msg = g_playerName == memberName and "You have been removed from the group." or "|cFEFEFE<<1>>|r has been removed from the group."
+        msg = g_playerName == memberName and GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF) or GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED)  
     elseif reason == GROUP_LEAVE_REASON_DISBAND and g_playerName == memberName then
-        msg = "The group has been disbanded."
+        msg = GetString(SI_LUIE_CA_GROUP_DISBAND_MSG)
     end
     if msg then
         -- Can occur if event is before EVENT_PLAYER_ACTIVATED
@@ -1090,34 +1100,34 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
 
     -- ==============================================================================
     -- DEBUG EVENTS WE DON'T KNOW YET
-    elseif reason == 6 then message = "Currency Change Reason 6 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 7 then message = "Currency Change Reason 7 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 12 then message = "Currency Change Reason 12 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 14 then message = "Currency Change Reason 14 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 15 then message = "Currency Change Reason 15 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 16 then message = "Currency Change Reason 16 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 18 then message = "Currency Change Reason 18 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 20 then message = "Currency Change Reason 20 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 21 then message = "Currency Change Reason 21 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 22 then message = "Currency Change Reason 22 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 23 then message = "Currency Change Reason 23 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 24 then message = "Currency Change Reason 24 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 25 then message = "Currency Change Reason 25 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 26 then message = "Currency Change Reason 26 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 27 then message = "Currency Change Reason 27 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 30 then message = "Currency Change Reason 30 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 34 then message = "Currency Change Reason 34 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 36 then message = "Currency Change Reason 36 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 37 then message = "Currency Change Reason 37 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 38 then message = "Currency Change Reason 38 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 39 then message = "Currency Change Reason 39 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 40 then message = "Currency Change Reason 40 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 41 then message = "Currency Change Reason 41 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 46 then message = "Currency Change Reason 46 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 53 then message = "Currency Change Reason 53 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 54 then message = "Currency Change Reason 54 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 58 then message = "Currency Change Reason 58 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 66 then message = "Currency Change Reason 66 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
+    elseif reason == 6 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 7 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 12 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 14 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 15 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 16 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 18 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 20 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 21 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 22 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 23 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 24 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 25 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 26 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 27 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 30 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 34 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 36 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 37 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 38 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 39 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 40 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 41 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 46 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 53 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 54 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 58 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 66 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     -- END DEBUG EVENTS
     -- ==============================================================================
 
@@ -1154,15 +1164,15 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         elseif CA.SV.MiscMail and reason == 2 then
             if not MailStop and MailStringPart1 ~= "" then
                 if not CA.SV.GoldChange then
-                    printToChat(strformat("<<1>> and <<2>> gold.", MailStringPart1, changetype))
+                    printToChat(strformat("<<1>> and <<2>> gold.", MailStringPart1, changetype)) -- SI_LUIE_CA_CANT_THINK_OF_NAME_MSG1
                 else
-                    printToChat(strformat("<<1>> and gold.", MailStringPart1))
+                    printToChat(strformat("<<1>> and gold.", MailStringPart1)) -- SI_LUIE_CA_CANT_THINK_OF_NAME_MSG2
                 end
             elseif not MailStop then
                 if not CA.SV.GoldChange then
-                    printToChat(strformat("Received mail with <<1>> gold.", changetype))
+                    printToChat(strformat(GetString(SI_LUIE_CA_MAIL_RECEIVED_GOLD_MSG), changetype))
                 else
-                    printToChat("Received mail with gold.")
+                    printToChat(GetString(SI_LUIE_CA_MAIL_RECEIVED_VAR_GOLD_MSG))
                 end
             end
             if CA.SV.GoldChange then
@@ -1214,13 +1224,13 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             total = ""
         end
 
-        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and not CA.SV.GoldChange then printToChat(strformat("COD Payment of <<1>> gold sent!", changetype)) end
-        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and CA.SV.GoldChange then printToChat("COD Payment sent!") end
-        if CA.SV.MiscMail and mailCOD == 0 and mailMoney == 0 and postageAmount >= 1 then printToChat("Mail sent!") end
-        if CA.SV.MiscMail and mailMoney ~= 0 and not CA.SV.GoldChange then printToChat (strformat("Mail sent with <<1>> gold!", mailMoney) ) end
-        if CA.SV.MiscMail and mailMoney ~= 0 and CA.SV.GoldChange then printToChat("Mail sent!") end
-        if CA.SV.MiscMail and mailCOD ~= 0 and not CA.SV.GoldChange then printToChat(strformat("COD sent for <<1>> gold!", mailCOD) ) end
-        if CA.SV.MiscMail and mailCOD ~= 0 and CA.SV.GoldChange then printToChat("COD sent!") end
+        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and not CA.SV.GoldChange then printToChat(strformat(GetString(SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT), changetype)) end
+        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and CA.SV.GoldChange then printToChat(GetString(SI_LUIE_CA_MAIL_COD_GOLD_SENT1)) end
+        if CA.SV.MiscMail and mailCOD == 0 and mailMoney == 0 and postageAmount >= 1 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_SUCCESS)) end
+        if CA.SV.MiscMail and mailMoney ~= 0 and not CA.SV.GoldChange then printToChat(strformat(GetString(SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG), mailMoney) ) end
+        if CA.SV.MiscMail and mailMoney ~= 0 and CA.SV.GoldChange then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_SUCCESS)) end
+        if CA.SV.MiscMail and mailCOD ~= 0 and not CA.SV.GoldChange then printToChat(strformat(GetString(SI_LUIE_CA_MAIL_COD_GOLD_SENT2), mailCOD) ) end
+        if CA.SV.MiscMail and mailCOD ~= 0 and CA.SV.GoldChange then printToChat(GetString(SI_LUIE_CA_MAIL_COD_SENT_SUCCESS)) end
 
         valuesent = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
 
@@ -1337,34 +1347,34 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
 
     -- ==============================================================================
     -- DEBUG EVENTS WE DON'T KNOW YET
-    if reason == 6 then message = "Currency Change Reason 6 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 7 then message = "Currency Change Reason 7 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 12 then message = "Currency Change Reason 12 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 14 then message = "Currency Change Reason 14 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 15 then message = "Currency Change Reason 15 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 16 then message = "Currency Change Reason 16 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 18 then message = "Currency Change Reason 18 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 20 then message = "Currency Change Reason 20 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 21 then message = "Currency Change Reason 21 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 22 then message = "Currency Change Reason 22 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 23 then message = "Currency Change Reason 23 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 24 then message = "Currency Change Reason 24 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 25 then message = "Currency Change Reason 25 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 26 then message = "Currency Change Reason 26 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 27 then message = "Currency Change Reason 27 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 30 then message = "Currency Change Reason 30 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 34 then message = "Currency Change Reason 34 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 36 then message = "Currency Change Reason 36 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 37 then message = "Currency Change Reason 37 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 38 then message = "Currency Change Reason 38 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 39 then message = "Currency Change Reason 39 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 40 then message = "Currency Change Reason 40 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 41 then message = "Currency Change Reason 41 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 46 then message = "Currency Change Reason 46 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 53 then message = "Currency Change Reason 53 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 54 then message = "Currency Change Reason 54 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 58 then message = "Currency Change Reason 58 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 66 then message = "Currency Change Reason 66 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
+    if reason == 6 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 7 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 12 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 14 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 15 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 16 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 18 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 20 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 21 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 22 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 23 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 24 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 25 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 26 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 27 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 30 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 34 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 36 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 37 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 38 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 39 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 40 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 41 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 46 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 53 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 54 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 58 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 66 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     end
     -- END DEBUG EVENTS
     -- ==============================================================================
@@ -1459,34 +1469,34 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
 
     -- ==============================================================================
     -- DEBUG EVENTS WE DON'T KNOW YET
-    elseif reason == 6 then message = "Currency Change Reason 6 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 7 then message = "Currency Change Reason 7 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 12 then message = "Currency Change Reason 12 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 14 then message = "Currency Change Reason 14 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 15 then message = "Currency Change Reason 15 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 16 then message = "Currency Change Reason 16 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 18 then message = "Currency Change Reason 18 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 20 then message = "Currency Change Reason 20 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 21 then message = "Currency Change Reason 21 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 22 then message = "Currency Change Reason 22 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 23 then message = "Currency Change Reason 23 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 24 then message = "Currency Change Reason 24 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 25 then message = "Currency Change Reason 25 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 26 then message = "Currency Change Reason 26 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 27 then message = "Currency Change Reason 27 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 30 then message = "Currency Change Reason 30 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 34 then message = "Currency Change Reason 34 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 36 then message = "Currency Change Reason 36 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 37 then message = "Currency Change Reason 37 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 38 then message = "Currency Change Reason 38 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 39 then message = "Currency Change Reason 39 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 40 then message = "Currency Change Reason 40 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 41 then message = "Currency Change Reason 41 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 46 then message = "Currency Change Reason 46 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 53 then message = "Currency Change Reason 53 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 54 then message = "Currency Change Reason 54 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 58 then message = "Currency Change Reason 58 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 66 then message = "Currency Change Reason 66 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
+    elseif reason == 6 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 7 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 12 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 14 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 15 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 16 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 18 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 20 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 21 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 22 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 23 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 24 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 25 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 26 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 27 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 30 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 34 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 36 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 37 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 38 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 39 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 40 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 41 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 46 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 53 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 54 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 58 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 66 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     -- END DEBUG EVENTS
     -- ==============================================================================
 
@@ -1587,34 +1597,34 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
 
     -- ==============================================================================
     -- DEBUG EVENTS WE DON'T KNOW YET
-    if reason == 6 then message = "Currency Change Reason 6 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 7 then message = "Currency Change Reason 7 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 12 then message = "Currency Change Reason 12 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 14 then message = "Currency Change Reason 14 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 15 then message = "Currency Change Reason 15 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 16 then message = "Currency Change Reason 16 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 18 then message = "Currency Change Reason 18 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 20 then message = "Currency Change Reason 20 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 21 then message = "Currency Change Reason 21 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 22 then message = "Currency Change Reason 22 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 23 then message = "Currency Change Reason 23 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 24 then message = "Currency Change Reason 24 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 25 then message = "Currency Change Reason 25 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 26 then message = "Currency Change Reason 26 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 27 then message = "Currency Change Reason 27 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 30 then message = "Currency Change Reason 30 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 34 then message = "Currency Change Reason 34 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 36 then message = "Currency Change Reason 36 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 37 then message = "Currency Change Reason 37 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 38 then message = "Currency Change Reason 38 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 39 then message = "Currency Change Reason 39 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 40 then message = "Currency Change Reason 40 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 41 then message = "Currency Change Reason 41 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 46 then message = "Currency Change Reason 46 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 53 then message = "Currency Change Reason 53 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 54 then message = "Currency Change Reason 54 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 58 then message = "Currency Change Reason 58 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
-    elseif reason == 66 then message = "Currency Change Reason 66 Triggered - If you have time please post on the LUI Extended comments section on ESOUI.com with what the event that caused this to happen. Thanks!"
+    if reason == 6 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 7 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 12 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 14 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 15 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 16 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 18 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 20 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 21 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 22 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 23 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 24 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 25 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 26 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 27 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 30 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 34 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 36 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 37 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 38 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 39 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 40 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 41 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 46 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 53 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 54 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 58 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 66 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     end
     -- END DEBUG EVENTS
     -- ==============================================================================
@@ -2130,7 +2140,7 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
                  (itemQuality >= ITEM_QUALITY_ARCANE and itemIsSpecial) or
                  (itemQuality >= ITEM_QUALITY_ARTIFACT and not itemIsKeyFragment) or
                  (lootType == LOOT_TYPE_COLLECTIBLE) or
-                 (itemType == ITEMTYPE_COSTUME) or 
+                 (itemType == ITEMTYPE_COSTUME) or
                  (itemType == ITEMTYPE_DISGUISE) or
                  (notableIDs[itemId]) ) then
 
@@ -2176,7 +2186,7 @@ itemstring2loss = ""
 -- "|ca80700" - LOSS
 
 function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainorloss, istrade)
-    
+
     --LoggedAnItem = true -- Set this to true, allows buffer to start!
 
     local bracket1 = ""
@@ -2252,10 +2262,10 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
     else
         itemName2 = ""
     end
-    
+
     if receivedBy == "CRAFT"  and gainorloss == "|c0B610B" then
         itemstring1gain = strfmt("%s%s%s%s|r ",gainorloss, bracket1, logPrefix, bracket2)
-     
+
         if itemstring2gain ~= "" then itemstring2gain = strfmt("%s%s,|r %s%s%s%s%s%s%s%s%s", itemstring2gain, gainorloss, icon,
             itemName2,
             itemName:gsub("^|H0", "|H1", 1),
@@ -2277,10 +2287,10 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
             combostring) end
         zo_callLater(CA.PrintMultiLineGain, 50)
     end
-    
+
     if receivedBy == "CRAFT"  and gainorloss == "|ca80700" then
         itemstring1loss = strfmt("%s%s%s%s|r ",gainorloss, bracket1, logPrefix, bracket2)
-     
+
         if itemstring2loss ~= "" then itemstring2loss = strfmt("%s%s,|r %s%s%s%s%s%s%s%s%s", itemstring2loss, gainorloss, icon,
             itemName2,
             itemName:gsub("^|H0", "|H1", 1),
@@ -2302,7 +2312,7 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
             combostring) end
         zo_callLater(CA.PrintMultiLineLoss, 50)
     end
-    
+
     if receivedBy ~= "CRAFT" then
         if not LaunderCheck then printToChat(strfmt(
             "%s%s%s%s|r %s%s%s%s%s%s%s%s%s",
@@ -2337,7 +2347,7 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
             formattedRecipient
         )) end
     end
-    
+
     LaunderCheck = false
     combostring = ""
 
@@ -2345,14 +2355,14 @@ end
 
 function CA.PrintMultiLineGain()
     if itemstring1gain == "" then return end
-    printToChat (itemstring1gain .. itemstring2gain)
+    printToChat(itemstring1gain .. itemstring2gain)
     itemstring1gain = ""
     itemstring2gain = ""
 end
 
 function CA.PrintMultiLineLoss()
     if itemstring1loss == "" then return end
-    printToChat (itemstring1loss .. itemstring2loss)
+    printToChat(itemstring1loss .. itemstring2loss)
     itemstring1loss = ""
     itemstring2loss = ""
 end
@@ -2372,13 +2382,13 @@ function CA.TradeInviteWaiting(eventCode, inviteeCharacterName, inviteeDisplayNa
     local displayBothString = ( strformat("<<1>><<2>>", gsub(inviteeCharacterName,"%^%a+",""), inviteeDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviteeDisplayName)
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then
-        printToChat(strformat("You have invited |cFEFEFE<<1>>|r to trade.", displayNameLink))
+        printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MSG_SELF), displayNameLink))
     end
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 2 then
-        printToChat(strformat("You have invited |cFEFEFE<<1>>|r to trade.", characterNameLink))
+        printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MSG_SELF), characterNameLink))
     end
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then
-        printToChat(strformat("You have invited |cFEFEFE<<1>>|r to trade.", displayBoth))
+        printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MSG_SELF), displayBoth))
     end
 end
 
@@ -2390,25 +2400,25 @@ function CA.TradeInviteConsidering(eventCode, inviterCharacterName, inviterDispl
     local displayBothString = ( strformat("<<1><<<2>>", gsub(inviterCharacterName,"%^%a+",""), inviterDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then
-        printToChat(strformat("|cFEFEFE<<1>>|r has invited you to trade.", displayNameLink))
+        printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MSG), displayNameLink))
     end
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 2 then
-        printToChat(strformat("|cFEFEFE<<1>>|r has invited you to trade.", characterNameLink))
+        printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MSG), characterNameLink))
     end
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then
-        printToChat(strformat("|cFEFEFE<<1>>|r has invited you to trade.", displayBoth))
+        printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MSG), displayBoth)) 
     end
 end
 
 function CA.TradeInviteAccepted(eventCode)
     if CA.SV.MiscTrade then
-        printToChat("Trade invite accepted.")
+        printToChat(GetString(SI_LUIE_CA_TRADE_INVITE_ACCEPTED))
     end
 end
 
 function CA.TradeInviteDecline(eventCode)
     if CA.SV.MiscTrade then
-        printToChat("Trade invite declined.")
+        printToChat(GetString(SI_TRADE_INVITE_DECLINE))
     end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
@@ -2418,7 +2428,7 @@ end
 
 function CA.TradeInviteCancel(eventCode)
     if CA.SV.MiscTrade then
-        printToChat("Trade invite canceled.")
+        printToChat(GetString(SI_TRADE_CANCEL_INVITE))
     end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
@@ -2434,7 +2444,6 @@ function CA.OnTradeAdded(eventCode, who, tradeIndex, itemSoundCategory)
         local name, icon, stack = GetTradeItemInfo (who, tradeIndex)
         local tradeitemlink = GetTradeItemLink (who, tradeIndex, LINK_STYLE_DEFAULT)
         g_TradeStacksOut[indexOut] = {stack=stack, name=name, icon=icon, itemlink=tradeitemlink}
-
     else
         local indexIn = tradeIndex
         local name, icon, stack = GetTradeItemInfo (who, tradeIndex)
@@ -2456,7 +2465,9 @@ end
 
 -- Cleanup if a Trade is canceled/exited
 function CA.TradeCancel(eventCode, cancelerName)
-    if CA.SV.MiscTrade then printToChat ("Trade canceled.") end
+    if CA.SV.MiscTrade then
+        printToChat(GetString(SI_TRADE_CANCELED))
+    end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
     TradeInviter = ""
@@ -2464,7 +2475,9 @@ function CA.TradeCancel(eventCode, cancelerName)
 end
 
 function CA.TradeFail(eventCode, cancelerName)
-    if CA.SV.MiscTrade then printToChat ("Trade failed.") end
+    if CA.SV.MiscTrade then
+        printToChat(GetString(SI_TRADE_FAILED))
+    end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
     TradeInviter = ""
@@ -2475,15 +2488,15 @@ end
 function CA.OnTradeSuccess(eventCode)
     combostring = ""
 
-    if CA.SV.MiscTrade then printToChat ("Trade complete.") end
-    if CA.SV.MiscTrade and tradestring1 ~= "" then printToChat (tradestring1) end
-    if CA.SV.MiscTrade and tradestring2 ~= "" then printToChat (tradestring2) end
+    if CA.SV.MiscTrade then
+        printToChat(GetString(SI_TRADE_COMPLETE))
+    end
+    if CA.SV.MiscTrade and tradestring1 ~= "" then printToChat(tradestring1) end
+    if CA.SV.MiscTrade and tradestring2 ~= "" then printToChat(tradestring2) end
 
     if CA.SV.LootTrade then
-
         if TradeInviter == "" then tradetarget = TradeInvitee end
         if TradeInvitee == "" then tradetarget = TradeInviter end
-
         for indexOut = 1, #g_TradeStacksOut do
             if g_TradeStacksOut[indexOut] ~= nil then
                 local gainorloss = "|ca80700"
@@ -2511,7 +2524,6 @@ function CA.OnTradeSuccess(eventCode)
                 CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss, istrade)
             end
         end
-
     end
 
     g_TradeStacksIn = {}
@@ -2534,7 +2546,6 @@ function CA.MailMoneyChanged(eventCode, moneyAmount)
     mailMoney = moneyAmount
     mailCOD = 0
     postageAmount = GetQueuedMailPostage()
-
 end
 
 function CA.MailCODChanged(eventCode, codAmount)
@@ -2545,7 +2556,7 @@ end
 
 function CA.MailRemoved(eventCode)
     if CA.SV.MiscMail then
-        printToChat ("Mail deleted!")
+        printToChat(GetString(SI_LUIE_CA_MAIL_DELETED_MSG))
     end
 end
 
@@ -2580,7 +2591,7 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
     local plural = "s"
     if NumMails == 1 then plural = "" end
 
-    MailStringPart1 = (strformat("Received mail with <<1>> attachment<<2>>", NumMails, plural) )
+    MailStringPart1 = (strformat(GetString(SI_LUIE_CA_MAIL_RECEIVED_ATTACHMENT), NumMails, plural) )
     zo_callLater(PrintMailAttachmentsIfNoGold, 25) -- We call this with a super short delay, it will return a string as long as a currency change event doesn't trigger beforehand!
 
     g_MailStacks = {}
@@ -2592,7 +2603,6 @@ function PrintMailAttachmentsIfNoGold()
     end
     MailStringPart1 = "" -- Important to clear this string, if we took a mail with only items attached, we don't want the next mail with gold to falsely show that attachments were taken!
 end
-
 
 function CA.OnMailAttach(eventCode, attachmentSlot)
     -- d(attachmentSlot) -- Debug
@@ -2617,13 +2627,13 @@ end
 
 function CA.OnMailFail(eventCode, reason)
     if CA.SV.MiscMail then
-        if reason == 2 then printToChat ("Cannot send mail: Unknown Player.") end
-        if reason == 3 then printToChat ("Cannot send mail: Recipient's Inbox is full.") end
-        if reason == 4 then printToChat ("You cannot send mail to that recipient.") end
-        if reason == 5 then printToChat ("Cannot send mail: Not enough gold.") end
-        if reason == 11 then printToChat ("You cannot send mail to yourself.") end
-        if reason == 9 then printToChat ("You must attach at least one item for Cash on Delivery mail.") end
-        if reason == 7 then printToChat ("Cannot send mail: This mail is lacking a subject, body, or attachments.") end
+        if reason == 2 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_UNKNOWN_PLAYER)) end
+        if reason == 3 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_RECIP_INBOX_FULL)) end
+        if reason == 4 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_CANT_SEND_TO_RECIP)) end
+        if reason == 5 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_NOT_ENOUGH_GOLD)) end 
+        if reason == 11 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_CANT_SEND_TO_SELF)) end
+        if reason == 9 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_COD_NO_ATTACHMENT)) end
+        if reason == 7 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_NO_SUB_BODY_ATTACHMENT)) end
         MailStop = true
         zo_callLater(CA.MailClearVariables, 500)
     end
@@ -2645,7 +2655,9 @@ function CA.OnMailSuccess(eventCode)
         for mailIndex = 1, #g_MailStacksOut do
         local gainorloss = "|ca80700"
         local logPrefix = "Sent"
-        if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
+        if CA.SV.ItemContextToggle then
+            logPrefix = ( CA.SV.ItemContextMessage )
+        end
         local receivedBy = ""
         local item = g_MailStacksOut[mailIndex]
         icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
@@ -2662,7 +2674,7 @@ end
 
 function CA.FunctionMailCurrencyCheck()
     if MailCurrencyCheck and CA.SV.MiscMail then
-        printToChat("Mail sent!")
+        printToChat(GetString(SI_LUIE_CA_MAIL_SENT_SUCCESS)) 
     end
 end
 
@@ -2712,7 +2724,6 @@ local LevelChanged1 = false
 local TotalLevelAdjust = ""
 local LevelCarryOverValue = 0
 
-
 local XPCombatBufferValue = 0
 local XPCombatBufferString = ""
 
@@ -2721,7 +2732,7 @@ local CP_BAR_COLORS = ZO_CP_BAR_GRADIENT_COLORS -- Color for Champion Levels
 
 function CA.PrintBufferedXP()
     if XPCombatBufferValue ~= 0 then
-        printToChat (XPCombatBufferString) -- If we leveled up, then this variable will be true, and we want to smash all the buffered XP into the level up display!
+        printToChat(XPCombatBufferString) -- If we leveled up, then this variable will be true, and we want to smash all the buffered XP into the level up display!
         XPCombatBufferValue = 0
         XPCombatBufferString = ""
     end
@@ -2731,11 +2742,11 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
     if unitTag == ("player") then
 
         CA.LevelUpdateHelper()
-        
+
         local icon = CA.SV.LevelUpIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_normal.dds|t ") or ( "" )
-        local attribute 
+        local attribute
         local CurrentLevelFormatted = XP_BAR_COLORS:Colorize(LevelContext .. " " .. CurrentLevel)
-        
+
         if IsChampion then
             attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned()+1 )
             if attribute == ATTRIBUTE_NONE then icon = CA.SV.LevelUpIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_champion.dds|t ") or ( "" ) end
@@ -2744,60 +2755,60 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
             if attribute == ATTRIBUTE_STAMINA then icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.ddst ") or ( "" ) end
             CurrentLevelFormatted = CP_BAR_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
         end
-        
+
         if not LevelChanged1 or Crossover == 1 then
             if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat (QuestString1)
-                printToChat (QuestString2)
+                printToChat(QuestString1)
+                printToChat(QuestString2)
             elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
                 printToChat(QuestString1)
             elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
                 printToChat(QuestString2)
             end
-        
+
             if CA.SV.ExperienceLevelUp and Crossover == 0 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat ("You have reached " .. icon .. CurrentLevelFormatted)
+                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted))
                 else
-                    printToChat ("You have reached " .. icon .. LevelContext .. " " .. CurrentLevel)
+                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel))
                 end
             end
             if CA.SV.ExperienceLevelUp and Crossover == 1 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat ("Champion Level Achieved! " .. icon .. CurrentLevelFormatted)
+                    printToChat(strformat(GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted))
                 else
-                    printToChat ("Champion Level Achieved! " .. icon .. LevelContext .. " " .. CurrentLevel)
+                    printToChat(strformat(GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel))
                 end
             end
         else
             if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat (QuestString1)
+                printToChat(QuestString1)
             elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
                 printToChat(QuestString1)
             elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
                 printToChat(QuestString2)
             end
-        
+
             if CA.SV.ExperienceLevelUp and Crossover == 0 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat ("You have reached " .. icon .. CurrentLevelFormatted)
+                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted))
                 else
-                    printToChat ("You have reached " .. icon .. LevelContext .. " " .. CurrentLevel)
+                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel))
                 end
             end
             if CA.SV.ExperienceLevelUp and Crossover == 1 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat ("Champion Level Achieved! " .. icon .. CurrentLevelFormatted)
+                    printToChat(strformat(GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted))
                 else
-                    printToChat ("Champion Level Achieved! " .. icon .. LevelContext .. " " .. CurrentLevel)
+                    printToChat(strformat(GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel))
                 end
             end
-            
+
             if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat (QuestString2)
+                printToChat(QuestString2)
             end
         end
-                
+
     end
     WeLeveled = 0
     Crossover = 0
@@ -2813,9 +2824,9 @@ end
 
 function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChampionPoints)
     if unitTag == ("player") then
-    
+
         CA.LevelUpdateHelper()
-    
+
         local attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned()+1 )
         local icon
         if attribute == ATTRIBUTE_NONE then icon = CA.SV.LevelUpIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_champion.dds|t ") or ( "" ) end
@@ -2823,46 +2834,46 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
         if attribute == ATTRIBUTE_MAGICKA then icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_magicka_icon-hud-32.dds|t ") or ( "" ) end
         if attribute == ATTRIBUTE_STAMINA then icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.ddst ") or ( "" ) end
         local CurrentLevelFormatted = CP_BAR_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
-        
+
         if not LevelChanged1 or Crossover == 1 then
             if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat (QuestString1)
-                printToChat (QuestString2)
+                printToChat(QuestString1)
+                printToChat(QuestString2)
             elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
                 printToChat(QuestString1)
             elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
                 printToChat(QuestString2)
             end
-        
+
             if CA.SV.ExperienceLevelUp then
-                if CA.SV.ExperienceColorLevel then 
-                    printToChat ("You have reached " .. icon .. CurrentLevelFormatted)
+                if CA.SV.ExperienceColorLevel then
+                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted)) 
                 else
-                    printToChat ("You have reached " .. icon .. LevelContext .. " " .. CurrentLevel)
+                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel)) 
                 end
             end
         else
             if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat (QuestString1)
+                printToChat(QuestString1)
             elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
                 printToChat(QuestString1)
             elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
                 printToChat(QuestString2)
             end
-        
+
             if CA.SV.ExperienceLevelUp then
-                if CA.SV.ExperienceColorLevel then 
-                    printToChat ("You have reached " .. icon .. CurrentLevelFormatted)
+                if CA.SV.ExperienceColorLevel then
+                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted))
                 else
-                    printToChat ("You have reached " .. icon .. LevelContext .. " " .. CurrentLevel)
+                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel))
                 end
             end
-            
+
             if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat (QuestString2)
+                printToChat(QuestString2)
             end
         end
-        
+
     end
     WeLeveled = 0
     Crossover = 0
@@ -2874,7 +2885,7 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
     LevelChanged1 = false
     TotalLevelAdjust = ""
     LevelCarryOverValue = 0
-end     
+end
 
 function CA.OnExperienceGain(eventCode, reason, level, previousExperience, currentExperience, championPoints)
 
@@ -2899,17 +2910,17 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
             LevelContext = ( "Level" )
         end
     end
-    
+
     if IsChampion then
         levelhelper = GetPlayerChampionXP()
     else
         levelhelper = GetUnitXP ("player")
     end
-    
-    if Crossover == 1 then 
+
+    if Crossover == 1 then
         levelhelper = GetNumExperiencePointsInLevel(49)
         XPLevel = GetNumExperiencePointsInLevel(49)
-    end 
+    end
 
         if CA.SV.Experience and ( not ( CA.SV.ExperienceHideCombat and reason == 0 ) or not reason == 0 ) then
             -- Change in Experience Points on gaining them
@@ -2934,14 +2945,14 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
             end
 
             -- Add to the throttled XP count if it is enabled
-            if CA.SV.ExperienceThrottle > 0 and reason == 0 then 
+            if CA.SV.ExperienceThrottle > 0 and reason == 0 then
                 XPCombatBufferValue = XPCombatBufferValue + change
                 icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. CommaValue (XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName ) or ( CommaValue (XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName )
             end
-            
+
             local xppct = 0             -- XP Percent
             local decimal = 0           -- If we're using a % value, this is the string that determines whether we have a decimal point or not.
-            
+
             if CA.SV.ExperienceShowProgress then
 
                 if CA.SV.ExperienceShowDecimal then
@@ -2980,15 +2991,15 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                     progress = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, CommaValue (levelhelper), CommaValue (XPLevel) )
                     end
                 end
-                
+
                 --
                 -- Big ass bullshit duplicate to create alternate string for Reason 2 on quest turnin with POI completion too
                 if reason == 2 and QuestCombiner1 ~= "" then
-                
+
                 -- CALCULATION 1
-                    
+
                     levelhelper = levelhelper - change
-                    
+
                     if CA.SV.ExperienceShowDecimal then
                             xppct = math.floor(10000*levelhelper/XPLevel) / 100
                     else
@@ -3021,11 +3032,11 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                         QuestCombiner2 = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, CommaValue (levelhelper), CommaValue (XPLevel) )
                         end
                     end
-                    
+
                 -- CALCULATION 2
 
                     local XPLevelAlt
-                
+
                     if IsChampion then
                         local AdjustLevel = GetPlayerChampionPointsEarned() -1
                         if AdjustLevel < 10 then AdjustLevel = 10 end -- Very important, if this player has never hit Champion level before, set the minimum possible value when hitting level 50.
@@ -3037,9 +3048,9 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                         local AdjustLevel = CurrentLevel -1
                         XPLevelAlt = GetNumExperiencePointsInLevel(AdjustLevel)
                     end
-                    
+
                     levelhelper = LevelCarryOverValue
-                    
+
                     if CA.SV.ExperienceShowDecimal then
                             xppct = math.floor(10000*levelhelper/XPLevelAlt) / 100
                     else
@@ -3076,11 +3087,11 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                 --
 
                 end
-                
-                
+
+
             end
 
-            if CA.SV.ExperienceShowLevel then 
+            if CA.SV.ExperienceShowLevel then
                 local attribute
                 if CA.SV.ExperienceColorLevel then
                     if IsChampion then
@@ -3092,7 +3103,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                 else
                     totallevel = strfmt( " %s %s", LevelContext, CurrentLevel)
                 end
-                
+
                 if QuestCombiner1 ~= "" then
                     if CA.SV.ExperienceColorLevel then
                         if IsChampion then
@@ -3110,7 +3121,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                     TotalLevelAdjust = ""
                 end
             end
-            
+
             --[[ Crossover from Normal XP --> Champion XP modifier ]] --
             if Crossover == 1 then
                 -- progress = (progressbrackets .. " (Level 50)")
@@ -3128,14 +3139,14 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
             end
 
         -- If we gain experience from a non combat source, and our buffer function holds a value, then we need to immediately dump this value before the next XP update is processed.
-        if reason ~= 0 and CA.SV.ExperienceThrottle > 0 and XPCombatBufferValue > 0 then 
+        if reason ~= 0 and CA.SV.ExperienceThrottle > 0 and XPCombatBufferValue > 0 then
             XPCombatBufferValue = 0
-            printToChat (XPCombatBufferString)
+            printToChat(XPCombatBufferString)
         end
-            
+
         if reason == 1 then
-            if WeLeveled == 1 then 
-                LevelChanged1 = true 
+            if WeLeveled == 1 then
+                LevelChanged1 = true
             end
             QuestString1 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
             zo_callLater(CA.PrintQuestExperienceHelper, 100)
@@ -3150,15 +3161,15 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
             QuestString2 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
             zo_callLater(CA.PrintQuestExperienceHelper, 100)
         elseif reason == 0 then
-            if change > CA.SV.ExperienceFilter and CA.SV.ExperienceThrottle == 0 then 
-                printToChat ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) ) 
+            if change > CA.SV.ExperienceFilter and CA.SV.ExperienceThrottle == 0 then
+                printToChat(strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
             elseif CA.SV.ExperienceThrottle > 0 then
                 XPCombatBufferString = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
                 local timer = CA.SV.ExperienceThrottle
                 zo_callLater(CA.PrintBufferedXP, 5000)
             end
         else
-            printToChat ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
+            printToChat(strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
         end
     end
 end
@@ -3167,8 +3178,8 @@ function CA.PrintQuestExperienceHelper()
     if WeLeveled == 1 then return end
 
     if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-        printToChat (QuestString1)
-        printToChat (QuestString2)
+        printToChat(QuestString1)
+        printToChat(QuestString2)
     elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
         printToChat(QuestString1)
     elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
@@ -3217,11 +3228,6 @@ function CA.OnAchievementUpdated(eventCode, aId)
     if topLevelIndex == 10 and not CA.SV.AchievementCategory10 then return end
     if topLevelIndex == 11 and not CA.SV.AchievementCategory11 then return end
     if topLevelIndex == 12 and not CA.SV.AchievementCategory12 then return end
-
-    -- Old Function
-    --[[if CA.SV.AchIgnoreList[topLevelIndex] then
-        return
-    end]]
 
     local link = strformat(GetAchievementLink(aId, LINK_STYLE_BRACKETS))
     local catName = GetAchievementCategoryInfo(topLevelIndex)
@@ -3448,10 +3454,9 @@ function CA.GetItemLinkFromItemId(itemId)
     local name = GetItemLinkName(ZO_LinkHandler_CreateLink("Test Trash", nil, ITEM_LINK_TYPE,itemId, 1, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 10000, 0))
     return ZO_LinkHandler_CreateLink(strformat("<<t:1>>", name), nil, ITEM_LINK_TYPE,itemId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 end
-
 -- Only used if the option to see destroyed items or items lost from a guard is turned on
 function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-    if bagId == 1 then
+    if bagId == BAG_BACKPACK then
         local receivedBy = ""
         if not g_InventoryStacks[slotId] then -- NEW ITEM
             local icon, stack = GetItemInfo(bagId, slotId)
@@ -3495,176 +3500,167 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
 
     ItemWasDestroyed = false
 end
-
 function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
+    ---------------------------------- INVENTORY ----------------------------------
+    if bagId == BAG_BACKPACK then
+        local receivedBy = "CRAFT"
+        if not g_InventoryStacks[slotId] then -- NEW ITEM
+            local icon, stack = GetItemInfo(bagId, slotId)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+            local item = g_InventoryStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local gainorloss = "|c0B610B"
+            local logPrefix = "Crafted"
+            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+        elseif g_InventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
+            OldItemLink = g_InventoryStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
+            local icon, stack = GetItemInfo(bagId, slotId)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+            local item = g_InventoryStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local gainorloss = "|c0B610B"
+            local logPrefix = "Upgraded"
+            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
+        elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
+            local item = g_InventoryStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
 
----------------------------------- INVENTORY ----------------------------------
+            if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
+               local gainorloss = "|c0B610B"
+               local logPrefix = "Crafted"
+               local icon, stack = GetItemInfo(bagId, slotId)
+               local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+               CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+               g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
-if bagId == 1 then --
+            elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
+                local itemtype = GetItemLinkItemType(g_InventoryStacks[slotId].itemlink)
+                local gainorloss = ("|ca80700")
+                local logPrefix = "Deconstructed"
 
-    local receivedBy = "CRAFT"
+        if itemtype == ITEMTYPE_ADDITIVE
+        or itemtype == ITEMTYPE_ARMOR_BOOSTER
+        or itemtype == ITEMTYPE_ARMOR_TRAIT
+        or itemtype == ITEMTYPE_BLACKSMITHING_BOOSTER
+        or itemtype == ITEMTYPE_BLACKSMITHING_MATERIAL
+        or itemtype == ITEMTYPE_CLOTHIER_BOOSTER
+        or itemtype == ITEMTYPE_CLOTHIER_MATERIAL
+        or itemtype == ITEMTYPE_ENCHANTING_RUNE_ASPECT
+        or itemtype == ITEMTYPE_ENCHANTING_RUNE_ESSENCE
+        or itemtype == ITEMTYPE_ENCHANTING_RUNE_POTENCY
+        or itemtype == ITEMTYPE_ENCHANTMENT_BOOSTER
+        or itemtype == ITEMTYPE_INGREDIENT
+        or itemtype == ITEMTYPE_POISON_BASE
+        or itemtype == ITEMTYPE_POTION_BASE
+        or itemtype == ITEMTYPE_REAGENT
+        or itemtype == ITEMTYPE_STYLE_MATERIAL
+        or itemtype == ITEMTYPE_WEAPON_BOOSTER
+        or itemtype == ITEMTYPE_WEAPON_TRAIT
+        or itemtype == ITEMTYPE_WOODWORKING_BOOSTER
+        or itemtype == ITEMTYPE_WOODWORKING_MATERIAL then
+            logPrefix = "Used"
+        elseif itemtype == itemtype == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL
+        or itemtype == ITEMTYPE_CLOTHIER_RAW_MATERIAL
+        or itemtype == ITEMTYPE_WOODWORKING_RAW_MATERIAL then
+            logPrefix = "Refined" end
 
-    if not g_InventoryStacks[slotId] then -- NEW ITEM
-        local icon, stack = GetItemInfo(bagId, slotId)
-        local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-        g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
-        local item = g_InventoryStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-        local gainorloss = "|c0B610B"
-        local logPrefix = "Crafted"
-        CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
-    elseif g_InventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
-        OldItemLink = g_InventoryStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
-        local icon, stack = GetItemInfo(bagId, slotId)
-        local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-        g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
-        local item = g_InventoryStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-        local gainorloss = "|c0B610B"
-        local logPrefix = "Upgraded"
-        CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
-    elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
-        local item = g_InventoryStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-
-        if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-           local gainorloss = "|c0B610B"
-           local logPrefix = "Crafted"
-           local icon, stack = GetItemInfo(bagId, slotId)
-           local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-           CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
-           g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
-
-        elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-            local itemtype = GetItemLinkItemType(g_InventoryStacks[slotId].itemlink)
-            local gainorloss = ("|ca80700")
-            local logPrefix = "Deconstructed"
-
-    if itemtype == ITEMTYPE_ADDITIVE
-    or itemtype == ITEMTYPE_ARMOR_BOOSTER
-    or itemtype == ITEMTYPE_ARMOR_TRAIT
-    or itemtype == ITEMTYPE_BLACKSMITHING_BOOSTER
-    or itemtype == ITEMTYPE_BLACKSMITHING_MATERIAL
-    or itemtype == ITEMTYPE_CLOTHIER_BOOSTER
-    or itemtype == ITEMTYPE_CLOTHIER_MATERIAL
-    or itemtype == ITEMTYPE_ENCHANTING_RUNE_ASPECT
-    or itemtype == ITEMTYPE_ENCHANTING_RUNE_ESSENCE
-    or itemtype == ITEMTYPE_ENCHANTING_RUNE_POTENCY
-    or itemtype == ITEMTYPE_ENCHANTMENT_BOOSTER
-    or itemtype == ITEMTYPE_INGREDIENT
-    or itemtype == ITEMTYPE_POISON_BASE
-    or itemtype == ITEMTYPE_POTION_BASE
-    or itemtype == ITEMTYPE_REAGENT
-    or itemtype == ITEMTYPE_STYLE_MATERIAL
-    or itemtype == ITEMTYPE_WEAPON_BOOSTER
-    or itemtype == ITEMTYPE_WEAPON_TRAIT
-    or itemtype == ITEMTYPE_WOODWORKING_BOOSTER
-    or itemtype == ITEMTYPE_WOODWORKING_MATERIAL then
-        logPrefix = "Used"
-    elseif itemtype == itemtype == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL
-    or itemtype == ITEMTYPE_CLOTHIER_RAW_MATERIAL
-    or itemtype == ITEMTYPE_WOODWORKING_RAW_MATERIAL then
-        logPrefix = "Refined" end
-
-            local change = (stackCountChange * -1)
-            local endcount = g_InventoryStacks[slotId].stack - change
-            if logPrefix ~= "Used" or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
-            if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
-                g_InventoryStacks[slotId] = nil
-            else
-                local icon, stack = GetItemInfo(bagId, slotId)
-                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-                g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+                local change = (stackCountChange * -1)
+                local endcount = g_InventoryStacks[slotId].stack - change
+                if logPrefix ~= "Used" or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
+                if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
+                    g_InventoryStacks[slotId] = nil
+                else
+                    local icon, stack = GetItemInfo(bagId, slotId)
+                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                    g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+                end
             end
         end
     end
-end
 
----------------------------------- BANK ----------------------------------
+    ---------------------------------- BANK ----------------------------------
+    if bagId == BAG_BANK then 
+        local receivedBy = "CRAFT"
+        if not g_BankStacks[slotId] then -- NEW ITEM
+            local icon, stack = GetItemInfo(bagId, slotId)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+            local item = g_BankStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local gainorloss = "|c0B610B"
+            local logPrefix = "Crafted - Bank"
+            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+        elseif g_BankStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
+            OldItemLink = g_BankStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
+            local icon, stack = GetItemInfo(bagId, slotId)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+            local item = g_BankStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local gainorloss = "|c0B610B"
+            local logPrefix = "Upgraded - Bank"
+            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
+        elseif g_BankStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
+            local item = g_BankStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
 
-if bagId == 2 then --
+            if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
+               local gainorloss = "|c0B610B"
+               local logPrefix = "Crafted - Bank"
+               local icon, stack = GetItemInfo(bagId, slotId)
+               local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+               CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+               g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
-    local receivedBy = "CRAFT"
+            elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
+                local itemtype = GetItemLinkItemType(g_BankStacks[slotId].itemlink)
+                local gainorloss = ("|ca80700")
+                local logPrefix = "Deconstructed - Bank"
 
-    if not g_BankStacks[slotId] then -- NEW ITEM
-        local icon, stack = GetItemInfo(bagId, slotId)
-        local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-        g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
-        local item = g_BankStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-        local gainorloss = "|c0B610B"
-        local logPrefix = "Crafted - Bank"
-        CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
-    elseif g_BankStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
-        OldItemLink = g_BankStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
-        local icon, stack = GetItemInfo(bagId, slotId)
-        local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-        g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
-        local item = g_BankStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-        local gainorloss = "|c0B610B"
-        local logPrefix = "Upgraded - Bank"
-        CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
-    elseif g_BankStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
-        local item = g_BankStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+        if itemtype == ITEMTYPE_ADDITIVE
+        or itemtype == ITEMTYPE_ARMOR_BOOSTER
+        or itemtype == ITEMTYPE_ARMOR_TRAIT
+        or itemtype == ITEMTYPE_BLACKSMITHING_BOOSTER
+        or itemtype == ITEMTYPE_BLACKSMITHING_MATERIAL
+        or itemtype == ITEMTYPE_CLOTHIER_BOOSTER
+        or itemtype == ITEMTYPE_CLOTHIER_MATERIAL
+        or itemtype == ITEMTYPE_ENCHANTING_RUNE_ASPECT
+        or itemtype == ITEMTYPE_ENCHANTING_RUNE_ESSENCE
+        or itemtype == ITEMTYPE_ENCHANTING_RUNE_POTENCY
+        or itemtype == ITEMTYPE_ENCHANTMENT_BOOSTER
+        or itemtype == ITEMTYPE_INGREDIENT
+        or itemtype == ITEMTYPE_POISON_BASE
+        or itemtype == ITEMTYPE_POTION_BASE
+        or itemtype == ITEMTYPE_REAGENT
+        or itemtype == ITEMTYPE_STYLE_MATERIAL
+        or itemtype == ITEMTYPE_WEAPON_BOOSTER
+        or itemtype == ITEMTYPE_WEAPON_TRAIT
+        or itemtype == ITEMTYPE_WOODWORKING_BOOSTER
+        or itemtype == ITEMTYPE_WOODWORKING_MATERIAL then
+            logPrefix = "Used"
+        elseif itemtype == itemtype == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL
+        or itemtype == ITEMTYPE_CLOTHIER_RAW_MATERIAL
+        or itemtype == ITEMTYPE_WOODWORKING_RAW_MATERIAL then
+            logPrefix = "Refined" end
 
-        if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-           local gainorloss = "|c0B610B"
-           local logPrefix = "Crafted - Bank"
-           local icon, stack = GetItemInfo(bagId, slotId)
-           local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-           CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
-           g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
-
-        elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-            local itemtype = GetItemLinkItemType(g_BankStacks[slotId].itemlink)
-            local gainorloss = ("|ca80700")
-            local logPrefix = "Deconstructed - Bank"
-
-    if itemtype == ITEMTYPE_ADDITIVE
-    or itemtype == ITEMTYPE_ARMOR_BOOSTER
-    or itemtype == ITEMTYPE_ARMOR_TRAIT
-    or itemtype == ITEMTYPE_BLACKSMITHING_BOOSTER
-    or itemtype == ITEMTYPE_BLACKSMITHING_MATERIAL
-    or itemtype == ITEMTYPE_CLOTHIER_BOOSTER
-    or itemtype == ITEMTYPE_CLOTHIER_MATERIAL
-    or itemtype == ITEMTYPE_ENCHANTING_RUNE_ASPECT
-    or itemtype == ITEMTYPE_ENCHANTING_RUNE_ESSENCE
-    or itemtype == ITEMTYPE_ENCHANTING_RUNE_POTENCY
-    or itemtype == ITEMTYPE_ENCHANTMENT_BOOSTER
-    or itemtype == ITEMTYPE_INGREDIENT
-    or itemtype == ITEMTYPE_POISON_BASE
-    or itemtype == ITEMTYPE_POTION_BASE
-    or itemtype == ITEMTYPE_REAGENT
-    or itemtype == ITEMTYPE_STYLE_MATERIAL
-    or itemtype == ITEMTYPE_WEAPON_BOOSTER
-    or itemtype == ITEMTYPE_WEAPON_TRAIT
-    or itemtype == ITEMTYPE_WOODWORKING_BOOSTER
-    or itemtype == ITEMTYPE_WOODWORKING_MATERIAL then
-        logPrefix = "Used"
-    elseif itemtype == itemtype == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL
-    or itemtype == ITEMTYPE_CLOTHIER_RAW_MATERIAL
-    or itemtype == ITEMTYPE_WOODWORKING_RAW_MATERIAL then
-        logPrefix = "Refined" end
-
-            local change = (stackCountChange * -1)
-            local endcount = g_BankStacks[slotId].stack - change
-            if logPrefix ~= "Used" or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
-            if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
-                g_BankStacks[slotId] = nil
-            else
-                local icon, stack = GetItemInfo(bagId, slotId)
-                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-                g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+                local change = (stackCountChange * -1)
+                local endcount = g_BankStacks[slotId].stack - change
+                if logPrefix ~= "Used" or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
+                if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
+                    g_BankStacks[slotId] = nil
+                else
+                    local icon, stack = GetItemInfo(bagId, slotId)
+                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                    g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+                end
             end
         end
     end
-end
 
----------------------------------- CRAFTING BAG ----------------------------------
-    if bagId == 5 then --
-
+    ---------------------------------- CRAFTING BAG ----------------------------------
+    if bagId == BAG_VIRTUAL then
         local itemlink = CA.GetItemLinkFromItemId(slotId)
         local icon = GetItemLinkInfo(itemlink)
         icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
@@ -3684,233 +3680,215 @@ end
         if logPrefix ~= "Used" or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss) end
     end
 
-----------------------------------------------------------------------------------
     ItemWasDestroyed = false
-
 end
 
 function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-
----------------------------------- INVENTORY ----------------------------------
-
-if bagId == 1 then --
-
-    local receivedBy = ""
-
-    if not g_InventoryStacks[slotId] then -- NEW ITEM
-        local icon, stack = GetItemInfo(bagId, slotId)
-        local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-        g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
-        local item = g_InventoryStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-        local gainorloss = "|c0B610B"
-        local logPrefix = "Withdrew"
-        if InventoryOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) InventoryOn = false end
-    --[[elseif g_InventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
-        local icon, stack = GetItemInfo(bagId, slotId)
-        local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-        g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
-        local item = g_InventoryStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-        local gainorloss = "|c0B610B"
-        local logPrefix = "Upgraded"
-        CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) -- Shouldn't need this for anything, but just in case. ]]-- Shouldn't be neccesary
-    elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
-        local item = g_InventoryStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-
-        if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-           local gainorloss = "|c0B610B"
-           local logPrefix = "Withdrew"
-           local icon, stack = GetItemInfo(bagId, slotId)
-           local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+    ---------------------------------- INVENTORY ----------------------------------
+    if bagId == BAG_BACKPACK then
+        local receivedBy = ""
+        if not g_InventoryStacks[slotId] then -- NEW ITEM
+            local icon, stack = GetItemInfo(bagId, slotId)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+            local item = g_InventoryStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local gainorloss = "|c0B610B"
+            local logPrefix = "Withdrew"
             if InventoryOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) InventoryOn = false end
-           g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
+        --[[elseif g_InventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
+            local icon, stack = GetItemInfo(bagId, slotId)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+            local item = g_InventoryStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local gainorloss = "|c0B610B"
+            local logPrefix = "Upgraded"
+            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) -- Shouldn't need this for anything, but just in case. ]]-- Shouldn't be neccesary
+        elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
+            local item = g_InventoryStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
 
-        elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-            local itemtype = GetItemLinkItemType(g_InventoryStacks[slotId].itemlink)
-            local gainorloss = ("|ca80700")
-            local logPrefix = "Destroyed"
-            local change = (stackCountChange * -1)
-            local endcount = g_InventoryStacks[slotId].stack - change
-            if CA.SV.ShowDestroy and ItemWasDestroyed then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
-            if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index
-                -- if InventoryOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) InventoryOn = false end
-                g_InventoryStacks[slotId] = nil
-            else
-                local icon, stack = GetItemInfo(bagId, slotId)
-                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-                g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+            if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
+               local gainorloss = "|c0B610B"
+               local logPrefix = "Withdrew"
+               local icon, stack = GetItemInfo(bagId, slotId)
+               local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                if InventoryOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) InventoryOn = false end
+               g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
+
+            elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
+                local itemtype = GetItemLinkItemType(g_InventoryStacks[slotId].itemlink)
+                local gainorloss = ("|ca80700")
+                local logPrefix = "Destroyed"
+                local change = (stackCountChange * -1)
+                local endcount = g_InventoryStacks[slotId].stack - change
+                if CA.SV.ShowDestroy and ItemWasDestroyed then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
+                if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index
+                    -- if InventoryOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) InventoryOn = false end
+                    g_InventoryStacks[slotId] = nil
+                else
+                    local icon, stack = GetItemInfo(bagId, slotId)
+                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                    g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+                end
             end
         end
-    end
-    if not ItemWasDestroyed then BankOn = true end
-    if not ItemWasDestroyed then InventoryOn = false end
-    if not ItemWasDestroyed then zo_callLater(CA.BankFixer, 50) end
-end
-
----------------------------------- BANK ----------------------------------
-
-if bagId == 2 then --
-
-    local receivedBy = ""
-
-    if not g_BankStacks[slotId] then -- NEW ITEM
-        local icon, stack = GetItemInfo(bagId, slotId)
-        local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-        g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
-        local item = g_BankStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-        local gainorloss = "|ca80700"
-        local logPrefix = "Deposited"
-        if BankOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) BankOn = false end
-    --[[elseif g_BankStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
-        OldItemLink = g_BankStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
-        local icon, stack = GetItemInfo(bagId, slotId)
-        local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-        g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
-        local item = g_BankStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-        local gainorloss = "|c0B610B"
-        local logPrefix = "Upgraded - Bank"]]--
-    elseif g_BankStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
-        local item = g_BankStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-
-        if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-           local gainorloss = "|ca80700"
-           local logPrefix = "Deposited"
-           local icon, stack = GetItemInfo(bagId, slotId)
-           local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-           if BankOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) BankOn = false end
-           g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
-
-        elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-            local gainorloss = ("|ca80700")
-            local logPrefix = "Destroyed - Bank"
-            local change = (stackCountChange * -1)
-            local endcount = g_BankStacks[slotId].stack - change
-            if CA.SV.ShowDestroy and ItemWasDestroyed then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
-            if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
-                -- if BankOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) BankOn = false end
-                g_BankStacks[slotId] = nil
-            else
-                local icon, stack = GetItemInfo(bagId, slotId)
-                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-                g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
-            end
-        end
-        if not ItemWasDestroyed then InventoryOn = true end
-        if not ItemWasDestroyed then BankOn = false end
+        if not ItemWasDestroyed then BankOn = true end
+        if not ItemWasDestroyed then InventoryOn = false end
         if not ItemWasDestroyed then zo_callLater(CA.BankFixer, 50) end
     end
-----------------------------------------------------------------------------------
 
+    ---------------------------------- BANK ----------------------------------
+    if bagId == BAG_BANK then
+        local receivedBy = ""
+        if not g_BankStacks[slotId] then -- NEW ITEM
+            local icon, stack = GetItemInfo(bagId, slotId)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+            local item = g_BankStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local gainorloss = "|ca80700"
+            local logPrefix = "Deposited"
+            if BankOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) BankOn = false end
+        --[[elseif g_BankStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
+            OldItemLink = g_BankStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
+            local icon, stack = GetItemInfo(bagId, slotId)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+            local item = g_BankStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local gainorloss = "|c0B610B"
+            local logPrefix = "Upgraded - Bank"]]--
+        elseif g_BankStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
+            local item = g_BankStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
 
+            if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
+               local gainorloss = "|ca80700"
+               local logPrefix = "Deposited"
+               local icon, stack = GetItemInfo(bagId, slotId)
+               local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+               if BankOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) BankOn = false end
+               g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
-end
-
--- POSSIBLY ADD MORE SUPPORT HERE FOR CRAFT BAG EXTENDED, RIGHT NOW STOWING OR RETRIEVING MATERIALS TO PLAYER BAG SHOWS DEPOSIT/WITHDRAW MESSAGE
-
-if bagId == 5 then --
-
-    local itemlink = CA.GetItemLinkFromItemId(slotId)
-    local icon = GetItemLinkInfo(itemlink)
-    icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
-    local receivedBy = ""
-    local gainorloss = "|c0B610B"
-    local logPrefix = "Withdrew"
-    local stack = stackCountChange
-
-    if stackCountChange < 1 then
-        gainorloss = "|ca80700"
-        logPrefix = "Deposited"
-        stack = stackCountChange * -1
+            elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
+                local gainorloss = ("|ca80700")
+                local logPrefix = "Destroyed - Bank"
+                local change = (stackCountChange * -1)
+                local endcount = g_BankStacks[slotId].stack - change
+                if CA.SV.ShowDestroy and ItemWasDestroyed then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
+                if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
+                    -- if BankOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) BankOn = false end
+                    g_BankStacks[slotId] = nil
+                else
+                    local icon, stack = GetItemInfo(bagId, slotId)
+                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                    g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+                end
+            end
+            if not ItemWasDestroyed then InventoryOn = true end
+            if not ItemWasDestroyed then BankOn = false end
+            if not ItemWasDestroyed then zo_callLater(CA.BankFixer, 50) end
+        end
     end
 
-    CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss)
-end
+    --[[
+    POSSIBLY ADD MORE SUPPORT HERE FOR CRAFT BAG EXTENDED, RIGHT NOW STOWING OR RETRIEVING MATERIALS TO PLAYER BAG SHOWS DEPOSIT/WITHDRAW MESSAGE
+    --]]
 
-ItemWasDestroyed = false
+    if bagId == BAG_VIRTUAL then
+        local itemlink = CA.GetItemLinkFromItemId(slotId)
+        local icon = GetItemLinkInfo(itemlink)
+        icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
+        local receivedBy = ""
+        local gainorloss = "|c0B610B"
+        local logPrefix = "Withdrew"
+        local stack = stackCountChange
 
+        if stackCountChange < 1 then
+            gainorloss = "|ca80700"
+            logPrefix = "Deposited"
+            stack = stackCountChange * -1
+        end
+
+        CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss)
+    end
+
+    ItemWasDestroyed = false
 end
 
 function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-
----------------------------------- INVENTORY ----------------------------------
-
-if bagId == 1 then
-
-    local receivedBy = ""
-
-    if not g_InventoryStacks[slotId] then -- NEW ITEM
-        local icon, stack = GetItemInfo(bagId, slotId)
-        local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-        g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
-        local item = g_InventoryStacks[slotId]
-        GuildBankCarry_icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-        GuildBankCarry_gainorloss = "|c0B610B"
-        GuildBankCarry_logPrefix = "Withdrew"
-        GuildBankCarry_receivedBy = ""
-        GuildBankCarry_itemLink = item.itemlink
-        GuildBankCarry_stackCount = stackCountChange or 1
-    --[[elseif g_InventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
-        local icon, stack = GetItemInfo(bagId, slotId)
-        local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-        g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
-        local item = g_InventoryStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-        local gainorloss = "|c0B610B"
-        local logPrefix = "Upgraded"
-        CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) -- Shouldn't need this for anything, but just in case. ]]-- Shouldn't be neccesary
-    elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
-        local item = g_InventoryStacks[slotId]
-        local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-
-        if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-           local icon, stack = GetItemInfo(bagId, slotId)
-           local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-           GuildBankCarry_icon = seticon
-           GuildBankCarry_gainorloss = "|c0B610B"
-           GuildBankCarry_logPrefix = "Withdrew"
-           GuildBankCarry_receivedBy = ""
-           GuildBankCarry_itemLink = item.itemlink
-           GuildBankCarry_stackCount = stackCountChange or 1
-           g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
-
-        elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-            local gainorloss = ("|ca80700")
-            local logPrefix = "Destroyed"
-            local change = (stackCountChange * -1)
-            local endcount = g_InventoryStacks[slotId].stack - change
-            GuildBankCarry_icon = seticon
-            GuildBankCarry_gainorloss = "|ca80700"
-            GuildBankCarry_logPrefix = "Despoited"
+    ---------------------------------- INVENTORY ----------------------------------
+    if bagId == BAG_BACKPACK then
+        local receivedBy = ""
+        if not g_InventoryStacks[slotId] then -- NEW ITEM
+            local icon, stack = GetItemInfo(bagId, slotId)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+            local item = g_InventoryStacks[slotId]
+            GuildBankCarry_icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            GuildBankCarry_gainorloss = "|c0B610B"
+            GuildBankCarry_logPrefix = "Withdrew"
             GuildBankCarry_receivedBy = ""
             GuildBankCarry_itemLink = item.itemlink
-            GuildBankCarry_stackCount = change
-            if CA.SV.ShowDestroy and ItemWasDestroyed then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
-            if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index
-                g_InventoryStacks[slotId] = nil
-            else
-                local icon, stack = GetItemInfo(bagId, slotId)
-                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-                g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+            GuildBankCarry_stackCount = stackCountChange or 1
+        --[[elseif g_InventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
+            local icon, stack = GetItemInfo(bagId, slotId)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+            local item = g_InventoryStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local gainorloss = "|c0B610B"
+            local logPrefix = "Upgraded"
+            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) -- Shouldn't need this for anything, but just in case. ]]-- Shouldn't be neccesary
+        elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
+            local item = g_InventoryStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+
+            if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
+               local icon, stack = GetItemInfo(bagId, slotId)
+               local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+               GuildBankCarry_icon = seticon
+               GuildBankCarry_gainorloss = "|c0B610B"
+               GuildBankCarry_logPrefix = "Withdrew"
+               GuildBankCarry_receivedBy = ""
+               GuildBankCarry_itemLink = item.itemlink
+               GuildBankCarry_stackCount = stackCountChange or 1
+               g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
+
+            elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
+                local gainorloss = ("|ca80700")
+                local logPrefix = "Destroyed"
+                local change = (stackCountChange * -1)
+                local endcount = g_InventoryStacks[slotId].stack - change
+                GuildBankCarry_icon = seticon
+                GuildBankCarry_gainorloss = "|ca80700"
+                GuildBankCarry_logPrefix = "Despoited"
+                GuildBankCarry_receivedBy = ""
+                GuildBankCarry_itemLink = item.itemlink
+                GuildBankCarry_stackCount = change
+                if CA.SV.ShowDestroy and ItemWasDestroyed then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
+                if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index
+                    g_InventoryStacks[slotId] = nil
+                else
+                    local icon, stack = GetItemInfo(bagId, slotId)
+                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                    g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+                end
             end
         end
     end
-end
 
----------------------------------- CRAFTING BAG ----------------------------------
-
-    if bagId == 5 then
+    ---------------------------------- CRAFTING BAG ----------------------------------
+    if bagId == BAG_VIRTUAL then
         local receivedBy = ""
         local gainorloss = "|c0B610B"
         local logPrefix = "Received"
         local itemlink = CA.GetItemLinkFromItemId(slotId)
         local icon = GetItemLinkInfo(itemlink)
         local seticon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
-        
+
         GuildBankCarry_icon = seticon
         GuildBankCarry_gainorloss = "|c0B610B"
         GuildBankCarry_logPrefix = "Withdrew"
@@ -3919,20 +3897,13 @@ end
         GuildBankCarry_stackCount = stackCountChange or 1
     end
 
-----------------------------------------------------------------------------------
-
-ItemWasDestroyed = false
-
+    ItemWasDestroyed = false
 end
 
 function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-
----------------------------------- INVENTORY ----------------------------------
-
-    if bagId == 1 then --
-
+    ---------------------------------- INVENTORY ----------------------------------
+    if bagId == BAG_BACKPACK then
         local receivedBy = ""
-
         if not g_InventoryStacks[slotId] and stackCountChange > 0 then -- NEW ITEM
             local icon, stack = GetItemInfo(bagId, slotId)
             local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
@@ -3985,9 +3956,8 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
         end
     end
 
----------------------------------- CRAFTING BAG ----------------------------------
-    if bagId == 5 then --
-
+    ---------------------------------- CRAFTING BAG ----------------------------------
+    if bagId == BAG_VIRTUAL then
         local itemlink = CA.GetItemLinkFromItemId(slotId)
         local icon = GetItemLinkInfo(itemlink)
         icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
@@ -4006,7 +3976,6 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
     ItemWasDestroyed = false
     combostring = ""
     LaunderCheck = false
-
 end
 
 -- Makes it so bank withdraw/deposit events only occur when we can confirm the item is crossing over.
@@ -4021,7 +3990,7 @@ local ConfiscateMessage = ("Bounty confiscated!")
 
 function CA.JusticeStealRemove(eventCode)
     if CA.SV.MiscConfiscate and eventCode == 131555 then
-        ConfiscateMessage = ("Bounty and stolen items confiscated!")
+        ConfiscateMessage = (GetString(SI_LUIE_CA_JUSTICE_CONFISCATED_BOUNTY_ITEMS_MSG))
     end
 
     if stealstring == "" then return end
@@ -4032,7 +4001,7 @@ function CA.JusticeStealRemove(eventCode)
 
     printToChat(stealstring)
     stealstring = ""
-    ConfiscateMessage = ("Bounty confiscated!")
+    ConfiscateMessage = (GetString(SI_LUIE_CA_JUSTICE_CONFISCATED_MSG))
 
     if CA.SV.ShowConfiscate or CA.SV.ShowDestroy then
         zo_callLater(CA.JusticeRemovePrint, 50)
@@ -4067,8 +4036,7 @@ function CA.JusticeRemovePrint()
         end
     end
 
-g_JusticeStacks = {} -- Clear the Justice Item Stacks since we don't need this for anything else!
-g_InventoryStacks = {}
-CA.IndexInventory() -- Reindex the inventory with the correct values!
-
+    g_JusticeStacks = {} -- Clear the Justice Item Stacks since we don't need this for anything else!
+    g_InventoryStacks = {}
+    CA.IndexInventory() -- Reindex the inventory with the correct values!
 end

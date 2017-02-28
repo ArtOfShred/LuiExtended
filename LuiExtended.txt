@@ -63,6 +63,8 @@ LuiExtendedSettings.lua
 bindings.xml
 
 i18n\locale.lua
+i18n\en.lua
+i18n\$(language).lua
 
 modules\Effects.lua
 modules\InfoPanel.lua
