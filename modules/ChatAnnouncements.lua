@@ -520,7 +520,7 @@ function CA.ActivityStatusUpdate(eventCode, status)
             ShowStatusDropMember = true
         end
         if status == ACTIVITY_FINDER_STATUS_IN_PROGRESS and ShowStatusDropMember == true then
-            printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_QUEUED_END))
+            printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_QUEUE_END))
             WeAreQueued = false
             ShowStatusDropMember = false
         end

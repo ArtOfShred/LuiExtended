@@ -31,7 +31,7 @@ ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF",                "You hav
 ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_REPLACEMENT_FOUND",          "A replacement party member has been found.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_DISBAND_MSG",                       "The group has been disbanded.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_QUEUE_START",                "You are now queued in the group finder.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_QUEUED_END",                 "You are no longer queued in the group finder.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_QUEUE_END",                 "You are no longer queued in the group finder.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MSG",                        "|cFEFEFE<<1>>|r has invited you to trade.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MSG_SELF",                   "You have invited |cFEFEFE<<1>>|r to trade.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_ACCEPTED",                   "Trade invite accepted.")
