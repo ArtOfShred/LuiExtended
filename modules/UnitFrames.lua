@@ -108,6 +108,7 @@ UF.D = {
     ReticleColour_Interact           = { 1, 1, 0 },
     ReticleColourByReaction          = false,
     DisplayOptions                   = 2,
+    ExecutePercentage                = 20,
 }
 UF.SV = nil
 
@@ -364,6 +365,8 @@ local function CreateCustomFrames()
             },
             [POWERTYPE_STAMINA] = {
                 ["backdrop"]= psb,
+                ["labelOne"]= UI.Label( psb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
+                ["labelTwo"]= UI.Label( psb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
                 ["bar"]     = UI.StatusBar( psb, nil, nil, nil, false ),
             },
             ["alternative"] = {
@@ -609,14 +612,16 @@ local function CreateCustomFrames()
                 ["control"]     = control,
                 [POWERTYPE_HEALTH] = {
                     ["backdrop"]= rhb,
+                    ["label"]   = UI.Label( rhb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
                     ["bar"]     = UI.StatusBar( rhb, nil, nil, nil, false ),
                     ["shield"]  = UI.StatusBar( rhb, nil, nil, nil, true ),
                 },
                 ["name"]        = UI.Label( rhb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, unitTag, false ),
                 ["dead"]        = UI.Label( rhb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "Status", false ),
-                ["stealth"]     = UI.Texture( rhb, {RIGHT,RIGHT,-2,0}, {24,24}, nil, 2, false ),
+                --["stealth"]     = UI.Texture( rhb, {RIGHT,RIGHT,-2,0}, {24,24}, nil, 2, false ), -- STEALTH temporary removal --> Add role icon onto bar
             }
-            UF.CustomFrames[unitTag].leader = {RIGHT, RIGHT, -20, 0, UF.CustomFrames[unitTag].control, true}
+            UF.CustomFrames[unitTag].leader = {RIGHT, RIGHT, -38, 0, UF.CustomFrames[unitTag].control, true}
+            UF.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = "Percentage%"
         end
     end
 
@@ -840,7 +845,7 @@ function UF.Initialize( enabled )
     g_playerAlliance = GetUnitAlliance( 'player' )
 
     -- For Sorcerer players we will change Target label colour on 20% instead of 25%
-    g_targetThreshold = ( GetUnitClassId('player') == 2 ) and 20 or g_defaultThreshold
+    g_targetThreshold = UF.SV.ExecutePercentage
 
     CreateDefaultFrames()
 
@@ -1267,7 +1272,7 @@ function UF.OnReticleTargetChanged(eventCode)
             UF.CustomFrames.reticleover.name:SetColor( colour[1], colour[2], colour[3] )
             UF.CustomFrames.reticleover.className:SetColor( colour[1], colour[2], colour[3] )
             if isCritter then
-                UF.CustomFrames.reticleover[POWERTYPE_HEALTH].labelOne:SetText( "-critter-" )
+                UF.CustomFrames.reticleover[POWERTYPE_HEALTH].labelOne:SetText( " - Critter - " )
             end
             UF.CustomFrames.reticleover[POWERTYPE_HEALTH].labelTwo:SetHidden( isCritter or not UF.CustomFrames.reticleover.dead:IsHidden() )
             -- Finally show custom target frame
@@ -1838,8 +1843,9 @@ function UF.OnLeaderUpdate(eventCode, leaderTag)
             local size = UF.CustomFrames[leaderTag].classIcon:GetWidth() *1.3
             g_customLeaderIcon:SetDimensions( size, size )
             UF.CustomFrames[leaderTag].topInfo:SetWidth( UF.SV.GroupBarWidth-size*5/6 )
+            UF.UpdateStaticControls( UF.CustomFrames[leaderTag] )
 
-        -- RaidGroup need just reset of icon size
+        -- RaidGroup need just reset of icon size (Going to need to add better function here at some point)
         else
             g_customLeaderIcon:SetDimensions( 24, 24 )
         end
@@ -1851,6 +1857,7 @@ function UF.OnLeaderUpdate(eventCode, leaderTag)
     -- Restore last leader label width
     if g_customLeaderIcon.unitTag and UF.CustomFrames[g_customLeaderIcon.unitTag] and UF.CustomFrames[g_customLeaderIcon.unitTag].topInfo then
         UF.CustomFrames[g_customLeaderIcon.unitTag].topInfo:SetWidth( UF.SV.GroupBarWidth-5 )
+        UF.UpdateStaticControls( UF.CustomFrames[g_customLeaderIcon.unitTag] )
     end
     -- And set current leader tag
     g_customLeaderIcon.unitTag = leaderTag
@@ -2580,7 +2587,15 @@ function UF.CustomFramesApplyLayoutPlayer()
 
         psb.backdrop:ClearAnchors()
         if not UF.SV.HideBarStamina then
-            psb.backdrop:SetAnchor( TOP, pmb.backdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
+            if not UF.SV.HideBarMagicka then
+                psb.backdrop:SetAnchor( TOP, pmb.backdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
+            else
+                if phb.shieldbackdrop then
+                    psb.backdrop:SetAnchor( TOP, phb.shieldbackdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
+                else
+                    psb.backdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
+                end
+            end
             psb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightStamina )
         end
         alt.backdrop:SetWidth( altW )
@@ -2595,7 +2610,6 @@ function UF.CustomFramesApplyLayoutPlayer()
             psb.labelOne:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightStamina-2 )
             psb.labelTwo:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightStamina-2 )
         end
-
         player.tlw:SetHidden(false)
     end
 
@@ -2749,9 +2763,11 @@ function UF.CustomFramesApplyLayoutRaid()
         unitFrame.control:SetAnchor( TOPLEFT, raid, TOPLEFT, UF.SV.RaidBarWidth*column, UF.SV.RaidBarHeight*(row-1) + (UF.SV.RaidSpacers and spacerHeight*(math.floor((i-1)/4)-math.floor(column*itemsPerColumn/4)) or 0) )
         unitFrame.control:SetDimensions( UF.SV.RaidBarWidth, UF.SV.RaidBarHeight )
 
-        -- Subtracted an additional additional 10 from dimensions here to correct for clipping into Offline label
-        unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-55, UF.SV.RaidBarHeight-2 )
+        -- Subtracted an additional additional 20 from dimensions here to correct for clipping into Offline label + Crown
+        unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-64, UF.SV.RaidBarHeight-2 )
         unitFrame.dead:SetDimensions( 75, UF.SV.RaidBarHeight-2 )
+        
+        unitFrame[POWERTYPE_HEALTH].label:SetDimensions(UF.SV.RaidBarWidth-50, UF.SV.RaidBarHeight-2)
 
     end
 

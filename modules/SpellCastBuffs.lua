@@ -61,6 +61,8 @@ SCB.D = {
     StealthState                     = true,
     ShowSprint                       = true,
     ShowGallop                       = true,
+    HideTargetBuffs                  = false,
+    HideTargetDebuffs                = false,
 }
 SCB.SV = nil
 
@@ -1228,6 +1230,9 @@ end
  *   integer statusEffectType
  ]]--
 function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+
+    if SCB.SV.HideTargetBuffs and effectType == 1 and unitTag ~= 'player' then return end
+    if SCB.SV.HideTargetDebuffs and effectType == 2 and unitTag ~= 'player' then return end
     --CHAT_SYSTEM:AddMessage(strfmt('OnEffectChanged %d: %s[%s] / %d/%d/%d [%s-%d] %d', changeType, effectName, unitTag, effectType, abilityType, statusEffectType, unitName, unitId, abilityId ))
 
     -- track only effects on self or target debuffs
@@ -1419,6 +1424,7 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
             forced = "short",
             restart=true, iconNum=0 }
         elseif source == playerName and target ~= playerName and target ~= nil then -- Can add an aura for buffs applied on target by player, can't be removed other than via timing out
+            if SCB.SV.HideTargetBuffs then return end
             g_effectsList.reticleover1[ abilityId ] = {
             type=1,
             id=abilityId, name=effectName, icon=iconName,
@@ -1443,6 +1449,7 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
         local source = strformat("<<t:1>>",sourceName)
         local target = strformat("<<t:1>>",targetName)
         if source == playerName and target ~= nil then
+            if SCB.SV.HideTargetDebuffs then return end
             g_effectsList.reticleover2[ abilityId ] = {
             type=effectType,
             id=abilityId, name=effectName, icon=iconName,
@@ -1471,6 +1478,7 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
             forced = "short",
             restart=true, iconNum=0 }
         elseif source == playerName and target ~= nil then
+            if SCB.SV.HideTargetDebuffs then return end
             g_effectsList.reticleover2[ abilityId ] = {
             type=EFFECT_TYPE_DEBUFF,
             id=abilityId, name=effectName, icon=iconName,

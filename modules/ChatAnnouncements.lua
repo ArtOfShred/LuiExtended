@@ -2252,7 +2252,7 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
     end
 
     local styleType = GetItemLinkItemStyle(itemName) -- Get Style of the item
-    if (CA.SV.LootShowStyle and styleType ~= ITEMSTYLE_NONE and styleType ~= ITEMSTYLE_UNIQUE and styleType ~= ITEMSTYLE_UNIVERSAL) then
+    if (CA.SV.LootShowStyle and styleType ~= ITEMSTYLE_NONE and styleType ~= ITEMSTYLE_UNIQUE and styleType ~= ITEMSTYLE_UNIVERSAL and itemType ~= ITEMTYPE_STYLE_MATERIAL) then
         formattedStyle = strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMSTYLE", styleType))
     end
 
@@ -2505,6 +2505,7 @@ function CA.OnTradeSuccess(eventCode)
                 local receivedBy = tradetarget
                 local istrade = true
                 local item = g_TradeStacksOut[indexOut]
+                local itemType = GetItemLinkItemType(item.itemlink)
                 icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
                 --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
                 CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss, istrade)
@@ -2519,6 +2520,7 @@ function CA.OnTradeSuccess(eventCode)
                 local receivedBy = tradetarget
                 local istrade = true
                 local item = g_TradeStacksIn[indexIn]
+                local itemType = GetItemLinkItemType(item.itemlink)
                 icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
                 --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
                 CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss, istrade)
@@ -2583,6 +2585,7 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
     for attachIndex = 1, #g_MailStacks do
         local item = g_MailStacks[attachIndex]
         local icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+        local itemType = GetItemLinkItemType(item.itemlink)
         NumMails = NumMails+1
         --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
         if CA.SV.LootMail then zo_callLater(function() CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss) end , 50) end
@@ -2661,6 +2664,7 @@ function CA.OnMailSuccess(eventCode)
         local receivedBy = ""
         local item = g_MailStacksOut[mailIndex]
         icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+        local itemType = GetItemLinkItemType(item.itemlink)
         --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
         CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss)
         end
@@ -3319,25 +3323,28 @@ local GuildBankCarry_itemLink
 local GuildBankCarry_stackCount
 local GuildBankCarry_receivedBy
 local GuildBankCarry_gainorloss
+local GuildBankCarry_itemType
 
 function CA.GuildBankItemAdded(eventCode, slotId)
-    CA.LogItem(GuildBankCarry_logPrefix, GuildBankCarry_icon, GuildBankCarry_itemLink, itemType, GuildBankCarry_stackCount or 1, GuildBankCarry_receivedBy, GuildBankCarry_gainorloss)
+    CA.LogItem(GuildBankCarry_logPrefix, GuildBankCarry_icon, GuildBankCarry_itemLink, GuildBankCarry_itemType, GuildBankCarry_stackCount or 1, GuildBankCarry_receivedBy, GuildBankCarry_gainorloss)
     GuildBankCarry_logPrefix = ""
     GuildBankCarry_icon = ""
     GuildBankCarry_itemLink = ""
     GuildBankCarry_stackCount = ""
     GuildBankCarry_receivedBy = ""
     GuildBankCarry_gainorloss = ""
+    GuildBankCarry_itemType = ""
 end
 
 function CA.GuildBankItemRemoved(eventCode, slotId)
-    CA.LogItem(GuildBankCarry_logPrefix, GuildBankCarry_icon, GuildBankCarry_itemLink, itemType, GuildBankCarry_stackCount or 1, GuildBankCarry_receivedBy, GuildBankCarry_gainorloss)
+    CA.LogItem(GuildBankCarry_logPrefix, GuildBankCarry_icon, GuildBankCarry_itemLink, GuildBankCarry_itemType, GuildBankCarry_stackCount or 1, GuildBankCarry_receivedBy, GuildBankCarry_gainorloss)
     GuildBankCarry_logPrefix = ""
     GuildBankCarry_icon = ""
     GuildBankCarry_itemLink = ""
     GuildBankCarry_stackCount = ""
     GuildBankCarry_receivedBy = ""
     GuildBankCarry_gainorloss = ""
+    GuildBankCarry_itemType = ""
 end
 
 function CA.IndexInventory()
@@ -3378,7 +3385,7 @@ end
 function CA.CraftingClose(eventCode, craftSkill)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate) end
-    if not CA.SV.ShowDestroy or CA.SV.ShowConfiscate then g_InventoryStacks = {} end
+    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) then g_InventoryStacks = {} end
     g_BankStacks = {}
 end
 
@@ -3394,7 +3401,7 @@ end
 function CA.BankClose(eventCode)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate) end
-    if not CA.SV.ShowDestroy or CA.SV.ShowConfiscate then g_InventoryStacks = {} end
+    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) then g_InventoryStacks = {} end
     g_BankStacks = {}
 end
 
@@ -3408,7 +3415,7 @@ end
 function CA.GuildBankClose(eventCode)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate) end
-    if not CA.SV.ShowDestroy or CA.SV.ShowConfiscate then g_InventoryStacks = {} end
+    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) then g_InventoryStacks = {} end
 end
 
 function CA.FenceOpen(eventCode, allowSell, allowLaunder)
@@ -3421,7 +3428,7 @@ end
 function CA.StoreClose(eventCode)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate) end
-    if not CA.SV.ShowDestroy or CA.SV.ShowConfiscate then g_InventoryStacks = {} end
+    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) then g_InventoryStacks = {} end
 end
 
 function CA.FenceSuccess(eventCode, result)
@@ -3444,7 +3451,7 @@ function CA.FenceHelper()
     IsValidLaunder = false
 end
 
--- Only active if destroyed items is enabled, flags the next time that is removed from inventory as destroyed.
+-- Only active if destroyed items is enabled, flags the next item that is removed from inventory as destroyed.
 function CA.DestroyItem(eventCode, itemSoundCategory)
     ItemWasDestroyed = true
 end
@@ -3454,6 +3461,7 @@ function CA.GetItemLinkFromItemId(itemId)
     local name = GetItemLinkName(ZO_LinkHandler_CreateLink("Test Trash", nil, ITEM_LINK_TYPE,itemId, 1, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 10000, 0))
     return ZO_LinkHandler_CreateLink(strformat("<<t:1>>", name), nil, ITEM_LINK_TYPE,itemId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 end
+
 -- Only used if the option to see destroyed items or items lost from a guard is turned on
 function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     if bagId == BAG_BACKPACK then
@@ -3464,6 +3472,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_InventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = "|c0B610B"
             local logPrefix = "Looted Item"
             -- CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
@@ -3471,6 +3480,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
         elseif g_InventoryStacks[slotId] then -- EXISTING ITEM
             local item = g_InventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange == 0 then return end -- Means item was modified (enchanted, etc)
 
@@ -3500,6 +3510,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
 
     ItemWasDestroyed = false
 end
+
 function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     ---------------------------------- INVENTORY ----------------------------------
     if bagId == BAG_BACKPACK then
@@ -3510,8 +3521,32 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_InventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = "|c0B610B"
             local logPrefix = "Crafted"
+            
+            if itemType == ITEMTYPE_ADDITIVE
+            or itemType == ITEMTYPE_ARMOR_BOOSTER
+            or itemType == ITEMTYPE_ARMOR_TRAIT
+            or itemType == ITEMTYPE_BLACKSMITHING_BOOSTER
+            or itemType == ITEMTYPE_BLACKSMITHING_MATERIAL
+            or itemType == ITEMTYPE_CLOTHIER_BOOSTER
+            or itemType == ITEMTYPE_CLOTHIER_MATERIAL
+            or itemType == ITEMTYPE_ENCHANTING_RUNE_ASPECT
+            or itemType == ITEMTYPE_ENCHANTING_RUNE_ESSENCE
+            or itemType == ITEMTYPE_ENCHANTING_RUNE_POTENCY
+            or itemType == ITEMTYPE_ENCHANTMENT_BOOSTER
+            or itemType == ITEMTYPE_INGREDIENT
+            or itemType == ITEMTYPE_POISON_BASE
+            or itemType == ITEMTYPE_POTION_BASE
+            or itemType == ITEMTYPE_REAGENT
+            or itemType == ITEMTYPE_STYLE_MATERIAL
+            or itemType == ITEMTYPE_WEAPON_BOOSTER
+            or itemType == ITEMTYPE_WEAPON_TRAIT
+            or itemType == ITEMTYPE_WOODWORKING_BOOSTER
+            or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
+                logPrefix = "Received" end
+            
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
         elseif g_InventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
             OldItemLink = g_InventoryStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
@@ -3526,45 +3561,68 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
         elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_InventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                local gainorloss = "|c0B610B"
                local logPrefix = "Crafted"
+               
+                if itemType == ITEMTYPE_ADDITIVE
+                or itemType == ITEMTYPE_ARMOR_BOOSTER
+                or itemType == ITEMTYPE_ARMOR_TRAIT
+                or itemType == ITEMTYPE_BLACKSMITHING_BOOSTER
+                or itemType == ITEMTYPE_BLACKSMITHING_MATERIAL
+                or itemType == ITEMTYPE_CLOTHIER_BOOSTER
+                or itemType == ITEMTYPE_CLOTHIER_MATERIAL
+                or itemType == ITEMTYPE_ENCHANTING_RUNE_ASPECT
+                or itemType == ITEMTYPE_ENCHANTING_RUNE_ESSENCE
+                or itemType == ITEMTYPE_ENCHANTING_RUNE_POTENCY
+                or itemType == ITEMTYPE_ENCHANTMENT_BOOSTER
+                or itemType == ITEMTYPE_INGREDIENT
+                or itemType == ITEMTYPE_POISON_BASE
+                or itemType == ITEMTYPE_POTION_BASE
+                or itemType == ITEMTYPE_REAGENT
+                or itemType == ITEMTYPE_STYLE_MATERIAL
+                or itemType == ITEMTYPE_WEAPON_BOOSTER
+                or itemType == ITEMTYPE_WEAPON_TRAIT
+                or itemType == ITEMTYPE_WOODWORKING_BOOSTER
+                or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
+                    logPrefix = "Received" end
+               
                local icon, stack = GetItemInfo(bagId, slotId)
                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
                g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local itemtype = GetItemLinkItemType(g_InventoryStacks[slotId].itemlink)
                 local gainorloss = ("|ca80700")
                 local logPrefix = "Deconstructed"
 
-        if itemtype == ITEMTYPE_ADDITIVE
-        or itemtype == ITEMTYPE_ARMOR_BOOSTER
-        or itemtype == ITEMTYPE_ARMOR_TRAIT
-        or itemtype == ITEMTYPE_BLACKSMITHING_BOOSTER
-        or itemtype == ITEMTYPE_BLACKSMITHING_MATERIAL
-        or itemtype == ITEMTYPE_CLOTHIER_BOOSTER
-        or itemtype == ITEMTYPE_CLOTHIER_MATERIAL
-        or itemtype == ITEMTYPE_ENCHANTING_RUNE_ASPECT
-        or itemtype == ITEMTYPE_ENCHANTING_RUNE_ESSENCE
-        or itemtype == ITEMTYPE_ENCHANTING_RUNE_POTENCY
-        or itemtype == ITEMTYPE_ENCHANTMENT_BOOSTER
-        or itemtype == ITEMTYPE_INGREDIENT
-        or itemtype == ITEMTYPE_POISON_BASE
-        or itemtype == ITEMTYPE_POTION_BASE
-        or itemtype == ITEMTYPE_REAGENT
-        or itemtype == ITEMTYPE_STYLE_MATERIAL
-        or itemtype == ITEMTYPE_WEAPON_BOOSTER
-        or itemtype == ITEMTYPE_WEAPON_TRAIT
-        or itemtype == ITEMTYPE_WOODWORKING_BOOSTER
-        or itemtype == ITEMTYPE_WOODWORKING_MATERIAL then
-            logPrefix = "Used"
-        elseif itemtype == itemtype == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL
-        or itemtype == ITEMTYPE_CLOTHIER_RAW_MATERIAL
-        or itemtype == ITEMTYPE_WOODWORKING_RAW_MATERIAL then
-            logPrefix = "Refined" end
+                if itemType == ITEMTYPE_ADDITIVE
+                or itemType == ITEMTYPE_ARMOR_BOOSTER
+                or itemType == ITEMTYPE_ARMOR_TRAIT
+                or itemType == ITEMTYPE_BLACKSMITHING_BOOSTER
+                or itemType == ITEMTYPE_BLACKSMITHING_MATERIAL
+                or itemType == ITEMTYPE_CLOTHIER_BOOSTER
+                or itemType == ITEMTYPE_CLOTHIER_MATERIAL
+                or itemType == ITEMTYPE_ENCHANTING_RUNE_ASPECT
+                or itemType == ITEMTYPE_ENCHANTING_RUNE_ESSENCE
+                or itemType == ITEMTYPE_ENCHANTING_RUNE_POTENCY
+                or itemType == ITEMTYPE_ENCHANTMENT_BOOSTER
+                or itemType == ITEMTYPE_INGREDIENT
+                or itemType == ITEMTYPE_POISON_BASE
+                or itemType == ITEMTYPE_POTION_BASE
+                or itemType == ITEMTYPE_REAGENT
+                or itemType == ITEMTYPE_STYLE_MATERIAL
+                or itemType == ITEMTYPE_WEAPON_BOOSTER
+                or itemType == ITEMTYPE_WEAPON_TRAIT
+                or itemType == ITEMTYPE_WOODWORKING_BOOSTER
+                or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
+                    logPrefix = "Used"
+                elseif itemType == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL
+                or itemType == ITEMTYPE_CLOTHIER_RAW_MATERIAL
+                or itemType == ITEMTYPE_WOODWORKING_RAW_MATERIAL then
+                    logPrefix = "Refined" end
 
                 local change = (stackCountChange * -1)
                 local endcount = g_InventoryStacks[slotId].stack - change
@@ -3589,6 +3647,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_BankStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = "|c0B610B"
             local logPrefix = "Crafted - Bank"
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
@@ -3605,6 +3664,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
         elseif g_BankStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_BankStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                local gainorloss = "|c0B610B"
@@ -3615,34 +3675,33 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
                g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local itemtype = GetItemLinkItemType(g_BankStacks[slotId].itemlink)
                 local gainorloss = ("|ca80700")
                 local logPrefix = "Deconstructed - Bank"
 
-        if itemtype == ITEMTYPE_ADDITIVE
-        or itemtype == ITEMTYPE_ARMOR_BOOSTER
-        or itemtype == ITEMTYPE_ARMOR_TRAIT
-        or itemtype == ITEMTYPE_BLACKSMITHING_BOOSTER
-        or itemtype == ITEMTYPE_BLACKSMITHING_MATERIAL
-        or itemtype == ITEMTYPE_CLOTHIER_BOOSTER
-        or itemtype == ITEMTYPE_CLOTHIER_MATERIAL
-        or itemtype == ITEMTYPE_ENCHANTING_RUNE_ASPECT
-        or itemtype == ITEMTYPE_ENCHANTING_RUNE_ESSENCE
-        or itemtype == ITEMTYPE_ENCHANTING_RUNE_POTENCY
-        or itemtype == ITEMTYPE_ENCHANTMENT_BOOSTER
-        or itemtype == ITEMTYPE_INGREDIENT
-        or itemtype == ITEMTYPE_POISON_BASE
-        or itemtype == ITEMTYPE_POTION_BASE
-        or itemtype == ITEMTYPE_REAGENT
-        or itemtype == ITEMTYPE_STYLE_MATERIAL
-        or itemtype == ITEMTYPE_WEAPON_BOOSTER
-        or itemtype == ITEMTYPE_WEAPON_TRAIT
-        or itemtype == ITEMTYPE_WOODWORKING_BOOSTER
-        or itemtype == ITEMTYPE_WOODWORKING_MATERIAL then
+        if itemType == ITEMTYPE_ADDITIVE
+        or itemType == ITEMTYPE_ARMOR_BOOSTER
+        or itemType == ITEMTYPE_ARMOR_TRAIT
+        or itemType == ITEMTYPE_BLACKSMITHING_BOOSTER
+        or itemType == ITEMTYPE_BLACKSMITHING_MATERIAL
+        or itemType == ITEMTYPE_CLOTHIER_BOOSTER
+        or itemType == ITEMTYPE_CLOTHIER_MATERIAL
+        or itemType == ITEMTYPE_ENCHANTING_RUNE_ASPECT
+        or itemType == ITEMTYPE_ENCHANTING_RUNE_ESSENCE
+        or itemType == ITEMTYPE_ENCHANTING_RUNE_POTENCY
+        or itemType == ITEMTYPE_ENCHANTMENT_BOOSTER
+        or itemType == ITEMTYPE_INGREDIENT
+        or itemType == ITEMTYPE_POISON_BASE
+        or itemType == ITEMTYPE_POTION_BASE
+        or itemType == ITEMTYPE_REAGENT
+        or itemType == ITEMTYPE_STYLE_MATERIAL
+        or itemType == ITEMTYPE_WEAPON_BOOSTER
+        or itemType == ITEMTYPE_WEAPON_TRAIT
+        or itemType == ITEMTYPE_WOODWORKING_BOOSTER
+        or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
             logPrefix = "Used"
-        elseif itemtype == itemtype == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL
-        or itemtype == ITEMTYPE_CLOTHIER_RAW_MATERIAL
-        or itemtype == ITEMTYPE_WOODWORKING_RAW_MATERIAL then
+        elseif itemType == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL
+        or itemType == ITEMTYPE_CLOTHIER_RAW_MATERIAL
+        or itemType == ITEMTYPE_WOODWORKING_RAW_MATERIAL then
             logPrefix = "Refined" end
 
                 local change = (stackCountChange * -1)
@@ -3668,13 +3727,13 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
         local gainorloss = "|c0B610B"
         local logPrefix = "Received"
         local stack = stackCountChange
-        local itemtype = GetItemLinkItemType(itemlink)
+        local itemType = GetItemLinkItemType(itemlink)
 
         if stackCountChange < 1 then
             gainorloss = "|ca80700"
             logPrefix = "Used"
             stack = stackCountChange * -1
-            if itemtype == itemtype == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL or itemtype == ITEMTYPE_CLOTHIER_RAW_MATERIAL or itemtype == ITEMTYPE_WOODWORKING_RAW_MATERIAL then logPrefix = "Refined" end
+            if itemType == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL or itemType == ITEMTYPE_CLOTHIER_RAW_MATERIAL or itemType == ITEMTYPE_WOODWORKING_RAW_MATERIAL then logPrefix = "Refined" end
         end
 
         if logPrefix ~= "Used" or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss) end
@@ -3693,6 +3752,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_InventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = "|c0B610B"
             local logPrefix = "Withdrew"
             if InventoryOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) InventoryOn = false end
@@ -3708,6 +3768,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
         elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_InventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                local gainorloss = "|c0B610B"
@@ -3718,7 +3779,6 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local itemtype = GetItemLinkItemType(g_InventoryStacks[slotId].itemlink)
                 local gainorloss = ("|ca80700")
                 local logPrefix = "Destroyed"
                 local change = (stackCountChange * -1)
@@ -3748,6 +3808,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_BankStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = "|ca80700"
             local logPrefix = "Deposited"
             if BankOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) BankOn = false end
@@ -3763,6 +3824,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
         elseif g_BankStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_BankStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                local gainorloss = "|ca80700"
@@ -3805,6 +3867,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
         local gainorloss = "|c0B610B"
         local logPrefix = "Withdrew"
         local stack = stackCountChange
+        local itemType = GetItemLinkItemType(itemlink)
 
         if stackCountChange < 1 then
             gainorloss = "|ca80700"
@@ -3833,6 +3896,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
             GuildBankCarry_receivedBy = ""
             GuildBankCarry_itemLink = item.itemlink
             GuildBankCarry_stackCount = stackCountChange or 1
+            GuildBankCarry_itemType = GetItemLinkItemType(item.itemlink)
         --[[elseif g_InventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
             local icon, stack = GetItemInfo(bagId, slotId)
             local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
@@ -3855,6 +3919,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
                GuildBankCarry_receivedBy = ""
                GuildBankCarry_itemLink = item.itemlink
                GuildBankCarry_stackCount = stackCountChange or 1
+               GuildBankCarry_itemType = GetItemLinkItemType(item.itemlink)
                g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
@@ -3868,6 +3933,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
                 GuildBankCarry_receivedBy = ""
                 GuildBankCarry_itemLink = item.itemlink
                 GuildBankCarry_stackCount = change
+                GuildBankCarry_itemType = GetItemLinkItemType(item.itemlink)
                 if CA.SV.ShowDestroy and ItemWasDestroyed then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index
                     g_InventoryStacks[slotId] = nil
@@ -3910,6 +3976,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_InventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = "|c0B610B"
             local logPrefix = "Laundered"
             LaunderCheck = true
@@ -3919,15 +3986,16 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
             g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_InventoryStacks[slotId]
-            local itemtype = GetItemLinkItemType(g_InventoryStacks[slotId].itemlink)
+            local itemType = GetItemLinkItemType(item.itemlink)
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local gainorloss = "|c0B610B"
             local logPrefix = "Laundered"
             LaunderCheck = true
-            if itemtype == ITEMTYPE_WEAPON or itemtype == ITEMTYPE_ARMOR or itemtype == ITEMTYPE_JEWELRY then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) end
+            if itemType == ITEMTYPE_WEAPON or itemType == ITEMTYPE_ARMOR or itemType == ITEMTYPE_JEWELRY then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) end
         elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_InventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                 local gainorloss = "|c0B610B"
@@ -3938,7 +4006,6 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
                 CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
                 g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local itemtype = GetItemLinkItemType(g_InventoryStacks[slotId].itemlink)
                 local gainorloss = ("|ca80700")
                 local logPrefix = "Destroyed"
                 local change = (stackCountChange * -1)
@@ -3965,7 +4032,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
         local gainorloss = "|c0B610B"
         local logPrefix = "Laundered"
         local stack = stackCountChange
-        local itemtype = GetItemLinkItemType(itemlink)
+        local itemType = GetItemLinkItemType(itemlink)
 
         if stackCountChange < 1 then return end -- Laundering won't ever remove things from the bag, so ignore
 
@@ -4025,6 +4092,7 @@ function CA.JusticeRemovePrint()
         if inventoryitem ~= nil then
             if justiceitem == nil then
                 local seticon = ( CA.SV.LootIcons and inventoryitem.icon and inventoryitem.icon ~= "" ) and ("|t16:16:" .. inventoryitem.icon .. "|t ") or ""
+                local itemType = GetItemLinkItemType(inventoryitem.itemlink)
                 local stack = inventoryitem.stack
                 local receivedBy = "CRAFT"
                 local gainorloss = (strfmt("|ca80700"))
