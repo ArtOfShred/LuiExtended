@@ -3351,7 +3351,7 @@ ItemWasDestroyed = false
 local GuildBankCarry_logPrefix
 local GuildBankCarry_icon
 local GuildBankCarry_itemLink
-local GuildBankCarry_stackCount
+local GuildBankCarry_stackCount = 1
 local GuildBankCarry_receivedBy
 local GuildBankCarry_gainorloss
 local GuildBankCarry_itemType
@@ -3361,7 +3361,7 @@ function CA.GuildBankItemAdded(eventCode, slotId)
     GuildBankCarry_logPrefix = ""
     GuildBankCarry_icon = ""
     GuildBankCarry_itemLink = ""
-    GuildBankCarry_stackCount = ""
+    GuildBankCarry_stackCount = 1
     GuildBankCarry_receivedBy = ""
     GuildBankCarry_gainorloss = ""
     GuildBankCarry_itemType = ""
@@ -3372,7 +3372,7 @@ function CA.GuildBankItemRemoved(eventCode, slotId)
     GuildBankCarry_logPrefix = ""
     GuildBankCarry_icon = ""
     GuildBankCarry_itemLink = ""
-    GuildBankCarry_stackCount = ""
+    GuildBankCarry_stackCount = 1
     GuildBankCarry_receivedBy = ""
     GuildBankCarry_gainorloss = ""
     GuildBankCarry_itemType = ""
@@ -3965,7 +3965,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
                 GuildBankCarry_logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
                 GuildBankCarry_receivedBy = ""
                 GuildBankCarry_itemLink = item.itemlink
-                GuildBankCarry_stackCount = change
+                GuildBankCarry_stackCount = change or 1
                 GuildBankCarry_itemType = GetItemLinkItemType(item.itemlink)
                 if CA.SV.ShowDestroy and ItemWasDestroyed then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index
