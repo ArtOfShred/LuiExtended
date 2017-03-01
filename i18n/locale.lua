@@ -583,7 +583,6 @@ L.Trigger_Crystal_Fragments_Proc    = 46327 --64159
 L.Trigger_Assassins_Will            = 61907
 L.Trigger_Assassins_Scourge         = 61932
 L.Trigger_Power_Lash                = 23903
-L.Trigger_Deadly_Throw              = 62549
 
 -- ---------------------------------------------------
 -- MUNDUS STONES -------------------------------------

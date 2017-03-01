@@ -61,8 +61,12 @@ SCB.D = {
     StealthState                     = true,
     ShowSprint                       = true,
     ShowGallop                       = true,
+    ShowResurrectionImmunity         = true,
     HideTargetBuffs                  = false,
     HideTargetDebuffs                = false,
+    HideGroundEffects                = false,
+    ShowTriggered                    = true,
+    ShowToggled                      = true,
 }
 SCB.SV = nil
 
@@ -227,9 +231,9 @@ local Effects = {
     -----------------------------------
 
     -- Aedric Spear
-    [L.Skill_Spear_Shards]                  = { false, false, true, 1.6 },
-    [L.Skill_Luminous_Shards]               = { false, false, true, 1.6 }, --This seems roughly accurate, trying to time it with the disorient, depends on latency
-    [L.Skill_Blazing_Spear]                 = { false, false, true, 1.6 }, --Possibly Hide later
+    [L.Skill_Spear_Shards]                  = { false, false, true, 1 },
+    [L.Skill_Luminous_Shards]               = { false, false, true, 1 }, --This seems roughly accurate, trying to time it with the disorient, depends on latency
+    [L.Skill_Blazing_Spear]                 = { false, false, true, 1 }, --Possibly Hide later
 
     -- Dawn's Wrath
     [L.Skill_Nova]                          = { false, false, 11.3, 1.1 },
@@ -299,7 +303,6 @@ local IsAbilityProc = {
     [L.Trigger_Assassins_Will]      = true,
     [L.Trigger_Assassins_Scourge]   = true,
     [L.Trigger_Power_Lash]          = true,
-    [L.Trigger_Deadly_Throw]        = true,
 }
 
 local HasAbilityProc = {
@@ -1207,7 +1210,7 @@ function SCB.OnUpdateCooldowns()
     -- Maybe process a ground-target spell
     if ( g_pendingGroundAbility ~= nil ) then
         -- Cast ability
-        SCB.NewEffects( g_pendingGroundAbility )
+        if not SCB.SV.HideGroundEffects then SCB.NewEffects( g_pendingGroundAbility ) end
         -- Clear the ground target queue
         g_pendingGroundAbility = nil
     end
@@ -1313,12 +1316,12 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         if unitTag == "player" then
             -- start any proc animation associated with this effect
             if abilityType == ABILITY_TYPE_BONUS and TriggeredSlots[effectName] then
-                SCB.PlayProcAnimations(TriggeredSlots[effectName])
+                if SCB.SV.ShowTriggered then SCB.PlayProcAnimations(TriggeredSlots[effectName]) end
             end
 
             -- switch on custom toggle highlight
             if ToggledSlots[effectName] then
-                SCB.ShowCustomToggle(ToggledSlots[effectName])
+                if SCB.SV.ShowToggled then SCB.ShowCustomToggle(ToggledSlots[effectName]) end
             end
         end
     end
@@ -1669,7 +1672,7 @@ function SCB.OnSlotAbilityUsed(eventCode, slotNum)
 
             else
                 -- Run all routines associated with selected ability
-                SCB.NewEffects( ability )
+                if not SCB.SV.HideGroundEffects then SCB.NewEffects( ability ) end
 
                 -- Flag the last cast time
                 g_lastCast = currentTime
@@ -1752,11 +1755,11 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
     -- check if currently this ability is in proc state
     local proc = HasAbilityProc[abilityName]
     if IsAbilityProc[abilityName] then
-        SCB.PlayProcAnimations(slotNum)
+        if SCB.SV.ShowTriggered then SCB.PlayProcAnimations(slotNum) end
     elseif proc then
         TriggeredSlots[proc] = slotNum
         if g_effectsList.player1[proc] then
-            SCB.PlayProcAnimations(slotNum)
+            if SCB.SV.ShowTriggered then SCB.PlayProcAnimations(slotNum) end
         end
     end
 
@@ -1764,7 +1767,7 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
     if IsAbilityCustomToggle[abilityName] then
         ToggledSlots[abilityName] = slotNum
         if g_effectsList.player1[ability_id] then
-            SCB.ShowCustomToggle(slotNum)
+            if SCB.SV.ShowToggled then SCB.ShowCustomToggle(slotNum) end
         end
     end
 end
@@ -2153,12 +2156,12 @@ function SCB.OnVibration(eventCode, duration, coarseMotor, fineMotor, leftTrigge
         g_playerResurectStage = 2
     elseif g_playerResurectStage == 2 and duration == 0 then
         g_playerResurectStage = 3
-    elseif g_playerResurectStage == 3 and duration == 350 then
+    elseif g_playerResurectStage == 3 and duration == 350 and SCB.SV.ShowResurrectionImmunity then
         -- we got correct sequence, so let us create a buff and reset the g_playerResurectStage
         g_playerResurectStage = nil
         SCB.NewEffects( {
             name = 'Resurrection Immunity',
-            icon = 'LuiExtended/media/icons/abilities/ability_player_resurrection_immunity.dds',
+            icon = 'esoui/art/icons/ability_mage_069.dds',
             effects = {10000, 0, 0, 0}
         } )
     else

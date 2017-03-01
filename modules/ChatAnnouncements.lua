@@ -1921,6 +1921,8 @@ function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previous
         local bracket2 = ""
         local icon = ""
         local logPrefix = "Purchased"
+        
+        if currentUpgrade < 1 then return end
 
         if CA.SV.ItemBracketDisplayOptions == 1 then
             bracket1 = "["
@@ -1965,6 +1967,8 @@ function CA.MiscAlertBank(eventCode, previousCapacity, currentCapacity, previous
         local bracket2 = ""
         local icon = ""
         local logPrefix = "Purchased"
+        
+        if currentUpgrade < 1 then return end
 
         if CA.SV.ItemBracketDisplayOptions == 1 then
             bracket1 = "["
@@ -3003,6 +3007,8 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                 -- CALCULATION 1
 
                     levelhelper = levelhelper - change
+                    
+                    if Crossover == 1 then levelhelper = XPLevel end -- If we crossover XP on this level then we just auto set this to max xp/level value for 50.
 
                     if CA.SV.ExperienceShowDecimal then
                             xppct = math.floor(10000*levelhelper/XPLevel) / 100
@@ -3129,14 +3135,14 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
             --[[ Crossover from Normal XP --> Champion XP modifier ]] --
             if Crossover == 1 then
                 -- progress = (progressbrackets .. " (Level 50)")
-                totallevel = XP_BAR_COLORS:Colorize(" (Level 50)")
+                totallevel = XP_BAR_COLORS:Colorize(" Level 50")
                 if QuestCombiner1 ~= "" then
                     -- QuestCombiner2 = (progressbrackets .. " (Level 50)")
                     if CA.SV.ExperienceShowLevel then
                         if CA.SV.ExperienceColorLevel then
                             TotalLevelAdjust = XP_BAR_COLORS:Colorize( " Level 49")
                         else
-                            TotalLevelAdjust = CA.SV.ExperienceShowLevel and (" Level 49")
+                            TotalLevelAdjust = (" Level 49")
                         end
                     end
                 end
