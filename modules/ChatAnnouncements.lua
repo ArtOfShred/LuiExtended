@@ -1044,10 +1044,10 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     -- Determine the color of the text based on whether we gained or lost gold
     if UpOrDown > 0 then
         color = "|c0B610B"
-        changetype = CommaValue (newMoney - oldMoney)
+        changetype = CommaValue(newMoney - oldMoney)
     else
         color = "|ca80700"
-        changetype = CommaValue (oldMoney - newMoney)
+        changetype = CommaValue(oldMoney - newMoney)
     end
 
     -- If we only recieve or lose 1 Gold, don't add an "s" onto the end of the name
@@ -1057,7 +1057,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
 
     -- If the name is blank, don't add an additional spacer before it after the change value
     if CA.SV.GoldName == ( "" ) or CA.SV.GoldName == ( "g" ) or CA.SV.GoldName == ( "gp" )then
-        formathelper = ( "" )
+        formathelper = ""
     end
 
     -- Sell/Buy from a Merchant
@@ -1318,12 +1318,12 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
     -- Determine the color and message of the text based on whether we gained or lost Alliance Points
     if UpOrDown > alliancePoints then
         color = "|c0B610B"
-        changetype = CommaValue ( difference )
-        message = ( "Earned" )
+        changetype = CommaValue( difference )
+        message = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_EARNED)
     else
         color = "|ca80700"
-        changetype = CommaValue ( difference * -1 )
-        message = ( GetString(SI_LUIE_CA_CURRENCY_MESSAGE_SPENT) )
+        changetype = CommaValue( difference * -1 )
+        message = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_SPENT)
     end
 
     -- If we only recieve or lose 1 Alliance Point, don't add an "s" onto the end of the name
@@ -1333,14 +1333,14 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
 
     -- If the name is blank, don't add an additional spacer before it after the change value
     if CA.SV.AlliancePointName == ( "" ) or CA.SV.AlliancePointName == ( "ap" ) or CA.SV.AlliancePointName == ( "a" ) then
-        formathelper = ( "" )
+        formathelper = ""
     end
 
     if CA.SV.CurrencyContextToggle then -- Override with custom string if enabled
-        if color == ( "|c0B610B" ) then
-            message = ( CA.SV.CurrencyContextMessageUp )
+        if color == "|c0B610B" then
+            message = CA.SV.CurrencyContextMessageUp
         else
-            message = ( CA.SV.CurrencyContextMessageDown )
+            message = CA.SV.CurrencyContextMessageDown
         end
     end
 
@@ -1451,10 +1451,10 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
     -- Determine the color of the text based on whether we gained or lost gold
     if UpOrDown > 0 then
         color = "|c0B610B"
-        changetype = CommaValue (newTelvarStones - oldTelvarStones)
+        changetype = CommaValue(newTelvarStones - oldTelvarStones)
     else
         color = "|ca80700"
-        changetype = CommaValue (oldTelvarStones - newTelvarStones)
+        changetype = CommaValue(oldTelvarStones - newTelvarStones)
     end
 
     -- If we only recieve or lose 1 Tel Var Stone, don't add an "s" onto the end of the name
@@ -1464,7 +1464,7 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
 
     -- If the name is blank, don't add an additional spacer before it after the change value
     if CA.SV.TelVarStoneName == ( "" ) or CA.SV.TelVarStoneName == ( "tv" ) or CA.SV.TelVarStoneName == ( "t" ) or CA.SV.TelVarStoneName == ( "tvs" ) then
-        formathelper = ( "" )
+        formathelper = ""
     end
 
     -- Buy from a Merchant (no way to sell Tel Var)
@@ -1525,9 +1525,9 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
 
     if CA.SV.CurrencyContextToggle then -- Override with custom string if enabled
         if color == ( "|c0B610B" ) then
-            message = ( CA.SV.CurrencyContextMessageUp )
+            message = CA.SV.CurrencyContextMessageUp
         else
-            message = ( CA.SV.CurrencyContextMessageDown )
+            message = CA.SV.CurrencyContextMessageDown
         end
     end
 
@@ -1612,7 +1612,7 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
 
     -- If the name is blank, don't add an additional spacer before it after the change value
     if CA.SV.WritVoucherName == ( "" ) or CA.SV.WritVoucherNAme == ( "wv" ) or CA.SV.WritVoucherNAme == ( "w" ) or CA.SV.WritVoucherNAme == ( "v" ) then
-        formathelper = ( "" )
+        formathelper = ""
     end
 
     -- ==============================================================================
@@ -1651,9 +1651,9 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
 
     if CA.SV.CurrencyContextToggle then -- Override with custom string if enabled
         if color == ( "|c0B610B" ) then
-            message = ( CA.SV.CurrencyContextMessageUp )
+            message = CA.SV.CurrencyContextMessageUp
         else
-            message = ( CA.SV.CurrencyContextMessageDown )
+            message = CA.SV.CurrencyContextMessageDown
         end
     end
 
@@ -1877,7 +1877,9 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
         local logPrefix = GetString(SI_MARKET_PURCHASED_LABEL)
         local skillstring
 
-        if source == 2 then logPrefix = "Learned" end
+        if source == 2 then
+            logPrefix = GetStringSI_LUIE_CA_CURRENCY_MESSAGE_LEARNED
+        end
 
         if CA.SV.ItemBracketDisplayOptions == 1 then
             bracket1 = "["
@@ -1918,7 +1920,7 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
         end
 
         if CA.SV.ItemContextToggle then
-            logPrefix = ( CA.SV.ItemContextMessage )
+            logPrefix = CA.SV.ItemContextMessage
         end
 
         if CA.SV.LootCurrencyCombo then
@@ -2011,7 +2013,7 @@ function CA.MiscAlertBank(eventCode, previousCapacity, currentCapacity, previous
         end
 
         if CA.SV.ItemContextToggle then
-            logPrefix = ( CA.SV.ItemContextMessage )
+            logPrefix = CA.SV.ItemContextMessage
         end
 
         if CA.SV.LootCurrencyCombo then
@@ -2030,7 +2032,7 @@ function CA.OnBuybackItem(eventCode, itemName, quantity, money, itemSound)
 
     icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
 
-    local logPrefix = "Buyback"
+    local logPrefix = GetString(SI_ITEMFILTERTYPE8) -- "Buyback"
     if CA.SV.ItemContextToggle then
         logPrefix = ( CA.SV.ItemContextMessage )
     end
@@ -2067,7 +2069,7 @@ function CA.OnSellItem(eventCode, itemName, quantity, money)
 
     icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
 
-    local logPrefix = "Sold"
+    local logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_SOLD)
     if CA.SV.ItemContextToggle then
         logPrefix = ( CA.SV.ItemContextMessage )
     end
@@ -2732,11 +2734,11 @@ function CA.LevelUpdateHelper()
         CurrentLevel = GetPlayerChampionPointsEarned()
         if CurrentLevel < 10 then CurrentLevel = 10 end -- Probably don't really need this here, but it's not going to hurt.
         XPLevel = GetNumChampionXPInChampionPoint(CurrentLevel)
-        LevelContext = ( GetString(SI_MAIN_MENU_CHAMPION) )
+        LevelContext = GetString(SI_MAIN_MENU_CHAMPION)
     else
         CurrentLevel = GetUnitLevel ("player")
         XPLevel = GetNumExperiencePointsInLevel(CurrentLevel)
-        LevelContext = ( "Level" )
+        LevelContext = GetString(SI_EXPERIENCE_LEVEL_LABEL)
     end
 end
 
@@ -2937,11 +2939,11 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
             CurrentLevel = GetPlayerChampionPointsEarned()
             if CurrentLevel < 10 then CurrentLevel = 10 end -- Very important, if this player has never hit Champion level before, set the minimum possible value when hitting level 50.
             XPLevel = GetNumChampionXPInChampionPoint(CurrentLevel)
-            LevelContext = ( GetString(SI_MAIN_MENU_CHAMPION) )
+            LevelContext = GetString(SI_MAIN_MENU_CHAMPION)
         else
             CurrentLevel = CurrentLevel + 1
             XPLevel = GetNumExperiencePointsInLevel(CurrentLevel)
-            LevelContext = ( "Level" )
+            LevelContext = GetString(SI_EXPERIENCE_LEVEL_LABEL)
         end
     end
 
@@ -2966,7 +2968,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 
             -- Format Helper puts a space in if the player enters a value for Experience Name, this way they don't have to do this formatting themselves.
             if CA.SV.ExperienceName == ( "" ) then
-                formathelper = ( "" )
+                formathelper = ""
             end
 
             -- Displays an icon if enabled
@@ -3161,14 +3163,14 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
             --[[ Crossover from Normal XP --> Champion XP modifier ]] --
             if Crossover == 1 then
                 -- progress = (progressbrackets .. " (Level 50)")
-                totallevel = XP_BAR_COLORS:Colorize(" Level 50")
+                totallevel = XP_BAR_COLORS:Colorize( stformat(" <<1>> 50", GetString(SI_EXPERIENCE_LEVEL_LABEL)) )
                 if QuestCombiner1 ~= "" then
                     -- QuestCombiner2 = (progressbrackets .. " (Level 50)")
                     if CA.SV.ExperienceShowLevel then
                         if CA.SV.ExperienceColorLevel then
-                            TotalLevelAdjust = XP_BAR_COLORS:Colorize( " Level 49")
+                            TotalLevelAdjust = XP_BAR_COLORS:Colorize( stformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL)) )
                         else
-                            TotalLevelAdjust = (" Level 49")
+                            TotalLevelAdjust = stformat("<<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL))
                         end
                     end
                 end
@@ -3525,7 +3527,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                 g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
                 local gainorloss = (strfmt("|ca80700"))
-                local logPrefix = "Destroyed"
+                local logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_InventoryStacks[slotId].stack - change
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
@@ -3814,7 +3816,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
                 local gainorloss = ("|ca80700")
-                local logPrefix = "Destroyed"
+                local logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_InventoryStacks[slotId].stack - change
                 if CA.SV.ShowDestroy and ItemWasDestroyed then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
@@ -3844,7 +3846,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = "|ca80700"
-            local logPrefix = "Deposited"
+            local logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSITED)
             if BankOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) BankOn = false end
         --[[elseif g_BankStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
             OldItemLink = g_BankStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
@@ -3862,7 +3864,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                local gainorloss = "|ca80700"
-               local logPrefix = "Deposited"
+               local logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSITED)
                local icon, stack = GetItemInfo(bagId, slotId)
                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                if BankOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) BankOn = false end
@@ -3870,7 +3872,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
                 local gainorloss = ("|ca80700")
-                local logPrefix = "Destroyed - Bank"
+                local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DESTROYED), GetString(SI_INTERACT_OPTION_BANK) )
                 local change = (stackCountChange * -1)
                 local endcount = g_BankStacks[slotId].stack - change
                 if CA.SV.ShowDestroy and ItemWasDestroyed then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
@@ -3905,7 +3907,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
 
         if stackCountChange < 1 then
             gainorloss = "|ca80700"
-            logPrefix = "Deposited"
+            logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSITED)
             stack = stackCountChange * -1
         end
 
@@ -3958,12 +3960,12 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
                 local gainorloss = ("|ca80700")
-                local logPrefix = "Destroyed"
+                local logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_InventoryStacks[slotId].stack - change
                 GuildBankCarry_icon = seticon
                 GuildBankCarry_gainorloss = "|ca80700"
-                GuildBankCarry_logPrefix = "Despoited"
+                GuildBankCarry_logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSITED)
                 GuildBankCarry_receivedBy = ""
                 GuildBankCarry_itemLink = item.itemlink
                 GuildBankCarry_stackCount = change
@@ -4012,7 +4014,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = "|c0B610B"
-            local logPrefix = "Laundered"
+            local logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LAUNDERED)
             LaunderCheck = true
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
         elseif g_InventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
@@ -4023,7 +4025,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             local itemType = GetItemLinkItemType(item.itemlink)
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local gainorloss = "|c0B610B"
-            local logPrefix = "Laundered"
+            local logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LAUNDERED)
             LaunderCheck = true
             if itemType == ITEMTYPE_WEAPON or itemType == ITEMTYPE_ARMOR or itemType == ITEMTYPE_JEWELRY then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) end
         elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
@@ -4033,7 +4035,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                 local gainorloss = "|c0B610B"
-                local logPrefix = "Laundered"
+                local logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LAUNDERED)
                 local icon, stack = GetItemInfo(bagId, slotId)
                 local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                 LaunderCheck = true
@@ -4041,7 +4043,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
                 g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
                 local gainorloss = ("|ca80700")
-                local logPrefix = "Destroyed"
+                local logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_InventoryStacks[slotId].stack - change
                 --CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
@@ -4064,7 +4066,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
         icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
         local receivedBy = ""
         local gainorloss = "|c0B610B"
-        local logPrefix = "Laundered"
+        local logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LAUNDERED)
         local stack = stackCountChange
         local itemType = GetItemLinkItemType(itemlink)
 

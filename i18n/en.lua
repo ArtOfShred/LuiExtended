@@ -13,6 +13,12 @@ ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_CONFISCATED",            "Confisc
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TRADED",                 "Traded")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DECONSTRUCTED",          "Deconstructed")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_REFINED",                "Refined")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DESTROYED",              "Destroyed")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_LAUNDERED",              "Laundered")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_EARNED",                 "Earned")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_LEARNED",                "Learned")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_SOLD",                   "Sold")
+
 ZO_CreateStringId("SI_LUIE_CA_GUILD_MEMBER_ADDED",                      "|cFEFEFE<<1>>|r has joined <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_MEMBER_REMOVED",                    "|cFEFEFE<<1>>|r has left <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_MOTD_CHANGED",                      "The message of the day for <<1>> has changed:\n<<2>>")
@@ -24,16 +30,21 @@ ZO_CreateStringId("SI_LUIE_CA_GUILD_JOIN_SELF",                         "You hav
 ZO_CreateStringId("SI_LUIE_CA_GUILD_LEAVE_SELF",                        "You have left <<1>>")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_INVITE_SELF",                       "|cFEFEFE<<1>>|r has invited you to join <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_INVITE_DECLINED",                   "Guild invite declined.")
+
 ZO_CreateStringId("SI_LUIE_CA_FRIEND_ADDED",                            "|cFEFEFE<<1>>|r added to friends list.")
 ZO_CreateStringId("SI_LUIE_CA_FRIEND_REMOVED",                          "|cFEFEFE<<1>>|r removed from friends list.")
 ZO_CreateStringId("SI_LUIE_CA_FRIEND_INVITE_PENDING",                   "|cFEFEFE<<1>>|r wants to be your friend.")
 ZO_CreateStringId("SI_LUIE_CA_FRIEND_INVITE_DECLINED",                  "Friend invite declined.")
+
 ZO_CreateStringId("SI_LUIE_CA_QUEST_SHARE_MSG",                         "|cFEFEFE<<1>>|r wants to share the quest: <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_QUEST_SHARE_DECLINED",                    "Shared quest declined.")
+
 ZO_CreateStringId("SI_LUIE_CA_READY_CHECK_ACTIVITY",                    "|cFFFFFF<<1>>|r ready.")
 ZO_CreateStringId("SI_LUIE_CA_READY_CHECK_CANCELED",                    "Ready check canceled, group was not ready.")
+
 ZO_CreateStringId("SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START",              "A vote to kick |cFEFEFE<<1>>|r from the group has started.")
 ZO_CreateStringId("SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL",               "A vote to kick |cFEFEFE<<1>>|r from the group has failed.")
+
 ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_RECEIVED",                   "|cFEFEFE<<1>>|r has invited you to join a group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_DECLINED",                   "Your group invitation was declined.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_FAILED_IGNORE",              "You cannot extend a group invitation to a player that is ignoring you.")
@@ -54,13 +65,17 @@ ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_KICKED",                     "|cFEFEF
 ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF",                "You have been removed from the group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_REPLACEMENT_FOUND",          "A replacement party member has been found.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_DISBAND_MSG",                       "The group has been disbanded.")
+
 ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_QUEUE_START",                "You are now queued in the group finder.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_QUEUE_END",                  "You are no longer queued in the group finder.")
+
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MSG",                        "|cFEFEFE<<1>>|r has invited you to trade.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MSG_SELF",                   "You have invited |cFEFEFE<<1>>|r to trade.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_ACCEPTED",                   "Trade invite accepted.")
+
 ZO_CreateStringId("SI_LUIE_CA_CANT_THINK_OF_NAME_MSG1",                 "<<1>> and <<2>> gold.") -- TODO: Find proper ID name
 ZO_CreateStringId("SI_LUIE_CA_CANT_THINK_OF_NAME_MSG2",                 "<<1>> and gold.") -- TODO: Find proper ID name
+
 ZO_CreateStringId("SI_LUIE_CA_MAIL_DELETED_MSG",                        "Mail deleted!")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_GOLD_MSG",                  "Received mail with gold.")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_VAR_GOLD_MSG",              "Received mail with <<1>> gold.")
@@ -79,14 +94,19 @@ ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_FAILED_NO_SUB_BODY_ATTACHMENT", "Can't s
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_FAILED_CANT_SEND_TO_RECIP",     "You can't send mail to that recipient.")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_FAILED_CANT_SEND_TO_SELF",      "You can't send mail to yourself.")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_FAILED_COD_NO_ATTACHMENT",      "You must attach at least one item for Cash on Delivery mail.")
+
 ZO_CreateStringId("SI_LUIE_CA_XP_LVL_ANNOUNCE1",                        "You have reached <<1>><<2>>")
 ZO_CreateStringId("SI_LUIE_CA_XP_LVL_ANNOUNCE2",                        "You have reached <<1>><<2>> <<3>>")
+
 ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE1",                        "Champion Level Achieved! <<1>><<2>>")
 ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE2",                        "Champion Level Achieved! <<1>><<2>> <<3>>")
+
 ZO_CreateStringId("SI_LUIE_CA_JUSTICE_CONFISCATED_MSG",                 "Bounty confiscated!")
 ZO_CreateStringId("SI_LUIE_CA_JUSTICE_CONFISCATED_BOUNTY_ITEMS_MSG",    "Bounty and stolen items confiscated!")
+
 ZO_CreateStringId("SI_LUIE_CA_MISC_LOCKPICK_SUCCESS",                   "Lockpick successful!")
 ZO_CreateStringId("SI_LUIE_CA_MISC_LOCKPICK_FAILED",                    "Lockpick failed!")
+
 ZO_CreateStringId("SI_LUIE_CA_DEBUG_MSG_CURRENCY",                      "Currency Change Reason <<1>> Triggered - Please post on the LUI Extended comments section on ESOUI.com describing what caused this message. Thanks!")
 
 -- Chat Announcement Component Default overwrites
