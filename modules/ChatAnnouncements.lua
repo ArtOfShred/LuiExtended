@@ -1486,34 +1486,34 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
 
     -- ==============================================================================
     -- DEBUG EVENTS WE DON'T KNOW YET
-    elseif reason == 6 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 7 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 12 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 14 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 15 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 16 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 18 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 20 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 21 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 22 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 23 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 24 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 25 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 26 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 27 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 30 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 34 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 36 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 37 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 38 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 39 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 40 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 41 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 46 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 53 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 54 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 58 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 66 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 6 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 7 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 12 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 14 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 15 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 16 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 18 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 20 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 21 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 22 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 23 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 24 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 25 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 26 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 27 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 30 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 34 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 36 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 37 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 38 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 39 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 40 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 41 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 46 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 53 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 54 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 58 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 66 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     -- END DEBUG EVENTS
     -- ==============================================================================
 
@@ -3160,14 +3160,14 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
             --[[ Crossover from Normal XP --> Champion XP modifier ]] --
             if Crossover == 1 then
                 -- progress = (progressbrackets .. " (Level 50)")
-                totallevel = XP_BAR_COLORS:Colorize( stformat(" <<1>> 50", GetString(SI_EXPERIENCE_LEVEL_LABEL)) )
+                totallevel = XP_BAR_COLORS:Colorize( strformat(" <<1>> 50", GetString(SI_EXPERIENCE_LEVEL_LABEL)) )
                 if QuestCombiner1 ~= "" then
                     -- QuestCombiner2 = (progressbrackets .. " (Level 50)")
                     if CA.SV.ExperienceShowLevel then
                         if CA.SV.ExperienceColorLevel then
-                            TotalLevelAdjust = XP_BAR_COLORS:Colorize( stformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL)) )
+                            TotalLevelAdjust = XP_BAR_COLORS:Colorize( strformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL)) )
                         else
-                            TotalLevelAdjust = stformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL))
+                            TotalLevelAdjust = strformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL))
                         end
                     end
                 end
@@ -3505,7 +3505,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = "|c0B610B"
-            local logPrefix = "Looted Item"
+            local logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LOOTEDITEM)
             -- CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
 
         elseif g_InventoryStacks[slotId] then -- EXISTING ITEM
@@ -3517,7 +3517,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                 local gainorloss = "|c0B610B"
-                local logPrefix = "Gained Stack"
+                local logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_GAINEDSTACK)
                 local icon, stack = GetItemInfo(bagId, slotId)
                 local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                 -- CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
@@ -3554,7 +3554,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = "|c0B610B"
-            local logPrefix = "Crafted"
+            local logPrefix = GetString(SI_ITEM_FORMAT_STR_CRAFTED)
             
             if itemType == ITEMTYPE_ADDITIVE
             or itemType == ITEMTYPE_ARMOR_BOOSTER
@@ -3587,7 +3587,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             local item = g_InventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local gainorloss = "|c0B610B"
-            local logPrefix = "Upgraded"
+            local logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_UPGRADED)
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
         elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_InventoryStacks[slotId]
@@ -3596,7 +3596,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                local gainorloss = "|c0B610B"
-               local logPrefix = "Crafted"
+               local logPrefix = GetString(SI_ITEM_FORMAT_STR_CRAFTED)
                
                 if itemType == ITEMTYPE_ADDITIVE
                 or itemType == ITEMTYPE_ARMOR_BOOSTER
@@ -3649,7 +3649,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
                 or itemType == ITEMTYPE_WEAPON_TRAIT
                 or itemType == ITEMTYPE_WOODWORKING_BOOSTER
                 or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
-                    logPrefix = "Used"
+                    logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_USED)
                 elseif itemType == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL
                 or itemType == ITEMTYPE_CLOTHIER_RAW_MATERIAL
                 or itemType == ITEMTYPE_WOODWORKING_RAW_MATERIAL then
@@ -3657,7 +3657,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
 
                 local change = (stackCountChange * -1)
                 local endcount = g_InventoryStacks[slotId].stack - change
-                if logPrefix ~= "Used" or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
+                if logPrefix ~= GetString(SI_LUIE_CA_CURRENCY_MESSAGE_USED) or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
                     g_InventoryStacks[slotId] = nil
                 else
@@ -3680,7 +3680,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = "|c0B610B"
-            local logPrefix = "Crafted - Bank"
+            local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_ITEM_FORMAT_STR_CRAFTED), GetString(SI_INTERACT_OPTION_BANK))
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
         elseif g_BankStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
             OldItemLink = g_BankStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
@@ -3690,7 +3690,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             local item = g_BankStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local gainorloss = "|c0B610B"
-            local logPrefix = "Upgraded - Bank"
+            local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_LUIE_CA_CURRENCY_MESSAGE_UPGRADED), GetString(SI_INTERACT_OPTION_BANK))
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
         elseif g_BankStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_BankStacks[slotId]
@@ -3699,7 +3699,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                local gainorloss = "|c0B610B"
-               local logPrefix = "Crafted - Bank"
+               local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_ITEM_FORMAT_STR_CRAFTED), GetString(SI_INTERACT_OPTION_BANK))
                local icon, stack = GetItemInfo(bagId, slotId)
                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
@@ -3707,7 +3707,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
                 local gainorloss = ("|ca80700")
-                local logPrefix = "Deconstructed - Bank"
+                local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DECONSTRUCTED), GetString(SI_INTERACT_OPTION_BANK))
 
         if itemType == ITEMTYPE_ADDITIVE
         or itemType == ITEMTYPE_ARMOR_BOOSTER
@@ -3729,7 +3729,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
         or itemType == ITEMTYPE_WEAPON_TRAIT
         or itemType == ITEMTYPE_WOODWORKING_BOOSTER
         or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
-            logPrefix = "Used"
+            logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_USED)
         elseif itemType == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL
         or itemType == ITEMTYPE_CLOTHIER_RAW_MATERIAL
         or itemType == ITEMTYPE_WOODWORKING_RAW_MATERIAL then
@@ -3737,7 +3737,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
 
                 local change = (stackCountChange * -1)
                 local endcount = g_BankStacks[slotId].stack - change
-                if logPrefix ~= "Used" or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
+                if logPrefix ~= GetString(SI_LUIE_CA_CURRENCY_MESSAGE_USED) or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
                     g_BankStacks[slotId] = nil
                 else
@@ -3762,14 +3762,14 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
 
         if stackCountChange < 1 then
             gainorloss = "|ca80700"
-            logPrefix = "Used"
+            logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_USED)
             stack = stackCountChange * -1
             if itemType == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL or itemType == ITEMTYPE_CLOTHIER_RAW_MATERIAL or itemType == ITEMTYPE_WOODWORKING_RAW_MATERIAL then
                 logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_REFINED)
             end
         end
 
-        if logPrefix ~= "Used" or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss) end
+        if logPrefix ~= GetString(SI_LUIE_CA_CURRENCY_MESSAGE_USED) or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss) end
     end
 
     ItemWasDestroyed = false
@@ -3796,7 +3796,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             local item = g_InventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local gainorloss = "|c0B610B"
-            local logPrefix = "Upgraded"
+            local logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_UPGRADED)
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) -- Shouldn't need this for anything, but just in case. ]]-- Shouldn't be neccesary
         elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_InventoryStacks[slotId]
@@ -3937,7 +3937,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
             local item = g_InventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local gainorloss = "|c0B610B"
-            local logPrefix = "Upgraded"
+            local logPrefix = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_UPGRADED)
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) -- Shouldn't need this for anything, but just in case. ]]-- Shouldn't be neccesary
         elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_InventoryStacks[slotId]
@@ -4090,7 +4090,7 @@ local ConfiscateMessage = (GetString(SI_LUIE_CA_JUSTICE_CONFISCATED_MSG))
 
 function CA.JusticeStealRemove(eventCode)
     if CA.SV.MiscConfiscate and eventCode == 131555 then
-        ConfiscateMessage = (GetString(SI_LUIE_CA_JUSTICE_CONFISCATED_BOUNTY_ITEMS_MSG))
+        ConfiscateMessage = GetString(SI_LUIE_CA_JUSTICE_CONFISCATED_BOUNTY_ITEMS_MSG)
     end
 
     if stealstring == "" then return end
