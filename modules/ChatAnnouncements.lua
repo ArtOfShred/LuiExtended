@@ -3170,7 +3170,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                         if CA.SV.ExperienceColorLevel then
                             TotalLevelAdjust = XP_BAR_COLORS:Colorize( stformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL)) )
                         else
-                            TotalLevelAdjust = stformat("<<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL))
+                            TotalLevelAdjust = stformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL))
                         end
                     end
                 end
@@ -3579,7 +3579,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             or itemType == ITEMTYPE_WEAPON_TRAIT
             or itemType == ITEMTYPE_WOODWORKING_BOOSTER
             or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
-                logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) end -- Received
+                logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) end
             
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
         elseif g_InventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
@@ -3621,7 +3621,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
                 or itemType == ITEMTYPE_WEAPON_TRAIT
                 or itemType == ITEMTYPE_WOODWORKING_BOOSTER
                 or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
-                    logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) end -- Received
+                    logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) end
                
                local icon, stack = GetItemInfo(bagId, slotId)
                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
