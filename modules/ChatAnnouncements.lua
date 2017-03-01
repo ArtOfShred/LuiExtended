@@ -295,8 +295,12 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
         local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
         local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
-        if currentRank > newRank then changestring = "promoted" end
-        if currentRank < newRank then changestring = "demoted" end
+        if currentRank > newRank then
+            changestring = GetString(SI_LUIE_CA_GUILD_RANK_UP)
+        end
+        if currentRank < newRank then
+            changestring = GetString(SI_LUIE_CA_GUILD_RANK_DOWN)
+        end
 
         GuildRankData[guildId].rank = newRank
         printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_SELF), changestring, rankSyntax, guildNameAlliance))
@@ -1854,7 +1858,7 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
         local bracket1 = ""
         local bracket2 = ""
         local icon = ""
-        local logPrefix = "Purchased"
+        local logPrefix = GetString(SI_MARKET_PURCHASED_LABEL) -- "Purchased"
         local skillstring
 
         if source == 2 then logPrefix = "Learned" end
@@ -1920,7 +1924,7 @@ function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previous
         local bracket1 = ""
         local bracket2 = ""
         local icon = ""
-        local logPrefix = "Purchased"
+        local logPrefix = GetString(SI_MARKET_PURCHASED_LABEL) -- "Purchased"
         
         if currentUpgrade < 1 then return end
 
@@ -1966,7 +1970,7 @@ function CA.MiscAlertBank(eventCode, previousCapacity, currentCapacity, previous
         local bracket1 = ""
         local bracket2 = ""
         local icon = ""
-        local logPrefix = "Purchased"
+        local logPrefix = GetString(SI_MARKET_PURCHASED_LABEL) -- "Purchased"
         
         if currentUpgrade < 1 then return end
 
@@ -2029,7 +2033,7 @@ function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCu
 
     icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
 
-    local logPrefix = "Purchased"
+    local logPrefix = GetString(SI_MARKET_PURCHASED_LABEL) -- "Purchased"
     if CA.SV.ItemContextToggle then
         logPrefix = ( CA.SV.ItemContextMessage )
     end

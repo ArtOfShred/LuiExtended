@@ -3,11 +3,11 @@ ZO_CreateStringId("SI_LUIE_CA_DEFAULTVARS_CURRENCYTOTALMESSAGE",        "[New To
 ZO_CreateStringId("SI_LUIE_CA_DEFAULTVARS_EXPERIENCECONTEXTNAME",       "[Earned]")
 ZO_CreateStringId("SI_LUIE_CA_DEFAULTVARS_EXPERIENCEPROGRESSNAME",      "[Progress]")
 
-
-
 ZO_CreateStringId("SI_LUIE_CA_GUILD_MEMBER_ADDED",                      "|cFEFEFE<<1>>|r has joined <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_MEMBER_REMOVED",                    "|cFEFEFE<<1>>|r has left <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_MOTD_CHANGED",                      "The message of the day for <<1>> has changed:\n<<2>>")
+ZO_CreateStringId("SI_LUIE_CA_GUILD_RANK_UP",                           "promoted")
+ZO_CreateStringId("SI_LUIE_CA_GUILD_RANK_DOWN",                         "demoted")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_RANK_CHANGED",                      "|cFEFEFE<<1>>|r's rank in <<2>> has been changed to <<3>>")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_RANK_CHANGED_SELF",                 "You have been <<1>> to <<2>> in <<3>>")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_JOIN_SELF",                         "You have joined <<1>>")
@@ -77,11 +77,6 @@ ZO_CreateStringId("SI_LUIE_CA_JUSTICE_CONFISCATED_BOUNTY_ITEMS_MSG",    "Bounty 
 ZO_CreateStringId("SI_LUIE_CA_MISC_LOCKPICK_SUCCESS",                   "Lockpick successful!")
 ZO_CreateStringId("SI_LUIE_CA_MISC_LOCKPICK_FAILED",                    "Lockpick failed!")
 ZO_CreateStringId("SI_LUIE_CA_DEBUG_MSG_CURRENCY",                      "Currency Change Reason <<1>> Triggered - Please post on the LUI Extended comments section on ESOUI.com describing what caused this message. Thanks!")
-
-
-
-
-
 
 -- Chat Announcement Component Default overwrites
 ZO_CreateStringId("SI_LUIE_GROUPINVITERESPONSE0",                       "Could not find a player named |cFEFEFE\"<<1>>\"|r to invite.")
