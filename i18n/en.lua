@@ -1,4 +1,19 @@
--- Chat Announcement Component
+-- LuiExtended.lua
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA",           "Can't port to your home while in AvA!")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_NOHOME",        "You don't have a primary Home set!")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG",          "Porting to primary House")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_PENDING",           "Regroup: A regroup is currently pending, please wait for the current regroup to finish before attempting another.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTINGRP",          "Regroup: You are not in a group.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_LFGACTIVITY",       "Regroup: You can't initiate a regroup while in an LFG activity.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTLEADER",         "Regroup: Only the party leader can initiate a regroup!")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG",                "Regroup: Group saved!")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG",             "Regroup: Reinviting group members:")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG",        "Regroup: Invited → |cFFFFFF<<1>>|r")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_DISBAND_FAILED_NOTINGRP",  "You are not in a group.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_DISBAND_FAILED_NOTLEADER", "You must be the group leader to do that.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_GUILD_FULL_MSG",                   "This guild is full.")
+
+-- ChatAnnouncements.lua
 ZO_CreateStringId("SI_LUIE_CA_CANT_THINK_OF_NAME_MSG1",                 "<<1>> and <<2>> gold.") -- TODO: Find proper ID name
 ZO_CreateStringId("SI_LUIE_CA_CANT_THINK_OF_NAME_MSG2",                 "<<1>> and gold.") -- TODO: Find proper ID name
 ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE",                         "Champion Level Achieved!")
@@ -95,7 +110,7 @@ ZO_CreateStringId("SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL",               "A vote 
 ZO_CreateStringId("SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START",              "A vote to kick |cFEFEFE<<1>>|r from the group has started.")
 ZO_CreateStringId("SI_LUIE_CA_XP_LVL_ANNOUNCE",                         "You have reached")
 
--- Chat Announcement Component Default overwrites
+-- ChatAnnouncements.lua [Default overwrites]
 ZO_CreateStringId("SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF",   "|cFEFEFE<<1>>|r has logged off with |cFEFEFE<<2>>|r.")
 ZO_CreateStringId("SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON",    "|cFEFEFE<<1>>|r has logged on with |cFEFEFE<<2>>|r.")
 ZO_CreateStringId("SI_LUIE_FRIENDS_LIST_FRIEND_LOGGED_OFF",             "|cFEFEFE<<1>>|r has logged off.")
