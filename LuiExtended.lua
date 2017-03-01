@@ -282,41 +282,41 @@ function LUIE.PortPrimaryHome()
     local primaryHouse = GetHousingPrimaryHouse()
 
     if IsPlayerInAvAWorld() then
-        LUIE.PrintToChat("Can't port to your home while in AvA!")
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA))
         return
     end
     if not primaryHouse then
-        LUIE.PrintToChat("You don't have a primary Home set!")
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_NOHOME))
     else
         RequestJumpToHouse(primaryHouse)
-        LUIE.PrintToChat("Porting to primary House")
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG))
     end
 end
 
 function LUIE.RegroupDisband()
     -- Check for pending regroup
     if PendingRegroup then
-        LUIE.PrintToChat("Regroup: A regroup is currently pending, please wait for the current regroup to finish before attempting another.")
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_PENDING))
         return
     end
 
     -- Check to make sure player is in a group
     local groupSize = GetGroupSize()
     if groupSize <= 1 then
-        LUIE.PrintToChat("Regroup: You are not in a group.")
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTINGRP))
         return
     end
 
     local isLFG = IsInLFGGroup()
     if isLFG then
-        LUIE.PrintToChat("Regroup: You cannot initiate a regroup while in an LFG activity.")
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_LFGACTIVITY))
         return
     end
 
     -- Check to make sure player is the leader
     local isLeader = IsUnitGroupLeader("player")
     if not isLeader then
-        LUIE.PrintToChat("Regroup: Only the party leader can initiate a regroup!")
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTLEADER))
         return
     end
 
@@ -338,7 +338,7 @@ function LUIE.RegroupDisband()
         g_regroupStacks[i] = { memberLink = memberLink, memberName = groupMemberName }
     end
 
-    LUIE.PrintToChat("Regroup: Group saved!")
+    LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG))
     GroupDisband()
     -- Reinvite the group after 5 seconds (give the group interface time to update on server and client end for all group members)
     zo_callLater(LUIE.RegroupInvite, 5000)
@@ -346,13 +346,13 @@ end
 
 
 function LUIE.RegroupInvite()
-    LUIE.PrintToChat("Regroup: Reinviting group members:")
+    LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG))
     for i = 1, #g_regroupStacks do
         local member = g_regroupStacks[i]
         -- Don't invite self and offline members
         if member.memberName ~= playerName then
             GroupInviteByName(member.memberName)
-            LUIE.PrintToChat(zo_strformat("Regroup: Invited → |cffffff<<1>>|r", member.memberLink))
+            LUIE.PrintToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberLink))
         end
     end
 
@@ -366,14 +366,14 @@ function LUIE.Disband()
     -- Check to make sure player is in a group
     local groupSize = GetGroupSize()
     if groupSize <= 1 then
-        LUIE.PrintToChat("You are not in a group.")
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_DISBAND_FAILED_NOTINGRP))
         return
     end
 
     -- Check to make sure player is the leader
     local isLeader = IsUnitGroupLeader('player')
     if not isLeader then
-        LUIE.PrintToChat("You must be the group leader to do that.")
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_DISBAND_FAILED_NOTLEADER))
         return
     end
 end
@@ -384,13 +384,13 @@ function LUIE.SlashGuildInvite1(option)
 
         -- If the player doesn't have guild invite permissions, display a message in chat indicating this.
         if not DoesPlayerHaveGuildPermission(1, GUILD_PERMISSION_INVITE) then
-            LUIE.PrintToChat("You are not permitted to invite members to the guild.")
+            LUIE.PrintToChat(GetString(SI_SOCIALACTIONRESULT17)) -- "You are not permitted to invite members to the guild."
             return
         end
 
         -- If the guild is full, display a message in chat indicating this.
         if GetNumGuildMembers(1) == MAX_GUILD_MEMBERS then
-            LUIE.PrintToChat("This guild is full.")
+            LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_GUILD_FULL_MSG))
             return
         end
 
@@ -398,7 +398,7 @@ function LUIE.SlashGuildInvite1(option)
         local allianceIconSize = 16
         local guildAlliance = GetGuildAlliance(1)
         local guildNameAlliance = LUIE.ChatAnnouncements.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-        LUIE.PrintToChat(zo_strformat("You have invited |cFEFEFE\"<<1>>\"|r to join |cFEFEFE<<2>>|r", option, guildNameAlliance))
+        LUIE.PrintToChat(zo_strformat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE), option, guildNameAlliance))
 	end
 end
 
@@ -408,13 +408,13 @@ function LUIE.SlashGuildInvite2(option)
 
         -- If the player doesn't have guild invite permissions, display a message in chat indicating this.
         if not DoesPlayerHaveGuildPermission(2, GUILD_PERMISSION_INVITE) then
-            LUIE.PrintToChat("You are not permitted to invite members to the guild.")
+            LUIE.PrintToChat(GetString(SI_SOCIALACTIONRESULT17)) -- "You are not permitted to invite members to the guild."
             return
         end
 
         -- If the guild is full, display a message in chat indicating this.
         if GetNumGuildMembers(2) == MAX_GUILD_MEMBERS then
-            LUIE.PrintToChat("This guild is full.")
+            LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_GUILD_FULL_MSG))
             return
         end
 
@@ -422,7 +422,7 @@ function LUIE.SlashGuildInvite2(option)
         local allianceIconSize = 16
         local guildAlliance = GetGuildAlliance(2)
         local guildNameAlliance = LUIE.ChatAnnouncements.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-        LUIE.PrintToChat(zo_strformat("You have invited |cFEFEFE\"<<1>>\"|r to join |cFEFEFE<<2>>|r", option, guildNameAlliance))
+        LUIE.PrintToChat(zo_strformat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE), option, guildNameAlliance))
 	end
 end
 
@@ -432,13 +432,13 @@ function LUIE.SlashGuildInvite3(option)
 
         -- If the player doesn't have guild invite permissions, display a message in chat indicating this.
         if not DoesPlayerHaveGuildPermission(3, GUILD_PERMISSION_INVITE) then
-            LUIE.PrintToChat("You are not permitted to invite members to the guild.")
+            LUIE.PrintToChat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE))
             return
         end
 
         -- If the guild is full, display a message in chat indicating this.
         if GetNumGuildMembers(3) == MAX_GUILD_MEMBERS then
-            LUIE.PrintToChat("This guild is full.")
+            LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_GUILD_FULL_MSG))
             return
         end
 
@@ -446,7 +446,7 @@ function LUIE.SlashGuildInvite3(option)
         local allianceIconSize = 16
         local guildAlliance = GetGuildAlliance(3)
         local guildNameAlliance = LUIE.ChatAnnouncements.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-        LUIE.PrintToChat(zo_strformat("You have invited |cFEFEFE\"<<1>>\"|r to join |cFEFEFE<<2>>|r", option, guildNameAlliance))
+        LUIE.PrintToChat(zo_strformat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE), option, guildNameAlliance))
 	end
 end
 
@@ -456,13 +456,13 @@ function LUIE.SlashGuildInvite4(option)
 
         -- If the player doesn't have guild invite permissions, display a message in chat indicating this.
         if not DoesPlayerHaveGuildPermission(4, GUILD_PERMISSION_INVITE) then
-            LUIE.PrintToChat("You are not permitted to invite members to the guild.")
+            LUIE.PrintToChat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE))
             return
         end
 
         -- If the guild is full, display a message in chat indicating this.
         if GetNumGuildMembers(4) == MAX_GUILD_MEMBERS then
-            LUIE.PrintToChat("This guild is full.")
+            LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_GUILD_FULL_MSG))
             return
         end
 
@@ -470,7 +470,7 @@ function LUIE.SlashGuildInvite4(option)
         local allianceIconSize = 16
         local guildAlliance = GetGuildAlliance(4)
         local guildNameAlliance = LUIE.ChatAnnouncements.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-        LUIE.PrintToChat(zo_strformat("You have invited |cFEFEFE\"<<1>>\"|r to join |cFEFEFE<<2>>|r", option, guildNameAlliance))
+        LUIE.PrintToChat(zo_strformat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE), option, guildNameAlliance))
 	end
 end
 
@@ -480,13 +480,13 @@ function LUIE.SlashGuildInvite5(option)
 
         -- If the player doesn't have guild invite permissions, display a message in chat indicating this.
         if not DoesPlayerHaveGuildPermission(5, GUILD_PERMISSION_INVITE) then
-            LUIE.PrintToChat("You are not permitted to invite members to the guild.")
+            LUIE.PrintToChat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE))
             return
         end
 
         -- If the guild is full, display a message in chat indicating this.
         if GetNumGuildMembers(5) == MAX_GUILD_MEMBERS then
-            LUIE.PrintToChat("This guild is full.")
+            LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_GUILD_FULL_MSG))
             return
         end
 
@@ -494,7 +494,7 @@ function LUIE.SlashGuildInvite5(option)
         local allianceIconSize = 16
         local guildAlliance = GetGuildAlliance(5)
         local guildNameAlliance = LUIE.ChatAnnouncements.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-        LUIE.PrintToChat(zo_strformat("You have invited |cFEFEFE\"<<1>>\"|r to join |cFEFEFE<<2>>|r", option, guildNameAlliance))
+        LUIE.PrintToChat(zo_strformat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE), option, guildNameAlliance))
 	end
 end
 

@@ -19,20 +19,20 @@ CA.D = {
     GoldChange                    = true,
     GoldColor                     = { 1, 1, 0.2, 1 },
     TotalGoldChange               = false,
-    GoldName                      = "Gold",
+    GoldName                      = GetString(SI_CURRENCY_GOLD), -- "Gold"
     AlliancePointChange           = true,
     AlliancePointFilter           = 0,
     AlliancePointColor            = { 0.164706, 0.862745, 0.133333, 1 },
     TotalAlliancePointChange      = false,
-    AlliancePointName             = "AP",
+    AlliancePointName             = GetString(SI_CURRENCY_ALLIANCE_POINTS), -- "Alliance Points"
     TelVarStoneChange             = true,
     TelVarStoneColor              = { 0.368627, 0.643137, 1, 1 },
     TotalTelVarStoneChange        = false,
-    TelVarStoneName               = "TV",
+    TelVarStoneName               = GetString(SI_CURRENCY_TELVAR_STONES), -- "Tel Var Stones"
     WritVoucherChange             = true,
     WritVoucherColor              = { 1, 1, 1, 1 },
     TotalWritVoucherChange        = false,
-    WritVoucherName               = "Writ Voucher",
+    WritVoucherName               = GetString(SI_CURRENCY_WRIT_VOUCHERS), -- "Writ Vouchers"
     Loot                          = true,
     LootIcons                     = true,
     LootVendor                    = true,
@@ -59,16 +59,16 @@ CA.D = {
     CurrencyContextToggle         = false,
     CurrencyContextMessageUp      = "",
     CurrencyContextMessageDown    = "",
-    CurrencyTotalMessage          = "[New Total]",
+    CurrencyTotalMessage          = GetString(SI_LUIE_CA_DEFAULTVARS_CURRENCYTOTALMESSAGE),
     ExperienceLevelUp             = true,
     LevelUpIcon                   = true,
     Experience                    = true,
-    ExperienceContextName         = "[Earned]",
+    ExperienceContextName         = GetString(SI_LUIE_CA_DEFAULTVARS_EXPERIENCECONTEXTNAME),
     ExperienceName                = "XP",
     ExperienceIcon                = true,
     ExperienceShowProgress        = true,
     ExperienceProgressColor       = true,
-    ExperienceProgressName        = "[Progress]",
+    ExperienceProgressName        = GetString(SI_LUIE_CA_DEFAULTVARS_EXPERIENCEPROGRESSNAME),
     ExperienceShowPBrackets       = true,
     ExperienceShowDecimal         = true,
     ExperienceShowLevel           = true,
@@ -295,8 +295,12 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
         local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
         local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
-        if currentRank > newRank then changestring = "promoted" end
-        if currentRank < newRank then changestring = "demoted" end
+        if currentRank > newRank then
+            changestring = GetString(SI_LUIE_CA_GUILD_RANK_UP)
+        end
+        if currentRank < newRank then
+            changestring = GetString(SI_LUIE_CA_GUILD_RANK_DOWN)
+        end
 
         GuildRankData[guildId].rank = newRank
         printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_SELF), changestring, rankSyntax, guildNameAlliance))
@@ -409,25 +413,20 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_GROUPINVITERESPONSE10, GetString(SI_LUIE_GROUPINVITERESPONSE10), 1)
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GROUP, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_GROUP), 1)
         SafeAddString(SI_GROUPLEAVEREASON1, GetString(SI_LUIE_GROUPLEAVEREASON1), 2) 
-
         -- Trade String Replacements
         SafeAddString(SI_TRADE_INVITE_CONFIRM, GetString(SI_LUIE_TRADE_INVITE_CONFIRM), 1) -- Fixes default Trade messages to match our syntax.
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_TRADE, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_TRADE), 1) -- Fixes default Trade messages to match our syntax.
-
         -- Friend Invite String Replacements
         SafeAddString(SI_FRIENDS_LIST_IGNORE_ADDED, GetString(SI_LUIE_FRIENDS_LIST_IGNORE_ADDED), 1) -- Fixes default Ignore List messages to match our syntax.
         SafeAddString(SI_FRIENDS_LIST_IGNORE_REMOVED, GetString(SI_LUIE_FRIENDS_LIST_IGNORE_REMOVED), 1) -- Fixes default Ignore List messages to match our syntax.
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST), 1) -- Default ZOS string was missing a period.
-
         SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_ON, GetString(SI_LUIE_FRIENDS_LIST_FRIEND_LOGGED_ON), 1)
         SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON, GetString(SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON), 1)
         SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_OFF, GetString(SI_LUIE_FRIENDS_LIST_FRIEND_LOGGED_OFF), 1)
         SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF, GetString(SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF), 1)
-
         -- Guild Invite String Replacements
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST), 1) -- Update syntax for guild invite message to match our chat syntax
         SafeAddString(SI_GUILD_ROSTER_INVITED_MESSAGE, GetString(SI_LUIE_GUILD_ROSTER_INVITED_MESSAGE), 1) -- Update syntax for guild invitation sent message to match group syntax.
-
         -- Quest Share String Replacements
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE), 3)
     end
@@ -503,14 +502,14 @@ function CA.GroupReplacementFound(eventCode)
 end
 
 function CA.ActivityComplete(eventCode)
-    printToChat(GetString(SI_ACTIVITY_FINDER_ACTIVITY_COMPLETE_ANNOUNCEMENT_TEXT))
+    printToChat(GetString(SI_ACTIVITY_FINDER_ACTIVITY_COMPLETE_ANNOUNCEMENT_TEXT)) -- "Activity Complete!"
 end
 
 function CA.ActivityStatusUpdate(eventCode, status)
     --d("status update:" .. status)
     if ShowActivityStatus then
         if status == ACTIVITY_FINDER_STATUS_NONE and WeAreQueued == true then
-            printToChat("You are no longer queued in the group finder.")
+            printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_QUEUE_END))
             WeAreQueued = false
             ShowStatusDropMember = false
         end
@@ -622,7 +621,7 @@ end
 function CA.VoteNotify(eventCode)
     local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
     if electionType == 2 then -- Ready Check
-        printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_MESSAGE))
+        printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_MESSAGE)) -- "Are you ready?"
     end
 
     if electionType == 3 then -- Vote Kick
@@ -649,13 +648,13 @@ function CA.VoteResult(eventCode, electionResult, descriptor)
     local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
     if descriptor == "[ZO_READY_CHECK]" then
         if electionResult == 1 then
-            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED))
+            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED)) -- "Someone in your group is not ready."
         end
         if electionResult == 4 then
-            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_PASSED))
+            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_PASSED)) -- "Someone in your group is not ready."
         end
         if electionResult == 5 then
-            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED))
+            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED)) -- "Someone in your group is not ready."
         end
     end
     if descriptor == "[ZO_NONE]" then
@@ -681,10 +680,10 @@ end
 
 function CA.VoteRequested(eventCode, descriptor)
     if descriptor == "[ZO_READY_CHECK]" then
-        printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_REQUESTED))
+        printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_REQUESTED)) -- "You have initiated a ready check..."
     end
     if descriptor == "[ZO_NONE]" then
-        printToChat(GetString(SI_GROUP_ELECTION_REQUESTED))
+        printToChat(GetString(SI_GROUP_ELECTION_REQUESTED)) -- "You have initiated a vote..."
     end
 end
 
@@ -709,6 +708,7 @@ end
 
 --[[ Would love to be able to use this function but its too buggy for now. Spams every single time someone updates their role, as well as when people join/leave group. If the player joins a large party for the first time then
 this broadcasts the role of every single player in the party. Too bad this doesn't only trigger when someone in group actually updates their role instead.
+No localization support yet.
 function CA.GMRC(eventCode, unitTag, dps, healer, tank)
 
 local updatedRoleName = GetUnitName(unitTag)
@@ -761,6 +761,7 @@ end
 
 --[[ Would love to be able to use this function but its too buggy for now. When a single player disconnects for the first time in the group, another player will see a message for the online/offline status of every other
 player in the group. Possibly reimplement and limit it to 2 player groups?
+No localization support yet.
 function CA.GMCS(eventCode, unitTag, isOnline)
 
     local onlineRoleName = GetUnitName(unitTag)
@@ -806,27 +807,27 @@ function CA.OnGroupInviteResponse(eventCode, inviterName, response, inviterDispl
     if response == 2 then
         printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_DECLINED))
     elseif response == 3 then
-        printToChat("You cannot extend a group invitation to a player that is ignoring you.")
+        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_IGNORE))
     elseif response == 4 then -- Add some kind of override here if you try to invite yourself
-        printToChat("You cannot extend a group invitation to a player that already has a pending group invite.")
+        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_PENDING))
     elseif response == 5 then -- Add some kind of override here if you try to invite yourself
-        printToChat("You cannot extend a group invitation to a player that is already in a group.")
+        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_ALREADYGRPD1))
     elseif response == 6 then
-        printToChat("The group is already full.")
+        printToChat(GetString(SI_GROUPINVITERESPONSE6)) -- "The group is already full."
     elseif response == 7 then
-        printToChat("You cannot invite yourself to a group.")
+        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_CANTINVSELF))
     elseif response == 8 then
-        printToChat("Failed to extend a group invitation, only the group leader can invite.")
+        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_NOTLEADER))
     elseif response == 9 then
-        printToChat("You cannot extend a group invitation to a player that is a member of the opposite faction.")
+        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_OPPOSITEFACTION))
     elseif response == 11 then
-        printToChat("Account type is not set to allow group creation.")
+        printToChat(GetString(SI_GROUPINVITERESPONSE11)) -- "Account type is not set to allow group creation."
     elseif response == 12 then
-        printToChat("Failed to join the group.")
+        printToChat(GetString(SI_GROUPINVITERESPONSE12)) -- "Failed to join the group"
     elseif response == 13 then
-        printToChat("Unable to join - the group is full.") -- Not sure if this is even used, doesn't trigger when player tries to join a group already full of 24, response 6 does.
+        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_UNUSEDFULL)) -- Not sure if this is even used, doesn't trigger when player tries to join a group already full of 24, response 6 does.
     elseif response == 14 then
-        printToChat("Unable to join - you are already in a group.")
+        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_ALREADYGRPD2))
     end
 end
 
@@ -1040,10 +1041,10 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     -- Determine the color of the text based on whether we gained or lost gold
     if UpOrDown > 0 then
         color = "|c0B610B"
-        changetype = CommaValue (newMoney - oldMoney)
+        changetype = CommaValue(newMoney - oldMoney)
     else
         color = "|ca80700"
-        changetype = CommaValue (oldMoney - newMoney)
+        changetype = CommaValue(oldMoney - newMoney)
     end
 
     -- If we only recieve or lose 1 Gold, don't add an "s" onto the end of the name
@@ -1053,50 +1054,61 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
 
     -- If the name is blank, don't add an additional spacer before it after the change value
     if CA.SV.GoldName == ( "" ) or CA.SV.GoldName == ( "g" ) or CA.SV.GoldName == ( "gp" )then
-        formathelper = ( "" )
+        formathelper = ""
     end
 
     -- Sell/Buy from a Merchant
-    if reason == 1 and UpOrDown > 0 then message = ( "Received" )
-    elseif reason == 1 and UpOrDown < 0 then message = ("Spent" )
+    if reason == 1 and UpOrDown > 0 then
+        message = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Receieved"
+    elseif reason == 1 and UpOrDown < 0 then
+        message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SPENT)
 
     -- Receieve Money in the Mail
-    elseif reason == 2 and UpOrDown > 0 then message = ( "Received" )
+    elseif reason == 2 and UpOrDown > 0 then
+        message = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Receieved"
 
     -- Send money in the mail, values changed to compensate for COD!
     elseif reason == 2 and UpOrDown < 0 then
         if postageAmount == 0 and mailMoney == 0 and mailCOD == 0 then
-            message = ( "COD Payment" )
+            message = GetString(SI_LUIE_CA_MAIL_COD_PAYMENT_MSG)
         else
-            message = ( "Sent" )
+            message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SENT)
         end
         changetype = CommaValue (oldMoney - newMoney - postageAmount)
         mailHelper = true
 
     -- Receive/Give Money in a Trade (Likely consolidate this later)
-    elseif reason == 3 then message = ( "Traded" )
+    elseif reason == 3 then
+        message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_TRADED)
 
     -- Receive from Quest Reward (4), AH Refund (32), Sell to Fence (63)
-    elseif reason == 4 or reason == 32 or reason == 63 then message = ( "Received" )
+    elseif reason == 4 or reason == 32 or reason == 63 then
+        message = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Receieved"
 
     -- Spend - NPC Conversation (5), Bag Space (8), Bank Space (9), Wayshrine (19), Mount Feed (28), Repairs (29), Buy on AH (31), AH Listing Fee (33), Respec Skills (44), Respec Attributes (45),
     -- Unstuck (48), Edit Guild Heraldry (49), Buy Guild Tabard (50), Respec Morphs (55), Pay Fence (56), Launder (60), Champion Respec (61), Buyback (64)
-    elseif reason == 5 or reason == 8 or reason == 9 or reason == 19 or reason == 28 or reason == 29 or reason == 31 or reason == 33 or reason == 44 or reason == 45 or reason == 48 or reason == 49 or reason == 50 or reason == 55 or reason == 56 or reason == 60 or reason == 61 or reason == 64 then message = ( "Spent" )
+    elseif reason == 5 or reason == 8 or reason == 9 or reason == 19 or reason == 28 or reason == 29 or reason == 31 or reason == 33 or reason == 44 or reason == 45 or reason == 48 or reason == 49 or reason == 50 or reason == 55 or reason == 56 or reason == 60 or reason == 61 or reason == 64 then
+        message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SPENT)
 
     -- Desposit in Bank (42) or Guild Bank (51)
-    elseif reason == 42 or reason == 51 then message = ( "Desposited" )
+    elseif reason == 42 or reason == 51 then
+        message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
 
     -- Withdraw from Bank (43) or Guild Bank (52)
-    elseif reason == 43 or reason == 52 then message = ( "Withdrew" )
+    elseif reason == 43 or reason == 52 then
+        message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
 
     -- Confiscated -- Pay to Guard (47) or Killed by Guard (57)
-    elseif reason == 47 or reason == 57 then message = ( "Confiscated" )
+    elseif reason == 47 or reason == 57 then
+        message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_CONFISCATED)
 
     -- Pickpocketed (59)
-    elseif reason == 59 then message = ( "Pickpocket" )
+    elseif reason == 59 then
+        message = GetString(SI_GAMECAMERAACTIONTYPE21) -- "Pickpocket"
 
     -- Looted - From Chest (0), Looted (13), Stolen Gold (62)
-    elseif reason == 0 or reason == 13 or reason == 62 then message = ( "Looted" )
+    elseif reason == 0 or reason == 13 or reason == 62 then
+        message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTED)
 
     -- ==============================================================================
     -- DEBUG EVENTS WE DON'T KNOW YET
@@ -1132,13 +1144,13 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     -- ==============================================================================
 
     -- If none of these returned true, then we must have just looted the gold (Potentially a few currency change events I missed too may have to adjust later)
-    else message = ( "Looted" ) end
+    else message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTED) end
 
     if CA.SV.CurrencyContextToggle then -- Override with custom string if enabled
         if color == ( "|c0B610B" ) then
-            message = ( CA.SV.CurrencyContextMessageUp )
+            message = CA.SV.CurrencyContextMessageUp
         else
-            message = ( CA.SV.CurrencyContextMessageDown )
+            message = CA.SV.CurrencyContextMessageDown
         end
     end
 
@@ -1164,9 +1176,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         elseif CA.SV.MiscMail and reason == 2 then
             if not MailStop and MailStringPart1 ~= "" then
                 if not CA.SV.GoldChange then
-                    printToChat(strformat("<<1>> and <<2>> gold.", MailStringPart1, changetype)) -- SI_LUIE_CA_CANT_THINK_OF_NAME_MSG1
+                    printToChat(strformat(GetString(SI_LUIE_CA_CANT_THINK_OF_NAME_MSG1), MailStringPart1, changetype))
                 else
-                    printToChat(strformat("<<1>> and gold.", MailStringPart1)) -- SI_LUIE_CA_CANT_THINK_OF_NAME_MSG2
+                    printToChat(strformat(GetString(SI_LUIE_CA_CANT_THINK_OF_NAME_MSG2), MailStringPart1))
                 end
             elseif not MailStop then
                 if not CA.SV.GoldChange then
@@ -1245,9 +1257,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
                 total = ""
             end
             if CA.SV.CurrencyContextToggle then -- Override with custom string if enabled
-                message = ( CA.SV.CurrencyContextMessageDown )
+                message = CA.SV.CurrencyContextMessageDown
             else
-                message = ( "Postage" )
+                message = GetString(SI_GAMEPAD_MAIL_SEND_POSTAGE_LABEL) -- "Postage"
             end
             if CA.SV.GoldChange then
                 printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, postagesyntax, total))
@@ -1303,12 +1315,12 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
     -- Determine the color and message of the text based on whether we gained or lost Alliance Points
     if UpOrDown > alliancePoints then
         color = "|c0B610B"
-        changetype = CommaValue ( difference )
-        message = ( "Earned" )
+        changetype = CommaValue( difference )
+        message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_EARNED)
     else
         color = "|ca80700"
-        changetype = CommaValue ( difference * -1 )
-        message = ( "Spent" )
+        changetype = CommaValue( difference * -1 )
+        message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SPENT)
     end
 
     -- If we only recieve or lose 1 Alliance Point, don't add an "s" onto the end of the name
@@ -1318,14 +1330,14 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
 
     -- If the name is blank, don't add an additional spacer before it after the change value
     if CA.SV.AlliancePointName == ( "" ) or CA.SV.AlliancePointName == ( "ap" ) or CA.SV.AlliancePointName == ( "a" ) then
-        formathelper = ( "" )
+        formathelper = ""
     end
 
     if CA.SV.CurrencyContextToggle then -- Override with custom string if enabled
-        if color == ( "|c0B610B" ) then
-            message = ( CA.SV.CurrencyContextMessageUp )
+        if color == "|c0B610B" then
+            message = CA.SV.CurrencyContextMessageUp
         else
-            message = ( CA.SV.CurrencyContextMessageDown )
+            message = CA.SV.CurrencyContextMessageDown
         end
     end
 
@@ -1436,10 +1448,10 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
     -- Determine the color of the text based on whether we gained or lost gold
     if UpOrDown > 0 then
         color = "|c0B610B"
-        changetype = CommaValue (newTelvarStones - oldTelvarStones)
+        changetype = CommaValue(newTelvarStones - oldTelvarStones)
     else
         color = "|ca80700"
-        changetype = CommaValue (oldTelvarStones - newTelvarStones)
+        changetype = CommaValue(oldTelvarStones - newTelvarStones)
     end
 
     -- If we only recieve or lose 1 Tel Var Stone, don't add an "s" onto the end of the name
@@ -1449,65 +1461,70 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
 
     -- If the name is blank, don't add an additional spacer before it after the change value
     if CA.SV.TelVarStoneName == ( "" ) or CA.SV.TelVarStoneName == ( "tv" ) or CA.SV.TelVarStoneName == ( "t" ) or CA.SV.TelVarStoneName == ( "tvs" ) then
-        formathelper = ( "" )
+        formathelper = ""
     end
 
     -- Buy from a Merchant (no way to sell Tel Var)
-    if reason == 1 and UpOrDown < 0 then message = ( "Spent" )
+    if reason == 1 and UpOrDown < 0 then
+        message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SPENT)
 
     -- Desposit in Bank (42)
-    elseif reason == 42 then message = ( "Desposited" )
+    elseif reason == 42 then
+        message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
 
     -- Withdraw from Bank (43)
-    elseif reason == 43 then message = ( "Withdrew" )
+    elseif reason == 43 then
+        message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
 
     -- Looted - From Chest (0) or from Player/NPC (65)
-    elseif reason == 0 or reason == 65 then message = ( "Looted" )
+    elseif reason == 0 or reason == 65 then
+        message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTED)
 
     -- Died to Player/NPC (67)
-    elseif reason == 67 then message = ( "Lost" )
+    elseif reason == 67 then
+        message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOST)
 
     -- ==============================================================================
     -- DEBUG EVENTS WE DON'T KNOW YET
-    elseif reason == 6 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 7 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 12 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 14 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 15 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 16 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 18 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 20 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 21 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 22 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 23 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 24 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 25 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 26 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 27 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 30 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 34 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 36 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 37 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 38 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 39 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 40 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 41 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 46 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 53 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 54 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 58 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 66 then message = stformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 6 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 7 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 12 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 14 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 15 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 16 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 18 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 20 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 21 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 22 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 23 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 24 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 25 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 26 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 27 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 30 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 34 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 36 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 37 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 38 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 39 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 40 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 41 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 46 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 53 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 54 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 58 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 66 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     -- END DEBUG EVENTS
     -- ==============================================================================
 
     -- If none of these returned true, then we must have just looted the Tel Var Stones
-    else message = ( "Looted" ) end
+    else message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTED) end
 
     if CA.SV.CurrencyContextToggle then -- Override with custom string if enabled
         if color == ( "|c0B610B" ) then
-            message = ( CA.SV.CurrencyContextMessageUp )
+            message = CA.SV.CurrencyContextMessageUp
         else
-            message = ( CA.SV.CurrencyContextMessageDown )
+            message = CA.SV.CurrencyContextMessageDown
         end
     end
 
@@ -1577,12 +1594,12 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
     -- Determine the color of the text based on whether we gained or lost gold
     if UpOrDown > 0 then
         color = "|c0B610B"
-        changetype = CommaValue (newWritVouchers - oldWritVouchers)
-        message = ( "Received" )
+        changetype = CommaValue(newWritVouchers - oldWritVouchers)
+        message = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Receieved"
     else
         color = "|ca80700"
-        changetype = CommaValue (oldWritVouchers - newWritVouchers)
-        message = ( "Spent" )
+        changetype = CommaValue(oldWritVouchers - newWritVouchers)
+        message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SPENT)
     end
 
     -- If we only recieve or lose 1 Writ Voucher, don't add an "s" onto the end of the name
@@ -1592,7 +1609,7 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
 
     -- If the name is blank, don't add an additional spacer before it after the change value
     if CA.SV.WritVoucherName == ( "" ) or CA.SV.WritVoucherNAme == ( "wv" ) or CA.SV.WritVoucherNAme == ( "w" ) or CA.SV.WritVoucherNAme == ( "v" ) then
-        formathelper = ( "" )
+        formathelper = ""
     end
 
     -- ==============================================================================
@@ -1631,9 +1648,9 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
 
     if CA.SV.CurrencyContextToggle then -- Override with custom string if enabled
         if color == ( "|c0B610B" ) then
-            message = ( CA.SV.CurrencyContextMessageUp )
+            message = CA.SV.CurrencyContextMessageUp
         else
-            message = ( CA.SV.CurrencyContextMessageDown )
+            message = CA.SV.CurrencyContextMessageDown
         end
     end
 
@@ -1837,11 +1854,11 @@ end
 --------------------------------------------------------------
 
 function CA.MiscAlertLockFailed(eventCode)
-    printToChat("Lockpick failed!")
+    printToChat(GetString(SI_LUIE_CA_MISC_LOCKPICK_FAILED))
 end
 
 function CA.MiscAlertLockSuccess(eventCode)
-    printToChat("Lockpick successful!")
+    printToChat(GetString(SI_LUIE_CA_MISC_LOCKPICK_SUCCESS))
 end
 
 function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source)
@@ -1854,10 +1871,12 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
         local bracket1 = ""
         local bracket2 = ""
         local icon = ""
-        local logPrefix = "Purchased"
+        local logPrefix = GetString(SI_MARKET_PURCHASED_LABEL) -- "Purchased"
         local skillstring
 
-        if source == 2 then logPrefix = "Learned" end
+        if source == 2 then
+            logPrefix = GetStringSI_LUIE_CA_PREFIX_MESSAGE_LEARNED
+        end
 
         if CA.SV.ItemBracketDisplayOptions == 1 then
             bracket1 = "["
@@ -1898,7 +1917,7 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
         end
 
         if CA.SV.ItemContextToggle then
-            logPrefix = ( CA.SV.ItemContextMessage )
+            logPrefix = CA.SV.ItemContextMessage
         end
 
         if CA.SV.LootCurrencyCombo then
@@ -1920,7 +1939,7 @@ function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previous
         local bracket1 = ""
         local bracket2 = ""
         local icon = ""
-        local logPrefix = "Purchased"
+        local logPrefix = GetString(SI_MARKET_PURCHASED_LABEL) -- "Purchased"
         
         if currentUpgrade < 1 then return end
 
@@ -1966,7 +1985,7 @@ function CA.MiscAlertBank(eventCode, previousCapacity, currentCapacity, previous
         local bracket1 = ""
         local bracket2 = ""
         local icon = ""
-        local logPrefix = "Purchased"
+        local logPrefix = GetString(SI_MARKET_PURCHASED_LABEL) -- "Purchased"
         
         if currentUpgrade < 1 then return end
 
@@ -1991,7 +2010,7 @@ function CA.MiscAlertBank(eventCode, previousCapacity, currentCapacity, previous
         end
 
         if CA.SV.ItemContextToggle then
-            logPrefix = ( CA.SV.ItemContextMessage )
+            logPrefix = CA.SV.ItemContextMessage
         end
 
         if CA.SV.LootCurrencyCombo then
@@ -2010,7 +2029,7 @@ function CA.OnBuybackItem(eventCode, itemName, quantity, money, itemSound)
 
     icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
 
-    local logPrefix = "Buyback"
+    local logPrefix = GetString(SI_ITEMFILTERTYPE8) -- "Buyback"
     if CA.SV.ItemContextToggle then
         logPrefix = ( CA.SV.ItemContextMessage )
     end
@@ -2029,7 +2048,7 @@ function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCu
 
     icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
 
-    local logPrefix = "Purchased"
+    local logPrefix = GetString(SI_MARKET_PURCHASED_LABEL) -- "Purchased"
     if CA.SV.ItemContextToggle then
         logPrefix = ( CA.SV.ItemContextMessage )
     end
@@ -2047,7 +2066,7 @@ function CA.OnSellItem(eventCode, itemName, quantity, money)
 
     icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
 
-    local logPrefix = "Sold"
+    local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SOLD)
     if CA.SV.ItemContextToggle then
         logPrefix = ( CA.SV.ItemContextMessage )
     end
@@ -2129,11 +2148,17 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
     if ( CA.SV.LootBlacklist and blacklistIDs[itemId] ) then return end
 
     -- Set prefix based on Looted/Pickpocket/Received
-    local logPrefix = "Looted"
+    local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTED)
 
-    if ( isPickpocketLoot ) then logPrefix = "Pickpocket" end
-    if ( receivedBy == nil ) then logPrefix = "Received" end
-    if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
+    if ( isPickpocketLoot ) then
+        logPrefix = GetString(SI_GAMECAMERAACTIONTYPE21) -- "Pickpocket"
+    end
+    if ( receivedBy == nil ) then
+        logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Receieved"
+    end
+    if CA.SV.ItemContextToggle then
+        logPrefix = ( CA.SV.ItemContextMessage )
+    end
 
     local gainorloss = "|c0B610B"
 
@@ -2422,7 +2447,7 @@ end
 
 function CA.TradeInviteDecline(eventCode)
     if CA.SV.MiscTrade then
-        printToChat(GetString(SI_TRADE_INVITE_DECLINE))
+        printToChat(GetString(SI_TRADE_INVITE_DECLINE)) -- "Trade invite declined."
     end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
@@ -2432,7 +2457,7 @@ end
 
 function CA.TradeInviteCancel(eventCode)
     if CA.SV.MiscTrade then
-        printToChat(GetString(SI_TRADE_CANCEL_INVITE))
+        printToChat(GetString(SI_TRADE_CANCEL_INVITE)) -- "Trade invitation canceled."
     end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
@@ -2470,7 +2495,7 @@ end
 -- Cleanup if a Trade is canceled/exited
 function CA.TradeCancel(eventCode, cancelerName)
     if CA.SV.MiscTrade then
-        printToChat(GetString(SI_TRADE_CANCELED))
+        printToChat(GetString(SI_TRADE_CANCELED)) -- "Trade canceled."
     end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
@@ -2480,7 +2505,7 @@ end
 
 function CA.TradeFail(eventCode, cancelerName)
     if CA.SV.MiscTrade then
-        printToChat(GetString(SI_TRADE_FAILED))
+        printToChat(GetString(SI_TRADE_FAILED)) -- "Trade failed."
     end
     g_TradeStacksIn = {}
     g_TradeStacksOut = {}
@@ -2493,7 +2518,7 @@ function CA.OnTradeSuccess(eventCode)
     combostring = ""
 
     if CA.SV.MiscTrade then
-        printToChat(GetString(SI_TRADE_COMPLETE))
+        printToChat(GetString(SI_TRADE_COMPLETE)) -- "Trade complete."
     end
     if CA.SV.MiscTrade and tradestring1 ~= "" then printToChat(tradestring1) end
     if CA.SV.MiscTrade and tradestring2 ~= "" then printToChat(tradestring2) end
@@ -2504,7 +2529,7 @@ function CA.OnTradeSuccess(eventCode)
         for indexOut = 1, #g_TradeStacksOut do
             if g_TradeStacksOut[indexOut] ~= nil then
                 local gainorloss = "|ca80700"
-                local logPrefix = "Traded"
+                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_TRADED)
                 if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
                 local receivedBy = tradetarget
                 local istrade = true
@@ -2519,7 +2544,7 @@ function CA.OnTradeSuccess(eventCode)
         for indexIn = 1, #g_TradeStacksIn do
             if g_TradeStacksIn[indexIn] ~= nil then
                 local gainorloss = "|c0B610B"
-                local logPrefix = "Traded"
+                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_TRADED)
                 if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
                 local receivedBy = tradetarget
                 local istrade = true
@@ -2582,7 +2607,7 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
     combostring = ""
     local NumMails = 0
     local gainorloss = "|c0B610B"
-    local logPrefix = "Received"
+    local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Received"
     local receivedBy = ""
     if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
 
@@ -2606,7 +2631,7 @@ end
 
 function PrintMailAttachmentsIfNoGold()
     if CA.SV.MiscMail and MailStringPart1 ~= "" then
-        printToChat(strformat("<<1>>.", MailStringPart1) )
+        printToChat(strformat("<<1>>.", MailStringPart1) ) -- Append a dot
     end
     MailStringPart1 = "" -- Important to clear this string, if we took a mail with only items attached, we don't want the next mail with gold to falsely show that attachments were taken!
 end
@@ -2661,7 +2686,7 @@ function CA.OnMailSuccess(eventCode)
     if CA.SV.LootMail then
         for mailIndex = 1, #g_MailStacksOut do
         local gainorloss = "|ca80700"
-        local logPrefix = "Sent"
+        local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SENT)
         if CA.SV.ItemContextToggle then
             logPrefix = ( CA.SV.ItemContextMessage )
         end
@@ -2706,11 +2731,11 @@ function CA.LevelUpdateHelper()
         CurrentLevel = GetPlayerChampionPointsEarned()
         if CurrentLevel < 10 then CurrentLevel = 10 end -- Probably don't really need this here, but it's not going to hurt.
         XPLevel = GetNumChampionXPInChampionPoint(CurrentLevel)
-        LevelContext = ( "Champion" )
+        LevelContext = GetString(SI_MAIN_MENU_CHAMPION) -- "Champion"
     else
         CurrentLevel = GetUnitLevel ("player")
         XPLevel = GetNumExperiencePointsInLevel(CurrentLevel)
-        LevelContext = ( "Level" )
+        LevelContext = GetString(SI_EXPERIENCE_LEVEL_LABEL) -- "Level"
     end
 end
 
@@ -2776,16 +2801,16 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
 
             if CA.SV.ExperienceLevelUp and Crossover == 0 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted))
+                    printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel))
+                    printToChat(strformat("<<1>><<2>><<3>> <<4>>", GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE), icon, LevelContext, CurrentLevel))
                 end
             end
             if CA.SV.ExperienceLevelUp and Crossover == 1 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat(GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted))
+                    printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat(GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel))
+                    printToChat(strformat("<<1>><<2>><<3>> <<4>>", GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE), icon, LevelContext, CurrentLevel))
                 end
             end
         else
@@ -2799,16 +2824,16 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
 
             if CA.SV.ExperienceLevelUp and Crossover == 0 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted))
+                    printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel))
+                    printToChat(strformat("<<1>><<2>><<3>> <<4>>", GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE), icon, LevelContext, CurrentLevel))
                 end
             end
             if CA.SV.ExperienceLevelUp and Crossover == 1 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat(GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted))
+                    printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat(GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel))
+                    printToChat(strformat("<<1>><<2>><<3>> <<4>>", GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE), icon, LevelContext, CurrentLevel))
                 end
             end
 
@@ -2911,11 +2936,11 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
             CurrentLevel = GetPlayerChampionPointsEarned()
             if CurrentLevel < 10 then CurrentLevel = 10 end -- Very important, if this player has never hit Champion level before, set the minimum possible value when hitting level 50.
             XPLevel = GetNumChampionXPInChampionPoint(CurrentLevel)
-            LevelContext = ( "Champion" )
+            LevelContext = GetString(SI_MAIN_MENU_CHAMPION) -- "Champion"
         else
             CurrentLevel = CurrentLevel + 1
             XPLevel = GetNumExperiencePointsInLevel(CurrentLevel)
-            LevelContext = ( "Level" )
+            LevelContext = GetString(SI_EXPERIENCE_LEVEL_LABEL) -- "Level"
         end
     end
 
@@ -2940,7 +2965,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 
             -- Format Helper puts a space in if the player enters a value for Experience Name, this way they don't have to do this formatting themselves.
             if CA.SV.ExperienceName == ( "" ) then
-                formathelper = ( "" )
+                formathelper = ""
             end
 
             -- Displays an icon if enabled
@@ -3135,14 +3160,14 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
             --[[ Crossover from Normal XP --> Champion XP modifier ]] --
             if Crossover == 1 then
                 -- progress = (progressbrackets .. " (Level 50)")
-                totallevel = XP_BAR_COLORS:Colorize(" Level 50")
+                totallevel = XP_BAR_COLORS:Colorize( strformat(" <<1>> 50", GetString(SI_EXPERIENCE_LEVEL_LABEL)) ) -- "Level"
                 if QuestCombiner1 ~= "" then
                     -- QuestCombiner2 = (progressbrackets .. " (Level 50)")
                     if CA.SV.ExperienceShowLevel then
                         if CA.SV.ExperienceColorLevel then
-                            TotalLevelAdjust = XP_BAR_COLORS:Colorize( " Level 49")
+                            TotalLevelAdjust = XP_BAR_COLORS:Colorize( strformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL)) )
                         else
-                            TotalLevelAdjust = (" Level 49")
+                            TotalLevelAdjust = strformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL)) -- "Level"
                         end
                     end
                 end
@@ -3225,7 +3250,7 @@ end
 function CA.OnAchievementUpdated(eventCode, aId)
     local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementId(aId)
 
-    -- bail out if this achievement comes from unwanted category
+    -- Bail out if this achievement comes from unwanted category
     if topLevelIndex == 1 and not CA.SV.AchievementCategory1 then return end
     if topLevelIndex == 2 and not CA.SV.AchievementCategory2 then return end
     if topLevelIndex == 3 and not CA.SV.AchievementCategory3 then return end
@@ -3449,7 +3474,7 @@ function CA.FenceHelper()
         printToChat(laundergoldstring)
         printToChat(launderitemstring)
     else
-        printToChat(strfmt("%s → %s", launderitemstring, laundergoldstring))
+        printToChat(strformat("<<1>> → <<2>>", launderitemstring, laundergoldstring))
     end
 
     laundergoldstring = ""
@@ -3480,7 +3505,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = "|c0B610B"
-            local logPrefix = "Looted Item"
+            local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTEDITEM)
             -- CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
 
         elseif g_InventoryStacks[slotId] then -- EXISTING ITEM
@@ -3492,14 +3517,14 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                 local gainorloss = "|c0B610B"
-                local logPrefix = "Gained Stack"
+                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_GAINEDSTACK)
                 local icon, stack = GetItemInfo(bagId, slotId)
                 local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                 -- CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
                 g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
                 local gainorloss = (strfmt("|ca80700"))
-                local logPrefix = "Destroyed"
+                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_InventoryStacks[slotId].stack - change
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
@@ -3529,7 +3554,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = "|c0B610B"
-            local logPrefix = "Crafted"
+            local logPrefix = GetString(SI_ITEM_FORMAT_STR_CRAFTED)
             
             if itemType == ITEMTYPE_ADDITIVE
             or itemType == ITEMTYPE_ARMOR_BOOSTER
@@ -3551,7 +3576,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             or itemType == ITEMTYPE_WEAPON_TRAIT
             or itemType == ITEMTYPE_WOODWORKING_BOOSTER
             or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
-                logPrefix = "Received" end
+                logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) end -- "Receieved"
             
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
         elseif g_InventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
@@ -3562,7 +3587,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             local item = g_InventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local gainorloss = "|c0B610B"
-            local logPrefix = "Upgraded"
+            local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED)
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
         elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_InventoryStacks[slotId]
@@ -3571,7 +3596,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                local gainorloss = "|c0B610B"
-               local logPrefix = "Crafted"
+               local logPrefix = GetString(SI_ITEM_FORMAT_STR_CRAFTED)
                
                 if itemType == ITEMTYPE_ADDITIVE
                 or itemType == ITEMTYPE_ARMOR_BOOSTER
@@ -3593,7 +3618,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
                 or itemType == ITEMTYPE_WEAPON_TRAIT
                 or itemType == ITEMTYPE_WOODWORKING_BOOSTER
                 or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
-                    logPrefix = "Received" end
+                    logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) end -- "Receieved"
                
                local icon, stack = GetItemInfo(bagId, slotId)
                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
@@ -3602,7 +3627,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
                 local gainorloss = ("|ca80700")
-                local logPrefix = "Deconstructed"
+                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DECONSTRUCTED)
 
                 if itemType == ITEMTYPE_ADDITIVE
                 or itemType == ITEMTYPE_ARMOR_BOOSTER
@@ -3624,15 +3649,15 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
                 or itemType == ITEMTYPE_WEAPON_TRAIT
                 or itemType == ITEMTYPE_WOODWORKING_BOOSTER
                 or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
-                    logPrefix = "Used"
+                    logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED)
                 elseif itemType == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL
                 or itemType == ITEMTYPE_CLOTHIER_RAW_MATERIAL
                 or itemType == ITEMTYPE_WOODWORKING_RAW_MATERIAL then
-                    logPrefix = "Refined" end
+                    logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_REFINED) end
 
                 local change = (stackCountChange * -1)
                 local endcount = g_InventoryStacks[slotId].stack - change
-                if logPrefix ~= "Used" or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
+                if logPrefix ~= GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED) or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
                     g_InventoryStacks[slotId] = nil
                 else
@@ -3655,7 +3680,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = "|c0B610B"
-            local logPrefix = "Crafted - Bank"
+            local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_ITEM_FORMAT_STR_CRAFTED), GetString(SI_INTERACT_OPTION_BANK))
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
         elseif g_BankStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
             OldItemLink = g_BankStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
@@ -3665,7 +3690,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             local item = g_BankStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local gainorloss = "|c0B610B"
-            local logPrefix = "Upgraded - Bank"
+            local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED), GetString(SI_INTERACT_OPTION_BANK))
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
         elseif g_BankStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_BankStacks[slotId]
@@ -3674,7 +3699,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                local gainorloss = "|c0B610B"
-               local logPrefix = "Crafted - Bank"
+               local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_ITEM_FORMAT_STR_CRAFTED), GetString(SI_INTERACT_OPTION_BANK))
                local icon, stack = GetItemInfo(bagId, slotId)
                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
@@ -3682,7 +3707,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
                 local gainorloss = ("|ca80700")
-                local logPrefix = "Deconstructed - Bank"
+                local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_LUIE_CA_PREFIX_MESSAGE_DECONSTRUCTED), GetString(SI_INTERACT_OPTION_BANK))
 
         if itemType == ITEMTYPE_ADDITIVE
         or itemType == ITEMTYPE_ARMOR_BOOSTER
@@ -3704,15 +3729,15 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
         or itemType == ITEMTYPE_WEAPON_TRAIT
         or itemType == ITEMTYPE_WOODWORKING_BOOSTER
         or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
-            logPrefix = "Used"
+            logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED)
         elseif itemType == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL
         or itemType == ITEMTYPE_CLOTHIER_RAW_MATERIAL
         or itemType == ITEMTYPE_WOODWORKING_RAW_MATERIAL then
-            logPrefix = "Refined" end
+            logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_REFINED) end
 
                 local change = (stackCountChange * -1)
                 local endcount = g_BankStacks[slotId].stack - change
-                if logPrefix ~= "Used" or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
+                if logPrefix ~= GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED) or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
                     g_BankStacks[slotId] = nil
                 else
@@ -3731,18 +3756,20 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
         icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
         local receivedBy = "CRAFT"
         local gainorloss = "|c0B610B"
-        local logPrefix = "Received"
+        local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Received"
         local stack = stackCountChange
         local itemType = GetItemLinkItemType(itemlink)
 
         if stackCountChange < 1 then
             gainorloss = "|ca80700"
-            logPrefix = "Used"
+            logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED)
             stack = stackCountChange * -1
-            if itemType == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL or itemType == ITEMTYPE_CLOTHIER_RAW_MATERIAL or itemType == ITEMTYPE_WOODWORKING_RAW_MATERIAL then logPrefix = "Refined" end
+            if itemType == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL or itemType == ITEMTYPE_CLOTHIER_RAW_MATERIAL or itemType == ITEMTYPE_WOODWORKING_RAW_MATERIAL then
+                logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_REFINED)
+            end
         end
 
-        if logPrefix ~= "Used" or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss) end
+        if logPrefix ~= GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED) or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss) end
     end
 
     ItemWasDestroyed = false
@@ -3760,7 +3787,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = "|c0B610B"
-            local logPrefix = "Withdrew"
+            local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
             if InventoryOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) InventoryOn = false end
         --[[elseif g_InventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
             local icon, stack = GetItemInfo(bagId, slotId)
@@ -3769,7 +3796,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             local item = g_InventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local gainorloss = "|c0B610B"
-            local logPrefix = "Upgraded"
+            local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED)
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) -- Shouldn't need this for anything, but just in case. ]]-- Shouldn't be neccesary
         elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_InventoryStacks[slotId]
@@ -3778,7 +3805,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                local gainorloss = "|c0B610B"
-               local logPrefix = "Withdrew"
+               local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
                local icon, stack = GetItemInfo(bagId, slotId)
                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                 if InventoryOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) InventoryOn = false end
@@ -3786,7 +3813,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
                 local gainorloss = ("|ca80700")
-                local logPrefix = "Destroyed"
+                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_InventoryStacks[slotId].stack - change
                 if CA.SV.ShowDestroy and ItemWasDestroyed then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
@@ -3816,7 +3843,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = "|ca80700"
-            local logPrefix = "Deposited"
+            local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
             if BankOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) BankOn = false end
         --[[elseif g_BankStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
             OldItemLink = g_BankStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
@@ -3834,7 +3861,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                local gainorloss = "|ca80700"
-               local logPrefix = "Deposited"
+               local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
                local icon, stack = GetItemInfo(bagId, slotId)
                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                if BankOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) BankOn = false end
@@ -3842,7 +3869,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
                 local gainorloss = ("|ca80700")
-                local logPrefix = "Destroyed - Bank"
+                local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED), GetString(SI_INTERACT_OPTION_BANK) )
                 local change = (stackCountChange * -1)
                 local endcount = g_BankStacks[slotId].stack - change
                 if CA.SV.ShowDestroy and ItemWasDestroyed then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
@@ -3871,13 +3898,13 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
         icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
         local receivedBy = ""
         local gainorloss = "|c0B610B"
-        local logPrefix = "Withdrew"
+        local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
         local stack = stackCountChange
         local itemType = GetItemLinkItemType(itemlink)
 
         if stackCountChange < 1 then
             gainorloss = "|ca80700"
-            logPrefix = "Deposited"
+            logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
             stack = stackCountChange * -1
         end
 
@@ -3898,7 +3925,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
             local item = g_InventoryStacks[slotId]
             GuildBankCarry_icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             GuildBankCarry_gainorloss = "|c0B610B"
-            GuildBankCarry_logPrefix = "Withdrew"
+            GuildBankCarry_logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
             GuildBankCarry_receivedBy = ""
             GuildBankCarry_itemLink = item.itemlink
             GuildBankCarry_stackCount = stackCountChange or 1
@@ -3910,7 +3937,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
             local item = g_InventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local gainorloss = "|c0B610B"
-            local logPrefix = "Upgraded"
+            local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED)
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) -- Shouldn't need this for anything, but just in case. ]]-- Shouldn't be neccesary
         elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_InventoryStacks[slotId]
@@ -3921,7 +3948,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                GuildBankCarry_icon = seticon
                GuildBankCarry_gainorloss = "|c0B610B"
-               GuildBankCarry_logPrefix = "Withdrew"
+               GuildBankCarry_logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
                GuildBankCarry_receivedBy = ""
                GuildBankCarry_itemLink = item.itemlink
                GuildBankCarry_stackCount = stackCountChange or 1
@@ -3930,12 +3957,12 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
                 local gainorloss = ("|ca80700")
-                local logPrefix = "Destroyed"
+                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_InventoryStacks[slotId].stack - change
                 GuildBankCarry_icon = seticon
                 GuildBankCarry_gainorloss = "|ca80700"
-                GuildBankCarry_logPrefix = "Despoited"
+                GuildBankCarry_logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
                 GuildBankCarry_receivedBy = ""
                 GuildBankCarry_itemLink = item.itemlink
                 GuildBankCarry_stackCount = change
@@ -3956,14 +3983,14 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
     if bagId == BAG_VIRTUAL then
         local receivedBy = ""
         local gainorloss = "|c0B610B"
-        local logPrefix = "Received"
+        local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Received"
         local itemlink = CA.GetItemLinkFromItemId(slotId)
         local icon = GetItemLinkInfo(itemlink)
         local seticon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
 
         GuildBankCarry_icon = seticon
         GuildBankCarry_gainorloss = "|c0B610B"
-        GuildBankCarry_logPrefix = "Withdrew"
+        GuildBankCarry_logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
         GuildBankCarry_receivedBy = ""
         GuildBankCarry_itemLink = itemlink
         GuildBankCarry_stackCount = stackCountChange or 1
@@ -3984,7 +4011,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = "|c0B610B"
-            local logPrefix = "Laundered"
+            local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LAUNDERED)
             LaunderCheck = true
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
         elseif g_InventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
@@ -3995,7 +4022,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             local itemType = GetItemLinkItemType(item.itemlink)
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local gainorloss = "|c0B610B"
-            local logPrefix = "Laundered"
+            local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LAUNDERED)
             LaunderCheck = true
             if itemType == ITEMTYPE_WEAPON or itemType == ITEMTYPE_ARMOR or itemType == ITEMTYPE_JEWELRY then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) end
         elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
@@ -4005,7 +4032,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                 local gainorloss = "|c0B610B"
-                local logPrefix = "Laundered"
+                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LAUNDERED)
                 local icon, stack = GetItemInfo(bagId, slotId)
                 local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                 LaunderCheck = true
@@ -4013,7 +4040,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
                 g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
                 local gainorloss = ("|ca80700")
-                local logPrefix = "Destroyed"
+                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_InventoryStacks[slotId].stack - change
                 --CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
@@ -4036,7 +4063,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
         icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
         local receivedBy = ""
         local gainorloss = "|c0B610B"
-        local logPrefix = "Laundered"
+        local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LAUNDERED)
         local stack = stackCountChange
         local itemType = GetItemLinkItemType(itemlink)
 
@@ -4059,11 +4086,11 @@ end
 
 g_JusticeStacks = {}
 
-local ConfiscateMessage = ("Bounty confiscated!")
+local ConfiscateMessage = (GetString(SI_LUIE_CA_JUSTICE_CONFISCATED_MSG))
 
 function CA.JusticeStealRemove(eventCode)
     if CA.SV.MiscConfiscate and eventCode == 131555 then
-        ConfiscateMessage = (GetString(SI_LUIE_CA_JUSTICE_CONFISCATED_BOUNTY_ITEMS_MSG))
+        ConfiscateMessage = GetString(SI_LUIE_CA_JUSTICE_CONFISCATED_BOUNTY_ITEMS_MSG)
     end
 
     if stealstring == "" then return end
@@ -4102,7 +4129,7 @@ function CA.JusticeRemovePrint()
                 local stack = inventoryitem.stack
                 local receivedBy = "CRAFT"
                 local gainorloss = (strfmt("|ca80700"))
-                local logPrefix = "Confiscated"
+                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_CONFISCATED)
                 if CA.SV.ShowConfiscate then
                     CA.LogItem(logPrefix, seticon, inventoryitem.itemlink, itemType, stack or 1, receivedBy, gainorloss)
                 end

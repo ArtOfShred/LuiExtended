@@ -1,3 +1,12 @@
+Version 4.99f
+- Fixed a major error with the option to turn off the display of stamina/magicka bar labels or bar display. Now these features work as intended.
+- Fixed an issue where the party leader name on group frames would clip into the other icons.
+- Fixed an annoying issue where weapon and armor trait crafting items, as well as style materials would display their trait/style.
+- Fixed an issue where withdrawing crafting materials from the guild bank was throwing UI errors (if you have a craft bag, the materials attempt to go into it).
+- Fixed an issue where removing an item from trade with items remaining in a later slot index would try to display the nonexistent item in the slot and throw an error.
+- Fixed broken saved variables in LuiExtended.lua that affected the functionality of chat system settings.
+- Fixed the Chat Announcements toggle option to hide materials consumed by crafting - now items will be hidden with the option off, and displayed with the option on.
+
 Version 4.99e
 - Sending mail with Gold currency change announcements toggled on, but currency icons off will no longer throw a UI error from attempting to reference an invalid variable.
 - Added a description of the SLASH COMMANDS available in LUI to the main Addon settings window.
