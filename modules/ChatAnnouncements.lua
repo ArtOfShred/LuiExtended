@@ -19,20 +19,20 @@ CA.D = {
     GoldChange                    = true,
     GoldColor                     = { 1, 1, 0.2, 1 },
     TotalGoldChange               = false,
-    GoldName                      = "Gold",
+    GoldName                      = GetString(SI_CURRENCY_GOLD),
     AlliancePointChange           = true,
     AlliancePointFilter           = 0,
     AlliancePointColor            = { 0.164706, 0.862745, 0.133333, 1 },
     TotalAlliancePointChange      = false,
-    AlliancePointName             = "AP",
+    AlliancePointName             = GetString(SI_CURRENCY_ALLIANCE_POINTS),
     TelVarStoneChange             = true,
     TelVarStoneColor              = { 0.368627, 0.643137, 1, 1 },
     TotalTelVarStoneChange        = false,
-    TelVarStoneName               = "TV",
+    TelVarStoneName               = GetString(SI_CURRENCY_TELVAR_STONES),
     WritVoucherChange             = true,
     WritVoucherColor              = { 1, 1, 1, 1 },
     TotalWritVoucherChange        = false,
-    WritVoucherName               = "Writ Voucher",
+    WritVoucherName               = GetString(SI_CURRENCY_WRIT_VOUCHERS),
     Loot                          = true,
     LootIcons                     = true,
     LootVendor                    = true,
@@ -59,16 +59,16 @@ CA.D = {
     CurrencyContextToggle         = false,
     CurrencyContextMessageUp      = "",
     CurrencyContextMessageDown    = "",
-    CurrencyTotalMessage          = "[New Total]",
+    CurrencyTotalMessage          = GetString(SI_LUIE_CA_DEFAULTVARS_CURRENCYTOTALMESSAGE),
     ExperienceLevelUp             = true,
     LevelUpIcon                   = true,
     Experience                    = true,
-    ExperienceContextName         = "[Earned]",
+    ExperienceContextName         = GetString(SI_LUIE_CA_DEFAULTVARS_EXPERIENCECONTEXTNAME),
     ExperienceName                = "XP",
     ExperienceIcon                = true,
     ExperienceShowProgress        = true,
     ExperienceProgressColor       = true,
-    ExperienceProgressName        = "[Progress]",
+    ExperienceProgressName        = GetString(SI_LUIE_CA_DEFAULTVARS_EXPERIENCEPROGRESSNAME),
     ExperienceShowPBrackets       = true,
     ExperienceShowDecimal         = true,
     ExperienceShowLevel           = true,
@@ -510,7 +510,7 @@ function CA.ActivityStatusUpdate(eventCode, status)
     --d("status update:" .. status)
     if ShowActivityStatus then
         if status == ACTIVITY_FINDER_STATUS_NONE and WeAreQueued == true then
-            printToChat("You are no longer queued in the group finder.")
+            printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_QUEUE_END))
             WeAreQueued = false
             ShowStatusDropMember = false
         end
@@ -806,27 +806,27 @@ function CA.OnGroupInviteResponse(eventCode, inviterName, response, inviterDispl
     if response == 2 then
         printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_DECLINED))
     elseif response == 3 then
-        printToChat("You cannot extend a group invitation to a player that is ignoring you.")
+        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_IGNORE))
     elseif response == 4 then -- Add some kind of override here if you try to invite yourself
-        printToChat("You cannot extend a group invitation to a player that already has a pending group invite.")
+        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_PENDING))
     elseif response == 5 then -- Add some kind of override here if you try to invite yourself
-        printToChat("You cannot extend a group invitation to a player that is already in a group.")
+        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_ALREADYGRPD1))
     elseif response == 6 then
-        printToChat("The group is already full.")
+        printToChat(GetString(SI_GROUPINVITERESPONSE6))
     elseif response == 7 then
-        printToChat("You cannot invite yourself to a group.")
+        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_CANTINVSELF))
     elseif response == 8 then
-        printToChat("Failed to extend a group invitation, only the group leader can invite.")
+        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_NOTLEADER))
     elseif response == 9 then
-        printToChat("You cannot extend a group invitation to a player that is a member of the opposite faction.")
+        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_OPPOSITEFACTION))
     elseif response == 11 then
-        printToChat("Account type is not set to allow group creation.")
+        printToChat(GetString(SI_GROUPINVITERESPONSE11))
     elseif response == 12 then
-        printToChat("Failed to join the group.")
+        printToChat(GetString(SI_GROUPINVITERESPONSE12))
     elseif response == 13 then
-        printToChat("Unable to join - the group is full.") -- Not sure if this is even used, doesn't trigger when player tries to join a group already full of 24, response 6 does.
+        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_UNUSEDFULL)) -- Not sure if this is even used, doesn't trigger when player tries to join a group already full of 24, response 6 does.
     elseif response == 14 then
-        printToChat("Unable to join - you are already in a group.")
+        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_ALREADYGRPD2))
     end
 end
 
@@ -1247,7 +1247,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             if CA.SV.CurrencyContextToggle then -- Override with custom string if enabled
                 message = ( CA.SV.CurrencyContextMessageDown )
             else
-                message = ( "Postage" )
+                message = ( GetString(SI_GAMEPAD_MAIL_SEND_POSTAGE_LABEL) )
             end
             if CA.SV.GoldChange then
                 printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, postagesyntax, total))
@@ -1578,7 +1578,7 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
     if UpOrDown > 0 then
         color = "|c0B610B"
         changetype = CommaValue (newWritVouchers - oldWritVouchers)
-        message = ( "Received" )
+        message = ( GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) ) -- Received
     else
         color = "|ca80700"
         changetype = CommaValue (oldWritVouchers - newWritVouchers)
@@ -1837,11 +1837,11 @@ end
 --------------------------------------------------------------
 
 function CA.MiscAlertLockFailed(eventCode)
-    printToChat("Lockpick failed!")
+    printToChat(GetString(SI_LUIE_CA_MISC_LOCKPICK_FAILED))
 end
 
 function CA.MiscAlertLockSuccess(eventCode)
-    printToChat("Lockpick successful!")
+    printToChat(GetString(SI_LUIE_CA_MISC_LOCKPICK_SUCCESS))
 end
 
 function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source)
@@ -2131,9 +2131,15 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
     -- Set prefix based on Looted/Pickpocket/Received
     local logPrefix = "Looted"
 
-    if ( isPickpocketLoot ) then logPrefix = "Pickpocket" end
-    if ( receivedBy == nil ) then logPrefix = "Received" end
-    if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
+    if ( isPickpocketLoot ) then
+        logPrefix = GetString(SI_GAMECAMERAACTIONTYPE21) -- "Pickpocket"
+    end
+    if ( receivedBy == nil ) then
+        logPrefix = GetStrring(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Received"
+    end
+    if CA.SV.ItemContextToggle then
+        logPrefix = ( CA.SV.ItemContextMessage )
+    end
 
     local gainorloss = "|c0B610B"
 
@@ -2582,7 +2588,7 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
     combostring = ""
     local NumMails = 0
     local gainorloss = "|c0B610B"
-    local logPrefix = "Received"
+    local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- Received
     local receivedBy = ""
     if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
 
@@ -2606,7 +2612,7 @@ end
 
 function PrintMailAttachmentsIfNoGold()
     if CA.SV.MiscMail and MailStringPart1 ~= "" then
-        printToChat(strformat("<<1>>.", MailStringPart1) )
+        printToChat(strformat("<<1>>.", MailStringPart1) ) -- Append a dot
     end
     MailStringPart1 = "" -- Important to clear this string, if we took a mail with only items attached, we don't want the next mail with gold to falsely show that attachments were taken!
 end
@@ -2706,7 +2712,7 @@ function CA.LevelUpdateHelper()
         CurrentLevel = GetPlayerChampionPointsEarned()
         if CurrentLevel < 10 then CurrentLevel = 10 end -- Probably don't really need this here, but it's not going to hurt.
         XPLevel = GetNumChampionXPInChampionPoint(CurrentLevel)
-        LevelContext = ( "Champion" )
+        LevelContext = ( GetString(SI_MAIN_MENU_CHAMPION) )
     else
         CurrentLevel = GetUnitLevel ("player")
         XPLevel = GetNumExperiencePointsInLevel(CurrentLevel)
@@ -2911,7 +2917,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
             CurrentLevel = GetPlayerChampionPointsEarned()
             if CurrentLevel < 10 then CurrentLevel = 10 end -- Very important, if this player has never hit Champion level before, set the minimum possible value when hitting level 50.
             XPLevel = GetNumChampionXPInChampionPoint(CurrentLevel)
-            LevelContext = ( "Champion" )
+            LevelContext = ( GetString(SI_MAIN_MENU_CHAMPION) )
         else
             CurrentLevel = CurrentLevel + 1
             XPLevel = GetNumExperiencePointsInLevel(CurrentLevel)
@@ -3225,7 +3231,7 @@ end
 function CA.OnAchievementUpdated(eventCode, aId)
     local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementId(aId)
 
-    -- bail out if this achievement comes from unwanted category
+    -- Bail out if this achievement comes from unwanted category
     if topLevelIndex == 1 and not CA.SV.AchievementCategory1 then return end
     if topLevelIndex == 2 and not CA.SV.AchievementCategory2 then return end
     if topLevelIndex == 3 and not CA.SV.AchievementCategory3 then return end
@@ -3449,7 +3455,7 @@ function CA.FenceHelper()
         printToChat(laundergoldstring)
         printToChat(launderitemstring)
     else
-        printToChat(strfmt("%s → %s", launderitemstring, laundergoldstring))
+        printToChat(strformat("<<1>> → <<2>>", launderitemstring, laundergoldstring))
     end
 
     laundergoldstring = ""
@@ -3551,7 +3557,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             or itemType == ITEMTYPE_WEAPON_TRAIT
             or itemType == ITEMTYPE_WOODWORKING_BOOSTER
             or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
-                logPrefix = "Received" end
+                logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) end -- Received
             
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
         elseif g_InventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
@@ -3593,7 +3599,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
                 or itemType == ITEMTYPE_WEAPON_TRAIT
                 or itemType == ITEMTYPE_WOODWORKING_BOOSTER
                 or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
-                    logPrefix = "Received" end
+                    logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) end -- Received
                
                local icon, stack = GetItemInfo(bagId, slotId)
                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
@@ -3731,7 +3737,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
         icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
         local receivedBy = "CRAFT"
         local gainorloss = "|c0B610B"
-        local logPrefix = "Received"
+        local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- Received
         local stack = stackCountChange
         local itemType = GetItemLinkItemType(itemlink)
 
@@ -3956,7 +3962,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
     if bagId == BAG_VIRTUAL then
         local receivedBy = ""
         local gainorloss = "|c0B610B"
-        local logPrefix = "Received"
+        local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- Received
         local itemlink = CA.GetItemLinkFromItemId(slotId)
         local icon = GetItemLinkInfo(itemlink)
         local seticon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
@@ -4059,7 +4065,7 @@ end
 
 g_JusticeStacks = {}
 
-local ConfiscateMessage = ("Bounty confiscated!")
+local ConfiscateMessage = (GetString(SI_LUIE_CA_JUSTICE_CONFISCATED_MSG))
 
 function CA.JusticeStealRemove(eventCode)
     if CA.SV.MiscConfiscate and eventCode == 131555 then

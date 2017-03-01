@@ -1,4 +1,10 @@
 -- Chat Announcement Component
+ZO_CreateStringId("SI_LUIE_CA_DEFAULTVARS_CURRENCYTOTALMESSAGE",        "[New Total]")
+ZO_CreateStringId("SI_LUIE_CA_DEFAULTVARS_EXPERIENCECONTEXTNAME",       "[Earned]")
+ZO_CreateStringId("SI_LUIE_CA_DEFAULTVARS_EXPERIENCEPROGRESSNAME",      "[Progress]")
+
+
+
 ZO_CreateStringId("SI_LUIE_CA_GUILD_MEMBER_ADDED",                      "|cFEFEFE<<1>>|r has joined <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_MEMBER_REMOVED",                    "|cFEFEFE<<1>>|r has left <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_MOTD_CHANGED",                      "The message of the day for <<1>> has changed:\n<<2>>")
@@ -20,6 +26,14 @@ ZO_CreateStringId("SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START",              "A vote 
 ZO_CreateStringId("SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL",               "A vote to kick |cFEFEFE<<1>>|r from the group has failed.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_RECEIVED",                   "|cFEFEFE<<1>>|r has invited you to join a group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_DECLINED",                   "Your group invitation was declined.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_FAILED_IGNORE",              "You cannot extend a group invitation to a player that is ignoring you.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_FAILED_PENDING",             "You cannot extend a group invitation to a player that already has a pending group invite.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_FAILED_ALREADYGRPD1",        "You cannot extend a group invitation to a player that is already in a group.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_FAILED_ALREADYGRPD2",        "Unable to join - you are already in a group.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_FAILED_CANTINVSELF",         "You cannot invite yourself to a group.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_FAILED_NOTLEADER",           "Failed to extend a group invitation, only the group leader can invite.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_FAILED_OPPOSITEFACTION",     "You cannot extend a group invitation to a player that is a member of the opposite faction.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_FAILED_UNUSEDFULL",          "Unable to join - the group is full.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_LEADER_CHANGED",                    "|cFEFEFE<<1>>|r is now the group leader!")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_LEADER_CHANGED_SELF",               "You are now the group leader!")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_JOIN",                       "|cFEFEFE<<1>>|r has joined the group.")
@@ -31,7 +45,7 @@ ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF",                "You hav
 ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_REPLACEMENT_FOUND",          "A replacement party member has been found.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_DISBAND_MSG",                       "The group has been disbanded.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_QUEUE_START",                "You are now queued in the group finder.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_QUEUE_END",                 "You are no longer queued in the group finder.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_QUEUE_END",                  "You are no longer queued in the group finder.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MSG",                        "|cFEFEFE<<1>>|r has invited you to trade.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MSG_SELF",                   "You have invited |cFEFEFE<<1>>|r to trade.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_ACCEPTED",                   "Trade invite accepted.")
@@ -60,8 +74,14 @@ ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE1",                        "Champio
 ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE2",                        "Champion Level Achieved! <<1>><<2>> <<3>>")
 ZO_CreateStringId("SI_LUIE_CA_JUSTICE_CONFISCATED_MSG",                 "Bounty confiscated!")
 ZO_CreateStringId("SI_LUIE_CA_JUSTICE_CONFISCATED_BOUNTY_ITEMS_MSG",    "Bounty and stolen items confiscated!")
-
+ZO_CreateStringId("SI_LUIE_CA_MISC_LOCKPICK_SUCCESS",                   "Lockpick successful!")
+ZO_CreateStringId("SI_LUIE_CA_MISC_LOCKPICK_FAILED",                    "Lockpick failed!")
 ZO_CreateStringId("SI_LUIE_CA_DEBUG_MSG_CURRENCY",                      "Currency Change Reason <<1>> Triggered - Please post on the LUI Extended comments section on ESOUI.com describing what caused this message. Thanks!")
+
+
+
+
+
 
 -- Chat Announcement Component Default overwrites
 ZO_CreateStringId("SI_LUIE_GROUPINVITERESPONSE0",                       "Could not find a player named |cFEFEFE\"<<1>>\"|r to invite.")
