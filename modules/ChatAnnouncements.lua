@@ -2801,16 +2801,16 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
 
             if CA.SV.ExperienceLevelUp and Crossover == 0 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted))
+                    printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel))
+                    printToChat(strformat("<<1>><<2>><<3>> <<4>>", GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE), icon, LevelContext, CurrentLevel))
                 end
             end
             if CA.SV.ExperienceLevelUp and Crossover == 1 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat(GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted))
+                    printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat(GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel))
+                    printToChat(strformat("<<1>><<2>><<3>> <<4>>", GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE), icon, LevelContext, CurrentLevel))
                 end
             end
         else
@@ -2824,16 +2824,16 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
 
             if CA.SV.ExperienceLevelUp and Crossover == 0 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted))
+                    printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel))
+                    printToChat(strformat("<<1>><<2>><<3>> <<4>>", GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE), icon, LevelContext, CurrentLevel))
                 end
             end
             if CA.SV.ExperienceLevelUp and Crossover == 1 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat(GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted))
+                    printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat(GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel))
+                    printToChat(strformat("<<1>><<2>><<3>> <<4>>", GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE), icon, LevelContext, CurrentLevel))
                 end
             end
 

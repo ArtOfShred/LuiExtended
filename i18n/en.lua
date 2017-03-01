@@ -1,6 +1,5 @@
 -- Chat Announcement Component
-ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE1",                        "Champion Level Achieved! <<1>><<2>>")
-ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE2",                        "Champion Level Achieved! <<1>><<2>> <<3>>")
+ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE",                         "Champion Level Achieved!")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_CONFISCATED",            "Confiscated")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DECONSTRUCTED",          "Deconstructed")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSITED",              "Desposited")
@@ -90,8 +89,7 @@ ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MSG",                        "|cFEFEF
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MSG_SELF",                   "You have invited |cFEFEFE<<1>>|r to trade.")
 ZO_CreateStringId("SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL",               "A vote to kick |cFEFEFE<<1>>|r from the group has failed.")
 ZO_CreateStringId("SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START",              "A vote to kick |cFEFEFE<<1>>|r from the group has started.")
-ZO_CreateStringId("SI_LUIE_CA_XP_LVL_ANNOUNCE1",                        "You have reached <<1>><<2>>")
-ZO_CreateStringId("SI_LUIE_CA_XP_LVL_ANNOUNCE2",                        "You have reached <<1>><<2>> <<3>>")
+ZO_CreateStringId("SI_LUIE_CA_XP_LVL_ANNOUNCE",                         "You have reached")
 
 -- Chat Announcement Component Default overwrites
 ZO_CreateStringId("SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF",   "|cFEFEFE<<1>>|r has logged off with |cFEFEFE<<2>>|r.")
