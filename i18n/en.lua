@@ -1,6 +1,4 @@
 -- Chat Announcement Component
-ZO_CreateStringId("SI_LUIE_CA_CANT_THINK_OF_NAME_MSG1",                 "<<1>> and <<2>> gold.") -- TODO: Find proper ID name
-ZO_CreateStringId("SI_LUIE_CA_CANT_THINK_OF_NAME_MSG2",                 "<<1>> and gold.") -- TODO: Find proper ID name
 ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE1",                        "Champion Level Achieved! <<1>><<2>>")
 ZO_CreateStringId("SI_LUIE_CA_CP_LVL_ANNOUNCE2",                        "Champion Level Achieved! <<1>><<2>> <<3>>")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_CONFISCATED",            "Confiscated")
@@ -61,6 +59,8 @@ ZO_CreateStringId("SI_LUIE_CA_GUILD_RANK_DOWN",                         "demoted
 ZO_CreateStringId("SI_LUIE_CA_GUILD_RANK_UP",                           "promoted")
 ZO_CreateStringId("SI_LUIE_CA_JUSTICE_CONFISCATED_BOUNTY_ITEMS_MSG",    "Bounty and stolen items confiscated!")
 ZO_CreateStringId("SI_LUIE_CA_JUSTICE_CONFISCATED_MSG",                 "Bounty confiscated!")
+ZO_CreateStringId("SI_LUIE_CA_CANT_THINK_OF_NAME_MSG1",                 "<<1>> and <<2>> gold.") -- TODO: Find proper ID name
+ZO_CreateStringId("SI_LUIE_CA_CANT_THINK_OF_NAME_MSG2",                 "<<1>> and gold.") -- TODO: Find proper ID name
 ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_GOLD_SENT",                      "COD Payment sent!")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_PAYMENT_MSG",                    "COD Payment")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_SENT_SUCCESS",                   "COD sent!")

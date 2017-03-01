@@ -413,25 +413,20 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_GROUPINVITERESPONSE10, GetString(SI_LUIE_GROUPINVITERESPONSE10), 1)
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GROUP, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_GROUP), 1)
         SafeAddString(SI_GROUPLEAVEREASON1, GetString(SI_LUIE_GROUPLEAVEREASON1), 2) 
-
         -- Trade String Replacements
         SafeAddString(SI_TRADE_INVITE_CONFIRM, GetString(SI_LUIE_TRADE_INVITE_CONFIRM), 1) -- Fixes default Trade messages to match our syntax.
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_TRADE, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_TRADE), 1) -- Fixes default Trade messages to match our syntax.
-
         -- Friend Invite String Replacements
         SafeAddString(SI_FRIENDS_LIST_IGNORE_ADDED, GetString(SI_LUIE_FRIENDS_LIST_IGNORE_ADDED), 1) -- Fixes default Ignore List messages to match our syntax.
         SafeAddString(SI_FRIENDS_LIST_IGNORE_REMOVED, GetString(SI_LUIE_FRIENDS_LIST_IGNORE_REMOVED), 1) -- Fixes default Ignore List messages to match our syntax.
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST), 1) -- Default ZOS string was missing a period.
-
         SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_ON, GetString(SI_LUIE_FRIENDS_LIST_FRIEND_LOGGED_ON), 1)
         SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON, GetString(SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON), 1)
         SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_OFF, GetString(SI_LUIE_FRIENDS_LIST_FRIEND_LOGGED_OFF), 1)
         SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF, GetString(SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF), 1)
-
         -- Guild Invite String Replacements
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST), 1) -- Update syntax for guild invite message to match our chat syntax
         SafeAddString(SI_GUILD_ROSTER_INVITED_MESSAGE, GetString(SI_LUIE_GUILD_ROSTER_INVITED_MESSAGE), 1) -- Update syntax for guild invitation sent message to match group syntax.
-
         -- Quest Share String Replacements
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE), 3)
     end
@@ -713,6 +708,7 @@ end
 
 --[[ Would love to be able to use this function but its too buggy for now. Spams every single time someone updates their role, as well as when people join/leave group. If the player joins a large party for the first time then
 this broadcasts the role of every single player in the party. Too bad this doesn't only trigger when someone in group actually updates their role instead.
+No localization support yet.
 function CA.GMRC(eventCode, unitTag, dps, healer, tank)
 
 local updatedRoleName = GetUnitName(unitTag)
@@ -765,6 +761,7 @@ end
 
 --[[ Would love to be able to use this function but its too buggy for now. When a single player disconnects for the first time in the group, another player will see a message for the online/offline status of every other
 player in the group. Possibly reimplement and limit it to 2 player groups?
+No localization support yet.
 function CA.GMCS(eventCode, unitTag, isOnline)
 
     local onlineRoleName = GetUnitName(unitTag)
@@ -1151,9 +1148,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
 
     if CA.SV.CurrencyContextToggle then -- Override with custom string if enabled
         if color == ( "|c0B610B" ) then
-            message = ( CA.SV.CurrencyContextMessageUp )
+            message = CA.SV.CurrencyContextMessageUp
         else
-            message = ( CA.SV.CurrencyContextMessageDown )
+            message = CA.SV.CurrencyContextMessageDown
         end
     end
 
@@ -1179,9 +1176,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         elseif CA.SV.MiscMail and reason == 2 then
             if not MailStop and MailStringPart1 ~= "" then
                 if not CA.SV.GoldChange then
-                    printToChat(strformat("<<1>> and <<2>> gold.", MailStringPart1, changetype)) -- SI_LUIE_CA_CANT_THINK_OF_NAME_MSG1
+                    printToChat(strformat(GetString(SI_LUIE_CA_CANT_THINK_OF_NAME_MSG1), MailStringPart1, changetype))
                 else
-                    printToChat(strformat("<<1>> and gold.", MailStringPart1)) -- SI_LUIE_CA_CANT_THINK_OF_NAME_MSG2
+                    printToChat(strformat(GetString(SI_LUIE_CA_CANT_THINK_OF_NAME_MSG2), MailStringPart1))
                 end
             elseif not MailStop then
                 if not CA.SV.GoldChange then
