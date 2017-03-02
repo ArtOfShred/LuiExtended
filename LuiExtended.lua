@@ -123,6 +123,14 @@ local function LUIE_RegisterEvents()
     EVENT_MANAGER:RegisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED, LUIE_LoadScreen)
     EVENT_MANAGER:RegisterForEvent(LUIE.name, EVENT_ACTION_LAYER_POPPED, LUIE_ToggleVisibility)
     EVENT_MANAGER:RegisterForEvent(LUIE.name, EVENT_ACTION_LAYER_PUSHED, LUIE_ToggleVisibility)
+    
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_SOCIAL_ERROR, LUIE.SocialError)
+end
+
+function LUIE.SocialError(eventCode, reason)
+
+if reason ~= 1 then LUIE.PrintToChat(zo_strformat(GetString("SI_SOCIALACTIONRESULT", reason))) end
+
 end
 
 -- LuiExtended Initialization
@@ -378,151 +386,117 @@ function LUIE.Disband()
     end
 end
 
-function LUIE.SlashGuildInvite1(option)
-    if option ~= "" then
-        GuildInvite(1, option)
+local guilds = GetNumGuilds()
 
-        -- If the player doesn't have guild invite permissions, display a message in chat indicating this.
-        if not DoesPlayerHaveGuildPermission(1, GUILD_PERMISSION_INVITE) then
-            LUIE.PrintToChat(GetString(SI_SOCIALACTIONRESULT17)) -- "You are not permitted to invite members to the guild."
-            return
+function LUIE.SlashGuildInvite(option)
+
+    if option == "" then LUIE.PrintToChat("You must enter a guild number followed by a character or account name to invite to the guild.") return end -- If no input was entered, display an error and end.
+    
+    -- Parse input
+    local options = {}
+    local searchResult = { string.match(option,"^(%S*)%s*(.-)$") }
+    for i,v in pairs(searchResult) do
+        if (v ~= nil and v ~= "") then
+            options[i] = v
         end
+    end
 
-        -- If the guild is full, display a message in chat indicating this.
-        if GetNumGuildMembers(1) == MAX_GUILD_MEMBERS then
-            LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_GUILD_FULL_MSG))
-            return
-        end
+    local guildnumber = options[1]
+    local name = options[2]
+    
+    if name == nil then LUIE.PrintToChat("You must enter a guild number followed by a character or account name to invite to the guild.") return end -- If no name was entered, display an error and end.
+    
+    if guildnumber == "1" then guildnumber = 1
+    elseif guildnumber == "2" then guildnumber = 2
+    elseif guildnumber == "3" then guildnumber = 3
+    elseif guildnumber == "4" then guildnumber = 4
+    elseif guildnumber == "5" then guildnumber = 5
+    else LUIE.PrintToChat ("You must enter a valid guild number to invite a player.") return end -- If we enter anything outside of the range of 1-5, display an error and end.
+    if guildnumber > guilds then LUIE.PrintToChat ("You must enter a valid guild number to invite a player.") return end -- If we try to invite a player to a guild we don't have display an error and end.
+    
+        GuildInvite(guildnumber, name)
 
-        local guildName = GetGuildName(1)
+        local guildName = GetGuildName(guildnumber)
         local allianceIconSize = 16
-        local guildAlliance = GetGuildAlliance(1)
+        local guildAlliance = GetGuildAlliance(guildnumber)
         local guildNameAlliance = LUIE.ChatAnnouncements.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-        LUIE.PrintToChat(zo_strformat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE), option, guildNameAlliance))
-	end
+        LUIE.PrintToChat(zo_strformat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE), name, guildNameAlliance))
 end
 
-function LUIE.SlashGuildInvite2(option)
-    if option ~= "" then
-        GuildInvite(2, option)
+function LUIE.GQuit(option)
+    
+    if option == "1" then option = 1
+    elseif option == "2" then option = 2
+    elseif option == "3" then option = 3
+    elseif option == "4" then option = 4
+    elseif option == "5" then option = 5
+    else LUIE.PrintToChat ("You must enter a valid guild number to leave a guild.") return end
+    if option > guilds then LUIE.PrintToChat ("You must enter a valid guild number to leave a guild.") return end -- If we try to invite a player to a guild we don't have display an error and end.
 
-        -- If the player doesn't have guild invite permissions, display a message in chat indicating this.
-        if not DoesPlayerHaveGuildPermission(2, GUILD_PERMISSION_INVITE) then
-            LUIE.PrintToChat(GetString(SI_SOCIALACTIONRESULT17)) -- "You are not permitted to invite members to the guild."
-            return
+    GuildLeave(option) -- If neither of the above errors were triggered, leave the guild number.
+    
+end
+
+function LUIE.GKick(option)
+
+    if option == "" then LUIE.PrintToChat("You must enter a guild number followed by a character or account name to kick from the guild.") return end -- If no input was entered, display an error and end.
+    
+    -- Parse input
+    local options = {}
+    local searchResult = { string.match(option,"^(%S*)%s*(.-)$") }
+    for i,v in pairs(searchResult) do
+        if (v ~= nil and v ~= "") then
+            options[i] = v
         end
+    end
 
-        -- If the guild is full, display a message in chat indicating this.
-        if GetNumGuildMembers(2) == MAX_GUILD_MEMBERS then
-            LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_GUILD_FULL_MSG))
-            return
-        end
+    local guildnumber = options[1]
+    local name = options[2]
+    
+    if name == nil then LUIE.PrintToChat("You must enter a guild number followed by a character or account name to kick from the guild.") return end -- If no name was entered, display an error and end.
+    
+    if guildnumber == "1" then guildnumber = 1
+    elseif guildnumber == "2" then guildnumber = 2
+    elseif guildnumber == "3" then guildnumber = 3
+    elseif guildnumber == "4" then guildnumber = 4
+    elseif guildnumber == "5" then guildnumber = 5
+    else LUIE.PrintToChat ("You must enter a valid guild number to kick a player.") return end -- If we enter anything outside of the range of 1-5, display an error and end.
+    if guildnumber > guilds then LUIE.PrintToChat ("You must enter a valid guild number to kick a player.") return end -- If we try to invite a player to a guild we don't have display an error and end.
+    
+    -- Index guild members so we can use character name as a kick option
+    local guildNumbers = GetNumGuildMembers(guildnumber)
+    local compareChar = string.lower(name)
+    
+    g_guildNamesTable = { }
+    
+    for i = 1,guildNumbers do
+        local displayName = GetGuildMemberInfo(guildnumber, i)
+        local _, characterName = GetGuildMemberCharacterInfo(guildnumber, i)
+    
+        local compareDisplay = string.lower(displayName)
+        local compareCharacter = string.lower(characterName)
+        
+        compareCharacter = string.gsub(compareCharacter,"%^%a+","")
+        
+        g_guildNamesTable[i] = { displayName=displayName, characterName=characterName, compareDisplay=compareDisplay, compareCharacter=compareCharacter}
+        --LUIE.PrintToChat(compareDisplay .. compareCharacter)
+        --LUIE.PrintToChat("comparing vs... " .. compareChar)
+    end
+    
+    local finalName = ""
+    
+    for i = 1, #g_guildNamesTable do
+        local comparing = g_guildNamesTable[i]
+        if comparing.compareDisplay == compareChar or comparing.compareCharacter == compareChar then finalName = comparing.displayName break end
+    end
 
-        local guildName = GetGuildName(2)
-        local allianceIconSize = 16
-        local guildAlliance = GetGuildAlliance(2)
-        local guildNameAlliance = LUIE.ChatAnnouncements.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-        LUIE.PrintToChat(zo_strformat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE), option, guildNameAlliance))
-	end
+    if finalName ~= "" then
+        GuildRemove(guildnumber, finalName)
+    else
+        LUIE.PrintToChat("You must enter a valid character or account name to kick from the guild.")
+    end
+    
 end
-
-function LUIE.SlashGuildInvite3(option)
-	if option ~= "" then
-        GuildInvite(3, option)
-
-        -- If the player doesn't have guild invite permissions, display a message in chat indicating this.
-        if not DoesPlayerHaveGuildPermission(3, GUILD_PERMISSION_INVITE) then
-            LUIE.PrintToChat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE))
-            return
-        end
-
-        -- If the guild is full, display a message in chat indicating this.
-        if GetNumGuildMembers(3) == MAX_GUILD_MEMBERS then
-            LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_GUILD_FULL_MSG))
-            return
-        end
-
-        local guildName = GetGuildName(3)
-        local allianceIconSize = 16
-        local guildAlliance = GetGuildAlliance(3)
-        local guildNameAlliance = LUIE.ChatAnnouncements.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-        LUIE.PrintToChat(zo_strformat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE), option, guildNameAlliance))
-	end
-end
-
-function LUIE.SlashGuildInvite4(option)
-    if option ~= "" then
-        GuildInvite(4, option)
-
-        -- If the player doesn't have guild invite permissions, display a message in chat indicating this.
-        if not DoesPlayerHaveGuildPermission(4, GUILD_PERMISSION_INVITE) then
-            LUIE.PrintToChat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE))
-            return
-        end
-
-        -- If the guild is full, display a message in chat indicating this.
-        if GetNumGuildMembers(4) == MAX_GUILD_MEMBERS then
-            LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_GUILD_FULL_MSG))
-            return
-        end
-
-        local guildName = GetGuildName(4)
-        local allianceIconSize = 16
-        local guildAlliance = GetGuildAlliance(4)
-        local guildNameAlliance = LUIE.ChatAnnouncements.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-        LUIE.PrintToChat(zo_strformat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE), option, guildNameAlliance))
-	end
-end
-
-function LUIE.SlashGuildInvite5(option)
-    if option ~= "" then
-        GuildInvite(5, option)
-
-        -- If the player doesn't have guild invite permissions, display a message in chat indicating this.
-        if not DoesPlayerHaveGuildPermission(5, GUILD_PERMISSION_INVITE) then
-            LUIE.PrintToChat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE))
-            return
-        end
-
-        -- If the guild is full, display a message in chat indicating this.
-        if GetNumGuildMembers(5) == MAX_GUILD_MEMBERS then
-            LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_GUILD_FULL_MSG))
-            return
-        end
-
-        local guildName = GetGuildName(5)
-        local allianceIconSize = 16
-        local guildAlliance = GetGuildAlliance(5)
-        local guildNameAlliance = LUIE.ChatAnnouncements.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-        LUIE.PrintToChat(zo_strformat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE), option, guildNameAlliance))
-	end
-end
-
---[[
-function LUIE.GQuitNoContext(option)
-    if option > 0 and option < 5 then GuildLeave(option) end
-end
-
-function LUIE.GQuit1()
-    GuildLeave(1)
-end
-
-function LUIE.GQuit2()
-    GuildLeave(1)
-end
-
-function LUIE.GQuit3()
-    GuildLeave(1)
-end
-
-function LUIE.GQuit4()
-    GuildLeave(1)
-end
-
-function LUIE.GQuit5()
-    GuildLeave(1)
-end
-]]--
 
 --[[
 
@@ -578,23 +552,14 @@ SLASH_COMMANDS["/regroup"] = LUIE.RegroupDisband
 SLASH_COMMANDS["/disband"] = LUIE.Disband
 SLASH_COMMANDS["/home"] = LUIE.PortPrimaryHome
 
-SLASH_COMMANDS["/ginvite1"] = LUIE.SlashGuildInvite1
-SLASH_COMMANDS["/ginvite2"] = LUIE.SlashGuildInvite2
-SLASH_COMMANDS["/ginvite3"] = LUIE.SlashGuildInvite3
-SLASH_COMMANDS["/ginvite4"] = LUIE.SlashGuildInvite4
-SLASH_COMMANDS["/ginvite5"] = LUIE.SlashGuildInvite5
+SLASH_COMMANDS["/ginvite"] = LUIE.SlashGuildInvite
+SLASH_COMMANDS["/gquit"] = LUIE.GQuit
+SLASH_COMMANDS["/gkick"] = LUIE.GKick
 
--- SLASH_COMMANDS["/gquit"] = LUIE.GQuitNoContext
--- SLASH_COMMANDS["/gquit1"] = LUIE.GQuit1
--- SLASH_COMMANDS["/gquit2"] = LUIE.GQuit2
--- SLASH_COMMANDS["/gquit3"] = LUIE.GQuit3
--- SLASH_COMMANDS["/gquit4"] = LUIE.GQuit4
--- SLASH_COMMANDS["/gquit5"] = LUIE.GQuit5
 
 -- TODO add these commands and various others later!
 --SLASH_COMMANDS["/friend"] = LUIE.SlashFriend
 --SLASH_COMMANDS["/ignore"] = LUIE.SlashIgnore
---SLASH_COMMANDS["/disband"] = GroupDisband
 
 -- NOTES:
     --AddIgnore(string charOrDisplayName)

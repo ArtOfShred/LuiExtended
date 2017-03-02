@@ -126,6 +126,7 @@ local IsValidLaunder        = false
 
 GroupJoinFudger = false -- Controls message for group join
 GuildRankData = {} -- Variable to store local player guild ranks, for guild rank changes.
+GuildIndexData = {}
 
 function CA.Initialize(enabled)
     -- Load settings
@@ -196,13 +197,25 @@ function CA.RegisterGuildEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD, CA.GuildRemovedSelf)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_INVITE_ADDED, CA.GuildInviteAdded)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_INVITE_REMOVED, CA.GuildInviteRemoved)
+        
+        -- Index Guilds
+        GuildIndexData = {}
+        for i = 1,5 do
+            local id = GetGuildId(i)
+            local name = GetGuildName(id)
+            local guildAlliance = GetGuildAlliance(id)
+            GuildIndexData[i] = {id, name=name, guildAlliance=guildAlliance}
+        end
+        
         if CA.SV.MiscGuildMOTD then
             EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MOTD_CHANGED, CA.GuildMOTD)
         end
+        
         if CA.SV.MiscGuildRank then
             EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_RANK_CHANGED, CA.GuildRank)
         end
-        -- Index Guilds
+        
+        -- Index Guild Ranks
         GuildRankData = {}
         if CA.SV.MiscGuildRank then
             for i = 1,5 do
@@ -217,32 +230,57 @@ end
 
 function CA.GuildMemberAdded(eventCode, guildId, DisplayName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
-    local allianceIconSize = 16
-    local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
     local guildName = GetGuildName(guildId)
-    local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    
+    local guilds = GetNumGuilds()
+    for i = 1,guilds do
+        local id = GetGuildId(i)
+        local name = GetGuildName(id)
+        
+        local allianceIconSize = 16
+        local guildAlliance = GetGuildAlliance(id) -- Temporary until I can figure out why GetGuildAlliance() isn't working
+        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+        
+        if guildName == name then printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MEMBER_ADDED), displayNameLink, guildNameAlliance)) break end
+    end
 
-    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MEMBER_ADDED), displayNameLink, guildNameAlliance))
 end
 
 function CA.GuildMemberRemoved(eventCode, guildId, DisplayName, CharacterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
-    local allianceIconSize = 16
-    local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
     local guildName = GetGuildName(guildId)
-    local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    
+    local guilds = GetNumGuilds()
+    for i = 1,guilds do
+        local id = GetGuildId(i)
+        local name = GetGuildName(id)
+        
+        local allianceIconSize = 16
+        local guildAlliance = GetGuildAlliance(id) -- Temporary until I can figure out why GetGuildAlliance() isn't working
+        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+        
+        if guildName == name then printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MEMBER_REMOVED), displayNameLink, guildNameAlliance)) break end
+    end
 
-    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MEMBER_REMOVED), displayNameLink, guildNameAlliance))
 end
 
 function CA.GuildMOTD(eventCode, guildId)
-    motd = GetGuildMotD(guildId)
-    local guildName = GetGuildName(guildId)
-    local allianceIconSize = 16
-    local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
-    local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
-    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MOTD_CHANGED), guildNameAlliance, motd))
+    local motd = GetGuildMotD(guildId)
+    local guildName = GetGuildName(guildId)
+    
+    local guilds = GetNumGuilds()
+    for i = 1,guilds do
+        local id = GetGuildId(i)
+        local name = GetGuildName(id)
+        
+        local allianceIconSize = 16
+        local guildAlliance = GetGuildAlliance(id) -- Temporary until I can figure out why GetGuildAlliance() isn't working
+        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+        
+        if guildName == name then printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MOTD_CHANGED), guildNameAlliance, motd)) break end
+    end
+
 end
 
 function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
@@ -268,11 +306,17 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
         local rankSyntax = CA.SV.MiscGuildIcon and zo_iconTextFormat(icon, iconSize, iconSize, ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
 
         local guildName = GetGuildName(guildId)
-        local allianceIconSize = 16
-        local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
-        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-
-        printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED), displayNameLink, guildNameAlliance, rankSyntax))
+        local guilds = GetNumGuilds()
+        for i = 1,guilds do
+            local id = GetGuildId(i)
+            local name = GetGuildName(id)
+            
+            local allianceIconSize = 16
+            local guildAlliance = GetGuildAlliance(id) -- Temporary until I can figure out why GetGuildAlliance() isn't working
+            local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+            
+            if guildName == name then printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED), displayNameLink, guildNameAlliance, rankSyntax)) break end
+        end
     end
 
     if DisplayName == g_playerDisplayName then -- Cancel out if its not the player being promoted. It would be a little inefficient to index all guild members on initialize for this.
@@ -291,10 +335,7 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
         local rankSyntax = CA.SV.MiscGuildIcon and zo_iconTextFormat(icon, iconSize, iconSize, ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
 
         local guildName = GetGuildName(guildId)
-        local allianceIconSize = 16
-        local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
-        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-
+       
         if currentRank > newRank then
             changestring = GetString(SI_LUIE_CA_GUILD_RANK_UP)
         end
@@ -303,17 +344,48 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
         end
 
         GuildRankData[guildId].rank = newRank
-        printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_SELF), changestring, rankSyntax, guildNameAlliance))
+
+        local guilds = GetNumGuilds()
+        for i = 1,guilds do
+            local id = GetGuildId(i)
+            local name = GetGuildName(id)
+            
+            local allianceIconSize = 16
+            local guildAlliance = GetGuildAlliance(id) -- Temporary until I can figure out why GetGuildAlliance() isn't working
+            local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+            
+            if guildName == name then printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_SELF), changestring, rankSyntax, guildNameAlliance)) break end
+            
+        end
+        ---------------
     end
 end
 
 function CA.GuildAddedSelf(eventCode, guildId, guildName)
-    local allianceIconSize = 16
-    local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
-    local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_JOIN_SELF), guildNameAlliance))
+    
+    local guilds = GetNumGuilds()
+    for i = 1,guilds do
+        local id = GetGuildId(i)
+        local name = GetGuildName(id)
+        
+        local allianceIconSize = 16
+        local guildAlliance = GetGuildAlliance(id) -- Temporary until I can figure out why GetGuildAlliance() isn't working
+        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+        
+        if guildName == name then printToChat(strformat(GetString(SI_LUIE_CA_GUILD_JOIN_SELF), guildNameAlliance)) break end
+    end
+    
     GuildJoinFudger = true
 
+    -- Index Guilds
+        GuildIndexData = {}
+        for i = 1,5 do
+            local id = GetGuildId(i)
+            local name = GetGuildName(id)
+            local guildAlliance = GetGuildAlliance(id)
+            GuildIndexData[i] = {id, name=name, guildAlliance=guildAlliance}
+        end
+    
     -- Reindex Guild Ranks
     GuildRankData = {}
     if CA.SV.MiscGuildRank then
@@ -327,11 +399,26 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
 end
 
 function CA.GuildRemovedSelf(eventCode, guildId, guildName)
-    local allianceIconSize = 16
-    local guildAlliance = 1 -- Temporary until I can figure out why GetGuildAlliance() isn't working
-    local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_LEAVE_SELF), guildNameAlliance))
 
+    for i = 1,5 do
+        local guild = GuildIndexData[i]
+        if guild.name == guildName then
+            local allianceIconSize = 16
+            local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guild.guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+            printToChat(strformat(GetString(SI_LUIE_CA_GUILD_LEAVE_SELF), guildNameAlliance))
+            break 
+        end
+    end
+
+    -- Index Guilds
+        GuildIndexData = {}
+        for i = 1,5 do
+            local id = GetGuildId(i)
+            local name = GetGuildName(id)
+            local guildAlliance = GetGuildAlliance(id)
+            GuildIndexData[i] = {id, name=name, guildAlliance=guildAlliance}
+        end
+    
     -- Reindex Guild Ranks
     GuildRankData = {}
     if CA.SV.MiscGuildRank then
