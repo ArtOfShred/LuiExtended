@@ -124,9 +124,11 @@ local MailStringPart1       = ""
 local MailCurrencyCheck     = true
 local IsValidLaunder        = false
 
-GroupJoinFudger = false -- Controls message for group join
-GuildRankData = {} -- Variable to store local player guild ranks, for guild rank changes.
-GuildIndexData = {}
+local GroupJoinFudger = false -- Controls message for group join
+local GuildJoinFudger = false
+local GuildRankData = {} -- Variable to store local player guild ranks, for guild rank changes.
+GuildsIndex = LUIE.GuildsIndex
+GuildIndexData = LUIE.GuildIndexData
 
 function CA.Initialize(enabled)
     -- Load settings
@@ -197,15 +199,6 @@ function CA.RegisterGuildEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD, CA.GuildRemovedSelf)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_INVITE_ADDED, CA.GuildInviteAdded)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_INVITE_REMOVED, CA.GuildInviteRemoved)
-        
-        -- Index Guilds
-        GuildIndexData = {}
-        for i = 1,5 do
-            local id = GetGuildId(i)
-            local name = GetGuildName(id)
-            local guildAlliance = GetGuildAlliance(id)
-            GuildIndexData[i] = {id, name=name, guildAlliance=guildAlliance}
-        end
         
         if CA.SV.MiscGuildMOTD then
             EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MOTD_CHANGED, CA.GuildMOTD)
@@ -377,15 +370,6 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
     
     GuildJoinFudger = true
 
-    -- Index Guilds
-        GuildIndexData = {}
-        for i = 1,5 do
-            local id = GetGuildId(i)
-            local name = GetGuildName(id)
-            local guildAlliance = GetGuildAlliance(id)
-            GuildIndexData[i] = {id, name=name, guildAlliance=guildAlliance}
-        end
-    
     -- Reindex Guild Ranks
     GuildRankData = {}
     if CA.SV.MiscGuildRank then
@@ -410,15 +394,6 @@ function CA.GuildRemovedSelf(eventCode, guildId, guildName)
         end
     end
 
-    -- Index Guilds
-        GuildIndexData = {}
-        for i = 1,5 do
-            local id = GetGuildId(i)
-            local name = GetGuildName(id)
-            local guildAlliance = GetGuildAlliance(id)
-            GuildIndexData[i] = {id, name=name, guildAlliance=guildAlliance}
-        end
-    
     -- Reindex Guild Ranks
     GuildRankData = {}
     if CA.SV.MiscGuildRank then
@@ -536,7 +511,6 @@ function CA.RegisterGroupEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_ELECTION_REQUESTED)
     -- Group Finder Events
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_FIND_REPLACEMENT_NOTIFICATION_NEW)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_JUMP_DUNGEON_NOTIFICATION_NEW)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_STATUS_UPDATE)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTIVITY_QUEUE_RESULT)
@@ -561,7 +535,6 @@ function CA.RegisterGroupEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_REQUESTED, CA.VoteRequested)
         -- Group Finder Events
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_FIND_REPLACEMENT_NOTIFICATION_NEW, CA.GroupFindReplacementNew)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_JUMP_DUNGEON_NOTIFICATION_NEW, CA.GroupReplacementFound)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE, CA.ActivityComplete)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_STATUS_UPDATE, CA.ActivityStatusUpdate)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_QUEUE_RESULT, CA.ActivityQueueResult)
@@ -574,6 +547,7 @@ end
 
 local WeAreQueued = false -- Variable to determine if we are in queue, if the player isn't in queue ACTIVITY_FINDER_STATUS_NONE is broadcast on init, we don't want this to show any event!
 local ShowRCUpdates = true
+local FixJoinMessage = false
 local ShowActivityStatus = true
 local ShowStatusDropMember = false
 
@@ -583,17 +557,11 @@ function CA.GroupFindReplacementNew(eventCode)
     printToChat(strformat(GetString(SI_LFG_FIND_REPLACEMENT_TEXT), name))
 end
 
-function CA.GroupReplacementFound(eventCode)
-    printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_REPLACEMENT_FOUND)) -- Test function for now, not sure how or if this works.
-    -- The idea is to differentiate party members found via queue or personally invited by the group leader.
-end
-
 function CA.ActivityComplete(eventCode)
     printToChat(GetString(SI_ACTIVITY_FINDER_ACTIVITY_COMPLETE_ANNOUNCEMENT_TEXT)) -- "Activity Complete!"
 end
 
 function CA.ActivityStatusUpdate(eventCode, status)
-    --d("status update:" .. status)
     if ShowActivityStatus then
         if status == ACTIVITY_FINDER_STATUS_NONE and WeAreQueued == true then
             printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_QUEUE_END))
@@ -612,13 +580,16 @@ function CA.ActivityStatusUpdate(eventCode, status)
         end
     end
 
-    if status == 0 then ShowRCUpdates = true end -- Should always trigger at the end result of a ready check failing.
+    if status == 0 then 
+        ShowRCUpdates = true
+        FixJoinMessage = false
+    end -- Should always trigger at the end result of a ready check failing.
+    if status == 2 then FixJoinMessage = false end
     if status == 4 then ShowRCUpdates = false end
 
 end
 
 function CA.ActivityQueueResult(eventCode, result)
-    --d("ActivityQueueResult: " .. result)
     if result == ACTIVITY_QUEUE_RESULT_INCOMPATIBLE_GROUP then
         printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT9)))
     end
@@ -672,9 +643,8 @@ function CA.ActivityStatusRefresh()
 end
 
 function CA.ReadyCheckUpdate(eventCode)
-    --d("Ready check update!")
     local activityType = GetLFGReadyCheckNotificationInfo()
-    local _, tanksPending, _, healersPending, _, dpsPending = GetLFGReadyCheckCounts()
+    local tanksAccepted, tanksPending, healersAccepted, healersPending, dpsAccepted, dpsPending = GetLFGReadyCheckCounts()
     if ShowRCUpdates then
         local activityName
 
@@ -685,13 +655,24 @@ function CA.ReadyCheckUpdate(eventCode)
         if activityType == LFG_ACTIVITY_HOME_SHOW then activityName = GetString(SI_LFGACTIVITY6) end
         if activityType == LFG_ACTIVITY_MASTER_DUNGEON then activityName = GetString(SI_LFGACTIVITY3) end
         if activityType == LFG_ACTIVITY_TRIAL then activityName = GetString(SI_LFGACTIVITY4) end
-        if activityType == 0 then return end
 
         printToChat(strformat(GetString(SI_LUIE_CA_READY_CHECK_ACTIVITY), activityName)) 
     end
 
-    if not ShowRCUpdates and (tanksPending == 0 and healersPending == 0 and dpsPending == 0) then
-        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON3))
+    if tanksAccepted > 0 or healersAccepted > 0 or dpsAccepted > 0 then 
+        FixJoinMessage = true
+    end
+    
+    if not FixJoinMessage then
+        if not ShowRCUpdates and (tanksPending == 0 and healersPending == 0 and dpsPending == 0) then
+            printToChat(GetString(SI_LFGREADYCHECKCANCELREASON3))
+        end
+    end
+    
+    if FixJoinMessage then
+        if not ShowRCUpdates and (tanksAccepted == 0 and healersAccepted == 0 and dpsAccepted == 0 and tanksPending == 0 and healersPending == 0 and dpsPending == 0) then
+            printToChat(GetString(SI_LFGREADYCHECKCANCELREASON4)) -- maybe alter since this is for joining in progress?
+        end
     end
 
     ShowRCUpdates = false
@@ -999,6 +980,7 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
         if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(msg, characterNameLink)) end
         if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(msg, displayBoth)) end
     end
+
 end
 
 -- Gold change into chat
@@ -1958,7 +1940,7 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
         local bracket1 = ""
         local bracket2 = ""
         local icon = ""
-        local logPrefix = GetString(SI_MARKET_PURCHASED_LABEL) -- "Purchased"
+        local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED) -- "Purchased"
         local skillstring
 
         if source == 2 then
@@ -2026,7 +2008,7 @@ function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previous
         local bracket1 = ""
         local bracket2 = ""
         local icon = ""
-        local logPrefix = GetString(SI_MARKET_PURCHASED_LABEL) -- "Purchased"
+        local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED) -- "Purchased"
         
         if currentUpgrade < 1 then return end
 
@@ -2072,7 +2054,7 @@ function CA.MiscAlertBank(eventCode, previousCapacity, currentCapacity, previous
         local bracket1 = ""
         local bracket2 = ""
         local icon = ""
-        local logPrefix = GetString(SI_MARKET_PURCHASED_LABEL) -- "Purchased"
+        local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED) -- "Purchased"
         
         if currentUpgrade < 1 then return end
 
@@ -2135,7 +2117,7 @@ function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCu
 
     icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
 
-    local logPrefix = GetString(SI_MARKET_PURCHASED_LABEL) -- "Purchased"
+    local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED) -- "Purchased"
     if CA.SV.ItemContextToggle then
         logPrefix = ( CA.SV.ItemContextMessage )
     end

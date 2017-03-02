@@ -58,6 +58,7 @@ SCB.D = {
     IgnoreCyrodiil                   = false,
     LongTermEffectsSeparate          = true,
     LongTermEffectsSeparateAlignment = 2,
+    ShowBlock                        = true,
     StealthState                     = true,
     ShowSprint                       = true,
     ShowGallop                       = true,
@@ -1245,6 +1246,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     if unitTag ~= 'player' then
         if effectType == 2 and not (castByPlayer == 1 or castByPlayer == 2) and not (E.DebuffDisplayOverrideId[abilityId] or E.DebuffDisplayOverrideName[effectName]) then return end
     end
+    
+    -- If block is not toggled to be displayed for player, don't show icon for it. Want to show it for targets regardless.
+    if abilityType == ABILITY_TYPE_BLOCK and unitTag == 'player' and not SCB.SV.ShowBlock then return end
 
     -- Ignore some buffs (by abilityId or by effectName)
     if E.IsEffectIgnored[ effectName ] or E.IsAbilityIgnoredById[abilityId] or

@@ -589,7 +589,7 @@ local function CreateCustomFrames()
                 ["dead"]        = UI.Label( ghb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "Status", false ),
             }
             --UF.CustomFrames[unitTag].leader = {RIGHT, LEFT, 0, 0, UF.CustomFrames[unitTag].classIcon, 0}
-            UF.CustomFrames[unitTag].leader = {BOTTOMLEFT, TOPLEFT, 0, 0, ghb}
+            UF.CustomFrames[unitTag].leader = {BOTTOMLEFT, TOPLEFT, -2, 0, ghb}
         end
     end
 

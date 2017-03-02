@@ -1091,6 +1091,16 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
+                name = "Show Block icon",
+                tooltip = "Display special buff icon when player is holding block.",
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ShowBlock end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowBlock = value end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ShowBlock,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                type = "checkbox",
                 name = "Show Stealth icon",
                 tooltip = "Display special buff icon when player is hidden or in stealth.",
                 getFunc = function() return LUIE.SpellCastBuffs.SV.StealthState end,
