@@ -42,19 +42,19 @@ LUIE.Fonts = {
     ["Fontin Regular"]          = "/LuiExtended/media/fonts/fontin_sans_r.otf",
     ["Fontin SmallCaps"]        = "/LuiExtended/media/fonts/fontin_sans_sc.otf",
     ["EnigmaBold"]              = [[/LuiExtended/media/fonts/EnigmaBold.ttf]],
-    ['Adventure']               = [[/LuiExtended/media/fonts/adventure.ttf]],
-    ['Bazooka']                 = [[/LuiExtended/media/fonts/bazooka.ttf]],
-    ['Cooline']                 = [[/LuiExtended/media/fonts/cooline.ttf]],
-    ['Diogenes']                = [[/LuiExtended/media/fonts/diogenes.ttf]],
-    ['Ginko']                   = [[/LuiExtended/media/fonts/ginko.ttf]],
-    ['Heroic']                  = [[/LuiExtended/media/fonts/heroic.ttf]],
-    ['Metamorphous']            = [[/LuiExtended/media/fonts/metamorphous.otf]],
-    ['Porky']                   = [[/LuiExtended/media/fonts/porky.ttf]],
-    ['Roboto Bold']             = [[/LuiExtended/media/fonts/Roboto-Bold.ttf]],
-    ['Roboto Bold Italic']      = [[/LuiExtended/media/fonts/Roboto-BoldItalic.ttf]],
-    ['Talisman']                = [[/LuiExtended/media/fonts/talisman.ttf]],
-    ['Transformers']            = [[/LuiExtended/media/fonts/transformers.ttf]],
-    ['Yellowjacket']            = [[/LuiExtended/media/fonts/yellowjacket.ttf]],
+    ["Adventure"]               = [[/LuiExtended/media/fonts/adventure.ttf]],
+    ["Bazooka"]                 = [[/LuiExtended/media/fonts/bazooka.ttf]],
+    ["Cooline"]                 = [[/LuiExtended/media/fonts/cooline.ttf]],
+    ["Diogenes"]                = [[/LuiExtended/media/fonts/diogenes.ttf]],
+    ["Ginko"]                   = [[/LuiExtended/media/fonts/ginko.ttf]],
+    ["Heroic"]                  = [[/LuiExtended/media/fonts/heroic.ttf]],
+    ["Metamorphous"]            = [[/LuiExtended/media/fonts/metamorphous.otf]],
+    ["Porky"]                   = [[/LuiExtended/media/fonts/porky.ttf]],
+    ["Roboto Bold"]             = [[/LuiExtended/media/fonts/Roboto-Bold.ttf]],
+    ["Roboto Bold Italic"]      = [[/LuiExtended/media/fonts/Roboto-BoldItalic.ttf]],
+    ["Talisman"]                = [[/LuiExtended/media/fonts/talisman.ttf]],
+    ["Transformers"]            = [[/LuiExtended/media/fonts/transformers.ttf]],
+    ["Yellowjacket"]            = [[/LuiExtended/media/fonts/yellowjacket.ttf]],
 }
 
 LUIE.StatusbarTextures = {
@@ -258,26 +258,26 @@ function LUIE.CommaValue(number, shorten, noncomma)
 
         if number >= 1000000000 then
             value = number / 1000000000
-            suffix = 'G'
+            suffix = "G"
         elseif number >= 1000000 then
             value = number / 1000000
-            suffix = 'M'
+            suffix = "M"
         elseif number >= 1000 then
             value = number / 1000
-            suffix = 'k'
+            suffix = "k"
         else
             value = number
         end
 
-        -- If we could not conver even to 'G', return full number with commas
+        -- If we could not conver even to "G", return full number with commas
         if value >= 1000 then
             value = LUIE.CommaValue(number)
         elseif value >= 100 or suffix == nil then
-            value = string.format('%d', value)
+            value = string.format("%d", value)
         elseif value >= 10 then
-            value = string.format('%.1f', value)
+            value = string.format("%.1f", value)
         else
-            value = string.format('%.2f', value)
+            value = string.format("%.2f", value)
         end
 
         if suffix ~= nil then
@@ -289,8 +289,8 @@ function LUIE.CommaValue(number, shorten, noncomma)
 
     local number = tostring(number)
     -- No shortening was done, so print number with commas
-    local left,num,right = string.match(number,'^([^%d]*%d)(%d*)(.-)$')
-    return left..(num:reverse():gsub('(%d%d%d)','%1,'):reverse())..right
+    local left,num,right = string.match(number,"^([^%d]*%d)(%d*)(.-)$")
+    return left..(num:reverse():gsub("(%d%d%d)","%1,"):reverse())..right
 end
 
 function LUIE.PortPrimaryHome()
@@ -392,7 +392,7 @@ function LUIE.Disband()
     end
 
     -- Check to make sure player is the leader
-    local isLeader = IsUnitGroupLeader('player')
+    local isLeader = IsUnitGroupLeader("player")
     if not isLeader then
         LUIE.PrintToChat(GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_THE_LEADER))
         return
@@ -430,7 +430,7 @@ function LUIE.GroupKick(option)
     end
 
     -- Check to make sure player is the leader
-    local isLeader = IsUnitGroupLeader('player')
+    local isLeader = IsUnitGroupLeader("player")
     if not isLeader then
         LUIE.PrintToChat(GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_THE_LEADER))
         return
