@@ -9,7 +9,7 @@ LUIE.components  = {}
 -- Saved variables options
 LUIE.SV          = nil
 LUIE.SVVer       = 2
-LUIE.SVName      = 'LUIESV'
+LUIE.SVName      = "LUIESV"
 
 -- Default Settings
 LUIE.D = {
@@ -84,7 +84,9 @@ end
 -- Load additional fonts and status bar textures from LMP if it is present in environment
 local function LUIE_LoadMedia()
     local LMP = LibStub("LibMediaProvider-1.0")
-    if LMP == nil then return end
+    if LMP == nil then
+        return
+    end
 
     -- Update Fonts
     for _, f in pairs(LMP:List(LMP.MediaType.FONT)) do
@@ -133,7 +135,9 @@ end
 -- LuiExtended Initialization
 local function LUIE_OnAddOnLoaded(eventCode, addonName)
     -- Only initialize our own addon
-    if LUIE.name ~= addonName then return end
+    if LUIE.name ~= addonName then
+        return
+    end
     -- Once we know it's ours, lets unregister the event listener
     EVENT_MANAGER:UnregisterForEvent(addonName, eventCode)
 
@@ -228,7 +232,9 @@ end
 
 -- Delay Buffer
 function LUIE.DelayBuffer(key, buffer, currentTime)
-    if key == nil then return end
+    if key == nil then
+        return
+    end
 
     local buffer = buffer or 10
     local now    = currentTime or GetFrameTimeMilliseconds()
@@ -342,9 +348,15 @@ function LUIE.RegroupDisband()
         local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(groupMemberAccountName)
         local displayBothString = ( zo_strformat("<<1>><<2>>", groupMemberName, groupMemberAccountName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, groupMemberAccountName)
-        if LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions == 1 then memberLink = displayNameLink end
-        if LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions == 2 then memberLink = characterNameLink end
-        if LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions == 3 then memberLink = displayBoth end
+        if LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions == 1 then
+            memberLink = displayNameLink
+        end
+        if LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions == 2 then
+            memberLink = characterNameLink
+        end
+        if LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions == 3 then
+            memberLink = displayBoth
+        end
         g_regroupStacks[i] = { memberLink = memberLink, memberName = groupMemberName }
     end
 
@@ -353,7 +365,6 @@ function LUIE.RegroupDisband()
     -- Reinvite the group after 5 seconds (give the group interface time to update on server and client end for all group members)
     zo_callLater(LUIE.RegroupInvite, 5000)
 end
-
 
 function LUIE.RegroupInvite()
     LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG))
@@ -393,7 +404,6 @@ function LUIE.Disband()
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_LFG_ACTIVITY))
         return
     end
-    
 end
 
 function LUIE.LeaveGroup()
@@ -407,7 +417,10 @@ end
 
 function LUIE.GroupKick(option)
     
-    if option == "" then LUIE.PrintToChat ("You must enter the name of a player to kick.") return end
+    if option == "" then
+        LUIE.PrintToChat("You must enter the name of a player to kick.")
+        return
+    end
 
     -- Check to make sure player is in a group
     local groupSize = GetGroupSize()
@@ -440,7 +453,10 @@ function LUIE.GroupKick(option)
     
     for i = 1,24 do
         local memberTag = GetGroupUnitTagByIndex(i)
-        if memberTag == nil then break end -- Once we reach a nil value (aka no party member there, stop the loop)
+        -- Once we reach a nil value (aka no party member there, stop the loop)
+        if memberTag == nil then
+            break
+        end
         kickedMemberName = string.lower(GetUnitName(memberTag))
         kickedAccountName = string.lower(GetUnitDisplayName(memberTag))
         g_partyKick[i] = { memberTag=memberTag, kickedMemberName=kickedMemberName, kickedAccountName=kickedAccountName }
@@ -451,7 +467,7 @@ function LUIE.GroupKick(option)
         local kickcompare = g_partyKick[i]
         if kickcompare.kickedMemberName == compareName or kickcompare.kickedAccountName == compareName then 
             if kickcompare.kickedMemberName == comparePlayerName or kickcompare.kickedAccountName == comparePlayerAccount then 
-                LUIE.PrintToChat "You cannot kick yourself from a group."
+                LUIE.PrintToChat("You cannot kick yourself from a group.")
             else
                 unitToKick = kickcompare.memberTag
                 GroupKick(unitToKick)
@@ -461,7 +477,6 @@ function LUIE.GroupKick(option)
     end
     
     LUIE.PrintToChat("You must enter a valid party member account name or character name to remove.")
-
 end
 
 function LUIE.InitGuildData()
@@ -476,7 +491,9 @@ function LUIE.InitGuildData()
 end
 
 function LUIE.SocialError(eventCode, reason)
-    if reason ~= 1 then LUIE.PrintToChat(zo_strformat(GetString("SI_SOCIALACTIONRESULT", reason))) end
+    if reason ~= 1 then
+        LUIE.PrintToChat(zo_strformat(GetString("SI_SOCIALACTIONRESULT", reason)))
+    end
 end
 
 function LUIE.GuildAddedSelf()
@@ -502,8 +519,10 @@ function LUIE.GuildRemovedSelf()
 end
 
 function LUIE.SlashGuildInvite(option)
-
-    if option == "" then LUIE.PrintToChat("You must enter a guild number followed by an account name or character name to invite to the guild.") return end -- If no input was entered, display an error and end.
+    if option == "" then
+        LUIE.PrintToChat("You must enter a guild number followed by an account name or character name to invite to the guild.")
+        return
+    end -- If no input was entered, display an error and end.
     
     -- Parse input
     local options = {}
@@ -517,42 +536,71 @@ function LUIE.SlashGuildInvite(option)
     local guildnumber = options[1]
     local name = options[2]
     
-    if name == nil then LUIE.PrintToChat("You must enter a guild number followed by an account name or character name to invite to the guild.") return end -- If no name was entered, display an error and end.
+    -- If no name was entered, display an error and end.
+    if name == nil then
+        LUIE.PrintToChat("You must enter a guild number followed by an account name or character name to invite to the guild.")
+        return
+    end 
     
-    if guildnumber == "1" and GuildIndexData[1] then guildnumber = GuildIndexData[1].id
-    elseif guildnumber == "2" and GuildIndexData[2] then guildnumber = GuildIndexData[2].id
-    elseif guildnumber == "3" and GuildIndexData[3] then guildnumber = GuildIndexData[3].id
-    elseif guildnumber == "4" and GuildIndexData[4] then guildnumber = GuildIndexData[4].id
-    elseif guildnumber == "5" and GuildIndexData[5] then guildnumber = GuildIndexData[5].id
-    else LUIE.PrintToChat ("You must enter a valid guild number to invite a player.") return end -- If we enter anything outside of the range of 1-5, display an error and end.
-    if guildnumber == nil then LUIE.PrintToChat ("You must enter a valid guild number to invite a player.") return end -- If we try to invite a player to a guild we don't have display an error and end.
+    if guildnumber == "1" and GuildIndexData[1] then
+        guildnumber = GuildIndexData[1].id
+    elseif guildnumber == "2" and GuildIndexData[2] then
+        guildnumber = GuildIndexData[2].id
+    elseif guildnumber == "3" and GuildIndexData[3] then
+        guildnumber = GuildIndexData[3].id
+    elseif guildnumber == "4" and GuildIndexData[4] then
+        guildnumber = GuildIndexData[4].id
+    elseif guildnumber == "5" and GuildIndexData[5] then
+        guildnumber = GuildIndexData[5].id
+    else -- If we enter anything outside of the range of 1-5, display an error and end.
+        LUIE.PrintToChat("You must enter a valid guild number to invite a player.")
+        return
+    end 
+    if guildnumber == nil then
+        LUIE.PrintToChat ("You must enter a valid guild number to invite a player.")
+        return
+    end -- If we try to invite a player to a guild we don't have display an error and end.
     
-        GuildInvite(guildnumber, name)
-
-        local guildName = GetGuildName(guildnumber)
-        local allianceIconSize = 16
-        local guildAlliance = GetGuildAlliance(guildnumber)
-        local guildNameAlliance = LUIE.ChatAnnouncements.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-        LUIE.PrintToChat(zo_strformat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE), name, guildNameAlliance))
+    GuildInvite(guildnumber, name)
+    
+    local guildName = GetGuildName(guildnumber)
+    local allianceIconSize = 16
+    local guildAlliance = GetGuildAlliance(guildnumber)
+    local guildNameAlliance = LUIE.ChatAnnouncements.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    
+    LUIE.PrintToChat(zo_strformat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE), name, guildNameAlliance))
 end
 
 function LUIE.GQuit(guildnumber)
+    if guildnumber == "1" and GuildIndexData[1] then
+        guildnumber = GuildIndexData[1].id
+    elseif guildnumber == "2" and GuildIndexData[2] then
+        guildnumber = GuildIndexData[2].id
+    elseif guildnumber == "3" and GuildIndexData[3] then
+        guildnumber = GuildIndexData[3].id
+    elseif guildnumber == "4" and GuildIndexData[4] then
+        guildnumber = GuildIndexData[4].id
+    elseif guildnumber == "5" and GuildIndexData[5] then
+        guildnumber = GuildIndexData[5].id
+    else
+        LUIE.PrintToChat("You must enter a valid guild number to leave a guild.")
+        return
+    end
     
-    if guildnumber == "1" and GuildIndexData[1] then guildnumber = GuildIndexData[1].id
-    elseif guildnumber == "2" and GuildIndexData[2] then guildnumber = GuildIndexData[2].id
-    elseif guildnumber == "3" and GuildIndexData[3] then guildnumber = GuildIndexData[3].id
-    elseif guildnumber == "4" and GuildIndexData[4] then guildnumber = GuildIndexData[4].id
-    elseif guildnumber == "5" and GuildIndexData[5] then guildnumber = GuildIndexData[5].id
-    else LUIE.PrintToChat ("You must enter a valid guild number to leave a guild.") return end
-    if guildnumber == nil then LUIE.PrintToChat ("You must enter a valid guild number to leave a guild.") return end -- If we try to invite a player to a guild we don't have display an error and end.
+    -- If we try to invite a player to a guild we don't have display an error and end.
+    if guildnumber == nil then
+        LUIE.PrintToChat ("You must enter a valid guild number to leave a guild.")
+        return
+    end
 
     GuildLeave(guildnumber) -- If neither of the above errors were triggered, leave the guild number.
-    
 end
 
 function LUIE.GKick(option)
-
-    if option == "" then LUIE.PrintToChat("You must enter a guild number followed by an account name or online character name to kick from the guild.") return end -- If no input was entered, display an error and end.
+    if option == "" then
+        LUIE.PrintToChat("You must enter a guild number followed by an account name or online character name to kick from the guild.")
+        return
+    end -- If no input was entered, display an error and end.
     
     -- Parse input
     local options = {}
@@ -566,15 +614,32 @@ function LUIE.GKick(option)
     local guildnumber = options[1]
     local name = options[2]
     
-    if name == nil then LUIE.PrintToChat("You must enter a guild number followed by an account name or online character name to kick from the guild.") return end -- If no name was entered, display an error and end.
+    -- If no name was entered, display an error and end.
+    if name == nil then
+        LUIE.PrintToChat("You must enter a guild number followed by an account name or online character name to kick from the guild.")
+        return
+    end
     
-    if guildnumber == "1" and GuildIndexData[1] then guildnumber = GuildIndexData[1].id
-    elseif guildnumber == "2" and GuildIndexData[2] then guildnumber = GuildIndexData[2].id
-    elseif guildnumber == "3" and GuildIndexData[3] then guildnumber = GuildIndexData[3].id
-    elseif guildnumber == "4" and GuildIndexData[4] then guildnumber = GuildIndexData[4].id
-    elseif guildnumber == "5" and GuildIndexData[5] then guildnumber = GuildIndexData[5].id
-    else LUIE.PrintToChat ("You must enter a valid guild number to kick a player.") return end -- If we enter anything outside of the range of 1-5, display an error and end.
-    if guildnumber == nil then LUIE.PrintToChat ("You must enter a valid guild number to kick a player.") return end -- If we try to invite a player to a guild we don't have display an error and end.
+    if guildnumber == "1" and GuildIndexData[1] then
+        guildnumber = GuildIndexData[1].id
+    elseif guildnumber == "2" and GuildIndexData[2] then
+        guildnumber = GuildIndexData[2].id
+    elseif guildnumber == "3" and GuildIndexData[3] then
+        guildnumber = GuildIndexData[3].id
+    elseif guildnumber == "4" and GuildIndexData[4] then
+        guildnumber = GuildIndexData[4].id
+    elseif guildnumber == "5" and GuildIndexData[5] then
+        guildnumber = GuildIndexData[5].id
+    else -- If we enter anything outside of the range of 1-5, display an error and end.
+        LUIE.PrintToChat("You must enter a valid guild number to kick a player.")
+        return
+    end
+    
+    -- If we try to invite a player to a guild we don't have display an error and end.
+    if guildnumber == nil then
+        LUIE.PrintToChat ("You must enter a valid guild number to kick a player.")
+        return
+    end
     
     -- Index guild members so we can use character name as a kick option
     local guildNumbers = GetNumGuildMembers(guildnumber)
@@ -592,40 +657,53 @@ function LUIE.GKick(option)
         compareCharacter = string.gsub(compareCharacter,"%^%a+","")
         
         g_guildNamesTable[i] = { displayName=displayName, characterName=characterName, compareDisplay=compareDisplay, compareCharacter=compareCharacter}
-        --LUIE.PrintToChat(compareDisplay .. compareCharacter)
-        --LUIE.PrintToChat("comparing vs... " .. compareChar)
+        --d(compareDisplay .. compareCharacter)
+        --d("comparing vs... " .. compareChar)
     end
     
     local finalName = ""
     
     for i = 1, #g_guildNamesTable do
         local comparing = g_guildNamesTable[i]
-        if comparing.compareDisplay == compareChar or comparing.compareCharacter == compareChar then finalName = comparing.displayName break end
+        if comparing.compareDisplay == compareChar or comparing.compareCharacter == compareChar then
+            finalName = comparing.displayName
+            break
+        end
     end
 
     if finalName ~= "" then
         GuildRemove(guildnumber, finalName)
     else
         LUIE.PrintToChat("You must enter a valid account name or online character name to kick from the guild.")
-    end
-    
+    end   
 end
 
 function LUIE.SlashFriend(option)
-    if option == "" then LUIE.PrintToChat( "You must enter the account name or character name of a player to send a friend request." ) return end
-    LUIE.PrintToChat (zo_strformat("You have invited |cFEFEFE\"<<1>>\"|r to be your friend.", option))
+    if option == "" then
+        LUIE.PrintToChat( "You must enter the account name or character name of a player to send a friend request." )
+        return
+    end
+    LUIE.PrintToChat(zo_strformat("You have invited |cFEFEFE\"<<1>>\"|r to be your friend.", option))
     RequestFriend(option)
 end
 
 function LUIE.SlashIgnore(option)
-    if option == "" then LUIE.PrintToChat( "You must enter the account name or character name of a player to ignore." ) return end
-    if IsIgnored(option) then LUIE.PrintToChat("That player is already on your ignore list." ) return end -- Only lists account names, unfortunately
+    if option == "" then
+        LUIE.PrintToChat("You must enter the account name or character name of a player to ignore.")
+        return
+    end
+    if IsIgnored(option) then -- Only lists account names, unfortunately
+        LUIE.PrintToChat("That player is already on your ignore list." )
+        return
+    end 
     AddIgnore(option)
 end
 
 function LUIE.SlashRemoveFriend(option)
-
-    if option == "" then LUIE.PrintToChat( "You must enter the account name or online character name of a player you want to remove from friends." ) return end
+    if option == "" then
+        LUIE.PrintToChat( "You must enter the account name or online character name of a player you want to remove from friends." )
+        return
+    end
     
     local compareChar = string.lower(option)
     
@@ -644,7 +722,10 @@ function LUIE.SlashRemoveFriend(option)
     
     for i = 1, #g_friendIndex do
         local comparing = g_friendIndex[i]
-        if comparing.compareDisplay == compareChar or comparing.compareCharacter == compareChar then finalName = comparing.displayName break end
+        if comparing.compareDisplay == compareChar or comparing.compareCharacter == compareChar then
+            finalName = comparing.displayName
+            break
+        end
     end
 
     if finalName ~= "" then
@@ -652,12 +733,13 @@ function LUIE.SlashRemoveFriend(option)
     else
         LUIE.PrintToChat("You must enter a valid account name or online character name to remove from friends.")
     end
-    
 end
 
 function LUIE.SlashRemoveIgnore(option)
-
-    if option == "" then LUIE.PrintToChat( "You must enter the account name of a player you want to remove from ignored." ) return end
+    if option == "" then
+        LUIE.PrintToChat( "You must enter the account name of a player you want to remove from ignored." )
+        return
+    end
 
     local compareChar = string.lower(option)
 
@@ -673,7 +755,10 @@ function LUIE.SlashRemoveIgnore(option)
     
     for i = 1,#g_ignoreIndex do
         local comparing = g_ignoreIndex[i]
-        if comparing.displayName == compareChar then finalName = comparing.displayName break end
+        if comparing.displayName == compareChar then
+            finalName = comparing.displayName
+            break
+        end
     end
     
     if finalName ~= "" then
@@ -681,7 +766,6 @@ function LUIE.SlashRemoveIgnore(option)
     else
         LUIE.PrintToChat("You must enter a valid account name to remove from ignored.")
     end
-
 end
 
 -- Slash Commands
