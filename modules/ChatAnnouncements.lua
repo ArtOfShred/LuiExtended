@@ -188,7 +188,10 @@ function CA.Initialize(enabled)
     CA.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "ChatAnnouncements", CA.D )
 
     -- Disable if setting not toggled on!
-    if not enabled then return end
+    if not enabled then
+        return
+    end
+
     CA.Enabled = true
 
     -- Read current player toon name
@@ -819,9 +822,15 @@ function CA.QuestShared (eventCode, questId)
     local displayBothString = ( strformat("<<1>><<2>>", characterName, displayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
 
-    if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), displayNameLink, questName)) end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), characterNameLink, questName)) end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), displayBoth, questName)) end
+    if CA.SV.ChatPlayerDisplayOptions == 1 then
+        printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), displayNameLink, questName))
+    end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then
+        printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), characterNameLink, questName))
+    end
+    if CA.SV.ChatPlayerDisplayOptions == 3
+        then printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), displayBoth, questName))
+    end
 end
 
 function CA.QuestShareRemoved(eventCode, questId)
@@ -910,8 +919,12 @@ function CA.ActivityStatusUpdate(eventCode, status)
         ShowRCUpdates = true
         FixJoinMessage = false
     end -- Should always trigger at the end result of a ready check failing.
-    if status == 2 then FixJoinMessage = false end
-    if status == 4 then ShowRCUpdates = false end
+    if status == 2 then
+        FixJoinMessage = false
+    end
+    if status == 4 then
+        ShowRCUpdates = false
+    end
 end
 
 function CA.ActivityQueueResult(eventCode, result)
@@ -973,13 +986,27 @@ function CA.ReadyCheckUpdate(eventCode)
     if ShowRCUpdates then
         local activityName
 
-        if activityType == 0 then return end
-        if activityType == LFG_ACTIVITY_AVA then activityName = GetString(SI_LFGACTIVITY1) end
-        if activityType == LFG_ACTIVITY_BATTLE_GROUND then activityName = "Battleground" end -- Not yet implemented
-        if activityType == LFG_ACTIVITY_DUNGEON then activityName = GetString(SI_LFGACTIVITY2) end
-        if activityType == LFG_ACTIVITY_HOME_SHOW then activityName = GetString(SI_LFGACTIVITY6) end
-        if activityType == LFG_ACTIVITY_MASTER_DUNGEON then activityName = GetString(SI_LFGACTIVITY3) end
-        if activityType == LFG_ACTIVITY_TRIAL then activityName = GetString(SI_LFGACTIVITY4) end
+        if activityType == 0 then
+            return
+        end
+        if activityType == LFG_ACTIVITY_AVA then
+            activityName = GetString(SI_LFGACTIVITY1)
+        end
+        if activityType == LFG_ACTIVITY_BATTLE_GROUND then
+            activityName = "Battleground" -- Not yet implemented yet
+        end
+        if activityType == LFG_ACTIVITY_DUNGEON then
+            activityName = GetString(SI_LFGACTIVITY2)
+        end
+        if activityType == LFG_ACTIVITY_HOME_SHOW then
+            activityName = GetString(SI_LFGACTIVITY6)
+        end
+        if activityType == LFG_ACTIVITY_MASTER_DUNGEON then
+            activityName = GetString(SI_LFGACTIVITY3)
+        end
+        if activityType == LFG_ACTIVITY_TRIAL then
+            activityName = GetString(SI_LFGACTIVITY4)
+        end
 
         printToChat(strformat(GetString(SI_LUIE_CA_READY_CHECK_ACTIVITY), activityName))
     end
@@ -1058,14 +1085,28 @@ function CA.VoteResult(eventCode, electionResult, descriptor)
         local displayBothString = ( strformat("<<1>><<2>>", kickMemberName, kickMemberAccountName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, kickMemberAccountName)
 
-        if CA.SV.ChatPlayerDisplayOptions == 1 then KickCarry = displayNameLink end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then KickCarry = characterNameLink end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then KickCarry = displayBoth end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then
+            KickCarry = displayNameLink
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then
+            KickCarry = characterNameLink
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then
+            KickCarry = displayBoth
+        end
 
-        if electionResult == 1 then printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry)) end
-        if electionResult == 2 then printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry)) end
-        if electionResult == 4 then printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry)) end
-        if electionResult == 5 then printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry)) end
+        if electionResult == 1 then
+            printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry))
+        end
+        if electionResult == 2 then
+            printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry))
+        end
+        if electionResult == 4 then
+            printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry))
+        end
+        if electionResult == 5 then
+            printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry))
+        end
     end
 end
 
@@ -1179,9 +1220,15 @@ function CA.OnGroupInviteReceived(eventCode, inviterName, inviterDisplayName)
     local displayBothString = ( strformat("<<1>><<2>>", inviterName, inviterDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
 
-    if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_RECEIVED), displayNameLink)) end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_RECEIVED), characterNameLink)) end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_RECEIVED), displayBoth)) end
+    if CA.SV.ChatPlayerDisplayOptions == 1 then
+        printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_RECEIVED), displayNameLink))
+    end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then
+        printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_RECEIVED), characterNameLink))
+    end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then
+        printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_RECEIVED), displayBoth))
+    end
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED) -- On receiving a group invite, it fires 2 events, we disable the event handler temporarily for this then recall it after.
     zo_callLater(CA.RefreshGroupInviteEnable, 100)
 end
@@ -1227,9 +1274,15 @@ function CA.OnGroupLeaderUpdate(eventCode, leaderTag)
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, groupLeaderAccount)
 
     if g_playerNameFormatted ~= groupLeaderName then -- If another player became the leader
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), displayNameLink)) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), characterNameLink)) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), displayBoth)) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), displayNameLink))
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), characterNameLink))
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), displayBoth))
+        end
     elseif g_playerNameFormatted == groupLeaderName then -- If the player character became the leader
         printToChat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_SELF))
     end
@@ -1244,7 +1297,9 @@ function CA.OnGroupMemberJoined(eventCode, memberName)
     -- Iterate through group member indices to get the relevant UnitTags
     for i = 1,40 do
         local memberTag = GetGroupUnitTagByIndex(i)
-        if memberTag == nil then break end -- Once we reach a nil value (aka no party member there, stop the loop)
+        if memberTag == nil then
+            break -- Once we reach a nil value (aka no party member there, stop the loop)
+        end
         g_partyStack[i] = { memberTag = memberTag }
     end
 
@@ -1264,9 +1319,15 @@ function CA.OnGroupMemberJoined(eventCode, memberName)
         local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(joinedMemberAccountName)
         local displayBothString = ( strformat("<<1>><<2>>", joinedMemberName, joinedMemberAccountName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, joinedMemberAccountName)
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), displayNameLink)) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), characterNameLink)) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), displayBoth)) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), displayNameLink))
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), characterNameLink))
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), displayBoth))
+        end
     elseif g_playerName == memberName then
         printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF)) -- Only prints on the initial group form between 2 players.
     end
@@ -1282,7 +1343,9 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, memberDisplayName)
     local msg = nil
 
-    if g_playerName == memberName then ShowStatusDropMember = false end -- Resets variable for Group Finder events, just in case.
+    if g_playerName == memberName then
+        ShowStatusDropMember = false -- Resets variable for Group Finder events, just in case.
+    end
 
     if reason == GROUP_LEAVE_REASON_VOLUNTARY then
         msg = g_playerName == memberName and GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF) or GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE)
@@ -1293,11 +1356,16 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
     end
     if msg then
         -- Can occur if event is before EVENT_PLAYER_ACTIVATED
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(msg, displayNameLink)) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(msg, characterNameLink)) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(msg, displayBoth)) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then
+            printToChat(strformat(msg, displayNameLink))
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then
+            printToChat(strformat(msg, characterNameLink))
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then
+            printToChat(strformat(msg, displayBoth))
+        end
     end
-
 end
 
 -- Gold Change Announcements
@@ -1376,7 +1444,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     end
 
     -- If the total gold change was 0 then we end this now
-    if UpOrDown == 0 then return end
+    if UpOrDown == 0 then
+        return
+    end
 
     -- Determine the color of the text based on whether we gained or lost gold
     if UpOrDown > 0 then
@@ -1576,13 +1646,27 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             total = ""
         end
 
-        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and not CA.SV.GoldChange then printToChat(strformat(GetString(SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT1), changetype)) end
-        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and CA.SV.GoldChange then printToChat(GetString(SI_LUIE_CA_MAIL_COD_GOLD_SENT)) end
-        if CA.SV.MiscMail and mailCOD == 0 and mailMoney == 0 and postageAmount >= 1 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_SUCCESS)) end
-        if CA.SV.MiscMail and mailMoney ~= 0 and not CA.SV.GoldChange then printToChat(strformat(GetString(SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG), mailMoney) ) end
-        if CA.SV.MiscMail and mailMoney ~= 0 and CA.SV.GoldChange then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_SUCCESS)) end
-        if CA.SV.MiscMail and mailCOD ~= 0 and not CA.SV.GoldChange then printToChat(strformat(GetString(SI_LUIE_CA_MAIL_COD_GOLD_SENT2), mailCOD) ) end
-        if CA.SV.MiscMail and mailCOD ~= 0 and CA.SV.GoldChange then printToChat(GetString(SI_LUIE_CA_MAIL_COD_SENT_SUCCESS)) end
+        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and not CA.SV.GoldChange then
+            printToChat(strformat(GetString(SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT1), changetype))
+        end
+        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and CA.SV.GoldChange then
+            printToChat(GetString(SI_LUIE_CA_MAIL_COD_GOLD_SENT))
+        end
+        if CA.SV.MiscMail and mailCOD == 0 and mailMoney == 0 and postageAmount >= 1 then
+            printToChat(GetString(SI_LUIE_CA_MAIL_SENT_SUCCESS))
+        end
+        if CA.SV.MiscMail and mailMoney ~= 0 and not CA.SV.GoldChange then
+            printToChat(strformat(GetString(SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG), mailMoney) )
+        end
+        if CA.SV.MiscMail and mailMoney ~= 0 and CA.SV.GoldChange then
+            printToChat(GetString(SI_LUIE_CA_MAIL_SENT_SUCCESS))
+        end
+        if CA.SV.MiscMail and mailCOD ~= 0 and not CA.SV.GoldChange then
+            printToChat(strformat(GetString(SI_LUIE_CA_MAIL_COD_GOLD_SENT2), mailCOD) )
+        end
+        if CA.SV.MiscMail and mailCOD ~= 0 and CA.SV.GoldChange then
+            printToChat(GetString(SI_LUIE_CA_MAIL_COD_SENT_SUCCESS))
+        end
 
         valuesent = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
 
@@ -1606,9 +1690,12 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             end
         end
 
-        if CA.SV.GoldChange and mailMoney ~= 0 then printToChat(valuesent) end
-        if CA.SV.GoldChange and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 then printToChat(valuesent) end -- All these values will be zero for a COD payment sent, since none of them are updated.
-
+        if CA.SV.GoldChange and mailMoney ~= 0 then
+            printToChat(valuesent)
+        end
+        if CA.SV.GoldChange and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 then
+            printToChat(valuesent) -- All these values will be zero for a COD payment sent, since none of them are updated.
+        end
     end
 
     mailHelper = false
@@ -1650,7 +1737,9 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
     end
 
     -- If the total AP change was 0 then we end this now
-    if UpOrDown == alliancePoints then return end
+    if UpOrDown == alliancePoints then
+        return
+    end
 
     -- Determine the color and message of the text based on whether we gained or lost Alliance Points
     if UpOrDown > alliancePoints then
@@ -1735,9 +1824,10 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
     if CA.SV.LootCurrencyCombo and color == ( "|ca80700" ) then
         combostring = (strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
     else
-        if difference > CA.SV.AlliancePointFilter then printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total)) end
+        if difference > CA.SV.AlliancePointFilter then
+            printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
+        end
     end
-
 end
 
 -- Tel Var Stones Change Announcements
@@ -1780,10 +1870,14 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
     end
 
     -- If the total Tel Var change was 0 then we end this now
-    if UpOrDown == 0 then return end
+    if UpOrDown == 0 then
+        return
+    end
 
     -- Reason 35 = Player Init (Triggers when player enters or exits Cyrodiil)
-    if reason == 35 then return end
+    if reason == 35 then
+        return
+    end
 
     -- Determine the color of the text based on whether we gained or lost gold
     if UpOrDown > 0 then
@@ -1926,10 +2020,14 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
     end
 
     -- If the total Tel Var change was 0 then we end this now
-    if UpOrDown == 0 then return end
+    if UpOrDown == 0 then
+        return
+    end
 
     -- Reason 35 = Player Init (Triggers when player changes zones)
-    if reason == 35 then return end
+    if reason == 35 then
+        return
+    end
 
     -- Determine the color of the text based on whether we gained or lost gold
     if UpOrDown > 0 then
@@ -2058,24 +2156,36 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
             bracket2 = ""
         end
 
-        if ridingSkillType == 1 and source == 1 then skillstring = "[Riding Speed Upgrade]"
-        elseif ridingSkillType == 2 and source == 1  then skillstring = "[Riding Capacity Upgrade]"
-        elseif ridingSkillType == 3 and source == 1  then skillstring = "[Riding Stamina Upgrade]"
-        elseif ridingSkillType == 1 and source == 2  then skillstring = "|H1:item:64700:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
-        elseif ridingSkillType == 2 and source == 2  then skillstring = "|H1:item:64702:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
-        elseif ridingSkillType == 3 and source == 2  then skillstring = "|H1:item:64701:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+        if ridingSkillType == 1 and source == 1 then
+            skillstring = "[Riding Speed Upgrade]"
+        elseif ridingSkillType == 2 and source == 1  then
+            skillstring = "[Riding Capacity Upgrade]"
+        elseif ridingSkillType == 3 and source == 1  then
+            skillstring = "[Riding Stamina Upgrade]"
+        elseif ridingSkillType == 1 and source == 2  then
+            skillstring = "|H1:item:64700:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+        elseif ridingSkillType == 2 and source == 2  then
+            skillstring = "|H1:item:64702:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+        elseif ridingSkillType == 3 and source == 2  then
+            skillstring = "|H1:item:64701:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
         end
 
         if CA.SV.LootIcons then
             if source == 1 then
-                if ridingSkillType == 1 then icon = "|t16:16:/esoui/art/mounts/ridingskill_speed.dds|t "
-                elseif ridingSkillType == 2 then icon = "|t16:16:/esoui/art/mounts/ridingskill_capacity.dds|t "
-                elseif ridingSkillType == 3 then icon = "|t16:16:/esoui/art/mounts/ridingskill_stamina.dds|t "
+                if ridingSkillType == 1 then
+                    icon = "|t16:16:/esoui/art/mounts/ridingskill_speed.dds|t "
+                elseif ridingSkillType == 2 then
+                    icon = "|t16:16:/esoui/art/mounts/ridingskill_capacity.dds|t "
+                elseif ridingSkillType == 3 then
+                    icon = "|t16:16:/esoui/art/mounts/ridingskill_stamina.dds|t "
                 end
             elseif source == 2 then
-                if ridingSkillType == 1 then icon = "|t16:16:/esoui/art/icons/store_ridinglessons_speed.dds|t "
-                elseif ridingSkillType == 2 then icon = "|t16:16:/esoui/art/icons/store_ridinglessons_capacity.dds|t "
-                elseif ridingSkillType == 3 then icon = "|t16:16:/esoui/art/icons/store_ridinglessons_stamina.dds|t "
+                if ridingSkillType == 1 then
+                    icon = "|t16:16:/esoui/art/icons/store_ridinglessons_speed.dds|t "
+                elseif ridingSkillType == 2 then
+                    icon = "|t16:16:/esoui/art/icons/store_ridinglessons_capacity.dds|t "
+                elseif ridingSkillType == 3 then
+                    icon = "|t16:16:/esoui/art/icons/store_ridinglessons_stamina.dds|t "
                 end
             end
         else
@@ -2107,7 +2217,9 @@ function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previous
         local icon = ""
         local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED) -- "Purchased"
 
-        if currentUpgrade < 1 then return end
+        if currentUpgrade < 1 then
+            return
+        end
 
         if CA.SV.ItemBracketDisplayOptions == 1 then
             bracket1 = "["
@@ -2153,7 +2265,9 @@ function CA.MiscAlertBank(eventCode, previousCapacity, currentCapacity, previous
         local icon = ""
         local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED) -- "Purchased"
 
-        if currentUpgrade < 1 then return end
+        if currentUpgrade < 1 then
+            return
+        end
 
         if CA.SV.ItemBracketDisplayOptions == 1 then
             bracket1 = "["
@@ -2267,7 +2381,9 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
     local itemIsSet = GetItemLinkSetInfo(itemName)
 
     -- Workaround for a ZOS bug: Daedric Embers are not flagged in-game as key fragments
-    if (itemId == 69059) then specializedItemType = SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT end
+    if (itemId == 69059) then
+        specializedItemType = SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT
+    end
 
     local itemIsKeyFragment = (itemType == ITEMTYPE_TROPHY) and (specializedItemType == SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT)
     local itemIsSpecial = (itemType == ITEMTYPE_TROPHY and not itemIsKeyFragment) or (itemType == ITEMTYPE_COLLECTIBLE) or IsItemLinkConsumable(itemName)
@@ -2309,7 +2425,9 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
     }
 
     -- Check for Blacklisted loot
-    if ( CA.SV.LootBlacklist and blacklistIDs[itemId] ) then return end
+    if ( CA.SV.LootBlacklist and blacklistIDs[itemId] ) then
+        return
+    end
 
     -- Set prefix based on Looted/Pickpocket/Received
     local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTED)
@@ -2528,14 +2646,18 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
 end
 
 function CA.PrintMultiLineGain()
-    if itemstring1gain == "" then return end
+    if itemstring1gain == "" then
+        return
+    end
     printToChat(itemstring1gain .. itemstring2gain)
     itemstring1gain = ""
     itemstring2gain = ""
 end
 
 function CA.PrintMultiLineLoss()
-    if itemstring1loss == "" then return end
+    if itemstring1loss == "" then
+        return
+    end
     printToChat(itemstring1loss .. itemstring2loss)
     itemstring1loss = ""
     itemstring2loss = ""
@@ -2658,17 +2780,27 @@ function CA.OnTradeSuccess(eventCode)
     if CA.SV.MiscTrade then
         printToChat(GetString(SI_TRADE_COMPLETE)) -- "Trade complete."
     end
-    if CA.SV.MiscTrade and tradestring1 ~= "" then printToChat(tradestring1) end
-    if CA.SV.MiscTrade and tradestring2 ~= "" then printToChat(tradestring2) end
+    if CA.SV.MiscTrade and tradestring1 ~= "" then
+        printToChat(tradestring1)
+    end
+    if CA.SV.MiscTrade and tradestring2 ~= "" then
+        printToChat(tradestring2)
+    end
 
     if CA.SV.LootTrade then
-        if TradeInviter == "" then tradetarget = TradeInvitee end
-        if TradeInvitee == "" then tradetarget = TradeInviter end
+        if TradeInviter == "" then
+            tradetarget = TradeInvitee
+        end
+        if TradeInvitee == "" then
+            tradetarget = TradeInviter
+        end
         for indexOut = 1,5 do
             if g_TradeStacksOut[indexOut] ~= nil then
                 local gainorloss = "|ca80700"
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_TRADED)
-                if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
+                if CA.SV.ItemContextToggle then
+                    logPrefix = ( CA.SV.ItemContextMessage )
+                end
                 local receivedBy = tradetarget
                 local istrade = true
                 local item = g_TradeStacksOut[indexOut]
@@ -2683,7 +2815,9 @@ function CA.OnTradeSuccess(eventCode)
             if g_TradeStacksIn[indexIn] ~= nil then
                 local gainorloss = "|c0B610B"
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_TRADED)
-                if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
+                if CA.SV.ItemContextToggle then
+                    logPrefix = ( CA.SV.ItemContextMessage )
+                end
                 local receivedBy = tradetarget
                 local istrade = true
                 local item = g_TradeStacksIn[indexIn]
@@ -2739,7 +2873,9 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
     local gainorloss = "|c0B610B"
     local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Received"
     local receivedBy = ""
-    if CA.SV.ItemContextToggle then logPrefix = ( CA.SV.ItemContextMessage ) end
+    if CA.SV.ItemContextToggle then
+        logPrefix = ( CA.SV.ItemContextMessage )
+    end
 
     for attachIndex = 1, #g_MailStacks do
         local item = g_MailStacks[attachIndex]
@@ -2747,11 +2883,15 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
         local itemType = GetItemLinkItemType(item.itemlink)
         NumMails = NumMails+1
         --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
-        if CA.SV.LootMail then zo_callLater(function() CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss) end , 50) end
+        if CA.SV.LootMail then
+            zo_callLater(function() CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss) end , 50)
+        end
     end
 
     local plural = "s"
-    if NumMails == 1 then plural = "" end
+    if NumMails == 1 then
+        plural = ""
+    end
 
     MailStringPart1 = (strformat(GetString(SI_LUIE_CA_MAIL_RECEIVED_ATTACHMENT), NumMails, plural) )
     zo_callLater(PrintMailAttachmentsIfNoGold, 25) -- We call this with a super short delay, it will return a string as long as a currency change event doesn't trigger beforehand!
@@ -2789,13 +2929,27 @@ end
 
 function CA.OnMailFail(eventCode, reason)
     if CA.SV.MiscMail then
-        if reason == 2 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_UNKNOWN_PLAYER)) end
-        if reason == 3 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_RECIP_INBOX_FULL)) end
-        if reason == 4 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_CANT_SEND_TO_RECIP)) end
-        if reason == 5 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_NOT_ENOUGH_GOLD)) end
-        if reason == 11 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_CANT_SEND_TO_SELF)) end
-        if reason == 9 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_COD_NO_ATTACHMENT)) end
-        if reason == 7 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_NO_SUB_BODY_ATTACHMENT)) end
+        if reason == 2 then
+            printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_UNKNOWN_PLAYER))
+        end
+        if reason == 3 then
+            printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_RECIP_INBOX_FULL))
+        end
+        if reason == 4 then
+            printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_CANT_SEND_TO_RECIP))
+        end
+        if reason == 5 then
+            printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_NOT_ENOUGH_GOLD))
+        end
+        if reason == 11 then
+            printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_CANT_SEND_TO_SELF))
+        end
+        if reason == 9 then
+            printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_COD_NO_ATTACHMENT))
+        end
+        if reason == 7 then
+            printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_NO_SUB_BODY_ATTACHMENT))
+        end
         MailStop = true
         zo_callLater(CA.MailClearVariables, 500)
     end
@@ -2848,7 +3002,9 @@ function CA.LevelUpdateHelper()
 
     if IsChampion then
         CurrentLevel = GetPlayerChampionPointsEarned()
-        if CurrentLevel < 10 then CurrentLevel = 10 end -- Probably don't really need this here, but it's not going to hurt.
+        if CurrentLevel < 10 then
+            CurrentLevel = 10  -- Probably don't really need this here, but it's not going to hurt.
+        end
         XPLevel = GetNumChampionXPInChampionPoint(CurrentLevel)
         LevelContext = GetString(SI_MAIN_MENU_CHAMPION) -- "Champion"
     else
@@ -2881,10 +3037,18 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
 
         if IsChampion then
             attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned()+1 )
-            if attribute == ATTRIBUTE_NONE then icon = CA.SV.LevelUpIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_champion.dds|t ") or ( "" ) end
-            if attribute == ATTRIBUTE_HEALTH then icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_health_icon-hud-32.dds|t ") or ( "" ) end
-            if attribute == ATTRIBUTE_MAGICKA then icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_magicka_icon-hud-32.dds|t ") or ( "" ) end
-            if attribute == ATTRIBUTE_STAMINA then icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.ddst ") or ( "" ) end
+            if attribute == ATTRIBUTE_NONE then
+                icon = CA.SV.LevelUpIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_champion.dds|t ") or ( "" )
+            end
+            if attribute == ATTRIBUTE_HEALTH then
+                icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_health_icon-hud-32.dds|t ") or ( "" )
+            end
+            if attribute == ATTRIBUTE_MAGICKA then
+                icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_magicka_icon-hud-32.dds|t ") or ( "" )
+            end
+            if attribute == ATTRIBUTE_STAMINA then
+                icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.ddst ") or ( "" )
+            end
             CurrentLevelFormatted = CP_BAR_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
         end
 
@@ -2961,10 +3125,18 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
 
         local attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned()+1 )
         local icon
-        if attribute == ATTRIBUTE_NONE then icon = CA.SV.LevelUpIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_champion.dds|t ") or ( "" ) end
-        if attribute == ATTRIBUTE_HEALTH then icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_health_icon-hud-32.dds|t ") or ( "" ) end
-        if attribute == ATTRIBUTE_MAGICKA then icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_magicka_icon-hud-32.dds|t ") or ( "" ) end
-        if attribute == ATTRIBUTE_STAMINA then icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.ddst ") or ( "" ) end
+        if attribute == ATTRIBUTE_NONE then
+            icon = CA.SV.LevelUpIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_champion.dds|t ") or ( "" )
+        end
+        if attribute == ATTRIBUTE_HEALTH then
+            icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_health_icon-hud-32.dds|t ") or ( "" )
+        end
+        if attribute == ATTRIBUTE_MAGICKA then
+            icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_magicka_icon-hud-32.dds|t ") or ( "" )
+        end
+        if attribute == ATTRIBUTE_STAMINA then
+            icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.ddst ") or ( "" )
+        end
         local CurrentLevelFormatted = CP_BAR_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
 
         if not LevelChanged1 or Crossover == 1 then
@@ -3032,7 +3204,9 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
         WeLeveled = 1
         if IsChampion then
             CurrentLevel = GetPlayerChampionPointsEarned()
-            if CurrentLevel < 10 then CurrentLevel = 10 end -- Very important, if this player has never hit Champion level before, set the minimum possible value when hitting level 50.
+            if CurrentLevel < 10 then
+                CurrentLevel = 10 -- Very important, if this player has never hit Champion level before, set the minimum possible value when hitting level 50.
+            end
             XPLevel = GetNumChampionXPInChampionPoint(CurrentLevel)
             LevelContext = GetString(SI_MAIN_MENU_CHAMPION) -- "Champion"
         else
@@ -3131,7 +3305,9 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 
                     levelhelper = levelhelper - change
 
-                    if Crossover == 1 then levelhelper = XPLevel end -- If we crossover XP on this level then we just auto set this to max xp/level value for 50.
+                    if Crossover == 1 then
+                        levelhelper = XPLevel -- If we crossover XP on this level then we just auto set this to max xp/level value for 50.
+                    end
 
                     if CA.SV.ExperienceShowDecimal then
                             xppct = math.floor(10000*levelhelper/XPLevel) / 100
@@ -3172,7 +3348,9 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 
                     if IsChampion then
                         local AdjustLevel = GetPlayerChampionPointsEarned() -1
-                        if AdjustLevel < 10 then AdjustLevel = 10 end -- Very important, if this player has never hit Champion level before, set the minimum possible value when hitting level 50.
+                        if AdjustLevel < 10 then
+                            AdjustLevel = 10 -- Very important, if this player has never hit Champion level before, set the minimum possible value when hitting level 50.
+                        end
                         XPLevelAlt = GetNumChampionXPInChampionPoint(AdjustLevel)
                         if Crossover == 1 then
                             XPLevelAlt = GetNumExperiencePointsInLevel(49)
@@ -3308,7 +3486,9 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 end
 
 function CA.PrintQuestExperienceHelper()
-    if WeLeveled == 1 then return end
+    if WeLeveled == 1 then
+        return
+    end
 
     if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
         printToChat(QuestString1)
@@ -3488,8 +3668,12 @@ end
 
 function CA.CraftingClose(eventCode, craftSkill)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate) end
-    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) then g_InventoryStacks = {} end
+    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
+    end
+    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate)
+        then g_InventoryStacks = {}
+    end
     g_BankStacks = {}
 end
 
@@ -3504,8 +3688,12 @@ end
 
 function CA.BankClose(eventCode)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate) end
-    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) then g_InventoryStacks = {} end
+    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
+    end
+    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) then
+        g_InventoryStacks = {}
+    end
     g_BankStacks = {}
 end
 
@@ -3518,8 +3706,12 @@ end
 
 function CA.GuildBankClose(eventCode)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate) end
-    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) then g_InventoryStacks = {} end
+    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
+    end
+    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) then
+        g_InventoryStacks = {}
+    end
 end
 
 function CA.FenceOpen(eventCode, allowSell, allowLaunder)
@@ -3531,8 +3723,12 @@ end
 
 function CA.StoreClose(eventCode)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate) end
-    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) then g_InventoryStacks = {} end
+    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
+    end
+    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) then
+        g_InventoryStacks = {}
+    end
 end
 
 function CA.FenceSuccess(eventCode, result)
@@ -3586,7 +3782,10 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
 
-            if stackCountChange == 0 then return end -- Means item was modified (enchanted, etc)
+            -- Means item was modified (enchanted, etc)
+            if stackCountChange == 0 then
+                return
+            end
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                 local gainorloss = "|c0B610B"
@@ -3601,7 +3800,9 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                 local change = (stackCountChange * -1)
                 local endcount = g_InventoryStacks[slotId].stack - change
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
-                    if CA.SV.ShowDestroy and ItemWasDestroyed then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
+                    if CA.SV.ShowDestroy and ItemWasDestroyed then
+                        CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                    end
                     g_InventoryStacks[slotId] = nil
                 else
                     local icon, stack = GetItemInfo(bagId, slotId)
@@ -3730,7 +3931,9 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
 
                 local change = (stackCountChange * -1)
                 local endcount = g_InventoryStacks[slotId].stack - change
-                if logPrefix ~= GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED) or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
+                if logPrefix ~= GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED) or CA.SV.ShowCraftUse then
+                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                end
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
                     g_InventoryStacks[slotId] = nil
                 else
@@ -3810,7 +4013,9 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
 
                 local change = (stackCountChange * -1)
                 local endcount = g_BankStacks[slotId].stack - change
-                if logPrefix ~= GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED) or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
+                if logPrefix ~= GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED) or CA.SV.ShowCraftUse then
+                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                end
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
                     g_BankStacks[slotId] = nil
                 else
@@ -3842,7 +4047,9 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             end
         end
 
-        if logPrefix ~= GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED) or CA.SV.ShowCraftUse then CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss) end
+        if logPrefix ~= GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED) or CA.SV.ShowCraftUse then
+            CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss)
+        end
     end
 
     ItemWasDestroyed = false
@@ -3861,7 +4068,10 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = "|c0B610B"
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
-            if InventoryOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) InventoryOn = false end
+            if InventoryOn then
+                CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+                InventoryOn = false
+            end
         --[[elseif g_InventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
             local icon, stack = GetItemInfo(bagId, slotId)
             local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
@@ -3877,11 +4087,14 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-               local gainorloss = "|c0B610B"
-               local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
-               local icon, stack = GetItemInfo(bagId, slotId)
-               local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-                if InventoryOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) InventoryOn = false end
+                local gainorloss = "|c0B610B"
+                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
+                local icon, stack = GetItemInfo(bagId, slotId)
+                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                if InventoryOn then
+                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+                    InventoryOn = false
+                end
                g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
@@ -3889,7 +4102,9 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_InventoryStacks[slotId].stack - change
-                if CA.SV.ShowDestroy and ItemWasDestroyed then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
+                if CA.SV.ShowDestroy and ItemWasDestroyed then
+                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                end
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index
                     -- if InventoryOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) InventoryOn = false end
                     g_InventoryStacks[slotId] = nil
@@ -3900,9 +4115,15 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                 end
             end
         end
-        if not ItemWasDestroyed then BankOn = true end
-        if not ItemWasDestroyed then InventoryOn = false end
-        if not ItemWasDestroyed then zo_callLater(CA.BankFixer, 50) end
+        if not ItemWasDestroyed then
+            BankOn = true
+        end
+        if not ItemWasDestroyed then
+            InventoryOn = false
+        end
+        if not ItemWasDestroyed then
+            zo_callLater(CA.BankFixer, 50)
+        end
     end
 
     ---------------------------------- BANK ----------------------------------
@@ -3917,7 +4138,10 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = "|ca80700"
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
-            if BankOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) BankOn = false end
+            if BankOn then
+                CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+                BankOn = false
+            end
         --[[elseif g_BankStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
             OldItemLink = g_BankStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
             local icon, stack = GetItemInfo(bagId, slotId)
@@ -3933,19 +4157,24 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-               local gainorloss = "|ca80700"
-               local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
-               local icon, stack = GetItemInfo(bagId, slotId)
-               local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-               if BankOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) BankOn = false end
-               g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
+                local gainorloss = "|ca80700"
+                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
+                local icon, stack = GetItemInfo(bagId, slotId)
+                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                if BankOn then
+                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+                    BankOn = false
+                end
+                g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
                 local gainorloss = ("|ca80700")
                 local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED), GetString(SI_INTERACT_OPTION_BANK) )
                 local change = (stackCountChange * -1)
                 local endcount = g_BankStacks[slotId].stack - change
-                if CA.SV.ShowDestroy and ItemWasDestroyed then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
+                if CA.SV.ShowDestroy and ItemWasDestroyed then
+                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                end
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
                     -- if BankOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) BankOn = false end
                     g_BankStacks[slotId] = nil
@@ -3955,9 +4184,15 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                     g_BankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
                 end
             end
-            if not ItemWasDestroyed then InventoryOn = true end
-            if not ItemWasDestroyed then BankOn = false end
-            if not ItemWasDestroyed then zo_callLater(CA.BankFixer, 50) end
+            if not ItemWasDestroyed then
+                InventoryOn = true
+            end
+            if not ItemWasDestroyed then
+                BankOn = false
+            end
+            if not ItemWasDestroyed then
+                zo_callLater(CA.BankFixer, 50)
+            end
         end
     end
 
@@ -4040,7 +4275,9 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
                 GuildBankCarry_itemLink = item.itemlink
                 GuildBankCarry_stackCount = change or 1
                 GuildBankCarry_itemType = GetItemLinkItemType(item.itemlink)
-                if CA.SV.ShowDestroy and ItemWasDestroyed then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
+                if CA.SV.ShowDestroy and ItemWasDestroyed
+                    then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                end
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index
                     g_InventoryStacks[slotId] = nil
                 else
@@ -4097,7 +4334,9 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             local gainorloss = "|c0B610B"
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LAUNDERED)
             LaunderCheck = true
-            if itemType == ITEMTYPE_WEAPON or itemType == ITEMTYPE_ARMOR or itemType == ITEMTYPE_JEWELRY then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) end
+            if itemType == ITEMTYPE_WEAPON or itemType == ITEMTYPE_ARMOR or itemType == ITEMTYPE_JEWELRY then
+                CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
+            end
         elseif g_InventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_InventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
@@ -4118,7 +4357,9 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
                 local endcount = g_InventoryStacks[slotId].stack - change
                 --CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
-                    if CA.SV.ShowDestroy and ItemWasDestroyed then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) end
+                    if CA.SV.ShowDestroy and ItemWasDestroyed then
+                        CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                    end
                     g_InventoryStacks[slotId] = nil
                 else
                     local icon, stack = GetItemInfo(bagId, slotId)
@@ -4140,7 +4381,10 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
         local stack = stackCountChange
         local itemType = GetItemLinkItemType(itemlink)
 
-        if stackCountChange < 1 then return end -- Laundering won't ever remove things from the bag, so ignore
+        -- Laundering won't ever remove things from the bag, so ignore
+        if stackCountChange < 1 then
+            return
+        end
 
         LaunderCheck = true
         CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss)
@@ -4163,7 +4407,9 @@ function CA.JusticeStealRemove(eventCode)
         ConfiscateMessage = GetString(SI_LUIE_CA_JUSTICE_CONFISCATED_BOUNTY_ITEMS_MSG)
     end
 
-    if stealstring == "" then return end
+    if stealstring == "" then
+        return
+    end
 
     if CA.SV.MiscConfiscate then
         printToChat(ConfiscateMessage)
@@ -4236,9 +4482,15 @@ function CA.DuelInviteReceived(eventCode, inviterCharacterName, inviterDisplayNa
     local displayBothString = ( strformat("<<1>><<2>>", inviterCharacterName, inviterDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
 
-    if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(GetString(SI_DUEL_INVITE_RECEIVED), displayNameLink)) end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(GetString(SI_DUEL_INVITE_RECEIVED), characterNameLink)) end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_DUEL_INVITE_RECEIVED), displayBoth)) end
+    if CA.SV.ChatPlayerDisplayOptions == 1 then
+        printToChat(strformat(GetString(SI_DUEL_INVITE_RECEIVED), displayNameLink))
+    end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then
+        printToChat(strformat(GetString(SI_DUEL_INVITE_RECEIVED), characterNameLink))
+    end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then
+        printToChat(strformat(GetString(SI_DUEL_INVITE_RECEIVED), displayBoth))
+    end
 end
 
 function CA.DuelInviteAccepted(eventCode)
@@ -4251,9 +4503,15 @@ function CA.DuelInviteSent(eventCode, inviteeCharacterName, inviteeDisplayName)
     local displayBothString = ( strformat("<<1>><<2>>", inviteeCharacterName, inviteeDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviteeDisplayName)
 
-    if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(GetString(SI_DUEL_INVITE_SENT), displayNameLink)) end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(GetString(SI_DUEL_INVITE_SENT), characterNameLink)) end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_DUEL_INVITE_SENT), displayBoth)) end
+    if CA.SV.ChatPlayerDisplayOptions == 1 then
+        printToChat(strformat(GetString(SI_DUEL_INVITE_SENT), displayNameLink))
+    end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then
+        printToChat(strformat(GetString(SI_DUEL_INVITE_SENT), characterNameLink))
+    end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then
+        printToChat(strformat(GetString(SI_DUEL_INVITE_SENT), displayBoth))
+    end
 end
 
 function CA.DuelFinished(eventCode, duelResult, wasLocalPlayersResult, opponentCharacterName, opponentDisplayName, opponentAlliance, opponentGender, opponentClassId, opponentRaceId)
@@ -4265,18 +4523,30 @@ function CA.DuelFinished(eventCode, duelResult, wasLocalPlayersResult, opponentC
         local displayBothString = ( strformat("<<1>><<2>>", g_playerName, g_playerDisplayName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, g_playerDisplayName)
 
-        if CA.SV.ChatPlayerDisplayOptions == 1 then resultName = displayNameLink end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then resultName = characterNameLink end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then resultName = displayBoth end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then
+            resultName = displayNameLink
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then
+            resultName = characterNameLink
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then
+            resultName = displayBoth
+        end
     else
         local characterNameLink = ZO_LinkHandler_CreateCharacterLink(opponentCharacterName)
         local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(opponentDisplayName)
         local displayBothString = ( strformat("<<1>><<2>>", opponentCharacterName, opponentDisplayName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, opponentDisplayName)
 
-        if CA.SV.ChatPlayerDisplayOptions == 1 then resultName = displayNameLink end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then resultName = characterNameLink end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then resultName = displayBoth end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then
+            resultName = displayNameLink
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then
+            resultName = characterNameLink
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then
+            resultName = displayBoth
+        end
     end
 
     if duelResult == 0 then
@@ -4293,9 +4563,15 @@ function CA.DuelInviteFailed(eventCode, reason, targetCharacterName, targetDispl
     local displayBothString = ( strformat("<<1>><<2>>", targetCharacterName, targetDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, targetDisplayName)
 
-    if CA.SV.ChatPlayerDisplayOptions == 1 then reasontName = displayNameLink end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then reasonName = characterNameLink end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then reasonName = displayBoth end
+    if CA.SV.ChatPlayerDisplayOptions == 1 then
+        reasontName = displayNameLink
+    end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then
+        reasonName = characterNameLink
+    end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then
+        reasonName = displayBoth
+    end
 
     printToChat(strformat(GetString("SI_DUELINVITEFAILREASON", reason), reasonName))
 end
