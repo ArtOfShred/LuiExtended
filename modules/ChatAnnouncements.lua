@@ -1251,9 +1251,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
                 end
             elseif not MailStop then
                 if not CA.SV.GoldChange then
-                    printToChat(strformat(GetString(SI_LUIE_CA_MAIL_RECEIVED_GOLD_MSG), changetype))
+                    printToChat(strformat(GetString(SI_LUIE_CA_MAIL_RECEIVED_VAR_GOLD_MSG), changetype))
                 else
-                    printToChat(GetString(SI_LUIE_CA_MAIL_RECEIVED_VAR_GOLD_MSG))
+                    printToChat(GetString(SI_LUIE_CA_MAIL_RECEIVED_GOLD_MSG))
                 end
             end
             if CA.SV.GoldChange then
@@ -1305,8 +1305,8 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             total = ""
         end
 
-        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and not CA.SV.GoldChange then printToChat(strformat(GetString(SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT), changetype)) end
-        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and CA.SV.GoldChange then printToChat(GetString(SI_LUIE_CA_MAIL_COD_GOLD_SENT1)) end
+        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and not CA.SV.GoldChange then printToChat(strformat(GetString(SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT1), changetype)) end
+        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and CA.SV.GoldChange then printToChat(GetString(SI_LUIE_CA_MAIL_COD_GOLD_SENT)) end
         if CA.SV.MiscMail and mailCOD == 0 and mailMoney == 0 and postageAmount >= 1 then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_SUCCESS)) end
         if CA.SV.MiscMail and mailMoney ~= 0 and not CA.SV.GoldChange then printToChat(strformat(GetString(SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG), mailMoney) ) end
         if CA.SV.MiscMail and mailMoney ~= 0 and CA.SV.GoldChange then printToChat(GetString(SI_LUIE_CA_MAIL_SENT_SUCCESS)) end
@@ -2753,18 +2753,20 @@ function CA.OnMailSuccess(eventCode)
     zo_callLater(CA.FunctionMailCurrencyCheck, latency)
 
     if CA.SV.LootMail then
-        for mailIndex = 1, #g_MailStacksOut do
-        local gainorloss = "|ca80700"
-        local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SENT)
-        if CA.SV.ItemContextToggle then
-            logPrefix = ( CA.SV.ItemContextMessage )
-        end
-        local receivedBy = ""
-        local item = g_MailStacksOut[mailIndex]
-        icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-        local itemType = GetItemLinkItemType(item.itemlink)
-        --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
-        CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss)
+        for mailIndex = 1,6 do -- Have to iterate through all 6 possible mail attachments, otherwise nil values will bump later items off the list potentially.
+            if g_MailStacksOut[mailIndex] ~= nil then
+                local gainorloss = "|ca80700"
+                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SENT)
+                    if CA.SV.ItemContextToggle then
+                        logPrefix = ( CA.SV.ItemContextMessage )
+                    end
+                local receivedBy = ""
+                local item = g_MailStacksOut[mailIndex]
+                icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+                local itemType = GetItemLinkItemType(item.itemlink)
+                --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
+                CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss)
+            end
         end
     end
 
