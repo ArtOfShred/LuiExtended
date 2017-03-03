@@ -152,35 +152,36 @@ local g_showActivityStatus        = true
 local g_showRCUpdates             = true
 local g_showStatusDropMember      = false
 local g_stealString               = ""
-local g_tradeString1              = ""
-local g_tradeString2              = ""
 local g_weAreQueued               = false -- Variable to determine if we are in queue, if the player isn't in queue ACTIVITY_FINDER_STATUS_NONE is broadcast on init, we don't want this to show any event!
 
--- When quest XP is gained during dialogue the player doesn't actually level up until exiting the dialogue. The variables get stored and saved to print on levelup if this is the case.
-local g_weLeveled = 0
-local g_crossover = 0
+-- When quest XP is gained during dialogue the player doesn't actually level up until exiting the dialogue.
+-- The variables get stored and saved to print on levelup if this is the case.
+local g_weLeveled                 = 0
+local g_crossover                 = 0
 
 -- Various fudge variables required for fixing display on levelup when turning in quests that give both XP completion and POI completion!
-local g_questString1              = ""
-local g_questString2              = ""
+local g_levelCarryOverValue       = 0
+local g_levelChanged1             = false
 local g_questCombiner1            = ""
 local g_questCombiner2            = ""
 local g_questCombiner2Alt         = ""
-local g_levelChanged1             = false
+local g_questString1              = ""
+local g_questString2              = ""
 local g_totalLevelAdjust          = ""
-local g_levelCarryOverValue       = 0
 
 -- Variables used for Trade Functions
-local g_tradeStacksIn   = {}
-local g_tradeStacksOut  = {}
-local g_tradeInviter      = ""
-local g_tradeInvitee      = ""
+local g_tradeInvitee              = ""
+local g_tradeInviter              = ""
+local g_tradeStacksIn             = {}
+local g_tradeStacksOut            = {}
+local g_tradeString1              = ""
+local g_tradeString2              = ""
 
 function CA.Initialize(enabled)
     -- Load settings
     CA.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "ChatAnnouncements", CA.D )
 
-    -- Disable if setting not toggled on!
+    -- Disable if setting not toggled on
     if not enabled then
         return
     end
@@ -249,11 +250,9 @@ function CA.RegisterGuildEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD, CA.GuildRemovedSelf)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_INVITE_ADDED, CA.GuildInviteAdded)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_INVITE_REMOVED, CA.GuildInviteRemoved)
-
         if CA.SV.MiscGuildMOTD then
             EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MOTD_CHANGED, CA.GuildMOTD)
         end
-
         if CA.SV.MiscGuildRank then
             EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_RANK_CHANGED, CA.GuildRank)
         end
@@ -629,15 +628,15 @@ end
 
 function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
     local currentRank = g_guildRankData[guildId].rank
-
-    hasPermission1 = DoesGuildRankHavePermission(guildId, currentRank, 4)
-    hasPermission2 = DoesGuildRankHavePermission(guildId, currentRank, 5)
+    local hasPermission1 = DoesGuildRankHavePermission(guildId, currentRank, 4)
+    local hasPermission2 = DoesGuildRankHavePermission(guildId, currentRank, 5)
+    
     if ((hasPermission1 or hasPermission2) and DisplayName ~= g_playerDisplayName and CA.SV.GuildRankDisplayOptions == 2) or (CA.SV.GuildRankDisplayOptions == 3 and DisplayName ~= g_playerDisplayName) then
         local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
         local rankName
-
-        rankNameDefault = GetDefaultGuildRankName(guildId, newRank)
-        rankNameCustom = GetGuildRankCustomName(guildId, newRank)
+        local rankNameDefault = GetDefaultGuildRankName(guildId, newRank)
+        local rankNameCustom = GetGuildRankCustomName(guildId, newRank)
+        
         if rankNameCustom == "" then
             rankName = rankNameDefault
         else
@@ -648,9 +647,9 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
         local icon = GetGuildRankLargeIcon(icon)
         local iconSize = 16
         local rankSyntax = CA.SV.MiscGuildIcon and zo_iconTextFormat(icon, iconSize, iconSize, ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
-
         local guildName = GetGuildName(guildId)
         local guilds = GetNumGuilds()
+        
         for i = 1,guilds do
             local id = GetGuildId(i)
             local name = GetGuildName(id)
@@ -665,11 +664,12 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
             end
         end
     end
-
-    if DisplayName == g_playerDisplayName then -- Cancel out if its not the player being promoted. It would be a little inefficient to index all guild members on initialize for this.
+    
+    -- Cancel out if its not the player being promoted. It would be a little inefficient to index all guild members on initialize for this.
+    if DisplayName == g_playerDisplayName then
         local rankName
-        rankNameDefault = GetDefaultGuildRankName(guildId, newRank)
-        rankNameCustom = GetGuildRankCustomName(guildId, newRank)
+        local rankNameDefault = GetDefaultGuildRankName(guildId, newRank)
+        local rankNameCustom = GetGuildRankCustomName(guildId, newRank)
         if rankNameCustom == "" then
             rankName = rankNameDefault
         else
