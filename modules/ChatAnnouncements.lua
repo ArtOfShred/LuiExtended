@@ -10,6 +10,9 @@ local strformat     = zo_strformat
 local strfmt        = string.format
 local gsub          = string.gsub
 
+GuildsIndex         = LUIE.GuildsIndex     -- UNUSED?
+GuildIndexData      = LUIE.GuildIndexData  -- THIS CAN BE LOCAL I THINK
+
 local moduleName    = LUIE.name .. '_ChatAnnouncements'
 
 CA.Enabled = false
@@ -107,6 +110,21 @@ CA.D = {
     MiscHorse                     = false,
 }
 
+g_InventoryStacks   = {} -- Called for indexing on init
+g_BankStacks        = {} -- Called for indexing on opening crafting window (If the player decons an item from the bank - not needed for bank, since we don't care about items in the bank)
+g_lastPercentage    = {} -- Here we will store last displayed percentage for achievement
+OldItemLink         = ""
+ItemWasDestroyed    = false
+itemstring1         = ""
+itemstring2         = ""
+itemstring3         = ""
+remembercontext     = "" -- UNUSED
+newcontextstring    = "" -- UNUSED
+itemstring1gain     = ""
+itemstring2gain     = ""
+itemstring1loss     = ""
+itemstring2loss     = ""
+
 local g_playerName          = nil
 local g_playerNameFormatted = nil
 local combostring           = "" -- String is filled by the EVENT_CURRENCY_CHANGE events and ammended onto the end of purchase/sales from LootLog component if toggled on!
@@ -123,12 +141,51 @@ local MailStop              = false
 local MailStringPart1       = ""
 local MailCurrencyCheck     = true
 local IsValidLaunder        = false
+local GroupJoinFudger       = false -- Controls message for group join
+local GuildJoinFudger       = false
+local GuildRankData         = {} -- Variable to store local player guild ranks, for guild rank changes.
+local GuildBankCarry_logPrefix
+local GuildBankCarry_icon
+local GuildBankCarry_itemLink
+local GuildBankCarry_stackCount = 1
+local GuildBankCarry_receivedBy
+local GuildBankCarry_gainorloss
+local GuildBankCarry_itemType
 
-local GroupJoinFudger = false -- Controls message for group join
-local GuildJoinFudger = false
-local GuildRankData = {} -- Variable to store local player guild ranks, for guild rank changes.
-GuildsIndex = LUIE.GuildsIndex
-GuildIndexData = LUIE.GuildIndexData
+-- When quest XP is gained during dialogue the player doesn't actually level up until exiting the dialogue. The variables get stored and saved to print on levelup if this is the case.
+local WeLeveled = 0
+local Crossover = 0
+
+-- Various fudge variables required for fixing display on levelup when turning in quests that give both XP completion and POI completion!
+local QuestString1         = ""
+local QuestString2         = ""
+local QuestCombiner1       = ""
+local QuestCombiner2       = ""
+local QuestCombiner2Alt    = ""
+local LevelChanged1        = false
+local TotalLevelAdjust     = ""
+local LevelCarryOverValue  = 0
+
+local XPCombatBufferValue  = 0
+local XPCombatBufferString = ""
+local XP_BAR_COLORS        = ZO_XP_BAR_GRADIENT_COLORS[2] -- Color for Normal Levels
+local CP_BAR_COLORS        = ZO_CP_BAR_GRADIENT_COLORS -- Color for Champion Levels
+
+local g_CraftStacks     = {}
+local g_MailStacks      = {}
+local g_MailStacksOut   = {}
+
+local WeAreQueued          = false -- Variable to determine if we are in queue, if the player isn't in queue ACTIVITY_FINDER_STATUS_NONE is broadcast on init, we don't want this to show any event!
+local ShowRCUpdates        = true
+local FixJoinMessage       = false
+local ShowActivityStatus   = true
+local ShowStatusDropMember = false
+
+-- Variables used for Trade Functions
+local g_TradeStacksIn   = {}
+local g_TradeStacksOut  = {}
+local TradeInviter      = ""
+local TradeInvitee      = ""
 
 function CA.Initialize(enabled)
     -- Load settings
@@ -215,11 +272,307 @@ function CA.RegisterGuildEvents()
             for i = 1,5 do
                 local guildId = GetGuildId(i)
                 local memberIndex = GetPlayerGuildMemberIndex(guildId)
-                local _, _, rankIndex = GetGuildMemberInfo (guildId, memberIndex)
+                local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
                 GuildRankData[guildId] = {rank=rankIndex}
             end
         end
     end
+end
+
+function CA.RegisterDuelEvents()
+    --EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_COUNTDOWN, CA.DuelCountdown)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_RECEIVED, CA.DuelInviteReceived)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_ACCEPTED, CA.DuelInviteAccepted)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_SENT, CA.DuelInviteSent)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_FINISHED, CA.DuelFinished)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_FAILED, CA.DuelInviteFailed)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_DECLINED, CA.DuelInviteDeclined)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_CANCELED, CA.DuelInviteCanceled)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_NEAR_BOUNDARY, CA.DuelNearBoundary)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, CA.DuelStarted)
+end
+
+function CA.RegisterAchievementsEvent()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACHIEVEMENT_UPDATED)
+    if CA.SV.Achievements then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACHIEVEMENT_UPDATED, CA.OnAchievementUpdated)
+    end
+end
+
+function CA.RegisterXPEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LEVEL_UPDATE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CHAMPION_POINT_UPDATE)
+    if CA.SV.Experience or CA.SV.ExperienceLevelUp then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN, CA.OnExperienceGain)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEVEL_UPDATE, CA.OnLevelUpdate)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_UPDATE, CA.OnChampionUpdate)
+
+        CA.LevelUpdateHelper()
+    end
+end
+
+function CA.RegisterGroupEvents()
+    -- Group Events
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_REMOVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_UPDATE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RESPONSE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LEADER_UPDATE)
+    -- Ready check and Group Finder Votekick Events
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_ELECTION_FAILED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_ELECTION_NOTIFICATION_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_ELECTION_RESULT)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_ELECTION_REQUESTED)
+    -- Group Finder Events
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_FIND_REPLACEMENT_NOTIFICATION_NEW)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_STATUS_UPDATE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTIVITY_QUEUE_RESULT)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_CANCELLED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_UPDATED)
+    if CA.SV.GroupChatMsg then
+        -- Group Events
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_REMOVED, CA.GroupInviteRemoved)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_UPDATE, CA.GroupUpdate)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED, CA.OnGroupMemberJoined)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT,   CA.OnGroupMemberLeft)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED, CA.OnGroupInviteReceived)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RESPONSE, CA.OnGroupInviteResponse)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEADER_UPDATE, CA.OnGroupLeaderUpdate)
+        --EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_ROLES_CHANGED, CA.GMRC) -- Possibly re-enable later if solution is found.
+        --EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_CONNECTED_STATUS, CA.GMCS) -- Possibly re-enable later if solution is found.
+        -- Ready check and Group Finder Votekick Events
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_FAILED, CA.VoteFailed)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_NOTIFICATION_ADDED, CA.VoteNotify)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_RESULT, CA.VoteResult)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_REQUESTED, CA.VoteRequested)
+        -- Group Finder Events
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_FIND_REPLACEMENT_NOTIFICATION_NEW, CA.GroupFindReplacementNew)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE, CA.ActivityComplete)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_STATUS_UPDATE, CA.ActivityStatusUpdate)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_QUEUE_RESULT, CA.ActivityQueueResult)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_CANCELLED, CA.ReadyCheckCancel)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_UPDATED, CA.ReadyCheckUpdate)
+    end
+end
+
+function CA.RegisterGoldEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MONEY_UPDATE)
+    if CA.SV.GoldChange or CA.SV.MiscMail then -- Only register this event if the menu setting is true
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MONEY_UPDATE, CA.OnMoneyUpdate)
+        GoldColorize = ZO_ColorDef:New(unpack(CA.SV.GoldColor))
+    end
+    if CA.SV.MiscMail or CA.SV.LootMail or CA.SV.GoldChange then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, CA.OnMailAttach)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, CA.OnMailAttachRemove)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, CA.OnMailCloseBox)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED, CA.OnMailFail)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS, CA.OnMailSuccess)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED, CA.MailMoneyChanged)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED, CA.MailCODChanged)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_REMOVED, CA.MailRemoved)
+    end
+end
+
+function CA.RegisterVendorEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_BUYBACK_RECEIPT)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_BUY_RECEIPT)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_SELL_RECEIPT)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_FENCE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_STORE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT)
+    if CA.SV.LootVendor then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BUYBACK_RECEIPT, CA.OnBuybackItem)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BUY_RECEIPT, CA.OnBuyItem)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_SELL_RECEIPT, CA.OnSellItem)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_FENCE, CA.FenceOpen)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_STORE, CA.StoreClose)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT, CA.FenceSuccess)
+    end
+end
+
+function CA.RegisterBankEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_BANK)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_BANK)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_GUILD_BANK)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_GUILD_BANK)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_REMOVED)
+    if CA.SV.LootBank then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_BANK, CA.BankOpen)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_BANK, CA.BankClose)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_GUILD_BANK, CA.GuildBankOpen)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_GUILD_BANK, CA.GuildBankClose)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_ADDED, CA.GuildBankItemAdded)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_REMOVED, CA.GuildBankItemRemoved)
+    end
+end
+
+function CA.RegisterTradeEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_SUCCEEDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_CANCELED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_FAILED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED)
+    if CA.SV.MiscTrade and not CA.SV.LootTrade then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_SUCCEEDED, CA.OnTradeSuccess)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING, CA.TradeInviteWaiting)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING, CA.TradeInviteConsidering)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED, CA.TradeInviteAccepted)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_CANCELED, CA.TradeCancel)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_FAILED, CA.TradeFail)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED, CA.TradeInviteCancel)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED, CA.TradeInviteDecline)
+    elseif CA.SV.LootTrade then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED, CA.OnTradeAdded)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED, CA.OnTradeRemoved)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_SUCCEEDED, CA.OnTradeSuccess)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING, CA.TradeInviteWaiting)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING, CA.TradeInviteConsidering)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED, CA.TradeInviteAccepted)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_CANCELED, CA.TradeCancel)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_FAILED, CA.TradeFail)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED, CA.TradeInviteCancel)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED, CA.TradeInviteDecline)
+    end
+end
+
+function CA.RegisterMailEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_READABLE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_TAKE_ATTACHED_ITEM_SUCCESS)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_REMOVED)
+    if CA.SV.MiscMail or CA.SV.LootMail then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_READABLE, CA.OnMailReadable)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_TAKE_ATTACHED_ITEM_SUCCESS, CA.OnMailTakeAttachedItem)
+    end
+    if CA.SV.MiscMail or CA.SV.LootMail or CA.SV.GoldChange then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, CA.OnMailAttach)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, CA.OnMailAttachRemove)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, CA.OnMailCloseBox)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED, CA.OnMailFail)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS, CA.OnMailSuccess)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED, CA.MailMoneyChanged)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED, CA.MailCODChanged)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_REMOVED, CA.MailRemoved)
+    end
+    if CA.SV.MiscMail or CA.SV.GoldChange then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MONEY_UPDATE, CA.OnMoneyUpdate)
+    end
+end
+
+function CA.RegisterCraftEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CRAFTING_STATION_INTERACT, CA.CraftingOpen)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_END_CRAFTING_STATION_INTERACT, CA.CraftingClose)
+    if CA.SV.LootCraft then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CRAFTING_STATION_INTERACT, CA.CraftingOpen)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_END_CRAFTING_STATION_INTERACT, CA.CraftingClose)
+    end
+end
+
+function CA.RegisterDestroyEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED)
+    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT, CA.MiscAlertHorse)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, CA.MiscAlertBags)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, CA.MiscAlertBank)
+        g_InventoryStacks = {}
+        CA.IndexInventory()
+    elseif not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) and CA.SV.MiscHorse then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT, CA.MiscAlertHorse)
+    elseif not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) and CA.SV.MiscBags then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, CA.MiscAlertBags)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, CA.MiscAlertBank)
+    end
+    if CA.SV.ShowDestroy then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED, CA.DestroyItem)
+    end
+    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.MiscConfiscate then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED, CA.JusticeStealRemove)
+    end
+    ItemWasDestroyed = false
+end
+
+function CA.RegisterBagEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED)
+    if CA.SV.MiscBags or CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, CA.MiscAlertBags)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, CA.MiscAlertBank)
+    end
+end
+
+function CA.RegisterLockpickEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOCKPICK_FAILED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS)
+    if CA.SV.MiscLockpick then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_FAILED, CA.MiscAlertLockFailed)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS, CA.MiscAlertLockSuccess)
+    end
+end
+
+function CA.RegisterHorseEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT)
+    if CA.SV.MiscHorse or CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT, CA.MiscAlertHorse)
+    end
+end
+
+function CA.RegisterAlliancePointEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ALLIANCE_POINT_UPDATE)
+    if CA.SV.AlliancePointChange then -- Only register this event if the menu setting is true
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ALLIANCE_POINT_UPDATE, CA.OnAlliancePointUpdate)
+        APColorize = ZO_ColorDef:New(unpack(CA.SV.AlliancePointColor))
+    end
+end
+
+function CA.RegisterTelVarStoneEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TELVAR_STONE_UPDATE)
+    if CA.SV.TelVarStoneChange then -- Only register this event if the menu setting is true
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TELVAR_STONE_UPDATE, CA.OnTelVarStoneUpdate)
+        TVColorize = ZO_ColorDef:New(unpack(CA.SV.TelVarStoneColor))
+    end
+end
+
+function CA.RegisterWritVoucherEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_WRIT_VOUCHER_UPDATE)
+    if CA.SV.WritVoucherChange then -- Only register this event if the menu setting is true
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_WRIT_VOUCHER_UPDATE, CA.OnWritVoucherUpdate)
+        WVColorize = ZO_ColorDef:New(unpack(CA.SV.WritVoucherColor))
+    end
+end
+
+function CA.RegisterLootEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOOT_RECEIVED)
+    if CA.SV.Loot then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_RECEIVED, CA.OnLootReceived)
+    end
+end
+
+-- Helper function called after receiving a group invite. This ensures we don't ever have any issues seeing the first group invite message by renabling the Event handler after the first message arrives.
+-- Otherwise we would see both messages broadcast as 2 events fire at the player when a group invite is received.
+function CA.RefreshGroupInviteEnable()
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED, CA.OnGroupInviteReceived)
 end
 
 function CA.GuildMemberAdded(eventCode, guildId, DisplayName)
@@ -235,9 +588,11 @@ function CA.GuildMemberAdded(eventCode, guildId, DisplayName)
         local guildAlliance = GetGuildAlliance(id) -- Temporary until I can figure out why GetGuildAlliance() isn't working
         local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
         
-        if guildName == name then printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MEMBER_ADDED), displayNameLink, guildNameAlliance)) break end
+        if guildName == name then
+            printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MEMBER_ADDED), displayNameLink, guildNameAlliance))
+            break
+        end
     end
-
 end
 
 function CA.GuildMemberRemoved(eventCode, guildId, DisplayName, CharacterName)
@@ -253,13 +608,14 @@ function CA.GuildMemberRemoved(eventCode, guildId, DisplayName, CharacterName)
         local guildAlliance = GetGuildAlliance(id) -- Temporary until I can figure out why GetGuildAlliance() isn't working
         local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
         
-        if guildName == name then printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MEMBER_REMOVED), displayNameLink, guildNameAlliance)) break end
+        if guildName == name then
+            printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MEMBER_REMOVED), displayNameLink, guildNameAlliance))
+            break
+        end
     end
-
 end
 
 function CA.GuildMOTD(eventCode, guildId)
-
     local motd = GetGuildMotD(guildId)
     local guildName = GetGuildName(guildId)
     
@@ -272,9 +628,11 @@ function CA.GuildMOTD(eventCode, guildId)
         local guildAlliance = GetGuildAlliance(id) -- Temporary until I can figure out why GetGuildAlliance() isn't working
         local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
         
-        if guildName == name then printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MOTD_CHANGED), guildNameAlliance, motd)) break end
+        if guildName == name then
+            printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MOTD_CHANGED), guildNameAlliance, motd))
+            break
+        end
     end
-
 end
 
 function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
@@ -309,7 +667,10 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
             local guildAlliance = GetGuildAlliance(id) -- Temporary until I can figure out why GetGuildAlliance() isn't working
             local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
             
-            if guildName == name then printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED), displayNameLink, guildNameAlliance, rankSyntax)) break end
+            if guildName == name then
+                printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED), displayNameLink, guildNameAlliance, rankSyntax))
+                break
+            end
         end
     end
 
@@ -348,15 +709,15 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
             local guildAlliance = GetGuildAlliance(id) -- Temporary until I can figure out why GetGuildAlliance() isn't working
             local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
             
-            if guildName == name then printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_SELF), changestring, rankSyntax, guildNameAlliance)) break end
-            
+            if guildName == name then
+                printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_SELF), changestring, rankSyntax, guildNameAlliance))
+                break
+            end
         end
-        ---------------
     end
 end
 
 function CA.GuildAddedSelf(eventCode, guildId, guildName)
-    
     local guilds = GetNumGuilds()
     for i = 1,guilds do
         local id = GetGuildId(i)
@@ -366,7 +727,10 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
         local guildAlliance = GetGuildAlliance(id) -- Temporary until I can figure out why GetGuildAlliance() isn't working
         local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
         
-        if guildName == name then printToChat(strformat(GetString(SI_LUIE_CA_GUILD_JOIN_SELF), guildNameAlliance)) break end
+        if guildName == name then
+            printToChat(strformat(GetString(SI_LUIE_CA_GUILD_JOIN_SELF), guildNameAlliance))
+            break
+        end
     end
     
     GuildJoinFudger = true
@@ -384,7 +748,6 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
 end
 
 function CA.GuildRemovedSelf(eventCode, guildId, guildName)
-
     for i = 1,5 do
         local guild = GuildIndexData[i]
         if guild.name == guildName then
@@ -454,15 +817,15 @@ function CA.FriendInviteRemoved(eventCode, inviterName)
 end
 
 function CA.QuestShared (eventCode, questId)
-        local questName, characterName, timeSinceRequestMs, displayName = GetOfferedQuestShareInfo(questId)
-        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(characterName)
-        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
-        local displayBothString = ( strformat("<<1>><<2>>", characterName, displayName) )
-        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+    local questName, characterName, timeSinceRequestMs, displayName = GetOfferedQuestShareInfo(questId)
+    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(characterName)
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+    local displayBothString = ( strformat("<<1>><<2>>", characterName, displayName) )
+    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
 
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), displayNameLink, questName)) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), characterNameLink, questName)) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), displayBoth, questName)) end
+    if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), displayNameLink, questName)) end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), characterNameLink, questName)) end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), displayBoth, questName)) end
 end
 
 function CA.QuestShareRemoved(eventCode, questId)
@@ -518,63 +881,6 @@ function CA.RegisterCustomStrings()
     end
 end
 
--- Display group join/leave in chat
-function CA.RegisterGroupEvents()
-    -- Group Events
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_REMOVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_UPDATE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RESPONSE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LEADER_UPDATE)
-    -- Ready check and Group Finder Votekick Events
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_ELECTION_FAILED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_ELECTION_NOTIFICATION_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_ELECTION_RESULT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_ELECTION_REQUESTED)
-    -- Group Finder Events
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_FIND_REPLACEMENT_NOTIFICATION_NEW)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_STATUS_UPDATE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTIVITY_QUEUE_RESULT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_CANCELLED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_UPDATED)
-    if CA.SV.GroupChatMsg then
-        --EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_ROLES_CHANGED, CA.GMRC) -- Possibly re-enable later if solution is found.
-        --EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_CONNECTED_STATUS, CA.GMCS) -- Possibly re-enable later if solution is found.
-
-        -- Group Events
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_REMOVED, CA.GroupInviteRemoved)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_UPDATE, CA.GroupUpdate)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED, CA.OnGroupMemberJoined)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT,   CA.OnGroupMemberLeft)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED, CA.OnGroupInviteReceived)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RESPONSE, CA.OnGroupInviteResponse)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEADER_UPDATE, CA.OnGroupLeaderUpdate)
-        -- Ready check and Group Finder Votekick Events
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_FAILED, CA.VoteFailed)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_NOTIFICATION_ADDED, CA.VoteNotify)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_RESULT, CA.VoteResult)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_REQUESTED, CA.VoteRequested)
-        -- Group Finder Events
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_FIND_REPLACEMENT_NOTIFICATION_NEW, CA.GroupFindReplacementNew)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE, CA.ActivityComplete)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_STATUS_UPDATE, CA.ActivityStatusUpdate)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_QUEUE_RESULT, CA.ActivityQueueResult)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_CANCELLED, CA.ReadyCheckCancel)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_UPDATED, CA.ReadyCheckUpdate)
-    end
-end
-
--------------------------------------------------------------------------------------------------------------------------------------------------
-
-local WeAreQueued = false -- Variable to determine if we are in queue, if the player isn't in queue ACTIVITY_FINDER_STATUS_NONE is broadcast on init, we don't want this to show any event!
-local ShowRCUpdates = true
-local FixJoinMessage = false
-local ShowActivityStatus = true
-local ShowStatusDropMember = false
-
 function CA.GroupFindReplacementNew(eventCode)
     local activityType, activityIndex = GetLFGFindReplacementNotificationInfo()
     local name = GetLFGOption(activityType, activityIndex)
@@ -582,7 +888,7 @@ function CA.GroupFindReplacementNew(eventCode)
 end
 
 function CA.ActivityComplete(eventCode)
-    printToChat(GetString(SI_ACTIVITY_FINDER_ACTIVITY_COMPLETE_ANNOUNCEMENT_TEXT)) -- "Activity Complete!"
+    printToChat(GetString(SI_ACTIVITY_FINDER_ACTIVITY_COMPLETE_ANNOUNCEMENT_TEXT))
 end
 
 function CA.ActivityStatusUpdate(eventCode, status)
@@ -610,7 +916,6 @@ function CA.ActivityStatusUpdate(eventCode, status)
     end -- Should always trigger at the end result of a ready check failing.
     if status == 2 then FixJoinMessage = false end
     if status == 4 then ShowRCUpdates = false end
-
 end
 
 function CA.ActivityQueueResult(eventCode, result)
@@ -704,8 +1009,6 @@ function CA.ReadyCheckUpdate(eventCode)
     ShowStatusDropMember = false
 end
 
--------------------------------------------------------------------------------------------------------------------------------------------------
-
 function CA.VoteFailed( eventCode, failureReason, descriptor)
     printToChat(GetString("SI_GROUPELECTIONFAILURE", failureReason))
 end
@@ -750,39 +1053,33 @@ function CA.VoteResult(eventCode, electionResult, descriptor)
         end
     end
     if descriptor == "[ZO_NONE]" then
-            local KickCarry
-            local kickMemberName = GetUnitName(targetUnitTag)
-            local kickMemberAccountName = GetUnitDisplayName(targetUnitTag)
+        local KickCarry
+        local kickMemberName = GetUnitName(targetUnitTag)
+        local kickMemberAccountName = GetUnitDisplayName(targetUnitTag)
 
-            local characterNameLink = ZO_LinkHandler_CreateCharacterLink(kickMemberName)
-            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(kickMemberAccountName)
-            local displayBothString = ( strformat("<<1>><<2>>", kickMemberName, kickMemberAccountName) )
-            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, kickMemberAccountName)
+        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(kickMemberName)
+        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(kickMemberAccountName)
+        local displayBothString = ( strformat("<<1>><<2>>", kickMemberName, kickMemberAccountName) )
+        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, kickMemberAccountName)
 
-            if CA.SV.ChatPlayerDisplayOptions == 1 then KickCarry = displayNameLink end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then KickCarry = characterNameLink end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then KickCarry = displayBoth end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then KickCarry = displayNameLink end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then KickCarry = characterNameLink end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then KickCarry = displayBoth end
 
-            if electionResult == 1 then printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry)) end
-            if electionResult == 2 then printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry)) end
-            if electionResult == 4 then printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry)) end
-            if electionResult == 5 then printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry)) end
+        if electionResult == 1 then printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry)) end
+        if electionResult == 2 then printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry)) end
+        if electionResult == 4 then printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry)) end
+        if electionResult == 5 then printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry)) end
     end
 end
 
 function CA.VoteRequested(eventCode, descriptor)
     if descriptor == "[ZO_READY_CHECK]" then
-        printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_REQUESTED)) -- "You have initiated a ready check..."
+        printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_REQUESTED))
     end
     if descriptor == "[ZO_NONE]" then
-        printToChat(GetString(SI_GROUP_ELECTION_REQUESTED)) -- "You have initiated a vote..."
+        printToChat(GetString(SI_GROUP_ELECTION_REQUESTED))
     end
-end
-
--- Helper function called after receiving a group invite. This ensures we don't ever have any issues seeing the first group invite message by renabling the Event handler after the first message arrives.
--- Otherwise we would see both messages broadcast as 2 events fire at the player when a group invite is received.
-function CA.RefreshGroupInviteEnable()
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED, CA.OnGroupInviteReceived)
 end
 
 -- Triggers when the player either accepts or declines an invite. We set GroupJoinFudger to true here, and if the next event is GroupUpdate then it plays a message, if not, the next invite event resets it.
@@ -1005,52 +1302,6 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
         if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(msg, displayBoth)) end
     end
 
-end
-
--- Gold change into chat
-function CA.RegisterGoldEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MONEY_UPDATE)
-    if CA.SV.GoldChange or CA.SV.MiscMail then -- Only register this event if the menu setting is true
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MONEY_UPDATE, CA.OnMoneyUpdate)
-        GoldColorize = ZO_ColorDef:New(unpack(CA.SV.GoldColor))
-    end
-    if CA.SV.MiscMail or CA.SV.LootMail or CA.SV.GoldChange then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, CA.OnMailAttach)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, CA.OnMailAttachRemove)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, CA.OnMailCloseBox)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED, CA.OnMailFail)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS, CA.OnMailSuccess)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED, CA.MailMoneyChanged)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED, CA.MailCODChanged)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_REMOVED, CA.MailRemoved)
-    end
-end
-
--- Alliance Points into chat
-function CA.RegisterAlliancePointEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ALLIANCE_POINT_UPDATE)
-    if CA.SV.AlliancePointChange then -- Only register this event if the menu setting is true
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ALLIANCE_POINT_UPDATE, CA.OnAlliancePointUpdate)
-        APColorize = ZO_ColorDef:New(unpack(CA.SV.AlliancePointColor))
-    end
-end
-
--- Tel Var Stones into chat
-function CA.RegisterTelVarStoneEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TELVAR_STONE_UPDATE)
-    if CA.SV.TelVarStoneChange then -- Only register this event if the menu setting is true
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TELVAR_STONE_UPDATE, CA.OnTelVarStoneUpdate)
-        TVColorize = ZO_ColorDef:New(unpack(CA.SV.TelVarStoneColor))
-    end
-end
-
--- Writ Vouchers into chat
-function CA.RegisterWritVoucherEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_WRIT_VOUCHER_UPDATE)
-    if CA.SV.WritVoucherChange then -- Only register this event if the menu setting is true
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_WRIT_VOUCHER_UPDATE, CA.OnWritVoucherUpdate)
-        WVColorize = ZO_ColorDef:New(unpack(CA.SV.WritVoucherColor))
-    end
 end
 
 -- Gold Change Announcements
@@ -1772,180 +2023,6 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
 
 end
 
--- Loot Announcements
-function CA.RegisterLootEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOOT_RECEIVED)
-    if CA.SV.Loot then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_RECEIVED, CA.OnLootReceived)
-    end
-end
-
-function CA.RegisterVendorEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_BUYBACK_RECEIPT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_BUY_RECEIPT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_SELL_RECEIPT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_FENCE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_STORE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT)
-    if CA.SV.LootVendor then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BUYBACK_RECEIPT, CA.OnBuybackItem)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BUY_RECEIPT, CA.OnBuyItem)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_SELL_RECEIPT, CA.OnSellItem)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_FENCE, CA.FenceOpen)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_STORE, CA.StoreClose)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT, CA.FenceSuccess)
-    end
-end
-
-function CA.RegisterBankEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_BANK)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_BANK)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_GUILD_BANK)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_GUILD_BANK)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_REMOVED)
-    if CA.SV.LootBank then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_BANK, CA.BankOpen)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_BANK, CA.BankClose)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_GUILD_BANK, CA.GuildBankOpen)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_GUILD_BANK, CA.GuildBankClose)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_ADDED, CA.GuildBankItemAdded)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_REMOVED, CA.GuildBankItemRemoved)
-    end
-end
-
-function CA.RegisterTradeEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_SUCCEEDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_CANCELED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_FAILED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED)
-    if CA.SV.MiscTrade and not CA.SV.LootTrade then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_SUCCEEDED, CA.OnTradeSuccess)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING, CA.TradeInviteWaiting)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING, CA.TradeInviteConsidering)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED, CA.TradeInviteAccepted)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_CANCELED, CA.TradeCancel)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_FAILED, CA.TradeFail)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED, CA.TradeInviteCancel)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED, CA.TradeInviteDecline)
-    elseif CA.SV.LootTrade then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED, CA.OnTradeAdded)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED, CA.OnTradeRemoved)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_SUCCEEDED, CA.OnTradeSuccess)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING, CA.TradeInviteWaiting)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING, CA.TradeInviteConsidering)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED, CA.TradeInviteAccepted)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_CANCELED, CA.TradeCancel)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_FAILED, CA.TradeFail)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED, CA.TradeInviteCancel)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED, CA.TradeInviteDecline)
-    end
-end
-
-function CA.RegisterMailEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_READABLE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_TAKE_ATTACHED_ITEM_SUCCESS)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_REMOVED)
-    if CA.SV.MiscMail or CA.SV.LootMail then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_READABLE, CA.OnMailReadable)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_TAKE_ATTACHED_ITEM_SUCCESS, CA.OnMailTakeAttachedItem)
-    end
-    if CA.SV.MiscMail or CA.SV.LootMail or CA.SV.GoldChange then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, CA.OnMailAttach)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, CA.OnMailAttachRemove)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, CA.OnMailCloseBox)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED, CA.OnMailFail)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS, CA.OnMailSuccess)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED, CA.MailMoneyChanged)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED, CA.MailCODChanged)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_REMOVED, CA.MailRemoved)
-    end
-    if CA.SV.MiscMail or CA.SV.GoldChange then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MONEY_UPDATE, CA.OnMoneyUpdate)
-    end
-end
-
-function CA.RegisterCraftEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CRAFTING_STATION_INTERACT, CA.CraftingOpen)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_END_CRAFTING_STATION_INTERACT, CA.CraftingClose)
-    if CA.SV.LootCraft then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CRAFTING_STATION_INTERACT, CA.CraftingOpen)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_END_CRAFTING_STATION_INTERACT, CA.CraftingClose)
-    end
-end
-
-function CA.RegisterDestroyEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED)
-    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT, CA.MiscAlertHorse)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, CA.MiscAlertBags)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, CA.MiscAlertBank)
-        g_InventoryStacks = {}
-        CA.IndexInventory()
-    elseif not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) and CA.SV.MiscHorse then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT, CA.MiscAlertHorse)
-    elseif not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) and CA.SV.MiscBags then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, CA.MiscAlertBags)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, CA.MiscAlertBank)
-    end
-
-    if CA.SV.ShowDestroy then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED, CA.DestroyItem)
-    end
-
-    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.MiscConfiscate then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED, CA.JusticeStealRemove)
-    end
-
-    ItemWasDestroyed = false
-end
-
-function CA.RegisterBagEvents()
-        EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED)
-        EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED)
-    if CA.SV.MiscBags or CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, CA.MiscAlertBags)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, CA.MiscAlertBank)
-    end
-end
-
-function CA.RegisterLockpickEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOCKPICK_FAILED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS)
-    if CA.SV.MiscLockpick then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_FAILED, CA.MiscAlertLockFailed)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS, CA.MiscAlertLockSuccess)
-    end
-end
-
-function CA.RegisterHorseEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT)
-    if CA.SV.MiscHorse or CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT, CA.MiscAlertHorse)
-    end
-end
-
---------------------------------------------------------------
-
 function CA.MiscAlertLockFailed(eventCode)
     printToChat(GetString(SI_LUIE_CA_MISC_LOCKPICK_FAILED))
 end
@@ -2122,7 +2199,7 @@ function CA.OnBuybackItem(eventCode, itemName, quantity, money, itemSound)
 
     icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
 
-    local logPrefix = GetString(SI_ITEMFILTERTYPE8) -- "Buyback"
+    local logPrefix = GetString(SI_ITEMFILTERTYPE8)
     if CA.SV.ItemContextToggle then
         logPrefix = ( CA.SV.ItemContextMessage )
     end
@@ -2169,8 +2246,6 @@ function CA.OnSellItem(eventCode, itemName, quantity, money)
 
     CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainorloss)
 end
-
---------------------------------------------------------------
 
 function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound, lootType, lootedBySelf, isPickpocketLoot, questItemIcon, itemId)
     combostring = ""
@@ -2290,25 +2365,7 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
     end
 end
 
---local LoggedAnItem = false
-itemstring1 = ""
-itemstring2 = ""
-itemstring3 = ""
-remembercontext = ""
-
-newcontextstring = ""
-
-itemstring1gain = ""
-itemstring2gain = ""
-
-itemstring1loss = ""
-itemstring2loss = ""
-
--- "|c0B610B" - GAIN
--- "|ca80700" - LOSS
-
 function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainorloss, istrade)
-
     --LoggedAnItem = true -- Set this to true, allows buffer to start!
 
     local bracket1 = ""
@@ -2472,7 +2529,6 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
 
     LaunderCheck = false
     combostring = ""
-
 end
 
 function CA.PrintMultiLineGain()
@@ -2488,13 +2544,6 @@ function CA.PrintMultiLineLoss()
     itemstring1loss = ""
     itemstring2loss = ""
 end
-
-
--- Variables used for Trade Functions
-local g_TradeStacksIn = {}
-local g_TradeStacksOut = {}
-local TradeInviter = ""
-local TradeInvitee = ""
 
 -- These 2 functions help us get the name of the person we are trading with regardless of who initiated the trade
 function CA.TradeInviteWaiting(eventCode, inviteeCharacterName, inviteeDisplayName)
@@ -2658,14 +2707,6 @@ function CA.OnTradeSuccess(eventCode)
     tradestring2 = ""
 end
 
-local g_CraftStacks = {}
-
---[[
- * Next two functions will track items in mail atachments
- ]]--
-local g_MailStacks = {}
-local g_MailStacksOut = {}
-
 function CA.MailMoneyChanged(eventCode, moneyAmount)
     mailMoney = moneyAmount
     mailCOD = 0
@@ -2806,19 +2847,6 @@ function CA.FunctionMailCurrencyCheck()
     end
 end
 
-function CA.RegisterXPEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LEVEL_UPDATE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CHAMPION_POINT_UPDATE)
-    if CA.SV.Experience or CA.SV.ExperienceLevelUp then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN, CA.OnExperienceGain)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEVEL_UPDATE, CA.OnLevelUpdate)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_UPDATE, CA.OnChampionUpdate)
-
-        CA.LevelUpdateHelper()
-    end
-end
-
 function CA.LevelUpdateHelper()
     IsChampion = IsUnitChampion("player")
 
@@ -2837,26 +2865,6 @@ end
 local function ExperiencePctToColour(xppct)
     return xppct == 100 and "71DE73" or xppct < 33.33 and "F27C7C" or xppct < 66.66 and "EDE858" or "CCF048"
 end
-
--- When quest XP is gained during dialogue the player doesn't actually level up until exiting the dialogue. The variables get stored and saved to print on levelup if this is the case.
-local WeLeveled = 0
-local Crossover = 0
-
--- Various fudge variables required for fixing display on levelup when turning in quests that give both XP completion and POI completion!
-local QuestString1 = ""
-local QuestString2 = ""
-local QuestCombiner1 = ""
-local QuestCombiner2 = ""
-local QuestCombiner2Alt = ""
-local LevelChanged1 = false
-local TotalLevelAdjust = ""
-local LevelCarryOverValue = 0
-
-local XPCombatBufferValue = 0
-local XPCombatBufferString = ""
-
-local XP_BAR_COLORS = ZO_XP_BAR_GRADIENT_COLORS[2] -- Color for Normal Levels
-local CP_BAR_COLORS = ZO_CP_BAR_GRADIENT_COLORS -- Color for Champion Levels
 
 function CA.PrintBufferedXP()
     if XPCombatBufferValue ~= 0 then
@@ -3016,7 +3024,6 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
 end
 
 function CA.OnExperienceGain(eventCode, reason, level, previousExperience, currentExperience, championPoints)
-
     -- d("Experience Gain) previousExperience: " .. previousExperience .. " --- " .. "currentExperience: " .. currentExperience)
     local levelhelper = 0 -- Gives us the correct value of XP to use toward the next level when calculating progress after a level up
 
@@ -3326,17 +3333,6 @@ function CA.PrintQuestExperienceHelper()
     LevelCarryOverValue = 0
 end
 
--- Display achievements progress in chat
-function CA.RegisterAchievementsEvent()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACHIEVEMENT_UPDATED)
-    if CA.SV.Achievements then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACHIEVEMENT_UPDATED, CA.OnAchievementUpdated)
-    end
-end
-
--- Here we will store last displayed percentage for achievement
-g_lastPercentage = {}
-
 -- Helper function to return colour (without |c prefix) according to current percentage
 local function AchievementPctToColour(pct)
     return pct == 1 and "71DE73" or pct < 0.33 and "F27C7C" or pct < 0.66 and "EDE858" or "CCF048"
@@ -3436,20 +3432,6 @@ function CA.OnAchievementUpdated(eventCode, aId)
                             details or "." )
                 )
 end
-
-g_InventoryStacks = {} -- Called for indexing on init
-g_BankStacks = {} -- Called for indexing on opening crafting window (If the player decons an item from the bank - not needed for bank, since we don't care about items in the bank)
-OldItemLink = ""
-
-ItemWasDestroyed = false
-
-local GuildBankCarry_logPrefix
-local GuildBankCarry_icon
-local GuildBankCarry_itemLink
-local GuildBankCarry_stackCount = 1
-local GuildBankCarry_receivedBy
-local GuildBankCarry_gainorloss
-local GuildBankCarry_itemType
 
 function CA.GuildBankItemAdded(eventCode, slotId)
     CA.LogItem(GuildBankCarry_logPrefix, GuildBankCarry_icon, GuildBankCarry_itemLink, GuildBankCarry_itemType, GuildBankCarry_stackCount or 1, GuildBankCarry_receivedBy, GuildBankCarry_gainorloss)
@@ -4179,11 +4161,8 @@ function CA.BankFixer()
     BankOn = false
 end
 
-g_JusticeStacks = {}
-
-local ConfiscateMessage = (GetString(SI_LUIE_CA_JUSTICE_CONFISCATED_MSG))
-
 function CA.JusticeStealRemove(eventCode)
+    local ConfiscateMessage = GetString(SI_LUIE_CA_JUSTICE_CONFISCATED_MSG)
     if CA.SV.MiscConfiscate and eventCode == 131555 then
         ConfiscateMessage = GetString(SI_LUIE_CA_JUSTICE_CONFISCATED_BOUNTY_ITEMS_MSG)
     end
@@ -4237,43 +4216,25 @@ function CA.JusticeRemovePrint()
     CA.IndexInventory() -- Reindex the inventory with the correct values!
 end
 
--- DUEL EVENTS
-
-function CA.RegisterDuelEvents()
-    --EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_COUNTDOWN, CA.DuelCountdown)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_RECEIVED, CA.DuelInviteReceived)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_ACCEPTED, CA.DuelInviteAccepted)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_SENT, CA.DuelInviteSent)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_FINISHED, CA.DuelFinished)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_FAILED, CA.DuelInviteFailed)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_DECLINED, CA.DuelInviteDeclined)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_CANCELED, CA.DuelInviteCanceled)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_NEAR_BOUNDARY, CA.DuelNearBoundary)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, CA.DuelStarted)
-    
-end
-
 --[[ I would have liked to have this optional feature, but it gets out of snyc sometimes so kind of ruins it
 function CA.DuelCountdown(eventCode, startTimeMS)
-
     local duelcounter = 6
 
     local function DuelCountdown()
         duelcounter = duelcounter - 1
-        printToChat (strformat(GetString(SI_DUELING_COUNTDOWN_CSA), duelcounter))
+        printToChat(strformat(GetString(SI_DUELING_COUNTDOWN_CSA), duelcounter))
     end
 
-    printToChat (strformat(GetString(SI_DUELING_COUNTDOWN_CSA), duelcounter))
-    zo_callLater (DuelCountdown, 1000)
-    zo_callLater (DuelCountdown, 2000)
-    zo_callLater (DuelCountdown, 3000)
-    zo_callLater (DuelCountdown, 4000)
-    zo_callLater (DuelCountdown, 5000)
+    printToChat(strformat(GetString(SI_DUELING_COUNTDOWN_CSA), duelcounter))
+    zo_callLater(DuelCountdown, 1000)
+    zo_callLater(DuelCountdown, 2000)
+    zo_callLater(DuelCountdown, 3000)
+    zo_callLater(DuelCountdown, 4000)
+    zo_callLater(DuelCountdown, 5000)
 end
 ]]--
 
-function CA.DuelInviteReceived(eventCode, inviterCharacterName, inviterDisplayName)
-    
+function CA.DuelInviteReceived(eventCode, inviterCharacterName, inviterDisplayName) 
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink(inviterCharacterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
     local displayBothString = ( strformat("<<1>><<2>>", inviterCharacterName, inviterDisplayName) )
@@ -4281,16 +4242,14 @@ function CA.DuelInviteReceived(eventCode, inviterCharacterName, inviterDisplayNa
 
     if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(GetString(SI_DUEL_INVITE_RECEIVED), displayNameLink)) end
     if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(GetString(SI_DUEL_INVITE_RECEIVED), characterNameLink)) end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_DUEL_INVITE_RECEIVED), displayBoth)) end
-    
+    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_DUEL_INVITE_RECEIVED), displayBoth)) end 
 end
 
 function CA.DuelInviteAccepted(eventCode)
-    printToChat (GetString(SI_DUEL_INVITE_ACCEPTED))
+    printToChat(GetString(SI_DUEL_INVITE_ACCEPTED))
 end
 
 function CA.DuelInviteSent(eventCode, inviteeCharacterName, inviteeDisplayName)
-    
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink(inviteeCharacterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviteeDisplayName)
     local displayBothString = ( strformat("<<1>><<2>>", inviteeCharacterName, inviteeDisplayName) )
@@ -4299,11 +4258,9 @@ function CA.DuelInviteSent(eventCode, inviteeCharacterName, inviteeDisplayName)
     if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(GetString(SI_DUEL_INVITE_SENT), displayNameLink)) end
     if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(GetString(SI_DUEL_INVITE_SENT), characterNameLink)) end
     if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_DUEL_INVITE_SENT), displayBoth)) end
-    
 end
 
 function CA.DuelFinished(eventCode, duelResult, wasLocalPlayersResult, opponentCharacterName, opponentDisplayName, opponentAlliance, opponentGender, opponentClassId, opponentRaceId)
-
     local resultName
 
     if wasLocalPlayersResult then -- Possibly replace this with just a simple string assignment of "You"
@@ -4327,15 +4284,13 @@ function CA.DuelFinished(eventCode, duelResult, wasLocalPlayersResult, opponentC
     end
     
     if duelResult == 0 then
-            printToChat(strformat(GetString(SI_DUELRESULT0), resultName))
+        printToChat(strformat(GetString(SI_DUELRESULT0), resultName))
     else
-            printToChat(strformat(GetString(SI_DUELRESULT1), resultName))
+        printToChat(strformat(GetString(SI_DUELRESULT1), resultName))
     end
-    
 end
 
 function CA.DuelInviteFailed(eventCode, reason, targetCharacterName, targetDisplayName)
-
     local reasonName
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink(targetCharacterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(targetDisplayName)
@@ -4346,29 +4301,28 @@ function CA.DuelInviteFailed(eventCode, reason, targetCharacterName, targetDispl
     if CA.SV.ChatPlayerDisplayOptions == 2 then reasonName = characterNameLink end
     if CA.SV.ChatPlayerDisplayOptions == 3 then reasonName = displayBoth end
 
-    printToChat (strformat(GetString("SI_DUELINVITEFAILREASON", reason), reasonName))
+    printToChat(strformat(GetString("SI_DUELINVITEFAILREASON", reason), reasonName))
 end
 
 function CA.DuelInviteDeclined(eventCode)
-    printToChat (GetString(SI_DUEL_INVITE_DECLINED))
+    printToChat(GetString(SI_DUEL_INVITE_DECLINED))
 end
 
 function CA.DuelInviteCanceled(eventCode)
-    printToChat (GetString(SI_DUEL_INVITE_CANCELED))
+    printToChat(GetString(SI_DUEL_INVITE_CANCELED))
 end
 
 function CA.DuelNearBoundary(eventCode, isInWarningArea)
-    if isInWarningArea then printToChat(GetString(SI_DUELING_NEAR_BOUNDARY_CSA)) end
+    if isInWarningArea then
+        printToChat(GetString(SI_DUELING_NEAR_BOUNDARY_CSA))
+    end
 end
 
 function CA.DuelStarted(eventCode)
-    printToChat (GetString(SI_LUIE_DUEL_STARTED))
+    printToChat(GetString(SI_LUIE_DUEL_STARTED))
 end
 
-
-
 --[[
-
 if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), displayBoth, questName)) end
 end
 
