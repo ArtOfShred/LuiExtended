@@ -1151,12 +1151,20 @@ local rolestring3 = ""
 local message = ""
 
     -- Return here in case something happens
-    if not (dps or healer or tank) then return end
+    if not (dps or healer or tank) then
+        return
+    end
 
     -- fill in strings for roles
-    if dps then rolestring3 = "DPS" end
-    if healer then rolestring2 = "Healer" end
-    if tank then rolestring1 = "Tank"end
+    if dps then
+        rolestring3 = "DPS"
+    end
+    if healer then
+        rolestring2 = "Healer"
+    end
+    if tank then
+        rolestring1 = "Tank"
+    end
 
     -- Get appropriate 2nd string for role
     if dps and not (healer or tank) then
@@ -1176,9 +1184,15 @@ local message = ""
     end
 
     if updatedRoleName ~= g_playerNameFormatted then
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r has updated their role: <<2>>", displayNameLink, message) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r has updated their role: <<2>>", characterNameLink, message) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r has updated their role: <<2>>", displayBoth, message) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then
+            printToChat(strformat("|cFEFEFE<<1>>|r has updated their role: <<2>>", displayNameLink, message) )
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then
+            printToChat(strformat("|cFEFEFE<<1>>|r has updated their role: <<2>>", characterNameLink, message) )
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then
+            printToChat(strformat("|cFEFEFE<<1>>|r has updated their role: <<2>>", displayBoth, message) )
+        end
     else
         printToChat(strformat("You have updated your role: <<1>>", message) )
     end
@@ -1200,13 +1214,25 @@ function CA.GMCS(eventCode, unitTag, isOnline)
 
 
     if not isOnline and onlineRoleName ~=g_playerNameFormatted then
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r has disconnected.", displayNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r has disconnected.", characterNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r has disconnected.", displayBoth) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then
+            printToChat(strformat("|cFEFEFE<<1>>|r has disconnected.", displayNameLink) )
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then
+            printToChat(strformat("|cFEFEFE<<1>>|r has disconnected.", characterNameLink) )
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then
+            printToChat(strformat("|cFEFEFE<<1>>|r has disconnected.", displayBoth) )
+        end
     elseif isOnline and onlineRoleName ~=g_playerNameFormatted then
-        if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat("|cFEFEFE<<1>>|r has reconnected.", displayNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat("|cFEFEFE<<1>>|r has reconnected.", characterNameLink) ) end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat("|cFEFEFE<<1>>|r has reconnected.", displayBoth) ) end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then
+            printToChat(strformat("|cFEFEFE<<1>>|r has reconnected.", displayNameLink) )
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then
+            printToChat(strformat("|cFEFEFE<<1>>|r has reconnected.", characterNameLink) )
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then
+            printToChat(strformat("|cFEFEFE<<1>>|r has reconnected.", displayBoth) )
+        end
     end
 end
 ]]--
@@ -4595,7 +4621,8 @@ function CA.DuelStarted(eventCode)
 end
 
 --[[
-if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), displayBoth, questName)) end
+if CA.SV.ChatPlayerDisplayOptions == 3 then
+    printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), displayBoth, questName))
 end
 
 function CA.QuestShareRemoved(eventCode, questId)
