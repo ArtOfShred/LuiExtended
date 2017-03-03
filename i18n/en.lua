@@ -154,3 +154,14 @@ ZO_CreateStringId("SI_LUIE_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE",      "<<1>> w
 ZO_CreateStringId("SI_LUIE_PLAYER_TO_PLAYER_INCOMING_TRADE",            "<<1>> has invited you to trade.")
 ZO_CreateStringId("SI_LUIE_TRADE_INVITE_CONFIRM",                       "You have invited <<1>> to trade.")
 ZO_CreateStringId("SI_SOCIALACTIONRESULT16",                            "Invalid guild name.")
+
+
+-- LuiExtendedSettings.lua
+ZO_CreateStringId("SI_LUIE_LAM_UNITFRAMES",                             "Unit Frames")
+ZO_CreateStringId("SI_LUIE_LAM_RELOADUI",                               "This will reload UI")
+ZO_CreateStringId("SI_LUIE_LAM_INFOPANEL_HEADER",                       "Info Panel Options")
+ZO_CreateStringId("SI_LUIE_LAM_INFOPANEL_SHOWPANEL",                    "Show Info Panel")
+ZO_CreateStringId("SI_LUIE_LAM_INFOPANEL_SHOWPANEL_TOOLTIP",            "Info mini panel contains clock, framerate, latency, mount info, inventory and items durability status.")
+ZO_CreateStringId("SI_LUIE_LAM_INFOPANEL_UNLOCKPANEL",                  "Unlock panel")
+ZO_CreateStringId("SI_LUIE_LAM_INFOPANEL_UNLOCKPANEL_TOOLTIP",          "Allow mouse dragging for Info Panel.")
+

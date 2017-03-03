@@ -65,7 +65,7 @@ function LUIE_CreateSettings()
     local panelData = {
         type = "panel",
         name = LUIE.name,
-        displayName = "LUI Extended Settings",
+        displayName = zo_strformat(LUIE.name, GetString(SI_GAME_MENU_SETTINGS)),
         author = LUIE.author,
         version = LUIE.version,
         website = "http://www.esoui.com/downloads/info818-LuiExtended.html",
@@ -76,8 +76,8 @@ function LUIE_CreateSettings()
 
     local panelDataUnitFrames = {
         type = "panel",
-        name = LUIE.name .. " - Unit Frames",
-        displayName = "LUI Extended Unit Frames Settings",
+        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_UNITFRAMES)),
+        displayName = zo_strformat(LUIE.name, GetString(SI_LUIE_LAM_UNITFRAMES), GetString(SI_GAME_MENU_SETTINGS)),
         author = LUIE.author,
         version = LUIE.version,
         website = "http://www.esoui.com/downloads/info818-LuiExtended.html",
@@ -92,7 +92,7 @@ function LUIE_CreateSettings()
     optionsData[#optionsData + 1] = { -- ReloadUI Button
         type = "button",
         name = "Reload UI",
-        tooltip = "This will reload UI",
+        tooltip = GetString(SI_LUIE_LAM_RELOADUI),
         func = function() ReloadUI("ingame") end,
         width = "full",
     }
@@ -100,13 +100,13 @@ function LUIE_CreateSettings()
     -- Info Panel Options
     optionsData[#optionsData + 1] = {
         type = "submenu",
-        name = "Info Panel Options",
+        name = GetString(SI_LUIE_LAM_INFOPANEL_HEADER),
         reference = "Info_Panel_Options_Submenu",
         controls = {
             {
                 type = "checkbox",
-                name = "Show Info Panel",
-                tooltip = "Info mini panel contains clock, framerate, latency, mount info, inventory and items durability status.",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWPANEL),
+                tooltip = GetString(SI_LUIE_LAM_INFOPANEL_SHOWPANEL_TOOLTIP),
                 getFunc = function() return LUIE.SV.InfoPanel_Enabled end,
                 setFunc = function(value) LUIE.SV.InfoPanel_Enabled = value end,
                 width = "full",
@@ -115,8 +115,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Unlock panel",
-                tooltip = "Allow mouse dragging for Info Panel.",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_UNLOCKPANEL),
+                tooltip = GetString(SI_LUIE_LAM_INFOPANEL_UNLOCKPANEL_TOOLTIP),
                 getFunc = function() return LUIE.InfoPanel.panelUnlocked end,
                 setFunc = LUIE.InfoPanel.SetMovingState,
                 width = "half",
