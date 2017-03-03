@@ -259,7 +259,7 @@ function LUIE_CreateSettings()
                 getFunc = function() return LUIE.SV.CombatInfo_Enabled end,
                 setFunc = function(value) LUIE.SV.CombatInfo_Enabled = value end,
                 width = "full",
-                warning = "Will need to reload the UI.",
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 default = LUIE.D.CombatInfo_Enabled,
             },
             {
@@ -346,7 +346,7 @@ function LUIE_CreateSettings()
                 getFunc = function() return LUIE.CombatInfo.SV.CloudTextEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.CloudTextEnabled = value end,
                 width = "full",
-                warning = "Will need to reload the UI.",
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 default = LUIE.CombatInfo.D.CloudTextEnabled,
                 disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
             },
@@ -404,7 +404,7 @@ function LUIE_CreateSettings()
                 getFunc = function() return LUIE.CombatInfo.SV.ScrollTextEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.ScrollTextEnabled = value end,
                 width = "full",
-                warning = "Will need to reload the UI.",
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 default = LUIE.CombatInfo.D.ScrollTextEnabled,
                 disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
             },
@@ -737,7 +737,7 @@ function LUIE_CreateSettings()
                 getFunc = function() return LUIE.SV.SpellCastBuff_Enable end,
                 setFunc = function(value) LUIE.SV.SpellCastBuff_Enable = value end,
                 width = "full",
-                warning = "Will need to reload the UI.",
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 default = LUIE.D.SpellCastBuff_Enable,
             },
             {
@@ -1025,7 +1025,7 @@ function LUIE_CreateSettings()
                 getFunc = function() return rotationOptions[LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment] end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment = rotationOptionsKeys[value] LUIE.SpellCastBuffs.Reset() end,
                 width = "full",
-                warning = "Will need to reload the UI.",
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 default = rotationOptions[2],
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffects_Player and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparate ) end,
             },
@@ -1142,7 +1142,7 @@ function LUIE_CreateSettings()
                 getFunc = function() return LUIE.SV.DamageMeter_Enable end,
                 setFunc = function(value) LUIE.SV.DamageMeter_Enable = value end,
                 width = "full",
-                warning = "Will need to reload the UI.",
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 default = LUIE.D.DamageMeter_Enable,
             },
             {
@@ -1311,7 +1311,7 @@ function LUIE_CreateSettings()
                 getFunc = function() return LUIE.SV.ChatAnnouncements_Enable end,
                 setFunc = function(value) LUIE.SV.ChatAnnouncements_Enable = value end,
                 width = "full",
-                warning = "Will need to reload the UI.",
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 default = LUIE.D.ChatAnnouncements_Enable,
             },
             {
@@ -1332,7 +1332,7 @@ function LUIE_CreateSettings()
                 getFunc = function() return LUIE.ChatAnnouncements.SV.CustomStrings end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.CustomStrings = value LUIE.ChatAnnouncements.RegisterCustomStrings() end,
                 width = "full",
-                warning = "Will need to reload the UI.",
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = LUIE.ChatAnnouncements.D.CustomStrings,
             },
@@ -2409,7 +2409,7 @@ function LUIE_CreateSettings()
         getFunc = function() return LUIE.SV.UnitFrames_Enabled end,
         setFunc = function(value) LUIE.SV.UnitFrames_Enabled = value end,
         width = "full",
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.D.UnitFrames_Enabled,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2446,7 +2446,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Player', value) end,
         width = "full",
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.UnitFrames.GetDefaultFramesSetting('Player', true),
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2457,7 +2457,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Target', value) end,
         width = "full",
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.UnitFrames.GetDefaultFramesSetting('Target', true),
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2468,7 +2468,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Group', value) end,
         width = "full",
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.UnitFrames.GetDefaultFramesSetting('Group', true),
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2479,7 +2479,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.RepositionFrames = value end,
         width = "full",
         default = LUIE.UnitFrames.D.RepositionFrames,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2698,7 +2698,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.CustomEnableRegen = value end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomEnableRegen,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.UnitFrames.SV.CustomEnableRegen end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2745,7 +2745,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.CustomShieldBarSeparate = value end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomShieldBarSeparate,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2766,7 +2766,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.CustomShieldBarFull = value end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomShieldBarFull,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and not LUIE.UnitFrames.SV.CustomShieldBarSeparate ) end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2792,7 +2792,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFramesPlayer = value end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomFramesPlayer,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2803,7 +2803,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFramesTarget = value end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomFramesTarget,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2854,7 +2854,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.HideLabelMagicka = value LUIE.UnitFrames.SV.HideBarMagicka = false end,
         width = "full",
         default = LUIE.UnitFrames.D.HideLabelMagicka,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2865,7 +2865,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.HideBarMagicka = value end,
         width = "full",
         default = LUIE.UnitFrames.D.HideBarMagicka,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.HideLabelMagicka ) end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2876,7 +2876,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.HideLabelStamina = value LUIE.UnitFrames.SV.HideBarStamina = false end,
         width = "full",
         default = LUIE.UnitFrames.D.HideLabelStamina,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2887,7 +2887,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.HideBarStamina = value end,
         width = "full",
         default = LUIE.UnitFrames.D.HideBarStamina,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.HideLabelStamina ) end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2948,7 +2948,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableArmor = value end,
         width = "full",
         default = LUIE.UnitFrames.D.PlayerEnableArmor,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
     --[[optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2959,7 +2959,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableWeaponPower = value end,
         width = "full",
         default = LUIE.UnitFrames.D.PlayerEnableWeaponPower,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }]]--
     --[[optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2970,7 +2970,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableSpellPower = value end,
         width = "full",
         default = LUIE.UnitFrames.D.PlayerEnableSpellPower,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }]]--
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -3053,7 +3053,7 @@ function LUIE_CreateSettings()
         getFunc = function() return LUIE.UnitFrames.SV.ExecutePercentage end,
         setFunc = function(value) LUIE.UnitFrames.SV.ExecutePercentage = value end,
         width = "full",
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.UnitFrames.D.ExecutePercentage,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
@@ -3080,7 +3080,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFramesGroup = value end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomFramesGroup,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -3146,7 +3146,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFramesRaid = value end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomFramesRaid,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -3225,7 +3225,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFramesBosses = value end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomFramesBosses,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -3241,7 +3241,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.AvaCustFramesTarget = value end,
         width = "full",
         default = LUIE.UnitFrames.D.AvaCustFramesTarget,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -3272,7 +3272,7 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = "Name Display Method",
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         tooltip = "Determines the method used to display other player names on unit frames. This setting does not effect the player frame.\nDefault: Character Name",
         choices = nameDisplayOptions,
         getFunc = function() return nameDisplayOptions[LUIE.UnitFrames.SV.DisplayOptions] end,
