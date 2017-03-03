@@ -183,3 +183,16 @@ ZO_CreateStringId("SI_LUIE_LAM_INFOPANEL_SHOWICTROPHYCOUNT",            "Show Im
 ZO_CreateStringId("SI_LUIE_LAM_INFOPANEL_DISABLECOLORSRO",              "Disable colours on read-only values")
 ZO_CreateStringId("SI_LUIE_LAM_INFOPANEL_DISABLECOLORSRO_TOOLTIP",      "Disable value-dependent colour of the information label for items that you don't have direct control: Currently this includes FPS and Latency labels.")
 
+ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_HEADER",                      "Combat Info Options")
+ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_SHOWCOMBATINFO",              "Show Combat Info")
+ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_SHOWCOMBATINFO_TOOLTIP",      "Displays various floating text for damage done, healing received, experience and alliance points gain.")
+ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_SHOWCOOLDOWNS",               "Show CoolDowns")
+ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_SHOWCOOLDOWNS_TOOLTIP",       "Show cooldown timers for active abilities.")
+ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_ULTIMATETRACKING_HEADER",     "Ultimate Tracking options")
+ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_SHOWULTIMATEVALUE",           "Show current Ultimate value")
+ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_SHOWULTIMATEVALUE_TOOLTIP",   "Display current ultimate ability resource level above ultimate skill slot.")
+ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_HIDEPERCENTWHENFULL",         "Hide percent label when full")
+ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_HIDEPERCENTWHENFULL_TOOLTIP", "Remove percentage label from ultimate slot when ability becomes ready.")
+ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_ENABLEULTIREADYALERT",        "Enable Ultimate Ready alert")
+ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_ENABLEULTIREADYALERT_TOOLTIP","Enable notification display when ability becomes ready.")
+

@@ -89,7 +89,8 @@ function LUIE_CreateSettings()
     local optionsData = {}
     local optionsDataUnitFrames = {}
 
-    optionsData[#optionsData + 1] = { -- ReloadUI Button
+    -- ReloadUI Button
+    optionsData[#optionsData + 1] = {
         type = "button",
         name = "Reload UI",
         tooltip = GetString(SI_LUIE_LAM_RELOADUI),
@@ -246,16 +247,16 @@ function LUIE_CreateSettings()
             },
         },
     }
-    --[[ COMBAT INFO OPTIONS ]]--
+    -- Combat Info Options
     optionsData[#optionsData + 1] = {
         type = "submenu",
-        name = "Combat Info Options",
+        name = GetString(SI_LUIE_LAM_COMBATINFO_HEADER),
         reference = "Combat_Info_Options_Submenu",
         controls = {
             {
                 type = "checkbox",
-                name = "Show Combat Info",
-                tooltip = "Displays various floating text for damage done, healing received, experience and alliance points gain.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_SHOWCOMBATINFO),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_SHOWCOMBATINFO_TOOLTIP),
                 getFunc = function() return LUIE.SV.CombatInfo_Enabled end,
                 setFunc = function(value) LUIE.SV.CombatInfo_Enabled = value end,
                 width = "full",
@@ -264,8 +265,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Display CoolDowns",
-                tooltip = "Show cooldown timers for active abilities.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_SHOWCOOLDOWNS),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_SHOWCOOLDOWNS_TOOLTIP),
                 getFunc = function() return LUIE.CombatInfo.SV.CoolDown end,
                 setFunc = function(value) LUIE.CombatInfo.SV.CoolDown = value end,
                 width = "full",
@@ -274,13 +275,13 @@ function LUIE_CreateSettings()
             },
             {
                 type = "header",
-                name = "Ultimate Tracking options",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_ULTIMATETRACKING_HEADER),
                 width = "full",
             },
             {
                 type = "checkbox",
-                name = "Show current Ultimate value",
-                tooltip = "Display current ultimate ability resource level above ultimate skill slot.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_SHOWULTIMATEVALUE),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_SHOWULTIMATEVALUE_TOOLTIP),
                 getFunc = function() return LUIE.CombatInfo.SV.UltimateEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.UltimateEnabled = value LUIE.CombatInfo.OnSlotsFullUpdate(nil) end,
                 width = "full",
@@ -289,8 +290,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Hide percent label when full",
-                tooltip = "Remove percentage label from ultimate slot when ability becomes ready.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_HIDEPERCENTWHENFULL),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_HIDEPERCENTWHENFULL_TOOLTIP),
                 getFunc = function() return LUIE.CombatInfo.SV.UltimateHideFull end,
                 setFunc = function(value) LUIE.CombatInfo.SV.UltimateHideFull = value end,
                 width = "full",
@@ -299,8 +300,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Enable Ultimate Ready alert",
-                tooltip = "Enable notification display when ability becomes ready.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_ENABLEULTIREADYALERT),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_ENABLEULTIREADYALERT_TOOLTIP),
                 getFunc = function() return LUIE.CombatInfo.SV.UltimateAlert end,
                 setFunc = function(value) LUIE.CombatInfo.SV.UltimateAlert = value end,
                 width = "full",
