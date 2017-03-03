@@ -121,67 +121,67 @@ itemstring2gain     = ""
 itemstring1loss     = ""
 itemstring2loss     = ""
 
-local g_playerName          = nil
-local g_playerNameFormatted = nil
-local combostring           = "" -- String is filled by the EVENT_CURRENCY_CHANGE events and ammended onto the end of purchase/sales from LootLog component if toggled on!
-local stealstring           = ""
-local LaunderCheck          = false
-local laundergoldstring     = ""
-local launderitemstring     = ""
-local tradestring1          = ""
-local tradestring2          = ""
-local mailCOD               = 0
-local mailMoney             = 0
-local postageAmount         = 0
-local MailStop              = false
-local MailStringPart1       = ""
-local MailCurrencyCheck     = true
-local IsValidLaunder        = false
-local GroupJoinFudger       = false -- Controls message for group join
-local GuildJoinFudger       = false
-local GuildRankData         = {} -- Variable to store local player guild ranks, for guild rank changes.
-local GuildBankCarry_logPrefix
-local GuildBankCarry_icon
-local GuildBankCarry_itemLink
-local GuildBankCarry_stackCount = 1
-local GuildBankCarry_receivedBy
-local GuildBankCarry_gainorloss
-local GuildBankCarry_itemType
+local g_playerName                = nil
+local g_playerNameFormatted       = nil
+local g_combostring               = "" -- String is filled by the EVENT_CURRENCY_CHANGE events and ammended onto the end of purchase/sales from LootLog component if toggled on!
+local g_stealstring               = ""
+local g_launderCheck              = false
+local g_launderGoldstring         = ""
+local g_launderItemstring         = ""
+local g_tradestring1              = ""
+local g_tradestring2              = ""
+local g_mailCOD                   = 0
+local g_mailMoney                 = 0
+local g_postageAmount             = 0
+local g_mailStop                  = false
+local g_mailStringPart1           = ""
+local g_mailCurrencyCheck         = true
+local g_isValidLaunder            = false
+local g_groupJoinFudger           = false -- Controls message for group join
+local g_guildJoinFudger           = false
+local g_guildRankData             = {} -- Variable to store local player guild ranks, for guild rank changes.
+local g_guildBankCarryLogPrefix
+local g_guildBankCarryIcon
+local g_guildBankCarryItemLink
+local g_guildBankCarryStackCount  = 1
+local g_guildBankCarryReceivedBy
+local g_guildBankCarryGainorloss
+local g_guildBankCarryItemType
 
 -- When quest XP is gained during dialogue the player doesn't actually level up until exiting the dialogue. The variables get stored and saved to print on levelup if this is the case.
-local WeLeveled = 0
-local Crossover = 0
+local g_weLeveled = 0
+local g_crossover = 0
 
 -- Various fudge variables required for fixing display on levelup when turning in quests that give both XP completion and POI completion!
-local QuestString1         = ""
-local QuestString2         = ""
-local QuestCombiner1       = ""
-local QuestCombiner2       = ""
-local QuestCombiner2Alt    = ""
-local LevelChanged1        = false
-local TotalLevelAdjust     = ""
-local LevelCarryOverValue  = 0
+local g_questString1         = ""
+local g_questString2         = ""
+local g_questCombiner1       = ""
+local g_questCombiner2       = ""
+local g_questCombiner2Alt    = ""
+local g_levelChanged1        = false
+local g_totalLevelAdjust     = ""
+local g_levelCarryOverValue  = 0
 
-local XPCombatBufferValue  = 0
-local XPCombatBufferString = ""
-local XP_BAR_COLORS        = ZO_XP_BAR_GRADIENT_COLORS[2] -- Color for Normal Levels
-local CP_BAR_COLORS        = ZO_CP_BAR_GRADIENT_COLORS -- Color for Champion Levels
+local g_XPCombatBufferValue  = 0
+local g_XPCombatBufferString = ""
+local g_XP_BAR_COLORS        = ZO_XP_BAR_GRADIENT_COLORS[2] -- Color for Normal Levels
+local g_CP_BAR_COLORS        = ZO_CP_BAR_GRADIENT_COLORS -- Color for Champion Levels
 
-local g_CraftStacks     = {}
-local g_MailStacks      = {}
-local g_MailStacksOut   = {}
+local g_craftStacks     = {}
+local g_mailStacks      = {}
+local g_mailStacksOut   = {}
 
-local WeAreQueued          = false -- Variable to determine if we are in queue, if the player isn't in queue ACTIVITY_FINDER_STATUS_NONE is broadcast on init, we don't want this to show any event!
-local ShowRCUpdates        = true
-local FixJoinMessage       = false
-local ShowActivityStatus   = true
-local ShowStatusDropMember = false
+local g_weAreQueued          = false -- Variable to determine if we are in queue, if the player isn't in queue ACTIVITY_FINDER_STATUS_NONE is broadcast on init, we don't want this to show any event!
+local g_showRCUpdates        = true
+local g_fixJoinMessage       = false
+local g_showActivityStatus   = true
+local g_showStatusDropMember = false
 
 -- Variables used for Trade Functions
-local g_TradeStacksIn   = {}
-local g_TradeStacksOut  = {}
-local TradeInviter      = ""
-local TradeInvitee      = ""
+local g_tradeStacksIn   = {}
+local g_tradeStacksOut  = {}
+local g_tradeInviter      = ""
+local g_tradeInvitee      = ""
 
 function CA.Initialize(enabled)
     -- Load settings
@@ -266,13 +266,13 @@ function CA.RegisterGuildEvents()
         end
 
         -- Index Guild Ranks
-        GuildRankData = {}
+        g_guildRankData = {}
         if CA.SV.MiscGuildRank then
             for i = 1,5 do
                 local guildId = GetGuildId(i)
                 local memberIndex = GetPlayerGuildMemberIndex(guildId)
                 local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
-                GuildRankData[guildId] = {rank=rankIndex}
+                g_guildRankData[guildId] = {rank=rankIndex}
             end
         end
     end
@@ -635,7 +635,7 @@ function CA.GuildMOTD(eventCode, guildId)
 end
 
 function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
-    local currentRank = GuildRankData[guildId].rank
+    local currentRank = g_guildRankData[guildId].rank
 
     hasPermission1 = DoesGuildRankHavePermission(guildId, currentRank, 4)
     hasPermission2 = DoesGuildRankHavePermission(guildId, currentRank, 5)
@@ -697,7 +697,7 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
             changestring = GetString(SI_LUIE_CA_GUILD_RANK_DOWN)
         end
 
-        GuildRankData[guildId].rank = newRank
+        g_guildRankData[guildId].rank = newRank
 
         local guilds = GetNumGuilds()
         for i = 1,guilds do
@@ -732,16 +732,16 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
         end
     end
 
-    GuildJoinFudger = true
+    g_guildJoinFudger = true
 
     -- Reindex Guild Ranks
-    GuildRankData = {}
+    g_guildRankData = {}
     if CA.SV.MiscGuildRank then
         for i = 1,5 do
             local guildId = GetGuildId(i)
             local memberIndex = GetPlayerGuildMemberIndex(guildId)
             local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
-            GuildRankData[guildId] = {rank=rankIndex}
+            g_guildRankData[guildId] = {rank=rankIndex}
         end
     end
 end
@@ -758,13 +758,13 @@ function CA.GuildRemovedSelf(eventCode, guildId, guildName)
     end
 
     -- Reindex Guild Ranks
-    GuildRankData = {}
+    g_guildRankData = {}
     if CA.SV.MiscGuildRank then
         for i = 1,5 do
             local guildId = GetGuildId(i)
             local memberIndex = GetPlayerGuildMemberIndex(guildId)
             local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
-            GuildRankData[guildId] = {rank=rankIndex}
+            g_guildRankData[guildId] = {rank=rankIndex}
         end
     end
 end
@@ -781,10 +781,10 @@ function CA.GuildInviteRemoved(eventCode, guildId)
 end
 
 function CA.GuildInviteFudger()
-    if not GuildJoinFudger then
+    if not g_guildJoinFudger then
         printToChat(GetString(SI_LUIE_CA_GUILD_INVITE_DECLINED))
     end
-    GuildJoinFudger = false
+    g_guildJoinFudger = false
 end
 
 function CA.FriendInviteFudger()
@@ -897,33 +897,33 @@ function CA.ActivityComplete(eventCode)
 end
 
 function CA.ActivityStatusUpdate(eventCode, status)
-    if ShowActivityStatus then
-        if status == ACTIVITY_FINDER_STATUS_NONE and WeAreQueued == true then
+    if g_showActivityStatus then
+        if status == ACTIVITY_FINDER_STATUS_NONE and g_weAreQueued == true then
             printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_QUEUE_END))
-            WeAreQueued = false
-            ShowStatusDropMember = false
+            g_weAreQueued = false
+            g_showStatusDropMember = false
         end
         if status == ACTIVITY_FINDER_STATUS_QUEUED then
             printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_QUEUE_START))
-            WeAreQueued = true
-            ShowStatusDropMember = true
+            g_weAreQueued = true
+            g_showStatusDropMember = true
         end
-        if status == ACTIVITY_FINDER_STATUS_IN_PROGRESS and ShowStatusDropMember == true then
+        if status == ACTIVITY_FINDER_STATUS_IN_PROGRESS and g_showStatusDropMember == true then
             printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_QUEUE_END))
-            WeAreQueued = false
-            ShowStatusDropMember = false
+            g_weAreQueued = false
+            g_showStatusDropMember = false
         end
     end
 
     if status == 0 then
-        ShowRCUpdates = true
-        FixJoinMessage = false
+        g_showRCUpdates = true
+        g_fixJoinMessage = false
     end -- Should always trigger at the end result of a ready check failing.
     if status == 2 then
-        FixJoinMessage = false
+        g_fixJoinMessage = false
     end
     if status == 4 then
-        ShowRCUpdates = false
+        g_showRCUpdates = false
     end
 end
 
@@ -948,9 +948,9 @@ function CA.ActivityQueueResult(eventCode, result)
         printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT6)))
     end
 
-    ShowRCUpdates = true
-    WeAreQueued = false
-    ShowStatusDropMember = false
+    g_showRCUpdates = true
+    g_weAreQueued = false
+    g_showStatusDropMember = false
 end
 
 function CA.ReadyCheckCancel(eventCode, reason)
@@ -969,21 +969,21 @@ function CA.ReadyCheckCancel(eventCode, reason)
         printToChat(GetString(SI_LUIE_CA_READY_CHECK_CANCELED))
     end
 
-    ShowRCUpdates = true
-    ShowActivityStatus = false
-    ShowStatusDropMember = false
-    WeAreQueued = false
+    g_showRCUpdates = true
+    g_showActivityStatus = false
+    g_showStatusDropMember = false
+    g_weAreQueued = false
     zo_callLater(CA.ActivityStatusRefresh, 500)
 end
 
 function CA.ActivityStatusRefresh()
-    ShowActivityStatus = true
+    g_showActivityStatus = true
 end
 
 function CA.ReadyCheckUpdate(eventCode)
     local activityType = GetLFGReadyCheckNotificationInfo()
     local tanksAccepted, tanksPending, healersAccepted, healersPending, dpsAccepted, dpsPending = GetLFGReadyCheckCounts()
-    if ShowRCUpdates then
+    if g_showRCUpdates then
         local activityName
 
         if activityType == 0 then
@@ -1012,24 +1012,24 @@ function CA.ReadyCheckUpdate(eventCode)
     end
 
     if tanksAccepted > 0 or healersAccepted > 0 or dpsAccepted > 0 then
-        FixJoinMessage = true
+        g_fixJoinMessage = true
     end
 
-    if not FixJoinMessage then
-        if not ShowRCUpdates and (tanksPending == 0 and healersPending == 0 and dpsPending == 0) then
+    if not g_fixJoinMessage then
+        if not g_showRCUpdates and (tanksPending == 0 and healersPending == 0 and dpsPending == 0) then
             printToChat(GetString(SI_LFGREADYCHECKCANCELREASON3))
         end
     end
 
-    if FixJoinMessage then
-        if not ShowRCUpdates and (tanksAccepted == 0 and healersAccepted == 0 and dpsAccepted == 0 and tanksPending == 0 and healersPending == 0 and dpsPending == 0) then
+    if g_fixJoinMessage then
+        if not g_showRCUpdates and (tanksAccepted == 0 and healersAccepted == 0 and dpsAccepted == 0 and tanksPending == 0 and healersPending == 0 and dpsPending == 0) then
             printToChat(GetString(SI_LFGREADYCHECKCANCELREASON4)) -- maybe alter since this is for joining in progress?
         end
     end
 
-    ShowRCUpdates = false
-    WeAreQueued = false
-    ShowStatusDropMember = false
+    g_showRCUpdates = false
+    g_weAreQueued = false
+    g_showStatusDropMember = false
 end
 
 function CA.VoteFailed( eventCode, failureReason, descriptor)
@@ -1119,17 +1119,17 @@ function CA.VoteRequested(eventCode, descriptor)
     end
 end
 
--- Triggers when the player either accepts or declines an invite. We set GroupJoinFudger to true here, and if the next event is GroupUpdate then it plays a message, if not, the next invite event resets it.
+-- Triggers when the player either accepts or declines an invite. We set g_groupJoinFudger to true here, and if the next event is GroupUpdate then it plays a message, if not, the next invite event resets it.
 function CA.GroupInviteRemoved(eventCode)
-    GroupJoinFudger = true
+    g_groupJoinFudger = true
 end
 
 -- Triggers when the group composition changes for a Party going from 2 people to 3+, we use this to display a message to the player joining the group.
 function CA.GroupUpdate(eventCode)
-    if GroupJoinFudger then
+    if g_groupJoinFudger then
         printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF))
     end
-    GroupJoinFudger = false
+    g_groupJoinFudger = false
 end
 
 --[[ Would love to be able to use this function but its too buggy for now. Spams every single time someone updates their role, as well as when people join/leave group. If the player joins a large party for the first time then
@@ -1239,7 +1239,7 @@ end
 
 -- Prints a message to chat when another player sends us a group invite
 function CA.OnGroupInviteReceived(eventCode, inviterName, inviterDisplayName)
-    GroupJoinFudger = false
+    g_groupJoinFudger = false
 
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink(inviterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
@@ -1370,7 +1370,7 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
     local msg = nil
 
     if g_playerName == memberName then
-        ShowStatusDropMember = false -- Resets variable for Group Finder events, just in case.
+        g_showStatusDropMember = false -- Resets variable for Group Finder events, just in case.
     end
 
     if reason == GROUP_LEAVE_REASON_VOLUNTARY then
@@ -1396,7 +1396,7 @@ end
 
 -- Gold Change Announcements
 function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
-    combostring = ""
+    g_combostring = ""
 
     --[[
     BIG ASS INDEX OF CURRENCY CHANGE EVENT REASONS AND WHAT THEY DO:
@@ -1505,12 +1505,12 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
 
     -- Send money in the mail, values changed to compensate for COD!
     elseif reason == 2 and UpOrDown < 0 then
-        if postageAmount == 0 and mailMoney == 0 and mailCOD == 0 then
+        if g_postageAmount == 0 and g_mailMoney == 0 and g_mailCOD == 0 then
             message = GetString(SI_LUIE_CA_MAIL_COD_PAYMENT_MSG)
         else
             message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SENT)
         end
-        changetype = CommaValue (oldMoney - newMoney - postageAmount)
+        changetype = CommaValue (oldMoney - newMoney - g_postageAmount)
         mailHelper = true
 
     -- Receive/Give Money in a Trade (Likely consolidate this later)
@@ -1608,15 +1608,15 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         end
         -- Print a message to chat based off all the values we filled in above
         if CA.SV.GoldChange and CA.SV.LootCurrencyCombo and UpOrDown < 0 and (reason == 1 or reason == 63 or reason == 64) then
-            combostring = ( strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
+            g_combostring = ( strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         elseif CA.SV.MiscMail and reason == 2 then
-            if not MailStop and MailStringPart1 ~= "" then
+            if not g_mailStop and g_mailStringPart1 ~= "" then
                 if not CA.SV.GoldChange then
-                    printToChat(strformat(GetString(SI_LUIE_CA_CANT_THINK_OF_NAME_MSG1), MailStringPart1, changetype))
+                    printToChat(strformat(GetString(SI_LUIE_CA_CANT_THINK_OF_NAME_MSG1), g_mailStringPart1, changetype))
                 else
-                    printToChat(strformat(GetString(SI_LUIE_CA_CANT_THINK_OF_NAME_MSG2), MailStringPart1))
+                    printToChat(strformat(GetString(SI_LUIE_CA_CANT_THINK_OF_NAME_MSG2), g_mailStringPart1))
                 end
-            elseif not MailStop then
+            elseif not g_mailStop then
                 if not CA.SV.GoldChange then
                     printToChat(strformat(GetString(SI_LUIE_CA_MAIL_RECEIVED_VAR_GOLD_MSG), changetype))
                 else
@@ -1626,40 +1626,40 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             if CA.SV.GoldChange then
                 printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
             end
-            MailStringPart1 = ""
+            g_mailStringPart1 = ""
         elseif CA.SV.GoldChange and reason == 3 and CA.SV.MiscTrade and UpOrDown < 0 then
-            tradestring1 = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
+            g_tradestring1 = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         elseif CA.SV.GoldChange and reason == 3 and CA.SV.MiscTrade and UpOrDown > 0 then
-            tradestring2 = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
+            g_tradestring2 = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         elseif CA.SV.GoldChange and CA.SV.LootCurrencyCombo and reason == 28 then
-            combostring = ( strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
+            g_combostring = ( strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         elseif CA.SV.GoldChange and reason == 47 then
-            stealstring = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
+            g_stealstring = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
             local latency = GetLatency()
             latency = latency + 50
             zo_callLater(CA.JusticeStealRemove, latency)
          elseif CA.SV.GoldChange and reason == 57 then
-            stealstring = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
+            g_stealstring = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
             local latency = GetLatency()
             latency = latency + 50
             zo_callLater(CA.JusticeStealRemove, latency)
         elseif CA.SV.GoldChange and CA.SV.LootCurrencyCombo and UpOrDown > 0 and (reason == 1 or reason == 63 or reason == 64) then
-            combostring = ( strformat(" ← <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
+            g_combostring = ( strformat(" ← <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         elseif CA.SV.GoldChange and CA.SV.LootCurrencyCombo and CA.SV.MiscBags and (reason == 8 or reason == 9) then
-            combostring = ( strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
+            g_combostring = ( strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         elseif CA.SV.GoldChange and UpOrDown < 0 and reason == 60 then
-            laundergoldstring = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
+            g_launderGoldstring = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
         else
             if CA.SV.GoldChange then
                 printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
             end
         end
     else
-        MailCurrencyCheck = false
+        g_mailCurrencyCheck = false
         local valuesent = ""
         local totalwithoutpostage = 0
-        if postageAmount ~= 0 then
-            totalWithoutPostage = CommaValue ( oldMoney - postageAmount )
+        if g_postageAmount ~= 0 then
+            totalWithoutPostage = CommaValue ( oldMoney - g_postageAmount )
         else
             totalWithoutPostage = CommaValue ( oldMoney )
         end
@@ -1672,32 +1672,32 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             total = ""
         end
 
-        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and not CA.SV.GoldChange then
+        if CA.SV.MiscMail and g_postageAmount == 0 and g_mailMoney == 0 and g_mailCOD == 0 and not CA.SV.GoldChange then
             printToChat(strformat(GetString(SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT1), changetype))
         end
-        if CA.SV.MiscMail and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 and CA.SV.GoldChange then
+        if CA.SV.MiscMail and g_postageAmount == 0 and g_mailMoney == 0 and g_mailCOD == 0 and CA.SV.GoldChange then
             printToChat(GetString(SI_LUIE_CA_MAIL_COD_GOLD_SENT))
         end
-        if CA.SV.MiscMail and mailCOD == 0 and mailMoney == 0 and postageAmount >= 1 then
+        if CA.SV.MiscMail and g_mailCOD == 0 and g_mailMoney == 0 and g_postageAmount >= 1 then
             printToChat(GetString(SI_LUIE_CA_MAIL_SENT_SUCCESS))
         end
-        if CA.SV.MiscMail and mailMoney ~= 0 and not CA.SV.GoldChange then
-            printToChat(strformat(GetString(SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG), mailMoney) )
+        if CA.SV.MiscMail and g_mailMoney ~= 0 and not CA.SV.GoldChange then
+            printToChat(strformat(GetString(SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG), g_mailMoney) )
         end
-        if CA.SV.MiscMail and mailMoney ~= 0 and CA.SV.GoldChange then
+        if CA.SV.MiscMail and g_mailMoney ~= 0 and CA.SV.GoldChange then
             printToChat(GetString(SI_LUIE_CA_MAIL_SENT_SUCCESS))
         end
-        if CA.SV.MiscMail and mailCOD ~= 0 and not CA.SV.GoldChange then
-            printToChat(strformat(GetString(SI_LUIE_CA_MAIL_COD_GOLD_SENT2), mailCOD) )
+        if CA.SV.MiscMail and g_mailCOD ~= 0 and not CA.SV.GoldChange then
+            printToChat(strformat(GetString(SI_LUIE_CA_MAIL_COD_GOLD_SENT2), g_mailCOD) )
         end
-        if CA.SV.MiscMail and mailCOD ~= 0 and CA.SV.GoldChange then
+        if CA.SV.MiscMail and g_mailCOD ~= 0 and CA.SV.GoldChange then
             printToChat(GetString(SI_LUIE_CA_MAIL_COD_SENT_SUCCESS))
         end
 
         valuesent = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
 
-        if postageAmount ~= 0 then
-            local postagesyntax = CA.SV.CurrencyIcons and GoldColorize:Colorize(strformat( " |t16:16:/esoui/art/currency/currency_gold.dds|t " .. postageAmount .. formathelper .. CA.SV.GoldName .. plural)) or GoldColorize:Colorize(strformat( " " .. postageAmount .. formathelper .. CA.SV.GoldName .. plural))
+        if g_postageAmount ~= 0 then
+            local postagesyntax = CA.SV.CurrencyIcons and GoldColorize:Colorize(strformat( " |t16:16:/esoui/art/currency/currency_gold.dds|t " .. g_postageAmount .. formathelper .. CA.SV.GoldName .. plural)) or GoldColorize:Colorize(strformat( " " .. g_postageAmount .. formathelper .. CA.SV.GoldName .. plural))
                 -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
             if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
                 total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. GoldColorize:Colorize(totalWithoutPostage) )
@@ -1716,26 +1716,26 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             end
         end
 
-        if CA.SV.GoldChange and mailMoney ~= 0 then
+        if CA.SV.GoldChange and g_mailMoney ~= 0 then
             printToChat(valuesent)
         end
-        if CA.SV.GoldChange and postageAmount == 0 and mailMoney == 0 and mailCOD == 0 then
+        if CA.SV.GoldChange and g_postageAmount == 0 and g_mailMoney == 0 and g_mailCOD == 0 then
             printToChat(valuesent) -- All these values will be zero for a COD payment sent, since none of them are updated.
         end
     end
 
     mailHelper = false
-    postageAmount = 0
-    mailMoney = 0
-    mailCOD = 0
-    if not MailCurrencyCheck then
+    g_postageAmount = 0
+    g_mailMoney = 0
+    g_mailCOD = 0
+    if not g_mailCurrencyCheck then
         zo_callLater(CA.MailClearVariables, 500)
     end
 end
 
 -- Alliance Point Change Announcements
 function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, difference)
-    combostring = ""
+    g_combostring = ""
 
     local UpOrDown     = alliancePoints + difference
     local color        = ""
@@ -1848,7 +1848,7 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
 
     -- Print a message to chat based off all the values we filled in above
     if CA.SV.LootCurrencyCombo and color == ( "|ca80700" ) then
-        combostring = (strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
+        g_combostring = (strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
     else
         if difference > CA.SV.AlliancePointFilter then
             printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
@@ -1858,7 +1858,7 @@ end
 
 -- Tel Var Stones Change Announcements
 function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, reason)
-    combostring = ""
+    g_combostring = ""
 
     --[[ Relevant Reason codes for Tel Var:
     0  = Chest Loot
@@ -2006,9 +2006,9 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
 
     -- Print a message to chat based off all the values we filled in above
     if CA.SV.LootCurrencyCombo and UpOrDown < 0 and reason == 1 then
-        combostring = (strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
+        g_combostring = (strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
     elseif CA.SV.LootCurrencyCombo and UpOrDown > 0 and reason == 1 then
-        combostring = (strformat(" ← <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
+        g_combostring = (strformat(" ← <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
     else
         printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
     end
@@ -2017,7 +2017,7 @@ end
 
 -- Writ Voucher Change Announcements
 function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, reason)
-    combostring = ""
+    g_combostring = ""
 
     local UpOrDown            = newWritVouchers - oldWritVouchers
     local currentWritVouchers = CommaValue (newWritVouchers)
@@ -2136,7 +2136,7 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
 
     -- Print a message to chat based off all the values we filled in above
     if CA.SV.LootCurrencyCombo and UpOrDown < 0 then
-        combostring = (strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
+        g_combostring = (strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
     else
         printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
     end
@@ -2223,8 +2223,8 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
         end
 
         if CA.SV.LootCurrencyCombo then
-            printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>><<5>> |cFFFFFF<<6>>/60|r<<7>>", bracket1, logPrefix, bracket2, icon, skillstring, current, combostring) )
-            combostring = ""
+            printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>><<5>> |cFFFFFF<<6>>/60|r<<7>>", bracket1, logPrefix, bracket2, icon, skillstring, current, g_combostring) )
+            g_combostring = ""
         else
             printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>><<5>> |cFFFFFF<<6>>/60|r", bracket1, logPrefix, bracket2, icon, skillstring, current) )
         end
@@ -2272,8 +2272,8 @@ function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previous
         end
 
         if CA.SV.LootCurrencyCombo then
-            printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>>[Bag Space Upgrade] |cFFFFFF<<5>>/8|r<<6>>", bracket1, logPrefix, bracket2, icon, currentUpgrade, combostring))
-            combostring = ""
+            printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>>[Bag Space Upgrade] |cFFFFFF<<5>>/8|r<<6>>", bracket1, logPrefix, bracket2, icon, currentUpgrade, g_combostring))
+            g_combostring = ""
         else
             printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>>[Bag Space Upgrade] |cFFFFFF<<5>>/8|r", bracket1, logPrefix, bracket2, icon, currentUpgrade))
         end
@@ -2320,8 +2320,8 @@ function CA.MiscAlertBank(eventCode, previousCapacity, currentCapacity, previous
         end
 
         if CA.SV.LootCurrencyCombo then
-            printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>>[Bank Space Upgrade] |cFFFFFF<<5>>/18|r<<6>>", bracket1, logPrefix, bracket2, icon, currentUpgrade, combostring))
-            combostring = ""
+            printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>>[Bank Space Upgrade] |cFFFFFF<<5>>/18|r<<6>>", bracket1, logPrefix, bracket2, icon, currentUpgrade, g_combostring))
+            g_combostring = ""
         else
             printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>>[Bank Space Upgrade] |cFFFFFF<<6>>/18|r", bracket1, logPrefix, bracket2, icon, currentUpgrade))
         end
@@ -2384,7 +2384,7 @@ function CA.OnSellItem(eventCode, itemName, quantity, money)
 end
 
 function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound, lootType, lootedBySelf, isPickpocketLoot, questItemIcon, itemId)
-    combostring = ""
+    g_combostring = ""
 
     local icon
     -- fix Icon for missing quest items
@@ -2593,7 +2593,7 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
             formattedTrait,
             formattedStyle,
             formattedRecipient,
-            combostring) end
+            g_combostring) end
 
         if itemstring2gain == "" then itemstring2gain = strfmt("%s%s%s%s%s%s%s%s%s", icon,
             itemName2,
@@ -2603,7 +2603,7 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
             formattedTrait,
             formattedStyle,
             formattedRecipient,
-            combostring) end
+            g_combostring) end
         zo_callLater(CA.PrintMultiLineGain, 50)
     end
 
@@ -2618,7 +2618,7 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
             formattedTrait,
             formattedStyle,
             formattedRecipient,
-            combostring) end
+            g_combostring) end
 
         if itemstring2loss == "" then itemstring2loss = strfmt("%s%s%s%s%s%s%s%s%s", icon,
             itemName2,
@@ -2628,12 +2628,12 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
             formattedTrait,
             formattedStyle,
             formattedRecipient,
-            combostring) end
+            g_combostring) end
         zo_callLater(CA.PrintMultiLineLoss, 50)
     end
 
     if receivedBy ~= "CRAFT" then
-        if not LaunderCheck then printToChat(strfmt(
+        if not g_launderCheck then printToChat(strfmt(
             "%s%s%s%s|r %s%s%s%s%s%s%s%s%s",
             gainorloss,
             bracket1,
@@ -2647,10 +2647,10 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
             formattedTrait,
             formattedStyle,
             formattedRecipient,
-            combostring
+            g_combostring
         )) end
 
-        if LaunderCheck then launderitemstring = (strfmt(
+        if g_launderCheck then g_launderItemstring = (strfmt(
             "%s%s%s%s|r %s%s%s%s%s%s%s%s",
             gainorloss,
             bracket1,
@@ -2667,8 +2667,8 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
         )) end
     end
 
-    LaunderCheck = false
-    combostring = ""
+    g_launderCheck = false
+    g_combostring = ""
 end
 
 function CA.PrintMultiLineGain()
@@ -2691,7 +2691,7 @@ end
 
 -- These 2 functions help us get the name of the person we are trading with regardless of who initiated the trade
 function CA.TradeInviteWaiting(eventCode, inviteeCharacterName, inviteeDisplayName)
-    TradeInvitee = inviteeCharacterName
+    g_tradeInvitee = inviteeCharacterName
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink( gsub(inviteeCharacterName,"%^%a+","") )
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviteeDisplayName)
     local displayBothString = ( strformat("<<1>><<2>>", gsub(inviteeCharacterName,"%^%a+",""), inviteeDisplayName) )
@@ -2709,7 +2709,7 @@ end
 
 -- These 2 functions help us get the name of the person we are trading with regardless of who initiated the trade
 function CA.TradeInviteConsidering(eventCode, inviterCharacterName, inviterDisplayName)
-    TradeInviter = inviterCharacterName
+    g_tradeInviter = inviterCharacterName
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink( gsub(inviterCharacterName,"%^%a+","") )
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
     local displayBothString = ( strformat("<<1><<<2>>", gsub(inviterCharacterName,"%^%a+",""), inviterDisplayName) )
@@ -2735,20 +2735,20 @@ function CA.TradeInviteDecline(eventCode)
     if CA.SV.MiscTrade then
         printToChat(GetString(SI_TRADE_INVITE_DECLINE)) -- "Trade invite declined."
     end
-    g_TradeStacksIn = {}
-    g_TradeStacksOut = {}
-    TradeInviter = ""
-    TradeInvitee = ""
+    g_tradeStacksIn = {}
+    g_tradeStacksOut = {}
+    g_tradeInviter = ""
+    g_tradeInvitee = ""
 end
 
 function CA.TradeInviteCancel(eventCode)
     if CA.SV.MiscTrade then
         printToChat(GetString(SI_TRADE_CANCEL_INVITE)) -- "Trade invitation canceled."
     end
-    g_TradeStacksIn = {}
-    g_TradeStacksOut = {}
-    TradeInviter = ""
-    TradeInvitee = ""
+    g_tradeStacksIn = {}
+    g_tradeStacksOut = {}
+    g_tradeInviter = ""
+    g_tradeInvitee = ""
 end
 
 -- Adds item to index when they are added to the trade
@@ -2758,12 +2758,12 @@ function CA.OnTradeAdded(eventCode, who, tradeIndex, itemSoundCategory)
         local indexOut = tradeIndex
         local name, icon, stack = GetTradeItemInfo (who, tradeIndex)
         local tradeitemlink = GetTradeItemLink (who, tradeIndex, LINK_STYLE_DEFAULT)
-        g_TradeStacksOut[indexOut] = {stack=stack, name=name, icon=icon, itemlink=tradeitemlink}
+        g_tradeStacksOut[indexOut] = {stack=stack, name=name, icon=icon, itemlink=tradeitemlink}
     else
         local indexIn = tradeIndex
         local name, icon, stack = GetTradeItemInfo (who, tradeIndex)
         local tradeitemlink = GetTradeItemLink (who, tradeIndex, LINK_STYLE_DEFAULT)
-        g_TradeStacksIn[indexIn] = {stack=stack, name=name, icon=icon, itemlink=tradeitemlink}
+        g_tradeStacksIn[indexIn] = {stack=stack, name=name, icon=icon, itemlink=tradeitemlink}
     end
 end
 
@@ -2771,10 +2771,10 @@ end
 function CA.OnTradeRemoved(eventCode, who, tradeIndex, itemSoundCategory)
     if who == 0 then
         local indexOut = tradeIndex
-        g_TradeStacksOut[indexOut] = nil
+        g_tradeStacksOut[indexOut] = nil
     else
         local indexIn = tradeIndex
-        g_TradeStacksIn[indexIn] = nil
+        g_tradeStacksIn[indexIn] = nil
     end
 end
 
@@ -2783,45 +2783,45 @@ function CA.TradeCancel(eventCode, cancelerName)
     if CA.SV.MiscTrade then
         printToChat(GetString(SI_TRADE_CANCELED)) -- "Trade canceled."
     end
-    g_TradeStacksIn = {}
-    g_TradeStacksOut = {}
-    TradeInviter = ""
-    TradeInvitee = ""
+    g_tradeStacksIn = {}
+    g_tradeStacksOut = {}
+    g_tradeInviter = ""
+    g_tradeInvitee = ""
 end
 
 function CA.TradeFail(eventCode, cancelerName)
     if CA.SV.MiscTrade then
         printToChat(GetString(SI_TRADE_FAILED)) -- "Trade failed."
     end
-    g_TradeStacksIn = {}
-    g_TradeStacksOut = {}
-    TradeInviter = ""
-    TradeInvitee = ""
+    g_tradeStacksIn = {}
+    g_tradeStacksOut = {}
+    g_tradeInviter = ""
+    g_tradeInvitee = ""
 end
 
 -- Sends results of the trade to the Item Log print function and clears variables so they are reset for next trade interactions
 function CA.OnTradeSuccess(eventCode)
-    combostring = ""
+    g_combostring = ""
 
     if CA.SV.MiscTrade then
         printToChat(GetString(SI_TRADE_COMPLETE)) -- "Trade complete."
     end
-    if CA.SV.MiscTrade and tradestring1 ~= "" then
-        printToChat(tradestring1)
+    if CA.SV.MiscTrade and g_tradestring1 ~= "" then
+        printToChat(g_tradestring1)
     end
-    if CA.SV.MiscTrade and tradestring2 ~= "" then
-        printToChat(tradestring2)
+    if CA.SV.MiscTrade and g_tradestring2 ~= "" then
+        printToChat(g_tradestring2)
     end
 
     if CA.SV.LootTrade then
-        if TradeInviter == "" then
-            tradetarget = TradeInvitee
+        if g_tradeInviter == "" then
+            tradetarget = g_tradeInvitee
         end
-        if TradeInvitee == "" then
-            tradetarget = TradeInviter
+        if g_tradeInvitee == "" then
+            tradetarget = g_tradeInviter
         end
         for indexOut = 1,5 do
-            if g_TradeStacksOut[indexOut] ~= nil then
+            if g_tradeStacksOut[indexOut] ~= nil then
                 local gainorloss = "|ca80700"
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_TRADED)
                 if CA.SV.ItemContextToggle then
@@ -2829,7 +2829,7 @@ function CA.OnTradeSuccess(eventCode)
                 end
                 local receivedBy = tradetarget
                 local istrade = true
-                local item = g_TradeStacksOut[indexOut]
+                local item = g_tradeStacksOut[indexOut]
                 local itemType = GetItemLinkItemType(item.itemlink)
                 icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
                 --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
@@ -2838,7 +2838,7 @@ function CA.OnTradeSuccess(eventCode)
         end
 
         for indexIn = 1,5 do
-            if g_TradeStacksIn[indexIn] ~= nil then
+            if g_tradeStacksIn[indexIn] ~= nil then
                 local gainorloss = "|c0B610B"
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_TRADED)
                 if CA.SV.ItemContextToggle then
@@ -2846,7 +2846,7 @@ function CA.OnTradeSuccess(eventCode)
                 end
                 local receivedBy = tradetarget
                 local istrade = true
-                local item = g_TradeStacksIn[indexIn]
+                local item = g_tradeStacksIn[indexIn]
                 local itemType = GetItemLinkItemType(item.itemlink)
                 icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
                 --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
@@ -2855,24 +2855,24 @@ function CA.OnTradeSuccess(eventCode)
         end
     end
 
-    g_TradeStacksIn = {}
-    g_TradeStacksOut = {}
-    TradeInviter = ""
-    TradeInvitee = ""
-    tradestring1 = ""
-    tradestring2 = ""
+    g_tradeStacksIn = {}
+    g_tradeStacksOut = {}
+    g_tradeInviter = ""
+    g_tradeInvitee = ""
+    g_tradestring1 = ""
+    g_tradestring2 = ""
 end
 
 function CA.MailMoneyChanged(eventCode, moneyAmount)
-    mailMoney = moneyAmount
-    mailCOD = 0
-    postageAmount = GetQueuedMailPostage()
+    g_mailMoney = moneyAmount
+    g_mailCOD = 0
+    g_postageAmount = GetQueuedMailPostage()
 end
 
 function CA.MailCODChanged(eventCode, codAmount)
-    mailCOD = codAmount
-    mailMoney = 0
-    postageAmount = GetQueuedMailPostage()
+    g_mailCOD = codAmount
+    g_mailMoney = 0
+    g_postageAmount = GetQueuedMailPostage()
 end
 
 function CA.MailRemoved(eventCode)
@@ -2882,19 +2882,19 @@ function CA.MailRemoved(eventCode)
 end
 
 function CA.OnMailReadable(eventCode, mailId)
-    g_MailStacks = {}
+    g_mailStacks = {}
 
     local numAttachments = GetMailAttachmentInfo( mailId )
 
     for attachIndex = 1, numAttachments do
         local icon, stack = GetAttachedItemInfo( mailId,  attachIndex)
         local mailitemlink = GetAttachedItemLink( mailId,  attachIndex, LINK_STYLE_DEFAULT)
-        g_MailStacks[attachIndex] = { stack=stack, icon=icon, itemlink=mailitemlink, }
+        g_mailStacks[attachIndex] = { stack=stack, icon=icon, itemlink=mailitemlink, }
     end
 end
 
 function CA.OnMailTakeAttachedItem(eventCode, mailId)
-    combostring = ""
+    g_combostring = ""
     local NumMails = 0
     local gainorloss = "|c0B610B"
     local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Received"
@@ -2903,8 +2903,8 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
         logPrefix = ( CA.SV.ItemContextMessage )
     end
 
-    for attachIndex = 1, #g_MailStacks do
-        local item = g_MailStacks[attachIndex]
+    for attachIndex = 1, #g_mailStacks do
+        local item = g_mailStacks[attachIndex]
         local icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
         local itemType = GetItemLinkItemType(item.itemlink)
         NumMails = NumMails+1
@@ -2919,38 +2919,38 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
         plural = ""
     end
 
-    MailStringPart1 = (strformat(GetString(SI_LUIE_CA_MAIL_RECEIVED_ATTACHMENT), NumMails, plural) )
+    g_mailStringPart1 = (strformat(GetString(SI_LUIE_CA_MAIL_RECEIVED_ATTACHMENT), NumMails, plural) )
     zo_callLater(PrintMailAttachmentsIfNoGold, 25) -- We call this with a super short delay, it will return a string as long as a currency change event doesn't trigger beforehand!
 
-    g_MailStacks = {}
+    g_mailStacks = {}
 end
 
 function PrintMailAttachmentsIfNoGold()
-    if CA.SV.MiscMail and MailStringPart1 ~= "" then
-        printToChat(strformat("<<1>>.", MailStringPart1) ) -- Append a dot
+    if CA.SV.MiscMail and g_mailStringPart1 ~= "" then
+        printToChat(strformat("<<1>>.", g_mailStringPart1) ) -- Append a dot
     end
-    MailStringPart1 = "" -- Important to clear this string, if we took a mail with only items attached, we don't want the next mail with gold to falsely show that attachments were taken!
+    g_mailStringPart1 = "" -- Important to clear this string, if we took a mail with only items attached, we don't want the next mail with gold to falsely show that attachments were taken!
 end
 
 function CA.OnMailAttach(eventCode, attachmentSlot)
     -- d(attachmentSlot) -- Debug
-    postageAmount = GetQueuedMailPostage()
+    g_postageAmount = GetQueuedMailPostage()
     local mailIndex = attachmentSlot
     local _, _, icon, stack = GetQueuedItemAttachmentInfo(attachmentSlot)
     local mailitemlink = GetMailQueuedAttachmentLink(attachmentSlot, LINK_STYLE_DEFAULT)
-    g_MailStacksOut[mailIndex] = {stack=stack, name=name, icon=icon, itemlink=mailitemlink}
+    g_mailStacksOut[mailIndex] = {stack=stack, name=name, icon=icon, itemlink=mailitemlink}
 end
 
 -- Removes items from index if they are removed from the trade
 function CA.OnMailAttachRemove(eventCode, attachmentSlot)
-    postageAmount = GetQueuedMailPostage()
+    g_postageAmount = GetQueuedMailPostage()
     local mailIndex = attachmentSlot
-    g_MailStacksOut[mailIndex] = nil
+    g_mailStacksOut[mailIndex] = nil
 end
 
 -- Cleanup if a Trade is canceled/exited
 function CA.OnMailCloseBox(eventCode)
-    g_MailStacksOut = {}
+    g_mailStacksOut = {}
 end
 
 function CA.OnMailFail(eventCode, reason)
@@ -2976,33 +2976,33 @@ function CA.OnMailFail(eventCode, reason)
         if reason == 7 then
             printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_NO_SUB_BODY_ATTACHMENT))
         end
-        MailStop = true
+        g_mailStop = true
         zo_callLater(CA.MailClearVariables, 500)
     end
 end
 
 function CA.MailClearVariables()
-    MailStop = false
-    MailCurrencyCheck = true
+    g_mailStop = false
+    g_mailCurrencyCheck = true
 end
 
 -- Sends results of the trade to the Item Log print function and clears variables so they are reset for next trade interactions
 function CA.OnMailSuccess(eventCode)
-    combostring = ""
+    g_combostring = ""
     local latency = GetLatency()
     latency = latency + 50
     zo_callLater(CA.FunctionMailCurrencyCheck, latency)
 
     if CA.SV.LootMail then
         for mailIndex = 1,6 do -- Have to iterate through all 6 possible mail attachments, otherwise nil values will bump later items off the list potentially.
-            if g_MailStacksOut[mailIndex] ~= nil then
+            if g_mailStacksOut[mailIndex] ~= nil then
                 local gainorloss = "|ca80700"
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SENT)
                     if CA.SV.ItemContextToggle then
                         logPrefix = ( CA.SV.ItemContextMessage )
                     end
                 local receivedBy = ""
-                local item = g_MailStacksOut[mailIndex]
+                local item = g_mailStacksOut[mailIndex]
                 icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
                 local itemType = GetItemLinkItemType(item.itemlink)
                 --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
@@ -3011,14 +3011,14 @@ function CA.OnMailSuccess(eventCode)
         end
     end
 
-    g_MailStacksOut = {}
-    mailCOD = 0
-    mailMoney = 0
-    postageAmount = 0
+    g_mailStacksOut = {}
+    g_mailCOD = 0
+    g_mailMoney = 0
+    g_postageAmount = 0
 end
 
 function CA.FunctionMailCurrencyCheck()
-    if MailCurrencyCheck and CA.SV.MiscMail then
+    if g_mailCurrencyCheck and CA.SV.MiscMail then
         printToChat(GetString(SI_LUIE_CA_MAIL_SENT_SUCCESS))
     end
 end
@@ -3045,10 +3045,10 @@ local function ExperiencePctToColour(xppct)
 end
 
 function CA.PrintBufferedXP()
-    if XPCombatBufferValue ~= 0 then
-        printToChat(XPCombatBufferString) -- If we leveled up, then this variable will be true, and we want to smash all the buffered XP into the level up display!
-        XPCombatBufferValue = 0
-        XPCombatBufferString = ""
+    if g_XPCombatBufferValue ~= 0 then
+        printToChat(g_XPCombatBufferString) -- If we leveled up, then this variable will be true, and we want to smash all the buffered XP into the level up display!
+        g_XPCombatBufferValue = 0
+        g_XPCombatBufferString = ""
     end
 end
 
@@ -3059,7 +3059,7 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
 
         local icon = CA.SV.LevelUpIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_normal.dds|t ") or ( "" )
         local attribute
-        local CurrentLevelFormatted = XP_BAR_COLORS:Colorize(LevelContext .. " " .. CurrentLevel)
+        local CurrentLevelFormatted = g_XP_BAR_COLORS:Colorize(LevelContext .. " " .. CurrentLevel)
 
         if IsChampion then
             attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned()+1 )
@@ -3075,27 +3075,27 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
             if attribute == ATTRIBUTE_STAMINA then
                 icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.ddst ") or ( "" )
             end
-            CurrentLevelFormatted = CP_BAR_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
+            CurrentLevelFormatted = g_CP_BAR_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
         end
 
-        if not LevelChanged1 or Crossover == 1 then
-            if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat(QuestString1)
-                printToChat(QuestString2)
-            elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
-                printToChat(QuestString1)
-            elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat(QuestString2)
+        if not g_levelChanged1 or g_crossover == 1 then
+            if g_questString1 ~= "" and g_questString2 ~= "" and CA.SV.Experience then
+                printToChat(g_questString1)
+                printToChat(g_questString2)
+            elseif g_questString1 ~= "" and g_questString2 == "" and CA.SV.Experience then
+                printToChat(g_questString1)
+            elseif g_questString1 == "" and g_questString2 ~= "" and CA.SV.Experience then
+                printToChat(g_questString2)
             end
 
-            if CA.SV.ExperienceLevelUp and Crossover == 0 then
+            if CA.SV.ExperienceLevelUp and g_crossover == 0 then
                 if CA.SV.ExperienceColorLevel then
                     printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE), icon, CurrentLevelFormatted))
                 else
                     printToChat(strformat("<<1>><<2>><<3>> <<4>>", GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE), icon, LevelContext, CurrentLevel))
                 end
             end
-            if CA.SV.ExperienceLevelUp and Crossover == 1 then
+            if CA.SV.ExperienceLevelUp and g_crossover == 1 then
                 if CA.SV.ExperienceColorLevel then
                     printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE), icon, CurrentLevelFormatted))
                 else
@@ -3103,22 +3103,22 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
                 end
             end
         else
-            if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat(QuestString1)
-            elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
-                printToChat(QuestString1)
-            elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat(QuestString2)
+            if g_questString1 ~= "" and g_questString2 ~= "" and CA.SV.Experience then
+                printToChat(g_questString1)
+            elseif g_questString1 ~= "" and g_questString2 == "" and CA.SV.Experience then
+                printToChat(g_questString1)
+            elseif g_questString1 == "" and g_questString2 ~= "" and CA.SV.Experience then
+                printToChat(g_questString2)
             end
 
-            if CA.SV.ExperienceLevelUp and Crossover == 0 then
+            if CA.SV.ExperienceLevelUp and g_crossover == 0 then
                 if CA.SV.ExperienceColorLevel then
                     printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE), icon, CurrentLevelFormatted))
                 else
                     printToChat(strformat("<<1>><<2>><<3>> <<4>>", GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE), icon, LevelContext, CurrentLevel))
                 end
             end
-            if CA.SV.ExperienceLevelUp and Crossover == 1 then
+            if CA.SV.ExperienceLevelUp and g_crossover == 1 then
                 if CA.SV.ExperienceColorLevel then
                     printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE), icon, CurrentLevelFormatted))
                 else
@@ -3126,22 +3126,22 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
                 end
             end
 
-            if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat(QuestString2)
+            if g_questString1 ~= "" and g_questString2 ~= "" and CA.SV.Experience then
+                printToChat(g_questString2)
             end
         end
 
     end
-    WeLeveled = 0
-    Crossover = 0
-    QuestString1 = ""
-    QuestString2 = ""
-    QuestCombiner1 = ""
-    QuestCombiner2 = ""
-    QuestCombiner2Alt = ""
-    LevelChanged1 = false
-    TotalLevelAdjust = ""
-    LevelCarryOverValue = 0
+    g_weLeveled = 0
+    g_crossover = 0
+    g_questString1 = ""
+    g_questString2 = ""
+    g_questCombiner1 = ""
+    g_questCombiner2 = ""
+    g_questCombiner2Alt = ""
+    g_levelChanged1 = false
+    g_totalLevelAdjust = ""
+    g_levelCarryOverValue = 0
 end
 
 function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChampionPoints)
@@ -3163,16 +3163,16 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
         if attribute == ATTRIBUTE_STAMINA then
             icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.ddst ") or ( "" )
         end
-        local CurrentLevelFormatted = CP_BAR_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
+        local CurrentLevelFormatted = g_CP_BAR_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
 
-        if not LevelChanged1 or Crossover == 1 then
-            if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat(QuestString1)
-                printToChat(QuestString2)
-            elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
-                printToChat(QuestString1)
-            elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat(QuestString2)
+        if not g_levelChanged1 or g_crossover == 1 then
+            if g_questString1 ~= "" and g_questString2 ~= "" and CA.SV.Experience then
+                printToChat(g_questString1)
+                printToChat(g_questString2)
+            elseif g_questString1 ~= "" and g_questString2 == "" and CA.SV.Experience then
+                printToChat(g_questString1)
+            elseif g_questString1 == "" and g_questString2 ~= "" and CA.SV.Experience then
+                printToChat(g_questString2)
             end
 
             if CA.SV.ExperienceLevelUp then
@@ -3183,12 +3183,12 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
                 end
             end
         else
-            if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat(QuestString1)
-            elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
-                printToChat(QuestString1)
-            elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat(QuestString2)
+            if g_questString1 ~= "" and g_questString2 ~= "" and CA.SV.Experience then
+                printToChat(g_questString1)
+            elseif g_questString1 ~= "" and g_questString2 == "" and CA.SV.Experience then
+                printToChat(g_questString1)
+            elseif g_questString1 == "" and g_questString2 ~= "" and CA.SV.Experience then
+                printToChat(g_questString2)
             end
 
             if CA.SV.ExperienceLevelUp then
@@ -3199,22 +3199,22 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
                 end
             end
 
-            if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-                printToChat(QuestString2)
+            if g_questString1 ~= "" and g_questString2 ~= "" and CA.SV.Experience then
+                printToChat(g_questString2)
             end
         end
 
     end
-    WeLeveled = 0
-    Crossover = 0
-    QuestString1 = ""
-    QuestString2 = ""
-    QuestCombiner1 = ""
-    QuestCombiner2 = ""
-    QuestCombiner2Alt = ""
-    LevelChanged1 = false
-    TotalLevelAdjust = ""
-    LevelCarryOverValue = 0
+    g_weLeveled = 0
+    g_crossover = 0
+    g_questString1 = ""
+    g_questString2 = ""
+    g_questCombiner1 = ""
+    g_questCombiner2 = ""
+    g_questCombiner2Alt = ""
+    g_levelChanged1 = false
+    g_totalLevelAdjust = ""
+    g_levelCarryOverValue = 0
 end
 
 function CA.OnExperienceGain(eventCode, reason, level, previousExperience, currentExperience, championPoints)
@@ -3224,10 +3224,10 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
     -- Determines if we leveled up - Needs to be functioning even if we don't printout progress or current level
     if currentExperience >= XPLevel then
         if not IsChampion and CurrentLevel == 49 then -- If we are level 49 and we level up that means we've reached Champion Level, this means we need to update these values!
-            Crossover = 1 -- Variable incrementer to help us determine if we just reached Champion Level
+            g_crossover = 1 -- Variable incrementer to help us determine if we just reached Champion Level
             IsChampion = true
         end
-        WeLeveled = 1
+        g_weLeveled = 1
         if IsChampion then
             CurrentLevel = GetPlayerChampionPointsEarned()
             if CurrentLevel < 10 then
@@ -3248,7 +3248,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
         levelhelper = GetUnitXP ("player")
     end
 
-    if Crossover == 1 then
+    if g_crossover == 1 then
         levelhelper = GetNumExperiencePointsInLevel(49)
         XPLevel = GetNumExperiencePointsInLevel(49)
     end
@@ -3271,14 +3271,14 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 
             -- If quest turnin, we save the first part of this string to combine with another in case this is followed up by POI completion event too.
             if reason == 1 then
-                LevelCarryOverValue = currentExperience
-                QuestCombiner1 = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. CommaValue (change) .. formathelper .. CA.SV.ExperienceName ) or ( CommaValue (change) .. formathelper .. CA.SV.ExperienceName )
+                g_levelCarryOverValue = currentExperience
+                g_questCombiner1 = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. CommaValue (change) .. formathelper .. CA.SV.ExperienceName ) or ( CommaValue (change) .. formathelper .. CA.SV.ExperienceName )
             end
 
             -- Add to the throttled XP count if it is enabled
             if CA.SV.ExperienceThrottle > 0 and reason == 0 then
-                XPCombatBufferValue = XPCombatBufferValue + change
-                icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. CommaValue (XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName ) or ( CommaValue (XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName )
+                g_XPCombatBufferValue = g_XPCombatBufferValue + change
+                icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. CommaValue (g_XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName ) or ( CommaValue (g_XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName )
             end
 
             local xppct = 0             -- XP Percent
@@ -3325,13 +3325,13 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 
                 --
                 -- Big ass bullshit duplicate to create alternate string for Reason 2 on quest turnin with POI completion too
-                if reason == 2 and QuestCombiner1 ~= "" then
+                if reason == 2 and g_questCombiner1 ~= "" then
 
                 -- CALCULATION 1
 
                     levelhelper = levelhelper - change
 
-                    if Crossover == 1 then
+                    if g_crossover == 1 then
                         levelhelper = XPLevel -- If we crossover XP on this level then we just auto set this to max xp/level value for 50.
                     end
 
@@ -3350,21 +3350,21 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 
                     if CA.SV.ExperienceDisplayOptions == 1 then
                         if CA.SV.ExperienceProgressColor then
-                        QuestCombiner2 = strfmt( "%s (|c%s%s|r/|c71DE73%s|r)", progressbrackets, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevel) )
+                        g_questCombiner2 = strfmt( "%s (|c%s%s|r/|c71DE73%s|r)", progressbrackets, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevel) )
                         else
-                        QuestCombiner2 = strfmt( "%s (%s/%s)|r", progressbrackets, CommaValue (levelhelper), CommaValue (XPLevel) )
+                        g_questCombiner2 = strfmt( "%s (%s/%s)|r", progressbrackets, CommaValue (levelhelper), CommaValue (XPLevel) )
                         end
                     elseif CA.SV.ExperienceDisplayOptions == 2 then
                         if CA.SV.ExperienceProgressColor then
-                        QuestCombiner2 = strfmt("%s (%s%%|r)", progressbrackets, decimal)
+                        g_questCombiner2 = strfmt("%s (%s%%|r)", progressbrackets, decimal)
                         else
-                        QuestCombiner2 = strfmt("%s (%s%%|r)", progressbrackets, decimal)
+                        g_questCombiner2 = strfmt("%s (%s%%|r)", progressbrackets, decimal)
                         end
                     elseif CA.SV.ExperienceDisplayOptions == 3 then
                         if CA.SV.ExperienceProgressColor then
-                        QuestCombiner2 = strfmt("%s (%s%%|r - |c%s%s|r/|c71DE73%s|r)", progressbrackets, decimal, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevel) )
+                        g_questCombiner2 = strfmt("%s (%s%%|r - |c%s%s|r/|c71DE73%s|r)", progressbrackets, decimal, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevel) )
                         else
-                        QuestCombiner2 = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, CommaValue (levelhelper), CommaValue (XPLevel) )
+                        g_questCombiner2 = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, CommaValue (levelhelper), CommaValue (XPLevel) )
                         end
                     end
 
@@ -3378,7 +3378,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                             AdjustLevel = 10 -- Very important, if this player has never hit Champion level before, set the minimum possible value when hitting level 50.
                         end
                         XPLevelAlt = GetNumChampionXPInChampionPoint(AdjustLevel)
-                        if Crossover == 1 then
+                        if g_crossover == 1 then
                             XPLevelAlt = GetNumExperiencePointsInLevel(49)
                         end
                     else
@@ -3386,7 +3386,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                         XPLevelAlt = GetNumExperiencePointsInLevel(AdjustLevel)
                     end
 
-                    levelhelper = LevelCarryOverValue
+                    levelhelper = g_levelCarryOverValue
 
                     if CA.SV.ExperienceShowDecimal then
                             xppct = math.floor(10000*levelhelper/XPLevelAlt) / 100
@@ -3403,21 +3403,21 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 
                     if CA.SV.ExperienceDisplayOptions == 1 then
                         if CA.SV.ExperienceProgressColor then
-                        QuestCombiner2Alt = strfmt( "%s (|c%s%s|r/|c71DE73%s|r)", progressbrackets, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevelAlt) )
+                        g_questCombiner2Alt = strfmt( "%s (|c%s%s|r/|c71DE73%s|r)", progressbrackets, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevelAlt) )
                         else
-                        QuestCombiner2Alt = strfmt( "%s (%s/%s)|r", progressbrackets, CommaValue (levelhelper), CommaValue (XPLevelAlt) )
+                        g_questCombiner2Alt = strfmt( "%s (%s/%s)|r", progressbrackets, CommaValue (levelhelper), CommaValue (XPLevelAlt) )
                         end
                     elseif CA.SV.ExperienceDisplayOptions == 2 then
                         if CA.SV.ExperienceProgressColor then
-                        QuestCombiner2Alt = strfmt("%s (%s%%|r)", progressbrackets, decimal)
+                        g_questCombiner2Alt = strfmt("%s (%s%%|r)", progressbrackets, decimal)
                         else
-                        QuestCombiner2Alt = strfmt("%s (%s%%|r)", progressbrackets, decimal)
+                        g_questCombiner2Alt = strfmt("%s (%s%%|r)", progressbrackets, decimal)
                         end
                     elseif CA.SV.ExperienceDisplayOptions == 3 then
                         if CA.SV.ExperienceProgressColor then
-                        QuestCombiner2Alt = strfmt("%s (%s%%|r - |c%s%s|r/|c71DE73%s|r)", progressbrackets, decimal, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevelAlt) )
+                        g_questCombiner2Alt = strfmt("%s (%s%%|r - |c%s%s|r/|c71DE73%s|r)", progressbrackets, decimal, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevelAlt) )
                         else
-                        QuestCombiner2Alt = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, CommaValue (levelhelper), CommaValue (XPLevelAlt) )
+                        g_questCombiner2Alt = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, CommaValue (levelhelper), CommaValue (XPLevelAlt) )
                         end
                     end
                 -- End big ass bullshit duplicate function
@@ -3433,75 +3433,75 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                 if CA.SV.ExperienceColorLevel then
                     if IsChampion then
                         attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned() +1)
-                        totallevel = CP_BAR_COLORS[attribute][2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel))
+                        totallevel = g_CP_BAR_COLORS[attribute][2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel))
                     else
-                        totallevel = XP_BAR_COLORS:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel))
+                        totallevel = g_XP_BAR_COLORS:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel))
                     end
                 else
                     totallevel = strfmt( " %s %s", LevelContext, CurrentLevel)
                 end
 
-                if QuestCombiner1 ~= "" then
+                if g_questCombiner1 ~= "" then
                     if CA.SV.ExperienceColorLevel then
                         if IsChampion then
                             attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned() )
-                            TotalLevelAdjust = CP_BAR_COLORS[attribute][2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel -1))
+                            g_totalLevelAdjust = g_CP_BAR_COLORS[attribute][2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel -1))
                         else
-                            TotalLevelAdjust = XP_BAR_COLORS:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel -1))
+                            g_totalLevelAdjust = g_XP_BAR_COLORS:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel -1))
                         end
                     else
-                        TotalLevelAdjust = strfmt( " %s %s", LevelContext, CurrentLevel -1)
+                        g_totalLevelAdjust = strfmt( " %s %s", LevelContext, CurrentLevel -1)
                     end
                 end
             else
-                if QuestCombiner1 ~= "" then
-                    TotalLevelAdjust = ""
+                if g_questCombiner1 ~= "" then
+                    g_totalLevelAdjust = ""
                 end
             end
 
             --[[ Crossover from Normal XP --> Champion XP modifier ]] --
-            if Crossover == 1 then
+            if g_crossover == 1 then
                 -- progress = (progressbrackets .. " (Level 50)")
-                totallevel = XP_BAR_COLORS:Colorize( strformat(" <<1>> 50", GetString(SI_EXPERIENCE_LEVEL_LABEL)) ) -- "Level"
-                if QuestCombiner1 ~= "" then
-                    -- QuestCombiner2 = (progressbrackets .. " (Level 50)")
+                totallevel = g_XP_BAR_COLORS:Colorize( strformat(" <<1>> 50", GetString(SI_EXPERIENCE_LEVEL_LABEL)) ) -- "Level"
+                if g_questCombiner1 ~= "" then
+                    -- g_questCombiner2 = (progressbrackets .. " (Level 50)")
                     if CA.SV.ExperienceShowLevel then
                         if CA.SV.ExperienceColorLevel then
-                            TotalLevelAdjust = XP_BAR_COLORS:Colorize( strformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL)) )
+                            g_totalLevelAdjust = g_XP_BAR_COLORS:Colorize( strformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL)) )
                         else
-                            TotalLevelAdjust = strformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL)) -- "Level"
+                            g_totalLevelAdjust = strformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL)) -- "Level"
                         end
                     end
                 end
             end
 
         -- If we gain experience from a non combat source, and our buffer function holds a value, then we need to immediately dump this value before the next XP update is processed.
-        if reason ~= 0 and CA.SV.ExperienceThrottle > 0 and XPCombatBufferValue > 0 then
-            XPCombatBufferValue = 0
-            printToChat(XPCombatBufferString)
+        if reason ~= 0 and CA.SV.ExperienceThrottle > 0 and g_XPCombatBufferValue > 0 then
+            g_XPCombatBufferValue = 0
+            printToChat(g_XPCombatBufferString)
         end
 
         if reason == 1 then
-            if WeLeveled == 1 then
-                LevelChanged1 = true
+            if g_weLeveled == 1 then
+                g_levelChanged1 = true
             end
-            QuestString1 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
+            g_questString1 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
             zo_callLater(CA.PrintQuestExperienceHelper, 100)
         elseif reason == 2 then
-            if QuestCombiner1 ~= "" then
-                if WeLeveled == 1 and not LevelChanged1 then
-                    QuestString1 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, QuestCombiner1, QuestCombiner2Alt, TotalLevelAdjust) )
+            if g_questCombiner1 ~= "" then
+                if g_weLeveled == 1 and not g_levelChanged1 then
+                    g_questString1 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, g_questCombiner1, g_questCombiner2Alt, g_totalLevelAdjust) )
                 else
-                    QuestString1 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, QuestCombiner1, QuestCombiner2, totallevel) )
+                    g_questString1 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, g_questCombiner1, g_questCombiner2, totallevel) )
                 end
             end
-            QuestString2 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
+            g_questString2 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
             zo_callLater(CA.PrintQuestExperienceHelper, 100)
         elseif reason == 0 then
             if change > CA.SV.ExperienceFilter and CA.SV.ExperienceThrottle == 0 then
                 printToChat(strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
             elseif CA.SV.ExperienceThrottle > 0 then
-                XPCombatBufferString = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
+                g_XPCombatBufferString = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
                 local timer = CA.SV.ExperienceThrottle
                 zo_callLater(CA.PrintBufferedXP, 5000)
             end
@@ -3512,27 +3512,27 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 end
 
 function CA.PrintQuestExperienceHelper()
-    if WeLeveled == 1 then
+    if g_weLeveled == 1 then
         return
     end
 
-    if QuestString1 ~= "" and QuestString2 ~= "" and CA.SV.Experience then
-        printToChat(QuestString1)
-        printToChat(QuestString2)
-    elseif QuestString1 ~= "" and QuestString2 == "" and CA.SV.Experience then
-        printToChat(QuestString1)
-    elseif QuestString1 == "" and QuestString2 ~= "" and CA.SV.Experience then
-        printToChat(QuestString2)
+    if g_questString1 ~= "" and g_questString2 ~= "" and CA.SV.Experience then
+        printToChat(g_questString1)
+        printToChat(g_questString2)
+    elseif g_questString1 ~= "" and g_questString2 == "" and CA.SV.Experience then
+        printToChat(g_questString1)
+    elseif g_questString1 == "" and g_questString2 ~= "" and CA.SV.Experience then
+        printToChat(g_questString2)
     end
 
-    QuestString1 = ""
-    QuestString2 = ""
-    QuestCombiner1 = ""
-    QuestCombiner2 = ""
-    QuestCombiner2Alt = ""
-    LevelChanged1 = false
-    TotalLevelAdjust = ""
-    LevelCarryOverValue = 0
+    g_questString1 = ""
+    g_questString2 = ""
+    g_questCombiner1 = ""
+    g_questCombiner2 = ""
+    g_questCombiner2Alt = ""
+    g_levelChanged1 = false
+    g_totalLevelAdjust = ""
+    g_levelCarryOverValue = 0
 end
 
 -- Helper function to return colour (without |c prefix) according to current percentage
@@ -3636,25 +3636,25 @@ function CA.OnAchievementUpdated(eventCode, aId)
 end
 
 function CA.GuildBankItemAdded(eventCode, slotId)
-    CA.LogItem(GuildBankCarry_logPrefix, GuildBankCarry_icon, GuildBankCarry_itemLink, GuildBankCarry_itemType, GuildBankCarry_stackCount or 1, GuildBankCarry_receivedBy, GuildBankCarry_gainorloss)
-    GuildBankCarry_logPrefix = ""
-    GuildBankCarry_icon = ""
-    GuildBankCarry_itemLink = ""
-    GuildBankCarry_stackCount = 1
-    GuildBankCarry_receivedBy = ""
-    GuildBankCarry_gainorloss = ""
-    GuildBankCarry_itemType = ""
+    CA.LogItem(g_guildBankCarryLogPrefix, g_guildBankCarryIcon, g_guildBankCarryItemLink, g_guildBankCarryItemType, g_guildBankCarryStackCount or 1, g_guildBankCarryReceivedBy, g_guildBankCarryGainorloss)
+    g_guildBankCarryLogPrefix = ""
+    g_guildBankCarryIcon = ""
+    g_guildBankCarryItemLink = ""
+    g_guildBankCarryStackCount = 1
+    g_guildBankCarryReceivedBy = ""
+    g_guildBankCarryGainorloss = ""
+    g_guildBankCarryItemType = ""
 end
 
 function CA.GuildBankItemRemoved(eventCode, slotId)
-    CA.LogItem(GuildBankCarry_logPrefix, GuildBankCarry_icon, GuildBankCarry_itemLink, GuildBankCarry_itemType, GuildBankCarry_stackCount or 1, GuildBankCarry_receivedBy, GuildBankCarry_gainorloss)
-    GuildBankCarry_logPrefix = ""
-    GuildBankCarry_icon = ""
-    GuildBankCarry_itemLink = ""
-    GuildBankCarry_stackCount = 1
-    GuildBankCarry_receivedBy = ""
-    GuildBankCarry_gainorloss = ""
-    GuildBankCarry_itemType = ""
+    CA.LogItem(g_guildBankCarryLogPrefix, g_guildBankCarryIcon, g_guildBankCarryItemLink, g_guildBankCarryItemType, g_guildBankCarryStackCount or 1, g_guildBankCarryReceivedBy, g_guildBankCarryGainorloss)
+    g_guildBankCarryLogPrefix = ""
+    g_guildBankCarryIcon = ""
+    g_guildBankCarryItemLink = ""
+    g_guildBankCarryStackCount = 1
+    g_guildBankCarryReceivedBy = ""
+    g_guildBankCarryGainorloss = ""
+    g_guildBankCarryItemType = ""
 end
 
 function CA.IndexInventory()
@@ -3759,22 +3759,22 @@ end
 
 function CA.FenceSuccess(eventCode, result)
     if result == 1 then
-        IsValidLaunder = true
+        g_isValidLaunder = true
         CA.FenceHelper() -- Can probably consolidate this, however leaving the functions separated until no bugs confirmed. Was thinking about putting a 50 ms delay on it just to make sure everything has time to go through.
     end
 end
 
 function CA.FenceHelper()
     if not CA.SV.LootCurrencyCombo then
-        printToChat(laundergoldstring)
-        printToChat(launderitemstring)
+        printToChat(g_launderGoldstring)
+        printToChat(g_launderItemstring)
     else
-        printToChat(strformat("<<1>> → <<2>>", launderitemstring, laundergoldstring))
+        printToChat(strformat("<<1>> → <<2>>", g_launderItemstring, g_launderGoldstring))
     end
 
-    laundergoldstring = ""
-    launderitemstring = ""
-    IsValidLaunder = false
+    g_launderGoldstring = ""
+    g_launderItemstring = ""
+    g_isValidLaunder = false
 end
 
 -- Only active if destroyed items is enabled, flags the next item that is removed from inventory as destroyed.
@@ -4257,13 +4257,13 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
             local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
             g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_InventoryStacks[slotId]
-            GuildBankCarry_icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            GuildBankCarry_gainorloss = "|c0B610B"
-            GuildBankCarry_logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
-            GuildBankCarry_receivedBy = ""
-            GuildBankCarry_itemLink = item.itemlink
-            GuildBankCarry_stackCount = stackCountChange or 1
-            GuildBankCarry_itemType = GetItemLinkItemType(item.itemlink)
+            g_guildBankCarryIcon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            g_guildBankCarryGainorloss = "|c0B610B"
+            g_guildBankCarryLogPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
+            g_guildBankCarryReceivedBy = ""
+            g_guildBankCarryItemLink = item.itemlink
+            g_guildBankCarryStackCount = stackCountChange or 1
+            g_guildBankCarryItemType = GetItemLinkItemType(item.itemlink)
         --[[elseif g_InventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
             local icon, stack = GetItemInfo(bagId, slotId)
             local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
@@ -4280,13 +4280,13 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                local icon, stack = GetItemInfo(bagId, slotId)
                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-               GuildBankCarry_icon = seticon
-               GuildBankCarry_gainorloss = "|c0B610B"
-               GuildBankCarry_logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
-               GuildBankCarry_receivedBy = ""
-               GuildBankCarry_itemLink = item.itemlink
-               GuildBankCarry_stackCount = stackCountChange or 1
-               GuildBankCarry_itemType = GetItemLinkItemType(item.itemlink)
+               g_guildBankCarryIcon = seticon
+               g_guildBankCarryGainorloss = "|c0B610B"
+               g_guildBankCarryLogPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
+               g_guildBankCarryReceivedBy = ""
+               g_guildBankCarryItemLink = item.itemlink
+               g_guildBankCarryStackCount = stackCountChange or 1
+               g_guildBankCarryItemType = GetItemLinkItemType(item.itemlink)
                g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
@@ -4294,13 +4294,13 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_InventoryStacks[slotId].stack - change
-                GuildBankCarry_icon = seticon
-                GuildBankCarry_gainorloss = "|ca80700"
-                GuildBankCarry_logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
-                GuildBankCarry_receivedBy = ""
-                GuildBankCarry_itemLink = item.itemlink
-                GuildBankCarry_stackCount = change or 1
-                GuildBankCarry_itemType = GetItemLinkItemType(item.itemlink)
+                g_guildBankCarryIcon = seticon
+                g_guildBankCarryGainorloss = "|ca80700"
+                g_guildBankCarryLogPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
+                g_guildBankCarryReceivedBy = ""
+                g_guildBankCarryItemLink = item.itemlink
+                g_guildBankCarryStackCount = change or 1
+                g_guildBankCarryItemType = GetItemLinkItemType(item.itemlink)
                 if CA.SV.ShowDestroy and ItemWasDestroyed
                     then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
                 end
@@ -4324,12 +4324,12 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
         local icon = GetItemLinkInfo(itemlink)
         local seticon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
 
-        GuildBankCarry_icon = seticon
-        GuildBankCarry_gainorloss = "|c0B610B"
-        GuildBankCarry_logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
-        GuildBankCarry_receivedBy = ""
-        GuildBankCarry_itemLink = itemlink
-        GuildBankCarry_stackCount = stackCountChange or 1
+        g_guildBankCarryIcon = seticon
+        g_guildBankCarryGainorloss = "|c0B610B"
+        g_guildBankCarryLogPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
+        g_guildBankCarryReceivedBy = ""
+        g_guildBankCarryItemLink = itemlink
+        g_guildBankCarryStackCount = stackCountChange or 1
     end
 
     ItemWasDestroyed = false
@@ -4348,7 +4348,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = "|c0B610B"
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LAUNDERED)
-            LaunderCheck = true
+            g_launderCheck = true
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
         elseif g_InventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
             local icon, stack = GetItemInfo(bagId, slotId)
@@ -4359,7 +4359,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local gainorloss = "|c0B610B"
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LAUNDERED)
-            LaunderCheck = true
+            g_launderCheck = true
             if itemType == ITEMTYPE_WEAPON or itemType == ITEMTYPE_ARMOR or itemType == ITEMTYPE_JEWELRY then
                 CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
             end
@@ -4373,7 +4373,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LAUNDERED)
                 local icon, stack = GetItemInfo(bagId, slotId)
                 local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-                LaunderCheck = true
+                g_launderCheck = true
                 CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
                 g_InventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
@@ -4412,13 +4412,13 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             return
         end
 
-        LaunderCheck = true
+        g_launderCheck = true
         CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss)
     end
 
     ItemWasDestroyed = false
-    combostring = ""
-    LaunderCheck = false
+    g_combostring = ""
+    g_launderCheck = false
 end
 
 -- Makes it so bank withdraw/deposit events only occur when we can confirm the item is crossing over.
@@ -4433,7 +4433,7 @@ function CA.JusticeStealRemove(eventCode)
         ConfiscateMessage = GetString(SI_LUIE_CA_JUSTICE_CONFISCATED_BOUNTY_ITEMS_MSG)
     end
 
-    if stealstring == "" then
+    if g_stealstring == "" then
         return
     end
 
@@ -4441,8 +4441,8 @@ function CA.JusticeStealRemove(eventCode)
         printToChat(ConfiscateMessage)
     end
 
-    printToChat(stealstring)
-    stealstring = ""
+    printToChat(g_stealstring)
+    g_stealstring = ""
     ConfiscateMessage = (GetString(SI_LUIE_CA_JUSTICE_CONFISCATED_MSG))
 
     if CA.SV.ShowConfiscate or CA.SV.ShowDestroy then
