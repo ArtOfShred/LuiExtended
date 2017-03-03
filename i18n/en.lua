@@ -111,6 +111,32 @@ ZO_CreateStringId("SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START",              "A vote 
 ZO_CreateStringId("SI_LUIE_CA_XP_LVL_ANNOUNCE",                         "You have reached")
 
 -- ChatAnnouncements.lua [Default overwrites]
+
+ZO_CreateStringId("SI_LUIE_DUEL_INVITE_ACCEPTED",                       "Duel challenge accepted.")
+ZO_CreateStringId("SI_LUIE_DUEL_INVITE_DECLINED",                       "Duel challenge declined.")
+ZO_CreateStringId("SI_LUIE_DUEL_INVITE_CANCELED",                       "Duel challenge canceled.")
+ZO_CreateStringId("SI_LUIE_DUEL_INVITE_SENT",                           "You have challenged |cFEFEFE<<1>>|r to a duel.")
+ZO_CreateStringId("SI_LUIE_DUEL_INVITE_RECEIVED",                       "|cFEFEFE<<1>>|r has challenged you to a duel.")
+ZO_CreateStringId("SI_LUIE_PLAYER_TO_PLAYER_INVITE_DUEL",               "Challenge to Duel")
+ZO_CreateStringId("SI_LUIE_DUELING_COUNTDOWN_CSA",                      "Duel Starts in <<1>>...")
+ZO_CreateStringId("SI_LUIE_DUELRESULT0",                                "|cFEFEFE<<1>>|r forfeited the duel.") -- Custom string with period for chat
+ZO_CreateStringId("SI_LUIE_DUELRESULT1",                                "|cFEFEFE<<1>>|r won the duel.") -- Custom string with period for chat
+ZO_CreateStringId("SI_LUIE_DUEL_STARTED",                               "Duel started!")
+-- Duel Failure Results
+ZO_CreateStringId("SI_LUIE_DUELINVITEFAILREASON1",                      "|cFEFEFE<<1>>|r is not available to duel.")
+ZO_CreateStringId("SI_LUIE_DUELINVITEFAILREASON4",                      "|cFEFEFE<<1>>|r is not available to duel because they are too far away.")
+ZO_CreateStringId("SI_LUIE_DUELINVITEFAILREASON5",                      "You cannot invite another player to duel while you have challenged |cFEFEFE<<1>>|r.")
+ZO_CreateStringId("SI_LUIE_DUELINVITEFAILREASON6",                      "You cannot invite another player to duel while responding to a duel challenge from |cFEFEFE<<1>>|r.")
+ZO_CreateStringId("SI_LUIE_DUELINVITEFAILREASON7",                      "You cannot invite another player to duel while you are already dueling |cFEFEFE<<1>>|r.")
+ZO_CreateStringId("SI_LUIE_DUELINVITEFAILREASON8",                      "|cFEFEFE<<1>>|r is not available to duel because they have challenged someone else to a duel.")
+ZO_CreateStringId("SI_LUIE_DUELINVITEFAILREASON9",                      "|cFEFEFE<<1>>|r is not available to duel because they are considering another duel challenge.")
+ZO_CreateStringId("SI_LUIE_DUELINVITEFAILREASON10",                     "|cFEFEFE<<1>>|r is not available to duel because they are dueling another player.")
+ZO_CreateStringId("SI_LUIE_DUELINVITEFAILREASON12",                     "|cFEFEFE<<1>>|r is not available to duel because they are dead.")
+ZO_CreateStringId("SI_LUIE_DUELINVITEFAILREASON14",                     "|cFEFEFE<<1>>|r is not available to duel because they are swimming.")
+ZO_CreateStringId("SI_LUIE_DUELINVITEFAILREASON16",                     "|cFEFEFE<<1>>|r is not available to duel because they are in combat.")
+ZO_CreateStringId("SI_LUIE_DUELINVITEFAILREASON18",                     "|cFEFEFE<<1>>|r is not available to duel because they are crafting.")
+               
+
 ZO_CreateStringId("SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF",   "|cFEFEFE<<1>>|r has logged off with |cFEFEFE<<2>>|r.")
 ZO_CreateStringId("SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON",    "|cFEFEFE<<1>>|r has logged on with |cFEFEFE<<2>>|r.")
 ZO_CreateStringId("SI_LUIE_FRIENDS_LIST_FRIEND_LOGGED_OFF",             "|cFEFEFE<<1>>|r has logged off.")

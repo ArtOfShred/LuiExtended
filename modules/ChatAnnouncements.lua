@@ -164,6 +164,7 @@ function CA.Initialize(enabled)
     CA.RegisterGuildEvents()
     CA.RegisterSocialEvents()
     CA.RegisterCustomStrings()
+    CA.RegisterDuelEvents()
 end
 
 function CA.RegisterSocialEvents()
@@ -490,7 +491,30 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST), 1) -- Update syntax for guild invite message to match our chat syntax
         SafeAddString(SI_GUILD_ROSTER_INVITED_MESSAGE, GetString(SI_LUIE_GUILD_ROSTER_INVITED_MESSAGE), 1) -- Update syntax for guild invitation sent message to match group syntax.
         -- Quest Share String Replacements
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE), 3)
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE), 3) 
+        -- Duel String Replacements
+        SafeAddString(SI_DUEL_INVITE_ACCEPTED, GetString(SI_LUIE_DUEL_INVITE_ACCEPTED), 1)
+        SafeAddString(SI_DUEL_INVITE_DECLINED, GetString(SI_LUIE_DUEL_INVITE_DECLINED), 1)
+        SafeAddString(SI_DUEL_INVITE_CANCELED, GetString(SI_LUIE_DUEL_INVITE_CANCELED), 1)
+        SafeAddString(SI_DUEL_INVITE_SENT, GetString(SI_LUIE_DUEL_INVITE_SENT), 1)
+        SafeAddString(SI_DUEL_INVITE_RECEIVED, GetString(SI_LUIE_DUEL_INVITE_RECEIVED), 1)
+        SafeAddString(SI_PLAYER_TO_PLAYER_INVITE_DUEL, GetString(SI_LUIE_PLAYER_TO_PLAYER_INVITE_DUEL), 1)
+        SafeAddString(SI_DUELING_COUNTDOWN_CSA, GetString(SI_LUIE_DUELING_COUNTDOWN_CSA), 1)
+        SafeAddString(SI_DUELRESULT0, GetString(SI_LUIE_DUELRESULT0), 1)
+        SafeAddString(SI_DUELRESULT1, GetString(SI_LUIE_DUELRESULT1), 1)
+        --Duel Failure Reason String Replacements
+        SafeAddString(SI_DUELINVITEFAILREASON1, GetString(SI_LUIE_DUELINVITEFAILREASON1), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON4, GetString(SI_LUIE_DUELINVITEFAILREASON4), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON5, GetString(SI_LUIE_DUELINVITEFAILREASON5), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON6, GetString(SI_LUIE_DUELINVITEFAILREASON6), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON7, GetString(SI_LUIE_DUELINVITEFAILREASON7), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON8, GetString(SI_LUIE_DUELINVITEFAILREASON8), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON9, GetString(SI_LUIE_DUELINVITEFAILREASON9), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON10, GetString(SI_LUIE_DUELINVITEFAILREASON10), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON12, GetString(SI_LUIE_DUELINVITEFAILREASON12), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON14, GetString(SI_LUIE_DUELINVITEFAILREASON14), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON16, GetString(SI_LUIE_DUELINVITEFAILREASON16), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON18, GetString(SI_LUIE_DUELINVITEFAILREASON18), 1)
     end
 end
 
@@ -2595,7 +2619,7 @@ function CA.OnTradeSuccess(eventCode)
     if CA.SV.LootTrade then
         if TradeInviter == "" then tradetarget = TradeInvitee end
         if TradeInvitee == "" then tradetarget = TradeInviter end
-        for indexOut = 1, #g_TradeStacksOut do
+        for indexOut = 1,5 do
             if g_TradeStacksOut[indexOut] ~= nil then
                 local gainorloss = "|ca80700"
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_TRADED)
@@ -2610,7 +2634,7 @@ function CA.OnTradeSuccess(eventCode)
             end
         end
 
-        for indexIn = 1, #g_TradeStacksIn do
+        for indexIn = 1,5 do
             if g_TradeStacksIn[indexIn] ~= nil then
                 local gainorloss = "|c0B610B"
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_TRADED)
@@ -4212,3 +4236,154 @@ function CA.JusticeRemovePrint()
     g_InventoryStacks = {}
     CA.IndexInventory() -- Reindex the inventory with the correct values!
 end
+
+-- DUEL EVENTS
+
+function CA.RegisterDuelEvents()
+    --EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_COUNTDOWN, CA.DuelCountdown)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_RECEIVED, CA.DuelInviteReceived)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_ACCEPTED, CA.DuelInviteAccepted)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_SENT, CA.DuelInviteSent)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_FINISHED, CA.DuelFinished)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_FAILED, CA.DuelInviteFailed)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_DECLINED, CA.DuelInviteDeclined)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_CANCELED, CA.DuelInviteCanceled)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_NEAR_BOUNDARY, CA.DuelNearBoundary)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, CA.DuelStarted)
+    
+end
+
+--[[ I would have liked to have this optional feature, but it gets out of snyc sometimes so kind of ruins it
+function CA.DuelCountdown(eventCode, startTimeMS)
+
+    local duelcounter = 6
+
+    local function DuelCountdown()
+        duelcounter = duelcounter - 1
+        printToChat (strformat(GetString(SI_DUELING_COUNTDOWN_CSA), duelcounter))
+    end
+
+    printToChat (strformat(GetString(SI_DUELING_COUNTDOWN_CSA), duelcounter))
+    zo_callLater (DuelCountdown, 1000)
+    zo_callLater (DuelCountdown, 2000)
+    zo_callLater (DuelCountdown, 3000)
+    zo_callLater (DuelCountdown, 4000)
+    zo_callLater (DuelCountdown, 5000)
+end
+]]--
+
+function CA.DuelInviteReceived(eventCode, inviterCharacterName, inviterDisplayName)
+    
+    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(inviterCharacterName)
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
+    local displayBothString = ( strformat("<<1>><<2>>", inviterCharacterName, inviterDisplayName) )
+    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
+
+    if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(GetString(SI_DUEL_INVITE_RECEIVED), displayNameLink)) end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(GetString(SI_DUEL_INVITE_RECEIVED), characterNameLink)) end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_DUEL_INVITE_RECEIVED), displayBoth)) end
+    
+end
+
+function CA.DuelInviteAccepted(eventCode)
+    printToChat (GetString(SI_DUEL_INVITE_ACCEPTED))
+end
+
+function CA.DuelInviteSent(eventCode, inviteeCharacterName, inviteeDisplayName)
+    
+    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(inviteeCharacterName)
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviteeDisplayName)
+    local displayBothString = ( strformat("<<1>><<2>>", inviteeCharacterName, inviteeDisplayName) )
+    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviteeDisplayName)
+
+    if CA.SV.ChatPlayerDisplayOptions == 1 then printToChat(strformat(GetString(SI_DUEL_INVITE_SENT), displayNameLink)) end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then printToChat(strformat(GetString(SI_DUEL_INVITE_SENT), characterNameLink)) end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_DUEL_INVITE_SENT), displayBoth)) end
+    
+end
+
+function CA.DuelFinished(eventCode, duelResult, wasLocalPlayersResult, opponentCharacterName, opponentDisplayName, opponentAlliance, opponentGender, opponentClassId, opponentRaceId)
+
+    local resultName
+
+    if wasLocalPlayersResult then -- Possibly replace this with just a simple string assignment of "You"
+        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(g_playerName)
+        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(g_playerDisplayName)
+        local displayBothString = ( strformat("<<1>><<2>>", g_playerName, g_playerDisplayName) )
+        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, g_playerDisplayName)
+        
+        if CA.SV.ChatPlayerDisplayOptions == 1 then resultName = displayNameLink end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then resultName = characterNameLink end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then resultName = displayBoth end
+    else
+        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(opponentCharacterName)
+        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(opponentDisplayName)
+        local displayBothString = ( strformat("<<1>><<2>>", opponentCharacterName, opponentDisplayName) )
+        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, opponentDisplayName)
+        
+        if CA.SV.ChatPlayerDisplayOptions == 1 then resultName = displayNameLink end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then resultName = characterNameLink end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then resultName = displayBoth end
+    end
+    
+    if duelResult == 0 then
+            printToChat(strformat(GetString(SI_DUELRESULT0), resultName))
+    else
+            printToChat(strformat(GetString(SI_DUELRESULT1), resultName))
+    end
+    
+end
+
+function CA.DuelInviteFailed(eventCode, reason, targetCharacterName, targetDisplayName)
+
+    local reasonName
+    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(targetCharacterName)
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(targetDisplayName)
+    local displayBothString = ( strformat("<<1>><<2>>", targetCharacterName, targetDisplayName) )
+    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, targetDisplayName)
+    
+    if CA.SV.ChatPlayerDisplayOptions == 1 then reasontName = displayNameLink end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then reasonName = characterNameLink end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then reasonName = displayBoth end
+
+    printToChat (strformat(GetString("SI_DUELINVITEFAILREASON", reason), reasonName))
+end
+
+function CA.DuelInviteDeclined(eventCode)
+    printToChat (GetString(SI_DUEL_INVITE_DECLINED))
+end
+
+function CA.DuelInviteCanceled(eventCode)
+    printToChat (GetString(SI_DUEL_INVITE_CANCELED))
+end
+
+function CA.DuelNearBoundary(eventCode, isInWarningArea)
+    if isInWarningArea then printToChat(GetString(SI_DUELING_NEAR_BOUNDARY_CSA)) end
+end
+
+function CA.DuelStarted(eventCode)
+    printToChat (GetString(SI_LUIE_DUEL_STARTED))
+end
+
+
+
+--[[
+
+if CA.SV.ChatPlayerDisplayOptions == 3 then printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), displayBoth, questName)) end
+end
+
+function CA.QuestShareRemoved(eventCode, questId)
+    printToChat(GetString(SI_LUIE_CA_QUEST_SHARE_DECLINED))
+
+    EVENT_DUEL_COUNTDOWN (integer eventCode,number startTimeMS)
+    EVENT_DUEL_INVITE_RECEIVED (integer eventCode,string inviterCharacterName, string inviterDisplayName)
+    EVENT_DUEL_INVITE_ACCEPTED (number eventCode)
+    EVENT_DUEL_INVITE_SENT (integer eventCode,string inviteeCharacterName, string inviteeDisplayName)
+    EVENT_DUEL_FINISHED (integer eventCode,number duelResult, boolean wasLocalPlayersResult, string opponentCharacterName, string opponentDisplayName, number opponentAlliance, number opponentGender, number opponentClassId, number opponentRaceId)
+    EVENT_DUEL_INVITE_FAILED (integer eventCode,number reason, string targetCharacterName, string targetDisplayName)
+    EVENT_DUEL_INVITE_DECLINED (number eventCode)
+    EVENT_DUEL_INVITE_CANCELED (number eventCode)
+    EVENT_DUEL_INVITE_REMOVED (number eventCode)
+    EVENT_DUEL_NEAR_BOUNDARY (integer eventCode,boolean isInWarningArea)
+    EVENT_DUEL_STARTED (number eventCode) 
+]]--
