@@ -4,9 +4,8 @@ LUIE.Effects = {}
 
 -- Performance Enhancement
 local E = LUIE.Effects
-local L = LUIE.GetLocale()
 local GetAbilityIcon = GetAbilityIcon
-
+local L = LUIE.GetLocale()
 
 --[[----------------------------------------------------------
  * Transition functions:
@@ -57,10 +56,6 @@ function E.GetAbilityIcon(abilityName, abilityId)
     return E.AbilityIcon[abilityName or ''] or E.EffectIconOverride[abilityId] or GetAbilityIcon(abilityId)
 end
 
---[[----------------------------------------------------------
- * Effects groupping
---]]----------------------------------------------------------
-
 --[[
  * List of abilities considered for Ultimate generation - same as in SCB
  ]]--
@@ -85,20 +80,25 @@ E.IsEffectIgnored = {
  * List of toggle abilities
  ]]--
 E.IsToggle = {
-    [L.Toggled_Unstable_Familiar]           = true,
-    [L.Toggled_Unstable_Clannfear]          = true,
-    [L.Toggled_Volatile_Familiar]           = true,
-    [L.Toggled_Summon_Winged_Twilight]      = true,
-    [L.Toggled_Summon_Restoring_Twilight]   = true,
-    [L.Toggled_Summon_Twilight_Matriarch]   = true,
-    [L.Toggled_Bound_Armor]                 = true,
-    [L.Toggled_Bound_Armaments]             = true,
-    [L.Toggled_Bound_Aegis]                 = true,
-    [L.Toggled_Overload]                    = true,
-    [L.Toggled_Energy_Overload]             = true,
-    [L.Toggled_Power_Overload]              = true,
-    [L.Toggled_Leeching_Strikes]            = true,
-    [L.Toggled_Brace_Generic]               = true,
+    [L.Toggled_Brace_Generic]               = true, -- Block (Innate)
+    [L.Toggled_Sprint]                      = true, -- Sprint (Innate)
+    [L.Toggled_Mount_Sprint]                = true, -- Mount Sprint (Generic) (Innate) -- NOTE: Renamed to Gallop in fake buffs
+    [L.Toggled_Leeching_Strikes]            = true, -- Leeching Strikes (Nightblade)
+    [L.Toggled_Unstable_Familiar]           = true, -- Summon Unstable Familiar (Sorcerer)
+    [L.Toggled_Unstable_Clannfear]          = true, -- Summon Unstable Clannfear (Sorcerer)
+    [L.Toggled_Volatile_Familiar]           = true, -- Summon Volatile Familiar (Sorcerer)
+    [L.Toggled_Summon_Winged_Twilight]      = true, -- Summon Winged Twilight (Sorcerer)
+    [L.Toggled_Summon_Twilight_Tormentor]   = true, -- Summon Twilight Tormentor (Sorcerer)
+    [L.Toggled_Summon_Twilight_Matriarch]   = true, -- Summon Twilight Matriarch (Sorcerer)
+    [L.Toggled_Bound_Armor]                 = true, -- Bound Armor (Sorcerer)
+    [L.Toggled_Bound_Armaments]             = true, -- Bound Armaments (Sorcerer)
+    [L.Toggled_Bound_Aegis]                 = true, -- Bound Aegis (Sorcerer)
+    [L.Toggled_Overload]                    = true, -- Overload (Sorcerer)
+    [L.Toggled_Energy_Overload]             = true, -- Energy Overload (Sorcerer)
+    [L.Toggled_Power_Overload]              = true, -- Power Overload (Sorcerer)
+    [L.Toggled_Guard]                       = true, -- Guard (Support)
+    [L.Toggled_Mystic_Guard]                = true, -- Mystic Guard (Support)
+    [L.Toggled_Stalwart_Guard]              = true, -- Stalwart Guard (Support)
 }
 
 --[[
@@ -2440,12 +2440,20 @@ E.EffectNameOverride = { --Force rename a buff (Note that if we rename a buff, w
 
 E.EffectForcedType = { --Force a change to the type buff container
 
+    [14890] = "short", -- Block
     [23284] = "short", -- Not sure, I believe this is Guard projectile intercept.
     [64197] = "short", -- Sanctuary Cyrodiil passive is considered unlimited duration, but the effect is only while the player is in the area. Should show up under short buffs.
     [54119] = "short", -- Remembrance (The Anger of a King)
     [83522] = "short", -- Freezing (Snow Bear Plunge)
     [85344] = 'short', -- Atronach Aura (Storm Atronach Aura)
 
+    
+}
+
+E.EffectForcedName = {
+    [L.Toggled_Guard]                       = "short",
+    [L.Toggled_Mystic_Guard]                = "short",
+    [L.Toggled_Stalwart_Guard]              = "short",
 }
 
 E.IsAbilityIgnoredById = { --Remove an ability from display by abilityId

@@ -1269,6 +1269,8 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 
     -- Allows us to overwrite Ability Names (Note that using this may break certain hidden icon functionality, should only be used when neccesary. Use base ability ID only for other modifications)
     effectName = E.EffectNameOverride[abilityId] or effectName
+    
+    local forcedType = E.EffectForcedType[abilityId] or E.EffectForcedName[effectName]
 
     -- Where the new icon will go into
     local context = unitTag .. effectType
@@ -1296,7 +1298,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     else
         local duration = endTime - beginTime
 
-        -- Block has an aura, but 0 duration, this allows it to display as a toggleable effect.
+        --[[ Old Block Code
         if abilityType == ABILITY_TYPE_BLOCK then
             g_effectsList[context][ abilityId ] = {
                         target=unitTag, type=effectType,
@@ -1306,15 +1308,15 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                         restart=true, iconNum=0 }
             -- clear groud pending ability
             g_pendingGroundAbility = nil
-        else
-            -- Buffs are created based on their ability ID, this allows buffs with the same display name to show up.
-            g_effectsList[context][ abilityId ] = {
-                        target=unitTag, type=effectType,
-                        id=abilityId, name=effectName, icon=iconName,
-                        dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
-                        forced=E.EffectForcedType[abilityId],
-                        restart=true, iconNum=0 }
-        end
+        ]]--
+        
+        -- Buffs are created based on their ability ID, this allows buffs with the same display name to show up.
+        g_effectsList[context][ abilityId ] = {
+                    target=unitTag, type=effectType,
+                    id=abilityId, name=effectName, icon=iconName,
+                    dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
+                    forced=forcedType,
+                    restart=true, iconNum=0 }
 
         -- also create visual enhancements from skill bar
         if unitTag == "player" then

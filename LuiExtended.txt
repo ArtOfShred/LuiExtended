@@ -62,10 +62,10 @@ LuiExtendedSettings.lua
 
 bindings.xml
 
-i18n\locale.lua
 i18n\en.lua
 i18n\$(language).lua
 
+modules\AbilityTables.lua
 modules\Effects.lua
 modules\InfoPanel.lua
 modules\ChatAnnouncements.lua

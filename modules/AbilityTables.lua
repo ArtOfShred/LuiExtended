@@ -1,5 +1,9 @@
 local L = {}
 
+--[[----------------------------------------------------------
+ * Effects groupping
+--]]----------------------------------------------------------
+
 -- ---------------------------------------------------
 -- WEAPONS -------------------------------------------
 -- ---------------------------------------------------
@@ -506,23 +510,25 @@ L.Skill_Restoring_Focus          = 22237
 -- ---------------------------------------------------
 -- TOGGLED EFFECTS -----------------------------------
 -- ---------------------------------------------------
-L.Toggled_Unstable_Familiar         = 23304
-L.Toggled_Unstable_Clannfear        = 23319
-L.Toggled_Volatile_Familiar         = 23316
-L.Toggled_Summon_Winged_Twilight    = 24613
-L.Toggled_Summon_Restoring_Twilight = 24636
-L.Toggled_Summon_Twilight_Matriarch = 24639
-L.Toggled_Bound_Armor               = 24158
-L.Toggled_Bound_Armaments           = 24165
-L.Toggled_Bound_Aegis               = 24163
-L.Toggled_Overload                  = 24785
-L.Toggled_Energy_Overload           = 24804
-L.Toggled_Power_Overload            = 24806
-L.Toggled_Leeching_Strikes          = 36908
-L.Toggled_Brace_Generic             = 14890
-L.Toggled_Guard                     = 63318 -- Untested
-L.Toggled_Mystic_Guard              = 63335 -- Untested
-L.Toggled_Stalwart_Guard            = 63351 -- Untested
+L.Toggled_Brace_Generic             = 14890 -- Block (Innate)
+L.Toggled_Sprint                    = 973 -- Sprint (Innate)
+L.Toggled_Mount_Sprint              = "Gallop" -- Mount Sprint (Generic) (Innate) -- NOTE: Renamed to Gallop in fake buffs
+L.Toggled_Leeching_Strikes          = 36908 -- Leeching Strikes (Nightblade)
+L.Toggled_Unstable_Familiar         = 23304 -- Summon Unstable Familiar (Sorcerer)
+L.Toggled_Unstable_Clannfear        = 23319 -- Summon Unstable Clannfear (Sorcerer)
+L.Toggled_Volatile_Familiar         = 23316 -- Summon Volatile Familiar (Sorcerer)
+L.Toggled_Summon_Winged_Twilight    = 24613 -- Summon Winged Twilight (Sorcerer)
+L.Toggled_Summon_Twilight_Tormentor = 24636 -- Summon Twilight Tormentor (Sorcerer)
+L.Toggled_Summon_Twilight_Matriarch = 24639 -- Summon Twilight Matriarch (Sorcerer)
+L.Toggled_Bound_Armor               = 24158 -- Bound Armor (Sorcerer)
+L.Toggled_Bound_Armaments           = 24165 -- Bound Armaments (Sorcerer)
+L.Toggled_Bound_Aegis               = 24163 -- Bound Aegis (Sorcerer)
+L.Toggled_Overload                  = 24785 -- Overload (Sorcerer)
+L.Toggled_Energy_Overload           = 24804 -- Energy Overload (Sorcerer)
+L.Toggled_Power_Overload            = 24806 -- Power Overload (Sorcerer)
+L.Toggled_Guard                     = 63318 -- Guard (Support)
+L.Toggled_Mystic_Guard              = 63335 -- Mystic Guard (Support)
+L.Toggled_Stalwart_Guard            = 63351 -- Stalwart Guard (Support)
 
 -- ---------------------------------------------------
 -- DAMAGE SHIELDS ------------------------------------
