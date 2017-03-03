@@ -110,7 +110,7 @@ function LUIE_CreateSettings()
                 getFunc = function() return LUIE.SV.InfoPanel_Enabled end,
                 setFunc = function(value) LUIE.SV.InfoPanel_Enabled = value end,
                 width = "full",
-                warning = "Will need to reload the UI.",
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 default = LUIE.D.InfoPanel_Enabled,
             },
             {
@@ -126,15 +126,15 @@ function LUIE_CreateSettings()
             },
             {
                 type = "button",
-                name = "Reset position",
-                tooltip = "This will reset position of Info Panel into screen top right corner.",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_RESETPOSITION),
+                tooltip = GetString(SI_LUIE_LAM_INFOPANEL_RESETPOSITION_TOOLTIP),
                 func = LUIE.InfoPanel.ResetPosition,
                 width = "half",
             },
             {
                 type = "slider",
-                name = "Info Panel Scale, %",
-                tooltip = "Used to magnify size of Info Panel on large resolution displays.",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_PANELSCALE),
+                tooltip = GetString(SI_LUIE_LAM_INFOPANEL_PANELSCALE_TOOLTIP),
                 min = 100, max = 300, step = 10,
                 getFunc = function() return LUIE.InfoPanel.SV.panelScale end,
                 setFunc = function(value) LUIE.InfoPanel.SV.panelScale = value LUIE.InfoPanel.SetScale() end,
@@ -144,13 +144,12 @@ function LUIE_CreateSettings()
             },
             {
                 type = "header",
-                name = "Info Panel elements",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_ELEMENTS_HEADER),
                 width = "full",
             },
             {
                 type = "checkbox",
-                name = "Show Latency",
-                --tooltip = "",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWLATENCY),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideLatency end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideLatency = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -159,8 +158,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Clock",
-                --tooltip = "",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWCLOCK),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideClock end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideClock = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -169,8 +167,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show FPS",
-                --tooltip = "",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWFPS),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideFPS end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideFPS = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -179,8 +176,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Mount Feed Timer |c00FFFF*|r",
-                tooltip = "(*) Once you have trained your mount to maximum level this field will be automatically hidden for current character.",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWMOUNTTIMER),
+                tooltip = GetString(SI_LUIE_LAM_INFOPANEL_SHOWMOUNTTIMER_TOOLTIP),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideMountFeed end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideMountFeed = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -189,8 +186,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Armour Durability",
-                --tooltip = "",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWARMORDURABILITY),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideArmour end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideArmour = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -199,8 +195,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Weapons Charges",
-                --tooltip = "",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWEAPONCHARGES),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideWeapons end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideWeapons = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -209,8 +204,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Bags Space",
-                --tooltip = "",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWBAGSPACE),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideBags end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideBags = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -219,8 +213,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Soul Gems",
-                --tooltip = "",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWSOULGEMS),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideGems end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideGems = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -229,8 +222,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Imperial City Trophy count",
-                --tooltip = "",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWICTROPHYCOUNT),
                 getFunc = function() return LUIE.InfoPanel.SV.ShowTrophy end,
                 setFunc = function(value) LUIE.InfoPanel.SV.ShowTrophy = value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -239,13 +231,13 @@ function LUIE_CreateSettings()
             },
             {
                 type = "header",
-                name = "Miscellaneous",
+                name = GetString(SI_PLAYER_MENU_MISC),
                 width = "full",
             },
             {
                 type = "checkbox",
-                name = "Disable colours on read-only values",
-                tooltip = "This option allows you to disable value-dependent colour of the information label for items that you do not have direct control: Currently this includes FPS and Latency labels.",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_DISABLECOLORSRO),
+                tooltip = GetString(SI_LUIE_LAM_INFOPANEL_DISABLECOLORSRO_TOOLTIP),
                 getFunc = function() return LUIE.InfoPanel.SV.DisableInfoColours end,
                 setFunc = function(value) LUIE.InfoPanel.SV.DisableInfoColours = value end,
                 width = "full",
@@ -351,7 +343,6 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = "Enable Cloud-type areas",
-                --tooltip = "",
                 getFunc = function() return LUIE.CombatInfo.SV.CloudTextEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.CloudTextEnabled = value end,
                 width = "full",
@@ -410,7 +401,6 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = "Enable Scrolling-type areas",
-                --tooltip = "",
                 getFunc = function() return LUIE.CombatInfo.SV.ScrollTextEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.ScrollTextEnabled = value end,
                 width = "full",
@@ -841,7 +831,6 @@ function LUIE_CreateSettings()
             {
                 type = "dropdown",
                 name = "Descending sort direction",
-                --tooltip = "",
                 choices = {"Left to Right", "Right to Left"},
                 getFunc = function() return LUIE.SpellCastBuffs.SV.SortDirection end,
                 setFunc = LUIE.SpellCastBuffs.SetSortDirection,
@@ -915,7 +904,6 @@ function LUIE_CreateSettings()
             {
                 type = "dropdown",
                 name = "Font Style",
-                --tooltip = "",
                 choices = styleOptions,
                 sort = "name-up",
                 getFunc = function() return LUIE.SpellCastBuffs.SV.BuffFontStyle end,
@@ -1514,7 +1502,6 @@ function LUIE_CreateSettings()
                     {
                         type = "colorpicker",
                         name = "\t\t\t\tGold Change Color",
-                        --tooltip = "",
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.GoldColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.GoldColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterGoldEvents() end,
                         width = "full",
@@ -1567,7 +1554,6 @@ function LUIE_CreateSettings()
                     {
                         type = "colorpicker",
                         name = "\t\t\t\tAlliance Point Change Color",
-                        --tooltip = "",
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.AlliancePointColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.AlliancePointColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterAlliancePointEvents() end,
                         width = "full",
@@ -1607,7 +1593,6 @@ function LUIE_CreateSettings()
                     {
                         type = "colorpicker",
                         name = "\t\t\t\tTel Var Stone Change Color",
-                        --tooltip = "",
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.TelVarStoneColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.TelVarStoneColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterTelVarStoneEvents() end,
                         width = "full",
@@ -1647,7 +1632,6 @@ function LUIE_CreateSettings()
                     {
                         type = "colorpicker",
                         name = "\t\t\t\tWrit Voucher Change Color",
-                        --tooltip = "",
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.WritVoucherColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.WritVoucherColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterWritVoucherEvents() end,
                         width = "full",
@@ -2457,7 +2441,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = "Default PLAYER Frame",
-        --tooltip = "",
         choices = LUIE.UnitFrames.GetDefaultFramesOptions('Player'),
         getFunc = function() return LUIE.UnitFrames.GetDefaultFramesSetting('Player') end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Player', value) end,
@@ -2469,7 +2452,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = "Default TARGET Frame",
-        --tooltip = "",
         choices = LUIE.UnitFrames.GetDefaultFramesOptions('Target'),
         getFunc = function() return LUIE.UnitFrames.GetDefaultFramesSetting('Target') end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Target', value) end,
@@ -2481,7 +2463,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = "Default Small GROUP Frame",
-        --tooltip = "",
         choices = LUIE.UnitFrames.GetDefaultFramesOptions('Group'),
         getFunc = function() return LUIE.UnitFrames.GetDefaultFramesSetting('Group') end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Group', value) end,
@@ -2560,7 +2541,6 @@ function LUIE_CreateSettings()
      optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = "Font Style",
-        --tooltip = "",
         choices = styleOptions,
         sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.DefaultFontStyle end,
@@ -2690,7 +2670,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = "Font Style",
-        --tooltip = "",
         choices = styleOptions,
         sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.CustomFontStyle end,
@@ -2772,7 +2751,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Separate Shield Bar Height",
-        --tooltip = "",
         min = 4, max = 12, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.CustomShieldBarHeight end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomShieldBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() LUIE.UnitFrames.CustomFramesApplyLayoutGroup() end,
@@ -2831,7 +2809,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Player Bars Width",
-        --tooltip = "",
         min = 200, max = 500, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarWidth end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarWidth = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -2842,7 +2819,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Player Health Bar Height",
-        --tooltip = "",
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarHeightHealth end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarHeightHealth = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -2853,7 +2829,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Player Magicka Bar Height",
-        --tooltip = "",
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarHeightMagicka end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarHeightMagicka = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -2864,7 +2839,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Player Stamina Bar Height",
-        --tooltip = "",
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarHeightStamina end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarHeightStamina = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -2919,7 +2893,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Spacing between Player Bars",
-        --tooltip = "",
         min = -1, max = 4, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarSpacing end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarSpacing = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3045,7 +3018,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Target Bars Width",
-        --tooltip = "",
         min = 200, max = 500, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.TargetBarWidth end,
         setFunc = function(value) LUIE.UnitFrames.SV.TargetBarWidth = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3056,7 +3028,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Target Bar Height",
-        --tooltip = "",
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.TargetBarHeight end,
         setFunc = function(value) LUIE.UnitFrames.SV.TargetBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3135,7 +3106,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Group Bars Width",
-        --tooltip = "",
         min = 100, max = 400, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.GroupBarWidth end,
         setFunc = function(value) LUIE.UnitFrames.SV.GroupBarWidth = value LUIE.UnitFrames.CustomFramesApplyLayoutGroup() end,
@@ -3146,7 +3116,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Group Bars Height",
-        --tooltip = "",
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.GroupBarHeight end,
         setFunc = function(value) LUIE.UnitFrames.SV.GroupBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutGroup() end,
@@ -3157,7 +3126,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Spacing between Group Bars",
-        --tooltip = "",
         min = 20, max = 80, step = 2,
         getFunc = function() return LUIE.UnitFrames.SV.GroupBarSpacing end,
         setFunc = function(value) LUIE.UnitFrames.SV.GroupBarSpacing = value LUIE.UnitFrames.CustomFramesApplyLayoutGroup() end,
@@ -3194,7 +3162,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Raid Bars Width",
-        --tooltip = "",
         min = 100, max = 500, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.RaidBarWidth end,
         setFunc = function(value) LUIE.UnitFrames.SV.RaidBarWidth = value LUIE.UnitFrames.CustomFramesApplyLayoutRaid() end,
@@ -3205,7 +3172,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Raid Bars Height",
-        --tooltip = "",
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.RaidBarHeight end,
         setFunc = function(value) LUIE.UnitFrames.SV.RaidBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutRaid() end,
@@ -3281,7 +3247,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "PvP Target Bars Width",
-        --tooltip = "",
         min = 300, max = 700, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.AvaTargetBarWidth end,
         setFunc = function(value) LUIE.UnitFrames.SV.AvaTargetBarWidth = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3292,7 +3257,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "PvP Target Bar Height",
-        --tooltip = "",
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.AvaTargetBarHeight end,
         setFunc = function(value) LUIE.UnitFrames.SV.AvaTargetBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3376,7 +3340,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = "Font Style",
-        --tooltip = "",
         choices = styleOptions,
         sort = "name-up",
         getFunc = function() return LUIE.SpellCastBuffs.SV.BuffFontStyle end,
