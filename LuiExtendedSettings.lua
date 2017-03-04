@@ -65,7 +65,7 @@ function LUIE_CreateSettings()
     local panelData = {
         type = "panel",
         name = LUIE.name,
-        displayName = "LUI Extended Settings",
+        displayName = strformat(LUIE.name, GetString(SI_GAME_MENU_SETTINGS)),
         author = LUIE.author,
         version = LUIE.version,
         website = "http://www.esoui.com/downloads/info818-LuiExtended.html",
@@ -76,8 +76,8 @@ function LUIE_CreateSettings()
 
     local panelDataUnitFrames = {
         type = "panel",
-        name = LUIE.name .. " - Unit Frames",
-        displayName = "LUI Extended Unit Frames Settings",
+        name = strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_UNITFRAMES)),
+        displayName = strformat(LUIE.name, GetString(SI_LUIE_LAM_UNITFRAMES), GetString(SI_GAME_MENU_SETTINGS)),
         author = LUIE.author,
         version = LUIE.version,
         website = "http://www.esoui.com/downloads/info818-LuiExtended.html",
@@ -89,10 +89,11 @@ function LUIE_CreateSettings()
     local optionsData = {}
     local optionsDataUnitFrames = {}
 
-    optionsData[#optionsData + 1] = { -- ReloadUI Button
+    -- ReloadUI Button
+    optionsData[#optionsData + 1] = {
         type = "button",
         name = "Reload UI",
-        tooltip = "This will reload UI",
+        tooltip = GetString(SI_LUIE_LAM_RELOADUI),
         func = function() ReloadUI("ingame") end,
         width = "full",
     }
@@ -100,23 +101,23 @@ function LUIE_CreateSettings()
     -- Info Panel Options
     optionsData[#optionsData + 1] = {
         type = "submenu",
-        name = "Info Panel Options",
+        name = GetString(SI_LUIE_LAM_INFOPANEL_HEADER),
         reference = "Info_Panel_Options_Submenu",
         controls = {
             {
                 type = "checkbox",
-                name = "Show Info Panel",
-                tooltip = "Info mini panel contains clock, framerate, latency, mount info, inventory and items durability status.",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWPANEL),
+                tooltip = GetString(SI_LUIE_LAM_INFOPANEL_SHOWPANEL_TOOLTIP),
                 getFunc = function() return LUIE.SV.InfoPanel_Enabled end,
                 setFunc = function(value) LUIE.SV.InfoPanel_Enabled = value end,
                 width = "full",
-                warning = "Will need to reload the UI.",
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 default = LUIE.D.InfoPanel_Enabled,
             },
             {
                 type = "checkbox",
-                name = "Unlock panel",
-                tooltip = "Allow mouse dragging for Info Panel.",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_UNLOCKPANEL),
+                tooltip = GetString(SI_LUIE_LAM_INFOPANEL_UNLOCKPANEL_TOOLTIP),
                 getFunc = function() return LUIE.InfoPanel.panelUnlocked end,
                 setFunc = LUIE.InfoPanel.SetMovingState,
                 width = "half",
@@ -126,15 +127,15 @@ function LUIE_CreateSettings()
             },
             {
                 type = "button",
-                name = "Reset position",
-                tooltip = "This will reset position of Info Panel into screen top right corner.",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_RESETPOSITION),
+                tooltip = GetString(SI_LUIE_LAM_INFOPANEL_RESETPOSITION_TOOLTIP),
                 func = LUIE.InfoPanel.ResetPosition,
                 width = "half",
             },
             {
                 type = "slider",
-                name = "Info Panel Scale, %",
-                tooltip = "Used to magnify size of Info Panel on large resolution displays.",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_PANELSCALE),
+                tooltip = GetString(SI_LUIE_LAM_INFOPANEL_PANELSCALE_TOOLTIP),
                 min = 100, max = 300, step = 10,
                 getFunc = function() return LUIE.InfoPanel.SV.panelScale end,
                 setFunc = function(value) LUIE.InfoPanel.SV.panelScale = value LUIE.InfoPanel.SetScale() end,
@@ -144,13 +145,12 @@ function LUIE_CreateSettings()
             },
             {
                 type = "header",
-                name = "Info Panel elements",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_ELEMENTS_HEADER),
                 width = "full",
             },
             {
                 type = "checkbox",
-                name = "Show Latency",
-                --tooltip = "",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWLATENCY),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideLatency end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideLatency = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -159,8 +159,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Clock",
-                --tooltip = "",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWCLOCK),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideClock end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideClock = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -169,8 +168,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show FPS",
-                --tooltip = "",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWFPS),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideFPS end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideFPS = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -179,8 +177,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Mount Feed Timer |c00FFFF*|r",
-                tooltip = "(*) Once you have trained your mount to maximum level this field will be automatically hidden for current character.",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWMOUNTTIMER),
+                tooltip = GetString(SI_LUIE_LAM_INFOPANEL_SHOWMOUNTTIMER_TOOLTIP),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideMountFeed end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideMountFeed = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -189,8 +187,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Armour Durability",
-                --tooltip = "",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWARMORDURABILITY),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideArmour end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideArmour = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -199,8 +196,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Weapons Charges",
-                --tooltip = "",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWEAPONCHARGES),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideWeapons end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideWeapons = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -209,8 +205,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Bags Space",
-                --tooltip = "",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWBAGSPACE),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideBags end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideBags = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -219,8 +214,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Soul Gems",
-                --tooltip = "",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWSOULGEMS),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideGems end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideGems = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -229,8 +223,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Imperial City Trophy count",
-                --tooltip = "",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWICTROPHYCOUNT),
                 getFunc = function() return LUIE.InfoPanel.SV.ShowTrophy end,
                 setFunc = function(value) LUIE.InfoPanel.SV.ShowTrophy = value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -239,13 +232,13 @@ function LUIE_CreateSettings()
             },
             {
                 type = "header",
-                name = "Miscellaneous",
+                name = GetString(SI_PLAYER_MENU_MISC),
                 width = "full",
             },
             {
                 type = "checkbox",
-                name = "Disable colours on read-only values",
-                tooltip = "This option allows you to disable value-dependent colour of the information label for items that you do not have direct control: Currently this includes FPS and Latency labels.",
+                name = GetString(SI_LUIE_LAM_INFOPANEL_DISABLECOLORSRO),
+                tooltip = GetString(SI_LUIE_LAM_INFOPANEL_DISABLECOLORSRO_TOOLTIP),
                 getFunc = function() return LUIE.InfoPanel.SV.DisableInfoColours end,
                 setFunc = function(value) LUIE.InfoPanel.SV.DisableInfoColours = value end,
                 width = "full",
@@ -254,26 +247,26 @@ function LUIE_CreateSettings()
             },
         },
     }
-    --[[ COMBAT INFO OPTIONS ]]--
+    -- Combat Info Options
     optionsData[#optionsData + 1] = {
         type = "submenu",
-        name = "Combat Info Options",
+        name = GetString(SI_LUIE_LAM_COMBATINFO_HEADER),
         reference = "Combat_Info_Options_Submenu",
         controls = {
             {
                 type = "checkbox",
-                name = "Show Combat Info",
-                tooltip = "Displays various floating text for damage done, healing received, experience and alliance points gain.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_SHOWCOMBATINFO),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_SHOWCOMBATINFO_TOOLTIP),
                 getFunc = function() return LUIE.SV.CombatInfo_Enabled end,
                 setFunc = function(value) LUIE.SV.CombatInfo_Enabled = value end,
                 width = "full",
-                warning = "Will need to reload the UI.",
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 default = LUIE.D.CombatInfo_Enabled,
             },
             {
                 type = "checkbox",
-                name = "Display CoolDowns",
-                tooltip = "Show cooldown timers for active abilities.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_SHOWCOOLDOWNS),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_SHOWCOOLDOWNS_TOOLTIP),
                 getFunc = function() return LUIE.CombatInfo.SV.CoolDown end,
                 setFunc = function(value) LUIE.CombatInfo.SV.CoolDown = value end,
                 width = "full",
@@ -282,13 +275,13 @@ function LUIE_CreateSettings()
             },
             {
                 type = "header",
-                name = "Ultimate Tracking options",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_ULTIMATETRACKING_HEADER),
                 width = "full",
             },
             {
                 type = "checkbox",
-                name = "Show current Ultimate value",
-                tooltip = "Display current ultimate ability resource level above ultimate skill slot.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_SHOWULTIMATEVALUE),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_SHOWULTIMATEVALUE_TOOLTIP),
                 getFunc = function() return LUIE.CombatInfo.SV.UltimateEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.UltimateEnabled = value LUIE.CombatInfo.OnSlotsFullUpdate(nil) end,
                 width = "full",
@@ -297,8 +290,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Hide percent label when full",
-                tooltip = "Remove percentage label from ultimate slot when ability becomes ready.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_HIDEPERCENTWHENFULL),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_HIDEPERCENTWHENFULL_TOOLTIP),
                 getFunc = function() return LUIE.CombatInfo.SV.UltimateHideFull end,
                 setFunc = function(value) LUIE.CombatInfo.SV.UltimateHideFull = value end,
                 width = "full",
@@ -307,8 +300,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Enable Ultimate Ready alert",
-                tooltip = "Enable notification display when ability becomes ready.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_ENABLEULTIREADYALERT),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_ENABLEULTIREADYALERT_TOOLTIP),
                 getFunc = function() return LUIE.CombatInfo.SV.UltimateAlert end,
                 setFunc = function(value) LUIE.CombatInfo.SV.UltimateAlert = value end,
                 width = "full",
@@ -317,8 +310,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Ultimate Generation texture",
-                tooltip = "Display special texture under Ultimate skill button when in-combat ultimate generation is detected.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_SHOWULTIGENTEXTURE),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_SHOWULTIGENTEXTURE_TOOLTIP),
                 getFunc = function() return LUIE.CombatInfo.SV.UltimateGeneration end,
                 setFunc = function(value) LUIE.CombatInfo.SV.UltimateGeneration = value end,
                 width = "full",
@@ -327,13 +320,13 @@ function LUIE_CreateSettings()
             },
             {
                 type = "header",
-                name = "Cloud-type areas text options",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_CLOUDTYPE_HEADER),
                 width = "full",
             },
             {
                 type = "checkbox",
-                name = "Unlock Areas",
-                tooltip = "Allow mouse dragging for different floating text areas.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_CLOUDTYPE_UNLOCK),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_CLOUDTYPE_UNLOCK_TOOLTIP),
                 getFunc = function() return LUIE.CombatInfo.panelUnlocked end,
                 setFunc = LUIE.CombatInfo.SetMovingState,
                 width = "half",
@@ -343,26 +336,25 @@ function LUIE_CreateSettings()
             },
             {
                 type = "button",
-                name = "Reset position",
-                tooltip = "This will reset position of Info Panel into screen top right corner.",
+                name = GetString(SI_INTERFACE_OPTIONS_FRAMERATE_LATENCY_POSITION_RESET),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_CLOUDTYPE_RESETPOSITION),
                 func = LUIE.CombatInfo.ResetPosition,
                 width = "half",
             },
             {
                 type = "checkbox",
-                name = "Enable Cloud-type areas",
-                --tooltip = "",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_CLOUDTYPE_ENABLE),
                 getFunc = function() return LUIE.CombatInfo.SV.CloudTextEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.CloudTextEnabled = value end,
                 width = "full",
-                warning = "Will need to reload the UI.",
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 default = LUIE.CombatInfo.D.CloudTextEnabled,
                 disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
             },
             {
                 type = "slider",
-                name = "Large Font Size",
-                tooltip = "Large font is used to for critical damage hits and experience gain labels.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_LARGEFONT),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_LARGEFONT_TOOLTIP),
                 min = 20, max = 50, step = 2,
                 getFunc = function() return LUIE.CombatInfo.SV.FontCloudSizeLarge end,
                 setFunc = function(value) LUIE.CombatInfo.SV.FontCloudSizeLarge = value LUIE.CombatInfo.PrepareFonts(true) end,
@@ -372,8 +364,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "slider",
-                name = "Medium Font Size",
-                tooltip = "Medium font is used to for normal damage hits, alliance points gain and drain/energize labels.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_MEDIUMFONT),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_MEDIUMFONT_TOOLTIP),
                 min = 14, max = 40, step = 2,
                 getFunc = function() return LUIE.CombatInfo.SV.FontCloudSizeMedium end,
                 setFunc = function(value) LUIE.CombatInfo.SV.FontCloudSizeMedium = value LUIE.CombatInfo.PrepareFonts(true) end,
@@ -383,8 +375,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "slider",
-                name = "Small Font Size",
-                tooltip = "Small font is used to for DOT damage hits, all incoming damage and all healing done and received labels.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_SMALLFONT),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_SMALLFONT_TOOLTIP),
                 min = 12, max = 30, step = 2,
                 getFunc = function() return LUIE.CombatInfo.SV.FontCloudSizeSmall end,
                 setFunc = function(value) LUIE.CombatInfo.SV.FontCloudSizeSmall = value LUIE.CombatInfo.PrepareFonts(true) end,
@@ -394,8 +386,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show label icons",
-                tooltip = "Display abilities icons (if available) next to each text label.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_LABELICONS),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_LABELICONS_TOOLTIP),
                 getFunc = function() return LUIE.CombatInfo.SV.ShowIconsCloud end,
                 setFunc = function(value) LUIE.CombatInfo.SV.ShowIconsCloud = value end,
                 width = "full",
@@ -404,24 +396,23 @@ function LUIE_CreateSettings()
             },
             {
                 type = "header",
-                name = "Scrolling-type areas text options",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_SCROLLTYPE_HEADER),
                 width = "full",
             },
             {
                 type = "checkbox",
-                name = "Enable Scrolling-type areas",
-                --tooltip = "",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_SCROLLTYPE_ENABLE),
                 getFunc = function() return LUIE.CombatInfo.SV.ScrollTextEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.ScrollTextEnabled = value end,
                 width = "full",
-                warning = "Will need to reload the UI.",
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 default = LUIE.CombatInfo.D.ScrollTextEnabled,
                 disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
             },
             {
                 type = "slider",
-                name = "Large Font Size",
-                tooltip = "Large font is used to for critical damage hits and experience gain labels.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_LARGEFONT),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_LARGEFONT_TOOLTIP),
                 min = 20, max = 50, step = 2,
                 getFunc = function() return LUIE.CombatInfo.SV.FontScrollSizeLarge end,
                 setFunc = function(value) LUIE.CombatInfo.SV.FontScrollSizeLarge = value LUIE.CombatInfo.PrepareFonts(true) end,
@@ -431,8 +422,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "slider",
-                name = "Medium Font Size",
-                tooltip = "Medium font is used to for normal damage hits, alliance points gain and drain/energize labels.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_MEDIUMFONT),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_MEDIUMFONT_TOOLTIP),
                 min = 14, max = 40, step = 2,
                 getFunc = function() return LUIE.CombatInfo.SV.FontScrollSizeMedium end,
                 setFunc = function(value) LUIE.CombatInfo.SV.FontScrollSizeMedium = value LUIE.CombatInfo.PrepareFonts(true) end,
@@ -442,8 +433,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "slider",
-                name = "Small Font Size",
-                tooltip = "Small font is used to for DOT damage hits, all incoming damage and all healing done and received labels.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_SMALLFONT),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_SMALLFONT_TOOLTIP),
                 min = 12, max = 30, step = 2,
                 getFunc = function() return LUIE.CombatInfo.SV.FontScrollSizeSmall end,
                 setFunc = function(value) LUIE.CombatInfo.SV.FontScrollSizeSmall = value LUIE.CombatInfo.PrepareFonts(true) end,
@@ -453,8 +444,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show label icons",
-                tooltip = "Display abilities icons (if available) next to each text label.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_LABELICONS),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_LABELICONS_TOOLTIP),
                 getFunc = function() return LUIE.CombatInfo.SV.ShowIconsScroll end,
                 setFunc = function(value) LUIE.CombatInfo.SV.ShowIconsScroll = value end,
                 width = "full",
@@ -463,8 +454,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Allow drop of some queued events",
-                tooltip = "If the event queue is getting too long during intensive fight allow to drop of some non too important events.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_SCROLLTYPE_QEVENTS),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_SCROLLTYPE_QEVENTS_TOOLTIP),
                 getFunc = function() return LUIE.CombatInfo.SV.PurgeExpiredScroll end,
                 setFunc = function(value) LUIE.CombatInfo.SV.PurgeExpiredScroll = value end,
                 width = "full",
@@ -473,13 +464,13 @@ function LUIE_CreateSettings()
             },
             {
                 type = "header",
-                name = "Common options",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_COMMON_HEADER),
                 width = "full",
             },
             {
                 type = "dropdown",
-                name = "Font family for labels",
-                tooltip = "Font family to use on floating text labels.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_COMMON_FONTFAMILY),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_COMMON_FONTFAMILY_TOOLTIP),
                 choices = FontsListCombatInfo,
                 getFunc = function() return LUIE.CombatInfo.SV.FontFamily end,
                 setFunc = function(var) LUIE.CombatInfo.SV.FontFamily = var LUIE.CombatInfo.PrepareFonts(true) end,
@@ -490,8 +481,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show combat related text",
-                tooltip = "Display floating numbers for various combat related events (damage, healing, etc).",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_COMMON_COMBATTEXT),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_COMMON_COMBATTEXT_TOOLTIP),
                 getFunc = function() return LUIE.CombatInfo.SV.CombatEventsEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.CombatEventsEnabled = value LUIE.CombatInfo.RegisterCombatEvent() end,
                 width = "full",
@@ -500,8 +491,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Throttle values",
-                tooltip = "Accumulates multiple hits into one label.",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_COMMON_THROTTLE),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_COMMON_THROTTLE_TOOLTIP),
                 getFunc = function() return LUIE.CombatInfo.SV.ThrottleEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.ThrottleEnabled = value end,
                 width = "full",
@@ -510,8 +501,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Incoming Damage-Over-Time",
-                tooltip = "Display floating numbers for incoming DOTs events",
+                name = GetString(SI_LUIE_LAM_COMBATINFO_COMMON_SHOWINCDOT),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_COMMON_SHOWINCDOT_TOOLTIP),
                 getFunc = function() return LUIE.CombatInfo.SV.DotsInEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.DotsInEnabled = value end,
                 width = "full",
@@ -747,7 +738,7 @@ function LUIE_CreateSettings()
                 getFunc = function() return LUIE.SV.SpellCastBuff_Enable end,
                 setFunc = function(value) LUIE.SV.SpellCastBuff_Enable = value end,
                 width = "full",
-                warning = "Will need to reload the UI.",
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 default = LUIE.D.SpellCastBuff_Enable,
             },
             {
@@ -841,7 +832,6 @@ function LUIE_CreateSettings()
             {
                 type = "dropdown",
                 name = "Descending sort direction",
-                --tooltip = "",
                 choices = {"Left to Right", "Right to Left"},
                 getFunc = function() return LUIE.SpellCastBuffs.SV.SortDirection end,
                 setFunc = LUIE.SpellCastBuffs.SetSortDirection,
@@ -915,7 +905,6 @@ function LUIE_CreateSettings()
             {
                 type = "dropdown",
                 name = "Font Style",
-                --tooltip = "",
                 choices = styleOptions,
                 sort = "name-up",
                 getFunc = function() return LUIE.SpellCastBuffs.SV.BuffFontStyle end,
@@ -1037,7 +1026,7 @@ function LUIE_CreateSettings()
                 getFunc = function() return rotationOptions[LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment] end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment = rotationOptionsKeys[value] LUIE.SpellCastBuffs.Reset() end,
                 width = "full",
-                warning = "Will need to reload the UI.",
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 default = rotationOptions[2],
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffects_Player and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparate ) end,
             },
@@ -1154,7 +1143,7 @@ function LUIE_CreateSettings()
                 getFunc = function() return LUIE.SV.DamageMeter_Enable end,
                 setFunc = function(value) LUIE.SV.DamageMeter_Enable = value end,
                 width = "full",
-                warning = "Will need to reload the UI.",
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 default = LUIE.D.DamageMeter_Enable,
             },
             {
@@ -1323,7 +1312,7 @@ function LUIE_CreateSettings()
                 getFunc = function() return LUIE.SV.ChatAnnouncements_Enable end,
                 setFunc = function(value) LUIE.SV.ChatAnnouncements_Enable = value end,
                 width = "full",
-                warning = "Will need to reload the UI.",
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 default = LUIE.D.ChatAnnouncements_Enable,
             },
             {
@@ -1344,7 +1333,7 @@ function LUIE_CreateSettings()
                 getFunc = function() return LUIE.ChatAnnouncements.SV.CustomStrings end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.CustomStrings = value LUIE.ChatAnnouncements.RegisterCustomStrings() end,
                 width = "full",
-                warning = "Will need to reload the UI.",
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = LUIE.ChatAnnouncements.D.CustomStrings,
             },
@@ -1514,7 +1503,6 @@ function LUIE_CreateSettings()
                     {
                         type = "colorpicker",
                         name = "\t\t\t\tGold Change Color",
-                        --tooltip = "",
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.GoldColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.GoldColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterGoldEvents() end,
                         width = "full",
@@ -1567,7 +1555,6 @@ function LUIE_CreateSettings()
                     {
                         type = "colorpicker",
                         name = "\t\t\t\tAlliance Point Change Color",
-                        --tooltip = "",
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.AlliancePointColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.AlliancePointColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterAlliancePointEvents() end,
                         width = "full",
@@ -1607,7 +1594,6 @@ function LUIE_CreateSettings()
                     {
                         type = "colorpicker",
                         name = "\t\t\t\tTel Var Stone Change Color",
-                        --tooltip = "",
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.TelVarStoneColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.TelVarStoneColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterTelVarStoneEvents() end,
                         width = "full",
@@ -1647,7 +1633,6 @@ function LUIE_CreateSettings()
                     {
                         type = "colorpicker",
                         name = "\t\t\t\tWrit Voucher Change Color",
-                        --tooltip = "",
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.WritVoucherColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.WritVoucherColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterWritVoucherEvents() end,
                         width = "full",
@@ -2425,7 +2410,7 @@ function LUIE_CreateSettings()
         getFunc = function() return LUIE.SV.UnitFrames_Enabled end,
         setFunc = function(value) LUIE.SV.UnitFrames_Enabled = value end,
         width = "full",
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.D.UnitFrames_Enabled,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2457,37 +2442,34 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = "Default PLAYER Frame",
-        --tooltip = "",
         choices = LUIE.UnitFrames.GetDefaultFramesOptions('Player'),
         getFunc = function() return LUIE.UnitFrames.GetDefaultFramesSetting('Player') end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Player', value) end,
         width = "full",
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.UnitFrames.GetDefaultFramesSetting('Player', true),
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = "Default TARGET Frame",
-        --tooltip = "",
         choices = LUIE.UnitFrames.GetDefaultFramesOptions('Target'),
         getFunc = function() return LUIE.UnitFrames.GetDefaultFramesSetting('Target') end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Target', value) end,
         width = "full",
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.UnitFrames.GetDefaultFramesSetting('Target', true),
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = "Default Small GROUP Frame",
-        --tooltip = "",
         choices = LUIE.UnitFrames.GetDefaultFramesOptions('Group'),
         getFunc = function() return LUIE.UnitFrames.GetDefaultFramesSetting('Group') end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Group', value) end,
         width = "full",
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.UnitFrames.GetDefaultFramesSetting('Group', true),
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2498,7 +2480,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.RepositionFrames = value end,
         width = "full",
         default = LUIE.UnitFrames.D.RepositionFrames,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2560,7 +2542,6 @@ function LUIE_CreateSettings()
      optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = "Font Style",
-        --tooltip = "",
         choices = styleOptions,
         sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.DefaultFontStyle end,
@@ -2690,7 +2671,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = "Font Style",
-        --tooltip = "",
         choices = styleOptions,
         sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.CustomFontStyle end,
@@ -2719,7 +2699,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.CustomEnableRegen = value end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomEnableRegen,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.UnitFrames.SV.CustomEnableRegen end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2766,13 +2746,12 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.CustomShieldBarSeparate = value end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomShieldBarSeparate,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Separate Shield Bar Height",
-        --tooltip = "",
         min = 4, max = 12, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.CustomShieldBarHeight end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomShieldBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() LUIE.UnitFrames.CustomFramesApplyLayoutGroup() end,
@@ -2788,7 +2767,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.CustomShieldBarFull = value end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomShieldBarFull,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and not LUIE.UnitFrames.SV.CustomShieldBarSeparate ) end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2814,7 +2793,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFramesPlayer = value end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomFramesPlayer,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2825,13 +2804,12 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFramesTarget = value end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomFramesTarget,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Player Bars Width",
-        --tooltip = "",
         min = 200, max = 500, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarWidth end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarWidth = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -2842,7 +2820,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Player Health Bar Height",
-        --tooltip = "",
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarHeightHealth end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarHeightHealth = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -2853,7 +2830,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Player Magicka Bar Height",
-        --tooltip = "",
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarHeightMagicka end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarHeightMagicka = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -2864,7 +2840,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Player Stamina Bar Height",
-        --tooltip = "",
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarHeightStamina end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarHeightStamina = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -2880,7 +2855,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.HideLabelMagicka = value LUIE.UnitFrames.SV.HideBarMagicka = false end,
         width = "full",
         default = LUIE.UnitFrames.D.HideLabelMagicka,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2891,7 +2866,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.HideBarMagicka = value end,
         width = "full",
         default = LUIE.UnitFrames.D.HideBarMagicka,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.HideLabelMagicka ) end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2902,7 +2877,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.HideLabelStamina = value LUIE.UnitFrames.SV.HideBarStamina = false end,
         width = "full",
         default = LUIE.UnitFrames.D.HideLabelStamina,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2913,13 +2888,12 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.HideBarStamina = value end,
         width = "full",
         default = LUIE.UnitFrames.D.HideBarStamina,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.HideLabelStamina ) end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Spacing between Player Bars",
-        --tooltip = "",
         min = -1, max = 4, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarSpacing end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarSpacing = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -2975,7 +2949,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableArmor = value end,
         width = "full",
         default = LUIE.UnitFrames.D.PlayerEnableArmor,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
     --[[optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2986,7 +2960,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableWeaponPower = value end,
         width = "full",
         default = LUIE.UnitFrames.D.PlayerEnableWeaponPower,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }]]--
     --[[optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2997,7 +2971,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableSpellPower = value end,
         width = "full",
         default = LUIE.UnitFrames.D.PlayerEnableSpellPower,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }]]--
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -3045,7 +3019,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Target Bars Width",
-        --tooltip = "",
         min = 200, max = 500, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.TargetBarWidth end,
         setFunc = function(value) LUIE.UnitFrames.SV.TargetBarWidth = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3056,7 +3029,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Target Bar Height",
-        --tooltip = "",
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.TargetBarHeight end,
         setFunc = function(value) LUIE.UnitFrames.SV.TargetBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3082,7 +3054,7 @@ function LUIE_CreateSettings()
         getFunc = function() return LUIE.UnitFrames.SV.ExecutePercentage end,
         setFunc = function(value) LUIE.UnitFrames.SV.ExecutePercentage = value end,
         width = "full",
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.UnitFrames.D.ExecutePercentage,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
@@ -3109,7 +3081,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFramesGroup = value end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomFramesGroup,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -3135,7 +3107,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Group Bars Width",
-        --tooltip = "",
         min = 100, max = 400, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.GroupBarWidth end,
         setFunc = function(value) LUIE.UnitFrames.SV.GroupBarWidth = value LUIE.UnitFrames.CustomFramesApplyLayoutGroup() end,
@@ -3146,7 +3117,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Group Bars Height",
-        --tooltip = "",
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.GroupBarHeight end,
         setFunc = function(value) LUIE.UnitFrames.SV.GroupBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutGroup() end,
@@ -3157,7 +3127,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Spacing between Group Bars",
-        --tooltip = "",
         min = 20, max = 80, step = 2,
         getFunc = function() return LUIE.UnitFrames.SV.GroupBarSpacing end,
         setFunc = function(value) LUIE.UnitFrames.SV.GroupBarSpacing = value LUIE.UnitFrames.CustomFramesApplyLayoutGroup() end,
@@ -3178,7 +3147,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFramesRaid = value end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomFramesRaid,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -3194,7 +3163,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Raid Bars Width",
-        --tooltip = "",
         min = 100, max = 500, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.RaidBarWidth end,
         setFunc = function(value) LUIE.UnitFrames.SV.RaidBarWidth = value LUIE.UnitFrames.CustomFramesApplyLayoutRaid() end,
@@ -3205,7 +3173,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "Raid Bars Height",
-        --tooltip = "",
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.RaidBarHeight end,
         setFunc = function(value) LUIE.UnitFrames.SV.RaidBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutRaid() end,
@@ -3259,7 +3226,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFramesBosses = value end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomFramesBosses,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -3275,13 +3242,12 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.AvaCustFramesTarget = value end,
         width = "full",
         default = LUIE.UnitFrames.D.AvaCustFramesTarget,
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "PvP Target Bars Width",
-        --tooltip = "",
         min = 300, max = 700, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.AvaTargetBarWidth end,
         setFunc = function(value) LUIE.UnitFrames.SV.AvaTargetBarWidth = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3292,7 +3258,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = "PvP Target Bar Height",
-        --tooltip = "",
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.AvaTargetBarHeight end,
         setFunc = function(value) LUIE.UnitFrames.SV.AvaTargetBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3308,7 +3273,7 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = "Name Display Method",
-        warning = "Will need to reload the UI.",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         tooltip = "Determines the method used to display other player names on unit frames. This setting does not effect the player frame.\nDefault: Character Name",
         choices = nameDisplayOptions,
         getFunc = function() return nameDisplayOptions[LUIE.UnitFrames.SV.DisplayOptions] end,
@@ -3376,7 +3341,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = "Font Style",
-        --tooltip = "",
         choices = styleOptions,
         sort = "name-up",
         getFunc = function() return LUIE.SpellCastBuffs.SV.BuffFontStyle end,

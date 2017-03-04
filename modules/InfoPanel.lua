@@ -16,9 +16,8 @@ local colors = {
 local PNL           = LUIE.InfoPanel
 local UI            = LUIE.UI
 local DelayBuffer   = LUIE.DelayBuffer
-local strformat     = string.format
 
-local moduleName    = LUIE.name .. '_InfoPanel'
+local moduleName    = LUIE.name .. "_InfoPanel"
 local fakeControl   = {}
 
 PNL.Enabled = false
@@ -27,7 +26,7 @@ PNL.SV      = nil
 PNL.panelUnlocked = false
 
 -- UI elements
-local g_infoPanelFont = '/LuiExtended/media/fonts/ProFontWindows.ttf|9|soft-shadow-thin'
+local g_infoPanelFont = "/LuiExtended/media/fonts/ProFontWindows.ttf|9|soft-shadow-thin"
 
 local uiPanel  = nil
 local uiTopRow = nil
@@ -77,12 +76,12 @@ local uiBags = {
 }
 local uiTrophy = {}
 local uiTrophyIcons = {
-    '/esoui/art/icons/quest_boneshard.dds',
-    '/esoui/art/icons/quest_darkether.dds',
-    '/esoui/art/icons/quest_markofthelegion.dds',
-    '/esoui/art/icons/quest_planararmor.dds',
-    '/esoui/art/icons/quest_tinyclaw.dds',
-    '/esoui/art/icons/quest_tooth.dds',
+    "/esoui/art/icons/quest_boneshard.dds",
+    "/esoui/art/icons/quest_darkether.dds",
+    "/esoui/art/icons/quest_markofthelegion.dds",
+    "/esoui/art/icons/quest_planararmor.dds",
+    "/esoui/art/icons/quest_tinyclaw.dds",
+    "/esoui/art/icons/quest_tooth.dds",
 }
 
 local function CreateUIControls()
@@ -157,7 +156,7 @@ local function CreateUIControls()
         uiTrophy[iconName] = label
         trophiesControls[i] = control
     end
-    -- manually anchor contols, so that it stays behaves properly on scaling
+    -- Manually anchor contols, so that it stays behaves properly on scaling
     trophiesControls[3]:SetAnchor(RIGHT, uiTroRow, CENTER)
     trophiesControls[2]:SetAnchor(RIGHT, trophiesControls[3], LEFT)
     trophiesControls[1]:SetAnchor(RIGHT, trophiesControls[2], LEFT)
@@ -166,20 +165,18 @@ local function CreateUIControls()
     trophiesControls[6]:SetAnchor(LEFT, trophiesControls[5], RIGHT)
 end
 
---[[
- * Rearranges panel elements. Called from Initialize and settings menu.
- ]]--
+-- Rearranges panel elements. Called from Initialize and settings menu.
 function PNL.RearrangePanel()
     if not PNL.Enabled then return end
 
-    -- reset scale of panel
+    -- Reset scale of panel
     uiPanel:SetScale(1)
 
-    -- top row
+    -- Top row
     local anchor = nil
     local size = 0
 
-    -- latency
+    -- Latency
     if PNL.SV.HideLatency then
         uiLatency.control:SetHidden(true)
     else
@@ -190,7 +187,7 @@ function PNL.RearrangePanel()
         anchor = uiLatency.control
     end
 
-    -- time
+    -- Time
     if PNL.SV.HideClock then
         uiClock.control:SetHidden(true)
     else
@@ -201,7 +198,7 @@ function PNL.RearrangePanel()
         anchor = uiClock.control
     end
 
-    -- fps
+    -- FPS
     if PNL.SV.HideFPS then
         uiFps.control:SetHidden(true)
     else
@@ -212,7 +209,7 @@ function PNL.RearrangePanel()
         anchor = uiFps.control
     end
 
-    -- soulgems
+    -- Soulgems
     if PNL.SV.HideGems then
         uiGems.control:SetHidden(true)
     else
@@ -223,14 +220,14 @@ function PNL.RearrangePanel()
         anchor = uiGems.control
     end
 
-    -- set row size
+    -- Set row size
     uiTopRow:SetWidth( ( size > 0 ) and size or 10 )
 
-    -- bottom row
+    -- Bottom row
     local anchor = nil
     local size = 0
 
-    -- feed timer
+    -- Feed timer
     if PNL.SV.HideMountFeed or uiFeedTimer.hideLocally then
         uiFeedTimer.control:SetHidden(true)
     else
@@ -241,7 +238,7 @@ function PNL.RearrangePanel()
         anchor = uiFeedTimer.control
     end
 
-    -- durability
+    -- Durability
     if PNL.SV.HideArmour then
         uiArmour.control:SetHidden(true)
     else
@@ -252,7 +249,7 @@ function PNL.RearrangePanel()
         anchor = uiArmour.control
     end
 
-    -- charges
+    -- Charges
     if PNL.SV.HideWeapons then
         uiWeapons.control:SetHidden(true)
     else
@@ -263,7 +260,7 @@ function PNL.RearrangePanel()
         anchor = uiWeapons.control
     end
 
-    -- bags
+    -- Bags
     if PNL.SV.HideBags then
         uiBags.control:SetHidden(true)
     else
@@ -274,121 +271,117 @@ function PNL.RearrangePanel()
         anchor = uiBags.control
     end
 
-    -- set row size
+    -- Set row size
     uiBotRow:SetWidth( ( size > 0 ) and size or 10 )
 
-    -- last bottom Trophy row
+    -- Last bottom Trophy row
     uiPanel.div2:SetHidden(not PNL.SV.ShowTrophy)
     uiTroRow:SetHidden(not PNL.SV.ShowTrophy)
     if PNL.SV.ShowTrophy then
-        --todo
+        --TODO
     end
 
-    -- set size of panel
+    -- Set size of panel
     uiPanel:SetWidth( math.max( uiTopRow:GetWidth(), uiBotRow:GetWidth(), 39*6 ) )
 
-    -- set scale of panel again
+    -- Set scale of panel again
     PNL.SetScale()
 end
 
 function PNL.Initialize( enabled )
-    -- load settings
-    PNL.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, 'InfoPanel' )
+    -- Load settings
+    PNL.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "InfoPanel" )
 
-    -- if User does not want the InfoPanel then exit right here
-    if not enabled then return end
+    -- If User does not want the InfoPanel then exit right here
+    if not enabled then
+        return
+    end
 
     PNL.Enabled = true
 
     CreateUIControls()
     PNL.RearrangePanel()
 
-    -- add control to global list so it can be hidden
+    -- Add control to global list so it can be hidden
     LUIE.components[ moduleName ] = uiPanel
-    LUIE.components[ moduleName .. '_FakeControl' ] = fakeControl
+    LUIE.components[ moduleName .. "_FakeControl" ] = fakeControl
 
-    -- panel position
+    -- Panel position
     if PNL.SV.position ~= nil and #PNL.SV.position == 2 then
         uiPanel:SetAnchor( CENTER, GuiRoot, TOPLEFT, PNL.SV.position[1], PNL.SV.position[2] )
     else
         uiPanel:SetAnchor(TOPRIGHT, GuiRoot, TOPRIGHT, -24, 20)
     end
 
-    -- dragging
+    -- Dragging
     uiPanel.OnMoveStop = function(self) PNL.SV.position = { self:GetCenter() } end
-    uiPanel:SetHandler( 'OnMoveStop',  uiPanel.OnMoveStop )
+    uiPanel:SetHandler( "OnMoveStop",  uiPanel.OnMoveStop )
 
-    -- set init values
+    -- Set init values
     -- uiWorld.label:SetText( GetWorldName() )
     PNL.OnUpdate01()
     PNL.OnUpdate10()
     PNL.OnUpdate60()
 
-    -- set event handlers
+    -- Set event handlers
     EVENT_MANAGER:RegisterForEvent( moduleName, EVENT_LOOT_RECEIVED,                PNL.OnBagUpdate )
     EVENT_MANAGER:RegisterForEvent( moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, PNL.OnBagUpdate )
-    EVENT_MANAGER:RegisterForUpdate( moduleName .. '01' , 1000,  PNL.OnUpdate01 )
-    EVENT_MANAGER:RegisterForUpdate( moduleName .. '10' , 10000, PNL.OnUpdate10 )
-    EVENT_MANAGER:RegisterForUpdate( moduleName .. '60' , 60000, PNL.OnUpdate60 )
+    EVENT_MANAGER:RegisterForUpdate( moduleName .. "01" , 1000,  PNL.OnUpdate01 )
+    EVENT_MANAGER:RegisterForUpdate( moduleName .. "10" , 10000, PNL.OnUpdate10 )
+    EVENT_MANAGER:RegisterForUpdate( moduleName .. "60" , 60000, PNL.OnUpdate60 )
 end
 
 function PNL.ResetPosition()
     PNL.SV.position = nil
-    if not PNL.Enabled then return end
+    if not PNL.Enabled then
+        return
+    end
     uiPanel:ClearAnchors()
     uiPanel:SetAnchor(TOPRIGHT, GuiRoot, TOPRIGHT, -24, 20)
 end
 
---[[
- * Unlock panel for moving. Called from Settings Menu.
- ]]--
+-- Unlock panel for moving. Called from Settings Menu.
 function PNL.SetMovingState( state )
-    if not PNL.Enabled then return end
+    if not PNL.Enabled then
+        return
+    end
     PNL.panelUnlocked = state
     uiPanel:SetMouseEnabled( state )
     uiPanel:SetMovable( state )
 end
 
---[[
- * Set scale of Info Panel. Called from Settings Menu.
- ]]--
+-- Set scale of Info Panel. Called from Settings Menu.
 function PNL.SetScale()
-    if not PNL.Enabled then return end
+    if not PNL.Enabled then
+        return
+    end
     uiPanel:SetScale( PNL.SV.panelScale and PNL.SV.panelScale/100 or 1 )
     uiPanel:SetHidden(false)
 end
 
---[[
- * Fake Component callback function used by main module
- ]]--
+-- Fake Component callback function used by main module
 function fakeControl.SetHidden(self, hidden)
     -- update not more then once every 5 second
-    if not hidden and DelayBuffer( 'InfoPanelFakeControl', 5000 ) then
+    if not hidden and DelayBuffer( "InfoPanelFakeControl", 5000 ) then
         PNL.OnUpdate60()
     end
 end
 
---[[
- * Listens to EVENT_INVENTORY_SINGLE_SLOT_UPDATE and EVENT_LOOT_RECEIVED
- ]]--
+-- Listens to EVENT_INVENTORY_SINGLE_SLOT_UPDATE and EVENT_LOOT_RECEIVED
 function PNL.OnBagUpdate()
     -- We shall not execute bags size calculation immediately, but rather set a flag with delay function
     -- This is needed to avoid lockups when the game start flooding us with same event for every bag slot used
     -- While we do not need any good latency, we can afford to update info-panel label with 250ms delay
-
-    EVENT_MANAGER:RegisterForUpdate(moduleName .. '_PendingBagsUpdate', 250, PNL.DoBagUpdate )
+    EVENT_MANAGER:RegisterForUpdate(moduleName .. "_PendingBagsUpdate", 250, PNL.DoBagUpdate )
 end
 
---[[
- * Performs calculation of empty space in bags
- * Called with delay by corresponding event listener
- ]]--
+-- Performs calculation of empty space in bags
+-- Called with delay by corresponding event listener
 function PNL.DoBagUpdate()
+    -- Clear pending event
+    EVENT_MANAGER:UnregisterForUpdate(moduleName .. "_PendingBagsUpdate")
 
-    -- clear pending event
-    EVENT_MANAGER:UnregisterForUpdate(moduleName .. '_PendingBagsUpdate')
-
-    -- update bags
+    -- Update bags
     local bagSize = GetBagSize( BAG_BACKPACK )
     local bagUsed = GetNumBagUsedSlots( BAG_BACKPACK )
 
@@ -402,10 +395,10 @@ function PNL.DoBagUpdate()
             end
         end
     end
-    uiBags.label:SetText( strformat( '%d/%d', bagUsed, bagSize ) )
+    uiBags.label:SetText( string.format( "%d/%d", bagUsed, bagSize ) )
     uiBags.label:SetColor( colour.r, colour.g, colour.b, 1 )
 
-    -- update soulgems
+    -- Update soulgems
     local myLevel = GetUnitEffectiveLevel("player")
     local _, icon, emptyCount = GetSoulGemInfo(SOUL_GEM_TYPE_EMPTY, myLevel, true);
     local _, iconF, fullCount = GetSoulGemInfo(SOUL_GEM_TYPE_FILLED, myLevel, true);
@@ -417,7 +410,7 @@ function PNL.DoBagUpdate()
     uiGems.icon:SetTexture( icon )
     uiGems.label:SetText( ( fullCount > 9 ) and fullText or ( fullText .. "/" .. emptyCount ) )
 
-    -- scan for trophies
+    -- Scan for trophies
     if PNL.SV.ShowTrophy then
         local tro = {}
         for slotIndex = 0, GetBagSize( BAG_BACKPACK ) - 1 do
@@ -428,7 +421,7 @@ function PNL.DoBagUpdate()
                 end
             end
         end
-        -- update labels
+        -- Update labels
         for icon, label in pairs(uiTrophy) do
             -- DEBUG tro[icon] = 1999
             local count = tro[icon] and (tro[icon] > 999 and 999 or tro[icon]) or 0
@@ -443,10 +436,10 @@ function PNL.DoBagUpdate()
 end
 
 function PNL.OnUpdate01()
-    -- update time
+    -- Update time
     uiClock.label:SetText( GetTimeString() )
 
-    -- update fps
+    -- Update fps
     local fps = GetFramerate()
     local colour = colors.WHITE
     if not PNL.SV.DisableInfoColours then
@@ -458,12 +451,12 @@ function PNL.OnUpdate01()
             end
         end
     end
-    uiFps.label:SetText( strformat( '%.1f fps', fps ) )
+    uiFps.label:SetText( string.format( "%.1f fps", fps ) )
     uiFps.label:SetColor( colour.r, colour.g, colour.b, 1 )
 end
 
 function PNL.OnUpdate10()
-    -- update latency
+    -- Update latency
     local lat = GetLatency()
     local colour = colors.WHITE
     if not PNL.SV.DisableInfoColours then
@@ -475,20 +468,20 @@ function PNL.OnUpdate10()
             end
         end
     end
-    uiLatency.label:SetText( strformat( '%d ms', lat ) )
+    uiLatency.label:SetText( string.format( "%d ms", lat ) )
     uiLatency.label:SetColor( colour.r, colour.g, colour.b, 1 )
 end
 
 function PNL.OnUpdate60()
-    -- update mountfeedtimer
+    -- Update mountfeedtimer
     if not PNL.SV.HideMountFeed and not uiFeedTimer.hideLocally then
         local mountFeedTimer, mountFeedTotalTime = GetTimeUntilCanBeTrained()
-        local mountFeedMessage = 'Maxed'
+        local mountFeedMessage = "Maxed"
         if ( mountFeedTimer ~= nil ) then
             if ( mountFeedTimer == 0 ) then
                 local inventoryBonus, maxInventoryBonus, staminaBonus, maxStaminaBonus, speedBonus, maxSpeedBonus = GetRidingStats()
                 if inventoryBonus ~= maxInventoryBonus or staminaBonus ~= maxStaminaBonus or speedBonus ~= maxSpeedBonus then
-                    mountFeedMessage = 'Feed now'
+                    mountFeedMessage = "Feed now"
                 else
                     uiFeedTimer.hideLocally = true
                     PNL.RearrangePanel()
@@ -496,13 +489,13 @@ function PNL.OnUpdate60()
             elseif ( mountFeedTimer > 0 ) then
                 local hours   = math.floor( mountFeedTimer / 3600000 )
                 local minutes = math.floor( ( mountFeedTimer - ( hours * 3600000 ) ) / 60000 )
-                mountFeedMessage = strformat( '%dh %dm', hours, minutes )
+                mountFeedMessage = string.format( "%dh %dm", hours, minutes )
             end
         end
         uiFeedTimer.label:SetText( mountFeedMessage )
     end
 
-    -- update item durability
+    -- Update item durability
     if not PNL.SV.HideArmour then
         local slotCount    = 0
         local duraSum      = 0
@@ -523,12 +516,12 @@ function PNL.OnUpdate60()
                 break
             end
         end
-        uiArmour.label:SetText( strformat( '%d%%', duraPercentage ) )
+        uiArmour.label:SetText( string.format( "%d%%", duraPercentage ) )
         uiArmour.label:SetColor( colour.r, colour.g, colour.b, 1 )
         uiArmour.icon:SetColor( iconcolour.r, iconcolour.g, iconcolour.b, 1 )
     end
 
-    -- get charges information
+    -- Get charges information
     if not PNL.SV.HideWeapons then
         for _, icon in pairs( { uiWeapons.main, uiWeapons.swap } ) do
             local charges, maxCharges = GetChargeInfoForItem( BAG_WORN, icon.slotIndex)
@@ -547,6 +540,6 @@ function PNL.OnUpdate60()
         end
     end
 
-    -- update bag slot count
+    -- Update bag slot count
     PNL.DoBagUpdate()
 end

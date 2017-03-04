@@ -11,57 +11,57 @@ local ParseLanguageString = LUIE.ParseLanguageString
 local strformat           = string.format
 local pairs               = pairs -- What does this do?
 
-local moduleName    = LUIE.name .. '_UnitFrames'
+local moduleName    = LUIE.name .. "_UnitFrames"
 
 local classIcons = {
-    [0] = '/esoui/art/contacts/social_status_offline.dds',
-    [1] = '/esoui/art/icons/class/class_dragonknight.dds',
-    [2] = '/esoui/art/icons/class/class_sorcerer.dds',
-    [3] = '/esoui/art/icons/class/class_nightblade.dds',
-    [6] = '/esoui/art/icons/class/class_templar.dds',
+    [0] = "/esoui/art/contacts/social_status_offline.dds",
+    [1] = "/esoui/art/icons/class/class_dragonknight.dds",
+    [2] = "/esoui/art/icons/class/class_sorcerer.dds",
+    [3] = "/esoui/art/icons/class/class_nightblade.dds",
+    [6] = "/esoui/art/icons/class/class_templar.dds",
 }
 
 local g_playerAlliance
 
 UF.Enabled = false
 UF.D = {
-    ShortenNumbers          = false,
-    RepositionFrames        = true,
-    DefaultOocTransparency  = 85,
-    DefaultIncTransparency  = 85,
-    DefaultFramesPlayer     = nil, -- this 3 default settings HAS TO BE nil!!!
-    DefaultFramesTarget     = nil,
-    DefaultFramesGroup      = nil,
-    Format                  = "Current + Shield (Percentage%)",
-    DefaultFontFace         = "Univers 67",
-    DefaultFontStyle        = "soft-shadow-thick",
-    DefaultFontSize         = 16,
-    DefaultTextColour       = { 1, 1, 1 },
-    TargetShowClass         = true,
-    TargetShowFriend        = true,
-    TargetColourByReaction  = false,
-    CustomFormatOne         = "Current + Shield (Percentage%)",
-    CustomFormatTwo         = "Percentage%",
-    CustomFontFace          = "Univers 67",
-    CustomFontStyle         = "soft-shadow-thin",
-    CustomFontBars          = 16,
-    CustomFontOther         = 20,
-    CustomTexture           = "Minimalistic",
-    CustomEnableRegen       = false,
-    CustomOocAlpha          = 85,
-    CustomIncAlpha          = 85,
-    CustomOocAlphaPower     = true,
-    CustomOocAlphaTarget    = true,
-    CustomColourHealth      = { 202/255,  20/255, 0       },
-    CustomColourShield      = { 1      , 192/255, 0       }, -- .a=0.5 for overlay and .a = 1 for separate
-    CustomColourMagicka     = { 0      ,  83/255, 209/255 },
-    CustomColourStamina     = {  28/255, 177/255, 0       },
-    CustomShieldBarSeparate = false,
-    CustomShieldBarHeight   = 10,
-    CustomShieldBarFull     = false,
-    CustomSmoothBar         = true,
-    CustomFramesPlayer      = true,
-    CustomFramesTarget      = true,
+    ShortenNumbers                   = false,
+    RepositionFrames                 = true,
+    DefaultOocTransparency           = 85,
+    DefaultIncTransparency           = 85,
+    DefaultFramesPlayer              = nil, -- this 3 default settings HAS TO BE nil!!!
+    DefaultFramesTarget              = nil,
+    DefaultFramesGroup               = nil,
+    Format                           = "Current + Shield (Percentage%)",
+    DefaultFontFace                  = "Univers 67",
+    DefaultFontStyle                 = "soft-shadow-thick",
+    DefaultFontSize                  = 16,
+    DefaultTextColour                = { 1, 1, 1 },
+    TargetShowClass                  = true,
+    TargetShowFriend                 = true,
+    TargetColourByReaction           = false,
+    CustomFormatOne                  = "Current + Shield (Percentage%)",
+    CustomFormatTwo                  = "Percentage%",
+    CustomFontFace                   = "Univers 67",
+    CustomFontStyle                  = "soft-shadow-thin",
+    CustomFontBars                   = 16,
+    CustomFontOther                  = 20,
+    CustomTexture                    = "Minimalistic",
+    CustomEnableRegen                = false,
+    CustomOocAlpha                   = 85,
+    CustomIncAlpha                   = 85,
+    CustomOocAlphaPower              = true,
+    CustomOocAlphaTarget             = true,
+    CustomColourHealth               = { 202/255,  20/255, 0       },
+    CustomColourShield               = { 1      , 192/255, 0       }, -- .a=0.5 for overlay and .a = 1 for separate
+    CustomColourMagicka              = { 0      ,  83/255, 209/255 },
+    CustomColourStamina              = {  28/255, 177/255, 0       },
+    CustomShieldBarSeparate          = false,
+    CustomShieldBarHeight            = 10,
+    CustomShieldBarFull              = false,
+    CustomSmoothBar                  = true,
+    CustomFramesPlayer               = true,
+    CustomFramesTarget               = true,
     PlayerBarWidth                   = 300,
     TargetBarWidth                   = 300,
     PlayerBarHeightHealth            = 30,
@@ -92,7 +92,7 @@ UF.D = {
     RaidDisableDefault               = true,
     RaidBarWidth                     = 200,
     RaidBarHeight                    = 30,
-    RaidLayout                       = '2 x 12',
+    RaidLayout                       = "2 x 12",
     --RaidSort                       = true,
     RaidSpacers                      = false,
     CustomFramesBosses               = true,
@@ -122,8 +122,8 @@ local g_AvaCustFrames = {} -- Another set of custom frames. Currently designed o
 UF.CustomFramesMovingState = false
 local g_customLeaderIcon
 local g_PendingUpdate = {
-    Group       = { flag = false, delay = 200 , name = moduleName .. '_PendingGroupUpdate' },
-    VeteranXP   = { flag = false, delay = 5000, name = moduleName .. '_PendingVeteranXP' },
+    Group       = { flag = false, delay = 200 , name = moduleName .. "_PendingGroupUpdate" },
+    VeteranXP   = { flag = false, delay = 5000, name = moduleName .. "_PendingVeteranXP" },
 }
 
 -- Reference to default UI target unit frame
@@ -144,12 +144,18 @@ local g_MaxChampionPoint = GetChampionPointsPlayerProgressionCap()
 
 -- Default Regen/degen animation used on default group frames and custom frames
 local function CreateRegenAnimation(parent, anchors, dims, alpha, degen)
-    if #dims ~= 2 then dims = { parent:GetDimensions() } end
+    if #dims ~= 2 then
+        dims = { parent:GetDimensions() }
+    end
 
     -- Create regen control
     local control = UI.Texture(parent, anchors, dims, "/LuiExtended/media/unitframes/regen.dds", 2, true)
-    if alpha then control:SetAlpha(alpha) end
-    if degen then control:SetTextureRotation(3.14159) end
+    if alpha then
+        control:SetAlpha(alpha)
+    end
+    if degen then
+        control:SetTextureRotation(3.14159)
+    end
     -- Create animation
     local animation, timeline = CreateSimpleAnimation(ANIMATION_TEXTURE, control)
     animation:SetImageData(1, 16)
@@ -184,14 +190,14 @@ local strOffline    = GetString(SI_UNIT_FRAME_STATUS_OFFLINE)
 
 -- Following settings will be used in options menu to define DefaultFrames behaviour
 local g_DefaultFramesOptions = {
-    [1] = 'Disable',                                -- false
-    [2] = 'Do nothing (keep default)',              -- nil
-    [3] = 'Use Extender (display text overlay)',    -- true
+    [1] = "Disable",                                -- false
+    [2] = "Do nothing (keep default)",              -- nil
+    [3] = "Use Extender (display text overlay)",    -- true
 }
 function UF.GetDefaultFramesOptions(frame)
     local retval = {}
     for k,v in pairs(g_DefaultFramesOptions) do
-        if k ~= 1 or frame == 'Player' or frame == 'Target' then
+        if k ~= 1 or frame == "Player" or frame == "Target" then
             table.insert( retval, v )
         end
     end
@@ -199,7 +205,7 @@ function UF.GetDefaultFramesOptions(frame)
 end
 
 function UF.SetDefaultFramesSetting(frame, value)
-    local key = 'DefaultFrames' .. tostring(frame)
+    local key = "DefaultFrames" .. tostring(frame)
     if value == g_DefaultFramesOptions[3] then
         UF.SV[key] = true
     elseif value == g_DefaultFramesOptions[1] then
@@ -210,7 +216,7 @@ function UF.SetDefaultFramesSetting(frame, value)
 end
 
 function UF.GetDefaultFramesSetting(frame, default)
-    local key = 'DefaultFrames' .. tostring(frame)
+    local key = "DefaultFrames" .. tostring(frame)
     local from = default and UF.D or UF.SV
     local value = from[key]
     local out_key = (value == true) and 3 or (value == false) and 1 or 2
@@ -275,7 +281,7 @@ local function CreateDefaultFrames()
 
     -- Instead of using Default Unit Frames Extender, the player could wish simply to disable and hide default UI frames
     if UF.SV.DefaultFramesPlayer == false then
-        local frames = { 'Health' , 'Stamina' , 'Magicka' , 'MountStamina' , 'Werewolf', 'SiegeHealth' }
+        local frames = { "Health" , "Stamina" , "Magicka" , "MountStamina" , "Werewolf", "SiegeHealth" }
         for i = 1 , #frames do
             local frame = _G["ZO_PlayerAttribute"..frames[i]]
             frame:UnregisterForEvent(EVENT_POWER_UPDATE)
@@ -296,7 +302,7 @@ local function CreateCustomFrames()
     if UF.SV.CustomFramesPlayer then
         -- Player Frame
         local playerTlw = UI.TopLevel( nil, nil )
-        playerTlw.customPositionAttr = 'CustomFramesPlayerFramePos'
+        playerTlw.customPositionAttr = "CustomFramesPlayerFramePos"
         playerTlw.preview = LUIE.UI.Backdrop( playerTlw, "fill", nil, nil, nil, true )
         local player = UI.Control( playerTlw, {TOPLEFT,TOPLEFT}, nil, false )
         local topInfo = UI.Control( player, {BOTTOM,TOP,0,-3}, nil, false )
@@ -339,9 +345,9 @@ local function CreateCustomFrames()
                 ["icon"]    = UI.Texture( alt, {RIGHT,LEFT,-2,0}, {20,20}, nil, nil, false ),
             },
             ["topInfo"]     = topInfo,
-            ["name"]        = UI.Label( topInfo, {BOTTOMLEFT,BOTTOMLEFT}, nil, {0,4}, nil, 'Player Name', false ),
+            ["name"]        = UI.Label( topInfo, {BOTTOMLEFT,BOTTOMLEFT}, nil, {0,4}, nil, "Player Name", false ),
             ["levelIcon"]   = pli,
-            ["level"]       = UI.Label( topInfo, {LEFT,RIGHT,1,0,pli}, nil, {0,1}, nil, 'level', false ),
+            ["level"]       = UI.Label( topInfo, {LEFT,RIGHT,1,0,pli}, nil, {0,1}, nil, "level", false ),
             ["classIcon"]   = UI.Texture( topInfo, {RIGHT,RIGHT,-1,0}, {22,22}, nil, nil, false ),
             ["botInfo"]     = botInfo,
             ["buffs"]       = UI.Control( playerTlw, nil, nil, false ),
@@ -375,9 +381,9 @@ local function CreateCustomFrames()
                 ["icon"]    = UI.Texture( alt, {RIGHT,LEFT,-2,0}, {20,20}, nil, nil, false ),
             },
             ["topInfo"]     = topInfo,
-            ["name"]        = UI.Label( topInfo, {BOTTOMLEFT,BOTTOMLEFT}, nil, {0,4}, nil, 'Player Name', false ),
+            ["name"]        = UI.Label( topInfo, {BOTTOMLEFT,BOTTOMLEFT}, nil, {0,4}, nil, "Player Name", false ),
             ["levelIcon"]   = pli,
-            ["level"]       = UI.Label( topInfo, {LEFT,RIGHT,1,0,pli}, nil, {0,1}, nil, 'level', false ),
+            ["level"]       = UI.Label( topInfo, {LEFT,RIGHT,1,0,pli}, nil, {0,1}, nil, "level", false ),
             ["classIcon"]   = UI.Texture( topInfo, {RIGHT,RIGHT,-1,0}, {22,22}, nil, nil, false ),
             ["botInfo"]     = botInfo,
             ["buffs"]       = UI.Control( playerTlw, nil, nil, false ),
@@ -411,9 +417,9 @@ local function CreateCustomFrames()
                 ["icon"]    = UI.Texture( alt, {RIGHT,LEFT,-2,0}, {20,20}, nil, nil, false ),
             },
             ["topInfo"]     = topInfo,
-            ["name"]        = UI.Label( topInfo, {BOTTOMLEFT,BOTTOMLEFT}, nil, {0,4}, nil, 'Player Name', false ),
+            ["name"]        = UI.Label( topInfo, {BOTTOMLEFT,BOTTOMLEFT}, nil, {0,4}, nil, "Player Name", false ),
             ["levelIcon"]   = pli,
-            ["level"]       = UI.Label( topInfo, {LEFT,RIGHT,1,0,pli}, nil, {0,1}, nil, 'level', false ),
+            ["level"]       = UI.Label( topInfo, {LEFT,RIGHT,1,0,pli}, nil, {0,1}, nil, "level", false ),
             ["classIcon"]   = UI.Texture( topInfo, {RIGHT,RIGHT,-1,0}, {22,22}, nil, nil, false ),
             ["botInfo"]     = botInfo,
             ["buffs"]       = UI.Control( playerTlw, nil, nil, false ),
@@ -445,9 +451,9 @@ local function CreateCustomFrames()
                 ["icon"]    = UI.Texture( alt, {RIGHT,LEFT,-2,0}, {20,20}, nil, nil, false ),
             },
             ["topInfo"]     = topInfo,
-            ["name"]        = UI.Label( topInfo, {BOTTOMLEFT,BOTTOMLEFT}, nil, {0,4}, nil, 'Player Name', false ),
+            ["name"]        = UI.Label( topInfo, {BOTTOMLEFT,BOTTOMLEFT}, nil, {0,4}, nil, "Player Name", false ),
             ["levelIcon"]   = pli,
-            ["level"]       = UI.Label( topInfo, {LEFT,RIGHT,1,0,pli}, nil, {0,1}, nil, 'level', false ),
+            ["level"]       = UI.Label( topInfo, {LEFT,RIGHT,1,0,pli}, nil, {0,1}, nil, "level", false ),
             ["classIcon"]   = UI.Texture( topInfo, {RIGHT,RIGHT,-1,0}, {22,22}, nil, nil, false ),
             ["botInfo"]     = botInfo,
             ["buffs"]       = UI.Control( playerTlw, nil, nil, false ),
@@ -463,9 +469,9 @@ local function CreateCustomFrames()
     if UF.SV.CustomFramesTarget then
         -- Target Frame
         local targetTlw = UI.TopLevel( nil, nil )
-        targetTlw.customPositionAttr = 'CustomFramesTargetFramePos'
+        targetTlw.customPositionAttr = "CustomFramesTargetFramePos"
         targetTlw.preview = LUIE.UI.Backdrop( targetTlw, "fill", nil, nil, nil, true )
-        targetTlw.previewLabel = UI.Label( targetTlw.preview, {CENTER,CENTER}, nil, nil, 'ZoFontGameMedium', "Target Frame", false )
+        targetTlw.previewLabel = UI.Label( targetTlw.preview, {CENTER,CENTER}, nil, nil, "ZoFontGameMedium", "Target Frame", false )
         local target = UI.Control( targetTlw, {TOPLEFT,TOPLEFT}, nil, false )
         local topInfo = UI.Control( target, {BOTTOM,TOP,0,-3}, nil, false )
         local botInfo = UI.Control( target, {TOP,BOTTOM,0,2}, nil, false )
@@ -488,16 +494,16 @@ local function CreateCustomFrames()
                 ["threshold"] = g_targetThreshold,
             },
             ["topInfo"]     = topInfo,
-            ["name"]        = UI.Label( topInfo, {BOTTOMLEFT,BOTTOMLEFT}, nil, {0,4}, nil, 'Target Name', false ),
+            ["name"]        = UI.Label( topInfo, {BOTTOMLEFT,BOTTOMLEFT}, nil, {0,4}, nil, "Target Name", false ),
             ["levelIcon"]   = tli,
-            ["level"]       = UI.Label( topInfo, {LEFT,RIGHT,1,0,tli}, nil, {0,1}, nil, 'level', false ),
+            ["level"]       = UI.Label( topInfo, {LEFT,RIGHT,1,0,tli}, nil, {0,1}, nil, "level", false ),
             ["classIcon"]   = UI.Texture( topInfo, {RIGHT,RIGHT,-1,0}, {22,22}, nil, nil, false ),
-            ["className"]   = UI.Label( topInfo, {BOTTOMRIGHT,TOPRIGHT,-1,-1}, nil, {2,4}, nil, 'Class', false ),
+            ["className"]   = UI.Label( topInfo, {BOTTOMRIGHT,TOPRIGHT,-1,-1}, nil, {2,4}, nil, "Class", false ),
             ["friendIcon"]  = UI.Texture( topInfo, {RIGHT,RIGHT,-20,0}, {22,22}, nil, nil, false ),
             ["botInfo"]     = botInfo,
-            ["title"]       = UI.Label( botInfo, {TOPLEFT,TOPLEFT}, nil, {0,3}, nil, '<Title>', false ),
+            ["title"]       = UI.Label( botInfo, {TOPLEFT,TOPLEFT}, nil, {0,3}, nil, "<Title>", false ),
             ["avaRankIcon"] = ari,
-            ["avaRank"]     = UI.Label( botInfo, {RIGHT,LEFT,-1,0,ari}, nil, {2,3}, nil, 'ava', false ),
+            ["avaRank"]     = UI.Label( botInfo, {RIGHT,LEFT,-1,0,ari}, nil, {2,3}, nil, "ava", false ),
             ["dead"]        = UI.Label( thb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "Status", true ),
             ["skull"]       = UI.Texture( target, {RIGHT,LEFT,-8,0}, nil, "LuiExtended/media/unitframes/unitframes_execute.dds", nil, true ),
             ["buffs"]       = UI.Control( targetTlw, {TOP,BOTTOM,0,2,botInfo}, nil, false ),
@@ -509,14 +515,14 @@ local function CreateCustomFrames()
     if UF.SV.AvaCustFramesTarget then
         -- Target Frame
         local targetTlw = UI.TopLevel( nil, nil )
-        targetTlw.customPositionAttr = 'AvaCustFramesTargetFramePos'
+        targetTlw.customPositionAttr = "AvaCustFramesTargetFramePos"
         targetTlw.preview = LUIE.UI.Backdrop( targetTlw, "fill", nil, nil, nil, true )
-        targetTlw.previewLabel = UI.Label( targetTlw.preview, {CENTER,CENTER}, nil, nil, 'ZoFontGameMedium', "PvP Player Target Frame", false )
+        targetTlw.previewLabel = UI.Label( targetTlw.preview, {CENTER,CENTER}, nil, nil, "ZoFontGameMedium", "PvP Player Target Frame", false )
         local target = UI.Control( targetTlw, {TOPLEFT,TOPLEFT}, nil, false )
         local topInfo = UI.Control( target, {BOTTOM,TOP,0,-3}, nil, false )
         local botInfo = UI.Control( target, {TOP,BOTTOM,0,2}, nil, false )
         local thb = LUIE.UI.Backdrop(target, {TOP,TOP,0,0}, nil, nil, nil, false )
-        local cn = UI.Label( botInfo, {TOP,TOP}, nil, {1,3}, nil, 'Class', false )
+        local cn = UI.Label( botInfo, {TOP,TOP}, nil, {1,3}, nil, "Class", false )
 
         -- Collect all together
         -- Notice, that we put this table into same UF.CustomFrames table.
@@ -537,13 +543,13 @@ local function CreateCustomFrames()
                 ["threshold"] = g_targetThreshold,
             },
             ["topInfo"]     = topInfo,
-            ["name"]        = UI.Label( topInfo, {BOTTOM,BOTTOM}, nil, {1,4}, nil, 'Target Name', false ),
+            ["name"]        = UI.Label( topInfo, {BOTTOM,BOTTOM}, nil, {1,4}, nil, "Target Name", false ),
             ["classIcon"]   = UI.Texture( topInfo, {LEFT,LEFT}, {20,20}, nil, nil, false ),
             ["avaRankIcon"] = UI.Texture( topInfo, {RIGHT,RIGHT}, {20,20}, nil, nil, false ),
             ["botInfo"]     = botInfo,
             ["className"]   = cn,
-            ["title"]       = UI.Label( botInfo, {TOP,BOTTOM,0,0,cn}, nil, {1,3}, nil, '<Title>', false ),
-            ["avaRank"]     = UI.Label( botInfo, {TOPRIGHT,TOPRIGHT}, nil, {2,3}, nil, 'ava', false ),
+            ["title"]       = UI.Label( botInfo, {TOP,BOTTOM,0,0,cn}, nil, {1,3}, nil, "<Title>", false ),
+            ["avaRank"]     = UI.Label( botInfo, {TOPRIGHT,TOPRIGHT}, nil, {2,3}, nil, "ava", false ),
             ["dead"]        = UI.Label( thb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "Status", true ),
         }
 
@@ -559,12 +565,12 @@ local function CreateCustomFrames()
     if UF.SV.CustomFramesGroup then
         -- Group Frame
         local group = UI.TopLevel( nil, nil )
-        group.customPositionAttr = 'CustomFramesGroupFramePos'
+        group.customPositionAttr = "CustomFramesGroupFramePos"
         group.preview = LUIE.UI.Backdrop( group, "fill", nil, nil, nil, true )
-        group.previewLabel = UI.Label( group.preview, {BOTTOM,TOP,0,-1,group}, nil, nil, 'ZoFontGameMedium', "Small Group", false )
+        group.previewLabel = UI.Label( group.preview, {BOTTOM,TOP,0,-1,group}, nil, nil, "ZoFontGameMedium", "Small Group", false )
 
         for i = 1, 4 do
-            local unitTag = 'SmallGroup' .. i
+            local unitTag = "SmallGroup" .. i
             local control = UI.Control( group, nil, nil, false )
             local topInfo = UI.Control( control, {BOTTOMRIGHT,TOPRIGHT,0,-3}, nil, false )
             local ghb = LUIE.UI.Backdrop( control, {TOPLEFT,TOPLEFT}, nil, nil, nil, false )
@@ -583,7 +589,7 @@ local function CreateCustomFrames()
                 ["topInfo"]     = topInfo,
                 ["name"]        = UI.Label( topInfo, {BOTTOMLEFT,BOTTOMLEFT}, nil, {0,4}, nil, unitTag, false ),
                 ["levelIcon"]   = gli,
-                ["level"]       = UI.Label( topInfo, {LEFT,RIGHT,1,0,gli}, nil, {0,1}, nil, 'level', false ),
+                ["level"]       = UI.Label( topInfo, {LEFT,RIGHT,1,0,gli}, nil, {0,1}, nil, "level", false ),
                 ["classIcon"]   = UI.Texture( topInfo, {RIGHT,RIGHT,-1,0}, {22,22}, nil, nil, false ),
                 ["friendIcon"]  = UI.Texture( topInfo, {RIGHT,RIGHT,-20,0}, {22,22}, nil, nil, false ),
                 ["dead"]        = UI.Label( ghb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "Status", false ),
@@ -597,13 +603,13 @@ local function CreateCustomFrames()
     if UF.SV.CustomFramesRaid then
         -- Raid Frame
         local raid = UI.TopLevel( nil, nil )
-        raid.customPositionAttr = 'CustomFramesRaidFramePos'
+        raid.customPositionAttr = "CustomFramesRaidFramePos"
         raid.preview = LUIE.UI.Backdrop( raid, {TOPLEFT,TOPLEFT}, nil, nil, nil, true )
         raid.preview2 = LUIE.UI.Backdrop( raid.preview, nil, nil, nil, nil, false )
-        raid.previewLabel = UI.Label( raid.preview, {BOTTOM,TOP,0,-1,raid}, nil, nil, 'ZoFontGameMedium', "Raid Group", false )
+        raid.previewLabel = UI.Label( raid.preview, {BOTTOM,TOP,0,-1,raid}, nil, nil, "ZoFontGameMedium", "Raid Group", false )
 
         for i = 1, 24 do
-            local unitTag = 'RaidGroup' .. i
+            local unitTag = "RaidGroup" .. i
             local control = UI.Control( raid, nil, nil, false )
             local rhb = LUIE.UI.Backdrop( control, "fill", nil, nil, nil, false )
 
@@ -629,12 +635,12 @@ local function CreateCustomFrames()
     if UF.SV.CustomFramesBosses then
         -- Bosses Frame
         local bosses = UI.TopLevel( nil, nil )
-        bosses.customPositionAttr = 'CustomFramesBossesFramePos'
+        bosses.customPositionAttr = "CustomFramesBossesFramePos"
         bosses.preview = LUIE.UI.Backdrop( bosses, "fill", nil, nil, nil, true )
-        bosses.previewLabel = UI.Label( bosses.preview, {BOTTOM,TOP,0,-1,bosses}, nil, nil, 'ZoFontGameMedium', "Bosses Group", false )
+        bosses.previewLabel = UI.Label( bosses.preview, {BOTTOM,TOP,0,-1,bosses}, nil, nil, "ZoFontGameMedium", "Bosses Group", false )
 
         for i = 1, 6 do
-            local unitTag = 'boss' .. i
+            local unitTag = "boss" .. i
             local control = UI.Control( bosses, nil, nil, false )
             local bhb = LUIE.UI.Backdrop( control, "fill", nil, nil, nil, false )
 
@@ -668,19 +674,19 @@ local function CreateCustomFrames()
     end
 
     -- Common actions for all created frames:
-    for _, baseName in pairs( { 'player', 'reticleover', 'SmallGroup', 'RaidGroup', 'boss', 'AvaPlayerTarget' } ) do
+    for _, baseName in pairs( { "player", "reticleover", "SmallGroup", "RaidGroup", "boss", "AvaPlayerTarget" } ) do
         -- set mouse handlers for all created tlws and create anchor coords preview labels
-        local unitFrame = UF.CustomFrames[baseName] or UF.CustomFrames[baseName .. '1'] or nil
+        local unitFrame = UF.CustomFrames[baseName] or UF.CustomFrames[baseName .. "1"] or nil
         if unitFrame ~= nil then
             -- Movement handlers
-            unitFrame.tlw:SetHandler( 'OnMoveStart', tlwOnMoveStart )
-            unitFrame.tlw:SetHandler( 'OnMoveStop', tlwOnMoveStop )
+            unitFrame.tlw:SetHandler( "OnMoveStart", tlwOnMoveStart )
+            unitFrame.tlw:SetHandler( "OnMoveStop", tlwOnMoveStop )
 
             -- Create Texture and a label for Anchor Preview
-            unitFrame.tlw.preview.anchorTexture = UI.Texture( unitFrame.tlw.preview, {TOPLEFT,TOPLEFT}, {16,16}, '/esoui/art/reticle/border_topleft.dds', DL_OVERLAY, false )
+            unitFrame.tlw.preview.anchorTexture = UI.Texture( unitFrame.tlw.preview, {TOPLEFT,TOPLEFT}, {16,16}, "/esoui/art/reticle/border_topleft.dds", DL_OVERLAY, false )
             unitFrame.tlw.preview.anchorTexture:SetColor(1, 1, 0, 0.9)
 
-            unitFrame.tlw.preview.anchorLabel = UI.Label( unitFrame.tlw.preview, {BOTTOMLEFT,TOPLEFT,0,-1}, nil, {0,2}, 'ZoFontGameSmall', "xxx, yyy", false )
+            unitFrame.tlw.preview.anchorLabel = UI.Label( unitFrame.tlw.preview, {BOTTOMLEFT,TOPLEFT,0,-1}, nil, {0,2}, "ZoFontGameSmall", "xxx, yyy", false )
             unitFrame.tlw.preview.anchorLabel:SetColor(1, 1, 0 , 1)
             unitFrame.tlw.preview.anchorLabel:SetDrawLayer(DL_OVERLAY)
             unitFrame.tlw.preview.anchorLabel:SetDrawTier(1)
@@ -690,8 +696,8 @@ local function CreateCustomFrames()
         end
 
         -- Now we have to anchor all bars to their backdrops
-        local shieldOverlay = ( baseName == 'RaidGroup' or baseName == 'boss' ) or not UF.SV.CustomShieldBarSeparate
-        local shieldFull = ( baseName == 'RaidGroup' or baseName == 'boss' ) or UF.SV.CustomShieldBarFull
+        local shieldOverlay = ( baseName == "RaidGroup" or baseName == "boss" ) or not UF.SV.CustomShieldBarSeparate
+        local shieldFull = ( baseName == "RaidGroup" or baseName == "boss" ) or UF.SV.CustomShieldBarFull
         for i = 0, 24 do
             local unitTag = (i==0) and baseName or ( baseName .. i )
             if UF.CustomFrames[unitTag] then
@@ -725,7 +731,7 @@ local function CreateCustomFrames()
     -- Create DOT / HOT animations for all attributes bars
     -- We will use this ugly loop over too-many controls, but it will keep things clean and uni-style
     if UF.SV.CustomEnableRegen then
-        for _, baseName in pairs( { 'player', 'reticleover', 'SmallGroup', 'RaidGroup', 'boss', 'AvaPlayerTarget' } ) do
+        for _, baseName in pairs( { "player", "reticleover", "SmallGroup", "RaidGroup", "boss", "AvaPlayerTarget" } ) do
             for i = 0, 24 do
                 local unitTag = (i==0) and baseName or ( baseName .. i )
                 if UF.CustomFrames[unitTag] then
@@ -743,12 +749,14 @@ local function CreateCustomFrames()
 
     -- Create armor stat change UI for player and target
     if UF.SV.PlayerEnableArmor then
-        for _, baseName in pairs( { 'player', 'reticleover', 'boss', 'AvaPlayerTarget' } ) do
+        for _, baseName in pairs( { "player", "reticleover", "boss", "AvaPlayerTarget" } ) do
             for i = 0, 6 do
                 local unitTag = (i==0) and baseName or ( baseName .. i )
                 if UF.CustomFrames[unitTag] then
                     -- Assume that unitTag DO have [POWERTYPE_HEALTH] field
-                    if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {} end
+                    if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then
+                        UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {}
+                    end
                     local backdrop = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
                     UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_ARMOR_RATING] = {
                         ["dec"] = CreateDecreasedArmorOverlay( backdrop, false ),
@@ -761,12 +769,14 @@ local function CreateCustomFrames()
 
     -- Create power stat change UI for player and target
     if UF.SV.PlayerEnableWeaponPower then
-        for _, baseName in pairs( { 'player', 'reticleover', 'boss' } ) do
+        for _, baseName in pairs( { "player", "reticleover", "boss" } ) do
             for i = 0, 6 do
                 local unitTag = (i==0) and baseName or ( baseName .. i )
                 if UF.CustomFrames[unitTag] then
                     -- Assume that unitTag DO have [POWERTYPE_HEALTH] field
-                    if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {} end
+                    if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then
+                        UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {}
+                    end
                     local backdrop = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
                     UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_WEAPON_POWER] = {
                         ["single"] = UI.Texture( backdrop, {CENTER,CENTER,-13,0}, {24,24}, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increaseweaponpower.dds", 2, true ),
@@ -777,12 +787,14 @@ local function CreateCustomFrames()
     end
 
     if UF.SV.PlayerEnableSpellPower then
-        for _, baseName in pairs( { 'player', 'reticleover', 'boss' } ) do
+        for _, baseName in pairs( { "player", "reticleover", "boss" } ) do
             for i = 0, 6 do
                 local unitTag = (i==0) and baseName or ( baseName .. i )
                 if UF.CustomFrames[unitTag] then
                     -- Assume that unitTag DO have [POWERTYPE_HEALTH] field
-                    if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {} end
+                    if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then
+                        UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {}
+                    end
                     local backdrop = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
                     UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_SPELL_POWER] = {
                         ["single"] = UI.Texture( backdrop, {CENTER,CENTER,-36,0}, {24,24}, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasespellpower.dds", 2, true ),
@@ -809,9 +821,9 @@ local function CreateCustomFrames()
     UF.CustomFramesApplyFont()
 
     -- Add this top level window to global controls list, so it can be hidden
-    for _, unitTag in pairs( { 'player', 'reticleover', 'SmallGroup1', 'RaidGroup1', 'boss1', 'AvaPlayerTarget' } ) do
+    for _, unitTag in pairs( { "player", "reticleover", "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget" } ) do
         if UF.CustomFrames[unitTag] then
-            LUIE.components[ moduleName .. '_CustomFrame_' .. unitTag ] = UF.CustomFrames[unitTag].tlw
+            LUIE.components[ moduleName .. "_CustomFrame_" .. unitTag ] = UF.CustomFrames[unitTag].tlw
         end
     end
 
@@ -820,13 +832,19 @@ end
 -- Main entry point to this module
 function UF.Initialize( enabled )
     -- Load settings
-    UF.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, 'UnitFrames', UF.D )
+    UF.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "UnitFrames", UF.D )
 
-    if UF.SV.DefaultOocTransparency < 0 or UF.SV.DefaultOocTransparency > 100 then UF.SV.DefaultOocTransparency = UF.D.DefaultOocTransparency end
-    if UF.SV.DefaultIncTransparency < 0 or UF.SV.DefaultIncTransparency > 100 then UF.SV.DefaultIncTransparency = UF.D.DefaultIncTransparency end
+    if UF.SV.DefaultOocTransparency < 0 or UF.SV.DefaultOocTransparency > 100 then
+        UF.SV.DefaultOocTransparency = UF.D.DefaultOocTransparency
+    end
+    if UF.SV.DefaultIncTransparency < 0 or UF.SV.DefaultIncTransparency > 100 then
+        UF.SV.DefaultIncTransparency = UF.D.DefaultIncTransparency
+    end
 
     -- If User does not want the InfoPanel then exit right here
-    if not enabled then return end
+    if not enabled then
+        return
+    end
     UF.Enabled = true
 
     -- Even if used do not want to use neither DefaultFrames nor CustomFrames, let us still create tables to hold health and shield values
@@ -835,14 +853,14 @@ function UF.Initialize( enabled )
     g_savedHealth.controlledsiege = {1,1,1,0}
     g_savedHealth.reticleover   = {1,1,1,0}
     for i = 1, 24 do
-        g_savedHealth['group' .. i] = {1,1,1,0}
+        g_savedHealth["group" .. i] = {1,1,1,0}
     end
     for i = 1, 6 do
-        g_savedHealth['boss' .. i] = {1,1,1,0}
+        g_savedHealth["boss" .. i] = {1,1,1,0}
     end
 
     -- Query for player alliance for future use
-    g_playerAlliance = GetUnitAlliance( 'player' )
+    g_playerAlliance = GetUnitAlliance( "player" )
 
     -- For Sorcerer players we will change Target label colour on 20% instead of 25%
     g_targetThreshold = UF.SV.ExecutePercentage
@@ -949,7 +967,7 @@ function UF.SetDefaultFramesTransparency(min_pct_value, max_pct_value)
     ZO_PlayerAttributeMagicka.playerAttributeBarObject.timeline:GetAnimation():SetAlphaValues(min_value, max_value)
     ZO_PlayerAttributeStamina.playerAttributeBarObject.timeline:GetAnimation():SetAlphaValues(min_value, max_value)
 
-    local inCombat = IsUnitInCombat('player')
+    local inCombat = IsUnitInCombat("player")
     ZO_PlayerAttributeHealth:SetAlpha(inCombat and max_value or min_value)
     ZO_PlayerAttributeStamina:SetAlpha(inCombat and max_value or min_value)
     ZO_PlayerAttributeMagicka:SetAlpha(inCombat and max_value or min_value)
@@ -963,7 +981,9 @@ function UF.TargetColourByReaction(value)
         UF.SV.TargetColourByReaction = value
     end
     -- if this Target name colouring is not required, revert it back to white
-    if not value then g_defaultTargetNameLabel:SetColor(1,1,1,1) end
+    if not value then
+        g_defaultTargetNameLabel:SetColor(1,1,1,1)
+    end
 end
 
 -- Update selection for target name colouring
@@ -972,20 +992,26 @@ function UF.ReticleColourByReaction(value)
         UF.SV.ReticleColourByReaction = value
     end
     -- if this Reticle colouring is not required, revert it back to white
-    if not value then ZO_ReticleContainerReticle:SetColor(1, 1, 1) end
+    if not value then
+        ZO_ReticleContainerReticle:SetColor(1, 1, 1)
+    end
 end
 
 -- Update format for labels on CustomFrames
 function UF.CustomFramesFormatLabels()
     -- search CustomFrames for attribute bars with correct labels
-    for _, baseName in pairs( { 'player', 'reticleover', 'SmallGroup' } ) do
+    for _, baseName in pairs( { "player", "reticleover", "SmallGroup" } ) do
         for i = 0, 4 do
             local unitTag = (i==0) and baseName or ( baseName .. i )
             if UF.CustomFrames[unitTag] then
                 for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
                     if UF.CustomFrames[unitTag][powerType] then
-                        if UF.CustomFrames[unitTag][powerType].labelOne then UF.CustomFrames[unitTag][powerType].labelOne.fmt = UF.SV.CustomFormatOne end
-                        if UF.CustomFrames[unitTag][powerType].labelTwo then UF.CustomFrames[unitTag][powerType].labelTwo.fmt = UF.SV.CustomFormatTwo end
+                        if UF.CustomFrames[unitTag][powerType].labelOne then
+                            UF.CustomFrames[unitTag][powerType].labelOne.fmt = UF.SV.CustomFormatOne
+                        end
+                        if UF.CustomFrames[unitTag][powerType].labelTwo then
+                            UF.CustomFrames[unitTag][powerType].labelTwo.fmt = UF.SV.CustomFormatTwo
+                        end
                     end
                 end
             end
@@ -1005,7 +1031,7 @@ function UF.OnPlayerActivated(eventCode)
     -- Create UI elements for default group members frames
     if g_DefaultFrames.SmallGroup then
         for i = 1, 24 do
-            local unitTag = 'group' .. i
+            local unitTag = "group" .. i
             if DoesUnitExist(unitTag) then
                 UF.DefaultFramesCreateUnitGroupControls(unitTag)
             end
@@ -1019,7 +1045,7 @@ function UF.OnPlayerActivated(eventCode)
     -- Else we need to manually scan and update DefaultFrames
     elseif g_DefaultFrames.SmallGroup then
         for i = 1, 24 do
-            local unitTag = 'group' .. i
+            local unitTag = "group" .. i
             if DoesUnitExist(unitTag) then
                 UF.ReloadValues(unitTag)
             end
@@ -1044,28 +1070,34 @@ function UF.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue,
 
     --[[ DEBUG code. Normally should be commented out because it is redundant
     if g_DefaultFrames[unitTag] and g_DefaultFrames[unitTag].unitTag ~= unitTag then
-        CHAT_SYSTEM:AddMessage('LUIE_DBG DF: ' .. tostring(g_DefaultFrames[unitTag].unitTag) .. ' ~= ' .. tostring(unitTag) )
+        d("LUIE_DBG DF: " .. tostring(g_DefaultFrames[unitTag].unitTag) .. " ~= " .. tostring(unitTag) )
     end
     if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag].unitTag ~= unitTag then
-        CHAT_SYSTEM:AddMessage('LUIE_DBG CF: ' .. tostring(UF.CustomFrames[unitTag].unitTag) .. ' ~= ' .. tostring(unitTag) )
+        d("LUIE_DBG CF: " .. tostring(UF.CustomFrames[unitTag].unitTag) .. " ~= " .. tostring(unitTag) )
     end
     if g_AvaCustFrames[unitTag] and g_AvaCustFrames[unitTag].unitTag ~= unitTag then
-        CHAT_SYSTEM:AddMessage('LUIE_DBG AF: ' .. tostring(g_AvaCustFrames[unitTag].unitTag) .. ' ~= ' .. tostring(unitTag) )
+        d("LUIE_DBG AF: " .. tostring(g_AvaCustFrames[unitTag].unitTag) .. " ~= " .. tostring(unitTag) )
     end --]]
 
     -- Update frames ( if we manually not forbade it )
-    if g_DefaultFrames[unitTag] then UF.UpdateAttribute( g_DefaultFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == POWERTYPE_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil ) end
-    if UF.CustomFrames[unitTag] then UF.UpdateAttribute( UF.CustomFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == POWERTYPE_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil ) end
-    if g_AvaCustFrames[unitTag] then UF.UpdateAttribute( g_AvaCustFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == POWERTYPE_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil ) end
+    if g_DefaultFrames[unitTag] then
+        UF.UpdateAttribute( g_DefaultFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == POWERTYPE_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil )
+    end
+    if UF.CustomFrames[unitTag] then
+        UF.UpdateAttribute( UF.CustomFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == POWERTYPE_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil )
+    end
+    if g_AvaCustFrames[unitTag] then
+        UF.UpdateAttribute( g_AvaCustFrames[unitTag][powerType], powerValue, powerEffectiveMax, (powerType == POWERTYPE_HEALTH) and g_savedHealth[unitTag][4] or nil, eventCode == nil )
+    end
 
     -- Record state of power loss to change transparency of player frame
-    if unitTag == 'player' and ( powerType == POWERTYPE_HEALTH or powerType == POWERTYPE_MAGICKA or powerType == POWERTYPE_STAMINA or powerType == POWERTYPE_MOUNT_STAMINA ) then
+    if unitTag == "player" and ( powerType == POWERTYPE_HEALTH or powerType == POWERTYPE_MAGICKA or powerType == POWERTYPE_STAMINA or powerType == POWERTYPE_MOUNT_STAMINA ) then
         g_statFull[powerType] = ( powerValue == powerEffectiveMax )
         UF.CustomFramesApplyInCombat()
     end
 
     -- If players powerValue is zero, issue new blinking event on Custom Frames
-    if unitTag == 'player' and powerValue == 0 then
+    if unitTag == "player" and powerValue == 0 then
         -- Sometimes when werewolf power goes to zero the EVENT_WEREWOLF_STATE_CHANGED is not always issued. Thus try to track it manually.
         if powerType == POWERTYPE_WEREWOLF then
             if UF.CustomFrames.player and UF.CustomFrames.player[POWERTYPE_WEREWOLF] then
@@ -1079,7 +1111,7 @@ function UF.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue,
     end
 
     -- Display skull icon for alive execute-level targets
-    if unitTag == 'reticleover' and
+    if unitTag == "reticleover" and
         powerType == POWERTYPE_HEALTH and
         UF.CustomFrames.reticleover and
         UF.CustomFrames.reticleover.hostile then
@@ -1097,7 +1129,7 @@ end
 -- Runs on the EVENT_UNIT_CREATED listener.
 -- Used to create DefaultFrames UI controls and request delayed CustomFrames group frame update
 function UF.OnUnitCreated(eventCode, unitTag)
-    --d( strformat('[%s] OnUnitCreated: %s (%s)', GetTimeString(), unitTag, GetUnitName(unitTag)) )
+    --d( strformat("[%s] OnUnitCreated: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
 
     -- Create on-fly UI controls for default UI group member and reread his values
     if g_DefaultFrames.SmallGroup then
@@ -1127,7 +1159,7 @@ end
 -- Runs on the EVENT_UNIT_DESTROYED listener.
 -- Used to request delayed CustomFrames group frame update
 function UF.OnUnitDestroyed(eventCode, unitTag)
-    --d( strformat('[%s] OnUnitDestroyed: %s (%s)', GetTimeString(), unitTag, GetUnitName(unitTag)) )
+    --d( strformat("[%s] OnUnitDestroyed: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
 
     -- Make sure we do not try to update bars on this unitTag before full group update is complete
     if "group" == string.sub(unitTag, 0, 5) then
@@ -1147,9 +1179,9 @@ function UF.DefaultFramesCreateUnitGroupControls(unitTag)
     if g_DefaultFrames[unitTag] == nil then -- If unitTag is already in our list, then skip this
         if "group" == string.sub(unitTag, 0, 5) then -- If it is really a group member unitTag
             local i = string.sub(unitTag, 6)
-            if _G['ZO_GroupUnitFramegroup' .. i] then
-                local parentBar     = _G['ZO_GroupUnitFramegroup' .. i .. 'Hp']
-                local parentName    = _G['ZO_GroupUnitFramegroup' .. i .. 'Name']
+            if _G["ZO_GroupUnitFramegroup" .. i] then
+                local parentBar     = _G["ZO_GroupUnitFramegroup" .. i .. "Hp"]
+                local parentName    = _G["ZO_GroupUnitFramegroup" .. i .. "Name"]
                 -- Prepare dimension of regen bar
                 local width, height = parentBar:GetDimensions()
                 -- Populate UI elements
@@ -1207,7 +1239,9 @@ end
 -- This handler fires every time the someone target changes.
 -- This function is needed in case the player teleports via Way Shrine
 function UF.OnTargetChange(eventCode, unitTag)
-    if unitTag ~= "player" then return end
+    if unitTag ~= "player" then
+        return
+    end
     UF.OnReticleTargetChanged(eventCode)
 end
 
@@ -1215,17 +1249,17 @@ end
 -- This handler fires every time the player's reticle target changes.
 -- Used to read initial values of target's health and shield.
 function UF.OnReticleTargetChanged(eventCode)
-    if DoesUnitExist('reticleover') then
+    if DoesUnitExist("reticleover") then
 
-        UF.ReloadValues( 'reticleover' )
+        UF.ReloadValues( "reticleover" )
 
-        local isWithinRange = IsUnitInGroupSupportRange('reticleover')
+        local isWithinRange = IsUnitInGroupSupportRange("reticleover")
 
         -- Now select appropriate custom colour to target name and (possibly) reticle
         local colour, reticle_colour
         local interactableCheck = false
-        local reactionType = GetUnitReaction('reticleover')
-        local attackable = IsUnitAttackable('reticleover')
+        local reactionType = GetUnitReaction("reticleover")
+        local attackable = IsUnitAttackable("reticleover")
         -- Select colour accordingly to reactionType, attackable and interactable
         if reactionType == UNIT_REACTION_HOSTILE then
             colour = UF.SV.Target_FontColour_Hostile
@@ -1262,8 +1296,12 @@ function UF.OnReticleTargetChanged(eventCode)
         end
 
         -- Update colour of default target if requested
-        if UF.SV.TargetColourByReaction then g_defaultTargetNameLabel:SetColor( colour[1], colour[2], colour[3], isWithinRange and 1 or 0.5 ) end
-        if UF.SV.ReticleColourByReaction then ZO_ReticleContainerReticle:SetColor(reticle_colour[1], reticle_colour[2], reticle_colour[3] ) end
+        if UF.SV.TargetColourByReaction then
+            g_defaultTargetNameLabel:SetColor( colour[1], colour[2], colour[3], isWithinRange and 1 or 0.5 )
+        end
+        if UF.SV.ReticleColourByReaction then
+            ZO_ReticleContainerReticle:SetColor(reticle_colour[1], reticle_colour[2], reticle_colour[3] )
+        end
 
         -- And colour of custom target name always. Also change 'labelOne' for critters
         if UF.CustomFrames.reticleover then
@@ -1280,7 +1318,7 @@ function UF.OnReticleTargetChanged(eventCode)
         end
         -- Unhide second target frame only for player enemies
         if UF.CustomFrames.AvaPlayerTarget then
-            UF.CustomFrames.AvaPlayerTarget.control:SetHidden( not ( UF.CustomFrames.AvaPlayerTarget.isPlayer and (reactionType == UNIT_REACTION_HOSTILE) and not IsUnitDead('reticleover') ) )
+            UF.CustomFrames.AvaPlayerTarget.control:SetHidden( not ( UF.CustomFrames.AvaPlayerTarget.isPlayer and (reactionType == UNIT_REACTION_HOSTILE) and not IsUnitDead("reticleover") ) )
         end
 
         -- Update position of default target class icon
@@ -1325,8 +1363,9 @@ function UF.OnReticleTargetChanged(eventCode)
         end
 
         -- Revert back the colour of reticle to white
-        if UF.SV.ReticleColourByReaction then ZO_ReticleContainerReticle:SetColor(1, 1, 1) end
-
+        if UF.SV.ReticleColourByReaction then
+            ZO_ReticleContainerReticle:SetColor(1, 1, 1)
+        end
     end
 
     -- Finally if user does not want to have default target frame we have to hide it here all the time
@@ -1338,7 +1377,7 @@ end
 -- Runs on the EVENT_DISPOSITION_UPDATE listener.
 -- Used to reread parameters of the target
 function UF.OnDispositionUpdate(eventCode, unitTag)
-    if unitTag == 'reticleover' then
+    if unitTag == "reticleover" then
         UF.OnReticleTargetChanged(eventCode)
     end
 end
@@ -1348,9 +1387,27 @@ function UF.ReloadValues( unitTag )
 
     -- Build list of powerTypes this unitTag has in both DefaultFrames and CustomFrames
     local powerTypes = {}
-    if g_DefaultFrames[unitTag] then for powerType,_ in pairs( g_DefaultFrames[unitTag] ) do if type(powerType) == "number" then powerTypes[powerType] = true end end end
-    if UF.CustomFrames[unitTag] then for powerType,_ in pairs( UF.CustomFrames[unitTag] ) do if type(powerType) == "number" then powerTypes[powerType] = true end end end
-    if g_AvaCustFrames[unitTag] then for powerType,_ in pairs( g_AvaCustFrames[unitTag] ) do if type(powerType) == "number" then powerTypes[powerType] = true end end end
+    if g_DefaultFrames[unitTag] then
+        for powerType,_ in pairs( g_DefaultFrames[unitTag] ) do
+            if type(powerType) == "number" then
+                powerTypes[powerType] = true
+            end
+        end
+    end
+    if UF.CustomFrames[unitTag] then
+        for powerType,_ in pairs( UF.CustomFrames[unitTag] ) do
+            if type(powerType) == "number" then
+                powerTypes[powerType] = true
+            end
+        end
+    end
+    if g_AvaCustFrames[unitTag] then
+        for powerType,_ in pairs( g_AvaCustFrames[unitTag] ) do
+            if type(powerType) == "number" then
+                powerTypes[powerType] = true
+            end
+        end
+    end
 
     -- For all attributes query its value and force updating
     for powerType,_ in pairs(powerTypes) do
@@ -1374,7 +1431,7 @@ function UF.ReloadValues( unitTag )
     UF.UpdateStat(unitTag, STAT_WEAPON_POWER,        ATTRIBUTE_HEALTH, POWERTYPE_HEALTH)
     UF.UpdateStat(unitTag, STAT_SPELL_POWER, ATTRIBUTE_HEALTH, POWERTYPE_HEALTH)
 
-    if unitTag == 'player' then
+    if unitTag == "player" then
         g_statFull[POWERTYPE_HEALTH] = ( g_savedHealth.player[1] == g_savedHealth.player[3] )
         UF.CustomFramesApplyInCombat()
     end
@@ -1397,7 +1454,9 @@ local HIDE_LEVEL_TYPES = {
 
 -- Updates text labels, classIcon, etc
 function UF.UpdateStaticControls( unitFrame )
-    if unitFrame == nil then return end
+    if unitFrame == nil then
+        return
+    end
 
     unitFrame.isPlayer  = IsUnitPlayer( unitFrame.unitTag )
     unitFrame.isChampion = IsUnitChampion( unitFrame.unitTag )
@@ -1418,7 +1477,7 @@ function UF.UpdateStaticControls( unitFrame )
         elseif unitDifficulty >= 3 then
             unitFrame.classIcon:SetTexture("LuiExtended/media/unitframes/unitframes_level_elite.dds")
         end
-        if unitFrame.unitTag == 'player' then
+        if unitFrame.unitTag == "player" then
             unitFrame.classIcon:SetHidden( not UF.SV.PlayerEnableYourname )
         else
             unitFrame.classIcon:SetHidden( not showClass )
@@ -1432,7 +1491,7 @@ function UF.UpdateStaticControls( unitFrame )
             unitFrame.className:SetText( className:gsub("%^%a+","") )
         end
         -- this condition is somehow extra, but let keep it to be in consistency with all others
-        if unitFrame.unitTag == 'player' then
+        if unitFrame.unitTag == "player" then
             unitFrame.className:SetHidden( not UF.SV.PlayerEnableYourname )
         else
             unitFrame.className:SetHidden( not showClass )
@@ -1455,7 +1514,7 @@ function UF.UpdateStaticControls( unitFrame )
     -- If unitFrame has unit name label control
     if unitFrame.name ~= nil then
         -- Update max width of label
-        local playerName = zo_strformat(SI_UNIT_NAME, GetUnitName('player'))
+        local playerName = zo_strformat(SI_UNIT_NAME, GetUnitName("player"))
         if unitFrame.name:GetParent() == unitFrame.topInfo then
             local width = unitFrame.topInfo:GetWidth()
             if unitFrame.classIcon and not unitFrame.classIcon:IsHidden() then
@@ -1489,7 +1548,7 @@ function UF.UpdateStaticControls( unitFrame )
             -- Level label should be already anchored
             unitFrame.level:SetText( tostring( unitFrame.isChampion and GetUnitChampionPoints( unitFrame.unitTag ) or GetUnitLevel( unitFrame.unitTag ) ) )
         end
-        if unitFrame.unitTag == 'player' then
+        if unitFrame.unitTag == "player" then
             unitFrame.levelIcon:SetHidden( not UF.SV.PlayerEnableYourname )
             unitFrame.level:SetHidden( not UF.SV.PlayerEnableYourname )
         else
@@ -1503,9 +1562,9 @@ function UF.UpdateStaticControls( unitFrame )
         local title = GetUnitCaption(unitFrame.unitTag)
         if unitFrame.isPlayer then
             title = GetUnitTitle(unitFrame.unitTag)
-            title = (title ~= '') and title or GetAvARankName( GetUnitGender(unitFrame.unitTag) , unitFrame.avaRankValue )
+            title = (title ~= "") and title or GetAvARankName( GetUnitGender(unitFrame.unitTag) , unitFrame.avaRankValue )
         end
-        title = title or ''
+        title = title or ""
         unitFrame.title:SetText( title:gsub("%^%a+","") )
     end
 
@@ -1560,7 +1619,9 @@ end
 -- Updates single attribute.
 -- Usually called from OnPowerUpdate handler.
 function UF.UpdateAttribute( attributeFrame, powerValue, powerEffectiveMax, shield, forceInit )
-    if attributeFrame == nil then return end
+    if attributeFrame == nil then
+        return
+    end
 
     local pct = math.floor(100*powerValue/powerEffectiveMax)
 
@@ -1601,7 +1662,7 @@ end
 -- Called from EVENT_UNIT_ATTRIBUTE_VISUAL_* listeners.
 function UF.UpdateShield( unitTag, value, maxValue )
     if g_savedHealth[unitTag] == nil then
-        --d( 'LUIE DEBUG: Stored health is nil: ', unitTag )
+        --d( "LUIE DEBUG: Stored health is nil: ", unitTag )
         return
     end
 
@@ -1625,7 +1686,9 @@ end
 
 -- Here actual update of shield bar on attribute is done
 function UF.UpdateShieldBar( attributeFrame, shieldValue, healthEffectiveMax)
-    if attributeFrame == nil or attributeFrame.shield == nil then return end
+    if attributeFrame == nil or attributeFrame.shield == nil then
+        return
+    end
 
     local hideShield = not (shieldValue > 0)
 
@@ -1642,7 +1705,9 @@ function UF.UpdateShieldBar( attributeFrame, shieldValue, healthEffectiveMax)
     end
 
     attributeFrame.shield:SetHidden(hideShield)
-    if attributeFrame.shieldbackdrop then attributeFrame.shieldbackdrop:SetHidden(hideShield) end
+    if attributeFrame.shieldbackdrop then
+        attributeFrame.shieldbackdrop:SetHidden(hideShield)
+    end
 end
 
 -- Reroutes call for regen/degen animation for given unit.
@@ -1669,7 +1734,9 @@ end
 
 -- Performs actual display of animation control if any
 function UF.DisplayRegen( control, isShown )
-    if control == nil then return end
+    if control == nil then
+        return
+    end
 
     control:SetHidden( not isShown )
     if isShown then
@@ -1702,8 +1769,12 @@ function UF.UpdateStat(unitTag, statType, attributeType, powerType )
 
         for _, control in pairs(statControls) do
             -- Hide proper controls if they exist
-            if control.dec then control.dec:SetHidden( value >= 0 ) end
-            if control.inc then control.inc:SetHidden( value <= 0 ) end
+            if control.dec then
+                control.dec:SetHidden( value >= 0 )
+            end
+            if control.inc then
+                control.inc:SetHidden( value <= 0 )
+            end
             if control.single then
                 control.single:SetHidden( value == 0 )
                 control.single:SetColor( unpack( value < 0 and {1,0,0,0.7} or {0,1,0,0.7} ) )
@@ -1721,7 +1792,7 @@ function UF.OnLevelUpdate(eventCode, unitTag, level)
     UF.UpdateStaticControls( g_AvaCustFrames[unitTag] )
 
     -- For Custom Player Frame we have to setup experience bar
-    if unitTag == 'player' and UF.CustomFrames.player and UF.CustomFrames.player.Experience then
+    if unitTag == "player" and UF.CustomFrames.player and UF.CustomFrames.player.Experience then
         UF.CustomFramesSetupAlternative( false, false, false )
     end
 end
@@ -1750,7 +1821,9 @@ end
 
 -- Runs on the EVENT_EXPERIENCE_UPDATE listener.
 function UF.OnXPUpdate( eventCode, unitTag, currentExp, maxExp, reason )
-    if unitTag ~= 'player' or not UF.CustomFrames.player then return end
+    if unitTag ~= "player" or not UF.CustomFrames.player then
+        return
+    end
 
     if UF.CustomFrames.player.isChampion then
         -- query for Veteran and Champion XP not more then once every 5 seconds
@@ -1770,7 +1843,7 @@ function UF.UpdateVeteranXP()
 
     if UF.CustomFrames.player then
         if UF.CustomFrames.player.Experience then
-            UF.CustomFrames.player.Experience.bar:SetValue( GetUnitChampionPoints('player') )
+            UF.CustomFrames.player.Experience.bar:SetValue( GetUnitChampionPoints("player") )
         elseif UF.CustomFrames.player.ChampionXP then
             UF.CustomFrames.player.ChampionXP.bar:SetValue( GetPlayerChampionXP() )
         end
@@ -1789,7 +1862,7 @@ end
 
 -- Runs on the EVENT_GROUP_MEMBER_CONNECTED_STATUS listener.
 function UF.OnGroupMemberConnectedStatus(eventCode, unitTag, isOnline)
-    --CHAT_SYSTEM:AddMessage( strformat('DC: %s - %s', unitTag, isOnline and 'Online' or 'Offline' ) )
+    --d( strformat("DC: %s - %s", unitTag, isOnline and "Online" or "Offline" ) )
     if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag].dead then
         UF.CustomFramesSetDeadLabel( UF.CustomFrames[unitTag], isOnline and nil or strOffline )
     end
@@ -1798,7 +1871,7 @@ end
 -- Runs on the EVENT_UNIT_DEATH_STATE_CHANGED listener.
 -- This handler fires every time a valid unitTag dies or is resurrected
 function UF.OnDeath(eventCode, unitTag, isDead)
-    --d( strformat('%s - %s', unitTag, isDead and 'Dead' or 'Alive' ) )
+    --d( strformat("%s - %s", unitTag, isDead and "Dead" or "Alive" ) )
     if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag].dead then
         UF.CustomFramesSetDeadLabel( UF.CustomFrames[unitTag], isDead and strDead or nil )
     end
@@ -1812,9 +1885,15 @@ function UF.OnDeath(eventCode, unitTag, isDead)
         -- 2. Stats
         if thb.stat then
             for _, statControls in pairs( thb.stat ) do
-                if statControls.dec then statControls.dec:SetHidden( true ) end
-                if statControls.inc then statControls.inc:SetHidden( true ) end
-                if statControls.single then statControls.single:SetHidden( true ) end
+                if statControls.dec then
+                    statControls.dec:SetHidden( true )
+                end
+                if statControls.inc then
+                    statControls.inc:SetHidden( true )
+                end
+                if statControls.single then
+                    statControls.single:SetHidden( true )
+                end
             end
         end
     end
@@ -1868,12 +1947,20 @@ end
 -- Werewolf -> Siege -> Mount -> ChampionXP / Experience
 local XP_BAR_COLOURS = ZO_XP_BAR_GRADIENT_COLORS[2]
 function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
-    if not UF.CustomFrames.player then return end
+    if not UF.CustomFrames.player then
+        return
+    end
 
     -- If any of input parameters are nil, we need to query them
-    if isWerewolf == nil then isWerewolf = IsWerewolf() end
-    if isSiege == nil then isSiege = ( IsPlayerControllingSiegeWeapon() or IsPlayerEscortingRam() ) end
-    if isMounted == nil then isMounted = IsMounted() end
+    if isWerewolf == nil then
+        isWerewolf = IsWerewolf()
+    end
+    if isSiege == nil then
+        isSiege = ( IsPlayerControllingSiegeWeapon() or IsPlayerEscortingRam() )
+    end
+    if isMounted == nil then
+        isMounted = IsMounted()
+    end
 
     local center, colour, icon
     local hidden = false
@@ -1889,7 +1976,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.ChampionXP = nil
         UF.CustomFrames.player.Experience = nil
 
-        UF.OnPowerUpdate(nil, 'player', nil, POWERTYPE_WEREWOLF, GetUnitPower('player', POWERTYPE_WEREWOLF))
+        UF.OnPowerUpdate(nil, "player", nil, POWERTYPE_WEREWOLF, GetUnitPower("player", POWERTYPE_WEREWOLF))
 
     elseif UF.SV.PlayerEnableAltbarMSW and isSiege then
         icon    = "LuiExtended/media/unitframes/unitframes_bar_siege.dds"
@@ -1902,7 +1989,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.ChampionXP = nil
         UF.CustomFrames.player.Experience = nil
 
-        UF.OnPowerUpdate(nil, 'controlledsiege', nil, POWERTYPE_HEALTH, GetUnitPower('controlledsiege', POWERTYPE_HEALTH))
+        UF.OnPowerUpdate(nil, "controlledsiege", nil, POWERTYPE_HEALTH, GetUnitPower("controlledsiege", POWERTYPE_HEALTH))
 
     elseif UF.SV.PlayerEnableAltbarMSW and isMounted then
         icon    = "LuiExtended/media/unitframes/unitframes_bar_mount.dds"
@@ -1915,7 +2002,7 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.ChampionXP = nil
         UF.CustomFrames.player.Experience = nil
 
-        UF.OnPowerUpdate(nil, 'player', nil, POWERTYPE_MOUNT_STAMINA, GetUnitPower('player', POWERTYPE_MOUNT_STAMINA))
+        UF.OnPowerUpdate(nil, "player", nil, POWERTYPE_MOUNT_STAMINA, GetUnitPower("player", POWERTYPE_MOUNT_STAMINA))
 
     elseif UF.SV.PlayerEnableAltbarXP and ( UF.CustomFrames.player.isLevelCap or ( UF.CustomFrames.player.isChampion )) then
         UF.CustomFrames.player[POWERTYPE_WEREWOLF] = nil
@@ -1940,8 +2027,8 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.ChampionXP = nil
         UF.CustomFrames.player.Experience = UF.CustomFrames.player.alternative
 
-        UF.CustomFrames.player.Experience.bar:SetMinMax( 0 , UF.CustomFrames.player.isChampion and GetNumChampionXPInChampionPoint('player')  or GetUnitXPMax('player') )
-        UF.CustomFrames.player.Experience.bar:SetValue( UF.CustomFrames.player.isChampion and GetPlayerChampionXP() or GetUnitXP('player') )
+        UF.CustomFrames.player.Experience.bar:SetMinMax( 0 , UF.CustomFrames.player.isChampion and GetNumChampionXPInChampionPoint("player")  or GetUnitXPMax("player") )
+        UF.CustomFrames.player.Experience.bar:SetValue( UF.CustomFrames.player.isChampion and GetPlayerChampionXP() or GetUnitXP("player") )
 
     -- Otherwise bar should be hidden and no tracking be done
     else
@@ -1955,9 +2042,15 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
     end
 
     -- Setup of bar colours and icon
-    if center then UF.CustomFrames.player.alternative.backdrop:SetCenterColor( unpack(center) ) end
-    if colour then UF.CustomFrames.player.alternative.bar:SetColor( unpack(colour) ) end
-    if icon then UF.CustomFrames.player.alternative.icon:SetTexture( icon ) end
+    if center then
+        UF.CustomFrames.player.alternative.backdrop:SetCenterColor( unpack(center) )
+    end
+    if colour then
+        UF.CustomFrames.player.alternative.bar:SetColor( unpack(colour) )
+    end
+    if icon then
+        UF.CustomFrames.player.alternative.icon:SetTexture( icon )
+    end
 
     -- Hide bar and reanchor buffs
     UF.CustomFrames.player.botInfo:SetHidden( hidden )
@@ -1996,7 +2089,9 @@ function UF.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         and UF.CustomFrames.player[powerType] ~= nil
         and UF.CustomFrames.player[powerType].backdrop ~= nil then
 
-        if g_powerError[powerType] then return end
+        if g_powerError[powerType] then
+            return
+        end
 
         g_powerError[powerType] = true
         -- Save original center colour and colour to red
@@ -2005,7 +2100,7 @@ function UF.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         backdrop:SetCenterColor( 0.4, 0, 0, 0.9 )
 
         -- Make a delayed call to return original colour
-        local uniqueId = moduleName .. '_powerError_' .. powerType
+        local uniqueId = moduleName .. "_powerError_" .. powerType
         local firstRun = true
 
         EVENT_MANAGER:RegisterForUpdate(uniqueId, 300, function()
@@ -2030,19 +2125,37 @@ function UF.CustomFramesSetDeadLabel( unitFrame, newValue )
 
     if newValue == "Offline" then
         classIcon = classIcons[0]
-        if unitFrame.level ~= nil then unitFrame.level:SetHidden( newValue ~= "Dead" or newValue ~= nil ) end
-        if unitFrame.levelIcon ~= nil then unitFrame.levelIcon:SetHidden( newValue ~= "Dead" or newValue ~= nil ) end
-        if unitFrame.friendIcon ~= nil then unitFrame.friendIcon:SetHidden( newValue ~= "Dead" or newValue ~= nil ) end
-        if unitFrame.classIcon ~= nil then unitFrame.classIcon:SetTexture(classIcon) end
+        if unitFrame.level ~= nil then
+            unitFrame.level:SetHidden( newValue ~= "Dead" or newValue ~= nil )
+        end
+        if unitFrame.levelIcon ~= nil then
+            unitFrame.levelIcon:SetHidden( newValue ~= "Dead" or newValue ~= nil )
+        end
+        if unitFrame.friendIcon ~= nil then
+            unitFrame.friendIcon:SetHidden( newValue ~= "Dead" or newValue ~= nil )
+        end
+        if unitFrame.classIcon ~= nil then
+            unitFrame.classIcon:SetTexture(classIcon)
+        end
     end
 
     if unitFrame[POWERTYPE_HEALTH] then
-        if unitFrame[POWERTYPE_HEALTH].bar ~= nil then unitFrame[POWERTYPE_HEALTH].bar:SetHidden( newValue ~= nil ) end
-        if unitFrame[POWERTYPE_HEALTH].label ~= nil then unitFrame[POWERTYPE_HEALTH].label:SetHidden( newValue ~= nil ) end
-        if unitFrame[POWERTYPE_HEALTH].labelOne ~= nil then unitFrame[POWERTYPE_HEALTH].labelOne:SetHidden( newValue ~= nil ) end
-        if unitFrame[POWERTYPE_HEALTH].labelTwo ~= nil then unitFrame[POWERTYPE_HEALTH].labelTwo:SetHidden( newValue ~= nil ) end
+        if unitFrame[POWERTYPE_HEALTH].bar ~= nil then
+            unitFrame[POWERTYPE_HEALTH].bar:SetHidden( newValue ~= nil )
+        end
+        if unitFrame[POWERTYPE_HEALTH].label ~= nil then
+            unitFrame[POWERTYPE_HEALTH].label:SetHidden( newValue ~= nil )
+        end
+        if unitFrame[POWERTYPE_HEALTH].labelOne ~= nil then
+            unitFrame[POWERTYPE_HEALTH].labelOne:SetHidden( newValue ~= nil )
+        end
+        if unitFrame[POWERTYPE_HEALTH].labelTwo ~= nil then
+            unitFrame[POWERTYPE_HEALTH].labelTwo:SetHidden( newValue ~= nil )
+        end
     end
-    if unitFrame.stealth ~= nil then unitFrame.stealth:SetHidden( newValue ~= nil ) end
+    if unitFrame.stealth ~= nil then
+        unitFrame.stealth:SetHidden( newValue ~= nil )
+    end
 
     -- Finally small check if we want to hide leader icon from control - this is required for RaidGroup
     if GetGroupLeaderUnitTag() == unitFrame.unitTag and unitFrame.leader and unitFrame.leader[6] then
@@ -2052,13 +2165,15 @@ end
 
 -- Repopulate group members, but try to update only those, that require it
 function UF.CustomFramesGroupUpdate()
-    --d( strformat('[%s] GroupUpdate', GetTimeString()) )
+    --d( strformat("[%s] GroupUpdate", GetTimeString()) )
 
     -- Unregister update function and clear local flag
     EVENT_MANAGER:UnregisterForUpdate( g_PendingUpdate.Group.name )
     g_PendingUpdate.Group.flag = false
 
-    if ( UF.CustomFrames.SmallGroup1 == nil and UF.CustomFrames.RaidGroup1 == nil ) then return end
+    if ( UF.CustomFrames.SmallGroup1 == nil and UF.CustomFrames.RaidGroup1 == nil ) then
+        return
+    end
 
     local disableGroup = UF.SV.GroupDisableDefault and (UF.CustomFrames.SmallGroup1 ~= nil)
     local disableRaid = UF.SV.RaidDisableDefault and (UF.CustomFrames.RaidGroup1 ~= nil)
@@ -2076,7 +2191,7 @@ function UF.CustomFramesGroupUpdate()
     -- At the same time we will calculate how many group members we have and then will hide rest of custom control elements
     local n = 0 -- counter used to reference custom frames. it always continuous while games unitTag could have gaps
     for i = 1, 24 do
-        local unitTag = 'group' .. i
+        local unitTag = "group" .. i
         if DoesUnitExist(unitTag) then
             -- Save this member for later sorting
             table.insert(groupList, { ["unitTag"] = unitTag, ["unitName"] = GetUnitName(unitTag) } )
@@ -2094,32 +2209,34 @@ function UF.CustomFramesGroupUpdate()
     -- Now we have to hide all excessive custom group controls
     if n > 4 then
         if UF.CustomFrames.SmallGroup1 then -- Custom group frames cannot be used for large groups
-            UF.CustomFramesUnreferenceGroupControl('SmallGroup', 1)
+            UF.CustomFramesUnreferenceGroupControl("SmallGroup", 1)
         end
         if UF.CustomFrames.RaidGroup1 then -- Real group is large and custom raid frames are enabled
-            UF.CustomFramesUnreferenceGroupControl('RaidGroup', n+1)
+            UF.CustomFramesUnreferenceGroupControl("RaidGroup", n+1)
             raid = true
         end
     else
         if UF.CustomFrames.SmallGroup1 then -- Custom group frames are enabled and used for small group
-            UF.CustomFramesUnreferenceGroupControl('SmallGroup', n+1)
+            UF.CustomFramesUnreferenceGroupControl("SmallGroup", n+1)
             raid = false
             if UF.CustomFrames.RaidGroup1 then -- In this case just hide all raid frames if they are enabled
-                UF.CustomFramesUnreferenceGroupControl('RaidGroup', 1)
+                UF.CustomFramesUnreferenceGroupControl("RaidGroup", 1)
             end
         elseif UF.CustomFrames.RaidGroup1 then -- Fallback option to use custom raid frames for small group
-            UF.CustomFramesUnreferenceGroupControl('RaidGroup', n+1)
+            UF.CustomFramesUnreferenceGroupControl("RaidGroup", n+1)
             raid = true
         end
     end
 
     -- Here we can check unlikely situation when neither custom frames were selected
-    if raid == nil then return end
+    if raid == nil then
+        return
+    end
 
     -- Now for small group we can exclude player from the list
     if raid == false and UF.SV.GroupExcludePlayer then
         for i = 1, #groupList do
-            if AreUnitsEqual( 'player', groupList[i].unitTag ) then
+            if AreUnitsEqual( "player", groupList[i].unitTag ) then
                 -- Dereference game unitTag from CustomFrames table
                 UF.CustomFrames[groupList[i].unitTag] = nil
                 -- Remove element from saved table
@@ -2127,7 +2244,7 @@ function UF.CustomFramesGroupUpdate()
                 -- Also remove last used (not removed on previous step) SmallGroup unitTag
                 -- Variable 'n' is still holding total number of group members
                 -- Thus we need to remove n-th one
-                local unitTag = 'SmallGroup' .. n
+                local unitTag = "SmallGroup" .. n
                 UF.CustomFrames[unitTag].unitTag = nil
                 UF.CustomFrames[unitTag].control:SetHidden( true )
                 break
@@ -2146,11 +2263,13 @@ function UF.CustomFramesGroupUpdate()
     for _, v in ipairs(groupList) do
         -- Increase local counter
         n = n + 1
-        UF.CustomFrames[v.unitTag] = UF.CustomFrames[ (raid and 'RaidGroup' or 'SmallGroup' ) .. n]
+        UF.CustomFrames[v.unitTag] = UF.CustomFrames[ (raid and "RaidGroup" or "SmallGroup" ) .. n]
         UF.CustomFrames[v.unitTag].control:SetHidden( false )
 
         -- For SmallGroup reset topInfo width
-        if not raid then UF.CustomFrames[v.unitTag].topInfo:SetWidth( UF.SV.GroupBarWidth-5 ) end
+        if not raid then
+            UF.CustomFrames[v.unitTag].topInfo:SetWidth( UF.SV.GroupBarWidth-5 )
+        end
 
         UF.CustomFrames[v.unitTag].unitTag = v.unitTag
         UF.ReloadValues(v.unitTag)
@@ -2164,9 +2283,9 @@ end
 -- Helper function to hide and remove unitTag reference from unused group controls
 function UF.CustomFramesUnreferenceGroupControl( groupType, first )
     local last
-    if groupType == 'SmallGroup' then
+    if groupType == "SmallGroup" then
         last = 4
-    elseif groupType == 'RaidGroup' then
+    elseif groupType == "RaidGroup" then
         last = 24
     else return end
 
@@ -2179,10 +2298,12 @@ end
 
 -- Runs EVENT_BOSSES_CHANGED listener
 function UF.OnBossesChanged( eventCode )
-    if not UF.CustomFrames.boss1 then return end
+    if not UF.CustomFrames.boss1 then
+        return
+    end
 
     for i = 1, 6 do
-        local unitTag = 'boss' .. i
+        local unitTag = "boss" .. i
         if DoesUnitExist(unitTag) then
             UF.CustomFrames[unitTag].control:SetHidden(false)
             UF.ReloadValues(unitTag)
@@ -2197,15 +2318,15 @@ end
 function UF.CustomFramesSetPositions()
 
     local default_anchors = {
-        ['player']      = {TOPLEFT,TOPLEFT,468,745},
-        ['reticleover'] = {TOPLEFT,TOPLEFT,1152,745},
-        ['SmallGroup1'] = {TOPLEFT,TOPLEFT,6,208},
-        ['RaidGroup1']  = {TOPLEFT,TOPLEFT,6,330},
-        ['boss1']       = {TOPLEFT,TOPLEFT,1266,228},
-        ['AvaPlayerTarget'] = {TOP,TOP,0,200},
+        ["player"]      = {TOPLEFT,TOPLEFT,468,745},
+        ["reticleover"] = {TOPLEFT,TOPLEFT,1152,745},
+        ["SmallGroup1"] = {TOPLEFT,TOPLEFT,6,208},
+        ["RaidGroup1"]  = {TOPLEFT,TOPLEFT,6,330},
+        ["boss1"]       = {TOPLEFT,TOPLEFT,1266,228},
+        ["AvaPlayerTarget"] = {TOP,TOP,0,200},
     }
 
-    for _, unitTag in pairs( { 'player', 'reticleover', 'SmallGroup1', 'RaidGroup1', 'boss1', 'AvaPlayerTarget' } ) do
+    for _, unitTag in pairs( { "player", "reticleover", "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget" } ) do
         if UF.CustomFrames[unitTag] then
             local savedPos = UF.SV[UF.CustomFrames[unitTag].tlw.customPositionAttr]
             local anchors = ( savedPos ~= nil and #savedPos == 2 ) and { TOPLEFT, TOPLEFT, savedPos[1], savedPos[2] } or default_anchors[unitTag]
@@ -2219,7 +2340,7 @@ end
 
 -- Reset anchors for all top level windows of CustomFrames
 function UF.CustomFramesResetPosition()
-    for _, unitTag in pairs( { 'player', 'reticleover', 'SmallGroup1', 'RaidGroup1', 'boss1', 'AvaPlayerTarget' } ) do
+    for _, unitTag in pairs( { "player", "reticleover", "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget" } ) do
         if UF.CustomFrames[unitTag] then
             UF.SV[UF.CustomFrames[unitTag].tlw.customPositionAttr] = nil
         end
@@ -2233,10 +2354,12 @@ function UF.CustomFramesSetMovingState( state )
     UF.CustomFramesMovingState = state
 
     -- Unlock individual frames
-    for _, unitTag in pairs( { 'player', 'reticleover', 'SmallGroup1', 'RaidGroup1', 'boss1', 'AvaPlayerTarget' } ) do
+    for _, unitTag in pairs( { "player", "reticleover", "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget" } ) do
         if UF.CustomFrames[unitTag] then
             local tlw = UF.CustomFrames[unitTag].tlw
-            if tlw.preview then tlw.preview:SetHidden( not state ) end -- player frame does not have 'preview' control
+            if tlw.preview then
+                tlw.preview:SetHidden( not state ) -- player frame does not have 'preview' control
+            end
             tlw:SetMouseEnabled( state )
             tlw:SetMovable( state )
             tlw:SetHidden( false )
@@ -2282,8 +2405,8 @@ function UF.CustomFramesApplyColours()
     local stamina_bg = { 0.1*UF.SV.CustomColourStamina[1], 0.1*UF.SV.CustomColourStamina[2], 0.1*UF.SV.CustomColourStamina[3], 0.9 }
 
     -- After colour is applied unhide frames, so player can see changes even from menu
-    for _, baseName in pairs( { 'player', 'reticleover', 'SmallGroup', 'RaidGroup', 'boss', 'AvaPlayerTarget' } ) do
-        shield[4] = ( UF.SV.CustomShieldBarSeparate and not ( baseName == 'RaidGroup' or baseName == 'boss' ) ) and 0.9 or 0.5
+    for _, baseName in pairs( { "player", "reticleover", "SmallGroup", "RaidGroup", "boss", "AvaPlayerTarget" } ) do
+        shield[4] = ( UF.SV.CustomShieldBarSeparate and not ( baseName == "RaidGroup" or baseName == "boss" ) ) and 0.9 or 0.5
         for i = 0, 24 do
             local unitTag = (i==0) and baseName or ( baseName .. i )
             if UF.CustomFrames[unitTag] then
@@ -2292,7 +2415,9 @@ function UF.CustomFramesApplyColours()
                 thb.bar:SetColor( unpack(health) )
                 thb.backdrop:SetCenterColor( unpack(health_bg) )
                 thb.shield:SetColor( unpack(shield) )
-                if thb.shieldbackdrop then thb.shieldbackdrop:SetCenterColor( unpack(shield_bg) ) end
+                if thb.shieldbackdrop then
+                    thb.shieldbackdrop:SetCenterColor( unpack(shield_bg) )
+                end
                 if i == 0 or i == 1 then
                     unitFrame.tlw:SetHidden( false )
                 end
@@ -2318,7 +2443,9 @@ function UF.CustomFramesApplyTexture()
     if UF.CustomFrames.player then
         UF.CustomFrames.player[POWERTYPE_HEALTH].backdrop:SetCenterTexture(texture)
         UF.CustomFrames.player[POWERTYPE_HEALTH].bar:SetTexture(texture)
-        if UF.CustomFrames.player[POWERTYPE_HEALTH].shieldbackdrop then UF.CustomFrames.player[POWERTYPE_HEALTH].shieldbackdrop:SetCenterTexture(texture) end
+        if UF.CustomFrames.player[POWERTYPE_HEALTH].shieldbackdrop then
+            UF.CustomFrames.player[POWERTYPE_HEALTH].shieldbackdrop:SetCenterTexture(texture)
+        end
         UF.CustomFrames.player[POWERTYPE_HEALTH].shield:SetTexture(texture)
         UF.CustomFrames.player[POWERTYPE_MAGICKA].backdrop:SetCenterTexture(texture)
         UF.CustomFrames.player[POWERTYPE_MAGICKA].bar:SetTexture(texture)
@@ -2331,30 +2458,36 @@ function UF.CustomFramesApplyTexture()
     if UF.CustomFrames.reticleover then
         UF.CustomFrames.reticleover[POWERTYPE_HEALTH].backdrop:SetCenterTexture(texture)
         UF.CustomFrames.reticleover[POWERTYPE_HEALTH].bar:SetTexture(texture)
-        if UF.CustomFrames.reticleover[POWERTYPE_HEALTH].shieldbackdrop then UF.CustomFrames.reticleover[POWERTYPE_HEALTH].shieldbackdrop:SetCenterTexture(texture) end
+        if UF.CustomFrames.reticleover[POWERTYPE_HEALTH].shieldbackdrop then
+            UF.CustomFrames.reticleover[POWERTYPE_HEALTH].shieldbackdrop:SetCenterTexture(texture)
+        end
         UF.CustomFrames.reticleover[POWERTYPE_HEALTH].shield:SetTexture(texture)
         UF.CustomFrames.reticleover.tlw:SetHidden( false )
     end
     if UF.CustomFrames.AvaPlayerTarget then
         UF.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].backdrop:SetCenterTexture(texture)
         UF.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].bar:SetTexture(texture)
-        if UF.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].shieldbackdrop then UF.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].shieldbackdrop:SetCenterTexture(texture) end
+        if UF.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].shieldbackdrop then
+            UF.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].shieldbackdrop:SetCenterTexture(texture)
+        end
         UF.CustomFrames.AvaPlayerTarget[POWERTYPE_HEALTH].shield:SetTexture(texture)
         UF.CustomFrames.AvaPlayerTarget.tlw:SetHidden( false )
     end
     if UF.CustomFrames.SmallGroup1 then
         for i = 1, 4 do
-            local unitTag = 'SmallGroup' .. i
+            local unitTag = "SmallGroup" .. i
             UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop:SetCenterTexture(texture)
             UF.CustomFrames[unitTag][POWERTYPE_HEALTH].bar:SetTexture(texture)
-            if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].shieldbackdrop then UF.CustomFrames[unitTag][POWERTYPE_HEALTH].shieldbackdrop:SetCenterTexture(texture) end
+            if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].shieldbackdrop then
+                UF.CustomFrames[unitTag][POWERTYPE_HEALTH].shieldbackdrop:SetCenterTexture(texture)
+            end
             UF.CustomFrames[unitTag][POWERTYPE_HEALTH].shield:SetTexture(texture)
         end
         UF.CustomFrames.SmallGroup1.tlw:SetHidden( false )
     end
     if UF.CustomFrames.RaidGroup1 then
         for i = 1, 24 do
-            local unitTag = 'RaidGroup' .. i
+            local unitTag = "RaidGroup" .. i
             UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop:SetCenterTexture(texture)
             UF.CustomFrames[unitTag][POWERTYPE_HEALTH].bar:SetTexture(texture)
             UF.CustomFrames[unitTag][POWERTYPE_HEALTH].shield:SetTexture(texture)
@@ -2363,7 +2496,7 @@ function UF.CustomFramesApplyTexture()
     end
     if UF.CustomFrames.boss1 then
         for i = 1, 6 do
-            local unitTag = 'boss' .. i
+            local unitTag = "boss" .. i
             UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop:SetCenterTexture(texture)
             UF.CustomFrames[unitTag][POWERTYPE_HEALTH].bar:SetTexture(texture)
             UF.CustomFrames[unitTag][POWERTYPE_HEALTH].shield:SetTexture(texture)
@@ -2377,12 +2510,12 @@ function UF.DefaultFramesApplyFont(unitTag)
 
     -- First try selecting font face
     local fontName = LUIE.Fonts[UF.SV.DefaultFontFace]
-    if not fontName or fontName == '' then
-        CHAT_SYSTEM:AddMessage('LUIE_CustomFrames: There was a problem with selecting required font. Falling back to game default.')
+    if not fontName or fontName == "" then
+        d("LUIE_CustomFrames: There was a problem with selecting required font. Falling back to game default.")
         fontName = "$(BOLD_FONT)"
     end
 
-    local fontStyle = ( UF.SV.DefaultFontStyle and UF.SV.DefaultFontStyle ~= '' ) and UF.SV.DefaultFontStyle or 'soft-shadow-thick'
+    local fontStyle = ( UF.SV.DefaultFontStyle and UF.SV.DefaultFontStyle ~= "" ) and UF.SV.DefaultFontStyle or "soft-shadow-thick"
     local fontSize = ( UF.SV.DefaultFontSize and UF.SV.DefaultFontSize > 0 ) and UF.SV.DefaultFontSize or 16
 
     local __applyFont = function(unitTag)
@@ -2390,7 +2523,7 @@ function UF.DefaultFramesApplyFont(unitTag)
             local unitFrame = g_DefaultFrames[unitTag]
             for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
                 if unitFrame[powerType] then
-                    unitFrame[powerType].label:SetFont( strformat( '%s|%d|%s', fontName, fontSize, fontStyle ) )
+                    unitFrame[powerType].label:SetFont( strformat( "%s|%d|%s", fontName, fontSize, fontStyle ) )
                 end
             end
         end
@@ -2441,34 +2574,52 @@ function UF.CustomFramesApplyFont()
 
     -- First try selecting font face
     local fontName = LUIE.Fonts[UF.SV.CustomFontFace]
-    if not fontName or fontName == '' then
-        CHAT_SYSTEM:AddMessage('LUIE_CustomFrames: There was a problem with selecting required font. Falling back to game default.')
+    if not fontName or fontName == "" then
+        CHAT_SYSTEM:AddMessage("LUIE_CustomFrames: There was a problem with selecting required font. Falling back to game default.")
         fontName = "$(MEDIUM_FONT)"
     end
 
-    local fontStyle = ( UF.SV.CustomFontStyle and UF.SV.CustomFontStyle ~= '' ) and UF.SV.CustomFontStyle or 'soft-shadow-thin'
+    local fontStyle = ( UF.SV.CustomFontStyle and UF.SV.CustomFontStyle ~= "" ) and UF.SV.CustomFontStyle or "soft-shadow-thin"
     local sizeCaption = ( UF.SV.CustomFontOther and UF.SV.CustomFontOther > 0 ) and UF.SV.CustomFontOther or 16
     local sizeBars = ( UF.SV.CustomFontBars and UF.SV.CustomFontBars > 0 ) and UF.SV.CustomFontBars or 14
 
-    local __mkFont = function(size) return strformat( '%s|%d|%s', fontName, size, fontStyle ) end
+    local __mkFont = function(size) return strformat( "%s|%d|%s", fontName, size, fontStyle ) end
 
     -- After fonts is applied unhide frames, so player can see changes even from menu
-    for _, baseName in pairs( { 'player', 'reticleover', 'SmallGroup', 'RaidGroup', 'boss', 'AvaPlayerTarget' } ) do
+    for _, baseName in pairs( { "player", "reticleover", "SmallGroup", "RaidGroup", "boss", "AvaPlayerTarget" } ) do
         for i = 0, 24 do
             local unitTag = (i==0) and baseName or ( baseName .. i )
             if UF.CustomFrames[unitTag] then
                 local unitFrame = UF.CustomFrames[unitTag]
-                if unitFrame.name then unitFrame.name:SetFont( __mkFont( (unitFrame.name:GetParent() == unitFrame.topInfo) and sizeCaption or sizeBars ) ) end
-                if unitFrame.level then unitFrame.level:SetFont( __mkFont(sizeCaption) ) end
-                if unitFrame.className then unitFrame.className:SetFont( __mkFont(sizeCaption) ) end
-                if unitFrame.title then unitFrame.title:SetFont( __mkFont(sizeCaption) ) end
-                if unitFrame.avaRank then unitFrame.avaRank:SetFont( __mkFont(sizeCaption) ) end
-                if unitFrame.dead then unitFrame.dead:SetFont( __mkFont(sizeBars) ) end
+                if unitFrame.name then
+                    unitFrame.name:SetFont( __mkFont( (unitFrame.name:GetParent() == unitFrame.topInfo) and sizeCaption or sizeBars ) )
+                end
+                if unitFrame.level then
+                    unitFrame.level:SetFont( __mkFont(sizeCaption) )
+                end
+                if unitFrame.className then
+                    unitFrame.className:SetFont( __mkFont(sizeCaption) )
+                end
+                if unitFrame.title then
+                    unitFrame.title:SetFont( __mkFont(sizeCaption) )
+                end
+                if unitFrame.avaRank then
+                    unitFrame.avaRank:SetFont( __mkFont(sizeCaption) )
+                end
+                if unitFrame.dead then
+                    unitFrame.dead:SetFont( __mkFont(sizeBars) )
+                end
                 for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
                     if unitFrame[powerType] then
-                        if unitFrame[powerType].label    then unitFrame[powerType].label:SetFont( __mkFont(sizeBars) ) end
-                        if unitFrame[powerType].labelOne then unitFrame[powerType].labelOne:SetFont( __mkFont(sizeBars) ) end
-                        if unitFrame[powerType].labelTwo then unitFrame[powerType].labelTwo:SetFont( __mkFont(sizeBars) ) end
+                        if unitFrame[powerType].label    then
+                            unitFrame[powerType].label:SetFont( __mkFont(sizeBars) )
+                        end
+                        if unitFrame[powerType].labelOne then
+                            unitFrame[powerType].labelOne:SetFont( __mkFont(sizeBars) )
+                        end
+                        if unitFrame[powerType].labelTwo then
+                            unitFrame[powerType].labelTwo:SetFont( __mkFont(sizeBars) )
+                        end
                     end
                 end
                 if i == 0 or i == 1 then
@@ -2479,7 +2630,7 @@ function UF.CustomFramesApplyFont()
     end
 
     -- Adjust height of Name and Title labels on Player, Target and SmallGroup frames
-    for _, baseName in pairs( { 'player', 'reticleover', 'SmallGroup', 'AvaPlayerTarget' } ) do
+    for _, baseName in pairs( { "player", "reticleover", "SmallGroup", "AvaPlayerTarget" } ) do
         for i = 0, 4 do
             local unitTag = (i==0) and baseName or ( baseName .. i )
             if UF.CustomFrames[unitTag] then
@@ -2679,7 +2830,9 @@ end
 
 -- Set dimensions of custom group frame and anchors or raid group members
 function UF.CustomFramesApplyLayoutGroup()
-    if not UF.CustomFrames.SmallGroup1 then return end
+    if not UF.CustomFrames.SmallGroup1 then
+        return
+    end
 
     local groupBarHeight = UF.SV.GroupBarHeight
     if UF.SV.CustomShieldBarSeparate then
@@ -2690,7 +2843,7 @@ function UF.CustomFramesApplyLayoutGroup()
     group:SetDimensions( UF.SV.GroupBarWidth, groupBarHeight*4 + UF.SV.GroupBarSpacing*3.5 )
 
     for i = 1, 4 do
-        local unitFrame = UF.CustomFrames['SmallGroup' .. i]
+        local unitFrame = UF.CustomFrames["SmallGroup" .. i]
 
         local ghb = unitFrame[POWERTYPE_HEALTH] -- Not a backdrop
 
@@ -2720,13 +2873,15 @@ end
 
 -- Set dimensions of custom raid frame and anchors or raid group members
 function UF.CustomFramesApplyLayoutRaid()
-    if not UF.CustomFrames.RaidGroup1 then return end
+    if not UF.CustomFrames.RaidGroup1 then
+        return
+    end
 
     local itemsPerColumn =
-        ( UF.SV.RaidLayout == '6 x 4' ) and 4 or
-        ( UF.SV.RaidLayout == '4 x 6' ) and 6 or
-        ( UF.SV.RaidLayout == '3 x 8' ) and 8 or
-        ( UF.SV.RaidLayout == '2 x 12' ) and 12 or
+        ( UF.SV.RaidLayout == "6 x 4" ) and 4 or
+        ( UF.SV.RaidLayout == "4 x 6" ) and 6 or
+        ( UF.SV.RaidLayout == "3 x 8" ) and 8 or
+        ( UF.SV.RaidLayout == "2 x 12" ) and 12 or
         24
 
     local spacerHeight = 3
@@ -2757,7 +2912,7 @@ function UF.CustomFramesApplyLayoutRaid()
             row = row + 1
         end
 
-        local unitFrame = UF.CustomFrames['RaidGroup' .. i]
+        local unitFrame = UF.CustomFrames["RaidGroup" .. i]
 
         unitFrame.control:ClearAnchors()
         unitFrame.control:SetAnchor( TOPLEFT, raid, TOPLEFT, UF.SV.RaidBarWidth*column, UF.SV.RaidBarHeight*(row-1) + (UF.SV.RaidSpacers and spacerHeight*(math.floor((i-1)/4)-math.floor(column*itemsPerColumn/4)) or 0) )
@@ -2766,7 +2921,7 @@ function UF.CustomFramesApplyLayoutRaid()
         -- Subtracted an additional additional 20 from dimensions here to correct for clipping into Offline label + Crown
         unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-64, UF.SV.RaidBarHeight-2 )
         unitFrame.dead:SetDimensions( 75, UF.SV.RaidBarHeight-2 )
-        
+
         unitFrame[POWERTYPE_HEALTH].label:SetDimensions(UF.SV.RaidBarWidth-50, UF.SV.RaidBarHeight-2)
 
     end
@@ -2776,14 +2931,16 @@ end
 
 -- Set dimensions of custom raid frame and anchors or raid group members
 function UF.CustomFramesApplyLayoutBosses()
-    if not UF.CustomFrames.boss1 then return end
+    if not UF.CustomFrames.boss1 then
+        return
+    end
 
     local bosses = UF.CustomFrames.boss1.tlw
 
     bosses:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.TargetBarHeight * 6 + 2 * 5)
 
     for i = 1, 6 do
-        local unitFrame = UF.CustomFrames['boss' .. i]
+        local unitFrame = UF.CustomFrames["boss" .. i]
 
         unitFrame.control:ClearAnchors()
         unitFrame.control:SetAnchor( TOPLEFT, bosses, TOPLEFT, 0, (UF.SV.TargetBarHeight+2)*(i-1) )
@@ -2826,24 +2983,24 @@ end
 
 function UF.CustomFramesDebugGroup()
     for i = 1, 4 do
-        local unitTag = 'SmallGroup' .. i
-        UF.CustomFrames[unitTag].unitTag = 'player'
+        local unitTag = "SmallGroup" .. i
+        UF.CustomFrames[unitTag].unitTag = "player"
         UF.CustomFrames[unitTag].control:SetHidden(false)
         UF.UpdateStaticControls( UF.CustomFrames[unitTag] )
     end
     UF.CustomFrames.SmallGroup1.friendIcon:SetHidden(false)
     UF.CustomFrames.SmallGroup1.friendIcon:SetTexture("/esoui/art/campaign/campaignbrowser_friends.dds")
-    UF.OnLeaderUpdate( nil, 'SmallGroup1' )
+    UF.OnLeaderUpdate( nil, "SmallGroup1" )
 end
 
 function UF.CustomFramesDebugRaid()
     for i = 1, 24 do
-        local unitTag = 'RaidGroup' .. i
-        UF.CustomFrames[unitTag].unitTag = 'player'
+        local unitTag = "RaidGroup" .. i
+        UF.CustomFrames[unitTag].unitTag = "player"
         UF.CustomFrames[unitTag].control:SetHidden(false)
         UF.UpdateStaticControls( UF.CustomFrames[unitTag] )
     end
-    UF.OnLeaderUpdate( nil, 'RaidGroup1' )
+    UF.OnLeaderUpdate( nil, "RaidGroup1" )
 end
 
 --[[----------------------------------------------------------
@@ -2886,8 +3043,12 @@ end
 -- Used to add characters from one specific guild.
 -- Called on EVENT_GUILD_SELF_JOINED_GUILD listener
 function UF.OnGuildSelfJoinedGuild(eventCode, guildId)
-    if not g_guildMemberIndexDisplayNames then return end
-    if not guildId or guildId == 0 then return end
+    if not g_guildMemberIndexDisplayNames then
+        return
+    end
+    if not guildId or guildId == 0 then
+        return
+    end
 
     local memberCount = GetNumGuildMembers(guildId)
     for mid = 1, memberCount, 1 do
@@ -2901,8 +3062,12 @@ end
 -- Used to update information on single player in single guild
 -- Called on EVENT_GUILD_MEMBER_ADDED and EVENT_GUILD_MEMBER_CHARACTER_UPDATED listeners
 function UF.OnGuildMemberAdded(eventCode, guildId, displayName)
-    if not g_guildMemberIndexDisplayNames then return end
-    if not guildId or guildId == 0 then return end
+    if not g_guildMemberIndexDisplayNames then
+        return
+    end
+    if not guildId or guildId == 0 then
+        return
+    end
 
     local memberCount = GetNumGuildMembers(guildId)
     for mid = 1, memberCount, 1 do
@@ -2915,10 +3080,16 @@ end
 -- Used to remove single player from local list
 -- Called on EVENT_GUILD_MEMBER_REMOVED  event listeners
 function UF.OnGuildMemberRemoved(eventCode, guildId, displayName, characterName)
-    if not g_guildMemberIndexDisplayNames then return end
-    if not guildId or guildId == 0 then return end
+    if not g_guildMemberIndexDisplayNames then
+        return
+    end
+    if not guildId or guildId == 0 then
+        return
+    end
 
-    if not g_guildMemberIndexDisplayNames[displayName] then return end
+    if not g_guildMemberIndexDisplayNames[displayName] then
+        return
+    end
 
     g_guildMemberIndexDisplayNames[displayName][guildId] = nil
     -- if this player is not in any other of your guilds, then purge remaining information
@@ -2929,6 +3100,8 @@ end
 
 -- Used to query if characterName is local list
 function UF.GetGuildDisplayNameInfo( displayName )
-    if g_guildMemberIndexDirty then UF.RebuildGuildMemberIndex() end
+    if g_guildMemberIndexDirty then
+        UF.RebuildGuildMemberIndex()
+    end
     return g_guildMemberIndexDisplayNames[displayName]
 end
