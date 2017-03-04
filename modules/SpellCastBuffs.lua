@@ -56,6 +56,8 @@ SCB.D = {
     IgnoreEquipment                  = false,
     IgnoreVampLycan                  = false,
     IgnoreCyrodiil                   = false,
+    IgnoreBattleSpirit               = false,
+    IgnoreEsoPlus                    = true,
     LongTermEffectsSeparate          = true,
     LongTermEffectsSeparateAlignment = 2,
     ShowBlock                        = true,
@@ -487,8 +489,6 @@ local IsAbilityCustomToggle = {
 
 -- some optimization
 local strHidden = L.Effect_Hidden
-local strHomeKeep   = "Home Keep Bonus"
-local strEnemyKeep  = "Enemy Keep Bonus"
 
 --[[
  * Manually handled list of potion durations.
@@ -1274,7 +1274,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         ( SCB.SV.IgnoreMundus and E.IsBoon[ effectName ] ) or
         ( SCB.SV.IgnoreEquipment and E.IsEquipmentSet[ effectName ] ) or
         ( SCB.SV.IgnoreVampLycan and E.IsVampLycan[ effectName ] ) or
-        ( SCB.SV.IgnoreCyrodiil and (E.IsCyrodiil[ effectName ] or strfind(effectName, "Keep Bonus") or strfind(effectName, strHomeKeep) or strfind(effectName, strEnemyKeep) ) )
+        ( SCB.SV.IgnoreCyrodiil and E.IsCyrodiil[abilityId] ) or
+        ( SCB.SV.IgnoreBattleSpirit and E.IsBattleSpirit[abilityId] ) or
+        ( SCB.SV.IgnoreEsoPlus and E.IsEsoPlus[abilityId] and unitTag == "player" ) -- Hide ESO Plus Member buff on the player frame if the option is turned on
     then return end
 
     -- Override some buff info

@@ -510,6 +510,7 @@ L.Skill_Restoring_Focus          = 22237
 -- ---------------------------------------------------
 -- TOGGLED EFFECTS -----------------------------------
 -- ---------------------------------------------------
+L.Toggled_Hidden                    = 20309 -- Hidden (Innate)
 L.Toggled_Brace_Generic             = 14890 -- Block (Innate)
 L.Toggled_Sprint                    = 973 -- Sprint (Innate)
 L.Toggled_Mount_Sprint              = "Gallop" -- Mount Sprint (Generic) (Innate) -- NOTE: Renamed to Gallop in fake buffs
@@ -609,19 +610,6 @@ L.Boon_Shadow                       = 13984
 L.Boon_Tower                        = 13985
 
 -- ---------------------------------------------------
--- AVA ------------------------------------------------
--- ---------------------------------------------------
-
-L.Passive_Offensive_Scroll_Bonus_1  = 15058
-L.Passive_Defensive_Scroll_Bonus_1  = 15060
-L.Passive_Offensive_Scroll_Bonus_2  = 16348
-L.Passive_Defensive_Scroll_Bonus_2  = 16350
-L.Passive_Emperorship               = 39671
-L.Passive_Blessing_of_War           = 66282
-L.Passive_BattleSpirit              = 12033
---L.Passive_Sanctuary               = 64197
-
--- ---------------------------------------------------
 -- PASSIVE COMPARE -----------------------------------
 -- ---------------------------------------------------
 
@@ -634,7 +622,6 @@ L.Passive_Invigorating_Bash         = 60407 --, 60409
 --night blade
 L.Passive_SoulSiphoner              = 36603
 --light armor
-L.Passive_ESO_Plus_Member           = 63601
 
 -- ---------------------------------------------------
 -- EQUIPMENT SETS EFFECTS ----------------------------

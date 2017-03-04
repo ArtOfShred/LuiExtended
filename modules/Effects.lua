@@ -71,15 +71,14 @@ E.IsWeaponAttack = {
  * Completely ignored effects
  ]]--
 E.IsEffectIgnored = {
-    [L.Passive_SoulSiphoner]    = true, -- Nightblade passive
-    [L.Passive_BattleSpirit]    = true, -- Battle Spirit
-    [L.Passive_ESO_Plus_Member] = true, -- ESO Plus Member
+
 }
 
 --[[
  * List of toggle abilities
  ]]--
 E.IsToggle = {
+    [L.Toggled_Hidden]                      = true, -- Hidden (Innate)
     [L.Toggled_Brace_Generic]               = true, -- Block (Innate)
     [L.Toggled_Sprint]                      = true, -- Sprint (Innate)
     [L.Toggled_Mount_Sprint]                = true, -- Mount Sprint (Generic) (Innate) -- NOTE: Renamed to Gallop in fake buffs
@@ -159,13 +158,34 @@ E.IsDisguise = {
  * PvP related buffs
  ]]--
 E.IsCyrodiil = {
-    [L.Passive_Offensive_Scroll_Bonus_1]    = true,
-    [L.Passive_Defensive_Scroll_Bonus_1]    = true,
-    [L.Passive_Offensive_Scroll_Bonus_2]    = true,
-    [L.Passive_Defensive_Scroll_Bonus_2]    = true,
-    [L.Passive_Emperorship]                 = true,
-    [L.Passive_Blessing_of_War]             = true,
-    [L.Passive_BattleSpirit]                = true,
+
+    [11346] = true, -- Home Keep Bonus
+    [11341] = true, -- Enemy Keep Bonus I
+    [11343] = true, -- Enemy Keep Bonus II
+    [11345] = true, -- Enemy Keep Bonus III
+    [11347] = true, -- Enemy Keep Bonus IV
+    [11348] = true, -- Enemy Keep Bonus V
+    [11350] = true, -- Enemy Keep Bonus VI
+    [11352] = true, -- Enemy Keep Bonus VII
+    [11353] = true, -- Enemy Keep Bonus VIII
+    [11356] = true, -- Enemy Keep Bonus IX
+    [15060] = true, -- Defensive Scroll Bonus I
+    [16350] = true, -- Defensive Scroll Bonus II
+    [15058] = true, -- Offensive Scroll Bonus I
+    [16348] = true, -- Offensive Scroll Bonus II
+    [39671] = true, -- Emperorship Alliance Bonus
+    [66282] = true, -- Blessing of War
+
+}
+
+E.IsBattleSpirit = {
+
+    [12033] = true, -- Battle Spirit
+
+}
+
+E.IsEsoPlus = {
+    [63601] = true, -- ESO Plus Member
 }
 
 --[[
@@ -664,8 +684,19 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [81554] = 'LuiExtended/media/icons/poisons/poison_1_green_r.dds', -- Hindrance (Cloudy Hindering Poison) DEBUFF
 
     -- Crown Poisons
-    [81274] = 'LuiExtended/media/icons/poisons/poison_crown_3_r.dds', -- Ravage Health (Crown Lethal Poison) DEBUFF
-    [81275] = 'LuiExtended/media/icons/poisons/poison_crown_3_r.dds', -- Creeping Ravage Health (Crown Lethal Poison) DEBUFF
+    
+    [88476] = 'LuiExtended/media/icons/poisons/poison_crown_orange_r.dds', -- Creeping Ravage Health (Crown Debilitating Poison)
+    [88477] = 'LuiExtended/media/icons/poisons/poison_crown_green_r.dds', -- Hindrance (Crown Debilitating Poison)
+    [88471] = 'LuiExtended/media/icons/poisons/poison_crown_blue_r.dds', -- Drain Magicka (Crown Draining Poison)
+    [88475] = 'LuiExtended/media/icons/poisons/poison_crown_green_r.dds', -- Drain Stamina (Crown Draining Poison)
+    [88473] = 'LuiExtended/media/icons/poisons/poison_crown_blue_g.dds', -- Restore Magicka (Crown Draining Poison)
+    [88474] = 'LuiExtended/media/icons/poisons/poison_crown_green_g.dds', -- Restore Stamina (Crown Draining Poison)
+    [88469] = 'LuiExtended/media/icons/poisons/poison_crown_yellow_r.dds', -- Minor Maim (Crown Enfeebling Poison)
+    [88470] = 'LuiExtended/media/icons/poisons/poison_crown_orange_r.dds', -- Minor Defile (Crown Enfeebling Poison)
+    [81274] = 'LuiExtended/media/icons/poisons/poison_crown_red_r.dds', -- Ravage Health (Crown Lethal Poison) DEBUFF
+    [81275] = 'LuiExtended/media/icons/poisons/poison_crown_orange_r.dds', -- Creeping Ravage Health (Crown Lethal Poison) DEBUFF
+    [88462] = 'LuiExtended/media/icons/poisons/poison_crown_red_r.dds', -- Immobilize (Crown Trapping Poison)
+    [88463] = 'LuiExtended/media/icons/poisons/poison_crown_green_r.dds', -- Hindrance (Crown Trapping Poison)
 
     ----------------------------------------------------------------
     -- FOOD & DRINK
@@ -778,6 +809,8 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
 
     -- Crown Store Momentos
     [85344] = 'LuiExtended/media/icons/momentos/momento_storm_atronach_aura.dds', -- Atronach Aura (Storm Atronach Aura)
+    [86976] = 'LuiExtended/media/icons/momentos/momento_wild_hunt_leaf-dance_aura.dds', -- Spriggan Aura (Wild Hunt Leaf-Dance Aura)
+    [86978] = 'LuiExtended/media/icons/momentos/momento_floral_swirl_aura.dds', -- Grand Spriggan Aura (Floral Swirl Aura)
 
     -- Assistants
     [77645] = 'LuiExtended/media/icons/abilities/ability_innate_hidden.dds', -- Stealth (Pirharri the Smuggler)
@@ -888,6 +921,7 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     --[973] = 'LuiExtended/media/icons/abilities/ability_innate_sprint.dds', -- Sprint (Reserved here if it ever becomes visible)
     [15356] = 'LuiExtended/media/icons/abilities/ability_innate_sprint.dds', -- Sprint Drain
     [10950] = 'LuiExtended/media/icons/abilities/ability_innate_fall_snare.dds', -- Fall Snare
+    [63601] = 'LuiExtended/media/icons/abilities/ability_innate_eso_plus_member.dds', -- ESO Plus Member
     [42514] = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', -- Hard Dismount
     --[33439] = 'LuiExtended/media/icons/abilities/ability_innate_mount_sprint.dds', -- Mount Sprint (Generic) (Resevered here if it ever becomes visible)
     [14890] = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', -- Block
@@ -1792,6 +1826,8 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [00000] = 'LuiExtended/media/icons/abilities/ability_', --
 
     -- CYRODIIL
+    [12033] = 'LuiExtended/media/icons/abilities/ability_ava_battle_spirit.dds', -- Battle Spirit
+    
     [47717] = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', -- Quick Strike (Cyrodiil Guard T1)
     [46830] = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', -- Bleeding Strike (Cyrodiil Guard T2)
     [46832] = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds', -- Bleeding (Cyrodiil Guard T2)
@@ -2067,6 +2103,8 @@ E.EffectNameOverride = { --Force rename a buff (Note that if we rename a buff, w
 
     -- Crown Store Momentos
     [85344] = 'Storm Atronach Aura', -- Atronach Aura (Storm Atronach Aura)
+    [86976] = 'Wild Hunt Leaf-Dance Aura', -- Spriggan Aura (Wild Hunt Leaf-Dance Aura)
+    [86978] = 'Floral Swirl Aura', -- Grand Spriggan Aura (Floral Swirl Aura)
 
     -- Assistants
     [77645] = 'Hidden', -- Stealth (Pirharri the Smuggler)
@@ -2967,6 +3005,7 @@ E.FakePlayerBuffs = { -- Fake buffs applied onto the player by self
     -- Crown Store Momentos
     [85349] = {icon = 'LuiExtended/media/icons/momentos/momento_storm_atronach_transform.dds', name = 'Storm Atronach Transform', duration = 180000}, -- Storm Atronach Transform (Atronach Transformation)
     [85347] = {icon = 'LuiExtended/media/icons/momentos/momento_storm_atronach_juggle.dds', name = 'Storm Orb Juggle', duration = 12000}, -- Storm Orb Juggle (Atronach Juggling)
+    [86977] = {icon = 'LuiExtended/media/icons/momentos/momento_wild_hunt_transform.dds', name = 'Wild Hunt Transform', duration = 15000}, -- Spriggan Transformation (Wild Hunt Transform)
 
     -- Enchants
     [21230] = {icon = 'LuiExtended/media/icons/glyphs/glyph_weapon_damage.dds', name = 'Weapon Damage Enchantment', duration = 5000}, -- Berserker (Glyph of Weapon Damage)
