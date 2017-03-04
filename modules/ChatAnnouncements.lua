@@ -782,25 +782,25 @@ end
 
 function CA.FriendInviteFudger()
     if not FriendInviteFudger then
-        printToChat(GetString(SI_LUIE_CA_FRIEND_INVITE_DECLINED))
+        printToChat(GetString(SI_LUIE_CA_FRIENDS_FRIEND_INVITE_DECLINED))
     end
     FriendInviteFudger = false
 end
 
 function CA.FriendAdded(eventCode, DisplayName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
-    printToChat(strformat(GetString(SI_LUIE_CA_FRIEND_ADDED), displayNameLink))
+    printToChat(strformat(GetString(SI_LUIE_CA_FRIENDS_FRIEND_ADDED), displayNameLink))
     FriendInviteFudger = true
 end
 
 function CA.FriendRemoved(eventCode, DisplayName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
-    printToChat(strformat(GetString(SI_LUIE_CA_FRIEND_REMOVED), displayNameLink))
+    printToChat(strformat(GetString(SI_LUIE_CA_FRIENDS_FRIEND_REMOVED), displayNameLink))
 end
 
 function CA.FriendInviteAdded(eventCode, inviterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
-    printToChat(strformat(GetString(SI_LUIE_CA_FRIEND_INVITE_PENDING), displayNameLink))
+    printToChat(strformat(GetString(SI_LUIE_CA_FRIENDS_FRIEND_INVITE_PENDING), displayNameLink))
 end
 
 function CA.FriendInviteRemoved(eventCode, inviterName)
@@ -833,49 +833,49 @@ end
 function CA.RegisterCustomStrings()
     if CA.SV.CustomStrings then
         -- Group Invite String Replacements
-        SafeAddString(SI_GROUPINVITERESPONSE0, GetString(SI_LUIE_GROUPINVITERESPONSE0), 1)
-        SafeAddString(SI_GROUPINVITERESPONSE10, GetString(SI_LUIE_GROUPINVITERESPONSE10), 1)
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GROUP, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_GROUP), 1)
-        SafeAddString(SI_GROUPLEAVEREASON1, GetString(SI_LUIE_GROUPLEAVEREASON1), 2)
+        SafeAddString(SI_GROUPINVITERESPONSE0, GetString(SI_LUIE_CA_GROUP_GROUPINVITERESPONSE0), 1)
+        SafeAddString(SI_GROUPINVITERESPONSE10, GetString(SI_LUIE_CA_GROUP_GROUPINVITERESPONSE10), 1)
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GROUP, GetString(SI_LUIE_CA_FRIENDS_INCOMING_GROUP_REQUEST), 1)
+        SafeAddString(SI_GROUPLEAVEREASON1, GetString(SI_LUIE_CA_GROUP_GROUPLEAVEREASON1), 2)
         -- Trade String Replacements
-        SafeAddString(SI_TRADE_INVITE_CONFIRM, GetString(SI_LUIE_TRADE_INVITE_CONFIRM), 1) -- Fixes default Trade messages to match our syntax.
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_TRADE, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_TRADE), 1) -- Fixes default Trade messages to match our syntax.
+        SafeAddString(SI_TRADE_INVITE_CONFIRM, GetString(SI_LUIE_CA_TRADE_INVITE_CONFIRM), 1) -- Fixes default Trade messages to match our syntax.
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_TRADE, GetString(SI_LUIE_CA_TRADE_INCOMING_TRADE), 1) -- Fixes default Trade messages to match our syntax.
         -- Friend Invite String Replacements
-        SafeAddString(SI_FRIENDS_LIST_IGNORE_ADDED, GetString(SI_LUIE_FRIENDS_LIST_IGNORE_ADDED), 1) -- Fixes default Ignore List messages to match our syntax.
-        SafeAddString(SI_FRIENDS_LIST_IGNORE_REMOVED, GetString(SI_LUIE_FRIENDS_LIST_IGNORE_REMOVED), 1) -- Fixes default Ignore List messages to match our syntax.
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST), 1) -- Default ZOS string was missing a period.
-        SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_ON, GetString(SI_LUIE_FRIENDS_LIST_FRIEND_LOGGED_ON), 1)
-        SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON, GetString(SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON), 1)
-        SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_OFF, GetString(SI_LUIE_FRIENDS_LIST_FRIEND_LOGGED_OFF), 1)
-        SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF, GetString(SI_LUIE_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF), 1)
+        SafeAddString(SI_FRIENDS_LIST_IGNORE_ADDED, GetString(SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED), 1) -- Fixes default Ignore List messages to match our syntax.
+        SafeAddString(SI_FRIENDS_LIST_IGNORE_REMOVED, GetString(SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED), 1) -- Fixes default Ignore List messages to match our syntax.
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST, GetString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST), 1) -- Default ZOS string was missing a period.
+        SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_ON, GetString(SI_LUIE_CA_FRIENDS_LIST_LOGGED_ON), 1)
+        SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON, GetString(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_ON), 1)
+        SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_OFF, GetString(SI_LUIE_CA_FRIENDS_LIST_LOGGED_OFF), 1)
+        SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF, GetString(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_OFF), 1)
         -- Guild Invite String Replacements
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST), 1) -- Update syntax for guild invite message to match our chat syntax
-        SafeAddString(SI_GUILD_ROSTER_INVITED_MESSAGE, GetString(SI_LUIE_GUILD_ROSTER_INVITED_MESSAGE), 1) -- Update syntax for guild invitation sent message to match group syntax.
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, GetString(SI_LUIE_CA_FRIENDS_INCOMING_GUILD_REQUEST), 1) -- Update syntax for guild invite message to match our chat syntax
+        SafeAddString(SI_GUILD_ROSTER_INVITED_MESSAGE, GetString(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE), 1) -- Update syntax for guild invitation sent message to match group syntax.
         -- Quest Share String Replacements
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, GetString(SI_LUIE_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE), 3)
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE), 3)
         -- Duel String Replacements
-        SafeAddString(SI_DUEL_INVITE_ACCEPTED, GetString(SI_LUIE_DUEL_INVITE_ACCEPTED), 1)
-        SafeAddString(SI_DUEL_INVITE_DECLINED, GetString(SI_LUIE_DUEL_INVITE_DECLINED), 1)
-        SafeAddString(SI_DUEL_INVITE_CANCELED, GetString(SI_LUIE_DUEL_INVITE_CANCELED), 1)
-        SafeAddString(SI_DUEL_INVITE_SENT, GetString(SI_LUIE_DUEL_INVITE_SENT), 1)
-        SafeAddString(SI_DUEL_INVITE_RECEIVED, GetString(SI_LUIE_DUEL_INVITE_RECEIVED), 1)
-        SafeAddString(SI_PLAYER_TO_PLAYER_INVITE_DUEL, GetString(SI_LUIE_PLAYER_TO_PLAYER_INVITE_DUEL), 1)
-        SafeAddString(SI_DUELING_COUNTDOWN_CSA, GetString(SI_LUIE_DUELING_COUNTDOWN_CSA), 1)
-        SafeAddString(SI_DUELRESULT0, GetString(SI_LUIE_DUELRESULT0), 1)
-        SafeAddString(SI_DUELRESULT1, GetString(SI_LUIE_DUELRESULT1), 1)
+        SafeAddString(SI_DUEL_INVITE_ACCEPTED, GetString(SI_LUIE_CA_DUEL_INVITE_ACCEPTED), 1)
+        SafeAddString(SI_DUEL_INVITE_DECLINED, GetString(SI_LUIE_CA_DUEL_INVITE_DECLINED), 1)
+        SafeAddString(SI_DUEL_INVITE_CANCELED, GetString(SI_LUIE_CA_DUEL_INVITE_CANCELED), 1)
+        SafeAddString(SI_DUEL_INVITE_SENT, GetString(SI_LUIE_CA_DUEL_INVITE_SENT), 1)
+        SafeAddString(SI_DUEL_INVITE_RECEIVED, GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), 1)
+        SafeAddString(SI_PLAYER_TO_PLAYER_INVITE_DUEL, GetString(SI_LUIE_CA_DUEL_INVITE_PLAYER), 1)
+        SafeAddString(SI_DUELING_COUNTDOWN_CSA, GetString(SI_LUIE_CA_DUEL_COUNTDOWN_CSA), 1)
+        SafeAddString(SI_DUELRESULT0, GetString(SI_LUIE_CA_DUEL_RESULT0), 1)
+        SafeAddString(SI_DUELRESULT1, GetString(SI_LUIE_CA_DUEL_RESULT1), 1)
         --Duel Failure Reason String Replacements
-        SafeAddString(SI_DUELINVITEFAILREASON1, GetString(SI_LUIE_DUELINVITEFAILREASON1), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON4, GetString(SI_LUIE_DUELINVITEFAILREASON4), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON5, GetString(SI_LUIE_DUELINVITEFAILREASON5), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON6, GetString(SI_LUIE_DUELINVITEFAILREASON6), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON7, GetString(SI_LUIE_DUELINVITEFAILREASON7), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON8, GetString(SI_LUIE_DUELINVITEFAILREASON8), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON9, GetString(SI_LUIE_DUELINVITEFAILREASON9), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON10, GetString(SI_LUIE_DUELINVITEFAILREASON10), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON12, GetString(SI_LUIE_DUELINVITEFAILREASON12), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON14, GetString(SI_LUIE_DUELINVITEFAILREASON14), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON16, GetString(SI_LUIE_DUELINVITEFAILREASON16), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON18, GetString(SI_LUIE_DUELINVITEFAILREASON18), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON1, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON1), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON4, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON4), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON5, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON5), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON6, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON6), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON7, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON7), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON8, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON8), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON9, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON9), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON10, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON10), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON12, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON12), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON14, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON14), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON16, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON16), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON18, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON18), 1)
     end
 end
 
@@ -4610,7 +4610,7 @@ function CA.DuelNearBoundary(eventCode, isInWarningArea)
 end
 
 function CA.DuelStarted(eventCode)
-    printToChat(GetString(SI_LUIE_DUEL_STARTED))
+    printToChat(GetString(SI_LUIE_CA_DUEL_STARTED))
 end
 
 --[[
