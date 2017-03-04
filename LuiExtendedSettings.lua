@@ -65,7 +65,7 @@ function LUIE_CreateSettings()
     local panelData = {
         type = "panel",
         name = LUIE.name,
-        displayName = zo_strformat(LUIE.name, GetString(SI_GAME_MENU_SETTINGS)),
+        displayName = strformat(LUIE.name, GetString(SI_GAME_MENU_SETTINGS)),
         author = LUIE.author,
         version = LUIE.version,
         website = "http://www.esoui.com/downloads/info818-LuiExtended.html",
@@ -76,8 +76,8 @@ function LUIE_CreateSettings()
 
     local panelDataUnitFrames = {
         type = "panel",
-        name = zo_strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_UNITFRAMES)),
-        displayName = zo_strformat(LUIE.name, GetString(SI_LUIE_LAM_UNITFRAMES), GetString(SI_GAME_MENU_SETTINGS)),
+        name = strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_UNITFRAMES)),
+        displayName = strformat(LUIE.name, GetString(SI_LUIE_LAM_UNITFRAMES), GetString(SI_GAME_MENU_SETTINGS)),
         author = LUIE.author,
         version = LUIE.version,
         website = "http://www.esoui.com/downloads/info818-LuiExtended.html",
