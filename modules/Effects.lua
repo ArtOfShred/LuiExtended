@@ -779,7 +779,8 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [68416] = 'LuiExtended/media/icons/consumables/consumable_crown_drink.dds', -- Crown Refreshing Drink
 
     -- Experience Bonuses
-    [64210] = 'LuiExtended/media/icons/consumables/consumable_xp_psijic.dds', -- Psijic Ambrosia
+    [64210] = 'LuiExtended/media/icons/consumables/consumable_xp_psijic_ambrosia.dds', -- Psijic Ambrosia
+    [88445] = 'LuiExtended/media/icons/consumables/consumable_xp_mythic_aetherial_ambrosia.dds', -- Mythic Aetherial Ambrosia
     [66776] = 'LuiExtended/media/icons/consumables/consumable_xp_scroll.dds', -- Crown Experience Scroll
     [85501] = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_1.dds', -- Crown Crate Experience Scroll
     [85502] = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_2.dds', -- Major Crown Crate Experience Scroll
@@ -2077,6 +2078,7 @@ E.EffectNameOverride = { --Force rename a buff (Note that if we rename a buff, w
 
     -- Experience Bonuses
     [64210] = 'Psijic Ambrosia', -- Psijic Ambrosia
+    [88445] = 'Mythic Aetherial Ambrosia', -- Mythic Aetherial Ambrosia
     [66776] = 'Crown Experience Scroll', -- Crown Experience Scroll
     [85501] = 'Crown Crate Experience Scroll', -- Crown Crate Experience Scroll
     [85502] = 'Major Crown Crate Experience Scroll', -- Major Crown Crate Experience Scroll

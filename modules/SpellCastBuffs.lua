@@ -65,6 +65,7 @@ SCB.D = {
     ShowSprint                       = true,
     ShowGallop                       = true,
     ShowResurrectionImmunity         = true,
+    ShowRecall                       = true,
     HideTargetBuffs                  = false,
     HideTargetDebuffs                = false,
     HideGroundEffects                = false,
@@ -1616,7 +1617,7 @@ function SCB.ReloadEffects(unitTag)
     end
 
     -- create custom buff icon for Recall Cooldown effect
-    if unitTag == "player" then
+    if SCB.SV.ShowRecall and unitTag == "player" then
         local recallRemain, _ = GetRecallCooldown()
         if recallRemain > 0 then
             local currentTime = GetGameTimeMilliseconds()

@@ -1148,6 +1148,16 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ShowResurrectionImmunity,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
+            {
+                type = "checkbox",
+                name = "Show Recall Cooldown icon",
+                tooltip = "Display special buff icon when player has accumulated a wayshrine recall cost penalty.",
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ShowRecall end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowRecall = value LUIE.SpellCastBuffs.ReloadEffects() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ShowRecall,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
         },
     }
     --[[ DAMAGE METER & COMBAT LOG ]]--
