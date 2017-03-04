@@ -174,7 +174,7 @@ local PendingRegroup    = false
 -- Return a formatted time
 -- Stolen from pChat, thanks @Ayantir
 function LUIE.CreateTimestamp(timeStr, formatStr)
-    formatStr = formatStr or LUIE.SV.TimeStampFormat
+    local formatStr = formatStr or LUIE.SV.TimeStampFormat
 
     -- Split up default timestamp
     local hours, minutes, seconds = timeStr:match("([^%:]+):([^%:]+):([^%:]+)")
@@ -416,7 +416,6 @@ function LUIE.LeaveGroup()
 end
 
 function LUIE.GroupKick(option)
-
     if option == "" then
         LUIE.PrintToChat("You must enter the name of a player to kick.")
         return
@@ -519,10 +518,11 @@ function LUIE.GuildRemovedSelf()
 end
 
 function LUIE.SlashGuildInvite(option)
+    -- If no input was entered, display an error and end.
     if option == "" then
         LUIE.PrintToChat("You must enter a guild number followed by an account name or character name to invite to the guild.")
         return
-    end -- If no input was entered, display an error and end.
+    end
 
     -- Parse input
     local options = {}
