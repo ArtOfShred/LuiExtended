@@ -723,7 +723,7 @@ function LUIE_CreateSettings()
             },
         },
     }
-    --[[ BUFFS AND DEBUFFS OPTIONS ]]--
+    -- Buffs and Debuffs Options
     optionsData[#optionsData + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_BUFF_HEADER),
@@ -1077,8 +1077,8 @@ function LUIE_CreateSettings()
             --]]
             {
                 type = "checkbox",
-                name = "Highlight Ability Bar Icon for Active Procs",
-                tooltip = "Highlights an ability that is in a procced state on the ability bar.",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONPROC),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONPROC_TOOLTIP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ShowTriggered end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowTriggered = value end,
                 width = "full",
@@ -1087,8 +1087,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Highlight Ability Bar Icon for Active Effects",
-                tooltip = "Highlights currently active buffs on the ability bar for their active duration.",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONEFFECT),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONEFFECT_TOOLTIP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ShowToggled end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowToggled = value end,
                 width = "full",
@@ -1097,8 +1097,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Block icon",
-                tooltip = "Display special buff icon when player is holding block.",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCK),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCK_TOOLTIP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ShowBlock end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowBlock = value end,
                 width = "full",
@@ -1107,8 +1107,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Stealth icon",
-                tooltip = "Display special buff icon when player is hidden or in stealth.",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTH),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTH_TOOLTIP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.StealthState end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.StealthState = value end,
                 width = "full",
@@ -1117,8 +1117,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Sprint icon",
-                tooltip = "Display special buff icon when player is sprinting.",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT_TOOLTIP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ShowSprint end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowSprint = value end,
                 width = "full",
@@ -1127,8 +1127,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Gallop icon",
-                tooltip = "Display special buff icon when player is mounted and galloping.",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP_TOOLTIP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ShowGallop end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowGallop = value end,
                 width = "full",
@@ -1137,8 +1137,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Resurrection Immunity icon",
-                tooltip = "Display special buff icon when player is resurrecting and immune to damage.",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWREZZ),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWREZZ_TOOLTIP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ShowResurrectionImmunity end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowResurrectionImmunity = value end,
                 width = "full",
@@ -1147,8 +1147,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = "Show Recall Cooldown icon",
-                tooltip = "Display special buff icon when player has accumulated a wayshrine recall cost penalty.",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWRECALL),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWRECALL_TOOLTIP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ShowRecall end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowRecall = value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
