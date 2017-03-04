@@ -668,7 +668,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_COMBATINFO_ALERTS_NOTIFYSOUND),
-                tooltip = GetString(GetString(SI_LUIE_LAM_COMBATINFO_ALERTS_NOTIFYSOUND_TOOLTIP))",
+                tooltip = GetString(GetString(SI_LUIE_LAM_COMBATINFO_ALERTS_NOTIFYSOUND_TOOLTIP)),
                 getFunc = function() return LUIE.CombatInfo.SV.LowSound end,
                 setFunc = function(value) LUIE.CombatInfo.SV.LowSound = value end,
                 width = "half",
