@@ -9,8 +9,22 @@ ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTLEADER",         "Regroup
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG",                "Regroup: Group saved!")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG",             "Regroup: Reinviting group members:")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG",        "Regroup: Invited → |cFFFFFF<<1>>|r")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_GUILD_FULL_MSG",                   "This guild is full.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_DISBAND_FAILED_LFG_ACTIVITY",      "You cannot disband a group while in an LFG activity.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME",               "You must enter the name of a player to kick.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_LFGACTIVITY",          "You can't kick a group member while in an LFG activity.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_CANTKICKSELF",         "You can't kick yourself from a group.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME",          "You must enter a valid party member account name or character name to remove.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV",  "You must enter a guild number followed by an account name or character name to invite to the guild.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK", "You must enter a guild number followed by an account name or character name to kick from the guild.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_INV",     "You must enter a valid guild number to invite a player.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE",   "You must enter a valid guild number to leave a guild.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_KICK",    "You must enter a valid guild number to kick a player.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME",             "You must enter the account name or character name of a player to send a friend request.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG",                "You have invited |cFEFEFE\"<<1>>\"|r to be your friend.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_INVITE_FAILED_NONAME",      "You must enter the account name or online character name of a player you want to remove from friends.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME",             "You must enter the account name or character name of a player to ignore.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE",      "That player is already on your ignore list.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE",      "You must enter the account name of a player you want to remove from ignored.")
 
 -- ChatAnnouncements.lua
 ZO_CreateStringId("SI_LUIE_CA_CANT_THINK_OF_NAME_MSG1",                 "<<1>> and <<2>> gold.") -- TODO: Find proper ID name
