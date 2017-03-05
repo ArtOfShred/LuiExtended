@@ -60,8 +60,10 @@ SCB.D = {
     IgnoreEsoPlus                    = true,
     LongTermEffectsSeparate          = true,
     LongTermEffectsSeparateAlignment = 2,
-    ShowBlock                        = true,
-    StealthState                     = true,
+    ShowBlockPlayer                  = true,
+    ShowBlockTarget                  = true,
+    StealthStatePlayer               = true,
+    StealthStateTarget               = true,
     ShowSprint                       = true,
     ShowGallop                       = true,
     ShowResurrectionImmunity         = true,
@@ -98,9 +100,6 @@ local g_quickslotLastUsable = false
 local g_playerActive = false
 local g_playerDead   = false
 local g_playerResurectStage = nil
-
--- Stealth tracking
-local g_stealth = nil
 
 -- Fast travel from any place in world
 local recallEffectName = "Recall Cooldown"
@@ -753,8 +752,10 @@ function SCB.Initialize( enabled )
 
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED,  SCB.OnDeath )
 
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STEALTH_STATE_CHANGED, SCB.StealthStateChanged )
-    EVENT_MANAGER:AddFilterForEvent(moduleName, EVENT_STEALTH_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
+    EVENT_MANAGER:RegisterForEvent(moduleName .. "player",          EVENT_STEALTH_STATE_CHANGED, SCB.StealthStateChanged )
+    EVENT_MANAGER:RegisterForEvent(moduleName .. "reticleover",     EVENT_STEALTH_STATE_CHANGED, SCB.StealthStateChanged )
+    EVENT_MANAGER:AddFilterForEvent(moduleName .. "player",         EVENT_STEALTH_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
+    EVENT_MANAGER:AddFilterForEvent(moduleName .. "reticleover",    EVENT_STEALTH_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "reticleover" )
 
     -- Activate, Deactivate player, death, alive.
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED,   SCB.OnPlayerActivated )
@@ -1265,7 +1266,11 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     end
 
     -- If block is not toggled to be displayed for player, don't show icon for it. Want to show it for targets regardless.
-    if abilityType == ABILITY_TYPE_BLOCK and unitTag == "player" and not SCB.SV.ShowBlock then
+    if abilityType == ABILITY_TYPE_BLOCK and unitTag == "player" and not SCB.SV.ShowBlockPlayer then
+        return
+    end
+    
+    if abilityType == ABILITY_TYPE_BLOCK and unitTag == "reticleover" and not SCB.SV.ShowBlockTarget then
         return
     end
 
@@ -1588,6 +1593,23 @@ end
 -- This handler fires every time the player's reticle target changes
 function SCB.OnReticleTargetChanged(eventCode)
     SCB.ReloadEffects("reticleover")
+    
+    if SCB.SV.StealthStateTarget then
+    local stealthState = GetUnitStealthState ("reticleover")
+        if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
+            g_effectsList.reticleover1[ strHidden ] =
+            {
+                type=1,
+                name=strHidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
+                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                forced = "short",
+                restart=true, iconNum=0
+            }
+        else
+            g_effectsList.reticleover1[ strHidden ] = nil
+        end
+    end
+    
 end
 
 -- Used to clear existing LET.effectsList.unitTag and to request game API to fill it again
@@ -2090,35 +2112,42 @@ end
 -- Runs on the EVENT_STEALTH_STATE_CHANGED listener.
 -- Watches for changes in a stealth state to display custom buff icon
 function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
-    if unitTag ~= "player" then
-        return
+
+    if SCB.SV.StealthStatePlayer and unitTag == "player" then
+        if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
+            -- Trigger a buff
+            g_effectsList.player1[ strHidden ] =
+            {
+                type=1,
+                name=strHidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
+                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                forced = "short",
+                restart=true, iconNum=0
+            }
+
+        -- Else remove buff
+        else
+            g_effectsList.player1[ strHidden ] = nil
+        end
     end
 
-    if ( SCB.SV.StealthState and
-        ( stealthState == STEALTH_STATE_HIDDEN or
-        stealthState == STEALTH_STATE_STEALTH or
-        stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED or
-        stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED )
-        --and ( g_stealth == STEALTH_STATE_DETECTED or g_stealth == STEALTH_STATE_NONE )
-        ) then
-
-        -- Trigger a buff
-        g_effectsList.player1[ strHidden ] =
-        {
-            type=1,
-            name=strHidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
-            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-            forced = "short",
-            restart=true, iconNum=0
-        }
-
-    -- Else remove buff
-    else
-        g_effectsList.player1[ strHidden ] = nil
+    if SCB.SV.StealthStateTarget and unitTag == "reticleover" then
+        if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
+            -- Trigger a buff
+            g_effectsList.reticleover1[ strHidden ] =
+            {
+                type=1,
+                name=strHidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
+                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                forced = "short",
+                restart=true, iconNum=0
+            }
+        -- Else remove buff
+        else
+            g_effectsList.reticleover1[ strHidden ] = nil
+        end
     end
-
-    -- Save the previous stealthed state
-    g_stealth = stealthState
+    
 end
 
 function SCB.OnPlayerActivated(eventCode)
