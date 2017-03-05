@@ -935,6 +935,7 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [21970] = 'LuiExtended/media/icons/abilities/ability_innate_bash.dds', -- Bash
     [21973] = '', -- Bash (Hides icon for interrupt)
     [21971] = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', -- Bash Stun (Stun from bashing cast)
+    [2727] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off-Balance
     [20172] = 'LuiExtended/media/icons/abilities/ability_innate_off-balance_exploit.dds', -- Off-Balance Exploit
     [16566] = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', -- CC Immunity
 
@@ -2491,9 +2492,7 @@ E.EffectForcedType = { --Force a change to the type buff container
 }
 
 E.EffectForcedName = {
-    [L.Toggled_Guard]                       = "short",
-    [L.Toggled_Mystic_Guard]                = "short",
-    [L.Toggled_Stalwart_Guard]              = "short",
+    -- Nothing here yet
 }
 
 E.IsAbilityIgnoredById = { --Remove an ability from display by abilityId
@@ -3023,6 +3022,8 @@ E.FakePlayerBuffs = { -- Fake buffs applied onto the player by self
     -- Player (Basic)
     [973] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_sprint.dds', name = 'Sprint', duration = 0}, -- Sprint
     [33439] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mount_sprint.dds', name = 'Gallop', duration = 0}, -- Mount Sprint (Generic)
+    [32346] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_skyshard_collect.dds', name = 'Collecting Skyshard', duration = 5800}, -- Skyshard Collect
+    [14031] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mundus_use.dds', name = 'Receiving Boon', duration = 5000}, -- Mundus Use
 
     -- Seasonal Quests (New Life Festival)
     [84125] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Breton Male Dance (Lava Foot Stomp)

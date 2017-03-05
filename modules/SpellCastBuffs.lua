@@ -104,7 +104,7 @@ local g_stealth = nil
 
 -- Fast travel from any place in world
 local recallEffectName = "Recall Cooldown"
-local recallIconFilename = "/esoui/art/icons/ability_rogue_053.dds"
+local recallIconFilename = "LuiExtended/media/icons/abilities/ability_innate_recall_cooldown.dds"
 
 -- Font to be used on icons
 -- "ZoFontWindowSubtitle" or ours:
