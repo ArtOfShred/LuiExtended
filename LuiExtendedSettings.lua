@@ -1670,9 +1670,10 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.TotalAlliancePointChange,
                     },
                     {
+                        -- Show Tel Var
                         type = "checkbox",
-                        name = "Show Tel Var Stone Changes",
-                        tooltip = "Print a context sensitive notification to chat when Tel Var Stones are gained or lost.",
+                        name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTV),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTV_TOOLTIP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TelVarStoneChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TelVarStoneChange = value LUIE.ChatAnnouncements.RegisterTelVarStoneEvents() end,
                         width = "full",
@@ -1680,8 +1681,9 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.TelVarStoneChange,
                     },
                     {
+                        -- Show Tel Var Color
                         type = "colorpicker",
-                        name = "\t\t\t\tTel Var Stone Change Color",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVCOLOR)),
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.TelVarStoneColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.TelVarStoneColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterTelVarStoneEvents() end,
                         width = "full",
@@ -1689,9 +1691,10 @@ function LUIE_CreateSettings()
                         default = {r=LUIE.ChatAnnouncements.D.TelVarStoneColor[1], g=LUIE.ChatAnnouncements.D.TelVarStoneColor[2], b=LUIE.ChatAnnouncements.D.TelVarStoneColor[3]}
                     },
                     {
+                        -- Show Tel Var Name
                         type = "editbox",
-                        name = "\t\t\t\tTel Var Stone Name",
-                        tooltip = "Name to display for Tel Var Stones. \"s\" will be added onto plural quantities of this name unless using one of the special formats listed below.\nSPECIAL FORMATTING:\nUsing \"Tel Var\", \"TelVar\", \"T\", \"TV\", or \"TVS\" will bypass the plural addition.\nUsing \"t\", \"tv\", or \"tvs\" will remove the spacing between the change amount and name as well as bypass the plural addition.",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVNAME)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVNAME_TOOLTIP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TelVarStoneName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TelVarStoneName = value end,
                         width = "full",
@@ -1699,9 +1702,10 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.TelVarStoneName,
                     },
                     {
+                        -- Show Tel Var Total
                         type = "checkbox",
-                        name = "\t\t\t\tShow total amount of Tel Var Stones",
-                        tooltip = "Show total amount of Tel Var Stones after change is displayed.",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTOTAL)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTOTAL_TOOLTIP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TotalTelVarStoneChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalTelVarStoneChange = value end,
                         width = "full",
@@ -1709,9 +1713,10 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.TotalTelVarStoneChange,
                     },
                     {
+                        -- Show Writ Vouchers
                         type = "checkbox",
-                        name = "Show Writ Voucher Changes",
-                        tooltip = "Print a context sensitive notification to chat when Writ Vouchers are rewarded or spent.",
+                        name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER_TOOLTIP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.WritVoucherChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.WritVoucherChange = value LUIE.ChatAnnouncements.RegisterWritVoucherEvents() end,
                         width = "full",
@@ -1719,8 +1724,9 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.WritVoucherChange,
                     },
                     {
+                        -- Show Writ Vouchers Color
                         type = "colorpicker",
-                        name = "\t\t\t\tWrit Voucher Change Color",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERCOLOR)),
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.WritVoucherColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.WritVoucherColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterWritVoucherEvents() end,
                         width = "full",
@@ -1728,9 +1734,10 @@ function LUIE_CreateSettings()
                         default = {r=LUIE.ChatAnnouncements.D.WritVoucherColor[1], g=LUIE.ChatAnnouncements.D.WritVoucherColor[2], b=LUIE.ChatAnnouncements.D.WritVoucherColor[3]}
                     },
                     {
+                        -- Show Writ Vouchers Name
                         type = "editbox",
-                        name = "\t\t\t\tWrit Voucher Name",
-                        tooltip = "Name to display for Writ Vouchers. \"s\" will be added onto plural quantities of this name unless using one of the special formats listed below.\nSPECIAL FORMATTING:\nUsing \"WV\", \"W\", or \"V\" will bypass the plural addition.\nUsing \"wv\", \"w\", or \"v\" will remove the spacing between the change amount and name as well as bypass the plural addition.",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME_TOOLTIP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.WritVoucherName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.WritVoucherName = value end,
                         width = "full",
@@ -1738,9 +1745,10 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.WritVoucherName,
                     },
                     {
+                        -- Show Writ Vouchers Total
                         type = "checkbox",
-                        name = "\t\t\t\tShow total amount of Writ Vouchers",
-                        tooltip = "Show total amount of Writ Vouchers after change is displayed.",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL_TOOLTIP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TotalWritVoucherChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalWritVoucherChange = value end,
                         width = "full",
