@@ -1553,14 +1553,16 @@ function LUIE_CreateSettings()
                 },
             },
             {
+                -- CA Currency Announcements Options Submenu
                 type = "submenu",
-                name = "Currency Announcements",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_HEADER),
                 reference = "Chat_Announcements_Options_Currency_Announcements_Submenu",
                 controls = {
                     {
+                        -- Show Currency Icons
                         type = "checkbox",
-                        name = "Show Looted Currency Icons",
-                        tooltip = "Display an icon for the relative type of currency when a notification is printed.",
+                        name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWICONS),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWICONS_TOOLTIP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyIcons end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyIcons = value end,
                         width = "full",
@@ -1568,9 +1570,10 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.CurrencyIcons,
                     },
                     {
+                        -- Show Gold
                         type = "checkbox",
-                        name = "Show Gold Changes",
-                        tooltip = "Print a context sensitive notification to chat when gold is gained or lost.",
+                        name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLD),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLD_TOOLTIP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GoldChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldChange = value LUIE.ChatAnnouncements.RegisterGoldEvents() end,
                         width = "full",
@@ -1578,8 +1581,9 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.GoldChange,
                     },
                     {
+                        -- Show Gold Color
                         type = "colorpicker",
-                        name = "\t\t\t\tGold Change Color",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDCOLOR)),
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.GoldColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.GoldColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterGoldEvents() end,
                         width = "full",
@@ -1587,9 +1591,10 @@ function LUIE_CreateSettings()
                         default = {r=LUIE.ChatAnnouncements.D.GoldColor[1], g=LUIE.ChatAnnouncements.D.GoldColor[2], b=LUIE.ChatAnnouncements.D.GoldColor[3]}
                     },
                     {
+                        -- Show Gold Name
                         type = "editbox",
-                        name = "\t\t\t\tGold Name",
-                        tooltip = "Name to display for Gold. \"s\" will be added onto plural quantities of this name unless using one of the special formats listed below.\nSPECIAL FORMATTING:\nUsing \"Gold\", \"Currency\", \"G\", or \"GP\" will bypass the plural addition.\nUsing \"g\" or \"gp\" will remove the spacing between the change amount and name as well as bypass the plural addition.",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDNAME)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDNAME_TOOLTIP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GoldName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldName = value end,
                         width = "full",
@@ -1597,9 +1602,10 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.GoldName,
                     },
                     {
+                        -- Show Gold Total Amount
                         type = "checkbox",
-                        name = "\t\t\t\tShow total amount of Gold",
-                        tooltip = "Show total amount of Gold after change is displayed.",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTOTAL)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTOTAL_TOOLTIP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TotalGoldChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalGoldChange = value end,
                         width = "full",
@@ -1607,9 +1613,10 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.TotalGoldChange,
                     },
                     {
+                        -- Show Alliance Points
                         type = "checkbox",
-                        name = "Show Alliance Point Changes",
-                        tooltip = "Print a context sensitive notification to chat when Alliance Points are earned or spent.",
+                        name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAP_TOOLTIP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AlliancePointChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AlliancePointChange = value LUIE.ChatAnnouncements.RegisterAlliancePointEvents() end,
                         width = "full",
@@ -1617,9 +1624,10 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.AlliancePointChange,
                     },
                     {
+                        -- Show Alliance Points Threshold
                         type = "slider",
-                        name = "\t\t\t\tAlliance Point Gain - Filter Threshold",
-                        tooltip = "Alliance point gains under this threshold will not display in chat, this option is intended to reduce spam from group PVP combat.",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHRESHOLD)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHRESHOLD_TOOLTIP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AlliancePointFilter end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AlliancePointFilter = value end,
                         min = 0,
@@ -1630,8 +1638,9 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.AlliancePointFilter,
                     },
                     {
+                        -- Show Alliance Points Color
                         type = "colorpicker",
-                        name = "\t\t\t\tAlliance Point Change Color",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPCOLOR)),
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.AlliancePointColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.AlliancePointColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterAlliancePointEvents() end,
                         width = "full",
@@ -1639,9 +1648,10 @@ function LUIE_CreateSettings()
                         default = {r=LUIE.ChatAnnouncements.D.AlliancePointColor[1], g=LUIE.ChatAnnouncements.D.AlliancePointColor[2], b=LUIE.ChatAnnouncements.D.AlliancePointColor[3]}
                     },
                     {
+                        -- Show Alliance Points Name
                         type = "editbox",
-                        name = "\t\t\t\tAlliance Point Name",
-                        tooltip = "Name to display for Alliance Points. \"s\" will be added onto plural quantities of this name unless using one of the special formats listed below.\nSPECIAL FORMATTING:\nUsing \"A\" or \"AP\" will bypass the plural addition.\nUsing \"a\" or \"ap\" will remove the spacing between the change amount and name as well as bypass the plural addition.",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPNAME)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPNAME_TOOLTIP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AlliancePointName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AlliancePointName = value end,
                         width = "full",
@@ -1649,9 +1659,10 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.TotalAlliancePointName,
                     },
                     {
+                        -- Show Alliance Points Total
                         type = "checkbox",
-                        name = "\t\t\t\tShow total amount of Alliance Points",
-                        tooltip = "Show total amount of Alliance Points after change is displayed.",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTOTAL)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTOTAL_TOOLTIP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TotalAlliancePointChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalAlliancePointChange = value end,
                         width = "full",
