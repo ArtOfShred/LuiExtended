@@ -1868,9 +1868,9 @@ function SCB.ReloadEffects(unitTag)
         end
         
         if SCB.SV.DisguiseStateTarget then
-            d("checking for disguise")
+            --d("checking for disguise")
             local disguiseState = GetUnitDisguiseState ("reticleover")
-            d("Disguise State: " .. disguiseState )
+            --d("Disguise State: " .. disguiseState )
             if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
                 -- Trigger a buff
                 g_effectsList.reticleover1[ strDisguise ] =
