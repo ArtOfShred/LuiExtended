@@ -342,6 +342,13 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER",            "Show St
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER_TOOLTIP",    "Display special buff icon when player is hidden or in stealth.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET",            "Show Stealth icon - Target")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET_TOOLTIP",    "Display special buff icon when target is hidden or in stealth.")
+
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWDISGUISEPLAYER",           "Show Disguised icon - Player")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWDISGUISEPLAYER_TOOLTIP",  "Display special buff icon when player is in a relevant area and is actively disguised from enemies.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWDISGUISETARGET",            "Show Disguised icon - Target")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWDISGUISETARGET_TOOLTIP",   "Display special buff icon when target is in a relevant area and is actively disguised from enemies.")
+
+
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT",                   "Show Sprint icon")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT_TOOLTIP",           "Display special buff icon when player is sprinting.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP",                   "Show Gallop icon")

@@ -1120,7 +1120,7 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER_TOOLTIP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.StealthStatePlayer end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.StealthStatePlayer = value end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.StealthStatePlayer = value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
                 default = LUIE.SpellCastBuffs.D.StealthStatePlayer,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
@@ -1130,11 +1130,35 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET_TOOLTIP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.StealthStateTarget end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.StealthStateTarget = value end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.StealthStateTarget = value LUIE.SpellCastBuffs.ReloadEffects("reticleover") end,
                 width = "full",
                 default = LUIE.SpellCastBuffs.D.StealthStateTarget,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
+            
+            -------------
+            {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWDISGUISEPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWDISGUISEPLAYER_TOOLTIP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.DisguiseStatePlayer end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.DisguiseStatePlayer = value LUIE.SpellCastBuffs.ReloadEffects() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.DisguiseStatePlayer,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWDISGUISETARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWDISGUISETARGET_TOOLTIP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.DisguiseStateTarget end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.DisguiseStateTarget = value LUIE.SpellCastBuffs.ReloadEffects("reticleover") end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.DisguiseStateTarget,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            },
+            -------------------
+            
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT),

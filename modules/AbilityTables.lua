@@ -511,6 +511,7 @@ L.Skill_Restoring_Focus          = 22237
 -- TOGGLED EFFECTS -----------------------------------
 -- ---------------------------------------------------
 L.Toggled_Hidden                    = 20309 -- Hidden (Innate)
+L.Toggled_Disguised                 = "Disguised"
 L.Toggled_Brace_Generic             = 14890 -- Block (Innate)
 L.Toggled_Sprint                    = 973 -- Sprint (Innate)
 L.Toggled_Mount_Sprint              = "Gallop" -- Mount Sprint (Generic) (Innate) -- NOTE: Renamed to Gallop in fake buffs

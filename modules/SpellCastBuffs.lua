@@ -64,6 +64,8 @@ SCB.D = {
     ShowBlockTarget                  = true,
     StealthStatePlayer               = true,
     StealthStateTarget               = true,
+    DisguiseStatePlayer              = true,
+    DisguiseStateTarget              = true,
     ShowSprint                       = true,
     ShowGallop                       = true,
     ShowResurrectionImmunity         = true,
@@ -489,6 +491,9 @@ local IsAbilityCustomToggle = {
 
 -- some optimization
 local strHidden = L.Effect_Hidden
+local strDisguise = "Disguised"
+local strMounted = "Mounted"
+local iconMounted = "LuiExtended/media/icons/mounts/mount_palomino_horse.dds"
 
 --[[
  * Manually handled list of potion durations.
@@ -756,6 +761,15 @@ function SCB.Initialize( enabled )
     EVENT_MANAGER:RegisterForEvent(moduleName .. "reticleover",     EVENT_STEALTH_STATE_CHANGED, SCB.StealthStateChanged )
     EVENT_MANAGER:AddFilterForEvent(moduleName .. "player",         EVENT_STEALTH_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
     EVENT_MANAGER:AddFilterForEvent(moduleName .. "reticleover",    EVENT_STEALTH_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "reticleover" )
+    
+    EVENT_MANAGER:RegisterForEvent(moduleName,          EVENT_DISGUISE_STATE_CHANGED, SCB.DisguiseStateChanged )
+    
+    --[[
+    EVENT_MANAGER:RegisterForEvent(moduleName .. "player",          EVENT_DISGUISE_STATE_CHANGED, SCB.DisguiseStateChanged )
+    EVENT_MANAGER:RegisterForEvent(moduleName .. "reticleover",     EVENT_DISGUISE_STATE_CHANGED, SCB.DiguiseStateChanged )
+    EVENT_MANAGER:AddFilterForEvent(moduleName .. "player",         EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
+    EVENT_MANAGER:AddFilterForEvent(moduleName .. "reticleover",    EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "reticleover" )
+    ]]--
 
     -- Activate, Deactivate player, death, alive.
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED,   SCB.OnPlayerActivated )
@@ -763,8 +777,209 @@ function SCB.Initialize( enabled )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_ALIVE, SCB.OnPlayerAlive )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_DEAD,  SCB.OnPlayerDead )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_VIBRATION,    SCB.OnVibration )
+    
+    
+    -- Mount
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MOUNTED_STATE_CHANGED, SCB.MountStatus)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_COLLECTIBLE_USE_RESULT, SCB.CollectibleUsed)
+    
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, SCB.DisguiseItem)
+    EVENT_MANAGER:AddFilterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, REGISTER_FILTER_BAG_ID, BAG_WORN )
+    
 end
 
+local g_currentDisguise = GetItemId(0, 10) or 0
+
+
+-- Move this into Init or something with a zo_call_later (probably)
+--[[
+if g_currentDisguise ~= 0 then
+    local name = E.DisguiseIcons[g_currentDisguise].name
+        local icon = E.DisguiseIcons[g_currentDisguise].icon
+        g_effectsList.player1["DisguiseType"] =
+            {
+                target="player", type=1,
+                name=name, icon=icon,
+                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                forced = "long",
+                restart=true, iconNum=0
+            }
+end
+]]--
+
+function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
+    
+    if slotId == 10 then
+        g_effectsList.player1["DisguiseType"] = nil
+        g_currentDisguise = GetItemId(0, 10) or 0
+        SCB.CollectibleBuff()
+        if g_currentDisguise == 0 then
+            return
+        else
+            local name = E.DisguiseIcons[g_currentDisguise].name
+            local icon = E.DisguiseIcons[g_currentDisguise].icon
+            g_effectsList.player1["DisguiseType"] =
+                {
+                    target="player", type=1,
+                    name=name, icon=icon,
+                    dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                    forced = "long",
+                    restart=true, iconNum=0
+                }
+        end
+    end
+    
+end
+
+function SCB.MountStatus(eventCode, mounted)
+
+    -- Remove icon first
+    g_effectsList.player1["Mount"] = nil
+    
+    if mounted then
+        local mountType = GetMountSkinId()
+        --d("Skin ID = " .. mountType) -- MOUNT
+        
+        strMounted = E.MountIcons[mountType] ~= nil and E.MountIcons[mountType].name or "Mounted"
+        iconMounted = E.MountIcons[mountType] ~= nil and E.MountIcons[mountType].icon or "LuiExtended/media/icons/mounts/mount_palomino_horse.dds"
+
+        g_effectsList.player1["Mount"] = 
+            {
+                target="player", type=1,
+                name=strMounted, icon=iconMounted,
+                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                forced = "long",
+                restart=true, iconNum=0
+            }
+    end
+end
+
+function SCB.CollectibleUsed(eventCode, result, isAttemptingActivation)
+    
+    local latency = GetLatency()
+    latency = latency + 50
+    zo_callLater (SCB.CollectibleBuff, latency)
+    
+end
+
+function SCB.CollectibleBuff()
+
+    -- PETS
+    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0 then
+        local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
+        local CollectibleName = GetCollectibleName(Collectible)
+        
+        local strPet = CollectibleName
+        local iconPet = E.PetIcons[CollectibleName] ~= nil and E.PetIcons[CollectibleName] or "LuiExtended/media/icons/pets/pet_pet_bravil_retriever.dds"
+        
+            g_effectsList.player1["PetType"] = 
+                {
+                        target="player", type=1,
+                        name=strPet, icon=iconPet,
+                        dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                        forced = "long",
+                        restart=true, iconNum=0
+                }
+    else
+        g_effectsList.player1["PetType"] = nil
+    end
+    
+    -- ASSISTANTS
+    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 then
+        local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
+        local CollectibleName = GetCollectibleName(Collectible)
+        
+        local strAssistant = CollectibleName
+        local iconAssistant = E.AssistantIcons[CollectibleName] ~= nil and E.AssistantIcons[CollectibleName] or "LuiExtended/media/icons/skins/skin_generic.dds"
+       
+            g_effectsList.player1["AssistantType"] = 
+                {
+                        target="player", type=1,
+                        name=strAssistant, icon=iconAssistant,
+                        dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                        forced = "long",
+                        restart=true, iconNum=0
+                }
+    else
+        g_effectsList.player1["AssistantSkinType"] = nil
+    end
+    
+    -- Check here to see if we have a disguise - hides polymorph or costume.
+    local DisguiseOn = GetItemId(0, 10) or 0
+    if DisguiseOn ~= 0 then
+        g_effectsList.player1["PolymorphType"] = nil
+        g_effectsList.player1["CostumeType"] = nil
+    end
+    
+    -- POLYMORPH
+    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) > 0 then
+        local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH)
+        local CollectibleName = GetCollectibleName(Collectible)
+        
+        local strPolymorph = CollectibleName
+        local iconPolymorph = E.PolymorphIcons[CollectibleName] ~= nil and E.PolymorphIcons[CollectibleName] or "LuiExtended/media/icons/costumes/costume_generic.dds"
+            if DisguiseOn == 0 then
+                g_effectsList.player1["PolymorphType"] = 
+                    {
+                            target="player", type=1,
+                            name=strPolymorph, icon=iconPolymorph,
+                            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                            forced = "long",
+                            restart=true, iconNum=0
+                    }
+            end
+            g_effectsList.player1["CostumeType"] = nil
+            g_effectsList.player1["SkinType"] = nil
+    else
+        g_effectsList.player1["PolymorphType"] = nil
+    end
+    
+    
+    -- SKINS
+    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_SKIN) > 0 then
+        local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_SKIN)
+        local CollectibleName = GetCollectibleName(Collectible)
+        
+        local strSkin = CollectibleName
+        local iconSkin = E.SkinIcons[CollectibleName] ~= nil and E.SkinIcons[CollectibleName] or "LuiExtended/media/icons/skins/skin_generic.dds"
+            if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) == 0 then
+                g_effectsList.player1["SkinType"] = 
+                    {
+                            target="player", type=1,
+                            name=strSkin, icon=iconSkin,
+                            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                            forced = "long",
+                            restart=true, iconNum=0
+                    }
+            end
+    else
+        g_effectsList.player1["SkinType"] = nil
+    end
+    
+    -- COSTUMES
+    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME) > 0 then
+        local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME)
+        local CollectibleName = GetCollectibleName(Collectible)
+        
+        local strCostume = CollectibleName
+        local iconCostume = E.CostumeIcons[CollectibleName] ~= nil and E.CostumeIcons[CollectibleName] or "LuiExtended/media/icons/costumes/costume_generic.dds"
+            if DisguiseOn == 0 and GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) == 0 then
+                g_effectsList.player1["CostumeType"] = 
+                    {
+                            target="player", type=1,
+                            name=strCostume, icon=iconCostume,
+                            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                            forced = "long",
+                            restart=true, iconNum=0
+                    }
+            end
+    else
+        g_effectsList.player1["CostumeType"] = nil
+    end
+    
+end
+
+        
 --[[
  * Sets horizontal alignment of icon. Called from Settings Menu.
  * This is done simply by setting of iconHolder anchor.
@@ -1593,23 +1808,6 @@ end
 -- This handler fires every time the player's reticle target changes
 function SCB.OnReticleTargetChanged(eventCode)
     SCB.ReloadEffects("reticleover")
-    
-    if SCB.SV.StealthStateTarget then
-    local stealthState = GetUnitStealthState ("reticleover")
-        if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
-            g_effectsList.reticleover1[ strHidden ] =
-            {
-                type=1,
-                name=strHidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "short",
-                restart=true, iconNum=0
-            }
-        else
-            g_effectsList.reticleover1[ strHidden ] = nil
-        end
-    end
-    
 end
 
 -- Used to clear existing LET.effectsList.unitTag and to request game API to fill it again
@@ -1651,7 +1849,45 @@ function SCB.ReloadEffects(unitTag)
                         restart=true, iconNum=0 }
         end
     end
-
+    
+    if unitTag == "reticleover" then
+        if SCB.SV.StealthStateTarget then
+            local stealthState = GetUnitStealthState ("reticleover")
+            if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
+                g_effectsList.reticleover1[ strHidden ] =
+                {
+                    type=1,
+                    name=strHidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
+                    dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                    forced = "short",
+                    restart=true, iconNum=0
+                }
+            else
+                g_effectsList.reticleover1[ strHidden ] = nil
+            end
+        end
+        
+        if SCB.SV.DisguiseStateTarget then
+            d("checking for disguise")
+            local disguiseState = GetUnitDisguiseState ("reticleover")
+            d("Disguise State: " .. disguiseState )
+            if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
+                -- Trigger a buff
+                g_effectsList.reticleover1[ strDisguise ] =
+                {
+                    type=1,
+                    name=strDisguise, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
+                    dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                    forced = "short",
+                    restart=true, iconNum=0
+                }
+            -- Else remove buff
+            else
+                g_effectsList.reticleover1[ strDisguise ] = nil
+            end
+        end
+    end
+    
 end
 
 -- Process new ability buff effects
@@ -2150,6 +2386,45 @@ function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
     
 end
 
+function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
+
+    if SCB.SV.DisguiseStatePlayer and unitTag == "player" then
+        if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
+            -- Trigger a buff
+            g_effectsList.player1[ strDisguise ] =
+            {
+                type=1,
+                name=strDisguise, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
+                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                forced = "short",
+                restart=true, iconNum=0
+            }
+
+        -- Else remove buff
+        else
+            g_effectsList.player1[ strDisguise ] = nil
+        end
+    end
+
+    if SCB.SV.DisguiseStatePlayer and unitTag == "reticleover" then
+        if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
+            -- Trigger a buff
+            g_effectsList.reticleover1[ strDisguise ] =
+            {
+                type=1,
+                name=strDisguise, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
+                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                forced = "short",
+                restart=true, iconNum=0
+            }
+        -- Else remove buff
+        else
+            g_effectsList.reticleover1[ strDisguise ] = nil
+        end
+    end
+    
+end
+
 function SCB.OnPlayerActivated(eventCode)
     -- Write current Action Bar and quick slot state
     SCB.OnSlotsFullUpdate(eventCode)
@@ -2157,8 +2432,52 @@ function SCB.OnPlayerActivated(eventCode)
 
     g_playerActive = true
     g_playerResurectStage = nil
+    
+    if IsMounted() then zo_callLater(function() SCB.MountStatus(eventCode, true) end , 50) end
 
+    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET or COLLECTIBLE_CATEGORY_TYPE_ASSISTANT or COLLECTIBLE_CATEGORY_TYPE_POLYMORPH or COLLECTIBLE_CATEGORY_TYPE_SKIN or COLLECTIBLE_CATEGORY_TYPE_COSTUME) > 0 then
+		zo_callLater(function() SCB.CollectibleBuff( eventCode, 0, true) end, 50)
+    end
+    
     SCB.ReloadEffects( "player" )
+    
+    if SCB.SV.DisguiseStatePlayer then
+        local disguiseState = GetUnitDisguiseState ("player")
+        if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
+            -- Trigger a buff
+            g_effectsList.player1[ strDisguise ] =
+            {
+                type=1,
+                name=strDisguise, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
+                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                forced = "short",
+                restart=true, iconNum=0
+            }
+        -- Else remove buff
+        else
+            g_effectsList.player1[ strDisguise ] = nil
+        end
+    end
+    
+    if SCB.SV.StealthStatePlayer then
+        local stealthState = GetUnitStealthState ("player")
+        if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
+            -- Trigger a buff
+            g_effectsList.player1[ strHidden ] =
+            {
+                type=1,
+                name=strHidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
+                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                forced = "short",
+                restart=true, iconNum=0
+            }
+
+        -- Else remove buff
+        else
+            g_effectsList.player1[ strHidden ] = nil
+        end
+    end
+    
 end
 
 function SCB.OnPlayerDeactivated(eventCode)
