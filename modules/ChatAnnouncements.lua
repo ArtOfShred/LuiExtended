@@ -3614,7 +3614,7 @@ function CA.OnAchievementUpdated(eventCode, aId)
                     cmpInfo[i] = strfmt( "%s |c%s%d|c87B7CC/|c71DE73%d", cmpInfo[i][1], AchievementPctToColour(pct), cmpInfo[i][2], cmpInfo[i][3] )
                 end
             end
-            details = "" > "" .. table.concat(cmpInfo, "|c87B7CC, ") .. "|c87B7CC."
+            details = " > " .. table.concat(cmpInfo, "|c87B7CC, ") .. "|c87B7CC."
         end
     end
 
