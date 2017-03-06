@@ -957,7 +957,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE_TOOLTIP),
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE_TOOLTIP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreDisguise end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreDisguise = not value LUIE.SpellCastBuffs.ReloadEffects() end,
@@ -1059,22 +1059,11 @@ function LUIE_CreateSettings()
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 2) end,
             },
             {
+                -- SpellCastBuffs Miscellaneous
                 type = "header",
                 name = GetString(SI_PLAYER_MENU_MISC),
                 width = "full",
             },
-            --[[ Ultimate Generation detection code in SCB module is broken
-            {
-                type = "checkbox",
-                name = "Show Ultimate Generation icon",
-                tooltip = "Display special buff icon when in-combat ultimate generation is detected.",
-                getFunc = function() return LUIE.SpellCastBuffs.SV.UltimateGeneration end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.UltimateGeneration = value end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.UltimateGeneration,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            --]]
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONPROC),
@@ -1096,6 +1085,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
             {
+                -- Show Block Player Icon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKPLAYER),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKPLAYER_TOOLTIP),
@@ -1106,6 +1096,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
             {
+                -- Show Block Target Icon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKTARGET),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKTARGET_TOOLTIP),
@@ -1116,6 +1107,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
             {
+                -- Show Stealth Player Icon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER_TOOLTIP),
@@ -1126,6 +1118,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
             {
+                -- Show Stealth Target Icon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET_TOOLTIP),
@@ -1135,9 +1128,8 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.StealthStateTarget,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
-            
-            -------------
             {
+                -- Show Disguise Player Icon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWDISGUISEPLAYER),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWDISGUISEPLAYER_TOOLTIP),
@@ -1148,6 +1140,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
             {
+                -- Show Disguise Target Icon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWDISGUISETARGET),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWDISGUISETARGET_TOOLTIP),
@@ -1156,10 +1149,9 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SpellCastBuffs.D.DisguiseStateTarget,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            -------------------
-            
+            },            
             {
+                -- Show Sprint Icon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT_TOOLTIP),
@@ -1170,6 +1162,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
             {
+                -- Show Gallop Icon 
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP_TOOLTIP),
@@ -1180,6 +1173,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
             {
+                -- Show Rezz Immunity Icon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWREZZ),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWREZZ_TOOLTIP),
@@ -1190,6 +1184,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
             {
+                -- Show Recall Cooldown Icon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWRECALL),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWRECALL_TOOLTIP),
