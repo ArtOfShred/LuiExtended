@@ -324,6 +324,8 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG",                    "Show Ba
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TOOLTIP",            "Print a notification to chat when bag or bank space upgrades are purchased ingame or through the crown store.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISE",                   "Show Disguise Status Change Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISE_TOOLTIP",           "Print a notification to chat when entering a relevant area and becoming disguised or revealed.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISEALERT",              "\t\t\tShow Disguise Alert Messages")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISEALERT_TOOLTIP",      "Print a notification to chat when near a sentry or performing suspicious activity while disguised.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUP",                      "Show Group Event Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUP_TOOLTIP",              "Print a notification to chat for group invites, group composition changes, and LFG features.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGUILD",                      "Show Guild Event Messages")

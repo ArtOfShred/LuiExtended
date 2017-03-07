@@ -1664,7 +1664,7 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.MiscConfiscate,
                     },
                     {
-                        -- Show Justice Events
+                        -- Show Disguise Events
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_MISC_SHOWDISGUISE),
                         tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWDISGUISE_TOOLTIP),
@@ -1673,6 +1673,17 @@ function LUIE_CreateSettings()
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.MiscDisguise,
+                    },
+                    {
+                        -- Show Disguise Alerts
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWDISGUISEALERT),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWDISGUISEALERT_TOOLTIP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscDisguiseAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscDisguiseAlert = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.MiscDisguise) end,
+                        default = LUIE.ChatAnnouncements.D.MiscDisguiseAlert,
                     },
                 },
             },

@@ -95,6 +95,7 @@ CA.D = {
     MiscSocial                    = false,
     MiscTrade                     = false,
     MiscDisguise                  = true,
+    MiscDisguiseAlert             = false,
     ShowConfiscate                = false,
     ShowCraftUse                  = false,
     ShowDestroy                   = false,
@@ -4797,18 +4798,21 @@ function CA.QuestShareRemoved(eventCode, questId)
 
 function CA.DisguiseState(eventCode, unitTag, disguiseState)
 
+        if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_DANGER then printToChat("Danger! Sentry nearby!") end
+        if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_SUSPICIOUS then printToChat("Danger! You are arousing suspicion!") end
+
         -- If we're still disguised and g_disguiseState is true then don't waste resources and end the function
         if g_disguiseState == 1 and ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
             return
         end
         
         if g_disguiseState == 1 and (disguiseState == DISGUISE_STATE_NONE) then
-            printToChat ("You are no longer disguised " .. E.DisguiseIcons[g_currentDisguise].description )
+            printToChat ("You are no longer disguised " .. E.DisguiseIcons[g_currentDisguise].description)
         end
         
         if g_disguiseState == 0 and ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
             g_currentDisguise = GetItemId(0, 10) or 0
-            printToChat ("You are now disguised " .. E.DisguiseIcons[g_currentDisguise].description )
+            printToChat ("You are now disguised " .. E.DisguiseIcons[g_currentDisguise].description)
         end
         
         g_disguiseState = GetUnitDisguiseState("player")
