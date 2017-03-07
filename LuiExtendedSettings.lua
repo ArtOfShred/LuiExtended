@@ -1663,6 +1663,17 @@ function LUIE_CreateSettings()
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.MiscConfiscate,
                     },
+                    {
+                        -- Show Justice Events
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWDISGUISE),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWDISGUISE_TOOLTIP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscDisguise end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscDisguise = value LUIE.ChatAnnouncements.RegisterDisguiseEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.MiscDisguise,
+                    },
                 },
             },
             {
@@ -2077,6 +2088,16 @@ function LUIE_CreateSettings()
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.ShowDestroy,
+                    },
+                    {
+                        type = "checkbox",
+                        name = "Show Disguise equip/unequip message",
+                        tooltip = "Displays a message in chat when a disguise item is equipped or unequipped. Note, can be paired with the misc function that prints when player disguise state changes.",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.ShowDisguise end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowDisguise = value LUIE.ChatAnnouncements.RegisterDestroyEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.ShowDisguise,
                     },
                     {
                         type = "checkbox",

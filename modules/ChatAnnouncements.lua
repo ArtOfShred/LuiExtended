@@ -94,9 +94,11 @@ CA.D = {
     MiscMail                      = false,
     MiscSocial                    = false,
     MiscTrade                     = false,
+    MiscDisguise                  = true,
     ShowConfiscate                = false,
     ShowCraftUse                  = false,
     ShowDestroy                   = false,
+    ShowDisguise                  = false,
     TelVarStoneChange             = true,
     TelVarStoneColor              = { 0.368627, 0.643137, 1, 1 },
     TelVarStoneName               = GetString(SI_CURRENCY_TELVAR_STONES), -- "Tel Var Stones"
@@ -109,6 +111,8 @@ CA.D = {
     WritVoucherName               = GetString(SI_CURRENCY_WRIT_VOUCHERS), -- "Writ Vouchers"
 }
 
+local g_currentDisguise
+local g_disguiseState
 local g_bankStacks                = {} -- Called for indexing on opening crafting window (If the player decons an item from the bank - not needed for bank, since we don't care about items in the bank)
 local g_CP_BAR_COLORS             = ZO_CP_BAR_GRADIENT_COLORS -- Color for Champion Levels
 local g_equippedStacks            = {} -- Called for indexing on init
@@ -218,6 +222,7 @@ function CA.Initialize(enabled)
     CA.RegisterSocialEvents()
     CA.RegisterCustomStrings()
     CA.RegisterDuelEvents()
+    CA.RegisterDisguiseEvents()
 end
 
 function CA.RegisterSocialEvents()
@@ -284,6 +289,17 @@ function CA.RegisterDuelEvents()
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_CANCELED, CA.DuelInviteCanceled)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_NEAR_BOUNDARY, CA.DuelNearBoundary)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, CA.DuelStarted)
+end
+
+function CA.RegisterDisguiseEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED)
+    if CA.SV.MiscDisguise then
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "player",          EVENT_DISGUISE_STATE_CHANGED, CA.DisguiseState )
+        EVENT_MANAGER:AddFilterForEvent(moduleName .. "player",         EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
+        g_currentDisguise = GetItemId(0, 10) or 0 -- Get the currently equipped disguise itemId if any
+        g_disguiseState = GetUnitDisguiseState("player") -- Get current player disguise state
+        if g_disguiseState > 0 then g_disguiseState = 1 end -- Simplify all the various states into a basic 0 = false, 1 = true value
+    end
 end
 
 function CA.RegisterAchievementsEvent()
@@ -485,7 +501,7 @@ function CA.RegisterDestroyEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED)
-    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
+    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT, CA.MiscAlertHorse)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, CA.MiscAlertBags)
@@ -494,16 +510,16 @@ function CA.RegisterDestroyEvents()
         g_inventoryStacks = {}
         CA.IndexEquipped()
         CA.IndexInventory()
-    elseif not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) and CA.SV.MiscHorse then
+    elseif not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate and CA.SV.ShowDisguise) and CA.SV.MiscHorse then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT, CA.MiscAlertHorse)
-    elseif not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) and CA.SV.MiscBags then
+    elseif not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate and CA.SV.ShowDisguise) and CA.SV.MiscBags then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, CA.MiscAlertBags)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, CA.MiscAlertBank)
     end
     if CA.SV.ShowDestroy then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED, CA.DestroyItem)
     end
-    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.MiscConfiscate then
+    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.MiscConfiscate or CA.SV.ShowDisguise then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED, CA.JusticeStealRemove)
     end
     g_itemWasDestroyed = false
@@ -512,7 +528,7 @@ end
 function CA.RegisterBagEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED)
-    if CA.SV.MiscBags or CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
+    if CA.SV.MiscBags or CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, CA.MiscAlertBags)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, CA.MiscAlertBank)
     end
@@ -529,7 +545,7 @@ end
 
 function CA.RegisterHorseEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT)
-    if CA.SV.MiscHorse or CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
+    if CA.SV.MiscHorse or CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT, CA.MiscAlertHorse)
     end
 end
@@ -3669,13 +3685,12 @@ function CA.IndexInventory()
 end
 
 function CA.IndexEquipped()
-
+    -- d("Debug - Equipped Items Indexed!")
     local bagsize = GetBagSize(0)
     
     for i = 1,bagsize do
         local icon, stack = GetItemInfo(0, i)
         local bagitemlink = GetItemLink(0, i, LINK_STYLE_DEFAULT)
-        printToChat(bagitemlink)
         if bagitemlink ~= "" then
             g_equippedStacks[i] = { icon=icon, stack=stack, itemlink=bagitemlink}
         end
@@ -3706,10 +3721,10 @@ end
 
 function CA.CraftingClose(eventCode, craftSkill)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
+    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
     end
-    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) then
+    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate and CA.SV.ShowDisguise) then
         g_inventoryStacks = {}
     end
     g_bankStacks = {}
@@ -3726,10 +3741,10 @@ end
 
 function CA.BankClose(eventCode)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
+    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
     end
-    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) then
+    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate and CA.SV.ShowDisguise) then
         g_inventoryStacks = {}
     end
     g_bankStacks = {}
@@ -3744,10 +3759,10 @@ end
 
 function CA.GuildBankClose(eventCode)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
+    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
     end
-    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) then
+    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate and CA.SV.ShowDisguise) then
         g_inventoryStacks = {}
     end
 end
@@ -3761,10 +3776,10 @@ end
 
 function CA.StoreClose(eventCode)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
+    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
     end
-    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) then
+    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate and CA.SV.ShowDisguise) then
         g_inventoryStacks = {}
     end
 end
@@ -3807,23 +3822,29 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
         local receivedBy = ""
         if not g_equippedStacks[slotId] then -- NEW ITEM
             local icon, stack = GetItemInfo(bagId, slotId)
-            local id = GetItemId(bagId, slotId)
             local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-            g_equippedStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink, id=id }
+            g_equippedStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_equippedStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
-            local gainorloss = "|c0B610B"
-            local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTEDITEM)
-            if slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then printToChat ("You are now wearing: " .. E.DisguiseIcons[item.id].itemlink) end
+            local gainorloss = "|cFEFEFE"
+            local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_EQUIP)
+            if CA.SV.ShowDisguise and slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) end
 
         elseif g_equippedStacks[slotId] then -- EXISTING ITEM
             -- Means item was modified (enchanted, etc)
             if stackCountChange == 0 then -- For equipment, stackCountChange 0 is also applied when gear is swapped out. This means we need to update the index on this change.
                 local icon, stack = GetItemInfo(bagId, slotId)
-                local id = GetItemId(bagId, slotId)
                 local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-                g_equippedStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink, id=id }
+                g_equippedStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+                if CA.SV.ShowDisguise and slotId == 10 then
+                    local item = g_equippedStacks[slotId]
+                    local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+                    local itemType = GetItemLinkItemType(item.itemlink)
+                    local gainorloss = "|cFEFEFE"
+                    local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_EQUIP)
+                    if (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) end
+                end
             end
             
             local item = g_equippedStacks[slotId]
@@ -3836,14 +3857,23 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                 local icon, stack = GetItemInfo(bagId, slotId)
                 local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                 -- CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
-                g_equippedStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
+                g_equippedStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = (strfmt("|ca80700"))
-                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
+                local gainorloss = (strfmt("|cFEFEFE"))
+                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_UNEQUIP)
                 local change = (stackCountChange * -1)
                 local endcount = g_equippedStacks[slotId].stack - change
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
+                    if CA.SV.ShowDisguise and not g_itemWasDestroyed and slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
+                        if IsUnitInCombat("player") then 
+                            logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_DESTROYED)
+                            gainorloss = "|ca80700"
+                        end
+                        CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) 
+                    end
                     if CA.SV.ShowDestroy and g_itemWasDestroyed then
+                        logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
+                        gainorloss = "|ca80700"
                         CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
                     end
                     g_equippedStacks[slotId] = nil
@@ -4511,7 +4541,7 @@ function CA.JusticeStealRemove(eventCode)
     g_stealString = ""
     ConfiscateMessage = (GetString(SI_LUIE_CA_JUSTICE_CONFISCATED_MSG))
 
-    if CA.SV.ShowConfiscate or CA.SV.ShowDestroy then
+    if CA.SV.ShowConfiscate then
         zo_callLater(CA.JusticeRemovePrint, 50)
     end
 end
@@ -4605,7 +4635,6 @@ function CA.JusticeRemovePrint()
     g_JusticeStacks = {} -- Clear the Justice Item Stacks since we don't need this for anything else!
     g_equippedStacks = {}
     g_inventoryStacks = {}
-    CA.IndexEquipped()
     CA.IndexInventory() -- Reindex the inventory with the correct values!
 end
 
@@ -4765,3 +4794,24 @@ function CA.QuestShareRemoved(eventCode, questId)
     EVENT_DUEL_NEAR_BOUNDARY (integer eventCode,boolean isInWarningArea)
     EVENT_DUEL_STARTED (number eventCode)
 ]]--
+
+function CA.DisguiseState(eventCode, unitTag, disguiseState)
+
+        -- If we're still disguised and g_disguiseState is true then don't waste resources and end the function
+        if g_disguiseState == 1 and ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
+            return
+        end
+        
+        if g_disguiseState == 1 and (disguiseState == DISGUISE_STATE_NONE) then
+            printToChat ("You are no longer disguised " .. E.DisguiseIcons[g_currentDisguise].description )
+        end
+        
+        if g_disguiseState == 0 and ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
+            g_currentDisguise = GetItemId(0, 10) or 0
+            printToChat ("You are now disguised " .. E.DisguiseIcons[g_currentDisguise].description )
+        end
+        
+        g_disguiseState = GetUnitDisguiseState("player")
+        if g_disguiseState > 0 then g_disguiseState = 1 end
+        
+end
