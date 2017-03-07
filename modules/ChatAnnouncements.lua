@@ -3803,7 +3803,7 @@ end
 -- Only used if the option to see destroyed items or items lost from a guard is turned on
 function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
 
-        if bagId == BAG_WORN then
+    if bagId == BAG_WORN then
         local receivedBy = ""
         if not g_equippedStacks[slotId] then -- NEW ITEM
             local icon, stack = GetItemInfo(bagId, slotId)
@@ -3818,10 +3818,12 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             if slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then printToChat ("You are now wearing: " .. E.DisguiseIcons[item.id].itemlink) end
 
         elseif g_equippedStacks[slotId] then -- EXISTING ITEM
-
             -- Means item was modified (enchanted, etc)
-            if stackCountChange == 0 then
-                return
+            if stackCountChange == 0 then -- For equipment, stackCountChange 0 is also applied when gear is swapped out. This means we need to update the index on this change.
+                local icon, stack = GetItemInfo(bagId, slotId)
+                local id = GetItemId(bagId, slotId)
+                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                g_equippedStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink, id=id }
             end
             
             local item = g_equippedStacks[slotId]
@@ -4515,6 +4517,8 @@ function CA.JusticeStealRemove(eventCode)
 end
 
 function CA.JusticeRemovePrint()
+
+    -- PART 1 -- INVENTORY
     local bagsize = GetBagSize(1)
 
     for i = 1,bagsize do
@@ -4533,7 +4537,7 @@ function CA.JusticeRemovePrint()
                 local seticon = ( CA.SV.LootIcons and inventoryitem.icon and inventoryitem.icon ~= "" ) and ("|t16:16:" .. inventoryitem.icon .. "|t ") or ""
                 local itemType = GetItemLinkItemType(inventoryitem.itemlink)
                 local stack = inventoryitem.stack
-                local receivedBy = "CRAFT"
+                local receivedBy = ""
                 local gainorloss = (strfmt("|ca80700"))
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_CONFISCATED)
                 if CA.SV.ShowConfiscate then
@@ -4543,8 +4547,65 @@ function CA.JusticeRemovePrint()
         end
     end
 
+        
+    -- Reset Justice Stacks to reuse for equipped
+    g_JusticeStacks = {}
+    
+    -- PART 2 -- EQUIPPED
+    bagsize = GetBagSize(0)
+    
+        -- We have to determine the currently active weapon, and swap the slots because of some wierd interaction when your equipped weapon is confiscated.
+        -- This works even if the other weapon slot is empty or both slots have a stolen weapon.
+        local weaponInfo = GetActiveWeaponPairInfo()
+        
+        -- Save weapons
+        local W1 = g_equippedStacks[4]
+        local W2 = g_equippedStacks[5]
+        local W3 = g_equippedStacks[20]
+        local W4 = g_equippedStacks[21]
+        
+        -- Swap weapons depending on currently equipped pair
+        if WeaponInfo == 1 then
+        g_equippedStacks[4] = W3
+        g_equippedStacks[5] = W4
+        end
+        
+        if WeaponInfo == 2 then
+        g_equippedStacks[20] = W1
+        g_equippedStacks[21] = W2
+        end
+    
+
+    for i = 1,bagsize do
+        local icon, stack = GetItemInfo(0, i)
+        local bagitemlink = GetItemLink(0, i, LINK_STYLE_DEFAULT)
+        if bagitemlink ~= "" then
+            g_JusticeStacks[i] = {icon=icon, stack=stack, itemlink=bagitemlink}
+        end
+    end
+
+    for i = 1,bagsize do
+        local inventoryitem = g_equippedStacks[i]
+        local justiceitem = g_JusticeStacks[i]
+        if inventoryitem ~= nil then
+            if justiceitem == nil then
+                local seticon = ( CA.SV.LootIcons and inventoryitem.icon and inventoryitem.icon ~= "" ) and ("|t16:16:" .. inventoryitem.icon .. "|t ") or ""
+                local itemType = GetItemLinkItemType(inventoryitem.itemlink)
+                local stack = inventoryitem.stack
+                local receivedBy = ""
+                local gainorloss = (strfmt("|ca80700"))
+                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_CONFISCATEDEQUIPPED)
+                if CA.SV.ShowConfiscate then
+                    CA.LogItem(logPrefix, seticon, inventoryitem.itemlink, itemType, stack or 1, receivedBy, gainorloss)
+                end
+            end
+        end
+    end
+
     g_JusticeStacks = {} -- Clear the Justice Item Stacks since we don't need this for anything else!
+    g_equippedStacks = {}
     g_inventoryStacks = {}
+    CA.IndexEquipped()
     CA.IndexInventory() -- Reindex the inventory with the correct values!
 end
 
