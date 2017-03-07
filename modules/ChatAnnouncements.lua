@@ -5,6 +5,7 @@ LUIE.ChatAnnouncements = {}
 -- Performance Enhancement
 local CA             = LUIE.ChatAnnouncements
 local CommaValue     = LUIE.CommaValue
+local E              = LUIE.Effects
 local printToChat    = LUIE.PrintToChat
 local GuildIndexData = LUIE.GuildIndexData
 local strformat      = zo_strformat
@@ -110,7 +111,9 @@ CA.D = {
 
 local g_bankStacks                = {} -- Called for indexing on opening crafting window (If the player decons an item from the bank - not needed for bank, since we don't care about items in the bank)
 local g_CP_BAR_COLORS             = ZO_CP_BAR_GRADIENT_COLORS -- Color for Champion Levels
+local g_equippedStacks            = {} -- Called for indexing on init
 local g_inventoryStacks           = {} -- Called for indexing on init
+local g_JusticeStacks             = {} -- Filled during justice confiscation to compare item changes
 local g_XPCombatBufferString      = ""
 local g_XPCombatBufferValue       = 0
 local g_XP_BAR_COLORS             = ZO_XP_BAR_GRADIENT_COLORS[2] -- Color for Normal Levels
@@ -487,7 +490,9 @@ function CA.RegisterDestroyEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT, CA.MiscAlertHorse)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, CA.MiscAlertBags)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, CA.MiscAlertBank)
+        g_equippedStacks = {}
         g_inventoryStacks = {}
+        CA.IndexEquipped()
         CA.IndexInventory()
     elseif not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) and CA.SV.MiscHorse then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT, CA.MiscAlertHorse)
@@ -3663,6 +3668,20 @@ function CA.IndexInventory()
     end
 end
 
+function CA.IndexEquipped()
+
+    local bagsize = GetBagSize(0)
+    
+    for i = 1,bagsize do
+        local icon, stack = GetItemInfo(0, i)
+        local bagitemlink = GetItemLink(0, i, LINK_STYLE_DEFAULT)
+        printToChat(bagitemlink)
+        if bagitemlink ~= "" then
+            g_equippedStacks[i] = { icon=icon, stack=stack, itemlink=bagitemlink}
+        end
+    end
+end
+
 function CA.IndexBank()
     -- d("Debug - Bank Indexed!")
     local bagsizebank = GetBagSize(2)
@@ -3690,8 +3709,8 @@ function CA.CraftingClose(eventCode, craftSkill)
     if CA.SV.ShowDestroy or CA.SV.ShowConfiscate then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
     end
-    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate)
-        then g_inventoryStacks = {}
+    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate) then
+        g_inventoryStacks = {}
     end
     g_bankStacks = {}
 end
@@ -3783,6 +3802,58 @@ end
 
 -- Only used if the option to see destroyed items or items lost from a guard is turned on
 function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
+
+        if bagId == BAG_WORN then
+        local receivedBy = ""
+        if not g_equippedStacks[slotId] then -- NEW ITEM
+            local icon, stack = GetItemInfo(bagId, slotId)
+            local id = GetItemId(bagId, slotId)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            g_equippedStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink, id=id }
+            local item = g_equippedStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local itemType = GetItemLinkItemType(item.itemlink)
+            local gainorloss = "|c0B610B"
+            local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTEDITEM)
+            if slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then printToChat ("You are now wearing: " .. E.DisguiseIcons[item.id].itemlink) end
+
+        elseif g_equippedStacks[slotId] then -- EXISTING ITEM
+
+            -- Means item was modified (enchanted, etc)
+            if stackCountChange == 0 then
+                return
+            end
+            
+            local item = g_equippedStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local itemType = GetItemLinkItemType(item.itemlink)
+
+            if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
+                local gainorloss = "|c0B610B"
+                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_GAINEDSTACK)
+                local icon, stack = GetItemInfo(bagId, slotId)
+                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                -- CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+                g_equippedStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
+            elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
+                local gainorloss = (strfmt("|ca80700"))
+                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
+                local change = (stackCountChange * -1)
+                local endcount = g_equippedStacks[slotId].stack - change
+                if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
+                    if CA.SV.ShowDestroy and g_itemWasDestroyed then
+                        CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                    end
+                    g_equippedStacks[slotId] = nil
+                else
+                    local icon, stack = GetItemInfo(bagId, slotId)
+                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                    g_equippedStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+                end
+            end
+        end
+    end
+
     if bagId == BAG_BACKPACK then
         local receivedBy = ""
         if not g_inventoryStacks[slotId] then -- NEW ITEM

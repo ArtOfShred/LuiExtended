@@ -357,41 +357,41 @@ E.DebuffDisplayOverrideName = {
 
 E.DisguiseIcons = {
 
-    [2571] = { name = 'Midnight Union Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_midnight_union_disguise.dds', itemlink = '|H0:item:2571:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' }, 
-    [27266] = {name = 'Vanguard Uniform', icon = 'LuiExtended/media/icons/disguises/disguise_vanguard_uniform.dds', itemlink = '|H0:item:27266:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [29536] = { name = 'Stormfist Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_stormfist_disguise.dds', itemlink = '|H0:item:29536:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [40283] = { name = 'Keeper\'s Garb', icon = 'LuiExtended/media/icons/disguises/disguise_keepers_garb.dds', itemlink = '	|H0:item:40283:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [40286] = { name = 'Seadrake Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_seadrake_disguise.dds', itemlink = '|H0:item:40286:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [40294] = { name = 'Pirate Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_pirate_disguise.dds', itemlink = '|H0:item:40294:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [40296] = { name = 'Red Rook Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_red_rook_disguise.dds', itemlink = '|H0:item:40296:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [42413] = { name = 'Colovian Uniform', icon = 'LuiExtended/media/icons/disguises/disguise_colovian_uniform.dds', itemlink = '|H0:item:42413:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [42736] = { name = 'Servant\'s Robes', icon = 'LuiExtended/media/icons/disguises/disguise_servants_robes.dds', itemlink = '|H0:item:42736:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [43046] = { name = 'Forebear Dishdasha', icon = 'LuiExtended/media/icons/disguises/disguise_forebear_dishdasha.dds', itemlink = '|H0:item:43046:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [43047] = { name = 'Crown Dishdasha', icon = 'LuiExtended/media/icons/disguises/disguise_crown_dishdasha.dds', itemlink = '|H0:item:43047:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [43508] = { name = 'Seaside Sanctuary Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', itemlink = '|H0:item:43508:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' }, -- NO ICON
-    [43511] = { name = 'Sea Viper Armor', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', itemlink = '|H0:item:43511:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' }, -- NO ICON
-    [43515] = { name = 'Imperial Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_imperial_disguise.dds', itemlink = '|H0:item:43515:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [44448] = { name = 'Frostedge Bandit Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_frostedge_bandit_disguise.dds', itemlink = '|H0:item:44448:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [44580] = { name = 'Hollow Moon Garb', icon = 'LuiExtended/media/icons/disguises/disguise_hollow_moon_garb.dds', itemlink = '|H0:item:44580:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [44587] = { name = 'Northwind Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_northwind_disguise.dds', itemlink = '|H0:item:44587:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [44697] = { name = 'Hallin\'s Stand Seventh Legion Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_hallins_stand_seventh_legion_disguise.dds', itemlink = '|H0:item:44697:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [45006] = { name = 'Phaer Mercenary Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_phaer_mercenary_disguise.dds', itemlink = '|H0:item:45006:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [45007] = { name = 'Quendeluun Veiled Heritance Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_quendeluun_veiled_heritance_disguise.dds', itemlink = '|H0:item:45007:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [45008] = { name = 'Vulkhel Guard Marine Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_vulkhel_guard_marine_disguise.dds', itemlink = '|H0:item:45008:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [45781] = { name = 'Kollopi Essence', icon = 'LuiExtended/media/icons/disguises/disguise_kollopi_essence.dds', itemlink = '|H0:item:45781:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [45803] = { name = 'Bloodthorn Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_bloodthorn_disguise.dds', itemlink = '|H0:item:45803:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [54332] = { name = 'Fort Amol Guard Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_fort_amol_guard_disguise.dds', itemlink = '|H0:item:54332:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [54380] = { name = 'Steel Shrike Uniform', icon = 'LuiExtended/media/icons/disguises/disguise_steel_shrike_uniform.dds', itemlink = '|H0:item:54380:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [54483] = { name = 'Courier Uniform', icon = 'LuiExtended/media/icons/disguises/disguise_courier_uniform.dds', itemlink = '|H0:item:54483:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [54994] = { name = 'Shadowsilk Gem', icon = 'LuiExtended/media/icons/disguises/disguise_shadowsilk_gem.dds', itemlink = '|H0:item:54994:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [55014] = { name = 'Wolfbane Watch Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', itemlink = '|H0:item:55014:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [64260] = { name = 'Dunmer Cultural Garb', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', itemlink = '|H0:item:64260:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' }, -- NO ICON
-    [71090] = { name = 'Servant\'s Outfit', icon = 'LuiExtended/media/icons/disguises/disguise_servants_outfit.dds', itemlink = '|H0:item:71090:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
-    [71541] = { name = 'Castle Kvatch Sentinel Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', itemlink = '|H0:item:71541:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' }, -- NO ICON
-    [71789] = { name = 'Castle Kvatch Sentinel Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', itemlink = '|H0:item:71789:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' }, -- NO ICON
-    [79332] = { name = 'Monk\'s Diguise', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', itemlink = '|H0:item:79332:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' }, -- NO ICON
-    [79505] = { name = 'Sentinel Guard Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', itemlink = '|H0:item:79505:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' }, -- NO ICON
-    [55262] = { name = 'Guild Tabard', icon = 'LuiExtended/media/icons/disguises/disguise_guild_tabard.dds', itemlink = '|H0:item:55262:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [2571] = { name = 'Midnight Union Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_midnight_union_disguise.dds', itemlink = '|H1:item:2571:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' }, 
+    [27266] = {name = 'Vanguard Uniform', icon = 'LuiExtended/media/icons/disguises/disguise_vanguard_uniform.dds', itemlink = '|H1:item:27266:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [29536] = { name = 'Stormfist Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_stormfist_disguise.dds', itemlink = '|H1:item:29536:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [40283] = { name = 'Keeper\'s Garb', icon = 'LuiExtended/media/icons/disguises/disguise_keepers_garb.dds', itemlink = '	|H1:item:40283:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [40286] = { name = 'Seadrake Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_seadrake_disguise.dds', itemlink = '|H1:item:40286:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [40294] = { name = 'Pirate Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_pirate_disguise.dds', itemlink = '|H1:item:40294:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [40296] = { name = 'Red Rook Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_red_rook_disguise.dds', itemlink = '|H1:item:40296:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [42413] = { name = 'Colovian Uniform', icon = 'LuiExtended/media/icons/disguises/disguise_colovian_uniform.dds', itemlink = '|H1:item:42413:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [42736] = { name = 'Servant\'s Robes', icon = 'LuiExtended/media/icons/disguises/disguise_servants_robes.dds', itemlink = '|H1:item:42736:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [43046] = { name = 'Forebear Dishdasha', icon = 'LuiExtended/media/icons/disguises/disguise_forebear_dishdasha.dds', itemlink = '|H1:item:43046:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [43047] = { name = 'Crown Dishdasha', icon = 'LuiExtended/media/icons/disguises/disguise_crown_dishdasha.dds', itemlink = '|H1:item:43047:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [43508] = { name = 'Seaside Sanctuary Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', itemlink = '|H1:item:43508:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' }, -- NO ICON
+    [43511] = { name = 'Sea Viper Armor', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', itemlink = '|H1:item:43511:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' }, -- NO ICON
+    [43515] = { name = 'Imperial Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_imperial_disguise.dds', itemlink = '|H1:item:43515:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [44448] = { name = 'Frostedge Bandit Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_frostedge_bandit_disguise.dds', itemlink = '|H1:item:44448:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [44580] = { name = 'Hollow Moon Garb', icon = 'LuiExtended/media/icons/disguises/disguise_hollow_moon_garb.dds', itemlink = '|H1:item:44580:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [44587] = { name = 'Northwind Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_northwind_disguise.dds', itemlink = '|H1:item:44587:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [44697] = { name = 'Hallin\'s Stand Seventh Legion Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_hallins_stand_seventh_legion_disguise.dds', itemlink = '|H1:item:44697:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [45006] = { name = 'Phaer Mercenary Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_phaer_mercenary_disguise.dds', itemlink = '|H1:item:45006:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [45007] = { name = 'Quendeluun Veiled Heritance Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_quendeluun_veiled_heritance_disguise.dds', itemlink = '|H1:item:45007:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [45008] = { name = 'Vulkhel Guard Marine Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_vulkhel_guard_marine_disguise.dds', itemlink = '|H1:item:45008:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [45781] = { name = 'Kollopi Essence', icon = 'LuiExtended/media/icons/disguises/disguise_kollopi_essence.dds', itemlink = '|H1:item:45781:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [45803] = { name = 'Bloodthorn Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_bloodthorn_disguise.dds', itemlink = '|H1:item:45803:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [54332] = { name = 'Fort Amol Guard Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_fort_amol_guard_disguise.dds', itemlink = '|H1:item:54332:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [54380] = { name = 'Steel Shrike Uniform', icon = 'LuiExtended/media/icons/disguises/disguise_steel_shrike_uniform.dds', itemlink = '|H1:item:54380:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [54483] = { name = 'Courier Uniform', icon = 'LuiExtended/media/icons/disguises/disguise_courier_uniform.dds', itemlink = '|H1:item:54483:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [54994] = { name = 'Shadowsilk Gem', icon = 'LuiExtended/media/icons/disguises/disguise_shadowsilk_gem.dds', itemlink = '|H1:item:54994:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [55014] = { name = 'Wolfbane Watch Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', itemlink = '|H1:item:55014:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [64260] = { name = 'Dunmer Cultural Garb', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', itemlink = '|H1:item:64260:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' }, -- NO ICON
+    [71090] = { name = 'Servant\'s Outfit', icon = 'LuiExtended/media/icons/disguises/disguise_servants_outfit.dds', itemlink = '|H1:item:71090:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
+    [71541] = { name = 'Castle Kvatch Sentinel Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', itemlink = '|H1:item:71541:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' }, -- NO ICON
+    [71789] = { name = 'Castle Kvatch Sentinel Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', itemlink = '|H1:item:71789:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' }, -- NO ICON
+    [79332] = { name = 'Monk\'s Diguise', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', itemlink = '|H1:item:79332:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' }, -- NO ICON
+    [79505] = { name = 'Sentinel Guard Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', itemlink = '|H1:item:79505:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' }, -- NO ICON
+    [55262] = { name = 'Guild Tabard', icon = 'LuiExtended/media/icons/disguises/disguise_guild_tabard.dds', itemlink = '|H1:item:55262:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h' },
 
 }
 

@@ -130,6 +130,7 @@ ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG",                  "Mail se
 ZO_CreateStringId("SI_LUIE_CA_MISC_LOCKPICK_FAILED",                    "Lockpick failed!")
 ZO_CreateStringId("SI_LUIE_CA_MISC_LOCKPICK_SUCCESS",                   "Lockpick successful!")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_CONFISCATED",              "Confiscated")
+ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_CONFISCATEDEQUIPPED",      "Confiscated - Equipped")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_DECONSTRUCTED",            "Deconstructed")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED",                "Desposited")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED",                "Destroyed")
