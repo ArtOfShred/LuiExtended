@@ -51,13 +51,25 @@ SCB.D = {
     lockPositionToUnitFrames         = true,
     LongTermEffects_Player           = true,
     LongTermEffects_Target           = true,
+    IgnoreMundusPlayer               = false,
+    IgnoreMundusTarget               = false,
+    IgnoreVampLycanPlayer            = false,
+    IgnoreVampLycanTarget            = false,
+    IgnoreCyrodiilPlayer             = false,
+    IgnoreCyrodiilTarget             = false,
+    IgnoreBattleSpiritPlayer         = false,
+    IgnoreBattleSpiritTarget         = false,
+    IgnoreEsoPlusPlayer              = true,
+    IgnoreEsoPlusTarget              = true,
+    
     IgnoreDisguise                   = false,
-    IgnoreMundus                     = false,
-    IgnoreEquipment                  = false,
-    IgnoreVampLycan                  = false,
-    IgnoreCyrodiil                   = false,
-    IgnoreBattleSpirit               = false,
-    IgnoreEsoPlus                    = true,
+    IgnoreCostume                    = false,
+    IgnoreSkin                       = false,
+    IgnorePolymorph                  = false,
+    IgnoreAssistant                  = false,
+    IgnorePet                        = false,
+    IgnoreMount                      = false,
+    
     LongTermEffectsSeparate          = true,
     LongTermEffectsSeparateAlignment = 2,
     ShowBlockPlayer                  = true,
@@ -495,116 +507,6 @@ local strDisguise = "Disguised"
 local strMounted = "Mounted"
 local iconMounted = "LuiExtended/media/icons/mounts/mount_palomino_horse.dds"
 
---[[
- * Manually handled list of potion durations.
- * This 2 tables are taken from Srendarr
- ]]--
-local PotionDurations = {
-    [1] = { --standard potions from loot or from vendor. Potions can be any level, so duration is just estimated.
-        ["Sip of"]      = 4,    --lvl 1-5   3.3 + (1+5) / 2 * 0.257 = 4.071
-        ["Tincture"]    = 5.3,  --lvl 6-10
-        ["Serum"]       = 6.6,  --lvl 11-15
-        ["Dram of"]     = 7.8,  --lvl 16-20
-        ["Effusion"]    = 9.1,  --lvl 21-35
-        ["Potion"]      = 10.4, --lvl 26-30
-        ["Draught"]     = 11.7, --lvl 31-35
-        ["Solution"]    = 13,   --lvl 36-40
-        ["Philter"]     = 14.3, --lvl 41-45
-        ["Elixir"]      = 15.8, --lvl 46-51 3.3 + (46+51) / 2 * 0.257 = 15.7645
-        ["Panacea"]     = 18,   --VR 5      3.3 + 57.5 * 0.257 = 17.949
-        ["Distillate"]  = 20.3, --VR10      3.3 + 66 * 0.257 = 20.262
-        ["Essence"]     = 22.1, --VR15      3.3 + 73 * 0.257 = 22.061
-    },
-    [2] = { --crafted 2 ingredients potions with long buff
-        ["Sip of"]      = 10.5, --lvl 3      9 +  4 * 0.375 = 10.425  (9 + itemLevel * 0.375)
-        ["Tincture"]    = 13.1, --lvl 10     9 + 11 * 0.375 = 13.125
-        ["Dram of"]     = 16.8, --lvl 20     9 + 21 * 0.375 = 16.875
-        ["Draught"]     = 20.6, --lvl 30     9 + 31 * 0.375 = 20.625
-        ["Solution"]    = 24.3, --lvl 40     9 + 41 * 0.375 = 24.375
-        ["Elixir"]      = 28.8, --VR 1       9 + 53 * 0.375 = 28.875
-        ["Panacea"]     = 31,   --VR 5       9 + 59 * 0.375 = 31.125
-        ["Distillate"]  = 33.8, --VR10       9 + 66 * 0.375 = 33.750
-        ["Essence"]     = 36.4, --VR15       9 + 73 * 0.375 = 36.375
-    },
-    [3] = {  --crafted 3 ingredients potions with long buff (+4 sec)
-        ["Sip of"]      = 14.5, --lvl 3
-        ["Tincture"]    = 17.1, --lvl 10
-        ["Dram of"]     = 20.8, --lvl 20
-        ["Draught"]     = 24.6, --lvl 30
-        ["Solution"]    = 28.3, --lvl 40
-        ["Elixir"]      = 32.8, --VR 1
-        ["Panacea"]     = 35,   --VR 5
-        ["Distillate"]  = 37.8, --VR10
-        ["Essence"]     = 40.4, --VR15
-    },
-    [4] = {  --crafted 2 ingredients potions with short buff
-        ["Sip of"]      = 4.5,  --lvl 3     4 +  4 * 0.129 = 4.516
-        ["Tincture"]    = 5.4,  --lvl 10    4 + 11 * 0.129 = 5.419
-        ["Dram of"]     = 6.7,  --lvl 20    4 + 21 * 0.129 = 6.709
-        ["Draught"]     = 8,    --lvl 30    4 + 31 * 0.129 = 7.999
-        ["Solution"]    = 9.3,  --lvl 40    4 + 41 * 0.129 = 9.289
-        ["Elixir"]      = 10.8, --VR 1      4 + 53 * 0.129 = 10.837
-        ["Panacea"]     = 11.6, --VR 5      4 + 59 * 0.129 = 11.611
-        ["Distillate"]  = 12.5, --VR10      4 + 66 * 0.129 = 12.514
-        ["Essence"]     = 13.4, --VR 5      4 + 73 * 0.129 = 13.417
-    },
-    [5] = {  --crafted 3 ingredients potions with short buff (+2 sec)
-        ["Sip of"]      = 6.5,  --lvl 3
-        ["Tincture"]    = 7.4,  --lvl 10
-        ["Dram of"]     = 8.7,  --lvl 20
-        ["Draught"]     = 10,   --lvl 30
-        ["Solution"]    = 11.3, --lvl 40
-        ["Elixir"]      = 12.8, --VR 1
-        ["Panacea"]     = 13.6, --VR 5
-        ["Distillate"]  = 14.5, --VR10
-        ["Essence"]     = 15.4, --VR15
-    },
-}
-
-local PotionEffects = { --buff, debuff, potionType
-    -- Drop & Vendor potions
-    [17302] = {true, false, 1}, --health
-    [17323] = {true, false, 1}, --magicka
-    [17328] = {true, false, 1}, --stamina
-    -- Crafted potions (positive effects)
-    [45221] = {true, false, 2}, --Health
-    [45223] = {true, false, 2}, --Magicka
-    [45225] = {true, false, 2}, --Stamina
-    [45227] = {true, false, 2}, --Spell Power
-    [45228] = {true, false, 2}, --Weapon Power
-    [45233] = {true, false, 2}, --Spell Protection
-    [45234] = {true, false, 2}, --Armor
-    [45235] = {true, false, 2}, --Speed
-    [45236] = {true, false, 2}, --Detection
-    [45237] = {true, false, 4}, --Invisiblity
-    [45239] = {true, false, 4}, --Immovability
-    [45241] = {true, false, 2}, --Weapon Crit
-    [45382] = {true, false, 3}, --Health (longer duration)
-    [45385] = {true, false, 3}, --Magicka (longer duration)
-    [45388] = {true, false, 3}, --Stamina (longer duration)
-    [45460] = {true, false, 5}, --Invisiblity (longer duration)
-    [45463] = {true, false, 5}, --Immovability (longer duration)
-    [45466] = {true, false, 3}, --Weapon Crit (longer duration)
-    [47193] = {true, false, 2}, --Spell Crit
-    [47195] = {true, false, 3}, --Spell Crit (longer duration)
-    -- Crafted potions (negative effects)
-    [46111] = {false, true, 2}, --Ravage Health
-    [46193] = {false, true, 2}, --Ravage Magicka
-    [46199] = {false, true, 2}, --Ravage Stamina
-    [46202] = {false, true, 2}, --Ravage Spell Power
-    [46204] = {false, true, 2}, --Ravage Weapon Power
-    [46206] = {false, true, 2}, --Ravage Spell Protection
-    [46210] = {false, true, 2}, --Slow
-    [46215] = {false, true, 3}, --Ravage Health (longer duration)
-    [46237] = {false, true, 3}, --Ravage Magicka (longer duration)
-    [46240] = {false, true, 3}, --Ravage Stamina (longer duration)
-    [46244] = {false, true, 2}, --Ravage Spell Power (longer duration)
-    [46246] = {false, true, 3}, --Ravage Weapon Power (longer duration)
-    [47203] = {false, true, 2}, --Ravage Weapon Critical
-    [47204] = {false, true, 2}, --Ravage Spell Critical
-    [47213] = {false, true, 2}, --Stun
-}
-
 --[[----------------------------------------------------------
     CORRECTION TO BUFFS
     * By default some API provided buffType values seems incorrect, that is,
@@ -733,14 +635,12 @@ function SCB.Initialize( enabled )
 
     -- Register events
     EVENT_MANAGER:RegisterForUpdate(moduleName, 100, SCB.OnUpdate )
-    EVENT_MANAGER:RegisterForUpdate(moduleName.."CheckPotion", 200, SCB.CheckPotion )
 
     -- Target Events
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TARGET_CHANGE,             SCB.OnTargetChange )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED,    SCB.OnReticleTargetChanged )
 
     -- Buff Events
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVE_QUICKSLOT_CHANGED,  SCB.OnActiveQuickslotChanged )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE,  SCB.OnSlotsFullUpdate )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED,       SCB.OnSlotUpdated )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_UPDATE_COOLDOWNS,   SCB.OnUpdateCooldowns )
@@ -790,22 +690,25 @@ end
 
 local g_currentDisguise = GetItemId(0, 10) or 0
 
-
--- Move this into Init or something with a zo_call_later (probably)
---[[
-if g_currentDisguise ~= 0 then
-    local name = E.DisguiseIcons[g_currentDisguise].name
+function SCB.InitializeDisguise()
+    g_effectsList.player1["DisguiseType"] = nil
+    if g_currentDisguise ~= 0 and not SCB.SV.IgnoreDisguise then
+    
+        -- Hide from display if we have a costume or polymorph and the disguise is a guild tabard
+        if g_currentDisguise == 55262 and (GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) > 0 or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME) > 0) then return end
+        
+        local name = E.DisguiseIcons[g_currentDisguise].name
         local icon = E.DisguiseIcons[g_currentDisguise].icon
-        g_effectsList.player1["DisguiseType"] =
-            {
-                target="player", type=1,
-                name=name, icon=icon,
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "long",
-                restart=true, iconNum=0
-            }
+            g_effectsList.player1["DisguiseType"] =
+                {
+                    target="player", type=1,
+                    name=name, icon=icon,
+                    dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                    forced = "long",
+                    restart=true, iconNum=0
+                }
+    end
 end
-]]--
 
 function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     
@@ -815,7 +718,11 @@ function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory
         SCB.CollectibleBuff()
         if g_currentDisguise == 0 then
             return
-        else
+        elseif g_currentDisguise ~= 0 and not SCB.SV.IgnoreDisguise then
+        
+            -- Hide from display if we have a costume or polymorph and the disguise is a guild tabard
+            if g_currentDisguise == 55262 and (GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) > 0 or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME) > 0) then return end
+        
             local name = E.DisguiseIcons[g_currentDisguise].name
             local icon = E.DisguiseIcons[g_currentDisguise].icon
             g_effectsList.player1["DisguiseType"] =
@@ -836,13 +743,12 @@ function SCB.MountStatus(eventCode, mounted)
     -- Remove icon first
     g_effectsList.player1["Mount"] = nil
     
-    if mounted then
+    if mounted and not SCB.SV.IgnoreMount then
         local mountType = GetMountSkinId()
-        --d("Skin ID = " .. mountType) -- MOUNT
+        --d("Skin ID = " .. mountType)
         
         strMounted = E.MountIcons[mountType] ~= nil and E.MountIcons[mountType].name or "Mounted"
         iconMounted = E.MountIcons[mountType] ~= nil and E.MountIcons[mountType].icon or "LuiExtended/media/icons/mounts/mount_palomino_horse.dds"
-
         g_effectsList.player1["Mount"] = 
             {
                 target="player", type=1,
@@ -865,7 +771,7 @@ end
 function SCB.CollectibleBuff()
 
     -- PETS
-    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0 then
+    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0 and not SCB.SV.IgnorePet then
         local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
         local CollectibleName = GetCollectibleName(Collectible)
         
@@ -885,7 +791,7 @@ function SCB.CollectibleBuff()
     end
     
     -- ASSISTANTS
-    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 then
+    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 and not SCB.SV.IgnoreAssistant then
         local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
         local CollectibleName = GetCollectibleName(Collectible)
         
@@ -906,19 +812,21 @@ function SCB.CollectibleBuff()
     
     -- Check here to see if we have a disguise - hides polymorph or costume.
     local DisguiseOn = GetItemId(0, 10) or 0
-    if DisguiseOn ~= 0 then
+    SCB.InitializeDisguise() -- Reload disguise setup
+    if DisguiseOn ~= 0 and DisguiseOn ~= 55262 then
         g_effectsList.player1["PolymorphType"] = nil
         g_effectsList.player1["CostumeType"] = nil
+        g_effectsList.player1["SkinType"] = nil
     end
     
     -- POLYMORPH
-    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) > 0 then
+    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) > 0 and not SCB.SV.IgnorePolymorph then
         local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH)
         local CollectibleName = GetCollectibleName(Collectible)
         
         local strPolymorph = CollectibleName
         local iconPolymorph = E.PolymorphIcons[CollectibleName] ~= nil and E.PolymorphIcons[CollectibleName] or "LuiExtended/media/icons/costumes/costume_generic.dds"
-            if DisguiseOn == 0 then
+            if DisguiseOn == 0 or DisguiseOn == 55262 then
                 g_effectsList.player1["PolymorphType"] = 
                     {
                             target="player", type=1,
@@ -934,36 +842,14 @@ function SCB.CollectibleBuff()
         g_effectsList.player1["PolymorphType"] = nil
     end
     
-    
-    -- SKINS
-    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_SKIN) > 0 then
-        local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_SKIN)
-        local CollectibleName = GetCollectibleName(Collectible)
-        
-        local strSkin = CollectibleName
-        local iconSkin = E.SkinIcons[CollectibleName] ~= nil and E.SkinIcons[CollectibleName] or "LuiExtended/media/icons/skins/skin_generic.dds"
-            if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) == 0 then
-                g_effectsList.player1["SkinType"] = 
-                    {
-                            target="player", type=1,
-                            name=strSkin, icon=iconSkin,
-                            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                            forced = "long",
-                            restart=true, iconNum=0
-                    }
-            end
-    else
-        g_effectsList.player1["SkinType"] = nil
-    end
-    
     -- COSTUMES
-    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME) > 0 then
+    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME) > 0 and not SCB.SV.IgnoreCostume then
         local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME)
         local CollectibleName = GetCollectibleName(Collectible)
         
         local strCostume = CollectibleName
         local iconCostume = E.CostumeIcons[CollectibleName] ~= nil and E.CostumeIcons[CollectibleName] or "LuiExtended/media/icons/costumes/costume_generic.dds"
-            if DisguiseOn == 0 and GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) == 0 then
+            if (DisguiseOn == 0 or DisguiseOn == 55262) and GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) == 0 then
                 g_effectsList.player1["CostumeType"] = 
                     {
                             target="player", type=1,
@@ -975,6 +861,27 @@ function SCB.CollectibleBuff()
             end
     else
         g_effectsList.player1["CostumeType"] = nil
+    end
+    
+    -- SKINS
+    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_SKIN) > 0 and not SCB.SV.IgnoreSkin then
+        local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_SKIN)
+        local CollectibleName = GetCollectibleName(Collectible)
+        
+        local strSkin = CollectibleName
+        local iconSkin = E.SkinIcons[CollectibleName] ~= nil and E.SkinIcons[CollectibleName] or "LuiExtended/media/icons/skins/skin_generic.dds"
+            if (DisguiseOn == 0 or DisguiseOn == 55262) and GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) == 0 then
+                g_effectsList.player1["SkinType"] = 
+                    {
+                            target="player", type=1,
+                            name=strSkin, icon=iconSkin,
+                            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                            forced = "long",
+                            restart=true, iconNum=0
+                    }
+            end
+    else
+        g_effectsList.player1["SkinType"] = nil
     end
     
 end
@@ -1394,40 +1301,6 @@ function SCB.ApplyFont()
 
 end
 
--- Check for whether a potion becomes available from cooldown
--- Runs OnUpdate - 200 ms buffer
-function SCB.CheckPotion()
-    -- Get the cooldown
-    local usable = ZO_ActionBar_GetButton(9).usable
-
-    -- Create alerts or new buff icons only if quick slot was not changed recently
-    if g_quickslotLastSame and g_quickslotAbility then
-
-        -- Trigger an alert if the potion has just become available
-        if ( usable and not g_quickslotLastUsable ) then
-            CI.CreatePotionAlert(g_quickslotAbility) -- (g_quickslotAbility.name)
-        end
-
-    end
-
-    -- Update the potion status
-    g_quickslotLastSame = true
-    g_quickslotLastUsable = usable
-end
-
--- Runs on the EVENT_ACTIVE_QUICKSLOT_CHANGED listener.
--- This handler fires every time the player make changes to quick slot.
-function SCB.OnActiveQuickslotChanged(eventCode, slotNum)
-    g_quickslotLastSame = false
-    local abilityId = GetSlotBoundId(slotNum)
-    local potionEffect = PotionEffects[abilityId]
-    if potionEffect then
-        g_quickslotAbility = GetSlotName(slotNum)
-    else
-        g_quickslotAbility = nil
-    end
-end
-
 -- Runs on the EVENT_ACTION_UPDATE_COOLDOWNS listener.
 -- This handler fires every time the player uses an active ability.
 function SCB.OnUpdateCooldowns()
@@ -1491,13 +1364,16 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 
     -- Ignore some buffs (by abilityId or by effectName)
     if E.IsEffectIgnored[ effectName ] or E.IsAbilityIgnoredById[abilityId] or
-        ( SCB.SV.IgnoreDisguise and abilityType == ABILITY_TYPE_CHANGEAPPEARANCE ) or
-        ( SCB.SV.IgnoreMundus and E.IsBoon[ effectName ] ) or
-        ( SCB.SV.IgnoreEquipment and E.IsEquipmentSet[ effectName ] ) or
-        ( SCB.SV.IgnoreVampLycan and E.IsVampLycan[ effectName ] ) or
-        ( SCB.SV.IgnoreCyrodiil and E.IsCyrodiil[abilityId] ) or
-        ( SCB.SV.IgnoreBattleSpirit and E.IsBattleSpirit[abilityId] ) or
-        ( SCB.SV.IgnoreEsoPlus and E.IsEsoPlus[abilityId] and unitTag == "player" ) -- Hide ESO Plus Member buff on the player frame if the option is turned on
+        ( SCB.SV.IgnoreMundusPlayer and E.IsBoon[ effectName ] and unitTag == "player" ) or
+        ( SCB.SV.IgnoreMundusTarget and E.IsBoon[ effectName ] and unitTag == "reticleover"  ) or
+        ( SCB.SV.IgnoreVampLycanPlayer and E.IsVampLycan[ effectName ] and unitTag == "player" ) or
+        ( SCB.SV.IgnoreVampLycanTarget and E.IsVampLycan[ effectName ] and unitTag == "reticleover"  ) or
+        ( SCB.SV.IgnoreCyrodiilPlayer and E.IsCyrodiil[abilityId] and unitTag == "player" ) or
+        ( SCB.SV.IgnoreCyrodiilTarget and E.IsCyrodiil[abilityId] and unitTag == "reticleover"  ) or
+        ( SCB.SV.IgnoreBattleSpiritPlayer and E.IsBattleSpirit[abilityId] and unitTag == "player" ) or
+        ( SCB.SV.IgnoreBattleSpiritTarget and E.IsBattleSpirit[abilityId] and unitTag == "reticleover"  ) or
+        ( SCB.SV.IgnoreEsoPlusPlayer and E.IsEsoPlus[abilityId] and unitTag == "player" ) or -- Hide ESO Plus Member buff on the player frame if the option is turned on
+        ( SCB.SV.IgnoreEsoPlusTarget and E.IsEsoPlus[abilityId] and unitTag == "reticleover" ) -- Hide ESO Plus Member buff on the player frame if the option is turned on
     then return end
 
     -- Override some buff info
@@ -2428,14 +2304,18 @@ end
 function SCB.OnPlayerActivated(eventCode)
     -- Write current Action Bar and quick slot state
     SCB.OnSlotsFullUpdate(eventCode)
-    SCB.OnActiveQuickslotChanged(eventCode, GetCurrentQuickslot())
 
     g_playerActive = true
     g_playerResurectStage = nil
     
-    if IsMounted() then zo_callLater(function() SCB.MountStatus(eventCode, true) end , 50) end
+    if not SCB.SV.IgnoreMount and IsMounted() then zo_callLater(function() SCB.MountStatus(eventCode, true) end , 50) end
+    if not SCB.SV.IgnoreDisguise then zo_callLater(SCB.InitializeDisguise, 50) end
 
-    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET or COLLECTIBLE_CATEGORY_TYPE_ASSISTANT or COLLECTIBLE_CATEGORY_TYPE_POLYMORPH or COLLECTIBLE_CATEGORY_TYPE_SKIN or COLLECTIBLE_CATEGORY_TYPE_COSTUME) > 0 then
+    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0
+    or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0
+    or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) > 0 
+    or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_SKIN) > 0
+    or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME) > 0 then
 		zo_callLater(function() SCB.CollectibleBuff( eventCode, 0, true) end, 50)
     end
     
