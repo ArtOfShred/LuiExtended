@@ -1154,6 +1154,7 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
 
     -- The Steed
     [60409] = 'LuiExtended/media/icons/abilities/ability_champion_invigorating_bash.dds', -- Invigorating Bash
+    [61661] = 'esoui/art/icons/ability_healer_003.dds', -- Resilient
     [64068] = 'LuiExtended/media/icons/abilities/ability_champion_reinforced.dds', -- Reinforced
 
     -- The Lady
@@ -1162,10 +1163,15 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [59287] = 'esoui/art/icons/ability_warrior_031.dds', -- Unchained
 
     -- The Lord
+    [59583] = 'LuiExtended/media/icons/abilities/ability_champion_infusion.dds', -- Infusion
+    [60428] = 'LuiExtended/media/icons/abilities/ability_champion_reinforced.dds', -- Revival
     [61015] = 'LuiExtended/media/icons/abilities/ability_champion_reinforced.dds', -- Determination
 
     -- The Tower
     [62518] = 'esoui/art/icons/ability_healer_004.dds', -- Mara's Gift
+    
+    -- The Lover
+    [63878] = 'esoui/art/icons/ability_healer_013.dds', -- Synergizer
 
     -- The Shadow
     [64244] = 'esoui/art/icons/ability_rogue_054.dds', -- Shadowstrike
@@ -2844,6 +2850,10 @@ E.IsAbilityIgnoredById = { --Remove an ability from display by abilityId
 
     -- Off-Balance Exploit
     [18793] = true, -- Off-Balance Exploit
+    
+    -- Resurrection
+    [55400] = true, -- Magicka Restore
+    [55401] = true, -- Magicka Restore
 
     -- Sorcerer (Passives)
     [31415] = true, -- Expert Summoner (Expert Summoner - Rank 1)
@@ -3293,6 +3303,7 @@ E.FakePlayerBuffs = { -- Fake buffs applied onto the player by self
     [21578] = {icon = 'LuiExtended/media/icons/glyphs/glyph_hardening.dds', name = 'Hardening Enchantment', duration = 5000}, -- Hardening (Glyph of Hardening)
 
     -- Champion Points
+    [60428] = {icon = 'LuiExtended/media/icons/abilities/ability_champion_reinforced.dds', name = 'Revival', duration = 5000}, -- Revival
     [61015] = {icon = 'LuiExtended/media/icons/abilities/ability_champion_reinforced.dds', name = 'Determination', duration = 15000}, -- Determination
     [77773] = {icon = 'esoui/art/icons/ability_rogue_067.dds', name = 'Hidden', duration = 0}, -- Clairvoyance Fx (Shadowstrike)
     [59530] = {icon = 'esoui/art/icons/ability_mage_045.dds', name = 'Foresight', duration = 7000}, -- Foresight
