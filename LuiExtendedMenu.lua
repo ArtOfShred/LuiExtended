@@ -2,45 +2,43 @@ local strformat = zo_strformat
 
 -- Create Settings Menu
 function LUIE_CreateSettings()
-    local LAM2  = LibStub("LibAddonMenu-2.0") -- Load LibAddonMenu
-    local L     = LUIE.GetLocale()
+    -- Load LibAddonMenu
+    local LAM2  = LibStub("LibAddonMenu-2.0")
     
     local l_BuffsMovingEnabled  = false -- Helper local flag
     local FontsList             = {}
     local FontsListCombatInfo   = {}
     local StatusbarTexturesList = {}
     
+    -- Get Fonts
     for f in pairs( LUIE.Fonts ) do
         table.insert(FontsList, f)
     end
-
     for key, _ in pairs( LUIE.CombatInfo.FontFamilies ) do
         table.insert( FontsListCombatInfo, key )
     end
-
     for key, _ in pairs( LUIE.StatusbarTextures ) do
         table.insert( StatusbarTexturesList, key )
     end
 
-    local styleOptions = {"normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline"}
-    local nameDisplayOptions = {"@UserID", "Character Name", "Character Name @UserID"}
-    local nameDisplayOptionsKeys = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
-
-    local chatnameDisplayOptions = {"@UserID", "Character Name", "Character Name @UserID"}
-    local chatnameDisplayOptionsKeys = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
-
-    local currencyBracketOptions = {"[]", "()", "Hyphen", "No Brackets"}
-    local currencyBracketOptionsKeys = { ["[]"] = 1, ["()"] = 2, ["Hyphen"] =3, ["No Brackets"] = 4 }
-
-    local itemBracketOptions = {"[]", "()", "Hyphen", "No Brackets"}
-    local itemBracketOptionsKeys = { ["[]"] = 1, ["()"] = 2, ["Hyphen"] =3, ["No Brackets"] = 4 }
-
-    local experienceDisplayOptions = {"Value", "Percentage", "Both"}
-    local experienceDisplayOptionsKeys = { ["Value"] = 1, ["Percentage"] = 2, ["Both"] = 3 }
-
-    local guildrankDisplayOptions = { "Self Only", "Self + All w/ Permissions", "Display All Rank Changes"}
-    local guildrankDisplayOptionsKeys = { ["Self Only"] = 1, ["Self + All w/ Permissions"] = 2, ["Display All Rank Changes"] = 3 }
-
+    local styleOptions                  = {"normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline"}
+    local nameDisplayOptions            = {"@UserID", "Character Name", "Character Name @UserID"}
+    local nameDisplayOptionsKeys        = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
+    local chatnameDisplayOptions        = {"@UserID", "Character Name", "Character Name @UserID"}
+    local chatnameDisplayOptionsKeys    = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
+    local currencyBracketOptions        = {"[]", "()", "Hyphen", "No Brackets"}
+    local currencyBracketOptionsKeys    = { ["[]"] = 1, ["()"] = 2, ["Hyphen"] =3, ["No Brackets"] = 4 }
+    local itemBracketOptions            = {"[]", "()", "Hyphen", "No Brackets"}
+    local itemBracketOptionsKeys        = { ["[]"] = 1, ["()"] = 2, ["Hyphen"] =3, ["No Brackets"] = 4 }
+    local experienceDisplayOptions      = {"Value", "Percentage", "Both"}
+    local experienceDisplayOptionsKeys  = { ["Value"] = 1, ["Percentage"] = 2, ["Both"] = 3 }
+    local guildrankDisplayOptions       = { "Self Only", "Self + All w/ Permissions", "Display All Rank Changes"}
+    local guildrankDisplayOptionsKeys   = { ["Self Only"] = 1, ["Self + All w/ Permissions"] = 2, ["Display All Rank Changes"] = 3 }
+    local rotationOptions               = { "Horizontal", "Vertical" }
+    local rotationOptionsKeys           = { ["Horizontal"] = 1, ["Vertical"] = 2 }
+    local hAlignOptions                 = { "Left", "Centered", "Right" }
+    local vAlignOptions                 = { "Top", "Middle", "Bottom" }
+    
     local formatOptions = {
         "Nothing",
         "Current",
@@ -54,10 +52,6 @@ function LUIE_CreateSettings()
         "Current (Percentage%)",
         "Current + Shield (Percentage%)"
     }
-    local rotationOptions = { "Horizontal", "Vertical" }
-    local rotationOptionsKeys = { ["Horizontal"] = 1, ["Vertical"] = 2 }
-    local hAlignOptions = { "Left", "Centered", "Right" }
-    local vAlignOptions = { "Top", "Middle", "Bottom" }
 
     local panelData = {
         type = "panel",
@@ -102,6 +96,7 @@ function LUIE_CreateSettings()
         reference = "Info_Panel_Options_Submenu",
         controls = {
             {
+                -- Show InfoPanel
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWPANEL),
                 tooltip = GetString(SI_LUIE_LAM_INFOPANEL_SHOWPANEL_TOOLTIP),
@@ -112,6 +107,7 @@ function LUIE_CreateSettings()
                 default = LUIE.D.InfoPanel_Enabled,
             },
             {
+                -- Unlock InfoPanel
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_INFOPANEL_UNLOCKPANEL),
                 tooltip = GetString(SI_LUIE_LAM_INFOPANEL_UNLOCKPANEL_TOOLTIP),
@@ -123,6 +119,7 @@ function LUIE_CreateSettings()
                 resetFunc = LUIE.InfoPanel.ResetPosition,
             },
             {
+                -- Reset InfoPanel position
                 type = "button",
                 name = GetString(SI_LUIE_LAM_RESETPOSITION),
                 tooltip = GetString(SI_LUIE_LAM_INFOPANEL_RESETPOSITION_TOOLTIP),
@@ -130,6 +127,7 @@ function LUIE_CreateSettings()
                 width = "half",
             },
             {
+                -- InfoPanel scale
                 type = "slider",
                 name = GetString(SI_LUIE_LAM_INFOPANEL_PANELSCALE),
                 tooltip = GetString(SI_LUIE_LAM_INFOPANEL_PANELSCALE_TOOLTIP),

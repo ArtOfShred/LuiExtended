@@ -31,7 +31,6 @@ local windowTitles = {
     target1     = "Target Buffs",
     target2     = "Target Debuffs",
 }
-local containerRouting = {}
 
 SCB.Enabled = false
 SCB.D = {
@@ -61,7 +60,6 @@ SCB.D = {
     IgnoreBattleSpiritTarget         = false,
     IgnoreEsoPlusPlayer              = true,
     IgnoreEsoPlusTarget              = true,
-    
     IgnoreDisguise                   = false,
     IgnoreCostume                    = false,
     IgnoreHat                        = false,
@@ -70,7 +68,6 @@ SCB.D = {
     IgnoreAssistant                  = false,
     IgnorePet                        = false,
     IgnoreMount                      = false,
-    
     LongTermEffectsSeparate          = true,
     LongTermEffectsSeparateAlignment = 2,
     ShowBlockPlayer                  = true,
@@ -91,19 +88,19 @@ SCB.D = {
 }
 SCB.SV = nil
 
--- GUI
-local uiTlw = {}
+local uiTlw                  = {} -- GUI
+local containerRouting       = {}
 
 -- Abilities and buffs
-local uiProcAnimation = {}
-local uiCustomToggle = {}
-local ActionBar = {}
-local TriggeredSlots = {}
-local ToggledSlots = {}
+local g_uiProcAnimation      = {}
+local g_uiCustomToggle       = {}
+local g_actionBar            = {}
+local g_triggeredSlots       = {}
+local g_toggledSlots         = {}
 
-local g_lastCast = 0
-local g_lastTarget = nil
-local g_effectsList = { player1 = {}, player2 = {}, reticleover1 = {}, reticleover2 = {}, ground = {} }
+local g_lastCast             = 0
+local g_lastTarget           = nil
+local g_effectsList          = { player1 = {}, player2 = {}, reticleover1 = {}, reticleover2 = {}, ground = {} }
 local g_pendingGroundAbility = nil
 
 -- Potions
@@ -117,14 +114,14 @@ local g_playerDead   = false
 local g_playerResurectStage = nil
 
 -- Fast travel from any place in world
-local recallEffectName = "Recall Cooldown"
-local recallIconFilename = "LuiExtended/media/icons/abilities/ability_innate_recall_cooldown.dds"
+local g_recallEffectName   = "Recall Cooldown"
+local g_recallIconFilename = "LuiExtended/media/icons/abilities/ability_innate_recall_cooldown.dds"
 
 -- Font to be used on icons
 -- "ZoFontWindowSubtitle" or ours:
---local buffsFont = "/LuiExtended/media/fonts/fontin_sans_r.otf|16|outline"
---local buffsFont = "$(MEDIUM_FONT)|17|outline"
-local buffsFont
+--local g_buffsFont = "/LuiExtended/media/fonts/fontin_sans_r.otf|16|outline"
+--local g_buffsFont = "$(MEDIUM_FONT)|17|outline"
+local g_buffsFont
 
 -- Padding distance between icons
 local g_padding = 0
@@ -132,6 +129,16 @@ local g_padding = 0
 local g_horizAlign = CENTER
 local v_horizAlign = MIDDLE
 local g_horizSortInvert = false
+
+-- Some optimization
+local strHidden     = L.Effect_Hidden
+local strDisguise   = "Disguised"
+local strMounted    = "Mounted"
+local iconMounted   = "LuiExtended/media/icons/mounts/mount_palomino_horse.dds"
+
+local abilityRouting = { "player1", "player2", "ground" }
+
+local g_currentDisguise = GetItemId(0, 10) or 0
 
 -- Double check that the slot is actually eligible for use
 local function HasFailure( slotIndex )
@@ -243,15 +250,15 @@ local Effects = {
     -- Assassination
 
     -- Shadow
-        [L.Skill_Consuming_Darkness]        = { false, false, true, nil },
-        [L.Skill_Bolstering_Darkness]       = { false, false, true, nil },
-        [L.Skill_Veil_of_Blades]            = { false, false, true, nil },
-        [L.Skill_Path_of_Darkness]          = { false, false, true, nil },
-        [L.Skill_Refreshing_Path]           = { false, false, true, nil },
-        [L.Skill_Twisting_Path]             = { false, false, true, nil },
-        [L.Skill_Summon_Shade]              = { true, false, false, nil },
-        [L.Skill_Dark_Shades]               = { true, false, false, nil },
-        [L.Skill_Shadow_Image]              = { true, false, false, nil },
+    [L.Skill_Consuming_Darkness]        = { false, false, true, nil },
+    [L.Skill_Bolstering_Darkness]       = { false, false, true, nil },
+    [L.Skill_Veil_of_Blades]            = { false, false, true, nil },
+    [L.Skill_Path_of_Darkness]          = { false, false, true, nil },
+    [L.Skill_Refreshing_Path]           = { false, false, true, nil },
+    [L.Skill_Twisting_Path]             = { false, false, true, nil },
+    [L.Skill_Summon_Shade]              = { true, false, false, nil },
+    [L.Skill_Dark_Shades]               = { true, false, false, nil },
+    [L.Skill_Shadow_Image]              = { true, false, false, nil },
 
     -- Siphoning
 
@@ -322,11 +329,8 @@ local Effects = {
     [L.Skill_Razor_Caltrops]        = { false, false, true, nil },
 
     --AVA Support
-    --Possibly add Siege shield here/remove active effect
-
+    --Possibly add Siege shield here/remove active effect 
 }
-
-local abilityRouting = { "player1", "player2", "ground" }
 
 local IsAbilityProc = {
     [L.Trigger_Assassins_Will]      = true,
@@ -339,7 +343,6 @@ local HasAbilityProc = {
 }
 
 local IsAbilityCustomToggle = {
-
     --Sorceror Skills (Dark Magic)
     --[L.Skill_Defensive_Rune]        = true, -- Doesn't work because of no aura, would be nice to have this highlight if possible.
 
@@ -501,12 +504,6 @@ local IsAbilityCustomToggle = {
     --[L.Skill_Efficient_Purge]      = true, -- Doesn't work for some reason
 
 }
-
--- some optimization
-local strHidden = L.Effect_Hidden
-local strDisguise = "Disguised"
-local strMounted = "Mounted"
-local iconMounted = "LuiExtended/media/icons/mounts/mount_palomino_horse.dds"
 
 --[[----------------------------------------------------------
     CORRECTION TO BUFFS
@@ -689,14 +686,14 @@ function SCB.Initialize( enabled )
     
 end
 
-local g_currentDisguise = GetItemId(0, 10) or 0
-
 function SCB.InitializeDisguise()
     g_effectsList.player1["DisguiseType"] = nil
     if g_currentDisguise ~= 0 and not SCB.SV.IgnoreDisguise then
     
         -- Hide from display if we have a costume or polymorph and the disguise is a guild tabard
-        if g_currentDisguise == 55262 and (GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) > 0 or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME) > 0) then return end
+        if g_currentDisguise == 55262 and (GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) > 0 or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME) > 0) then
+            return
+        end
         
         local name = E.DisguiseIcons[g_currentDisguise].name
         local icon = E.DisguiseIcons[g_currentDisguise].icon
@@ -712,7 +709,6 @@ function SCB.InitializeDisguise()
 end
 
 function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-    
     if slotId == 10 then
         g_effectsList.player1["DisguiseType"] = nil
         g_currentDisguise = GetItemId(0, 10) or 0
@@ -722,7 +718,9 @@ function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory
         elseif g_currentDisguise ~= 0 and not SCB.SV.IgnoreDisguise then
         
             -- Hide from display if we have a costume or polymorph and the disguise is a guild tabard
-            if g_currentDisguise == 55262 and (GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) > 0 or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME) > 0) then return end
+            if g_currentDisguise == 55262 and (GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) > 0 or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME) > 0) then
+                return
+            end
         
             local name = E.DisguiseIcons[g_currentDisguise].name
             local icon = E.DisguiseIcons[g_currentDisguise].icon
@@ -736,11 +734,9 @@ function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory
                 }
         end
     end
-    
 end
 
 function SCB.MountStatus(eventCode, mounted)
-
     -- Remove icon first
     g_effectsList.player1["Mount"] = nil
     
@@ -762,7 +758,6 @@ function SCB.MountStatus(eventCode, mounted)
 end
 
 function SCB.CollectibleUsed(eventCode, result, isAttemptingActivation)
-    
     local latency = GetLatency()
     latency = latency + 50
     zo_callLater (SCB.CollectibleBuff, latency)
@@ -770,7 +765,6 @@ function SCB.CollectibleUsed(eventCode, result, isAttemptingActivation)
 end
 
 function SCB.CollectibleBuff()
-
     -- PETS
     if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0 and not SCB.SV.IgnorePet then
         local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
@@ -1256,7 +1250,7 @@ function SCB.CreateSingleIcon(container, AnchorItem)
     -- Icon itself
     buff.icon   = UI.Texture( buff, nil, nil, "/esoui/art/icons/icon_missing.dds", DL_CONTROLS, false )
     -- Remaining text label
-    buff.label = UI.Label( buff, nil, nil, nil, buffsFont, nil, false )
+    buff.label = UI.Label( buff, nil, nil, nil, g_buffsFont, nil, false )
     buff.label:SetAnchor(TOPLEFT, buff, LEFT, -g_padding)
     buff.label:SetAnchor(BOTTOMRIGHT, buff, BOTTOMRIGHT, g_padding, -2)
     -- Cooldown circular control
@@ -1307,7 +1301,7 @@ function SCB.ApplyFont()
     local fontStyle = ( SCB.SV.BuffFontStyle and SCB.SV.BuffFontStyle ~= "" ) and SCB.SV.BuffFontStyle or "outline"
     local fontSize = ( SCB.SV.BuffFontSize and SCB.SV.BuffFontSize > 0 ) and SCB.SV.BuffFontSize or 17
 
-    buffsFont = fontName .. "|" .. fontSize .. "|" .. fontStyle
+    g_buffsFont = fontName .. "|" .. fontSize .. "|" .. fontStyle
 
     local needs_reset = {}
     -- And reset sizes of already existing icons
@@ -1317,7 +1311,7 @@ function SCB.ApplyFont()
     for _, container in pairs(containerRouting) do
         if needs_reset[container] then
             for i = 1, #uiTlw[container].icons do
-                uiTlw[container].icons[i].label:SetFont(buffsFont)
+                uiTlw[container].icons[i].label:SetFont(g_buffsFont)
             end
         end
         needs_reset[container] = false
@@ -1427,13 +1421,13 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         -- Also delete visual enhancements from skill bar
         if unitTag == "player" then
             -- Stop any proc animation associated with this effect
-            if abilityType == ABILITY_TYPE_BONUS and TriggeredSlots[effectName] and uiProcAnimation[TriggeredSlots[effectName]] then
-                uiProcAnimation[TriggeredSlots[effectName]]:Stop()
+            if abilityType == ABILITY_TYPE_BONUS and g_triggeredSlots[effectName] and g_uiProcAnimation[g_triggeredSlots[effectName]] then
+                g_uiProcAnimation[g_triggeredSlots[effectName]]:Stop()
             end
 
             -- Switch off custom toggle highlight
-            if ToggledSlots[effectName] and uiCustomToggle[ToggledSlots[effectName]] then
-                uiCustomToggle[ToggledSlots[effectName]]:SetHidden(true)
+            if g_toggledSlots[effectName] and g_uiCustomToggle[g_toggledSlots[effectName]] then
+                g_uiCustomToggle[g_toggledSlots[effectName]]:SetHidden(true)
             end
         end
 
@@ -1464,16 +1458,16 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         -- Also create visual enhancements from skill bar
         if unitTag == "player" then
             -- start any proc animation associated with this effect
-            if abilityType == ABILITY_TYPE_BONUS and TriggeredSlots[effectName] then
+            if abilityType == ABILITY_TYPE_BONUS and g_triggeredSlots[effectName] then
                 if SCB.SV.ShowTriggered then
-                    SCB.PlayProcAnimations(TriggeredSlots[effectName])
+                    SCB.PlayProcAnimations(g_triggeredSlots[effectName])
                 end
             end
 
             -- Switch on custom toggle highlight
-            if ToggledSlots[effectName] then
+            if g_toggledSlots[effectName] then
                 if SCB.SV.ShowToggled then
-                    SCB.ShowCustomToggle(ToggledSlots[effectName])
+                    SCB.ShowCustomToggle(g_toggledSlots[effectName])
                 end
             end
         end
@@ -1685,8 +1679,8 @@ function SCB.OnDeath(eventCode, unitTag, isDead)
     -- And toggle buttons
     if unitTag == "player" then
         for slotNum = 3, 8 do
-            if uiCustomToggle[slotNum] then
-                uiCustomToggle[slotNum]:SetHidden(true)
+            if g_uiCustomToggle[slotNum] then
+                g_uiCustomToggle[slotNum]:SetHidden(true)
             end
         end
     end
@@ -1741,9 +1735,9 @@ function SCB.ReloadEffects(unitTag)
         local recallRemain, _ = GetRecallCooldown()
         if recallRemain > 0 then
             local currentTime = GetGameTimeMilliseconds()
-            g_effectsList["player1"][ recallEffectName ] = {
+            g_effectsList["player1"][ g_recallEffectName ] = {
                         target="player", type=1,
-                        name=recallEffectName, icon=recallIconFilename,
+                        name=g_recallEffectName, icon=g_recallIconFilename,
                         dur=recallRemain, starts=currentTime, ends=currentTime+recallRemain,
                         forced = "long",
                         restart=true, iconNum=0 }
@@ -1835,7 +1829,7 @@ function SCB.OnSlotAbilityUsed(eventCode, slotNum)
     g_pendingGroundAbility = nil
 
     -- Get the used ability
-    local ability = ActionBar[slotNum]
+    local ability = g_actionBar[slotNum]
 
     if ability then -- Only proceed if this button is being watched
         -- Get the time
@@ -1871,29 +1865,29 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
     end
 
     -- Remove saved triggered proc information
-    for abilityName, slot in pairs(TriggeredSlots) do
+    for abilityName, slot in pairs(g_triggeredSlots) do
         if (slot == slotNum) then
-            TriggeredSlots[abilityName] = nil
+            g_triggeredSlots[abilityName] = nil
         end
     end
     -- Stop possible proc animation
-    if uiProcAnimation[slotNum] and uiProcAnimation[slotNum]:IsPlaying() then
-        uiProcAnimation[slotNum]:Stop()
+    if g_uiProcAnimation[slotNum] and g_uiProcAnimation[slotNum]:IsPlaying() then
+        g_uiProcAnimation[slotNum]:Stop()
     end
 
     -- Remove custom toggle information and custom highlight
-    for abilityName, slot in pairs(ToggledSlots) do
+    for abilityName, slot in pairs(g_toggledSlots) do
         if (slot == slotNum) then
-            ToggledSlots[abilityName] = nil
+            g_toggledSlots[abilityName] = nil
         end
     end
-    if uiCustomToggle[slotNum] then
-        uiCustomToggle[slotNum]:SetHidden(true)
+    if g_uiCustomToggle[slotNum] then
+        g_uiCustomToggle[slotNum]:SetHidden(true)
     end
 
     -- Bail out if slot is not used
     if not IsSlotUsed(slotNum) then
-        ActionBar[slotNum] = nil
+        g_actionBar[slotNum] = nil
         return
     end
 
@@ -1922,7 +1916,7 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
         end
     end
 
-    ActionBar[slotNum] = {
+    g_actionBar[slotNum] = {
         id      = ability_id,
         name    = abilityName,
         type    = mechanicType,
@@ -1939,7 +1933,7 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
             SCB.PlayProcAnimations(slotNum)
         end
     elseif proc then
-        TriggeredSlots[proc] = slotNum
+        g_triggeredSlots[proc] = slotNum
         if g_effectsList.player1[proc] then
             if SCB.SV.ShowTriggered then
                 SCB.PlayProcAnimations(slotNum)
@@ -1949,7 +1943,7 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
 
     -- Check if current skill is our custom toggle skill and save it
     if IsAbilityCustomToggle[abilityName] then
-        ToggledSlots[abilityName] = slotNum
+        g_toggledSlots[abilityName] = slotNum
         if g_effectsList.player1[ability_id] then
             if SCB.SV.ShowToggled then
                 SCB.ShowCustomToggle(slotNum)
@@ -1965,7 +1959,7 @@ function SCB.OnSlotsFullUpdate(eventCode, isHotbarSwap)
     end
 
     -- Update action bar skills
-    ActionBar = {}
+    g_actionBar = {}
     for i = 3, 8 do
         SCB.OnSlotUpdated(eventCode, i)
     end
@@ -1973,7 +1967,7 @@ end
 
 -- Starts proc animation
 function SCB.PlayProcAnimations(slotNum)
-    if not uiProcAnimation[slotNum] then
+    if not g_uiProcAnimation[slotNum] then
         local actionButton = ZO_ActionBar_GetButton(slotNum)
         local procLoopTexture = WINDOW_MANAGER:CreateControl("$(parent)Loop_LUIE", actionButton.slot, CT_TEXTURE)
         procLoopTexture:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
@@ -1992,18 +1986,18 @@ function SCB.PlayProcAnimations(slotNum)
         procLoopTimeline:SetHandler("OnPlay", procLoopTimeline.onPlay)
         procLoopTimeline:SetHandler("OnStop", procLoopTimeline.onStop)
 
-        uiProcAnimation[slotNum] = procLoopTimeline
+        g_uiProcAnimation[slotNum] = procLoopTimeline
     end
-    if uiProcAnimation[slotNum] then
-        if not uiProcAnimation[slotNum]:IsPlaying() then
-            uiProcAnimation[slotNum]:PlayFromStart()
+    if g_uiProcAnimation[slotNum] then
+        if not g_uiProcAnimation[slotNum]:IsPlaying() then
+            g_uiProcAnimation[slotNum]:PlayFromStart()
         end
     end
 end
 
 -- Displays custom toggle texture
 function SCB.ShowCustomToggle(slotNum)
-    if not uiCustomToggle[slotNum] then
+    if not g_uiCustomToggle[slotNum] then
         local actionButton = ZO_ActionBar_GetButton(slotNum)
         local toggleTexture = WINDOW_MANAGER:CreateControl("$(parent)Toggle_LUIE", actionButton.slot, CT_TEXTURE)
         toggleTexture:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
@@ -2016,10 +2010,10 @@ function SCB.ShowCustomToggle(slotNum)
         toggleTexture:SetColor(0.5,1,0.5,1)
         toggleTexture:SetHidden(true)
 
-        uiCustomToggle[slotNum] = toggleTexture
+        g_uiCustomToggle[slotNum] = toggleTexture
     end
-    if uiCustomToggle[slotNum] then
-        uiCustomToggle[slotNum]:SetHidden(false)
+    if g_uiCustomToggle[slotNum] then
+        g_uiCustomToggle[slotNum]:SetHidden(false)
     end
 end
 
@@ -2064,8 +2058,8 @@ function SCB.OnUpdate(currentTime)
             if v.ends ~= nil and v.dur > 0 and v.ends < currentTime then
                 effectsList[k] = nil
                 -- Switch off custom toggle highlight
-                if ToggledSlots[k] and uiCustomToggle[ToggledSlots[k]] then
-                    uiCustomToggle[ToggledSlots[k]]:SetHidden(true)
+                if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] then
+                    g_uiCustomToggle[g_toggledSlots[k]]:SetHidden(true)
                 end
 
             -- Or append to correct container

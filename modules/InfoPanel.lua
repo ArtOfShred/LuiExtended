@@ -2,6 +2,13 @@
 -- InfoPanel namespace
 LUIE.InfoPanel = {}
 
+-- Performance Enhancement
+local PNL           = LUIE.InfoPanel
+local UI            = LUIE.UI
+local DelayBuffer   = LUIE.DelayBuffer
+
+local moduleName    = LUIE.name .. "_InfoPanel"
+
 local colors = {
     RED         = { r = 1    , g = 0    , b = 0    },
     GREEN       = { r = 0    , g = 1    , b = 0    },
@@ -12,17 +19,10 @@ local colors = {
     GRAY        = { r = 0.5  , g = 0.5  , b = 0.5  },
 }
 
--- Performance Enhancement
-local PNL           = LUIE.InfoPanel
-local UI            = LUIE.UI
-local DelayBuffer   = LUIE.DelayBuffer
-
-local moduleName    = LUIE.name .. "_InfoPanel"
 local fakeControl   = {}
 
-PNL.Enabled = false
-PNL.SV      = nil
-
+PNL.Enabled       = false
+PNL.SV            = nil
 PNL.panelUnlocked = false
 
 -- UI elements
@@ -31,6 +31,9 @@ local g_infoPanelFont = "/LuiExtended/media/fonts/ProFontWindows.ttf|9|soft-shad
 local uiPanel  = nil
 local uiTopRow = nil
 local uiBotRow = nil
+local uiClock  = {}
+local uiGems   = {}
+local uiTrophy = {}
 
 local uiLatency = {
     colour = {
@@ -39,7 +42,7 @@ local uiLatency = {
         [3] = {            colour = colors.RED },
     },
 }
-local uiClock = {}
+
 local uiFps = {
     colour = {
         [1] = { fps = 25, colour = colors.RED },
@@ -51,6 +54,7 @@ local uiFps = {
 local uiFeedTimer = {
     hideLocally = false,
 }
+
 local uiArmour = {
     colour = {
         [1] = { dura = 50, colour = colors.RED,    iconcolour = colors.RED },
@@ -59,6 +63,7 @@ local uiArmour = {
         [3] = {            colour = colors.WHITE,  iconcolour = colors.WHITE },
     },
 }
+
 local uiWeapons = {
     colour = {
         [1] = { charges = 5,  colour = colors.RED },
@@ -66,7 +71,7 @@ local uiWeapons = {
         [3] = {               colour = colors.WHITE },
     },
 }
-local uiGems = {}
+
 local uiBags = {
     colour = {
         [1] = { fill = 50, colour = colors.WHITE },
@@ -74,7 +79,7 @@ local uiBags = {
         [3] = {            colour = colors.RED },
     },
 }
-local uiTrophy = {}
+
 local uiTrophyIcons = {
     "/esoui/art/icons/quest_boneshard.dds",
     "/esoui/art/icons/quest_darkether.dds",

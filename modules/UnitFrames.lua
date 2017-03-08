@@ -21,8 +21,6 @@ local classIcons = {
     [6] = "/esoui/art/icons/class/class_templar.dds",
 }
 
-local g_playerAlliance
-
 UF.Enabled = false
 UF.D = {
     ShortenNumbers                   = false,
@@ -112,35 +110,33 @@ UF.D = {
 }
 UF.SV = nil
 
--- Tables to store numerical values
-local g_savedHealth = {}
-local g_statFull = {}
--- Tables to store UI controls
-local g_DefaultFrames = {} -- Default Unit Frames are not referenced by external modules
-UF.CustomFrames = {} -- Custom Unit Frames on contrary are!
-local g_AvaCustFrames = {} -- Another set of custom frames. Currently designed only to provide AvA Player Target reticleover frame
+UF.CustomFrames            = {} -- Custom Unit Frames on contrary are!
 UF.CustomFramesMovingState = false
+
+local g_playerAlliance
 local g_customLeaderIcon
+local g_savedHealth         = {}
+local g_statFull            = {}
+local g_DefaultFrames       = {} -- Default Unit Frames are not referenced by external modules
+local g_AvaCustFrames       = {} -- Another set of custom frames. Currently designed only to provide AvA Player Target reticleover frame
+local g_powerError          = {}
+local g_defaultThreshold    = 25
+local g_targetThreshold
+local g_targetUnitFrame          -- Reference to default UI target unit frame
+local g_defaultTargetNameLabel   -- Reference to default UI target name label
+local g_MaxChampionPoint    = GetChampionPointsPlayerProgressionCap() -- Keet this value in local constant
+
 local g_PendingUpdate = {
     Group       = { flag = false, delay = 200 , name = moduleName .. "_PendingGroupUpdate" },
     VeteranXP   = { flag = false, delay = 5000, name = moduleName .. "_PendingVeteranXP" },
 }
 
--- Reference to default UI target unit frame
-local g_targetUnitFrame
--- Reference to default UI target name label
-local g_defaultTargetNameLabel
-
-local g_defaultThreshold = 25
-local g_targetThreshold
-
-local g_powerError = {}
-
 -- Font to be used on default UI overlay labels
 local defaultLabelFont = "/LuiExtended/media/fonts/fontin_sans_sc.otf|15|outline"
 
--- Keet this value in local constant
-local g_MaxChampionPoint = GetChampionPointsPlayerProgressionCap()
+-- Very simple and crude translation support of common labels
+local strDead       = GetString(SI_UNIT_FRAME_STATUS_DEAD)
+local strOffline    = GetString(SI_UNIT_FRAME_STATUS_OFFLINE)
 
 -- Default Regen/degen animation used on default group frames and custom frames
 local function CreateRegenAnimation(parent, anchors, dims, alpha, degen)
@@ -184,10 +180,6 @@ local function CreateDecreasedArmorOverlay( parent, small )
     return control
 end
 
--- Very simple and crude translation support of common labels
-local strDead       = GetString(SI_UNIT_FRAME_STATUS_DEAD)
-local strOffline    = GetString(SI_UNIT_FRAME_STATUS_OFFLINE)
-
 -- Following settings will be used in options menu to define DefaultFrames behaviour
 local g_DefaultFramesOptions = {
     [1] = "Disable",                                -- false
@@ -226,7 +218,6 @@ end
 -- Used to create default frames extender controls for player and target.
 -- Called from UF.Initialize
 local function CreateDefaultFrames()
-
     -- Create text overlay for default unit frames for player and reticleover.
     local default_controls = {}
 
@@ -291,13 +282,11 @@ local function CreateDefaultFrames()
             frame:SetHidden(true)
         end
     end
-
 end
 
 -- Used to create custom frames extender controls for player and target.
 -- Called from UF.Initialize
 local function CreateCustomFrames()
-
     -- Create Custom unit frames
     if UF.SV.CustomFramesPlayer then
         -- Player Frame
@@ -951,7 +940,6 @@ end
 
 -- Sets out-of-combat transparency values for default user-frames
 function UF.SetDefaultFramesTransparency(min_pct_value, max_pct_value)
-
     if min_pct_value ~= nil then
         UF.SV.DefaultOocTransparency = min_pct_value
     end
@@ -971,16 +959,15 @@ function UF.SetDefaultFramesTransparency(min_pct_value, max_pct_value)
     ZO_PlayerAttributeHealth:SetAlpha(inCombat and max_value or min_value)
     ZO_PlayerAttributeStamina:SetAlpha(inCombat and max_value or min_value)
     ZO_PlayerAttributeMagicka:SetAlpha(inCombat and max_value or min_value)
-
 end
 
 -- Update selection for target name colouring
 function UF.TargetColourByReaction(value)
-    -- if we have a parameter, save it
+    -- If we have a parameter, save it
     if value ~= nil then
         UF.SV.TargetColourByReaction = value
     end
-    -- if this Target name colouring is not required, revert it back to white
+    -- If this Target name colouring is not required, revert it back to white
     if not value then
         g_defaultTargetNameLabel:SetColor(1,1,1,1)
     end
@@ -991,7 +978,7 @@ function UF.ReticleColourByReaction(value)
     if value ~= nil then
         UF.SV.ReticleColourByReaction = value
     end
-    -- if this Reticle colouring is not required, revert it back to white
+    -- If this Reticle colouring is not required, revert it back to white
     if not value then
         ZO_ReticleContainerReticle:SetColor(1, 1, 1)
     end
@@ -999,7 +986,7 @@ end
 
 -- Update format for labels on CustomFrames
 function UF.CustomFramesFormatLabels()
-    -- search CustomFrames for attribute bars with correct labels
+    -- Search CustomFrames for attribute bars with correct labels
     for _, baseName in pairs( { "player", "reticleover", "SmallGroup" } ) do
         for i = 0, 4 do
             local unitTag = (i==0) and baseName or ( baseName .. i )
@@ -1328,15 +1315,6 @@ function UF.OnReticleTargetChanged(eventCode)
         else
             g_DefaultFrames.reticleover.classIcon:SetHidden(true)
         end
-        -- Update position of default target ignore/friend/guild icon
-        --[[ 2015-09-13: It seams avaRank 0 also has an icon, so we do not need to reposition our custom friend icon anymore
-        if UF.SV.TargetShowFriend and g_DefaultFrames.reticleover.isPlayer then
-            g_DefaultFrames.reticleover.friendIcon:ClearAnchors()
-            g_DefaultFrames.reticleover.friendIcon:SetAnchor(TOPLEFT, ZO_TargetUnitFramereticleoverTextArea, TOPRIGHT, ( g_DefaultFrames.reticleover.avaRankValue > 0 ) and 30 or 2, -4)
-        else
-            g_DefaultFrames.reticleover.friendIcon:SetHidden(true)
-        end
-        ]]--
         -- Instead just make sure it is hidden
         if not UF.SV.TargetShowFriend or not g_DefaultFrames.reticleover.isPlayer then
             g_DefaultFrames.reticleover.friendIcon:SetHidden(true)
