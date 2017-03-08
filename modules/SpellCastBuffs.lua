@@ -64,6 +64,7 @@ SCB.D = {
     
     IgnoreDisguise                   = false,
     IgnoreCostume                    = false,
+    IgnoreHat                        = false,
     IgnoreSkin                       = false,
     IgnorePolymorph                  = false,
     IgnoreAssistant                  = false,
@@ -816,6 +817,7 @@ function SCB.CollectibleBuff()
     if DisguiseOn ~= 0 and DisguiseOn ~= 55262 then
         g_effectsList.player1["PolymorphType"] = nil
         g_effectsList.player1["CostumeType"] = nil
+        g_effectsList.player1["HatType"] = nil
         g_effectsList.player1["SkinType"] = nil
     end
     
@@ -837,6 +839,7 @@ function SCB.CollectibleBuff()
                     }
             end
             g_effectsList.player1["CostumeType"] = nil
+            g_effectsList.player1["HatType"] = nil
             g_effectsList.player1["SkinType"] = nil
     else
         g_effectsList.player1["PolymorphType"] = nil
@@ -861,6 +864,27 @@ function SCB.CollectibleBuff()
             end
     else
         g_effectsList.player1["CostumeType"] = nil
+    end
+    
+    -- HATS
+    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HAT) > 0 and not SCB.SV.IgnoreHat then
+        local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HAT)
+        local CollectibleName = GetCollectibleName(Collectible)
+        
+        local strHat = CollectibleName
+        local iconHat = E.HatIcons[CollectibleName] ~= nil and E.HatIcons[CollectibleName] or "LuiExtended/media/icons/costumes/costume_generic.dds"
+            if (DisguiseOn == 0 or DisguiseOn == 55262) and GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) == 0 then
+                g_effectsList.player1["HatType"] = 
+                    {
+                            target="player", type=1,
+                            name=strHat, icon=iconHat,
+                            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                            forced = "long",
+                            restart=true, iconNum=0
+                    }
+            end
+    else
+        g_effectsList.player1["HatType"] = nil
     end
     
     -- SKINS

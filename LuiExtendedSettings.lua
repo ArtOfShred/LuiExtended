@@ -1081,6 +1081,17 @@ function LUIE_CreateSettings()
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             },
             {
+                -- Show Hats
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_HAT),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_HAT_TOOLTIP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreHat end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreHat = not value LUIE.SpellCastBuffs.OnPlayerActivated() end,
+                width = "full",
+                default = not LUIE.SpellCastBuffs.D.IgnoreHat,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
+            },
+            {
                 -- Show Skins
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SKIN),

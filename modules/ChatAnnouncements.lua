@@ -7,7 +7,6 @@ local CA             = LUIE.ChatAnnouncements
 local CommaValue     = LUIE.CommaValue
 local E              = LUIE.Effects
 local printToChat    = LUIE.PrintToChat
-local GuildIndexData = LUIE.GuildIndexData
 local strformat      = zo_strformat
 local strfmt         = string.format
 local gsub           = string.gsub
@@ -125,6 +124,7 @@ local g_XP_BAR_COLORS             = ZO_XP_BAR_GRADIENT_COLORS[2] -- Color for No
 local g_comboString               = "" -- String is filled by the EVENT_CURRENCY_CHANGE events and ammended onto the end of purchase/sales from LootLog component if toggled on!
 local g_craftStacks               = {}
 local g_fixJoinMessage            = false
+local g_groupFormFudger           = false
 local g_groupJoinFudger           = false -- Controls message for group join
 local g_guildBankCarryGainorloss  = ""
 local g_guildBankCarryIcon        = ""
@@ -156,6 +156,7 @@ local g_oldItemLink               = ""
 local g_playerName                = nil
 local g_playerNameFormatted       = nil
 local g_postageAmount             = 0
+local g_QuestShareFudger          = false
 local g_showActivityStatus        = true
 local g_showRCUpdates             = true
 local g_showStatusDropMember      = false
@@ -240,6 +241,7 @@ function CA.RegisterSocialEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_REMOVED, CA.FriendInviteRemoved)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARED, CA.QuestShared)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARE_REMOVED, CA.QuestShareRemoved)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_ADDED, CA.QuestAdded)
     end
 end
 
@@ -324,6 +326,9 @@ function CA.RegisterXPEvents()
 end
 
 function CA.RegisterGroupEvents()
+
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_LFG_JOINED, CA.LFGJoined)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_NO_LONGER_LFG, CA.LFGLeft)
     -- Group Events
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_REMOVED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_UPDATE)
@@ -429,6 +434,9 @@ function CA.RegisterTradeEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_FAILED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ELEVATION_FAILED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_ADD_FAILED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_CANCELED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_FAILED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED)
@@ -438,6 +446,9 @@ function CA.RegisterTradeEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING, CA.TradeInviteWaiting)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING, CA.TradeInviteConsidering)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED, CA.TradeInviteAccepted)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_FAILED, CA.TradeInviteFailed)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ELEVATION_FAILED, CA.TradeElevationFailed)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_ADD_FAILED, CA.TradeItemAddFailed)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_CANCELED, CA.TradeCancel)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_FAILED, CA.TradeFail)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED, CA.TradeInviteCancel)
@@ -449,6 +460,9 @@ function CA.RegisterTradeEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING, CA.TradeInviteWaiting)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING, CA.TradeInviteConsidering)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED, CA.TradeInviteAccepted)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_FAILED, CA.TradeInviteFailed)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ELEVATION_FAILED, CA.TradeElevationFailed)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_ADD_FAILED, CA.TradeItemAddFailed)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_CANCELED, CA.TradeCancel)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_FAILED, CA.TradeFail)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED, CA.TradeInviteCancel)
@@ -762,6 +776,7 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
 end
 
 function CA.GuildRemovedSelf(eventCode, guildId, guildName)
+    local GuildIndexData = LUIE.GuildIndexData
     for i = 1,5 do
         local guild = GuildIndexData[i]
         if guild.name == guildName then
@@ -838,30 +853,76 @@ function CA.QuestShared (eventCode, questId)
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
 
     if CA.SV.ChatPlayerDisplayOptions == 1 then
-        printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), displayNameLink, questName))
+        printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE), displayNameLink, questName))
     end
     if CA.SV.ChatPlayerDisplayOptions == 2 then
-        printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), characterNameLink, questName))
+        printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE), characterNameLink, questName))
     end
     if CA.SV.ChatPlayerDisplayOptions == 3
-        then printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), displayBoth, questName))
+        then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE), displayBoth, questName))
     end
 end
 
 function CA.QuestShareRemoved(eventCode, questId)
-    printToChat(GetString(SI_LUIE_CA_QUEST_SHARE_DECLINED))
+    zo_callLater(CA.QuestShareMessageHelper, 50)
+end
+
+function CA.QuestAdded(eventCode, journalIndex, questName, objectiveName)
+    g_QuestShareFudger = true
+    zo_callLater(CA.QuestShareMessageReset, 100)
+end
+
+-- Checks to see if quest was accepted 50 ms after share is removed
+function CA.QuestShareMessageHelper()
+    if g_QuestShareFudger == false then printToChat(GetString(SI_LUIE_CA_GROUP_QUEST_SHARE_DECLINED)) end
+end
+
+-- Reset message state after 100 ms
+function CA.QuestShareMessageReset()
+    g_QuestShareFudger = false
 end
 
 function CA.RegisterCustomStrings()
     if CA.SV.CustomStrings then
         -- Group Invite String Replacements
-        SafeAddString(SI_GROUPINVITERESPONSE0, GetString(SI_LUIE_CA_GROUP_GROUPINVITERESPONSE0), 1)
-        SafeAddString(SI_GROUPINVITERESPONSE10, GetString(SI_LUIE_CA_GROUP_GROUPINVITERESPONSE10), 1)
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GROUP, GetString(SI_LUIE_CA_FRIENDS_INCOMING_GROUP_REQUEST), 1)
-        SafeAddString(SI_GROUPLEAVEREASON1, GetString(SI_LUIE_CA_GROUP_GROUPLEAVEREASON1), 2)
+        SafeAddString(SI_GROUPINVITERESPONSE0, GetString(SI_LUIE_CA_GROUPINVITERESPONSE0), 2)
+        SafeAddString(SI_GROUPINVITERESPONSE1, GetString(SI_LUIE_CA_GROUPINVITERESPONSE1), 3)
+        SafeAddString(SI_GROUPINVITERESPONSE2, GetString(SI_LUIE_CA_GROUPINVITERESPONSE2), 3)
+        SafeAddString(SI_GROUPINVITERESPONSE3, GetString(SI_LUIE_CA_GROUPINVITERESPONSE3), 2)
+        SafeAddString(SI_GROUPINVITERESPONSE4, GetString(SI_LUIE_CA_GROUPINVITERESPONSE4), 3)
+        SafeAddString(SI_GROUPINVITERESPONSE5, GetString(SI_LUIE_CA_GROUPINVITERESPONSE5), 3)
+        SafeAddString(SI_GROUPINVITERESPONSE9, GetString(SI_LUIE_CA_GROUPINVITERESPONSE9), 2)
+        SafeAddString(SI_GROUPINVITERESPONSE10, GetString(SI_LUIE_CA_GROUPINVITERESPONSE10), 1)
+        SafeAddString(SI_GROUPINVITERESPONSE13, GetString(SI_LUIE_CA_GROUPINVITERESPONSE13), 1)
+        SafeAddString(SI_GROUPINVITERESPONSE14, GetString(SI_LUIE_CA_GROUPINVITERESPONSE14), 1)
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GROUP, GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE_ALT), 1)
+        SafeAddString(SI_GROUP_INVITE_MESSAGE, GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE_ALT), 2)
+        SafeAddString(SI_GROUPLEAVEREASON1, GetString(SI_LUIE_CA_GROUP_GROUPLEAVEREASON1), 3)
+        SafeAddString(SI_GROUPLEAVEREASON2, GetString(SI_LUIE_CA_GROUP_MEMBER_DISBAND_MSG), 1)
+        SafeAddString(SI_LUIE_CA_GROUP_INVITE_MESSAGE, GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE_ALT), 1)
+        SafeAddString(SI_LUIE_CA_GROUP_LEADER_CHANGED, GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_ALT), 1) -- Replaces default syntax style string with LUIE style
+        SafeAddString(SI_LUIE_CA_GROUP_MEMBER_JOIN, GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_ALT), 1) -- Replaces default syntax style string with LUIE style
+        SafeAddString(SI_LUIE_CA_GROUP_MEMBER_KICKED, GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_ALT), 1) -- Replaces default syntax style string with LUIE style
+        SafeAddString(SI_LUIE_CA_GROUP_MEMBER_LEAVE, GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_ALT), 1) -- Replaces default syntax style string with LUIE style
+        
+        -- Group Finder String Replacements
+        SafeAddString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL, GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL_ALT), 1) -- Replaces default syntax style string with LUIE style
+        SafeAddString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START, GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START_ALT), 1) -- Replaces default syntax style string with LUIE style
+        SafeAddString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_PASSED, GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_PASSED_ALT), 1) -- Replaces default syntax style string with LUIE style
+        
+        -- Quest Share String Replacements
+        SafeAddString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE, GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_ALT), 1)
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_ALT), 3)
+        SafeAddString(SI_QUEST_SHARE_MESSAGE, GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_ALT), 1)
+        
         -- Trade String Replacements
-        SafeAddString(SI_TRADE_INVITE_CONFIRM, GetString(SI_LUIE_CA_TRADE_INVITE_CONFIRM), 1) -- Fixes default Trade messages to match our syntax.
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_TRADE, GetString(SI_LUIE_CA_TRADE_INCOMING_TRADE), 1) -- Fixes default Trade messages to match our syntax.
+        SafeAddString(SI_TRADE_INVITE_CONFIRM, GetString(SI_LUIE_CA_TRADE_INVITE_CONFIRM), 1)
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_TRADE, GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), 1)
+        SafeAddString(SI_TRADE_INVITE_PROMPT, GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), 1)
+        SafeAddString(SI_TRADE_INVITE, GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), 1)
+        SafeAddString(SI_TRADE_INVITE_MESSAGE, GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), 1)
+        SafeAddString(SI_TRADEACTIONRESULT1, GetString(SI_LUIE_CA_TRADEACTIONRESULT1), 1)
+        
         -- Friend Invite String Replacements
         SafeAddString(SI_FRIENDS_LIST_IGNORE_ADDED, GetString(SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED), 1) -- Fixes default Ignore List messages to match our syntax.
         SafeAddString(SI_FRIENDS_LIST_IGNORE_REMOVED, GetString(SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED), 1) -- Fixes default Ignore List messages to match our syntax.
@@ -873,9 +934,10 @@ function CA.RegisterCustomStrings()
         -- Guild Invite String Replacements
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, GetString(SI_LUIE_CA_FRIENDS_INCOMING_GUILD_REQUEST), 1) -- Update syntax for guild invite message to match our chat syntax
         SafeAddString(SI_GUILD_ROSTER_INVITED_MESSAGE, GetString(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE), 1) -- Update syntax for guild invitation sent message to match group syntax.
-        -- Quest Share String Replacements
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE), 3)
+        
         -- Duel String Replacements
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_DUEL, GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), 1)
+        SafeAddString(SI_DUEL_INVITE_MESSAGE, GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), 1)
         SafeAddString(SI_DUEL_INVITE_ACCEPTED, GetString(SI_LUIE_CA_DUEL_INVITE_ACCEPTED), 1)
         SafeAddString(SI_DUEL_INVITE_DECLINED, GetString(SI_LUIE_CA_DUEL_INVITE_DECLINED), 1)
         SafeAddString(SI_DUEL_INVITE_CANCELED, GetString(SI_LUIE_CA_DUEL_INVITE_CANCELED), 1)
@@ -883,9 +945,11 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_DUEL_INVITE_RECEIVED, GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), 1)
         SafeAddString(SI_PLAYER_TO_PLAYER_INVITE_DUEL, GetString(SI_LUIE_CA_DUEL_INVITE_PLAYER), 1)
         SafeAddString(SI_DUELING_COUNTDOWN_CSA, GetString(SI_LUIE_CA_DUEL_COUNTDOWN_CSA), 1)
+        SafeAddString(SI_DUELING_NEAR_BOUNDARY_CSA, GetString(SI_LUIE_DUELING_NEAR_BOUNDARY_CSA), 1)
         SafeAddString(SI_DUELRESULT0, GetString(SI_LUIE_CA_DUEL_RESULT0), 1)
         SafeAddString(SI_DUELRESULT1, GetString(SI_LUIE_CA_DUEL_RESULT1), 1)
-        --Duel Failure Reason String Replacements
+        SafeAddString(SI_DUELSTATE1, GetString(SI_LUIE_CA_DUEL_STATE1), 1)
+        SafeAddString(SI_DUELSTATE1, GetString(SI_LUIE_CA_DUEL_STATE2), 1)
         SafeAddString(SI_DUELINVITEFAILREASON1, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON1), 1)
         SafeAddString(SI_DUELINVITEFAILREASON4, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON4), 1)
         SafeAddString(SI_DUELINVITEFAILREASON5, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON5), 1)
@@ -898,7 +962,16 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_DUELINVITEFAILREASON14, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON14), 1)
         SafeAddString(SI_DUELINVITEFAILREASON16, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON16), 1)
         SafeAddString(SI_DUELINVITEFAILREASON18, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON18), 1)
+        SafeAddString(SI_DUELINVITEFAILREASON20, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON20), 1)
     end
+end
+
+function CA.LFGJoined(eventCode, locationName)
+    printToChat(strformat("You have joined an LFG group for <<1>>", locationName))
+end
+
+function CA.LFGLeft(eventCode)
+    d("You are no longer in an LFG Group.")
 end
 
 function CA.GroupFindReplacementNew(eventCode)
@@ -944,23 +1017,23 @@ end
 
 function CA.ActivityQueueResult(eventCode, result)
     if result == ACTIVITY_QUEUE_RESULT_INCOMPATIBLE_GROUP then
-        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT9)))
+        printToChat(GetString(SI_ACTIVITYQUEUERESULT9))
     end
 
     if result == ACTIVITY_QUEUE_RESULT_MEMBERS_OFFLINE then
-        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT14)))
+        printToChat(GetString(SI_ACTIVITYQUEUERESULT14))
     end
 
     if result == ACTIVITY_QUEUE_RESULT_ON_QUEUE_COOLDOWN then
-        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT12)))
+        printToChat(GetString(SI_ACTIVITYQUEUERESULT12))
     end
 
     if result == ACTIVITY_QUEUE_RESULT_MEMBER_CANCELED_READY_CHECK then
-        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT19)))
+        printToChat(GetString(SI_ACTIVITYQUEUERESULT19))
     end
 
     if result == ACTIVITY_QUEUE_RESULT_DLC_LOCKED then
-        printToChat(strformat("<<1>> - <<2>>", GetString(SI_ACTIVITYFINDERSTATUS0), GetString(SI_ACTIVITYQUEUERESULT6)))
+        printToChat(GetString(SI_ACTIVITYQUEUERESULT6))
     end
 
     g_showRCUpdates = true
@@ -981,7 +1054,7 @@ function CA.ReadyCheckCancel(eventCode, reason)
 
     end
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_READY then
-        printToChat(GetString(SI_LUIE_CA_READY_CHECK_CANCELED))
+        printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_READY_CHECK_CANCELED))
     end
 
     g_showRCUpdates = true
@@ -1023,7 +1096,7 @@ function CA.ReadyCheckUpdate(eventCode)
             activityName = GetString(SI_LFGACTIVITY4)
         end
 
-        printToChat(strformat(GetString(SI_LUIE_CA_READY_CHECK_ACTIVITY), activityName))
+        printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_READY_CHECK_ACTIVITY), activityName))
     end
 
     if tanksAccepted > 0 or healersAccepted > 0 or dpsAccepted > 0 then
@@ -1038,7 +1111,7 @@ function CA.ReadyCheckUpdate(eventCode)
 
     if g_fixJoinMessage then
         if not g_showRCUpdates and (tanksAccepted == 0 and healersAccepted == 0 and dpsAccepted == 0 and tanksPending == 0 and healersPending == 0 and dpsPending == 0) then
-            printToChat(GetString(SI_LFGREADYCHECKCANCELREASON4)) -- maybe alter since this is for joining in progress?
+            printToChat(GetString(SI_LFGREADYCHECKCANCELREASON4))
         end
     end
 
@@ -1066,13 +1139,13 @@ function CA.VoteNotify(eventCode)
         local displayBothString = ( strformat("<<1>><<2>>", kickMemberName, kickMemberAccountName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, kickMemberAccountName)
         if CA.SV.ChatPlayerDisplayOptions == 1 then
-            printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START), displayNameLink))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START), displayNameLink))
         end
         if CA.SV.ChatPlayerDisplayOptions == 2 then
-            printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START), characterNameLink))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START), characterNameLink))
         end
         if CA.SV.ChatPlayerDisplayOptions == 3 then
-            printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_START), displayBoth))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START), displayBoth))
         end
     end
 end
@@ -1084,7 +1157,7 @@ function CA.VoteResult(eventCode, electionResult, descriptor)
             printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED)) -- "Someone in your group is not ready."
         end
         if electionResult == 4 then
-            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_PASSED)) -- "Someone in your group is not ready."
+            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_PASSED)) -- "Everyone in your group is ready!"
         end
         if electionResult == 5 then
             printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED)) -- "Someone in your group is not ready."
@@ -1111,16 +1184,16 @@ function CA.VoteResult(eventCode, electionResult, descriptor)
         end
 
         if electionResult == 1 then
-            printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL), KickCarry))
         end
         if electionResult == 2 then
-            printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL), KickCarry))
         end
         if electionResult == 4 then
-            printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_PASSED), KickCarry))
         end
         if electionResult == 5 then
-            printToChat(strformat(GetString(SI_LUIE_CA_VOTE_NOTIFY_VOTEKICK_FAIL), KickCarry))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL), KickCarry))
         end
     end
 end
@@ -1262,46 +1335,40 @@ function CA.OnGroupInviteReceived(eventCode, inviterName, inviterDisplayName)
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
 
     if CA.SV.ChatPlayerDisplayOptions == 1 then
-        printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_RECEIVED), displayNameLink))
+        printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), displayNameLink))
     end
     if CA.SV.ChatPlayerDisplayOptions == 2 then
-        printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_RECEIVED), characterNameLink))
+        printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), characterNameLink))
     end
     if CA.SV.ChatPlayerDisplayOptions == 3 then
-        printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_RECEIVED), displayBoth))
+        printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), displayBoth))
     end
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED) -- On receiving a group invite, it fires 2 events, we disable the event handler temporarily for this then recall it after.
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED) -- On receiving a group invite, it fires 2 events, we disable the event handler temporarily for this then re-enable it after.
     zo_callLater(CA.RefreshGroupInviteEnable, 100)
 end
 
 -- Prints a message to chat when invites are declined or failed.
 -- Currently broken as of 2/9/2017 so we have to omit any names from this function until it returns the correct InviteeName and InviteeDisplayName instead
 function CA.OnGroupInviteResponse(eventCode, inviterName, response, inviterDisplayName)
-    if response == 2 then
-        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_DECLINED))
-    elseif response == 3 then
-        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_IGNORE))
-    elseif response == 4 then -- Add some kind of override here if you try to invite yourself
-        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_PENDING))
-    elseif response == 5 then -- Add some kind of override here if you try to invite yourself
-        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_ALREADYGRPD1))
-    elseif response == 6 then
-        printToChat(GetString(SI_GROUPINVITERESPONSE6)) -- "The group is already full."
-    elseif response == 7 then
-        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_CANTINVSELF))
-    elseif response == 8 then
-        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_NOTLEADER))
-    elseif response == 9 then
-        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_OPPOSITEFACTION))
-    elseif response == 11 then
-        printToChat(GetString(SI_GROUPINVITERESPONSE11)) -- "Account type is not set to allow group creation."
-    elseif response == 12 then
-        printToChat(GetString(SI_GROUPINVITERESPONSE12)) -- "Failed to join the group"
-    elseif response == 13 then
-        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_UNUSEDFULL)) -- Not sure if this is even used, doesn't trigger when player tries to join a group already full of 24, response 6 does.
-    elseif response == 14 then
-        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_FAILED_ALREADYGRPD2))
+
+    local responseName
+    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(inviterName)
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
+    local displayBothString = ( strformat("<<1>><<2>>", inviterName, inviterDisplayName) )
+    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
+    
+    if CA.SV.ChatPlayerDisplayOptions == 1 then responseName = displayNameLink end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then responseName = characterNameLink end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then responseName = displayBoth end
+    
+    if response ~= 0 and response ~= 1 then
+        printToChat(strformat(GetString("SI_GROUPINVITERESPONSE", response), responseName))
+    elseif response == 1 and g_playerName ~= inviterName then
+        g_groupFormFudger = true
+        printToChat(strformat(GetString("SI_GROUPINVITERESPONSE", response), responseName))
+        printToChat(GetString(SI_LUIE_CA_GROUP_FORM_SELF))
     end
+    
 end
 
 -- Prints a message to chat when the leader of the group is updated
@@ -1331,6 +1398,7 @@ end
 
 -- Prints a message to chat when a group member joins
 function CA.OnGroupMemberJoined(eventCode, memberName)
+    g_groupJoinFudger = false
     local g_partyStack = { }
     local joinedMemberName = ""
     local joinedMemberAccountName = ""
@@ -1369,12 +1437,16 @@ function CA.OnGroupMemberJoined(eventCode, memberName)
         if CA.SV.ChatPlayerDisplayOptions == 3 then
             printToChat(strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), displayBoth))
         end
-    elseif g_playerName == memberName then
+    elseif g_playerName == memberName and not g_groupFormFudger then
         printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF)) -- Only prints on the initial group form between 2 players.
     end
 
     g_partyStack = { }
+    g_groupFormFudger = false
+    
 end
+
+function ""
 
 -- Prints a message to chat when a group member leaves
 function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLeader, memberDisplayName, actionRequiredVote)
@@ -1393,7 +1465,7 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
     elseif reason == GROUP_LEAVE_REASON_KICKED then
         msg = g_playerName == memberName and GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF) or GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED)
     elseif reason == GROUP_LEAVE_REASON_DISBAND and g_playerName == memberName then
-        msg = GetString(SI_LUIE_CA_GROUP_DISBAND_MSG)
+        msg = GetString(SI_LUIE_CA_GROUP_MEMBER_DISBAND_MSG)
     end
     if msg then
         -- Can occur if event is before EVENT_PLAYER_ACTIVATED
@@ -1407,6 +1479,7 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
             printToChat(strformat(msg, displayBoth))
         end
     end
+    
 end
 
 -- Gold Change Announcements
@@ -2712,13 +2785,13 @@ function CA.TradeInviteWaiting(eventCode, inviteeCharacterName, inviteeDisplayNa
     local displayBothString = ( strformat("<<1>><<2>>", gsub(inviteeCharacterName,"%^%a+",""), inviteeDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviteeDisplayName)
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then
-        printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MSG_SELF), displayNameLink))
+        printToChat(strformat(GetString(SI_TRADE_INVITE_CONFIRM), displayNameLink))
     end
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 2 then
-        printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MSG_SELF), characterNameLink))
+        printToChat(strformat(GetString(SI_TRADE_INVITE_CONFIRM), characterNameLink))
     end
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then
-        printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MSG_SELF), displayBoth))
+        printToChat(strformat(GetString(SI_TRADE_INVITE_CONFIRM), displayBoth))
     end
 end
 
@@ -2730,13 +2803,13 @@ function CA.TradeInviteConsidering(eventCode, inviterCharacterName, inviterDispl
     local displayBothString = ( strformat("<<1><<<2>>", gsub(inviterCharacterName,"%^%a+",""), inviterDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 1 then
-        printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MSG), displayNameLink))
+        printToChat(strformat(GetString(SI_TRADE_INVITE), displayNameLink))
     end
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 2 then
-        printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MSG), characterNameLink))
+        printToChat(strformat(GetString(SI_TRADE_INVITE), characterNameLink))
     end
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then
-        printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MSG), displayBoth))
+        printToChat(strformat(GetString(SI_TRADE_INVITE), displayBoth))
     end
 end
 
@@ -2744,6 +2817,30 @@ function CA.TradeInviteAccepted(eventCode)
     if CA.SV.MiscTrade then
         printToChat(GetString(SI_LUIE_CA_TRADE_INVITE_ACCEPTED))
     end
+end
+
+function CA.TradeInviteFailed(eventCode, reason, inviteeCharacterName, inviteeDisplayName)
+    if CA.SV.MiscTrade then
+        local failName
+        local characterNameLink = ZO_LinkHandler_CreateCharacterLink( gsub(inviteeCharacterName,"%^%a+","") )
+        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviteeDisplayName)
+        local displayBothString = ( strformat("<<1>><<2>>", gsub(inviteeCharacterName,"%^%a+",""), inviteeDisplayName) )
+        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviteeDisplayName)
+        
+        if CA.SV.ChatPlayerDisplayOptions == 1 then failName = displayNameLink end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then failName = characterNameLink end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then failName = displayBoth end
+        
+        printToChat(strformat(GetString("SI_TRADEACTIONRESULT", reason), failName))
+    end
+end
+
+function CA.TradeElevationFailed(eventCode, reason, itemName)
+    if CA.SV.MiscTrade then printToChat(strformat(GetString("SI_TRADEACTIONRESULT", reason), itemName)) end
+end
+
+function CA.TradeItemAddFailed(eventCode, reason, itemName)
+    if CA.SV.MiscTrade then printToChat(strformat(GetString("SI_TRADEACTIONRESULT", reason), itemName)) end
 end
 
 function CA.TradeInviteDecline(eventCode)
@@ -2804,9 +2901,9 @@ function CA.TradeCancel(eventCode, cancelerName)
     g_tradeInvitee = ""
 end
 
-function CA.TradeFail(eventCode, cancelerName)
+function CA.TradeFail(eventCode, reason)
     if CA.SV.MiscTrade then
-        printToChat(GetString(SI_TRADE_FAILED)) -- "Trade failed."
+        printToChat(GetString("SI_TRADEACTIONRESULT", reason))
     end
     g_tradeStacksIn = {}
     g_tradeStacksOut = {}
@@ -4745,7 +4842,7 @@ function CA.DuelInviteFailed(eventCode, reason, targetCharacterName, targetDispl
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, targetDisplayName)
 
     if CA.SV.ChatPlayerDisplayOptions == 1 then
-        reasontName = displayNameLink
+        reasonName = displayNameLink
     end
     if CA.SV.ChatPlayerDisplayOptions == 2 then
         reasonName = characterNameLink
@@ -4774,27 +4871,6 @@ end
 function CA.DuelStarted(eventCode)
     printToChat(GetString(SI_LUIE_CA_DUEL_STARTED))
 end
-
---[[
-if CA.SV.ChatPlayerDisplayOptions == 3 then
-    printToChat(strformat(GetString(SI_LUIE_CA_QUEST_SHARE_MSG), displayBoth, questName))
-end
-
-function CA.QuestShareRemoved(eventCode, questId)
-    printToChat(GetString(SI_LUIE_CA_QUEST_SHARE_DECLINED))
-
-    EVENT_DUEL_COUNTDOWN (integer eventCode,number startTimeMS)
-    EVENT_DUEL_INVITE_RECEIVED (integer eventCode,string inviterCharacterName, string inviterDisplayName)
-    EVENT_DUEL_INVITE_ACCEPTED (number eventCode)
-    EVENT_DUEL_INVITE_SENT (integer eventCode,string inviteeCharacterName, string inviteeDisplayName)
-    EVENT_DUEL_FINISHED (integer eventCode,number duelResult, boolean wasLocalPlayersResult, string opponentCharacterName, string opponentDisplayName, number opponentAlliance, number opponentGender, number opponentClassId, number opponentRaceId)
-    EVENT_DUEL_INVITE_FAILED (integer eventCode,number reason, string targetCharacterName, string targetDisplayName)
-    EVENT_DUEL_INVITE_DECLINED (number eventCode)
-    EVENT_DUEL_INVITE_CANCELED (number eventCode)
-    EVENT_DUEL_INVITE_REMOVED (number eventCode)
-    EVENT_DUEL_NEAR_BOUNDARY (integer eventCode,boolean isInWarningArea)
-    EVENT_DUEL_STARTED (number eventCode)
-]]--
 
 function CA.DisguiseState(eventCode, unitTag, disguiseState)
 

@@ -295,12 +295,18 @@ end
 
 function LUIE.PortPrimaryHome()
     local primaryHouse = GetHousingPrimaryHouse()
+    
+    if IsUnitInCombat("player") then
+        LUIE.PrintToChat("You can't port to your fucking house when you're in combat you weabtron.")
+        return
+    end
 
     if IsPlayerInAvAWorld() then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA))
         return
     end
-    if not primaryHouse then
+    
+    if primaryHouse == 0 then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_NOHOME))
     else
         RequestJumpToHouse(primaryHouse)
@@ -480,12 +486,12 @@ end
 
 function LUIE.InitGuildData()
     GuildsIndex = GetNumGuilds()
-    GuildIndexData = {}
+    LUIE.GuildIndexData = {}
     for i = 1,GuildsIndex do
         local id = GetGuildId(i)
         local name = GetGuildName(id)
         local guildAlliance = GetGuildAlliance(id)
-        GuildIndexData[i] = {id=id, name=name, guildAlliance=guildAlliance}
+        LUIE.GuildIndexData[i] = {id=id, name=name, guildAlliance=guildAlliance}
     end
 end
 
@@ -497,23 +503,23 @@ end
 
 function LUIE.GuildAddedSelf()
     GuildsIndex = GetNumGuilds()
-    GuildIndexData = {}
+    LUIE.GuildIndexData = {}
     for i = 1,GuildsIndex do
         local id = GetGuildId(i)
         local name = GetGuildName(id)
         local guildAlliance = GetGuildAlliance(id)
-        GuildIndexData[i] = {id=id, name=name, guildAlliance=guildAlliance}
+        LUIE.GuildIndexData[i] = {id=id, name=name, guildAlliance=guildAlliance}
     end
 end
 
 function LUIE.GuildRemovedSelf()
     GuildsIndex = GetNumGuilds()
-    GuildIndexData = {}
+    LUIE.GuildIndexData = {}
     for i = 1,GuildsIndex do
         local id = GetGuildId(i)
         local name = GetGuildName(id)
         local guildAlliance = GetGuildAlliance(id)
-        GuildIndexData[i] = {id=id, name=name, guildAlliance=guildAlliance}
+        LUIE.GuildIndexData[i] = {id=id, name=name, guildAlliance=guildAlliance}
     end
 end
 
@@ -542,16 +548,16 @@ function LUIE.SlashGuildInvite(option)
         return
     end
 
-    if guildnumber == "1" and GuildIndexData[1] then
-        guildnumber = GuildIndexData[1].id
-    elseif guildnumber == "2" and GuildIndexData[2] then
-        guildnumber = GuildIndexData[2].id
-    elseif guildnumber == "3" and GuildIndexData[3] then
-        guildnumber = GuildIndexData[3].id
-    elseif guildnumber == "4" and GuildIndexData[4] then
-        guildnumber = GuildIndexData[4].id
-    elseif guildnumber == "5" and GuildIndexData[5] then
-        guildnumber = GuildIndexData[5].id
+    if guildnumber == "1" and LUIE.GuildIndexData[1] then
+        guildnumber = LUIE.GuildIndexData[1].id
+    elseif guildnumber == "2" and LUIE.GuildIndexData[2] then
+        guildnumber = LUIE.GuildIndexData[2].id
+    elseif guildnumber == "3" and LUIE.GuildIndexData[3] then
+        guildnumber = LUIE.GuildIndexData[3].id
+    elseif guildnumber == "4" and LUIE.GuildIndexData[4] then
+        guildnumber = LUIE.GuildIndexData[4].id
+    elseif guildnumber == "5" and LUIE.GuildIndexData[5] then
+        guildnumber = LUIE.GuildIndexData[5].id
     else -- If we enter anything outside of the range of 1-5, display an error and end.
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_INV))
         return
@@ -574,16 +580,16 @@ function LUIE.SlashGuildInvite(option)
 end
 
 function LUIE.GQuit(guildnumber)
-    if guildnumber == "1" and GuildIndexData[1] then
-        guildnumber = GuildIndexData[1].id
-    elseif guildnumber == "2" and GuildIndexData[2] then
-        guildnumber = GuildIndexData[2].id
-    elseif guildnumber == "3" and GuildIndexData[3] then
-        guildnumber = GuildIndexData[3].id
-    elseif guildnumber == "4" and GuildIndexData[4] then
-        guildnumber = GuildIndexData[4].id
-    elseif guildnumber == "5" and GuildIndexData[5] then
-        guildnumber = GuildIndexData[5].id
+    if guildnumber == "1" and LUIE.GuildIndexData[1] then
+        guildnumber = LUIE.GuildIndexData[1].id
+    elseif guildnumber == "2" and LUIE.GuildIndexData[2] then
+        guildnumber = LUIE.GuildIndexData[2].id
+    elseif guildnumber == "3" and LUIE.GuildIndexData[3] then
+        guildnumber = LUIE.GuildIndexData[3].id
+    elseif guildnumber == "4" and LUIE.GuildIndexData[4] then
+        guildnumber = LUIE.GuildIndexData[4].id
+    elseif guildnumber == "5" and LUIE.GuildIndexData[5] then
+        guildnumber = LUIE.GuildIndexData[5].id
     else
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE))
         return
@@ -624,16 +630,16 @@ function LUIE.GKick(option)
         return
     end
 
-    if guildnumber == "1" and GuildIndexData[1] then
-        guildnumber = GuildIndexData[1].id
-    elseif guildnumber == "2" and GuildIndexData[2] then
-        guildnumber = GuildIndexData[2].id
-    elseif guildnumber == "3" and GuildIndexData[3] then
-        guildnumber = GuildIndexData[3].id
-    elseif guildnumber == "4" and GuildIndexData[4] then
-        guildnumber = GuildIndexData[4].id
-    elseif guildnumber == "5" and GuildIndexData[5] then
-        guildnumber = GuildIndexData[5].id
+    if guildnumber == "1" and LUIE.GuildIndexData[1] then
+        guildnumber = LUIE.GuildIndexData[1].id
+    elseif guildnumber == "2" and LUIE.GuildIndexData[2] then
+        guildnumber = LUIE.GuildIndexData[2].id
+    elseif guildnumber == "3" and LUIE.GuildIndexData[3] then
+        guildnumber = LUIE.GuildIndexData[3].id
+    elseif guildnumber == "4" and LUIE.GuildIndexData[4] then
+        guildnumber = LUIE.GuildIndexData[4].id
+    elseif guildnumber == "5" and LUIE.GuildIndexData[5] then
+        guildnumber = LUIE.GuildIndexData[5].id
     else -- If we enter anything outside of the range of 1-5, display an error and end.
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_KICK))
         return
@@ -772,6 +778,30 @@ function LUIE.SlashRemoveIgnore(option)
     end
 end
 
+function LUIE.SlashTrade(option)
+    if option == "" then
+        LUIE.PrintToChat("You must enter the name of a player to trade with.")
+        return
+    end
+    
+    TradeInviteByName(option)
+end
+
+function LUIE.SlashVoteKick(option)
+    if option == "" then
+        LUIE.PrintToChat("You must enter the name of a player to votekick.")
+        return
+    end
+
+    if not IsInLFGGroup() then
+        LUIE.PrintToChat("Get real chickentits, you can't votekick a player when you're not in LFG")
+        return
+    end
+    
+    --BeginGroupElection(GROUP_ELECTION_TYPE_KICK_MEMBER, string electionDescriptor, option) 
+    
+end
+
 -- Slash Commands
 SLASH_COMMANDS["/regroup"] = LUIE.RegroupDisband
 SLASH_COMMANDS["/disband"] = LUIE.Disband
@@ -782,6 +812,8 @@ SLASH_COMMANDS["/remove"] = LUIE.GroupKick
 SLASH_COMMANDS["/groupkick"] = LUIE.GroupKick
 SLASH_COMMANDS["/groupremove"] = LUIE.GroupKick
 SLASH_COMMANDS["/home"] = LUIE.PortPrimaryHome
+SLASH_COMMANDS["/trade"] = LUIE.SlashTrade
+SLASH_COMMANDS["/votekick"] = LUIE.SlashVoteKick
 
 SLASH_COMMANDS["/ginvite"] = LUIE.SlashGuildInvite
 SLASH_COMMANDS["/gquit"] = LUIE.GQuit

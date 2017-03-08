@@ -547,6 +547,41 @@ E.SkinIcons = {
 
 }
 
+E.HatIcons = {
+
+['12-Point Antler Skullcap'] = 'LuiExtended/media/icons/hats/hat_12-point_antler_skullcap.dds',
+['14-Point Antler Skullcap'] = 'LuiExtended/media/icons/hats/hat_14-point_antler_skullcap.dds',
+['Abah\'s Watch Turban with Mask'] = 'LuiExtended/media/icons/hats/hat_abahs_watch_turban.dds',
+['Abah\'s Watch Turban'] = 'LuiExtended/media/icons/hats/hat_abahs_watch_turban_with_mask.dds',
+['Alliance Rider Hood'] = 'LuiExtended/media/icons/hats/hat_alliance_rider_hood.dds',
+['Cadwell\'s Helm of Heroism'] = 'LuiExtended/media/icons/hats/hat_cadwells_helm_of_heroism.dds',
+['\"Clever Man\" Wizard Hat'] = 'LuiExtended/media/icons/hats/hat_clever_man_wizard_hat.dds',
+['Colovian Filigreed Hood'] = 'LuiExtended/media/icons/hats/hat_colovian_filigreed_hood.dds',
+['Colovian Fur Hood'] = 'LuiExtended/media/icons/hats/hat_colovian_fur_hood.dds',
+['Dwarf-Style Mage\'s Hat'] = 'LuiExtended/media/icons/hats/hat_dwarf-style_mages_hat.dds',
+['Feathered Bycoket Cap'] = 'LuiExtended/media/icons/hats/hat_feathered_bycoket_cap.dds',
+['Fibonaccus Spiral Hat'] = 'LuiExtended/media/icons/hats/hat_fibonaccus_spiral_hat.dds',
+['Flannel Forester\'s Hood'] = 'LuiExtended/media/icons/hats/hat_flannel_foresters_hood.dds',
+['Forester\'s Hoot with Flower'] = 'LuiExtended/media/icons/hats/hat_foresters_hood_with_flower.dds',
+['Hedge Wizard\'s Claw Cap'] = 'LuiExtended/media/icons/hats/hat_hedge_wizards_claw_cap.dds',
+['Imperial Mananaut Cap & Goggles'] = 'LuiExtended/media/icons/hats/hat_imperial_mananaut_cap_&_goggles.dds',
+['Jhunal\'s Owl Mask'] = 'LuiExtended/media/icons/hats/hat_jhunals_owl_mask.dds',
+['New Life Festival Cap'] = 'LuiExtended/media/icons/hats/hat_new_life_festival_cap.dds',
+['New Life Monk\'s Ca'] = 'LuiExtended/media/icons/hats/hat_new_life_monks_cap.dds',
+['Pumpkin Spectre Mask'] = 'LuiExtended/media/icons/hats/hat_pumpkin_spectre_mask.dds',
+['Rajhin\'s Cat Mask'] = 'LuiExtended/media/icons/hats/hat_rajhins_cat_mask.dds',
+['Rootbrim Hat with Flowers'] = 'LuiExtended/media/icons/hats/hat_rootbrim_hat_with_flower.dds',
+['Scarecrow Spectre Mask'] = 'LuiExtended/media/icons/hats/hat_scarecrow_spectre_mask.dds',
+['Silvenari Felt Bycoket'] = 'LuiExtended/media/icons/hats/hat_silvenari_felt_bycoket.dds',
+['Sun\'s Dusk Winter Hood'] = 'LuiExtended/media/icons/hats/hat_suns_dusk_winter_hood.dds',
+['Upright Antler Skullcap'] = 'LuiExtended/media/icons/hats/hat_upright_antler_skullcap.dds',
+['Vosh Rakh Ceremonial Mask'] = 'LuiExtended/media/icons/hats/hat_vosh_rakh_ceremonial_mask.dds',
+['Wild Hunt Antler Skullcap'] = 'LuiExtended/media/icons/hats/hat_wild_hunt_antler_skullcap.dds',
+['Wild Hunt Rootbrim Hat'] = 'LuiExtended/media/icons/hats/hat_wild_hunt_rootbrim_hat.dds',
+['Z\'en Vengeance Kiss-Me-Not Cap'] = 'LuiExtended/media/icons/hats/hat_zen_vengeance_kiss-me-not_cap.dds',
+
+}
+
 E.CostumeIcons = { 
 
     ['\"Brilliance\" Brocade Robes'] = 'LuiExtended/media/icons/costumes/costume_brilliance_brocade_robes.dds',
