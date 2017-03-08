@@ -65,8 +65,9 @@ bindings.xml
 i18n\en.lua
 i18n\$(language).lua
 
-modules\AbilityTables.lua
-modules\Effects.lua
+data\AbilityTables.lua
+data\Effects.lua
+
 modules\InfoPanel.lua
 modules\ChatAnnouncements.lua
 modules\CombatInfo.lua
