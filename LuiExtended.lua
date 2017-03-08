@@ -798,7 +798,15 @@ function LUIE.SlashVoteKick(option)
         return
     end
     
-    --BeginGroupElection(GROUP_ELECTION_TYPE_KICK_MEMBER, string electionDescriptor, option) 
+    -- Make sure is leader too
+    
+    -- Make sure is in group too
+    
+    -- Priority of warnings? Does "Hey you didn't enter an option take priority or do we print the "You're not in a group/LFG/etc warnings first?"
+    
+    BeginGroupElection(GROUP_ELECTION_TYPE_KICK_MEMBER, ZO_NONE, option)
+    
+    -- Add group iteration name comparison shit here to votekick proper member. Wooo
     
 end
 

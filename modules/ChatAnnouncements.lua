@@ -1446,8 +1446,6 @@ function CA.OnGroupMemberJoined(eventCode, memberName)
     
 end
 
-function ""
-
 -- Prints a message to chat when a group member leaves
 function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLeader, memberDisplayName, actionRequiredVote)
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink( gsub(memberName,"%^%a+","") )
