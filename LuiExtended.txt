@@ -58,7 +58,7 @@ libs\LibAddonMenu-2.0\controls\divider.lua
 
 LuiExtended.lua
 LuiExtendedUI.lua
-LuiExtendedSettings.lua
+LuiExtendedMenu.lua
 
 bindings.xml
 
