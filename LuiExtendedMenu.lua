@@ -2,25 +2,22 @@ local strformat = zo_strformat
 
 -- Create Settings Menu
 function LUIE_CreateSettings()
-    local LAM2 = LibStub("LibAddonMenu-2.0")
-    if LAM2 == nil then return end
-
-    local L = LUIE.GetLocale()
-
-    -- Helper local flag
-    local l_BuffsMovingEnabled = false
-
-    local FontsList = {}
+    local LAM2  = LibStub("LibAddonMenu-2.0") -- Load LibAddonMenu
+    local L     = LUIE.GetLocale()
+    
+    local l_BuffsMovingEnabled  = false -- Helper local flag
+    local FontsList             = {}
+    local FontsListCombatInfo   = {}
+    local StatusbarTexturesList = {}
+    
     for f in pairs( LUIE.Fonts ) do
         table.insert(FontsList, f)
     end
 
-    local FontsListCombatInfo = {}
     for key, _ in pairs( LUIE.CombatInfo.FontFamilies ) do
         table.insert( FontsListCombatInfo, key )
     end
 
-    local StatusbarTexturesList = {}
     for key, _ in pairs( LUIE.StatusbarTextures ) do
         table.insert( StatusbarTexturesList, key )
     end
@@ -713,8 +710,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_COMBATINFO_MISC_COMBATSTATE),
-                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_MISC_COMBATSTATE_TOOLTIP),
+                name = GetString(SI_LUIE_LAM_COMBATINFO_COMBATSTATE),
+                tooltip = GetString(SI_LUIE_LAM_COMBATINFO_COMBATSTATE_TOOLTIP),
                 getFunc = function() return LUIE.CombatInfo.SV.CombatStateEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.CombatStateEnabled = value LUIE.CombatInfo.RegisterCombatStateEvent() end,
                 width = "full",

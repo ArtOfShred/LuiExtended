@@ -2229,11 +2229,11 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
 end
 
 function CA.MiscAlertLockFailed(eventCode)
-    printToChat(GetString(SI_LUIE_CA_MISC_LOCKPICK_FAILED))
+    printToChat(GetString(SI_LUIE_CA_LOCKPICK_FAILED))
 end
 
 function CA.MiscAlertLockSuccess(eventCode)
-    printToChat(GetString(SI_LUIE_CA_MISC_LOCKPICK_SUCCESS))
+    printToChat(GetString(SI_LUIE_CA_LOCKPICK_SUCCESS))
 end
 
 function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source)
