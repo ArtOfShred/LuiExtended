@@ -297,8 +297,8 @@ end
 function CA.RegisterDisguiseEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED)
     if CA.SV.MiscDisguise then
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "player",          EVENT_DISGUISE_STATE_CHANGED, CA.DisguiseState )
-        EVENT_MANAGER:AddFilterForEvent(moduleName .. "player",         EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, CA.DisguiseState )
+        EVENT_MANAGER:AddFilterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
         g_currentDisguise = GetItemId(0, 10) or 0 -- Get the currently equipped disguise itemId if any
         g_disguiseState = GetUnitDisguiseState("player") -- Get current player disguise state
         if g_disguiseState > 0 then g_disguiseState = 1 end -- Simplify all the various states into a basic 0 = false, 1 = true value
@@ -326,7 +326,6 @@ function CA.RegisterXPEvents()
 end
 
 function CA.RegisterGroupEvents()
-
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_LFG_JOINED, CA.LFGJoined)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_NO_LONGER_LFG, CA.LFGLeft)
     -- Group Events
@@ -971,7 +970,7 @@ function CA.LFGJoined(eventCode, locationName)
 end
 
 function CA.LFGLeft(eventCode)
-    d("You are no longer in an LFG Group.")
+    printToChat(strformat("You are no longer in an LFG Group."))
 end
 
 function CA.GroupFindReplacementNew(eventCode)
@@ -3391,8 +3390,8 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                 icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. CommaValue (g_XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName ) or ( CommaValue (g_XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName )
             end
 
-            local xppct = 0             -- XP Percent
-            local decimal = 0           -- If we're using a % value, this is the string that determines whether we have a decimal point or not.
+            local xppct = 0    -- XP Percent
+            local decimal = 0  -- If we're using a % value, this is the string that determines whether we have a decimal point or not.
 
             if CA.SV.ExperienceShowProgress then
 
