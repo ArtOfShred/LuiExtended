@@ -4,8 +4,8 @@ LUIE.Effects = {}
 
 -- Performance Enhancement
 local E = LUIE.Effects
+local A = LUIE.GetAbility()
 local GetAbilityIcon = GetAbilityIcon
-local L = LUIE.GetLocale()
 
 --[[----------------------------------------------------------
  * Transition functions:
@@ -60,11 +60,11 @@ end
  * List of abilities considered for Ultimate generation - same as in SCB
  ]]--
 E.IsWeaponAttack = {
-    [L.Skill_Light_Attack]              = true,
-    [L.Skill_Heavy_Attack]              = true,
-    [L.Skill_Heavy_Attack_Dual_Wield]   = true,
-    [L.Skill_Heavy_Attack_Bow]          = true,
-    [L.Skill_Heavy_Attack_Werewolf]     = true,
+    [A.Skill_Light_Attack]              = true,
+    [A.Skill_Heavy_Attack]              = true,
+    [A.Skill_Heavy_Attack_Dual_Wield]   = true,
+    [A.Skill_Heavy_Attack_Bow]          = true,
+    [A.Skill_Heavy_Attack_Werewolf]     = true,
 }
 
 --[[
@@ -78,64 +78,64 @@ E.IsEffectIgnored = {
  * List of toggle abilities
  ]]--
 E.IsToggle = {
-    [L.Toggled_Hidden]                      = true, -- Hidden (Innate)
-    [L.Toggled_Disguised]                   = true, -- Disguised (Innate)
-    [L.Toggled_Brace_Generic]               = true, -- Block (Innate)
-    [L.Toggled_Sprint]                      = true, -- Sprint (Innate)
-    [L.Toggled_Mount_Sprint]                = true, -- Mount Sprint (Generic) (Innate) -- NOTE: Renamed to Gallop in fake buffs
-    [L.Toggled_Leeching_Strikes]            = true, -- Leeching Strikes (Nightblade)
-    [L.Toggled_Unstable_Familiar]           = true, -- Summon Unstable Familiar (Sorcerer)
-    [L.Toggled_Unstable_Clannfear]          = true, -- Summon Unstable Clannfear (Sorcerer)
-    [L.Toggled_Volatile_Familiar]           = true, -- Summon Volatile Familiar (Sorcerer)
-    [L.Toggled_Summon_Winged_Twilight]      = true, -- Summon Winged Twilight (Sorcerer)
-    [L.Toggled_Summon_Twilight_Tormentor]   = true, -- Summon Twilight Tormentor (Sorcerer)
-    [L.Toggled_Summon_Twilight_Matriarch]   = true, -- Summon Twilight Matriarch (Sorcerer)
-    [L.Toggled_Bound_Armor]                 = true, -- Bound Armor (Sorcerer)
-    [L.Toggled_Bound_Armaments]             = true, -- Bound Armaments (Sorcerer)
-    [L.Toggled_Bound_Aegis]                 = true, -- Bound Aegis (Sorcerer)
-    [L.Toggled_Overload]                    = true, -- Overload (Sorcerer)
-    [L.Toggled_Energy_Overload]             = true, -- Energy Overload (Sorcerer)
-    [L.Toggled_Power_Overload]              = true, -- Power Overload (Sorcerer)
-    [L.Toggled_Guard]                       = true, -- Guard (Support)
-    [L.Toggled_Mystic_Guard]                = true, -- Mystic Guard (Support)
-    [L.Toggled_Stalwart_Guard]              = true, -- Stalwart Guard (Support)
+    [A.Toggled_Hidden]                      = true, -- Hidden (Innate)
+    [A.Toggled_Disguised]                   = true, -- Disguised (Innate)
+    [A.Toggled_Brace_Generic]               = true, -- Block (Innate)
+    [A.Toggled_Sprint]                      = true, -- Sprint (Innate)
+    [A.Toggled_Mount_Sprint]                = true, -- Mount Sprint (Generic) (Innate) -- NOTE: Renamed to Gallop in fake buffs
+    [A.Toggled_Leeching_Strikes]            = true, -- Leeching Strikes (Nightblade)
+    [A.Toggled_Unstable_Familiar]           = true, -- Summon Unstable Familiar (Sorcerer)
+    [A.Toggled_Unstable_Clannfear]          = true, -- Summon Unstable Clannfear (Sorcerer)
+    [A.Toggled_Volatile_Familiar]           = true, -- Summon Volatile Familiar (Sorcerer)
+    [A.Toggled_Summon_Winged_Twilight]      = true, -- Summon Winged Twilight (Sorcerer)
+    [A.Toggled_Summon_Twilight_Tormentor]   = true, -- Summon Twilight Tormentor (Sorcerer)
+    [A.Toggled_Summon_Twilight_Matriarch]   = true, -- Summon Twilight Matriarch (Sorcerer)
+    [A.Toggled_Bound_Armor]                 = true, -- Bound Armor (Sorcerer)
+    [A.Toggled_Bound_Armaments]             = true, -- Bound Armaments (Sorcerer)
+    [A.Toggled_Bound_Aegis]                 = true, -- Bound Aegis (Sorcerer)
+    [A.Toggled_Overload]                    = true, -- Overload (Sorcerer)
+    [A.Toggled_Energy_Overload]             = true, -- Energy Overload (Sorcerer)
+    [A.Toggled_Power_Overload]              = true, -- Power Overload (Sorcerer)
+    [A.Toggled_Guard]                       = true, -- Guard (Support)
+    [A.Toggled_Mystic_Guard]                = true, -- Mystic Guard (Support)
+    [A.Toggled_Stalwart_Guard]              = true, -- Stalwart Guard (Support)
 }
 
 --[[
  * Vampire / Lycantropy
  ]]--
 E.IsVampLycan = {
-    [L.VampLycan_Fed_on_ally]           = true,
-    [L.VampLycan_Bit_an_ally]           = true,
-    [L.VampLycan_Dark_Stalker]          = true,
-    [L.VampLycan_Supernatural_Recovery] = true,
-    [L.VampLycan_Stage_1_Vampirism]     = true,
-    [L.VampLycan_Stage_2_Vampirism]     = true,
-    [L.VampLycan_Stage_3_Vampirism]     = true,
-    [L.VampLycan_Stage_4_Vampirism]     = true,
-    [L.VampLycan_Vampirism]             = true,
-    [L.VampLycan_Lycanthropy]           = true,
-    [L.VampLycan_Call_of_the_Pack]      = true,
-    [L.VampLycan_Sanies_Lupinus]        = true,
+    [A.VampLycan_Fed_on_ally]           = true,
+    [A.VampLycan_Bit_an_ally]           = true,
+    [A.VampLycan_Dark_Stalker]          = true,
+    [A.VampLycan_Supernatural_Recovery] = true,
+    [A.VampLycan_Stage_1_Vampirism]     = true,
+    [A.VampLycan_Stage_2_Vampirism]     = true,
+    [A.VampLycan_Stage_3_Vampirism]     = true,
+    [A.VampLycan_Stage_4_Vampirism]     = true,
+    [A.VampLycan_Vampirism]             = true,
+    [A.VampLycan_Lycanthropy]           = true,
+    [A.VampLycan_Call_of_the_Pack]      = true,
+    [A.VampLycan_Sanies_Lupinus]        = true,
 }
 
 --[[
  * Mundus passives
  ]]--
 E.IsBoon = {
-    [L.Boon_Warrior]    = true,
-    [L.Boon_Mage]       = true,
-    [L.Boon_Serpent]    = true,
-    [L.Boon_Thief]      = true,
-    [L.Boon_Lady]       = true,
-    [L.Boon_Steed]      = true,
-    [L.Boon_Lord]       = true,
-    [L.Boon_Apprentice] = true,
-    [L.Boon_Ritual]     = true,
-    [L.Boon_Lover]      = true,
-    [L.Boon_Atronach]   = true,
-    [L.Boon_Shadow]     = true,
-    [L.Boon_Tower]      = true,
+    [A.Boon_Warrior]    = true,
+    [A.Boon_Mage]       = true,
+    [A.Boon_Serpent]    = true,
+    [A.Boon_Thief]      = true,
+    [A.Boon_Lady]       = true,
+    [A.Boon_Steed]      = true,
+    [A.Boon_Lord]       = true,
+    [A.Boon_Apprentice] = true,
+    [A.Boon_Ritual]     = true,
+    [A.Boon_Lover]      = true,
+    [A.Boon_Atronach]   = true,
+    [A.Boon_Shadow]     = true,
+    [A.Boon_Tower]      = true,
 }
 
 --[[
@@ -176,25 +176,25 @@ E.IsEsoPlus = {
  * List of abilities that have to be purged when first damage is recorded
  ]]--
 E.IsGroundMine = {
-    [L.Skill_Daedric_Mines]     = true,
-    [L.Skill_Daedric_Minefield] = true,
-    [L.Skill_Daedric_Tomb]      = true,
-    [L.Skill_Fire_Rune]         = true,
-    [L.Skill_Scalding_Rune]     = true,
-    [L.Skill_Volcanic_Rune]     = true,
-    [L.Skill_Trap_Beast]        = true,
+    [A.Skill_Daedric_Mines]     = true,
+    [A.Skill_Daedric_Minefield] = true,
+    [A.Skill_Daedric_Tomb]      = true,
+    [A.Skill_Fire_Rune]         = true,
+    [A.Skill_Scalding_Rune]     = true,
+    [A.Skill_Volcanic_Rune]     = true,
+    [A.Skill_Trap_Beast]        = true,
 }
 
 --[[
  * Taunts
  ]]--
 E.IsTaunt = {
-    [L.Skill_Puncture]      = true,
-    [L.Skill_Pierce_Armor]  = true,
-    [L.Skill_Ransack]       = true,
-    [L.Skill_Inner_Fire]    = true,
-    [L.Skill_Inner_Rage]    = true,
-    [L.Skill_Inner_Beast]   = true,
+    [A.Skill_Puncture]      = true,
+    [A.Skill_Pierce_Armor]  = true,
+    [A.Skill_Ransack]       = true,
+    [A.Skill_Inner_Fire]    = true,
+    [A.Skill_Inner_Rage]    = true,
+    [A.Skill_Inner_Beast]   = true,
 }
 
 --[[
@@ -228,23 +228,23 @@ E.AbilityIcon = {
     -- End various misc abilities TEMP
 
     -- Most of this other stuff should be deprecated!
-    [L.Effect_Fall_Snare]               = '/esoui/art/icons/death_recap_fall_damage.dds',
+    [A.Effect_Fall_Snare]               = '/esoui/art/icons/death_recap_fall_damage.dds',
 
     ['Feed']                            = '/esoui/art/icons/ability_vampire_002.dds', -- EN,FR
 
-    [L.Effect_Magicka_Bomb]            = '/esoui/art/icons/death_recap_magic_ranged.dds', -- EN
+    [A.Effect_Magicka_Bomb]            = '/esoui/art/icons/death_recap_magic_ranged.dds', -- EN
 
-    [L.Effect_Surge_Heal]               = '/esoui/art/icons/ability_sorcerer_critical_surge.dds',
-    [L.Effect_Dark_Exchange_Heal]       = '/esoui/art/icons/ability_sorcerer_dark_exchange.dds',
-    [L.Skill_Dark_Exchange]             = '/esoui/art/icons/ability_sorcerer_dark_exchange.dds',
+    [A.Effect_Surge_Heal]               = '/esoui/art/icons/ability_sorcerer_critical_surge.dds',
+    [A.Effect_Dark_Exchange_Heal]       = '/esoui/art/icons/ability_sorcerer_dark_exchange.dds',
+    [A.Skill_Dark_Exchange]             = '/esoui/art/icons/ability_sorcerer_dark_exchange.dds',
     ['Blood Magic']                     = '/esoui/art/icons/ability_mage_026.dds', -- EN, ?
 
-    [L.Skill_Grand_Healing]             = '/esoui/art/icons/ability_restorationstaff_003.dds',
-    [L.Skill_Healing_Ward]              = '/esoui/art/icons/ability_restorationstaff_001_a.dds',
+    [A.Skill_Grand_Healing]             = '/esoui/art/icons/ability_restorationstaff_003.dds',
+    [A.Skill_Healing_Ward]              = '/esoui/art/icons/ability_restorationstaff_001_a.dds',
 
-    [L.Skill_Quick_Siphon]              = '/esoui/art/icons/ability_restorationstaff_005_b.dds',
+    [A.Skill_Quick_Siphon]              = '/esoui/art/icons/ability_restorationstaff_005_b.dds',
 
-    [L.Passive_Invigorating_Bash]       = '/esoui/art/icons/ability_warrior_026.dds',
+    [A.Passive_Invigorating_Bash]       = '/esoui/art/icons/ability_warrior_026.dds',
 
 
 

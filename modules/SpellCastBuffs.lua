@@ -7,7 +7,7 @@ local SCB       = LUIE.SpellCastBuffs
 local CI        = LUIE.CombatInfo
 local UI        = LUIE.UI
 local E         = LUIE.Effects
-local L         = LUIE.GetLocale()
+local A         = LUIE.GetAbility()
 local strfmt    = string.format
 local strformat = zo_strformat
 local strfind   = zo_plainstrfind
@@ -131,7 +131,7 @@ local v_horizAlign = MIDDLE
 local g_horizSortInvert = false
 
 -- Some optimization
-local strHidden     = L.Effect_Hidden
+local strHidden     = A.Effect_Hidden
 local strDisguise   = "Disguised"
 local strMounted    = "Mounted"
 local iconMounted   = "LuiExtended/media/icons/mounts/mount_palomino_horse.dds"
@@ -180,66 +180,66 @@ local Effects = {
     -----------------------------------
 
     -- Bow
-    [L.Skill_Volley]                = { false, false, true, 2 },
-    [L.Skill_Scorched_Earth]        = { false, false, true, 2 },
-    [L.Skill_Arrow_Barrage]         = { false, false, true, 2 },
+    [A.Skill_Volley]                = { false, false, true, 2 },
+    [A.Skill_Scorched_Earth]        = { false, false, true, 2 },
+    [A.Skill_Arrow_Barrage]         = { false, false, true, 2 },
 
     -- Destro Staff
-    [L.Skill_Wall_of_Fire]            = { false, false, 6.4, nil },
-    [L.Skill_Wall_Of_Storms]          = { false, false, 6.4, nil },
-    [L.Skill_Wall_of_Frost]           = { false, false, 6.4, nil },
-    [L.Skill_Unstable_Wall_of_Fire]   = { false, false, 6.4, nil },
-    [L.Skill_Unstable_Wall_of_Frost]  = { false, false, 6.4, nil },
-    [L.Skill_Unstable_Wall_of_Storms] = { false, false, 6.4, nil }, -- Tested these values manually to make them as close to accurate as possible
-    [L.Skill_Blockade_of_Fire]        = { false, false, 8.3, nil },
-    [L.Skill_Blockade_of_Frost]       = { false, false, 8.3, nil },
-    [L.Skill_Blockade_of_Storms]      = { false, false, 8.3, nil },
+    [A.Skill_Wall_of_Fire]            = { false, false, 6.4, nil },
+    [A.Skill_Wall_Of_Storms]          = { false, false, 6.4, nil },
+    [A.Skill_Wall_of_Frost]           = { false, false, 6.4, nil },
+    [A.Skill_Unstable_Wall_of_Fire]   = { false, false, 6.4, nil },
+    [A.Skill_Unstable_Wall_of_Frost]  = { false, false, 6.4, nil },
+    [A.Skill_Unstable_Wall_of_Storms] = { false, false, 6.4, nil }, -- Tested these values manually to make them as close to accurate as possible
+    [A.Skill_Blockade_of_Fire]        = { false, false, 8.3, nil },
+    [A.Skill_Blockade_of_Frost]       = { false, false, 8.3, nil },
+    [A.Skill_Blockade_of_Storms]      = { false, false, 8.3, nil },
 
     -- Resto Staff
-    [L.Skill_Grand_Healing]         = { true, false, false, nil },
-    [L.Skill_Healing_Springs]       = { true, false, false, nil }, -- Possibly Hide later, hard to account for cast time, only cast time is the animation which can be anim cancelled
-    [L.Skill_Illustrious_Healing]   = { true, false, false, nil },
+    [A.Skill_Grand_Healing]         = { true, false, false, nil },
+    [A.Skill_Healing_Springs]       = { true, false, false, nil }, -- Possibly Hide later, hard to account for cast time, only cast time is the animation which can be anim cancelled
+    [A.Skill_Illustrious_Healing]   = { true, false, false, nil },
 
     -----------------------------------
     -- SORCERER
     -----------------------------------
 
     -- Dark Magic
-    [L.Skill_Negate_Magic]          = { false, false, true, nil },
-    [L.Skill_Absorption_Field]      = { true , false, true, nil },  -- Values here are completely accurate
-    [L.Skill_Suppression_Field]     = { false , false, true, nil },
+    [A.Skill_Negate_Magic]          = { false, false, true, nil },
+    [A.Skill_Absorption_Field]      = { true , false, true, nil },  -- Values here are completely accurate
+    [A.Skill_Suppression_Field]     = { false , false, true, nil },
 
-    [L.Skill_Daedric_Mines]         = { false, false, 36, 3.5 },
-    [L.Skill_Daedric_Minefield]     = { false, false, 36, 3.5 },    -- Doesn't account for not having +20% duration passives, otherwise decently accurate
-    [L.Skill_Daedric_Tomb]          = { false, false, 36, 0.5 },    -- Decent timer otherwise
+    [A.Skill_Daedric_Mines]         = { false, false, 36, 3.5 },
+    [A.Skill_Daedric_Minefield]     = { false, false, 36, 3.5 },    -- Doesn't account for not having +20% duration passives, otherwise decently accurate
+    [A.Skill_Daedric_Tomb]          = { false, false, 36, 0.5 },    -- Decent timer otherwise
 
     -- Daedric Summoning
-    [L.Skill_Summon_Storm_Atronach]   = { false, false, true, 0.8 },  -- Values here are completely accurate
-    [L.Skill_Greater_Storm_Atronach]  = { false, false, true, 0.8 },  -- Don't absolutely have to have this, player already gets a buff on them, but this gives us more feedback
-    [L.Skill_Summon_Charged_Atronach] = { false, false, true, 0.8 },
+    [A.Skill_Summon_Storm_Atronach]   = { false, false, true, 0.8 },  -- Values here are completely accurate
+    [A.Skill_Greater_Storm_Atronach]  = { false, false, true, 0.8 },  -- Don't absolutely have to have this, player already gets a buff on them, but this gives us more feedback
+    [A.Skill_Summon_Charged_Atronach] = { false, false, true, 0.8 },
 
     -- Storm Calling
-    [L.Skill_Lightning_Splash]      = { false, false, true, nil },
-    [L.Skill_Liquid_Lightning]      = { false, false, true, nil },
-    [L.Skill_Lightning_Flood]       = { false, false, true, nil },
+    [A.Skill_Lightning_Splash]      = { false, false, true, nil },
+    [A.Skill_Liquid_Lightning]      = { false, false, true, nil },
+    [A.Skill_Lightning_Flood]       = { false, false, true, nil },
 
     -----------------------------------
     -- DRAGONKNIGHT
     -----------------------------------
 
     -- Ardent Flame
-    [L.Skill_Dragonknight_Standard] = { false, false, true, nil },
-    [L.Skill_Shifting_Standard]     = { false, false, true, nil }, -- This is the new standard effect fired when moving Shifting Standard
-    [L.Skill_Shift_Standard]        = { false, false, true, nil }, -- Would be better to add these as a fake aura later - Standard doesn't go away when you cast shifting
-    [L.Skill_Standard_of_Might]     = { true, false, true, nil }, -- Also if mob dies before banner ends, the banner stops but icon persists
+    [A.Skill_Dragonknight_Standard] = { false, false, true, nil },
+    [A.Skill_Shifting_Standard]     = { false, false, true, nil }, -- This is the new standard effect fired when moving Shifting Standard
+    [A.Skill_Shift_Standard]        = { false, false, true, nil }, -- Would be better to add these as a fake aura later - Standard doesn't go away when you cast shifting
+    [A.Skill_Standard_of_Might]     = { true, false, true, nil }, -- Also if mob dies before banner ends, the banner stops but icon persists
 
     -- Draonic Power
     -- Could add inhale here eventually, gonna need to do it with a fake aura however (2.5 sec duration timer before it explodes)
 
     -- Earthen Heart
-    [L.Skill_Ash_Cloud]             = { false, false, true, nil },
-    [L.Skill_Cinder_Storm]          = { false, false, true, nil },
-    [L.Skill_Eruption]              = { false, false, true, nil },
+    [A.Skill_Ash_Cloud]             = { false, false, true, nil },
+    [A.Skill_Cinder_Storm]          = { false, false, true, nil },
+    [A.Skill_Eruption]              = { false, false, true, nil },
 
     -- Draconic Power
 
@@ -250,15 +250,15 @@ local Effects = {
     -- Assassination
 
     -- Shadow
-    [L.Skill_Consuming_Darkness]        = { false, false, true, nil },
-    [L.Skill_Bolstering_Darkness]       = { false, false, true, nil },
-    [L.Skill_Veil_of_Blades]            = { false, false, true, nil },
-    [L.Skill_Path_of_Darkness]          = { false, false, true, nil },
-    [L.Skill_Refreshing_Path]           = { false, false, true, nil },
-    [L.Skill_Twisting_Path]             = { false, false, true, nil },
-    [L.Skill_Summon_Shade]              = { true, false, false, nil },
-    [L.Skill_Dark_Shades]               = { true, false, false, nil },
-    [L.Skill_Shadow_Image]              = { true, false, false, nil },
+    [A.Skill_Consuming_Darkness]        = { false, false, true, nil },
+    [A.Skill_Bolstering_Darkness]       = { false, false, true, nil },
+    [A.Skill_Veil_of_Blades]            = { false, false, true, nil },
+    [A.Skill_Path_of_Darkness]          = { false, false, true, nil },
+    [A.Skill_Refreshing_Path]           = { false, false, true, nil },
+    [A.Skill_Twisting_Path]             = { false, false, true, nil },
+    [A.Skill_Summon_Shade]              = { true, false, false, nil },
+    [A.Skill_Dark_Shades]               = { true, false, false, nil },
+    [A.Skill_Shadow_Image]              = { true, false, false, nil },
 
     -- Siphoning
 
@@ -267,52 +267,52 @@ local Effects = {
     -----------------------------------
 
     -- Aedric Spear
-    [L.Skill_Spear_Shards]                  = { false, false, true, 1 },
-    [L.Skill_Luminous_Shards]               = { false, false, true, 1 }, -- This seems roughly accurate, trying to time it with the disorient, depends on latency
-    [L.Skill_Blazing_Spear]                 = { false, false, true, 1 }, -- Possibly Hide later
+    [A.Skill_Spear_Shards]                  = { false, false, true, 1 },
+    [A.Skill_Luminous_Shards]               = { false, false, true, 1 }, -- This seems roughly accurate, trying to time it with the disorient, depends on latency
+    [A.Skill_Blazing_Spear]                 = { false, false, true, 1 }, -- Possibly Hide later
 
     -- Dawn's Wrath
-    [L.Skill_Nova]                          = { false, false, 11.3, 1.1 },
-    [L.Skill_Solar_Prison]                  = { false, false, 11.3, 1.1 }, -- Rough estimate of Nova duration - the damage fires off a bit after VFX fade - Pretty happy with these values
-    [L.Skill_Solar_Disturbance]             = { false, false, 11.3, 1.1 },
+    [A.Skill_Nova]                          = { false, false, 11.3, 1.1 },
+    [A.Skill_Solar_Prison]                  = { false, false, 11.3, 1.1 }, -- Rough estimate of Nova duration - the damage fires off a bit after VFX fade - Pretty happy with these values
+    [A.Skill_Solar_Disturbance]             = { false, false, 11.3, 1.1 },
 
     -- Restoring Light
-    [L.Skill_Cleansing_Ritual]              = { true, false, false, nil },
-    [L.Skill_Extended_Ritual]               = { true, false, false, nil },
-    [L.Skill_Purifying_Ritual]              = { true, false, true, nil },
-    [L.Skill_Rune_Focus]                    = { true, false, false, nil },
-    [L.Skill_Channeled_Focus]               = { true, false, false, nil },
-    [L.Skill_Restoring_Focus]               = { true, false, false, nil },
+    [A.Skill_Cleansing_Ritual]              = { true, false, false, nil },
+    [A.Skill_Extended_Ritual]               = { true, false, false, nil },
+    [A.Skill_Purifying_Ritual]              = { true, false, true, nil },
+    [A.Skill_Rune_Focus]                    = { true, false, false, nil },
+    [A.Skill_Channeled_Focus]               = { true, false, false, nil },
+    [A.Skill_Restoring_Focus]               = { true, false, false, nil },
 
     -----------------------------------
     -- GUILDS
     -----------------------------------
 
     -- Fighter Guild
-    --[L.Skill_Trap_Beast]          = { 0, 28.8, 3.5, false }, -- FIXME: check duration on r4, add other 2 skills
-    [L.Skill_Circle_of_Protection]  = { true, false, false, nil },
-    [L.Skill_Turn_Undead]           = { true, false, false, nil },
-    [L.Skill_Ring_of_Preservation]  = { true, false, false, nil },
+    --[A.Skill_Trap_Beast]          = { 0, 28.8, 3.5, false }, -- FIXME: check duration on r4, add other 2 skills
+    [A.Skill_Circle_of_Protection]  = { true, false, false, nil },
+    [A.Skill_Turn_Undead]           = { true, false, false, nil },
+    [A.Skill_Ring_of_Preservation]  = { true, false, false, nil },
 
     -- Mages Guild
-    [L.Skill_Meteor]                = { false, false, 11.8, 0 },
-    [L.Skill_Ice_Comet]             = { false, false, 11.8, 0 },    -- Might need some work on timer
-    [L.Skill_Shooting_Star]         = { false, false, 11.8, 0 },
+    [A.Skill_Meteor]                = { false, false, 11.8, 0 },
+    [A.Skill_Ice_Comet]             = { false, false, 11.8, 0 },    -- Might need some work on timer
+    [A.Skill_Shooting_Star]         = { false, false, 11.8, 0 },
     -- Need to add Fire Rune here
 
     -- Undaunted
-    [L.Skill_Trapping_Webs]         = { false, false, true, nil },
-    [L.Skill_Shadow_Silk]           = { false, false, true, nil },
-    [L.Skill_Tangling_Webs]         = { false, false, true, nil },
+    [A.Skill_Trapping_Webs]         = { false, false, true, nil },
+    [A.Skill_Shadow_Silk]           = { false, false, true, nil },
+    [A.Skill_Tangling_Webs]         = { false, false, true, nil },
 
     -----------------------------------
     -- WORLD
     -----------------------------------
 
     -- Vampire
-    [L.Skill_Bat_Swarm]             = { false, false, 5.5, 0.1 },
-    [L.Skill_Clouding_Swarm]        = { false, false, 5.5, 0.1 }, -- These values are perfect. Also note, this isn't needed as this shows as a buff on the player as well.
-    [L.Skill_Devouring_Swarm]       = { false, false, 5.5, 0.1 },
+    [A.Skill_Bat_Swarm]             = { false, false, 5.5, 0.1 },
+    [A.Skill_Clouding_Swarm]        = { false, false, 5.5, 0.1 }, -- These values are perfect. Also note, this isn't needed as this shows as a buff on the player as well.
+    [A.Skill_Devouring_Swarm]       = { false, false, 5.5, 0.1 },
 
     -- Werewolf
 
@@ -321,187 +321,187 @@ local Effects = {
     -----------------------------------
 
     -- AVA Assault
-    --[L.Skill_Vigor]               = { 5, false, false, 0 },
-    --[L.Skill_Echoing_Vigor]       = { 5, false, false, 0 },
-    --[L.Skill_Resolving_Vigor]     = { 5, false, false, 0 },
-    [L.Skill_Caltrops]              = { false, false, true, nil },
-    [L.Skill_Anti_Cavalry_Caltrops] = { false, false, true, nil },
-    [L.Skill_Razor_Caltrops]        = { false, false, true, nil },
+    --[A.Skill_Vigor]               = { 5, false, false, 0 },
+    --[A.Skill_Echoing_Vigor]       = { 5, false, false, 0 },
+    --[A.Skill_Resolving_Vigor]     = { 5, false, false, 0 },
+    [A.Skill_Caltrops]              = { false, false, true, nil },
+    [A.Skill_Anti_Cavalry_Caltrops] = { false, false, true, nil },
+    [A.Skill_Razor_Caltrops]        = { false, false, true, nil },
 
     --AVA Support
     --Possibly add Siege shield here/remove active effect 
 }
 
 local IsAbilityProc = {
-    [L.Trigger_Assassins_Will]      = true,
-    [L.Trigger_Assassins_Scourge]   = true,
-    [L.Trigger_Power_Lash]          = true,
+    [A.Trigger_Assassins_Will]      = true,
+    [A.Trigger_Assassins_Scourge]   = true,
+    [A.Trigger_Power_Lash]          = true,
 }
 
 local HasAbilityProc = {
-    [L.Skill_Crystal_Fragments]     = L.Trigger_Crystal_Fragments_Proc, -- Trigger_Crystal_Fragments_Passive
+    [A.Skill_Crystal_Fragments]     = A.Trigger_Crystal_Fragments_Proc, -- Trigger_Crystal_Fragments_Passive
 }
 
 local IsAbilityCustomToggle = {
     --Sorceror Skills (Dark Magic)
-    --[L.Skill_Defensive_Rune]        = true, -- Doesn't work because of no aura, would be nice to have this highlight if possible.
+    --[A.Skill_Defensive_Rune]        = true, -- Doesn't work because of no aura, would be nice to have this highlight if possible.
 
     -- Sorceror Skills (Daedric Summoning)
-    [L.DamageShield_Conjured_Ward]  = true,
-    [L.DamageShield_Empowered_Ward] = true,
-    [L.DamageShield_Hardened_Ward]  = true,
+    [A.DamageShield_Conjured_Ward]  = true,
+    [A.DamageShield_Empowered_Ward] = true,
+    [A.DamageShield_Hardened_Ward]  = true,
 
     -- Sorceror Skills (Storm Calling)
-    [L.Skill_Lightning_Form]        = true,
-    [L.Skill_Boundless_Storm]       = true,
-    [L.Skill_Thundering_Presence]   = true,
-    [L.Skill_Surge]                 = true,
-    [L.Skill_Critical_Surge]        = true,
-    [L.Skill_Power_Surge]           = true,
+    [A.Skill_Lightning_Form]        = true,
+    [A.Skill_Boundless_Storm]       = true,
+    [A.Skill_Thundering_Presence]   = true,
+    [A.Skill_Surge]                 = true,
+    [A.Skill_Critical_Surge]        = true,
+    [A.Skill_Power_Surge]           = true,
 
     --Dragonknight Skills (Ardent Flame)
-    [L.Skill_Inferno]               = true,
-    [L.Skill_Flames_Of_Oblivion]    = true,
-    [L.Skill_Cauterize]             = true,
+    [A.Skill_Inferno]               = true,
+    [A.Skill_Flames_Of_Oblivion]    = true,
+    [A.Skill_Cauterize]             = true,
 
     --Dragonknight Skills (Draconic Power)
-    [L.Skill_Spiked_Armor]          = true,
-    [L.Skill_Volatile_Armor]        = true,
-    [L.Skill_Hardened_Armor]        = true, -- Cut short by short duration shield effect
-    --[L.Skill_Dragon_Blood]            = true,
-    --[L.Skill_Green_Dragon_Blood]      = true,     -- Doesn't work, no ability to go along with cast, only Major/Minor effects
-    --[L.Skill_Coagulating_Blood]       = true,
-    [L.Skill_Reflective_Scale]      = true,
-    [L.Skill_Reflective_Plate]      = true,
-    [L.Skill_Dragon_Fire_Scale]     = true,
+    [A.Skill_Spiked_Armor]          = true,
+    [A.Skill_Volatile_Armor]        = true,
+    [A.Skill_Hardened_Armor]        = true, -- Cut short by short duration shield effect
+    --[A.Skill_Dragon_Blood]            = true,
+    --[A.Skill_Green_Dragon_Blood]      = true,     -- Doesn't work, no ability to go along with cast, only Major/Minor effects
+    --[A.Skill_Coagulating_Blood]       = true,
+    [A.Skill_Reflective_Scale]      = true,
+    [A.Skill_Reflective_Plate]      = true,
+    [A.Skill_Dragon_Fire_Scale]     = true,
 
     --Dragonknight Skills (Earthen Heart)
-    [L.Skill_Molten_Weapons]           = true,
-    [L.Skill_Igneous_Weapons]          = true,
-    [L.Skill_Molten_Armaments]         = true,
-    [L.DamageShield_Obsidian_Shield]   = true,
-    [L.DamageShield_Fragmented_Shield] = true,
-    [L.DamageShield_Igneous_Shield]    = true,
+    [A.Skill_Molten_Weapons]           = true,
+    [A.Skill_Igneous_Weapons]          = true,
+    [A.Skill_Molten_Armaments]         = true,
+    [A.DamageShield_Obsidian_Shield]   = true,
+    [A.DamageShield_Fragmented_Shield] = true,
+    [A.DamageShield_Igneous_Shield]    = true,
 
     --Templar Skills (Aedric Spear)
-    [L.DamageShield_Sun_Shield]     = true, -- These seem to fade on dodge roll, unlike other shields, I have no idea why
-    [L.DamageShield_Radiant_Ward]   = true, -- These seem to fade on dodge roll, unlike other shields, I have no idea why
-    [L.DamageShield_Blazing_Shield] = true, -- These seem to fade on dodge roll, unlike other shields, I have no idea why
+    [A.DamageShield_Sun_Shield]     = true, -- These seem to fade on dodge roll, unlike other shields, I have no idea why
+    [A.DamageShield_Radiant_Ward]   = true, -- These seem to fade on dodge roll, unlike other shields, I have no idea why
+    [A.DamageShield_Blazing_Shield] = true, -- These seem to fade on dodge roll, unlike other shields, I have no idea why
 
     --Nightblade Skills (Assassination)
-    [L.Skill_Blur]                  = true,
-    [L.Skill_Double_Take]           = true,
-    [L.Skill_Mirage]                = true,
-    [L.Skill_Grim_Focus]            = true,
-    [L.Skill_Relentless_Focus]      = true,
-    [L.Skill_Merciless_Resolve]     = true,
+    [A.Skill_Blur]                  = true,
+    [A.Skill_Double_Take]           = true,
+    [A.Skill_Mirage]                = true,
+    [A.Skill_Grim_Focus]            = true,
+    [A.Skill_Relentless_Focus]      = true,
+    [A.Skill_Merciless_Resolve]     = true,
     -- Ambush Empower, possibly add here
 
     --Nightblade Skills (Shadow)
-    [L.Skill_Shadow_Cloak]          = true,
-    [L.Skill_Shadowy_Disguise]      = true,
-    [L.Skill_Dark_Cloak]            = true,
+    [A.Skill_Shadow_Cloak]          = true,
+    [A.Skill_Shadowy_Disguise]      = true,
+    [A.Skill_Dark_Cloak]            = true,
     -- If POSSIBLE - ADD SHADE ABILITIES HERE (Also add proc effect for Shadow Image potentially)
 
     --Nightblade Skills (Siphoning)
-    [L.Skill_Siphoning_Strikes]     = true,
-    [L.Skill_Siphoning_Attacks]     = true,
+    [A.Skill_Siphoning_Strikes]     = true,
+    [A.Skill_Siphoning_Attacks]     = true,
     -- Cripple Major expedition, possibly add here
     -- Drain power Major Brutality, possibly add here
 
     --Two Handed
-    [L.DamageShield_Brawler]        = true,
+    [A.DamageShield_Brawler]        = true,
     -- IF POSSIBLE - ADD CARVE MINOR HEROISM
     -- Uppercut empower, possibly add here
-    [L.Skill_Momentum]              = true,
-    [L.Skill_Forward_Momentum]      = true,
-    [L.Skill_Rally]                 = true,
+    [A.Skill_Momentum]              = true,
+    [A.Skill_Forward_Momentum]      = true,
+    [A.Skill_Rally]                 = true,
 
     --One Hand and Shield
     -- IF POSSIBLE - ADD HEROIC SLASH MINOR HEROISM
-    [L.Skill_Defensive_Posture]       = true,
-    [L.Skill_Defensive_Stance]        = true,
-    [L.Skill_Absorb_Magic]            = true,
-    [L.DamageShield_Shielded_Assault] = true,
+    [A.Skill_Defensive_Posture]       = true,
+    [A.Skill_Defensive_Stance]        = true,
+    [A.Skill_Absorb_Magic]            = true,
+    [A.DamageShield_Shielded_Assault] = true,
 
     --Dual Wield
-    [L.Skill_Blade_Cloak]            = true,
-    [L.Skill_Quick_Cloak]            = true,
-    [L.Skill_Deadly_Cloak]           = true,
+    [A.Skill_Blade_Cloak]            = true,
+    [A.Skill_Quick_Cloak]            = true,
+    [A.Skill_Deadly_Cloak]           = true,
     -- IF POSSIBLE - ADD HIDDEN BLADE MAJOR BRUTALITY HERE
 
     --Bow - Possibly scatter shot indicator?
 
     --Resto Staff
-    --[L.Skill_Grand_Healing]          = true, -- Doesn't work, no effect related to it
-    --[L.Skill_Healing_Springs]        = true, -- Doesn't work, no effect related to it
-    --[L.Skill_Illustrious_Healing]    = true, -- Doesn't work, no effect related to it
-    [L.Skill_Regeneration]           = true,
-    [L.Skill_Mutagen]                = true,
-    [L.Skill_Rapid_Regeneration]     = true,
+    --[A.Skill_Grand_Healing]          = true, -- Doesn't work, no effect related to it
+    --[A.Skill_Healing_Springs]        = true, -- Doesn't work, no effect related to it
+    --[A.Skill_Illustrious_Healing]    = true, -- Doesn't work, no effect related to it
+    [A.Skill_Regeneration]           = true,
+    [A.Skill_Mutagen]                = true,
+    [A.Skill_Rapid_Regeneration]     = true,
     -- Blessing of Protection + Morphs (not sure how to fix this, base effect is short duration)
-    [L.DamageShield_Steadfast_Ward]  = true,
-    [L.DamageShield_Ward_Ally]       = true,
-    [L.DamageShield_Healing_Ward]    = true,
+    [A.DamageShield_Steadfast_Ward]  = true,
+    [A.DamageShield_Ward_Ally]       = true,
+    [A.DamageShield_Healing_Ward]    = true,
 
     --Light Armor
-    [L.DamageShield_Annulment]       = true,
-    [L.DamageShield_Dampen_Magic]    = true,
-    [L.DamageShield_Harness_Magicka] = true,
+    [A.DamageShield_Annulment]       = true,
+    [A.DamageShield_Dampen_Magic]    = true,
+    [A.DamageShield_Harness_Magicka] = true,
 
     --Medium Armor
-    --[L.Skill_Evasion]                = true,
-    --[L.Skill_Elude]                  = true,      -- NOT SURE WHY THESE DON'T WORK
-    --[L.Skill_Shuffle]                = true,
+    --[A.Skill_Evasion]                = true,
+    --[A.Skill_Elude]                  = true,      -- NOT SURE WHY THESE DON'T WORK
+    --[A.Skill_Shuffle]                = true,
 
     --Heavy Armor
-    [L.Skill_Immovable]              = true,
-    [L.Skill_Immovable_Brute]        = true,        -- Only shows the CC Immunity duration, need to figure a way to make other buffs display
-    [L.Skill_Unstoppable]            = true,
+    [A.Skill_Immovable]              = true,
+    [A.Skill_Immovable_Brute]        = true,        -- Only shows the CC Immunity duration, need to figure a way to make other buffs display
+    [A.Skill_Unstoppable]            = true,
 
     --Werewolf
-    [L.Skill_Hircines_Rage]          = true,        -- Breaks on dodge roll for some reason
-    [L.Skill_Hircines_Fortitude]     = true,        -- Breaks on dodge roll for some reason
+    [A.Skill_Hircines_Rage]          = true,        -- Breaks on dodge roll for some reason
+    [A.Skill_Hircines_Fortitude]     = true,        -- Breaks on dodge roll for some reason
 
     --Fighter's Guild
-    [L.Skill_Expert_Hunter]          = true,
-    [L.Skill_Evil_Hunter]            = true,
-    [L.Skill_Camouflaged_Hunter]     = true,
+    [A.Skill_Expert_Hunter]          = true,
+    [A.Skill_Evil_Hunter]            = true,
+    [A.Skill_Camouflaged_Hunter]     = true,
 
     --Mage's Guild
-    [L.Skill_Magelight]              = true,
-    [L.Skill_Inner_Light]            = true,
-    [L.Skill_Radiant_Magelight]      = true,
-    --[L.Skill_Entropy]              = true,
-    --[L.Skill_Degeneration]         = true,
-    --[L.Skill_Structured_Entropy]   = true,
-    [L.Skill_Equilibrium]            = true,    -- Fades sooner than it should from other effects
-    [L.Skill_Spell_Symmetry]         = true,
-    [L.Skill_Balance]                = true,    -- Fades sooner than it should from other effects
+    [A.Skill_Magelight]              = true,
+    [A.Skill_Inner_Light]            = true,
+    [A.Skill_Radiant_Magelight]      = true,
+    --[A.Skill_Entropy]              = true,
+    --[A.Skill_Degeneration]         = true,
+    --[A.Skill_Structured_Entropy]   = true,
+    [A.Skill_Equilibrium]            = true,    -- Fades sooner than it should from other effects
+    [A.Skill_Spell_Symmetry]         = true,
+    [A.Skill_Balance]                = true,    -- Fades sooner than it should from other effects
 
     --Undaunted
     -- BLOOD ALTAR HERE (possibly GTAOE)
-    [L.DamageShield_Bone_Shield]     = true,
-    [L.DamageShield_Bone_Surge]      = true,
-    [L.DamageShield_Spiked_Bone_Shield] = true,
+    [A.DamageShield_Bone_Shield]     = true,
+    [A.DamageShield_Bone_Surge]      = true,
+    [A.DamageShield_Spiked_Bone_Shield] = true,
     -- Necrotic Orb?? Can't decide what to do with this.
 
     --AVA Assault
-    [L.Skill_Rapid_Maneuver]         = true,
-    [L.Skill_Charging_Maneuver]      = true,
-    [L.Skill_Retreating_Maneuver]    = true,
-    [L.Skill_Vigor]                  = true,    -- Drops after rolling for some reason
-    [L.Skill_Echoing_Vigor]          = true,    -- Drops after rolling for some reason
-    [L.Skill_Resolving_Vigor]        = true,    -- Drops after rolling for some reason
-    [L.Skill_Proximity_Detonation]   = true,
+    [A.Skill_Rapid_Maneuver]         = true,
+    [A.Skill_Charging_Maneuver]      = true,
+    [A.Skill_Retreating_Maneuver]    = true,
+    [A.Skill_Vigor]                  = true,    -- Drops after rolling for some reason
+    [A.Skill_Echoing_Vigor]          = true,    -- Drops after rolling for some reason
+    [A.Skill_Resolving_Vigor]        = true,    -- Drops after rolling for some reason
+    [A.Skill_Proximity_Detonation]   = true,
 
     --AVA Support
-    [L.Skill_Siege_Shield]           = true, -- Behavior on Siege Shield's is kind of odd, only shows bar effect when standing inside it as it reapplies.
-    [L.Skill_Propelling_Shield]      = true, -- Still, you can only have one shield up, and it's pretty hard to miss the thing.
-    [L.Skill_Siege_Weapon_Shield]    = true, -- Possibly add GTAOE duration indicator as well
-    [L.Skill_Purge]                  = true,
-    [L.Skill_Cleanse]                = true,
-    --[L.Skill_Efficient_Purge]      = true, -- Doesn't work for some reason
+    [A.Skill_Siege_Shield]           = true, -- Behavior on Siege Shield's is kind of odd, only shows bar effect when standing inside it as it reapplies.
+    [A.Skill_Propelling_Shield]      = true, -- Still, you can only have one shield up, and it's pretty hard to miss the thing.
+    [A.Skill_Siege_Weapon_Shield]    = true, -- Possibly add GTAOE duration indicator as well
+    [A.Skill_Purge]                  = true,
+    [A.Skill_Cleanse]                = true,
+    --[A.Skill_Efficient_Purge]      = true, -- Doesn't work for some reason
 
 }
 
