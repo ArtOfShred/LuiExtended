@@ -1017,8 +1017,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BATTLESPIRITPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BATTLESPIRITPLAYER_TOOLTIP),
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITPLAYER_TOOLTIP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreBattleSpiritPlayer end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreBattleSpiritPlayer = not value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
@@ -1027,8 +1027,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BATTLESPIRITTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BATTLESPIRITTARGET_TOOLTIP),
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITTARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITTARGET_TOOLTIP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreBattleSpiritTarget end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreBattleSpiritTarget = not value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
