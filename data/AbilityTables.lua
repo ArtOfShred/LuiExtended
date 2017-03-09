@@ -1,9 +1,5 @@
 local A = {}
 
---[[----------------------------------------------------------
- * Effects groupping
---]]----------------------------------------------------------
-
 -- ---------------------------------------------------
 -- WEAPONS -------------------------------------------
 -- ---------------------------------------------------
@@ -109,10 +105,10 @@ A.Skill_Pulsar                   = 39161
 A.Skill_Fiery_Pulsar             = 39162
 A.Skill_Icy_Pulsar               = 39163
 A.Skill_Electric_Pulsar          = 39167
--- Unmorphed Wall of Element Variations
-A.Skill_Wall_of_Fire             = 41659
-A.Skill_Wall_Of_Storms           = 41668
-A.Skill_Wall_of_Frost            = 41663
+A.Skill_Wall_of_Fire             = 41659 -- Unmorphed Wall of Element Variations
+A.Skill_Wall_Of_Storms           = 41668 -- Unmorphed Wall of Element Variations
+A.Skill_Wall_of_Frost            = 41663 -- Unmorphed Wall of Element Variations
+
 -- RESTORATION STAFF --------
 A.Skill_Grand_Healing            = 28385
 A.Skill_Healing_Springs          = 40060
@@ -130,9 +126,9 @@ A.Skill_Force_Siphon             = 31531
 A.Skill_Quick_Siphon             = 40116
 A.Skill_Siphon_Spirit            = 40109
 
--- --------------------------
--- ARMOUR -------------------
--- --------------------------
+-- ---------------------------------------------------
+-- ARMOUR --------------------------------------------
+-- ---------------------------------------------------
 
 -- LIGHT ARMOUR -------------
 A.Skill_Annulment                = 29338
@@ -149,9 +145,9 @@ A.Skill_Immovable                = 29552
 A.Skill_Immovable_Brute          = 39205
 A.Skill_Unstoppable              = 39197
 
--- --------------------------
--- GUILDS -------------------
--- --------------------------
+-- ---------------------------------------------------
+-- GUILDS --------------------------------------------
+-- ---------------------------------------------------
 
 -- FIGHTERS GUILD -----------
 A.Skill_Dawnbreaker              = 35713
@@ -198,9 +194,9 @@ A.Skill_Bone_Shield              = 39369
 A.Skill_Bone_Surge               = 42176
 A.Skill_Spiked_Bone_Shield       = 42138
 
--- --------------------------
--- WORLD --------------------
--- --------------------------
+-- ---------------------------------------------------
+-- WORLD ---------------------------------------------
+-- ---------------------------------------------------
 
 -- SOUL MAGIC ---------------
 A.Skill_Soul_Strike              = 39270
@@ -234,9 +230,9 @@ A.Skill_Mist_Form                = 32986
 A.Skill_Elusive_Mist             = 38963
 A.Skill_Poison_Mist              = 38965
 
--- --------------------------
--- ALLIANCE WAR -------------
--- --------------------------
+-- ---------------------------------------------------
+-- ALLIANCE WAR --------------------------------------
+-- ---------------------------------------------------
 
 -- ASSAULT ------------------
 A.Skill_War_Horn                 = 38563
@@ -268,9 +264,9 @@ A.Skill_Efficient_Purge          = 40232
 -- ADD GUARD
 -- ADD FLARE
 
--- --------------------------
--- CLASS: DRAGONKNIGHT ------
--- --------------------------
+-- ---------------------------------------------------
+-- CLASS: DRAGONKNIGHT -------------------------------
+-- ---------------------------------------------------
 
 -- ARDENT FLAME -------------
 A.Skill_Dragonknight_Standard    = 28988
@@ -294,7 +290,6 @@ A.Skill_Power_Lash               = 20824
 A.Skill_Inferno                  = 25954
 A.Skill_Flames_Of_Oblivion       = 32853
 A.Skill_Cauterize                = 32881
-
 
 -- DRACONIC POWER -----------
 A.Skill_Ferocious_Leap           = 32715
@@ -334,9 +329,9 @@ A.Skill_Ash_Cloud                = 29059
 A.Skill_Cinder_Storm             = 20779
 A.Skill_Eruption                 = 32710
 
--- --------------------------
--- CLASS: SORCERER ----------
--- --------------------------
+-- ---------------------------------------------------
+-- CLASS: SORCERER -----------------------------------
+-- ---------------------------------------------------
 
 -- DAEDRIC SUMMONING --------
 A.Skill_Summon_Storm_Atronach    = 23634
@@ -392,9 +387,9 @@ A.Skill_Streak                   = 23236
 A.Skill_Yesss                    = 30432
 A.Skill_Bound_Armor              = 30445
 
--- --------------------------
--- CLASS: NIGHTBLADE --------
--- --------------------------
+-- ---------------------------------------------------
+-- CLASS: NIGHTBLADE ---------------------------------
+-- ---------------------------------------------------
 
 -- ASSASSINATION ------------
 A.Skill_Teleport_Strike          = 18342
@@ -452,9 +447,9 @@ A.Skill_Drain_Power              = 33316
 A.Skill_Power_Extraction         = 36901
 A.Skill_Sap_Essence              = 36891
 
--- --------------------------
--- CLASS: TEMPLAR -----------
--- --------------------------
+-- ---------------------------------------------------
+-- CLASS: TEMPLAR ------------------------------------
+-- ---------------------------------------------------
 
 -- AEDRIC SPEAR -------------
 A.Skill_Radial_Sweep             = 22138
@@ -510,6 +505,7 @@ A.Skill_Restoring_Focus          = 22237
 -- ---------------------------------------------------
 -- TOGGLED EFFECTS -----------------------------------
 -- ---------------------------------------------------
+
 A.Toggled_Hidden                    = 20309 -- Hidden (Innate)
 A.Toggled_Disguised                 = "Disguised"
 A.Toggled_Brace_Generic             = 14890 -- Block (Innate)
@@ -615,14 +611,10 @@ A.Boon_Tower                        = 13985
 -- ---------------------------------------------------
 
 A.Passive_SoulSummons               = 39269
---alchemy
---champion points
 A.Passive_Invigorating_Bash         = 60407 --, 60409
--- sorc
 --A.Passive_Intercept               = 23284
---night blade
 A.Passive_SoulSiphoner              = 36603
---light armor
+
 
 -- ---------------------------------------------------
 -- EQUIPMENT SETS EFFECTS ----------------------------
@@ -668,16 +660,13 @@ A.Effect_Grip_of_Lorkaj             = 57517
 A.Effect_Unstable_Void              = 74488
 A.Effect_Curse_Duration             = 25000
 
--- ---------------------------------------------------
--- replace ability IDs with names --------------------
--- ---------------------------------------------------
+
+-- Replace ability IDs with names
 for k, v in pairs(A) do
     if type(v) == "number" then
         A[k] = GetAbilityName(v)
     end
 end
 
--- ---------------------------------------------------
--- Export string data to global namespace ------------
--- ---------------------------------------------------
+-- Export string data to global namespace
 LUIE.GetAbility = function() return A end
