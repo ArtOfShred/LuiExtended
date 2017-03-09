@@ -1129,6 +1129,7 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [15356] = 'LuiExtended/media/icons/abilities/ability_innate_sprint.dds', -- Sprint Drain
     [10950] = 'LuiExtended/media/icons/abilities/ability_innate_fall_snare.dds', -- Fall Snare
     [63601] = 'LuiExtended/media/icons/abilities/ability_innate_eso_plus_member.dds', -- ESO Plus Member
+    [47270] = 'esoui/art/icons/achievement_update11_dungeons_017.dds', -- Ritual of Mara
     [42514] = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', -- Hard Dismount
     --[33439] = 'LuiExtended/media/icons/abilities/ability_innate_mount_sprint.dds', -- Mount Sprint (Generic) (Resevered here if it ever becomes visible)
     [14890] = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', -- Block

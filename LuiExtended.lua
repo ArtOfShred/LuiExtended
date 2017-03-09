@@ -577,7 +577,7 @@ function LUIE.SlashGuildInvite(option)
             and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName))
             or (ZO_SELECTED_TEXT:Colorize(guildName))
 
-    LUIE.PrintToChat(zo_strformat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE), name, guildNameAlliance))
+    LUIE.PrintToChat(zo_strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE), name, guildNameAlliance))
 end
 
 function LUIE.GQuit(guildnumber)
@@ -712,7 +712,7 @@ end
 
 function LUIE.SlashRemoveFriend(option)
     if option == "" then
-        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_FAILED_NONAME))
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME))
         return
     end
 

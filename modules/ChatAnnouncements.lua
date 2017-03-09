@@ -84,12 +84,14 @@ CA.D = {
     LootVendor                    = true,
     MiscBags                      = false,
     MiscConfiscate                = false,
+    MiscDuel                      = false,
     MiscGuild                     = false,
     MiscGuildIcon                 = false,
     MiscGuildMOTD                 = false,
     MiscGuildRank                 = false,
     MiscHorse                     = false,
     MiscLockpick                  = false,
+    MiscMara                      = true,
     MiscMail                      = false,
     MiscSocial                    = false,
     MiscTrade                     = false,
@@ -121,7 +123,7 @@ local g_JusticeStacks             = {} -- Filled during justice confiscation to 
 local g_XPCombatBufferString      = ""
 local g_XPCombatBufferValue       = 0
 local g_XP_BAR_COLORS             = ZO_XP_BAR_GRADIENT_COLORS[2] -- Color for Normal Levels
-local g_comboString               = "" -- String is filled by the EVENT_CURRENCY_CHANGE events and ammended onto the end of purchase/sales from LootLog component if toggled on!
+local g_comboString               = "" -- String is filled by the EVENT_CURRENCY_CHANGE events and amended onto the end of purchase/sales from LootLog component if toggled on!
 local g_craftStacks               = {}
 local g_areWeGrouped              = false
 local g_stopGroupLeaveQueue       = false
@@ -229,6 +231,7 @@ function CA.Initialize(enabled)
     CA.RegisterCustomStrings()
     CA.RegisterDuelEvents()
     CA.RegisterDisguiseEvents()
+    CA.RegisterMaraEvents()
 end
 
 function CA.RegisterSocialEvents()
@@ -285,17 +288,38 @@ function CA.RegisterGuildEvents()
     end
 end
 
+function CA.RegisterMaraEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_OFFER)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_RESULT)
+    if CA.SV.MiscMara then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_OFFER, CA.MaraOffer)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_RESULT, CA.MaraResult)
+    end
+end
+
 function CA.RegisterDuelEvents()
-    --EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_COUNTDOWN, CA.DuelCountdown)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_RECEIVED, CA.DuelInviteReceived)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_ACCEPTED, CA.DuelInviteAccepted)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_SENT, CA.DuelInviteSent)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_FINISHED, CA.DuelFinished)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_FAILED, CA.DuelInviteFailed)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_DECLINED, CA.DuelInviteDeclined)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_CANCELED, CA.DuelInviteCanceled)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_NEAR_BOUNDARY, CA.DuelNearBoundary)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, CA.DuelStarted)
+    -- EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_COUNTDOWN, CA.DuelCountdown) 
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_INVITE_RECEIVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_INVITE_ACCEPTED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_INVITE_SENT)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_FINISHED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_INVITE_FAILED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_INVITE_DECLINED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_INVITE_CANCELED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_NEAR_BOUNDARY)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_STARTED)
+    if CA.SV.MiscDuel then
+        --EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_COUNTDOWN, CA.DuelCountdown)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_RECEIVED, CA.DuelInviteReceived)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_ACCEPTED, CA.DuelInviteAccepted)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_SENT, CA.DuelInviteSent)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_FINISHED, CA.DuelFinished)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_FAILED, CA.DuelInviteFailed)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_DECLINED, CA.DuelInviteDeclined)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_CANCELED, CA.DuelInviteCanceled)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_NEAR_BOUNDARY, CA.DuelNearBoundary)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, CA.DuelStarted)
+    end
 end
 
 function CA.RegisterDisguiseEvents()
@@ -624,7 +648,7 @@ function CA.GuildMemberAdded(eventCode, guildId, DisplayName)
         local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
         if guildName == name then
-            printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MEMBER_ADDED), displayNameLink, guildNameAlliance))
+            printToChat(strformat(GetString(SI_GUILD_ROSTER_ADDED), displayNameLink, guildNameAlliance))
             break
         end
     end
@@ -644,7 +668,7 @@ function CA.GuildMemberRemoved(eventCode, guildId, DisplayName, CharacterName)
         local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
         if guildName == name then
-            printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MEMBER_REMOVED), displayNameLink, guildNameAlliance))
+            printToChat(strformat(GetString(SI_GUILD_ROSTER_REMOVED), displayNameLink, guildNameAlliance))
             break
         end
     end
@@ -811,7 +835,7 @@ function CA.GuildInviteAdded(eventCode, guildId, guildName, guildAlliance, invit
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
     local allianceIconSize = 16
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_INVITE_SELF), displayNameLink, guildNameAlliance))
+    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST), displayNameLink, guildNameAlliance))
 end
 
 function CA.GuildInviteRemoved(eventCode, guildId)
@@ -845,7 +869,7 @@ end
 
 function CA.FriendInviteAdded(eventCode, inviterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
-    printToChat(strformat(GetString(SI_LUIE_CA_FRIENDS_FRIEND_INVITE_PENDING), displayNameLink))
+    printToChat(strformat(GetString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST), displayNameLink))
 end
 
 function CA.FriendInviteRemoved(eventCode, inviterName)
@@ -922,6 +946,18 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_PASSED, GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_PASSED_ALT), 1) -- Replaces default syntax style string with LUIE style
         SafeAddString(SI_LFG_READY_CHECK_TEXT, GetString(SI_LUIE_CA_GROUP_FINDER_READY_CHECK_TEXT), 2)
         
+        -- Mara String Replacements
+        SafeAddString(SI_PLEDGEOFMARARESULT0, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT0), 1)
+        SafeAddString(SI_PLEDGEOFMARARESULT1, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT1), 1)
+        SafeAddString(SI_PLEDGEOFMARARESULT2, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT2), 1)
+        SafeAddString(SI_PLEDGEOFMARARESULT3, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT3), 2)
+        SafeAddString(SI_PLEDGEOFMARARESULT4, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT4), 2)
+        SafeAddString(SI_PLEDGEOFMARARESULT6, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT6), 1)
+        SafeAddString(SI_PLEDGEOFMARARESULT7, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT7), 1)
+        
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_RITUAL_OF_MARA, GetString(SI_PLEDGE_OF_MARA_MESSAGE), 1)
+        SafeAddString(SI_PLAYER_TO_PLAYER_OUTGOING_RITUAL_OF_MARA, GetString(SI_PLEDGE_OF_MARA_SENDER_MESSAGE), 1)
+        
         -- Quest Share String Replacements
         SafeAddString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE, GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_ALT), 1)
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_ALT), 3)
@@ -934,8 +970,9 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_TRADE_INVITE, GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), 1)
         SafeAddString(SI_TRADE_INVITE_MESSAGE, GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), 1)
         SafeAddString(SI_TRADEACTIONRESULT1, GetString(SI_LUIE_CA_TRADEACTIONRESULT1), 1)
-        
+
         -- Friend Invite String Replacements
+        SafeAddString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG, GetString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_ALT), 1) -- Replaces default syntax style string with LUIE style
         SafeAddString(SI_FRIENDS_LIST_IGNORE_ADDED, GetString(SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED), 1) -- Fixes default Ignore List messages to match our syntax.
         SafeAddString(SI_FRIENDS_LIST_IGNORE_REMOVED, GetString(SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED), 1) -- Fixes default Ignore List messages to match our syntax.
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST, GetString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST), 1) -- Default ZOS string was missing a period.
@@ -943,9 +980,20 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON, GetString(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_ON), 1)
         SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_OFF, GetString(SI_LUIE_CA_FRIENDS_LIST_LOGGED_OFF), 1)
         SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF, GetString(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_OFF), 1)
+        SafeAddString(SI_LUIE_CA_FRIENDS_FRIEND_ADDED, GetString(SI_LUIE_CA_FRIENDS_FRIEND_ADDED_ALT), 1) -- Replaces default syntax style string with LUIE style
+        SafeAddString(SI_LUIE_CA_FRIENDS_FRIEND_REMOVED, GetString(SI_LUIE_CA_FRIENDS_FRIEND_REMOVED_ALT), 1) -- Replaces default syntax style string with LUIE style
+        SafeAddString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST, GetString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST_ALT), 1) -- Replaces default syntax style string with LUIE style
+        
         -- Guild Invite String Replacements
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, GetString(SI_LUIE_CA_FRIENDS_INCOMING_GUILD_REQUEST), 1) -- Update syntax for guild invite message to match our chat syntax
-        SafeAddString(SI_GUILD_ROSTER_INVITED_MESSAGE, GetString(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE), 1) -- Update syntax for guild invitation sent message to match group syntax.
+        SafeAddString(SI_GUILD_ROSTER_INVITED_MESSAGE, GetString(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE_ALT), 2)
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST_ALT), 1)
+        SafeAddString(SI_GUILD_INVITE_MESSAGE, GetString(SI_LUIE_CA_GUILD_INVITE_MESSAGE), 3)
+        SafeAddString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST, GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST_ALT), 1) -- Replaces default syntax style string with LUIE style
+        SafeAddString(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, GetString(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE_ALT), 1)
+        SafeAddString(SI_GUILD_ROSTER_ADDED, GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), 2)
+        SafeAddString(SI_GUILD_ROSTER_REMOVED, GetString(SI_LUIE_CA_GUILD_ROSTER_REMOVED), 2)
+        SafeAddString(SI_LUIE_CA_GUILD_RANK_CHANGED, GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_ALT), 1)
+
         
         -- Duel String Replacements
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_DUEL, GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), 1)
@@ -1920,6 +1968,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     if not g_mailCurrencyCheck then
         zo_callLater(CA.MailClearVariables, 500)
     end
+    
 end
 
 -- Alliance Point Change Announcements
@@ -2341,10 +2390,6 @@ function CA.MiscAlertLockSuccess(eventCode)
 end
 
 function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source)
-    if ridingSkillType == 2 then
-        g_inventoryStacks = {}
-        CA.IndexInventory()
-    end
 
     if CA.SV.MiscHorse then
         local bracket1 = ""
@@ -2354,7 +2399,7 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
         local skillstring
 
         if source == 2 then
-            logPrefix = GetStringSI_LUIE_CA_PREFIX_MESSAGE_LEARNED
+            logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LEARNED)
         end
 
         if CA.SV.ItemBracketDisplayOptions == 1 then
@@ -2410,9 +2455,9 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
         if CA.SV.ItemContextToggle then
             logPrefix = CA.SV.ItemContextMessage
         end
-
-        if CA.SV.LootCurrencyCombo then
-            printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>><<5>> |cFFFFFF<<6>>/60|r<<7>>", bracket1, logPrefix, bracket2, icon, skillstring, current, g_comboString) )
+        
+        if CA.SV.LootCurrencyCombo == true then
+            printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>><<5>> |cFFFFFF<<6>>/60|r<<7>>", bracket1, logPrefix, bracket2, icon, skillstring, current, g_comboString))
             g_comboString = ""
         else
             printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>><<5>> |cFFFFFF<<6>>/60|r", bracket1, logPrefix, bracket2, icon, skillstring, current) )
@@ -2432,7 +2477,8 @@ function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previous
         local icon = ""
         local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED) -- "Purchased"
 
-        if currentUpgrade < 1 then
+        -- If this isn't a bag upgrade purchase then ignore this event. We have a separate event handling mount space upgrades.
+        if currentUpgrade <= previousUpgrade then   
             return
         end
 
@@ -2460,7 +2506,7 @@ function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previous
             logPrefix = ( CA.SV.ItemContextMessage )
         end
 
-        if CA.SV.LootCurrencyCombo then
+        if CA.SV.LootCurrencyCombo == true then
             printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>>[Bag Space Upgrade] |cFFFFFF<<5>>/8|r<<6>>", bracket1, logPrefix, bracket2, icon, currentUpgrade, g_comboString))
             g_comboString = ""
         else
@@ -4995,4 +5041,51 @@ function CA.DisguiseState(eventCode, unitTag, disguiseState)
         g_disguiseState = GetUnitDisguiseState("player")
         if g_disguiseState > 0 then g_disguiseState = 1 end
         
+end
+
+
+
+function CA.MaraOffer(eventCode, targetCharacterName, isSender, targetDisplayName)
+
+    local maraName
+    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(targetCharacterName)
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(targetDisplayName)
+    local displayBothString = ( strformat("<<1>><<2>>", targetCharacterName, targetDisplayName) )
+    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, targetDisplayName)
+    
+    if CA.SV.ChatPlayerDisplayOptions == 1 then maraName = displayNameLink end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then maraName = characterNameLink end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then maraName = displayBoth end
+    
+    if isSender then
+        printToChat(strformat(GetString(SI_PLAYER_TO_PLAYER_OUTGOING_RITUAL_OF_MARA), maraName))
+    else
+        printToChat(strformat(GetString(SI_PLAYER_TO_PLAYER_INCOMING_RITUAL_OF_MARA), maraName))
+    end
+
+end
+
+function CA.MaraResult (eventCode, reason, targetCharacterName, targetDisplayName)
+    
+    local maraName
+    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(targetCharacterName)
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(targetDisplayName)
+    local displayBothString = ( strformat("<<1>><<2>>", targetCharacterName, targetDisplayName) )
+    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, targetDisplayName)
+    
+    if CA.SV.ChatPlayerDisplayOptions == 1 then maraName = displayNameLink end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then maraName = characterNameLink end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then maraName = displayBoth end
+    
+    printToChat(strformat(GetString("SI_PLEDGEOFMARARESULT", reason), maraName))
+    
+    if reason == 3 and CA.SV.Loot then
+        local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_RECEIVED)
+        local receivedBy = ""
+        local gainorloss = "|c0B610B"
+        local icon = CA.SV.LootIcons and "|t16:16:esoui/art/icons/entitlement_002.dds|t " or ""
+        local itemlink = '|H1:item:44904:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h'
+        CA.LogItem(logPrefix, icon, itemlink, itemType, 1, receivedBy, gainorloss)
+    end
+    
 end

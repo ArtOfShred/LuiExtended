@@ -1560,6 +1560,28 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.MiscMail,
                     },
                     {
+                        -- Show Duel Events
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_DUEL),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_DUEL_TOOLTIP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscDuel end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscDuel = value LUIE.ChatAnnouncements.RegisterDuelEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.MiscDuel,
+                    },
+                    {
+                        -- Show Pledge of Mara Events
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_MARA),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_MARA_TOOLTIP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscMara end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscMara = value LUIE.ChatAnnouncements.RegisterMaraEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.MiscMara,
+                    },
+                    {
                         -- Show Social Events
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL),
