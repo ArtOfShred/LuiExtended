@@ -123,9 +123,13 @@ local g_XPCombatBufferValue       = 0
 local g_XP_BAR_COLORS             = ZO_XP_BAR_GRADIENT_COLORS[2] -- Color for Normal Levels
 local g_comboString               = "" -- String is filled by the EVENT_CURRENCY_CHANGE events and ammended onto the end of purchase/sales from LootLog component if toggled on!
 local g_craftStacks               = {}
+local g_areWeGrouped              = false
+local g_stopGroupLeaveQueue       = false
 local g_fixJoinMessage            = false
 local g_groupFormFudger           = false
 local g_groupJoinFudger           = false -- Controls message for group join
+local g_joinLFGOverride           = false
+local g_leaveLFGOverride          = false
 local g_guildBankCarryGainorloss  = ""
 local g_guildBankCarryIcon        = ""
 local g_guildBankCarryItemLink    = ""
@@ -326,8 +330,7 @@ function CA.RegisterXPEvents()
 end
 
 function CA.RegisterGroupEvents()
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_LFG_JOINED, CA.LFGJoined)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_NO_LONGER_LFG, CA.LFGLeft)
+
     -- Group Events
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_REMOVED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_UPDATE)
@@ -342,6 +345,8 @@ function CA.RegisterGroupEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_ELECTION_RESULT)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_ELECTION_REQUESTED)
     -- Group Finder Events
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_LFG_JOINED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_NO_LONGER_LFG)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_FIND_REPLACEMENT_NOTIFICATION_NEW)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_STATUS_UPDATE)
@@ -349,6 +354,8 @@ function CA.RegisterGroupEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_CANCELLED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_UPDATED)
     if CA.SV.GroupChatMsg then
+        local groupSize = GetGroupSize()
+        if groupSize > 1 then g_areWeGrouped = true end
         -- Group Events
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_REMOVED, CA.GroupInviteRemoved)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_UPDATE, CA.GroupUpdate)
@@ -365,6 +372,8 @@ function CA.RegisterGroupEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_RESULT, CA.VoteResult)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_REQUESTED, CA.VoteRequested)
         -- Group Finder Events
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_LFG_JOINED, CA.LFGJoined)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_NO_LONGER_LFG, CA.LFGLeft)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_FIND_REPLACEMENT_NOTIFICATION_NEW, CA.GroupFindReplacementNew)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE, CA.ActivityComplete)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_STATUS_UPDATE, CA.ActivityStatusUpdate)
@@ -883,13 +892,14 @@ end
 
 function CA.RegisterCustomStrings()
     if CA.SV.CustomStrings then
-        -- Group Invite String Replacements
+        -- Group String Replacements
         SafeAddString(SI_GROUPINVITERESPONSE0, GetString(SI_LUIE_CA_GROUPINVITERESPONSE0), 2)
         SafeAddString(SI_GROUPINVITERESPONSE1, GetString(SI_LUIE_CA_GROUPINVITERESPONSE1), 3)
         SafeAddString(SI_GROUPINVITERESPONSE2, GetString(SI_LUIE_CA_GROUPINVITERESPONSE2), 3)
         SafeAddString(SI_GROUPINVITERESPONSE3, GetString(SI_LUIE_CA_GROUPINVITERESPONSE3), 2)
         SafeAddString(SI_GROUPINVITERESPONSE4, GetString(SI_LUIE_CA_GROUPINVITERESPONSE4), 3)
         SafeAddString(SI_GROUPINVITERESPONSE5, GetString(SI_LUIE_CA_GROUPINVITERESPONSE5), 3)
+        SafeAddString(SI_GROUPINVITERESPONSE8, GetString(SI_LUIE_CA_GROUPINVITERESPONSE8), 2)
         SafeAddString(SI_GROUPINVITERESPONSE9, GetString(SI_LUIE_CA_GROUPINVITERESPONSE9), 2)
         SafeAddString(SI_GROUPINVITERESPONSE10, GetString(SI_LUIE_CA_GROUPINVITERESPONSE10), 1)
         SafeAddString(SI_GROUPINVITERESPONSE13, GetString(SI_LUIE_CA_GROUPINVITERESPONSE13), 1)
@@ -903,11 +913,14 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_LUIE_CA_GROUP_MEMBER_JOIN, GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_ALT), 1) -- Replaces default syntax style string with LUIE style
         SafeAddString(SI_LUIE_CA_GROUP_MEMBER_KICKED, GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_ALT), 1) -- Replaces default syntax style string with LUIE style
         SafeAddString(SI_LUIE_CA_GROUP_MEMBER_LEAVE, GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_ALT), 1) -- Replaces default syntax style string with LUIE style
+        SafeAddString(SI_GROUP_NOTIFICATION_GROUP_LEADER_CHANGED, GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_ALT), 1)
         
         -- Group Finder String Replacements
+        SafeAddString(SI_GROUPING_TOOLS_ALERT_LFG_JOINED, GetString(SI_LUIE_CA_GROUP_FINDER_ALERT_LFG_JOINED), 1)
         SafeAddString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL, GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL_ALT), 1) -- Replaces default syntax style string with LUIE style
         SafeAddString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START, GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START_ALT), 1) -- Replaces default syntax style string with LUIE style
         SafeAddString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_PASSED, GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_PASSED_ALT), 1) -- Replaces default syntax style string with LUIE style
+        SafeAddString(SI_LFG_READY_CHECK_TEXT, GetString(SI_LUIE_CA_GROUP_FINDER_READY_CHECK_TEXT), 2)
         
         -- Quest Share String Replacements
         SafeAddString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE, GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_ALT), 1)
@@ -962,15 +975,51 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_DUELINVITEFAILREASON16, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON16), 1)
         SafeAddString(SI_DUELINVITEFAILREASON18, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON18), 1)
         SafeAddString(SI_DUELINVITEFAILREASON20, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON20), 1)
+        
+        -- Regroup Replacement String
+        SafeAddString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG, GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG_ALT), 1)
     end
 end
 
 function CA.LFGJoined(eventCode, locationName)
-    printToChat(strformat("You have joined an LFG group for <<1>>", locationName))
+    printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_ALERT_LFG_JOINED), locationName))
+    g_joinLFGOverride = true
 end
 
 function CA.LFGLeft(eventCode)
-    printToChat(strformat("You are no longer in an LFG Group."))
+    g_leaveLFGOverride = true
+end
+
+function CA.CheckLFGStatusJoin()
+    if not g_stopGroupLeaveQueue then
+        if IsInLFGGroup() and not g_joinLFGOverride then 
+            printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF_LFG))
+        elseif not IsInLFGGroup() and not g_joinLFGOverride then 
+            printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF))
+        end
+        g_joinLFGOverride = false
+    end
+end
+
+function CA.PrintJoinStatusNotSelf(SendString)
+    if not g_stopGroupLeaveQueue then
+        printToChat(SendString)
+    end
+end
+
+function CA.CheckLFGStatusLeave(SendString, WasKicked)
+    if not g_stopGroupLeaveQueue then
+    
+        if SendString ~= "" then printToChat(SendString) end
+        
+        if not g_leaveLFGOverride then
+            if WasKicked then printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF)) end
+            if GetGroupSize() == 0 then printToChat(GetString(SI_LUIE_CA_GROUP_QUIT)) end
+        elseif g_leaveLFGOverride and GetGroupSize() == 0 then 
+            printToChat(GetString(SI_LUIE_CA_GROUP_QUIT_LFG))
+        end
+    end
+    g_leaveLFGOverride = false
 end
 
 function CA.GroupFindReplacementNew(eventCode)
@@ -984,6 +1033,7 @@ function CA.ActivityComplete(eventCode)
 end
 
 function CA.ActivityStatusUpdate(eventCode, status)
+    --d(status)
     if g_showActivityStatus then
         if status == ACTIVITY_FINDER_STATUS_NONE and g_weAreQueued == true then
             printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_QUEUE_END))
@@ -1012,6 +1062,11 @@ function CA.ActivityStatusUpdate(eventCode, status)
     if status == 4 then
         g_showRCUpdates = false
     end
+    
+    if status == 5 then
+        g_fixJoinMessage = true
+    end
+        
 end
 
 function CA.ActivityQueueResult(eventCode, result)
@@ -1035,6 +1090,7 @@ function CA.ActivityQueueResult(eventCode, result)
         printToChat(GetString(SI_ACTIVITYQUEUERESULT6))
     end
 
+    g_fixJoinMessage = false
     g_showRCUpdates = true
     g_weAreQueued = false
     g_showStatusDropMember = false
@@ -1050,12 +1106,15 @@ function CA.ReadyCheckCancel(eventCode, reason)
     end
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_FORMED_SUCCESSFULLY then
         printToChat(GetString(SI_LFGREADYCHECKCANCELREASON4))
+        g_stopGroupLeaveQueue = true
+        zo_callLater(CA.ResetGroupLeaveQueue, 1000)
 
     end
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_READY then
         printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_READY_CHECK_CANCELED))
     end
 
+    g_fixJoinMessage = false
     g_showRCUpdates = true
     g_showActivityStatus = false
     g_showStatusDropMember = false
@@ -1068,8 +1127,9 @@ function CA.ActivityStatusRefresh()
 end
 
 function CA.ReadyCheckUpdate(eventCode)
-    local activityType = GetLFGReadyCheckNotificationInfo()
+    local activityType, playerRole = GetLFGReadyCheckNotificationInfo()
     local tanksAccepted, tanksPending, healersAccepted, healersPending, dpsAccepted, dpsPending = GetLFGReadyCheckCounts()
+    --d(tanksAccepted .. " " .. tanksPending .. " " .. healersAccepted .. " " .. healersPending .. " " .. dpsAccepted .." " .. dpsPending)
     if g_showRCUpdates then
         local activityName
 
@@ -1094,29 +1154,40 @@ function CA.ReadyCheckUpdate(eventCode)
         if activityType == LFG_ACTIVITY_TRIAL then
             activityName = GetString(SI_LFGACTIVITY4)
         end
-
-        printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_READY_CHECK_ACTIVITY), activityName))
-    end
-
-    if tanksAccepted > 0 or healersAccepted > 0 or dpsAccepted > 0 then
-        g_fixJoinMessage = true
+        
+        if playerRole ~= 0 then
+            local roleIcon = (strformat("|t16:16:<<1>>|t", GetRoleIcon(playerRole)))
+            local roleString = GetString("SI_LFGROLE", playerRole)
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_READY_CHECK_ACTIVITY_ROLE), activityName, roleIcon, roleString ))
+        else
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_READY_CHECK_ACTIVITY), activityName))
+        end
     end
 
     if not g_fixJoinMessage then
-        if not g_showRCUpdates and (tanksPending == 0 and healersPending == 0 and dpsPending == 0) then
+        if not g_showRCUpdates and (tanksAccepted == 0 and tanksPending == 0 and healersAccepted == 0 and healersPending == 0 and dpsAccepted == 0 and dpsPending == 0) then
             printToChat(GetString(SI_LFGREADYCHECKCANCELREASON3))
+        elseif not g_showRCUpdates and (tanksAccepted > 0 or healersAccepted > 0 or dpsAccepted > 0)  and g_areWeGrouped == false then
+            g_fixJoinMessage = true
         end
     end
 
     if g_fixJoinMessage then
         if not g_showRCUpdates and (tanksAccepted == 0 and healersAccepted == 0 and dpsAccepted == 0 and tanksPending == 0 and healersPending == 0 and dpsPending == 0) then
             printToChat(GetString(SI_LFGREADYCHECKCANCELREASON4))
+            g_stopGroupLeaveQueue = true
+            zo_callLater(CA.ResetGroupLeaveQueue, 1000)
         end
     end
 
     g_showRCUpdates = false
     g_weAreQueued = false
     g_showStatusDropMember = false
+    
+end
+
+function CA.ResetGroupLeaveQueue()
+    g_stopGroupLeaveQueue = false
 end
 
 function CA.VoteFailed( eventCode, failureReason, descriptor)
@@ -1214,9 +1285,11 @@ end
 -- Triggers when the group composition changes for a Party going from 2 people to 3+, we use this to display a message to the player joining the group.
 function CA.GroupUpdate(eventCode)
     if g_groupJoinFudger then
-        printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF))
+        zo_callLater(CA.CheckLFGStatusJoin, 100)
     end
     g_groupJoinFudger = false
+    local groupSize = GetGroupSize()
+    if groupSize > 1 then g_areWeGrouped = true end
 end
 
 --[[ Would love to be able to use this function but its too buggy for now. Spams every single time someone updates their role, as well as when people join/leave group. If the player joins a large party for the first time then
@@ -1360,12 +1433,13 @@ function CA.OnGroupInviteResponse(eventCode, inviterName, response, inviterDispl
     if CA.SV.ChatPlayerDisplayOptions == 2 then responseName = characterNameLink end
     if CA.SV.ChatPlayerDisplayOptions == 3 then responseName = displayBoth end
     
-    if response ~= 0 and response ~= 1 then
+    if response == 2 and (inviterName == "" or inviterDisplayName == "") then -- Stops blank [] response from printing out when the invited player is zoning
+        return
+    elseif response ~= 0 and response ~= 1 then
         printToChat(strformat(GetString("SI_GROUPINVITERESPONSE", response), responseName))
     elseif response == 1 and g_playerName ~= inviterName then
         g_groupFormFudger = true
-        printToChat(strformat(GetString("SI_GROUPINVITERESPONSE", response), responseName))
-        printToChat(GetString(SI_LUIE_CA_GROUP_FORM_SELF))
+        printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF))
     end
     
 end
@@ -1423,46 +1497,76 @@ function CA.OnGroupMemberJoined(eventCode, memberName)
 
     if g_playerName ~= memberName then
         -- Can occur if event is before EVENT_PLAYER_ACTIVATED
+        local groupJoinName
         local characterNameLink = ZO_LinkHandler_CreateCharacterLink(joinedMemberName)
         local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(joinedMemberAccountName)
         local displayBothString = ( strformat("<<1>><<2>>", joinedMemberName, joinedMemberAccountName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, joinedMemberAccountName)
-        if CA.SV.ChatPlayerDisplayOptions == 1 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), displayNameLink))
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), characterNameLink))
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), displayBoth))
-        end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then groupJoinName = displayNameLink end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then groupJoinName = characterNameLink end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then groupJoinName = displayBoth end
+        local SendString = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), groupJoinName))
+        zo_callLater(function() CA.PrintJoinStatusNotSelf(SendString) end, 100)
     elseif g_playerName == memberName and not g_groupFormFudger then
-        printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF)) -- Only prints on the initial group form between 2 players.
+        zo_callLater(CA.CheckLFGStatusJoin, 100)
     end
 
     g_partyStack = { }
     g_groupFormFudger = false
+    g_areWeGrouped = true
     
 end
 
 -- Prints a message to chat when a group member leaves
 function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLeader, memberDisplayName, actionRequiredVote)
+    local memberLeftName
+    local SendString
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink( gsub(memberName,"%^%a+","") )
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(memberDisplayName)
     local displayBothString = ( strformat("<<1>><<2>>", gsub(memberName,"%^%a+",""), memberDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, memberDisplayName)
-    local msg = nil
 
     if g_playerName == memberName then
         g_showStatusDropMember = false -- Resets variable for Group Finder events, just in case.
     end
-
+    
+    if CA.SV.ChatPlayerDisplayOptions == 1 then
+        memberLeftName = displayNameLink
+    end
+    
+    if CA.SV.ChatPlayerDisplayOptions == 2 then
+        memberLeftName = characterNameLink
+    end
+    
+    if CA.SV.ChatPlayerDisplayOptions == 3 then
+        memberLeftName = displayBoth
+    end
+    
     if reason == GROUP_LEAVE_REASON_VOLUNTARY then
-        msg = g_playerName == memberName and GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF) or GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE)
+        if g_playerName == memberName then
+            g_areWeGrouped = false
+            SendString = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF), memberLeftName))
+            zo_callLater(function() CA.CheckLFGStatusLeave(SendString, WasKicked) end , 100)
+        end
+        if g_playerName ~= memberName then 
+            SendString = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE), memberLeftName))
+            zo_callLater(function() CA.CheckLFGStatusLeave(SendString, WasKicked) end , 100)
+        end
     elseif reason == GROUP_LEAVE_REASON_KICKED then
-        msg = g_playerName == memberName and GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF) or GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED)
+        if g_playerName == memberName then
+            g_areWeGrouped = false
+            SendString = ("")
+            local WasKicked = true
+            zo_callLater(function() CA.CheckLFGStatusLeave(SendString, WasKicked) end , 100)
+        end
+        if g_playerName ~= memberName then
+            SendString = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED), memberLeftName))
+            zo_callLater(function() CA.CheckLFGStatusLeave(SendString, WasKicked) end , 100)
+        end
     elseif reason == GROUP_LEAVE_REASON_DISBAND and g_playerName == memberName then
-        msg = GetString(SI_LUIE_CA_GROUP_MEMBER_DISBAND_MSG)
+        g_areWeGrouped = false
+        SendString = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_DISBAND_MSG), memberLeftName))
+        zo_callLater(function() CA.CheckLFGStatusLeave(SendString, WasKicked) end , 100)
     end
     if msg then
         -- Can occur if event is before EVENT_PLAYER_ACTIVATED

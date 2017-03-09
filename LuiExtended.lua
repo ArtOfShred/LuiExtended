@@ -297,7 +297,7 @@ function LUIE.PortPrimaryHome()
     local primaryHouse = GetHousingPrimaryHouse()
     
     if IsUnitInCombat("player") then
-        LUIE.PrintToChat("You can't port to your fucking house when you're in combat you weabtron.")
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IN_COMBAT))
         return
     end
 
@@ -312,36 +312,33 @@ function LUIE.PortPrimaryHome()
         RequestJumpToHouse(primaryHouse)
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG))
     end
+    
 end
 
 function LUIE.RegroupDisband()
+
     -- Check for pending regroup
     if PendingRegroup then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_PENDING))
         return
     end
     
-    -- Check to make sure player is in a group
     local groupSize = GetGroupSize()
     if groupSize <= 1 then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTINGRP))
         return
     end
-    
-    -- Check to make sure player is not in an LFG group
-    local isLFG = IsInLFGGroup()
-    if isLFG then
-        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_LFGACTIVITY))
-        return
-    end
-    
-    -- Check to make sure player is the leader
-    local isLeader = IsUnitGroupLeader("player")
-    if not isLeader then
+
+    if not IsUnitGroupLeader("player") then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTLEADER))
         return
     end
 
+    if IsInLFGGroup() then
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_LFGACTIVITY))
+        return
+    end
+    
     PendingRegroup = true
 
     for i = 1,groupSize do
@@ -391,15 +388,13 @@ function LUIE.Disband()
     GroupDisband()
 
     -- Check to make sure player is in a group
-    local groupSize = GetGroupSize()
-    if groupSize <= 1 then
+    if GetGroupSize() <= 1 then
         LUIE.PrintToChat(GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_IN_A_GROUP))
         return
     end
 
     -- Check to make sure player is the leader
-    local isLeader = IsUnitGroupLeader("player")
-    if not isLeader then
+    if not IsUnitGroupLeader("player") then
         LUIE.PrintToChat(GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_THE_LEADER))
         return
     end
@@ -422,38 +417,42 @@ function LUIE.LeaveGroup()
 end
 
 function LUIE.GroupKick(option)
-    if option == "" then
-        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME))
-        return
+
+    -- Rather then error out, let the player use /kick and /remove as a substitute for /votekick and /voteremove in LFG
+    if IsInLFGGroup() then
+        if option == "" then
+            LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME))
+            return
+        else
+            LUIE.SlashVoteKick(option)
+            return
+        end
     end
 
     -- Check to make sure player is in a group
-    local groupSize = GetGroupSize()
-    if groupSize <= 1 then
+    if GetGroupSize() <= 1 then
         LUIE.PrintToChat(GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_IN_A_GROUP))
         return
     end
 
     -- Check to make sure player is the leader
-    local isLeader = IsUnitGroupLeader("player")
-    if not isLeader then
+    if not IsUnitGroupLeader("player") then
         LUIE.PrintToChat(GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_THE_LEADER))
         return
     end
-
-    -- Check to make sure we're not in LFG
-    local isLFG = IsInLFGGroup()
-    if isLFG then
-        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_LFGACTIVITY))
+    
+    if option == "" then
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME))
         return
     end
+
 
     local g_partyKick = { }
     local kickedMemberName
     local kickedAccountName
     local compareName = string.lower(option)
-    local comparePlayerName = string.lower(option)
-    local comparePlayerAccount = string.lower(option)
+    local comparePlayerName = string.lower(playerName)
+    local comparePlayerAccount = string.lower(playerAccountName)
     local unitToKick
 
     for i = 1,24 do
@@ -472,7 +471,7 @@ function LUIE.GroupKick(option)
         local kickcompare = g_partyKick[i]
         if kickcompare.kickedMemberName == compareName or kickcompare.kickedAccountName == compareName then
             if kickcompare.kickedMemberName == comparePlayerName or kickcompare.kickedAccountName == comparePlayerAccount then
-                LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_CANTKICKSELF))
+                GroupLeave()
             else
                 unitToKick = kickcompare.memberTag
                 GroupKick(unitToKick)
@@ -480,7 +479,7 @@ function LUIE.GroupKick(option)
             return
         end
     end
-
+    
     LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME))
 end
 
@@ -782,7 +781,7 @@ end
 
 function LUIE.SlashTrade(option)
     if option == "" then
-        LUIE.PrintToChat("You must enter the name of a player to trade with.")
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME))
         return
     end
     
@@ -790,25 +789,57 @@ function LUIE.SlashTrade(option)
 end
 
 function LUIE.SlashVoteKick(option)
-    if option == "" then
-        LUIE.PrintToChat("You must enter the name of a player to votekick.")
+
+
+    if GetGroupSize() <= 1 then
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFG))
         return
     end
 
     if not IsInLFGGroup() then
-        LUIE.PrintToChat("Get real chickentits, you can't votekick a player when you're not in LFG")
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFG))
         return
     end
     
-    -- Make sure is leader too
+    if option == "" then
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NONAME))
+        return
+    end
+
+    local g_partyKick = { }
+    local kickedMemberName
+    local kickedAccountName
+    local compareName = string.lower(option)
+    local comparePlayerName = string.lower(playerName)
+    local comparePlayerAccount = string.lower(playerAccountName)
+    local unitToKick = ""
+
+    for i = 1,24 do
+        local memberTag = GetGroupUnitTagByIndex(i)
+        -- Once we reach a nil value (aka no party member there, stop the loop)
+        if memberTag == nil then
+            break
+        end
+        kickedMemberName = string.lower(GetUnitName(memberTag))
+        kickedAccountName = string.lower(GetUnitDisplayName(memberTag))
+        g_partyKick[i] = { memberTag=memberTag, kickedMemberName=kickedMemberName, kickedAccountName=kickedAccountName }
+    end
+
+    -- Iterate through UnitTags to get the member who just joined
+    for i = 1,#g_partyKick do
+        local kickcompare = g_partyKick[i]
+        if kickcompare.kickedMemberName == compareName or kickcompare.kickedAccountName == compareName then
+            if kickcompare.kickedMemberName == comparePlayerName or kickcompare.kickedAccountName == comparePlayerAccount then
+                unitToKick = kickcompare.memberTag
+                break
+            else
+                unitToKick = kickcompare.memberTag
+                break
+            end
+        end
+    end
     
-    -- Make sure is in group too
-    
-    -- Priority of warnings? Does "Hey you didn't enter an option take priority or do we print the "You're not in a group/LFG/etc warnings first?"
-    
-    BeginGroupElection(GROUP_ELECTION_TYPE_KICK_MEMBER, ZO_NONE, option)
-    
-    -- Add group iteration name comparison shit here to votekick proper member. Wooo
+    BeginGroupElection(GROUP_ELECTION_TYPE_KICK_MEMBER, ZO_GROUP_ELECTION_DESCRIPTORS.NONE, unitToKick)
     
 end
 
@@ -824,6 +855,7 @@ SLASH_COMMANDS["/groupremove"] = LUIE.GroupKick
 SLASH_COMMANDS["/home"] = LUIE.PortPrimaryHome
 SLASH_COMMANDS["/trade"] = LUIE.SlashTrade
 SLASH_COMMANDS["/votekick"] = LUIE.SlashVoteKick
+SLASH_COMMANDS["/voteremove"] = LUIE.SlashVoteKick
 
 SLASH_COMMANDS["/ginvite"] = LUIE.SlashGuildInvite
 SLASH_COMMANDS["/gquit"] = LUIE.GQuit
