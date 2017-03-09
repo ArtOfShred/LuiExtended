@@ -574,7 +574,9 @@ function LUIE.SlashGuildInvite(option)
     local guildName = GetGuildName(guildnumber)
     local allianceIconSize = 16
     local guildAlliance = GetGuildAlliance(guildnumber)
-    local guildNameAlliance = LUIE.ChatAnnouncements.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    local guildNameAlliance = LUIE.ChatAnnouncements.SV.MiscGuildIcon
+            and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName))
+            or (ZO_SELECTED_TEXT:Colorize(guildName))
 
     LUIE.PrintToChat(zo_strformat(GetString(SI_GUILD_ROSTER_INVITED_MESSAGE), name, guildNameAlliance))
 end

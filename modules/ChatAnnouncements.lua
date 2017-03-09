@@ -297,8 +297,8 @@ end
 function CA.RegisterDisguiseEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED)
     if CA.SV.MiscDisguise then
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "player",          EVENT_DISGUISE_STATE_CHANGED, CA.DisguiseState )
-        EVENT_MANAGER:AddFilterForEvent(moduleName .. "player",         EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, CA.DisguiseState )
+        EVENT_MANAGER:AddFilterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
         g_currentDisguise = GetItemId(0, 10) or 0 -- Get the currently equipped disguise itemId if any
         g_disguiseState = GetUnitDisguiseState("player") -- Get current player disguise state
         if g_disguiseState > 0 then g_disguiseState = 1 end -- Simplify all the various states into a basic 0 = false, 1 = true value
@@ -326,7 +326,6 @@ function CA.RegisterXPEvents()
 end
 
 function CA.RegisterGroupEvents()
-
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_LFG_JOINED, CA.LFGJoined)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_NO_LONGER_LFG, CA.LFGLeft)
     -- Group Events
@@ -945,7 +944,7 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_DUEL_INVITE_RECEIVED, GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), 1)
         SafeAddString(SI_PLAYER_TO_PLAYER_INVITE_DUEL, GetString(SI_LUIE_CA_DUEL_INVITE_PLAYER), 1)
         SafeAddString(SI_DUELING_COUNTDOWN_CSA, GetString(SI_LUIE_CA_DUEL_COUNTDOWN_CSA), 1)
-        SafeAddString(SI_DUELING_NEAR_BOUNDARY_CSA, GetString(SI_LUIE_DUELING_NEAR_BOUNDARY_CSA), 1)
+        SafeAddString(SI_DUELING_NEAR_BOUNDARY_CSA, GetString(SI_LUIE_CA_DUEL_NEAR_BOUNDARY_CSA), 1)
         SafeAddString(SI_DUELRESULT0, GetString(SI_LUIE_CA_DUEL_RESULT0), 1)
         SafeAddString(SI_DUELRESULT1, GetString(SI_LUIE_CA_DUEL_RESULT1), 1)
         SafeAddString(SI_DUELSTATE1, GetString(SI_LUIE_CA_DUEL_STATE1), 1)
@@ -971,7 +970,7 @@ function CA.LFGJoined(eventCode, locationName)
 end
 
 function CA.LFGLeft(eventCode)
-    d("You are no longer in an LFG Group.")
+    printToChat(strformat("You are no longer in an LFG Group."))
 end
 
 function CA.GroupFindReplacementNew(eventCode)
@@ -1698,9 +1697,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         elseif CA.SV.MiscMail and reason == 2 then
             if not g_mailStop and g_mailStringPart1 ~= "" then
                 if not CA.SV.GoldChange then
-                    printToChat(strformat(GetString(SI_LUIE_CA_CANT_THINK_OF_NAME_MSG1), g_mailStringPart1, changetype))
+                    printToChat(strformat(GetString(SI_LUIE_CA_VAR_AND_VAR_GOLD_MSG), g_mailStringPart1, changetype))
                 else
-                    printToChat(strformat(GetString(SI_LUIE_CA_CANT_THINK_OF_NAME_MSG2), g_mailStringPart1))
+                    printToChat(strformat(GetString(SI_LUIE_CA_VAR_AND_GOLD_MSG), g_mailStringPart1))
                 end
             elseif not g_mailStop then
                 if not CA.SV.GoldChange then
@@ -2230,11 +2229,11 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
 end
 
 function CA.MiscAlertLockFailed(eventCode)
-    printToChat(GetString(SI_LUIE_CA_MISC_LOCKPICK_FAILED))
+    printToChat(GetString(SI_LUIE_CA_LOCKPICK_FAILED))
 end
 
 function CA.MiscAlertLockSuccess(eventCode)
-    printToChat(GetString(SI_LUIE_CA_MISC_LOCKPICK_SUCCESS))
+    printToChat(GetString(SI_LUIE_CA_LOCKPICK_SUCCESS))
 end
 
 function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source)
@@ -3200,16 +3199,16 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
 
             if CA.SV.ExperienceLevelUp and g_crossover == 0 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE), icon, CurrentLevelFormatted))
+                    printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat("<<1>><<2>><<3>> <<4>>", GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE), icon, LevelContext, CurrentLevel))
+                    printToChat(strformat("<<1>><<2>><<3>> <<4>>", GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), icon, LevelContext, CurrentLevel))
                 end
             end
             if CA.SV.ExperienceLevelUp and g_crossover == 1 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE), icon, CurrentLevelFormatted))
+                    printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_LVL_ANNOUNCE_CP), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat("<<1>><<2>><<3>> <<4>>", GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE), icon, LevelContext, CurrentLevel))
+                    printToChat(strformat("<<1>><<2>><<3>> <<4>>", GetString(SI_LUIE_CA_LVL_ANNOUNCE_CP), icon, LevelContext, CurrentLevel))
                 end
             end
         else
@@ -3223,16 +3222,16 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
 
             if CA.SV.ExperienceLevelUp and g_crossover == 0 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE), icon, CurrentLevelFormatted))
+                    printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat("<<1>><<2>><<3>> <<4>>", GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE), icon, LevelContext, CurrentLevel))
+                    printToChat(strformat("<<1>><<2>><<3>> <<4>>", GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), icon, LevelContext, CurrentLevel))
                 end
             end
             if CA.SV.ExperienceLevelUp and g_crossover == 1 then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE), icon, CurrentLevelFormatted))
+                    printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_LVL_ANNOUNCE_CP), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat("<<1>><<2>><<3>> <<4>>", GetString(SI_LUIE_CA_CP_LVL_ANNOUNCE), icon, LevelContext, CurrentLevel))
+                    printToChat(strformat("<<1>><<2>><<3>> <<4>>", GetString(SI_LUIE_CA_LVL_ANNOUNCE_CP), icon, LevelContext, CurrentLevel))
                 end
             end
 
@@ -3287,9 +3286,9 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
 
             if CA.SV.ExperienceLevelUp then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted))
+                    printToChat(strformat(GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel))
+                    printToChat(strformat(GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), icon, LevelContext, CurrentLevel))
                 end
             end
         else
@@ -3303,9 +3302,9 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
 
             if CA.SV.ExperienceLevelUp then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE1), icon, CurrentLevelFormatted))
+                    printToChat(strformat(GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat(GetString(SI_LUIE_CA_XP_LVL_ANNOUNCE2), icon, LevelContext, CurrentLevel))
+                    printToChat(strformat(GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), icon, LevelContext, CurrentLevel))
                 end
             end
 
@@ -3391,8 +3390,8 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                 icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. CommaValue (g_XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName ) or ( CommaValue (g_XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName )
             end
 
-            local xppct = 0             -- XP Percent
-            local decimal = 0           -- If we're using a % value, this is the string that determines whether we have a decimal point or not.
+            local xppct = 0    -- XP Percent
+            local decimal = 0  -- If we're using a % value, this is the string that determines whether we have a decimal point or not.
 
             if CA.SV.ExperienceShowProgress then
 

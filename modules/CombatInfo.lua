@@ -6,7 +6,6 @@ LUIE.CombatInfo     = {}
 local CI            = LUIE.CombatInfo
 local UI            = LUIE.UI
 local E             = LUIE.Effects
-local L             = LUIE.GetLocale()
 local DelayBuffer   = LUIE.DelayBuffer
 local strformat     = zo_strformat
 local strfmt        = string.format
@@ -14,7 +13,6 @@ local strfmt        = string.format
 local moduleName    = LUIE.name .. "_CombatInfo"
 
 CI.Enabled  = false
--- Saved player variables
 CI.D = {
     position            = {},
   --HUDElements         = false,
@@ -94,8 +92,7 @@ local g_ultimatAbilityName       = ""
 local g_ultimatAbilityId         = 0
 local g_ultimateNotReady         = false
 local g_lastExecuteAlert         = {}
-
-local ULTIMATE_SLOT              = ACTION_BAR_ULTIMATE_SLOT_INDEX + 1
+local g_ultimateSlot             = ACTION_BAR_ULTIMATE_SLOT_INDEX + 1
 
 function fifoQueue.new()
     return {first = 0, last = -1}
@@ -1478,7 +1475,7 @@ function CI.RegisterPowerEvent()
     EVENT_MANAGER:RegisterForEvent(moduleName .."execute", EVENT_POWER_UPDATE, CI.OnPowerUpdateTarget)
     -- Those are only for ultimate tracking
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE, CI.OnSlotsFullUpdate)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED, function(eventCode, slotNum) if slotNum == ULTIMATE_SLOT then CI.OnSlotsFullUpdate(eventCode) end end)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED, function(eventCode, slotNum) if slotNum == g_ultimateSlot then CI.OnSlotsFullUpdate(eventCode) end end)
 end
 
 -- Clear and then (maybe) re-register event listener for combat tips alerts
@@ -2168,7 +2165,7 @@ function CI.OnSlotsFullUpdate(eventCode)
         return
     end
 
-    local setHidden = not ( CI.SV.UltimateEnabled and IsSlotUsed( ULTIMATE_SLOT ) )
+    local setHidden = not ( CI.SV.UltimateEnabled and IsSlotUsed( g_ultimateSlot ) )
 
     uiUltimate.LabelVal:SetHidden( setHidden )
     if setHidden then
@@ -2176,12 +2173,12 @@ function CI.OnSlotsFullUpdate(eventCode)
     end
 
     -- Get the currently slotted ultimate cost
-    local cost, mechType = GetSlotAbilityCost( ULTIMATE_SLOT )
+    local cost, mechType = GetSlotAbilityCost( g_ultimateSlot )
 
     g_ultimateCost = ( mechType == POWERTYPE_ULTIMATE ) and cost or 0
 
-    g_ultimatAbilityName = GetSlotName( ULTIMATE_SLOT )
-    g_ultimatAbilityId = GetSlotBoundId( ULTIMATE_SLOT )
+    g_ultimatAbilityName = GetSlotName( g_ultimateSlot )
+    g_ultimatAbilityId = GetSlotBoundId( g_ultimateSlot )
 
     -- if this event was caused only by user manually changing the ultimate ability, then
     -- force recalculation of percent value. Otherwise (weapons swap) this will be called by the game
