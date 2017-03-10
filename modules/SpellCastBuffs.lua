@@ -2427,7 +2427,7 @@ function SCB.OnVibration(eventCode, duration, coarseMotor, fineMotor, leftTrigge
         g_playerResurectStage = nil
         SCB.NewEffects( {
             name = "Resurrection Immunity",
-            icon = "esoui/art/icons/ability_mage_069.dds",
+            icon = "LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds",
             effects = {10000, 0, 0, 0}
         } )
     else

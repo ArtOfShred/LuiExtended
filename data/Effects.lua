@@ -1145,6 +1145,7 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [2727] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off-Balance
     [20172] = 'LuiExtended/media/icons/abilities/ability_innate_off-balance_exploit.dds', -- Off-Balance Exploit
     [16566] = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', -- CC Immunity
+    [16593] = 'LuiExtended/media/icons/abilities/ability_innate_melee_snare.dds', -- Melee Snare
 
     ----------------------------------------------------------------
     -- DRAGONKNIGHT PASSIVES ---------------------------------------
