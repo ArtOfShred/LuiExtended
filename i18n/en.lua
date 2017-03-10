@@ -215,6 +215,7 @@ ZO_CreateStringId("SI_LUIE_LAM_RELOADUI_WARNING",                       "Will ne
 ZO_CreateStringId("SI_LUIE_LAM_RESETPOSITION",                          "Reset position")
 ZO_CreateStringId("SI_LUIE_LAM_UNITFRAMES",                             "Unit Frames")
 
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_HEADER",                            "Buffs and Debuffs Options")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_COLOUREDTIMELABEL",                 "Coloured time label")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_COLOUREDTIMELABE_TOOLTIP",          "Set the colour of text label same as icon border or keep it white.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_DESCENDINGSORT",                    "Descending sort direction")
@@ -232,7 +233,6 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_GLOWICONBORDER_TOOLTIP",            "Use col
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_HARDLOCK",                          "Hard-Lock position to Unit Frames")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_HARDLOCK_TOOLTIP",                  "Hard-Lock position of buffs windows to Health bar of unit frames (default one or custom). This will forbid changing windows position indemendently.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_HARDLOCK_WARNING",                  "Will need to reload the UI.\nWhen this position is locked, you will not be able to move buffs.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_HEADER",                            "Buffs and Debuffs Options")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF",              "Hide GROUND Buffs and Debuffs")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF_TOOLTIP",      "Prevents ground targeted effects from displaying..")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDETARGETBUFF",                    "Hide TARGET Buffs")
@@ -324,6 +324,7 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TOOLTIP",       "Format 
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_UNLOCKWINDOW",                      "Unlock Buffs window")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_UNLOCKWINDOW_TOOLTIP",              "Unlock for dragging window with buffs icons. This will only unlock areas unaffected by previous option (if it is enabled).")
 
+ZO_CreateStringId("SI_LUIE_LAM_CA_HEADER",                              "Chat Announcements Options")
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLORDOWN",                           "Color for negative loot/currency gains")
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLORUP",                             "Color for positive loot/currency gains")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CSMBRACKET",                          "Bracket Settings for Context Specific Messages")
@@ -412,7 +413,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABELNAME_TOOLTIP",   "Modifie
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABEL_TOOLTIP",       "Displays [Progress] label before reporting XP progress.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT",             "Throttle Experience gained in combat")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT_TOOLTIP",     "Setting this option higher than 0 allows you to throttle XP gain by X seconds.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_HEADER",                              "Chat Announcements Options")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_COLLECTIBLE",                    "Show Collectibles Unlocked")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_COLLECTIBLE_COLOR",              "Color Context Message Color")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_COLLECTIBLE_TOOLTIP",            "Display a lootlog style message in chat when a collectible is added or unlocked.")
@@ -497,11 +497,14 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWTRADE",                      "Show Tr
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWTRADE_TOOLTIP",              "Prints a notification to chat for trade invitations, cancellation, and success.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD",                   "Player Name Display Method")
 ZO_CreateStringId("SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TOOLTIP",           "Determines the method used to display player names in Chat Announcements where applicable.\nDefault: Character Name")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_HEADER",                      "Achievements Announcements")
-
-
-
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_ENABLE",                      "Enable Achievements Tracking")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_ENABLE_TOOLTIP",              "Enables achievements tracking sub-module. Below you can select categories of achievements to be tracked.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_STEPSIZE",                    "Achievements Step Size, %")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_STEPSIZE_TOOLTIP",            "Display achievement update information every #% to completion. Setting this value to 0 means to print achievement information on every update event.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO",                  "Show Detailed Achievement Info")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO_TOOLTIP",          "Displays each subcategory required for achievement completion and completion of each subcategory.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_ENABLE_CATEGORY",             "Enables achievements tracking in <<1>> category.")
 ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_ALERTS_ENABLEDEATH",          "Enable group member death alert")
 ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_ALERTS_ENABLEDEATH_TOOLTIP",  "Display an alert when group member dies.")
 ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_ALERTS_ENABLETIPS",           "Enable Active Combat Tips alerts")
