@@ -318,10 +318,8 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS",               "Show se
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TOOLTIP",       "Format remaining text labes as \"12.3\" or keep only seconds \"12\".")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_UNLOCKWINDOW",                      "Unlock Buffs window")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_UNLOCKWINDOW_TOOLTIP",              "Unlock for dragging window with buffs icons. This will only unlock areas unaffected by previous option (if it is enabled).")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLORUP",                             "Color for positive loot/currency gains")
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLORDOWN",                           "Color for negative loot/currency gains")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_CSMBRACKET",                          "Bracket Settings for Context Specific Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CSMBRACKET_TOOLTIP",                  "Allows you to customize the format of the Brackets present on Context Specific Messages.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CSMOVERRIDE",                         "Allow override Context specific messages")
@@ -406,12 +404,11 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABEL_TOOLTIP",       "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT",             "Throttle Experience gained in combat")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT_TOOLTIP",     "Setting this option higher than 0 allows you to throttle XP gain by X seconds.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_HEADER",                              "Chat Announcements Options")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT",            "Hide Gold spent on Guild Trader Purchases (Compatibility)")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT",            "Hide Gold spent on Guild Trader Purchases")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TOOLTIP",    "Toggle this option to hide the display of gold spent on Guild Trader purchases - this is a useful if you are using an addon like Awesome Guild Store to announce trader purchases.")
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_COLLECTIBLE",                    "Show Collectibles added")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_COLLECTIBLE",                    "Show Collectibles Unlocked")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_COLLECTIBLE_TOOLTIP",            "Display a lootlog style message in chat when a collectible is added or unlocked.")
-
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_COLLECTIBLE_COLOR",              "Color Context Message Color")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_CSMLOOT_GAIN",                   "Context Specific Override Message - Loot")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_CSMLOOT_GAIN_TOOLTIP",           "Enter a string to replace the default context specific bracketed message displayed before item changes.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_HEADER",                         "Loot Announcements")

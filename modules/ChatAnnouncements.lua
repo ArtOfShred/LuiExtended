@@ -34,10 +34,8 @@ CA.D = {
     AlliancePointColor            = { 0.164706, 0.862745, 0.133333, 1 },
     AlliancePointFilter           = 0,
     AlliancePointName             = GetString(SI_CURRENCY_ALLIANCE_POINTS), -- "Alliance Points"
-    
     ChangeColorUp                 = { 0.043137, 0.380392, 0.043137, 1 },
     ChangeColorDown               = { 0.7, 0, 0, 1 },
-    
     ChatPlayerDisplayOptions      = 2,
     CurrencyBracketDisplayOptions = 1,
     CurrencyContextMessageDown    = "",
@@ -76,6 +74,7 @@ CA.D = {
     LootBank                      = true,
     LootBlacklist                 = false,
     LootCollectible               = false,
+    LootCollectibleColor          = { 0, 1, 1, 1 },
     LootCraft                     = true,
     LootCurrencyCombo             = false,
     LootGroup                     = true,
@@ -254,6 +253,7 @@ end
 function CA.RegisterColorEvents()
     ChangeUpColorize = ZO_ColorDef:New(unpack(CA.SV.ChangeColorUp))
     ChangeDownColorize = ZO_ColorDef:New(unpack(CA.SV.ChangeColorDown))
+    CollectibleColorize = ZO_ColorDef:New(unpack(CA.SV.LootCollectibleColor))
     GoldColorize = ZO_ColorDef:New(unpack(CA.SV.GoldColor))
     APColorize = ZO_ColorDef:New(unpack(CA.SV.AlliancePointColor))
     TVColorize = ZO_ColorDef:New(unpack(CA.SV.TelVarStoneColor))
@@ -666,9 +666,8 @@ function CA.GuildMemberAdded(eventCode, guildId, DisplayName)
         local id = GetGuildId(i)
         local name = GetGuildName(id)
 
-        local allianceIconSize = 16
-        local guildAlliance = GetGuildAlliance(id) -- Temporary until I can figure out why GetGuildAlliance() isn't working
-        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+        local guildAlliance = GetGuildAlliance(id)
+        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
         if guildName == name then
             printToChat(strformat(GetString(SI_GUILD_ROSTER_ADDED), displayNameLink, guildNameAlliance))
@@ -686,9 +685,8 @@ function CA.GuildMemberRemoved(eventCode, guildId, DisplayName, CharacterName)
         local id = GetGuildId(i)
         local name = GetGuildName(id)
 
-        local allianceIconSize = 16
-        local guildAlliance = GetGuildAlliance(id) -- Temporary until I can figure out why GetGuildAlliance() isn't working
-        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+        local guildAlliance = GetGuildAlliance(id)
+        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
         if guildName == name then
             printToChat(strformat(GetString(SI_GUILD_ROSTER_REMOVED), displayNameLink, guildNameAlliance))
@@ -706,9 +704,8 @@ function CA.GuildMOTD(eventCode, guildId)
         local id = GetGuildId(i)
         local name = GetGuildName(id)
 
-        local allianceIconSize = 16
-        local guildAlliance = GetGuildAlliance(id) -- Temporary until I can figure out why GetGuildAlliance() isn't working
-        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+        local guildAlliance = GetGuildAlliance(id)
+        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
         if guildName == name then
             printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MOTD_CHANGED), guildNameAlliance, motd))
@@ -745,9 +742,8 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
             local id = GetGuildId(i)
             local name = GetGuildName(id)
 
-            local allianceIconSize = 16
-            local guildAlliance = GetGuildAlliance(id) -- Temporary until I can figure out why GetGuildAlliance() isn't working
-            local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+            local guildAlliance = GetGuildAlliance(id)
+            local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
             if guildName == name then
                 printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED), displayNameLink, guildNameAlliance, rankSyntax))
@@ -788,9 +784,8 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
             local id = GetGuildId(i)
             local name = GetGuildName(id)
 
-            local allianceIconSize = 16
-            local guildAlliance = GetGuildAlliance(id) -- Temporary until I can figure out why GetGuildAlliance() isn't working
-            local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+            local guildAlliance = GetGuildAlliance(id)
+            local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
             if guildName == name then
                 printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_SELF), changestring, rankSyntax, guildNameAlliance))
@@ -806,9 +801,8 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
         local id = GetGuildId(i)
         local name = GetGuildName(id)
 
-        local allianceIconSize = 16
-        local guildAlliance = GetGuildAlliance(id) -- Temporary until I can figure out why GetGuildAlliance() isn't working
-        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+        local guildAlliance = GetGuildAlliance(id)
+        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
         if guildName == name then
             printToChat(strformat(GetString(SI_LUIE_CA_GUILD_JOIN_SELF), guildNameAlliance))
@@ -835,8 +829,7 @@ function CA.GuildRemovedSelf(eventCode, guildId, guildName)
     for i = 1,5 do
         local guild = GuildIndexData[i]
         if guild.name == guildName then
-            local allianceIconSize = 16
-            local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guild.guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+            local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guild.guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
             printToChat(strformat(GetString(SI_LUIE_CA_GUILD_LEAVE_SELF), guildNameAlliance))
             break
         end
@@ -856,8 +849,7 @@ end
 
 function CA.GuildInviteAdded(eventCode, guildId, guildName, guildAlliance, inviterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
-    local allianceIconSize = 16
-    local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), allianceIconSize, allianceIconSize, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
     printToChat(strformat(GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST), displayNameLink, guildNameAlliance))
 end
 
@@ -2730,7 +2722,7 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
     
     if gainorloss == 1 then color = ChangeUpColorize end
     if gainorloss == 2 then color = ChangeDownColorize end
-    if gainorloss == 3 then color = ColorWhite
+    if gainorloss == 3 then color = ZO_SELECTED_TEXT end
 
     if CA.SV.ItemBracketDisplayOptions == 1 then
         bracket1 = "["
@@ -4054,7 +4046,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             local item = g_equippedStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
-            local gainorloss = "|cFEFEFE"
+            local gainorloss = 3
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_EQUIP)
             if CA.SV.ShowDisguise and slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) end
 
@@ -4068,7 +4060,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                     local item = g_equippedStacks[slotId]
                     local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
                     local itemType = GetItemLinkItemType(item.itemlink)
-                    local gainorloss = "|cFEFEFE"
+                    local gainorloss = 3
                     local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_EQUIP)
                     if (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) end
                 end
@@ -5079,6 +5071,7 @@ function CA.NewCollectible(eventCode, collectibleId)
 
     local bracket1
     local bracket2
+    local message
 
     if CA.SV.ItemBracketDisplayOptions == 1 then
         bracket1 = "["
@@ -5094,11 +5087,18 @@ function CA.NewCollectible(eventCode, collectibleId)
         bracket2 = ""
     end
 
-local _, _, icon, _, _, _, _, categoryType = GetCollectibleInfo(collectibleId)
-local link = GetCollectibleLink(collectibleId, LINK_STYLE_BRACKETS)
-categoryType = GetString("SI_COLLECTIBLECATEGORYTYPE", categoryType)
-icon = zo_iconFormat(icon, 16, 16) 
+    local _, _, icon, _, _, _, _, categoryType = GetCollectibleInfo(collectibleId)
+    local link = GetCollectibleLink(collectibleId, LINK_STYLE_BRACKETS)
+    categoryType = GetString("SI_COLLECTIBLECATEGORYTYPE", categoryType)
 
-printToChat(strformat("|c00FFFF<<1>><<2>> <<3>><<4>>|r <<5>> <<6>>", bracket1, categoryType, GetString(SI_LUIE_CA_PREFIX_MESSAGE_ADDED), bracket2, icon, link))
+    if CA.SV.LootIcons then
+        icon = strfmt(" |t16:16:%s|t", icon)
+    else
+        icon = ("")
+    end
+    
+    message = CollectibleColorize:Colorize(strfmt("%s%s %s%s", bracket1, categoryType, GetString(SI_LUIE_CA_PREFIX_MESSAGE_ADDED), bracket2))
+
+    printToChat(strfmt("%s%s %s", message, icon, link))
 
 end

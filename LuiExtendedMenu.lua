@@ -1520,7 +1520,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = LUIE.ChatAnnouncements.D.CustomStrings,
             },
-            
             {
                 -- Positive Change Color
                 type = "colorpicker",
@@ -1531,8 +1530,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = {r=LUIE.ChatAnnouncements.D.ChangeColorUp[1], g=LUIE.ChatAnnouncements.D.ChangeColorUp[2], b=LUIE.ChatAnnouncements.D.ChangeColorUp[3]}
             },
-            
-            
             {
                 -- Negative Change Color
                 type = "colorpicker",
@@ -1543,8 +1540,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = {r=LUIE.ChatAnnouncements.D.ChangeColorDown[1], g=LUIE.ChatAnnouncements.D.ChangeColorDown[2], b=LUIE.ChatAnnouncements.D.ChangeColorDown[3]}
             },
-            
-            
             {
                 -- CA Miscellaneous Announcements Submenu
                 type = "submenu",
@@ -2185,7 +2180,7 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.ShowDestroy,
                     },
                     {
-                        -- Show Disguise message
+                        -- Show Disguise Equip
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWDISGUISE),
                         tooltip = strformat("<<1>>\n<<2>>", GetString(SI_LUIE_LAM_CA_LOOT_SHOWDISGUISE_TOOLTIP), GetString(SI_LUIE_LAM_CA_LOOT_SHOWDISGUISE_NOTE)),
@@ -2281,7 +2276,17 @@ function LUIE_CreateSettings()
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.LootCollectible,
-                    },   
+                    },
+                    {
+                        -- Collectible Color
+                        type = "colorpicker",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_COLLECTIBLE_COLOR)),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.LootCollectibleColor) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.LootCollectibleColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.LootCollectible) end,
+                        default = {r=LUIE.ChatAnnouncements.D.LootCollectibleColor[1], g=LUIE.ChatAnnouncements.D.LootCollectibleColor[2], b=LUIE.ChatAnnouncements.D.LootCollectibleColor[3]}
+                    },
                     {
                         -- Bracket Settings for Context Specific Messages
                         type = "dropdown",
