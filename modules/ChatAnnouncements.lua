@@ -59,6 +59,7 @@ CA.D = {
     ExperienceShowProgress        = true,
     ExperienceThrottle            = 0,
     GoldChange                    = true,
+    GoldHideAHSpent               = false,
     GoldColor                     = { 1, 1, 0.2, 1 },
     GoldName                      = GetString(SI_CURRENCY_GOLD), -- "Gold"
     GroupChatMsg                  = false,
@@ -70,6 +71,7 @@ CA.D = {
     Loot                          = true,
     LootBank                      = true,
     LootBlacklist                 = false,
+    LootCollectible               = false,
     LootCraft                     = true,
     LootCurrencyCombo             = false,
     LootGroup                     = true,
@@ -232,6 +234,14 @@ function CA.Initialize(enabled)
     CA.RegisterDuelEvents()
     CA.RegisterDisguiseEvents()
     CA.RegisterMaraEvents()
+    CA.RegisterCollectibleEvents()
+end
+
+function CA.RegisterCollectibleEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_COLLECTIBLE_NOTIFICATION_NEW)
+    if CA.SV.LootCollectible then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_COLLECTIBLE_NOTIFICATION_NEW, CA.NewCollectible)
+    end
 end
 
 function CA.RegisterSocialEvents()
@@ -1680,7 +1690,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     ]]--
 
     local UpOrDown     = newMoney - oldMoney
-    local currentMoney = CommaValue(GetCurrentMoney())
+    local currentMoney = GetCurrentMoney()
     local color        = ""
     local changetype   = ""
     local message      = ""
@@ -1714,10 +1724,10 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     -- Determine the color of the text based on whether we gained or lost gold
     if UpOrDown > 0 then
         color = "|c0B610B"
-        changetype = CommaValue(newMoney - oldMoney)
+        changetype = newMoney - oldMoney
     else
         color = "|ca80700"
-        changetype = CommaValue(oldMoney - newMoney)
+        changetype = oldMoney - newMoney
     end
 
     -- If we only recieve or lose 1 Gold, don't add an "s" onto the end of the name
@@ -1747,7 +1757,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         else
             message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SENT)
         end
-        changetype = CommaValue (oldMoney - newMoney - g_postageAmount)
+        changetype = oldMoney - newMoney - g_postageAmount
         mailHelper = true
 
     -- Receive/Give Money in a Trade (Likely consolidate this later)
@@ -1758,9 +1768,14 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     elseif reason == 4 or reason == 32 or reason == 63 then
         message = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Receieved"
 
-    -- Spend - NPC Conversation (5), Bag Space (8), Bank Space (9), Wayshrine (19), Mount Feed (28), Repairs (29), Buy on AH (31), AH Listing Fee (33), Respec Skills (44), Respec Attributes (45),
+    -- Spend - NPC Conversation (5), Bag Space (8), Bank Space (9), Wayshrine (19), Mount Feed (28), Repairs (29), AH Listing Fee (33), Respec Skills (44), Respec Attributes (45),
     -- Unstuck (48), Edit Guild Heraldry (49), Buy Guild Tabard (50), Respec Morphs (55), Pay Fence (56), Launder (60), Champion Respec (61), Buyback (64)
-    elseif reason == 5 or reason == 8 or reason == 9 or reason == 19 or reason == 28 or reason == 29 or reason == 31 or reason == 33 or reason == 44 or reason == 45 or reason == 48 or reason == 49 or reason == 50 or reason == 55 or reason == 56 or reason == 60 or reason == 61 or reason == 64 then
+    elseif reason == 5 or reason == 8 or reason == 9 or reason == 19 or reason == 28 or reason == 29 or reason == 33 or reason == 44 or reason == 45 or reason == 48 or reason == 49 or reason == 50 or reason == 55 or reason == 56 or reason == 60 or reason == 61 or reason == 64 then
+        message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SPENT)
+    
+    -- Buy on AH (31)
+    elseif reason == 31 then
+        if CA.SV.GoldHideAHSpent then return end
         message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SPENT)
 
     -- Desposit in Bank (42) or Guild Bank (51)
@@ -1829,17 +1844,17 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
 
     -- Determines syntax based on whether icon is displayed or not, we use "ICON - GOLD CHANGE AMOUNT" if so, and "GOLD CHANGE AMOUNT - GOLD" if not
     if CA.SV.CurrencyIcons then
-        syntax = GoldColorize:Colorize(strformat(" |t16:16:/esoui/art/currency/currency_gold.dds|t <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.GoldName, plural))
+        syntax = GoldColorize:Colorize(strformat(" |t16:16:/esoui/art/currency/currency_gold.dds|t <<1>><<2>><<3>><<4>>", ZO_LocalizeDecimalNumber(changetype), formathelper, CA.SV.GoldName, plural))
     else
-        syntax = GoldColorize:Colorize(strformat(" <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.GoldName, plural))
+        syntax = GoldColorize:Colorize(strformat(" <<1>><<2>><<3>><<4>>", ZO_LocalizeDecimalNumber(changetype), formathelper, CA.SV.GoldName, plural))
     end
 
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if not mailHelper then
         if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. GoldColorize:Colorize(currentMoney) )
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " " .. GoldColorize:Colorize(ZO_LocalizeDecimalNumber(currentMoney)) )
         elseif CA.SV.TotalGoldChange and CA.SV.CurrencyIcons then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. GoldColorize:Colorize(currentMoney) )
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. GoldColorize:Colorize(ZO_LocalizeDecimalNumber(currentMoney)) )
         else
             total = ""
         end
@@ -1849,13 +1864,13 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         elseif CA.SV.MiscMail and reason == 2 then
             if not g_mailStop and g_mailStringPart1 ~= "" then
                 if not CA.SV.GoldChange then
-                    printToChat(strformat(GetString(SI_LUIE_CA_VAR_AND_VAR_GOLD_MSG), g_mailStringPart1, changetype))
+                    printToChat(strformat(GetString(SI_LUIE_CA_VAR_AND_VAR_GOLD_MSG), g_mailStringPart1, ZO_LocalizeDecimalNumber(changetype)))
                 else
                     printToChat(strformat(GetString(SI_LUIE_CA_VAR_AND_GOLD_MSG), g_mailStringPart1))
                 end
             elseif not g_mailStop then
                 if not CA.SV.GoldChange then
-                    printToChat(strformat(GetString(SI_LUIE_CA_MAIL_RECEIVED_VAR_GOLD_MSG), changetype))
+                    printToChat(strformat(GetString(SI_LUIE_CA_MAIL_RECEIVED_VAR_GOLD_MSG), ZO_LocalizeDecimalNumber(changetype)))
                 else
                     printToChat(GetString(SI_LUIE_CA_MAIL_RECEIVED_GOLD_MSG))
                 end
@@ -1896,21 +1911,21 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         local valuesent = ""
         local totalwithoutpostage = 0
         if g_postageAmount ~= 0 then
-            totalWithoutPostage = CommaValue ( oldMoney - g_postageAmount )
+            totalWithoutPostage = oldMoney - g_postageAmount
         else
-            totalWithoutPostage = CommaValue ( oldMoney )
+            totalWithoutPostage = oldMoney
         end
 
         if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. GoldColorize:Colorize(currentMoney) )
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " " .. GoldColorize:Colorize(ZO_LocalizeDecimalNumber(currentMoney)) )
         elseif CA.SV.TotalGoldChange and CA.SV.CurrencyIcons then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. GoldColorize:Colorize(currentMoney) )
+            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. GoldColorize:Colorize(ZO_LocalizeDecimalNumber(currentMoney)) )
         else
             total = ""
         end
 
         if CA.SV.MiscMail and g_postageAmount == 0 and g_mailMoney == 0 and g_mailCOD == 0 and not CA.SV.GoldChange then
-            printToChat(strformat(GetString(SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT1), changetype))
+            printToChat(strformat(GetString(SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT1), ZO_LocalizeDecimalNumber(changetype)))
         end
         if CA.SV.MiscMail and g_postageAmount == 0 and g_mailMoney == 0 and g_mailCOD == 0 and CA.SV.GoldChange then
             printToChat(GetString(SI_LUIE_CA_MAIL_COD_GOLD_SENT))
@@ -1937,7 +1952,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             local postagesyntax = CA.SV.CurrencyIcons and GoldColorize:Colorize(strformat( " |t16:16:/esoui/art/currency/currency_gold.dds|t " .. g_postageAmount .. formathelper .. CA.SV.GoldName .. plural)) or GoldColorize:Colorize(strformat( " " .. g_postageAmount .. formathelper .. CA.SV.GoldName .. plural))
                 -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
             if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
-                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. GoldColorize:Colorize(totalWithoutPostage) )
+                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " " .. GoldColorize:Colorize(totalWithoutPostage) )
             elseif CA.SV.TotalGoldChange and CA.SV.CurrencyIcons then
                 total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. GoldColorize:Colorize(totalWithoutPostage) )
             else
@@ -2392,8 +2407,8 @@ end
 function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source)
 
     if CA.SV.MiscHorse then
-        local bracket1 = ""
-        local bracket2 = ""
+        local bracket1
+        local bracket2
         local icon = ""
         local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED) -- "Purchased"
         local skillstring
@@ -2465,15 +2480,11 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
     end
 end
 
-
 function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
-    g_inventoryStacks = {}
-    g_bankStacks = {}
-    CA.IndexInventory()
-    CA.IndexBank()
+        
     if CA.SV.MiscBags then
-        local bracket1 = ""
-        local bracket2 = ""
+        local bracket1
+        local bracket2
         local icon = ""
         local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED) -- "Purchased"
 
@@ -2516,13 +2527,10 @@ function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previous
 end
 
 function CA.MiscAlertBank(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
-    g_inventoryStacks = {}
-    g_bankStacks = {}
-    CA.IndexInventory()
-    CA.IndexBank()
+
     if CA.SV.MiscBags then
-        local bracket1 = ""
-        local bracket2 = ""
+        local bracket1
+        local bracket2
         local icon = ""
         local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED) -- "Purchased"
 
@@ -2743,8 +2751,8 @@ end
 function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainorloss, istrade)
     --LoggedAnItem = true -- Set this to true, allows buffer to start!
 
-    local bracket1 = ""
-    local bracket2 = ""
+    local bracket1
+    local bracket2
 
     if CA.SV.ItemBracketDisplayOptions == 1 then
         bracket1 = "["
@@ -3917,10 +3925,10 @@ function CA.GuildBankItemRemoved(eventCode, slotId)
 end
 
 function CA.IndexInventory()
-    -- d("Debug - Inventory Indexed!")
+    d("Debug - Inventory Indexed!")
     local bagsize = GetBagSize(1)
 
-    for i = 1,bagsize do
+    for i = 0,bagsize do
         local icon, stack = GetItemInfo(1, i)
         local bagitemlink = GetItemLink(1, i, LINK_STYLE_DEFAULT)
         if bagitemlink ~= "" then
@@ -3930,10 +3938,10 @@ function CA.IndexInventory()
 end
 
 function CA.IndexEquipped()
-    -- d("Debug - Equipped Items Indexed!")
+    d("Debug - Equipped Items Indexed!")
     local bagsize = GetBagSize(0)
     
-    for i = 1,bagsize do
+    for i = 0,bagsize do
         local icon, stack = GetItemInfo(0, i)
         local bagitemlink = GetItemLink(0, i, LINK_STYLE_DEFAULT)
         if bagitemlink ~= "" then
@@ -3943,10 +3951,10 @@ function CA.IndexEquipped()
 end
 
 function CA.IndexBank()
-    -- d("Debug - Bank Indexed!")
+    d("Debug - Bank Indexed!")
     local bagsizebank = GetBagSize(2)
 
-    for i = 1,bagsizebank do
+    for i = 0,bagsizebank do
         local icon, stack = GetItemInfo(2, i)
         local bagitemlink = GetItemLink(2, i, LINK_STYLE_DEFAULT)
         if bagitemlink ~= "" then
@@ -3969,7 +3977,7 @@ function CA.CraftingClose(eventCode, craftSkill)
     if CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
     end
-    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate and CA.SV.ShowDisguise) then
+    if not (CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise) then
         g_inventoryStacks = {}
     end
     g_bankStacks = {}
@@ -3989,7 +3997,7 @@ function CA.BankClose(eventCode)
     if CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
     end
-    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate and CA.SV.ShowDisguise) then
+    if not (CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise) then
         g_inventoryStacks = {}
     end
     g_bankStacks = {}
@@ -4007,7 +4015,7 @@ function CA.GuildBankClose(eventCode)
     if CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
     end
-    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate and CA.SV.ShowDisguise) then
+    if not (CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise) then
         g_inventoryStacks = {}
     end
 end
@@ -4024,7 +4032,7 @@ function CA.StoreClose(eventCode)
     if CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
     end
-    if not (CA.SV.ShowDestroy and CA.SV.ShowConfiscate and CA.SV.ShowDisguise) then
+    if not (CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise) then
         g_inventoryStacks = {}
     end
 end
@@ -4423,6 +4431,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
 end
 
 function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
+
     ---------------------------------- INVENTORY ----------------------------------
     if bagId == BAG_BACKPACK then
         local receivedBy = ""
@@ -5088,4 +5097,32 @@ function CA.MaraResult (eventCode, reason, targetCharacterName, targetDisplayNam
         CA.LogItem(logPrefix, icon, itemlink, itemType, 1, receivedBy, gainorloss)
     end
     
+end
+
+function CA.NewCollectible(eventCode, collectibleId)
+
+    local bracket1
+    local bracket2
+
+    if CA.SV.ItemBracketDisplayOptions == 1 then
+        bracket1 = "["
+        bracket2 = "]"
+    elseif CA.SV.ItemBracketDisplayOptions == 2 then
+        bracket1 = "("
+        bracket2 = ")"
+    elseif CA.SV.ItemBracketDisplayOptions == 3 then
+        bracket1 = ""
+        bracket2 = " -"
+    elseif CA.SV.ItemBracketDisplayOptions == 4 then
+        bracket1 = ""
+        bracket2 = ""
+    end
+
+local _, _, icon, _, _, _, _, categoryType = GetCollectibleInfo(collectibleId)
+local link = GetCollectibleLink(collectibleId, LINK_STYLE_BRACKETS)
+categoryType = GetString("SI_COLLECTIBLECATEGORYTYPE", categoryType)
+icon = zo_iconFormat(icon, 16, 16) 
+
+printToChat(strformat("|c00FFFF<<1>><<2>> <<3>><<4>>|r <<5>> <<6>>", bracket1, categoryType, GetString(SI_LUIE_CA_PREFIX_MESSAGE_ADDED), bracket2, icon, link))
+
 end

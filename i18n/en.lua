@@ -172,7 +172,7 @@ ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT6",                "|cFEFEF
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT7",                "You are too far away from |cFEFEFE<<1>>|r to perform the Ritual of Mara.")
 
 
-
+ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_ADDED",                    "Added")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_CONFISCATED",              "Confiscated")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_CONFISCATEDEQUIPPED",      "Confiscated - Equipped")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_DECONSTRUCTED",            "Deconstructed")
@@ -402,6 +402,12 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABEL_TOOLTIP",       "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT",             "Throttle Experience gained in combat")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT_TOOLTIP",     "Setting this option higher than 0 allows you to throttle XP gain by X seconds.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_HEADER",                              "Chat Announcements Options")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT",            "Hide Gold spent on Guild Trader Purchases (Compatibility)")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TOOLTIP",    "Toggle this option to hide the display of gold spent on Guild Trader purchases - this is a useful if you are using an addon like Awesome Guild Store to announce trader purchases.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_COLLECTIBLE",                    "Show Collectibles added")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_COLLECTIBLE_TOOLTIP",            "Display a lootlog style message in chat when a collectible is added or unlocked.")
+
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_CSMLOOT_GAIN",                   "Context Specific Override Message - Loot")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_CSMLOOT_GAIN_TOOLTIP",           "Enter a string to replace the default context specific bracketed message displayed before item changes.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_HEADER",                         "Loot Announcements")

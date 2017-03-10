@@ -1777,6 +1777,17 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.TotalGoldChange,
                     },
                     {
+                        -- Hide Gold Spent on AH
+                        type = "checkbox",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TOOLTIP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GoldHideAHSpente end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldHideAHSpent = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.GoldChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.GoldHideAHSpent,
+                    },
+                    {
                         -- Show Alliance Points
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAP),
@@ -2235,6 +2246,17 @@ function LUIE_CreateSettings()
                             )) end,
                         default = LUIE.ChatAnnouncements.D.LootNotTrash,
                     },
+                    {
+                        -- Show Collectible Items
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_LOOT_COLLECTIBLE),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_COLLECTIBLE_TOOLTIP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootCollectible end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootCollectible = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootCollectible,
+                    },   
                     {
                         -- Bracket Settings for Context Specific Messages
                         type = "dropdown",
