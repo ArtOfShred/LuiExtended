@@ -2376,8 +2376,12 @@ function SCB.OnPlayerActivated(eventCode)
         end
     end
     
-    if isUnitDead("player") then g_playerDead = true end -- Sets the player to dead if reloading UI or loading in while dead.
-    
+    -- Sets the player to dead if reloading UI or loading in while dead.
+    --[[
+    if isUnitDead("player") then
+        g_playerDead = true
+    end
+    ]]--
 end
 
 function SCB.OnPlayerDeactivated(eventCode)
