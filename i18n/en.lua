@@ -318,6 +318,10 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS",               "Show se
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TOOLTIP",       "Format remaining text labes as \"12.3\" or keep only seconds \"12\".")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_UNLOCKWINDOW",                      "Unlock Buffs window")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_UNLOCKWINDOW_TOOLTIP",              "Unlock for dragging window with buffs icons. This will only unlock areas unaffected by previous option (if it is enabled).")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLORUP",                             "Color for positive loot/currency gains")
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLORDOWN",                           "Color for negative loot/currency gains")
+
 ZO_CreateStringId("SI_LUIE_LAM_CA_CSMBRACKET",                          "Bracket Settings for Context Specific Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CSMBRACKET_TOOLTIP",                  "Allows you to customize the format of the Brackets present on Context Specific Messages.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CSMOVERRIDE",                         "Allow override Context specific messages")

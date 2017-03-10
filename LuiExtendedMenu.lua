@@ -1520,6 +1520,31 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = LUIE.ChatAnnouncements.D.CustomStrings,
             },
+            
+            {
+                -- Positive Change Color
+                type = "colorpicker",
+                name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLORUP)),
+                getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.ChangeColorUp) end,
+                setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.ChangeColorUp = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = {r=LUIE.ChatAnnouncements.D.ChangeColorUp[1], g=LUIE.ChatAnnouncements.D.ChangeColorUp[2], b=LUIE.ChatAnnouncements.D.ChangeColorUp[3]}
+            },
+            
+            
+            {
+                -- Negative Change Color
+                type = "colorpicker",
+                name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLORDOWN)),
+                getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.ChangeColorDown) end,
+                setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.ChangeColorDown = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = {r=LUIE.ChatAnnouncements.D.ChangeColorDown[1], g=LUIE.ChatAnnouncements.D.ChangeColorDown[2], b=LUIE.ChatAnnouncements.D.ChangeColorDown[3]}
+            },
+            
+            
             {
                 -- CA Miscellaneous Announcements Submenu
                 type = "submenu",
@@ -1749,7 +1774,7 @@ function LUIE_CreateSettings()
                         type = "colorpicker",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDCOLOR)),
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.GoldColor) end,
-                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.GoldColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterGoldEvents() end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.GoldColor = { r, g, b, a } CA.RegisterColorEvents() end,
                         width = "full",
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.GoldChange and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = {r=LUIE.ChatAnnouncements.D.GoldColor[1], g=LUIE.ChatAnnouncements.D.GoldColor[2], b=LUIE.ChatAnnouncements.D.GoldColor[3]}
@@ -1817,7 +1842,7 @@ function LUIE_CreateSettings()
                         type = "colorpicker",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPCOLOR)),
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.AlliancePointColor) end,
-                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.AlliancePointColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterAlliancePointEvents() end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.AlliancePointColor = { r, g, b, a } CA.RegisterColorEvents() end,
                         width = "full",
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.AlliancePointChange and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = {r=LUIE.ChatAnnouncements.D.AlliancePointColor[1], g=LUIE.ChatAnnouncements.D.AlliancePointColor[2], b=LUIE.ChatAnnouncements.D.AlliancePointColor[3]}
@@ -1860,7 +1885,7 @@ function LUIE_CreateSettings()
                         type = "colorpicker",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVCOLOR)),
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.TelVarStoneColor) end,
-                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.TelVarStoneColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterTelVarStoneEvents() end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.TelVarStoneColor = { r, g, b, a } CA.RegisterColorEvents() end,
                         width = "full",
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.TelVarStoneChange and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = {r=LUIE.ChatAnnouncements.D.TelVarStoneColor[1], g=LUIE.ChatAnnouncements.D.TelVarStoneColor[2], b=LUIE.ChatAnnouncements.D.TelVarStoneColor[3]}
@@ -1903,7 +1928,7 @@ function LUIE_CreateSettings()
                         type = "colorpicker",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERCOLOR)),
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.WritVoucherColor) end,
-                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.WritVoucherColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterWritVoucherEvents() end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.WritVoucherColor = { r, g, b, a } CA.RegisterColorEvents() end,
                         width = "full",
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.WritVoucherChange and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = {r=LUIE.ChatAnnouncements.D.WritVoucherColor[1], g=LUIE.ChatAnnouncements.D.WritVoucherColor[2], b=LUIE.ChatAnnouncements.D.WritVoucherColor[3]}
