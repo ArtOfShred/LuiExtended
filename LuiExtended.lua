@@ -293,9 +293,9 @@ function LUIE.CommaValue(number, shorten, noncomma)
     return left .. (num:reverse():gsub("(%d%d%d)","%1,"):reverse()) .. right
 end
 
-function LUIE.PortPrimaryHome()
+function LUIE.SlashHome()
     local primaryHouse = GetHousingPrimaryHouse()
-    
+
     if IsUnitInCombat("player") then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IN_COMBAT))
         return
@@ -305,40 +305,39 @@ function LUIE.PortPrimaryHome()
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA))
         return
     end
-    
+
     if primaryHouse == 0 then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_NOHOME))
     else
         RequestJumpToHouse(primaryHouse)
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG))
     end
-    
+
 end
 
-function LUIE.RegroupDisband()
-
+function LUIE.SlashRegroup()
+    local groupSize = GetGroupSize()
     -- Check for pending regroup
     if PendingRegroup then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_PENDING))
         return
     end
-    
-    local groupSize = GetGroupSize()
+    -- Check to make sure player is in a group
     if groupSize <= 1 then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTINGRP))
         return
     end
-
+    -- Check to make sure player is the leader
     if not IsUnitGroupLeader("player") then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTLEADER))
         return
     end
-
+    -- Check to make sure we're not in LFG
     if IsInLFGGroup() then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_LFGACTIVITY))
         return
     end
-    
+
     PendingRegroup = true
 
     for i = 1,groupSize do
@@ -384,30 +383,28 @@ function LUIE.RegroupInvite()
     g_regroupStacks = {} -- Allow index to be used again.
 end
 
-function LUIE.Disband()
-    GroupDisband()
-
+function LUIE.SlashDisband()
     -- Check to make sure player is in a group
     if GetGroupSize() <= 1 then
         LUIE.PrintToChat(GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_IN_A_GROUP))
         return
     end
-
     -- Check to make sure player is the leader
     if not IsUnitGroupLeader("player") then
         LUIE.PrintToChat(GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_THE_LEADER))
         return
     end
-
     -- Check to make sure we're not in LFG
     local isLFG = IsInLFGGroup()
     if isLFG then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_LFG_ACTIVITY))
         return
     end
+    
+    GroupDisband()
 end
 
-function LUIE.LeaveGroup()
+function LUIE.SlashGroupLeave()
     GroupLeave()
     local groupSize = GetGroupSize()
     if groupSize <= 1 then
@@ -416,8 +413,7 @@ function LUIE.LeaveGroup()
     end
 end
 
-function LUIE.GroupKick(option)
-
+function LUIE.SlashGroupKick(option)
     -- Rather then error out, let the player use /kick and /remove as a substitute for /votekick and /voteremove in LFG
     if IsInLFGGroup() then
         if option == "" then
@@ -434,18 +430,16 @@ function LUIE.GroupKick(option)
         LUIE.PrintToChat(GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_IN_A_GROUP))
         return
     end
-
     -- Check to make sure player is the leader
     if not IsUnitGroupLeader("player") then
         LUIE.PrintToChat(GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_THE_LEADER))
         return
     end
-    
+
     if option == "" then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME))
         return
     end
-
 
     local g_partyKick = { }
     local kickedMemberName
@@ -474,12 +468,12 @@ function LUIE.GroupKick(option)
                 GroupLeave()
             else
                 unitToKick = kickcompare.memberTag
-                GroupKick(unitToKick)
+                SlashGroupKick(unitToKick)
             end
             return
         end
     end
-    
+
     LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME))
 end
 
@@ -561,7 +555,7 @@ function LUIE.SlashGuildInvite(option)
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_INV))
         return
     end
-    
+
     -- If we try to invite a player to a guild we don't have display an error and end.
     if guildnumber == nil then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_INV))
@@ -580,7 +574,7 @@ function LUIE.SlashGuildInvite(option)
     LUIE.PrintToChat(zo_strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE), name, guildNameAlliance))
 end
 
-function LUIE.GQuit(guildnumber)
+function LUIE.SlashGuildQuit(guildnumber)
     if guildnumber == "1" and LUIE.GuildIndexData[1] then
         guildnumber = LUIE.GuildIndexData[1].id
     elseif guildnumber == "2" and LUIE.GuildIndexData[2] then
@@ -601,12 +595,12 @@ function LUIE.GQuit(guildnumber)
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE))
         return
     end
-    
+
     -- If neither of the above errors were triggered, leave the guild number.
-    GuildLeave(guildnumber) 
+    GuildLeave(guildnumber)
 end
 
-function LUIE.GKick(option)
+function LUIE.SlashGuildKick(option)
     -- If no input was entered, display an error and end.
     if option == "" then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK))
@@ -784,23 +778,23 @@ function LUIE.SlashTrade(option)
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME))
         return
     end
-    
+
     TradeInviteByName(option)
 end
 
 function LUIE.SlashVoteKick(option)
-
-
+    -- Check to make sure player is in a group
     if GetGroupSize() <= 1 then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFG))
         return
     end
-
+    
+    -- Check to make sure we're not in LFG
     if not IsInLFGGroup() then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFG))
         return
     end
-    
+
     if option == "" then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NONAME))
         return
@@ -838,35 +832,34 @@ function LUIE.SlashVoteKick(option)
             end
         end
     end
-    
+
     BeginGroupElection(GROUP_ELECTION_TYPE_KICK_MEMBER, ZO_GROUP_ELECTION_DESCRIPTORS.NONE, unitToKick)
-    
 end
 
 -- Slash Commands
-SLASH_COMMANDS["/regroup"] = LUIE.RegroupDisband
-SLASH_COMMANDS["/disband"] = LUIE.Disband
-SLASH_COMMANDS["/leave"] = LUIE.LeaveGroup
-SLASH_COMMANDS["/leavegroup"] = LUIE.LeaveGroup
-SLASH_COMMANDS["/kick"] = LUIE.GroupKick
-SLASH_COMMANDS["/remove"] = LUIE.GroupKick
-SLASH_COMMANDS["/groupkick"] = LUIE.GroupKick
-SLASH_COMMANDS["/groupremove"] = LUIE.GroupKick
-SLASH_COMMANDS["/home"] = LUIE.PortPrimaryHome
-SLASH_COMMANDS["/trade"] = LUIE.SlashTrade
-SLASH_COMMANDS["/votekick"] = LUIE.SlashVoteKick
-SLASH_COMMANDS["/voteremove"] = LUIE.SlashVoteKick
-
-SLASH_COMMANDS["/ginvite"] = LUIE.SlashGuildInvite
-SLASH_COMMANDS["/gquit"] = LUIE.GQuit
-SLASH_COMMANDS["/gkick"] = LUIE.GKick
-SLASH_COMMANDS["/addfriend"] = LUIE.SlashFriend
-SLASH_COMMANDS["/friend"] = LUIE.SlashFriend
-SLASH_COMMANDS["/addignore"] = LUIE.SlashIgnore
-SLASH_COMMANDS["/ignore"] = LUIE.SlashIgnore
-SLASH_COMMANDS["/unfriend"] = LUIE.SlashRemoveFriend
+-- Safe commands
+SLASH_COMMANDS["/regroup"]      = LUIE.SlashRegroup
+SLASH_COMMANDS["/disband"]      = LUIE.SlashDisband
+SLASH_COMMANDS["/leave"]        = LUIE.SlashGroupLeave
+SLASH_COMMANDS["/leavegroup"]   = LUIE.SlashGroupLeave
+SLASH_COMMANDS["/kick"]         = LUIE.SlashGroupKick
+SLASH_COMMANDS["/remove"]       = LUIE.SlashGroupKick
+SLASH_COMMANDS["/groupkick"]    = LUIE.SlashGroupKick
+SLASH_COMMANDS["/groupremove"]  = LUIE.SlashGroupKick
+SLASH_COMMANDS["/home"]         = LUIE.SlashHome
+SLASH_COMMANDS["/trade"]        = LUIE.SlashTrade
+SLASH_COMMANDS["/votekick"]     = LUIE.SlashVoteKick
+SLASH_COMMANDS["/voteremove"]   = LUIE.SlashVoteKick
+SLASH_COMMANDS["/guildinvite"]  = LUIE.SlashGuildInvite
+SLASH_COMMANDS["/guildquit"]    = LUIE.SlashGuildQuit
+SLASH_COMMANDS["/guildkick"]    = LUIE.SlashGuildKick
+SLASH_COMMANDS["/addfriend"]    = LUIE.SlashFriend
+SLASH_COMMANDS["/friend"]       = LUIE.SlashFriend
+SLASH_COMMANDS["/addignore"]    = LUIE.SlashIgnore
+SLASH_COMMANDS["/ignore"]       = LUIE.SlashIgnore
+SLASH_COMMANDS["/unfriend"]     = LUIE.SlashRemoveFriend
 SLASH_COMMANDS["/removefriend"] = LUIE.SlashRemoveFriend
-SLASH_COMMANDS["/unignore"] = LUIE.SlashRemoveIgnore
+SLASH_COMMANDS["/unignore"]     = LUIE.SlashRemoveIgnore
 SLASH_COMMANDS["/removeignore"] = LUIE.SlashRemoveIgnore
 
 -- Hook initialization
