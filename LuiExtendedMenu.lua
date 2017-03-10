@@ -11,28 +11,28 @@ function LUIE_CreateSettings()
     local StatusbarTexturesList = {}
     
     -- Get Fonts
-    for f in pairs( LUIE.Fonts ) do
+    for f in pairs(LUIE.Fonts) do
         table.insert(FontsList, f)
     end
-    for key, _ in pairs( LUIE.CombatInfo.FontFamilies ) do
-        table.insert( FontsListCombatInfo, key )
+    for key, _ in pairs(LUIE.CombatInfo.FontFamilies) do
+        table.insert(FontsListCombatInfo, key)
     end
-    for key, _ in pairs( LUIE.StatusbarTextures ) do
-        table.insert( StatusbarTexturesList, key )
+    for key, _ in pairs(LUIE.StatusbarTextures) do
+        table.insert(StatusbarTexturesList, key)
     end
 
-    local styleOptions                  = {"normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline"}
-    local nameDisplayOptions            = {"@UserID", "Character Name", "Character Name @UserID"}
+    local styleOptions                  = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" }
+    local nameDisplayOptions            = { "@UserID", "Character Name", "Character Name @UserID" }
     local nameDisplayOptionsKeys        = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
-    local chatnameDisplayOptions        = {"@UserID", "Character Name", "Character Name @UserID"}
+    local chatnameDisplayOptions        = { "@UserID", "Character Name", "Character Name @UserID" }
     local chatnameDisplayOptionsKeys    = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
-    local currencyBracketOptions        = {"[]", "()", "Hyphen", "No Brackets"}
+    local currencyBracketOptions        = { "[]", "()", "Hyphen", "No Brackets" }
     local currencyBracketOptionsKeys    = { ["[]"] = 1, ["()"] = 2, ["Hyphen"] =3, ["No Brackets"] = 4 }
-    local itemBracketOptions            = {"[]", "()", "Hyphen", "No Brackets"}
+    local itemBracketOptions            = { "[]", "()", "Hyphen", "No Brackets" }
     local itemBracketOptionsKeys        = { ["[]"] = 1, ["()"] = 2, ["Hyphen"] =3, ["No Brackets"] = 4 }
-    local experienceDisplayOptions      = {"Value", "Percentage", "Both"}
+    local experienceDisplayOptions      = { "Value", "Percentage", "Both" }
     local experienceDisplayOptionsKeys  = { ["Value"] = 1, ["Percentage"] = 2, ["Both"] = 3 }
-    local guildrankDisplayOptions       = { "Self Only", "Self + All w/ Permissions", "Display All Rank Changes"}
+    local guildrankDisplayOptions       = { "Self Only", "Self + All w/ Permissions", "Display All Rank Changes" }
     local guildrankDisplayOptionsKeys   = { ["Self Only"] = 1, ["Self + All w/ Permissions"] = 2, ["Display All Rank Changes"] = 3 }
     local rotationOptions               = { "Horizontal", "Vertical" }
     local rotationOptionsKeys           = { ["Horizontal"] = 1, ["Vertical"] = 2 }
@@ -1800,7 +1800,7 @@ function LUIE_CreateSettings()
                         -- Hide Gold Spent on AH
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TOOLTIP),
+                        tooltip = strformat("<<1>>\n<<2>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TOOLTIP), GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_NOTE)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GoldHideAHSpente end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldHideAHSpent = value end,
                         width = "full",
@@ -2562,8 +2562,9 @@ function LUIE_CreateSettings()
                 },
             },
             {
+                -- CA Experience Announcements Options Submenu
                 type = "submenu",
-                name = "Achievements Announcements",
+                name = GetString(SI_LUIE_LAM_CA_ACHIEVE_HEADER),
                 reference = "Chat_Announcements_Options_Achievements_Announcements_Submenu",
                 controls = {
                     {

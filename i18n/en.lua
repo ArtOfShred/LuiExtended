@@ -35,6 +35,7 @@ ZO_CreateStringId("SI_LUIE_CA_DEBUG_MSG_CURRENCY",                      "Currenc
 ZO_CreateStringId("SI_LUIE_CA_DEFAULTVARS_CURRENCYTOTALMESSAGE",        "[New Total]")
 ZO_CreateStringId("SI_LUIE_CA_DEFAULTVARS_EXPERIENCECONTEXTNAME",       "[Earned]")
 ZO_CreateStringId("SI_LUIE_CA_DEFAULTVARS_EXPERIENCEPROGRESSNAME",      "[Progress]")
+
 ZO_CreateStringId("SI_LUIE_CA_DUEL_COUNTDOWN_CSA",                      "Duel Starts in <<1>>...")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_ACCEPTED",                    "Duel challenge accepted.")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_CANCELED",                    "Duel challenge cancelled.")
@@ -61,6 +62,7 @@ ZO_CreateStringId("SI_LUIE_CA_DUEL_RESULT1",                            "|cFEFEF
 ZO_CreateStringId("SI_LUIE_CA_DUEL_STARTED",                            "Duel started!")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_STATE1",                             "You are currently waiting for a duel challenge response from |cFEFEFE<<1>>|r.")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_STATE2",                             "You are currently considering a duel challenge from |cFEFEFE<<1>>|r.")
+
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_FRIEND_ADDED",                    "<<1>> added to friends.")
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_FRIEND_ADDED_ALT",                "|cFEFEFE<<1>>|r added to friends.") -- Replaces default syntax style string with LUIE style
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_FRIEND_INVITE_DECLINED",          "Friend invite declined.")
@@ -74,6 +76,7 @@ ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED",               "|cFEFEF
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED",             "|cFEFEFE<<1>>|r removed from ignored.")
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_LOGGED_OFF",                 "|cFEFEFE<<1>>|r has logged off.")
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_LOGGED_ON",                  "|cFEFEFE<<1>>|r has logged on.")
+
 ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE0",                    "Could not find a player named \"|cFEFEFE<<1>>|r\" to invite.")
 ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE1",                    "|cFEFEFE<<1>>|r accepted your group invitation.")
 ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE10",                   "You have invited \"|cFEFEFE<<1>>|r\" to join your group.")
@@ -85,6 +88,7 @@ ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE4",                    "|cFEFEF
 ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE5",                    "|cFEFEFE<<1>>|r is already in a group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE8",                    "You must be the group leader to extend a group invitation.")
 ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE9",                    "|cFEFEFE<<1>>|r is a member of another alliance.")
+
 ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_ALERT_LFG_JOINED",           "You have joined an LFG group for |cFEFEFE<<1>>|r.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL",       "A vote to kick <<1>> from the group has failed.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL_ALT",   "A vote to kick |cFEFEFE<<1>>|r from the group has failed.") -- When localize option is turned on, this replaces other format.
@@ -162,7 +166,6 @@ ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_FAILED_UNKNOWN_PLAYER",         "Can't s
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_SUCCESS",                       "Mail sent!")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG",                  "Mail sent with <<1>> gold!")
 
-
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT0",                "|cFEFEFE<<1>>|r is too busy to pledge with.")
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT1",                "|cFEFEFE<<1>>|r can't use Pledge of Mara while a player is dead.")
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT2",                "Beginning Ritual of Mara with |cFEFEFE<<1>>|r.")
@@ -170,7 +173,6 @@ ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT3",                "|cFEFEF
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT4",                "|cFEFEFE<<1>>|r has declined the Ritual of Mara request")
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT6",                "|cFEFEFE<<1>>|r is not eligible for the Ritual of Mara.")
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT7",                "You are too far away from |cFEFEFE<<1>>|r to perform the Ritual of Mara.")
-
 
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_ADDED",                    "Added")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_CONFISCATED",              "Confiscated")
@@ -198,10 +200,12 @@ ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_TRADED",                   "Traded"
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED",                 "Upgraded")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_USED",                     "Used")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW",                 "Withdrew")
+
 ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT1",                      "|cFEFEFE<<1>>|r is ignoring you.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_ACCEPTED",                   "Trade invite accepted.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_CONFIRM",                    "You have invited |cFEFEFE<<1>>|r to trade.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MESSAGE",                    "|cFEFEFE<<1>>|r has invited you to trade.")
+
 ZO_CreateStringId("SI_LUIE_CA_VAR_AND_GOLD_MSG",                        "<<1>> and gold.")
 ZO_CreateStringId("SI_LUIE_CA_VAR_AND_VAR_GOLD_MSG",                    "<<1>> and <<2>> gold.")
 
@@ -210,6 +214,7 @@ ZO_CreateStringId("SI_LUIE_LAM_RELOADUI",                               "This wi
 ZO_CreateStringId("SI_LUIE_LAM_RELOADUI_WARNING",                       "Will need to reload the UI.")
 ZO_CreateStringId("SI_LUIE_LAM_RESETPOSITION",                          "Reset position")
 ZO_CreateStringId("SI_LUIE_LAM_UNITFRAMES",                             "Unit Frames")
+
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_COLOUREDTIMELABEL",                 "Coloured time label")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_COLOUREDTIMELABE_TOOLTIP",          "Set the colour of text label same as icon border or keep it white.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_DESCENDINGSORT",                    "Descending sort direction")
@@ -318,8 +323,9 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS",               "Show se
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TOOLTIP",       "Format remaining text labes as \"12.3\" or keep only seconds \"12\".")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_UNLOCKWINDOW",                      "Unlock Buffs window")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_UNLOCKWINDOW_TOOLTIP",              "Unlock for dragging window with buffs icons. This will only unlock areas unaffected by previous option (if it is enabled).")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLORUP",                             "Color for positive loot/currency gains")
+
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLORDOWN",                           "Color for negative loot/currency gains")
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLORUP",                             "Color for positive loot/currency gains")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CSMBRACKET",                          "Bracket Settings for Context Specific Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CSMBRACKET_TOOLTIP",                  "Allows you to customize the format of the Brackets present on Context Specific Messages.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CSMOVERRIDE",                         "Allow override Context specific messages")
@@ -330,6 +336,9 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_GAIN_TOOLTIP",   "Enter a
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_LOSS",           "Context Override Message - Currency Loss")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_LOSS_TOOLTIP",   "Enter a string to replace the default context specific bracketed message displayed before NEGATIVE currency changes.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HEADER",                     "Currency Announcements")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT",            "Hide Gold spent on Guild Trader Purchases")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_NOTE",       "This is a useful if you are using an addon like Awesome Guild Store to announce trader purchases.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TOOLTIP",    "Toggle this option to hide the display of gold spent on Guild Trader purchases.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAP",                     "Show Alliance Point Changes")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPCOLOR",                "Alliance Point Change Color")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPNAME",                 "Alliance Point Name")
@@ -404,11 +413,9 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABEL_TOOLTIP",       "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT",             "Throttle Experience gained in combat")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT_TOOLTIP",     "Setting this option higher than 0 allows you to throttle XP gain by X seconds.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_HEADER",                              "Chat Announcements Options")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT",            "Hide Gold spent on Guild Trader Purchases")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TOOLTIP",    "Toggle this option to hide the display of gold spent on Guild Trader purchases - this is a useful if you are using an addon like Awesome Guild Store to announce trader purchases.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_COLLECTIBLE",                    "Show Collectibles Unlocked")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_COLLECTIBLE_TOOLTIP",            "Display a lootlog style message in chat when a collectible is added or unlocked.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_COLLECTIBLE_COLOR",              "Color Context Message Color")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_COLLECTIBLE_TOOLTIP",            "Display a lootlog style message in chat when a collectible is added or unlocked.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_CSMLOOT_GAIN",                   "Context Specific Override Message - Loot")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_CSMLOOT_GAIN_TOOLTIP",           "Enter a string to replace the default context specific bracketed message displayed before item changes.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_HEADER",                         "Loot Announcements")
@@ -453,16 +460,13 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWTRADE",                      "Show Tr
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWTRADE_TOOLTIP",              "Display items received or lost in a trade.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWVENDOR",                     "Show Vendor Inventory Changes")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWVENDOR_TOOLTIP",             "Display items purchased or sold at a vendor.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_HEADER",                         "Miscellaneous Announcements")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG",                    "Show Bag/Bank Upgrade Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TOOLTIP",            "Print a notification to chat when bag or bank space upgrades are purchased ingame or through the crown store.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_DUEL",                           "Show Duel Event Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_DUEL_TOOLTIP",                   "Print a notification to chat for duel invites and events.")
-
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_HEADER",                         "Miscellaneous Announcements")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_MARA",                           "Show Pledge of Mara Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_MARA_TOOLTIP",                   "Print a notification to chat Pledge of Mara events.")
-
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG",                    "Show Bag/Bank Upgrade Messages")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TOOLTIP",            "Print a notification to chat when bag or bank space upgrades are purchased ingame or through the crown store.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISE",                   "Show Disguise Status Change Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISEALERT",              "\t\t\tShow Disguise Alert Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISEALERT_TOOLTIP",      "Print a notification to chat when near a sentry or performing suspicious activity while disguised.")
@@ -493,6 +497,11 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWTRADE",                      "Show Tr
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWTRADE_TOOLTIP",              "Prints a notification to chat for trade invitations, cancellation, and success.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD",                   "Player Name Display Method")
 ZO_CreateStringId("SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TOOLTIP",           "Determines the method used to display player names in Chat Announcements where applicable.\nDefault: Character Name")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_HEADER",                      "Achievements Announcements")
+
+
+
 ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_ALERTS_ENABLEDEATH",          "Enable group member death alert")
 ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_ALERTS_ENABLEDEATH_TOOLTIP",  "Display an alert when group member dies.")
 ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_ALERTS_ENABLETIPS",           "Enable Active Combat Tips alerts")
@@ -515,6 +524,8 @@ ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_CLOUDTYPE_HEADER",            "Cloud-t
 ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_CLOUDTYPE_RESETPOSITION",     "This will reset position of Info Panel into screen top right corner.")
 ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_CLOUDTYPE_UNLOCK",            "Unlock Areas")
 ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_CLOUDTYPE_UNLOCK_TOOLTIP",    "Allow mouse dragging for different floating text areas.")
+ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_COMBATSTATE",                 "Enable Combat State notification")
+ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_COMBATSTATE_TOOLTIP",         "Enable notification when players enters or leaves combat.")
 ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_COMMON_COMBATTEXT",           "Show combat related text")
 ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_COMMON_COMBATTEXT_TOOLTIP",   "Display floating numbers for various combat related events (damage, healing, etc).")
 ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_COMMON_DMGCOLORS",            "Enable damage-type dependent colours")
@@ -555,8 +566,6 @@ ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_LARGEFONT",                   "Large F
 ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_LARGEFONT_TOOLTIP",           "Large font is used to for critical damage hits and experience gain labels.")
 ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_MEDIUMFONT",                  "Medium Font Size")
 ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_MEDIUMFONT_TOOLTIP",          "Medium Font Size")
-ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_COMBATSTATE",                 "Enable Combat State notification")
-ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_COMBATSTATE_TOOLTIP",         "Enable notification when players enters or leaves combat.")
 ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_SCROLLTYPE_ENABLE",           "Enable Scrolling-type areas")
 ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_SCROLLTYPE_HEADER",           "Scrolling-type areas text options")
 ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_SCROLLTYPE_QEVENTS",          "Allow drop of some queued events")
@@ -574,6 +583,7 @@ ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_SMALLFONT_TOOLTIP",           "Small f
 ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_THRESHOLD",                   "Threshold level, %")
 ZO_CreateStringId("SI_LUIE_LAM_COMBATINFO_ULTIMATETRACKING_HEADER",     "Ultimate Tracking options")
 ZO_CreateStringId("SI_LUIE_LAM_COMPATIBILITY_WARNING",                  "Disable this option if you are having compatibility issues with other addons.")
+
 ZO_CreateStringId("SI_LUIE_LAM_INFOPANEL_DISABLECOLORSRO",              "Disable colours on read-only values")
 ZO_CreateStringId("SI_LUIE_LAM_INFOPANEL_DISABLECOLORSRO_TOOLTIP",      "Disable value-dependent colour of the information label for items that you don't have direct control: Currently this includes FPS and Latency labels.")
 ZO_CreateStringId("SI_LUIE_LAM_INFOPANEL_ELEMENTS_HEADER",              "Info Panel elements")
@@ -595,3 +605,4 @@ ZO_CreateStringId("SI_LUIE_LAM_INFOPANEL_SHOWPANEL_TOOLTIP",            "Info mi
 ZO_CreateStringId("SI_LUIE_LAM_INFOPANEL_SHOWSOULGEMS",                 "Show Soul Gems")
 ZO_CreateStringId("SI_LUIE_LAM_INFOPANEL_UNLOCKPANEL",                  "Unlock panel")
 ZO_CreateStringId("SI_LUIE_LAM_INFOPANEL_UNLOCKPANEL_TOOLTIP",          "Allow mouse dragging for Info Panel.")
+
