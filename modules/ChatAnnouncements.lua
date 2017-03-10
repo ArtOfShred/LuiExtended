@@ -1656,63 +1656,25 @@ end
 
 -- Gold Change Announcements
 function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
+
     g_comboString = ""
-
-    --[[
-    BIG ASS INDEX OF CURRENCY CHANGE EVENT REASONS AND WHAT THEY DO:
-    reason 0 = loot from Chest
-    reason 1 = sell/buy from merchant
-    reason 2 = send/recieve money in mail
-    reason 3 = spend/receive money in trade
-    reason 4 = quest reward
-    reason 5 = spent on NPC conversation
-    reason 8 = spent - Bag Space Upgrade
-    reason 9 = spent - Bank Space Upgrade
-    reason 19 = spent - Wayshrine Cost
-    reason 20 = Receieve from COD (Untested)
-    reason 28 = Spent - Mount Feed
-    reason 29 - Spent - Repairs
-    reason 31 = Spent - Buy on AH
-    reason 32 = Received - AH Refund (Untested)
-    reason 33 = Spent - AH Listing Fee
-    reason 42 = Deposit - Bank
-    reason 43 = Withdraw - Bank
-    reason 44 = Spent - Respec Skills
-    reason 45 = Spell - Respec Attributes
-    reason 47 = Spent - Bounty Paid to Guard
-    reason 48 = Spent - Unstuck Function
-    reason 49 = Spent - Edit Guild Heraldry (Untested)
-    reason 50 = Spent - Bought a guild tabard
-    reason 51 = Deposit - G Bank
-    reason 52 = Withdraw - G Bank
-    reason 53 = Guild Standard (Untested) - I'm not sure what this is, assuming Spent?
-    reason 54 = Jump Failure (Untested) - Guessing this is a gain in gold if Wayshrine jump fails somehow, IDK wtf
-    reason 55 = Spent - Respec Morphs
-    reason 56 = Spent - Pay bounty to Fence
-    reason 57 = Loss - Bounty confiscated if killed by guard
-    reason 58 = Guild Forward Camp (Untested) - Not sure what this one is either
-    reason 59 = Looted - Pickpocket (Untested) (Don't think any NPC's have gold in their pockets)
-    reason 60 = Spent - Launder
-    reason 61 = Spent - Champion Respec
-    reason 62 = Looted - Stolen loot or chest (BUG NOTE: No event fired from Justice Chests UNLESS gold is specifically looted)
-    reason 63 = Received - Sold Stolen
-    reason 64 = Spent - Buyback
-    reason 65 = PVP Kill Transfer??? (Untested)
-    reason 66 = Bank Fee??? (Untested)
-    reason 67 = Death??? (Untested)
-    ]]--
-
     local UpOrDown     = newMoney - oldMoney
-    local currentMoney = CommaValue(GetCurrentMoney())
-    local color        = ""
-    local changetype   = ""
-    local message      = ""
-    local total        = ""
-    local plural       = "s"
-    local formathelper = " "
-    local bracket1     = ""
-    local bracket2     = ""
-    local syntax       = ""
+    
+    -- If the total gold change was 0 then we don't waste any more resoureces and end this now
+    if UpOrDown == 0 then
+        return
+    end
+    
+    local currentMoney = ZO_LocalizeDecimalNumber(GetCurrentMoney())
+    local color              -- Gets the value from ChangeUpColorize or ChangeDownColorize to color strings
+    local changetype         -- Amount of currency gained or lost
+    local bracket1           -- Leading bracket
+    local bracket2           -- Trailing bracket
+    local message            -- Combined String Part 1: Context Message
+    local syntax             -- Combined String Part 2: Currency Change and Icon
+    local total              -- Combined String Part 3: Total String
+    local plural       = "s" -- Adds an "s" onto the end of plural values of currency when not using a set string
+    local formathelper = " " -- Places a spacer between the amount of currency and the name used for currency. This spacer is overwritten based on certain currency name string situations.
     local mailHelper   = false
 
     if CA.SV.CurrencyBracketDisplayOptions == 1 then
@@ -1729,18 +1691,13 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         bracket2 = ""
     end
 
-    -- If the total gold change was 0 then we end this now
-    if UpOrDown == 0 then
-        return
-    end
-
     -- Determine the color of the text based on whether we gained or lost gold
     if UpOrDown > 0 then
-        color = "|c0B610B"
-        changetype = CommaValue(newMoney - oldMoney)
+        color = ChangeUpColorize
+        changetype = ZO_LocalizeDecimalNumber(newMoney - oldMoney)
     else
-        color = "|ca80700"
-        changetype = CommaValue(oldMoney - newMoney)
+        color = ChangeDownColorize
+        changetype = ZO_LocalizeDecimalNumber(oldMoney - newMoney)
     end
 
     -- If we only recieve or lose 1 Gold, don't add an "s" onto the end of the name
@@ -1770,7 +1727,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         else
             message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SENT)
         end
-        changetype = CommaValue (oldMoney - newMoney - g_postageAmount)
+        changetype = ZO_LocalizeDecimalNumber(oldMoney - newMoney - g_postageAmount)
         mailHelper = true
 
     -- Receive/Give Money in a Trade (Likely consolidate this later)
@@ -1781,13 +1738,13 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     elseif reason == 4 or reason == 32 or reason == 63 then
         message = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Receieved"
 
-    -- Spend - NPC Conversation (5), Bag Space (8), Bank Space (9), Wayshrine (19), Mount Feed (28), Repairs (29), Respec Skills (44), Respec Attributes (45),
+    -- Spend - NPC Conversation (5), Bag Space (8), Bank Space (9), Wayshrine (19), Mount Feed (28), Repairs (29), AH Listing Fee (33), Respec Skills (44), Respec Attributes (45),
     -- Unstuck (48), Edit Guild Heraldry (49), Buy Guild Tabard (50), Respec Morphs (55), Pay Fence (56), Launder (60), Champion Respec (61), Buyback (64)
-    elseif reason == 5 or reason == 8 or reason == 9 or reason == 19 or reason == 28 or reason == 29 or reason == 44 or reason == 45 or reason == 48 or reason == 49 or reason == 50 or reason == 55 or reason == 56 or reason == 60 or reason == 61 or reason == 64 then
+    elseif reason == 5 or reason == 8 or reason == 9 or reason == 19 or reason == 28 or reason == 29 or reason == 33 or reason == 44 or reason == 45 or reason == 48 or reason == 49 or reason == 50 or reason == 55 or reason == 56 or reason == 60 or reason == 61 or reason == 64 then
         message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SPENT)
     
-    -- Buy on AH (31) or AH Listing Fee (33)
-    elseif reason == 31 or reason == 33 then
+    -- Buy on AH (31)
+    elseif reason == 31 then
         if CA.SV.GoldHideAHSpent then return end
         message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SPENT)
 
@@ -1848,32 +1805,35 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     else message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTED) end
 
     if CA.SV.CurrencyContextToggle then -- Override with custom string if enabled
-        if color == ( "|c0B610B" ) then
+        if color == ChangeUpColorize then
             message = CA.SV.CurrencyContextMessageUp
         else
             message = CA.SV.CurrencyContextMessageDown
         end
     end
+    
+    -- Creates initial message
+    message = color:Colorize(strfmt("%s%s%s", bracket1, message, bracket2))
 
     -- Determines syntax based on whether icon is displayed or not, we use "ICON - GOLD CHANGE AMOUNT" if so, and "GOLD CHANGE AMOUNT - GOLD" if not
     if CA.SV.CurrencyIcons then
-        syntax = GoldColorize:Colorize(strformat(" |t16:16:/esoui/art/currency/currency_gold.dds|t <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.GoldName, plural))
+        syntax = GoldColorize:Colorize(strfmt(" |t16:16:/esoui/art/currency/currency_gold.dds|t %s%s%s%s", changetype, formathelper, CA.SV.GoldName, plural))
     else
-        syntax = GoldColorize:Colorize(strformat(" <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.GoldName, plural))
+        syntax = GoldColorize:Colorize(strfmt(" %s%s%s%s", changetype, formathelper, CA.SV.GoldName, plural))
     end
 
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if not mailHelper then
         if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. GoldColorize:Colorize(currentMoney) )
+            total = CA.SV.TotalGoldChange and strfmt(" %s %s", color:Colorize(CA.SV.CurrencyTotalMessage), GoldColorize:Colorize(currentMoney))
         elseif CA.SV.TotalGoldChange and CA.SV.CurrencyIcons then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. GoldColorize:Colorize(currentMoney) )
+            total = CA.SV.TotalGoldChange and strfmt(" %s |t16:16:/esoui/art/currency/currency_gold.dds|t %s", color:Colorize(CA.SV.CurrencyTotalMessage), GoldColorize:Colorize(currentMoney))
         else
             total = ""
         end
         -- Print a message to chat based off all the values we filled in above
         if CA.SV.GoldChange and CA.SV.LootCurrencyCombo and UpOrDown < 0 and (reason == 1 or reason == 63 or reason == 64) then
-            g_comboString = ( strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
+            g_comboString = ( strfmt(" → %s%s%s", message, syntax, total) )
         elseif CA.SV.MiscMail and reason == 2 then
             if not g_mailStop and g_mailStringPart1 ~= "" then
                 if not CA.SV.GoldChange then
@@ -1889,34 +1849,34 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
                 end
             end
             if CA.SV.GoldChange then
-                printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
+                printToChat(strfmt("%s%s%s", message, syntax, total))
             end
             g_mailStringPart1 = ""
         elseif CA.SV.GoldChange and reason == 3 and CA.SV.MiscTrade and UpOrDown < 0 then
-            g_tradeString1 = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
+            g_tradeString1 = ( strfmt("%s%s%s", message, syntax, total) )
         elseif CA.SV.GoldChange and reason == 3 and CA.SV.MiscTrade and UpOrDown > 0 then
-            g_tradeString2 = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
+            g_tradeString2 = ( strfmt("%s%s%s", message, syntax, total) )
         elseif CA.SV.GoldChange and CA.SV.LootCurrencyCombo and reason == 28 then
-            g_comboString = ( strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
+            g_comboString = ( strfmt(" → %s%s%s", message, syntax, total) )
         elseif CA.SV.GoldChange and reason == 47 then
-            g_stealString = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
+            g_stealString = ( strfmt("%s%s%s", message, syntax, total) )
             local latency = GetLatency()
             latency = latency + 50
             zo_callLater(CA.JusticeStealRemove, latency)
          elseif CA.SV.GoldChange and reason == 57 then
-            g_stealString = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
+            g_stealString = ( strfmt("%s%s%s", message, syntax, total) )
             local latency = GetLatency()
             latency = latency + 50
             zo_callLater(CA.JusticeStealRemove, latency)
         elseif CA.SV.GoldChange and CA.SV.LootCurrencyCombo and UpOrDown > 0 and (reason == 1 or reason == 63 or reason == 64) then
-            g_comboString = ( strformat(" ← <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
+            g_comboString = ( strfmt(" ← %s%s%s", message, syntax, total) )
         elseif CA.SV.GoldChange and CA.SV.LootCurrencyCombo and CA.SV.MiscBags and (reason == 8 or reason == 9) then
-            g_comboString = ( strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
+            g_comboString = ( strfmt(" → %s%s%s", message, syntax, total) )
         elseif CA.SV.GoldChange and UpOrDown < 0 and reason == 60 then
-            g_launderGoldstring = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
+            g_launderGoldstring = ( strfmt("%s%s%s", message, syntax, total) )
         else
             if CA.SV.GoldChange then
-                printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
+                printToChat(strfmt("%s%s%s", message, syntax, total))
             end
         end
     else
@@ -1924,21 +1884,21 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         local valuesent = ""
         local totalwithoutpostage = 0
         if g_postageAmount ~= 0 then
-            totalWithoutPostage = CommaValue ( oldMoney - g_postageAmount )
+            totalWithoutPostage = ZO_LocalizeDecimalNumber ( oldMoney - g_postageAmount )
         else
-            totalWithoutPostage = CommaValue ( oldMoney )
+            totalWithoutPostage = ZO_LocalizeDecimalNumber ( oldMoney )
         end
 
         if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. GoldColorize:Colorize(currentMoney) )
+            total = CA.SV.TotalGoldChange and strfmt(" %s %s", color:Colorize(CA.SV.CurrencyTotalMessage), GoldColorize:Colorize(currentMoney))
         elseif CA.SV.TotalGoldChange and CA.SV.CurrencyIcons then
-            total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. GoldColorize:Colorize(currentMoney) )
+            total = CA.SV.TotalGoldChange and strfmt(" %s |t16:16:/esoui/art/currency/currency_gold.dds|t %s", color:Colorize(CA.SV.CurrencyTotalMessage), GoldColorize:Colorize(currentMoney))
         else
             total = ""
         end
-
+        
         if CA.SV.MiscMail and g_postageAmount == 0 and g_mailMoney == 0 and g_mailCOD == 0 and not CA.SV.GoldChange then
-            printToChat(strformat(GetString(SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT1), changetype))
+            printToChat(strfmt(GetString(SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT1), changetype))
         end
         if CA.SV.MiscMail and g_postageAmount == 0 and g_mailMoney == 0 and g_mailCOD == 0 and CA.SV.GoldChange then
             printToChat(GetString(SI_LUIE_CA_MAIL_COD_GOLD_SENT))
@@ -1947,37 +1907,37 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             printToChat(GetString(SI_LUIE_CA_MAIL_SENT_SUCCESS))
         end
         if CA.SV.MiscMail and g_mailMoney ~= 0 and not CA.SV.GoldChange then
-            printToChat(strformat(GetString(SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG), g_mailMoney) )
+            printToChat(strfmt(GetString(SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG), g_mailMoney) )
         end
         if CA.SV.MiscMail and g_mailMoney ~= 0 and CA.SV.GoldChange then
             printToChat(GetString(SI_LUIE_CA_MAIL_SENT_SUCCESS))
         end
         if CA.SV.MiscMail and g_mailCOD ~= 0 and not CA.SV.GoldChange then
-            printToChat(strformat(GetString(SI_LUIE_CA_MAIL_COD_GOLD_SENT2), g_mailCOD) )
+            printToChat(strfmt(GetString(SI_LUIE_CA_MAIL_COD_GOLD_SENT2), g_mailCOD) )
         end
         if CA.SV.MiscMail and g_mailCOD ~= 0 and CA.SV.GoldChange then
             printToChat(GetString(SI_LUIE_CA_MAIL_COD_SENT_SUCCESS))
         end
 
-        valuesent = ( strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total) )
+        valuesent = ( strfmt("%s%s%s", message, syntax, total) )
 
         if g_postageAmount ~= 0 then
-            local postagesyntax = CA.SV.CurrencyIcons and GoldColorize:Colorize(strformat( " |t16:16:/esoui/art/currency/currency_gold.dds|t " .. g_postageAmount .. formathelper .. CA.SV.GoldName .. plural)) or GoldColorize:Colorize(strformat( " " .. g_postageAmount .. formathelper .. CA.SV.GoldName .. plural))
-                -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
+            local postagesyntax = CA.SV.CurrencyIcons and GoldColorize:Colorize(strfmt( " |t16:16:/esoui/art/currency/currency_gold.dds|t " .. g_postageAmount .. formathelper .. CA.SV.GoldName .. plural)) or GoldColorize:Colorize(strfmt( " " .. g_postageAmount .. formathelper .. CA.SV.GoldName .. plural))
+
             if CA.SV.TotalGoldChange and not CA.SV.CurrencyIcons then
-                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. GoldColorize:Colorize(totalWithoutPostage) )
+                total = CA.SV.TotalGoldChange and strfmt(" %s %s", color:Colorize(CA.SV.CurrencyTotalMessage), GoldColorize:Colorize(totalWithoutPostage))
             elseif CA.SV.TotalGoldChange and CA.SV.CurrencyIcons then
-                total = CA.SV.TotalGoldChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_gold.dds|t " .. GoldColorize:Colorize(totalWithoutPostage) )
+                total = CA.SV.TotalGoldChange and strfmt(" %s |t16:16:/esoui/art/currency/currency_gold.dds|t %s", color:Colorize(CA.SV.CurrencyTotalMessage), GoldColorize:Colorize(totalWithoutPostage))
             else
                 total = ""
             end
             if CA.SV.CurrencyContextToggle then -- Override with custom string if enabled
-                message = CA.SV.CurrencyContextMessageDown
+                message = color:Colorize(strfmt("%s%s%s", bracket1, CA.SV.CurrencyContextMessageDown, bracket2))
             else
-                message = GetString(SI_GAMEPAD_MAIL_SEND_POSTAGE_LABEL) -- "Postage"
+                message = color:Colorize(strfmt("%s%s%s", bracket1, GetString(SI_GAMEPAD_MAIL_SEND_POSTAGE_LABEL), bracket2)) -- "Postage"
             end
             if CA.SV.GoldChange then
-                printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, postagesyntax, total))
+                printToChat(strfmt("%s%s%s", message, postagesyntax, total))
             end
         end
 
@@ -2001,18 +1961,24 @@ end
 
 -- Alliance Point Change Announcements
 function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, difference)
+
     g_comboString = ""
+    
+    -- If the total AP change was 0 then we end this now
+    if UpOrDown == alliancePoints then
+        return
+    end
 
     local UpOrDown     = alliancePoints + difference
-    local color        = ""
-    local changetype   = ""
-    local message      = ""
-    local total        = ""
-    local plural       = "s"
-    local formathelper = " "
-    local bracket1     = ""
-    local bracket2     = ""
-    local syntax       = ""
+    local color              -- Gets the value from ChangeUpColorize or ChangeDownColorize to color strings
+    local changetype         -- Amount of currency gained or lost
+    local bracket1           -- Leading bracket
+    local bracket2           -- Trailing bracket
+    local message            -- Combined String Part 1: Context Message
+    local syntax             -- Combined String Part 2: Currency Change and Icon
+    local total              -- Combined String Part 3: Total String
+    local plural       = "s" -- Adds an "s" onto the end of plural values of currency when not using a set string
+    local formathelper = " " -- Places a spacer between the amount of currency and the name used for currency. This spacer is overwritten based on certain currency name string situations.
 
     if CA.SV.CurrencyBracketDisplayOptions == 1 then
         bracket1 = "["
@@ -2028,19 +1994,14 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
         bracket2 = ""
     end
 
-    -- If the total AP change was 0 then we end this now
-    if UpOrDown == alliancePoints then
-        return
-    end
-
     -- Determine the color and message of the text based on whether we gained or lost Alliance Points
     if UpOrDown > alliancePoints then
-        color = "|c0B610B"
-        changetype = CommaValue( difference )
+        color = ChangeUpColorize
+        changetype = ZO_LocalizeDecimalNumber( difference )
         message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_EARNED)
     else
-        color = "|ca80700"
-        changetype = CommaValue( difference * -1 )
+        color = ChangeDownColorize
+        changetype = ZO_LocalizeDecimalNumber( difference * -1 )
         message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SPENT)
     end
 
@@ -2055,25 +2016,28 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
     end
 
     if CA.SV.CurrencyContextToggle then -- Override with custom string if enabled
-        if color == "|c0B610B" then
+        if color == ChangeUpColorize then
             message = CA.SV.CurrencyContextMessageUp
         else
             message = CA.SV.CurrencyContextMessageDown
         end
     end
+    
+    -- Creates initial message
+    message = color:Colorize(strfmt("%s%s%s", bracket1, message, bracket2))
 
     -- Determines syntax based on whether icon is displayed or not
     if CA.SV.CurrencyIcons then
-        syntax = APColorize:Colorize(strformat(" |t16:16:/esoui/art/currency/alliancepoints.dds|t <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.AlliancePointName, plural))
+        syntax = APColorize:Colorize(strfmt(" |t16:16:/esoui/art/currency/alliancepoints.dds|t %s%s%s%s", changetype, formathelper, CA.SV.AlliancePointName, plural))
     else
-        syntax = APColorize:Colorize(strformat(" <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.AlliancePointName, plural))
+        syntax = APColorize:Colorize(strfmt(" %s%s%s%s", changetype, formathelper, CA.SV.AlliancePointName, plural))
     end
 
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if CA.SV.TotalAlliancePointChange and not CA.SV.CurrencyIcons then
-        total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. "|r " .. APColorize:Colorize(CommaValue(alliancePoints)) )
+        total = CA.SV.TotalGoldChange and strfmt(" %s %s", color:Colorize(CA.SV.CurrencyTotalMessage), APColorize:Colorize(ZO_LocalizeDecimalNumber(alliancePoints)))
     elseif CA.SV.TotalAlliancePointChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalAlliancePointChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. "|r |t16:16:/esoui/art/currency/alliancepoints.dds|t " .. APColorize:Colorize(CommaValue(alliancePoints)) )
+        total = CA.SV.TotalGoldChange and strfmt(" %s |t16:16:/esoui/art/currency/currency_gold.dds|t %s", color:Colorize(CA.SV.CurrencyTotalMessage), APColorize:Colorize(ZO_LocalizeDecimalNumber(alliancePoints)))
     else
         total = ""
     end
@@ -2113,39 +2077,36 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
     -- ==============================================================================
 
     -- Print a message to chat based off all the values we filled in above
-    if CA.SV.LootCurrencyCombo and color == ( "|ca80700" ) then
-        g_comboString = (strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
+    if CA.SV.LootCurrencyCombo and color == ChangeUpColorize then
+        g_comboString = (strfmt(" → %s%s%s", message, syntax, total))
     else
         if difference > CA.SV.AlliancePointFilter then
-            printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
+            printToChat(strfmt("%s%s%s", message, syntax, total))
         end
     end
 end
 
 -- Tel Var Stones Change Announcements
 function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, reason)
+
     g_comboString = ""
-
-    --[[ Relevant Reason codes for Tel Var:
-    0  = Chest Loot
-    1  = Merchant Buy/Sell
-    42 = Deposit in Bank
-    43 = Withdraw from Bank
-    65 = PVP Kill Transfer (NPC or Player)
-    67 = Death (Player Dies)
-    ]]--
-
     local UpOrDown      = newTelvarStones - oldTelvarStones
-    local currentTelvar = CommaValue(newTelvarStones)
-    local color         = ""
-    local changetype    = ""
-    local message       = ""
-    local total         = ""
-    local plural        = "s"
-    local formathelper  = " "
-    local bracket1      = ""
-    local bracket2      = ""
-    local syntax        = ""
+    
+    -- If the total Tel Var change was 0 or Reason 35 = Player Init (Triggers when player changes zones) - End Now
+    if UpOrDown == 0 or reason == 35 then
+        return
+    end
+    
+    local currentTelvar = ZO_LocalizeDecimalNumber(newTelvarStones)
+    local color              -- Gets the value from ChangeUpColorize or ChangeDownColorize to color strings
+    local changetype         -- Amount of currency gained or lost
+    local bracket1           -- Leading bracket
+    local bracket2           -- Trailing bracket
+    local message            -- Combined String Part 1: Context Message
+    local syntax             -- Combined String Part 2: Currency Change and Icon
+    local total              -- Combined String Part 3: Total String
+    local plural       = "s" -- Adds an "s" onto the end of plural values of currency when not using a set string
+    local formathelper = " " -- Places a spacer between the amount of currency and the name used for currency. This spacer is overwritten based on certain currency name string situations.
 
     if CA.SV.CurrencyBracketDisplayOptions == 1 then
         bracket1 = "["
@@ -2161,23 +2122,13 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
         bracket2 = ""
     end
 
-    -- If the total Tel Var change was 0 then we end this now
-    if UpOrDown == 0 then
-        return
-    end
-
-    -- Reason 35 = Player Init (Triggers when player enters or exits Cyrodiil)
-    if reason == 35 then
-        return
-    end
-
     -- Determine the color of the text based on whether we gained or lost gold
     if UpOrDown > 0 then
-        color = "|c0B610B"
-        changetype = CommaValue(newTelvarStones - oldTelvarStones)
+        color = ChangeUpColorize
+        changetype = ZO_LocalizeDecimalNumber(newTelvarStones - oldTelvarStones)
     else
-        color = "|ca80700"
-        changetype = CommaValue(oldTelvarStones - newTelvarStones)
+        color = ChangeDownColorize
+        changetype = ZO_LocalizeDecimalNumber(oldTelvarStones - newTelvarStones)
     end
 
     -- If we only recieve or lose 1 Tel Var Stone, don't add an "s" onto the end of the name
@@ -2247,55 +2198,64 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
     else message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTED) end
 
     if CA.SV.CurrencyContextToggle then -- Override with custom string if enabled
-        if color == ( "|c0B610B" ) then
+        if color == ChangeUpColorize then
             message = CA.SV.CurrencyContextMessageUp
         else
             message = CA.SV.CurrencyContextMessageDown
         end
     end
+    
+    -- Creates initial message
+    message = color:Colorize(strfmt("%s%s%s", bracket1, message, bracket2))
 
     -- Determines syntax based on whether icon is displayed or not
     if CA.SV.CurrencyIcons then
-        syntax = TVColorize:Colorize(strformat(" |t16:16:/esoui/art/currency/currency_telvar.dds|t <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.TelVarStoneName, plural))
+        syntax = TVColorize:Colorize(strfmt(" |t16:16:/esoui/art/currency/currency_telvar.dds|t %s%s%s%s", changetype, formathelper, CA.SV.TelVarStoneName, plural))
     else
-        syntax = TVColorize:Colorize(strformat(" <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.TelVarStoneName, plural))
+        syntax = TVColorize:Colorize(strfmt(" %s%s%s%s", changetype, formathelper, CA.SV.TelVarStoneName, plural))
     end
 
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if CA.SV.TotalTelVarStoneChange and not CA.SV.CurrencyIcons then
-        total = CA.SV.TotalTelVarStoneChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. TVColorize:Colorize(currentTelvar) )
+        total = CA.SV.TotalGoldChange and strfmt(" %s %s", color:Colorize(CA.SV.CurrencyTotalMessage), TVColorize:Colorize(currentTelvar))
     elseif CA.SV.TotalTelVarStoneChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalTelVarStoneChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_telvar.dds|t " .. TVColorize:Colorize(currentTelvar) )
+        total = CA.SV.TotalGoldChange and strfmt(" %s |t16:16:/esoui/art/currency/currency_gold.dds|t %s", color:Colorize(CA.SV.CurrencyTotalMessage), TVColorize:Colorize(currentTelvar))
     else
         total = ""
     end
 
     -- Print a message to chat based off all the values we filled in above
     if CA.SV.LootCurrencyCombo and UpOrDown < 0 and reason == 1 then
-        g_comboString = (strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
+        g_comboString = (strfmt(" → %s%s%s", message, syntax, total))
     elseif CA.SV.LootCurrencyCombo and UpOrDown > 0 and reason == 1 then
-        g_comboString = (strformat(" ← <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
+        g_comboString = (strfmt(" ← %s%s%s", message, syntax, total))
     else
-        printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
+        printToChat(strfmt("%s%s%s", message, syntax, total))
     end
 
 end
 
 -- Writ Voucher Change Announcements
 function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, reason)
-    g_comboString = ""
 
+    -- If the total Writ Voucher change was 0 or Reason 35 = Player Init (Triggers when player changes zones) - End Now
+    if UpOrDown == 0 or reason == 35 then
+        return
+    end
+
+    g_comboString = ""
     local UpOrDown            = newWritVouchers - oldWritVouchers
-    local currentWritVouchers = CommaValue (newWritVouchers)
-    local color               = ""
-    local changetype          = ""
-    local message             = ""
-    local total               = ""
-    local plural              = "s"
-    local formathelper        = " "
-    local bracket1            = ""
-    local bracket2            = ""
-    local syntax              = ""
+    
+    local currentWritVouchers = ZO_LocalizeDecimalNumber(newWritVouchers)
+    local color              -- Gets the value from ChangeUpColorize or ChangeDownColorize to color strings
+    local changetype         -- Amount of currency gained or lost
+    local bracket1           -- Leading bracket
+    local bracket2           -- Trailing bracket
+    local message            -- Combined String Part 1: Context Message
+    local syntax             -- Combined String Part 2: Currency Change and Icon
+    local total              -- Combined String Part 3: Total String
+    local plural       = "s" -- Adds an "s" onto the end of plural values of currency when not using a set string
+    local formathelper = " " -- Places a spacer between the amount of currency and the name used for currency. This spacer is overwritten based on certain currency name string situations.
 
     if CA.SV.CurrencyBracketDisplayOptions == 1 then
         bracket1 = "["
@@ -2311,24 +2271,14 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
         bracket2 = ""
     end
 
-    -- If the total Tel Var change was 0 then we end this now
-    if UpOrDown == 0 then
-        return
-    end
-
-    -- Reason 35 = Player Init (Triggers when player changes zones)
-    if reason == 35 then
-        return
-    end
-
     -- Determine the color of the text based on whether we gained or lost gold
     if UpOrDown > 0 then
-        color = "|c0B610B"
-        changetype = CommaValue(newWritVouchers - oldWritVouchers)
+        color = ChangeUpColorize
+        changetype = ZO_LocalizeDecimalNumber(newWritVouchers - oldWritVouchers)
         message = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Receieved"
     else
-        color = "|ca80700"
-        changetype = CommaValue(oldWritVouchers - newWritVouchers)
+        color = ChangeDownColorize
+        changetype = ZO_LocalizeDecimalNumber(oldWritVouchers - newWritVouchers)
         message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SPENT)
     end
 
@@ -2377,34 +2327,37 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
     -- ==============================================================================
 
     if CA.SV.CurrencyContextToggle then -- Override with custom string if enabled
-        if color == ( "|c0B610B" ) then
+        if color == ChangeUpColorize then
             message = CA.SV.CurrencyContextMessageUp
         else
             message = CA.SV.CurrencyContextMessageDown
         end
     end
+    
+    -- Creates initial message
+    message = color:Colorize(strfmt("%s%s%s", bracket1, message, bracket2))
 
     -- Determines syntax based on whether icon is displayed or not
     if CA.SV.CurrencyIcons then
-        syntax = WVColorize:Colorize(strformat(" |t16:16:/esoui/art/currency/currency_writvoucher.dds|t <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.WritVoucherName, plural))
+        syntax = WVColorize:Colorize(strfmt(" |t16:16:/esoui/art/currency/currency_writvoucher.dds|t %s%s%s%s", changetype, formathelper, CA.SV.WritVoucherName, plural))
     else
-        syntax = WVColorize:Colorize(strformat(" <<1>><<2>><<3>><<4>>", changetype, formathelper, CA.SV.WritVoucherName, plural))
+        syntax = WVColorize:Colorize(strfmt(" %s%s%s%s", changetype, formathelper, CA.SV.WritVoucherName, plural))
     end
 
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if CA.SV.TotalWritVoucherChange and not CA.SV.CurrencyIcons then
-        total = CA.SV.TotalWritVoucherChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r" .. WVColorize:Colorize(currentWritVouchers) )
+        total = CA.SV.TotalGoldChange and strfmt(" %s %s", color:Colorize(CA.SV.CurrencyTotalMessage), WVColorize:Colorize(currentWritVouchers))
     elseif CA.SV.TotalWritVoucherChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalWritVoucherChange and ( color .. " " .. CA.SV.CurrencyTotalMessage .. " |r|t16:16:/esoui/art/currency/currency_writvoucher.dds|t " .. WVColorize:Colorize(currentWritVouchers) )
+        total = CA.SV.TotalGoldChange and strfmt(" %s |t16:16:/esoui/art/currency/currency_gold.dds|t %s", color:Colorize(CA.SV.CurrencyTotalMessage), WVColorize:Colorize(currentWritVouchers))
     else
         total = ""
     end
 
     -- Print a message to chat based off all the values we filled in above
     if CA.SV.LootCurrencyCombo and UpOrDown < 0 then
-        g_comboString = (strformat(" → <<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
+        g_comboString = (strfmt(" → %s%s%s", message, syntax, total))
     else
-        printToChat(strformat("<<1>><<2>><<3>><<4>><<5>><<6>>", color, bracket1, message, bracket2, syntax, total))
+        printToChat(strfmt("%s%s%s", message, syntax, total))
     end
 
 end
@@ -2422,7 +2375,7 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
     if CA.SV.MiscHorse then
         local bracket1
         local bracket2
-        local icon = ""
+        local icon
         local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED) -- "Purchased"
         local skillstring
 
@@ -2484,11 +2437,13 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
             logPrefix = CA.SV.ItemContextMessage
         end
         
+        logPrefix = ChangeUpColorize:Colorize(strfmt("%s%s%s", bracket1, logPrefix, bracket2))
+        
         if CA.SV.LootCurrencyCombo == true then
-            printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>><<5>> |cFFFFFF<<6>>/60|r<<7>>", bracket1, logPrefix, bracket2, icon, skillstring, current, g_comboString))
+            printToChat(strfmt("%s %s%s |cFFFFFF%s/60|r%s", logPrefix, icon, skillstring, current, g_comboString))
             g_comboString = ""
         else
-            printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>><<5>> |cFFFFFF<<6>>/60|r", bracket1, logPrefix, bracket2, icon, skillstring, current) )
+            printToChat(strformat("%s %s%s |cFFFFFF%s/60|r", logPrefix, icon, skillstring, current) )
         end
     end
 end
@@ -2498,7 +2453,7 @@ function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previous
     if CA.SV.MiscBags then
         local bracket1
         local bracket2
-        local icon = ""
+        local icon
         local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED) -- "Purchased"
 
         -- If this isn't a bag upgrade purchase then ignore this event. We have a separate event handling mount space upgrades.
@@ -2529,13 +2484,14 @@ function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previous
         if CA.SV.ItemContextToggle then
             logPrefix = ( CA.SV.ItemContextMessage )
         end
+        
+        logPrefix = ChangeUpColorize:Colorize(strfmt("%s%s%s", bracket1, logPrefix, bracket2))
 
         if CA.SV.LootCurrencyCombo == true then
-            local part1 = (strformat("|c0B610B<<1>><<2>><<3>>|r <<4>>[Bag Space Upgrade] |cFFFFFF<<5>>/8|r", bracket1, logPrefix, bracket2, icon, currentUpgrade))
-            printToChat(string.format("%s%s", part1, g_comboString))
+            printToChat(strfmt("%s %s[Bag Space Upgrade] |cFFFFFF%s/8|r%s", logPrefix, icon, currentUpgrade, g_comboString))
             g_comboString = ""
         else
-            printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>>[Bag Space Upgrade] |cFFFFFF<<5>>/8|r", bracket1, logPrefix, bracket2, icon, currentUpgrade))
+            printToChat(strfmt("%s %s[Bag Space Upgrade] |cFFFFFF%s/8|r", logPrefix, icon, currentUpgrade))
         end
     end
 end
@@ -2576,11 +2532,13 @@ function CA.MiscAlertBank(eventCode, previousCapacity, currentCapacity, previous
             logPrefix = CA.SV.ItemContextMessage
         end
 
-        if CA.SV.LootCurrencyCombo then
-            printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>>[Bank Space Upgrade] |cFFFFFF<<5>>/18|r<<6>>", bracket1, logPrefix, bracket2, icon, currentUpgrade, g_comboString))
+        logPrefix = ChangeUpColorize:Colorize(strfmt("%s%s%s", bracket1, logPrefix, bracket2))
+
+        if CA.SV.LootCurrencyCombo == true then
+            printToChat(strfmt("%s %s[Bank Space Upgrade] |cFFFFFF%s/8|r%s", logPrefix, icon, currentUpgrade, g_comboString))
             g_comboString = ""
         else
-            printToChat(strformat("|c0B610B<<1>><<2>><<3>>|r <<4>>[Bank Space Upgrade] |cFFFFFF<<6>>/18|r", bracket1, logPrefix, bracket2, icon, currentUpgrade))
+            printToChat(strfmt("%s %s[Bank Space Upgrade] |cFFFFFF%s/8|r", logPrefix, icon, currentUpgrade))
         end
     end
 end
@@ -2598,7 +2556,7 @@ function CA.OnBuybackItem(eventCode, itemName, quantity, money, itemSound)
     end
 
     local receivedBy = ""
-    local gainorloss = "|c0B610B"
+    local gainorloss = 1
 
     CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainorloss)
 end
@@ -2617,7 +2575,7 @@ function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCu
     end
 
     local receivedBy = ""
-    local gainorloss = "|c0B610B"
+    local gainorloss = 1
 
     CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainorloss)
 end
@@ -2635,7 +2593,7 @@ function CA.OnSellItem(eventCode, itemName, quantity, money)
     end
 
     local receivedBy = ""
-    local gainorloss = "|ca80700"
+    local gainorloss = 2
 
     CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainorloss)
 end
@@ -2725,7 +2683,7 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
         logPrefix = ( CA.SV.ItemContextMessage )
     end
 
-    local gainorloss = "|c0B610B"
+    local gainorloss = 1
 
     if lootedBySelf then
         if CA.SV.LootOnlyNotable then
@@ -2767,6 +2725,11 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
 
     local bracket1
     local bracket2
+    local color
+    local message
+    
+    if gainorloss == 1 then color = ChangeUpColorize end
+    if gainorloss == 2 then color = ChangeDownColorize end
 
     if CA.SV.ItemBracketDisplayOptions == 1 then
         bracket1 = "["
@@ -2794,11 +2757,11 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
         formattedRecipient = ""
     else
        -- Selects direction of pointer based on whether item is gained for lost, reversed for Trade purposes.
-        if gainorloss == "|c0B610B" and not istrade then
+        if gainorloss == 1 and not istrade then
             arrowPointer = " →"
-        elseif gainorloss == "|ca80700" and not istrade then
+        elseif gainorloss == 2 and not istrade then
             arrowPointer = " ←"
-        elseif gainorloss == "|c0B610B" and istrade then
+        elseif gainorloss == 1 and istrade then
             arrowPointer = " ←"
         else
             arrowPointer = " →"
@@ -2838,11 +2801,13 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
     else
         itemName2 = ""
     end
+    
+    message = color:Colorize(strfmt("%s%s%s ", bracket1, logPrefix, bracket2))
 
-    if receivedBy == "CRAFT"  and gainorloss == "|c0B610B" then
-        g_itemString1Gain = strfmt("%s%s%s%s|r ",gainorloss, bracket1, logPrefix, bracket2)
+    if receivedBy == "CRAFT"  and gainorloss == 1 then
+        g_itemString1Gain = message
 
-        if g_itemString2Gain ~= "" then g_itemString2Gain = strfmt("%s%s,|r %s%s%s%s%s%s%s%s%s", g_itemString2Gain, gainorloss, icon,
+        if g_itemString2Gain ~= "" then g_itemString2Gain = strfmt("%s%s %s%s%s%s%s%s%s%s%s", g_itemString2Gain, color:Colorize(","), icon,
             itemName2,
             itemName:gsub("^|H0", "|H1", 1),
             formattedQuantity,
@@ -2864,10 +2829,10 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
         zo_callLater(CA.PrintMultiLineGain, 50)
     end
 
-    if receivedBy == "CRAFT"  and gainorloss == "|ca80700" then
-        g_itemString1Loss = strfmt("%s%s%s%s|r ",gainorloss, bracket1, logPrefix, bracket2)
+    if receivedBy == "CRAFT"  and gainorloss == 2 then
+        g_itemString1Loss = message
 
-        if g_itemString2Loss ~= "" then g_itemString2Loss = strfmt("%s%s,|r %s%s%s%s%s%s%s%s%s", g_itemString2Loss, gainorloss, icon,
+        if g_itemString2Loss ~= "" then g_itemString2Loss = strfmt("%s%s %s%s%s%s%s%s%s%s%s", g_itemString2Loss, color:Colorize(","), icon,
             itemName2,
             itemName:gsub("^|H0", "|H1", 1),
             formattedQuantity,
@@ -2891,11 +2856,8 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
 
     if receivedBy ~= "CRAFT" then
         if not g_launderCheck then printToChat(strfmt(
-            "%s%s%s%s|r %s%s%s%s%s%s%s%s%s",
-            gainorloss,
-            bracket1,
-            logPrefix,
-            bracket2,
+            "%s%s%s%s%s%s%s%s%s%s",
+            message,
             icon,
             itemName2,
             itemName:gsub("^|H0", "|H1", 1),
@@ -2908,11 +2870,8 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
         )) end
 
         if g_launderCheck then g_launderItemstring = (strfmt(
-            "%s%s%s%s|r %s%s%s%s%s%s%s%s",
-            gainorloss,
-            bracket1,
-            logPrefix,
-            bracket2,
+            "%s%s%s%s%s%s%s%s%s",
+            message,
             icon,
             itemName2,
             itemName:gsub("^|H0", "|H1", 1),
@@ -3103,7 +3062,7 @@ function CA.OnTradeSuccess(eventCode)
         end
         for indexOut = 1,5 do
             if g_tradeStacksOut[indexOut] ~= nil then
-                local gainorloss = "|ca80700"
+                local gainorloss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_TRADED)
                 if CA.SV.ItemContextToggle then
                     logPrefix = ( CA.SV.ItemContextMessage )
@@ -3120,7 +3079,7 @@ function CA.OnTradeSuccess(eventCode)
 
         for indexIn = 1,5 do
             if g_tradeStacksIn[indexIn] ~= nil then
-                local gainorloss = "|c0B610B"
+                local gainorloss = 1
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_TRADED)
                 if CA.SV.ItemContextToggle then
                     logPrefix = ( CA.SV.ItemContextMessage )
@@ -3177,7 +3136,7 @@ end
 function CA.OnMailTakeAttachedItem(eventCode, mailId)
     g_comboString = ""
     local NumMails = 0
-    local gainorloss = "|c0B610B"
+    local gainorloss = 1
     local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Received"
     local receivedBy = ""
     if CA.SV.ItemContextToggle then
@@ -3277,7 +3236,7 @@ function CA.OnMailSuccess(eventCode)
     if CA.SV.LootMail then
         for mailIndex = 1,6 do -- Have to iterate through all 6 possible mail attachments, otherwise nil values will bump later items off the list potentially.
             if g_mailStacksOut[mailIndex] ~= nil then
-                local gainorloss = "|ca80700"
+                local gainorloss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SENT)
                     if CA.SV.ItemContextToggle then
                         logPrefix = ( CA.SV.ItemContextMessage )
@@ -3548,18 +3507,18 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
             end
 
             -- Displays an icon if enabled
-            local icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. CommaValue (change) .. formathelper .. CA.SV.ExperienceName ) or ( CommaValue (change) .. formathelper .. CA.SV.ExperienceName )
+            local icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. ZO_LocalizeDecimalNumber (change) .. formathelper .. CA.SV.ExperienceName ) or ( ZO_LocalizeDecimalNumber (change) .. formathelper .. CA.SV.ExperienceName )
 
             -- If quest turnin, we save the first part of this string to combine with another in case this is followed up by POI completion event too.
             if reason == 1 then
                 g_levelCarryOverValue = currentExperience
-                g_questCombiner1 = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. CommaValue (change) .. formathelper .. CA.SV.ExperienceName ) or ( CommaValue (change) .. formathelper .. CA.SV.ExperienceName )
+                g_questCombiner1 = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. ZO_LocalizeDecimalNumber (change) .. formathelper .. CA.SV.ExperienceName ) or ( ZO_LocalizeDecimalNumber (change) .. formathelper .. CA.SV.ExperienceName )
             end
 
             -- Add to the throttled XP count if it is enabled
             if CA.SV.ExperienceThrottle > 0 and reason == 0 then
                 g_XPCombatBufferValue = g_XPCombatBufferValue + change
-                icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. CommaValue (g_XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName ) or ( CommaValue (g_XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName )
+                icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. ZO_LocalizeDecimalNumber (g_XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName ) or ( ZO_LocalizeDecimalNumber (g_XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName )
             end
 
             local xppct = 0    -- XP Percent
@@ -3586,9 +3545,9 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 
                 if CA.SV.ExperienceDisplayOptions == 1 then
                     if CA.SV.ExperienceProgressColor then
-                    progress = strfmt( "%s (|c%s%s|r/|c71DE73%s|r)", progressbrackets, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevel) )
+                    progress = strfmt( "%s (|c%s%s|r/|c71DE73%s|r)", progressbrackets, ExperiencePctToColour(xppct), ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
                     else
-                    progress = strfmt( "%s (%s/%s)|r", progressbrackets, CommaValue (levelhelper), CommaValue (XPLevel) )
+                    progress = strfmt( "%s (%s/%s)|r", progressbrackets, ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
                     end
                 elseif CA.SV.ExperienceDisplayOptions == 2 then
                     if CA.SV.ExperienceProgressColor then
@@ -3598,9 +3557,9 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                     end
                 elseif CA.SV.ExperienceDisplayOptions == 3 then
                     if CA.SV.ExperienceProgressColor then
-                    progress = strfmt("%s (%s%%|r - |c%s%s|r/|c71DE73%s|r)", progressbrackets, decimal, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevel) )
+                    progress = strfmt("%s (%s%%|r - |c%s%s|r/|c71DE73%s|r)", progressbrackets, decimal, ExperiencePctToColour(xppct), ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
                     else
-                    progress = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, CommaValue (levelhelper), CommaValue (XPLevel) )
+                    progress = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
                     end
                 end
 
@@ -3631,9 +3590,9 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 
                     if CA.SV.ExperienceDisplayOptions == 1 then
                         if CA.SV.ExperienceProgressColor then
-                        g_questCombiner2 = strfmt( "%s (|c%s%s|r/|c71DE73%s|r)", progressbrackets, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevel) )
+                        g_questCombiner2 = strfmt( "%s (|c%s%s|r/|c71DE73%s|r)", progressbrackets, ExperiencePctToColour(xppct), ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
                         else
-                        g_questCombiner2 = strfmt( "%s (%s/%s)|r", progressbrackets, CommaValue (levelhelper), CommaValue (XPLevel) )
+                        g_questCombiner2 = strfmt( "%s (%s/%s)|r", progressbrackets, ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
                         end
                     elseif CA.SV.ExperienceDisplayOptions == 2 then
                         if CA.SV.ExperienceProgressColor then
@@ -3643,9 +3602,9 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                         end
                     elseif CA.SV.ExperienceDisplayOptions == 3 then
                         if CA.SV.ExperienceProgressColor then
-                        g_questCombiner2 = strfmt("%s (%s%%|r - |c%s%s|r/|c71DE73%s|r)", progressbrackets, decimal, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevel) )
+                        g_questCombiner2 = strfmt("%s (%s%%|r - |c%s%s|r/|c71DE73%s|r)", progressbrackets, decimal, ExperiencePctToColour(xppct), ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
                         else
-                        g_questCombiner2 = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, CommaValue (levelhelper), CommaValue (XPLevel) )
+                        g_questCombiner2 = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
                         end
                     end
 
@@ -3684,9 +3643,9 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 
                     if CA.SV.ExperienceDisplayOptions == 1 then
                         if CA.SV.ExperienceProgressColor then
-                        g_questCombiner2Alt = strfmt( "%s (|c%s%s|r/|c71DE73%s|r)", progressbrackets, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevelAlt) )
+                        g_questCombiner2Alt = strfmt( "%s (|c%s%s|r/|c71DE73%s|r)", progressbrackets, ExperiencePctToColour(xppct), ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevelAlt) )
                         else
-                        g_questCombiner2Alt = strfmt( "%s (%s/%s)|r", progressbrackets, CommaValue (levelhelper), CommaValue (XPLevelAlt) )
+                        g_questCombiner2Alt = strfmt( "%s (%s/%s)|r", progressbrackets, ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevelAlt) )
                         end
                     elseif CA.SV.ExperienceDisplayOptions == 2 then
                         if CA.SV.ExperienceProgressColor then
@@ -3696,9 +3655,9 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                         end
                     elseif CA.SV.ExperienceDisplayOptions == 3 then
                         if CA.SV.ExperienceProgressColor then
-                        g_questCombiner2Alt = strfmt("%s (%s%%|r - |c%s%s|r/|c71DE73%s|r)", progressbrackets, decimal, ExperiencePctToColour(xppct), CommaValue (levelhelper), CommaValue (XPLevelAlt) )
+                        g_questCombiner2Alt = strfmt("%s (%s%%|r - |c%s%s|r/|c71DE73%s|r)", progressbrackets, decimal, ExperiencePctToColour(xppct), ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevelAlt) )
                         else
-                        g_questCombiner2Alt = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, CommaValue (levelhelper), CommaValue (XPLevelAlt) )
+                        g_questCombiner2Alt = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevelAlt) )
                         end
                     end
                 -- End big ass bullshit duplicate function
@@ -4119,7 +4078,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-                local gainorloss = "|c0B610B"
+                local gainorloss = 1
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_GAINEDSTACK)
                 local icon, stack = GetItemInfo(bagId, slotId)
                 local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
@@ -4134,13 +4093,13 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                     if CA.SV.ShowDisguise and not g_itemWasDestroyed and slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
                         if IsUnitInCombat("player") then 
                             logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_DESTROYED)
-                            gainorloss = "|ca80700"
+                            gainorloss = 2
                         end
                         CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) 
                     end
                     if CA.SV.ShowDestroy and g_itemWasDestroyed then
                         logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
-                        gainorloss = "|ca80700"
+                        gainorloss = 2
                         CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
                     end
                     g_equippedStacks[slotId] = nil
@@ -4162,7 +4121,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             local item = g_inventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
-            local gainorloss = "|c0B610B"
+            local gainorloss = 1
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTEDITEM)
             -- CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
 
@@ -4177,14 +4136,14 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             end
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-                local gainorloss = "|c0B610B"
+                local gainorloss = 1
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_GAINEDSTACK)
                 local icon, stack = GetItemInfo(bagId, slotId)
                 local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                 -- CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
                 g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = (strfmt("|ca80700"))
+                local gainorloss = (strfmt(2))
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_inventoryStacks[slotId].stack - change
@@ -4216,7 +4175,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             local item = g_inventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
-            local gainorloss = "|c0B610B"
+            local gainorloss = 1
             local logPrefix = GetString(SI_ITEM_FORMAT_STR_CRAFTED)
 
             if itemType == ITEMTYPE_ADDITIVE
@@ -4249,7 +4208,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_inventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local gainorloss = "|c0B610B"
+            local gainorloss = 1
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED)
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
         elseif g_inventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
@@ -4258,7 +4217,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-               local gainorloss = "|c0B610B"
+               local gainorloss = 1
                local logPrefix = GetString(SI_ITEM_FORMAT_STR_CRAFTED)
 
                 if itemType == ITEMTYPE_ADDITIVE
@@ -4289,7 +4248,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
                g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = ("|ca80700")
+                local gainorloss = (2)
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DECONSTRUCTED)
 
                 if itemType == ITEMTYPE_ADDITIVE
@@ -4344,7 +4303,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             local item = g_bankStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
-            local gainorloss = "|c0B610B"
+            local gainorloss = 1
             local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_ITEM_FORMAT_STR_CRAFTED), GetString(SI_INTERACT_OPTION_BANK))
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
         elseif g_bankStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
@@ -4354,7 +4313,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_bankStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local gainorloss = "|c0B610B"
+            local gainorloss = 1
             local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED), GetString(SI_INTERACT_OPTION_BANK))
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
         elseif g_bankStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
@@ -4363,7 +4322,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-               local gainorloss = "|c0B610B"
+               local gainorloss = 1
                local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_ITEM_FORMAT_STR_CRAFTED), GetString(SI_INTERACT_OPTION_BANK))
                local icon, stack = GetItemInfo(bagId, slotId)
                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
@@ -4371,7 +4330,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
                g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = ("|ca80700")
+                local gainorloss = (2)
                 local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_LUIE_CA_PREFIX_MESSAGE_DECONSTRUCTED), GetString(SI_INTERACT_OPTION_BANK))
 
         if itemType == ITEMTYPE_ADDITIVE
@@ -4422,13 +4381,13 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
         local icon = GetItemLinkInfo(itemlink)
         icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
         local receivedBy = "CRAFT"
-        local gainorloss = "|c0B610B"
+        local gainorloss = 1
         local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Received"
         local stack = stackCountChange
         local itemType = GetItemLinkItemType(itemlink)
 
         if stackCountChange < 1 then
-            gainorloss = "|ca80700"
+            gainorloss = 2
             logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED)
             stack = stackCountChange * -1
             if itemType == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL or itemType == ITEMTYPE_CLOTHIER_RAW_MATERIAL or itemType == ITEMTYPE_WOODWORKING_RAW_MATERIAL then
@@ -4456,7 +4415,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             local item = g_inventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
-            local gainorloss = "|c0B610B"
+            local gainorloss = 1
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
             if InventoryOn then
                 CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
@@ -4468,7 +4427,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_inventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local gainorloss = "|c0B610B"
+            local gainorloss = 1
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED)
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) -- Shouldn't need this for anything, but just in case. ]]-- Shouldn't be neccesary
         elseif g_inventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
@@ -4477,7 +4436,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-                local gainorloss = "|c0B610B"
+                local gainorloss = 1
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
                 local icon, stack = GetItemInfo(bagId, slotId)
                 local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
@@ -4488,7 +4447,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = ("|ca80700")
+                local gainorloss = (2)
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_inventoryStacks[slotId].stack - change
@@ -4526,7 +4485,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             local item = g_bankStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
-            local gainorloss = "|ca80700"
+            local gainorloss = 2
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
             if BankOn then
                 CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
@@ -4539,7 +4498,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_bankStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local gainorloss = "|c0B610B"
+            local gainorloss = 1
             local logPrefix = "Upgraded - Bank"]]--
         elseif g_bankStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_bankStacks[slotId]
@@ -4547,7 +4506,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-                local gainorloss = "|ca80700"
+                local gainorloss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
                 local icon, stack = GetItemInfo(bagId, slotId)
                 local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
@@ -4558,7 +4517,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                 g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = ("|ca80700")
+                local gainorloss = (2)
                 local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED), GetString(SI_INTERACT_OPTION_BANK) )
                 local change = (stackCountChange * -1)
                 local endcount = g_bankStacks[slotId].stack - change
@@ -4595,13 +4554,13 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
         local icon = GetItemLinkInfo(itemlink)
         icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
         local receivedBy = ""
-        local gainorloss = "|c0B610B"
+        local gainorloss = 1
         local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
         local stack = stackCountChange
         local itemType = GetItemLinkItemType(itemlink)
 
         if stackCountChange < 1 then
-            gainorloss = "|ca80700"
+            gainorloss = 2
             logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
             stack = stackCountChange * -1
         end
@@ -4622,7 +4581,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_inventoryStacks[slotId]
             g_guildBankCarryIcon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            g_guildBankCarryGainorloss = "|c0B610B"
+            g_guildBankCarryGainorloss = 1
             g_guildBankCarryLogPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
             g_guildBankCarryReceivedBy = ""
             g_guildBankCarryItemLink = item.itemlink
@@ -4634,7 +4593,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_inventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local gainorloss = "|c0B610B"
+            local gainorloss = 1
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED)
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) -- Shouldn't need this for anything, but just in case. ]]-- Shouldn't be neccesary
         elseif g_inventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
@@ -4645,7 +4604,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
                local icon, stack = GetItemInfo(bagId, slotId)
                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                g_guildBankCarryIcon = seticon
-               g_guildBankCarryGainorloss = "|c0B610B"
+               g_guildBankCarryGainorloss = 1
                g_guildBankCarryLogPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
                g_guildBankCarryReceivedBy = ""
                g_guildBankCarryItemLink = item.itemlink
@@ -4654,12 +4613,12 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
                g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = ("|ca80700")
+                local gainorloss = (2)
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_inventoryStacks[slotId].stack - change
                 g_guildBankCarryIcon = seticon
-                g_guildBankCarryGainorloss = "|ca80700"
+                g_guildBankCarryGainorloss = 2
                 g_guildBankCarryLogPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
                 g_guildBankCarryReceivedBy = ""
                 g_guildBankCarryItemLink = item.itemlink
@@ -4682,14 +4641,14 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
     ---------------------------------- CRAFTING BAG ----------------------------------
     if bagId == BAG_VIRTUAL then
         local receivedBy = ""
-        local gainorloss = "|c0B610B"
+        local gainorloss = 1
         local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Received"
         local itemlink = CA.GetItemLinkFromItemId(slotId)
         local icon = GetItemLinkInfo(itemlink)
         local seticon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
 
         g_guildBankCarryIcon = seticon
-        g_guildBankCarryGainorloss = "|c0B610B"
+        g_guildBankCarryGainorloss = 1
         g_guildBankCarryLogPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
         g_guildBankCarryReceivedBy = ""
         g_guildBankCarryItemLink = itemlink
@@ -4710,7 +4669,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             local item = g_inventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
-            local gainorloss = "|c0B610B"
+            local gainorloss = 1
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LAUNDERED)
             g_launderCheck = true
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
@@ -4721,7 +4680,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             local item = g_inventoryStacks[slotId]
             local itemType = GetItemLinkItemType(item.itemlink)
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local gainorloss = "|c0B610B"
+            local gainorloss = 1
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LAUNDERED)
             g_launderCheck = true
             if itemType == ITEMTYPE_WEAPON or itemType == ITEMTYPE_ARMOR or itemType == ITEMTYPE_JEWELRY then
@@ -4733,7 +4692,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-                local gainorloss = "|c0B610B"
+                local gainorloss = 1
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LAUNDERED)
                 local icon, stack = GetItemInfo(bagId, slotId)
                 local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
@@ -4741,7 +4700,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
                 CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
                 g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = ("|ca80700")
+                local gainorloss = (2)
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_inventoryStacks[slotId].stack - change
@@ -4766,7 +4725,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
         local icon = GetItemLinkInfo(itemlink)
         icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
         local receivedBy = ""
-        local gainorloss = "|c0B610B"
+        local gainorloss = 1
         local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LAUNDERED)
         local stack = stackCountChange
         local itemType = GetItemLinkItemType(itemlink)
@@ -4836,7 +4795,7 @@ function CA.JusticeRemovePrint()
                 local itemType = GetItemLinkItemType(inventoryitem.itemlink)
                 local stack = inventoryitem.stack
                 local receivedBy = ""
-                local gainorloss = (strfmt("|ca80700"))
+                local gainorloss = (strfmt(2))
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_CONFISCATED)
                 if CA.SV.ShowConfiscate then
                     CA.LogItem(logPrefix, seticon, inventoryitem.itemlink, itemType, stack or 1, receivedBy, gainorloss)
@@ -4891,7 +4850,7 @@ function CA.JusticeRemovePrint()
                 local itemType = GetItemLinkItemType(inventoryitem.itemlink)
                 local stack = inventoryitem.stack
                 local receivedBy = ""
-                local gainorloss = (strfmt("|ca80700"))
+                local gainorloss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_CONFISCATEDEQUIPPED)
                 if CA.SV.ShowConfiscate then
                     CA.LogItem(logPrefix, seticon, inventoryitem.itemlink, itemType, stack or 1, receivedBy, gainorloss)
@@ -4903,6 +4862,7 @@ function CA.JusticeRemovePrint()
     g_JusticeStacks = {} -- Clear the Justice Item Stacks since we don't need this for anything else!
     g_equippedStacks = {}
     g_inventoryStacks = {}
+    CA.IndexEquipped()
     CA.IndexInventory() -- Reindex the inventory with the correct values!
 end
 
@@ -5106,7 +5066,7 @@ function CA.MaraResult (eventCode, reason, targetCharacterName, targetDisplayNam
     if reason == 3 and CA.SV.Loot then
         local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
         local receivedBy = ""
-        local gainorloss = "|c0B610B"
+        local gainorloss = 1
         local icon = CA.SV.LootIcons and "|t16:16:esoui/art/icons/entitlement_002.dds|t " or ""
         local itemlink = '|H1:item:44904:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h'
         CA.LogItem(logPrefix, icon, itemlink, itemType, 1, receivedBy, gainorloss)
