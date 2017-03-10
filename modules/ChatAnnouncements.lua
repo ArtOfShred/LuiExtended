@@ -2730,6 +2730,7 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
     
     if gainorloss == 1 then color = ChangeUpColorize end
     if gainorloss == 2 then color = ChangeDownColorize end
+    if gainorloss == 3 then color = ColorWhite
 
     if CA.SV.ItemBracketDisplayOptions == 1 then
         bracket1 = "["
@@ -4085,7 +4086,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                 -- CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
                 g_equippedStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = (strfmt("|cFEFEFE"))
+                local gainorloss = 3
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_UNEQUIP)
                 local change = (stackCountChange * -1)
                 local endcount = g_equippedStacks[slotId].stack - change
@@ -4143,7 +4144,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                 -- CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
                 g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = (strfmt(2))
+                local gainorloss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_inventoryStacks[slotId].stack - change
@@ -4248,7 +4249,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
                g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = (2)
+                local gainorloss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DECONSTRUCTED)
 
                 if itemType == ITEMTYPE_ADDITIVE
@@ -4330,7 +4331,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
                g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = (2)
+                local gainorloss = 2
                 local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_LUIE_CA_PREFIX_MESSAGE_DECONSTRUCTED), GetString(SI_INTERACT_OPTION_BANK))
 
         if itemType == ITEMTYPE_ADDITIVE
@@ -4447,7 +4448,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = (2)
+                local gainorloss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_inventoryStacks[slotId].stack - change
@@ -4517,7 +4518,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                 g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = (2)
+                local gainorloss = 2
                 local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED), GetString(SI_INTERACT_OPTION_BANK) )
                 local change = (stackCountChange * -1)
                 local endcount = g_bankStacks[slotId].stack - change
@@ -4613,7 +4614,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
                g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = (2)
+                local gainorloss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_inventoryStacks[slotId].stack - change
@@ -4700,7 +4701,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
                 CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
                 g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = (2)
+                local gainorloss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_inventoryStacks[slotId].stack - change
@@ -4795,7 +4796,7 @@ function CA.JusticeRemovePrint()
                 local itemType = GetItemLinkItemType(inventoryitem.itemlink)
                 local stack = inventoryitem.stack
                 local receivedBy = ""
-                local gainorloss = (strfmt(2))
+                local gainorloss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_CONFISCATED)
                 if CA.SV.ShowConfiscate then
                     CA.LogItem(logPrefix, seticon, inventoryitem.itemlink, itemType, stack or 1, receivedBy, gainorloss)
