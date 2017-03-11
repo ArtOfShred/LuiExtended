@@ -54,6 +54,9 @@ UF.D = {
     CustomColourShield               = { 1      , 192/255, 0       }, -- .a=0.5 for overlay and .a = 1 for separate
     CustomColourMagicka              = { 0      ,  83/255, 209/255 },
     CustomColourStamina              = {  28/255, 177/255, 0       },
+    CustomColourDPS                  = { 255/255, 196/255, 128/255 },
+    CustomColourHealer               = { 117/255, 077/255, 135/255 },
+    CustomColourTank                 = { 133/255, 018/255, 013/255 },
     CustomShieldBarSeparate          = false,
     CustomShieldBarHeight            = 10,
     CustomShieldBarFull              = false,
@@ -303,8 +306,6 @@ local function CreateCustomFrames()
         local pli = UI.Texture( topInfo, nil, {20,20}, nil, nil, false )
 
         -- Collect all together
-        -- This is a massive shitpile thanks to having to change the entire table depending on whether a bar is hidden or not, but shouldn't cause any undo performance issues since this function only creates the frames once
-        if not UF.SV.HideLabelMagicka and not UF.SV.HideLabelStamina then
         UF.CustomFrames.player = {
             ["unitTag"]     = "player",
             ["tlw"]         = playerTlw,
@@ -342,112 +343,17 @@ local function CreateCustomFrames()
             ["buffs"]       = UI.Control( playerTlw, nil, nil, false ),
             ["debuffs"]     = UI.Control( playerTlw, {BOTTOM,TOP,0,-2,topInfo}, nil, false ),
         }
-        elseif UF.SV.HideLabelMagicka and not UF.SV.HideLabelStamina then
-        UF.CustomFrames.player = {
-            ["unitTag"]     = "player",
-            ["tlw"]         = playerTlw,
-            ["control"]     = player,
-            [POWERTYPE_HEALTH] = {
-                ["backdrop"]= phb,
-                ["labelOne"]= UI.Label( phb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
-                ["labelTwo"]= UI.Label( phb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
-                ["bar"]     = UI.StatusBar( phb, nil, nil, nil, false ),
-                ["shield"]  = UI.StatusBar( phb, nil, nil, nil, true ),
-            },
-            [POWERTYPE_MAGICKA] = {
-                ["backdrop"]= pmb,
-                ["bar"]     = UI.StatusBar( pmb, nil, nil, nil, false ),
-            },
-            [POWERTYPE_STAMINA] = {
-                ["backdrop"]= psb,
-                ["labelOne"]= UI.Label( psb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
-                ["labelTwo"]= UI.Label( psb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
-                ["bar"]     = UI.StatusBar( psb, nil, nil, nil, false ),
-            },
-            ["alternative"] = {
-                ["backdrop"]= alt,
-                ["bar"]     = UI.StatusBar( alt, nil, nil, nil, false ),
-                ["icon"]    = UI.Texture( alt, {RIGHT,LEFT,-2,0}, {20,20}, nil, nil, false ),
-            },
-            ["topInfo"]     = topInfo,
-            ["name"]        = UI.Label( topInfo, {BOTTOMLEFT,BOTTOMLEFT}, nil, {0,4}, nil, "Player Name", false ),
-            ["levelIcon"]   = pli,
-            ["level"]       = UI.Label( topInfo, {LEFT,RIGHT,1,0,pli}, nil, {0,1}, nil, "level", false ),
-            ["classIcon"]   = UI.Texture( topInfo, {RIGHT,RIGHT,-1,0}, {22,22}, nil, nil, false ),
-            ["botInfo"]     = botInfo,
-            ["buffs"]       = UI.Control( playerTlw, nil, nil, false ),
-            ["debuffs"]     = UI.Control( playerTlw, {BOTTOM,TOP,0,-2,topInfo}, nil, false ),
-        }
-        elseif UF.SV.HideLabelStamina and not UF.SV.HideLabelMagicka then
-        UF.CustomFrames.player = {
-            ["unitTag"]     = "player",
-            ["tlw"]         = playerTlw,
-            ["control"]     = player,
-            [POWERTYPE_HEALTH] = {
-                ["backdrop"]= phb,
-                ["labelOne"]= UI.Label( phb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
-                ["labelTwo"]= UI.Label( phb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
-                ["bar"]     = UI.StatusBar( phb, nil, nil, nil, false ),
-                ["shield"]  = UI.StatusBar( phb, nil, nil, nil, true ),
-            },
-            [POWERTYPE_MAGICKA] = {
-                ["backdrop"]= pmb,
-                ["labelOne"]= UI.Label( pmb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
-                ["labelTwo"]= UI.Label( pmb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
-                ["bar"]     = UI.StatusBar( pmb, nil, nil, nil, false ),
-            },
-            [POWERTYPE_STAMINA] = {
-                ["backdrop"]= psb,
-                ["bar"]     = UI.StatusBar( psb, nil, nil, nil, false ),
-            },
-            ["alternative"] = {
-                ["backdrop"]= alt,
-                ["bar"]     = UI.StatusBar( alt, nil, nil, nil, false ),
-                ["icon"]    = UI.Texture( alt, {RIGHT,LEFT,-2,0}, {20,20}, nil, nil, false ),
-            },
-            ["topInfo"]     = topInfo,
-            ["name"]        = UI.Label( topInfo, {BOTTOMLEFT,BOTTOMLEFT}, nil, {0,4}, nil, "Player Name", false ),
-            ["levelIcon"]   = pli,
-            ["level"]       = UI.Label( topInfo, {LEFT,RIGHT,1,0,pli}, nil, {0,1}, nil, "level", false ),
-            ["classIcon"]   = UI.Texture( topInfo, {RIGHT,RIGHT,-1,0}, {22,22}, nil, nil, false ),
-            ["botInfo"]     = botInfo,
-            ["buffs"]       = UI.Control( playerTlw, nil, nil, false ),
-            ["debuffs"]     = UI.Control( playerTlw, {BOTTOM,TOP,0,-2,topInfo}, nil, false ),
-        }
-        else
-        UF.CustomFrames.player = {
-            ["unitTag"]     = "player",
-            ["tlw"]         = playerTlw,
-            ["control"]     = player,
-            [POWERTYPE_HEALTH] = {
-                ["backdrop"]= phb,
-                ["labelOne"]= UI.Label( phb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
-                ["labelTwo"]= UI.Label( phb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
-                ["bar"]     = UI.StatusBar( phb, nil, nil, nil, false ),
-                ["shield"]  = UI.StatusBar( phb, nil, nil, nil, true ),
-            },
-            [POWERTYPE_MAGICKA] = {
-                ["backdrop"]= pmb,
-                ["bar"]     = UI.StatusBar( pmb, nil, nil, nil, false ),
-            },
-            [POWERTYPE_STAMINA] = {
-                ["backdrop"]= psb,
-                ["bar"]     = UI.StatusBar( psb, nil, nil, nil, false ),
-            },
-            ["alternative"] = {
-                ["backdrop"]= alt,
-                ["bar"]     = UI.StatusBar( alt, nil, nil, nil, false ),
-                ["icon"]    = UI.Texture( alt, {RIGHT,LEFT,-2,0}, {20,20}, nil, nil, false ),
-            },
-            ["topInfo"]     = topInfo,
-            ["name"]        = UI.Label( topInfo, {BOTTOMLEFT,BOTTOMLEFT}, nil, {0,4}, nil, "Player Name", false ),
-            ["levelIcon"]   = pli,
-            ["level"]       = UI.Label( topInfo, {LEFT,RIGHT,1,0,pli}, nil, {0,1}, nil, "level", false ),
-            ["classIcon"]   = UI.Texture( topInfo, {RIGHT,RIGHT,-1,0}, {22,22}, nil, nil, false ),
-            ["botInfo"]     = botInfo,
-            ["buffs"]       = UI.Control( playerTlw, nil, nil, false ),
-            ["debuffs"]     = UI.Control( playerTlw, {BOTTOM,TOP,0,-2,topInfo}, nil, false ),
-        }
+        
+        -- If Stamina Label is hidden in menu options, hide the stamina bar labels
+        if UF.SV.HideLabelStamina then 
+            UF.CustomFrames.player[POWERTYPE_STAMINA].labelOne:SetHidden(true)
+            UF.CustomFrames.player[POWERTYPE_STAMINA].labelTwo:SetHidden(true)
+        end
+        
+        -- If Magicka Label is hidden in menu options, hide the magicka bar labels
+        if UF.SV.HideLabelMagicka then
+            UF.CustomFrames.player[POWERTYPE_MAGICKA].labelOne:SetHidden(true)
+            UF.CustomFrames.player[POWERTYPE_MAGICKA].labelTwo:SetHidden(true)
         end
 
         UF.CustomFrames.controlledsiege = { -- placeholder for alternative bar when using siege weapon
@@ -802,9 +708,7 @@ local function CreateCustomFrames()
     UF.CustomFramesSetPositions()
     -- Apply formatting for labels
     UF.CustomFramesFormatLabels()
-    -- Apply bar colours
-    UF.CustomFramesApplyColours()
-    -- Apply textures
+    -- Apply bar textures
     UF.CustomFramesApplyTexture()
     -- Apply fonts
     UF.CustomFramesApplyFont()
@@ -910,6 +814,7 @@ function UF.Initialize( enabled )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_GAINED,     UF.OnChampionPointGained )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_SUPPORT_RANGE_UPDATE,    UF.OnGroupSupportRangeUpdate )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_CONNECTED_STATUS, UF.OnGroupMemberConnectedStatus )
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_ROLES_CHANGED, UF.OnGroupMemberRoleChange )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED,  UF.OnDeath )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEADER_UPDATE,         UF.OnLeaderUpdate )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BOSSES_CHANGED,    UF.OnBossesChanged )
@@ -1014,6 +919,9 @@ function UF.OnPlayerActivated(eventCode)
     UF.ReloadValues("player")
     UF.UpdateRegen( "player", STAT_MAGICKA_REGEN_COMBAT, ATTRIBUTE_MAGICKA, POWERTYPE_MAGICKA )
     UF.UpdateRegen( "player", STAT_STAMINA_REGEN_COMBAT, ATTRIBUTE_STAMINA, POWERTYPE_STAMINA )
+    
+    -- Apply bar colors here, has to be after player init to get group roles
+    UF.CustomFramesApplyColours()
 
     -- Create UI elements for default group members frames
     if g_DefaultFrames.SmallGroup then
@@ -1846,6 +1754,12 @@ function UF.OnGroupMemberConnectedStatus(eventCode, unitTag, isOnline)
     end
 end
 
+function UF.OnGroupMemberRoleChange(eventCode, unitTag, dps, healer, tank)
+    if UF.CustomFrames[unitTag] then
+        UF.CustomFramesApplyColours()
+    end
+end
+
 -- Runs on the EVENT_UNIT_DEATH_STATE_CHANGED listener.
 -- This handler fires every time a valid unitTag dies or is resurrected
 function UF.OnDeath(eventCode, unitTag, isDead)
@@ -2370,22 +2284,30 @@ function UF.CustomFramesSetMovingState( state )
 end
 
 -- Apply selected colours for all known bars on custom unit frames
-function UF.CustomFramesApplyColours()
+function UF.CustomFramesApplyColours(isMenu)
 
     local health = { UF.SV.CustomColourHealth[1], UF.SV.CustomColourHealth[2], UF.SV.CustomColourHealth[3], 0.9 }
     local shield = { UF.SV.CustomColourShield[1], UF.SV.CustomColourShield[2], UF.SV.CustomColourShield[3], 0 } -- .a value will be fixed in the loop
     local magicka = { UF.SV.CustomColourMagicka[1], UF.SV.CustomColourMagicka[2], UF.SV.CustomColourMagicka[3], 0.9 }
     local stamina = { UF.SV.CustomColourStamina[1], UF.SV.CustomColourStamina[2], UF.SV.CustomColourStamina[3], 0.9 }
+    
+    local dps =  { UF.SV.CustomColourDPS[1], UF.SV.CustomColourDPS[2], UF.SV.CustomColourDPS[3], 0.9 }
+    local healer =  { UF.SV.CustomColourHealer[1], UF.SV.CustomColourHealer[2], UF.SV.CustomColourHealer[3], 0.9 }
+    local tank =  { UF.SV.CustomColourTank[1], UF.SV.CustomColourTank[2], UF.SV.CustomColourTank[3], 0.9 }
 
     local health_bg = { 0.1*UF.SV.CustomColourHealth[1], 0.1*UF.SV.CustomColourHealth[2], 0.1*UF.SV.CustomColourHealth[3], 0.9 }
     local shield_bg = { 0.1*UF.SV.CustomColourShield[1], 0.1*UF.SV.CustomColourShield[2], 0.1*UF.SV.CustomColourShield[3], 0.9 }
     local magicka_bg = { 0.1*UF.SV.CustomColourMagicka[1], 0.1*UF.SV.CustomColourMagicka[2], 0.1*UF.SV.CustomColourMagicka[3], 0.9 }
     local stamina_bg = { 0.1*UF.SV.CustomColourStamina[1], 0.1*UF.SV.CustomColourStamina[2], 0.1*UF.SV.CustomColourStamina[3], 0.9 }
+    
+    local dps_bg = { 0.1*UF.SV.CustomColourDPS[1], 0.1*UF.SV.CustomColourDPS[2], 0.1*UF.SV.CustomColourDPS[3], 0.9 }
+    local healer_bg = { 0.1*UF.SV.CustomColourHealer[1], 0.1*UF.SV.CustomColourHealer[2], 0.1*UF.SV.CustomColourHealer[3], 0.9 }
+    local tank_bg = { 0.1*UF.SV.CustomColourTank[1], 0.1*UF.SV.CustomColourTank[2], 0.1*UF.SV.CustomColourTank[3], 0.9 }
 
     -- After colour is applied unhide frames, so player can see changes even from menu
-    for _, baseName in pairs( { "player", "reticleover", "SmallGroup", "RaidGroup", "boss", "AvaPlayerTarget" } ) do
-        shield[4] = ( UF.SV.CustomShieldBarSeparate and not ( baseName == "RaidGroup" or baseName == "boss" ) ) and 0.9 or 0.5
-        for i = 0, 24 do
+    for _, baseName in pairs( { "player", "reticleover", "boss", "AvaPlayerTarget" } ) do
+        shield[4] = ( UF.SV.CustomShieldBarSeparate and not (baseName == "boss") ) and 0.9 or 0.5
+        for i = 0, 6 do
             local unitTag = (i==0) and baseName or ( baseName .. i )
             if UF.CustomFrames[unitTag] then
                 local unitFrame = UF.CustomFrames[unitTag]
@@ -2396,12 +2318,51 @@ function UF.CustomFramesApplyColours()
                 if thb.shieldbackdrop then
                     thb.shieldbackdrop:SetCenterColor( unpack(shield_bg) )
                 end
-                if i == 0 or i == 1 then
+                if isMenu then
                     unitFrame.tlw:SetHidden( false )
                 end
             end
         end
     end
+    
+    for _, baseName in pairs( { "SmallGroup", "RaidGroup" } ) do
+        shield[4] = ( UF.SV.CustomShieldBarSeparate and not (baseName == "RaidGroup") ) and 0.9 or 0.5
+        for i = 0, 24 do
+            local unitTag = (i==0) and baseName or ( baseName .. i )
+            if UF.CustomFrames[unitTag] then
+                local isDps, isHealer, isTank = GetGroupMemberRoles("group" .. i)
+                
+                -- Trying to determine when roles are able to be detected
+                --if isDps then d("group"..i .. "  is DPS") end
+                --if isHealer then d("group"..i .. "  is Healer") end
+                --if isTank then d("group"..i .. "  is Tank") end
+                --if not isDps and not isHealer and not isTank then d("group"..i.. " is not anything LOLE.") end
+                
+                local unitFrame = UF.CustomFrames[unitTag]
+                local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+                if isDps then
+                    thb.bar:SetColor( unpack(dps) )
+                    thb.backdrop:SetCenterColor( unpack(dps_bg) )
+                end
+                if isHealer then
+                    thb.bar:SetColor( unpack(healer) )
+                    thb.backdrop:SetCenterColor( unpack(healer_bg) )
+                end
+                if isTank then
+                    thb.bar:SetColor( unpack(tank) )
+                    thb.backdrop:SetCenterColor( unpack(tank_bg) )
+                end
+                thb.shield:SetColor( unpack(shield) )
+                if thb.shieldbackdrop then
+                    thb.shieldbackdrop:SetCenterColor( unpack(shield_bg) )
+                end
+                if isMenu then
+                    unitFrame.tlw:SetHidden( false )
+                end
+            end
+        end
+    end
+        
 
     -- Player frame also requires setting of magicka and stamina bars
     if UF.CustomFrames.player then
@@ -2410,6 +2371,30 @@ function UF.CustomFramesApplyColours()
         UF.CustomFrames.player[POWERTYPE_STAMINA].bar:SetColor( unpack(stamina) )
         UF.CustomFrames.player[POWERTYPE_STAMINA].backdrop:SetCenterColor( unpack(stamina_bg) )
     end
+   
+--[[   
+    for i = 1, 24 do
+        local unitTag = ("group" .. i)
+        local isDps, isHealer, isTank = GetGroupMemberRoles("group" .. i)
+        if UF.CustomFrames[unitTag] then
+            local unitFrame = UF.CustomFrames[unitTag]
+            local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+            if isDps then
+                thb.bar:SetColor( unpack(dps) )
+                thb.backdrop:SetCenterColor( unpack(dps_bg) )
+            end
+            if isHealer then
+                thb.bar:SetColor( unpack(healer) )
+                thb.backdrop:SetCenterColor( unpack(healer_bg) )
+            end
+            if isTank then
+                thb.bar:SetColor( unpack(tank) )
+                thb.backdrop:SetCenterColor( unpack(tank_bg) )
+            end
+        end
+    end
+]]--    
+   
 end
 
 -- Apply selected texture for all known bars on custom unit frames
