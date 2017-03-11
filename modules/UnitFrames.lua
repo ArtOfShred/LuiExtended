@@ -7,8 +7,8 @@ local UF                  = LUIE.UnitFrames
 local UI                  = LUIE.UI
 local CommaValue          = LUIE.CommaValue
 local DelayBuffer         = LUIE.DelayBuffer
-local ParseLanguageString = LUIE.ParseLanguageString
-local strformat           = string.format
+local strformat           = zo_strformat
+local strfmt              = string.format
 local pairs               = pairs -- What does this do?
 
 local moduleName    = LUIE.name .. "_UnitFrames"
@@ -27,9 +27,9 @@ UF.D = {
     RepositionFrames                 = true,
     DefaultOocTransparency           = 85,
     DefaultIncTransparency           = 85,
-    DefaultFramesPlayer              = nil, -- this 3 default settings HAS TO BE nil!!!
-    DefaultFramesTarget              = nil,
-    DefaultFramesGroup               = nil,
+    DefaultFramesPlayer              = nil, -- this default setting HAS TO BE nil!!!
+    DefaultFramesTarget              = nil, -- this default setting HAS TO BE nil!!!
+    DefaultFramesGroup               = nil, -- this default setting HAS TO BE nil!!!
     Format                           = "Current + Shield (Percentage%)",
     DefaultFontFace                  = "Univers 67",
     DefaultFontStyle                 = "soft-shadow-thick",
@@ -113,21 +113,23 @@ UF.D = {
 }
 UF.SV = nil
 
-UF.CustomFrames            = {} -- Custom Unit Frames on contrary are!
-UF.CustomFramesMovingState = false
+UF.CustomFrames             = {} -- Custom Unit Frames on contrary are!
+UF.CustomFramesMovingState  = false
 
-local g_playerAlliance
+local g_AvaCustFrames       = {} -- Another set of custom frames. Currently designed only to provide AvA Player Target reticleover frame
+local g_DefaultFrames       = {} -- Default Unit Frames are not referenced by external modules
+local g_MaxChampionPoint    = GetChampionPointsPlayerProgressionCap() -- Keet this value in local constant
 local g_customLeaderIcon
+local g_defaultTargetNameLabel   -- Reference to default UI target name label
+local g_defaultThreshold    = 25
+local g_playerAlliance
+local g_powerError          = {}
 local g_savedHealth         = {}
 local g_statFull            = {}
-local g_DefaultFrames       = {} -- Default Unit Frames are not referenced by external modules
-local g_AvaCustFrames       = {} -- Another set of custom frames. Currently designed only to provide AvA Player Target reticleover frame
-local g_powerError          = {}
-local g_defaultThreshold    = 25
 local g_targetThreshold
 local g_targetUnitFrame          -- Reference to default UI target unit frame
-local g_defaultTargetNameLabel   -- Reference to default UI target name label
-local g_MaxChampionPoint    = GetChampionPointsPlayerProgressionCap() -- Keet this value in local constant
+
+local CP_BAR_COLOURS = ZO_CP_BAR_GRADIENT_COLORS
 
 local g_PendingUpdate = {
     Group       = { flag = false, delay = 200 , name = moduleName .. "_PendingGroupUpdate" },
@@ -140,6 +142,21 @@ local defaultLabelFont = "/LuiExtended/media/fonts/fontin_sans_sc.otf|15|outline
 -- Very simple and crude translation support of common labels
 local strDead       = GetString(SI_UNIT_FRAME_STATUS_DEAD)
 local strOffline    = GetString(SI_UNIT_FRAME_STATUS_OFFLINE)
+
+-- Following settings will be used in options menu to define DefaultFrames behaviour
+local g_DefaultFramesOptions = {
+    [1] = "Disable",                                -- false
+    [2] = "Do nothing (keep default)",              -- nil
+    [3] = "Use Extender (display text overlay)",    -- true
+}
+
+-- This icon will be used for alternative bar when using ChampionXP
+local CHAMPION_ATTRIBUTE_HUD_ICONS = {
+    [ATTRIBUTE_NONE] = "/esoui/art/champion/champion_icon_32.dds",
+    [ATTRIBUTE_HEALTH] = "/esoui/art/champion/champion_points_health_icon-hud-32.dds",
+    [ATTRIBUTE_MAGICKA] = "/esoui/art/champion/champion_points_magicka_icon-hud-32.dds",
+    [ATTRIBUTE_STAMINA] = "/esoui/art/champion/champion_points_stamina_icon-hud-32.dds",
+}
 
 -- Default Regen/degen animation used on default group frames and custom frames
 local function CreateRegenAnimation(parent, anchors, dims, alpha, degen)
@@ -183,12 +200,6 @@ local function CreateDecreasedArmorOverlay( parent, small )
     return control
 end
 
--- Following settings will be used in options menu to define DefaultFrames behaviour
-local g_DefaultFramesOptions = {
-    [1] = "Disable",                                -- false
-    [2] = "Do nothing (keep default)",              -- nil
-    [3] = "Use Extender (display text overlay)",    -- true
-}
 function UF.GetDefaultFramesOptions(frame)
     local retval = {}
     for k,v in pairs(g_DefaultFramesOptions) do
@@ -559,7 +570,7 @@ local function CreateCustomFrames()
     -- Callback used to hide anchor coords preview label on movement start
     local tlwOnMoveStart = function(self)
         EVENT_MANAGER:RegisterForUpdate( moduleName .. "previewMove", 200, function()
-            self.preview.anchorLabel:SetText(strformat("%d, %d", self:GetLeft(), self:GetTop()))
+            self.preview.anchorLabel:SetText(strfmt("%d, %d", self:GetLeft(), self:GetTop()))
         end)
     end
     -- Callback used to save new position of frames
@@ -742,9 +753,9 @@ function UF.Initialize( enabled )
 
     -- Even if used do not want to use neither DefaultFrames nor CustomFrames, let us still create tables to hold health and shield values
     -- { powerValue, powerMax, powerEffectiveMax, shield }
-    g_savedHealth.player        = {1,1,1,0}
+    g_savedHealth.player          = {1,1,1,0}
     g_savedHealth.controlledsiege = {1,1,1,0}
-    g_savedHealth.reticleover   = {1,1,1,0}
+    g_savedHealth.reticleover     = {1,1,1,0}
     for i = 1, 24 do
         g_savedHealth["group" .. i] = {1,1,1,0}
     end
@@ -914,7 +925,6 @@ end
 -- Runs on the EVENT_PLAYER_ACTIVATED listener.
 -- This handler fires every time the player is loaded. Used to set initial values.
 function UF.OnPlayerActivated(eventCode)
-
     -- Reload values for player frames
     UF.ReloadValues("player")
     UF.UpdateRegen( "player", STAT_MAGICKA_REGEN_COMBAT, ATTRIBUTE_MAGICKA, POWERTYPE_MAGICKA )
@@ -1024,7 +1034,7 @@ end
 -- Runs on the EVENT_UNIT_CREATED listener.
 -- Used to create DefaultFrames UI controls and request delayed CustomFrames group frame update
 function UF.OnUnitCreated(eventCode, unitTag)
-    --d( strformat("[%s] OnUnitCreated: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
+    --d( strfmt("[%s] OnUnitCreated: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
 
     -- Create on-fly UI controls for default UI group member and reread his values
     if g_DefaultFrames.SmallGroup then
@@ -1033,7 +1043,6 @@ function UF.OnUnitCreated(eventCode, unitTag)
 
     -- If CustomFrames are used then values for unitTag will be reloaded in delayed full group update
     if UF.CustomFrames.SmallGroup1 ~= nil or UF.CustomFrames.RaidGroup1 ~= nil then
-
         -- Make sure we do not try to update bars on this unitTag before full group update is complete
         if "group" == string.sub(unitTag, 0, 5) then
             UF.CustomFrames[unitTag] = nil
@@ -1044,7 +1053,6 @@ function UF.OnUnitCreated(eventCode, unitTag)
             g_PendingUpdate.Group.flag = true
             EVENT_MANAGER:RegisterForUpdate(g_PendingUpdate.Group.name, g_PendingUpdate.Group.delay, UF.CustomFramesGroupUpdate )
         end
-
     -- Else we need to manually update this unitTag in g_DefaultFrames
     elseif g_DefaultFrames.SmallGroup then
         UF.ReloadValues(unitTag)
@@ -1054,7 +1062,7 @@ end
 -- Runs on the EVENT_UNIT_DESTROYED listener.
 -- Used to request delayed CustomFrames group frame update
 function UF.OnUnitDestroyed(eventCode, unitTag)
-    --d( strformat("[%s] OnUnitDestroyed: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
+    --d( strfmt("[%s] OnUnitDestroyed: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
 
     -- Make sure we do not try to update bars on this unitTag before full group update is complete
     if "group" == string.sub(unitTag, 0, 5) then
@@ -1145,9 +1153,8 @@ end
 -- Used to read initial values of target's health and shield.
 function UF.OnReticleTargetChanged(eventCode)
     if DoesUnitExist("reticleover") then
-
         UF.ReloadValues( "reticleover" )
-
+        
         local isWithinRange = IsUnitInGroupSupportRange("reticleover")
 
         -- Now select appropriate custom colour to target name and (possibly) reticle
@@ -1270,7 +1277,6 @@ end
 
 -- Used to query initial values and display them in corresponding control
 function UF.ReloadValues( unitTag )
-
     -- Build list of powerTypes this unitTag has in both DefaultFrames and CustomFrames
     local powerTypes = {}
     if g_DefaultFrames[unitTag] then
@@ -1400,7 +1406,7 @@ function UF.UpdateStaticControls( unitFrame )
     -- If unitFrame has unit name label control
     if unitFrame.name ~= nil then
         -- Update max width of label
-        local playerName = zo_strformat(SI_UNIT_NAME, GetUnitName("player"))
+        local playerName = strformat(SI_UNIT_NAME, GetUnitName("player"))
         if unitFrame.name:GetParent() == unitFrame.topInfo then
             local width = unitFrame.topInfo:GetWidth()
             if unitFrame.classIcon and not unitFrame.classIcon:IsHidden() then
@@ -1648,7 +1654,6 @@ function UF.UpdateStat(unitTag, statType, attributeType, powerType )
 
     -- If we have a control, proceed next
     if #statControls > 0 then
-
         -- Calculate actual value, and fallback to 0 if we call this function with nil parameters
         local value = (GetUnitAttributeVisualizerEffectInfo(unitTag, ATTRIBUTE_VISUAL_INCREASED_STAT, statType, attributeType, powerType) or 0)
                     + (GetUnitAttributeVisualizerEffectInfo(unitTag, ATTRIBUTE_VISUAL_DECREASED_STAT, statType, attributeType, powerType) or 0)
@@ -1712,7 +1717,7 @@ function UF.OnXPUpdate( eventCode, unitTag, currentExp, maxExp, reason )
     end
 
     if UF.CustomFrames.player.isChampion then
-        -- query for Veteran and Champion XP not more then once every 5 seconds
+        -- Query for Veteran and Champion XP not more then once every 5 seconds
         if not g_PendingUpdate.VeteranXP.flag then
             g_PendingUpdate.VeteranXP.flag = true
             EVENT_MANAGER:RegisterForUpdate( g_PendingUpdate.VeteranXP.name, g_PendingUpdate.VeteranXP.delay, UF.UpdateVeteranXP )
@@ -1724,7 +1729,7 @@ end
 
 -- Helper function that updates Champion XP bar. Called from event listener with 5 sec delay
 function UF.UpdateVeteranXP()
-    -- unregister update function
+    -- Unregister update function
     EVENT_MANAGER:UnregisterForUpdate( g_PendingUpdate.VeteranXP.name )
 
     if UF.CustomFrames.player then
@@ -1735,7 +1740,7 @@ function UF.UpdateVeteranXP()
         end
     end
 
-    -- clear local flag
+    -- Clear local flag
     g_PendingUpdate.VeteranXP.flag = false
 end
 
@@ -1748,7 +1753,7 @@ end
 
 -- Runs on the EVENT_GROUP_MEMBER_CONNECTED_STATUS listener.
 function UF.OnGroupMemberConnectedStatus(eventCode, unitTag, isOnline)
-    --d( strformat("DC: %s - %s", unitTag, isOnline and "Online" or "Offline" ) )
+    --d( strfmt("DC: %s - %s", unitTag, isOnline and "Online" or "Offline" ) )
     if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag].dead then
         UF.CustomFramesSetDeadLabel( UF.CustomFrames[unitTag], isOnline and nil or strOffline )
     end
@@ -1763,7 +1768,7 @@ end
 -- Runs on the EVENT_UNIT_DEATH_STATE_CHANGED listener.
 -- This handler fires every time a valid unitTag dies or is resurrected
 function UF.OnDeath(eventCode, unitTag, isDead)
-    --d( strformat("%s - %s", unitTag, isDead and "Dead" or "Alive" ) )
+    --d( strfmt("%s - %s", unitTag, isDead and "Dead" or "Alive" ) )
     if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag].dead then
         UF.CustomFramesSetDeadLabel( UF.CustomFrames[unitTag], isDead and strDead or nil )
     end
@@ -1950,16 +1955,6 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
     UF.CustomFrames.player.buffs:SetAnchor( TOP, hidden and UF.CustomFrames.player.control or UF.CustomFrames.player.botInfo, BOTTOM, 0, 5 )
 end
 
--- This icon will be used for alternative bar when using ChampionXP
-local CHAMPION_ATTRIBUTE_HUD_ICONS =
-{
-    [ATTRIBUTE_NONE] = "/esoui/art/champion/champion_icon_32.dds",
-    [ATTRIBUTE_HEALTH] = "/esoui/art/champion/champion_points_health_icon-hud-32.dds",
-    [ATTRIBUTE_MAGICKA] = "/esoui/art/champion/champion_points_magicka_icon-hud-32.dds",
-    [ATTRIBUTE_STAMINA] = "/esoui/art/champion/champion_points_stamina_icon-hud-32.dds",
-}
-local CP_BAR_COLOURS = ZO_CP_BAR_GRADIENT_COLORS
-
 -- Runs on EVENT_CHAMPION_POINT_GAINED event listener
 -- Used to change icon on alternative bar for next champion point type
 function UF.OnChampionPointGained(eventCode)
@@ -2057,7 +2052,7 @@ end
 
 -- Repopulate group members, but try to update only those, that require it
 function UF.CustomFramesGroupUpdate()
-    --d( strformat("[%s] GroupUpdate", GetTimeString()) )
+    --d( strfmt("[%s] GroupUpdate", GetTimeString()) )
 
     -- Unregister update function and clear local flag
     EVENT_MANAGER:UnregisterForUpdate( g_PendingUpdate.Group.name )
@@ -2073,8 +2068,8 @@ function UF.CustomFramesGroupUpdate()
     -- First hide default group frame, but if player has this option:
     -- Could be 4 possibilities never hide, hide only for small, hide only for large
     ZO_UnitFramesGroups:SetHidden( ( disableGroup and disableRaid ) or
-                                    ( disableGroup and GetGroupSize() <= 4 ) or
-                                    ( disableRaid and GetGroupSize() > 4 ) )
+                                   ( disableGroup and GetGroupSize() <= 4 ) or
+                                   ( disableRaid and GetGroupSize() > 4 ) )
 
     -- This requires some tricks if we want to keep list alphabetically sorted
     local groupList = {}
@@ -2208,7 +2203,6 @@ end
 
 -- Set anchors for all top level windows of CustomFrames
 function UF.CustomFramesSetPositions()
-
     local default_anchors = {
         ["player"]      = {TOPLEFT,TOPLEFT,468,745},
         ["reticleover"] = {TOPLEFT,TOPLEFT,1152,745},
@@ -2224,7 +2218,7 @@ function UF.CustomFramesSetPositions()
             local anchors = ( savedPos ~= nil and #savedPos == 2 ) and { TOPLEFT, TOPLEFT, savedPos[1], savedPos[2] } or default_anchors[unitTag]
             UF.CustomFrames[unitTag].tlw:ClearAnchors()
             UF.CustomFrames[unitTag].tlw:SetAnchor( anchors[1], GuiRoot, anchors[2], anchors[3], anchors[4] )
-            UF.CustomFrames[unitTag].tlw.preview.anchorLabel:SetText( ( savedPos ~= nil and #savedPos == 2 ) and strformat("%d, %d", savedPos[1], savedPos[2]) or "default" )
+            UF.CustomFrames[unitTag].tlw.preview.anchorLabel:SetText( ( savedPos ~= nil and #savedPos == 2 ) and strfmt("%d, %d", savedPos[1], savedPos[2]) or "default" )
         end
     end
 
@@ -2242,7 +2236,6 @@ end
 
 -- Unlock CustomFrames for moving. Called from Settings Menu.
 function UF.CustomFramesSetMovingState( state )
-
     UF.CustomFramesMovingState = state
 
     -- Unlock individual frames
@@ -2285,24 +2278,23 @@ end
 
 -- Apply selected colours for all known bars on custom unit frames
 function UF.CustomFramesApplyColours(isMenu)
-
-    local health = { UF.SV.CustomColourHealth[1], UF.SV.CustomColourHealth[2], UF.SV.CustomColourHealth[3], 0.9 }
-    local shield = { UF.SV.CustomColourShield[1], UF.SV.CustomColourShield[2], UF.SV.CustomColourShield[3], 0 } -- .a value will be fixed in the loop
-    local magicka = { UF.SV.CustomColourMagicka[1], UF.SV.CustomColourMagicka[2], UF.SV.CustomColourMagicka[3], 0.9 }
-    local stamina = { UF.SV.CustomColourStamina[1], UF.SV.CustomColourStamina[2], UF.SV.CustomColourStamina[3], 0.9 }
+    local health    = { UF.SV.CustomColourHealth[1],  UF.SV.CustomColourHealth[2],  UF.SV.CustomColourHealth[3], 0.9 }
+    local shield    = { UF.SV.CustomColourShield[1],  UF.SV.CustomColourShield[2],  UF.SV.CustomColourShield[3], 0 } -- .a value will be fixed in the loop
+    local magicka   = { UF.SV.CustomColourMagicka[1], UF.SV.CustomColourMagicka[2], UF.SV.CustomColourMagicka[3], 0.9 }
+    local stamina   = { UF.SV.CustomColourStamina[1], UF.SV.CustomColourStamina[2], UF.SV.CustomColourStamina[3], 0.9 }
     
-    local dps =  { UF.SV.CustomColourDPS[1], UF.SV.CustomColourDPS[2], UF.SV.CustomColourDPS[3], 0.9 }
-    local healer =  { UF.SV.CustomColourHealer[1], UF.SV.CustomColourHealer[2], UF.SV.CustomColourHealer[3], 0.9 }
-    local tank =  { UF.SV.CustomColourTank[1], UF.SV.CustomColourTank[2], UF.SV.CustomColourTank[3], 0.9 }
+    local dps       =  { UF.SV.CustomColourDPS[1],    UF.SV.CustomColourDPS[2],     UF.SV.CustomColourDPS[3], 0.9 }
+    local healer    =  { UF.SV.CustomColourHealer[1], UF.SV.CustomColourHealer[2],  UF.SV.CustomColourHealer[3], 0.9 }
+    local tank      =  { UF.SV.CustomColourTank[1],   UF.SV.CustomColourTank[2],    UF.SV.CustomColourTank[3], 0.9 }
 
-    local health_bg = { 0.1*UF.SV.CustomColourHealth[1], 0.1*UF.SV.CustomColourHealth[2], 0.1*UF.SV.CustomColourHealth[3], 0.9 }
-    local shield_bg = { 0.1*UF.SV.CustomColourShield[1], 0.1*UF.SV.CustomColourShield[2], 0.1*UF.SV.CustomColourShield[3], 0.9 }
+    local health_bg  = { 0.1*UF.SV.CustomColourHealth[1],  0.1*UF.SV.CustomColourHealth[2],  0.1*UF.SV.CustomColourHealth[3], 0.9 }
+    local shield_bg  = { 0.1*UF.SV.CustomColourShield[1],  0.1*UF.SV.CustomColourShield[2],  0.1*UF.SV.CustomColourShield[3], 0.9 }
     local magicka_bg = { 0.1*UF.SV.CustomColourMagicka[1], 0.1*UF.SV.CustomColourMagicka[2], 0.1*UF.SV.CustomColourMagicka[3], 0.9 }
     local stamina_bg = { 0.1*UF.SV.CustomColourStamina[1], 0.1*UF.SV.CustomColourStamina[2], 0.1*UF.SV.CustomColourStamina[3], 0.9 }
     
-    local dps_bg = { 0.1*UF.SV.CustomColourDPS[1], 0.1*UF.SV.CustomColourDPS[2], 0.1*UF.SV.CustomColourDPS[3], 0.9 }
+    local dps_bg    = { 0.1*UF.SV.CustomColourDPS[1],    0.1*UF.SV.CustomColourDPS[2],    0.1*UF.SV.CustomColourDPS[3], 0.9 }
     local healer_bg = { 0.1*UF.SV.CustomColourHealer[1], 0.1*UF.SV.CustomColourHealer[2], 0.1*UF.SV.CustomColourHealer[3], 0.9 }
-    local tank_bg = { 0.1*UF.SV.CustomColourTank[1], 0.1*UF.SV.CustomColourTank[2], 0.1*UF.SV.CustomColourTank[3], 0.9 }
+    local tank_bg   = { 0.1*UF.SV.CustomColourTank[1],   0.1*UF.SV.CustomColourTank[2],   0.1*UF.SV.CustomColourTank[3], 0.9 }
 
     -- After colour is applied unhide frames, so player can see changes even from menu
     for _, baseName in pairs( { "player", "reticleover", "boss", "AvaPlayerTarget" } ) do
@@ -2363,7 +2355,6 @@ function UF.CustomFramesApplyColours(isMenu)
         end
     end
         
-
     -- Player frame also requires setting of magicka and stamina bars
     if UF.CustomFrames.player then
         UF.CustomFrames.player[POWERTYPE_MAGICKA].bar:SetColor( unpack(magicka) )
@@ -2399,7 +2390,6 @@ end
 
 -- Apply selected texture for all known bars on custom unit frames
 function UF.CustomFramesApplyTexture()
-
     local texture = LUIE.StatusbarTextures[UF.SV.CustomTexture]
 
     -- After texture is applied unhide frames, so player can see changes even from menu
@@ -2470,7 +2460,6 @@ end
 
 -- Apply selected font for all known label on default unit frames
 function UF.DefaultFramesApplyFont(unitTag)
-
     -- First try selecting font face
     local fontName = LUIE.Fonts[UF.SV.DefaultFontFace]
     if not fontName or fontName == "" then
@@ -2486,7 +2475,7 @@ function UF.DefaultFramesApplyFont(unitTag)
             local unitFrame = g_DefaultFrames[unitTag]
             for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
                 if unitFrame[powerType] then
-                    unitFrame[powerType].label:SetFont( strformat( "%s|%d|%s", fontName, fontSize, fontStyle ) )
+                    unitFrame[powerType].label:SetFont( strfmt( "%s|%d|%s", fontName, fontSize, fontStyle ) )
                 end
             end
         end
@@ -2509,7 +2498,6 @@ end
 
 -- Reapplies colour for default unit frames extender module labels
 function UF.DefaultFramesApplyColour()
-
     -- Helper function
     local __applyColour = function(unitTag)
         if g_DefaultFrames[unitTag] then
@@ -2534,7 +2522,6 @@ end
 
 -- Apply selected font for all known label on custom unit frames
 function UF.CustomFramesApplyFont()
-
     -- First try selecting font face
     local fontName = LUIE.Fonts[UF.SV.CustomFontFace]
     if not fontName or fontName == "" then
@@ -2546,7 +2533,7 @@ function UF.CustomFramesApplyFont()
     local sizeCaption = ( UF.SV.CustomFontOther and UF.SV.CustomFontOther > 0 ) and UF.SV.CustomFontOther or 16
     local sizeBars = ( UF.SV.CustomFontBars and UF.SV.CustomFontBars > 0 ) and UF.SV.CustomFontBars or 14
 
-    local __mkFont = function(size) return strformat( "%s|%d|%s", fontName, size, fontStyle ) end
+    local __mkFont = function(size) return strfmt( "%s|%d|%s", fontName, size, fontStyle ) end
 
     -- After fonts is applied unhide frames, so player can see changes even from menu
     for _, baseName in pairs( { "player", "reticleover", "SmallGroup", "RaidGroup", "boss", "AvaPlayerTarget" } ) do
@@ -2637,7 +2624,6 @@ end
 
 -- Set dimensions of custom group frame and anchors or raid group members
 function UF.CustomFramesApplyLayoutPlayer()
-
     -- Player frame
     if UF.CustomFrames.player then
         local player = UF.CustomFrames.player

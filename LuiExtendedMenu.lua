@@ -4,12 +4,12 @@ local strformat = zo_strformat
 function LUIE_CreateSettings()
     -- Load LibAddonMenu
     local LAM2  = LibStub("LibAddonMenu-2.0")
-    
+
     local l_BuffsMovingEnabled  = false -- Helper local flag
     local FontsList             = {}
     local FontsListCombatInfo   = {}
     local StatusbarTexturesList = {}
-    
+
     -- Get Fonts
     for f in pairs(LUIE.Fonts) do
         table.insert(FontsList, f)
@@ -38,7 +38,7 @@ function LUIE_CreateSettings()
     local rotationOptionsKeys           = { ["Horizontal"] = 1, ["Vertical"] = 2 }
     local hAlignOptions                 = { "Left", "Centered", "Right" }
     local vAlignOptions                 = { "Top", "Middle", "Bottom" }
-    
+
     local formatOptions = {
         "Nothing",
         "Current",
@@ -873,7 +873,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_BUFF_FONTS),
+                name = GetString(SI_LUIE_LAM_FONT),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_FONTS_TOOLTIP),
                 choices = FontsList,
                 sort = "name-up",
@@ -885,7 +885,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_BUFF_FONTS_SIZE),
+                name = GetString(SI_LUIE_LAM_FONT_SIZE),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_FONTS_SIZE_TOOLTIP),
                 min = 10, max = 30, step = 1,
                 getFunc = function() return LUIE.SpellCastBuffs.SV.BuffFontSize end,
@@ -896,7 +896,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_BUFF_FONTS_STYLE),
+                name = GetString(SI_LUIE_LAM_FONT_STYLE),
                 choices = styleOptions,
                 sort = "name-up",
                 getFunc = function() return LUIE.SpellCastBuffs.SV.BuffFontStyle end,
@@ -1052,7 +1052,7 @@ function LUIE_CreateSettings()
                 default = not LUIE.SpellCastBuffs.D.IgnoreEsoPlusTarget,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             },
-            
+
             {
                 -- Show Disguises
                 type = "checkbox",
@@ -1270,7 +1270,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SpellCastBuffs.D.DisguiseStateTarget,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },            
+            },
             {
                 -- Show Sprint Icon
                 type = "checkbox",
@@ -1283,7 +1283,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
             {
-                -- Show Gallop Icon 
+                -- Show Gallop Icon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP_TOOLTIP),
@@ -1998,7 +1998,7 @@ function LUIE_CreateSettings()
                         disabled =  function() return not (LUIE.ChatAnnouncements.SV.CurrencyContextToggle and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.CurrencyContextMessageUp,
                     },
-                    {   
+                    {
                         -- Context Override Message Currency Loss
                         type = "editbox",
                         name = GetString(SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_LOSS),
@@ -2009,7 +2009,7 @@ function LUIE_CreateSettings()
                         disabled =  function() return not (LUIE.ChatAnnouncements.SV.CurrencyContextToggle and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.CurrencyContextMessageDown,
                     },
-                    {   
+                    {
                         -- Total Currency Message
                         type = "editbox",
                         name = GetString(SI_LUIE_LAM_CA_CURRENCY_TOTALCURRENCYMSG),
@@ -2345,7 +2345,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootCurrencyCombo end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootCurrencyCombo = value end,
                         width = "full",
-                        warning = GetString(SI_LUIE_LAM_CA_LOOT_MERGEWITHCURRENCY_WARNING),
+                        warning = GetString(SI_LUIE_LAM_GENERIC_WARNING),
                         disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
                             (
                                 LUIE.ChatAnnouncements.SV.Loot or
@@ -2365,7 +2365,7 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_CA_EXP_HEADER),
                 reference = "Chat_Announcements_Options_Experience_Announcements_Submenu",
                 controls = {
-                    {   
+                    {
                         -- Show Level Up Message in Chat
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_EXP_LVLUPMSG),
@@ -2410,7 +2410,7 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.ExperienceIcon,
                     },
                     {
-                        -- Combat Experience Gain Filter Threshold 
+                        -- Combat Experience Gain Filter Threshold
                         type = "slider",
                         name = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD),
                         tooltip = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD_TOOLTIP),
@@ -2738,94 +2738,104 @@ function LUIE_CreateSettings()
         },
     }
 
-    optionsData[#optionsData + 1] = { -- Use system for messages
+    -- Use LUI print to chat for messages
+    optionsData[#optionsData + 1] = {
         type = "checkbox",
-        name = "Use LUIE print to chat function",
-        tooltip = "Prints messages using the LUIE specific print to chat function, this will prevent messages from being affected by pChat timestamps and from being logged and restored by pChat.",
+        name = GetString(SI_LUIE_LAM_LUIPRINTTOCHAT),
+        tooltip = GetString(SI_LUIE_LAM_LUIPRINTTOCHAT_TOOLTIP),
         getFunc = function() return LUIE.SV.ChatUseSystem end,
         setFunc = function(value) LUIE.SV.ChatUseSystem = value end,
         width = "full",
-        warning = "Enable this only if you know what you are doing.",
+        warning = GetString(SI_LUIE_LAM_GENERIC_WARNING),
         default = LUIE.D.ChatUseSystem,
     }
-    optionsData[#optionsData + 1] = { -- Timestamp
+    -- Include Timestamp
+    optionsData[#optionsData + 1] = {
         type = "checkbox",
-        name = "\t\tInclude Timestamp",
-        tooltip = "Prepend printed text with current time label.",
+        name = strformat("\t\t<<1>>", GetString(SI_LUIE_LAM_TIMESTAMP)),
+        tooltip = GetString(SI_LUIE_LAM_TIMESTAMP_TOOLTIP),
         getFunc = function() return LUIE.SV.TimeStamp end,
         setFunc = function(value) LUIE.SV.TimeStamp = value end,
         width = "full",
         disabled = function() return not LUIE.SV.ChatUseSystem end,
         default = LUIE.D.TimeStamp,
     }
-    optionsData[#optionsData + 1] = { -- Timestamp Format
+    -- Timestamp Format
+    optionsData[#optionsData + 1] = {
         type = "editbox",
-        name = "\t\tTimestamp format",
-        tooltip = "FORMAT:\nHH: hours (24)\nhh: hours (12)\nH: hour (24, no leading 0)\nh: hour (12, no leading 0)\nA: AM/PM\na: am/pm\nm: minutes\ns: seconds",
+        name = strformat("\t\t<<1>>", GetString(SI_LUIE_LAM_TIMESTAMPFORMAT)),
+        tooltip = GetString(SI_LUIE_LAM_TIMESTAMPFORMAT_TOOLTIP),
         getFunc = function() return LUIE.SV.TimeStampFormat end,
         setFunc = function(value) LUIE.SV.TimeStampFormat = value end,
         width = "full",
         disabled = function() return not (LUIE.SV.ChatUseSystem and LUIE.SV.TimeStamp) end,
         default = LUIE.D.TimeStampFormat,
     }
-    optionsData[#optionsData + 1] = { -- Startup message options
+    -- Startup message options
+    optionsData[#optionsData + 1] = {
         type = "checkbox",
-        name = "Disable startup message",
-        tooltip = "This setting will disable add-on startup message.",
+        name = GetString(SI_LUIE_LAM_STARTUPMSG),
+        tooltip = GetString(SI_LUIE_LAM_STARTUPMSG_TOOLTIP),
         getFunc = function() return LUIE.SV.StartupInfo end,
         setFunc = function(value) LUIE.SV.StartupInfo = value end,
         width = "full",
         default = LUIE.D.StartupInfo,
     }
+    -- Slash Commands Overview
     optionsData[#optionsData + 1] = {
         type = "header",
-        name = "LUIE Slash Commands Overview",
+        name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER),
         width = "full",
     }
     optionsData[#optionsData + 1] = {
         type = "description",
-        text = "\"/home:\" Ports the user to their primary home.\n\"/disband:\" Disbands the current group if you are group leader.\n\"/regroup:\" Saves your current party configuration, disbands the group and reinvites them after 5 seconds. This command does not work in LFG.\n\"/ginvite1,2,3,4,5:\" Invites a player to one of your guilds based on their order in your Guild Menu. Example syntax: \"/ginvite1 @ArtOfShred\"",
+        text = strformat("<<1>>\n<<2>>\n<<3>>\n<<4>>", GetString(SI_LUIE_LAM_SLASHCMDS_HOME), GetString(SI_LUIE_LAM_SLASHCMDS_DISBAND), GetString(SI_LUIE_LAM_SLASHCMDS_REGROUP), GetString(SI_LUIE_LAM_SLASHCMDS_GUILDINV)),
     }
 
-    --[[  BEGIN UNIT FRAMES SETTING PANEL ]]--
+    -- Enable Unit Frames module
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Enable Unit Frames Module",
+        name = GetString(SI_LUIE_LAM_UNITFRAMES_ENABLE),
         getFunc = function() return LUIE.SV.UnitFrames_Enabled end,
         setFunc = function(value) LUIE.SV.UnitFrames_Enabled = value end,
         width = "full",
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.D.UnitFrames_Enabled,
     }
+    -- Unit Frames module description
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "description",
-        text = "This module allows display of textual attributes information over default UI controls. It also creates custom frames for player and target. Many of the settings can be applied only after reload of UI.",
+        text = GetString(SI_LUIE_LAM_UNITFRAMES_DESCRIPTION),
     }
+    -- ReloadUI Button
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "button",
         name = "Reload UI",
-        tooltip = "This will reload UI",
+        tooltip = GetString(SI_LUIE_LAM_RELOADUI),
         func = function() ReloadUI("ingame") end,
         width = "full",
     }
+    -- Shorten numbers
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Shorten numbers on all bars",
-        tooltip = "Replace large numbers like 12,345 with 12.3k on all bars and labels related to unit frames.",
+        name = GetString(SI_LUIE_LAM_UNITFRAMES_SHORTNUMBERS),
+        tooltip = GetString(SI_LUIE_LAM_UNITFRAMES_SHORTNUMBERS_TOOLTIP),
         getFunc = function() return LUIE.UnitFrames.SV.ShortenNumbers end,
         setFunc = function(value) LUIE.UnitFrames.SV.ShortenNumbers = value end,
         width = "full",
         default = LUIE.UnitFrames.D.ShortenNumbers,
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Default Frames header
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "header",
-        name = "Default Unit Frames",
+        name = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_HEADER),
         width = "full",
     }
+    -- Default PLAYER frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = "Default PLAYER Frame",
+        name = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_PLAYER),
         choices = LUIE.UnitFrames.GetDefaultFramesOptions('Player'),
         getFunc = function() return LUIE.UnitFrames.GetDefaultFramesSetting('Player') end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Player', value) end,
@@ -2834,9 +2844,10 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.UnitFrames.GetDefaultFramesSetting('Player', true),
     }
+    -- Default TARGET frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = "Default TARGET Frame",
+        name = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_TARGET),
         choices = LUIE.UnitFrames.GetDefaultFramesOptions('Target'),
         getFunc = function() return LUIE.UnitFrames.GetDefaultFramesSetting('Target') end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Target', value) end,
@@ -2845,9 +2856,10 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.UnitFrames.GetDefaultFramesSetting('Target', true),
     }
+    -- Default small GROUP frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = "Default Small GROUP Frame",
+        name = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_GROUPSMALL),
         choices = LUIE.UnitFrames.GetDefaultFramesOptions('Group'),
         getFunc = function() return LUIE.UnitFrames.GetDefaultFramesSetting('Group') end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Group', value) end,
@@ -2856,10 +2868,11 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.UnitFrames.GetDefaultFramesSetting('Group', true),
     }
+    -- Reposition default player bars
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Reposition default player bars",
-        tooltip = "Change position of default unit frames to be stuck in the center.",
+        name = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_REPOSITION),
+        tooltip = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_REPOSIT_TOOLTIP),
         getFunc = function() return LUIE.UnitFrames.SV.RepositionFrames end,
         setFunc = function(value) LUIE.UnitFrames.SV.RepositionFrames = value end,
         width = "full",
@@ -2867,10 +2880,11 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Format label text
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = "Format label text",
-        tooltip = "Format of the label text over default unit frames.",
+        name = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_LABEL),
+        tooltip = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_LABEL_TOOLTIP),
         choices = formatOptions,
         getFunc = function() return LUIE.UnitFrames.SV.Format end,
         setFunc = function(var) LUIE.UnitFrames.SV.Format = var end,
@@ -2878,10 +2892,11 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.Format,
     }
+    -- Out-of-Combat bars transparency
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Out-of-Combat bars transparency",
-        tooltip = "This will change the value of transparency of default unit frames when player is out of combat. Default UI makes frames disappear completely, this value is 0.",
+        name = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_OOCTRANS),
+        tooltip = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_OOCTRANS_TOOLTIP),
         min = 0, max = 100, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.DefaultOocTransparency end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesTransparency(value, nil) end,
@@ -2889,10 +2904,11 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.DefaultOocTransparency,
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- In-Combat bars transparency
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "In-Combat bars transparency",
-        tooltip = "This will change the value of transparency of default unit frames when player is in combat. Default UI makes frames fully visible, this value is 100.",
+        name = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_INCTRANS),
+        tooltip = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_INCTRANS_TOOLTIP),
         min = 0, max = 100, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.DefaultIncTransparency end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesTransparency(nil, value) end,
@@ -2900,10 +2916,11 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.DefaultIncTransparency,
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- DefaultFrames Font
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = "Font",
-        tooltip = "Font to display all labels on default frames.",
+        name = GetString(SI_LUIE_LAM_FONT),
+        tooltip = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_FONT_TOOLTIP),
         choices = FontsList,
         sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.DefaultFontFace end,
@@ -2912,10 +2929,11 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.DefaultFontFace,
     }
+    -- DefaultFrames Font Size
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Font Size",
-        tooltip = "Font Size to be used on all labels on the default unit frames bars.",
+        name = GetString(SI_LUIE_LAM_FONT_SIZE),
+        tooltip = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_FONT_SIZE_TOOLTIP),
         min = 10, max = 30, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.DefaultFontSize end,
         setFunc = function(value) LUIE.UnitFrames.SV.DefaultFontSize = value LUIE.UnitFrames.DefaultFramesApplyFont() end,
@@ -2923,9 +2941,10 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.DefaultFontSize,
     }
-     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+    -- DefaultFrames Font Style
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = "Font Style",
+        name = GetString(SI_LUIE_LAM_FONT_STYLE),
         choices = styleOptions,
         sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.DefaultFontStyle end,
@@ -2934,9 +2953,10 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.DefaultFontStyle,
     }
+    -- Color of text labels
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = "Colour of text labels",
+        name = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_LABEL_COLOR),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.DefaultTextColour) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.DefaultTextColour={r,g,b} LUIE.UnitFrames.DefaultFramesApplyColour() end,
         width = "full",

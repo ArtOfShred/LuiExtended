@@ -1,5 +1,5 @@
 ------------------
--- Local namespace
+-- SpellCastBuffs namespace
 LUIE.SpellCastBuffs = {}
 
 -- Performance Enhancement
@@ -10,7 +10,6 @@ local E         = LUIE.Effects
 local A         = LUIE.GetAbility()
 local strfmt    = string.format
 local strformat = zo_strformat
-local strfind   = zo_plainstrfind
 local pairs     = pairs -- What does this do?
 
 local moduleName = LUIE.name .. "_SpellCastBuffs"
