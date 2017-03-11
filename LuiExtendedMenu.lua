@@ -2787,11 +2787,15 @@ function LUIE_CreateSettings()
         name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER),
         width = "full",
     }
+    -- Slash Commands description
     optionsData[#optionsData + 1] = {
         type = "description",
-        text = strformat("<<1>>\n<<2>>\n<<3>>\n<<4>>", GetString(SI_LUIE_LAM_SLASHCMDS_HOME), GetString(SI_LUIE_LAM_SLASHCMDS_DISBAND), GetString(SI_LUIE_LAM_SLASHCMDS_REGROUP), GetString(SI_LUIE_LAM_SLASHCMDS_GUILDINV)),
+        text = strformat("<<1>>\n<<2>>\n<<3>>\n<<4>>",
+               GetString(SI_LUIE_LAM_SLASHCMDS_HOME),
+               GetString(SI_LUIE_LAM_SLASHCMDS_DISBAND),
+               GetString(SI_LUIE_LAM_SLASHCMDS_REGROUP),
+               GetString(SI_LUIE_LAM_SLASHCMDS_GUILDINV)),
     }
-
     -- Enable Unit Frames module
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
