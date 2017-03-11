@@ -11,28 +11,28 @@ function LUIE_CreateSettings()
     local StatusbarTexturesList = {}
     
     -- Get Fonts
-    for f in pairs( LUIE.Fonts ) do
+    for f in pairs(LUIE.Fonts) do
         table.insert(FontsList, f)
     end
-    for key, _ in pairs( LUIE.CombatInfo.FontFamilies ) do
-        table.insert( FontsListCombatInfo, key )
+    for key, _ in pairs(LUIE.CombatInfo.FontFamilies) do
+        table.insert(FontsListCombatInfo, key)
     end
-    for key, _ in pairs( LUIE.StatusbarTextures ) do
-        table.insert( StatusbarTexturesList, key )
+    for key, _ in pairs(LUIE.StatusbarTextures) do
+        table.insert(StatusbarTexturesList, key)
     end
 
-    local styleOptions                  = {"normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline"}
-    local nameDisplayOptions            = {"@UserID", "Character Name", "Character Name @UserID"}
+    local styleOptions                  = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" }
+    local nameDisplayOptions            = { "@UserID", "Character Name", "Character Name @UserID" }
     local nameDisplayOptionsKeys        = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
-    local chatnameDisplayOptions        = {"@UserID", "Character Name", "Character Name @UserID"}
+    local chatnameDisplayOptions        = { "@UserID", "Character Name", "Character Name @UserID" }
     local chatnameDisplayOptionsKeys    = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
-    local currencyBracketOptions        = {"[]", "()", "Hyphen", "No Brackets"}
+    local currencyBracketOptions        = { "[]", "()", "Hyphen", "No Brackets" }
     local currencyBracketOptionsKeys    = { ["[]"] = 1, ["()"] = 2, ["Hyphen"] =3, ["No Brackets"] = 4 }
-    local itemBracketOptions            = {"[]", "()", "Hyphen", "No Brackets"}
+    local itemBracketOptions            = { "[]", "()", "Hyphen", "No Brackets" }
     local itemBracketOptionsKeys        = { ["[]"] = 1, ["()"] = 2, ["Hyphen"] =3, ["No Brackets"] = 4 }
-    local experienceDisplayOptions      = {"Value", "Percentage", "Both"}
+    local experienceDisplayOptions      = { "Value", "Percentage", "Both" }
     local experienceDisplayOptionsKeys  = { ["Value"] = 1, ["Percentage"] = 2, ["Both"] = 3 }
-    local guildrankDisplayOptions       = { "Self Only", "Self + All w/ Permissions", "Display All Rank Changes"}
+    local guildrankDisplayOptions       = { "Self Only", "Self + All w/ Permissions", "Display All Rank Changes" }
     local guildrankDisplayOptionsKeys   = { ["Self Only"] = 1, ["Self + All w/ Permissions"] = 2, ["Display All Rank Changes"] = 3 }
     local rotationOptions               = { "Horizontal", "Vertical" }
     local rotationOptionsKeys           = { ["Horizontal"] = 1, ["Vertical"] = 2 }
@@ -1800,7 +1800,7 @@ function LUIE_CreateSettings()
                         -- Hide Gold Spent on AH
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TOOLTIP),
+                        tooltip = strformat("<<1>>\n<<2>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TOOLTIP), GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_NOTE)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GoldHideAHSpente end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldHideAHSpent = value end,
                         width = "full",
@@ -2562,14 +2562,16 @@ function LUIE_CreateSettings()
                 },
             },
             {
+                -- CA Experience Announcements Options Submenu
                 type = "submenu",
-                name = "Achievements Announcements",
+                name = GetString(SI_LUIE_LAM_CA_ACHIEVE_HEADER),
                 reference = "Chat_Announcements_Options_Achievements_Announcements_Submenu",
                 controls = {
                     {
+                        -- Enable Achievements Tracking
                         type = "checkbox",
-                        name = "Enable Achievements Tracking",
-                        tooltip = "Enables achievements tracking sub-module. Below you can select categories of achievements to be tracked.",
+                        name = GetString(SI_LUIE_LAM_CA_ACHIEVE_ENABLE),
+                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_ENABLE_TOOLTIP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.Achievements end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.Achievements = value LUIE.ChatAnnouncements.RegisterAchievementsEvent() end,
                         width = "full",
@@ -2577,9 +2579,10 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.Achievements,
                     },
                     {
+                        -- Achievements Step Size
                         type = "slider",
-                        name = "Achievements Step Size, %",
-                        tooltip = "Display achievement update information every #% to completion. Setting this value to 0 means to print achievement information on every update event.",
+                        name = GetString(SI_LUIE_LAM_CA_ACHIEVE_STEPSIZE),
+                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_STEPSIZE_TOOLTIP),
                         min = 0, max = 25, step = 1,
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsStep end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsStep = value end,
@@ -2588,9 +2591,10 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
+                        -- Show Detailed Achievement Info
                         type = "checkbox",
-                        name = "Show Detailed Achievement Info",
-                        tooltip = "Displays each subcategory required for achievement completion and completion of each subcategory.",
+                        name = GetString(SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO),
+                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO_TOOLTIP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
                         width = "full",
@@ -2598,9 +2602,10 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
+                        -- Enables achievements tracking in %s category
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(1),
-                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(1)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_ENABLE_CATEGORY), GetAchievementCategoryInfo(1)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory1 end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory1 = value end,
                         width = "full",
@@ -2608,9 +2613,10 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
+                        -- Enables achievements tracking in %s category
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(2),
-                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(2)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_ENABLE_CATEGORY), GetAchievementCategoryInfo(2)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory2 end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory2 = value end,
                         width = "full",
@@ -2618,9 +2624,10 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
+                        -- Enables achievements tracking in %s category
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(3),
-                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(3)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_ENABLE_CATEGORY), GetAchievementCategoryInfo(3)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory3 end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory3 = value end,
                         width = "full",
@@ -2628,9 +2635,10 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
+                        -- Enables achievements tracking in %s category
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(4),
-                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(4)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_ENABLE_CATEGORY), GetAchievementCategoryInfo(4)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory4 end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory4 = value end,
                         width = "full",
@@ -2638,9 +2646,10 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
+                        -- Enables achievements tracking in %s category
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(5),
-                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(5)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_ENABLE_CATEGORY), GetAchievementCategoryInfo(5)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory5 end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory5 = value end,
                         width = "full",
@@ -2648,9 +2657,10 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
+                        -- Enables achievements tracking in %s category
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(6),
-                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(6)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_ENABLE_CATEGORY), GetAchievementCategoryInfo(6)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory6 end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory6 = value end,
                         width = "full",
@@ -2658,9 +2668,10 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
+                        -- Enables achievements tracking in %s category
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(7),
-                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(7)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_ENABLE_CATEGORY), GetAchievementCategoryInfo(7)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory7 end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory7 = value end,
                         width = "full",
@@ -2668,9 +2679,10 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
+                        -- Enables achievements tracking in %s category
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(8),
-                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(8)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_ENABLE_CATEGORY), GetAchievementCategoryInfo(8)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory8 end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory8 = value end,
                         width = "full",
@@ -2678,9 +2690,10 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
+                        -- Enables achievements tracking in %s category
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(9),
-                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(9)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_ENABLE_CATEGORY), GetAchievementCategoryInfo(9)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory9 end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory9 = value end,
                         width = "full",
@@ -2688,9 +2701,10 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
+                        -- Enables achievements tracking in %s category
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(10),
-                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(10)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_ENABLE_CATEGORY), GetAchievementCategoryInfo(10)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory10 end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory10 = value end,
                         width = "full",
@@ -2698,9 +2712,10 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
+                        -- Enables achievements tracking in %s category
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(11),
-                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(11)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_ENABLE_CATEGORY), GetAchievementCategoryInfo(11)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory11 end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory11 = value end,
                         width = "full",
@@ -2708,9 +2723,10 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievements and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
                     {
+                        -- Enables achievements tracking in %s category
                         type = "checkbox",
                         name = GetAchievementCategoryInfo(12),
-                        tooltip = strformat("Enables achievements tracking in <<1>> category.", GetAchievementCategoryInfo(12)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_ENABLE_CATEGORY), GetAchievementCategoryInfo(12)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory12 end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory12 = value end,
                         width = "full",

@@ -4,7 +4,6 @@ LUIE.ChatAnnouncements = {}
 
 -- Performance Enhancement
 local CA             = LUIE.ChatAnnouncements
-local CommaValue     = LUIE.CommaValue
 local E              = LUIE.Effects
 local printToChat    = LUIE.PrintToChat
 local strformat      = zo_strformat
@@ -331,7 +330,7 @@ function CA.RegisterMaraEvents()
 end
 
 function CA.RegisterDuelEvents()
-    -- EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_COUNTDOWN, CA.DuelCountdown) 
+    -- EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_COUNTDOWN, CA.DuelCountdown)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_INVITE_RECEIVED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_INVITE_ACCEPTED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_INVITE_SENT)
@@ -718,13 +717,13 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
     local currentRank = g_guildRankData[guildId].rank
     local hasPermission1 = DoesGuildRankHavePermission(guildId, currentRank, 4)
     local hasPermission2 = DoesGuildRankHavePermission(guildId, currentRank, 5)
-    
+
     if ((hasPermission1 or hasPermission2) and DisplayName ~= g_playerDisplayName and CA.SV.GuildRankDisplayOptions == 2) or (CA.SV.GuildRankDisplayOptions == 3 and DisplayName ~= g_playerDisplayName) then
         local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
         local rankName
         local rankNameDefault = GetDefaultGuildRankName(guildId, newRank)
         local rankNameCustom = GetGuildRankCustomName(guildId, newRank)
-        
+
         if rankNameCustom == "" then
             rankName = rankNameDefault
         else
@@ -737,7 +736,7 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
         local rankSyntax = CA.SV.MiscGuildIcon and zo_iconTextFormat(icon, iconSize, iconSize, ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
         local guildName = GetGuildName(guildId)
         local guilds = GetNumGuilds()
-        
+
         for i = 1,guilds do
             local id = GetGuildId(i)
             local name = GetGuildName(id)
@@ -751,7 +750,7 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
             end
         end
     end
-    
+
     -- Cancel out if its not the player being promoted. It would be a little inefficient to index all guild members on initialize for this.
     if DisplayName == g_playerDisplayName then
         local rankName
@@ -905,8 +904,8 @@ function CA.QuestShared (eventCode, questId)
     if CA.SV.ChatPlayerDisplayOptions == 2 then
         printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE), characterNameLink, questName))
     end
-    if CA.SV.ChatPlayerDisplayOptions == 3
-        then printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE), displayBoth, questName))
+    if CA.SV.ChatPlayerDisplayOptions == 3 then
+        printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE), displayBoth, questName))
     end
 end
 
@@ -921,7 +920,9 @@ end
 
 -- Checks to see if quest was accepted 50 ms after share is removed
 function CA.QuestShareMessageHelper()
-    if g_QuestShareFudger == false then printToChat(GetString(SI_LUIE_CA_GROUP_QUEST_SHARE_DECLINED)) end
+    if g_QuestShareFudger == false then
+        printToChat(GetString(SI_LUIE_CA_GROUP_QUEST_SHARE_DECLINED))
+    end
 end
 
 -- Reset message state after 100 ms
@@ -953,14 +954,14 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_LUIE_CA_GROUP_MEMBER_KICKED, GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_ALT), 1) -- Replaces default syntax style string with LUIE style
         SafeAddString(SI_LUIE_CA_GROUP_MEMBER_LEAVE, GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_ALT), 1) -- Replaces default syntax style string with LUIE style
         SafeAddString(SI_GROUP_NOTIFICATION_GROUP_LEADER_CHANGED, GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_ALT), 1)
-        
+
         -- Group Finder String Replacements
         SafeAddString(SI_GROUPING_TOOLS_ALERT_LFG_JOINED, GetString(SI_LUIE_CA_GROUP_FINDER_ALERT_LFG_JOINED), 1)
         SafeAddString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL, GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL_ALT), 1) -- Replaces default syntax style string with LUIE style
         SafeAddString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START, GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START_ALT), 1) -- Replaces default syntax style string with LUIE style
         SafeAddString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_PASSED, GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_PASSED_ALT), 1) -- Replaces default syntax style string with LUIE style
         SafeAddString(SI_LFG_READY_CHECK_TEXT, GetString(SI_LUIE_CA_GROUP_FINDER_READY_CHECK_TEXT), 2)
-        
+
         -- Mara String Replacements
         SafeAddString(SI_PLEDGEOFMARARESULT0, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT0), 1)
         SafeAddString(SI_PLEDGEOFMARARESULT1, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT1), 1)
@@ -969,15 +970,15 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_PLEDGEOFMARARESULT4, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT4), 2)
         SafeAddString(SI_PLEDGEOFMARARESULT6, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT6), 1)
         SafeAddString(SI_PLEDGEOFMARARESULT7, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT7), 1)
-        
+
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_RITUAL_OF_MARA, GetString(SI_PLEDGE_OF_MARA_MESSAGE), 1)
         SafeAddString(SI_PLAYER_TO_PLAYER_OUTGOING_RITUAL_OF_MARA, GetString(SI_PLEDGE_OF_MARA_SENDER_MESSAGE), 1)
-        
+
         -- Quest Share String Replacements
         SafeAddString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE, GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_ALT), 1)
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_ALT), 3)
         SafeAddString(SI_QUEST_SHARE_MESSAGE, GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_ALT), 1)
-        
+
         -- Trade String Replacements
         SafeAddString(SI_TRADE_INVITE_CONFIRM, GetString(SI_LUIE_CA_TRADE_INVITE_CONFIRM), 1)
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_TRADE, GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), 1)
@@ -998,7 +999,7 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_LUIE_CA_FRIENDS_FRIEND_ADDED, GetString(SI_LUIE_CA_FRIENDS_FRIEND_ADDED_ALT), 1) -- Replaces default syntax style string with LUIE style
         SafeAddString(SI_LUIE_CA_FRIENDS_FRIEND_REMOVED, GetString(SI_LUIE_CA_FRIENDS_FRIEND_REMOVED_ALT), 1) -- Replaces default syntax style string with LUIE style
         SafeAddString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST, GetString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST_ALT), 1) -- Replaces default syntax style string with LUIE style
-        
+
         -- Guild Invite String Replacements
         SafeAddString(SI_GUILD_ROSTER_INVITED_MESSAGE, GetString(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE_ALT), 2)
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST_ALT), 1)
@@ -1009,7 +1010,6 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_GUILD_ROSTER_REMOVED, GetString(SI_LUIE_CA_GUILD_ROSTER_REMOVED), 2)
         SafeAddString(SI_LUIE_CA_GUILD_RANK_CHANGED, GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_ALT), 1)
 
-        
         -- Duel String Replacements
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_DUEL, GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), 1)
         SafeAddString(SI_DUEL_INVITE_MESSAGE, GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), 1)
@@ -1038,7 +1038,7 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_DUELINVITEFAILREASON16, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON16), 1)
         SafeAddString(SI_DUELINVITEFAILREASON18, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON18), 1)
         SafeAddString(SI_DUELINVITEFAILREASON20, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON20), 1)
-        
+
         -- Regroup Replacement String
         SafeAddString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG, GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG_ALT), 1)
     end
@@ -1055,9 +1055,9 @@ end
 
 function CA.CheckLFGStatusJoin()
     if not g_stopGroupLeaveQueue then
-        if IsInLFGGroup() and not g_joinLFGOverride then 
+        if IsInLFGGroup() and not g_joinLFGOverride then
             printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF_LFG))
-        elseif not IsInLFGGroup() and not g_joinLFGOverride then 
+        elseif not IsInLFGGroup() and not g_joinLFGOverride then
             printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF))
         end
         g_joinLFGOverride = false
@@ -1072,13 +1072,17 @@ end
 
 function CA.CheckLFGStatusLeave(SendString, WasKicked)
     if not g_stopGroupLeaveQueue then
-    
-        if SendString ~= "" then printToChat(SendString) end
-        
+        if SendString ~= "" then
+            printToChat(SendString)
+        end
         if not g_leaveLFGOverride then
-            if WasKicked then printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF)) end
-            if GetGroupSize() == 0 then printToChat(GetString(SI_LUIE_CA_GROUP_QUIT)) end
-        elseif g_leaveLFGOverride and GetGroupSize() == 0 then 
+            if WasKicked then
+                printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF))
+            end
+            if GetGroupSize() == 0 then
+                printToChat(GetString(SI_LUIE_CA_GROUP_QUIT))
+            end
+        elseif g_leaveLFGOverride and GetGroupSize() == 0 then
             printToChat(GetString(SI_LUIE_CA_GROUP_QUIT_LFG))
         end
     end
@@ -1125,11 +1129,10 @@ function CA.ActivityStatusUpdate(eventCode, status)
     if status == 4 then
         g_showRCUpdates = false
     end
-    
+
     if status == 5 then
         g_fixJoinMessage = true
     end
-        
 end
 
 function CA.ActivityQueueResult(eventCode, result)
@@ -1217,7 +1220,7 @@ function CA.ReadyCheckUpdate(eventCode)
         if activityType == LFG_ACTIVITY_TRIAL then
             activityName = GetString(SI_LFGACTIVITY4)
         end
-        
+
         if playerRole ~= 0 then
             local roleIcon = (strformat("|t16:16:<<1>>|t", GetRoleIcon(playerRole)))
             local roleString = GetString("SI_LFGROLE", playerRole)
@@ -1246,7 +1249,6 @@ function CA.ReadyCheckUpdate(eventCode)
     g_showRCUpdates = false
     g_weAreQueued = false
     g_showStatusDropMember = false
-    
 end
 
 function CA.ResetGroupLeaveQueue()
@@ -1485,17 +1487,22 @@ end
 -- Prints a message to chat when invites are declined or failed.
 -- Currently broken as of 2/9/2017 so we have to omit any names from this function until it returns the correct InviteeName and InviteeDisplayName instead
 function CA.OnGroupInviteResponse(eventCode, inviterName, response, inviterDisplayName)
-
     local responseName
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink(inviterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
     local displayBothString = ( strformat("<<1>><<2>>", inviterName, inviterDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
-    
-    if CA.SV.ChatPlayerDisplayOptions == 1 then responseName = displayNameLink end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then responseName = characterNameLink end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then responseName = displayBoth end
-    
+
+    if CA.SV.ChatPlayerDisplayOptions == 1 then
+        responseName = displayNameLink
+    end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then
+        responseName = characterNameLink
+    end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then
+        responseName = displayBoth
+    end
+
     if response == 2 and (inviterName == "" or inviterDisplayName == "") then -- Stops blank [] response from printing out when the invited player is zoning
         return
     elseif response ~= 0 and response ~= 1 then
@@ -1504,7 +1511,6 @@ function CA.OnGroupInviteResponse(eventCode, inviterName, response, inviterDispl
         g_groupFormFudger = true
         printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF))
     end
-    
 end
 
 -- Prints a message to chat when the leader of the group is updated
@@ -1577,7 +1583,6 @@ function CA.OnGroupMemberJoined(eventCode, memberName)
     g_partyStack = { }
     g_groupFormFudger = false
     g_areWeGrouped = true
-    
 end
 
 -- Prints a message to chat when a group member leaves
@@ -1592,26 +1597,26 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
     if g_playerName == memberName then
         g_showStatusDropMember = false -- Resets variable for Group Finder events, just in case.
     end
-    
+
     if CA.SV.ChatPlayerDisplayOptions == 1 then
         memberLeftName = displayNameLink
     end
-    
+
     if CA.SV.ChatPlayerDisplayOptions == 2 then
         memberLeftName = characterNameLink
     end
-    
+
     if CA.SV.ChatPlayerDisplayOptions == 3 then
         memberLeftName = displayBoth
     end
-    
+
     if reason == GROUP_LEAVE_REASON_VOLUNTARY then
         if g_playerName == memberName then
             g_areWeGrouped = false
             SendString = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF), memberLeftName))
             zo_callLater(function() CA.CheckLFGStatusLeave(SendString, WasKicked) end , 100)
         end
-        if g_playerName ~= memberName then 
+        if g_playerName ~= memberName then
             SendString = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE), memberLeftName))
             zo_callLater(function() CA.CheckLFGStatusLeave(SendString, WasKicked) end , 100)
         end
@@ -1643,7 +1648,6 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
             printToChat(strformat(msg, displayBoth))
         end
     end
-    
 end
 
 -- Gold Change Announcements
@@ -1651,12 +1655,12 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
 
     g_comboString = ""
     local UpOrDown     = newMoney - oldMoney
-    
+
     -- If the total gold change was 0 then we don't waste any more resoureces and end this now
     if UpOrDown == 0 then
         return
     end
-    
+
     local currentMoney = ZO_LocalizeDecimalNumber(GetCurrentMoney())
     local color              -- Gets the value from ChangeUpColorize or ChangeDownColorize to color strings
     local changetype         -- Amount of currency gained or lost
@@ -1704,13 +1708,13 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
 
     -- Sell/Buy from a Merchant
     if reason == 1 and UpOrDown > 0 then
-        message = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Receieved"
+        message = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
     elseif reason == 1 and UpOrDown < 0 then
         message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SPENT)
 
     -- Receieve Money in the Mail
     elseif reason == 2 and UpOrDown > 0 then
-        message = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Receieved"
+        message = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
 
     -- Send money in the mail, values changed to compensate for COD!
     elseif reason == 2 and UpOrDown < 0 then
@@ -1728,13 +1732,13 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
 
     -- Receive from Quest Reward (4), AH Refund (32), Sell to Fence (63)
     elseif reason == 4 or reason == 32 or reason == 63 then
-        message = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Receieved"
+        message = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
 
     -- Spend - NPC Conversation (5), Bag Space (8), Bank Space (9), Wayshrine (19), Mount Feed (28), Repairs (29), AH Listing Fee (33), Respec Skills (44), Respec Attributes (45),
     -- Unstuck (48), Edit Guild Heraldry (49), Buy Guild Tabard (50), Respec Morphs (55), Pay Fence (56), Launder (60), Champion Respec (61), Buyback (64)
     elseif reason == 5 or reason == 8 or reason == 9 or reason == 19 or reason == 28 or reason == 29 or reason == 33 or reason == 44 or reason == 45 or reason == 48 or reason == 49 or reason == 50 or reason == 55 or reason == 56 or reason == 60 or reason == 61 or reason == 64 then
         message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SPENT)
-    
+
     -- Buy on AH (31)
     elseif reason == 31 then
         if CA.SV.GoldHideAHSpent then return end
@@ -1754,7 +1758,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
 
     -- Pickpocketed (59)
     elseif reason == 59 then
-        message = GetString(SI_GAMECAMERAACTIONTYPE21) -- "Pickpocket"
+        message = GetString(SI_GAMECAMERAACTIONTYPE21)
 
     -- Looted - From Chest (0), Looted (13), Stolen Gold (62)
     elseif reason == 0 or reason == 13 or reason == 62 then
@@ -1803,7 +1807,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             message = CA.SV.CurrencyContextMessageDown
         end
     end
-    
+
     -- Creates initial message
     message = color:Colorize(strfmt("%s%s%s", bracket1, message, bracket2))
 
@@ -1888,7 +1892,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         else
             total = ""
         end
-        
+
         if CA.SV.MiscMail and g_postageAmount == 0 and g_mailMoney == 0 and g_mailCOD == 0 and not CA.SV.GoldChange then
             printToChat(strfmt(GetString(SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT1), changetype))
         end
@@ -1948,14 +1952,12 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     if not g_mailCurrencyCheck then
         zo_callLater(CA.MailClearVariables, 500)
     end
-    
 end
 
 -- Alliance Point Change Announcements
 function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, difference)
-
     g_comboString = ""
-    
+
     -- If the total AP change was 0 then we end this now
     if UpOrDown == alliancePoints then
         return
@@ -2014,7 +2016,7 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
             message = CA.SV.CurrencyContextMessageDown
         end
     end
-    
+
     -- Creates initial message
     message = color:Colorize(strfmt("%s%s%s", bracket1, message, bracket2))
 
@@ -2080,15 +2082,14 @@ end
 
 -- Tel Var Stones Change Announcements
 function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, reason)
-
     g_comboString = ""
-    local UpOrDown      = newTelvarStones - oldTelvarStones
-    
+    local UpOrDown = newTelvarStones - oldTelvarStones
+
     -- If the total Tel Var change was 0 or Reason 35 = Player Init (Triggers when player changes zones) - End Now
     if UpOrDown == 0 or reason == 35 then
         return
     end
-    
+
     local currentTelvar = ZO_LocalizeDecimalNumber(newTelvarStones)
     local color              -- Gets the value from ChangeUpColorize or ChangeDownColorize to color strings
     local changetype         -- Amount of currency gained or lost
@@ -2196,7 +2197,7 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
             message = CA.SV.CurrencyContextMessageDown
         end
     end
-    
+
     -- Creates initial message
     message = color:Colorize(strfmt("%s%s%s", bracket1, message, bracket2))
 
@@ -2224,7 +2225,6 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
     else
         printToChat(strfmt("%s%s%s", message, syntax, total))
     end
-
 end
 
 -- Writ Voucher Change Announcements
@@ -2237,7 +2237,7 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
 
     g_comboString = ""
     local UpOrDown            = newWritVouchers - oldWritVouchers
-    
+
     local currentWritVouchers = ZO_LocalizeDecimalNumber(newWritVouchers)
     local color              -- Gets the value from ChangeUpColorize or ChangeDownColorize to color strings
     local changetype         -- Amount of currency gained or lost
@@ -2325,7 +2325,7 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
             message = CA.SV.CurrencyContextMessageDown
         end
     end
-    
+
     -- Creates initial message
     message = color:Colorize(strfmt("%s%s%s", bracket1, message, bracket2))
 
@@ -2351,7 +2351,6 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
     else
         printToChat(strfmt("%s%s%s", message, syntax, total))
     end
-
 end
 
 function CA.MiscAlertLockFailed(eventCode)
@@ -2363,7 +2362,6 @@ function CA.MiscAlertLockSuccess(eventCode)
 end
 
 function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source)
-
     if CA.SV.MiscHorse then
         local bracket1
         local bracket2
@@ -2428,9 +2426,9 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
         if CA.SV.ItemContextToggle then
             logPrefix = CA.SV.ItemContextMessage
         end
-        
+
         logPrefix = ChangeUpColorize:Colorize(strfmt("%s%s%s", bracket1, logPrefix, bracket2))
-        
+
         if CA.SV.LootCurrencyCombo == true then
             printToChat(strfmt("%s %s%s |cFFFFFF%s/60|r%s", logPrefix, icon, skillstring, current, g_comboString))
             g_comboString = ""
@@ -2441,7 +2439,6 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
 end
 
 function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
-        
     if CA.SV.MiscBags then
         local bracket1
         local bracket2
@@ -2449,7 +2446,7 @@ function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previous
         local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED) -- "Purchased"
 
         -- If this isn't a bag upgrade purchase then ignore this event. We have a separate event handling mount space upgrades.
-        if currentUpgrade <= previousUpgrade then   
+        if currentUpgrade <= previousUpgrade then
             return
         end
 
@@ -2476,7 +2473,7 @@ function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previous
         if CA.SV.ItemContextToggle then
             logPrefix = ( CA.SV.ItemContextMessage )
         end
-        
+
         logPrefix = ChangeUpColorize:Colorize(strfmt("%s%s%s", bracket1, logPrefix, bracket2))
 
         if CA.SV.LootCurrencyCombo == true then
@@ -2489,7 +2486,6 @@ function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previous
 end
 
 function CA.MiscAlertBank(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
-
     if CA.SV.MiscBags then
         local bracket1
         local bracket2
@@ -2719,7 +2715,7 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
     local bracket2
     local color
     local message
-    
+
     if gainorloss == 1 then color = ChangeUpColorize end
     if gainorloss == 2 then color = ChangeDownColorize end
     if gainorloss == 3 then color = ZO_SELECTED_TEXT end
@@ -2794,7 +2790,7 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
     else
         itemName2 = ""
     end
-    
+
     message = color:Colorize(strfmt("%s%s%s ", bracket1, logPrefix, bracket2))
 
     if receivedBy == "CRAFT"  and gainorloss == 1 then
@@ -2947,11 +2943,11 @@ function CA.TradeInviteFailed(eventCode, reason, inviteeCharacterName, inviteeDi
         local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviteeDisplayName)
         local displayBothString = ( strformat("<<1>><<2>>", gsub(inviteeCharacterName,"%^%a+",""), inviteeDisplayName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviteeDisplayName)
-        
+
         if CA.SV.ChatPlayerDisplayOptions == 1 then failName = displayNameLink end
         if CA.SV.ChatPlayerDisplayOptions == 2 then failName = characterNameLink end
         if CA.SV.ChatPlayerDisplayOptions == 3 then failName = displayBoth end
-        
+
         printToChat(strformat(GetString("SI_TRADEACTIONRESULT", reason), failName))
     end
 end
@@ -2966,7 +2962,7 @@ end
 
 function CA.TradeInviteDecline(eventCode)
     if CA.SV.MiscTrade then
-        printToChat(GetString(SI_TRADE_INVITE_DECLINE)) -- "Trade invite declined."
+        printToChat(GetString(SI_TRADE_INVITE_DECLINE))
     end
     g_tradeStacksIn = {}
     g_tradeStacksOut = {}
@@ -2976,7 +2972,7 @@ end
 
 function CA.TradeInviteCancel(eventCode)
     if CA.SV.MiscTrade then
-        printToChat(GetString(SI_TRADE_CANCEL_INVITE)) -- "Trade invitation canceled."
+        printToChat(GetString(SI_TRADE_CANCEL_INVITE))
     end
     g_tradeStacksIn = {}
     g_tradeStacksOut = {}
@@ -2986,7 +2982,7 @@ end
 
 -- Adds item to index when they are added to the trade
 function CA.OnTradeAdded(eventCode, who, tradeIndex, itemSoundCategory)
-    -- d( "tradeIndex: " .. tradeIndex .. " --- WHO: " .. who ) -- Debug
+    -- d( "tradeIndex: " .. tradeIndex .. " --- WHO: " .. who )
     if who == 0 then
         local indexOut = tradeIndex
         local name, icon, stack = GetTradeItemInfo (who, tradeIndex)
@@ -3014,7 +3010,7 @@ end
 -- Cleanup if a Trade is canceled/exited
 function CA.TradeCancel(eventCode, cancelerName)
     if CA.SV.MiscTrade then
-        printToChat(GetString(SI_TRADE_CANCELED)) -- "Trade canceled."
+        printToChat(GetString(SI_TRADE_CANCELED))
     end
     g_tradeStacksIn = {}
     g_tradeStacksOut = {}
@@ -3891,7 +3887,7 @@ function CA.GuildBankItemRemoved(eventCode, slotId)
 end
 
 function CA.IndexInventory()
-    d("Debug - Inventory Indexed!")
+    --d("Debug - Inventory Indexed!")
     local bagsize = GetBagSize(1)
 
     for i = 0,bagsize do
@@ -3904,9 +3900,9 @@ function CA.IndexInventory()
 end
 
 function CA.IndexEquipped()
-    d("Debug - Equipped Items Indexed!")
+    --d("Debug - Equipped Items Indexed!")
     local bagsize = GetBagSize(0)
-    
+
     for i = 0,bagsize do
         local icon, stack = GetItemInfo(0, i)
         local bagitemlink = GetItemLink(0, i, LINK_STYLE_DEFAULT)
@@ -3917,7 +3913,7 @@ function CA.IndexEquipped()
 end
 
 function CA.IndexBank()
-    d("Debug - Bank Indexed!")
+    --d("Debug - Bank Indexed!")
     local bagsizebank = GetBagSize(2)
 
     for i = 0,bagsizebank do
@@ -4036,7 +4032,6 @@ end
 
 -- Only used if the option to see destroyed items or items lost from a guard is turned on
 function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-
     if bagId == BAG_WORN then
         local receivedBy = ""
         if not g_equippedStacks[slotId] then -- NEW ITEM
@@ -4065,7 +4060,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                     if (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) end
                 end
             end
-            
+
             local item = g_equippedStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
@@ -4084,11 +4079,11 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                 local endcount = g_equippedStacks[slotId].stack - change
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
                     if CA.SV.ShowDisguise and not g_itemWasDestroyed and slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
-                        if IsUnitInCombat("player") then 
+                        if IsUnitInCombat("player") then
                             logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_DESTROYED)
                             gainorloss = 2
                         end
-                        CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) 
+                        CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
                     end
                     if CA.SV.ShowDestroy and g_itemWasDestroyed then
                         logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
@@ -4397,7 +4392,6 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
 end
 
 function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-
     ---------------------------------- INVENTORY ----------------------------------
     if bagId == BAG_BACKPACK then
         local receivedBy = ""
@@ -4767,7 +4761,6 @@ function CA.JusticeStealRemove(eventCode)
 end
 
 function CA.JusticeRemovePrint()
-
     -- PART 1 -- INVENTORY
     local bagsize = GetBagSize(1)
 
@@ -4797,34 +4790,34 @@ function CA.JusticeRemovePrint()
         end
     end
 
-        
+
     -- Reset Justice Stacks to reuse for equipped
     g_JusticeStacks = {}
-    
+
     -- PART 2 -- EQUIPPED
     bagsize = GetBagSize(0)
-    
+
         -- We have to determine the currently active weapon, and swap the slots because of some wierd interaction when your equipped weapon is confiscated.
         -- This works even if the other weapon slot is empty or both slots have a stolen weapon.
         local weaponInfo = GetActiveWeaponPairInfo()
-        
+
         -- Save weapons
         local W1 = g_equippedStacks[4]
         local W2 = g_equippedStacks[5]
         local W3 = g_equippedStacks[20]
         local W4 = g_equippedStacks[21]
-        
+
         -- Swap weapons depending on currently equipped pair
         if WeaponInfo == 1 then
         g_equippedStacks[4] = W3
         g_equippedStacks[5] = W4
         end
-        
+
         if WeaponInfo == 2 then
         g_equippedStacks[20] = W1
         g_equippedStacks[21] = W2
         end
-    
+
 
     for i = 1,bagsize do
         local icon, stack = GetItemInfo(0, i)
@@ -4996,65 +4989,66 @@ function CA.DuelStarted(eventCode)
 end
 
 function CA.DisguiseState(eventCode, unitTag, disguiseState)
-
-        if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_DANGER then printToChat("Danger! Sentry nearby!") end
-        if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_SUSPICIOUS then printToChat("Danger! You are arousing suspicion!") end
+        if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_DANGER then
+            printToChat("Danger! Sentry nearby!")
+        end
+        
+        if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_SUSPICIOUS then
+            printToChat("Danger! You are arousing suspicion!")
+        end
 
         -- If we're still disguised and g_disguiseState is true then don't waste resources and end the function
         if g_disguiseState == 1 and ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
             return
         end
-        
+
         if g_disguiseState == 1 and (disguiseState == DISGUISE_STATE_NONE) then
             printToChat ("You are no longer disguised " .. E.DisguiseIcons[g_currentDisguise].description)
         end
-        
+
         if g_disguiseState == 0 and ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
             g_currentDisguise = GetItemId(0, 10) or 0
             printToChat ("You are now disguised " .. E.DisguiseIcons[g_currentDisguise].description)
         end
-        
+
         g_disguiseState = GetUnitDisguiseState("player")
-        if g_disguiseState > 0 then g_disguiseState = 1 end
         
+        if g_disguiseState > 0 then
+            g_disguiseState = 1
+        end
 end
 
-
-
 function CA.MaraOffer(eventCode, targetCharacterName, isSender, targetDisplayName)
-
     local maraName
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink(targetCharacterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(targetDisplayName)
     local displayBothString = ( strformat("<<1>><<2>>", targetCharacterName, targetDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, targetDisplayName)
-    
+
     if CA.SV.ChatPlayerDisplayOptions == 1 then maraName = displayNameLink end
     if CA.SV.ChatPlayerDisplayOptions == 2 then maraName = characterNameLink end
     if CA.SV.ChatPlayerDisplayOptions == 3 then maraName = displayBoth end
-    
+
     if isSender then
         printToChat(strformat(GetString(SI_PLAYER_TO_PLAYER_OUTGOING_RITUAL_OF_MARA), maraName))
     else
         printToChat(strformat(GetString(SI_PLAYER_TO_PLAYER_INCOMING_RITUAL_OF_MARA), maraName))
     end
-
 end
 
 function CA.MaraResult (eventCode, reason, targetCharacterName, targetDisplayName)
-    
     local maraName
     local characterNameLink = ZO_LinkHandler_CreateCharacterLink(targetCharacterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(targetDisplayName)
     local displayBothString = ( strformat("<<1>><<2>>", targetCharacterName, targetDisplayName) )
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, targetDisplayName)
-    
+
     if CA.SV.ChatPlayerDisplayOptions == 1 then maraName = displayNameLink end
     if CA.SV.ChatPlayerDisplayOptions == 2 then maraName = characterNameLink end
     if CA.SV.ChatPlayerDisplayOptions == 3 then maraName = displayBoth end
-    
+
     printToChat(strformat(GetString("SI_PLEDGEOFMARARESULT", reason), maraName))
-    
+
     -- TODO : this item link doesn't show crafted status or correctly display inventory placement, possibly just index instead?
     if reason == 3 and CA.SV.Loot then
         local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
@@ -5064,11 +5058,9 @@ function CA.MaraResult (eventCode, reason, targetCharacterName, targetDisplayNam
         local itemlink = '|H1:item:44904:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h'
         CA.LogItem(logPrefix, icon, itemlink, itemType, 1, receivedBy, gainorloss)
     end
-    
 end
 
 function CA.NewCollectible(eventCode, collectibleId)
-
     local bracket1
     local bracket2
     local message
@@ -5096,9 +5088,8 @@ function CA.NewCollectible(eventCode, collectibleId)
     else
         icon = ("")
     end
-    
+
     message = CollectibleColorize:Colorize(strfmt("%s%s %s%s", bracket1, categoryType, GetString(SI_LUIE_CA_PREFIX_MESSAGE_ADDED), bracket2))
 
     printToChat(strfmt("%s%s %s", message, icon, link))
-
 end
