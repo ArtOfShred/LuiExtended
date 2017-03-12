@@ -1,5 +1,5 @@
 ------------------
--- Local namespace
+-- Effects namespace
 LUIE.Effects = {}
 
 -- Performance Enhancement

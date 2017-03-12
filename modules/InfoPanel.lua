@@ -6,6 +6,7 @@ LUIE.InfoPanel = {}
 local PNL           = LUIE.InfoPanel
 local UI            = LUIE.UI
 local DelayBuffer   = LUIE.DelayBuffer
+local strfmt        = string.format
 
 local moduleName    = LUIE.name .. "_InfoPanel"
 
@@ -400,7 +401,7 @@ function PNL.DoBagUpdate()
             end
         end
     end
-    uiBags.label:SetText( string.format( "%d/%d", bagUsed, bagSize ) )
+    uiBags.label:SetText( strfmt( "%d/%d", bagUsed, bagSize ) )
     uiBags.label:SetColor( colour.r, colour.g, colour.b, 1 )
 
     -- Update soulgems
@@ -456,7 +457,7 @@ function PNL.OnUpdate01()
             end
         end
     end
-    uiFps.label:SetText( string.format( "%.1f fps", fps ) )
+    uiFps.label:SetText( strfmt( "%.1f fps", fps ) )
     uiFps.label:SetColor( colour.r, colour.g, colour.b, 1 )
 end
 
@@ -473,7 +474,7 @@ function PNL.OnUpdate10()
             end
         end
     end
-    uiLatency.label:SetText( string.format( "%d ms", lat ) )
+    uiLatency.label:SetText( strfmt( "%d ms", lat ) )
     uiLatency.label:SetColor( colour.r, colour.g, colour.b, 1 )
 end
 
@@ -494,7 +495,7 @@ function PNL.OnUpdate60()
             elseif ( mountFeedTimer > 0 ) then
                 local hours   = math.floor( mountFeedTimer / 3600000 )
                 local minutes = math.floor( ( mountFeedTimer - ( hours * 3600000 ) ) / 60000 )
-                mountFeedMessage = string.format( "%dh %dm", hours, minutes )
+                mountFeedMessage = strfmt( "%dh %dm", hours, minutes )
             end
         end
         uiFeedTimer.label:SetText( mountFeedMessage )
@@ -521,7 +522,7 @@ function PNL.OnUpdate60()
                 break
             end
         end
-        uiArmour.label:SetText( string.format( "%d%%", duraPercentage ) )
+        uiArmour.label:SetText( strfmt( "%d%%", duraPercentage ) )
         uiArmour.label:SetColor( colour.r, colour.g, colour.b, 1 )
         uiArmour.icon:SetColor( iconcolour.r, iconcolour.g, iconcolour.b, 1 )
     end
