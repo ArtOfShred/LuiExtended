@@ -6,7 +6,6 @@ LUIE.DamageMeter = {}
 local DM             = LUIE.DamageMeter
 local UI             = LUIE.UI
 local E              = LUIE.Effects
-local commaValue     = LUIE.CommaValue
 local colours        = LUIE.CombatInfo.Colours
 local strfmt         = string.format
 local strformat      = zo_strformat
@@ -418,7 +417,7 @@ function DM.Display()
     local dps = g_Meter.damage/fight_time
 
     -- Set Header
-    local head  = ( g_Meter.damage > 0 ) and strfmt( "Total Damage - %s (%.1f DPS)", commaValue( g_Meter.damage ), dps ) or "No Outgoing Damage"
+    local head  = ( g_Meter.damage > 0 ) and strfmt( "Total Damage - %s (%.1f DPS)", ZO_LocalizeDecimalNumber( g_Meter.damage ), dps ) or "No Outgoing Damage"
     uiMeter.dam.title:SetText( head )
     uiMeter.dam.dam:SetHidden( g_Meter.damage == 0 )
     uiMeter.dam.hits:SetHidden( g_Meter.damage == 0 )
@@ -437,7 +436,7 @@ function DM.Display()
     for i = 1 , ndamage do
 
         -- Get data
-        local total = commaValue( damages[i].total )
+        local total = ZO_LocalizeDecimalNumber( damages[i].total )
         local count = damages[i].count
         local crit  = math.floor( ( damages[i].crit / count ) * 100 )
         local adps  = strfmt( "%.1f" , damages[i].total / fight_time )
@@ -467,7 +466,7 @@ function DM.Display()
     local hps = g_Meter.healing/fight_time
 
     -- Set Header
-    local head  = ( g_Meter.healing > 0 ) and strfmt( "Total Healing - %s (%.1f HPS)", commaValue( g_Meter.healing ), hps ) or "No Outgoing Healing"
+    local head  = ( g_Meter.healing > 0 ) and strfmt( "Total Healing - %s (%.1f HPS)", ZO_LocalizeDecimalNumber( g_Meter.healing ), hps ) or "No Outgoing Healing"
     uiMeter.heal.title:SetText( head )
     uiMeter.heal.heal:SetHidden( g_Meter.healing == 0 )
     uiMeter.heal.hits:SetHidden( g_Meter.healing == 0 )
@@ -486,7 +485,7 @@ function DM.Display()
     for i = 1 , nheals do
 
         -- Get data
-        local total = commaValue( heals[i].total )
+        local total = ZO_LocalizeDecimalNumber( heals[i].total )
         local count = heals[i].count
         local crit  = math.floor( ( heals[i].crit / count ) * 100 )
         local ahps  = strfmt( "%.1f" , heals[i].total / fight_time )
@@ -516,7 +515,7 @@ function DM.Display()
     local ips = g_Meter.incoming/fight_time
 
     -- Set Header
-    local head  = ( g_Meter.incoming > 0 ) and strfmt( "Incoming Damage - %s (%.1f IPS)", commaValue( g_Meter.incoming ), ips ) or "No Incoming Damage"
+    local head  = ( g_Meter.incoming > 0 ) and strfmt( "Incoming Damage - %s (%.1f IPS)", ZO_LocalizeDecimalNumber( g_Meter.incoming ), ips ) or "No Incoming Damage"
     uiMeter.inc.title:SetText( head )
 
     --[[----------------------------------
@@ -1034,7 +1033,7 @@ function DM.Post( context )
         metric = "HPS"
     end
 
-    local label = strfmt("%s (%.1fs) - %s Total %s (%.1f %s)" , name, fight_time, commaValue(total), context, total/fight_time, metric )
+    local label = strfmt("%s (%.1fs) - %s Total %s (%.1f %s)" , name, fight_time, ZO_LocalizeDecimalNumber(total), context, total/fight_time, metric )
 
     -- Determine appropriate channel
     local channel = IsUnitGrouped('player') and "/p " or "/say "
@@ -1191,7 +1190,7 @@ function DM.LogDamage(damage)
         msg = strfmt("%s %s absorbed |cEEEEEE%s|r damage.",
                     damage.out and strformat("|cFF0000<<!aCg:1>>|r", damage.target) or "|c00AA00Your|r",
                     damage.name ~= "" and strformat("|cEEEEEE<<t:1>>|r", damage.name) or "shield",
-                    commaValue(damage.value))
+                    ZO_LocalizeDecimalNumber(damage.value))
         category = CHAT_CATEGORY_COMBAT_BLOCK_ABSORBED_DEFEND
 
     -- Blocks
@@ -1199,7 +1198,7 @@ function DM.LogDamage(damage)
         msg = strfmt("%s blocked %staking %s%s|r damage.",
                     damage.out and strformat("|cFF0000<<!aC:1>>|r", damage.target) or "|c00AA00You|r",
                     damage.name ~= "" and strformat("|cEEEEEE<<t:1>>|r ", damage.name) or "",
-                    colours.DAMAGE_COLOURED[damage.type].hex, commaValue(damage.value))
+                    colours.DAMAGE_COLOURED[damage.type].hex, ZO_LocalizeDecimalNumber(damage.value))
         category = CHAT_CATEGORY_COMBAT_BLOCK_ABSORBED_DEFEND
 
     elseif damage.value > 0 then
@@ -1212,7 +1211,7 @@ function DM.LogDamage(damage)
                 verb = colours.DAMAGECRIT.hex .. "critically " .. verb .. "|r"
             end
             msg = strfmt("%s %s %s for %s%s|r damage with %s.", subject, verb, object,
-                        colours.DAMAGE_COLOURED[damage.type].hex, commaValue(damage.value), strformat("|cEEEEEE<<t:1>>|r", damage.name))
+                        colours.DAMAGE_COLOURED[damage.type].hex, ZO_LocalizeDecimalNumber(damage.value), strformat("|cEEEEEE<<t:1>>|r", damage.name))
             category = CHAT_CATEGORY_COMBAT_DIRECT_DAMAGE
 
         -- dot
@@ -1221,7 +1220,7 @@ function DM.LogDamage(damage)
             local object    = damage.out and strformat("|cFF0000<<!aC:1>>|r", damage.target) or "|c00AA00you|r"
             local verb      = "applied " .. ((damage.result == ACTION_RESULT_DOT_TICK_CRITICAL) and (colours.DAMAGECRIT.hex .. "critical ") or "") .. "dot|r"
             msg = strfmt("%s %s on %s for %s%s|r damage with %s.", subject, verb, object,
-                        colours.DAMAGE_COLOURED[damage.type].hex, commaValue(damage.value), strformat("|cEEEEEE<<t:1>>|r", damage.name))
+                        colours.DAMAGE_COLOURED[damage.type].hex, ZO_LocalizeDecimalNumber(damage.value), strformat("|cEEEEEE<<t:1>>|r", damage.name))
             category = CHAT_CATEGORY_COMBAT_DOT
 
         end
@@ -1236,5 +1235,5 @@ end
  ]]--
 function DM.LogExp(value)
     if not DM.SV.CombatLog or value <= 0 then return end
-    DM.AddMessage(strfmt("You earned |cEEEEEE%s|r experience for a kill.", commaValue(value)), DM.SV.LogTimeStamp, CHAT_CATEGORY_COMBAT_EXPERIENCE)
+    DM.AddMessage(strfmt("You earned |cEEEEEE%s|r experience for a kill.", ZO_LocalizeDecimalNumber(value)), DM.SV.LogTimeStamp, CHAT_CATEGORY_COMBAT_EXPERIENCE)
 end
