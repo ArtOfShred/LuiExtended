@@ -30,6 +30,13 @@ local roleIcons = {
 
 }
 
+local leaderIcons = {
+
+    [0] = "LuiExtended/media/unitframes/unitframes_class_none.dds",
+    [1] = "/esoui/art/icons/guildranks/guild_rankicon_misc01.dds",
+
+}
+
 UF.Enabled = false
 UF.D = {
     ShortenNumbers                   = false,
@@ -132,7 +139,6 @@ UF.CustomFramesMovingState  = false
 local g_AvaCustFrames       = {} -- Another set of custom frames. Currently designed only to provide AvA Player Target reticleover frame
 local g_DefaultFrames       = {} -- Default Unit Frames are not referenced by external modules
 local g_MaxChampionPoint    = GetChampionPointsPlayerProgressionCap() -- Keet this value in local constant
-local g_customLeaderIcon
 local g_defaultTargetNameLabel   -- Reference to default UI target name label
 local g_defaultThreshold    = 25
 local g_playerAlliance
@@ -513,9 +519,8 @@ local function CreateCustomFrames()
                 ["friendIcon"]  = UI.Texture( topInfo, {RIGHT,RIGHT,-20,0}, {22,22}, nil, nil, false ),
                 ["roleIcon"]    = UI.Texture( ghb, {LEFT,LEFT, 5,0}, {18,18}, nil, 2, false ),
                 ["dead"]        = UI.Label( ghb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "Status", false ),
+                ["leader"]      = UI.Texture( topInfo, {LEFT,LEFT, -7,0}, {32,32}, nil, 2, false ),
             }
-            --UF.CustomFrames[unitTag].leader = {RIGHT, LEFT, 0, 0, UF.CustomFrames[unitTag].classIcon, 0}
-            UF.CustomFrames[unitTag].leader = {BOTTOMLEFT, TOPLEFT, -2, 0, ghb}
             
         end
     end
@@ -546,9 +551,9 @@ local function CreateCustomFrames()
                 ["name"]        = UI.Label( rhb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, unitTag, false ),
                 ["roleIcon"]    = UI.Texture( rhb, {LEFT,LEFT, 4,0}, {16,16}, nil, 2, false ),
                 ["dead"]        = UI.Label( rhb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "Status", false ),
+                ["leader"]      = UI.Texture( ghb, {LEFT,LEFT, -7,0}, {32,32}, nil, 2, false ),
 
             }
-            UF.CustomFrames[unitTag].leader = {RIGHT, RIGHT, -38, 0, UF.CustomFrames[unitTag].control, true}
             UF.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = "Percentage%"
 
         end
@@ -646,10 +651,6 @@ local function CreateCustomFrames()
             end
         end
     end
-
-    -- Create Raid leader icon only once, and later move it around different controls
-    -- We will create this icon always. Even if group or raid frames are not used
-    g_customLeaderIcon = UI.Texture( ZO_UnitFramesGroups, nil, {24,24}, "/esoui/art/icons/guildranks/guild_rankicon_misc01.dds", 2, true )
 
     -- Create DOT / HOT animations for all attributes bars
     -- We will use this ugly loop over too-many controls, but it will keep things clean and uni-style
@@ -1436,7 +1437,8 @@ function UF.UpdateStaticControls( unitFrame )
     if unitFrame.name ~= nil then
         -- Update max width of label
         local playerName = strformat(SI_UNIT_NAME, GetUnitName("player"))
-        if unitFrame.name:GetParent() == unitFrame.topInfo then
+        -- Only apply this formatting to non-group frames
+        if unitFrame.name:GetParent() == unitFrame.topInfo and (unitFrame.unitTag == "player" or unitFrame.unitTag == "reticleover") then
             local width = unitFrame.topInfo:GetWidth()
             if unitFrame.classIcon then
                 width = width - unitFrame.classIcon:GetWidth()
@@ -1463,8 +1465,10 @@ function UF.UpdateStaticControls( unitFrame )
         -- Show level for players and non-friendly NPCs
         local showLevel = unitFrame.isPlayer -- or not ( IsUnitInvulnerableGuard( unitFrame.unitTag ) or HIDE_LEVEL_TYPES[GetUnitType( unitFrame.unitTag )] or HIDE_LEVEL_REACTIONS[GetUnitReaction( unitFrame.unitTag )] ) -- No longer need to display level for anything but players
         if showLevel then
-            unitFrame.levelIcon:ClearAnchors()
-            unitFrame.levelIcon:SetAnchor( LEFT, unitFrame.topInfo, LEFT, unitFrame.name:GetTextWidth()+1, 0 )
+            if unitFrame.unitTag == "player" or unitFrame.unitTag == "reticleover" then
+                unitFrame.levelIcon:ClearAnchors()
+                unitFrame.levelIcon:SetAnchor( LEFT, unitFrame.topInfo, LEFT, unitFrame.name:GetTextWidth()+1, 0 )
+            end
             unitFrame.levelIcon:SetTexture( unitFrame.isChampion and "LuiExtended/media/unitframes/unitframes_level_champion.dds" or "LuiExtended/media/unitframes/unitframes_level_normal.dds" )
             -- Level label should be already anchored
             unitFrame.level:SetText( tostring( unitFrame.isChampion and GetUnitChampionPoints( unitFrame.unitTag ) or GetUnitLevel( unitFrame.unitTag ) ) )
@@ -1828,36 +1832,10 @@ end
 
 -- Runs on the EVENT_LEADER_UPDATE listener.
 function UF.OnLeaderUpdate(eventCode, leaderTag)
-    if UF.CustomFrames[leaderTag] and UF.CustomFrames[leaderTag].leader then
-        local anchors = UF.CustomFrames[leaderTag].leader
-        g_customLeaderIcon:SetParent( UF.CustomFrames[leaderTag].control )
-        g_customLeaderIcon:ClearAnchors()
-        g_customLeaderIcon:SetAnchor( anchors[1], anchors[5], anchors[2], anchors[3], anchors[4]  )
-        g_customLeaderIcon:SetHidden( anchors[6] and not UF.CustomFrames[leaderTag].dead:IsHidden() )
 
-        -- SmallGroup need special treatment
-        if UF.CustomFrames[leaderTag].classIcon then
-            local size = UF.CustomFrames[leaderTag].classIcon:GetWidth() *1.3
-            g_customLeaderIcon:SetDimensions( size, size )
-            UF.CustomFrames[leaderTag].topInfo:SetWidth( UF.SV.GroupBarWidth-size*5/6 )
-            UF.UpdateStaticControls( UF.CustomFrames[leaderTag] )
-
-        -- RaidGroup need just reset of icon size (Going to need to add better function here at some point)
-        else
-            g_customLeaderIcon:SetDimensions( 24, 24 )
-        end
-
-    else
-        g_customLeaderIcon:SetHidden(true)
-    end
-
-    -- Restore last leader label width
-    if g_customLeaderIcon.unitTag and UF.CustomFrames[g_customLeaderIcon.unitTag] and UF.CustomFrames[g_customLeaderIcon.unitTag].topInfo then
-        UF.CustomFrames[g_customLeaderIcon.unitTag].topInfo:SetWidth( UF.SV.GroupBarWidth-5 )
-        UF.UpdateStaticControls( UF.CustomFrames[g_customLeaderIcon.unitTag] )
-    end
-    -- And set current leader tag
-    g_customLeaderIcon.unitTag = leaderTag
+    UF.CustomFramesApplyLayoutGroup()
+    UF.CustomFramesApplyLayoutRaid()
+ 
 end
 
 -- This function is used to setup alternative bar for player
@@ -2062,10 +2040,6 @@ function UF.CustomFramesSetDeadLabel( unitFrame, newValue )
         end
     end
 
-    -- Finally small check if we want to hide leader icon from control - this is required for RaidGroup
-    if GetGroupLeaderUnitTag() == unitFrame.unitTag and unitFrame.leader and unitFrame.leader[6] then
-        g_customLeaderIcon:SetHidden( newValue ~= nil )
-    end
 end
 
 -- Repopulate group members, but try to update only those, that require it
@@ -2180,9 +2154,7 @@ function UF.CustomFramesGroupUpdate()
         UF.ReloadValues(v.unitTag)
     end
 
-    -- Clear previously stored leader unitTag and call function to update current leader
-    g_customLeaderIcon.unitTag = nil
-    UF.OnLeaderUpdate( nil, GetGroupLeaderUnitTag() )
+    UF.OnLeaderUpdate( nil, nil )
 end
 
 -- Helper function to hide and remove unitTag reference from unused group controls
@@ -2839,6 +2811,7 @@ function UF.CustomFramesApplyLayoutGroup()
 
     for i = 1, 4 do
         local unitFrame = UF.CustomFrames["SmallGroup" .. i]
+        local unitTag = GetGroupUnitTagByIndex(i)
 
         local ghb = unitFrame[POWERTYPE_HEALTH] -- Not a backdrop
 
@@ -2847,10 +2820,19 @@ function UF.CustomFramesApplyLayoutGroup()
         unitFrame.control:SetDimensions(UF.SV.GroupBarWidth, groupBarHeight)
         unitFrame.topInfo:SetWidth( UF.SV.GroupBarWidth-5 )
 
-        unitFrame.name:SetWidth(UF.SV.GroupBarWidth-80)
-
         unitFrame.levelIcon:ClearAnchors()
-        unitFrame.levelIcon:SetAnchor( LEFT, unitFrame.topInfo, LEFT, unitFrame.name:GetTextWidth()+1, 0 )
+        
+        if IsUnitGroupLeader(unitTag) then
+            unitFrame.name:SetDimensions(UF.SV.GroupBarWidth - 127)
+            unitFrame.name:SetAnchor ( LEFT, TopInfo, LEFT, 22, 0)
+            unitFrame.levelIcon:SetAnchor( LEFT, unitFrame.topInfo, LEFT, unitFrame.name:GetTextWidth()+23, 0 )
+            unitFrame.leader:SetTexture(leaderIcons[1])
+        else
+            unitFrame.name:SetDimensions(UF.SV.GroupBarWidth - 105)
+            unitFrame.name:SetAnchor ( LEFT, TopInfo, LEFT, 0, 0)
+            unitFrame.levelIcon:SetAnchor( LEFT, unitFrame.topInfo, LEFT, unitFrame.name:GetTextWidth()+1, 0 )
+            unitFrame.leader:SetTexture(leaderIcons[0])
+        end
 
         ghb.backdrop:SetDimensions(UF.SV.GroupBarWidth, UF.SV.GroupBarHeight)
         if ghb.shieldbackdrop then
@@ -2868,7 +2850,7 @@ function UF.CustomFramesApplyLayoutGroup()
             ghb.labelOne:SetAnchor ( LEFT, phb, LEFT, 5, 0 )
         end
         unitFrame.roleIcon:SetHidden (not UF.SV.RoleIconSmallGroup)
-        
+
         -- Second HP Label
         ghb.labelTwo:SetDimensions(UF.SV.GroupBarWidth-50, UF.SV.GroupBarHeight-2)
     end
