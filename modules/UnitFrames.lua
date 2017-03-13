@@ -2361,7 +2361,7 @@ function UF.CustomFramesApplyColours(isMenu)
                         thb.bar:SetColor( unpack(tank) )
                         thb.backdrop:SetCenterColor( unpack(tank_bg) )
                     end
-                    if not (isDps and isHealer and isTank) then
+                    if not (isDps or isHealer or isTank) then
                         thb.bar:SetColor( unpack(health) )
                         thb.backdrop:SetCenterColor( unpack(health_bg) ) 
                     end
