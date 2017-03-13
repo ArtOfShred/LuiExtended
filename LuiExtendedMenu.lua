@@ -67,8 +67,8 @@ function LUIE_CreateSettings()
 
     local panelDataUnitFrames = {
         type = "panel",
-        name = strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_UNITFRAMES)),
-        displayName = strformat(LUIE.name, GetString(SI_LUIE_LAM_UNITFRAMES), GetString(SI_GAME_MENU_SETTINGS)),
+        name = strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_UF)),
+        displayName = strformat(LUIE.name, GetString(SI_LUIE_LAM_UF), GetString(SI_GAME_MENU_SETTINGS)),
         author = LUIE.author,
         version = LUIE.version,
         website = "http://www.esoui.com/downloads/info818-LuiExtended.html",
@@ -92,14 +92,14 @@ function LUIE_CreateSettings()
     -- Info Panel Options
     optionsData[#optionsData + 1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_INFOPANEL_HEADER),
+        name = GetString(SI_LUIE_LAM_IP_HEADER),
         reference = "Info_Panel_Options_Submenu",
         controls = {
             {
                 -- Show InfoPanel
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWPANEL),
-                tooltip = GetString(SI_LUIE_LAM_INFOPANEL_SHOWPANEL_TOOLTIP),
+                name = GetString(SI_LUIE_LAM_IP_SHOWPANEL),
+                tooltip = GetString(SI_LUIE_LAM_IP_SHOWPANEL_TOOLTIP),
                 getFunc = function() return LUIE.SV.InfoPanel_Enabled end,
                 setFunc = function(value) LUIE.SV.InfoPanel_Enabled = value end,
                 width = "full",
@@ -109,8 +109,8 @@ function LUIE_CreateSettings()
             {
                 -- Unlock InfoPanel
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_INFOPANEL_UNLOCKPANEL),
-                tooltip = GetString(SI_LUIE_LAM_INFOPANEL_UNLOCKPANEL_TOOLTIP),
+                name = GetString(SI_LUIE_LAM_IP_UNLOCKPANEL),
+                tooltip = GetString(SI_LUIE_LAM_IP_UNLOCKPANEL_TOOLTIP),
                 getFunc = function() return LUIE.InfoPanel.panelUnlocked end,
                 setFunc = LUIE.InfoPanel.SetMovingState,
                 width = "half",
@@ -122,15 +122,15 @@ function LUIE_CreateSettings()
                 -- Reset InfoPanel position
                 type = "button",
                 name = GetString(SI_LUIE_LAM_RESETPOSITION),
-                tooltip = GetString(SI_LUIE_LAM_INFOPANEL_RESETPOSITION_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_IP_RESETPOSITION_TOOLTIP),
                 func = LUIE.InfoPanel.ResetPosition,
                 width = "half",
             },
             {
                 -- InfoPanel scale
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_INFOPANEL_PANELSCALE),
-                tooltip = GetString(SI_LUIE_LAM_INFOPANEL_PANELSCALE_TOOLTIP),
+                name = GetString(SI_LUIE_LAM_IP_PANELSCALE),
+                tooltip = GetString(SI_LUIE_LAM_IP_PANELSCALE_TOOLTIP),
                 min = 100, max = 300, step = 10,
                 getFunc = function() return LUIE.InfoPanel.SV.panelScale end,
                 setFunc = function(value) LUIE.InfoPanel.SV.panelScale = value LUIE.InfoPanel.SetScale() end,
@@ -140,12 +140,12 @@ function LUIE_CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_INFOPANEL_ELEMENTS_HEADER),
+                name = GetString(SI_LUIE_LAM_IP_ELEMENTS_HEADER),
                 width = "full",
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWLATENCY),
+                name = GetString(SI_LUIE_LAM_IP_SHOWLATENCY),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideLatency end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideLatency = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -154,7 +154,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWCLOCK),
+                name = GetString(SI_LUIE_LAM_IP_SHOWCLOCK),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideClock end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideClock = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -163,7 +163,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWFPS),
+                name = GetString(SI_LUIE_LAM_IP_SHOWFPS),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideFPS end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideFPS = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -172,8 +172,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWMOUNTTIMER),
-                tooltip = GetString(SI_LUIE_LAM_INFOPANEL_SHOWMOUNTTIMER_TOOLTIP),
+                name = GetString(SI_LUIE_LAM_IP_SHOWMOUNTTIMER),
+                tooltip = GetString(SI_LUIE_LAM_IP_SHOWMOUNTTIMER_TOOLTIP),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideMountFeed end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideMountFeed = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -182,7 +182,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWARMORDURABILITY),
+                name = GetString(SI_LUIE_LAM_IP_SHOWARMORDURABILITY),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideArmour end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideArmour = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -191,7 +191,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWEAPONCHARGES),
+                name = GetString(SI_LUIE_LAM_IP_SHOWEAPONCHARGES),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideWeapons end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideWeapons = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -200,7 +200,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWBAGSPACE),
+                name = GetString(SI_LUIE_LAM_IP_SHOWBAGSPACE),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideBags end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideBags = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -209,7 +209,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWSOULGEMS),
+                name = GetString(SI_LUIE_LAM_IP_SHOWSOULGEMS),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideGems end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideGems = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -218,7 +218,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_INFOPANEL_SHOWICTROPHYCOUNT),
+                name = GetString(SI_LUIE_LAM_IP_SHOWICTROPHYCOUNT),
                 getFunc = function() return LUIE.InfoPanel.SV.ShowTrophy end,
                 setFunc = function(value) LUIE.InfoPanel.SV.ShowTrophy = value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -232,8 +232,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_INFOPANEL_DISABLECOLORSRO),
-                tooltip = GetString(SI_LUIE_LAM_INFOPANEL_DISABLECOLORSRO_TOOLTIP),
+                name = GetString(SI_LUIE_LAM_IP_DISABLECOLORSRO),
+                tooltip = GetString(SI_LUIE_LAM_IP_DISABLECOLORSRO_TOOLTIP),
                 getFunc = function() return LUIE.InfoPanel.SV.DisableInfoColours end,
                 setFunc = function(value) LUIE.InfoPanel.SV.DisableInfoColours = value end,
                 width = "full",
@@ -2799,7 +2799,7 @@ function LUIE_CreateSettings()
     -- Enable Unit Frames module
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UNITFRAMES_ENABLE),
+        name = GetString(SI_LUIE_LAM_UF_ENABLE),
         getFunc = function() return LUIE.SV.UnitFrames_Enabled end,
         setFunc = function(value) LUIE.SV.UnitFrames_Enabled = value end,
         width = "full",
@@ -2809,7 +2809,7 @@ function LUIE_CreateSettings()
     -- Unit Frames module description
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "description",
-        text = GetString(SI_LUIE_LAM_UNITFRAMES_DESCRIPTION),
+        text = GetString(SI_LUIE_LAM_UF_DESCRIPTION),
     }
     -- ReloadUI Button
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -2822,8 +2822,8 @@ function LUIE_CreateSettings()
     -- Shorten numbers
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UNITFRAMES_SHORTNUMBERS),
-        tooltip = GetString(SI_LUIE_LAM_UNITFRAMES_SHORTNUMBERS_TOOLTIP),
+        name = GetString(SI_LUIE_LAM_UF_SHORTNUMBERS),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHORTNUMBERS_TOOLTIP),
         getFunc = function() return LUIE.UnitFrames.SV.ShortenNumbers end,
         setFunc = function(value) LUIE.UnitFrames.SV.ShortenNumbers = value end,
         width = "full",
@@ -2833,13 +2833,13 @@ function LUIE_CreateSettings()
     -- Default Frames header
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "header",
-        name = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_HEADER),
+        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_HEADER),
         width = "full",
     }
     -- Default PLAYER frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_PLAYER),
+        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_PLAYER),
         choices = LUIE.UnitFrames.GetDefaultFramesOptions('Player'),
         getFunc = function() return LUIE.UnitFrames.GetDefaultFramesSetting('Player') end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Player', value) end,
@@ -2851,7 +2851,7 @@ function LUIE_CreateSettings()
     -- Default TARGET frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_TARGET),
+        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_TARGET),
         choices = LUIE.UnitFrames.GetDefaultFramesOptions('Target'),
         getFunc = function() return LUIE.UnitFrames.GetDefaultFramesSetting('Target') end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Target', value) end,
@@ -2863,7 +2863,7 @@ function LUIE_CreateSettings()
     -- Default small GROUP frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_GROUPSMALL),
+        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_GROUPSMALL),
         choices = LUIE.UnitFrames.GetDefaultFramesOptions('Group'),
         getFunc = function() return LUIE.UnitFrames.GetDefaultFramesSetting('Group') end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Group', value) end,
@@ -2875,8 +2875,8 @@ function LUIE_CreateSettings()
     -- Reposition default player bars
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_REPOSITION),
-        tooltip = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_REPOSIT_TOOLTIP),
+        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_REPOSITION),
+        tooltip = GetString(SI_LUIE_LAM_UF_DEFFRAMES_REPOSIT_TOOLTIP),
         getFunc = function() return LUIE.UnitFrames.SV.RepositionFrames end,
         setFunc = function(value) LUIE.UnitFrames.SV.RepositionFrames = value end,
         width = "full",
@@ -2887,8 +2887,8 @@ function LUIE_CreateSettings()
     -- Format label text
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_LABEL),
-        tooltip = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_LABEL_TOOLTIP),
+        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_LABEL),
+        tooltip = GetString(SI_LUIE_LAM_UF_DEFFRAMES_LABEL_TOOLTIP),
         choices = formatOptions,
         getFunc = function() return LUIE.UnitFrames.SV.Format end,
         setFunc = function(var) LUIE.UnitFrames.SV.Format = var end,
@@ -2899,8 +2899,8 @@ function LUIE_CreateSettings()
     -- Out-of-Combat bars transparency
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_OOCTRANS),
-        tooltip = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_OOCTRANS_TOOLTIP),
+        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_OOCTRANS),
+        tooltip = GetString(SI_LUIE_LAM_UF_DEFFRAMES_OOCTRANS_TOOLTIP),
         min = 0, max = 100, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.DefaultOocTransparency end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesTransparency(value, nil) end,
@@ -2911,8 +2911,8 @@ function LUIE_CreateSettings()
     -- In-Combat bars transparency
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_INCTRANS),
-        tooltip = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_INCTRANS_TOOLTIP),
+        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_INCTRANS),
+        tooltip = GetString(SI_LUIE_LAM_UF_DEFFRAMES_INCTRANS_TOOLTIP),
         min = 0, max = 100, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.DefaultIncTransparency end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesTransparency(nil, value) end,
@@ -2924,7 +2924,7 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = GetString(SI_LUIE_LAM_FONT),
-        tooltip = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_FONT_TOOLTIP),
+        tooltip = GetString(SI_LUIE_LAM_UF_DEFFRAMES_FONT_TOOLTIP),
         choices = FontsList,
         sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.DefaultFontFace end,
@@ -2937,7 +2937,7 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = GetString(SI_LUIE_LAM_FONT_SIZE),
-        tooltip = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_FONT_SIZE_TOOLTIP),
+        tooltip = GetString(SI_LUIE_LAM_UF_DEFFRAMES_FONT_SIZE_TOOLTIP),
         min = 10, max = 30, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.DefaultFontSize end,
         setFunc = function(value) LUIE.UnitFrames.SV.DefaultFontSize = value LUIE.UnitFrames.DefaultFramesApplyFont() end,
@@ -2960,7 +2960,7 @@ function LUIE_CreateSettings()
     -- Color of text labels
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = GetString(SI_LUIE_LAM_UNITFRAMES_DEFFRAMES_LABEL_COLOR),
+        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_LABEL_COLOR),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.DefaultTextColour) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.DefaultTextColour={r,g,b} LUIE.UnitFrames.DefaultFramesApplyColour() end,
         width = "full",
