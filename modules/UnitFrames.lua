@@ -2352,13 +2352,16 @@ function UF.CustomFramesApplyColours(isMenu)
                     if isDps then
                         thb.bar:SetColor( unpack(dps) )
                         thb.backdrop:SetCenterColor( unpack(dps_bg) )
-                    elseif isHealer then
+                    end
+                    if isHealer then
                         thb.bar:SetColor( unpack(healer) )
                         thb.backdrop:SetCenterColor( unpack(healer_bg) )
-                    elseif isTank then
+                    end
+                    if isTank then
                         thb.bar:SetColor( unpack(tank) )
                         thb.backdrop:SetCenterColor( unpack(tank_bg) )
-                    else
+                    end
+                    if not (isDps and isHealer and isTank) then
                         thb.bar:SetColor( unpack(health) )
                         thb.backdrop:SetCenterColor( unpack(health_bg) ) 
                     end
@@ -2417,10 +2420,12 @@ function UF.CustomFramesApplyColoursSingle(unitTag)
                 if isDps then
                     thb.bar:SetColor( unpack(dps) )
                     thb.backdrop:SetCenterColor( unpack(dps_bg) )
-                elseif isHealer then
+                end
+                if isHealer then
                     thb.bar:SetColor( unpack(healer) )
                     thb.backdrop:SetCenterColor( unpack(healer_bg) )
-                elseif isTank then
+                end
+                if isTank then
                     thb.bar:SetColor( unpack(tank) )
                     thb.backdrop:SetCenterColor( unpack(tank_bg) )
                 end
