@@ -172,7 +172,7 @@ ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_CONFISCATEDEQUIPPED",      "Confisc
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_DECONSTRUCTED",            "Deconstructed")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED",                "Desposited")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED",                "Destroyed")
-ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_DESTROYED",       "Disguise Destroyed")
+ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_DESTROYED",       "Destroyed Disguise")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_EQUIP",           "Equipped Disguise")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_UNEQUIP",         "Unequipped Disguise")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_EARNED",                   "Earned")
