@@ -3146,6 +3146,32 @@ function LUIE_CreateSettings()
         default = { r=LUIE.UnitFrames.D.CustomColourStamina[1], g=LUIE.UnitFrames.D.CustomColourStamina[2], b=LUIE.UnitFrames.D.CustomColourStamina[3] },
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    
+    -----------------------
+    
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = "Color Custom Group Frames by Player Role",
+        tooltip = "Colors the custom group frame bars based off player role.",
+        getFunc = function() return LUIE.UnitFrames.SV.ColorRoleGroup end,
+        setFunc = function(value) LUIE.UnitFrames.SV.ColorRoleGroup = value LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
+        width = "full",
+        default = LUIE.UnitFrames.D.ColorRoleGroup,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
+    }
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = "Color Custom Raid Frames by Player Role",
+        tooltip = "Colors the custom raid frame bars based off player role.",
+        getFunc = function() return LUIE.UnitFrames.SV.ColorRoleRaid end,
+        setFunc = function(value) LUIE.UnitFrames.SV.ColorRoleRaid = value LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
+        width = "full",
+        default = LUIE.UnitFrames.D.ColorRoleRaid,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
+    }
+    
+    -----------------------
+    
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
         name = "DPS Role Colour",
@@ -3153,7 +3179,7 @@ function LUIE_CreateSettings()
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourDPS={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.CustomColourDPS[1], g=LUIE.UnitFrames.D.CustomColourDPS[2], b=LUIE.UnitFrames.D.CustomColourDPS[3] },
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) and (LUIE.UnitFrames.SV.ColorRoleGroup or LUIE.UnitFrames.SV.ColorRoleRaid) ) end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
@@ -3162,7 +3188,7 @@ function LUIE_CreateSettings()
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourHealer={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.CustomColourHealer[1], g=LUIE.UnitFrames.D.CustomColourHealer[2], b=LUIE.UnitFrames.D.CustomColourHealer[3] },
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) and (LUIE.UnitFrames.SV.ColorRoleGroup or LUIE.UnitFrames.SV.ColorRoleRaid) ) end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
@@ -3171,8 +3197,11 @@ function LUIE_CreateSettings()
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourTank={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.CustomColourTank[1], g=LUIE.UnitFrames.D.CustomColourTank[2], b=LUIE.UnitFrames.D.CustomColourTank[3] },
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) and (LUIE.UnitFrames.SV.ColorRoleGroup or LUIE.UnitFrames.SV.ColorRoleRaid) ) end,
     }
+    
+    -----------------------
+    
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
         name = "Use Separate Shield Bar",

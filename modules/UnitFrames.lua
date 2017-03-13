@@ -105,6 +105,8 @@ UF.D = {
     RaidLayout                       = "2 x 12",
     RoleIconSmallGroup               = true,
     RoleIconRaid                     = true,
+    ColorRoleGroup                   = true,
+    ColorRoleRaid                    = true,
     --RaidSort                       = true,
     RaidSpacers                      = false,
     CustomFramesBosses               = true,
@@ -1779,18 +1781,18 @@ function UF.OnGroupMemberConnectedStatus(eventCode, unitTag, isOnline)
     if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag].dead then
         UF.CustomFramesSetDeadLabel( UF.CustomFrames[unitTag], isOnline and nil or strOffline )
     end
-    UF.CustomFramesApplyColours()
+    if isOnline and (UF.SV.ColorRoleGroup or UF.SV.ColorRoleRaid) then UF.CustomFramesApplyColours() end
 end
 
 function UF.OnGroupMemberRoleChange(eventCode, unitTag, dps, healer, tank)
     if UF.CustomFrames[unitTag] then
-        UF.CustomFramesApplyColoursSingle(unitTag)
+        if (UF.SV.ColorRoleGroup or UF.SV.ColorRoleRaid) then UF.CustomFramesApplyColoursSingle(unitTag) end
         UF.ReloadValues(unitTag)
     end
 end
 
 function UF.OnGroupMemberChange()
-    UF.CustomFramesApplyColours()
+    if (UF.SV.ColorRoleGroup or UF.SV.ColorRoleRaid) then UF.CustomFramesApplyColours() end
 end
 
 -- Runs on the EVENT_UNIT_DEATH_STATE_CHANGED listener.
@@ -2345,17 +2347,24 @@ function UF.CustomFramesApplyColours(isMenu)
                 
                 local unitFrame = UF.CustomFrames[unitTag]
                 local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
-                if isDps then
-                    thb.bar:SetColor( unpack(dps) )
-                    thb.backdrop:SetCenterColor( unpack(dps_bg) )
-                end
-                if isHealer then
-                    thb.bar:SetColor( unpack(healer) )
-                    thb.backdrop:SetCenterColor( unpack(healer_bg) )
-                end
-                if isTank then
-                    thb.bar:SetColor( unpack(tank) )
-                    thb.backdrop:SetCenterColor( unpack(tank_bg) )
+                
+                if (groupSize <= 4 and UF.SV.ColorRoleGroup) or (groupSize > 4 and UF.SV.ColorRoleRaid) then
+                    if isDps then
+                        thb.bar:SetColor( unpack(dps) )
+                        thb.backdrop:SetCenterColor( unpack(dps_bg) )
+                    elseif isHealer then
+                        thb.bar:SetColor( unpack(healer) )
+                        thb.backdrop:SetCenterColor( unpack(healer_bg) )
+                    elseif isTank then
+                        thb.bar:SetColor( unpack(tank) )
+                        thb.backdrop:SetCenterColor( unpack(tank_bg) )
+                    else
+                        thb.bar:SetColor( unpack(health) )
+                        thb.backdrop:SetCenterColor( unpack(health_bg) ) 
+                    end
+                else
+                    thb.bar:SetColor( unpack(health) )
+                    thb.backdrop:SetCenterColor( unpack(health_bg) )
                 end
                 thb.shield:SetColor( unpack(shield) )
                 if thb.shieldbackdrop then
@@ -2397,14 +2406,9 @@ function UF.CustomFramesApplyColoursSingle(unitTag)
     local healer_bg = { 0.1*UF.SV.CustomColourHealer[1], 0.1*UF.SV.CustomColourHealer[2], 0.1*UF.SV.CustomColourHealer[3], 0.9 }
     local tank_bg   = { 0.1*UF.SV.CustomColourTank[1],   0.1*UF.SV.CustomColourTank[2],   0.1*UF.SV.CustomColourTank[3], 0.9 }
 
-    -- For the single update, we don't need to modify shield color here.
-            if UF.CustomFrames[unitTag] then
-                local unitFrame = UF.CustomFrames[unitTag]
-                local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
-                thb.bar:SetColor( unpack(health) )
-                thb.backdrop:SetCenterColor( unpack(health_bg) )
-            end
-    
+        local groupSize = GetGroupSize()
+
+        if (groupSize <= 4 and UF.SV.ColorRoleGroup) or (groupSize > 4 and UF.SV.ColorRoleRaid) then
             if UF.CustomFrames[unitTag] then
                 local isDps, isHealer, isTank = GetGroupMemberRoles(unitTag)
 
@@ -2413,16 +2417,15 @@ function UF.CustomFramesApplyColoursSingle(unitTag)
                 if isDps then
                     thb.bar:SetColor( unpack(dps) )
                     thb.backdrop:SetCenterColor( unpack(dps_bg) )
-                end
-                if isHealer then
+                elseif isHealer then
                     thb.bar:SetColor( unpack(healer) )
                     thb.backdrop:SetCenterColor( unpack(healer_bg) )
-                end
-                if isTank then
+                elseif isTank then
                     thb.bar:SetColor( unpack(tank) )
                     thb.backdrop:SetCenterColor( unpack(tank_bg) )
                 end
             end
+        end
 
 end
 
