@@ -1833,9 +1833,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         elseif CA.SV.MiscMail and reason == 2 then
             if not g_mailStop and g_mailStringPart1 ~= "" then
                 if not CA.SV.GoldChange then
-                    printToChat(strformat(GetString(SI_LUIE_CA_VAR_AND_VAR_GOLD_MSG), g_mailStringPart1, changetype))
+                    printToChat(strformat("<<1>><<2>><<3>> <<c:4>>.", g_mailStringPart1, GetString(SI_LIST_AND_SEPARATOR), changetype, GetString(SI_CURRENCY_GOLD)))
                 else
-                    printToChat(strformat(GetString(SI_LUIE_CA_VAR_AND_GOLD_MSG), g_mailStringPart1))
+                    printToChat(strformat("<<1>><<2>><<c:3>>.", g_mailStringPart1, GetString(SI_LIST_AND_SEPARATOR)), GetString(SI_CURRENCY_GOLD))
                 end
             elseif not g_mailStop then
                 if not CA.SV.GoldChange then

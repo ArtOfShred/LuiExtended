@@ -196,8 +196,6 @@ ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT1",                      "|cFEFEF
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_ACCEPTED",                   "Trade invite accepted.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_CONFIRM",                    "You have invited |cFEFEFE<<1>>|r to trade.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MESSAGE",                    "|cFEFEFE<<1>>|r has invited you to trade.")
-ZO_CreateStringId("SI_LUIE_CA_VAR_AND_GOLD_MSG",                        "<<1>> and gold.")
-ZO_CreateStringId("SI_LUIE_CA_VAR_AND_VAR_GOLD_MSG",                    "<<1>> and <<2>> gold.")
 
 -- LuiExtendedSettings.lua
 ZO_CreateStringId("SI_LUIE_LAM_COMPATIBILITY_WARNING",                  "Disable this option if you are having compatibility issues with other addons.")
