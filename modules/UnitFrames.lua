@@ -844,8 +844,9 @@ function UF.Initialize( enabled )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_SUPPORT_RANGE_UPDATE,    UF.OnGroupSupportRangeUpdate )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_CONNECTED_STATUS, UF.OnGroupMemberConnectedStatus )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_ROLES_CHANGED, UF.OnGroupMemberRoleChange )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED, UF.OnGroupMemberChange)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT, UF.OnGroupMemberChange)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_UPDATE, UF.OnGroupMemberChange )
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED, UF.OnGroupMemberChange )
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT, UF.OnGroupMemberChange )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED,  UF.OnDeath )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEADER_UPDATE,         UF.OnLeaderUpdate )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BOSSES_CHANGED,    UF.OnBossesChanged )
@@ -1796,7 +1797,7 @@ function UF.OnGroupMemberRoleChange(eventCode, unitTag, dps, healer, tank)
 end
 
 function UF.OnGroupMemberChange()
-    if (UF.SV.ColorRoleGroup or UF.SV.ColorRoleRaid) then UF.CustomFramesApplyColours() end
+    UF.CustomFramesApplyColours()
 end
 
 -- Runs on the EVENT_UNIT_DEATH_STATE_CHANGED listener.
@@ -2823,12 +2824,12 @@ function UF.CustomFramesApplyLayoutGroup()
         unitFrame.levelIcon:ClearAnchors()
         
         if IsUnitGroupLeader(unitTag) then
-            unitFrame.name:SetDimensions(UF.SV.GroupBarWidth - 127)
+            unitFrame.name:SetDimensions(UF.SV.GroupBarWidth - 137)
             unitFrame.name:SetAnchor ( LEFT, TopInfo, LEFT, 22, 0)
             unitFrame.levelIcon:SetAnchor( LEFT, unitFrame.topInfo, LEFT, unitFrame.name:GetTextWidth()+23, 0 )
             unitFrame.leader:SetTexture(leaderIcons[1])
         else
-            unitFrame.name:SetDimensions(UF.SV.GroupBarWidth - 105)
+            unitFrame.name:SetDimensions(UF.SV.GroupBarWidth - 115)
             unitFrame.name:SetAnchor ( LEFT, TopInfo, LEFT, 0, 0)
             unitFrame.levelIcon:SetAnchor( LEFT, unitFrame.topInfo, LEFT, unitFrame.name:GetTextWidth()+1, 0 )
             unitFrame.leader:SetTexture(leaderIcons[0])
