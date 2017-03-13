@@ -219,7 +219,7 @@ ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMP",                              "Include
 ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMPFORMAT",                        "Timestamp format")
 ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMPFORMAT_TOOLTIP",                "FORMAT:\nHH: hours (24)\nhh: hours (12)\nH: hour (24, no leading 0)\nh: hour (12, no leading 0)\nA: AM/PM\na: am/pm\nm: minutes\ns: seconds")
 ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMP_TOOLTIP",                      "Prepend printed text with current time label.")
-ZO_CreateStringId("SI_LUIE_LAM_UF",                             "Unit Frames")
+ZO_CreateStringId("SI_LUIE_LAM_UF",                                     "Unit Frames")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_COLOUREDTIMELABEL",                 "Coloured time label")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_COLOUREDTIMELABE_TOOLTIP",          "Set the colour of text label same as icon border or keep it white.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_DESCENDINGSORT",                    "Descending sort direction")
