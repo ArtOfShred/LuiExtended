@@ -3348,7 +3348,7 @@ function LUIE_CreateSettings()
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Display Mount/Siege/Werewolf bar",
+        name = "Display Mount/Siege/Werewolf Bar",
         tooltip = "Display alternative meaning bar to track mount stamina, siege weapon health, werewolf time left.",
         getFunc = function() return LUIE.UnitFrames.SV.PlayerEnableAltbarMSW end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableAltbarMSW = value LUIE.UnitFrames.CustomFramesSetupAlternative() end,
@@ -3358,7 +3358,7 @@ function LUIE_CreateSettings()
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Display XP/ChampionXP bar",
+        name = "Display XP/Champion XP Bar",
         tooltip = "Display alternative meaning bar to track player experience.",
         getFunc = function() return LUIE.UnitFrames.SV.PlayerEnableAltbarXP end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableAltbarXP = value LUIE.UnitFrames.CustomFramesSetupAlternative() end,
@@ -3368,7 +3368,7 @@ function LUIE_CreateSettings()
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "ChampionXP bar Point-Type Colour",
+        name = "Champion XP Bar Point-Type Colour",
         tooltip = "Set colour of ChampionXP bar (Experience bar for vr14 players) to be dependent on type of Champion Point being earned.",
         getFunc = function() return LUIE.UnitFrames.SV.PlayerChampionColour end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerChampionColour = value LUIE.UnitFrames.OnChampionPointGained() end,
@@ -3570,6 +3570,16 @@ function LUIE_CreateSettings()
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = "Show Role Icon on Group Frames",
+        tooltip = "This will show the selected player role on group frames.",
+        getFunc = function() return LUIE.UnitFrames.SV.RoleIconSmallGroup end,
+        setFunc = function(value) LUIE.UnitFrames.SV.RoleIconSmallGroup = value LUIE.UnitFrames.CustomFramesApplyLayoutGroup() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.RoleIconSmallGroup,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
+    }
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "header",
         name = "Custom Unit Frames (Raid)",
         width = "full",
@@ -3647,6 +3657,16 @@ function LUIE_CreateSettings()
         width = "full",
         default = LUIE.UnitFrames.D.RaidSpacers,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
+    }
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = "Show Role Icon on Raid Frames",
+        tooltip = "This will show the selected player role on raid frames.",
+        getFunc = function() return LUIE.UnitFrames.SV.RoleIconRaid end,
+        setFunc = function(value) LUIE.UnitFrames.SV.RoleIconRaid  = value LUIE.UnitFrames.CustomFramesApplyLayoutRaid() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.RoleIconRaid,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
     }
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "header",

@@ -21,6 +21,15 @@ local classIcons = {
     [6] = "/esoui/art/icons/class/class_templar.dds",
 }
 
+local roleIcons = {
+
+    [0] = "LuiExtended/media/unitframes/unitframes_class_none.dds",
+    [1] = "esoui/art/lfg/lfg_icon_dps.dds",
+    [2] = "esoui/art/lfg/lfg_icon_healer.dds",
+    [3] = "esoui/art/lfg/lfg_icon_tank.dds",
+
+}
+
 UF.Enabled = false
 UF.D = {
     ShortenNumbers                   = false,
@@ -94,6 +103,8 @@ UF.D = {
     RaidBarWidth                     = 200,
     RaidBarHeight                    = 30,
     RaidLayout                       = "2 x 12",
+    RoleIconSmallGroup               = true,
+    RoleIconRaid                     = true,
     --RaidSort                       = true,
     RaidSpacers                      = false,
     CustomFramesBosses               = true,
@@ -498,10 +509,12 @@ local function CreateCustomFrames()
                 ["level"]       = UI.Label( topInfo, {LEFT,RIGHT,1,0,gli}, nil, {0,1}, nil, "level", false ),
                 ["classIcon"]   = UI.Texture( topInfo, {RIGHT,RIGHT,-1,0}, {22,22}, nil, nil, false ),
                 ["friendIcon"]  = UI.Texture( topInfo, {RIGHT,RIGHT,-20,0}, {22,22}, nil, nil, false ),
+                ["roleIcon"]    = UI.Texture( ghb, {LEFT,LEFT, 5,0}, {18,18}, nil, 2, false ),
                 ["dead"]        = UI.Label( ghb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "Status", false ),
             }
             --UF.CustomFrames[unitTag].leader = {RIGHT, LEFT, 0, 0, UF.CustomFrames[unitTag].classIcon, 0}
             UF.CustomFrames[unitTag].leader = {BOTTOMLEFT, TOPLEFT, -2, 0, ghb}
+            
         end
     end
 
@@ -529,11 +542,13 @@ local function CreateCustomFrames()
                     ["shield"]  = UI.StatusBar( rhb, nil, nil, nil, true ),
                 },
                 ["name"]        = UI.Label( rhb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, unitTag, false ),
+                ["roleIcon"]    = UI.Texture( rhb, {LEFT,LEFT, 4,0}, {16,16}, nil, 2, false ),
                 ["dead"]        = UI.Label( rhb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "Status", false ),
-                --["stealth"]     = UI.Texture( rhb, {RIGHT,RIGHT,-2,0}, {24,24}, nil, 2, false ), -- STEALTH temporary removal --> Add role icon onto bar
+
             }
             UF.CustomFrames[unitTag].leader = {RIGHT, RIGHT, -38, 0, UF.CustomFrames[unitTag].control, true}
             UF.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = "Percentage%"
+
         end
     end
 
@@ -826,12 +841,11 @@ function UF.Initialize( enabled )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_SUPPORT_RANGE_UPDATE,    UF.OnGroupSupportRangeUpdate )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_CONNECTED_STATUS, UF.OnGroupMemberConnectedStatus )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_ROLES_CHANGED, UF.OnGroupMemberRoleChange )
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED, UF.OnGroupMemberChange)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT, UF.OnGroupMemberChange)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED,  UF.OnDeath )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEADER_UPDATE,         UF.OnLeaderUpdate )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BOSSES_CHANGED,    UF.OnBossesChanged )
-
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STEALTH_STATE_CHANGED, UF.OnStealthState )
-        EVENT_MANAGER:AddFilterForEvent(moduleName, EVENT_STEALTH_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG_PREFIX, "group" )
 
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD,     UF.InvalidateGuildMemberIndex )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD,   UF.OnGuildSelfJoinedGuild )
@@ -929,9 +943,6 @@ function UF.OnPlayerActivated(eventCode)
     UF.ReloadValues("player")
     UF.UpdateRegen( "player", STAT_MAGICKA_REGEN_COMBAT, ATTRIBUTE_MAGICKA, POWERTYPE_MAGICKA )
     UF.UpdateRegen( "player", STAT_STAMINA_REGEN_COMBAT, ATTRIBUTE_STAMINA, POWERTYPE_STAMINA )
-    
-    -- Apply bar colors here, has to be after player init to get group roles
-    UF.CustomFramesApplyColours()
 
     -- Create UI elements for default group members frames
     if g_DefaultFrames.SmallGroup then
@@ -963,6 +974,10 @@ function UF.OnPlayerActivated(eventCode)
 
     UF.OnPlayerCombatState(EVENT_PLAYER_COMBAT_STATE, IsUnitInCombat("player") )
     UF.CustomFramesSetupAlternative()
+    
+    -- Apply bar colors here, has to be after player init to get group roles
+    UF.CustomFramesApplyColours()
+    
 end
 
 -- Runs on the EVENT_POWER_UPDATE listener.
@@ -1355,8 +1370,20 @@ function UF.UpdateStaticControls( unitFrame )
     unitFrame.isLevelCap = ( GetUnitChampionPoints( unitFrame.unitTag ) == g_MaxChampionPoint  )
     unitFrame.avaRankValue = GetUnitAvARank( unitFrame.unitTag )
 
-    -- First update classIcon and friendIcon, so then we can set maximal length of name label
+    -- First update roleIcon, classIcon and friendIcon, so then we can set maximal length of name label
 
+    if unitFrame.roleIcon ~= nil then
+        local isDps, isHealer, isTank = GetGroupMemberRoles(unitFrame.unitTag)
+        local role = 0
+        
+        if isDps then role = 1 end
+        if isHealer then role = 2 end
+        if isTank then role = 3 end
+
+        local unitRole = roleIcons[role]
+        unitFrame.roleIcon:SetTexture(unitRole)
+    end
+    
     -- If unitFrame has unit classIcon control
     if unitFrame.classIcon ~= nil then
         local unitDifficulty = GetUnitDifficulty( unitFrame.unitTag )
@@ -1483,11 +1510,6 @@ function UF.UpdateStaticControls( unitFrame )
             unitFrame.avaRank:SetHidden(true)
             unitFrame.avaRankIcon:SetHidden(true)
         end
-    end
-
-    -- If unitFrame has also stealth icon, then query for current state
-    if unitFrame.stealth ~= nil then
-        UF.OnStealthState( EVENT_STEALTH_STATE_CHANGED, unitFrame.unitTag, GetUnitStealthState( unitFrame.unitTag ) )
     end
 
     -- If unitFrame has dead/offline indicator, then query its state and act accordingly
@@ -1757,12 +1779,18 @@ function UF.OnGroupMemberConnectedStatus(eventCode, unitTag, isOnline)
     if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag].dead then
         UF.CustomFramesSetDeadLabel( UF.CustomFrames[unitTag], isOnline and nil or strOffline )
     end
+    UF.CustomFramesApplyColours()
 end
 
 function UF.OnGroupMemberRoleChange(eventCode, unitTag, dps, healer, tank)
     if UF.CustomFrames[unitTag] then
-        UF.CustomFramesApplyColours()
+        UF.CustomFramesApplyColoursSingle(unitTag)
+        UF.ReloadValues(unitTag)
     end
+end
+
+function UF.OnGroupMemberChange()
+    UF.CustomFramesApplyColours()
 end
 
 -- Runs on the EVENT_UNIT_DEATH_STATE_CHANGED listener.
@@ -1793,15 +1821,6 @@ function UF.OnDeath(eventCode, unitTag, isDead)
                 end
             end
         end
-    end
-end
-
--- Runs on the EVENT_STEALTH_STATE_CHANGED listener.
-function UF.OnStealthState(eventCode, unitTag, stealthState)
-    if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag].stealth then
-        local stealth = ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED )
-        UF.CustomFrames[unitTag].stealth:SetTexture( stealth and "/esoui/art/icons/guildranks/guild_rankicon_misc06.dds" or "/esoui/art/icons/guildranks/guild_rankicon_misc12.dds" )
-        UF.CustomFrames[unitTag].stealth:SetAlpha( stealth and 1 or 0.1 )
     end
 end
 
@@ -2039,9 +2058,6 @@ function UF.CustomFramesSetDeadLabel( unitFrame, newValue )
         if unitFrame[POWERTYPE_HEALTH].labelTwo ~= nil then
             unitFrame[POWERTYPE_HEALTH].labelTwo:SetHidden( newValue ~= nil )
         end
-    end
-    if unitFrame.stealth ~= nil then
-        unitFrame.stealth:SetHidden( newValue ~= nil )
     end
 
     -- Finally small check if we want to hide leader icon from control - this is required for RaidGroup
@@ -2317,18 +2333,15 @@ function UF.CustomFramesApplyColours(isMenu)
         end
     end
     
+    local groupSize = GetGroupSize()
+    
     for _, baseName in pairs( { "SmallGroup", "RaidGroup" } ) do
         shield[4] = ( UF.SV.CustomShieldBarSeparate and not (baseName == "RaidGroup") ) and 0.9 or 0.5
-        for i = 0, 24 do
-            local unitTag = (i==0) and baseName or ( baseName .. i )
+        for i = 1, groupSize do
+            local unitTag = baseName .. i
             if UF.CustomFrames[unitTag] then
-                local isDps, isHealer, isTank = GetGroupMemberRoles("group" .. i)
-                
-                -- Trying to determine when roles are able to be detected
-                --if isDps then d("group"..i .. "  is DPS") end
-                --if isHealer then d("group"..i .. "  is Healer") end
-                --if isTank then d("group"..i .. "  is Tank") end
-                --if not isDps and not isHealer and not isTank then d("group"..i.. " is not anything LOLE.") end
+                local defaultUnitTag = GetGroupUnitTagByIndex(i)
+                local isDps, isHealer, isTank = GetGroupMemberRoles(defaultUnitTag)
                 
                 local unitFrame = UF.CustomFrames[unitTag]
                 local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
@@ -2363,29 +2376,54 @@ function UF.CustomFramesApplyColours(isMenu)
         UF.CustomFrames.player[POWERTYPE_STAMINA].backdrop:SetCenterColor( unpack(stamina_bg) )
     end
    
---[[   
-    for i = 1, 24 do
-        local unitTag = ("group" .. i)
-        local isDps, isHealer, isTank = GetGroupMemberRoles("group" .. i)
-        if UF.CustomFrames[unitTag] then
-            local unitFrame = UF.CustomFrames[unitTag]
-            local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
-            if isDps then
-                thb.bar:SetColor( unpack(dps) )
-                thb.backdrop:SetCenterColor( unpack(dps_bg) )
+end
+
+function UF.CustomFramesApplyColoursSingle(unitTag)
+    local health    = { UF.SV.CustomColourHealth[1],  UF.SV.CustomColourHealth[2],  UF.SV.CustomColourHealth[3], 0.9 }
+    local shield    = { UF.SV.CustomColourShield[1],  UF.SV.CustomColourShield[2],  UF.SV.CustomColourShield[3], 0 } -- .a value will be fixed in the loop
+    local magicka   = { UF.SV.CustomColourMagicka[1], UF.SV.CustomColourMagicka[2], UF.SV.CustomColourMagicka[3], 0.9 }
+    local stamina   = { UF.SV.CustomColourStamina[1], UF.SV.CustomColourStamina[2], UF.SV.CustomColourStamina[3], 0.9 }
+    
+    local dps       =  { UF.SV.CustomColourDPS[1],    UF.SV.CustomColourDPS[2],     UF.SV.CustomColourDPS[3], 0.9 }
+    local healer    =  { UF.SV.CustomColourHealer[1], UF.SV.CustomColourHealer[2],  UF.SV.CustomColourHealer[3], 0.9 }
+    local tank      =  { UF.SV.CustomColourTank[1],   UF.SV.CustomColourTank[2],    UF.SV.CustomColourTank[3], 0.9 }
+
+    local health_bg  = { 0.1*UF.SV.CustomColourHealth[1],  0.1*UF.SV.CustomColourHealth[2],  0.1*UF.SV.CustomColourHealth[3], 0.9 }
+    local shield_bg  = { 0.1*UF.SV.CustomColourShield[1],  0.1*UF.SV.CustomColourShield[2],  0.1*UF.SV.CustomColourShield[3], 0.9 }
+    local magicka_bg = { 0.1*UF.SV.CustomColourMagicka[1], 0.1*UF.SV.CustomColourMagicka[2], 0.1*UF.SV.CustomColourMagicka[3], 0.9 }
+    local stamina_bg = { 0.1*UF.SV.CustomColourStamina[1], 0.1*UF.SV.CustomColourStamina[2], 0.1*UF.SV.CustomColourStamina[3], 0.9 }
+    
+    local dps_bg    = { 0.1*UF.SV.CustomColourDPS[1],    0.1*UF.SV.CustomColourDPS[2],    0.1*UF.SV.CustomColourDPS[3], 0.9 }
+    local healer_bg = { 0.1*UF.SV.CustomColourHealer[1], 0.1*UF.SV.CustomColourHealer[2], 0.1*UF.SV.CustomColourHealer[3], 0.9 }
+    local tank_bg   = { 0.1*UF.SV.CustomColourTank[1],   0.1*UF.SV.CustomColourTank[2],   0.1*UF.SV.CustomColourTank[3], 0.9 }
+
+    -- For the single update, we don't need to modify shield color here.
+            if UF.CustomFrames[unitTag] then
+                local unitFrame = UF.CustomFrames[unitTag]
+                local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+                thb.bar:SetColor( unpack(health) )
+                thb.backdrop:SetCenterColor( unpack(health_bg) )
             end
-            if isHealer then
-                thb.bar:SetColor( unpack(healer) )
-                thb.backdrop:SetCenterColor( unpack(healer_bg) )
+    
+            if UF.CustomFrames[unitTag] then
+                local isDps, isHealer, isTank = GetGroupMemberRoles(unitTag)
+
+                local unitFrame = UF.CustomFrames[unitTag]
+                local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+                if isDps then
+                    thb.bar:SetColor( unpack(dps) )
+                    thb.backdrop:SetCenterColor( unpack(dps_bg) )
+                end
+                if isHealer then
+                    thb.bar:SetColor( unpack(healer) )
+                    thb.backdrop:SetCenterColor( unpack(healer_bg) )
+                end
+                if isTank then
+                    thb.bar:SetColor( unpack(tank) )
+                    thb.backdrop:SetCenterColor( unpack(tank_bg) )
+                end
             end
-            if isTank then
-                thb.bar:SetColor( unpack(tank) )
-                thb.backdrop:SetCenterColor( unpack(tank_bg) )
-            end
-        end
-    end
-]]--    
-   
+
 end
 
 -- Apply selected texture for all known bars on custom unit frames
@@ -2813,7 +2851,17 @@ function UF.CustomFramesApplyLayoutGroup()
             ghb.shieldbackdrop:SetDimensions( UF.SV.GroupBarWidth, UF.SV.CustomShieldBarHeight )
         end
 
-        ghb.labelOne:SetDimensions(UF.SV.GroupBarWidth-50, UF.SV.GroupBarHeight-2)
+        -- First HP Label
+        if UF.SV.RoleIconSmallGroup then
+            ghb.labelOne:SetDimensions(UF.SV.GroupBarWidth-52, UF.SV.GroupBarHeight-2)
+            ghb.labelOne:SetAnchor ( LEFT, phb, LEFT, 25, 0 )
+        else
+            ghb.labelOne:SetDimensions(UF.SV.GroupBarWidth-72, UF.SV.GroupBarHeight-2)
+            ghb.labelOne:SetAnchor ( LEFT, phb, LEFT, 5, 0 )
+        end
+        unitFrame.roleIcon:SetHidden (not UF.SV.RoleIconSmallGroup)
+        
+        -- Second HP Label
         ghb.labelTwo:SetDimensions(UF.SV.GroupBarWidth-50, UF.SV.GroupBarHeight-2)
     end
 
@@ -2867,8 +2915,14 @@ function UF.CustomFramesApplyLayoutRaid()
         unitFrame.control:SetAnchor( TOPLEFT, raid, TOPLEFT, UF.SV.RaidBarWidth*column, UF.SV.RaidBarHeight*(row-1) + (UF.SV.RaidSpacers and spacerHeight*(math.floor((i-1)/4)-math.floor(column*itemsPerColumn/4)) or 0) )
         unitFrame.control:SetDimensions( UF.SV.RaidBarWidth, UF.SV.RaidBarHeight )
 
-        -- Subtracted an additional additional 20 from dimensions here to correct for clipping into Offline label + Crown
-        unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-64, UF.SV.RaidBarHeight-2 )
+        if UF.SV.RoleIconRaid then
+            unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-81, UF.SV.RaidBarHeight-2 )
+            unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
+        else
+            unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-64, UF.SV.RaidBarHeight-2 )
+            unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 5, 0 )
+        end
+        unitFrame.roleIcon:SetHidden (not UF.SV.RoleIconRaid)
         unitFrame.dead:SetDimensions( 75, UF.SV.RaidBarHeight-2 )
 
         unitFrame[POWERTYPE_HEALTH].label:SetDimensions(UF.SV.RaidBarWidth-50, UF.SV.RaidBarHeight-2)
