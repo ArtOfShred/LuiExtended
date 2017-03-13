@@ -1438,10 +1438,10 @@ function UF.UpdateStaticControls( unitFrame )
         local playerName = strformat(SI_UNIT_NAME, GetUnitName("player"))
         if unitFrame.name:GetParent() == unitFrame.topInfo then
             local width = unitFrame.topInfo:GetWidth()
-            if unitFrame.classIcon and not unitFrame.classIcon:IsHidden() then
+            if unitFrame.classIcon then
                 width = width - unitFrame.classIcon:GetWidth()
             end
-            if unitFrame.friendIcon and not unitFrame.friendIcon:IsHidden() then
+            if unitFrame.friendIcon then
                 width = width - unitFrame.friendIcon:GetWidth() * 5/6
             end
             if unitFrame.level then
