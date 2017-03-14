@@ -3360,10 +3360,11 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.HideLabelMagicka ) end,
     }
+    -- Hide Player Stamina Bar Label
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Hide Player Stamina Bar Label",
-        tooltip = "Completely hide the Player Stamina Bar",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL_TP),
         getFunc = function() return LUIE.UnitFrames.SV.HideLabelStamina end,
         setFunc = function(value) LUIE.UnitFrames.SV.HideLabelStamina = value LUIE.UnitFrames.SV.HideBarStamina = false end,
         width = "full",
@@ -3371,10 +3372,11 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Hide Player Stamina Bar
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Hide Player Stamina Bar",
-        tooltip = "Hide just the label on the Player Stamina Bar",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR_TP),
         getFunc = function() return LUIE.UnitFrames.SV.HideBarStamina end,
         setFunc = function(value) LUIE.UnitFrames.SV.HideBarStamina = value end,
         width = "full",
@@ -3382,9 +3384,10 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.HideLabelStamina ) end,
     }
+    -- Spacing between Player Bars
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Spacing between Player Bars",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_SPACING),
         min = -1, max = 4, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarSpacing end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarSpacing = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3392,50 +3395,55 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.PlayerBarSpacing,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Display self name on Player Frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Display Your name on Player Frame",
-        tooltip = "Display your character name and level on the player frame.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_NAMESELF),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_NAMESELF_TP),
         getFunc = function() return LUIE.UnitFrames.SV.PlayerEnableYourname end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableYourname = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
         width = "full",
         default = LUIE.UnitFrames.D.PlayerEnableYourname,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Display Mount/Siege/Werewolf Bar
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Display Mount/Siege/Werewolf Bar",
-        tooltip = "Display alternative meaning bar to track mount stamina, siege weapon health, werewolf time left.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_MOUNTSIEGEWWBAR),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_MOUNTSIEGEWWBAR_TP),
         getFunc = function() return LUIE.UnitFrames.SV.PlayerEnableAltbarMSW end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableAltbarMSW = value LUIE.UnitFrames.CustomFramesSetupAlternative() end,
         width = "full",
         default = LUIE.UnitFrames.D.PlayerEnableAltbarMSW,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Display XP/Champion XP Bar
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Display XP/Champion XP Bar",
-        tooltip = "Display alternative meaning bar to track player experience.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBAR),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBAR_TP),
         getFunc = function() return LUIE.UnitFrames.SV.PlayerEnableAltbarXP end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableAltbarXP = value LUIE.UnitFrames.CustomFramesSetupAlternative() end,
         width = "full",
         default = LUIE.UnitFrames.D.PlayerEnableAltbarXP,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Champion XP Bar Point-Type Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Champion XP Bar Point-Type Colour",
-        tooltip = "Set colour of ChampionXP bar (Experience bar for vr14 players) to be dependent on type of Champion Point being earned.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR_TP),
         getFunc = function() return LUIE.UnitFrames.SV.PlayerChampionColour end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerChampionColour = value LUIE.UnitFrames.OnChampionPointGained() end,
         width = "full",
         default = LUIE.UnitFrames.D.PlayerChampionColour,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.PlayerEnableAltbarXP ) end,
     }
+    -- Display Armor stat change
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Display Armor stat change",
-        tooltip = "Display additional icon on unit health bar when unit has its armor affected. Also displays cracked texture over health bar when armor is decreased.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ARMORCHANGE),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ARMORCHANGE_TP),
         getFunc = function() return LUIE.UnitFrames.SV.PlayerEnableArmor end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableArmor = value end,
         width = "full",
@@ -3588,7 +3596,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
         name = "Include Player in Group Frame",
-        -- tooltip = "",
         getFunc = function() return not LUIE.UnitFrames.SV.GroupExcludePlayer end,
         setFunc = function(value) LUIE.UnitFrames.SV.GroupExcludePlayer = (not value) LUIE.UnitFrames.CustomFramesGroupUpdate() end,
         width = "full",
