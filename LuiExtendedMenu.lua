@@ -21,7 +21,6 @@ function LUIE_CreateSettings()
         table.insert(StatusbarTexturesList, key)
     end
 
-    local styleOptions                  = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" }
     local nameDisplayOptions            = { "@UserID", "Character Name", "Character Name @UserID" }
     local nameDisplayOptionsKeys        = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
     local chatnameDisplayOptions        = { "@UserID", "Character Name", "Character Name @UserID" }
@@ -36,8 +35,6 @@ function LUIE_CreateSettings()
     local guildrankDisplayOptionsKeys   = { ["Self Only"] = 1, ["Self + All w/ Permissions"] = 2, ["Display All Rank Changes"] = 3 }
     local rotationOptions               = { "Horizontal", "Vertical" }
     local rotationOptionsKeys           = { ["Horizontal"] = 1, ["Vertical"] = 2 }
-    local hAlignOptions                 = { "Left", "Centered", "Right" }
-    local vAlignOptions                 = { "Top", "Middle", "Bottom" }
 
     local formatOptions = {
         "Nothing",
@@ -92,14 +89,14 @@ function LUIE_CreateSettings()
     -- Info Panel Options
     optionsData[#optionsData + 1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_IP_HEADER),
+        name = GetString(SI_LUIE_LAM_PNL_HEADER),
         reference = "Info_Panel_Options_Submenu",
         controls = {
             {
                 -- Show InfoPanel
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_IP_SHOWPANEL),
-                tooltip = GetString(SI_LUIE_LAM_IP_SHOWPANEL_TOOLTIP),
+                name = GetString(SI_LUIE_LAM_PNL_SHOWPANEL),
+                tooltip = GetString(SI_LUIE_LAM_PNL_SHOWPANEL_TP),
                 getFunc = function() return LUIE.SV.InfoPanel_Enabled end,
                 setFunc = function(value) LUIE.SV.InfoPanel_Enabled = value end,
                 width = "full",
@@ -109,8 +106,8 @@ function LUIE_CreateSettings()
             {
                 -- Unlock InfoPanel
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_IP_UNLOCKPANEL),
-                tooltip = GetString(SI_LUIE_LAM_IP_UNLOCKPANEL_TOOLTIP),
+                name = GetString(SI_LUIE_LAM_PNL_UNLOCKPANEL),
+                tooltip = GetString(SI_LUIE_LAM_PNL_UNLOCKPANEL_TP),
                 getFunc = function() return LUIE.InfoPanel.panelUnlocked end,
                 setFunc = LUIE.InfoPanel.SetMovingState,
                 width = "half",
@@ -122,15 +119,15 @@ function LUIE_CreateSettings()
                 -- Reset InfoPanel position
                 type = "button",
                 name = GetString(SI_LUIE_LAM_RESETPOSITION),
-                tooltip = GetString(SI_LUIE_LAM_IP_RESETPOSITION_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_PNL_RESETPOSITION_TP),
                 func = LUIE.InfoPanel.ResetPosition,
                 width = "half",
             },
             {
                 -- InfoPanel scale
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_IP_PANELSCALE),
-                tooltip = GetString(SI_LUIE_LAM_IP_PANELSCALE_TOOLTIP),
+                name = GetString(SI_LUIE_LAM_PNL_PANELSCALE),
+                tooltip = GetString(SI_LUIE_LAM_PNL_PANELSCALE_TP),
                 min = 100, max = 300, step = 10,
                 getFunc = function() return LUIE.InfoPanel.SV.panelScale end,
                 setFunc = function(value) LUIE.InfoPanel.SV.panelScale = value LUIE.InfoPanel.SetScale() end,
@@ -140,12 +137,12 @@ function LUIE_CreateSettings()
             },
             {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_IP_ELEMENTS_HEADER),
+                name = GetString(SI_LUIE_LAM_PNL_ELEMENTS_HEADER),
                 width = "full",
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_IP_SHOWLATENCY),
+                name = GetString(SI_LUIE_LAM_PNL_SHOWLATENCY),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideLatency end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideLatency = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -154,7 +151,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_IP_SHOWCLOCK),
+                name = GetString(SI_LUIE_LAM_PNL_SHOWCLOCK),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideClock end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideClock = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -163,7 +160,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_IP_SHOWFPS),
+                name = GetString(SI_LUIE_LAM_PNL_SHOWFPS),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideFPS end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideFPS = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -172,8 +169,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_IP_SHOWMOUNTTIMER),
-                tooltip = GetString(SI_LUIE_LAM_IP_SHOWMOUNTTIMER_TOOLTIP),
+                name = GetString(SI_LUIE_LAM_PNL_SHOWMOUNTTIMER),
+                tooltip = GetString(SI_LUIE_LAM_PNL_SHOWMOUNTTIMER_TP),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideMountFeed end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideMountFeed = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -182,7 +179,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_IP_SHOWARMORDURABILITY),
+                name = GetString(SI_LUIE_LAM_PNL_SHOWARMORDURABILITY),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideArmour end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideArmour = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -191,7 +188,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_IP_SHOWEAPONCHARGES),
+                name = GetString(SI_LUIE_LAM_PNL_SHOWEAPONCHARGES),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideWeapons end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideWeapons = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -200,7 +197,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_IP_SHOWBAGSPACE),
+                name = GetString(SI_LUIE_LAM_PNL_SHOWBAGSPACE),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideBags end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideBags = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -209,7 +206,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_IP_SHOWSOULGEMS),
+                name = GetString(SI_LUIE_LAM_PNL_SHOWSOULGEMS),
                 getFunc = function() return not LUIE.InfoPanel.SV.HideGems end,
                 setFunc = function(value) LUIE.InfoPanel.SV.HideGems = not value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -218,7 +215,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_IP_SHOWICTROPHYCOUNT),
+                name = GetString(SI_LUIE_LAM_PNL_SHOWICTROPHYCOUNT),
                 getFunc = function() return LUIE.InfoPanel.SV.ShowTrophy end,
                 setFunc = function(value) LUIE.InfoPanel.SV.ShowTrophy = value LUIE.InfoPanel.RearrangePanel() end,
                 width = "full",
@@ -232,8 +229,8 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_IP_DISABLECOLORSRO),
-                tooltip = GetString(SI_LUIE_LAM_IP_DISABLECOLORSRO_TOOLTIP),
+                name = GetString(SI_LUIE_LAM_PNL_DISABLECOLORSRO),
+                tooltip = GetString(SI_LUIE_LAM_PNL_DISABLECOLORSRO_TP),
                 getFunc = function() return LUIE.InfoPanel.SV.DisableInfoColours end,
                 setFunc = function(value) LUIE.InfoPanel.SV.DisableInfoColours = value end,
                 width = "full",
@@ -251,7 +248,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_SHOWCOMBATINFO),
-                tooltip = GetString(SI_LUIE_LAM_CI_SHOWCOMBATINFO_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_SHOWCOMBATINFO_TP),
                 getFunc = function() return LUIE.SV.CombatInfo_Enabled end,
                 setFunc = function(value) LUIE.SV.CombatInfo_Enabled = value end,
                 width = "full",
@@ -261,7 +258,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_SHOWCOOLDOWNS),
-                tooltip = GetString(SI_LUIE_LAM_CI_SHOWCOOLDOWNS_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_SHOWCOOLDOWNS_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.CoolDown end,
                 setFunc = function(value) LUIE.CombatInfo.SV.CoolDown = value end,
                 width = "full",
@@ -276,7 +273,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_SHOWULTIMATEVALUE),
-                tooltip = GetString(SI_LUIE_LAM_CI_SHOWULTIMATEVALUE_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_SHOWULTIMATEVALUE_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.UltimateEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.UltimateEnabled = value LUIE.CombatInfo.OnSlotsFullUpdate(nil) end,
                 width = "full",
@@ -286,7 +283,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_HIDEPERCENTWHENFULL),
-                tooltip = GetString(SI_LUIE_LAM_CI_HIDEPERCENTWHENFULL_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_HIDEPERCENTWHENFULL_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.UltimateHideFull end,
                 setFunc = function(value) LUIE.CombatInfo.SV.UltimateHideFull = value end,
                 width = "full",
@@ -296,7 +293,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ENABLEULTIREADYALERT),
-                tooltip = GetString(SI_LUIE_LAM_CI_ENABLEULTIREADYALERT_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_ENABLEULTIREADYALERT_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.UltimateAlert end,
                 setFunc = function(value) LUIE.CombatInfo.SV.UltimateAlert = value end,
                 width = "full",
@@ -306,7 +303,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_SHOWULTIGENTEXTURE),
-                tooltip = GetString(SI_LUIE_LAM_CI_SHOWULTIGENTEXTURE_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_SHOWULTIGENTEXTURE_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.UltimateGeneration end,
                 setFunc = function(value) LUIE.CombatInfo.SV.UltimateGeneration = value end,
                 width = "full",
@@ -321,7 +318,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_CLOUDTYPE_UNLOCK),
-                tooltip = GetString(SI_LUIE_LAM_CI_CLOUDTYPE_UNLOCK_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_CLOUDTYPE_UNLOCK_TP),
                 getFunc = function() return LUIE.CombatInfo.panelUnlocked end,
                 setFunc = LUIE.CombatInfo.SetMovingState,
                 width = "half",
@@ -349,7 +346,7 @@ function LUIE_CreateSettings()
             {
                 type = "slider",
                 name = GetString(SI_LUIE_LAM_CI_LARGEFONT),
-                tooltip = GetString(SI_LUIE_LAM_CI_LARGEFONT_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_LARGEFONT_TP),
                 min = 20, max = 50, step = 2,
                 getFunc = function() return LUIE.CombatInfo.SV.FontCloudSizeLarge end,
                 setFunc = function(value) LUIE.CombatInfo.SV.FontCloudSizeLarge = value LUIE.CombatInfo.PrepareFonts(true) end,
@@ -360,7 +357,7 @@ function LUIE_CreateSettings()
             {
                 type = "slider",
                 name = GetString(SI_LUIE_LAM_CI_MEDIUMFONT),
-                tooltip = GetString(SI_LUIE_LAM_CI_MEDIUMFONT_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_MEDIUMFONT_TP),
                 min = 14, max = 40, step = 2,
                 getFunc = function() return LUIE.CombatInfo.SV.FontCloudSizeMedium end,
                 setFunc = function(value) LUIE.CombatInfo.SV.FontCloudSizeMedium = value LUIE.CombatInfo.PrepareFonts(true) end,
@@ -371,7 +368,7 @@ function LUIE_CreateSettings()
             {
                 type = "slider",
                 name = GetString(SI_LUIE_LAM_CI_SMALLFONT),
-                tooltip = GetString(SI_LUIE_LAM_CI_SMALLFONT_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_SMALLFONT_TP),
                 min = 12, max = 30, step = 2,
                 getFunc = function() return LUIE.CombatInfo.SV.FontCloudSizeSmall end,
                 setFunc = function(value) LUIE.CombatInfo.SV.FontCloudSizeSmall = value LUIE.CombatInfo.PrepareFonts(true) end,
@@ -382,7 +379,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_LABELICONS),
-                tooltip = GetString(SI_LUIE_LAM_CI_LABELICONS_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_LABELICONS_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.ShowIconsCloud end,
                 setFunc = function(value) LUIE.CombatInfo.SV.ShowIconsCloud = value end,
                 width = "full",
@@ -407,7 +404,7 @@ function LUIE_CreateSettings()
             {
                 type = "slider",
                 name = GetString(SI_LUIE_LAM_CI_LARGEFONT),
-                tooltip = GetString(SI_LUIE_LAM_CI_LARGEFONT_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_LARGEFONT_TP),
                 min = 20, max = 50, step = 2,
                 getFunc = function() return LUIE.CombatInfo.SV.FontScrollSizeLarge end,
                 setFunc = function(value) LUIE.CombatInfo.SV.FontScrollSizeLarge = value LUIE.CombatInfo.PrepareFonts(true) end,
@@ -418,7 +415,7 @@ function LUIE_CreateSettings()
             {
                 type = "slider",
                 name = GetString(SI_LUIE_LAM_CI_MEDIUMFONT),
-                tooltip = GetString(SI_LUIE_LAM_CI_MEDIUMFONT_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_MEDIUMFONT_TP),
                 min = 14, max = 40, step = 2,
                 getFunc = function() return LUIE.CombatInfo.SV.FontScrollSizeMedium end,
                 setFunc = function(value) LUIE.CombatInfo.SV.FontScrollSizeMedium = value LUIE.CombatInfo.PrepareFonts(true) end,
@@ -429,7 +426,7 @@ function LUIE_CreateSettings()
             {
                 type = "slider",
                 name = GetString(SI_LUIE_LAM_CI_SMALLFONT),
-                tooltip = GetString(SI_LUIE_LAM_CI_SMALLFONT_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_SMALLFONT_TP),
                 min = 12, max = 30, step = 2,
                 getFunc = function() return LUIE.CombatInfo.SV.FontScrollSizeSmall end,
                 setFunc = function(value) LUIE.CombatInfo.SV.FontScrollSizeSmall = value LUIE.CombatInfo.PrepareFonts(true) end,
@@ -440,7 +437,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_LABELICONS),
-                tooltip = GetString(SI_LUIE_LAM_CI_LABELICONS_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_LABELICONS_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.ShowIconsScroll end,
                 setFunc = function(value) LUIE.CombatInfo.SV.ShowIconsScroll = value end,
                 width = "full",
@@ -450,7 +447,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_SCROLLTYPE_QEVENTS),
-                tooltip = GetString(SI_LUIE_LAM_CI_SCROLLTYPE_QEVENTS_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_SCROLLTYPE_QEVENTS_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.PurgeExpiredScroll end,
                 setFunc = function(value) LUIE.CombatInfo.SV.PurgeExpiredScroll = value end,
                 width = "full",
@@ -465,7 +462,7 @@ function LUIE_CreateSettings()
             {
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_CI_COMMON_FONTFAMILY),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_FONTFAMILY_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_FONTFAMILY_TP),
                 choices = FontsListCombatInfo,
                 getFunc = function() return LUIE.CombatInfo.SV.FontFamily end,
                 setFunc = function(var) LUIE.CombatInfo.SV.FontFamily = var LUIE.CombatInfo.PrepareFonts(true) end,
@@ -477,7 +474,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_COMMON_COMBATTEXT),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_COMBATTEXT_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_COMBATTEXT_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.CombatEventsEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.CombatEventsEnabled = value LUIE.CombatInfo.RegisterCombatEvent() end,
                 width = "full",
@@ -487,7 +484,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_COMMON_THROTTLE),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_THROTTLE_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_THROTTLE_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.ThrottleEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.ThrottleEnabled = value end,
                 width = "full",
@@ -497,7 +494,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_COMMON_SHOWINCDOT),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWINCDOT_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWINCDOT_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.DotsInEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.DotsInEnabled = value end,
                 width = "full",
@@ -507,7 +504,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_COMMON_SHOWOUTDOT),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWOUTDOT_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWOUTDOT_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.DotsOutEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.DotsOutEnabled = value end,
                 width = "full",
@@ -517,7 +514,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_COMMON_SHOWINCHEAL),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWINCHEAL_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWINCHEAL_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.HealingInEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.HealingInEnabled = value end,
                 width = "full",
@@ -527,7 +524,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_COMMON_SHOWOUTHEAL),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWOUTHEAL_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWOUTHEAL_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.HealingOutEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.HealingOutEnabled = value end,
                 width = "full",
@@ -537,7 +534,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_COMMON_DMGCOLORS),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_DMGCOLORS_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_DMGCOLORS_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.DamageColoured end,
                 setFunc = function(value) LUIE.CombatInfo.SV.DamageColoured = value end,
                 width = "full",
@@ -547,7 +544,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_COMMON_SHOWCCEVENTS),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWCCEVENTS_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWCCEVENTS_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.CombatCCEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.CombatCCEnabled = value LUIE.CombatInfo.RegisterCombatEvent() end,
                 width = "full",
@@ -557,7 +554,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_COMMON_SHOWATTRDRAIN),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWATTRDRAIN_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWATTRDRAIN_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.DrainEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.DrainEnabled = value end,
                 width = "full",
@@ -567,7 +564,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_COMMON_SHOWATTRNRG),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWATTRNRG_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWATTRNRG_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.EnergizeEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.EnergizeEnabled = value end,
                 width = "full",
@@ -577,7 +574,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_COMMON_SHOWXPGAIN),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWXPGAIN_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWXPGAIN_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.ExperienceEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.ExperienceEnabled = value LUIE.CombatInfo.RegisterXPEvent() end,
                 width = "full",
@@ -587,7 +584,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_COMMON_SHOWAPGAIN),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWAPGAIN_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWAPGAIN_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.AllianceEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.AllianceEnabled = value LUIE.CombatInfo.RegisterAPEvent() end,
                 width = "full",
@@ -597,7 +594,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_COMMON_SHOWTVGAIN),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWTVGAIN_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWTVGAIN_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.TelVarEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.TelVarEnabled = value LUIE.CombatInfo.RegisterTSEvent() end,
                 width = "full",
@@ -612,7 +609,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERTS_ENABLETIPS),
-                tooltip = GetString(SI_LUIE_LAM_CI_ALERTS_ENABLETIPS_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERTS_ENABLETIPS_TP),
                 warning = GetString(SI_LUIE_LAM_CI_ALERTS_ENABLETIPS_WARRNING),
                 getFunc = function() return LUIE.CombatInfo.SV.CombatTipsEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.CombatTipsEnabled = value LUIE.CombatInfo.RegisterCombatTipEvent() end,
@@ -623,7 +620,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERTS_HIDEZOSTIPS),
-                tooltip = GetString(SI_LUIE_LAM_CI_ALERTS_HIDEZOSTIPS_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERTS_HIDEZOSTIPS_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.HideIngameTips end,
                 setFunc = function(value) LUIE.CombatInfo.SV.HideIngameTips = value ZO_ActiveCombatTips:SetHidden(value) end,
                 width = "full",
@@ -633,7 +630,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERTS_ENABLEDEATH),
-                tooltip = GetString(SI_LUIE_LAM_CI_ALERTS_ENABLEDEATH_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERTS_ENABLEDEATH_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.GroupDeathEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.GroupDeathEnabled = value LUIE.CombatInfo.RegisterDeathEvent() end,
                 width = "full",
@@ -643,7 +640,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERTS_LOWATTRIB),
-                tooltip = GetString(SI_LUIE_LAM_CI_ALERTS_LOWATTRIB_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERTS_LOWATTRIB_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.LowEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.LowEnabled = value end,
                 width = "full",
@@ -663,7 +660,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERTS_NOTIFYSOUND),
-                tooltip = GetString(GetString(SI_LUIE_LAM_CI_ALERTS_NOTIFYSOUND_TOOLTIP)),
+                tooltip = GetString(GetString(SI_LUIE_LAM_CI_ALERTS_NOTIFYSOUND_TP)),
                 getFunc = function() return LUIE.CombatInfo.SV.LowSound end,
                 setFunc = function(value) LUIE.CombatInfo.SV.LowSound = value end,
                 width = "half",
@@ -673,7 +670,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_ALERTS_EXECUTE),
-                tooltip = GetString(SI_LUIE_LAM_CI_ALERTS_EXECUTE_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERTS_EXECUTE_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.ExecuteEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.ExecuteEnabled = value end,
                 width = "full",
@@ -693,7 +690,7 @@ function LUIE_CreateSettings()
             {
                 type = "slider",
                 name = GetString(SI_LUIE_LAM_CI_ALERTS_TIMEOUT),
-                tooltip = GetString(SI_LUIE_LAM_CI_ALERTS_TIMEOUT_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_ALERTS_TIMEOUT_TP),
                 min = 4, max = 20, step = 1,
                 getFunc = function() return LUIE.CombatInfo.SV.ExecuteTimeout end,
                 setFunc = function(value) LUIE.CombatInfo.SV.ExecuteTimeout = value end,
@@ -709,7 +706,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_COMBATSTATE),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMBATSTATE_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CI_COMBATSTATE_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.CombatStateEnabled end,
                 setFunc = function(value) LUIE.CombatInfo.SV.CombatStateEnabled = value LUIE.CombatInfo.RegisterCombatStateEvent() end,
                 width = "full",
@@ -727,7 +724,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK_TP),
                 getFunc = function() return LUIE.SV.SpellCastBuff_Enable end,
                 setFunc = function(value) LUIE.SV.SpellCastBuff_Enable = value end,
                 width = "full",
@@ -737,7 +734,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.HideTargetBuffs end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HideTargetBuffs = value end,
                 width = "full",
@@ -747,7 +744,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.HideTargetDebuffs end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HideTargetDebuffs = value end,
                 width = "full",
@@ -757,7 +754,7 @@ function LUIE_CreateSettings()
              {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.HideGroundEffects end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HideGroundEffects = value end,
                 width = "full",
@@ -767,7 +764,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_HARDLOCK),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_HARDLOCK_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_HARDLOCK_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.lockPositionToUnitFrames end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.lockPositionToUnitFrames = value end,
                 width = "full",
@@ -778,7 +775,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_UNLOCKWINDOW),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_UNLOCKWINDOW_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_UNLOCKWINDOW_TP),
                 getFunc = function() return l_BuffsMovingEnabled end,
                 setFunc = function(value)
                     l_BuffsMovingEnabled = value
@@ -791,7 +788,7 @@ function LUIE_CreateSettings()
             {
                 type = "button",
                 name = GetString(SI_LUIE_LAM_RESETPOSITION),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_RESETPOSITION_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_RESETPOSITION_TP),
                 func = LUIE.SpellCastBuffs.ResetTlwPosition,
                 width = "half",
             },
@@ -813,8 +810,8 @@ function LUIE_CreateSettings()
             {
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_BUFF_HORIZONTICONALIGN),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_HORIZONTICONALIGN_TOOLTIP),
-                choices = hAlignOptions,
+                tooltip = GetString(SI_LUIE_LAM_BUFF_HORIZONTICONALIGN_TP),
+                choices = { "Left", "Centered", "Right" },
                 getFunc = function() return LUIE.SpellCastBuffs.SV.Alignment end,
                 setFunc = LUIE.SpellCastBuffs.SetIconsAlignment,
                 width = "full",
@@ -834,7 +831,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_GLOWICONBORDER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_GLOWICONBORDER_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_GLOWICONBORDER_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.GlowIcons end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.GlowIcons = value LUIE.SpellCastBuffs.Reset() end,
                 width = "full",
@@ -844,7 +841,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_SHOWBOARDERCOOLDOWN),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWBOARDERCOOLDOWN_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWBOARDERCOOLDOWN_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.RemainingCooldown end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.RemainingCooldown = value LUIE.SpellCastBuffs.Reset() end,
                 width = "full",
@@ -854,7 +851,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_FADEEXPIREICON),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_FADEEXPIREICON_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_FADEEXPIREICON_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.FadeOutIcons end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.FadeOutIcons = value end,
                 width = "full",
@@ -864,7 +861,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_SHOWREMAINTIMELABEL),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWREMAINTIMELABEL_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWREMAINTIMELABEL_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.RemainingText end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.RemainingText = value LUIE.SpellCastBuffs.Reset() end,
                 width = "full",
@@ -874,7 +871,7 @@ function LUIE_CreateSettings()
             {
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_FONT),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_FONTS_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_FONTS_TP),
                 choices = FontsList,
                 sort = "name-up",
                 getFunc = function() return LUIE.SpellCastBuffs.SV.BuffFontFace end,
@@ -886,7 +883,7 @@ function LUIE_CreateSettings()
             {
                 type = "slider",
                 name = GetString(SI_LUIE_LAM_FONT_SIZE),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_FONTS_SIZE_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_FONTS_SIZE_TP),
                 min = 10, max = 30, step = 1,
                 getFunc = function() return LUIE.SpellCastBuffs.SV.BuffFontSize end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.BuffFontSize = value LUIE.SpellCastBuffs.ApplyFont() end,
@@ -897,7 +894,7 @@ function LUIE_CreateSettings()
             {
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_FONT_STYLE),
-                choices = styleOptions,
+                choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
                 getFunc = function() return LUIE.SpellCastBuffs.SV.BuffFontStyle end,
                 setFunc = function(var) LUIE.SpellCastBuffs.SV.BuffFontStyle = var LUIE.SpellCastBuffs.ApplyFont() end,
@@ -908,7 +905,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_COLOUREDTIMELABEL),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOUREDTIMELABE_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOUREDTIMELABE_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.RemainingTextColoured end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.RemainingTextColoured = value LUIE.SpellCastBuffs.Reset() end,
                 width = "full",
@@ -918,7 +915,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.RemainingTextMillis end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.RemainingTextMillis = value end,
                 width = "full",
@@ -933,7 +930,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SELF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SELF_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SELF_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.LongTermEffects_Player end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.LongTermEffects_Player = value end,
                 width = "full",
@@ -943,7 +940,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_TARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_TARGET_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_TARGET_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.LongTermEffects_Target end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.LongTermEffects_Target = value end,
                 width = "full",
@@ -953,7 +950,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSPLAYER_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSPLAYER_TP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreMundusPlayer end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreMundusPlayer = not value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
@@ -963,7 +960,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSTARGET_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSTARGET_TP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreMundusTarget end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreMundusTarget = not value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
@@ -973,7 +970,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPPLAYER_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPPLAYER_TP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreVampLycanPlayer end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreVampLycanPlayer = not value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
@@ -983,7 +980,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPTARGET_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPTARGET_TP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreVampLycanTarget end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreVampLycanTarget = not value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
@@ -993,7 +990,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROPLAYER_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROPLAYER_TP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreCyrodiilPlayer end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreCyrodiilPlayer = not value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
@@ -1003,7 +1000,7 @@ function LUIE_CreateSettings()
              {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROTARGET_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROTARGET_TP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreCyrodiilTarget end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreCyrodiilTarget = not value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
@@ -1013,7 +1010,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITPLAYER_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITPLAYER_TP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreBattleSpiritPlayer end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreBattleSpiritPlayer = not value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
@@ -1023,7 +1020,7 @@ function LUIE_CreateSettings()
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITTARGET_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITTARGET_TP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreBattleSpiritTarget end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreBattleSpiritTarget = not value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
@@ -1034,7 +1031,7 @@ function LUIE_CreateSettings()
                 -- Ignore ESO Plus - Player
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSPLAYER_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSPLAYER_TP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreEsoPlusPlayer end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreEsoPlusPlayer = not value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
@@ -1045,7 +1042,7 @@ function LUIE_CreateSettings()
                 -- Ignore ESO Plus - Target
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSTARGET_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSTARGET_TP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreEsoPlusTarget end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreEsoPlusTarget = not value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
@@ -1057,7 +1054,7 @@ function LUIE_CreateSettings()
                 -- Show Disguises
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE_TP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreDisguise end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreDisguise = not value LUIE.SpellCastBuffs.OnPlayerActivated() end,
                 width = "full",
@@ -1068,7 +1065,7 @@ function LUIE_CreateSettings()
                 -- Show Costumes
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_COSTUME),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_COSTUME_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_COSTUME_TP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreCostume end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreCostume = not value LUIE.SpellCastBuffs.OnPlayerActivated() end,
                 width = "full",
@@ -1079,7 +1076,7 @@ function LUIE_CreateSettings()
                 -- Show Hats
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_HAT),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_HAT_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_HAT_TP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreHat end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreHat = not value LUIE.SpellCastBuffs.OnPlayerActivated() end,
                 width = "full",
@@ -1090,7 +1087,7 @@ function LUIE_CreateSettings()
                 -- Show Skins
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SKIN),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SKIN_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SKIN_TP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreSkin end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreSkin = not value LUIE.SpellCastBuffs.OnPlayerActivated() end,
                 width = "full",
@@ -1101,7 +1098,7 @@ function LUIE_CreateSettings()
                 -- Show Polymorphs
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_POLYMORPH),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_POLYMORPH_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_POLYMORPH_TP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnorePolymorph end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnorePolymorph = not value LUIE.SpellCastBuffs.OnPlayerActivated() end,
                 width = "full",
@@ -1112,7 +1109,7 @@ function LUIE_CreateSettings()
                 -- Show Assistants
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ASSISTANT),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ASSISTANT_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ASSISTANT_TP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreAssistant end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreAssistant = not value LUIE.SpellCastBuffs.OnPlayerActivated() end,
                 width = "full",
@@ -1123,7 +1120,7 @@ function LUIE_CreateSettings()
                 -- Show Pets
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET_TP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnorePet end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnorePet = not value LUIE.SpellCastBuffs.OnPlayerActivated() end,
                 width = "full",
@@ -1134,7 +1131,7 @@ function LUIE_CreateSettings()
                 -- Show Mounts
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_TP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreMount end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreMount = not value LUIE.SpellCastBuffs.OnPlayerActivated() end,
                 width = "full",
@@ -1145,7 +1142,7 @@ function LUIE_CreateSettings()
                 -- Seperate control for player effects
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.LongTermEffectsSeparate end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.LongTermEffectsSeparate = value LUIE.SpellCastBuffs.Reset() end,
                 width = "full",
@@ -1156,7 +1153,7 @@ function LUIE_CreateSettings()
                 -- Container orientation
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER_TP),
                 choices = rotationOptions,
                 getFunc = function() return rotationOptions[LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment] end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment = rotationOptionsKeys[value] LUIE.SpellCastBuffs.Reset() end,
@@ -1169,8 +1166,8 @@ function LUIE_CreateSettings()
                 -- Vertical Icons Alignment
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VERTALIGNICON),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VERTALIGNICON_TOOLTIP),
-                choices = vAlignOptions,
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VERTALIGNICON_TP),
+                choices = { "Top", "Middle", "Bottom" },
                 getFunc = function() return LUIE.SpellCastBuffs.SV.AlignmentVert end,
                 setFunc = LUIE.SpellCastBuffs.SetIconsAlignmentVert,
                 width = "full",
@@ -1187,7 +1184,7 @@ function LUIE_CreateSettings()
                 -- Highlight Ability Bar Icon for Active Procs
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONPROC),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONPROC_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONPROC_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ShowTriggered end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowTriggered = value end,
                 width = "full",
@@ -1198,7 +1195,7 @@ function LUIE_CreateSettings()
                 -- Highlight Ability Bar Icon for Active Effects
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONEFFECT),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONEFFECT_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONEFFECT_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ShowToggled end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowToggled = value end,
                 width = "full",
@@ -1209,7 +1206,7 @@ function LUIE_CreateSettings()
                 -- Show Block Player Icon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKPLAYER_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKPLAYER_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ShowBlockPlayer end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowBlockPlayer = value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
@@ -1220,7 +1217,7 @@ function LUIE_CreateSettings()
                 -- Show Block Target Icon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKTARGET_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWBLOCKTARGET_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ShowBlockTarget end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowBlockTarget = value LUIE.SpellCastBuffs.ReloadEffects("reticleover") end,
                 width = "full",
@@ -1231,7 +1228,7 @@ function LUIE_CreateSettings()
                 -- Show Stealth Player Icon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHPLAYER_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.StealthStatePlayer end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.StealthStatePlayer = value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
@@ -1242,7 +1239,7 @@ function LUIE_CreateSettings()
                 -- Show Stealth Target Icon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSTEALTHTARGET_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.StealthStateTarget end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.StealthStateTarget = value LUIE.SpellCastBuffs.ReloadEffects("reticleover") end,
                 width = "full",
@@ -1253,7 +1250,7 @@ function LUIE_CreateSettings()
                 -- Show Disguise Player Icon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWDISGUISEPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWDISGUISEPLAYER_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWDISGUISEPLAYER_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.DisguiseStatePlayer end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.DisguiseStatePlayer = value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
@@ -1264,7 +1261,7 @@ function LUIE_CreateSettings()
                 -- Show Disguise Target Icon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWDISGUISETARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWDISGUISETARGET_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWDISGUISETARGET_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.DisguiseStateTarget end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.DisguiseStateTarget = value LUIE.SpellCastBuffs.ReloadEffects("reticleover") end,
                 width = "full",
@@ -1275,7 +1272,7 @@ function LUIE_CreateSettings()
                 -- Show Sprint Icon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ShowSprint end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowSprint = value end,
                 width = "full",
@@ -1286,7 +1283,7 @@ function LUIE_CreateSettings()
                 -- Show Gallop Icon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ShowGallop end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowGallop = value end,
                 width = "full",
@@ -1297,7 +1294,7 @@ function LUIE_CreateSettings()
                 -- Show Rezz Immunity Icon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWREZZ),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWREZZ_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWREZZ_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ShowResurrectionImmunity end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowResurrectionImmunity = value end,
                 width = "full",
@@ -1308,7 +1305,7 @@ function LUIE_CreateSettings()
                 -- Show Recall Cooldown Icon
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWRECALL),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWRECALL_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWRECALL_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ShowRecall end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowRecall = value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
@@ -1489,7 +1486,7 @@ function LUIE_CreateSettings()
                 -- Enable Chat Announcements
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CA_ENABLE),
-                tooltip = GetString(SI_LUIE_LAM_CA_ENABLE_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CA_ENABLE_TP),
                 getFunc = function() return LUIE.SV.ChatAnnouncements_Enable end,
                 setFunc = function(value) LUIE.SV.ChatAnnouncements_Enable = value end,
                 width = "full",
@@ -1499,8 +1496,8 @@ function LUIE_CreateSettings()
             {
                 -- Player Name Display Method
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD),
-                tooltip = GetString(SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TOOLTIP),
+                name = GetString(SI_LUIE_LAM_NAMEDISPLAYMETHOD),
+                tooltip = GetString(SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP),
                 choices = chatnameDisplayOptions,
                 getFunc = function() return chatnameDisplayOptions[LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions] end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions = chatnameDisplayOptionsKeys[value] end,
@@ -1512,7 +1509,7 @@ function LUIE_CreateSettings()
                 -- Default String Enhance
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CA_DEFAULTSTRINGENHANCE),
-                tooltip = GetString(SI_LUIE_LAM_CA_DEFAULTSTRINGENHANCE_TOOLTIP),
+                tooltip = GetString(SI_LUIE_LAM_CA_DEFAULTSTRINGENHANCE_TP),
                 getFunc = function() return LUIE.ChatAnnouncements.SV.CustomStrings end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.CustomStrings = value LUIE.ChatAnnouncements.RegisterCustomStrings() end,
                 width = "full",
@@ -1550,7 +1547,7 @@ function LUIE_CreateSettings()
                         -- Show Group Events
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUP),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUP_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUP_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupChatMsg end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupChatMsg = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
                         width = "full",
@@ -1572,7 +1569,7 @@ function LUIE_CreateSettings()
                         -- Show Mail Events
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscMail end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscMail = value LUIE.ChatAnnouncements.RegisterMailEvents() end,
                         width = "full",
@@ -1583,7 +1580,7 @@ function LUIE_CreateSettings()
                         -- Show Duel Events
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_MISC_DUEL),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_DUEL_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_DUEL_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscDuel end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscDuel = value LUIE.ChatAnnouncements.RegisterDuelEvents() end,
                         width = "full",
@@ -1594,7 +1591,7 @@ function LUIE_CreateSettings()
                         -- Show Pledge of Mara Events
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_MISC_MARA),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_MARA_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_MARA_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscMara end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscMara = value LUIE.ChatAnnouncements.RegisterMaraEvents() end,
                         width = "full",
@@ -1605,7 +1602,7 @@ function LUIE_CreateSettings()
                         -- Show Social Events
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscSocial end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscSocial = value LUIE.ChatAnnouncements.RegisterSocialEvents() end,
                         width = "full",
@@ -1616,7 +1613,7 @@ function LUIE_CreateSettings()
                         -- Show Guild Events
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILD),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILD_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILD_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuild end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuild = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
                         width = "full",
@@ -1627,7 +1624,7 @@ function LUIE_CreateSettings()
                         -- Show Guild Events Icons
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDICONS)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDICONS_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDICONS_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildIcon end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildIcon = value end,
                         width = "full",
@@ -1638,7 +1635,7 @@ function LUIE_CreateSettings()
                         -- Show Guild Rank Events
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANK)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANK_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANK_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildRank end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildRank = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
                         width = "full",
@@ -1649,7 +1646,7 @@ function LUIE_CreateSettings()
                         -- Show Guild Rank Events Display Options
                         type = "dropdown",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANKDISPLAY)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANKDISPLAY_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANKDISPLAY_TP),
                         choices = guildrankDisplayOptions,
                         getFunc = function() return guildrankDisplayOptions[LUIE.ChatAnnouncements.SV.GuildRankDisplayOptions] end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildRankDisplayOptions = guildrankDisplayOptionsKeys[value] LUIE.ChatAnnouncements.RegisterGuildEvents() end,
@@ -1661,7 +1658,7 @@ function LUIE_CreateSettings()
                         -- Show Guild MOTD Events
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDMOTD)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDMOTD_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDMOTD_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildMOTD end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildMOTD = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
                         width = "full",
@@ -1672,7 +1669,7 @@ function LUIE_CreateSettings()
                         -- Show Bank/Bag Upgrade
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscBags end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscBags = value LUIE.ChatAnnouncements.RegisterBagEvents() end,
                         width = "full",
@@ -1683,7 +1680,7 @@ function LUIE_CreateSettings()
                         -- Show Riding Skill Upgrade
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscHorse end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscHorse = value LUIE.ChatAnnouncements.RegisterHorseEvents() end,
                         width = "full",
@@ -1694,7 +1691,7 @@ function LUIE_CreateSettings()
                         -- Show Lockpick Events
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscLockpick end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscLockpick = value LUIE.ChatAnnouncements.RegisterLockpickEvents() end,
                         width = "full",
@@ -1705,7 +1702,7 @@ function LUIE_CreateSettings()
                         -- Show Justice Events
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscConfiscate end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscConfiscate = value LUIE.ChatAnnouncements.RegisterDestroyEvents() end,
                         width = "full",
@@ -1716,7 +1713,7 @@ function LUIE_CreateSettings()
                         -- Show Disguise Events
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_MISC_SHOWDISGUISE),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWDISGUISE_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWDISGUISE_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscDisguise end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscDisguise = value LUIE.ChatAnnouncements.RegisterDisguiseEvents() end,
                         width = "full",
@@ -1727,7 +1724,7 @@ function LUIE_CreateSettings()
                         -- Show Disguise Alerts
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_MISC_SHOWDISGUISEALERT),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWDISGUISEALERT_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWDISGUISEALERT_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscDisguiseAlert end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscDisguiseAlert = value end,
                         width = "full",
@@ -1746,7 +1743,7 @@ function LUIE_CreateSettings()
                         -- Show Currency Icons
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWICONS),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWICONS_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWICONS_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyIcons end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyIcons = value end,
                         width = "full",
@@ -1757,7 +1754,7 @@ function LUIE_CreateSettings()
                         -- Show Gold
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLD),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLD_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLD_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GoldChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldChange = value LUIE.ChatAnnouncements.RegisterGoldEvents() end,
                         width = "full",
@@ -1778,7 +1775,7 @@ function LUIE_CreateSettings()
                         -- Show Gold Name
                         type = "editbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDNAME)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDNAME_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDNAME_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GoldName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldName = value end,
                         width = "full",
@@ -1789,7 +1786,7 @@ function LUIE_CreateSettings()
                         -- Show Gold Total Amount
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTOTAL)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTOTAL_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTOTAL_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TotalGoldChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalGoldChange = value end,
                         width = "full",
@@ -1800,7 +1797,7 @@ function LUIE_CreateSettings()
                         -- Hide Gold Spent on AH
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT)),
-                        tooltip = strformat("<<1>>\n<<2>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TOOLTIP), GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_NOTE)),
+                        tooltip = strformat("<<1>>\n<<2>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TP), GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_NOTE)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GoldHideAHSpente end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldHideAHSpent = value end,
                         width = "full",
@@ -1811,7 +1808,7 @@ function LUIE_CreateSettings()
                         -- Show Alliance Points
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAP),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAP_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAP_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AlliancePointChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AlliancePointChange = value LUIE.ChatAnnouncements.RegisterAlliancePointEvents() end,
                         width = "full",
@@ -1822,7 +1819,7 @@ function LUIE_CreateSettings()
                         -- Show Alliance Points Threshold
                         type = "slider",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHRESHOLD)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHRESHOLD_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHRESHOLD_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AlliancePointFilter end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AlliancePointFilter = value end,
                         min = 0,
@@ -1846,7 +1843,7 @@ function LUIE_CreateSettings()
                         -- Show Alliance Points Name
                         type = "editbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPNAME)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPNAME_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPNAME_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AlliancePointName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AlliancePointName = value end,
                         width = "full",
@@ -1857,7 +1854,7 @@ function LUIE_CreateSettings()
                         -- Show Alliance Points Total
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTOTAL)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTOTAL_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTOTAL_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TotalAlliancePointChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalAlliancePointChange = value end,
                         width = "full",
@@ -1868,7 +1865,7 @@ function LUIE_CreateSettings()
                         -- Show Tel Var
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTV),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTV_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTV_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TelVarStoneChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TelVarStoneChange = value LUIE.ChatAnnouncements.RegisterTelVarStoneEvents() end,
                         width = "full",
@@ -1889,7 +1886,7 @@ function LUIE_CreateSettings()
                         -- Show Tel Var Name
                         type = "editbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVNAME)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVNAME_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVNAME_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TelVarStoneName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TelVarStoneName = value end,
                         width = "full",
@@ -1900,7 +1897,7 @@ function LUIE_CreateSettings()
                         -- Show Tel Var Total
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTOTAL)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTOTAL_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTOTAL_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TotalTelVarStoneChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalTelVarStoneChange = value end,
                         width = "full",
@@ -1911,7 +1908,7 @@ function LUIE_CreateSettings()
                         -- Show Writ Vouchers
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.WritVoucherChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.WritVoucherChange = value LUIE.ChatAnnouncements.RegisterWritVoucherEvents() end,
                         width = "full",
@@ -1932,7 +1929,7 @@ function LUIE_CreateSettings()
                         -- Show Writ Vouchers Name
                         type = "editbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.WritVoucherName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.WritVoucherName = value end,
                         width = "full",
@@ -1943,7 +1940,7 @@ function LUIE_CreateSettings()
                         -- Show Writ Vouchers Total
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.TotalWritVoucherChange end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalWritVoucherChange = value end,
                         width = "full",
@@ -1955,7 +1952,7 @@ function LUIE_CreateSettings()
                         type = "dropdown",
                         name = GetString(SI_LUIE_LAM_CA_CSMBRACKET),
                         choices = currencyBracketOptions,
-                        tooltip = GetString(SI_LUIE_LAM_CA_CSMBRACKET_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CSMBRACKET_TP),
                         getFunc = function() return currencyBracketOptions[LUIE.ChatAnnouncements.SV.CurrencyBracketDisplayOptions] end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyBracketDisplayOptions = currencyBracketOptionsKeys[value] end,
                         width = "full",
@@ -1973,7 +1970,7 @@ function LUIE_CreateSettings()
                         -- Override Context specific messages
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_CSMOVERRIDE),
-                        tooltip = strformat("<<1>>\n<<2>>", GetString(SI_LUIE_LAM_CA_CSMOVERRIDE_TOOLTIP), GetString(SI_LUIE_LAM_CA_CSMOVERRIDE_NOTE)),
+                        tooltip = strformat("<<1>>\n<<2>>", GetString(SI_LUIE_LAM_CA_CSMOVERRIDE_TP), GetString(SI_LUIE_LAM_CA_CSMOVERRIDE_NOTE)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyContextToggle end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyContextToggle = value end,
                         width = "full",
@@ -1991,7 +1988,7 @@ function LUIE_CreateSettings()
                         -- Context Override Message Currency Gain
                         type = "editbox",
                         name = GetString(SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_GAIN),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_GAIN_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_GAIN_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyContextMessageUp end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyContextMessageUp = value end,
                         width = "full",
@@ -2002,7 +1999,7 @@ function LUIE_CreateSettings()
                         -- Context Override Message Currency Loss
                         type = "editbox",
                         name = GetString(SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_LOSS),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_LOSS_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_LOSS_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyContextMessageDown end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyContextMessageDown = value end,
                         width = "full",
@@ -2013,7 +2010,7 @@ function LUIE_CreateSettings()
                         -- Total Currency Message
                         type = "editbox",
                         name = GetString(SI_LUIE_LAM_CA_CURRENCY_TOTALCURRENCYMSG),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_TOTALCURRENCYMSG_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_TOTALCURRENCYMSG_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyTotalMessage end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyTotalMessage = value end,
                         width = "full",
@@ -2039,7 +2036,7 @@ function LUIE_CreateSettings()
                         -- Show looted item icons
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWICONS),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWICONS_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWICONS_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootIcons end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootIcons = value end,
                         width = "full",
@@ -2050,7 +2047,7 @@ function LUIE_CreateSettings()
                         -- Show looted items
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWITEMS),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWITEMS_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWITEMS_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.Loot end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.Loot = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
                         width = "full",
@@ -2061,7 +2058,7 @@ function LUIE_CreateSettings()
                         -- Show notable loot
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_SHOWNOTABLE)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWNOTABLE_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWNOTABLE_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootOnlyNotable end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootOnlyNotable = value end,
                         width = "full",
@@ -2072,7 +2069,7 @@ function LUIE_CreateSettings()
                         -- Show group loot
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_SHOWGRPLOOT)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWGRPLOOT_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWGRPLOOT_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootGroup end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootGroup = value end,
                         width = "full",
@@ -2083,7 +2080,7 @@ function LUIE_CreateSettings()
                         -- Hide annoying items
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_HIDEANNOYINGITEMS)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_HIDEANNOYINGITEMS_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_HIDEANNOYINGITEMS_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootBlacklist end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootBlacklist = value end,
                         width = "full",
@@ -2095,7 +2092,7 @@ function LUIE_CreateSettings()
                         -- Show Vendor Inventory Changes
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWVENDOR),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWVENDOR_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWVENDOR_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootVendor end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootVendor = value LUIE.ChatAnnouncements.RegisterVendorEvents() end,
                         width = "full",
@@ -2106,7 +2103,7 @@ function LUIE_CreateSettings()
                         -- Show Bank Inventory Changes
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWBANK),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWBANK_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWBANK_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootBank end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootBank = value LUIE.ChatAnnouncements.RegisterBankEvents() end,
                         width = "full",
@@ -2117,7 +2114,7 @@ function LUIE_CreateSettings()
                         -- Show Mail Inventory Changes
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWMAIL),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWMAIL_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWMAIL_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootMail end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMail = value LUIE.ChatAnnouncements.RegisterMailEvents() end,
                         width = "full",
@@ -2128,7 +2125,7 @@ function LUIE_CreateSettings()
                         -- Show Trade
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWTRADE),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWTRADE_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWTRADE_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootTrade end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootTrade = value LUIE.ChatAnnouncements.RegisterTradeEvents() end,
                         width = "full",
@@ -2139,7 +2136,7 @@ function LUIE_CreateSettings()
                         -- Show Craft
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWCRAFT),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootCraft end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootCraft = value LUIE.ChatAnnouncements.RegisterCraftEvents() end,
                         width = "full",
@@ -2150,7 +2147,7 @@ function LUIE_CreateSettings()
                         -- Show Materials consumed when crafting
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_MATERIALS)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_MATERIALS_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_MATERIALS_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ShowCraftUse end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowCraftUse = value end,
                         width = "full",
@@ -2161,7 +2158,7 @@ function LUIE_CreateSettings()
                         -- Show Confiscated Items
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWCONFISCATED),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWCONFISCATED_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWCONFISCATED_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ShowConfiscate end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowConfiscate = value LUIE.ChatAnnouncements.RegisterDestroyEvents() end,
                         width = "full",
@@ -2172,7 +2169,7 @@ function LUIE_CreateSettings()
                         -- Show Destroyed Items
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWDESTROYED),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWDESTROYED_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWDESTROYED_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ShowDestroy end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowDestroy = value LUIE.ChatAnnouncements.RegisterDestroyEvents() end,
                         width = "full",
@@ -2183,7 +2180,7 @@ function LUIE_CreateSettings()
                         -- Show Disguise Equip
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWDISGUISE),
-                        tooltip = strformat("<<1>>\n<<2>>", GetString(SI_LUIE_LAM_CA_LOOT_SHOWDISGUISE_TOOLTIP), GetString(SI_LUIE_LAM_CA_LOOT_SHOWDISGUISE_NOTE)),
+                        tooltip = strformat("<<1>>\n<<2>>", GetString(SI_LUIE_LAM_CA_LOOT_SHOWDISGUISE_TP), GetString(SI_LUIE_LAM_CA_LOOT_SHOWDISGUISE_NOTE)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ShowDisguise end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowDisguise = value LUIE.ChatAnnouncements.RegisterDestroyEvents() end,
                         width = "full",
@@ -2194,7 +2191,7 @@ function LUIE_CreateSettings()
                         -- Show Armor Type
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWARMORTYPE),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWARMORTYPE_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWARMORTYPE_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootShowArmorType end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootShowArmorType = value end,
                         width = "full",
@@ -2213,7 +2210,7 @@ function LUIE_CreateSettings()
                         -- Show Item Trait
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWITEMTRAIT),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWITEMTRAIT_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWITEMTRAIT_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootShowTrait end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootShowTrait = value end,
                         width = "full",
@@ -2232,7 +2229,7 @@ function LUIE_CreateSettings()
                         -- Show Item Style
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWITEMSTYLE),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWITEMSTYLE_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWITEMSTYLE_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootShowStyle end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootShowStyle = value end,
                         width = "full",
@@ -2251,7 +2248,7 @@ function LUIE_CreateSettings()
                         -- Hide Trash Quality Items
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_HIDETRASH),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_HIDETRASH_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_HIDETRASH_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootNotTrash end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootNotTrash = value end,
                         width = "full",
@@ -2270,7 +2267,7 @@ function LUIE_CreateSettings()
                         -- Show Collectible Items
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_COLLECTIBLE),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_COLLECTIBLE_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_COLLECTIBLE_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootCollectible end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootCollectible = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
                         width = "full",
@@ -2292,7 +2289,7 @@ function LUIE_CreateSettings()
                         type = "dropdown",
                         name = GetString(SI_LUIE_LAM_CA_CSMBRACKET),
                         choices = itemBracketOptions,
-                        tooltip = GetString(SI_LUIE_LAM_CA_CSMBRACKET_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CSMBRACKET_TP),
                         getFunc = function() return itemBracketOptions[LUIE.ChatAnnouncements.SV.ItemBracketDisplayOptions] end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ItemBracketDisplayOptions = itemBracketOptionsKeys[value] end,
                         width = "full",
@@ -2311,7 +2308,7 @@ function LUIE_CreateSettings()
                         -- Allow override Context specific messages
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_CSMOVERRIDE),
-                        tooltip = strformat("<<1>>\n<<2>>", GetString(SI_LUIE_LAM_CA_CSMOVERRIDE_TOOLTIP), GetString(SI_LUIE_LAM_CA_CSMOVERRIDE_NOTE)),
+                        tooltip = strformat("<<1>>\n<<2>>", GetString(SI_LUIE_LAM_CA_CSMOVERRIDE_TP), GetString(SI_LUIE_LAM_CA_CSMOVERRIDE_NOTE)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ItemContextToggle end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ItemContextToggle = value end,
                         width = "full",
@@ -2330,7 +2327,7 @@ function LUIE_CreateSettings()
                         -- Context Specific Override Message Loot
                         type = "editbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_CSMLOOT_GAIN),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_CSMLOOT_GAIN_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_CSMLOOT_GAIN_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ItemContextMessage end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ItemContextMessage = value end,
                         width = "full",
@@ -2341,7 +2338,7 @@ function LUIE_CreateSettings()
                         -- Merge LootLog Sales with Currency Changes
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_MERGEWITHCURRENCY),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MERGEWITHCURRENCY_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MERGEWITHCURRENCY_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootCurrencyCombo end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootCurrencyCombo = value end,
                         width = "full",
@@ -2369,7 +2366,7 @@ function LUIE_CreateSettings()
                         -- Show Level Up Message in Chat
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_EXP_LVLUPMSG),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_LVLUPMSG_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_LVLUPMSG_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceLevelUp end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceLevelUp = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
@@ -2380,7 +2377,7 @@ function LUIE_CreateSettings()
                         -- Show Level Icon on Level Up
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_EXP_LVLUPICON),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_LVLUPICON_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_LVLUPICON_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LevelUpIcon end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LevelUpIcon = value end,
                         width = "full",
@@ -2391,7 +2388,7 @@ function LUIE_CreateSettings()
                         -- Show Experience Gain
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_EXP_SHOWEXPGAIN),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWEXPGAIN_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWEXPGAIN_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.Experience end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.Experience = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
@@ -2402,7 +2399,7 @@ function LUIE_CreateSettings()
                         -- Show Experience Icon
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_EXP_SHOWEXPICON),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWEXPICON_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWEXPICON_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceIcon end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceIcon = value end,
                         width = "full",
@@ -2413,7 +2410,7 @@ function LUIE_CreateSettings()
                         -- Combat Experience Gain Filter Threshold
                         type = "slider",
                         name = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceFilter end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceFilter = value end,
                         min = 0,
@@ -2427,7 +2424,7 @@ function LUIE_CreateSettings()
                         -- Context Name for Experience Gain
                         type = "editbox",
                         name = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINCONTEXTNAME),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINCONTEXTNAME_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINCONTEXTNAME_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceContextName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceContextName = value end,
                         width = "full",
@@ -2438,7 +2435,7 @@ function LUIE_CreateSettings()
                         -- Name for Experience Gain
                         type = "editbox",
                         name = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINDISPLAYNAME),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINDISPLAYNAME_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINDISPLAYNAME_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceName = value end,
                         width = "full",
@@ -2449,7 +2446,7 @@ function LUIE_CreateSettings()
                         -- Show Progress to next level
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_EXP_PROGRESSTONEXTLVL),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_PROGRESSTONEXTLVL_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_PROGRESSTONEXTLVL_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceShowProgress end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceShowProgress = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
@@ -2460,7 +2457,7 @@ function LUIE_CreateSettings()
                         -- Progress Display Method
                         type = "dropdown",
                         name = GetString(SI_LUIE_LAM_CA_EXP_PROGRESSDISPLAYMETHOD),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_PROGRESSDISPLAYMETHOD_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_PROGRESSDISPLAYMETHOD_TP),
                         choices = experienceDisplayOptions,
                         getFunc = function() return experienceDisplayOptions[LUIE.ChatAnnouncements.SV.ExperienceDisplayOptions] end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceDisplayOptions = experienceDisplayOptionsKeys[value] end,
@@ -2472,7 +2469,7 @@ function LUIE_CreateSettings()
                         -- Show Color Experience Progress
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_EXP_PROGRESSCOLOR),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_PROGRESSCOLOR_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_PROGRESSCOLOR_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceProgressColor end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceProgressColor = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
@@ -2483,7 +2480,7 @@ function LUIE_CreateSettings()
                         -- Show [x.xx] decimal format
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_EXP_SHOWDECIMALFORMAT),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWDECIMALFORMAT_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWDECIMALFORMAT_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceShowDecimal end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceShowDecimal = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
@@ -2494,7 +2491,7 @@ function LUIE_CreateSettings()
                         -- Show Progress label
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABEL),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABEL_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABEL_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceShowPBrackets end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceShowPBrackets = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
@@ -2505,7 +2502,7 @@ function LUIE_CreateSettings()
                         -- Display name for Progress label
                         type = "editbox",
                         name = GetString(SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABELNAME),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABELNAME_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABELNAME_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceProgressName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceProgressName = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
@@ -2516,7 +2513,7 @@ function LUIE_CreateSettings()
                         -- Show Current Level label
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_EXP_SHOWCURRENTLVLLABEL),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWCURRENTLVLLABEL_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWCURRENTLVLLABEL_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceShowLevel end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceShowLevel = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
@@ -2527,7 +2524,7 @@ function LUIE_CreateSettings()
                         -- Color Level by Context
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceColorLevel end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceColorLevel = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
@@ -2538,7 +2535,7 @@ function LUIE_CreateSettings()
                         -- Hide Experience from Kills
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_EXP_HIDEEXPKILLS),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_HIDEEXPKILLS_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_HIDEEXPKILLS_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceHideCombat end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceHideCombat = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
@@ -2549,7 +2546,7 @@ function LUIE_CreateSettings()
                         -- Throttle Experience gained in combat
                         type = "slider",
                         name = GetString(SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceThrottle end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceThrottle = value end,
                         min = 0,
@@ -2571,7 +2568,7 @@ function LUIE_CreateSettings()
                         -- Enable Achievements Tracking
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_ACHIEVE_ENABLE),
-                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_ENABLE_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_ENABLE_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.Achievements end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.Achievements = value LUIE.ChatAnnouncements.RegisterAchievementsEvent() end,
                         width = "full",
@@ -2582,7 +2579,7 @@ function LUIE_CreateSettings()
                         -- Achievements Step Size
                         type = "slider",
                         name = GetString(SI_LUIE_LAM_CA_ACHIEVE_STEPSIZE),
-                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_STEPSIZE_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_STEPSIZE_TP),
                         min = 0, max = 25, step = 1,
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsStep end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsStep = value end,
@@ -2594,7 +2591,7 @@ function LUIE_CreateSettings()
                         -- Show Detailed Achievement Info
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO),
-                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO_TOOLTIP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementsDetails end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
                         width = "full",
@@ -2742,7 +2739,7 @@ function LUIE_CreateSettings()
     optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_LUIPRINTTOCHAT),
-        tooltip = GetString(SI_LUIE_LAM_LUIPRINTTOCHAT_TOOLTIP),
+        tooltip = GetString(SI_LUIE_LAM_LUIPRINTTOCHAT_TP),
         getFunc = function() return LUIE.SV.ChatUseSystem end,
         setFunc = function(value) LUIE.SV.ChatUseSystem = value end,
         width = "full",
@@ -2753,7 +2750,7 @@ function LUIE_CreateSettings()
     optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = strformat("\t\t<<1>>", GetString(SI_LUIE_LAM_TIMESTAMP)),
-        tooltip = GetString(SI_LUIE_LAM_TIMESTAMP_TOOLTIP),
+        tooltip = GetString(SI_LUIE_LAM_TIMESTAMP_TP),
         getFunc = function() return LUIE.SV.TimeStamp end,
         setFunc = function(value) LUIE.SV.TimeStamp = value end,
         width = "full",
@@ -2764,7 +2761,7 @@ function LUIE_CreateSettings()
     optionsData[#optionsData + 1] = {
         type = "editbox",
         name = strformat("\t\t<<1>>", GetString(SI_LUIE_LAM_TIMESTAMPFORMAT)),
-        tooltip = GetString(SI_LUIE_LAM_TIMESTAMPFORMAT_TOOLTIP),
+        tooltip = GetString(SI_LUIE_LAM_TIMESTAMPFORMAT_TP),
         getFunc = function() return LUIE.SV.TimeStampFormat end,
         setFunc = function(value) LUIE.SV.TimeStampFormat = value end,
         width = "full",
@@ -2775,7 +2772,7 @@ function LUIE_CreateSettings()
     optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_STARTUPMSG),
-        tooltip = GetString(SI_LUIE_LAM_STARTUPMSG_TOOLTIP),
+        tooltip = GetString(SI_LUIE_LAM_STARTUPMSG_TP),
         getFunc = function() return LUIE.SV.StartupInfo end,
         setFunc = function(value) LUIE.SV.StartupInfo = value end,
         width = "full",
@@ -2823,7 +2820,7 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_UF_SHORTNUMBERS),
-        tooltip = GetString(SI_LUIE_LAM_UF_SHORTNUMBERS_TOOLTIP),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHORTNUMBERS_TP),
         getFunc = function() return LUIE.UnitFrames.SV.ShortenNumbers end,
         setFunc = function(value) LUIE.UnitFrames.SV.ShortenNumbers = value end,
         width = "full",
@@ -2833,13 +2830,13 @@ function LUIE_CreateSettings()
     -- Default Frames header
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "header",
-        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_HEADER),
+        name = GetString(SI_LUIE_LAM_UF_DFRAMES_HEADER),
         width = "full",
     }
     -- Default PLAYER frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_PLAYER),
+        name = GetString(SI_LUIE_LAM_UF_DFRAMES_PLAYER),
         choices = LUIE.UnitFrames.GetDefaultFramesOptions('Player'),
         getFunc = function() return LUIE.UnitFrames.GetDefaultFramesSetting('Player') end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Player', value) end,
@@ -2851,7 +2848,7 @@ function LUIE_CreateSettings()
     -- Default TARGET frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_TARGET),
+        name = GetString(SI_LUIE_LAM_UF_DFRAMES_TARGET),
         choices = LUIE.UnitFrames.GetDefaultFramesOptions('Target'),
         getFunc = function() return LUIE.UnitFrames.GetDefaultFramesSetting('Target') end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Target', value) end,
@@ -2863,7 +2860,7 @@ function LUIE_CreateSettings()
     -- Default small GROUP frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_GROUPSMALL),
+        name = GetString(SI_LUIE_LAM_UF_DFRAMES_GROUPSMALL),
         choices = LUIE.UnitFrames.GetDefaultFramesOptions('Group'),
         getFunc = function() return LUIE.UnitFrames.GetDefaultFramesSetting('Group') end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Group', value) end,
@@ -2875,8 +2872,8 @@ function LUIE_CreateSettings()
     -- Reposition default player bars
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_REPOSITION),
-        tooltip = GetString(SI_LUIE_LAM_UF_DEFFRAMES_REPOSIT_TOOLTIP),
+        name = GetString(SI_LUIE_LAM_UF_DFRAMES_REPOSIT),
+        tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_REPOSIT_TP),
         getFunc = function() return LUIE.UnitFrames.SV.RepositionFrames end,
         setFunc = function(value) LUIE.UnitFrames.SV.RepositionFrames = value end,
         width = "full",
@@ -2887,8 +2884,8 @@ function LUIE_CreateSettings()
     -- Format label text
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_LABEL),
-        tooltip = GetString(SI_LUIE_LAM_UF_DEFFRAMES_LABEL_TOOLTIP),
+        name = GetString(SI_LUIE_LAM_UF_DFRAMES_LABEL),
+        tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_LABEL_TP),
         choices = formatOptions,
         getFunc = function() return LUIE.UnitFrames.SV.Format end,
         setFunc = function(var) LUIE.UnitFrames.SV.Format = var end,
@@ -2899,8 +2896,8 @@ function LUIE_CreateSettings()
     -- Out-of-Combat bars transparency
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_OOCTRANS),
-        tooltip = GetString(SI_LUIE_LAM_UF_DEFFRAMES_OOCTRANS_TOOLTIP),
+        name = GetString(SI_LUIE_LAM_UF_DFRAMES_OOCTRANS),
+        tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_OOCTRANS_TP),
         min = 0, max = 100, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.DefaultOocTransparency end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesTransparency(value, nil) end,
@@ -2911,8 +2908,8 @@ function LUIE_CreateSettings()
     -- In-Combat bars transparency
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_INCTRANS),
-        tooltip = GetString(SI_LUIE_LAM_UF_DEFFRAMES_INCTRANS_TOOLTIP),
+        name = GetString(SI_LUIE_LAM_UF_DFRAMES_INCTRANS),
+        tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_INCTRANS_TP),
         min = 0, max = 100, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.DefaultIncTransparency end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesTransparency(nil, value) end,
@@ -2924,7 +2921,7 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = GetString(SI_LUIE_LAM_FONT),
-        tooltip = GetString(SI_LUIE_LAM_UF_DEFFRAMES_FONT_TOOLTIP),
+        tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_FONT_TP),
         choices = FontsList,
         sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.DefaultFontFace end,
@@ -2937,7 +2934,7 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = GetString(SI_LUIE_LAM_FONT_SIZE),
-        tooltip = GetString(SI_LUIE_LAM_UF_DEFFRAMES_FONT_SIZE_TOOLTIP),
+        tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_FONT_SIZE_TP),
         min = 10, max = 30, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.DefaultFontSize end,
         setFunc = function(value) LUIE.UnitFrames.SV.DefaultFontSize = value LUIE.UnitFrames.DefaultFramesApplyFont() end,
@@ -2949,7 +2946,7 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = GetString(SI_LUIE_LAM_FONT_STYLE),
-        choices = styleOptions,
+        choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
         sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.DefaultFontStyle end,
         setFunc = function(var) LUIE.UnitFrames.SV.DefaultFontStyle = var LUIE.UnitFrames.DefaultFramesApplyFont() end,
@@ -2960,52 +2957,57 @@ function LUIE_CreateSettings()
     -- Color of text labels
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_LABEL_COLOR),
+        name = GetString(SI_LUIE_LAM_UF_DFRAMES_LABEL_COLOR),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.DefaultTextColour) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.DefaultTextColour={r,g,b} LUIE.UnitFrames.DefaultFramesApplyColour() end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.DefaultTextColour[1], g=LUIE.UnitFrames.D.DefaultTextColour[2], b=LUIE.UnitFrames.D.DefaultTextColour[3] },
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Target class icon
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Target class icon",
-        tooltip = "Display icon for target player class.",
+        name = GetString(SI_LUIE_LAM_UF_TARGET_ICON_CLASS),
+        tooltip = GetString(SI_LUIE_LAM_UF_TARGET_ICON_CLASS_TP),
         getFunc = function() return LUIE.UnitFrames.SV.TargetShowClass end,
         setFunc = function(value) LUIE.UnitFrames.SV.TargetShowClass = value end,
         width = "full",
         default = LUIE.UnitFrames.D.TargetShowClass,
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Target ignore/friend/guild icon
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Target ignore/friend/guild icon",
-        tooltip = "Display icon for target player if this player is ignored, or your friend, or in one of your guilds.",
+        name = GetString(SI_LUIE_LAM_UF_TARGET_ICON_GFI),
+        tooltip = GetString(SI_LUIE_LAM_UF_TARGET_ICON_GFI_TP),
         getFunc = function() return LUIE.UnitFrames.SV.TargetShowFriend end,
         setFunc = function(value) LUIE.UnitFrames.SV.TargetShowFriend = value end,
         width = "full",
         default = LUIE.UnitFrames.D.TargetShowFriend,
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Colour target name by reaction
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Colour target name by reaction",
-        tooltip = "Change the colour of targets name label according to unit reaction.",
+        name = GetString(SI_LUIE_LAM_UF_TARGET_COLOR_REACTION),
+        tooltip = GetString(SI_LUIE_LAM_UF_TARGET_COLOR_REACTION_TP),
         getFunc = function() return LUIE.UnitFrames.SV.TargetColourByReaction end,
         setFunc = LUIE.UnitFrames.TargetColourByReaction,
         width = "full",
         default = LUIE.UnitFrames.D.TargetColourByReaction,
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Custom Unit Frames Header
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "header",
-        name = "Custom Unit Frames",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_HEADER),
         width = "full",
     }
+    -- Custom Unit Frames Unlock
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Unlock Custom Frames",
-        tooltip = "Allow mouse dragging for all unit frames. When frames are unlocked, the target frame is not being hidden and can display outdated information.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_UNLOCK),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_UNLOCK_TP),
         getFunc = function() return LUIE.UnitFrames.CustomFramesMovingState end,
         setFunc = LUIE.UnitFrames.CustomFramesSetMovingState,
         width = "half",
@@ -3013,17 +3015,19 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         resetFunc = LUIE.UnitFrames.CustomFramesResetPosition,
     }
+    -- Custom Unit Frames Reset position
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "button",
-        name = "Reset position",
-        tooltip = "This will reset position of Custom Frames into original position.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT_TP),
         func = LUIE.UnitFrames.CustomFramesResetPosition,
         width = "half",
     }
+    -- Custom Unit Frames format left label
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = "Format left label text",
-        tooltip = "Format first label for custom attribute bar.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_LEFT),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_LEFT_TP),
         choices = formatOptions,
         getFunc = function() return LUIE.UnitFrames.SV.CustomFormatOne end,
         setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatOne = var LUIE.UnitFrames.CustomFramesFormatLabels() end,
@@ -3031,10 +3035,11 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.CustomFormatOne,
     }
+    -- Custom Unit Frames format right label
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = "Format right label text",
-        tooltip = "Format second label for custom attribute bar.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_RIGHT),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_RIGHT_TP),
         choices = formatOptions,
         getFunc = function() return LUIE.UnitFrames.SV.CustomFormatTwo end,
         setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatTwo = var LUIE.UnitFrames.CustomFramesFormatLabels() end,
@@ -3042,10 +3047,11 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.CustomFormatTwo,
     }
+    -- Custom Unit Frames Font
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = "Font",
-        tooltip = "Font to display all labels on custom frames.",
+        name = GetString(SI_LUIE_LAM_FONT),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FONT_TP),
         choices = FontsList,
         sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.CustomFontFace end,
@@ -3054,10 +3060,11 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.CustomFontFace,
     }
+    -- Custom Unit Frames Font size labels
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Font Size (labels)",
-        tooltip = "Font Size to be used to display unit name, caption, etc: everything not on bars.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_FONT_SIZE_LABELS),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FONT_SIZE_LABELS_TP),
         min = 10, max = 30, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.CustomFontOther end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFontOther = value LUIE.UnitFrames.CustomFramesApplyFont() end,
@@ -3065,10 +3072,11 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.CustomFontOther,
     }
+    -- Custom Unit Frames Font size bars
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Font Size (bars)",
-        tooltip = "Font Size to be used on all labels on the bars.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_FONT_SIZE_BARS),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FONT_SIZE_BARS_TP),
         min = 10, max = 30, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.CustomFontBars end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFontBars = value LUIE.UnitFrames.CustomFramesApplyFont() end,
@@ -3076,10 +3084,11 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.CustomFontBars,
     }
+    -- Custom Unit Frames Font style
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = "Font Style",
-        choices = styleOptions,
+        name = GetString(SI_LUIE_LAM_FONT_STYLE),
+        choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
         sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.CustomFontStyle end,
         setFunc = function(var) LUIE.UnitFrames.SV.CustomFontStyle = var LUIE.UnitFrames.CustomFramesApplyFont() end,
@@ -3087,10 +3096,11 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.CustomFontStyle,
     }
+    -- Custom Unit Frames Texture
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = "Texture",
-        tooltip = "Texture to use on custom frames.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_TEXTURE),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_TEXTURE_TP),
         choices = StatusbarTexturesList,
         sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.CustomTexture end,
@@ -3099,10 +3109,11 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.CustomTexture,
     }
+    -- Custom Unit Frames Display HoT / DoT Animations
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Display HoT / DoT Animations",
-        tooltip = "DISABLED: Currently broken",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_HOTDOT),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_HOTDOT_TP),
         getFunc = function() return LUIE.UnitFrames.SV.CustomEnableRegen end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomEnableRegen = value end,
         width = "full",
@@ -3110,102 +3121,81 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.UnitFrames.SV.CustomEnableRegen end,
     }
+    -- Custom Unit Frames Health Bar Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = "Health Bar Colour",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_HEALTH),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourHealth) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourHealth={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.CustomColourHealth[1], g=LUIE.UnitFrames.D.CustomColourHealth[2], b=LUIE.UnitFrames.D.CustomColourHealth[3] },
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Custom Unit Frames Shield Bar Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = "Shield Bar Colour",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_SHIELD),
         getFunc = function() return LUIE.UnitFrames.SV.CustomColourShield[1], LUIE.UnitFrames.SV.CustomColourShield[2], LUIE.UnitFrames.SV.CustomColourShield[3]  end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourShield={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.CustomColourShield[1], g=LUIE.UnitFrames.D.CustomColourShield[2], b=LUIE.UnitFrames.D.CustomColourShield[3] },
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Custom Unit Frames Magicka Bar Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = "Magicka Bar Colour",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_MAGICKA),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourMagicka) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourMagicka={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.CustomColourMagicka[1], g=LUIE.UnitFrames.D.CustomColourMagicka[2], b=LUIE.UnitFrames.D.CustomColourMagicka[3] },
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Custom Unit Frames Stamina Bar Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = "Stamina Bar Colour",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_STAMINA),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourStamina) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourStamina={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.CustomColourStamina[1], g=LUIE.UnitFrames.D.CustomColourStamina[2], b=LUIE.UnitFrames.D.CustomColourStamina[3] },
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
-    
-    -----------------------
-    
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = "Color Custom Group Frames by Player Role",
-        tooltip = "Colors the custom group frame bars based off player role.",
-        getFunc = function() return LUIE.UnitFrames.SV.ColorRoleGroup end,
-        setFunc = function(value) LUIE.UnitFrames.SV.ColorRoleGroup = value LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
-        width = "full",
-        default = LUIE.UnitFrames.D.ColorRoleGroup,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
-    }
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = "Color Custom Raid Frames by Player Role",
-        tooltip = "Colors the custom raid frame bars based off player role.",
-        getFunc = function() return LUIE.UnitFrames.SV.ColorRoleRaid end,
-        setFunc = function(value) LUIE.UnitFrames.SV.ColorRoleRaid = value LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
-        width = "full",
-        default = LUIE.UnitFrames.D.ColorRoleRaid,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
-    }
-    
-    -----------------------
-    
+    -- Custom Unit Frames DPS Role Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = "DPS Role Colour",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_DPS),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourDPS) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourDPS={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.CustomColourDPS[1], g=LUIE.UnitFrames.D.CustomColourDPS[2], b=LUIE.UnitFrames.D.CustomColourDPS[3] },
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) and (LUIE.UnitFrames.SV.ColorRoleGroup or LUIE.UnitFrames.SV.ColorRoleRaid) ) end,
     }
+    -- Custom Unit Frames Healer Role Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = "Healer Role Colour",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_HEALER),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourHealer) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourHealer={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.CustomColourHealer[1], g=LUIE.UnitFrames.D.CustomColourHealer[2], b=LUIE.UnitFrames.D.CustomColourHealer[3] },
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) and (LUIE.UnitFrames.SV.ColorRoleGroup or LUIE.UnitFrames.SV.ColorRoleRaid) ) end,
     }
+     -- Custom Unit Frames Tank Role Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = "Tank Role Colour",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_TANK),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourTank) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourTank={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.CustomColourTank[1], g=LUIE.UnitFrames.D.CustomColourTank[2], b=LUIE.UnitFrames.D.CustomColourTank[3] },
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) and (LUIE.UnitFrames.SV.ColorRoleGroup or LUIE.UnitFrames.SV.ColorRoleRaid) ) end,
     }
-    
-    -----------------------
-    
+    -- Custom Unit Frames Separate Shield Bar
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Use Separate Shield Bar",
-        tooltip = "Enable this option to make a Shield Bar on Player, Target and Small Group custom frames independent and not overlayed with Health Bar. If you are heavy shield user like many sorcerer players, then you may like this option.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE),
+        tooltip = strformat(GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_TP), GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_NOTE)),
         getFunc = function() return LUIE.UnitFrames.SV.CustomShieldBarSeparate end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomShieldBarSeparate = value end,
         width = "full",
@@ -3213,9 +3203,10 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end
     }
+    -- Custom Unit Frames Separate Shield Bar Height
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Separate Shield Bar Height",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_HEIGHT),
         min = 4, max = 12, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.CustomShieldBarHeight end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomShieldBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() LUIE.UnitFrames.CustomFramesApplyLayoutGroup() end,
@@ -3223,10 +3214,11 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.CustomShieldBarHeight,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomShieldBarSeparate ) end,
     }
+    -- Custom Unit Frames Overlay Full Height Shield Bar
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Overlay Full Height Shield Bar",
-        tooltip = "(When Shield bar is NOT separate) Use full-sized shield bar on top of health bar for Player, Target and Small Group custom frames instead of default half-height overlay bar.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_OVERLAY),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_OVERLAY_TP),
         getFunc = function() return LUIE.UnitFrames.SV.CustomShieldBarFull end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomShieldBarFull = value end,
         width = "full",
@@ -3234,25 +3226,28 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and not LUIE.UnitFrames.SV.CustomShieldBarSeparate ) end,
     }
+    -- Custom Unit Frames Smooth Bar Transition
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Use Smooth Bar Transition",
-        tooltip = "Use smooth transition on all bars when value get changed. Disabling this option could improve performance a little.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_SMOOTHBARTRANS),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_SMOOTHBARTRANS_TP),
         getFunc = function() return LUIE.UnitFrames.SV.CustomSmoothBar end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomSmoothBar = value end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomSmoothBar,
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Custom Unit Frames (Player, Target)
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "header",
-        name = "Custom Unit Frames (Player, Target)",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_HEADER),
         width = "full",
     }
+    -- Enable LUIE PLAYER frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Enable This Addon PLAYER frame",
-        tooltip = "Create custom Player unit frames.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_PLAYER),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_PLAYER_TP),
         getFunc = function() return LUIE.UnitFrames.SV.CustomFramesPlayer end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFramesPlayer = value end,
         width = "full",
@@ -3260,10 +3255,11 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Enable LUIE Target frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Enable This Addon TARGET frame",
-        tooltip = "Create custom Target unit frames.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_TARGET),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_TARGET_TP),
         getFunc = function() return LUIE.UnitFrames.SV.CustomFramesTarget end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFramesTarget = value end,
         width = "full",
@@ -3271,9 +3267,10 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Player Bars Width
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Player Bars Width",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_WIDTH),
         min = 200, max = 500, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarWidth end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarWidth = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3281,9 +3278,10 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.PlayerBarWidth,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Player Health Bar Height
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Player Health Bar Height",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_HP_HIGHT),
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarHeightHealth end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarHeightHealth = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3291,9 +3289,10 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.PlayerBarHeightHealth,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Player Magicka Bar Height
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Player Magicka Bar Height",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_HIGHT),
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarHeightMagicka end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarHeightMagicka = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3301,9 +3300,10 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.PlayerBarHeightMagicka,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Player Stamina Bar Height
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Player Stamina Bar Height",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_HIGHT),
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarHeightStamina end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarHeightStamina = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3311,21 +3311,11 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.PlayerBarHeightStamina,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Hide Player Magicka Bar
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Hide Player Magicka Bar Label",
-        tooltip = "Hide just the label on the Player Magicka Bar",
-        getFunc = function() return LUIE.UnitFrames.SV.HideLabelMagicka end,
-        setFunc = function(value) LUIE.UnitFrames.SV.HideLabelMagicka = value LUIE.UnitFrames.SV.HideBarMagicka = false end,
-        width = "full",
-        default = LUIE.UnitFrames.D.HideLabelMagicka,
-        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
-    }
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = "Hide Player Magicka Bar",
-        tooltip = "Completely hide the Player Magicka Bar",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR_TP),
         getFunc = function() return LUIE.UnitFrames.SV.HideBarMagicka end,
         setFunc = function(value) LUIE.UnitFrames.SV.HideBarMagicka = value end,
         width = "full",
@@ -3333,10 +3323,23 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.HideLabelMagicka ) end,
     }
+    -- Hide Player Magicka Bar Label
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Hide Player Stamina Bar Label",
-        tooltip = "Completely hide the Player Stamina Bar",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL_TP),
+        getFunc = function() return LUIE.UnitFrames.SV.HideLabelMagicka end,
+        setFunc = function(value) LUIE.UnitFrames.SV.HideLabelMagicka = value LUIE.UnitFrames.SV.HideBarMagicka = false end,
+        width = "full",
+        default = LUIE.UnitFrames.D.HideLabelMagicka,
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
+    }
+    -- Hide Player Stamina Bar Label
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL_TP),
         getFunc = function() return LUIE.UnitFrames.SV.HideLabelStamina end,
         setFunc = function(value) LUIE.UnitFrames.SV.HideLabelStamina = value LUIE.UnitFrames.SV.HideBarStamina = false end,
         width = "full",
@@ -3344,10 +3347,11 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Hide Player Stamina Bar
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Hide Player Stamina Bar",
-        tooltip = "Hide just the label on the Player Stamina Bar",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR_TP),
         getFunc = function() return LUIE.UnitFrames.SV.HideBarStamina end,
         setFunc = function(value) LUIE.UnitFrames.SV.HideBarStamina = value end,
         width = "full",
@@ -3355,9 +3359,10 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.HideLabelStamina ) end,
     }
+    -- Spacing between Player Bars
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Spacing between Player Bars",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_SPACING),
         min = -1, max = 4, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarSpacing end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarSpacing = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3365,50 +3370,55 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.PlayerBarSpacing,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Display self name on Player Frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Display Your name on Player Frame",
-        tooltip = "Display your character name and level on the player frame.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_NAMESELF),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_NAMESELF_TP),
         getFunc = function() return LUIE.UnitFrames.SV.PlayerEnableYourname end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableYourname = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
         width = "full",
         default = LUIE.UnitFrames.D.PlayerEnableYourname,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Display Mount/Siege/Werewolf Bar
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Display Mount/Siege/Werewolf Bar",
-        tooltip = "Display alternative meaning bar to track mount stamina, siege weapon health, werewolf time left.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_MOUNTSIEGEWWBAR),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_MOUNTSIEGEWWBAR_TP),
         getFunc = function() return LUIE.UnitFrames.SV.PlayerEnableAltbarMSW end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableAltbarMSW = value LUIE.UnitFrames.CustomFramesSetupAlternative() end,
         width = "full",
         default = LUIE.UnitFrames.D.PlayerEnableAltbarMSW,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Display XP/Champion XP Bar
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Display XP/Champion XP Bar",
-        tooltip = "Display alternative meaning bar to track player experience.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBAR),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBAR_TP),
         getFunc = function() return LUIE.UnitFrames.SV.PlayerEnableAltbarXP end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableAltbarXP = value LUIE.UnitFrames.CustomFramesSetupAlternative() end,
         width = "full",
         default = LUIE.UnitFrames.D.PlayerEnableAltbarXP,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Champion XP Bar Point-Type Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Champion XP Bar Point-Type Colour",
-        tooltip = "Set colour of ChampionXP bar (Experience bar for vr14 players) to be dependent on type of Champion Point being earned.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR_TP),
         getFunc = function() return LUIE.UnitFrames.SV.PlayerChampionColour end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerChampionColour = value LUIE.UnitFrames.OnChampionPointGained() end,
         width = "full",
         default = LUIE.UnitFrames.D.PlayerChampionColour,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.PlayerEnableAltbarXP ) end,
     }
+    -- Display Armor stat change
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Display Armor stat change",
-        tooltip = "Display additional icon on unit health bar when unit has its armor affected. Also displays cracked texture over health bar when armor is decreased.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ARMORCHANGE),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ARMORCHANGE_TP),
         getFunc = function() return LUIE.UnitFrames.SV.PlayerEnableArmor end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableArmor = value end,
         width = "full",
@@ -3416,7 +3426,8 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
-    --[[optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+    --[[Display Weapon Power stat change
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
         name = "Display Weapon Power stat change",
         tooltip = "Display additional icon on unit health bar when unit has its weapon power affected.",
@@ -3427,7 +3438,8 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }]]--
-    --[[optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+    --[[Display Spell Power stat change
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
         name = "Display Spell Power stat change",
         tooltip = "Display additional icon on unit health bar when unit has its spell power affected.",
@@ -3438,10 +3450,11 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }]]--
+    -- Out-of-Combat frame opacity
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Out-of-Combat frame opacity",
-        tooltip = "Opacity of Player custom frame when not engaged in combat.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OOCPACITY),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OOCPACITY_TP),
         min = 0, max = 100, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.CustomOocAlpha end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomOocAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
@@ -3449,10 +3462,11 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.CustomOocAlpha,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
+    -- In-Combat frame opacity
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "In-Combat frame opacity",
-        tooltip = "Opacity of Player custom frame when engaged in combat.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ICPACITY),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ICPACITY_TP),
         min = 0, max = 100, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.CustomIncAlpha end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomIncAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
@@ -3460,29 +3474,31 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.CustomIncAlpha,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
+    -- Treat Missing Power as In-Combat
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Treat Missing Power as In-Combat",
-        -- tooltip = "",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_MISSPOWERCOMBAT),
         getFunc = function() return LUIE.UnitFrames.SV.CustomOocAlphaPower end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomOocAlphaPower = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomOocAlphaPower,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
+    -- Apply same opacity to Target frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Apply same opacity to Target frame",
-        tooltip = "Apply same transparency setting to Target frame as well. If this option is disabled, the Targets frame will have always 'In-Combat' values of opacity.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGETOPACITY),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGETOPACITY_TP),
         getFunc = function() return LUIE.UnitFrames.SV.CustomOocAlphaTarget end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomOocAlphaTarget = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomOocAlphaTarget,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesTarget ) end,
     }
+    -- Target Bars Width
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Target Bars Width",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_WIDTH),
         min = 200, max = 500, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.TargetBarWidth end,
         setFunc = function(value) LUIE.UnitFrames.SV.TargetBarWidth = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3490,9 +3506,10 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.TargetBarWidth,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesTarget ) end,
     }
+    -- Target Bars Height
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Target Bar Height",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_HEIGHT),
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.TargetBarHeight end,
         setFunc = function(value) LUIE.UnitFrames.SV.TargetBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3500,20 +3517,22 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.TargetBarHeight,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesTarget ) end,
     }
+    -- Display Target class label
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Display Target class label",
-        tooltip = "Display text label with target class name on target frame together with class icon.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_CLASSLABEL),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_CLASSLABEL_TP),
         getFunc = function() return LUIE.UnitFrames.SV.TargetEnableClass end,
         setFunc = function(value) LUIE.UnitFrames.SV.TargetEnableClass = value end,
         width = "full",
         default = LUIE.UnitFrames.D.TargetEnableClass,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesTarget ) end,
     }
+    -- Execute Health % Threshold
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Execute Health % Threshold",
-        tooltip = "Determines the threshold of HP to color the target label text red, as well as display the skull execute texture if enabled.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_EXETHRESHOLD),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_EXETHRESHOLD_TP),
         min = 0, max = 50, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.ExecutePercentage end,
         setFunc = function(value) LUIE.UnitFrames.SV.ExecutePercentage = value end,
@@ -3522,25 +3541,28 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.ExecutePercentage,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Display Skull Execute Texture
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Display Skull Execute Texture",
-        tooltip = "Display Skull texture next to custom target frame for low-health target that should be executed.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_EXETEXTURE),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_EXETEXTURE_TP),
         getFunc = function() return LUIE.UnitFrames.SV.TargetEnableSkull end,
         setFunc = function(value) LUIE.UnitFrames.SV.TargetEnableSkull = value end,
         width = "full",
         default = LUIE.UnitFrames.D.TargetEnableSkull,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesTarget ) end,
     }
+    -- Custom Unit Frames (Group)
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "header",
-        name = "Custom Unit Frames (Group)",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESG_HEADER),
         width = "full",
     }
+    -- Enable This Addon GROUP frames
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Enable This Addon GROUP frames",
-        tooltip = "Create custom GROUP unit frames.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESG_LUIEFRAMESENABLE),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESG_LUIEFRAMESENABLE_TP),
         getFunc = function() return LUIE.UnitFrames.SV.CustomFramesGroup end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFramesGroup = value end,
         width = "full",
@@ -3548,29 +3570,31 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Enable Default GROUP frames
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Enable Default GROUP frames",
-        tooltip = "This will show default UI small group unit frames when group size is less or equal then 4.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESG_DEFFRAMESENABLE),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESG_DEFFRAMESENABLE_TP),
         getFunc = function() return not ( LUIE.UnitFrames.SV.GroupDisableDefault and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
         setFunc = function(value) LUIE.UnitFrames.SV.GroupDisableDefault = not value LUIE.UnitFrames.CustomFramesGroupUpdate() end,
         width = "full",
         default = not LUIE.UnitFrames.D.GroupDisableDefault,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
     }
+    -- Include Player in Group Frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Include Player in Group Frame",
-        -- tooltip = "",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESG_INCPLAYERS),
         getFunc = function() return not LUIE.UnitFrames.SV.GroupExcludePlayer end,
         setFunc = function(value) LUIE.UnitFrames.SV.GroupExcludePlayer = (not value) LUIE.UnitFrames.CustomFramesGroupUpdate() end,
         width = "full",
         default = not LUIE.UnitFrames.D.GroupExcludePlayer,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
     }
+    -- Group Bars Width
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Group Bars Width",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESG_WIDTH),
         min = 100, max = 400, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.GroupBarWidth end,
         setFunc = function(value) LUIE.UnitFrames.SV.GroupBarWidth = value LUIE.UnitFrames.CustomFramesApplyLayoutGroup() end,
@@ -3578,9 +3602,10 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.GroupBarWidth,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
     }
+    -- Group Bars Height
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Group Bars Height",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESG_HEIGHT),
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.GroupBarHeight end,
         setFunc = function(value) LUIE.UnitFrames.SV.GroupBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutGroup() end,
@@ -3588,9 +3613,10 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.GroupBarHeight,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
     }
+    -- Spacing between Group Bars
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Spacing between Group Bars",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESG_SPACING),
         min = 20, max = 80, step = 2,
         getFunc = function() return LUIE.UnitFrames.SV.GroupBarSpacing end,
         setFunc = function(value) LUIE.UnitFrames.SV.GroupBarSpacing = value LUIE.UnitFrames.CustomFramesApplyLayoutGroup() end,
@@ -3598,25 +3624,39 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.GroupBarSpacing,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
     }
+    -- Show Role Icon on Group Frames
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Show Role Icon on Group Frames",
-        tooltip = "This will show the selected player role on group frames.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESG_ROLEICON),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESG_ROLEICON_TP),
         getFunc = function() return LUIE.UnitFrames.SV.RoleIconSmallGroup end,
         setFunc = function(value) LUIE.UnitFrames.SV.RoleIconSmallGroup = value LUIE.UnitFrames.CustomFramesApplyLayoutGroup() end,
         width = "full",
         default = LUIE.UnitFrames.D.RoleIconSmallGroup,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
     }
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "header",
-        name = "Custom Unit Frames (Raid)",
-        width = "full",
-    }
+    -- Custom Unit Frames Group Color Player Role
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Enable This Addon RAID frames",
-        tooltip = "Create custom RAID unit frames. If custom GROUP frames are used, then this raid frame will also be used for small groups.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYROLE),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYROLE_TP),
+        getFunc = function() return LUIE.UnitFrames.SV.ColorRoleGroup end,
+        setFunc = function(value) LUIE.UnitFrames.SV.ColorRoleGroup = value LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
+        width = "full",
+        default = LUIE.UnitFrames.D.ColorRoleGroup,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
+    }
+    -- Custom Unit Frames (Raid)
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "header",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESR_HEADER),
+        width = "full",
+    }
+    -- Enable This Addon RAID frames
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESR_LUIEFRAMESENABLE),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_LUIEFRAMESENABLE_TP),
         getFunc = function() return LUIE.UnitFrames.SV.CustomFramesRaid end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFramesRaid = value end,
         width = "full",
@@ -3624,19 +3664,21 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Enable Default RAID frames
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Enable Default RAID frames",
-        tooltip = "This will show default UI RAID unit frames when group size is larger then 4.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESR_DEFFRAMESENABLE),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_DEFFRAMESENABLE_TP),
         getFunc = function() return not ( LUIE.UnitFrames.SV.RaidDisableDefault and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
         setFunc = function(value) LUIE.UnitFrames.SV.RaidDisableDefault = not value LUIE.UnitFrames.CustomFramesGroupUpdate() end,
         width = "full",
         default = not LUIE.UnitFrames.D.RaidDisableDefault,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
     }
+    -- Raid Bars Width
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Raid Bars Width",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESR_WIDTH),
         min = 100, max = 500, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.RaidBarWidth end,
         setFunc = function(value) LUIE.UnitFrames.SV.RaidBarWidth = value LUIE.UnitFrames.CustomFramesApplyLayoutRaid() end,
@@ -3644,9 +3686,10 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.RaidBarWidth,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
     }
+    -- Raid Bars Height
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Raid Bars Height",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESR_HEIGHT),
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.RaidBarHeight end,
         setFunc = function(value) LUIE.UnitFrames.SV.RaidBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutRaid() end,
@@ -3654,11 +3697,12 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.RaidBarHeight,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
     }
+    -- Raid Frame Layout
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = "Raid Frame Layout",
-        tooltip = "Select layout of raid frame in format 'columns*rows'.",
-        choices = { '1 x 24', '2 x 12', '3 x 8', '4 x 6', '6 x 4' },
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESR_LAYOUT),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_LAYOUT_TP),
+        choices = { "1 x 24", "2 x 12", "3 x 8", "4 x 6", "6 x 4" },
         -- sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.RaidLayout end,
         setFunc = function(var) LUIE.UnitFrames.SV.RaidLayout = var LUIE.UnitFrames.CustomFramesApplyLayoutRaid() end,
@@ -3666,7 +3710,7 @@ function LUIE_CreateSettings()
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
         default = LUIE.UnitFrames.D.RaidLayout,
     }
-    --[[
+    --[[Sort Raid Frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
         name = "Sort Raid Frame",
@@ -3677,35 +3721,50 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.RaidSort,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
     } ]]--
+    -- Add Spacer for every 4 members
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Add Spacer for every 4 members",
-        tooltip = "Add a small spacer between raid members frames to visualize default group splitting.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESR_SPACER),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_SPACER_TP),
         getFunc = function() return LUIE.UnitFrames.SV.RaidSpacers end,
         setFunc = function(value) LUIE.UnitFrames.SV.RaidSpacers = value LUIE.UnitFrames.CustomFramesApplyLayoutRaid() end,
         width = "full",
         default = LUIE.UnitFrames.D.RaidSpacers,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
     }
+    -- Show Role Icon on Raid Frames
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Show Role Icon on Raid Frames",
-        tooltip = "This will show the selected player role on raid frames.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESR_ROLEICON),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_ROLEICON_TP),
         getFunc = function() return LUIE.UnitFrames.SV.RoleIconRaid end,
         setFunc = function(value) LUIE.UnitFrames.SV.RoleIconRaid  = value LUIE.UnitFrames.CustomFramesApplyLayoutRaid() end,
         width = "full",
         default = LUIE.UnitFrames.D.RoleIconRaid,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
     }
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "header",
-        name = "Custom Unit Frames (Boss)",
-        width = "full",
-    }
+    -- Custom Unit Frames Raid Color Player Role
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Enable This Addon BOSS frames",
-        tooltip = "Create custom BOSS unit frames. This will track health of up to 6 bosses in dungeons encounters.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYROLE),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYROLE_TP),
+        getFunc = function() return LUIE.UnitFrames.SV.ColorRoleRaid end,
+        setFunc = function(value) LUIE.UnitFrames.SV.ColorRoleRaid = value LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
+        width = "full",
+        default = LUIE.UnitFrames.D.ColorRoleRaid,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
+    }
+    -- Custom Unit Frames (Boss)
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "header",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESB_HEADER),
+        width = "full",
+    }
+    -- Enable This Addon BOSS frames
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESB_LUIEFRAMESENABLE),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESB_LUIEFRAMESENABLE_TP),
         getFunc = function() return LUIE.UnitFrames.SV.CustomFramesBosses end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFramesBosses = value end,
         width = "full",
@@ -3713,15 +3772,17 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Custom Unit Frames (PvP Target Frame)
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "header",
-        name = "Custom Unit Frames (PvP Target Frame)",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPVP_HEADER),
         width = "full",
     }
+    -- Enable additional PvP Target frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Enable additional PvP Target frame",
-        tooltip = "Create additional custom target unit frames. This will track health of hostile pvp players only. It also by default has larger size, less information and positioned on screen center.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_TP),
         getFunc = function() return LUIE.UnitFrames.SV.AvaCustFramesTarget end,
         setFunc = function(value) LUIE.UnitFrames.SV.AvaCustFramesTarget = value end,
         width = "full",
@@ -3729,9 +3790,10 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- PvP Target Bars Width
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "PvP Target Bars Width",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_WIDTH),
         min = 300, max = 700, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.AvaTargetBarWidth end,
         setFunc = function(value) LUIE.UnitFrames.SV.AvaTargetBarWidth = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3739,9 +3801,10 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.AvaTargetBarWidth,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.AvaCustFramesTarget ) end,
     }
+    -- PvP Target Bars Height
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "PvP Target Bar Height",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_HEIGHT),
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.AvaTargetBarHeight end,
         setFunc = function(value) LUIE.UnitFrames.SV.AvaTargetBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3749,16 +3812,18 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.AvaTargetBarHeight,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.AvaCustFramesTarget ) end,
     }
+    -- Common options
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "header",
-        name = "Common options",
+        name = GetString(SI_LUIE_LAM_UF_COMMON_HEADER),
         width = "full",
     }
+    -- Player Name Display Method
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = "Name Display Method",
+        name = GetString(SI_LUIE_LAM_NAMEDISPLAYMETHOD),
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-        tooltip = "Determines the method used to display other player names on unit frames. This setting does not effect the player frame.\nDefault: Character Name",
+        tooltip = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAYMETHOD_TP),
         choices = nameDisplayOptions,
         getFunc = function() return nameDisplayOptions[LUIE.UnitFrames.SV.DisplayOptions] end,
         setFunc = function(value) LUIE.UnitFrames.SV.DisplayOptions = nameDisplayOptionsKeys[value] end,
@@ -3766,66 +3831,72 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = nameDisplayOptions[2]
     }
+    -- Default Caption Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = "Default Caption Colour",
+        name = GetString(SI_LUIE_LAM_UF_COMMON_CAPTIONCOLOR),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.Target_FontColour) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.Target_FontColour={r,g,b} end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.Target_FontColour[1], g=LUIE.UnitFrames.D.Target_FontColour[2], b=LUIE.UnitFrames.D.Target_FontColour[3] },
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Friendly NPC Font Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = "Friendly NPC Font Colour",
+        name = GetString(SI_LUIE_LAM_UF_COMMON_NPCFONTCOLOR),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.Target_FontColour_FriendlyNPC) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.Target_FontColour_FriendlyNPC={r,g,b} end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.Target_FontColour_FriendlyNPC[1], g=LUIE.UnitFrames.D.Target_FontColour_FriendlyNPC[2], b=LUIE.UnitFrames.D.Target_FontColour_FriendlyNPC[3] },
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Friendly Player Font Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = "Friendly Player Font Colour",
+        name = GetString(SI_LUIE_LAM_UF_COMMON_PLAYERFONTCOLOR),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.Target_FontColour_FriendlyPlayer) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.Target_FontColour_FriendlyPlayer={r,g,b} end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.Target_FontColour_FriendlyPlayer[1], g=LUIE.UnitFrames.D.Target_FontColour_FriendlyPlayer[2], b=LUIE.UnitFrames.D.Target_FontColour_FriendlyPlayer[3] },
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Hostile Font Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = "Hostile Font Colour",
+        name = GetString(SI_LUIE_LAM_UF_COMMON_HOSTILEFONTCOLOR),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.Target_FontColour_Hostile) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.Target_FontColour_Hostile={r,g,b} end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.Target_FontColour_Hostile[1], g=LUIE.UnitFrames.D.Target_FontColour_Hostile[2], b=LUIE.UnitFrames.D.Target_FontColour_Hostile[3] },
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Apply same settings to reticle
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Apply same settings to reticle",
-        tooltip = "Change the colour of reticle (cross-hair) according to unit reaction.",
+        name = GetString(SI_LUIE_LAM_UF_COMMON_RETICLECOLOR),
+        tooltip = GetString(SI_LUIE_LAM_UF_COMMON_RETICLECOLOR_TP),
         getFunc = function() return LUIE.UnitFrames.SV.ReticleColourByReaction end,
         setFunc = LUIE.UnitFrames.ReticleColourByReaction,
         width = "full",
         default = LUIE.UnitFrames.D.ReticleColourByReaction,
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Interactible Reticle Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = "Interactible Reticle Colour",
+        name = GetString(SI_LUIE_LAM_UF_COMMON_RETICLECOLORINTERACT),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.ReticleColour_Interact) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.ReticleColour_Interact={r,g,b} end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.ReticleColour_Interact[1], g=LUIE.UnitFrames.D.ReticleColour_Interact[2], b=LUIE.UnitFrames.D.ReticleColour_Interact[3] },
         disabled = function() return not (LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.ReticleColourByReaction) end,
     }
-    --[[
+    --[[Font Style
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = "Font Style",
-        choices = styleOptions,
+        choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
         sort = "name-up",
         getFunc = function() return LUIE.SpellCastBuffs.SV.BuffFontStyle end,
         setFunc = function(var) LUIE.SpellCastBuffs.SV.BuffFontStyle = var LUIE.SpellCastBuffs.ApplyFont() end,

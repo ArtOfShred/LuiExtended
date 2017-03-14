@@ -3,18 +3,16 @@
 LUIE.DamageMeter = {}
 
 -- Performance Enhancement
-local DM             = LUIE.DamageMeter
-local UI             = LUIE.UI
-local E              = LUIE.Effects
-local colours        = LUIE.CombatInfo.Colours
-local strfmt         = string.format
-local strformat      = zo_strformat
-local IsUnitInCombat = IsUnitInCombat
+local DM                 = LUIE.DamageMeter
+local UI                 = LUIE.UI
+local E                  = LUIE.Effects
+local printToChat        = LUIE.PrintToChat
+local strfmt             = string.format
+local strformat          = zo_strformat
+local colours            = LUIE.CombatInfo.Colours
+local IsUnitInCombat     = IsUnitInCombat
 
 local moduleName         = LUIE.name .. '_DamageMeter'
-local g_DamageMeterTitle = "LUIE Damage Meter"
-local g_DamageGraphTitle = "LUIE Damage Log"
-local g_NoRecord         = "No Combat Recorded"
 
 local fakeControl = {}
 
@@ -35,6 +33,10 @@ DM.DC = {
     LogSaved = {},
 }
 
+local g_DamageMeterTitle = "LUIE Damage Meter"
+local g_DamageGraphTitle = "LUIE Damage Log"
+local g_NoRecord         = "No Combat Recorded"
+
 local uiPanel
 local uiMeter
 local uiGraph
@@ -50,11 +52,6 @@ local g_TimelineCur
 local g_CombatLogActivated = false
 
 local fontPanelLabel = '/LuiExtended/media/fonts/fontin_sans_r.otf|14|soft-shadow-thin'
-
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_DISPLAY_DAMAGE_METER", "Display Damage Meter")
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_DISPLAY_DAMAGE_LOG", "Display Damage Log")
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_POST_DAMAGE_RESULTS", "Post Damage Results")
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_POST_HEALING_RESULTS", "Post Healing Results")
 
 function DM.Initialize( enabled )
     -- load settings
@@ -608,7 +605,7 @@ function DM.OnCombatEvent( eventCode , result , isError , abilityName, abilityGr
 
         -- Prompt other unrecognized
         --local direction = damageIn and "Incoming" or "Outgoing"
-        --CHAT_SYSTEM:AddMessage( direction .. " result " .. result .. " not recognized! Target: " .. targetName .. " Value: " .. hitValue , {1,1,0} )
+        --printToChat( direction .. " result " .. result .. " not recognized! Target: " .. targetName .. " Value: " .. hitValue , {1,1,0} )
     end
 
 end
@@ -994,11 +991,11 @@ end
 function DM.Post( context )
     if not DM.Enabled then return end
 
-    CHAT_SYSTEM:AddMessage(context)
+    printToChat(context)
 
     -- Make sure there's something to report
     if ( g_Meter.damage + g_Meter.healing == 0 ) then
-        CHAT_SYSTEM:AddMessage( "No damage to report!" )
+        printToChat( "No damage to report!" )
         return
     end
 
@@ -1039,7 +1036,7 @@ function DM.Post( context )
     local channel = IsUnitGrouped('player') and "/p " or "/say "
 
     -- Print output to chat
-    --CHAT_SYSTEM:AddMessage(label)
+    --printToChat(label)
     CHAT_SYSTEM.textEntry:SetText( channel .. label )
 end
 

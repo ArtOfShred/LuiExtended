@@ -7,8 +7,8 @@ local CI            = LUIE.CombatInfo
 local UI            = LUIE.UI
 local E             = LUIE.Effects
 local DelayBuffer   = LUIE.DelayBuffer
-local strformat     = zo_strformat
 local strfmt        = string.format
+local strformat     = zo_strformat
 
 local moduleName    = LUIE.name .. "_CombatInfo"
 
@@ -82,7 +82,7 @@ local g_scrollingRadius    = 1000
 
 -- EXP
 local g_combatXP                 = 0
-local g_lastExp                  = 0 
+local g_lastExp                  = 0
 local g_useChampionXP            = false
 local g_cxpEnlightenedPool       = 0
 local g_cxpEnlightenedMultiplier = nil
@@ -421,9 +421,9 @@ local combatTargets = {
 }
 
 local lowAlertText = {
-    [POWERTYPE_HEALTH]  = "Low Health!",
-    [POWERTYPE_MAGICKA] = "Low Magicka!",
-    [POWERTYPE_STAMINA] = "Low Stamina!",
+    [POWERTYPE_HEALTH]  = strformat("<<1>> <<2>>!", GetString(SI_LOW), GetString(SI_ATTRIBUTES1)),
+    [POWERTYPE_MAGICKA] = strformat("<<1>> <<2>>!", GetString(SI_LOW), GetString(SI_ATTRIBUTES2)),
+    [POWERTYPE_STAMINA] = strformat("<<1>> <<2>>!", GetString(SI_LOW), GetString(SI_ATTRIBUTES3)),
 }
 
 -- Events routing definition

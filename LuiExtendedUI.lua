@@ -131,16 +131,16 @@ function LUIE.UI.Backdrop( parent, anchors, dims, center, edge, hidden )
 end
 
 -- Creates CT_BACKDROP UI control element with Chat Window background style
-function LUIE.UI.ChatBackdrop( parent, anchors, dims, colour, edge_size, hidden )
+function LUIE.UI.ChatBackdrop( parent, anchors, dims, color, edge_size, hidden )
     if not parent then return end
 
-    local colour = ( colour ~= nil and #colour == 4 ) and colour or { 0,0,0,1 }
+    local color = ( color ~= nil and #color == 4 ) and color or { 0,0,0,1 }
     local edge_size = ( edge_size ~= nil and edge_size > 0 ) and edge_size or 16
 
     local bg = wm:CreateControl(nil, parent, CT_BACKDROP)
 
-    bg:SetCenterColor( colour[1], colour[2], colour[3], colour[4] )
-    bg:SetEdgeColor( colour[1], colour[2], colour[3], colour[4] )
+    bg:SetCenterColor( color[1], color[2], color[3], color[4] )
+    bg:SetEdgeColor( color[1], color[2], color[3], color[4] )
     bg:SetCenterTexture("/esoui/art/chatwindow/chat_bg_center.dds")
     bg:SetEdgeTexture("/esoui/art/chatwindow/chat_bg_edge.dds", 256, 256, edge_size)
     bg:SetInsets(edge_size, edge_size, -edge_size, -edge_size)
@@ -163,7 +163,7 @@ function LUIE.UI.ChatBackdrop( parent, anchors, dims, colour, edge_size, hidden 
 end
 
 -- Creates CT_STATUSBAR UI control element
-function LUIE.UI.StatusBar( parent, anchors, dims, colour, hidden )
+function LUIE.UI.StatusBar( parent, anchors, dims, color, hidden )
     if not parent then return end
 
     local sb = wm:CreateControl(nil, parent, CT_STATUSBAR)
@@ -181,8 +181,8 @@ function LUIE.UI.StatusBar( parent, anchors, dims, colour, hidden )
         sb:SetDimensions( dims[1], dims[2] )
     end
 
-    if colour ~= nil and ( #colour == 3 or #colour == 4 ) then
-        sb:SetColor( unpack(colour) )
+    if color ~= nil and ( #color == 3 or #color == 4 ) then
+        sb:SetColor( unpack(color) )
     end
 
     return sb

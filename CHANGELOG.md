@@ -123,7 +123,7 @@ Version 4.14
 - Bug fixes
 
 Version 4.13
-- Info Panel: added option to disable colouring of FPS/Latency
+- Info Panel: added option to disable coloring of FPS/Latency
 - Unit Frames: Fixed small misalignment in raid group when having more then 1 column and spacing enabled
 - Unit Frames: Added configuration option to set custom transparency when In-Combat
 
@@ -148,14 +148,14 @@ Version 4.8.a
 
 Version 4.8
 - CombatInfo: added 'Cleanse Now!' alert
-- CombatLog: added more colours to messages and increased font size by 1
+- CombatLog: added more colors to messages and increased font size by 1
 - CombatLog: added option to auto-focus corresponding chat tab during combat
 - CombatLog: added option to save last 20 messages during logout
 
 Version 4.7
 - CombatInfo: changed back the default (for new installations) cloud-like floating text
 - CombatInfo: added options to filter out healing and dots events (in- and out-)
-- CombatInfo: added more colouring to cloud-like floating labels when damage-dependent colouring option is on
+- CombatInfo: added more coloring to cloud-like floating labels when damage-dependent coloring option is on
 - UnitFrames: fixed smooth target health bar transition on target change
 
 Version 4.6
@@ -204,7 +204,7 @@ Version 3.9
 - Custom Unit Frames: Added label to display current anchored position of frames when they are unlocked.
 
 Version 3.8
-- Default Unit Frames Extender: added option to change overlay labels colour
+- Default Unit Frames Extender: added option to change overlay labels color
 - Ultimate Generation Tracking was moved to Combat Info module. Not it will display glowing texture under Ultimate skill button
 
 Version 3.7
@@ -254,7 +254,7 @@ Version 2.15
 - Short-term buffs: updated code for spell activation detection. This should help with ground-targeted spells.
 - Custom Unit Frames:
 - - Added separate options to display experience bar and Mount/Siege/WW
-- - Added option to set colour of ChampionXP bar according to champion point being earned; changed textures of champion point.
+- - Added option to set color of ChampionXP bar according to champion point being earned; changed textures of champion point.
 - - Size of this alternative bar will now scale with size of the font used
 
 Version 2.14
@@ -295,7 +295,7 @@ Version 2.8
 
 Version 2.7a
 - Added option to enable each component in default and custom frames independently of each other
-- Added new option for name colouring for Friendly Players targets
+- Added new option for name coloring for Friendly Players targets
 - Fixed bug introduced in previous release
 - Added Proc animation over ActionBar slot for Crystal Fragments passive
 
@@ -323,7 +323,7 @@ Version 2.2 - new Unit Frames:
 Combat Info:
 - added option to select font sizes for scrolling text
 - changed routing for outgoing healing
-- added option to colour outgoing damage according to damage type
+- added option to color outgoing damage according to damage type
 NEW: Custom Unit Frames.
 - Contains previous Default Unit Frames Externder module
 - Provides new Custom Frames for Player, Target, (Raid)Group
@@ -339,7 +339,7 @@ Version 2.0:
 - Dropped CrystalFragmentProc module, as now API provides needed info
 - Rewritten Short-term buffs module is the same way as FTC was modified
 - Default Unit Frames module now put commas into long numbers
-- Updates to colouring of reticle.
+- Updates to coloring of reticle.
 
 Version 1.19 - pre Update 6:
 - Updated LAM to r17
