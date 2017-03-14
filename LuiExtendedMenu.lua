@@ -3451,7 +3451,8 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
-    --[[optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+    --[[Display Weapon Power stat change
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
         name = "Display Weapon Power stat change",
         tooltip = "Display additional icon on unit health bar when unit has its weapon power affected.",
@@ -3462,7 +3463,8 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }]]--
-    --[[optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+    --[[Display Spell Power stat change
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
         name = "Display Spell Power stat change",
         tooltip = "Display additional icon on unit health bar when unit has its spell power affected.",
@@ -3473,10 +3475,11 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }]]--
+    -- Out-of-Combat frame opacity
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Out-of-Combat frame opacity",
-        tooltip = "Opacity of Player custom frame when not engaged in combat.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OOCPACITY),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OOCPACITY_TP),
         min = 0, max = 100, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.CustomOocAlpha end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomOocAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
@@ -3484,10 +3487,11 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.CustomOocAlpha,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
+    -- In-Combat frame opacity
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "In-Combat frame opacity",
-        tooltip = "Opacity of Player custom frame when engaged in combat.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ICPACITY),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ICPACITY_TP),
         min = 0, max = 100, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.CustomIncAlpha end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomIncAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
@@ -3495,29 +3499,31 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.CustomIncAlpha,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
+    -- Treat Missing Power as In-Combat
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Treat Missing Power as In-Combat",
-        -- tooltip = "",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_MISSPOWERCOMBAT),
         getFunc = function() return LUIE.UnitFrames.SV.CustomOocAlphaPower end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomOocAlphaPower = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomOocAlphaPower,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
+    -- Apply same opacity to Target frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Apply same opacity to Target frame",
-        tooltip = "Apply same transparency setting to Target frame as well. If this option is disabled, the Targets frame will have always 'In-Combat' values of opacity.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGETOPACITY),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGETOPACITY_TP),
         getFunc = function() return LUIE.UnitFrames.SV.CustomOocAlphaTarget end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomOocAlphaTarget = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
         width = "full",
         default = LUIE.UnitFrames.D.CustomOocAlphaTarget,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesTarget ) end,
     }
+    -- Target Bars Width
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Target Bars Width",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_WIDTH),
         min = 200, max = 500, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.TargetBarWidth end,
         setFunc = function(value) LUIE.UnitFrames.SV.TargetBarWidth = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3525,9 +3531,10 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.TargetBarWidth,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesTarget ) end,
     }
+    -- Target Bars Height
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Target Bar Height",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_HEIGHT),
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.TargetBarHeight end,
         setFunc = function(value) LUIE.UnitFrames.SV.TargetBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3535,20 +3542,22 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.TargetBarHeight,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesTarget ) end,
     }
+    -- Display Target class label
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Display Target class label",
-        tooltip = "Display text label with target class name on target frame together with class icon.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_CLASSLABEL),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_CLASSLABEL_TP),
         getFunc = function() return LUIE.UnitFrames.SV.TargetEnableClass end,
         setFunc = function(value) LUIE.UnitFrames.SV.TargetEnableClass = value end,
         width = "full",
         default = LUIE.UnitFrames.D.TargetEnableClass,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesTarget ) end,
     }
+    -- Execute Health % Threshold
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Execute Health % Threshold",
-        tooltip = "Determines the threshold of HP to color the target label text red, as well as display the skull execute texture if enabled.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_EXETHRESHOLD),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_EXETHRESHOLD_TP),
         min = 0, max = 50, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.ExecutePercentage end,
         setFunc = function(value) LUIE.UnitFrames.SV.ExecutePercentage = value end,
@@ -3557,10 +3566,11 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.ExecutePercentage,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Display Skull Execute Texture
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Display Skull Execute Texture",
-        tooltip = "Display Skull texture next to custom target frame for low-health target that should be executed.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_EXETEXTURE),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_EXETEXTURE_TP),
         getFunc = function() return LUIE.UnitFrames.SV.TargetEnableSkull end,
         setFunc = function(value) LUIE.UnitFrames.SV.TargetEnableSkull = value end,
         width = "full",
