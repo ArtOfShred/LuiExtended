@@ -509,9 +509,9 @@ A.Skill_Restoring_Focus          = 22237
 -- ---------------------------------------------------
 
 A.Toggled_Hidden                    = 20309 -- Hidden (Innate)
-A.Toggled_Disguised                 = "Disguised"
+A.Toggled_Disguised                 = GetString(SI_DISGUISE_DISGUISED)
 A.Toggled_Brace_Generic             = 14890 -- Block (Innate)
-A.Toggled_Sprint                    = 973 -- Sprint (Innate)
+A.Toggled_Sprint                    = 973   -- Sprint (Innate)
 A.Toggled_Mount_Sprint              = "Gallop" -- Mount Sprint (Generic) (Innate) -- NOTE: Renamed to Gallop in fake buffs
 A.Toggled_Leeching_Strikes          = 36908 -- Leeching Strikes (Nightblade)
 A.Toggled_Unstable_Familiar         = 23304 -- Summon Unstable Familiar (Sorcerer)

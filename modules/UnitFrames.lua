@@ -748,7 +748,6 @@ local function CreateCustomFrames()
             LUIE.components[ moduleName .. "_CustomFrame_" .. unitTag ] = UF.CustomFrames[unitTag].tlw
         end
     end
-
 end
 
 -- Main entry point to this module
@@ -860,8 +859,7 @@ function UF.Initialize( enabled )
         EVENT_MANAGER:RegisterForEvent(moduleName .. "1", EVENT_GUILD_MEMBER_CHARACTER_UPDATED,    UF.OnGuildMemberAdded )
         EVENT_MANAGER:RegisterForEvent(moduleName .. "2", EVENT_GUILD_MEMBER_CHARACTER_UPDATED,    UF.GuildUpdateGroupFrames )
         EVENT_MANAGER:RegisterForEvent(moduleName .. "1", EVENT_GUILD_MEMBER_REMOVED,  UF.OnGuildMemberRemoved )
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "2", EVENT_GUILD_MEMBER_REMOVED,  UF.GuildUpdateGroupFrames )
-        
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "2", EVENT_GUILD_MEMBER_REMOVED,  UF.GuildUpdateGroupFrames )       
     end
 
     -- New AvA frames
@@ -986,7 +984,6 @@ function UF.OnPlayerActivated(eventCode)
     
     -- Apply bar colors here, has to be after player init to get group roles
     UF.CustomFramesApplyColours()
-    
 end
 
 -- Runs on the EVENT_POWER_UPDATE listener.
@@ -1838,10 +1835,8 @@ end
 
 -- Runs on the EVENT_LEADER_UPDATE listener.
 function UF.OnLeaderUpdate(eventCode, leaderTag)
-
     UF.CustomFramesApplyLayoutGroup()
     UF.CustomFramesApplyLayoutRaid()
- 
 end
 
 -- This function is used to setup alternative bar for player
@@ -2409,7 +2404,6 @@ function UF.CustomFramesApplyColoursSingle(unitTag)
                 end
             end
         end
-
 end
 
 -- Apply selected texture for all known bars on custom unit frames
@@ -2517,7 +2511,6 @@ function UF.DefaultFramesApplyFont(unitTag)
             __applyFont("group" .. i)
         end
     end
-
 end
 
 -- Reapplies colour for default unit frames extender module labels
@@ -2541,7 +2534,6 @@ function UF.DefaultFramesApplyColour()
     for i = 0, 24 do
         __applyColour("group" .. i)
     end
-
 end
 
 -- Apply selected font for all known label on custom unit frames
@@ -3130,5 +3122,4 @@ function UF.GuildUpdateGroupFrames()
     
     zo_callLater(UpdateGuildIcons, 2000)
     zo_callLater(function() UF.ReloadValues("reticleover") end, 2000)
-
 end

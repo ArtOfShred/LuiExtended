@@ -269,7 +269,6 @@ E.DebuffDisplayOverrideId = {
     [2727] = true, -- Off-Balance
 }
 
-
 -- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY NAME
 E.DebuffDisplayOverrideName = {
     ['Major Breach']                    = true,
