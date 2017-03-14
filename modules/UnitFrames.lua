@@ -851,12 +851,17 @@ function UF.Initialize( enabled )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEADER_UPDATE,         UF.OnLeaderUpdate )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BOSSES_CHANGED,    UF.OnBossesChanged )
 
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD,     UF.InvalidateGuildMemberIndex )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD,   UF.OnGuildSelfJoinedGuild )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_ADDED,                UF.OnGuildMemberAdded )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_CHARACTER_UPDATED,    UF.OnGuildMemberAdded )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_REMOVED,  UF.OnGuildMemberRemoved )
-
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "1", EVENT_GUILD_SELF_LEFT_GUILD,     UF.InvalidateGuildMemberIndex )
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "2", EVENT_GUILD_SELF_LEFT_GUILD,     UF.GuildUpdateGroupFrames )
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "1", EVENT_GUILD_SELF_JOINED_GUILD,   UF.OnGuildSelfJoinedGuild )
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "2", EVENT_GUILD_SELF_JOINED_GUILD,   UF.GuildUpdateGroupFrames )
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "1", EVENT_GUILD_MEMBER_ADDED,                UF.OnGuildMemberAdded )
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "2", EVENT_GUILD_MEMBER_ADDED,                UF.GuildUpdateGroupFrames )
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "1", EVENT_GUILD_MEMBER_CHARACTER_UPDATED,    UF.OnGuildMemberAdded )
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "2", EVENT_GUILD_MEMBER_CHARACTER_UPDATED,    UF.GuildUpdateGroupFrames )
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "1", EVENT_GUILD_MEMBER_REMOVED,  UF.OnGuildMemberRemoved )
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "2", EVENT_GUILD_MEMBER_REMOVED,  UF.GuildUpdateGroupFrames )
+        
     end
 
     -- New AvA frames
@@ -3109,4 +3114,21 @@ function UF.GetGuildDisplayNameInfo( displayName )
         UF.RebuildGuildMemberIndex()
     end
     return g_guildMemberIndexDisplayNames[displayName]
+end
+
+-- Updates group frames when a relevant guild change event happens
+function UF.GuildUpdateGroupFrames()
+
+    local function UpdateGuildIcons()
+        for i = 1, 24 do
+            local unitTag = "group" .. i
+            if DoesUnitExist(unitTag) then
+                UF.ReloadValues(unitTag)
+            end
+        end
+    end
+    
+    zo_callLater(UpdateGuildIcons, 2000)
+    zo_callLater(function() UF.ReloadValues("reticleover") end, 2000)
+
 end
