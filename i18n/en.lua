@@ -218,6 +218,9 @@ ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_ACCEPTED",                   "Trade i
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_CONFIRM",                    "You have invited |cFEFEFE<<1>>|r to trade.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MESSAGE",                    "|cFEFEFE<<1>>|r has invited you to trade.")
 
+-- UnitFrames.lua
+ZO_CreateStringId("SI_LUIE_UF_ERROR_FONT",                              "LUIE_CustomFrames: There was a problem with selecting required font. Falling back to game default.")
+
 -- LuiExtendedSettings.lua
 ZO_CreateStringId("SI_LUIE_LAM_COMPATIBILITY_WARNING",                  "Disable this option if you are having compatibility issues with other addons.")
 ZO_CreateStringId("SI_LUIE_LAM_FONT",                                   "Font")

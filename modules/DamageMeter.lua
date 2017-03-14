@@ -7,6 +7,7 @@ local DM             = LUIE.DamageMeter
 local UI             = LUIE.UI
 local E              = LUIE.Effects
 local colours        = LUIE.CombatInfo.Colours
+local printToChat    = LUIE.PrintToChat
 local strfmt         = string.format
 local strformat      = zo_strformat
 local IsUnitInCombat = IsUnitInCombat
@@ -603,7 +604,7 @@ function DM.OnCombatEvent( eventCode , result , isError , abilityName, abilityGr
 
         -- Prompt other unrecognized
         --local direction = damageIn and "Incoming" or "Outgoing"
-        --CHAT_SYSTEM:AddMessage( direction .. " result " .. result .. " not recognized! Target: " .. targetName .. " Value: " .. hitValue , {1,1,0} )
+        --printToChat( direction .. " result " .. result .. " not recognized! Target: " .. targetName .. " Value: " .. hitValue , {1,1,0} )
     end
 
 end
@@ -989,11 +990,11 @@ end
 function DM.Post( context )
     if not DM.Enabled then return end
 
-    CHAT_SYSTEM:AddMessage(context)
+    printToChat(context)
 
     -- Make sure there's something to report
     if ( g_Meter.damage + g_Meter.healing == 0 ) then
-        CHAT_SYSTEM:AddMessage( "No damage to report!" )
+        printToChat( "No damage to report!" )
         return
     end
 
@@ -1034,7 +1035,7 @@ function DM.Post( context )
     local channel = IsUnitGrouped('player') and "/p " or "/say "
 
     -- Print output to chat
-    --CHAT_SYSTEM:AddMessage(label)
+    --printToChat(label)
     CHAT_SYSTEM.textEntry:SetText( channel .. label )
 end
 

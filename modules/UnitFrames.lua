@@ -3,13 +3,14 @@
 LUIE.UnitFrames = {}
 
 -- Performance Enhancement
-local UF                  = LUIE.UnitFrames
-local UI                  = LUIE.UI
-local CommaValue          = LUIE.CommaValue
-local DelayBuffer         = LUIE.DelayBuffer
-local strformat           = zo_strformat
-local strfmt              = string.format
-local pairs               = pairs -- What does this do?
+local UF            = LUIE.UnitFrames
+local UI            = LUIE.UI
+local CommaValue    = LUIE.CommaValue
+local DelayBuffer   = LUIE.DelayBuffer
+local printToChat   = LUIE.PrintToChat
+local strformat     = zo_strformat
+local strfmt        = string.format
+local pairs         = pairs -- What does this do?
 
 local moduleName    = LUIE.name .. "_UnitFrames"
 
@@ -2541,7 +2542,7 @@ function UF.CustomFramesApplyFont()
     -- First try selecting font face
     local fontName = LUIE.Fonts[UF.SV.CustomFontFace]
     if not fontName or fontName == "" then
-        CHAT_SYSTEM:AddMessage("LUIE_CustomFrames: There was a problem with selecting required font. Falling back to game default.")
+        printToChat(GetString(SI_LUIE_UF_ERROR_FONT))
         fontName = "$(MEDIUM_FONT)"
     end
 
