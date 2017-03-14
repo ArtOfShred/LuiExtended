@@ -40,6 +40,17 @@ ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NONAME",           "You mus
 ZO_CreateStringId("SI_LUIE_IP_FEEDNOW",                                 "Feed Now")
 ZO_CreateStringId("SI_LUIE_IP_MAXED",                                   "Maxed")
 
+-- SpellCastBuffs.lua
+ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS",                "Player Buffs")
+ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS",              "Player Debuffs")
+ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS",      "Player Long Term Effects")
+ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS",                "Target Buffs")
+ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS",              "Target Debuffs")
+ZO_CreateStringId("SI_LUIE_SCB_RECALLCOOLDOWN",                         "Recall Cooldown")
+ZO_CreateStringId("SI_LUIE_SCB_MOUNTED",                                "Mounted")
+ZO_CreateStringId("SI_LUIE_SCB_REZZIMMUNITY",                           "Resurrection Immunity")
+ZO_CreateStringId("SI_LUIE_SCB_ERROR_FONT",                             "LUIE_SpellCastBuffs: There was a problem with selecting required font. Falling back to game default.")
+
 -- ChatAnnouncements.lua
 ZO_CreateStringId("SI_LUIE_CA_DEBUG_MSG_CURRENCY",                      "Currency Change Reason <<1>> Triggered - Please post on the LUI Extended comments section on ESOUI.com describing what caused this message. Thanks!")
 ZO_CreateStringId("SI_LUIE_CA_DEFAULTVARS_CURRENCYTOTALMESSAGE",        "[New Total]")

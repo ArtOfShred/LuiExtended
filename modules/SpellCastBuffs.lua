@@ -3,16 +3,17 @@
 LUIE.SpellCastBuffs = {}
 
 -- Performance Enhancement
-local SCB       = LUIE.SpellCastBuffs
-local CI        = LUIE.CombatInfo
-local UI        = LUIE.UI
-local E         = LUIE.Effects
-local A         = LUIE.GetAbility()
-local strfmt    = string.format
-local strformat = zo_strformat
-local pairs     = pairs -- What does this do?
+local SCB           = LUIE.SpellCastBuffs
+local CI            = LUIE.CombatInfo
+local UI            = LUIE.UI
+local E             = LUIE.Effects
+local A             = LUIE.GetAbility()
+local printToChat   = LUIE.PrintToChat
+local strfmt        = string.format
+local strformat     = zo_strformat
+local pairs         = pairs -- What does this do?
 
-local moduleName = LUIE.name .. "_SpellCastBuffs"
+local moduleName    = LUIE.name .. "_SpellCastBuffs"
 
 local testEffectPrefix = "testEffect:"
 local testEffectList   = { 22, 44, 55, 1800000 }
@@ -20,15 +21,15 @@ local testEffectList   = { 22, 44, 55, 1800000 }
 local playerName = strformat(SI_UNIT_NAME, GetUnitName("player"))
 
 local windowTitles = {
-    playerb     = "Player Buffs",
-    playerd     = "Player Debuffs",
-    player1     = "Player Buffs",
-    player2     = "Player Debuffs",
-    player_long = "Player Long Term Effects", -- "E"
-    targetb     = "Target Buffs",
-    targetd     = "Target Debuffs",
-    target1     = "Target Buffs",
-    target2     = "Target Debuffs",
+    playerb     = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS),
+    playerd     = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS),
+    player1     = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS),
+    player2     = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS),
+    player_long = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS),
+    targetb     = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS),
+    targetd     = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS),
+    target1     = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS),
+    target2     = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS),
 }
 
 SCB.Enabled = false
@@ -113,7 +114,7 @@ local g_playerDead   = false
 local g_playerResurectStage = nil
 
 -- Fast travel from any place in world
-local g_recallEffectName   = "Recall Cooldown"
+local g_recallEffectName   = GetString(SI_LUIE_SCB_RECALLCOOLDOWN)
 local g_recallIconFilename = "LuiExtended/media/icons/abilities/ability_innate_recall_cooldown.dds"
 
 -- Font to be used on icons
@@ -131,8 +132,8 @@ local g_horizSortInvert = false
 
 -- Some optimization
 local strHidden     = A.Effect_Hidden
-local strDisguise   = "Disguised"
-local strMounted    = "Mounted"
+local strDisguise   = GetString(SI_DISGUISE_DISGUISED)
+local strMounted    = GetString(SI_LUIE_SCB_MOUNTED)
 local iconMounted   = "LuiExtended/media/icons/mounts/mount_palomino_horse.dds"
 
 local abilityRouting = { "player1", "player2", "ground" }
@@ -743,7 +744,7 @@ function SCB.MountStatus(eventCode, mounted)
         local mountType = GetMountSkinId()
         --d("Skin ID = " .. mountType)
         
-        strMounted = E.MountIcons[mountType] ~= nil and E.MountIcons[mountType].name or "Mounted"
+        strMounted = E.MountIcons[mountType] ~= nil and E.MountIcons[mountType].name or GetString(SI_LUIE_SCB_MOUNTED)
         iconMounted = E.MountIcons[mountType] ~= nil and E.MountIcons[mountType].icon or "LuiExtended/media/icons/mounts/mount_palomino_horse.dds"
         g_effectsList.player1["Mount"] = 
             {
@@ -1293,7 +1294,7 @@ function SCB.ApplyFont()
     -- First try selecting font face
     local fontName = LUIE.Fonts[SCB.SV.BuffFontFace]
     if not fontName or fontName == "" then
-        CHAT_SYSTEM:AddMessage("LUIE_SpellCastBuffs: There was a problem with selecting required font. Falling back to game default.")
+        printToChat(GetString(SI_LUIE_SCB_ERROR_FONT))
         fontName = "$(MEDIUM_FONT)"
     end
 
@@ -2431,7 +2432,7 @@ function SCB.OnVibration(eventCode, duration, coarseMotor, fineMotor, leftTrigge
         -- We got correct sequence, so let us create a buff and reset the g_playerResurectStage
         g_playerResurectStage = nil
         SCB.NewEffects( {
-            name = "Resurrection Immunity",
+            name = GetString(SI_LUIE_SCB_REZZIMMUNITY),
             icon = "LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds",
             effects = {10000, 0, 0, 0}
         } )
