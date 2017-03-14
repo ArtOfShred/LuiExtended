@@ -421,9 +421,9 @@ local combatTargets = {
 }
 
 local lowAlertText = {
-    [POWERTYPE_HEALTH]  = strformat("<<1>> <<2>>!", GetString(SI_LOW), GetString(SI_ATTRIBUTES1))
-    [POWERTYPE_MAGICKA] = strformat("<<1>> <<2>>!", GetString(SI_LOW), GetString(SI_ATTRIBUTES2))
-    [POWERTYPE_STAMINA] = strformat("<<1>> <<2>>!", GetString(SI_LOW), GetString(SI_ATTRIBUTES3))
+    [POWERTYPE_HEALTH]  = strformat("<<1>> <<2>>!", GetString(SI_LOW), GetString(SI_ATTRIBUTES1)),
+    [POWERTYPE_MAGICKA] = strformat("<<1>> <<2>>!", GetString(SI_LOW), GetString(SI_ATTRIBUTES2)),
+    [POWERTYPE_STAMINA] = strformat("<<1>> <<2>>!", GetString(SI_LOW), GetString(SI_ATTRIBUTES3)),
 }
 
 -- Events routing definition
