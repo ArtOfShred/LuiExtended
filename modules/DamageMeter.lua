@@ -3,19 +3,16 @@
 LUIE.DamageMeter = {}
 
 -- Performance Enhancement
-local DM             = LUIE.DamageMeter
-local UI             = LUIE.UI
-local E              = LUIE.Effects
-local colours        = LUIE.CombatInfo.Colours
-local printToChat    = LUIE.PrintToChat
-local strfmt         = string.format
-local strformat      = zo_strformat
-local IsUnitInCombat = IsUnitInCombat
+local DM                 = LUIE.DamageMeter
+local UI                 = LUIE.UI
+local E                  = LUIE.Effects
+local printToChat        = LUIE.PrintToChat
+local strfmt             = string.format
+local strformat          = zo_strformat
+local colours            = LUIE.CombatInfo.Colours
+local IsUnitInCombat     = IsUnitInCombat
 
 local moduleName         = LUIE.name .. '_DamageMeter'
-local g_DamageMeterTitle = "LUIE Damage Meter"
-local g_DamageGraphTitle = "LUIE Damage Log"
-local g_NoRecord         = "No Combat Recorded"
 
 local fakeControl = {}
 
@@ -35,6 +32,10 @@ DM.DC = {
     LogSaveEnable = false,
     LogSaved = {},
 }
+
+local g_DamageMeterTitle = "LUIE Damage Meter"
+local g_DamageGraphTitle = "LUIE Damage Log"
+local g_NoRecord         = "No Combat Recorded"
 
 local uiPanel
 local uiMeter

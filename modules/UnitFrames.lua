@@ -8,8 +8,8 @@ local UI            = LUIE.UI
 local CommaValue    = LUIE.CommaValue
 local DelayBuffer   = LUIE.DelayBuffer
 local printToChat   = LUIE.PrintToChat
-local strformat     = zo_strformat
 local strfmt        = string.format
+local strformat     = zo_strformat
 local pairs         = pairs -- What does this do?
 
 local moduleName    = LUIE.name .. "_UnitFrames"

@@ -6,8 +6,8 @@ LUIE.ChatAnnouncements = {}
 local CA             = LUIE.ChatAnnouncements
 local E              = LUIE.Effects
 local printToChat    = LUIE.PrintToChat
-local strformat      = zo_strformat
 local strfmt         = string.format
+local strformat      = zo_strformat
 local gsub           = string.gsub
 
 local moduleName     = LUIE.name .. '_ChatAnnouncements'

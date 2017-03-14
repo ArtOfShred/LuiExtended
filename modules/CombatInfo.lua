@@ -7,8 +7,8 @@ local CI            = LUIE.CombatInfo
 local UI            = LUIE.UI
 local E             = LUIE.Effects
 local DelayBuffer   = LUIE.DelayBuffer
-local strformat     = zo_strformat
 local strfmt        = string.format
+local strformat     = zo_strformat
 
 local moduleName    = LUIE.name .. "_CombatInfo"
 
