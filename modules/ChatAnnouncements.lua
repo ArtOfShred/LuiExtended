@@ -3764,7 +3764,7 @@ function CA.PrintQuestExperienceHelper()
     g_levelCarryOverValue = 0
 end
 
--- Helper function to return colour (without |c prefix) according to current percentage
+-- Helper function to return color (without |c prefix) according to current percentage
 local function AchievementPctToColour(pct)
     return pct == 1 and "71DE73" or pct < 0.33 and "F27C7C" or pct < 0.66 and "EDE858" or "CCF048"
 end

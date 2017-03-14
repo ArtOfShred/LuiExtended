@@ -37,18 +37,18 @@ local uiGems   = {}
 local uiTrophy = {}
 
 local uiLatency = {
-    colour = {
-        [1] = { ping = 50, colour = colors.WHITE },
-        [2] = { ping = 99, colour = colors.YELLOW },
-        [3] = {            colour = colors.RED },
+    color = {
+        [1] = { ping = 50, color = colors.WHITE },
+        [2] = { ping = 99, color = colors.YELLOW },
+        [3] = {            color = colors.RED },
     },
 }
 
 local uiFps = {
-    colour = {
-        [1] = { fps = 25, colour = colors.RED },
-        [2] = { fps = 55, colour = colors.YELLOW },
-        [3] = {           colour = colors.GREEN },
+    color = {
+        [1] = { fps = 25, color = colors.RED },
+        [2] = { fps = 55, color = colors.YELLOW },
+        [3] = {           color = colors.GREEN },
     },
 }
 
@@ -57,27 +57,27 @@ local uiFeedTimer = {
 }
 
 local uiArmour = {
-    colour = {
-        [1] = { dura = 50, colour = colors.RED,    iconcolour = colors.RED },
-        [2] = { dura = 80, colour = colors.YELLOW, iconcolour = colors.YELLOW },
-        [2] = { dura = 95, colour = colors.GREEN,  iconcolour = colors.WHITE },
-        [3] = {            colour = colors.WHITE,  iconcolour = colors.WHITE },
+    color = {
+        [1] = { dura = 50, color = colors.RED,    iconcolour = colors.RED },
+        [2] = { dura = 80, color = colors.YELLOW, iconcolour = colors.YELLOW },
+        [2] = { dura = 95, color = colors.GREEN,  iconcolour = colors.WHITE },
+        [3] = {            color = colors.WHITE,  iconcolour = colors.WHITE },
     },
 }
 
 local uiWeapons = {
-    colour = {
-        [1] = { charges = 5,  colour = colors.RED },
-        [2] = { charges = 33, colour = colors.YELLOW },
-        [3] = {               colour = colors.WHITE },
+    color = {
+        [1] = { charges = 5,  color = colors.RED },
+        [2] = { charges = 33, color = colors.YELLOW },
+        [3] = {               color = colors.WHITE },
     },
 }
 
 local uiBags = {
-    colour = {
-        [1] = { fill = 50, colour = colors.WHITE },
-        [2] = { fill = 90, colour = colors.YELLOW },
-        [3] = {            colour = colors.RED },
+    color = {
+        [1] = { fill = 50, color = colors.WHITE },
+        [2] = { fill = 90, color = colors.YELLOW },
+        [3] = {            color = colors.RED },
     },
 }
 
@@ -392,17 +392,17 @@ function PNL.DoBagUpdate()
     local bagUsed = GetNumBagUsedSlots( BAG_BACKPACK )
 
     local filledSlotPercentage = ( bagUsed / bagSize ) * 100
-    local colour = uiBags.colour[#uiBags.colour].colour
+    local color = uiBags.color[#uiBags.color].color
     if bagSize - bagUsed > 10 then
-        for i = 1, #uiBags.colour-1 do
-            if filledSlotPercentage < uiBags.colour[i].fill then
-                colour = uiBags.colour[i].colour
+        for i = 1, #uiBags.color-1 do
+            if filledSlotPercentage < uiBags.color[i].fill then
+                color = uiBags.color[i].color
                 break
             end
         end
     end
     uiBags.label:SetText( strfmt( "%d/%d", bagUsed, bagSize ) )
-    uiBags.label:SetColor( colour.r, colour.g, colour.b, 1 )
+    uiBags.label:SetColor( color.r, color.g, color.b, 1 )
 
     -- Update soulgems
     local myLevel = GetUnitEffectiveLevel("player")
@@ -447,35 +447,35 @@ function PNL.OnUpdate01()
 
     -- Update fps
     local fps = GetFramerate()
-    local colour = colors.WHITE
+    local color = colors.WHITE
     if not PNL.SV.DisableInfoColours then
-        colour = uiFps.colour[#uiFps.colour].colour
-        for i = 1, #uiFps.colour-1 do
-            if fps < uiFps.colour[i].fps then
-                colour = uiFps.colour[i].colour
+        color = uiFps.color[#uiFps.color].color
+        for i = 1, #uiFps.color-1 do
+            if fps < uiFps.color[i].fps then
+                color = uiFps.color[i].color
                 break
             end
         end
     end
     uiFps.label:SetText( strfmt( "%.1f fps", fps ) )
-    uiFps.label:SetColor( colour.r, colour.g, colour.b, 1 )
+    uiFps.label:SetColor( color.r, color.g, color.b, 1 )
 end
 
 function PNL.OnUpdate10()
     -- Update latency
     local lat = GetLatency()
-    local colour = colors.WHITE
+    local color = colors.WHITE
     if not PNL.SV.DisableInfoColours then
-        colour = uiLatency.colour[#uiLatency.colour].colour
-        for i = 1, #uiLatency.colour-1 do
-            if lat < uiLatency.colour[i].ping then
-                colour = uiLatency.colour[i].colour
+        color = uiLatency.color[#uiLatency.color].color
+        for i = 1, #uiLatency.color-1 do
+            if lat < uiLatency.color[i].ping then
+                color = uiLatency.color[i].color
                 break
             end
         end
     end
     uiLatency.label:SetText( strfmt( "%d ms", lat ) )
-    uiLatency.label:SetColor( colour.r, colour.g, colour.b, 1 )
+    uiLatency.label:SetColor( color.r, color.g, color.b, 1 )
 end
 
 function PNL.OnUpdate60()
@@ -513,17 +513,17 @@ function PNL.OnUpdate60()
             end
         end
         local duraPercentage = ( slotCount == 0 ) and 0 or duraSum / slotCount
-        local colour = uiArmour.colour[#uiArmour.colour].colour
-        local iconcolour = uiArmour.colour[#uiArmour.colour].iconcolour
-        for i = 1, #uiArmour.colour-1 do
-            if duraPercentage < uiArmour.colour[i].dura then
-                colour = uiArmour.colour[i].colour
-                iconcolour = uiArmour.colour[i].iconcolour
+        local color = uiArmour.color[#uiArmour.color].color
+        local iconcolour = uiArmour.color[#uiArmour.color].iconcolour
+        for i = 1, #uiArmour.color-1 do
+            if duraPercentage < uiArmour.color[i].dura then
+                color = uiArmour.color[i].color
+                iconcolour = uiArmour.color[i].iconcolour
                 break
             end
         end
         uiArmour.label:SetText( strfmt( "%d%%", duraPercentage ) )
-        uiArmour.label:SetColor( colour.r, colour.g, colour.b, 1 )
+        uiArmour.label:SetColor( color.r, color.g, color.b, 1 )
         uiArmour.icon:SetColor( iconcolour.r, iconcolour.g, iconcolour.b, 1 )
     end
 
@@ -531,18 +531,18 @@ function PNL.OnUpdate60()
     if not PNL.SV.HideWeapons then
         for _, icon in pairs( { uiWeapons.main, uiWeapons.swap } ) do
             local charges, maxCharges = GetChargeInfoForItem( BAG_WORN, icon.slotIndex)
-            local colour = colors.GRAY
+            local color = colors.GRAY
             if maxCharges > 0 then
-                colour = uiWeapons.colour[#uiWeapons.colour].colour
+                color = uiWeapons.color[#uiWeapons.color].color
                 local chargesPercentage = 100 * charges / maxCharges
-                for i = 1, #uiWeapons.colour-1 do
-                    if chargesPercentage < uiWeapons.colour[i].charges then
-                        colour = uiWeapons.colour[i].colour
+                for i = 1, #uiWeapons.color-1 do
+                    if chargesPercentage < uiWeapons.color[i].charges then
+                        color = uiWeapons.color[i].color
                         break
                     end
                 end
             end
-            icon:SetColor( colour.r, colour.g, colour.b, 1 )
+            icon:SetColor( color.r, color.g, color.b, 1 )
         end
     end
 
