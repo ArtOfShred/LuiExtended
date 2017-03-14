@@ -1,4 +1,4 @@
--- Keybindings
+-- bindings.xml
 ZO_CreateStringId("SI_BINDING_NAME_LUIE_DISPLAY_DAMAGE_METER",          "Display Damage Meter")
 ZO_CreateStringId("SI_BINDING_NAME_LUIE_DISPLAY_DAMAGE_LOG",            "Display Damage Log")
 ZO_CreateStringId("SI_BINDING_NAME_LUIE_POST_DAMAGE_RESULTS",           "Post Damage Results")
