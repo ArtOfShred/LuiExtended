@@ -3262,15 +3262,17 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.CustomSmoothBar,
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Custom Unit Frames (Player, Target)
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "header",
-        name = "Custom Unit Frames (Player, Target)",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_HEADER),
         width = "full",
     }
+    -- Enable LUIE PLAYER frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Enable This Addon PLAYER frame",
-        tooltip = "Create custom Player unit frames.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_PLAYER),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_PLAYER_TOOLTIP),
         getFunc = function() return LUIE.UnitFrames.SV.CustomFramesPlayer end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFramesPlayer = value end,
         width = "full",
@@ -3278,10 +3280,11 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Enable LUIE Target frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Enable This Addon TARGET frame",
-        tooltip = "Create custom Target unit frames.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_TARGET),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_TARGET_TOOLTIP),
         getFunc = function() return LUIE.UnitFrames.SV.CustomFramesTarget end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFramesTarget = value end,
         width = "full",
@@ -3289,9 +3292,10 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Player Bars Width
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Player Bars Width",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_WIDTH),
         min = 200, max = 500, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarWidth end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarWidth = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3299,9 +3303,10 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.PlayerBarWidth,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Player Health Bar Height
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Player Health Bar Height",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_HP_HIGHT),
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarHeightHealth end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarHeightHealth = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3309,9 +3314,10 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.PlayerBarHeightHealth,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Player Magicka Bar Height
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Player Magicka Bar Height",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_HIGHT),
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarHeightMagicka end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarHeightMagicka = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3319,9 +3325,10 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.PlayerBarHeightMagicka,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Player Stamina Bar Height
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Player Stamina Bar Height",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_HIGHT),
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarHeightStamina end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarHeightStamina = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -3329,10 +3336,11 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.PlayerBarHeightStamina,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Hide Player Magicka Bar Label
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Hide Player Magicka Bar Label",
-        tooltip = "Hide just the label on the Player Magicka Bar",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL_TOOLTIP),
         getFunc = function() return LUIE.UnitFrames.SV.HideLabelMagicka end,
         setFunc = function(value) LUIE.UnitFrames.SV.HideLabelMagicka = value LUIE.UnitFrames.SV.HideBarMagicka = false end,
         width = "full",
@@ -3340,10 +3348,11 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    -- Hide Player Magicka Bar
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Hide Player Magicka Bar",
-        tooltip = "Completely hide the Player Magicka Bar",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR_TOOLTIP),
         getFunc = function() return LUIE.UnitFrames.SV.HideBarMagicka end,
         setFunc = function(value) LUIE.UnitFrames.SV.HideBarMagicka = value end,
         width = "full",
