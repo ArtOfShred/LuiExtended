@@ -3164,28 +3164,6 @@ function LUIE_CreateSettings()
         default = { r=LUIE.UnitFrames.D.CustomColourStamina[1], g=LUIE.UnitFrames.D.CustomColourStamina[2], b=LUIE.UnitFrames.D.CustomColourStamina[3] },
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
-    -- Custom Unit Frames Group Color Player Role
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYROLE),
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYROLE_TP),
-        getFunc = function() return LUIE.UnitFrames.SV.ColorRoleGroup end,
-        setFunc = function(value) LUIE.UnitFrames.SV.ColorRoleGroup = value LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
-        width = "full",
-        default = LUIE.UnitFrames.D.ColorRoleGroup,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
-    }
-    -- Custom Unit Frames Raid Color Player Role
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYROLE),
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYROLE_TP),
-        getFunc = function() return LUIE.UnitFrames.SV.ColorRoleRaid end,
-        setFunc = function(value) LUIE.UnitFrames.SV.ColorRoleRaid = value LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
-        width = "full",
-        default = LUIE.UnitFrames.D.ColorRoleRaid,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
-    }
     -- Custom Unit Frames DPS Role Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
@@ -3336,18 +3314,6 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.PlayerBarHeightStamina,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
-    -- Hide Player Magicka Bar Label
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL),
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL_TP),
-        getFunc = function() return LUIE.UnitFrames.SV.HideLabelMagicka end,
-        setFunc = function(value) LUIE.UnitFrames.SV.HideLabelMagicka = value LUIE.UnitFrames.SV.HideBarMagicka = false end,
-        width = "full",
-        default = LUIE.UnitFrames.D.HideLabelMagicka,
-        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
-    }
     -- Hide Player Magicka Bar
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
@@ -3359,6 +3325,18 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.HideBarMagicka,
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.HideLabelMagicka ) end,
+    }
+    -- Hide Player Magicka Bar Label
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL_TP),
+        getFunc = function() return LUIE.UnitFrames.SV.HideLabelMagicka end,
+        setFunc = function(value) LUIE.UnitFrames.SV.HideLabelMagicka = value LUIE.UnitFrames.SV.HideBarMagicka = false end,
+        width = "full",
+        default = LUIE.UnitFrames.D.HideLabelMagicka,
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
     -- Hide Player Stamina Bar Label
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -3660,6 +3638,17 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.RoleIconSmallGroup,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
     }
+    -- Custom Unit Frames Group Color Player Role
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYROLE),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYROLE_TP),
+        getFunc = function() return LUIE.UnitFrames.SV.ColorRoleGroup end,
+        setFunc = function(value) LUIE.UnitFrames.SV.ColorRoleGroup = value LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
+        width = "full",
+        default = LUIE.UnitFrames.D.ColorRoleGroup,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
+    }
     -- Custom Unit Frames (Raid)
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "header",
@@ -3755,6 +3744,17 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.RoleIconRaid  = value LUIE.UnitFrames.CustomFramesApplyLayoutRaid() end,
         width = "full",
         default = LUIE.UnitFrames.D.RoleIconRaid,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
+    }
+    -- Custom Unit Frames Raid Color Player Role
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYROLE),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYROLE_TP),
+        getFunc = function() return LUIE.UnitFrames.SV.ColorRoleRaid end,
+        setFunc = function(value) LUIE.UnitFrames.SV.ColorRoleRaid = value LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
+        width = "full",
+        default = LUIE.UnitFrames.D.ColorRoleRaid,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
     }
     -- Custom Unit Frames (Boss)
