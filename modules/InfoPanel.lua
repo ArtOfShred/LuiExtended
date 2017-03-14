@@ -133,7 +133,7 @@ local function CreateUIControls()
 
     uiFeedTimer.control = UI.Control( uiBotRow, nil, {84,20}, false )
     uiFeedTimer.icon = UI.Texture( uiFeedTimer.control, {LEFT,LEFT}, {28,28}, "/esoui/art/mounts/tabicon_mounts_up.dds", nil, false )
-    uiFeedTimer.label = UI.Label( uiFeedTimer.control, {LEFT,RIGHT,0,0,uiFeedTimer.icon}, {56,20}, {0,1}, g_infoPanelFont, "Feed Now", false )
+    uiFeedTimer.label = UI.Label( uiFeedTimer.control, {LEFT,RIGHT,0,0,uiFeedTimer.icon}, {56,20}, {0,1}, g_infoPanelFont, GetString(SI_LUIE_IP_FEEDNOW), false )
     --uiFeedTimer.bg = UI.Backdrop( uiFeedTimer.control, "fill", nil, nil, nil, false )
 
     uiArmour.control = UI.Control( uiBotRow, nil, {55,20}, false )
@@ -482,12 +482,12 @@ function PNL.OnUpdate60()
     -- Update mountfeedtimer
     if not PNL.SV.HideMountFeed and not uiFeedTimer.hideLocally then
         local mountFeedTimer, mountFeedTotalTime = GetTimeUntilCanBeTrained()
-        local mountFeedMessage = "Maxed"
+        local mountFeedMessage = GetString(SI_LUIE_IP_MAXED)
         if ( mountFeedTimer ~= nil ) then
             if ( mountFeedTimer == 0 ) then
                 local inventoryBonus, maxInventoryBonus, staminaBonus, maxStaminaBonus, speedBonus, maxSpeedBonus = GetRidingStats()
                 if inventoryBonus ~= maxInventoryBonus or staminaBonus ~= maxStaminaBonus or speedBonus ~= maxSpeedBonus then
-                    mountFeedMessage = "Feed now"
+                    mountFeedMessage = GetString(SI_LUIE_IP_FEEDNOW)
                 else
                     uiFeedTimer.hideLocally = true
                     PNL.RearrangePanel()

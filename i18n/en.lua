@@ -30,6 +30,10 @@ ZO_CreateStringId("SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME",              "You mus
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFG",           "You must be in an LFG group to do that.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NONAME",           "You must enter the name of a party member to initiate a vote to remove.")
 
+-- InfoPanel.lua
+ZO_CreateStringId("SI_LUIE_IP_FEEDNOW",                                 "Feed Now")
+ZO_CreateStringId("SI_LUIE_IP_MAXED",                                   "Maxed")
+
 -- ChatAnnouncements.lua
 ZO_CreateStringId("SI_LUIE_CA_DEBUG_MSG_CURRENCY",                      "Currency Change Reason <<1>> Triggered - Please post on the LUI Extended comments section on ESOUI.com describing what caused this message. Thanks!")
 ZO_CreateStringId("SI_LUIE_CA_DEFAULTVARS_CURRENCYTOTALMESSAGE",        "[New Total]")
