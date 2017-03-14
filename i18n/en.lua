@@ -610,7 +610,7 @@ ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_FONT_SIZE_TOOLTIP",           "Font Si
 ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_FONT_TOOLTIP",                "Font to display all labels on default frames.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_GROUPSMALL",                  "Default Small GROUP Frame")
 ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_HEADER",                      "Default Unit Frames")
-ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_INCTRANSP",                   "In-Combat bars transparency")
+ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_INCTRANS",                    "In-Combat bars transparency")
 ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_INCTRANS_TOOLTIP",            "Change the value of transparency of default unit frames when in combat. Default UI makes frames fully visible, this value is 100.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_LABEL",                       "Format label text")
 ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_LABEL_COLOR",                 "Color of text labels")
