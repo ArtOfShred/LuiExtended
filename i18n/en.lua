@@ -1,3 +1,9 @@
+-- Keybindings
+ZO_CreateStringId("SI_BINDING_NAME_LUIE_DISPLAY_DAMAGE_METER",          "Display Damage Meter")
+ZO_CreateStringId("SI_BINDING_NAME_LUIE_DISPLAY_DAMAGE_LOG",            "Display Damage Log")
+ZO_CreateStringId("SI_BINDING_NAME_LUIE_POST_DAMAGE_RESULTS",           "Post Damage Results")
+ZO_CreateStringId("SI_BINDING_NAME_LUIE_POST_HEALING_RESULTS",          "Post Healing Results")
+
 -- LuiExtended.lua
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_DISBAND_FAILED_LFG_ACTIVITY",      "You cannot disband an LFG group.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME",             "You must enter the account name or character name of a player to add to friends.")

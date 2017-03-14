@@ -51,11 +51,6 @@ local g_CombatLogActivated = false
 
 local fontPanelLabel = '/LuiExtended/media/fonts/fontin_sans_r.otf|14|soft-shadow-thin'
 
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_DISPLAY_DAMAGE_METER", "Display Damage Meter")
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_DISPLAY_DAMAGE_LOG", "Display Damage Log")
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_POST_DAMAGE_RESULTS", "Post Damage Results")
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_POST_HEALING_RESULTS", "Post Healing Results")
-
 function DM.Initialize( enabled )
     -- load settings
     DM.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, 'DamageMeter', DM.D )
