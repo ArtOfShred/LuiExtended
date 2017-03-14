@@ -2833,13 +2833,13 @@ function LUIE_CreateSettings()
     -- Default Frames header
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "header",
-        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_HEADER),
+        name = GetString(SI_LUIE_LAM_UF_DFRAMES_HEADER),
         width = "full",
     }
     -- Default PLAYER frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_PLAYER),
+        name = GetString(SI_LUIE_LAM_UF_DFRAMES_PLAYER),
         choices = LUIE.UnitFrames.GetDefaultFramesOptions('Player'),
         getFunc = function() return LUIE.UnitFrames.GetDefaultFramesSetting('Player') end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Player', value) end,
@@ -2851,7 +2851,7 @@ function LUIE_CreateSettings()
     -- Default TARGET frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_TARGET),
+        name = GetString(SI_LUIE_LAM_UF_DFRAMES_TARGET),
         choices = LUIE.UnitFrames.GetDefaultFramesOptions('Target'),
         getFunc = function() return LUIE.UnitFrames.GetDefaultFramesSetting('Target') end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Target', value) end,
@@ -2863,7 +2863,7 @@ function LUIE_CreateSettings()
     -- Default small GROUP frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_GROUPSMALL),
+        name = GetString(SI_LUIE_LAM_UF_DFRAMES_GROUPSMALL),
         choices = LUIE.UnitFrames.GetDefaultFramesOptions('Group'),
         getFunc = function() return LUIE.UnitFrames.GetDefaultFramesSetting('Group') end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesSetting('Group', value) end,
@@ -2875,8 +2875,8 @@ function LUIE_CreateSettings()
     -- Reposition default player bars
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_REPOSITION),
-        tooltip = GetString(SI_LUIE_LAM_UF_DEFFRAMES_REPOSIT_TOOLTIP),
+        name = GetString(SI_LUIE_LAM_UF_DFRAMES_REPOSIT),
+        tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_REPOSIT_TOOLTIP),
         getFunc = function() return LUIE.UnitFrames.SV.RepositionFrames end,
         setFunc = function(value) LUIE.UnitFrames.SV.RepositionFrames = value end,
         width = "full",
@@ -2887,8 +2887,8 @@ function LUIE_CreateSettings()
     -- Format label text
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_LABEL),
-        tooltip = GetString(SI_LUIE_LAM_UF_DEFFRAMES_LABEL_TOOLTIP),
+        name = GetString(SI_LUIE_LAM_UF_DFRAMES_LABEL),
+        tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_LABEL_TOOLTIP),
         choices = formatOptions,
         getFunc = function() return LUIE.UnitFrames.SV.Format end,
         setFunc = function(var) LUIE.UnitFrames.SV.Format = var end,
@@ -2899,8 +2899,8 @@ function LUIE_CreateSettings()
     -- Out-of-Combat bars transparency
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_OOCTRANS),
-        tooltip = GetString(SI_LUIE_LAM_UF_DEFFRAMES_OOCTRANS_TOOLTIP),
+        name = GetString(SI_LUIE_LAM_UF_DFRAMES_OOCTRANS),
+        tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_OOCTRANS_TOOLTIP),
         min = 0, max = 100, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.DefaultOocTransparency end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesTransparency(value, nil) end,
@@ -2911,8 +2911,8 @@ function LUIE_CreateSettings()
     -- In-Combat bars transparency
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_INCTRANS),
-        tooltip = GetString(SI_LUIE_LAM_UF_DEFFRAMES_INCTRANS_TOOLTIP),
+        name = GetString(SI_LUIE_LAM_UF_DFRAMES_INCTRANS),
+        tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_INCTRANS_TOOLTIP),
         min = 0, max = 100, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.DefaultIncTransparency end,
         setFunc = function(value) LUIE.UnitFrames.SetDefaultFramesTransparency(nil, value) end,
@@ -2924,7 +2924,7 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = GetString(SI_LUIE_LAM_FONT),
-        tooltip = GetString(SI_LUIE_LAM_UF_DEFFRAMES_FONT_TOOLTIP),
+        tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_FONT_TOOLTIP),
         choices = FontsList,
         sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.DefaultFontFace end,
@@ -2937,7 +2937,7 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = GetString(SI_LUIE_LAM_FONT_SIZE),
-        tooltip = GetString(SI_LUIE_LAM_UF_DEFFRAMES_FONT_SIZE_TOOLTIP),
+        tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_FONT_SIZE_TOOLTIP),
         min = 10, max = 30, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.DefaultFontSize end,
         setFunc = function(value) LUIE.UnitFrames.SV.DefaultFontSize = value LUIE.UnitFrames.DefaultFramesApplyFont() end,
@@ -2960,52 +2960,57 @@ function LUIE_CreateSettings()
     -- Color of text labels
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = GetString(SI_LUIE_LAM_UF_DEFFRAMES_LABEL_COLOR),
+        name = GetString(SI_LUIE_LAM_UF_DFRAMES_LABEL_COLOR),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.DefaultTextColour) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.DefaultTextColour={r,g,b} LUIE.UnitFrames.DefaultFramesApplyColour() end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.DefaultTextColour[1], g=LUIE.UnitFrames.D.DefaultTextColour[2], b=LUIE.UnitFrames.D.DefaultTextColour[3] },
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Target class icon
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Target class icon",
-        tooltip = "Display icon for target player class.",
+        name = GetString(SI_LUIE_LAM_UF_TARGET_ICON_CLASS),
+        tooltip = GetString(SI_LUIE_LAM_UF_TARGET_ICON_CLASS_TOOLTIP),
         getFunc = function() return LUIE.UnitFrames.SV.TargetShowClass end,
         setFunc = function(value) LUIE.UnitFrames.SV.TargetShowClass = value end,
         width = "full",
         default = LUIE.UnitFrames.D.TargetShowClass,
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Target ignore/friend/guild icon
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Target ignore/friend/guild icon",
-        tooltip = "Display icon for target player if this player is ignored, or your friend, or in one of your guilds.",
+        name = GetString(SI_LUIE_LAM_UF_TARGET_ICON_GFI),
+        tooltip = GetString(SI_LUIE_LAM_UF_TARGET_ICON_GFI_TOOLTIP),
         getFunc = function() return LUIE.UnitFrames.SV.TargetShowFriend end,
         setFunc = function(value) LUIE.UnitFrames.SV.TargetShowFriend = value end,
         width = "full",
         default = LUIE.UnitFrames.D.TargetShowFriend,
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Colour target name by reaction
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Colour target name by reaction",
-        tooltip = "Change the colour of targets name label according to unit reaction.",
+        name = GetString(SI_LUIE_LAM_UF_TARGET_COLOR_REACTION),
+        tooltip = GetString(SI_LUIE_LAM_UF_TARGET_COLOR_REACTION_TOOLTIP),
         getFunc = function() return LUIE.UnitFrames.SV.TargetColourByReaction end,
         setFunc = LUIE.UnitFrames.TargetColourByReaction,
         width = "full",
         default = LUIE.UnitFrames.D.TargetColourByReaction,
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Custom Unit Frames Header
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "header",
-        name = "Custom Unit Frames",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_HEADER),
         width = "full",
     }
+    -- Custom Unit Frames Unlock
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Unlock Custom Frames",
-        tooltip = "Allow mouse dragging for all unit frames. When frames are unlocked, the target frame is not being hidden and can display outdated information.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_UNLOCK),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_UNLOCK_TOOLTIP),
         getFunc = function() return LUIE.UnitFrames.CustomFramesMovingState end,
         setFunc = LUIE.UnitFrames.CustomFramesSetMovingState,
         width = "half",
@@ -3013,17 +3018,19 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         resetFunc = LUIE.UnitFrames.CustomFramesResetPosition,
     }
+    -- Custom Unit Frames Reset position
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "button",
-        name = "Reset position",
-        tooltip = "This will reset position of Custom Frames into original position.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT_TOOLTIP),
         func = LUIE.UnitFrames.CustomFramesResetPosition,
         width = "half",
     }
+    -- Custom Unit Frames format left label
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = "Format left label text",
-        tooltip = "Format first label for custom attribute bar.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_LEFT),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_LEFT_TOOLTIP),
         choices = formatOptions,
         getFunc = function() return LUIE.UnitFrames.SV.CustomFormatOne end,
         setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatOne = var LUIE.UnitFrames.CustomFramesFormatLabels() end,
@@ -3031,10 +3038,11 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.CustomFormatOne,
     }
+    -- Custom Unit Frames format right label
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = "Format right label text",
-        tooltip = "Format second label for custom attribute bar.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_RIGHT),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_RIGHT_TOOLTIP),
         choices = formatOptions,
         getFunc = function() return LUIE.UnitFrames.SV.CustomFormatTwo end,
         setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatTwo = var LUIE.UnitFrames.CustomFramesFormatLabels() end,
@@ -3042,10 +3050,11 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.CustomFormatTwo,
     }
+    -- Custom Unit Frames Font
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = "Font",
-        tooltip = "Font to display all labels on custom frames.",
+        name = GetString(SI_LUIE_LAM_FONT),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FONT_TOOLTIP),
         choices = FontsList,
         sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.CustomFontFace end,
@@ -3054,10 +3063,11 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.CustomFontFace,
     }
+    -- Custom Unit Frames Font size labels
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Font Size (labels)",
-        tooltip = "Font Size to be used to display unit name, caption, etc: everything not on bars.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_FONT_SIZE_LABELS),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FONT_SIZE_LABELS_TOOLTIP),
         min = 10, max = 30, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.CustomFontOther end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFontOther = value LUIE.UnitFrames.CustomFramesApplyFont() end,
@@ -3065,10 +3075,11 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.CustomFontOther,
     }
+    -- Custom Unit Frames Font size bars
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Font Size (bars)",
-        tooltip = "Font Size to be used on all labels on the bars.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_FONT_SIZE_BARS),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FONT_SIZE_BARS_TOOLTIP),
         min = 10, max = 30, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.CustomFontBars end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomFontBars = value LUIE.UnitFrames.CustomFramesApplyFont() end,
@@ -3076,9 +3087,10 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.CustomFontBars,
     }
+    -- Custom Unit Frames Font style
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = "Font Style",
+        name = GetString(SI_LUIE_LAM_FONT_STYLE),
         choices = styleOptions,
         sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.CustomFontStyle end,
@@ -3087,10 +3099,11 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.CustomFontStyle,
     }
+    -- Custom Unit Frames Texture
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = "Texture",
-        tooltip = "Texture to use on custom frames.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_TEXTURE),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_TEXTURE_TOOLTIP),
         choices = StatusbarTexturesList,
         sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.CustomTexture end,
@@ -3099,10 +3112,11 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.CustomTexture,
     }
+    -- Custom Unit Frames Display HoT / DoT Animations
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Display HoT / DoT Animations",
-        tooltip = "DISABLED: Currently broken",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_HOTDOT),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_HOTDOT_TOOLTIP),
         getFunc = function() return LUIE.UnitFrames.SV.CustomEnableRegen end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomEnableRegen = value end,
         width = "full",
@@ -3110,102 +3124,103 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.UnitFrames.SV.CustomEnableRegen end,
     }
+    -- Custom Unit Frames Health Bar Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = "Health Bar Colour",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_HEALTH),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourHealth) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourHealth={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.CustomColourHealth[1], g=LUIE.UnitFrames.D.CustomColourHealth[2], b=LUIE.UnitFrames.D.CustomColourHealth[3] },
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Custom Unit Frames Shield Bar Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = "Shield Bar Colour",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_SHIELD),
         getFunc = function() return LUIE.UnitFrames.SV.CustomColourShield[1], LUIE.UnitFrames.SV.CustomColourShield[2], LUIE.UnitFrames.SV.CustomColourShield[3]  end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourShield={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.CustomColourShield[1], g=LUIE.UnitFrames.D.CustomColourShield[2], b=LUIE.UnitFrames.D.CustomColourShield[3] },
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Custom Unit Frames Magicka Bar Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = "Magicka Bar Colour",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_MAGICKA),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourMagicka) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourMagicka={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.CustomColourMagicka[1], g=LUIE.UnitFrames.D.CustomColourMagicka[2], b=LUIE.UnitFrames.D.CustomColourMagicka[3] },
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Custom Unit Frames Stamina Bar Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = "Stamina Bar Colour",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_STAMINA),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourStamina) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourStamina={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.CustomColourStamina[1], g=LUIE.UnitFrames.D.CustomColourStamina[2], b=LUIE.UnitFrames.D.CustomColourStamina[3] },
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
-    
-    -----------------------
-    
+    -- Custom Unit Frames Group Color Player Role
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Color Custom Group Frames by Player Role",
-        tooltip = "Colors the custom group frame bars based off player role.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYROLE),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYROLE_TOOLTIP),
         getFunc = function() return LUIE.UnitFrames.SV.ColorRoleGroup end,
         setFunc = function(value) LUIE.UnitFrames.SV.ColorRoleGroup = value LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
         width = "full",
         default = LUIE.UnitFrames.D.ColorRoleGroup,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
     }
+    -- Custom Unit Frames Raid Color Player Role
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Color Custom Raid Frames by Player Role",
-        tooltip = "Colors the custom raid frame bars based off player role.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYROLE),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYROLE_TOOLTIP),
         getFunc = function() return LUIE.UnitFrames.SV.ColorRoleRaid end,
         setFunc = function(value) LUIE.UnitFrames.SV.ColorRoleRaid = value LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
         width = "full",
         default = LUIE.UnitFrames.D.ColorRoleRaid,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
     }
-    
-    -----------------------
-    
+    -- Custom Unit Frames DPS Role Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = "DPS Role Colour",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_DPS),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourDPS) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourDPS={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.CustomColourDPS[1], g=LUIE.UnitFrames.D.CustomColourDPS[2], b=LUIE.UnitFrames.D.CustomColourDPS[3] },
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) and (LUIE.UnitFrames.SV.ColorRoleGroup or LUIE.UnitFrames.SV.ColorRoleRaid) ) end,
     }
+    -- Custom Unit Frames Healer Role Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = "Healer Role Colour",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_HEALER),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourHealer) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourHealer={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.CustomColourHealer[1], g=LUIE.UnitFrames.D.CustomColourHealer[2], b=LUIE.UnitFrames.D.CustomColourHealer[3] },
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) and (LUIE.UnitFrames.SV.ColorRoleGroup or LUIE.UnitFrames.SV.ColorRoleRaid) ) end,
     }
+     -- Custom Unit Frames Tank Role Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = "Tank Role Colour",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_TANK),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourTank) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourTank={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(isMenu) end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.CustomColourTank[1], g=LUIE.UnitFrames.D.CustomColourTank[2], b=LUIE.UnitFrames.D.CustomColourTank[3] },
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) and (LUIE.UnitFrames.SV.ColorRoleGroup or LUIE.UnitFrames.SV.ColorRoleRaid) ) end,
     }
-    
-    -----------------------
-    
+    -- Custom Unit Frames Separate Shield Bar
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Use Separate Shield Bar",
-        tooltip = "Enable this option to make a Shield Bar on Player, Target and Small Group custom frames independent and not overlayed with Health Bar. If you are heavy shield user like many sorcerer players, then you may like this option.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE),
+        tooltip = strformat(GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_TOOLTIP), GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_NOTE)),
         getFunc = function() return LUIE.UnitFrames.SV.CustomShieldBarSeparate end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomShieldBarSeparate = value end,
         width = "full",
@@ -3213,9 +3228,10 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end
     }
+    -- Custom Unit Frames Separate Shield Bar Height
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Separate Shield Bar Height",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_HEIGHT),
         min = 4, max = 12, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.CustomShieldBarHeight end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomShieldBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() LUIE.UnitFrames.CustomFramesApplyLayoutGroup() end,
@@ -3223,10 +3239,11 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.CustomShieldBarHeight,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomShieldBarSeparate ) end,
     }
+    -- Custom Unit Frames Overlay Full Height Shield Bar
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Overlay Full Height Shield Bar",
-        tooltip = "(When Shield bar is NOT separate) Use full-sized shield bar on top of health bar for Player, Target and Small Group custom frames instead of default half-height overlay bar.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_OVERLAY),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_OVERLAY_TOOLTIP),
         getFunc = function() return LUIE.UnitFrames.SV.CustomShieldBarFull end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomShieldBarFull = value end,
         width = "full",
@@ -3234,10 +3251,11 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and not LUIE.UnitFrames.SV.CustomShieldBarSeparate ) end,
     }
+    -- Custom Unit Frames Smooth Bar Transition
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Use Smooth Bar Transition",
-        tooltip = "Use smooth transition on all bars when value get changed. Disabling this option could improve performance a little.",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_SMOOTHBARTRANS),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_SMOOTHBARTRANS_TOOLTIP),
         getFunc = function() return LUIE.UnitFrames.SV.CustomSmoothBar end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomSmoothBar = value end,
         width = "full",
