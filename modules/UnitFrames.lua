@@ -551,10 +551,10 @@ local function CreateCustomFrames()
                 ["name"]        = UI.Label( rhb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, unitTag, false ),
                 ["roleIcon"]    = UI.Texture( rhb, {LEFT,LEFT, 4,0}, {16,16}, nil, 2, false ),
                 ["dead"]        = UI.Label( rhb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "Status", false ),
-                ["leader"]      = UI.Texture( ghb, {LEFT,LEFT, -7,0}, {32,32}, nil, 2, false ),
+                ["leader"]      = UI.Texture( rhb, {LEFT,LEFT, -2,0}, {28,28}, nil, 2, false ),
 
             }
-            UF.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = "Percentage%"
+            UF.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = "Current (Percentage%)"
 
         end
     end
@@ -1796,8 +1796,8 @@ function UF.OnGroupMemberRoleChange(eventCode, unitTag, dps, healer, tank)
     end
 end
 
-function UF.OnGroupMemberChange()
-    UF.CustomFramesApplyColours()
+function UF.OnGroupMemberChange(eventCode, memberName)
+    zo_callLater(UF.CustomFramesApplyColours, 200)
 end
 
 -- Runs on the EVENT_UNIT_DEATH_STATE_CHANGED listener.
@@ -2268,7 +2268,7 @@ function UF.CustomFramesSetMovingState( state )
 end
 
 -- Apply selected colours for all known bars on custom unit frames
-function UF.CustomFramesApplyColours(isMenu)
+function UF.CustomFramesApplyColours(isMenu, isReloadOnly)
     local health    = { UF.SV.CustomColourHealth[1],  UF.SV.CustomColourHealth[2],  UF.SV.CustomColourHealth[3], 0.9 }
     local shield    = { UF.SV.CustomColourShield[1],  UF.SV.CustomColourShield[2],  UF.SV.CustomColourShield[3], 0 } -- .a value will be fixed in the loop
     local magicka   = { UF.SV.CustomColourMagicka[1], UF.SV.CustomColourMagicka[2], UF.SV.CustomColourMagicka[3], 0.9 }
@@ -2901,19 +2901,30 @@ function UF.CustomFramesApplyLayoutRaid()
         end
 
         local unitFrame = UF.CustomFrames["RaidGroup" .. i]
+        local unitTag = GetGroupUnitTagByIndex(i)
 
         unitFrame.control:ClearAnchors()
         unitFrame.control:SetAnchor( TOPLEFT, raid, TOPLEFT, UF.SV.RaidBarWidth*column, UF.SV.RaidBarHeight*(row-1) + (UF.SV.RaidSpacers and spacerHeight*(math.floor((i-1)/4)-math.floor(column*itemsPerColumn/4)) or 0) )
         unitFrame.control:SetDimensions( UF.SV.RaidBarWidth, UF.SV.RaidBarHeight )
 
         if UF.SV.RoleIconRaid then
-            unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-81, UF.SV.RaidBarHeight-2 )
+            unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-111, UF.SV.RaidBarHeight-2 )
             unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
         else
-            unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-64, UF.SV.RaidBarHeight-2 )
+            unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-94, UF.SV.RaidBarHeight-2 )
             unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 5, 0 )
         end
         unitFrame.roleIcon:SetHidden (not UF.SV.RoleIconRaid)
+        
+        if IsUnitGroupLeader(unitTag) then
+            unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-111, UF.SV.RaidBarHeight-2 )
+            unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
+            unitFrame.roleIcon:SetHidden (true)
+            unitFrame.leader:SetTexture(leaderIcons[1])
+        else
+            unitFrame.leader:SetTexture(leaderIcons[0])
+        end
+        
         unitFrame.dead:SetDimensions( 75, UF.SV.RaidBarHeight-2 )
 
         unitFrame[POWERTYPE_HEALTH].label:SetDimensions(UF.SV.RaidBarWidth-50, UF.SV.RaidBarHeight-2)
