@@ -21,7 +21,6 @@ function LUIE_CreateSettings()
         table.insert(StatusbarTexturesList, key)
     end
 
-    local styleOptions                  = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" }
     local nameDisplayOptions            = { "@UserID", "Character Name", "Character Name @UserID" }
     local nameDisplayOptionsKeys        = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
     local chatnameDisplayOptions        = { "@UserID", "Character Name", "Character Name @UserID" }
@@ -36,8 +35,6 @@ function LUIE_CreateSettings()
     local guildrankDisplayOptionsKeys   = { ["Self Only"] = 1, ["Self + All w/ Permissions"] = 2, ["Display All Rank Changes"] = 3 }
     local rotationOptions               = { "Horizontal", "Vertical" }
     local rotationOptionsKeys           = { ["Horizontal"] = 1, ["Vertical"] = 2 }
-    local hAlignOptions                 = { "Left", "Centered", "Right" }
-    local vAlignOptions                 = { "Top", "Middle", "Bottom" }
 
     local formatOptions = {
         "Nothing",
@@ -814,7 +811,7 @@ function LUIE_CreateSettings()
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_BUFF_HORIZONTICONALIGN),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HORIZONTICONALIGN_TP),
-                choices = hAlignOptions,
+                choices = { "Left", "Centered", "Right" },
                 getFunc = function() return LUIE.SpellCastBuffs.SV.Alignment end,
                 setFunc = LUIE.SpellCastBuffs.SetIconsAlignment,
                 width = "full",
@@ -897,7 +894,7 @@ function LUIE_CreateSettings()
             {
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_FONT_STYLE),
-                choices = styleOptions,
+                choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
                 getFunc = function() return LUIE.SpellCastBuffs.SV.BuffFontStyle end,
                 setFunc = function(var) LUIE.SpellCastBuffs.SV.BuffFontStyle = var LUIE.SpellCastBuffs.ApplyFont() end,
@@ -1170,7 +1167,7 @@ function LUIE_CreateSettings()
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VERTALIGNICON),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VERTALIGNICON_TP),
-                choices = vAlignOptions,
+                choices = { "Top", "Middle", "Bottom" },
                 getFunc = function() return LUIE.SpellCastBuffs.SV.AlignmentVert end,
                 setFunc = LUIE.SpellCastBuffs.SetIconsAlignmentVert,
                 width = "full",
@@ -2949,7 +2946,7 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = GetString(SI_LUIE_LAM_FONT_STYLE),
-        choices = styleOptions,
+        choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
         sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.DefaultFontStyle end,
         setFunc = function(var) LUIE.UnitFrames.SV.DefaultFontStyle = var LUIE.UnitFrames.DefaultFramesApplyFont() end,
@@ -3091,7 +3088,7 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = GetString(SI_LUIE_LAM_FONT_STYLE),
-        choices = styleOptions,
+        choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
         sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.CustomFontStyle end,
         setFunc = function(var) LUIE.UnitFrames.SV.CustomFontStyle = var LUIE.UnitFrames.CustomFramesApplyFont() end,
@@ -3899,7 +3896,7 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = "Font Style",
-        choices = styleOptions,
+        choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
         sort = "name-up",
         getFunc = function() return LUIE.SpellCastBuffs.SV.BuffFontStyle end,
         setFunc = function(var) LUIE.SpellCastBuffs.SV.BuffFontStyle = var LUIE.SpellCastBuffs.ApplyFont() end,
