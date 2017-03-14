@@ -1262,7 +1262,7 @@ end
 function CA.VoteNotify(eventCode)
     local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
     if electionType == 2 then -- Ready Check
-        printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_MESSAGE)) -- "Are you ready?"
+        printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_MESSAGE))
     end
 
     if electionType == 3 then -- Vote Kick
@@ -1289,13 +1289,13 @@ function CA.VoteResult(eventCode, electionResult, descriptor)
     local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
     if descriptor == "[ZO_READY_CHECK]" then
         if electionResult == 1 then
-            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED)) -- "Someone in your group is not ready."
+            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED))
         end
         if electionResult == 4 then
-            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_PASSED)) -- "Everyone in your group is ready!"
+            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_PASSED))
         end
         if electionResult == 5 then
-            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED)) -- "Someone in your group is not ready."
+            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED))
         end
     end
     if descriptor == "[ZO_NONE]" then
@@ -2267,7 +2267,7 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
     if UpOrDown > 0 then
         color = ChangeUpColorize
         changetype = ZO_LocalizeDecimalNumber(newWritVouchers - oldWritVouchers)
-        message = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Receieved"
+        message = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
     else
         color = ChangeDownColorize
         changetype = ZO_LocalizeDecimalNumber(oldWritVouchers - newWritVouchers)
@@ -2366,7 +2366,7 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
         local bracket1
         local bracket2
         local icon
-        local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED) -- "Purchased"
+        local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED)
         local skillstring
 
         if source == 2 then
@@ -2443,7 +2443,7 @@ function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previous
         local bracket1
         local bracket2
         local icon
-        local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED) -- "Purchased"
+        local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED)
 
         -- If this isn't a bag upgrade purchase then ignore this event. We have a separate event handling mount space upgrades.
         if currentUpgrade <= previousUpgrade then
@@ -2490,7 +2490,7 @@ function CA.MiscAlertBank(eventCode, previousCapacity, currentCapacity, previous
         local bracket1
         local bracket2
         local icon = ""
-        local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED) -- "Purchased"
+        local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED)
 
         if currentUpgrade < 1 then
             return
@@ -2557,7 +2557,7 @@ function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCu
 
     icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
 
-    local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED) -- "Purchased"
+    local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED)
     if CA.SV.ItemContextToggle then
         logPrefix = ( CA.SV.ItemContextMessage )
     end
@@ -2662,10 +2662,10 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
     local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTED)
 
     if ( isPickpocketLoot ) then
-        logPrefix = GetString(SI_GAMECAMERAACTIONTYPE21) -- "Pickpocket"
+        logPrefix = GetString(SI_GAMECAMERAACTIONTYPE21)
     end
     if ( receivedBy == nil ) then
-        logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Receieved"
+        logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
     end
     if CA.SV.ItemContextToggle then
         logPrefix = ( CA.SV.ItemContextMessage )
@@ -2738,7 +2738,7 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
     local formattedQuantity  = ""
     local formattedTrait     = ""
     local formattedArmorType = ""
-    local formattedStyle = ""
+    local formattedStyle     = ""
     local arrowPointer       = ""
 
     if (receivedBy == "" or receivedBy == "CRAFT") then
@@ -3033,7 +3033,7 @@ function CA.OnTradeSuccess(eventCode)
     g_comboString = ""
 
     if CA.SV.MiscTrade then
-        printToChat(GetString(SI_TRADE_COMPLETE)) -- "Trade complete."
+        printToChat(GetString(SI_TRADE_COMPLETE))
     end
     if CA.SV.MiscTrade and g_tradeString1 ~= "" then
         printToChat(g_tradeString1)
@@ -3126,7 +3126,7 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
     g_comboString = ""
     local NumMails = 0
     local gainorloss = 1
-    local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Received"
+    local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
     local receivedBy = ""
     if CA.SV.ItemContextToggle then
         logPrefix = ( CA.SV.ItemContextMessage )
@@ -3261,11 +3261,11 @@ function CA.LevelUpdateHelper()
             CurrentLevel = 10  -- Probably don't really need this here, but it's not going to hurt.
         end
         XPLevel = GetNumChampionXPInChampionPoint(CurrentLevel)
-        LevelContext = GetString(SI_MAIN_MENU_CHAMPION) -- "Champion"
+        LevelContext = GetString(SI_MAIN_MENU_CHAMPION)
     else
         CurrentLevel = GetUnitLevel ("player")
         XPLevel = GetNumExperiencePointsInLevel(CurrentLevel)
-        LevelContext = GetString(SI_EXPERIENCE_LEVEL_LABEL) -- "Level"
+        LevelContext = GetString(SI_EXPERIENCE_LEVEL_LABEL)
     end
 end
 
@@ -3463,11 +3463,11 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                 CurrentLevel = 10 -- Very important, if this player has never hit Champion level before, set the minimum possible value when hitting level 50.
             end
             XPLevel = GetNumChampionXPInChampionPoint(CurrentLevel)
-            LevelContext = GetString(SI_MAIN_MENU_CHAMPION) -- "Champion"
+            LevelContext = GetString(SI_MAIN_MENU_CHAMPION)
         else
             CurrentLevel = CurrentLevel + 1
             XPLevel = GetNumExperiencePointsInLevel(CurrentLevel)
-            LevelContext = GetString(SI_EXPERIENCE_LEVEL_LABEL) -- "Level"
+            LevelContext = GetString(SI_EXPERIENCE_LEVEL_LABEL)
         end
     end
 
@@ -3698,7 +3698,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                         if CA.SV.ExperienceColorLevel then
                             g_totalLevelAdjust = g_XP_BAR_COLORS:Colorize( strformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL)) )
                         else
-                            g_totalLevelAdjust = strformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL)) -- "Level"
+                            g_totalLevelAdjust = strformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL))
                         end
                     end
                 end
@@ -3866,24 +3866,24 @@ end
 
 function CA.GuildBankItemAdded(eventCode, slotId)
     CA.LogItem(g_guildBankCarryLogPrefix, g_guildBankCarryIcon, g_guildBankCarryItemLink, g_guildBankCarryItemType, g_guildBankCarryStackCount or 1, g_guildBankCarryReceivedBy, g_guildBankCarryGainorloss)
-    g_guildBankCarryLogPrefix = ""
-    g_guildBankCarryIcon = ""
-    g_guildBankCarryItemLink = ""
-    g_guildBankCarryStackCount = 1
-    g_guildBankCarryReceivedBy = ""
-    g_guildBankCarryGainorloss = ""
-    g_guildBankCarryItemType = ""
+    g_guildBankCarryLogPrefix   = ""
+    g_guildBankCarryIcon        = ""
+    g_guildBankCarryItemLink    = ""
+    g_guildBankCarryStackCount  = 1
+    g_guildBankCarryReceivedBy  = ""
+    g_guildBankCarryGainorloss  = ""
+    g_guildBankCarryItemType    = ""
 end
 
 function CA.GuildBankItemRemoved(eventCode, slotId)
     CA.LogItem(g_guildBankCarryLogPrefix, g_guildBankCarryIcon, g_guildBankCarryItemLink, g_guildBankCarryItemType, g_guildBankCarryStackCount or 1, g_guildBankCarryReceivedBy, g_guildBankCarryGainorloss)
-    g_guildBankCarryLogPrefix = ""
-    g_guildBankCarryIcon = ""
-    g_guildBankCarryItemLink = ""
-    g_guildBankCarryStackCount = 1
-    g_guildBankCarryReceivedBy = ""
-    g_guildBankCarryGainorloss = ""
-    g_guildBankCarryItemType = ""
+    g_guildBankCarryLogPrefix   = ""
+    g_guildBankCarryIcon        = ""
+    g_guildBankCarryItemLink    = ""
+    g_guildBankCarryStackCount  = 1
+    g_guildBankCarryReceivedBy  = ""
+    g_guildBankCarryGainorloss  = ""
+    g_guildBankCarryItemType    = ""
 end
 
 function CA.IndexInventory()
@@ -4186,7 +4186,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             or itemType == ITEMTYPE_WEAPON_TRAIT
             or itemType == ITEMTYPE_WOODWORKING_BOOSTER
             or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
-                logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) end -- "Receieved"
+                logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) end
 
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
         elseif g_inventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
@@ -4228,7 +4228,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
                 or itemType == ITEMTYPE_WEAPON_TRAIT
                 or itemType == ITEMTYPE_WOODWORKING_BOOSTER
                 or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
-                    logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) end -- "Receieved"
+                    logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) end
 
                local icon, stack = GetItemInfo(bagId, slotId)
                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
@@ -4370,7 +4370,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
         icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
         local receivedBy = "CRAFT"
         local gainorloss = 1
-        local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Received"
+        local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
         local stack = stackCountChange
         local itemType = GetItemLinkItemType(itemlink)
 
@@ -4629,7 +4629,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
     if bagId == BAG_VIRTUAL then
         local receivedBy = ""
         local gainorloss = 1
-        local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) -- "Received"
+        local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
         local itemlink = CA.GetItemLinkFromItemId(slotId)
         local icon = GetItemLinkInfo(itemlink)
         local seticon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
@@ -4989,33 +4989,33 @@ function CA.DuelStarted(eventCode)
 end
 
 function CA.DisguiseState(eventCode, unitTag, disguiseState)
-        if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_DANGER then
-            printToChat("Danger! Sentry nearby!")
-        end
-        
-        if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_SUSPICIOUS then
-            printToChat("Danger! You are arousing suspicion!")
-        end
+    if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_DANGER then
+        printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER))
+    end
+       
+    if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_SUSPICIOUS then
+        printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS))
+    end
 
-        -- If we're still disguised and g_disguiseState is true then don't waste resources and end the function
-        if g_disguiseState == 1 and ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
-            return
-        end
+    -- If we're still disguised and g_disguiseState is true then don't waste resources and end the function
+    if g_disguiseState == 1 and ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
+        return
+    end
 
-        if g_disguiseState == 1 and (disguiseState == DISGUISE_STATE_NONE) then
-            printToChat ("You are no longer disguised " .. E.DisguiseIcons[g_currentDisguise].description)
-        end
+    if g_disguiseState == 1 and (disguiseState == DISGUISE_STATE_NONE) then
+        printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description))
+    end
 
-        if g_disguiseState == 0 and ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
-            g_currentDisguise = GetItemId(0, 10) or 0
-            printToChat ("You are now disguised " .. E.DisguiseIcons[g_currentDisguise].description)
-        end
+    if g_disguiseState == 0 and ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
+        g_currentDisguise = GetItemId(0, 10) or 0
+        printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))
+    end
 
-        g_disguiseState = GetUnitDisguiseState("player")
-        
-        if g_disguiseState > 0 then
-            g_disguiseState = 1
-        end
+    g_disguiseState = GetUnitDisguiseState("player")
+      
+    if g_disguiseState > 0 then
+        g_disguiseState = 1
+    end
 end
 
 function CA.MaraOffer(eventCode, targetCharacterName, isSender, targetDisplayName)
