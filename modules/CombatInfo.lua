@@ -82,7 +82,7 @@ local g_scrollingRadius    = 1000
 
 -- EXP
 local g_combatXP                 = 0
-local g_lastExp                  = 0 
+local g_lastExp                  = 0
 local g_useChampionXP            = false
 local g_cxpEnlightenedPool       = 0
 local g_cxpEnlightenedMultiplier = nil

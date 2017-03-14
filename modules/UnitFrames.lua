@@ -374,13 +374,13 @@ local function CreateCustomFrames()
             ["buffs"]       = UI.Control( playerTlw, nil, nil, false ),
             ["debuffs"]     = UI.Control( playerTlw, {BOTTOM,TOP,0,-2,topInfo}, nil, false ),
         }
-        
+
         -- If Stamina Label is hidden in menu options, hide the stamina bar labels
-        if UF.SV.HideLabelStamina then 
+        if UF.SV.HideLabelStamina then
             UF.CustomFrames.player[POWERTYPE_STAMINA].labelOne:SetHidden(true)
             UF.CustomFrames.player[POWERTYPE_STAMINA].labelTwo:SetHidden(true)
         end
-        
+
         -- If Magicka Label is hidden in menu options, hide the magicka bar labels
         if UF.SV.HideLabelMagicka then
             UF.CustomFrames.player[POWERTYPE_MAGICKA].labelOne:SetHidden(true)
@@ -522,7 +522,7 @@ local function CreateCustomFrames()
                 ["dead"]        = UI.Label( ghb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "Status", false ),
                 ["leader"]      = UI.Texture( topInfo, {LEFT,LEFT, -7,0}, {32,32}, nil, 2, false ),
             }
-            
+
         end
     end
 
@@ -860,7 +860,7 @@ function UF.Initialize( enabled )
         EVENT_MANAGER:RegisterForEvent(moduleName .. "1", EVENT_GUILD_MEMBER_CHARACTER_UPDATED,    UF.OnGuildMemberAdded )
         EVENT_MANAGER:RegisterForEvent(moduleName .. "2", EVENT_GUILD_MEMBER_CHARACTER_UPDATED,    UF.GuildUpdateGroupFrames )
         EVENT_MANAGER:RegisterForEvent(moduleName .. "1", EVENT_GUILD_MEMBER_REMOVED,  UF.OnGuildMemberRemoved )
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "2", EVENT_GUILD_MEMBER_REMOVED,  UF.GuildUpdateGroupFrames )       
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "2", EVENT_GUILD_MEMBER_REMOVED,  UF.GuildUpdateGroupFrames )
     end
 
     -- New AvA frames
@@ -982,7 +982,7 @@ function UF.OnPlayerActivated(eventCode)
 
     UF.OnPlayerCombatState(EVENT_PLAYER_COMBAT_STATE, IsUnitInCombat("player") )
     UF.CustomFramesSetupAlternative()
-    
+
     -- Apply bar colors here, has to be after player init to get group roles
     UF.CustomFramesApplyColours()
 end
@@ -1176,7 +1176,7 @@ end
 function UF.OnReticleTargetChanged(eventCode)
     if DoesUnitExist("reticleover") then
         UF.ReloadValues( "reticleover" )
-        
+
         local isWithinRange = IsUnitInGroupSupportRange("reticleover")
 
         -- Now select appropriate custom colour to target name and (possibly) reticle
@@ -1382,7 +1382,7 @@ function UF.UpdateStaticControls( unitFrame )
     if unitFrame.roleIcon ~= nil then
         local isDps, isHealer, isTank = GetGroupMemberRoles(unitFrame.unitTag)
         local role = 0
-        
+
         if isDps then role = 1 end
         if isHealer then role = 2 end
         if isTank then role = 3 end
@@ -1390,7 +1390,7 @@ function UF.UpdateStaticControls( unitFrame )
         local unitRole = roleIcons[role]
         unitFrame.roleIcon:SetTexture(unitRole)
     end
-    
+
     -- If unitFrame has unit classIcon control
     if unitFrame.classIcon ~= nil then
         local unitDifficulty = GetUnitDifficulty( unitFrame.unitTag )
@@ -2274,7 +2274,7 @@ function UF.CustomFramesApplyColours(isMenu, isReloadOnly)
     local shield    = { UF.SV.CustomColourShield[1],  UF.SV.CustomColourShield[2],  UF.SV.CustomColourShield[3], 0 } -- .a value will be fixed in the loop
     local magicka   = { UF.SV.CustomColourMagicka[1], UF.SV.CustomColourMagicka[2], UF.SV.CustomColourMagicka[3], 0.9 }
     local stamina   = { UF.SV.CustomColourStamina[1], UF.SV.CustomColourStamina[2], UF.SV.CustomColourStamina[3], 0.9 }
-    
+
     local dps       =  { UF.SV.CustomColourDPS[1],    UF.SV.CustomColourDPS[2],     UF.SV.CustomColourDPS[3], 0.9 }
     local healer    =  { UF.SV.CustomColourHealer[1], UF.SV.CustomColourHealer[2],  UF.SV.CustomColourHealer[3], 0.9 }
     local tank      =  { UF.SV.CustomColourTank[1],   UF.SV.CustomColourTank[2],    UF.SV.CustomColourTank[3], 0.9 }
@@ -2283,7 +2283,7 @@ function UF.CustomFramesApplyColours(isMenu, isReloadOnly)
     local shield_bg  = { 0.1*UF.SV.CustomColourShield[1],  0.1*UF.SV.CustomColourShield[2],  0.1*UF.SV.CustomColourShield[3], 0.9 }
     local magicka_bg = { 0.1*UF.SV.CustomColourMagicka[1], 0.1*UF.SV.CustomColourMagicka[2], 0.1*UF.SV.CustomColourMagicka[3], 0.9 }
     local stamina_bg = { 0.1*UF.SV.CustomColourStamina[1], 0.1*UF.SV.CustomColourStamina[2], 0.1*UF.SV.CustomColourStamina[3], 0.9 }
-    
+
     local dps_bg    = { 0.1*UF.SV.CustomColourDPS[1],    0.1*UF.SV.CustomColourDPS[2],    0.1*UF.SV.CustomColourDPS[3], 0.9 }
     local healer_bg = { 0.1*UF.SV.CustomColourHealer[1], 0.1*UF.SV.CustomColourHealer[2], 0.1*UF.SV.CustomColourHealer[3], 0.9 }
     local tank_bg   = { 0.1*UF.SV.CustomColourTank[1],   0.1*UF.SV.CustomColourTank[2],   0.1*UF.SV.CustomColourTank[3], 0.9 }
@@ -2308,9 +2308,9 @@ function UF.CustomFramesApplyColours(isMenu, isReloadOnly)
             end
         end
     end
-    
+
     local groupSize = GetGroupSize()
-    
+
     for _, baseName in pairs( { "SmallGroup", "RaidGroup" } ) do
         shield[4] = ( UF.SV.CustomShieldBarSeparate and not (baseName == "RaidGroup") ) and 0.9 or 0.5
         for i = 1, groupSize do
@@ -2318,10 +2318,10 @@ function UF.CustomFramesApplyColours(isMenu, isReloadOnly)
             if UF.CustomFrames[unitTag] then
                 local defaultUnitTag = GetGroupUnitTagByIndex(i)
                 local isDps, isHealer, isTank = GetGroupMemberRoles(defaultUnitTag)
-                
+
                 local unitFrame = UF.CustomFrames[unitTag]
                 local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
-                
+
                 if (groupSize <= 4 and UF.SV.ColorRoleGroup) or (groupSize > 4 and UF.SV.ColorRoleRaid) then
                     if isDps then
                         thb.bar:SetColor( unpack(dps) )
@@ -2337,7 +2337,7 @@ function UF.CustomFramesApplyColours(isMenu, isReloadOnly)
                     end
                     if not (isDps or isHealer or isTank) then
                         thb.bar:SetColor( unpack(health) )
-                        thb.backdrop:SetCenterColor( unpack(health_bg) ) 
+                        thb.backdrop:SetCenterColor( unpack(health_bg) )
                     end
                 else
                     thb.bar:SetColor( unpack(health) )
@@ -2353,7 +2353,7 @@ function UF.CustomFramesApplyColours(isMenu, isReloadOnly)
             end
         end
     end
-        
+
     -- Player frame also requires setting of magicka and stamina bars
     if UF.CustomFrames.player then
         UF.CustomFrames.player[POWERTYPE_MAGICKA].bar:SetColor( unpack(magicka) )
@@ -2361,7 +2361,7 @@ function UF.CustomFramesApplyColours(isMenu, isReloadOnly)
         UF.CustomFrames.player[POWERTYPE_STAMINA].bar:SetColor( unpack(stamina) )
         UF.CustomFrames.player[POWERTYPE_STAMINA].backdrop:SetCenterColor( unpack(stamina_bg) )
     end
-   
+
 end
 
 function UF.CustomFramesApplyColoursSingle(unitTag)
@@ -2369,7 +2369,7 @@ function UF.CustomFramesApplyColoursSingle(unitTag)
     local shield    = { UF.SV.CustomColourShield[1],  UF.SV.CustomColourShield[2],  UF.SV.CustomColourShield[3], 0 } -- .a value will be fixed in the loop
     local magicka   = { UF.SV.CustomColourMagicka[1], UF.SV.CustomColourMagicka[2], UF.SV.CustomColourMagicka[3], 0.9 }
     local stamina   = { UF.SV.CustomColourStamina[1], UF.SV.CustomColourStamina[2], UF.SV.CustomColourStamina[3], 0.9 }
-    
+
     local dps       =  { UF.SV.CustomColourDPS[1],    UF.SV.CustomColourDPS[2],     UF.SV.CustomColourDPS[3], 0.9 }
     local healer    =  { UF.SV.CustomColourHealer[1], UF.SV.CustomColourHealer[2],  UF.SV.CustomColourHealer[3], 0.9 }
     local tank      =  { UF.SV.CustomColourTank[1],   UF.SV.CustomColourTank[2],    UF.SV.CustomColourTank[3], 0.9 }
@@ -2378,7 +2378,7 @@ function UF.CustomFramesApplyColoursSingle(unitTag)
     local shield_bg  = { 0.1*UF.SV.CustomColourShield[1],  0.1*UF.SV.CustomColourShield[2],  0.1*UF.SV.CustomColourShield[3], 0.9 }
     local magicka_bg = { 0.1*UF.SV.CustomColourMagicka[1], 0.1*UF.SV.CustomColourMagicka[2], 0.1*UF.SV.CustomColourMagicka[3], 0.9 }
     local stamina_bg = { 0.1*UF.SV.CustomColourStamina[1], 0.1*UF.SV.CustomColourStamina[2], 0.1*UF.SV.CustomColourStamina[3], 0.9 }
-    
+
     local dps_bg    = { 0.1*UF.SV.CustomColourDPS[1],    0.1*UF.SV.CustomColourDPS[2],    0.1*UF.SV.CustomColourDPS[3], 0.9 }
     local healer_bg = { 0.1*UF.SV.CustomColourHealer[1], 0.1*UF.SV.CustomColourHealer[2], 0.1*UF.SV.CustomColourHealer[3], 0.9 }
     local tank_bg   = { 0.1*UF.SV.CustomColourTank[1],   0.1*UF.SV.CustomColourTank[2],   0.1*UF.SV.CustomColourTank[3], 0.9 }
@@ -2820,7 +2820,7 @@ function UF.CustomFramesApplyLayoutGroup()
         unitFrame.topInfo:SetWidth( UF.SV.GroupBarWidth-5 )
 
         unitFrame.levelIcon:ClearAnchors()
-        
+
         if IsUnitGroupLeader(unitTag) then
             unitFrame.name:SetDimensions(UF.SV.GroupBarWidth - 137)
             unitFrame.name:SetAnchor ( LEFT, TopInfo, LEFT, 22, 0)
@@ -2913,7 +2913,7 @@ function UF.CustomFramesApplyLayoutRaid()
             unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 5, 0 )
         end
         unitFrame.roleIcon:SetHidden (not UF.SV.RoleIconRaid)
-        
+
         if IsUnitGroupLeader(unitTag) then
             unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-111, UF.SV.RaidBarHeight-2 )
             unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
@@ -2922,7 +2922,7 @@ function UF.CustomFramesApplyLayoutRaid()
         else
             unitFrame.leader:SetTexture(leaderIcons[0])
         end
-        
+
         unitFrame.dead:SetDimensions( 75, UF.SV.RaidBarHeight-2 )
 
         unitFrame[POWERTYPE_HEALTH].label:SetDimensions(UF.SV.RaidBarWidth-50, UF.SV.RaidBarHeight-2)
@@ -3120,7 +3120,7 @@ function UF.GuildUpdateGroupFrames()
             end
         end
     end
-    
+
     zo_callLater(UpdateGuildIcons, 2000)
     zo_callLater(function() UF.ReloadValues("reticleover") end, 2000)
 end

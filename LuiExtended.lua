@@ -400,7 +400,7 @@ function LUIE.SlashDisband()
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_LFG_ACTIVITY))
         return
     end
-    
+
     GroupDisband()
 end
 
@@ -788,7 +788,7 @@ function LUIE.SlashVoteKick(option)
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFG))
         return
     end
-    
+
     -- Check to make sure we're not in LFG
     if not IsInLFGGroup() then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFG))

@@ -4992,7 +4992,7 @@ function CA.DisguiseState(eventCode, unitTag, disguiseState)
     if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_DANGER then
         printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER))
     end
-       
+
     if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_SUSPICIOUS then
         printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS))
     end
@@ -5012,7 +5012,7 @@ function CA.DisguiseState(eventCode, unitTag, disguiseState)
     end
 
     g_disguiseState = GetUnitDisguiseState("player")
-      
+
     if g_disguiseState > 0 then
         g_disguiseState = 1
     end
