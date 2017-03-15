@@ -246,6 +246,7 @@ function CA.Initialize(enabled)
     CA.RegisterMaraEvents()
     CA.RegisterCollectibleEvents()
     CA.RegisterColorEvents()
+    CA.RegisterCrownEvents()
 
 end
 
@@ -5092,4 +5093,64 @@ function CA.NewCollectible(eventCode, collectibleId)
     message = CollectibleColorize:Colorize(strfmt("%s%s %s%s", bracket1, categoryType, GetString(SI_LUIE_CA_PREFIX_MESSAGE_ADDED), bracket2))
 
     printToChat(strfmt("%s%s %s", message, icon, link))
+end
+
+
+--- Crown store test shit
+
+function CA.RegisterCrownEvents()
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ANIMATION_NOTE, CA.Crown1)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CROWN_CRATE_INVENTORY_UPDATED, CA.Crown2)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CROWN_CRATE_QUANTITY_UPDATE, CA.Crown3)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CROWN_CRATE_OPEN_RESPONSE, CA.Crown4)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CROWN_CRATES_SYSTEM_STATE_CHANGED, CA.Crown5)
+end
+
+
+function CA.Crown1(eventCode, animNote)
+    d("CROWN - EVENT ANIMATION NOTE")
+    
+    g_inventoryStacks = {}
+    g_bankStacks = {}
+    CA.IndexInventory() -- Index Inventory
+    CA.IndexBank() -- Index Bank
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateCraft)
+    
+end
+
+function CA.Crown2(eventCode)
+    d("Crown Crate Inventory Updated")
+end
+
+function CA.Crown3(eventCode, crateId, count)
+    d("Crown Crate QUANTITY UPDATE: " .. count .. " --- CrownCrateID: " .. crateId)
+    
+    g_inventoryStacks = {}
+    g_bankStacks = {}
+    CA.IndexInventory() -- Index Inventory
+    CA.IndexBank() -- Index Bank
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateCraft)
+    
+    --zo_callLater(CA.CraftingClose, 1000)
+end
+
+function CA.Crown4(eventCode, crownCrateId, response)
+
+    d("Crown Crate Open Response: " ..response.. " --- CrownCrateID: " .. crownCrateId)
+    
+    g_inventoryStacks = {}
+    g_bankStacks = {}
+    CA.IndexInventory() -- Index Inventory
+    CA.IndexBank() -- Index Bank
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateCraft)
+    
+    --zo_callLater(CA.CraftingClose, 1000)
+    
+end
+
+function CA.Crown5(eventCode, crownCratesSystemState)
+    d("Crown Crate system state change: " .. crownCratesSystemState)
 end

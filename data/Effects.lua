@@ -360,6 +360,10 @@ E.MountIcons = {
     [38] = { name = 'Dro-m\'Athra Senche', icon = 'LuiExtended/media/icons/mounts/mount_dro-mathra_senche.dds' },
     [40] = { name = 'Black Camel of Ill Omen', icon = 'LuiExtended/media/icons/mounts/mount_black_camel_of_ill_omen.dds' },
     [42] = { name = 'Pride-King Lion', icon = 'LuiExtended/media/icons/mounts/mount_pride-king_lion.dds' },
+    [44] = { name = 'Wild Hunt Horse', icon = 'LuiExtended/media/icons/mounts/mount_wild_hunt_horse.dds' },
+    [45] = { name = 'Wild Hunt Senche', icon = 'LuiExtended/media/icons/mounts/mount_wild_hunt_senche.dds' },
+    [46] = { name = 'Wild Hunt Guar', icon = 'LuiExtended/media/icons/mounts/mount_wild_hunt_guar.dds' },
+    [47] = { name = 'Wild Hunt Bear Mount', icon = 'LuiExtended/media/icons/mounts/mount_wild_hunt_bear.dds' },
     [49] = { name = 'Highland Wolf', icon = 'LuiExtended/media/icons/mounts/mount_highland_wolf.dds' },
     [50] = { name = 'Doom Wolf', icon = 'LuiExtended/media/icons/mounts/mount_doom_wolf.dds' },
     [52] = { name = 'Red Pit Wolf', icon = 'LuiExtended/media/icons/mounts/mount_red_pit_wolf.dds' },
@@ -371,6 +375,8 @@ E.MountIcons = {
     [64] = { name = 'Storm Atronach Guar', icon = 'LuiExtended/media/icons/mounts/mount_storm_atronach_guar.dds' },
     [65] = { name = 'Storm Atronach Wolf', icon = 'LuiExtended/media/icons/mounts/mount_storm_atronach_wolf.dds' },
     [66] = { name = 'Black Mane Lion', icon = 'LuiExtended/media/icons/mounts/mount_black_mane_lion.dds' },
+    [67] = { name = 'Wild Hunt Wolf Mount', icon = 'LuiExtended/media/icons/mounts/mount_wild_hunt_wolf.dds' },
+    [68] = { name = 'Wild Hunt Camel', icon = 'LuiExtended/media/icons/mounts/mount_wild_hunt_camel.dds' },
     [71] = { name = 'Alliance War Horse', icon = 'LuiExtended/media/icons/mounts/mount_alliance_war_horse.dds' }, -- AD
     [72] = { name = 'Alliance War Horse', icon = 'LuiExtended/media/icons/mounts/mount_alliance_war_horse.dds' }, -- EP
     [73] = { name = 'Alliance War Horse', icon = 'LuiExtended/media/icons/mounts/mount_alliance_war_horse.dds' }, -- DC
@@ -487,7 +493,7 @@ E.HatIcons = {
     ['Feathered Bycoket Cap']           = 'LuiExtended/media/icons/hats/hat_feathered_bycoket_cap.dds',
     ['Fibonaccus Spiral Hat']           = 'LuiExtended/media/icons/hats/hat_fibonaccus_spiral_hat.dds',
     ['Flannel Forester\'s Hood']        = 'LuiExtended/media/icons/hats/hat_flannel_foresters_hood.dds',
-    ['Forester\'s Hoot with Flower']    = 'LuiExtended/media/icons/hats/hat_foresters_hood_with_flower.dds',
+    ['Forester\'s Hood with Flower']    = 'LuiExtended/media/icons/hats/hat_foresters_hood_with_flower.dds',
     ['Hedge Wizard\'s Claw Cap']        = 'LuiExtended/media/icons/hats/hat_hedge_wizards_claw_cap.dds',
     ['Imperial Mananaut Cap & Goggles'] = 'LuiExtended/media/icons/hats/hat_imperial_mananaut_cap_&_goggles.dds',
     ['Jhunal\'s Owl Mask']              = 'LuiExtended/media/icons/hats/hat_jhunals_owl_mask.dds',
@@ -495,7 +501,7 @@ E.HatIcons = {
     ['New Life Monk\'s Ca']             = 'LuiExtended/media/icons/hats/hat_new_life_monks_cap.dds',
     ['Pumpkin Spectre Mask']            = 'LuiExtended/media/icons/hats/hat_pumpkin_spectre_mask.dds',
     ['Rajhin\'s Cat Mask']              = 'LuiExtended/media/icons/hats/hat_rajhins_cat_mask.dds',
-    ['Rootbrim Hat with Flowers']       = 'LuiExtended/media/icons/hats/hat_rootbrim_hat_with_flower.dds',
+    ['Rootbrim Hat with Flower']       = 'LuiExtended/media/icons/hats/hat_rootbrim_hat_with_flower.dds',
     ['Scarecrow Spectre Mask']          = 'LuiExtended/media/icons/hats/hat_scarecrow_spectre_mask.dds',
     ['Silvenari Felt Bycoket']          = 'LuiExtended/media/icons/hats/hat_silvenari_felt_bycoket.dds',
     ['Sun\'s Dusk Winter Hood']         = 'LuiExtended/media/icons/hats/hat_suns_dusk_winter_hood.dds',

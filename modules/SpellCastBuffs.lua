@@ -758,8 +758,9 @@ function SCB.MountStatus(eventCode, mounted)
 end
 
 function SCB.CollectibleUsed(eventCode, result, isAttemptingActivation)
+
     local latency = GetLatency()
-    latency = latency + 50
+    latency = latency + 100
     zo_callLater (SCB.CollectibleBuff, latency)
 
 end
