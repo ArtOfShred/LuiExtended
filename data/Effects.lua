@@ -380,6 +380,7 @@ E.MountIcons = {
     [71] = { name = 'Alliance War Horse', icon = 'LuiExtended/media/icons/mounts/mount_alliance_war_horse.dds' }, -- AD
     [72] = { name = 'Alliance War Horse', icon = 'LuiExtended/media/icons/mounts/mount_alliance_war_horse.dds' }, -- EP
     [73] = { name = 'Alliance War Horse', icon = 'LuiExtended/media/icons/mounts/mount_alliance_war_horse.dds' }, -- DC
+    [78] = { name = 'Sabre Cat', icon = 'LuiExtended/media/icons/mounts/mount_sabre_cat.dds'}
 }
 
 E.PetIcons = {
@@ -407,6 +408,7 @@ E.PetIcons = {
     ['Deadrat']                     = 'LuiExtended/media/icons/pets/pet_daedrat.dds',
     ['Daedric Scamp']               = 'LuiExtended/media/icons/pets/pet_daedric_scamp.dds',
     ['Dark Moons Lynx']             = 'LuiExtended/media/icons/pets/pet_dark_moons_lynx.dds',
+    ['Desert Lynx']                 = 'LuiExtended/media/icons/pets/pet_desert_lynx.dds',
     ['Doom Wolf Pup']               = 'LuiExtended/media/icons/pets/pet_doom_wolf_pup.dds',
     ['Dragontail Goat']             = 'LuiExtended/media/icons/pets/pet_dragontail_goat.dds',
     ['Echalette']                   = 'LuiExtended/media/icons/pets/pet_echalette.dds',
@@ -436,6 +438,7 @@ E.PetIcons = {
     ['Red Pit Wolf Pup']            = 'LuiExtended/media/icons/pets/pet_red_pit_wolf_pup.dds',
     ['Rosy Netch Calf']             = 'LuiExtended/media/icons/pets/pet_rosy_netch_calf.dds',
     ['Rufous Mudcrab']              = 'LuiExtended/media/icons/pets/pet_rufous_mudcrab.dds',
+    ['Sabre Cat Cub']               = 'LuiExtended/media/icons/pets/pet_sabre_cat_cub.dds',
     ['Sanguine\'s Black Goat']      = 'LuiExtended/media/icons/pets/pet_sanguines_black_goat.dds',
     ['Senche-Lion Cub']             = 'LuiExtended/media/icons/pets/pet_senche-lion_cub.dds',
     ['Sep Adder']                   = 'LuiExtended/media/icons/pets/pet_sep_adder.dds',
