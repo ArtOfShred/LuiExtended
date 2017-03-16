@@ -209,6 +209,41 @@ local APColorize
 local TVColorize
 local WVColorize
 
+-- List of items to whitelist as notable loot
+local g_notableIDs = {
+    [56862]  = true,    -- [Fortified Nirncrux]
+    [56863]  = true,    -- [Potent Nirncrux]
+    [68342]  = true,    -- [Hakeijo]
+}
+
+-- List of items to blacklist as annyoing loot
+local g_blacklistIDs = {
+    [64713]  = true,    -- [Laurel]
+    [64690]  = true,    -- [Malachite Shard]
+    [69432]  = true,    -- [Glass Style Motif Fragment]
+    -- Trial non worthless junk
+    [114427] = true,    -- [Undaunted Plunder]
+    [81180]  = true,    -- [The Serpent's Egg-Tooth]
+    [74453]  = true,    -- [The Rid-Thar's Moon Pearls]
+    [87701]  = true,    -- [Star-Studded Champion's Baldric]
+    [87700]  = true,    -- [Periapt of Elinhir]
+    -- Mercenary Motif Pages
+    [64716]  = true,    -- [Mercenary Motif]
+    [64717]  = true,    -- [Mercenary Motif]
+    [64718]  = true,    -- [Mercenary Motif]
+    [64719]  = true,    -- [Mercenary Motif]
+    [64720]  = true,    -- [Mercenary Motif]
+    [64721]  = true,    -- [Mercenary Motif]
+    [64722]  = true,    -- [Mercenary Motif]
+    [64723]  = true,    -- [Mercenary Motif]
+    [64724]  = true,    -- [Mercenary Motif]
+    [64725]  = true,    -- [Mercenary Motif]
+    [64726]  = true,    -- [Mercenary Motif]
+    [64727]  = true,    -- [Mercenary Motif]
+    [64728]  = true,    -- [Mercenary Motif]
+    [64729]  = true,    -- [Mercenary Motif]
+}
+
 function CA.Initialize(enabled)
     -- Load settings
     CA.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "ChatAnnouncements", CA.D )
@@ -246,7 +281,6 @@ function CA.Initialize(enabled)
     CA.RegisterMaraEvents()
     CA.RegisterCollectibleEvents()
     CA.RegisterColorEvents()
-
 end
 
 function CA.RegisterColorEvents()
@@ -2619,42 +2653,6 @@ function CA.OnSellItem(eventCode, itemName, quantity, money)
     CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainorloss)
 end
 
--- List of items to whitelist as notable
-local notableIDs = {
-    [56862]  = true,    -- [Fortified Nirncrux]
-    [56863]  = true,    -- [Potent Nirncrux]
-    [68342]  = true,    -- [Hakeijo]
-}
-
--- List of items to blacklist
-local blacklistIDs = {
-    [64713]  = true,    -- [Laurel]
-    [64690]  = true,    -- [Malachite Shard]
-    [69432]  = true,    -- [Glass Style Motif Fragment]
-    -- Trial non worthless junk
-    [114427] = true,    -- [Undaunted Plunder]
-    [81180]  = true,    -- [The Serpent's Egg-Tooth]
-    [74453]  = true,    -- [The Rid-Thar's Moon Pearls]
-    [87701]  = true,    -- [Star-Studded Champion's Baldric]
-    [87700]  = true,    -- [Periapt of Elinhir]
-    -- Mercenary Motif Pages
-    -- TODO: Find a better way than using IDs
-    [64716]  = true,    -- [Mercenary Motif]
-    [64717]  = true,    -- [Mercenary Motif]
-    [64718]  = true,    -- [Mercenary Motif]
-    [64719]  = true,    -- [Mercenary Motif]
-    [64720]  = true,    -- [Mercenary Motif]
-    [64721]  = true,    -- [Mercenary Motif]
-    [64722]  = true,    -- [Mercenary Motif]
-    [64723]  = true,    -- [Mercenary Motif]
-    [64724]  = true,    -- [Mercenary Motif]
-    [64725]  = true,    -- [Mercenary Motif]
-    [64726]  = true,    -- [Mercenary Motif]
-    [64727]  = true,    -- [Mercenary Motif]
-    [64728]  = true,    -- [Mercenary Motif]
-    [64729]  = true,    -- [Mercenary Motif]
-}
-
 function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound, lootType, lootedBySelf, isPickpocketLoot, questItemIcon, itemId)
     g_comboString = ""
     g_isLooted = true
@@ -2696,7 +2694,7 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
     local itemIsSpecial = (itemType == ITEMTYPE_TROPHY and not itemIsKeyFragment) or (itemType == ITEMTYPE_COLLECTIBLE) or IsItemLinkConsumable(itemName)
 
     -- Check for Blacklisted loot
-    if ( CA.SV.LootBlacklist and blacklistIDs[itemId] ) then
+    if ( CA.SV.LootBlacklist and g_blacklistIDs[itemId] ) then
         return
     end
 
@@ -2723,7 +2721,7 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
          (itemQuality >= ITEM_QUALITY_ARCANE and itemIsSpecial) or
          (itemQuality >= ITEM_QUALITY_ARTIFACT and not itemIsKeyFragment) or
          (lootType == LOOT_TYPE_COLLECTIBLE) or
-         (notableIDs[itemId]) ) then
+         (g_notableIDs[itemId]) ) then
 
         CA.LogItem( logPrefix, icon, itemName, itemType, quantity, self and "" or receivedBy, gainorloss )
     end
@@ -4083,7 +4081,7 @@ function CA.PrintInventoryIndexChanges(itemId, seticon, item, itemType, stackCou
     if unequipHelper then return end
 
         -- If the itemID is on the blacklist, don't show
-        if ( CA.SV.LootBlacklist and blacklistIDs[itemid] ) then
+        if ( CA.SV.LootBlacklist and g_blacklistIDs[itemid] ) then
             return
         end
 
@@ -4108,7 +4106,7 @@ function CA.PrintInventoryIndexChanges(itemId, seticon, item, itemType, stackCou
                  (itemQuality >= ITEM_QUALITY_ARTIFACT and not itemIsKeyFragment) or
                  (itemType == ITEMTYPE_COSTUME) or
                  (itemType == ITEMTYPE_DISGUISE) or
-                 (notableIDs[itemId]) ) then
+                 (g_notableIDs[itemId]) ) then
 
                 CA.LogItem(logPrefix, seticon, item, itemType, stackCountChange or 1, receivedBy, gainorloss)
             end
