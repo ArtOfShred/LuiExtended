@@ -261,6 +261,9 @@ function CA.Initialize(enabled)
     g_playerDisplayName = strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
 
     -- Register events
+    
+    CA.CraftModeOverrides()
+    
     CA.RegisterGroupEvents()
     CA.RegisterGoldEvents()
     CA.RegisterAlliancePointEvents()
@@ -3966,6 +3969,8 @@ function CA.CraftingClose(eventCode, craftSkill)
         g_inventoryStacks = {}
     end
     g_bankStacks = {}
+    g_smithing   = {}
+    g_enchanting = {}
 end
 
 function CA.BankOpen(eventCode)
@@ -4272,7 +4277,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
         icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
         local receivedBy = ""
         local gainorloss = 1
-        local logPrefix = ("LOOTED - Craft Bag")
+        local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTED)
         local stack = stackCountChange
         local itemType = GetItemLinkItemType(itemlink)
 
@@ -4285,7 +4290,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
 
         if printNextChange == true then
             if not g_weAreInAStore and CA.SV.Loot then
-                CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss)
+                zo_callLater (function() CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss) end, 50)
             end
         end
     end
@@ -4293,10 +4298,95 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
     g_itemWasDestroyed = false
 end
 
+local g_smithing = {} -- Table for smithing mode
+local g_enchanting = {} -- Table for enchanting mode
+
+-- Simple posthook into ZOS crafting mode functions, based off MultiCraft, thanks Ayantir!
+function CA.CraftModeOverrides()
+
+    -- Set mode on Smithing Station interaction
+	local zos_Smithing = SMITHING.SetMode
+	SMITHING.SetMode = function(...)
+		zos_Smithing(...)
+        if GetCraftingInteractionType() == CRAFTING_TYPE_SMITHNG then
+		mode = g_smithing:GetMode() end
+	end
+	
+    -- Get SMITHING mode
+	g_smithing.GetMode = function()
+		return SMITHING.mode
+	end
+    
+    -- Set mode on Enchanting Station interaction
+    local zos_Enchanting = ENCHANTING.SetEnchantingMode
+	ENCHANTING.SetEnchantingMode = function(...)
+		zos_Enchanting(...)
+        if GetCraftingInteractionType() == CRAFTING_TYPE_ENCHANTING then
+            mode = g_enchanting:GetMode() end
+        end
+    
+    -- Get ENCHANTING mode
+    g_enchanting.GetMode = function()
+		return ENCHANTING:GetEnchantingMode()
+	end   
+    
+    -- NOTE: Alchemy and provisioning don't matter, as the only options are to craft and use materials.
+    
+end
+
+local g_enchant_prefix_pos = {
+
+[1] = GetString(SI_ITEM_FORMAT_STR_CRAFTED),
+[2] = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN),
+[3] = GetString(SI_ITEM_FORMAT_STR_CRAFTED),
+
+}
+local g_enchant_prefix_neg = {
+
+[1] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED),
+[2] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_EXTRACTED),
+[3] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED),
+
+}
+local g_smithing_prefix_pos = {
+
+[1] = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN),
+[2] = GetString(SI_ITEM_FORMAT_STR_CRAFTED),
+[3] = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN),
+[4] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED),
+[5] = "",
+[6] = GetString(SI_ITEM_FORMAT_STR_CRAFTED),
+
+}
+local g_smithing_prefix_neg = {
+
+[1] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_REFINED),
+[2] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED),
+[3] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DECONSTRUCTED),
+[4] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED),
+[5] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_RESEARCHED),
+[6] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED),
+
+}
+
 function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
+    
+    local logPrefixPos = GetString(SI_ITEM_FORMAT_STR_CRAFTED)
+    local logPrefixNeg = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED)
+    
+    if GetCraftingInteractionType() == CRAFTING_TYPE_ENCHANTING then 
+        logPrefixPos = g_enchant_prefix_pos[g_enchanting.GetMode()]
+        logPrefixNeg = g_enchant_prefix_neg[g_enchanting.GetMode()]
+        
+    end   
+    if (GetCraftingInteractionType() == CRAFTING_TYPE_BLACKSMITHING or GetCraftingInteractionType() == CRAFTING_TYPE_CLOTHIER or GetCraftingInteractionType() == CRAFTING_TYPE_WOODWORKING) then
+        logPrefixPos = g_smithing_prefix_pos[g_smithing.GetMode()]
+        logPrefixNeg = g_smithing_prefix_neg[g_smithing.GetMode()]
+    end
+    local receivedBy = "CRAFT"
+    
     ---------------------------------- INVENTORY ----------------------------------
     if bagId == BAG_BACKPACK then
-        local receivedBy = "CRAFT"
         if not g_inventoryStacks[slotId] then -- NEW ITEM
             local icon, stack = GetItemInfo(bagId, slotId)
             local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
@@ -4305,8 +4395,177 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = 1
-            local logPrefix = GetString(SI_ITEM_FORMAT_STR_CRAFTED)
+            local logPrefix = logPrefixPos
+            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+        elseif g_inventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
+            g_oldItemLink = g_inventoryStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
+            local icon, stack = GetItemInfo(bagId, slotId)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+            local item = g_inventoryStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local gainorloss = 1
+            local logPrefix = logPrefixPos
+            receivedBy = ""
+            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
+        elseif g_inventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
+            local item = g_inventoryStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local itemType = GetItemLinkItemType(item.itemlink)
 
+            if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
+               local gainorloss = 1
+               local logPrefix = logPrefixPos
+               local icon, stack = GetItemInfo(bagId, slotId)
+               local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+               CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+               g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
+
+            elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
+                local gainorloss = 2
+                local logPrefix = logPrefixNeg
+                    
+                if (GetCraftingInteractionType() == CRAFTING_TYPE_BLACKSMITHING or GetCraftingInteractionType() == CRAFTING_TYPE_CLOTHIER or GetCraftingInteractionType() == CRAFTING_TYPE_WOODWORKING) and g_smithing.GetMode() == 4 then
+                    receivedBy = ""
+                    if itemType == ITEMTYPE_ADDITIVE
+                    or itemType == ITEMTYPE_ARMOR_BOOSTER
+                    or itemType == ITEMTYPE_ARMOR_TRAIT
+                    or itemType == ITEMTYPE_BLACKSMITHING_BOOSTER
+                    or itemType == ITEMTYPE_BLACKSMITHING_MATERIAL
+                    or itemType == ITEMTYPE_CLOTHIER_BOOSTER
+                    or itemType == ITEMTYPE_CLOTHIER_MATERIAL
+                    or itemType == ITEMTYPE_ENCHANTING_RUNE_ASPECT
+                    or itemType == ITEMTYPE_ENCHANTING_RUNE_ESSENCE
+                    or itemType == ITEMTYPE_ENCHANTING_RUNE_POTENCY
+                    or itemType == ITEMTYPE_ENCHANTMENT_BOOSTER
+                    or itemType == ITEMTYPE_INGREDIENT
+                    or itemType == ITEMTYPE_POISON_BASE
+                    or itemType == ITEMTYPE_POTION_BASE
+                    or itemType == ITEMTYPE_REAGENT
+                    or itemType == ITEMTYPE_STYLE_MATERIAL
+                    or itemType == ITEMTYPE_WEAPON_BOOSTER
+                    or itemType == ITEMTYPE_WEAPON_TRAIT
+                    or itemType == ITEMTYPE_WOODWORKING_BOOSTER
+                    or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
+                        logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED)
+                    end
+                end
+                
+                local change = (stackCountChange * -1)
+                local endcount = g_inventoryStacks[slotId].stack - change
+                if logPrefix ~= GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED) or CA.SV.ShowCraftUse then
+                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                end
+                if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
+                    g_inventoryStacks[slotId] = nil
+                else
+                    local icon, stack = GetItemInfo(bagId, slotId)
+                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                    g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+                end
+            end
+        end
+    end
+
+    ---------------------------------- BANK ----------------------------------
+    if bagId == BAG_BANK then
+        if not g_bankStacks[slotId] then -- NEW ITEM
+            local icon, stack = GetItemInfo(bagId, slotId)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+            local item = g_bankStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local itemType = GetItemLinkItemType(item.itemlink)
+            local gainorloss = 1
+            local logPrefix = strformat("<<1>> - <<2>>", logPrefixPos, GetString(SI_INTERACT_OPTION_BANK))
+            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+        elseif g_bankStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
+            g_oldItemLink = g_bankStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
+            local icon, stack = GetItemInfo(bagId, slotId)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+            local item = g_bankStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local gainorloss = 1
+            local logPrefix = strformat("<<1>> - <<2>>", logPrefixPos, GetString(SI_INTERACT_OPTION_BANK))
+            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
+        elseif g_bankStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
+            local item = g_bankStacks[slotId]
+            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
+            local itemType = GetItemLinkItemType(item.itemlink)
+
+            if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
+               local gainorloss = 1
+               local logPrefix = strformat("<<1>> - <<2>>", logPrefixPos, GetString(SI_INTERACT_OPTION_BANK))
+               local icon, stack = GetItemInfo(bagId, slotId)
+               local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+               CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+               g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
+
+            elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
+                local gainorloss = 2
+                local logPrefix = strformat("<<1>> - <<2>>", logPrefixNeg, GetString(SI_INTERACT_OPTION_BANK))
+
+                if (GetCraftingInteractionType() == CRAFTING_TYPE_BLACKSMITHING or GetCraftingInteractionType() == CRAFTING_TYPE_CLOTHIER or GetCraftingInteractionType() == CRAFTING_TYPE_WOODWORKING) and g_smithing.GetMode() == 4 then
+                    receivedBy = ""
+                    if itemType == ITEMTYPE_ADDITIVE
+                    or itemType == ITEMTYPE_ARMOR_BOOSTER
+                    or itemType == ITEMTYPE_ARMOR_TRAIT
+                    or itemType == ITEMTYPE_BLACKSMITHING_BOOSTER
+                    or itemType == ITEMTYPE_BLACKSMITHING_MATERIAL
+                    or itemType == ITEMTYPE_CLOTHIER_BOOSTER
+                    or itemType == ITEMTYPE_CLOTHIER_MATERIAL
+                    or itemType == ITEMTYPE_ENCHANTING_RUNE_ASPECT
+                    or itemType == ITEMTYPE_ENCHANTING_RUNE_ESSENCE
+                    or itemType == ITEMTYPE_ENCHANTING_RUNE_POTENCY
+                    or itemType == ITEMTYPE_ENCHANTMENT_BOOSTER
+                    or itemType == ITEMTYPE_INGREDIENT
+                    or itemType == ITEMTYPE_POISON_BASE
+                    or itemType == ITEMTYPE_POTION_BASE
+                    or itemType == ITEMTYPE_REAGENT
+                    or itemType == ITEMTYPE_STYLE_MATERIAL
+                    or itemType == ITEMTYPE_WEAPON_BOOSTER
+                    or itemType == ITEMTYPE_WEAPON_TRAIT
+                    or itemType == ITEMTYPE_WOODWORKING_BOOSTER
+                    or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
+                        logPrefix = strformat("<<1>> - <<2>>", GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED), GetString(SI_INTERACT_OPTION_BANK))
+                    end
+                end
+
+                local change = (stackCountChange * -1)
+                local endcount = g_bankStacks[slotId].stack - change
+                if logPrefix ~= strformat("<<1>> - <<2>>", GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED), GetString(SI_INTERACT_OPTION_BANK)) or CA.SV.ShowCraftUse then
+                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                end
+                if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
+                    g_bankStacks[slotId] = nil
+                else
+                    local icon, stack = GetItemInfo(bagId, slotId)
+                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                    g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+                end
+            end
+        end
+    end
+
+    ---------------------------------- CRAFTING BAG ----------------------------------
+    if bagId == BAG_VIRTUAL then
+        local itemlink = CA.GetItemLinkFromItemId(slotId)
+        local icon = GetItemLinkInfo(itemlink)
+        icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
+        local gainorloss = 1
+        local logPrefix = logPrefixPos
+        local stack = stackCountChange
+        local itemType = GetItemLinkItemType(itemlink)
+
+        if stackCountChange < 1 then
+            gainorloss = 2
+            logPrefix = logPrefixNeg
+            stack = stackCountChange * -1
+        end
+
+        if (GetCraftingInteractionType() == CRAFTING_TYPE_BLACKSMITHING or GetCraftingInteractionType() == CRAFTING_TYPE_CLOTHIER or GetCraftingInteractionType() == CRAFTING_TYPE_WOODWORKING) and g_smithing.GetMode() == 4 then
+            receivedBy = ""
             if itemType == ITEMTYPE_ADDITIVE
             or itemType == ITEMTYPE_ARMOR_BOOSTER
             or itemType == ITEMTYPE_ARMOR_TRAIT
@@ -4327,203 +4586,10 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             or itemType == ITEMTYPE_WEAPON_TRAIT
             or itemType == ITEMTYPE_WOODWORKING_BOOSTER
             or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
-                logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) end
-
-            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
-        elseif g_inventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
-            g_oldItemLink = g_inventoryStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
-            local icon, stack = GetItemInfo(bagId, slotId)
-            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-            g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
-            local item = g_inventoryStacks[slotId]
-            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local gainorloss = 1
-            local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED)
-            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
-        elseif g_inventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
-            local item = g_inventoryStacks[slotId]
-            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local itemType = GetItemLinkItemType(item.itemlink)
-
-            if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-               local gainorloss = 1
-               local logPrefix = GetString(SI_ITEM_FORMAT_STR_CRAFTED)
-
-                if itemType == ITEMTYPE_ADDITIVE
-                or itemType == ITEMTYPE_ARMOR_BOOSTER
-                or itemType == ITEMTYPE_ARMOR_TRAIT
-                or itemType == ITEMTYPE_BLACKSMITHING_BOOSTER
-                or itemType == ITEMTYPE_BLACKSMITHING_MATERIAL
-                or itemType == ITEMTYPE_CLOTHIER_BOOSTER
-                or itemType == ITEMTYPE_CLOTHIER_MATERIAL
-                or itemType == ITEMTYPE_ENCHANTING_RUNE_ASPECT
-                or itemType == ITEMTYPE_ENCHANTING_RUNE_ESSENCE
-                or itemType == ITEMTYPE_ENCHANTING_RUNE_POTENCY
-                or itemType == ITEMTYPE_ENCHANTMENT_BOOSTER
-                or itemType == ITEMTYPE_INGREDIENT
-                or itemType == ITEMTYPE_POISON_BASE
-                or itemType == ITEMTYPE_POTION_BASE
-                or itemType == ITEMTYPE_REAGENT
-                or itemType == ITEMTYPE_STYLE_MATERIAL
-                or itemType == ITEMTYPE_WEAPON_BOOSTER
-                or itemType == ITEMTYPE_WEAPON_TRAIT
-                or itemType == ITEMTYPE_WOODWORKING_BOOSTER
-                or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
-                    logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) end
-
-               local icon, stack = GetItemInfo(bagId, slotId)
-               local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-               CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
-               g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
-
-            elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = 2
-                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DECONSTRUCTED)
-
-                if itemType == ITEMTYPE_ADDITIVE
-                or itemType == ITEMTYPE_ARMOR_BOOSTER
-                or itemType == ITEMTYPE_ARMOR_TRAIT
-                or itemType == ITEMTYPE_BLACKSMITHING_BOOSTER
-                or itemType == ITEMTYPE_BLACKSMITHING_MATERIAL
-                or itemType == ITEMTYPE_CLOTHIER_BOOSTER
-                or itemType == ITEMTYPE_CLOTHIER_MATERIAL
-                or itemType == ITEMTYPE_ENCHANTING_RUNE_ASPECT
-                or itemType == ITEMTYPE_ENCHANTING_RUNE_ESSENCE
-                or itemType == ITEMTYPE_ENCHANTING_RUNE_POTENCY
-                or itemType == ITEMTYPE_ENCHANTMENT_BOOSTER
-                or itemType == ITEMTYPE_INGREDIENT
-                or itemType == ITEMTYPE_POISON_BASE
-                or itemType == ITEMTYPE_POTION_BASE
-                or itemType == ITEMTYPE_REAGENT
-                or itemType == ITEMTYPE_STYLE_MATERIAL
-                or itemType == ITEMTYPE_WEAPON_BOOSTER
-                or itemType == ITEMTYPE_WEAPON_TRAIT
-                or itemType == ITEMTYPE_WOODWORKING_BOOSTER
-                or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
-                    logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED)
-                elseif itemType == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL
-                or itemType == ITEMTYPE_CLOTHIER_RAW_MATERIAL
-                or itemType == ITEMTYPE_WOODWORKING_RAW_MATERIAL then
-                    logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_REFINED) end
-
-                local change = (stackCountChange * -1)
-                local endcount = g_inventoryStacks[slotId].stack - change
-                if logPrefix ~= GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED) or CA.SV.ShowCraftUse then
-                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
-                end
-                if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
-                    g_inventoryStacks[slotId] = nil
-                else
-                    local icon, stack = GetItemInfo(bagId, slotId)
-                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-                    g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
-                end
+                logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED)
             end
         end
-    end
-
-    ---------------------------------- BANK ----------------------------------
-    if bagId == BAG_BANK then
-        local receivedBy = "CRAFT"
-        if not g_bankStacks[slotId] then -- NEW ITEM
-            local icon, stack = GetItemInfo(bagId, slotId)
-            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-            g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
-            local item = g_bankStacks[slotId]
-            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local itemType = GetItemLinkItemType(item.itemlink)
-            local gainorloss = 1
-            local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_ITEM_FORMAT_STR_CRAFTED), GetString(SI_INTERACT_OPTION_BANK))
-            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
-        elseif g_bankStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
-            g_oldItemLink = g_bankStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
-            local icon, stack = GetItemInfo(bagId, slotId)
-            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-            g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
-            local item = g_bankStacks[slotId]
-            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local gainorloss = 1
-            local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED), GetString(SI_INTERACT_OPTION_BANK))
-            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
-        elseif g_bankStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
-            local item = g_bankStacks[slotId]
-            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local itemType = GetItemLinkItemType(item.itemlink)
-
-            if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-               local gainorloss = 1
-               local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_ITEM_FORMAT_STR_CRAFTED), GetString(SI_INTERACT_OPTION_BANK))
-               local icon, stack = GetItemInfo(bagId, slotId)
-               local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-               CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
-               g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
-
-            elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = 2
-                local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_LUIE_CA_PREFIX_MESSAGE_DECONSTRUCTED), GetString(SI_INTERACT_OPTION_BANK))
-
-        if itemType == ITEMTYPE_ADDITIVE
-        or itemType == ITEMTYPE_ARMOR_BOOSTER
-        or itemType == ITEMTYPE_ARMOR_TRAIT
-        or itemType == ITEMTYPE_BLACKSMITHING_BOOSTER
-        or itemType == ITEMTYPE_BLACKSMITHING_MATERIAL
-        or itemType == ITEMTYPE_CLOTHIER_BOOSTER
-        or itemType == ITEMTYPE_CLOTHIER_MATERIAL
-        or itemType == ITEMTYPE_ENCHANTING_RUNE_ASPECT
-        or itemType == ITEMTYPE_ENCHANTING_RUNE_ESSENCE
-        or itemType == ITEMTYPE_ENCHANTING_RUNE_POTENCY
-        or itemType == ITEMTYPE_ENCHANTMENT_BOOSTER
-        or itemType == ITEMTYPE_INGREDIENT
-        or itemType == ITEMTYPE_POISON_BASE
-        or itemType == ITEMTYPE_POTION_BASE
-        or itemType == ITEMTYPE_REAGENT
-        or itemType == ITEMTYPE_STYLE_MATERIAL
-        or itemType == ITEMTYPE_WEAPON_BOOSTER
-        or itemType == ITEMTYPE_WEAPON_TRAIT
-        or itemType == ITEMTYPE_WOODWORKING_BOOSTER
-        or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
-            logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED)
-        elseif itemType == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL
-        or itemType == ITEMTYPE_CLOTHIER_RAW_MATERIAL
-        or itemType == ITEMTYPE_WOODWORKING_RAW_MATERIAL then
-            logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_REFINED) end
-
-                local change = (stackCountChange * -1)
-                local endcount = g_bankStacks[slotId].stack - change
-                if logPrefix ~= GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED) or CA.SV.ShowCraftUse then
-                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
-                end
-                if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
-                    g_bankStacks[slotId] = nil
-                else
-                    local icon, stack = GetItemInfo(bagId, slotId)
-                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-                    g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
-                end
-            end
-        end
-    end
-
-    ---------------------------------- CRAFTING BAG ----------------------------------
-    if bagId == BAG_VIRTUAL then
-        local itemlink = CA.GetItemLinkFromItemId(slotId)
-        local icon = GetItemLinkInfo(itemlink)
-        icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
-        local receivedBy = "CRAFT"
-        local gainorloss = 1
-        local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
-        local stack = stackCountChange
-        local itemType = GetItemLinkItemType(itemlink)
-
-        if stackCountChange < 1 then
-            gainorloss = 2
-            logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED)
-            stack = stackCountChange * -1
-            if itemType == ITEMTYPE_BLACKSMITHING_RAW_MATERIAL or itemType == ITEMTYPE_CLOTHIER_RAW_MATERIAL or itemType == ITEMTYPE_WOODWORKING_RAW_MATERIAL then
-                logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_REFINED)
-            end
-        end
-
+        
         if logPrefix ~= GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED) or CA.SV.ShowCraftUse then
             CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss)
         end
