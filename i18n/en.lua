@@ -166,31 +166,21 @@ ZO_CreateStringId("SI_LUIE_CA_LOCKPICK_FAILED",                         "Lockpic
 ZO_CreateStringId("SI_LUIE_CA_LOCKPICK_SUCCESS",                        "Lockpick successful!")
 ZO_CreateStringId("SI_LUIE_CA_LVL_ANNOUNCE_CP",                         "Champion Level Achieved!")
 ZO_CreateStringId("SI_LUIE_CA_LVL_ANNOUNCE_XP",                         "You have reached")
-
 ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_PAYMENT_MSG",                    "COD Payment") -- PREFIX MESSAGE
-
-
 ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_PAYMENT_SENT",                   "COD payment sent!")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_PAYMENT_SENT_VAR",               "COD payment of <<1>> gold sent!")
-
 ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_SENT",                           "COD sent with <<1>> attachments!")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_SENT_VAR",                       "COD sent for <<1>> gold with <<2>> attachment<<3>>!")
-
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_SUCCESS",                       "Mail sent!")
-
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_ATTACHMENT",                    "Mail sent with <<1>> attachment<<2>>")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_GOLD_MSG",                      "Mail sent with gold!")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG",                  "Mail sent with <<1>> gold!")
-
-
 ZO_CreateStringId("SI_LUIE_CA_MAIL_DELETED_MSG",                        "Mail deleted!")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_ATTACHMENT",                "Received mail with <<1>> attachment<<2>>")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_GOLD_MSG",                  "Received mail with gold.")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_VAR_GOLD_MSG",              "Received mail with <<1>> gold.")
-
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENDMAILRESULT2",                    "Unknown player.") -- Fixing missing periods on default strings
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENDMAILRESULT3",                    "Recipient's Inbox is full.") -- Fixing missing periods on default strings
-
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT0",                "|cFEFEFE<<1>>|r is too busy to pledge with.")
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT1",                "|cFEFEFE<<1>>|r can't use Pledge of Mara while a player is dead.")
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT2",                "Beginning Ritual of Mara with |cFEFEFE<<1>>|r.")
@@ -253,6 +243,7 @@ ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMPFORMAT",                        "Timesta
 ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMPFORMAT_TP",                     "FORMAT:\nHH: hours (24)\nhh: hours (12)\nH: hour (24, no leading 0)\nh: hour (12, no leading 0)\nA: AM/PM\na: am/pm\nm: minutes\ns: seconds")
 ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMP_TP",                           "Prepend printed text with current time label.")
 ZO_CreateStringId("SI_LUIE_LAM_UF",                                     "Unit Frames")
+ZO_CreateStringId("SI_LUIE_LAM_NAMEDISPLAYMETHOD",                      "Player Name Display Method")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_COLOUREDTIMELABEL",                 "Coloured time label")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_COLOUREDTIMELABE_TP",               "Set the colour of text label same as icon border or keep it white.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_DESCENDINGSORT",                    "Descending sort direction")
@@ -509,7 +500,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_MARA_TP",                        "Print a
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG",                    "Show Bag/Bank Upgrade Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP",                 "Print a notification to chat when bag or bank space upgrades are purchased ingame or through the crown store.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISE",                   "Show Disguise Status Change Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISEALERT",              "\t\t\tShow Disguise Alert Messages")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISEALERT",              "Show Disguise Alert Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISEALERT_TP",           "Print a notification to chat when near a sentry or performing suspicious activity while disguised.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISE_TP",                "Print a notification to chat when entering a relevant area and becoming disguised or revealed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUP",                      "Show Group Event Messages")
@@ -536,7 +527,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWSOCIAL",                     "Show So
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWSOCIAL_TP",                  "Prints a notification to chat for friend invites, friend list changes, and ignore list changes.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWTRADE",                      "Show Trade Event Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWTRADE_TP",                   "Prints a notification to chat for trade invitations, cancellation, and success.")
-ZO_CreateStringId("SI_LUIE_LAM_NAMEDISPLAYMETHOD",                      "Player Name Display Method")
 ZO_CreateStringId("SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP",                "Determines the method used to display player names in Chat Announcements where applicable.\nDefault: Character Name")
 ZO_CreateStringId("SI_LUIE_LAM_CI_ALERTS_ENABLEDEATH",                  "Enable group member death alert")
 ZO_CreateStringId("SI_LUIE_LAM_CI_ALERTS_ENABLEDEATH_TP",               "Display an alert when group member dies.")
@@ -655,7 +645,7 @@ ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_REPOSIT",                     "Reposit
 ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_REPOSIT_TP",                  "Change position of default unit frames to be stuck in the center.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_TARGET",                      "Default TARGET Frame")
 ZO_CreateStringId("SI_LUIE_LAM_UF_DESCRIPTION",                         "This allows display of textual attributes information over default UI controls. It also creates custom frames for player and target.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_ENABLE",                              "Allow mouse dragging for Info Panel.")
+ZO_CreateStringId("SI_LUIE_LAM_UF_ENABLE",                              "Enable Unit Frames Module")
 ZO_CreateStringId("SI_LUIE_LAM_UF_SHORTNUMBERS",                        "Shorten numbers on all bars")
 ZO_CreateStringId("SI_LUIE_LAM_UF_SHORTNUMBERS_TP",                     "Replace large numbers like 12,345 with 12.3k on all bars and labels related to unit frames.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_TARGET_ICON_CLASS",                   "Target class icon")
