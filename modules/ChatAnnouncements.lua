@@ -117,6 +117,9 @@ CA.D = {
     WritVoucherName               = GetString(SI_CURRENCY_WRIT_VOUCHERS), -- "Writ Vouchers"
 }
 
+local g_tradeDisablePrint         = false -- Toggled on when a trade is completed, causing item updates to be suspended to allow our trade item changes printing to work.
+local g_isLooted                  = false -- This value is false by default, and toggled on only by on_loot_received being triggered. It replaces the [Received] context message in Item updates with [Looted]
+local g_weAreInAStore             = false -- Toggled on when the player opens a store, this sends information to our indexing function to not show changes to inventory and let sell events handle it
 local g_currentDisguise
 local g_disguiseState
 local g_bankStacks                = {} -- Called for indexing on opening crafting window (If the player decons an item from the bank - not needed for bank, since we don't care about items in the bank)
@@ -156,9 +159,11 @@ local g_launderCheck              = false
 local g_launderGoldstring         = ""
 local g_launderItemstring         = ""
 local g_mailCOD                   = 0
+local g_mailCODBackup             = 0 -- Saved value if mail sent results in an error, restores correct values
 local g_mailCurrencyCheck         = true
 local g_mailMoney                 = 0
-local g_mailStacks                = {}
+local g_mailMoneyBackup           = 0 -- Saved value if mail sent results in an error, restores correct values
+local g_mailStacks                = 0
 local g_mailStacksOut             = {}
 local g_mailStop                  = false
 local g_mailStringPart1           = ""
@@ -227,12 +232,7 @@ function CA.Initialize(enabled)
     CA.RegisterTelVarStoneEvents()
     CA.RegisterWritVoucherEvents()
     CA.RegisterLootEvents()
-    CA.RegisterVendorEvents()
-    CA.RegisterBankEvents()
-    CA.RegisterTradeEvents()
     CA.RegisterMailEvents()
-    CA.RegisterCraftEvents()
-    CA.RegisterDestroyEvents()
     CA.RegisterXPEvents()
     CA.RegisterAchievementsEvent()
     CA.RegisterBagEvents()
@@ -246,7 +246,6 @@ function CA.Initialize(enabled)
     CA.RegisterMaraEvents()
     CA.RegisterCollectibleEvents()
     CA.RegisterColorEvents()
-    CA.RegisterCrownEvents()
 
 end
 
@@ -457,88 +456,12 @@ function CA.RegisterGoldEvents()
     end
 end
 
-function CA.RegisterVendorEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_BUYBACK_RECEIPT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_BUY_RECEIPT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_SELL_RECEIPT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_FENCE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_STORE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT)
-    if CA.SV.LootVendor then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BUYBACK_RECEIPT, CA.OnBuybackItem)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BUY_RECEIPT, CA.OnBuyItem)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_SELL_RECEIPT, CA.OnSellItem)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_FENCE, CA.FenceOpen)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_STORE, CA.StoreClose)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT, CA.FenceSuccess)
-    end
-end
-
-function CA.RegisterBankEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_BANK)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_BANK)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_GUILD_BANK)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_GUILD_BANK)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_REMOVED)
-    if CA.SV.LootBank then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_BANK, CA.BankOpen)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_BANK, CA.BankClose)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_GUILD_BANK, CA.GuildBankOpen)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_GUILD_BANK, CA.GuildBankClose)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_ADDED, CA.GuildBankItemAdded)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_REMOVED, CA.GuildBankItemRemoved)
-    end
-end
-
-function CA.RegisterTradeEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_SUCCEEDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_FAILED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ELEVATION_FAILED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_ADD_FAILED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_CANCELED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_FAILED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED)
-    if CA.SV.MiscTrade and not CA.SV.LootTrade then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_SUCCEEDED, CA.OnTradeSuccess)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING, CA.TradeInviteWaiting)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING, CA.TradeInviteConsidering)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED, CA.TradeInviteAccepted)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_FAILED, CA.TradeInviteFailed)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ELEVATION_FAILED, CA.TradeElevationFailed)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_ADD_FAILED, CA.TradeItemAddFailed)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_CANCELED, CA.TradeCancel)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_FAILED, CA.TradeFail)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED, CA.TradeInviteCancel)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED, CA.TradeInviteDecline)
-    elseif CA.SV.LootTrade then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED, CA.OnTradeAdded)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED, CA.OnTradeRemoved)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_SUCCEEDED, CA.OnTradeSuccess)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING, CA.TradeInviteWaiting)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING, CA.TradeInviteConsidering)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED, CA.TradeInviteAccepted)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_FAILED, CA.TradeInviteFailed)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ELEVATION_FAILED, CA.TradeElevationFailed)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_ADD_FAILED, CA.TradeItemAddFailed)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_CANCELED, CA.TradeCancel)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_FAILED, CA.TradeFail)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED, CA.TradeInviteCancel)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED, CA.TradeInviteDecline)
-    end
-end
-
 function CA.RegisterMailEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_READABLE)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_TAKE_ATTACHED_ITEM_SUCCESS)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_OPEN_MAILBOX)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS)
@@ -552,50 +475,152 @@ function CA.RegisterMailEvents()
     if CA.SV.MiscMail or CA.SV.LootMail or CA.SV.GoldChange then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, CA.OnMailAttach)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, CA.OnMailAttachRemove)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, CA.OnMailCloseBox)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED, CA.OnMailFail)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS, CA.OnMailSuccess)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED, CA.MailMoneyChanged)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED, CA.MailCODChanged)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_REMOVED, CA.MailRemoved)
     end
+    if CA.SV.Loot or CA.SV.MiscMail or CA.SV.LootMail or CA.SV.GoldChange then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_OPEN_MAILBOX, CA.OnMailOpenBox)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, CA.OnMailCloseBox)
+    end
     if CA.SV.MiscMail or CA.SV.GoldChange then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MONEY_UPDATE, CA.OnMoneyUpdate)
     end
 end
 
-function CA.RegisterCraftEvents()
+function CA.RegisterLootEvents()
+    
+    -- LOOT RECEIVED
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOOT_RECEIVED)
+    
+    -- INDEX
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    
+    -- VENDOR
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_BUYBACK_RECEIPT)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_BUY_RECEIPT)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_SELL_RECEIPT)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_FENCE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_STORE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_STORE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT)
+    
+    -- BANK
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_BANK)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_BANK)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_GUILD_BANK)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_GUILD_BANK)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_REMOVED)
+    
+    -- TRADE
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_SUCCEEDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_FAILED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ELEVATION_FAILED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_ADD_FAILED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_CANCELED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_FAILED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED)
+    
+    -- CRAFT
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CRAFTING_STATION_INTERACT, CA.CraftingOpen)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_END_CRAFTING_STATION_INTERACT, CA.CraftingClose)
-    if CA.SV.LootCraft then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CRAFTING_STATION_INTERACT, CA.CraftingOpen)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_END_CRAFTING_STATION_INTERACT, CA.CraftingClose)
-    end
-end
-
-function CA.RegisterDestroyEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    
+    -- JUSTICE/DESTROY
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED)
-    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
+    
+    -- LOOT RECEIVED
+    if CA.SV.Loot then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_RECEIVED, CA.OnLootReceived)
+    end
+    
+    -- INDEX
+    if CA.SV.Loot or CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT, CA.MiscAlertHorse)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, CA.MiscAlertBags)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, CA.MiscAlertBank)
         g_equippedStacks = {}
         g_inventoryStacks = {}
         CA.IndexEquipped()
         CA.IndexInventory()
     end
+    
+    -- VENDOR
+    if CA.SV.LootVendor then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BUYBACK_RECEIPT, CA.OnBuybackItem)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BUY_RECEIPT, CA.OnBuyItem)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_SELL_RECEIPT, CA.OnSellItem)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT, CA.FenceSuccess)
+    end
+    if CA.SV.Loot or CA.SV.LootVendor then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_FENCE, CA.FenceOpen)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_STORE, CA.StoreOpen)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_STORE, CA.StoreClose)
+    end
+    
+    -- BANK
+    if CA.SV.LootBank then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_ADDED, CA.GuildBankItemAdded)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_REMOVED, CA.GuildBankItemRemoved)
+    end
+    if CA.SV.Loot or CA.SV.LootBank then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_BANK, CA.BankOpen)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_BANK, CA.BankClose)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_GUILD_BANK, CA.GuildBankOpen)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_GUILD_BANK, CA.GuildBankClose)
+    end
+    
+    -- TRADE
+    if CA.SV.MiscTrade or CA.SV.LootTrade or CA.SV.Loot then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_SUCCEEDED, CA.OnTradeSuccess)
+    end
+    if CA.SV.MiscTrade and not CA.SV.LootTrade then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING, CA.TradeInviteWaiting)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING, CA.TradeInviteConsidering)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED, CA.TradeInviteAccepted)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_FAILED, CA.TradeInviteFailed)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ELEVATION_FAILED, CA.TradeElevationFailed)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_ADD_FAILED, CA.TradeItemAddFailed)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_CANCELED, CA.TradeCancel)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_FAILED, CA.TradeFail)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED, CA.TradeInviteCancel)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED, CA.TradeInviteDecline)
+    elseif CA.SV.LootTrade then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED, CA.OnTradeAdded)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED, CA.OnTradeRemoved)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING, CA.TradeInviteWaiting)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING, CA.TradeInviteConsidering)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED, CA.TradeInviteAccepted)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_FAILED, CA.TradeInviteFailed)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ELEVATION_FAILED, CA.TradeElevationFailed)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_ADD_FAILED, CA.TradeItemAddFailed)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_CANCELED, CA.TradeCancel)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_FAILED, CA.TradeFail)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED, CA.TradeInviteCancel)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED, CA.TradeInviteDecline)
+    end
+    
+    -- CRAFT
+    if CA.SV.Loot or CA.SV.LootCraft then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CRAFTING_STATION_INTERACT, CA.CraftingOpen)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_END_CRAFTING_STATION_INTERACT, CA.CraftingClose)
+    end
+
+    -- JUSTICE/DESTROY
     if CA.SV.ShowDestroy then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED, CA.DestroyItem)
     end
-    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.MiscConfiscate or CA.SV.ShowDisguise then
+    if CA.SV.Loot or CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.MiscConfiscate or CA.SV.ShowDisguise then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED, CA.JusticeStealRemove)
     end
+    
 end
 
 function CA.RegisterBagEvents()
@@ -641,13 +666,6 @@ function CA.RegisterWritVoucherEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_WRIT_VOUCHER_UPDATE)
     if CA.SV.WritVoucherChange then -- Only register this event if the menu setting is true
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_WRIT_VOUCHER_UPDATE, CA.OnWritVoucherUpdate)
-    end
-end
-
-function CA.RegisterLootEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOOT_RECEIVED)
-    if CA.SV.Loot then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_RECEIVED, CA.OnLootReceived)
     end
 end
 
@@ -1039,6 +1057,10 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_DUELINVITEFAILREASON16, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON16), 1)
         SafeAddString(SI_DUELINVITEFAILREASON18, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON18), 1)
         SafeAddString(SI_DUELINVITEFAILREASON20, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON20), 1)
+        
+        -- Mail String Replacements
+        SafeAddString(SI_SENDMAILRESULT2, GetString(SI_LUIE_CA_MAIL_SENDMAILRESULT2), 1)
+        SafeAddString(SI_SENDMAILRESULT3, GetString(SI_LUIE_CA_MAIL_SENDMAILRESULT3), 1)
 
         -- Regroup Replacement String
         SafeAddString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG, GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG_ALT), 1)
@@ -1836,7 +1858,7 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
                 if not CA.SV.GoldChange then
                     printToChat(strformat("<<1>><<2>><<3>> <<c:4>>.", g_mailStringPart1, GetString(SI_LIST_AND_SEPARATOR), changetype, GetString(SI_CURRENCY_GOLD)))
                 else
-                    printToChat(strformat("<<1>><<2>><<c:3>>.", g_mailStringPart1, GetString(SI_LIST_AND_SEPARATOR)), GetString(SI_CURRENCY_GOLD))
+                    printToChat(strformat("<<1>><<2>><<c:3>>.", g_mailStringPart1, GetString(SI_LIST_AND_SEPARATOR), GetString(SI_CURRENCY_GOLD)))
                 end
             elseif not g_mailStop then
                 if not CA.SV.GoldChange then
@@ -1893,27 +1915,62 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         else
             total = ""
         end
+        
+        local itemCounter = 0
+        local mailAttachmentsStringPlural = "s"
+        local mailAttachmentsString = ""
+        for i = 1, #g_mailStacksOut do
+            itemCounter = itemCounter + 1
+        end
+        
+        if itemCounter == 1 then mailAttachmentsStringPlural = "" end
+        
+        if itemCounter > 0 then 
+            mailAttachmentsString = (strformat(GetString(SI_LUIE_CA_MAIL_SENT_ATTACHMENT), itemCounter, mailAttachmentsStringPlural))
+        elseif itemCounter == 0 then
+            mailAttachmentsString = ("")
+        end
 
+        -- COD Payment sent with Gold Change off
         if CA.SV.MiscMail and g_postageAmount == 0 and g_mailMoney == 0 and g_mailCOD == 0 and not CA.SV.GoldChange then
-            printToChat(strfmt(GetString(SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT1), changetype))
+            printToChat(strformat(GetString(SI_LUIE_CA_MAIL_COD_PAYMENT_SENT_VAR), changetype))
         end
+        -- COD Payment sent with Gold Change on
         if CA.SV.MiscMail and g_postageAmount == 0 and g_mailMoney == 0 and g_mailCOD == 0 and CA.SV.GoldChange then
-            printToChat(GetString(SI_LUIE_CA_MAIL_COD_GOLD_SENT))
+            printToChat(GetString(SI_LUIE_CA_MAIL_COD_PAYMENT_SENT))
         end
-        if CA.SV.MiscMail and g_mailCOD == 0 and g_mailMoney == 0 and g_postageAmount >= 1 then
-            printToChat(GetString(SI_LUIE_CA_MAIL_SENT_SUCCESS))
-        end
-        if CA.SV.MiscMail and g_mailMoney ~= 0 and not CA.SV.GoldChange then
-            printToChat(strfmt(GetString(SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG), g_mailMoney) )
-        end
-        if CA.SV.MiscMail and g_mailMoney ~= 0 and CA.SV.GoldChange then
-            printToChat(GetString(SI_LUIE_CA_MAIL_SENT_SUCCESS))
-        end
+        -- COD Sent with Gold Change Off
         if CA.SV.MiscMail and g_mailCOD ~= 0 and not CA.SV.GoldChange then
-            printToChat(strfmt(GetString(SI_LUIE_CA_MAIL_COD_GOLD_SENT2), g_mailCOD) )
+            printToChat(strformat(GetString(SI_LUIE_CA_MAIL_COD_SENT_VAR), g_mailCOD, itemCounter, mailAttachmentsStringPlural) )
         end
+        -- COD Sent with Gold Change On
         if CA.SV.MiscMail and g_mailCOD ~= 0 and CA.SV.GoldChange then
-            printToChat(GetString(SI_LUIE_CA_MAIL_COD_SENT_SUCCESS))
+            printToChat(strformat(GetString(SI_LUIE_CA_MAIL_COD_SENT), itemCounter) )
+        end
+        
+        -- Mail with no gold or COD sent
+        if CA.SV.MiscMail and g_mailCOD == 0 and g_mailMoney == 0 and g_postageAmount >= 1 then
+            if mailAttachmentsString ~= ("") then
+                printToChat(strformat("<<1>>!", mailAttachmentsString))
+            else
+                printToChat(GetString(SI_LUIE_CA_MAIL_SENT_SUCCESS))
+            end
+        end
+        -- Mail with gold sent and Gold Change off
+        if CA.SV.MiscMail and g_mailMoney ~= 0 and not CA.SV.GoldChange then
+            if mailAttachmentsString ~= ("") then
+                printToChat(strformat("<<1>><<2>><<3>> <<c:4>>!", mailAttachmentsString, GetString(SI_LIST_AND_SEPARATOR), changetype, GetString(SI_CURRENCY_GOLD)))
+            else
+                printToChat(strformat(GetString(SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG), g_mailMoney) )
+            end
+        end
+        -- Mail with gold sent and Gold Change On
+        if CA.SV.MiscMail and g_mailMoney ~= 0 and CA.SV.GoldChange then
+            if mailAttachmentsString ~= ("") then
+                printToChat(strformat("<<1>><<2>><<c:3>>!", mailAttachmentsString, GetString(SI_LIST_AND_SEPARATOR), GetString(SI_CURRENCY_GOLD)))
+            else
+                printToChat(GetString(SI_LUIE_CA_MAIL_SENT_GOLD_MSG))
+            end
         end
 
         valuesent = ( strfmt("%s%s%s", message, syntax, total) )
@@ -2587,9 +2644,50 @@ function CA.OnSellItem(eventCode, itemName, quantity, money)
     CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainorloss)
 end
 
-function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound, lootType, lootedBySelf, isPickpocketLoot, questItemIcon, itemId)
-    g_comboString = ""
+    -- List of items to whitelist as notable
+    local notableIDs = {
+        [56862]  = true,    -- [Fortified Nirncrux]
+        [56863]  = true,    -- [Potent Nirncrux]
+        [68342]  = true,    -- [Hakeijo]
+    }
 
+    -- List of items to blacklist
+    local blacklistIDs = {
+        [64713]  = true,    -- [Laurel]
+        [64690]  = true,    -- [Malachite Shard]
+        [69432]  = true,    -- [Glass Style Motif Fragment]
+        -- Trial non worthless junk
+        [114427] = true,    -- [Undaunted Plunder]
+        [81180]  = true,    -- [The Serpent's Egg-Tooth]
+        [74453]  = true,    -- [The Rid-Thar's Moon Pearls]
+        [87701]  = true,    -- [Star-Studded Champion's Baldric]
+        [87700]  = true,    -- [Periapt of Elinhir]
+        -- Mercenary Motif Pages
+        -- TODO: Find a better way than using IDs
+        [64716]  = true,    -- [Mercenary Motif]
+        [64717]  = true,    -- [Mercenary Motif]
+        [64718]  = true,    -- [Mercenary Motif]
+        [64719]  = true,    -- [Mercenary Motif]
+        [64720]  = true,    -- [Mercenary Motif]
+        [64721]  = true,    -- [Mercenary Motif]
+        [64722]  = true,    -- [Mercenary Motif]
+        [64723]  = true,    -- [Mercenary Motif]
+        [64724]  = true,    -- [Mercenary Motif]
+        [64725]  = true,    -- [Mercenary Motif]
+        [64726]  = true,    -- [Mercenary Motif]
+        [64727]  = true,    -- [Mercenary Motif]
+        [64728]  = true,    -- [Mercenary Motif]
+        [64729]  = true,    -- [Mercenary Motif]
+    }
+
+function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound, lootType, lootedBySelf, isPickpocketLoot, questItemIcon, itemId)
+
+    g_comboString = ""
+    g_isLooted = true
+    
+    if lootedBySelf and lootType ~= LOOT_TYPE_QUEST_ITEM then return end -- If we didn't receive the loot, and we don't have Only Notable loot shown then we ignore the rest of this event and everything is passed to Index functions
+    if not CA.SV.LootGroup then return end
+    
     local icon
     -- fix Icon for missing quest items
     if lootType == LOOT_TYPE_QUEST_ITEM then
@@ -2618,42 +2716,6 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
     local itemIsKeyFragment = (itemType == ITEMTYPE_TROPHY) and (specializedItemType == SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT)
     local itemIsSpecial = (itemType == ITEMTYPE_TROPHY and not itemIsKeyFragment) or (itemType == ITEMTYPE_COLLECTIBLE) or IsItemLinkConsumable(itemName)
 
-    -- List of items to whitelist as notable
-    notableIDs = {
-        [56862]  = true,    -- [Fortified Nirncrux]
-        [56863]  = true,    -- [Potent Nirncrux]
-        [68342]  = true,    -- [Hakeijo]
-    }
-
-    -- List of items to blacklist
-    blacklistIDs = {
-        [64713]  = true,    -- [Laurel]
-        [64690]  = true,    -- [Malachite Shard]
-        [69432]  = true,    -- [Glass Style Motif Fragment]
-        -- Trial non worthless junk
-        [114427] = true,    -- [Undaunted Plunder]
-        [81180]  = true,    -- [The Serpent's Egg-Tooth]
-        [74453]  = true,    -- [The Rid-Thar's Moon Pearls]
-        [87701]  = true,    -- [Star-Studded Champion's Baldric]
-        [87700]  = true,    -- [Periapt of Elinhir]
-        -- Mercenary Motif Pages
-        -- TODO: Find a better way than using IDs
-        [64716]  = true,    -- [Mercenary Motif]
-        [64717]  = true,    -- [Mercenary Motif]
-        [64718]  = true,    -- [Mercenary Motif]
-        [64719]  = true,    -- [Mercenary Motif]
-        [64720]  = true,    -- [Mercenary Motif]
-        [64721]  = true,    -- [Mercenary Motif]
-        [64722]  = true,    -- [Mercenary Motif]
-        [64723]  = true,    -- [Mercenary Motif]
-        [64724]  = true,    -- [Mercenary Motif]
-        [64725]  = true,    -- [Mercenary Motif]
-        [64726]  = true,    -- [Mercenary Motif]
-        [64727]  = true,    -- [Mercenary Motif]
-        [64728]  = true,    -- [Mercenary Motif]
-        [64729]  = true,    -- [Mercenary Motif]
-    }
-
     -- Check for Blacklisted loot
     if ( CA.SV.LootBlacklist and blacklistIDs[itemId] ) then
         return
@@ -2673,39 +2735,19 @@ function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound,
     end
 
     local gainorloss = 1
+    
+    if ( (lootType ~= LOOT_TYPE_ITEM and lootType ~= LOOT_TYPE_COLLECTIBLE) or
+         (itemType == ITEMTYPE_CONTAINER) or -- Don't show containers for group members
+         (itemQuality == ITEM_QUALITY_ARCANE and itemType == ITEMTYPE_RACIAL_STYLE_MOTIF) ) then -- Don't show blue motifs for group members
+        return
+    end
+    if ( (itemIsSet) or
+         (itemQuality >= ITEM_QUALITY_ARCANE and itemIsSpecial) or
+         (itemQuality >= ITEM_QUALITY_ARTIFACT and not itemIsKeyFragment) or
+         (lootType == LOOT_TYPE_COLLECTIBLE) or
+         (notableIDs[itemId]) ) then
 
-    if lootedBySelf then
-        if CA.SV.LootOnlyNotable then
-            -- Notable items are: any set items, any purple+ items, blue+ special items (e.g., treasure maps)
-            if ( (itemIsSet) or
-                 (itemQuality >= ITEM_QUALITY_ARCANE and itemIsSpecial) or
-                 (itemQuality >= ITEM_QUALITY_ARTIFACT and not itemIsKeyFragment) or
-                 (lootType == LOOT_TYPE_COLLECTIBLE) or
-                 (itemType == ITEMTYPE_COSTUME) or
-                 (itemType == ITEMTYPE_DISGUISE) or
-                 (notableIDs[itemId]) ) then
-
-                CA.LogItem( logPrefix, icon, itemName, itemType, quantity, lootedBySelf and "" or receivedBy, gainorloss )
-            end
-        elseif CA.SV.LootNotTrash and ( itemQuality == ITEM_QUALITY_TRASH ) and not ( ( itemType == ITEMTYPE_ARMOR) or (itemType == ITEMTYPE_COSTUME) or (itemType == ITEMTYPE_DISGUISE) ) then
-            return
-        else
-            CA.LogItem( logPrefix, icon, itemName, itemType, quantity, lootedBySelf and "" or receivedBy, gainorloss )
-        end
-    elseif CA.SV.LootGroup then
-        if ( (lootType ~= LOOT_TYPE_ITEM and lootType ~= LOOT_TYPE_COLLECTIBLE) or
-             (itemType == ITEMTYPE_CONTAINER) or -- Don't show containers for group members
-             (itemQuality == ITEM_QUALITY_ARCANE and itemType == ITEMTYPE_RACIAL_STYLE_MOTIF) ) then -- Don't show blue motifs for group members
-            return
-        end
-        if ( (itemIsSet) or
-             (itemQuality >= ITEM_QUALITY_ARCANE and itemIsSpecial) or
-             (itemQuality >= ITEM_QUALITY_ARTIFACT and not itemIsKeyFragment) or
-             (lootType == LOOT_TYPE_COLLECTIBLE) or
-             (notableIDs[itemId]) ) then
-
-            CA.LogItem( logPrefix, icon, itemName, itemType, quantity, self and "" or receivedBy, gainorloss )
-        end
+        CA.LogItem( logPrefix, icon, itemName, itemType, quantity, self and "" or receivedBy, gainorloss )
     end
 end
 
@@ -3032,6 +3074,14 @@ end
 -- Sends results of the trade to the Item Log print function and clears variables so they are reset for next trade interactions
 function CA.OnTradeSuccess(eventCode)
     g_comboString = ""
+    
+    g_tradeDisablePrint = true
+    -- Disables print to chat from item indexing momentarily while out trade results process!
+    local function ResetItemPrinting()
+        g_tradeDisablePrint = false
+    end
+    
+    zo_callLater(ResetItemPrinting, 500)
 
     if CA.SV.MiscTrade then
         printToChat(GetString(SI_TRADE_COMPLETE))
@@ -3095,13 +3145,17 @@ end
 
 function CA.MailMoneyChanged(eventCode, moneyAmount)
     g_mailMoney = moneyAmount
+    g_mailMoneyBackup = moneyAmount
     g_mailCOD = 0
+    g_mailCODBackup = 0
     g_postageAmount = GetQueuedMailPostage()
 end
 
 function CA.MailCODChanged(eventCode, codAmount)
     g_mailCOD = codAmount
+    g_mailCODBackup = codAmount
     g_mailMoney = 0
+    g_mailMoneyBackup = 0
     g_postageAmount = GetQueuedMailPostage()
 end
 
@@ -3112,47 +3166,27 @@ function CA.MailRemoved(eventCode)
 end
 
 function CA.OnMailReadable(eventCode, mailId)
-    g_mailStacks = {}
+    g_mailStacks = 0
 
     local numAttachments = GetMailAttachmentInfo( mailId )
 
-    for attachIndex = 1, numAttachments do
-        local icon, stack = GetAttachedItemInfo( mailId,  attachIndex)
-        local mailitemlink = GetAttachedItemLink( mailId,  attachIndex, LINK_STYLE_DEFAULT)
-        g_mailStacks[attachIndex] = { stack=stack, icon=icon, itemlink=mailitemlink, }
+    for i = 1, numAttachments do
+        g_mailStacks = g_mailStacks + 1
     end
 end
 
 function CA.OnMailTakeAttachedItem(eventCode, mailId)
-    g_comboString = ""
-    local NumMails = 0
-    local gainorloss = 1
-    local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
-    local receivedBy = ""
-    if CA.SV.ItemContextToggle then
-        logPrefix = ( CA.SV.ItemContextMessage )
-    end
-
-    for attachIndex = 1, #g_mailStacks do
-        local item = g_mailStacks[attachIndex]
-        local icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-        local itemType = GetItemLinkItemType(item.itemlink)
-        NumMails = NumMails+1
-        --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
-        if CA.SV.LootMail then
-            zo_callLater(function() CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss) end , 50)
-        end
-    end
-
     local plural = "s"
-    if NumMails == 1 then
+    if g_mailStacks == 1 then
         plural = ""
     end
 
-    g_mailStringPart1 = (strformat(GetString(SI_LUIE_CA_MAIL_RECEIVED_ATTACHMENT), NumMails, plural) )
+    if g_mailStacks == 0 then return end -- If we've already looted an item from this indexed mail and our inventory was full, don't try to print another message
+    
+    g_mailStringPart1 = (strformat(GetString(SI_LUIE_CA_MAIL_RECEIVED_ATTACHMENT), g_mailStacks, plural) )
     zo_callLater(PrintMailAttachmentsIfNoGold, 25) -- We call this with a super short delay, it will return a string as long as a currency change event doesn't trigger beforehand!
 
-    g_mailStacks = {}
+    g_mailStacks = 0
 end
 
 function PrintMailAttachmentsIfNoGold()
@@ -3178,37 +3212,42 @@ function CA.OnMailAttachRemove(eventCode, attachmentSlot)
     g_mailStacksOut[mailIndex] = nil
 end
 
--- Cleanup if a Trade is canceled/exited
+function CA.OnMailOpenBox(eventCode)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    if CA.SV.LootMail then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
+        g_inventoryStacks = {}
+        CA.IndexInventory() -- Index Inventory
+    end
+end
+
 function CA.OnMailCloseBox(eventCode)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    if CA.SV.Loot or CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
+    end
+    if not (CA.SV.Loot or CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise) then
+        g_inventoryStacks = {}
+    end
     g_mailStacksOut = {}
 end
 
 function CA.OnMailFail(eventCode, reason)
-    if CA.SV.MiscMail then
-        if reason == 2 then
-            printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_UNKNOWN_PLAYER))
-        end
-        if reason == 3 then
-            printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_RECIP_INBOX_FULL))
-        end
-        if reason == 4 then
-            printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_CANT_SEND_TO_RECIP))
-        end
-        if reason == 5 then
-            printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_NOT_ENOUGH_GOLD))
-        end
-        if reason == 11 then
-            printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_CANT_SEND_TO_SELF))
-        end
-        if reason == 9 then
-            printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_COD_NO_ATTACHMENT))
-        end
-        if reason == 7 then
-            printToChat(GetString(SI_LUIE_CA_MAIL_SENT_FAILED_NO_SUB_BODY_ATTACHMENT))
-        end
-        g_mailStop = true
-        zo_callLater(CA.MailClearVariables, 500)
+
+    local function RestoreMailBackupValues()
+        g_postageAmount = GetQueuedMailPostage()
+        g_mailCOD = g_mailCODBackup
+        g_mailMoney = g_mailMoneyBackup
+        g_mailCODBackup = 0
+        g_mailMoneyBackup = 0
     end
+
+    if CA.SV.MiscMail then
+        printToChat(GetString("SI_SENDMAILRESULT", reason))
+        g_mailStop = true -- Prevents mail received message from firing on a failed sent mail
+        zo_callLater(CA.MailClearVariables, 50)
+    end
+    zo_callLater(RestoreMailBackupValues, 50) -- Prevents values from being cleared by failed message (when inbox is full, the currency change fires first regardless and then is refunded)
 end
 
 function CA.MailClearVariables()
@@ -3219,9 +3258,7 @@ end
 -- Sends results of the trade to the Item Log print function and clears variables so they are reset for next trade interactions
 function CA.OnMailSuccess(eventCode)
     g_comboString = ""
-    local latency = GetLatency()
-    latency = latency + 50
-    zo_callLater(CA.FunctionMailCurrencyCheck, latency)
+    zo_callLater(CA.FunctionMailCurrencyCheck, 50)
 
     if CA.SV.LootMail then
         for mailIndex = 1,6 do -- Have to iterate through all 6 possible mail attachments, otherwise nil values will bump later items off the list potentially.
@@ -3243,7 +3280,9 @@ function CA.OnMailSuccess(eventCode)
 
     g_mailStacksOut = {}
     g_mailCOD = 0
+    g_mailCODBackup = 0
     g_mailMoney = 0
+    g_mailMoneyBackup = 0
     g_postageAmount = 0
 end
 
@@ -3927,77 +3966,90 @@ function CA.IndexBank()
 end
 
 function CA.CraftingOpen(eventCode, craftSkill, sameStation)
-    g_inventoryStacks = {}
-    g_bankStacks = {}
-    CA.IndexInventory() -- Index Inventory
-    CA.IndexBank() -- Index Bank
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateCraft)
+    if CA.SV.LootCraft then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateCraft)
+        g_inventoryStacks = {}
+        g_bankStacks = {}
+        CA.IndexInventory() -- Index Inventory
+        CA.IndexBank() -- Index Bank
+    end
 end
 
 function CA.CraftingClose(eventCode, craftSkill)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
+    if CA.SV.Loot or CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
     end
-    if not (CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise) then
+    if not (CA.SV.Loot or CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise) then
         g_inventoryStacks = {}
     end
     g_bankStacks = {}
 end
 
 function CA.BankOpen(eventCode)
-    g_inventoryStacks = {}
-    g_bankStacks = {}
-    CA.IndexInventory() -- Index Inventory
-    CA.IndexBank() -- Index Bank
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateBank)
+    if CA.SV.LootBank then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateBank)
+        g_inventoryStacks = {}
+        g_bankStacks = {}
+        CA.IndexInventory() -- Index Inventory
+        CA.IndexBank() -- Index Bank
+    end
 end
 
 function CA.BankClose(eventCode)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
+    if CA.SV.Loot or CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
     end
-    if not (CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise) then
+    if not (CA.SV.Loot or CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise) then
         g_inventoryStacks = {}
     end
     g_bankStacks = {}
 end
 
 function CA.GuildBankOpen(eventCode)
-    g_inventoryStacks = {}
-    CA.IndexInventory() -- Index Inventory
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateGuildBank)
+    if CA.SV.LootBank then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateGuildBank)
+        g_inventoryStacks = {}
+        CA.IndexInventory() -- Index Inventory
+    end
 end
 
 function CA.GuildBankClose(eventCode)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
+    if CA.SV.Loot or CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
     end
-    if not (CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise) then
+    if not (CA.SV.Loot or CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise) then
         g_inventoryStacks = {}
     end
 end
 
 function CA.FenceOpen(eventCode, allowSell, allowLaunder)
-    g_inventoryStacks = {}
-    CA.IndexInventory() -- Index Inventory
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateFence)
+    if CA.SV.LootVendor then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateFence)
+        g_inventoryStacks = {}
+        CA.IndexInventory() -- Index Inventory
+    end
+end
+
+function CA.StoreOpen(eventCode)
+    g_weAreInAStore = true
 end
 
 function CA.StoreClose(eventCode)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    if CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
+    if CA.SV.Loot or CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
     end
-    if not (CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise) then
+    if not (CA.SV.Loot or CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise) then
         g_inventoryStacks = {}
     end
+    g_weAreInAStore = false
 end
 
 function CA.FenceSuccess(eventCode, result)
@@ -4031,6 +4083,68 @@ function CA.GetItemLinkFromItemId(itemId)
     return ZO_LinkHandler_CreateLink(strformat("<<t:1>>", name), nil, ITEM_LINK_TYPE,itemId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 end
 
+local printNextChange = true
+local unequipHelper = false
+
+function CA.PrintInventoryIndexChanges(itemId, seticon, item, itemType, stackCountChange, receivedBy, gainorloss)
+
+    -- ResetIsLooted first before we potentially return the rest of the function
+    local function ResetIsLooted()
+        g_isLooted = false
+    end
+    zo_callLater(ResetIsLooted, 50)
+    
+    -- Return if any of these statments are true
+    if g_tradeDisablePrint then return end
+    if not printNextChange then return end
+    if unequipHelper then return end
+
+        -- If the itemID is on the blacklist, don't show
+        if ( CA.SV.LootBlacklist and blacklistIDs[itemid] ) then
+            return
+        end
+        
+        local _, specializedItemType = GetItemLinkItemType(item)
+        local itemQuality = GetItemLinkQuality(item)
+        local itemIsSet = GetItemLinkSetInfo(item)
+
+        -- Workaround for a ZOS bug: Daedric Embers are not flagged in-game as key fragments
+        if (itemId == 69059) then
+            specializedItemType = SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT
+        end
+        
+        local itemIsKeyFragment = (itemType == ITEMTYPE_TROPHY) and (specializedItemType == SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT)
+        local itemIsSpecial = (itemType == ITEMTYPE_TROPHY and not itemIsKeyFragment) or (itemType == ITEMTYPE_COLLECTIBLE) or IsItemLinkConsumable(item)
+        
+        local logPrefix = g_isLooted and GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTED) or GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
+        
+        if CA.SV.LootOnlyNotable then
+            -- Notable items are: any set items, any purple+ items, blue+ special items (e.g., treasure maps)
+            if ( (itemIsSet) or
+                 (itemQuality >= ITEM_QUALITY_ARCANE and itemIsSpecial) or
+                 (itemQuality >= ITEM_QUALITY_ARTIFACT and not itemIsKeyFragment) or
+                 (itemType == ITEMTYPE_COSTUME) or
+                 (itemType == ITEMTYPE_DISGUISE) or
+                 (notableIDs[itemId]) ) then
+
+                CA.LogItem(logPrefix, seticon, item, itemType, stackCountChange or 1, receivedBy, gainorloss)
+            end
+        elseif CA.SV.LootNotTrash and ( itemQuality == ITEM_QUALITY_TRASH ) and not ( ( itemType == ITEMTYPE_ARMOR) or (itemType == ITEMTYPE_COSTUME) or (itemType == ITEMTYPE_DISGUISE) ) then
+            return
+        else
+            CA.LogItem(logPrefix, seticon, item, itemType, stackCountChange or 1, receivedBy, gainorloss)
+        end
+    
+end
+
+function CA.ResetPrintNextChange()
+    printNextChange = true
+end
+
+function CA.UpdateUnequipHelperValue()
+    unequipHelper = false
+end
+
 -- Only used if the option to see destroyed items or items lost from a guard is turned on
 function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     if bagId == BAG_WORN then
@@ -4049,6 +4163,8 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
         elseif g_equippedStacks[slotId] then -- EXISTING ITEM
             -- Means item was modified (enchanted, etc)
             if stackCountChange == 0 then -- For equipment, stackCountChange 0 is also applied when gear is swapped out. This means we need to update the index on this change.
+                unequipHelper = true
+                zo_callLater (CA.UpdateUnequipHelperValue, 100)
                 local icon, stack = GetItemInfo(bagId, slotId)
                 local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                 g_equippedStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
@@ -4074,6 +4190,8 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                 -- CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
                 g_equippedStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
+                unequipHelper = true
+                zo_callLater (CA.UpdateUnequipHelperValue, 100)
                 local gainorloss = 3
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_UNEQUIP)
                 local change = (stackCountChange * -1)
@@ -4111,8 +4229,10 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
             local gainorloss = 1
-            local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTEDITEM)
-            -- CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+            local logPrefix = ""
+            local itemId = GetItemId(bagId, slotId)
+            if not g_weAreInAStore and CA.SV.Loot then zo_callLater(function() CA.PrintInventoryIndexChanges(itemId, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) end, 50) end
+            printNextChange = true
 
         elseif g_inventoryStacks[slotId] then -- EXISTING ITEM
             local item = g_inventoryStacks[slotId]
@@ -4126,12 +4246,16 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                 local gainorloss = 1
-                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_GAINEDSTACK)
+                local logPrefix = ""
                 local icon, stack = GetItemInfo(bagId, slotId)
                 local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-                -- CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+                local itemId = GetItemId(bagId, slotId)
+                if not g_weAreInAStore and CA.SV.Loot then zo_callLater(function() CA.PrintInventoryIndexChanges(itemId, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss) end, 50) end
+                printNextChange = true
                 g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
+                if itemType ~= ITEMTYPE_CONTAINER then printNextChange = false end -- If the item is a container, don't set this value to false, as if we open a container with 1 item and take it, the container will be destroyed and falsely flag this value.
+                zo_callLater(CA.ResetPrintNextChange, 100)
                 local gainorloss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
@@ -4150,6 +4274,28 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
         end
     end
 
+    if bagId == BAG_VIRTUAL then
+        local itemlink = CA.GetItemLinkFromItemId(slotId)
+        local icon = GetItemLinkInfo(itemlink)
+        icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
+        local receivedBy = ""
+        local gainorloss = 1
+        local logPrefix = ("LOOTED - Craft Bag")
+        local stack = stackCountChange
+        local itemType = GetItemLinkItemType(itemlink)
+
+        -- Item removed from craft bag
+        if stackCountChange < 1 then
+            printNextChange = false
+            zo_callLater(CA.ResetPrintNextChange, 100)
+            return
+        end
+
+        if printNextChange == true then
+                if not g_weAreInAStore and CA.SV.Loot then CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss) end
+        end
+    end
+    
     g_itemWasDestroyed = false
 end
 
@@ -5093,64 +5239,4 @@ function CA.NewCollectible(eventCode, collectibleId)
     message = CollectibleColorize:Colorize(strfmt("%s%s %s%s", bracket1, categoryType, GetString(SI_LUIE_CA_PREFIX_MESSAGE_ADDED), bracket2))
 
     printToChat(strfmt("%s%s %s", message, icon, link))
-end
-
-
---- Crown store test shit
-
-function CA.RegisterCrownEvents()
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ANIMATION_NOTE, CA.Crown1)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CROWN_CRATE_INVENTORY_UPDATED, CA.Crown2)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CROWN_CRATE_QUANTITY_UPDATE, CA.Crown3)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CROWN_CRATE_OPEN_RESPONSE, CA.Crown4)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CROWN_CRATES_SYSTEM_STATE_CHANGED, CA.Crown5)
-end
-
-
-function CA.Crown1(eventCode, animNote)
-    d("CROWN - EVENT ANIMATION NOTE")
-    
-    g_inventoryStacks = {}
-    g_bankStacks = {}
-    CA.IndexInventory() -- Index Inventory
-    CA.IndexBank() -- Index Bank
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateCraft)
-    
-end
-
-function CA.Crown2(eventCode)
-    d("Crown Crate Inventory Updated")
-end
-
-function CA.Crown3(eventCode, crateId, count)
-    d("Crown Crate QUANTITY UPDATE: " .. count .. " --- CrownCrateID: " .. crateId)
-    
-    g_inventoryStacks = {}
-    g_bankStacks = {}
-    CA.IndexInventory() -- Index Inventory
-    CA.IndexBank() -- Index Bank
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateCraft)
-    
-    --zo_callLater(CA.CraftingClose, 1000)
-end
-
-function CA.Crown4(eventCode, crownCrateId, response)
-
-    d("Crown Crate Open Response: " ..response.. " --- CrownCrateID: " .. crownCrateId)
-    
-    g_inventoryStacks = {}
-    g_bankStacks = {}
-    CA.IndexInventory() -- Index Inventory
-    CA.IndexBank() -- Index Bank
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateCraft)
-    
-    --zo_callLater(CA.CraftingClose, 1000)
-    
-end
-
-function CA.Crown5(eventCode, crownCratesSystemState)
-    d("Crown Crate system state change: " .. crownCratesSystemState)
 end

@@ -166,24 +166,31 @@ ZO_CreateStringId("SI_LUIE_CA_LOCKPICK_FAILED",                         "Lockpic
 ZO_CreateStringId("SI_LUIE_CA_LOCKPICK_SUCCESS",                        "Lockpick successful!")
 ZO_CreateStringId("SI_LUIE_CA_LVL_ANNOUNCE_CP",                         "Champion Level Achieved!")
 ZO_CreateStringId("SI_LUIE_CA_LVL_ANNOUNCE_XP",                         "You have reached")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_GOLD_SENT",                      "COD Payment sent!")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_PAYMENT_MSG",                    "COD Payment")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_SENT_SUCCESS",                   "COD sent!")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT1",                 "COD Payment of <<1>> gold sent!")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_VAR_GOLD_SENT2",                 "COD sent for <<1>> gold!")
+
+ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_PAYMENT_MSG",                    "COD Payment") -- PREFIX MESSAGE
+
+
+ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_PAYMENT_SENT",                   "COD payment sent!")
+ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_PAYMENT_SENT_VAR",               "COD payment of <<1>> gold sent!")
+
+ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_SENT",                           "COD sent with <<1>> attachments!")
+ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_SENT_VAR",                       "COD sent for <<1>> gold with <<2>> attachment<<3>>!")
+
+ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_SUCCESS",                       "Mail sent!")
+
+ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_ATTACHMENT",                    "Mail sent with <<1>> attachment<<2>>")
+ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_GOLD_MSG",                      "Mail sent with gold!")
+ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG",                  "Mail sent with <<1>> gold!")
+
+
 ZO_CreateStringId("SI_LUIE_CA_MAIL_DELETED_MSG",                        "Mail deleted!")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_ATTACHMENT",                "Received mail with <<1>> attachment<<2>>")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_GOLD_MSG",                  "Received mail with gold.")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_VAR_GOLD_MSG",              "Received mail with <<1>> gold.")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_FAILED_CANT_SEND_TO_RECIP",     "You can't send mail to that recipient.")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_FAILED_CANT_SEND_TO_SELF",      "You can't send mail to yourself.")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_FAILED_COD_NO_ATTACHMENT",      "You must attach at least one item for Cash on Delivery mail.")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_FAILED_NOT_ENOUGH_GOLD",        "Can't send mail: Not enough gold.")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_FAILED_NO_SUB_BODY_ATTACHMENT", "Can't send mail: This mail is lacking a subject, body, or attachments.")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_FAILED_RECIP_INBOX_FULL",       "Can't send mail: Recipient's Inbox is full.")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_FAILED_UNKNOWN_PLAYER",         "Can't send mail: Unknown Player.")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_SUCCESS",                       "Mail sent!")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG",                  "Mail sent with <<1>> gold!")
+
+ZO_CreateStringId("SI_LUIE_CA_MAIL_SENDMAILRESULT2",                    "Unknown player.") -- Fixing missing periods on default strings
+ZO_CreateStringId("SI_LUIE_CA_MAIL_SENDMAILRESULT3",                    "Recipient's Inbox is full.") -- Fixing missing periods on default strings
+
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT0",                "|cFEFEFE<<1>>|r is too busy to pledge with.")
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT1",                "|cFEFEFE<<1>>|r can't use Pledge of Mara while a player is dead.")
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT2",                "Beginning Ritual of Mara with |cFEFEFE<<1>>|r.")
@@ -205,10 +212,8 @@ ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_GAINEDSTACK",              "Gained 
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_LAUNDERED",                "Laundered")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_LEARNED",                  "Learned")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_LOOTED",                   "Looted")
-ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_LOOTEDITEM",               "Looted Item")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_LOST",                     "Lost")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED",                "Purchased")
-ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_RECEIVED",                 "Received")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_REFINED",                  "Refined")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_SENT",                     "Sent")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_SOLD",                     "Sold")
