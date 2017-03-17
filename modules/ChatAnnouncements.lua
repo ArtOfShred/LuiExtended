@@ -106,6 +106,7 @@ CA.D = {
     ShowCraftUse                  = false,
     ShowDestroy                   = false,
     ShowDisguise                  = false,
+    ShowLockpickBreak             = false,
     TelVarStoneChange             = true,
     TelVarStoneColor              = { 0.368627, 0.643137, 1, 1 },
     TelVarStoneName               = GetString(SI_CURRENCY_TELVAR_STONES),
@@ -155,6 +156,7 @@ local g_itemString2Gain           = ""
 local g_itemString1Loss           = ""
 local g_itemString2Loss           = ""
 local g_itemWasDestroyed          = false
+local g_lockpickBroken            = false
 local g_lastPercentage            = {} -- Here we will store last displayed percentage for achievement
 local g_launderCheck              = false
 local g_launderGoldstring         = ""
@@ -675,9 +677,19 @@ function CA.RegisterBagEvents()
 end
 
 function CA.RegisterLockpickEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOCKPICK_BROKE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INTERACTABLE_IMPOSSIBLE_TO_PICK)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INTERACTABLE_LOCKED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOCKPICK_FAILED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS)
+    if CA.SV.ShowLockpickBreak then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_BROKE, CA.MiscAlertLockBroke)
+    end
     if CA.SV.MiscLockpick then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INTERACTABLE_IMPOSSIBLE_TO_PICK, CA.MiscAlertLockImpossible)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INTERACTABLE_LOCKED, CA.MiscAlertLockLocked)
+    end
+    if CA.SV.MiscLockpick or CA.SV.ShowLockpickBreak then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_FAILED, CA.MiscAlertLockFailed)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS, CA.MiscAlertLockSuccess)
     end
@@ -2441,12 +2453,43 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
     end
 end
 
+local function ResetLockpickBroken()
+    g_lockpickBroken = false
+end
+
+function CA.MiscAlertLockBroke(eventCode, inactivityLengthMs)
+    if CA.SV.ShowLockpickBreak then
+        g_lockpickBroken = true
+        zo_callLater(ResetLockpickBroken, 200)
+    end
+end
+
 function CA.MiscAlertLockFailed(eventCode)
-    printToChat(GetString(SI_LUIE_CA_LOCKPICK_FAILED))
+    if CA.SV.MiscLockpick then
+        printToChat(GetString(SI_LUIE_CA_LOCKPICK_FAILED))
+    end   
+    if CA.SV.ShowLockpickBreak then
+        g_lockpickBroken = true
+        zo_callLater(ResetLockpickBroken, 200)
+    end
 end
 
 function CA.MiscAlertLockSuccess(eventCode)
-    printToChat(GetString(SI_LUIE_CA_LOCKPICK_SUCCESS))
+    if CA.SV.MiscLockpick then
+        printToChat(GetString(SI_LUIE_CA_LOCKPICK_SUCCESS))
+    end
+    if CA.SV.ShowLockpickBreak then
+        g_lockpickBroken = true
+        zo_callLater(ResetLockpickBroken, 200)
+    end
+end
+
+function CA.MiscAlertLockImpossible(eventCode, interactableName)
+    printToChat(strformat(GetString(SI_LOCKPICK_IMPOSSIBLE_LOCK), interactableName))
+end
+
+function CA.MiscAlertLockLocked(eventCode, interactableName)
+    printToChat(strformat(GetString(SI_LOCKPICK_NO_KEY_AND_NO_LOCK_PICKS), interactableName))
 end
 
 function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source)
@@ -4150,6 +4193,7 @@ end
 
 -- Only used if the option to see destroyed items or items lost from a guard is turned on
 function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
+    
     if bagId == BAG_WORN then
         local receivedBy = ""
         if not g_equippedStacks[slotId] then -- NEW ITEM
@@ -4273,6 +4317,13 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                 local gainorloss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
+                
+                if CA.SV.ShowLockpickBreak and g_lockpickBroken then
+                    logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_BROKEN)
+                    gainorloss = 2
+                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                end
+                
                 local endcount = g_inventoryStacks[slotId].stack - change
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
                     if CA.SV.ShowDestroy and g_itemWasDestroyed then
@@ -4313,6 +4364,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
     end
 
     g_itemWasDestroyed = false
+    g_lockpickBroken = false
 end
 
 local g_smithing = {} -- Table for smithing mode
@@ -4613,6 +4665,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
     end
 
     g_itemWasDestroyed = false
+    g_lockpickBroken = false
 end
 
 function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
@@ -4782,6 +4835,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
     end
 
     g_itemWasDestroyed = false
+    g_lockpickBroken = false
 end
 
 function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
@@ -4869,6 +4923,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
     end
 
     g_itemWasDestroyed = false
+    g_lockpickBroken = false
 end
 
 function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
@@ -4954,6 +5009,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
     end
 
     g_itemWasDestroyed = false
+    g_lockpickBroken = false
     g_comboString = ""
     g_launderCheck = false
 end

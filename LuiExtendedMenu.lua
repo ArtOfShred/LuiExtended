@@ -1981,6 +1981,17 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.ShowDestroy,
                     },
                     {
+                        -- Show Lockpick Break
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWLOCKPICKBREAK),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWLOCKPICKBREAK_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.ShowLockpickBreak end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowLockpickBreak = value LUIE.ChatAnnouncements.RegisterLockpickEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.ShowDestroy) end,
+                        default = LUIE.ChatAnnouncements.D.ShowLockpickBreak,
+                    },
+                    {
                         -- Show Disguise Equip
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWDISGUISE),
