@@ -326,7 +326,7 @@ E.DisguiseIcons = {
     [71090] = { name = 'Servant\'s Outfit', icon = 'LuiExtended/media/icons/disguises/disguise_servants_outfit.dds', description = 'as a servant of the Iron Wheel.' },
     [71541] = { name = 'Castle Kvatch Sentinel Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', description = 'as a Castle Kvatch sentinel.' }, -- NO ICON (Not sure it exists)
     [71789] = { name = 'Castle Kvatch Sentinel Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', description = 'as a Castle Kvatch sentinel.' }, -- NO ICON (Not sure it exists)
-    [79332] = { name = 'Monk\'s Diguise', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', description = 'as a monk.' }, -- NO ICON
+    --[79332] = { name = 'Monk\'s Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_monks_disguise.dds', description = 'as a monk.' }, -- HAS AN AURA SO NOT NECESSARY (Note - we make an exception to HIDE this itemId to prevent errors)
     [79505] = { name = 'Sentinel Guard Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', description = 'as a Sentinel Guard.' }, -- NO ICON (Not sure it exists)
     [55262] = { name = 'Guild Tabard', icon = 'LuiExtended/media/icons/disguises/disguise_guild_tabard.dds' },
 }
@@ -1081,6 +1081,12 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [68455] = 'LuiExtended/media/icons/abilities/ability_innate_proc_disintegration.dds', -- Disintegration (Lightning Vulnerability Proc)
     [68458] = 'LuiExtended/media/icons/abilities/ability_innate_proc_deep_freeze.dds', -- Deep Freeze (Frost Vulnerability Proc)
     [68457] = 'LuiExtended/media/icons/abilities/ability_innate_proc_deep_freeze.dds', -- Deep Freeze (Frost Vulnerability Proc)
+    
+    ----------------------------------------------------------------
+    -- EQUIPMENT ---------------------------------------------------
+    ----------------------------------------------------------------
+    
+    [82631] = 'LuiExtended/media/icons/disguises/disguise_monks_disguise.dds', -- Monk Disguise Timer (Monk's Disguise)
 
     ----------------------------------------------------------------
     -- CHAMPION POINTS ---------------------------------------------
@@ -2354,6 +2360,12 @@ E.EffectNameOverride = {
     [17945] = 'Weakening Enchantment', -- Weakening (Glyph of Weakening)
     --[17910] = 'Weapon Damage Enchantment', -- Weapon Damage (Glyph of Weapon Damage) (DUMMY EVENT, HERE JUST IN CASE)
     --[21230] = 'Weapon Damage Enchantment', -- Berserker (Glyph of Weapon Damage) (Added in case ever needed)
+    
+    ----------------------------------------------------------------
+    -- EQUIPMENT ---------------------------------------------------
+    ----------------------------------------------------------------
+    
+    [82631] = 'Monk\'s Disguise', -- Monk Disguise Timer (Monk's Disguise)
 
     ----------------------------------------------------------------
     -- PLAYER ABILITIES --------------------------------------------

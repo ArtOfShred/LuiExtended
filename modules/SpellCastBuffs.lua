@@ -694,7 +694,9 @@ function SCB.InitializeDisguise()
         if g_currentDisguise == 55262 and (GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) > 0 or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME) > 0) then
             return
         end
-
+        
+        if g_currentDisguise == 79332 then return end -- Don't show Monk's Disguise since it already has an aura
+        
         local name = E.DisguiseIcons[g_currentDisguise].name
         local icon = E.DisguiseIcons[g_currentDisguise].icon
             g_effectsList.player1["DisguiseType"] =
@@ -721,6 +723,8 @@ function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory
             if g_currentDisguise == 55262 and (GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) > 0 or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME) > 0) then
                 return
             end
+            
+            if g_currentDisguise == 79332 then return end -- Don't show Monk's Disguise since it already has an aura
 
             local name = E.DisguiseIcons[g_currentDisguise].name
             local icon = E.DisguiseIcons[g_currentDisguise].icon
@@ -2378,11 +2382,10 @@ function SCB.OnPlayerActivated(eventCode)
     end
 
     -- Sets the player to dead if reloading UI or loading in while dead.
-    --[[
-    if isUnitDead("player") then
+    if IsUnitDead("player") then
         g_playerDead = true
     end
-    ]]--
+    
 end
 
 function SCB.OnPlayerDeactivated(eventCode)

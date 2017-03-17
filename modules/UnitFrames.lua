@@ -148,6 +148,7 @@ local g_savedHealth         = {}
 local g_statFull            = {}
 local g_targetThreshold
 local g_targetUnitFrame          -- Reference to default UI target unit frame
+local playerDisplayName = GetUnitDisplayName("player")
 
 local CP_BAR_COLOURS = ZO_CP_BAR_GRADIENT_COLORS
 
@@ -831,8 +832,10 @@ function UF.Initialize( enabled )
         EVENT_MANAGER:AddFilterForEvent(moduleName, EVENT_COMBAT_EVENT, REGISTER_FILTER_IS_ERROR, true )
 
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_DESTROYED,        UF.OnUnitDestroyed )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_ADDED,          UF.OnUnitDestroyed ) -- this will request group frame redraw
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_REMOVED,        UF.OnUnitDestroyed ) -- this will request group frame redraw
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_ADDED,          UF.SocialUpdateFrames)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_REMOVED,        UF.SocialUpdateFrames)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_IGNORE_ADDED,          UF.SocialUpdateFrames)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_IGNORE_REMOVED,        UF.SocialUpdateFrames)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_COMBAT_STATE,   UF.OnPlayerCombatState )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED,    UF.OnWerewolf )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BEGIN_SIEGE_CONTROL,       UF.OnSiege )
@@ -851,16 +854,10 @@ function UF.Initialize( enabled )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEADER_UPDATE,         UF.OnLeaderUpdate )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BOSSES_CHANGED,    UF.OnBossesChanged )
 
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "1", EVENT_GUILD_SELF_LEFT_GUILD,     UF.InvalidateGuildMemberIndex )
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "2", EVENT_GUILD_SELF_LEFT_GUILD,     UF.GuildUpdateGroupFrames )
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "1", EVENT_GUILD_SELF_JOINED_GUILD,   UF.OnGuildSelfJoinedGuild )
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "2", EVENT_GUILD_SELF_JOINED_GUILD,   UF.GuildUpdateGroupFrames )
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "1", EVENT_GUILD_MEMBER_ADDED,                UF.OnGuildMemberAdded )
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "2", EVENT_GUILD_MEMBER_ADDED,                UF.GuildUpdateGroupFrames )
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "1", EVENT_GUILD_MEMBER_CHARACTER_UPDATED,    UF.OnGuildMemberAdded )
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "2", EVENT_GUILD_MEMBER_CHARACTER_UPDATED,    UF.GuildUpdateGroupFrames )
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "1", EVENT_GUILD_MEMBER_REMOVED,  UF.OnGuildMemberRemoved )
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "2", EVENT_GUILD_MEMBER_REMOVED,  UF.GuildUpdateGroupFrames )
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD,     UF.SocialUpdateFrames)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD,   UF.SocialUpdateFrames)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_ADDED,        UF.SocialUpdateFrames)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_REMOVED,      UF.SocialUpdateFrames)
     end
 
     -- New AvA frames
@@ -1366,6 +1363,18 @@ local HIDE_LEVEL_TYPES = {
     [UNIT_TYPE_SIMPLEINTERACTOBJ] = true,
 }
 
+local function IsGuildMate(unitTag)
+    local displayName = GetUnitDisplayName(unitTag)
+    if displayName == playerDisplayName then return end
+    for i = 1, GetNumGuilds() do
+        local guildId = GetGuildId(i)
+        if GetGuildMemberIndexFromDisplayName(guildId, displayName) ~= nil then 
+            return true
+        end
+    end
+    return false
+end
+
 -- Updates text labels, classIcon, etc
 function UF.UpdateStaticControls( unitFrame )
     if unitFrame == nil then
@@ -1428,7 +1437,7 @@ function UF.UpdateStaticControls( unitFrame )
     if unitFrame.friendIcon ~= nil then
         local isIgnored = unitFrame.isPlayer and IsUnitIgnored( unitFrame.unitTag )
         local isFriend = unitFrame.isPlayer and IsUnitFriend( unitFrame.unitTag )
-        local isGuild = unitFrame.isPlayer and (not isFriend) and (not isIgnored) and UF.GetGuildDisplayNameInfo( GetUnitDisplayName( unitFrame.unitTag ) )
+        local isGuild = unitFrame.isPlayer and (not isFriend) and (not isIgnored) and IsGuildMate( unitFrame.unitTag )
         if isIgnored or isFriend or isGuild then
             unitFrame.friendIcon:SetTexture( isIgnored and "LuiExtended/media/unitframes/unitframes_social_ignore.dds" or isFriend and "/esoui/art/campaign/campaignbrowser_friends.dds" or "/esoui/art/campaign/campaignbrowser_guild.dds" )
             unitFrame.friendIcon:SetHidden(false)
@@ -3006,121 +3015,13 @@ function UF.CustomFramesDebugRaid()
     UF.OnLeaderUpdate( nil, "RaidGroup1" )
 end
 
---[[----------------------------------------------------------
-    GUILD MEMBER INDEX
-
-    Following functions and data structures are used to keep local index
-    of all characters and players for all 5 possible guilds
---]]----------------------------------------------------------
-
-local g_guildMemberIndexDirty = true
-local g_guildMemberIndexDisplayNames = nil
-
--- Used to invalidate local index. Called on several event listeners
-function UF.InvalidateGuildMemberIndex()
-    g_guildMemberIndexDirty = true
-end
-
--- Used to rebuild from scratch local index
-function UF.RebuildGuildMemberIndex()
-    -- clear tables
-    g_guildMemberIndexDisplayNames = {}
-
-    for i = 1, MAX_GUILDS do
-        UF.OnGuildSelfJoinedGuild(EVENT_GUILD_SELF_JOINED_GUILD, GetGuildId(i))
-    end
-    g_guildMemberIndexDirty = false
-end
-
-local function UpdateGuildMember( gid, mid )
-    local displayName = GetGuildMemberInfo(gid, mid)
-
-    -- Remember in which guilds is this player
-    if g_guildMemberIndexDisplayNames[displayName] then
-        g_guildMemberIndexDisplayNames[displayName][gid] = true
-    else
-        g_guildMemberIndexDisplayNames[displayName] = { [gid] = true }
-    end
-end
-
--- Used to add characters from one specific guild.
--- Called on EVENT_GUILD_SELF_JOINED_GUILD listener
-function UF.OnGuildSelfJoinedGuild(eventCode, guildId)
-    if not g_guildMemberIndexDisplayNames then
-        return
-    end
-    if not guildId or guildId == 0 then
-        return
-    end
-
-    local memberCount = GetNumGuildMembers(guildId)
-    for mid = 1, memberCount, 1 do
-        UpdateGuildMember( guildId, mid )
-    end
-
-    -- Finally purge information about yourself
-    g_guildMemberIndexDisplayNames[GetDisplayName()] = nil
-end
-
--- Used to update information on single player in single guild
--- Called on EVENT_GUILD_MEMBER_ADDED and EVENT_GUILD_MEMBER_CHARACTER_UPDATED listeners
-function UF.OnGuildMemberAdded(eventCode, guildId, displayName)
-    if not g_guildMemberIndexDisplayNames then
-        return
-    end
-    if not guildId or guildId == 0 then
-        return
-    end
-
-    local memberCount = GetNumGuildMembers(guildId)
-    for mid = 1, memberCount, 1 do
-        if GetGuildMemberInfo(guildId, mid) == displayName then
-            UpdateGuildMember( guildId, mid )
-        end
-    end
-end
-
--- Used to remove single player from local list
--- Called on EVENT_GUILD_MEMBER_REMOVED  event listeners
-function UF.OnGuildMemberRemoved(eventCode, guildId, displayName, characterName)
-    if not g_guildMemberIndexDisplayNames then
-        return
-    end
-    if not guildId or guildId == 0 then
-        return
-    end
-
-    if not g_guildMemberIndexDisplayNames[displayName] then
-        return
-    end
-
-    g_guildMemberIndexDisplayNames[displayName][guildId] = nil
-    -- if this player is not in any other of your guilds, then purge remaining information
-    if #g_guildMemberIndexDisplayNames[displayName] == 0 then
-        g_guildMemberIndexDisplayNames[displayName] = nil
-    end
-end
-
--- Used to query if characterName is local list
-function UF.GetGuildDisplayNameInfo( displayName )
-    if g_guildMemberIndexDirty then
-        UF.RebuildGuildMemberIndex()
-    end
-    return g_guildMemberIndexDisplayNames[displayName]
-end
-
 -- Updates group frames when a relevant guild change event happens
-function UF.GuildUpdateGroupFrames()
-
-    local function UpdateGuildIcons()
-        for i = 1, 24 do
-            local unitTag = "group" .. i
-            if DoesUnitExist(unitTag) then
-                UF.ReloadValues(unitTag)
-            end
+function UF.SocialUpdateFrames()
+    for i = 1, 24 do
+        local unitTag = "group" .. i
+        if DoesUnitExist(unitTag) then
+            UF.ReloadValues(unitTag)
         end
     end
-
-    zo_callLater(UpdateGuildIcons, 2000)
-    zo_callLater(function() UF.ReloadValues("reticleover") end, 2000)
+    UF.ReloadValues("reticleover")
 end
