@@ -101,6 +101,7 @@ CA.D = {
     MiscMara                      = true,
     MiscSocial                    = false,
     MiscTrade                     = false,
+    MiscStuck                     = true,
     ShowConfiscate                = false,
     ShowCraftUse                  = false,
     ShowDestroy                   = false,
@@ -284,6 +285,7 @@ function CA.Initialize(enabled)
     CA.RegisterMaraEvents()
     CA.RegisterCollectibleEvents()
     CA.RegisterColorEvents()
+    CA.RegisterStuckEvents()
 end
 
 function CA.RegisterColorEvents()
@@ -422,6 +424,21 @@ function CA.RegisterXPEvents()
 
         CA.LevelUpdateHelper()
     end
+end
+
+function CA.RegisterStuckEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_BEGIN)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_ERROR_ALREADY_IN_PROGRESS)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_ERROR_INVALID_LOCATION)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_ERROR_IN_COMBAT)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_ERROR_ON_COOLDOWN)
+        if CA.SV.MiscStuck then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_BEGIN, CA.StuckBegin)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_ERROR_ALREADY_IN_PROGRESS, CA.StuckAlreadyInProgress)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_ERROR_INVALID_LOCATION, CA.StuckInvalidLocation)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_ERROR_IN_COMBAT, CA.StuckInCombat)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_ERROR_ON_COOLDOWN, CA.StuckOnCooldown)
+        end
 end
 
 function CA.RegisterGroupEvents()
@@ -5269,15 +5286,6 @@ function CA.MaraResult (eventCode, reason, targetCharacterName, targetDisplayNam
 
     printToChat(strformat(GetString("SI_PLEDGEOFMARARESULT", reason), maraName))
 
-    -- TODO : this item link doesn't show crafted status or correctly display inventory placement, possibly just index instead?
-    if reason == 3 and CA.SV.Loot then
-        local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
-        local receivedBy = ""
-        local gainorloss = 1
-        local icon = CA.SV.LootIcons and "|t16:16:esoui/art/icons/entitlement_002.dds|t " or ""
-        local itemlink = '|H1:item:44904:1:1:0:0:0:0:0:0:0:0:0:0:0:0:36:0:0:0:0:0|h|h'
-        CA.LogItem(logPrefix, icon, itemlink, itemType, 1, receivedBy, gainorloss)
-    end
 end
 
 function CA.NewCollectible(eventCode, collectibleId)
@@ -5312,4 +5320,26 @@ function CA.NewCollectible(eventCode, collectibleId)
     message = CollectibleColorize:Colorize(strfmt("%s%s %s%s", bracket1, categoryType, GetString(SI_LUIE_CA_PREFIX_MESSAGE_ADDED), bracket2))
 
     printToChat(strfmt("%s%s %s", message, icon, link))
+end
+
+function CA.StuckBegin(eventCode)
+    printToChat(GetString(SI_FIXING_STUCK_TEXT))
+end
+
+function CA.StuckAlreadyInProgress(eventCode)
+    printToChat(GetString(SI_STUCK_ERROR_ALREADY_IN_PROGRESS))
+end
+
+function CA.StuckInvalidLocation(eventCode)
+    printToChat(GetString(SI_INVALID_STUCK_LOCATION))
+end
+
+function CA.StuckInCombat(eventCode)
+    printToChat(GetString(SI_STUCK_ERROR_IN_COMBAT))
+end
+
+function CA.StuckOnCooldown(eventCode)
+    local cooldownText = ZO_FormatTime(GetStuckCooldown(), TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_TWELVE_HOUR)
+    local cooldownRemainingText = ZO_FormatTimeMilliseconds(GetTimeUntilStuckAvailable(), TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_TWELVE_HOUR)
+    printToChat(strformat(GetString(SI_STUCK_ERROR_ON_COOLDOWN), cooldownText, cooldownRemainingText ))
 end

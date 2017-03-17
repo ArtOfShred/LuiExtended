@@ -2730,6 +2730,17 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.MiscDisguise) end,
                         default = LUIE.ChatAnnouncements.D.MiscDisguiseAlert,
                     },
+                    {
+                        -- Show /Stuck Alerts
+                        type = "checkbox",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWSTUCK)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWSTUCK_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscStuck end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscStuck = value LUIE.ChatAnnouncements.RegisterStuckEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.MiscStuck,
+                    },
                 },
             },
         },

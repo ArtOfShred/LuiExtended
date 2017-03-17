@@ -127,6 +127,7 @@ local function LUIE_RegisterEvents()
     EVENT_MANAGER:RegisterForEvent(LUIE.name, EVENT_ACTION_LAYER_PUSHED, LUIE_ToggleVisibility)
     -- Events registed for Slash Commands
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_SOCIAL_ERROR, LUIE.SocialError)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_JUMP_FAILED, LUIE.JumpFailed)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, LUIE.GuildAddedSelf)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD, LUIE.GuildRemovedSelf)
 end
@@ -489,9 +490,13 @@ function LUIE.InitGuildData()
 end
 
 function LUIE.SocialError(eventCode, reason)
-    if reason ~= 1 then
+    if reason ~= 1 and reason ~= 32 then
         LUIE.PrintToChat(zo_strformat(GetString("SI_SOCIALACTIONRESULT", reason)))
     end
+end
+
+function LUIE.JumpFailed(eventCode, reason)
+    printToChat(GetString("SI_JUMPRESULT", reason))
 end
 
 function LUIE.GuildAddedSelf()

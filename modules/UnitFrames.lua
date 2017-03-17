@@ -3015,7 +3015,7 @@ function UF.CustomFramesDebugRaid()
     UF.OnLeaderUpdate( nil, "RaidGroup1" )
 end
 
--- Updates group frames when a relevant guild change event happens
+-- Updates group frames when a relevant social change event happens
 function UF.SocialUpdateFrames()
     for i = 1, 24 do
         local unitTag = "group" .. i
