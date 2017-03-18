@@ -52,6 +52,9 @@ ZO_CreateStringId("SI_LUIE_SCB_REZZIMMUNITY",                           "Resurre
 ZO_CreateStringId("SI_LUIE_SCB_ERROR_FONT",                             "LUIE_SpellCastBuffs: There was a problem with selecting required font. Falling back to game default.")
 
 -- ChatAnnouncements.lua
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_ALLIANCE_POINT",                 "Alliance Point") -- Have to create singular strings here to use to prevent plural quantities from being double s
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_TELVAR_STONE",                  "Tel Var Stone") -- Have to create singular strings here to use to prevent plural quantities from being double s
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_WRIT_VOUCHER",                   "Writ Voucher") -- Have to create singular strings here to use to prevent plural quantities from being double s
 ZO_CreateStringId("SI_LUIE_CA_DEBUG_MSG_CURRENCY",                      "Currency Change Reason <<1>> Triggered - Please post on the LUI Extended comments section on ESOUI.com describing what caused this message. Thanks!")
 ZO_CreateStringId("SI_LUIE_CA_DEFAULTVARS_CURRENCYTOTALMESSAGE",        "[New Total]")
 ZO_CreateStringId("SI_LUIE_CA_DEFAULTVARS_EXPERIENCECONTEXTNAME",       "[Earned]")
@@ -372,6 +375,20 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_GAIN_TP",        "Enter a
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_LOSS",           "Context Override Message - Currency Loss")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_LOSS_TP",        "Enter a string to replace the default context specific bracketed message displayed before NEGATIVE currency changes.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HEADER",                     "Currency Announcements")
+
+-- New shit needs placed
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHROTTLE",             "Throttle Alliance Point Gains")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHROTTLE_TP",          "Throttle the display of Alliance Points earned by X seconds.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTHRESHOLD",          "Gold (Loot) Gain - Filter Threshold")    
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTHRESHOLD_TP",       "Gold looted below this value will not be displayed.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTHROTTLE",           "Combine Looted Gold from multiple sources")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTHROTTLE_TP",        "When toggled on, gold looted from a group of bodies will combine into one value instead of showing individual values.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHRESHOLD",            "Tel Var Stone Gain - Filter Threshold")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHRESHOLD_TP",         "Tel Var Stones looted below this value will not be displayed.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHROTTLE",             "Throttle Tel Var Stone Gains")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHROTTLE_TP",          "Throttle the display of Tel Var Stones looted by X seconds.")
+
+
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT",            "Hide Gold spent on Guild Trader Purchases")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_NOTE",       "This is a useful if you are using an addon like Awesome Guild Store to announce trader purchases.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TP",         "Toggle this option to hide the display of gold spent on Guild Trader purchases.")

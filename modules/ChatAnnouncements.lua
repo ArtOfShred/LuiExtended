@@ -32,7 +32,8 @@ CA.D = {
     AlliancePointChange           = true,
     AlliancePointColor            = { 0.164706, 0.862745, 0.133333, 1 },
     AlliancePointFilter           = 0,
-    AlliancePointName             = GetString(SI_CURRENCY_ALLIANCE_POINTS),
+    AlliancePointName             = GetString(SI_LUIE_CA_CURRENCY_ALLIANCE_POINT),
+    AlliancePointThrottle         = 0,
     ChangeColorDown               = { 0.7, 0, 0, 1 },
     ChangeColorUp                 = { 0.043137, 0.380392, 0.043137, 1 },
     ChatPlayerDisplayOptions      = 2,
@@ -61,8 +62,10 @@ CA.D = {
     ExperienceThrottle            = 0,
     GoldChange                    = true,
     GoldColor                     = { 1, 1, 0.2, 1 },
+    GoldFilter                    = 0,
     GoldHideAHSpent               = false,
     GoldName                      = GetString(SI_CURRENCY_GOLD),
+    GoldThrottle                  = true,
     GroupChatMsg                  = false,
     GuildRankDisplayOptions       = 1,
     ItemBracketDisplayOptions     = 1,
@@ -109,14 +112,16 @@ CA.D = {
     ShowLockpickBreak             = false,
     TelVarStoneChange             = true,
     TelVarStoneColor              = { 0.368627, 0.643137, 1, 1 },
-    TelVarStoneName               = GetString(SI_CURRENCY_TELVAR_STONES),
+    TelVarFilter                  = 0,
+    TelVarStoneName               = GetString(SI_LUIE_CA_CURRENCY_TELVAR_STONE),
+    TelVarThrottle                = 0,
     TotalAlliancePointChange      = false,
     TotalGoldChange               = false,
     TotalTelVarStoneChange        = false,
     TotalWritVoucherChange        = false,
     WritVoucherChange             = true,
     WritVoucherColor              = { 1, 1, 1, 1 },
-    WritVoucherName               = GetString(SI_CURRENCY_WRIT_VOUCHERS),
+    WritVoucherName               = GetString(SI_LUIE_CA_CURRENCY_WRIT_VOUCHER),
 }
 
 local g_tradeDisablePrint         = false -- Toggled on when a trade is completed, causing item updates to be suspended to allow our trade item changes printing to work.
@@ -1716,6 +1721,11 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
     end
 end
 
+local g_goldThrottle = 0 -- Held value for gold throttle
+local g_alliancePointThrottle = 0 -- Held value for AP throttle
+local g_telVarStoneThrottle = 0 -- Held value for TV throttle
+local g_telVarStoneMaxSave = 0 -- We also have to pass the current total TV stones as there isn't a function to determine how many TV you have
+
 -- Gold Change Announcements
 function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     g_comboString = ""
@@ -1935,6 +1945,16 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             g_comboString = ( strfmt(" → %s%s%s", message, syntax, total) )
         elseif CA.SV.GoldChange and UpOrDown < 0 and reason == 60 then
             g_launderGoldstring = ( strfmt("%s%s%s", message, syntax, total) )
+        -- Don't show LOOTED gold below this threshold
+        elseif CA.SV.GoldChange and (reason == 0 or reason == 13 or reason == 62) and CA.SV.GoldFilter > 0 and not CA.SV.GoldThrottle then
+            if UpOrDown > CA.SV.GoldFilter then
+                printToChat(strfmt("%s%s%s", message, syntax, total))
+            end
+        elseif CA.SV.GoldChange and (reason == 0 or reason == 13 or reason == 62) and CA.SV.GoldThrottle then
+            zo_callLater(CA.GoldThrottlePrinter, 50 )
+            g_goldThrottle = g_goldThrottle + UpOrDown
+        elseif CA.SV.GoldChange and reason == 99 then -- reason 99 is a fake code we send from the throttle printer function
+            printToChat(strfmt("%s%s%s", message, syntax, total))
         else
             if CA.SV.GoldChange then
                 printToChat(strfmt("%s%s%s", message, syntax, total))
@@ -2054,16 +2074,28 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     end
 end
 
+function CA.GoldThrottlePrinter()
+    if g_goldThrottle > 1 then
+        local newMoney = GetCurrentMoney()
+        local oldMoney = newMoney - g_goldThrottle
+        if g_goldThrottle > CA.SV.GoldFilter then
+            CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, 99)
+        end
+        g_goldThrottle = 0
+    end
+end
+
 -- Alliance Point Change Announcements
-function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, difference)
+function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, difference, throttlechecker)
     g_comboString = ""
 
+    local UpOrDown     = alliancePoints + difference
+    
     -- If the total AP change was 0 then we end this now
     if UpOrDown == alliancePoints then
         return
     end
 
-    local UpOrDown     = alliancePoints + difference
     local color              -- Gets the value from ChangeUpColorize or ChangeDownColorize to color strings
     local changetype         -- Amount of currency gained or lost
     local bracket1           -- Leading bracket
@@ -2095,7 +2127,8 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
         message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_EARNED)
     else
         color = ChangeDownColorize
-        changetype = ZO_LocalizeDecimalNumber( difference * -1 )
+        difference = difference * -1
+        changetype = ZO_LocalizeDecimalNumber( difference )
         message = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SPENT)
     end
 
@@ -2131,52 +2164,38 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
     if CA.SV.TotalAlliancePointChange and not CA.SV.CurrencyIcons then
         total = CA.SV.TotalGoldChange and strfmt(" %s %s", color:Colorize(CA.SV.CurrencyTotalMessage), APColorize:Colorize(ZO_LocalizeDecimalNumber(alliancePoints)))
     elseif CA.SV.TotalAlliancePointChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalGoldChange and strfmt(" %s |t16:16:/esoui/art/currency/currency_gold.dds|t %s", color:Colorize(CA.SV.CurrencyTotalMessage), APColorize:Colorize(ZO_LocalizeDecimalNumber(alliancePoints)))
+        total = CA.SV.TotalGoldChange and strfmt(" %s |t16:16:/esoui/art/currency/alliancepoints.dds|t %s", color:Colorize(CA.SV.CurrencyTotalMessage), APColorize:Colorize(ZO_LocalizeDecimalNumber(alliancePoints)))
     else
         total = ""
     end
 
-    -- ==============================================================================
-    -- DEBUG EVENTS WE DON'T KNOW YET
-    if reason == 6 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 7 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 12 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 14 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 15 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 16 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 18 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 20 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 21 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 22 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 23 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 24 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 25 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 26 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 27 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 30 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 34 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 36 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 37 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 38 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 39 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 40 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 41 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 46 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 53 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 54 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 58 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 66 then message = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    end
-    -- END DEBUG EVENTS
-    -- ==============================================================================
-
     -- Print a message to chat based off all the values we filled in above
-    if CA.SV.LootCurrencyCombo and color == ChangeUpColorize then
+    if CA.SV.LootCurrencyCombo and color == ChangeDownColorize then
         g_comboString = (strfmt(" → %s%s%s", message, syntax, total))
-    else
-        if difference > CA.SV.AlliancePointFilter then
+    elseif difference > 0 then
+        if CA.SV.AlliancePointFilter > 0 and not CA.SV.AlliancePointThrottle then
+            if difference > CA.SV.AlliancePointFilter then
+                printToChat(strfmt("%s%s%s", message, syntax, total))
+            end
+        elseif CA.SV.AlliancePointThrottle then
+            zo_callLater(CA.AlliancePointThrottlePrinter, (CA.SV.AlliancePointThrottle * 1000) )
+            g_alliancePointThrottle = g_alliancePointThrottle + difference
+        elseif throttlechecker then
+            printToChat(strfmt("%s%s%s", message, syntax, total))
+        else
             printToChat(strfmt("%s%s%s", message, syntax, total))
         end
+    -- Always print AP spent
+    elseif difference < 0 then
+        printToChat(strfmt("%s%s%s", message, syntax, total))
+    end
+end
+
+function CA.AlliancePointThrottlePrinter()
+    local alliancepoints = GetAlliancePoints()
+    if g_alliancePointThrottle > 1 then
+        CA.OnAlliancePointUpdate(eventCode, alliancepoints, false, g_alliancePointThrottle, true)
+        g_alliancePointThrottle = 0
     end
 end
 
@@ -2184,7 +2203,7 @@ end
 function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, reason)
     g_comboString = ""
     local UpOrDown = newTelvarStones - oldTelvarStones
-
+   
     -- If the total Tel Var change was 0 or Reason 35 = Player Init (Triggers when player changes zones) - End Now
     if UpOrDown == 0 or reason == 35 then
         return
@@ -2218,7 +2237,11 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
     -- Determine the color of the text based on whether we gained or lost gold
     if UpOrDown > 0 then
         color = ChangeUpColorize
-        changetype = ZO_LocalizeDecimalNumber(newTelvarStones - oldTelvarStones)
+        if reason == 99 then
+            changetype = ZO_LocalizeDecimalNumber(oldTelvarStones)
+        else
+            changetype = ZO_LocalizeDecimalNumber(newTelvarStones - oldTelvarStones)
+        end
     else
         color = ChangeDownColorize
         changetype = ZO_LocalizeDecimalNumber(oldTelvarStones - newTelvarStones)
@@ -2312,7 +2335,7 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
     if CA.SV.TotalTelVarStoneChange and not CA.SV.CurrencyIcons then
         total = CA.SV.TotalGoldChange and strfmt(" %s %s", color:Colorize(CA.SV.CurrencyTotalMessage), TVColorize:Colorize(currentTelvar))
     elseif CA.SV.TotalTelVarStoneChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalGoldChange and strfmt(" %s |t16:16:/esoui/art/currency/currency_gold.dds|t %s", color:Colorize(CA.SV.CurrencyTotalMessage), TVColorize:Colorize(currentTelvar))
+        total = CA.SV.TotalGoldChange and strfmt(" %s |t16:16:/esoui/art/currency/currency_telvar.dds|t %s", color:Colorize(CA.SV.CurrencyTotalMessage), TVColorize:Colorize(currentTelvar))
     else
         total = ""
     end
@@ -2322,8 +2345,28 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
         g_comboString = (strfmt(" → %s%s%s", message, syntax, total))
     elseif CA.SV.LootCurrencyCombo and UpOrDown > 0 and reason == 1 then
         g_comboString = (strfmt(" ← %s%s%s", message, syntax, total))
+    elseif (reason == 0 or reason == 65) and CA.SV.TelVarStoneFilter > 0 and CA.SV.TelVarStoneThrottle == 0 then
+        if UpOrDown > CA.SV.TelVarStoneFilter then
+            printToChat(strfmt("%s%s%s", message, syntax, total))
+        end
+    elseif (reason == 0 or reason == 65) and CA.SV.TelVarStoneThrottle > 0 then
+        zo_callLater(CA.TelVarStoneThrottlePrinter, (CA.SV.TelVarStoneThrottle * 1000) )
+        g_telVarStoneThrottle = g_telVarStoneThrottle + UpOrDown
+        g_telVarStoneMaxSave = newTelvarStones
+    elseif reason == 99 then
+        printToChat(strfmt("%s%s%s", message, syntax, total))
     else
         printToChat(strfmt("%s%s%s", message, syntax, total))
+    end
+end
+
+function CA.TelVarStoneThrottlePrinter()
+    if g_telVarStoneThrottle > 1 then
+        if g_telVarStoneThrottle > CA.SV.TelVarStoneFilter then
+            CA.OnTelVarStoneUpdate(eventCode, g_telVarStoneMaxSave, g_telVarStoneThrottle, 99)
+        end
+        g_telVarStoneThrottle = 0
+        g_telVarStoneMaxSave = 0
     end
 end
 
@@ -2439,7 +2482,7 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
     if CA.SV.TotalWritVoucherChange and not CA.SV.CurrencyIcons then
         total = CA.SV.TotalGoldChange and strfmt(" %s %s", color:Colorize(CA.SV.CurrencyTotalMessage), WVColorize:Colorize(currentWritVouchers))
     elseif CA.SV.TotalWritVoucherChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalGoldChange and strfmt(" %s |t16:16:/esoui/art/currency/currency_gold.dds|t %s", color:Colorize(CA.SV.CurrencyTotalMessage), WVColorize:Colorize(currentWritVouchers))
+        total = CA.SV.TotalGoldChange and strfmt(" %s |t16:16:/esoui/art/currency/currency_writvoucher.dds|t %s", color:Colorize(CA.SV.CurrencyTotalMessage), WVColorize:Colorize(currentWritVouchers))
     else
         total = ""
     end

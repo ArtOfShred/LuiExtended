@@ -1587,6 +1587,31 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.GoldName,
                     },
                     {
+                        -- Show Gold Threshold
+                        type = "slider",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTHRESHOLD)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTHRESHOLD_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GoldFilter end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldFilter = value end,
+                        min = 0,
+                        max = 10000,
+                        step = 50,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.GoldChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.GoldFilter,
+                    },
+                    {
+                        -- Throttle Gold Looted
+                        type = "checkbox",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTHROTTLE)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTHROTTLE_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GoldThrottle end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldThrottle = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.GoldChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.GoldThrottle,
+                    },
+                    {
                         -- Show Gold Total Amount
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTOTAL)),
@@ -1602,7 +1627,7 @@ function LUIE_CreateSettings()
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT)),
                         tooltip = strformat("<<1>>\n<<2>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TP), GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_NOTE)),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.GoldHideAHSpente end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GoldHideAHSpent end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldHideAHSpent = value end,
                         width = "full",
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.GoldChange and LUIE.SV.ChatAnnouncements_Enable) end,
@@ -1632,6 +1657,20 @@ function LUIE_CreateSettings()
                         width = "full",
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.AlliancePointChange and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.AlliancePointFilter,
+                    },
+                    {
+                        -- Throttle Alliance Points Earned
+                        type = "slider",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHROTTLE)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHROTTLE_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AlliancePointThrottle end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AlliancePointThrottle = value end,
+                        min = 0,
+                        max = 5,
+                        step = 0.1,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AlliancePointChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.AlliancePointThrottle,
                     },
                     {
                         -- Show Alliance Points Color
@@ -1676,6 +1715,35 @@ function LUIE_CreateSettings()
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.TelVarStoneChange,
                     },
+                    {
+                        -- Show Tel Var Stones Threshold
+                        type = "slider",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHRESHOLD)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHRESHOLD_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.TelVarStoneFilter end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.TelVarStoneFilter = value end,
+                        min = 0,
+                        max = 10000,
+                        step = 50,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.TelVarStoneChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.TelVarStoneFilter,
+                    },
+                    {
+                        -- Throttle Tel Var Stones Looted
+                        type = "slider",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHROTTLE)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHROTTLE_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.TelVarStoneThrottle end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.TelVarStoneThrottle = value end,
+                        min = 0,
+                        max = 5,
+                        step = 0.1,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.TelVarStoneChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.TelVarStoneThrottle,
+                    },
+                    
                     {
                         -- Show Tel Var Color
                         type = "colorpicker",
@@ -2366,7 +2434,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceThrottle = value end,
                         min = 0,
                         max = 5,
-                        step = 1,
+                        step = 0.1,
                         width = "full",
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.ExperienceThrottle,
