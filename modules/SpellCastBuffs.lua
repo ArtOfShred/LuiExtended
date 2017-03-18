@@ -807,7 +807,7 @@ function SCB.CollectibleBuff()
                         restart=true, iconNum=0
                 }
     else
-        g_effectsList.player1["AssistantSkinType"] = nil
+        g_effectsList.player1["AssistantType"] = nil
     end
 
     -- Check here to see if we have a disguise - hides polymorph or costume.
