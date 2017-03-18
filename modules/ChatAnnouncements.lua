@@ -1066,11 +1066,11 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_LUIE_CA_GROUP_MEMBER_LEAVE, GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_ALT), 1)
         SafeAddString(SI_GROUP_NOTIFICATION_GROUP_LEADER_CHANGED, GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_ALT), 1)
         -- Group Finder String Replacements
-        SafeAddString(SI_GROUPING_TOOLS_ALERT_LFG_JOINED, GetString(SI_LUIE_CA_GROUP_FINDER_ALERT_LFG_JOINED), 1)
-        SafeAddString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL, GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL_ALT), 1)
-        SafeAddString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START, GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START_ALT), 1)
-        SafeAddString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_PASSED, GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_PASSED_ALT), 1)
-        SafeAddString(SI_LFG_READY_CHECK_TEXT, GetString(SI_LUIE_CA_GROUP_FINDER_READY_CHECK_TEXT), 2)
+        SafeAddString(SI_GROUPING_TOOLS_ALERT_LFG_JOINED, GetString(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED), 1)
+        SafeAddString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL, GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL_ALT), 1)
+        SafeAddString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START, GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START_ALT), 1)
+        SafeAddString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED, GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED_ALT), 1)
+        SafeAddString(SI_LFG_READY_CHECK_TEXT, GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_TEXT), 2)
         -- Mara String Replacements
         SafeAddString(SI_PLEDGEOFMARARESULT0, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT0), 1)
         SafeAddString(SI_PLEDGEOFMARARESULT1, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT1), 1)
@@ -1150,7 +1150,7 @@ function CA.RegisterCustomStrings()
 end
 
 function CA.LFGJoined(eventCode, locationName)
-    printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_ALERT_LFG_JOINED), locationName))
+    printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED), locationName))
     g_joinLFGOverride = true
 end
 
@@ -1208,17 +1208,17 @@ function CA.ActivityStatusUpdate(eventCode, status)
     --d(status)
     if g_showActivityStatus then
         if status == ACTIVITY_FINDER_STATUS_NONE and g_weAreQueued == true then
-            printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_QUEUE_END))
+            printToChat(GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_END))
             g_weAreQueued = false
             g_showStatusDropMember = false
         end
         if status == ACTIVITY_FINDER_STATUS_QUEUED then
-            printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_QUEUE_START))
+            printToChat(GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_START))
             g_weAreQueued = true
             g_showStatusDropMember = true
         end
         if status == ACTIVITY_FINDER_STATUS_IN_PROGRESS and g_showStatusDropMember == true then
-            printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_QUEUE_END))
+            printToChat(GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_END))
             g_weAreQueued = false
             g_showStatusDropMember = false
         end
@@ -1278,7 +1278,7 @@ function CA.ReadyCheckCancel(eventCode, reason)
 
     end
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_READY then
-        printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_READY_CHECK_CANCELED))
+        printToChat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_CANCELED))
     end
 
     g_fixJoinMessage = false
@@ -1325,9 +1325,9 @@ function CA.ReadyCheckUpdate(eventCode)
         if playerRole ~= 0 then
             local roleIcon = (strformat("|t16:16:<<1>>|t", GetRoleIcon(playerRole)))
             local roleString = GetString("SI_LFGROLE", playerRole)
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_READY_CHECK_ACTIVITY_ROLE), activityName, roleIcon, roleString ))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE), activityName, roleIcon, roleString ))
         else
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_READY_CHECK_ACTIVITY), activityName))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY), activityName))
         end
     end
 
@@ -1375,13 +1375,13 @@ function CA.VoteNotify(eventCode)
         local displayBothString = ( strformat("<<1>><<2>>", kickMemberName, kickMemberAccountName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, kickMemberAccountName)
         if CA.SV.ChatPlayerDisplayOptions == 1 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START), displayNameLink))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), displayNameLink))
         end
         if CA.SV.ChatPlayerDisplayOptions == 2 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START), characterNameLink))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), characterNameLink))
         end
         if CA.SV.ChatPlayerDisplayOptions == 3 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START), displayBoth))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), displayBoth))
         end
     end
 end
@@ -1420,16 +1420,16 @@ function CA.VoteResult(eventCode, electionResult, descriptor)
         end
 
         if electionResult == 1 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL), KickCarry))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL), KickCarry))
         end
         if electionResult == 2 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL), KickCarry))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL), KickCarry))
         end
         if electionResult == 4 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_PASSED), KickCarry))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED), KickCarry))
         end
         if electionResult == 5 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL), KickCarry))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL), KickCarry))
         end
     end
 end

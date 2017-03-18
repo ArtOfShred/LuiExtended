@@ -53,7 +53,7 @@ ZO_CreateStringId("SI_LUIE_SCB_ERROR_FONT",                             "LUIE_Sp
 
 -- ChatAnnouncements.lua
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_ALLIANCE_POINT",                 "Alliance Point") -- Have to create singular strings here to use to prevent plural quantities from being double s
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_TELVAR_STONE",                  "Tel Var Stone") -- Have to create singular strings here to use to prevent plural quantities from being double s
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_TELVAR_STONE",                   "Tel Var Stone") -- Have to create singular strings here to use to prevent plural quantities from being double s
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_WRIT_VOUCHER",                   "Writ Voucher") -- Have to create singular strings here to use to prevent plural quantities from being double s
 ZO_CreateStringId("SI_LUIE_CA_DEBUG_MSG_CURRENCY",                      "Currency Change Reason <<1>> Triggered - Please post on the LUI Extended comments section on ESOUI.com describing what caused this message. Thanks!")
 ZO_CreateStringId("SI_LUIE_CA_DEFAULTVARS_CURRENCYTOTALMESSAGE",        "[New Total]")
@@ -109,19 +109,19 @@ ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE4",                    "|cFEFEF
 ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE5",                    "|cFEFEFE<<1>>|r is already in a group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE8",                    "You must be the group leader to extend a group invitation.")
 ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE9",                    "|cFEFEFE<<1>>|r is a member of another alliance.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_ALERT_LFG_JOINED",           "You have joined an LFG group for |cFEFEFE<<1>>|r.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL",       "A vote to kick <<1>> from the group has failed.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL_ALT",   "A vote to kick |cFEFEFE<<1>>|r from the group has failed.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_PASSED",     "A vote to kick <<1>> from the group has passed.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_PASSED_ALT", "A vote to kick |cFEFEFE<<1>>|r from the group has passed.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START",      "A vote to kick <<1>> from the group has started.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START_ALT",  "A vote to kick |cFEFEFE<<1>>|r from the group has started.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_QUEUE_END",                  "You are no longer queued in the group finder.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_QUEUE_START",                "You are now queued in the group finder.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_READY_CHECK_ACTIVITY",       "|cFEFEFE<<1>>|r ready.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_READY_CHECK_ACTIVITY_ROLE",  "|cFEFEFE<<1>>|r ready. Your role: |cFEFEFE<<2>> <<3>>|r")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_READY_CHECK_CANCELED",       "Ready check canceled, group was not ready.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_FINDER_READY_CHECK_TEXT",           "|cFEFEFE<<1>>|r ready. Your role: <<X:2>> |cFEFEFE<<3>>|r\nExpires in |cFEFEFE<<4>>|r.")
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED",            "You have joined an LFG group for |cFEFEFE<<1>>|r.")
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL",               "A vote to kick <<1>> from the group has failed.")
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL_ALT",           "A vote to kick |cFEFEFE<<1>>|r from the group has failed.")
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED",             "A vote to kick <<1>> from the group has passed.")
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED_ALT",         "A vote to kick |cFEFEFE<<1>>|r from the group has passed.")
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_VOTEKICK_START",              "A vote to kick <<1>> from the group has started.")
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_VOTEKICK_START_ALT",          "A vote to kick |cFEFEFE<<1>>|r from the group has started.")
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_QUEUE_END",                   "You are no longer queued in the group finder.")
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_QUEUE_START",                 "You are now queued in the group finder.")
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY",        "|cFEFEFE<<1>>|r ready.")
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE",   "|cFEFEFE<<1>>|r ready. Your role: |cFEFEFE<<2>> <<3>>|r")
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_READY_CHECK_CANCELED",        "Ready check canceled, group was not ready.")
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_READY_CHECK_TEXT",            "|cFEFEFE<<1>>|r ready. Your role: <<X:2>> |cFEFEFE<<3>>|r\nExpires in |cFEFEFE<<4>>|r.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_GROUPLEAVEREASON1",                 "<<1>>(<<2>>) has been removed from the group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE",              "<<1>> wants to share <<2>>.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_ALT",          "|cFEFEFE<<1>>|r wants to share |cFEFEFE<<2>>|r.")
