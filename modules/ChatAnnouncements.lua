@@ -130,13 +130,11 @@ local g_weAreInAStore             = false -- Toggled on when the player opens a 
 local g_currentDisguise
 local g_disguiseState
 local g_bankStacks                = {} -- Called for indexing on opening crafting window (If the player decons an item from the bank - not needed for bank, since we don't care about items in the bank)
-local g_CP_BAR_COLORS             = ZO_CP_BAR_GRADIENT_COLORS -- Color for Champion Levels
 local g_equippedStacks            = {} -- Called for indexing on init
 local g_inventoryStacks           = {} -- Called for indexing on init
 local g_JusticeStacks             = {} -- Filled during justice confiscation to compare item changes
 local g_XPCombatBufferString      = ""
 local g_XPCombatBufferValue       = 0
-local g_XP_BAR_COLORS             = ZO_XP_BAR_GRADIENT_COLORS[2] -- Color for Normal Levels
 local g_comboString               = "" -- String is filled by the EVENT_CURRENCY_CHANGE events and amended onto the end of purchase/sales from LootLog component if toggled on!
 local g_craftStacks               = {}
 local g_areWeGrouped              = false
@@ -189,8 +187,8 @@ local g_goldThrottle              = 0 -- Held value for gold throttle
 local g_alliancePointThrottle     = 0 -- Held value for AP throttle
 local g_telVarStoneThrottle       = 0 -- Held value for TV throttle
 local g_telVarStoneMaxSave        = 0 -- We also have to pass the current total TV stones as there isn't a function to determine how many TV you have
-local g_smithing = {} -- Table for smithing mode
-local g_enchanting = {} -- Table for enchanting mode
+local g_smithing                  = {} -- Table for smithing mode
+local g_enchanting                = {} -- Table for enchanting mode
 
 -- When quest XP is gained during dialogue the player doesn't actually level up until exiting the dialogue.
 -- The variables get stored and saved to print on levelup if this is the case.
@@ -3456,7 +3454,7 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
 
         local icon = CA.SV.LevelUpIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_normal.dds|t ") or ( "" )
         local attribute
-        local CurrentLevelFormatted = g_XP_BAR_COLORS:Colorize(LevelContext .. " " .. CurrentLevel)
+        local CurrentLevelFormatted = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(LevelContext .. " " .. CurrentLevel)
 
         if IsChampion then
             attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned()+1 )
@@ -3472,7 +3470,7 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
             if attribute == ATTRIBUTE_STAMINA then
                 icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.ddst ") or ( "" )
             end
-            CurrentLevelFormatted = g_CP_BAR_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
+            CurrentLevelFormatted = ZO_CP_BAR_GRADIENT_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
         end
 
         if not g_levelChanged1 or g_crossover == 1 then
@@ -3559,7 +3557,7 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
         if attribute == ATTRIBUTE_STAMINA then
             icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.ddst ") or ( "" )
         end
-        local CurrentLevelFormatted = g_CP_BAR_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
+        local CurrentLevelFormatted = ZO_CP_BAR_GRADIENT_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
 
         if not g_levelChanged1 or g_crossover == 1 then
             if g_questString1 ~= "" and g_questString2 ~= "" and CA.SV.Experience then
@@ -3820,9 +3818,9 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
             if CA.SV.ExperienceColorLevel then
                 if IsChampion then
                     attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned() +1)
-                    totallevel = g_CP_BAR_COLORS[attribute][2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel))
+                    totallevel = ZO_CP_BAR_GRADIENT_COLORS[attribute][2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel))
                 else
-                    totallevel = g_XP_BAR_COLORS:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel))
+                    totallevel = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel))
                 end
             else
                 totallevel = strfmt( " %s %s", LevelContext, CurrentLevel)
@@ -3832,9 +3830,9 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                 if CA.SV.ExperienceColorLevel then
                     if IsChampion then
                         attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned() )
-                        g_totalLevelAdjust = g_CP_BAR_COLORS[attribute][2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel -1))
+                        g_totalLevelAdjust = ZO_CP_BAR_GRADIENT_COLORS[attribute][2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel -1))
                     else
-                        g_totalLevelAdjust = g_XP_BAR_COLORS:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel -1))
+                        g_totalLevelAdjust = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel -1))
                     end
                 else
                     g_totalLevelAdjust = strfmt( " %s %s", LevelContext, CurrentLevel -1)
@@ -3849,12 +3847,12 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
         --[[ Crossover from Normal XP --> Champion XP modifier ]] --
         if g_crossover == 1 then
             -- progress = (progressbrackets .. " (Level 50)")
-            totallevel = g_XP_BAR_COLORS:Colorize( strformat(" <<1>> 50", GetString(SI_EXPERIENCE_LEVEL_LABEL)) ) -- "Level"
+            totallevel = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize( strformat(" <<1>> 50", GetString(SI_EXPERIENCE_LEVEL_LABEL)) ) -- "Level"
             if g_questCombiner1 ~= "" then
                 -- g_questCombiner2 = (progressbrackets .. " (Level 50)")
                 if CA.SV.ExperienceShowLevel then
                     if CA.SV.ExperienceColorLevel then
-                        g_totalLevelAdjust = g_XP_BAR_COLORS:Colorize( strformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL)) )
+                        g_totalLevelAdjust = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize( strformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL)) )
                     else
                         g_totalLevelAdjust = strformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL))
                     end
