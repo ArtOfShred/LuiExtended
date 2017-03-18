@@ -605,7 +605,6 @@ function SCB.Initialize( enabled )
     -- Loop over created controls to...
     for _, v in pairs(containerRouting) do
         if uiTlw[v].preview == nil then
-
             -- Create background areas for preview position purposes
             --uiTlw[v].preview = UI.Backdrop( uiTlw[v], "fill", nil, nil, nil, true )
             uiTlw[v].preview = UI.Texture( uiTlw[v], "fill", nil, "/esoui/art/miscellaneous/inset_bg.dds", DL_BACKGROUND, true )
@@ -676,14 +675,12 @@ function SCB.Initialize( enabled )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_DEAD,  SCB.OnPlayerDead )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_VIBRATION,    SCB.OnVibration )
 
-
     -- Mount
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MOUNTED_STATE_CHANGED, SCB.MountStatus)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_COLLECTIBLE_USE_RESULT, SCB.CollectibleUsed)
 
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, SCB.DisguiseItem)
     EVENT_MANAGER:AddFilterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, REGISTER_FILTER_BAG_ID, BAG_WORN )
-
 end
 
 function SCB.InitializeDisguise()
@@ -695,18 +692,20 @@ function SCB.InitializeDisguise()
             return
         end
         
-        if g_currentDisguise == 79332 then return end -- Don't show Monk's Disguise since it already has an aura
-        
+        -- Don't show Monk's Disguise since it already has an aura
+        if g_currentDisguise == 79332 then
+            return
+        end
+
         local name = E.DisguiseIcons[g_currentDisguise].name
         local icon = E.DisguiseIcons[g_currentDisguise].icon
-            g_effectsList.player1["DisguiseType"] =
-                {
-                    target="player", type=1,
-                    name=name, icon=icon,
-                    dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                    forced = "long",
-                    restart=true, iconNum=0
-                }
+        g_effectsList.player1["DisguiseType"] = {
+            target="player", type=1,
+            name=name, icon=icon,
+            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+            forced = "long",
+            restart=true, iconNum=0
+        }
     end
 end
 
@@ -723,7 +722,7 @@ function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory
             if g_currentDisguise == 55262 and (GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) > 0 or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME) > 0) then
                 return
             end
-            
+
             if g_currentDisguise == 79332 then return end -- Don't show Monk's Disguise since it already has an aura
 
             local name = E.DisguiseIcons[g_currentDisguise].name
@@ -2385,7 +2384,7 @@ function SCB.OnPlayerActivated(eventCode)
     if IsUnitDead("player") then
         g_playerDead = true
     end
-    
+
 end
 
 function SCB.OnPlayerDeactivated(eventCode)

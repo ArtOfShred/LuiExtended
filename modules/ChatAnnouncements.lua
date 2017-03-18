@@ -130,13 +130,11 @@ local g_weAreInAStore             = false -- Toggled on when the player opens a 
 local g_currentDisguise
 local g_disguiseState
 local g_bankStacks                = {} -- Called for indexing on opening crafting window (If the player decons an item from the bank - not needed for bank, since we don't care about items in the bank)
-local g_CP_BAR_COLORS             = ZO_CP_BAR_GRADIENT_COLORS -- Color for Champion Levels
 local g_equippedStacks            = {} -- Called for indexing on init
 local g_inventoryStacks           = {} -- Called for indexing on init
 local g_JusticeStacks             = {} -- Filled during justice confiscation to compare item changes
 local g_XPCombatBufferString      = ""
 local g_XPCombatBufferValue       = 0
-local g_XP_BAR_COLORS             = ZO_XP_BAR_GRADIENT_COLORS[2] -- Color for Normal Levels
 local g_comboString               = "" -- String is filled by the EVENT_CURRENCY_CHANGE events and amended onto the end of purchase/sales from LootLog component if toggled on!
 local g_craftStacks               = {}
 local g_areWeGrouped              = false
@@ -185,6 +183,12 @@ local g_showRCUpdates             = true
 local g_showStatusDropMember      = false
 local g_stealString               = ""
 local g_weAreQueued               = false -- Variable to determine if we are in queue, if the player isn't in queue ACTIVITY_FINDER_STATUS_NONE is broadcast on init, we don't want this to show any event!
+local g_goldThrottle              = 0 -- Held value for gold throttle
+local g_alliancePointThrottle     = 0 -- Held value for AP throttle
+local g_telVarStoneThrottle       = 0 -- Held value for TV throttle
+local g_telVarStoneMaxSave        = 0 -- We also have to pass the current total TV stones as there isn't a function to determine how many TV you have
+local g_smithing                  = {} -- Table for smithing mode
+local g_enchanting                = {} -- Table for enchanting mode
 
 -- When quest XP is gained during dialogue the player doesn't actually level up until exiting the dialogue.
 -- The variables get stored and saved to print on levelup if this is the case.
@@ -219,37 +223,67 @@ local WVColorize
 
 -- List of items to whitelist as notable loot
 local g_notableIDs = {
-    [56862]  = true,    -- [Fortified Nirncrux]
-    [56863]  = true,    -- [Potent Nirncrux]
-    [68342]  = true,    -- [Hakeijo]
+    [56862]  = true,    -- Fortified Nirncrux
+    [56863]  = true,    -- Potent Nirncrux
+    [68342]  = true,    -- Hakeijo
 }
 
 -- List of items to blacklist as annyoing loot
 local g_blacklistIDs = {
-    [64713]  = true,    -- [Laurel]
-    [64690]  = true,    -- [Malachite Shard]
-    [69432]  = true,    -- [Glass Style Motif Fragment]
+    [64713]  = true,    -- Laurel
+    [64690]  = true,    -- Malachite Shard
+    [69432]  = true,    -- Glass Style Motif Fragment
     -- Trial non worthless junk
-    [114427] = true,    -- [Undaunted Plunder]
-    [81180]  = true,    -- [The Serpent's Egg-Tooth]
-    [74453]  = true,    -- [The Rid-Thar's Moon Pearls]
-    [87701]  = true,    -- [Star-Studded Champion's Baldric]
-    [87700]  = true,    -- [Periapt of Elinhir]
+    [114427] = true,    -- Undaunted Plunder
+    [81180]  = true,    -- The Serpent's Egg-Tooth
+    [74453]  = true,    -- The Rid-Thar's Moon Pearls
+    [87701]  = true,    -- Star-Studded Champion's Baldric
+    [87700]  = true,    -- Periapt of Elinhir
     -- Mercenary Motif Pages
-    [64716]  = true,    -- [Mercenary Motif]
-    [64717]  = true,    -- [Mercenary Motif]
-    [64718]  = true,    -- [Mercenary Motif]
-    [64719]  = true,    -- [Mercenary Motif]
-    [64720]  = true,    -- [Mercenary Motif]
-    [64721]  = true,    -- [Mercenary Motif]
-    [64722]  = true,    -- [Mercenary Motif]
-    [64723]  = true,    -- [Mercenary Motif]
-    [64724]  = true,    -- [Mercenary Motif]
-    [64725]  = true,    -- [Mercenary Motif]
-    [64726]  = true,    -- [Mercenary Motif]
-    [64727]  = true,    -- [Mercenary Motif]
-    [64728]  = true,    -- [Mercenary Motif]
-    [64729]  = true,    -- [Mercenary Motif]
+    [64716]  = true,    -- Mercenary Motif
+    [64717]  = true,    -- Mercenary Motif
+    [64718]  = true,    -- Mercenary Motif
+    [64719]  = true,    -- Mercenary Motif
+    [64720]  = true,    -- Mercenary Motif
+    [64721]  = true,    -- Mercenary Motif
+    [64722]  = true,    -- Mercenary Motif
+    [64723]  = true,    -- Mercenary Motif
+    [64724]  = true,    -- Mercenary Motif
+    [64725]  = true,    -- Mercenary Motif
+    [64726]  = true,    -- Mercenary Motif
+    [64727]  = true,    -- Mercenary Motif
+    [64728]  = true,    -- Mercenary Motif
+    [64729]  = true,    -- Mercenary Motif
+}
+
+local g_enchant_prefix_pos = {
+    [1] = GetString(SI_ITEM_FORMAT_STR_CRAFTED),
+    [2] = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN),
+    [3] = GetString(SI_ITEM_FORMAT_STR_CRAFTED),
+}
+
+local g_enchant_prefix_neg = {
+    [1] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED),
+    [2] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_EXTRACTED),
+    [3] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED),
+}
+
+local g_smithing_prefix_pos = {
+    [1] = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN),
+    [2] = GetString(SI_ITEM_FORMAT_STR_CRAFTED),
+    [3] = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN),
+    [4] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED),
+    [5] = "",
+    [6] = GetString(SI_ITEM_FORMAT_STR_CRAFTED),
+}
+
+local g_smithing_prefix_neg = {
+    [1] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_REFINED),
+    [2] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED),
+    [3] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DECONSTRUCTED),
+    [4] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED),
+    [5] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_RESEARCHED),
+    [6] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED),
 }
 
 function CA.Initialize(enabled)
@@ -268,10 +302,9 @@ function CA.Initialize(enabled)
     g_playerNameFormatted = strformat(SI_UNIT_NAME, GetUnitName("player"))
     g_playerDisplayName = strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
 
-    -- Register events
-    
     CA.CraftModeOverrides()
-    
+
+    -- Register events
     CA.RegisterGroupEvents()
     CA.RegisterGoldEvents()
     CA.RegisterAlliancePointEvents()
@@ -438,13 +471,13 @@ function CA.RegisterStuckEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_ERROR_INVALID_LOCATION)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_ERROR_IN_COMBAT)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_ERROR_ON_COOLDOWN)
-        if CA.SV.MiscStuck then
+    if CA.SV.MiscStuck then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_BEGIN, CA.StuckBegin)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_ERROR_ALREADY_IN_PROGRESS, CA.StuckAlreadyInProgress)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_ERROR_INVALID_LOCATION, CA.StuckInvalidLocation)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_ERROR_IN_COMBAT, CA.StuckInCombat)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_ERROR_ON_COOLDOWN, CA.StuckOnCooldown)
-        end
+    end
 end
 
 function CA.RegisterGroupEvents()
@@ -504,7 +537,8 @@ end
 
 function CA.RegisterGoldEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MONEY_UPDATE)
-    if CA.SV.GoldChange or CA.SV.MiscMail then -- Only register this event if the menu setting is true
+     -- Only register this event if the menu setting is true
+    if CA.SV.GoldChange or CA.SV.MiscMail then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MONEY_UPDATE, CA.OnMoneyUpdate)
     end
     if CA.SV.MiscMail or CA.SV.LootMail or CA.SV.GoldChange then
@@ -599,7 +633,7 @@ function CA.RegisterLootEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INTERACTABLE_LOCKED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOCKPICK_FAILED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS)
-    
+
     -- LOOT RECEIVED
     if CA.SV.Loot then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_RECEIVED, CA.OnLootReceived)
@@ -1026,17 +1060,17 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_GROUPLEAVEREASON1, GetString(SI_LUIE_CA_GROUP_GROUPLEAVEREASON1), 3)
         SafeAddString(SI_GROUPLEAVEREASON2, GetString(SI_LUIE_CA_GROUP_MEMBER_DISBAND_MSG), 1)
         SafeAddString(SI_LUIE_CA_GROUP_INVITE_MESSAGE, GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE_ALT), 1)
-        SafeAddString(SI_LUIE_CA_GROUP_LEADER_CHANGED, GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_ALT), 1) -- Replaces default syntax style string with LUIE style
-        SafeAddString(SI_LUIE_CA_GROUP_MEMBER_JOIN, GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_ALT), 1) -- Replaces default syntax style string with LUIE style
-        SafeAddString(SI_LUIE_CA_GROUP_MEMBER_KICKED, GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_ALT), 1) -- Replaces default syntax style string with LUIE style
-        SafeAddString(SI_LUIE_CA_GROUP_MEMBER_LEAVE, GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_ALT), 1) -- Replaces default syntax style string with LUIE style
+        SafeAddString(SI_LUIE_CA_GROUP_LEADER_CHANGED, GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_ALT), 1)
+        SafeAddString(SI_LUIE_CA_GROUP_MEMBER_JOIN, GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_ALT), 1)
+        SafeAddString(SI_LUIE_CA_GROUP_MEMBER_KICKED, GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_ALT), 1)
+        SafeAddString(SI_LUIE_CA_GROUP_MEMBER_LEAVE, GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_ALT), 1)
         SafeAddString(SI_GROUP_NOTIFICATION_GROUP_LEADER_CHANGED, GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_ALT), 1)
         -- Group Finder String Replacements
-        SafeAddString(SI_GROUPING_TOOLS_ALERT_LFG_JOINED, GetString(SI_LUIE_CA_GROUP_FINDER_ALERT_LFG_JOINED), 1)
-        SafeAddString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL, GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL_ALT), 1) -- Replaces default syntax style string with LUIE style
-        SafeAddString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START, GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START_ALT), 1) -- Replaces default syntax style string with LUIE style
-        SafeAddString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_PASSED, GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_PASSED_ALT), 1) -- Replaces default syntax style string with LUIE style
-        SafeAddString(SI_LFG_READY_CHECK_TEXT, GetString(SI_LUIE_CA_GROUP_FINDER_READY_CHECK_TEXT), 2)
+        SafeAddString(SI_GROUPING_TOOLS_ALERT_LFG_JOINED, GetString(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED), 1)
+        SafeAddString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL, GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL_ALT), 1)
+        SafeAddString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START, GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START_ALT), 1)
+        SafeAddString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED, GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED_ALT), 1)
+        SafeAddString(SI_LFG_READY_CHECK_TEXT, GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_TEXT), 2)
         -- Mara String Replacements
         SafeAddString(SI_PLEDGEOFMARARESULT0, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT0), 1)
         SafeAddString(SI_PLEDGEOFMARARESULT1, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT1), 1)
@@ -1059,22 +1093,22 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_TRADE_INVITE_MESSAGE, GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), 1)
         SafeAddString(SI_TRADEACTIONRESULT1, GetString(SI_LUIE_CA_TRADEACTIONRESULT1), 1)
         -- Friend Invite String Replacements
-        SafeAddString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG, GetString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_ALT), 1) -- Replaces default syntax style string with LUIE style
-        SafeAddString(SI_FRIENDS_LIST_IGNORE_ADDED, GetString(SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED), 1) -- Fixes default Ignore List messages to match our syntax.
-        SafeAddString(SI_FRIENDS_LIST_IGNORE_REMOVED, GetString(SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED), 1) -- Fixes default Ignore List messages to match our syntax.
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST, GetString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST), 1) -- Default ZOS string was missing a period.
+        SafeAddString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG, GetString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_ALT), 1)
+        SafeAddString(SI_FRIENDS_LIST_IGNORE_ADDED, GetString(SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED), 1)
+        SafeAddString(SI_FRIENDS_LIST_IGNORE_REMOVED, GetString(SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED), 1)
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST, GetString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST), 1)
         SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_ON, GetString(SI_LUIE_CA_FRIENDS_LIST_LOGGED_ON), 1)
         SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON, GetString(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_ON), 1)
         SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_OFF, GetString(SI_LUIE_CA_FRIENDS_LIST_LOGGED_OFF), 1)
         SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF, GetString(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_OFF), 1)
-        SafeAddString(SI_LUIE_CA_FRIENDS_FRIEND_ADDED, GetString(SI_LUIE_CA_FRIENDS_FRIEND_ADDED_ALT), 1) -- Replaces default syntax style string with LUIE style
-        SafeAddString(SI_LUIE_CA_FRIENDS_FRIEND_REMOVED, GetString(SI_LUIE_CA_FRIENDS_FRIEND_REMOVED_ALT), 1) -- Replaces default syntax style string with LUIE style
-        SafeAddString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST, GetString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST_ALT), 1) -- Replaces default syntax style string with LUIE style
+        SafeAddString(SI_LUIE_CA_FRIENDS_FRIEND_ADDED, GetString(SI_LUIE_CA_FRIENDS_FRIEND_ADDED_ALT), 1)
+        SafeAddString(SI_LUIE_CA_FRIENDS_FRIEND_REMOVED, GetString(SI_LUIE_CA_FRIENDS_FRIEND_REMOVED_ALT), 1)
+        SafeAddString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST, GetString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST_ALT), 1)
         -- Guild Invite String Replacements
         SafeAddString(SI_GUILD_ROSTER_INVITED_MESSAGE, GetString(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE_ALT), 2)
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST_ALT), 1)
         SafeAddString(SI_GUILD_INVITE_MESSAGE, GetString(SI_LUIE_CA_GUILD_INVITE_MESSAGE), 3)
-        SafeAddString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST, GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST_ALT), 1) -- Replaces default syntax style string with LUIE style
+        SafeAddString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST, GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST_ALT), 1)
         SafeAddString(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, GetString(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE_ALT), 1)
         SafeAddString(SI_GUILD_ROSTER_ADDED, GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), 2)
         SafeAddString(SI_GUILD_ROSTER_REMOVED, GetString(SI_LUIE_CA_GUILD_ROSTER_REMOVED), 2)
@@ -1116,7 +1150,7 @@ function CA.RegisterCustomStrings()
 end
 
 function CA.LFGJoined(eventCode, locationName)
-    printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_ALERT_LFG_JOINED), locationName))
+    printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED), locationName))
     g_joinLFGOverride = true
 end
 
@@ -1174,17 +1208,17 @@ function CA.ActivityStatusUpdate(eventCode, status)
     --d(status)
     if g_showActivityStatus then
         if status == ACTIVITY_FINDER_STATUS_NONE and g_weAreQueued == true then
-            printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_QUEUE_END))
+            printToChat(GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_END))
             g_weAreQueued = false
             g_showStatusDropMember = false
         end
         if status == ACTIVITY_FINDER_STATUS_QUEUED then
-            printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_QUEUE_START))
+            printToChat(GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_START))
             g_weAreQueued = true
             g_showStatusDropMember = true
         end
         if status == ACTIVITY_FINDER_STATUS_IN_PROGRESS and g_showStatusDropMember == true then
-            printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_QUEUE_END))
+            printToChat(GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_END))
             g_weAreQueued = false
             g_showStatusDropMember = false
         end
@@ -1210,19 +1244,15 @@ function CA.ActivityQueueResult(eventCode, result)
     if result == ACTIVITY_QUEUE_RESULT_INCOMPATIBLE_GROUP then
         printToChat(GetString(SI_ACTIVITYQUEUERESULT9))
     end
-
     if result == ACTIVITY_QUEUE_RESULT_MEMBERS_OFFLINE then
         printToChat(GetString(SI_ACTIVITYQUEUERESULT14))
     end
-
     if result == ACTIVITY_QUEUE_RESULT_ON_QUEUE_COOLDOWN then
         printToChat(GetString(SI_ACTIVITYQUEUERESULT12))
     end
-
     if result == ACTIVITY_QUEUE_RESULT_MEMBER_CANCELED_READY_CHECK then
         printToChat(GetString(SI_ACTIVITYQUEUERESULT19))
     end
-
     if result == ACTIVITY_QUEUE_RESULT_DLC_LOCKED then
         printToChat(GetString(SI_ACTIVITYQUEUERESULT6))
     end
@@ -1248,7 +1278,7 @@ function CA.ReadyCheckCancel(eventCode, reason)
 
     end
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_READY then
-        printToChat(GetString(SI_LUIE_CA_GROUP_FINDER_READY_CHECK_CANCELED))
+        printToChat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_CANCELED))
     end
 
     g_fixJoinMessage = false
@@ -1295,9 +1325,9 @@ function CA.ReadyCheckUpdate(eventCode)
         if playerRole ~= 0 then
             local roleIcon = (strformat("|t16:16:<<1>>|t", GetRoleIcon(playerRole)))
             local roleString = GetString("SI_LFGROLE", playerRole)
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_READY_CHECK_ACTIVITY_ROLE), activityName, roleIcon, roleString ))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE), activityName, roleIcon, roleString ))
         else
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_READY_CHECK_ACTIVITY), activityName))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY), activityName))
         end
     end
 
@@ -1345,13 +1375,13 @@ function CA.VoteNotify(eventCode)
         local displayBothString = ( strformat("<<1>><<2>>", kickMemberName, kickMemberAccountName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, kickMemberAccountName)
         if CA.SV.ChatPlayerDisplayOptions == 1 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START), displayNameLink))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), displayNameLink))
         end
         if CA.SV.ChatPlayerDisplayOptions == 2 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START), characterNameLink))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), characterNameLink))
         end
         if CA.SV.ChatPlayerDisplayOptions == 3 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_START), displayBoth))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), displayBoth))
         end
     end
 end
@@ -1390,16 +1420,16 @@ function CA.VoteResult(eventCode, electionResult, descriptor)
         end
 
         if electionResult == 1 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL), KickCarry))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL), KickCarry))
         end
         if electionResult == 2 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL), KickCarry))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL), KickCarry))
         end
         if electionResult == 4 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_PASSED), KickCarry))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED), KickCarry))
         end
         if electionResult == 5 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_FINDER_NOTIFY_VOTEKICK_FAIL), KickCarry))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL), KickCarry))
         end
     end
 end
@@ -1425,7 +1455,9 @@ function CA.GroupUpdate(eventCode)
     end
     g_groupJoinFudger = false
     local groupSize = GetGroupSize()
-    if groupSize > 1 then g_areWeGrouped = true end
+    if groupSize > 1 then
+        g_areWeGrouped = true
+    end
 end
 
 --[[ Would love to be able to use this function but its too buggy for now. Spams every single time someone updates their role, as well as when people join/leave group. If the player joins a large party for the first time then
@@ -1574,7 +1606,8 @@ function CA.OnGroupInviteResponse(eventCode, inviterName, response, inviterDispl
         responseName = displayBoth
     end
 
-    if response == 2 and (inviterName == "" or inviterDisplayName == "") then -- Stops blank [] response from printing out when the invited player is zoning
+    -- Stops blank [] response from printing out when the invited player is zoning
+    if response == 2 and (inviterName == "" or inviterDisplayName == "") then
         return
     elseif response ~= 0 and response ~= 1 then
         printToChat(strformat(GetString("SI_GROUPINVITERESPONSE", response), responseName))
@@ -1642,9 +1675,15 @@ function CA.OnGroupMemberJoined(eventCode, memberName)
         local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(joinedMemberAccountName)
         local displayBothString = ( strformat("<<1>><<2>>", joinedMemberName, joinedMemberAccountName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, joinedMemberAccountName)
-        if CA.SV.ChatPlayerDisplayOptions == 1 then groupJoinName = displayNameLink end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then groupJoinName = characterNameLink end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then groupJoinName = displayBoth end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then
+            groupJoinName = displayNameLink
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then
+            groupJoinName = characterNameLink
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then
+            groupJoinName = displayBoth
+        end
         local SendString = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), groupJoinName))
         zo_callLater(function() CA.PrintJoinStatusNotSelf(SendString) end, 100)
     elseif g_playerName == memberName and not g_groupFormFudger then
@@ -1672,11 +1711,9 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
     if CA.SV.ChatPlayerDisplayOptions == 1 then
         memberLeftName = displayNameLink
     end
-
     if CA.SV.ChatPlayerDisplayOptions == 2 then
         memberLeftName = characterNameLink
     end
-
     if CA.SV.ChatPlayerDisplayOptions == 3 then
         memberLeftName = displayBoth
     end
@@ -1720,11 +1757,6 @@ function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLe
         end
     end
 end
-
-local g_goldThrottle = 0 -- Held value for gold throttle
-local g_alliancePointThrottle = 0 -- Held value for AP throttle
-local g_telVarStoneThrottle = 0 -- Held value for TV throttle
-local g_telVarStoneMaxSave = 0 -- We also have to pass the current total TV stones as there isn't a function to determine how many TV you have
 
 -- Gold Change Announcements
 function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
@@ -2088,9 +2120,8 @@ end
 -- Alliance Point Change Announcements
 function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, difference, throttlechecker)
     g_comboString = ""
-
     local UpOrDown     = alliancePoints + difference
-    
+
     -- If the total AP change was 0 then we end this now
     if UpOrDown == alliancePoints then
         return
@@ -2203,7 +2234,7 @@ end
 function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, reason)
     g_comboString = ""
     local UpOrDown = newTelvarStones - oldTelvarStones
-   
+
     -- If the total Tel Var change was 0 or Reason 35 = Player Init (Triggers when player changes zones) - End Now
     if UpOrDown == 0 or reason == 35 then
         return
@@ -2509,7 +2540,7 @@ end
 function CA.MiscAlertLockFailed(eventCode)
     if CA.SV.MiscLockpick then
         printToChat(GetString(SI_LUIE_CA_LOCKPICK_FAILED))
-    end   
+    end
     if CA.SV.ShowLockpickBreak then
         g_lockpickBroken = true
         zo_callLater(ResetLockpickBroken, 200)
@@ -3073,20 +3104,30 @@ function CA.TradeInviteFailed(eventCode, reason, inviteeCharacterName, inviteeDi
         local displayBothString = ( strformat("<<1>><<2>>", gsub(inviteeCharacterName,"%^%a+",""), inviteeDisplayName) )
         local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviteeDisplayName)
 
-        if CA.SV.ChatPlayerDisplayOptions == 1 then failName = displayNameLink end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then failName = characterNameLink end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then failName = displayBoth end
+        if CA.SV.ChatPlayerDisplayOptions == 1 then
+            failName = displayNameLink
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then
+            failName = characterNameLink
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then
+            failName = displayBoth
+        end
 
         printToChat(strformat(GetString("SI_TRADEACTIONRESULT", reason), failName))
     end
 end
 
 function CA.TradeElevationFailed(eventCode, reason, itemName)
-    if CA.SV.MiscTrade then printToChat(strformat(GetString("SI_TRADEACTIONRESULT", reason), itemName)) end
+    if CA.SV.MiscTrade then
+        printToChat(strformat(GetString("SI_TRADEACTIONRESULT", reason), itemName))
+    end
 end
 
 function CA.TradeItemAddFailed(eventCode, reason, itemName)
-    if CA.SV.MiscTrade then printToChat(strformat(GetString("SI_TRADEACTIONRESULT", reason), itemName)) end
+    if CA.SV.MiscTrade then
+        printToChat(strformat(GetString("SI_TRADEACTIONRESULT", reason), itemName))
+    end
 end
 
 function CA.TradeInviteDecline(eventCode)
@@ -3319,7 +3360,6 @@ function CA.OnMailCloseBox(eventCode)
 end
 
 function CA.OnMailFail(eventCode, reason)
-
     local function RestoreMailBackupValues()
         g_postageAmount = GetQueuedMailPostage()
         g_mailCOD = g_mailCODBackup
@@ -3351,9 +3391,9 @@ function CA.OnMailSuccess(eventCode)
             if g_mailStacksOut[mailIndex] ~= nil then
                 local gainorloss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SENT)
-                    if CA.SV.ItemContextToggle then
-                        logPrefix = ( CA.SV.ItemContextMessage )
-                    end
+                if CA.SV.ItemContextToggle then
+                    logPrefix = ( CA.SV.ItemContextMessage )
+                end
                 local receivedBy = ""
                 local item = g_mailStacksOut[mailIndex]
                 icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
@@ -3414,7 +3454,7 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
 
         local icon = CA.SV.LevelUpIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_normal.dds|t ") or ( "" )
         local attribute
-        local CurrentLevelFormatted = g_XP_BAR_COLORS:Colorize(LevelContext .. " " .. CurrentLevel)
+        local CurrentLevelFormatted = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(LevelContext .. " " .. CurrentLevel)
 
         if IsChampion then
             attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned()+1 )
@@ -3430,7 +3470,7 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
             if attribute == ATTRIBUTE_STAMINA then
                 icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.ddst ") or ( "" )
             end
-            CurrentLevelFormatted = g_CP_BAR_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
+            CurrentLevelFormatted = ZO_CP_BAR_GRADIENT_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
         end
 
         if not g_levelChanged1 or g_crossover == 1 then
@@ -3501,7 +3541,6 @@ end
 
 function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChampionPoints)
     if unitTag == ("player") then
-
         CA.LevelUpdateHelper()
 
         local attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned()+1 )
@@ -3518,7 +3557,7 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
         if attribute == ATTRIBUTE_STAMINA then
             icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.ddst ") or ( "" )
         end
-        local CurrentLevelFormatted = g_CP_BAR_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
+        local CurrentLevelFormatted = ZO_CP_BAR_GRADIENT_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
 
         if not g_levelChanged1 or g_crossover == 1 then
             if g_questString1 ~= "" and g_questString2 ~= "" and CA.SV.Experience then
@@ -3560,6 +3599,7 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
         end
 
     end
+
     g_weLeveled = 0
     g_crossover = 0
     g_questString1 = ""
@@ -3608,47 +3648,87 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
         XPLevel = GetNumExperiencePointsInLevel(49)
     end
 
-        if CA.SV.Experience and ( not ( CA.SV.ExperienceHideCombat and reason == 0 ) or not reason == 0 ) then
-            -- Change in Experience Points on gaining them
-            local change = currentExperience - previousExperience
-            local formathelper = " "
-            local totallevel = ""
-            local progressbrackets = ""
-            local progress = "" -- String returned depending on whether Progress Option is toggled on or off
+    if CA.SV.Experience and ( not ( CA.SV.ExperienceHideCombat and reason == 0 ) or not reason == 0 ) then
+        -- Change in Experience Points on gaining them
+        local change = currentExperience - previousExperience
+        local formathelper = " "
+        local totallevel = ""
+        local progressbrackets = ""
+        local progress = "" -- String returned depending on whether Progress Option is toggled on or off
 
-            -- Format Helper puts a space in if the player enters a value for Experience Name, this way they don't have to do this formatting themselves.
-            if CA.SV.ExperienceName == ( "" ) then
-                formathelper = ""
+        -- Format Helper puts a space in if the player enters a value for Experience Name, this way they don't have to do this formatting themselves.
+        if CA.SV.ExperienceName == ( "" ) then
+            formathelper = ""
+        end
+
+        -- Displays an icon if enabled
+        local icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. ZO_LocalizeDecimalNumber (change) .. formathelper .. CA.SV.ExperienceName ) or ( ZO_LocalizeDecimalNumber (change) .. formathelper .. CA.SV.ExperienceName )
+
+        -- If quest turnin, we save the first part of this string to combine with another in case this is followed up by POI completion event too.
+        if reason == 1 then
+            g_levelCarryOverValue = currentExperience
+            g_questCombiner1 = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. ZO_LocalizeDecimalNumber (change) .. formathelper .. CA.SV.ExperienceName ) or ( ZO_LocalizeDecimalNumber (change) .. formathelper .. CA.SV.ExperienceName )
+        end
+
+        -- Add to the throttled XP count if it is enabled
+        if CA.SV.ExperienceThrottle > 0 and reason == 0 then
+            g_XPCombatBufferValue = g_XPCombatBufferValue + change
+            icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. ZO_LocalizeDecimalNumber (g_XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName ) or ( ZO_LocalizeDecimalNumber (g_XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName )
+        end
+
+        local xppct = 0    -- XP Percent
+        local decimal = 0  -- If we're using a % value, this is the string that determines whether we have a decimal point or not.
+
+        if CA.SV.ExperienceShowProgress then
+            if CA.SV.ExperienceShowDecimal then
+                xppct = math.floor(10000*levelhelper/XPLevel) / 100
+            else
+                xppct = math.floor(100*levelhelper/XPLevel)
             end
 
-            -- Displays an icon if enabled
-            local icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. ZO_LocalizeDecimalNumber (change) .. formathelper .. CA.SV.ExperienceName ) or ( ZO_LocalizeDecimalNumber (change) .. formathelper .. CA.SV.ExperienceName )
-
-            -- If quest turnin, we save the first part of this string to combine with another in case this is followed up by POI completion event too.
-            if reason == 1 then
-                g_levelCarryOverValue = currentExperience
-                g_questCombiner1 = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. ZO_LocalizeDecimalNumber (change) .. formathelper .. CA.SV.ExperienceName ) or ( ZO_LocalizeDecimalNumber (change) .. formathelper .. CA.SV.ExperienceName )
+            if CA.SV.ExperienceShowPBrackets then -- If [Progress] display brackets are hidden, then the XP numbers will just print on the end
+                progressbrackets = strfmt( " %s", CA.SV.ExperienceProgressName )
             end
 
-            -- Add to the throttled XP count if it is enabled
-            if CA.SV.ExperienceThrottle > 0 and reason == 0 then
-                g_XPCombatBufferValue = g_XPCombatBufferValue + change
-                icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. ZO_LocalizeDecimalNumber (g_XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName ) or ( ZO_LocalizeDecimalNumber (g_XPCombatBufferValue) .. formathelper .. CA.SV.ExperienceName )
+            -- Configures progress experience configuration options
+            if CA.SV.ExperienceProgressColor then
+                decimal = strfmt( "|c%s%s", ExperiencePctToColour(xppct), xppct)
+            else
+                decimal = strfmt( "%s", xppct)
             end
 
-            local xppct = 0    -- XP Percent
-            local decimal = 0  -- If we're using a % value, this is the string that determines whether we have a decimal point or not.
-
-            if CA.SV.ExperienceShowProgress then
-
-                if CA.SV.ExperienceShowDecimal then
-                        xppct = math.floor(10000*levelhelper/XPLevel) / 100
+            if CA.SV.ExperienceDisplayOptions == 1 then
+                if CA.SV.ExperienceProgressColor then
+                    progress = strfmt( "%s (|c%s%s|r/|c71DE73%s|r)", progressbrackets, ExperiencePctToColour(xppct), ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
                 else
-                        xppct = math.floor(100*levelhelper/XPLevel)
+                    progress = strfmt( "%s (%s/%s)|r", progressbrackets, ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
+                end
+            elseif CA.SV.ExperienceDisplayOptions == 2 then
+                if CA.SV.ExperienceProgressColor then
+                    progress = strfmt("%s (%s%%|r)", progressbrackets, decimal)
+                else
+                    progress = strfmt("%s (%s%%|r)", progressbrackets, decimal)
+                end
+            elseif CA.SV.ExperienceDisplayOptions == 3 then
+                if CA.SV.ExperienceProgressColor then
+                    progress = strfmt("%s (%s%%|r - |c%s%s|r/|c71DE73%s|r)", progressbrackets, decimal, ExperiencePctToColour(xppct), ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
+                else
+                    progress = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
+                end
+            end
+
+            -- Big ass bullshit duplicate to create alternate string for Reason 2 on quest turnin with POI completion too
+            if reason == 2 and g_questCombiner1 ~= "" then
+                -- CALCULATION 1
+                levelhelper = levelhelper - change
+                if g_crossover == 1 then
+                    levelhelper = XPLevel -- If we crossover XP on this level then we just auto set this to max xp/level value for 50.
                 end
 
-                if CA.SV.ExperienceShowPBrackets then -- If [Progress] display brackets are hidden, then the XP numbers will just print on the end
-                    progressbrackets = strfmt( " %s", CA.SV.ExperienceProgressName )
+                if CA.SV.ExperienceShowDecimal then
+                    xppct = math.floor(10000*levelhelper/XPLevel) / 100
+                else
+                    xppct = math.floor(100*levelhelper/XPLevel)
                 end
 
                 -- Configures progress experience configuration options
@@ -3660,175 +3740,125 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 
                 if CA.SV.ExperienceDisplayOptions == 1 then
                     if CA.SV.ExperienceProgressColor then
-                    progress = strfmt( "%s (|c%s%s|r/|c71DE73%s|r)", progressbrackets, ExperiencePctToColour(xppct), ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
+                        g_questCombiner2 = strfmt( "%s (|c%s%s|r/|c71DE73%s|r)", progressbrackets, ExperiencePctToColour(xppct), ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
                     else
-                    progress = strfmt( "%s (%s/%s)|r", progressbrackets, ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
+                        g_questCombiner2 = strfmt( "%s (%s/%s)|r", progressbrackets, ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
                     end
                 elseif CA.SV.ExperienceDisplayOptions == 2 then
                     if CA.SV.ExperienceProgressColor then
-                    progress = strfmt("%s (%s%%|r)", progressbrackets, decimal)
+                        g_questCombiner2 = strfmt("%s (%s%%|r)", progressbrackets, decimal)
                     else
-                    progress = strfmt("%s (%s%%|r)", progressbrackets, decimal)
+                        g_questCombiner2 = strfmt("%s (%s%%|r)", progressbrackets, decimal)
                     end
                 elseif CA.SV.ExperienceDisplayOptions == 3 then
                     if CA.SV.ExperienceProgressColor then
-                    progress = strfmt("%s (%s%%|r - |c%s%s|r/|c71DE73%s|r)", progressbrackets, decimal, ExperiencePctToColour(xppct), ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
+                        g_questCombiner2 = strfmt("%s (%s%%|r - |c%s%s|r/|c71DE73%s|r)", progressbrackets, decimal, ExperiencePctToColour(xppct), ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
                     else
-                    progress = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
+                        g_questCombiner2 = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
                     end
                 end
-
-                --
-                -- Big ass bullshit duplicate to create alternate string for Reason 2 on quest turnin with POI completion too
-                if reason == 2 and g_questCombiner1 ~= "" then
-
-                -- CALCULATION 1
-
-                    levelhelper = levelhelper - change
-
-                    if g_crossover == 1 then
-                        levelhelper = XPLevel -- If we crossover XP on this level then we just auto set this to max xp/level value for 50.
-                    end
-
-                    if CA.SV.ExperienceShowDecimal then
-                            xppct = math.floor(10000*levelhelper/XPLevel) / 100
-                    else
-                            xppct = math.floor(100*levelhelper/XPLevel)
-                    end
-
-                    -- Configures progress experience configuration options
-                    if CA.SV.ExperienceProgressColor then
-                        decimal = strfmt( "|c%s%s", ExperiencePctToColour(xppct), xppct)
-                    else
-                        decimal = strfmt( "%s", xppct)
-                    end
-
-                    if CA.SV.ExperienceDisplayOptions == 1 then
-                        if CA.SV.ExperienceProgressColor then
-                        g_questCombiner2 = strfmt( "%s (|c%s%s|r/|c71DE73%s|r)", progressbrackets, ExperiencePctToColour(xppct), ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
-                        else
-                        g_questCombiner2 = strfmt( "%s (%s/%s)|r", progressbrackets, ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
-                        end
-                    elseif CA.SV.ExperienceDisplayOptions == 2 then
-                        if CA.SV.ExperienceProgressColor then
-                        g_questCombiner2 = strfmt("%s (%s%%|r)", progressbrackets, decimal)
-                        else
-                        g_questCombiner2 = strfmt("%s (%s%%|r)", progressbrackets, decimal)
-                        end
-                    elseif CA.SV.ExperienceDisplayOptions == 3 then
-                        if CA.SV.ExperienceProgressColor then
-                        g_questCombiner2 = strfmt("%s (%s%%|r - |c%s%s|r/|c71DE73%s|r)", progressbrackets, decimal, ExperiencePctToColour(xppct), ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
-                        else
-                        g_questCombiner2 = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevel) )
-                        end
-                    end
 
                 -- CALCULATION 2
+                local XPLevelAlt
 
-                    local XPLevelAlt
-
-                    if IsChampion then
-                        local AdjustLevel = GetPlayerChampionPointsEarned() -1
-                        if AdjustLevel < 10 then
-                            AdjustLevel = 10 -- Very important, if this player has never hit Champion level before, set the minimum possible value when hitting level 50.
-                        end
-                        XPLevelAlt = GetNumChampionXPInChampionPoint(AdjustLevel)
-                        if g_crossover == 1 then
-                            XPLevelAlt = GetNumExperiencePointsInLevel(49)
-                        end
-                    else
-                        local AdjustLevel = CurrentLevel -1
-                        XPLevelAlt = GetNumExperiencePointsInLevel(AdjustLevel)
+                if IsChampion then
+                    local AdjustLevel = GetPlayerChampionPointsEarned() -1
+                    if AdjustLevel < 10 then
+                        AdjustLevel = 10 -- Very important, if this player has never hit Champion level before, set the minimum possible value when hitting level 50.
                     end
-
-                    levelhelper = g_levelCarryOverValue
-
-                    if CA.SV.ExperienceShowDecimal then
-                            xppct = math.floor(10000*levelhelper/XPLevelAlt) / 100
-                    else
-                            xppct = math.floor(100*levelhelper/XPLevelAlt)
-                    end
-
-                    -- Configures progress experience configuration options
-                    if CA.SV.ExperienceProgressColor then
-                        decimal = strfmt( "|c%s%s", ExperiencePctToColour(xppct), xppct)
-                    else
-                        decimal = strfmt( "%s", xppct)
-                    end
-
-                    if CA.SV.ExperienceDisplayOptions == 1 then
-                        if CA.SV.ExperienceProgressColor then
-                        g_questCombiner2Alt = strfmt( "%s (|c%s%s|r/|c71DE73%s|r)", progressbrackets, ExperiencePctToColour(xppct), ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevelAlt) )
-                        else
-                        g_questCombiner2Alt = strfmt( "%s (%s/%s)|r", progressbrackets, ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevelAlt) )
-                        end
-                    elseif CA.SV.ExperienceDisplayOptions == 2 then
-                        if CA.SV.ExperienceProgressColor then
-                        g_questCombiner2Alt = strfmt("%s (%s%%|r)", progressbrackets, decimal)
-                        else
-                        g_questCombiner2Alt = strfmt("%s (%s%%|r)", progressbrackets, decimal)
-                        end
-                    elseif CA.SV.ExperienceDisplayOptions == 3 then
-                        if CA.SV.ExperienceProgressColor then
-                        g_questCombiner2Alt = strfmt("%s (%s%%|r - |c%s%s|r/|c71DE73%s|r)", progressbrackets, decimal, ExperiencePctToColour(xppct), ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevelAlt) )
-                        else
-                        g_questCombiner2Alt = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevelAlt) )
-                        end
-                    end
-                -- End big ass bullshit duplicate function
-                --
-
-                end
-
-
-            end
-
-            if CA.SV.ExperienceShowLevel then
-                local attribute
-                if CA.SV.ExperienceColorLevel then
-                    if IsChampion then
-                        attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned() +1)
-                        totallevel = g_CP_BAR_COLORS[attribute][2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel))
-                    else
-                        totallevel = g_XP_BAR_COLORS:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel))
+                    XPLevelAlt = GetNumChampionXPInChampionPoint(AdjustLevel)
+                    if g_crossover == 1 then
+                        XPLevelAlt = GetNumExperiencePointsInLevel(49)
                     end
                 else
-                    totallevel = strfmt( " %s %s", LevelContext, CurrentLevel)
+                    local AdjustLevel = CurrentLevel -1
+                    XPLevelAlt = GetNumExperiencePointsInLevel(AdjustLevel)
                 end
 
-                if g_questCombiner1 ~= "" then
-                    if CA.SV.ExperienceColorLevel then
-                        if IsChampion then
-                            attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned() )
-                            g_totalLevelAdjust = g_CP_BAR_COLORS[attribute][2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel -1))
-                        else
-                            g_totalLevelAdjust = g_XP_BAR_COLORS:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel -1))
-                        end
+                levelhelper = g_levelCarryOverValue
+
+                if CA.SV.ExperienceShowDecimal then
+                    xppct = math.floor(10000*levelhelper/XPLevelAlt) / 100
+                else
+                    xppct = math.floor(100*levelhelper/XPLevelAlt)
+                end
+
+                -- Configures progress experience configuration options
+                if CA.SV.ExperienceProgressColor then
+                    decimal = strfmt( "|c%s%s", ExperiencePctToColour(xppct), xppct)
+                else
+                    decimal = strfmt( "%s", xppct)
+                end
+
+                if CA.SV.ExperienceDisplayOptions == 1 then
+                    if CA.SV.ExperienceProgressColor then
+                        g_questCombiner2Alt = strfmt( "%s (|c%s%s|r/|c71DE73%s|r)", progressbrackets, ExperiencePctToColour(xppct), ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevelAlt) )
                     else
-                        g_totalLevelAdjust = strfmt( " %s %s", LevelContext, CurrentLevel -1)
+                        g_questCombiner2Alt = strfmt( "%s (%s/%s)|r", progressbrackets, ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevelAlt) )
                     end
+                elseif CA.SV.ExperienceDisplayOptions == 2 then
+                    if CA.SV.ExperienceProgressColor then
+                        g_questCombiner2Alt = strfmt("%s (%s%%|r)", progressbrackets, decimal)
+                    else
+                        g_questCombiner2Alt = strfmt("%s (%s%%|r)", progressbrackets, decimal)
+                    end
+                elseif CA.SV.ExperienceDisplayOptions == 3 then
+                    if CA.SV.ExperienceProgressColor then
+                        g_questCombiner2Alt = strfmt("%s (%s%%|r - |c%s%s|r/|c71DE73%s|r)", progressbrackets, decimal, ExperiencePctToColour(xppct), ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevelAlt) )
+                    else
+                        g_questCombiner2Alt = strfmt("%s (%s%%|r - %s/%s)|r", progressbrackets, decimal, ZO_LocalizeDecimalNumber (levelhelper), ZO_LocalizeDecimalNumber (XPLevelAlt) )
+                    end
+                end
+                -- End big ass bullshit duplicate function
+            end
+        end
+
+        if CA.SV.ExperienceShowLevel then
+            local attribute
+            if CA.SV.ExperienceColorLevel then
+                if IsChampion then
+                    attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned() +1)
+                    totallevel = ZO_CP_BAR_GRADIENT_COLORS[attribute][2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel))
+                else
+                    totallevel = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel))
                 end
             else
-                if g_questCombiner1 ~= "" then
-                    g_totalLevelAdjust = ""
-                end
+                totallevel = strfmt( " %s %s", LevelContext, CurrentLevel)
             end
 
-            --[[ Crossover from Normal XP --> Champion XP modifier ]] --
-            if g_crossover == 1 then
-                -- progress = (progressbrackets .. " (Level 50)")
-                totallevel = g_XP_BAR_COLORS:Colorize( strformat(" <<1>> 50", GetString(SI_EXPERIENCE_LEVEL_LABEL)) ) -- "Level"
-                if g_questCombiner1 ~= "" then
-                    -- g_questCombiner2 = (progressbrackets .. " (Level 50)")
-                    if CA.SV.ExperienceShowLevel then
-                        if CA.SV.ExperienceColorLevel then
-                            g_totalLevelAdjust = g_XP_BAR_COLORS:Colorize( strformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL)) )
-                        else
-                            g_totalLevelAdjust = strformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL))
-                        end
+            if g_questCombiner1 ~= "" then
+                if CA.SV.ExperienceColorLevel then
+                    if IsChampion then
+                        attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned() )
+                        g_totalLevelAdjust = ZO_CP_BAR_GRADIENT_COLORS[attribute][2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel -1))
+                    else
+                        g_totalLevelAdjust = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel -1))
+                    end
+                else
+                    g_totalLevelAdjust = strfmt( " %s %s", LevelContext, CurrentLevel -1)
+                end
+            end
+        else
+            if g_questCombiner1 ~= "" then
+                g_totalLevelAdjust = ""
+            end
+        end
+
+        --[[ Crossover from Normal XP --> Champion XP modifier ]] --
+        if g_crossover == 1 then
+            -- progress = (progressbrackets .. " (Level 50)")
+            totallevel = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize( strformat(" <<1>> 50", GetString(SI_EXPERIENCE_LEVEL_LABEL)) ) -- "Level"
+            if g_questCombiner1 ~= "" then
+                -- g_questCombiner2 = (progressbrackets .. " (Level 50)")
+                if CA.SV.ExperienceShowLevel then
+                    if CA.SV.ExperienceColorLevel then
+                        g_totalLevelAdjust = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize( strformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL)) )
+                    else
+                        g_totalLevelAdjust = strformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL))
                     end
                 end
             end
+        end
 
         -- If we gain experience from a non combat source, and our buffer function holds a value, then we need to immediately dump this value before the next XP update is processed.
         if reason ~= 0 and CA.SV.ExperienceThrottle > 0 and g_XPCombatBufferValue > 0 then
@@ -4175,7 +4205,6 @@ local printNextChange = true
 local unequipHelper = false
 
 function CA.PrintInventoryIndexChanges(itemId, seticon, item, itemType, stackCountChange, receivedBy, gainorloss)
-
     -- ResetIsLooted first before we potentially return the rest of the function
     local function ResetIsLooted()
         g_isLooted = false
@@ -4235,7 +4264,7 @@ end
 
 -- Only used if the option to see destroyed items or items lost from a guard is turned on
 function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-    
+
     if bagId == BAG_WORN then
         local receivedBy = ""
         if not g_equippedStacks[slotId] then -- NEW ITEM
@@ -4359,13 +4388,13 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                 local gainorloss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
-                
+
                 if CA.SV.ShowLockpickBreak and g_lockpickBroken then
                     logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_BROKEN)
                     gainorloss = 2
                     CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
                 end
-                
+
                 local endcount = g_inventoryStacks[slotId].stack - change
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
                     if CA.SV.ShowDestroy and g_itemWasDestroyed then
@@ -4409,12 +4438,8 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
     g_lockpickBroken = false
 end
 
-local g_smithing = {} -- Table for smithing mode
-local g_enchanting = {} -- Table for enchanting mode
-
 -- Simple posthook into ZOS crafting mode functions, based off MultiCraft, thanks Ayantir!
 function CA.CraftModeOverrides()
-
     -- Set mode on Smithing Station interaction
 	local zos_Smithing = SMITHING.SetMode
 	SMITHING.SetMode = function(...)
@@ -4422,12 +4447,12 @@ function CA.CraftModeOverrides()
         if GetCraftingInteractionType() == CRAFTING_TYPE_SMITHNG then
 		mode = g_smithing:GetMode() end
 	end
-	
+
     -- Get SMITHING mode
 	g_smithing.GetMode = function()
 		return SMITHING.mode
 	end
-    
+
     -- Set mode on Enchanting Station interaction
     local zos_Enchanting = ENCHANTING.SetEnchantingMode
 	ENCHANTING.SetEnchantingMode = function(...)
@@ -4435,67 +4460,32 @@ function CA.CraftModeOverrides()
         if GetCraftingInteractionType() == CRAFTING_TYPE_ENCHANTING then
             mode = g_enchanting:GetMode() end
         end
-    
+
     -- Get ENCHANTING mode
     g_enchanting.GetMode = function()
 		return ENCHANTING:GetEnchantingMode()
-	end   
-    
+	end
+
     -- NOTE: Alchemy and provisioning don't matter, as the only options are to craft and use materials.
-    
+
 end
 
-local g_enchant_prefix_pos = {
-
-[1] = GetString(SI_ITEM_FORMAT_STR_CRAFTED),
-[2] = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN),
-[3] = GetString(SI_ITEM_FORMAT_STR_CRAFTED),
-
-}
-local g_enchant_prefix_neg = {
-
-[1] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED),
-[2] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_EXTRACTED),
-[3] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED),
-
-}
-local g_smithing_prefix_pos = {
-
-[1] = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN),
-[2] = GetString(SI_ITEM_FORMAT_STR_CRAFTED),
-[3] = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN),
-[4] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED),
-[5] = "",
-[6] = GetString(SI_ITEM_FORMAT_STR_CRAFTED),
-
-}
-local g_smithing_prefix_neg = {
-
-[1] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_REFINED),
-[2] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED),
-[3] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DECONSTRUCTED),
-[4] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED),
-[5] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_RESEARCHED),
-[6] = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED),
-
-}
-
 function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-    
+
     local logPrefixPos = GetString(SI_ITEM_FORMAT_STR_CRAFTED)
     local logPrefixNeg = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED)
-    
-    if GetCraftingInteractionType() == CRAFTING_TYPE_ENCHANTING then 
+
+    if GetCraftingInteractionType() == CRAFTING_TYPE_ENCHANTING then
         logPrefixPos = g_enchant_prefix_pos[g_enchanting.GetMode()]
         logPrefixNeg = g_enchant_prefix_neg[g_enchanting.GetMode()]
-        
-    end   
+
+    end
     if (GetCraftingInteractionType() == CRAFTING_TYPE_BLACKSMITHING or GetCraftingInteractionType() == CRAFTING_TYPE_CLOTHIER or GetCraftingInteractionType() == CRAFTING_TYPE_WOODWORKING) then
         logPrefixPos = g_smithing_prefix_pos[g_smithing.GetMode()]
         logPrefixNeg = g_smithing_prefix_neg[g_smithing.GetMode()]
     end
     local receivedBy = "CRAFT"
-    
+
     ---------------------------------- INVENTORY ----------------------------------
     if bagId == BAG_BACKPACK then
         if not g_inventoryStacks[slotId] then -- NEW ITEM
@@ -4535,7 +4525,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
                 local gainorloss = 2
                 local logPrefix = logPrefixNeg
-                    
+
                 if (GetCraftingInteractionType() == CRAFTING_TYPE_BLACKSMITHING or GetCraftingInteractionType() == CRAFTING_TYPE_CLOTHIER or GetCraftingInteractionType() == CRAFTING_TYPE_WOODWORKING) and g_smithing.GetMode() == 4 then
                     receivedBy = ""
                     if itemType == ITEMTYPE_ADDITIVE
@@ -4561,7 +4551,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
                         logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED)
                     end
                 end
-                
+
                 local change = (stackCountChange * -1)
                 local endcount = g_inventoryStacks[slotId].stack - change
                 if logPrefix ~= GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED) or CA.SV.ShowCraftUse then
@@ -4700,7 +4690,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
                 logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED)
             end
         end
-        
+
         if logPrefix ~= GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED) or CA.SV.ShowCraftUse then
             CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss)
         end
@@ -5383,7 +5373,6 @@ function CA.MaraResult (eventCode, reason, targetCharacterName, targetDisplayNam
     end
 
     printToChat(strformat(GetString("SI_PLEDGEOFMARARESULT", reason), maraName))
-
 end
 
 function CA.NewCollectible(eventCode, collectibleId)
