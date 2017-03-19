@@ -744,6 +744,7 @@ function LUIE.SlashIgnore(option)
     end
     if IsIgnored(option) then -- Only lists account names, unfortunately
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE))
+        ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE)))
         return
     end
     AddIgnore(option)
