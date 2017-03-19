@@ -2404,6 +2404,17 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.ExperienceShowLevel,
                     },
                     {
+                        -- Show Level Icon with current level
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_EXP_LVLTOTALICON),
+                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_LVLOTALICON_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LevelTotalIcon end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LevelTotalIcon = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.ExperienceShowLevel and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.LevelTotalIcon,
+                    },
+                    {
                         -- Color Level by Context
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT),
@@ -2411,7 +2422,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceColorLevel end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceColorLevel = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.ExperienceShowLevel and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.ExperienceColorLevel,
                     },
                     {
@@ -2819,6 +2830,17 @@ function LUIE_CreateSettings()
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.MiscStuck,
+                    },
+                    {
+                         -- Show Inventory Full
+                        type = "checkbox",
+                        name = strformat("\t\t\t\t<<1>>", GetString("TODO")),
+                        tooltip = GetString("TODO"),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.ShowLootFail end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowLootFail = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.ShowLootFail,                   
                     },
                 },
             },

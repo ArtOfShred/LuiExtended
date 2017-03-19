@@ -72,6 +72,7 @@ CA.D = {
     ItemContextMessage            = "",
     ItemContextToggle             = false,
     LevelUpIcon                   = true,
+    LevelTotalIcon                = true,
     Loot                          = true,
     LootBank                      = true,
     LootBlacklist                 = false,
@@ -110,6 +111,7 @@ CA.D = {
     ShowDestroy                   = false,
     ShowDisguise                  = false,
     ShowLockpickBreak             = false,
+    ShowLootFail                  = true,
     TelVarStoneChange             = true,
     TelVarStoneColor              = { 0.368627, 0.643137, 1, 1 },
     TelVarFilter                  = 0,
@@ -631,6 +633,10 @@ function CA.RegisterLootEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INTERACTABLE_LOCKED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOCKPICK_FAILED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS)
+    -- LOOT FAILED
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_COMPLETE_ATTEMPT_FAILED_INVENTORY_FULL)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_IS_FULL)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED)
 
     -- LOOT RECEIVED
     if CA.SV.Loot then
@@ -719,6 +725,11 @@ function CA.RegisterLootEvents()
     if CA.SV.MiscLockpick or CA.SV.ShowLockpickBreak then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_FAILED, CA.MiscAlertLockFailed)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS, CA.MiscAlertLockSuccess)
+    end
+    if CA.SV.ShowLootFail then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_COMPLETE_ATTEMPT_FAILED_INVENTORY_FULL, CA.InventoryFull)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_IS_FULL, CA.InventoryFull)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED, CA.LootItemFailed)
     end
 end
 
@@ -3454,8 +3465,16 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
     if unitTag == ("player") then
 
         CA.LevelUpdateHelper()
-
-        local icon = CA.SV.LevelUpIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_normal.dds|t ") or ( "" )
+        local icon
+        
+        if CA.SV.ExperienceColorLevel then
+            icon = zo_iconFormatInheritColor("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)
+            icon = CA.SV.LevelUpIcon and ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(strfmt("%s ", levelicon)) or ( "" )
+        else
+           icon = zo_iconFormat("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)
+           icon = CA.SV.LevelUpIcon and (strfmt("%s ", levelicon)) or ( "" ) 
+        end
+        
         local attribute
         local CurrentLevelFormatted = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(LevelContext .. " " .. CurrentLevel)
 
@@ -3471,7 +3490,7 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
                 icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_magicka_icon-hud-32.dds|t ") or ( "" )
             end
             if attribute == ATTRIBUTE_STAMINA then
-                icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.ddst ") or ( "" )
+                icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.dds|t ") or ( "" )
             end
             CurrentLevelFormatted = ZO_CP_BAR_GRADIENT_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
         end
@@ -3558,7 +3577,7 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
             icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_magicka_icon-hud-32.dds|t ") or ( "" )
         end
         if attribute == ATTRIBUTE_STAMINA then
-            icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.ddst ") or ( "" )
+            icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.dds|t ") or ( "" )
         end
         local CurrentLevelFormatted = ZO_CP_BAR_GRADIENT_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
 
@@ -3818,27 +3837,79 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 
         if CA.SV.ExperienceShowLevel then
             local attribute
+            local levelicon
             if CA.SV.ExperienceColorLevel then
                 if IsChampion then
                     attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned() +1)
-                    totallevel = ZO_CP_BAR_GRADIENT_COLORS[attribute][2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel))
+                    if attribute == ATTRIBUTE_NONE then
+                        levelicon = CA.SV.LevelTotalIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_champion.dds|t ") or ( "" )
+                    end
+                    if attribute == ATTRIBUTE_HEALTH then
+                        levelicon = CA.SV.LevelTotalIcon and ("|t16:16:/esoui/art/champion/champion_points_health_icon-hud-32.dds|t ") or ( "" )
+                    end
+                    if attribute == ATTRIBUTE_MAGICKA then
+                        levelicon = CA.SV.LevelTotalIcon and ("|t16:16:/esoui/art/champion/champion_points_magicka_icon-hud-32.dds|t ") or ( "" )
+                    end
+                    if attribute == ATTRIBUTE_STAMINA then
+                        levelicon = CA.SV.LevelTotalIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.dds|t ") or ( "" )
+                    end
+                    totallevel = ZO_CP_BAR_GRADIENT_COLORS[attribute][2]:Colorize(strfmt(" %s%s %s", levelicon, LevelContext, CurrentLevel))
                 else
-                    totallevel = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel))
+                    levelicon = zo_iconFormatInheritColor("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)
+                    levelicon = CA.SV.LevelTotalIcon and (strfmt("%s ", levelicon)) or ( "" )
+                    totallevel = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(strfmt(" %s%s %s", levelicon, LevelContext, CurrentLevel))
                 end
             else
-                totallevel = strfmt( " %s %s", LevelContext, CurrentLevel)
+                levelicon = zo_iconFormat("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)
+                levelicon = CA.SV.LevelTotalIcon and (strfmt("%s ", levelicon)) or ( "" )
+                totallevel = strfmt( " %s%s %s", levelicon, LevelContext, CurrentLevel)
             end
 
             if g_questCombiner1 ~= "" then
+                local levelicon
                 if CA.SV.ExperienceColorLevel then
                     if IsChampion then
                         attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned() )
-                        g_totalLevelAdjust = ZO_CP_BAR_GRADIENT_COLORS[attribute][2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel -1))
+                        if attribute == ATTRIBUTE_NONE then
+                            levelicon = CA.SV.LevelTotalIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_champion.dds|t ") or ( "" )
+                        end
+                        if attribute == ATTRIBUTE_HEALTH then
+                            levelicon = CA.SV.LevelTotalIcon and ("|t16:16:/esoui/art/champion/champion_points_health_icon-hud-32.dds|t ") or ( "" )
+                        end
+                        if attribute == ATTRIBUTE_MAGICKA then
+                            levelicon = CA.SV.LevelTotalIcon and ("|t16:16:/esoui/art/champion/champion_points_magicka_icon-hud-32.dds|t ") or ( "" )
+                        end
+                        if attribute == ATTRIBUTE_STAMINA then
+                            levelicon = CA.SV.LevelTotalIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.dds|t ") or ( "" )
+                        end
+                        g_totalLevelAdjust = ZO_CP_BAR_GRADIENT_COLORS[attribute][2]:Colorize(strfmt(" %s%s %s", levelicon, LevelContext, CurrentLevel -1))
                     else
-                        g_totalLevelAdjust = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(strfmt(" %s %s", LevelContext, CurrentLevel -1))
+                        levelicon = zo_iconFormatInheritColor("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)
+                        levelicon = CA.SV.LevelTotalIcon and (strfmt("%s ", levelicon)) or ( "" )
+                        g_totalLevelAdjust = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(strfmt(" %s%s %s", levelicon, LevelContext, CurrentLevel -1))
                     end
                 else
-                    g_totalLevelAdjust = strfmt( " %s %s", LevelContext, CurrentLevel -1)
+                    if IsChampion then
+                        local attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned()+1 )
+
+                        if attribute == ATTRIBUTE_NONE then
+                            levelicon = CA.SV.LevelTotalIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_champion.dds|t ") or ( "" )
+                        end
+                        if attribute == ATTRIBUTE_HEALTH then
+                            levelicon = CA.SV.LevelTotalIcon and ("|t16:16:/esoui/art/champion/champion_points_health_icon-hud-32.dds|t ") or ( "" )
+                        end
+                        if attribute == ATTRIBUTE_MAGICKA then
+                            levelicon = CA.SV.LevelTotalIcon and ("|t16:16:/esoui/art/champion/champion_points_magicka_icon-hud-32.dds|t ") or ( "" )
+                        end
+                        if attribute == ATTRIBUTE_STAMINA then
+                            levelicon = CA.SV.LevelTotalIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.dds|t ") or ( "" )
+                        end
+                        g_totalLevelAdjust = strfmt( " %s%s %s", levelicon, LevelContext, CurrentLevel -1)
+                    else
+                        levelicon = zo_iconFormat("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)
+                        levelicon = CA.SV.LevelTotalIcon and (strfmt("%s ", levelicon)) or ( "" )
+                        g_totalLevelAdjust = strfmt( " %s%s %s", levelicon, LevelContext, CurrentLevel -1)
+                    end 
                 end
             end
         else
@@ -3850,14 +3921,27 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
         --[[ Crossover from Normal XP --> Champion XP modifier ]] --
         if g_crossover == 1 then
             -- progress = (progressbrackets .. " (Level 50)")
-            totallevel = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize( strformat(" <<1>> 50", GetString(SI_EXPERIENCE_LEVEL_LABEL)) ) -- "Level"
+            local levelicon
+            if CA.SV.ExperienceColorLevel then
+                levelicon = zo_iconFormatInheritColor("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)
+                levelicon = CA.SV.LevelTotalIcon and (strfmt("%s ", levelicon)) or ( "" )
+                totallevel = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize( strformat(" <<1>><<2>> 50", levelicon, GetString(SI_EXPERIENCE_LEVEL_LABEL)) ) -- "Level"
+            else
+                levelicon = zo_iconFormat("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)
+                levelicon = CA.SV.LevelTotalIcon and (strfmt("%s ", levelicon)) or ( "" )
+                totallevel = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize( strformat(" <<1>><<2>> 50", levelicon, GetString(SI_EXPERIENCE_LEVEL_LABEL)) ) -- "Level"
+            end
             if g_questCombiner1 ~= "" then
                 -- g_questCombiner2 = (progressbrackets .. " (Level 50)")
                 if CA.SV.ExperienceShowLevel then
                     if CA.SV.ExperienceColorLevel then
-                        g_totalLevelAdjust = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize( strformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL)) )
+                        levelicon = zo_iconFormatInheritColor("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)
+                        levelicon = CA.SV.LevelTotalIcon and (strfmt("%s ", levelicon)) or ( "" )
+                        g_totalLevelAdjust = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize( strformat(" <<1>> 49", levelicon, GetString(SI_EXPERIENCE_LEVEL_LABEL)) )
                     else
-                        g_totalLevelAdjust = strformat(" <<1>> 49", GetString(SI_EXPERIENCE_LEVEL_LABEL))
+                        levelicon = zo_iconFormat("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)
+                        levelicon = CA.SV.LevelTotalIcon and (strfmt("%s ", levelicon)) or ( "" )
+                        g_totalLevelAdjust = strformat(" <<1>><<2>> 49", levelicon, GetString(SI_EXPERIENCE_LEVEL_LABEL))
                     end
                 end
             end
@@ -4103,8 +4187,6 @@ function CA.CraftingClose(eventCode, craftSkill)
         g_inventoryStacks = {}
     end
     g_bankStacks = {}
-    g_smithing   = {}
-    g_enchanting = {}
 end
 
 function CA.BankOpen(eventCode)
@@ -5431,4 +5513,26 @@ function CA.StuckOnCooldown(eventCode)
     local cooldownText = ZO_FormatTime(GetStuckCooldown(), TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_TWELVE_HOUR)
     local cooldownRemainingText = ZO_FormatTimeMilliseconds(GetTimeUntilStuckAvailable(), TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_TWELVE_HOUR)
     printToChat(strformat(GetString(SI_STUCK_ERROR_ON_COOLDOWN), cooldownText, cooldownRemainingText ))
+end
+
+function CA.InventoryFull(eventCode,numSlotsRequested,numSlotsFree)
+
+    local function DisplayItemFailed()
+        printToChat(GetString(SI_INVENTORY_ERROR_INVENTORY_FULL))
+    end
+    
+    zo_callLater(DisplayItemFailed, 100)
+end
+
+function CA.LootItemFailed(eventCode, reason, itemName)
+    
+    -- Stop Spam
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED)
+    
+    local function ReactivateLootItemFailed()
+    printToChat(GetString("SI_LOOTITEMRESULT", reason))
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED, CA.LootItemFailed)
+    end
+    
+    zo_callLater(ReactivateLootItemFailed, 100)
 end

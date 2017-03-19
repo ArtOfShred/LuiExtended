@@ -437,6 +437,8 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD_TP",             "Experie
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HEADER",                          "Experience Announcements")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HIDEEXPKILLS",                    "Hide Experience from Kills")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HIDEEXPKILLS_TP",                 "Toggle this option on to only report experience gain in chat from non-combat sources.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_LVLTOTALICON",                    "Show Level Icon with Total Level")
+ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_LVLTOTALICON_TP",                 "Toggle the display of the normal level icon or relevant champion point type icon when total level is displayed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_LVLUPICON",                       "Show Level Icon on Level Up")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_LVLUPICON_TP",                    "Toggle the display of the normal level icon or relevant champion point type icon when a level is gained.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_LVLUPMSG",                        "Show Level Up Message in Chat")
