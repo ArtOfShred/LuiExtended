@@ -213,7 +213,7 @@ function LUIE.FormatMessage(msg, doTimestamp)
     if doTimestamp then
         local timestring = GetTimeString()
         -- Color Code to match pChat default
-        msg = zo_strformat("|c8F8F8F[<<1>>]|r <<2>>", LUIE.CreateTimestamp(timestring), msg)
+        msg = string.format("|c8F8F8F[%s]|r %s", LUIE.CreateTimestamp(timestring), msg)
     end
     return msg
 end

@@ -1977,6 +1977,9 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             g_comboString = ( strfmt(" → %s%s%s", message, syntax, total) )
         elseif CA.SV.GoldChange and UpOrDown < 0 and reason == 60 then
             g_launderGoldstring = ( strfmt("%s%s%s", message, syntax, total) )
+        elseif CA.SV.GoldChange and reason == 99 then -- reason 99 is a fake code we send from the throttle printer function
+            printToChat(strfmt("%s%s%s", message, syntax, total))
+            return
         -- Don't show LOOTED gold below this threshold
         elseif CA.SV.GoldChange and (reason == 0 or reason == 13 or reason == 62) and CA.SV.GoldFilter > 0 and not CA.SV.GoldThrottle then
             if UpOrDown > CA.SV.GoldFilter then
@@ -1985,8 +1988,6 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
         elseif CA.SV.GoldChange and (reason == 0 or reason == 13 or reason == 62) and CA.SV.GoldThrottle then
             zo_callLater(CA.GoldThrottlePrinter, 50 )
             g_goldThrottle = g_goldThrottle + UpOrDown
-        elseif CA.SV.GoldChange and reason == 99 then -- reason 99 is a fake code we send from the throttle printer function
-            printToChat(strfmt("%s%s%s", message, syntax, total))
         else
             if CA.SV.GoldChange then
                 printToChat(strfmt("%s%s%s", message, syntax, total))
@@ -2126,7 +2127,8 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
     if UpOrDown == alliancePoints then
         return
     end
-
+    
+    local currentAlliancePoints = ZO_LocalizeDecimalNumber(alliancePoints)
     local color              -- Gets the value from ChangeUpColorize or ChangeDownColorize to color strings
     local changetype         -- Amount of currency gained or lost
     local bracket1           -- Leading bracket
@@ -2193,9 +2195,9 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
 
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if CA.SV.TotalAlliancePointChange and not CA.SV.CurrencyIcons then
-        total = CA.SV.TotalGoldChange and strfmt(" %s %s", color:Colorize(CA.SV.CurrencyTotalMessage), APColorize:Colorize(ZO_LocalizeDecimalNumber(alliancePoints)))
+        total = strfmt(" %s %s", color:Colorize(CA.SV.CurrencyTotalMessage), APColorize:Colorize(currentAlliancePoints))
     elseif CA.SV.TotalAlliancePointChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalGoldChange and strfmt(" %s |t16:16:/esoui/art/currency/alliancepoints.dds|t %s", color:Colorize(CA.SV.CurrencyTotalMessage), APColorize:Colorize(ZO_LocalizeDecimalNumber(alliancePoints)))
+        total = strfmt(" %s |t16:16:/esoui/art/currency/alliancepoints.dds|t %s", color:Colorize(CA.SV.CurrencyTotalMessage), APColorize:Colorize(currentAlliancePoints))
     else
         total = ""
     end
@@ -2204,15 +2206,16 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
     if CA.SV.LootCurrencyCombo and color == ChangeDownColorize then
         g_comboString = (strfmt(" → %s%s%s", message, syntax, total))
     elseif difference > 0 then
-        if CA.SV.AlliancePointFilter > 0 and not CA.SV.AlliancePointThrottle then
+        if throttlechecker == true then
+            printToChat(strfmt("%s%s%s", message, syntax, total))
+            return
+        elseif CA.SV.AlliancePointFilter > 0 and CA.SV.AlliancePointThrottle == 0 then
             if difference > CA.SV.AlliancePointFilter then
                 printToChat(strfmt("%s%s%s", message, syntax, total))
             end
-        elseif CA.SV.AlliancePointThrottle then
-            zo_callLater(CA.AlliancePointThrottlePrinter, (CA.SV.AlliancePointThrottle * 1000) )
+        elseif CA.SV.AlliancePointThrottle > 0 then
+            zo_callLater(CA.AlliancePointThrottlePrinter, CA.SV.AlliancePointThrottle )
             g_alliancePointThrottle = g_alliancePointThrottle + difference
-        elseif throttlechecker then
-            printToChat(strfmt("%s%s%s", message, syntax, total))
         else
             printToChat(strfmt("%s%s%s", message, syntax, total))
         end
@@ -2364,9 +2367,9 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
 
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if CA.SV.TotalTelVarStoneChange and not CA.SV.CurrencyIcons then
-        total = CA.SV.TotalGoldChange and strfmt(" %s %s", color:Colorize(CA.SV.CurrencyTotalMessage), TVColorize:Colorize(currentTelvar))
+        total = strfmt(" %s %s", color:Colorize(CA.SV.CurrencyTotalMessage), TVColorize:Colorize(currentTelvar))
     elseif CA.SV.TotalTelVarStoneChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalGoldChange and strfmt(" %s |t16:16:/esoui/art/currency/currency_telvar.dds|t %s", color:Colorize(CA.SV.CurrencyTotalMessage), TVColorize:Colorize(currentTelvar))
+        total = strfmt(" %s |t16:16:/esoui/art/currency/currency_telvar.dds|t %s", color:Colorize(CA.SV.CurrencyTotalMessage), TVColorize:Colorize(currentTelvar))
     else
         total = ""
     end
@@ -2376,16 +2379,17 @@ function CA.OnTelVarStoneUpdate(eventCode, newTelvarStones, oldTelvarStones, rea
         g_comboString = (strfmt(" → %s%s%s", message, syntax, total))
     elseif CA.SV.LootCurrencyCombo and UpOrDown > 0 and reason == 1 then
         g_comboString = (strfmt(" ← %s%s%s", message, syntax, total))
+    elseif reason == 99 then
+        printToChat(strfmt("%s%s%s", message, syntax, total))
+        return
     elseif (reason == 0 or reason == 65) and CA.SV.TelVarStoneFilter > 0 and CA.SV.TelVarStoneThrottle == 0 then
         if UpOrDown > CA.SV.TelVarStoneFilter then
             printToChat(strfmt("%s%s%s", message, syntax, total))
         end
     elseif (reason == 0 or reason == 65) and CA.SV.TelVarStoneThrottle > 0 then
-        zo_callLater(CA.TelVarStoneThrottlePrinter, (CA.SV.TelVarStoneThrottle * 1000) )
+        zo_callLater(CA.TelVarStoneThrottlePrinter, CA.SV.TelVarStoneThrottle )
         g_telVarStoneThrottle = g_telVarStoneThrottle + UpOrDown
         g_telVarStoneMaxSave = newTelvarStones
-    elseif reason == 99 then
-        printToChat(strfmt("%s%s%s", message, syntax, total))
     else
         printToChat(strfmt("%s%s%s", message, syntax, total))
     end
@@ -2511,9 +2515,9 @@ function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, rea
 
     -- If Total Currency display is on, then this line is printed additionally on the end, if not then print a blank string
     if CA.SV.TotalWritVoucherChange and not CA.SV.CurrencyIcons then
-        total = CA.SV.TotalGoldChange and strfmt(" %s %s", color:Colorize(CA.SV.CurrencyTotalMessage), WVColorize:Colorize(currentWritVouchers))
+        total = strfmt(" %s %s", color:Colorize(CA.SV.CurrencyTotalMessage), WVColorize:Colorize(currentWritVouchers))
     elseif CA.SV.TotalWritVoucherChange and CA.SV.CurrencyIcons then
-        total = CA.SV.TotalGoldChange and strfmt(" %s |t16:16:/esoui/art/currency/currency_writvoucher.dds|t %s", color:Colorize(CA.SV.CurrencyTotalMessage), WVColorize:Colorize(currentWritVouchers))
+        total = strfmt(" %s |t16:16:/esoui/art/currency/currency_writvoucher.dds|t %s", color:Colorize(CA.SV.CurrencyTotalMessage), WVColorize:Colorize(currentWritVouchers))
     else
         total = ""
     end
@@ -3887,8 +3891,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                 printToChat(strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
             elseif CA.SV.ExperienceThrottle > 0 then
                 g_XPCombatBufferString = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
-                local timer = CA.SV.ExperienceThrottle
-                zo_callLater(CA.PrintBufferedXP, 5000)
+                zo_callLater(CA.PrintBufferedXP, CA.SV.ExperienceThrottle)
             end
         else
             printToChat(strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )

@@ -1451,17 +1451,19 @@ function UF.UpdateStaticControls( unitFrame )
         -- Update max width of label
         local playerName = strformat(SI_UNIT_NAME, GetUnitName("player"))
         -- Only apply this formatting to non-group frames
-        if unitFrame.name:GetParent() == unitFrame.topInfo and (unitFrame.unitTag == "player" or unitFrame.unitTag == "reticleover") then
+        if unitFrame.name:GetParent() == unitFrame.topInfo and unitFrame.unitTag == "reticleover" then
             local width = unitFrame.topInfo:GetWidth()
             if unitFrame.classIcon then
                 width = width - unitFrame.classIcon:GetWidth()
             end
+        if unitFrame.isPlayer then
             if unitFrame.friendIcon then
-                width = width - unitFrame.friendIcon:GetWidth() * 5/6
+                width = width - unitFrame.friendIcon:GetWidth()
             end
             if unitFrame.level then
                 width = width - 2.3 * unitFrame.levelIcon:GetWidth()
             end
+        end
             unitFrame.name:SetWidth(width)
         end
         if unitFrame.isPlayer and ( GetUnitName( unitFrame.unitTag ) ~= playerName ) and UF.SV.DisplayOptions == 3 then
@@ -2676,7 +2678,7 @@ function UF.CustomFramesApplyLayoutPlayer()
         player.topInfo:SetWidth( UF.SV.PlayerBarWidth )
         player.botInfo:SetWidth( UF.SV.PlayerBarWidth )
 
-        player.name:SetWidth( UF.SV.PlayerBarWidth-50 )
+        player.name:SetWidth( UF.SV.PlayerBarWidth-90 )
         player.buffs:SetWidth( UF.SV.PlayerBarWidth )
         player.debuffs:SetWidth( UF.SV.PlayerBarWidth )
 
