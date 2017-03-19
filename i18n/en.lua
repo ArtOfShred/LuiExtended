@@ -20,6 +20,7 @@ ZO_CreateStringId("SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE",      "You mus
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME",               "You must enter the name of a party member to remove.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV",  "You must enter a guild number followed by an account name or character name to invite to a guild.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK", "You must enter a guild number followed by an account name or online character name to remove from a guild.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDNM_KICK",  "You must enter the account name or online character name of a player to remove from the guild.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_INV",     "You must enter a valid guild number to invite a player.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_KICK",    "You must enter a valid guild number to remove a player.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE",   "You must enter a valid guild number to leave a guild.")

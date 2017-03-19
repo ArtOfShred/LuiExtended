@@ -5388,10 +5388,12 @@ end
 function CA.DisguiseState(eventCode, unitTag, disguiseState)
     if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_DANGER then
         printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER))
+        ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GROUP_ELECTION_REQUESTED, (GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER)))
     end
 
     if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_SUSPICIOUS then
         printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS))
+        ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GROUP_ELECTION_REQUESTED, (GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS)))
     end
 
     -- If we're still disguised and g_disguiseState is true then don't waste resources and end the function
@@ -5518,7 +5520,11 @@ end
 function CA.InventoryFull(eventCode,numSlotsRequested,numSlotsFree)
 
     local function DisplayItemFailed()
-        printToChat(GetString(SI_INVENTORY_ERROR_INVENTORY_FULL))
+        if numSlotsRequested == 1 then
+            printToChat(GetString(SI_INVENTORY_ERROR_INVENTORY_FULL))
+        else
+            printToChat(strformat(GetString(SI_INVENTORY_ERROR_INSUFFICIENT_SPACE), (numSlotsRequested - numSlotsFree) ))
+        end
     end
     
     zo_callLater(DisplayItemFailed, 100)
@@ -5530,7 +5536,7 @@ function CA.LootItemFailed(eventCode, reason, itemName)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED)
     
     local function ReactivateLootItemFailed()
-    printToChat(GetString("SI_LOOTITEMRESULT", reason))
+    printToChat(zo_strformat(GetString("SI_LOOTITEMRESULT", reason), itemName))
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED, CA.LootItemFailed)
     end
     
