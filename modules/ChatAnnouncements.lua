@@ -367,7 +367,6 @@ function CA.RegisterGuildEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_MEMBER_REMOVED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_MEMBER_RANK_CHANGED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_INVITE_ADDED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_INVITE_REMOVED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_MOTD_CHANGED)
@@ -375,7 +374,6 @@ function CA.RegisterGuildEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_ADDED, CA.GuildMemberAdded)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_REMOVED, CA.GuildMemberRemoved)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, CA.GuildAddedSelf)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD, CA.GuildRemovedSelf)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_INVITE_ADDED, CA.GuildInviteAdded)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_INVITE_REMOVED, CA.GuildInviteRemoved)
         if CA.SV.MiscGuildMOTD then
@@ -934,6 +932,7 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
     end
 end
 
+-- We don't register this event here because its important that it is called before reindexing is applied in LUIE base.
 function CA.GuildRemovedSelf(eventCode, guildId, guildName)
     local GuildIndexData = LUIE.GuildIndexData
     for i = 1,5 do

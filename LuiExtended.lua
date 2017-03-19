@@ -499,7 +499,7 @@ function LUIE.JumpFailed(eventCode, reason)
     printToChat(GetString("SI_JUMPRESULT", reason))
 end
 
-function LUIE.GuildAddedSelf()
+function LUIE.GuildAddedSelf(eventCode, guildId, guildName)
     GuildsIndex = GetNumGuilds()
     LUIE.GuildIndexData = {}
     for i = 1,GuildsIndex do
@@ -510,7 +510,10 @@ function LUIE.GuildAddedSelf()
     end
 end
 
-function LUIE.GuildRemovedSelf()
+function LUIE.GuildRemovedSelf(eventCode, guildId, guildName)
+    if LUIE.ChatAnnouncements.SV.MiscGuild then
+        LUIE.ChatAnnouncements.GuildRemovedSelf(eventCode, guildId, guildName)
+    end
     GuildsIndex = GetNumGuilds()
     LUIE.GuildIndexData = {}
     for i = 1,GuildsIndex do
