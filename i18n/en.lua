@@ -546,6 +546,16 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK",                   "Show Lo
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK_TP",                "Print a notification to chat when for failed or successful lockpick attempts.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWMAIL",                       "Show Mail Event Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP",                    "Prints a notification to chat when mail is accepted, deleted, or sent.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWQUEST",                      "Show Quest Accepted/Abandoned/Completed")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWQUEST_TP",                   "Prints a notification to chat when a quest is accepted, abandoned, or completed.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWQUESTSHARE",                 "Show Shared Quest Notifications")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWQUESTSHARE_TP",              "Prints a notification to chat when another player shares a quest with you.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWQUESTFAILURE",               "Show Quest FAILURE Message")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWQUESTFAILURE_TP",            "Prints a notification to chat when a quest is failed..")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWQUESTHIDEACCEPT",            "Hide Quest ACCEPT Message")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWQUESTHIDEACCEPT_TP",         "Compatibility option intended to be used with Ravalox' Quest Tracker. Disables only the quest accepted message and allows Ravalox to handle that aspect.")
+
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING",                     "Show Riding Skill Upgrade Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP",                  "Print a notification to chat when riding upgrades are purchased or Crown Riding Skill books are used.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWSOCIAL",                     "Show Social Event Messages")

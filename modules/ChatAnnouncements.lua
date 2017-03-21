@@ -108,6 +108,10 @@ CA.D = {
     MiscSocial                    = false,
     MiscTrade                     = false,
     MiscStuck                     = true,
+    MiscQuest                     = false,
+    MiscQuestFailure              = false,
+    MiscQuestHideAccept           = false,
+    MiscQuestShare                = true,
     ShowConfiscate                = false,
     ShowCraftUse                  = false,
     ShowDestroy                   = false,
@@ -332,6 +336,7 @@ function CA.Initialize(enabled)
     CA.RegisterCollectibleEvents()
     CA.RegisterColorEvents()
     CA.RegisterStuckEvents()
+    CA.RegisterQuestEvents()
 end
 
 function CA.RegisterColorEvents()
@@ -357,18 +362,37 @@ function CA.RegisterSocialEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_FRIEND_REMOVED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_ADDED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_REMOVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_SHARED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_SHARE_REMOVED)
     if CA.SV.MiscSocial then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_ADDED, CA.FriendAdded)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_REMOVED, CA.FriendRemoved)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_ADDED, CA.FriendInviteAdded)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_REMOVED, CA.FriendInviteRemoved)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARED, CA.QuestShared)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARE_REMOVED, CA.QuestShareRemoved)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_ADDED, CA.QuestAdded)
     end
 end
+
+function CA.RegisterQuestEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_SHARED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_SHARE_REMOVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_REMOVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_COMPLETE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_CONDITION_COUNTER_CHANGED)
+    if CA.SV.MiscQuestShare then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARED, CA.QuestShared)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARE_REMOVED, CA.QuestShareRemoved)
+    end
+    if CA.SV.MiscQuest or CA.SV.MiscQuestShare then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_ADDED, CA.QuestAdded)
+    end
+    if CA.SV.MiscQuest then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_REMOVED, CA.QuestRemoved)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_COMPLETE, CA.QuestComplete)
+    end
+    if CA.SV.MiscQuestFailure then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_CONDITION_COUNTER_CHANGED, CA.QuestFailed)
+    end
+end
+        
 
 function CA.RegisterGuildEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_MEMBER_ADDED)
@@ -1049,8 +1073,76 @@ function CA.QuestShareRemoved(eventCode, questId)
 end
 
 function CA.QuestAdded(eventCode, journalIndex, questName, objectiveName)
-    g_QuestShareFudger = true
-    zo_callLater(CA.QuestShareMessageReset, 100)
+    if CA.SV.MiscQuestShare then
+        g_QuestShareFudger = true
+        zo_callLater(CA.QuestShareMessageReset, 100)
+    end
+    
+    if CA.SV.MiscQuest and not CA.SV.MiscQuestHideAccept then
+    
+        local questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
+        local questType = GetJournalQuestType(journalIndex)
+        local instanceDisplayType = GetJournalInstanceDisplayType(journalIndex)
+        local questJournalObject = SYSTEMS:GetObject("questJournal")
+        local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
+        local formattedString
+        if iconTexture then
+            formattedString = strformat(SI_NOTIFYTEXT_QUEST_ACCEPT_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questNameFormatted)
+        else
+            formattedString = strformat(SI_NOTIFYTEXT_QUEST_ACCEPT, questNameFormatted)
+        end
+  
+        printToChat(formattedString)
+    end
+end
+
+function CA.QuestRemoved(eventCode, isCompleted, journalIndex, questName, zoneIndex, poiIndex, questID)
+    if not isCompleted then
+        local questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
+        local questType = GetJournalQuestType(journalIndex)
+        local instanceDisplayType = GetJournalQuestInstanceDisplayType(journalIndex)
+        local questJournalObject = SYSTEMS:GetObject("questJournal")
+        local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
+        local formattedString
+        if iconTexture then
+            formattedString = strformat("<<1>><<2>>", zo_iconFormat(iconTexture, "75%", "75%"), questNameFormatted)
+        else
+            formattedString = (questNameFormatted)
+        end
+        printToChat(strformat("Abandoned: <<1>>", formattedString))
+    end
+end
+
+function CA.QuestComplete(eventCode, questName, level, previousExperience, currentExperience, championPoints, questType, instanceDisplayType) 
+    local questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
+    local questJournalObject = SYSTEMS:GetObject("questJournal")
+    local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
+    local formattedString
+    if iconTexture then
+        formattedString = strformat(SI_NOTIFYTEXT_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questNameFormatted)
+    else
+        formattedString = strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questNameFormatted)
+    end
+    printToChat(formattedString)
+end
+
+-- EVENT_QUEST_CONDITION_COUNTER_CHANGED
+
+function CA.QuestFailed(eventCode, journalIndex, questName, conditionText, conditionType, currConditionVal, newConditionVal, conditionMax, isFailCondition, stepOverrideText, isPushed, isComplete, isConditionComplete, isStepHidden) 
+
+    -- We're only interested in this event for failure condition
+    if not isFailCondition then return end
+    
+    if stepOverrideText == "" then
+        if conditionMax > 1 then
+            printToChat(strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL, conditionText, newConditionVal, conditionMax))
+        else
+            printToChat(strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, conditionText))
+        end
+    else
+        printToChat(strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, stepOverrideText))
+    end
+
 end
 
 -- Checks to see if quest was accepted 50 ms after share is removed
