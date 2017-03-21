@@ -182,6 +182,7 @@ local g_playerName                = nil
 local g_playerNameFormatted       = nil
 local g_postageAmount             = 0
 local g_QuestShareFudger          = false
+local g_saveMailId                = "" -- If the player takes a mail and cannot loot all the items, the index is cleared. This value will save the ID of the last opened mail and reuse it if the mail still has more items to loot.
 local g_showActivityStatus        = true
 local g_showRCUpdates             = true
 local g_showStatusDropMember      = false
@@ -193,6 +194,7 @@ local g_telVarStoneThrottle       = 0 -- Held value for TV throttle
 local g_telVarStoneMaxSave        = 0 -- We also have to pass the current total TV stones as there isn't a function to determine how many TV you have
 local g_smithing                  = {} -- Table for smithing mode
 local g_enchanting                = {} -- Table for enchanting mode
+local g_weAreInMail               = false -- Toggled on when looting mail to prevent notable item display from hiding items acquired.
 
 -- When quest XP is gained during dialogue the player doesn't actually level up until exiting the dialogue.
 -- The variables get stored and saved to print on levelup if this is the case.
@@ -3316,6 +3318,7 @@ function CA.MailRemoved(eventCode)
     if CA.SV.MiscMail then
         printToChat(GetString(SI_LUIE_CA_MAIL_DELETED_MSG))
     end
+    g_saveMailId = ""
 end
 
 function CA.OnMailReadable(eventCode, mailId)
@@ -3326,6 +3329,7 @@ function CA.OnMailReadable(eventCode, mailId)
     for i = 1, numAttachments do
         g_mailStacks = g_mailStacks + 1
     end
+    g_saveMailId = mailId
 end
 
 function CA.OnMailTakeAttachedItem(eventCode, mailId)
@@ -3372,6 +3376,10 @@ function CA.OnMailOpenBox(eventCode)
         g_inventoryStacks = {}
         CA.IndexInventory() -- Index Inventory
     end
+    if g_saveMailId ~= "" then
+        CA.OnMailReadable(eventCode, g_saveMailId)
+    end
+    g_weAreInMail = true
 end
 
 function CA.OnMailCloseBox(eventCode)
@@ -3383,6 +3391,7 @@ function CA.OnMailCloseBox(eventCode)
         g_inventoryStacks = {}
     end
     g_mailStacksOut = {}
+    g_weAreInMail = false
 end
 
 function CA.OnMailFail(eventCode, reason)
@@ -4331,7 +4340,7 @@ function CA.PrintInventoryIndexChanges(itemId, seticon, item, itemType, stackCou
 
         local logPrefix = g_isLooted and GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTED) or GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
 
-        if CA.SV.LootOnlyNotable then
+        if CA.SV.LootOnlyNotable and not g_weAreInMail then
             -- Notable items are: any set items, any purple+ items, blue+ special items (e.g., treasure maps)
             if ( (itemIsSet) or
                  (itemQuality >= ITEM_QUALITY_ARCANE and itemIsSpecial) or
@@ -4526,7 +4535,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
 
         if printNextChange == true then
             if not g_weAreInAStore and CA.SV.Loot then
-                if not CA.SV.LootOnlyNotable or itemQuality >= ITEM_QUALITY_ARTIFACT then
+                if not CA.SV.LootOnlyNotable or itemQuality >= ITEM_QUALITY_ARTIFACT or g_weAreInMail then
                 zo_callLater (function() CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss) end, 50)
                 end
             end
