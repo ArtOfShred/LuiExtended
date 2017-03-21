@@ -1112,7 +1112,7 @@ end
 function CA.QuestRemoved(eventCode, isCompleted, journalIndex, questName, zoneIndex, poiIndex, questID)
     if not isCompleted then
         local questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
-        printToChat(strformat("Abandoned: <<1>>", questNameFormatted))
+        printToChat(strformat(SI_LUIE_CA_QUEST_ABANDONED, questNameFormatted))
     end
 end
 
@@ -4115,7 +4115,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                 g_levelChanged1 = true
             end
             g_questString1 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
-            zo_callLater(CA.PrintQuestExperienceHelper, 100)
+            zo_callLater(CA.PrintQuestExperienceHelper, 50)
         elseif reason == 2 then
             if g_questCombiner1 ~= "" then
                 if g_weLeveled == 1 and not g_levelChanged1 then
@@ -4125,7 +4125,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                 end
             end
             g_questString2 = ( strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )
-            zo_callLater(CA.PrintQuestExperienceHelper, 100)
+            zo_callLater(CA.PrintQuestExperienceHelper, 50)
         elseif reason == 0 then
             if change > CA.SV.ExperienceFilter and CA.SV.ExperienceThrottle == 0 then
                 printToChat(strfmt("%s %s%s%s", CA.SV.ExperienceContextName, icon, progress, totallevel) )

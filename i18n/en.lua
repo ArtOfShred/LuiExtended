@@ -219,6 +219,7 @@ ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_TRADED",                   "Traded"
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED",                 "Upgraded")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_USED",                     "Used")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW",                 "Withdrew")
+ZO_CreateStringId("SI_LUIE_CA_QUEST_ABANDONED",                         "Abandoned: <<1>>")
 ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT1",                      "|cFEFEFE<<1>>|r is ignoring you.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_ACCEPTED",                   "Trade invite accepted.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_CONFIRM",                    "You have invited |cFEFEFE<<1>>|r to trade.")
