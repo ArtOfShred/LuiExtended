@@ -35,6 +35,8 @@ function LUIE_CreateSettings()
     local guildrankDisplayOptionsKeys   = { ["Self Only"] = 1, ["Self + All w/ Permissions"] = 2, ["Display All Rank Changes"] = 3 }
     local rotationOptions               = { "Horizontal", "Vertical" }
     local rotationOptionsKeys           = { ["Horizontal"] = 1, ["Vertical"] = 2 }
+    local disguiseNotifyOptions         = { "Chat Announcement", "Center Screen Notification", "Both" }
+    local disguiseNotifyOptionsKeys     = { ["Chat Announcement"] = 1, ["Center Screen Notification"] = 2, ["Both"] = 3 }
 
     local formatOptions = {
         "Nothing",
@@ -2809,6 +2811,19 @@ function LUIE_CreateSettings()
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.MiscDisguise,
                     },
+                    {
+                        -- Disguise Event Type
+                        type = "dropdown",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWDISGUISEOPTION),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWDISGUISEOPTION_TP),
+                        choices = disguiseNotifyOptions,
+                        getFunc = function() return disguiseNotifyOptions[LUIE.ChatAnnouncements.SV.MiscDisguiseOption] end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscDisguiseOption = disguiseNotifyOptionsKeys[value] end,
+                        width = "full",
+                        default = disguiseNotifyOptions[3],
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.MiscDisguise) end,
+                    },
+                    
                     {
                         -- Show Disguise Alerts
                         type = "checkbox",

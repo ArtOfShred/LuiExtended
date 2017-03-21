@@ -95,6 +95,7 @@ CA.D = {
     MiscConfiscate                = false,
     MiscDisguise                  = true,
     MiscDisguiseAlert             = false,
+    MiscDisguiseOption            = 3,
     MiscDuel                      = false,
     MiscGuild                     = false,
     MiscGuildIcon                 = false,
@@ -452,7 +453,8 @@ function CA.RegisterDisguiseEvents()
 end
 
 function CA.DisplayDisguiseOnLoad()
-    printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))
+    if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description)) end
+    if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:DisplayMessage(CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))) end
 end
 
 function CA.RegisterAchievementsEvent()
@@ -4513,6 +4515,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
         local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTED)
         local stack = stackCountChange
         local itemType = GetItemLinkItemType(itemlink)
+        local itemQuality = GetItemLinkQuality(itemlink)
 
         -- Item removed from craft bag
         if stackCountChange < 1 then
@@ -4523,7 +4526,9 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
 
         if printNextChange == true then
             if not g_weAreInAStore and CA.SV.Loot then
+                if not CA.SV.LootOnlyNotable or itemQuality >= ITEM_QUALITY_ARTIFACT then
                 zo_callLater (function() CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss) end, 50)
+                end
             end
         end
     end
@@ -5397,13 +5402,13 @@ end
 
 function CA.DisguiseState(eventCode, unitTag, disguiseState)
     if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_DANGER then
-        printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER))
-        CENTER_SCREEN_ANNOUNCE:DisplayMessage(CSA_EVENT_SMALL_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED, DisguiseAlertColorize:Colorize(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER)))
+        if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER)) end
+        if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:DisplayMessage(CSA_EVENT_SMALL_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED, DisguiseAlertColorize:Colorize(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER))) end
     end
 
     if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_SUSPICIOUS then
-        printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS))
-        CENTER_SCREEN_ANNOUNCE:DisplayMessage(CSA_EVENT_SMALL_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED, DisguiseAlertColorize:Colorize(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS)))
+        if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS)) end
+        if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:DisplayMessage(CSA_EVENT_SMALL_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED, DisguiseAlertColorize:Colorize(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS))) end
     end
 
     -- If we're still disguised and g_disguiseState is true then don't waste resources and end the function
@@ -5412,12 +5417,14 @@ function CA.DisguiseState(eventCode, unitTag, disguiseState)
     end
 
     if g_disguiseState == 1 and (disguiseState == DISGUISE_STATE_NONE) then
-        printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description))
+        if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description)) end
+        if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:DisplayMessage(CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description))) end
     end
-
+        
     if g_disguiseState == 0 and ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
         g_currentDisguise = GetItemId(0, 10) or 0
-        printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))
+        if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description)) end
+        if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:DisplayMessage(CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))) end
     end
 
     g_disguiseState = GetUnitDisguiseState("player")
@@ -5436,13 +5443,15 @@ function CA.OnPlayerActivated(eventCode, initial)
         elseif g_disguiseState ~= 0 then
             g_disguiseState = 1
             g_currentDisguise = GetItemId(0, 10) or 0
-            printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))
+            if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description)) end
+            if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:DisplayMessage(CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))) end
             return
         end
     elseif g_disguiseState == 1 then
         g_disguiseState = GetUnitDisguiseState("player")
         if g_disguiseState == 0 then
-            printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description))
+            if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description)) end
+            if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:DisplayMessage(CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description))) end
             return
         elseif g_disguiseState ~= 0 then
             g_disguiseState = 1
@@ -5450,8 +5459,6 @@ function CA.OnPlayerActivated(eventCode, initial)
             return
         end
     end
-    
-    printToChat("Activated!")
     
 end
 
