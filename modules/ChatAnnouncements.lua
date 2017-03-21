@@ -1096,8 +1096,6 @@ function CA.QuestAdded(eventCode, journalIndex, questName, objectiveName)
         local instanceDisplayType = GetJournalInstanceDisplayType(journalIndex)
         local questJournalObject = SYSTEMS:GetObject("questJournal")
         local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
-        d(instanceDisplayType)
-        d(iconTexture)
         local formattedString
         if iconTexture then
             formattedString = strformat(SI_NOTIFYTEXT_QUEST_ACCEPT_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questNameFormatted)
@@ -1301,6 +1299,9 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_SENDMAILRESULT3, GetString(SI_LUIE_CA_MAIL_SENDMAILRESULT3), 1)
         -- Regroup Replacement String
         SafeAddString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG, GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG_ALT), 1)
+        -- Quest String Replacements
+        SafeAddString(SI_NOTIFYTEXT_QUEST_ACCEPT_WITH_ICON, GetString(SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON), 1)
+        SafeAddString(SI_NOTIFYTEXT_QUEST_COMPLETE_WITH_ICON, GetString(SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON), 1)
     end
 end
 
@@ -3844,7 +3845,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
         local icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. ZO_LocalizeDecimalNumber (change) .. formathelper .. CA.SV.ExperienceName ) or ( ZO_LocalizeDecimalNumber (change) .. formathelper .. CA.SV.ExperienceName )
 
         -- If quest turnin, we save the first part of this string to combine with another in case this is followed up by POI completion event too.
-        if reason == 1 then
+        if reason == 1 or reason == 7 then
             g_levelCarryOverValue = currentExperience
             g_questCombiner1 = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. ZO_LocalizeDecimalNumber (change) .. formathelper .. CA.SV.ExperienceName ) or ( ZO_LocalizeDecimalNumber (change) .. formathelper .. CA.SV.ExperienceName )
         end
@@ -4110,7 +4111,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
             printToChat(g_XPCombatBufferString)
         end
 
-        if reason == 1 then
+        if reason == 1 or reason == 7 then
             if g_weLeveled == 1 then
                 g_levelChanged1 = true
             end
