@@ -2821,6 +2821,17 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.MiscDisguiseAlert,
                     },
                     {
+                        -- Disguise Alert Color
+                        type = "colorpicker",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWDISGUISEALERTCOLOR)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWDISGUISEALERTCOLOR_TP),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.DisguiseAlertColor) end,
+                        setFunc = function(r,g,b,a) LUIE.ChatAnnouncements.SV.DisguiseAlertColor={r,g,b} LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        default = { r=LUIE.ChatAnnouncements.D.DisguiseAlertColor[1], g=LUIE.ChatAnnouncements.D.DisguiseAlertColor[2], b=LUIE.ChatAnnouncements.D.DisguiseAlertColor[3] },
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.MiscDisguise and LUIE.ChatAnnouncements.SV.MiscDisguiseAlert) end,
+                    },
+                    {
                         -- Show /Stuck Alerts
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWSTUCK)),

@@ -523,6 +523,8 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP",                 "Print a
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISE",                   "Show Disguise Status Change Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISEALERT",              "Show Disguise Alert Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISEALERT_TP",           "Print a notification to chat when near a sentry or performing suspicious activity while disguised.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISEALERTCOLOR",         "Disguise Alert Message Color")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISEALERTCOLOR_TP",      "Change the color of the center screen warning displayed when near a sentry or performing suspicious activity while disguised.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISE_TP",                "Print a notification to chat when entering a relevant area and becoming disguised or revealed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUP",                      "Show Group Event Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUP_TP",                   "Print a notification to chat for group invites, group composition changes, and LFG features.")

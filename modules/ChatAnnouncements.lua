@@ -44,6 +44,7 @@ CA.D = {
     CurrencyIcons                 = true,
     CurrencyTotalMessage          = GetString(SI_LUIE_CA_DEFAULTVARS_CURRENCYTOTALMESSAGE),
     CustomStrings                 = false,
+    DisguiseAlertColor            = { 1, 0, 0, 1 },
     Experience                    = true,
     ExperienceColorLevel          = true,
     ExperienceContextName         = GetString(SI_LUIE_CA_DEFAULTVARS_EXPERIENCECONTEXTNAME),
@@ -222,6 +223,7 @@ local GoldColorize
 local APColorize
 local TVColorize
 local WVColorize
+local DisguiseAlertColorize
 
 -- List of items to whitelist as notable loot
 local g_notableIDs = {
@@ -337,6 +339,7 @@ function CA.RegisterColorEvents()
     APColorize = ZO_ColorDef:New(unpack(CA.SV.AlliancePointColor))
     TVColorize = ZO_ColorDef:New(unpack(CA.SV.TelVarStoneColor))
     WVColorize = ZO_ColorDef:New(unpack(CA.SV.WritVoucherColor))
+    DisguiseAlertColorize = ZO_ColorDef:New(unpack(CA.SV.DisguiseAlertColor))
 end
 
 function CA.RegisterCollectibleEvents()
@@ -434,15 +437,22 @@ end
 
 function CA.RegisterDisguiseEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED)
     if CA.SV.MiscDisguise then
         EVENT_MANAGER:RegisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, CA.DisguiseState )
         EVENT_MANAGER:AddFilterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, CA.OnPlayerActivated)
         g_currentDisguise = GetItemId(0, 10) or 0 -- Get the currently equipped disguise itemId if any
         g_disguiseState = GetUnitDisguiseState("player") -- Get current player disguise state
         if g_disguiseState > 0 then
             g_disguiseState = 1 -- Simplify all the various states into a basic 0 = false, 1 = true value
+            zo_callLater(CA.DisplayDisguiseOnLoad, 50)
         end
     end
+end
+
+function CA.DisplayDisguiseOnLoad()
+    printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))
 end
 
 function CA.RegisterAchievementsEvent()
@@ -5388,12 +5398,12 @@ end
 function CA.DisguiseState(eventCode, unitTag, disguiseState)
     if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_DANGER then
         printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER))
-        ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GROUP_ELECTION_REQUESTED, (GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER)))
+        CENTER_SCREEN_ANNOUNCE:DisplayMessage(CSA_EVENT_SMALL_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED, DisguiseAlertColorize:Colorize(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER)))
     end
 
     if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_SUSPICIOUS then
         printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS))
-        ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GROUP_ELECTION_REQUESTED, (GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS)))
+        CENTER_SCREEN_ANNOUNCE:DisplayMessage(CSA_EVENT_SMALL_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED, DisguiseAlertColorize:Colorize(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS)))
     end
 
     -- If we're still disguised and g_disguiseState is true then don't waste resources and end the function
@@ -5416,6 +5426,35 @@ function CA.DisguiseState(eventCode, unitTag, disguiseState)
         g_disguiseState = 1
     end
 end
+
+function CA.OnPlayerActivated(eventCode, initial)
+
+    if g_disguiseState == 0 then
+        g_disguiseState = GetUnitDisguiseState("player")
+        if g_disguiseState == 0 then
+            return 
+        elseif g_disguiseState ~= 0 then
+            g_disguiseState = 1
+            g_currentDisguise = GetItemId(0, 10) or 0
+            printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))
+            return
+        end
+    elseif g_disguiseState == 1 then
+        g_disguiseState = GetUnitDisguiseState("player")
+        if g_disguiseState == 0 then
+            printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description))
+            return
+        elseif g_disguiseState ~= 0 then
+            g_disguiseState = 1
+            g_currentDisguise = GetItemId(0, 10) or 0
+            return
+        end
+    end
+    
+    printToChat("Activated!")
+    
+end
+
 
 function CA.MaraOffer(eventCode, targetCharacterName, isSender, targetDisplayName)
     local maraName
