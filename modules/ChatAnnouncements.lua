@@ -162,6 +162,7 @@ local g_guildBankCarryStackCount  = 1
 local g_guildJoinFudger           = false
 local g_guildRankData             = {} -- Variable to store local player guild ranks, for guild rank changes.
 local g_isValidLaunder            = false
+local g_itemReceivedIsQuestReward = false -- Variable gets set to true when a quest reward is received, flags in loot function to update the context string.
 local g_itemString1Gain           = ""
 local g_itemString2Gain           = ""
 local g_itemString1Loss           = ""
@@ -377,6 +378,7 @@ function CA.RegisterQuestEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_REMOVED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_COMPLETE)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_CONDITION_COUNTER_CHANGED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OBJECTIVE_COMPLETED)
     if CA.SV.MiscQuestShare then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARED, CA.QuestShared)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARE_REMOVED, CA.QuestShareRemoved)
@@ -386,6 +388,9 @@ function CA.RegisterQuestEvents()
     end
     if CA.SV.MiscQuest then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_REMOVED, CA.QuestRemoved)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OBJECTIVE_COMPLETED, CA.QuestObjectiveComplete)
+    end
+    if CA.SV.MiscQuest or CA.SV.Loot then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_COMPLETE, CA.QuestComplete)
     end
     if CA.SV.MiscQuestFailure then
@@ -628,6 +633,8 @@ end
 function CA.RegisterLootEvents()
     -- LOOT RECEIVED
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOOT_RECEIVED)
+    -- QUEST REWARD CONTEXT
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_COMPLETE)
     -- INDEX
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     -- VENDOR
@@ -679,6 +686,10 @@ function CA.RegisterLootEvents()
     -- LOOT RECEIVED
     if CA.SV.Loot then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_RECEIVED, CA.OnLootReceived)
+    end
+    -- QUEST REWARD CONTEXT
+    if CA.SV.Loot or CA.SV.MiscQuest then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_COMPLETE, CA.QuestComplete)
     end
     -- INDEX
     if CA.SV.Loot or CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise or CA.SV.ShowLockpickBreak then
@@ -765,7 +776,7 @@ function CA.RegisterLootEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS, CA.MiscAlertLockSuccess)
     end
     if CA.SV.ShowLootFail then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_COMPLETE_ATTEMPT_FAILED_INVENTORY_FULL, CA.InventoryFull)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_COMPLETE_ATTEMPT_FAILED_INVENTORY_FULL, CA.InventoryFullQuest)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_IS_FULL, CA.InventoryFull)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED, CA.LootItemFailed)
     end
@@ -1085,6 +1096,8 @@ function CA.QuestAdded(eventCode, journalIndex, questName, objectiveName)
         local instanceDisplayType = GetJournalInstanceDisplayType(journalIndex)
         local questJournalObject = SYSTEMS:GetObject("questJournal")
         local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
+        d(instanceDisplayType)
+        d(iconTexture)
         local formattedString
         if iconTexture then
             formattedString = strformat(SI_NOTIFYTEXT_QUEST_ACCEPT_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questNameFormatted)
@@ -1099,31 +1112,57 @@ end
 function CA.QuestRemoved(eventCode, isCompleted, journalIndex, questName, zoneIndex, poiIndex, questID)
     if not isCompleted then
         local questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
-        local questType = GetJournalQuestType(journalIndex)
-        local instanceDisplayType = GetJournalQuestInstanceDisplayType(journalIndex)
+        printToChat(strformat("Abandoned: <<1>>", questNameFormatted))
+    end
+end
+
+function CA.QuestObjectiveComplete(eventCode, zoneIndex, poiIndex, level, previousExperience, currentExperience, championPoints)
+
+    local function ReactivateObjectiveComplete()
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OBJECTIVE_COMPLETED, CA.QuestObjectiveComplete)
+    end
+    
+    local name, _, _, finishedDescription = GetPOIInfo(zoneIndex, poiIndex)
+    local nameFormatted = (strformat("|cFFA500<<1>>|r", name))
+    printToChat(strformat(SI_NOTIFYTEXT_OBJECTIVE_COMPLETE, nameFormatted))
+    
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OBJECTIVE_COMPLETED)
+    zo_callLater(ReactivateObjectiveComplete, 100)
+    
+end
+
+function CA.QuestComplete(eventCode, questName, level, previousExperience, currentExperience, championPoints, questType, instanceDisplayType)
+
+    local function ReactivateQuestComplete()
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_COMPLETE, CA.QuestComplete)
+    end
+    
+    local function ResetQuestRewardStatus()
+        g_itemReceivedIsQuestReward = false
+    end
+    
+    if CA.SV.MiscQuest then
+        local questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
         local questJournalObject = SYSTEMS:GetObject("questJournal")
         local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
         local formattedString
         if iconTexture then
-            formattedString = strformat("<<1>><<2>>", zo_iconFormat(iconTexture, "75%", "75%"), questNameFormatted)
+            formattedString = strformat(SI_NOTIFYTEXT_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questNameFormatted)
         else
-            formattedString = (questNameFormatted)
+            formattedString = strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questNameFormatted)
         end
-        printToChat(strformat("Abandoned: <<1>>", formattedString))
+        printToChat(formattedString)
+        -- Have to unregister the event here to prevent it from spamming us twice.
+        EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_COMPLETE)
+        zo_callLater(ReactivateQuestComplete, 100)
     end
-end
-
-function CA.QuestComplete(eventCode, questName, level, previousExperience, currentExperience, championPoints, questType, instanceDisplayType) 
-    local questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
-    local questJournalObject = SYSTEMS:GetObject("questJournal")
-    local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
-    local formattedString
-    if iconTexture then
-        formattedString = strformat(SI_NOTIFYTEXT_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questNameFormatted)
-    else
-        formattedString = strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questNameFormatted)
+    
+    if CA.SV.Loot then
+        -- We set this variable to true in order to override the [Looted] message syntax that would be applied to a quest reward normally.
+        g_itemReceivedIsQuestReward = true
+        zo_callLater(ResetQuestRewardStatus, 500)
     end
-    printToChat(formattedString)
+    
 end
 
 -- EVENT_QUEST_CONDITION_COUNTER_CHANGED
@@ -2077,6 +2116,11 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
             g_tradeString2 = ( strfmt("%s%s%s", message, syntax, total) )
         elseif CA.SV.GoldChange and CA.SV.LootCurrencyCombo and reason == 28 then
             g_comboString = ( strfmt(" → %s%s%s", message, syntax, total) )
+        elseif CA.SV.GoldChange and reason == 4 then
+            local function DisplayQuestRewardGold()
+                printToChat(strfmt("%s%s%s", message, syntax, total))
+            end
+            zo_callLater(DisplayQuestRewardGold, 50)
         elseif CA.SV.GoldChange and reason == 47 then
             g_stealString = ( strfmt("%s%s%s", message, syntax, total) )
             local latency = GetLatency()
@@ -3582,10 +3626,10 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
         
         if CA.SV.ExperienceColorLevel then
             icon = zo_iconFormatInheritColor("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)
-            icon = CA.SV.LevelUpIcon and ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(strfmt("%s ", levelicon)) or ( "" )
+            icon = CA.SV.LevelUpIcon and ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(strfmt("%s ", levelicon)) or ( " " )
         else
            icon = zo_iconFormat("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)
-           icon = CA.SV.LevelUpIcon and (strfmt("%s ", levelicon)) or ( "" ) 
+           icon = CA.SV.LevelUpIcon and (strfmt("%s ", levelicon)) or ( " " ) 
         end
         
         local attribute
@@ -3594,16 +3638,16 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
         if IsChampion then
             attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned()+1 )
             if attribute == ATTRIBUTE_NONE then
-                icon = CA.SV.LevelUpIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_champion.dds|t ") or ( "" )
+                icon = CA.SV.LevelUpIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_champion.dds|t ") or ( " " )
             end
             if attribute == ATTRIBUTE_HEALTH then
-                icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_health_icon-hud-32.dds|t ") or ( "" )
+                icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_health_icon-hud-32.dds|t ") or ( " " )
             end
             if attribute == ATTRIBUTE_MAGICKA then
-                icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_magicka_icon-hud-32.dds|t ") or ( "" )
+                icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_magicka_icon-hud-32.dds|t ") or ( " " )
             end
             if attribute == ATTRIBUTE_STAMINA then
-                icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.dds|t ") or ( "" )
+                icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.dds|t ") or ( " " )
             end
             CurrentLevelFormatted = ZO_CP_BAR_GRADIENT_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
         end
@@ -3681,16 +3725,16 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
         local attribute = GetChampionPointAttributeForRank( GetPlayerChampionPointsEarned()+1 )
         local icon
         if attribute == ATTRIBUTE_NONE then
-            icon = CA.SV.LevelUpIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_champion.dds|t ") or ( "" )
+            icon = CA.SV.LevelUpIcon and ("|t16:16:LuiExtended/media/unitframes/unitframes_level_champion.dds|t ") or ( " " )
         end
         if attribute == ATTRIBUTE_HEALTH then
-            icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_health_icon-hud-32.dds|t ") or ( "" )
+            icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_health_icon-hud-32.dds|t ") or ( " " )
         end
         if attribute == ATTRIBUTE_MAGICKA then
-            icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_magicka_icon-hud-32.dds|t ") or ( "" )
+            icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_magicka_icon-hud-32.dds|t ") or ( " " )
         end
         if attribute == ATTRIBUTE_STAMINA then
-            icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.dds|t ") or ( "" )
+            icon = CA.SV.LevelUpIcon and ("|t16:16:/esoui/art/champion/champion_points_stamina_icon-hud-32.dds|t ") or ( " " )
         end
         local CurrentLevelFormatted = ZO_CP_BAR_GRADIENT_COLORS[attribute][2]:Colorize(LevelContext .. " " .. CurrentLevel)
 
@@ -3706,9 +3750,9 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
 
             if CA.SV.ExperienceLevelUp then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat(GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), icon, CurrentLevelFormatted))
+                    printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat(GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), icon, LevelContext, CurrentLevel))
+                    printToChat(strformat("<<1>><<2>><<3>> <<4>>", GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), icon, LevelContext, CurrentLevel))
                 end
             end
         else
@@ -3722,9 +3766,9 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
 
             if CA.SV.ExperienceLevelUp then
                 if CA.SV.ExperienceColorLevel then
-                    printToChat(strformat(GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), icon, CurrentLevelFormatted))
+                    printToChat(strformat("<<1>><<2>><<3>>", GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), icon, CurrentLevelFormatted))
                 else
-                    printToChat(strformat(GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), icon, LevelContext, CurrentLevel))
+                    printToChat(strformat("<<1>><<2>><<3>> <<4>>", GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), icon, LevelContext, CurrentLevel))
                 end
             end
 
@@ -4431,6 +4475,8 @@ function CA.PrintInventoryIndexChanges(itemId, seticon, item, itemType, stackCou
         local itemIsSpecial = (itemType == ITEMTYPE_TROPHY and not itemIsKeyFragment) or (itemType == ITEMTYPE_COLLECTIBLE) or IsItemLinkConsumable(item)
 
         local logPrefix = g_isLooted and GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTED) or GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
+        
+        if g_itemReceivedIsQuestReward then logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) end -- Override function for quest rewards
 
         if CA.SV.LootOnlyNotable and not g_weAreInMail then
             -- Notable items are: any set items, any purple+ items, blue+ special items (e.g., treasure maps)
@@ -5664,8 +5710,11 @@ function CA.StuckOnCooldown(eventCode)
     printToChat(strformat(GetString(SI_STUCK_ERROR_ON_COOLDOWN), cooldownText, cooldownRemainingText ))
 end
 
-function CA.InventoryFull(eventCode,numSlotsRequested,numSlotsFree)
+function CA.InventoryFullQuest(eventCode)
+    printToChat(GetString(SI_INVENTORY_ERROR_INVENTORY_FULL))
+end
 
+function CA.InventoryFull(eventCode, numSlotsRequested, numSlotsFree)
     local function DisplayItemFailed()
         if numSlotsRequested == 1 then
             printToChat(GetString(SI_INVENTORY_ERROR_INVENTORY_FULL))
