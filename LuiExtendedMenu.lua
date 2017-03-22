@@ -2353,6 +2353,17 @@ function LUIE_CreateSettings()
                 reference = "Chat_Announcements_Options_Experience_Announcements_Submenu",
                 controls = {
                     {
+                        -- Show Enlightened State Change
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_EXP_ENLIGHTENED),
+                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_ENLIGHTENED_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceEnlightened end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceEnlightened = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.ExperienceEnlightened,
+                    },
+                    {
                         -- Show Level Up Message in Chat
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_EXP_LVLUPMSG),
@@ -2366,7 +2377,7 @@ function LUIE_CreateSettings()
                     {
                         -- Show Level Icon on Level Up
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_EXP_LVLUPICON),
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_LVLUPICON)),
                         tooltip = GetString(SI_LUIE_LAM_CA_EXP_LVLUPICON_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LevelUpIcon end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LevelUpIcon = value end,
@@ -2388,7 +2399,7 @@ function LUIE_CreateSettings()
                     {
                         -- Show Experience Icon
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_EXP_SHOWEXPICON),
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_SHOWEXPICON)),
                         tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWEXPICON_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceIcon end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceIcon = value end,
@@ -2399,7 +2410,7 @@ function LUIE_CreateSettings()
                     {
                         -- Combat Experience Gain Filter Threshold
                         type = "slider",
-                        name = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD),
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD)),
                         tooltip = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceFilter end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceFilter = value end,
@@ -2413,7 +2424,7 @@ function LUIE_CreateSettings()
                     {
                         -- Context Name for Experience Gain
                         type = "editbox",
-                        name = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINCONTEXTNAME),
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_EXPGAINCONTEXTNAME)),
                         tooltip = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINCONTEXTNAME_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceContextName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceContextName = value end,
@@ -2424,7 +2435,7 @@ function LUIE_CreateSettings()
                     {
                         -- Name for Experience Gain
                         type = "editbox",
-                        name = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINDISPLAYNAME),
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_EXPGAINDISPLAYNAME)),
                         tooltip = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINDISPLAYNAME_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceName = value end,
@@ -2435,7 +2446,7 @@ function LUIE_CreateSettings()
                     {
                         -- Show Progress to next level
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_EXP_PROGRESSTONEXTLVL),
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_PROGRESSTONEXTLVL)),
                         tooltip = GetString(SI_LUIE_LAM_CA_EXP_PROGRESSTONEXTLVL_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceShowProgress end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceShowProgress = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
@@ -2446,7 +2457,7 @@ function LUIE_CreateSettings()
                     {
                         -- Progress Display Method
                         type = "dropdown",
-                        name = GetString(SI_LUIE_LAM_CA_EXP_PROGRESSDISPLAYMETHOD),
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_PROGRESSDISPLAYMETHOD)),
                         tooltip = GetString(SI_LUIE_LAM_CA_EXP_PROGRESSDISPLAYMETHOD_TP),
                         choices = experienceDisplayOptions,
                         getFunc = function() return experienceDisplayOptions[LUIE.ChatAnnouncements.SV.ExperienceDisplayOptions] end,
@@ -2458,7 +2469,7 @@ function LUIE_CreateSettings()
                     {
                         -- Show Color Experience Progress
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_EXP_PROGRESSCOLOR),
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_PROGRESSCOLOR)),
                         tooltip = GetString(SI_LUIE_LAM_CA_EXP_PROGRESSCOLOR_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceProgressColor end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceProgressColor = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
@@ -2469,7 +2480,7 @@ function LUIE_CreateSettings()
                     {
                         -- Show [x.xx] decimal format
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_EXP_SHOWDECIMALFORMAT),
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_SHOWDECIMALFORMAT)),
                         tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWDECIMALFORMAT_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceShowDecimal end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceShowDecimal = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
@@ -2480,7 +2491,7 @@ function LUIE_CreateSettings()
                     {
                         -- Show Progress label
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABEL),
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABEL)),
                         tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABEL_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceShowPBrackets end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceShowPBrackets = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
@@ -2491,7 +2502,7 @@ function LUIE_CreateSettings()
                     {
                         -- Display name for Progress label
                         type = "editbox",
-                        name = GetString(SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABELNAME),
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABELNAME)),
                         tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABELNAME_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceProgressName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceProgressName = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
@@ -2502,7 +2513,7 @@ function LUIE_CreateSettings()
                     {
                         -- Show Current Level label
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_EXP_SHOWCURRENTLVLLABEL),
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_SHOWCURRENTLVLLABEL)),
                         tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWCURRENTLVLLABEL_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceShowLevel end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceShowLevel = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
@@ -2513,7 +2524,7 @@ function LUIE_CreateSettings()
                     {
                         -- Show Level Icon with current level
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_EXP_LVLTOTALICON),
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_LVLTOTALICON)),
                         tooltip = GetString(SI_LUIE_LAM_CA_EXP_LVLOTALICON_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LevelTotalIcon end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LevelTotalIcon = value end,
@@ -2524,7 +2535,7 @@ function LUIE_CreateSettings()
                     {
                         -- Color Level by Context
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT),
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT)),
                         tooltip = GetString(SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceColorLevel end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceColorLevel = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
@@ -2535,7 +2546,7 @@ function LUIE_CreateSettings()
                     {
                         -- Hide Experience from Kills
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_EXP_HIDEEXPKILLS),
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_HIDEEXPKILLS)),
                         tooltip = GetString(SI_LUIE_LAM_CA_EXP_HIDEEXPKILLS_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceHideCombat end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceHideCombat = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
@@ -2546,7 +2557,7 @@ function LUIE_CreateSettings()
                     {
                         -- Throttle Experience gained in combat
                         type = "slider",
-                        name = GetString(SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT),
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT)),
                         tooltip = GetString(SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceThrottle end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceThrottle = value end,
@@ -3169,8 +3180,8 @@ function LUIE_CreateSettings()
                     {
                          -- Show Inventory Full
                         type = "checkbox",
-                        name = strformat("\t\t\t\t<<1>>", GetString("TODO")),
-                        tooltip = GetString("TODO"),
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_INVENTORYFULL)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_INVENTORYFULL_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ShowLootFail end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowLootFail = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
                         width = "full",

@@ -49,6 +49,7 @@ CA.D = {
     ExperienceColorLevel          = true,
     ExperienceContextName         = GetString(SI_LUIE_CA_DEFAULTVARS_EXPERIENCECONTEXTNAME),
     ExperienceDisplayOptions      = 1,
+    ExperienceEnlightened         = false,
     ExperienceFilter              = 0,
     ExperienceHideCombat          = false,
     ExperienceIcon                = true,
@@ -498,9 +499,9 @@ function CA.RegisterDisguiseEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED)
     if CA.SV.MiscDisguise then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, CA.OnPlayerActivated)
         EVENT_MANAGER:RegisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, CA.DisguiseState )
         EVENT_MANAGER:AddFilterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, CA.OnPlayerActivated)
         g_currentDisguise = GetItemId(0, 10) or 0 -- Get the currently equipped disguise itemId if any
         g_disguiseState = GetUnitDisguiseState("player") -- Get current player disguise state
         if g_disguiseState > 0 then
@@ -526,12 +527,20 @@ function CA.RegisterXPEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LEVEL_UPDATE)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CHAMPION_POINT_UPDATE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ENLIGHTENED_STATE_GAINED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ENLIGHTENED_STATE_LOST)
     if CA.SV.Experience or CA.SV.ExperienceLevelUp then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN, CA.OnExperienceGain)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEVEL_UPDATE, CA.OnLevelUpdate)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_UPDATE, CA.OnChampionUpdate)
-
         CA.LevelUpdateHelper()
+    end
+    if CA.SV.ExperienceEnlightened then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ENLIGHTENED_STATE_GAINED, CA.EnlightenedGained)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ENLIGHTENED_STATE_LOST, CA.EnlightenedLost)
+        if IsEnlightenedAvailableForCharacter() and GetEnlightenedPool() > 0 then
+            zo_callLater(CA.EnlightenedGained, 50)
+        end
     end
 end
 
@@ -550,7 +559,14 @@ function CA.RegisterStuckEvents()
     end
 end
 
+function CA.Broadcast(eventCode, message)
+    d("Broadcast deteceted!")
+    printToChat(message)
+end
+
 function CA.RegisterGroupEvents()
+
+EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BROADCAST, CA.Broadcast)
     -- Group Events
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_REMOVED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_UPDATE)
@@ -1762,7 +1778,7 @@ function CA.TrialScore(eventCode, trialName, score, isWeekly)
         formattedString = strformat(SI_TRIAL_NEW_BEST_SCORE_LIFETIME, formattedName)
     end
     
-    local function PrintTrialScore
+    local function PrintTrialScore()
         printToChat(formattedString)
     end
     
@@ -4334,6 +4350,14 @@ function CA.PrintQuestExperienceHelper()
     g_levelCarryOverValue = 0
 end
 
+function CA.EnlightenedGained(eventCode)
+    printToChat(strformat("<<1>>! <<2>>", GetString(SI_ENLIGHTENED_STATE_GAINED_HEADER), GetString(SI_ENLIGHTENED_STATE_GAINED_DESCRIPTION)))
+end
+
+function CA.EnlightenedLost(eventCode)
+    printToChat(strformat("<<1>>!", GetString(SI_ENLIGHTENED_STATE_LOST_HEADER)))
+end
+
 -- Helper function to return color (without |c prefix) according to current percentage
 local function AchievementPctToColour(pct)
     return pct == 1 and "71DE73" or pct < 0.33 and "F27C7C" or pct < 0.66 and "EDE858" or "CCF048"
@@ -5753,7 +5777,7 @@ function CA.DisguiseState(eventCode, unitTag, disguiseState)
 end
 
 function CA.OnPlayerActivated(eventCode, initial)
-
+    -- Displays disguise status change when zoning, if enabled
     if g_disguiseState == 0 then
         g_disguiseState = GetUnitDisguiseState("player")
         if g_disguiseState == 0 then
@@ -5777,7 +5801,6 @@ function CA.OnPlayerActivated(eventCode, initial)
             return
         end
     end
-    
 end
 
 
