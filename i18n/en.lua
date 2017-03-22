@@ -220,9 +220,9 @@ ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED",                 "Upgrade
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_USED",                     "Used")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW",                 "Withdrew")
 ZO_CreateStringId("SI_LUIE_CA_QUEST_ABANDONED",                         "Abandoned: <<1>>")
+ZO_CreateStringId("SI_LUIE_CA_QUEST_DISCOVER",                          "Discovered: <<1>>")
 ZO_CreateStringId("SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON",                  "Started: <<1>> <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON",                "Completed: <<1>> <<2>>")
-
 ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT1",                      "|cFEFEFE<<1>>|r is ignoring you.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_ACCEPTED",                   "Trade invite accepted.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_CONFIRM",                    "You have invited |cFEFEFE<<1>>|r to trade.")
@@ -550,16 +550,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK",                   "Show Lo
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK_TP",                "Print a notification to chat when for failed or successful lockpick attempts.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWMAIL",                       "Show Mail Event Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP",                    "Prints a notification to chat when mail is accepted, deleted, or sent.")
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWQUEST",                      "Show Quest Accepted/Abandoned/Completed")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWQUEST_TP",                   "Prints a notification to chat when a quest is accepted, abandoned, or completed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWQUESTSHARE",                 "Show Shared Quest Notifications")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWQUESTSHARE_TP",              "Prints a notification to chat when another player shares a quest with you.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWQUESTFAILURE",               "Show Quest FAILURE Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWQUESTFAILURE_TP",            "Prints a notification to chat when a quest is failed..")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWQUESTHIDEACCEPT",            "Hide Quest ACCEPT Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWQUESTHIDEACCEPT_TP",         "Compatibility option intended to be used with Ravalox' Quest Tracker. Disables only the quest accepted message and allows Ravalox to handle that aspect.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING",                     "Show Riding Skill Upgrade Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP",                  "Print a notification to chat when riding upgrades are purchased or Crown Riding Skill books are used.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWSOCIAL",                     "Show Social Event Messages")
@@ -568,6 +558,30 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWSTUCK",                      "Show /S
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWSTUCK_TP",                   "Prints a message in chat for results of the /stuck function.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWTRADE",                      "Show Trade Event Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWTRADE_TP",                   "Prints a notification to chat for trade invitations, cancellation, and success.")
+
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_HEADER",                        "Quest/POI Announcements")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POIDISCOVERY",                  "Show POI Discovery")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POIDISCOVERY_TP",               "Displays a message in chat when a point of interest is discovered.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POICOMPLETED",                  "Show POI Completion")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POICOMPLETED_TP",               "Displays a message in chat when a point of interest is completed. The most common type of completion is Dolmens and Quests.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_OBJECTIVEDISCOVERY",            "Show Quest POI Objective")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_OBJECTIVEDISCOVERY_TP",         "Displays a message in chat when a quest with an associated POI is accepted. This will display the overall objective to complete the POI.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUEST",                     "Show Quest Accepted/Abandoned/Completed")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUEST_TP",                  "Prints a notification to chat when a quest is accepted, abandoned, or completed.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTCSA",                  "Show Quest Abandon CSA")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTCSA_TP",               "Displays a Center Screen Announcement when a quest is abandoned. This option is independent and intended to match the default Center Screen Announcements for Accepting/Completing a quest.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE",                "Show Shared Quest Notifications")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP",             "Prints a notification to chat when another player shares a quest with you.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTFAILURE",              "Show Quest FAILURE Message")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTFAILURE_TP",           "Prints a notification to chat when a quest is failed..")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG",                 "Show Detailed Quest Description")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG_TP",              "When toggled on, accepting a quest will display the Journal Entry details of the quest in the announcement.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG",        "Show Detailed POI Completion Description")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG_TP",     "When toggled on, completing a quest with an associated POI will display the long completion description.")
+
+
 ZO_CreateStringId("SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP",                "Determines the method used to display player names in Chat Announcements where applicable.\nDefault: Character Name")
 ZO_CreateStringId("SI_LUIE_LAM_CI_ALERTS_ENABLEDEATH",                  "Enable group member death alert")
 ZO_CreateStringId("SI_LUIE_LAM_CI_ALERTS_ENABLEDEATH_TP",               "Display an alert when group member dies.")

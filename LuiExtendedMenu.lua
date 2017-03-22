@@ -2629,6 +2629,118 @@ function LUIE_CreateSettings()
                 },
             },
             {
+                -- CA Quest Announcements Submenu
+                type = "submenu",
+                name = GetString(SI_LUIE_LAM_CA_QUEST_HEADER),
+                reference = "Chat_Announcements_Options_Quest_Announcements_Submenu",
+                controls = {
+                    {
+                         -- Show Quest Share
+                        type = "checkbox",
+                        name = strformat("<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestShare end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestShare = value LUIE.ChatAnnouncements.RegisterQuestEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestShare,                   
+                    },
+                    {
+                         -- Show Quest Abandon CSA
+                        type = "checkbox",
+                        name = strformat("<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTCSA)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTCSA_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestCSA = value LUIE.ChatAnnouncements.RegisterQuestEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestCSA,                   
+                    },
+                    {
+                         -- Show Quest Messages
+                        type = "checkbox",
+                        name = strformat("<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUEST)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUEST_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.Quest end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.Quest = value LUIE.ChatAnnouncements.RegisterQuestEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.Quest,                   
+                    },
+                    {
+                         -- Show Quest Failure
+                        type = "checkbox",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTFAILURE)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTFAILURE_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestFailure end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestFailure = value LUIE.ChatAnnouncements.RegisterQuestEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Quest) end,
+                        default = LUIE.ChatAnnouncements.D.QuestFailure,                   
+                    },
+                    {
+                         -- Show Quest Long String
+                        type = "checkbox",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLong end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLong = value LUIE.ChatAnnouncements.RegisterQuestEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Quest) end,
+                        default = LUIE.ChatAnnouncements.D.QuestLong,                   
+                    },
+                    
+                    -- Show Quest POI Accepted
+                    -- Show POI Discovered
+                    -- Show POI Completed
+                    {
+                         -- Show POI Discovery
+                        type = "checkbox",
+                        name = strformat("<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_POIDISCOVERY)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_QUEST_POIDISCOVERY_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestPOIDiscovery end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestPOIDiscovery = value LUIE.ChatAnnouncements.RegisterQuestEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestPOIDiscovery,                   
+                    },
+                    {
+                         -- Show Quest POI Discovrey
+                        type = "checkbox",
+                        name = strformat("<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVEDISCOVERY)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVEDISCOVERY_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestObjectiveDiscovery end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestObjectiveDiscovery = value LUIE.ChatAnnouncements.RegisterQuestEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestObjectiveDiscovery,                   
+                    },
+                    {
+                         -- Show POI Completed
+                        type = "checkbox",
+                        name = strformat("<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_POICOMPLETED)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_QUEST_POICOMPLETED_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestPOICompleted end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestPOICompleted = value LUIE.ChatAnnouncements.RegisterQuestEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestPOICompleted,                   
+                    },
+                    
+                    {
+                         -- Show POI Completed Long String
+                        type = "checkbox",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestObjectiveLong end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestObjectiveLong = value LUIE.ChatAnnouncements.RegisterQuestEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.QuestPOICompleted) end,
+                        default = LUIE.ChatAnnouncements.D.QuestObjectiveLong,                   
+                    },
+                },
+            },
+            {
                 -- CA Miscellaneous Announcements Submenu
                 type = "submenu",
                 name = GetString(SI_LUIE_LAM_CA_MISC_HEADER),
@@ -2867,51 +2979,6 @@ function LUIE_CreateSettings()
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.ShowLootFail,                   
-                    },
-                    
-                    {
-                         -- Show Quest Share
-                        type = "checkbox",
-                        name = strformat("<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWQUESTSHARE)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWQUESTSHARE_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscQuestShare end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscQuestShare = value LUIE.ChatAnnouncements.RegisterQuestEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.MiscQuestShare,                   
-                    },
-                    {
-                         -- Show Quest Messages
-                        type = "checkbox",
-                        name = strformat("<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWQUEST)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWQUEST_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscQuest end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscQuest = value LUIE.ChatAnnouncements.RegisterQuestEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.MiscQuest,                   
-                    },
-                    {
-                         -- Show Quest Failure
-                        type = "checkbox",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWQUESTFAILURE)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWQUESTFAILURE_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscQuestFailure end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscQuestFailure = value LUIE.ChatAnnouncements.RegisterQuestEvents() end,
-                        width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.MiscQuest) end,
-                        default = LUIE.ChatAnnouncements.D.MiscQuestFailure,                   
-                    },
-                    {
-                         -- Hide Quest Accept
-                        type = "checkbox",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWQUESTHIDEACCEPT)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWQUESTHIDEACCEPT_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscQuestHideAccept end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscQuestHideAccept = value LUIE.ChatAnnouncements.RegisterQuestEvents() end,
-                        width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.MiscQuest) end,
-                        default = LUIE.ChatAnnouncements.D.MiscQuestHideAccept,                   
                     },
                 },
             },

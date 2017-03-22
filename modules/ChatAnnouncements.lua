@@ -108,10 +108,15 @@ CA.D = {
     MiscSocial                    = false,
     MiscTrade                     = false,
     MiscStuck                     = true,
-    MiscQuest                     = false,
-    MiscQuestFailure              = false,
-    MiscQuestHideAccept           = false,
-    MiscQuestShare                = true,
+    Quest                         = false,
+    QuestCSA                      = true,
+    QuestFailure                  = false,
+    QuestLong                     = false,
+    QuestObjectiveLong            = false,
+    QuestPOICompleted             = false,
+    QuestPOIDiscovery             = false,
+    QuestObjectiveDiscovery       = false,
+    QuestShare                    = true,
     ShowConfiscate                = false,
     ShowCraftUse                  = false,
     ShowDestroy                   = false,
@@ -379,22 +384,33 @@ function CA.RegisterQuestEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_COMPLETE)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_CONDITION_COUNTER_CHANGED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OBJECTIVE_COMPLETED)
-    if CA.SV.MiscQuestShare then
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_POI_DISCOVERED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DISCOVERY_EXPERIENCE)
+    
+    if CA.SV.QuestShare then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARED, CA.QuestShared)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARE_REMOVED, CA.QuestShareRemoved)
     end
-    if CA.SV.MiscQuest or CA.SV.MiscQuestShare then
+    if CA.SV.Quest or CA.SV.QuestShare then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_ADDED, CA.QuestAdded)
     end
-    if CA.SV.MiscQuest then
+    if CA.SV.Quest or CA.SV.QuestCSA then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_REMOVED, CA.QuestRemoved)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OBJECTIVE_COMPLETED, CA.QuestObjectiveComplete)
     end
-    if CA.SV.MiscQuest or CA.SV.Loot then
+    if CA.SV.Quest or CA.SV.Loot then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_COMPLETE, CA.QuestComplete)
     end
-    if CA.SV.MiscQuestFailure then
+    if CA.SV.QuestFailure then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_CONDITION_COUNTER_CHANGED, CA.QuestFailed)
+    end
+    if CA.SV.QuestPOICompleted then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OBJECTIVE_COMPLETED, CA.QuestObjectiveComplete)
+    end
+    if CA.SV.QuestPOIDiscovery then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DISCOVERY_EXPERIENCE, CA.DiscoveryExperience)
+    end
+    if CA.SV.QuestObjectiveDiscovery then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_POI_DISCOVERED, CA.POIDiscovered)
     end
 end
         
@@ -485,7 +501,7 @@ end
 
 function CA.DisplayDisguiseOnLoad()
     if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description)) end
-    if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:DisplayMessage(CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))) end
+    if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_DISGUISE_STATE_CHANGED, CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))) end
 end
 
 function CA.RegisterAchievementsEvent()
@@ -688,7 +704,7 @@ function CA.RegisterLootEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_RECEIVED, CA.OnLootReceived)
     end
     -- QUEST REWARD CONTEXT
-    if CA.SV.Loot or CA.SV.MiscQuest then
+    if CA.SV.Loot or CA.SV.Quest then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_COMPLETE, CA.QuestComplete)
     end
     -- INDEX
@@ -1083,34 +1099,57 @@ function CA.QuestShareRemoved(eventCode, questId)
     zo_callLater(CA.QuestShareMessageHelper, 50)
 end
 
+g_questComboString = ""
+
 function CA.QuestAdded(eventCode, journalIndex, questName, objectiveName)
-    if CA.SV.MiscQuestShare then
+    if CA.SV.QuestShare then
         g_QuestShareFudger = true
         zo_callLater(CA.QuestShareMessageReset, 100)
     end
-    
-    if CA.SV.MiscQuest and not CA.SV.MiscQuestHideAccept then
-    
-        local questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
+
+    if CA.SV.Quest then
         local questType = GetJournalQuestType(journalIndex)
         local instanceDisplayType = GetJournalInstanceDisplayType(journalIndex)
         local questJournalObject = SYSTEMS:GetObject("questJournal")
         local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
+        local questNameFormatted
+        local stepText = GetJournalQuestStepInfo(journalIndex, 1)
         local formattedString
+        
+        if CA.SV.QuestLong then
+            questNameFormatted = (strformat("|cFFA500<<1>>:|r <<2>>", questName, stepText))
+        else
+            questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
+        end
+
         if iconTexture then
             formattedString = strformat(SI_NOTIFYTEXT_QUEST_ACCEPT_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questNameFormatted)
         else
             formattedString = strformat(SI_NOTIFYTEXT_QUEST_ACCEPT, questNameFormatted)
         end
   
-        printToChat(formattedString)
+        g_questComboString = formattedString
+        zo_callLater (CA.PrintQuestAccepted, 50)
+    end
+end
+
+function CA.PrintQuestAccepted()
+    if g_questComboString ~= "" then
+        printToChat(g_questComboString)
+        g_questComboString = ""
     end
 end
 
 function CA.QuestRemoved(eventCode, isCompleted, journalIndex, questName, zoneIndex, poiIndex, questID)
     if not isCompleted then
-        local questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
-        printToChat(strformat(SI_LUIE_CA_QUEST_ABANDONED, questNameFormatted))
+        if CA.SV.Quest then
+            local questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
+            printToChat(strformat(SI_LUIE_CA_QUEST_ABANDONED, questNameFormatted))
+        end
+        
+        if CA.SV.QuestCSA then 
+            CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_QUEST_REMOVED, CSA_EVENT_LARGE_TEXT, "", (strformat(SI_LUIE_CA_QUEST_ABANDONED, questName)))
+        end
     end
 end
 
@@ -1121,12 +1160,38 @@ function CA.QuestObjectiveComplete(eventCode, zoneIndex, poiIndex, level, previo
     end
     
     local name, _, _, finishedDescription = GetPOIInfo(zoneIndex, poiIndex)
-    local nameFormatted = (strformat("|cFFA500<<1>>|r", name))
-    printToChat(strformat(SI_NOTIFYTEXT_OBJECTIVE_COMPLETE, nameFormatted))
+    local nameFormatted
+    local formattedText
+    
+    if CA.SV.QuestObjectiveLong and finishedDescription ~= "" then
+        nameFormatted = (strformat("|cFEFEFE<<1>>:|r <<2>>", name, finishedDescription))
+    else
+        nameFormatted = (strformat("|cFEFEFE<<1>>|r", name))
+    end
+    
+    formattedText = strformat(SI_NOTIFYTEXT_OBJECTIVE_COMPLETE, nameFormatted)
+    
+    printToChat(formattedText)
     
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OBJECTIVE_COMPLETED)
     zo_callLater(ReactivateObjectiveComplete, 100)
     
+end
+
+function CA.DiscoveryExperience(eventCode, areaName, level, previousExperience, currentExperience, championPoints)
+
+    local nameFormatted = (strformat("|cFEFEFE<<1>>|r", areaName))
+    printToChat(strformat(SI_SUBZONE_NOTIFICATION_DISCOVER, nameFormatted))
+
+end
+
+function CA.POIDiscovered(eventCode,zoneIndex, poiIndex)
+    local name, _, startDescription = GetPOIInfo(zoneIndex, poiIndex)
+    printToChat(strformat("|cFEFEFE<<1>>:|r <<2>>", name, startDescription))
+    if g_questComboString ~= "" then 
+        printToChat(g_questComboString) 
+    end
+    g_questComboString = ""
 end
 
 function CA.QuestComplete(eventCode, questName, level, previousExperience, currentExperience, championPoints, questType, instanceDisplayType)
@@ -1139,7 +1204,7 @@ function CA.QuestComplete(eventCode, questName, level, previousExperience, curre
         g_itemReceivedIsQuestReward = false
     end
     
-    if CA.SV.MiscQuest then
+    if CA.SV.Quest then
         local questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
         local questJournalObject = SYSTEMS:GetObject("questJournal")
         local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
@@ -1302,6 +1367,8 @@ function CA.RegisterCustomStrings()
         -- Quest String Replacements
         SafeAddString(SI_NOTIFYTEXT_QUEST_ACCEPT_WITH_ICON, GetString(SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON), 1)
         SafeAddString(SI_NOTIFYTEXT_QUEST_COMPLETE_WITH_ICON, GetString(SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON), 1)
+        -- POI Discovery
+        SafeAddString(SI_SUBZONE_NOTIFICATION_DISCOVER, GetString(SI_LUIE_CA_QUEST_DISCOVER), 4)
     end
 end
 
@@ -5551,12 +5618,12 @@ end
 function CA.DisguiseState(eventCode, unitTag, disguiseState)
     if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_DANGER then
         if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER)) end
-        if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:DisplayMessage(CSA_EVENT_SMALL_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED, DisguiseAlertColorize:Colorize(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER))) end
+        if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_DISGUISE_STATE_CHANGED, CSA_EVENT_SMALL_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED, DisguiseAlertColorize:Colorize(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER))) end
     end
 
     if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_SUSPICIOUS then
         if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS)) end
-        if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:DisplayMessage(CSA_EVENT_SMALL_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED, DisguiseAlertColorize:Colorize(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS))) end
+        if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_DISGUISE_STATE_CHANGED, CSA_EVENT_SMALL_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED, DisguiseAlertColorize:Colorize(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS))) end
     end
 
     -- If we're still disguised and g_disguiseState is true then don't waste resources and end the function
@@ -5566,13 +5633,13 @@ function CA.DisguiseState(eventCode, unitTag, disguiseState)
 
     if g_disguiseState == 1 and (disguiseState == DISGUISE_STATE_NONE) then
         if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description)) end
-        if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:DisplayMessage(CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description))) end
+        if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_DISGUISE_STATE_CHANGED, CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description))) end
     end
         
     if g_disguiseState == 0 and ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
         g_currentDisguise = GetItemId(0, 10) or 0
         if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description)) end
-        if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:DisplayMessage(CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))) end
+        if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_DISGUISE_STATE_CHANGED, CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))) end
     end
 
     g_disguiseState = GetUnitDisguiseState("player")
@@ -5592,14 +5659,14 @@ function CA.OnPlayerActivated(eventCode, initial)
             g_disguiseState = 1
             g_currentDisguise = GetItemId(0, 10) or 0
             if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description)) end
-            if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:DisplayMessage(CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))) end
+            if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_PLAYER_ACTIVATED, CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))) end
             return
         end
     elseif g_disguiseState == 1 then
         g_disguiseState = GetUnitDisguiseState("player")
         if g_disguiseState == 0 then
             if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description)) end
-            if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:DisplayMessage(CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description))) end
+            if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_PLAYER_ACTIVATED, CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description))) end
             return
         elseif g_disguiseState ~= 0 then
             g_disguiseState = 1
