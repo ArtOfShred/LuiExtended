@@ -111,6 +111,8 @@ CA.D = {
     Quest                         = false,
     QuestCSA                      = true,
     QuestFailure                  = false,
+    QuestIcon                     = false,
+    QuestLogFull                  = false,
     QuestLong                     = false,
     QuestObjectiveLong            = false,
     QuestPOICompleted             = false,
@@ -386,6 +388,7 @@ function CA.RegisterQuestEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OBJECTIVE_COMPLETED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_POI_DISCOVERED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DISCOVERY_EXPERIENCE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_LOG_IS_FULL)
     
     if CA.SV.QuestShare then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARED, CA.QuestShared)
@@ -411,6 +414,9 @@ function CA.RegisterQuestEvents()
     end
     if CA.SV.QuestObjectiveDiscovery then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_POI_DISCOVERED, CA.POIDiscovered)
+    end
+    if CA.SV.QuestLogFull then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_LOG_IS_FULL, CA.QuestLogFull)
     end
 end
         
@@ -1122,8 +1128,8 @@ function CA.QuestAdded(eventCode, journalIndex, questName, objectiveName)
             questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
         end
 
-        if iconTexture then
-            formattedString = strformat(SI_NOTIFYTEXT_QUEST_ACCEPT_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questNameFormatted)
+        if iconTexture and CA.SV.QuestIcon then
+            formattedString = strformat(SI_NOTIFYTEXT_QUEST_ACCEPT_WITH_ICON, zo_iconFormat(iconTexture, 16, 16), questNameFormatted)
         else
             formattedString = strformat(SI_NOTIFYTEXT_QUEST_ACCEPT, questNameFormatted)
         end
@@ -1194,6 +1200,10 @@ function CA.POIDiscovered(eventCode,zoneIndex, poiIndex)
     g_questComboString = ""
 end
 
+function CA.QuestLogFull(eventCode)
+    printToChat(GetString(SI_ERROR_QUEST_LOG_FULL))
+end
+
 function CA.QuestComplete(eventCode, questName, level, previousExperience, currentExperience, championPoints, questType, instanceDisplayType)
 
     local function ReactivateQuestComplete()
@@ -1209,8 +1219,8 @@ function CA.QuestComplete(eventCode, questName, level, previousExperience, curre
         local questJournalObject = SYSTEMS:GetObject("questJournal")
         local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
         local formattedString
-        if iconTexture then
-            formattedString = strformat(SI_NOTIFYTEXT_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questNameFormatted)
+        if iconTexture and CA.SV.QuestIcon then
+            formattedString = strformat(SI_NOTIFYTEXT_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, 16, 16), questNameFormatted)
         else
             formattedString = strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questNameFormatted)
         end
@@ -1367,6 +1377,7 @@ function CA.RegisterCustomStrings()
         -- Quest String Replacements
         SafeAddString(SI_NOTIFYTEXT_QUEST_ACCEPT_WITH_ICON, GetString(SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON), 1)
         SafeAddString(SI_NOTIFYTEXT_QUEST_COMPLETE_WITH_ICON, GetString(SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON), 1)
+        SafeAddString(SI_ERROR_QUEST_LOG_FULL, GetString(SI_LUIE_CA_QUEST_LOG_FULL), 1)
         -- POI Discovery
         SafeAddString(SI_SUBZONE_NOTIFICATION_DISCOVER, GetString(SI_LUIE_CA_QUEST_DISCOVER), 4)
     end
