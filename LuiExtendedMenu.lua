@@ -1644,12 +1644,12 @@ function LUIE_CreateSettings()
         default = {r=LUIE.ChatAnnouncements.D.ChangeColorDown[1], g=LUIE.ChatAnnouncements.D.ChangeColorDown[2], b=LUIE.ChatAnnouncements.D.ChangeColorDown[3]}
     }
 
-    -- CA Currency Announcements Options Submenu
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
-        type = "submenu",
-        name = GetString(SI_LUIE_LAM_CA_CURRENCY_HEADER),
-        reference = "Chat_Announcements_Options_Currency_Announcements_Submenu",
-        controls = {
+                -- CA Currency Announcements Options Submenu
+                optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
+                type = "submenu",
+                name = GetString(SI_LUIE_LAM_CA_CURRENCY_HEADER),
+                reference = "Chat_Announcements_Options_Currency_Announcements_Submenu",
+                controls = {
                     {
                         -- Show Currency Icons
                         type = "checkbox",
@@ -2733,7 +2733,6 @@ function LUIE_CreateSettings()
                     },
                 },
             }
-                
                 -- CA Quest Announcements Submenu
                 optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
                 type = "submenu",
@@ -2863,69 +2862,16 @@ function LUIE_CreateSettings()
                     },
                 },
             }
-                -- CA Miscellaneous Announcements Submenu
+                
+                -- CA Social Announcements Submenu
                 optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
                 type = "submenu",
-                name = GetString(SI_LUIE_LAM_CA_MISC_HEADER),
-                reference = "Chat_Announcements_Options_Misc_Announcements_Submenu",
+                name = GetString(SI_LUIE_LAM_CA_SOCIAL_HEADER),
+                reference = "Chat_Announcements_Options_Social_Announcements_Submenu",
                 controls = {
+                ---
                     {
-                        -- Show Group Events
-                        type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUP),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUP_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupChatMsg end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupChatMsg = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.GroupChatMsg,
-                    },
-                    {
-                        -- Show Trade Events
-                        type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWTRADE),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWTRADE),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscTrade end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscTrade = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.MiscTrade,
-                    },
-                    {
-                        -- Show Mail Events
-                        type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscMail end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscMail = value LUIE.ChatAnnouncements.RegisterMailEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.MiscMail,
-                    },
-                    {
-                        -- Show Duel Events
-                        type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_DUEL),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_DUEL_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscDuel end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscDuel = value LUIE.ChatAnnouncements.RegisterDuelEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.MiscDuel,
-                    },
-                    {
-                        -- Show Pledge of Mara Events
-                        type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_MARA),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_MARA_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscMara end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscMara = value LUIE.ChatAnnouncements.RegisterMaraEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.MiscMara,
-                    },
-                    {
-                        -- Show Social Events
+                        -- Show Friend/Ignore Events
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL),
                         tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL_TP),
@@ -2990,6 +2936,134 @@ function LUIE_CreateSettings()
                         width = "full",
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.MiscGuild and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.MiscGuildMOTD,
+                    },
+                
+                    {
+                        -- Show Trade Events
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWTRADE),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWTRADE),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscTrade end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscTrade = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.MiscTrade,
+                    },
+                    {
+                        -- Show Duel Events
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_DUEL),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_DUEL_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscDuel end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscDuel = value LUIE.ChatAnnouncements.RegisterDuelEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.MiscDuel,
+                    },
+                    {
+                        -- Show Pledge of Mara Events
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_MARA),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_MARA_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscMara end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscMara = value LUIE.ChatAnnouncements.RegisterMaraEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.MiscMara,
+                    },
+                ---
+                },
+            }
+                -- CA Group Announcements Submenu
+                optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
+                type = "submenu",
+                name = GetString(SI_LUIE_LAM_CA_GROUP_HEADER),
+                reference = "Chat_Announcements_Options_Group_Announcements_Submenu",
+                controls = {
+                    {
+                        -- Show Group Events
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUP_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupChatMsg end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupChatMsg = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupChatMsg,
+                    },
+                    {
+                        -- Show Group Vote
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPVOTE),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPVOTE_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupVote end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupVote = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupVote,
+                    },
+                    {
+                        -- Show LFG Status Events
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPLFG),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPLFG_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupLFG end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFG = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupLFG,
+                    },
+                    {
+                        -- Show LFG Activity Completed
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPLFGCOMPLETE),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPLFGCOMPLETE_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupLFGComplete end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGComplete = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupLFGComplete,
+                    },
+                    {
+                        -- Show Raid Notifications
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPRAID),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPRAID_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaid end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaid = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupRaid,
+                    },
+                    {
+                        -- Show Raid Score
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDSCORE),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDSCORE_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidScore end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidScore = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupRaidScore,
+                    },
+                },
+            }
+                -- CA Miscellaneous Announcements Submenu
+                optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
+                type = "submenu",
+                name = GetString(SI_LUIE_LAM_CA_MISC_HEADER),
+                reference = "Chat_Announcements_Options_Misc_Announcements_Submenu",
+                controls = {
+                    {
+                        -- Show Mail Events
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscMail end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscMail = value LUIE.ChatAnnouncements.RegisterMailEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.MiscMail,
                     },
                     {
                         -- Show Bank/Bag Upgrade

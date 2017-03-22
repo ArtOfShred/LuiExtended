@@ -144,6 +144,11 @@ ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF",                 "You hav
 ZO_CreateStringId("SI_LUIE_CA_GROUP_QUEST_SHARE_DECLINED",              "Shared quest declined.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_QUIT",                              "You are no longer in a group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_QUIT_LFG",                          "You are no longer in an LFG group.")
+
+ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_STARTED",                     "Started: <<1>>")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_FAILED",                      "Failed: <<1>>")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_SCORETALLY",                  "Final Score <<1>> Total Time <<2>> Vitality Bonus <<3>> <<4>>")
+
 ZO_CreateStringId("SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST",            "<<1>> has invited you to join <<2>>.")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST_ALT",        "|cFEFEFE<<1>>|r has invited you to join <<2>>.")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_INVITE_DECLINED",                   "Guild invite declined.")
@@ -537,8 +542,21 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISEALERTCOLOR_TP",      "Change 
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISE_TP",                "Print a notification to chat when entering a relevant area and becoming disguised or revealed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISEOPTION",             "Disguise Notifaction Option")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWDISGUISEOPTION_TP",          "Choose whether disguise status effects and alerts will display as a Chat Announcement, Center Screen Notification, or both.")
+
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUP",                      "Show Group Event Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUP_TP",                   "Print a notification to chat for group invites, group composition changes, and LFG features.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUP_TP",                   "Print a notification to chat for group invites and group composition changes.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPVOTE",                  "Show Group Vote Notifications")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPVOTE_TP",               "Display a notification in chat when a ready check or votekick is initiated.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPLFG",                   "Show LFG Event Messages")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPLFG_TP",                "Print a notification to chat entering or leaving an LFG queue or forming an LFG group.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPLFGCOMPLETE",           "Show LFG Completion Message")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPLFGCOMPLETE_TP",        "Print a notification to chat when an LFG activity is completed.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAID",                  "Show Trial Notifications")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAID_TP",               "Display chat notifications when a Trial is started, failed, or completed.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDSCORE",             "Show Trial - New High Score")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDSCORE_TP",          "Display a chat notification when a new high score is achieved on trial completion.")
+
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGUILD",                      "Show Guild Event Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGUILDICONS",                 "Show Guild Icons")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGUILDICONS_TP",              "Displays the faction icon or guild rank icon for guild messages.")
@@ -557,7 +575,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWMAIL",                       "Show Ma
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP",                    "Prints a notification to chat when mail is accepted, deleted, or sent.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING",                     "Show Riding Skill Upgrade Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP",                  "Print a notification to chat when riding upgrades are purchased or Crown Riding Skill books are used.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWSOCIAL",                     "Show Social Event Messages")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWSOCIAL",                     "Show Friend/Ignore Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWSOCIAL_TP",                  "Prints a notification to chat for friend invites, friend list changes, and ignore list changes.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWSTUCK",                      "Show /Stuck Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWSTUCK_TP",                   "Prints a message in chat for results of the /stuck function.")
@@ -588,8 +606,8 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG_TP",              "When to
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG",        "Show Detailed POI Completion Description")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG_TP",     "When toggled on, completing a quest with an associated POI will display the long completion description.")
 
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DESCRIPTION",                  "Social/Guild Announcements")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_DESCRIPTION",                   "Group Announcements")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_HEADER",                       "Social/Guild Announcements")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_HEADER",                        "Group Announcements/LFG Announcements")
 
 
 ZO_CreateStringId("SI_LUIE_LAM_CI_ALERTS_ENABLEDEATH",                  "Enable group member death alert")

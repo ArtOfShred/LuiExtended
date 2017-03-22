@@ -68,6 +68,11 @@ CA.D = {
     GoldName                      = GetString(SI_CURRENCY_GOLD),
     GoldThrottle                  = true,
     GroupChatMsg                  = false,
+    GroupLFG                      = false,
+    GroupLFGComplete              = false,
+    GroupRaid                     = false,
+    GroupRaidScore                = false,
+    GroupVote                     = false,
     GuildRankDisplayOptions       = 1,
     ItemBracketDisplayOptions     = 1,
     ItemContextMessage            = "",
@@ -568,6 +573,11 @@ function CA.RegisterGroupEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTIVITY_QUEUE_RESULT)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_CANCELLED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_UPDATED)
+    -- Raid Events
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_RAID_TRIAL_COMPLETE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_RAID_TRIAL_FAILED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_RAID_TRIAL_STARTED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_RAID_TRIAL_NEW_BEST_SCORE)
     if CA.SV.GroupChatMsg then
         local groupSize = GetGroupSize()
         if groupSize > 1 then
@@ -592,11 +602,21 @@ function CA.RegisterGroupEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_LFG_JOINED, CA.LFGJoined)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_NO_LONGER_LFG, CA.LFGLeft)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_FIND_REPLACEMENT_NOTIFICATION_NEW, CA.GroupFindReplacementNew)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE, CA.ActivityComplete)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_STATUS_UPDATE, CA.ActivityStatusUpdate)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_QUEUE_RESULT, CA.ActivityQueueResult)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_CANCELLED, CA.ReadyCheckCancel)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_UPDATED, CA.ReadyCheckUpdate)
+    end
+    if CA.SV.GroupLFGComplete then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE, CA.ActivityComplete)
+    end
+    if CA.SV.GroupRaid then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RAID_TRIAL_COMPLETE, CA.TrialComplete)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RAID_TRIAL_FAILED, CA.TrialFailed)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RAID_TRIAL_STARTED, CA.TrialStarted)
+    end
+    if CA.SV.GroupRaidScore then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RAID_TRIAL_NEW_BEST_SCORE, CA.TrialScore)
     end
 end
 
@@ -1293,6 +1313,10 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_LUIE_CA_GROUP_MEMBER_KICKED, GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_ALT), 1)
         SafeAddString(SI_LUIE_CA_GROUP_MEMBER_LEAVE, GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_ALT), 1)
         SafeAddString(SI_GROUP_NOTIFICATION_GROUP_LEADER_CHANGED, GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_ALT), 1)
+        
+        SafeAddString(SI_TRIAL_STARTED, GetString(SI_LUIE_CA_GROUP_TRIAL_STARTED), 1)
+        SafeAddString(SI_TRIAL_FAILED, GetString(SI_LUIE_CA_GROUP_TRIAL_FAILED), 1)
+        
         -- Group Finder String Replacements
         SafeAddString(SI_GROUPING_TOOLS_ALERT_LFG_JOINED, GetString(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED), 1)
         SafeAddString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL, GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL_ALT), 1)
@@ -1384,7 +1408,7 @@ function CA.RegisterCustomStrings()
 end
 
 function CA.LFGJoined(eventCode, locationName)
-    printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED), locationName))
+    if CA.SV.GroupLFG then printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED), locationName)) end
     g_joinLFGOverride = true
 end
 
@@ -1431,7 +1455,7 @@ end
 function CA.GroupFindReplacementNew(eventCode)
     local activityType, activityIndex = GetLFGFindReplacementNotificationInfo()
     local name = GetLFGOption(activityType, activityIndex)
-    printToChat(strformat(GetString(SI_LFG_FIND_REPLACEMENT_TEXT), name))
+    if CA.SV.GroupLFG then printToChat(strformat(GetString(SI_LFG_FIND_REPLACEMENT_TEXT), name)) end
 end
 
 function CA.ActivityComplete(eventCode)
@@ -1442,17 +1466,17 @@ function CA.ActivityStatusUpdate(eventCode, status)
     --d(status)
     if g_showActivityStatus then
         if status == ACTIVITY_FINDER_STATUS_NONE and g_weAreQueued == true then
-            printToChat(GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_END))
+            if CA.SV.GroupLFG then printToChat(GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_END)) end
             g_weAreQueued = false
             g_showStatusDropMember = false
         end
         if status == ACTIVITY_FINDER_STATUS_QUEUED then
-            printToChat(GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_START))
+            if CA.SV.GroupLFG then printToChat(GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_START)) end
             g_weAreQueued = true
             g_showStatusDropMember = true
         end
         if status == ACTIVITY_FINDER_STATUS_IN_PROGRESS and g_showStatusDropMember == true then
-            printToChat(GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_END))
+            if CA.SV.GroupLFG then printToChat(GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_END)) end
             g_weAreQueued = false
             g_showStatusDropMember = false
         end
@@ -1475,20 +1499,22 @@ function CA.ActivityStatusUpdate(eventCode, status)
 end
 
 function CA.ActivityQueueResult(eventCode, result)
-    if result == ACTIVITY_QUEUE_RESULT_INCOMPATIBLE_GROUP then
-        printToChat(GetString(SI_ACTIVITYQUEUERESULT9))
-    end
-    if result == ACTIVITY_QUEUE_RESULT_MEMBERS_OFFLINE then
-        printToChat(GetString(SI_ACTIVITYQUEUERESULT14))
-    end
-    if result == ACTIVITY_QUEUE_RESULT_ON_QUEUE_COOLDOWN then
-        printToChat(GetString(SI_ACTIVITYQUEUERESULT12))
-    end
-    if result == ACTIVITY_QUEUE_RESULT_MEMBER_CANCELED_READY_CHECK then
-        printToChat(GetString(SI_ACTIVITYQUEUERESULT19))
-    end
-    if result == ACTIVITY_QUEUE_RESULT_DLC_LOCKED then
-        printToChat(GetString(SI_ACTIVITYQUEUERESULT6))
+    if CA.SV.GroupLFG then 
+        if result == ACTIVITY_QUEUE_RESULT_INCOMPATIBLE_GROUP then
+            printToChat(GetString(SI_ACTIVITYQUEUERESULT9))
+        end
+        if result == ACTIVITY_QUEUE_RESULT_MEMBERS_OFFLINE then
+            printToChat(GetString(SI_ACTIVITYQUEUERESULT14))
+        end
+        if result == ACTIVITY_QUEUE_RESULT_ON_QUEUE_COOLDOWN then
+            printToChat(GetString(SI_ACTIVITYQUEUERESULT12))
+        end
+        if result == ACTIVITY_QUEUE_RESULT_MEMBER_CANCELED_READY_CHECK then
+            printToChat(GetString(SI_ACTIVITYQUEUERESULT19))
+        end
+        if result == ACTIVITY_QUEUE_RESULT_DLC_LOCKED then
+            printToChat(GetString(SI_ACTIVITYQUEUERESULT6))
+        end
     end
 
     g_fixJoinMessage = false
@@ -1499,20 +1525,20 @@ end
 
 function CA.ReadyCheckCancel(eventCode, reason)
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_MEMBER_CANCELED then
-        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON3))
+        if CA.SV.GroupLFG then printToChat(GetString(SI_LFGREADYCHECKCANCELREASON3)) end
     end
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_NOT_VIABLE then
-        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON2))
+        if CA.SV.GroupLFG then printToChat(GetString(SI_LFGREADYCHECKCANCELREASON2)) end
 
     end
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_FORMED_SUCCESSFULLY then
-        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON4))
+        if CA.SV.GroupLFG then printToChat(GetString(SI_LFGREADYCHECKCANCELREASON4)) end
         g_stopGroupLeaveQueue = true
         zo_callLater(CA.ResetGroupLeaveQueue, 1000)
 
     end
     if reason == LFG_READY_CHECK_CANCEL_REASON_GROUP_READY then
-        printToChat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_CANCELED))
+        if CA.SV.GroupLFG then printToChat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_CANCELED)) end
     end
 
     g_fixJoinMessage = false
@@ -1559,15 +1585,15 @@ function CA.ReadyCheckUpdate(eventCode)
         if playerRole ~= 0 then
             local roleIcon = (strformat("|t16:16:<<1>>|t", GetRoleIcon(playerRole)))
             local roleString = GetString("SI_LFGROLE", playerRole)
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE), activityName, roleIcon, roleString ))
+            if CA.SV.GroupLFG then printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE), activityName, roleIcon, roleString )) end
         else
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY), activityName))
+            if CA.SV.GroupLFG then printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY), activityName)) end
         end
     end
 
     if not g_fixJoinMessage then
         if not g_showRCUpdates and (tanksAccepted == 0 and tanksPending == 0 and healersAccepted == 0 and healersPending == 0 and dpsAccepted == 0 and dpsPending == 0) then
-            printToChat(GetString(SI_LFGREADYCHECKCANCELREASON3))
+            if CA.SV.GroupLFG then printToChat(GetString(SI_LFGREADYCHECKCANCELREASON3)) end
         elseif not g_showRCUpdates and (tanksAccepted > 0 or healersAccepted > 0 or dpsAccepted > 0)  and g_areWeGrouped == false then
             g_fixJoinMessage = true
         end
@@ -1575,7 +1601,7 @@ function CA.ReadyCheckUpdate(eventCode)
 
     if g_fixJoinMessage then
         if not g_showRCUpdates and (tanksAccepted == 0 and healersAccepted == 0 and dpsAccepted == 0 and tanksPending == 0 and healersPending == 0 and dpsPending == 0) then
-            printToChat(GetString(SI_LFGREADYCHECKCANCELREASON4))
+            if CA.SV.GroupLFG then printToChat(GetString(SI_LFGREADYCHECKCANCELREASON4)) end
             g_stopGroupLeaveQueue = true
             zo_callLater(CA.ResetGroupLeaveQueue, 1000)
         end
@@ -1591,31 +1617,33 @@ function CA.ResetGroupLeaveQueue()
 end
 
 function CA.VoteFailed( eventCode, failureReason, descriptor)
-    printToChat(GetString("SI_GROUPELECTIONFAILURE", failureReason))
+    if CA.SV.GroupVote then printToChat(GetString("SI_GROUPELECTIONFAILURE", failureReason)) end
 end
 
 function CA.VoteNotify(eventCode)
     local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
     if electionType == 2 then -- Ready Check
-        printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_MESSAGE))
+        if CA.SV.GroupVote then printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_MESSAGE)) end
     end
 
     if electionType == 3 then -- Vote Kick
-        local kickMemberName = GetUnitName(targetUnitTag)
-        local kickMemberAccountName = GetUnitDisplayName(targetUnitTag)
+        if CA.SV.GroupVote then
+            local kickMemberName = GetUnitName(targetUnitTag)
+            local kickMemberAccountName = GetUnitDisplayName(targetUnitTag)
 
-        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(kickMemberName)
-        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(kickMemberAccountName)
-        local displayBothString = ( strformat("<<1>><<2>>", kickMemberName, kickMemberAccountName) )
-        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, kickMemberAccountName)
-        if CA.SV.ChatPlayerDisplayOptions == 1 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), displayNameLink))
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), characterNameLink))
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), displayBoth))
+            local characterNameLink = ZO_LinkHandler_CreateCharacterLink(kickMemberName)
+            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(kickMemberAccountName)
+            local displayBothString = ( strformat("<<1>><<2>>", kickMemberName, kickMemberAccountName) )
+            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, kickMemberAccountName)
+            if CA.SV.ChatPlayerDisplayOptions == 1 then
+                printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), displayNameLink))
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 2 then
+                printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), characterNameLink))
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 3 then
+                printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), displayBoth))
+            end
         end
     end
 end
@@ -1623,58 +1651,122 @@ end
 function CA.VoteResult(eventCode, electionResult, descriptor)
     local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
     if descriptor == "[ZO_READY_CHECK]" then
-        if electionResult == 1 then
-            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED))
-        end
-        if electionResult == 4 then
-            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_PASSED))
-        end
-        if electionResult == 5 then
-            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED))
+        if CA.SV.GroupVote then 
+            if electionResult == 1 then
+                printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED))
+            end
+            if electionResult == 4 then
+                printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_PASSED))
+            end
+            if electionResult == 5 then
+                printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED))
+            end
         end
     end
     if descriptor == "[ZO_NONE]" then
-        local KickCarry
-        local kickMemberName = GetUnitName(targetUnitTag)
-        local kickMemberAccountName = GetUnitDisplayName(targetUnitTag)
+        if CA.SV.GroupVote then 
+            local KickCarry
+            local kickMemberName = GetUnitName(targetUnitTag)
+            local kickMemberAccountName = GetUnitDisplayName(targetUnitTag)
 
-        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(kickMemberName)
-        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(kickMemberAccountName)
-        local displayBothString = ( strformat("<<1>><<2>>", kickMemberName, kickMemberAccountName) )
-        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, kickMemberAccountName)
+            local characterNameLink = ZO_LinkHandler_CreateCharacterLink(kickMemberName)
+            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(kickMemberAccountName)
+            local displayBothString = ( strformat("<<1>><<2>>", kickMemberName, kickMemberAccountName) )
+            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, kickMemberAccountName)
 
-        if CA.SV.ChatPlayerDisplayOptions == 1 then
-            KickCarry = displayNameLink
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then
-            KickCarry = characterNameLink
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then
-            KickCarry = displayBoth
-        end
+            if CA.SV.ChatPlayerDisplayOptions == 1 then
+                KickCarry = displayNameLink
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 2 then
+                KickCarry = characterNameLink
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 3 then
+                KickCarry = displayBoth
+            end
 
-        if electionResult == 1 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL), KickCarry))
-        end
-        if electionResult == 2 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL), KickCarry))
-        end
-        if electionResult == 4 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED), KickCarry))
-        end
-        if electionResult == 5 then
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL), KickCarry))
+            if electionResult == 1 then
+                printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL), KickCarry))
+            end
+            if electionResult == 2 then
+                printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL), KickCarry))
+            end
+            if electionResult == 4 then
+                printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED), KickCarry))
+            end
+            if electionResult == 5 then
+                printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL), KickCarry))
+            end
         end
     end
 end
 
 function CA.VoteRequested(eventCode, descriptor)
-    if descriptor == "[ZO_READY_CHECK]" then
-        printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_REQUESTED))
+    if CA.SV.GroupVote then 
+        if descriptor == "[ZO_READY_CHECK]" then
+            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_REQUESTED))
+        end
+        if descriptor == "[ZO_NONE]" then
+            printToChat(GetString(SI_GROUP_ELECTION_REQUESTED))
+        end
     end
-    if descriptor == "[ZO_NONE]" then
-        printToChat(GetString(SI_GROUP_ELECTION_REQUESTED))
+end
+
+function CA.TrialStarted(eventCode, trialName, score, totalTime)
+    local formattedName = strformat("|cFEFEFE<<1>>|r", trialName)
+    printToChat(strformat(SI_TRIAL_STARTED, formattedName))
+end
+
+function CA.TrialComplete(eventCode, trialName, score)
+    local formattedName = strformat("|cFEFEFE<<1>>|r", trialName)
+    printToChat(strformat(SI_TRIAL_COMPLETED_LARGE, formattedName))
+    
+    -- SI_LUIE_CA_GROUP_TRIAL_SCORETALLY          -- "Final Score <<1>> Total Time <<2>> Vitality Bonus <<3>> <<4>>"
+    
+    local wasUnderTargetTime = GetRaidDuration() <= GetRaidTargetTime()
+    local totalTime = GetRaidDuration()
+    local formattedTime = ZO_FormatTimeMilliseconds(totalTime, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_SECONDS)
+    local vitalityBonus = GetCurrentRaidLifeScoreBonus()
+    local currentCount = GetRaidReviveCountersRemaining()
+    local maxCount = GetCurrentRaidStartingReviveCounters()
+    
+    local VitalityCounterString = strformat("<<1>> <<2>>/<<3>>", zo_iconFormatInheritColor("esoui/art/trials/vitalitydepletion.dds", 16, 16), currentCount, maxCount )
+    local FinalScore = ZO_DEFAULT_ENABLED_COLOR:Colorize(score)
+    vitalityBonus = ZO_DEFAULT_ENABLED_COLOR:Colorize(vitalityBonus)
+    if currentCount == 0 then
+        VitalityCounterString = ZO_DISABLED_TEXT:Colorize(VitalityCounterString)
+    else
+        VitalityCounterString = ZO_DEFAULT_ENABLED_COLOR:Colorize(VitalityCounterString)
     end
+    if wasUnderTargetTime then
+        formattedTime = ZO_DEFAULT_ENABLED_COLOR:Colorize(formattedtime)
+    else
+        formattedTime = ZO_ERROR_COLOR:Colorize(formattedtime)
+    end
+    
+    printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_SCORETALLY, FinalScore, formattedTime, vitalityBonus, VitalityCounterString))
+     
+end
+
+function CA.TrialFailed(eventCode, trialName, weekly)
+    local formattedName = strformat("|cFEFEFE<<1>>|r", trialName)
+    printToChat(strformat(SI_TRIAL_FAILED, formattedName))
+end
+
+function CA.TrialScore(eventCode, trialName, score, isWeekly)
+
+    local formattedString
+    local formattedName = strformat("|cFEFEFE<<1>>|r", trialName)
+    if isWeekly then 
+        formattedString = strformat(SI_TRIAL_NEW_BEST_SCORE_WEEKLY, formattedName)
+    else
+        formattedString = strformat(SI_TRIAL_NEW_BEST_SCORE_LIFETIME, formattedName)
+    end
+    
+    local function PrintTrialScore
+        printToChat(formattedString)
+    end
+    
+    zo_callLater(PrintTrialScore, 50)
 end
 
 -- Triggers when the player either accepts or declines an invite. We set g_groupJoinFudger to true here, and if the next event is GroupUpdate then it plays a message, if not, the next invite event resets it.
@@ -1997,8 +2089,8 @@ function CA.OnMoneyUpdate(eventCode, newMoney, oldMoney, reason)
     g_comboString = ""
     local UpOrDown = newMoney - oldMoney
 
-    -- If the total gold change was 0 then we don't waste any more resoureces and end this now
-    if UpOrDown == 0 then
+    -- If the total gold change was 0 or Reason 35 = Player Init (Triggers when player changes zones) - End Now
+    if UpOrDown == 0 or reason == 35 then
         return
     end
 
