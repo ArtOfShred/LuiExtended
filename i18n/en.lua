@@ -579,17 +579,19 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE",                "Show Sh
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP",             "Prints a notification to chat when another player shares a quest with you.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTFAILURE",              "Show Quest FAILURE Message")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTFAILURE_TP",           "Prints a notification to chat when a quest is failed.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTICON",                 "Show Quest Context Icon")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTICON_TP",              "Display an icon relevant to the difficulty and type of quest.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_LOGFULL",                       "Show Quest Log Full")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_LOGFULL_TP",                    "Prints a notification to chat when a your quest log is full and you attempt to accept a quest.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG",                 "Show Detailed Quest Description")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG_TP",              "When toggled on, accepting a quest will display the Journal Entry details of the quest in the announcement.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG",        "Show Detailed POI Completion Description")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG_TP",     "When toggled on, completing a quest with an associated POI will display the long completion description.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DESCRIPTION",                  "Social/Guild Announcements")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_DESCRIPTION",                   "Group Announcements")
+
+
 ZO_CreateStringId("SI_LUIE_LAM_CI_ALERTS_ENABLEDEATH",                  "Enable group member death alert")
 ZO_CreateStringId("SI_LUIE_LAM_CI_ALERTS_ENABLEDEATH_TP",               "Display an alert when group member dies.")
 ZO_CreateStringId("SI_LUIE_LAM_CI_ALERTS_ENABLETIPS",                   "Enable Active Combat Tips alerts")
