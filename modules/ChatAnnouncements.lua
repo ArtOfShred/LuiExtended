@@ -43,8 +43,8 @@ CA.D = {
     CurrencyContextToggle         = false,
     CurrencyIcons                 = true,
     CurrencyTotalMessage          = GetString(SI_LUIE_CA_DEFAULTVARS_CURRENCYTOTALMESSAGE),
-    CustomStrings                 = false,
     DisguiseAlertColor            = { 1, 0, 0, 1 },
+    EnableCustomStrings           = true,
     Experience                    = true,
     ExperienceColorLevel          = true,
     ExperienceContextName         = GetString(SI_LUIE_CA_DEFAULTVARS_EXPERIENCECONTEXTNAME),
@@ -1306,7 +1306,7 @@ function CA.QuestShareMessageReset()
 end
 
 function CA.RegisterCustomStrings()
-    if CA.SV.CustomStrings then
+    if CA.SV.EnableCustomStrings then
         -- Group String Replacements
         SafeAddString(SI_GROUPINVITERESPONSE0, GetString(SI_LUIE_CA_GROUPINVITERESPONSE0), 2)
         SafeAddString(SI_GROUPINVITERESPONSE1, GetString(SI_LUIE_CA_GROUPINVITERESPONSE1), 3)

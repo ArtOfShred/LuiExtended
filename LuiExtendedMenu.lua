@@ -120,6 +120,13 @@ function LUIE_CreateSettings()
         name = GetString(SI_LUIE_LAM_PNL_HEADER),
         reference = "Info_Panel_Options_Submenu",
         controls = {
+                
+            
+            {
+                -- TEMP DESCRIPTION INFO PANEL (NO LOCALIZATION NEEDED)
+                type = "description",
+                text = "Displays a small panel with potentially important information on it. This feature may be significantly overhauled in the future.",
+            },
             {
                 -- Show InfoPanel
                 type = "checkbox",
@@ -273,6 +280,11 @@ function LUIE_CreateSettings()
         name = GetString(SI_LUIE_LAM_CI_HEADER),
         reference = "Combat_Info_Options_Submenu",
         controls = {
+            {
+                -- TEMP DESCRIPTION COMBAT INFO PANEL (NO LOCALIZATION NEEDED)
+                type = "description",
+                text = "NOTE: No further work is being done on this component and it will be REMOVED in the next major update for LUIE (Ultimate tracking function will be moved into Buffs & Debuffs). Combat Cloud will be updated soon to use as a companion to LUIE as it has far more options to work with for SCT.",
+            },
             {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_SHOWCOMBATINFO),
@@ -752,6 +764,11 @@ function LUIE_CreateSettings()
         reference = "Damage_Meter_and_Combat_Log_Submenu",
         controls = {
             {
+                -- TEMP DESCRIPTION DAMAGE METER (NO LOCALIZATION NEEDED)
+                type = "description",
+                text = "NOTE: No further work is being done on this component and it will be REMOVED in the next major update for LUIE. Combat Metrics does a far better job providing information than this component and is more efficient. Support will be added for Combat Metrics before the next major LUIE update for the custom icons and ability name corrections present in LUIE.",
+            },
+            {
                 type = "checkbox",
                 name = "Enable Damage Meter",
                 tooltip = "Counts damage and healing done.",
@@ -958,13 +975,38 @@ function LUIE_CreateSettings()
     -- Slash Commands description
     optionsData[#optionsData + 1] = {
         type = "description",
-        text = strformat("<<1>>\n<<2>>\n<<3>>\n<<4>>",
-               GetString(SI_LUIE_LAM_SLASHCMDS_HOME),
-               GetString(SI_LUIE_LAM_SLASHCMDS_DISBAND),
-               GetString(SI_LUIE_LAM_SLASHCMDS_REGROUP),
-               GetString(SI_LUIE_LAM_SLASHCMDS_GUILDINV)),
+        text = strformat("<<1>>\n<<2>>\n<<3>>",
+               GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GENERAL),
+               GetString(SI_LUIE_LAM_SLASHCMDS_TRADE),
+               GetString(SI_LUIE_LAM_SLASHCMDS_HOME)),
     }
-    
+    optionsData[#optionsData + 1] = {
+        type = "description",
+        text = strformat("<<1>>\n<<2>>\n<<3>>\n<<4>>\n<<5>>\n<<6>>",
+               GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GROUP),
+               GetString(SI_LUIE_LAM_SLASHCMDS_REGROUP),
+               GetString(SI_LUIE_LAM_SLASHCMDS_LEAVE),
+               GetString(SI_LUIE_LAM_SLASHCMDS_DISBAND),
+               GetString(SI_LUIE_LAM_SLASHCMDS_KICK),
+               GetString(SI_LUIE_LAM_SLASHCMDS_VOTEKICK)),
+    }
+    optionsData[#optionsData + 1] = {
+        type = "description",
+        text = strformat("<<1>>\n<<2>>\n<<3>>\n<<4>>",
+               GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GUILD),
+               GetString(SI_LUIE_LAM_SLASHCMDS_GUILDINVITE),
+               GetString(SI_LUIE_LAM_SLASHCMDS_GUILDKICK),
+               GetString(SI_LUIE_LAM_SLASHCMDS_GUILDQUIT)),
+    }
+    optionsData[#optionsData + 1] = {
+        type = "description",
+        text = strformat("<<1>>\n<<2>>\n<<3>>\n<<4>>\n<<5>>",
+               GetString(SI_LUIE_LAM_SLASHCMDSHEADER_SOCIAL),
+               GetString(SI_LUIE_LAM_SLASHCMDS_FRIEND),
+               GetString(SI_LUIE_LAM_SLASHCMDS_IGNORE),
+               GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND),
+               GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE)),
+    }
     
     -- Enable Buffs & Debuffs Module
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
@@ -1616,12 +1658,12 @@ function LUIE_CreateSettings()
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_CA_DEFAULTSTRINGENHANCE),
         tooltip = GetString(SI_LUIE_LAM_CA_DEFAULTSTRINGENHANCE_TP),
-        getFunc = function() return LUIE.ChatAnnouncements.SV.CustomStrings end,
-        setFunc = function(value) LUIE.ChatAnnouncements.SV.CustomStrings = value LUIE.ChatAnnouncements.RegisterCustomStrings() end,
+        getFunc = function() return LUIE.ChatAnnouncements.SV.EnableCustomStrings end,
+        setFunc = function(value) LUIE.ChatAnnouncements.SV.EnableCustomStrings = value LUIE.ChatAnnouncements.RegisterCustomStrings() end,
         width = "full",
         warning = strformat("<<1>>\n<<2>>", GetString(SI_LUIE_LAM_COMPATIBILITY_WARNING), GetString(SI_LUIE_LAM_RELOADUI_WARNING)),
         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-        default = LUIE.ChatAnnouncements.D.CustomStrings,
+        default = LUIE.ChatAnnouncements.D.EnableCustomStrings,
     }
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         -- Positive Change Color
