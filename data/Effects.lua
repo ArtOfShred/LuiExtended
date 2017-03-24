@@ -488,14 +488,18 @@ E.HatIcons = {
     ['Abah\'s Watch Turban with Mask']  = 'LuiExtended/media/icons/hats/hat_abahs_watch_turban.dds',
     ['Abah\'s Watch Turban']            = 'LuiExtended/media/icons/hats/hat_abahs_watch_turban_with_mask.dds',
     ['Alliance Rider Hood']             = 'LuiExtended/media/icons/hats/hat_alliance_rider_hood.dds',
+    ['Ass-Ears Jester Cap']             = 'LuiExtended/media/icons/hats/hat_ass-ears_jester_cap.dds',
+    ['Bi-Color Coxcomb Cap']            = 'LuiExtended/media/icons/hats/hat_bi-color_coxcomb_cap.dds',
     ['Cadwell\'s Helm of Heroism']      = 'LuiExtended/media/icons/hats/hat_cadwells_helm_of_heroism.dds',
     ['\"Clever Man\" Wizard Hat']       = 'LuiExtended/media/icons/hats/hat_clever_man_wizard_hat.dds',
     ['Colovian Filigreed Hood']         = 'LuiExtended/media/icons/hats/hat_colovian_filigreed_hood.dds',
     ['Colovian Fur Hood']               = 'LuiExtended/media/icons/hats/hat_colovian_fur_hood.dds',
+    ['Crown of Misrule']                = 'LuiExtended/media/icons/hats/hat_crown_of_misrule.dds',
     ['Dwarf-Style Mage\'s Hat']         = 'LuiExtended/media/icons/hats/hat_dwarf-style_mages_hat.dds',
     ['Feathered Bycoket Cap']           = 'LuiExtended/media/icons/hats/hat_feathered_bycoket_cap.dds',
     ['Fibonaccus Spiral Hat']           = 'LuiExtended/media/icons/hats/hat_fibonaccus_spiral_hat.dds',
     ['Flannel Forester\'s Hood']        = 'LuiExtended/media/icons/hats/hat_flannel_foresters_hood.dds',
+    ['Fool\'s Cap and Masque']          = 'LuiExtended/media/icons/hats/hat_fools_cap_and_masque.dds',
     ['Forester\'s Hood with Flower']    = 'LuiExtended/media/icons/hats/hat_foresters_hood_with_flower.dds',
     ['Hedge Wizard\'s Claw Cap']        = 'LuiExtended/media/icons/hats/hat_hedge_wizards_claw_cap.dds',
     ['Imperial Mananaut Cap & Goggles'] = 'LuiExtended/media/icons/hats/hat_imperial_mananaut_cap_&_goggles.dds',
@@ -2113,7 +2117,7 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [85351] = 'LuiExtended/media/icons/momentos/momento_event_mud_ball.dds', -- Self-Serve Mudbath (Mud Ball Merriment) (Seems to be unusued - added just in case)
     [85352] = 'LuiExtended/media/icons/momentos/momento_event_mud_ball.dds', -- Covered in Mud (Mud Ball Merriment) (Seems to be unusued - added just in case)
 
-    [89476] = 'LuiExtended/media/icons/abilities/ability_event_steamy_spring_pie.dds', -- Steamy Spring Pie (Steamy Spring Pie)
+    [91369] = 'LuiExtended/media/icons/abilities/ability_event_steamy_spring_pie.dds', -- Jester's Experience Boost Pie (The Pie of Misrule)
 
     ----------------------------------------------------------------
     -- WORLD EVENTS ------------------------------------------------
@@ -2658,7 +2662,9 @@ E.EffectNameOverride = {
     [85639] = 'Mud Ball', -- Covered in Mud (Mud Ball Merriment)
     [85351] = 'Mud Ball', -- Self-Serve Mudbath (Mud Ball Merriment) (Seems to be unusued - added just in case)
     [85352] = 'Mud Ball', -- Covered in Mud (Mud Ball Merriment) (Seems to be unusued - added just in case)
-
+    
+    [91369] = 'The Pie of Misrule', -- Jester's Experience Boost Pie (The Pie of Misrule)
+    
     ----------------------------------------------------------------
     -- WORLD EVENTS ------------------------------------------------
     ----------------------------------------------------------------
@@ -2712,8 +2718,6 @@ E.IsAbilityIgnoredById = { --Remove an ability from display by abilityId
     [84733] = true,  -- Increase Health Regen (Witchmother's Potent Brew) - Odd event applied on zone transition with Witchmother's Potent Brew up
     [89958] = true, -- Increase Stamina (Dubious Camoran Throne) - Odd event applied on zone transition with Dubious Camoran Throne up
     [89959] = true, -- Increase Health (Dubious Camoran Throne) - Odd event applied on zone transition with Dubious Camoran Throne up
-    --[89972] = true, -- Increase Magicka Recovery (Jewels of Misrule) - Odd event applied on zone transition with Jewels of Misrule up
-    --[89973] = true, -- Increase Health (Jewels of Misrule) - Odd event applied on zone transition with Jewels of Misrule up
     -- Other
     [70582] = true, -- Roll 1d1000 (Merethic Restorative Resin)
 
