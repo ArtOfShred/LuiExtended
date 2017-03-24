@@ -512,7 +512,7 @@ function LUIE.SocialError(eventCode, reason)
 end
 
 function LUIE.JumpFailed(eventCode, reason)
-    printToChat(GetString("SI_JUMPRESULT", reason))
+    LUIE.PrintToChat(GetString("SI_JUMPRESULT", reason))
 end
 
 function LUIE.GuildAddedSelf(eventCode, guildId, guildName)

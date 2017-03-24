@@ -3813,10 +3813,10 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
         
         if CA.SV.ExperienceColorLevel then
             icon = zo_iconFormatInheritColor("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)
-            icon = CA.SV.LevelUpIcon and ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(strfmt("%s ", levelicon)) or ( " " )
+            icon = CA.SV.LevelUpIcon and ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(strfmt("%s ", icon)) or ( " " )
         else
            icon = zo_iconFormat("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)
-           icon = CA.SV.LevelUpIcon and (strfmt("%s ", levelicon)) or ( " " ) 
+           icon = CA.SV.LevelUpIcon and (strfmt("%s ", icon)) or ( " " )
         end
         
         local attribute
