@@ -3,7 +3,7 @@
 LUIE             = {}
 LUIE.name        = "LuiExtended"
 LUIE.author      = "ArtOfShred, psypanda, Upularity & SpellBuilder"
-LUIE.version     = "4.99f BETA"
+LUIE.version     = "5.00 BETA"
 LUIE.components  = {}
 
 -- Saved variables options
