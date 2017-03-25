@@ -71,7 +71,7 @@ UF.D = {
     CustomColourShield               = { 1      , 192/255, 0       }, -- .a=0.5 for overlay and .a = 1 for separate
     CustomColourMagicka              = { 0      ,  83/255, 209/255 },
     CustomColourStamina              = {  28/255, 177/255, 0       },
-    CustomColourDPS                  = { 255/255, 196/255, 128/255 },
+    CustomColourDPS                  = { 130/255, 99/255, 65/255 },
     CustomColourHealer               = { 117/255, 077/255, 135/255 },
     CustomColourTank                 = { 133/255, 018/255, 013/255 },
     CustomShieldBarSeparate          = false,
