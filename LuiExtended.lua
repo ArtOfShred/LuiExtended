@@ -3,7 +3,7 @@
 LUIE             = {}
 LUIE.name        = "LuiExtended"
 LUIE.author      = "ArtOfShred, psypanda, Upularity & SpellBuilder"
-LUIE.version     = "5.01 BETA"
+LUIE.version     = "5.02 BETA"
 LUIE.components  = {}
 
 -- Saved variables options
@@ -152,8 +152,8 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     LUIE.CombatInfo.Initialize( LUIE.SV.CombatInfo_Enabled )
     LUIE.DamageMeter.Initialize(LUIE.SV.DamageMeter_Enable)
     LUIE.InfoPanel.Initialize( LUIE.SV.InfoPanel_Enabled )
-    LUIE.SpellCastBuffs.Initialize( LUIE.SV.SpellCastBuff_Enable )
     LUIE.UnitFrames.Initialize( LUIE.SV.UnitFrames_Enabled )
+    LUIE.SpellCastBuffs.Initialize( LUIE.SV.SpellCastBuff_Enable )
 
     -- Create settings menu for our addon
     LUIE_CreateSettings()
