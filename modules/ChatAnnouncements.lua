@@ -395,7 +395,7 @@ function CA.RegisterQuestEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_POI_DISCOVERED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DISCOVERY_EXPERIENCE)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_LOG_IS_FULL)
-    
+
     if CA.SV.QuestShare then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARED, CA.QuestShared)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARE_REMOVED, CA.QuestShareRemoved)
@@ -425,7 +425,6 @@ function CA.RegisterQuestEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_LOG_IS_FULL, CA.QuestLogFull)
     end
 end
-        
 
 function CA.RegisterGuildEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_MEMBER_ADDED)
@@ -512,8 +511,12 @@ function CA.RegisterDisguiseEvents()
 end
 
 function CA.DisplayDisguiseOnLoad()
-    if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description)) end
-    if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_DISGUISE_STATE_CHANGED, CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))) end
+    if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then
+        printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))
+    end
+    if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then
+        CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_DISGUISE_STATE_CHANGED, CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description)))
+    end
 end
 
 function CA.RegisterAchievementsEvent()
@@ -560,13 +563,12 @@ function CA.RegisterStuckEvents()
 end
 
 function CA.Broadcast(eventCode, message)
-    d("Broadcast deteceted!")
+    --d("Broadcast deteceted!")
     printToChat(message)
 end
 
 function CA.RegisterGroupEvents()
-
-EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BROADCAST, CA.Broadcast)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BROADCAST, CA.Broadcast)
     -- Group Events
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_REMOVED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_UPDATE)
@@ -1157,7 +1159,7 @@ function CA.QuestAdded(eventCode, journalIndex, questName, objectiveName)
         local questNameFormatted
         local stepText = GetJournalQuestStepInfo(journalIndex, 1)
         local formattedString
-        
+
         if CA.SV.QuestLong then
             questNameFormatted = (strformat("|cFFA500<<1>>:|r <<2>>", questName, stepText))
         else
@@ -1169,7 +1171,7 @@ function CA.QuestAdded(eventCode, journalIndex, questName, objectiveName)
         else
             formattedString = strformat(SI_NOTIFYTEXT_QUEST_ACCEPT, questNameFormatted)
         end
-  
+
         g_questComboString = formattedString
         zo_callLater (CA.PrintQuestAccepted, 50)
     end
@@ -1188,8 +1190,8 @@ function CA.QuestRemoved(eventCode, isCompleted, journalIndex, questName, zoneIn
             local questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
             printToChat(strformat(SI_LUIE_CA_QUEST_ABANDONED, questNameFormatted))
         end
-        
-        if CA.SV.QuestCSA then 
+
+        if CA.SV.QuestCSA then
             CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_QUEST_REMOVED, CSA_EVENT_LARGE_TEXT, "", (strformat(SI_LUIE_CA_QUEST_ABANDONED, questName)))
         end
     end
@@ -1200,38 +1202,35 @@ function CA.QuestObjectiveComplete(eventCode, zoneIndex, poiIndex, level, previo
     local function ReactivateObjectiveComplete()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OBJECTIVE_COMPLETED, CA.QuestObjectiveComplete)
     end
-    
+
     local name, _, _, finishedDescription = GetPOIInfo(zoneIndex, poiIndex)
     local nameFormatted
     local formattedText
-    
+
     if CA.SV.QuestObjectiveLong and finishedDescription ~= "" then
         nameFormatted = (strformat("|cFEFEFE<<1>>:|r <<2>>", name, finishedDescription))
     else
         nameFormatted = (strformat("|cFEFEFE<<1>>|r", name))
     end
-    
+
     formattedText = strformat(SI_NOTIFYTEXT_OBJECTIVE_COMPLETE, nameFormatted)
-    
+
     printToChat(formattedText)
-    
+
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OBJECTIVE_COMPLETED)
     zo_callLater(ReactivateObjectiveComplete, 100)
-    
 end
 
 function CA.DiscoveryExperience(eventCode, areaName, level, previousExperience, currentExperience, championPoints)
-
     local nameFormatted = (strformat("|cFEFEFE<<1>>|r", areaName))
     printToChat(strformat(SI_SUBZONE_NOTIFICATION_DISCOVER, nameFormatted))
-
 end
 
 function CA.POIDiscovered(eventCode,zoneIndex, poiIndex)
     local name, _, startDescription = GetPOIInfo(zoneIndex, poiIndex)
     printToChat(strformat("|cFEFEFE<<1>>:|r <<2>>", name, startDescription))
-    if g_questComboString ~= "" then 
-        printToChat(g_questComboString) 
+    if g_questComboString ~= "" then
+        printToChat(g_questComboString)
     end
     g_questComboString = ""
 end
@@ -1241,15 +1240,14 @@ function CA.QuestLogFull(eventCode)
 end
 
 function CA.QuestComplete(eventCode, questName, level, previousExperience, currentExperience, championPoints, questType, instanceDisplayType)
-
     local function ReactivateQuestComplete()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_COMPLETE, CA.QuestComplete)
     end
-    
+
     local function ResetQuestRewardStatus()
         g_itemReceivedIsQuestReward = false
     end
-    
+
     if CA.SV.Quest then
         local questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
         local questJournalObject = SYSTEMS:GetObject("questJournal")
@@ -1265,22 +1263,22 @@ function CA.QuestComplete(eventCode, questName, level, previousExperience, curre
         EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_COMPLETE)
         zo_callLater(ReactivateQuestComplete, 100)
     end
-    
+
     if CA.SV.Loot then
         -- We set this variable to true in order to override the [Looted] message syntax that would be applied to a quest reward normally.
         g_itemReceivedIsQuestReward = true
         zo_callLater(ResetQuestRewardStatus, 500)
     end
-    
 end
 
 -- EVENT_QUEST_CONDITION_COUNTER_CHANGED
 
-function CA.QuestFailed(eventCode, journalIndex, questName, conditionText, conditionType, currConditionVal, newConditionVal, conditionMax, isFailCondition, stepOverrideText, isPushed, isComplete, isConditionComplete, isStepHidden) 
-
+function CA.QuestFailed(eventCode, journalIndex, questName, conditionText, conditionType, currConditionVal, newConditionVal, conditionMax, isFailCondition, stepOverrideText, isPushed, isComplete, isConditionComplete, isStepHidden)
     -- We're only interested in this event for failure condition
-    if not isFailCondition then return end
-    
+    if not isFailCondition then
+        return
+    end
+
     if stepOverrideText == "" then
         if conditionMax > 1 then
             printToChat(strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL, conditionText, newConditionVal, conditionMax))
@@ -1290,7 +1288,6 @@ function CA.QuestFailed(eventCode, journalIndex, questName, conditionText, condi
     else
         printToChat(strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, stepOverrideText))
     end
-
 end
 
 -- Checks to see if quest was accepted 50 ms after share is removed
@@ -1329,10 +1326,9 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_LUIE_CA_GROUP_MEMBER_KICKED, GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_ALT), 1)
         SafeAddString(SI_LUIE_CA_GROUP_MEMBER_LEAVE, GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_ALT), 1)
         SafeAddString(SI_GROUP_NOTIFICATION_GROUP_LEADER_CHANGED, GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_ALT), 1)
-        
+        -- Trial String Replacement
         SafeAddString(SI_TRIAL_STARTED, GetString(SI_LUIE_CA_GROUP_TRIAL_STARTED), 1)
         SafeAddString(SI_TRIAL_FAILED, GetString(SI_LUIE_CA_GROUP_TRIAL_FAILED), 1)
-        
         -- Group Finder String Replacements
         SafeAddString(SI_GROUPING_TOOLS_ALERT_LFG_JOINED, GetString(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED), 1)
         SafeAddString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL, GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL_ALT), 1)
@@ -1424,7 +1420,9 @@ function CA.RegisterCustomStrings()
 end
 
 function CA.LFGJoined(eventCode, locationName)
-    if CA.SV.GroupLFG then printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED), locationName)) end
+    if CA.SV.GroupLFG then
+        printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED), locationName))
+    end
     g_joinLFGOverride = true
 end
 
@@ -1471,7 +1469,9 @@ end
 function CA.GroupFindReplacementNew(eventCode)
     local activityType, activityIndex = GetLFGFindReplacementNotificationInfo()
     local name = GetLFGOption(activityType, activityIndex)
-    if CA.SV.GroupLFG then printToChat(strformat(GetString(SI_LFG_FIND_REPLACEMENT_TEXT), name)) end
+    if CA.SV.GroupLFG then
+        printToChat(strformat(GetString(SI_LFG_FIND_REPLACEMENT_TEXT), name))
+    end
 end
 
 function CA.ActivityComplete(eventCode)
@@ -1515,7 +1515,7 @@ function CA.ActivityStatusUpdate(eventCode, status)
 end
 
 function CA.ActivityQueueResult(eventCode, result)
-    if CA.SV.GroupLFG then 
+    if CA.SV.GroupLFG then
         if result == ACTIVITY_QUEUE_RESULT_INCOMPATIBLE_GROUP then
             printToChat(GetString(SI_ACTIVITYQUEUERESULT9))
         end
@@ -1601,15 +1601,21 @@ function CA.ReadyCheckUpdate(eventCode)
         if playerRole ~= 0 then
             local roleIcon = (strformat("|t16:16:<<1>>|t", GetRoleIcon(playerRole)))
             local roleString = GetString("SI_LFGROLE", playerRole)
-            if CA.SV.GroupLFG then printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE), activityName, roleIcon, roleString )) end
+            if CA.SV.GroupLFG then
+                printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE), activityName, roleIcon, roleString ))
+            end
         else
-            if CA.SV.GroupLFG then printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY), activityName)) end
+            if CA.SV.GroupLFG then
+                printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY), activityName))
+            end
         end
     end
 
     if not g_fixJoinMessage then
         if not g_showRCUpdates and (tanksAccepted == 0 and tanksPending == 0 and healersAccepted == 0 and healersPending == 0 and dpsAccepted == 0 and dpsPending == 0) then
-            if CA.SV.GroupLFG then printToChat(GetString(SI_LFGREADYCHECKCANCELREASON3)) end
+            if CA.SV.GroupLFG then
+                printToChat(GetString(SI_LFGREADYCHECKCANCELREASON3))
+            end
         elseif not g_showRCUpdates and (tanksAccepted > 0 or healersAccepted > 0 or dpsAccepted > 0)  and g_areWeGrouped == false then
             g_fixJoinMessage = true
         end
@@ -1617,7 +1623,9 @@ function CA.ReadyCheckUpdate(eventCode)
 
     if g_fixJoinMessage then
         if not g_showRCUpdates and (tanksAccepted == 0 and healersAccepted == 0 and dpsAccepted == 0 and tanksPending == 0 and healersPending == 0 and dpsPending == 0) then
-            if CA.SV.GroupLFG then printToChat(GetString(SI_LFGREADYCHECKCANCELREASON4)) end
+            if CA.SV.GroupLFG then
+                printToChat(GetString(SI_LFGREADYCHECKCANCELREASON4))
+            end
             g_stopGroupLeaveQueue = true
             zo_callLater(CA.ResetGroupLeaveQueue, 1000)
         end
@@ -1633,13 +1641,17 @@ function CA.ResetGroupLeaveQueue()
 end
 
 function CA.VoteFailed( eventCode, failureReason, descriptor)
-    if CA.SV.GroupVote then printToChat(GetString("SI_GROUPELECTIONFAILURE", failureReason)) end
+    if CA.SV.GroupVote then
+        printToChat(GetString("SI_GROUPELECTIONFAILURE", failureReason))
+    end
 end
 
 function CA.VoteNotify(eventCode)
     local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
     if electionType == 2 then -- Ready Check
-        if CA.SV.GroupVote then printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_MESSAGE)) end
+        if CA.SV.GroupVote then
+            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_MESSAGE))
+        end
     end
 
     if electionType == 3 then -- Vote Kick
@@ -1667,7 +1679,7 @@ end
 function CA.VoteResult(eventCode, electionResult, descriptor)
     local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
     if descriptor == "[ZO_READY_CHECK]" then
-        if CA.SV.GroupVote then 
+        if CA.SV.GroupVote then
             if electionResult == 1 then
                 printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED))
             end
@@ -1680,7 +1692,7 @@ function CA.VoteResult(eventCode, electionResult, descriptor)
         end
     end
     if descriptor == "[ZO_NONE]" then
-        if CA.SV.GroupVote then 
+        if CA.SV.GroupVote then
             local KickCarry
             local kickMemberName = GetUnitName(targetUnitTag)
             local kickMemberAccountName = GetUnitDisplayName(targetUnitTag)
@@ -1717,7 +1729,7 @@ function CA.VoteResult(eventCode, electionResult, descriptor)
 end
 
 function CA.VoteRequested(eventCode, descriptor)
-    if CA.SV.GroupVote then 
+    if CA.SV.GroupVote then
         if descriptor == "[ZO_READY_CHECK]" then
             printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_REQUESTED))
         end
@@ -1735,16 +1747,16 @@ end
 function CA.TrialComplete(eventCode, trialName, score)
     local formattedName = strformat("|cFEFEFE<<1>>|r", trialName)
     printToChat(strformat(SI_TRIAL_COMPLETED_LARGE, formattedName))
-    
+
     -- SI_LUIE_CA_GROUP_TRIAL_SCORETALLY          -- "Final Score <<1>> Total Time <<2>> Vitality Bonus <<3>> <<4>>"
-    
+
     local wasUnderTargetTime = GetRaidDuration() <= GetRaidTargetTime()
     local totalTime = GetRaidDuration()
     local formattedTime = ZO_FormatTimeMilliseconds(totalTime, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_SECONDS)
     local vitalityBonus = GetCurrentRaidLifeScoreBonus()
     local currentCount = GetRaidReviveCountersRemaining()
     local maxCount = GetCurrentRaidStartingReviveCounters()
-    
+
     local VitalityCounterString = strformat("<<1>> <<2>>/<<3>>", zo_iconFormatInheritColor("esoui/art/trials/vitalitydepletion.dds", 16, 16), currentCount, maxCount )
     local FinalScore = ZO_DEFAULT_ENABLED_COLOR:Colorize(score)
     vitalityBonus = ZO_DEFAULT_ENABLED_COLOR:Colorize(vitalityBonus)
@@ -1758,9 +1770,8 @@ function CA.TrialComplete(eventCode, trialName, score)
     else
         formattedTime = ZO_ERROR_COLOR:Colorize(formattedtime)
     end
-    
+
     printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_SCORETALLY, FinalScore, formattedTime, vitalityBonus, VitalityCounterString))
-     
 end
 
 function CA.TrialFailed(eventCode, trialName, weekly)
@@ -1769,19 +1780,18 @@ function CA.TrialFailed(eventCode, trialName, weekly)
 end
 
 function CA.TrialScore(eventCode, trialName, score, isWeekly)
-
     local formattedString
     local formattedName = strformat("|cFEFEFE<<1>>|r", trialName)
-    if isWeekly then 
+    if isWeekly then
         formattedString = strformat(SI_TRIAL_NEW_BEST_SCORE_WEEKLY, formattedName)
     else
         formattedString = strformat(SI_TRIAL_NEW_BEST_SCORE_LIFETIME, formattedName)
     end
-    
+
     local function PrintTrialScore()
         printToChat(formattedString)
     end
-    
+
     zo_callLater(PrintTrialScore, 50)
 end
 
@@ -2474,7 +2484,7 @@ function CA.OnAlliancePointUpdate(eventCode, alliancePoints, playSound, differen
     if UpOrDown == alliancePoints then
         return
     end
-    
+
     local currentAlliancePoints = ZO_LocalizeDecimalNumber(alliancePoints)
     local color              -- Gets the value from ChangeUpColorize or ChangeDownColorize to color strings
     local changetype         -- Amount of currency gained or lost
@@ -2988,7 +2998,7 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
             printToChat(strfmt("%s %s%s |cFFFFFF%s/60|r%s", logPrefix, icon, skillstring, current, g_comboString))
             g_comboString = ""
         else
-            printToChat(strformat("%s %s%s |cFFFFFF%s/60|r", logPrefix, icon, skillstring, current) )
+            printToChat(strfmt("%s %s%s |cFFFFFF%s/60|r", logPrefix, icon, skillstring, current) )
         end
     end
 end
@@ -3660,8 +3670,10 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
     if g_mailStacks == 1 then
         plural = ""
     end
-
-    if g_mailStacks == 0 then return end -- If we've already looted an item from this indexed mail and our inventory was full, don't try to print another message
+    -- If we've already looted an item from this indexed mail and our inventory was full, don't try to print another message
+    if g_mailStacks == 0 then
+        return
+    end
 
     g_mailStringPart1 = (strformat(GetString(SI_LUIE_CA_MAIL_RECEIVED_ATTACHMENT), g_mailStacks, plural) )
     zo_callLater(PrintMailAttachmentsIfNoGold, 25) -- We call this with a super short delay, it will return a string as long as a currency change event doesn't trigger beforehand!
@@ -3810,7 +3822,7 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
 
         CA.LevelUpdateHelper()
         local icon
-        
+
         if CA.SV.ExperienceColorLevel then
             icon = zo_iconFormatInheritColor("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)
             icon = CA.SV.LevelUpIcon and ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(strfmt("%s ", icon)) or ( " " )
@@ -3818,7 +3830,7 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
            icon = zo_iconFormat("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)
            icon = CA.SV.LevelUpIcon and (strfmt("%s ", icon)) or ( " " )
         end
-        
+
         local attribute
         local CurrentLevelFormatted = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(LevelContext .. " " .. CurrentLevel)
 
@@ -3893,6 +3905,7 @@ function CA.OnLevelUpdate(eventCode, unitTag, level)
         end
 
     end
+
     g_weLeveled = 0
     g_crossover = 0
     g_questString1 = ""
@@ -4253,7 +4266,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
                         levelicon = zo_iconFormat("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)
                         levelicon = CA.SV.LevelTotalIcon and (strfmt("%s ", levelicon)) or ( "" )
                         g_totalLevelAdjust = strfmt( " %s%s %s", levelicon, LevelContext, CurrentLevel -1)
-                    end 
+                    end
                 end
             end
         else
@@ -4670,7 +4683,7 @@ function CA.PrintInventoryIndexChanges(itemId, seticon, item, itemType, stackCou
         local itemIsSpecial = (itemType == ITEMTYPE_TROPHY and not itemIsKeyFragment) or (itemType == ITEMTYPE_COLLECTIBLE) or IsItemLinkConsumable(item)
 
         local logPrefix = g_isLooted and GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTED) or GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
-        
+
         if g_itemReceivedIsQuestReward then logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) end -- Override function for quest rewards
 
         if CA.SV.LootOnlyNotable and not g_weAreInMail then
@@ -4689,7 +4702,6 @@ function CA.PrintInventoryIndexChanges(itemId, seticon, item, itemType, stackCou
         else
             CA.LogItem(logPrefix, seticon, item, itemType, stackCountChange or 1, receivedBy, gainorloss)
         end
-
 end
 
 function CA.ResetPrintNextChange()
@@ -4702,7 +4714,6 @@ end
 
 -- Only used if the option to see destroyed items or items lost from a guard is turned on
 function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-
     if bagId == BAG_WORN then
         local receivedBy = ""
         if not g_equippedStacks[slotId] then -- NEW ITEM
@@ -4869,7 +4880,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
         if printNextChange == true then
             if not g_weAreInAStore and CA.SV.Loot then
                 if not CA.SV.LootOnlyNotable or itemQuality >= ITEM_QUALITY_ARTIFACT or g_weAreInMail then
-                zo_callLater (function() CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss) end, 50)
+                    zo_callLater (function() CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss) end, 50)
                 end
             end
         end
@@ -4886,7 +4897,8 @@ function CA.CraftModeOverrides()
 	SMITHING.SetMode = function(...)
 		zos_Smithing(...)
         if GetCraftingInteractionType() == CRAFTING_TYPE_SMITHNG then
-		mode = g_smithing:GetMode() end
+            mode = g_smithing:GetMode()
+        end
 	end
 
     -- Get SMITHING mode
@@ -4908,18 +4920,15 @@ function CA.CraftModeOverrides()
 	end
 
     -- NOTE: Alchemy and provisioning don't matter, as the only options are to craft and use materials.
-
 end
 
 function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-
     local logPrefixPos = GetString(SI_ITEM_FORMAT_STR_CRAFTED)
     local logPrefixNeg = GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED)
 
     if GetCraftingInteractionType() == CRAFTING_TYPE_ENCHANTING then
         logPrefixPos = g_enchant_prefix_pos[g_enchanting.GetMode()]
         logPrefixNeg = g_enchant_prefix_neg[g_enchanting.GetMode()]
-
     end
     if (GetCraftingInteractionType() == CRAFTING_TYPE_BLACKSMITHING or GetCraftingInteractionType() == CRAFTING_TYPE_CLOTHIER or GetCraftingInteractionType() == CRAFTING_TYPE_WOODWORKING) then
         logPrefixPos = g_smithing_prefix_pos[g_smithing.GetMode()]
@@ -5744,13 +5753,21 @@ end
 
 function CA.DisguiseState(eventCode, unitTag, disguiseState)
     if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_DANGER then
-        if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER)) end
-        if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_DISGUISE_STATE_CHANGED, CSA_EVENT_SMALL_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED, DisguiseAlertColorize:Colorize(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER))) end
+        if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then
+            printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER))
+        end
+        if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then
+            CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_DISGUISE_STATE_CHANGED, CSA_EVENT_SMALL_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED, DisguiseAlertColorize:Colorize(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER)))
+        end
     end
 
     if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_SUSPICIOUS then
-        if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS)) end
-        if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_DISGUISE_STATE_CHANGED, CSA_EVENT_SMALL_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED, DisguiseAlertColorize:Colorize(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS))) end
+        if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then
+            printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS))
+        end
+        if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then
+            CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_DISGUISE_STATE_CHANGED, CSA_EVENT_SMALL_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED, DisguiseAlertColorize:Colorize(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS)))
+        end
     end
 
     -- If we're still disguised and g_disguiseState is true then don't waste resources and end the function
@@ -5759,14 +5776,22 @@ function CA.DisguiseState(eventCode, unitTag, disguiseState)
     end
 
     if g_disguiseState == 1 and (disguiseState == DISGUISE_STATE_NONE) then
-        if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description)) end
-        if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_DISGUISE_STATE_CHANGED, CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description))) end
+        if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then
+            printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description))
+        end
+        if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then
+            CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_DISGUISE_STATE_CHANGED, CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description)))
+        end
     end
-        
+
     if g_disguiseState == 0 and ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
         g_currentDisguise = GetItemId(0, 10) or 0
-        if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description)) end
-        if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_DISGUISE_STATE_CHANGED, CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))) end
+        if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then
+            printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))
+        end
+        if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then
+            CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_DISGUISE_STATE_CHANGED, CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description)))
+        end
     end
 
     g_disguiseState = GetUnitDisguiseState("player")
@@ -5781,19 +5806,27 @@ function CA.OnPlayerActivated(eventCode, initial)
     if g_disguiseState == 0 then
         g_disguiseState = GetUnitDisguiseState("player")
         if g_disguiseState == 0 then
-            return 
+            return
         elseif g_disguiseState ~= 0 then
             g_disguiseState = 1
             g_currentDisguise = GetItemId(0, 10) or 0
-            if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description)) end
-            if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_PLAYER_ACTIVATED, CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))) end
+            if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then
+                printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))
+            end
+            if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then
+                CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_PLAYER_ACTIVATED, CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description)))
+            end
             return
         end
     elseif g_disguiseState == 1 then
         g_disguiseState = GetUnitDisguiseState("player")
         if g_disguiseState == 0 then
-            if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description)) end
-            if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_PLAYER_ACTIVATED, CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description))) end
+            if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then
+                printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description))
+            end
+            if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then
+                CENTER_SCREEN_ANNOUNCE:QueueMessage(EVENT_PLAYER_ACTIVATED, CSA_EVENT_SMALL_TEXT, "", (strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description)))
+            end
             return
         elseif g_disguiseState ~= 0 then
             g_disguiseState = 1
@@ -5916,19 +5949,18 @@ function CA.InventoryFull(eventCode, numSlotsRequested, numSlotsFree)
             printToChat(strformat(GetString(SI_INVENTORY_ERROR_INSUFFICIENT_SPACE), (numSlotsRequested - numSlotsFree) ))
         end
     end
-    
+
     zo_callLater(DisplayItemFailed, 100)
 end
 
 function CA.LootItemFailed(eventCode, reason, itemName)
-    
     -- Stop Spam
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED)
-    
+
     local function ReactivateLootItemFailed()
     printToChat(zo_strformat(GetString("SI_LOOTITEMRESULT", reason), itemName))
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED, CA.LootItemFailed)
     end
-    
+
     zo_callLater(ReactivateLootItemFailed, 100)
 end
