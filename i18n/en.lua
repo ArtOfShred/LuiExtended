@@ -297,7 +297,7 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_HARDLOCK_TP",                       "Hard-Lo
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_HARDLOCK_WARNING",                  "Will need to reload the UI.\nWhen this position is locked, you will not be able to move buffs.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_HEADER",                            "Buffs and Debuffs Options")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF",              "Hide GROUND Buffs and Debuffs")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF_TP",           "Prevents ground targeted effects from displaying..")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF_TP",           "Prevents ground targeted effects from displaying.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDETARGETBUFF",                    "Hide TARGET Buffs")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDETARGETBUFF_TP",                 "Prevents buffs on your target from displaying.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF",                  "Hide TARGET Debuffs")

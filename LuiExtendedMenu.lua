@@ -1038,7 +1038,16 @@ function LUIE_CreateSettings()
         name = GetString(SI_LUIE_LAM_CI_COMMON_HEADER),
         width = "full",
     }
-
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.HideTargetBuffs end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.HideTargetBuffs = value end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.HideTargetBuffs,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            }
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF),
