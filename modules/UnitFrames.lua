@@ -1368,7 +1368,7 @@ local function IsGuildMate(unitTag)
     if displayName == playerDisplayName then return end
     for i = 1, GetNumGuilds() do
         local guildId = GetGuildId(i)
-        if GetGuildMemberIndexFromDisplayName(guildId, displayName) ~= nil then 
+        if GetGuildMemberIndexFromDisplayName(guildId, displayName) ~= nil then
             return true
         end
     end

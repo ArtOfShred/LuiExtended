@@ -686,12 +686,11 @@ end
 function SCB.InitializeDisguise()
     g_effectsList.player1["DisguiseType"] = nil
     if g_currentDisguise ~= 0 and not SCB.SV.IgnoreDisguise then
-
         -- Hide from display if we have a costume or polymorph and the disguise is a guild tabard
         if g_currentDisguise == 55262 and (GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) > 0 or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME) > 0) then
             return
         end
-        
+
         -- Don't show Monk's Disguise since it already has an aura
         if g_currentDisguise == 79332 then
             return
@@ -761,11 +760,9 @@ function SCB.MountStatus(eventCode, mounted)
 end
 
 function SCB.CollectibleUsed(eventCode, result, isAttemptingActivation)
-
     local latency = GetLatency()
     latency = latency + 100
     zo_callLater (SCB.CollectibleBuff, latency)
-
 end
 
 function SCB.CollectibleBuff()
@@ -908,11 +905,8 @@ function SCB.CollectibleBuff()
 
 end
 
-
---[[
- * Sets horizontal alignment of icon. Called from Settings Menu.
- * This is done simply by setting of iconHolder anchor.
- ]]--
+-- Sets horizontal alignment of icon. Called from Settings Menu.
+-- This is done simply by setting of iconHolder anchor.
 function SCB.SetIconsAlignment( value )
     -- Check correctness of argument value
     if value ~= "Left" and value ~= "Centered" and value ~= "Right" then
@@ -1230,7 +1224,6 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
 end
 
 function SCB.CreateSingleIcon(container, AnchorItem)
-
     local buff = UI.Backdrop( uiTlw[container], nil, nil, {0,0,0,0.5}, {0,0,0,1}, false )
 
     -- Enable tooltip
@@ -1354,7 +1347,6 @@ end
  *   integer statusEffectType
  ]]--
 function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
-
     if SCB.SV.HideTargetBuffs and effectType == 1 and unitTag ~= "player" then
         return
     end
@@ -1496,7 +1488,6 @@ local IsResultDamage = {
  * As well as create fake buffs/debuffs for events with no active effect present.
  ]]--
 function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
-
     -- Ignore error events
     if isError then
         return
@@ -1553,7 +1544,6 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
 
     -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by player OR applied on target by player)
     if E.FakePlayerBuffs[abilityId] ~= nil then
-
         if abilityId == 973 and not SCB.SV.ShowSprint then
             return
         end
@@ -1785,12 +1775,10 @@ function SCB.ReloadEffects(unitTag)
             end
         end
     end
-
 end
 
 -- Process new ability buff effects
 function SCB.NewEffects( ability )
-
     -- Get the time
     local currentTime = GetGameTimeMilliseconds()
 
@@ -1820,9 +1808,7 @@ function SCB.NewEffects( ability )
                     }
                 end
             end
-
         end
-
     end
 end
 
@@ -1839,7 +1825,7 @@ function SCB.OnSlotAbilityUsed(eventCode, slotNum)
         -- Get the time
         local currentTime = GetGameTimeMilliseconds()
 
-        -- avoid failure and button mashing
+        -- Avoid failure and button mashing
         if not HasFailure( slotNum ) and ( currentTime > g_lastCast + 250 ) then
 
             -- Don't process effects immediately for ground-target spells
@@ -1862,7 +1848,6 @@ end
 -- Called from EVENT_ACTION_SLOT_UPDATED listener
 function SCB.OnSlotUpdated(eventCode, slotNum)
     --d( strfmt("%d: %s(%d)", slotNum, GetSlotName(slotNum), GetSlotBoundId(slotNum) ) )
-
     -- Look only for action bar slots
     if slotNum < 3 or slotNum > 8 then
         return
@@ -2246,7 +2231,6 @@ end
 -- Runs on the EVENT_STEALTH_STATE_CHANGED listener.
 -- Watches for changes in a stealth state to display custom buff icon
 function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
-
     if SCB.SV.StealthStatePlayer and unitTag == "player" then
         if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
             -- Trigger a buff
@@ -2285,7 +2269,6 @@ function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
 end
 
 function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
-
     if SCB.SV.DisguiseStatePlayer and unitTag == "player" then
         if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
             -- Trigger a buff
@@ -2330,8 +2313,12 @@ function SCB.OnPlayerActivated(eventCode)
     g_playerActive = true
     g_playerResurectStage = nil
 
-    if not SCB.SV.IgnoreMount and IsMounted() then zo_callLater(function() SCB.MountStatus(eventCode, true) end , 50) end
-    if not SCB.SV.IgnoreDisguise then zo_callLater(SCB.InitializeDisguise, 50) end
+    if not SCB.SV.IgnoreMount and IsMounted() then 
+        zo_callLater(function() SCB.MountStatus(eventCode, true) end , 50)
+    end
+    if not SCB.SV.IgnoreDisguise then 
+        zo_callLater(SCB.InitializeDisguise, 50)
+    end
 
     if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0
     or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0
