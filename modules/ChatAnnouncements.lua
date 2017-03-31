@@ -4472,17 +4472,14 @@ function CA.OnAchievementUpdated(eventCode, aId)
 end
 
 function CA.GuildBankItemAdded(eventCode, slotId)
-    CA.LogItem(g_guildBankCarryLogPrefix, g_guildBankCarryIcon, g_guildBankCarryItemLink, g_guildBankCarryItemType, g_guildBankCarryStackCount or 1, g_guildBankCarryReceivedBy, g_guildBankCarryGainorloss)
-    g_guildBankCarryLogPrefix   = ""
-    g_guildBankCarryIcon        = ""
-    g_guildBankCarryItemLink    = ""
-    g_guildBankCarryStackCount  = 1
-    g_guildBankCarryReceivedBy  = ""
-    g_guildBankCarryGainorloss  = ""
-    g_guildBankCarryItemType    = ""
+    zo_callLater(CA.LogGuildBankChange, 50)
 end
 
 function CA.GuildBankItemRemoved(eventCode, slotId)
+    zo_callLater(CA.LogGuildBankChange, 50)
+end
+
+function CA.LogGuildBankChange()
     CA.LogItem(g_guildBankCarryLogPrefix, g_guildBankCarryIcon, g_guildBankCarryItemLink, g_guildBankCarryItemType, g_guildBankCarryStackCount or 1, g_guildBankCarryReceivedBy, g_guildBankCarryGainorloss)
     g_guildBankCarryLogPrefix   = ""
     g_guildBankCarryIcon        = ""
@@ -4733,7 +4730,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             -- Means item was modified (enchanted, etc)
             if stackCountChange == 0 then -- For equipment, stackCountChange 0 is also applied when gear is swapped out. This means we need to update the index on this change.
                 unequipHelper = true
-                zo_callLater (CA.UpdateUnequipHelperValue, 100)
+                zo_callLater (CA.UpdateUnequipHelperValue, 250)
                 local icon, stack = GetItemInfo(bagId, slotId)
                 local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                 g_equippedStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
@@ -4762,7 +4759,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                 g_equippedStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
                 unequipHelper = true
-                zo_callLater (CA.UpdateUnequipHelperValue, 100)
+                zo_callLater (CA.UpdateUnequipHelperValue, 250)
                 local gainorloss = 3
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_UNEQUIP)
                 local change = (stackCountChange * -1)
@@ -4935,6 +4932,10 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
         logPrefixNeg = g_smithing_prefix_neg[g_smithing.GetMode()]
     end
     local receivedBy = "CRAFT"
+    
+    -- New Error Checker
+    if logPrefixPos == nil then logPrefixPos = "GET MODE ERROR" end
+    if logPrefixNeg == nil then logPrefixNeg = "GET MODE ERROR" end
 
     ---------------------------------- INVENTORY ----------------------------------
     if bagId == BAG_BACKPACK then

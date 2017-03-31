@@ -107,6 +107,7 @@ UF.D = {
     GroupBarHeight                   = 36,
     GroupBarSpacing                  = 40,
     CustomFramesRaid                 = true,
+    RaidNameClip                     = 94,
     RaidDisableDefault               = true,
     RaidBarWidth                     = 200,
     RaidBarHeight                    = 30,
@@ -2915,29 +2916,28 @@ function UF.CustomFramesApplyLayoutRaid()
         unitFrame.control:ClearAnchors()
         unitFrame.control:SetAnchor( TOPLEFT, raid, TOPLEFT, UF.SV.RaidBarWidth*column, UF.SV.RaidBarHeight*(row-1) + (UF.SV.RaidSpacers and spacerHeight*(math.floor((i-1)/4)-math.floor(column*itemsPerColumn/4)) or 0) )
         unitFrame.control:SetDimensions( UF.SV.RaidBarWidth, UF.SV.RaidBarHeight )
-
+        
         if UF.SV.RoleIconRaid then
-            unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-111, UF.SV.RaidBarHeight-2 )
+            unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
             unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
         else
-            unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-94, UF.SV.RaidBarHeight-2 )
+            unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip, UF.SV.RaidBarHeight-2 )
             unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 5, 0 )
         end
         unitFrame.roleIcon:SetHidden (not UF.SV.RoleIconRaid)
 
         if IsUnitGroupLeader(unitTag) then
-            unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-111, UF.SV.RaidBarHeight-2 )
+            unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
             unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
             unitFrame.roleIcon:SetHidden (true)
             unitFrame.leader:SetTexture(leaderIcons[1])
         else
             unitFrame.leader:SetTexture(leaderIcons[0])
         end
-
-        unitFrame.dead:SetDimensions( 75, UF.SV.RaidBarHeight-2 )
-
+        
+        unitFrame.dead:SetDimensions(UF.SV.RaidBarWidth-50, UF.SV.RaidBarHeight-2)
+        
         unitFrame[POWERTYPE_HEALTH].label:SetDimensions(UF.SV.RaidBarWidth-50, UF.SV.RaidBarHeight-2)
-
     end
 
     raid:SetHidden( false )

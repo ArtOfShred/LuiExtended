@@ -855,6 +855,8 @@ ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_DEFFRAMESENABLE",            "Enable 
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_DEFFRAMESENABLE_TP",         "This will show default UI RAID unit frames when group size is larger then 4.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_WIDTH",                      "Raid Bars Width")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_HEIGHT",                     "Raid Bars Height")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_NAMECLIP",                   "Raid Name Clip Location")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_NAMECLIP_TP",                "Due to the inability to detect the length of the hit point value, you can use this setting to manually change where the name is clipped on raid frames in order to prevent overlap.")                                         
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_LAYOUT",                     "Raid Frame Layout")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_LAYOUT_TP",                  "Select layout of raid frame in format 'columns*rows'.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESR_SPACER",                     "Add Spacer for every 4 members")

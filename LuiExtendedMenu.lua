@@ -4146,6 +4146,20 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.RaidBarHeight,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
     }
+    
+  optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "slider",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESR_NAMECLIP),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_NAMECLIP_TP),
+        min = 0, max = 200, step = 1,
+        getFunc = function() return LUIE.UnitFrames.SV.RaidNameClip end,
+        setFunc = function(value) LUIE.UnitFrames.SV.RaidNameClip = value LUIE.UnitFrames.CustomFramesApplyLayoutRaid() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.RaidNameClip,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
+    }  
+    
+    
     -- Raid Frame Layout
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
