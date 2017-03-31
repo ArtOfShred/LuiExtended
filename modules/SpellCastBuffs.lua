@@ -131,10 +131,11 @@ local v_horizAlign = MIDDLE
 local g_horizSortInvert = false
 
 -- Some optimization
-local strHidden     = A.Effect_Hidden
-local strDisguise   = GetString(SI_DISGUISE_DISGUISED)
-local strMounted    = GetString(SI_LUIE_SCB_MOUNTED)
-local iconMounted   = "LuiExtended/media/icons/mounts/mount_palomino_horse.dds"
+local strHidden     =   A.Effect_Hidden
+local strBossImmunity = A.Effect_CC_Immunity
+local strDisguise   =   GetString(SI_DISGUISE_DISGUISED)
+local strMounted    =   GetString(SI_LUIE_SCB_MOUNTED)
+local iconMounted   =   "LuiExtended/media/icons/mounts/mount_palomino_horse.dds"
 
 local abilityRouting = { "player1", "player2", "ground" }
 
@@ -1722,6 +1723,19 @@ function SCB.ReloadEffects(unitTag)
             end
         end
         SCB.OnEffectChanged(0, 3, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0--[[unitId]], abilityId, castByPlayer)
+    end
+    
+    if not SCB.SV.HideTargetBuffs then
+        local unitName = GetUnitName(unitTag)
+        -- We need to check to make sure the mob is not dead, and also check to make sure the unitTag is not the player (just in case someones name exactly matches that of a boss NPC)
+        if E.IsBossMob[unitName] and not IsUnitDead(unitTag) and not unitTag == "player" then
+            g_effectsList.reticleover1[ "Boss CC Immunity" ] = {
+            type=1,
+            name=strBossImmunity, icon="LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds",
+            dur=0, starts=1, ends=nil,
+            forced = "short",
+            restart=true, iconNum=0 }
+        end
     end
 
     -- create custom buff icon for Recall Cooldown effect

@@ -633,6 +633,7 @@ A.Equip_Para_Bellum                 = 71193
 -- ---------------------------------------------------
 
 A.Effect_Hidden                     = 20309
+A.Effect_CC_Immunity                = 38117
 A.Skill_Light_Attack                = 7880
 A.Skill_Heavy_Attack                = 7095
 A.Skill_Heavy_Attack_Dual_Wield     = 16420

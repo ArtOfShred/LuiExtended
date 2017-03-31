@@ -190,15 +190,16 @@ E.AbilityIcon = {
     [A.Effect_Fall_Snare]               = '/esoui/art/icons/death_recap_fall_damage.dds',
     ['Feed']                            = '/esoui/art/icons/ability_vampire_002.dds', -- EN,FR
     [A.Effect_Magicka_Bomb]            = '/esoui/art/icons/death_recap_magic_ranged.dds', -- EN
-    [A.Effect_Surge_Heal]               = '/esoui/art/icons/ability_sorcerer_critical_surge.dds',
-    [A.Effect_Dark_Exchange_Heal]       = '/esoui/art/icons/ability_sorcerer_dark_exchange.dds',
-    [A.Skill_Dark_Exchange]             = '/esoui/art/icons/ability_sorcerer_dark_exchange.dds',
+    --[A.Effect_Surge_Heal]               = '/esoui/art/icons/ability_sorcerer_critical_surge.dds',
+    --[A.Effect_Dark_Exchange_Heal]       = '/esoui/art/icons/ability_sorcerer_dark_exchange.dds',
+    --[A.Skill_Dark_Exchange]             = '/esoui/art/icons/ability_sorcerer_dark_exchange.dds',
     ['Blood Magic']                     = '/esoui/art/icons/ability_mage_026.dds', -- EN, ?
-    [A.Skill_Grand_Healing]             = '/esoui/art/icons/ability_restorationstaff_003.dds',
-    [A.Skill_Healing_Ward]              = '/esoui/art/icons/ability_restorationstaff_001_a.dds',
-    [A.Skill_Quick_Siphon]              = '/esoui/art/icons/ability_restorationstaff_005_b.dds',
+    --[A.Skill_Grand_Healing]             = '/esoui/art/icons/ability_restorationstaff_003.dds',
+    --[A.Skill_Healing_Ward]              = '/esoui/art/icons/ability_restorationstaff_001_a.dds',
+    --[A.Skill_Quick_Siphon]              = '/esoui/art/icons/ability_restorationstaff_005_b.dds',
     [A.Passive_Invigorating_Bash]       = '/esoui/art/icons/ability_warrior_026.dds',
-    -- Temp Major/Minor Buffs before ZOS update adds them
+    -- Temp Major/Minor Buffs before ZOS update adds them 
+    --[[
     ['Empower']                         = 'esoui/art/icons/ability_buff_major_empower.dds',
     ['Major Berserk']                   = 'esoui/art/icons/ability_buff_major_berserk.dds',
     ['Major Brutality']                 = 'esoui/art/icons/ability_buff_major_brutality.dds',
@@ -262,6 +263,7 @@ E.AbilityIcon = {
     ['Minor Mangle']                    = 'esoui/art/icons/ability_debuff_minor_mangle.dds',
     ['Minor Uncertainty']               = 'esoui/art/icons/ability_debuff_minor_uncertainty.dds',
     ['Minor Vulnerability']             = 'esoui/art/icons/ability_debuff_minor_vulnerability.dds',
+    ]]--
 }
 
 -- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY ID
@@ -619,6 +621,13 @@ E.CostumeIcons = {
     ['Winterborn Shaman\'s Costume']     = 'LuiExtended/media/icons/costumes/costume_winterborn_shamans_costume.dds',
     ['Winterborn Warrior\'s Costume']    = 'LuiExtended/media/icons/costumes/costume_winterborn_warriors_costume.dds',
     ['Wood Elf Vanguard']                = 'LuiExtended/media/icons/costumes/costume_wood_elf_vanguard.dds',
+}
+
+E.IsBossMob = {
+
+    ['War Chief Ozozai'] = true,
+    ['Broodbirther'] = true,
+
 }
 
 E.EffectTypeOverride = {
@@ -1161,6 +1170,7 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [21973] = '', -- Bash (Hides icon for interrupt)
     [21971] = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', -- Bash Stun (Stun from bashing cast)
     [2727] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off-Balance
+    [45982] = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', -- Bash Stun (Stun from bashing cast when NPC is pinned against an obstacle)
     [20172] = 'LuiExtended/media/icons/abilities/ability_innate_off-balance_exploit.dds', -- Off-Balance Exploit
     [16566] = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', -- CC Immunity
     [16593] = 'LuiExtended/media/icons/abilities/ability_innate_melee_snare.dds', -- Melee Snare
@@ -1188,7 +1198,28 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
 
     [29476] = 'LuiExtended/media/icons/abilities/ability_dragonknight_helping_hands.dds', -- Kynareth's Blessing (Helping Hands - Rank 1)
     [45010] = 'LuiExtended/media/icons/abilities/ability_dragonknight_helping_hands.dds', -- Kynareth's Blessing (Helping Hands - Rank 2)
-
+    
+    
+    ----------------------------------------------------------------
+    -- DRAGONKNIGHT ACTIVE ABILITIES -------------------------------
+    ----------------------------------------------------------------
+    
+    -- Lava Whip
+    [23808] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off Balance (Lava Whip - Rank 1)
+    [20804] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off Balance (Lava Whip - Rank 2)
+    [23810] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off Balance (Lava Whip - Rank 3)
+    [23812] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off Balance (Lava Whip - Rank 4)
+    
+    -- Spiked Armor
+    [61815] = 'esoui/art/icons/ability_buff_major_resolve.dds', -- Major Resolve (Spiked Armor - Rank 1)
+    [61816] = 'esoui/art/icons/ability_buff_major_ward.dds', -- Major Ward (Spiked Armor - Rank 1)
+    [61820] = 'esoui/art/icons/ability_buff_major_resolve.dds', -- Major Resolve (Spiked Armor - Rank 2)
+    [61821] = 'esoui/art/icons/ability_buff_major_ward.dds', -- Major Ward (Spiked Armor - Rank 2)
+    [61823] = 'esoui/art/icons/ability_buff_major_resolve.dds', -- Major Resolve (Spiked Armor - Rank 3)
+    [61824] = 'esoui/art/icons/ability_buff_major_ward.dds', -- Major Ward (Spiked Armor - Rank 3)
+    [61825] = 'esoui/art/icons/ability_buff_major_resolve.dds', -- Major Resolve (Spiked Armor - Rank 4)
+    [61826] = 'esoui/art/icons/ability_buff_major_ward.dds', -- Major Ward (Spiked Armor - Rank 4)
+    
     ----------------------------------------------------------------
     -- SORCERER PASSIVES -------------------------------------------
     ----------------------------------------------------------------
@@ -1470,6 +1501,7 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
 
     -- SHARED NPC PASSIVES
     [33097] = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', -- Scary Immunities
+    [44176] = 'LuiExtended/media/icons/abilities/ability_innate_flying_immunities.dds', -- Flying Immunities
     [13739] = 'esoui/art/icons/ability_rogue_046.dds', -- Backstabber
 
     -- SHARED NPC ACTIVE EVENTS
@@ -2390,6 +2422,22 @@ E.EffectNameOverride = {
     ----------------------------------------------------------------
     -- DRAGONKNIGHT PASSIVES ---------------------------------------
     ----------------------------------------------------------------
+    
+    ----------------------------------------------------------------
+    -- DRAGONKNIGHT ACTIVE ABILITIES -------------------------------
+    ----------------------------------------------------------------
+    
+    -- Lava Whip
+    [23808] = 'Off-Balance', -- Off Balance (Lava Whip - Rank 1)
+    [20804] = 'Off-Balance', -- Off Balance (Lava Whip - Rank 2)
+    [23810] = 'Off-Balance', -- Off Balance (Lava Whip - Rank 3)
+    [23812] = 'Off-Balance', -- Off Balance (Lava Whip - Rank 4)
+    
+    -- Spiked Armor
+    [20320] = 'Spiked Armor', -- Spiked Armor Damage Return (Spiked Armor - Rank 1)
+    [23823] = 'Spiked Armor', -- Spiked Armor Damage Return (Spiked Armor - Rank 2)
+    [23826] = 'Spiked Armor', -- Spiked Armor Damage Return (Spiked Armor - Rank 3)
+    [23829] = 'Spiked Armor', -- Spiked Armor Damage Return (Spiked Armor - Rank 4)
 
     ----------------------------------------------------------------
     -- SORCERER PASSIVES -------------------------------------------
@@ -2542,6 +2590,7 @@ E.EffectNameOverride = {
 
     -- SHARED NPC PASSIVES
     [33097] = 'CC Immunity', -- Scary Immunities
+    [44176] = 'Flying Immunity', -- Flying Immunities
     --[13739] = 'Deal Extra Damage from Behind', -- Backstabber
 
     -- SHARED NPC ACTIVE EVENTS
@@ -2812,7 +2861,6 @@ E.IsAbilityIgnoredById = { --Remove an ability from display by abilityId
 
     -- BASIC NPC ABILITIES
     [67950] = true, -- CC Immunity Plus
-    [44176] = true, -- Flying Immunities
     [88283] = true, -- No Call Ally (is Ally)
     [88289] = true, -- No Call Ally (Failed)
     [89175] = true, -- No Call Ally 1:1 Ally Tracker
