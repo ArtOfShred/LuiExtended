@@ -131,10 +131,11 @@ local v_horizAlign = MIDDLE
 local g_horizSortInvert = false
 
 -- Some optimization
-local strHidden     = A.Effect_Hidden
-local strDisguise   = GetString(SI_DISGUISE_DISGUISED)
-local strMounted    = GetString(SI_LUIE_SCB_MOUNTED)
-local iconMounted   = "LuiExtended/media/icons/mounts/mount_palomino_horse.dds"
+local strHidden     =   A.Effect_Hidden
+local strBossImmunity = A.Effect_CC_Immunity
+local strDisguise   =   GetString(SI_DISGUISE_DISGUISED)
+local strMounted    =   GetString(SI_LUIE_SCB_MOUNTED)
+local iconMounted   =   "LuiExtended/media/icons/mounts/mount_palomino_horse.dds"
 
 local abilityRouting = { "player1", "player2", "ground" }
 
@@ -175,6 +176,22 @@ end
 
 local Effects = {
 
+    -- RESORTED
+    
+    -- Resto Staff
+    [A.Skill_Grand_Healing]         = { true, false, false, nil }, -- ACCURATE
+    
+    -- Destro Staff
+    [A.Skill_Wall_of_Fire]            = { false, false, 6.6, nil }, -- ACCURATE
+    [A.Skill_Wall_Of_Storms]          = { false, false, 6.6, nil }, -- ACCURATE
+    [A.Skill_Wall_of_Frost]           = { false, false, 6.6, nil }, -- ACCURATE
+    
+    -- Dragonknight
+    [A.Skill_Dragonknight_Standard] = { false, false, true, nil },
+    
+    
+    -- NEEDS TO BE RESORTED STILL:
+
     -----------------------------------
     -- WEAPON SKILLS
     -----------------------------------
@@ -185,18 +202,14 @@ local Effects = {
     [A.Skill_Arrow_Barrage]         = { false, false, true, 2 },
 
     -- Destro Staff
-    [A.Skill_Wall_of_Fire]            = { false, false, 6.4, nil },
-    [A.Skill_Wall_Of_Storms]          = { false, false, 6.4, nil },
-    [A.Skill_Wall_of_Frost]           = { false, false, 6.4, nil },
-    [A.Skill_Unstable_Wall_of_Fire]   = { false, false, 6.4, nil },
-    [A.Skill_Unstable_Wall_of_Frost]  = { false, false, 6.4, nil },
-    [A.Skill_Unstable_Wall_of_Storms] = { false, false, 6.4, nil }, -- Tested these values manually to make them as close to accurate as possible
-    [A.Skill_Blockade_of_Fire]        = { false, false, 8.3, nil },
-    [A.Skill_Blockade_of_Frost]       = { false, false, 8.3, nil },
-    [A.Skill_Blockade_of_Storms]      = { false, false, 8.3, nil },
+    [A.Skill_Unstable_Wall_of_Fire]   = { false, false, 6.6, nil }, -- ACCURATE
+    [A.Skill_Unstable_Wall_of_Frost]  = { false, false, 6.6, nil }, -- ACCURATE
+    [A.Skill_Unstable_Wall_of_Storms] = { false, false, 6.6, nil }, -- ACCURATE
+    [A.Skill_Blockade_of_Fire]        = { false, false, 8.3, nil }, -- CHECK THESE VALUES
+    [A.Skill_Blockade_of_Frost]       = { false, false, 8.3, nil }, -- CHECK THESE VALUES
+    [A.Skill_Blockade_of_Storms]      = { false, false, 8.3, nil }, -- CHECK THESE VALUES
 
     -- Resto Staff
-    [A.Skill_Grand_Healing]         = { true, false, false, nil },
     [A.Skill_Healing_Springs]       = { true, false, false, nil }, -- Possibly Hide later, hard to account for cast time, only cast time is the animation which can be anim cancelled
     [A.Skill_Illustrious_Healing]   = { true, false, false, nil },
 
@@ -228,7 +241,6 @@ local Effects = {
     -----------------------------------
 
     -- Ardent Flame
-    [A.Skill_Dragonknight_Standard] = { false, false, true, nil },
     [A.Skill_Shifting_Standard]     = { false, false, true, nil }, -- This is the new standard effect fired when moving Shifting Standard
     [A.Skill_Shift_Standard]        = { false, false, true, nil }, -- Would be better to add these as a fake aura later - Standard doesn't go away when you cast shifting
     [A.Skill_Standard_of_Might]     = { true, false, true, nil }, -- Also if mob dies before banner ends, the banner stops but icon persists
@@ -343,6 +355,22 @@ local HasAbilityProc = {
 }
 
 local IsAbilityCustomToggle = {
+
+    -- RESORTED:
+    
+    --Resto Staff
+    --[A.Skill_Grand_Healing]        = true, -- Doesn't work, no effect related to it
+    
+    [A.Skill_Regeneration]           = true,
+    
+    --Dragonknight Skills (Draconic Power)
+    [A.Skill_Spiked_Armor]          = true,
+    
+    --Dragonknight Skills (Earthen Heart)
+    [A.Skill_Molten_Weapons]           = true,
+    
+    -- HAS NOT BEEN RESORTED YET:
+
     --Sorceror Skills (Dark Magic)
     --[A.Skill_Defensive_Rune]        = true, -- Doesn't work because of no aura, would be nice to have this highlight if possible.
 
@@ -365,7 +393,6 @@ local IsAbilityCustomToggle = {
     [A.Skill_Cauterize]             = true,
 
     --Dragonknight Skills (Draconic Power)
-    [A.Skill_Spiked_Armor]          = true,
     [A.Skill_Volatile_Armor]        = true,
     [A.Skill_Hardened_Armor]        = true, -- Cut short by short duration shield effect
     --[A.Skill_Dragon_Blood]            = true,
@@ -376,7 +403,6 @@ local IsAbilityCustomToggle = {
     [A.Skill_Dragon_Fire_Scale]     = true,
 
     --Dragonknight Skills (Earthen Heart)
-    [A.Skill_Molten_Weapons]           = true,
     [A.Skill_Igneous_Weapons]          = true,
     [A.Skill_Molten_Armaments]         = true,
     [A.DamageShield_Obsidian_Shield]   = true,
@@ -433,10 +459,8 @@ local IsAbilityCustomToggle = {
     --Bow - Possibly scatter shot indicator?
 
     --Resto Staff
-    --[A.Skill_Grand_Healing]          = true, -- Doesn't work, no effect related to it
     --[A.Skill_Healing_Springs]        = true, -- Doesn't work, no effect related to it
     --[A.Skill_Illustrious_Healing]    = true, -- Doesn't work, no effect related to it
-    [A.Skill_Regeneration]           = true,
     [A.Skill_Mutagen]                = true,
     [A.Skill_Rapid_Regeneration]     = true,
     -- Blessing of Protection + Morphs (not sure how to fix this, base effect is short duration)
@@ -1723,6 +1747,19 @@ function SCB.ReloadEffects(unitTag)
         end
         SCB.OnEffectChanged(0, 3, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0--[[unitId]], abilityId, castByPlayer)
     end
+    
+    if not SCB.SV.HideTargetBuffs then
+        local unitName = GetUnitName(unitTag)
+        -- We need to check to make sure the mob is not dead, and also check to make sure the unitTag is not the player (just in case someones name exactly matches that of a boss NPC)
+        if E.IsBossMob[unitName] and not IsUnitDead(unitTag) and not unitTag == "player" then
+            g_effectsList.reticleover1[ "Boss CC Immunity" ] = {
+            type=1,
+            name=strBossImmunity, icon="LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds",
+            dur=0, starts=1, ends=nil,
+            forced = "short",
+            restart=true, iconNum=0 }
+        end
+    end
 
     -- create custom buff icon for Recall Cooldown effect
     if SCB.SV.ShowRecall and unitTag == "player" then
@@ -1938,7 +1975,7 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
                 SCB.ShowCustomToggle(slotNum)
             end
         end
-    end
+    end       
 end
 
 function SCB.OnSlotsFullUpdate(eventCode, isHotbarSwap)

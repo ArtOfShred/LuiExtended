@@ -613,7 +613,6 @@ A.Boon_Tower                        = 13985
 -- ---------------------------------------------------
 
 A.Passive_SoulSummons               = 39269
-A.Passive_Invigorating_Bash         = 60407 --, 60409
 --A.Passive_Intercept               = 23284
 A.Passive_SoulSiphoner              = 36603
 
@@ -633,6 +632,7 @@ A.Equip_Para_Bellum                 = 71193
 -- ---------------------------------------------------
 
 A.Effect_Hidden                     = 20309
+A.Effect_CC_Immunity                = 38117
 A.Skill_Light_Attack                = 7880
 A.Skill_Heavy_Attack                = 7095
 A.Skill_Heavy_Attack_Dual_Wield     = 16420
@@ -649,7 +649,6 @@ A.Effect_Poisoned                   = 776
 A.Effect_Diseased                   = 21925
 A.Effect_Bleeding                   = 8398
 A.Effect_Armor_Shatter              = 75071
-A.Effect_Fall_Snare                 = 10950
 
 -- Sanctum Ophidia
 A.Effect_Magicka_Bomb               = 59036

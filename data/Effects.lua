@@ -171,6 +171,7 @@ E.IsTaunt = {
 -- Abilities icons that has to be override the API value returned by GetAbilityIcon(abilityId)
 -- List only contains English names. Other languages will use game provided icons
 E.AbilityIcon = {
+    --[[
     -- Currencies icons
     ['Money']                           = '/EsoUI/Art/Icons/Item_Generic_CoinBag.dds',
     ['Alliance Points']                 = '/EsoUI/Art/Icons/Icon_AlliancePoints.dds',
@@ -183,22 +184,16 @@ E.AbilityIcon = {
     ['Twin Slashes Bleed']              = 'esoui/art/icons/ability_dualwield_001.dds',
     ['Rending Slashes Bleed']           = 'esoui/art/icons/ability_dualwield_001_a.dds',
     ['Blood Craze Bleed']               = 'esoui/art/icons/ability_dualwield_001_b.dds',
-    -- Various misc abilities TEMP (until individual replacements can be done, a lot of these work regardless)
-    -- Bla bla add shit here for Rally, Dark Exchange, etc before release!
-    -- End various misc abilities TEMP
-    -- Most of this other stuff should be deprecated!
-    [A.Effect_Fall_Snare]               = '/esoui/art/icons/death_recap_fall_damage.dds',
     ['Feed']                            = '/esoui/art/icons/ability_vampire_002.dds', -- EN,FR
     [A.Effect_Magicka_Bomb]            = '/esoui/art/icons/death_recap_magic_ranged.dds', -- EN
     [A.Effect_Surge_Heal]               = '/esoui/art/icons/ability_sorcerer_critical_surge.dds',
     [A.Effect_Dark_Exchange_Heal]       = '/esoui/art/icons/ability_sorcerer_dark_exchange.dds',
     [A.Skill_Dark_Exchange]             = '/esoui/art/icons/ability_sorcerer_dark_exchange.dds',
     ['Blood Magic']                     = '/esoui/art/icons/ability_mage_026.dds', -- EN, ?
-    [A.Skill_Grand_Healing]             = '/esoui/art/icons/ability_restorationstaff_003.dds',
     [A.Skill_Healing_Ward]              = '/esoui/art/icons/ability_restorationstaff_001_a.dds',
     [A.Skill_Quick_Siphon]              = '/esoui/art/icons/ability_restorationstaff_005_b.dds',
-    [A.Passive_Invigorating_Bash]       = '/esoui/art/icons/ability_warrior_026.dds',
-    -- Temp Major/Minor Buffs before ZOS update adds them
+    ]]--
+    -- Temp Major/Minor Buffs before ZOS update adds them 
     ['Empower']                         = 'esoui/art/icons/ability_buff_major_empower.dds',
     ['Major Berserk']                   = 'esoui/art/icons/ability_buff_major_berserk.dds',
     ['Major Brutality']                 = 'esoui/art/icons/ability_buff_major_brutality.dds',
@@ -619,6 +614,13 @@ E.CostumeIcons = {
     ['Winterborn Shaman\'s Costume']     = 'LuiExtended/media/icons/costumes/costume_winterborn_shamans_costume.dds',
     ['Winterborn Warrior\'s Costume']    = 'LuiExtended/media/icons/costumes/costume_winterborn_warriors_costume.dds',
     ['Wood Elf Vanguard']                = 'LuiExtended/media/icons/costumes/costume_wood_elf_vanguard.dds',
+}
+
+E.IsBossMob = {
+
+    ['War Chief Ozozai'] = true,
+    ['Broodbirther'] = true,
+
 }
 
 E.EffectTypeOverride = {
@@ -1161,6 +1163,7 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [21973] = '', -- Bash (Hides icon for interrupt)
     [21971] = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', -- Bash Stun (Stun from bashing cast)
     [2727] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off-Balance
+    [45982] = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', -- Bash Stun (Stun from bashing cast when NPC is pinned against an obstacle)
     [20172] = 'LuiExtended/media/icons/abilities/ability_innate_off-balance_exploit.dds', -- Off-Balance Exploit
     [16566] = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', -- CC Immunity
     [16593] = 'LuiExtended/media/icons/abilities/ability_innate_melee_snare.dds', -- Melee Snare
@@ -1188,7 +1191,19 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
 
     [29476] = 'LuiExtended/media/icons/abilities/ability_dragonknight_helping_hands.dds', -- Kynareth's Blessing (Helping Hands - Rank 1)
     [45010] = 'LuiExtended/media/icons/abilities/ability_dragonknight_helping_hands.dds', -- Kynareth's Blessing (Helping Hands - Rank 2)
-
+    
+    ----------------------------------------------------------------
+    -- DRAGONKNIGHT ACTIVE ABILITIES -------------------------------
+    ----------------------------------------------------------------
+    
+    -- Lava Whip
+    [23808] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off Balance (Lava Whip - Rank 1)
+    [20804] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off Balance (Lava Whip - Rank 2)
+    [23810] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off Balance (Lava Whip - Rank 3)
+    [23812] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off Balance (Lava Whip - Rank 4)
+    
+    [29230] = 'esoui/art/icons/ability_debuff_major_defile.dds', -- Major Deflie (Dragonknight Standard - Rank 1)
+    
     ----------------------------------------------------------------
     -- SORCERER PASSIVES -------------------------------------------
     ----------------------------------------------------------------
@@ -1347,6 +1362,24 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [77922] = 'LuiExtended/media/icons/abilities/ability_restorationstaff_essence_drain.dds', -- Major Mending (Essence Drain - Rank 2)
     [30971] = 'LuiExtended/media/icons/abilities/ability_restorationstaff_absorb.dds', -- Absorb (Rank 1)
     [45522] = 'LuiExtended/media/icons/abilities/ability_restorationstaff_absorb.dds', -- Absorb (Rank 2)
+    
+    ----------------------------------------------------------------
+    -- PLAYER ACTIVES WEAPONS --------------------------------------
+    ----------------------------------------------------------------
+    
+    -- Destruction Staff
+    [68719] = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', -- Frozen (Wall of Elements - All Ranks) -- Frost
+    
+    [62968] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Wall of Storms (Wall of Elements - Rank 1) -- Lightning
+    [62973] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Wall of Storms (Wall of Elements - Rank 2) -- Lightning
+    [62978] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Wall of Storms (Wall of Elements - Rank 3) -- Lightning
+    [62983] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Wall of Storms (Wall of Elements - Rank 4) -- Lightning
+    
+    -- Restoration Staff
+    [28386] = 'esoui/art/icons/ability_restorationstaff_004.dds', -- Grand Healing (Grand Healing - Rank 1)
+    [41245] = 'esoui/art/icons/ability_restorationstaff_004.dds', -- Grand Healing (Grand Healing - Rank 2)
+    [41247] = 'esoui/art/icons/ability_restorationstaff_004.dds', -- Grand Healing (Grand Healing - Rank 3)
+    [41249] = 'esoui/art/icons/ability_restorationstaff_004.dds', -- Grand Healing (Grand Healing - Rank 4)
 
     ----------------------------------------------------------------
     -- PLAYER PASSIVES ARMOR ---------------------------------------
@@ -1470,6 +1503,7 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
 
     -- SHARED NPC PASSIVES
     [33097] = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', -- Scary Immunities
+    [44176] = 'LuiExtended/media/icons/abilities/ability_innate_flying_immunities.dds', -- Flying Immunities
     [13739] = 'esoui/art/icons/ability_rogue_046.dds', -- Backstabber
 
     -- SHARED NPC ACTIVE EVENTS
@@ -2390,6 +2424,24 @@ E.EffectNameOverride = {
     ----------------------------------------------------------------
     -- DRAGONKNIGHT PASSIVES ---------------------------------------
     ----------------------------------------------------------------
+    
+    ----------------------------------------------------------------
+    -- DRAGONKNIGHT ACTIVE ABILITIES -------------------------------
+    ----------------------------------------------------------------
+    
+    -- Lava Whip
+    [23808] = 'Off-Balance', -- Off Balance (Lava Whip - Rank 1)
+    [20804] = 'Off-Balance', -- Off Balance (Lava Whip - Rank 2)
+    [23810] = 'Off-Balance', -- Off Balance (Lava Whip - Rank 3)
+    [23812] = 'Off-Balance', -- Off Balance (Lava Whip - Rank 4)
+    
+    -- Spiked Armor
+    [20320] = 'Spiked Armor', -- Spiked Armor Damage Return (Spiked Armor - Rank 1)
+    [23823] = 'Spiked Armor', -- Spiked Armor Damage Return (Spiked Armor - Rank 2)
+    [23826] = 'Spiked Armor', -- Spiked Armor Damage Return (Spiked Armor - Rank 3)
+    [23829] = 'Spiked Armor', -- Spiked Armor Damage Return (Spiked Armor - Rank 4)
+    
+    [29230] = 'Major Defile', -- Major Deflie (Dragonknight Standard - Rank 1)
 
     ----------------------------------------------------------------
     -- SORCERER PASSIVES -------------------------------------------
@@ -2484,7 +2536,20 @@ E.EffectNameOverride = {
     [45505] = 'Tri Focus (Shock)', -- Shock (Tri Focus - Rank 2)
     [30966] = 'Destruction Expert', -- Magicka Restore (Destruction Expert - Rank 1)
     [45515] = 'Destruction Expert', -- Magicka Restore (Destruction Expert - Rank 2)
+    
+    ----------------------------------------------------------------
+    -- PLAYER ACTIVES WEAPONS --------------------------------------
+    ----------------------------------------------------------------
 
+    [62928] = 'Wall of Frost', -- Wall of Frost Snare (Wall of Elements - Rank 1) -- Frost
+    [62933] = 'Wall of Frost', -- Unstable Wall of Frost (Wall of Elements - Rank 2) -- Frost
+    [62938] = 'Wall of Frost', -- Unstable Wall of Frost (Wall of Elements - Rank 3) -- Frost
+    [62943] = 'Wall of Frost', -- Unstable Wall of Frost (Wall of Elements - Rank 4) -- Frost
+    
+    [62968] = 'Off-Balance', -- Wall of Storms (Wall of Elements - Rank 1) -- Lightning
+    [62973] = 'Off-Balance', -- Wall of Storms (Wall of Elements - Rank 2) -- Lightning
+    [62978] = 'Off-Balance', -- Wall of Storms (Wall of Elements - Rank 2) -- Lightning
+    [62983] = 'Off-Balance', -- Wall of Storms (Wall of Elements - Rank 2) -- Lightning
 
     ----------------------------------------------------------------
     -- PLAYER PASSIVES WORLD ----------------------------------------
@@ -2542,6 +2607,7 @@ E.EffectNameOverride = {
 
     -- SHARED NPC PASSIVES
     [33097] = 'CC Immunity', -- Scary Immunities
+    [44176] = 'Flying Immunity', -- Flying Immunities
     --[13739] = 'Deal Extra Damage from Behind', -- Backstabber
 
     -- SHARED NPC ACTIVE EVENTS
@@ -2812,7 +2878,6 @@ E.IsAbilityIgnoredById = { --Remove an ability from display by abilityId
 
     -- BASIC NPC ABILITIES
     [67950] = true, -- CC Immunity Plus
-    [44176] = true, -- Flying Immunities
     [88283] = true, -- No Call Ally (is Ally)
     [88289] = true, -- No Call Ally (Failed)
     [89175] = true, -- No Call Ally 1:1 Ally Tracker
