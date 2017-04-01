@@ -186,14 +186,23 @@ E.AbilityIcon = {
     ['Blood Craze Bleed']               = 'esoui/art/icons/ability_dualwield_001_b.dds',
     ['Feed']                            = '/esoui/art/icons/ability_vampire_002.dds', -- EN,FR
     [A.Effect_Magicka_Bomb]            = '/esoui/art/icons/death_recap_magic_ranged.dds', -- EN
-    [A.Effect_Surge_Heal]               = '/esoui/art/icons/ability_sorcerer_critical_surge.dds',
-    [A.Effect_Dark_Exchange_Heal]       = '/esoui/art/icons/ability_sorcerer_dark_exchange.dds',
-    [A.Skill_Dark_Exchange]             = '/esoui/art/icons/ability_sorcerer_dark_exchange.dds',
+    --[A.Effect_Surge_Heal]               = '/esoui/art/icons/ability_sorcerer_critical_surge.dds',
+    --[A.Effect_Dark_Exchange_Heal]       = '/esoui/art/icons/ability_sorcerer_dark_exchange.dds',
+    --[A.Skill_Dark_Exchange]             = '/esoui/art/icons/ability_sorcerer_dark_exchange.dds',
     ['Blood Magic']                     = '/esoui/art/icons/ability_mage_026.dds', -- EN, ?
+<<<<<<< HEAD
     [A.Skill_Healing_Ward]              = '/esoui/art/icons/ability_restorationstaff_001_a.dds',
     [A.Skill_Quick_Siphon]              = '/esoui/art/icons/ability_restorationstaff_005_b.dds',
     ]]--
     -- Temp Major/Minor Buffs before ZOS update adds them 
+=======
+    --[A.Skill_Grand_Healing]             = '/esoui/art/icons/ability_restorationstaff_003.dds',
+    --[A.Skill_Healing_Ward]              = '/esoui/art/icons/ability_restorationstaff_001_a.dds',
+    --[A.Skill_Quick_Siphon]              = '/esoui/art/icons/ability_restorationstaff_005_b.dds',
+    [A.Passive_Invigorating_Bash]       = '/esoui/art/icons/ability_warrior_026.dds',
+    -- Temp Major/Minor Buffs before ZOS update adds them 
+    --[[
+>>>>>>> origin/master
     ['Empower']                         = 'esoui/art/icons/ability_buff_major_empower.dds',
     ['Major Berserk']                   = 'esoui/art/icons/ability_buff_major_berserk.dds',
     ['Major Brutality']                 = 'esoui/art/icons/ability_buff_major_brutality.dds',
@@ -257,6 +266,7 @@ E.AbilityIcon = {
     ['Minor Mangle']                    = 'esoui/art/icons/ability_debuff_minor_mangle.dds',
     ['Minor Uncertainty']               = 'esoui/art/icons/ability_debuff_minor_uncertainty.dds',
     ['Minor Vulnerability']             = 'esoui/art/icons/ability_debuff_minor_vulnerability.dds',
+    ]]--
 }
 
 -- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY ID
@@ -1192,6 +1202,10 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [29476] = 'LuiExtended/media/icons/abilities/ability_dragonknight_helping_hands.dds', -- Kynareth's Blessing (Helping Hands - Rank 1)
     [45010] = 'LuiExtended/media/icons/abilities/ability_dragonknight_helping_hands.dds', -- Kynareth's Blessing (Helping Hands - Rank 2)
     
+<<<<<<< HEAD
+=======
+    
+>>>>>>> origin/master
     ----------------------------------------------------------------
     -- DRAGONKNIGHT ACTIVE ABILITIES -------------------------------
     ----------------------------------------------------------------
@@ -1202,7 +1216,19 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [23810] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off Balance (Lava Whip - Rank 3)
     [23812] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off Balance (Lava Whip - Rank 4)
     
+<<<<<<< HEAD
     [29230] = 'esoui/art/icons/ability_debuff_major_defile.dds', -- Major Deflie (Dragonknight Standard - Rank 1)
+=======
+    -- Spiked Armor
+    [61815] = 'esoui/art/icons/ability_buff_major_resolve.dds', -- Major Resolve (Spiked Armor - Rank 1)
+    [61816] = 'esoui/art/icons/ability_buff_major_ward.dds', -- Major Ward (Spiked Armor - Rank 1)
+    [61820] = 'esoui/art/icons/ability_buff_major_resolve.dds', -- Major Resolve (Spiked Armor - Rank 2)
+    [61821] = 'esoui/art/icons/ability_buff_major_ward.dds', -- Major Ward (Spiked Armor - Rank 2)
+    [61823] = 'esoui/art/icons/ability_buff_major_resolve.dds', -- Major Resolve (Spiked Armor - Rank 3)
+    [61824] = 'esoui/art/icons/ability_buff_major_ward.dds', -- Major Ward (Spiked Armor - Rank 3)
+    [61825] = 'esoui/art/icons/ability_buff_major_resolve.dds', -- Major Resolve (Spiked Armor - Rank 4)
+    [61826] = 'esoui/art/icons/ability_buff_major_ward.dds', -- Major Ward (Spiked Armor - Rank 4)
+>>>>>>> origin/master
     
     ----------------------------------------------------------------
     -- SORCERER PASSIVES -------------------------------------------
@@ -2440,8 +2466,11 @@ E.EffectNameOverride = {
     [23823] = 'Spiked Armor', -- Spiked Armor Damage Return (Spiked Armor - Rank 2)
     [23826] = 'Spiked Armor', -- Spiked Armor Damage Return (Spiked Armor - Rank 3)
     [23829] = 'Spiked Armor', -- Spiked Armor Damage Return (Spiked Armor - Rank 4)
+<<<<<<< HEAD
     
     [29230] = 'Major Defile', -- Major Deflie (Dragonknight Standard - Rank 1)
+=======
+>>>>>>> origin/master
 
     ----------------------------------------------------------------
     -- SORCERER PASSIVES -------------------------------------------
