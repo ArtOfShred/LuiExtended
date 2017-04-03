@@ -1202,7 +1202,36 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [23810] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off Balance (Lava Whip - Rank 3)
     [23812] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off Balance (Lava Whip - Rank 4)
     
+    [18032] = 'esoui/art/icons/ability_dragonknight_009.dds', -- Stun (Dragon Leap - All Ranks)
+    [29016] = 'esoui/art/icons/ability_dragonknight_009.dds', -- Dragon Leap (Dragon Leap - Rank 1)
+    [33654] = 'esoui/art/icons/ability_dragonknight_009.dds', -- Dragon Leap (Dragon Leap - Rank 2)
+    [33657] = 'esoui/art/icons/ability_dragonknight_009.dds', -- Dragon Leap (Dragon Leap - Rank 3)
+    [33660] = 'esoui/art/icons/ability_dragonknight_009.dds', -- Dragon Leap (Dragon Leap - Rank 4)
+    
+    -- Dragonknight Standard
+    [36075] = 'esoui/art/icons/ability_mage_023.dds', -- Shackle (Dragonknight Standard - All Ranks)
     [29230] = 'esoui/art/icons/ability_debuff_major_defile.dds', -- Major Deflie (Dragonknight Standard - Rank 1)
+    [33957] = 'esoui/art/icons/ability_debuff_major_defile.dds', -- Dragonknight Standard (Dragonknight Standard - Rank 2)
+    [33961] = 'esoui/art/icons/ability_debuff_major_defile.dds', -- Dragonknight Standard (Dragonknight Standard - Rank 3)
+    
+    -- Burning Talons
+    [20253] = 'esoui/art/icons/ability_dragonknight_010_b.dds', -- Burning Talons (Burning Talons - Rank 1)
+    
+    -- Choking Talons
+    
+    
+    
+    -- Obsidian Shard
+    [68763] = 'esoui/art/icons/ability_dragonknight_013_b.dds', -- Obsidian Shard (Obsidian Shard - Rank 1)
+    
+    -- Molten Weapons
+    [29043] = 'esoui/art/icons/ability_buff_major_sorcery.dds', -- Molten Weapons (Molten Weapons - Rank 1)
+    [32151] = 'esoui/art/icons/ability_buff_major_sorcery.dds', -- Molten Weapons (Molten Weapons - Rank 2)
+    [32154] = 'esoui/art/icons/ability_buff_major_sorcery.dds', -- Molten Weapons (Molten Weapons - Rank 3)
+    [32156] = 'esoui/art/icons/ability_buff_major_sorcery.dds', -- Molten Weapons (Molten Weapons - Rank 4)
+    
+    -- Igneous Weapons
+    [31874] = 'esoui/art/icons/ability_buff_major_sorcery.dds', -- Igneous Weapons (Igneous Weapons - Rank 1)
     
     ----------------------------------------------------------------
     -- SORCERER PASSIVES -------------------------------------------
@@ -2435,13 +2464,30 @@ E.EffectNameOverride = {
     [23810] = 'Off-Balance', -- Off Balance (Lava Whip - Rank 3)
     [23812] = 'Off-Balance', -- Off Balance (Lava Whip - Rank 4)
     
+    [18032] = 'Dragon Leap', -- Stun (Dragon Leap - All Ranks)
+    
     -- Spiked Armor
     [20320] = 'Spiked Armor', -- Spiked Armor Damage Return (Spiked Armor - Rank 1)
     [23823] = 'Spiked Armor', -- Spiked Armor Damage Return (Spiked Armor - Rank 2)
     [23826] = 'Spiked Armor', -- Spiked Armor Damage Return (Spiked Armor - Rank 3)
     [23829] = 'Spiked Armor', -- Spiked Armor Damage Return (Spiked Armor - Rank 4)
     
+    -- Hardened Armor
+    [20329] = 'Hardened Armor', -- Hardened Armor Damage Return (Hardened Armor - Rank 1)
+    
+    -- Dragonknight Standard
     [29230] = 'Major Defile', -- Major Deflie (Dragonknight Standard - Rank 1)
+    [33957] = 'Major Defile', -- Dragonknight Standard (Dragonknight Standard - Rank 2)
+    [33961] = 'Major Defile', -- Dragonknight Standard (Dragonknight Standard - Rank 3)
+    
+    -- Molten Weapons
+    [29043] = 'Major Sorcery', -- Molten Weapons (Molten Weapons - Rank 1)
+    [32151] = 'Major Sorcery', -- Molten Weapons (Molten Weapons - Rank 2)
+    [32154] = 'Major Sorcery', -- Molten Weapons (Molten Weapons - Rank 3)
+    [32156] = 'Major Sorcery', -- Molten Weapons (Molten Weapons - Rank 4)
+    
+    -- Igneous Weapons
+    [31874] = 'Major Sorcery', -- (Igneous Weapons - Rank 1)
 
     ----------------------------------------------------------------
     -- SORCERER PASSIVES -------------------------------------------
@@ -2839,6 +2885,32 @@ E.IsAbilityIgnoredById = { --Remove an ability from display by abilityId
     -- Resurrection
     [55400] = true, -- Magicka Restore
     [55401] = true, -- Magicka Restore
+    
+    ------------------------------------------------------------------------------
+    -- Dragonknight (Actives)
+    ------------------------------------------------------------------------------
+    
+    
+    -- Dragonknight Standard
+    [36075] = true, -- Shackle (Dragonknight Standard - All Ranks)
+    [76705] = true, -- Immune (Dragonknight Standard - All Ranks)
+    [32905] = true, -- Dragonknight Standard (Dragonknight Standard - Rank 1)
+    [33958] = true, -- Dragonknight Standard (Dragonknight Standard - Rank 2)
+    [33962] = true, -- Dragonknight Standard (Dragonknight Standard - Rank 3)
+    
+    -- Dragon Leap
+    [48532] = true, -- Charge Snare (Dragon Leap - Rank 1)
+    
+    -- Dark Talons
+    [32976] = true, -- Impale Grant Ability (Dark Talons - Rank 1)
+    [33238] = true, -- Impale Grant Ability (Dark Talons - Rank 2)
+    [33240] = true, -- Impale Grant Ability (Dark Talons - Rank 3)
+    [33242] = true, -- Impale Grant Ability (Dark Talons - Rank 4)
+    
+    [33244] = true, -- Impale Grant Ability (Burning Talons - Rank 1)
+    
+    -- Obsidian Shard
+    [68763] = true, -- Obsidian Shard (Obsidian Shard - Rank 1)
 
     -- Sorcerer (Passives)
     [31415] = true, -- Expert Summoner (Expert Summoner - Rank 1)
@@ -3364,4 +3436,14 @@ E.FakeStagger = {
 
 E.FakeSelfAura = {
     -- Nothing here yet
+}
+
+E.FakeDuplicate = {
+
+    [29043] = {icon = 'esoui/art/icons/ability_dragonknight_015.dds', name = 'Molten Weapons'}, -- Molten Weapons (Molten Weapons - Rank 1)
+    [32151] = {icon = 'esoui/art/icons/ability_dragonknight_015.dds', name = 'Molten Weapons'}, -- Molten Weapons (Molten Weapons - Rank 2)
+    [32154] = {icon = 'esoui/art/icons/ability_dragonknight_015.dds', name = 'Molten Weapons'}, -- Molten Weapons (Molten Weapons - Rank 3)
+    [32156] = {icon = 'esoui/art/icons/ability_dragonknight_015.dds', name = 'Molten Weapons'}, -- Molten Weapons (Molten Weapons - Rank 4)
+    [31874] = {icon = 'esoui/art/icons/ability_dragonknight_015_a.dds', name = 'Igneous Weapons'}, -- Igneous Weapons (Igneous Weapons - Rank 1)
+
 }

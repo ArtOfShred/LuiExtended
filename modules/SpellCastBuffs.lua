@@ -187,7 +187,7 @@ local Effects = {
     [A.Skill_Wall_of_Frost]           = { false, false, 6.6, nil }, -- ACCURATE
     
     -- Dragonknight
-    [A.Skill_Dragonknight_Standard] = { false, false, true, nil },
+    [A.Skill_Dragonknight_Standard]   = { false, false, true, nil }, -- ACCURATE
     
     
     -- NEEDS TO BE RESORTED STILL:
@@ -354,12 +354,48 @@ local HasAbilityProc = {
     [A.Skill_Crystal_Fragments]     = A.Trigger_Crystal_Fragments_Proc, -- Trigger_Crystal_Fragments_Passive
 }
 
-local IsAbilityCustomToggle = {
+-- Table of associations we have to fix
+local AbilityCustomToggleFix = {
 
-    -- RESORTED:
+    -- Templar (Aedric Spear)
+    [27501] = 27504 -- Sun Shield (Sun Shield - Rank 4)
+
+}
+
+local IsAbilityCustomToggleId = {
+
+    -- Restoration Staff
+    [28385] = true, -- Grand Helaing (Grand Healing - Rank 1)
+    [41244] = true, -- Grand Helaing (Grand Healing - Rank 2)
+    [41246] = true, -- Grand Helaing (Grand Healing - Rank 3)
+    [41248] = true, -- Grand Helaing (Grand Healing - Rank 4)
     
-    --Resto Staff
-    --[A.Skill_Grand_Healing]        = true, -- Doesn't work, no effect related to it
+    -- Dragonknight Skills (Draconic Power)
+    [20319] = true, -- Spiked Armor (Spiked Armor - Rank 1)
+    [23822] = true, -- Spiked Armor (Spiked Armor - Rank 2)
+    [23825] = true, -- Spiked Armor (Spiked Armor - Rank 3)
+    [23828] = true, -- Spiked Armor (Spiked Armor - Rank 4)
+    
+    [20328] = true, -- Hardened Armor (Hardened Armor - Rank 1)
+    
+    -- Dragonknight Skills (Earthen Heart)
+    [29043] = true, -- Molten Weapons (Molten Weapons - Rank 1)
+    [32151] = true, -- Molten Weapons (Molten Weapons - Rank 2)
+    [32154] = true, -- Molten Weapons (Molten Weapons - Rank 3)
+    [32156] = true, -- Molten Weapons (Molten Weapons - Rank 4)
+    [31874] = true, -- Igneous Weapons (Molten Weapons - Rank 4)
+    
+    
+   
+}
+   
+-- Old Deprecated List, using this to pull values from as a reminder!
+local IsAbilityCustomToggleName = {
+
+    
+    
+        -- RESORTED:
+
     
     [A.Skill_Regeneration]           = true,
     
@@ -367,7 +403,7 @@ local IsAbilityCustomToggle = {
     [A.Skill_Spiked_Armor]          = true,
     
     --Dragonknight Skills (Earthen Heart)
-    [A.Skill_Molten_Weapons]           = true,
+    --[A.Skill_Molten_Weapons]           = true, -- BROKEN BY RENAMING
     
     -- HAS NOT BEEN RESORTED YET:
 
@@ -403,16 +439,15 @@ local IsAbilityCustomToggle = {
     [A.Skill_Dragon_Fire_Scale]     = true,
 
     --Dragonknight Skills (Earthen Heart)
-    [A.Skill_Igneous_Weapons]          = true,
     [A.Skill_Molten_Armaments]         = true,
     [A.DamageShield_Obsidian_Shield]   = true,
     [A.DamageShield_Fragmented_Shield] = true,
     [A.DamageShield_Igneous_Shield]    = true,
 
     --Templar Skills (Aedric Spear)
-    [A.DamageShield_Sun_Shield]     = true, -- These seem to fade on dodge roll, unlike other shields, I have no idea why
-    [A.DamageShield_Radiant_Ward]   = true, -- These seem to fade on dodge roll, unlike other shields, I have no idea why
-    [A.DamageShield_Blazing_Shield] = true, -- These seem to fade on dodge roll, unlike other shields, I have no idea why
+    --[A.DamageShield_Sun_Shield]     = true, -- These seem to fade on dodge roll, unlike other shields, I have no idea why
+    --[A.DamageShield_Radiant_Ward]   = true, -- These seem to fade on dodge roll, unlike other shields, I have no idea why
+    --[A.DamageShield_Blazing_Shield] = true, -- These seem to fade on dodge roll, unlike other shields, I have no idea why
 
     --Nightblade Skills (Assassination)
     [A.Skill_Blur]                  = true,
@@ -526,15 +561,8 @@ local IsAbilityCustomToggle = {
     [A.Skill_Purge]                  = true,
     [A.Skill_Cleanse]                = true,
     --[A.Skill_Efficient_Purge]      = true, -- Doesn't work for some reason
-
+    
 }
-
---[[----------------------------------------------------------
-    CORRECTION TO BUFFS
-    * By default some API provided buffType values seems incorrect, that is,
-    * when the effect sounds like "debuff" it is still listed as "buff".
-    * This table is used to correct such items
---]]----------------------------------------------------------
 
 -- Initialization
 function SCB.Initialize( enabled )
@@ -1437,6 +1465,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 
     if changeType == EFFECT_RESULT_FADED then -- delete Effect
         g_effectsList[context][abilityId] = nil
+        if E.FakeDuplicate[ abilityId ] then
+            g_effectsList[context][ E.FakeDuplicate[abilityId].name ] = nil
+        end
 
         -- Also delete visual enhancements from skill bar
         if unitTag == "player" then
@@ -1446,26 +1477,14 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
             end
 
             -- Switch off custom toggle highlight
-            if g_toggledSlots[effectName] and g_uiCustomToggle[g_toggledSlots[effectName]] then
-                g_uiCustomToggle[g_toggledSlots[effectName]]:SetHidden(true)
+            if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
+                g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
             end
         end
 
     -- Create Effect
     else
         local duration = endTime - beginTime
-
-        --[[ Old Block Code
-        if abilityType == ABILITY_TYPE_BLOCK then
-            g_effectsList[context][ abilityId ] = {
-                        target=unitTag, type=effectType,
-                        id=abilityId, name=effectName, icon=iconName,
-                        dur=0, starts=0, ends=nil, -- ends=nil : last buff in sorting
-                        forced="short",
-                        restart=true, iconNum=0 }
-            -- clear groud pending ability
-            g_pendingGroundAbility = nil
-        ]]--
 
         -- Buffs are created based on their ability ID, this allows buffs with the same display name to show up.
         g_effectsList[context][ abilityId ] = {
@@ -1474,6 +1493,18 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                     dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
                     forced=forcedType,
                     restart=true, iconNum=0 }
+           
+        -- Create a fake container for certain major/minor buffs
+        if E.FakeDuplicate[ abilityId ] then
+                g_effectsList[context][ E.FakeDuplicate[abilityId].name ] =
+                {
+                    target=unitTag, type=effectType,
+                    name=E.FakeDuplicate[abilityId].name, icon=E.FakeDuplicate[abilityId].icon,
+                    dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
+                    forced=forcedType,
+                    restart=true, iconNum=0
+                }
+        end
 
         -- Also create visual enhancements from skill bar
         if unitTag == "player" then
@@ -1485,9 +1516,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
             end
 
             -- Switch on custom toggle highlight
-            if g_toggledSlots[effectName] then
+            if g_toggledSlots[abilityId] then
                 if SCB.SV.ShowToggled then
-                    SCB.ShowCustomToggle(g_toggledSlots[effectName])
+                    SCB.ShowCustomToggle(g_toggledSlots[abilityId])
                 end
             end
         end
@@ -1822,17 +1853,22 @@ function SCB.NewEffects( ability )
     -- Try manually tracked effects first
     local effects = ability.effects
     if ( effects ~= nil ) then
+    
+    -- Switch off custom toggle highlight
+    if g_toggledSlots[ability.id] and g_uiCustomToggle[g_toggledSlots[ability.id]] then
+        g_uiCustomToggle[g_toggledSlots[ability.id]]:SetHidden(true)
+    end
 
         for i = 1, 3 do
             local context = abilityRouting[i]
-
+            
             if effects[i] and effects[i] > 0 then
                 -- Update or create new effect
-                if g_effectsList[context][ability.name] ~= nil then
-                    g_effectsList[context][ability.name].ends = currentTime + effects[4] + effects[i]
-                    g_effectsList[context][ability.name].restart = true
+                if g_effectsList[context][ability.id] ~= nil then
+                    g_effectsList[context][ability.id].ends = currentTime + effects[4] + effects[i]
+                    g_effectsList[context][ability.id].restart = true
                 else
-                    g_effectsList[context][ability.name] = {
+                    g_effectsList[context][ability.id] = {
                         target  = ( i < 3 ) and "player" or "reticleover",
                         type    = ( i == 1 ) and 1 or 2,
                         name    = ability.name,
@@ -1845,8 +1881,17 @@ function SCB.NewEffects( ability )
                     }
                 end
             end
+
         end
     end
+    
+    -- Switch on custom toggle highlight
+    if g_toggledSlots[ability.id] then
+        if SCB.SV.ShowToggled then
+            SCB.ShowCustomToggle(g_toggledSlots[ability.id])
+        end
+    end
+    
 end
 
 -- Called from EVENT_ACTION_SLOT_ABILITY_USED listener
@@ -1891,9 +1936,9 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
     end
 
     -- Remove saved triggered proc information
-    for abilityName, slot in pairs(g_triggeredSlots) do
+    for abilityId, slot in pairs(g_triggeredSlots) do
         if (slot == slotNum) then
-            g_triggeredSlots[abilityName] = nil
+            g_triggeredSlots[abilityId] = nil
         end
     end
     -- Stop possible proc animation
@@ -1902,9 +1947,9 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
     end
 
     -- Remove custom toggle information and custom highlight
-    for abilityName, slot in pairs(g_toggledSlots) do
+    for abilityId, slot in pairs(g_toggledSlots) do
         if (slot == slotNum) then
-            g_toggledSlots[abilityName] = nil
+            g_toggledSlots[abilityId] = nil
         end
     end
     if g_uiCustomToggle[slotNum] then
@@ -1929,18 +1974,32 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
     local duration = GetAbilityDuration(ability_id)
 
     local effects = nil
+    
     if Effects[ abilityName ] then
         effects = {}
         for i = 1, 4 do
-            if not Effects[ abilityName ][i] or Effects[ abilityName ][i] == 0 then
+            if not Effects[ abilityName  ][i] or Effects[ abilityName  ][i] == 0 then
                 effects[i] = 0
-            elseif Effects[ abilityName ][i] == true then
+            elseif Effects[ abilityName  ][i] == true then
                 effects[i] = (i < 4) and duration or castTime
             else
                 effects[i] = Effects[ abilityName ][i] * 1000
             end
         end
     end
+    
+    --[[if Effects[ ability_id  ] then
+        effects = {}
+        for i = 1, 4 do
+            if not Effects[ ability_id  ][i] or Effects[ ability_id  ][i] == 0 then
+                effects[i] = 0
+            elseif Effects[ ability_id  ][i] == true then
+                effects[i] = (i < 4) and duration or castTime
+            else
+                effects[i] = Effects[ ability_id  ][i] * 1000
+            end
+        end
+    end]]
 
     g_actionBar[slotNum] = {
         id      = ability_id,
@@ -1968,14 +2027,16 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
     end
 
     -- Check if current skill is our custom toggle skill and save it
-    if IsAbilityCustomToggle[abilityName] then
-        g_toggledSlots[abilityName] = slotNum
+    if IsAbilityCustomToggleId[ability_id] then
+        -- Some abilities primary effect isn't the same as the main Id for the slot, so we have to fudge it
+        ability_id = AbilityCustomToggleFix[ability_id] or ability_id
+        g_toggledSlots[ability_id] = slotNum
         if g_effectsList.player1[ability_id] then
             if SCB.SV.ShowToggled then
                 SCB.ShowCustomToggle(slotNum)
             end
         end
-    end       
+    end
 end
 
 function SCB.OnSlotsFullUpdate(eventCode, isHotbarSwap)
