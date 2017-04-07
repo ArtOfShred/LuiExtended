@@ -623,6 +623,44 @@ E.IsBossMob = {
 
 }
 
+E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ONLY!!!)
+    
+    [55400] = true,
+    [55401] = true,
+    
+    [45982] = true,
+    
+    ----------------------------
+    -- Templar (Aedric Spear)
+    ----------------------------
+    
+    -- Piercing Javelin
+    [26162] = true, -- Piercing Javelin (Piercing Javelin - Rank 1)
+    [26972] = true, -- Piercing Javelin (Piercing Javelin - Rank 2)
+    [26974] = true, -- Piercing Javelin (Piercing Javelin - Rank 3)
+    [26976] = true, -- Piercing Javelin (Piercing Javelin - Rank 4)
+    
+    -- Aurora Javelin
+    [26801] = true, -- Aurora Javelin (Aurora Javelin - Rank 1)
+    
+    -- Binding Javelin
+    [26805] = true, -- Binding Javelin (Binding Javelin - Rank 1)
+    
+    ----------------------------
+    -- Destruction Staff
+    ----------------------------
+    
+    [38172] = true, -- Stun After Knockback Movement (Destructive Touch - Rank 1) -- Fire
+    [62661] = true, -- Stun After Knockback Movement (Destructive Touch - Rank 2) -- Fire
+    [62664] = true, -- Stun After Knockback Movement (Destructive Touch - Rank 3) -- Fire
+    [62667] = true, -- Stun After Knockback Movement (Destructive Touch - Rank 4) -- Fire
+    
+    [38987] = true, -- Stun After Knockback Movement (Destructive Clench - Rank 1) -- Fire
+    
+    [38946] = true, -- Stun After Knockback Movement (Destructive Reach - Rank 1) -- Fire
+    
+}
+
 E.EffectTypeOverride = {
     [51392] = BUFF_EFFECT_TYPE_DEBUFF, -- Bolt Escape Fatigue
     [69143] = BUFF_EFFECT_TYPE_DEBUFF, -- Dodge Fatigue
@@ -1117,7 +1155,7 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [62518] = 'esoui/art/icons/ability_healer_004.dds', -- Mara's Gift
 
     -- The Lover
-    [63878] = 'esoui/art/icons/ability_healer_013.dds', -- Synergizer
+    [63878] = 'esoui/art/icons/ability_healer_031.dds', -- Synergizer
 
     -- The Shadow
     [64244] = 'esoui/art/icons/ability_rogue_054.dds', -- Shadowstrike
@@ -1167,6 +1205,8 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [20172] = 'LuiExtended/media/icons/abilities/ability_innate_off-balance_exploit.dds', -- Off-Balance Exploit
     [16566] = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', -- CC Immunity
     [16593] = 'LuiExtended/media/icons/abilities/ability_innate_melee_snare.dds', -- Melee Snare
+    [38254] = 'esoui/art/icons/ability_warrior_010.dds', -- Taunt
+    [38541] = 'esoui/art/icons/ability_warrior_010.dds', -- Taunt
 
     ----------------------------------------------------------------
     -- DRAGONKNIGHT PASSIVES ---------------------------------------
@@ -1202,6 +1242,15 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [23810] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off Balance (Lava Whip - Rank 3)
     [23812] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off Balance (Lava Whip - Rank 4)
     
+    -- Molten Whip
+    [20806] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off Balance (Molten Whip - Rank 1)
+    
+    -- Flame Lash
+    [34117] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Off Balance (Flame Lash - Rank 1)
+    [23105] = 'esoui/art/icons/ability_warrior_025.dds', -- Power Lash (Power Lash - Rank 1)
+    [70745] = 'esoui/art/icons/ability_warrior_025.dds', -- Off-Balance Exploit (Power Lash - Rank 1)
+    
+    -- Dragon Leap
     [18032] = 'esoui/art/icons/ability_dragonknight_009.dds', -- Stun (Dragon Leap - All Ranks)
     [29016] = 'esoui/art/icons/ability_dragonknight_009.dds', -- Dragon Leap (Dragon Leap - Rank 1)
     [33654] = 'esoui/art/icons/ability_dragonknight_009.dds', -- Dragon Leap (Dragon Leap - Rank 2)
@@ -1213,13 +1262,24 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [29230] = 'esoui/art/icons/ability_debuff_major_defile.dds', -- Major Deflie (Dragonknight Standard - Rank 1)
     [33957] = 'esoui/art/icons/ability_debuff_major_defile.dds', -- Dragonknight Standard (Dragonknight Standard - Rank 2)
     [33961] = 'esoui/art/icons/ability_debuff_major_defile.dds', -- Dragonknight Standard (Dragonknight Standard - Rank 3)
+    [33965] = 'esoui/art/icons/ability_debuff_major_defile.dds', -- Dragonknight Standard (Dragonknight Standard - Rank 4)
+    
+    [32961] = 'esoui/art/icons/ability_debuff_major_defile.dds', -- Shifting Standard (Shifting Standard - Rank 1)
+    [32965] = 'esoui/art/icons/ability_debuff_major_defile.dds', -- Shifting Standard (Shifting Standard - Rank 1)
+    
+    [32949] = 'esoui/art/icons/ability_debuff_major_defile.dds', -- Standard of Might (Standard of Might - Rank 1)
     
     -- Burning Talons
     [20253] = 'esoui/art/icons/ability_dragonknight_010_b.dds', -- Burning Talons (Burning Talons - Rank 1)
+
+    -- Dragon Blood
+    [29010] = 'esoui/art/icons/ability_dragonknight_011.dds', -- Dragon Blood (Dragon Blood - Rank 1)
+    [33614] = 'esoui/art/icons/ability_dragonknight_011.dds', -- Dragon Blood (Dragon Blood - Rank 2)
+    [33617] = 'esoui/art/icons/ability_dragonknight_011.dds', -- Dragon Blood (Dragon Blood - Rank 3)
+    [33620] = 'esoui/art/icons/ability_dragonknight_011.dds', -- Dragon Blood (Dragon Blood - Rank 4)
     
-    -- Choking Talons
-    
-    
+    -- Green Dragon Blood
+    [32745] = 'esoui/art/icons/ability_dragonknight_011_b.dds', -- Green Dragon Blood (Green Dragon Blood - Rank 1)
     
     -- Obsidian Shard
     [68763] = 'esoui/art/icons/ability_dragonknight_013_b.dds', -- Obsidian Shard (Obsidian Shard - Rank 1)
@@ -1232,6 +1292,9 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     
     -- Igneous Weapons
     [31874] = 'esoui/art/icons/ability_buff_major_sorcery.dds', -- Igneous Weapons (Igneous Weapons - Rank 1)
+    
+    -- Molten Armaments
+    [31888] = 'esoui/art/icons/ability_buff_major_sorcery.dds', -- Molten Armaments (Molten Armaments - Rank 1)
     
     ----------------------------------------------------------------
     -- SORCERER PASSIVES -------------------------------------------
@@ -1300,6 +1363,44 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     [80230] = 'LuiExtended/media/icons/abilities/ability_templar_sacred_ground.dds', -- Sacred Ground (Sacred Ground - Rank 1 & 2)
 
     [52703] = 'LuiExtended/media/icons/abilities/ability_templar_illuminate.dds', -- Light Weaver Ultimate (Light Weaver - Rank 1 & 2)
+    
+    ----------------------------------------------------------------
+    -- TEMPLAR ACTIVE ABILITIES ------------------------------------
+    ----------------------------------------------------------------
+    
+    -- Puncturing Sweep
+    [55183] = 'esoui/art/icons/ability_templar_reckless_attacks.dds', -- Puncturing Sweep Heal (Puncturing Sweep - Rank 1)
+    
+    -- Sun Fire
+    [21727] = 'esoui/art/icons/ability_templar_sun_fire.dds', -- Sun Fire (Sun Fire - Rank 1)
+    [24161] = 'esoui/art/icons/ability_templar_sun_fire.dds', -- Sun Fire (Sun Fire - Rank 2)
+    [24169] = 'esoui/art/icons/ability_templar_sun_fire.dds', -- Sun Fire (Sun Fire - Rank 3)
+    [24172] = 'esoui/art/icons/ability_templar_sun_fire.dds', -- Sun Fire (Sun Fire - Rank 4)
+    
+    -- Vampire's Bane
+    [21730] = 'esoui/art/icons/ability_templar_vampire_bane.dds', -- Vampire's Bane (Vampire's Bane - Rank 1)
+    
+    -- Reflective Light
+    [21733] = 'esoui/art/icons/ability_templar_vampire_bane.dds', -- Reflective Light (Reflective Light - Rank 1)
+    
+    -- Nova
+    [31540] = 'esoui/art/icons/ability_healer_013.dds', -- Supernova (Nova - All Ranks)
+    
+    -- Breath of Life
+    [44391] = 'esoui/art/icons/ability_templar_breath_of_life.dds', -- Breath of Life (Breath of Life - Rank 1)
+    
+    -- Healing Ritual
+    [22307] = 'esoui/art/icons/ability_templar_healing_ritual.dds', -- Healing Ritual (Healing Ritual - Rank 1)
+    [27335] = 'esoui/art/icons/ability_templar_healing_ritual.dds', -- Healing Ritual (Healing Ritual - Rank 2)
+    [27341] = 'esoui/art/icons/ability_templar_healing_ritual.dds', -- Healing Ritual (Healing Ritual - Rank 3)
+    [27343] = 'esoui/art/icons/ability_templar_healing_ritual.dds', -- Healing Ritual (Healing Ritual - Rank 4)
+    
+    -- Ritual of Rebirth
+    [22331] = 'esoui/art/icons/ability_templar_ritual_of_rebirth.dds', -- Ritual of Rebirth (Ritual of Rebirth - Rank 1)
+    [88456] = 'esoui/art/icons/ability_templar_ritual_of_rebirth.dds', -- Ritual of Rebirth (Ritual of Rebirth - Rank 1)
+    
+    -- Rite of Passage
+    [22225] = 'esoui/art/icons/ability_templar_rite_of_passage.dds', -- Rite of Passage (Rite of Passage - Rank 1)
 
     ----------------------------------------------------------------
     -- PLAYER WEAPON ATTACKS ---------------------------------------
@@ -1396,15 +1497,73 @@ E.EffectIconOverride = { --Force a change to the icon displayed on an abilityId
     -- PLAYER ACTIVES WEAPONS --------------------------------------
     ----------------------------------------------------------------
     
-    -- Destruction Staff
-    [68719] = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', -- Frozen (Wall of Elements - All Ranks) -- Frost
+    -- 1H + Shield
     
+    -- Dual Wield
+    [29293] = 'esoui/art/icons/ability_dualwield_001.dds', -- Twin Slashes Bleed (Twin Slashes - Rank 1)
+    [40660] = 'esoui/art/icons/ability_dualwield_001.dds', -- Twin Slashes Bleed (Twin Slashes - Rank 2)
+    [40663] = 'esoui/art/icons/ability_dualwield_001.dds', -- Twin Slashes Bleed (Twin Slashes - Rank 3)
+    [40666] = 'esoui/art/icons/ability_dualwield_001.dds', -- Twin Slashes Bleed (Twin Slashes - Rank 4)
+    
+    [38841] = 'esoui/art/icons/ability_dualwield_001_a.dds', -- Rending Slashes Bleed (Rending Slashes - Rank 1)
+    
+    [38848] = 'esoui/art/icons/ability_dualwield_001_b.dds', -- Blood Craze Bleed (Blood Craze - Rank 1)
+    
+    -----------------------------------------
+    -- DESTRUCTION STAFF ACTIVES ------------
+    -----------------------------------------
+    
+    -- Crushing Shock
+    [48009] = 'esoui/art/icons/ability_destructionstaff_001a.dds', -- Stagger (Crushing Shock - Rank 1)
+    
+    -- Force Pulse
+    [48016] = 'esoui/art/icons/ability_destructionstaff_001b.dds', -- Force Pulse (Force Pulse - Rank 1)
+    
+    -- Wall of Elements
+    [68719] = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', -- Frozen (Wall of Elements - All Ranks) -- Frost
     [62968] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Wall of Storms (Wall of Elements - Rank 1) -- Lightning
     [62973] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Wall of Storms (Wall of Elements - Rank 2) -- Lightning
     [62978] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Wall of Storms (Wall of Elements - Rank 3) -- Lightning
     [62983] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Wall of Storms (Wall of Elements - Rank 4) -- Lightning
     
-    -- Restoration Staff
+    -- Elemental Blockade
+    [62988] = 'esoui/art/icons/ability_debuff_offbalance.dds', -- Blockade of Storms (Elemental Blockade - Rank 1) -- Lightning
+    
+    -- Destructive Touch
+    [38172] = 'esoui/art/icons/ability_destructionstaff_007.dds', -- Stun After Knockback Movement (Destructive Touch - Rank 1) -- Fire
+    [29075] = 'esoui/art/icons/ability_destructionstaff_007.dds', -- Fire Touch (destruction) (Destructive Touch - Rank 1) -- Fire
+    [62661] = 'esoui/art/icons/ability_destructionstaff_007.dds', -- Stun After Knockback Movement (Destructive Touch - Rank 2) -- Fire
+    [62660] = 'esoui/art/icons/ability_destructionstaff_007.dds', -- Fire Touch (destruction) (Destructive Touch - Rank 2) -- Fire
+    [62664] = 'esoui/art/icons/ability_destructionstaff_007.dds', -- Stun After Knockback Movement (Destructive Touch - Rank 3) -- Fire
+    [62663] = 'esoui/art/icons/ability_destructionstaff_007.dds', -- Fire Touch (destruction) (Destructive Touch - Rank 3) -- Fire
+    [62667] = 'esoui/art/icons/ability_destructionstaff_007.dds', -- Stun After Knockback Movement (Destructive Touch - Rank 4) -- Fire
+    [62666] = 'esoui/art/icons/ability_destructionstaff_007.dds', -- Fire Touch (destruction) (Destructive Touch - Rank 4) -- Fire
+    
+    -- Destructive Clench
+    [38987] = 'esoui/art/icons/ability_destructionstaff_007.dds', -- Stun After Knockback Movement (Destructive Clench - Rank 1) -- Fire
+    [38986] = 'esoui/art/icons/ability_destructionstaff_007.dds', -- Fire Touch (destruction) (Destructive Clench - Rank 1) -- Fire
+    
+    -- Destructive Reach
+    [38946] = 'esoui/art/icons/ability_destructionstaff_007.dds', -- Stun After Knockback Movement (Destructive Reach - Rank 1) -- Fire
+    [38945] = 'esoui/art/icons/ability_destructionstaff_007.dds', -- Flame Reach (destruction) (Destructive Reach - Rank 1) -- Fire
+    
+    -- Weakness to Elements
+    [53881] = 'esoui/art/icons/ability_debuff_major_breach.dds', -- Major Spell Shatter (Weakness to Elements - Rank 1)
+    [62772] = 'esoui/art/icons/ability_debuff_major_breach.dds', -- Major Spell Shatter (Weakness to Elements - Rank 2)
+    [62773] = 'esoui/art/icons/ability_debuff_major_breach.dds', -- Major Spell Shatter (Weakness to Elements - Rank 3)
+    [62774] = 'esoui/art/icons/ability_debuff_major_breach.dds', -- Major Spell Shatter (Weakness to Elements - Rank 4)
+    
+    -- Elemental Susceptibility
+    [62775] = 'esoui/art/icons/ability_debuff_major_breach.dds', -- Major Spell Shatter (Elemental Susceptibility - Rank 1)
+    
+    -- Elemental Drain
+    [62787] = 'esoui/art/icons/ability_debuff_major_breach.dds', -- Major Spell Shatter (Elemental Drain - Rank 1)
+    [39099] = 'esoui/art/icons/ability_buff_minor_magickasteal.dds', -- Minor Magickasteal (Elemental Drain - Rank 1)
+    
+    -----------------------------------------
+    -- RESTORATION STAFF ACTIVES ------------
+    -----------------------------------------
+    
     [28386] = 'esoui/art/icons/ability_restorationstaff_004.dds', -- Grand Healing (Grand Healing - Rank 1)
     [41245] = 'esoui/art/icons/ability_restorationstaff_004.dds', -- Grand Healing (Grand Healing - Rank 2)
     [41247] = 'esoui/art/icons/ability_restorationstaff_004.dds', -- Grand Healing (Grand Healing - Rank 3)
@@ -2464,6 +2623,14 @@ E.EffectNameOverride = {
     [23810] = 'Off-Balance', -- Off Balance (Lava Whip - Rank 3)
     [23812] = 'Off-Balance', -- Off Balance (Lava Whip - Rank 4)
     
+    -- Molten Whip
+    [20806] = 'Off-Balance', -- Off Balance (Molten Whip - Rank 1)
+    
+    -- Flame Lash
+    [34117] = 'Off-Balance', -- Off Balance (Flame Lash - Rank 1)
+    [70745] = 'Power Lash', -- Off-Balance Exploit (Power Lash - Rank 1)
+    
+    -- Dragon Leap
     [18032] = 'Dragon Leap', -- Stun (Dragon Leap - All Ranks)
     
     -- Spiked Armor
@@ -2475,10 +2642,22 @@ E.EffectNameOverride = {
     -- Hardened Armor
     [20329] = 'Hardened Armor', -- Hardened Armor Damage Return (Hardened Armor - Rank 1)
     
+    -- Volatile Armor
+    [20324] = 'Volatile Armor', -- Volatile Armor Damage Return (Volatile Armor - Rank 1)
+    
     -- Dragonknight Standard
     [29230] = 'Major Defile', -- Major Deflie (Dragonknight Standard - Rank 1)
     [33957] = 'Major Defile', -- Dragonknight Standard (Dragonknight Standard - Rank 2)
     [33961] = 'Major Defile', -- Dragonknight Standard (Dragonknight Standard - Rank 3)
+    [33965] = 'Major Defile', -- Dragonknight Standard (Dragonknight Standard - Rank 4)
+    
+    -- Shifting Standard
+    [32961] = 'Major Defile', -- Shifting Standard (Shifting Standard - Rank 1)
+    [32965] = 'Major Defile', -- Shifting Standard (Shifting Standard - Rank 1)
+    [32963] = 'Shifting Standard', -- Shift Standard (Shifting Standard - Rank 1)
+    
+    -- Standard of Might
+    [32949] = 'Major Defile', -- Standard of Might (Standard of Might - Rank 1)
     
     -- Molten Weapons
     [29043] = 'Major Sorcery', -- Molten Weapons (Molten Weapons - Rank 1)
@@ -2488,6 +2667,9 @@ E.EffectNameOverride = {
     
     -- Igneous Weapons
     [31874] = 'Major Sorcery', -- (Igneous Weapons - Rank 1)
+    
+    -- Molten Armaments
+    [31888] = 'Major Sorcery', -- Molten Armaments (Molten Armaments - Rank 1)
 
     ----------------------------------------------------------------
     -- SORCERER PASSIVES -------------------------------------------
@@ -2511,6 +2693,16 @@ E.EffectNameOverride = {
 
     -- Restoring Light
     [52703] = 'Light Weaver', -- Light Weaver Ultimate (Light Weaver - Rank 1 & 2)
+    
+    ----------------------------------------------------------------
+    -- TEMPLAR ACTIVE ABILITIES ------------------------------------
+    ----------------------------------------------------------------
+    
+    -- Puncturing Sweep
+    [55183] = 'Puncturing Sweep', -- Puncturing Sweep Heal (Puncturing Sweep - Rank 1)
+    
+    -- Aurora Javelin
+    [37414] = 'Aurora Javelin', -- Piercing Javelin (Aurora Javelin - Rank 1)
 
     ----------------------------------------------------------------
     -- PLAYER WEAPON ATTACKS ---------------------------------------
@@ -2586,16 +2778,93 @@ E.EffectNameOverride = {
     ----------------------------------------------------------------
     -- PLAYER ACTIVES WEAPONS --------------------------------------
     ----------------------------------------------------------------
+    
+    -- 1H + Shield
+    [28305] = 'Low Slash', -- Low Slash Snare (Low Slash - Rank 1)
+    [41389] = 'Low Slash', -- Low Slash Snare (Low Slash - Rank 2)
+    [41393] = 'Low Slash', -- Low Slash Snare (Low Slash - Rank 3)
+    [41396] = 'Low Slash', -- Low Slash Snare (Low Slash - Rank 4)
+    
+    [38266] = 'Heroic Slash', -- Heroic Slash Snare (Heroic Slash - Rank 1)
+    
+    -- Dual Wield
+    [29293] = 'Twin Slashes', -- Twin Slashes Bleed (Twin Slashes - Rank 1)
+    [40660] = 'Twin Slashes', -- Twin Slashes Bleed (Twin Slashes - Rank 2)
+    [40663] = 'Twin Slashes', -- Twin Slashes Bleed (Twin Slashes - Rank 3)
+    [40666] = 'Twin Slashes', -- Twin Slashes Bleed (Twin Slashes - Rank 4)
+    
+    [38841] = 'Rending Slashes', -- Rending Slashes Bleed (Rending Slashes - Rank 1)
+    
+    [38848] = 'Blood Craze', -- Blood Craze Bleed (Blood Craze - Rank 1)
 
+    -------------------------------------------
+    -- DESTRUCTION STAFF ACTIVES --------------
+    -------------------------------------------
+    
+    -- Crushing Shock
+    [48009] = 'Crushing Shock', -- Stagger (Crushing Shock - Rank 1)
+    [48011] = 'Crushing Shock', -- Uber Attack (Crushing Shock - Rank 1)
+    
+    -- Wall of Elements
+    [62968] = 'Off-Balance', -- Wall of Storms (Wall of Elements - Rank 1) -- Lightning
     [62928] = 'Wall of Frost', -- Wall of Frost Snare (Wall of Elements - Rank 1) -- Frost
+    [62973] = 'Off-Balance', -- Wall of Storms (Wall of Elements - Rank 2) -- Lightning
     [62933] = 'Wall of Frost', -- Unstable Wall of Frost (Wall of Elements - Rank 2) -- Frost
+    [62978] = 'Off-Balance', -- Wall of Storms (Wall of Elements - Rank 3) -- Lightning
     [62938] = 'Wall of Frost', -- Unstable Wall of Frost (Wall of Elements - Rank 3) -- Frost
+    [62983] = 'Off-Balance', -- Wall of Storms (Wall of Elements - Rank 4) -- Lightning
     [62943] = 'Wall of Frost', -- Unstable Wall of Frost (Wall of Elements - Rank 4) -- Frost
     
-    [62968] = 'Off-Balance', -- Wall of Storms (Wall of Elements - Rank 1) -- Lightning
-    [62973] = 'Off-Balance', -- Wall of Storms (Wall of Elements - Rank 2) -- Lightning
-    [62978] = 'Off-Balance', -- Wall of Storms (Wall of Elements - Rank 2) -- Lightning
-    [62983] = 'Off-Balance', -- Wall of Storms (Wall of Elements - Rank 2) -- Lightning
+    -- Unstable Wall of Elements
+    [39077] = 'Off-Balance', -- Unstable Wall of Storms (Unstable Wall of Elements - Rank 1) -- Lightning
+    
+    -- Elemental Blockade
+    [62988] = 'Off-Balance', -- Blockade of Storms (Elemental Blockade - Rank 1) -- Lightning
+    [62948] = 'Blockade of Frost', -- Unstable Wall of Frost (Elemental Blockade - Rank 1) -- Frost
+    
+    -- Destructive Touch
+    [62648] = 'Flame Touch', -- Fire Touch (Destructive Touch - Rank 1) -- Fire
+    [38172] = 'Flame Touch', -- Stun After Knockback Movement (Destructive Touch - Rank 1) -- Fire
+    [29075] = 'Flame Touch', -- Fire Touch (destruction) (Destructive Touch - Rank 1) -- Fire
+    [30450] = 'Frost Touch', -- Deep Freeze (Destructive Touch - Rank 1) -- Frost
+    [62659] = 'Flame Touch', -- Fire Touch (Destructive Touch - Rank 2) -- Fire
+    [62661] = 'Flame Touch', -- Stun After Knockback Movement (Destructive Touch - Rank 2) -- Fire
+    [62660] = 'Flame Touch', -- Fire Touch (destruction) (Destructive Touch - Rank 2) -- Fire
+    [62693] = 'Frost Touch', -- Deep Freeze (Destructive Touch - Rank 2) -- Frost
+    [62662] = 'Flame Touch', -- Fire Touch (Destructive Touch - Rank 3) -- Fire
+    [62664] = 'Flame Touch', -- Stun After Knockback Movement (Destructive Touch - Rank 3) -- Fire
+    [62663] = 'Flame Touch', -- Fire Touch (destruction) (Destructive Touch - Rank 3) -- Fire
+    [62696] = 'Frost Touch', -- Deep Freeze (Destructive Touch - Rank 3) -- Frost
+    [62665] = 'Flame Touch', -- Fire Touch (Destructive Touch - Rank 4) -- Fire
+    [62667] = 'Flame Touch', -- Stun After Knockback Movement (Destructive Touch - Rank 4) -- Fire
+    [62666] = 'Flame Touch', -- Fire Touch (destruction) (Destructive Touch - Rank 4) -- Fire
+    [62699] = 'Frost Touch', -- Deep Freeze (Destructive Touch - Rank 4) -- Frost
+    
+    -- Destructive Clench
+    [62668] = 'Flame Clench', -- Fire Clench (Destructive Clench - Rank 1) -- Fire
+    [38987] = 'Flame Clench', -- Stun After Knockback Movement (Destructive Clench - Rank 1) -- Fire
+    [38986] = 'Flame Clench', -- Fire Touch (destruction) (Destructive Clench - Rank 1) -- Fire
+    [68635] = 'Shock Clench', -- Shock Touch (Destructive Clench - Rank 1) -- Shock
+    [62734] = 'Shock Clench', -- Shock Clench Explosion (Destructive Clench - Rank 1) -- Shock
+    [38990] = 'Frost Clench', -- Deep Freeze (Destructive Clench - Rank 1) -- Frost
+    
+    -- Destructive Reach
+    [38946] = 'Flame Reach', -- Stun After Knockback Movement (Destructive Reach - Rank 1) -- Fire
+    [38945] = 'Flame Reach', -- Flame Reach (destruction) (Destructive Reach - Rank 1) -- Fire
+    [68574] = 'Shock Reach', -- Shock Touch (Destructive Reach - Rank 1) -- Fire
+    [38971] = 'Frost Reach', -- Frost Grip (Destructive Reach - Rank 1) -- Frost
+    
+    -- Weakness to Elements
+    [53881] = 'Major Breach', -- Major Spell Shatter (Weakness to Elements - Rank 1)
+    [62772] = 'Major Breach', -- Major Spell Shatter (Weakness to Elements - Rank 2)
+    [62773] = 'Major Breach', -- Major Spell Shatter (Weakness to Elements - Rank 3)
+    [62774] = 'Major Breach', -- Major Spell Shatter (Weakness to Elements - Rank 4)
+    
+    -- Elemental Susceptibility
+    [62775] = 'Major Breach', -- Major Spell Shatter (Elemental Susceptibility - Rank 1)
+    
+    -- Elemental Drain
+    [62787] = 'Major Breach', -- Major Spell Shatter (Elemental Drain - Rank 1)
 
     ----------------------------------------------------------------
     -- PLAYER PASSIVES WORLD ----------------------------------------
@@ -2886,10 +3155,12 @@ E.IsAbilityIgnoredById = { --Remove an ability from display by abilityId
     [55400] = true, -- Magicka Restore
     [55401] = true, -- Magicka Restore
     
+    -- Basic Abilities
+    [48532] = true, -- Charge Snare
+    
     ------------------------------------------------------------------------------
     -- Dragonknight (Actives)
     ------------------------------------------------------------------------------
-    
     
     -- Dragonknight Standard
     [36075] = true, -- Shackle (Dragonknight Standard - All Ranks)
@@ -2897,9 +3168,17 @@ E.IsAbilityIgnoredById = { --Remove an ability from display by abilityId
     [32905] = true, -- Dragonknight Standard (Dragonknight Standard - Rank 1)
     [33958] = true, -- Dragonknight Standard (Dragonknight Standard - Rank 2)
     [33962] = true, -- Dragonknight Standard (Dragonknight Standard - Rank 3)
+    [33966] = true, -- Dragonknight Standard (Dragonknight Standard - Rank 4)
     
-    -- Dragon Leap
-    [48532] = true, -- Charge Snare (Dragon Leap - Rank 1)
+    -- Shifting Standard
+    [32962] = true, -- Shifting Standard (Shifting Standard - Rank 1)
+    [32966] = true, -- Shifting Standard (Shifting Standard - Rank 1)
+    
+    -- Standard of Might
+    [32950] = true, -- Standard of Might (Standard of Might - Rank 1)
+    
+    -- Coagulating Blood
+    [32733] = true, -- Coagulating Blood Bonus Heal (Coagulating Blood - Rank 1)
     
     -- Dark Talons
     [32976] = true, -- Impale Grant Ability (Dark Talons - Rank 1)
@@ -2907,10 +3186,38 @@ E.IsAbilityIgnoredById = { --Remove an ability from display by abilityId
     [33240] = true, -- Impale Grant Ability (Dark Talons - Rank 3)
     [33242] = true, -- Impale Grant Ability (Dark Talons - Rank 4)
     
+    -- Burning Talons
     [33244] = true, -- Impale Grant Ability (Burning Talons - Rank 1)
+    
+    -- Choking Talons
+    [33252] = true, -- Impale Grant Ability (Choking Talons - Rank 1)
     
     -- Obsidian Shard
     [68763] = true, -- Obsidian Shard (Obsidian Shard - Rank 1)
+    
+    -- Corrosive Armor
+    [17881] = true, -- Corrosive Armor (Corrosive Armor - Rank 1)
+    
+    ------------------------------------------------------------------------------
+    -- Templar (Actives)
+    ------------------------------------------------------------------------------
+    
+    [31537] = true, -- Supernova (Nova - All Ranks)
+    
+    -- Breath of Life
+    [22256] = true, -- Breath of Life (Breath of Life - Rank 1)
+    
+    -- Healing Ritual
+    [22307] = true, -- Healing Ritual (Healing Ritual - Rank 1)
+    [27335] = true, -- Healing Ritual (Healing Ritual - Rank 2)
+    [27341] = true, -- Healing Ritual (Healing Ritual - Rank 3)
+    [27343] = true, -- Healing Ritual (Healing Ritual - Rank 4)
+    
+    -- Ritual of Rebirth
+    [22331] = true, -- Ritual of Rebirth (Ritual of Rebirth - Rank 1)
+    
+    -- Hasty Prayer
+    [22318] = true, -- Hasty Prayer (Hasty Prayer - Rank 1)
 
     -- Sorcerer (Passives)
     [31415] = true, -- Expert Summoner (Expert Summoner - Rank 1)
@@ -2920,6 +3227,37 @@ E.IsAbilityIgnoredById = { --Remove an ability from display by abilityId
     [19277] = true, -- Shock Pulse (Lightning Staff)
     [30966] = true, -- Magicka Restore (Destruction Expert - Rank 1)
     [45515] = true, -- Magicka Restore (Destruction Expert - Rank 1)
+    
+    ----------------------------------
+    -- Destruction Staff (Actives)
+    ----------------------------------
+    
+    [29073] = true, -- Flame Touch (Destructive Touch - Rank 1) -- Fire
+    [29089] = true, -- Shock Touch (Destructive Touch - Rank 1) -- Shock
+    [29078] = true, -- Frost Touch (Destructive Touch - Rank 1) -- Frost
+    [40948] = true, -- Flame Touch (Destructive Touch - Rank 2) -- Fire
+    [40953] = true, -- Shock Touch (Destructive Touch - Rank 2) -- Shock
+    [40950] = true, -- Frost Touch (Destructive Touch - Rank 2) -- Frost
+    [40957] = true, -- Flame Touch (Destructive Touch - Rank 3) -- Fire
+    [40962] = true, -- Shock Touch (Destructive Touch - Rank 3) -- Shock
+    [40959] = true, -- Frost Touch (Destructive Touch - Rank 3) -- Frost
+    [40965] = true, -- Flame Touch (Destructive Touch - Rank 4) -- Fire
+    [40970] = true, -- Shock Touch (Destructive Touch - Rank 4) -- Shock
+    [40967] = true, -- Frost Touch (Destructive Touch - Rank 4) -- Frost
+    
+    [38985] = true, -- Flame Clench (Destructive Clench - Rank 1) -- Fire
+    [38993] = true, -- Shock Clench (Destructive Clench - Rank 1) -- Shock
+    [38989] = true, -- Frost Clench (Destructive Clench - Rank 1) -- Frost
+    
+    [38944] = true, -- Flame Reach (Destructive Reach - Rank 1) -- Fire
+    [38978] = true, -- Shock Reach (Destructive Reach - Rank 1) -- Shock
+    [38970] = true, -- Frost Reach (Destructive Reach - Rank 1) -- Frost
+    
+    ----------------------------------
+    -- Restoration Staff (Actives)
+    ----------------------------------
+    
+    [37243] = true, -- Blessing of Protection (Blessing of Protection - Rank 1)
 
     -- Soul Magic (Passives)
     [39268] = true, -- Soul Shatter (Soul Shatter - Rank 1)
@@ -3352,7 +3690,7 @@ E.FakePlayerBuffs = {
     [33439] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mount_sprint.dds', name = 'Gallop', duration = 0}, -- Mount Sprint (Generic)
     [32346] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_skyshard_collect.dds', name = 'Collecting Skyshard', duration = 5800}, -- Skyshard Collect
     [14031] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mundus_use.dds', name = 'Receiving Boon', duration = 5000}, -- Mundus Use
-
+    
     -- Seasonal Quests (New Life Festival)
     [84125] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Breton Male Dance (Lava Foot Stomp)
     [84126] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Breton Female Dance (Lava Foot Stomp)
@@ -3389,11 +3727,19 @@ E.FakePlayerDebuffs = { -- Fake debuffs applied onto a target by the player
     [68461] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_pestilence.dds', name = 'Pestilence', duration = 3000}, -- Pestilence (Disease Vulnerability Proc)
     [68455] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_disintegration.dds', name = 'Disintegration', duration = 3000}, -- Disintegration (Lightning Vulnerability Proc)
     [68457] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_deep_freeze.dds', name = 'Deep Freeze', duration = 3000}, -- Deep Freeze (Frost Vulnerability Proc)
+    
+    -- Dragonknight (Flame Lash)
+    [70745] = {icon = 'esoui/art/icons/ability_warrior_025.dds', name = 'Power Lash', duration = 2000}, -- Off-Balance Exploit (Flame Lash - Rank 1)
+    
 }
 
 -- We use this for debuffs applied on the player or on a target that don't need to check for a removal condition
 -- Useful for effects like staggers where there is no way to break out of them for the short duration they are applied
 E.FakeStagger = {
+
+    -- Destruction Staff
+    [48009] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = 'Stagger', duration = 433}, -- Stagger (Crushing Shock - Rank 1)
+    
     -- On Player
     [2874] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = 'Stagger', duration = 433}, -- Staggered (Generic Stagger applied to player by many different NPC abilities)
     [29402] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = 'Stagger', duration = 433}, -- Power Bash (Stagger when hit with Power Bash)
@@ -3440,10 +3786,24 @@ E.FakeSelfAura = {
 
 E.FakeDuplicate = {
 
+    -- Dragonknight 
     [29043] = {icon = 'esoui/art/icons/ability_dragonknight_015.dds', name = 'Molten Weapons'}, -- Molten Weapons (Molten Weapons - Rank 1)
     [32151] = {icon = 'esoui/art/icons/ability_dragonknight_015.dds', name = 'Molten Weapons'}, -- Molten Weapons (Molten Weapons - Rank 2)
     [32154] = {icon = 'esoui/art/icons/ability_dragonknight_015.dds', name = 'Molten Weapons'}, -- Molten Weapons (Molten Weapons - Rank 3)
     [32156] = {icon = 'esoui/art/icons/ability_dragonknight_015.dds', name = 'Molten Weapons'}, -- Molten Weapons (Molten Weapons - Rank 4)
-    [31874] = {icon = 'esoui/art/icons/ability_dragonknight_015_a.dds', name = 'Igneous Weapons'}, -- Igneous Weapons (Igneous Weapons - Rank 1)
+    
+    [31874] = {icon = 'esoui/art/icons/ability_dragonknight_015_a.dds', name = 'Igneous Weapons'}, -- Igneous Weapons (Igneous Weapons - Rank 1
+    
+    [29011] = {icon = 'esoui/art/icons/ability_dragonknight_011.dds', name = 'Dragon Blood'}, -- Dragon Blood (Dragon Blood - Rank 1)
+    [61871] = {icon = 'esoui/art/icons/ability_dragonknight_011.dds', name = 'Dragon Blood'}, -- Dragon Blood (Dragon Blood - Rank 2)
+    [61872] = {icon = 'esoui/art/icons/ability_dragonknight_011.dds', name = 'Dragon Blood'}, -- Dragon Blood (Dragon Blood - Rank 3)
+    [61873] = {icon = 'esoui/art/icons/ability_dragonknight_011.dds', name = 'Dragon Blood'}, -- Dragon Blood (Dragon Blood - Rank 4)
+    
+    [61884] = {icon = 'esoui/art/icons/ability_dragonknight_011_b.dds', name = 'Green Dragon Blood'}, -- Green Dragon Blood (Green Dragon Blood - Rank 1)
+    
+    [61891] = {icon = 'esoui/art/icons/ability_dragonknight_011_a.dds', name = 'Coagulating Blood'}, -- Coagulating Blood (Coagulating Blood - Rank 1)
+    
+    -- Destruction Staff
+    [62775] = {icon = 'esoui/art/icons/ability_destructionstaff_011b.dds', name = 'Elemental Susceptibility'} -- Major Spell Shatter (Elemental Susceptibility - Rank 1)
 
 }

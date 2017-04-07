@@ -185,9 +185,21 @@ local Effects = {
     [A.Skill_Wall_of_Fire]            = { false, false, 6.6, nil }, -- ACCURATE
     [A.Skill_Wall_Of_Storms]          = { false, false, 6.6, nil }, -- ACCURATE
     [A.Skill_Wall_of_Frost]           = { false, false, 6.6, nil }, -- ACCURATE
+    [A.Skill_Unstable_Wall_of_Fire]   = { false, false, 6.6, nil }, -- ACCURATE
+    [A.Skill_Unstable_Wall_of_Frost]  = { false, false, 6.6, nil }, -- ACCURATE
+    [A.Skill_Unstable_Wall_of_Storms] = { false, false, 6.6, nil }, -- ACCURATE
+    [A.Skill_Blockade_of_Fire]        = { false, false, 8.6, nil }, -- ACCURATE
+    [A.Skill_Blockade_of_Frost]       = { false, false, 8.6, nil }, -- ACCURATE
+    [A.Skill_Blockade_of_Storms]      = { false, false, 8.6, nil }, -- ACCURATE
     
     -- Dragonknight
     [A.Skill_Dragonknight_Standard]   = { false, false, true, nil }, -- ACCURATE
+    [A.Skill_Shifting_Standard]     = { false, false, true, nil }, -- ACCURATE
+    [A.Skill_Shift_Standard]        = { false, false, true, nil }, -- ACCURATE
+    [A.Skill_Standard_of_Might]     = { true, false, true, nil }, -- ACCURATE
+    
+    -- Templar
+    [A.Skill_Nova]                          = { false, false, true, 1.1 }, -- ACCURATE SO FAR
     
     
     -- NEEDS TO BE RESORTED STILL:
@@ -201,16 +213,8 @@ local Effects = {
     [A.Skill_Scorched_Earth]        = { false, false, true, 2 },
     [A.Skill_Arrow_Barrage]         = { false, false, true, 2 },
 
-    -- Destro Staff
-    [A.Skill_Unstable_Wall_of_Fire]   = { false, false, 6.6, nil }, -- ACCURATE
-    [A.Skill_Unstable_Wall_of_Frost]  = { false, false, 6.6, nil }, -- ACCURATE
-    [A.Skill_Unstable_Wall_of_Storms] = { false, false, 6.6, nil }, -- ACCURATE
-    [A.Skill_Blockade_of_Fire]        = { false, false, 8.3, nil }, -- CHECK THESE VALUES
-    [A.Skill_Blockade_of_Frost]       = { false, false, 8.3, nil }, -- CHECK THESE VALUES
-    [A.Skill_Blockade_of_Storms]      = { false, false, 8.3, nil }, -- CHECK THESE VALUES
-
     -- Resto Staff
-    [A.Skill_Healing_Springs]       = { true, false, false, nil }, -- Possibly Hide later, hard to account for cast time, only cast time is the animation which can be anim cancelled
+    [A.Skill_Healing_Springs]       = { true, false, false, nil },
     [A.Skill_Illustrious_Healing]   = { true, false, false, nil },
 
     -----------------------------------
@@ -239,11 +243,6 @@ local Effects = {
     -----------------------------------
     -- DRAGONKNIGHT
     -----------------------------------
-
-    -- Ardent Flame
-    [A.Skill_Shifting_Standard]     = { false, false, true, nil }, -- This is the new standard effect fired when moving Shifting Standard
-    [A.Skill_Shift_Standard]        = { false, false, true, nil }, -- Would be better to add these as a fake aura later - Standard doesn't go away when you cast shifting
-    [A.Skill_Standard_of_Might]     = { true, false, true, nil }, -- Also if mob dies before banner ends, the banner stops but icon persists
 
     -- Draonic Power
     -- Could add inhale here eventually, gonna need to do it with a fake aura however (2.5 sec duration timer before it explodes)
@@ -284,7 +283,6 @@ local Effects = {
     [A.Skill_Blazing_Spear]                 = { false, false, true, 1 }, -- Possibly Hide later
 
     -- Dawn's Wrath
-    [A.Skill_Nova]                          = { false, false, 11.3, 1.1 },
     [A.Skill_Solar_Prison]                  = { false, false, 11.3, 1.1 }, -- Rough estimate of Nova duration - the damage fires off a bit after VFX fade - Pretty happy with these values
     [A.Skill_Solar_Disturbance]             = { false, false, 11.3, 1.1 },
 
@@ -357,18 +355,38 @@ local HasAbilityProc = {
 -- Table of associations we have to fix
 local AbilityCustomToggleFix = {
 
+    -- Restoration Staff
+    [37243] = 62619, -- Blessing of Protection (Blessing of Protection - Rank 1)
+
+    -- Dragonknight Skills (Draconic Power)
+    [29004] = 29011, -- Dragon Blood (Dragon Blood - Rank 1)
+    [33405] = 61871, -- Dragon Blood (Dragon Blood - Rank 2)
+    [33616] = 61872, -- Dragon Blood (Dragon Blood - Rank 3)
+    [33619] = 61873, -- Dragon Blood (Dragon Blood - Rank 4)
+    
+    [32744] = 61884, -- Green Dragon Blood (Green Dragon Blood - Rank 1)
+    
+    [32722] = 61891, -- Coagulating Blood (Coagulating Blood - Rank 1 )
+
+    -- Dragonknight Skills (Earthen Heart)
+    [31888] = 76537, -- Molten Armaments (Molten Armaments - Rank 1)
+
     -- Templar (Aedric Spear)
-    [27501] = 27504 -- Sun Shield (Sun Shield - Rank 4)
+    [27501] = 27504, -- Sun Shield (Sun Shield - Rank 4)
 
 }
 
 local IsAbilityCustomToggleId = {
 
     -- Restoration Staff
-    [28385] = true, -- Grand Helaing (Grand Healing - Rank 1)
-    [41244] = true, -- Grand Helaing (Grand Healing - Rank 2)
-    [41246] = true, -- Grand Helaing (Grand Healing - Rank 3)
-    [41248] = true, -- Grand Helaing (Grand Healing - Rank 4)
+    [28385] = true, -- Grand Healing (Grand Healing - Rank 1)
+    [41244] = true, -- Grand Healing (Grand Healing - Rank 2)
+    [41246] = true, -- Grand Healing (Grand Healing - Rank 3)
+    [41248] = true, -- Grand Healing (Grand Healing - Rank 4)
+    
+    [37243] = true, -- Blessing of Protection (Blessing of Protection - Rank 1)
+    
+    [37232] = true, -- Steadfast Ward (Steadfast Ward - Rank 1)
     
     -- Dragonknight Skills (Draconic Power)
     [20319] = true, -- Spiked Armor (Spiked Armor - Rank 1)
@@ -378,13 +396,35 @@ local IsAbilityCustomToggleId = {
     
     [20328] = true, -- Hardened Armor (Hardened Armor - Rank 1)
     
+    [20323] = true, -- Volatile Armor (Volatile Armor - Rank 1)
+    
+    [29004] = true, -- Dragon Blood (Dragon Blood - Rank 1)
+    [33405] = true, -- Dragon Blood (Dragon Blood - Rank 2)
+    [33616] = true, -- Dragon Blood (Dragon Blood - Rank 3)
+    [33619] = true, -- Dragon Blood (Dragon Blood - Rank 4)
+    
+    [32744] = true, -- Green Dragon Blood (Green Dragon Blood - Rank 1)
+    
+    [32722] = true, -- Coagulating Blood (Coagulating Blood - Rank 1 )
+    
     -- Dragonknight Skills (Earthen Heart)
     [29043] = true, -- Molten Weapons (Molten Weapons - Rank 1)
     [32151] = true, -- Molten Weapons (Molten Weapons - Rank 2)
     [32154] = true, -- Molten Weapons (Molten Weapons - Rank 3)
     [32156] = true, -- Molten Weapons (Molten Weapons - Rank 4)
-    [31874] = true, -- Igneous Weapons (Molten Weapons - Rank 4)
     
+    [31874] = true, -- Igneous Weapons (Molten Weapons - Rank 1)
+    
+    [31888] = true, -- Molten Armaments (Molten Armaments - Rank 1)
+    
+    [29071] = true, -- Obsidian Shield (Obsidian Shield - Rank 1)
+    [33862] = true, -- Obsidian Shield (Obsidian Shield - Rank 2)
+    [33864] = true, -- Obsidian Shield (Obsidian Shield - Rank 3)
+    [33866] = true, -- Obsidian Shield (Obsidian Shield - Rank 4)
+    
+    [29224] = true, -- Igneous Shield (Igneous Shield - Rank 1)
+    
+    [32673] = true, -- Fragmented Shield (Fragmeneted Shield - Rank 1)
     
    
 }
@@ -429,20 +469,12 @@ local IsAbilityCustomToggleName = {
     [A.Skill_Cauterize]             = true,
 
     --Dragonknight Skills (Draconic Power)
-    [A.Skill_Volatile_Armor]        = true,
-    [A.Skill_Hardened_Armor]        = true, -- Cut short by short duration shield effect
-    --[A.Skill_Dragon_Blood]            = true,
     --[A.Skill_Green_Dragon_Blood]      = true,     -- Doesn't work, no ability to go along with cast, only Major/Minor effects
     --[A.Skill_Coagulating_Blood]       = true,
     [A.Skill_Reflective_Scale]      = true,
     [A.Skill_Reflective_Plate]      = true,
     [A.Skill_Dragon_Fire_Scale]     = true,
 
-    --Dragonknight Skills (Earthen Heart)
-    [A.Skill_Molten_Armaments]         = true,
-    [A.DamageShield_Obsidian_Shield]   = true,
-    [A.DamageShield_Fragmented_Shield] = true,
-    [A.DamageShield_Igneous_Shield]    = true,
 
     --Templar Skills (Aedric Spear)
     --[A.DamageShield_Sun_Shield]     = true, -- These seem to fade on dodge roll, unlike other shields, I have no idea why
@@ -498,8 +530,6 @@ local IsAbilityCustomToggleName = {
     --[A.Skill_Illustrious_Healing]    = true, -- Doesn't work, no effect related to it
     [A.Skill_Mutagen]                = true,
     [A.Skill_Rapid_Regeneration]     = true,
-    -- Blessing of Protection + Morphs (not sure how to fix this, base effect is short duration)
-    [A.DamageShield_Steadfast_Ward]  = true,
     [A.DamageShield_Ward_Ally]       = true,
     [A.DamageShield_Healing_Ward]    = true,
 
@@ -1966,7 +1996,7 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
     local ability_id = GetSlotBoundId(slotNum)
 
     -- Get additional ability information
-    local abilityName = GetAbilityName(ability_id) -- GetSlotName(slotNum)
+    local abilityName = E.EffectNameOverride[ability_id] or GetAbilityName(ability_id) -- GetSlotName(slotNum)
     -- Localization ^^ here. We will use English name from here onwards.
     local abilityCost, mechanicType = GetSlotAbilityCost(slotNum)
     -- Get API information for this ability

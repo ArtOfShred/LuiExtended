@@ -273,7 +273,7 @@ A.Skill_Efficient_Purge          = 40232
 -- ARDENT FLAME -------------
 A.Skill_Dragonknight_Standard    = 28988
 A.Skill_Shifting_Standard        = 32958
-A.Skill_Shift_Standard           = 33992
+A.Skill_Shift_Standard           = 32963
 A.Skill_Standard_of_Might        = 32947
 A.Skill_Fiery_Grip               = 20492
 A.Skill_Extended_Chains          = 20496
@@ -470,7 +470,7 @@ A.Skill_Radiant_Ward             = 22182
 A.Skill_Blazing_Shield           = 22180
 
 -- DAWNS WRATH --------------
-A.Skill_Nova                     = 21752
+A.Skill_Nova                     = 21976
 A.Skill_Solar_Prison             = 21755
 A.Skill_Solar_Disturbance        = 21758
 A.Skill_Sun_Fire                 = 21726
