@@ -19,6 +19,7 @@ local classIcons = {
     [1] = "/esoui/art/icons/class/class_dragonknight.dds",
     [2] = "/esoui/art/icons/class/class_sorcerer.dds",
     [3] = "/esoui/art/icons/class/class_nightblade.dds",
+    [4] = "/esoui/art/icons/class/class_warden.dds",
     [6] = "/esoui/art/icons/class/class_templar.dds",
 }
 
@@ -338,6 +339,12 @@ local function CreateCustomFrames()
         local alt = LUIE.UI.Backdrop( botInfo, {RIGHT,RIGHT}, nil, nil , {0,0,0,1}, false )
         local pli = UI.Texture( topInfo, nil, {20,20}, nil, nil, false )
 
+        local fragment = ZO_HUDFadeSceneFragment:New(playerTlw, 0, 0)
+
+		SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
+		SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
+		SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+        
         -- Collect all together
         UF.CustomFrames.player = {
             ["unitTag"]     = "player",
@@ -406,6 +413,12 @@ local function CreateCustomFrames()
         local thb = LUIE.UI.Backdrop(target, {TOP,TOP,0,0}, nil, nil, nil, false )
         local tli = UI.Texture( topInfo, nil, {20,20}, nil, nil, false )
         local ari = UI.Texture( botInfo, {RIGHT,RIGHT,-1,0}, {20,20}, nil, nil, false )
+        
+        local fragment = ZO_HUDFadeSceneFragment:New(targetTlw, 0, 0)
+
+		SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
+		SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
+		SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
 
         -- Collect all together
         UF.CustomFrames.reticleover = {
@@ -451,6 +464,12 @@ local function CreateCustomFrames()
         local botInfo = UI.Control( target, {TOP,BOTTOM,0,2}, nil, false )
         local thb = LUIE.UI.Backdrop(target, {TOP,TOP,0,0}, nil, nil, nil, false )
         local cn = UI.Label( botInfo, {TOP,TOP}, nil, {1,3}, nil, "Class", false )
+        
+        local fragment = ZO_HUDFadeSceneFragment:New(targetTlw, 0, 0)
+
+		SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
+		SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
+		SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
 
         -- Collect all together
         -- Notice, that we put this table into same UF.CustomFrames table.
@@ -496,6 +515,12 @@ local function CreateCustomFrames()
         group.customPositionAttr = "CustomFramesGroupFramePos"
         group.preview = LUIE.UI.Backdrop( group, "fill", nil, nil, nil, true )
         group.previewLabel = UI.Label( group.preview, {BOTTOM,TOP,0,-1,group}, nil, nil, "ZoFontGameMedium", "Small Group", false )
+        
+        local fragment = ZO_HUDFadeSceneFragment:New(group, 0, 0)
+
+		SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
+		SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
+		SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
 
         for i = 1, 4 do
             local unitTag = "SmallGroup" .. i
@@ -537,6 +562,12 @@ local function CreateCustomFrames()
         raid.preview2 = LUIE.UI.Backdrop( raid.preview, nil, nil, nil, nil, false )
         raid.previewLabel = UI.Label( raid.preview, {BOTTOM,TOP,0,-1,raid}, nil, nil, "ZoFontGameMedium", "Raid Group", false )
 
+        local fragment = ZO_HUDFadeSceneFragment:New(raid, 0, 0)
+
+		SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
+		SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
+		SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+        
         for i = 1, 24 do
             local unitTag = "RaidGroup" .. i
             local control = UI.Control( raid, nil, nil, false )
@@ -570,6 +601,12 @@ local function CreateCustomFrames()
         bosses.preview = LUIE.UI.Backdrop( bosses, "fill", nil, nil, nil, true )
         bosses.previewLabel = UI.Label( bosses.preview, {BOTTOM,TOP,0,-1,bosses}, nil, nil, "ZoFontGameMedium", "Bosses Group", false )
 
+        local fragment = ZO_HUDFadeSceneFragment:New(bosses, 0, 0)
+
+		SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
+		SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
+		SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+        
         for i = 1, 6 do
             local unitTag = "boss" .. i
             local control = UI.Control( bosses, nil, nil, false )
@@ -745,12 +782,14 @@ local function CreateCustomFrames()
     -- Apply fonts
     UF.CustomFramesApplyFont()
 
+    --[[
     -- Add this top level window to global controls list, so it can be hidden
     for _, unitTag in pairs( { "player", "reticleover", "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget" } ) do
         if UF.CustomFrames[unitTag] then
             LUIE.components[ moduleName .. "_CustomFrame_" .. unitTag ] = UF.CustomFrames[unitTag].tlw
         end
     end
+    ]]--
 end
 
 -- Main entry point to this module
@@ -921,7 +960,7 @@ function UF.ReticleColourByReaction(value)
 end
 
 -- Update format for labels on CustomFrames
-function UF.CustomFramesFormatLabels()
+function UF.CustomFramesFormatLabels(menu)
     -- Search CustomFrames for attribute bars with correct labels
     for _, baseName in pairs( { "player", "reticleover", "SmallGroup" } ) do
         for i = 0, 4 do
@@ -937,6 +976,9 @@ function UF.CustomFramesFormatLabels()
                         end
                     end
                 end
+            end
+            if menu and DoesUnitExist(unitTag) then
+                UF.ReloadValues(unitTag)
             end
         end
     end
@@ -982,7 +1024,7 @@ function UF.OnPlayerActivated(eventCode)
     UF.CustomFramesSetupAlternative()
 
     -- Apply bar colors here, has to be after player init to get group roles
-    UF.CustomFramesApplyColours()
+    UF.CustomFramesApplyColours(false)
 end
 
 -- Runs on the EVENT_POWER_UPDATE listener.
@@ -1801,18 +1843,20 @@ function UF.OnGroupMemberConnectedStatus(eventCode, unitTag, isOnline)
     if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag].dead then
         UF.CustomFramesSetDeadLabel( UF.CustomFrames[unitTag], isOnline and nil or strOffline )
     end
-    if isOnline and (UF.SV.ColorRoleGroup or UF.SV.ColorRoleRaid) then UF.CustomFramesApplyColours() end
+    if isOnline and (UF.SV.ColorRoleGroup or UF.SV.ColorRoleRaid) then UF.CustomFramesApplyColours(false) end
 end
 
 function UF.OnGroupMemberRoleChange(eventCode, unitTag, dps, healer, tank)
     if UF.CustomFrames[unitTag] then
         if (UF.SV.ColorRoleGroup or UF.SV.ColorRoleRaid) then UF.CustomFramesApplyColoursSingle(unitTag) end
         UF.ReloadValues(unitTag)
+        UF.CustomFramesApplyLayoutGroup()
+        UF.CustomFramesApplyLayoutRaid()
     end
 end
 
 function UF.OnGroupMemberChange(eventCode, memberName)
-    zo_callLater(UF.CustomFramesApplyColours, 200)
+    zo_callLater(function() UF.CustomFramesApplyColours(false) end, 200)
 end
 
 -- Runs on the EVENT_UNIT_DEATH_STATE_CHANGED listener.
@@ -2281,7 +2325,7 @@ function UF.CustomFramesSetMovingState( state )
 end
 
 -- Apply selected colours for all known bars on custom unit frames
-function UF.CustomFramesApplyColours(isMenu, isReloadOnly)
+function UF.CustomFramesApplyColours(isMenu)
     local health    = { UF.SV.CustomColourHealth[1],  UF.SV.CustomColourHealth[2],  UF.SV.CustomColourHealth[3], 0.9 }
     local shield    = { UF.SV.CustomColourShield[1],  UF.SV.CustomColourShield[2],  UF.SV.CustomColourShield[3], 0 } -- .a value will be fixed in the loop
     local magicka   = { UF.SV.CustomColourMagicka[1], UF.SV.CustomColourMagicka[2], UF.SV.CustomColourMagicka[3], 0.9 }
@@ -2299,7 +2343,7 @@ function UF.CustomFramesApplyColours(isMenu, isReloadOnly)
     local dps_bg    = { 0.1*UF.SV.CustomColourDPS[1],    0.1*UF.SV.CustomColourDPS[2],    0.1*UF.SV.CustomColourDPS[3], 0.9 }
     local healer_bg = { 0.1*UF.SV.CustomColourHealer[1], 0.1*UF.SV.CustomColourHealer[2], 0.1*UF.SV.CustomColourHealer[3], 0.9 }
     local tank_bg   = { 0.1*UF.SV.CustomColourTank[1],   0.1*UF.SV.CustomColourTank[2],   0.1*UF.SV.CustomColourTank[3], 0.9 }
-
+    
     -- After colour is applied unhide frames, so player can see changes even from menu
     for _, baseName in pairs( { "player", "reticleover", "boss", "AvaPlayerTarget" } ) do
         shield[4] = ( UF.SV.CustomShieldBarSeparate and not (baseName == "boss") ) and 0.9 or 0.5
@@ -2414,6 +2458,10 @@ function UF.CustomFramesApplyColoursSingle(unitTag)
                 if isTank then
                     thb.bar:SetColor( unpack(tank) )
                     thb.backdrop:SetCenterColor( unpack(tank_bg) )
+                end
+                if not (isDps or isHealer or isTank) then
+                    thb.bar:SetColor( unpack(health) )
+                    thb.backdrop:SetCenterColor( unpack(health_bg) )
                 end
             end
         end
@@ -2852,8 +2900,10 @@ function UF.CustomFramesApplyLayoutGroup()
             ghb.shieldbackdrop:SetDimensions( UF.SV.GroupBarWidth, UF.SV.CustomShieldBarHeight )
         end
 
+        local role1, role2, role3 = GetGroupMemberRoles(unitTag)
+        
         -- First HP Label
-        if UF.SV.RoleIconSmallGroup then
+        if UF.SV.RoleIconSmallGroup and (role1 or role2 or role3) then
             ghb.labelOne:SetDimensions(UF.SV.GroupBarWidth-52, UF.SV.GroupBarHeight-2)
             ghb.labelOne:SetAnchor ( LEFT, phb, LEFT, 25, 0 )
         else
@@ -2917,7 +2967,9 @@ function UF.CustomFramesApplyLayoutRaid()
         unitFrame.control:SetAnchor( TOPLEFT, raid, TOPLEFT, UF.SV.RaidBarWidth*column, UF.SV.RaidBarHeight*(row-1) + (UF.SV.RaidSpacers and spacerHeight*(math.floor((i-1)/4)-math.floor(column*itemsPerColumn/4)) or 0) )
         unitFrame.control:SetDimensions( UF.SV.RaidBarWidth, UF.SV.RaidBarHeight )
         
-        if UF.SV.RoleIconRaid then
+        local role1, role2, role3 = GetGroupMemberRoles(unitTag)
+        
+        if UF.SV.RoleIconRaid and (role1 or role2 or role3) then
             unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
             unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
         else

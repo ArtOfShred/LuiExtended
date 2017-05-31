@@ -548,7 +548,7 @@ function DM.OnCombatEvent( eventCode , result , isError , abilityName, abilityGr
         ["result"]  = result,
         ["target"]  = targetName,
         ["source"]  = sourceName,
-        ["name"]    = E.EffectNameOverride[abilityId] or abilityName,
+        ["name"]    = E.EffectOverride[abilityId] and E.EffectOverride[abilityId].name or abilityName,
         ["id"]      = abilityId,
         ["type"]    = damageType,
         ["value"]   = hitValue,

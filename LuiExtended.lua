@@ -3,7 +3,7 @@
 LUIE             = {}
 LUIE.name        = "LuiExtended"
 LUIE.author      = "ArtOfShred, psypanda, Upularity & SpellBuilder"
-LUIE.version     = "5.03 BETA"
+LUIE.version     = "5.1 BETA"
 LUIE.components  = {}
 
 -- Saved variables options
@@ -115,7 +115,7 @@ end
 -- Runs on the EVENT_ACTION_LAYER_POPPED and EVENT_ACTION_LAYER_PUSHED listeners.
 -- This handler is used to hide and show all GUI elements when player opens any sort of menu.
 local function LUIE_ToggleVisibility(eventCode, layerIndex, activeLayerIndex)
-    local hidden = ( activeLayerIndex > 2 )
+    local hidden = ( activeLayerIndex > 3 )
     for _, control in pairs( LUIE.components ) do
         control:SetHidden( hidden )
     end
@@ -163,6 +163,270 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
     -- Keep track of guilds for the /ginvite commands
     LUIE.InitGuildData()
+    
+    local zos_IconSetup = SKILLS_WINDOW.SetupAbilityEntry
+    SKILLS_WINDOW.SetupAbilityEntry = function(self, ability, data)
+        zos_IconSetup(self, ability, data)
+        
+        local abilityId = GetSkillAbilityId(data.skillType, data.lineIndex, data.abilityIndex)
+        local slot = ability.slot
+        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then
+            slot.icon:SetTexture(LUIE.Effects.EffectOverride[abilityId].icon)
+            slot.iconFile = LUIE.Effects.EffectOverride[abilityId].icon
+        end
+    end
+
+    local zos_GetSkillAbilityInfo = GetSkillAbilityInfo
+    GetSkillAbilityInfo = function(skillType, skillIndex, abilityIndex)
+        local name, texture, earnedRank, passive, ultimate, purchased, progressionIndex = zos_GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
+        local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex)
+        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then
+            texture = LUIE.Effects.EffectOverride[abilityId].icon
+        end
+        return name, texture, earnedRank, passive, ultimate, purchased, progressionIndex
+    end
+
+    local zos_GetSkillAbilityNextUpgradeInfo = GetSkillAbilityNextUpgradeInfo
+    GetSkillAbilityNextUpgradeInfo = function(skillType, skillIndex, abilityIndex)
+        local name, texture, earnedRank = zos_GetSkillAbilityNextUpgradeInfo(skillType, skillIndex, abilityIndex)
+        local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex)
+        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then
+            texture = LUIE.Effects.EffectOverride[abilityId].icon
+        end
+        return name, texture, earnedRank
+    end
+ 
+    local zos_GetUnitBuffInfo = GetUnitBuffInfo
+    GetUnitBuffInfo = function(unitTag, buffIndex)
+        local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = zos_GetUnitBuffInfo(unitTag, buffIndex)
+        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then buffName = LUIE.Effects.EffectOverride[abilityId].name end
+        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then iconFile = LUIE.Effects.EffectOverride[abilityId].icon end
+    
+        return buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer
+    
+    end
+    
+    -- Death Recap enhancements:
+    
+    local zos_GetKillingAttackerInfo = GetKillingAttackerInfo
+    local zos_GetKillingAttackInfo = GetKillingAttackInfo
+    
+    GetKillingAttackerInfo = function(index)
+        local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
+        local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS = zos_GetKillingAttackInfo(index)
+       -- if LUIE.DeathRecap.DeathRecapSourceOverride[attackerRawName] then
+       --     if LUIE.DeathRecap.DeathRecapSourceOverride[attackerRawName][attackName] then attackerRawName = LUIE.DeathRecap.DeathRecapSourceOverride[attackerRawName][attackName] end
+       -- end
+        if LUIE.DeathRecap.DeathRecapInfoOverride[attackName] and LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName] and not isPlayer then
+            local source
+            if LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName].source then source = LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName].source end
+            if source then attackerRawName = source end
+        end
+        
+        return attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName
+    end
+ 
+    GetKillingAttackInfo = function(index)
+        local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
+        local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS = zos_GetKillingAttackInfo(index)
+        
+        local name
+        local icon
+        attackerRawName = zo_strformat("<<t:1>>", attackerRawName)
+        minionName = zo_strformat("<<t:1>>", minionName)
+        
+        -- A few overrides require source, attackname, and ICON as well, this handles those
+        if LUIE.DeathRecap.DeathRecapTripleOverride[attackName] and not isPlayer then
+            if LUIE.DeathRecap.DeathRecapTripleOverride[attackName][attackerRawName] then
+                if LUIE.DeathRecap.DeathRecapTripleOverride[attackName][attackerRawName][attackIcon] then
+                    if LUIE.DeathRecap.DeathRecapTripleOverride[attackName][attackerRawName][attackIcon].name then name = LUIE.DeathRecap.DeathRecapTripleOverride[attackName][attackerRawName][attackIcon].name end
+                    if LUIE.DeathRecap.DeathRecapTripleOverride[attackName][attackerRawName][attackIcon].icon then icon = LUIE.DeathRecap.DeathRecapTripleOverride[attackName][attackerRawName][attackIcon].icon end
+                    if name then attackName = name end
+                    if icon then attackIcon = icon end
+                    return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS
+                end
+            elseif LUIE.DeathRecap.DeathRecapTripleOverride[attackName][minionName] then
+                if LUIE.DeathRecap.DeathRecapTripleOverride[attackName][minionName][attackIcon] then
+                    if LUIE.DeathRecap.DeathRecapTripleOverride[attackName][minionName][attackIcon].name then name = LUIE.DeathRecap.DeathRecapTripleOverride[attackName][minionName][attackIcon].name end
+                    if LUIE.DeathRecap.DeathRecapTripleOverride[attackName][minionName][attackIcon].icon then icon = LUIE.DeathRecap.DeathRecapTripleOverride[attackName][minionName][attackIcon].icon end
+                    if name then attackName = name end
+                    if icon then attackIcon = icon end
+                    return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS
+                end
+            end
+        end
+        
+        -- Advanced override considering source
+        if LUIE.DeathRecap.DeathRecapInfoOverride[attackName] and not isPlayer then
+            if LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName] then
+                if LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName].name then name = LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName].name end
+                if LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName].icon then icon = LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName].icon end
+                if name then attackName = name end
+                if icon then attackIcon = icon end
+                return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS
+            elseif LUIE.DeathRecap.DeathRecapInfoOverride[attackName][minionName] then
+                if LUIE.DeathRecap.DeathRecapInfoOverride[attackName][minionName].name then name = LUIE.DeathRecap.DeathRecapInfoOverride[attackName][minionName].name end
+                if LUIE.DeathRecap.DeathRecapInfoOverride[attackName][minionName].icon then icon = LUIE.DeathRecap.DeathRecapInfoOverride[attackName][minionName].icon end
+                if name then attackName = name end
+                if icon then attackIcon = icon end
+                return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS
+            end  
+        end
+        
+        -- Basic override by name
+        if LUIE.DeathRecap.DeathRecapBasicOverride[attackName] and not isPlayer then
+            if LUIE.DeathRecap.DeathRecapBasicOverride[attackName].name then name = LUIE.DeathRecap.DeathRecapBasicOverride[attackName].name end
+            if LUIE.DeathRecap.DeathRecapBasicOverride[attackName].icon then icon = LUIE.DeathRecap.DeathRecapBasicOverride[attackName].icon end
+        end
+        
+        if name then attackName = name end
+        if icon then attackIcon = icon end
+        
+        return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS
+    end
+    
+    -- HOOK SUPPORT FOR OTHER ADDONS (ICON)
+    LUIE.GetAbilityIcon = GetAbilityIcon
+    local zos_GetAbilityIcon = GetAbilityIcon
+    GetAbilityIcon = function(abilityId)
+        local icon = zos_GetAbilityIcon(abilityId)
+        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then icon = LUIE.Effects.EffectOverride[abilityId].icon end
+        return(icon)
+    end
+    
+    -- HOOK SUPPORT FOR OTHER ADDONS (NAME)
+    LUIE.GetAbilityName = GetAbilityName
+    local zos_GetAbilityName = GetAbilityName
+    GetAbilityName = function(abilityId)
+        local abilityName = zos_GetAbilityName(abilityId)
+        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then abilityName = LUIE.Effects.EffectOverride[abilityId].name end
+        return(abilityName)
+    end
+    
+    -- HOOK SUPPORT FOR OTHER ADDONS (ARTIFICIAL EFFECT IDS)
+    LUIE.GetArtificialEffectInfo = GetArtificialEffectInfo
+    local zos_GetArtificialEffectInfo = GetArtificialEffectInfo
+    GetArtificialEffectInfo = function(artificialEffectId)
+        local displayName, iconFile, effectType, sortOrder, timeStarted, timeEnding = zos_GetArtificialEffectInfo(artificialEffectId)
+        if LUIE.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Effects.ArtificialEffectOverride[artificialEffectId].icon then iconFile = LUIE.Effects.ArtificialEffectOverride[artificialEffectId].icon end
+        return displayName, iconFile, effectType, sortOrder, timeStarted, timeEnding
+    end
+    
+    local zos_GetSynergyInfo = GetSynergyInfo
+    GetSynergyInfo = function()
+        local synergyName, iconFilename = zos_GetSynergyInfo()
+        if LUIE.Effects.SynergyNameOverride[synergyName] then iconFilename = LUIE.Effects.SynergyNameOverride[synergyName] end
+        return synergyName, iconFilename
+    end
+    
+    local function EffectsRowComparator(left, right)
+        local leftIsArtificial, rightIsArtificial = left.isArtificial, right.isArtificial
+        if leftIsArtificial ~= rightIsArtificial then
+            --Artificial before real
+            return leftIsArtificial
+        else
+            if leftIsArtificial then
+                --Both artificial, use def defined sort order
+                return left.sortOrder < right.sortOrder
+            else
+                --Both real, use time
+                return left.time.endTime < right.time.endTime
+            end
+        end
+    end
+    
+    STATS.AddLongTermEffects = function(self, container, effectsRowPool)
+           
+        local function UpdateEffects(eventCode, changeType, buffSlot, buffName, unitTag, startTime, endTime, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId)
+            if (not unitTag or unitTag == "player") and not container:IsHidden() then
+                effectsRowPool:ReleaseAllObjects()
+                
+                local effectsRows = {}
+
+                --Artificial effects--
+                for effectId in ZO_GetNextActiveArtificialEffectIdIter do
+                    local displayName, iconFile, effectType, sortOrder = GetArtificialEffectInfo(effectId)
+                    
+                    local effectsRow = effectsRowPool:AcquireObject()
+                    effectsRow.name:SetText(zo_strformat(SI_ABILITY_TOOLTIP_NAME, displayName))
+                    effectsRow.icon:SetTexture(iconFile)
+                    effectsRow.effectType = effectType
+                    effectsRow.time:SetHidden(true)
+                    effectsRow.sortOrder = sortOrder
+                    effectsRow.tooltipTitle = displayName
+                    effectsRow.effectId = effectId
+                    effectsRow.isArtificial = true
+
+                    table.insert(effectsRows, effectsRow)
+                        
+                end
+
+                for i = 1, GetNumBuffs("player") do
+                    local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId = GetUnitBuffInfo("player", i)
+                    
+                    local tooltipText = GetAbilityEffectDescription(buffSlot)
+                    -- Have to trim trailing spaces on the end of tooltips
+                    if tooltipText ~= "" then tooltipText = string.match(tooltipText, ".*%S") end 
+                    if buffSlot > 0 and buffName ~= "" and not (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide) then
+                        local effectsRow = effectsRowPool:AcquireObject()
+                        effectsRow.name:SetText(zo_strformat(SI_ABILITY_TOOLTIP_NAME, buffName))
+                        effectsRow.icon:SetTexture(iconFile)
+                        effectsRow.tooltipTitle = buffName
+                        effectsRow.tooltipText = (tooltipText)
+                        local duration = startTime - endTime
+                        effectsRow.time:SetHidden(duration == 0)
+                        effectsRow.time.endTime = endTime
+                        effectsRow.effectType = effectType
+                        effectsRow.buffSlot = buffSlot
+                        effectsRow.isArtificial = false
+
+                        table.insert(effectsRows, effectsRow)
+                    end
+                end
+
+                table.sort(effectsRows, EffectsRowComparator)
+                local prevRow
+                for i, effectsRow in ipairs(effectsRows) do
+                    if(prevRow) then
+                        effectsRow:SetAnchor(TOPLEFT, prevRow, BOTTOMLEFT)
+                    else
+                        effectsRow:SetAnchor(TOPLEFT, nil, TOPLEFT, 5, 0)
+                    end
+                    effectsRow:SetHidden(false)
+
+                    prevRow = effectsRow
+                end
+
+            end
+        end
+           
+       container:RegisterForEvent(EVENT_EFFECT_CHANGED, UpdateEffects)
+       container:RegisterForEvent(EVENT_EFFECTS_FULL_UPDATE, UpdateEffects)
+       container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_ADDED, UpdateEffects)
+       container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_REMOVED, UpdateEffects)
+       container:SetHandler("OnEffectivelyShown", UpdateEffects)
+       
+    end
+    
+    ZO_StatsActiveEffect_OnMouseEnter = function(control)
+        InitializeTooltip(GameTooltip, control, RIGHT, -15)
+        if control.isArtificial then
+            local tooltipText = GetArtificialEffectTooltipText(control.effectId)
+            GameTooltip:AddLine(control.tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
+            GameTooltip:AddLine(tooltipText, "", ZO_NORMAL_TEXT:UnpackRGBA())
+        else
+            GameTooltip:AddLine(control.tooltipTitle, "", ZO_SELECTED_TEXT:UnpackRGBA())
+            if control.tooltipText ~= "" then
+                GameTooltip:AddLine(control.tooltipText, "", ZO_NORMAL_TEXT:UnpackRGBA())
+            end
+        end
+
+        if not control.animation then
+            control.animation = ANIMATION_MANAGER:CreateTimelineFromVirtual("ShowOnMouseOverLabelAnimation", control:GetNamedChild("Highlight"))
+        end
+        control.animation:PlayForward()
+    end
+    
 end
 
 local delayBuffer       = {}

@@ -1860,7 +1860,7 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         combatEvent.eventCode      = scrolling -- !!! -- eventCode
         combatEvent.result         = result
         combatEvent.isError        = isError
-        combatEvent.abilityName    = E.EffectNameOverride[abilityId] or abilityName
+        combatEvent.abilityName    = E.EffectOverride[abilityId] and E.EffectOverride[abilityId].name or abilityName
         combatEvent.abilityGraphic = abilityGraphic
         combatEvent.abilityAST     = abilityActionSlotType
         combatEvent.sourceName     = sourceName

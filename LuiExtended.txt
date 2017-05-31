@@ -1,7 +1,7 @@
 ﻿## Title: |cE12000L|cFFFFB0ui E|rxtended|
 ## Author: ArtOfShred, psypanda, Upularity & SpellBuilder
-## Version: 5.03 BETA
-## APIVersion: 100018
+## Version: 5.1 BETA
+## APIVersion: 100019
 ## Description: Provides UnitFrames, InfoPanel, CombatEvents, Buffs Tracking, Damage Meter and Chat Announcements.
 ## OptionalDependsOn: LibStub LibAddonMenu-2.0 LibMediaProvider-1.0
 ## SavedVariables: LUIESV
@@ -67,6 +67,7 @@ i18n\$(language).lua
 
 data\AbilityTables.lua
 data\Effects.lua
+data\DeathRecap.lua
 
 modules\ChatAnnouncements.lua
 modules\CombatInfo.lua
