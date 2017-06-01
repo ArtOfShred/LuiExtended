@@ -19,6 +19,9 @@ local testEffectPrefix = "Test Effect: "
 local testEffectIds = { 999900, 999901, 999902, 999903, 999904 }
 local testEffectList   = { 22, 44, 55, 300, 1800000 }
 
+local hidePlayerEffects = { }
+local hideTargetEffects = { }
+
 local playerName = strformat(SI_UNIT_NAME, GetUnitName("player"))
 
 local windowTitles = {
@@ -416,14 +419,7 @@ local IsAbilityCustomToggleId = {
     [32722] = true, -- Coagulating Blood (Coagulating Blood - Rank 1 )
     
     -- Dragonknight Skills (Earthen Heart)
-    [29043] = true, -- Molten Weapons (Molten Weapons - Rank 1)
-    [32151] = true, -- Molten Weapons (Molten Weapons - Rank 2)
-    [32154] = true, -- Molten Weapons (Molten Weapons - Rank 3)
-    [32156] = true, -- Molten Weapons (Molten Weapons - Rank 4)
-    
-    [31874] = true, -- Igneous Weapons (Molten Weapons - Rank 1)
-    
-    [31888] = true, -- Molten Armaments (Molten Armaments - Rank 1)
+    -- NEED TO FIX ALL RANKS OF MOLTEN WEP
     
     [29071] = true, -- Obsidian Shield (Obsidian Shield - Rank 1)
     [33862] = true, -- Obsidian Shield (Obsidian Shield - Rank 2)
@@ -433,13 +429,642 @@ local IsAbilityCustomToggleId = {
     [29224] = true, -- Igneous Shield (Igneous Shield - Rank 1)
     
     [32673] = true, -- Fragmented Shield (Fragmeneted Shield - Rank 1)
+    
+    
+    
+    
+    
+    
+    ------------------------------------------------------------------------------------------------------------------------------------------------------
+    -- RELATIVELY UNSORTED TEMP LIST HERE, ADDED FROM UESP SKILL TREE ABILITY ID'S, WILL BE MORE THROUGHLY PROCESSED IN THE FUTURE
+    ------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    -- Alliance War (Assault)
+    [61503] = true, -- Vigor
+    [63236] = true, -- Vigor
+    [63238] = true, -- Vigor
+    [63240] = true, -- Vigor
+    [61505] = true, -- Echoing Vigor
+    [63243] = true, -- Echoing Vigor
+    [63245] = true, -- Echoing Vigor
+    [63247] = true, -- Echoing Vigor
+    [61507] = true, -- Resolving Vigor
+    [63249] = true, -- Resolving Vigor
+    [63252] = true, -- Resolving Vigor
+    [63255] = true, -- Resolving Vigor
+    
+    [38566] = true, -- Rapid Maneuver
+    [46484] = true, -- Rapid Maneuver
+    [46488] = true, -- Rapid Maneuver
+    [46492] = true, -- Rapid Maneuver
+    
+    [40211] = true, -- Retreating Maneuver
+    [46497] = true, -- Retreating Maneuver
+    [46501] = true, -- Retreating Maneuver
+    [46505] = true, -- Retreating Maneuver
+    
+    [40215] = true, -- Charging Maneuver
+    [46509] = true, -- Charging Maneuver
+    [46514] = true, -- Charging Maneuver
+    [46519] = true, -- Charging Maneuver
+    
+    [61500] = true, -- Proximity Detonation
+    [63296] = true, -- Proximity Detonation
+    [63299] = true, -- Proximity Detonation
+    [63302] = true, -- Proximity Detonation
+    
+    -- Alliance War (Support)
+    [61511] = true, -- Guard
+    [63308] = true, -- Guard
+    [63313] = true, -- Guard
+    [63318] = true, -- Guard
+    
+    [61536] = true, -- Mystic Guard
+    [63323] = true, -- Mystic Guard
+    [63329] = true, -- Mystic Guard
+    [63335] = true, -- Mystic Guard
+    
+    [61529] = true, -- Stalwart  Guard
+    [63341] = true, -- Stalwart  Guard
+    [63346] = true, -- Stalwart  Guard
+    [63351] = true, -- Stalwart  Guard
+    
+    -- Armor (Heavy)
+    [29552] = true, -- Immovable
+    [41078] = true, -- Immovable
+    [41080] = true, -- Immovable
+    [41082] = true, -- Immovable
+    
+    [39205] = true, -- Immovable Brute
+    [41085] = true, -- Immovable Brute
+    [41088] = true, -- Immovable Brute
+    [41091] = true, -- Immovable Brute
+    
+    [39197] = true, -- Unstoppable
+    [41097] = true, -- Unstoppable
+    [41100] = true, -- Unstoppable
+    [41103] = true, -- Unstoppable
+    
+    -- Armor (Light)
+    [29338] = true, -- Annulment
+    [41106] = true, -- Annulment
+    [41107] = true, -- Annulment
+    [41108] = true, -- Annulment
+    
+    [39186] = true, -- Dampen Magic
+    [41109] = true, -- Dampen Magic
+    [41111] = true, -- Dampen Magic
+    [41113] = true, -- Dampen Magic
+    
+    [39182] = true, -- Harness Magicka
+    [41115] = true, -- Harness Magicka
+    [41118] = true, -- Harness Magicka
+    [41121] = true, -- Harness Magicka
+    
+    -- Armor (Medium)
+    [39195] = true, -- Shuffle
+    [41127] = true, -- Shuffle
+    [41129] = true, -- Shuffle
+    [41131] = true, -- Shuffle
+    
+    -- Dragonknight
+    [28967] = true, -- Inferno
+    [34051] = true, -- Inferno
+    [34056] = true, -- Inferno
+    [34061] = true, -- Inferno
+    
+    [32853] = true, -- Flames of Oblivion
+    [34066] = true, -- Flames of Oblivion
+    [34073] = true, -- Flames of Oblivion
+    [34080] = true, -- Flames of Oblivion
+    
+    [32881] = true, -- Cauterize
+    [34088] = true, -- Cauterize
+    [34094] = true, -- Cauterize
+    [34100] = true, -- Cauterize
+    
+    [20319] = true, -- Spiked Armor
+    [23822] = true, -- Spiked Armor
+    [23825] = true, -- Spiked Armor
+    [23828] = true, -- Spiked Armor
+    
+    [20328] = true, -- Hardened Armor
+    [23846] = true, -- Hardened Armor
+    [23851] = true, -- Hardened Armor
+    [23856] = true, -- Hardened Armor
+    
+    [20323] = true, -- Volatile Armor
+    [23834] = true, -- Volatile Armor
+    [23838] = true, -- Volatile Armor
+    [23842] = true, -- Volatile Armor
+    
+    [29004] = true, -- Dragon Blood
+    [33405] = true, -- Dragon Blood
+    [33616] = true, -- Dragon Blood
+    [33619] = true, -- Dragon Blood
+    
+    [32744] = true, -- Green Dragon Blood
+    [33622] = true, -- Green Dragon Blood
+    [33627] = true, -- Green Dragon Blood
+    [33632] = true, -- Green Dragon Blood
+    
+    [32722] = true, -- Coagulating Blood
+    [33638] = true, -- Coagulating Blood
+    [33642] = true, -- Coagulating Blood
+    [33646] = true, -- Coagulating Blood
+    
+    [21007] = true, -- Reflective Scale
+    [33741] = true, -- Reflective Scale
+    [33742] = true, -- Reflective Scale
+    [33743] = true, -- Reflective Scale
+    
+    [21014] = true, -- Reflective Plate
+    [33745] = true, -- Reflective Plate
+    [33747] = true, -- Reflective Plate
+    [33749] = true, -- Reflective Plate
+    
+    [21017] = true, -- Dragon Fire Scale
+    [33753] = true, -- Dragon Fire Scale
+    [33757] = true, -- Dragon Fire Scale
+    [33759] = true, -- Dragon Fire Scale
+    
+    [29071] = true, -- Obsidian Shield
+    [33862] = true, -- Obsidian Shield
+    [33864] = true, -- Obsidian Shield
+    [33866] = true, -- Obsidian Shield
+    
+    [29224] = true, -- Igneous Shield
+    [33868] = true, -- Igneous Shield
+    [33870] = true, -- Igneous Shield
+    [33872] = true, -- Igneous Shield
+    
+    [32673] = true, -- Fragmented Shield
+    [33875] = true, -- Fragmented Shield
+    [33878] = true, -- Fragmented Shield
+    [33881] = true, -- Fragmented Shield
+    
+    [31888] = true, -- Molten Armaments
+    [32171] = true, -- Molten Armaments
+    [32172] = true, -- Molten Armaments
+    [32173] = true, -- Molten Armaments
+    
+    -- Fighter's Guild
+    [35737] = true, -- Circle of Protection
+    [42501] = true, -- Circle of Protection
+    [42505] = true, -- Circle of Protection
+    [42509] = true, -- Circle of Protection
+    
+    [40181] = true, -- Turn Undead
+    [42515] = true, -- Turn Undead
+    [42522] = true, -- Turn Undead
+    [42529] = true, -- Turn Undead
+    
+    [40169] = true, -- Ring of Preservation
+    [42536] = true, -- Ring of Preservation
+    [42542] = true, -- Ring of Preservation
+    [42548] = true, -- Ring of Preservation
+    
+    [35762] = true, -- Expert Hunter
+    [42602] = true, -- Expert Hunter
+    [42606] = true, -- Expert Hunter
+    [42610] = true, -- Expert Hunter
+    
+    [40194] = true, -- Evil Hunter
+    [42614] = true, -- Evil Hunter
+    [42619] = true, -- Evil Hunter
+    [42624] = true, -- Evil Hunter
+    
+    [40195] = true, -- Camouflaged Hunter
+    [42629] = true, -- Camouflaged Hunter
+    [42635] = true, -- Camouflaged Hunter
+    [42641] = true, -- Camouflaged Hunter
+    
+    [30920] = true, -- Magelight
+    [42410] = true, -- Magelight
+    [42414] = true, -- Magelight
+    [42418] = true, -- Magelight
+    [40478] = true, -- Inner Light
+    [42422] = true, -- Inner Light
+    [42426] = true, -- Inner Light
+    [42430] = true, -- Inner Light
+    [40483] = true, -- Radiant Magelight
+    [42443] = true, -- Radiant Magelight
+    [42449] = true, -- Radiant Magelight
+    [42455] = true, -- Radiant Magelight
+    
+    -- Undaunted
+    
+    -- NOTE: Need to add ground auras for Altar here if possible
+    
+    [39369] = true, -- Bone Shield
+    [43304] = true, -- Bone Shield
+    [43307] = true, -- Bone Shield
+    [43310] = true, -- Bone Shield
+    
+    [42138] = true, -- Spiked Bone Shield
+    [43313] = true, -- Spiked Bone Shield
+    [43318] = true, -- Spiked Bone Shield
+    [43323] = true, -- Spiked Bone Shield
+    
+    [42176] = true, -- Bone Surge
+    [43328] = true, -- Bone Surge
+    [43331] = true, -- Bone Surge
+    [43334] = true, -- Bone Surge
+    
+    -- Nightblade
+    
+    --[[ Messes up and won't disappear until dodge rolling for some reason, hiding for now
+    [25375] = true, -- Shadow Cloak
+    [36329] = true, -- Shadow Cloak
+    [36333] = true, -- Shadow Cloak
+    [36337] = true, -- Shadow Cloak
+    
+    [25380] = true, -- Shadowy Disguise
+    [36356] = true, -- Shadowy Disguise
+    [36362] = true, -- Shadowy Disguise
+    [36368] = true, -- Shadowy Disguise
+    
+    [25377] = true, -- Dark Cloak
+    [36341] = true, -- Dark Cloak
+    [36346] = true, -- Dark Cloak
+    [36351] = true, -- Dark Cloak
+    ]]--
+    
+    [33211] = true, -- Summon Shade
+    [36267] = true, -- Summon Shade
+    [36271] = true, -- Summon Shade
+    [36313] = true, -- Summon Shade
+    
+    [35434] = true, -- Dark Shades
+    [36273] = true, -- Dark Shades
+    [36278] = true, -- Dark Shades
+    [36283] = true, -- Dark Shades
+    
+    [35441] = true, -- Shadow Image
+    [36288] = true, -- Shadow Image
+    [36293] = true, -- Shadow Image
+    [36298] = true, -- Shadow Image
+    
+    [33319] = true, -- Siphoning Strikes
+    [37955] = true, -- Siphoning Strikes
+    [37966] = true, -- Siphoning Strikes
+    [37977] = true, -- Siphoning Strikes
+    
+    [36908] = true, -- Leeching Strikes
+    [37989] = true, -- Leeching Strikes
+    [38002] = true, -- Leeching Strikes
+    [38015] = true, -- Leeching Strikes
+    
+    [36935] = true, -- Siphoning Attacks
+    [38028] = true, -- Siphoning Attacks
+    [38039] = true, -- Siphoning Attacks
+    [38050] = true, -- Siphoning Attacks
+    
+    -- Sorcerer
+    -- Need these to show as toggles - will have to associate them with the active abilities that unlock
+    --[[
+    [23304] = true, -- Summon Unstable Familiar
+    [30631] = true, -- Summon Unstable Familiar
+    [30636] = true, -- Summon Unstable Familiar
+    [30641] = true, -- Summon Unstable Familiar
+    
+    [23319] = true, -- Summon Unstable Clannfear
+    [30647] = true, -- Summon Unstable Clannfear
+    [30652] = true, -- Summon Unstable Clannfear
+    [30657] = true, -- Summon Unstable Clannfear
+    
+    [23316] = true, -- Summon Volatile Familiar
+    [30664] = true, -- Summon Volatile Familiar
+    [30669] = true, -- Summon Volatile Familiar
+    [30674] = true, -- Summon Volatile Familiar
+    
+    [24613] = true, -- Summon Wingled Twilight
+    [30581] = true, -- Summon Wingled Twilight
+    [30584] = true, -- Summon Wingled Twilight
+    [30587] = true, -- Summon Wingled Twilight
+    
+    [24636] = true, -- Summon Twilight Tormentor
+    [30592] = true, -- Summon Twilight Tormentor
+    [30595] = true, -- Summon Twilight Tormentor
+    [30598] = true, -- Summon Twilight Tormentor
+    
+    [24639] = true, -- Summon Twilight Matriarch
+    [30618] = true, -- Summon Twilight Matriarch
+    [30622] = true, -- Summon Twilight Matriarch
+    [30626] = true, -- Summon Twilight Matriarch
+    ]]--
+    
+    [28418] = true, -- Conjured Ward
+    [30457] = true, -- Conjured Ward
+    [30460] = true, -- Conjured Ward
+    [30463] = true, -- Conjured Ward
+    
+    [29489] = true, -- Hardened Ward
+    [30466] = true, -- Hardened Ward
+    [30470] = true, -- Hardened Ward
+    [30474] = true, -- Hardened Ward
+    
+    [29482] = true, -- Empowered Ward
+    [30478] = true, -- Empowered Ward
+    [30482] = true, -- Empowered Ward
+    [30486] = true, -- Empowered Ward
+    
+    --[[  Disappears when refreshed, not sure why
+    [24574] = true, -- Rune Prison
+    [30182] = true, -- Rune Prison
+    [30188] = true, -- Rune Prison
+    [30194] = true, -- Rune Prison
+    ]]--
+    
+    [23210] = true, -- Lightning Form
+    [30229] = true, -- Lightning Form
+    [30232] = true, -- Lightning Form
+    [30235] = true, -- Lightning Form
+    
+    [23231] = true, -- Hurricane
+    [30238] = true, -- Hurricane
+    [30241] = true, -- Hurricane
+    [30244] = true, -- Hurricane
+    
+    [23213] = true, -- Boundless Storm
+    [30247] = true, -- Boundless Storm
+    [30251] = true, -- Boundless Storm
+    [30255] = true, -- Boundless Storm
+    
+    [23670] = true, -- Surge
+    [30386] = true, -- Surge
+    [30388] = true, -- Surge
+    [30390] = true, -- Surge
+    
+    [23674] = true, -- Power Surge
+    [30392] = true, -- Power Surge
+    [30394] = true, -- Power Surge
+    [30396] = true, -- Power Surge
+    
+    [23678] = true, -- Critical Surge
+    [30398] = true, -- Critical Surge
+    [30402] = true, -- Critical Surge
+    [30406] = true, -- Critical Surge
+    
+    -- Templar
+    --[[ -- These won't disappear when they end, hidden for now
+    [22178] = true, -- Sun Shield
+    [27493] = true, -- Sun Shield
+    [27497] = true, -- Sun Shield
+    [27501] = true, -- Sun Shield
+    
+    [22182] = true, -- Radiant Ward
+    [27506] = true, -- Radiant Ward
+    [27510] = true, -- Radiant Ward
+    [27514] = true, -- Radiant Ward
+    
+    [22180] = true, -- Blazing Shield
+    [27520] = true, -- Blazing Shield
+    [27526] = true, -- Blazing Shield
+    [27530] = true, -- Blazing Shield
+    ]]--
+    
+    [22265] = true, -- Cleansing Ritual
+    [27243] = true, -- Cleansing Ritual
+    [27249] = true, -- Cleansing Ritual
+    [27255] = true, -- Cleansing Ritual
+    
+    [22259] = true, -- Ritual of Retribution
+    [27261] = true, -- Ritual of Retribution
+    [27269] = true, -- Ritual of Retribution
+    [27275] = true, -- Ritual of Retribution
+    
+    [22262] = true, -- Extended Ritual
+    [27281] = true, -- Extended Ritual
+    [27288] = true, -- Extended Ritual
+    [27295] = true, -- Extended Ritual
+    
+    [22234] = true, -- Rune Focus
+    [23968] = true, -- Rune Focus
+    [23969] = true, -- Rune Focus
+    [23970] = true, -- Rune Focus
+    
+    [22240] = true, -- Channeled Focus
+    [23996] = true, -- Channeled Focus
+    [23997] = true, -- Channeled Focus
+    [23998] = true, -- Channeled Focus
+    
+    [22237] = true, -- Restoring Focus
+    [23983] = true, -- Restoring Focus
+    [23984] = true, -- Restoring Focus
+    [23985] = true, -- Restoring Focus
+    
+    -- Warden
+    [86050] = true, -- Betty Netch
+    [86051] = true, -- Betty Netch
+    [86052] = true, -- Betty Netch
+    [86053] = true, -- Betty Netch
+    
+    [86054] = true, -- Blue Betty
+    [86055] = true, -- Blue Betty
+    [86056] = true, -- Blue Betty
+    [86057] = true, -- Blue Betty
+    
+    [86058] = true, -- Bull Netch
+    [86059] = true, -- Bull Netch
+    [86060] = true, -- Bull Netch
+    [86061] = true, -- Bull Netch
+    
+    [86037] = true, -- Falcon's Swiftness
+    [86038] = true, -- Falcon's Swiftness
+    [86039] = true, -- Falcon's Swiftness
+    [86040] = true, -- Falcon's Swiftness
+    
+    [86041] = true, -- Deceptive Predator
+    [86042] = true, -- Deceptive Predator
+    [86043] = true, -- Deceptive Predator
+    [86044] = true, -- Deceptive Predator
+    
+    [86045] = true, -- Bird of Prey
+    [86046] = true, -- Bird of Prey
+    [86047] = true, -- Bird of Prey
+    [86048] = true, -- Bird of Prey
+    
+    -- Add aura for Healing Seed
+    
+    [85552] = true, -- Living Vines
+    [93875] = true, -- Living Vines
+    [93876] = true, -- Living Vines
+    [93877] = true, -- Living Vines
+    
+    [85850] = true, -- Leeching Vines
+    [93878] = true, -- Leeching Vines
+    [93879] = true, -- Leeching Vines
+    [93880] = true, -- Leeching Vines
+    
+    [85851] = true, -- Living Trellis
+    [93881] = true, -- Living Trellis
+    [93882] = true, -- Living Trellis
+    [93883] = true, -- Living Trellis
+    
+    [85539] = true, -- Lotus Flower
+    [93906] = true, -- Lotus Flower
+    [93907] = true, -- Lotus Flower
+    [93908] = true, -- Lotus Flower
+    
+    [85854] = true, -- Green Lotus
+    [93909] = true, -- Green Lotus
+    [93910] = true, -- Green Lotus
+    [93911] = true, -- Green Lotus
+    
+    [85855] = true, -- Lotus Blossom
+    [93912] = true, -- Lotus Blossom
+    [93913] = true, -- Lotus Blossom
+    [93914] = true, -- Lotus Blossom
+    
+    --[[ No aura
+    [86122] = true, -- Frost Cloak
+    [86123] = true, -- Frost Cloak
+    [86124] = true, -- Frost Cloak
+    [86125] = true, -- Frost Cloak
+    
+    [86126] = true, -- Expansive Frost Cloak
+    [86127] = true, -- Expansive Frost Cloak
+    [86128] = true, -- Expansive Frost Cloak
+    [86129] = true, -- Expansive Frost Cloak
+    
+    [86130] = true, -- Ice Fortress
+    [86131] = true, -- Ice Fortress
+    [86132] = true, -- Ice Fortress
+    [86133] = true, -- Ice Fortress
+    ]]--
+    
+    -- Add aura for Impaling Shards
+    
+    --[[ -- Won't disappear after shield fades
+    [86148] = true, -- Arctic Wind
+    [86149] = true, -- Arctic Wind
+    [86150] = true, -- Arctic Wind
+    [86151] = true, -- Arctic Wind
+    
+    [86152] = true, -- Polar Wind
+    [86153] = true, -- Polar Wind
+    [86154] = true, -- Polar Wind
+    [86155] = true, -- Polar Wind
+    
+    [86156] = true, -- Arctic Blast
+    [86157] = true, -- Arctic Blast
+    [86158] = true, -- Arctic Blast
+    [86159] = true, -- Arctic Blast
+    ]]--
+    
+    [86135] = true, -- Crystallized Shield
+    [86136] = true, -- Crystallized Shield
+    [86137] = true, -- Crystallized Shield
+    [86138] = true, -- Crystallized Shield
+    
+    [86139] = true, -- Crystallized Slab
+    [86140] = true, -- Crystallized Slab
+    [86141] = true, -- Crystallized Slab
+    [86142] = true, -- Crystallized Slab
+    
+    [86143] = true, -- Shimmering Shield
+    [86144] = true, -- Shimmering Shield
+    [86145] = true, -- Shimmering Shield
+    [86146] = true, -- Shimmering Shield
+    
+    -- Weapon
+    
+    [28613] = true, -- Blade Cloak
+    [40631] = true, -- Blade Cloak
+    [40632] = true, -- Blade Cloak
+    [40633] = true, -- Blade Cloak
+    
+    [38901] = true, -- Quick Cloak
+    [40634] = true, -- Quick Cloak
+    [40638] = true, -- Quick Cloak
+    [40642] = true, -- Quick Cloak
+    
+    [38906] = true, -- Deadly Cloak
+    [40646] = true, -- Deadly Cloak
+    [40649] = true, -- Deadly Cloak
+    [40651] = true, -- Deadly Cloak
+    
+    
+    [28727] = true, -- Defensive Posture
+    [41349] = true, -- Defensive Posture
+    [41350] = true, -- Defensive Posture
+    [41351] = true, -- Defensive Posture
+    
+    [38312] = true, -- Defensive Stance
+    [41352] = true, -- Defensive Stance
+    [41355] = true, -- Defensive Stance
+    [41358] = true, -- Defensive Stance
+    
+    [38317] = true, -- Absorb Magic
+    [41370] = true, -- Absorb Magic
+    [41375] = true, -- Absorb Magic
+    [41380] = true, -- Absorb Magic
+    
+    [28385] = true, -- Grand Healing
+    [41244] = true, -- Grand Healing
+    [41246] = true, -- Grand Healing
+    [41248] = true, -- Grand Healing
+    
+    [40058] = true, -- Illustrious Healing
+    [41251] = true, -- Illustrious Healing
+    [41253] = true, -- Illustrious Healing
+    [41255] = true, -- Illustrious Healing
+    
+    [40060] = true, -- Healing Springs
+    [41257] = true, -- Healing Springs
+    [41261] = true, -- Healing Springs
+    [41265] = true, -- Healing Springs
+    
+    [28536] = true, -- Regeneration
+    [41269] = true, -- Regeneration
+    [41270] = true, -- Regeneration
+    [41271] = true, -- Regeneration
+    
+    [40076] = true, -- Rapid Regeneration
+    [41272] = true, -- Rapid Regeneration
+    [41274] = true, -- Rapid Regeneration
+    [41276] = true, -- Rapid Regeneration
+    
+    [40079] = true, -- Mutagen
+    [41278] = true, -- Mutagen
+    [41283] = true, -- Mutagen
+    [41288] = true, -- Mutagen
+    
+    [37232] = true, -- Steadfast Ward
+    [41306] = true, -- Steadfast Ward
+    [41308] = true, -- Steadfast Ward
+    [41310] = true, -- Steadfast Ward
+    
+    [41310] = true, -- Ward Ally
+    [41294] = true, -- Ward Ally
+    [41298] = true, -- Ward Ally
+    [41302] = true, -- Ward Ally
+    
+    [40126] = true, -- Healing Ward
+    [41312] = true, -- Healing Ward
+    [41316] = true, -- Healing Ward
+    [41320] = true, -- Healing Ward
+    
+    [28297] = true, -- Momentum
+    [39868] = true, -- Momentum
+    [39871] = true, -- Momentum
+    [39881] = true, -- Momentum
+    
+    [38794] = true, -- Forward Momentum
+    [39884] = true, -- Forward Momentum
+    [39888] = true, -- Forward Momentum
+    [39892] = true, -- Forward Momentum
+    
+    [38802] = true, -- Rally
+    [39896] = true, -- Rally
+    [39990] = true, -- Rally
+    [39904] = true, -- Rally
    
 }
    
 -- Old Deprecated List, using this to pull values from as a reminder!
 local IsAbilityCustomToggleName = {
-
-    
     
         -- RESORTED:
 
@@ -736,6 +1361,7 @@ function SCB.Initialize( enabled )
     end
 
     SCB.Reset()
+    SCB.UpdateContextHideList()
 
     -- Register events
     EVENT_MANAGER:RegisterForUpdate(moduleName, 100, SCB.OnUpdate )
@@ -1515,12 +2141,12 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         return
     end
     
-    -- TODO: Replace this extra check with a table.insert value on an alternate effect override instead to make it more efficient (don't use default effect override since it hooks into default ZOS UI)
-    if E.IsCyrodiil[abilityId] and unitTag =="player" and SCB.SV.IgnoreCyrodiilPlayer then
+    -- Hide effects if chosen in the options menu
+    if hidePlayerEffects[abilityId] and unitTag == "player" then
         return
     end
     
-    if E.IsCyrodiil[abilityId] and unitTag == "reticleover" and SCB.SV.IgnoreCyrodiilTarget then
+    if hideTargetEffects[abilityId] and unitTag == "reticleover'" then
         return
     end
         
@@ -2703,4 +3329,63 @@ function SCB.OnVibration(eventCode, duration, coarseMotor, fineMotor, leftTrigge
         -- This event does not seem to have anything to do with player self-resurrection
         g_playerResurectStage = nil
     end
+end
+
+function SCB.UpdateContextHideList()
+
+    hidePlayerEffects = { }
+    hideTargetEffects = { }
+
+    if SCB.SV.IgnoreMundusPlayer then
+        for k, v in pairs(E.IsBoon) do
+            hidePlayerEffects[k] = v
+        end
+    end
+
+    if SCB.SV.IgnoreMundusTarget then
+        for k, v in pairs(E.IsBoon) do
+            hideTargetEffects[k] = v
+        end
+    end
+
+    if SCB.SV.IgnoreVampLycanPlayer then
+        for k, v in pairs(E.IsVampLycan) do
+            hidePlayerEffects[k] = v
+        end
+    end
+    if SCB.SV.IgnoreVampLycanTarget then
+        for k, v in pairs(E.IsVampLycan) do
+            hideTargetEffects[k] = v
+        end
+    end
+    if SCB.SV.IgnoreCyrodiilPlayer then
+        for k, v in pairs(E.IsCyrodiil) do
+            hidePlayerEffects[k] = v
+        end
+    end
+    if SCB.SV.IgnoreCyrodiilTarget then
+        for k, v in pairs(E.IsCyrodiil) do
+            hideTargetEffects[k] = v
+        end
+    end
+    if SCB.SV.IgnoreEsoPlusPlayer then
+        for k, v in pairs(E.IsEsoPlus) do
+            hidePlayerEffects[k] = v
+        end
+    end
+    if SCB.SV.IgnoreEsoPlusTarget then
+        for k, v in pairs(E.IsEsoPlus) do
+            hideTargetEffects[k] = v
+        end
+    end
+    
+    -- TODO:
+    -- Add block here
+    -- Add food here?
+    -- Separate Vamp/Lycan just in case (vampire stage is arguably more important than WW passives)
+    -- Possibly allow player to insert values into this table manually
+
+    --if SCB.SV.ShowBlockPlayer then -- Currently we use ability_type to hide/show this, maybe add here later when I can determine NPC block abilities
+    --if SCB.SV.ShowBlockTarget then
+
 end

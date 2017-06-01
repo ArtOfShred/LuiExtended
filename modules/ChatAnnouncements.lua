@@ -93,6 +93,8 @@ CA.D = {
     Loot                          = true,
     LootBank                      = true,
     LootBlacklist                 = false,
+    LootTotal                     = false,
+    LootTotalString               = GetString(SI_LUIE_CA_DEFAULTVARS_CURRENCYTOTALMESSAGE),
     
     Collectible                   = false,
     CollectiblePrefix             = "[Collectible Added]",
@@ -3449,7 +3451,18 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
     else
         itemName2 = ""
     end
-
+    
+    local total = ""
+    if CA.SV.LootTotal and formattedRecipient == "" then
+        local total1, total2, total3 = GetItemLinkStacks(itemName)
+        total = total1 + total2 + total3
+        if total > 1 then
+            total = strfmt(" %s %s|cFEFEFE%s|r", color:Colorize(CA.SV.LootTotalString), icon, ZO_LocalizeDecimalNumber(total))
+        else
+            total = ""
+        end
+    end
+    
     message = color:Colorize(strfmt("%s%s%s ", bracket1, logPrefix, bracket2))
 
     if receivedBy == "CRAFT"  and gainorloss == 1 then
@@ -3504,7 +3517,7 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
 
     if receivedBy ~= "CRAFT" then
         if not g_launderCheck then printToChat(strfmt(
-            "%s%s%s%s%s%s%s%s%s%s",
+            "%s%s%s%s%s%s%s%s%s%s%s",
             message,
             icon,
             itemName2,
@@ -3514,6 +3527,7 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
             formattedTrait,
             formattedStyle,
             formattedRecipient,
+            total,
             g_comboString
         )) end
 
@@ -3527,7 +3541,8 @@ function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, g
             formattedArmorType,
             formattedTrait,
             formattedStyle,
-            formattedRecipient
+            formattedRecipient,
+            total
         )) end
     end
 

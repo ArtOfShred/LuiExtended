@@ -89,57 +89,38 @@ E.IsToggle = {
     [A.Toggled_Stalwart_Guard]              = true, -- Stalwart Guard (Support)
 }
 
+-- TODO: TEMPORARY
 -- Vampire / Lycantropy
 E.IsVampLycan = {
-    [A.VampLycan_Fed_on_ally]           = true,
-    [A.VampLycan_Bit_an_ally]           = true,
-    [A.VampLycan_Dark_Stalker]          = true,
-    [A.VampLycan_Supernatural_Recovery] = true,
-    [A.VampLycan_Stage_1_Vampirism]     = true,
-    [A.VampLycan_Stage_2_Vampirism]     = true,
-    [A.VampLycan_Stage_3_Vampirism]     = true,
-    [A.VampLycan_Stage_4_Vampirism]     = true,
-    [A.VampLycan_Vampirism]             = true,
-    [A.VampLycan_Lycanthropy]           = true,
-    [A.VampLycan_Call_of_the_Pack]      = true,
-    [A.VampLycan_Sanies_Lupinus]        = true,
+    [40359] = true, -- Fed on ally
+    [40525] = true, -- Bit an ally
+    [33090] = true, -- Dark Stalker
+    [33095] = true, -- Supernatural Recovery
+    [35771] = true, -- Stage 1 Vampirism
+    [35996] = true, -- Stage 2 Vampirism
+    [35783] = true, -- Stage 3 Vampirism
+    [35792] = true, -- Stage 4 Vampirism
+    [40360] = true, -- Vampirism
+    [35658] = true, -- Lycanthrophy
+    [14271] = true, -- Call of the Pack
+    [31068] = true, -- Sanies Lupinus
 }
 
 -- Mundus passives
 E.IsBoon = {
-    [A.Boon_Warrior]    = true,
-    [A.Boon_Mage]       = true,
-    [A.Boon_Serpent]    = true,
-    [A.Boon_Thief]      = true,
-    [A.Boon_Lady]       = true,
-    [A.Boon_Steed]      = true,
-    [A.Boon_Lord]       = true,
-    [A.Boon_Apprentice] = true,
-    [A.Boon_Ritual]     = true,
-    [A.Boon_Lover]      = true,
-    [A.Boon_Atronach]   = true,
-    [A.Boon_Shadow]     = true,
-    [A.Boon_Tower]      = true,
-}
-
--- PvP related buffs
-E.IsCyrodiil = {
-    [11346] = true, -- Home Keep Bonus
-    [11341] = true, -- Enemy Keep Bonus I
-    [11343] = true, -- Enemy Keep Bonus II
-    [11345] = true, -- Enemy Keep Bonus III
-    [11347] = true, -- Enemy Keep Bonus IV
-    [11348] = true, -- Enemy Keep Bonus V
-    [11350] = true, -- Enemy Keep Bonus VI
-    [11352] = true, -- Enemy Keep Bonus VII
-    [11353] = true, -- Enemy Keep Bonus VIII
-    [11356] = true, -- Enemy Keep Bonus IX
-    [15060] = true, -- Defensive Scroll Bonus I
-    [16350] = true, -- Defensive Scroll Bonus II
-    [15058] = true, -- Offensive Scroll Bonus I
-    [16348] = true, -- Offensive Scroll Bonus II
-    [39671] = true, -- Emperorship Alliance Bonus
-    [66282] = true, -- Blessing of War
+    [13940] = true, -- The Warrior
+    [13943] = true, -- The Mage
+    [13974] = true, -- The Serpent
+    [13975] = true, -- The Thief
+    [13976] = true, -- The Lady
+    [13977] = true, -- The Steed
+    [13978] = true, -- The Lord
+    [13979] = true, -- The Apprentice
+    [13980] = true, -- The Ritual
+    [13981] = true, -- The Lover
+    [13982] = true, -- The Atronach
+    [13984] = true, -- The Shadow
+    [13985] = true, -- The Tower
 }
 
 E.IsBattleSpirit = {
@@ -147,6 +128,7 @@ E.IsBattleSpirit = {
 }
 
 -- TODO: TEMPORARY
+-- Cyrodiil passives
 E.IsCyrodiil = {
 
     [11346] = true, -- Home Keep Bonus
@@ -2834,21 +2816,26 @@ E.EffectOverride = {
     -- DAEDRA
     [51256] = { hide = true }, -- Siphon (Atronach Passive)
     
-    [51265] = { icon = 'LuiExtended/media/icons/abilities/ability_air_atronach_flame.dds', name = 'Empower Atronach: Flame' }, -- Air Atronach Flame (Air Atronach - Flame)
-    [51270] = { icon = 'LuiExtended/media/icons/abilities/ability_air_atronach_storm.dds', name = 'Empower Atronach: Storm' }, -- Air Atronach Flame (Air Atronach - Storm)
-    [51267] = { icon = 'LuiExtended/media/icons/abilities/ability_air_atronach_frost.dds', name = 'Empower Atronach: Frost' }, -- Air Atronach Flame (Air Atronach - Frost)
     [48092] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_swipe.dds' }, -- Swipe (Air Atronach)
     [48093] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_swipe.dds' }, -- Swipe (Air Atronach)
     [48096] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_flare.dds' }, -- Flare (Air Atronach)
     [48121] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_heavy_attack.dds' }, -- Heavy Attack (Air Atronach)
     [48137] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_tornado.dds' }, -- Tornado (Air Atronach)
+    [51269] = { hide = true }, -- Air Atronach Flame  (Air Atronach - Frost)
+    [51267] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_empower_frost.dds', name = 'Empower Atronach: Frost' }, -- Air Atronach Flame (Air Atronach - Frost)
+    [50021] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_ice_vortex.dds' }, -- Ice Vortex (Air Atronach - Frost)
+    [50022] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_ice_vortex.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Ice Vortex (Air Atronach - Frost)
+    [51262] = { hide = true }, -- Air Atronach Flame (Air Atronach - Flame)
+    [51265] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_empower_flame.dds', name = 'Empower Atronach: Flame' }, -- Air Atronach Flame (Air Atronach - Flame)
     [51282] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_flame_tornado.dds' }, -- Flame Tornado (Air Atronach)
+    
+    [51271] = { hide = true }, -- Air Atronach Flame (Air Atronach - Storm)
+    [51270] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_empower_storm.dds', name = 'Empower Atronach: Storm' }, -- Air Atronach Flame (Air Atronach - Storm)
     [50023] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_lightning_rod.dds' }, -- Lightning Rod (Air Atronach)
     [88902] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_lightning_rod.dds' }, -- Lightning Rod (Air Atronach)
-    [50026] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shock_pulse.dds', name = 'Lightning Pulse' }, -- Lightning Rod (Air Atronach)
-    [50021] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_ice_vortex.dds' }, -- Ice Vortex (Air Atronach)
-    [50022] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_ice_vortex.dds', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Ice Vortex (Air Atronach)
-    [52053] = { hide = true }, -- Lightning Road (Air Atronach - Storm) (Pointless aura)
+    [50026] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_pulse.dds', name = 'Lightning Pulse' }, -- Lightning Rod (Air Atronach)
+
+    
 
     [9743] = { icon = 'LuiExtended/media/icons/abilities/ability_banekin_entropic_touch.dds' }, -- Entropic Touch (Banekin)
     [9747] = { icon = 'LuiExtended/media/icons/abilities/ability_banekin_dire_wound.dds' }, -- Dire Wound (Banekin)
@@ -3050,7 +3037,6 @@ E.EffectOverride = {
     [6795] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_latch_on.dds' }, -- Latch On (Hoarvor)
     [13585] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_latch_on.dds' }, -- Latch On (Hoarvor)
     
-    
     [61243] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_vile_bite.dds' }, -- Vile Bite (Hoarvor DLC)
     [69392] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_vile_bite.dds', name = 'Vile Bite' }, -- Vile Bite Poison (Hoarvor DLC)
     [61244] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_fevered_retch.dds' }, -- Fevered Retch (Hoarvor DLC)
@@ -3103,7 +3089,29 @@ E.EffectOverride = {
     [26382] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_ranged.dds' }, -- Bolt (Thunderbug)
     [26412] = { icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_thunderstrikes.dds' }, -- Thunderstrikes (Thunderbug)
     [34980] = { icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_thunderstrikes.dds' }, -- Thunderstrikes (Thunderbug)
-
+    
+    [73166] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_bite.dds' }, -- Bite (Kotu Gava)
+    [73214] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_bite.dds' }, -- Bite (Kotu Gava)
+    [73215] = { hide = true }, -- Bite (Kotu Gava)
+    
+    [73184] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_ranged.dds', hide = true }, -- Vile Spit (Kotu Gava Broodmother)
+    [73172] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_swarm.dds'}, -- Swarm (Kotu Gava Broodmother)
+    [73173] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_swarm.dds'}, -- Swarm (Kotu Gava Broodmother)
+    [73193] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_swarm.dds'}, -- Swarm (Kotu Gava Broodmother)
+    [73177] = { hide = true }, -- Swarmburst (Kotu Gava Broodmother)
+    [73174] = { hide = true }, -- Swarm (Kotu Gava Broodmother)
+    [73175] = { hide = true }, -- Swarm (Kotu Gava Broodmother)
+    [73176] = { hide = true }, -- Swarm (Kotu Gava Broodmother)
+    [76579] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_bite.dds' }, -- Bite (Kotu Gava Spawn)
+    [76580] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_bite.dds' }, -- Bite (Kotu Gava Spawn)
+    [76581] = { hide = true }, -- Bite (Kotu Gava Spawn)
+    [73200] = { hide = true }, -- Swarmburst (Kotu Gava Broodmother)
+    [73195] = { hide = true }, -- Swarmburst (Kotu Gava Spawn)
+    [73196] = { hide = true }, -- Swarmburst (Kotu Gava Spawn)
+    [73197] = { hide = true }, -- Swarmburst (Kotu Gava Spawn)
+    [73194] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_swarm.dds'}, -- Swarmburst (Kotu Gava Broodmother)
+    [73198] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_swarm.dds'}, -- Swarmburst (Kotu Gava Broodmother)
+    
     -- MONSTERS
     [25716] = { icon = 'esoui/art/icons/ability_debuff_stun.dds', name = 'Lacerate' }, -- Stun (Gargoyle)
     [25714] = { icon = 'esoui/art/icons/ability_mage_026.dds' }, -- Vampiric Touch (Gargoyle)

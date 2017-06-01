@@ -3,7 +3,7 @@
 LUIE             = {}
 LUIE.name        = "LuiExtended"
 LUIE.author      = "ArtOfShred, psypanda, Upularity & SpellBuilder"
-LUIE.version     = "5.1 BETA"
+LUIE.version     = "5.1.1 BETA"
 LUIE.components  = {}
 
 -- Saved variables options
@@ -108,7 +108,7 @@ local function LUIE_LoadScreen()
     EVENT_MANAGER:UnregisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED)
 
     if not LUIE.SV.StartupInfo then
-        LUIE.PrintToChat(zo_strformat("|cFEFEFE<<1>> by|r |c00C000<<2>>|r |cFEFEFEv<<3>>|r", LUIE.name, LUIE.author, LUIE.version))
+        LUIE.PrintToChat(string.format("|cFEFEFE%s by|r |c00C000%s|r |cFEFEFEv%s|r", LUIE.name, LUIE.author, LUIE.version))
     end
 end
 

@@ -149,7 +149,15 @@ DR.DeathRecapBasicOverride = {
     ['Thunder Bite'] =          { icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_thunder_bite.dds' }, -- Thunder Bite (Thunderbug)
     ['Thunderstrikes'] =        { icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_thunderstrikes.dds' }, -- Thunderstrikes (Thunderbug)
     
+    ['Vile Spit'] =             { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_ranged.dds' }, -- Vile Spit (Kotu Gava Broodmother)
+    ['Swarmburst'] =            { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_swarm.dds'}, -- Swarmburst (Kotu Gava Broodmother) 
+    
     -- DAEDRA
+    ['Tornado'] =               { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_tornado.dds' }, -- Tornado (Air Atronach)
+    ['Flame Tornado'] =         { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_flame_tornado.dds' }, -- Flame Tornado (Air Atronach - Flame)
+    ['Lightning Rod'] =         { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_lightning_rod.dds' }, -- Lightning Rod (Air Atronach - Storm)
+    ['Ice Vortex'] =            { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_ice_vortex.dds'}, -- Ice Vortex (Air Atronach - Frost)
+    
     ['Body Slam'] =             { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_body_slam.dds' }, -- Body Slam (Ogrim)
     
     -- MONSTERS
@@ -221,7 +229,13 @@ DR.DeathRecapInfoOverride = {
                             ['Heiress Alona'] =     { icon = 'LuiExtended/media/icons/abilities/ability_weapon_staff_strike.dds', name = 'Staff Strike' }, -- Quick Strike (Battlemage)
                             ['Attendant Konia'] =   { icon = 'LuiExtended/media/icons/abilities/ability_weapon_staff_strike.dds', name = 'Staff Strike' }, -- Quick Strike (Battlemage)
                             },    
-    
+                            
+    ['Flare'] =             {
+                            ['Air Atronach'] =      { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_flare.dds' }, -- Flare (Air Atronach)
+                            },
+    ['Heavy Attack'] =      {
+                            ['Air Atronach'] =      { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_heavy_attack.dds' }, -- Heavy Attack (Air Atronach)
+                            },
     -- ANIMALS
     ['Helljoint'] =         {
                             ['Jackal'] =            { icon = 'LuiExtended/media/icons/abilities/ability_jackal_helljoint.dds' }, -- Helljoint (Wolf)
@@ -337,8 +351,12 @@ DR.DeathRecapInfoOverride = {
                             ['Strifeswarm Scrib'] = { icon = 'LuiExtended/media/icons/abilities/ability_kwamascrib_bite.dds' }, -- Bite (Kwama Scrib)
                             
                             -- Kwama Worker
-                            ['Kwama Worker'] =     { icon = 'LuiExtended/media/icons/abilities/ability_kwamaworker_bite.dds' }, -- Bite (Kwama Worker)
-                            ['Strifeswarm Brute'] =     { icon = 'LuiExtended/media/icons/abilities/ability_kwamaworker_bite.dds' }, -- Bite (Kwama Worker) 
+                            ['Kwama Worker'] =      { icon = 'LuiExtended/media/icons/abilities/ability_kwamaworker_bite.dds' }, -- Bite (Kwama Worker)
+                            ['Strifeswarm Brute'] =     { icon = 'LuiExtended/media/icons/abilities/ability_kwamaworker_bite.dds' }, -- Bite (Kwama Worker)
+                            
+                            ['Kotu Gava'] =         { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_bite.dds' }, -- Bite (Kotu Gava)
+                            ['Kotu Gava Spawn'] =   { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_bite.dds' }, -- Bite (Kotu Gava)
+                            ['Kotu Gava Broodmother'] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_bite.dds' }, -- Bite (Kotu Gava)
                             
                             -- Lion
                             ['Lion'] =              { icon = 'LuiExtended/media/icons/abilities/ability_lion_bite.dds' }, -- Bite (Lion)
@@ -416,6 +434,9 @@ DR.DeathRecapInfoOverride = {
                             ['Old Rust-Eye'] =      { icon = 'LuiExtended/media/icons/abilities/ability_dreugh_shocking_touch.dds' }, -- Shocking Touch (Dreugh)
                             },
     ['Swipe'] =             {
+                            -- Air Atronach
+                            ['Air Atronach'] =      { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_swipe.dds' }, -- Swipe (Air Atronach)
+                            
                             -- Dreugh
                             ['Dreugh'] =            { icon = 'LuiExtended/media/icons/abilities/ability_dreugh_swipe.dds' }, -- Swipe (Dreugh)
                             ['Old Rust-Eye'] =      { icon = 'LuiExtended/media/icons/abilities/ability_dreugh_swipe.dds' }, -- Swipe (Dreugh)
@@ -501,7 +522,10 @@ DR.DeathRecapInfoOverride = {
     ['Spit'] =              {
                             -- Kwama Scrib
                             ['Kwama Scrib'] =       { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_ranged.dds', name = 'Contagion' }, -- Spit (Giant Spider)
-                            ['Strifeswarm Scrib'] =       { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_ranged.dds', name = 'Contagion' }, -- Spit (Giant Spider)
+                            ['Strifeswarm Scrib'] =     { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_ranged.dds', name = 'Contagion' }, -- Spit (Giant Spider)
+                            },
+    ['Swarm'] =             {
+                            ['Kotu Gava Broodmother'] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_swarm.dds'}, -- Swarm (Kotu Gava Broodmother) 
                             },
     -- TRAPS
     ['Fire Trap'] =         {
@@ -611,5 +635,10 @@ DR.DeathRecapTripleOverride = {
                 },
 
 -]]
+['Lightning Rod'] = {
+                    ['Air Atronach'] =  {
+                                        ['/esoui/art/icons/death_recap_shock_aoe.dds'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_pulse.dds', name = 'Lightning Pulse' }, -- Lightning Rod (Air Atronach - Storm)
+                                        },
+                    },
 
 }
