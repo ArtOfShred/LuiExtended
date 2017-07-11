@@ -1,7 +1,7 @@
 --[[
 Author: Ayantir
 Filename: LibAnnyoingUpdateNotificationInGame.lua
-Version: 2
+Version: 3
 ]]--
 
 --[[
@@ -30,7 +30,7 @@ http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 ]]--
 
 local libLoaded
-local LIB_NAME, VERSION = "Launig", 2
+local LIB_NAME, VERSION = "Launig", 3
 local Launig, oldminor = LibStub:NewLibrary(LIB_NAME, VERSION)
 if not Launig then return end
 
@@ -85,6 +85,12 @@ local function GetDLCTextures()
 	local picts = {}
 	for dlcIndex = 1 , GetTotalCollectiblesByCategoryType(COLLECTIBLE_CATEGORY_TYPE_DLC) do
 		local collectibleId = GetCollectibleIdFromType(COLLECTIBLE_CATEGORY_TYPE_DLC, dlcIndex) 
+		local pict = GetCollectibleGamepadBackgroundImage(collectibleId)
+		table.insert(picts, pict)
+	end
+	
+	for chapterIndex = 1 , GetTotalCollectiblesByCategoryType(COLLECTIBLE_CATEGORY_TYPE_CHAPTER) do
+		local collectibleId = GetCollectibleIdFromType(COLLECTIBLE_CATEGORY_TYPE_CHAPTER, chapterIndex) 
 		local pict = GetCollectibleGamepadBackgroundImage(collectibleId)
 		table.insert(picts, pict)
 	end
@@ -236,7 +242,7 @@ local function HaveOutdatedAddons()
 		end
 	end
 	
-	return haveOutdatedAddons
+	return true
 	
 end
 
