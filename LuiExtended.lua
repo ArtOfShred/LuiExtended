@@ -1154,6 +1154,35 @@ function LUIE.SlashVoteKick(option)
     BeginGroupElection(GROUP_ELECTION_TYPE_KICK_MEMBER, ZO_GROUP_ELECTION_DESCRIPTORS.NONE, unitToKick)
 end
 
+function LUIE.SlashCampaignQ(option)
+    if option == "" then
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGNQ_FAILED_NONAME))
+        ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, (GetString(SI_LUIE_SLASHCMDS_CAMPAIGNQ_FAILED_NONAME)))
+        return
+    end
+    --QueueForCampaign
+    -- 80 = Sotha Sil
+    -- 81 = Vivec
+    -- 82 = Kyne
+    -- 83 = Shor
+    if option == "sotha" then
+        LUIE.PrintToChat("Queing for Sotha Sil...")
+        QueueForCampaign( 80 )
+    elseif option == "vivec" then
+        LUIE.PrintToChat("Queing for Vivec...")
+        QueueForCampaign( 81 ) 
+    elseif option == "shor" then
+        LUIE.PrintToChat("Queing for Shor...")
+        QueueForCampaign( 83 ) 
+    elseif option == "kyne" then
+        -- TODO: Check char lvl, if above 50 print error cant join
+        LUIE.PrintToChat("Queing for Kyne...")
+        QueueForCampaign( 82 )
+    else
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGNQ_FAILED_WRONCAMPAIGN))
+    end
+end
+
 -- Slash Commands
 -- Safe commands
 SLASH_COMMANDS["/regroup"]      = LUIE.SlashRegroup
@@ -1184,6 +1213,7 @@ SLASH_COMMANDS["/unfriend"]     = LUIE.SlashRemoveFriend
 SLASH_COMMANDS["/removefriend"] = LUIE.SlashRemoveFriend
 SLASH_COMMANDS["/unignore"]     = LUIE.SlashRemoveIgnore
 SLASH_COMMANDS["/removeignore"] = LUIE.SlashRemoveIgnore
+SLASH_COMMANDS["/campaign"]     = LUIE.SlashCampaignQ
 
 -- Hook initialization
 EVENT_MANAGER:RegisterForEvent(LUIE.name, EVENT_ADD_ON_LOADED, LUIE_OnAddOnLoaded)
