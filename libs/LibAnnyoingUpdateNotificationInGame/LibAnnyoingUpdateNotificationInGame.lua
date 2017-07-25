@@ -30,12 +30,12 @@ http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 ]]--
 
 local libLoaded
-local LIB_NAME, VERSION = "Launig", 3
+local LIB_NAME, VERSION = "Launig", 4
 local Launig, oldminor = LibStub:NewLibrary(LIB_NAME, VERSION)
 if not Launig then return end
 
-local GRACE_PERIOD = 86400 * 7
-local REPEAT_EVERY = 86400 * 20
+local GRACE_PERIOD = 86400 * 10
+local REPEAT_EVERY = 86400 * 30
 
 local UPDATE_WEBSITE = "http://www.esoui.com"
 
@@ -258,18 +258,20 @@ function Launig:Init()
 	local apiVersion = GetAPIVersion()
 	local now = GetTimeStamp()
 	if GetWorldName() ~= "PTS" then
-		if not SV_HOST.Launig or apiVersion > SV_HOST.Launig.a then
-			SV_HOST.Launig = { t = now, a = apiVersion, d = false } -- time, api, displayed
-		elseif HaveOutdatedAddons() then
-			local remindPeriod = GRACE_PERIOD
-			if SV_HOST.Launig.d then
-				remindPeriod = REPEAT_EVERY
-			end
-			if now > SV_HOST.Launig.t + remindPeriod then
-				SV_HOST.Launig.t = now
-				SV_HOST.Launig.d = true
-				InitializeAnnouncement()
-				EVENT_MANAGER:RegisterForEvent(LIB_NAME, EVENT_PLAYER_ACTIVATED, OnPlayerActivated)
+		if SV_HOST then
+			if not SV_HOST.Launig or apiVersion > SV_HOST.Launig.a then
+				SV_HOST.Launig = { t = now, a = apiVersion, d = false } -- time, api, displayed
+			elseif HaveOutdatedAddons() then
+				local remindPeriod = GRACE_PERIOD
+				if SV_HOST.Launig.d then
+					remindPeriod = REPEAT_EVERY
+				end
+				if now > SV_HOST.Launig.t + remindPeriod then
+					SV_HOST.Launig.t = now
+					SV_HOST.Launig.d = true
+					InitializeAnnouncement()
+					EVENT_MANAGER:RegisterForEvent(LIB_NAME, EVENT_PLAYER_ACTIVATED, OnPlayerActivated)
+				end
 			end
 		end
 	end

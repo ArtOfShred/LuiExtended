@@ -1,7 +1,7 @@
 --[[
 Author: Ayantir
 Filename: LibCustomTitles.lua
-Version: 19
+Version: 20
 ]]--
 
 --[[
@@ -30,7 +30,7 @@ http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 ]]--
 
 local libLoaded
-local LIB_NAME, VERSION = "LibCustomTitles", 18
+local LIB_NAME, VERSION = "LibCustomTitles", 20
 local LibCustomTitles, oldminor = LibStub:NewLibrary(LIB_NAME, VERSION)
 if not LibCustomTitles then return end
 
