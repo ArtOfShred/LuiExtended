@@ -87,6 +87,27 @@ ZO_CreateStringId("SI_LUIE_CA_DUEL_STARTED",                            "Duel st
 ZO_CreateStringId("SI_LUIE_CA_DUEL_STARTED_WITH_ICON",                  "<<1>> Duel started!")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_STATE1",                             "You are currently waiting for a duel challenge response from |cFEFEFE<<1>>|r.")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_STATE2",                             "You are currently considering a duel challenge from |cFEFEFE<<1>>|r.")
+
+ZO_CreateStringId("SI_LUIE_CHAMPION_POINT_TYPE",                        "<<1>><<2>> <<3>> <<1[Point/Points]>>")
+
+ZO_CreateStringId("SI_LUIE_CA_SKILLPOINT_MESSAGE",                      "Gained <<1>> skill <<1[point/points]>>.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_UPDATED",                  "Display Skill Points Gained")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_UPDATED_TP",               "Display a message in chat when a Skill Point is gained from leveling up, quests, or skyshards.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_UPDATEDPARTIAL",           "Display Skyshard Counter Gained")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_UPDATEDPARTIAL_TP",        "Display a message in chat in x/3 format when a Skyshard is collected.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_COLOR",                    "Skill Point Message Color")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_MESSAGE",                  "Skill Point Message Format")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_MESSAGE_TP",               "Message format for skill points, <<1>> represents # of skill points, <<1[singular/plural]>> represents name of skill points.\nDefault: \"Gained <<1>> skill <<1[point/points]>>.\"")
+
+
+-- LOREBOOKS
+ZO_CreateStringId("SI_LUIE_CA_LOREBOOK_BOOK",                           "Book Discovered")
+ZO_CreateStringId("SI_LUIE_CA_LOREBOOK_ADDED_CSA",                      "<<1>> added to <<2>>")
+ZO_CreateStringId("SI_LUIE_CA_LOREBOOK_ADDED_CA",                       "added to") -- Have to add this extra string for CA, if we try to colorize the whole string with the link, it also colorizes our custom link type. 
+
+
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_FRIEND_ADDED",                    "<<1>> added to friends.")
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_FRIEND_ADDED_ALT",                "|cFEFEFE<<1>>|r added to friends.")
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_FRIEND_INVITE_DECLINED",          "Friend invite declined.")
@@ -146,9 +167,13 @@ ZO_CreateStringId("SI_LUIE_CA_GROUP_QUEST_SHARE_DECLINED",              "Shared 
 ZO_CreateStringId("SI_LUIE_CA_GROUP_QUIT",                              "You are no longer in a group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_QUIT_LFG",                          "You are no longer in an LFG group.")
 
-ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_STARTED",                     "Started: <<1>>")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_FAILED",                      "Failed: <<1>>")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_STARTED",                     "Started: <<1>>") -- Replaces default string to remove "Trial" label (Started: <<1>> Trial) (Note - SI_TRIAL_COMPLETED_LARGE does not have the same issue)
+ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_FAILED",                      "Failed: <<1>>") -- Replaces default string to remove "Trial" label (Failed: <<1>> Trial) (Note - SI_TRIAL_COMPLETED_LARGE does not have the same issue)
 ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_SCORETALLY",                  "Final Score <<1>> Total Time <<2>> Vitality Bonus <<3>> <<4>>")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_REVIVE_COUNTER_UPDATED",            "|t16:16:<<1>>|t Vitality Bonus Decreased") -- Custom string for printToChat Revive Counter update
+ZO_CreateStringId("SI_LUIE_CA_GROUP_REVIVE_COUNTER_UPDATED_LARGE",      "|t64:64:<<1>>|t Vitality Bonus Decreased") -- Replaces default string to add spacing between icon and text.
+ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_SCORE_UPDATED",               "|t16:16:<<1>>|t <<2>> Points Rewarded") -- Custom string for printToChat score updates.
+ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_SCORE_UPDATED_LARGE",         "|t64:64:<<1>>|t <<2>> Points Rewarded") -- Replaces default string to add spacing between icon and text.
 
 ZO_CreateStringId("SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST",            "<<1>> has invited you to join <<2>>.")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST_ALT",        "|cFEFEFE<<1>>|r has invited you to join <<2>>.")
@@ -198,6 +223,25 @@ ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT3",                "|cFEFEF
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT4",                "|cFEFEFE<<1>>|r has declined the Ritual of Mara request")
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT6",                "|cFEFEFE<<1>>|r is not eligible for the Ritual of Mara.")
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT7",                "You are too far away from |cFEFEFE<<1>>|r to perform the Ritual of Mara.")
+
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_LOOT",                   "You loot %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_RECEIVE",                "You receive %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_SPEND",                  "You spend %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN",                "You receive %s from %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TRADEOUT",               "You trade %s to %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSIT",                "You deposit %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAW",               "You withdraw %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_CONFISCATE",             "A guard confiscates %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_PICKPOCKET",             "You pickpocket %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_LOST",                   "You lost %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_EARN",                   "You earn %s.")
+
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGOLD",              "Total Gold: %s")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP",                "Total AP: %s")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTV",                "Total TV: %s")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALWV",                "Total Vouchers: %s")
+
+----- OUDATED
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_ADDED",                    "Added")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_BROKEN",                   "Broken")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_CONFISCATED",              "Confiscated")
@@ -225,6 +269,7 @@ ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_TRADED",                   "Traded"
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED",                 "Upgraded")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_USED",                     "Used")
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW",                 "Withdrew")
+
 ZO_CreateStringId("SI_LUIE_CA_QUEST_ABANDONED",                         "Abandoned: <<1>>")
 ZO_CreateStringId("SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON",               "Abandoned: <<1>> <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_QUEST_DISCOVER",                          "Discovered: <<1>>")
@@ -423,31 +468,27 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_HEADER",                  "Collect
 
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE",                  "Show Collectibles Unlocked")
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE_TP",               "Display a message in chat when a collectible is added or unlocked.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_PREFIX",                  "Collectible Prefix Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_PREFIX_TP",               "Choose the format for the prefix message displayed when a collectible is unlocked.\nDefault: [Collectible Unlocked]")
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX",           "Collectible Prefix Message")
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX_TP",        "Enter the message that will display before the name of the collectible unlocked.\nDefault: \"Collection Updated:\"")
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ICON",                    "Show Collectible Icon")
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ICON_TP",                 "Display an icon for the relevant collectible unlocked.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_COLOR",                   "Color Context Message Color")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_BRACKET",                 "Bracket Settings for Category Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_BRACKET_TP",              "Allows you to customize the format of the Brackets present on Context Specific Messages.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ABBREVIATE",              "Abbreviate Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ABBREVIATE_TP",           "Display message in format \"[Category Unlocked] Collectible Name\" instead of \"[Prefix] Collectible Name [Category]\"\nNote: This will use the relevant bracket options for the prefix message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ABBREVIATE_PREFIX",       "Abbreviated Message content")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ABBREVIATE_PREFIX_TP",    "Messages will appear with relevant bracket options and this value X as \"Category Name X\"\nDefault: Unlocked")
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_ONE",               "Collectible Message Color (Part 1)")
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_TWO",               "Collectible Message Color (Part 2)")
 
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_ENABLE",                     "Show Lorebooks Discovered")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP",                  "Display a message in chat when a lorebook is discovered.")
 
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX1",                    "Lorebook Discovered Prefix Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX1_TP",                 "Choose the format for the prefix message displayed when a Lorebook is discovered.\nDefault: [Lorebook Discovered]")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX1_TP",                 "Choose the format for the prefix message displayed when a Lorebook is discovered.\nDefault: \"Lorebook Discovered:\"")
 
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX2",                    "Crafting Motif Prefix Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX2_TP",                 "Choose the format for the prefix message displayed when a Crafting Motif is discovered.\nDefault: [Motif Learned]")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX2_TP",                 "Choose the format for the prefix message displayed when a Crafting Motif is discovered.\nDefault: \"Motif Learned:\"")
 
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX3",                    "Book Prefix Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX3_TP",                 "Choose the format for the prefix message displayed when a book is discovered.\nDefault: [Book Discovered]")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX3_TP",                 "Choose the format for the prefix message displayed when a book is discovered.\nDefault: \"Book Discovered:\"")
 
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLOR",                      "Color Content Message Color")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLOR1",                     "Message Pt1 Color")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLOR2",                     "Message Pt2 Color")
 
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE",                 "Hide Books without Eidetic Memory")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE_TP",              "Hide standard books discovered unless Eidetic Memory is unlocked.")
@@ -470,15 +511,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_COLOR_TP",          "Colors 
 
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLORDOWN",                           "Color for negative loot/currency gains")
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLORUP",                             "Color for positive loot/currency gains")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CSMBRACKET",                          "Bracket Settings for Context Specific Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CSMBRACKET_TP",                       "Allows you to customize the format of the Brackets present on Context Specific Messages.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CSMOVERRIDE",                         "Allow override Context specific messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CSMOVERRIDE_NOTE",                    "Note: These changes will still recolor to green/red depending on the context of currency change.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CSMOVERRIDE_TP",                      "Allows you to enter a message in the field below to replace the default context based messages for currency changes.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_GAIN",           "Context Override Message - Currency Gain")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_GAIN_TP",        "Enter a string to replace the default context specific bracketed message displayed before POSITIVE currency changes.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_LOSS",           "Context Override Message - Currency Loss")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_LOSS_TP",        "Enter a string to replace the default context specific bracketed message displayed before NEGATIVE currency changes.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HEADER",                     "Currency Announcements")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT",            "Hide Gold spent on Guild Trader Purchases")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_NOTE",       "This is a useful if you are using an addon like Awesome Guild Store to announce trader purchases.")
@@ -495,16 +527,16 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPTOTAL",                "Show to
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPTOTAL_TP",             "Show total amount of Alliance Points after change is displayed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAP_TP",                  "Print a context sensitive notification to chat when Alliance Points are earned or spent.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWGOLD",                   "Show Gold Changes")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDCOLOR",              "Gold Change Color")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDNAME",               "Gold Name")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDNAME_TP",            "Name to display for Gold. 's' will be added onto plural quantities of this name unless using one of the special formats listed below.\n")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCurrencyGoldColor",              "Gold Change Color")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCurrencyGoldName",               "Gold Name")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCurrencyGoldName_TP",            "Name to display for Gold. 's' will be added onto plural quantities of this name unless using one of the special formats listed below.\n")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTOTAL",              "Show total amount of Gold")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTOTAL_TP",           "Show total amount of Gold after change is displayed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWGOLD_TP",                "Print a context sensitive notification to chat when gold is gained or lost.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTHRESHOLD",          "Gold (Loot) Gain - Filter Threshold")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTHRESHOLD_TP",       "Gold looted below this value will not be displayed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTHROTTLE",           "Combine Looted Gold from multiple sources")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTHROTTLE_TP",        "When toggled on, gold looted from a group of bodies will combine into one value instead of showing individual values.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCurrencyGoldThrottle",           "Combine Looted Gold from multiple sources")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCurrencyGoldThrottle_TP",        "When toggled on, gold looted from a group of bodies will combine into one value instead of showing individual values.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWICONS",                  "Show Looted Currency Icons")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWICONS_TP",               "Display an icon for the relative type of currency when a notification is printed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTV",                     "Show Tel Var Stone Changes")
@@ -545,30 +577,19 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD_TP",             "Experie
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HEADER",                          "Experience Announcements")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HIDEEXPKILLS",                    "Hide Experience from Kills")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HIDEEXPKILLS_TP",                 "Toggle this option on to only report experience gain in chat from non-combat sources.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_LVLTOTALICON",                    "Show Level Icon with Total Level")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_LVLTOTALICON_TP",                 "Toggle the display of the normal level icon or relevant champion point type icon when total level is displayed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_LVLUPICON",                       "Show Level Icon on Level Up")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_LVLUPICON_TP",                    "Toggle the display of the normal level icon or relevant champion point type icon when a level is gained.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_LVLUPMSG",                        "Show Level Up Message in Chat")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_LVLUPMSG_TP",                     "Displays a message in chat when the player levels up.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_PROGRESSCOLOR",                   "Color Experience Progress")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_PROGRESSCOLOR_TP",                "Enables color change for reported experience based off level of completion toward the next level.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_PROGRESSDISPLAYMETHOD",           "Progress Display Method")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_PROGRESSDISPLAYMETHOD_TP",        "Choose the method in which Experience progress will be reported.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_PROGRESSTONEXTLVL",               "Show Progress to next level")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_PROGRESSTONEXTLVL_TP",            "When enabled, any XP gains will be amended with a display of your progress toward the next level.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWCURRENTLVLLABEL",             "Show (Current Level) label")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWCURRENTLVLLABEL_TP",          "Displays (Current Level) after reporting XP progress.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWDECIMALFORMAT",               "Show [x.xx] decimal format")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWDECIMALFORMAT_TP",            "When using progress display method 2 or 3, this will display the XP percentage as x.xx% rather than x%.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_EXPERIENCE_COLOR",                    "Experience Gain Message Color")
+ZO_CreateStringId("SI_LUIE_LAM_CA_EXPERIENCE_LEVELUP_COLOR",            "Level Up Message Color")
+
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWEXPGAIN",                     "Show Experience Gain")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWEXPGAIN_TP",                  "Enable print experience gain to chat.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWEXPICON",                     "Display Experience Icon")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWEXPICON_TP",                  "Toggle the display of an icon with experience point gain.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABEL",               "Show [Progress] label")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABELNAME",           "Display name for [Progress] label")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABELNAME_TP",        "Modifier the spacer message displayed between XP amount gained and the progress to the next level.\nDefault: \"[Progress]\"")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABEL_TP",            "Displays [Progress] label before reporting XP progress.")
+
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT",             "Throttle Experience gained in combat")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT_TP",          "Setting this option higher than 0 allows you to throttle XP gain by X milliseconds.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_HEADER",                              "Chat Announcements Options")
@@ -653,10 +674,16 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPLFG",                   "Show LF
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPLFG_TP",                "Print a notification to chat entering or leaving an LFG queue or forming an LFG group.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPLFGCOMPLETE",           "Show LFG Completion Message")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPLFGCOMPLETE_TP",        "Print a notification to chat when an LFG activity is completed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAID",                  "Show Trial Notifications")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAID",                  "Show Trial - Status Notifications")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAID_TP",               "Display chat notifications when a Trial is started, failed, or completed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDSCORE",             "Show Trial - New High Score")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDSCORE_TP",          "Display a chat notification when a new high score is achieved on trial completion.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDSCORE",             "Show Trial - Score Update")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDSCORE_TP",          "Display a chat notification when your score in a Trial is increased.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDBESTSCORE",         "Show Trial - New High Score")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDBESTSCORE_TP",      "Display a chat notification when a new high score is achieved on trial completion.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDREVIVE",            "Show Trial - Vitality Bonus Loss")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDREVIVE_TP",         "Display a chat notification when Vitality Bonus is decreased.")
 
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGUILD",                      "Show Guild Event Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGUILDICONS",                 "Show Guild Icons")

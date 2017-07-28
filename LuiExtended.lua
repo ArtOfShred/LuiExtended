@@ -150,7 +150,6 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     -- Initialize this addon modules according to user preferences
     LUIE.ChatAnnouncements.Initialize( LUIE.SV.ChatAnnouncements_Enable )
     LUIE.CombatInfo.Initialize( LUIE.SV.CombatInfo_Enabled )
-    LUIE.DamageMeter.Initialize(LUIE.SV.DamageMeter_Enable)
     LUIE.InfoPanel.Initialize( LUIE.SV.InfoPanel_Enabled )
     LUIE.UnitFrames.Initialize( LUIE.SV.UnitFrames_Enabled )
     LUIE.SpellCastBuffs.Initialize( LUIE.SV.SpellCastBuff_Enable )

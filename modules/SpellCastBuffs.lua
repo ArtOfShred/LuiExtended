@@ -1375,14 +1375,16 @@ function SCB.Initialize( enabled )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED,       SCB.OnSlotUpdated )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_UPDATE_COOLDOWNS,   SCB.OnUpdateCooldowns )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_ABILITY_USED,  SCB.OnSlotAbilityUsed )
-    -- Tracking of finishing long-term buffs
+    
     EVENT_MANAGER:RegisterForEvent(moduleName  .. "player",         EVENT_EFFECT_CHANGED, SCB.OnEffectChanged )
     EVENT_MANAGER:RegisterForEvent(moduleName  .. "reticleover",    EVENT_EFFECT_CHANGED, SCB.OnEffectChanged )
     EVENT_MANAGER:AddFilterForEvent(moduleName .. "player",         EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
     EVENT_MANAGER:AddFilterForEvent(moduleName .. "reticleover",    EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "reticleover" )
 
-    -- FIXME: Reenable later properly
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_COMBAT_EVENT, SCB.OnCombatEvent )
+    EVENT_MANAGER:RegisterForEvent(moduleName .. "player",          EVENT_COMBAT_EVENT, SCB.OnCombatEvent )
+    EVENT_MANAGER:RegisterForEvent(moduleName .. "reticleover",     EVENT_COMBAT_EVENT, SCB.OnCombatEvent )
+    EVENT_MANAGER:AddFilterForEvent(moduleName .. "player",         EVENT_COMBAT_EVENT, REGISTER_FILTER_UNIT_TAG, "player" )
+    EVENT_MANAGER:AddFilterForEvent(moduleName .. "reticleover",    EVENT_COMBAT_EVENT, REGISTER_FILTER_UNIT_TAG, "reticleover" )
     EVENT_MANAGER:AddFilterForEvent(moduleName, EVENT_COMBAT_EVENT, REGISTER_FILTER_IS_ERROR, false )
 
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED,  SCB.OnDeath )
@@ -3077,10 +3079,8 @@ function SCB.updateIcons( currentTime, sortedList, container )
         if effect.restart and buff.cd ~= nil then
             if remain == nil or effect.dur == nil or effect.dur == 0 then
                 buff.cd:StartCooldown(0, 0, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_UNTIL, false )
-            elseif remain > 8000 then
-                buff.cd:StartCooldown(100000, 100000, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_UNTIL, false )
             else
-                buff.cd:StartCooldown(remain, 8000, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_UNTIL, false )
+                buff.cd:StartCooldown(remain, effect.dur, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_UNTIL, false )
                 effect.restart = false
             end
         end

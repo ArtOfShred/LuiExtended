@@ -7,15 +7,11 @@ function LUIE_CreateSettings()
 
     local l_BuffsMovingEnabled  = false -- Helper local flag
     local FontsList             = {}
-    local FontsListCombatInfo   = {}
     local StatusbarTexturesList = {}
 
     -- Get Fonts
     for f in pairs(LUIE.Fonts) do
         table.insert(FontsList, f)
-    end
-    for key, _ in pairs(LUIE.CombatInfo.FontFamilies) do
-        table.insert(FontsListCombatInfo, key)
     end
     for key, _ in pairs(LUIE.StatusbarTextures) do
         table.insert(StatusbarTexturesList, key)
@@ -27,16 +23,10 @@ function LUIE_CreateSettings()
     local chatnameDisplayOptionsKeys    = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
     local achievementBracketOptions     = { "[]", "()", "Hyphen", "No Brackets" }
     local achievementBracketOptionsKeys = { ["[]"] = 1, ["()"] = 2, ["Hyphen"] =3, ["No Brackets"] = 4 }
-    local collectibleBracketOptions     = { "[]", "()", "Hyphen", "No Brackets" }
-    local collectibleBracketOptionsKeys = { ["[]"] = 1, ["()"] = 2, ["Hyphen"] =3, ["No Brackets"] = 4 }
-    local currencyBracketOptions        = { "[]", "()", "Hyphen", "No Brackets" }
-    local currencyBracketOptionsKeys    = { ["[]"] = 1, ["()"] = 2, ["Hyphen"] =3, ["No Brackets"] = 4 }
     local itemBracketOptions            = { "[]", "()", "Hyphen", "No Brackets" }
     local itemBracketOptionsKeys        = { ["[]"] = 1, ["()"] = 2, ["Hyphen"] =3, ["No Brackets"] = 4 }
-    local lorebookBracketOptions        = { "[]", "()", "Hyphen", "No Brackets" }
-    local lorebookBracketOptionsKeys    = { ["[]"] = 1, ["()"] = 2, ["Hyphen"] =3, ["No Brackets"] = 4 }
-    local experienceDisplayOptions      = { "Value", "Percentage", "Both" }
-    local experienceDisplayOptionsKeys  = { ["Value"] = 1, ["Percentage"] = 2, ["Both"] = 3 }
+    local lorebookBracketOptions        = { "[]", "()", "-", ":", "No Brackets" }
+    local lorebookBracketOptionsKeys    = { ["[]"] = 1, ["()"] = 2, ["-"] = 3, [":"] = 4, ["No Brackets"] = 5 }
     local guildrankDisplayOptions       = { "Self Only", "Self + All w/ Permissions", "Display All Rank Changes" }
     local guildrankDisplayOptionsKeys   = { ["Self Only"] = 1, ["Self + All w/ Permissions"] = 2, ["Display All Rank Changes"] = 3 }
     local rotationOptions               = { "Horizontal", "Vertical" }
@@ -289,11 +279,6 @@ function LUIE_CreateSettings()
         reference = "Combat_Info_Options_Submenu",
         controls = {
             {
-                -- TEMP DESCRIPTION COMBAT INFO PANEL (NO LOCALIZATION NEEDED)
-                type = "description",
-                text = "NOTE: No further work is being done on this component and it will be REMOVED in the next major update for LUIE (Ultimate tracking function will be moved into Buffs & Debuffs). Combat Cloud will be updated soon to use as a companion to LUIE as it has far more options to work with for SCT.",
-            },
-            {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_CI_SHOWCOMBATINFO),
                 tooltip = GetString(SI_LUIE_LAM_CI_SHOWCOMBATINFO_TP),
@@ -323,7 +308,7 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_SHOWULTIMATEVALUE),
                 tooltip = GetString(SI_LUIE_LAM_CI_SHOWULTIMATEVALUE_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.UltimateEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.UltimateEnabled = value LUIE.CombatInfo.OnSlotsFullUpdate(nil) end,
+                setFunc = function(value) LUIE.CombatInfo.SV.UltimateEnabled = value LUIE.CombatInfo.RegisterCombatInfo() LUIE.CombatInfo.OnSlotsFullUpdate(nil) end,
                 width = "full",
                 default = LUIE.CombatInfo.D.UltimateEnabled,
                 disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
@@ -333,20 +318,10 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_CI_HIDEPERCENTWHENFULL),
                 tooltip = GetString(SI_LUIE_LAM_CI_HIDEPERCENTWHENFULL_TP),
                 getFunc = function() return LUIE.CombatInfo.SV.UltimateHideFull end,
-                setFunc = function(value) LUIE.CombatInfo.SV.UltimateHideFull = value end,
+                setFunc = function(value) LUIE.CombatInfo.SV.UltimateHideFull = value LUIE.CombatInfo.OnSlotsFullUpdate(nil) end,
                 width = "full",
                 default = LUIE.CombatInfo.D.UltimateHideFull,
                 disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.UltimateEnabled ) end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_ENABLEULTIREADYALERT),
-                tooltip = GetString(SI_LUIE_LAM_CI_ENABLEULTIREADYALERT_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.UltimateAlert end,
-                setFunc = function(value) LUIE.CombatInfo.SV.UltimateAlert = value end,
-                width = "full",
-                default = LUIE.CombatInfo.D.UltimateAlert,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
             },
             {
                 type = "checkbox",
@@ -357,576 +332,6 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.CombatInfo.D.UltimateGeneration,
                 disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-            },
-            {
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CI_CLOUDTYPE_HEADER),
-                width = "full",
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_CLOUDTYPE_UNLOCK),
-                tooltip = GetString(SI_LUIE_LAM_CI_CLOUDTYPE_UNLOCK_TP),
-                getFunc = function() return LUIE.CombatInfo.panelUnlocked end,
-                setFunc = LUIE.CombatInfo.SetMovingState,
-                width = "half",
-                default = false,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-                resetFunc = LUIE.CombatInfo.ResetPosition,
-            },
-            {
-                type = "button",
-                name = GetString(SI_INTERFACE_OPTIONS_FRAMERATE_LATENCY_POSITION_RESET),
-                tooltip = GetString(SI_LUIE_LAM_CI_CLOUDTYPE_RESETPOSITION),
-                func = LUIE.CombatInfo.ResetPosition,
-                width = "half",
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_CLOUDTYPE_ENABLE),
-                getFunc = function() return LUIE.CombatInfo.SV.CloudTextEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.CloudTextEnabled = value end,
-                width = "full",
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-                default = LUIE.CombatInfo.D.CloudTextEnabled,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-            },
-            {
-                type = "slider",
-                name = GetString(SI_LUIE_LAM_CI_LARGEFONT),
-                tooltip = GetString(SI_LUIE_LAM_CI_LARGEFONT_TP),
-                min = 20, max = 50, step = 2,
-                getFunc = function() return LUIE.CombatInfo.SV.FontCloudSizeLarge end,
-                setFunc = function(value) LUIE.CombatInfo.SV.FontCloudSizeLarge = value LUIE.CombatInfo.PrepareFonts(true) end,
-                width = "full",
-                default = LUIE.CombatInfo.D.FontCloudSizeLarge,
-                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CloudTextEnabled) end,
-            },
-            {
-                type = "slider",
-                name = GetString(SI_LUIE_LAM_CI_MEDIUMFONT),
-                tooltip = GetString(SI_LUIE_LAM_CI_MEDIUMFONT_TP),
-                min = 14, max = 40, step = 2,
-                getFunc = function() return LUIE.CombatInfo.SV.FontCloudSizeMedium end,
-                setFunc = function(value) LUIE.CombatInfo.SV.FontCloudSizeMedium = value LUIE.CombatInfo.PrepareFonts(true) end,
-                width = "full",
-                default = LUIE.CombatInfo.D.FontCloudSizeMedium,
-                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CloudTextEnabled) end,
-            },
-            {
-                type = "slider",
-                name = GetString(SI_LUIE_LAM_CI_SMALLFONT),
-                tooltip = GetString(SI_LUIE_LAM_CI_SMALLFONT_TP),
-                min = 12, max = 30, step = 2,
-                getFunc = function() return LUIE.CombatInfo.SV.FontCloudSizeSmall end,
-                setFunc = function(value) LUIE.CombatInfo.SV.FontCloudSizeSmall = value LUIE.CombatInfo.PrepareFonts(true) end,
-                width = "full",
-                default = LUIE.CombatInfo.D.FontCloudSizeSmall,
-                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CloudTextEnabled) end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_LABELICONS),
-                tooltip = GetString(SI_LUIE_LAM_CI_LABELICONS_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.ShowIconsCloud end,
-                setFunc = function(value) LUIE.CombatInfo.SV.ShowIconsCloud = value end,
-                width = "full",
-                default = LUIE.CombatInfo.D.ShowIconsCloud,
-                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CloudTextEnabled) end,
-            },
-            {
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CI_SCROLLTYPE_HEADER),
-                width = "full",
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_SCROLLTYPE_ENABLE),
-                getFunc = function() return LUIE.CombatInfo.SV.ScrollTextEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.ScrollTextEnabled = value end,
-                width = "full",
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-                default = LUIE.CombatInfo.D.ScrollTextEnabled,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-            },
-            {
-                type = "slider",
-                name = GetString(SI_LUIE_LAM_CI_LARGEFONT),
-                tooltip = GetString(SI_LUIE_LAM_CI_LARGEFONT_TP),
-                min = 20, max = 50, step = 2,
-                getFunc = function() return LUIE.CombatInfo.SV.FontScrollSizeLarge end,
-                setFunc = function(value) LUIE.CombatInfo.SV.FontScrollSizeLarge = value LUIE.CombatInfo.PrepareFonts(true) end,
-                width = "full",
-                default = LUIE.CombatInfo.D.FontScrollSizeLarge,
-                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.ScrollTextEnabled) end,
-            },
-            {
-                type = "slider",
-                name = GetString(SI_LUIE_LAM_CI_MEDIUMFONT),
-                tooltip = GetString(SI_LUIE_LAM_CI_MEDIUMFONT_TP),
-                min = 14, max = 40, step = 2,
-                getFunc = function() return LUIE.CombatInfo.SV.FontScrollSizeMedium end,
-                setFunc = function(value) LUIE.CombatInfo.SV.FontScrollSizeMedium = value LUIE.CombatInfo.PrepareFonts(true) end,
-                width = "full",
-                default = LUIE.CombatInfo.D.FontScrollSizeMedium,
-                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.ScrollTextEnabled) end,
-            },
-            {
-                type = "slider",
-                name = GetString(SI_LUIE_LAM_CI_SMALLFONT),
-                tooltip = GetString(SI_LUIE_LAM_CI_SMALLFONT_TP),
-                min = 12, max = 30, step = 2,
-                getFunc = function() return LUIE.CombatInfo.SV.FontScrollSizeSmall end,
-                setFunc = function(value) LUIE.CombatInfo.SV.FontScrollSizeSmall = value LUIE.CombatInfo.PrepareFonts(true) end,
-                width = "full",
-                default = LUIE.CombatInfo.D.FontScrollSizeSmall,
-                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.ScrollTextEnabled) end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_LABELICONS),
-                tooltip = GetString(SI_LUIE_LAM_CI_LABELICONS_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.ShowIconsScroll end,
-                setFunc = function(value) LUIE.CombatInfo.SV.ShowIconsScroll = value end,
-                width = "full",
-                default = LUIE.CombatInfo.D.ShowIconsScroll,
-                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.ScrollTextEnabled) end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_SCROLLTYPE_QEVENTS),
-                tooltip = GetString(SI_LUIE_LAM_CI_SCROLLTYPE_QEVENTS_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.PurgeExpiredScroll end,
-                setFunc = function(value) LUIE.CombatInfo.SV.PurgeExpiredScroll = value end,
-                width = "full",
-                default = LUIE.CombatInfo.D.PurgeExpiredScroll,
-                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.ScrollTextEnabled) end,
-            },
-            {
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CI_COMMON_HEADER),
-                width = "full",
-            },
-            {
-                type = "dropdown",
-                name = GetString(SI_LUIE_LAM_CI_COMMON_FONTFAMILY),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_FONTFAMILY_TP),
-                choices = FontsListCombatInfo,
-                getFunc = function() return LUIE.CombatInfo.SV.FontFamily end,
-                setFunc = function(var) LUIE.CombatInfo.SV.FontFamily = var LUIE.CombatInfo.PrepareFonts(true) end,
-                width = "full",
-                sort = "name-up",
-                default = LUIE.CombatInfo.D.FontFamily,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_COMMON_COMBATTEXT),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_COMBATTEXT_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.CombatEventsEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.CombatEventsEnabled = value LUIE.CombatInfo.RegisterCombatEvent() end,
-                width = "full",
-                default = LUIE.CombatInfo.D.CombatEventsEnabled,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_COMMON_THROTTLE),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_THROTTLE_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.ThrottleEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.ThrottleEnabled = value end,
-                width = "full",
-                default = LUIE.CombatInfo.D.ThrottleEnabled,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CombatEventsEnabled ) end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_COMMON_SHOWINCDOT),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWINCDOT_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.DotsInEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.DotsInEnabled = value end,
-                width = "full",
-                default = LUIE.CombatInfo.D.DotsInEnabled,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CombatEventsEnabled ) end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_COMMON_SHOWOUTDOT),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWOUTDOT_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.DotsOutEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.DotsOutEnabled = value end,
-                width = "full",
-                default = LUIE.CombatInfo.D.DotsOutEnabled,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CombatEventsEnabled ) end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_COMMON_SHOWINCHEAL),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWINCHEAL_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.HealingInEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.HealingInEnabled = value end,
-                width = "full",
-                default = LUIE.CombatInfo.D.HealingInEnabled,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CombatEventsEnabled ) end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_COMMON_SHOWOUTHEAL),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWOUTHEAL_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.HealingOutEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.HealingOutEnabled = value end,
-                width = "full",
-                default = LUIE.CombatInfo.D.HealingOutEnabled,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CombatEventsEnabled ) end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_COMMON_DMGCOLORS),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_DMGCOLORS_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.DamageColoured end,
-                setFunc = function(value) LUIE.CombatInfo.SV.DamageColoured = value end,
-                width = "full",
-                default = LUIE.CombatInfo.D.DamageColoured,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CombatEventsEnabled ) end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_COMMON_SHOWCCEVENTS),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWCCEVENTS_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.CombatCCEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.CombatCCEnabled = value LUIE.CombatInfo.RegisterCombatEvent() end,
-                width = "full",
-                default = LUIE.CombatInfo.D.CombatCCEnabled,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CombatEventsEnabled ) end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_COMMON_SHOWATTRDRAIN),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWATTRDRAIN_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.DrainEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.DrainEnabled = value end,
-                width = "full",
-                default = LUIE.CombatInfo.D.DrainEnabled,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CombatEventsEnabled ) end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_COMMON_SHOWATTRNRG),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWATTRNRG_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.EnergizeEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.EnergizeEnabled = value end,
-                width = "full",
-                default = LUIE.CombatInfo.D.EnergizeEnabled,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CombatEventsEnabled ) end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_COMMON_SHOWXPGAIN),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWXPGAIN_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.ExperienceEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.ExperienceEnabled = value LUIE.CombatInfo.RegisterXPEvent() end,
-                width = "full",
-                default = LUIE.CombatInfo.D.ExperienceEnabled,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_COMMON_SHOWAPGAIN),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWAPGAIN_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.AllianceEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.AllianceEnabled = value LUIE.CombatInfo.RegisterAPEvent() end,
-                width = "full",
-                default = LUIE.CombatInfo.D.AllianceEnabled,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_COMMON_SHOWTVGAIN),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMMON_SHOWTVGAIN_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.TelVarEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.TelVarEnabled = value LUIE.CombatInfo.RegisterTSEvent() end,
-                width = "full",
-                default = LUIE.CombatInfo.D.TelVarEnabled,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-            },
-            {
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CI_ALERTS_HEADER),
-                width = "full",
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_ALERTS_ENABLETIPS),
-                tooltip = GetString(SI_LUIE_LAM_CI_ALERTS_ENABLETIPS_TP),
-                warning = GetString(SI_LUIE_LAM_CI_ALERTS_ENABLETIPS_WARRNING),
-                getFunc = function() return LUIE.CombatInfo.SV.CombatTipsEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.CombatTipsEnabled = value LUIE.CombatInfo.RegisterCombatTipEvent() end,
-                width = "full",
-                default = LUIE.CombatInfo.D.CombatTipsEnabled,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_ALERTS_HIDEZOSTIPS),
-                tooltip = GetString(SI_LUIE_LAM_CI_ALERTS_HIDEZOSTIPS_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.HideIngameTips end,
-                setFunc = function(value) LUIE.CombatInfo.SV.HideIngameTips = value ZO_ActiveCombatTips:SetHidden(value) end,
-                width = "full",
-                default = LUIE.CombatInfo.D.HideIngameTips,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.CombatTipsEnabled ) end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_ALERTS_ENABLEDEATH),
-                tooltip = GetString(SI_LUIE_LAM_CI_ALERTS_ENABLEDEATH_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.GroupDeathEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.GroupDeathEnabled = value LUIE.CombatInfo.RegisterDeathEvent() end,
-                width = "full",
-                default = LUIE.CombatInfo.D.GroupDeathEnabled,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_ALERTS_LOWATTRIB),
-                tooltip = GetString(SI_LUIE_LAM_CI_ALERTS_LOWATTRIB_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.LowEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.LowEnabled = value end,
-                width = "full",
-                default = LUIE.CombatInfo.D.LowEnabled,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-            },
-            {
-                type = "slider",
-                name = GetString(SI_LUIE_LAM_CI_THRESHOLD),
-                min = 10, max = 50, step = 5,
-                getFunc = function() return LUIE.CombatInfo.SV.LowThreshold end,
-                setFunc = function(value) LUIE.CombatInfo.SV.LowThreshold = value LUIE.CombatInfo.thresholdAttribute = 0.01 * value end,
-                width = "half",
-                default = LUIE.CombatInfo.D.LowThreshold,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.LowEnabled ) end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_ALERTS_NOTIFYSOUND),
-                tooltip = GetString(GetString(SI_LUIE_LAM_CI_ALERTS_NOTIFYSOUND_TP)),
-                getFunc = function() return LUIE.CombatInfo.SV.LowSound end,
-                setFunc = function(value) LUIE.CombatInfo.SV.LowSound = value end,
-                width = "half",
-                default = LUIE.CombatInfo.D.LowSound,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.LowEnabled ) end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_ALERTS_EXECUTE),
-                tooltip = GetString(SI_LUIE_LAM_CI_ALERTS_EXECUTE_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.ExecuteEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.ExecuteEnabled = value end,
-                width = "full",
-                default = LUIE.CombatInfo.D.ExecuteEnabled,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-            },
-            {
-                type = "slider",
-                name = GetString(SI_LUIE_LAM_CI_THRESHOLD),
-                min = 20, max = 35, step = 1,
-                getFunc = function() return LUIE.CombatInfo.SV.ExecuteThreshold end,
-                setFunc = function(value) LUIE.CombatInfo.SV.ExecuteThreshold = value LUIE.CombatInfo.thresholdExecute = 0.01 * value end,
-                width = "half",
-                default = LUIE.CombatInfo.D.ExecuteThreshold,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.ExecuteEnabled ) end,
-            },
-            {
-                type = "slider",
-                name = GetString(SI_LUIE_LAM_CI_ALERTS_TIMEOUT),
-                tooltip = GetString(SI_LUIE_LAM_CI_ALERTS_TIMEOUT_TP),
-                min = 4, max = 20, step = 1,
-                getFunc = function() return LUIE.CombatInfo.SV.ExecuteTimeout end,
-                setFunc = function(value) LUIE.CombatInfo.SV.ExecuteTimeout = value end,
-                width = "half",
-                default = LUIE.CombatInfo.D.ExecuteTimeout,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.ExecuteEnabled ) end,
-            },
-            {
-                type = "header",
-                name = GetString(SI_PLAYER_MENU_MISC),
-                width = "full",
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_COMBATSTATE),
-                tooltip = GetString(SI_LUIE_LAM_CI_COMBATSTATE_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.CombatStateEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.CombatStateEnabled = value LUIE.CombatInfo.RegisterCombatStateEvent() end,
-                width = "full",
-                default = LUIE.CombatInfo.D.CombatStateEnabled,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-            },
-        },
-    }
-    
-    -- Damage Meter and Combat Log Options
-    -- Not gonna add localization support atm since we might get rid of that component.
-    optionsData[#optionsData + 1] = {
-        type = "submenu",
-        name = "Damage Meter & Combat Log",
-        reference = "Damage_Meter_and_Combat_Log_Submenu",
-        controls = {
-            {
-                -- TEMP DESCRIPTION DAMAGE METER (NO LOCALIZATION NEEDED)
-                type = "description",
-                text = "NOTE: No further work is being done on this component and it will be REMOVED in the next major update for LUIE. Combat Metrics does a far better job providing information than this component and is more efficient. Support will be added for Combat Metrics before the next major LUIE update for the custom icons and ability name corrections present in LUIE.",
-            },
-            {
-                type = "checkbox",
-                name = "Enable Damage Meter",
-                tooltip = "Counts damage and healing done.",
-                getFunc = function() return LUIE.SV.DamageMeter_Enable end,
-                setFunc = function(value) LUIE.SV.DamageMeter_Enable = value end,
-                width = "full",
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-                default = LUIE.D.DamageMeter_Enable,
-            },
-            {
-                type = "slider",
-                name = "Timeout Threshold",
-                tooltip = "Number of seconds without damage to signal encounter termination.",
-                min = 1, max = 10, step = 1,
-                getFunc = function() return LUIE.DamageMeter.SV.DamageTimeout end,
-                setFunc = function(value) LUIE.DamageMeter.SV.DamageTimeout = value end,
-                width = "full",
-                disabled = function() return not LUIE.SV.DamageMeter_Enable end,
-                default = LUIE.DamageMeter.D.DamageTimeout,
-            },
-            {
-                type = "checkbox",
-                name = "Update Damage Statistics in realtime",
-                tooltip = "Update Full Damage Meter window during combat. Otherwise it is updated when being displayed with information of last combat.",
-                getFunc = function() return LUIE.DamageMeter.SV.UpdateFullRealtime end,
-                setFunc = function(value) LUIE.DamageMeter.SV.UpdateFullRealtime = value end,
-                width = "full",
-                disabled = function() return not LUIE.SV.DamageMeter_Enable end,
-                default = LUIE.DamageMeter.D.UpdateFullRealtime,
-            },
-            {
-                type = "checkbox",
-                name = "Unlock window",
-                tooltip = "Allow mouse dragging for Damage Meter window.",
-                getFunc = function() return LUIE.DamageMeter.panelUnlocked end,
-                setFunc = LUIE.DamageMeter.SetMovingState,
-                width = "half",
-                default = false,
-                disabled = function() return not LUIE.SV.DamageMeter_Enable end,
-                resetFunc = LUIE.DamageMeter.ResetTlwPosition,
-            },
-            {
-                type = "button",
-                name = "Reset position",
-                tooltip = "This will reset position of Damage Meter window into screen top left corner.",
-                func = LUIE.DamageMeter.ResetTlwPosition,
-                width = "half",
-            },
-            {
-                type = "header",
-                name = "Meter Mini-panel",
-                width = "full",
-            },
-            {
-                type = "checkbox",
-                name = "Show Fight time label",
-                tooltip = "Include Fight time control as 4th element on mini-panel.",
-                getFunc = function() return LUIE.DamageMeter.SV.FightTime end,
-                setFunc = function(value) LUIE.DamageMeter.SV.FightTime = value LUIE.DamageMeter.LayoutMiniPanel() end,
-                width = "full",
-                default = LUIE.DamageMeter.D.FightTime,
-                disabled = function() return not LUIE.SV.DamageMeter_Enable end,
-            },
-            {
-                type = "checkbox",
-                name = "Show Background on Mini-meter panel",
-                tooltip = "Create mini-panel with background or leave it completely transparent.",
-                getFunc = function() return LUIE.DamageMeter.SV.Backdrop end,
-                setFunc = function(value) LUIE.DamageMeter.SV.Backdrop = value LUIE.DamageMeter.LayoutMiniPanel() end,
-                width = "full",
-                default = LUIE.DamageMeter.D.Backdrop,
-                disabled = function() return not LUIE.SV.DamageMeter_Enable end,
-            },
-            {
-                type = "header",
-                name = "Notes",
-                width = "full",
-            },
-            {
-                type = "description",
-                text = "You can click on incoming damage label to display full combat statistics for completed fight. Clicking on 'fight time' label will display graphical log of the fight. To report to chat your damage/healing performance click on damage and healing text labels on the meter mini-panel.",
-            },
-            {
-                type = "description",
-                text = "You can also setup unique key bindings for those actions in standard game 'Controls' menu.",
-            },
-            {
-                type = "checkbox",
-                name = "Enable Combat Log",
-                tooltip = "Enable Combat Log component to print combat related information into separate chat tab named 'Combat Log'.",
-                getFunc = function() return LUIE.DamageMeter.SV.CombatLog end,
-                setFunc = function(value) LUIE.DamageMeter.SV.CombatLog = value LUIE.DamageMeter.RegisterCombatStateEvent() LUIE.DamageMeter.RegisterEffectChangedEvent() end,
-                width = "full",
-                default = LUIE.DamageMeter.D.CombatLog,
-                disabled = function() return not LUIE.SV.DamageMeter_Enable end,
-            },
-            {
-                type = "checkbox",
-                name = "Include Time Stamp",
-                tooltip = "Include time of each combat event.",
-                getFunc = function() return LUIE.DamageMeter.SV.LogTimeStamp end,
-                setFunc = function(value) LUIE.DamageMeter.SV.LogTimeStamp = value end,
-                width = "full",
-                default = LUIE.DamageMeter.D.LogTimeStamp,
-                disabled = function() return not (LUIE.SV.DamageMeter_Enable and LUIE.DamageMeter.SV.CombatLog) end,
-            },
-            {
-                type = "checkbox",
-                name = "Focus in combat",
-                tooltip = "Switch active chat tab to CombatLog when enterring combat and resore the original one when finishing combat.",
-                getFunc = function() return LUIE.DamageMeter.SV.CombatLogFocus end,
-                setFunc = function(value) LUIE.DamageMeter.SV.CombatLogFocus = value LUIE.DamageMeter.RegisterCombatStateEvent() end,
-                width = "full",
-                default = LUIE.DamageMeter.D.CombatLogFocus,
-                disabled = function() return not (LUIE.SV.DamageMeter_Enable and LUIE.DamageMeter.SV.CombatLog) end
-            },
-            {
-                type = "checkbox",
-                name = "Log debuffs on player",
-                tooltip = "Include in CombatLog events when negative effect was applied to player character.",
-                getFunc = function() return LUIE.DamageMeter.SV.CombatLogDebuff end,
-                setFunc = function(value) LUIE.DamageMeter.SV.CombatLogDebuff = value LUIE.DamageMeter.RegisterEffectChangedEvent() end,
-                width = "full",
-                default = LUIE.DamageMeter.D.CombatLogDebuff,
-                disabled = function() return not (LUIE.SV.DamageMeter_Enable and LUIE.DamageMeter.SV.CombatLog) end,
-            },
-            {
-                type = "slider",
-                name = "Font Size Adjustment",
-                tooltip = "Used to change size of Combat Log font with respect to default chat font size.",
-                min = -3, max = 2, step = 1,
-                getFunc = function() return LUIE.DamageMeter.SV.CombatLogFont end,
-                setFunc = function(value) LUIE.DamageMeter.SV.CombatLogFont = value LUIE.DamageMeter.OnPlayerActivated() end,
-                width = "full",
-                default = LUIE.DamageMeter.D.CombatLogFont,
-                disabled = function() return not (LUIE.SV.DamageMeter_Enable and LUIE.DamageMeter.SV.CombatLog) end,
-            },
-            {
-                type = "checkbox",
-                name = "Preserve between logins",
-                tooltip = "Try to save last 20 log elements between character logins. Though this will not work if you game crashes instead exiting normally.",
-                getFunc = function() return LUIE.DamageMeter.SVC.LogSaveEnable end,
-                setFunc = function(value) LUIE.DamageMeter.SVC.LogSaveEnable = value end,
-                width = "full",
-                default = LUIE.DamageMeter.DC.LogSaveEnable,
-                disabled = function() return not (LUIE.SV.DamageMeter_Enable and LUIE.DamageMeter.SV.CombatLog) end,
-            },
-            {
-                type = "description",
-                text = "This component will create new chat tab 'CombatLog' and will send all combat related text into it. If you delete this tab it will be automatically recreated. If you wish to stop using this component, then first disable it here in menu and after it delete chat tab manually.",
             },
         },
     }
@@ -1682,26 +1087,6 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
         default = LUIE.ChatAnnouncements.D.EnableCustomStrings,
     }
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
-        -- Positive Change Color
-        type = "colorpicker",
-        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLORUP)),
-        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.ChangeColorUp) end,
-        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.ChangeColorUp = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
-        width = "full",
-        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-        default = {r=LUIE.ChatAnnouncements.D.ChangeColorUp[1], g=LUIE.ChatAnnouncements.D.ChangeColorUp[2], b=LUIE.ChatAnnouncements.D.ChangeColorUp[3]}
-    }
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
-        -- Negative Change Color
-        type = "colorpicker",
-        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLORDOWN)),
-        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.ChangeColorDown) end,
-        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.ChangeColorDown = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
-        width = "full",
-        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-        default = {r=LUIE.ChatAnnouncements.D.ChangeColorDown[1], g=LUIE.ChatAnnouncements.D.ChangeColorDown[2], b=LUIE.ChatAnnouncements.D.ChangeColorDown[3]}
-    }
 
                 -- CA Currency Announcements Options Submenu
                 optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
@@ -1721,347 +1106,564 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.CurrencyIcons,
                     },
                     {
+                        -- Currency Message Color
+                        type = "colorpicker",
+                        name = "TODO: Currency message color",
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.CurrencyColor) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.CurrencyColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable or LUIE.ChatAnnouncements.SV.CurrencyContextColor end,
+                        default = {r=LUIE.ChatAnnouncements.D.CurrencyColor[1], g=LUIE.ChatAnnouncements.D.CurrencyColor[2], b=LUIE.ChatAnnouncements.D.CurrencyColor[3]}
+                    },
+                    {
+                        -- Use Context Color for Currency Messages
+                        type = "checkbox",
+                        name = "TODO: Use Currency Context Color Bla Bla",
+                        tooltip = "TODO: Some shit here",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyContextColor end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyContextColor = value LUIE.ChatAnnouncements.RegisterGoldEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyContextColor,
+                    },
+                    {
+                        -- Positive Change Color
+                        type = "colorpicker",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLORUP)),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.CurrencyColorUp) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.CurrencyColorUp = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyContextColor and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = {r=LUIE.ChatAnnouncements.D.CurrencyColorUp[1], g=LUIE.ChatAnnouncements.D.CurrencyColorUp[2], b=LUIE.ChatAnnouncements.D.CurrencyColorUp[3]}
+                    },
+                    {
+                        -- Negative Change Color
+                        type = "colorpicker",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLORDOWN)),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.CurrencyColorDown) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.CurrencyColorDown = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyContextColor and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = {r=LUIE.ChatAnnouncements.D.CurrencyColorDown[1], g=LUIE.ChatAnnouncements.D.CurrencyColorDown[2], b=LUIE.ChatAnnouncements.D.CurrencyColorDown[3]}
+                    },
+                    {
                         -- Show Gold
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLD),
                         tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLD_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.GoldChange end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldChange = value LUIE.ChatAnnouncements.RegisterGoldEvents() end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyGoldChange end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyGoldChange = value LUIE.ChatAnnouncements.RegisterGoldEvents() end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.GoldChange,
+                        default = LUIE.ChatAnnouncements.D.CurrencyGoldChange,
                     },
                     {
                         -- Show Gold Color
                         type = "colorpicker",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDCOLOR)),
-                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.GoldColor) end,
-                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.GoldColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCurrencyGoldColor)),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.CurrencyGoldColor) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.CurrencyGoldColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.GoldChange and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = {r=LUIE.ChatAnnouncements.D.GoldColor[1], g=LUIE.ChatAnnouncements.D.GoldColor[2], b=LUIE.ChatAnnouncements.D.GoldColor[3]}
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyGoldChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = {r=LUIE.ChatAnnouncements.D.CurrencyGoldColor[1], g=LUIE.ChatAnnouncements.D.CurrencyGoldColor[2], b=LUIE.ChatAnnouncements.D.CurrencyGoldColor[3]}
                     },
                     {
                         -- Show Gold Name
                         type = "editbox",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDNAME)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDNAME_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.GoldName end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldName = value end,
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCurrencyGoldName)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCurrencyGoldName_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyGoldName end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyGoldName = value end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.GoldChange and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.GoldName,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyGoldChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyGoldName,
                     },
                     {
                         -- Show Gold Threshold
                         type = "slider",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTHRESHOLD)),
                         tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTHRESHOLD_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.GoldFilter end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldFilter = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyGoldFilter end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyGoldFilter = value end,
                         min = 0,
                         max = 10000,
                         step = 50,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.GoldChange and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.GoldFilter,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyGoldChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyGoldFilter,
                     },
                     {
                         -- Throttle Gold Looted
                         type = "checkbox",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTHROTTLE)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTHROTTLE_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.GoldThrottle end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldThrottle = value end,
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCurrencyGoldThrottle)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWCurrencyGoldThrottle_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyGoldThrottle end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyGoldThrottle = value end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.GoldChange and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.GoldThrottle,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyGoldChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyGoldThrottle,
                     },
                     {
                         -- Show Gold Total Amount
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTOTAL)),
                         tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWGOLDTOTAL_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.TotalGoldChange end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalGoldChange = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyGoldShowTotal end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyGoldShowTotal = value end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.GoldChange and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.TotalGoldChange,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyGoldChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyGoldShowTotal,
                     },
                     {
                         -- Hide Gold Spent on AH
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT)),
                         tooltip = strformat("<<1>>\n<<2>>", GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TP), GetString(SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_NOTE)),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.GoldHideAHSpent end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GoldHideAHSpent = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyGoldHideAH end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyGoldHideAH = value end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.GoldChange and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.GoldHideAHSpent,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyGoldChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyGoldHideAH,
                     },
                     {
                         -- Show Alliance Points
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAP),
                         tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAP_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.AlliancePointChange end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AlliancePointChange = value LUIE.ChatAnnouncements.RegisterAlliancePointEvents() end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyAPShowChange end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyAPShowChange = value LUIE.ChatAnnouncements.RegisterAlliancePointEvents() end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.AlliancePointChange,
+                        default = LUIE.ChatAnnouncements.D.CurrencyAPShowChange,
                     },
                     {
                         -- Show Alliance Points Threshold
                         type = "slider",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHRESHOLD)),
                         tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHRESHOLD_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.AlliancePointFilter end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AlliancePointFilter = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyAPFilter end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyAPFilter = value end,
                         min = 0,
                         max = 10000,
                         step = 50,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AlliancePointChange and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.AlliancePointFilter,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyAPShowChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyAPFilter,
                     },
                     {
                         -- Throttle Alliance Points Earned
                         type = "slider",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHROTTLE)),
                         tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHROTTLE_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.AlliancePointThrottle end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AlliancePointThrottle = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyAPThrottle end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyAPThrottle = value end,
                         min = 0,
                         max = 5000,
                         step = 50,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AlliancePointChange and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.AlliancePointThrottle,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyAPShowChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyAPThrottle,
                     },
                     {
                         -- Show Alliance Points Color
                         type = "colorpicker",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPCOLOR)),
-                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.AlliancePointColor) end,
-                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.AlliancePointColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.CurrencyAPColor) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.CurrencyAPColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AlliancePointChange and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = {r=LUIE.ChatAnnouncements.D.AlliancePointColor[1], g=LUIE.ChatAnnouncements.D.AlliancePointColor[2], b=LUIE.ChatAnnouncements.D.AlliancePointColor[3]}
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyAPShowChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = {r=LUIE.ChatAnnouncements.D.CurrencyAPColor[1], g=LUIE.ChatAnnouncements.D.CurrencyAPColor[2], b=LUIE.ChatAnnouncements.D.CurrencyAPColor[3]}
                     },
                     {
                         -- Show Alliance Points Name
                         type = "editbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPNAME)),
                         tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPNAME_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.AlliancePointName end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AlliancePointName = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyAPName end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyAPName = value end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AlliancePointChange and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.TotalAlliancePointName,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyAPShowChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.TotalCurrencyAPName,
                     },
                     {
                         -- Show Alliance Points Total
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTOTAL)),
                         tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWAPTOTAL_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.TotalAlliancePointChange end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalAlliancePointChange = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyAPShowTotal end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyAPShowTotal = value end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AlliancePointChange and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.TotalAlliancePointChange,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyAPShowChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyAPShowTotal,
                     },
                     {
                         -- Show Tel Var
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTV),
                         tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTV_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.TelVarStoneChange end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.TelVarStoneChange = value LUIE.ChatAnnouncements.RegisterTelVarStoneEvents() end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyTVChange end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyTVChange = value LUIE.ChatAnnouncements.RegisterTelVarStoneEvents() end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.TelVarStoneChange,
+                        default = LUIE.ChatAnnouncements.D.CurrencyTVChange,
                     },
                     {
                         -- Show Tel Var Stones Threshold
                         type = "slider",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHRESHOLD)),
                         tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHRESHOLD_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.TelVarStoneFilter end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.TelVarStoneFilter = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyTVFilter end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyTVFilter = value end,
                         min = 0,
                         max = 10000,
                         step = 50,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.TelVarStoneChange and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.TelVarStoneFilter,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyTVChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyTVFilter,
                     },
                     {
                         -- Throttle Tel Var Stones Looted
                         type = "slider",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHROTTLE)),
                         tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHROTTLE_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.TelVarStoneThrottle end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.TelVarStoneThrottle = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyTVThrottle end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyTVThrottle = value end,
                         min = 0,
                         max = 5000,
                         step = 50,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.TelVarStoneChange and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.TelVarStoneThrottle,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyTVChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyTVThrottle,
                     },
                     
                     {
                         -- Show Tel Var Color
                         type = "colorpicker",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVCOLOR)),
-                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.TelVarStoneColor) end,
-                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.TelVarStoneColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.CurrencyTVColor) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.CurrencyTVColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.TelVarStoneChange and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = {r=LUIE.ChatAnnouncements.D.TelVarStoneColor[1], g=LUIE.ChatAnnouncements.D.TelVarStoneColor[2], b=LUIE.ChatAnnouncements.D.TelVarStoneColor[3]}
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyTVChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = {r=LUIE.ChatAnnouncements.D.CurrencyTVColor[1], g=LUIE.ChatAnnouncements.D.CurrencyTVColor[2], b=LUIE.ChatAnnouncements.D.CurrencyTVColor[3]}
                     },
                     {
                         -- Show Tel Var Name
                         type = "editbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVNAME)),
                         tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVNAME_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.TelVarStoneName end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.TelVarStoneName = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyTVName end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyTVName = value end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.TelVarStoneChange and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.TelVarStoneName,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyTVChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyTVName,
                     },
                     {
                         -- Show Tel Var Total
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTOTAL)),
                         tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWTVTOTAL_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.TotalTelVarStoneChange end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalTelVarStoneChange = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyTVShowTotal end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyTVShowTotal = value end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.TelVarStoneChange and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.TotalTelVarStoneChange,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyTVChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyTVShowTotal,
                     },
                     {
                         -- Show Writ Vouchers
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER),
                         tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.WritVoucherChange end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.WritVoucherChange = value LUIE.ChatAnnouncements.RegisterWritVoucherEvents() end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyWVChange end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyWVChange = value LUIE.ChatAnnouncements.RegisterWritVoucherEvents() end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.WritVoucherChange,
+                        default = LUIE.ChatAnnouncements.D.CurrencyWVChange,
                     },
                     {
                         -- Show Writ Vouchers Color
                         type = "colorpicker",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERCOLOR)),
-                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.WritVoucherColor) end,
-                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.WritVoucherColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.CurrencyWVColor) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.CurrencyWVColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.WritVoucherChange and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = {r=LUIE.ChatAnnouncements.D.WritVoucherColor[1], g=LUIE.ChatAnnouncements.D.WritVoucherColor[2], b=LUIE.ChatAnnouncements.D.WritVoucherColor[3]}
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyWVChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = {r=LUIE.ChatAnnouncements.D.CurrencyWVColor[1], g=LUIE.ChatAnnouncements.D.CurrencyWVColor[2], b=LUIE.ChatAnnouncements.D.CurrencyWVColor[3]}
                     },
                     {
                         -- Show Writ Vouchers Name
                         type = "editbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME)),
                         tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.WritVoucherName end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.WritVoucherName = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyWVName end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyWVName = value end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.WritVoucherChange and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.WritVoucherName,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyWVChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyWVName,
                     },
                     {
                         -- Show Writ Vouchers Total
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL)),
                         tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.TotalWritVoucherChange end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.TotalWritVoucherChange = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyWVShowTotal end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyWVShowTotal = value end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.WritVoucherChange and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.TotalWritVoucherChange,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CurrencyWVChange and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyWVShowTotal,
                     },
                     {
-                        -- Bracket Settings for Context Specific Messages
-                        type = "dropdown",
-                        name = GetString(SI_LUIE_LAM_CA_CSMBRACKET),
-                        choices = currencyBracketOptions,
-                        tooltip = GetString(SI_LUIE_LAM_CA_CSMBRACKET_TP),
-                        getFunc = function() return currencyBracketOptions[LUIE.ChatAnnouncements.SV.CurrencyBracketDisplayOptions] end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyBracketDisplayOptions = currencyBracketOptionsKeys[value] end,
+                        -- Total Currency Message (Gold)
+                        type = "editbox",
+                        name = "Total Gold Message",
+                        tooltip = "TODO: Tooltip",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageTotalGold end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageTotalGold = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.CurrencyGoldChange) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageTotalGold,
+                    },
+                    {
+                        -- Total Currency Message (Alliance Points)
+                        type = "editbox",
+                        name = "Total AP Message",
+                        tooltip = "TODO: Tooltip",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageTotalAP end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageTotalAP = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.CurrencyAPShowChange) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageTotalAP,
+                    },
+                    {
+                        -- Total Currency Message (Tel Var Stones)
+                        type = "editbox",
+                        name = "Total TV Message",
+                        tooltip = "TODO: Tooltip",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageTotalTV end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageTotalTV = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.CurrencyTVChange) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageTotalTV,
+                    },
+                    {
+                        -- Total Currency Message (Writ Vouchers)
+                        type = "editbox",
+                        name = "Total WV Message",
+                        tooltip = "TODO: Tooltip",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageTotalWV end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageTotalWV = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.CurrencyWVChange) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageTotalWV,
+                    },
+
+                    {
+                    type = "divider",
+                    width = "full",
+                    alpha = 1,
+                    },
+                    
+                    -- BIG LIST OF SHIT
+                    
+                    {
+                        -- Loot Message
+                        type = "editbox",
+                        name = "Loot Message",
+                        tooltip = "ugh",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageLoot end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageLoot = value end,
                         width = "full",
                         disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
                             (
-                                LUIE.ChatAnnouncements.SV.GoldChange or
-                                LUIE.ChatAnnouncements.SV.AlliancePointChange or
-                                LUIE.ChatAnnouncements.SV.TelVarStoneChange or
-                                LUIE.ChatAnnouncements.SV.WritVoucherChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyGoldChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyAPShowChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyTVChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyWVChange or
                                 LUIE.SV.ChatAnnouncements_Enable
                             )) end,
-                        default = currencyBracketOptions[1]
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageLoot,
                     },
                     {
-                        -- Override Context specific messages
-                        type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_CSMOVERRIDE),
-                        tooltip = strformat("<<1>>\n<<2>>", GetString(SI_LUIE_LAM_CA_CSMOVERRIDE_TP), GetString(SI_LUIE_LAM_CA_CSMOVERRIDE_NOTE)),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyContextToggle end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyContextToggle = value end,
+                        -- Receive Message
+                        type = "editbox",
+                        name = "Receive Message",
+                        tooltip = "ugh",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageReceive end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageReceive = value end,
                         width = "full",
                         disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
                             (
-                                LUIE.ChatAnnouncements.SV.GoldChange or
-                                LUIE.ChatAnnouncements.SV.AlliancePointChange or
-                                LUIE.ChatAnnouncements.SV.TelVarStoneChange or
-                                LUIE.ChatAnnouncements.SV.WritVoucherChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyGoldChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyAPShowChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyTVChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyWVChange or
                                 LUIE.SV.ChatAnnouncements_Enable
                             )) end,
-                        default = LUIE.ChatAnnouncements.D.CurrencyContextToggle,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageReceive,
                     },
                     {
-                        -- Context Override Message Currency Gain
+                        -- Spend Message
                         type = "editbox",
-                        name = GetString(SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_GAIN),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_GAIN_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyContextMessageUp end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyContextMessageUp = value end,
-                        width = "full",
-                        disabled =  function() return not (LUIE.ChatAnnouncements.SV.CurrencyContextToggle and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.CurrencyContextMessageUp,
-                    },
-                    {
-                        -- Context Override Message Currency Loss
-                        type = "editbox",
-                        name = GetString(SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_LOSS),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_CSMCURRENCY_LOSS_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyContextMessageDown end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyContextMessageDown = value end,
-                        width = "full",
-                        disabled =  function() return not (LUIE.ChatAnnouncements.SV.CurrencyContextToggle and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.CurrencyContextMessageDown,
-                    },
-                    {
-                        -- Total Currency Message
-                        type = "editbox",
-                        name = GetString(SI_LUIE_LAM_CA_CURRENCY_TOTALCURRENCYMSG),
-                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_TOTALCURRENCYMSG_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyTotalMessage end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyTotalMessage = value end,
+                        name = "Spend Message",
+                        tooltip = "ugh",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageSpend end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageSpend = value end,
                         width = "full",
                         disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
                             (
-                                LUIE.ChatAnnouncements.SV.GoldChange or
-                                LUIE.ChatAnnouncements.SV.AlliancePointChange or
-                                LUIE.ChatAnnouncements.SV.TelVarStoneChange or
-                                LUIE.ChatAnnouncements.SV.WritVoucherChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyGoldChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyAPShowChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyTVChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyWVChange or
                                 LUIE.SV.ChatAnnouncements_Enable
                             )) end,
-                        default = LUIE.ChatAnnouncements.D.CurrencyTotalMessage,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageSpend,
                     },
+                    {
+                        -- Trade Message (In)
+                        type = "editbox",
+                        name = "Trade Message (Incoming)",
+                        tooltip = "ugh",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageTradeIn end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageTradeIn = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
+                            (
+                                LUIE.ChatAnnouncements.SV.CurrencyGoldChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyAPShowChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyTVChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyWVChange or
+                                LUIE.SV.ChatAnnouncements_Enable
+                            )) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageTradeIn,
+                    },
+                    {
+                        -- Trade Message (Out)
+                        type = "editbox",
+                        name = "Trade Message (Outgoing)",
+                        tooltip = "ugh",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageTradeOut end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageTradeOut = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
+                            (
+                                LUIE.ChatAnnouncements.SV.CurrencyGoldChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyAPShowChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyTVChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyWVChange or
+                                LUIE.SV.ChatAnnouncements_Enable
+                            )) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageTradeOut,
+                    },
+                    {
+                        -- Deposit Message
+                        type = "editbox",
+                        name = "Deposit Message",
+                        tooltip = "ugh",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageDeposit end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageDeposit = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
+                            (
+                                LUIE.ChatAnnouncements.SV.CurrencyGoldChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyAPShowChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyTVChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyWVChange or
+                                LUIE.SV.ChatAnnouncements_Enable
+                            )) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageDeposit,
+                    },
+                    {
+                        -- Withdraw Message
+                        type = "editbox",
+                        name = "Withdraw Message",
+                        tooltip = "ugh",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageWithdraw end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageWithdraw = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
+                            (
+                                LUIE.ChatAnnouncements.SV.CurrencyGoldChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyAPShowChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyTVChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyWVChange or
+                                LUIE.SV.ChatAnnouncements_Enable
+                            )) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageWithdrew,
+                    },
+                    {
+                        -- Confiscate Message
+                        type = "editbox",
+                        name = "Confiscate Message",
+                        tooltip = "ugh",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageConfiscate end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageConfiscate = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
+                            (
+                                LUIE.ChatAnnouncements.SV.CurrencyGoldChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyAPShowChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyTVChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyWVChange or
+                                LUIE.SV.ChatAnnouncements_Enable
+                            )) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageConfiscate,
+                    },
+                    {
+                        -- Pickpocket Message
+                        type = "editbox",
+                        name = "Pickpocket Message",
+                        tooltip = "ugh",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessagePickpocket end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessagePickpocket = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
+                            (
+                                LUIE.ChatAnnouncements.SV.CurrencyGoldChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyAPShowChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyTVChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyWVChange or
+                                LUIE.SV.ChatAnnouncements_Enable
+                            )) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessagePickpocket,
+                    },
+                    {
+                        -- Lost Message
+                        type = "editbox",
+                        name = "Lost Message",
+                        tooltip = "ugh",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageLost end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageLost = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
+                            (
+                                LUIE.ChatAnnouncements.SV.CurrencyGoldChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyAPShowChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyTVChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyWVChange or
+                                LUIE.SV.ChatAnnouncements_Enable
+                            )) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageLost,
+                    },
+                    {
+                        -- Earned Message
+                        type = "editbox",
+                        name = "Earned Message",
+                        tooltip = "ugh",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageEarn end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageEarn = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
+                            (
+                                LUIE.ChatAnnouncements.SV.CurrencyGoldChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyAPShowChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyTVChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyWVChange or
+                                LUIE.SV.ChatAnnouncements_Enable
+                            )) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageEarn,
+                    },
+                    
+                    
                 },
             }
                 -- CA Loot Announcements Options Submenu
@@ -2453,11 +2055,18 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceColorLevel end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceColorLevel = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.ExperienceLevelUp or (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.ExperienceShowLevel))) end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.ExperienceLevelUp and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.ExperienceColorLevel,
-                        
-                        --(LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.Loot or LUIE.ChatAnnouncements.SV.LootCraft )) end,
-                        
+                    },
+                    {
+                        -- Experience Level Up Color
+                        type = "colorpicker",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXPERIENCE_LEVELUP_COLOR)),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.ExperienceLevelUpColor) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.ExperienceLevelUpColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Collectible) end,
+                        default = {r=LUIE.ChatAnnouncements.D.ExperienceLevelUpColor[1], g=LUIE.ChatAnnouncements.D.ExperienceLevelUpColor[2], b=LUIE.ChatAnnouncements.D.ExperienceLevelUpColor[3]}
                     },
                     {
                         -- Show Experience Gain
@@ -2482,20 +2091,6 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.ExperienceIcon,
                     },
                     {
-                        -- Combat Experience Gain Filter Threshold
-                        type = "slider",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceFilter end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceFilter = value end,
-                        min = 0,
-                        max = 10000,
-                        step = 100,
-                        width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.ExperienceFilter,
-                    },
-                    {
                         -- Context Name for Experience Gain
                         type = "editbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_EXPGAINCONTEXTNAME)),
@@ -2518,95 +2113,6 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.ExperienceName,
                     },
                     {
-                        -- Show Progress to next level
-                        type = "checkbox",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_PROGRESSTONEXTLVL)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_PROGRESSTONEXTLVL_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceShowProgress end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceShowProgress = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
-                        width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.ExperienceShowProgress,
-                    },
-                    {
-                        -- Progress Display Method
-                        type = "dropdown",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_PROGRESSDISPLAYMETHOD)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_PROGRESSDISPLAYMETHOD_TP),
-                        choices = experienceDisplayOptions,
-                        getFunc = function() return experienceDisplayOptions[LUIE.ChatAnnouncements.SV.ExperienceDisplayOptions] end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceDisplayOptions = experienceDisplayOptionsKeys[value] end,
-                        width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.ExperienceShowProgress and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = experienceDisplayOptions[1],
-                    },
-                    {
-                        -- Show Color Experience Progress
-                        type = "checkbox",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_PROGRESSCOLOR)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_PROGRESSCOLOR_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceProgressColor end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceProgressColor = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
-                        width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.ExperienceShowProgress and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.ExperienceProgressColor,
-                    },
-                    {
-                        -- Show [x.xx] decimal format
-                        type = "checkbox",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_SHOWDECIMALFORMAT)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWDECIMALFORMAT_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceShowDecimal end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceShowDecimal = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
-                        width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.ExperienceShowProgress and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.ExperienceShowDecimal,
-                    },
-                    {
-                        -- Show Progress label
-                        type = "checkbox",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABEL)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABEL_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceShowPBrackets end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceShowPBrackets = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
-                        width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.ExperienceShowProgress and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.ExperienceShowPBrackets,
-                    },
-                    {
-                        -- Display name for Progress label
-                        type = "editbox",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABELNAME)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWPROGRESSLABELNAME_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceProgressName end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceProgressName = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
-                        width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.ExperienceShowProgress and LUIE.ChatAnnouncements.SV.ExperienceShowPBrackets and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.ExperienceProgressName,
-                    },
-                    {
-                        -- Show Current Level label
-                        type = "checkbox",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_SHOWCURRENTLVLLABEL)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_SHOWCURRENTLVLLABEL_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceShowLevel end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceShowLevel = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
-                        width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.ExperienceShowLevel,
-                    },
-                    {
-                        -- Show Level Icon with current level
-                        type = "checkbox",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_LVLTOTALICON)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_LVLOTALICON_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.LevelTotalIcon end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LevelTotalIcon = value end,
-                        width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.ChatAnnouncements.SV.ExperienceShowLevel and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.LevelTotalIcon,
-                    },
-                    {
                         -- Hide Experience from Kills
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_HIDEEXPKILLS)),
@@ -2616,6 +2122,20 @@ function LUIE_CreateSettings()
                         width = "full",
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.ExperienceHideCombat,
+                    },
+                    {
+                        -- Combat Experience Gain Filter Threshold
+                        type = "slider",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINTHRESHOLD_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceFilter end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceFilter = value end,
+                        min = 0,
+                        max = 10000,
+                        step = 100,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.ExperienceFilter,
                     },
                     {
                         -- Throttle Experience gained in combat
@@ -2631,6 +2151,64 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.ExperienceThrottle,
                     },
+                    {
+                        -- Experience Color
+                        type = "colorpicker",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXPERIENCE_COLOR)),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.ExperienceColor) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.ExperienceColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Collectible) end,
+                        default = {r=LUIE.ChatAnnouncements.D.ExperienceColor[1], g=LUIE.ChatAnnouncements.D.ExperienceColor[2], b=LUIE.ChatAnnouncements.D.ExperienceColor[3]}
+                    },
+                    
+                    {
+                        -- Show Skill Points Updated
+                        type = "checkbox",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.ShowSkillPoints end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowSkillPoints = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.ShowSkillPoints,
+                    },
+                    {
+                        -- Show Skill Points Updated
+                        type = "checkbox",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATEDPARTIAL)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATEDPARTIAL_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.ShowSkillPointsPartial end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowSkillPointsPartial = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.ShowSkillPointsPartial,
+                    },
+                    
+                    {
+                        -- Skill Point Message Prefix
+                        type = "editbox",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_MESSAGE)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_SKILLPOINT_MESSAGE_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillPointMessage end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillPointMessage = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.SkillPointMessage,
+                    },
+                    
+                    {
+                        -- Skill Point Color
+                        type = "colorpicker",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_COLOR)),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.SkillPointColor) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.SkillPointColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Collectible) end,
+                        default = {r=LUIE.ChatAnnouncements.D.SkillPointColor[1], g=LUIE.ChatAnnouncements.D.SkillPointColor[2], b=LUIE.ChatAnnouncements.D.SkillPointColor[3]}
+                    },
+                    
+                    
                 },
             }
                 -- CA Collectible Announcements Options Submenu
@@ -2651,17 +2229,6 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.Collectible,
                     },
                     {
-                        -- Collectible Prefix
-                        type = "editbox",
-                        name = strformat("\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_PREFIX)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_PREFIX_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.CollectiblePrefix end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CollectiblePrefix = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
-                        width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Collectible) end,
-                        default = LUIE.ChatAnnouncements.D.CollectiblePrefix,
-                    },
-                    {
                         -- Collectible Icon
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ICON)),
@@ -2673,48 +2240,35 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.CollectibleIcon,
                     },
                     {
-                        -- Collectible Color
-                        type = "colorpicker",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLLECTIBLE_COLOR)),
-                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.CollectibleColor) end,
-                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.CollectibleColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
-                        width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Collectible) end,
-                        default = {r=LUIE.ChatAnnouncements.D.CollectibleColor[1], g=LUIE.ChatAnnouncements.D.CollectibleColor[2], b=LUIE.ChatAnnouncements.D.CollectibleColor[3]}
-                    },
-                    {
-                        -- Collectible Bracket Options
-                        type = "dropdown",
-                        name = strformat("\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_BRACKET)),
-                        choices = collectibleBracketOptions,
-                        tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_BRACKET_TP),
-                        getFunc = function() return collectibleBracketOptions[LUIE.ChatAnnouncements.SV.CollectibleBracketOptions] end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CollectibleBracketOptions = collectibleBracketOptionsKeys[value] end,
-                        width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Collectible) end,
-                        default = collectibleBracketOptions[1]
-                    },
-                    {
-                        -- Collectible Abbreviation
-                        type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ABBREVIATE),
-                        tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ABBREVIATE_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.CollectibleAbbreviate end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CollectibleAbbreviate = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
-                        width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Collectible) end,
-                        default = LUIE.ChatAnnouncements.D.CollectibleAbbreviate,
-                    },
-                    {
-                        -- Collectible Abbreviation Prefix
+                        -- Collectible Message Prefix
                         type = "editbox",
-                        name = strformat("\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ABBREVIATE_PREFIX)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ABBREVIATE_PREFIX_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.CollectibleAbbreviatePrefix end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CollectibleAbbreviatePrefix = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
+                        name = strformat("\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CollectibleMessage end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CollectibleMessage = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Collectible and LUIE.ChatAnnouncements.SV.CollectibleAbbreviate) end,
-                        default = LUIE.ChatAnnouncements.D.CollectibleAbbreviatePrefix,
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Collectible) end,
+                        default = LUIE.ChatAnnouncements.D.CollectibleMessage,
+                    },
+                    {
+                        -- Collectible Color 1
+                        type = "colorpicker",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_ONE)),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.CollectibleColor1) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.CollectibleColor1 = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Collectible) end,
+                        default = {r=LUIE.ChatAnnouncements.D.CollectibleColor1[1], g=LUIE.ChatAnnouncements.D.CollectibleColor1[2], b=LUIE.ChatAnnouncements.D.CollectibleColor1[3]}
+                    },
+                    {
+                        -- Collectible Color 2
+                        type = "colorpicker",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_TWO)),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.CollectibleColor2) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.CollectibleColor2 = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Collectible) end,
+                        default = {r=LUIE.ChatAnnouncements.D.CollectibleColor2[1], g=LUIE.ChatAnnouncements.D.CollectibleColor2[2], b=LUIE.ChatAnnouncements.D.CollectibleColor2[3]}
                     },
                     
                     {
@@ -2728,11 +2282,45 @@ function LUIE_CreateSettings()
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE),
                         tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.Lorebook end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.Lorebook = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCA = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.Lorebook,
+                        default = LUIE.ChatAnnouncements.D.LorebookCA,
+                    },
+                    {
+                        -- Show Lorebooks Unlocked
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCSA = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LorebookCSA,
+                    },
+                    {
+                        -- Show Lorebooks Unlocked
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookAlert = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LorebookAlert,
+                    },
+                    {
+                        -- Lorebooks Bracket Options
+                        type = "dropdown",
+                        name = strformat("\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET)),
+                        choices = lorebookBracketOptions,
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET_TP),
+                        getFunc = function() return lorebookBracketOptions[LUIE.ChatAnnouncements.SV.LorebookBracket] end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookBracket = lorebookBracketOptionsKeys[value] end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Lorebook and LUIE.ChatAnnouncements.SV.LorebookCategory) end,
+                        default = lorebookBracketOptions[1]
                     },
                     {
                         -- Lorebooks Prefix 1
@@ -2756,6 +2344,7 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Lorebook) end,
                         default = LUIE.ChatAnnouncements.D.LorebookPrefix2,
                     },
+                    --[[
                     {
                         -- Lorebooks Prefix 3
                         type = "editbox",
@@ -2767,6 +2356,7 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Lorebook) end,
                         default = LUIE.ChatAnnouncements.D.LorebookPrefix3,
                     },
+                    ]]--
                     {
                         -- Lorebooks Icon
                         type = "checkbox",
@@ -2779,49 +2369,49 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.LorebookIcon,
                     },
                     {
-                        -- Lorebooks Color
+                        -- Lorebooks Color 1
                         type = "colorpicker",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOREBOOK_COLOR)),
-                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.LorebookColor) end,
-                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.LorebookColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOREBOOK_COLOR1)),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.LorebookColor1) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.LorebookColor1 = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
                         disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Lorebook) end,
-                        default = {r=LUIE.ChatAnnouncements.D.LorebookColor[1], g=LUIE.ChatAnnouncements.D.LorebookColor[2], b=LUIE.ChatAnnouncements.D.LorebookColor[3]}
+                        default = {r=LUIE.ChatAnnouncements.D.LorebookColor1[1], g=LUIE.ChatAnnouncements.D.LorebookColor1[2], b=LUIE.ChatAnnouncements.D.LorebookColor1[3]}
                     },
                     {
-                        -- Don't Show without Eidetic
+                        -- Lorebooks Color 2
+                        type = "colorpicker",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOREBOOK_COLOR2)),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.LorebookColor2) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.LorebookColor2 = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Lorebook) end,
+                        default = {r=LUIE.ChatAnnouncements.D.LorebookColor2[1], g=LUIE.ChatAnnouncements.D.LorebookColor2[2], b=LUIE.ChatAnnouncements.D.LorebookColor2[3]}
+                    },
+                    {
+                        -- Show hidden books
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE)),
                         tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookNoShowHide end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookNoShowHide = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookShowHidden end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookShowHidden = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
                         width = "full",
                         disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Lorebook) end,
-                        default = LUIE.ChatAnnouncements.D.LorebookNoShowHide,
+                        default = LUIE.ChatAnnouncements.D.LorebookShowHidden,
                     },
                     {
                         -- Lorebooks Category
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY),
                         tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookCategory end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCategory = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookShowCategory end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookShowCategory = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
                         width = "full",
                         disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Lorebook) end,
-                        default = LUIE.ChatAnnouncements.D.LorebookCategory,
+                        default = LUIE.ChatAnnouncements.D.LorebookShowCategory,
                     },
-                    {
-                        -- Lorebooks Category Bracket Options
-                        type = "dropdown",
-                        name = strformat("\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET)),
-                        choices = lorebookBracketOptions,
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET_TP),
-                        getFunc = function() return lorebookBracketOptions[LUIE.ChatAnnouncements.SV.LorebookBracketOptions] end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookBracketOptions = lorebookBracketOptionsKeys[value] end,
-                        width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Lorebook and LUIE.ChatAnnouncements.SV.LorebookCategory) end,
-                        default = lorebookBracketOptions[1]
-                    },
+                    
+                    --[[
                     {
                         -- Lorebooks Category Completion
                         type = "checkbox",
@@ -2844,6 +2434,7 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Lorebook and LUIE.ChatAnnouncements.SV.LorebookCategory and LUIE.ChatAnnouncements.SV.LorebookNumber) end,
                         default = LUIE.ChatAnnouncements.D.LorebookNumberColor,
                     },
+                    ]]--
                     
                 },
             }
@@ -3457,7 +3048,7 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.GroupRaid,
                     },
                     {
-                        -- Show Raid Score
+                        -- Show Raid Score Updates
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDSCORE),
                         tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDSCORE_TP),
@@ -3466,6 +3057,28 @@ function LUIE_CreateSettings()
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupRaidScore,
+                    },
+                    {
+                        -- Show Raid High Score
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDBESTSCORE),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDBESTSCORE_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidBestScore end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidBestScore = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupRaidBestScore,
+                    },
+                    {
+                        -- Show Raid Revive Counter Changes
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDREVIVE),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDREVIVE_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidRevive end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidRevive = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupRaidRevive,
                     },
                 },
             }

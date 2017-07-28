@@ -3934,7 +3934,7 @@ E.FakePlayerBuffs = {
     -- Player (Basic)
     [973] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_sprint.dds', name = 'Sprint', duration = 0}, -- Sprint
     [33439] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mount_sprint.dds', name = 'Gallop', duration = 0}, -- Mount Sprint (Generic)
-    [32346] = {icon = 'esoui/art/icons/ability_mage_050.dds', name = 'Collecting Skyshard', duration = 5800}, -- Skyshard Collect
+    [32346] = {icon = 'esoui/art/icons/ability_mage_050.dds', name = 'Absorbing Skyshard', duration = 5800}, -- Skyshard Collect
     [14031] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mundus_use.dds', name = 'Receiving Boon', duration = 5000}, -- Mundus Use
     
     -- Seasonal Quests (New Life Festival)
