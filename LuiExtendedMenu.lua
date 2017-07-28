@@ -2093,19 +2093,19 @@ function LUIE_CreateSettings()
                     {
                         -- Context Name for Experience Gain
                         type = "editbox",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_EXPGAINCONTEXTNAME)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINCONTEXTNAME_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceContextName end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceContextName = value end,
+                        name = "Experience Point Message Format",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceMessage end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceMessage = value end,
                         width = "full",
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.ExperienceContextName,
+                        default = LUIE.ChatAnnouncements.D.ExperienceMessage,
                     },
                     {
                         -- Name for Experience Gain
                         type = "editbox",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_EXPGAINDISPLAYNAME)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_EXPGAINDISPLAYNAME_TP),
+                        name = "Experience Point Name",
+                        tooltip = "TODO",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceName = value end,
                         width = "full",
@@ -2152,14 +2152,24 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.ExperienceThrottle,
                     },
                     {
-                        -- Experience Color
+                        -- Experience Message Color
                         type = "colorpicker",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXPERIENCE_COLOR)),
-                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.ExperienceColor) end,
-                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.ExperienceColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.ExperienceColorMessage) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.ExperienceColorMessage = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
                         disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Collectible) end,
-                        default = {r=LUIE.ChatAnnouncements.D.ExperienceColor[1], g=LUIE.ChatAnnouncements.D.ExperienceColor[2], b=LUIE.ChatAnnouncements.D.ExperienceColor[3]}
+                        default = {r=LUIE.ChatAnnouncements.D.ExperienceColorMessage[1], g=LUIE.ChatAnnouncements.D.ExperienceColorMessage[2], b=LUIE.ChatAnnouncements.D.ExperienceColorMessage[3]}
+                    },
+                    {
+                        -- Experience Name Color
+                        type = "colorpicker",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXPERIENCE_COLOR)),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.ExperienceColorName) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.ExperienceColorName = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Collectible) end,
+                        default = {r=LUIE.ChatAnnouncements.D.ExperienceColorName[1], g=LUIE.ChatAnnouncements.D.ExperienceColorName[2], b=LUIE.ChatAnnouncements.D.ExperienceColorName[3]}
                     },
                     
                     {

@@ -235,8 +235,8 @@ local g_banksubStacks             = {} -- Called for indexing on opening craftin
 local g_equippedStacks            = {} -- Called for indexing on init
 local g_inventoryStacks           = {} -- Called for indexing on init
 local g_JusticeStacks             = {} -- Filled during justice confiscation to compare item changes
+local g_XPCombatBufferString      = ""
 local g_XPCombatBufferValue       = 0
-local g_XPCombatBufferTotal       = 0
 local g_comboString               = "" -- String is filled by the EVENT_CURRENCY_CHANGE events and amended onto the end of purchase/sales from LootLog component if toggled on!
 local g_craftStacks               = {}
 local g_areWeGrouped              = false
@@ -485,8 +485,8 @@ function CA.RegisterColorEvents()
     AchievementsColorize = ZO_ColorDef:New(unpack(CA.SV.AchievementsColor))
     LorebookColorize1 = ZO_ColorDef:New(unpack(CA.SV.LorebookColor1))
     LorebookColorize2 = ZO_ColorDef:New(unpack(CA.SV.LorebookColor2))
-    ExperienceMessageColorize = ZO_ColorDef:New(unpack(CA.SV.ExperienceColorMessage)):ToHex()
-    ExperienceNameColorize = ZO_ColorDef:New(unpack(CA.SV.ExperienceColorName)):ToHex()
+    ExperienceMessageColorize = ZO_ColorDef:New(unpack(CA.SV.ExperienceMessageColor))
+    ExperienceNameColorize = ZO_ColorDef:New(unpack(CA.SV.ExperienceNameColor)) 
     LevelUpColorize = ZO_ColorDef:New(unpack(CA.SV.ExperienceLevelUpColor))
     SkillPointColorize = ZO_ColorDef:New(unpack(CA.SV.SkillPointColor))
 end
@@ -2443,8 +2443,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         -- TODO -- We need to find all Alliance Point gain values so we can determine what keep rewards, etc are and print those out immediately! (and also reset the throttle with those)
         -- Send change info to the throttle printer and end function now if we throttle Alliance Points Gained
         if CA.SV.CurrencyAPThrottle > 0 and reason == 13 then
-            EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedAP")
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "BufferedAP", CA.SV.CurrencyAPThrottle, CA.CurrencyAPThrottlePrinter )
+            zo_callLater(CA.CurrencyAPThrottlePrinter, CA.SV.CurrencyAPThrottle )
             g_CurrencyAPThrottle = g_CurrencyAPThrottle + UpOrDown
             return
         end
@@ -2479,8 +2478,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
     
         -- Send change info to the throttle printer and end function now if we throttle Tel Var Gained
         if CA.SV.CurrencyTVThrottle > 0 and (reason == 0 or reason == 65) then
-            EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedTV")
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "BufferedTV", CA.SV.CurrencyTVThrottle, CA.CurrencyTVThrottlePrinter )
+            zo_callLater(CA.CurrencyTVThrottlePrinter, CA.SV.CurrencyTVThrottle )
             g_CurrencyTVThrottle = g_CurrencyTVThrottle + UpOrDown
             return
         end
@@ -2651,28 +2649,26 @@ function CA.CurrencyGoldThrottlePrinter()
     local newValue = GetCarriedCurrencyAmount(1)
     local oldValue = newValue - g_CurrencyGoldThrottle
     if g_CurrencyGoldThrottle > CA.SV.CurrencyGoldFilter then
-        CA.OnCurrencyUpdate(nil, 1, newValue, oldValue, 99)
+        CA.OnCurrencyUpdate(eventCode, 1, newValue, oldValue, 99)
     end
     g_CurrencyGoldThrottle = 0
 end
 
 function CA.CurrencyAPThrottlePrinter()
-    if g_CurrencyAPThrottle > 0 and g_CurrencyAPThrottle > CA.SV.CurrencyAPFilter then
-        local newValue = GetCarriedCurrencyAmount(2)
-        local oldValue = newValue - g_CurrencyAPThrottle
-        CA.OnCurrencyUpdate(nil, 2, newValue, oldValue, 98)
+    local newValue = GetCarriedCurrencyAmount(2)
+    local oldValue = newValue - g_CurrencyAPThrottle
+    if g_CurrencyAPThrottle > CA.SV.CurrencyAPFilter then
+        CA.OnCurrencyUpdate(eventCode, 2, newValue, oldValue, 98)
     end
-    EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedAP")
     g_CurrencyAPThrottle = 0
 end
 
 function CA.CurrencyTVThrottlePrinter()
-    if g_CurrencyTVThrottle > 0 and g_CurrencyTVThrottle > CA.SV.CurrencyTVFilter then
-        local newValue = GetCarriedCurrencyAmount(3)
-        local oldValue = newValue - g_CurrencyTVThrottle
-        CA.OnCurrencyUpdate(nil, 3, newValue, oldValue, 97)
+    local newValue = GetCarriedCurrencyAmount(3)
+    local oldValue = newValue - g_CurrencyTVThrottle
+    if g_CurrencyTVThrottle > CA.SV.CurrencyTVFilter then
+        CA.OnCurrencyUpdate(eventCode, 3, newValue, oldValue, 97)
     end
-    EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedTV")
     g_CurrencyTVThrottle = 0
 end
 
@@ -3618,6 +3614,14 @@ function CA.FunctionMailCurrencyCheck()
     end
 end
 
+function CA.PrintBufferedXP()
+    if g_XPCombatBufferValue ~= 0 then
+        printToChat(g_XPCombatBufferString) -- If we leveled up, then this variable will be true, and we want to smash all the buffered XP into the level up display!
+        g_XPCombatBufferValue = 0
+        g_XPCombatBufferString = ""
+    end
+end
+
 function CA.OnLevelUpdate(eventCode, unitTag, level)
     if unitTag == ("player") then
         
@@ -3710,49 +3714,38 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
     if CA.SV.Experience and ( not ( CA.SV.ExperienceHideCombat and reason == 0 ) or not reason == 0 ) then
         -- Change in Experience Points on gaining them
         local change = currentExperience - previousExperience
-        
-        -- If throttle is enabled, save value and end function here
+        local formatHelper = " "
+
+        -- Format Helper puts a space in if the player enters a value for Experience Name, this way they don't have to do this formatting themselves.
+        if CA.SV.ExperienceName == ( "" ) then
+            formatHelper = ""
+        end
+
+        -- Displays an icon if enabled
+        local icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. ZO_LocalizeDecimalNumber (change) .. formatHelper .. CA.SV.ExperienceName ) or ( ZO_LocalizeDecimalNumber (change) .. formatHelper .. CA.SV.ExperienceName )
+
+        -- Add to the throttled XP count if it is enabled
         if CA.SV.ExperienceThrottle > 0 and reason == 0 then
             g_XPCombatBufferValue = g_XPCombatBufferValue + change
-            g_XPCombatBufferTotal = currentExperience
-            -- We unregister the event, then re-register it, this keeps the buffer at a constant X throttle after XP is gained.
-            EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "BufferedXP", CA.SV.ExperienceThrottle, CA.PrintBufferedXP )
-            return
+            icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t " .. ZO_LocalizeDecimalNumber (g_XPCombatBufferValue) .. formatHelper .. CA.SV.ExperienceName ) or ( ZO_LocalizeDecimalNumber (g_XPCombatBufferValue) .. formatHelper .. CA.SV.ExperienceName )
         end
-        
-        -- If filter is enabled and value is below filter then end function here
-        if CA.SV.ExperienceFilter > 0 and reason == 0 then
-            if change < CA.SV.ExperienceFilter then
-                return
+
+        if reason == 0 then
+            if change > CA.SV.ExperienceFilter and CA.SV.ExperienceThrottle == 0 then
+                printToChat(ExperienceMessageColorize:Colorize(strfmt("%s %s", CA.SV.ExperienceContextName, icon) ))
+            elseif CA.SV.ExperienceThrottle > 0 then
+                g_XPCombatBufferString = ExperienceMessageColorize:Colorize( strfmt("%s %s", CA.SV.ExperienceContextName, icon) )
+                zo_callLater(CA.PrintBufferedXP, CA.SV.ExperienceThrottle)
             end
+        else
+            -- If we gain experience from a non combat source, and our buffer function holds a value, then we need to immediately dump this value before the next XP update is processed.
+            if CA.SV.ExperienceThrottle > 0 and g_XPCombatBufferValue > 0 then
+                g_XPCombatBufferValue = 0
+                printToChat(g_XPCombatBufferString)
+            end
+            printToChat(ExperienceMessageColorize:Colorize(strfmt("%s %s", CA.SV.ExperienceContextName, icon) ))
         end
-
-        -- If we gain experience from a non combat source, and our buffer function holds a value, then we need to immediately dump this value before the next XP update is processed.
-        -- TODO: Possibly integrate this into something else too? Currently this fires after other events like the Wayshrine discovery message so it looks odd still.
-        if CA.SV.ExperienceThrottle > 0 and g_XPCombatBufferValue > 0 and (reason ~= 0 and reason ~= 99) then
-            CA.PrintBufferedXP()
-        end
-        
-        -- Displays an icon if enabled
-        local icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t ") or ""
-        local messageP1 = ("|r|c" .. ExperienceNameColorize .. icon .. ZO_LocalizeDecimalNumber(change) .. " " .. CA.SV.ExperienceName .. "|r|c" .. ExperienceMessageColorize)
-        local formattedMessageP1 = (strfmt(CA.SV.ExperienceMessage, messageP1))
-        local finalMessage = strfmt("|c%s%s|r", ExperienceMessageColorize, formattedMessageP1)
-        
-        printToChat(finalMessage)
     end
-end
-
-function CA.PrintBufferedXP()
-    if g_XPCombatBufferValue > 0 and g_XPCombatBufferValue > CA.SV.ExperienceFilter then
-        local previousExperience = g_XPCombatBufferTotal - g_XPCombatBufferValue
-        local currentExperience = g_XPCombatBufferTotal
-        CA.OnExperienceGain(nil, 99, nil, previousExperience, currentExperience, nil)
-    end
-    g_XPCombatBufferValue = 0
-    g_XPCombatBufferTotal = 0
-    EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
 end
 
 function CA.EnlightenedGained(eventCode)
