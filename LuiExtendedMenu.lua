@@ -2065,7 +2065,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.ExperienceLevelUpColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.ExperienceLevelUpColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Collectible) end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.ExperienceLevelUp and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = {r=LUIE.ChatAnnouncements.D.ExperienceLevelUpColor[1], g=LUIE.ChatAnnouncements.D.ExperienceLevelUpColor[2], b=LUIE.ChatAnnouncements.D.ExperienceLevelUpColor[3]}
                     },
                     {
@@ -2093,7 +2093,7 @@ function LUIE_CreateSettings()
                     {
                         -- Context Name for Experience Gain
                         type = "editbox",
-                        name = "Experience Point Message Format",
+                        name = "\t\t\t\tExperience Point Message Format",
                         tooltip = "TODO",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceMessage end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceMessage = value end,
@@ -2104,7 +2104,7 @@ function LUIE_CreateSettings()
                     {
                         -- Name for Experience Gain
                         type = "editbox",
-                        name = "Experience Point Name",
+                        name = "\t\t\t\tExperience Point Name",
                         tooltip = "TODO",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceName end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceName = value end,
@@ -2158,7 +2158,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.ExperienceColorMessage) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.ExperienceColorMessage = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Collectible) end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = {r=LUIE.ChatAnnouncements.D.ExperienceColorMessage[1], g=LUIE.ChatAnnouncements.D.ExperienceColorMessage[2], b=LUIE.ChatAnnouncements.D.ExperienceColorMessage[3]}
                     },
                     {
@@ -2168,14 +2168,14 @@ function LUIE_CreateSettings()
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.ExperienceColorName) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.ExperienceColorName = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Collectible) end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = {r=LUIE.ChatAnnouncements.D.ExperienceColorName[1], g=LUIE.ChatAnnouncements.D.ExperienceColorName[2], b=LUIE.ChatAnnouncements.D.ExperienceColorName[3]}
                     },
                     
                     {
                         -- Show Skill Points Updated
                         type = "checkbox",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED)),
+                        name = GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED),
                         tooltip = GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ShowSkillPoints end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowSkillPoints = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
@@ -2191,7 +2191,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ShowSkillPointsPartial end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowSkillPointsPartial = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.ShowSkillPoints) end,
                         default = LUIE.ChatAnnouncements.D.ShowSkillPointsPartial,
                     },
                     
@@ -2203,7 +2203,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.SkillPointMessage end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillPointMessage = value end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.ShowSkillPoints) end,
                         default = LUIE.ChatAnnouncements.D.SkillPointMessage,
                     },
                     
@@ -2214,7 +2214,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.SkillPointColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.SkillPointColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Collectible) end,
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.ShowSkillPoints) end,
                         default = {r=LUIE.ChatAnnouncements.D.SkillPointColor[1], g=LUIE.ChatAnnouncements.D.SkillPointColor[2], b=LUIE.ChatAnnouncements.D.SkillPointColor[3]}
                     },
                     

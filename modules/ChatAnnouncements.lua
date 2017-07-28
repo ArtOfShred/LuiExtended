@@ -235,8 +235,6 @@ local g_banksubStacks             = {} -- Called for indexing on opening craftin
 local g_equippedStacks            = {} -- Called for indexing on init
 local g_inventoryStacks           = {} -- Called for indexing on init
 local g_JusticeStacks             = {} -- Filled during justice confiscation to compare item changes
-local g_XPCombatBufferValue       = 0
-local g_XPCombatBufferTotal       = 0
 local g_comboString               = "" -- String is filled by the EVENT_CURRENCY_CHANGE events and amended onto the end of purchase/sales from LootLog component if toggled on!
 local g_craftStacks               = {}
 local g_areWeGrouped              = false
@@ -336,9 +334,14 @@ local SkillPointColorize
 -- UPDATED CODE (VARIABLES)
 -----------------------------------
 
-local g_CurrencyGoldThrottle              = 0 -- Held value for gold throttle
-local g_CurrencyAPThrottle     = 0 -- Held value for AP throttle
-local g_CurrencyTVThrottle       = 0 -- Held value for TV throttle
+local g_currencyGoldThrottle        = 0 -- Held value for gold throttle
+local g_currencyAPThrottleValue     = 0 -- Held value for AP throttle (counter)
+local g_currencyAPThrottleTotal     = 0 -- Held value for AP throttle (total gold)
+local g_currencyTVThrottleValue     = 0 -- Held value for TV throttle (counter)
+local g_currencyTVThrottleTotal     = 0 -- Held value for TV throttle (total gold)
+
+local g_xpCombatBufferValue         = 0
+local g_xpCombatBufferTotal         = 0
 
 -----------------------------------
 -- UPDATED CODE (COLORIZE VALUES)
@@ -2409,7 +2412,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         -- Send change info to the throttle printer and end function now if we throttle gold from loot.
         if CA.SV.CurrencyGoldThrottle and (reason == 0 or reason == 13 or reason == 62) then
             zo_callLater(CA.CurrencyGoldThrottlePrinter, 50 )
-            g_CurrencyGoldThrottle = g_CurrencyGoldThrottle + UpOrDown
+            g_currencyGoldThrottle = g_currencyGoldThrottle + UpOrDown
             return
         end
         
@@ -2421,7 +2424,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         end
 
         currencyTypeColor = CurrencyGoldColorize:ToHex()
-        currencyIcon = zo_iconFormat("esoui/art/currency/currency_gold.dds", 16, 16)
+        currencyIcon = CA.SV.CurrencyIcons and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
         currencyName = CA.SV.CurrencyGoldName
         currencyTotal = CA.SV.CurrencyGoldShowTotal
         messageTotal = CA.SV.CurrencyMessageTotalGold
@@ -2445,7 +2448,8 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         if CA.SV.CurrencyAPThrottle > 0 and reason == 13 then
             EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedAP")
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "BufferedAP", CA.SV.CurrencyAPThrottle, CA.CurrencyAPThrottlePrinter )
-            g_CurrencyAPThrottle = g_CurrencyAPThrottle + UpOrDown
+            g_currencyAPThrottleValue = g_currencyAPThrottleValue + UpOrDown
+            g_currencyAPThrottleTotal = GetCarriedCurrencyAmount(2)
             return
         end
         
@@ -2456,8 +2460,13 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
             end
         end
         
+        -- Immediately print value if another source of AP is gained (or spent)
+        if CA.SV.CurrencyAPThrottle > 0 and reason ~= 13 then
+            CA.CurrencyAPThrottlePrinter()
+        end
+        
         currencyTypeColor = APColorize:ToHex()
-        currencyIcon = "|t16:16:/esoui/art/currency/alliancepoints.dds|t"
+        currencyIcon = CA.SV.CurrencyIcons and "|t16:16:/esoui/art/currency/alliancepoints.dds|t" or ""
         currencyName = CA.SV.CurrencyAPName
         currencyTotal = CA.SV.CurrencyAPShowTotal
         messageTotal = CA.SV.CurrencyMessageTotalAP
@@ -2481,7 +2490,8 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         if CA.SV.CurrencyTVThrottle > 0 and (reason == 0 or reason == 65) then
             EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedTV")
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "BufferedTV", CA.SV.CurrencyTVThrottle, CA.CurrencyTVThrottlePrinter )
-            g_CurrencyTVThrottle = g_CurrencyTVThrottle + UpOrDown
+            g_currencyTVThrottleValue = g_currencyTVThrottleValue + UpOrDown
+            g_currencyTVThrottleTotal = GetCarriedCurrencyAmount(3)
             return
         end
         
@@ -2492,8 +2502,13 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
             end
         end
         
+        -- Immediately print value if another source of TV is gained or lost
+        if CA.SV.CurrencyTVThrottle > 0 and (reason ~= 0 and reason ~= 65) then
+            CA.CurrencyTVThrottlePrinter()
+        end
+        
         currencyTypeColor = TVColorize:ToHex()
-        currencyIcon = "|t16:16:/esoui/art/currency/currency_telvar.dds|t"
+        currencyIcon = CA.SV.CurrencyIcons and "|t16:16:/esoui/art/currency/currency_telvar.dds|t" or ""
         currencyName = CA.SV.CurrencyTVName
         currencyTotal = CA.SV.CurrencyTVShowTotal
         messageTotal = CA.SV.CurrencyMessageTotalTV
@@ -2513,7 +2528,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         
     elseif currency == 4 then -- Writ Vouchers
         currencyTypeColor = WVColorize:ToHex()
-        currencyIcon = "|t16:16:/esoui/art/currency/currency_writvoucher.dds|t"
+        currencyIcon = CA.SV.CurrencyIcons and "|t16:16:/esoui/art/currency/currency_writvoucher.dds|t" or ""
         currencyName = CA.SV.CurrencyWVName
         currencyTotal = CA.SV.CurrencyWVShowTotal
         messageTotal = CA.SV.CurrencyMessageTotalWV
@@ -2588,48 +2603,40 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
     -- ==============================================================================
     -- DEBUG EVENTS WE DON'T KNOW YET
     -- TODO -- Need to add support for AP messages here. Also, in the case of AP gain we also need to adjust looted to earned if the reason code ends up being 0
-    elseif reason == 6 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 7 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 12 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 15 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- Keep Upgrade
-    elseif reason == 16 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 18 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 20 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 22 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 23 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 24 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 25 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 26 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 27 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 30 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 34 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 36 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 37 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 38 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 39 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 41 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 46 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 53 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 54 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 58 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 66 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 6 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 7 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 12 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 15 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason) -- Keep Upgrade
+    elseif reason == 16 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 18 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 20 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 22 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 23 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 24 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 25 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 26 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 27 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 30 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 34 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 36 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 37 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 38 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 39 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 41 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 46 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 53 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 54 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 58 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 66 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
     -- END DEBUG EVENTS
     -- ==============================================================================
     -- If none of these returned true, then we must have just looted the gold (Potentially a few currency change events I missed too may have to adjust later)
     else messageChange = CA.SV.CurrencyMessageLoot end
-    
-    --messageChange = changeColor:Colorize(messageChange)
-    
-    if CA.SV.CurrencyIcons then
-        messageP1 = ("|r|c" .. currencyTypeColor .. currencyIcon .. " " .. changeType .. formatHelper .. currencyName .. plural .. "|r|c" .. changeColor)
-    else
-        messageP1 = ("|r|c" .. currencyTypeColor .. changeType .. formatHelper .. CA.SV.CurrencyGoldName .. plural .. "|r|c" .. changeColor)
-    end
-    
-    if currencyTotal and CA.SV.CurrencyIcons then
+
+    messageP1 = ("|r|c" .. currencyTypeColor .. currencyIcon .. " " .. changeType .. formatHelper .. currencyName .. plural .. "|r|c" .. changeColor)
+
+    if currencyTotal then
         messageP2 = ("|r|c" .. currencyTypeColor .. currencyIcon .. " " .. formattedValue .. "|r|c" .. changeColor)
-    elseif currencyTotal and not CA.SV.CurrencyIcons then
-        messageP2 = ("|r|c" .. formattedValue .. "|r|c" .. changeColor)
     else
         messageP2 = "|r"
     end
@@ -2649,31 +2656,33 @@ end
 
 function CA.CurrencyGoldThrottlePrinter()
     local newValue = GetCarriedCurrencyAmount(1)
-    local oldValue = newValue - g_CurrencyGoldThrottle
-    if g_CurrencyGoldThrottle > CA.SV.CurrencyGoldFilter then
+    local oldValue = newValue - g_currencyGoldThrottle
+    if g_currencyGoldThrottle > CA.SV.CurrencyGoldFilter then
         CA.OnCurrencyUpdate(nil, 1, newValue, oldValue, 99)
     end
-    g_CurrencyGoldThrottle = 0
+    g_currencyGoldThrottle = 0
 end
 
 function CA.CurrencyAPThrottlePrinter()
-    if g_CurrencyAPThrottle > 0 and g_CurrencyAPThrottle > CA.SV.CurrencyAPFilter then
-        local newValue = GetCarriedCurrencyAmount(2)
-        local oldValue = newValue - g_CurrencyAPThrottle
+    if g_currencyAPThrottleValue > 0 and g_currencyAPThrottleValue > CA.SV.CurrencyAPFilter then
+        local newValue = g_currencyAPThrottleTotal
+        local oldValue = newValue - g_currencyAPThrottleValue
         CA.OnCurrencyUpdate(nil, 2, newValue, oldValue, 98)
     end
     EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedAP")
-    g_CurrencyAPThrottle = 0
+    g_currencyAPThrottleValue = 0
+    g_currencyAPThrottleTotal = 0
 end
 
 function CA.CurrencyTVThrottlePrinter()
-    if g_CurrencyTVThrottle > 0 and g_CurrencyTVThrottle > CA.SV.CurrencyTVFilter then
-        local newValue = GetCarriedCurrencyAmount(3)
-        local oldValue = newValue - g_CurrencyTVThrottle
+    if g_currencyTVThrottleValue > 0 and g_currencyTVThrottleValue > CA.SV.CurrencyTVFilter then
+        local newValue = g_currencyTVThrottleTotal
+        local oldValue = newValue - g_currencyTVThrottleValue
         CA.OnCurrencyUpdate(nil, 3, newValue, oldValue, 97)
     end
     EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedTV")
-    g_CurrencyTVThrottle = 0
+    g_currencyTVThrottleValue = 0
+    g_currencyTVThrottleTotal = 0
 end
 
 -- Writ Voucher Change Announcements
@@ -3713,8 +3722,8 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
         
         -- If throttle is enabled, save value and end function here
         if CA.SV.ExperienceThrottle > 0 and reason == 0 then
-            g_XPCombatBufferValue = g_XPCombatBufferValue + change
-            g_XPCombatBufferTotal = currentExperience
+            g_xpCombatBufferValue = g_xpCombatBufferValue + change
+            g_xpCombatBufferTotal = currentExperience
             -- We unregister the event, then re-register it, this keeps the buffer at a constant X throttle after XP is gained.
             EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "BufferedXP", CA.SV.ExperienceThrottle, CA.PrintBufferedXP )
@@ -3730,7 +3739,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 
         -- If we gain experience from a non combat source, and our buffer function holds a value, then we need to immediately dump this value before the next XP update is processed.
         -- TODO: Possibly integrate this into something else too? Currently this fires after other events like the Wayshrine discovery message so it looks odd still.
-        if CA.SV.ExperienceThrottle > 0 and g_XPCombatBufferValue > 0 and (reason ~= 0 and reason ~= 99) then
+        if CA.SV.ExperienceThrottle > 0 and g_xpCombatBufferValue > 0 and (reason ~= 0 and reason ~= 99) then
             CA.PrintBufferedXP()
         end
         
@@ -3745,13 +3754,13 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 end
 
 function CA.PrintBufferedXP()
-    if g_XPCombatBufferValue > 0 and g_XPCombatBufferValue > CA.SV.ExperienceFilter then
-        local previousExperience = g_XPCombatBufferTotal - g_XPCombatBufferValue
-        local currentExperience = g_XPCombatBufferTotal
+    if g_xpCombatBufferValue > 0 and g_xpCombatBufferValue > CA.SV.ExperienceFilter then
+        local previousExperience = g_xpCombatBufferTotal - g_xpCombatBufferValue
+        local currentExperience = g_xpCombatBufferTotal
         CA.OnExperienceGain(nil, 99, nil, previousExperience, currentExperience, nil)
     end
-    g_XPCombatBufferValue = 0
-    g_XPCombatBufferTotal = 0
+    g_xpCombatBufferValue = 0
+    g_xpCombatBufferTotal = 0
     EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
 end
 
