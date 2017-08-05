@@ -36,10 +36,12 @@ ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG",                "Regroup
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME",              "You must enter the name of a player to trade with.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFG",           "You must be in an LFG group to do that.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NONAME",           "You must enter the name of a party member to initiate a vote to remove.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGNQ_FAILED_NONAME",          "You must enter the name of the campaign to join.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGNQ_FAILED_WRONCAMPAIGN",    "The Campaign you enterd is not a valid Campaign.")
 
 -- InfoPanel.lua
-ZO_CreateStringId("SI_LUIE_PNL_FEEDNOW",                                 "Feed Now")
-ZO_CreateStringId("SI_LUIE_PNL_MAXED",                                   "Maxed")
+ZO_CreateStringId("SI_LUIE_PNL_FEEDNOW",                                "Feed Now")
+ZO_CreateStringId("SI_LUIE_PNL_MAXED",                                  "Maxed")
 
 -- SpellCastBuffs.lua
 ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS",                "Player Buffs")
