@@ -1375,7 +1375,6 @@ function SCB.Initialize( enabled )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED,       SCB.OnSlotUpdated )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_UPDATE_COOLDOWNS,   SCB.OnUpdateCooldowns )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_ABILITY_USED,  SCB.OnSlotAbilityUsed )
-    
     EVENT_MANAGER:RegisterForEvent(moduleName  .. "player",         EVENT_EFFECT_CHANGED, SCB.OnEffectChanged )
     EVENT_MANAGER:RegisterForEvent(moduleName  .. "reticleover",    EVENT_EFFECT_CHANGED, SCB.OnEffectChanged )
     EVENT_MANAGER:AddFilterForEvent(moduleName .. "player",         EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
