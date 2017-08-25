@@ -23,6 +23,7 @@ LUIE.D = {
     TimeStamp                   = false,
     TimeStampFormat             = "HH:m:s",
     StartupInfo                 = false,
+    HideXPBar                   = false,
 }
 
 -- Global fonts table to use in other parts of this addon

@@ -279,6 +279,7 @@ ZO_CreateStringId("SI_LUIE_CA_QUEST_DISCOVER",                          "Discove
 ZO_CreateStringId("SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON",                  "Started: <<1>> <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON",                "Completed: <<1>> <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_QUEST_LOG_FULL",                          "Your quest log is full.")
+
 ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT1",                      "|cFEFEFE<<1>>|r is ignoring you.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_ACCEPTED",                   "Trade invite accepted.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_CONFIRM",                    "You have invited |cFEFEFE<<1>>|r to trade.")
