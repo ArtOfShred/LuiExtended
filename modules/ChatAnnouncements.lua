@@ -516,10 +516,6 @@ function CA.Initialize(enabled)
     --
     CA.AlertStyleLearned()
 
-    -- Display enlightened message on game load or reload UI if toggled on
-    if CA.SV.ExperienceEnlightened and IsEnlightenedAvailableForCharacter() and GetEnlightenedPool() > 0 then
-        zo_callLater(CA.EnlightenedGained, 50) -- TODO: Change to on TICK
-    end
 end
 
 function CA.RegisterColorEvents()
@@ -748,16 +744,10 @@ function CA.RegisterXPEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LEVEL_UPDATE)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CHAMPION_POINT_UPDATE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ENLIGHTENED_STATE_GAINED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ENLIGHTENED_STATE_LOST)
     if CA.SV.Experience or CA.SV.ExperienceLevelUp then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN, CA.OnExperienceGain)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEVEL_UPDATE, CA.OnLevelUpdate)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_UPDATE, CA.OnChampionUpdate)
-    end
-    if CA.SV.ExperienceEnlightened then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ENLIGHTENED_STATE_GAINED, CA.EnlightenedGained)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ENLIGHTENED_STATE_LOST, CA.EnlightenedLost)
     end
     if CA.SV.ShowSkillPoints then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_SKILL_POINTS_CHANGED, CA.SkillPointsChanged)
@@ -3740,14 +3730,6 @@ function CA.PrintBufferedXP()
     EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
 end
 
-function CA.EnlightenedGained(eventCode)
-    printToChat(strformat("<<1>>! <<2>>", GetString(SI_ENLIGHTENED_STATE_GAINED_HEADER), GetString(SI_ENLIGHTENED_STATE_GAINED_DESCRIPTION)))
-end
-
-function CA.EnlightenedLost(eventCode)
-    printToChat(strformat("<<1>>!", GetString(SI_ENLIGHTENED_STATE_LOST_HEADER)))
-end
-
 -- Helper function to return color (without |c prefix) according to current percentage
 local function AchievementPctToColour(pct)
     return pct == 1 and "71DE73" or pct < 0.33 and "F27C7C" or pct < 0.66 and "EDE858" or "CCF048"
@@ -5750,6 +5732,14 @@ local function GetRelevantBarParams(level, previousExperience, currentExperience
     end
 end
 
+local function GetCurrentChampionPointsBarParams()
+    local championPoints = GetPlayerChampionPointsEarned()
+    local currentChampionXP = GetPlayerChampionXP()
+    local barParams = CENTER_SCREEN_ANNOUNCE:CreateBarParams(PPB_CP, championPoints, currentChampionXP, currentChampionXP)
+    barParams:SetShowNoGain(true)
+    return barParams
+end
+
 -- Alert Prehooks
 function CA.AlertStyleLearned()
     
@@ -6390,6 +6380,111 @@ function CA.AlertStyleLearned()
         
     end
     
+    local XP_GAIN_SHOW_REASONS =
+    {
+        [PROGRESS_REASON_PVP_EMPEROR] = true,
+        [PROGRESS_REASON_DUNGEON_CHALLENGE] = true,
+        [PROGRESS_REASON_OVERLAND_BOSS_KILL] = true,
+        [PROGRESS_REASON_SCRIPTED_EVENT] = true,
+        [PROGRESS_REASON_LOCK_PICK] = true,
+        [PROGRESS_REASON_LFG_REWARD] = true,
+    }
+
+    local XP_GAIN_SHOW_SOUNDS =
+    {
+        [PROGRESS_REASON_OVERLAND_BOSS_KILL] = SOUNDS.OVERLAND_BOSS_KILL,
+        [PROGRESS_REASON_LOCK_PICK] = SOUNDS.LOCKPICKING_SUCCESS_CELEBRATION,
+    }
+    
+    -- This function is prehooked in order to allow the XP bar popup to be hidden. In addition we shift the sound over 
+    local function ExperienceGainHook(reason, level, previousExperience, currentExperience, championPoints)
+        
+        local sound = XP_GAIN_SHOW_SOUNDS[reason]
+        
+        if XP_GAIN_SHOW_REASONS[reason] and not LUIE.SV.HideXPBar then
+            local barParams = GetRelevantBarParams(level, previousExperience, currentExperience, championPoints)
+            if barParams then
+                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_NO_TEXT)
+                barParams:SetSound(sound)
+                messageParams:SetBarParams(barParams)
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_EXPERIENCE_GAIN)
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+        end
+        
+        -- We want to play a sound still even if the bar popup is hidden
+        if LUIE.SV.HideXPBar and sound ~= nil then
+            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT)
+            messageParams:SetSound(sound)
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_EXPERIENCE_GAIN)
+            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        end
+
+        local levelSize = GetNumExperiencePointsInLevel(level)
+        if levelSize ~= nil and currentExperience >= levelSize then
+            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.LEVEL_UP)
+            messageParams:SetText(GetString(SI_LEVEL_UP_NOTIFICATION))
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_LEVEL_GAIN)
+            if not LUIE.SV.HideXPBar then
+                local barParams = CENTER_SCREEN_ANNOUNCE:CreateBarParams(PPB_XP, level + 1, currentExperience - levelSize, currentExperience - levelSize)
+                barParams:SetShowNoGain(true)
+                messageParams:SetBarParams(barParams)
+            end
+            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        end
+        
+        return true
+    end
+    
+    function EnlightenGainHook()
+        formattedString = strformat("<<1>>! <<2>>", GetString(SI_ENLIGHTENED_STATE_GAINED_HEADER), GetString(SI_ENLIGHTENED_STATE_GAINED_DESCRIPTION))
+        g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        
+        if IsEnlightenedAvailableForCharacter() then
+            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.ENLIGHTENED_STATE_GAINED)
+            messageParams:SetText(zo_strformat(SI_ENLIGHTENED_STATE_GAINED_HEADER), zo_strformat(SI_ENLIGHTENED_STATE_GAINED_DESCRIPTION))
+            if not LUIE.SV.HideXPBar then
+                local barParams = GetCurrentChampionPointsBarParams()
+                messageParams:SetBarParams(barParams)
+            end
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_ENLIGHTENMENT_GAINED)
+            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        end
+        return true
+    end
+
+    function EnlightenLossHook()
+        formattedString = strformat("<<1>>!", GetString(SI_ENLIGHTENED_STATE_LOST_HEADER))
+        g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        
+        if IsEnlightenedAvailableForCharacter() then
+            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.ENLIGHTENED_STATE_LOST)
+            if not LUIE.SV.HideXPBar then
+                messageParams:SetBarParams(GetCurrentChampionPointsBarParams())
+            end
+            messageParams:SetText(zo_strformat(SI_ENLIGHTENED_STATE_LOST_HEADER))
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_ENLIGHTENMENT_LOST)
+            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        end
+        return true
+    end
+    
+    local firstActivation = true
+    function PlayerActivatedHook()
+        if firstActivation then
+            firstActivation = false
+
+            if IsEnlightenedAvailableForCharacter() and GetEnlightenedPool() > 0 then
+                EnlightenGainHook()
+            end
+        end
+        return true
+    end
+    
     -- Unregister the ZOS events for handling Quest Removal/Advanced/Added to replace with our own functions
     EVENT_MANAGER:UnregisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_REMOVED)
     EVENT_MANAGER:UnregisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_ADVANCED)
@@ -6410,6 +6505,12 @@ function CA.AlertStyleLearned()
     ZO_PreHook(csaHandlers, EVENT_QUEST_OPTIONAL_STEP_ADVANCED, OptionalStepHook)
     ZO_PreHook(csaHandlers, EVENT_DISCOVERY_EXPERIENCE, DiscoveryExperienceHook)
     ZO_PreHook(csaHandlers, EVENT_POI_DISCOVERED, PoiDiscoveredHook)
+    ZO_PreHook(csaHandlers, EVENT_EXPERIENCE_GAIN, ExperienceGainHook)
+    
+    ZO_PreHook(csaHandlers, EVENT_ENLIGHTENED_STATE_GAINED, EnlightenGainHook)
+    ZO_PreHook(csaHandlers, EVENT_ENLIGHTENED_STATE_LOST, EnlightenLostHook)
+    
+    ZO_PreHook(csaHandlers, EVENT_PLAYER_ACTIVATED, PlayerActivatedHook)
     
    -- ZO_PreHook(csaHandlers, loreEvents[3], LoreCollectionHook)
    -- ZO_PreHook(csaHandlers, loreEvents[4], LoreCollectionXPHook)

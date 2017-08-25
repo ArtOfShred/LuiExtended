@@ -379,17 +379,16 @@ function LUIE_CreateSettings()
         width = "full",
         default = LUIE.D.StartupInfo,
     }
-    
     -- Toggle XP Bar popup
     optionsData[#optionsData + 1] = {
         type = "checkbox",
-        name = "Hide XP Bar Popup"
-        tooltip "When gaining experience from Discovery, Boss Kills, or Skill Line updates, the XP bar will no longer popup. Useful if you have a custom UI element in that corner of the screen and don't want it to be overlapped."
-        getFunc = function() return LUIE.SV.HideXPBar end
+        name = "Hide XP Bar Popup",
+        tooltip = "When gaining experience from Discovery, Boss Kills, or Skill Line updates, the XP bar will no longer popup. Useful if you have a custom UI element in that corner of the screen and don't want it to be overlapped.",
+        getFunc = function() return LUIE.SV.HideXPBar end,
         setFunc = function(value) LUIE.SV.HideXPBar = value end,
-        width = "full"
-        default = LUIE.D.HideXPBar
-    
+        width = "full",
+        default = LUIE.D.HideXPBar,
+    }
     -- Slash Commands Overview
     optionsData[#optionsData + 1] = {
         type = "header",
