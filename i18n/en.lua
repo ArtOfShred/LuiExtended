@@ -238,6 +238,13 @@ ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_CONFISCATE",             "A guard
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_PICKPOCKET",             "You pickpocket %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_LOST",                   "You lost %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_EARN",                   "You earn %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_STABLE",                 "You purchase a %s riding skill upgrade for %s.")
+
+ZO_CreateStringId("SI_LUIE_CA_STORAGE_RIDINGTYPE1",                     "[Riding Speed Upgrade]")
+ZO_CreateStringId("SI_LUIE_CA_STORAGE_RIDINGTYPE2",                     "[Riding Capacity Upgrade]")
+ZO_CreateStringId("SI_LUIE_CA_STORAGE_RIDINGTYPE3",                     "[Riding Stamina Upgrade]")
+
+ZO_CreateStringId("SI_LUIE_CA_STORAGE_LEARN",                           "You learn %s x%s")
 
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGOLD",              "Total Gold: %s")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP",                "Total AP: %s")

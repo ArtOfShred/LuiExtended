@@ -243,6 +243,7 @@ CA.D = {
     CurrencyMessageTradeIn          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN),
     CurrencyMessageTradeOut         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEOUT),
     CurrencyMessageWithdraw         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAW),
+    CurrencyMessageStable           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_STABLE),
     CurrencyTVChange                = true,
     CurrencyTVColor                 = { 0.368627, 0.643137, 1, 1 },
     CurrencyTVFilter                = 0,
@@ -2314,7 +2315,8 @@ end
 
 ------ TEMP TODO
 
-function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
+-- Note, sentvalue here is an additional variable called when certain reasons are pushed through to this function to generate strings.
+function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason, sentvalue)
 
     local UpOrDown = newValue - oldValue
     -- DEBUG TEMP
@@ -2323,13 +2325,13 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
     d("OV: " .. oldValue)
     d("reason: " .. reason)
     
-    -- If the total gold change was 0 or (Reason 2 = Receieve Money in the Mail) or (Reason 35 = Player Init) - End Now
-    if UpOrDown == 0 or reason == 2 or reason == 35 then
+    -- If the total gold change was 0 or (Reason 2 = Receieve Money in the Mail) or (Reason 28 = Mount Feed) or (Reason 35 = Player Init) - End Now
+    if UpOrDown == 0 or reason == 2 or reason == 28 or reason == 35 then
         return
     end
     
     local formattedValue = ZO_LocalizeDecimalNumber(newValue)
-    local changeColor                                                         -- Gets the value from CurrencyUpColorize or CurrencyDownColorize to color strings
+    local changeColor                                                   -- Gets the value from CurrencyUpColorize or CurrencyDownColorize to color strings
     local changeType                                                    -- Amount of currency gained or lost
     local plural                                                        -- Adds an "s" onto the end of plural values of currency when not using a set string
     local formatHelper                                                  -- Places a spacer between the amount of currency and the name used for currency. This spacer is overwritten based on certain currency name string situations.
@@ -2517,9 +2519,9 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
     -- Receive from Quest Reward (4), Medal (21), AH Refund (32), Sell to Fence (63)
     elseif reason == 4 or reason == 21 or reason == 32 or reason == 63 then
         messageChange = CA.SV.CurrencyMessageReceive
-    -- Spend - NPC Conversation (5), Bag Space (8), Bank Space (9), Wayshrine (19), Mount Feed (28), Repairs (29), AH Listing Fee (33), Respec Skills (44), Respec Attributes (45),
+    -- Spend - NPC Conversation (5), Bag Space (8), Bank Space (9), Wayshrine (19), Repairs (29), AH Listing Fee (33), Respec Skills (44), Respec Attributes (45),
     -- Unstuck (48), Edit Guild Heraldry (49), Buy Guild Tabard (50), Respec Morphs (55), Pay Fence (56), Launder (60), Champion Respec (61), Buyback (64)
-    elseif reason == 5 or reason == 8 or reason == 9 or reason == 19 or reason == 28 or reason == 29 or reason == 33 or reason == 44 or reason == 45 or reason == 48 or reason == 49 or reason == 50 or reason == 55 or reason == 56 or reason == 60 or reason == 61 or reason == 64 then
+    elseif reason == 5 or reason == 8 or reason == 9 or reason == 19 or reason == 29 or reason == 33 or reason == 44 or reason == 45 or reason == 48 or reason == 49 or reason == 50 or reason == 55 or reason == 56 or reason == 60 or reason == 61 or reason == 64 then
         messageChange = CA.SV.CurrencyMessageSpend
     -- Keep Reward (14), Keep Repair (40), FAKE THROTTLE REASON ALLIANCE POINTS (98)
     elseif reason == 14 or reason == 40 or reason == 98 then
@@ -2553,6 +2555,10 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
     -- Died to Player/NPC (67)
     elseif reason == 67 then
         messageChange = CA.SV.CurrencyMessageLost
+        
+    -- FAKE MOUNT UPGRADE STABLE REASON (96) 
+    elseif reason == 96 then
+        messageChange = CA.SV.CurrencyMessageStable
     -- ==============================================================================
     -- DEBUG EVENTS WE DON'T KNOW YET
     -- TODO -- Need to add support for AP messages here. Also, in the case of AP gain we also need to adjust looted to earned if the reason code ends up being 0
@@ -2594,7 +2600,33 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         messageP2 = "|r"
     end
 
-    local formattedMessageP1 = (strfmt(messageChange, messageP1))
+    local formattedMessageP1
+    if reason == 96 then
+    
+        local function ResolveRidingStats()
+            -- if somevar then icon = else no
+            local skillType = GetString("SI_LUIE_CA_STORAGE_RIDINGTYPE", sentvalue)
+            local icon
+            
+            if CA.SV.LootIcons then
+                if sentvalue == 1 then
+                    icon = "|t16:16:/esoui/art/mounts/ridingskill_speed.dds|t "
+                elseif sentvalue == 2 then
+                    icon = "|t16:16:/esoui/art/mounts/ridingskill_capacity.dds|t "
+                elseif sentvalue == 3 then
+                    icon = "|t16:16:/esoui/art/mounts/ridingskill_stamina.dds|t "
+                end
+            else
+                icon = ""
+            end
+            
+            return strfmt("|r" .. icon .. "|cFFFFFF" .. skillType .. "|r|c" .. changeColor)
+        end
+    
+        formattedMessageP1 = (strfmt(messageChange, ResolveRidingStats(), messageP1))
+    else
+        formattedMessageP1 = (strfmt(messageChange, messageP1))
+    end
     local formattedMessageP2 = (strfmt(messageTotal, messageP2))
     local finalMessage
     if currencyTotal then
@@ -2698,80 +2730,7 @@ function CA.MiscAlertLockLocked(eventCode, interactableName)
 end
 
 function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source)
-    if CA.SV.MiscHorse then
-        local bracket1
-        local bracket2
-        local icon
-        local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED)
-        local skillstring
-
-        if source == 2 then
-            logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LEARNED)
-        end
-
-        if CA.SV.ItemBracketDisplayOptions == 1 then
-            bracket1 = "["
-            bracket2 = "]"
-        elseif CA.SV.ItemBracketDisplayOptions == 2 then
-            bracket1 = "("
-            bracket2 = ")"
-        elseif CA.SV.ItemBracketDisplayOptions == 3 then
-            bracket1 = ""
-            bracket2 = " -"
-        elseif CA.SV.ItemBracketDisplayOptions == 4 then
-            bracket1 = ""
-            bracket2 = ""
-        end
-
-        if ridingSkillType == 1 and source == 1 then
-            skillstring = "[Riding Speed Upgrade]"
-        elseif ridingSkillType == 2 and source == 1  then
-            skillstring = "[Riding Capacity Upgrade]"
-        elseif ridingSkillType == 3 and source == 1  then
-            skillstring = "[Riding Stamina Upgrade]"
-        elseif ridingSkillType == 1 and source == 2  then
-            skillstring = "|H1:item:64700:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
-        elseif ridingSkillType == 2 and source == 2  then
-            skillstring = "|H1:item:64702:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
-        elseif ridingSkillType == 3 and source == 2  then
-            skillstring = "|H1:item:64701:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
-        end
-
-        if CA.SV.LootIcons then
-            if source == 1 then
-                if ridingSkillType == 1 then
-                    icon = "|t16:16:/esoui/art/mounts/ridingskill_speed.dds|t "
-                elseif ridingSkillType == 2 then
-                    icon = "|t16:16:/esoui/art/mounts/ridingskill_capacity.dds|t "
-                elseif ridingSkillType == 3 then
-                    icon = "|t16:16:/esoui/art/mounts/ridingskill_stamina.dds|t "
-                end
-            elseif source == 2 then
-                if ridingSkillType == 1 then
-                    icon = "|t16:16:/esoui/art/icons/store_ridinglessons_speed.dds|t "
-                elseif ridingSkillType == 2 then
-                    icon = "|t16:16:/esoui/art/icons/store_ridinglessons_capacity.dds|t "
-                elseif ridingSkillType == 3 then
-                    icon = "|t16:16:/esoui/art/icons/store_ridinglessons_stamina.dds|t "
-                end
-            end
-        else
-            icon = ""
-        end
-
-        if CA.SV.ItemContextToggle then
-            logPrefix = CA.SV.ItemContextMessage
-        end
-
-        logPrefix = CurrencyUpColorize:Colorize(strfmt("%s%s%s", bracket1, logPrefix, bracket2))
-
-        if CA.SV.LootCurrencyCombo == true then
-            printToChat(strfmt("%s %s%s |cFFFFFF%s/60|r%s", logPrefix, icon, skillstring, current, g_comboString))
-            g_comboString = ""
-        else
-            printToChat(strfmt("%s %s%s |cFFFFFF%s/60|r", logPrefix, icon, skillstring, current) )
-        end
-    end
+  
 end
 
 function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
@@ -5772,14 +5731,39 @@ function CA.AlertStyleLearned()
     end
     ZO_PreHook(handlers, EVENT_STYLE_LEARNED, StyleLearnedHook)
     
-    -- We'll probably hide this event because it's kind of pointless - This will only trigger VERY occasionally when a lorebook is used and doesn't immediately fade away before the player can interact with it again (I guess just when Server lags).
+    -- TODO: We'll probably hide this event because it's kind of pointless - This will only trigger VERY occasionally when a lorebook is used and doesn't immediately fade away before the player can interact with it again (I guess just when Server lags).
     local function AlreadyKnowBookHook(bookTitle)
         printToChat(strformat(SI_LORE_LIBRARY_ALREADY_KNOW_BOOK, bookTitle))
         return ERROR, strformat(SI_LORE_LIBRARY_ALREADY_KNOW_BOOK, bookTitle)
     end
     
-    ZO_PreHook(handlers, EVENT_LORE_BOOK_ALREADY_KNOWN, AlreadyKnowBookHook)
+    local function RidingSkillImprovementAlertHook(ridingSkill, previous, current, source)
+        
+        -- If we purchased from the stables, display a currency announcement if relevant
+        -- Additionally, display Chat Announcement here instead of delaying it as the CSA does.
+        if CA.SV.StorageRiding CA and source == RIDING_TRAIN_SOURCE_STABLES then
+            -- TODO: Currency conditional here!!!!
+            local newValue = GetCarriedCurrencyAmount(1)
+            local oldValue = newValue + 250
+            CA.OnCurrencyUpdate(eventCode, 1, newValue, oldValue, 96, ridingSkill)
+            --
+            
+            local formattedString = zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current)
+            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        end
 
+        -- Display Alert
+        if CA.SV.StorageRidingAlert then
+            local text = zo_strformat(SI_RIDING_SKILL_IMPROVEMENT_ALERT, GetString("SI_RIDINGTRAINTYPE", ridingSkill))
+            return ALERT, text
+        end
+    
+    end
+    
+    ZO_PreHook(handlers, EVENT_LORE_BOOK_ALREADY_KNOWN, AlreadyKnowBookHook)
+    ZO_PreHook(handlers, EVENT_RIDING_SKILL_IMPROVEMENT, RidingSkillImprovementAlertHook)
     
     
     
@@ -6321,7 +6305,7 @@ function CA.AlertStyleLearned()
         OnQuestAdvanced(EVENT_QUEST_ADVANCED, questIndex, nil, nil, nil, true, true)
     end
     
-    function DiscoveryExperienceHook(subzoneName, level, previousExperience, currentExperience, championPoints)
+    local function DiscoveryExperienceHook(subzoneName, level, previousExperience, currentExperience, championPoints)
         if CA.SV.QuestLocDiscoveryCA then
             local nameFormatted = (strformat("|c<<1>><<2>>|r", QuestColorLocNameColorize, subzoneName))
             local formattedString = strformat(SI_LUIE_CA_QUEST_DISCOVER, nameFormatted)
@@ -6354,7 +6338,7 @@ function CA.AlertStyleLearned()
         
     end
 
-    function PoiDiscoveredHook(zoneIndex, poiIndex)
+    local function PoiDiscoveredHook(zoneIndex, poiIndex)
         local name, _, startDescription = GetPOIInfo(zoneIndex, poiIndex)
         
         if CA.SV.QuestLocObjectiveCA then
@@ -6436,7 +6420,7 @@ function CA.AlertStyleLearned()
         return true
     end
     
-    function EnlightenGainHook()
+    local function EnlightenGainHook()
         formattedString = strformat("<<1>>! <<2>>", GetString(SI_ENLIGHTENED_STATE_GAINED_HEADER), GetString(SI_ENLIGHTENED_STATE_GAINED_DESCRIPTION))
         g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
@@ -6455,7 +6439,7 @@ function CA.AlertStyleLearned()
         return true
     end
 
-    function EnlightenLossHook()
+    local function EnlightenLossHook()
         formattedString = strformat("<<1>>!", GetString(SI_ENLIGHTENED_STATE_LOST_HEADER))
         g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
@@ -6474,7 +6458,7 @@ function CA.AlertStyleLearned()
     end
     
     local firstActivation = true
-    function PlayerActivatedHook()
+    local function PlayerActivatedHook()
         if firstActivation then
             firstActivation = false
 
@@ -6482,6 +6466,52 @@ function CA.AlertStyleLearned()
                 EnlightenGainHook()
             end
         end
+        return true
+    end
+    
+    local function RidingSkillImprovementHook(ridingSkill, previous, current, source)
+       
+        if CA.SV.StorageRidingCA and source == RIDING_TRAIN_SOURCE_ITEM then
+        
+            -- TODO: if ca.sv.loot or whatever
+                local icon
+                local bookString
+                local value = current - previous
+                local learnString = GetString(SI_LUIE_CA_STORAGE_LEARN)
+                
+                if ridingSkill == 1 then
+                    bookString = "|H1:item:64700:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+                    icon = "|t16:16:/esoui/art/icons/store_ridinglessons_speed.dds|t "
+                elseif ridingSkill == 2 then
+                    bookString = "|H1:item:64702:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+                    icon = "|t16:16:/esoui/art/icons/store_ridinglessons_capacity.dds|t "
+                elseif ridingSkill == 3 then
+                    bookString = "|H1:item:64701:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+                    icon = "|t16:16:/esoui/art/icons/store_ridinglessons_stamina.dds|t "
+                end
+                
+                local messageP1 = CA.SV.LootIcons and (icon .. skillstring) or (skillstring)
+                local finalMessage = strfmt("|cFFFFFF" .. learnString, messageP1, value .. ".|r")
+            
+                
+                g_queuedMessages[g_queuedMessagesCounter] = { message = strb, type = "QUEST" }
+                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            -----
+        
+            local formattedString = zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current)
+            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        end
+    
+        if CA.SV.StorageRidingCSA then
+            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
+            messageParams:SetText(GetString(SI_RIDING_SKILL_ANNOUCEMENT_BANNER), zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RIDING_SKILL_IMPROVEMENT)
+            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        end
+
         return true
     end
     
@@ -6511,6 +6541,8 @@ function CA.AlertStyleLearned()
     ZO_PreHook(csaHandlers, EVENT_ENLIGHTENED_STATE_LOST, EnlightenLostHook)
     
     ZO_PreHook(csaHandlers, EVENT_PLAYER_ACTIVATED, PlayerActivatedHook)
+    
+    ZO_PreHook(csaHandlers, EVENT_RIDING_SKILL_IMPROVEMENT, RidingSkillImprovementHook)
     
    -- ZO_PreHook(csaHandlers, loreEvents[3], LoreCollectionHook)
    -- ZO_PreHook(csaHandlers, loreEvents[4], LoreCollectionXPHook)

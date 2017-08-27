@@ -1672,6 +1672,24 @@ function LUIE_CreateSettings()
                             )) end,
                         default = LUIE.ChatAnnouncements.D.CurrencyMessageEarn,
                     },
+                    {
+                        -- Stable Message
+                        type = "editbox",
+                        name = "Stable Message",
+                        tooltip = "ugh",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageStable end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageStable = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
+                            (
+                                LUIE.ChatAnnouncements.SV.CurrencyGoldChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyAPShowChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyTVChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyWVChange or
+                                LUIE.SV.ChatAnnouncements_Enable
+                            )) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageStable,
+                    },
                     
                     
                 },
