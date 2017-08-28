@@ -105,7 +105,8 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_COLOR",                    "Skill P
 ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_MESSAGE",                  "Skill Point Message Format")
 ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_MESSAGE_TP",               "Message format for skill points, <<1>> represents # of skill points, <<1[singular/plural]>> represents name of skill points.\nDefault: \"Gained <<1>> skill <<1[point/points]>>.\"")
 
-
+-- COLLECTIBLES
+ZO_CreateStringId("SI_LUIE_CA_COLLECTIBLE",                             "Collection Updated")
 
 -- LOREBOOKS
 ZO_CreateStringId("SI_LUIE_CA_LOREBOOK_BOOK",                           "Book Discovered")
