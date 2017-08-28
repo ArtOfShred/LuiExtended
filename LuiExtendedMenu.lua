@@ -1690,6 +1690,24 @@ function LUIE_CreateSettings()
                             )) end,
                         default = LUIE.ChatAnnouncements.D.CurrencyMessageStable,
                     },
+                    {
+                        -- Storage Message
+                        type = "editbox",
+                        name = "Stable Message",
+                        tooltip = "ugh",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageStorage end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageStorage = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
+                            (
+                                LUIE.ChatAnnouncements.SV.CurrencyGoldChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyAPShowChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyTVChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyWVChange or
+                                LUIE.SV.ChatAnnouncements_Enable
+                            )) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageStorage,
+                    },
                     
                     
                 },
@@ -3428,28 +3446,97 @@ function LUIE_CreateSettings()
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.MiscMail,
                     },
+                    
                     {
-                        -- Show Bank/Bag Upgrade
-                        type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscBags end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscBags = value LUIE.ChatAnnouncements.RegisterBagEvents() end,
+                        -- Mount Upgrade Message Color
+                        type = "colorpicker",
+                        name = "Bag/Bank Upgrade Message Color",
+                        tooltip = "TODO",
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.StorageRidingColor) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.StorageRidingColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.MiscBags,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.ExperienceLevelUp and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = {r=LUIE.ChatAnnouncements.D.StorageRidingColor[1], g=LUIE.ChatAnnouncements.D.StorageRidingColor[2], b=LUIE.ChatAnnouncements.D.StorageRidingColor[3]}
                     },
                     {
-                        -- Show Riding Skill Upgrade
+                        -- Show Mount Upgrade (CA)
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscHorse end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscHorse = value LUIE.ChatAnnouncements.RegisterHorseEvents() end,
+                        name = "Show Mount Upgrade CA",
+                        tooltip = "Show Mount Upgrade",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.StorageRidingCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.StorageRidingCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.MiscHorse,
+                        default = LUIE.ChatAnnouncements.D.StorageRidingCA,
                     },
+                    {
+                        -- Show Mount Upgrade (CSA)
+                        type = "checkbox",
+                        name = "Show Mount Upgrade CSA",
+                        tooltip = "Show Mount Upgrade",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.StorageRidingCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.StorageRidingCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.StorageRidingCSA,
+                    },
+                    {
+                        -- Show Mount Upgrade (Alert)
+                        type = "checkbox",
+                        name = "Show Mount Upgrade Alert",
+                        tooltip = "Show Mount Upgrade",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.StorageRidingAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.StorageRidingAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.StorageRidingAlert,
+                    },
+                    
+                    {
+                        -- Bag/Bank Upgrade Message Color
+                        type = "colorpicker",
+                        name = "Bag/Bank Upgrade Message Color",
+                        tooltip = "TODO",
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.StorageBagColor) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.StorageBagColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.ExperienceLevelUp and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = {r=LUIE.ChatAnnouncements.D.StorageBagColor[1], g=LUIE.ChatAnnouncements.D.StorageBagColor[2], b=LUIE.ChatAnnouncements.D.StorageBagColor[3]}
+                    },
+                    {
+                        -- Show Bag/Bank Upgrade (CA)
+                        type = "checkbox",
+                        name = "Show Bag/Bank Upgrade CA",
+                        tooltip = "Show Bag/Bank Upgrade",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.StorageBagCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.StorageBagCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.StorageBagCA,
+                    },
+                    {
+                        -- Show Bag/Bank Upgrade (CSA)
+                        type = "checkbox",
+                        name = "Show Bag/Bank Upgrade CSA",
+                        tooltip = "Show Bag/Bank Upgrade",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.StorageBagCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.StorageBagCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.StorageBagCSA,
+                    },
+                    {
+                        -- Show Bag/Bank Upgrade (Alert)
+                        type = "checkbox",
+                        name = "Show Bag/Bank Upgrade Alert",
+                        tooltip = "Show Bag/Bank Upgrade",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.StorageBagAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.StorageBagAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.StorageBagAlert,
+                    },
+
                     {
                         -- Show Lockpick Events
                         type = "checkbox",

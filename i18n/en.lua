@@ -55,9 +55,11 @@ ZO_CreateStringId("SI_LUIE_SCB_REZZIMMUNITY",                           "Resurre
 ZO_CreateStringId("SI_LUIE_SCB_ERROR_FONT",                             "LUIE_SpellCastBuffs: There was a problem with selecting required font. Falling back to game default.")
 
 -- ChatAnnouncements.lua
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_ALLIANCE_POINT",                 "Alliance Point") -- Have to create singular strings here to use to prevent plural quantities from being double s
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_TELVAR_STONE",                   "Tel Var Stone") -- Have to create singular strings here to use to prevent plural quantities from being double s
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_WRIT_VOUCHER",                   "Writ Voucher") -- Have to create singular strings here to use to prevent plural quantities from being double s
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_GOLD",                           " <<1[Gold/Gold]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_ALLIANCE_POINT",                 " <<1[Alliance Point/Alliance Points]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_TELVAR_STONE",                   " <<1[Tel Var Stone/Tel Var Stones]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_WRIT_VOUCHER",                   " <<1[Writ Voucher/Writ Vouchers]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
+
 ZO_CreateStringId("SI_LUIE_CA_DEBUG_MSG_CURRENCY",                      "Currency Change Reason <<1>> Triggered - Please post on the LUI Extended comments section on ESOUI.com describing what caused this message. Thanks!")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_COUNTDOWN_CSA",                      "Duel Starts in <<1>>...")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_ACCEPTED",                    "Duel challenge accepted.")
@@ -238,11 +240,18 @@ ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_CONFISCATE",             "A guard
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_PICKPOCKET",             "You pickpocket %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_LOST",                   "You lost %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_EARN",                   "You earn %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_STABLE",                 "You purchase a %s riding skill upgrade for %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_STABLE",                 "You purchase a %s for %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_STORAGE",                "You purchase a %s for %s.")
 
 ZO_CreateStringId("SI_LUIE_CA_STORAGE_RIDINGTYPE1",                     "[Riding Speed Upgrade]")
 ZO_CreateStringId("SI_LUIE_CA_STORAGE_RIDINGTYPE2",                     "[Riding Capacity Upgrade]")
 ZO_CreateStringId("SI_LUIE_CA_STORAGE_RIDINGTYPE3",                     "[Riding Stamina Upgrade]")
+
+ZO_CreateStringId("SI_LUIE_CA_STORAGE_BAG_UPGRADE",                     "Your inventory capacity has increased.")
+ZO_CreateStringId("SI_LUIE_CA_STORAGE_BANK_UPGRADE",                    "Your bank capacity has increased.")
+
+ZO_CreateStringId("SI_LUIE_CA_STORAGE_BAGTYPE1",                        "[Backpack Upgrade]")
+ZO_CreateStringId("SI_LUIE_CA_STORAGE_BAGTYPE2",                        "[Bank Space Upgrade]")
 
 ZO_CreateStringId("SI_LUIE_CA_STORAGE_LEARN",                           "You learn %s x%s")
 

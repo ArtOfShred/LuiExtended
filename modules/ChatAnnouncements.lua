@@ -138,6 +138,17 @@ CA.D = {
     -- UPDATED CODE
     -----------------------
     
+    -- Storage / Riding Upgrades
+    StorageRidingColor            = { 1, 1, 1, 1 },
+    StorageRidingCA               = true,
+    StorageRidingCSA              = true,
+    StorageRidingAlert            = true,
+    
+    StorageBagColor               = { 1, 1, 1, 1 },
+    StorageBagCA                  = true,
+    StorageBagCSA                 = true,
+    StorageBagAlert               = true,
+    
     -- Collectibles/Lorebooks:
     Collectible                   = false,
     CollectibleMessage            = "Collection Updated:",
@@ -225,7 +236,7 @@ CA.D = {
     CurrencyGoldColor               = { 1, 1, 0.2, 1 },
     CurrencyGoldFilter              = 0,
     CurrencyGoldHideAH              = false,
-    CurrencyGoldName                = GetString(SI_CURRENCY_GOLD),
+    CurrencyGoldName                = GetString(SI_LUIE_CA_CURRENCY_GOLD),
     CurrencyGoldShowTotal           = true,
     CurrencyGoldThrottle            = true,
     CurrencyMessageConfiscate       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_CONFISCATE),
@@ -244,6 +255,7 @@ CA.D = {
     CurrencyMessageTradeOut         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEOUT),
     CurrencyMessageWithdraw         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAW),
     CurrencyMessageStable           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_STABLE),
+    CurrencyMessageStorage          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_STORAGE),
     CurrencyTVChange                = true,
     CurrencyTVColor                 = { 0.368627, 0.643137, 1, 1 },
     CurrencyTVFilter                = 0,
@@ -402,6 +414,9 @@ local QuestColorLocDescriptionColorize
 local QuestColorNameColorize
 local QuestColorDescriptionColorize
 
+local StorageRidingColorize
+local StorageBagColorize
+
 ---------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -501,7 +516,9 @@ function CA.Initialize(enabled)
     CA.RegisterMailEvents()
     CA.RegisterXPEvents()
     CA.RegisterAchievementsEvent()
-    CA.RegisterBagEvents()
+    -- TODO: Possibly don't register these unless enabled, I'm not sure -- at least move to better sorted order
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, CA.StorageBag)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, CA.StorageBank)
     CA.RegisterHorseEvents()
     CA.RegisterGuildEvents()
     CA.RegisterSocialEvents()
@@ -542,6 +559,9 @@ function CA.RegisterColorEvents()
     QuestColorLocDescriptionColorize = ZO_ColorDef:New(unpack(CA.SV.QuestColorLocDescription)):ToHex()
     QuestColorNameColorize = ZO_ColorDef:New(unpack(CA.SV.QuestColorName)):ToHex()
     QuestColorDescriptionColorize = ZO_ColorDef:New(unpack(CA.SV.QuestColorDescription)):ToHex()
+    
+    StorageRidingColorize = ZO_ColorDef:New(unpack(CA.SV.StorageRidingColor))
+    StorageBagColorize = ZO_ColorDef:New(unpack(CA.SV.StorageBagColor))
     
 end
 
@@ -1057,12 +1077,7 @@ function CA.RegisterLootEvents()
 end
 
 function CA.RegisterBagEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED)
-    if CA.SV.MiscBags then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, CA.MiscAlertBags)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, CA.MiscAlertBank)
-    end
+
 end
 
 function CA.RegisterHorseEvents()
@@ -2319,11 +2334,12 @@ end
 function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason, sentvalue)
 
     local UpOrDown = newValue - oldValue
-    -- DEBUG TEMP
+    --[[ DEBUG
     d("currency: " .. currency)
     d("NV: " .. newValue)
     d("OV: " .. oldValue)
     d("reason: " .. reason)
+    ]]
     
     -- If the total gold change was 0 or (Reason 2 = Receieve Money in the Mail) or (Reason 28 = Mount Feed) or (Reason 35 = Player Init) - End Now
     if UpOrDown == 0 or reason == 2 or reason == 28 or reason == 35 then
@@ -2333,8 +2349,6 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason, se
     local formattedValue = ZO_LocalizeDecimalNumber(newValue)
     local changeColor                                                   -- Gets the value from CurrencyUpColorize or CurrencyDownColorize to color strings
     local changeType                                                    -- Amount of currency gained or lost
-    local plural                                                        -- Adds an "s" onto the end of plural values of currency when not using a set string
-    local formatHelper                                                  -- Places a spacer between the amount of currency and the name used for currency. This spacer is overwritten based on certain currency name string situations.
     local currencyTypeColor                                              -- Determines color to use for colorization of currency based off currency type.
     local currencyIcon                                                  -- Determines icon to use for currency based off currency type.
     local currencyName                                                  -- Determines name to use for currency based off type.
@@ -2380,23 +2394,10 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason, se
 
         currencyTypeColor = CurrencyGoldColorize:ToHex()
         currencyIcon = CA.SV.CurrencyIcons and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
-        currencyName = CA.SV.CurrencyGoldName
+        currencyName = strformat(CA.SV.CurrencyGoldName, UpOrDown)
         currencyTotal = CA.SV.CurrencyGoldShowTotal
         messageTotal = CA.SV.CurrencyMessageTotalGold
-        
-        -- If we only recieve or lose 1 Gold, don't add an "s" onto the end of the name
-        if UpOrDown == 1 or UpOrDown == -1 or CA.SV.CurrencyGoldName == "" or CA.SV.CurrencyGoldName == "Gold" or CA.SV.CurrencyGoldName == "Currency" or CA.SV.CurrencyGoldName == "GP" or CA.SV.CurrencyGoldName == "gp" or CA.SV.CurrencyGoldName == "G" or CA.SV.CurrencyGoldName == "g" then
-            plural = ""
-        else
-            plural = "s"
-        end
 
-        -- If the name is blank, don't add an additional spacer before it after the change value
-        if CA.SV.CurrencyGoldName == ( "" ) or CA.SV.CurrencyGoldName == ( "g" ) or CA.SV.CurrencyGoldName == ( "gp" )then
-            formatHelper = ""
-        else
-            formatHelper = " "
-        end
     elseif currency == 2 then -- Alliance Points
         -- TODO -- We need to find all Alliance Point gain values so we can determine what keep rewards, etc are and print those out immediately! (and also reset the throttle with those)
         -- Send change info to the throttle printer and end function now if we throttle Alliance Points Gained
@@ -2422,23 +2423,10 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason, se
         
         currencyTypeColor = APColorize:ToHex()
         currencyIcon = CA.SV.CurrencyIcons and "|t16:16:/esoui/art/currency/alliancepoints.dds|t" or ""
-        currencyName = CA.SV.CurrencyAPName
+        currencyName = strformat(CA.SV.CurrencyAPName, UpOrDown)
         currencyTotal = CA.SV.CurrencyAPShowTotal
         messageTotal = CA.SV.CurrencyMessageTotalAP
-        
-        -- If we only recieve or lose 1 Alliance Point, don't add an "s" onto the end of the name
-        if UpOrDown == 1 or UpOrDown == -1 or CA.SV.CurrencyAPName == "" or CA.SV.CurrencyAPName == "AP" or CA.SV.CurrencyAPName == "ap" or CA.SV.CurrencyAPName == "A" or CA.SV.CurrencyAPName == "a" then
-            plural = ""
-        else
-            plural = "s"
-        end
-        
-        -- If the name is blank, don't add an additional spacer before it after the change value
-        if CA.SV.CurrencyAPName == ( "" ) or CA.SV.CurrencyAPName == ( "ap" ) or CA.SV.CurrencyAPName == ( "a" ) then
-            formatHelper = ""
-        else
-            formatHelper = " "
-        end
+
     elseif currency == 3 then -- TelVar Stones
     
         -- Send change info to the throttle printer and end function now if we throttle Tel Var Gained
@@ -2464,43 +2452,17 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason, se
         
         currencyTypeColor = TVColorize:ToHex()
         currencyIcon = CA.SV.CurrencyIcons and "|t16:16:/esoui/art/currency/currency_telvar.dds|t" or ""
-        currencyName = CA.SV.CurrencyTVName
+        currencyName = strformat(CA.SV.CurrencyTVName, UpOrDown)
         currencyTotal = CA.SV.CurrencyTVShowTotal
         messageTotal = CA.SV.CurrencyMessageTotalTV
-        
-        -- If we only recieve or lose 1 Tel Var Stone, don't add an "s" onto the end of the name
-        if UpOrDown == 1 or UpOrDown == -1 or CA.SV.CurrencyTVName == "" or CA.SV.CurrencyTVName == "TV" or CA.SV.CurrencyTVName == "tv" or CA.SV.CurrencyTVName == "TVS" or CA.SV.CurrencyTVName == "tvs" or CA.SV.CurrencyTVName == "T" or CA.SV.CurrencyTVName == "t" or CA.SV.CurrencyTVName == "TelVar" or CA.SV.CurrencyTVName == "Tel Var" then
-            plural = ""
-        else
-            plural = "s"
-        end
-        -- If the name is blank, don't add an additional spacer before it after the change value
-        if CA.SV.CurrencyTVName == ( "" ) or CA.SV.CurrencyTVName == ( "tv" ) or CA.SV.CurrencyTVName == ( "t" ) or CA.SV.CurrencyTVName == ( "tvs" ) then
-            formatHelper = ""
-        else
-            formatHelper = " "
-        end
-        
+
     elseif currency == 4 then -- Writ Vouchers
         currencyTypeColor = WVColorize:ToHex()
         currencyIcon = CA.SV.CurrencyIcons and "|t16:16:/esoui/art/currency/currency_writvoucher.dds|t" or ""
-        currencyName = CA.SV.CurrencyWVName
+        currencyName = strformat(CA.SV.CurrencyWVName, UpOrDown)
         currencyTotal = CA.SV.CurrencyWVShowTotal
         messageTotal = CA.SV.CurrencyMessageTotalWV
         
-        -- If we only recieve or lose 1 Writ Voucher, don't add an "s" onto the end of the name
-        if UpOrDown == 1 or UpOrDown == -1 or CA.SV.CurrencyWVName == "" or CA.SV.CurrencyWVName == "WV" or CA.SV.CurrencyWVName == "wv" or CA.SV.CurrencyWVName == "W" or CA.SV.CurrencyWVName == "w" or CA.SV.CurrencyWVName == "V" or CA.SV.CurrencyWVName == "v" then
-            plural = ""
-        else
-            plural = "s"
-        end
-
-        -- If the name is blank, don't add an additional spacer before it after the change value
-        if CA.SV.CurrencyWVName == ( "" ) or CA.SV.CurrencyWVName == ( "wv" ) or CA.SV.CurrencyWVName == ( "w" ) or CA.SV.CurrencyWVName == ( "v" ) then
-            formatHelper = ""
-        else
-            formatHelper = " "
-        end
     else -- If for some reason there is no currency type, end the function now
         return
     end
@@ -2519,9 +2481,12 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason, se
     -- Receive from Quest Reward (4), Medal (21), AH Refund (32), Sell to Fence (63)
     elseif reason == 4 or reason == 21 or reason == 32 or reason == 63 then
         messageChange = CA.SV.CurrencyMessageReceive
-    -- Spend - NPC Conversation (5), Bag Space (8), Bank Space (9), Wayshrine (19), Repairs (29), AH Listing Fee (33), Respec Skills (44), Respec Attributes (45),
+    -- Bag Space (8), Bank Space (9)
+    elseif reason == 8 or reason == 9 then
+        messageChange = CA.SV.CurrencyMessageStorage
+    -- Spend - NPC Conversation (5), Wayshrine (19), Repairs (29), AH Listing Fee (33), Respec Skills (44), Respec Attributes (45),
     -- Unstuck (48), Edit Guild Heraldry (49), Buy Guild Tabard (50), Respec Morphs (55), Pay Fence (56), Launder (60), Champion Respec (61), Buyback (64)
-    elseif reason == 5 or reason == 8 or reason == 9 or reason == 19 or reason == 29 or reason == 33 or reason == 44 or reason == 45 or reason == 48 or reason == 49 or reason == 50 or reason == 55 or reason == 56 or reason == 60 or reason == 61 or reason == 64 then
+    elseif reason == 5 or reason == 19 or reason == 29 or reason == 33 or reason == 44 or reason == 45 or reason == 48 or reason == 49 or reason == 50 or reason == 55 or reason == 56 or reason == 60 or reason == 61 or reason == 64 then
         messageChange = CA.SV.CurrencyMessageSpend
     -- Keep Reward (14), Keep Repair (40), FAKE THROTTLE REASON ALLIANCE POINTS (98)
     elseif reason == 14 or reason == 40 or reason == 98 then
@@ -2592,7 +2557,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason, se
     -- If none of these returned true, then we must have just looted the gold (Potentially a few currency change events I missed too may have to adjust later)
     else messageChange = CA.SV.CurrencyMessageLoot end
 
-    messageP1 = ("|r|c" .. currencyTypeColor .. currencyIcon .. " " .. changeType .. formatHelper .. currencyName .. plural .. "|r|c" .. changeColor)
+    messageP1 = ("|r|c" .. currencyTypeColor .. currencyIcon .. " " .. changeType .. currencyName .. "|r|c" .. changeColor)
 
     if currencyTotal then
         messageP2 = ("|r|c" .. currencyTypeColor .. currencyIcon .. " " .. formattedValue .. "|r|c" .. changeColor)
@@ -2601,7 +2566,27 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason, se
     end
 
     local formattedMessageP1
-    if reason == 96 then
+    if reason == 8 or reason == 9 then
+        
+        local function ResolveStorageType()
+            local bagType
+            local icon
+            if reason == 8 then
+                bagType = GetString(SI_LUIE_CA_STORAGE_BAGTYPE1)
+                icon = CA.SV.LootIcons and "|t16:16:/esoui/art/icons/store_upgrade_bag.dds|t " or ""
+            end
+            
+            if reason == 9 then
+                bagType = GetString(SI_LUIE_CA_STORAGE_BAGTYPE2)
+                icon = CA.SV.LootIcons and "|t16:16:/esoui/art/icons/store_upgrade_bank.dds|t " or ""
+            end
+            
+            return strfmt("|r" .. icon .. "|cFFFFFF" .. bagType .. "|r|c" .. changeColor)
+        end
+        
+        formattedMessageP1 = (strfmt(messageChange, ResolveStorageType(), messageP1))
+    
+    elseif reason == 96 then
     
         local function ResolveRidingStats()
             -- if somevar then icon = else no
@@ -2733,104 +2718,34 @@ function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source
   
 end
 
-function CA.MiscAlertBags(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
-    if CA.SV.MiscBags then
-        local bracket1
-        local bracket2
-        local icon
-        local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED)
-
-        -- If this isn't a bag upgrade purchase then ignore this event. We have a separate event handling mount space upgrades.
-        if currentUpgrade < 1 then
-            return
-        end
-        
-        if currentUpgrade <= previousUpgrade then
-            return
+function CA.StorageBag(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
+    if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
+        if CA.SV.StorageBagCA then
+            local formattedString = StorageBagColorize:Colorize(zo_strformat(SI_INVENTORY_BAG_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
+            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
 
-        if CA.SV.ItemBracketDisplayOptions == 1 then
-            bracket1 = "["
-            bracket2 = "]"
-        elseif CA.SV.ItemBracketDisplayOptions == 2 then
-            bracket1 = "("
-            bracket2 = ")"
-        elseif CA.SV.ItemBracketDisplayOptions == 3 then
-            bracket1 = ""
-            bracket2 = " -"
-        elseif CA.SV.ItemBracketDisplayOptions == 4 then
-            bracket1 = ""
-            bracket2 = ""
-        end
-
-        if CA.SV.LootIcons then
-            icon = "|t16:16:/esoui/art/icons/store_upgrade_bag.dds|t "
-        else
-            icon = ""
-        end
-
-        if CA.SV.ItemContextToggle then
-            logPrefix = ( CA.SV.ItemContextMessage )
-        end
-
-        logPrefix = CurrencyUpColorize:Colorize(strfmt("%s%s%s", bracket1, logPrefix, bracket2))
-
-        if CA.SV.LootCurrencyCombo == true then
-            printToChat(strfmt("%s %s[Bag Space Upgrade] |cFFFFFF%s/8|r%s", logPrefix, icon, currentUpgrade, g_comboString))
-            g_comboString = ""
-        else
-            printToChat(strfmt("%s %s[Bag Space Upgrade] |cFFFFFF%s/8|r", logPrefix, icon, currentUpgrade))
+        if CA.SV.StorageBagAlert then
+            local text = zo_strformat(SI_LUIE_CA_STORAGE_BAG_UPGRADE)
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
         end
     end
 end
 
-function CA.MiscAlertBank(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
-    if CA.SV.MiscBags then
-        local bracket1
-        local bracket2
-        local icon = ""
-        local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED)
-
-        -- If this isn't a bag upgrade purchase then ignore this event. We have a separate event handling mount space upgrades.
-        if currentUpgrade < 1 then
-            return
-        end
-        
-        if currentUpgrade <= previousUpgrade then
-            return
+function CA.StorageBank(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
+    if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
+        if CA.SV.StorageBagCA then
+            local formattedString = StorageBagColorize:Colorize(zo_strformat(SI_INVENTORY_BANK_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
+            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
 
-        if CA.SV.ItemBracketDisplayOptions == 1 then
-            bracket1 = "["
-            bracket2 = "]"
-        elseif CA.SV.ItemBracketDisplayOptions == 2 then
-            bracket1 = "("
-            bracket2 = ")"
-        elseif CA.SV.ItemBracketDisplayOptions == 3 then
-            bracket1 = ""
-            bracket2 = " -"
-        elseif CA.SV.ItemBracketDisplayOptions == 4 then
-            bracket1 = ""
-            bracket2 = ""
-        end
-
-        if CA.SV.LootIcons then
-            icon = "|t16:16:/esoui/art/icons/store_upgrade_bank.dds|t "
-        else
-            icon = ""
-        end
-
-        if CA.SV.ItemContextToggle then
-            logPrefix = CA.SV.ItemContextMessage
-        end
-
-        logPrefix = CurrencyUpColorize:Colorize(strfmt("%s%s%s", bracket1, logPrefix, bracket2))
-
-        if CA.SV.LootCurrencyCombo == true then
-            printToChat(strfmt("%s %s[Bank Space Upgrade] |cFFFFFF%s/18|r%s", logPrefix, icon, currentUpgrade, g_comboString))
-            g_comboString = ""
-        else
-            printToChat(strfmt("%s %s[Bank Space Upgrade] |cFFFFFF%s/18|r", logPrefix, icon, currentUpgrade))
+        if CA.SV.StorageBagAlert then
+            local text = zo_strformat(SI_LUIE_CA_STORAGE_BANK_UPGRADE)
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
         end
     end
 end
@@ -5739,26 +5654,41 @@ function CA.AlertStyleLearned()
     
     local function RidingSkillImprovementAlertHook(ridingSkill, previous, current, source)
         
-        -- If we purchased from the stables, display a currency announcement if relevant
-        -- Additionally, display Chat Announcement here instead of delaying it as the CSA does.
-        if CA.SV.StorageRiding CA and source == RIDING_TRAIN_SOURCE_STABLES then
-            -- TODO: Currency conditional here!!!!
-            local newValue = GetCarriedCurrencyAmount(1)
-            local oldValue = newValue + 250
-            CA.OnCurrencyUpdate(eventCode, 1, newValue, oldValue, 96, ridingSkill)
-            --
+        if source == RIDING_TRAIN_SOURCE_STABLES then
+            -- If we purchased from the stables, display a currency announcement if relevant
+            if CA.SV.StorageRidingCA then
+                -- TODO: Currency conditional here!!!!
+                local newValue = GetCarriedCurrencyAmount(1)
+                local oldValue = newValue + 250
+                CA.OnCurrencyUpdate(eventCode, 1, newValue, oldValue, 96, ridingSkill)
+                --
+                
+                local formattedString = StorageRidingColorize:Colorize(zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
+                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            end
             
-            local formattedString = zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current)
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            if CA.SV.StorageRidingCSA then
+                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
+                messageParams:SetText(GetString(SI_RIDING_SKILL_ANNOUCEMENT_BANNER), zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RIDING_SKILL_IMPROVEMENT)
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
         end
 
-        -- Display Alert
+        -- Display Alert (Detailed alert if purchased at the stables, simple alert if using skill upgrade books to avoid spam)
         if CA.SV.StorageRidingAlert then
-            local text = zo_strformat(SI_RIDING_SKILL_IMPROVEMENT_ALERT, GetString("SI_RIDINGTRAINTYPE", ridingSkill))
-            return ALERT, text
+            local text
+            if source == RIDING_TRAIN_SOURCE_ITEM then
+                text = zo_strformat(SI_RIDING_SKILL_IMPROVEMENT_ALERT, GetString("SI_RIDINGTRAINTYPE", ridingSkill))
+            else
+                text = zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current)
+            end
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
         end
+        
+        return true
     
     end
     
@@ -6469,49 +6399,76 @@ function CA.AlertStyleLearned()
         return true
     end
     
+    -- Note: This function is effected by a throttle in centerscreenannouncehandlers, we resolve any message that needs to be throttled in this function.
     local function RidingSkillImprovementHook(ridingSkill, previous, current, source)
        
-        if CA.SV.StorageRidingCA and source == RIDING_TRAIN_SOURCE_ITEM then
-        
-            -- TODO: if ca.sv.loot or whatever
-                local icon
-                local bookString
-                local value = current - previous
-                local learnString = GetString(SI_LUIE_CA_STORAGE_LEARN)
-                
-                if ridingSkill == 1 then
-                    bookString = "|H1:item:64700:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
-                    icon = "|t16:16:/esoui/art/icons/store_ridinglessons_speed.dds|t "
-                elseif ridingSkill == 2 then
-                    bookString = "|H1:item:64702:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
-                    icon = "|t16:16:/esoui/art/icons/store_ridinglessons_capacity.dds|t "
-                elseif ridingSkill == 3 then
-                    bookString = "|H1:item:64701:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
-                    icon = "|t16:16:/esoui/art/icons/store_ridinglessons_stamina.dds|t "
-                end
-                
-                local messageP1 = CA.SV.LootIcons and (icon .. skillstring) or (skillstring)
-                local finalMessage = strfmt("|cFFFFFF" .. learnString, messageP1, value .. ".|r")
+        if source == RIDING_TRAIN_SOURCE_ITEM then 
+            if CA.SV.StorageRidingCA then
             
+                -- TODO: if ca.sv.loot or whatever
+                    local icon
+                    local bookString
+                    local value = current - previous
+                    local learnString = GetString(SI_LUIE_CA_STORAGE_LEARN)
+                    
+                    if ridingSkill == 1 then
+                        bookString = "|H1:item:64700:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+                        icon = "|t16:16:/esoui/art/icons/store_ridinglessons_speed.dds|t "
+                    elseif ridingSkill == 2 then
+                        bookString = "|H1:item:64702:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+                        icon = "|t16:16:/esoui/art/icons/store_ridinglessons_capacity.dds|t "
+                    elseif ridingSkill == 3 then
+                        bookString = "|H1:item:64701:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+                        icon = "|t16:16:/esoui/art/icons/store_ridinglessons_stamina.dds|t "
+                    end
+                    
+                    local messageP1 = CA.SV.LootIcons and (icon .. bookString) or (bookString)
+                    local finalMessage = strfmt("|cFFFFFF" .. learnString, messageP1, value .. ".|r")
                 
-                g_queuedMessages[g_queuedMessagesCounter] = { message = strb, type = "QUEST" }
+                    
+                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "QUEST" }
+                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                -----
+            
+                local formattedString = StorageRidingColorize:Colorize(zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
+                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
-            -----
+            end
         
-            local formattedString = zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current)
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
-        end
-    
-        if CA.SV.StorageRidingCSA then
-            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
-            messageParams:SetText(GetString(SI_RIDING_SKILL_ANNOUCEMENT_BANNER), zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
-            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RIDING_SKILL_IMPROVEMENT)
-            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            if CA.SV.StorageRidingCSA then
+                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
+                messageParams:SetText(GetString(SI_RIDING_SKILL_ANNOUCEMENT_BANNER), zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RIDING_SKILL_IMPROVEMENT)
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
         end
 
+        return true
+    end
+    
+    local function InventoryBagCapacityHook(previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
+        if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
+            if CA.SV.StorageBagCSA then
+                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
+                messageParams:SetText(GetString(SI_INVENTORY_BAG_UPGRADE_ANOUNCEMENT_TITLE), zo_strformat(SI_INVENTORY_BAG_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_BAG_CAPACITY_CHANGED)
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+        end
+        return true
+    end
+
+    local function InventoryBankCapacityHook(previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
+        if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
+            if CA.SV.StorageBagCSA then
+                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
+                messageParams:SetText(GetString(SI_INVENTORY_BANK_UPGRADE_ANOUNCEMENT_TITLE), zo_strformat(SI_INVENTORY_BANK_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_BANK_CAPACITY_CHANGED)
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+        end
         return true
     end
     
@@ -6543,6 +6500,9 @@ function CA.AlertStyleLearned()
     ZO_PreHook(csaHandlers, EVENT_PLAYER_ACTIVATED, PlayerActivatedHook)
     
     ZO_PreHook(csaHandlers, EVENT_RIDING_SKILL_IMPROVEMENT, RidingSkillImprovementHook)
+    
+    ZO_PreHook(csaHandlers, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, InventoryBagCapacityHook)
+    ZO_PreHook(csaHandlers, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, InventoryBankCapacityHook)
     
    -- ZO_PreHook(csaHandlers, loreEvents[3], LoreCollectionHook)
    -- ZO_PreHook(csaHandlers, loreEvents[4], LoreCollectionXPHook)
