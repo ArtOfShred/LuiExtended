@@ -150,13 +150,17 @@ CA.D = {
     StorageBagAlert               = true,
     
     -- Collectibles/Lorebooks:
-    Collectible                   = false,
-    CollectibleMessage            = "Collection Updated:",
-    CollectibleIcon               = false,
+    CollectibleCA                 = true,
+    CollectibleCSA                = true,
+    CollectibleAlert              = false,
+    CollectibleBracket            = 4,
+    CollectiblePrefix             = GetString("SI_LUIE_CA_COLLECTIBLE"),
+    CollectibleIcon               = true,
     CollectibleColor1             = { 0, .5, 1, 1 },
     CollectibleColor2             = { 1, 1, 1, 1 },
+    CollectibleCategory           = true,
     
-    LorebookCA                    = false, -- Display a CA for Lorebooks
+    LorebookCA                    = true, -- Display a CA for Lorebooks
     LorebookCSA                   = true, -- Display a CSA for Lorebooks
     LorebookAlert                 = false, -- Display a ZO_Alert for Lorebooks
     
@@ -169,7 +173,7 @@ CA.D = {
     
     LorebookIcon                  = false, -- Display an icon for Lorebook CA
     LorebookShowHidden            = false, -- Display books even when they are hidden in the journal menu
-    LorebookShowCategory          = false, -- Display "added to X category" message
+    LorebookCategory              = false, -- Display "added to X category" message
     
     --Lorebook                      = false,
     --LorebookPrefix1               = "Lorebook Discovered:",
@@ -5467,43 +5471,6 @@ end
 -- UPDATED CODE
 -------------------------------------------------------------------------
 
--- EVENT_COLLECTIBLE_UPDATED
--- This handler fires when a collectible is unlocked or added.
-function CA.CollectibleUpdated(eventCode, collectibleId, justUnlocked)
-
-    local collectibleName, _, iconFile = GetCollectibleInfo(collectibleId)
-    local isPlaceholder = IsCollectiblePlaceholder(collectibleId)
-    if not isPlaceholder then
-        local categoryIndex, subcategoryIndex = GetCategoryInfoFromCollectibleId(collectibleId)
-
-        local categoryName = GetCollectibleCategoryInfo(categoryIndex)
-        local subcategoryName = subcategoryIndex and GetCollectibleSubCategoryInfo(categoryIndex, subcategoryIndex) or nil
-
-        local displayedCategory = subcategoryName and subcategoryName or categoryName
-        
-        local link = GetCollectibleLink(collectibleId, LINK_STYLE_BRACKETS)
-        if CA.SV.CollectibleIcon then
-            iconFile = strfmt("|t16:16:%s|t ", iconFile)
-        else
-            iconFile = ("")
-        end
-    
-        local string1 = CollectibleColorize1:Colorize(strformat(CA.SV.CollectibleMessage))
-        local string2 = CollectibleColorize2:Colorize(strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, link, displayedCategory) .. ".")
-        printToChat(strformat("<<1>> <<2>> <<3>>", string1, iconFile, string2))
-    end
-end
-
--- EVENT_COLLECTIBLES_UPDATED
--- This handler fires when a large amount of collectibles is unlocked or added (Crown Store cosmetic bundle packs).
-function CA.CollectiblesUpdated(eventCode, numJustUnlocked)
-    if numJustUnlocked > 0 then
-        local string1 = CollectibleColorize1:Colorize(strformat(CA.SV.CollectibleMessage))
-        local string2 = CollectibleColorize2:Colorize(strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked) .. ".")
-        printToChat(strformat("<<1>> <<2>>", string1, string2))
-    end
-end
-
 -- LINK_HANDLER.LINK_MOUSE_UP_EVENT
 -- LINK_HANDLER.LINK_CLICKED_EVENT
 -- Custom Link Handlers to deal with when a book link in chat is clicked, this will open the book rather than the default link that only shows whether a lore entry has been read or not.
@@ -5717,10 +5684,10 @@ function CA.AlertStyleLearned()
             
             local collectionName, _, numKnownBooks, totalBooks, hidden = GetLoreCollectionInfo(categoryIndex, collectionIndex)
             
-            if not hidden or CA.SV.LorebookShowHidden then
+            if not hidden or not CA.SV.LorebookShowHidden then
                 
                 local title, icon = GetLoreBookInfo(categoryIndex, collectionIndex, bookIndex)
-                local formattedIcon = CA.SV.AchievementsIcon and (" |t16:16:" .. icon .. "|t") or ""
+                local formattedIcon = CA.SV.AchievementsIcon and ("|t16:16:" .. icon .. "|t ") or ""
                 local bookName = strfmt("[%s]", title)
                 local bookLink = strfmt("|H1:LINK_TYPE_LUIBOOK:%s:%s:%s|h%s|h", categoryIndex, collectionIndex, bookIndex, bookName)
                 
@@ -5733,17 +5700,28 @@ function CA.AlertStyleLearned()
                     stringPrefix = CA.SV.LorebookPrefix2
                 end
                 
-                local stringPart1 = strformat("<<1>><<2>><<3>><<4>>", bracket1[CA.SV.LorebookBracket], stringPrefix, bracket2[CA.SV.LorebookBracket], formattedIcon)
-                local stringPart2 = collectionName ~= "" and strformat("<<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), collectionName) or strformat("<<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY))
+                local stringPart1
+                if stringprefix ~= "" then 
+                    stringPart1 = LorebookColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.LorebookBracket], stringPrefix, bracket2[CA.SV.LorebookBracket]))
+                else
+                    stringPart1 = ""
+                end
+                local stringPart2
+                if CA.SV.LorebookCategory then
+                    stringPart2 = collectionName ~= "" and LorebookColorize2:Colorize(strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), collectionName)) or LorebookColorize2:Colorize(strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY)))
+                else
+                    stringPart2 = ""
+                end
                 
                 -- Chat Announcement
                 if CA.SV.LorebookCA then
-                    printToChat(strformat("<<1>> <<2>> <<3>>", LorebookColorize1:Colorize(stringPart1), bookLink, LorebookColorize2:Colorize(stringPart2)))
+                    printToChat(strformat("<<1>><<2>><<3>><<4>>", stringPart1, formattedIcon, bookLink, stringPart2))
                 end
                 
                 -- Alert Announcement
                 if CA.SV.LorebookAlert then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, SOUNDS.BOOK_ACQUIRED, strformat("<<1>><<2>><<3>> <<4>> <<5>>", bracket1[CA.SV.LorebookBracket], stringPrefix, bracket2[CA.SV.LorebookBracket], title, stringPart2) )
+                    local text = collectionName ~= "" and strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), collectionName) or strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY))
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat("<<1>> <<2>>", title, text))
                 end
                 
                 -- Center Screen Announcement 
@@ -5781,25 +5759,36 @@ function CA.AlertStyleLearned()
                 stringPrefix = CA.SV.LorebookPrefix2
             end
             
-            local stringPart1 = strformat("<<1>><<2>><<3>><<4>>", bracket1[CA.SV.LorebookBracket], stringPrefix, bracket2[CA.SV.LorebookBracket], formattedIcon)
-            local stringPart2 = collectionName ~= "" and strformat("<<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), collectionName) or strformat("<<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY))
             
+            local stringPart1
+            if stringprefix ~= "" then 
+                stringPart1 = LorebookColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.LorebookBracket], stringPrefix, bracket2[CA.SV.LorebookBracket]))
+            else
+                stringPart1 = ""
+            end
+            local stringPart2
+            if CA.SV.LorebookCategory then
+                stringPart2 = collectionName ~= "" and LorebookColorize2:Colorize(strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), collectionName)) or LorebookColorize2:Colorize(strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY)))
+            else
+                stringPart2 = ""
+            end
             -- Chat Announcement
             if CA.SV.LorebookCA then
-                printToChat(strformat("<<1>> <<2>> <<3>>", LorebookColorize1:Colorize(stringPart1), bookLink, LorebookColorize2:Colorize(stringPart2)))
+                printToChat(strformat("<<1>><<2>><<3>><<4>>", stringPart1, formattedIcon, bookLink, stringPart2))
             end
             
             -- Alert Announcement
             if CA.SV.LorebookAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, SOUNDS.BOOK_ACQUIRED, strformat("<<1>><<2>><<3>> <<4>> <<5>>", bracket1[CA.SV.LorebookBracket], stringPrefix, bracket2[CA.SV.LorebookBracket], title, stringPart2) )
+                local text = collectionName ~= "" and strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), collectionName) or strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY))
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat("<<1>> <<2>>", title, text))
             end
             
             -- Center Screen Announcement
             if CA.SV.LorebookCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.BOOK_ACQUIRED)
-                local barType = PLAYER_PROGRESS_BAR:GetBarType(PPB_CLASS_SKILL, skillType, skillIndex)
-                local rankStartXP, nextRankStartXP = GetSkillLineRankXPExtents(skillType, skillIndex, rank)
                 if not LUIE.SV.HideXPBar then
+                    local barType = PLAYER_PROGRESS_BAR:GetBarType(PPB_CLASS_SKILL, skillType, skillIndex)
+                    local rankStartXP, nextRankStartXP = GetSkillLineRankXPExtents(skillType, skillIndex, rank)
                     messageParams:SetBarParams(CENTER_SCREEN_ANNOUNCE:CreateBarParams(barType, rank, previousXP - rankStartXP, currentXP - rankStartXP))
                 end
                 if collectionName ~= "" then
@@ -5814,7 +5803,88 @@ function CA.AlertStyleLearned()
         end
         return true
     end
-    
+ 
+    local COLLECTIBLE_EMERGENCY_BACKGROUND = "EsoUI/Art/Guild/guildRanks_iconFrame_selected.dds"
+    local function CollectibleUnlockedHook(collectibleId, justUnlocked)
+        if not justUnlocked then
+            return
+        end
+        
+        local collectibleName, _, iconFile = GetCollectibleInfo(collectibleId)
+        local isPlaceholder = IsCollectiblePlaceholder(collectibleId)
+        if not isPlaceholder then
+        
+            local categoryIndex, subcategoryIndex = GetCategoryInfoFromCollectibleId(collectibleId)
+
+            local categoryName = GetCollectibleCategoryInfo(categoryIndex)
+            local subcategoryName = subcategoryIndex and GetCollectibleSubCategoryInfo(categoryIndex, subcategoryIndex) or nil
+            local displayedCategory = subcategoryName and subcategoryName or categoryName
+
+            if CA.SV.CollectibleCA then
+                local link = GetCollectibleLink(collectibleId, LINK_STYLE_BRACKETS)
+                local formattedIcon = CA.SV.CollectibleIcon and strfmt("|t16:16:%s|t ", iconFile) or ""
+            
+                local string1
+                if CA.SV.CollectiblePrefix ~= "" then 
+                    string1 = CollectibleColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.CollectibleBracket], CA.SV.CollectiblePrefix, bracket2[CA.SV.CollectibleBracket]))
+                else
+                    string1 = ""
+                end
+                local string2
+                if CA.SV.CollectibleCategory then
+                    string2 = CollectibleColorize2:Colorize(strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, link, displayedCategory) .. ".")
+                else
+                    string2 = link
+                end
+                printToChat(strformat("<<1>><<2>><<3>>", string1, formattedIcon, string2))
+            end
+            
+            if CA.SV.CollectibleCSA then
+                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
+                messageParams:SetText(CA.SV.CollectiblePrefix, zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, displayedCategory))
+                messageParams:SetIconData(iconFile, COLLECTIBLE_EMERGENCY_BACKGROUND)
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SINGLE_COLLECTIBLE_UPDATED)
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+            
+            if CA.SV.CollectibleAlert then
+                local text = zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, displayedCategory .. ".")
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
+            end
+            
+        end
+        return true
+    end
+
+    local function CollectiblesUnlockedHook(numJustUnlocked)
+        if numJustUnlocked > 0 then
+            
+            if CA.SV.CollectibleCA then
+                local string1
+                if CA.SV.CollectiblePrefix ~= "" then 
+                    string1 = CollectibleColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.CollectibleBracket], CA.SV.CollectiblePrefix, bracket2[CA.SV.CollectibleBracket]))
+                else
+                    string1 = ""
+                end
+                local string2 = CollectibleColorize2:Colorize(strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked) .. ".")
+                printToChat(strformat("<<1>><<2>>", string1, string2))
+            end
+        
+            if CA.SV.CollectibleCSA then
+                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
+                messageParams:SetText(CA.SV.CollectiblePrefix, zo_strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked))
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COLLECTIBLES_UPDATED)
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+            
+            if CA.SV.CollectibleAlert then
+                local text = zo_strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked) .. "."
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
+            end
+            
+        end
+        return true
+    end 
     
     local function QuestAddedHook(journalIndex, questName, objectiveName)
         local questType = GetJournalQuestType(journalIndex)
@@ -6503,6 +6573,9 @@ function CA.AlertStyleLearned()
     
     ZO_PreHook(csaHandlers, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, InventoryBagCapacityHook)
     ZO_PreHook(csaHandlers, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, InventoryBankCapacityHook)
+    
+    ZO_PreHook(csaHandlers, EVENT_COLLECTIBLE_UPDATED, CollectibleUnlockedHook)
+    ZO_PreHook(csaHandlers, EVENT_COLLECTIBLES_UPDATED, CollectiblesUnlockedHook)
     
    -- ZO_PreHook(csaHandlers, loreEvents[3], LoreCollectionHook)
    -- ZO_PreHook(csaHandlers, loreEvents[4], LoreCollectionXPHook)
