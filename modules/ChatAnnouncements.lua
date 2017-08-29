@@ -85,10 +85,44 @@ CA.D = {
     LootTotal                     = false,
     LootTotalString               = GetString(SI_LUIE_CA_DEFAULTVARS_CURRENCYTOTALMESSAGE),
     
-    ShowSkillPoints               = false,
+    SkillPointCA                  = true,
+    SkillPointCSA                 = true,
+    SkillPointAlert               = false,
+    SkillPointSkyshardMsg         = GetString(SI_SKYSHARD_GAINED),
+    SkillPointBracket             = 4,
     ShowSkillPointsPartial        = false,
-    SkillPointColor               = { 1, 1, 1, 1 },
-    SkillPointMessage             = GetString(SI_LUIE_CA_SKILLPOINT_MESSAGE),
+    SkillPointColor1              = { 0, 1, 1, 1 },
+    SkillPointColor2              = { 1, 1, 1, 1 },
+    
+    SkillLineUnlockCA             = true,
+    SkillLineUnlockCSA            = true,
+    SkillLineUnlockAlert          = false,
+    SkillLineCA                   = false,
+    SkillLineCSA                  = true,
+    SkillLineAlert                = false,
+    SkillAbilityCA                = false,
+    SkillAbilityCSA               = true,
+    SkillAbilityAlert             = false,
+    SkillLineIcon                 = true,
+    SkillLineColor                = { .75, .75, .75, 1},
+    
+    SkillGuildFighters            = false,
+    SkillGuildMages               = false,
+    SkillGuildUndaunted           = false,
+    SkillGuildThieves             = false,
+    SkillGuildDarkBrotherhood     = false,
+    SkillGuildIcon                = true,
+    SkillGuildMsg                 = GetString(SI_LUIE_CA_SKILL_GUILD_MSG),
+    SkillGuildColor               = { .75, .75, .75, 1},
+    SkillGuildColorFG             = { .75, .37, 0, 1},
+    SkillGuildColorMG             = { 0, .52, .75, 1},
+    SkillGuildColorUD             = { .58, .75, 0, 1},
+    SkillGuildColorTG             = { .29, .27, .42, 1},
+    SkillGuildColorDB             = { .70, 0, .19, 1},
+    
+    SkillGuildThrottle            = 0,
+    SkillGuildThreshold           = 0,
+    SkillGuildAlert               = false,
     
     LootCraft                     = true,
     LootCurrencyCombo             = false,
@@ -154,7 +188,7 @@ CA.D = {
     CollectibleCSA                = true,
     CollectibleAlert              = false,
     CollectibleBracket            = 4,
-    CollectiblePrefix             = GetString("SI_LUIE_CA_COLLECTIBLE"),
+    CollectiblePrefix             = GetString(SI_LUIE_CA_COLLECTIBLE),
     CollectibleIcon               = true,
     CollectibleColor1             = { 0, .5, 1, 1 },
     CollectibleColor2             = { 1, 1, 1, 1 },
@@ -163,6 +197,11 @@ CA.D = {
     LorebookCA                    = true, -- Display a CA for Lorebooks
     LorebookCSA                   = true, -- Display a CSA for Lorebooks
     LorebookAlert                 = false, -- Display a ZO_Alert for Lorebooks
+    
+    LorebookCollectionCA          = true,
+    LorebookCollectionCSA         = true,
+    LorebookCollectionAlert       = false,
+    LorebookCollectionPrefix      = GetString(SI_LORE_LIBRARY_COLLECTION_COMPLETED_LARGE),
     
     LorebookPrefix1               = GetString(SI_LUIE_CA_LOREBOOK_BOOK),
     LorebookPrefix2               = GetString(SI_LORE_LIBRARY_ANNOUNCE_BOOK_LEARNED),
@@ -380,7 +419,16 @@ local AchievementsColorize
 local ExperienceMessageColorize
 local ExperienceNameColorize
 local LevelUpColorize
-local SkillPointColorize
+local SkillPointColorize1
+local SkillPointColorize2
+local SkillLineColorize
+
+local SkillGuildColorize
+local SkillGuildColorizeFG
+local SkillGuildColorizeMG
+local SkillGuildColorizeUD
+local SkillGuildColorizeTG
+local SkillGuildColorizeDB
 
 -----------------------------------
 -- UPDATED CODE (VARIABLES)
@@ -523,6 +571,13 @@ function CA.Initialize(enabled)
     -- TODO: Possibly don't register these unless enabled, I'm not sure -- at least move to better sorted order
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, CA.StorageBag)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, CA.StorageBank)
+    -- TODO: Move these too:
+    LINK_HANDLER:RegisterCallback(LINK_HANDLER.LINK_MOUSE_UP_EVENT, LUIE.HandleClickEvent) 
+    LINK_HANDLER:RegisterCallback(LINK_HANDLER.LINK_CLICKED_EVENT, LUIE.HandleClickEvent)
+    
+    -- TODO: also move this
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_SKILL_XP_UPDATE, CA.SkillXPUpdate)
+    
     CA.RegisterHorseEvents()
     CA.RegisterGuildEvents()
     CA.RegisterSocialEvents()
@@ -557,7 +612,16 @@ function CA.RegisterColorEvents()
     ExperienceMessageColorize = ZO_ColorDef:New(unpack(CA.SV.ExperienceColorMessage)):ToHex()
     ExperienceNameColorize = ZO_ColorDef:New(unpack(CA.SV.ExperienceColorName)):ToHex()
     LevelUpColorize = ZO_ColorDef:New(unpack(CA.SV.ExperienceLevelUpColor))
-    SkillPointColorize = ZO_ColorDef:New(unpack(CA.SV.SkillPointColor))
+    SkillPointColorize1 = ZO_ColorDef:New(unpack(CA.SV.SkillPointColor1))
+    SkillPointColorize2 = ZO_ColorDef:New(unpack(CA.SV.SkillPointColor2))
+    SkillLineColorize = ZO_ColorDef:New(unpack(CA.SV.SkillLineColor))
+    
+    SkillGuildColorize = ZO_ColorDef:New(unpack(CA.SV.SkillGuildColor)):ToHex()
+    SkillGuildColorizeFG = ZO_ColorDef:New(unpack(CA.SV.SkillGuildColorFG)):ToHex()
+    SkillGuildColorizeMG = ZO_ColorDef:New(unpack(CA.SV.SkillGuildColorMG)):ToHex()
+    SkillGuildColorizeUD = ZO_ColorDef:New(unpack(CA.SV.SkillGuildColorUD)):ToHex()
+    SkillGuildColorizeTG = ZO_ColorDef:New(unpack(CA.SV.SkillGuildColorTG)):ToHex()
+    SkillGuildColorizeDB = ZO_ColorDef:New(unpack(CA.SV.SkillGuildColorDB)):ToHex()
     
     QuestColorLocNameColorize = ZO_ColorDef:New(unpack(CA.SV.QuestColorLocName)):ToHex()
     QuestColorLocDescriptionColorize = ZO_ColorDef:New(unpack(CA.SV.QuestColorLocDescription)):ToHex()
@@ -578,8 +642,6 @@ function CA.RegisterCollectibleEvents()
     end
     if CA.SV.Lorebook then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LORE_BOOK_LEARNED, CA.LoreBookLearned)
-        LINK_HANDLER:RegisterCallback(LINK_HANDLER.LINK_MOUSE_UP_EVENT, LUIE.HandleClickEvent) 
-        LINK_HANDLER:RegisterCallback(LINK_HANDLER.LINK_CLICKED_EVENT, LUIE.HandleClickEvent)
     end
 end
 
@@ -3533,21 +3595,8 @@ end
 
 function CA.SkillPointsChanged(eventCode, pointsBefore, pointsNow, partialPointsBefore, partialPointsNow)
 
-    if partialPointsBefore ~= partialPointsNow and CA.SV.ShowSkillPointsPartial then
-        if partialPointsNow == 0 then
-            if pointsNow <= pointsBefore then
-                return
-            end
-            printToChat(SkillPointColorize:Colorize(strformat(SI_SKYSHARD_GAINED)))
-            printToChat(SkillPointColorize:Colorize(strformat(CA.SV.SkillPointMessage, pointsNow - pointsBefore)))
-        else
-            printToChat(SkillPointColorize:Colorize(strformat(SI_SKYSHARD_GAINED)))
-            printToChat(SkillPointColorize:Colorize(strformat(SI_SKYSHARD_GAINED_POINTS, partialPointsNow, NUM_PARTIAL_SKILL_POINTS_FOR_FULL)))
-        end
-    elseif pointsNow > pointsBefore then
-        printToChat(SkillPointColorize:Colorize(strformat(CA.SV.SkillPointMessage, pointsNow - pointsBefore)))
-    end
-    
+-- TODO: Unregister, remove!
+
 end
 
 function CA.OnExperienceGain(eventCode, reason, level, previousExperience, currentExperience, championPoints)
@@ -5581,6 +5630,33 @@ local function GetCurrentChampionPointsBarParams()
     return barParams
 end
 
+-- local vars for EVENT_SKILL_XP
+
+local GUILD_SKILL_SHOW_REASONS =
+{
+    [PROGRESS_REASON_DARK_ANCHOR_CLOSED] = true,
+    [PROGRESS_REASON_DARK_FISSURE_CLOSED] = true,
+    [PROGRESS_REASON_BOSS_KILL] = true,
+}
+
+local GUILD_SKILL_SHOW_SOUNDS =
+{
+    [PROGRESS_REASON_DARK_ANCHOR_CLOSED] = SOUNDS.SKILL_XP_DARK_ANCHOR_CLOSED,
+    [PROGRESS_REASON_DARK_FISSURE_CLOSED] = SOUNDS.SKILL_XP_DARK_FISSURE_CLOSED,
+    [PROGRESS_REASON_BOSS_KILL] = SOUNDS.SKILL_XP_BOSS_KILLED,
+}
+
+local GUILD_SKILL_ICONS =
+{
+
+    [1] = "esoui/art/icons/mapkey/mapkey_fightersguild.dds",
+    [2] = "esoui/art/icons/mapkey/mapkey_magesguild.dds",
+    [3] = "esoui/art/icons/mapkey/mapkey_undaunted.dds",
+    [4] = "esoui/art/icons/mapkey/mapkey_thievesguild.dds",
+    [5] = "esoui/art/icons/mapkey/mapkey_darkbrotherhood.dds",
+}
+
+
 -- Alert Prehooks
 function CA.AlertStyleLearned()
     
@@ -5670,12 +5746,6 @@ function CA.AlertStyleLearned()
     
 
 	local csaHandlers = ZO_CenterScreenAnnounce_GetHandlers()
-	
-    -- Table of lore events to use for hooking handlers
-	local loreEvents = {
-		EVENT_LORE_COLLECTION_COMPLETED,
-		EVENT_LORE_COLLECTION_COMPLETED_SKILL_EXPERIENCE,
-	}
     
     local function LoreBookHook(categoryIndex, collectionIndex, bookIndex, guildReputationIndex, isMaxRank)
         if guildReputationIndex == 0 or isMaxRank then
@@ -5684,43 +5754,49 @@ function CA.AlertStyleLearned()
             
             local collectionName, _, numKnownBooks, totalBooks, hidden = GetLoreCollectionInfo(categoryIndex, collectionIndex)
             
-            if not hidden or not CA.SV.LorebookShowHidden then
+            if not hidden or CA.SV.LorebookShowHidden then
                 
                 local title, icon = GetLoreBookInfo(categoryIndex, collectionIndex, bookIndex)
-                local formattedIcon = CA.SV.AchievementsIcon and ("|t16:16:" .. icon .. "|t ") or ""
                 local bookName = strfmt("[%s]", title)
                 local bookLink = strfmt("|H1:LINK_TYPE_LUIBOOK:%s:%s:%s|h%s|h", categoryIndex, collectionIndex, bookIndex, bookName)
                 
-                local stringPrefix = ""
+                local stringPrefix
+                local csaPrefix
                 if categoryIndex == 1 then 
                     -- Is a lore book
                     stringPrefix = CA.SV.LorebookPrefix1
+                    csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_LORE_LIBRARY_ANNOUNCE_BOOK_LEARNED)
                 else
                     -- Is a normal book
                     stringPrefix = CA.SV.LorebookPrefix2
-                end
-                
-                local stringPart1
-                if stringprefix ~= "" then 
-                    stringPart1 = LorebookColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.LorebookBracket], stringPrefix, bracket2[CA.SV.LorebookBracket]))
-                else
-                    stringPart1 = ""
-                end
-                local stringPart2
-                if CA.SV.LorebookCategory then
-                    stringPart2 = collectionName ~= "" and LorebookColorize2:Colorize(strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), collectionName)) or LorebookColorize2:Colorize(strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY)))
-                else
-                    stringPart2 = ""
+                    csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_LUIE_CA_LOREBOOK_BOOK)
                 end
                 
                 -- Chat Announcement
                 if CA.SV.LorebookCA then
-                    printToChat(strformat("<<1>><<2>><<3>><<4>>", stringPart1, formattedIcon, bookLink, stringPart2))
+                    local formattedIcon = CA.SV.LorebookIcon and ("|t16:16:" .. icon .. "|t ") or ""
+                    local stringPart1
+                    local stringPart2
+                    if stringPrefix ~= "" then 
+                        stringPart1 = LorebookColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.LorebookBracket], stringPrefix, bracket2[CA.SV.LorebookBracket]))
+                    else
+                        stringPart1 = ""
+                    end
+                    if CA.SV.LorebookCategory then
+                        stringPart2 = collectionName ~= "" and LorebookColorize2:Colorize(strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), collectionName)) or LorebookColorize2:Colorize(strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY)))
+                    else
+                        stringPart2 = ""
+                    end
+                
+                    local finalMessage = strformat("<<1>><<2>><<3>><<4>>", stringPart1, formattedIcon, bookLink, stringPart2)
+                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "LOREBOOK" }
+                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
                 
                 -- Alert Announcement
                 if CA.SV.LorebookAlert then
-                    local text = collectionName ~= "" and strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), collectionName) or strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY))
+                    local text = collectionName ~= "" and strformat("<<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), collectionName) or strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY))
                     ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat("<<1>> <<2>>", title, text))
                 end
                 
@@ -5728,13 +5804,16 @@ function CA.AlertStyleLearned()
                 if CA.SV.LorebookCSA then
                     local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.BOOK_ACQUIRED)
                     if collectionName ~= "" then
-                        messageParams:SetText(stringPrefix, strformat(SI_LUIE_CA_LOREBOOK_ADDED_CSA, title, collectionName))
+                        messageParams:SetText(csaPrefix, strformat(SI_LUIE_CA_LOREBOOK_ADDED_CSA, title, collectionName))
                     else
-                        messageParams:SetText(stringPrefix, strformat(SI_LUIE_CA_LOREBOOK_ADDED_CSA, title, GetString(SI_WINDOW_TITLE_LORE_LIBRARY)))
+                        messageParams:SetText(csaPrefix, strformat(SI_LUIE_CA_LOREBOOK_ADDED_CSA, title, GetString(SI_WINDOW_TITLE_LORE_LIBRARY)))
                     end
                     messageParams:SetIconData(icon, "EsoUI/Art/Achievements/achievements_iconBG.dds")
                     messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_LORE_BOOK_LEARNED)
                     CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+                end
+                if not CA.SV.LorebookCSA then
+                    PlaySound(SOUNDS.BOOK_ACQUIRED)
                 end
             end
         end
@@ -5746,40 +5825,46 @@ function CA.AlertStyleLearned()
         
             local collectionName, _, numKnownBooks, totalBooks, hidden = GetLoreCollectionInfo(categoryIndex, collectionIndex)
             local title, icon = GetLoreBookInfo(categoryIndex, collectionIndex, bookIndex)
-            local formattedIcon = CA.SV.AchievementsIcon and ("|t16:16:" .. icon .. "|t ") or ""
             local bookName = strfmt("[%s]", title)
             local bookLink = strfmt("|H1:LINK_TYPE_LUIBOOK:%s:%s:%s|h%s|h", categoryIndex, collectionIndex, bookIndex, bookName)
             
-            local stringPrefix = ""
+            local stringPrefix
+            local csaPrefix
             if categoryIndex == 1 then 
                 -- Is a lore book
                 stringPrefix = CA.SV.LorebookPrefix1
+                csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_LORE_LIBRARY_ANNOUNCE_BOOK_LEARNED)
             else
                 -- Is a normal book
                 stringPrefix = CA.SV.LorebookPrefix2
+                csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_LUIE_CA_LOREBOOK_BOOK)
             end
             
-            
-            local stringPart1
-            if stringprefix ~= "" then 
-                stringPart1 = LorebookColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.LorebookBracket], stringPrefix, bracket2[CA.SV.LorebookBracket]))
-            else
-                stringPart1 = ""
-            end
-            local stringPart2
-            if CA.SV.LorebookCategory then
-                stringPart2 = collectionName ~= "" and LorebookColorize2:Colorize(strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), collectionName)) or LorebookColorize2:Colorize(strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY)))
-            else
-                stringPart2 = ""
-            end
             -- Chat Announcement
             if CA.SV.LorebookCA then
-                printToChat(strformat("<<1>><<2>><<3>><<4>>", stringPart1, formattedIcon, bookLink, stringPart2))
+                local formattedIcon = CA.SV.LorebookIcon and ("|t16:16:" .. icon .. "|t ") or ""
+                local stringPart1
+                local stringPart2
+                if stringPrefix ~= "" then 
+                    stringPart1 = LorebookColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.LorebookBracket], stringPrefix, bracket2[CA.SV.LorebookBracket]))
+                else
+                    stringPart1 = ""
+                end
+                if CA.SV.LorebookCategory then
+                    stringPart2 = collectionName ~= "" and LorebookColorize2:Colorize(strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), collectionName)) or LorebookColorize2:Colorize(strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY)))
+                else
+                    stringPart2 = ""
+                end
+            
+                local finalMessage = strformat("<<1>><<2>><<3>><<4>>", stringPart1, formattedIcon, bookLink, stringPart2)
+                g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "LOREBOOK" }
+                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
             
             -- Alert Announcement
             if CA.SV.LorebookAlert then
-                local text = collectionName ~= "" and strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), collectionName) or strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY))
+                local text = collectionName ~= "" and strformat("<<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), collectionName) or strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY))
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat("<<1>> <<2>>", title, text))
             end
             
@@ -5792,23 +5877,359 @@ function CA.AlertStyleLearned()
                     messageParams:SetBarParams(CENTER_SCREEN_ANNOUNCE:CreateBarParams(barType, rank, previousXP - rankStartXP, currentXP - rankStartXP))
                 end
                 if collectionName ~= "" then
-                    messageParams:SetText(stringPrefix, strformat(SI_LUIE_CA_LOREBOOK_ADDED_CSA, title, collectionName))
+                    messageParams:SetText(csaPrefix, strformat(SI_LUIE_CA_LOREBOOK_ADDED_CSA, title, collectionName))
                 else
-                    messageParams:SetText(stringPrefix, strformat(SI_LUIE_CA_LOREBOOK_ADDED_CSA, title, GetString(SI_WINDOW_TITLE_LORE_LIBRARY)))
+                    messageParams:SetText(csaPrefix, strformat(SI_LUIE_CA_LOREBOOK_ADDED_CSA, title, GetString(SI_WINDOW_TITLE_LORE_LIBRARY)))
                 end
                 messageParams:SetIconData(icon, "EsoUI/Art/Achievements/achievements_iconBG.dds")
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_LORE_BOOK_LEARNED_SKILL_EXPERIENCE)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
+            if not CA.SV.LorebookCSA then
+                PlaySound(SOUNDS.BOOK_ACQUIRED)
+            end
+        end
+        return true
+    end
+    
+    local function LoreCollectionHook(categoryIndex, collectionIndex, bookIndex, guildReputationIndex, isMaxRank)
+        if guildReputationIndex == 0 or isMaxRank then
+            -- Only fire this message if we're not part of the guild or at max level within the guild.
+            -- TODO: Fix, this condition doesn't work
+            local collectionName, description, numKnownBooks, totalBooks, hidden , textureName = GetLoreCollectionInfo(categoryIndex, collectionIndex)
+            local stringPrefix = CA.SV.LorebookCollectionPrefix
+            local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_LORE_LIBRARY_COLLECTION_COMPLETED_LARGE)
+            if not hidden or CA.SV.LorebookShowHidden then
+                
+                if CA.SV.LorebookCollectionCA then
+                    local formattedIcon
+                    local stringPart1
+                    local stringPart2
+                    if stringPrefix ~= "" then
+                        stringPart1 = LorebookColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.LorebookBracket], stringPrefix, bracket2[CA.SV.LorebookBracket]))
+                    else
+                        stringPart1 = ""
+                    end
+                    if textureName ~= "" and textureName ~= nil then
+                        formattedIcon = CA.SV.LorebookIcon and ("|t16:16:" .. textureName .. "|t ") or ""
+                    end
+                    if CA.SV.LorebookCategory then
+                        stringPart2 = LorebookColorize2:Colorize(zo_strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
+                    else
+                        stringPart2 = ""
+                    end
+                    
+                    local finalMessage = strformat("<<1>><<2>><<3>>", stringPart1, formattedIcon, stringPart2)
+                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "LOREBOOK" }
+                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                end
+                
+                if CA.SV.LorebookCollectionCSA then
+                    local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.BOOK_COLLECTION_COMPLETED)
+                    messageParams:SetText(csaPrefix, zo_strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
+                    messageParams:SetIconData(textureName)
+                    messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_LORE_COLLECTION_COMPLETED)
+                    CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+                end
+                
+                if CA.SV.LorebookCollectionAlert then
+                   local text = zo_strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName)
+                   ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
+                end
+                if not CA.SV.LorebookCSA then
+                    PlaySound(SOUNDS.BOOK_COLLECTION_COMPLETED)
+                end
+                
+            end
+        end
+        return true
+    end
+
+    local function LoreCollectionXPHook(categoryIndex, collectionIndex, guildReputationIndex, skillType, skillIndex, rank, previousXP, currentXP)
+        if guildReputationIndex > 0 then
+            local collectionName, description, numKnownBooks, totalBooks, hidden, textureName = GetLoreCollectionInfo(categoryIndex, collectionIndex)
+            local stringPrefix = CA.SV.LorebookCollectionPrefix
+            local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_LORE_LIBRARY_COLLECTION_COMPLETED_LARGE)
+            if not hidden or CA.SV.LorebookShowHidden then
+            
+                if CA.SV.LorebookCollectionCA then
+                    local formattedIcon
+                    local stringPart1
+                    local stringPart2
+                    if stringPrefix ~= "" then
+                        stringPart1 = LorebookColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.LorebookBracket], stringPrefix, bracket2[CA.SV.LorebookBracket]))
+                    else
+                        stringPart1 = ""
+                    end
+                    if textureName ~= "" and textureName ~= nil then
+                        formattedIcon = CA.SV.LorebookIcon and ("|t16:16:" .. textureName .. "|t ") or ""
+                    end
+                    if CA.SV.LorebookCategory then
+                        stringPart2 = LorebookColorize2:Colorize(zo_strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
+                    else
+                        stringPart2 = ""
+                    end
+                    
+                    local finalMessage = strformat("<<1>><<2>><<3>>", stringPart1, formattedIcon, stringPart2)
+                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "LOREBOOK" }
+                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                end
+            
+                if CA.SV.LorebookCollectionCSA then
+                    local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.BOOK_COLLECTION_COMPLETED)
+                    if not LUIE.SV.HideXPBar then
+                        local barType = PLAYER_PROGRESS_BAR:GetBarType(PPB_CLASS_SKILL, skillType, skillIndex)
+                        local rankStartXP, nextRankStartXP = GetSkillLineRankXPExtents(skillType, skillIndex, rank)
+                        messageParams:SetBarParams(CENTER_SCREEN_ANNOUNCE:CreateBarParams(barType, rank, previousXP - rankStartXP, currentXP - rankStartXP))
+                    end
+                    messageParams:SetText(csaPrefix, zo_strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
+                    messageParams:SetIconData(textureName)
+                    messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_LORE_COLLECTION_COMPLETED_SKILL_EXPERIENCE)
+                    CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+                end
+                
+                if CA.SV.LorebookCollectionAlert then
+                   local text = zo_strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName)
+                   ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
+                end
+                if not CA.SV.LorebookCSA then
+                    PlaySound(SOUNDS.BOOK_COLLECTION_COMPLETED)
+                end
+                
+            end
+        end
+        return true
+    end
+    
+    local function SkillPointsChangedHook(oldPoints, newPoints, oldPartialPoints, newPartialPoints)
+        local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
+        local stringPrefix = CA.SV.SkillPointSkyshardMsg
+        local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_SKYSHARD_GAINED)
+        
+        local stringPart1 -- CA
+        local stringPart2 -- CA
+        local finalMessage -- CA
+        local finalText -- Alert
+        local sound -- All
+        
+        if oldPartialPoints ~= newPartialPoints then
+            sound = SOUNDS.SKYSHARD_GAINED
+            if newPartialPoints == 0 then
+                if newPoints <= oldPoints then
+                    return
+                end
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_GAINED)
+                messageParams:SetText(csaPrefix, zo_strformat(SI_SKILL_POINT_GAINED, newPoints - oldPoints))
+                text = zo_strformat(SI_SKILL_POINT_GAINED, newPoints - oldPoints)
+                finalText = zo_strformat("<<1>> (3/3)", csaPrefix)
+                
+                if stringPrefix ~= "" then
+                    stringPart1 = SkillPointColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.SkillPointBracket], stringPrefix, bracket2[CA.SV.SkillPointBracket]))
+                else
+                    stringPart1 = ""
+                end
+                stringPart2 = SkillPointColorize2:Colorize(zo_strformat(SI_SKILL_POINT_GAINED, newPoints - oldPoints))
+                finalMessage = strformat("<<1>><<2>>.", stringPart1, stringPart2)
+            else
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_PARTIAL_GAINED)
+                messageParams:SetText(csaPrefix, zo_strformat(SI_SKYSHARD_GAINED_POINTS, newPartialPoints, NUM_PARTIAL_SKILL_POINTS_FOR_FULL))
+                textPart1 = (stringPrefix .. ": ")
+                finalText = zo_strformat("<<1>> (<<2>>/3)", csaPrefix, newPoints-oldPoints)
+                
+                if stringPrefix ~= "" then
+                    if CA.SV.ShowSkillPointsPartial then
+                        stringPart1 = SkillPointColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.SkillPointBracket], stringPrefix, bracket2[CA.SV.SkillPointBracket]))
+                    else
+                        stringPart1 = SkillPointColorize1:Colorize(strformat("<<1>>!", stringPrefix))
+                    end
+                else
+                    stringPart1 = ""
+                end
+                if CA.SV.ShowSkillPointsPartial then
+                    stringPart2 = SkillPointColorize2:Colorize(zo_strformat(SI_SKYSHARD_GAINED_POINTS, newPartialPoints, NUM_PARTIAL_SKILL_POINTS_FOR_FULL))
+                else
+                    stringPart2 = ""
+                end
+                finalMessage = strformat("<<1>><<2>>", stringPart1, stringPart2)
+            end
+        elseif newPoints > oldPoints then
+            sound = SOUNDS.SKILL_GAINED
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_GAINED)
+            messageParams:SetText(zo_strformat(SI_SKILL_POINT_GAINED, newPoints - oldPoints))
+            
+            finalMessage = SkillPointColorize2:Colorize(zo_strformat(SI_SKILL_POINT_GAINED, newPoints - oldPoints) .. ".")
+            finalText = zo_strformat(SI_SKILL_POINT_GAINED, newPoints - oldPoints) .. "."
+        end
+        
+        if CA.SV.SkillPointCA then
+            if finalMessage ~= "" then
+                g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "SKILL" }
+                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            end
+        end
+        if CA.SV.SkillPointCSA then
+            messageParams:SetSound(sound)
+            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        end
+        if CA.SV.SkillPointAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, finalText)
+        end
+        if not CA.SV.SkillPointCSA then
+            PlaySound(Sound)
+        end
+        return true
+    end
+
+    local function SkillLineAddedHook(skillType, lineIndex)
+        local lineName = GetSkillLineInfo(skillType, lineIndex)
+        local icon = select(4, ZO_Skills_GetIconsForSkillType(skillType))
+        
+        if CA.SV.SkillLineUnlockCA then
+            local formattedIcon = CA.SV.SkillLineIcon and ("|t16:16:" .. icon .. "|t ") or ""
+            local formattedString = SkillLineColorize:Colorize(zo_strformat(SI_LUIE_CA_SKILL_LINE_ADDED, formattedIcon, lineName))
+            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            
+        end
+        
+        local discoverIcon = zo_iconFormat(icon, 32, 32)
+        if CA.SV.SkillLineUnlockCSA then
+            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.SKILL_LINE_ADDED)
+            local formattedIcon = zo_iconFormat(icon, 32, 32)
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_LINE_ADDED)
+            messageParams:SetText(zo_strformat(SI_SKILL_LINE_ADDED, formattedIcon, lineName))
+            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        end
+        
+        if CA.SV.SkillLineUnlockAlert then
+            local formattedIcon = zo_iconFormat(icon, "75%", "75%")
+            local text = zo_strformat(SI_SKILL_LINE_ADDED, formattedIcon, lineName)
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
+        end
+        if not CA.SV.SkillLineUnlockCSA then
+            PlaySound(SOUNDS.SKILL_LINE_ADDED)
         end
         return true
     end
  
+    local function AbilityProgressionRankHook(progressionIndex, rank, maxRank, morph)
+        local _, _, _, atMorph = GetAbilityProgressionXPInfo(progressionIndex)
+        local name = GetAbilityProgressionAbilityInfo(progressionIndex, morph, rank)
+        
+        if atMorph then
+            if CA.SV.SkillAbilityCA then
+                formattedString = SkillLineColorize:Colorize(zo_strformat(SI_MORPH_AVAILABLE_ANNOUNCEMENT, name) .. ".")
+                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL" }
+                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            end
+            
+            if CA.SV.SkillAbilityCSA then
+                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.ABILITY_MORPH_AVAILABLE)
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_ABILITY_PROGRESSION_RANK_MORPH)
+                messageParams:SetText(zo_strformat(SI_MORPH_AVAILABLE_ANNOUNCEMENT, name))
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+            
+            if CA.SV.SkillAbilityAlert then
+                local text = zo_strformat(SI_MORPH_AVAILABLE_ANNOUNCEMENT, name) .. "."
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
+            end
+            
+            if not CA.SV.SkillAbilityCSA then
+                PlaySound(SOUNDS.ABILITY_MORPH_AVAILABLE)
+            end   
+        else
+            if CA.SV.SkillAbilityCA then
+                formattedString = SkillLineColorize:Colorize(zo_strformat(SI_LUIE_CA_ABILITY_RANK_UP, name, rank) .. ".")
+                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL" }
+                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            end
+            
+            if CA.SV.SkillAbilityCSA then
+                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.ABILITY_RANK_UP)
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_ABILITY_PROGRESSION_RANK_UPDATE)
+                messageParams:SetText(zo_strformat(SI_LUIE_CA_ABILITY_RANK_UP, name, rank))
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+            
+            if CA.SV.SkillAbilityAlert then
+                local text = zo_strformat(SI_LUIE_CA_ABILITY_RANK_UP, name, rank) .. "."
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
+            end
+            
+            if not CA.SV.SkillAbilityCSA then
+                PlaySound(SOUNDS.ABILITY_RANK_UP)
+            end   
+            
+        end
+        return true
+    end
+    
+    local function SkillRankUpdateHook(skillType, lineIndex, rank)
+        -- crafting skill updates get deferred if they're increased while crafting animations are in progress
+        -- ZO_Skills_TieSkillInfoHeaderToCraftingSkill handles triggering the deferred center screen announce in that case
+        if skillType ~= SKILL_TYPE_RACIAL and (skillType ~= SKILL_TYPE_TRADESKILL or not ZO_CraftingUtils_IsPerformingCraftProcess()) then
+            local lineName, _, discovered = GetSkillLineInfo(skillType, lineIndex)
+            if discovered then
+                
+                if CA.SV.SkillLineCA then
+                    local formattedString = SkillLineColorize:Colorize(zo_strformat(SI_SKILL_RANK_UP, lineName, rank) .. ".")
+                    g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL" }
+                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                end
+                
+                if CA.SV.SkillLineCSA then
+                    local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.SKILL_LINE_LEVELED_UP)
+                    messageParams:SetText(zo_strformat(SI_SKILL_RANK_UP, lineName, rank))
+                    messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_RANK_UPDATE)
+                    CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+                end
+                
+                if CA.SV.SkillLineAlert then
+                    local formattedText = zo_strformat(SI_SKILL_RANK_UP, lineName, rank) .. "."
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, formattedText)
+                end
+                
+                if not CA.SV.SkillLineCSA then
+                    PlaySound(SOUNDS.SKILL_LINE_LEVELED_UP)
+                end
+                
+            end
+        end
+        return true
+    end
+
+    local function SkillXPUpdateHook(skillType, skillIndex, reason, rank, previousXP, currentXP)
+        if (skillType == SKILL_TYPE_GUILD and GUILD_SKILL_SHOW_REASONS[reason]) or reason == PROGRESS_REASON_JUSTICE_SKILL_EVENT then
+            if not LUIE.SV.HideXPBar then
+                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_NO_TEXT)
+                local barType = PLAYER_PROGRESS_BAR:GetBarType(PPB_CLASS_SKILL, skillType, skillIndex)
+                local rankStartXP, nextRankStartXP = GetSkillLineRankXPExtents(skillType, skillIndex, rank)
+                local sound = GUILD_SKILL_SHOW_SOUNDS[reason]
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_XP_UPDATE)
+                messageParams:SetBarParams(CENTER_SCREEN_ANNOUNCE:CreateBarParams(barType, rank, previousXP - rankStartXP, currentXP - rankStartXP, sound))
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+        end
+        return true
+        
+    end
+    
     local COLLECTIBLE_EMERGENCY_BACKGROUND = "EsoUI/Art/Guild/guildRanks_iconFrame_selected.dds"
     local function CollectibleUnlockedHook(collectibleId, justUnlocked)
         if not justUnlocked then
             return
         end
+        
+        local stringPrefix = CA.SV.CollectiblePrefix
+        local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_TITLE)
         
         local collectibleName, _, iconFile = GetCollectibleInfo(collectibleId)
         local isPlaceholder = IsCollectiblePlaceholder(collectibleId)
@@ -5825,8 +6246,8 @@ function CA.AlertStyleLearned()
                 local formattedIcon = CA.SV.CollectibleIcon and strfmt("|t16:16:%s|t ", iconFile) or ""
             
                 local string1
-                if CA.SV.CollectiblePrefix ~= "" then 
-                    string1 = CollectibleColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.CollectibleBracket], CA.SV.CollectiblePrefix, bracket2[CA.SV.CollectibleBracket]))
+                if stringPrefix ~= "" then 
+                    string1 = CollectibleColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.CollectibleBracket], stringPrefix, bracket2[CA.SV.CollectibleBracket]))
                 else
                     string1 = ""
                 end
@@ -5841,7 +6262,7 @@ function CA.AlertStyleLearned()
             
             if CA.SV.CollectibleCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
-                messageParams:SetText(CA.SV.CollectiblePrefix, zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, displayedCategory))
+                messageParams:SetText(csaPrefix, zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, displayedCategory))
                 messageParams:SetIconData(iconFile, COLLECTIBLE_EMERGENCY_BACKGROUND)
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SINGLE_COLLECTIBLE_UPDATED)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
@@ -5858,11 +6279,14 @@ function CA.AlertStyleLearned()
 
     local function CollectiblesUnlockedHook(numJustUnlocked)
         if numJustUnlocked > 0 then
+        
+            local stringPrefix = CA.SV.CollectiblePrefix
+            local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_TITLE)
             
             if CA.SV.CollectibleCA then
                 local string1
-                if CA.SV.CollectiblePrefix ~= "" then 
-                    string1 = CollectibleColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.CollectibleBracket], CA.SV.CollectiblePrefix, bracket2[CA.SV.CollectibleBracket]))
+                if stringPrefix ~= "" then 
+                    string1 = CollectibleColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.CollectibleBracket], stringPrefix, bracket2[CA.SV.CollectibleBracket]))
                 else
                     string1 = ""
                 end
@@ -5872,7 +6296,7 @@ function CA.AlertStyleLearned()
         
             if CA.SV.CollectibleCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
-                messageParams:SetText(CA.SV.CollectiblePrefix, zo_strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked))
+                messageParams:SetText(csaPrefix, zo_strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked))
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COLLECTIBLES_UPDATED)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
@@ -6555,6 +6979,16 @@ function CA.AlertStyleLearned()
     ZO_PreHook(csaHandlers, EVENT_LORE_BOOK_LEARNED, LoreBookHook)
     ZO_PreHook(csaHandlers, EVENT_LORE_BOOK_LEARNED_SKILL_EXPERIENCE, LoreBookXPHook)
     
+    ZO_PreHook(csaHandlers, EVENT_LORE_COLLECTION_COMPLETED, LoreCollectionHook)
+    ZO_PreHook(csaHandlers, EVENT_LORE_COLLECTION_COMPLETED_SKILL_EXPERIENCE, LoreCollectionXPHook)
+    
+    ZO_PreHook(csaHandlers, EVENT_SKILL_POINTS_CHANGED, SkillPointsChangedHook)
+    ZO_PreHook(csaHandlers, EVENT_SKILL_LINE_ADDED, SkillLineAddedHook)
+    ZO_PreHook(csaHandlers, EVENT_ABILITY_PROGRESSION_RANK_UPDATE, AbilityProgressionRankHook)
+    ZO_PreHook(csaHandlers, EVENT_SKILL_RANK_UPDATE, SkillRankUpdateHook)
+    
+    ZO_PreHook(csaHandlers, EVENT_SKILL_XP_UPDATE, SkillXPUpdateHook)
+    
     ZO_PreHook(csaHandlers, EVENT_QUEST_ADDED, QuestAddedHook)
     ZO_PreHook(csaHandlers, EVENT_QUEST_COMPLETE, QuestCompleteHook)
     ZO_PreHook(csaHandlers, EVENT_OBJECTIVE_COMPLETED, ObjectiveCompletedHook)
@@ -6614,6 +7048,74 @@ function CA.AlertStyleLearned()
 	
 end
 
+function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previousXP, currentXP)
+    if (skillType == SKILL_TYPE_GUILD) then
+
+        -- Bail out early if a certain type is not set to be displayed
+        if skillIndex == 1 and not CA.SV.SkillGuildFighters then
+            return
+        elseif skillIndex == 2 and not CA.SV.SkillGuildMages then
+           return
+        elseif skillIndex == 3 and not CA.SV.SkillGuildUndaunted then
+           return
+        elseif skillIndex == 4 and not CA.SV.SkillGuildThieves then
+           return
+        elseif skillIndex == 5 and not CA.SV.SkillGuildDarkBrotherhood then
+           return
+        end
+        
+        local change = currentXP - previousXP
+        
+        -- Bail out or save value if Throttle/Threshold conditions are met
+        if skillIndex == 1 and CA.SV.SkillGuildFighters then
+            if change <= CA.SV.SkillGuildThreshold then 
+                return
+            end
+            -- Only throttle values 5 or lower (FG Dailies give +10 skill)
+            if CA.SV.SkillGuildThrottle > 0 and change <= 5 then
+                g_guildSkillThrottle = g_guildSkillThrottle + change
+                return
+                -- call function later
+            end
+        end
+        
+        -- TODO: Move this (not sure where to since putting it in the base function makes it populate before colors are defined)
+        local GUILD_SKILL_COLOR_TABLE =
+        {
+            [1] = SkillGuildColorizeFG,
+            [2] = SkillGuildColorizeMG,
+            [3] = SkillGuildColorizeUD,
+            [4] = SkillGuildColorizeTG,
+            [5] = SkillGuildColorizeDB,
+        }
+        
+        local lineName = GetSkillLineInfo(skillType, skillIndex)
+        local icon = zo_iconFormatInheritColor(GUILD_SKILL_ICONS[skillIndex], 16, 16)
+        local formattedIcon = CA.SV.SkillGuildIcon and (icon .. " ") or ""
+        
+        local colorize = GUILD_SKILL_COLOR_TABLE[skillIndex]
+        local messageP1 = ("|r|c" .. colorize .. formattedIcon .. change .. " " .. lineName .. "|r|c" .. SkillGuildColorize)
+        local formattedMessageP1 = (strfmt(CA.SV.SkillGuildMsg, messageP1))
+        local finalMessage = strfmt("|c%s%s|r", SkillGuildColorize, formattedMessageP1)
+        
+        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "SKILL" }
+        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        
+        if CA.SV.SkillGuildAlert then
+            local text = zo_strformat(GetString(SI_LUIE_CA_SKILL_GUILD_ALERT), lineName)
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
+        end
+        
+        --[[
+        CA.SV.SkillXPUpdateThrottlePrinter
+        if g_guildSkillThrottle > 0 and g_guildSkillThrottle > CA.SV.SkillGuildThreshold then
+            bla bla print
+            g_guildSkillThrottle = 0
+                
+        ]]
+     end
+end         
 
 -- TEMP COPIED FROM NO THANK YOU TO SEE
 --[[
@@ -6648,21 +7150,21 @@ function CA.PrintQueuedMessages()
 
     -- Resolve achievement update messages first
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type == "Achievement" then
+        if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type == "ACHIEVEMENT" then
             printToChat(g_queuedMessages[i].message)
         end
     end
     
     -- Next display Quest/Objective Completion and Experience
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type == "Quest" or g_queuedMessages[i].type == "Experience" then
+        if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type == "QUEST" or g_queuedMessages[i].type == "EXPERIENCE" then
             printToChat(g_queuedMessages[i].message)
         end
     end
     
     -- Display the rest
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type ~= "Quest" and g_queuedMessages[i].type ~= "Experience" and g_queuedMessages[i].type ~= "Achievement" then
+        if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type ~= "QUEST" and g_queuedMessages[i].type ~= "EXPERIENCE" and g_queuedMessages[i].type ~= "ACHIEVEMENT" then
             if g_queuedMessages[i].type == "Loot" then
                 -- TODO: queued Messages for loot save all neccesary variables then push them over to loot printer function which gets resolved here.
                 d("Loot Message resolve extra stuff here")

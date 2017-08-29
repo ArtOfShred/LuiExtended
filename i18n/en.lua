@@ -91,8 +91,6 @@ ZO_CreateStringId("SI_LUIE_CA_DUEL_STATE2",                             "You are
 
 ZO_CreateStringId("SI_LUIE_CHAMPION_POINT_TYPE",                        "<<1>><<2>> <<3>> <<1[Point/Points]>>")
 
-ZO_CreateStringId("SI_LUIE_CA_SKILLPOINT_MESSAGE",                      "Gained <<1>> skill <<1[point/points]>>.")
-
 ZO_CreateStringId("SI_LUIE_CA_EXPERIENCE_MESSAGE",                      "You earn %s.")
 ZO_CreateStringId("SI_LUIE_CA_EXPERIENCE_NAME",                         "experience points")
 
@@ -102,8 +100,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_UPDATEDPARTIAL",           "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_UPDATEDPARTIAL_TP",        "Display a message in chat in x/3 format when a Skyshard is collected.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_COLOR",                    "Skill Point Message Color")
 
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_MESSAGE",                  "Skill Point Message Format")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_MESSAGE_TP",               "Message format for skill points, <<1>> represents # of skill points, <<1[singular/plural]>> represents name of skill points.\nDefault: \"Gained <<1>> skill <<1[point/points]>>.\"")
+
 
 -- COLLECTIBLES
 ZO_CreateStringId("SI_LUIE_CA_COLLECTIBLE",                             "Collection Updated")
@@ -111,8 +108,7 @@ ZO_CreateStringId("SI_LUIE_CA_COLLECTIBLE",                             "Collect
 -- LOREBOOKS
 ZO_CreateStringId("SI_LUIE_CA_LOREBOOK_BOOK",                           "Book Discovered")
 ZO_CreateStringId("SI_LUIE_CA_LOREBOOK_ADDED_CSA",                      "<<1>> added to <<2>>")
-ZO_CreateStringId("SI_LUIE_CA_LOREBOOK_ADDED_CA",                       "added to") -- Have to add this extra string for CA, if we try to colorize the whole string with the link, it also colorizes our custom link type. 
-
+ZO_CreateStringId("SI_LUIE_CA_LOREBOOK_ADDED_CA",                       "added to") -- Have to add this extra string for CA, if we try to colorize the whole string with the link, it also colorizes our custom link type.
 
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_FRIEND_ADDED",                    "<<1>> added to friends.")
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_FRIEND_ADDED_ALT",                "|cFEFEFE<<1>>|r added to friends.")
@@ -260,6 +256,13 @@ ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGOLD",              "Total G
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP",                "Total AP: %s")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTV",                "Total TV: %s")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALWV",                "Total Vouchers: %s")
+
+
+ZO_CreateStringId("SI_LUIE_CA_SKILL_LINE_ADDED",                        "Skill line gained: <<1>><<2>>")
+ZO_CreateStringId("SI_LUIE_CA_ABILITY_RANK_UP",                         "<<1>> Increased to Rank <<R:2>>")
+
+ZO_CreateStringId("SI_LUIE_CA_SKILL_GUILD_MSG",                         "You earn %s reputation.")
+ZO_CreateStringId("SI_LUIE_CA_SKILL_GUILD_ALERT",                       "Your <<1>> reputation has increased.")
 
 ----- OUDATED
 ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_ADDED",                    "Added")
@@ -511,8 +514,8 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX3_TP",                 "Choose 
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLOR1",                     "Message Pt1 Color")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLOR2",                     "Message Pt2 Color")
 
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE",                 "Hide Books without Eidetic Memory")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE_TP",              "Hide standard books discovered unless Eidetic Memory is unlocked.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE",                 "Show Books even without Eidetic Memory")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE_TP",              "Show standard books unlocked even without Eidetic Memory.")
 
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_ICON",                       "Show Lorebook Icon")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_ICON_TP",                    "Display an icon for the relevant lorebook unlocked.")

@@ -19,18 +19,20 @@ function LUIE_CreateSettings()
 
     local nameDisplayOptions            = { "@UserID", "Character Name", "Character Name @UserID" }
     local nameDisplayOptionsKeys        = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
-    local chatnameDisplayOptions        = { "@UserID", "Character Name", "Character Name @UserID" }
-    local chatnameDisplayOptionsKeys    = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
+    local chatNameDisplayOptions        = { "@UserID", "Character Name", "Character Name @UserID" }
+    local chatNameDisplayOptionsKeys    = { ["@UserID"] = 1, ["Character Name"] = 2, ["Character Name @UserID"] = 3 }
     local achievementBracketOptions     = { "[]", "()", "Hyphen", "No Brackets" }
     local achievementBracketOptionsKeys = { ["[]"] = 1, ["()"] = 2, ["Hyphen"] =3, ["No Brackets"] = 4 }
     local itemBracketOptions            = { "[]", "()", "Hyphen", "No Brackets" }
     local itemBracketOptionsKeys        = { ["[]"] = 1, ["()"] = 2, ["Hyphen"] =3, ["No Brackets"] = 4 }
     local collectibleBracketOptions     = { "[]", "()", "-", ":", "No Brackets" }
     local collectibleBracketOptionsKeys = { ["[]"] = 1, ["()"] = 2, ["-"] = 3, [":"] = 4, ["No Brackets"] = 5 }
-    local lorebookBracketOptions        = { "[]", "()", "-", ":", "No Brackets" }
-    local lorebookBracketOptionsKeys    = { ["[]"] = 1, ["()"] = 2, ["-"] = 3, [":"] = 4, ["No Brackets"] = 5 }
-    local guildrankDisplayOptions       = { "Self Only", "Self + All w/ Permissions", "Display All Rank Changes" }
-    local guildrankDisplayOptionsKeys   = { ["Self Only"] = 1, ["Self + All w/ Permissions"] = 2, ["Display All Rank Changes"] = 3 }
+    local skillPointBracketOptions      = { "[]", "()", "-", ":", "No Brackets" }
+    local skillPointBracketOptionsKeys  = { ["[]"] = 1, ["()"] = 2, ["-"] = 3, [":"] = 4, ["No Brackets"] = 5 }
+    local loreBookBracketOptions        = { "[]", "()", "-", ":", "No Brackets" }
+    local loreBookBracketOptionsKeys    = { ["[]"] = 1, ["()"] = 2, ["-"] = 3, [":"] = 4, ["No Brackets"] = 5 }
+    local guildRankDisplayOptions       = { "Self Only", "Self + All w/ Permissions", "Display All Rank Changes" }
+    local guildRankDisplayOptionsKeys   = { ["Self Only"] = 1, ["Self + All w/ Permissions"] = 2, ["Display All Rank Changes"] = 3 }
     local rotationOptions               = { "Horizontal", "Vertical" }
     local rotationOptionsKeys           = { ["Horizontal"] = 1, ["Vertical"] = 2 }
     local disguiseNotifyOptions         = { "Chat Announcement", "Center Screen Notification", "Both" }
@@ -1080,12 +1082,12 @@ function LUIE_CreateSettings()
         type = "dropdown",
         name = GetString(SI_LUIE_LAM_NAMEDISPLAYMETHOD),
         tooltip = GetString(SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP),
-        choices = chatnameDisplayOptions,
-        getFunc = function() return chatnameDisplayOptions[LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions] end,
-        setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions = chatnameDisplayOptionsKeys[value] end,
+        choices = chatNameDisplayOptions,
+        getFunc = function() return chatNameDisplayOptions[LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions] end,
+        setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions = chatNameDisplayOptionsKeys[value] end,
         width = "full",
         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-        default = chatnameDisplayOptions[2],
+        default = chatNameDisplayOptions[2],
     }
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         -- Default String Enhance
@@ -2221,51 +2223,411 @@ function LUIE_CreateSettings()
                     },
                     
                     {
-                        -- Show Skill Points Updated
+                        -- Show Skill Points Updated CA
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED),
+                        name = "Show Skill Point Update CA",
                         tooltip = GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.ShowSkillPoints end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowSkillPoints = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillPointCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillPointCA = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.ShowSkillPoints,
+                        default = LUIE.ChatAnnouncements.D.SkillPointCA,
                     },
                     {
-                        -- Show Skill Points Updated
+                        -- Show Skill Points Updated CSA
                         type = "checkbox",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATEDPARTIAL)),
+                        name = "Show Skill Point Update CSA",
+                        tooltip = GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillPointCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillPointCSA = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillPointCSA,
+                    },
+                    {
+                        -- Show Skill Points Updated Alert
+                        type = "checkbox",
+                        name = "Show Skill Point Update Alert",
+                        tooltip = GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillPointAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillPointAlert = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillPointAlert,
+                    },
+                    {
+                        -- Show Skill Points Updated Partial
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATEDPARTIAL),
                         tooltip = GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATEDPARTIAL_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.ShowSkillPointsPartial end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowSkillPointsPartial = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.ShowSkillPoints) end,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.ShowSkillPointsPartial,
                     },
                     
                     {
-                        -- Skill Point Message Prefix
-                        type = "editbox",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_MESSAGE)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_SKILLPOINT_MESSAGE_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillPointMessage end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillPointMessage = value end,
+                        -- Collectible Bracket Options
+                        type = "dropdown",
+                        name = "Skill Point Bracket",
+                        choices = skillPointBracketOptions,
+                        tooltip = "TODO",
+                        getFunc = function() return skillPointBracketOptions[LUIE.ChatAnnouncements.SV.SkillPointBracket] end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillPointBracket = skillPointBracketOptionsKeys[value] end,
                         width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.ShowSkillPoints) end,
-                        default = LUIE.ChatAnnouncements.D.SkillPointMessage,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = skillPointBracketOptions[1]
                     },
                     
                     {
-                        -- Skill Point Color
+                        -- Skyshard Prefix
+                        type = "editbox",
+                        name = "Skyshard Prefix",
+                        tooltip = GetString(SI_LUIE_LAM_CA_SKILLPOINT_UPDATED_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillPointSkyshardMsg end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillPointSkyshardMsg = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillPointSkyshardMsg,
+                    },
+
+                    {
+                        -- Skill Point Color 1
                         type = "colorpicker",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_COLOR)),
-                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.SkillPointColor) end,
-                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.SkillPointColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.SkillPointColor1) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.SkillPointColor1 = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.ShowSkillPoints) end,
-                        default = {r=LUIE.ChatAnnouncements.D.SkillPointColor[1], g=LUIE.ChatAnnouncements.D.SkillPointColor[2], b=LUIE.ChatAnnouncements.D.SkillPointColor[3]}
+                        isabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = {r=LUIE.ChatAnnouncements.D.SkillPointColor1[1], g=LUIE.ChatAnnouncements.D.SkillPointColor1[2], b=LUIE.ChatAnnouncements.D.SkillPointColor1[3]}
+                    },
+                    {
+                        -- Skill Point Color 2
+                        type = "colorpicker",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SKILLPOINT_COLOR)),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.SkillPointColor2) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.SkillPointColor2 = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        isabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = {r=LUIE.ChatAnnouncements.D.SkillPointColor2[1], g=LUIE.ChatAnnouncements.D.SkillPointColor2[2], b=LUIE.ChatAnnouncements.D.SkillPointColor2[3]}
                     },
                     
+                    {
+                        -- Skill Line Unlocked CA
+                        type = "checkbox",
+                        name = "Skill Line Unlocked CA",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillLineUnlockCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillLineUnlockCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillLineUnlockCA,
+                    },
+                    {
+                        -- Skill Line Unlocked CSA
+                        type = "checkbox",
+                        name = "Skill Line Unlocked CSA",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillLineUnlockCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillLineUnlockCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillLineUnlockCSA,
+                    },
+                    {
+                        -- Skill Line Unlocked Alert
+                        type = "checkbox",
+                        name = "Skill Line Unlocked CA",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillLineUnlockAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillLineUnlockAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillLineUnlockAlert,
+                    },
+                    
+                    {
+                        -- Skill Line Progression CA
+                        type = "checkbox",
+                        name = "Skill Line Progression CA",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillLineCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillLineCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillLineCA,
+                    },
+                    {
+                        -- Skill Line Progression CSA
+                        type = "checkbox",
+                        name = "Skill Line Progression CSA",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillLineCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillLineCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillLineCSA,
+                    },
+                    {
+                        -- Skill Line Progression Alert
+                        type = "checkbox",
+                        name = "Skill Line Progression CA",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillLineAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillLineAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillLineAlert,
+                    },
+                    
+                    {
+                        -- Skill Ability Progression CA
+                        type = "checkbox",
+                        name = "Skill Ability Progression CA",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillAbilityCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillAbilityCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillAbilityCA,
+                    },
+                    {
+                        -- Skill Ability Progression CSA
+                        type = "checkbox",
+                        name = "Skill Ability Progression CSA",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillAbilityCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillAbilityCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillAbilityCSA,
+                    },
+                    {
+                        -- Skill Ability Progression Alert
+                        type = "checkbox",
+                        name = "Skill Ability Progression CA",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillAbilityAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillAbilityAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillAbilityAlert,
+                    },
+                    
+                    {
+                        -- Skill Line Icon
+                        type = "checkbox",
+                        name = "Display Skill Line Icon",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillLineIcon end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillLineIcon = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillLineIcon,
+                    },
+                    {
+                        -- Skill Line Color
+                        type = "colorpicker",
+                        name = "Skill Line / Ability Upgrade Color",
+                        tooltip = "TODO",
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.SkillLineColor) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.SkillLineColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        isabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = {r=LUIE.ChatAnnouncements.D.SkillLineColor[1], g=LUIE.ChatAnnouncements.D.SkillLineColor[2], b=LUIE.ChatAnnouncements.D.SkillLineColor[3]}
+                    },
+                    
+                    
+                    {
+                        -- Skill Fighters Guild
+                        type = "checkbox",
+                        name = "Display Fighters Guild Skill Gained",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillGuildFighters end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillGuildFighters = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillGuildFighters,
+                    },
+                    {
+                        -- Skill Mages Guild
+                        type = "checkbox",
+                        name = "Display Mages Guild Skill Gained",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillGuildMages end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillGuildMages = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillGuildMages,
+                    },
+                    {
+                        -- Skill Undaunted
+                        type = "checkbox",
+                        name = "Display Undaunted Skill Gained",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillGuildUndaunted end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillGuildUndaunted = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillGuildUndaunted,
+                    },
+                    {
+                        -- Skill Thieves Guild
+                        type = "checkbox",
+                        name = "Display Thieves Guild Skill Gained",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillGuildThieves end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillGuildThieves = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillGuildThieves,
+                    },
+                    {
+                        -- Skill Dark Brotherhood
+                        type = "checkbox",
+                        name = "Display Dark Brotherhood Skill Gained",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillGuildDarkBrotherhood end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillGuildDarkBrotherhood = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillGuildDarkBrotherhood,
+                    },
+                    
+                    {
+                        -- Skill Guild Alert
+                        type = "checkbox",
+                        name = "Display Basic Alert",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillGuildAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillGuildAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillGuildAlert,
+                    },
+                    
+                    {
+                        -- Skill Guild Throttle Combat
+                        type = "slider",
+                        name = "Throttle Guild Skill Earned From Kills",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillGuildThrottle end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillGuildThrottle = value end,
+                        min = 0,
+                        max = 5000,
+                        step = 50,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillGuildThrottle,
+                    },
+                    
+                    {
+                        -- Skill Guild Threshold
+                        type = "slider",
+                        name = "Hide Guild Skill Earned From Kills",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillGuildThreshold end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillGuildThreshold = value end,
+                        min = 0,
+                        max = 5,
+                        step = 1,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillGuildThreshold,
+                    },
+                    
+                    {
+                        -- Skill Guild Icon
+                        type = "checkbox",
+                        name = "Display Guild Icon",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillGuildIcon end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillGuildIcon = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillGuildIcon,
+                    },
+                    
+                    {
+                        -- Guild Skill Point Message
+                        type = "editbox",
+                        name = "Guild Skill Point Message Format",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillGuildMsg end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillGuildMsg = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillGuildMsg,
+                    },
+                    
+                    {
+                        -- Guild Skill Point Color
+                        type = "colorpicker",
+                        name = "Guild Skill Point Update Color",
+                        tooltip = "TODO",
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.SkillGuildColor) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.SkillGuildColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        isabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = {r=LUIE.ChatAnnouncements.D.SkillGuildColor[1], g=LUIE.ChatAnnouncements.D.SkillGuildColor[2], b=LUIE.ChatAnnouncements.D.SkillGuildColor[3]}
+                    },
+                    
+                    {
+                        -- Guild Skill Point Color FG
+                        type = "colorpicker",
+                        name = "Fighters Guild Color",
+                        tooltip = "TODO",
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.SkillGuildColorFG) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.SkillGuildColorFG = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        isabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = {r=LUIE.ChatAnnouncements.D.SkillGuildColorFG[1], g=LUIE.ChatAnnouncements.D.SkillGuildColorFG[2], b=LUIE.ChatAnnouncements.D.SkillGuildColorFG[3]}
+                    },
+                    {
+                        -- Guild Skill Point Color MG
+                        type = "colorpicker",
+                        name = "Mages Guild Color",
+                        tooltip = "TODO",
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.SkillGuildColorMG) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.SkillGuildColorMG = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        isabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = {r=LUIE.ChatAnnouncements.D.SkillGuildColorMG[1], g=LUIE.ChatAnnouncements.D.SkillGuildColorMG[2], b=LUIE.ChatAnnouncements.D.SkillGuildColorMG[3]}
+                    },
+                    {
+                        -- Guild Skill Point Color UD
+                        type = "colorpicker",
+                        name = "Undaunted Color",
+                        tooltip = "TODO",
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.SkillGuildColorUD) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.SkillGuildColorUD = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        isabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = {r=LUIE.ChatAnnouncements.D.SkillGuildColorUD[1], g=LUIE.ChatAnnouncements.D.SkillGuildColorUD[2], b=LUIE.ChatAnnouncements.D.SkillGuildColorUD[3]}
+                    },
+                    {
+                        -- Guild Skill Point Color TG
+                        type = "colorpicker",
+                        name = "Thieves Guild Color",
+                        tooltip = "TODO",
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.SkillGuildColorTG) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.SkillGuildColorTG = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        isabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = {r=LUIE.ChatAnnouncements.D.SkillGuildColorTG[1], g=LUIE.ChatAnnouncements.D.SkillGuildColorTG[2], b=LUIE.ChatAnnouncements.D.SkillGuildColorTG[3]}
+                    },
+                    {
+                        -- Guild Skill Point Color DB
+                        type = "colorpicker",
+                        name = "Dark Brotherhood Color",
+                        tooltip = "TODO",
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.SkillGuildColorDB) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.SkillGuildColorDB = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        isabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = {r=LUIE.ChatAnnouncements.D.SkillGuildColorDB[1], g=LUIE.ChatAnnouncements.D.SkillGuildColorDB[2], b=LUIE.ChatAnnouncements.D.SkillGuildColorDB[3]}
+                    },
                     
                 },
             }
@@ -2383,8 +2745,8 @@ function LUIE_CreateSettings()
                     {
                         -- Show Lorebooks Unlocked
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP),
+                        name = "Show Lorebooks CA",
+                        tooltip = "TODO",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookCA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCA = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
                         width = "full",
@@ -2394,8 +2756,8 @@ function LUIE_CreateSettings()
                     {
                         -- Show Lorebooks Unlocked
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP),
+                        name = "Show Lorebooks CSA",
+                        tooltip = "TODO",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookCSA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCSA = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
                         width = "full",
@@ -2405,25 +2767,61 @@ function LUIE_CreateSettings()
                     {
                         -- Show Lorebooks Unlocked
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP),
+                        name = "Show Lorebooks Alert",
+                        tooltip = "TODO",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookAlert end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookAlert = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.LorebookAlert,
                     },
+                    
+                    {
+                        -- Show Lorebook Collection Complete
+                        type = "checkbox",
+                        name = "Show Collection Complete CA",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookCollectionCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCollectionCA = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LorebookCollectionCA,
+                    },
+                    {
+                        -- Show Lorebook Collection Complete
+                        type = "checkbox",
+                        name = "Show Collection Complete CSA",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookCollectionCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCollectionCSA = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LorebookCollectionCSA,
+                    },
+                    {
+                        -- Show Lorebook Collection Complete
+                        type = "checkbox",
+                        name = "Show Collection Complete Alert",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookCollectionAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCollectionAlert = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LorebookCollectionAlert,
+                    },
+                    
+                    
                     {
                         -- Lorebooks Bracket Options
                         type = "dropdown",
                         name = strformat("\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET)),
-                        choices = lorebookBracketOptions,
+                        choices = loreBookBracketOptions,
                         tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET_TP),
-                        getFunc = function() return lorebookBracketOptions[LUIE.ChatAnnouncements.SV.LorebookBracket] end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookBracket = lorebookBracketOptionsKeys[value] end,
+                        getFunc = function() return loreBookBracketOptions[LUIE.ChatAnnouncements.SV.LorebookBracket] end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookBracket = loreBookBracketOptionsKeys[value] end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = lorebookBracketOptions[1]
+                        default = loreBookBracketOptions[1]
                     },
                     {
                         -- Lorebooks Prefix 1
@@ -2446,6 +2844,17 @@ function LUIE_CreateSettings()
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.LorebookPrefix2,
+                    },
+                    {
+                        -- Lorebooks Collection Prefix
+                        type = "editbox",
+                        name = "Lorebook Collection Prefix",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookCollectionPrefix end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCollectionPrefix = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LorebookCollectionPrefix,
                     },
                     --[[
                     {
@@ -3313,12 +3722,12 @@ function LUIE_CreateSettings()
                         type = "dropdown",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANKDISPLAY)),
                         tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANKDISPLAY_TP),
-                        choices = guildrankDisplayOptions,
-                        getFunc = function() return guildrankDisplayOptions[LUIE.ChatAnnouncements.SV.GuildRankDisplayOptions] end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildRankDisplayOptions = guildrankDisplayOptionsKeys[value] LUIE.ChatAnnouncements.RegisterGuildEvents() end,
+                        choices = guildRankDisplayOptions,
+                        getFunc = function() return guildRankDisplayOptions[LUIE.ChatAnnouncements.SV.guildRankDisplayOptions] end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.guildRankDisplayOptions = guildRankDisplayOptionsKeys[value] LUIE.ChatAnnouncements.RegisterGuildEvents() end,
                         width = "full",
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.MiscGuild and LUIE.ChatAnnouncements.SV.MiscGuildRank and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = guildrankDisplayOptions[1],
+                        default = guildRankDisplayOptions[1],
                     },
                     {
                         -- Show Guild MOTD Events
