@@ -50,21 +50,6 @@ CA.D = {
     CurrencyIcons                 = true,
     DisguiseAlertColor            = { 1, 0, 0, 1 },
     EnableCustomStrings           = true,
-    Experience                    = true,
-    ExperienceColorMessage        = { 1, 1, 1, 1 },
-    ExperienceColorName           = { 1, 1, 1, 1 },
-    ExperienceLevelUpColor        = { 1, 1, 1, 1 },
-    ExperienceColorLevel          = true,
-    ExperienceMessage             = GetString(SI_LUIE_CA_EXPERIENCE_MESSAGE),
-    ExperienceName                = GetString(SI_LUIE_CA_EXPERIENCE_NAME),
-    ExperienceDisplayOptions      = 1,
-    ExperienceEnlightened         = false,
-    ExperienceFilter              = 0,
-    ExperienceHideCombat          = false,
-    ExperienceIcon                = true,
-    ExperienceLevelUp             = true,
-    ExperienceShowLevel           = true,
-    ExperienceThrottle            = 0,
     GroupChatMsg                  = false,
     GroupLFG                      = false,
     GroupLFGComplete              = false,
@@ -77,52 +62,12 @@ CA.D = {
     ItemBracketDisplayOptions     = 1,
     ItemContextMessage            = "",
     ItemContextToggle             = false,
-    LevelUpIcon                   = true,
     LevelTotalIcon                = true,
     Loot                          = true,
     LootBank                      = true,
     LootBlacklist                 = false,
     LootTotal                     = false,
     LootTotalString               = GetString(SI_LUIE_CA_DEFAULTVARS_CURRENCYTOTALMESSAGE),
-    
-    SkillPointCA                  = true,
-    SkillPointCSA                 = true,
-    SkillPointAlert               = false,
-    SkillPointSkyshardMsg         = GetString(SI_SKYSHARD_GAINED),
-    SkillPointBracket             = 4,
-    ShowSkillPointsPartial        = false,
-    SkillPointColor1              = { 0, 1, 1, 1 },
-    SkillPointColor2              = { 1, 1, 1, 1 },
-    
-    SkillLineUnlockCA             = true,
-    SkillLineUnlockCSA            = true,
-    SkillLineUnlockAlert          = false,
-    SkillLineCA                   = false,
-    SkillLineCSA                  = true,
-    SkillLineAlert                = false,
-    SkillAbilityCA                = false,
-    SkillAbilityCSA               = true,
-    SkillAbilityAlert             = false,
-    SkillLineIcon                 = true,
-    SkillLineColor                = { .75, .75, .75, 1},
-    
-    SkillGuildFighters            = false,
-    SkillGuildMages               = false,
-    SkillGuildUndaunted           = false,
-    SkillGuildThieves             = false,
-    SkillGuildDarkBrotherhood     = false,
-    SkillGuildIcon                = true,
-    SkillGuildMsg                 = GetString(SI_LUIE_CA_SKILL_GUILD_MSG),
-    SkillGuildColor               = { .75, .75, .75, 1},
-    SkillGuildColorFG             = { .75, .37, 0, 1},
-    SkillGuildColorMG             = { 0, .52, .75, 1},
-    SkillGuildColorUD             = { .58, .75, 0, 1},
-    SkillGuildColorTG             = { .29, .27, .42, 1},
-    SkillGuildColorDB             = { .70, 0, .19, 1},
-    
-    SkillGuildThrottle            = 0,
-    SkillGuildThreshold           = 0,
-    SkillGuildAlert               = false,
     
     LootCraft                     = true,
     LootCurrencyCombo             = false,
@@ -264,6 +209,68 @@ CA.D = {
     QuestObjUpdateCSA               = true,
     QuestObjUpdateAlert             = false,
     
+    -- EXPERIENCE
+    ExperienceEnlightened           = false,
+    
+    ExperienceLevelUpCA             = true,
+    ExperienceLevelUpCSA            = true,
+    ExperienceLevelUpAlert          = false,
+    ExperienceLevelUpCSAExpand      = false,
+    ExperienceLevelUpIcon           = true,
+    ExperienceLevelColorByLevel     = true,
+    ExperienceLevelUpColor          = { 1, 1, 1, 1 },
+    
+    Experience                      = true,
+    ExperienceIcon                  = true,
+    ExperienceMessage               = GetString(SI_LUIE_CA_EXPERIENCE_MESSAGE),
+    ExperienceName                  = GetString(SI_LUIE_CA_EXPERIENCE_NAME),
+    ExperienceHideCombat            = false,
+    ExperienceFilter                = 0,
+    ExperienceThrottle              = 0,
+    ExperienceColorMessage          = { 1, 1, 1, 1 },
+    ExperienceColorName             = { 1, 1, 1, 1 },
+    
+    -- SKILL POINT
+    SkillPointCA                    = true,
+    SkillPointCSA                   = true,
+    SkillPointAlert                 = false,
+    SkillPointSkyshardMsg           = GetString(SI_SKYSHARD_GAINED),
+    SkillPointBracket               = 4,
+    ShowSkillPointsPartial          = false,
+    SkillPointColor1                = { 0, 1, 1, 1 },
+    SkillPointColor2                = { 1, 1, 1, 1 },
+    
+    SkillLineUnlockCA               = true,
+    SkillLineUnlockCSA              = true,
+    SkillLineUnlockAlert            = false,
+    SkillLineCA                     = false,
+    SkillLineCSA                    = true,
+    SkillLineAlert                  = false,
+    SkillAbilityCA                  = false,
+    SkillAbilityCSA                 = true,
+    SkillAbilityAlert               = false,
+    SkillLineIcon                   = true,
+    SkillLineColor                  = { .75, .75, .75, 1},
+    
+    SkillGuildFighters              = false,
+    SkillGuildMages                 = false,
+    SkillGuildUndaunted             = false,
+    SkillGuildThieves               = false,
+    SkillGuildDarkBrotherhood       = false,
+    SkillGuildIcon                  = true,
+    SkillGuildMsg                   = GetString(SI_LUIE_CA_SKILL_GUILD_MSG),
+    SkillGuildRepName               = GetString(SI_LUIE_CA_SKILL_GUILD_REPUTATION),
+    SkillGuildColor                 = { .75, .75, .75, 1},
+    SkillGuildColorFG               = { .75, .37, 0, 1},
+    SkillGuildColorMG               = { 0, .52, .75, 1},
+    SkillGuildColorUD               = { .58, .75, 0, 1},
+    SkillGuildColorTG               = { .29, .27, .42, 1},
+    SkillGuildColorDB               = { .70, 0, .19, 1},
+    
+    SkillGuildThrottle              = 0,
+    SkillGuildThreshold             = 0,
+    SkillGuildAlert                 = false,
+    
     -- CURRENCY
     CurrencyAPColor                 = { 0.164706, 0.862745, 0.133333, 1 },
     CurrencyAPFilter                = 0,
@@ -383,21 +390,6 @@ local g_LFGJoinAntiSpam           = false -- Stops LFG join messages from spammi
 local g_rcUpdateDeclineOverride   = false -- Variable set to true for 5 seconds when a LFG group joing event happens, this prevents RC declined messages from erroneously appearing after solo joining an in progress LFG group.
 local g_lfgDisableGroupEvents     = false
 
--- When quest XP is gained during dialogue the player doesn't actually level up until exiting the dialogue.
--- The variables get stored and saved to print on levelup if this is the case.
-local g_weLeveled                 = 0
-local g_crossover                 = 0
-
--- Various fudge variables required for fixing display on levelup when turning in quests that give both XP completion and POI completion!
-local g_levelCarryOverValue       = 0
-local g_levelChanged1             = false
-local g_questCombiner1            = ""
-local g_questCombiner2            = ""
-local g_questCombiner2Alt         = ""
-local g_questString1              = ""
-local g_questString2              = ""
-local g_totalLevelAdjust          = ""
-
 -- Variables used for Trade Functions
 local g_tradeInvitee              = ""
 local g_tradeInviter              = ""
@@ -440,7 +432,8 @@ local g_queuedMessages = { } -- Table to hold messages for the 50 ms tick functi
 local g_queuedMessagesCounter = 1
 
 -- Currency
-local g_currencyGoldThrottle        = 0 -- Held value for gold throttle
+local g_currencyGoldThrottleValue   = 0 -- Held value for gold throttle (counter)
+local g_currencyGoldThrottleTotal   = 0 -- Held value for gold throttle (total gold)
 local g_currencyAPThrottleValue     = 0 -- Held value for AP throttle (counter)
 local g_currencyAPThrottleTotal     = 0 -- Held value for AP throttle (total gold)
 local g_currencyTVThrottleValue     = 0 -- Held value for TV throttle (counter)
@@ -448,7 +441,7 @@ local g_currencyTVThrottleTotal     = 0 -- Held value for TV throttle (total gol
 
 -- Experience
 local g_xpCombatBufferValue         = 0
-local g_xpCombatBufferTotal         = 0
+local g_guildSkillThrottle          = 0
 -----------------------------------
 -- UPDATED CODE (COLORIZE VALUES)
 -----------------------------------
@@ -829,12 +822,8 @@ end
 
 function CA.RegisterXPEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LEVEL_UPDATE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CHAMPION_POINT_UPDATE)
     if CA.SV.Experience or CA.SV.ExperienceLevelUp then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN, CA.OnExperienceGain)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEVEL_UPDATE, CA.OnLevelUpdate)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_UPDATE, CA.OnChampionUpdate)
     end
     if CA.SV.ShowSkillPoints then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_SKILL_POINTS_CHANGED, CA.SkillPointsChanged)
@@ -2397,7 +2386,7 @@ end
 ------ TEMP TODO
 
 -- Note, sentvalue here is an additional variable called when certain reasons are pushed through to this function to generate strings.
-function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason, sentvalue)
+function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
 
     local UpOrDown = newValue - oldValue
     --[[ DEBUG
@@ -2407,6 +2396,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason, se
     d("reason: " .. reason)
     ]]
     
+    -- TODO: Need to add more detailed filters here for certain conditionals!
     -- If the total gold change was 0 or (Reason 2 = Receieve Money in the Mail) or (Reason 28 = Mount Feed) or (Reason 35 = Player Init) - End Now
     if UpOrDown == 0 or reason == 2 or reason == 28 or reason == 35 then
         return
@@ -2415,39 +2405,23 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason, se
     local formattedValue = ZO_LocalizeDecimalNumber(newValue)
     local changeColor                                                   -- Gets the value from CurrencyUpColorize or CurrencyDownColorize to color strings
     local changeType                                                    -- Amount of currency gained or lost
-    local currencyTypeColor                                              -- Determines color to use for colorization of currency based off currency type.
+    local currencyTypeColor                                             -- Determines color to use for colorization of currency based off currency type.
     local currencyIcon                                                  -- Determines icon to use for currency based off currency type.
     local currencyName                                                  -- Determines name to use for currency based off type.
     local currencyTotal                                                 -- Determines if the total should be displayed based off type.
-    
     local messageChange                                                 -- Set to a string value based on the reason code.
     local messageTotal                                                  -- Set to a string value based on the currency type.
-    local messageP1                                                     -- First part of message - Change
-    local messageP2                                                     -- Second part of the message (if enabled) - Total
-    
-    -- Did we gain or lose currency
-    if UpOrDown > 0 then
-        if CA.SV.CurrencyContextColor then
-            changeColor = CurrencyUpColorize:ToHex()
-        else
-            changeColor = CurrencyColorize:ToHex()
-        end
-        changeType = ZO_LocalizeDecimalNumber(newValue - oldValue)
-    elseif UpOrDown < 0 then
-        if CA.SV.CurrencyContextColor then
-            changeColor = CurrencyDownColorize:ToHex()
-        else
-            changeColor = CurrencyColorize:ToHex()
-        end
-        changeType = ZO_LocalizeDecimalNumber(oldValue - newValue)
-    end
+    local type
     
     -- Resolve Currency Type (TODO: Use CURRENCY_TYPE when implemented rather than # values)
     if currency == 1 then -- Gold
         -- Send change info to the throttle printer and end function now if we throttle gold from loot.
         if CA.SV.CurrencyGoldThrottle and (reason == 0 or reason == 13 or reason == 62) then
-            zo_callLater(CA.CurrencyGoldThrottlePrinter, 50 )
-            g_currencyGoldThrottle = g_currencyGoldThrottle + UpOrDown
+            -- TODO: Register Event here instead
+            EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedGold")
+            EVENT_MANAGER:RegisterForUpdate(moduleName .. "BufferedGold", 50, CA.CurrencyGoldThrottlePrinter )
+            g_currencyGoldThrottleValue = g_currencyGoldThrottleValue + UpOrDown
+            g_currencyGoldThrottleTotal = GetCarriedCurrencyAmount(1)
             return
         end
         
@@ -2532,6 +2506,23 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason, se
     else -- If for some reason there is no currency type, end the function now
         return
     end
+    
+    -- Did we gain or lose currency
+    if UpOrDown > 0 then
+        if CA.SV.CurrencyContextColor then
+            changeColor = CurrencyUpColorize:ToHex()
+        else
+            changeColor = CurrencyColorize:ToHex()
+        end
+        changeType = ZO_LocalizeDecimalNumber(newValue - oldValue)
+    elseif UpOrDown < 0 then
+        if CA.SV.CurrencyContextColor then
+            changeColor = CurrencyDownColorize:ToHex()
+        else
+            changeColor = CurrencyColorize:ToHex()
+        end
+        changeType = ZO_LocalizeDecimalNumber(oldValue - newValue)
+    end
 
     -- Determine syntax based on reason
     -- Sell/Buy from a Merchant
@@ -2547,15 +2538,20 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason, se
     -- Receive from Quest Reward (4), Medal (21), AH Refund (32), Sell to Fence (63)
     elseif reason == 4 or reason == 21 or reason == 32 or reason == 63 then
         messageChange = CA.SV.CurrencyMessageReceive
-    -- Bag Space (8), Bank Space (9)
-    elseif reason == 8 or reason == 9 then
+    -- Bag Space (8)
+    elseif reason == 8 then
         messageChange = CA.SV.CurrencyMessageStorage
+        type = "LUIE_CURRENCY_BAG"
+    -- Bank Space (9)
+    elseif reason == 9 then
+        messageChange = CA.SV.CurrencyMessageStorage
+        type = "LUIE_CURRENCY_BANK"
     -- Spend - NPC Conversation (5), Wayshrine (19), Repairs (29), AH Listing Fee (33), Respec Skills (44), Respec Attributes (45),
     -- Unstuck (48), Edit Guild Heraldry (49), Buy Guild Tabard (50), Respec Morphs (55), Pay Fence (56), Launder (60), Champion Respec (61), Buyback (64)
     elseif reason == 5 or reason == 19 or reason == 29 or reason == 33 or reason == 44 or reason == 45 or reason == 48 or reason == 49 or reason == 50 or reason == 55 or reason == 56 or reason == 60 or reason == 61 or reason == 64 then
         messageChange = CA.SV.CurrencyMessageSpend
-    -- Keep Reward (14), Keep Repair (40), FAKE THROTTLE REASON ALLIANCE POINTS (98)
-    elseif reason == 14 or reason == 40 or reason == 98 then
+    -- Keep Reward (14), Keep Repair (40)
+    elseif reason == 14 or reason == 40 then
         messageChange = CA.SV.CurrencyMessageEarn
     -- Buy on AH (31)
     elseif reason == 31 then
@@ -2573,11 +2569,11 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason, se
     -- Pickpocketed (59)
     elseif reason == 59 then
         messageChange = GetString(SI_GAMECAMERAACTIONTYPE21)
-    -- Looted - From Chest (0), Stolen Gold (62), Looted from Player/NPC (65), FAKE THROTTLE REASON GOLD (99)
-    elseif reason == 0 or reason == 62 or reason == 65 or reason == 99 then
+    -- Looted - From Chest (0), Stolen Gold (62), Looted from Player/NPC (65)
+    elseif reason == 0 or reason == 62 or reason == 65 then
         messageChange = CA.SV.CurrencyMessageLoot
-    -- Looted (13), FAKE THROTTLE REASON TEL VAR (97)
-    elseif reason == 13 or reason == 97 then
+    -- Looted (13)
+    elseif reason == 13 then
         if currency == 2 then
             messageChange = CA.SV.CurrencyMessageEarn
         else
@@ -2586,42 +2582,51 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason, se
     -- Died to Player/NPC (67)
     elseif reason == 67 then
         messageChange = CA.SV.CurrencyMessageLost
-        
-    -- FAKE MOUNT UPGRADE STABLE REASON (96) 
-    elseif reason == 96 then
-        messageChange = CA.SV.CurrencyMessageStable
+
     -- ==============================================================================
     -- DEBUG EVENTS WE DON'T KNOW YET
     -- TODO -- Need to add support for AP messages here. Also, in the case of AP gain we also need to adjust looted to earned if the reason code ends up being 0
-    elseif reason == 6 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 7 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 12 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 15 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason) -- Keep Upgrade
-    elseif reason == 16 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 18 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 20 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 22 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 23 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 24 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 25 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 26 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 27 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 30 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 34 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 36 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 37 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 38 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 39 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 41 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 46 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 53 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 54 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 58 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
-    elseif reason == 66 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSg_currency), reason)
+    elseif reason == 6 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 7 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 12 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 15 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- Keep Upgrade
+    elseif reason == 16 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 18 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 20 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 22 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 23 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 24 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 25 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 26 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 27 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 30 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 34 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 36 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 37 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 38 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 39 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 41 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 46 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 53 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 54 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 58 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 66 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     -- END DEBUG EVENTS
     -- ==============================================================================
     -- If none of these returned true, then we must have just looted the gold (Potentially a few currency change events I missed too may have to adjust later)
     else messageChange = CA.SV.CurrencyMessageLoot end
+    
+    -- Send relevant values over to the currency printer
+    CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
+    
+end
+
+-- Printer function receives values from currency update or from other functions that display currency updates.
+-- Type here refers to an LUIE_CURRENCY_TYPE
+function CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
+
+    local messageP1                                                     -- First part of message - Change
+    local messageP2                                                     -- Second part of the message (if enabled) - Total
 
     messageP1 = ("|r|c" .. currencyTypeColor .. currencyIcon .. " " .. changeType .. currencyName .. "|r|c" .. changeColor)
 
@@ -2632,48 +2637,38 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason, se
     end
 
     local formattedMessageP1
-    if reason == 8 or reason == 9 then
-        
+    if type == "LUIE_CURRENCY_BAG" or type == "LUIE_CURRENCY_BANK" then
         local function ResolveStorageType()
             local bagType
             local icon
-            if reason == 8 then
+            if type == "LUIE_CURRENCY_BAG" then
                 bagType = GetString(SI_LUIE_CA_STORAGE_BAGTYPE1)
                 icon = CA.SV.LootIcons and "|t16:16:/esoui/art/icons/store_upgrade_bag.dds|t " or ""
             end
-            
-            if reason == 9 then
+            if type == "LUIE_CURRENCY_BANK" then
                 bagType = GetString(SI_LUIE_CA_STORAGE_BAGTYPE2)
                 icon = CA.SV.LootIcons and "|t16:16:/esoui/art/icons/store_upgrade_bank.dds|t " or ""
             end
-            
             return strfmt("|r" .. icon .. "|cFFFFFF" .. bagType .. "|r|c" .. changeColor)
         end
-        
         formattedMessageP1 = (strfmt(messageChange, ResolveStorageType(), messageP1))
-    
-    elseif reason == 96 then
-    
+    elseif type == "LUIE_CURRENCY_RIDING_SPEED" or type == "LUIE_CURRENCY_RIDING_CAPACITY" or type == "LUIE_CURRENCY_RIDING_STAMINA" then
         local function ResolveRidingStats()
             -- if somevar then icon = else no
-            local skillType = GetString("SI_LUIE_CA_STORAGE_RIDINGTYPE", sentvalue)
+            local skillType
             local icon
-            
-            if CA.SV.LootIcons then
-                if sentvalue == 1 then
-                    icon = "|t16:16:/esoui/art/mounts/ridingskill_speed.dds|t "
-                elseif sentvalue == 2 then
-                    icon = "|t16:16:/esoui/art/mounts/ridingskill_capacity.dds|t "
-                elseif sentvalue == 3 then
-                    icon = "|t16:16:/esoui/art/mounts/ridingskill_stamina.dds|t "
-                end
-            else
-                icon = ""
+            if type == "LUIE_CURRENCY_RIDING_SPEED" then
+                skillType = GetString(SI_LUIE_CA_STORAGE_RIDINGTYPE1)
+                icon = CA.SV.LootIcons and "|t16:16:/esoui/art/mounts/ridingskill_speed.dds|t " or ""
+            elseif type == "LUIE_CURRENCY_RIDING_CAPACITY" then
+                skillType = GetString(SI_LUIE_CA_STORAGE_RIDINGTYPE2)
+                icon = CA.SV.LootIcons and "|t16:16:/esoui/art/mounts/ridingskill_capacity.dds|t " or ""
+            elseif type == "LUIE_CURRENCY_RIDING_STAMINA" then
+                skillType = GetString(SI_LUIE_CA_STORAGE_RIDINGTYPE3)
+                icon = CA.SV.LootIcons and "|t16:16:/esoui/art/mounts/ridingskill_stamina.dds|t " or ""
             end
-            
             return strfmt("|r" .. icon .. "|cFFFFFF" .. skillType .. "|r|c" .. changeColor)
         end
-    
         formattedMessageP1 = (strfmt(messageChange, ResolveRidingStats(), messageP1))
     else
         formattedMessageP1 = (strfmt(messageChange, messageP1))
@@ -2687,31 +2682,49 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason, se
     end
     
     -- If this value is being sent from the Throttle Printer, do not throttle the printout of the value
-    if reason == 97 or reason == 98 or reason == 99 then
+    if type == "LUIE_CURRENCY_THROTTLE" then
         printToChat(finalMessage)
     -- Otherwise sent to our Print Queued Messages function to be processed on a 50 ms delay.
     else
-        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "Currency" }
+        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "CURRENCY" }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
     end
-    
+
 end
 
 function CA.CurrencyGoldThrottlePrinter()
-    local newValue = GetCarriedCurrencyAmount(1)
-    local oldValue = newValue - g_currencyGoldThrottle
-    if g_currencyGoldThrottle > CA.SV.CurrencyGoldFilter then
-        CA.OnCurrencyUpdate(nil, 1, newValue, oldValue, 99)
+    if g_currencyGoldThrottleValue > 0 and g_currencyGoldThrottleValue > CA.SV.CurrencyGoldFilter then
+        local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
+        local changeColor = CurrencyUpColorize:ToHex()
+        local changeType = ZO_LocalizeDecimalNumber(g_currencyGoldThrottleValue)
+        local currencyTypeColor = CurrencyGoldColorize:ToHex()
+        local currencyIcon = CA.SV.CurrencyIcons and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
+        local currencyName = strformat(CA.SV.CurrencyGoldName, g_currencyGoldThrottleValue)
+        local currencyTotal = CA.SV.CurrencyGoldShowTotal
+        local messageTotal = CA.SV.CurrencyMessageTotalGold
+        local messageChange = CA.SV.CurrencyMessageLoot
+        local type = "LUIE_CURRENCY_THROTTLE"
+        CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
-    g_currencyGoldThrottle = 0
+    EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedGold")
+    g_currencyGoldThrottleValue = 0
+    g_currencyGoldThrottleTotal = 0
 end
 
 function CA.CurrencyAPThrottlePrinter()
     if g_currencyAPThrottleValue > 0 and g_currencyAPThrottleValue > CA.SV.CurrencyAPFilter then
-        local newValue = g_currencyAPThrottleTotal
-        local oldValue = newValue - g_currencyAPThrottleValue
-        CA.OnCurrencyUpdate(nil, 2, newValue, oldValue, 98)
+        local formattedValue = ZO_LocalizeDecimalNumber(g_currencyAPThrottleTotal)
+        local changeColor = CurrencyUpColorize:ToHex()
+        local changeType = ZO_LocalizeDecimalNumber(g_currencyAPThrottleValue)
+        local currencyTypeColor = APColorize:ToHex()
+        local currencyIcon = CA.SV.CurrencyIcons and "|t16:16:/esoui/art/currency/alliancepoints.dds|t" or ""
+        local currencyName = strformat(CA.SV.CurrencyAPName, g_currencyAPThrottleValue)
+        local currencyTotal = CA.SV.CurrencyAPShowTotal
+        local messageTotal = CA.SV.CurrencyMessageTotalAP
+        local messageChange = CA.SV.CurrencyMessageEarn
+        local type = "LUIE_CURRENCY_THROTTLE"
+        CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
     EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedAP")
     g_currencyAPThrottleValue = 0
@@ -2720,9 +2733,17 @@ end
 
 function CA.CurrencyTVThrottlePrinter()
     if g_currencyTVThrottleValue > 0 and g_currencyTVThrottleValue > CA.SV.CurrencyTVFilter then
-        local newValue = g_currencyTVThrottleTotal
-        local oldValue = newValue - g_currencyTVThrottleValue
-        CA.OnCurrencyUpdate(nil, 3, newValue, oldValue, 97)
+        local formattedValue = ZO_LocalizeDecimalNumber(g_currencyTVThrottleTotal)
+        local changeColor = CurrencyUpColorize:ToHex()
+        local changeType = ZO_LocalizeDecimalNumber(g_currencyTVThrottleValue)
+        local currencyTypeColor = TVColorize:ToHex()
+        local currencyIcon = CA.SV.CurrencyIcons and "|t16:16:/esoui/art/currency/currency_telvar.dds|t" or ""
+        local currencyName = strformat(CA.SV.CurrencyTVName, g_currencyTVThrottleValue)
+        local currencyTotal = CA.SV.CurrencyTVShowTotal
+        local messageTotal = CA.SV.CurrencyMessageTotalTV
+        local messageChange = CA.SV.CurrencyMessageEarn
+        local type = "LUIE_CURRENCY_THROTTLE"
+        CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
     EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedTV")
     g_currencyTVThrottleValue = 0
@@ -2788,7 +2809,7 @@ function CA.StorageBag(eventCode, previousCapacity, currentCapacity, previousUpg
     if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
         if CA.SV.StorageBagCA then
             local formattedString = StorageBagColorize:Colorize(zo_strformat(SI_INVENTORY_BAG_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "STORAGE" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
@@ -2804,7 +2825,7 @@ function CA.StorageBank(eventCode, previousCapacity, currentCapacity, previousUp
     if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
         if CA.SV.StorageBagCA then
             local formattedString = StorageBagColorize:Colorize(zo_strformat(SI_INVENTORY_BANK_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "STORAGE" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
@@ -3528,45 +3549,14 @@ function CA.FunctionMailCurrencyCheck()
     end
 end
 
-function CA.OnLevelUpdate(eventCode, unitTag, level)
-    if unitTag == ("player") then
-        
-        local IsChampion = IsUnitChampion("player")
-        if IsChampion then
-            return
-        end
-        
-        local CurrentLevel = GetUnitLevel ("player")
-        
-        local icon = ""
-        if CA.SV.ExperienceColorLevel then
-            icon = CA.SV.LevelUpIcon and ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(" " .. zo_iconFormatInheritColor("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)) or ""
-        else
-            icon = CA.SV.LevelUpIcon and (" " .. zo_iconFormat("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)) or ""
-        end
-        
-        local CurrentLevelFormatted = ""
-        if CA.SV.ExperienceColorLevel then
-            CurrentLevelFormatted = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(GetString(SI_GAMEPAD_QUEST_JOURNAL_QUEST_LEVEL) .. " " .. CurrentLevel)
-        else
-            CurrentLevelFormatted = LevelUpColorize:Colorize(GetString(SI_GAMEPAD_QUEST_JOURNAL_QUEST_LEVEL) .. " " .. CurrentLevel)
-        end
-
-        if CA.SV.ExperienceColorLevel then
-            printToChat(strformat("<<1>><<2>> <<3>><<4>>", LevelUpColorize:Colorize(GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP)), icon, CurrentLevelFormatted, LevelUpColorize:Colorize("!")))
-        else
-            printToChat(strformat("<<1>><<2>> <<3>><<4>>", LevelUpColorize:Colorize(GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP)), icon, CurrentLevelFormatted, LevelUpColorize:Colorize("!")))
-        end
-        
-    end
-end
-
 function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChampionPoints)
 
     --"Gained <<1[$d Champion Point/$d Champion Points]>>", -- SI_CHAMPION_POINT_EARNED
     --"<<1>> |t16:16:<<X:2>>|t <<3>> <<1[Point/Points]>>", -- SI_CHAMPION_POINT_TYPE
     
     -- adding one so that we are starting from the first gained point instead of the starting champion points
+    
+    --[[
     local pointsEarned = currentChampionPoints - oldChampionPoints
     local endingPoints = currentChampionPoints
     local startingPoints = oldChampionPoints + 1
@@ -3582,15 +3572,17 @@ function CA.OnChampionUpdate(eventCode, unitTag, oldChampionPoints, currentChamp
     
     for pointType,amount in pairs(championPointsByType) do
         if amount > 0 then
-            local icon = CA.SV.LevelUpIcon and strformat(" |t16:16:<<X:1>>|t", GetChampionPointAttributeHUDIcon(pointType)) or ( " " )
+            local icon = CA.SV.ExperienceLevelUpIcon and strformat(" |t16:16:<<X:1>>|t", GetChampionPointAttributeHUDIcon(pointType)) or ( " " )
             local constellationGroupName = ZO_Champion_GetUnformattedConstellationGroupNameFromAttribute(pointType)
-            if CA.SV.ExperienceColorLevel then
+            if CA.SV.ExperienceLevelColorByLevel then
                 printToChat(ZO_CP_BAR_GRADIENT_COLORS[pointType][2]:Colorize(strformat(SI_LUIE_CHAMPION_POINT_TYPE, amount, icon, constellationGroupName)))
             else
                 printToChat(LevelUpColorize:Colorize(strformat(SI_LUIE_CHAMPION_POINT_TYPE, amount, icon, constellationGroupName)))
             end
         end
     end
+    
+    ]]
 end
 
 function CA.SkillPointsChanged(eventCode, pointsBefore, pointsNow, partialPointsBefore, partialPointsNow)
@@ -3604,13 +3596,12 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
     -- d("Experience Gain) previousExperience: " .. previousExperience .. " --- " .. "currentExperience: " .. currentExperience)
     
     if CA.SV.Experience and ( not ( CA.SV.ExperienceHideCombat and reason == 0 ) or not reason == 0 ) then
-        -- Change in Experience Points on gaining them
-        local change = currentExperience - previousExperience
+    
+        local change = currentExperience - previousExperience -- Change in Experience Points on gaining them
         
         -- If throttle is enabled, save value and end function here
         if CA.SV.ExperienceThrottle > 0 and reason == 0 then
             g_xpCombatBufferValue = g_xpCombatBufferValue + change
-            g_xpCombatBufferTotal = currentExperience
             -- We unregister the event, then re-register it, this keeps the buffer at a constant X throttle after XP is gained.
             EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "BufferedXP", CA.SV.ExperienceThrottle, CA.PrintBufferedXP )
@@ -3625,36 +3616,35 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
         end
 
         -- If we gain experience from a non combat source, and our buffer function holds a value, then we need to immediately dump this value before the next XP update is processed.
-        -- TODO: Possibly integrate this into something else too? Currently this fires after other events like the Wayshrine discovery message so it looks odd still.
+        -- TODO: Possibly integrate this XP dump into something else too? Currently this fires after other events like the Wayshrine discovery message so it looks odd still.
         if CA.SV.ExperienceThrottle > 0 and g_xpCombatBufferValue > 0 and (reason ~= 0 and reason ~= 99) then
+            EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
             CA.PrintBufferedXP()
         end
         
-        -- Displays an icon if enabled
-        local icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t ") or ""
-        local messageP1 = ("|r|c" .. ExperienceNameColorize .. icon .. ZO_LocalizeDecimalNumber(change) .. " " .. CA.SV.ExperienceName .. "|r|c" .. ExperienceMessageColorize)
-        local formattedMessageP1 = (strfmt(CA.SV.ExperienceMessage, messageP1))
-        local finalMessage = strfmt("|c%s%s|r", ExperienceMessageColorize, formattedMessageP1)
-        
-        if reason == 99 then
-            printToChat(finalMessage)
-        else
-            g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "EXPERIENCE" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
-        end
+        CA.PrintExperienceGain(change)
+
     end
+end
+
+function CA.PrintExperienceGain(change)
+    local icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t ") or ""
+    local messageP1 = ("|r|c" .. ExperienceNameColorize .. icon .. ZO_LocalizeDecimalNumber(change) .. " " .. CA.SV.ExperienceName .. "|r|c" .. ExperienceMessageColorize)
+    local formattedMessageP1 = (strfmt(CA.SV.ExperienceMessage, messageP1))
+    local finalMessage = strfmt("|c%s%s|r", ExperienceMessageColorize, formattedMessageP1)
+
+    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "EXPERIENCE" }
+    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
 end
 
 function CA.PrintBufferedXP()
     if g_xpCombatBufferValue > 0 and g_xpCombatBufferValue > CA.SV.ExperienceFilter then
-        local previousExperience = g_xpCombatBufferTotal - g_xpCombatBufferValue
-        local currentExperience = g_xpCombatBufferTotal
-        CA.OnExperienceGain(nil, 99, nil, previousExperience, currentExperience, nil)
+        local change = g_xpCombatBufferValue
+        CA.PrintExperienceGain(change)
     end
-    g_xpCombatBufferValue = 0
-    g_xpCombatBufferTotal = 0
     EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
+    g_xpCombatBufferValue = 0
 end
 
 -- Helper function to return color (without |c prefix) according to current percentage
@@ -5701,13 +5691,28 @@ function CA.AlertStyleLearned()
             -- If we purchased from the stables, display a currency announcement if relevant
             if CA.SV.StorageRidingCA then
                 -- TODO: Currency conditional here!!!!
-                local newValue = GetCarriedCurrencyAmount(1)
-                local oldValue = newValue + 250
-                CA.OnCurrencyUpdate(eventCode, 1, newValue, oldValue, 96, ridingSkill)
-                --
+            
+                local type
+                if ridingSkill == 1 then
+                    type = "LUIE_CURRENCY_RIDING_SPEED"
+                elseif ridingSkill == 2 then
+                    type = "LUIE_CURRENCY_RIDING_CAPACITY"
+                elseif ridingSkill == 3 then
+                    type = "LUIE_CURRENCY_RIDING_STAMINA"
+                end
+                local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1) + 250)
+                local changeColor = CurrencyUpColorize:ToHex()
+                local changeType = ZO_LocalizeDecimalNumber(250)
+                local currencyTypeColor = CurrencyGoldColorize:ToHex()
+                local currencyIcon = CA.SV.CurrencyIcons and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
+                local currencyName = strformat(CA.SV.CurrencyGoldName, 250)
+                local currencyTotal = CA.SV.CurrencyGoldShowTotal
+                local messageTotal = CA.SV.CurrencyMessageTotalGold
+                local messageChange = CA.SV.CurrencyMessageStable
+                CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
                 
                 local formattedString = StorageRidingColorize:Colorize(zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
-                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "STORAGE" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
@@ -5963,7 +5968,7 @@ function CA.AlertStyleLearned()
                         stringPart1 = ""
                     end
                     if textureName ~= "" and textureName ~= nil then
-                        formattedIcon = CA.SV.LorebookIcon and ("|t16:16:" .. textureName .. "|t ") or ""
+                        formattedIcon = CA.SV.LorebookIcon and zo_strformat("<<1>> ", zo_iconFormatInheritColor(textureName, 16, 16)) or ""
                     end
                     if CA.SV.LorebookCategory then
                         stringPart2 = LorebookColorize2:Colorize(zo_strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
@@ -6088,7 +6093,7 @@ function CA.AlertStyleLearned()
         local icon = select(4, ZO_Skills_GetIconsForSkillType(skillType))
         
         if CA.SV.SkillLineUnlockCA then
-            local formattedIcon = CA.SV.SkillLineIcon and ("|t16:16:" .. icon .. "|t ") or ""
+            local formattedIcon = CA.SV.SkillLineIcon and zo_strformat("<<1>> ", zo_iconFormatInheritColor(icon, 16, 16)) or ""
             local formattedString = SkillLineColorize:Colorize(zo_strformat(SI_LUIE_CA_SKILL_LINE_ADDED, formattedIcon, lineName))
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
@@ -6393,19 +6398,6 @@ function CA.AlertStyleLearned()
 
         local questJournalObject = SYSTEMS:GetObject("questJournal")
         local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
-
-        if CA.SV.QuestCompleteCA then
-            local questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
-            local formattedString
-            if iconTexture and CA.SV.QuestIcon then
-                formattedString = strformat(SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, 16, 16), questNameFormatted)
-            else
-                formattedString = strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questNameFormatted)
-            end
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedText, type = "QUEST" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
-        end
         
         if CA.SV.QuestCompleteCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.QUEST_COMPLETED)
@@ -6431,6 +6423,25 @@ function CA.AlertStyleLearned()
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertString)
         end
         
+        if CA.SV.QuestCompleteCA then
+            local questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
+            local formattedString
+            if iconTexture and CA.SV.QuestIcon then
+                formattedString = strformat(SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, 16, 16), questNameFormatted)
+            else
+                formattedString = strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questNameFormatted)
+            end
+            -- This event double fires on quest completion, if an equivalent message is already detected in queue, then abort!
+            for i = 1, #g_queuedMessages do
+                if g_queuedMessages[i].message == formattedString then
+                    return true
+                end
+            end
+            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        end
+        
         -- If we don't have either CSA or Alert on (then we want to play a sound here)
         if not CA.SV.QuestCompleteCSA then
             PlaySound(SOUNDS.QUEST_COMPLETED)
@@ -6447,7 +6458,6 @@ function CA.AlertStyleLearned()
     end
     
     local function ObjectiveCompletedHook(zoneIndex, poiIndex, level, previousExperience, currentExperience, championPoints)
-        d("Objective Complete")
         local name, _, _, finishedDescription = GetPOIInfo(zoneIndex, poiIndex)
         local nameFormatted
         local formattedText
@@ -6458,12 +6468,6 @@ function CA.AlertStyleLearned()
             nameFormatted = (strformat("|c<<1>><<2>>|r", name))
         end
         formattedText = strformat(SI_NOTIFYTEXT_OBJECTIVE_COMPLETE, nameFormatted)
-        
-        if CA.SV.QuestCompleteCA then
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedText, type = "QUEST" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
-        end
         
         if CA.SV.QuestCompleteAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_NOTIFYTEXT_OBJECTIVE_COMPLETE, name))
@@ -6478,6 +6482,18 @@ function CA.AlertStyleLearned()
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_OBJECTIVE_COMPLETED)
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
+        
+        if CA.SV.QuestCompleteCA then
+            -- This event double fires on quest completion, if an equivalent message is already detected in queue, then abort!
+            for i = 1, #g_queuedMessages do
+                if g_queuedMessages[i].message == formattedText then
+                    return true
+                end
+            end
+            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedText, type = "QUEST" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        end
 
         return true
     end
@@ -6485,7 +6501,7 @@ function CA.AlertStyleLearned()
     -- For failure and updates (gonna need to punch a bunch of stuff in here to divide it up)
     local function ConditionCounterHook(journalIndex, questName, conditionText, conditionType, currConditionVal, newConditionVal, conditionMax, isFailCondition, stepOverrideText, isPushed, isComplete, isConditionComplete, isStepHidden)
         if isStepHidden or (isPushed and isComplete) or (currConditionVal >= newConditionVal) then
-        return
+        return true
     end
 
         local type -- This variable represents whether this message is an objective update or failure state message (1 = update, 2 = failure) There are too many conditionals to resolve what we need to print inside them so we do it after setting the formatting.
@@ -6767,7 +6783,7 @@ function CA.AlertStyleLearned()
         
         if CA.SV.QuestLocObjectiveCA then
             local formattedString = (strformat("|c<<1>><<2>>:|r |c<<3>><<4>>|r", QuestColorLocNameColorize, name, QuestColorLocDescriptionColorize, startDescription))
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST_POI" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             
@@ -6820,25 +6836,74 @@ function CA.AlertStyleLearned()
             end
         end
         
-        -- We want to play a sound still even if the bar popup is hidden
-        if LUIE.SV.HideXPBar and sound ~= nil then
+        -- We want to play a sound still even if the bar popup is hidden, but the delay needs to remain intact so we add a blank CSA with sound.
+        if XP_GAIN_SHOW_REASONS[reason] and LUIE.SV.HideXPBar and sound ~= nil then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT)
             messageParams:SetSound(sound)
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_EXPERIENCE_GAIN)
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
 
+        -- Level up notification
         local levelSize = GetNumExperiencePointsInLevel(level)
         if levelSize ~= nil and currentExperience >= levelSize then
-            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.LEVEL_UP)
-            messageParams:SetText(GetString(SI_LEVEL_UP_NOTIFICATION))
-            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_LEVEL_GAIN)
-            if not LUIE.SV.HideXPBar then
-                local barParams = CENTER_SCREEN_ANNOUNCE:CreateBarParams(PPB_XP, level + 1, currentExperience - levelSize, currentExperience - levelSize)
-                barParams:SetShowNoGain(true)
-                messageParams:SetBarParams(barParams)
+        
+            local CurrentLevel = level + 1
+            if CA.SV.ExperienceLevelUpCA then
+                local icon
+                if CA.SV.ExperienceLevelColorByLevel then
+                    icon = CA.SV.ExperienceLevelUpIcon and ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(" " .. zo_iconFormatInheritColor("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)) or ""
+                else
+                    icon = CA.SV.ExperienceLevelUpIcon and (" " .. zo_iconFormat("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)) or ""
+                end
+                
+                local CurrentLevelFormatted = ""
+                if CA.SV.ExperienceLevelColorByLevel then
+                    CurrentLevelFormatted = ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(GetString(SI_GAMEPAD_QUEST_JOURNAL_QUEST_LEVEL) .. " " .. CurrentLevel)
+                else
+                    CurrentLevelFormatted = LevelUpColorize:Colorize(GetString(SI_GAMEPAD_QUEST_JOURNAL_QUEST_LEVEL) .. " " .. CurrentLevel)
+                end
+
+                local formattedString
+                if CA.SV.ExperienceLevelColorByLevel then
+                    formattedString = strformat("<<1>><<2>> <<3>><<4>>", LevelUpColorize:Colorize(GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP)), icon, CurrentLevelFormatted, LevelUpColorize:Colorize("!"))
+                else
+                    formattedString = strformat("<<1>><<2>> <<3>><<4>>", LevelUpColorize:Colorize(GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP)), icon, CurrentLevelFormatted, LevelUpColorize:Colorize("!"))
+                end
+                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
+                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
-            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        
+            if CA.SV.ExperienceLevelUpCSA then
+                local iconCSA = (" " .. zo_iconFormat("LuiExtended/media/unitframes/unitframes_level_up.dds", "100%", "100%")) or ""
+                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.LEVEL_UP)
+                if CA.SV.ExperienceLevelUpCSAExpand then
+                    local levelUpExpanded = zo_strformat("<<1>><<2>> <<3>> <<4>>", GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), iconCSA, GetString(SI_GAMEPAD_QUEST_JOURNAL_QUEST_LEVEL), CurrentLevel)
+                    messageParams:SetText(zo_strformat(SI_LEVEL_UP_NOTIFICATION), levelUpExpanded)
+                else
+                    messageParams:SetText(GetString(SI_LEVEL_UP_NOTIFICATION))
+                end
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_LEVEL_GAIN)
+                if not LUIE.SV.HideXPBar then
+                    local barParams = CENTER_SCREEN_ANNOUNCE:CreateBarParams(PPB_XP, level + 1, currentExperience - levelSize, currentExperience - levelSize)
+                    barParams:SetShowNoGain(true)
+                    messageParams:SetBarParams(barParams)
+                end
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+            
+            if CA.SV.ExperienceLevelUpAlert then
+                local iconAlert = CA.SV.ExperienceLevelUpIcon and (" " .. zo_iconFormat("LuiExtended/media/unitframes/unitframes_level_up.dds", "75%", "75%")) or ""
+                local text = zo_strformat("<<1>><<2>> <<3>> <<4>>!", GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), iconAlert, GetString(SI_GAMEPAD_QUEST_JOURNAL_QUEST_LEVEL), CurrentLevel)
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
+            end
+            
+            -- Play Sound even if CSA is disabled
+            if not CA.SV.ExperienceLevelUpCSA then
+                PlaySound(SOUNDS.LEVEL_UP)
+            end
+            
         end
         
         return true
@@ -6846,7 +6911,7 @@ function CA.AlertStyleLearned()
     
     local function EnlightenGainHook()
         formattedString = strformat("<<1>>! <<2>>", GetString(SI_ENLIGHTENED_STATE_GAINED_HEADER), GetString(SI_ENLIGHTENED_STATE_GAINED_DESCRIPTION))
-        g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+        g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         
@@ -6865,7 +6930,7 @@ function CA.AlertStyleLearned()
 
     local function EnlightenLossHook()
         formattedString = strformat("<<1>>!", GetString(SI_ENLIGHTENED_STATE_LOST_HEADER))
-        g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+        g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         
@@ -6920,13 +6985,13 @@ function CA.AlertStyleLearned()
                     local finalMessage = strfmt("|cFFFFFF" .. learnString, messageP1, value .. ".|r")
                 
                     
-                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "QUEST" }
+                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "STORAGE" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                     EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 -----
             
                 local formattedString = StorageRidingColorize:Colorize(zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
-                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
+                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "STORAGE" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
@@ -6964,6 +7029,121 @@ function CA.AlertStyleLearned()
             end
         end
         return true
+    end
+    
+    local function ChampionLevelAchievedHook(wasChampionSystemUnlocked)
+    
+        local icon = GetChampionPointsIcon()
+        
+        if CA.SV.ExperienceLevelUpCA then
+            local formattedIcon = CA.SV.ExperienceLevelUpIcon and zo_strformat("<<1>> ", zo_iconFormatInheritColor(icon, 16, 16)) or ""
+            local formattedString = LevelUpColorize:Colorize(zo_strformat("<<1>>!", GetString(SI_CHAMPION_ANNOUNCEMENT_UNLOCKED, formattedIcon)))
+            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        end
+        
+        if CA.SV.ExperienceLevelUpCSA then
+            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.CHAMPION_POINT_GAINED)
+            local formattedIcon = zo_strformat("<<1>> ", zo_iconFormat(icon, "100%", "100%"))
+            messageParams:SetText(zo_strformat(SI_CHAMPION_ANNOUNCEMENT_UNLOCKED, formattedIcon))
+            if not LUIE.SV.HideXPBar then
+                if wasChampionSystemUnlocked then
+                    local championPoints = GetPlayerChampionPointsEarned()
+                    local currentChampionXP = GetPlayerChampionXP()
+                    local barParams = CENTER_SCREEN_ANNOUNCE:CreateBarParams(PPB_CP, championPoints, currentChampionXP, currentChampionXP)
+                    barParams:SetShowNoGain(true)
+                    messageParams:SetBarParams(barParams)
+                else
+                    local totalChampionPoints = GetPlayerChampionPointsEarned()
+                    local championXPGained = 0;
+                    for i = 0, (totalChampionPoints - 1) do
+                        championXPGained = championXPGained + GetNumChampionXPInChampionPoint(i)
+                    end
+                    messageParams:SetBarParams(CENTER_SCREEN_ANNOUNCE:CreateBarParams(PPB_CP, 0, 0, championXPGained))
+                    messageParams:SetLifespanMS(12000)
+                end
+            end
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_CHAMPION_LEVEL_ACHIEVED)
+            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        end
+        
+        if CA.SV.ExperienceLevelUpAlert then
+            local formattedIcon = CA.SV.ExperienceLevelUpIcon and zo_strformat("<<1>> ", zo_iconFormat(icon, "75%", "75%")) or ""
+            local text = zo_strformat("<<1>>!", GetString(SI_CHAMPION_ANNOUNCEMENT_UNLOCKED, formattedIcon))
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
+        end
+        
+        if not CA.SV.ExperienceLevelUpCSA then
+            PlaySound(SOUNDS.CHAMPION_POINT_GAINED)
+        end
+        
+        return true
+    end
+
+    local function ChampionPointGainedHook(pointDelta)
+        -- adding one so that we are starting from the first gained point instead of the starting champion points
+        local endingPoints = GetPlayerChampionPointsEarned()
+        local startingPoints = endingPoints - pointDelta + 1
+        local championPointsByType = { 0, 0, 0 }
+
+        while startingPoints <= endingPoints do
+            local pointType = GetChampionPointAttributeForRank(startingPoints)
+            championPointsByType[pointType] = championPointsByType[pointType] + 1
+            startingPoints = startingPoints + 1
+        end
+        
+        if CA.SV.ExperienceLevelUpCA then
+            local formattedString = LevelUpColorize:Colorize(zo_strformat("<<1>>:", GetString(SI_CHAMPION_POINT_EARNED, pointDelta)))
+            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        end
+
+        local secondLine = ""
+        if CA.SV.ExperienceLevelUpCA or CA.SV.ExperienceLevelUpCSA then
+            for pointType,amount in pairs(championPointsByType) do
+                if amount > 0 then
+                    local icon = GetChampionPointAttributeHUDIcon(pointType)
+                    local formattedIcon = CA.SV.ExperienceLevelUpIcon and strformat(" <<1>>", zo_iconFormat(icon, 16, 16)) or ""
+                    local constellationGroupName = ZO_Champion_GetUnformattedConstellationGroupNameFromAttribute(pointType)
+                    if CA.SV.ExperienceLevelColorByLevel then
+                        formattedString = ZO_CP_BAR_GRADIENT_COLORS[pointType][2]:Colorize(strformat(SI_LUIE_CHAMPION_POINT_TYPE, amount, formattedIcon, constellationGroupName))
+                    else
+                        formattedString = LevelUpColorize:Colorize(strformat(SI_LUIE_CHAMPION_POINT_TYPE, amount, formattedIcon, constellationGroupName))
+                    end
+                    if CA.SV.ExperienceLevelUpCA then
+                        g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
+                        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                    end
+                    if CA.SV.ExperienceLevelUpCSA then
+                        secondLine = secondLine .. zo_strformat(SI_CHAMPION_POINT_TYPE, amount, icon, constellationGroupName) .. "\n"
+                    end
+                end
+            end
+        end
+        
+        if CA.SV.ExperienceLevelUpCSA then
+            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.CHAMPION_POINT_GAINED)
+            messageParams:SetText(zo_strformat(SI_CHAMPION_POINT_EARNED, pointDelta), secondLine)
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_CHAMPION_POINT_GAINED)
+            messageParams:MarkSuppressIconFrame()
+            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        end
+        
+        if CA.SV.ExperienceLevelUpAlert then
+            local text = zo_strformat("<<1>>!", GetString(SI_CHAMPION_POINT_EARNED, pointDelta))
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
+        end
+        
+        if not CA.SV.ExperienceLevelUpCSA then
+            PlaySound(SOUNDS.CHAMPION_POINT_GAINED)
+        end
+        
+        return true
+
+            
     end
     
     -- Unregister the ZOS events for handling Quest Removal/Advanced/Added to replace with our own functions
@@ -7011,6 +7191,9 @@ function CA.AlertStyleLearned()
     ZO_PreHook(csaHandlers, EVENT_COLLECTIBLE_UPDATED, CollectibleUnlockedHook)
     ZO_PreHook(csaHandlers, EVENT_COLLECTIBLES_UPDATED, CollectiblesUnlockedHook)
     
+    ZO_PreHook(csaHandlers, EVENT_CHAMPION_LEVEL_ACHIEVED, ChampionLevelAchievedHook)
+    ZO_PreHook(csaHandlers, EVENT_CHAMPION_POINT_GAINED, ChampionPointGainedHook)
+    
    -- ZO_PreHook(csaHandlers, loreEvents[3], LoreCollectionHook)
    -- ZO_PreHook(csaHandlers, loreEvents[4], LoreCollectionXPHook)
     
@@ -7046,7 +7229,7 @@ function CA.AlertStyleLearned()
     
     ]]
 	
-end
+end       
 
 function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previousXP, currentXP)
     if (skillType == SKILL_TYPE_GUILD) then
@@ -7065,57 +7248,68 @@ function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previo
         end
         
         local change = currentXP - previousXP
-        
-        -- Bail out or save value if Throttle/Threshold conditions are met
-        if skillIndex == 1 and CA.SV.SkillGuildFighters then
-            if change <= CA.SV.SkillGuildThreshold then 
-                return
-            end
-            -- Only throttle values 5 or lower (FG Dailies give +10 skill)
-            if CA.SV.SkillGuildThrottle > 0 and change <= 5 then
-                g_guildSkillThrottle = g_guildSkillThrottle + change
-                return
-                -- call function later
-            end
-        end
-        
-        -- TODO: Move this (not sure where to since putting it in the base function makes it populate before colors are defined)
-        local GUILD_SKILL_COLOR_TABLE =
-        {
-            [1] = SkillGuildColorizeFG,
-            [2] = SkillGuildColorizeMG,
-            [3] = SkillGuildColorizeUD,
-            [4] = SkillGuildColorizeTG,
-            [5] = SkillGuildColorizeDB,
-        }
-        
         local lineName = GetSkillLineInfo(skillType, skillIndex)
-        local icon = zo_iconFormatInheritColor(GUILD_SKILL_ICONS[skillIndex], 16, 16)
-        local formattedIcon = CA.SV.SkillGuildIcon and (icon .. " ") or ""
-        
-        local colorize = GUILD_SKILL_COLOR_TABLE[skillIndex]
-        local messageP1 = ("|r|c" .. colorize .. formattedIcon .. change .. " " .. lineName .. "|r|c" .. SkillGuildColorize)
-        local formattedMessageP1 = (strfmt(CA.SV.SkillGuildMsg, messageP1))
-        local finalMessage = strfmt("|c%s%s|r", SkillGuildColorize, formattedMessageP1)
-        
-        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "SKILL" }
-        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         
         if CA.SV.SkillGuildAlert then
             local text = zo_strformat(GetString(SI_LUIE_CA_SKILL_GUILD_ALERT), lineName)
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
         end
         
-        --[[
-        CA.SV.SkillXPUpdateThrottlePrinter
-        if g_guildSkillThrottle > 0 and g_guildSkillThrottle > CA.SV.SkillGuildThreshold then
-            bla bla print
-            g_guildSkillThrottle = 0
-                
-        ]]
+        -- Bail out or save value if Throttle/Threshold conditions are met
+        if skillIndex == 1 and CA.SV.SkillGuildFighters then
+            -- Only throttle values 5 or lower (FG Dailies give +10 skill)
+            if CA.SV.SkillGuildThrottle > 0 and change <= 5 then
+                g_guildSkillThrottle = g_guildSkillThrottle + change
+                EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedRep")
+                EVENT_MANAGER:RegisterForUpdate(moduleName .. "BufferedRep", CA.SV.SkillGuildThrottle, CA.PrintBufferedGuildRep )
+                return
+            end
+            
+            -- If throttle wasn't triggered and the value was below threshold then bail out.
+            if change <= CA.SV.SkillGuildThreshold then 
+                return
+            end
+        end
+        
+        CA.PrintGuildRep(change, lineName, skillIndex)
+
      end
-end         
+end
+
+function CA.PrintGuildRep(change, lineName, skillIndex)
+    -- TODO: Move this (not sure where to since putting it in the base function makes it populate before colors are defined)
+    local GUILD_SKILL_COLOR_TABLE =
+    {
+        [1] = SkillGuildColorizeFG,
+        [2] = SkillGuildColorizeMG,
+        [3] = SkillGuildColorizeUD,
+        [4] = SkillGuildColorizeTG,
+        [5] = SkillGuildColorizeDB,
+    }
+    
+    local icon = zo_iconFormatInheritColor(GUILD_SKILL_ICONS[skillIndex], 16, 16)
+    local formattedIcon = CA.SV.SkillGuildIcon and (icon .. " ") or ""
+    
+    local guildString = zo_strformat(CA.SV.SkillGuildRepName, change)
+    local colorize = GUILD_SKILL_COLOR_TABLE[skillIndex]
+    local messageP1 = ("|r|c" .. colorize .. formattedIcon .. change .. " " .. lineName .. " " .. guildString .. "|r|c" .. SkillGuildColorize)
+    local formattedMessageP1 = (strfmt(CA.SV.SkillGuildMsg, messageP1))
+    local finalMessage = strfmt("|c%s%s|r", SkillGuildColorize, formattedMessageP1)
+    
+    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "SKILL" }
+    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+end
+
+function CA.PrintBufferedGuildRep()
+    if (g_guildSkillThrottle > 0 and g_guildSkillThrottle > CA.SV.SkillGuildThreshold) then
+        local skillIndex = 1
+        local lineName = GetSkillLineInfo(SKILL_TYPE_GUILD, skillIndex)
+        CA.PrintGuildRep(g_guildSkillThrottle, lineName, skillIndex)
+    end
+    EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedRep")
+    g_guildSkillThrottle = 0
+end
 
 -- TEMP COPIED FROM NO THANK YOU TO SEE
 --[[
@@ -7148,9 +7342,18 @@ end
 
 function CA.PrintQueuedMessages()
 
+    -- TODO: Replace with table.sort function to print. Although POSSIBLY print a few sets and remove them first in order to preserve order.
+
     -- Resolve achievement update messages first
     for i=1, #g_queuedMessages do
         if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type == "ACHIEVEMENT" then
+            printToChat(g_queuedMessages[i].message)
+        end
+    end
+    
+    -- Resolve quest POI added
+    for i=1, #g_queuedMessages do
+        if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type == "QUEST_POI" then
             printToChat(g_queuedMessages[i].message)
         end
     end
@@ -7164,7 +7367,7 @@ function CA.PrintQueuedMessages()
     
     -- Display the rest
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type ~= "QUEST" and g_queuedMessages[i].type ~= "EXPERIENCE" and g_queuedMessages[i].type ~= "ACHIEVEMENT" then
+        if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type ~= "QUEST" and g_queuedMessages[i].type ~= "EXPERIENCE" and g_queuedMessages[i].type ~= "ACHIEVEMENT" and g_queuedMessages[i].type ~= "QUEST_POI" then
             if g_queuedMessages[i].type == "Loot" then
                 -- TODO: queued Messages for loot save all neccesary variables then push them over to loot printer function which gets resolved here.
                 d("Loot Message resolve extra stuff here")

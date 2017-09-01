@@ -2078,35 +2078,68 @@ function LUIE_CreateSettings()
                     {
                         -- Show Level Up Message in Chat
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_EXP_LVLUPMSG),
-                        tooltip = GetString(SI_LUIE_LAM_CA_EXP_LVLUPMSG_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceLevelUp end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceLevelUp = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
+                        name = "Level Up CA",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceLevelUpCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceLevelUpCA = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.ExperienceLevelUp,
+                        default = LUIE.ChatAnnouncements.D.ExperienceLevelUpCA,
+                    },
+                    {
+                        -- Level Up CA
+                        type = "checkbox",
+                        name = "Level Up CSA",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceLevelUpCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceLevelUpCSA = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.ExperienceLevelUpCSA,
+                    },
+                    {
+                        -- Level Up Alert
+                        type = "checkbox",
+                        name = "Level Up Alert",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceLevelUpAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceLevelUpAlert = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.ExperienceLevelUpAlert,
+                    },
+                    {
+                        -- Level Up CSA Expanded
+                        type = "checkbox",
+                        name = "Level Up CSA Expanded",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceLevelUpCSAExpand end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceLevelUpCSAExpand = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.ExperienceLevelUpCSAExpand,
                     },
                     {
                         -- Show Level Icon on Level Up
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_LVLUPICON)),
                         tooltip = GetString(SI_LUIE_LAM_CA_EXP_LVLUPICON_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.LevelUpIcon end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LevelUpIcon = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceLevelUpIcon end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceLevelUpIcon = value end,
                         width = "full",
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.ExperienceLevelUp and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.LevelUpIcon,
+                        default = LUIE.ChatAnnouncements.D.ExperienceExperienceLevelUpIcon,
                     },
                     {
                         -- Color Level by Context
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT)),
                         tooltip = GetString(SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceColorLevel end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceColorLevel = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.ExperienceLevelColorByLevel end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ExperienceLevelColorByLevel = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
                         width = "full",
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.ExperienceLevelUp and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.ExperienceColorLevel,
+                        default = LUIE.ChatAnnouncements.D.ExperienceLevelColorByLevel,
                     },
                     {
                         -- Experience Level Up Color
@@ -2525,7 +2558,7 @@ function LUIE_CreateSettings()
                     {
                         -- Skill Guild Threshold
                         type = "slider",
-                        name = "Hide Guild Skill Earned From Kills",
+                        name = "Hide Guild Rep Earned From Kills",
                         tooltip = "TODO",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.SkillGuildThreshold end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillGuildThreshold = value end,
@@ -2552,7 +2585,7 @@ function LUIE_CreateSettings()
                     {
                         -- Guild Skill Point Message
                         type = "editbox",
-                        name = "Guild Skill Point Message Format",
+                        name = "Guild Rep Message Format",
                         tooltip = "TODO",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.SkillGuildMsg end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillGuildMsg = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
@@ -2562,9 +2595,21 @@ function LUIE_CreateSettings()
                     },
                     
                     {
+                        -- Guild Skill Point Message
+                        type = "editbox",
+                        name = "Reputation Name",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.SkillGuildRepName end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.SkillGuildRepName = value LUIE.ChatAnnouncements.RegisterXPEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.SkillGuildRepName,
+                    },
+                    
+                    {
                         -- Guild Skill Point Color
                         type = "colorpicker",
-                        name = "Guild Skill Point Update Color",
+                        name = "Guild Rep Update Color",
                         tooltip = "TODO",
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.SkillGuildColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.SkillGuildColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
@@ -3911,7 +3956,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.StorageRidingColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.StorageRidingColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.ExperienceLevelUp and LUIE.SV.ChatAnnouncements_Enable) end,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = {r=LUIE.ChatAnnouncements.D.StorageRidingColor[1], g=LUIE.ChatAnnouncements.D.StorageRidingColor[2], b=LUIE.ChatAnnouncements.D.StorageRidingColor[3]}
                     },
                     {
@@ -3956,7 +4001,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.StorageBagColor) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.StorageBagColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.ExperienceLevelUp and LUIE.SV.ChatAnnouncements_Enable) end,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = {r=LUIE.ChatAnnouncements.D.StorageBagColor[1], g=LUIE.ChatAnnouncements.D.StorageBagColor[2], b=LUIE.ChatAnnouncements.D.StorageBagColor[3]}
                     },
                     {
