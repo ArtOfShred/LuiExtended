@@ -316,6 +316,16 @@ CA.D = {
     CurrencyWVColor                 = { 1, 1, 1, 1 },
     CurrencyWVName                  = GetString(SI_LUIE_CA_CURRENCY_WRIT_VOUCHER),
     CurrencyWVShowTotal             = true,
+    
+    -- LOOT
+    LootMessageReceived             = "You receive %s.",
+    LootMessageLooted               = "You loot %s.",
+    LootMessageDestroy              = "You destroy %s.",
+    LootMessageLockpick             = "Your %s breaks.",
+    
+    LootMessageDisguiseEquip        = "You equip %s.",
+    LootMessageDisguiseRemove       = "You unequip %s.",
+    LootMessageDisguiseDestroy      = "Your %s is destroyed.",
 }
 
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -341,7 +351,7 @@ local g_groupFormFudger           = false
 local g_groupJoinFudger           = false -- Controls message for group join
 local g_joinLFGOverride           = false
 local g_leaveLFGOverride          = false
-local g_guildBankCarryGainorloss  = ""
+local g_guildBankCarrygainOrLoss  = ""
 local g_guildBankCarryIcon        = ""
 local g_guildBankCarryItemLink    = ""
 local g_guildBankCarryItemType    = ""
@@ -2419,7 +2429,8 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         if CA.SV.CurrencyGoldThrottle and (reason == 0 or reason == 13 or reason == 62) then
             -- TODO: Register Event here instead
             EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedGold")
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "BufferedGold", 50, CA.CurrencyGoldThrottlePrinter )
+            -- NOTE: Unlike other throttle events, we used zo_callLater here because we have to make the call immediately (if some of the gold is looted after items, the message will appear after the loot if we don't use zo_callLater instead of a RegisterForUpdate)
+            zo_callLater( CA.CurrencyGoldThrottlePrinter, 50 )
             g_currencyGoldThrottleValue = g_currencyGoldThrottleValue + UpOrDown
             g_currencyGoldThrottleTotal = GetCarriedCurrencyAmount(1)
             return
@@ -2707,7 +2718,6 @@ function CA.CurrencyGoldThrottlePrinter()
         local type = "LUIE_CURRENCY_THROTTLE"
         CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
-    EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedGold")
     g_currencyGoldThrottleValue = 0
     g_currencyGoldThrottleTotal = 0
 end
@@ -2850,9 +2860,9 @@ function CA.OnBuybackItem(eventCode, itemName, quantity, money, itemSound)
     end
 
     local receivedBy = ""
-    local gainorloss = 1
+    local gainOrLoss = 1
 
-    CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainorloss)
+    CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainOrLoss)
 end
 
 function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCurrencyType1, specialCurrencyInfo1, specialCurrencyQuantity1, specialCurrencyType2, specialCurrencyInfo2, specialCurrencyQuantity2, itemSoundCategory)
@@ -2868,9 +2878,9 @@ function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCu
     end
 
     local receivedBy = ""
-    local gainorloss = 1
+    local gainOrLoss = 1
 
-    CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainorloss)
+    CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainOrLoss)
 end
 
 function CA.OnSellItem(eventCode, itemName, quantity, money)
@@ -2886,273 +2896,9 @@ function CA.OnSellItem(eventCode, itemName, quantity, money)
     end
 
     local receivedBy = ""
-    local gainorloss = 2
+    local gainOrLoss = 2
 
-    CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainorloss)
-end
-
-function CA.OnLootReceived(eventCode, receivedBy, itemName, quantity, itemSound, lootType, lootedBySelf, isPickpocketLoot, questItemIcon, itemId)
-
-    d("Loot Received")
-    
-    g_comboString = ""
-    g_isLooted = true
-
-    -- If we didn't receive the loot, and we don't have Only Notable loot shown then we ignore the rest of this event and everything is passed to Index functions
-    if lootedBySelf and lootType ~= LOOT_TYPE_QUEST_ITEM then
-        return
-    end
-    if not CA.SV.LootGroup then
-        return
-    end
-
-    local icon
-    -- fix Icon for missing quest items
-    if lootType == LOOT_TYPE_QUEST_ITEM then
-        icon = questItemIcon
-    elseif lootType == LOOT_TYPE_COLLECTIBLE then
-        local collectibleId = GetCollectibleIdFromLink(itemName)
-        local _,_,collectibleIcon = GetCollectibleInfo(collectibleId)
-        icon = collectibleIcon
-    else
-        -- Get Icon
-        local itemIcon,_,_,_,_ = GetItemLinkInfo(itemName)
-        icon = itemIcon
-    end
-    
-    -- Create Icon string if icon exists and corresponding setting is ON
-    icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
-
-    local itemType, specializedItemType = GetItemLinkItemType(itemName)
-    local itemQuality = GetItemLinkQuality(itemName)
-    local itemIsSet = GetItemLinkSetInfo(itemName)
-
-    -- Workaround for a ZOS bug: Daedric Embers are not flagged in-game as key fragments
-    if (itemId == 69059) then
-        specializedItemType = SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT
-    end
-
-    local itemIsKeyFragment = (itemType == ITEMTYPE_TROPHY) and (specializedItemType == SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT)
-    local itemIsSpecial = (itemType == ITEMTYPE_TROPHY and not itemIsKeyFragment) or (itemType == ITEMTYPE_COLLECTIBLE) or IsItemLinkConsumable(itemName)
-
-    -- Check for Blacklisted loot
-    if ( CA.SV.LootBlacklist and g_blacklistIDs[itemId] ) then
-        return
-    end
-
-    -- Set prefix based on Looted/Pickpocket/Received
-    local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTED)
-    if ( isPickpocketLoot ) then
-        logPrefix = GetString(SI_GAMECAMERAACTIONTYPE21)
-    end
-    if ( receivedBy == nil ) then
-        logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
-    end
-    if CA.SV.ItemContextToggle then
-        logPrefix = ( CA.SV.ItemContextMessage )
-    end
-
-    local gainorloss = 1
-
-    if ( (lootType ~= LOOT_TYPE_ITEM and lootType ~= LOOT_TYPE_COLLECTIBLE) or
-         (itemType == ITEMTYPE_CONTAINER) or -- Don't show containers for group members
-         (itemQuality == ITEM_QUALITY_ARCANE and itemType == ITEMTYPE_RACIAL_STYLE_MOTIF) ) then -- Don't show blue motifs for group members
-        return
-    end
-    if ( (itemIsSet) or
-         (itemQuality >= ITEM_QUALITY_ARCANE and itemIsSpecial) or
-         (itemQuality >= ITEM_QUALITY_ARTIFACT and not itemIsKeyFragment) or
-         (lootType == LOOT_TYPE_COLLECTIBLE) or
-         (g_notableIDs[itemId]) ) then
-
-        CA.LogItem( logPrefix, icon, itemName, itemType, quantity, self and "" or receivedBy, gainorloss )
-    end
-end
-
-function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainorloss, istrade)
-    --LoggedAnItem = true -- Set this to true, allows buffer to start!
-    local bracket1
-    local bracket2
-    local color
-    local message
-
-    if gainorloss == 1 then
-        color = CurrencyUpColorize
-    end
-    if gainorloss == 2 then
-        color = CurrencyDownColorize
-    end
-    if gainorloss == 3 then
-        color = ZO_SELECTED_TEXT
-    end
-
-    if CA.SV.ItemBracketDisplayOptions == 1 then
-        bracket1 = "["
-        bracket2 = "]"
-    elseif CA.SV.ItemBracketDisplayOptions == 2 then
-        bracket1 = "("
-        bracket2 = ")"
-    elseif CA.SV.ItemBracketDisplayOptions == 3 then
-        bracket1 = ""
-        bracket2 = " -"
-    elseif CA.SV.ItemBracketDisplayOptions == 4 then
-        bracket1 = ""
-        bracket2 = ""
-    end
-
-    local formattedRecipient
-    local formattedQuantity  = ""
-    local formattedTrait     = ""
-    local formattedArmorType = ""
-    local formattedStyle     = ""
-    local arrowPointer       = ""
-
-    if (receivedBy == "" or receivedBy == "CRAFT") then
-        -- Don't display yourself
-        formattedRecipient = ""
-    else
-       -- Selects direction of pointer based on whether item is gained for lost, reversed for Trade purposes.
-        if gainorloss == 1 and not istrade then
-            arrowPointer = " →"
-        elseif gainorloss == 2 and not istrade then
-            arrowPointer = " ←"
-        elseif gainorloss == 1 and istrade then
-            arrowPointer = " ←"
-        else
-            arrowPointer = " →"
-        end
-        -- Create a character link to make it easier to contact the recipient
-        formattedRecipient = strfmt(
-            "%s |c%06X|H0:character:%s|h%s|h|r",
-            arrowPointer,
-            HashString(receivedBy) % 0x1000000, -- Use the hash of the name for the color so that is random, but consistent
-            receivedBy,
-            receivedBy:gsub("%^%a+$", "", 1)
-        )
-    end
-
-    if (quantity > 1) then
-        formattedQuantity = strfmt(" |cFFFFFFx%d|r", quantity)
-    end
-
-    local armorType = GetItemLinkArmorType(itemName) -- Get Armor Type of item
-    if (CA.SV.LootShowArmorType and armorType ~= ARMORTYPE_NONE) then
-        formattedArmorType = strfmt(" |cFFFFFF(%s)|r", GetString("SI_ARMORTYPE", armorType))
-    end
-
-    local traitType = GetItemLinkTraitInfo(itemName) -- Get Trait type of item
-    if (CA.SV.LootShowTrait and traitType ~= ITEM_TRAIT_TYPE_NONE and itemType ~= ITEMTYPE_ARMOR_TRAIT and itemType ~= ITEMTYPE_WEAPON_TRAIT) then
-        formattedTrait = strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMTRAITTYPE", traitType))
-    end
-
-    local styleType = GetItemLinkItemStyle(itemName) -- Get Style of the item
-    if (CA.SV.LootShowStyle and styleType ~= ITEMSTYLE_NONE and styleType ~= ITEMSTYLE_UNIQUE and styleType ~= ITEMSTYLE_UNIVERSAL and itemType ~= ITEMTYPE_STYLE_MATERIAL) then
-        formattedStyle = strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMSTYLE", styleType))
-    end
-
-    if g_oldItemLink ~= "" then
-        itemName2 = (strfmt("%s → ", g_oldItemLink:gsub("^|H0", "|H1", 1)))
-        g_oldItemLink = ""
-    else
-        itemName2 = ""
-    end
-    
-    local total = ""
-    if CA.SV.LootTotal and formattedRecipient == "" then
-        local total1, total2, total3 = GetItemLinkStacks(itemName)
-        total = total1 + total2 + total3
-        if total > 1 then
-            total = strfmt(" %s %s|cFEFEFE%s|r", color:Colorize(CA.SV.LootTotalString), icon, ZO_LocalizeDecimalNumber(total))
-        else
-            total = ""
-        end
-    end
-    
-    message = color:Colorize(strfmt("%s%s%s ", bracket1, logPrefix, bracket2))
-
-    if receivedBy == "CRAFT"  and gainorloss == 1 then
-        g_itemString1Gain = message
-
-        if g_itemString2Gain ~= "" then g_itemString2Gain = strfmt("%s%s %s%s%s%s%s%s%s%s%s", g_itemString2Gain, color:Colorize(","), icon,
-            itemName2,
-            itemName:gsub("^|H0", "|H1", 1),
-            formattedQuantity,
-            formattedArmorType,
-            formattedTrait,
-            formattedStyle,
-            formattedRecipient,
-            g_comboString) end
-
-        if g_itemString2Gain == "" then g_itemString2Gain = strfmt("%s%s%s%s%s%s%s%s%s", icon,
-            itemName2,
-            itemName:gsub("^|H0", "|H1", 1),
-            formattedQuantity,
-            formattedArmorType,
-            formattedTrait,
-            formattedStyle,
-            formattedRecipient,
-            g_comboString) end
-        zo_callLater(CA.PrintMultiLineGain, 50)
-    end
-
-    if receivedBy == "CRAFT"  and gainorloss == 2 then
-        g_itemString1Loss = message
-
-        if g_itemString2Loss ~= "" then g_itemString2Loss = strfmt("%s%s %s%s%s%s%s%s%s%s%s", g_itemString2Loss, color:Colorize(","), icon,
-            itemName2,
-            itemName:gsub("^|H0", "|H1", 1),
-            formattedQuantity,
-            formattedArmorType,
-            formattedTrait,
-            formattedStyle,
-            formattedRecipient,
-            g_comboString) end
-
-        if g_itemString2Loss == "" then g_itemString2Loss = strfmt("%s%s%s%s%s%s%s%s%s", icon,
-            itemName2,
-            itemName:gsub("^|H0", "|H1", 1),
-            formattedQuantity,
-            formattedArmorType,
-            formattedTrait,
-            formattedStyle,
-            formattedRecipient,
-            g_comboString) end
-        zo_callLater(CA.PrintMultiLineLoss, 50)
-    end
-
-    if receivedBy ~= "CRAFT" then
-        if not g_launderCheck then printToChat(strfmt(
-            "%s%s%s%s%s%s%s%s%s%s%s",
-            message,
-            icon,
-            itemName2,
-            itemName:gsub("^|H0", "|H1", 1),
-            formattedQuantity,
-            formattedArmorType,
-            formattedTrait,
-            formattedStyle,
-            formattedRecipient,
-            total,
-            g_comboString
-        )) end
-
-        if g_launderCheck then g_launderItemstring = (strfmt(
-            "%s%s%s%s%s%s%s%s%s",
-            message,
-            icon,
-            itemName2,
-            itemName:gsub("^|H0", "|H1", 1),
-            formattedQuantity,
-            formattedArmorType,
-            formattedTrait,
-            formattedStyle,
-            formattedRecipient,
-            total
-        )) end
-    end
-
-    g_launderCheck = false
-    g_comboString = ""
+    CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainOrLoss)
 end
 
 function CA.PrintMultiLineGain()
@@ -3349,7 +3095,7 @@ function CA.OnTradeSuccess(eventCode)
         end
         for indexOut = 1,5 do
             if g_tradeStacksOut[indexOut] ~= nil then
-                local gainorloss = 2
+                local gainOrLoss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_TRADED)
                 if CA.SV.ItemContextToggle then
                     logPrefix = ( CA.SV.ItemContextMessage )
@@ -3360,13 +3106,13 @@ function CA.OnTradeSuccess(eventCode)
                 local itemType = GetItemLinkItemType(item.itemlink)
                 icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
                 --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
-                CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss, istrade)
+                CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainOrLoss, istrade)
             end
         end
 
         for indexIn = 1,5 do
             if g_tradeStacksIn[indexIn] ~= nil then
-                local gainorloss = 1
+                local gainOrLoss = 1
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_TRADED)
                 if CA.SV.ItemContextToggle then
                     logPrefix = ( CA.SV.ItemContextMessage )
@@ -3377,7 +3123,7 @@ function CA.OnTradeSuccess(eventCode)
                 local itemType = GetItemLinkItemType(item.itemlink)
                 icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
                 --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
-                CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss, istrade)
+                CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainOrLoss, istrade)
             end
         end
     end
@@ -3520,7 +3266,7 @@ function CA.OnMailSuccess(eventCode)
     if CA.SV.LootMail then
         for mailIndex = 1,6 do -- Have to iterate through all 6 possible mail attachments, otherwise nil values will bump later items off the list potentially.
             if g_mailStacksOut[mailIndex] ~= nil then
-                local gainorloss = 2
+                local gainOrLoss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SENT)
                 if CA.SV.ItemContextToggle then
                     logPrefix = ( CA.SV.ItemContextMessage )
@@ -3530,7 +3276,7 @@ function CA.OnMailSuccess(eventCode)
                 icon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
                 local itemType = GetItemLinkItemType(item.itemlink)
                 --CA.OnLootReceived(eventCode, nil, item.itemlink, item.stack or 1, nil, LOOT_TYPE_ITEM, true, false, _, _, tradevalue) Hanging onto this for now
-                CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainorloss)
+                CA.LogItem(logPrefix, icon, item.itemlink, itemType, item.stack or 1, receivedBy, gainOrLoss)
             end
         end
     end
@@ -3852,13 +3598,13 @@ function CA.GuildBankItemRemoved(eventCode, slotId)
 end
 
 function CA.LogGuildBankChange()
-    CA.LogItem(g_guildBankCarryLogPrefix, g_guildBankCarryIcon, g_guildBankCarryItemLink, g_guildBankCarryItemType, g_guildBankCarryStackCount or 1, g_guildBankCarryReceivedBy, g_guildBankCarryGainorloss)
+    CA.LogItem(g_guildBankCarryLogPrefix, g_guildBankCarryIcon, g_guildBankCarryItemLink, g_guildBankCarryItemType, g_guildBankCarryStackCount or 1, g_guildBankCarryReceivedBy, g_guildBankCarrygainOrLoss)
     g_guildBankCarryLogPrefix   = ""
     g_guildBankCarryIcon        = ""
     g_guildBankCarryItemLink    = ""
     g_guildBankCarryStackCount  = 1
     g_guildBankCarryReceivedBy  = ""
-    g_guildBankCarryGainorloss  = ""
+    g_guildBankCarrygainOrLoss  = ""
     g_guildBankCarryItemType    = ""
 end
 
@@ -3868,9 +3614,11 @@ function CA.IndexInventory()
 
     for i = 0,bagsize do
         local icon, stack = GetItemInfo(1, i)
-        local bagitemlink = GetItemLink(1, i, LINK_STYLE_DEFAULT)
-        if bagitemlink ~= "" then
-            g_inventoryStacks[i] = { icon=icon, stack=stack, itemlink=bagitemlink}
+        local itemType = GetItemType(1, i)
+        local itemId = GetItemId(1, i)
+        local itemLink = GetItemLink(1, i, LINK_STYLE_DEFAULT)
+        if itemlink ~= "" then
+            g_inventoryStacks[i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink}
         end
     end
 end
@@ -3881,9 +3629,11 @@ function CA.IndexEquipped()
 
     for i = 0,bagsize do
         local icon, stack = GetItemInfo(0, i)
-        local bagitemlink = GetItemLink(0, i, LINK_STYLE_DEFAULT)
-        if bagitemlink ~= "" then
-            g_equippedStacks[i] = { icon=icon, stack=stack, itemlink=bagitemlink}
+        local itemType = GetItemType(0, i)
+        local itemId = GetItemId(0, i)
+        local itemLink = GetItemLink(0, i, LINK_STYLE_DEFAULT)
+        if itemLink ~= "" then
+            g_equippedStacks[i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink}
         end
     end
 end
@@ -4033,230 +3783,530 @@ function CA.GetItemLinkFromItemId(itemId)
     return ZO_LinkHandler_CreateLink(strformat("<<t:1>>", name), nil, ITEM_LINK_TYPE,itemId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 end
 
-function CA.PrintInventoryIndexChanges(itemId, seticon, item, itemType, stackCountChange, receivedBy, gainorloss)
-    -- ResetIsLooted first before we potentially return the rest of the function
-    local function ResetIsLooted()
-        g_isLooted = false
-    end
-    zo_callLater(ResetIsLooted, 50)
+-- TODO: Replace
+function CA.PrintInventoryIndexChanges(itemId, seticon, item, itemType, stackCountChange, receivedBy, gainOrLoss)
 
-    -- Return if any of these statments are true
-    if g_tradeDisablePrint then return end
-
-        -- If the itemID is on the blacklist, don't show
-        if ( CA.SV.LootBlacklist and g_blacklistIDs[itemid] ) then
-            return
-        end
-
-        local _, specializedItemType = GetItemLinkItemType(item)
-        local itemQuality = GetItemLinkQuality(item)
-        local itemIsSet = GetItemLinkSetInfo(item)
-
-        -- Workaround for a ZOS bug: Daedric Embers are not flagged in-game as key fragments
-        if (itemId == 69059) then
-            specializedItemType = SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT
-        end
-
-        local itemIsKeyFragment = (itemType == ITEMTYPE_TROPHY) and (specializedItemType == SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT)
-        local itemIsSpecial = (itemType == ITEMTYPE_TROPHY and not itemIsKeyFragment) or (itemType == ITEMTYPE_COLLECTIBLE) or IsItemLinkConsumable(item)
-
-        local logPrefix = g_isLooted and GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTED) or GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
-
-        if g_itemReceivedIsQuestReward then logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN) end -- Override function for quest rewards
-
-        if CA.SV.LootOnlyNotable and not g_weAreInMail then
-            -- Notable items are: any set items, any purple+ items, blue+ special items (e.g., treasure maps)
-            if ( (itemIsSet) or
-                 (itemQuality >= ITEM_QUALITY_ARCANE and itemIsSpecial) or
-                 (itemQuality >= ITEM_QUALITY_ARTIFACT and not itemIsKeyFragment) or
-                 (itemType == ITEMTYPE_COSTUME) or
-                 (itemType == ITEMTYPE_DISGUISE) or
-                 (g_notableIDs[itemId]) ) then
-
-                CA.LogItem(logPrefix, seticon, item, itemType, stackCountChange or 1, receivedBy, gainorloss)
-            end
-        elseif CA.SV.LootNotTrash and ( itemQuality == ITEM_QUALITY_TRASH ) and not ( ( itemType == ITEMTYPE_ARMOR) or (itemType == ITEMTYPE_COSTUME) or (itemType == ITEMTYPE_DISGUISE) ) then
-            return
-        else
-            CA.LogItem(logPrefix, seticon, item, itemType, stackCountChange or 1, receivedBy, gainorloss)
-        end
 end
 
---[[
+function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound, lootType, lootedBySelf, isPickpocketLoot, questItemIcon, itemId)
 
-function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-    d("Inventory UPDATE")
-    if isNewItem then d("This is a new item wow wiggity wew") end
-    
-    if bagId == BAG_BACKPACK then
-        local receivedBy = ""
+    g_comboString = ""
+    if lootedBySelf then
+        d("Loot Received (Self)")
+        g_isLooted = true
         
-        if not g_inventoryStacks[slotId] then -- NEW ITEM
-            local icon, stack = GetItemInfo(bagId, slotId)
-            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-            g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
+        local function ResetIsLooted()
+            g_isLooted = false
+        end
+        zo_callLater(ResetIsLooted, 500)
+    else
+        d("Another dude looted")
+    end
 
-]]
+    -- If we didn't receive the loot, and we don't have Only Notable loot shown then we ignore the rest of this event and everything is passed to Index functions
+    if lootedBySelf and lootType ~= LOOT_TYPE_QUEST_ITEM then
+        return
+    end
+    if not CA.SV.LootGroup then
+        return
+    end
 
--- Only used if the option to see destroyed items or items lost from a guard is turned on
+    local icon
+    -- fix Icon for missing quest items
+    if lootType == LOOT_TYPE_QUEST_ITEM then
+        icon = questItemIcon
+    elseif lootType == LOOT_TYPE_COLLECTIBLE then
+        local collectibleId = GetCollectibleIdFromLink(itemLink)
+        local _,_,collectibleIcon = GetCollectibleInfo(collectibleId)
+        icon = collectibleIcon
+    else
+        -- Get Icon
+        local itemIcon,_,_,_,_ = GetItemLinkInfo(itemLink)
+        icon = itemIcon
+    end
+    
+    -- Create Icon string if icon exists and corresponding setting is ON
+    icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
+
+    local itemType, specializedItemType = GetItemLinkItemType(itemLink)
+    local itemQuality = GetItemLinkQuality(itemLink)
+    local itemIsSet = GetItemLinkSetInfo(itemLink)
+
+    -- Workaround for a ZOS bug: Daedric Embers are not flagged in-game as key fragments
+    if (itemId == 69059) then
+        specializedItemType = SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT
+    end
+
+    local itemIsKeyFragment = (itemType == ITEMTYPE_TROPHY) and (specializedItemType == SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT)
+    local itemIsSpecial = (itemType == ITEMTYPE_TROPHY and not itemIsKeyFragment) or (itemType == ITEMTYPE_COLLECTIBLE) or IsItemLinkConsumable(itemLink)
+
+    -- Check for Blacklisted loot
+    if ( CA.SV.LootBlacklist and g_blacklistIDs[itemId] ) then
+        return
+    end
+
+    -- Set prefix based on Looted/Pickpocket/Received
+    local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTED)
+    if ( isPickpocketLoot ) then
+        logPrefix = GetString(SI_GAMECAMERAACTIONTYPE21)
+    end
+    if ( receivedBy == nil ) then
+        logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
+    end
+    if CA.SV.ItemContextToggle then
+        logPrefix = ( CA.SV.ItemContextMessage )
+    end
+
+    local gainOrLoss = 1
+
+    if ( (lootType ~= LOOT_TYPE_ITEM and lootType ~= LOOT_TYPE_COLLECTIBLE) or
+         (itemType == ITEMTYPE_CONTAINER) or -- Don't show containers for group members
+         (itemQuality == ITEM_QUALITY_ARCANE and itemType == ITEMTYPE_RACIAL_STYLE_MOTIF) ) then -- Don't show blue motifs for group members
+        return
+    end
+    if ( (itemIsSet) or
+         (itemQuality >= ITEM_QUALITY_ARCANE and itemIsSpecial) or
+         (itemQuality >= ITEM_QUALITY_ARTIFACT and not itemIsKeyFragment) or
+         (lootType == LOOT_TYPE_COLLECTIBLE) or
+         (g_notableIDs[itemId]) ) then
+
+        CA.LogItem( logPrefix, icon, itemLink, itemType, quantity, self and "" or receivedBy, gainOrLoss )
+    end
+end
+
+function CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainOrLoss, istrade)
+
+    --[[
+    if g_oldItemLink ~= "" then
+        itemName2 = (strfmt("%s → ", g_oldItemLink:gsub("^|H0", "|H1", 1)))
+        g_oldItemLink = ""
+    else
+        itemName2 = ""
+    end
+    ]]
+
+    --[[
+    if receivedBy == "CRAFT"  and gainOrLoss == 1 then
+        g_itemString1Gain = message
+
+        if g_itemString2Gain ~= "" then g_itemString2Gain = strfmt("%s%s %s%s%s%s%s%s%s%s%s", g_itemString2Gain, color:Colorize(","), icon,
+            itemName2,
+            itemName:gsub("^|H0", "|H1", 1),
+            formattedQuantity,
+            formattedArmorType,
+            formattedTrait,
+            formattedStyle,
+            formattedRecipient,
+            g_comboString) end
+
+        if g_itemString2Gain == "" then g_itemString2Gain = strfmt("%s%s%s%s%s%s%s%s%s", icon,
+            itemName2,
+            itemName:gsub("^|H0", "|H1", 1),
+            formattedQuantity,
+            formattedArmorType,
+            formattedTrait,
+            formattedStyle,
+            formattedRecipient,
+            g_comboString) end
+        zo_callLater(CA.PrintMultiLineGain, 50)
+    end
+
+    if receivedBy == "CRAFT"  and gainOrLoss == 2 then
+        g_itemString1Loss = message
+
+        if g_itemString2Loss ~= "" then g_itemString2Loss = strfmt("%s%s %s%s%s%s%s%s%s%s%s", g_itemString2Loss, color:Colorize(","), icon,
+            itemName2,
+            itemName:gsub("^|H0", "|H1", 1),
+            formattedQuantity,
+            formattedArmorType,
+            formattedTrait,
+            formattedStyle,
+            formattedRecipient,
+            g_comboString) end
+
+        if g_itemString2Loss == "" then g_itemString2Loss = strfmt("%s%s%s%s%s%s%s%s%s", icon,
+            itemName2,
+            itemName:gsub("^|H0", "|H1", 1),
+            formattedQuantity,
+            formattedArmorType,
+            formattedTrait,
+            formattedStyle,
+            formattedRecipient,
+            g_comboString) end
+        zo_callLater(CA.PrintMultiLineLoss, 50)
+    end
+
+    if receivedBy ~= "CRAFT" then
+        if not g_launderCheck then printToChat(strfmt(
+            "%s%s%s%s%s%s%s%s%s%s%s",
+            message,
+            icon,
+            itemName2,
+            itemName:gsub("^|H0", "|H1", 1),
+            formattedQuantity,
+            formattedArmorType,
+            formattedTrait,
+            formattedStyle,
+            formattedRecipient,
+            total,
+            g_comboString
+        )) end
+
+        if g_launderCheck then g_launderItemstring = (strfmt(
+            "%s%s%s%s%s%s%s%s%s",
+            message,
+            icon,
+            itemName2,
+            itemName:gsub("^|H0", "|H1", 1),
+            formattedQuantity,
+            formattedArmorType,
+            formattedTrait,
+            formattedStyle,
+            formattedRecipient,
+            total
+        )) end
+    end
+
+    g_launderCheck = false
+    g_comboString = ""
+    ]]--
+end
+
+
+-- If filter is true, we run the item through this function to determine if we should display it. Filter only gets set to true for relevant loot functions, mail, trade, stores, etc don't apply the filter.
+function CA.ItemFilter(itemType, itemId, itemLink)
+
+    if ( CA.SV.LootBlacklist and g_blacklistIDs[itemId] ) then
+        return false
+    end
+    
+    local _, specializedItemType = GetItemLinkItemType(itemLink)
+    local itemQuality = GetItemLinkQuality(itemLink)
+    local itemIsSet = GetItemLinkSetInfo(itemId)
+    
+    -- TODO: Not sure if still needed
+    if (itemId == 69059) then
+        specializedItemType = SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT
+    end
+    
+    local itemIsKeyFragment = (itemType == ITEMTYPE_TROPHY) and (specializedItemType == SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT)
+    local itemIsSpecial = (itemType == ITEMTYPE_TROPHY and not itemIsKeyFragment) or (itemType == ITEMTYPE_COLLECTIBLE) or IsItemLinkConsumable(item)
+    
+    if CA.SV.LootOnlyNotable then
+        -- Notable items are: any set items, any purple+ items, blue+ special items (e.g., treasure maps)
+        if ( (itemIsSet) or
+             (itemQuality >= ITEM_QUALITY_ARCANE and itemIsSpecial) or
+             (itemQuality >= ITEM_QUALITY_ARTIFACT and not itemIsKeyFragment) or
+             (itemType == ITEMTYPE_COSTUME) or
+             (itemType == ITEMTYPE_DISGUISE) or
+             (g_notableIDs[itemId]) ) then
+
+            return true
+        end
+    elseif CA.SV.LootNotTrash and ( itemQuality == ITEM_QUALITY_TRASH ) and not ( ( itemType == ITEMTYPE_ARMOR) or (itemType == ITEMTYPE_COSTUME) or (itemType == ITEMTYPE_DISGUISE) ) then
+        return false
+    else
+        return true
+    end
+    
+end
+
+-- TODO: Make this work
+local LUIE_EXCLUDE_STYLES = {
+
+    ITEMTYPE_ADDITIVE = true,
+    ITEMTYPE_ARMOR_BOOSTER = true,
+    ITEMTYPE_ARMOR_TRAIT = true,
+    ITEMTYPE_BLACKSMITHING_BOOSTER = true,
+    ITEMTYPE_BLACKSMITHING_MATERIAL = true,
+    ITEMTYPE_CLOTHIER_BOOSTER = true,
+    ITEMTYPE_CLOTHIER_MATERIAL = true,
+    ITEMTYPE_ENCHANTING_RUNE_ASPECT = true,
+    ITEMTYPE_ENCHANTING_RUNE_ESSENCE = true,
+    ITEMTYPE_ENCHANTING_RUNE_POTENCY = true,
+    ITEMTYPE_ENCHANTMENT_BOOSTER = true,
+    ITEMTYPE_INGREDIENT = true,
+    ITEMTYPE_POISON_BASE = true,
+    ITEMTYPE_POTION_BASE = true,
+    ITEMTYPE_REAGENT = true,
+    ITEMTYPE_STYLE_MATERIAL = true,
+    ITEMTYPE_WEAPON_BOOSTER = true,
+    ITEMTYPE_WEAPON_TRAIT = true,
+    ITEMTYPE_WOODWORKING_BOOSTER = true,
+    ITEMTYPE_WOODWORKING_MATERIAL = true,
+    ITEMTYPE_GLYPH_ARMOR = true,
+    ITEMTYPE_GLYPH_JEWELRY = true,
+    ITEMTYPE_GLYPH_WEAPON  = true,
+
+}
+
+function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter)
+
+    if filter then 
+        -- If filter returns false then bail out right now, we're not displaying this item.
+        if not CA.ItemFilter(itemType, itemId, itemLink) then return end
+    end
+    
+    local formattedIcon = icon ~= "" and zo_strformat("<<1>> ", zo_iconFormat(icon, 16, 16)) or ""
+    local color
+    if gainOrLoss == 1 then
+        color = CurrencyUpColorize:ToHex()
+    elseif gainOrLoss == 2 then
+        color = CurrencyDownColorize:ToHex()
+    elseif gainOrLoss == 3 then
+        color = ZO_SELECTED_TEXT:ToHex()
+    end
+    
+    local formattedRecipient
+    local formattedQuantity
+    local formattedTrait
+    local formattedArmorType
+    local formattedStyle
+    
+    if (receivedBy == "" or receivedBy == "CRAFT") then
+        -- Don't display yourself
+        formattedRecipient = ""
+    else
+        -- Create a character link to make it easier to contact the recipient
+        -- TODO edit this to be a standard character link instead
+        formattedRecipient = strfmt(
+            "%s |c%06X|H0:character:%s|h%s|h|r",
+            arrowPointer,
+            HashString(receivedBy) % 0x1000000, -- Use the hash of the name for the color so that is random, but consistent
+            receivedBy,
+            receivedBy:gsub("%^%a+$", "", 1)
+        )
+    end
+    
+    if (stack > 1) then
+        formattedQuantity = strfmt(" |cFFFFFFx%d|r", stack)
+    else
+        formattedQuantity = ""
+    end
+    
+    local armorType = GetItemLinkArmorType(itemLink) -- Get Armor Type of item
+    formattedArmorType = (CA.SV.LootShowArmorType and armorType ~= ARMORTYPE_NONE) and strfmt(" |cFFFFFF(%s)|r", GetString("SI_ARMORTYPE", armorType)) or ""
+    
+    local traitType = GetItemLinkTraitInfo(itemLink) -- Get Trait type of item
+    formattedTrait = (CA.SV.LootShowTrait and traitType ~= ITEM_TRAIT_TYPE_NONE and itemType ~= ITEMTYPE_ARMOR_TRAIT and itemType ~= ITEMTYPE_WEAPON_TRAIT) and strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMTRAITTYPE", traitType)) or ""
+    
+    local styleType = GetItemLinkItemStyle(itemLink) -- Get Style of the item
+    formattedStyle = (CA.SV.LootShowStyle and styleType ~= ITEMSTYLE_NONE and styleType ~= ITEMSTYLE_UNIQUE and styleType ~= ITEMSTYLE_UNIVERSAL and itemType ~= ITEMTYPE_STYLE_MATERIAL) and strfmt(" |cFFFFFF(%s)|r", GetItemStyleName(styleType)) or ""
+    
+    local formattedTotal = ""
+    if CA.SV.LootTotal and formattedRecipient == "" then
+        local total1, total2, total3 = GetItemLinkStacks(itemLink)
+        local total = total1 + total2 + total3
+        if total > 1 then
+            formattedTotal = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", color, CA.SV.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+        end
+    end
+    
+    local itemString = strfmt("%s%s%s%s%s%s", formattedIcon, itemLink, formattedQuantity, formattedArmorType, formattedTrait, formattedStyle)
+    local totalString = formattedTotal
+    
+    g_queuedMessages[g_queuedMessagesCounter] = { message=itemString, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString=totalString }
+    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+    
+end
+
+-- Simple function combines our strings or modifies the prefix if RECEIEVED instead of looted
+function CA.ResolveItemMessage(message, formattedRecipient, color, logPrefix, totalString)
+
+    if logPrefix == "" then
+        if g_isLooted and not g_itemReceivedIsQuestReward then
+            logPrefix = CA.SV.LootMessageLooted
+            -- reset variables that control looted, or at least ZO_CallLater them
+        else
+            logPrefix = CA.SV.LootMessageReceived
+        end
+    end
+    
+    local formattedMessageP1 = ("|r" .. message .. "|c" .. color)
+    local formattedMessageP2 = strfmt(logPrefix, formattedMessageP1)
+    
+    local finalMessage = strfmt("|c%s%s|r%s", color, formattedMessageP2, totalString)
+    
+    printToChat(finalMessage)
+    
+   -- "You loot %s."
+   -- "You receive %s."
+end
+    
 function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-    d("Inventory UPDATE" .. bagId)
-    d(inventoryUpdateReason)
-    if isNewItem then d("This is a new item wow wiggity wew") end
+
+    if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then return end
+
+    local receivedBy = ""
     if bagId == BAG_WORN then
-        local receivedBy = ""
-        if not g_equippedStacks[slotId] then -- NEW ITEM
-            local icon, stack = GetItemInfo(bagId, slotId)
-            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-            g_equippedStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
-            local item = g_equippedStacks[slotId]
-            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local itemType = GetItemLinkItemType(item.itemlink)
-            local gainorloss = 3
-            local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_EQUIP)
+    
+        local gainOrLoss
+        local logPrefix
+        local icon
+        local stack
+        local itemType
+        local itemId
+        local itemLink
+        local removed
+        -- NEW ITEM
+        if not g_equippedStacks[slotId] then
+            icon, stack = GetItemInfo(bagId, slotId)
+            itemType = GetItemType(bagId, slotId)
+            itemId = GetItemId(bagId, slotId)
+            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            g_equippedStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             if CA.SV.ShowDisguise and slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
-                --CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
-                CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+                gainOrLoss = 3
+                logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_EQUIP)
+                CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
             end
-
-        elseif g_equippedStacks[slotId] then -- EXISTING ITEM
-            -- Means item was modified (enchanted, etc)
-            if stackCountChange == 0 then -- For equipment, stackCountChange 0 is also applied when gear is swapped out. This means we need to update the index on this change.
-                local icon, stack = GetItemInfo(bagId, slotId)
-                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-                g_equippedStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
-                if CA.SV.ShowDisguise and slotId == 10 then
-                    local item = g_equippedStacks[slotId]
-                    local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-                    local itemType = GetItemLinkItemType(item.itemlink)
-                    local gainorloss = 3
-                    local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_EQUIP)
-                    if (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
-                        --CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
-                        CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+        -- EXISTING ITEM    
+        elseif g_equippedStacks[slotId] then
+            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            if itemLink == nil or itemLink == "" then
+                -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
+                icon = g_equippedStacks[slotId].icon
+                stack = g_equippedStacks[slotId].stack
+                itemType = g_equippedStacks[slotId].itemType
+                itemId = g_equippedStacks[slotId].itemId
+                itemLink = g_equippedStacks[slotId].itemLink
+                removed = true
+            else
+                -- If we get a value for itemLink, then we want to use bag info to fill in the blanks
+                icon, stack = GetItemInfo(bagId, slotId)
+                itemType = GetItemType(bagId, slotId)
+                itemId = GetItemId(bagId, slotId)
+                removed = false
+            end
+            
+            -- STACK COUNT REMAINED THE SAME (GEAR SWAPPED)
+            if stackCountChange == 0 then
+                if CA.SV.ShowDisguise and slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
+                    gainOrLoss = 3
+                    logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_EQUIP)
+                    CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+            -- STACK COUNT INCREMENTED UP
+            elseif stackCountChange > 0 then
+                -- TODO: Remove, nothing to do here!
+            -- STACK COUNT INCREMENTED DOWN
+            elseif stackCountChange < 0 then
+                local change = stackCountChange * -1
+                if g_itemWasDestroyed and CA.SV.ShowDestroy then
+                    gainOrLoss = 2
+                    logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
+                    CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+                if CA.SV.ShowDisguise and not g_itemWasDestroyed and slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
+                    if IsUnitInCombat("player") then
+                        logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_DESTROYED)
+                        gainOrLoss = 2
+                    else
+                        logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_UNEQUIP)
+                        gainOrLoss = 3
                     end
+                    CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
             end
-
-            local item = g_equippedStacks[slotId]
-            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local itemType = GetItemLinkItemType(item.itemlink)
-
-            if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-                local gainorloss = 1
-                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_GAINEDSTACK)
-                local icon, stack = GetItemInfo(bagId, slotId)
-                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-                -- CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
-                g_equippedStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
-            elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = 3
-                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_UNEQUIP)
-                local change = (stackCountChange * -1)
-                local endcount = g_equippedStacks[slotId].stack - change
-                if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
-                    if CA.SV.ShowDisguise and not g_itemWasDestroyed and slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
-                        if IsUnitInCombat("player") then
-                            logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DISGUISE_DESTROYED)
-                            gainorloss = 2
-                        end
-                        CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
-                    end
-                    if CA.SV.ShowDestroy and g_itemWasDestroyed then
-                        logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
-                        gainorloss = 2
-                        CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
-                    end
+            
+            if removed then
+                if g_equippedStacks[slotId] then 
                     g_equippedStacks[slotId] = nil
-                else
-                    local icon, stack = GetItemInfo(bagId, slotId)
-                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-                    g_equippedStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
                 end
+            else
+                g_equippedStacks[slotId] = { icon=icon, stack=stack, itemId =itemId, itemType=itemType, itemLink=itemLink }
             end
         end
     end
 
     if bagId == BAG_BACKPACK then
-        local receivedBy = ""
-        if not g_inventoryStacks[slotId] then -- NEW ITEM
-            local icon, stack = GetItemInfo(bagId, slotId)
-            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-            g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
-            local item = g_inventoryStacks[slotId]
-            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local itemType = GetItemLinkItemType(item.itemlink)
-            local gainorloss = 1
-            local logPrefix = ""
-            local itemId = GetItemId(bagId, slotId)
+    
+        local gainOrLoss
+        local logPrefix
+        local icon
+        local stack
+        local itemType
+        local itemId
+        local itemLink
+        local removed
+        -- NEW ITEM
+        if not g_inventoryStacks[slotId] then
+            icon, stack = GetItemInfo(bagId, slotId)
+            itemType = GetItemType(bagId, slotId)
+            itemId = GetItemId(bagId, slotId)
+            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
+            gainOrLoss = 1
+            logPrefix = ""
             if not g_weAreInAStore and CA.SV.Loot and isNewItem then
-                CA.PrintInventoryIndexChanges(itemId, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+                CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
             end
-
-        elseif g_inventoryStacks[slotId] then -- EXISTING ITEM
-            local item = g_inventoryStacks[slotId]
-            local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local itemType = GetItemLinkItemType(item.itemlink)
-
-            -- Means item was modified (enchanted, etc)
-            if stackCountChange == 0 then
-                return
+        -- EXISTING ITEM    
+        elseif g_inventoryStacks[slotId] then
+            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            if itemLink == nil or itemLink == "" then
+                -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
+                icon = g_inventoryStacks[slotId].icon
+                stack = g_inventoryStacks[slotId].stack
+                itemType = g_inventoryStacks[slotId].itemType
+                itemId = g_inventoryStacks[slotId].itemId
+                itemLink = g_inventoryStacks[slotId].itemLink
+                removed = true
+            else
+                -- If we get a value for itemLink, then we want to use bag info to fill in the blanks
+                icon, stack = GetItemInfo(bagId, slotId)
+                itemType = GetItemType(bagId, slotId)
+                itemId = GetItemId(bagId, slotId)
+                removed = false
             end
-
-            if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-                local gainorloss = 1
-                local logPrefix = ""
-                local icon, stack = GetItemInfo(bagId, slotId)
-                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-                local itemId = GetItemId(bagId, slotId)
+            
+            -- STACK COUNT INCREMENTED UP
+            if stackCountChange > 0 then
+                gainOrLoss = 1
+                logPrefix = ""
                 if not g_weAreInAStore and CA.SV.Loot and isNewItem then
-                    CA.PrintInventoryIndexChanges(itemId, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+                    CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
                 end
-                g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
-            elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = 2
-                local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
-                local change = (stackCountChange * -1)
-
+            -- STACK COUNT INCREMENTED DOWN
+            elseif stackCountChange < 0 then
+                local change = stackCountChange * -1
+                if g_itemWasDestroyed and CA.SV.ShowDestroy then
+                    gainOrLoss = 2
+                    logPrefix = "You destroy %s."
+                    CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
                 if CA.SV.ShowLockpickBreak and g_lockpickBroken then
                     logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_BROKEN)
-                    gainorloss = 2
-                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                    gainOrLoss = 2
+                    CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
-
-                local endcount = g_inventoryStacks[slotId].stack - change
-                if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
-                    if CA.SV.ShowDestroy and g_itemWasDestroyed then
-                        CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
-                    end
+            end
+            
+            if removed then
+                if g_inventoryStacks[slotId] then 
                     g_inventoryStacks[slotId] = nil
-                else
-                    local icon, stack = GetItemInfo(bagId, slotId)
-                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-                    g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
                 end
+            else
+                g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             end
         end
     end
-
+    
     if bagId == BAG_VIRTUAL then
-        local itemlink = CA.GetItemLinkFromItemId(slotId)
+        local gainOrLoss = 1
+        local logPrefix = ""
+        local itemLink = CA.GetItemLinkFromItemId(slotId)
         local icon = GetItemLinkInfo(itemlink)
-        icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
-        local receivedBy = ""
-        local gainorloss = 1
-        --local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
-        local stack = stackCountChange
-        local itemType = GetItemLinkItemType(itemlink)
-        local itemQuality = GetItemLinkQuality(itemlink)
-
+        local itemType = GetItemLinkItemType(itemLink) 
+        local itemId = slotId
+        local itemQuality = GetItemLinkQuality(itemLink)
+        
         if not g_weAreInAStore and CA.SV.Loot and isNewItem then
-            if not CA.SV.LootOnlyNotable or itemQuality >= ITEM_QUALITY_ARTIFACT or g_weAreInMail then
-                CA.PrintInventoryIndexChanges(slotId, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss)
-            end
+            CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
         end
     end
-
+    
     g_itemWasDestroyed = false
     g_lockpickBroken = false
 end
@@ -4325,9 +4375,9 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             local item = g_inventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
-            local gainorloss = 1
+            local gainOrLoss = 1
             local logPrefix = logPrefixPos
-            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainOrLoss)
         elseif g_inventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
             g_oldItemLink = g_inventoryStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
             local icon, stack = GetItemInfo(bagId, slotId)
@@ -4335,25 +4385,25 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_inventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local gainorloss = 1
+            local gainOrLoss = 1
             local logPrefix = logPrefixPos
             receivedBy = ""
-            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
+            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainOrLoss)
         elseif g_inventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_inventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-               local gainorloss = 1
+               local gainOrLoss = 1
                local logPrefix = logPrefixPos
                local icon, stack = GetItemInfo(bagId, slotId)
                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-               CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+               CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainOrLoss)
                g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = 2
+                local gainOrLoss = 2
                 local logPrefix = logPrefixNeg
 
                 if (GetCraftingInteractionType() == CRAFTING_TYPE_BLACKSMITHING or GetCraftingInteractionType() == CRAFTING_TYPE_CLOTHIER or GetCraftingInteractionType() == CRAFTING_TYPE_WOODWORKING) and g_smithing.GetMode() == 4 then
@@ -4385,7 +4435,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
                 local change = (stackCountChange * -1)
                 local endcount = g_inventoryStacks[slotId].stack - change
                 if logPrefix ~= GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED) or CA.SV.ShowCraftUse then
-                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainOrLoss)
                 end
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
                     g_inventoryStacks[slotId] = nil
@@ -4407,9 +4457,9 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             local item = g_bankStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
-            local gainorloss = 1
+            local gainOrLoss = 1
             local logPrefix = strformat("<<1>> - <<2>>", logPrefixPos, GetString(SI_INTERACT_OPTION_BANK))
-            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainOrLoss)
         elseif g_bankStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
             g_oldItemLink = g_bankStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
             local icon, stack = GetItemInfo(bagId, slotId)
@@ -4417,24 +4467,24 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_bankStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local gainorloss = 1
+            local gainOrLoss = 1
             local logPrefix = strformat("<<1>> - <<2>>", logPrefixPos, GetString(SI_INTERACT_OPTION_BANK))
-            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
+            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainOrLoss)
         elseif g_bankStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_bankStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-               local gainorloss = 1
+               local gainOrLoss = 1
                local logPrefix = strformat("<<1>> - <<2>>", logPrefixPos, GetString(SI_INTERACT_OPTION_BANK))
                local icon, stack = GetItemInfo(bagId, slotId)
                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-               CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+               CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainOrLoss)
                g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = 2
+                local gainOrLoss = 2
                 local logPrefix = strformat("<<1>> - <<2>>", logPrefixNeg, GetString(SI_INTERACT_OPTION_BANK))
 
                 if (GetCraftingInteractionType() == CRAFTING_TYPE_BLACKSMITHING or GetCraftingInteractionType() == CRAFTING_TYPE_CLOTHIER or GetCraftingInteractionType() == CRAFTING_TYPE_WOODWORKING) and g_smithing.GetMode() == 4 then
@@ -4466,7 +4516,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
                 local change = (stackCountChange * -1)
                 local endcount = g_bankStacks[slotId].stack - change
                 if logPrefix ~= strformat("<<1>> - <<2>>", GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED), GetString(SI_INTERACT_OPTION_BANK)) or CA.SV.ShowCraftUse then
-                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainOrLoss)
                 end
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
                     g_bankStacks[slotId] = nil
@@ -4488,9 +4538,9 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             local item = g_banksubStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
-            local gainorloss = 1
+            local gainOrLoss = 1
             local logPrefix = strformat("<<1>> - <<2>>", logPrefixPos, GetString(SI_INTERACT_OPTION_BANK))
-            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainOrLoss)
         elseif g_banksubStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
             g_oldItemLink = g_banksubStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
             local icon, stack = GetItemInfo(bagId, slotId)
@@ -4498,24 +4548,24 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             g_banksubStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_banksubStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local gainorloss = 1
+            local gainOrLoss = 1
             local logPrefix = strformat("<<1>> - <<2>>", logPrefixPos, GetString(SI_INTERACT_OPTION_BANK))
-            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
+            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainOrLoss)
         elseif g_banksubStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_banksubStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-               local gainorloss = 1
+               local gainOrLoss = 1
                local logPrefix = strformat("<<1>> - <<2>>", logPrefixPos, GetString(SI_INTERACT_OPTION_BANK))
                local icon, stack = GetItemInfo(bagId, slotId)
                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
-               CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+               CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainOrLoss)
                g_banksubStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = 2
+                local gainOrLoss = 2
                 local logPrefix = strformat("<<1>> - <<2>>", logPrefixNeg, GetString(SI_INTERACT_OPTION_BANK))
 
                 if (GetCraftingInteractionType() == CRAFTING_TYPE_BLACKSMITHING or GetCraftingInteractionType() == CRAFTING_TYPE_CLOTHIER or GetCraftingInteractionType() == CRAFTING_TYPE_WOODWORKING) and g_smithing.GetMode() == 4 then
@@ -4547,7 +4597,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
                 local change = (stackCountChange * -1)
                 local endcount = g_banksubStacks[slotId].stack - change
                 if logPrefix ~= strformat("<<1>> - <<2>>", GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED), GetString(SI_INTERACT_OPTION_BANK)) or CA.SV.ShowCraftUse then
-                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainOrLoss)
                 end
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
                     g_banksubStacks[slotId] = nil
@@ -4565,13 +4615,13 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
         local itemlink = CA.GetItemLinkFromItemId(slotId)
         local icon = GetItemLinkInfo(itemlink)
         icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
-        local gainorloss = 1
+        local gainOrLoss = 1
         local logPrefix = logPrefixPos
         local stack = stackCountChange
         local itemType = GetItemLinkItemType(itemlink)
 
         if stackCountChange < 1 then
-            gainorloss = 2
+            gainOrLoss = 2
             logPrefix = logPrefixNeg
             stack = stackCountChange * -1
         end
@@ -4603,7 +4653,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
         end
 
         if logPrefix ~= GetString(SI_LUIE_CA_PREFIX_MESSAGE_USED) or CA.SV.ShowCraftUse then
-            CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss)
+            CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainOrLoss)
         end
     end
 
@@ -4626,10 +4676,10 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             local item = g_inventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
-            local gainorloss = 1
+            local gainOrLoss = 1
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
             if InventoryOn then
-                CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+                CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainOrLoss)
                 InventoryOn = false
             end
         --[[elseif g_inventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
@@ -4638,36 +4688,36 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_inventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local gainorloss = 1
+            local gainOrLoss = 1
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED)
-            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) -- Shouldn't need this for anything, but just in case. ]]-- Shouldn't be neccesary
+            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainOrLoss) -- Shouldn't need this for anything, but just in case. ]]-- Shouldn't be neccesary
         elseif g_inventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_inventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-                local gainorloss = 1
+                local gainOrLoss = 1
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
                 local icon, stack = GetItemInfo(bagId, slotId)
                 local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                 if InventoryOn then
-                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainOrLoss)
                     InventoryOn = false
                 end
                g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = 2
+                local gainOrLoss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_inventoryStacks[slotId].stack - change
                 if CA.SV.ShowDestroy and g_itemWasDestroyed then
-                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainOrLoss)
                 end
                 -- If the change in stacks resulted in a 0 balance, then we remove the item from the index
                 if endcount <= 0 then
-                    -- if InventoryOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) InventoryOn = false end
+                    -- if InventoryOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainOrLoss) InventoryOn = false end
                     g_inventoryStacks[slotId] = nil
                 else
                     local icon, stack = GetItemInfo(bagId, slotId)
@@ -4697,10 +4747,10 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             local item = g_bankStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
-            local gainorloss = 2
+            local gainOrLoss = 2
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
             if BankOn then
-                CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+                CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainOrLoss)
                 BankOn = false
             end
         --[[elseif g_bankStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
@@ -4710,7 +4760,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_bankStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local gainorloss = 1
+            local gainOrLoss = 1
             local logPrefix = "Upgraded - Bank"]]--
         elseif g_bankStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_bankStacks[slotId]
@@ -4718,27 +4768,27 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-                local gainorloss = 2
+                local gainOrLoss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
                 local icon, stack = GetItemInfo(bagId, slotId)
                 local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                 if BankOn then
-                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainOrLoss)
                     BankOn = false
                 end
                 g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = 2
+                local gainOrLoss = 2
                 local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED), GetString(SI_INTERACT_OPTION_BANK) )
                 local change = (stackCountChange * -1)
                 local endcount = g_bankStacks[slotId].stack - change
                 if CA.SV.ShowDestroy and g_itemWasDestroyed then
-                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainOrLoss)
                 end
                 -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
                 if endcount <= 0 then
-                    -- if BankOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) BankOn = false end
+                    -- if BankOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainOrLoss) BankOn = false end
                     g_bankStacks[slotId] = nil
                 else
                     local icon, stack = GetItemInfo(bagId, slotId)
@@ -4768,10 +4818,10 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             local item = g_banksubStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
-            local gainorloss = 2
+            local gainOrLoss = 2
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
             if BankOn then
-                CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+                CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainOrLoss)
                 BankOn = false
             end
         --[[elseif g_banksubStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
@@ -4781,7 +4831,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             g_banksubStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_banksubStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local gainorloss = 1
+            local gainOrLoss = 1
             local logPrefix = "Upgraded - Bank"]]--
         elseif g_banksubStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_banksubStacks[slotId]
@@ -4789,27 +4839,27 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-                local gainorloss = 2
+                local gainOrLoss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
                 local icon, stack = GetItemInfo(bagId, slotId)
                 local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                 if BankOn then
-                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainOrLoss)
                     BankOn = false
                 end
                 g_banksubStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = 2
+                local gainOrLoss = 2
                 local logPrefix = strformat("<<1>> - <<2>>", GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED), GetString(SI_INTERACT_OPTION_BANK) )
                 local change = (stackCountChange * -1)
                 local endcount = g_banksubStacks[slotId].stack - change
                 if CA.SV.ShowDestroy and g_itemWasDestroyed then
-                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                    CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainOrLoss)
                 end
                 -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
                 if endcount <= 0 then
-                    -- if BankOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss) BankOn = false end
+                    -- if BankOn then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainOrLoss) BankOn = false end
                     g_banksubStacks[slotId] = nil
                 else
                     local icon, stack = GetItemInfo(bagId, slotId)
@@ -4838,18 +4888,18 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
         local icon = GetItemLinkInfo(itemlink)
         icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
         local receivedBy = ""
-        local gainorloss = 1
+        local gainOrLoss = 1
         local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
         local stack = stackCountChange
         local itemType = GetItemLinkItemType(itemlink)
 
         if stackCountChange < 1 then
-            gainorloss = 2
+            gainOrLoss = 2
             logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
             stack = stackCountChange * -1
         end
 
-        CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss)
+        CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainOrLoss)
     end
 
     g_itemWasDestroyed = false
@@ -4870,7 +4920,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_inventoryStacks[slotId]
             g_guildBankCarryIcon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            g_guildBankCarryGainorloss = 1
+            g_guildBankCarrygainOrLoss = 1
             g_guildBankCarryLogPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
             g_guildBankCarryReceivedBy = ""
             g_guildBankCarryItemLink = item.itemlink
@@ -4882,9 +4932,9 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_inventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local gainorloss = 1
+            local gainOrLoss = 1
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED)
-            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss) -- Shouldn't need this for anything, but just in case. ]]-- Shouldn't be neccesary
+            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainOrLoss) -- Shouldn't need this for anything, but just in case. ]]-- Shouldn't be neccesary
         elseif g_inventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_inventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
@@ -4893,7 +4943,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
                local icon, stack = GetItemInfo(bagId, slotId)
                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                g_guildBankCarryIcon = seticon
-               g_guildBankCarryGainorloss = 1
+               g_guildBankCarrygainOrLoss = 1
                g_guildBankCarryLogPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
                g_guildBankCarryReceivedBy = ""
                g_guildBankCarryItemLink = item.itemlink
@@ -4902,19 +4952,19 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
                g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
 
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = 2
+                local gainOrLoss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_inventoryStacks[slotId].stack - change
                 g_guildBankCarryIcon = seticon
-                g_guildBankCarryGainorloss = 2
+                g_guildBankCarrygainOrLoss = 2
                 g_guildBankCarryLogPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
                 g_guildBankCarryReceivedBy = ""
                 g_guildBankCarryItemLink = item.itemlink
                 g_guildBankCarryStackCount = change or 1
                 g_guildBankCarryItemType = GetItemLinkItemType(item.itemlink)
                 if CA.SV.ShowDestroy and g_itemWasDestroyed
-                    then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                    then CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainOrLoss)
                 end
                 if endcount <= 0 then -- If the change in stacks resulted in a 0 balance, then we remove the item from the index
                     g_inventoryStacks[slotId] = nil
@@ -4930,14 +4980,14 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
     ---------------------------------- CRAFTING BAG ----------------------------------
     if bagId == BAG_VIRTUAL then
         local receivedBy = ""
-        local gainorloss = 1
+        local gainOrLoss = 1
         local logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
         local itemlink = CA.GetItemLinkFromItemId(slotId)
         local icon = GetItemLinkInfo(itemlink)
         local seticon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
 
         g_guildBankCarryIcon = seticon
-        g_guildBankCarryGainorloss = 1
+        g_guildBankCarrygainOrLoss = 1
         g_guildBankCarryLogPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
         g_guildBankCarryReceivedBy = ""
         g_guildBankCarryItemLink = itemlink
@@ -4963,10 +5013,10 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             local item = g_inventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
             local itemType = GetItemLinkItemType(item.itemlink)
-            local gainorloss = 1
+            local gainOrLoss = 1
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LAUNDERED)
             g_launderCheck = true
-            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+            CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainOrLoss)
         elseif g_inventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
             local icon, stack = GetItemInfo(bagId, slotId)
             local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
@@ -4974,11 +5024,11 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             local item = g_inventoryStacks[slotId]
             local itemType = GetItemLinkItemType(item.itemlink)
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
-            local gainorloss = 1
+            local gainOrLoss = 1
             local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LAUNDERED)
             g_launderCheck = true
             if itemType == ITEMTYPE_WEAPON or itemType == ITEMTYPE_ARMOR or itemType == ITEMTYPE_JEWELRY then
-                CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainorloss)
+                CA.LogItem(logPrefix, seticon, item.itemlink, itemType, 1, receivedBy, gainOrLoss)
             end
         elseif g_inventoryStacks[slotId] and stackCountChange ~= 0 then -- EXISTING ITEM
             local item = g_inventoryStacks[slotId]
@@ -4986,23 +5036,23 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             local itemType = GetItemLinkItemType(item.itemlink)
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
-                local gainorloss = 1
+                local gainOrLoss = 1
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LAUNDERED)
                 local icon, stack = GetItemInfo(bagId, slotId)
                 local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
                 g_launderCheck = true
-                CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainorloss)
+                CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainOrLoss)
                 g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
             elseif stackCountChange < 0 then -- STACK COUNT INCREMENTED DOWN
-                local gainorloss = 2
+                local gainOrLoss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
                 local change = (stackCountChange * -1)
                 local endcount = g_inventoryStacks[slotId].stack - change
-                --CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                --CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainOrLoss)
                 -- If the change in stacks resulted in a 0 balance, then we remove the item from the index!
                 if endcount <= 0 then
                     if CA.SV.ShowDestroy and g_itemWasDestroyed then
-                        CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainorloss)
+                        CA.LogItem(logPrefix, seticon, item.itemlink, itemType, change or 1, receivedBy, gainOrLoss)
                     end
                     g_inventoryStacks[slotId] = nil
                 else
@@ -5020,7 +5070,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
         local icon = GetItemLinkInfo(itemlink)
         icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
         local receivedBy = ""
-        local gainorloss = 1
+        local gainOrLoss = 1
         local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LAUNDERED)
         local stack = stackCountChange
         local itemType = GetItemLinkItemType(itemlink)
@@ -5031,7 +5081,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
         end
 
         g_launderCheck = true
-        CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainorloss)
+        CA.LogItem(logPrefix, icon, itemlink, itemType, stack or 1, receivedBy, gainOrLoss)
     end
 
     g_itemWasDestroyed = false
@@ -5089,10 +5139,10 @@ function CA.JusticeRemovePrint()
                     local itemType = GetItemLinkItemType(inventoryitem.itemlink)
                     local stack = inventoryitem.stack
                     local receivedBy = ""
-                    local gainorloss = 2
+                    local gainOrLoss = 2
                     local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_CONFISCATED)
                     if CA.SV.ShowConfiscate then
-                        CA.LogItem(logPrefix, seticon, inventoryitem.itemlink, itemType, stack or 1, receivedBy, gainorloss)
+                        CA.LogItem(logPrefix, seticon, inventoryitem.itemlink, itemType, stack or 1, receivedBy, gainOrLoss)
                     end
                 end
             end
@@ -5142,10 +5192,10 @@ function CA.JusticeRemovePrint()
                     local itemType = GetItemLinkItemType(inventoryitem.itemlink)
                     local stack = inventoryitem.stack
                     local receivedBy = ""
-                    local gainorloss = 2
+                    local gainOrLoss = 2
                     local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_CONFISCATEDEQUIPPED)
                     if CA.SV.ShowConfiscate then
-                        CA.LogItem(logPrefix, seticon, inventoryitem.itemlink, itemType, stack or 1, receivedBy, gainorloss)
+                        CA.LogItem(logPrefix, seticon, inventoryitem.itemlink, itemType, stack or 1, receivedBy, gainOrLoss)
                     end
                 end
             end
@@ -7341,7 +7391,6 @@ end
 ]]--
 
 function CA.PrintQueuedMessages()
-
     -- TODO: Replace with table.sort function to print. Although POSSIBLY print a few sets and remove them first in order to preserve order.
 
     -- Resolve achievement update messages first
@@ -7364,13 +7413,12 @@ function CA.PrintQueuedMessages()
             printToChat(g_queuedMessages[i].message)
         end
     end
-    
+
     -- Display the rest
     for i=1, #g_queuedMessages do
         if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type ~= "QUEST" and g_queuedMessages[i].type ~= "EXPERIENCE" and g_queuedMessages[i].type ~= "ACHIEVEMENT" and g_queuedMessages[i].type ~= "QUEST_POI" then
-            if g_queuedMessages[i].type == "Loot" then
-                -- TODO: queued Messages for loot save all neccesary variables then push them over to loot printer function which gets resolved here.
-                d("Loot Message resolve extra stuff here")
+            if g_queuedMessages[i].type == "LOOT" then
+                CA.ResolveItemMessage(g_queuedMessages[i].message, g_queuedMessages[i].formattedRecipient, g_queuedMessages[i].color, g_queuedMessages[i].logPrefix, g_queuedMessages[i].totalString)
             else
                 printToChat(g_queuedMessages[i].message)
             end

@@ -2056,6 +2056,31 @@ function LUIE_CreateSettings()
                             )) end,
                         default = LUIE.ChatAnnouncements.D.LootCurrencyCombo,
                     },
+                    
+                    
+                    {
+                        -- Context Specific Override Message Loot
+                        type = "editbox",
+                        name = "LOOT RECEIVE",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageReceived end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageReceived = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageReceived,
+                    },
+                    {
+                        -- Context Specific Override Message Loot
+                        type = "editbox",
+                        name = "LOOT LOOTED",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageLooted end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageLooted = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageLooted,
+                    },
+                    
                 },
             }
                 -- CA Experience Announcements Options Submenu
