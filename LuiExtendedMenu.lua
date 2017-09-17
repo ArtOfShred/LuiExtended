@@ -1986,100 +1986,273 @@ function LUIE_CreateSettings()
                             )) end,
                         default = LUIE.ChatAnnouncements.D.LootNotTrash,
                     },
+
                     {
-                        -- Bracket Settings for Context Specific Messages
-                        type = "dropdown",
-                        name = GetString(SI_LUIE_LAM_CA_CSMBRACKET),
-                        choices = itemBracketOptions,
-                        tooltip = GetString(SI_LUIE_LAM_CA_CSMBRACKET_TP),
-                        getFunc = function() return itemBracketOptions[LUIE.ChatAnnouncements.SV.ItemBracketDisplayOptions] end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ItemBracketDisplayOptions = itemBracketOptionsKeys[value] end,
-                        width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-                            (
-                                LUIE.ChatAnnouncements.SV.Loot or
-                                LUIE.ChatAnnouncements.SV.LootCraft or
-                                LUIE.ChatAnnouncements.SV.LootTrade or
-                                LUIE.ChatAnnouncements.SV.LootMail or
-                                LUIE.ChatAnnouncements.SV.LootVendor or
-                                LUIE.ChatAnnouncements.SV.LootBank
-                            )) end,
-                        default = itemBracketOptions[1]
-                    },
-                    {
-                        -- Allow override Context specific messages
-                        type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_CSMOVERRIDE),
-                        tooltip = strformat("<<1>>\n<<2>>", GetString(SI_LUIE_LAM_CA_CSMOVERRIDE_TP), GetString(SI_LUIE_LAM_CA_CSMOVERRIDE_NOTE)),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.ItemContextToggle end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ItemContextToggle = value end,
-                        width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-                            (
-                                LUIE.ChatAnnouncements.SV.Loot or
-                                LUIE.ChatAnnouncements.SV.LootCraft or
-                                LUIE.ChatAnnouncements.SV.LootTrade or
-                                LUIE.ChatAnnouncements.SV.LootMail or
-                                LUIE.ChatAnnouncements.SV.LootVendor or
-                                LUIE.ChatAnnouncements.SV.LootBank
-                            )) end,
-                        default = LUIE.ChatAnnouncements.D.ItemContextToggle,
-                    },
-                    {
-                        -- Context Specific Override Message Loot
+                        -- Loot Message (Loot)
                         type = "editbox",
-                        name = GetString(SI_LUIE_LAM_CA_LOOT_CSMLOOT_GAIN),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_CSMLOOT_GAIN_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.ItemContextMessage end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ItemContextMessage = value end,
-                        width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.ItemContextToggle and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.ItemContextMessage,
-                    },
-                    {
-                        -- Merge LootLog Sales with Currency Changes
-                        type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_LOOT_MERGEWITHCURRENCY),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MERGEWITHCURRENCY_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootCurrencyCombo end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootCurrencyCombo = value end,
-                        width = "full",
-                        warning = GetString(SI_LUIE_LAM_GENERIC_WARNING),
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-                            (
-                                LUIE.ChatAnnouncements.SV.Loot or
-                                LUIE.ChatAnnouncements.SV.LootCraft or
-                                LUIE.ChatAnnouncements.SV.LootTrade or
-                                LUIE.ChatAnnouncements.SV.LootMail or
-                                LUIE.ChatAnnouncements.SV.LootVendor or
-                                LUIE.ChatAnnouncements.SV.LootBank
-                            )) end,
-                        default = LUIE.ChatAnnouncements.D.LootCurrencyCombo,
-                    },
-                    
-                    
-                    {
-                        -- Context Specific Override Message Loot
-                        type = "editbox",
-                        name = "LOOT RECEIVE",
+                        name = "Loot Loot",
                         tooltip = "TODO",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageReceived end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageReceived = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageLoot end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageLoot = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.LootMessageReceived,
+                        default = LUIE.ChatAnnouncements.D.LootMessageLoot,
                     },
                     {
-                        -- Context Specific Override Message Loot
+                        -- Loot Message (Receive)
                         type = "editbox",
-                        name = "LOOT LOOTED",
+                        name = "Loot Receive",
                         tooltip = "TODO",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageLooted end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageLooted = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageReceive end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageReceive = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.LootMessageLooted,
+                        default = LUIE.ChatAnnouncements.D.LootMessageReceive,
                     },
+                    {
+                        -- Loot Message (TradeIn)
+                        type = "editbox",
+                        name = "Loot TradeIn",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageTradeIn end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageTradeIn = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageTradeIn,
+                    },
+                    {
+                        -- Loot Message (TradeOut)
+                        type = "editbox",
+                        name = "Loot TradeOut",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageTradeOut end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageTradeOut = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageTradeOut,
+                    },
+                    {
+                        -- Loot Message (Deposit)
+                        type = "editbox",
+                        name = "Loot Deposit",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageDeposit end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageDeposit = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageDeposit,
+                    },
+                    {
+                        -- Loot Message (Withdraw)
+                        type = "editbox",
+                        name = "Loot Withdraw",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageWithdraw end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageWithdraw = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageWithdraw,
+                    },
+                    {
+                        -- Loot Message (Sell)
+                        type = "editbox",
+                        name = "Loot Sell",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageSell end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageSell = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageSell,
+                    },
+                    {
+                        -- Loot Message (Buy)
+                        type = "editbox",
+                        name = "Loot Buy",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageBuy end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageBuy = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageBuy,
+                    },
+                    {
+                        -- Loot Message (Pickpocket)
+                        type = "editbox",
+                        name = "Loot Pickpocket",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessagePickpocket end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessagePickpocket = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessagePickpocket,
+                    },
+                    {
+                        -- Loot Message (Launder)
+                        type = "editbox",
+                        name = "Loot Launder",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageLaunder end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageLaunder = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageLaunder,
+                    },
+                    {
+                        -- Loot Message (Confiscate)
+                        type = "editbox",
+                        name = "Loot Confiscate",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageConfiscate end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageConfiscate = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageConfiscate,
+                    },
+                    {
+                        -- Loot Message (Lose)
+                        type = "editbox",
+                        name = "Loot Lose",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageLose end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageLose = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageLose,
+                    },
+                    {
+                        -- Loot Message (Use)
+                        type = "editbox",
+                        name = "Loot Use",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageUse end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageUse = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageUse,
+                    },
+                    {
+                        -- Loot Message (Craft)
+                        type = "editbox",
+                        name = "Loot Craft",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageCraft end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageCraft = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageCraft,
+                    },
+                    {
+                        -- Loot Message (Extract)
+                        type = "editbox",
+                        name = "Loot Extract",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageExtract end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageExtract = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageExtract,
+                    },
+                    {
+                        -- Loot Message (Upgrade)
+                        type = "editbox",
+                        name = "Loot Upgrade",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageUpgrade end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageUpgrade = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageUpgrade,
+                    },         
+                    {
+                        -- Loot Message (Refine)
+                        type = "editbox",
+                        name = "Loot Refine",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageRefine end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageRefine = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageRefine,
+                    },  
+                    {
+                        -- Loot Message (Deconstruct)
+                        type = "editbox",
+                        name = "Loot Deconstruct",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageDeconstruct end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageDeconstruct = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageDeconstruct,
+                    },  
+                    {
+                        -- Loot Message (Research)
+                        type = "editbox",
+                        name = "Loot Research",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageResearch end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageResearch = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageResearch,
+                    },  
+                    {
+                        -- Loot Message (Destroy)
+                        type = "editbox",
+                        name = "Loot Destroy",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageDestroy end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageDestroy = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageDestroy,
+                    },  
+                    {
+                        -- Loot Message (Lockpick)
+                        type = "editbox",
+                        name = "Loot Lockpick",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageLockpick end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageLockpick = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageLockpick,
+                    },
+
+                    {
+                        -- Loot Message (Disguise Equip)
+                        type = "editbox",
+                        name = "Loot Disguise Equip",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageDisguiseEquip end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageDisguiseEquip = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageDisguiseEquip,
+                    },     
+                    {
+                        -- Loot Message (Disguise Remove)
+                        type = "editbox",
+                        name = "Loot Disguise Remove",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageDisguiseRemove end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageDisguiseRemove = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageDisguiseRemove,
+                    },     
+                    {
+                        -- Loot Message (Disguise Destroy)
+                        type = "editbox",
+                        name = "Loot Disguise Destroy",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageDisguiseDestroy end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageDisguiseDestroy = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageDisguiseDestroy,
+                    },     
+                    
                     
                 },
             }
