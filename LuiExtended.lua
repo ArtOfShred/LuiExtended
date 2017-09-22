@@ -213,7 +213,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     
     GetKillingAttackerInfo = function(index)
         local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
-        local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS = zos_GetKillingAttackInfo(index)
+        local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits = zos_GetKillingAttackInfo(index)
        -- if LUIE.DeathRecap.DeathRecapSourceOverride[attackerRawName] then
        --     if LUIE.DeathRecap.DeathRecapSourceOverride[attackerRawName][attackName] then attackerRawName = LUIE.DeathRecap.DeathRecapSourceOverride[attackerRawName][attackName] end
        -- end
@@ -228,12 +228,34 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
  
     GetKillingAttackInfo = function(index)
         local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
-        local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS = zos_GetKillingAttackInfo(index)
+        local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits = zos_GetKillingAttackInfo(index)
         
         local name
         local icon
         attackerRawName = zo_strformat("<<t:1>>", attackerRawName)
-        minionName = zo_strformat("<<t:1>>", minionName)
+        minionName = zo_strformat("<<t:1>>", minionName) 
+        
+        --if LUIE.DeathRecap.DeathRecapNeutral[attackName] then
+        
+        -- Player ability overrides (Advanced - checks name + icon)
+        if LUIE.DeathRecap.DeathRecapPlayerAdvanced[attackName] and isPlayer then
+            if LUIE.DeathRecap.DeathRecapPlayerAdvanced[attackName][attackIcon] then
+                if LUIE.DeathRecap.DeathRecapPlayerAdvanced[attackName][attackIcon].name then name = LUIE.DeathRecap.DeathRecapPlayerAdvanced[attackName][attackIcon].name end
+                if LUIE.DeathRecap.DeathRecapPlayerAdvanced[attackName][attackIcon].icon then icon = LUIE.DeathRecap.DeathRecapPlayerAdvanced[attackName][attackIcon].icon end
+                if name then attackName = name end
+                if icon then attackIcon = icon end
+                return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
+            end
+        end
+        
+        -- Player ability overrides (Basic - just checks name)
+        if LUIE.DeathRecap.DeathRecapPlayerBasic[attackName] and isPlayer then
+            if LUIE.DeathRecap.DeathRecapPlayerBasic[attackName].name then name = LUIE.DeathRecap.DeathRecapPlayerBasic[attackName].name end
+            if LUIE.DeathRecap.DeathRecapPlayerBasic[attackName].icon then icon = LUIE.DeathRecap.DeathRecapPlayerBasic[attackName].icon end
+            if name then attackName = name end
+            if icon then attackIcon = icon end
+            return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
+        end
         
         -- A few overrides require source, attackname, and ICON as well, this handles those
         if LUIE.DeathRecap.DeathRecapTripleOverride[attackName] and not isPlayer then
@@ -243,7 +265,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     if LUIE.DeathRecap.DeathRecapTripleOverride[attackName][attackerRawName][attackIcon].icon then icon = LUIE.DeathRecap.DeathRecapTripleOverride[attackName][attackerRawName][attackIcon].icon end
                     if name then attackName = name end
                     if icon then attackIcon = icon end
-                    return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS
+                    return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
                 end
             elseif LUIE.DeathRecap.DeathRecapTripleOverride[attackName][minionName] then
                 if LUIE.DeathRecap.DeathRecapTripleOverride[attackName][minionName][attackIcon] then
@@ -251,7 +273,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     if LUIE.DeathRecap.DeathRecapTripleOverride[attackName][minionName][attackIcon].icon then icon = LUIE.DeathRecap.DeathRecapTripleOverride[attackName][minionName][attackIcon].icon end
                     if name then attackName = name end
                     if icon then attackIcon = icon end
-                    return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS
+                    return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
                 end
             end
         end
@@ -263,13 +285,13 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                 if LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName].icon then icon = LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName].icon end
                 if name then attackName = name end
                 if icon then attackIcon = icon end
-                return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS
+                return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
             elseif LUIE.DeathRecap.DeathRecapInfoOverride[attackName][minionName] then
                 if LUIE.DeathRecap.DeathRecapInfoOverride[attackName][minionName].name then name = LUIE.DeathRecap.DeathRecapInfoOverride[attackName][minionName].name end
                 if LUIE.DeathRecap.DeathRecapInfoOverride[attackName][minionName].icon then icon = LUIE.DeathRecap.DeathRecapInfoOverride[attackName][minionName].icon end
                 if name then attackName = name end
                 if icon then attackIcon = icon end
-                return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS
+                return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
             end  
         end
         
@@ -277,12 +299,23 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         if LUIE.DeathRecap.DeathRecapBasicOverride[attackName] and not isPlayer then
             if LUIE.DeathRecap.DeathRecapBasicOverride[attackName].name then name = LUIE.DeathRecap.DeathRecapBasicOverride[attackName].name end
             if LUIE.DeathRecap.DeathRecapBasicOverride[attackName].icon then icon = LUIE.DeathRecap.DeathRecapBasicOverride[attackName].icon end
+            if name then attackName = name end
+            if icon then attackIcon = icon end
+            return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
         end
         
-        if name then attackName = name end
-        if icon then attackIcon = icon end
+        -- Override for self inflicted damage
+        if LUIE.DeathRecap.NoSourceOverride[attackName] and attackerRawName == "" then
+            if LUIE.DeathRecap.NoSourceOverride[attackName][attackIcon] then
+                if LUIE.DeathRecap.NoSourceOverride[attackName][attackIcon].name then name = LUIE.DeathRecap.NoSourceOverride[attackName][attackIcon].name end
+                if LUIE.DeathRecap.NoSourceOverride[attackName][attackIcon].icon then icon = LUIE.DeathRecap.NoSourceOverride[attackName][attackIcon].icon end
+                if name then attackName = name end
+                if icon then attackIcon = icon end
+                return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
+            end
+        end
         
-        return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS
+        return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
     end
     
     -- HOOK SUPPORT FOR OTHER ADDONS (ICON)
@@ -347,6 +380,12 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                 for effectId in ZO_GetNextActiveArtificialEffectIdIter do
                     local displayName, iconFile, effectType, sortOrder = GetArtificialEffectInfo(effectId)
                     
+                    if effectId == 0 then
+                        displayName = "Dueling"
+                        iconFile = "/esoui/art/icons/achievement_dueling_002.dds"
+                    end
+                        
+                    
                     local effectsRow = effectsRowPool:AcquireObject()
                     effectsRow.name:SetText(zo_strformat(SI_ABILITY_TOOLTIP_NAME, displayName))
                     effectsRow.icon:SetTexture(iconFile)
@@ -365,8 +404,9 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId = GetUnitBuffInfo("player", i)
                     
                     local tooltipText = GetAbilityEffectDescription(buffSlot)
+                    --if LUIE.Effects.TooltipOverride[abilityId] then tooltipText = LUIE.Effects.TooltipOverride[abilityId] end
                     -- Have to trim trailing spaces on the end of tooltips
-                    if tooltipText ~= "" then tooltipText = string.match(tooltipText, ".*%S") end 
+                    if tooltipText ~= "" then tooltipText = string.match(tooltipText, ".*%S") end
                     if buffSlot > 0 and buffName ~= "" and not (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide) then
                         local effectsRow = effectsRowPool:AcquireObject()
                         effectsRow.name:SetText(zo_strformat(SI_ABILITY_TOOLTIP_NAME, buffName))

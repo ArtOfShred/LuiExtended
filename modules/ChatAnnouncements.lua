@@ -4116,7 +4116,16 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
     formattedTrait = (CA.SV.LootShowTrait and traitType ~= ITEM_TRAIT_TYPE_NONE and itemType ~= ITEMTYPE_ARMOR_TRAIT and itemType ~= ITEMTYPE_WEAPON_TRAIT and logPrefix ~= GetString(SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED) ) and strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMTRAITTYPE", traitType)) or ""
     
     local styleType = GetItemLinkItemStyle(itemLink) -- Get Style of the item
-    formattedStyle = (CA.SV.LootShowStyle and styleType ~= ITEMSTYLE_NONE and styleType ~= ITEMSTYLE_UNIQUE and styleType ~= ITEMSTYLE_UNIVERSAL and itemType ~= ITEMTYPE_STYLE_MATERIAL and logPrefix ~= GetString(SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED) ) and strfmt(" |cFFFFFF(%s)|r", GetItemStyleName(styleType)) or ""
+    formattedStyle = (CA.SV.LootShowStyle 
+        and styleType ~= ITEMSTYLE_NONE 
+        and styleType ~= ITEMSTYLE_UNIQUE 
+        and styleType ~= ITEMSTYLE_UNIVERSAL 
+        and itemType ~= ITEMTYPE_STYLE_MATERIAL
+        and itemType ~= ITEMTYPE_GLYPH_ARMOR 
+        and itemType ~= ITEMTYPE_GLYPH_JEWELRY 
+        and itemType ~= ITEMTYPE_GLYPH_WEAPON 
+        and logPrefix ~= GetString(SI_LUIE_CA_PREFIX_MESSAGE_UPGRADED) )
+    and strfmt(" |cFFFFFF(%s)|r", GetItemStyleName(styleType)) or ""
     
     local formattedTotal = ""
     if CA.SV.LootTotal and formattedRecipient == "" and receivedBy ~= "LUIE_INVENTORY_UPDATE_DISGUISE" then
@@ -4429,7 +4438,6 @@ end
 function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
     
     -- End right now if this is any other reason (durability loss, etc)
-    -- TODO: Double check all craft reasons only use this code.
     if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then return end
     
     local function ResolveCraftingUsed(itemType)
@@ -4719,6 +4727,8 @@ end
 
 function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
 
+    -- End right now if this is any other reason (durability loss, etc)
+    if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then return end
     d("Inventory UPDATE BANK" .. bagId)
     if isNewItem then d("This is a new item wow wiggity wew") end
 
@@ -5265,6 +5275,7 @@ function CA.JusticeRemovePrint()
     CA.IndexInventory() -- Reindex the inventory with the correct values!
 end
 
+-- TODO: Interface this with the CSA handler to fix!
 --[[ I would have liked to have this optional feature, but it gets out of snyc sometimes so kind of ruins it
 function CA.DuelCountdown(eventCode, startTimeMS)
     local duelcounter = 6

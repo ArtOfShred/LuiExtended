@@ -4,6 +4,85 @@ LUIE.DeathRecap = {}
 
 local DR = LUIE.DeathRecap
 
+-- Player ability death recaps, these all use Name + Icon detection for replacement
+DR.DeathRecapPlayerBasic = {
+    
+    -- BASIC
+    ['Bash'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_bash.dds' }, -- Bash (Innate)
+    
+    -- CHAMPION
+    ['Riposte'] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_riposte.dds'}, -- Riposte (Champion)
+    
+    -- WEAPON ATTACKS
+    ['Heavy Attack (Dual Wield)'] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds', name = 'Heavy Attack'}, -- Heavy Attack (Melee)
+    ['Heavy Attack (Shock)'] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_lightning_attackheavy.dds' },
+    ['Shock Pulse'] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_lightning_attackheavypulse.dds', name = 'Heavy Attack (Shock Pulse)'}, -- Shock Pulse
+    ['Shock'] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_lightning_attackheavy.dds', name = 'Tri Focus (Shock)'}, -- Tri-Focus
+    ['Twin Blade and Blunt Bleed'] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = 'Twin Blade and Blunt' }, -- Twin Blade and Blunt Bleed
+    ['Heavy Weapons Bleed'] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleed.dds', name = 'Heavy Weapons' }, -- Heavy Weapons Bleed
+    ['Forceful'] = { icon = 'LuiExtended/media/icons/abilities/ability_2handed_forceful.dds' }, -- Forceful
+    
+    -- PASSIVES
+    ['Burning Light'] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_burning_light.dds'}, -- Burning Light
+    ['Implosion'] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_implosion.dds'}, -- Implosion
+    ['Soul Shatter'] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_shatter.dds' }, -- Soul Shatter
+    
+    -- GLYPHS
+    ['Life Drain'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_health.dds', name = 'Life Drain Enchantment' }, -- Glyph of Absorb Health
+    ['Absorb Magicka'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_magicka.dds', name = 'Absorb Magicka Enchantment' }, -- Glyph of Absorb Magicka
+    ['Absorb Stamina'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_stamina.dds', name = 'Absorb Stamina Enchantment' }, -- Glyph of Absorb Stamina
+    ['Damage Health'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_decrease_health.dds', name = 'Decrease Health Enchantment' }, -- Glyph of Decrease Health
+    ['Fiery Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_flame.dds', name = 'Fiery Weapon Enchantment' }, -- Glyph of Flame
+    ['Befouled Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_foulness.dds', name = 'Befouled Weapon Enchantment' }, -- Glyph of Foulness
+    ['Frozen Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_frost.dds', name = 'Frozen Weapon Enchantment' }, -- Glyph of Frost
+    ['Poisoned Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_poison.dds', name = 'Poisoned Weapon Enchantment' }, -- Glyph of Poison
+    ['Prismatic Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_prismatic.dds', name = 'Prismatic Weapon Enchantment' }, -- Glyph of Prismatic Onslaught
+    ['Charged Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_shock.dds', name = 'Charged Weapon Enchantment' }, -- Glyph of Shock
+    
+    -- STATUS EFFECTS
+    ['Burning'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_burning.dds' }, -- Burning (Fire Status Effect)
+    ['Diseased'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_diseased.dds' }, -- Diseased (Disease Status Effect)
+    ['Chill'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_chill.dds' }, -- Chill (Frost Status Effect)
+    ['Poisoned'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_poisoned.dds' }, -- Poisoned (Poison Status Effect)
+    ['Concussion'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_concussion.dds' }, -- Concussion (Shock Status Effect)
+    
+}
+
+DR.DeathRecapPlayerAdvanced = {
+    -- WEAPON ATTACKS
+    ['Light Attack'] =              {
+                                    ['/esoui/art/icons/death_recap_melee_basic.dds'] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds'}, -- Light Attack (Melee)
+                                    ['/esoui/art/icons/death_recap_ranged_basic.dds'] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds'}, -- Light Attack (Bow)
+                                    ['/esoui/art/icons/death_recap_magic_ranged.dds'] = { icon = 'LuiExtended/media/icons/abilities/ability_restorationstaff_attacklight.dds'}, -- Light Attack (Restoration Staff)
+                                    ['/esoui/art/icons/death_recap_shock_ranged.dds'] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_lightning_attacklight.dds' }, -- Light Attack (Lightning Staff)
+                                    ['/esoui/art/icons/death_recap_fire_ranged.dds'] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_flame_attacklight.dds' }, -- Light Attack (Flame Staff)
+                                    ['/esoui/art/icons/death_recap_cold_ranged.dds'] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_frost_attacklight.dds' }, -- Light Attack (Frost Staff)
+                                    },
+    ['Heavy Attack'] =              {
+                                    ['/esoui/art/icons/death_recap_melee_basic.dds'] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds'}, -- Heavy Attack (Melee)
+                                    ['/esoui/art/icons/death_recap_ranged_basic.dds'] = { icon = 'LuiExtended/media/icons/abilities/ability_bow_attackheavy.dds'}, -- Heavy Attack (Bow)
+                                    ['/esoui/art/icons/death_recap_magic_ranged.dds'] = { icon = 'LuiExtended/media/icons/abilities/ability_restorationstaff_attackheavy.dds'}, -- Heavy Attack (Restoration Staff)
+                                    ['/esoui/art/icons/death_recap_fire_ranged.dds'] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_flame_attackheavy.dds' }, -- Heavy Attack (Flame Staff)
+                                    ['/esoui/art/icons/death_recap_cold_ranged.dds'] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_frost_attackheavy.dds' }, -- Heavy Attack (Frost Staff)
+                                    },
+                                    
+    ['Ravage Health'] =             {
+                                    ['/esoui/art/icons/crafting_poison_001_red_005.dds'] = { icon = 'LuiExtended/media/icons/poisons/poison_1_red_r.dds' }, -- Ravage Health
+                                    ['/esoui/art/icons/death_recap_poison_melee.dds'] = { icon = 'LuiExtended/media/icons/poisons/poison_1_red_r.dds' }, -- Ravage Health
+                                    },
+    ['Drain Health'] =              {
+                                    ['/esoui/art/icons/crafting_poison_002_red_005.dds'] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_r.dds' }, -- Drain Health
+                                    ['/esoui/art/icons/crafting_poison_002_orange_005.dds'] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_r.dds', name = 'Creeping Drain Health' }, -- Drain Health
+                                    },
+    ['Creeping Drain Health'] =     {
+                                    ['/esoui/art/icons/crafting_poison_002_orange_005.dds'] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_r.dds'}, -- Creeping Drain Health
+                                    },
+    ['Creeping Ravage Health'] =    {
+                                    ['/esoui/art/icons/crafting_poison_001_orange_005.dds'] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds' }, -- Creeping Ravage Health
+                                    ['/esoui/art/icons/death_recap_poison_melee.dds'] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds' }, -- Creeping Ravage Health
+                                    },
+}
+
 -- For basic icon or name replacements, when the relevant ability icon/name can be bulk replaced by name
 DR.DeathRecapBasicOverride = {
 
@@ -640,5 +719,26 @@ DR.DeathRecapTripleOverride = {
                                         ['/esoui/art/icons/death_recap_shock_aoe.dds'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_pulse.dds', name = 'Lightning Pulse' }, -- Lightning Rod (Air Atronach - Storm)
                                         },
                     },
+
+}
+
+-- Used for damage the player does to themself
+DR.NoSourceOverride = {
+
+    ['Health Potion Poison'] =      {
+                                    ['/esoui/art/icons/consumable_potion_015_type_001.dds'] = { icon = 'LuiExtended/media/icons/potions/potion_015.dds', name = 'Ravage Health' }, -- Health Potion Poison
+                                    },
+    ['Health Potion Lingering Effect'] = {
+                                    ['/esoui/art/icons/consumable_potion_015_type_001.dds'] = { icon = 'LuiExtended/media/icons/potions/potion_015.dds', name = 'Ravage Health' }, -- Health Potion Lingering Effect
+                                    },
+    ['Ravage Health'] =             {
+                                    ['/esoui/art/icons/consumable_potion_015_type_001.dds'] = { icon = 'LuiExtended/media/icons/potions/potion_015.dds' }, -- Ravage Health
+                                    },
+    ['Damage Health'] =             {
+                                    ['/esoui/art/icons/consumable_potion_015_type_001.dds'] = { icon = 'LuiExtended/media/icons/potions/potion_015.dds', name = 'Ravage Health' }, -- Damage Health
+                                    },
+    ['Creeping Ravage Health'] =    {
+                                    ['/esoui/art/icons/consumable_potion_014_type_001.dds'] = { icon = 'LuiExtended/media/icons/potions/potion_014r.dds' }, -- Creeping Ravage Health
+                                    },
 
 }
