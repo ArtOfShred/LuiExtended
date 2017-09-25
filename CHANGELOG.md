@@ -61,7 +61,7 @@ Buffs and Debuffs
 - Implemented horizontal container orientation for long term effects.
 - Updated a number of buffs that display a green highlight on the ability bar while their duration is active.
 - Updated the duration of ground tracking effects to be more accurate based on cast time. There is still some work to do here.
-- Added a significant amount of new icons for player effects - Potions, poisons, food, experience consumables, momentos, and weapon enchants.
+- Added a significant amount of new icons for player effects - Potions, poisons, food, experience consumables, mementos, and weapon enchants.
 - Added a significant amount of new icons for NPC abilities, as well as updating icons for certain player passives, champion point passives with active components, etc..
 - Many placeholder icons used by abilities or NPC abilites have been updated.
 - Implemented new "fake" buff tracking to display a buff/debuff for effects that normally do not show one in the base game. This includes the weapon and spell damage weapon enchant procs.

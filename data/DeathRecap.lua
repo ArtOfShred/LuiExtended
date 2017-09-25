@@ -46,6 +46,35 @@ DR.DeathRecapPlayerBasic = {
     ['Poisoned'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_poisoned.dds' }, -- Poisoned (Poison Status Effect)
     ['Concussion'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_concussion.dds' }, -- Concussion (Shock Status Effect)
     
+    -- WEAPON SETS
+    ['Merciless Charge'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_merciless_charge.dds' }, -- Merciless Charge (Maelstrom 2H)
+    
+    -- MONSTER HELMS
+    ['Domihaus'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_stone.dds' }, -- Domihaus (Domihaus) -- Unfortunately both use the same icon so we can't make separate icons for damage type
+    ['Grothdarr'] = { icon = 'esoui/art/icons/achievement_update11_dungeons_033.dds' }, -- Grothdarr (Grothdarr)
+    ['Iceheart'] = { icon = 'esoui/art/icons/achievement_wrothgar_042.dds' }, -- Iceheart (Iceheart)
+    ['Infernal Guardian'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_infernal_guardian.dds' }, -- Infernal Guardian (Infernal Guardian)
+    ['Kra\'gh'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_kragh.dds' }, -- Kra'gh (Kra'gh)
+    ['Scourge Harvest'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds', name = 'Malubeth the Scourger' }, -- Scourge Harvest (Malubeth)
+    ['Jagged Claw'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_maw_of_the_infernal.dds'}, -- Jagged Claw (Maw of the Infernal)
+    ['Fiery Jaws'] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_jaws.dds'}, -- Fiery Jaws (Maw of the Infernal)
+    ['Lich Crystal'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_nerieneth.dds', name = 'Nerien\'eth' }, -- Lich Crystal (Nerien'eth)
+    ['Selene'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_selene.dds' }, -- Selene (Selene)
+    ['Sellistrix'] = { icon = 'esoui/art/icons/achievement_thievesguild_021.dds' }, -- Sellistrix (Sellistrix)
+    ['Shadowrend'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_shadowrend_headbutt.dds', name = 'Headbutt' }, -- Shadowrend (Shadowrend)
+    ['Mephala\'s Web'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', name = 'Spawn of Mephala' }, -- Mephala's Web (Spawn of Mephala)
+    ['Stormfist'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds' }, -- Stormfist (Stormfist)
+    ['Tremorscale'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds' }, -- Tremorscale
+    ['Valkyn Skoria'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_valkyn_skoria.dds' }, -- Valkyn Skoria
+    ['Velidreth'] = { icon = 'esoui/art/icons/achievement_update11_dungeons_035.dds' }, -- Velidreth
+    
+    -- CRAFTED SETS
+    ['Ashen Grip'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ashen_grip.dds' }, -- Ashen Grip
+    ['Eternal Hunt'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds' }, -- Eternal Hunt
+    ['Song of Lamae'] = { icon = 'esoui/art/icons/achievement_021.dds' }, -- Song of Lamae
+    
+    
+    
 }
 
 DR.DeathRecapPlayerAdvanced = {
@@ -66,6 +95,7 @@ DR.DeathRecapPlayerAdvanced = {
                                     ['/esoui/art/icons/death_recap_cold_ranged.dds'] = { icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_frost_attackheavy.dds' }, -- Heavy Attack (Frost Staff)
                                     },
                                     
+    -- POISONS
     ['Ravage Health'] =             {
                                     ['/esoui/art/icons/crafting_poison_001_red_005.dds'] = { icon = 'LuiExtended/media/icons/poisons/poison_1_red_r.dds' }, -- Ravage Health
                                     ['/esoui/art/icons/death_recap_poison_melee.dds'] = { icon = 'LuiExtended/media/icons/poisons/poison_1_red_r.dds' }, -- Ravage Health
@@ -81,12 +111,21 @@ DR.DeathRecapPlayerAdvanced = {
                                     ['/esoui/art/icons/crafting_poison_001_orange_005.dds'] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds' }, -- Creeping Ravage Health
                                     ['/esoui/art/icons/death_recap_poison_melee.dds'] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds' }, -- Creeping Ravage Health
                                     },
+    
+    -- ITEM SETS
+    ['Ilambris'] =                  {
+                                    ['/esoui/art/icons/death_recap_shock_aoe.dds'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_ilambris_shock.dds' }, -- Ilambris (Ilambris)
+                                    ['/esoui/art/icons/death_recap_fire_aoe.dds'] = { icon = 'esoui/art/icons/ava_siege_ui_002.dds' }, -- Ilambris (Ilambris)
+                                    },
+    ['Fiery Breath'] =              {
+                                    ['/esoui/art/icons/death_recap_fire_aoe.dds'] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds'}, -- Fiery Breath (Maw of the Infernal)
+                                    },
 }
 
 -- For basic icon or name replacements, when the relevant ability icon/name can be bulk replaced by name
 DR.DeathRecapBasicOverride = {
 
-    -- HUMAN NPC'S
+    -- HUMAN NPCS
     ['Quick Strike'] =          { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike (Shared NPC)
     ['Quick Shot'] =            { icon = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds' }, -- Quick Shot (Shared NPC)
     ['Ice Arrow'] =             { icon = 'esoui/art/icons/ability_mage_009.dds' }, -- Ice Arrow (Shared NPC)
