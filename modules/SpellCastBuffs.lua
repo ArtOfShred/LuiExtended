@@ -2128,7 +2128,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                
     -- If the source of the buff isn't the player or the buff is not on the AbilityId or AbilityName override list then we don't display it
     if unitTag ~= "player" then
-        if effectType == 2 and not (castByPlayer == 1 or castByPlayer == 2) and not (E.DebuffDisplayOverrideId[abilityId] or E.DebuffDisplayOverrideName[effectName]) then
+        if effectType == 2 and not (castByPlayer == 1) and not (E.DebuffDisplayOverrideId[abilityId] or E.DebuffDisplayOverrideName[effectName]) then
             return
         end
     end
@@ -2294,9 +2294,31 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
     if E.EffectOverride[abilityId] then
         unbreakable = E.EffectOverride[abilityId].unbreakable or 0
     end
-
+    
+    if E.FakeGroundBuffs[abilityId] ~= nil then
+        g_effectsList.player1[ abilityId ] = nil
+        if E.FakeGroundBuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
+        iconName = E.FakeGroundBuffs[abilityId].icon
+        effectName = E.FakeGroundBuffs[abilityId].name
+        duration = E.FakeGroundBuffs[abilityId].duration
+        local beginTime = GetGameTimeMilliseconds()
+        local endTime = beginTime + duration
+        local source = strformat("<<t:1>>",sourceName)
+        local target = strformat("<<t:1>>",targetName)
+        if source == playerName and target ~= "" then
+        g_effectsList.ground[ abilityId ] = {
+            type=EFFECT_TYPE_DEBUFF,
+            id=abilityId, name=effectName, icon=iconName,
+            dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+            forced = "short",
+            restart=true, iconNum=0,
+            unbreakable=unbreakable }
+        end
+    end
+        
     -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by target)
     if E.FakeExternalBuffs[abilityId] ~= nil then
+        g_effectsList.player1[ abilityId ] = nil
         if E.FakeExternalBuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
         iconName = E.FakeExternalBuffs[abilityId].icon
         effectName = E.FakeExternalBuffs[abilityId].name
@@ -2313,13 +2335,12 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
             forced = "short",
             restart=true, iconNum=0,
             unbreakable=unbreakable }
-        elseif source == "" and target == playerName then
-            g_effectsList.player1[ abilityId ] = nil
         end
     end
 
     -- Creatures fake debuff icons for debuffs without an aura - These refresh on reapplication/removal (Applied on player by target)
     if E.FakeExternalDebuffs[abilityId] ~= nil then
+        g_effectsList.player2[ abilityId ] = nil
         if E.FakeExternalDebuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
         iconName = E.FakeExternalDebuffs[abilityId].icon
         effectName = E.FakeExternalDebuffs[abilityId].name
@@ -2336,13 +2357,12 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
             forced = "short",
             restart=true, iconNum=0,
             unbreakable=unbreakable }
-        elseif source == "" and target == playerName then
-            g_effectsList.player2[ abilityId ] = nil
         end
     end
 
-    -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by player OR applied on target by player)
+    -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by player)
     if E.FakePlayerBuffs[abilityId] ~= nil then
+        g_effectsList.player1[ abilityId ] = nil
         if abilityId == 973 and not SCB.SV.ShowSprint then
             return
         end
@@ -2360,20 +2380,63 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
         local source = strformat("<<t:1>>",sourceName)
         local target = strformat("<<t:1>>",targetName)
         if source == playerName and target == playerName then
-            g_effectsList.player1[ abilityId ] = {
-            type=1,
+            if E.FakePlayerBuffs[abilityId].debuff == true then -- If the "buff" is flagged as a debuff, then display it here instead
+                g_effectsList.player2[ abilityId ] = {
+                type=EFFECT_TYPE_DEBUFF,
+                id=abilityId, name=effectName, icon=iconName,
+                dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+                forced = "short",
+                restart=true, iconNum=0,
+                unbreakable=unbreakable }
+            else -- Otherwise, display as a normal buff
+                g_effectsList.player1[ abilityId ] = {
+                type=1,
+                id=abilityId, name=effectName, icon=iconName,
+                dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+                forced = "short",
+                restart=true, iconNum=0,
+                unbreakable=unbreakable }
+            end
+        end
+    end
+    
+    -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on target by player)
+    if E.FakePlayerExternalBuffs[abilityId] then
+        g_effectsList.reticleover1[ abilityId ] = nil
+        if not DoesUnitExist("reticleover") then return end
+        if GetUnitReaction("reticleover") == UNIT_REACTION_HOSTILE then return end
+        if IsUnitDead(unitTag) then return end
+        if E.FakePlayerExternalBuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
+        iconName = E.FakePlayerExternalBuffs[abilityId].icon
+        effectName = E.FakePlayerExternalBuffs[abilityId].name
+        duration = E.FakePlayerExternalBuffs[abilityId].duration
+        effectType = EFFECT_TYPE_DEBUFF
+        local beginTime = GetGameTimeMilliseconds()
+        local endTime = beginTime + duration
+        local source = strformat("<<t:1>>",sourceName)
+        local target = strformat("<<t:1>>",targetName)
+        local unitName = strformat("<<t:1>>", GetUnitName("reticleover") )
+        if unitName ~= target then return end
+        if source == playerName and target ~= nil then
+            if SCB.SV.HideTargetBuffs then
+                return
+            end
+            g_effectsList.reticleover1[ abilityId ] = {
+            type=effectType,
             id=abilityId, name=effectName, icon=iconName,
             dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
             forced = "short",
             restart=true, iconNum=0,
             unbreakable=unbreakable }
-        elseif source == "" and target == playerName then
-            g_effectsList.player1[ abilityId ] = nil
         end
     end
 
     -- Creates fake debuff icons for debuffs without an aura - These refresh on reapplication/removal (Applied on target by player)
     if E.FakePlayerDebuffs[abilityId] ~= nil then
+        g_effectsList.reticleover2[ abilityId ] = nil
+        if not DoesUnitExist("reticleover") then end
+        --if GetUnitReaction("reticleover") ~= UNIT_REACTION_HOSTILE then return end
+        if IsUnitDead(unitTag) then return end
         if E.FakePlayerDebuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
         iconName = E.FakePlayerDebuffs[abilityId].icon
         effectName = E.FakePlayerDebuffs[abilityId].name
@@ -2383,6 +2446,8 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
         local endTime = beginTime + duration
         local source = strformat("<<t:1>>",sourceName)
         local target = strformat("<<t:1>>",targetName)
+        local unitName = strformat("<<t:1>>", GetUnitName("reticleover") )
+        if unitName ~= target then return end
         if source == playerName and target ~= nil then
             if SCB.SV.HideTargetDebuffs then
                 return
@@ -2398,6 +2463,7 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
     end
     
     if E.FakeFlippedBuffs[abilityId] ~= nil then
+        g_effectsList.reticleover1[ abilityId ] = nil
         if E.FakeFlippedBuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
         iconName = E.FakeFlippedBuffs[abilityId].icon
         effectName = E.FakeFlippedBuffs[abilityId].name
@@ -2423,6 +2489,8 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
 
     -- Simulates fake debuff icons for stagger effects - works for both (target -> player) and (player -> target) - DOES NOT REFRESH - Only expiration condition is the timer
     if E.FakeStagger[abilityId] ~= nil then
+        g_effectsList.player2[ abilityId ] = nil
+        g_effectsList.reticleover2[ abilityId ] = nil
         if E.FakeStagger[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
         iconName = E.FakeStagger[abilityId].icon
         effectName = E.FakeStagger[abilityId].name
@@ -2431,6 +2499,7 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
         local endTime = beginTime + duration
         local source = strformat("<<t:1>>",sourceName)
         local target = strformat("<<t:1>>",targetName)
+        local unitName = strformat("<<t:1>>", GetUnitName("reticleover") )
         if source ~= "" and target == playerName then
             g_effectsList.player2[ abilityId ] = {
             type=EFFECT_TYPE_DEBUFF,
@@ -2440,6 +2509,7 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
             restart=true, iconNum=0,
             unbreakable=unbreakable }
         elseif source == playerName and target ~= nil then
+            if unitName ~= target then return end
             if SCB.SV.HideTargetDebuffs then
                 return
             end
@@ -2455,6 +2525,8 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
 
     -- Simulates fake buffs/debuffs on the player frame for self applied buffs/debuffs that do not display correctly - DOES NOT REFRESH - Only expiration condition is the timer
     if E.FakeSelfAura[abilityId] ~= nil then
+        g_effectsList.player1[ abilityId ] = nil
+        g_effectsList.player2[ abilityId ] = nil
         if E.FakeSelfAura[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
         iconName = E.FakeSelfAura[abilityId].icon
         effectName = E.FakeSelfAura[abilityId].name
@@ -2537,13 +2609,11 @@ function SCB.ReloadEffects(unitTag)
     for i = 1, GetNumBuffs(unitTag) do
         local unitName = GetRawUnitName(unitTag)
         local buffName, timeStarted, timeEnding, buffSlot, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = GetUnitBuffInfo(unitTag, i)
-        if effectType == 2 then
-            -- Fudge this value to send to SCB.OnEffectChanged if this is a debuff
-            if castByPlayer == true then
-            castByPlayer = 1
-            else
-                castByPlayer = 5
-            end
+        -- Fudge this value to send to SCB.OnEffectChanged if this is a debuff
+        if castByPlayer == true then
+        castByPlayer = 1
+        else
+            castByPlayer = 5
         end
         SCB.OnEffectChanged(0, 3, buffSlot, buffName, unitTag, timeStarted, timeEnding, stackCount, iconFilename, buffType, effectType, abilityType, statusEffectType, unitName, 0--[[unitId]], abilityId, castByPlayer)
     end

@@ -212,6 +212,10 @@ E.AbilityIcon = {
 E.DebuffDisplayOverrideId = {
     [2727] = true, -- Off-Balance (Generic)
     
+    -- Player (Sets)
+    [51315] = true, -- Destructive Mage (Aether ... of Destruction)
+    [60416] = true, -- Sunderflame
+    
     -- Human NPC's
     [88281] = true, -- Call Ally (Pet Ranger)
     [89017] = true, -- Dark Shade (Dreadweaver)
@@ -265,7 +269,7 @@ E.DisguiseIcons = {
     [43046] = { name = 'Forebear Dishdasha', icon = 'LuiExtended/media/icons/disguises/disguise_forebear_dishdasha.dds', description = 'as a member of the Forebears.' },
     [43047] = { name = 'Crown Dishdasha', icon = 'LuiExtended/media/icons/disguises/disguise_crown_dishdasha.dds', description = 'as a member of the Crowns.' },
     [43508] = { name = 'Seaside Sanctuary Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', description = 'in a Seaside Sanctuary disguise.' }, -- NO ICON (Probably doesn't exist)
-    [43511] = { name = 'Sea Viper Armor', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', description = 'as a Maormer soldier.' }, -- NO ICON
+    [43511] = { name = 'Sea Viper Armor', icon = 'LuiExtended/media/icons/disguises/disguise_sea_viper_armor.dds', description = 'as a Maormer soldier.' }, -- NO ICON
     [43515] = { name = 'Imperial Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_imperial_disguise.dds', description = 'as an Imperial soldier.' },
     [44448] = { name = 'Frostedge Bandit Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_frostedge_bandit_disguise.dds', description = 'as a Frostedge bandit.' },
     [44580] = { name = 'Hollow Moon Garb', icon = 'LuiExtended/media/icons/disguises/disguise_hollow_moon_garb.dds', description = 'as a member of the Hollow Moon.' },
@@ -732,6 +736,9 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     [16261] = true, -- Heavy Attack (Frost)
     [15383] = true, -- Heavy Attack (Flame)
     
+    -- Sets
+    [32755] = true, -- Nikulas' Heavy Armor (of Nikulas)
+    
     
     
     ----------------------------
@@ -808,6 +815,8 @@ E.EffectForcedType = { --Force a change to the type buff container
     [97896] = "short", -- Domihaus (Domihaus) 
     
     [59586] = "short", -- Lord Warden (Lord Warden)
+    
+    [75815] = "short", -- Lunar Bastion (of the Lunar Bastion)
     
 }
 
@@ -1341,8 +1350,8 @@ E.EffectOverride = {
     [99781] = { icon = 'LuiExtended/media/icons/abilities/ability_set_master_grand_rejuvenation.dds' }, -- Grand Rejuvenation (Master Resto Staff)
     
     -- MONSTER SETS
-    [59517] = { icon = 'esoui/art/icons/achievement_update11_dungeons_036.dds' }, -- Blood Spawn (Blood Spawn)
-    [61274] = { icon = 'esoui/art/icons/achievement_update11_dungeons_036.dds' }, -- Blood Spawn (Blood Spawn)
+    [59517] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds' }, -- Blood Spawn (Blood Spawn)
+    [61274] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds' }, -- Blood Spawn (Blood Spawn)
     [59591] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_bogdan.dds', name = 'Bogdan the Nightflame' }, -- Bogdan Totem (Bogdan the Nightflame)
     [81069] = { hide = true }, -- Chokethorn (Chokethorn)
     [81077] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_chokethorn.dds' }, -- Chokethorn (Chokethorn)
@@ -1379,8 +1388,8 @@ E.EffectOverride = {
     [60972] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds'}, -- Fiery Breath (Maw of the Infernal)
     [60973] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_jaws.dds'}, -- Fiery Jaws (Maw of the Infernal)
     
-    [66808] = { icon = 'esoui/art/icons/achievement_ic_014.dds' }, -- Molag Kena (Molag Kena)
-    [66812] = { icon = 'esoui/art/icons/achievement_ic_014.dds' }, -- Overkill (Molag Kena)
+    [66808] = { icon = 'LuiExtended/media/icons/abilities/ability_set_molag_kena.dds' }, -- Molag Kena (Molag Kena)
+    [66812] = { icon = 'LuiExtended/media/icons/abilities/ability_set_molag_kena.dds' }, -- Overkill (Molag Kena)
     
     [59593] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_nerieneth.dds', name = 'Nerien\'eth' }, -- Lich Crystal (Nerien'eth)
     
@@ -1394,7 +1403,7 @@ E.EffectOverride = {
     [80549] = { icon = 'esoui/art/icons/achievement_thievesguild_021.dds' }, -- Sellistrix (Sellistrix)
     
     [80955] = { hide = true }, -- Shadowrend (Shadowrend)
-    [80594] = { hide = true }, -- Shadowrend Summon (Shadowrend)
+    [80954] = { hide = true }, -- Shadowrend Summon (Shadowrend)
     [80980] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_shadowrend_headbutt.dds', name = 'Headbutt' }, -- Shadowrend (Shadowrend)
     [80990] = { icon = 'esoui/art/icons/ability_debuff_minor_maim.dds' }, -- Minor Maim (Shadowrend)
     [80989] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_shadowrend_tail_spike.dds', name = 'Tail Spike' }, -- Shadowrend (Shadowrend)
@@ -1430,8 +1439,8 @@ E.EffectOverride = {
     [34592] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds' }, -- Alessia's Bulwark
     [75746] = { icon = 'LuiExtended/media/icons/abilities/ability_set_clever_alchemist.dds' }, -- Clever Alchemist
     
-    [33764] = { icon = 'LuiExtended/media/icons/abilities/ability_set_deaths_wind.dds', hide = true }, -- Death's Wind
-    [52289] = { icon = 'LuiExtended/media/icons/abilities/ability_set_deaths_wind.dds' }, -- Death's Wind
+    [33764] = { icon = 'LuiExtended/media/icons/abilities/ability_set_deaths_wind.dds' }, -- Death's Wind
+    [52289] = { icon = 'LuiExtended/media/icons/abilities/ability_set_deaths_wind.dds', hide = true }, -- Death's Wind
     
     [75929] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds' }, -- Eternal Hunt
     [76533] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds' }, -- Eternal Hunt
@@ -1441,10 +1450,17 @@ E.EffectOverride = {
     [57207] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kagrenacs_hope.dds', hide = true }, -- Kagrenac's Hope
     
     [34381] = { hide = true }, -- Magnus
+    
+    [99204] = { icon = 'esoui/art/icons/achievement_update16_015.dds' }, -- Mechanical Acuity (of Mechanical Acuity)
+    
     [71671] = { hide = true }, -- Morkuldin (Morkuldin)
     
-    [61684] = { icon = 'esoui/art/icons/achievement_028.dds', name = 'Redistribution', hide = true }, -- Redistribution
-    [49126] = { icon = 'esoui/art/icons/achievement_update15_036.dds' }
+    [71678] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds' }, -- Light Attack (Morkuldin)
+    [71679] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_cleave.dds' }, -- Cleave (Morkuldin)
+    
+    [61784] = { icon = 'esoui/art/icons/achievement_028.dds', name = 'Redistribution', hide = true }, -- Redistribution
+    
+    [49126] = { icon = 'esoui/art/icons/achievement_update15_036.dds' }, -- Shalidor's Curse
     
     [75726] = { icon = 'LuiExtended/media/icons/abilities/ability_set_tavas_favor.dds' }, -- Tava's Favor
     
@@ -1453,17 +1469,340 @@ E.EffectOverride = {
     
     [34386] = { icon = 'esoui/art/icons/achievement_witchesfestival_01.dds' }, -- Night Mother's Gaze
     
-    [61781] = { icon = 'esoui/art/icons/achievement_thievesguild_034.dds' }, -- Noble's Conquest
+    [61781] = { icon = 'LuiExtended/media/icons/abilities/ability_set_nobles_conquest.dds' }, -- Noble's Conquest
     [61782] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Minor Vulnerability (Noble's Conquest)
     
     [34587] = { icon = 'esoui/art/icons/achievement_021.dds' }, -- Song of Lamae
     [34588] = { icon = 'esoui/art/icons/achievement_021.dds' }, -- Song of Lamae
     
-    [79079] = { icon = 'esoui/art/icons/achievement_067.dds', name = 'Varen\'s Legacy' }, -- Varen's Wall (Varen's Legacy)
+    [71067] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_melee_alt.dds' }, -- Trial by Shock (Trials)
+    [71058] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_melee_alt.dds' }, -- Trial by Fire (Trials)
+    [71019] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cold_melee_alt.dds' }, -- Trial by Frost (Trials)
+    [71072] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_melee_alt.dds' }, -- Trial by Poison (Trials)
+    [71069] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_disease_melee_alt.dds' }, -- Trial by Disease (Trials)
     
-    [57170] = { icon = 'esoui/art/icons/ability_set_vampires_kiss.dds' }, -- Vampire's Kiss
+    [79089] = { icon = 'esoui/art/icons/achievement_ic_survival.dds', name = 'Varen\'s Legacy' }, -- Varen's Wall (Varen's Legacy)
+    [79093] = { hide = true }, -- Remove Trigger (Varen's Legacy)
     
-    [49236] = { icon = 'LuiExtended/media/icons/ability_set_whitestrake.dds' }, -- Whitestake's Retribution (Whitestrake's)
+    [57170] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vampires_kiss.dds' }, -- Vampire's Kiss
+    
+    [49236] = { icon = 'LuiExtended/media/icons/abilities/ability_set_whitestrake.dds' }, -- Whitestake's Retribution (Whitestrake's)
+    
+    -- Overland Sets (Light)
+    
+    [75707] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds' }, -- Bahraha's Curse
+    [75692] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds' }, -- Bahraha's Curse
+    [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds' }, -- Bahraha's Curse
+    
+    [34522] = { icon = 'esoui/art/icons/achievement_wrothgar_012.dds' }, -- Bloodthorn's Touch (Bloodthorn)
+    [57177] = { icon = 'esoui/art/icons/achievement_wrothgar_012.dds' }, -- Bloodthorn's Touch (Bloodthorn)
+    
+    [48913] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dreamers_mantle.dds' }, -- Dreamer's Mantle (Dreamer's)
+    [57133] = { icon = 'LuiExtended/media/icons/abilities/ability_set_dreamers_mantle.dds' }, -- Dreamer's Mantle (Dreamer's)
+    
+    [85776] = { icon = 'esoui/art/icons/achievement_update11_dungeons_010.dds' }, -- Robes of the Hist (of Hist Sap)
+    
+    [52705] = { icon = 'LuiExtended/media/icons/abilities/ability_set_martial_knowledge.dds' }, -- Way of Martial Knowledge (of Martial Knowledge)
+    
+    [85825] = { icon = 'esoui/art/icons/achievement_update16_011.dds' }, -- Prisoner's Rags (Prisoner's)
+    
+    [34506] = { icon = 'LuiExtended/media/icons/abilities/ability_set_syrabane.dds' }, -- Syrabane's Grip (of Syrabane)
+    
+    [57173] = { icon = 'LuiExtended/media/icons/abilities/ability_set_withered_hand.dds' }, -- Withered Hand
+    [57175] = { icon = 'LuiExtended/media/icons/abilities/ability_set_withered_hand.dds', hide = true }, -- Withered Hand
+    
+    [71657] = { icon = 'LuiExtended/media/icons/abilities/ability_set_trinimacs_valor.dds' }, -- Trinimac's Valor
+    [71658] = { icon = 'LuiExtended/media/icons/abilities/ability_set_trinimacs_valor.dds' }, -- Trinimac's Valor
+    
+    [93026] = { hide = true }, -- Mad Tinkerer (Mad Tinkerer's)
+    [92982] = { hide = true }, -- Mad Tinkerer (Mad Tinkerer's)
+    [93002] = { icon = 'esoui/art/icons/achievement_update16_029.dds' }, -- Mad Tinkerer (Mad Tinkerer's)
+    [93003] = { icon = 'esoui/art/icons/achievement_update16_029.dds', hide = true }, -- Mad Tinkerer (Mad Tinkerer's)
+    [93001] = { icon = 'esoui/art/icons/achievement_update16_029.dds' }, -- Mad Tinkerer (Mad Tinkerer's)
+    
+    -- Overland Sets (Medium)
+    
+    [71106] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds' }, -- Briarheart
+    
+    [93308] = { hide = true }, -- Defiler
+    [93307] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_torpor.dds' }, -- Defiler
+    [93305] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_torpor.dds' }, -- Defiler
+    [93326] = { hide = true }, -- Defiler
+    
+    [34875] = { icon = 'LuiExtended/media/icons/abilities/ability_set_night_terror.dds' }, -- Night Terror (of Night Terror)
+    
+    [34611] = { icon = 'esoui/art/icons/perks_fighters_guild_002.dds' }, -- Senche's Bite (Senche's)
+    
+    [67101] = { icon = 'LuiExtended/media/icons/abilities/ability_set_swamp_raider.dds'}, -- Swamp Raider
+    
+    [76344] = { icon = 'LuiExtended/media/icons/abilities/ability_set_syvarras_scales.dds', name = 'Syvarra\'s Scales', hide = true }, -- Serpent's Spirit (Syvarra's Scales)
+    [75718] = { icon = 'LuiExtended/media/icons/abilities/ability_set_syvarras_scales.dds', name = 'Syvarra\'s Scales' }, -- Serpent's Spirit (Syvarra's Scales)
+    
+    [52709] = { icon = 'LuiExtended/media/icons/abilities/ability_set_way_of_air.dds' }, -- Way of Air (of the Air)
+    
+    [34383] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_infernal_guardian.dds' }, -- Shadow of the Red Mountain (of the Red Mountain)
+    
+    [34817] = { icon = 'LuiExtended/media/icons/abilities/ability_set_twin_sisters.dds', name = 'Twin Sisters' }, -- Twin Sisters Bleed
+    
+    [34870] = { icon = 'LuiExtended/media/icons/abilities/ability_set_wilderqueen.dds' }, -- Wilderqueen's Arch (of the Wilderqueen)
+    
+    [99268] = { icon = 'LuiExtended/media/icons/abilities/ability_set_unfathomable_darkness.dds' }, -- Unfathomable Darkness (of Unfathomable Darkness)
+    [99267] = { icon = 'LuiExtended/media/icons/abilities/ability_set_unfathomable_darkness.dds', hide = true }, -- Unfathomable Darkness (of Unfathomable Darkness)
+    
+    [34508] = { icon = 'LuiExtended/media/icons/abilities/ability_set_werewolf_hide.dds' }, -- Hide of the Werewolf (Werewolf Hide)
+    
+    [18993] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds' }, -- Witchman Armor (Witchman's)
+    [85818] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds' }, -- Witchman Armor (Witchman's)
+    
+    -- Overland Sets (Heavy)
+    
+    [34711] = { icon = 'LuiExtended/media/icons/abilities/ability_set_meridia.dds' }, -- Meridia's Blessed Armor (Blessed)
+    
+    [57298] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_heritage.dds', hide = true }, -- Draugr's Heritage
+    [57296] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_heritage.dds' }, -- Draugr's Heritage
+    [57297] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_heritage.dds' }, -- Draugr's Heritage
+    
+    [99286] = { icon = 'esoui/art/icons/achievement_vvardenfel_046.dds' }, -- Livewire
+    
+    [79123] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morihaus.dds' }, -- Hide of Morihaus (of Morihaus)
+    [79112] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morihaus.dds' }, -- Hide of Morihaus (of Morihaus)
+    
+    [34526] = { icon = 'LuiExtended/media/icons/abilities/ability_set_seventh_legion.dds' }, -- Seventh Legion Brute (Seventh Legion)
+    [57186] = { icon = 'LuiExtended/media/icons/abilities/ability_set_seventh_legion.dds' }, -- Seventh Legion Brute (Seventh Legion)
+    
+    [85594] = { icon = 'esoui/art/icons/ability_buff_minor_heroism.dds' }, -- Minor Heroism (Shalk's)
+    
+    [52711] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_melee.dds', name = 'Way of Fire' }, -- Fiery Weapon (Way of Fire)
+    
+    [85797] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hatchlings_shell.dds' }, -- Hatchling's Shell (of the Hatchling's Shell)
+    
+    [57210] = { icon = 'LuiExtended/media/icons/abilities/ability_set_storm_knight.dds' }, -- Storm Knight's Plate (of the Storm Knight)
+    [57209] = { icon = 'LuiExtended/media/icons/abilities/ability_set_storm_knight.dds' }, -- Storm Knight's Plate (of the Storm Knight)
+    
+    [33514] = { icon = 'esoui/art/icons/perks_fighters_guild_003.dds' }, -- Armor of the Veiled Heritance (of the Veiled Heritance)
+    
+    [33497] = { icon = 'esoui/art/icons/achievement_vvardenfel_035.dds' }, -- Thunderbug's Carapace (Thunderbug's)
+    
+    [92762] = { icon = 'esoui/art/icons/ability_buff_minor_toughness.dds' }, -- Minor Toughness (Warrior-Poet's)
+    
+    -- Dungeon Sets (Light)
+    
+    [61459] = { icon = 'LuiExtended/media/icons/abilities/ability_set_burning_spellweave.dds' }, -- Burning Spellweave
+    
+    [97539] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds' }, -- Draugr's Rest
+    
+    [97574] = { icon = 'LuiExtended/media/icons/abilities/ability_set_flame_blossom.dds' }, -- Flame Blossom
+    
+    [85610] = { icon = 'esoui/art/icons/achievement_021.dds' }, -- Lamia's Song (Lamia's)
+    
+    [67129] = { icon = 'LuiExtended/media/icons/abilities/ability_set_overwhelming.dds' }, -- Overwhelming Surge (Overwhelming)
+    [67136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_overwhelming.dds' }, -- Overwhelming Surge (Overwhelming)
+    
+    [34504] = { icon = 'LuiExtended/media/icons/abilities/ability_set_prayer.dds' }, -- Prayer Shawl (of Prayer)
+    
+    [32834] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hircine.dds' }, -- Sanctuary (of Sanctuary)
+    
+    [66902] = { icon = 'LuiExtended/media/icons/abilities/ability_set_spell_power_cure.dds' }, -- Spell Power Cure
+    
+    [67098] = { icon = 'LuiExtended/media/icons/abilities/ability_set_combat_physician.dds' }, -- Combat Physician (of the Combat Physician)
+    
+    [57164] = { icon = 'esoui/art/icons/achievement_ic_014.dds' }, -- Shroud of the Lich (of the Lich)
+    
+    [34813] = { icon = 'LuiExtended/media/icons/abilities/ability_set_magicka_furnace.dds' }, -- Magicka Furnace (of the Magicka Furnace)
+    
+    [67288] = { icon = 'esoui/art/icons/ava_siege_hookpoint_002.dds' }, -- Scathing Mage (of the Scathing Mage)
+    
+    [59676] = { icon = 'LuiExtended/media/icons/abilities/ability_set_undaunted_unweaver.dds' }, -- Undaunted Unweaver (of the Undaunted Unweaver)
+    
+    [57163] = { icon = 'esoui/art/icons/achievement_darkbrotherhood_027.dds' }, -- Robes of the Warlock (of the Warlock)
+    
+    [47367] = { icon = 'LuiExtended/media/icons/abilities/ability_set_worm_cult.dds'}, -- Worm's Raiment (of the Worm Cult)
+    
+    -- Dungeon Sets (Medium)
+    
+    [85977] = { icon = 'LuiExtended/media/icons/abilities/ability_set_barkskin.dds' }, -- Barkskin
+    [85978] = { icon = 'LuiExtended/media/icons/abilities/ability_set_barkskin.dds' }, -- Barkskin
+    
+    [47365] = { icon = 'LuiExtended/media/icons/abilities/ability_set_hircine.dds' }, -- Hircine's Veneer (Hircine's)
+    
+    [34612] = { hide = true }, -- Oblivion's Edge (of Oblivion)
+    [57206] = { icon = 'LuiExtended/media/icons/abilities/ability_set_oblivion.dds' }, -- Oblivion's Edge (of Oblivion)
+    
+    [97716] = { icon = 'LuiExtended/media/icons/abilities/ability_set_pillar_of_nirn.dds' }, -- Pillar of Nirn
+    [97743] = { icon = 'LuiExtended/media/icons/abilities/ability_set_pillar_of_nirn.dds' }, -- Pillar of Nirn
+    
+    [67141] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_melee.dds'}, -- Sheer Venom
+    
+    [60060] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sunderflame.dds' }, -- Sunderflame
+    [60416] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sunderflame.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Sunderflame
+    
+    [85635] = { icon = 'LuiExtended/media/icons/abilities/ability_set_spelunker.dds' }, -- Spelunker (Spelunker's)
+    
+    [70297] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_melee.dds' }, -- Storm Master (Storm Master's)
+    [70298] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_melee.dds' }, -- Storm Master (Storm Master's)
+    
+    [49220] = { hide = true }, -- Extra Dodge (of the Crusader)
+    
+    [67334] = { icon = 'LuiExtended/media/icons/abilities/ability_set_essence_thief.dds' }, -- Essence Thief (of the Essence Thief)
+    [70284] = { icon = 'LuiExtended/media/icons/abilities/ability_set_essence_thief.dds' }, -- Essence Thief (of the Essence Thief)
+    [70290] = { icon = 'LuiExtended/media/icons/abilities/ability_set_essence_thief.dds' }, -- Essence Thief (of the Essence Thief)
+    
+    [59667] = { icon = 'LuiExtended/media/icons/abilities/ability_set_undaunted_infiltrator.dds' }, -- Undaunted Infiltrator (of the Undaunted Infiltrator)
+    
+    [33691] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vipers_sting.dds' }, -- Viper's Sting
+    
+    [84350] = { icon = 'esoui/art/icons/achievement_update11_dungeons_035.dds' }, -- Widowmaker
+    
+    -- Dungeon Sets (Heavy
+    
+    [34527] = { name = 'Major Defile' }, -- Durok's Bane Major Defile (of Durok's Bane)
+    
+    [47362] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ebon.dds' }, -- Ebon Armory (Ebon)
+    
+    [59695] = { icon = 'LuiExtended/media/icons/abilities/ability_set_embershield.dds' }, -- Embershield (Embershield)
+    [59696] = { icon = 'LuiExtended/media/icons/abilities/ability_set_embershield.dds' }, -- Embershield (Embershield)
+    
+    [34404] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ice_furnace.dds', name = 'Ice Furnace' }, -- Frostfire (Ice Furnace)
+    
+    [97626] = { icon = 'esoui/art/icons/achievement_update11_dungeons_036.dds', unbreakable = 1 }, -- Ironblood
+    
+    [67078] = { icon = 'LuiExtended/media/icons/abilities/ability_set_jolting.dds' }, -- Jolting Arms (Jolting)
+    [67080] = { icon = 'LuiExtended/media/icons/abilities/ability_set_jolting.dds', name = 'Jolting Arms' }, -- Shocking Bash (Jolting)
+    
+    [85620] = { icon = 'esoui/art/icons/achievement_darkbrotherhood_028.dds' }, -- Knight-Errant's Mail (Knight-Errant's)
+    
+    [69345] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds' }, -- Leeching Plate (of Leeching)
+    [67204] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds' }, -- Leeching Plate (of Leeching)
+    
+    [84277] = { icon = 'esoui/art/icons/achievement_update11_dungeons_006.dds' }, -- Aspect of Mazzatun (of Mazzatun)
+    [84278] = { icon = 'esoui/art/icons/achievement_update11_dungeons_006.dds' }, -- Aspect of Mazzatun (of Mazzatun)
+    [84279] = { icon = 'esoui/art/icons/achievement_update11_dungeons_006.dds' }, -- Aspect of Mazzatun (of Mazzatun)
+    
+    [84357] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', name = 'Hand of Mephala', duration = 0 }, -- Hand of Mephala Webbing (of Mephala's Hand)
+    [84355] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds' }, -- Hand of Mephala (of Mephala's Hand)
+    
+    [66887] = { icon = 'LuiExtended/media/icons/abilities/ability_set_imperium.dds' }, -- Brands of the Imperium (of the Imperium)
+    
+    [67283] = { icon = 'esoui/art/icons/achievement_ic_025_heroic.dds', name = 'Tormentor' }, -- Tormentor Resistance (of the Tormentor)
+    
+    [61200] = { icon = 'esoui/art/icons/achievement_undaunteddailies_003.dds' }, -- Undaunted Bastion (of the Undaunted Bastion)
+    
+    [86070] = { icon = 'esoui/art/icons/achievement_thievesguild_034.dds' }, -- Armor of Truth (of Truth)
+    
+    -- Trial Sets (Hel Ra Citadel)
+    
+    [50978] = { icon = 'esoui/art/icons/achievement_update11_dungeons_001.dds' }, -- Berserking Warrior (Advancing Yokeda)
+    
+    [90937] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior.dds', unbreakable = 1 }, -- Immortal Warrior (Immortal Yokeda)
+    [90938] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior.dds', name = "Immortal Warrior Cooldown" }, -- Immortal Warrior (Immortal Yokeda)
+    
+    [86907] = { icon = 'LuiExtended/media/icons/abilities/ability_set_defending_warrior.dds' }, -- Defending Warrior (Resilient Yokeda)
+    [50992] = { icon = 'LuiExtended/media/icons/abilities/ability_set_defending_warrior.dds' }, -- Defending Warrior (Resilient Yokeda)
+    
+    [76618] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_aegis.dds' }, -- Minor Aegis (Eternal Yokeda)
+    [90940] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior.dds', unbreakable = 1 }, -- Eternal Warrior (Eternal Yokeda)
+    [61437] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior.dds' }, -- Eternal Warrior (Eternal Yokeda)
+    [90939] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior.dds', name = "Eternal Warrior Cooldown" }, -- Eternal Warrior (Eternal Yokeda)
+    
+    -- Trial Sets (Aetherian Archive)
+    
+    [51315] = { icon = 'LuiExtended/media/icons/abilities/ability_set_destructive_mage.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Destructive Mage (Aether... of Destruction)
+    [51320] = { icon = 'LuiExtended/media/icons/abilities/ability_set_destructive_mage.dds', name = 'Destructive Mage' }, -- Mage Destruction Bomb (Aether... of Destruction)
+    
+    [51443] = { icon = 'LuiExtended/media/icons/abilities/ability_set_healing_mage.dds', name = 'Healing Mage' }, -- Healing Bane (of Mending)
+    
+    [51434] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Minor Vulnerability (Aether ... of Strategy)
+    
+    [76617] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds' }, -- Minor Slayer (of the Infallible Aether)
+    [81519] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Minor Vulnerability (of the Infallible Aether)
+    
+    -- Trial Sets (Sanctum Ophidia)
+    
+    [51241] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vipers_sting.dds' }, -- Poisonous Serpent (Ophidian ... of Venom)
+    
+    [51176] = { icon = 'esoui/art/icons/achievement_darkbrotherhood_010.dds' }, -- Twice-Fanged Serpent (of the Two-Fanged Snake)
+    
+    [98103] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds' }, -- Minor Slayer (of the Vicious Ophidian)
+    [81524] = { icon = 'esoui/art/icons/ability_buff_major_expedition.dds', name = 'Major Expedition' }, -- Quick Serpent (of the Vicious Ophidian)
+    [81522] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vicious_serpent.dds', name = 'Vicious Serpent' }, -- Serpent Stamina (of the Vicious Ophidian)
+    
+    -- Trial Sets (Maw of Lorkhaj)
+    
+    [75801] = { icon = 'LuiExtended/media/icons/abilities/ability_set_moondancer_lunar.dds' }, -- Lunar Blessing (Moondancer)
+    [75804] = { icon = 'LuiExtended/media/icons/abilities/ability_set_moondancer_shadow.dds' }, -- Shadow Blessing (Moondancer)
+    
+    [98102] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds' }, -- Minor Slayer (of Alkosh)
+    [75752] = { icon = 'esoui/art/icons/achievement_026.dds' }, -- Roar of Alkosh (of Alkosh)
+    [75753] = { icon = 'esoui/art/icons/achievement_026.dds', name = 'Roar of Alkosh' }, -- Line Breaker (of Alkosh)
+    [76667] = { icon = 'esoui/art/icons/achievement_026.dds' }, -- Roar of Alkosh (of Alkosh)
+    
+    [75815] = { icon = 'LuiExtended/media/icons/abilities/ability_set_lunar_bastion.dds', duration = 0 }, -- Lunar Bastion (of the Lunar Bastion)
+    
+    [75770] = { icon = 'LuiExtended/media/icons/abilities/ability_set_twilight_remedy.dds' }, -- Twilight Remedy (of Twilight Remedy)
+    
+    -- Trial Sets (Halls of Fabrication)
+    
+    [93444] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds' }, -- Major Aegis (Automated Defense)
+    [93125] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_major_aegis.dds' }, -- Major Aegis (Inventor's Guard)
+    [93120] = { icon = 'esoui/art/icons/achievement_vvardenfel_061.dds' }, -- Major Slayer (Master Architect)
+    [93442] = { icon = 'esoui/art/icons/achievement_vvardenfel_061.dds' }, -- Major Slayer (War Machine)
+    
+    -- Battleground Sets
+    [93104] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_oblivion.dds' }, -- Knight Slayer
+    
+    [92916] = { icon = 'esoui/art/icons/achievement_update15_041.dds' }, -- Vanguard's Challenge
+    
+    -- Imperial City Sets
+    [79421] = { icon = 'LuiExtended/media/icons/abilities/ability_set_galerions_revenge.dds' }, -- Mark of Revenge (Galerion's)
+    [79420] = { icon = 'LuiExtended/media/icons/abilities/ability_set_galerions_revenge.dds' }, -- Galerion's Revenge (Galerion's)
+    
+    [65706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_meritorious_service.dds' }, -- Meritorious Service (of Meritorious Service)
+    
+    [90935] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds', unbreakable = 1 }, -- Phoenix (of the Phoenix)
+    [90936] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds', name = "Phoenix Cooldown" }, -- Phoenix (of the Phoenix)
+    [68940] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds' }, -- Phoenix (of the Phoenix)
+    [70405] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds' }, -- Phoenix (of the Phoenix)
+    
+    [61771] = { icon = 'LuiExtended/media/icons/abilities/ability_set_powerful_assault.dds' }, -- Powerful Assault (of the Powerful Assault)
+    
+    [68974] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_oblivion.dds' }, -- Shield Breaker (of the Shield Breaker)
+    
+    [79363] = { icon = 'esoui/art/icons/achievement_029.dds' }, -- Thews of the Harbinger (of the Harbinger)
+    
+    [79469] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vicecanon.dds', name = 'Vicecanon of Venom' }, -- Deadly Venom (the Vicanon's)
+    [79471] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vicecanon.dds', name = 'Vicecanon of Venom' }, -- Deadly Venom (the Vicanon's)
+    
+    -- Cyrodiil Sets (Light)
+    
+    [34605] = { icon = 'LuiExtended/media/icons/abilities/ability_set_almalexias_mercy.dds' }, -- Almalexia's Mercy (of Almalexia's Mercy)
+    
+    [70392] = { icon = 'LuiExtended/media/icons/abilities/ability_set_arch-mage.dds' }, -- The Arch-Mage (of the Arch-Mage)
+    
+    [33498] = { icon = 'esoui/art/icons/achievement_update11_dungeons_007.dds' }, -- Desert Rose (of the Desert Rose)
+    
+    [47352] = { icon = 'LuiExtended/media/icons/abilities/ability_set_whitestrake.dds' }, -- Buffer of the Swift (of the Swift)
+    
+    -- Cyrodiil Sets (Medium)
+    
+    [34509] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kynes_kiss.dds' }, -- Kyne's Kiss (of Kyne's Kiss)
+    [70492] = { icon = 'LuiExtended/media/icons/abilities/ability_set_kynes_kiss.dds' }, -- Kyne's Kiss (of Kyne's Kiss)
+    
+    [34384] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morag_tong.dds' }, -- The Morag Tong (of the Morag Tong)
+    
+    [57180] = { icon = 'esoui/art/icons/achievement_thievesguild_011.dds' }, -- Shadow Walker (of the Shadow Walker)
+    [57181] = { icon = 'esoui/art/icons/achievement_thievesguild_011.dds' }, -- Shadow Walker (of the Shadow Walker)
+    
+    [47358] = { icon = 'LuiExtended/media/icons/abilities/ability_set_twilight_remedy.dds' }, -- Vengeance Leech (of Vengeance Leech)
+    [47359] = { icon = 'LuiExtended/media/icons/abilities/ability_set_twilight_remedy.dds' }, -- Vengeance Leech (of Vengeance Leech)
+    [47360] = { icon = 'LuiExtended/media/icons/abilities/ability_set_twilight_remedy.dds' }, -- Vengeance Leech (of Vengeance Leech)
+    
+    -- Cyrodiil Sets (Heavy)
+    
+    [34787] = { icon = 'LuiExtended/media/icons/abilities/ability_set_affliction.dds' }, -- Affliction (Afflicted)
+    
+    [34872] = { icon = 'LuiExtended/media/icons/abilities/ability_set_the_ravager.dds' }, -- The Ravager (Ravaging)
+    
+    [34512] = { icon = 'LuiExtended/media/icons/abilities/ability_set_the_juggernaut.dds' }, -- The Juggernaut (of the Juggernaut)
     
     -- DISGUISES
     [82631] = { icon = 'LuiExtended/media/icons/disguises/disguise_monks_disguise.dds', name = 'Monk\'s Disguise' }, -- Monk Disguise Timer (Monk's Disguise)
@@ -1560,9 +1899,23 @@ E.EffectOverride = {
     -- Basic Abilities
     [48532] = { hide = true }, -- Charge Snare
     
+    -- Disguise Effects
+    [13371] = { hide = true }, -- Acting Suspicious
+    
     -- Misc
     [21263] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = 'Ayleid Well'}, -- Ayleid Health Bonus
-
+    
+    ----------------------------------------------------------------
+    -- WORLD EVENTS  -----------------------------------------------
+    ----------------------------------------------------------------
+    
+    -- Daedric Anchor
+    
+    [95813] = { type = BUFF_EFFECT_TYPE_DEBUFF, duration = 0, unbreakable = 1 }, -- Static Charge
+    
+    [46291] = { hide = true }, -- Rain of Doom
+    [46293] = { hide = true }, -- Stun
+    
     ----------------------------------------------------------------
     -- DRAGONKNIGHT PASSIVES ---------------------------------------
     ----------------------------------------------------------------
@@ -2680,7 +3033,7 @@ E.EffectOverride = {
     [88554] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_summon_the_dead.dds' }, -- Summon the Dead (Necromancer)
     [88555] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_summon_the_dead.dds' }, -- Summon the Dead (Necromancer)
     [88561] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', name = 'Weakness', duration = -120, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Summon the Dead (Necromancer)
-    [13397] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_empower_undead.dds' }, -- Empower Undead (Necromancer)
+    [13397] = { icon = 'esoui/art/icons/achievement_update15_030.dds' }, -- Empower Undead (Necromancer)
     [43757] = { hide = true }, -- Cultist Synergy Cast (Applied on summoned ghost }, no point in displaying)
     [31848] = { hide = true }, -- Summon the Dead (Necromancer)
     [88582] = { hide = true }, -- Summon the Dead (Necromancer)
@@ -4029,6 +4382,15 @@ E.EffectOverride = {
     
 }
 
+E.FakeGroundBuffs = { 
+
+    -- Item Sets
+    [75981] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = 'Bahraha\'s Curse', duration = 5000 }, -- Bahraha's Curse
+    
+    [69346] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds', name = 'Leeching Plate', duration = 5000}, -- Leeching Plate (of Leeching)
+
+}
+
 -- Fake Buffs applied onto the player by NPCs or Events (Friendly)
 E.FakeExternalBuffs = {
     -- Nothing here yet
@@ -4039,6 +4401,9 @@ E.FakeExternalDebuffs = {
 
     -- Player
     [18396] = {icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_lightning_attackheavy.dds', name = 'Heavy Attack (Shock)', duration = 1800, norefresh = true}, -- Heavy Attack (Shock)
+    
+    -- Item Sets
+    [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = 'Bahraha\'s Curse', duration = 0 }, -- Bahraha's Curse
 
     -- Traps
     [29602] = {icon = 'esoui/art/icons/ability_debuff_stun.dds', name = 'Falling Rocks', duration = 2000}, -- Falling Rocks (Tripwire)
@@ -4115,7 +4480,7 @@ E.FakeExternalDebuffs = {
 
 }
 
--- Fake buffs applied onto the player by self
+-- Fake buffs applied onto the player by self (also supports debuffs with debuff = true)
 E.FakePlayerBuffs = {
 
     -- Misc Consumables
@@ -4149,6 +4514,14 @@ E.FakePlayerBuffs = {
     [59573] = { icon = 'esoui/art/icons/ability_buff_major_vitality.dds', name = 'Major Vitality', duration = 510 }, -- Major Vitality (Malubeth)
     [81675] = { icon = 'esoui/art/icons/achievement_housing_038.dds', name = 'Pirate Skeleton', duration = 12000 }, -- Pirate Skeleton
     
+    [75981] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = 'Bahraha\'s Curse', duration = 5000 }, -- Bahraha's Curse
+    
+    [71107] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds', name = 'Briareart', duration = 10000 }, -- Briarheart
+    
+    [97626] = { icon = 'esoui/art/icons/achievement_update11_dungeons_036.dds', name = 'Ironblood', duration = 10000, debuff = true }, -- Ironblood
+    
+    [69346] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds', name = 'Leeching Plate', duration = 5000}, -- Leeching Plate (of Leeching)
+    
     -- Player (Basic)
     [973] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_sprint.dds', name = 'Sprint', duration = 0}, -- Sprint
     [33439] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mount_sprint.dds', name = 'Gallop', duration = 0}, -- Mount Sprint (Generic)
@@ -4176,6 +4549,13 @@ E.FakePlayerBuffs = {
 
 }
 
+-- Fake buffs applied onto a target by the player
+E.FakePlayerExternalBuffs = {
+
+    [61381] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_bogdan.dds', name = 'Bogdan the Nightflame', duration = 0 }, -- Bogdan Totem (Bogdan the Nightflame)
+
+}
+
 E.FakePlayerDebuffs = { -- Fake debuffs applied onto a target by the player
 
     ----------------------------------------------------------------
@@ -4199,6 +4579,9 @@ E.FakePlayerDebuffs = { -- Fake debuffs applied onto a target by the player
     
     -- Dragonknight (Flame Lash)
     [70745] = {icon = 'esoui/art/icons/ability_warrior_025.dds', name = 'Power Lash', duration = 2000}, -- Off-Balance Exploit (Flame Lash - Rank 1)
+    
+    -- Item Sets
+    [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = 'Bahraha\'s Curse', duration = 0 }, -- Bahraha's Curse
     
 }
 

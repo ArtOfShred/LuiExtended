@@ -3822,8 +3822,9 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
         
         local function ResetIsLooted()
             g_isLooted = false
+            EVENT_MANAGER:UnregisterForUpdate(moduleName .. "ResetLooted")
         end
-        zo_callLater(ResetIsLooted, 500)
+        EVENT_MANAGER:RegisterForUpdate(moduleName .. "ResetLooted", 200, ResetIsLooted )
     else
         --d("Another dude looted")
     end

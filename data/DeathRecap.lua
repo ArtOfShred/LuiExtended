@@ -73,6 +73,52 @@ DR.DeathRecapPlayerBasic = {
     ['Eternal Hunt'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds' }, -- Eternal Hunt
     ['Song of Lamae'] = { icon = 'esoui/art/icons/achievement_021.dds' }, -- Song of Lamae
     
+    -- OVERLAND SETS
+    ['Bahraha\'s Curse'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds' }, -- Bahraha's Curse
+    ['Trinimac\'s Valor'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_trinimacs_valor.dds' }, -- Trinimac's Valor
+    ['Mad Tinkerer'] = { icon = 'esoui/art/icons/achievement_update16_029.dds' }, -- Mad Tinkerer (Mad Tinkerer's)
+    ['Defiler'] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_torpor.dds' }, -- Defiler (Defiler's)
+    ['Night Terror'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_night_terror.dds' }, -- Night Terror (of Night Terror)
+    ['Serpent\'s Spirit'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_syvarras_scales.dds', name = 'Syvarra\'s Scales' }, -- Serpent's Spirit (Syvarra's Scales)
+    ['Shadow of the Red Mountain'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_infernal_guardian.dds' }, -- Shadow of the Red Mountain (of the Red Mountain)
+    ['Twin Sisters Bleed'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_twin_sisters.dds', name = 'Twin Sisters' }, -- Twin Sisters Bleed
+    ['Unfathomable Darkness'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_unfathomable_darkness.dds' }, -- Unfathomable Darkness (of Unfathomable Darkness)
+    ['Hide of Morihaus'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morihaus.dds' }, -- Hide of Morihaus (of Morihaus)
+    ['Storm Knight\'s Plate'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_storm_knight.dds' }, -- Storm Knight's Plate (of the Storm Knight)
+    ['Thunderbug\'s Carapace'] = { icon = 'esoui/art/icons/achievement_vvardenfel_035.dds' }, -- Thunderbug's Carapace (Thunderbug's)
+    
+    -- DUNGEON SETS
+    ['Flame Blossom'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_flame_blossom.dds' }, -- Flame Blossom
+    ['Overwhelming Surge'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_overwhelming.dds' }, -- Overwhelming Surge (Overwhelming)
+    ['Pillar of Nirn'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_pillar_of_nirn.dds' }, -- Pillar of Nirn
+    ['Sheer Venom'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_melee.dds'}, -- Sheer Venom
+    ['Storm Master'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_melee.dds' }, -- Storm Master (Storm Master's)
+    ['Sunderflame'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_sunderflame.dds' }, -- Sunderflame
+    ['Viper\'s Sting'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vipers_sting.dds' }, -- Viper's Sting
+    ['Embershield'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_embershield.dds' }, -- Embershield (Embershield)
+    ['Frostfire'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ice_furnace.dds', name = 'Ice Furnace' }, -- Frostfire (Ice Furnace)
+    ['Shocking Bash'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_jolting.dds', name = 'Jolting Arms' }, -- Shocking Bash (Jolting)
+    ['Leeching Plate'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds' }, -- Leeching Plate (of Leeching)
+    ['Hand of Mephala'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds' }, -- Hand of Mephala (of Mephala's Hand)
+    
+    -- TRIAL SETS
+    ['Defending Warrior'] = { icon = 'LuiExtended/media/icons/abilities//ability_set_defending_warrior.dds' }, -- Defending Warrior (Resilient Yokeda)
+    ['Mage Destruction Bomb'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_destructive_mage.dds', name = 'Destructive Mage' }, -- Mage Destruction Bomb (Aether... of Destruction)
+    ['Poisonous Serpent'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vipers_sting.dds' }, -- Poisonous Serpent (Ophidian ... of Venom)
+    ['Roar of Alkosh'] = { icon = 'esoui/art/icons/achievement_026.dds' }, -- Roar of Alkosh (of Alkosh)
+    
+    -- BATTLEGROUND SETS
+    ['Knight Slayer'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_oblivion.dds' }, -- Knight Slayer
+    
+    -- IMPERIAL CITY SETS
+    ['Galerion\'s Revenge'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_galerions_revenge.dds' }, -- Galerion's Revenge (Galerion's Revenge)
+    ['Phoenix'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds' }, -- Phoenix (of the Phoenix)
+    ['Shield Breaker'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_oblivion.dds' }, -- Shield Breaker (of the Shield Breaker)
+    ['Thews of the Harbinger'] = { icon = 'esoui/art/icons/achievement_029.dds' }, -- Thews of the Harbinger (of the Harbinger)
+    ['Deadly Venom'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vicecanon.dds', name = 'Vicecanon of Venom' }, -- Deadly Venom (the Vicanon's)
+    
+    -- CYRODIIL SETS
+    ['Affliction'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_affliction.dds' }, -- Affliction (Afflicted)
     
     
 }
@@ -117,13 +163,26 @@ DR.DeathRecapPlayerAdvanced = {
                                     ['/esoui/art/icons/death_recap_shock_aoe.dds'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_ilambris_shock.dds' }, -- Ilambris (Ilambris)
                                     ['/esoui/art/icons/death_recap_fire_aoe.dds'] = { icon = 'esoui/art/icons/ava_siege_ui_002.dds' }, -- Ilambris (Ilambris)
                                     },
-    ['Fiery Breath'] =              {
-                                    ['/esoui/art/icons/death_recap_fire_aoe.dds'] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds'}, -- Fiery Breath (Maw of the Infernal)
-                                    },
+}
+
+DR.DeathRecapPlayerPet = {
+
+['Morkuldin Sword'] =           {
+                                    ['Light Attack'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds', source = 'Morkuldin' }, -- Light Attack (Morkuldin)
+                                    ['Cleave'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_cleave.dds', source = 'Morkuldin' }, -- Cleave (Morkuldin)
+                                },
+                
+['Daedroth'] =                  {
+                                    ['Fiery Breath'] = { icon = 'LuiExtended/media/icons/abilities/ability_daedroth_fiery_breath.dds'}, -- Fiery Breath (Maw of the Infernal)
+                                },
+
 }
 
 -- For basic icon or name replacements, when the relevant ability icon/name can be bulk replaced by name
 DR.DeathRecapBasicOverride = {
+
+    -- PLAYER BASIC
+    ['Fall Damage'] =           { icon = 'LuiExtended/media/icons/abilities/ability_innate_fall_snare.dds' }, -- Fall Snare
 
     -- HUMAN NPCS
     ['Quick Strike'] =          { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike (Shared NPC)
@@ -779,5 +838,4 @@ DR.NoSourceOverride = {
     ['Creeping Ravage Health'] =    {
                                     ['/esoui/art/icons/consumable_potion_014_type_001.dds'] = { icon = 'LuiExtended/media/icons/potions/potion_014r.dds' }, -- Creeping Ravage Health
                                     },
-
 }

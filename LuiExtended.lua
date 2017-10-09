@@ -217,10 +217,21 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
        -- if LUIE.DeathRecap.DeathRecapSourceOverride[attackerRawName] then
        --     if LUIE.DeathRecap.DeathRecapSourceOverride[attackerRawName][attackName] then attackerRawName = LUIE.DeathRecap.DeathRecapSourceOverride[attackerRawName][attackName] end
        -- end
+       
+       -- Override source name (Non-player)
         if LUIE.DeathRecap.DeathRecapInfoOverride[attackName] and LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName] and not isPlayer then
             local source
             if LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName].source then source = LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName].source end
             if source then attackerRawName = source end
+        end
+        
+        -- Override pet name (Player)
+        if (minionName ~= "" and minionName ~= nil) and LUIE.DeathRecap.DeathRecapPlayerPet[minionName] and isPlayer then
+            if LUIE.DeathRecap.DeathRecapPlayerPet[minionName][attackName] then
+                local source
+                if LUIE.DeathRecap.DeathRecapPlayerPet[minionName][attackName].source then source = LUIE.DeathRecap.DeathRecapPlayerPet[minionName][attackName].source end
+                if source then minionName = source end
+            end
         end
         
         return attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName
@@ -233,9 +244,18 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         local name
         local icon
         attackerRawName = zo_strformat("<<t:1>>", attackerRawName)
-        minionName = zo_strformat("<<t:1>>", minionName) 
+        minionName = zo_strformat("<<t:1>>", minionName)
         
-        --if LUIE.DeathRecap.DeathRecapNeutral[attackName] then
+        -- Player pet ability overrides
+        if (minionName ~= "" and minionName ~= nil) and LUIE.DeathRecap.DeathRecapPlayerPet[minionName] and isPlayer then
+            if LUIE.DeathRecap.DeathRecapPlayerPet[minionName][attackName] then
+                if LUIE.DeathRecap.DeathRecapPlayerPet[minionName][attackName].name then name = LUIE.DeathRecap.DeathRecapPlayerPet[minionName][attackName].name end
+                if LUIE.DeathRecap.DeathRecapPlayerPet[minionName][attackName].icon then icon = LUIE.DeathRecap.DeathRecapPlayerPet[minionName][attackName].icon end
+                if name then attackName = name end
+                if icon then attackIcon = icon end
+                return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
+            end
+        end
         
         -- Player ability overrides (Advanced - checks name + icon)
         if LUIE.DeathRecap.DeathRecapPlayerAdvanced[attackName] and isPlayer then
