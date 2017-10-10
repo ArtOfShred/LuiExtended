@@ -120,6 +120,9 @@ DR.DeathRecapPlayerBasic = {
     -- CYRODIIL SETS
     ['Affliction'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_affliction.dds' }, -- Affliction (Afflicted)
     
+    -- REWARDS FOR THE WORTHY SETS
+    ['Vicious Death'] = { icon = 'esoui/art/icons/procs_003.dds' }, -- Vicious Death (of Vicious Death)
+    
     
 }
 
@@ -183,6 +186,9 @@ DR.DeathRecapBasicOverride = {
 
     -- PLAYER BASIC
     ['Fall Damage'] =           { icon = 'LuiExtended/media/icons/abilities/ability_innate_fall_snare.dds' }, -- Fall Snare
+    
+    -- WORLD EVENTS
+    ['Drop Anchor'] =           { icon = 'LuiExtended/media/icons/abilities/ability_innate_anchor_drop.dds', name = 'Anchor Drop' }, -- Drop Anchor
 
     -- HUMAN NPCS
     ['Quick Strike'] =          { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike (Shared NPC)

@@ -939,6 +939,10 @@ E.EffectOverride = {
     [86693] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds' }, -- Crown Warrior's Elixir (Major Endurance)
     [86694] = { icon = 'LuiExtended/media/icons/potions/potion_crown_yellow.dds' }, -- Crown Warrior's Elixir (Major Savagery)
     [86695] = { icon = 'LuiExtended/media/icons/potions/potion_crown_yellow.dds' }, -- Crown Warrior's Elixir (Major Brutality)
+    
+    [92415] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds' }, -- Major Fortitude (Gold Coast Swift Survivor Elixir)
+    [92418] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds' }, -- Major Expedition (Gold Coast Swift Survivor Elixir)
+    [92416] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds' }, -- Unstoppable (Gold Coast Swift Survivor Elixir)
 
     ----------------------------------------------------------------
     -- POTION UP FRONT EFFECTS -------------------------------------
@@ -966,12 +970,14 @@ E.EffectOverride = {
     [78053] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds' }, -- Restore Stamina (Roguish Stealth Draught)
     [78079] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds' }, -- Restore Stamina (Roguish Escape Draught)
 
+    -- Crown Store Potions
     [68401] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', name = 'Restore Health' }, -- Restore All Resources (Crown Tri-Restoration Potion)
     [68407] = { icon = 'LuiExtended/media/icons/potions/potion_crown_blue.dds' }, -- Restore Magicka (Crown Tri-Restoration Potion)
     [68409] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds' }, -- Restore Stamina (Crown Tri-Restoration Potion)
     [86682] = { icon = 'LuiExtended/media/icons/potions/potion_crown_blue.dds', name = 'Restore Magicka' }, -- Crown Spellcaster's Elixir (Crown Spellcaster's Elixir)
     [86696] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', name = 'Restore Health' }, -- Crown Survivor's Elixir (Crown Survivor's Elixir)
     [86692] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds', name = 'Restore Stamina' }, -- Crown Warrior's Elixir (Crown Warrior's Elixir)
+    [92414] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', name = 'Restore Health' }, -- Crown Survivor's Elixir (Gold Coast Swift Survivor Elixir)
 
     ----------------------------------------------------------------
     -- POSIONS -----------------------------------------------------
@@ -1248,6 +1254,9 @@ E.EffectOverride = {
     
     [92866] = { icon = 'LuiExtended/media/icons/mementos/memento_dwarven_puzzle_orb.dds', name = 'Dwarven Puzzle Orb' }, -- Dwarven Globe (Dwarven Puzzle Orb)
     [92867] = { icon = 'LuiExtended/media/icons/mementos/memento_dwarven_tonal_forks.dds', name = 'Dwarven Tonal Forks' }, -- Dwarven Tuning Forks (Dwarven Tonal Forks)
+    
+    [97273] = { icon = 'LuiExtended/media/icons/mementos/memento_crows_calling.dds', name = 'Crow\'s Calling', unbreakable = 1 }, -- TROPHY Death Crate Mem 1 (Crow's Calling)
+    [98378] = { hide = true }, -- Murderous Strike (Murderous Strike)
 
     -- Assistants
     [77645] = { hide = true }, -- Stealth (Pirharri the Smuggler)
@@ -1804,6 +1813,16 @@ E.EffectOverride = {
     
     [34512] = { icon = 'LuiExtended/media/icons/abilities/ability_set_the_juggernaut.dds' }, -- The Juggernaut (of the Juggernaut)
     
+    -- Rewards for the Worthy Sets
+    
+    [76947] = { icon = 'esoui/art/icons/ability_debuff_minor_defile.dds', name = 'Minor Defile' }, -- Fasalla's Guile (of Fasalla's Guile)
+    
+    [76950] = { icon = 'esoui/art/icons/ability_warrior_025.dds' }, -- Warrior's Fury (of Fury)
+    
+    [76936] = { icon = 'LuiExtended/media/icons/abilities/ability_set_transmutation.dds' }, -- Transmutation (of Transmutation)
+    
+    [76938] = { icon = 'esoui/art/icons/procs_003.dds' }, -- Vicious Death (of Vicious Death)
+    
     -- DISGUISES
     [82631] = { icon = 'LuiExtended/media/icons/disguises/disguise_monks_disguise.dds', name = 'Monk\'s Disguise' }, -- Monk Disguise Timer (Monk's Disguise)
 
@@ -1910,6 +1929,13 @@ E.EffectOverride = {
     ----------------------------------------------------------------
     
     -- Daedric Anchor
+    
+    [86717] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_anchor_drop.dds', name = 'Anchor Drop' }, -- Drop Anchor
+    
+    [46690] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_power_of_the_daedra.dds' }, -- Power of the Daedra
+    [46689] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_power_of_the_daedra.dds', name = 'Power of the Daedra' }, -- Vitality of the Daedra
+    [51632] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_power_of_the_daedra.dds', name = 'Power of the Daedra' }, -- Vitality of the Daedra
+    [51633] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_power_of_the_daedra.dds', name = 'Power of the Daedra' }, -- Vitality of the Daedra
     
     [95813] = { type = BUFF_EFFECT_TYPE_DEBUFF, duration = 0, unbreakable = 1 }, -- Static Charge
     
@@ -4508,6 +4534,9 @@ E.FakePlayerBuffs = {
     [85347] = {icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_juggle.dds', name = 'Storm Orb Juggle', duration = 12000}, -- Storm Orb Juggle (Atronach Juggling)
     [86977] = {icon = 'LuiExtended/media/icons/mementos/memento_wild_hunt_transform.dds', name = 'Wild Hunt Transform', duration = 15000}, -- Spriggan Transformation (Wild Hunt Transform)
     [92868] = {icon = 'LuiExtended/media/icons/mementos/memento_dwemervamidium_mirage.dds', name = 'Dwemervamidium Mirage', duration= 180000}, -- Dwarven Transformation (Dwemervamidium Mirage)
+    
+    [97273] = { icon = 'LuiExtended/media/icons/mementos/memento_crows_calling.dds', name = 'Crow\'s Calling', duration = 9000 }, -- TROPHY Death Crate Mem 1 (Crow's Calling)
+    [97274] = { icon = 'LuiExtended/media/icons/mementos/memento_swarm_of_crows.dds', name = 'Swarm of Crows', duration = 180000 }, -- Swarm of Crows (Swarm of Crows)
     
     -- Set Items
     [61381] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_bogdan.dds', name = 'Bogdan the Nightflame', duration = 0 }, -- Bogdan Totem (Bogdan the Nightflame)
