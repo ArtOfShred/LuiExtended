@@ -190,6 +190,14 @@ DR.DeathRecapBasicOverride = {
     -- WORLD EVENTS
     ['Drop Anchor'] =           { icon = 'LuiExtended/media/icons/abilities/ability_innate_anchor_drop.dds', name = 'Anchor Drop' }, -- Drop Anchor
 
+    -- JUSTICE NPCS
+    ['Heavy Blow'] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds', name = 'Heavy Blow' }, -- Heavy Blow (Justice Guard)
+    ['Focused Strike'] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_focused_strike.dds' }, -- Focused Strike (Justice Guard)
+    ['Fiery Chain'] = { name = 'Fiery Grip' }, -- Fiery Chain (Justice Guard)
+    ['Flame Shard'] = { icon = 'esoui/art/icons/ability_dragonknight_013.dds', name = 'Stonefist' }, -- Flame Shard (Justice Guard 2H)
+    ['Piercing Bolt'] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_piercing_bolt.dds' }, -- Piercing Bolt (Justice Guard)
+    ['Focused Shot'] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_focused_shot.dds' }, -- Focused Shot (Justice Guard)
+    
     -- HUMAN NPCS
     ['Quick Strike'] =          { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike (Shared NPC)
     ['Quick Shot'] =            { icon = 'LuiExtended/media/icons/abilities/ability_bow_attacklight.dds' }, -- Quick Shot (Shared NPC)
@@ -402,6 +410,16 @@ DR.DeathRecapBasicOverride = {
     
     ['Overcharge Expulsion'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_pulse.dds' }, -- Overcharge Explusion ( Nchulaeon -- Nchuleftingth)
     
+}
+
+-- Advanced death recap override: By name and icon
+DR.DeathRecapIconOverride = {
+
+['Charge'] =            {
+                        ['/esoui/art/icons/ability_1handed_003.dds'] = { name = 'Shield Charge' }, -- Charge (Justice Guard)
+                        ['/esoui/art/icons/ability_2handed_003.dds'] = { name = 'Mighty Charge' }, -- Charge (Justice Guard)
+                        },
+
 }
 
 -- Advanced death recap override: By specific source name: Allows icon, name, and source override (used to fix traps and dummy events with nonsense names)

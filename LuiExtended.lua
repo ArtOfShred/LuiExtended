@@ -315,6 +315,17 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
             end  
         end
         
+        -- Advanced override considering icon
+        if LUIE.DeathRecap.DeathRecapIconOverride[attackName] and not isPlayer then
+            if LUIE.DeathRecap.DeathRecapIconOverride[attackName][attackIcon] then
+                if LUIE.DeathRecap.DeathRecapIconOverride[attackName][attackIcon].name then name = LUIE.DeathRecap.DeathRecapIconOverride[attackName][attackIcon].name end
+                if LUIE.DeathRecap.DeathRecapIconOverride[attackName][attackIcon].icon then icon = LUIE.DeathRecap.DeathRecapIconOverride[attackName][attackIcon].icon end
+                if name then attackName = name end
+                if icon then attackIcon = icon end
+                return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
+            end  
+        end
+        
         -- Basic override by name
         if LUIE.DeathRecap.DeathRecapBasicOverride[attackName] and not isPlayer then
             if LUIE.DeathRecap.DeathRecapBasicOverride[attackName].name then name = LUIE.DeathRecap.DeathRecapBasicOverride[attackName].name end

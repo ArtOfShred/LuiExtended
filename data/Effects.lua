@@ -2859,6 +2859,71 @@ E.EffectOverride = {
     [92150] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_dwarven_furnace.dds', name = 'Dwarven Furnace', hide = true }, -- Dwarven Furnace (Vvardenfell -- Divine Intervention)
 
     ----------------------------------------------------------------
+    -- JUSTICE NPCS ------------------------------------------------
+    ----------------------------------------------------------------
+    
+    [63153] = { hide = true }, -- Guard Immunities (Justice Guard)
+    [63174] = { hide = true }, -- Guard Speed Boost (Justice Guard)
+    
+    [63148] = { icon = 'esoui/art/icons/ability_debuff_major_defile.dds' }, -- Major Defile (Justice Guard)
+    [63095] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_focused_strike.dds' }, -- Focused Strike (Justice Guard)
+    
+    [63157] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds', name = 'Heavy Blow' }, -- Heavy Blow (Justice Guard)
+    [63268] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds', name = 'Heavy Blow' }, -- Uppercut (Justice Guard)
+    [63160] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds', name = 'Heavy Blow' }, -- Heavy Blow Knockdown (Justice Guard)
+    
+    [63261] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds', name = 'Heavy Blow' }, -- Heavy Blow (Justice Guard)
+    [63265] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds', name = 'Heavy Blow' }, -- Uppercut (Justice Guard)
+    [63263] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds', name = 'Heavy Blow' }, -- Heavy Blow Knockdown (Justice Guard)
+    
+    [63093] = { name = 'Shield Charge' }, -- Charge (Justice Guard 1H)
+    [63259] = { name = 'Mighty Charge' }, -- Charge (Justice Guard 2H)
+    [63260] = { icon = 'esoui/art/icons/ability_2handed_003.dds', name = 'Mighty Charge' }, -- Charge (Justice Guard 2H)
+    
+    [63198] = { name = 'Fiery Grip' }, -- Fiery Chain (Justice Guard)
+    [63200] = { name = 'Fiery Grip' }, -- Firey Chain (Justice Guard)
+    
+    [64139] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_piercing_bolt.dds' }, -- Piercing Bolt (Justice Guard)
+    [64267] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_focused_shot.dds' }, -- Piercing Bolt (Justice Guard)
+    
+    [63911] = { hide = true }, -- Guard Stacking Damage
+    
+    [78804] = { hide = true }, -- Seek
+    [78802] = { hide = true }, -- Seek
+    [78760] = { hide = true }, -- Confusion
+    [78764] = { hide = true }, -- Confusion
+    [78775] = { hide = true }, -- Confusion
+    [78767] = { hide = true }, -- Confusion
+    [78768] = { hide = true }, -- Confusion
+    [78769] = { hide = true }, -- Confusion
+    [78770] = { hide = true }, -- Confusion
+    [78766] = { hide = true }, -- Confusion
+    [78772] = { hide = true }, -- Confusion
+    [78771] = { hide = true }, -- Confusion
+    
+    [63179] = { icon = 'esoui/art/icons/ability_dragonknight_013.dds', name = 'Stonefist' }, -- Flame Shard (Justice Guard 2H)
+    [63194] = { icon = 'esoui/art/icons/ability_dragonknight_013.dds', name = 'Stonefist' }, -- Flame Shard (Justice Guard 2H)
+    
+    [78743] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds' }, -- Revealed (Guard)
+    [78789] = { hide = true }, -- Flare (Guard)
+    [78750] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds' }, -- Revealed (Guard)
+    [78744] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_flare_trap.dds' }, -- Flare (Guard)
+    
+    [77452] = { hide = true }, -- Shadow Cloak Immunity (Basic Justice NPC)
+    
+    [78012] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike (Basic Justice NPC)
+    
+    [75613] = { hide = true }, -- Shadowcloak Immunity (Mage Guard)
+    [77919] = { hide = true }, -- Clairvoyance Tutorial (Mage Guard)
+    
+    ---
+    
+    -- DB MAGE
+    [77449] = { hide = true }, -- Clairvoyance Tutorial (DB Guard)
+    [72694] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds', name = 'Detection' }, -- Clairvoyance (DB Guard)
+    [73226] = { hide = true }, -- Hurried Ward (DB Guard)
+    
+    ----------------------------------------------------------------
     -- NPC(Basic) --------------------------------------------------
     ----------------------------------------------------------------
 
@@ -4440,6 +4505,14 @@ E.FakeExternalDebuffs = {
     [64535] = {icon = 'esoui/art/icons/ability_wrothgar_chillingwind.dds', name = 'Chilling Wind', duration = 2000}, -- Chilling Wind (Orsinium - Sorrow's Kiss)
     [67586] = {icon = 'esoui/art/icons/ability_wrothgar_avalanche.dds', name = 'Avalanche', duration = 2500}, -- Avalanche (Orsinium - Sorrow's Kiss)
 
+    
+    -- Justice NPC's
+    [63160] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds', name = 'Heavy Blow', duration = 2000 }, -- Heavy Blow Knockdown (Justice Guard)
+    [63263] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds', name = 'Heavy Blow', duration = 2000 }, -- Heavy Blow Knockdown (Justice Guard)
+    [63094] = { icon = 'esoui/art/icons/ability_1handed_003.dds', name = 'Shield Charge', duration = 1500 }, -- Shield Charge (Justice Guard 1H)
+    [63260] = { icon = 'esoui/art/icons/ability_2handed_003.dds', name = 'Mighty Charge', duration = 1500 }, -- Shield Charge (Justice Guard 2H)
+    [63194] = { icon = 'esoui/art/icons/ability_dragonknight_013.dds', name = 'Stonefist', duration = 6000 }, -- Flame Shard (Justice Guard 2H)
+    
     -- Standard NPC Abilities
     [42514] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', name = 'Hard Dismount', duration = 2000}, -- Hard Dismount (Player knocked off horse)
     [29401] = {icon = 'esoui/art/icons/ability_1handed_005.dds', name = 'Power Bash', duration = 3000}, --Power Bash (NPC Disorient)
@@ -4593,6 +4666,9 @@ E.FakePlayerDebuffs = { -- Fake debuffs applied onto a target by the player
     
     [18396] = {icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_lightning_attackheavy.dds', name = 'Heavy Attack (Shock)', duration = 1800, norefresh = true}, -- Heavy Attack (Shock)
 
+    -- JUSTICE NPCS
+    [63194] = { icon = 'esoui/art/icons/ability_dragonknight_013.dds', name = 'Stonefist', duration = 6000 }, -- Flame Shard (Justice Guard 2H) -- If the player reflects
+    
     ----------------------------------------------------------------
     -- PLAYER ABILITIES --------------------------------------------
     ----------------------------------------------------------------
@@ -4620,6 +4696,9 @@ E.FakeStagger = {
 
     -- Destruction Staff
     [48009] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = 'Stagger', duration = 433}, -- Stagger (Crushing Shock - Rank 1)
+    
+    -- Justice NPC's
+    [63200] = { icon = 'esoui/art/icons/ability_dragonknight_005.dds', name = 'Fiery Grip', duration = 1000 }, -- Firey Chain (Justice Guard)
     
     -- On Player
     [2874] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = 'Stagger', duration = 433}, -- Staggered (Generic Stagger applied to player by many different NPC abilities)
