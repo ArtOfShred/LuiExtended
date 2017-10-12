@@ -4656,7 +4656,6 @@ E.FakePlayerBuffs = {
     [97274] = { icon = 'LuiExtended/media/icons/mementos/memento_swarm_of_crows.dds', name = 'Swarm of Crows', duration = 180000 }, -- Swarm of Crows (Swarm of Crows)
     
     -- Set Items
-    [61381] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_bogdan.dds', name = 'Bogdan the Nightflame', duration = 0 }, -- Bogdan Totem (Bogdan the Nightflame)
     [59573] = { icon = 'esoui/art/icons/ability_buff_major_vitality.dds', name = 'Major Vitality', duration = 510 }, -- Major Vitality (Malubeth)
     [81675] = { icon = 'esoui/art/icons/achievement_housing_038.dds', name = 'Pirate Skeleton', duration = 12000 }, -- Pirate Skeleton
     
@@ -4697,8 +4696,6 @@ E.FakePlayerBuffs = {
 
 -- Fake buffs applied onto a target by the player
 E.FakePlayerExternalBuffs = {
-
-    [61381] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_bogdan.dds', name = 'Bogdan the Nightflame', duration = 0 }, -- Bogdan Totem (Bogdan the Nightflame)
 
 }
 

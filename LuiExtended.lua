@@ -683,33 +683,54 @@ function LUIE.SlashRegroup()
     end
 
     PendingRegroup = true
-
-    for i = 1,groupSize do
-        -- Note not exactly sure why, but it seems we need to index the player here as well. Maybe array needs to have 2+ values in it to be read correctly.
+    
+    local flagOffline = 0
+    local index = 1
+    for i = 1, groupSize do
+        -- We need to index player here as well
         local memberTag = GetGroupUnitTagByIndex(i)
-        local groupMemberString
-        local groupMemberName = GetUnitName(memberTag)
-        local groupMemberAccountName = GetUnitDisplayName(memberTag)
-        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(groupMemberName)
-        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(groupMemberAccountName)
-        local displayBothString = ( zo_strformat("<<1>><<2>>", groupMemberName, groupMemberAccountName) )
-        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, groupMemberAccountName)
-        if LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions == 1 then
-            memberLink = displayNameLink
+        if IsUnitOnline(memberTag) then
+            local groupMemberString
+            local groupMemberName = GetUnitName(memberTag)
+            local groupMemberAccountName = GetUnitDisplayName(memberTag)
+            local characterNameLink = ZO_LinkHandler_CreateCharacterLink(groupMemberName)
+            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(groupMemberAccountName)
+            local displayBothString = ( zo_strformat("<<1>><<2>>", groupMemberName, groupMemberAccountName) )
+            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, groupMemberAccountName)
+            if LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions == 1 then
+                memberLink = displayNameLink
+            end
+            if LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions == 2 then
+                memberLink = characterNameLink
+            end
+            if LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions == 3 then
+                memberLink = displayBoth
+            end
+            -- Place inside counter incremented index, this way if we have offline members in the group we still index everything in an ordered integer list.
+            g_regroupStacks[index] = { memberLink = memberLink, memberName = groupMemberName }
+            index = index + 1
+        else
+            flagOffline = flagOffline + 1
         end
-        if LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions == 2 then
-            memberLink = characterNameLink
-        end
-        if LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions == 3 then
-            memberLink = displayBoth
-        end
-        g_regroupStacks[i] = { memberLink = memberLink, memberName = groupMemberName }
     end
-
-    LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG))
-    GroupDisband()
+    
     -- Reinvite the group after 5 seconds (give the group interface time to update on server and client end for all group members)
-    zo_callLater(LUIE.RegroupInvite, 5000)
+    -- If the stack counter was less than 1 (just the player eligible for reinvite then regroup won't invite any members.)
+    if flagOffline > 0 then 
+        if #g_regroupStacks > 1 then
+            LUIE.PrintToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG), flagOffline, flagOffline, flagOffline))
+            GroupDisband()
+            zo_callLater(LUIE.RegroupInvite, 5000)
+        else
+            LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG))
+            PendingRegroup = false -- Allow Regroup command to be used again
+            g_regroupStacks = {} -- Allow index to be used again.
+        end
+    else
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG))
+        GroupDisband()
+        zo_callLater(LUIE.RegroupInvite, 5000)
+    end
 end
 
 function LUIE.RegroupInvite()
@@ -757,6 +778,16 @@ function LUIE.SlashGroupLeave()
     if groupSize <= 1 then
         LUIE.PrintToChat(GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_IN_A_GROUP))
         return
+    end
+end
+
+-- If the player uses /kick with no option then we need to play the kick emote, otherwise handle everything with the SlashGroupKick function.
+function LUIE.SlashKick(option)
+
+    if option == "" then
+        PlayEmoteByIndex(109)
+    else
+        LUIE.SlashGroupKick(option)
     end
 end
 
@@ -819,7 +850,7 @@ function LUIE.SlashGroupKick(option)
                 GroupLeave()
             else
                 unitToKick = kickcompare.memberTag
-                SlashGroupKick(unitToKick)
+                GroupKick(unitToKick)
             end
             return
         end
@@ -1261,7 +1292,7 @@ SLASH_COMMANDS["/regroup"]      = LUIE.SlashRegroup
 SLASH_COMMANDS["/disband"]      = LUIE.SlashDisband
 SLASH_COMMANDS["/leave"]        = LUIE.SlashGroupLeave
 SLASH_COMMANDS["/leavegroup"]   = LUIE.SlashGroupLeave
-SLASH_COMMANDS["/kick"]         = LUIE.SlashGroupKick
+SLASH_COMMANDS["/kick"]         = LUIE.SlashKick
 SLASH_COMMANDS["/remove"]       = LUIE.SlashGroupKick
 SLASH_COMMANDS["/groupkick"]    = LUIE.SlashGroupKick
 SLASH_COMMANDS["/groupremove"]  = LUIE.SlashGroupKick
