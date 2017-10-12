@@ -44,7 +44,8 @@ SCB.D = {
     BuffFontStyle                    = "outline",
     BuffFontSize                     = 16,
     Alignment                        = "Centered",
-    AlignmentVert                    = "Top",
+    AlignmentLongVert                = "Top",
+    AlignmentLongHorz                = "Centered",
     SortDirection                    = "Left to Right",
     GlowIcons                        = false,
     RemainingText                    = true,
@@ -76,6 +77,7 @@ SCB.D = {
     IgnorePet                        = true,
     IgnoreMount                      = false,
     LongTermEffectsSeparate          = true,
+    LongTermEffectsReverse           = true,
     LongTermEffectsSeparateAlignment = 2,
     ShowBlockPlayer                  = true,
     ShowBlockTarget                  = true,
@@ -134,7 +136,8 @@ local g_buffsFont
 local g_padding = 0
 
 local g_horizAlign = CENTER
-local v_horizAlign = MIDDLE
+local g_longHorizAlign = CENTER
+local g_longVertAlign = MIDDLE
 local g_horizSortInvert = false
 
 -- Some optimization
@@ -1660,35 +1663,73 @@ function SCB.SetIconsAlignment( value )
             uiTlw[v].iconHolder:ClearAnchors()
             if uiTlw[v].alignVertical then
                 -- Might need to consolidate these two functions somehow, possibly consolidate all options so that Left = Top, Middle = Center, Right = Bottom
-                uiTlw[v].iconHolder:SetAnchor( BOTTOM )
+                uiTlw[v].iconHolder:SetAnchor( g_longVertAlign )
             else
-                uiTlw[v].iconHolder:SetAnchor( g_horizAlign )
+                if v == "player_long" then
+                    uiTlw[v].iconHolder:SetAnchor( g_longHorizAlign )
+                else
+                    uiTlw[v].iconHolder:SetAnchor( g_horizAlign )
+                end
             end
         end
     end
 end
 
-function SCB.SetIconsAlignmentVert( value )
+function SCB.SetIconsAlignmentLongVert( value )
     -- Check correctness of argument value
     if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
-        value = SCB.D.AlignmentVert
+        value = SCB.D.AlignmentLongVert
     end
-    SCB.SV.AlignmentVert = value
+    SCB.SV.AlignmentLongVert = value
 
     if not SCB.Enabled then
         return
     end
 
-    g_vertAlign = ( value == "Top" ) and TOP or ( value == "Bottom" ) and BOTTOM or MIDDLE
+    g_longVertAlign = ( value == "Top" ) and TOP or ( value == "Bottom" ) and BOTTOM or MIDDLE
 
     for _, v in pairs(containerRouting) do
         if uiTlw[v].iconHolder then
             uiTlw[v].iconHolder:ClearAnchors()
             if uiTlw[v].alignVertical then
                 -- Might need to consolidate these two functions somehow, possibly consolidate all options so that Left = Top, Middle = Center, Right = Bottom
-                uiTlw[v].iconHolder:SetAnchor( g_vertAlign )
+                uiTlw[v].iconHolder:SetAnchor( g_longVertAlign )
             else
-                uiTlw[v].iconHolder:SetAnchor( g_horizAlign )
+                if v == "player_long" then
+                    uiTlw[v].iconHolder:SetAnchor( g_longHorizAlign )
+                else
+                    uiTlw[v].iconHolder:SetAnchor( g_horizAlign )
+                end
+            end
+        end
+    end
+end
+
+function SCB.SetIconsAlignmentLongHorz( value )
+    -- Check correctness of argument value
+    if value ~= "Left" and value ~= "Centered" and value ~= "Right" then
+        value = SCB.D.AlignmentLongHorz
+    end
+    SCB.SV.AlignmentLongHorz = value
+
+    if not SCB.Enabled then
+        return
+    end
+
+    g_longHorizAlign = ( value == "Left" ) and LEFT or ( value == "Right" ) and RIGHT or CENTER
+
+    for _, v in pairs(containerRouting) do
+        if uiTlw[v].iconHolder then
+            uiTlw[v].iconHolder:ClearAnchors()
+            if uiTlw[v].alignVertical then
+                -- Might need to consolidate these two functions somehow, possibly consolidate all options so that Left = Top, Middle = Center, Right = Bottom
+                uiTlw[v].iconHolder:SetAnchor( g_longVertAlign )
+            else
+                if v == "player_long" then
+                    uiTlw[v].iconHolder:SetAnchor( g_longHorizAlign )
+                else
+                    uiTlw[v].iconHolder:SetAnchor( g_horizAlign )
+                end
             end
         end
     end
@@ -1889,7 +1930,8 @@ function SCB.Reset()
 
     -- Reset alignment and sort
     SCB.SetIconsAlignment( SCB.SV.Alignment )
-    SCB.SetIconsAlignmentVert( SCB.SV.AlignmentVert )
+    SCB.SetIconsAlignmentLongVert( SCB.SV.AlignmentLongVert )
+    SCB.SetIconsAlignmentLongHorz( SCB.SV.AlignmentLongHorz )
     SCB.SetSortDirection( SCB.SV.SortDirection )
 
     local needs_reset = {}
@@ -3051,12 +3093,20 @@ function SCB.updateIcons( currentTime, sortedList, container )
     -- Chose direction of iteration
     local istart, iend, istep
     -- Reverse the order for right aligned icons
-    if g_horizSortInvert and not uiTlw[container].alignVertical then
-        istart, iend, istep = iconsNum, 1, -1
+    if container == "player_long" and SCB.SV.LongTermEffectsReverse then
+        if g_horizSortInvert and not uiTlw[container].alignVertical then
+            istart, iend, istep = iconsNum, 1, -1
+        else
+            istart, iend, istep = iconsNum, 1, -1
+        end
     else
-        istart, iend, istep = 1, iconsNum, 1
+        if g_horizSortInvert and not uiTlw[container].alignVertical then
+            istart, iend, istep = iconsNum, 1, -1
+        else
+            istart, iend, istep = 1, iconsNum, 1
+        end
     end
-
+    
     -- Size of icon+padding
     local iconSize = SCB.SV.IconSize + g_padding
 

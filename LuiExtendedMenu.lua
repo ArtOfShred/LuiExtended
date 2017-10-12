@@ -930,17 +930,43 @@ function LUIE_CreateSettings()
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffects_Player and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparate ) end,
             }
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- Vertical Icons Alignment
+                -- Vertical Long Term Icons Alignment
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VERTALIGNICON),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VERTALIGNICON_TP),
+                name = "VERTICAL LONG TERM ALIGNMENT",
+                tooltip = "TODO",
                 choices = { "Top", "Middle", "Bottom" },
-                getFunc = function() return LUIE.SpellCastBuffs.SV.AlignmentVert end,
-                setFunc = LUIE.SpellCastBuffs.SetIconsAlignmentVert,
+                getFunc = function() return LUIE.SpellCastBuffs.SV.AlignmentLongVert end,
+                setFunc = LUIE.SpellCastBuffs.SetIconsAlignmentLongVert,
                 width = "full",
-                default = LUIE.SpellCastBuffs.D.AlignmentVert,
+                default = LUIE.SpellCastBuffs.D.AlignmentLongVert,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 2) end,
             }
+            
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                -- Horizontal Long Term Icons Alignment
+                type = "dropdown",
+                name = "HORIZONTAL LONG TERM ALIGNMENT",
+                tooltip = "TODO",
+                choices = { "Left", "Centered", "Right" },
+                getFunc = function() return LUIE.SpellCastBuffs.SV.AlignmentLongHorz end,
+                setFunc = LUIE.SpellCastBuffs.SetIconsAlignmentLongHorz,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.AlignmentLongHorz,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 1) end,
+            }
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                -- LONG TERM REVERSE SORT ORDER
+                type = "checkbox",
+                name = "REVERSE LONG TERM BUFF SORT ORDER",
+                tooltip = "TODO",
+                getFunc = function() return LUIE.SpellCastBuffs.SV.LongTermEffectsReverse end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.LongTermEffectsReverse = value LUIE.SpellCastBuffs.Reset() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.LongTermEffectsReverse,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffects_Player ) end,
+            }
+            
+            
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 -- SpellCastBuffs Miscellaneous
                 type = "header",
