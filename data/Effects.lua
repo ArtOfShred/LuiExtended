@@ -649,6 +649,14 @@ E.EffectOverrideByName = {
                 ['Naryu Virian'] = { icon = 'LuiExtended/media/icons/abilities/ability_unarmed_attacklight.dds' } -- Attack (Tutorial)
                 },
                 
+    -- JUSTICE NPCS
+    [37087] =   { 
+                ['Estate Spellbreaker'] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_onslaught.dds' }, -- Lightning Onslaught (Battlemage)
+                },
+    [37156] =   { 
+                ['Estate Spellbreaker'] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_onslaught.dds' }, -- Lightning Onslaught (Battlemage)
+                },
+                
     -- HUMAN NPCS
     [29521] =   {
                 ['Aura of Protection'] = { hide = true } -- Aura of Protection (Aura of Protection)
@@ -773,9 +781,7 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     -- MAIN QUEST
     [61648] = true, -- Replenish Stamina (Tutorial - Child of Bones)
     
-    
     -- VVARDENFELL
-    
     [82272] = true, -- Dark Reach (Slavemaster Arenim -- Vvardenfell -- The Heart of a Telvanni)
     [82273] = true, -- Dark Reach (Slavemaster Arenim -- Vvardenfell -- The Heart of a Telvanni)
     
@@ -827,7 +833,7 @@ E.EffectForcedName = {
 -- Using a separate chart for ZOS Artificial Effects just in case this is significantly expanded at any point
 E.ArtificialEffectOverride = {
 
-    [0] = { icon = 'esoui/art/icons/artificialeffect_battle-spirit.dds' }, -- Battle Spirit (Duel)
+    [0] = { icon = 'esoui/art/icons/achievement_dueling_002.dds', name = 'Dueling' }, -- Battle Spirit (Duel)
     [2] = { icon = 'esoui/art/icons/artificialeffect_battle-spirit.dds' }, -- Battle Spirit (BG)
 
 }
@@ -2077,9 +2083,6 @@ E.EffectOverride = {
     [64860] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_rebate.dds', name = 'Rebate' }, -- Rebate Magic (Rebate - Rank 1)
     [64861] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_rebate.dds', name = 'Rebate' }, -- Rebate Magic (Rebate - Rank 2)
     
-    [31417] = { icon = 'esoui/art/icons/ability_sorcerer_030.dds' }, -- Daedric Protection
-    [45200] = { icon = 'esoui/art/icons/ability_sorcerer_030.dds' }, -- Daedric Protection
-    
     [31415] = { hide = true }, -- Expert Summoner (Expert Summoner - Rank 1)
     [46198] = { hide = true }, -- Expert Summoner (Expert Summoner - Rank 2)
 
@@ -2098,8 +2101,10 @@ E.EffectOverride = {
     [45038] = { icon = 'LuiExtended/media/icons/abilities/passive_nightblade_master_assassin.dds' },
     
     [36630] = { icon = 'LuiExtended/media/icons/abilities/passive_nightblade_executioner.dds' }, -- Executioner (Executioner - Rank 1)
+    [101435] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_executioner.dds' }, -- Executioner (Executioner - Rank 1)
     [36633] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_executioner.dds' }, -- Executioner (Executioner - Rank 1)
     [45048] = { icon = 'LuiExtended/media/icons/abilities/passive_nightblade_executioner.dds' }, -- Executioner (Executioner - Rank 2)
+    [101436] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_executioner.dds' }, -- Executioner (Executioner - Rank 2)
     [45050] = { icon = 'LuiExtended/media/icons/abilities/ability_nightblade_executioner.dds' }, -- Executioner (Executioner - Rank 2)
     
     [36636] = { icon = 'LuiExtended/media/icons/abilities/passive_nightblade_pressure_points.dds' },
@@ -2908,20 +2913,61 @@ E.EffectOverride = {
     [78789] = { hide = true }, -- Flare (Guard)
     [78750] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds' }, -- Revealed (Guard)
     [78744] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_flare_trap.dds' }, -- Flare (Guard)
-    
-    [77452] = { hide = true }, -- Shadow Cloak Immunity (Basic Justice NPC)
-    
-    [78012] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike (Basic Justice NPC)
-    
+     
     [75613] = { hide = true }, -- Shadowcloak Immunity (Mage Guard)
     [77919] = { hide = true }, -- Clairvoyance Tutorial (Mage Guard)
+    [77937] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds', name = 'Detection' }, -- Clairvoyance (Mage Guard)
+    [77941] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = 0, unbreakable = 1 }, -- Revealed (Mage Guard)
     
-    ---
+    [77917] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_empower_weapon_flame.dds' }, -- Empower Weapon: Flame (Mage Guard)
+    [74502] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_focused_strike_staff.dds' }, -- Focused Strike (Mage Guard)
+    [74503] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_focused_strike_staff.dds' }, -- Focused Strike (Mage Guard)
+    [74504] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_focused_strike_staff.dds' }, -- Focused Strike (Mage Guard)
     
-    -- DB MAGE
-    [77449] = { hide = true }, -- Clairvoyance Tutorial (DB Guard)
-    [72694] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds', name = 'Detection' }, -- Clairvoyance (DB Guard)
+    [74862] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_teleport_trap.dds' }, -- Teleport Trap (Mage Guard)
+    [74870] = { hide = true }, -- Teleport Trap (Mage Guard)
+    [74864] = { hide = true }, -- Teleport Trap (Mage Guard)
+    [74863] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_teleport_trap.dds' }, -- Teleport Trap (Mage Guard)
+
+    [77449] = { hide = true }, -- Clairvoyance Tutorial (Mage Guard - Instanced)
+    [72694] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_detection.dds', name = 'Detection' }, -- Clairvoyance (Mage Guard - Instanced)
+    [72695] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = 0, unbreakable = 1 }, -- Revealed (Mage Guard - Instanced)
+    [78060] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Revealed (Mage Guard - Instanced)
+    [75809] = { hide = true }, -- Guard Speed Boost (Mage Guard - Instanced)
+    
+    [64647] = { hide = true }, -- Remove Effects (Guard)
+    
+    
     [73226] = { hide = true }, -- Hurried Ward (DB Guard)
+    
+    [77452] = { hide = true }, -- Shadow Cloak Immunity (Basic Justice NPC)
+    [78012] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike (Basic Justice NPC)
+    [62472] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_stab.dds' }, -- Stab (Justice Rogue)
+    [62506] = { icon = 'esoui/art/icons/ability_dualwield_deadlycloak.dds', name = 'Dagger Toss', hide = true }, -- Thrown Dagger (Justice Rogue)
+    
+    [62408] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_bound_weapon.dds' }, -- Bound Weapon (Justice Mage)
+    [62502] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_flames.dds' }, -- Fiery Wind (Justice Mage)
+    [62407] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_fire_ranged.dds', hide = true }, -- Fiery Touch (Justice Mage)
+    [63828] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_fire_ranged.dds' }, -- Fiery Touch (Justice Mage)
+    
+    [78265] = { hide = true }, -- Alarm (Estate Marshal - DB)
+    [78266] = { hide = true }, -- Alarm (Estate Marshal - DB)
+    
+    [52471] = { hide = true }, -- Nullify (Estate Spellbreaker - DB)
+    [52474] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_nullify.dds' }, -- Nullify (Estate Spellbreaker - DB)
+    [66669] = { hide = true }, -- Nullify (Estate Spellbreaker - DB)
+    
+    [73229] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_hurried_ward.dds' }, -- Hurried Ward (Mage Guard - DB)
+    
+    -- TRAPS & INTERACTABLES
+    
+    [72711] = { hide = true }, -- Hidden (Hiding Spot)
+    [77335] = { hide = true }, -- Threat Drop (Hiding Spot)
+    [77336] = { hide = true }, -- Threat Drop (Hiding Spot)
+    [77337] = { hide = true }, -- Threat Drop (Hiding Spot)
+    [77338] = { hide = true }, -- Threat Drop (Hiding Spot)
+    [77339] = { hide = true }, -- Threat Drop (Hiding Spot)
+    [75747] = { hide = true }, -- Hiding Spot (Hiding Spot)
     
     ----------------------------------------------------------------
     -- NPC(Basic) --------------------------------------------------
@@ -4039,7 +4085,6 @@ E.EffectOverride = {
     [64091] = { hide = true }, -- Power Bash (Tutorial - Used on Lyris)
     
     [61748] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds' }, -- Heavy Attack (Tutorial)
-    [61916] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_heat_wave.dds' }, -- Heat Wave (Tutorial)
     
     [63737] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds' }, -- Heavy Attack (Dremora Churl)
     
@@ -4053,21 +4098,22 @@ E.EffectOverride = {
     [63753] = { icon = 'LuiExtended/media/icons/abilities/ability_zombie_vomit.dds' }, -- Vomit (Feral Soul Shriven)
     
     [62230] = { hide = true }, -- Coldharbour Flames (Flame Trap)
+    [62771] = { hide = true }, -- Coldharbour Flames (Flame Trap)
     [62769] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_coldharbour_flames.dds', name = 'Cold Fire Trap'}, -- Coldharbour Flames (Flame Trap)
     [62770] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_coldharbour_flames.dds', name = 'Cold Fire Trap'}, -- Coldharbour Flames (Flame Trap)
     
     [63755] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_heat_wave.dds' }, -- Heat Wave (Skeletal Pyromancer)
     [63756] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_heat_wave.dds', hide = true }, -- Heat Wave - Used by Skeletal Pyromancer in Tutorial }, -- Heat Wave (Skeletal Pyromancer)
     
-    [64072] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Eye of the Sentinel (CH Tutorial)
+    [64072] = { icon = 'esoui/art/icons/ability_debuff_reveal.dds', type = BUFF_EFFECT_TYPE_DEBUFF, duration = 0, unbreakable = 1, name = 'Eye of the Sentinel' }, -- Eye of the Sentinel (CH Tutorial)
     
     [48345] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds' }, -- Focused Healing (The Prophet)
     [48346] = { hide = true }, -- Minor Wound (The Prophet)
     
-    [63522] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_bone_saw_tutorial.dds' }, -- Bone Saw (Bone Colossus)
+    [63522] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_bone_saw_tutorial.dds', name = 'Stomp' }, -- Bone Saw (Bone Colossus)
     
-    [61646] = { icon = 'esoui/art/icons/ability_debuff_fear.dds', duration = 0}, -- Incapacitating Terror
-    [64074] = { icon = 'esoui/art/icons/ability_debuff_fear.dds'}, -- Incapacitating Terror
+    [61646] = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_incapacitating_terror.dds', duration = 0}, -- Incapacitating Terror
+    [64074] = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_incapacitating_terror.dds'}, -- Incapacitating Terror
     
     [75514] = { hide = true }, -- Greater Protection - CH Tutorial pointless aura
     [64772] = { hide = true }, -- MQ1 Input Lock LAtk - CH Tutorial pointless aura
@@ -4076,10 +4122,7 @@ E.EffectOverride = {
     [64798] = { hide = true }, -- MQ1 Heat Wave (Tutorial) - CH Tutorial pointless aura
     [61961] = { hide = true }, -- Perma Set Off Balance Target - CH Tutorial pointless aura
     [64677] = { hide = true }, -- MQ1 Tutorial Perma Off-Balance - CH Tutorial pointless aura
-    [63270] = { hide = true }, -- Heat Wave - Used by Forgemaster in Tutorial }, Instant Damage but has aura for no reason
-    [64069] = { hide = true }, -- Sentinel Barrier - CH Tutorial pointless aura
-    [63555] = { hide = true }, -- MQ1 Sneak Atk Tutorial Trigger - CH Tutorial pointless aura
-    [63559] = { hide = true }, -- MQ1 Sneak Tutorial Trigger - CH Tutorial pointless aura
+    [64069] = { hide = true }, -- Sentinel Barrier
     [64166] = { hide = true }, -- Major Protection - CH Tutorial pointless aura
     [63637] = { hide = true }, -- Teleport - CH Tutorial event when player teleports out
     
@@ -4336,19 +4379,18 @@ E.EffectOverride = {
     
     -- TUTORIAL
     [92245] = { hide = true }, -- MQ1 Input Lock LAtk
-    [1718] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = 'Light Attack' }, -- Light Attack
+    [1718] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = 'Light Attack' }, -- Attack
     [83416] = { icon = 'LuiExtended/media/icons/abilities/ability_unarmed_attackheavy.dds'}, -- Heavy Attack
     [93577] = { hide = true }, -- MQ1 Tutorial Block Heavy
     [92263] = { hide = true }, -- Perma Set Off Balance Target
     [92266] = { hide = true }, -- MQ1 Tutorial Perma Off-Balance
-    [92233] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_throw_dagger.dds'}, -- Throw Dagger
     [92238] = { hide = true }, -- MQ1 Heat Wave (Tutorial)
     
     [88904] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds', name = 'Bear Trap' }, -- Metal Trap
     [88905] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_bear_trap.dds', name = 'Bear Trap' }, -- Metal Trap
     
-    [63269] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_heat_wave.dds' }, -- Heat Wave
-    [63270] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_heat_wave.dds', hide = true }, -- Heat Wave
+    [63269] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_heat_wave.dds', name = 'Wall of Flame' }, -- Heat Wave
+    [63270] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_heat_wave.dds', name = 'Wall of Flame', hide = true }, -- Heat Wave
     
     -- THE FORGOTTEN WASTES (PUBLIC DUNGEON)
     [91659] = { icon = 'LuiExtended/media/icons/abilities/ability_trap_falling_rocks.dds', hide = true }, -- Falling Rocks -- Deadfall
@@ -4484,7 +4526,9 @@ E.FakeGroundBuffs = {
 
 -- Fake Buffs applied onto the player by NPCs or Events (Friendly)
 E.FakeExternalBuffs = {
-    -- Nothing here yet
+    
+    [48345] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds', name = 'Focused Healing', duration = 4000, norefresh = true }, -- Focused Healing (The Prophet)
+    
 }
 
  -- Fake Debuffs applied onto the player by NPCs or Events (Hostile)

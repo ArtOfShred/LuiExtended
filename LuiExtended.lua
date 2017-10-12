@@ -373,6 +373,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     GetArtificialEffectInfo = function(artificialEffectId)
         local displayName, iconFile, effectType, sortOrder, timeStarted, timeEnding = zos_GetArtificialEffectInfo(artificialEffectId)
         if LUIE.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Effects.ArtificialEffectOverride[artificialEffectId].icon then iconFile = LUIE.Effects.ArtificialEffectOverride[artificialEffectId].icon end
+        if LUIE.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Effects.ArtificialEffectOverride[artificialEffectId].name then displayName = LUIE.Effects.ArtificialEffectOverride[artificialEffectId].name end
         return displayName, iconFile, effectType, sortOrder, timeStarted, timeEnding
     end
     

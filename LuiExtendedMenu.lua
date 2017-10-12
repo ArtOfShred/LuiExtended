@@ -542,6 +542,16 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             }
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "slider",
+                name = "BUFF LABEL POSITION",
+                min = -64, max = 64, step = 2,
+                getFunc = function() return LUIE.SpellCastBuffs.SV.LabelPosition end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.LabelPosition = value LUIE.SpellCastBuffs.Reset() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.LabelPosition,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            }
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_BUFF_HORIZONTICONALIGN),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HORIZONTICONALIGN_TP),

@@ -187,6 +187,13 @@ DR.DeathRecapBasicOverride = {
     -- PLAYER BASIC
     ['Fall Damage'] =           { icon = 'LuiExtended/media/icons/abilities/ability_innate_fall_snare.dds' }, -- Fall Snare
     
+    -- STATUS EFFECTS
+    ['Burning'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_burning.dds' }, -- Burning (Fire Status Effect)
+    ['Diseased'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_diseased.dds' }, -- Diseased (Disease Status Effect)
+    ['Chill'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_chill.dds' }, -- Chill (Frost Status Effect)
+    ['Poisoned'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_poisoned.dds' }, -- Poisoned (Poison Status Effect)
+    ['Concussion'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_concussion.dds' }, -- Concussion (Shock Status Effect)
+    
     -- WORLD EVENTS
     ['Drop Anchor'] =           { icon = 'LuiExtended/media/icons/abilities/ability_innate_anchor_drop.dds', name = 'Anchor Drop' }, -- Drop Anchor
 
@@ -197,6 +204,10 @@ DR.DeathRecapBasicOverride = {
     ['Flame Shard'] = { icon = 'esoui/art/icons/ability_dragonknight_013.dds', name = 'Stonefist' }, -- Flame Shard (Justice Guard 2H)
     ['Piercing Bolt'] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_piercing_bolt.dds' }, -- Piercing Bolt (Justice Guard)
     ['Focused Shot'] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_focused_shot.dds' }, -- Focused Shot (Justice Guard)
+    ['Stab'] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_stab.dds' }, -- Stab (Justice Rogue)
+    ['Thrown Dagger'] = { icon = 'esoui/art/icons/ability_dualwield_deadlycloak.dds', name = 'Dagger Toss' }, -- Thrown Dagger (Justice Rogue)
+    ['Fiery Wind'] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_flames.dds' }, -- Fiery Wind (Justice Mage)
+    ['Fiery Touch'] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_fire_ranged.dds' }, -- Fiery Touch (Justice Mage)
     
     -- HUMAN NPCS
     ['Quick Strike'] =          { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike (Shared NPC)
@@ -360,11 +371,11 @@ DR.DeathRecapBasicOverride = {
     ['In Lava'] =               { icon = 'LuiExtended/media/icons/abilities/ability_trap_lava.dds', name = 'Lava' }, -- Lava
     
     -- MAIN QUEST
-    ['Attack'] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = 'Light Attack' }, -- Light Attack
-    ['Pound'] =             { icon = 'LuiExtended/media/icons/abilities/ability_zombie_pound.dds' }, -- Pound (Feral Soul Shriven)
-    ['Vomit'] =             { icon = 'LuiExtended/media/icons/abilities/ability_zombie_vomit.dds' }, -- Vomit (Feral Soul Shriven)
-    ['Bone Saw'] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_bone_saw.dds' }, -- Bone Saw (Bone Colossus)
-    ['Incapacitating Terror']   = { icon = 'esoui/art/icons/ability_debuff_fear.dds'}, -- Incapacitating Terror (Child of Bones) -- Just in case
+    ['Attack'] =                { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds', name = 'Light Attack' }, -- Attack
+    ['Pound'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_zombie_pound.dds' }, -- Pound (Feral Soul Shriven)
+    ['Vomit'] =                 { icon = 'LuiExtended/media/icons/abilities/ability_zombie_vomit.dds' }, -- Vomit (Feral Soul Shriven)
+    ['Bone Saw'] =              { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_bone_saw.dds' }, -- Bone Saw (Bone Colossus)
+    ['Incapacitating Terror']   = { icon = 'LuiExtended/media/icons/abilities/ability_bone_colossus_incapacitating_terror.dds'}, -- Incapacitating Terror (Child of Bones)
     
     -- VVARDENFELL
     ['Ash Storm'] =         { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_ash_storm.dds' }, -- Divine Intervention (Divine Delusions)
@@ -425,6 +436,22 @@ DR.DeathRecapIconOverride = {
 -- Advanced death recap override: By specific source name: Allows icon, name, and source override (used to fix traps and dummy events with nonsense names)
 DR.DeathRecapInfoOverride = {
 
+    -- JUSTICE NPC's
+    ['Focused Strike'] =    
+                            { -- Mage Guard
+                            ['Abah\'s Landing Guard'] =  { icon = 'LuiExtended/media/icons/abilities/ability_weapon_focused_strike_staff.dds' }, -- Focused Strike (Mage Guard),
+                            ['Manor Guard'] =  { icon = 'LuiExtended/media/icons/abilities/ability_weapon_focused_strike_staff.dds' }, -- Focused Strike (Mage Guard),
+                            },
+                            
+    ['Lightning Onslaught'] =   {
+                                ['Estate Spellbreaker'] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_onslaught.dds' }, -- Lightning Onslaught (Estate Spellbreaker - DB)
+                                },
+                                
+    -- TUTORIAL NPC's
+    ['Heat Wave'] =             { 
+                                ['Vaekar the Forgemaster'] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_heat_wave.dds', name = 'Wall of Flame' }, -- Heat Wave
+                                ['First Mate Ulveni'] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_heat_wave.dds', name = 'Wall of Flame' }, -- Heat Wave
+                                },
     -- HUMAN NPC's
     ['Quick Strike'] =      { -- BATTLEMAGE MELEE
                             ['Heiress Alona'] =     { icon = 'LuiExtended/media/icons/abilities/ability_weapon_staff_strike.dds', name = 'Staff Strike' }, -- Quick Strike (Battlemage)
@@ -771,7 +798,7 @@ DR.DeathRecapInfoOverride = {
     -----------------------------------------------
     
     ['Bone Saw'] =              {
-                                ['Child of Bones'] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_bone_saw_tutorial.dds' }, -- Bone Saw (Bone Colossus)
+                                ['Child of Bones'] = { icon = 'LuiExtended/media/icons/abilities/ability_bonecolossus_bone_saw_tutorial.dds', name = 'Stomp' }, -- Bone Saw (Bone Colossus)
                                 },
 
     -----------------------------------------------

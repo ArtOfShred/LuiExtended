@@ -39,6 +39,7 @@ local windowTitles = {
 SCB.Enabled = false
 SCB.D = {
     IconSize                         = 40,
+    LabelPosition                    = 0,
     BuffFontFace                     = "Fontin Regular",
     BuffFontStyle                    = "outline",
     BuffFontSize                     = 16,
@@ -1350,8 +1351,8 @@ function SCB.Initialize( enabled )
             -- create control that will hold the icons
             uiTlw[v].prevIconsCount = 0
             -- We need this container only for icons that are aligned in one row/column automatically.
-            -- Thus we do not create containers for player and target buffs on custom frames
-            if v ~= "player1" and v ~= "target1" then
+            -- Thus we do not create containers for player and target buffs/debuffs on custom frames
+            if v ~= "player1" and v ~= "player2" and v ~= "target1" and v ~= "target2" then
                 uiTlw[v].iconHolder = UI.Control( uiTlw[v], nil, nil, false )
             end
             -- Create table to store created contols for icons
@@ -1855,6 +1856,8 @@ function SCB.Reset()
         uiTlw.playerd:SetDimensions( 500, SCB.SV.IconSize + 6 )
     else
         uiTlw.player2:SetHeight( SCB.SV.IconSize )
+        uiTlw.player2.firstAnchor = { TOPLEFT, TOP }
+        uiTlw.player2.maxIcons = math.floor(  (uiTlw.player2:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
 
         uiTlw.player1:SetHeight( SCB.SV.IconSize * 2)
         uiTlw.player1.firstAnchor = { TOPLEFT, TOP }
@@ -1867,6 +1870,8 @@ function SCB.Reset()
         uiTlw.targetd:SetDimensions( 500, SCB.SV.IconSize + 6 )
     else
         uiTlw.target2:SetHeight( SCB.SV.IconSize )
+        uiTlw.target2.firstAnchor = { TOPLEFT, TOP }
+        uiTlw.target2.maxIcons = math.floor(  (uiTlw.target2:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
 
         uiTlw.target1:SetHeight( SCB.SV.IconSize * 2)
         uiTlw.target1.firstAnchor = { TOPLEFT, TOP }
@@ -1916,6 +1921,8 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
     buff.frame:SetDimensions( frameSize, frameSize )
     buff.back:SetHidden( SCB.SV.GlowIcons )
     buff.frame:SetHidden( not SCB.SV.GlowIcons )
+    buff.label:SetAnchor(TOPLEFT, buff, LEFT, -g_padding, -SCB.SV.LabelPosition)
+    buff.label:SetAnchor(BOTTOMRIGHT, buff, BOTTOMRIGHT, g_padding, -2)
     buff.label:SetHidden( not SCB.SV.RemainingText )
     if buff.cd ~= nil then
         buff.cd:SetHidden(     not SCB.SV.RemainingCooldown )
@@ -1983,7 +1990,7 @@ function SCB.CreateSingleIcon(container, AnchorItem)
     buff.icon   = UI.Texture( buff, nil, nil, "/esoui/art/icons/icon_missing.dds", DL_CONTROLS, false )
     -- Remaining text label
     buff.label = UI.Label( buff, nil, nil, nil, g_buffsFont, nil, false )
-    buff.label:SetAnchor(TOPLEFT, buff, LEFT, -g_padding)
+    buff.label:SetAnchor(TOPLEFT, buff, LEFT, -g_padding, -SCB.SV.LabelPosition)
     buff.label:SetAnchor(BOTTOMRIGHT, buff, BOTTOMRIGHT, g_padding, -2)
     -- Cooldown circular control
     if buff.iconbg ~= nil then
@@ -2162,7 +2169,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     end
 
     if changeType == EFFECT_RESULT_FADED then -- delete Effect
-        g_effectsList[context][abilityId] = nil
+        g_effectsList[context][effectSlot] = nil
         if E.FakeDuplicate[ abilityId ] then
             g_effectsList[context][ E.FakeDuplicate[abilityId].name ] = nil
         end
@@ -2194,7 +2201,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         end
 
         -- Buffs are created based on their ability ID, this allows buffs with the same display name to show up.
-        g_effectsList[context][ abilityId ] = {
+        g_effectsList[context][ effectSlot ] = {
                     target=unitTag, type=effectType,
                     id=abilityId, name=effectName, icon=iconName,
                     dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
@@ -2242,11 +2249,6 @@ function SCB.ArtificialEffectUpdate(eventCode, effectId)
             -- Bail out if we don't have Battle Spirit display for the player on
             
             if (effectId == 0 or effectId == 2) and SCB.SV.IgnoreBattleSpiritPlayer then return end
-            
-            if effectId == 0 then
-                displayName = "Dueling"
-                iconFile = "/esoui/art/icons/achievement_dueling_002.dds"
-            end
 
             g_effectsList.player1[ effectId ] = {
                 target="player", type=effectType,
@@ -2256,7 +2258,6 @@ function SCB.ArtificialEffectUpdate(eventCode, effectId)
                 restart=true, iconNum=0,
                 }
     end    
-           -- "esoui/art/icons/artificialeffect_battle-spirit.dds" 
 end
 
 -- List of all damage results for analysis in following function
@@ -2296,8 +2297,8 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
     end
     
     if E.FakeGroundBuffs[abilityId] ~= nil then
-        g_effectsList.player1[ abilityId ] = nil
         if E.FakeGroundBuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
+        g_effectsList.player1[ abilityId ] = nil
         iconName = E.FakeGroundBuffs[abilityId].icon
         effectName = E.FakeGroundBuffs[abilityId].name
         duration = E.FakeGroundBuffs[abilityId].duration
@@ -2318,8 +2319,8 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
         
     -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by target)
     if E.FakeExternalBuffs[abilityId] ~= nil then
-        g_effectsList.player1[ abilityId ] = nil
         if E.FakeExternalBuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
+        g_effectsList.player1[ abilityId ] = nil
         iconName = E.FakeExternalBuffs[abilityId].icon
         effectName = E.FakeExternalBuffs[abilityId].name
         duration = E.FakeExternalBuffs[abilityId].duration
@@ -2329,7 +2330,7 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
         local target = strformat("<<t:1>>",targetName)
         if source ~= "" and target == playerName then
             g_effectsList.player1[ abilityId ] = {
-            type=EFFECT_TYPE_DEBUFF,
+            type=1,
             id=abilityId, name=effectName, icon=iconName,
             dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
             forced = "short",
@@ -2340,8 +2341,8 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
 
     -- Creatures fake debuff icons for debuffs without an aura - These refresh on reapplication/removal (Applied on player by target)
     if E.FakeExternalDebuffs[abilityId] ~= nil then
-        g_effectsList.player2[ abilityId ] = nil
         if E.FakeExternalDebuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
+        g_effectsList.player2[ abilityId ] = nil
         iconName = E.FakeExternalDebuffs[abilityId].icon
         effectName = E.FakeExternalDebuffs[abilityId].name
         duration = E.FakeExternalDebuffs[abilityId].duration
@@ -2362,6 +2363,7 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
 
     -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by player)
     if E.FakePlayerBuffs[abilityId] ~= nil then
+        if E.FakePlayerBuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
         g_effectsList.player1[ abilityId ] = nil
         if abilityId == 973 and not SCB.SV.ShowSprint then
             return
@@ -2369,8 +2371,6 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
         if abilityId == 33439 and not SCB.SV.ShowGallop then
             return
         end
-        
-        if E.FakePlayerBuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
 
         iconName = E.FakePlayerBuffs[abilityId].icon
         effectName = E.FakePlayerBuffs[abilityId].name
@@ -2402,11 +2402,11 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
     
     -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on target by player)
     if E.FakePlayerExternalBuffs[abilityId] then
+        if E.FakePlayerExternalBuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
         g_effectsList.reticleover1[ abilityId ] = nil
         if not DoesUnitExist("reticleover") then return end
         if GetUnitReaction("reticleover") == UNIT_REACTION_HOSTILE then return end
         if IsUnitDead(unitTag) then return end
-        if E.FakePlayerExternalBuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
         iconName = E.FakePlayerExternalBuffs[abilityId].icon
         effectName = E.FakePlayerExternalBuffs[abilityId].name
         duration = E.FakePlayerExternalBuffs[abilityId].duration
@@ -2433,11 +2433,11 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
 
     -- Creates fake debuff icons for debuffs without an aura - These refresh on reapplication/removal (Applied on target by player)
     if E.FakePlayerDebuffs[abilityId] ~= nil then
+        if E.FakePlayerDebuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
         g_effectsList.reticleover2[ abilityId ] = nil
         if not DoesUnitExist("reticleover") then end
         --if GetUnitReaction("reticleover") ~= UNIT_REACTION_HOSTILE then return end
         if IsUnitDead(unitTag) then return end
-        if E.FakePlayerDebuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
         iconName = E.FakePlayerDebuffs[abilityId].icon
         effectName = E.FakePlayerDebuffs[abilityId].name
         duration = E.FakePlayerDebuffs[abilityId].duration
@@ -2463,8 +2463,8 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
     end
     
     if E.FakeFlippedBuffs[abilityId] ~= nil then
-        g_effectsList.reticleover1[ abilityId ] = nil
         if E.FakeFlippedBuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
+        g_effectsList.reticleover1[ abilityId ] = nil
         iconName = E.FakeFlippedBuffs[abilityId].icon
         effectName = E.FakeFlippedBuffs[abilityId].name
         duration = E.FakeFlippedBuffs[abilityId].duration
@@ -2523,9 +2523,9 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
 
     -- Simulates fake buffs/debuffs on the player frame for self applied buffs/debuffs that do not display correctly - DOES NOT REFRESH - Only expiration condition is the timer
     if E.FakeSelfAura[abilityId] ~= nil then
+        if E.FakeSelfAura[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
         g_effectsList.player1[ abilityId ] = nil
         g_effectsList.player2[ abilityId ] = nil
-        if E.FakeSelfAura[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
         iconName = E.FakeSelfAura[abilityId].icon
         effectName = E.FakeSelfAura[abilityId].name
         duration = E.FakeSelfAura[abilityId].duration
@@ -3109,7 +3109,13 @@ function SCB.updateIcons( currentTime, sortedList, container )
                 buff:SetAnchor( TOPLEFT, uiTlw[container], anchor, leftPadding, row*iconSize )
                 -- Determine if we need to make next row
                 if uiTlw[container].maxIcons then
-                    row = row + 1
+                    -- If buffs then stack down
+                    if container == "player1" or container == "target1" then
+                        row = row + 1
+                    -- If debuffs then stack up
+                    elseif container == "player2"  or container == "target2" then
+                        row = row -1
+                    end
                     next_row_break = next_row_break + uiTlw[container].maxIcons
                 end
             end
@@ -3148,7 +3154,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
         end
         if effect.restart and buff.cd ~= nil then
             if remain == nil or effect.dur == nil or effect.dur == 0 then
-                buff.cd:StartCooldown(0, 0, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_UNTIL, false )
+                buff.cd:StartCooldown(0, 0, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_REMAINING, false )
             else
                 buff.cd:StartCooldown(remain, effect.dur, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_UNTIL, false )
                 effect.restart = false

@@ -2432,8 +2432,8 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
     ]]
     
     -- TODO: Need to add more detailed filters here for certain conditionals!
-    -- If the total gold change was 0 or (Reason 2 = Receieve Money in the Mail) or (Reason 28 = Mount Feed) or (Reason 35 = Player Init) - End Now
-    if UpOrDown == 0 or reason == 2 or reason == 28 or reason == 35 then
+    -- If the total gold change was 0 or (Reason 2 = Receieve Money in the Mail) or (Reason 7 = Command) or (Reason 28 = Mount Feed) or (Reason 35 = Player Init) - End Now
+    if UpOrDown == 0 or reason == 2 or reason == 7 or reason == 28 or reason == 35 then
         return
     end
     
@@ -2586,8 +2586,8 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
     -- Unstuck (48), Edit Guild Heraldry (49), Buy Guild Tabard (50), Respec Morphs (55), Pay Fence (56), Launder (60), Champion Respec (61), Buyback (64)
     elseif reason == 5 or reason == 19 or reason == 29 or reason == 33 or reason == 44 or reason == 45 or reason == 48 or reason == 49 or reason == 50 or reason == 55 or reason == 56 or reason == 60 or reason == 61 or reason == 64 then
         messageChange = CA.SV.CurrencyMessageSpend
-    -- Keep Reward (14), Keep Repair (40)
-    elseif reason == 14 or reason == 40 then
+    -- Keep Reward (14), Keep Repair (40), PVP Resurrect (41)
+    elseif reason == 14 or reason == 40 or reason == 41 then
         messageChange = CA.SV.CurrencyMessageEarn
     -- Buy on AH (31)
     elseif reason == 31 then
@@ -2623,7 +2623,6 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
     -- DEBUG EVENTS WE DON'T KNOW YET
     -- TODO -- Need to add support for AP messages here. Also, in the case of AP gain we also need to adjust looted to earned if the reason code ends up being 0
     elseif reason == 6 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 7 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 12 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 15 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- Keep Upgrade
     elseif reason == 16 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
@@ -2641,7 +2640,6 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
     elseif reason == 37 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 38 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 39 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 41 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 46 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 53 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 54 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
@@ -3046,12 +3044,12 @@ function CA.OnTradeAdded(eventCode, who, tradeIndex, itemSoundCategory)
     if who == 0 then
         local indexOut = tradeIndex
         local name, icon, stack = GetTradeItemInfo (who, tradeIndex)
-        local tradeitemlink = GetTradeItemLink (who, tradeIndex, LINK_STYLE_DEFAULT)
+        local tradeitemlink = GetTradeItemLink (who, tradeIndex, LINK_STYLE_BRACKETS)
         g_tradeStacksOut[indexOut] = {stack=stack, name=name, icon=icon, itemlink=tradeitemlink}
     else
         local indexIn = tradeIndex
         local name, icon, stack = GetTradeItemInfo (who, tradeIndex)
-        local tradeitemlink = GetTradeItemLink (who, tradeIndex, LINK_STYLE_DEFAULT)
+        local tradeitemlink = GetTradeItemLink (who, tradeIndex, LINK_STYLE_BRACKETS)
         g_tradeStacksIn[indexIn] = {stack=stack, name=name, icon=icon, itemlink=tradeitemlink}
     end
 end
@@ -3224,7 +3222,7 @@ function CA.OnMailAttach(eventCode, attachmentSlot)
     g_postageAmount = GetQueuedMailPostage()
     local mailIndex = attachmentSlot
     local _, _, icon, stack = GetQueuedItemAttachmentInfo(attachmentSlot)
-    local mailitemlink = GetMailQueuedAttachmentLink(attachmentSlot, LINK_STYLE_DEFAULT)
+    local mailitemlink = GetMailQueuedAttachmentLink(attachmentSlot, LINK_STYLE_BRACKETS)
     g_mailStacksOut[mailIndex] = {stack=stack, name=name, icon=icon, itemlink=mailitemlink}
 end
 
@@ -3428,7 +3426,7 @@ function CA.PrintAchievementDetails(stringpart1, stringpart2, stringpart3, strin
 end
 
 function CA.OnAchievementUpdated(eventCode, id)
-    d("Achievement Updated")
+    --d("Achievement Updated")
 
     local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementId(id)
 
@@ -3550,7 +3548,7 @@ function CA.OnAchievementUpdated(eventCode, id)
 end
 
 function CA.OnAchievementAwarded(eventCode, name, points, id, link)
-    d("Achievement Completed!")
+    --d("Achievement Completed!")
 
     local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementId(id)
     
@@ -3641,7 +3639,7 @@ function CA.IndexInventory()
         local icon, stack = GetItemInfo(1, i)
         local itemType = GetItemType(1, i)
         local itemId = GetItemId(1, i)
-        local itemLink = GetItemLink(1, i, LINK_STYLE_DEFAULT)
+        local itemLink = GetItemLink(1, i, LINK_STYLE_BRACKETS)
         if itemlink ~= "" then
             g_inventoryStacks[i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink}
         end
@@ -3656,7 +3654,7 @@ function CA.IndexEquipped()
         local icon, stack = GetItemInfo(0, i)
         local itemType = GetItemType(0, i)
         local itemId = GetItemId(0, i)
-        local itemLink = GetItemLink(0, i, LINK_STYLE_DEFAULT)
+        local itemLink = GetItemLink(0, i, LINK_STYLE_BRACKETS)
         if itemLink ~= "" then
             g_equippedStacks[i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink}
         end
@@ -3670,7 +3668,7 @@ function CA.IndexBank()
 
     for i = 0,bagsizebank do
         local icon, stack = GetItemInfo(2, i)
-        local bagitemlink = GetItemLink(2, i, LINK_STYLE_DEFAULT)
+        local bagitemlink = GetItemLink(2, i, LINK_STYLE_BRACKETS)
         if bagitemlink ~= "" then
             g_bankStacks[i] = { icon=icon, stack=stack, itemlink=bagitemlink}
         end
@@ -3678,7 +3676,7 @@ function CA.IndexBank()
     
     for i = 0,bagsizesubbank do
         local icon, stack = GetItemInfo(6, i)
-        local bagitemlink = GetItemLink(6, i, LINK_STYLE_DEFAULT)
+        local bagitemlink = GetItemLink(6, i, LINK_STYLE_BRACKETS)
         if bagitemlink ~= "" then
             g_banksubStacks[i] = { icon=icon, stack=stack, itemlink=bagitemlink}
         end
@@ -4738,7 +4736,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
         local receivedBy = ""
         if not g_inventoryStacks[slotId] then -- NEW ITEM
             local icon, stack = GetItemInfo(bagId, slotId)
-            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_inventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
@@ -4751,7 +4749,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             end
         --[[elseif g_inventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
             local icon, stack = GetItemInfo(bagId, slotId)
-            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_inventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
@@ -4767,7 +4765,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                 local gainOrLoss = 1
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
                 local icon, stack = GetItemInfo(bagId, slotId)
-                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
                 if InventoryOn then
                     CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainOrLoss)
                     InventoryOn = false
@@ -4788,7 +4786,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                     g_inventoryStacks[slotId] = nil
                 else
                     local icon, stack = GetItemInfo(bagId, slotId)
-                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
                     g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
                 end
             end
@@ -4809,7 +4807,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
         local receivedBy = ""
         if not g_bankStacks[slotId] then -- NEW ITEM
             local icon, stack = GetItemInfo(bagId, slotId)
-            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
             g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_bankStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
@@ -4823,7 +4821,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
         --[[elseif g_bankStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
             g_oldItemLink = g_bankStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
             local icon, stack = GetItemInfo(bagId, slotId)
-            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
             g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_bankStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
@@ -4838,7 +4836,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                 local gainOrLoss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
                 local icon, stack = GetItemInfo(bagId, slotId)
-                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
                 if BankOn then
                     CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainOrLoss)
                     BankOn = false
@@ -4859,7 +4857,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                     g_bankStacks[slotId] = nil
                 else
                     local icon, stack = GetItemInfo(bagId, slotId)
-                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
                     g_bankStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
                 end
             end
@@ -4880,7 +4878,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
         local receivedBy = ""
         if not g_banksubStacks[slotId] then -- NEW ITEM
             local icon, stack = GetItemInfo(bagId, slotId)
-            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
             g_banksubStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_banksubStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
@@ -4894,7 +4892,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
         --[[elseif g_banksubStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
             g_oldItemLink = g_banksubStacks[slotId].itemlink -- Sends over to LogItem to do an upgrade string!
             local icon, stack = GetItemInfo(bagId, slotId)
-            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
             g_banksubStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_banksubStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
@@ -4909,7 +4907,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                 local gainOrLoss = 2
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DEPOSITED)
                 local icon, stack = GetItemInfo(bagId, slotId)
-                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
                 if BankOn then
                     CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainOrLoss)
                     BankOn = false
@@ -4930,7 +4928,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                     g_banksubStacks[slotId] = nil
                 else
                     local icon, stack = GetItemInfo(bagId, slotId)
-                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
                     g_banksubStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
                 end
             end
@@ -4983,7 +4981,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
         local receivedBy = ""
         if not g_inventoryStacks[slotId] then -- NEW ITEM
             local icon, stack = GetItemInfo(bagId, slotId)
-            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_inventoryStacks[slotId]
             g_guildBankCarryIcon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
@@ -4995,7 +4993,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
             g_guildBankCarryItemType = GetItemLinkItemType(item.itemlink)
         --[[elseif g_inventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
             local icon, stack = GetItemInfo(bagId, slotId)
-            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_inventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
@@ -5008,7 +5006,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
 
             if stackCountChange >= 1 then -- STACK COUNT INCREMENTED UP
                local icon, stack = GetItemInfo(bagId, slotId)
-               local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+               local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
                g_guildBankCarryIcon = seticon
                g_guildBankCarrygainOrLoss = 1
                g_guildBankCarryLogPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW)
@@ -5037,7 +5035,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
                     g_inventoryStacks[slotId] = nil
                 else
                     local icon, stack = GetItemInfo(bagId, slotId)
-                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
                     g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
                 end
             end
@@ -5075,7 +5073,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
         local receivedBy = ""
         if not g_inventoryStacks[slotId] and stackCountChange > 0 then -- NEW ITEM
             local icon, stack = GetItemInfo(bagId, slotId)
-            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_inventoryStacks[slotId]
             local seticon = ( CA.SV.LootIcons and item.icon and item.icon ~= "" ) and ("|t16:16:" .. item.icon .. "|t ") or ""
@@ -5086,7 +5084,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainOrLoss)
         elseif g_inventoryStacks[slotId] and stackCountChange == 0 then -- UPDGRADE
             local icon, stack = GetItemInfo(bagId, slotId)
-            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+            local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
             local item = g_inventoryStacks[slotId]
             local itemType = GetItemLinkItemType(item.itemlink)
@@ -5106,7 +5104,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
                 local gainOrLoss = 1
                 local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LAUNDERED)
                 local icon, stack = GetItemInfo(bagId, slotId)
-                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
                 g_launderCheck = true
                 CA.LogItem(logPrefix, seticon, item.itemlink, itemType, stackCountChange or 1, receivedBy, gainOrLoss)
                 g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink}
@@ -5124,7 +5122,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
                     g_inventoryStacks[slotId] = nil
                 else
                     local icon, stack = GetItemInfo(bagId, slotId)
-                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_DEFAULT)
+                    local bagitemlink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
                     g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemlink=bagitemlink }
                 end
             end
@@ -5191,7 +5189,7 @@ function CA.JusticeRemovePrint()
 
         for i = 1,bagsize do
             local icon, stack = GetItemInfo(1, i)
-            local bagitemlink = GetItemLink(1, i, LINK_STYLE_DEFAULT)
+            local bagitemlink = GetItemLink(1, i, LINK_STYLE_BRACKETS)
             if bagitemlink ~= "" then
                 g_JusticeStacks[i] = {icon=icon, stack=stack, itemlink=bagitemlink}
             end
@@ -5244,7 +5242,7 @@ function CA.JusticeRemovePrint()
 
         for i = 1,bagsize do
             local icon, stack = GetItemInfo(0, i)
-            local bagitemlink = GetItemLink(0, i, LINK_STYLE_DEFAULT)
+            local bagitemlink = GetItemLink(0, i, LINK_STYLE_BRACKETS)
             if bagitemlink ~= "" then
                 g_JusticeStacks[i] = {icon=icon, stack=stack, itemlink=bagitemlink}
             end
@@ -6583,7 +6581,7 @@ function CA.AlertStyleLearned()
         if CA.SV.QuestLocLong and finishedDescription ~= "" then
             nameFormatted = (strformat("|c<<1>><<2>>:|r |c<<3>><<4>>|r", QuestColorLocNameColorize, name, QuestColorLocDescriptionColorize, finishedDescription))
         else
-            nameFormatted = (strformat("|c<<1>><<2>>|r", name))
+            nameFormatted = (strformat("|c<<1>><<2>>|r", QuestColorLocNameColorize, name))
         end
         formattedText = strformat(SI_NOTIFYTEXT_OBJECTIVE_COMPLETE, nameFormatted)
         
