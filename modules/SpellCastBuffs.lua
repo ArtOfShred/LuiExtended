@@ -40,9 +40,14 @@ SCB.Enabled = false
 SCB.D = {
     IconSize                         = 40,
     LabelPosition                    = 0,
+    BarLabelPosition                 = -20,
     BuffFontFace                     = "Fontin Regular",
     BuffFontStyle                    = "outline",
     BuffFontSize                     = 16,
+    BuffShowLabel                    = true,
+    BarFontFace                      = "Fontin Regular",
+    BarFontStyle                     = "outline",
+    BarFontSize                      = 16,
     Alignment                        = "Centered",
     AlignmentLongVert                = "Top",
     AlignmentLongHorz                = "Centered",
@@ -133,6 +138,7 @@ local g_recallIconFilename = "LuiExtended/media/icons/abilities/ability_innate_r
 --local g_buffsFont = "/LuiExtended/media/fonts/fontin_sans_r.otf|16|outline"
 --local g_buffsFont = "$(MEDIUM_FONT)|17|outline"
 local g_buffsFont
+local g_barFont
 
 -- Padding distance between icons
 local g_padding = 0
@@ -1381,10 +1387,7 @@ function SCB.Initialize( enabled )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED,       SCB.OnSlotUpdated )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_UPDATE_COOLDOWNS,   SCB.OnUpdateCooldowns )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_ABILITY_USED,  SCB.OnSlotAbilityUsed )
-    EVENT_MANAGER:RegisterForEvent(moduleName  .. "player",         EVENT_EFFECT_CHANGED, SCB.OnEffectChanged )
-    EVENT_MANAGER:RegisterForEvent(moduleName  .. "reticleover",    EVENT_EFFECT_CHANGED, SCB.OnEffectChanged )
-    EVENT_MANAGER:AddFilterForEvent(moduleName .. "player",         EVENT_EFFECT_CHANGED, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER)
-    EVENT_MANAGER:AddFilterForEvent(moduleName .. "reticleover",    EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "reticleover" )
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, SCB.OnEffectChanged )
 
     EVENT_MANAGER:RegisterForEvent(moduleName .. "player",          EVENT_COMBAT_EVENT, SCB.OnCombatEvent )
     EVENT_MANAGER:RegisterForEvent(moduleName .. "reticleover",     EVENT_COMBAT_EVENT, SCB.OnCombatEvent )
@@ -2109,6 +2112,51 @@ function SCB.ApplyFont()
         end
         needs_reset[container] = false
     end
+    
+    local barFontName = LUIE.Fonts[SCB.SV.BarFontFace]
+        if not fontName or fontName == "" then
+        printToChat(GetString(SI_LUIE_SCB_ERROR_FONT))
+        fontName = "$(MEDIUM_FONT)"
+    end
+    
+    local barFontStyle = ( SCB.SV.BarFontStyle and SCB.SV.BarFontStyle ~= "" ) and SCB.SV.BarFontStyle or "outline"
+    local barFontSize = ( SCB.SV.BarFontSize and SCB.SV.BarFontSize > 0 ) and SCB.SV.BarFontSize or 17
+    
+    g_barFont = barFontName .. "|" .. barFontSize .. "|" .. barFontStyle
+    
+    for k, _ in pairs(g_uiProcAnimation) do
+        g_uiProcAnimation[k].procLoopTexture.label:SetFont(g_barFont)
+    end
+    
+    for k, _ in pairs(g_uiCustomToggle) do
+        g_uiCustomToggle[k].label:SetFont(g_barFont)
+    end
+
+end
+
+-- Resets bar labels on menu option change
+function SCB.ResetBarLabel()
+
+    for k, _ in pairs(g_uiProcAnimation) do
+        g_uiProcAnimation[k].procLoopTexture.label:SetText("")
+    end
+    
+    for k, _ in pairs(g_uiCustomToggle) do
+        g_uiCustomToggle[k].label:SetText("")
+    end
+    
+    for i = 3, 8 do
+        local actionButton = ZO_ActionBar_GetButton(i)
+        if g_uiCustomToggle[i] then
+            g_uiCustomToggle[i].label:ClearAnchors()
+            g_uiCustomToggle[i].label:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
+            g_uiCustomToggle[i].label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"), nil, 0, -SCB.SV.BarLabelPosition)
+        elseif g_uiProcAnimation[i] then
+            g_uiProcAnimation[i].procLoopTexture.label:ClearAnchors()
+            g_uiProcAnimation[i].procLoopTexture.label:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
+            g_uiProcAnimation[i].procLoopTexture.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"), nil, 0, -SCB.SV.BarLabelPosition)
+        end
+    end
 
 end
 
@@ -2146,24 +2194,26 @@ end
  ]]--
 function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
     
-    if g_pendingGroundAbility and g_pendingGroundAbility.id == abilityId and changeType == EFFECT_RESULT_GAINED then
-        -- Bar Tracker
-        if SCB.SV.ShowToggled then
-            local currentTime = GetGameTimeMilliseconds()
-            local slotNum = g_pendingGroundAbility.slotNum
-            if g_toggledSlots[g_pendingGroundAbility.id] then
-                if SCB.SV.ShowToggled then
-                    g_toggledSlotsRemain[abilityId] = g_actionBar[slotNum].duration + currentTime
-                    SCB.ShowCustomToggle(slotNum)
-                end
-            end    
-        end 
-        -- Cast ability
-        if not SCB.SV.HideGroundEffects then
-            SCB.NewEffects( g_pendingGroundAbility )
+    if castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
+        if g_pendingGroundAbility and g_pendingGroundAbility.id == abilityId and changeType == EFFECT_RESULT_GAINED then
+            -- Bar Tracker
+            if SCB.SV.ShowToggled then
+                local currentTime = GetGameTimeMilliseconds()
+                local slotNum = g_pendingGroundAbility.slotNum
+                if g_toggledSlots[g_pendingGroundAbility.id] then
+                    if SCB.SV.ShowToggled then
+                        g_toggledSlotsRemain[abilityId] = g_actionBar[slotNum].duration + currentTime
+                        SCB.ShowCustomToggle(slotNum)
+                    end
+                end    
+            end 
+            -- Cast ability
+            if not SCB.SV.HideGroundEffects then
+                SCB.NewEffects( g_pendingGroundAbility )
+            end
+            -- Clear the ground target queue
+            g_pendingGroundAbility = nil
         end
-        -- Clear the ground target queue
-        g_pendingGroundAbility = nil
     end
     
     if SCB.SV.HideTargetBuffs and effectType == 1 and unitTag ~= "player" then
@@ -2957,7 +3007,9 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
     if duration > 0 then
         g_toggledSlots[ability_id] = slotNum
         if g_toggledSlotsRemain[ability_id] and g_toggledSlotsRemain[ability_id] > 0 then
-            SCB.ShowCustomToggle(slotNum)
+            if SCB.SV.ShowToggled then
+                SCB.ShowCustomToggle(slotNum)
+            end
         end
     end
     
@@ -3000,9 +3052,9 @@ function SCB.PlayProcAnimations(slotNum)
         procLoopTexture:SetDrawLevel(2)
         procLoopTexture:SetHidden(true)
         
-        procLoopTexture.label = UI.Label (procLoopTexture, nil, nil, nil, g_buffsFont, nil, false)
+        procLoopTexture.label = UI.Label (procLoopTexture, nil, nil, nil, g_barFont, nil, false)
         procLoopTexture.label:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
-        procLoopTexture.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"))
+        procLoopTexture.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"), nil, 0, -SCB.SV.BarLabelPosition)
         procLoopTexture.label:SetDrawLayer(DL_COUNT)
         procLoopTexture.label:SetDrawLevel(3)
         procLoopTexture.label:SetDrawTier(3)
@@ -3045,9 +3097,9 @@ function SCB.ShowCustomToggle(slotNum)
         toggleFrame:SetColor(0.5,1,0.5,1)
         toggleFrame:SetHidden(false)
         
-        toggleFrame.label = UI.Label (toggleFrame, nil, nil, nil, g_buffsFont, nil, false)
+        toggleFrame.label = UI.Label (toggleFrame, nil, nil, nil, g_barFont, nil, false)
         toggleFrame.label:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
-        toggleFrame.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"))
+        toggleFrame.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"), nil, 0, -SCB.SV.BarLabelPosition)
         toggleFrame.label:SetDrawLayer(DL_COUNT)
         toggleFrame.label:SetDrawLevel(1)
         toggleFrame.label:SetDrawTier(3)
@@ -3096,10 +3148,14 @@ function SCB.OnUpdate(currentTime)
         if g_triggeredSlots[k] and g_uiProcAnimation[g_triggeredSlots[k]] then
             if g_triggeredSlotsRemain[k] then
                 local remain = g_triggeredSlotsRemain[k] - currentTime
-                g_uiProcAnimation[g_triggeredSlots[k]].procLoopTexture.label:SetText( strfmt(SCB.SV.RemainingTextMillis and "%.1f" or "%.2d", remain/1000) )
+                if SCB.SV.BarShowLabel then
+                    g_uiProcAnimation[g_triggeredSlots[k]].procLoopTexture.label:SetText( strfmt(SCB.SV.RemainingTextMillis and "%.1f" or "%.2d", remain/1000) )
+                end
                 if currentTime > g_triggeredSlotsRemain[k] then
                     g_uiProcAnimation[g_triggeredSlots[k]]:Stop()
-                    g_uiProcAnimation[g_triggeredSlots[k]].procLoopTexture.label:SetText(strfmt("%s", g_actionBar[v].duration / 100 ))
+                    if SCB.SV.BarShowLabel then
+                        g_uiProcAnimation[g_triggeredSlots[k]].procLoopTexture.label:SetText(strfmt("%s", g_actionBar[v].duration / 100 ))
+                    end
                     g_triggeredSlotsRemain[k] = 0
                 end
             end
@@ -3111,10 +3167,14 @@ function SCB.OnUpdate(currentTime)
             if g_actionBar[v] then
                 if g_toggledSlotsRemain[k] then
                     local remain = g_toggledSlotsRemain[k] - currentTime
-                    g_uiCustomToggle[g_toggledSlots[k]].label:SetText( strfmt(SCB.SV.RemainingTextMillis and "%.1f" or "%.2d", remain/1000) )
+                    if SCB.SV.BarShowLabel then
+                        g_uiCustomToggle[g_toggledSlots[k]].label:SetText( strfmt(SCB.SV.RemainingTextMillis and "%.1f" or "%.2d", remain/1000) )
+                    end
                     if currentTime > g_toggledSlotsRemain[k] then
                         g_uiCustomToggle[g_toggledSlots[k]]:SetHidden(true)
-                        g_uiCustomToggle[g_toggledSlots[k]].label:SetText(strfmt("%s", g_actionBar[v].duration / 100 ))
+                        if SCB.SV.BarShowLabel then
+                            g_uiCustomToggle[g_toggledSlots[k]].label:SetText(strfmt("%s", g_actionBar[v].duration / 100 ))
+                        end
                         g_toggledSlotsRemain[k] = 0
                     end
                 end

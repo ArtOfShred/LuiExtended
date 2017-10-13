@@ -979,7 +979,7 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONPROC),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONPROC_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ShowTriggered end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowTriggered = value end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowTriggered = value LUIE.SpellCastBuffs.OnSlotsFullUpdate() end,
                 width = "full",
                 default = LUIE.SpellCastBuffs.D.ShowTriggered,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
@@ -990,11 +990,70 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONEFFECT),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONEFFECT_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ShowToggled end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowToggled = value end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowToggled = value LUIE.SpellCastBuffs.OnSlotsFullUpdate() end,
                 width = "full",
                 default = LUIE.SpellCastBuffs.D.ShowToggled,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             }
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                -- SHOW LABEL ON BAR HIGHLIGH
+                type = "checkbox",
+                name = "SHOW LABEL FOR BAR HIGHLIGHT",
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONEFFECT_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.BarShowLabel end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.BarShowLabel = value LUIE.SpellCastBuffs.ResetBarLabel() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.BarShowLabel,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            }
+            
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "slider",
+                name = "BAR LABEL POSITION",
+                min = -64, max = 64, step = 2,
+                getFunc = function() return LUIE.SpellCastBuffs.SV.BarLabelPosition end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.BarLabelPosition = value LUIE.SpellCastBuffs.ResetBarLabel() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.BarLabelPosition,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            }
+            
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "dropdown",
+                name = "BAR FONT FACE",
+                tooltip = GetString(SI_LUIE_LAM_BUFF_FONTS_TP),
+                choices = FontsList,
+                sort = "name-up",
+                getFunc = function() return LUIE.SpellCastBuffs.SV.BarFontFace end,
+                setFunc = function(var) LUIE.SpellCastBuffs.SV.BarFontFace = var LUIE.SpellCastBuffs.ApplyFont() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.BarFontFace,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.RemainingText ) end,
+            }
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "slider",
+                name = "BAR FONT SIZE",
+                tooltip = GetString(SI_LUIE_LAM_BUFF_FONTS_SIZE_TP),
+                min = 10, max = 30, step = 1,
+                getFunc = function() return LUIE.SpellCastBuffs.SV.BarFontSize end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.BarFontSize = value LUIE.SpellCastBuffs.ApplyFont() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.BarFontSize,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.RemainingText ) end,
+            }
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "dropdown",
+                name = "BAR FONT STYLE",
+                choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
+                sort = "name-up",
+                getFunc = function() return LUIE.SpellCastBuffs.SV.BarFontStyle end,
+                setFunc = function(var) LUIE.SpellCastBuffs.SV.BarFontStyle = var LUIE.SpellCastBuffs.ApplyFont() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.BarFontStyle,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.RemainingText ) end,
+            }
+            
+            
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 -- Show Block Player Icon
                 type = "checkbox",
