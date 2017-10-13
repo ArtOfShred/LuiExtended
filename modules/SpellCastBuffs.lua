@@ -105,7 +105,9 @@ local g_uiProcAnimation      = {}
 local g_uiCustomToggle       = {}
 local g_actionBar            = {}
 local g_triggeredSlots       = {}
+local g_triggeredSlotsRemain = {}
 local g_toggledSlots         = {}
+local g_toggledSlotsRemain   = {}
 
 local g_lastCast             = 0
 local g_lastTarget           = nil
@@ -364,7 +366,7 @@ local IsAbilityProc = {
 }
 
 local HasAbilityProc = {
-    [A.Skill_Crystal_Fragments]     = A.Trigger_Crystal_Fragments_Proc, -- Trigger_Crystal_Fragments_Passive
+    [A.Skill_Crystal_Fragments]     = 46327, -- Trigger_Crystal_Fragments_Passive
 }
 
 -- Table of associations we have to fix
@@ -1381,7 +1383,7 @@ function SCB.Initialize( enabled )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_ABILITY_USED,  SCB.OnSlotAbilityUsed )
     EVENT_MANAGER:RegisterForEvent(moduleName  .. "player",         EVENT_EFFECT_CHANGED, SCB.OnEffectChanged )
     EVENT_MANAGER:RegisterForEvent(moduleName  .. "reticleover",    EVENT_EFFECT_CHANGED, SCB.OnEffectChanged )
-    EVENT_MANAGER:AddFilterForEvent(moduleName .. "player",         EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
+    EVENT_MANAGER:AddFilterForEvent(moduleName .. "player",         EVENT_EFFECT_CHANGED, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER)
     EVENT_MANAGER:AddFilterForEvent(moduleName .. "reticleover",    EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "reticleover" )
 
     EVENT_MANAGER:RegisterForEvent(moduleName .. "player",          EVENT_COMBAT_EVENT, SCB.OnCombatEvent )
@@ -2113,6 +2115,8 @@ end
 -- Runs on the EVENT_ACTION_UPDATE_COOLDOWNS listener.
 -- This handler fires every time the player uses an active ability.
 function SCB.OnUpdateCooldowns()
+
+--[[
     -- Maybe process a ground-target spell
     if ( g_pendingGroundAbility ~= nil ) then
         -- Cast ability
@@ -2121,7 +2125,7 @@ function SCB.OnUpdateCooldowns()
         end
         -- Clear the ground target queue
         g_pendingGroundAbility = nil
-    end
+    end]]--
 end
 
 --[[
@@ -2141,6 +2145,27 @@ end
  *   integer statusEffectType
  ]]--
 function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+    
+    if g_pendingGroundAbility and g_pendingGroundAbility.id == abilityId and changeType == EFFECT_RESULT_GAINED then
+        -- Bar Tracker
+        if SCB.SV.ShowToggled then
+            local currentTime = GetGameTimeMilliseconds()
+            local slotNum = g_pendingGroundAbility.slotNum
+            if g_toggledSlots[g_pendingGroundAbility.id] then
+                if SCB.SV.ShowToggled then
+                    g_toggledSlotsRemain[abilityId] = g_actionBar[slotNum].duration + currentTime
+                    SCB.ShowCustomToggle(slotNum)
+                end
+            end    
+        end 
+        -- Cast ability
+        if not SCB.SV.HideGroundEffects then
+            SCB.NewEffects( g_pendingGroundAbility )
+        end
+        -- Clear the ground target queue
+        g_pendingGroundAbility = nil
+    end
+    
     if SCB.SV.HideTargetBuffs and effectType == 1 and unitTag ~= "player" then
         return
     end
@@ -2219,14 +2244,15 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         -- Also delete visual enhancements from skill bar
         if unitTag == "player" then
             -- Stop any proc animation associated with this effect
-            if abilityType == ABILITY_TYPE_BONUS and g_triggeredSlots[effectName] and g_uiProcAnimation[g_triggeredSlots[effectName]] then
-                g_uiProcAnimation[g_triggeredSlots[effectName]]:Stop()
+            if abilityType == ABILITY_TYPE_BONUS and g_triggeredSlots[abilityId] and g_uiProcAnimation[g_triggeredSlots[abilityId]] then
+                g_uiProcAnimation[g_triggeredSlots[abilityId]]:Stop()
+                g_triggeredSlotsRemain[abilityId] = 0
             end
 
             -- Switch off custom toggle highlight
-            if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
-                g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
-            end
+            --if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
+            --    g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
+            --end
         end
 
     -- Create Effect
@@ -2265,18 +2291,20 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         -- Also create visual enhancements from skill bar
         if unitTag == "player" then
             -- start any proc animation associated with this effect
-            if abilityType == ABILITY_TYPE_BONUS and g_triggeredSlots[effectName] then
+            if abilityType == ABILITY_TYPE_BONUS and g_triggeredSlots[abilityId] then
                 if SCB.SV.ShowTriggered then
-                    SCB.PlayProcAnimations(g_triggeredSlots[effectName])
+                    PlaySound(SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN)
+                    SCB.PlayProcAnimations(g_triggeredSlots[abilityId])
+                    g_triggeredSlotsRemain[abilityId] = GetAbilityDuration(abilityId) + GetGameTimeMilliseconds()
                 end
             end
 
             -- Switch on custom toggle highlight
-            if g_toggledSlots[abilityId] then
+            --[[if g_toggledSlots[abilityId] then
                 if SCB.SV.ShowToggled then
                     SCB.ShowCustomToggle(g_toggledSlots[abilityId])
                 end
-            end
+            end]]--
         end
     end
 end
@@ -2744,9 +2772,9 @@ function SCB.NewEffects( ability )
     if ( effects ~= nil ) then
     
     -- Switch off custom toggle highlight
-    if g_toggledSlots[ability.id] and g_uiCustomToggle[g_toggledSlots[ability.id]] then
-        g_uiCustomToggle[g_toggledSlots[ability.id]]:SetHidden(true)
-    end
+    --if g_toggledSlots[ability.id] and g_uiCustomToggle[g_toggledSlots[ability.id]] then
+    --  g_uiCustomToggle[g_toggledSlots[ability.id]]:SetHidden(true)
+    --end
 
         for i = 1, 3 do
             local context = abilityRouting[i]
@@ -2775,26 +2803,27 @@ function SCB.NewEffects( ability )
     end
     
     -- Switch on custom toggle highlight
-    if g_toggledSlots[ability.id] then
+    --[[if g_toggledSlots[ability.id] then
         if SCB.SV.ShowToggled then
             SCB.ShowCustomToggle(g_toggledSlots[ability.id])
         end
-    end
+    end]]--
     
 end
 
 -- Called from EVENT_ACTION_SLOT_ABILITY_USED listener
 -- Check for whether a spell is being cast
 function SCB.OnSlotAbilityUsed(eventCode, slotNum)
+    d("slot abi used")
     -- Clear stored ground-target ability
     g_pendingGroundAbility = nil
 
     -- Get the used ability
+    local currentTime = GetGameTimeMilliseconds()
     local ability = g_actionBar[slotNum]
 
     if ability then -- Only proceed if this button is being watched
         -- Get the time
-        local currentTime = GetGameTimeMilliseconds()
 
         -- Avoid failure and button mashing
         if not HasFailure( slotNum ) and ( currentTime > g_lastCast + 250 ) then
@@ -2804,6 +2833,12 @@ function SCB.OnSlotAbilityUsed(eventCode, slotNum)
                 g_pendingGroundAbility = ability
 
             else
+                if g_toggledSlots[ability.id] then
+                    if SCB.SV.ShowToggled then
+                        g_toggledSlotsRemain[ability.id] = g_actionBar[slotNum].duration + currentTime
+                        SCB.ShowCustomToggle(slotNum)
+                    end
+                end    
                 -- Run all routines associated with selected ability
                 if not SCB.SV.HideGroundEffects then
                     SCB.NewEffects( ability )
@@ -2813,7 +2848,9 @@ function SCB.OnSlotAbilityUsed(eventCode, slotNum)
                 g_lastCast = currentTime
             end
         end
+ 
     end
+    
 end
 
 -- Called from EVENT_ACTION_SLOT_UPDATED listener
@@ -2897,7 +2934,9 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
         cost    = abilityCost,
         icon    = GetSlotTexture(slotNum),
         ground  = ( GetAbilityTargetDescription(ability_id) == "Ground" ),
-        effects = effects
+        effects = effects,
+        duration = duration,
+        slotNum=slotNum
     }
 
     -- Check if currently this ability is in proc state
@@ -2908,15 +2947,22 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
         end
     elseif proc then
         g_triggeredSlots[proc] = slotNum
-        if g_effectsList.player1[proc] then
+         if g_triggeredSlotsRemain[proc] and g_triggeredSlotsRemain[proc] > 0 then
             if SCB.SV.ShowTriggered then
                 SCB.PlayProcAnimations(slotNum)
             end
         end
     end
 
+    if duration > 0 then
+        g_toggledSlots[ability_id] = slotNum
+        if g_toggledSlotsRemain[ability_id] and g_toggledSlotsRemain[ability_id] > 0 then
+            SCB.ShowCustomToggle(slotNum)
+        end
+    end
+    
     -- Check if current skill is our custom toggle skill and save it
-    if IsAbilityCustomToggleId[ability_id] then
+    --[[if IsAbilityCustomToggleId[ability_id] then
         -- Some abilities primary effect isn't the same as the main Id for the slot, so we have to fudge it
         ability_id = AbilityCustomToggleFix[ability_id] or ability_id
         g_toggledSlots[ability_id] = slotNum
@@ -2926,6 +2972,7 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
             end
         end
     end
+    ]]--
 end
 
 function SCB.OnSlotsFullUpdate(eventCode, isHotbarSwap)
@@ -2952,6 +2999,15 @@ function SCB.PlayProcAnimations(slotNum)
         procLoopTexture:SetBlendMode(TEX_BLEND_MODE_ADD)
         procLoopTexture:SetDrawLevel(2)
         procLoopTexture:SetHidden(true)
+        
+        procLoopTexture.label = UI.Label (procLoopTexture, nil, nil, nil, g_buffsFont, nil, false)
+        procLoopTexture.label:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
+        procLoopTexture.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"))
+        procLoopTexture.label:SetDrawLayer(DL_COUNT)
+        procLoopTexture.label:SetDrawLevel(3)
+        procLoopTexture.label:SetDrawTier(3)
+        procLoopTexture.label:SetColor( unpack( SCB.SV.RemainingTextColoured and colour or {1,1,1,1} ) )
+        procLoopTexture.label:SetHidden(false)
 
         local procLoopTimeline = ANIMATION_MANAGER:CreateTimelineFromVirtual("UltimateReadyLoop", procLoopTexture)
         procLoopTimeline.procLoopTexture = procLoopTexture
@@ -2975,18 +3031,30 @@ end
 function SCB.ShowCustomToggle(slotNum)
     if not g_uiCustomToggle[slotNum] then
         local actionButton = ZO_ActionBar_GetButton(slotNum)
-        local toggleTexture = WINDOW_MANAGER:CreateControl("$(parent)Toggle_LUIE", actionButton.slot, CT_TEXTURE)
-        toggleTexture:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
-        toggleTexture:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"))
-        toggleTexture:SetTexture("/esoui/art/actionbar/actionslot_toggledon.dds")
-        toggleTexture:SetBlendMode(TEX_BLEND_MODE_ADD)
-        toggleTexture:SetDrawLayer(0)
-        toggleTexture:SetDrawLevel(0)
-        toggleTexture:SetDrawTier(2)
-        toggleTexture:SetColor(0.5,1,0.5,1)
-        toggleTexture:SetHidden(true)
+        
+        local toggleFrame = WINDOW_MANAGER:CreateControl("$(parent)Toggle_LUIE", actionButton.slot, CT_TEXTURE)
+        
+        --toggleFrame.back = UI.Texture( toggleFrame, nil, nil, "/esoui/art/actionbar/actionslot_toggledon.dds")
+        toggleFrame:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
+        toggleFrame:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"))
+        toggleFrame:SetTexture("/esoui/art/actionbar/actionslot_toggledon.dds")
+        toggleFrame:SetBlendMode(TEX_BLEND_MODE_ADD)
+        toggleFrame:SetDrawLayer(0)
+        toggleFrame:SetDrawLevel(0)
+        toggleFrame:SetDrawTier(2)
+        toggleFrame:SetColor(0.5,1,0.5,1)
+        toggleFrame:SetHidden(false)
+        
+        toggleFrame.label = UI.Label (toggleFrame, nil, nil, nil, g_buffsFont, nil, false)
+        toggleFrame.label:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
+        toggleFrame.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"))
+        toggleFrame.label:SetDrawLayer(DL_COUNT)
+        toggleFrame.label:SetDrawLevel(1)
+        toggleFrame.label:SetDrawTier(3)
+        toggleFrame.label:SetColor( unpack( SCB.SV.RemainingTextColoured and colour or {1,1,1,1} ) )
+        toggleFrame.label:SetHidden(false)
 
-        g_uiCustomToggle[slotNum] = toggleTexture
+        g_uiCustomToggle[slotNum] = toggleFrame
     end
     if g_uiCustomToggle[slotNum] then
         g_uiCustomToggle[slotNum]:SetHidden(false)
@@ -3023,20 +3091,46 @@ function SCB.OnUpdate(currentTime)
             buffsSorted[container] = {}
         end
     end
+    
+    for k, v in pairs (g_triggeredSlots) do
+        if g_triggeredSlots[k] and g_uiProcAnimation[g_triggeredSlots[k]] then
+            if g_triggeredSlotsRemain[k] then
+                local remain = g_triggeredSlotsRemain[k] - currentTime
+                g_uiProcAnimation[g_triggeredSlots[k]].procLoopTexture.label:SetText( strfmt(SCB.SV.RemainingTextMillis and "%.1f" or "%.2d", remain/1000) )
+                if currentTime > g_triggeredSlotsRemain[k] then
+                    g_uiProcAnimation[g_triggeredSlots[k]]:Stop()
+                    g_uiProcAnimation[g_triggeredSlots[k]].procLoopTexture.label:SetText(strfmt("%s", g_actionBar[v].duration / 100 ))
+                    g_triggeredSlotsRemain[k] = 0
+                end
+            end
+        end
+    end
 
+    for k, v in pairs (g_toggledSlots) do
+        if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] then
+            if g_actionBar[v] then
+                if g_toggledSlotsRemain[k] then
+                    local remain = g_toggledSlotsRemain[k] - currentTime
+                    g_uiCustomToggle[g_toggledSlots[k]].label:SetText( strfmt(SCB.SV.RemainingTextMillis and "%.1f" or "%.2d", remain/1000) )
+                    if currentTime > g_toggledSlotsRemain[k] then
+                        g_uiCustomToggle[g_toggledSlots[k]]:SetHidden(true)
+                        g_uiCustomToggle[g_toggledSlots[k]].label:SetText(strfmt("%s", g_actionBar[v].duration / 100 ))
+                        g_toggledSlotsRemain[k] = 0
+                    end
+                end
+            end
+        end
+    end
+    
     -- Filter expired events. and build array for sorting
     for context, effectsList in pairs(g_effectsList) do
         local container = containerRouting[context]
 
         for k, v in pairs(effectsList) do
-
+        
             -- Remove effect (that is not permanent and has duration)
             if v.ends ~= nil and v.dur > 0 and v.ends < currentTime then
                 effectsList[k] = nil
-                -- Switch off custom toggle highlight
-                if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] then
-                    g_uiCustomToggle[g_toggledSlots[k]]:SetHidden(true)
-                end
 
             -- Or append to correct container
             elseif container then
