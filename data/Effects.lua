@@ -256,6 +256,20 @@ E.DebuffDisplayOverrideName = {
     ['Minor Vulnerability']             = true,
 }
 
+-- Adds this aura to a list of fake GROUND auras to display
+-- Optional: name, icon
+-- Required: buff, debuff, ground = true/false
+E.EffectGroundDisplay = {
+
+    [59590] = true,
+    
+    [80529] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_ilambris_shock.dds', buff = false, debuff = false, ground = true }, -- Ilambris (Ilambris)
+    [80527] = { icon = 'esoui/art/icons/ava_siege_ui_002.dds', buff = false, debuff = false, ground = true }, -- Ilambris (Ilambris)
+    
+    [59587] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds', name = 'Lord Warden Dusk', buff = true, debuff = false, ground = false }, -- Lord Warden (Lord Warden)
+
+}
+
 E.DisguiseIcons = {
     [2571]  = { name = 'Midnight Union Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_midnight_union_disguise.dds', description = 'as a Midnight Union thief.' },
     [27266] = { name = 'Vanguard Uniform', icon = 'LuiExtended/media/icons/disguises/disguise_vanguard_uniform.dds', description = 'as a soldier in Tanval\'s Vanguard.' },

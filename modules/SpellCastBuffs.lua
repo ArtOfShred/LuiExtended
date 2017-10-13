@@ -194,6 +194,8 @@ end
 
 local Effects = {
 
+    ["Imperial Prison Item Set"]    = { 6.0, false, false, nil},
+
     -- Resto Staff
     [A.Skill_Grand_Healing]         = { true, false, false, nil }, -- ACCURATE
     
@@ -2214,6 +2216,34 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
             -- Clear the ground target queue
             g_pendingGroundAbility = nil
         end
+        
+        -- Create fake ground aura
+        if E.EffectGroundDisplay[abilityId] then
+            if changeType ~= EFFECT_RESULT_FADED then
+                local duration = endTime - beginTime
+                
+                local groundType = { }
+                groundType[1] = { info = E.EffectGroundDisplay[abilityId].buff, context = "player1", type = 1 }
+                groundType[2] = { info = E.EffectGroundDisplay[abilityId].debuff, context = "player2", type = BUFF_EFFECT_TYPE_DEBUFF }
+                groundType[3] = { info = E.EffectGroundDisplay[abilityId].ground, context = "ground", type = BUFF_EFFECT_TYPE_DEBUFF }
+                iconName = E.EffectGroundDisplay[abilityId].icon or iconName
+                effectName = E.EffectGroundDisplay[abilityId].name or effectName
+                
+                for i = 1, 3 do
+                    if groundType[i].info == true then
+                        g_effectsList[groundType[i].context][ abilityId ] = {
+                            target="player", type=groundType[i].type,
+                            id=abilityId, name=effectName, icon=iconName,
+                            dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
+                            forced=nil,
+                            restart=true, iconNum=0,
+                            unbreakable=0 }
+                    end
+                end
+                return
+            end
+        end
+        
     end
     
     if SCB.SV.HideTargetBuffs and effectType == 1 and unitTag ~= "player" then
@@ -2348,13 +2378,6 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                     g_triggeredSlotsRemain[abilityId] = GetAbilityDuration(abilityId) + GetGameTimeMilliseconds()
                 end
             end
-
-            -- Switch on custom toggle highlight
-            --[[if g_toggledSlots[abilityId] then
-                if SCB.SV.ShowToggled then
-                    SCB.ShowCustomToggle(g_toggledSlots[abilityId])
-                end
-            end]]--
         end
     end
 end
@@ -2864,7 +2887,6 @@ end
 -- Called from EVENT_ACTION_SLOT_ABILITY_USED listener
 -- Check for whether a spell is being cast
 function SCB.OnSlotAbilityUsed(eventCode, slotNum)
-    d("slot abi used")
     -- Clear stored ground-target ability
     g_pendingGroundAbility = nil
 
