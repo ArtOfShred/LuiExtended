@@ -261,12 +261,35 @@ E.DebuffDisplayOverrideName = {
 -- Required: buff, debuff, ground = true/false
 E.EffectGroundDisplay = {
 
-    [59590] = true,
-    
+    -- Monster Sets
+    [59590] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_bogdan.dds', name = 'Bogdan the Nightflame', buff = true, debuff = false, ground = false }, -- Imperial Prison Item Set (Bogdan the Nightflame)
+    [97901] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_stone.dds', buff = true, debuff = false, ground = true }, -- Domihaus (Domihaus) 
+    [97882] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_fire.dds', buff = true, debuff = false, ground = true }, -- Domihaus (Domihaus)
+    [97855] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_earthgore.dds', buff = true, debuff = false, ground = false }, -- Earthgore (Earthgore)
     [80529] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_ilambris_shock.dds', buff = false, debuff = false, ground = true }, -- Ilambris (Ilambris)
     [80527] = { icon = 'esoui/art/icons/ava_siege_ui_002.dds', buff = false, debuff = false, ground = true }, -- Ilambris (Ilambris)
-    
     [59587] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds', name = 'Lord Warden Dusk', buff = true, debuff = false, ground = false }, -- Lord Warden (Lord Warden)
+    [59568] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds', name = 'Malubeth the Scourger', buff = true, debuff = false, ground = false }, -- Scourge Harvest (Malubeth)
+    [59508] = { icon = 'esoui/art/icons/achievement_ic_020.dds', name = 'Maw of the Infernal', buff = true, debuff = false, ground = false }, -- Banished Cells Item Set (Maw of the Infernal)
+    
+    [81036] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarven_spider_heal.dds', buff = true, debuff = false, ground = false }, -- Sentinel of Rkugamz
+    
+    
+    [80954] = { icon = 'esoui/art/icons/achievement_ic_017.dds', name = 'Shadowrend', buff = true, debuff = false, ground = false }, -- Shadowrend Summon (Shadowrend) 
+    [59497] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', buff = false, debuff = false, ground = true }, -- Spawn of Mephala (Spawn of Mephala)   
+    [80523] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds', buff = false, debuff = false, ground = true }, -- Stormfist (Stormfist)
+    
+    -- Crafted Sets
+    [71671] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds', buff = true, debuff = false, ground = false }, -- Morkuldin (Morkuldin)
+    
+    -- Overland Sets
+    [75691] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', buff = false, debuff = false, ground = true }, -- Bahraha's Curse
+    
+    -- Dungeon Sets
+    [97538] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds', buff = true, debuff = false, ground = false }, -- Draugr's Rest
+    [97908] = { icon = 'esoui/art/icons/achievement_wrothgar_044.dds', buff = true, debuff = false, ground = true }, -- Hagraven's Garden (Hagraven's)
+    [67205] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds', buff = false, debuff = false, ground = true }, -- Leeching Plate (of Leeching)
+    [84354] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', buff = false, debuff = false, ground = true }, -- Hand of Mephala (of Mephala's Hand)
 
 }
 
@@ -1430,6 +1453,10 @@ E.EffectOverride = {
     
     [80544] = { icon = 'esoui/art/icons/achievement_thievesguild_021.dds' }, -- Sellistrix (Sellistrix)
     [80549] = { icon = 'esoui/art/icons/achievement_thievesguild_021.dds' }, -- Sellistrix (Sellistrix)
+    
+    [81036] = { hide = true }, -- Sentinel of Rkugamz
+    [81038] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarven_spider_heal.dds' }, -- Sentinel of Rkugamz
+    [81041] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarven_spider_heal.dds' }, -- Sentinel of Rkugamz
     
     [80955] = { hide = true }, -- Shadowrend (Shadowrend)
     [80954] = { hide = true }, -- Shadowrend Summon (Shadowrend)
@@ -4529,15 +4556,6 @@ E.EffectOverride = {
     
 }
 
-E.FakeGroundBuffs = { 
-
-    -- Item Sets
-    [75981] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = 'Bahraha\'s Curse', duration = 5000 }, -- Bahraha's Curse
-    
-    [69346] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds', name = 'Leeching Plate', duration = 5000}, -- Leeching Plate (of Leeching)
-
-}
-
 -- Fake Buffs applied onto the player by NPCs or Events (Friendly)
 E.FakeExternalBuffs = {
     
@@ -4673,13 +4691,9 @@ E.FakePlayerBuffs = {
     [59573] = { icon = 'esoui/art/icons/ability_buff_major_vitality.dds', name = 'Major Vitality', duration = 510 }, -- Major Vitality (Malubeth)
     [81675] = { icon = 'esoui/art/icons/achievement_housing_038.dds', name = 'Pirate Skeleton', duration = 12000 }, -- Pirate Skeleton
     
-    [75981] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = 'Bahraha\'s Curse', duration = 5000 }, -- Bahraha's Curse
-    
     [71107] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds', name = 'Briareart', duration = 10000 }, -- Briarheart
     
     [97626] = { icon = 'esoui/art/icons/achievement_update11_dungeons_036.dds', name = 'Ironblood', duration = 10000, debuff = true }, -- Ironblood
-    
-    [69346] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds', name = 'Leeching Plate', duration = 5000}, -- Leeching Plate (of Leeching)
     
     -- Player (Basic)
     [973] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_sprint.dds', name = 'Sprint', duration = 0}, -- Sprint

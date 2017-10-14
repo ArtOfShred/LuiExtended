@@ -2240,7 +2240,6 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                             unbreakable=0 }
                     end
                 end
-                return
             end
         end
         
@@ -2437,27 +2436,6 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
     
     if E.EffectOverride[abilityId] then
         unbreakable = E.EffectOverride[abilityId].unbreakable or 0
-    end
-    
-    if E.FakeGroundBuffs[abilityId] ~= nil then
-        if E.FakeGroundBuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
-        g_effectsList.player1[ abilityId ] = nil
-        iconName = E.FakeGroundBuffs[abilityId].icon
-        effectName = E.FakeGroundBuffs[abilityId].name
-        duration = E.FakeGroundBuffs[abilityId].duration
-        local beginTime = GetGameTimeMilliseconds()
-        local endTime = beginTime + duration
-        local source = strformat("<<t:1>>",sourceName)
-        local target = strformat("<<t:1>>",targetName)
-        if source == playerName and target ~= "" then
-        g_effectsList.ground[ abilityId ] = {
-            type=EFFECT_TYPE_DEBUFF,
-            id=abilityId, name=effectName, icon=iconName,
-            dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-            forced = "short",
-            restart=true, iconNum=0,
-            unbreakable=unbreakable }
-        end
     end
         
     -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by target)
@@ -2941,6 +2919,7 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
     end
     -- Stop possible proc animation
     if g_uiProcAnimation[slotNum] and g_uiProcAnimation[slotNum]:IsPlaying() then
+        --g_uiProcAnimation[slotNum].procLoopTexture.label:SetText("")
         g_uiProcAnimation[slotNum]:Stop()
     end
 
@@ -2950,7 +2929,9 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
             g_toggledSlots[abilityId] = nil
         end
     end
+    
     if g_uiCustomToggle[slotNum] then
+        --g_uiCustomToggle[slotNum].label:SetText("")
         g_uiCustomToggle[slotNum]:SetHidden(true)
     end
 
@@ -3019,7 +3000,7 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
         end
     elseif proc then
         g_triggeredSlots[proc] = slotNum
-         if g_triggeredSlotsRemain[proc] and g_triggeredSlotsRemain[proc] > 0 then
+         if g_triggeredSlotsRemain[proc] then
             if SCB.SV.ShowTriggered then
                 SCB.PlayProcAnimations(slotNum)
             end
@@ -3028,7 +3009,7 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
 
     if duration > 0 then
         g_toggledSlots[ability_id] = slotNum
-        if g_toggledSlotsRemain[ability_id] and g_toggledSlotsRemain[ability_id] > 0 then
+        if g_toggledSlotsRemain[ability_id] then
             if SCB.SV.ShowToggled then
                 SCB.ShowCustomToggle(slotNum)
             end
@@ -3165,41 +3146,49 @@ function SCB.OnUpdate(currentTime)
             buffsSorted[container] = {}
         end
     end
-    
-    for k, v in pairs (g_triggeredSlots) do
-        if g_triggeredSlots[k] and g_uiProcAnimation[g_triggeredSlots[k]] then
-            if g_triggeredSlotsRemain[k] then
-                local remain = g_triggeredSlotsRemain[k] - currentTime
+
+    -- Procs
+    for k, v in pairs (g_triggeredSlotsRemain) do
+        local remain = g_triggeredSlotsRemain[k] - currentTime
+        
+        -- If duration reaches 0 then remove effect
+        if remain <= 0 then
+            if g_triggeredSlots[k] and g_uiProcAnimation[g_triggeredSlots[k]] then
+                g_uiProcAnimation[g_triggeredSlots[k]]:Stop()
                 if SCB.SV.BarShowLabel then
-                    g_uiProcAnimation[g_triggeredSlots[k]].procLoopTexture.label:SetText( strfmt(SCB.SV.RemainingTextMillis and "%.1f" or "%.2d", remain/1000) )
+                    g_uiProcAnimation[g_triggeredSlots[k]].procLoopTexture.label:SetText( "" )
                 end
-                if currentTime > g_triggeredSlotsRemain[k] then
-                    g_uiProcAnimation[g_triggeredSlots[k]]:Stop()
-                    if SCB.SV.BarShowLabel then
-                        g_uiProcAnimation[g_triggeredSlots[k]].procLoopTexture.label:SetText(strfmt("%s", g_actionBar[v].duration / 100 ))
-                    end
-                    g_triggeredSlotsRemain[k] = 0
-                end
+            end
+            g_triggeredSlotsRemain[k] = nil
+        end
+        
+        -- Update Label
+        if g_triggeredSlots[k] and g_uiProcAnimation[g_triggeredSlots[k]] and g_triggeredSlotsRemain[k] then
+            if SCB.SV.BarShowLabel then
+                g_uiProcAnimation[g_triggeredSlots[k]].procLoopTexture.label:SetText( strfmt(SCB.SV.RemainingTextMillis and "%.1f" or "%.2d", remain/1000) )
             end
         end
     end
-
-    for k, v in pairs (g_toggledSlots) do
-        if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] then
-            if g_actionBar[v] then
-                if g_toggledSlotsRemain[k] then
-                    local remain = g_toggledSlotsRemain[k] - currentTime
-                    if SCB.SV.BarShowLabel then
-                        g_uiCustomToggle[g_toggledSlots[k]].label:SetText( strfmt(SCB.SV.RemainingTextMillis and "%.1f" or "%.2d", remain/1000) )
-                    end
-                    if currentTime > g_toggledSlotsRemain[k] then
-                        g_uiCustomToggle[g_toggledSlots[k]]:SetHidden(true)
-                        if SCB.SV.BarShowLabel then
-                            g_uiCustomToggle[g_toggledSlots[k]].label:SetText(strfmt("%s", g_actionBar[v].duration / 100 ))
-                        end
-                        g_toggledSlotsRemain[k] = 0
-                    end
+    
+    -- Ability Highlight
+    for k, v in pairs (g_toggledSlotsRemain) do
+        local remain = g_toggledSlotsRemain[k] - currentTime
+        
+        -- If duration reaches 0 then remove effect
+        if remain <= 0 then
+            if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] then
+                g_uiCustomToggle[g_toggledSlots[k]]:SetHidden(true)
+                if SCB.SV.BarShowLabel then
+                    g_uiCustomToggle[g_toggledSlots[k]].label:SetText( "" )
                 end
+            end
+            g_toggledSlotsRemain[k] = nil
+        end
+        
+        -- Update Label
+        if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] and g_toggledSlotsRemain[k] then
+            if SCB.SV.BarShowLabel then
+                g_uiCustomToggle[g_toggledSlots[k]].label:SetText( strfmt(SCB.SV.RemainingTextMillis and "%.1f" or "%.2d", remain/1000) )
             end
         end
     end
