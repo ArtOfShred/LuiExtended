@@ -42,7 +42,7 @@ DR.DeathRecapPlayerBasic = {
     -- STATUS EFFECTS
     ['Burning'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_burning.dds' }, -- Burning (Fire Status Effect)
     ['Diseased'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_diseased.dds' }, -- Diseased (Disease Status Effect)
-    ['Chill'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_chill.dds' }, -- Chill (Frost Status Effect)
+    ['Chill'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_chill.dds', name = 'Chilled' }, -- Chill (Frost Status Effect)
     ['Poisoned'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_poisoned.dds' }, -- Poisoned (Poison Status Effect)
     ['Concussion'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_concussion.dds' }, -- Concussion (Shock Status Effect)
     
@@ -190,7 +190,7 @@ DR.DeathRecapBasicOverride = {
     -- STATUS EFFECTS
     ['Burning'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_burning.dds' }, -- Burning (Fire Status Effect)
     ['Diseased'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_diseased.dds' }, -- Diseased (Disease Status Effect)
-    ['Chill'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_chill.dds' }, -- Chill (Frost Status Effect)
+    ['Chill'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_chill.dds', name = 'Chilled' }, -- Chill (Frost Status Effect)
     ['Poisoned'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_poisoned.dds' }, -- Poisoned (Poison Status Effect)
     ['Concussion'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_concussion.dds' }, -- Concussion (Shock Status Effect)
     
