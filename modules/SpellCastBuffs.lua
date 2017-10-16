@@ -2202,12 +2202,14 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
             if SCB.SV.ShowToggled then
                 local currentTime = GetGameTimeMilliseconds()
                 local slotNum = g_pendingGroundAbility.slotNum
-                if g_toggledSlots[g_pendingGroundAbility.id] then
+                if g_toggledSlots[abilityId] then
                     if SCB.SV.ShowToggled then
-                        g_toggledSlotsRemain[abilityId] = g_actionBar[slotNum].duration + currentTime
+                        local groundDuration = endTime - beginTime
+                        d(groundDuration)
+                        g_toggledSlotsRemain[abilityId] = groundDuration*1000 + currentTime
                         SCB.ShowCustomToggle(slotNum)
                         if SCB.SV.BarShowLabel then
-                            g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(SCB.SV.RemainingTextMillis and "%.1f" or "%.2d", GetAbilityDuration(abilityId)/1000) )
+                            g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(SCB.SV.RemainingTextMillis and "%.1f" or "%.2d", groundDuration) )
                         end
                     end
                 end    

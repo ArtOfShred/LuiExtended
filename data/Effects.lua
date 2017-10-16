@@ -2573,10 +2573,8 @@ E.EffectOverride = {
     [45526] = { icon = 'esoui/art/icons/ability_armor_013.dds' }, -- Constitution (Constitution - Rank 2)
     [58430] = { icon = 'LuiExtended/media/icons/abilities/ability_armor_constitution.dds' }, -- Constitution (Constitution - Rank 2)
     [58431] = { icon = 'LuiExtended/media/icons/abilities/ability_armor_constitution.dds' }, -- Constitution (Constitution - Rank 2)
-    [29773] = { icon = 'LuiExtended/media/icons/abilities/passive_armor_wrath.dds' }, -- Wrath (Wrath - Rank 1)
-    [80000] = { icon = 'LuiExtended/media/icons/abilities/ability_armor_wrath.dds' }, -- Wrath (Wrath - Rank 1)
-    [45528] = { icon = 'LuiExtended/media/icons/abilities/passive_armor_wrath.dds' }, -- Wrath (Wrath - Rank 2)
-    [80012] = { icon = 'LuiExtended/media/icons/abilities/ability_armor_wrath.dds' }, -- Wrath (Wrath - Rank 2)
+    [29773] = { icon = 'esoui/art/icons/passive_armor_014.dds' }, -- Revitalize (Revitalize - Rank 1)
+    [45528] = { icon = 'esoui/art/icons/passive_armor_014.dds' }, -- Revitalize (Revitalize - Rank 2)
 
     ----------------------------------------------------------------
     -- PLAYER PASSIVES WORLD ---------------------------------------
