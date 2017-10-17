@@ -4773,7 +4773,7 @@ function LUIE_CreateSettings()
         width = "full",
         default = LUIE.UnitFrames.D.CustomEnableRegen,
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-        disabled = function() return not LUIE.UnitFrames.SV.CustomEnableRegen end,
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     -- Custom Unit Frames Health Bar Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {

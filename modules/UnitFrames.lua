@@ -188,19 +188,23 @@ local function CreateRegenAnimation(parent, anchors, dims, alpha, degen)
     end
 
     -- Create regen control
-    local control = UI.Texture(parent, anchors, dims, "/LuiExtended/media/unitframes/regen.dds", 2, true)
+    local control
+    if degen then
+        control = UI.Texture(parent, anchors, dims, "/LuiExtended/media/unitframes/degen.dds", 2, true)
+    else
+        control = UI.Texture(parent, anchors, dims, "/LuiExtended/media/unitframes/regen.dds", 2, true)
+    end
     if alpha then
         control:SetAlpha(alpha)
     end
-    if degen then
-        control:SetTextureRotation(3.14159)
-    end
     -- Create animation
     local animation, timeline = CreateSimpleAnimation(ANIMATION_TEXTURE, control)
-    animation:SetImageData(1, 16)
-    animation:SetFramerate(16)
+    animation:SetImageData(1, 32)
+    animation:SetFramerate(32)
     animation:SetDuration(1000)
     timeline:SetPlaybackType(ANIMATION_PLAYBACK_LOOP, LOOP_INDEFINITELY)
+    
+    control.animation = animation
     control.timeline = timeline
 
     return control
@@ -702,8 +706,31 @@ local function CreateCustomFrames()
                     for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
                         if UF.CustomFrames[unitTag][powerType] then
                             local backdrop = UF.CustomFrames[unitTag][powerType].backdrop
-                            UF.CustomFrames[unitTag][powerType].regen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { backdrop:GetWidth()-20, 14 }, 0.55, false )
-                            UF.CustomFrames[unitTag][powerType].degen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { backdrop:GetWidth()-20, 14 }, 0.55, true )
+                            local size1
+                            local size2
+                            if baseName == "player" then 
+                                size1 = UF.SV.PlayerBarWidth
+                                size2 = UF.SV.PlayerBarHeightHealth
+                            elseif baseName == "reticleover" then 
+                                size1 = UF.SV.TargetBarWidth
+                                size2 = UF.SV.TargetBarHeight
+                            elseif baseName == "SmallGroup" then 
+                                size1 = UF.SV.GroupBarWidth
+                                size2 = UF.SV.GroupBarHeight
+                            elseif baseName == "RaidGroup" then 
+                                size1 = UF.SV.RaidBarWidth
+                                size2 = UF.SV.RaidBarHeight
+                            elseif baseName == "boss" then 
+                                size1 = UF.SV.PlayerBarWidth
+                                size2 = UF.SV.PlayerBarHeightHealth
+                            elseif baseName == "AvaPlayerTarget" then 
+                                size1 = UF.SV.AvaTargetBarWidth
+                                size2 = UF.SV.AvaTargetBarHeight
+                            end
+                            if size1 ~= nil and size2 ~= nil then
+                                UF.CustomFrames[unitTag][powerType].regen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, false )
+                                UF.CustomFrames[unitTag][powerType].degen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, true )
+                            end
                         end
                     end
                 end
@@ -1195,6 +1222,8 @@ end
 function UF.OnVisualizationUpdated(eventCode, unitTag, unitAttributeVisual, statType, attributeType, powerType, oldValue, newValue, oldMaxValue, newMaxValue)
     if unitAttributeVisual == ATTRIBUTE_VISUAL_POWER_SHIELDING then
         UF.UpdateShield(unitTag, newValue, newMaxValue)
+    elseif unitAttributeVisual == ATTRIBUTE_VISUAL_INCREASED_REGEN_POWER or unitAttributeVisual == ATTRIBUTE_VISUAL_DECREASED_REGEN_POWER then
+        UF.UpdateRegen(unitTag, statType, attributeType, powerType )
     elseif unitAttributeVisual == ATTRIBUTE_VISUAL_INCREASED_STAT or unitAttributeVisual == ATTRIBUTE_VISUAL_DECREASED_STAT then
         UF.UpdateStat(unitTag, statType, attributeType, powerType )
     end
@@ -1691,9 +1720,12 @@ end
 -- Reroutes call for regen/degen animation for given unit.
 -- Called from EVENT_UNIT_ATTRIBUTE_VISUAL_* listeners.
 function UF.UpdateRegen(unitTag, statType, attributeType, powerType )
-    -- Calculate actual value, and fallback to 0 if we call this function with nil parameters
-    local value = (GetUnitAttributeVisualizerEffectInfo(unitTag, ATTRIBUTE_VISUAL_INCREASED_REGEN_POWER, statType, attributeType, powerType) or 0)
-                + (GetUnitAttributeVisualizerEffectInfo(unitTag, ATTRIBUTE_VISUAL_DECREASED_REGEN_POWER, statType, attributeType, powerType) or 0)
+    -- Calculate actual value, and fallback to 0 if we call this function with nil parameters  
+    local value1 = (GetUnitAttributeVisualizerEffectInfo(unitTag, ATTRIBUTE_VISUAL_INCREASED_REGEN_POWER, statType, attributeType, powerType) or 0)
+    local value2 = (GetUnitAttributeVisualizerEffectInfo(unitTag, ATTRIBUTE_VISUAL_DECREASED_REGEN_POWER, statType, attributeType, powerType) or 0)
+    if value1 < 0 then value1 = 1 end
+    if value2 > 0 then value2 = -1 end
+    local value = value1 + value2
 
     -- Here we assume, that every unitTag entry in tables has POWERTYPE_HEALTH key
     if g_DefaultFrames[unitTag] and g_DefaultFrames[unitTag][powerType] then
@@ -1716,11 +1748,17 @@ function UF.DisplayRegen( control, isShown )
         return
     end
 
-    control:SetHidden( not isShown )
+    control:SetHidden( false )
     if isShown then
+        -- We restart the animation here only if its not already playing (prevents sharp fades mid-animation)
+        if control.animation:IsPlaying() then
+            return
+        end
+        control.timeline:SetPlaybackType(ANIMATION_PLAYBACK_LOOP, LOOP_INDEFINITELY)
         control.timeline:PlayFromStart()
     else
-        control.timeline:Stop()
+        --control.timeline:Stop()
+        control.timeline:SetPlaybackLoopsRemaining(0)
     end
 end
 
