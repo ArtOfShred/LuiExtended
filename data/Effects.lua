@@ -150,11 +150,6 @@ E.IsCyrodiil = {
     
 }
 
--- ESO Plus Member
-E.IsEsoPlus = {
-    [63601] = true,
-}
-
 E.IsSoulSummons = {
     [43752] = true,
 }

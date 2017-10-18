@@ -2305,7 +2305,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         return
     end
     
-    if hideTargetEffects[abilityId] and unitTag == "reticleover'" then
+    if hideTargetEffects[abilityId] and unitTag == "reticleover" then
         return
     end
         
@@ -3691,14 +3691,10 @@ function SCB.UpdateContextHideList()
         end
     end
     if SCB.SV.IgnoreEsoPlusPlayer then
-        for k, v in pairs(E.IsEsoPlus) do
-            hidePlayerEffects[k] = v
-        end
+        hidePlayerEffects[63601] = true
     end
     if SCB.SV.IgnoreEsoPlusTarget then
-        for k, v in pairs(E.IsEsoPlus) do
-            hideTargetEffects[k] = v
-        end
+        hideTargetEffects[63601] = true
     end
     if SCB.SV.IgnoreSoulSummonsPlayer then
         for k, v in pairs(E.IsSoulSummons) do

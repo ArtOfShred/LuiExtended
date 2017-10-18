@@ -920,6 +920,7 @@ function UF.Initialize( enabled )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEVEL_UPDATE,        UF.OnLevelUpdate )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_UPDATE, UF.OnLevelUpdate )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TITLE_UPDATE,  UF.TitleUpdate )
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RANK_POINT_UPDATE,  UF.TitleUpdate )
 
     -- Next events make sense only for CustomFrames
     if UF.CustomFrames.player or UF.CustomFrames.reticleover or UF.CustomFrames.SmallGroup1 or UF.CustomFrames.RaidGroup1 or UF.CustomFrames.boss1 then
@@ -1720,7 +1721,10 @@ end
 
 -- Updates title for unit if changed, and also reanchors buffs or toggles display on/off if the unittag had no title selected previously
 -- Called from EVENT_TITLE_UPDATE
+-- Called from EVENT_RANK_POINT_UPDATE
 function UF.TitleUpdate( eventCode, unitTag )
+
+    -- TODO: Doesn't seem to be an event handler for AVA Rank change, would be nice to have one for this purpose.
 
     UF.UpdateStaticControls( g_DefaultFrames[unitTag] )
     UF.UpdateStaticControls( UF.CustomFrames[unitTag] )
