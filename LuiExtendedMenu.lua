@@ -5234,17 +5234,6 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
-    -- Enable Default GROUP frames
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESG_DEFFRAMESENABLE),
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESG_DEFFRAMESENABLE_TP),
-        getFunc = function() return not ( LUIE.UnitFrames.SV.GroupDisableDefault and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
-        setFunc = function(value) LUIE.UnitFrames.SV.GroupDisableDefault = not value LUIE.UnitFrames.CustomFramesGroupUpdate() end,
-        width = "full",
-        default = not LUIE.UnitFrames.D.GroupDisableDefault,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
-    }
     -- Include Player in Group Frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
@@ -5391,17 +5380,6 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.CustomFramesRaid,
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-    }
-    -- Enable Default RAID frames
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESR_DEFFRAMESENABLE),
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_DEFFRAMESENABLE_TP),
-        getFunc = function() return not ( LUIE.UnitFrames.SV.RaidDisableDefault and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
-        setFunc = function(value) LUIE.UnitFrames.SV.RaidDisableDefault = not value LUIE.UnitFrames.CustomFramesGroupUpdate() end,
-        width = "full",
-        default = not LUIE.UnitFrames.D.RaidDisableDefault,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
     }
     -- Raid Bars Width
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {

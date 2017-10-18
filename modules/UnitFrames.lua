@@ -2443,14 +2443,12 @@ function UF.CustomFramesGroupUpdate()
         return
     end
 
-    local disableGroup = UF.SV.GroupDisableDefault and (UF.CustomFrames.SmallGroup1 ~= nil)
-    local disableRaid = UF.SV.RaidDisableDefault and (UF.CustomFrames.RaidGroup1 ~= nil)
-
-    -- First hide default group frame, but if player has this option:
-    -- Could be 4 possibilities never hide, hide only for small, hide only for large
-    ZO_UnitFramesGroups:SetHidden( ( disableGroup and disableRaid ) or
-                                   ( disableGroup and GetGroupSize() <= 4 ) or
-                                   ( disableRaid and GetGroupSize() > 4 ) )
+    if UF.SV.CustomFramesGroup then
+        if GetGroupSize() <= 4 then ZO_UnitFramesGroups:SetHidden ( true ) end
+    end
+    if UF.SV.CustomFramesRaid then
+        if GetGroupSize() >4 then ZO_UnitFramesGroups:SetHidden ( true ) end
+    end
 
     -- This requires some tricks if we want to keep list alphabetically sorted
     local groupList = {}
@@ -2490,9 +2488,9 @@ function UF.CustomFramesGroupUpdate()
             if UF.CustomFrames.RaidGroup1 then -- In this case just hide all raid frames if they are enabled
                 UF.CustomFramesUnreferenceGroupControl("RaidGroup", 1)
             end
-        elseif UF.CustomFrames.RaidGroup1 then -- Fallback option to use custom raid frames for small group
-            UF.CustomFramesUnreferenceGroupControl("RaidGroup", n+1)
-            raid = true
+        elseif UF.CustomFrames.RaidGroup1 then -- Remove frames if custom Small Group is not set to show
+            UF.CustomFramesUnreferenceGroupControl("RaidGroup", 1)
+            raid = false
         end
     end
 
@@ -2532,15 +2530,17 @@ function UF.CustomFramesGroupUpdate()
         -- Increase local counter
         n = n + 1
         UF.CustomFrames[v.unitTag] = UF.CustomFrames[ (raid and "RaidGroup" or "SmallGroup" ) .. n]
-        UF.CustomFrames[v.unitTag].control:SetHidden( false )
+        if UF.CustomFrames[v.unitTag] then
+            UF.CustomFrames[v.unitTag].control:SetHidden( false )
 
-        -- For SmallGroup reset topInfo width
-        if not raid then
-            UF.CustomFrames[v.unitTag].topInfo:SetWidth( UF.SV.GroupBarWidth-5 )
+            -- For SmallGroup reset topInfo width
+            if not raid then
+                UF.CustomFrames[v.unitTag].topInfo:SetWidth( UF.SV.GroupBarWidth-5 )
+            end
+
+            UF.CustomFrames[v.unitTag].unitTag = v.unitTag
+            UF.ReloadValues(v.unitTag)
         end
-
-        UF.CustomFrames[v.unitTag].unitTag = v.unitTag
-        UF.ReloadValues(v.unitTag)
     end
 
     UF.OnLeaderUpdate( nil, nil )
