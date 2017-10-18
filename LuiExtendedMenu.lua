@@ -4683,11 +4683,11 @@ function LUIE_CreateSettings()
         name = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_LEFT),
         tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_LEFT_TP),
         choices = formatOptions,
-        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatOne end,
-        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatOne = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
+        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatOnePT end,
+        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatOnePT = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
         width = "full",
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-        default = LUIE.UnitFrames.D.CustomFormatOne,
+        default = LUIE.UnitFrames.D.CustomFormatOnePT,
     }
     -- Custom Unit Frames format right label
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -4695,11 +4695,11 @@ function LUIE_CreateSettings()
         name = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_RIGHT),
         tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_RIGHT_TP),
         choices = formatOptions,
-        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatTwo end,
-        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatTwo = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
+        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatTwoPT end,
+        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatTwoPT = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
         width = "full",
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-        default = LUIE.UnitFrames.D.CustomFormatTwo,
+        default = LUIE.UnitFrames.D.CustomFormatTwoPT,
     }
     -- Custom Unit Frames Font
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -5277,6 +5277,32 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.GroupBarHeight,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
     }
+    
+    -- Custom Unit Frames format left label
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "dropdown",
+        name = "GROUP FRAMES LABEL ONE",
+        tooltip = "TODO",
+        choices = formatOptions,
+        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatOneGroup end,
+        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatOneGroup = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
+        width = "full",
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+        default = LUIE.UnitFrames.D.CustomFormatOneGroup,
+    }
+    -- Custom Unit Frames format right label
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "dropdown",
+        name = "GROUP FRAMES LABEL TWO",
+        tooltip = "TODO",
+        choices = formatOptions,
+        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatTwoGroup end,
+        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatTwoGroup = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
+        width = "full",
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+        default = LUIE.UnitFrames.D.CustomFormatTwoGroup,
+    }
+    
     -- Spacing between Group Bars
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
@@ -5361,8 +5387,21 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.RaidBarHeight,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
     }
+    -- Raid HP Bar Format
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "dropdown",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_LEFT),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_LEFT_TP),
+        choices = formatOptions,
+        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatRaid end,
+        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatRaid = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
+        width = "full",
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+        default = LUIE.UnitFrames.D.CustomFormatRaid,
+    }
     
-  optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+    -- Raid Name Clip
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = GetString(SI_LUIE_LAM_UF_CFRAMESR_NAMECLIP),
         tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_NAMECLIP_TP),

@@ -56,8 +56,11 @@ UF.D = {
     TargetShowClass                  = true,
     TargetShowFriend                 = true,
     TargetColourByReaction           = false,
-    CustomFormatOne                  = "Current + Shield (Percentage%)",
-    CustomFormatTwo                  = "Percentage%",
+    CustomFormatOnePT                = "Current + Shield / Max",
+    CustomFormatOneGroup             = "Current + Shield / Max",
+    CustomFormatTwoPT                = "Percentage%",
+    CustomFormatTwoGroup             = "Percentage%",
+    CustomFormatRaid                 = "Current (Percentage%)",
     CustomFontFace                   = "Univers 67",
     CustomFontStyle                  = "soft-shadow-thin",
     CustomFontBars                   = 16,
@@ -610,6 +613,7 @@ local function CreateCustomFrames()
             UF.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = "Current (Percentage%)"
 
         end
+        
     end
 
     -- Loop through Bosses
@@ -1018,24 +1022,58 @@ end
 -- Update format for labels on CustomFrames
 function UF.CustomFramesFormatLabels(menu)
     -- Search CustomFrames for attribute bars with correct labels
-    for _, baseName in pairs( { "player", "reticleover", "SmallGroup" } ) do
-        for i = 0, 4 do
-            local unitTag = (i==0) and baseName or ( baseName .. i )
-            if UF.CustomFrames[unitTag] then
-                for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
-                    if UF.CustomFrames[unitTag][powerType] then
-                        if UF.CustomFrames[unitTag][powerType].labelOne then
-                            UF.CustomFrames[unitTag][powerType].labelOne.fmt = UF.SV.CustomFormatOne
-                        end
-                        if UF.CustomFrames[unitTag][powerType].labelTwo then
-                            UF.CustomFrames[unitTag][powerType].labelTwo.fmt = UF.SV.CustomFormatTwo
-                        end
+    
+    -- Format Player/Target Labels
+    for _, baseName in pairs( { "player", "reticleover" } ) do
+        local unitTag = baseName
+        if UF.CustomFrames[unitTag] then
+            for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
+                if UF.CustomFrames[unitTag][powerType] then
+                    if UF.CustomFrames[unitTag][powerType].labelOne then
+                        UF.CustomFrames[unitTag][powerType].labelOne.fmt = UF.SV.CustomFormatOnePT
+                    end
+                    if UF.CustomFrames[unitTag][powerType].labelTwo then
+                        UF.CustomFrames[unitTag][powerType].labelTwo.fmt = UF.SV.CustomFormatTwoPT
                     end
                 end
             end
-            if menu and DoesUnitExist(unitTag) then
-                UF.ReloadValues(unitTag)
+        end
+        if menu and DoesUnitExist(unitTag) then
+            UF.ReloadValues(unitTag)
+        end
+    end
+    
+    -- Format Small Group Labels
+    for i = 1, 4 do
+        local unitTag = "SmallGroup" .. i
+        if UF.CustomFrames[unitTag] then
+            if UF.CustomFrames[unitTag][POWERTYPE_HEALTH] then
+                if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].labelOne then
+                    UF.CustomFrames[unitTag][POWERTYPE_HEALTH].labelOne.fmt = UF.SV.CustomFormatOneGroup
+                end
+                if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].labelTwo then
+                    UF.CustomFrames[unitTag][POWERTYPE_HEALTH].labelTwo.fmt = UF.SV.CustomFormatTwoGroup
+                end
             end
+        end
+        if menu and DoesUnitExist(unitTag) then
+            UF.ReloadValues(unitTag)
+        end
+    end
+    
+    -- Format Raid Labels
+    for i = 1, 24 do
+        local unitTag = "RaidGroup" .. i
+        if UF.CustomFrames[unitTag] then
+            if UF.CustomFrames[unitTag][POWERTYPE_HEALTH] then
+                if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].label then
+                    UF.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = UF.SV.CustomFormatRaid
+                end
+            end
+        end
+        local baseTag = GetGroupUnitTagByIndex(i)
+        if menu and DoesUnitExist(baseTag) then
+            UF.ReloadValues(baseTag)
         end
     end
 end
@@ -3103,6 +3141,7 @@ function UF.CustomFramesApplyLayoutRaid()
         unitFrame.dead:SetDimensions(UF.SV.RaidBarWidth-50, UF.SV.RaidBarHeight-2)
         
         unitFrame[POWERTYPE_HEALTH].label:SetDimensions(UF.SV.RaidBarWidth-50, UF.SV.RaidBarHeight-2)
+        
     end
 
     raid:SetHidden( false )
