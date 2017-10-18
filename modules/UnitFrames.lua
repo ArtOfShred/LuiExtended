@@ -99,6 +99,8 @@ UF.D = {
     PlayerEnableArmor                = true,
     PlayerEnablePower                = true,
     TargetEnableClass                = false,
+    TargetEnableRank                 = true,
+    TargetEnableTitle                = true,
     TargetEnableSkull                = true,
     CustomFramesGroup                = true,
     GroupDisableDefault              = true,
@@ -798,7 +800,7 @@ local function CreateCustomFrames()
                         
                         
                         UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER] = {
-                        ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,0,0}, {size1 * 1.8, size2 * 3.8}, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true ),
+                        ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,4,0}, {size1 * 1.8, size2 * 4.0}, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true ),
                         ["dec"] = UI.Texture( backdrop, {CENTER,CENTER,0,0}, {size1 * 2.2, size2 * 3}, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true ),
                         }
                         
@@ -917,6 +919,7 @@ function UF.Initialize( enabled )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_CREATED, UF.OnUnitCreated )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEVEL_UPDATE,        UF.OnLevelUpdate )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_UPDATE, UF.OnLevelUpdate )
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TITLE_UPDATE,  UF.TitleUpdate )
 
     -- Next events make sense only for CustomFrames
     if UF.CustomFrames.player or UF.CustomFrames.reticleover or UF.CustomFrames.SmallGroup1 or UF.CustomFrames.RaidGroup1 or UF.CustomFrames.boss1 then
@@ -1591,15 +1594,28 @@ function UF.UpdateStaticControls( unitFrame )
         end
     end
 
+    local savedTitle
     -- If unitFrame has unit title label control
     if unitFrame.title ~= nil then
         local title = GetUnitCaption(unitFrame.unitTag)
+        local option
+        local ava
         if unitFrame.isPlayer then
             title = GetUnitTitle(unitFrame.unitTag)
-            title = (title ~= "") and title or GetAvARankName( GetUnitGender(unitFrame.unitTag) , unitFrame.avaRankValue )
+            ava = GetAvARankName( GetUnitGender(unitFrame.unitTag) , unitFrame.avaRankValue )
+            if UF.SV.TargetEnableRank then
+                title = (ava ~= "") and ava
+            elseif UF.SV.TargetEnableTitle and not UF.SV.TargetEnableRank then
+                title = (title ~= "") and title
+            end
         end
         title = title or ""
         unitFrame.title:SetText( title:gsub("%^%a+","") )
+        if unitFrame.unitTag == "reticleover" then
+            unitFrame.title:SetHidden ( not UF.SV.TargetEnableRank and not UF.SV.TargetEnableTitle )
+        end
+        
+        if title == "" then savedTitle = "" end
     end
 
     -- If unitFrame has unit AVA rank control
@@ -1621,9 +1637,24 @@ function UF.UpdateStaticControls( unitFrame )
                 colour = GetAllianceColor( alliance )
             end
             unitFrame.avaRankIcon:SetColor( colour.r, colour.g, colour.b )
+            if unitFrame.unitTag == "reticleover" then
+                unitFrame.avaRank:SetHidden( not UF.SV.TargetEnableRank )
+                unitFrame.avaRankIcon:SetHidden( not UF.SV.TargetEnableRank )
+            end
         else
             unitFrame.avaRank:SetHidden(true)
             unitFrame.avaRankIcon:SetHidden(true)
+        end
+    end
+    
+    -- Reanchor buffs if title changes
+    if unitFrame.buffs then
+        if (not UF.SV.TargetEnableRank and not UF.SV.TargetEnableTitle) or savedTitle == "" then
+            unitFrame.buffs:ClearAnchors()
+            unitFrame.buffs:SetAnchor( TOP, unitFrame.control, BOTTOM, 0, 5 )
+        else
+            unitFrame.buffs:ClearAnchors()
+            unitFrame.buffs:SetAnchor( TOP, unitFrame.botInfo, BOTTOM, 0, 5 )
         end
     end
 
@@ -1685,6 +1716,16 @@ function UF.UpdateAttribute( attributeFrame, powerValue, powerEffectiveMax, shie
             attributeFrame.bar:SetValue( powerValue )
         end
     end
+end
+
+-- Updates title for unit if changed, and also reanchors buffs or toggles display on/off if the unittag had no title selected previously
+-- Called from EVENT_TITLE_UPDATE
+function UF.TitleUpdate( eventCode, unitTag )
+
+    UF.UpdateStaticControls( g_DefaultFrames[unitTag] )
+    UF.UpdateStaticControls( UF.CustomFrames[unitTag] )
+    UF.UpdateStaticControls( g_AvaCustFrames[unitTag] )
+
 end
 
 -- Updates shield value for given unit.
@@ -2859,6 +2900,20 @@ function UF.CustomFramesApplyLayoutPlayer()
         target.title:SetWidth( UF.SV.TargetBarWidth-50 )
         target.buffs:SetWidth( UF.SV.TargetBarWidth )
         target.debuffs:SetWidth( UF.SV.TargetBarWidth )
+        
+        target.title:SetHidden( not UF.SV.TargetEnableTitle )
+        target.avaRank:SetHidden( not UF.SV.TargetEnableRank )
+        target.avaRankIcon:SetHidden( not UF.SV.TargetEnableRank )
+        
+        local enable
+        if (not UF.SV.TargetEnableTitle and not UF.SV.TargetEnableRank) then
+            enable = false
+        else
+            enable = true
+        end
+        
+        target.buffs:ClearAnchors()
+        target.buffs:SetAnchor( TOP, not enable and target.control or target.botInfo, BOTTOM, 0, 5 )
 
         target.levelIcon:ClearAnchors()
         target.levelIcon:SetAnchor( LEFT, target.topInfo, LEFT, target.name:GetTextWidth()+1, 0 )

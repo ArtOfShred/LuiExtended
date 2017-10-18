@@ -5035,6 +5035,28 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.PlayerEnableYourname,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
+    
+    -- Display self name on Player Frame
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = "DISPLAY TITLE ON TARGET FRAME",
+        tooltip = "TODO",
+        getFunc = function() return LUIE.UnitFrames.SV.TargetEnableTitle end,
+        setFunc = function(value) LUIE.UnitFrames.SV.TargetEnableTitle = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.TargetEnableTitle,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
+    }
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = "DISPLAY AVA RANK ON TARGET FRAME",
+        tooltip = "TODO",
+        getFunc = function() return LUIE.UnitFrames.SV.TargetEnableRank end,
+        setFunc = function(value) LUIE.UnitFrames.SV.TargetEnableRank = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.TargetEnableRank,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
+    }
     -- Display Mount/Siege/Werewolf Bar
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
