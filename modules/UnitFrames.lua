@@ -3251,9 +3251,13 @@ function UF.CustomFramesApplyLayoutGroup()
         if UF.SV.RoleIconSmallGroup and (role1 or role2 or role3) then
             ghb.labelOne:SetDimensions(UF.SV.GroupBarWidth-52, UF.SV.GroupBarHeight-2)
             ghb.labelOne:SetAnchor ( LEFT, phb, LEFT, 25, 0 )
+            unitFrame.dead:ClearAnchors()
+            unitFrame.dead:SetAnchor ( LEFT, phb, LEFT, 25, 0 )
         else
             ghb.labelOne:SetDimensions(UF.SV.GroupBarWidth-72, UF.SV.GroupBarHeight-2)
             ghb.labelOne:SetAnchor ( LEFT, phb, LEFT, 5, 0 )
+            unitFrame.dead:ClearAnchors()
+            unitFrame.dead:SetAnchor ( LEFT, phb, LEFT, 5, 0 )
         end
         unitFrame.roleIcon:SetHidden (not UF.SV.RoleIconSmallGroup)
 
