@@ -1788,12 +1788,6 @@ end
 -- While this applicable only to custom frames, we do not need to split this function into 2 different ones
 -- Called from EVENT_UNIT_ATTRIBUTE_VISUAL_* listeners.
 function UF.UpdateStat(unitTag, statType, attributeType, powerType )
-    
-    d("UpdateStat called")
-    d(unitTag)
-    d(statType)
-    d(attributeType)
-    d(powerType)
 
     -- Build a list of UI controls to hold this statType on different UnitFrames lists
     local statControls = {}
