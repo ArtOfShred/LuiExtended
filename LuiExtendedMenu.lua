@@ -4677,30 +4677,6 @@ function LUIE_CreateSettings()
         func = LUIE.UnitFrames.CustomFramesResetPosition,
         width = "half",
     }
-    -- Custom Unit Frames format left label
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_LEFT),
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_LEFT_TP),
-        choices = formatOptions,
-        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatOnePT end,
-        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatOnePT = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
-        width = "full",
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-        default = LUIE.UnitFrames.D.CustomFormatOnePT,
-    }
-    -- Custom Unit Frames format right label
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_RIGHT),
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_RIGHT_TP),
-        choices = formatOptions,
-        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatTwoPT end,
-        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatTwoPT = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
-        width = "full",
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-        default = LUIE.UnitFrames.D.CustomFormatTwoPT,
-    }
     -- Custom Unit Frames Font
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
@@ -4964,6 +4940,30 @@ function LUIE_CreateSettings()
         width = "full",
         default = LUIE.UnitFrames.D.PlayerBarHeightStamina,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
+    }
+    -- Custom Unit Frames format left label
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "dropdown",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_LEFT),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_LEFT_TP),
+        choices = formatOptions,
+        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatOnePT end,
+        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatOnePT = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
+        width = "full",
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+        default = LUIE.UnitFrames.D.CustomFormatOnePT,
+    }
+    -- Custom Unit Frames format right label
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "dropdown",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_RIGHT),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_RIGHT_TP),
+        choices = formatOptions,
+        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatTwoPT end,
+        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatTwoPT = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
+        width = "full",
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+        default = LUIE.UnitFrames.D.CustomFormatTwoPT,
     }
     -- Hide Player Magicka Bar Label
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -5489,6 +5489,41 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Boss Bars Width
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "slider",
+        name = "BOSS BAR WIDTH",
+        min = 100, max = 500, step = 5,
+        getFunc = function() return LUIE.UnitFrames.SV.BossBarWidth end,
+        setFunc = function(value) LUIE.UnitFrames.SV.BossBarWidth = value LUIE.UnitFrames.CustomFramesApplyLayoutBosses() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.BossBarWidth,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
+    }
+    -- Boss Bars Height
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "slider",
+        name = "BOSS BAR HEIGHT",
+        min = 20, max = 70, step = 1,
+        getFunc = function() return LUIE.UnitFrames.SV.BossBarHeight end,
+        setFunc = function(value) LUIE.UnitFrames.SV.BossBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutBosses() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.BossBarHeight,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
+    }
+    -- Boss HP Bar Format
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "dropdown",
+        name = "BOSS HP LABEL FORMAT",
+        tooltip = "TODO",
+        choices = formatOptions,
+        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatBoss end,
+        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatBoss = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
+        width = "full",
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+        default = LUIE.UnitFrames.D.CustomFormatBoss,
+    }
+    
     -- Custom Unit Frames (PvP Target Frame)
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "header",

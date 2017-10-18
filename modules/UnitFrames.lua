@@ -61,6 +61,7 @@ UF.D = {
     CustomFormatTwoPT                = "Percentage%",
     CustomFormatTwoGroup             = "Percentage%",
     CustomFormatRaid                 = "Current (Percentage%)",
+    CustomFormatBoss                 = "Percentage%",
     CustomFontFace                   = "Univers 67",
     CustomFontStyle                  = "soft-shadow-thin",
     CustomFontBars                   = 16,
@@ -89,6 +90,8 @@ UF.D = {
     PlayerBarHeightHealth            = 30,
     PlayerBarHeightMagicka           = 28,
     PlayerBarHeightStamina           = 28,
+    BossBarWidth                     = 300,
+    BossBarHeight                    = 36,
     HideBarMagicka                   = false,
     HideLabelMagicka                 = false,
     HideBarStamina                   = false,
@@ -742,8 +745,8 @@ local function CreateCustomFrames()
                                 size1 = UF.SV.RaidBarWidth
                                 size2 = UF.SV.RaidBarHeight
                             elseif baseName == "boss" then 
-                                size1 = UF.SV.PlayerBarWidth
-                                size2 = UF.SV.PlayerBarHeightHealth
+                                size1 = UF.SV.BossBarWidth
+                                size2 = UF.SV.BossBarHeight
                             elseif baseName == "AvaPlayerTarget" then 
                                 size1 = UF.SV.AvaTargetBarWidth
                                 size2 = UF.SV.AvaTargetBarHeight
@@ -761,7 +764,7 @@ local function CreateCustomFrames()
 
     -- Create armor stat change UI for player and target
     if UF.SV.PlayerEnableArmor then
-        for _, baseName in pairs( { "player", "reticleover", "boss", "AvaPlayerTarget" } ) do
+        for _, baseName in pairs( { 'player', 'reticleover', 'boss', 'AvaPlayerTarget', 'SmallGroup' } ) do
             for i = 0, 6 do
                 local unitTag = (i==0) and baseName or ( baseName .. i )
                 if UF.CustomFrames[unitTag] then
@@ -781,7 +784,7 @@ local function CreateCustomFrames()
 
     -- Create power stat change UI for player and target
     if UF.SV.PlayerEnablePower then
-		for _, baseName in pairs( { 'player', 'reticleover', 'boss' } ) do
+		for _, baseName in pairs( { 'player', 'reticleover', 'boss', 'AvaPlayerTarget', 'SmallGroup' } ) do
 			for i = 0, 6 do
 				local unitTag = (i==0) and baseName or ( baseName .. i )
 				if UF.CustomFrames[unitTag] then
@@ -794,9 +797,18 @@ local function CreateCustomFrames()
                     elseif baseName == "reticleover" then 
                         size1 = UF.SV.TargetBarWidth
                         size2 = UF.SV.TargetBarHeight
+                    elseif baseName == "SmallGroup" then 
+                        size1 = UF.SV.GroupBarWidth
+                        size2 = UF.SV.GroupBarHeight
+                    --elseif baseName == "RaidGroup" then 
+                    --    size1 = UF.SV.RaidBarWidth
+                    --    size2 = UF.SV.RaidBarHeight
                     elseif baseName == "boss" then 
-                        size1 = UF.SV.PlayerBarWidth
-                        size2 = UF.SV.PlayerBarHeightHealth
+                        size1 = UF.SV.BossBarWidth
+                        size2 = UF.SV.BossBarHeight
+                    elseif baseName == "AvaPlayerTarget" then 
+                        size1 = UF.SV.AvaTargetBarWidth
+                        size2 = UF.SV.AvaTargetBarHeight
                     end
                     if size1 ~= nil and size2 ~= nil then
                         if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {} end
@@ -1076,6 +1088,22 @@ function UF.CustomFramesFormatLabels(menu)
             UF.ReloadValues(baseTag)
         end
     end
+
+    -- Format Boss Labels
+    for i = 1, 6 do
+        local unitTag = "boss" .. i
+        if UF.CustomFrames[unitTag] then
+            if UF.CustomFrames[unitTag][POWERTYPE_HEALTH] then
+                if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].label then
+                    UF.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = UF.SV.CustomFormatBoss
+                end
+            end
+        end
+        if menu and DoesUnitExist(unitTag) then
+            UF.ReloadValues(unitTag)
+        end
+    end
+    
 end
 
 -- Runs on the EVENT_PLAYER_ACTIVATED listener.
@@ -3155,18 +3183,18 @@ function UF.CustomFramesApplyLayoutBosses()
 
     local bosses = UF.CustomFrames.boss1.tlw
 
-    bosses:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.TargetBarHeight * 6 + 2 * 5)
+    bosses:SetDimensions( UF.SV.BossBarWidth, UF.SV.BossBarHeight * 6 + 2 * 5)
 
     for i = 1, 6 do
         local unitFrame = UF.CustomFrames["boss" .. i]
 
         unitFrame.control:ClearAnchors()
-        unitFrame.control:SetAnchor( TOPLEFT, bosses, TOPLEFT, 0, (UF.SV.TargetBarHeight+2)*(i-1) )
-        unitFrame.control:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.TargetBarHeight )
+        unitFrame.control:SetAnchor( TOPLEFT, bosses, TOPLEFT, 0, (UF.SV.BossBarHeight+2)*(i-1) )
+        unitFrame.control:SetDimensions( UF.SV.BossBarWidth, UF.SV.BossBarHeight )
 
-        unitFrame.name:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.TargetBarHeight-2 )
+        unitFrame.name:SetDimensions( UF.SV.BossBarWidth-50, UF.SV.BossBarHeight-2 )
 
-        unitFrame[POWERTYPE_HEALTH].label:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.TargetBarHeight-2 )
+        unitFrame[POWERTYPE_HEALTH].label:SetDimensions( UF.SV.BossBarWidth-50, UF.SV.BossBarHeight-2 )
     end
 
     bosses:SetHidden( false )
