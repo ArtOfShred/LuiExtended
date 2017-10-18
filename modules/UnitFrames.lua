@@ -97,8 +97,7 @@ UF.D = {
     PlayerEnableAltbarXP             = true,
     PlayerChampionColour             = true,
     PlayerEnableArmor                = true,
-    PlayerEnableWeaponPower          = false,
-    PlayerEnableSpellPower           = false,
+    PlayerEnablePower                = true,
     TargetEnableClass                = false,
     TargetEnableSkull                = true,
     CustomFramesGroup                = true,
@@ -338,8 +337,14 @@ local function CreateCustomFrames()
         local topInfo = UI.Control( player, {BOTTOM,TOP,0,-3}, nil, false )
         local botInfo = UI.Control( player, {TOP,BOTTOM,0,2}, nil, false )
         local phb = LUIE.UI.Backdrop( player, {TOP,TOP,0,0}, nil, nil, nil, false )
+        phb:SetDrawLayer(DL_BACKDROP)
+        phb:SetDrawLevel(1)
         local pmb = LUIE.UI.Backdrop( player, nil, nil, nil, nil, false )
+        pmb:SetDrawLayer(DL_BACKDROP)
+        pmb:SetDrawLevel(1)
         local psb = LUIE.UI.Backdrop( player, nil, nil, nil, nil, false )
+        psb:SetDrawLayer(DL_BACKDROP)
+        psb:SetDrawLevel(1)
         local alt = LUIE.UI.Backdrop( botInfo, {RIGHT,RIGHT}, nil, nil , {0,0,0,1}, false )
         local pli = UI.Texture( topInfo, nil, {20,20}, nil, nil, false )
 
@@ -415,6 +420,8 @@ local function CreateCustomFrames()
         local topInfo = UI.Control( target, {BOTTOM,TOP,0,-3}, nil, false )
         local botInfo = UI.Control( target, {TOP,BOTTOM,0,2}, nil, false )
         local thb = LUIE.UI.Backdrop(target, {TOP,TOP,0,0}, nil, nil, nil, false )
+        thb:SetDrawLayer(DL_BACKDROP)
+        thb:SetDrawLevel(1)
         local tli = UI.Texture( topInfo, nil, {20,20}, nil, nil, false )
         local ari = UI.Texture( botInfo, {RIGHT,RIGHT,-1,0}, {20,20}, nil, nil, false )
         
@@ -467,6 +474,8 @@ local function CreateCustomFrames()
         local topInfo = UI.Control( target, {BOTTOM,TOP,0,-3}, nil, false )
         local botInfo = UI.Control( target, {TOP,BOTTOM,0,2}, nil, false )
         local thb = LUIE.UI.Backdrop(target, {TOP,TOP,0,0}, nil, nil, nil, false )
+        thb:SetDrawLayer(DL_BACKDROP)
+        thb:SetDrawLevel(1)
         local cn = UI.Label( botInfo, {TOP,TOP}, nil, {1,3}, nil, "Class", false )
         
         local fragment = ZO_HUDFadeSceneFragment:New(targetTlw, 0, 0)
@@ -531,6 +540,8 @@ local function CreateCustomFrames()
             local control = UI.Control( group, nil, nil, false )
             local topInfo = UI.Control( control, {BOTTOMRIGHT,TOPRIGHT,0,-3}, nil, false )
             local ghb = LUIE.UI.Backdrop( control, {TOPLEFT,TOPLEFT}, nil, nil, nil, false )
+            ghb:SetDrawLayer(DL_BACKDROP)
+            ghb:SetDrawLevel(1)
             local gli = UI.Texture( topInfo, nil, {20,20}, nil, nil, false )
 
             UF.CustomFrames[unitTag] = {
@@ -576,6 +587,8 @@ local function CreateCustomFrames()
             local unitTag = "RaidGroup" .. i
             local control = UI.Control( raid, nil, nil, false )
             local rhb = LUIE.UI.Backdrop( control, "fill", nil, nil, nil, false )
+            rhb:SetDrawLayer(DL_BACKDROP)
+            rhb:SetDrawLevel(1)
 
             UF.CustomFrames[unitTag] = {
                 ["tlw"]         = raid,
@@ -615,6 +628,8 @@ local function CreateCustomFrames()
             local unitTag = "boss" .. i
             local control = UI.Control( bosses, nil, nil, false )
             local bhb = LUIE.UI.Backdrop( control, "fill", nil, nil, nil, false )
+            bhb:SetDrawLayer(DL_BACKDROP)
+            bhb:SetDrawLevel(1)
 
             UF.CustomFrames[unitTag] = {
                 ["unitTag"]     = unitTag,
@@ -751,7 +766,7 @@ local function CreateCustomFrames()
                     local backdrop = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
                     UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_ARMOR_RATING] = {
                         ["dec"] = CreateDecreasedArmorOverlay( backdrop, false ),
-                        ["single"] = UI.Texture( backdrop, {CENTER,CENTER,13,0}, {24,24}, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true ),
+                        ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,13,0}, {24,24}, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true ),
                     }
                 end
             end
@@ -759,41 +774,51 @@ local function CreateCustomFrames()
     end
 
     -- Create power stat change UI for player and target
-    if UF.SV.PlayerEnableWeaponPower then
-        for _, baseName in pairs( { "player", "reticleover", "boss" } ) do
-            for i = 0, 6 do
-                local unitTag = (i==0) and baseName or ( baseName .. i )
-                if UF.CustomFrames[unitTag] then
-                    -- Assume that unitTag DO have [POWERTYPE_HEALTH] field
-                    if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then
-                        UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {}
+    if UF.SV.PlayerEnablePower then
+		for _, baseName in pairs( { 'player', 'reticleover', 'boss' } ) do
+			for i = 0, 6 do
+				local unitTag = (i==0) and baseName or ( baseName .. i )
+				if UF.CustomFrames[unitTag] then
+					-- assume that unitTag DO have [POWERTYPE_HEALTH] field
+                    local size1
+                    local size2
+                    if baseName == "player" then 
+                        size1 = UF.SV.PlayerBarWidth
+                        size2 = UF.SV.PlayerBarHeightHealth
+                    elseif baseName == "reticleover" then 
+                        size1 = UF.SV.TargetBarWidth
+                        size2 = UF.SV.TargetBarHeight
+                    elseif baseName == "boss" then 
+                        size1 = UF.SV.PlayerBarWidth
+                        size2 = UF.SV.PlayerBarHeightHealth
                     end
-                    local backdrop = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
-                    UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_WEAPON_POWER] = {
-                        ["single"] = UI.Texture( backdrop, {CENTER,CENTER,-13,0}, {24,24}, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increaseweaponpower.dds", 2, true ),
-                    }
-                end
-            end
-        end
-    end
-
-    if UF.SV.PlayerEnableSpellPower then
-        for _, baseName in pairs( { "player", "reticleover", "boss" } ) do
-            for i = 0, 6 do
-                local unitTag = (i==0) and baseName or ( baseName .. i )
-                if UF.CustomFrames[unitTag] then
-                    -- Assume that unitTag DO have [POWERTYPE_HEALTH] field
-                    if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then
-                        UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {}
+                    if size1 ~= nil and size2 ~= nil then
+                        if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {} end
+                        local backdrop = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
+                        
+                        
+                        UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER] = {
+                        ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,0,0}, {size1 * 1.8, size2 * 3.8}, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true ),
+                        ["dec"] = UI.Texture( backdrop, {CENTER,CENTER,0,0}, {size1 * 2.2, size2 * 3}, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true ),
+                        }
+                        
+                        -- Create glow animation
+                        local control = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER].inc
+                        local animation, timeline = CreateSimpleAnimation(ANIMATION_TEXTURE, control)
+                        animation:SetImageData(4, 8)
+                        animation:SetFramerate(32)
+                        animation:SetDuration(1000)
+                        timeline:SetPlaybackType(ANIMATION_PLAYBACK_LOOP, LOOP_INDEFINITELY)
+        
+                        control.animation = animation
+                        control.timeline = timeline
+                        
+                        control.timeline:PlayFromStart()
                     end
-                    local backdrop = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
-                    UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_SPELL_POWER] = {
-                        ["single"] = UI.Texture( backdrop, {CENTER,CENTER,-36,0}, {24,24}, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasespellpower.dds", 2, true ),
-                    }
                 end
-            end
-        end
-    end
+			end
+		end
+	end
 
     -- Set proper anchors according to user preferences
     UF.CustomFramesApplyLayoutPlayer()
@@ -1182,8 +1207,6 @@ function UF.DefaultFramesCreateUnitGroupControls(unitTag)
                     [POWERTYPE_HEALTH] = {
                         label = UI.Label( parentBar, {TOP,BOTTOM}, nil, nil, nil, nil, false ),
                         colour = UF.SV.DefaultTextColour,
-                        regen = CreateRegenAnimation( parentBar, {LEFT,LEFT,0,0}, {width-height,height*1.3}, nil, false ),
-                        degen = CreateRegenAnimation( parentBar, {LEFT,LEFT,0,0}, {width-height,height*1.3}, nil, true ),
                         shield = UI.StatusBar( parentBar, {BOTTOM,BOTTOM,0,0}, {width-height,height}, {1,0.75,0,0.5}, true ),
                     },
                     ["classIcon"]   = UI.Texture( parentName, {RIGHT,LEFT,-4,2},  {24,24}, nil, nil, true ),
@@ -1411,8 +1434,7 @@ function UF.ReloadValues( unitTag )
 
     -- Get initial stats
     UF.UpdateStat(unitTag, STAT_ARMOR_RATING, ATTRIBUTE_HEALTH, POWERTYPE_HEALTH)
-    UF.UpdateStat(unitTag, STAT_WEAPON_POWER,        ATTRIBUTE_HEALTH, POWERTYPE_HEALTH)
-    UF.UpdateStat(unitTag, STAT_SPELL_POWER, ATTRIBUTE_HEALTH, POWERTYPE_HEALTH)
+    UF.UpdateStat(unitTag, STAT_POWER, ATTRIBUTE_HEALTH, POWERTYPE_HEALTH)
 
     if unitTag == "player" then
         g_statFull[POWERTYPE_HEALTH] = ( g_savedHealth.player[1] == g_savedHealth.player[3] )
@@ -1766,6 +1788,13 @@ end
 -- While this applicable only to custom frames, we do not need to split this function into 2 different ones
 -- Called from EVENT_UNIT_ATTRIBUTE_VISUAL_* listeners.
 function UF.UpdateStat(unitTag, statType, attributeType, powerType )
+    
+    d("UpdateStat called")
+    d(unitTag)
+    d(statType)
+    d(attributeType)
+    d(powerType)
+
     -- Build a list of UI controls to hold this statType on different UnitFrames lists
     local statControls = {}
 
@@ -1789,10 +1818,6 @@ function UF.UpdateStat(unitTag, statType, attributeType, powerType )
             end
             if control.inc then
                 control.inc:SetHidden( value <= 0 )
-            end
-            if control.single then
-                control.single:SetHidden( value == 0 )
-                control.single:SetColor( unpack( value < 0 and {1,0,0,0.7} or {0,1,0,0.7} ) )
             end
         end
     end
@@ -1919,9 +1944,6 @@ function UF.OnDeath(eventCode, unitTag, isDead)
                 end
                 if statControls.inc then
                     statControls.inc:SetHidden( true )
-                end
-                if statControls.single then
-                    statControls.single:SetHidden( true )
                 end
             end
         end

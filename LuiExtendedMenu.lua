@@ -5080,30 +5080,18 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
-    --[[Display Weapon Power stat change
+    --Display Power stat change
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Display Weapon Power stat change",
-        tooltip = "Display additional icon on unit health bar when unit has its weapon power affected.",
-        getFunc = function() return LUIE.UnitFrames.SV.PlayerEnableWeaponPower end,
-        setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableWeaponPower = value end,
+        name = "Display Power stat change",
+        tooltip = "Display additional icon on unit health bar when unit has its power affected.",
+        getFunc = function() return LUIE.UnitFrames.SV.PlayerEnablePower end,
+        setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnablePower = value end,
         width = "full",
-        default = LUIE.UnitFrames.D.PlayerEnableWeaponPower,
+        default = LUIE.UnitFrames.D.PlayerEnablePower,
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
-    }]]--
-    --[[Display Spell Power stat change
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = "Display Spell Power stat change",
-        tooltip = "Display additional icon on unit health bar when unit has its spell power affected.",
-        getFunc = function() return LUIE.UnitFrames.SV.PlayerEnableSpellPower end,
-        setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableSpellPower = value end,
-        width = "full",
-        default = LUIE.UnitFrames.D.PlayerEnableSpellPower,
-        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
-    }]]--
+    }
     -- Out-of-Combat frame opacity
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
