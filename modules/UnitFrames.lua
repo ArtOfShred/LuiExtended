@@ -67,7 +67,6 @@ UF.D = {
     CustomFontBars                   = 16,
     CustomFontOther                  = 20,
     CustomTexture                    = "Minimalistic",
-    CustomEnableRegen                = false,
     CustomOocAlpha                   = 85,
     CustomIncAlpha                   = 85,
     CustomOocAlphaPower              = true,
@@ -104,6 +103,17 @@ UF.D = {
     PlayerChampionColour             = true,
     PlayerEnableArmor                = true,
     PlayerEnablePower                = true,
+    PlayerEnableRegen                = true,
+    GroupEnableArmor                 = false,
+    GroupEnablePower                 = false,
+    GroupEnableRegen                 = true,
+    RaidEnableArmor                  = false,
+    RaidEnablePower                  = false,
+    RaidEnableRegen                  = false,
+    BossEnableArmor                  = false,
+    BossEnablePower                  = false,
+    BossEnableRegen                  = false,
+    
     TargetEnableClass                = false,
     TargetEnableRank                 = true,
     TargetEnableTitle                = true,
@@ -722,39 +732,85 @@ local function CreateCustomFrames()
 
     -- Create DOT / HOT animations for all attributes bars
     -- We will use this ugly loop over too-many controls, but it will keep things clean and uni-style
-    if UF.SV.CustomEnableRegen then
-        for _, baseName in pairs( { "player", "reticleover", "SmallGroup", "RaidGroup", "boss", "AvaPlayerTarget" } ) do
-            for i = 0, 24 do
-                local unitTag = (i==0) and baseName or ( baseName .. i )
-                if UF.CustomFrames[unitTag] then
-                    for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
-                        if UF.CustomFrames[unitTag][powerType] then
-                            local backdrop = UF.CustomFrames[unitTag][powerType].backdrop
-                            local size1
-                            local size2
-                            if baseName == "player" then 
-                                size1 = UF.SV.PlayerBarWidth
-                                size2 = UF.SV.PlayerBarHeightHealth
-                            elseif baseName == "reticleover" then 
-                                size1 = UF.SV.TargetBarWidth
-                                size2 = UF.SV.TargetBarHeight
-                            elseif baseName == "SmallGroup" then 
-                                size1 = UF.SV.GroupBarWidth
-                                size2 = UF.SV.GroupBarHeight
-                            elseif baseName == "RaidGroup" then 
-                                size1 = UF.SV.RaidBarWidth
-                                size2 = UF.SV.RaidBarHeight
-                            elseif baseName == "boss" then 
-                                size1 = UF.SV.BossBarWidth
-                                size2 = UF.SV.BossBarHeight
-                            elseif baseName == "AvaPlayerTarget" then 
-                                size1 = UF.SV.AvaTargetBarWidth
-                                size2 = UF.SV.AvaTargetBarHeight
-                            end
-                            if size1 ~= nil and size2 ~= nil then
-                                UF.CustomFrames[unitTag][powerType].regen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, false )
-                                UF.CustomFrames[unitTag][powerType].degen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, true )
-                            end
+    if UF.SV.PlayerEnableRegen then
+        for _, baseName in pairs( { 'player', 'reticleover', 'AvaPlayerTarget' } ) do
+            local unitTag = baseName
+            if UF.CustomFrames[unitTag] then
+                for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
+                    if UF.CustomFrames[unitTag][powerType] then
+                        local backdrop = UF.CustomFrames[unitTag][powerType].backdrop
+                        local size1
+                        local size2
+                        if baseName == "player" then 
+                            size1 = UF.SV.PlayerBarWidth
+                            size2 = UF.SV.PlayerBarHeightHealth
+                        elseif baseName == "reticleover" then 
+                            size1 = UF.SV.TargetBarWidth
+                            size2 = UF.SV.TargetBarHeight
+                        elseif baseName == "AvaPlayerTarget" then 
+                            size1 = UF.SV.AvaTargetBarWidth
+                            size2 = UF.SV.AvaTargetBarHeight
+                        end
+                        if size1 ~= nil and size2 ~= nil then
+                            UF.CustomFrames[unitTag][powerType].regen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, false )
+                            UF.CustomFrames[unitTag][powerType].degen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, true )
+                        end
+                    end
+                end
+            end
+        end
+    end
+    
+    if UF.SV.GroupEnableRegen then  
+        for i = 1, 4 do
+            local unitTag = 'SmallGroup' .. i
+            if UF.CustomFrames[unitTag] then
+                for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
+                    if UF.CustomFrames[unitTag][powerType] then
+                        local backdrop = UF.CustomFrames[unitTag][powerType].backdrop
+                        local size1 = UF.SV.GroupBarWidth
+                        local size2 = UF.SV.GroupBarHeight
+                        if size1 ~= nil and size2 ~= nil then
+                            UF.CustomFrames[unitTag][powerType].regen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .4) }, 0.55, false )
+                            UF.CustomFrames[unitTag][powerType].degen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .4) }, 0.55, true )
+                        end
+                    end
+                end
+            end
+        end
+    end
+            
+    if UF.SV.RaidEnableRegen then  
+        for i = 1, 24 do
+            local unitTag = 'RaidGroup' .. i
+            if UF.CustomFrames[unitTag] then
+                for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
+                    if UF.CustomFrames[unitTag][powerType] then
+                        local backdrop = UF.CustomFrames[unitTag][powerType].backdrop
+                        local size1 = UF.SV.RaidBarWidth
+                        local size2 = UF.SV.RaidBarHeight
+                        if size1 ~= nil and size2 ~= nil then
+                            UF.CustomFrames[unitTag][powerType].regen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, false )
+                            UF.CustomFrames[unitTag][powerType].degen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, true )
+                        end
+                    end
+                end
+            end
+        end
+    end
+            
+    if UF.SV.BossEnableRegen then
+        for i = 0, 6 do
+            local unitTag = 'boss' .. i
+            if UF.CustomFrames[unitTag] then
+                for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
+                    if UF.CustomFrames[unitTag][powerType] then
+                        local backdrop = UF.CustomFrames[unitTag][powerType].backdrop
+                        local size1 = UF.SV.BossBarWidth
+                        local size2 = UF.SV.BossBarHeight
+                        if size1 ~= nil and size2 ~= nil then
+                            UF.CustomFrames[unitTag][powerType].regen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, false )
+                            UF.CustomFrames[unitTag][powerType].degen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, true )
                         end
                     end
                 end
@@ -764,79 +820,189 @@ local function CreateCustomFrames()
 
     -- Create armor stat change UI for player and target
     if UF.SV.PlayerEnableArmor then
-        for _, baseName in pairs( { 'player', 'reticleover', 'boss', 'AvaPlayerTarget', 'SmallGroup' } ) do
-            for i = 0, 6 do
-                local unitTag = (i==0) and baseName or ( baseName .. i )
-                if UF.CustomFrames[unitTag] then
-                    -- Assume that unitTag DO have [POWERTYPE_HEALTH] field
-                    if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then
-                        UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {}
-                    end
-                    local backdrop = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
-                    UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_ARMOR_RATING] = {
-                        ["dec"] = CreateDecreasedArmorOverlay( backdrop, false ),
-                        ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,13,0}, {24,24}, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true ),
-                    }
+        for _, baseName in pairs( { 'player', 'reticleover', 'AvaPlayerTarget' } ) do
+            local unitTag = baseName
+            if UF.CustomFrames[unitTag] then
+                -- Assume that unitTag DO have [POWERTYPE_HEALTH] field
+                if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then
+                    UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {}
                 end
+                local backdrop = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
+                UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_ARMOR_RATING] = {
+                    ["dec"] = CreateDecreasedArmorOverlay( backdrop, false ),
+                    ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,13,0}, {24,24}, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true ),
+                }
+            end
+        end
+    end
+    
+    if UF.SV.GroupEnableArmor then  
+        for i = 1, 4 do
+            local unitTag = 'SmallGroup' .. i
+            if UF.CustomFrames[unitTag] then
+                -- Assume that unitTag DO have [POWERTYPE_HEALTH] field
+                if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then
+                    UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {}
+                end
+                local backdrop = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
+                UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_ARMOR_RATING] = {
+                    ["dec"] = CreateDecreasedArmorOverlay( backdrop, false ),
+                    ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,13,0}, {24,24}, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true ),
+                }
+            end
+        end
+    end
+    
+    if UF.SV.RaidEnableArmor then  
+        for i = 1, 24 do
+            local unitTag = 'RaidGroup' .. i
+            if UF.CustomFrames[unitTag] then
+                -- Assume that unitTag DO have [POWERTYPE_HEALTH] field
+                if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then
+                    UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {}
+                end
+                local backdrop = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
+                UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_ARMOR_RATING] = {
+                    ["dec"] = CreateDecreasedArmorOverlay( backdrop, false ),
+                    ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,13,0}, {24,24}, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true ),
+                }
+            end
+        end
+    end
+    
+    if UF.SV.BossEnableArmor then
+        for i = 0, 6 do
+            local unitTag = 'boss' .. i
+            if UF.CustomFrames[unitTag] then
+                -- Assume that unitTag DO have [POWERTYPE_HEALTH] field
+                if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then
+                    UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {}
+                end
+                local backdrop = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
+                UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_ARMOR_RATING] = {
+                    ["dec"] = CreateDecreasedArmorOverlay( backdrop, false ),
+                    ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,13,0}, {24,24}, "/esoui/art/icons/alchemy/crafting_alchemy_trait_increasearmor.dds", 2, true ),
+                }
             end
         end
     end
 
     -- Create power stat change UI for player and target
     if UF.SV.PlayerEnablePower then
-		for _, baseName in pairs( { 'player', 'reticleover', 'boss', 'AvaPlayerTarget', 'SmallGroup' } ) do
-			for i = 0, 6 do
-				local unitTag = (i==0) and baseName or ( baseName .. i )
-				if UF.CustomFrames[unitTag] then
-					-- assume that unitTag DO have [POWERTYPE_HEALTH] field
-                    local size1
-                    local size2
-                    if baseName == "player" then 
-                        size1 = UF.SV.PlayerBarWidth
-                        size2 = UF.SV.PlayerBarHeightHealth
-                    elseif baseName == "reticleover" then 
-                        size1 = UF.SV.TargetBarWidth
-                        size2 = UF.SV.TargetBarHeight
-                    elseif baseName == "SmallGroup" then 
-                        size1 = UF.SV.GroupBarWidth
-                        size2 = UF.SV.GroupBarHeight
-                    --elseif baseName == "RaidGroup" then 
-                    --    size1 = UF.SV.RaidBarWidth
-                    --    size2 = UF.SV.RaidBarHeight
-                    elseif baseName == "boss" then 
-                        size1 = UF.SV.BossBarWidth
-                        size2 = UF.SV.BossBarHeight
-                    elseif baseName == "AvaPlayerTarget" then 
-                        size1 = UF.SV.AvaTargetBarWidth
-                        size2 = UF.SV.AvaTargetBarHeight
-                    end
-                    if size1 ~= nil and size2 ~= nil then
-                        if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {} end
-                        local backdrop = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
-                        
-                        
-                        UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER] = {
+        for _, baseName in pairs( { 'player', 'reticleover', 'AvaPlayerTarget' } ) do
+            local unitTag = baseName
+            if UF.CustomFrames[unitTag] then
+                if baseName == "player" then 
+                    size1 = UF.SV.PlayerBarWidth
+                    size2 = UF.SV.PlayerBarHeightHealth
+                elseif baseName == "reticleover" then 
+                    size1 = UF.SV.TargetBarWidth
+                    size2 = UF.SV.TargetBarHeight
+                elseif baseName == "AvaPlayerTarget" then 
+                    size1 = UF.SV.AvaTargetBarWidth
+                    size2 = UF.SV.AvaTargetBarHeight
+                end
+                if size1 ~= nil and size2 ~= nil then
+                    if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {} end
+                    local backdrop = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
+                    UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER] = {
                         ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,4,0}, {size1 * 1.8, size2 * 4.0}, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true ),
                         ["dec"] = UI.Texture( backdrop, {CENTER,CENTER,0,0}, {size1 * 2.2, size2 * 3}, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true ),
-                        }
-                        
-                        -- Create glow animation
-                        local control = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER].inc
-                        local animation, timeline = CreateSimpleAnimation(ANIMATION_TEXTURE, control)
-                        animation:SetImageData(4, 8)
-                        animation:SetFramerate(32)
-                        animation:SetDuration(1000)
-                        timeline:SetPlaybackType(ANIMATION_PLAYBACK_LOOP, LOOP_INDEFINITELY)
-        
-                        control.animation = animation
-                        control.timeline = timeline
-                        
-                        control.timeline:PlayFromStart()
+                    }
+                end
+            end
+        end
+    end
+    
+    if UF.SV.GroupEnablePower then
+        for i = 1, 4 do
+            local unitTag = 'SmallGroup' .. i
+            if UF.CustomFrames[unitTag] then
+                -- assume that unitTag DO have [POWERTYPE_HEALTH] field
+                local size1 = UF.SV.GroupBarWidth
+                local size2 = UF.SV.GroupBarHeight
+                --elseif baseName == "RaidGroup" then 
+                --    size1 = UF.SV.RaidBarWidth
+                --    size2 = UF.SV.RaidBarHeight
+                if size1 ~= nil and size2 ~= nil then
+                    if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {} end
+                    local backdrop = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
+                    UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER] = {
+                        ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,4,0}, {size1 * 1.8, size2 * 4.0}, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true ),
+                        ["dec"] = UI.Texture( backdrop, {CENTER,CENTER,0,0}, {size1 * 2.2, size2 * 3}, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true ),
+                    }
+                end
+            end
+        end
+    end
+    
+    if UF.SV.RaidEnablePower then
+        for i = 1, 24 do
+            local unitTag = 'RaidGroup' .. i
+            if UF.CustomFrames[unitTag] then
+                -- assume that unitTag DO have [POWERTYPE_HEALTH] field
+                local size1 = UF.SV.RaidBarWidth
+                local size2 = UF.SV.RaidBarHeight
+                if size1 ~= nil and size2 ~= nil then
+                    if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {} end
+                    local backdrop = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
+                    UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER] = {
+                        ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,4,0}, {size1 * 1.8, size2 * 4.0}, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true ),
+                        ["dec"] = UI.Texture( backdrop, {CENTER,CENTER,0,0}, {size1 * 2.2, size2 * 3}, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true ),
+                    }
+                end
+            end
+        end
+    end
+    
+    if UF.SV.BossEnablePower then
+        for i = 1, 6 do
+            local unitTag = 'boss' .. i
+            if UF.CustomFrames[unitTag] then
+                -- assume that unitTag DO have [POWERTYPE_HEALTH] field
+                local size1 = UF.SV.BossBarWidth
+                local size2 = UF.SV.BossBarHeight
+                if size1 ~= nil and size2 ~= nil then
+                    if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat == nil then UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat = {} end
+                    local backdrop = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].backdrop
+                    UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER] = {
+                        ["inc"] = UI.Texture( backdrop, {CENTER,CENTER,4,0}, {size1 * 1.8, size2 * 4.0}, "/esoui/art/unitattributevisualizer/increasedpower_animatedhalo_32fr.dds", 0, true ),
+                        ["dec"] = UI.Texture( backdrop, {CENTER,CENTER,0,0}, {size1 * 2.2, size2 * 3}, "/esoui/art/unitattributevisualizer/attributebar_dynamic_decreasedpower_halo.dds", 0, true ),
+                    }
+                end
+            end
+        end
+    end
+    
+    -- Animate Power Glow for all frames that have it displayed
+    for _, baseName in pairs( { 'player', 'reticleover', 'AvaPlayerTarget', 'boss', 'SmallGroup', 'RaidGroup' } ) do
+        for i = 0, 24 do
+            local unitTag = (i==0) and baseName or ( baseName .. i )
+            if UF.CustomFrames[unitTag] then
+                if UF.CustomFrames[unitTag][POWERTYPE_HEALTH] then
+                    if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat then
+                        if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER] then
+                            if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER].inc then
+                            
+                                -- Create glow animation
+                                local control = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER].inc
+                                local animation, timeline = CreateSimpleAnimation(ANIMATION_TEXTURE, control)
+                                animation:SetImageData(4, 8)
+                                animation:SetFramerate(32)
+                                animation:SetDuration(1000)
+                                timeline:SetPlaybackType(ANIMATION_PLAYBACK_LOOP, LOOP_INDEFINITELY)
+                
+                                control.animation = animation
+                                control.timeline = timeline
+                                
+                                control.timeline:PlayFromStart()
+                            end
+                        end
                     end
                 end
-			end
-		end
-	end
+            end
+        end
+    end
 
     -- Set proper anchors according to user preferences
     UF.CustomFramesApplyLayoutPlayer()

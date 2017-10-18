@@ -4739,18 +4739,6 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.CustomTexture,
     }
-    -- Custom Unit Frames Display HoT / DoT Animations
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMES_HOTDOT),
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_HOTDOT_TP),
-        getFunc = function() return LUIE.UnitFrames.SV.CustomEnableRegen end,
-        setFunc = function(value) LUIE.UnitFrames.SV.CustomEnableRegen = value end,
-        width = "full",
-        default = LUIE.UnitFrames.D.CustomEnableRegen,
-        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-    }
     -- Custom Unit Frames Health Bar Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
@@ -5093,7 +5081,7 @@ function LUIE_CreateSettings()
     -- Display Armor stat change
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ARMORCHANGE),
+        name = "Player/Target - Display Armor Stat Change",
         tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ARMORCHANGE_TP),
         getFunc = function() return LUIE.UnitFrames.SV.PlayerEnableArmor end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableArmor = value end,
@@ -5105,14 +5093,26 @@ function LUIE_CreateSettings()
     --Display Power stat change
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Display Power stat change",
-        tooltip = "Display additional icon on unit health bar when unit has its power affected.",
+        name = "Player/Target - Display Power Stat Change",
+        tooltip = "Display glow border when unit has its power changed.",
         getFunc = function() return LUIE.UnitFrames.SV.PlayerEnablePower end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnablePower = value end,
         width = "full",
         default = LUIE.UnitFrames.D.PlayerEnablePower,
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
+    }
+    -- Custom Unit Frames Display HoT / DoT Animations
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = "Player / Target - Display HoT/DoT Regen Arrows",
+        tooltip = "TODO",
+        getFunc = function() return LUIE.UnitFrames.SV.PlayerEnableRegen end,
+        setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableRegen = value end,
+        width = "full",
+        default = LUIE.UnitFrames.D.PlayerEnableRegen,
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     -- Out-of-Combat frame opacity
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -5287,7 +5287,7 @@ function LUIE_CreateSettings()
         getFunc = function() return LUIE.UnitFrames.SV.CustomFormatOneGroup end,
         setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatOneGroup = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
         width = "full",
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
         default = LUIE.UnitFrames.D.CustomFormatOneGroup,
     }
     -- Custom Unit Frames format right label
@@ -5299,7 +5299,7 @@ function LUIE_CreateSettings()
         getFunc = function() return LUIE.UnitFrames.SV.CustomFormatTwoGroup end,
         setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatTwoGroup = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
         width = "full",
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
         default = LUIE.UnitFrames.D.CustomFormatTwoGroup,
     }
     
@@ -5323,7 +5323,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.RoleIconSmallGroup = value LUIE.UnitFrames.CustomFramesApplyLayoutGroup() end,
         width = "full",
         default = LUIE.UnitFrames.D.RoleIconSmallGroup,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
     }
     -- Custom Unit Frames Group Color Player Role
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -5334,8 +5334,46 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.ColorRoleGroup = value LUIE.UnitFrames.CustomFramesApplyColours(true) end,
         width = "full",
         default = LUIE.UnitFrames.D.ColorRoleGroup,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
     }
+    
+    -- Display Armor stat change
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = "Group - Display Armor Stat Change",
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ARMORCHANGE_TP),
+        getFunc = function() return LUIE.UnitFrames.SV.GroupEnableArmor end,
+        setFunc = function(value) LUIE.UnitFrames.SV.GroupEnableArmor = value end,
+        width = "full",
+        default = LUIE.UnitFrames.D.GroupEnableArmor,
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
+    }
+    --Display Power stat change
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = "Group - Display Power Stat Change",
+        tooltip = "Display glow border when unit has its power changed.",
+        getFunc = function() return LUIE.UnitFrames.SV.GroupEnablePower end,
+        setFunc = function(value) LUIE.UnitFrames.SV.GroupEnablePower = value end,
+        width = "full",
+        default = LUIE.UnitFrames.D.GroupEnablePower,
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
+    }
+    -- Display Regen Arrows
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = "Group - Display HoT/DoT Regen Arrows",
+        tooltip = "TODO",
+        getFunc = function() return LUIE.UnitFrames.SV.GroupEnableRegen end,
+        setFunc = function(value) LUIE.UnitFrames.SV.GroupEnableRegen = value end,
+        width = "full",
+        default = LUIE.UnitFrames.D.GroupEnableRegen,
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
+    }
+    
     -- Custom Unit Frames (Raid)
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "header",
@@ -5396,7 +5434,7 @@ function LUIE_CreateSettings()
         getFunc = function() return LUIE.UnitFrames.SV.CustomFormatRaid end,
         setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatRaid = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
         width = "full",
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
         default = LUIE.UnitFrames.D.CustomFormatRaid,
     }
     
@@ -5458,7 +5496,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.RoleIconRaid  = value LUIE.UnitFrames.CustomFramesApplyLayoutRaid() end,
         width = "full",
         default = LUIE.UnitFrames.D.RoleIconRaid,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
     }
     -- Custom Unit Frames Raid Color Player Role
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -5469,8 +5507,47 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.ColorRoleRaid = value LUIE.UnitFrames.CustomFramesApplyColours(true) end,
         width = "full",
         default = LUIE.UnitFrames.D.ColorRoleRaid,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) ) end,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
     }
+    
+    -- Display Armor stat change
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = "Raid - Display Armor Stat Change",
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ARMORCHANGE_TP),
+        getFunc = function() return LUIE.UnitFrames.SV.RaidEnableArmor end,
+        setFunc = function(value) LUIE.UnitFrames.SV.RaidEnableArmor = value end,
+        width = "full",
+        default = LUIE.UnitFrames.D.RaidEnableArmor,
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
+    }
+    -- Display Power stat change
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = "Raid - Display Power Stat Change",
+        tooltip = "Display glow border when unit has its power changed.",
+        getFunc = function() return LUIE.UnitFrames.SV.RaidEnablePower end,
+        setFunc = function(value) LUIE.UnitFrames.SV.RaidEnablePower = value end,
+        width = "full",
+        default = LUIE.UnitFrames.D.RaidEnablePower,
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
+    }
+    -- Display Regen Arrows
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = "Raid - Display HoT/DoT Regen Arrows",
+        tooltip = "TODO",
+        getFunc = function() return LUIE.UnitFrames.SV.RaidEnableRegen end,
+        setFunc = function(value) LUIE.UnitFrames.SV.RaidEnableRegen = value end,
+        width = "full",
+        default = LUIE.UnitFrames.D.RaidEnableRegen,
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
+    }
+    
+    
     -- Custom Unit Frames (Boss)
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "header",
@@ -5498,7 +5575,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.BossBarWidth = value LUIE.UnitFrames.CustomFramesApplyLayoutBosses() end,
         width = "full",
         default = LUIE.UnitFrames.D.BossBarWidth,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesBosses ) end,
     }
     -- Boss Bars Height
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -5509,7 +5586,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.BossBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutBosses() end,
         width = "full",
         default = LUIE.UnitFrames.D.BossBarHeight,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesBosses ) end,
     }
     -- Boss HP Bar Format
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -5520,8 +5597,45 @@ function LUIE_CreateSettings()
         getFunc = function() return LUIE.UnitFrames.SV.CustomFormatBoss end,
         setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatBoss = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
         width = "full",
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesBosses ) end,
         default = LUIE.UnitFrames.D.CustomFormatBoss,
+    }
+    
+    -- Display Armor stat change
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = "Boss - Display Armor Stat Change",
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ARMORCHANGE_TP),
+        getFunc = function() return LUIE.UnitFrames.SV.BossEnableArmor end,
+        setFunc = function(value) LUIE.UnitFrames.SV.BossEnableArmor = value end,
+        width = "full",
+        default = LUIE.UnitFrames.D.BossEnableArmor,
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesBosses ) end,
+    }
+    -- Display Power stat change
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = "Boss - Display Power Stat Change",
+        tooltip = "Display glow border when unit has its power changed.",
+        getFunc = function() return LUIE.UnitFrames.SV.BossEnablePower end,
+        setFunc = function(value) LUIE.UnitFrames.SV.BossEnablePower = value end,
+        width = "full",
+        default = LUIE.UnitFrames.D.BossEnablePower,
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesBosses ) end,
+    }
+    -- Display Regen Arrows
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = "Boss - Display HoT/DoT Regen Arrows",
+        tooltip = "TODO",
+        getFunc = function() return LUIE.UnitFrames.SV.BossEnableRegen end,
+        setFunc = function(value) LUIE.UnitFrames.SV.BossEnableRegen = value end,
+        width = "full",
+        default = LUIE.UnitFrames.D.BossEnableRegen,
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesBosses ) end,
     }
     
     -- Custom Unit Frames (PvP Target Frame)
