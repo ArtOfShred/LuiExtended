@@ -3397,7 +3397,7 @@ function UF.CustomFramesApplyInCombat()
         UF.CustomFrames.player.control:SetAlpha( idle and oocAlphaPlayer or incAlphaPlayer )
     end
     if UF.CustomFrames.AvaPlayerTarget then
-        UF.CustomFrames.AvaPlayerTarget.control:SetAlpha( idle and oocAlphaPlayer or incAlphaPlayer )
+        UF.CustomFrames.AvaPlayerTarget.control:SetAlpha( idle and oocAlphaTarget or incAlphaTarget )
     end
     if UF.CustomFrames.reticleover then
         UF.CustomFrames.reticleover.control:SetAlpha( idle and oocAlphaTarget or incAlphaTarget )
