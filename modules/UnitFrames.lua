@@ -67,6 +67,8 @@ UF.D = {
     CustomFontBars                   = 16,
     CustomFontOther                  = 20,
     CustomTexture                    = "Minimalistic",
+    HideBuffsPlayerOoc               = false,
+    HideBuffsTargetOoc               = false,
     PlayerOocAlpha                   = 85,
     PlayerIncAlpha                   = 85,
     TargetOocAlpha                   = 85,
@@ -3395,12 +3397,26 @@ function UF.CustomFramesApplyInCombat()
     -- Apply to all frames
     if UF.CustomFrames.player then
         UF.CustomFrames.player.control:SetAlpha( idle and oocAlphaPlayer or incAlphaPlayer )
+        if UF.SV.HideBuffsPlayerOoc then
+            UF.CustomFrames.player.buffs:SetHidden ( idle and true or false )
+            UF.CustomFrames.player.debuffs:SetHidden ( idle and true or false )
+        else
+            UF.CustomFrames.player.buffs:SetHidden ( false )
+            UF.CustomFrames.player.debuffs:SetHidden ( false )
+        end
     end
     if UF.CustomFrames.AvaPlayerTarget then
         UF.CustomFrames.AvaPlayerTarget.control:SetAlpha( idle and oocAlphaTarget or incAlphaTarget )
     end
     if UF.CustomFrames.reticleover then
         UF.CustomFrames.reticleover.control:SetAlpha( idle and oocAlphaTarget or incAlphaTarget )
+        if UF.SV.HideBuffsTargetOoc then
+            UF.CustomFrames.reticleover.buffs:SetHidden ( idle and true or false )
+            UF.CustomFrames.reticleover.debuffs:SetHidden ( idle and true or false )
+        else
+            UF.CustomFrames.reticleover.buffs:SetHidden ( false )
+            UF.CustomFrames.reticleover.debuffs:SetHidden ( false )
+        end
     end
 
     for i = 1, 6 do

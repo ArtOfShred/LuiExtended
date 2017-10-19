@@ -5172,16 +5172,25 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.CustomOocAlphaPower,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
-    -- Apply same opacity to Target frame
+    -- HIDE BUFFS OOC - PLAYER
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGETOPACITY),
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGETOPACITY_TP),
-        getFunc = function() return LUIE.UnitFrames.SV.CustomOocAlphaTarget end,
-        setFunc = function(value) LUIE.UnitFrames.SV.CustomOocAlphaTarget = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
+        name = "HIDE ANCHORED BUFFS (PLAYER) OUT OF COMBAT",
+        getFunc = function() return LUIE.UnitFrames.SV.HideBuffsPlayerOoc end,
+        setFunc = function(value) LUIE.UnitFrames.SV.HideBuffsPlayerOoc = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
         width = "full",
-        default = LUIE.UnitFrames.D.CustomOocAlphaTarget,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesTarget ) end,
+        default = LUIE.UnitFrames.D.HideBuffsPlayerOoc,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
+    }
+    -- HIDE BUFFS OOC - TARGET
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = "HIDE ANCHORED BUFFS (TARGET) OUT OF COMBAT",
+        getFunc = function() return LUIE.UnitFrames.SV.HideBuffsTargetOoc end,
+        setFunc = function(value) LUIE.UnitFrames.SV.HideBuffsTargetOoc = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.HideBuffsTargetOoc,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
     -- Target Bars Width
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
