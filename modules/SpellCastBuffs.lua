@@ -1488,11 +1488,9 @@ function SCB.MountStatus(eventCode, mounted)
     g_effectsList.player1["Mount"] = nil
 
     if mounted and not SCB.SV.IgnoreMount then
-        local mountType = GetMountSkinId()
-        --d("Skin ID = " .. mountType)
 
-        strMounted = E.MountIcons[mountType] ~= nil and E.MountIcons[mountType].name or GetString(SI_LUIE_SCB_MOUNTED)
-        iconMounted = E.MountIcons[mountType] ~= nil and E.MountIcons[mountType].icon or "LuiExtended/media/icons/mounts/mount_palomino_horse.dds"
+        strMounted = GetString(SI_LUIE_SCB_MOUNTED)
+        iconMounted = "LuiExtended/media/icons/abilities/ability_innate_mounted.dds"
         g_effectsList.player1["Mount"] =
             {
                 target="player", type=1,
@@ -1514,10 +1512,9 @@ function SCB.CollectibleBuff()
     -- PETS
     if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0 and not SCB.SV.IgnorePet and not IsPlayerInAvAWorld() then
         local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
-        local CollectibleName = GetCollectibleName(Collectible)
 
-        local strPet = CollectibleName
-        local iconPet = E.PetIcons[CollectibleName] ~= nil and E.PetIcons[CollectibleName] or "LuiExtended/media/icons/pets/pet_pet_bravil_retriever.dds"
+        local strPet = GetString(SI_LUIE_SCB_PET)
+        local iconPet = "LuiExtended/media/icons/abilities/ability_innate_pet.dds"
 
             g_effectsList.player1["PetType"] =
                 {
@@ -1532,7 +1529,7 @@ function SCB.CollectibleBuff()
     end
 
     -- ASSISTANTS
-    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 and not SCB.SV.IgnoreAssistant then
+    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 and not SCB.SV.IgnoreAssistant and not IsPlayerInAvAWorld() then
         local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
         local CollectibleName = GetCollectibleName(Collectible)
 
@@ -1549,103 +1546,6 @@ function SCB.CollectibleBuff()
                 }
     else
         g_effectsList.player1["AssistantType"] = nil
-    end
-
-    -- Check here to see if we have a disguise - hides polymorph or costume.
-    local DisguiseOn = GetItemId(0, 10) or 0
-    SCB.InitializeDisguise() -- Reload disguise setup
-    if DisguiseOn ~= 0 and DisguiseOn ~= 55262 then
-        g_effectsList.player1["PolymorphType"] = nil
-        g_effectsList.player1["CostumeType"] = nil
-        g_effectsList.player1["HatType"] = nil
-        g_effectsList.player1["SkinType"] = nil
-    end
-
-    -- POLYMORPH
-    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) > 0 and not SCB.SV.IgnorePolymorph then
-        local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH)
-        local CollectibleName = GetCollectibleName(Collectible)
-
-        local strPolymorph = CollectibleName
-        local iconPolymorph = E.PolymorphIcons[CollectibleName] ~= nil and E.PolymorphIcons[CollectibleName] or "LuiExtended/media/icons/costumes/costume_generic.dds"
-            if DisguiseOn == 0 or DisguiseOn == 55262 then
-                g_effectsList.player1["PolymorphType"] =
-                    {
-                            target="player", type=1,
-                            name=strPolymorph, icon=iconPolymorph,
-                            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                            forced = "long",
-                            restart=true, iconNum=0
-                    }
-            end
-            g_effectsList.player1["CostumeType"] = nil
-            g_effectsList.player1["HatType"] = nil
-            g_effectsList.player1["SkinType"] = nil
-    else
-        g_effectsList.player1["PolymorphType"] = nil
-    end
-
-    -- COSTUMES
-    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME) > 0 and not SCB.SV.IgnoreCostume then
-        local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME)
-        local CollectibleName = GetCollectibleName(Collectible)
-
-        local strCostume = CollectibleName
-        local iconCostume = E.CostumeIcons[CollectibleName] ~= nil and E.CostumeIcons[CollectibleName] or "LuiExtended/media/icons/costumes/costume_generic.dds"
-            if (DisguiseOn == 0 or DisguiseOn == 55262) and GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) == 0 then
-                g_effectsList.player1["CostumeType"] =
-                    {
-                            target="player", type=1,
-                            name=strCostume, icon=iconCostume,
-                            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                            forced = "long",
-                            restart=true, iconNum=0
-                    }
-            end
-    else
-        g_effectsList.player1["CostumeType"] = nil
-    end
-
-    -- HATS
-    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HAT) > 0 and not SCB.SV.IgnoreHat then
-        local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_HAT)
-        local CollectibleName = GetCollectibleName(Collectible)
-
-        local strHat = CollectibleName
-        local iconHat = E.HatIcons[CollectibleName] ~= nil and E.HatIcons[CollectibleName] or "LuiExtended/media/icons/costumes/costume_generic.dds"
-            if (DisguiseOn == 0 or DisguiseOn == 55262) and GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) == 0 then
-                g_effectsList.player1["HatType"] =
-                    {
-                            target="player", type=1,
-                            name=strHat, icon=iconHat,
-                            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                            forced = "long",
-                            restart=true, iconNum=0
-                    }
-            end
-    else
-        g_effectsList.player1["HatType"] = nil
-    end
-
-    -- SKINS
-    if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_SKIN) > 0 and not SCB.SV.IgnoreSkin then
-        local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_SKIN)
-        local CollectibleName = GetCollectibleName(Collectible)
-
-        local strSkin = CollectibleName
-        local iconSkin = E.SkinIcons[CollectibleName] ~= nil and E.SkinIcons[CollectibleName] or "LuiExtended/media/icons/skins/skin_generic.dds"
-            if (DisguiseOn == 0 or DisguiseOn == 55262) and GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) == 0 then
-                g_effectsList.player1["SkinType"] =
-                    {
-                            target="player", type=1,
-                            name=strSkin, icon=iconSkin,
-                            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                            forced = "long",
-                            restart=true, iconNum=0
-                    }
-            end
-    else
-        g_effectsList.player1["SkinType"] = nil
     end
 
 end
@@ -3531,10 +3431,7 @@ function SCB.OnPlayerActivated(eventCode)
     end
 
     if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0
-    or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0
-    or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) > 0
-    or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_SKIN) > 0
-    or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME) > 0 then
+    or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 then
 		zo_callLater(function() SCB.CollectibleBuff( eventCode, 0, true) end, 50)
     end
 

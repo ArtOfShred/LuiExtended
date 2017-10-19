@@ -52,6 +52,7 @@ ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS",      "Player 
 ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS",                "Target Buffs")
 ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS",              "Target Debuffs")
 ZO_CreateStringId("SI_LUIE_SCB_RECALLCOOLDOWN",                         "Recall Cooldown")
+ZO_CreateStringId("SI_LUIE_SCB_PET",                                    "Vanity Pet")
 ZO_CreateStringId("SI_LUIE_SCB_MOUNTED",                                "Mounted")
 ZO_CreateStringId("SI_LUIE_SCB_REZZIMMUNITY",                           "Resurrection Immunity")
 ZO_CreateStringId("SI_LUIE_SCB_ERROR_FONT",                             "LUIE_SpellCastBuffs: There was a problem with selecting required font. Falling back to game default.")

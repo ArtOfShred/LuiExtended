@@ -84,6 +84,13 @@ UF.D = {
     CustomColourDPS                  = { 130/255, 99/255, 65/255 },
     CustomColourHealer               = { 117/255, 077/255, 135/255 },
     CustomColourTank                 = { 133/255, 018/255, 013/255 },
+    
+    CustomColourDragonknight         = { 128/255, 62/255, 22/255 },
+    CustomColourNightblade           = { 167/255, 15/255, 15/255 },
+    CustomColourSorcerer             = { 75/255, 83/255, 247/255 },
+    CustomColourTemplar              = { 255/255, 232/255, 125/255 },
+    CustomColourWarden               = { 136/255, 245/255, 125/255 },
+    
     CustomShieldBarSeparate          = false,
     CustomShieldBarHeight            = 10,
     CustomShieldBarFull              = false,
@@ -135,9 +142,10 @@ UF.D = {
     RaidBarHeight                    = 30,
     RaidLayout                       = "2 x 12",
     RoleIconSmallGroup               = true,
-    RoleIconRaid                     = true,
     ColorRoleGroup                   = true,
     ColorRoleRaid                    = true,
+    ColorClassGroup                  = false,
+    ColorClassRaid                   = false,
     --RaidSort                       = true,
     RaidSpacers                      = false,
     CustomFramesBosses               = true,
@@ -154,6 +162,9 @@ UF.D = {
     ReticleColourByReaction          = false,
     DisplayOptions                   = 2,
     ExecutePercentage                = 20,
+    RaidIconOptions                  = 4,
+    ChampionOptions                  = "Show Above Cap",
+    RepositionFramesAdjust           = 0,
 }
 UF.SV = nil
 
@@ -623,6 +634,7 @@ local function CreateCustomFrames()
                 },
                 ["name"]        = UI.Label( rhb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, unitTag, false ),
                 ["roleIcon"]    = UI.Texture( rhb, {LEFT,LEFT, 4,0}, {16,16}, nil, 2, false ),
+                ["classIcon"]    = UI.Texture( rhb, {LEFT,LEFT, 1,0}, {20,20}, nil, 2, false ),
                 ["dead"]        = UI.Label( rhb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "Status", false ),
                 ["leader"]      = UI.Texture( rhb, {LEFT,LEFT, -2,0}, {28,28}, nil, 2, false ),
 
@@ -1076,7 +1088,7 @@ function UF.Initialize( enabled )
     if UF.SV.RepositionFrames then
         -- Shift to center magicka and stamina bars
         ZO_PlayerAttributeHealth:ClearAnchors()
-        ZO_PlayerAttributeHealth:SetAnchor( BOTTOM, ActionButton5, TOP, 0, -47 )
+        ZO_PlayerAttributeHealth:SetAnchor( BOTTOM, ActionButton5, TOP, 0, -47 - UF.SV.RepositionFramesAdjust )
         ZO_PlayerAttributeMagicka:ClearAnchors()
         ZO_PlayerAttributeMagicka:SetAnchor( TOPRIGHT, ZO_PlayerAttributeHealth, BOTTOM, -1, 2 )
         ZO_PlayerAttributeStamina:ClearAnchors()
@@ -1820,7 +1832,11 @@ function UF.UpdateStaticControls( unitFrame )
             end
             unitFrame.levelIcon:SetTexture( unitFrame.isChampion and "LuiExtended/media/unitframes/unitframes_level_champion.dds" or "LuiExtended/media/unitframes/unitframes_level_normal.dds" )
             -- Level label should be already anchored
-            unitFrame.level:SetText( tostring( unitFrame.isChampion and GetUnitChampionPoints( unitFrame.unitTag ) or GetUnitLevel( unitFrame.unitTag ) ) )
+            if UF.SV.ChampionOptions == "Limit to Cap" then
+                unitFrame.level:SetText( tostring( unitFrame.isChampion and GetUnitEffectiveChampionPoints( unitFrame.unitTag ) or GetUnitLevel( unitFrame.unitTag ) ) )
+            elseif UF.SV.ChampionOptions == "Show Above Cap" then
+                unitFrame.level:SetText( tostring( unitFrame.isChampion and GetUnitChampionPoints( unitFrame.unitTag ) or GetUnitLevel( unitFrame.unitTag ) ) )
+            end
         end
         if unitFrame.unitTag == "player" then
             unitFrame.levelIcon:SetHidden( not UF.SV.PlayerEnableYourname )
@@ -2669,6 +2685,12 @@ function UF.CustomFramesApplyColours(isMenu)
     local dps       =  { UF.SV.CustomColourDPS[1],    UF.SV.CustomColourDPS[2],     UF.SV.CustomColourDPS[3], 0.9 }
     local healer    =  { UF.SV.CustomColourHealer[1], UF.SV.CustomColourHealer[2],  UF.SV.CustomColourHealer[3], 0.9 }
     local tank      =  { UF.SV.CustomColourTank[1],   UF.SV.CustomColourTank[2],    UF.SV.CustomColourTank[3], 0.9 }
+    
+    local class1  = { UF.SV.CustomColourDragonknight[1], UF.SV.CustomColourDragonknight[2], UF.SV.CustomColourDragonknight[3], 0.9} -- Dragonkight
+    local class3  = { UF.SV.CustomColourNightblade[1], UF.SV.CustomColourNightblade[2], UF.SV.CustomColourNightblade[3], 0.9} -- Nightblade
+    local class2  = { UF.SV.CustomColourSorcerer[1], UF.SV.CustomColourSorcerer[2], UF.SV.CustomColourSorcerer[3], 0.9} -- Sorcerer
+    local class6  = { UF.SV.CustomColourTemplar[1], UF.SV.CustomColourTemplar[2], UF.SV.CustomColourTemplar[3], 0.9} -- Templar
+    local class4  = { UF.SV.CustomColourWarden[1], UF.SV.CustomColourWarden[2], UF.SV.CustomColourWarden[3], 0.9} -- Warden
 
     local health_bg  = { 0.1*UF.SV.CustomColourHealth[1],  0.1*UF.SV.CustomColourHealth[2],  0.1*UF.SV.CustomColourHealth[3], 0.9 }
     local shield_bg  = { 0.1*UF.SV.CustomColourShield[1],  0.1*UF.SV.CustomColourShield[2],  0.1*UF.SV.CustomColourShield[3], 0.9 }
@@ -2678,6 +2700,12 @@ function UF.CustomFramesApplyColours(isMenu)
     local dps_bg    = { 0.1*UF.SV.CustomColourDPS[1],    0.1*UF.SV.CustomColourDPS[2],    0.1*UF.SV.CustomColourDPS[3], 0.9 }
     local healer_bg = { 0.1*UF.SV.CustomColourHealer[1], 0.1*UF.SV.CustomColourHealer[2], 0.1*UF.SV.CustomColourHealer[3], 0.9 }
     local tank_bg   = { 0.1*UF.SV.CustomColourTank[1],   0.1*UF.SV.CustomColourTank[2],   0.1*UF.SV.CustomColourTank[3], 0.9 }
+    
+    local class1_bg  = { 0.1*UF.SV.CustomColourDragonknight[1], 0.1*UF.SV.CustomColourDragonknight[2], 0.1*UF.SV.CustomColourDragonknight[3], 0.9} -- Dragonkight
+    local class3_bg  = { 0.1*UF.SV.CustomColourNightblade[1], 0.1*UF.SV.CustomColourNightblade[2], 0.1*UF.SV.CustomColourNightblade[3], 0.9} -- Nightblade
+    local class2_bg  = { 0.1*UF.SV.CustomColourSorcerer[1], 0.1*UF.SV.CustomColourSorcerer[2], 0.1*UF.SV.CustomColourSorcerer[3], 0.9} -- Sorcerer
+    local class6_bg  = { 0.1*UF.SV.CustomColourTemplar[1], 0.1*UF.SV.CustomColourTemplar[2], 0.1*UF.SV.CustomColourTemplar[3], 0.9} -- Templar
+    local class4_bg  = { 0.1*UF.SV.CustomColourWarden[1], 0.1*UF.SV.CustomColourWarden[2], 0.1*UF.SV.CustomColourWarden[3], 0.9} -- Warden
     
     -- After colour is applied unhide frames, so player can see changes even from menu
     for _, baseName in pairs( { "player", "reticleover", "boss", "AvaPlayerTarget" } ) do
@@ -2709,6 +2737,7 @@ function UF.CustomFramesApplyColours(isMenu)
             if UF.CustomFrames[unitTag] then
                 local defaultUnitTag = GetGroupUnitTagByIndex(i)
                 local isDps, isHealer, isTank = GetGroupMemberRoles(defaultUnitTag)
+                local class = GetUnitClassId(defaultUnitTag)
 
                 local unitFrame = UF.CustomFrames[unitTag]
                 local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
@@ -2730,6 +2759,30 @@ function UF.CustomFramesApplyColours(isMenu)
                         thb.bar:SetColor( unpack(health) )
                         thb.backdrop:SetCenterColor( unpack(health_bg) )
                     end
+                elseif (groupSize <= 4 and UF.SV.ColorClassGroup) or (groupSize > 4 and UF.SV.ColorClassRaid) and class ~= 0 then
+                    local class_color
+                    local class_bg
+                    if class == 1 then
+                        class_color = class1
+                        class_bg = class1_bg
+                    elseif class == 2 then
+                        class_color = class2
+                        class_bg = class2_bg
+                    elseif class == 3 then
+                        class_color = class3
+                        class_bg = class3_bg
+                    elseif class == 4 then
+                        class_color = class4
+                        class_bg = class4_bg
+                    elseif class == 6 then
+                        class_color = class6
+                        class_bg = class6_bg
+                    else -- Fallback option just in case
+                        class_color = health
+                        class_bg = health_bg
+                    end
+                    thb.bar:SetColor( unpack(class_color) )
+                    thb.backdrop:SetCenterColor( unpack(class_bg) )
                 else
                     thb.bar:SetColor( unpack(health) )
                     thb.backdrop:SetCenterColor( unpack(health_bg) )
@@ -3322,19 +3375,85 @@ function UF.CustomFramesApplyLayoutRaid()
         
         local role1, role2, role3 = GetGroupMemberRoles(unitTag)
         
-        if UF.SV.RoleIconRaid and (role1 or role2 or role3) then
+        -- If we have icons set to display
+        if UF.SV.RaidIconOptions > 1 then
+            if UF.SV.RaidIconOptions == 2 then -- Class Icon Only
+                unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
+                unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
+                unitFrame.roleIcon:SetHidden (true)
+                unitFrame.classIcon:SetHidden (false)
+            end
+            if UF.SV.RaidIconOptions == 3 then -- Role Icon Only
+                if (role1 or role2 or role3) then
+                    unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
+                    unitFrame.roleIcon:SetHidden (false)
+                    unitFrame.classIcon:SetHidden (true)
+                end
+            end
+            if UF.SV.RaidIconOptions == 4 then -- Class PVP, Role PVE
+                if IsPlayerInAvAWorld() or IsActiveWorldBattleground() then
+                    unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
+                    unitFrame.roleIcon:SetHidden (true)
+                    unitFrame.classIcon:SetHidden (false)
+                elseif not ( IsPlayerInAvAWorld() or IsActiveWorldBattleground() ) and (role1 or role2 or role3) then
+                    unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
+                    unitFrame.roleIcon:SetHidden (false)
+                    unitFrame.classIcon:SetHidden (true)
+                else
+                    -- Fallback if neither condition is true then we clear the frame
+                    unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip, UF.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 5, 0 )
+                    unitFrame.roleIcon:SetHidden (true)
+                    unitFrame.classIcon:SetHidden (true)
+                end
+            end
+            if UF.SV.RaidIconOptions == 5 then -- Class PVE, Role PVP
+                if ( IsPlayerInAvAWorld() or IsActiveWorldBattleground() )  and (role1 or role2 or role3) then
+                    unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
+                    unitFrame.roleIcon:SetHidden (false)
+                    unitFrame.classIcon:SetHidden (true)
+                elseif not ( IsPlayerInAvAWorld() or IsActiveWorldBattleground() ) then
+                    unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
+                    unitFrame.roleIcon:SetHidden (true)
+                    unitFrame.classIcon:SetHidden (false)
+                else
+                    -- Fallback if neither condition is true then we clear the frame
+                    unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip, UF.SV.RaidBarHeight-2 )
+                    unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 5, 0 )
+                    unitFrame.roleIcon:SetHidden (true)
+                    unitFrame.classIcon:SetHidden (true)
+                end
+            end
+        else
+            unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip, UF.SV.RaidBarHeight-2 )
+            unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 5, 0 )
+            unitFrame.roleIcon:SetHidden (true)
+            unitFrame.classIcon:SetHidden (true)
+        end
+        
+        -- Old Function preserved here just in case
+        --[[
+        if (UF.SV.RoleIconRaid and (role1 or role2 or role3) and not IsPlayerInAvAWorld() ) or (UF.SV.ClassIconRaid and IsUnitOnline(unitTag) ) then
             unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
             unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
         else
             unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip, UF.SV.RaidBarHeight-2 )
             unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 5, 0 )
         end
-        unitFrame.roleIcon:SetHidden (not UF.SV.RoleIconRaid)
+        unitFrame.roleIcon:SetHidden (not UF.SV.RoleIconRaid or IsPlayerInAvAWorld() )
+        unitFrame.classIcon:SetHidden (not UF.SV.ClassIconRaid)
+        ]]--
 
         if IsUnitGroupLeader(unitTag) then
             unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip-17, UF.SV.RaidBarHeight-2 )
             unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 22, 0 )
             unitFrame.roleIcon:SetHidden (true)
+            unitFrame.classIcon:SetHidden (true)
             unitFrame.leader:SetTexture(leaderIcons[1])
         else
             unitFrame.leader:SetTexture(leaderIcons[0])
@@ -3343,6 +3462,12 @@ function UF.CustomFramesApplyLayoutRaid()
         unitFrame.dead:SetDimensions(UF.SV.RaidBarWidth-50, UF.SV.RaidBarHeight-2)
         
         unitFrame[POWERTYPE_HEALTH].label:SetDimensions(UF.SV.RaidBarWidth-50, UF.SV.RaidBarHeight-2)
+
+        if not IsUnitOnline(unitTag) then
+            unitFrame.name:SetDimensions( UF.SV.RaidBarWidth-UF.SV.RaidNameClip, UF.SV.RaidBarHeight-2 )
+            unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 5, 0 )
+            unitFrame.classIcon:SetHidden (true)
+        end
         
     end
 
