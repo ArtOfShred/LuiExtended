@@ -5120,10 +5120,10 @@ function LUIE_CreateSettings()
         name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OOCPACITY),
         tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OOCPACITY_TP),
         min = 0, max = 100, step = 5,
-        getFunc = function() return LUIE.UnitFrames.SV.CustomOocAlpha end,
-        setFunc = function(value) LUIE.UnitFrames.SV.CustomOocAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
+        getFunc = function() return LUIE.UnitFrames.SV.PlayerOocAlpha end,
+        setFunc = function(value) LUIE.UnitFrames.SV.PlayerOocAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
         width = "full",
-        default = LUIE.UnitFrames.D.CustomOocAlpha,
+        default = LUIE.UnitFrames.D.PlayerOocAlpha,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
     -- In-Combat frame opacity
@@ -5132,10 +5132,34 @@ function LUIE_CreateSettings()
         name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ICPACITY),
         tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ICPACITY_TP),
         min = 0, max = 100, step = 5,
-        getFunc = function() return LUIE.UnitFrames.SV.CustomIncAlpha end,
-        setFunc = function(value) LUIE.UnitFrames.SV.CustomIncAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
+        getFunc = function() return LUIE.UnitFrames.SV.PlayerIncAlpha end,
+        setFunc = function(value) LUIE.UnitFrames.SV.PlayerIncAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
         width = "full",
-        default = LUIE.UnitFrames.D.CustomIncAlpha,
+        default = LUIE.UnitFrames.D.PlayerIncAlpha,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
+    }
+    -- Out-of-Combat frame opacity
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "slider",
+        name = "TARGET OOC OPAC",
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OOCPACITY_TP),
+        min = 0, max = 100, step = 5,
+        getFunc = function() return LUIE.UnitFrames.SV.TargetOocAlpha end,
+        setFunc = function(value) LUIE.UnitFrames.SV.TargetOocAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.TargetOocAlpha,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
+    }
+    -- In-Combat frame opacity
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "slider",
+        name = "TARGET IN COMBAT OPAC",
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ICPACITY_TP),
+        min = 0, max = 100, step = 5,
+        getFunc = function() return LUIE.UnitFrames.SV.TargetIncAlpha end,
+        setFunc = function(value) LUIE.UnitFrames.SV.TargetIncAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.TargetIncAlpha,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
     -- Treat Missing Power as In-Combat
@@ -5326,6 +5350,19 @@ function LUIE_CreateSettings()
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
     }
     
+        -- Out-of-Combat frame opacity
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "slider",
+        name = "Group / Raid ALPHA (Shared Setting",
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OOCPACITY_TP),
+        min = 0, max = 100, step = 5,
+        getFunc = function() return LUIE.UnitFrames.SV.GroupAlpha end,
+        setFunc = function(value) LUIE.UnitFrames.SV.GroupAlpha = value LUIE.UnitFrames.CustomFramesGroupAlpha() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.GroupAlpha,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
+    }
+    
     -- Display Armor stat change
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
@@ -5488,6 +5525,19 @@ function LUIE_CreateSettings()
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
     }
     
+            -- Out-of-Combat frame opacity
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "slider",
+        name = "Group / Raid ALPHA (Shared Setting",
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OOCPACITY_TP),
+        min = 0, max = 100, step = 5,
+        getFunc = function() return LUIE.UnitFrames.SV.GroupAlpha end,
+        setFunc = function(value) LUIE.UnitFrames.SV.GroupAlpha = value LUIE.UnitFrames.CustomFramesGroupAlpha() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.GroupAlpha,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
+    }
+    
     -- Display Armor stat change
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
@@ -5577,6 +5627,31 @@ function LUIE_CreateSettings()
         width = "full",
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesBosses ) end,
         default = LUIE.UnitFrames.D.CustomFormatBoss,
+    }
+    
+    -- Out-of-Combat frame opacity
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "slider",
+        name = "BOSS OOC OPAC",
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OOCPACITY_TP),
+        min = 0, max = 100, step = 5,
+        getFunc = function() return LUIE.UnitFrames.SV.BossOocAlpha end,
+        setFunc = function(value) LUIE.UnitFrames.SV.BossOocAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.BossOocAlpha,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesBosses ) end,
+    }
+    -- In-Combat frame opacity
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "slider",
+        name = "Boss IN COMBAT OPAC",
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ICPACITY_TP),
+        min = 0, max = 100, step = 5,
+        getFunc = function() return LUIE.UnitFrames.SV.BossIncAlpha end,
+        setFunc = function(value) LUIE.UnitFrames.SV.BossIncAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.BossIncAlpha,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesBosses ) end,
     }
     
     -- Display Armor stat change

@@ -67,10 +67,14 @@ UF.D = {
     CustomFontBars                   = 16,
     CustomFontOther                  = 20,
     CustomTexture                    = "Minimalistic",
-    CustomOocAlpha                   = 85,
-    CustomIncAlpha                   = 85,
+    PlayerOocAlpha                   = 85,
+    PlayerIncAlpha                   = 85,
+    TargetOocAlpha                   = 85,
+    TargetIncAlpha                   = 85,
+    GroupAlpha                       = 85,
+    BossOocAlpha                     = 85,
+    BossIncAlpha                     = 85,
     CustomOocAlphaPower              = true,
-    CustomOocAlphaTarget             = true,
     CustomColourHealth               = { 202/255,  20/255, 0       },
     CustomColourShield               = { 1      , 192/255, 0       }, -- .a=0.5 for overlay and .a = 1 for separate
     CustomColourMagicka              = { 0      ,  83/255, 209/255 },
@@ -119,14 +123,12 @@ UF.D = {
     TargetEnableTitle                = true,
     TargetEnableSkull                = true,
     CustomFramesGroup                = true,
-    GroupDisableDefault              = true,
     GroupExcludePlayer               = false,
     GroupBarWidth                    = 250,
     GroupBarHeight                   = 36,
     GroupBarSpacing                  = 40,
     CustomFramesRaid                 = true,
     RaidNameClip                     = 94,
-    RaidDisableDefault               = true,
     RaidBarWidth                     = 200,
     RaidBarHeight                    = 30,
     RaidLayout                       = "2 x 12",
@@ -1905,7 +1907,7 @@ function UF.UpdateStaticControls( unitFrame )
 
     -- Finally set transparency for group frames that has .control field
     if "group" == string.sub(unitFrame.unitTag, 0, 5) and unitFrame.control then
-        unitFrame.control:SetAlpha( IsUnitInGroupSupportRange(unitFrame.unitTag) and 1 or 0.5 )
+        unitFrame.control:SetAlpha( IsUnitInGroupSupportRange(unitFrame.unitTag) and ( UF.SV.GroupAlpha * 0.01) or ( UF.SV.GroupAlpha * 0.01) / 2 )
     end
 end
 
@@ -2167,7 +2169,7 @@ end
 -- Runs on the EVENT_GROUP_SUPPORT_RANGE_UPDATE listener.
 function UF.OnGroupSupportRangeUpdate(eventCode, unitTag, status)
     if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag].control then
-        UF.CustomFrames[unitTag].control:SetAlpha( status and 1 or 0.5 )
+        UF.CustomFrames[unitTag].control:SetAlpha( status and ( UF.SV.GroupAlpha * 0.01) or ( UF.SV.GroupAlpha * 0.01) / 2 )
     end
 end
 
@@ -3381,15 +3383,50 @@ function UF.CustomFramesApplyInCombat()
         idle = g_statFull.combat
     end
 
-    local oocAlpha = 0.01 * UF.SV.CustomOocAlpha
-    local incAlpha = 0.01 * UF.SV.CustomIncAlpha
+    local oocAlphaPlayer = 0.01 * UF.SV.PlayerOocAlpha
+    local incAlphaPlayer = 0.01 * UF.SV.PlayerIncAlpha
+    
+    local oocAlphaTarget = 0.01 * UF.SV.TargetOocAlpha
+    local incAlphaTarget = 0.01 * UF.SV.TargetIncAlpha
+    
+    local oocAlphaBoss = 0.01 * UF.SV.BossOocAlpha
+    local incAlphaBoss = 0.01 * UF.SV.BossIncAlpha
 
-    -- This applies only to player and target
+    -- Apply to all frames
     if UF.CustomFrames.player then
-        UF.CustomFrames.player.control:SetAlpha( idle and oocAlpha or incAlpha )
+        UF.CustomFrames.player.control:SetAlpha( idle and oocAlphaPlayer or incAlphaPlayer )
+    end
+    if UF.CustomFrames.AvaPlayerTarget then
+        UF.CustomFrames.AvaPlayerTarget.control:SetAlpha( idle and oocAlphaPlayer or incAlphaPlayer )
     end
     if UF.CustomFrames.reticleover then
-        UF.CustomFrames.reticleover.control:SetAlpha( ( idle and UF.SV.CustomOocAlphaTarget ) and oocAlpha or incAlpha )
+        UF.CustomFrames.reticleover.control:SetAlpha( idle and oocAlphaTarget or incAlphaTarget )
+    end
+
+    for i = 1, 6 do
+        local unitTag = "boss" .. i
+        if UF.CustomFrames[unitTag] then
+            UF.CustomFrames[unitTag].control:SetAlpha ( idle and oocAlphaBoss or incAlphaBoss )
+        end
+    end
+end
+
+function UF.CustomFramesGroupAlpha()
+
+    local alphaGroup = 0.01 * UF.SV.GroupAlpha
+    
+    for i = 1, 4 do
+        local unitTag = "SmallGroup" .. i
+        if UF.CustomFrames[unitTag] then
+           UF.CustomFrames[unitTag].control:SetAlpha( IsUnitInGroupSupportRange(UF.CustomFrames[unitTag].unitTag) and alphaGroup or ( alphaGroup / 2 ) )
+        end
+    end
+    
+    for i = 1, 24 do
+        local unitTag = "RaidGroup" .. i
+        if UF.CustomFrames[unitTag] then
+            UF.CustomFrames[unitTag].control:SetAlpha( IsUnitInGroupSupportRange(UF.CustomFrames[unitTag].unitTag) and alphaGroup or ( alphaGroup / 2 ) )
+        end
     end
 end
 
