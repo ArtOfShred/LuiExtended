@@ -83,7 +83,7 @@ function LUIE_CreateSettings()
         author = LUIE.author,
         version = LUIE.version,
         website = "http://www.esoui.com/downloads/info818-LuiExtended.html",
-        slashCommand = "/luica",
+        slashCommand = "/luiscb",
         registerForRefresh = true,
         registerForDefaults = true,
     }
@@ -111,11 +111,24 @@ function LUIE_CreateSettings()
         registerForRefresh = true,
         registerForDefaults = true,
     }
+    
+    local panelDataCombatInfo = {
+        type = "panel",
+        name = strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CI)),
+        displayName = strformat(LUIE.name, GetString(SI_LUIE_LAM_CI), GetString(SI_GAME_MENU_SETTINGS)),
+        author = LUIE.author,
+        version = LUIE.version,
+        website = "http://www.esoui.com/downloads/info818-LuiExtended.html",
+        slashCommand = "/luici",
+        registerForRefresh = true,
+        registerForDefaults = true,
+    }
 
     local optionsData = {}
     local optionsDataBuffsDebuffs = {}
     local optionsDataChatAnnouncements = {}
     local optionsDataUnitFrames = {}
+    local optionsDataCombatInfo = {}
 
     -- ReloadUI Button
     optionsData[#optionsData + 1] = {
@@ -124,6 +137,73 @@ function LUIE_CreateSettings()
         tooltip = GetString(SI_LUIE_LAM_RELOADUI),
         func = function() ReloadUI("ingame") end,
         width = "full",
+    }
+    
+    -- Enable Unit Frames module
+    optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_UF_ENABLE),
+        getFunc = function() return LUIE.SV.UnitFrames_Enabled end,
+        setFunc = function(value) LUIE.SV.UnitFrames_Enabled = value end,
+        width = "full",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        default = LUIE.D.UnitFrames_Enabled,
+    }
+    -- Unit Frames module description
+    optionsData[#optionsData + 1] = {
+        type = "description",
+        text = GetString(SI_LUIE_LAM_UF_DESCRIPTION),
+    }
+    
+    -- Enable CI Module
+    optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_CI_SHOWCOMBATINFO),
+        tooltip = GetString(SI_LUIE_LAM_CI_SHOWCOMBATINFO_TP),
+        getFunc = function() return LUIE.SV.CombatInfo_Enabled end,
+        setFunc = function(value) LUIE.SV.CombatInfo_Enabled = value end,
+        width = "full",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        default = LUIE.D.CombatInfo_Enabled,
+    }
+    -- CI Description
+    optionsData[#optionsData + 1] = {
+        type = "description",
+        text = GetString(SI_LUIE_LAM_CI_DESCRIPTION),
+    }
+    
+    -- Enable Buffs & Debuffs Module
+    optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK),
+        tooltip = GetString(SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK_TP),
+        getFunc = function() return LUIE.SV.SpellCastBuff_Enable end,
+        setFunc = function(value) LUIE.SV.SpellCastBuff_Enable = value end,
+        width = "full",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        default = LUIE.D.SpellCastBuff_Enable,
+    }
+    -- Buffs & Debuffs Description
+    optionsData[#optionsData + 1] = {
+        type = "description",
+        text = GetString(SI_LUIE_LAM_BUFFS_DESCRIPTION),
+    }
+    
+    -- Enable Chat Announcements module
+    optionsData[#optionsData +1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_CA_ENABLE),
+        tooltip = GetString(SI_LUIE_LAM_CA_ENABLE_TP),
+        getFunc = function() return LUIE.SV.ChatAnnouncements_Enable end,
+        setFunc = function(value) LUIE.SV.ChatAnnouncements_Enable = value end,
+        width = "full",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        default = LUIE.D.ChatAnnouncements_Enable,
+    }
+    -- CA Module Description
+    optionsData[#optionsData +1] = {
+        type = "description",
+        text = GetString(SI_LUIE_LAM_CA_DESCRIPTION),
     }
 
     -- Info Panel Options
@@ -286,69 +366,6 @@ function LUIE_CreateSettings()
             },
         },
     }
-    -- Combat Info Options
-    optionsData[#optionsData + 1] = {
-        type = "submenu",
-        name = GetString(SI_LUIE_LAM_CI_HEADER),
-        reference = "Combat_Info_Options_Submenu",
-        controls = {
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_SHOWCOMBATINFO),
-                tooltip = GetString(SI_LUIE_LAM_CI_SHOWCOMBATINFO_TP),
-                getFunc = function() return LUIE.SV.CombatInfo_Enabled end,
-                setFunc = function(value) LUIE.SV.CombatInfo_Enabled = value end,
-                width = "full",
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-                default = LUIE.D.CombatInfo_Enabled,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_SHOWCOOLDOWNS),
-                tooltip = GetString(SI_LUIE_LAM_CI_SHOWCOOLDOWNS_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.CoolDown end,
-                setFunc = function(value) LUIE.CombatInfo.SV.CoolDown = value end,
-                width = "full",
-                default = LUIE.CombatInfo.D.CoolDown,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-            },
-            {
-                type = "header",
-                name = GetString(SI_LUIE_LAM_CI_ULTIMATETRACKING_HEADER),
-                width = "full",
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_SHOWULTIMATEVALUE),
-                tooltip = GetString(SI_LUIE_LAM_CI_SHOWULTIMATEVALUE_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.UltimateEnabled end,
-                setFunc = function(value) LUIE.CombatInfo.SV.UltimateEnabled = value LUIE.CombatInfo.RegisterCombatInfo() LUIE.CombatInfo.OnSlotsFullUpdate(nil) end,
-                width = "full",
-                default = LUIE.CombatInfo.D.UltimateEnabled,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_HIDEPERCENTWHENFULL),
-                tooltip = GetString(SI_LUIE_LAM_CI_HIDEPERCENTWHENFULL_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.UltimateHideFull end,
-                setFunc = function(value) LUIE.CombatInfo.SV.UltimateHideFull = value LUIE.CombatInfo.OnSlotsFullUpdate(nil) end,
-                width = "full",
-                default = LUIE.CombatInfo.D.UltimateHideFull,
-                disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.UltimateEnabled ) end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_CI_SHOWULTIGENTEXTURE),
-                tooltip = GetString(SI_LUIE_LAM_CI_SHOWULTIGENTEXTURE_TP),
-                getFunc = function() return LUIE.CombatInfo.SV.UltimateGeneration end,
-                setFunc = function(value) LUIE.CombatInfo.SV.UltimateGeneration = value end,
-                width = "full",
-                default = LUIE.CombatInfo.D.UltimateGeneration,
-                disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-            },
-        },
-    }
 
     -- Use LUI print to chat for messages
     optionsData[#optionsData + 1] = {
@@ -445,6 +462,174 @@ function LUIE_CreateSettings()
                GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE)),
     }
     
+    
+    -- Enable CI Module
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_CI_SHOWCOMBATINFO),
+        tooltip = GetString(SI_LUIE_LAM_CI_SHOWCOMBATINFO_TP),
+        getFunc = function() return LUIE.SV.CombatInfo_Enabled end,
+        setFunc = function(value) LUIE.SV.CombatInfo_Enabled = value end,
+        width = "full",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        default = LUIE.D.CombatInfo_Enabled,
+    }
+    -- CI Description
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "description",
+        text = GetString(SI_LUIE_LAM_CI_DESCRIPTION),
+    }
+    -- ReloadUI Button
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "button",
+        name = "Reload UI",
+        tooltip = GetString(SI_LUIE_LAM_RELOADUI),
+        func = function() ReloadUI("ingame") end,
+        width = "full",
+    }
+    -- Combat Info Options
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "header",
+        name = GetString(SI_LUIE_LAM_CI_HEADER),
+        reference = "Combat_Info_Options_Submenu",
+    }
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_CI_SHOWCOOLDOWNS),
+        tooltip = GetString(SI_LUIE_LAM_CI_SHOWCOOLDOWNS_TP),
+        getFunc = function() return LUIE.CombatInfo.SV.CoolDown end,
+        setFunc = function(value) LUIE.CombatInfo.SV.CoolDown = value end,
+        width = "full",
+        default = LUIE.CombatInfo.D.CoolDown,
+        disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+    }
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "header",
+        name = GetString(SI_LUIE_LAM_CI_ULTIMATETRACKING_HEADER),
+        width = "full",
+    }
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_CI_SHOWULTIMATEVALUE),
+        tooltip = GetString(SI_LUIE_LAM_CI_SHOWULTIMATEVALUE_TP),
+        getFunc = function() return LUIE.CombatInfo.SV.UltimateEnabled end,
+        setFunc = function(value) LUIE.CombatInfo.SV.UltimateEnabled = value LUIE.CombatInfo.RegisterCombatInfo() LUIE.CombatInfo.OnSlotsFullUpdate(nil) end,
+        width = "full",
+        default = LUIE.CombatInfo.D.UltimateEnabled,
+        disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+    }
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_CI_HIDEPERCENTWHENFULL),
+        tooltip = GetString(SI_LUIE_LAM_CI_HIDEPERCENTWHENFULL_TP),
+        getFunc = function() return LUIE.CombatInfo.SV.UltimateHideFull end,
+        setFunc = function(value) LUIE.CombatInfo.SV.UltimateHideFull = value LUIE.CombatInfo.OnSlotsFullUpdate(nil) end,
+        width = "full",
+        default = LUIE.CombatInfo.D.UltimateHideFull,
+        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.UltimateEnabled ) end,
+    }
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_CI_SHOWULTIGENTEXTURE),
+        tooltip = GetString(SI_LUIE_LAM_CI_SHOWULTIGENTEXTURE_TP),
+        getFunc = function() return LUIE.CombatInfo.SV.UltimateGeneration end,
+        setFunc = function(value) LUIE.CombatInfo.SV.UltimateGeneration = value end,
+        width = "full",
+        default = LUIE.CombatInfo.D.UltimateGeneration,
+        disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+    }
+    
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        -- Highlight Ability Bar Icon for Active Procs
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONPROC),
+        tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONPROC_TP),
+        getFunc = function() return LUIE.CombatInfo.SV.ShowTriggered end,
+        setFunc = function(value) LUIE.CombatInfo.SV.ShowTriggered = value LUIE.CombatInfo.OnSlotsFullUpdate() end,
+        width = "full",
+        default = LUIE.CombatInfo.D.ShowTriggered,
+        disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+    }
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        -- Highlight Ability Bar Icon for Active Effects
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONEFFECT),
+        tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONEFFECT_TP),
+        getFunc = function() return LUIE.CombatInfo.SV.ShowToggled end,
+        setFunc = function(value) LUIE.CombatInfo.SV.ShowToggled = value LUIE.CombatInfo.OnSlotsFullUpdate() end,
+        width = "full",
+        default = LUIE.CombatInfo.D.ShowToggled,
+        disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+    }
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        -- SHOW LABEL ON BAR HIGHLIGHT
+        type = "checkbox",
+        name = "SHOW LABEL FOR BAR HIGHLIGHT",
+        tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONEFFECT_TP),
+        getFunc = function() return LUIE.CombatInfo.SV.BarShowLabel end,
+        setFunc = function(value) LUIE.CombatInfo.SV.BarShowLabel = value LUIE.CombatInfo.ResetBarLabel() end,
+        width = "full",
+        default = LUIE.CombatInfo.D.BarShowLabel,
+        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and ( LUIE.CombatInfo.SV.ShowTriggered or LUIE.CombatInfo.SV.ShowToggled) ) end,
+    }
+    
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "slider",
+        name = "BAR LABEL POSITION",
+        min = -64, max = 64, step = 2,
+        getFunc = function() return LUIE.CombatInfo.SV.BarLabelPosition end,
+        setFunc = function(value) LUIE.CombatInfo.SV.BarLabelPosition = value LUIE.CombatInfo.ResetBarLabel() end,
+        width = "full",
+        default = LUIE.CombatInfo.D.BarLabelPosition,
+        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.BarShowLabel and ( LUIE.CombatInfo.SV.ShowTriggered or LUIE.CombatInfo.SV.ShowToggled)) end,
+    }
+    
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "dropdown",
+        name = "BAR FONT FACE",
+        tooltip = GetString(SI_LUIE_LAM_BUFF_FONTS_TP),
+        choices = FontsList,
+        sort = "name-up",
+        getFunc = function() return LUIE.CombatInfo.SV.BarFontFace end,
+        setFunc = function(var) LUIE.CombatInfo.SV.BarFontFace = var LUIE.CombatInfo.ApplyFont() end,
+        width = "full",
+        default = LUIE.CombatInfo.D.BarFontFace,
+        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.BarShowLabel and ( LUIE.CombatInfo.SV.ShowTriggered or LUIE.CombatInfo.SV.ShowToggled)) end,
+    }
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "slider",
+        name = "BAR FONT SIZE",
+        tooltip = GetString(SI_LUIE_LAM_BUFF_FONTS_SIZE_TP),
+        min = 10, max = 30, step = 1,
+        getFunc = function() return LUIE.CombatInfo.SV.BarFontSize end,
+        setFunc = function(value) LUIE.CombatInfo.SV.BarFontSize = value LUIE.CombatInfo.ApplyFont() end,
+        width = "full",
+        default = LUIE.CombatInfo.D.BarFontSize,
+        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.BarShowLabel and ( LUIE.CombatInfo.SV.ShowTriggered or LUIE.CombatInfo.SV.ShowToggled)) end,
+    }
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "dropdown",
+        name = "BAR FONT STYLE",
+        choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
+        sort = "name-up",
+        getFunc = function() return LUIE.CombatInfo.SV.BarFontStyle end,
+        setFunc = function(var) LUIE.CombatInfo.SV.BarFontStyle = var LUIE.CombatInfo.ApplyFont() end,
+        width = "full",
+        default = LUIE.CombatInfo.D.BarFontStyle,
+        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.BarShowLabel and ( LUIE.CombatInfo.SV.ShowTriggered or LUIE.CombatInfo.SV.ShowToggled)) end,
+    }
+    
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS),
+        tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
+        getFunc = function() return LUIE.CombatInfo.SV.RemainingTextMillis end,
+        setFunc = function(value) LUIE.CombatInfo.SV.RemainingTextMillis = value end,
+        width = "full",
+        default = LUIE.CombatInfo.D.RemainingTextMillis,
+        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.BarShowLabel and ( LUIE.CombatInfo.SV.ShowTriggered or LUIE.CombatInfo.SV.ShowToggled)) end,
+    }  
+
     -- Enable Buffs & Debuffs Module
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "checkbox",
@@ -939,87 +1124,7 @@ function LUIE_CreateSettings()
                 name = GetString(SI_PLAYER_MENU_MISC),
                 width = "full",
             }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- Highlight Ability Bar Icon for Active Procs
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONPROC),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONPROC_TP),
-                getFunc = function() return LUIE.SpellCastBuffs.SV.ShowTriggered end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowTriggered = value LUIE.SpellCastBuffs.OnSlotsFullUpdate() end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.ShowTriggered,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- Highlight Ability Bar Icon for Active Effects
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONEFFECT),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONEFFECT_TP),
-                getFunc = function() return LUIE.SpellCastBuffs.SV.ShowToggled end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowToggled = value LUIE.SpellCastBuffs.OnSlotsFullUpdate() end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.ShowToggled,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- SHOW LABEL ON BAR HIGHLIGH
-                type = "checkbox",
-                name = "SHOW LABEL FOR BAR HIGHLIGHT",
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONEFFECT_TP),
-                getFunc = function() return LUIE.SpellCastBuffs.SV.BarShowLabel end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.BarShowLabel = value LUIE.SpellCastBuffs.ResetBarLabel() end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.BarShowLabel,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            }
-            
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                type = "slider",
-                name = "BAR LABEL POSITION",
-                min = -64, max = 64, step = 2,
-                getFunc = function() return LUIE.SpellCastBuffs.SV.BarLabelPosition end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.BarLabelPosition = value LUIE.SpellCastBuffs.ResetBarLabel() end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.BarLabelPosition,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            }
-            
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                type = "dropdown",
-                name = "BAR FONT FACE",
-                tooltip = GetString(SI_LUIE_LAM_BUFF_FONTS_TP),
-                choices = FontsList,
-                sort = "name-up",
-                getFunc = function() return LUIE.SpellCastBuffs.SV.BarFontFace end,
-                setFunc = function(var) LUIE.SpellCastBuffs.SV.BarFontFace = var LUIE.SpellCastBuffs.ApplyFont() end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.BarFontFace,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.RemainingText ) end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                type = "slider",
-                name = "BAR FONT SIZE",
-                tooltip = GetString(SI_LUIE_LAM_BUFF_FONTS_SIZE_TP),
-                min = 10, max = 30, step = 1,
-                getFunc = function() return LUIE.SpellCastBuffs.SV.BarFontSize end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.BarFontSize = value LUIE.SpellCastBuffs.ApplyFont() end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.BarFontSize,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.RemainingText ) end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                type = "dropdown",
-                name = "BAR FONT STYLE",
-                choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
-                sort = "name-up",
-                getFunc = function() return LUIE.SpellCastBuffs.SV.BarFontStyle end,
-                setFunc = function(var) LUIE.SpellCastBuffs.SV.BarFontStyle = var LUIE.SpellCastBuffs.ApplyFont() end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.BarFontStyle,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.RemainingText ) end,
-            }
-            
-            
+
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 -- Show Block Player Icon
                 type = "checkbox",
@@ -5936,13 +6041,24 @@ function LUIE_CreateSettings()
     LAM2:RegisterAddonPanel('LUIEAddonOptions', panelData)
     LAM2:RegisterOptionControls('LUIEAddonOptions', optionsData)
 
-    LAM2:RegisterAddonPanel('LUIEUnitFramesOptions', panelDataUnitFrames)
-    LAM2:RegisterOptionControls('LUIEUnitFramesOptions', optionsDataUnitFrames)
+    if LUIE.SV.UnitFrames_Enabled then
+        LAM2:RegisterAddonPanel('LUIEUnitFramesOptions', panelDataUnitFrames)
+        LAM2:RegisterOptionControls('LUIEUnitFramesOptions', optionsDataUnitFrames)
+    end
     
-    LAM2:RegisterAddonPanel('LUIEChatAnnouncementOptions', panelDataChatAnnouncements)
-    LAM2:RegisterOptionControls('LUIEChatAnnouncementOptions', optionsDataChatAnnouncements)
+    if LUIE.SV.ChatAnnouncements_Enable then
+        LAM2:RegisterAddonPanel('LUIEChatAnnouncementOptions', panelDataChatAnnouncements)
+        LAM2:RegisterOptionControls('LUIEChatAnnouncementOptions', optionsDataChatAnnouncements)
+    end
     
-    LAM2:RegisterAddonPanel('LUIEBuffsAndDebuffsOptions', panelDataBuffsDebuffs)
-    LAM2:RegisterOptionControls('LUIEBuffsAndDebuffsOptions', optionsDataBuffsDebuffs)
+    if LUIE.SV.SpellCastBuff_Enable then
+        LAM2:RegisterAddonPanel('LUIEBuffsAndDebuffsOptions', panelDataBuffsDebuffs)
+        LAM2:RegisterOptionControls('LUIEBuffsAndDebuffsOptions', optionsDataBuffsDebuffs)
+    end
+    
+    if LUIE.SV.CombatInfo_Enabled then
+        LAM2:RegisterAddonPanel('LUIECombatInfoOptions', panelDataCombatInfo)
+        LAM2:RegisterOptionControls('LUIECombatInfoOptions', optionsDataCombatInfo)
+    end
     
 end

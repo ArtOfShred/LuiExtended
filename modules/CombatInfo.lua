@@ -6,19 +6,29 @@ LUIE.CombatInfo     = {}
 local CI            = LUIE.CombatInfo
 local UI            = LUIE.UI
 local E             = LUIE.Effects
+local A             = LUIE.GetAbility()
+local printToChat   = LUIE.PrintToChat
 --local DelayBuffer   = LUIE.DelayBuffer
 local strfmt        = string.format
---local strformat     = zo_strformat
+local strformat     = zo_strformat
 
 
 local moduleName    = LUIE.name .. "_CombatInfo"
 
 CI.Enabled  = false
 CI.D = {
-    CoolDown            = false,
-    UltimateEnabled     = true,
-    UltimateHideFull    = true,
-    UltimateGeneration  = true,
+    CoolDown                         = false,
+    UltimateEnabled                  = true,
+    UltimateHideFull                 = true,
+    UltimateGeneration               = true,
+    ShowTriggered                    = true,
+    ShowToggled                      = true,
+    BarShowLabel                     = true,
+    BarLabelPosition                 = -20,
+    BarFontFace                      = "Univers 67",
+    BarFontStyle                     = "outline",
+    BarFontSize                      = 20,
+    RemainingTextMillis              = true,
 }
 CI.SV       = nil
 
@@ -27,6 +37,17 @@ local g_ultimateCurrent          = 0
 local g_ultimateAbilityName       = ""
 local g_ultimateAbilityId         = 0
 local g_ultimateSlot             = ACTION_BAR_ULTIMATE_SLOT_INDEX + 1
+
+-- Bar Abilities
+local g_uiProcAnimation      = {}
+local g_uiCustomToggle       = {}
+local g_actionBar            = {}
+local g_triggeredSlots       = {}
+local g_triggeredSlotsRemain = {}
+local g_toggledSlots         = {}
+local g_toggledSlotsRemain   = {}
+local g_lastCast = 0
+local g_barFont
 
 -- Cooldowns overlay
 local uiCooldown    = {
@@ -57,6 +78,42 @@ local uiUltimate = {
     NotFull = false,
 }
 
+local IsAbilityProc = {
+    [A.Trigger_Assassins_Will]      = true,
+    [A.Trigger_Assassins_Scourge]   = true,
+    [A.Trigger_Power_Lash]          = true,
+}
+
+local HasAbilityProc = {
+    [A.Skill_Crystal_Fragments]     = 46327, -- Trigger_Crystal_Fragments_Passive
+}
+
+-- Double check that the slot is actually eligible for use
+local function HasFailure( slotIndex )
+    if ( HasCostFailure( slotIndex ) ) then
+        return true
+    elseif ( HasRequirementFailure( slotIndex ) ) then
+        return true
+    elseif ( HasWeaponSlotFailure( slotIndex ) ) then
+        return true
+    elseif ( HasTargetFailure( slotIndex ) ) then
+        return true
+    elseif ( HasRangeFailure( slotIndex ) ) then
+        return true
+    elseif ( HasStatusEffectFailure( slotIndex )  ) then
+        return true
+    elseif ( HasFallingFailure( slotIndex ) ) then
+        return true
+    elseif ( HasSwimmingFailure( slotIndex ) ) then
+        return true
+    elseif ( HasMountedFailure( slotIndex ) ) then
+        return true
+    elseif ( HasReincarnatingFailure( slotIndex ) ) then
+        return true
+    end
+    return false
+end
+
 
 -- Module initialization
 function CI.Initialize( enabled )
@@ -66,6 +123,8 @@ function CI.Initialize( enabled )
     -- If User does not want the Combat Info then exit right here
     if not enabled then return end
     CI.Enabled = true
+    
+    CI.ApplyFont()
 
     -- Set ability cooldown controls
     for actionButtonNum = 3, 7 do
@@ -116,7 +175,11 @@ function CI.RegisterCombatInfo()
         EVENT_MANAGER:AddFilterForEvent(moduleName .. "player", EVENT_POWER_UPDATE, REGISTER_FILTER_UNIT_TAG, "player" )
         
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE, CI.OnSlotsFullUpdate)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED, function(eventCode, slotNum) if slotNum == g_ultimateSlot then CI.OnSlotsFullUpdate(eventCode) end end)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED, CI.OnSlotUpdated)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_ABILITY_USED, CI.OnSlotAbilityUsed)
+        
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED, CI.OnDeath)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, CI.OnEffectChanged)
     end
 end
 
@@ -132,6 +195,47 @@ end
 
 -- Updates all floating labels. Called every 100ms
 function CI.OnUpdate(currentTime)
+    
+    -- Procs
+    for k, v in pairs (g_triggeredSlotsRemain) do
+        local remain = g_triggeredSlotsRemain[k] - currentTime
+        
+        -- If duration reaches 0 then remove effect
+        if remain <= 0 then
+            if g_triggeredSlots[k] and g_uiProcAnimation[g_triggeredSlots[k]] then
+                g_uiProcAnimation[g_triggeredSlots[k]]:Stop()
+            end
+            g_triggeredSlotsRemain[k] = nil
+        end
+        
+        -- Update Label
+        if g_triggeredSlots[k] and g_uiProcAnimation[g_triggeredSlots[k]] and g_triggeredSlotsRemain[k] then
+            if CI.SV.BarShowLabel then
+                g_uiProcAnimation[g_triggeredSlots[k]].procLoopTexture.label:SetText( strfmt(CI.SV.RemainingTextMillis and "%.1f" or "%.1d", remain/1000) )
+            end
+        end
+    end
+    
+    -- Ability Highlight
+    for k, v in pairs (g_toggledSlotsRemain) do
+        local remain = g_toggledSlotsRemain[k] - currentTime
+        
+        -- If duration reaches 0 then remove effect
+        if remain <= 0 then
+            if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] then
+                g_uiCustomToggle[g_toggledSlots[k]]:SetHidden(true)
+            end
+            g_toggledSlotsRemain[k] = nil
+        end
+        
+        -- Update Label
+        if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] and g_toggledSlotsRemain[k] then
+            if CI.SV.BarShowLabel then
+                g_uiCustomToggle[g_toggledSlots[k]].label:SetText( strfmt(CI.SV.RemainingTextMillis and "%.1f" or "%.1d", remain/1000) )
+            end
+        end
+    end
+
     -- Ability cooldowns
     if ( CI.SV.CoolDown ) then
         for actionButtonNum = 3, 7 do
@@ -181,12 +285,138 @@ function CI.OnUpdate(currentTime)
 
 end
 
+-- Updates local variable with new font and resets all existing icons
+function CI.ApplyFont()
+    if not CI.Enabled then
+        return
+    end
+
+    local barFontName = LUIE.Fonts[CI.SV.BarFontFace]
+        if not barFontName or barFontName == "" then
+        printToChat(GetString(SI_LUIE_SCB_ERROR_FONT))
+        barfontName = "$(MEDIUM_FONT)"
+    end
+    
+    local barFontStyle = ( CI.SV.BarFontStyle and CI.SV.BarFontStyle ~= "" ) and CI.SV.BarFontStyle or "outline"
+    local barFontSize = ( CI.SV.BarFontSize and CI.SV.BarFontSize > 0 ) and CI.SV.BarFontSize or 17
+    
+    g_barFont = barFontName .. "|" .. barFontSize .. "|" .. barFontStyle
+    
+    for k, _ in pairs(g_uiProcAnimation) do
+        g_uiProcAnimation[k].procLoopTexture.label:SetFont(g_barFont)
+    end
+    
+    for k, _ in pairs(g_uiCustomToggle) do
+        g_uiCustomToggle[k].label:SetFont(g_barFont)
+    end
+
+end
+
+-- Resets bar labels on menu option change
+function CI.ResetBarLabel()
+
+    for k, _ in pairs(g_uiProcAnimation) do
+        g_uiProcAnimation[k].procLoopTexture.label:SetText("")
+    end
+    
+    for k, _ in pairs(g_uiCustomToggle) do
+        g_uiCustomToggle[k].label:SetText("")
+    end
+    
+    for i = 3, 8 do
+        local actionButton = ZO_ActionBar_GetButton(i)
+        if g_uiCustomToggle[i] then
+            g_uiCustomToggle[i].label:ClearAnchors()
+            g_uiCustomToggle[i].label:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
+            g_uiCustomToggle[i].label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"), nil, 0, -CI.SV.BarLabelPosition)
+        elseif g_uiProcAnimation[i] then
+            g_uiProcAnimation[i].procLoopTexture.label:ClearAnchors()
+            g_uiProcAnimation[i].procLoopTexture.label:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
+            g_uiProcAnimation[i].procLoopTexture.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"), nil, 0, -CI.SV.BarLabelPosition)
+        end
+    end
+end
+
+function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+
+    if castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
+        if g_pendingGroundAbility and g_pendingGroundAbility.id == abilityId and changeType == EFFECT_RESULT_GAINED then
+            -- Bar Tracker
+            if CI.SV.ShowToggled then
+                local currentTime = GetGameTimeMilliseconds()
+                local slotNum = g_pendingGroundAbility.slotNum
+                if g_toggledSlots[abilityId] then
+                    if CI.SV.ShowToggled then
+                        local groundDuration = endTime - beginTime
+                        g_toggledSlotsRemain[abilityId] = groundDuration*1000 + currentTime
+                        CI.ShowCustomToggle(slotNum)
+                        if CI.SV.BarShowLabel then
+                            g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.RemainingTextMillis and "%.1f" or "%.1d", groundDuration - 1) )
+                        end
+                    end
+                end    
+            end 
+            -- Clear the ground target queue
+            g_pendingGroundAbility = nil
+        end 
+    end
+    
+    if changeType == EFFECT_RESULT_FADED then -- delete Effect
+    
+        if unitTag == "player" then
+            -- Stop any proc animation associated with this effect
+            if abilityType == ABILITY_TYPE_BONUS and g_triggeredSlotsRemain[abilityId] then
+                if g_triggeredSlots[abilityId] and g_uiProcAnimation[g_triggeredSlots[abilityId]] then
+                    g_uiProcAnimation[g_triggeredSlots[abilityId]]:Stop()
+                end
+                g_triggeredSlotsRemain[abilityId] = nil
+            end
+            
+            -- Stop any toggle animation associted with this effect
+            if g_toggledSlotsRemain[abilityId] then 
+                if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
+                    g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
+                end
+                g_toggledSlotsRemain[abilityId] = nil
+            end
+        end
+    else
+        -- Also create visual enhancements from skill bar
+        if unitTag == "player" then
+            -- start any proc animation associated with this effect
+            if abilityType == ABILITY_TYPE_BONUS and g_triggeredSlots[abilityId] then
+                if CI.SV.ShowTriggered then
+                    PlaySound(SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN)
+                    g_triggeredSlotsRemain[abilityId] = GetAbilityDuration(abilityId) + GetGameTimeMilliseconds()
+                    CI.PlayProcAnimations(g_triggeredSlots[abilityId])
+                    if CI.SV.BarShowLabel then
+                        g_uiProcAnimation[g_triggeredSlots[abilityId]].procLoopTexture.label:SetText( strfmt(CI.SV.RemainingTextMillis and "%.1f" or "%.1d", GetAbilityDuration(abilityId)/1000 -1) )
+                    end
+                end
+            end
+            
+            -- Display active effects
+            if g_toggledSlots[abilityId] then
+                local currentTime = GetGameTimeMilliseconds()
+                if CI.SV.ShowToggled then
+                    g_toggledSlotsRemain[abilityId] = GetAbilityDuration(abilityId) + GetGameTimeMilliseconds()
+                    CI.ShowCustomToggle(g_toggledSlots[abilityId])
+                    if CI.SV.BarShowLabel then
+                        g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.RemainingTextMillis and "%.1f" or "%.1d", GetAbilityDuration(abilityId)/1000 -1) )
+                    end
+                end
+            end 
+        end
+    end
+
+end
+
 -- Listens to EVENT_COMBAT_EVENT
 function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
     -- Ignore error events
     if isError then return end
 
-    -- Manually track Ultimate generation -- same as in SCB module
+    -- Manually track Ultimate generation -- same as in CI module
     if CI.SV.UltimateGeneration and uiUltimate.NotFull and (
         ( result == ACTION_RESULT_BLOCKED_DAMAGE and targetType == COMBAT_UNIT_TYPE_PLAYER ) or
         ( E.IsWeaponAttack[abilityName] and sourceType == COMBAT_UNIT_TYPE_PLAYER and targetType == COMBAT_UNIT_TYPE_NONE )
@@ -198,7 +428,133 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
 
 end
 
-function CI.OnSlotsFullUpdate(eventCode)
+function CI.OnSlotAbilityUsed(eventCode, slotNum)
+    -- Clear stored ground-target ability
+    g_pendingGroundAbility = nil
+
+    -- Get the used ability
+    local currentTime = GetGameTimeMilliseconds()
+    local ability = g_actionBar[slotNum]
+
+    if ability then -- Only proceed if this button is being watched
+        -- Get the time
+
+        -- Avoid failure and button mashing
+        if not HasFailure( slotNum ) and ( currentTime > g_lastCast + 250 ) then
+
+            -- Don't process effects immediately for ground-target spells
+            if ability.ground then
+                g_pendingGroundAbility = ability
+            else
+                if g_toggledSlots[ability.id] then
+                    if CI.SV.ShowToggled then
+                        g_toggledSlotsRemain[ability.id] = g_actionBar[slotNum].duration + currentTime
+                        CI.ShowCustomToggle(slotNum)
+                        if CI.SV.BarShowLabel then
+                            g_uiCustomToggle[g_toggledSlots[ability.id]].label:SetText( strfmt(CI.SV.RemainingTextMillis and "%.1f" or "%.1d", GetAbilityDuration(ability.id)/1000 -1) )
+                        end
+                    end
+                end
+
+                -- Flag the last cast time
+                g_lastCast = currentTime
+            end
+        end
+ 
+    end
+    
+end
+
+function CI.OnSlotUpdated(eventCode, slotNum)
+
+    -- Handle ultimate label first
+    --if slotNum == g_ultimateSlot then CI.OnSlotsFullUpdate(eventCode) end
+    
+    -- Handle slot update for action bars
+    --d( strfmt("%d: %s(%d)", slotNum, GetSlotName(slotNum), GetSlotBoundId(slotNum) ) )
+    -- Look only for action bar slots
+    if slotNum < 3 or slotNum > 8 then
+        return
+    end
+
+    -- Remove saved triggered proc information
+    for abilityId, slot in pairs(g_triggeredSlots) do
+        if (slot == slotNum) then
+            g_triggeredSlots[abilityId] = nil
+        end
+    end
+    -- Stop possible proc animation
+    if g_uiProcAnimation[slotNum] and g_uiProcAnimation[slotNum]:IsPlaying() then
+        --g_uiProcAnimation[slotNum].procLoopTexture.label:SetText("")
+        g_uiProcAnimation[slotNum]:Stop()
+    end
+
+    -- Remove custom toggle information and custom highlight
+    for abilityId, slot in pairs(g_toggledSlots) do
+        if (slot == slotNum) then
+            g_toggledSlots[abilityId] = nil
+        end
+    end
+    
+    if g_uiCustomToggle[slotNum] then
+        --g_uiCustomToggle[slotNum].label:SetText("")
+        g_uiCustomToggle[slotNum]:SetHidden(true)
+    end
+
+    -- Bail out if slot is not used
+    if not IsSlotUsed(slotNum) then
+        g_actionBar[slotNum] = nil
+        return
+    end
+
+    -- Get the slotted ability ID
+    local ability_id = GetSlotBoundId(slotNum)
+    local abilityName = E.EffectOverride[ability_id] and E.EffectOverride[ability_id].name or GetAbilityName(ability_id) -- GetSlotName(slotNum)
+    local duration = GetAbilityDuration(ability_id)
+
+    g_actionBar[slotNum] = {
+        id      = ability_id,
+        name    = abilityName,
+        ground  = ( GetAbilityTargetDescription(ability_id) == "Ground" ),
+        duration = duration,
+        slotNum=slotNum
+    }
+
+    -- Check if currently this ability is in proc state
+    local proc = HasAbilityProc[abilityName]
+    if IsAbilityProc[abilityName] then
+        if CI.SV.ShowTriggered then
+            CI.PlayProcAnimations(slotNum)
+            -- TODO
+        end
+    elseif proc then
+        g_triggeredSlots[proc] = slotNum
+         if g_triggeredSlotsRemain[proc] then
+            if CI.SV.ShowTriggered then
+                CI.PlayProcAnimations(slotNum)
+                if CI.SV.BarShowLabel then
+                    g_uiProcAnimation[slotNum].procLoopTexture.label:SetText( strfmt(CI.SV.RemainingTextMillis and "%.1f" or "%.1d", GetAbilityDuration(ability_id)/1000) )
+                end
+            end
+        end
+    end
+
+    if duration > 0 then
+        g_toggledSlots[ability_id] = slotNum
+        if g_toggledSlotsRemain[ability_id] then
+            if CI.SV.ShowToggled then
+                CI.ShowCustomToggle(slotNum)
+                if CI.SV.BarShowLabel then
+                    g_uiCustomToggle[slotNum].label:SetText( strfmt(CI.SV.RemainingTextMillis and "%.1f" or "%.1d", GetAbilityDuration(ability_id)/1000) )
+                end
+            end
+        end
+    end  
+
+end
+
+function CI.OnSlotsFullUpdate(eventCode, isHotbarSwap)
+    -- Handle ultimate label first
     local setHidden = not ( CI.SV.UltimateEnabled and IsSlotUsed( g_ultimateSlot ) )
 
     uiUltimate.LabelVal:SetHidden( setHidden )
@@ -218,6 +574,101 @@ function CI.OnSlotsFullUpdate(eventCode)
     -- force recalculation of percent value. Otherwise (weapons swap) this will be called by the game
     if ( eventCode == EVENT_ACTION_SLOT_UPDATED or EVENT_ACTION_SLOTS_FULL_UPDATE and not setHidden ) then
         CI.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, POWERTYPE_ULTIMATE, g_ultimateCurrent, 0, 0)
+    end
+    
+    -- If the event was triggered by a weapon swap we need to clear ground-target stored ability
+    if isHotbarSwap then
+        g_pendingGroundAbility = nil
+    end
+
+    -- Update action bar skills
+    g_actionBar = {}
+    for i = 3, 8 do
+        CI.OnSlotUpdated(eventCode, i)
+    end
+    
+end
+
+function CI.PlayProcAnimations(slotNum)
+    if not g_uiProcAnimation[slotNum] then
+        local actionButton = ZO_ActionBar_GetButton(slotNum)
+        local procLoopTexture = WINDOW_MANAGER:CreateControl("$(parent)Loop_LUIE", actionButton.slot, CT_TEXTURE)
+        procLoopTexture:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
+        procLoopTexture:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"))
+        procLoopTexture:SetTexture("/esoui/art/actionbar/abilityhighlight_mage_med.dds")
+        procLoopTexture:SetBlendMode(TEX_BLEND_MODE_ADD)
+        procLoopTexture:SetDrawLevel(2)
+        procLoopTexture:SetHidden(true)
+        
+        procLoopTexture.label = UI.Label (procLoopTexture, nil, nil, nil, g_barFont, nil, false)
+        procLoopTexture.label:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
+        procLoopTexture.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"), nil, 0, -CI.SV.BarLabelPosition)
+        procLoopTexture.label:SetDrawLayer(DL_COUNT)
+        procLoopTexture.label:SetDrawLevel(3)
+        procLoopTexture.label:SetDrawTier(3)
+        procLoopTexture.label:SetColor( unpack( CI.SV.RemainingTextColoured and colour or {1,1,1,1} ) )
+        procLoopTexture.label:SetHidden(false)
+
+        local procLoopTimeline = ANIMATION_MANAGER:CreateTimelineFromVirtual("UltimateReadyLoop", procLoopTexture)
+        procLoopTimeline.procLoopTexture = procLoopTexture
+
+        procLoopTimeline.onPlay = function(self) self.procLoopTexture:SetHidden(false) end
+        procLoopTimeline.onStop = function(self) self.procLoopTexture:SetHidden(true) end
+
+        procLoopTimeline:SetHandler("OnPlay", procLoopTimeline.onPlay)
+        procLoopTimeline:SetHandler("OnStop", procLoopTimeline.onStop)
+
+        g_uiProcAnimation[slotNum] = procLoopTimeline
+    end
+    if g_uiProcAnimation[slotNum] then
+        if not g_uiProcAnimation[slotNum]:IsPlaying() then
+            g_uiProcAnimation[slotNum]:PlayFromStart()
+        end
+    end
+end
+
+function CI.OnDeath(eventCode, unitTag, isDead)
+    -- And toggle buttons
+    if unitTag == "player" then
+        for slotNum = 3, 8 do
+            if g_uiCustomToggle[slotNum] then
+                g_uiCustomToggle[slotNum]:SetHidden(true)
+            end
+        end
+    end
+end
+
+-- Displays custom toggle texture
+function CI.ShowCustomToggle(slotNum)
+    if not g_uiCustomToggle[slotNum] then
+        local actionButton = ZO_ActionBar_GetButton(slotNum)
+        
+        local toggleFrame = WINDOW_MANAGER:CreateControl("$(parent)Toggle_LUIE", actionButton.slot, CT_TEXTURE)
+        
+        --toggleFrame.back = UI.Texture( toggleFrame, nil, nil, "/esoui/art/actionbar/actionslot_toggledon.dds")
+        toggleFrame:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
+        toggleFrame:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"))
+        toggleFrame:SetTexture("/esoui/art/actionbar/actionslot_toggledon.dds")
+        toggleFrame:SetBlendMode(TEX_BLEND_MODE_ADD)
+        toggleFrame:SetDrawLayer(0)
+        toggleFrame:SetDrawLevel(0)
+        toggleFrame:SetDrawTier(2)
+        toggleFrame:SetColor(0.5,1,0.5,1)
+        toggleFrame:SetHidden(false)
+        
+        toggleFrame.label = UI.Label (toggleFrame, nil, nil, nil, g_barFont, nil, false)
+        toggleFrame.label:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
+        toggleFrame.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"), nil, 0, -CI.SV.BarLabelPosition)
+        toggleFrame.label:SetDrawLayer(DL_COUNT)
+        toggleFrame.label:SetDrawLevel(1)
+        toggleFrame.label:SetDrawTier(3)
+        toggleFrame.label:SetColor( unpack( CI.SV.RemainingTextColoured and colour or {1,1,1,1} ) )
+        toggleFrame.label:SetHidden(false)
+
+        g_uiCustomToggle[slotNum] = toggleFrame
+    end
+    if g_uiCustomToggle[slotNum] then
+        g_uiCustomToggle[slotNum]:SetHidden(false)
     end
 end
 
