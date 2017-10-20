@@ -43,6 +43,9 @@ function LUIE_CreateSettings()
     local raidIconOptions               = { "No Icons", "Class Icons Only", "Role Icons Only", "Class Icon in PVP, Role in PVE", "Class Icon in PVE, Role in PVP" }
     local raidIconOptionsKeys           = { ["No Icons"] = 1 , ["Class Icons Only"] = 2, ["Role Icons Only"] = 3, ["Class Icon in PVP, Role in PVE"] = 4, ["Class Icon in PVE, Role in PVP"] = 5 }
     
+    local globalMethodOptions           = { "Ascending", "Descending", "Radial" }
+	local globalMethodOptionsKeys = { ["Ascending"] = 1, ["Descending"] = 2, ["Radial"] = 3 }
+    
     local championOptions = {
     
     "Show Above Cap",
@@ -493,16 +496,82 @@ function LUIE_CreateSettings()
         name = GetString(SI_LUIE_LAM_CI_HEADER),
         reference = "Combat_Info_Options_Submenu",
     }
+    -- Show Cooldowns (Potion Only when I get finished) -- TODO
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_CI_SHOWCOOLDOWNS),
-        tooltip = GetString(SI_LUIE_LAM_CI_SHOWCOOLDOWNS_TP),
+        name = "Show Potion Cooldown Timer",
+        tooltip = "TODO",
         getFunc = function() return LUIE.CombatInfo.SV.CoolDown end,
         setFunc = function(value) LUIE.CombatInfo.SV.CoolDown = value end,
         width = "full",
         default = LUIE.CombatInfo.D.CoolDown,
         disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
     }
+    
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "checkbox",
+        name = "Show Global Cooldown on Action Bars",
+        tooltip = "TODO",
+        getFunc = function() return LUIE.CombatInfo.SV.GlobalShow end,
+        setFunc = function(value) LUIE.CombatInfo.SV.GlobalShow = value end,
+        width = "full",
+        default = LUIE.CombatInfo.D.GlobalShow,
+        disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+    }
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "checkbox",
+        name = "Global Cooldown - Show on Quickslot",
+        tooltip = "TODO",
+        getFunc = function() return LUIE.CombatInfo.SV.GlobalPotion end,
+        setFunc = function(value) LUIE.CombatInfo.SV.GlobalPotion = value end,
+        width = "full",
+        default = LUIE.CombatInfo.D.GlobalPotion,
+        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShow) end,
+    }
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "checkbox",
+        name = "Global Cooldown - Show on Ultimate",
+        tooltip = "TODO",
+        getFunc = function() return LUIE.CombatInfo.SV.GlobalUltimate end,
+        setFunc = function(value) LUIE.CombatInfo.SV.GlobalUltimate = value end,
+        width = "full",
+        default = LUIE.CombatInfo.D.GlobalUltimate,
+        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShow) end,
+    }
+    
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "checkbox",
+        name = "Global Cooldown - Show Ready Flash",
+        tooltip = "TODO",
+        getFunc = function() return LUIE.CombatInfo.SV.GlobalFlash end,
+        setFunc = function(value) LUIE.CombatInfo.SV.GlobalFlash = value end,
+        width = "full",
+        default = LUIE.CombatInfo.D.GlobalFlash,
+        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShow) end,
+    }
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "checkbox",
+        name = "Global Cooldown - Desaturate Icons on GCD",
+        tooltip = "TODO",
+        getFunc = function() return LUIE.CombatInfo.SV.GlobalDesat end,
+        setFunc = function(value) LUIE.CombatInfo.SV.GlobalDesat = value end,
+        width = "full",
+        default = LUIE.CombatInfo.D.GlobalDesat,
+        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShow) end,
+    }
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "dropdown",
+        name = "Global Cooldown - Choose cooldown animation method",
+        tooltip = "TODO",
+        choices = globalMethodOptions,
+        getFunc = function() return globalMethodOptions[LUIE.CombatInfo.SV.GlobalMethod] end,
+        setFunc = function(value) LUIE.CombatInfo.SV.GlobalMethod = globalMethodOptionsKeys[value] end,
+        width = "full",
+        default = LUIE.CombatInfo.D.GlobalMethod,
+        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShow) end,
+    }
+
+    
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "header",
         name = GetString(SI_LUIE_LAM_CI_ULTIMATETRACKING_HEADER),

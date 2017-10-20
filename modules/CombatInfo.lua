@@ -18,6 +18,14 @@ local moduleName    = LUIE.name .. "_CombatInfo"
 CI.Enabled  = false
 CI.D = {
     CoolDown                         = false,
+    
+    GlobalShow                       = true,
+    GlobalPotion                     = true,
+    GlobalUltimate                   = true,
+    GlobalFlash                      = true,
+    GlobalDesat                      = false,
+    GlobalMethod                     = 3,
+    
     UltimateEnabled                  = true,
     UltimateHideFull                 = true,
     UltimateGeneration               = true,
@@ -49,15 +57,6 @@ local g_toggledSlotsRemain   = {}
 local g_lastCast = 0
 local g_barFont
 
--- Cooldowns overlay
-local uiCooldown    = {
-    colour  = {0.941, 0.973, .957},
-    timeColours = {
-        [1] = {remain = 600, colour = {0.878, 0.941, 0.251}},
-        [2] = {remain = 400, colour = {0.941, 0.565, 0.251}},
-        [3] = {remain = 200, colour = {0.941, 0.251, 0.125}},
-    },
-}
 -- Quickslot
 local uiQuickSlot   = {
     colour  = {0.941, 0.565, 0.251},
@@ -88,6 +87,12 @@ local HasAbilityProc = {
     [A.Skill_Crystal_Fragments]     = 46327, -- Trigger_Crystal_Fragments_Passive
 }
 
+local CooldownMethod = {
+    [1] = CD_TYPE_VERTICAL_REVEAL,
+    [2] = CD_TYPE_VERTICAL,
+    [3] = CD_TYPE_RADIAL,
+}
+
 -- Double check that the slot is actually eligible for use
 local function HasFailure( slotIndex )
     if ( HasCostFailure( slotIndex ) ) then
@@ -114,7 +119,6 @@ local function HasFailure( slotIndex )
     return false
 end
 
-
 -- Module initialization
 function CI.Initialize( enabled )
     -- Load settings
@@ -126,25 +130,10 @@ function CI.Initialize( enabled )
     
     CI.ApplyFont()
 
-    -- Set ability cooldown controls
-    for actionButtonNum = 3, 7 do
-        local parent = ZO_ActionBar_GetButton(actionButtonNum).slot
-        local bg = UI.Texture( parent, nil, nil, nil, DL_OVERLAY, true )
-        bg:SetAnchor(TOPLEFT, parent:GetNamedChild("FlipCard"))
-        bg:SetAnchor(BOTTOMRIGHT, parent:GetNamedChild("FlipCard"))
-        --:SetAlpha( 0.55 )
-        uiCooldown[ actionButtonNum ] = {}
-        uiCooldown[ actionButtonNum ].bg = bg
-        uiCooldown[ actionButtonNum ].label = UI.Label( bg, {CENTER,CENTER}, nil, nil, "$(BOLD_FONT)|24|soft-shadow-thin", nil, true )
-        uiCooldown[ actionButtonNum ].label:SetColor(unpack(uiCooldown.colour))
-    end
-
     uiQuickSlot.label = UI.Label( ActionButton9, {CENTER,CENTER}, nil, nil, "$(MEDIUM_FONT)|18|outline", nil, true )
     uiQuickSlot.label:SetColor(unpack(uiQuickSlot.colour))
     uiQuickSlot.label:SetDrawLayer( DL_OVERLAY )
     uiQuickSlot.label:SetDrawTier( DT_HIGH )
-    -- FIXME: This stopped working with Update 1.7.0
-    --ActionButton9CountText:SetFont("/EsoUI/Common/Fonts/FTN87.otf|14|soft-shadow-thin")
 
     -- Create Ultimate overlay labels
     uiUltimate.LabelVal = UI.Label( ActionButton8, {BOTTOM,TOP,0,-3}, nil, {1,2}, "$(BOLD_FONT)|16|soft-shadow-thick", nil, true )
@@ -155,6 +144,122 @@ function CI.Initialize( enabled )
 
     CI.RegisterCombatInfo()
 
+    ActionButton.UpdateUsable = function(self)
+        local slotnum = self:GetSlot()
+        local isGamepad = IsInGamepadPreferredMode()
+        local _, duration, _, _ = GetSlotCooldownInfo(slotnum)
+        local isShowingCooldown = self.showingCooldown
+        local isKeyboardUltimateSlot = not isGamepad and self.slot.slotNum == ACTION_BAR_ULTIMATE_SLOT_INDEX + 1
+        local usable = false
+        if not self.useFailure and not isShowingCooldown then
+            usable = true
+        elseif ( isKeyboardUltimateSlot and self.costFailureOnly and not isShowingCooldown ) or ( isKeyboardUltimateSlot and not CI.SV.GlobalUltimate ) then
+            usable = true
+        -- Fix to grey out potions
+        elseif ( IsSlotItemConsumable(slotnum) and not self.useFailure and not isShowingCooldown ) or ( IsSlotItemConsumable(slotnum) and not CI.SV.GlobalPotion ) then
+			usable = true
+		end
+        if usable ~= self.usable or isGamepad ~= self.isGamepad then
+            self.usable = usable
+            self.isGamepad = isGamepad
+        end
+        -- Have to move this out of conditional to fix desaturation from getting stuck on icons.
+        local useDesaturation = (isShowingCooldown and CI.SV.GlobalDesat )
+        ZO_ActionSlot_SetUnusable(self.icon, not usable, useDesaturation)
+    end
+    
+    ActionButton.UpdateCooldown = function(self, options)
+        local slotnum = self:GetSlot()
+        local remain, duration, global, globalSlotType = GetSlotCooldownInfo(slotnum)
+        local isInCooldown = duration > 0
+        local slotType = GetSlotType(slotnum)
+        local showGlobalCooldownForCollectible = global and slotType == ACTION_TYPE_COLLECTIBLE and globalSlotType == ACTION_TYPE_COLLECTIBLE
+        local showCooldown = isInCooldown and (CI.SV.GlobalShow or not global or showGlobalCooldownForCollectible)
+        self.cooldown:SetHidden(not showCooldown)
+
+        local updateChromaQuickslot = slotType ~= ACTION_TYPE_ABILITY and ZO_RZCHROMA_EFFECTS
+
+        if showCooldown then
+            -- For items with a long CD we need to be sure not to hide the countdown radial timer, so if the duration is the 1 sec GCD, then we don't turn off the cooldown animation.
+            if not (slotnum == 8 and not CI.SV.GlobalUltimate ) and not ( IsSlotItemConsumable(slotnum) and duration < 5000 and not CI.SV.GlobalPotion ) then
+                self.cooldown:StartCooldown(remain, duration, CooldownMethod[CI.SV.GlobalMethod], nil, NO_LEADING_EDGE)
+                if self.cooldownCompleteAnim.animation then
+                    self.cooldownCompleteAnim.animation:GetTimeline():PlayInstantlyToStart()
+                end
+
+                if IsInGamepadPreferredMode() then
+                    if not self.itemQtyFailure then
+                        self.icon:SetDesaturation(0)
+                    end
+                    self.cooldown:SetHidden(true)
+                    if not self.showingCooldown then
+                        self:SetNeedsAnimationParameterUpdate(true)
+                        self:PlayAbilityUsedBounce()
+                    end
+                else
+                    self.cooldown:SetHidden(false)
+                end
+
+                self.slot:SetHandler("OnUpdate", function() self:RefreshCooldown() end)
+                if updateChromaQuickslot then
+                    ZO_RZCHROMA_EFFECTS:RemoveKeybindActionEffect("ACTION_BUTTON_9")
+                end
+            end
+        else
+            if CI.SV.GlobalFlash then
+                if self.showingCooldown then
+                    -- Stop flash from appearing on potion/ultimate if toggled off.
+                    if not (slotnum == 8 and not CI.SV.GlobalUltimate ) and not ( IsSlotItemConsumable(slotnum) and duration < 5000 and not CI.SV.GlobalPotion ) then
+                        -- This ability was in a non-global cooldown, and now the cooldown is over...play animation and sound
+                        if options ~= FORCE_SUPPRESS_COOLDOWN_SOUND then
+                            PlaySound(SOUNDS.ABILITY_READY)
+                        end
+
+                        self.cooldownCompleteAnim.animation = self.cooldownCompleteAnim.animation or CreateSimpleAnimation(ANIMATION_TEXTURE, self.cooldownCompleteAnim)
+                        local anim = self.cooldownCompleteAnim.animation
+
+                        self.cooldownCompleteAnim:SetHidden(false)
+                        self.cooldown:SetHidden(false)
+
+                        anim:SetImageData(16,1)
+                        anim:SetFramerate(30)
+                        anim:GetTimeline():PlayFromStart()
+
+                        if updateChromaQuickslot then
+                            ZO_RZCHROMA_EFFECTS:AddKeybindActionEffect("ACTION_BUTTON_9")
+                        end
+                    end
+                end
+            end
+
+            self.icon.percentComplete = 1
+            self.slot:SetHandler("OnUpdate", nil)
+            self.cooldown:ResetCooldown()
+        end
+
+        if showCooldown ~= self.showingCooldown then
+            self.showingCooldown = showCooldown
+
+            if self.showingCooldown then
+                ZO_ContextualActionBar_AddReference()
+            else
+                ZO_ContextualActionBar_RemoveReference()
+            end
+
+            self:UpdateActivationHighlight()
+            if IsInGamepadPreferredMode() then
+                self:SetCooldownHeight(self.icon.percentComplete)
+            end
+            self:SetCooldownIconAnchors(showCooldown)
+        end
+
+        local textColor = showCooldown and INTERFACE_TEXT_COLOR_FAILED or INTERFACE_TEXT_COLOR_SELECTED
+        self.buttonText:SetColor(GetInterfaceColor(INTERFACE_COLOR_TYPE_TEXT_COLORS, textColor))
+
+        self.isGlobalCooldown = global
+        self:UpdateUsable()
+    end
+    
 end
 
 -- Clear and then (maybe) re-register event listeners for Combat/Power/Slot Updates
@@ -236,32 +341,12 @@ function CI.OnUpdate(currentTime)
         end
     end
 
-    -- Ability cooldowns
+    -- Quickslot cooldown
     if ( CI.SV.CoolDown ) then
-        for actionButtonNum = 3, 7 do
-            local bg    = uiCooldown[ actionButtonNum ].bg
-            local label = uiCooldown[ actionButtonNum ].label
-            local remain, duration, global = GetSlotCooldownInfo( actionButtonNum )
-            if ( duration > 0 ) then
-                bg:SetHidden( false )
-                bg:SetAlpha( 0.001*remain )
-                label:SetHidden( false )
-                label:SetText( strfmt( "%.1f", 0.001*remain ) )
-                --for i = #(uiCooldown.timeColours), 1, -1 do
-                --  if remain < uiCooldown.timeColours[i].remain then
-                --      label:SetColor( unpack( uiCooldown.timeColours[i].colour ) )
-                --      break
-                --  end
-                --end
-            else
-                bg:SetHidden( true )
-                --label:SetColor( unpack( uiCooldown.colour ) )
-            end
-        end
-        -- Now same thing for quickslot
         local slotIndex = GetCurrentQuickslot()
         local remain, duration, global = GetSlotCooldownInfo( slotIndex )
-        if ( duration > 0 ) then
+        -- Don't show unless potion is used - We have to counter for the GCD lockout from casting a spell here
+        if ( duration > 5000 ) then
             uiQuickSlot.label:SetHidden( false )
             uiQuickSlot.label:SetText( strfmt( "%.1f", 0.001*remain ) )
             for i = #(uiQuickSlot.timeColours), 1, -1 do
