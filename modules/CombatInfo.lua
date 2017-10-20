@@ -55,6 +55,7 @@ local g_triggeredSlotsRemain = {}
 local g_toggledSlots         = {}
 local g_toggledSlotsRemain   = {}
 local g_lastCast = 0
+local g_pendingGroundAbility = nil
 local g_barFont
 
 -- Quickslot
@@ -552,8 +553,9 @@ end
 
 function CI.OnSlotUpdated(eventCode, slotNum)
 
-    -- Handle ultimate label first
-    --if slotNum == g_ultimateSlot then CI.OnSlotsFullUpdate(eventCode) end
+    if slotNum == 8 then
+        CI.UpdateUltimateLabel(eventCode)
+    end
     
     -- Handle slot update for action bars
     --d( strfmt("%d: %s(%d)", slotNum, GetSlotName(slotNum), GetSlotBoundId(slotNum) ) )
@@ -638,10 +640,11 @@ function CI.OnSlotUpdated(eventCode, slotNum)
 
 end
 
-function CI.OnSlotsFullUpdate(eventCode, isHotbarSwap)
+function CI.UpdateUltimateLabel(eventCode)
+
     -- Handle ultimate label first
     local setHidden = not ( CI.SV.UltimateEnabled and IsSlotUsed( g_ultimateSlot ) )
-
+    
     uiUltimate.LabelVal:SetHidden( setHidden )
     if setHidden then
         uiUltimate.LabelPct:SetHidden( true )
@@ -657,9 +660,14 @@ function CI.OnSlotsFullUpdate(eventCode, isHotbarSwap)
 
     -- if this event was caused only by user manually changing the ultimate ability, then
     -- force recalculation of percent value. Otherwise (weapons swap) this will be called by the game
-    if ( eventCode == EVENT_ACTION_SLOT_UPDATED or EVENT_ACTION_SLOTS_FULL_UPDATE and not setHidden ) then
+    if ( (eventCode == EVENT_ACTION_SLOT_UPDATED or EVENT_ACTION_SLOTS_FULL_UPDATE) and not setHidden ) then
         CI.OnPowerUpdatePlayer(EVENT_POWER_UPDATE, "player", nil, POWERTYPE_ULTIMATE, g_ultimateCurrent, 0, 0)
     end
+end
+
+function CI.OnSlotsFullUpdate(eventCode, isHotbarSwap)
+    -- Handle ultimate label first
+    CI.UpdateUltimateLabel(eventCode)
     
     -- If the event was triggered by a weapon swap we need to clear ground-target stored ability
     if isHotbarSwap then
@@ -768,21 +776,23 @@ function CI.OnPowerUpdatePlayer( eventCode , unitTag, powerIndex, powerType, pow
     local pct = ( g_ultimateCost > 0 ) and math.floor( ( powerValue / g_ultimateCost ) * 100 ) or 0
     -- Update the tooltip only when corresponding setting is enabled
     if CI.SV.UltimateEnabled then
-        -- Values label: Set Value and assign colour
-        -- Pct label: show always when less then 100% and possibly if UltimateHideFull is false
-        uiUltimate.LabelVal:SetText( powerValue .. "/" .. g_ultimateCost )
-        uiUltimate.LabelPct:SetText( pct .. "%")
-        if pct < 100  then
-            uiUltimate.LabelPct:SetHidden(false)
-            for i = #(uiUltimate.pctColours), 1, -1 do
-                if pct < uiUltimate.pctColours[i].pct then
-                    uiUltimate.LabelVal:SetColor( unpack( uiUltimate.pctColours[i].colour ) )
-                    break
+        if IsSlotUsed( g_ultimateSlot ) then
+            -- Values label: Set Value and assign colour
+            -- Pct label: show always when less then 100% and possibly if UltimateHideFull is false
+            uiUltimate.LabelVal:SetText( powerValue .. "/" .. g_ultimateCost )
+            uiUltimate.LabelPct:SetText( pct .. "%")
+            if pct < 100  then
+                uiUltimate.LabelPct:SetHidden(false)
+                for i = #(uiUltimate.pctColours), 1, -1 do
+                    if pct < uiUltimate.pctColours[i].pct then
+                        uiUltimate.LabelVal:SetColor( unpack( uiUltimate.pctColours[i].colour ) )
+                        break
+                    end
                 end
+            else
+                uiUltimate.LabelPct:SetHidden( CI.SV.UltimateHideFull )
+                uiUltimate.LabelVal:SetColor( unpack(uiUltimate.colour) )
             end
-        else
-            uiUltimate.LabelPct:SetHidden( CI.SV.UltimateHideFull )
-            uiUltimate.LabelVal:SetColor( unpack(uiUltimate.colour) )
         end
     end
 
