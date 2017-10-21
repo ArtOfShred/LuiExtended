@@ -493,19 +493,8 @@ function LUIE_CreateSettings()
     -- Combat Info Options
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "header",
-        name = GetString(SI_LUIE_LAM_CI_HEADER),
-        reference = "Combat_Info_Options_Submenu",
-    }
-    -- Show Cooldowns (Potion Only when I get finished) -- TODO
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "checkbox",
-        name = "Show Potion Cooldown Timer",
-        tooltip = "TODO",
-        getFunc = function() return LUIE.CombatInfo.SV.CoolDown end,
-        setFunc = function(value) LUIE.CombatInfo.SV.CoolDown = value end,
+        name = "Global Cooldown Options",
         width = "full",
-        default = LUIE.CombatInfo.D.CoolDown,
-        disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
     }
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
@@ -574,7 +563,7 @@ function LUIE_CreateSettings()
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "header",
-        name = GetString(SI_LUIE_LAM_CI_ULTIMATETRACKING_HEADER),
+        name = "Ultimate Tracking Options",
         width = "full",
     }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
@@ -608,6 +597,11 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
     }
     
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "header",
+        name = "Bar Ability Highlight Options",
+        width = "full",
+    }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         -- Highlight Ability Bar Icon for Active Procs
         type = "checkbox",
@@ -645,7 +639,7 @@ function LUIE_CreateSettings()
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "slider",
         name = "BAR LABEL POSITION",
-        min = -64, max = 64, step = 2,
+        min = -72, max = 40, step = 2,
         getFunc = function() return LUIE.CombatInfo.SV.BarLabelPosition end,
         setFunc = function(value) LUIE.CombatInfo.SV.BarLabelPosition = value LUIE.CombatInfo.ResetBarLabel() end,
         width = "full",
@@ -692,12 +686,97 @@ function LUIE_CreateSettings()
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS),
         tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.RemainingTextMillis end,
-        setFunc = function(value) LUIE.CombatInfo.SV.RemainingTextMillis = value end,
+        getFunc = function() return LUIE.CombatInfo.SV.BarMiilis end,
+        setFunc = function(value) LUIE.CombatInfo.SV.BarMiilis = value end,
         width = "full",
-        default = LUIE.CombatInfo.D.RemainingTextMillis,
+        default = LUIE.CombatInfo.D.BarMiilis,
         disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.BarShowLabel and ( LUIE.CombatInfo.SV.ShowTriggered or LUIE.CombatInfo.SV.ShowToggled)) end,
-    }  
+    }
+    
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "header",
+        name = "Potion Cooldown Timer Options",
+        width = "full",
+    }
+    -- Show Cooldowns (Potion Only when I get finished) -- TODO
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "checkbox",
+        name = "Show Potion Cooldown Timer",
+        tooltip = "TODO",
+        getFunc = function() return LUIE.CombatInfo.SV.PotionTimerShow end,
+        setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerShow = value end,
+        width = "full",
+        default = LUIE.CombatInfo.D.PotionTimerShow,
+        disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+    }
+    
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "slider",
+        name = "Potion Cooldown Timer Label Position",
+        min = -72, max = 40, step = 2,
+        getFunc = function() return LUIE.CombatInfo.SV.PotionTimerLabelPosition end,
+        setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerLabelPosition = value LUIE.CombatInfo.ResetPotionTimerLabel() end,
+        width = "full",
+        default = LUIE.CombatInfo.D.PotionTimerLabelPosition,
+        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.PotionTimerShow ) end,
+    }
+    
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "dropdown",
+        name = "POTION TIMER FONT FACE",
+        tooltip = GetString(SI_LUIE_LAM_BUFF_FONTS_TP),
+        choices = FontsList,
+        sort = "name-up",
+        getFunc = function() return LUIE.CombatInfo.SV.PotionTimerFontFace end,
+        setFunc = function(var) LUIE.CombatInfo.SV.PotionTimerFontFace = var LUIE.CombatInfo.ApplyFont() end,
+        width = "full",
+        default = LUIE.CombatInfo.D.PotionTimerFontFace,
+        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.PotionTimerShow ) end,
+    }
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "slider",
+        name = "POTION TIMER FONT SIZE",
+        tooltip = GetString(SI_LUIE_LAM_BUFF_FONTS_SIZE_TP),
+        min = 10, max = 30, step = 1,
+        getFunc = function() return LUIE.CombatInfo.SV.PotionTimerFontSize end,
+        setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerFontSize = value LUIE.CombatInfo.ApplyFont() end,
+        width = "full",
+        default = LUIE.CombatInfo.D.PotionTimerFontSize,
+        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.PotionTimerShow ) end,
+    }
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "dropdown",
+        name = "POTION TIMER FONT STYLE",
+        choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
+        sort = "name-up",
+        getFunc = function() return LUIE.CombatInfo.SV.PotionTimerFontStyle end,
+        setFunc = function(var) LUIE.CombatInfo.SV.PotionTimerFontStyle = var LUIE.CombatInfo.ApplyFont() end,
+        width = "full",
+        default = LUIE.CombatInfo.D.PotionTimerFontStyle,
+        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.PotionTimerShow ) end,
+    }
+    
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "checkbox",
+        name = "POTION TIMER COLOR LABEL?",
+        tooltip = "TODO",
+        getFunc = function() return LUIE.CombatInfo.SV.PotionTimerColor end,
+        setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerColor = value end,
+        width = "full",
+        default = LUIE.CombatInfo.D.PotionTimerColor,
+        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.PotionTimerShow ) end,
+    }
+    
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS),
+        tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
+        getFunc = function() return LUIE.CombatInfo.SV.PotionTimerMiilis end,
+        setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerMiilis = value end,
+        width = "full",
+        default = LUIE.CombatInfo.D.PotionTimerMiilis,
+        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.PotionTimerShow ) end,
+    }
 
     -- Enable Buffs & Debuffs Module
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {

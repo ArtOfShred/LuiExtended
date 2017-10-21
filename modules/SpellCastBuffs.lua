@@ -93,15 +93,6 @@ SCB.D = {
     HideTargetBuffs                  = false,
     HideTargetDebuffs                = false,
     HideGroundEffects                = false,
-    
-    ShowTriggered                    = true,
-    ShowToggled                      = true,
-    BarShowLabel                     = true,
-    BarLabelPosition                 = -20,
-    BarFontFace                      = "Fontin Regular",
-    BarFontStyle                     = "outline",
-    BarFontSize                      = 16,
-    
 }
 SCB.SV = nil
 

@@ -17,7 +17,6 @@ local moduleName    = LUIE.name .. "_CombatInfo"
 
 CI.Enabled  = false
 CI.D = {
-    CoolDown                         = false,
     
     GlobalShow                       = true,
     GlobalPotion                     = true,
@@ -29,14 +28,23 @@ CI.D = {
     UltimateEnabled                  = true,
     UltimateHideFull                 = true,
     UltimateGeneration               = true,
+    
     ShowTriggered                    = true,
     ShowToggled                      = true,
     BarShowLabel                     = true,
     BarLabelPosition                 = -20,
     BarFontFace                      = "Univers 67",
     BarFontStyle                     = "outline",
-    BarFontSize                      = 20,
-    RemainingTextMillis              = true,
+    BarFontSize                      = 17,
+    BarMiilis                        = true,
+    
+    PotionTimerShow                  = false,
+    PotionTimerLabelPosition         = 0,
+    PotionTimerFontFace              = "Univers 67",
+    PotionTimerFontStyle             = "outline",
+    PotionTimerFontSize              = 20,
+    PotionTimerColor                 = false,
+    PotionTimerMillis                = true,
 }
 CI.SV       = nil
 
@@ -57,6 +65,7 @@ local g_toggledSlotsRemain   = {}
 local g_lastCast = 0
 local g_pendingGroundAbility = nil
 local g_barFont
+local g_potionFont
 
 -- Quickslot
 local uiQuickSlot   = {
@@ -131,11 +140,17 @@ function CI.Initialize( enabled )
     
     CI.ApplyFont()
 
-    uiQuickSlot.label = UI.Label( ActionButton9, {CENTER,CENTER}, nil, nil, "$(MEDIUM_FONT)|18|outline", nil, true )
-    uiQuickSlot.label:SetColor(unpack(uiQuickSlot.colour))
+    uiQuickSlot.label = UI.Label( ActionButton9, {CENTER,CENTER}, nil, nil, g_potionFont, nil, true )    
+    uiQuickSlot.label:SetFont(g_potionFont)
+    if CI.SV.PotionTimerColor then
+        uiQuickSlot.label:SetColor(unpack(uiQuickSlot.colour))
+    else
+        uiQuickSlot.label:SetColor( 1, 1, 1, 1 )
+    end
     uiQuickSlot.label:SetDrawLayer( DL_OVERLAY )
     uiQuickSlot.label:SetDrawTier( DT_HIGH )
-
+    CI.ResetPotionTimerLabel() -- Set the label position
+    
     -- Create Ultimate overlay labels
     uiUltimate.LabelVal = UI.Label( ActionButton8, {BOTTOM,TOP,0,-3}, nil, {1,2}, "$(BOLD_FONT)|16|soft-shadow-thick", nil, true )
     uiUltimate.LabelPct = UI.Label( ActionButton8, {CENTER,CENTER}, nil, nil, "$(BOLD_FONT)|20|outline", nil, true )
@@ -317,7 +332,7 @@ function CI.OnUpdate(currentTime)
         -- Update Label
         if g_triggeredSlots[k] and g_uiProcAnimation[g_triggeredSlots[k]] and g_triggeredSlotsRemain[k] then
             if CI.SV.BarShowLabel then
-                g_uiProcAnimation[g_triggeredSlots[k]].procLoopTexture.label:SetText( strfmt(CI.SV.RemainingTextMillis and "%.1f" or "%.1d", remain/1000) )
+                g_uiProcAnimation[g_triggeredSlots[k]].procLoopTexture.label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
             end
         end
     end
@@ -337,22 +352,26 @@ function CI.OnUpdate(currentTime)
         -- Update Label
         if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] and g_toggledSlotsRemain[k] then
             if CI.SV.BarShowLabel then
-                g_uiCustomToggle[g_toggledSlots[k]].label:SetText( strfmt(CI.SV.RemainingTextMillis and "%.1f" or "%.1d", remain/1000) )
+                g_uiCustomToggle[g_toggledSlots[k]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
             end
         end
     end
 
     -- Quickslot cooldown
-    if ( CI.SV.CoolDown ) then
+    if ( CI.SV.PotionTimerShow ) then
         local slotIndex = GetCurrentQuickslot()
         local remain, duration, global = GetSlotCooldownInfo( slotIndex )
         -- Don't show unless potion is used - We have to counter for the GCD lockout from casting a spell here
         if ( duration > 5000 ) then
             uiQuickSlot.label:SetHidden( false )
-            uiQuickSlot.label:SetText( strfmt( "%.1f", 0.001*remain ) )
+            uiQuickSlot.label:SetText( strfmt(CI.SV.PotionTimerMiilis and "%.1f" or "%.1d", 0.001*remain ) )            
             for i = #(uiQuickSlot.timeColours), 1, -1 do
                 if remain < uiQuickSlot.timeColours[i].remain then
-                    uiQuickSlot.label:SetColor( unpack( uiQuickSlot.timeColours[i].colour ) )
+                    if CI.SV.PotionTimerColor then
+                        uiQuickSlot.label:SetColor( unpack( uiQuickSlot.timeColours[i].colour ) )
+                    else
+                        uiQuickSlot.label:SetColor( 1, 1, 1, 1 )
+                    end
                     break
                 end
             end
@@ -377,6 +396,7 @@ function CI.ApplyFont()
         return
     end
 
+    -- Setup Bar Font
     local barFontName = LUIE.Fonts[CI.SV.BarFontFace]
         if not barFontName or barFontName == "" then
         printToChat(GetString(SI_LUIE_SCB_ERROR_FONT))
@@ -395,7 +415,24 @@ function CI.ApplyFont()
     for k, _ in pairs(g_uiCustomToggle) do
         g_uiCustomToggle[k].label:SetFont(g_barFont)
     end
-
+    
+    -- Setup Potion Timer Font
+    local potionFontName = LUIE.Fonts[CI.SV.PotionTimerFontFace]
+        if not potionFontName or potionFontName == "" then
+        printToChat(GetString(SI_LUIE_SCB_ERROR_FONT))
+        potionFontName = "$(MEDIUM_FONT)"
+    end
+    
+    local potionFontStyle = ( CI.SV.PotionTimerFontStyle and CI.SV.PotionTimerFontStyle ~= "" ) and CI.SV.PotionTimerFontStyle or "outline"
+    local potionFontSize = ( CI.SV.PotionTimerFontSize and CI.SV.PotionTimerFontSize > 0 ) and CI.SV.PotionTimerFontSize or 17
+    
+    g_potionFont = potionFontName .. "|" .. potionFontSize .. "|" .. potionFontStyle
+    
+    -- If QuickSlot is created, and we're updating font from the menu setting, set the font here.
+    if uiQuickSlot.label then
+        uiQuickSlot.label:SetFont(g_potionFont)
+    end
+    
 end
 
 -- Resets bar labels on menu option change
@@ -423,6 +460,15 @@ function CI.ResetBarLabel()
     end
 end
 
+function CI.ResetPotionTimerLabel()
+    
+    local actionButton = ZO_ActionBar_GetButton(9)
+    uiQuickSlot.label:ClearAnchors()
+    uiQuickSlot.label:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
+    uiQuickSlot.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"), nil, 0, -CI.SV.PotionTimerLabelPosition)
+    
+end
+
 function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
 
     if castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
@@ -437,7 +483,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                         g_toggledSlotsRemain[abilityId] = groundDuration*1000 + currentTime
                         CI.ShowCustomToggle(slotNum)
                         if CI.SV.BarShowLabel then
-                            g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.RemainingTextMillis and "%.1f" or "%.1d", groundDuration - 1) )
+                            g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", groundDuration - 1) )
                         end
                     end
                 end    
@@ -476,7 +522,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                     g_triggeredSlotsRemain[abilityId] = GetAbilityDuration(abilityId) + GetGameTimeMilliseconds()
                     CI.PlayProcAnimations(g_triggeredSlots[abilityId])
                     if CI.SV.BarShowLabel then
-                        g_uiProcAnimation[g_triggeredSlots[abilityId]].procLoopTexture.label:SetText( strfmt(CI.SV.RemainingTextMillis and "%.1f" or "%.1d", GetAbilityDuration(abilityId)/1000 -1) )
+                        g_uiProcAnimation[g_triggeredSlots[abilityId]].procLoopTexture.label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", GetAbilityDuration(abilityId)/1000 -1) )
                     end
                 end
             end
@@ -488,7 +534,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                     g_toggledSlotsRemain[abilityId] = GetAbilityDuration(abilityId) + GetGameTimeMilliseconds()
                     CI.ShowCustomToggle(g_toggledSlots[abilityId])
                     if CI.SV.BarShowLabel then
-                        g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.RemainingTextMillis and "%.1f" or "%.1d", GetAbilityDuration(abilityId)/1000 -1) )
+                        g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", GetAbilityDuration(abilityId)/1000 -1) )
                     end
                 end
             end 
@@ -537,7 +583,7 @@ function CI.OnSlotAbilityUsed(eventCode, slotNum)
                         g_toggledSlotsRemain[ability.id] = g_actionBar[slotNum].duration + currentTime
                         CI.ShowCustomToggle(slotNum)
                         if CI.SV.BarShowLabel then
-                            g_uiCustomToggle[g_toggledSlots[ability.id]].label:SetText( strfmt(CI.SV.RemainingTextMillis and "%.1f" or "%.1d", GetAbilityDuration(ability.id)/1000 -1) )
+                            g_uiCustomToggle[g_toggledSlots[ability.id]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", GetAbilityDuration(ability.id)/1000 -1) )
                         end
                     end
                 end
@@ -620,7 +666,7 @@ function CI.OnSlotUpdated(eventCode, slotNum)
             if CI.SV.ShowTriggered then
                 CI.PlayProcAnimations(slotNum)
                 if CI.SV.BarShowLabel then
-                    g_uiProcAnimation[slotNum].procLoopTexture.label:SetText( strfmt(CI.SV.RemainingTextMillis and "%.1f" or "%.1d", GetAbilityDuration(ability_id)/1000) )
+                    g_uiProcAnimation[slotNum].procLoopTexture.label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", GetAbilityDuration(ability_id)/1000) )
                 end
             end
         end
@@ -632,7 +678,7 @@ function CI.OnSlotUpdated(eventCode, slotNum)
             if CI.SV.ShowToggled then
                 CI.ShowCustomToggle(slotNum)
                 if CI.SV.BarShowLabel then
-                    g_uiCustomToggle[slotNum].label:SetText( strfmt(CI.SV.RemainingTextMillis and "%.1f" or "%.1d", GetAbilityDuration(ability_id)/1000) )
+                    g_uiCustomToggle[slotNum].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", GetAbilityDuration(ability_id)/1000) )
                 end
             end
         end

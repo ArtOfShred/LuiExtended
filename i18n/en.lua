@@ -795,7 +795,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CI_HIDEPERCENTWHENFULL",                 "Hide pe
 ZO_CreateStringId("SI_LUIE_LAM_CI_HIDEPERCENTWHENFULL_TP",              "Remove percentage label from ultimate slot when ability becomes ready.")
 ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWCOOLDOWNS",                       "Show CoolDowns")
 ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWCOOLDOWNS_TP",                    "Show cooldown timers for active abilities.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWCOMBATINFO",                      "Show Combat Info")
+ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWCOMBATINFO",                      "Enable Combat Info")
 ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWCOMBATINFO_TP",                   "Displays various floating text for damage done, healing received, experience and alliance points gain.")
 ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWULTIGENTEXTURE",                  "Show Ultimate Generation texture")
 ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWULTIGENTEXTURE_TP",               "Display special texture under Ultimate skill button when in-combat ultimate generation is detected.")
