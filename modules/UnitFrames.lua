@@ -1165,7 +1165,48 @@ function UF.Initialize( enabled )
     -- Initialize colouring. This is actually needed when user does NOT want those features
     UF.TargetColourByReaction()
     UF.ReticleColourByReaction()
+    
+    --[[ WIP Posthook to update level container on UnitFrames
+    local zosCreateFrame = UNIT_FRAMES.CreateFrame 
+    function UNIT_FRAMES.CreateFrame(...) 
+        local unitFrame = zosCreateFrame(...) 
+        unitFrame.UpdateLevel = UF.UpdateDefaultLevel(unitFrame)
+        return unitFrame 
+    end
+    ]]--
 end
+
+    --[[
+    function UF.UpdateDefaultLevel(self)
+        local showLevel = self:ShouldShowLevel()
+        local unitLevel
+        local isChampion = IsUnitChampion(self:GetUnitTag())
+        if isChampion then
+            unitLevel = GetUnitChampionPoints(self:GetUnitTag())
+        else
+            unitLevel = GetUnitLevel(self:GetUnitTag())
+        end
+
+        if(self.levelLabel) then
+            if(showLevel and unitLevel > 0) then
+                self.levelLabel:SetHidden(false)
+                self.levelLabel:SetText(tostring(unitLevel))
+                self.nameLabel:SetAnchor(TOPLEFT, self.levelLabel, TOPRIGHT, 10, 0)
+            else
+                self.levelLabel:SetHidden(true)
+                self.nameLabel:SetAnchor(TOPLEFT)
+            end
+        end
+
+        if(self.championIcon) then
+            if showLevel and isChampion then
+                self.championIcon:SetHidden(false)
+            else
+                self.championIcon:SetHidden(true)
+            end
+        end
+    end
+    ]]--
 
 -- Sets out-of-combat transparency values for default user-frames
 function UF.SetDefaultFramesTransparency(min_pct_value, max_pct_value)
@@ -1514,6 +1555,38 @@ function UF.OnTargetChange(eventCode, unitTag)
     UF.OnReticleTargetChanged(eventCode)
 end
 
+function UF.UpdateDefaultLevelTarget()
+    local targetLevel = ZO_TargetUnitFramereticleoverLevel
+    local targetChamp = ZO_TargetUnitFramereticleoverChampionIcon
+    local targetName = ZO_TargetUnitFramereticleoverName
+    local unitLevel
+    local isChampion = IsUnitChampion("reticleover")
+    if isChampion then
+        if UF.SV.ChampionOptions == "Limit to Cap" then
+            unitLevel = GetUnitEffectiveChampionPoints("reticleover")
+        else
+            unitLevel = GetUnitChampionPoints("reticleover")
+        end
+    else
+        unitLevel = GetUnitLevel("reticleover")
+    end
+
+    if unitLevel > 0 then
+        targetLevel:SetHidden(false)
+        targetLevel:SetText(tostring(unitLevel))
+        targetName:SetAnchor(TOPLEFT, targetLevel, TOPRIGHT, 10, 0)
+    else
+        targetLevel:SetHidden(true)
+        targetName:SetAnchor(TOPLEFT)
+    end
+    
+    if isChampion then
+        targetChamp:SetHidden(false)
+    else
+        targetChamp:SetHidden(true)
+    end
+end
+
 -- Runs on the EVENT_RETICLE_TARGET_CHANGED listener.
 -- This handler fires every time the player's reticle target changes.
 -- Used to read initial values of target's health and shield.
@@ -1561,6 +1634,11 @@ function UF.OnReticleTargetChanged(eventCode)
         -- Hide custom label on Default Frames for critters.
         if g_DefaultFrames.reticleover[POWERTYPE_HEALTH] then
             g_DefaultFrames.reticleover[POWERTYPE_HEALTH].label:SetHidden( isCritter )
+        end
+        
+        -- Update level display based off our setting for Champion Points
+        if g_DefaultFrames.reticleover.isPlayer then
+            UF.UpdateDefaultLevelTarget()
         end
 
         -- Update colour of default target if requested
