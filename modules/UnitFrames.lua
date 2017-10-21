@@ -1166,47 +1166,7 @@ function UF.Initialize( enabled )
     UF.TargetColourByReaction()
     UF.ReticleColourByReaction()
     
-    --[[ WIP Posthook to update level container on UnitFrames
-    local zosCreateFrame = UNIT_FRAMES.CreateFrame 
-    function UNIT_FRAMES.CreateFrame(...) 
-        local unitFrame = zosCreateFrame(...) 
-        unitFrame.UpdateLevel = UF.UpdateDefaultLevel(unitFrame)
-        return unitFrame 
-    end
-    ]]--
 end
-
-    --[[
-    function UF.UpdateDefaultLevel(self)
-        local showLevel = self:ShouldShowLevel()
-        local unitLevel
-        local isChampion = IsUnitChampion(self:GetUnitTag())
-        if isChampion then
-            unitLevel = GetUnitChampionPoints(self:GetUnitTag())
-        else
-            unitLevel = GetUnitLevel(self:GetUnitTag())
-        end
-
-        if(self.levelLabel) then
-            if(showLevel and unitLevel > 0) then
-                self.levelLabel:SetHidden(false)
-                self.levelLabel:SetText(tostring(unitLevel))
-                self.nameLabel:SetAnchor(TOPLEFT, self.levelLabel, TOPRIGHT, 10, 0)
-            else
-                self.levelLabel:SetHidden(true)
-                self.nameLabel:SetAnchor(TOPLEFT)
-            end
-        end
-
-        if(self.championIcon) then
-            if showLevel and isChampion then
-                self.championIcon:SetHidden(false)
-            else
-                self.championIcon:SetHidden(true)
-            end
-        end
-    end
-    ]]--
 
 -- Sets out-of-combat transparency values for default user-frames
 function UF.SetDefaultFramesTransparency(min_pct_value, max_pct_value)
@@ -1682,11 +1642,14 @@ function UF.OnReticleTargetChanged(eventCode)
     -- Target is invalid: reset stored values to defaults
     else
         g_savedHealth.reticleover = {1,1,1,0}
+        
+        --[[ Removed due to causing custom UI elements to abruptly fade out. Left here in case there is any reason to re-enable.
         if g_DefaultFrames.reticleover[POWERTYPE_HEALTH] then
             g_DefaultFrames.reticleover[POWERTYPE_HEALTH].label:SetHidden(true)
         end
         g_DefaultFrames.reticleover.classIcon:SetHidden(true)
         g_DefaultFrames.reticleover.friendIcon:SetHidden(true)
+        ]]-- 
 
         -- Hide target frame bars control, LTE will clear buffs and remove then itself, SCB should continue to display ground buffs
         if UF.CustomFrames.reticleover then
@@ -2470,7 +2433,13 @@ function UF.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         -- Save original center colour and colour to red
         local backdrop = UF.CustomFrames.player[powerType].backdrop
         local r,g,b = backdrop:GetCenterColor()
-        backdrop:SetCenterColor( 0.4, 0, 0, 0.9 )
+        if powerType == POWERTYPE_STAMINA then
+            backdrop:SetCenterColor( 0, 0.2, 0, 0.9 )
+        elseif powerType == POWERTYPE_MAGICKA then
+            backdrop:SetCenterColor( 0, 0.05, 0.35, 0.9 )
+        else
+            backdrop:SetCenterColor( 0.4, 0, 0, 0.9 )
+        end
 
         -- Make a delayed call to return original colour
         local uniqueId = moduleName .. "_powerError_" .. powerType
