@@ -2423,9 +2423,10 @@ function UF.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         and targetType == COMBAT_UNIT_TYPE_PLAYER
         and UF.CustomFrames.player ~= nil
         and UF.CustomFrames.player[powerType] ~= nil
-        and UF.CustomFrames.player[powerType].backdrop ~= nil then
-
-        if g_powerError[powerType] then
+        and UF.CustomFrames.player[powerType].backdrop ~= nil
+        and ( powerType == POWERTYPE_HEALTH or powerType == POWERTYPE_STAMINA or powerType == POWERTYPE_MAGICKA) then
+        
+        if g_powerError[powerType] or IsUnitDead("player") then
             return
         end
 
