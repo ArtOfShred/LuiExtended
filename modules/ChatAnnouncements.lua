@@ -34,15 +34,20 @@ CA.D = {
     AchievementsProgressMsg       = "[Achievement Updated]",
     AchievementsCompleteMsg       = "[Achievement Completed]",
     AchievementsColorProgress     = true,
-    AchievementsColor             = { 0.25, 0.5, 1, 1 },
-    AchievementsCompPercentage     = false,
-    AchievementsProgress          = true,
+    AchievementColor1             = { 0.25, 0.5, 1, 1 },
+    AchievementColor2             = { 0.25, 0.5, 1, 1 },
+    AchievementsCompPercentage    = false,
+    
+    AchievementUpdateCA           = false,
+    AchievementUpdateAlert        = false,
+    
     AchievementsComplete          = true,
     AchievementsIcon              = true,
     AchievementsCategory          = true,
     AchievementsSubcategory       = true,
     AchievementsDetails           = true,
-    AchievementsBracketOptions    = 1,
+    AchievementsBracketOptions    = 4,
+    AchievementsCatBracketOptions = 2,
     AchievementsStep              = 10,
 
     
@@ -53,10 +58,24 @@ CA.D = {
     GroupChatMsg                  = false,
     GroupLFG                      = false,
     GroupLFGComplete              = false,
-    GroupRaid                     = false,
-    GroupRaidScore                = false,
-    GroupRaidBestScore            = false,
-    GroupRaidRevive               = false,
+    
+    GroupRaidCA                   = false,
+    GroupRaidCSA                  = true,
+    GroupRaidAlert                = false,
+    
+    GroupRaidScoreCA              = false,
+    GroupRaidScoreCSA             = true,
+    GroupRaidScoreAlert           = false,
+    
+    GroupRaidBestScoreCA          = false,
+    GroupRaidBestScoreCSA         = true,
+    GroupRaidBestScoreAlert       = false,
+    
+    GroupRaidReviveCA             = false,
+    GroupRaidReviveCSA            = true,
+    GroupRaidReviveAlert          = false,
+    
+    
     GroupVote                     = false,
     GuildRankDisplayOptions       = 1,
     ItemBracketDisplayOptions     = 1,
@@ -86,8 +105,24 @@ CA.D = {
     MiscDisguise                  = true,
     MiscDisguiseAlert             = true,
     MiscDisguiseOption            = 3,
-    MiscDuel                      = false,
+    
+    DuelCA                        = false,
+    DuelCSA                       = true,
+    DuelAlert                     = true,
+    
+    DuelBoundaryCA                = false,
+    DuelBoundaryCSA               = true,
+    DuelBoundaryAlert             = false,
+    
+    DuelWonCA                     = false,
+    DuelWonCSA                    = true,
+    DuelWonAlert                  = false,
+    
+    DuelStartCA                   = false,
+    DuelStartCSA                  = true,
+    
     MiscDuelStartOptions          = 1,
+    
     MiscGuild                     = false,
     MiscGuildIcon                 = false,
     MiscGuildMOTD                 = false,
@@ -429,7 +464,8 @@ local APColorize
 local TVColorize
 local WVColorize
 local DisguiseAlertColorize
-local AchievementsColorize
+local AchievementColorize1
+local AchievementColorize2
 local ExperienceMessageColorize
 local ExperienceNameColorize
 local LevelUpColorize
@@ -491,6 +527,41 @@ local QuestColorDescriptionColorize
 
 local StorageRidingColorize
 local StorageBagColorize
+
+-- 5 Option Bracket (1)
+local bracket1 = {
+    [1] = "[",
+    [2] = "(",
+    [3] = "",
+    [4] = "",
+    [5] = "",
+}
+
+-- 5 Option Bracket (2)
+local bracket2 = {
+    [1] = "]",
+    [2] = ")",
+    [3] = " -",
+    [4] = ":",
+    [5] = "",
+}
+
+-- 4 Option Bracket (1)
+local bracket3 = {
+    [1] = "[",
+    [2] = "(",
+    [3] = "- ",
+    [4] = "",
+
+}
+
+-- 4 Option Bracket (2)
+local bracket4 = {
+    [1] = "]",
+    [2] = ")",
+    [3] = "",
+    [4] = "",
+}
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -576,10 +647,8 @@ function CA.Initialize(enabled)
     CA.RegisterGuildEvents()
     CA.RegisterSocialEvents()
     CA.RegisterCustomStrings()
-    CA.RegisterDuelEvents()
     CA.RegisterDisguiseEvents()
     CA.RegisterMaraEvents()
-    CA.RegisterCollectibleEvents()
     CA.RegisterColorEvents()
     CA.RegisterStuckEvents()
     CA.RegisterQuestEvents()
@@ -634,7 +703,8 @@ function CA.RegisterColorEvents()
     TVColorize = ZO_ColorDef:New(unpack(CA.SV.CurrencyTVColor))
     WVColorize = ZO_ColorDef:New(unpack(CA.SV.CurrencyWVColor))
     DisguiseAlertColorize = ZO_ColorDef:New(unpack(CA.SV.DisguiseAlertColor))
-    AchievementsColorize = ZO_ColorDef:New(unpack(CA.SV.AchievementsColor))
+    AchievementColorize1 = ZO_ColorDef:New(unpack(CA.SV.AchievementColor1))
+    AchievementColorize2 = ZO_ColorDef:New(unpack(CA.SV.AchievementColor2))
     LorebookColorize1 = ZO_ColorDef:New(unpack(CA.SV.LorebookColor1))
     LorebookColorize2 = ZO_ColorDef:New(unpack(CA.SV.LorebookColor2))
     ExperienceMessageColorize = ZO_ColorDef:New(unpack(CA.SV.ExperienceColorMessage)):ToHex()
@@ -661,18 +731,6 @@ function CA.RegisterColorEvents()
     
 end
 
-function CA.RegisterCollectibleEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_COLLECTIBLE_NOTIFICATION_NEW)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LORE_BOOK_LEARNED)
-    if CA.SV.Collectible then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_COLLECTIBLE_UPDATED, CA.CollectibleUpdated)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_COLLECTIBLES_UPDATED, CA.CollectiblesUpdated)
-    end
-    if CA.SV.Lorebook then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LORE_BOOK_LEARNED, CA.LoreBookLearned)
-    end
-end
-
 function CA.RegisterSocialEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_FRIEND_ADDED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_FRIEND_REMOVED)
@@ -689,39 +747,11 @@ end
 function CA.RegisterQuestEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_SHARED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_SHARE_REMOVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_REMOVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_COMPLETE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_CONDITION_COUNTER_CHANGED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OBJECTIVE_COMPLETED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_POI_DISCOVERED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DISCOVERY_EXPERIENCE)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_LOG_IS_FULL)
 
     if CA.SV.QuestShare then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARED, CA.QuestShared)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARE_REMOVED, CA.QuestShareRemoved)
-    end
-    if CA.SV.Quest or CA.SV.QuestShare then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_ADDED, CA.QuestAdded)
-    end
-    if CA.SV.Quest or CA.SV.QuestCSA then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_REMOVED, CA.QuestRemoved)
-    end
-    if CA.SV.Quest or CA.SV.Loot then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_COMPLETE, CA.QuestComplete)
-    end
-    if CA.SV.QuestFailure then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_CONDITION_COUNTER_CHANGED, CA.QuestFailed)
-    end
-    if CA.SV.QuestPOICompleted then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OBJECTIVE_COMPLETED, CA.QuestObjectiveComplete)
-    end
-    if CA.SV.QuestPOIDiscovery then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DISCOVERY_EXPERIENCE, CA.DiscoveryExperience)
-    end
-    if CA.SV.QuestObjectiveDiscovery then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_POI_DISCOVERED, CA.POIDiscovered)
     end
     if CA.SV.QuestLogFull then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_LOG_IS_FULL, CA.QuestLogFull)
@@ -791,31 +821,6 @@ function CA.RegisterMaraEvents()
     end
 end
 
-function CA.RegisterDuelEvents()
-    -- EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_COUNTDOWN, CA.DuelCountdown)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_INVITE_RECEIVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_INVITE_ACCEPTED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_INVITE_SENT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_FINISHED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_INVITE_FAILED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_INVITE_DECLINED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_INVITE_CANCELED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_NEAR_BOUNDARY)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_DUEL_STARTED)
-    if CA.SV.MiscDuel then
-        --EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_COUNTDOWN, CA.DuelCountdown)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_RECEIVED, CA.DuelInviteReceived)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_ACCEPTED, CA.DuelInviteAccepted)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_SENT, CA.DuelInviteSent)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_FINISHED, CA.DuelFinished)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_FAILED, CA.DuelInviteFailed)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_DECLINED, CA.DuelInviteDeclined)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_INVITE_CANCELED, CA.DuelInviteCanceled)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_NEAR_BOUNDARY, CA.DuelNearBoundary)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, CA.DuelStarted)
-    end
-end
-
 function CA.RegisterDisguiseEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED)
@@ -846,12 +851,8 @@ end
 
 function CA.RegisterAchievementsEvent()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACHIEVEMENT_UPDATED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACHIEVEMENT_AWARDED)
-    if CA.SV.AchievementsProgress then
+    if CA.SV.AchievementUpdateCA or CA.SV.AchievementUpdateAlert then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACHIEVEMENT_UPDATED, CA.OnAchievementUpdated)
-    end
-    if CA.SV.AchievementsComplete then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACHIEVEMENT_AWARDED, CA.OnAchievementAwarded)
     end
 end
 
@@ -909,11 +910,6 @@ function CA.RegisterGroupEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTIVITY_QUEUE_RESULT)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_CANCELLED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_UPDATED)
-    -- Raid Events
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_RAID_TRIAL_COMPLETE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_RAID_TRIAL_FAILED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_RAID_TRIAL_STARTED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_RAID_TRIAL_NEW_BEST_SCORE)
     if CA.SV.GroupChatMsg then
         local groupSize = GetGroupSize()
         if groupSize > 1 then
@@ -948,20 +944,6 @@ function CA.RegisterGroupEvents()
     end
     if CA.SV.GroupLFGComplete then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE, CA.ActivityComplete)
-    end
-    if CA.SV.GroupRaid then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RAID_TRIAL_COMPLETE, CA.TrialComplete)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RAID_TRIAL_FAILED, CA.TrialFailed)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RAID_TRIAL_STARTED, CA.TrialStarted)
-    end
-    if CA.SV.GroupRaidScore then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RAID_TRIAL_SCORE_UPDATE, CA.TrialScore)
-    end
-    if CA.SV.GroupRaidBestScore then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RAID_TRIAL_NEW_BEST_SCORE, CA.TrialBestScore)
-    end
-    if CA.SV.GroupRaidRevive then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RAID_REVIVE_COUNTER_UPDATE, CA.TrialReviveCounter)
     end
 end
 
@@ -1018,7 +1000,6 @@ function CA.RegisterLootEvents()
     -- LOOT RECEIVED
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOOT_RECEIVED)
     -- QUEST REWARD CONTEXT
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_COMPLETE)
     -- INDEX
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     -- VENDOR
@@ -1070,10 +1051,6 @@ function CA.RegisterLootEvents()
     -- LOOT RECEIVED
     if CA.SV.Loot then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_RECEIVED, CA.OnLootReceived)
-    end
-    -- QUEST REWARD CONTEXT
-    if CA.SV.Loot or CA.SV.Quest then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_COMPLETE, CA.QuestComplete)
     end
     -- INDEX
     if CA.SV.Loot or CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise or CA.SV.ShowLockpickBreak then
@@ -1441,108 +1418,8 @@ function CA.QuestShareRemoved(eventCode, questId)
     zo_callLater(CA.QuestShareMessageHelper, 50)
 end
 
-function CA.QuestAdded(eventCode, journalIndex, questName, objectiveName)
-end
-
-function CA.QuestRemoved(eventCode, isCompleted, journalIndex, questName, zoneIndex, poiIndex, questID)
-end
-
-function CA.QuestObjectiveComplete(eventCode, zoneIndex, poiIndex, level, previousExperience, currentExperience, championPoints)
-
-    --[[
-    local function ReactivateObjectiveComplete()
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OBJECTIVE_COMPLETED, CA.QuestObjectiveComplete)
-    end
-
-    local name, _, _, finishedDescription = GetPOIInfo(zoneIndex, poiIndex)
-    local nameFormatted
-    local formattedText
-
-    if CA.SV.QuestObjectiveLong and finishedDescription ~= "" then
-        nameFormatted = (strformat("|cFEFEFE<<1>>:|r <<2>>", name, finishedDescription))
-    else
-        nameFormatted = (strformat("|cFEFEFE<<1>>|r", name))
-    end
-
-    formattedText = strformat(SI_NOTIFYTEXT_OBJECTIVE_COMPLETE, nameFormatted)
-
-    printToChat(formattedText)
-
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OBJECTIVE_COMPLETED)
-    zo_callLater(ReactivateObjectiveComplete, 100)
-    ]]--
-end
-
-function CA.DiscoveryExperience(eventCode, areaName, level, previousExperience, currentExperience, championPoints)
-
-end
-
-function CA.POIDiscovered(eventCode,zoneIndex, poiIndex)
-
-end
-
 function CA.QuestLogFull(eventCode)
     printToChat(GetString(SI_ERROR_QUEST_LOG_FULL))
-end
-
-function CA.QuestComplete(eventCode, questName, level, previousExperience, currentExperience, championPoints, questType, instanceDisplayType)
---[[
-
-    d("Quest Complete")
-    
-    local function ReactivateQuestComplete()
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_COMPLETE, CA.QuestComplete)
-    end
-
-    local function ResetQuestRewardStatus()
-        g_itemReceivedIsQuestReward = false
-    end
-
-    if CA.SV.Quest then
-        local questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
-        local questJournalObject = SYSTEMS:GetObject("questJournal")
-        local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
-        local formattedString
-        if iconTexture and CA.SV.QuestIcon then
-            formattedString = strformat(SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON), zo_iconFormat(iconTexture, 16, 16), questNameFormatted)
-        else
-            formattedString = strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questNameFormatted)
-        end
-        printToChat(formattedString)
-        -- Have to unregister the event here to prevent it from spamming us twice.
-        EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_COMPLETE)
-        zo_callLater(ReactivateQuestComplete, 100)
-    end
-
-    if CA.SV.Loot then
-        -- We set this variable to true in order to override the [Looted] message syntax that would be applied to a quest reward normally.
-        g_itemReceivedIsQuestReward = true
-        zo_callLater(ResetQuestRewardStatus, 500)
-    end
-    
-    ]]--
-end
-
--- EVENT_QUEST_CONDITION_COUNTER_CHANGED
-
-function CA.QuestFailed(eventCode, journalIndex, questName, conditionText, conditionType, currConditionVal, newConditionVal, conditionMax, isFailCondition, stepOverrideText, isPushed, isComplete, isConditionComplete, isStepHidden)
-    -- We're only interested in this event for failure condition
-    
-    --[[
-    if not isFailCondition or conditionText == "TRACKER GOAL TEXT" then --TODO: Localize this string
-        return
-    end
-
-    if stepOverrideText == "" then
-        if conditionMax > 1 then
-            printToChat(strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL, conditionText, newConditionVal, conditionMax))
-        else
-            printToChat(strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, conditionText))
-        end
-    else
-        printToChat(strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, stepOverrideText))
-    end
-    ]]--
 end
 
 -- Checks to see if quest was accepted 50 ms after share is removed
@@ -1583,10 +1460,6 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_LUIE_CA_GROUP_MEMBER_LEAVE, GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_ALT), 1)
         SafeAddString(SI_GROUP_NOTIFICATION_GROUP_LEADER_CHANGED, GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_ALT), 1)
         -- Trial String Replacement
-        SafeAddString(SI_TRIAL_STARTED, GetString(SI_LUIE_CA_GROUP_TRIAL_STARTED), 1)
-        SafeAddString(SI_TRIAL_FAILED, GetString(SI_LUIE_CA_GROUP_TRIAL_FAILED), 1)
-        SafeAddString(SI_REVIVE_COUNTER_UPDATED_LARGE, GetString(SI_LUIE_CA_GROUP_REVIVE_COUNTER_UPDATED_LARGE), 2)
-        SafeAddString(SI_TRIAL_SCORE_UPDATED_LARGE, GetString(SI_LUIE_CA_GROUP_TRIAL_SCORE_UPDATED_LARGE), 1)
         -- Group Finder String Replacements
         SafeAddString(SI_GROUPING_TOOLS_ALERT_LFG_JOINED, GetString(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED), 1)
         SafeAddString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL, GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL_ALT), 1)
@@ -1634,40 +1507,11 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_GUILD_ROSTER_ADDED, GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), 2)
         SafeAddString(SI_GUILD_ROSTER_REMOVED, GetString(SI_LUIE_CA_GUILD_ROSTER_REMOVED), 2)
         SafeAddString(SI_LUIE_CA_GUILD_RANK_CHANGED, GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_ALT), 1)
-        -- Duel String Replacements
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_DUEL, GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), 1)
-        SafeAddString(SI_DUEL_INVITE_MESSAGE, GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), 1)
-        SafeAddString(SI_DUEL_INVITE_ACCEPTED, GetString(SI_LUIE_CA_DUEL_INVITE_ACCEPTED), 1)
-        SafeAddString(SI_DUEL_INVITE_DECLINED, GetString(SI_LUIE_CA_DUEL_INVITE_DECLINED), 1)
-        SafeAddString(SI_DUEL_INVITE_CANCELED, GetString(SI_LUIE_CA_DUEL_INVITE_CANCELED), 1)
-        SafeAddString(SI_DUEL_INVITE_SENT, GetString(SI_LUIE_CA_DUEL_INVITE_SENT), 1)
-        SafeAddString(SI_DUEL_INVITE_RECEIVED, GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), 1)
-        SafeAddString(SI_PLAYER_TO_PLAYER_INVITE_DUEL, GetString(SI_LUIE_CA_DUEL_INVITE_PLAYER), 1)
-        SafeAddString(SI_DUELING_COUNTDOWN_CSA, GetString(SI_LUIE_CA_DUEL_COUNTDOWN_CSA), 1)
-        SafeAddString(SI_DUELING_NEAR_BOUNDARY_CSA, GetString(SI_LUIE_CA_DUEL_NEAR_BOUNDARY_CSA), 1)
-        SafeAddString(SI_DUELRESULT0, GetString(SI_LUIE_CA_DUEL_RESULT0), 1)
-        SafeAddString(SI_DUELRESULT1, GetString(SI_LUIE_CA_DUEL_RESULT1), 1)
-        SafeAddString(SI_DUELSTATE1, GetString(SI_LUIE_CA_DUEL_STATE1), 1)
-        SafeAddString(SI_DUELSTATE1, GetString(SI_LUIE_CA_DUEL_STATE2), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON1, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON1), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON4, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON4), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON5, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON5), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON6, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON6), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON7, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON7), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON8, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON8), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON9, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON9), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON10, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON10), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON12, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON12), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON14, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON14), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON16, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON16), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON18, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON18), 1)
-        SafeAddString(SI_DUELINVITEFAILREASON20, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON20), 1)
         -- Mail String Replacements
         SafeAddString(SI_SENDMAILRESULT2, GetString(SI_LUIE_CA_MAIL_SENDMAILRESULT2), 1)
         SafeAddString(SI_SENDMAILRESULT3, GetString(SI_LUIE_CA_MAIL_SENDMAILRESULT3), 1)
         -- Regroup Replacement String
         SafeAddString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG, GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG_ALT), 1)
-        
         -- Quest String Replacements
         SafeAddString(SI_ERROR_QUEST_LOG_FULL, GetString(SI_LUIE_CA_QUEST_LOG_FULL), 1) -- Add a period. TODO: Remove
 
@@ -2009,100 +1853,6 @@ function CA.VoteRequested(eventCode, descriptor)
             printToChat(GetString(SI_GROUP_ELECTION_REQUESTED))
         end
     end
-end
-
-function CA.TrialStarted(eventCode, trialName, weekly)
-    local formattedName = strformat("|cFEFEFE<<1>>|r", trialName)
-    printToChat(strformat(SI_TRIAL_STARTED, formattedName))
-end
-
-function CA.TrialComplete(eventCode, trialName, score, totalTime)
-    local formattedName = strformat("|cFEFEFE<<1>>|r", trialName)
-    printToChat(strformat(SI_TRIAL_COMPLETED_LARGE, formattedName))
-
-    -- SI_LUIE_CA_GROUP_TRIAL_SCORETALLY          -- "Final Score <<1>> Total Time <<2>> Vitality Bonus <<3>> <<4>>"
-
-    local wasUnderTargetTime = totalTime <= GetRaidTargetTime()
-    local formattedTime = ZO_FormatTimeMilliseconds(totalTime, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_SECONDS)
-    local vitalityBonus = GetCurrentRaidLifeScoreBonus()
-    local currentCount = GetRaidReviveCountersRemaining()
-    local maxCount = GetCurrentRaidStartingReviveCounters()
-
-    local VitalityCounterString = strformat("<<1>> <<2>>/<<3>>", zo_iconFormatInheritColor("esoui/art/trials/vitalitydepletion.dds", 16, 16), currentCount, maxCount )
-    local FinalScore = ZO_DEFAULT_ENABLED_COLOR:Colorize(score)
-    vitalityBonus = ZO_DEFAULT_ENABLED_COLOR:Colorize(vitalityBonus)
-    if currentCount == 0 then
-        VitalityCounterString = ZO_DISABLED_TEXT:Colorize(VitalityCounterString)
-    else
-        VitalityCounterString = ZO_DEFAULT_ENABLED_COLOR:Colorize(VitalityCounterString)
-    end
-    if wasUnderTargetTime then
-        formattedTime = ZO_DEFAULT_ENABLED_COLOR:Colorize(formattedtime)
-    else
-        formattedTime = ZO_ERROR_COLOR:Colorize(formattedtime)
-    end
-
-    printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_SCORETALLY, FinalScore, formattedTime, vitalityBonus, VitalityCounterString))
-end
-
-function CA.TrialFailed(eventCode, trialName, score)
-    local formattedName = strformat("|cFEFEFE<<1>>|r", trialName)
-    printToChat(strformat(SI_TRIAL_FAILED, formattedName))
-end
-
-function CA.TrialScore(eventCode, scoreType, scoreAmount, totalScore) 
-
-    -- Table from ZOS code, determines icon based off criteria. Leaving sound here as well for the time being.
-    local TRIAL_SCORE_REASON_TO_ASSETS =
-    {
-        [RAID_POINT_REASON_KILL_MINIBOSS]           = { icon = "EsoUI/Art/Trials/trialPoints_normal.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_NORMAL },
-        [RAID_POINT_REASON_KILL_BOSS]               = { icon = "EsoUI/Art/Trials/trialPoints_veryHigh.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_HIGH },
-
-        [RAID_POINT_REASON_BONUS_ACTIVITY_LOW]      = { icon = "EsoUI/Art/Trials/trialPoints_veryLow.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_LOW },
-        [RAID_POINT_REASON_BONUS_ACTIVITY_MEDIUM]   = { icon = "EsoUI/Art/Trials/trialPoints_low.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_LOW },
-        [RAID_POINT_REASON_BONUS_ACTIVITY_HIGH]     = { icon = "EsoUI/Art/Trials/trialPoints_high.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_HIGH },
-
-        [RAID_POINT_REASON_SOLO_ARENA_PICKUP_ONE]   = { icon = "EsoUI/Art/Trials/trialPoints_veryLow.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_LOW },
-        [RAID_POINT_REASON_SOLO_ARENA_PICKUP_TWO]   = { icon = "EsoUI/Art/Trials/trialPoints_low.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_LOW },
-        [RAID_POINT_REASON_SOLO_ARENA_PICKUP_THREE] = { icon = "EsoUI/Art/Trials/trialPoints_normal.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_NORMAL },
-        [RAID_POINT_REASON_SOLO_ARENA_PICKUP_FOUR]  = { icon = "EsoUI/Art/Trials/trialPoints_high.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_HIGH },
-        [RAID_POINT_REASON_SOLO_ARENA_COMPLETE]     = { icon = "EsoUI/Art/Trials/trialPoints_veryHigh.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_HIGH },
-    }
-
-    local reasonAssets = TRIAL_SCORE_REASON_TO_ASSETS[scoreType]
-    if reasonAssets then
-        printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_SCORE_UPDATED, reasonAssets.icon, scoreAmount))
-    end
-
-end
-
-function CA.TrialBestScore(eventCode, trialName, score, isWeekly)
-    local formattedString
-    local formattedName = strformat("|cFEFEFE<<1>>|r", trialName)
-    if isWeekly then
-        formattedString = strformat(SI_TRIAL_NEW_BEST_SCORE_WEEKLY, formattedName)
-    else
-        formattedString = strformat(SI_TRIAL_NEW_BEST_SCORE_LIFETIME, formattedName)
-    end
-
-    -- Delay presumably in place so this message comes AFTER completion message.
-    local function PrintTrialBestScore()
-        printToChat(formattedString)
-    end
-
-    zo_callLater(PrintTrialBestScore, 50)
-end
-
-function CA.TrialReviveCounter(eventCode, currentCounter, countDelta)
-    -- TODO: revisit this once there is a way to properly handle this in client/server code (from ZOS code, might be noteworthy)
-    if not IsRaidInProgress() then
-        return
-    end
-    
-    if countDelta < 0 then
-        printToChat(strformat(SI_LUIE_CA_GROUP_REVIVE_COUNTER_UPDATED, "EsoUI/Art/Trials/VitalityDepletion.dds"))
-    end
-
 end
 
 -- Triggers when the player either accepts or declines an invite. We set g_groupJoinFudger to true here, and if the next event is GroupUpdate then it plays a message, if not, the next invite event resets it.
@@ -3421,12 +3171,12 @@ local function AchievementPctToColour(pct)
     return pct == 1 and "71DE73" or pct < 0.33 and "F27C7C" or pct < 0.66 and "EDE858" or "CCF048"
 end
 
+-- Printer function for achievement CA
 function CA.PrintAchievementDetails(stringpart1, stringpart2, stringpart3, stringpart4)
     printToChat( strfmt("%s%s%s%s", stringpart1, stringpart2, stringpart3, stringpart4))
 end
 
 function CA.OnAchievementUpdated(eventCode, id)
-    --d("Achievement Updated")
 
     local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementId(id)
 
@@ -3443,172 +3193,103 @@ function CA.OnAchievementUpdated(eventCode, id)
     if topLevelIndex == 10 and not CA.SV.AchievementCategory10 then return end
     if topLevelIndex == 11 and not CA.SV.AchievementCategory11 then return end
     --if topLevelIndex == 12 and not CA.SV.AchievementCategory12 then return end
-    
-    local totalCmp = 0
-    local totalReq = 0
-    local showInfo = false
 
-    local numCriteria = GetAchievementNumCriteria(id)
-    local cmpInfo = {}
-    for i = 1, numCriteria do
-        local name, numCompleted, numRequired = GetAchievementCriterion(id, i)
+    if CA.SV.AchievementUpdateCA or CA.SV.AchievementUpdateAlert then
+        local totalCmp = 0
+        local totalReq = 0
+        local showInfo = false
 
-        table.insert(cmpInfo, { strformat(name), numCompleted, numRequired })
+        local numCriteria = GetAchievementNumCriteria(id)
+        local cmpInfo = {}
+        for i = 1, numCriteria do
+            local name, numCompleted, numRequired = GetAchievementCriterion(id, i)
 
-        -- Collect the numbers to calculate the correct percentage
-        totalCmp = totalCmp + numCompleted
-        totalReq = totalReq + numRequired
+            table.insert(cmpInfo, { strformat(name), numCompleted, numRequired })
 
-        -- Show the achievement on every special achievement because it's a rare event
-        if numRequired == 1 and numCompleted == 1 then
-            showInfo = true
-        end
-    end
-    
-    if not showInfo then
-        -- Achievement completed        
-        -- This is the first numCompleted value
-        -- Show every time
-        if ( totalCmp == totalReq ) or ( totalCmp == 1 ) or ( CA.SV.AchievementsStep == 0 ) then
-            showInfo = true
-        else
-            -- Achievement step hit
-            local percentage = math.floor( 100 / totalReq * totalCmp )
+            -- Collect the numbers to calculate the correct percentage
+            totalCmp = totalCmp + numCompleted
+            totalReq = totalReq + numRequired
 
-            if percentage > 0 and percentage % CA.SV.AchievementsStep == 0 and g_lastPercentage[id] ~= percentage then
+            -- Show the achievement on every special achievement because it's a rare event
+            if numRequired == 1 and numCompleted == 1 then
                 showInfo = true
-                g_lastPercentage[id] = percentage
             end
         end
-    end
+        
+        if not showInfo then
+            -- Achievement completed        
+            -- This is the first numCompleted value
+            -- Show every time
+            if ( totalCmp == totalReq ) or ( totalCmp == 1 ) or ( CA.SV.AchievementsStep == 0 ) then
+                showInfo = true
+            else
+                -- Achievement step hit
+                local percentage = math.floor( 100 / totalReq * totalCmp )
 
-    -- Bail out here if this achievement update event is not going to be printed to chat
-    if not showInfo then
-        return
-    end
-    
-    local bracket1
-    local bracket2
-
-    if CA.SV.AchievementsBracketOptions == 1 then
-        bracket1 = "["
-        bracket2 = "]"
-    elseif CA.SV.AchievementsBracketOptions == 2 then
-        bracket1 = "("
-        bracket2 = ")"
-    elseif CA.SV.AchievementsBracketOptions == 3 then
-        bracket1 = ""
-        bracket2 = " -"
-    elseif CA.SV.AchievementsBracketOptions == 4 then
-        bracket1 = ""
-        bracket2 = ""
-    end
-    
-    local link = strformat(GetAchievementLink(id, LINK_STYLE_BRACKETS))
-    local catName = GetAchievementCategoryInfo(topLevelIndex)
-    local subcatName = categoryIndex ~= nil and GetAchievementSubCategoryInfo(topLevelIndex, categoryIndex) or "General"
-    local _, _, _, icon = GetAchievementInfo(id)
-    icon = CA.SV.AchievementsIcon and ("|t16:16:" .. icon .. "|t ") or ""
-    
-    local stringpart1 = AchievementsColorize:Colorize(strfmt("%s %s%s (", CA.SV.AchievementsProgressMsg, icon, link))
-    
-    local stringpart2 = CA.SV.AchievementsColorProgress and strfmt("|c%s%d%%|r", AchievementPctToColour(totalCmp/totalReq), math.floor(100*totalCmp/totalReq)) or AchievementsColorize:Colorize(strfmt("%d%%", math.floor(100*totalCmp/totalReq)))
-    
-    local stringpart3
-    if CA.SV.AchievementsCategory and CA.SV.AchievementsSubcategory then
-        stringpart3 = AchievementsColorize:Colorize(strfmt(") %s%s - %s%s", bracket1, catName, subcatName, bracket2))
-    elseif CA.SV.AchievementsCategory and not CA.SV.AchievementsSubcategory then
-        stringpart3 = AchievementsColorize:Colorize(strfmt(") %s%s%s", bracket1, catName, bracket2))
-    else
-        stringpart3 = AchievementsColorize:Colorize(")")
-    end
-    
-    -- Prepare details information
-    local stringpart4 = ""
-    if CA.SV.AchievementsDetails then
-        -- Skyshards needs separate treatment otherwise text become too long
-        -- We also put this short information for achievements that has too many subitems
-        if topLevelIndex == 9 or #cmpInfo > 12 then
-            stringpart4 = CA.SV.AchievementsColorProgress and strfmt( " %s|c%s%d|r%s|c71DE73%d|c87B7CC|r%s", AchievementsColorize:Colorize("("), AchievementPctToColour(totalCmp/totalReq), totalCmp, AchievementsColorize:Colorize("/"), totalReq, AchievementsColorize:Colorize(")") ) or AchievementsColorize:Colorize(strfmt( " (%d/%d)", totalCmp, totalReq))
-        else
-            for i = 1, #cmpInfo do
-                -- Boolean achievement stage
-                if cmpInfo[i][3] == 1 then
-                    cmpInfo[i] = CA.SV.AchievementsColorProgress and strfmt( "|c%s%s", AchievementPctToColour(cmpInfo[i][2]), cmpInfo[i][1] ) or AchievementsColorize:Colorize(strfmt( "%s%s", cmpInfo[i][2], cmpInfo[i][1] ))
-                -- Others
-                else
-                    local pct = cmpInfo[i][2] / cmpInfo[i][3]
-                    cmpInfo[i] = CA.SV.AchievementsColorProgress and strfmt( "%s %s|c%s%d|r%s|c71DE73%d|r%s", AchievementsColorize:Colorize(cmpInfo[i][1]), AchievementsColorize:Colorize("("), AchievementPctToColour(pct), cmpInfo[i][2], AchievementsColorize:Colorize("/"), cmpInfo[i][3], AchievementsColorize:Colorize(")") ) or AchievementsColorize:Colorize(strfmt( "%s (%d/%d)", cmpInfo[i][1], cmpInfo[i][2], cmpInfo[i][3] ))
+                if percentage > 0 and percentage % CA.SV.AchievementsStep == 0 and g_lastPercentage[id] ~= percentage then
+                    showInfo = true
+                    g_lastPercentage[id] = percentage
                 end
             end
-            stringpart4 = " " .. table.concat(cmpInfo, AchievementsColorize:Colorize(", ")) .. ""
         end
-    end
-    zo_callLater(function() CA.PrintAchievementDetails(stringpart1, stringpart2, stringpart3, stringpart4) end, 100)
-end
 
-function CA.OnAchievementAwarded(eventCode, name, points, id, link)
-    --d("Achievement Completed!")
-
-    local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementId(id)
-    
-    -- Bail out if this achievement comes from unwanted category
-    if topLevelIndex == 1 and not CA.SV.AchievementCategory1 then return end
-    if topLevelIndex == 2 and not CA.SV.AchievementCategory2 then return end
-    if topLevelIndex == 3 and not CA.SV.AchievementCategory3 then return end
-    if topLevelIndex == 4 and not CA.SV.AchievementCategory4 then return end
-    if topLevelIndex == 5 and not CA.SV.AchievementCategory5 then return end
-    if topLevelIndex == 6 and not CA.SV.AchievementCategory6 then return end
-    if topLevelIndex == 7 and not CA.SV.AchievementCategory7 then return end
-    if topLevelIndex == 8 and not CA.SV.AchievementCategory8 then return end
-    if topLevelIndex == 9 and not CA.SV.AchievementCategory9 then return end
-    if topLevelIndex == 10 and not CA.SV.AchievementCategory10 then return end
-    if topLevelIndex == 11 and not CA.SV.AchievementCategory11 then return end
-    --if topLevelIndex == 12 and not CA.SV.AchievementCategory12 then return end
-    
-    local bracket1
-    local bracket2
-
-    if CA.SV.AchievementsBracketOptions == 1 then
-        bracket1 = "["
-        bracket2 = "]"
-    elseif CA.SV.AchievementsBracketOptions == 2 then
-        bracket1 = "("
-        bracket2 = ")"
-    elseif CA.SV.AchievementsBracketOptions == 3 then
-        bracket1 = ""
-        bracket2 = " -"
-    elseif CA.SV.AchievementsBracketOptions == 4 then
-        bracket1 = ""
-        bracket2 = ""
+        -- Bail out here if this achievement update event is not going to be printed to chat
+        if not showInfo then
+            return
+        end
+        
+        local link = strformat(GetAchievementLink(id, LINK_STYLE_BRACKETS))
+        local name = strformat(GetAchievementNameFromLink(link))
+        
+        if CA.SV.AchievementUpdateCA then
+            local catName = GetAchievementCategoryInfo(topLevelIndex)
+            local subcatName = categoryIndex ~= nil and GetAchievementSubCategoryInfo(topLevelIndex, categoryIndex) or "General"
+            local _, _, _, icon = GetAchievementInfo(id)
+            icon = CA.SV.AchievementsIcon and ("|t16:16:" .. icon .. "|t ") or ""
+            
+            local stringpart1 = AchievementColorize1:Colorize(strfmt("%s%s%s %s%s", bracket1[CA.SV.AchievementsBracketOptions], CA.SV.AchievementsProgressMsg, bracket2[CA.SV.AchievementsBracketOptions], icon, link))
+            
+            local stringpart2 = CA.SV.AchievementsColorProgress and strfmt(" %s|c%s%d%%|r", AchievementColorize2:Colorize("("), AchievementPctToColour(totalCmp/totalReq), math.floor(100*totalCmp/totalReq)) or AchievementColorize2:Colorize(strfmt("%d%%", math.floor(100*totalCmp/totalReq)))
+            
+            local stringpart3
+            if CA.SV.AchievementsCategory and CA.SV.AchievementsSubcategory then
+                stringpart3 = AchievementColorize2:Colorize(strfmt(") %s%s - %s%s", bracket3[CA.SV.AchievementsCatBracketOptions], catName, subcatName, bracket4[CA.SV.AchievementsCatBracketOptions]))
+            elseif CA.SV.AchievementsCategory and not CA.SV.AchievementsSubcategory then
+                stringpart3 = AchievementColorize2:Colorize(strfmt(") %s%s%s", bracket3[CA.SV.AchievementsCatBracketOptions], catName, bracket4[CA.SV.AchievementsCatBracketOptions]))
+            else
+                stringpart3 = AchievementColorize2:Colorize(")")
+            end
+            
+            -- Prepare details information
+            local stringpart4 = ""
+            if CA.SV.AchievementsDetails then
+                -- Skyshards needs separate treatment otherwise text become too long
+                -- We also put this short information for achievements that has too many subitems
+                if topLevelIndex == 9 or #cmpInfo > 12 then
+                    stringpart4 = CA.SV.AchievementsColorProgress and strfmt( " %s|c%s%d|r%s|c71DE73%d|c87B7CC|r%s", AchievementColorize2:Colorize("("), AchievementPctToColour(totalCmp/totalReq), totalCmp, AchievementColorize2:Colorize("/"), totalReq, AchievementColorize2:Colorize(")") ) or AchievementColorize2:Colorize(strfmt( " (%d/%d)", totalCmp, totalReq))
+                else
+                    for i = 1, #cmpInfo do
+                        -- Boolean achievement stage
+                        if cmpInfo[i][3] == 1 then
+                            cmpInfo[i] = CA.SV.AchievementsColorProgress and strfmt( "|c%s%s", AchievementPctToColour(cmpInfo[i][2]), cmpInfo[i][1] ) or AchievementColorize2:Colorize(strfmt( "%s%s", cmpInfo[i][2], cmpInfo[i][1] ))
+                        -- Others
+                        else
+                            local pct = cmpInfo[i][2] / cmpInfo[i][3]
+                            cmpInfo[i] = CA.SV.AchievementsColorProgress and strfmt( "%s %s|c%s%d|r%s|c71DE73%d|r%s", AchievementColorize2:Colorize(cmpInfo[i][1]), AchievementColorize2:Colorize("("), AchievementPctToColour(pct), cmpInfo[i][2], AchievementColorize2:Colorize("/"), cmpInfo[i][3], AchievementColorize2:Colorize(")") ) or AchievementColorize2:Colorize(strfmt( "%s (%d/%d)", cmpInfo[i][1], cmpInfo[i][2], cmpInfo[i][3] ))
+                        end
+                    end
+                    stringpart4 = " " .. table.concat(cmpInfo, AchievementColorize2:Colorize(", ")) .. ""
+                end
+            end
+            zo_callLater(function() CA.PrintAchievementDetails(stringpart1, stringpart2, stringpart3, stringpart4) end, 100)
+        end
+        
+        if CA.SV.AchievementUpdateAlert then
+            local alertMessage = zo_strformat("<<1>>: <<2>>", CA.SV.AchievementsProgressMsg, name)
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
+        end
+        
     end
-    
-    link = strformat(GetAchievementLink(id, LINK_STYLE_BRACKETS))
-    local catName = GetAchievementCategoryInfo(topLevelIndex)
-    local subcatName = categoryIndex ~= nil and GetAchievementSubCategoryInfo(topLevelIndex, categoryIndex) or "General"
-    local _, _, _, icon = GetAchievementInfo(id)
-    icon = CA.SV.AchievementsIcon and ("|t16:16:" .. icon .. "|t ") or ""
-    
-    local stringpart1 = AchievementsColorize:Colorize(strfmt("%s %s%s", CA.SV.AchievementsCompleteMsg, icon, link))
-    
-    local stringpart2
-    if CA.SV.AchievementsCompPercentage then 
-        stringpart2 = CA.SV.AchievementsColorProgress and strfmt(" %s|c71DE73%s|r%s", AchievementsColorize:Colorize("("), ("100%"), AchievementsColorize:Colorize(")")) or AchievementsColorize:Colorize (" (100%)")
-    else
-        stringpart2 = ""
-    end
-    
-    local stringpart3
-    if CA.SV.AchievementsCategory and CA.SV.AchievementsSubcategory then
-        stringpart3 = AchievementsColorize:Colorize(strfmt(" %s%s - %s%s", bracket1, catName, subcatName, bracket2))
-    elseif CA.SV.AchievementsCategory and not CA.SV.AchievementsSubcategory then
-        stringpart3 = AchievementsColorize:Colorize(strfmt(" %s%s%s", bracket1, catName, bracket2))
-    else
-        stringpart3 = AchievementsColorize:Colorize("")
-    end
-    local stringpart4 = ""
-    
-    zo_callLater(function() CA.PrintAchievementDetails(stringpart1, stringpart2, stringpart3, stringpart4) end, 100)
     
 end
 
@@ -5274,155 +4955,6 @@ function CA.JusticeRemovePrint()
     CA.IndexInventory() -- Reindex the inventory with the correct values!
 end
 
--- TODO: Interface this with the CSA handler to fix!
---[[ I would have liked to have this optional feature, but it gets out of snyc sometimes so kind of ruins it
-function CA.DuelCountdown(eventCode, startTimeMS)
-    local duelcounter = 6
-
-    local function DuelCountdown()
-        duelcounter = duelcounter - 1
-        printToChat(strformat(GetString(SI_DUELING_COUNTDOWN_CSA), duelcounter))
-    end
-
-    printToChat(strformat(GetString(SI_DUELING_COUNTDOWN_CSA), duelcounter))
-    zo_callLater(DuelCountdown, 1000)
-    zo_callLater(DuelCountdown, 2000)
-    zo_callLater(DuelCountdown, 3000)
-    zo_callLater(DuelCountdown, 4000)
-    zo_callLater(DuelCountdown, 5000)
-end
-]]--
-
-function CA.DuelInviteReceived(eventCode, inviterCharacterName, inviterDisplayName)
-    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(inviterCharacterName)
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
-    local displayBothString = ( strformat("<<1>><<2>>", inviterCharacterName, inviterDisplayName) )
-    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
-
-    if CA.SV.ChatPlayerDisplayOptions == 1 then
-        printToChat(strformat(GetString(SI_DUEL_INVITE_RECEIVED), displayNameLink))
-    end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then
-        printToChat(strformat(GetString(SI_DUEL_INVITE_RECEIVED), characterNameLink))
-    end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then
-        printToChat(strformat(GetString(SI_DUEL_INVITE_RECEIVED), displayBoth))
-    end
-end
-
-function CA.DuelInviteAccepted(eventCode)
-    printToChat(GetString(SI_DUEL_INVITE_ACCEPTED))
-end
-
-function CA.DuelInviteSent(eventCode, inviteeCharacterName, inviteeDisplayName)
-    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(inviteeCharacterName)
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviteeDisplayName)
-    local displayBothString = ( strformat("<<1>><<2>>", inviteeCharacterName, inviteeDisplayName) )
-    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviteeDisplayName)
-
-    if CA.SV.ChatPlayerDisplayOptions == 1 then
-        printToChat(strformat(GetString(SI_DUEL_INVITE_SENT), displayNameLink))
-    end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then
-        printToChat(strformat(GetString(SI_DUEL_INVITE_SENT), characterNameLink))
-    end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then
-        printToChat(strformat(GetString(SI_DUEL_INVITE_SENT), displayBoth))
-    end
-end
-
-function CA.DuelFinished(eventCode, duelResult, wasLocalPlayersResult, opponentCharacterName, opponentDisplayName, opponentAlliance, opponentGender, opponentClassId, opponentRaceId)
-    local resultName
-
-    if wasLocalPlayersResult then -- Possibly replace this with just a simple string assignment of "You"
-        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(g_playerName)
-        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(g_playerDisplayName)
-        local displayBothString = ( strformat("<<1>><<2>>", g_playerName, g_playerDisplayName) )
-        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, g_playerDisplayName)
-
-        if CA.SV.ChatPlayerDisplayOptions == 1 then
-            resultName = displayNameLink
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then
-            resultName = characterNameLink
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then
-            resultName = displayBoth
-        end
-    else
-        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(opponentCharacterName)
-        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(opponentDisplayName)
-        local displayBothString = ( strformat("<<1>><<2>>", opponentCharacterName, opponentDisplayName) )
-        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, opponentDisplayName)
-
-        if CA.SV.ChatPlayerDisplayOptions == 1 then
-            resultName = displayNameLink
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then
-            resultName = characterNameLink
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then
-            resultName = displayBoth
-        end
-    end
-
-    if duelResult == 0 then
-        printToChat(strformat(GetString(SI_DUELRESULT0), resultName))
-    else
-        printToChat(strformat(GetString(SI_DUELRESULT1), resultName))
-    end
-end
-
-function CA.DuelInviteFailed(eventCode, reason, targetCharacterName, targetDisplayName)
-    local reasonName
-    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(targetCharacterName)
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(targetDisplayName)
-    local displayBothString = ( strformat("<<1>><<2>>", targetCharacterName, targetDisplayName) )
-    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, targetDisplayName)
-
-    if CA.SV.ChatPlayerDisplayOptions == 1 then
-        reasonName = displayNameLink
-    end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then
-        reasonName = characterNameLink
-    end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then
-        reasonName = displayBoth
-    end
-
-    printToChat(strformat(GetString("SI_DUELINVITEFAILREASON", reason), reasonName))
-end
-
-function CA.DuelInviteDeclined(eventCode)
-    printToChat(GetString(SI_DUEL_INVITE_DECLINED))
-end
-
-function CA.DuelInviteCanceled(eventCode)
-    printToChat(GetString(SI_DUEL_INVITE_CANCELED))
-end
-
-function CA.DuelNearBoundary(eventCode, isInWarningArea)
-    if isInWarningArea then
-        printToChat(GetString(SI_DUELING_NEAR_BOUNDARY_CSA))
-    end
-end
-
-function CA.DuelStarted(eventCode)
-    
-    local formattedIcon = zo_iconFormat("EsoUI/Art/HUD/HUD_Countdown_Badge_Dueling.dds", 16, 16)
-    
-    if CA.SV.MiscDuelStartOptions == 1 then
-        printToChat(strformat(GetString(SI_LUIE_CA_DUEL_STARTED_WITH_ICON), formattedIcon))
-    elseif CA.SV.MiscDuelStartOptions == 2 then
-        printToChat(GetString(SI_LUIE_CA_DUEL_STARTED))
-    elseif CA.SV.MiscDuelStartOptions == 3 then
-        printToChat(strformat("<<1>>", formattedIcon))
-    else
-        return
-    end
-    
-end
-
 function CA.DisguiseState(eventCode, unitTag, disguiseState)
     if CA.SV.MiscDisguiseAlert and disguiseState == DISGUISE_STATE_DANGER then
         if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then
@@ -5637,78 +5169,6 @@ function LUIE.HandleClickEvent(rawLink, mouseButton, linkText, linkStyle, linkTy
   end
 end
 
--- EVENT_LORE_BOOK_LEARNED
--- This handler fires when a lorebook (or any lore library entry) is unlocked.
--- We add some custom handling here to deal with crafting and standard books.
-
-function CA.LoreBookLearned(eventCode, categoryIndex, collectionIndex, bookIndex, guildIndex, isMaxRank)
-
-end
---[[
-    local collectionName, _, numKnownBooks, totalBooks, hidden = GetLoreCollectionInfo(categoryIndex, collectionIndex)
-    
-    if hidden and CA.SV.LorebookNoShowHide then
-        return
-    end
-
-    local prefix
-    if categoryIndex == 1 then
-        prefix = CA.SV.LorebookPrefix1
-    -- Special handling here, as the standard motif styles without chapters are lumped into this category as well.
-    elseif (categoryIndex == 2 and collectionIndex ~= 1) or (categoryIndex == 2 and collectionIndex == 1 and bookIndex >= 3 and bookIndex <= 16) or (categoryIndex == 2 and collectionIndex == 1 and bookIndex == 23) then
-        prefix = CA.SV.LorebookPrefix2
-    else
-        prefix = CA.SV.LorebookPrefix3
-    end
-
-    local title, icon = GetLoreBookInfo(categoryIndex, collectionIndex, bookIndex)
-    
-    local category
-    if CA.SV.LorebookCategory and not hidden then
-        local message1 = strfmt(" %s%s%s", bracket1, collectionName, bracket2)
-        if CA.SV.LorebookNumber then
-            --local percentage = math.floor( 100 / numKnownBooks * totalBooks )
-            if CA.SV.LorebookNumberColor then
-                category = strfmt(" %s|c%s%s|r%s|c71DE73%s|r%s%s", LorebookColorize:Colorize("("), AchievementPctToColour(numKnownBooks/totalBooks), numKnownBooks, LorebookColorize:Colorize("/"), totalBooks, LorebookColorize:Colorize(")"), LorebookColorize:Colorize(message1)) 
-            else
-                category = LorebookColorize:Colorize(strfmt(" (%s/%s)%s", numKnownBooks, totalBooks, message1))
-            end
-        else
-        category = LorebookColorize:Colorize(message1)
-        end
-    else
-        category = ""
-    end
-
-    local bookName = strfmt("[%s]", title)
-    local bookLink = strfmt("|H1:LINK_TYPE_LUIBOOK:%s:%s:%s|h%s|h", categoryIndex, collectionIndex, bookIndex, bookName)
-
-    printToChat(strfmt("%s %s%s%s", LorebookColorize:Colorize(prefix), icon, bookLink, category))
-    
-    stringPart1 = LorebookColorize:Colorize(strfmt("<<1>><<2>>", stringPrefixCA, formattedIcon))
-    stringPart2 = LorebookColorize:Colorize(strfmt(SI_LUIE_CA_LOREBOOK_ADDED_CSA, bookLink, collectionName))
-    printToChat strfmt(stringPart1, stringPart2)
-
-end
-]]--
-
-local bracket1 = {
-    [1] = "[",
-    [2] = "(",
-    [3] = "",
-    [4] = "",
-    [5] = "",
-}
-    
-local bracket2 = {
-    [1] = "]",
-    [2] = ")",
-    [3] = " -",
-    [4] = ":",
-    [5] = "",
-}
-
-
 -- Function needed to display XP bar updates
 local function GetRelevantBarParams(level, previousExperience, currentExperience, championPoints)
     local championXpToNextPoint
@@ -5856,19 +5316,7 @@ function CA.AlertStyleLearned()
     
     end
     
-    ZO_PreHook(handlers, EVENT_LORE_BOOK_ALREADY_KNOWN, AlreadyKnowBookHook)
-    ZO_PreHook(handlers, EVENT_RIDING_SKILL_IMPROVEMENT, RidingSkillImprovementAlertHook)
-    
-    
-    
-    
-    
-    
-    
-
-	local csaHandlers = ZO_CenterScreenAnnounce_GetHandlers()
-    
-    local function LoreBookHook(categoryIndex, collectionIndex, bookIndex, guildReputationIndex, isMaxRank)
+    local function LoreBookLearnedAlertHook(categoryIndex, collectionIndex, bookIndex, guildReputationIndex, isMaxRank)
         if guildReputationIndex == 0 or isMaxRank then
             -- We only want to fire this event if a player is not part of the guild or if they've reached max level in the guild.
             -- Otherwise, the _SKILL_EXPERIENCE version of this event will send a center screen message instead.
@@ -5940,7 +5388,246 @@ function CA.AlertStyleLearned()
         end
         return true
     end
-	
+    
+        -----------------------------
+    -- DUEL ALERTS --------------
+    -----------------------------
+        
+    -- EVENT_DUEL_INVITE_RECEIVED - ALERT HANDLER
+    local function DuelInviteReceivedAlert(inviterCharacterName, inviterDisplayName)
+        
+        -- Display CA
+        if CA.SV.DuelCA then
+            local characterNameLink = ZO_LinkHandler_CreateCharacterLink(inviterCharacterName)
+            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
+            local displayBothString = ( strformat("<<1>><<2>>", inviterCharacterName, inviterDisplayName) )
+            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
+
+            if CA.SV.ChatPlayerDisplayOptions == 1 then
+                printToChat(strformat(GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), displayNameLink))
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 2 then
+                printToChat(strformat(GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), characterNameLink))
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 3 then
+                printToChat(strformat(GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), displayBoth))
+            end
+        end
+        
+        -- Display Alert
+        if CA.SV.DuelAlert then
+            local formattedString
+            local displayBothAlert = ( strformat("<<1>><<2>>", inviterCharacterName, inviterDisplayName) )
+            if CA.SV.ChatPlayerDisplayOptions == 1 then
+                formattedString = strformat(GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), inviterDisplayName)
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 2 then
+                formattedString = strformat(GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), inviterCharacterName)
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 3 then
+                formattedString = strformat(GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), displayBothAlert)
+            end
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, formattedString)
+        end
+        
+        return true
+        
+    end
+
+    -- EVENT_DUEL_INVITE_ACCEPTED - ALERT HANDLER
+    local function DuelInviteAcceptedAlert()
+    
+        -- Display CA
+        if CA.SV.DuelCA then
+            printToChat(GetString(SI_LUIE_CA_DUEL_INVITE_ACCEPTED))
+        end
+        
+        -- Display Alert
+        if CA.SV.DuelAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, SOUNDS.DUEL_ACCEPTED, GetString(SI_LUIE_CA_DUEL_INVITE_ACCEPTED) )
+        end
+        
+        -- Play sound if we don't have the Alert turned on
+        if not CA.SV.DuelAlert then
+            PlaySound(SOUNDS.DUEL_ACCEPTED)
+        end
+        return true
+    end
+
+    -- EVENT_DUEL_INVITE_SENT - ALERT HANDLER
+    local function DuelInviteSentAlert(inviteeCharacterName, inviteeDisplayName)
+    
+        -- Display CA
+        if CA.SV.DuelCA then
+            local characterNameLink = ZO_LinkHandler_CreateCharacterLink(inviteeCharacterName)
+            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviteeDisplayName)
+            local displayBothString = ( strformat("<<1>><<2>>", inviteeCharacterName, inviteeDisplayName) )
+            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviteeDisplayName)
+
+            if CA.SV.ChatPlayerDisplayOptions == 1 then
+                printToChat(strformat(GetString(SI_LUIE_CA_DUEL_INVITE_SENT), displayNameLink))
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 2 then
+                printToChat(strformat(GetString(SI_LUIE_CA_DUEL_INVITE_SENT), characterNameLink))
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 3 then
+                printToChat(strformat(GetString(SI_LUIE_CA_DUEL_INVITE_SENT), displayBoth))
+            end
+        end
+        
+        -- Display Alert
+        if CA.SV.DuelAlert then
+            local formattedString
+            local displayBothAlert = ( strformat("<<1>><<2>>", inviteeCharacterName, inviteeDisplayName) )
+            if CA.SV.ChatPlayerDisplayOptions == 1 then
+                formattedString = strformat(GetString(SI_LUIE_CA_DUEL_INVITE_SENT), inviteeDisplayName)
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 2 then
+                formattedString = strformat(GetString(SI_LUIE_CA_DUEL_INVITE_SENT), inviteeCharacterName)
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 3 then
+                formattedString = strformat(GetString(SI_LUIE_CA_DUEL_INVITE_SENT), displayBothAlert)
+            end
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, formattedString)
+        end
+        return true
+    end
+
+    -- Register Strings here for EVENT_DUEL_INVITE_FAILED
+    -- We use a high version number here to compensate for possible future overrides or other addons potentially overriding these strings
+    SafeAddString(SI_DUELINVITEFAILREASON1, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON1), 5)
+    SafeAddString(SI_DUELINVITEFAILREASON4, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON4), 5)
+    SafeAddString(SI_DUELINVITEFAILREASON5, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON5), 5)
+    SafeAddString(SI_DUELINVITEFAILREASON6, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON6), 5)
+    SafeAddString(SI_DUELINVITEFAILREASON7, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON7), 5)
+    SafeAddString(SI_DUELINVITEFAILREASON8, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON8), 5)
+    SafeAddString(SI_DUELINVITEFAILREASON9, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON9), 5)
+    SafeAddString(SI_DUELINVITEFAILREASON10, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON10), 5)
+    SafeAddString(SI_DUELINVITEFAILREASON12, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON12), 5)
+    SafeAddString(SI_DUELINVITEFAILREASON14, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON14), 5)
+    SafeAddString(SI_DUELINVITEFAILREASON16, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON16), 5)
+    SafeAddString(SI_DUELINVITEFAILREASON18, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON18), 5)
+    SafeAddString(SI_DUELINVITEFAILREASON20, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON20), 5)
+    -- Player to Player replacement strings for Duels
+    SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_DUEL, GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), 5)
+    SafeAddString(SI_DUEL_INVITE_MESSAGE, GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), 5)
+    SafeAddString(SI_PLAYER_TO_PLAYER_INVITE_DUEL, GetString(SI_LUIE_CA_DUEL_INVITE_PLAYER), 5)
+    -- TODO - These are likely a standard error response string
+    SafeAddString(SI_DUELSTATE1, GetString(SI_LUIE_CA_DUEL_STATE1), 5)
+    SafeAddString(SI_DUELSTATE1, GetString(SI_LUIE_CA_DUEL_STATE2), 5)
+    
+    -- EVENT_DUEL_INVITE_FAILED -- ALERT HANDLER
+    local function DuelInviteFailedAlert(reason, targetCharacterName, targetDisplayName)
+    
+        local userFacingName = ZO_GetPrimaryPlayerNameWithSecondary(targetDisplayName, targetCharacterName)
+        -- Display CA
+        if CA.SV.DuelCA then
+            local reasonName
+            local characterNameLink = ZO_LinkHandler_CreateCharacterLink(targetCharacterName)
+            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(targetDisplayName)
+            local displayBothString = ( strformat("<<1>><<2>>", targetCharacterName, targetDisplayName) )
+            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, targetDisplayName)
+
+            if CA.SV.ChatPlayerDisplayOptions == 1 then
+                reasonName = displayNameLink
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 2 then
+                reasonName = characterNameLink
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 3 then
+                reasonName = displayBoth
+            end
+            if userFacingName then
+                printToChat(strformat(GetString("SI_DUELINVITEFAILREASON", reason), reasonName))
+            else
+                printToChat(strformat(GetString("SI_DUELINVITEFAILREASON", reason)))
+            end
+        end
+        
+        -- Display Alert
+        if CA.SV.DuelAlert then
+            local formattedString
+            local displayBothAlert = ( strformat("<<1>><<2>>", targetCharacterName, targetDisplayName) )
+            if CA.SV.ChatPlayerDisplayOptions == 1 then
+                formattedString = strformat(GetString("SI_DUELINVITEFAILREASON", reason), targetDisplayName)
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 2 then
+                formattedString = strformat(GetString("SI_DUELINVITEFAILREASON", reason), targetCharacterName)
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 3 then
+                formattedString = strformat(GetString("SI_DUELINVITEFAILREASON", reason), displayBothAlert)
+            end
+            if userFacingName then
+                ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, formattedString)
+            else
+                ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, (GetString("SI_DUELINVITEFAILREASON", reason)))
+            end
+        end
+        
+        -- Play sound if we don't have the Alert turned on
+        if not CA.SV.DuelAlert then
+            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        end
+        return true
+    end
+
+    -- EVENT_DUEL_INVITE_DECLINED -- ALERT HANDLER
+    local function DuelInviteDeclinedAlert()
+        -- Display CA
+        if CA.SV.DuelCA then
+            printToChat(GetString(SI_LUIE_CA_DUEL_INVITE_DECLINED))
+        end
+        
+        -- Display Alert
+        if CA.SV.DuelAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, GetString(SI_LUIE_CA_DUEL_INVITE_DECLINED))
+        end
+        
+        -- Play sound if we don't have the Alert turned on
+        if not CA.SV.DuelAlert then
+            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        end
+        return true
+    end
+
+    -- EVENT_DUEL_INVITE_CANCELED -- ALERT HANDLER
+    local function DuelInviteCanceledAlert()
+        -- Display CA
+        if CA.SV.DuelCA then
+            printToChat(GetString(SI_LUIE_CA_DUEL_INVITE_CANCELED))
+        end
+        
+        -- Display Alert
+        if CA.SV.DuelAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, GetString(SI_LUIE_CA_DUEL_INVITE_CANCELED))
+        end
+        
+        -- Play sound if we don't have the Alert turned on
+        if not CA.SV.DuelAlert then
+            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        end
+        return true
+    end
+    
+    ZO_PreHook(handlers, EVENT_LORE_BOOK_ALREADY_KNOWN, AlreadyKnowBookHook)
+    ZO_PreHook(handlers, EVENT_RIDING_SKILL_IMPROVEMENT, RidingSkillImprovementAlertHook)
+    
+    ZO_PreHook(handlers, EVENT_LORE_BOOK_LEARNED, LoreBookLearnedAlertHook)
+    
+    ZO_PreHook(handlers, EVENT_DUEL_INVITE_RECEIVED, DuelInviteReceivedAlert)
+    ZO_PreHook(handlers, EVENT_DUEL_INVITE_SENT, DuelInviteSentAlert)
+    ZO_PreHook(handlers, EVENT_DUEL_INVITE_ACCEPTED, DuelInviteAcceptedAlert)
+    ZO_PreHook(handlers, EVENT_DUEL_INVITE_FAILED, DuelInviteFailedAlert)
+    ZO_PreHook(handlers, EVENT_DUEL_INVITE_DECLINED, DuelInviteDeclinedAlert)
+    ZO_PreHook(handlers, EVENT_DUEL_INVITE_CANCELED, DuelInviteCanceledAlert)
+    
+    
+    
+    
+    
+
+	local csaHandlers = ZO_CenterScreenAnnounce_GetHandlers()
+
 	local function LoreBookXPHook(categoryIndex, collectionIndex, bookIndex, guildReputationIndex, skillType, skillIndex, rank, previousXP, currentXP)
         if guildReputationIndex > 0 then
         
@@ -7262,6 +6949,516 @@ function CA.AlertStyleLearned()
             
     end
     
+    -- Extra Functions for EVENT_DUEL_NEAR_BOUNDARY
+    local DUEL_BOUNDARY_WARNING_LIFESPAN_MS = 2000
+    local DUEL_BOUNDARY_WARNING_UPDATE_TIME_MS = 2100
+    local lastEventTime = 0
+    local function CheckBoundary()
+        if IsNearDuelBoundary() then
+            -- Display CA
+            if CA.SV.DuelBoundaryCA then
+                printToChat(GetString(SI_LUIE_CA_DUEL_NEAR_BOUNDARY_CSA))
+            end
+        
+            -- Display CSA
+            if CA.SV.DuelBoundaryCSA then
+                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.DUEL_BOUNDARY_WARNING)
+                messageParams:SetText(GetString(SI_LUIE_CA_DUEL_NEAR_BOUNDARY_CSA))
+                messageParams:SetLifespanMS(DUEL_BOUNDARY_WARNING_LIFESPAN_MS)
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_DUEL_NEAR_BOUNDARY)
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+            
+            -- Display Alert
+            if CA.SV.DuelBoundaryAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, (GetString(SI_LUIE_CA_DUEL_NEAR_BOUNDARY_CSA)))
+            end
+            
+            -- Play Sound if CSA if off
+            if not CA.SV.DuelBoundaryCSA then
+                PlaySound(SOUNDS.DUEL_BOUNDARY_WARNING)
+            end
+        end
+    end
+
+    -- EVENT_DUEL_NEAR_BOUNDARY -- CSA HANDLER
+    local function DuelNearBoundaryHook(isInWarningArea)
+        if isInWarningArea then
+            local nowEventTime = GetFrameTimeMilliseconds()
+            EVENT_MANAGER:RegisterForUpdate("EVENT_DUEL_NEAR_BOUNDARY_LUIE", DUEL_BOUNDARY_WARNING_UPDATE_TIME_MS, CheckBoundary)
+            if nowEventTime > lastEventTime + DUEL_BOUNDARY_WARNING_UPDATE_TIME_MS then
+                lastEventTime = nowEventTime
+                CheckBoundary()
+            end
+        else
+            EVENT_MANAGER:UnregisterForUpdate("EVENT_DUEL_NEAR_BOUNDARY_LUIE")
+        end
+        return true
+    end    
+    
+    -- EVENT_DUEL_FINISHED -- CSA HANDLER
+    local function DuelFinishedHook(result, wasLocalPlayersResult, opponentCharacterName, opponentDisplayName)
+        
+        -- Setup result format, name, and result sound
+        local resultString = wasLocalPlayersResult and GetString("SI_LUIE_CA_DUEL_SELF_RESULT", result) or GetString("SI_LUIE_CA_DUEL_RESULT", result)
+        local characterName = opponentCharacterName
+        local displayName = opponentDisplayName
+
+        local localPlayerWonDuel = (result == DUEL_RESULT_WON and wasLocalPlayersResult) or (result == DUEL_RESULT_FORFEIT and not wasLocalPlayersResult)
+        local localPlayerForfeitDuel = (result == DUEL_RESULT_FORFEIT and wasLocalPlayersResult)
+        local resultSound = nil
+        if localPlayerWonDuel then
+            resultSound = SOUNDS.DUEL_WON
+        elseif localPlayerForfeitDuel then
+            resultSound = SOUNDS.DUEL_FORFEIT
+        end
+        
+        -- Setup string if we have both names set to display
+        local displayBothString = ( strformat("<<1>><<2>>", characterName, displayName) )
+        -- Display CA
+        if CA.SV.DuelWonCA then
+            local characterNameLink = ZO_LinkHandler_CreateCharacterLink(characterName)
+            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+            local resultChatString
+            if wasLocalPlayersResult then
+                resultChatString = resultString
+            else
+                if CA.SV.ChatPlayerDisplayOptions == 1 then
+                    resultChatString = zo_strformat(resultString, displayNameLink)
+                end
+                if CA.SV.ChatPlayerDisplayOptions == 2 then
+                    resultChatString = zo_strformat(resultString, characterNameLink)
+                end
+                if CA.SV.ChatPlayerDisplayOptions == 3 then
+                    resultChatString = zo_strformat(resultString, displayBoth)
+                end
+            end
+            printToChat(resultChatString)
+        end
+        
+        if CA.SV.DuelWonCSA or CA.SV.DuelWonAlert then
+            -- Setup String for CSA/Alert
+            local resultCSAString
+            if wasLocalPlayersResult then
+                resultCSAString = resultString
+            else
+                if CA.SV.ChatPlayerDisplayOptions == 1 then
+                    resultCSAString = zo_strformat(resultString, displayName)
+                end
+                if CA.SV.ChatPlayerDisplayOptions == 2 then
+                    resultCSAString = zo_strformat(resultString, characterName)
+                end
+                if CA.SV.ChatPlayerDisplayOptions == 3 then
+                    resultCSAString = zo_strformat(resultString, displayBothString)
+                end
+            end
+                
+            -- Display CSA
+            if CA.SV.DuelWonCSA then
+                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, resultSound)
+                messageParams:SetText(resultCSAString)
+                messageParams:MarkShowImmediately()
+                messageParams:MarkQueueImmediately()
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_DUEL_FINISHED)
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+            
+            -- Display Alert
+            if CA.SV.DuelWonAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, resultCSAString)
+            end
+        end
+        
+        -- Play sound if CSA is not enabled
+        if not CA.SV.DuelWonCSA then
+            PlaySound(resultSound)
+        end      
+        return true
+
+    end
+
+    -- EVENT_DUEL_COUNTDOWN -- CSA HANDLER
+    local function DuelCountdownHook(startTimeMS)
+        -- Display CSA
+        if CA.SV.DuelStartCSA then
+            local displayTime = startTimeMS - GetFrameTimeMilliseconds()
+            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_COUNTDOWN_TEXT, SOUNDS.DUEL_START)
+            messageParams:SetLifespanMS(displayTime)
+            messageParams:SetIconData("EsoUI/Art/HUD/HUD_Countdown_Badge_Dueling.dds")
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COUNTDOWN)
+        end
+        return true
+    end
+    
+    -- EVENT_RAID_TRIAL_STARTED -- CSA HANDLER
+    local function RaidStartedHook(raidName, isWeekly)
+    
+        -- Display CA
+        if CA.SV.GroupRaidCA then
+            local formattedName = strformat("|cFEFEFE<<1>>|r", raidName)
+            printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_STARTED, formattedName))
+        end
+        
+        -- Display CSA
+        if CA.SV.GroupRaidCSA then
+            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.RAID_TRIAL_STARTED)
+            messageParams:SetText(zo_strformat(SI_LUIE_CA_GROUP_TRIAL_STARTED, raidName))
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RAID_TRIAL)
+            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        end
+        
+        -- Display Alert
+        if CA.SV.GroupRaidAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_GROUP_TRIAL_STARTED, raidName) )
+        end
+        
+        -- Play sound if CSA is not enabled
+        if not CA.SV.GroupRaidCSA then
+            PlaySound(SOUNDS.RAID_TRIAL_STARTED)
+        end
+        return true
+    end
+
+    local TRIAL_COMPLETE_LIFESPAN_MS = 10000
+    -- EVENT_RAID_TRIAL_COMPLETE -- CSA HANDLER
+    local function RaidCompleteHook(raidName, score, totalTime)
+        local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_RAID_COMPLETE_TEXT, SOUNDS.RAID_TRIAL_COMPLETED)
+        local wasUnderTargetTime = GetRaidDuration() <= GetRaidTargetTime()
+        local formattedTime = ZO_FormatTimeMilliseconds(totalTime, TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_SECONDS)
+        local vitalityBonus = GetCurrentRaidLifeScoreBonus()
+        local currentCount = GetRaidReviveCountersRemaining()
+        local maxCount = GetCurrentRaidStartingReviveCounters()
+        
+        -- Display CA
+        if CA.SV.GroupRaidCA then
+            local formattedName = strformat("|cFEFEFE<<1>>|r", raidName)
+            local VitalityCounterString = strformat("<<1>> <<2>>/<<3>>", zo_iconFormatInheritColor("esoui/art/trials/vitalitydepletion.dds", 16, 16), currentCount, maxCount )
+            local FinalScore = ZO_DEFAULT_ENABLED_COLOR:Colorize(score)
+            vitalityBonus = ZO_DEFAULT_ENABLED_COLOR:Colorize(vitalityBonus)
+            if currentCount == 0 then
+                VitalityCounterString = ZO_DISABLED_TEXT:Colorize(VitalityCounterString)
+            else
+                VitalityCounterString = ZO_DEFAULT_ENABLED_COLOR:Colorize(VitalityCounterString)
+            end
+            if wasUnderTargetTime then
+                formattedTime = ZO_DEFAULT_ENABLED_COLOR:Colorize(formattedtime)
+            else
+                formattedTime = ZO_ERROR_COLOR:Colorize(formattedtime)
+            end
+            
+            printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_COMPLETED_LARGE, formattedName))
+            printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_SCORETALLY, FinalScore, formattedTime, vitalityBonus, VitalityCounterString))
+        end
+
+        -- Display CSA
+        if CA.SV.GroupRaidCSA then
+            messageParams:SetEndOfRaidData({ score, formattedTime, wasUnderTargetTime, vitalityBonus, zo_strformat(SI_REVIVE_COUNTER_REVIVES_USED, currentCount, maxCount) })
+            messageParams:SetText(zo_strformat(SI_TRIAL_COMPLETED_LARGE, raidName))
+            messageParams:SetLifespanMS(TRIAL_COMPLETE_LIFESPAN_MS)
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RAID_TRIAL)
+            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        end
+        
+        -- Display Alert
+        if CA.SV.GroupRaidAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_TRIAL_COMPLETED_LARGE, raidName) )
+        end
+        
+        -- Play sound if CSA is not enabled
+        if not CA.SV.GroupRaidCSA then
+            PlaySound(SOUNDS.RAID_TRIAL_COMPLETE)
+        end
+        return true
+    end
+
+    -- EVENT_RAID_TRIAL_FAILED -- CSA HANDLER
+    local function RaidFailedHook(raidName, score)
+    
+        -- Display CA
+        if CA.SV.GroupRaidCA then
+            local formattedName = strformat("|cFEFEFE<<1>>|r", trialName)
+            printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_FAILED, formattedName))
+        end
+        
+        -- Display CSA
+        if CA.SV.GroupRaidCSA then
+            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.RAID_TRIAL_FAILED)
+            messageParams:SetText(zo_strformat(SI_LUIE_CA_GROUP_TRIAL_FAILED, raidName))
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RAID_TRIAL)
+            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        end
+        
+        -- Display Alert
+        if CA.SV.GroupRaidAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_GROUP_TRIAL_FAILED, raidName) )
+        end
+        
+        -- Play sound if CSA is not enabled
+        if not CA.SV.GroupRaidCSA then
+            PlaySound(SOUNDS.RAID_TRIAL_FAILED)
+        end
+        return true
+    end
+
+    -- EVENT_RAID_TRIAL_NEW_BEST_SCORE -- CSA HANDLER
+    local function RaidBestScoreHook(raidName, score, isWeekly)
+    
+        -- Display CA
+        if CA.SV.GroupRaidBestScoreCA then
+            local formattedName = strformat("|cFEFEFE<<1>>|r", trialName)
+            local formattedString = isWeekly and strformat(SI_TRIAL_NEW_BEST_SCORE_WEEKLY, formattedName) or strformat(SI_TRIAL_NEW_BEST_SCORE_LIFETIME, formattedName)
+            printToChat(formattedString)
+        end
+        
+        -- Display CSA
+        if CA.SV.GroupRaidBestScoreCSA then
+            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.RAID_TRIAL_NEW_BEST)
+            messageParams:SetText(zo_strformat(isWeekly and SI_TRIAL_NEW_BEST_SCORE_WEEKLY or SI_TRIAL_NEW_BEST_SCORE_LIFETIME, raidName))
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RAID_TRIAL)
+            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        end
+        
+        -- Display Alert
+        if CA.SV.GroupRaidBestScoreAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(isWeekly and SI_TRIAL_NEW_BEST_SCORE_WEEKLY or SI_TRIAL_NEW_BEST_SCORE_LIFETIME, raidName) )
+        end
+        
+        -- Play sound ONLY if normal score is not set to display, otherwise the audio will overlap
+        if not CA.SV.GroupRaidBestScoreCSA and not (CA.SV.GroupRaidScoreCA and CA.SV.GroupRaidScoreCSA and CA.SV.GroupRaidScoreAlert) then
+            PlaySound(SOUNDS.RAID_TRIAL_NEW_BEST)
+        end
+        return true
+    end
+
+    -- EVENT_RAID_REVIVE_COUNTER_UPDATE -- CSA HANDLER
+    local function RaidReviveCounterHook(currentCount, countDelta)
+        if not IsRaidInProgress() then
+            return
+        end
+        if countDelta < 0 then
+            if CA.SV.GroupRaidReviveCA then
+                local iconCA = zo_iconFormat("EsoUI/Art/Trials/VitalityDepletion.dds", 16, 16)
+                printToChat(strformat(SI_LUIE_CA_GROUP_REVIVE_COUNTER_UPDATED, iconCA))
+            end
+            
+            if CA.SV.GroupRaidReviveCSA then
+                local iconCSA = zo_iconFormat("EsoUI/Art/Trials/VitalityDepletion.dds", "100%", "100%")
+                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.RAID_TRIAL_COUNTER_UPDATE)
+                messageParams:SetText(zo_strformat(SI_LUIE_CA_GROUP_REVIVE_COUNTER_UPDATED, iconCSA))
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RAID_TRIAL)
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+            
+            if CA.SV.GroupRaidReviveAlert then
+                local iconAlert = zo_iconFormat("EsoUI/Art/Trials/VitalityDepletion.dds", "75%", "75%")
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_GROUP_REVIVE_COUNTER_UPDATED, iconAlert) )
+            end
+            
+            -- Play Sound if CSA is not enabled
+            if not CA.SV.GroupRaidReviveCSA then
+                PlaySound(SOUNDS.RAID_TRIAL_COUNTER_UPDATE)
+            end
+        end
+        return true
+    end
+
+    local TRIAL_SCORE_REASON_TO_ASSETS =
+    {
+        [RAID_POINT_REASON_KILL_MINIBOSS]           = { icon = "EsoUI/Art/Trials/trialPoints_normal.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_NORMAL },
+        [RAID_POINT_REASON_KILL_BOSS]               = { icon = "EsoUI/Art/Trials/trialPoints_veryHigh.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_HIGH },
+
+        [RAID_POINT_REASON_BONUS_ACTIVITY_LOW]      = { icon = "EsoUI/Art/Trials/trialPoints_veryLow.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_LOW },
+        [RAID_POINT_REASON_BONUS_ACTIVITY_MEDIUM]   = { icon = "EsoUI/Art/Trials/trialPoints_low.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_LOW },
+        [RAID_POINT_REASON_BONUS_ACTIVITY_HIGH]     = { icon = "EsoUI/Art/Trials/trialPoints_high.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_HIGH },
+
+        [RAID_POINT_REASON_SOLO_ARENA_PICKUP_ONE]   = { icon = "EsoUI/Art/Trials/trialPoints_veryLow.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_LOW },
+        [RAID_POINT_REASON_SOLO_ARENA_PICKUP_TWO]   = { icon = "EsoUI/Art/Trials/trialPoints_low.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_LOW },
+        [RAID_POINT_REASON_SOLO_ARENA_PICKUP_THREE] = { icon = "EsoUI/Art/Trials/trialPoints_normal.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_NORMAL },
+        [RAID_POINT_REASON_SOLO_ARENA_PICKUP_FOUR]  = { icon = "EsoUI/Art/Trials/trialPoints_high.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_HIGH },
+        [RAID_POINT_REASON_SOLO_ARENA_COMPLETE]     = { icon = "EsoUI/Art/Trials/trialPoints_veryHigh.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_HIGH },
+    }
+
+    -- EVENT_RAID_TRIAL_SCORE_UPDATE -- CSA HANDLER
+    local function RaidScoreUpdateHook(scoreUpdateReason, scoreAmount, totalScore)
+        local reasonAssets = TRIAL_SCORE_REASON_TO_ASSETS[scoreUpdateReason]
+        
+        if reasonAssets then
+        
+            -- Display CA
+            if CA.SV.GroupRaidScoreCA then
+                local iconCA = zo_iconFormat(reasonAssets.icon, 16, 16)
+                printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_SCORE_UPDATED, iconCA, scoreAmount))
+            end
+            
+            -- Display CSA
+            if CA.SV.GroupRaidScoreCSA then
+                local iconCSA = zo_iconFormat(reasonAssets.icon, "100%", "100%")
+                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, reasonAssets.soundId)
+                messageParams:SetText(zo_strformat(SI_LUIE_CA_GROUP_TRIAL_SCORE_UPDATED, iconCSA, scoreAmount))
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RAID_TRIAL)
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+            
+            -- Display Alert
+            if CA.SV.GroupRaidScoreAlert then
+                local iconAlert = zo_iconFormat(reasonAssets.icon, "75%", "75%")
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_GROUP_TRIAL_SCORE_UPDATED, iconAlert, scoreAmount) )
+            end
+            
+            -- Play Sound if CSA is not enabled
+            if not CA.SV.GroupRaidScoreCSA then
+                PlaySound(reasonAssets.soundId)
+            end 
+        end
+        return true
+    end
+
+    -- EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE -- CSA HANDLER
+    local function ActivityFinderCompleteHook()
+        local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.LFG_COMPLETE_ANNOUNCEMENT)
+        messageParams:SetText(GetString(SI_ACTIVITY_FINDER_ACTIVITY_COMPLETE_ANNOUNCEMENT_TEXT))
+        messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_ACTIVITY_COMPLETE)
+        return messageParams
+    end
+    
+    -- EVENT_DISPLAY_ANNOUNCEMENT -- CSA HANDLER
+    local function DisplayAnnouncementHook(title, description)
+        d("EVENT_DISPLAY_ANNOUNCEMENT")
+        local messageParams
+        local message
+        if title ~= "" and description ~= "" then
+            messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
+        elseif title ~= "" then
+            messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
+        elseif description ~= "" then
+            messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
+        end
+        
+        -- CA
+        if title ~= "" and description ~= "" then
+            printToChat(title)
+            printToChat(description)
+        elseif title ~= "" then
+            printToChat(title)
+        elseif description ~= "" then
+            printToChat(description)
+        end
+      
+        
+        -- CSA
+        if messageParams then
+            messageParams:SetText(title, description)
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_DISPLAY_ANNOUNCEMENT)
+            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        end
+        
+        -- ALERT
+        if title ~= "" and description ~= "" then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, title)
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, description)
+        elseif title ~= "" then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, title)
+        elseif description ~= "" then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, description)
+        end
+        
+        return true
+    end
+
+    -- EVENT BROADCAST -- CSA HANDLER
+    local function BroadcastHook(message)
+        d("EVENT_BROADCAST")
+    
+        -- CA
+        printToChat(string.format("|cffff00%s|r", message))
+    
+        -- CSA
+        local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.MESSAGE_BROADCAST)
+        messageParams:SetText(string.format("|cffff00%s|r", message))
+        messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SYSTEM_BROADCAST)
+        CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        
+        -- Alert
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
+        return true
+    end
+    
+    -- EVENT_ACHIEVEMENT_AWARDED
+    local function AchievementAwardedHook(name, points, id, link)
+    
+        -- Display CSA
+        if CA.SV.AchievementCompleteCSA then
+            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.ACHIEVEMENT_AWARDED)
+            local icon = select(4, GetAchievementInfo(id))
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_ACHIEVEMENT_AWARDED)
+            messageParams:SetText(CA.SV.AchievementsCompleteMsg, zo_strformat(name))
+            messageParams:SetIconData(icon, "EsoUI/Art/Achievements/achievements_iconBG.dds")
+            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        end
+    
+        -- Play sound if CSA is disabled
+        if not CA.SV.AchievementCompleteCSA then
+            PlaySound(SOUNDS.ACHIEVEMENT_AWARDED)
+        end
+        
+        local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementId(id)
+        -- Bail out if this achievement comes from unwanted category
+        if topLevelIndex == 1 and not CA.SV.AchievementCategory1 then return true end
+        if topLevelIndex == 2 and not CA.SV.AchievementCategory2 then return true end
+        if topLevelIndex == 3 and not CA.SV.AchievementCategory3 then return true end
+        if topLevelIndex == 4 and not CA.SV.AchievementCategory4 then return true end
+        if topLevelIndex == 5 and not CA.SV.AchievementCategory5 then return true end
+        if topLevelIndex == 6 and not CA.SV.AchievementCategory6 then return true end
+        if topLevelIndex == 7 and not CA.SV.AchievementCategory7 then return true end
+        if topLevelIndex == 8 and not CA.SV.AchievementCategory8 then return true end
+        if topLevelIndex == 9 and not CA.SV.AchievementCategory9 then return true end
+        if topLevelIndex == 10 and not CA.SV.AchievementCategory10 then return true end
+        if topLevelIndex == 11 and not CA.SV.AchievementCategory11 then return true end
+        --if topLevelIndex == 12 and not CA.SV.AchievementCategory12 then return end
+    
+        if CA.SV.AchievementCompleteCA then
+            
+            link = strformat(GetAchievementLink(id, LINK_STYLE_BRACKETS))
+            local catName = GetAchievementCategoryInfo(topLevelIndex)
+            local subcatName = categoryIndex ~= nil and GetAchievementSubCategoryInfo(topLevelIndex, categoryIndex) or "General"
+            local _, _, _, icon = GetAchievementInfo(id)
+            icon = CA.SV.AchievementsIcon and ("|t16:16:" .. icon .. "|t ") or ""
+            
+            local stringpart1 = AchievementColorize1:Colorize(strfmt("%s%s%s %s%s", bracket1[CA.SV.AchievementsBracketOptions], CA.SV.AchievementsCompleteMsg, bracket2[CA.SV.AchievementsBracketOptions], icon, link))
+            
+            local stringpart2
+            if CA.SV.AchievementsCompPercentage then 
+                stringpart2 = CA.SV.AchievementsColorProgress and strfmt(" %s|c71DE73%s|r%s", AchievementColorize2:Colorize("("), ("100%"), AchievementColorize2:Colorize(")")) or AchievementColorize2:Colorize (" (100%)")
+            else
+                stringpart2 = ""
+            end
+            
+            local stringpart3
+            if CA.SV.AchievementsCategory and CA.SV.AchievementsSubcategory then
+                stringpart3 = AchievementColorize2:Colorize(strfmt(" %s%s - %s%s", bracket1[CA.SV.AchievementsCatBracketOptions], catName, subcatName, bracket2[CA.SV.AchievementsCatBracketOptions]))
+            elseif CA.SV.AchievementsCategory and not CA.SV.AchievementsSubcategory then
+                stringpart3 = AchievementColorize2:Colorize(strfmt(" %s%s%s", bracket1[CA.SV.AchievementsCatBracketOptions], catName, bracket2[CA.SV.AchievementsCatBracketOptions]))
+            else
+                stringpart3 = ""
+            end
+            local stringpart4 = ""
+            
+            -- TODO: Replace with Chat Printer function!!!
+            zo_callLater(function() CA.PrintAchievementDetails(stringpart1, stringpart2, stringpart3, stringpart4) end, 100)
+        end
+        
+        -- Display Alert
+        if CA.SV.AchievementCompleteAlert then
+            local alertMessage = zo_strformat("<<1>>: <<2>>", CA.SV.AchievementsCompleteMsg, name)
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
+        end
+        
+        return true
+        
+    end
+
+    
     -- Unregister the ZOS events for handling Quest Removal/Advanced/Added to replace with our own functions
     EVENT_MANAGER:UnregisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_REMOVED)
     EVENT_MANAGER:UnregisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_ADVANCED)
@@ -7270,9 +7467,6 @@ function CA.AlertStyleLearned()
     EVENT_MANAGER:RegisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_ADVANCED, OnQuestAdvanced)
     EVENT_MANAGER:RegisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_ADDED, OnQuestAdded)
     
-    
-   
-    ZO_PreHook(csaHandlers, EVENT_LORE_BOOK_LEARNED, LoreBookHook)
     ZO_PreHook(csaHandlers, EVENT_LORE_BOOK_LEARNED_SKILL_EXPERIENCE, LoreBookXPHook)
     
     ZO_PreHook(csaHandlers, EVENT_LORE_COLLECTION_COMPLETED, LoreCollectionHook)
@@ -7310,42 +7504,48 @@ function CA.AlertStyleLearned()
     ZO_PreHook(csaHandlers, EVENT_CHAMPION_LEVEL_ACHIEVED, ChampionLevelAchievedHook)
     ZO_PreHook(csaHandlers, EVENT_CHAMPION_POINT_GAINED, ChampionPointGainedHook)
     
-   -- ZO_PreHook(csaHandlers, loreEvents[3], LoreCollectionHook)
-   -- ZO_PreHook(csaHandlers, loreEvents[4], LoreCollectionXPHook)
+    ZO_PreHook(csaHandlers, EVENT_DUEL_NEAR_BOUNDARY, DuelNearBoundaryHook)
+    ZO_PreHook(csaHandlers, EVENT_DUEL_FINISHED, DuelFinishedHook)
+    ZO_PreHook(csaHandlers, EVENT_DUEL_COUNTDOWN, DuelCountdownHook)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, CA.DuelStarted)
     
-    --[[
-  
-    CSH[EVENT_LORE_COLLECTION_COMPLETED] = function(categoryIndex, collectionIndex, bookIndex, guildReputationIndex, isMaxRank)
-        if guildReputationIndex == 0 or isMaxRank then
-            -- Only fire this message if we're not part of the guild or at max level within the guild.
-            local collectionName, description, numKnownBooks, totalBooks, hidden = GetLoreCollectionInfo(categoryIndex, collectionIndex)
-            if not hidden then
-                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.BOOK_COLLECTION_COMPLETED)
-                messageParams:SetText(GetString(SI_LORE_LIBRARY_COLLECTION_COMPLETED_LARGE), strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
-                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_LORE_COLLECTION_COMPLETED)
-                return messageParams
-            end
-        end
-    end
+    ZO_PreHook(csaHandlers, EVENT_RAID_TRIAL_STARTED, RaidStartedHook)
+    ZO_PreHook(csaHandlers, EVENT_RAID_TRIAL_COMPLETE, RaidCompleteHook)
+    ZO_PreHook(csaHandlers, EVENT_RAID_TRIAL_FAILED, RaidFailedHook)
+    ZO_PreHook(csaHandlers, EVENT_RAID_TRIAL_NEW_BEST_SCORE, RaidBestScoreHook)
+    ZO_PreHook(csaHandlers, EVENT_RAID_REVIVE_COUNTER_UPDATE, RaidReviveCounterHook)
+    ZO_PreHook(csaHandlers, EVENT_RAID_TRIAL_SCORE_UPDATE, RaidScoreUpdateHook)
+    ZO_PreHook(csaHandlers, EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE, ActivityFinderCompleteHook)
+    
+    ZO_PreHook(csaHandlers, EVENT_DISPLAY_ANNOUNCEMENT, DisplayAnnouncementHook)
+    ZO_PreHook(csaHandlers, EVENT_BROADCAST, BroadcastHook)
+    
+    ZO_PreHook(csaHandlers, EVENT_ACHIEVEMENT_AWARDED, AchievementAwardedHook)
 
-    CSH[EVENT_LORE_COLLECTION_COMPLETED_SKILL_EXPERIENCE] = function(categoryIndex, collectionIndex, guildReputationIndex, skillType, skillIndex, rank, previousXP, currentXP)
-        if guildReputationIndex > 0 then
-            local collectionName, description, numKnownBooks, totalBooks, hidden = GetLoreCollectionInfo(categoryIndex, collectionIndex)
-            if not hidden then
-                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.BOOK_COLLECTION_COMPLETED)
-                local barType = PLAYER_PROGRESS_BAR:GetBarType(PPB_CLASS_SKILL, skillType, skillIndex)
-                local rankStartXP, nextRankStartXP = GetSkillLineRankXPExtents(skillType, skillIndex, rank)
-                messageParams:SetBarParams(CENTER_SCREEN_ANNOUNCE:CreateBarParams(barType, rank, previousXP - rankStartXP, currentXP - rankStartXP))
-                messageParams:SetText(GetString(SI_LORE_LIBRARY_COLLECTION_COMPLETED_LARGE), strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
-                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_LORE_COLLECTION_COMPLETED_SKILL_EXPERIENCE)
-                return messageParams
+end
+
+    -- EVENT_DUEL_STARTED -- EVENT HANDLER
+    function CA.DuelStarted(eventCode)
+        
+        -- Display CA
+        if CA.SV.DuelStartCA then
+            local formattedIcon = zo_iconFormat("EsoUI/Art/HUD/HUD_Countdown_Badge_Dueling.dds", 16, 16)
+            
+            if CA.SV.MiscDuelStartOptions == 1 then
+                printToChat(strformat(GetString(SI_LUIE_CA_DUEL_STARTED_WITH_ICON), formattedIcon))
+            elseif CA.SV.MiscDuelStartOptions == 2 then
+                printToChat(GetString(SI_LUIE_CA_DUEL_STARTED))
+            elseif CA.SV.MiscDuelStartOptions == 3 then
+                printToChat(strformat("<<1>>", formattedIcon))
             end
         end
-    end
-    
-    ]]
-	
-end       
+        
+        -- Play sound if CSA is not enabled
+        if not CA.SV.DuelStartCSA then
+            PlaySound(SOUNDS.DUEL_START)
+        end
+        
+    end      
 
 function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previousXP, currentXP)
     if (skillType == SKILL_TYPE_GUILD) then

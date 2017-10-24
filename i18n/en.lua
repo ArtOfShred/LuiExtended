@@ -64,7 +64,6 @@ ZO_CreateStringId("SI_LUIE_CA_CURRENCY_TELVAR_STONE",                   " <<1[Te
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_WRIT_VOUCHER",                   " <<1[Writ Voucher/Writ Vouchers]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
 
 ZO_CreateStringId("SI_LUIE_CA_DEBUG_MSG_CURRENCY",                      "Currency Change Reason <<1>> Triggered - Please post on the LUI Extended comments section on ESOUI.com describing what caused this message. Thanks!")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_COUNTDOWN_CSA",                      "Duel Starts in <<1>>...")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_ACCEPTED",                    "Duel challenge accepted.")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_CANCELED",                    "Duel challenge cancelled.")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_DECLINED",                    "Duel challenge declined.")
@@ -85,8 +84,10 @@ ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_PLAYER",                      "Challen
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_RECEIVED",                    "|cFEFEFE<<1>>|r has challenged you to a duel.")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_SENT",                        "You have challenged |cFEFEFE<<1>>|r to a duel.")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_NEAR_BOUNDARY_CSA",                  "You are close to the edge of the duel area!")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_RESULT0",                            "|cFEFEFE<<1>>|r forfeited the duel.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_RESULT1",                            "|cFEFEFE<<1>>|r won the duel.")
+ZO_CreateStringId("SI_LUIE_CA_DUEL_SELF_RESULT0",                       "You forfeited the duel!")
+ZO_CreateStringId("SI_LUIE_CA_DUEL_SELF_RESULT1",                       "You won the duel!")
+ZO_CreateStringId("SI_LUIE_CA_DUEL_RESULT0",                            "|cFEFEFE<<1>>|r forfeited the duel!")
+ZO_CreateStringId("SI_LUIE_CA_DUEL_RESULT1",                            "|cFEFEFE<<1>>|r won the duel!")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_STARTED",                            "Duel started!")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_STARTED_WITH_ICON",                  "<<1>> Duel started!")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_STATE1",                             "You are currently waiting for a duel challenge response from |cFEFEFE<<1>>|r.")
@@ -172,13 +173,12 @@ ZO_CreateStringId("SI_LUIE_CA_GROUP_QUEST_SHARE_DECLINED",              "Shared 
 ZO_CreateStringId("SI_LUIE_CA_GROUP_QUIT",                              "You are no longer in a group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_QUIT_LFG",                          "You are no longer in an LFG group.")
 
-ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_STARTED",                     "Started: <<1>>") -- Replaces default string to remove "Trial" label (Started: <<1>> Trial) (Note - SI_TRIAL_COMPLETED_LARGE does not have the same issue)
-ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_FAILED",                      "Failed: <<1>>") -- Replaces default string to remove "Trial" label (Failed: <<1>> Trial) (Note - SI_TRIAL_COMPLETED_LARGE does not have the same issue)
+ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_STARTED",                     "Started: <<1>>")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_FAILED",                      "Failed: <<1>>")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_COMPLETED_LARGE",             "Completed: <<1>>")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_SCORETALLY",                  "Final Score <<1>> Total Time <<2>> Vitality Bonus <<3>> <<4>>")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_REVIVE_COUNTER_UPDATED",            "|t16:16:<<1>>|t Vitality Bonus Decreased") -- Custom string for printToChat Revive Counter update
-ZO_CreateStringId("SI_LUIE_CA_GROUP_REVIVE_COUNTER_UPDATED_LARGE",      "|t64:64:<<1>>|t Vitality Bonus Decreased") -- Replaces default string to add spacing between icon and text.
-ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_SCORE_UPDATED",               "|t16:16:<<1>>|t <<2>> Points Rewarded") -- Custom string for printToChat score updates.
-ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_SCORE_UPDATED_LARGE",         "|t64:64:<<1>>|t <<2>> Points Rewarded") -- Replaces default string to add spacing between icon and text.
+ZO_CreateStringId("SI_LUIE_CA_GROUP_REVIVE_COUNTER_UPDATED",            "<<1>> Vitality Bonus Decreased")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_SCORE_UPDATED",               "<<1>> <<2>> Points Rewarded")
 
 ZO_CreateStringId("SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST",            "<<1>> has invited you to join <<2>>.")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST_ALT",        "|cFEFEFE<<1>>|r has invited you to join <<2>>.")
@@ -697,10 +697,9 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_TOTAL_TP",                       "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_TOTALSTRING",                    "Context Message for New Total")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_TOTALSTRING_TP",                 "Choose the context message that appears before the total # of items./nDefault: \"[New Total]\" ")
 
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_DUEL",                           "Show Duel Event Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_DUEL_TP",                        "Print a notification to chat for duel invites and events.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_DUELSTART",                      "Duel Start Notification Type")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_DUELSTART",                      "CA - Duel Start Notification Type")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_DUELSTART_TP",                   "Choose the message that is displayed when the countdown ends and the duel is started.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_HEADER",                         "Miscellaneous Announcements")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_INVENTORYFULL",                  "Display inventory is full notification")
