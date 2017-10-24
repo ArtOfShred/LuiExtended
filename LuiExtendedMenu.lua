@@ -3562,7 +3562,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsProgressMsg = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementsProgressMsg,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.AchievementsProgress) end,
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
                     },
                     {
                         -- Achievements Step Size
@@ -3574,7 +3574,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsStep = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementsStep,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.AchievementsProgress) end,
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
                     },
                     
                     {
@@ -3620,7 +3620,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsCompleteMsg = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementsCompleteMsg,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.AchievementsComplete) end,
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert) ) end,
                     },
                     {
                         -- Show 100% Completion on complete event
@@ -3631,7 +3631,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsCompPercentage = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementsCompPercentage,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.AchievementsComplete) end,
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert) ) end,
                     },
                     {
                     type = "divider",
@@ -3646,7 +3646,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.AchievementColor1) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.AchievementColor1 = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
                         default = {r=LUIE.ChatAnnouncements.D.AchievementColor1[1], g=LUIE.ChatAnnouncements.D.AchievementColor1[2], b=LUIE.ChatAnnouncements.D.AchievementColor1[3]}
                     },
                     {
@@ -3657,7 +3657,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.AchievementColor2) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.AchievementColor2 = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
                         default = {r=LUIE.ChatAnnouncements.D.AchievementColor2[1], g=LUIE.ChatAnnouncements.D.AchievementColor2[2], b=LUIE.ChatAnnouncements.D.AchievementColor2[3]}
                     },
                     
@@ -3670,7 +3670,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsIcon = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementsIcon,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
                     },
                     {
                         -- Show Achievement Category
@@ -3681,7 +3681,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsCategory = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementsCategory,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
                     },
                     {
                         -- Show Achievement Subcategory
@@ -3692,7 +3692,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsSubcategory = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementsSubcategory,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.AchievementsCategory and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.AchievementsCategory and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
                     },
                     {
                         -- Category & Subcategory Bracket Options
@@ -3703,7 +3703,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return bracketOptions4[LUIE.ChatAnnouncements.SV.AchievementsCatBracketOptions] end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsCatBracketOptions = bracketOptions4Keys[value] end,
                         width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.AchievementsCategory and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.AchievementsCategory and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
                         default = LUIE.ChatAnnouncements.D.AchievementsCatBracketOptions
                     },
                     
@@ -3716,7 +3716,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return bracketOptions5[LUIE.ChatAnnouncements.SV.AchievementsBracketOptions] end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsBracketOptions = bracketOptions5Keys[value] end,
                         width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
                         default = LUIE.ChatAnnouncements.D.AchievementsBracketOptions
                     },
                    
@@ -3729,7 +3729,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsDetails = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementsDetails,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
                     },
                     {
                         -- Color Achievement Progress
@@ -3740,7 +3740,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementsColorProgress = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementsColorProgress,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
                     },
                     {
                     type = "divider",
