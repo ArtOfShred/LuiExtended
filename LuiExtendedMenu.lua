@@ -512,16 +512,6 @@ function LUIE_CreateSettings()
         default = LUIE.CombatInfo.D.GlobalPotion,
         disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShow) end,
     }
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "checkbox",
-        name = "Global Cooldown - Show on Ultimate",
-        tooltip = "TODO",
-        getFunc = function() return LUIE.CombatInfo.SV.GlobalUltimate end,
-        setFunc = function(value) LUIE.CombatInfo.SV.GlobalUltimate = value end,
-        width = "full",
-        default = LUIE.CombatInfo.D.GlobalUltimate,
-        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShow) end,
-    }
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
@@ -541,6 +531,16 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.CombatInfo.SV.GlobalDesat = value end,
         width = "full",
         default = LUIE.CombatInfo.D.GlobalDesat,
+        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShow) end,
+    }
+    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "checkbox",
+        name = "Global Cooldown - Color Slot Label Red",
+        tooltip = "TODO",
+        getFunc = function() return LUIE.CombatInfo.SV.GlobalLabelColor end,
+        setFunc = function(value) LUIE.CombatInfo.SV.GlobalLabelColor = value end,
+        width = "full",
+        default = LUIE.CombatInfo.D.GlobalLabelColor,
         disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShow) end,
     }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
