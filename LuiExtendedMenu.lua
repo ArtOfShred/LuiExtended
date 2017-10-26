@@ -4517,15 +4517,49 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and ( LUIE.ChatAnnouncements.SV.DuelStartCA or LUIE.ChatAnnouncements.SV.DuelStartCSA) ) end,
                     },
                     {
-                        -- Show Pledge of Mara Events
+                        -- Show Pledge of Mara CA
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_MARA),
+                        name = "Show Pledge of Mara CA",
                         tooltip = GetString(SI_LUIE_LAM_CA_MISC_MARA_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscMara end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscMara = value LUIE.ChatAnnouncements.RegisterMaraEvents() end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.PledgeOfMaraCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.PledgeOfMaraCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.MiscMara,
+                        default = LUIE.ChatAnnouncements.D.PledgeOfMaraCA,
+                    },
+                    {
+                        -- Show Pledge of Mara CSA
+                        type = "checkbox",
+                        name = "Show Pledge of Mara CSA",
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_MARA_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.PledgeOfMaraCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.PledgeOfMaraCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.PledgeOfMaraCSA,
+                    },
+                    {
+                        -- Show Pledge of Mara Alert
+                        type = "checkbox",
+                        name = "Show Pledge of Mara Alert",
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_MARA_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.PledgeOfMaraAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.PledgeOfMaraAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.PledgeOfMaraAlert,
+                    },
+                    
+                    {
+                        -- Show Pledge of Mara Alert
+                        type = "checkbox",
+                        name = "Only Show Pledge of Mara Alert if failed to complete",
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_MARA_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.PledgeOfMaraAlertOnlyFail end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.PledgeOfMaraAlertOnlyFail = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable and not (LUIE.ChatAnnouncements.SV.PledgeOfMaraCA or LUIE.ChatAnnouncements.SV.PledgeOfMaraCSA or LUIE.ChatAnnouncements.SV.PledgeOfMaraAlert) end,
+                        default = LUIE.ChatAnnouncements.D.PledgeOfMaraAlertOnlyFail,
                     },
                 ---
                 },
@@ -4536,6 +4570,134 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_CA_GROUP_HEADER),
                 reference = "Chat_Announcements_Options_Group_Announcements_Submenu",
                 controls = {
+                    
+                    {
+                        -- Show Group CA
+                        type = "checkbox",
+                        name = "Show Group CA",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupCA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupCA,
+                    },
+                    {
+                        -- Show Group Alert
+                        type = "checkbox",
+                        name = "Show Group Alert",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupAlert = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupAlert,
+                    },
+                    
+                    {
+                        -- Show Group LFG CA
+                        type = "checkbox",
+                        name = "Show Group LFG - CA",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupLFGCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGCA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupLFGCA,
+                    },
+                    {
+                        -- Show Group LFG Alert
+                        type = "checkbox",
+                        name = "Show Group LFG - Alert",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupLFGAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGAlert = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupLFGAlert,
+                    },
+                    
+                    {
+                        -- Show Group LFG CA
+                        type = "checkbox",
+                        name = "Show Group LFG Queue - CA",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupLFGQueueCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGQueueCA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupLFGQueueCA,
+                    },
+                    {
+                        -- Show Group LFG Alert
+                        type = "checkbox",
+                        name = "Show Group LFG Queue - Alert",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupLFGQueueAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGQueueAlert = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupLFGQueueAlert,
+                    },
+                    
+                    {
+                        -- Show Group Vote CA
+                        type = "checkbox",
+                        name = "Show Group Vote - CA",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupVoteCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupVoteCA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupVoteCA,
+                    },
+                    {
+                        -- Show Group Vote Alert
+                        type = "checkbox",
+                        name = "Show Group Vote - Alert",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupVoteAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupVoteAlert = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupVoteAlert,
+                    },
+                    
+                    {
+                        -- Show LFG Activity Completed CA
+                        type = "checkbox",
+                        name = "Show Group LFG - Activity Complete CA",
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPLFGCOMPLETE_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupLFGCompleteCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGCompleteCA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupLFGCompleteCA,
+                    },
+                    {
+                        -- Show LFG Activity Completed CSA
+                        type = "checkbox",
+                        name = "Show Group LFG - Activity Complete CSA",
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPLFGCOMPLETE_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupLFGCompleteCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGCompleteCSA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupLFGCompleteCSA,
+                    },
+                    {
+                        -- Show LFG Activity Completed Alert
+                        type = "checkbox",
+                        name = "Show Group LFG - Activity Complete Alert",
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPLFGCOMPLETE_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupLFGCompleteAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGCompleteAlert = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupLFGCompleteAlert,
+                    },
+                
+                
                     {
                         -- Show Group Events
                         type = "checkbox",

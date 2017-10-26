@@ -59,6 +59,22 @@ CA.D = {
     GroupLFG                      = false,
     GroupLFGComplete              = false,
     
+    GroupCA                       = true,
+    GroupAlert                    = true,
+    
+    GroupLFGCA                    = true,
+    GroupLFGAlert                 = true,
+    
+    GroupLFGQueueCA               = true,
+    GroupLFGQueueAlert            = true,
+    
+    GroupLFGCompleteCA            = false,
+    GroupLFGCompleteCSA           = true,
+    GroupLFGCompleteAlert         = false,
+    
+    GroupVoteCA                   = true,
+    GroupVoteAlert                = true,
+    
     GroupRaidCA                   = false,
     GroupRaidCSA                  = true,
     GroupRaidAlert                = false,
@@ -130,7 +146,13 @@ CA.D = {
     MiscHorse                     = false,
     MiscLockpick                  = false,
     MiscMail                      = false,
-    MiscMara                      = false,
+    
+    PledgeOfMaraCA                = false,
+    PledgeOfMaraCSA               = true,
+    PledgeOfMaraAlert             = true,
+    PledgeOfMaraAlertOnlyFail     = true,
+    
+    
     MiscSocial                    = false,
     MiscTrade                     = false,
     MiscStuck                     = false,
@@ -508,6 +530,10 @@ local g_lockpickBroken              = false
 -- Experience
 local g_xpCombatBufferValue         = 0
 local g_guildSkillThrottle          = 0
+
+-- Group
+local currentGroupLeaderRawName
+local currentGroupLeaderDisplayName
 -----------------------------------
 -- UPDATED CODE (COLORIZE VALUES)
 -----------------------------------
@@ -618,16 +644,26 @@ function CA.Initialize(enabled)
 
     CA.Enabled = true
 
-    -- Read current player toon name
+    -- Read current player name and get current group leader
     g_playerName = GetRawUnitName("player")
     g_playerNameFormatted = strformat(SI_UNIT_NAME, GetUnitName("player"))
     g_playerDisplayName = strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
+    currentGroupLeaderRawName = GetRawUnitName(GetGroupLeaderUnitTag())
+    currentGroupLeaderDisplayName = GetUnitDisplayName(GetGroupLeaderUnitTag())
+    
+    -- Setup group variables
+    local groupSize = GetGroupSize()
+    if groupSize > 1 then
+        g_areWeGrouped = true
+    end
+    if IsInLFGGroup() then
+        g_LFGJoinAntiSpam = true
+    end
 
     -- Posthook Crafting Interface (Keyboard)
     CA.CraftModeOverrides()
 
     -- Register events
-    CA.RegisterGroupEvents()
     CA.RegisterGoldEvents()
     CA.RegisterLootEvents()
     CA.RegisterMailEvents()
@@ -648,7 +684,6 @@ function CA.Initialize(enabled)
     CA.RegisterSocialEvents()
     CA.RegisterCustomStrings()
     CA.RegisterDisguiseEvents()
-    CA.RegisterMaraEvents()
     CA.RegisterColorEvents()
     CA.RegisterStuckEvents()
     CA.RegisterQuestEvents()
@@ -812,15 +847,6 @@ function CA.RegisterGuildEvents()
     end
 end
 
-function CA.RegisterMaraEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_OFFER)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_RESULT)
-    if CA.SV.MiscMara then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_OFFER, CA.MaraOffer)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_RESULT, CA.MaraResult)
-    end
-end
-
 function CA.RegisterDisguiseEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED)
@@ -881,70 +907,8 @@ function CA.RegisterStuckEvents()
     end
 end
 
-function CA.Broadcast(eventCode, message)
-    --d("Broadcast deteceted!")
-    printToChat(message)
-end
-
 function CA.RegisterGroupEvents()
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BROADCAST, CA.Broadcast)
-    -- Group Events
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_REMOVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_UPDATE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RESPONSE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LEADER_UPDATE)
-    -- Ready check and Group Finder Votekick Events
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_ELECTION_FAILED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_ELECTION_NOTIFICATION_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_ELECTION_RESULT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_ELECTION_REQUESTED)
-    -- Group Finder Events
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_LFG_JOINED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_NO_LONGER_LFG)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_FIND_REPLACEMENT_NOTIFICATION_NEW)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_STATUS_UPDATE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTIVITY_QUEUE_RESULT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_CANCELLED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_UPDATED)
-    if CA.SV.GroupChatMsg then
-        local groupSize = GetGroupSize()
-        if groupSize > 1 then
-            g_areWeGrouped = true
-        end
-        if IsInLFGGroup() then
-            g_LFGJoinAntiSpam = true
-        end
-        -- Group Events
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_REMOVED, CA.GroupInviteRemoved)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_UPDATE, CA.GroupUpdate)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED, CA.OnGroupMemberJoined)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT,   CA.OnGroupMemberLeft)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED, CA.OnGroupInviteReceived)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RESPONSE, CA.OnGroupInviteResponse)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEADER_UPDATE, CA.OnGroupLeaderUpdate)
-        --EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_ROLES_CHANGED, CA.GMRC) -- Possibly re-enable later if solution is found.
-        --EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_CONNECTED_STATUS, CA.GMCS) -- Possibly re-enable later if solution is found.
-        -- Ready check and Group Finder Votekick Events
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_FAILED, CA.VoteFailed)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_NOTIFICATION_ADDED, CA.VoteNotify)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_RESULT, CA.VoteResult)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_REQUESTED, CA.VoteRequested)
-        -- Group Finder Events
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_LFG_JOINED, CA.LFGJoined)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_NO_LONGER_LFG, CA.LFGLeft)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_FIND_REPLACEMENT_NOTIFICATION_NEW, CA.GroupFindReplacementNew)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_STATUS_UPDATE, CA.ActivityStatusUpdate)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_QUEUE_RESULT, CA.ActivityQueueResult)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_CANCELLED, CA.ReadyCheckCancel)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_UPDATED, CA.ReadyCheckUpdate)
-    end
-    if CA.SV.GroupLFGComplete then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE, CA.ActivityComplete)
-    end
+
 end
 
 function CA.RegisterGoldEvents()
@@ -1152,12 +1116,6 @@ function CA.RegisterHorseEvents()
     if CA.SV.MiscHorse then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT, CA.MiscAlertHorse)
     end
-end
-
--- Helper function called after receiving a group invite. This ensures we don't ever have any issues seeing the first group invite message by renabling the Event handler after the first message arrives.
--- Otherwise we would see both messages broadcast as 2 events fire at the player when a group invite is received.
-function CA.RefreshGroupInviteEnable()
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED, CA.OnGroupInviteReceived)
 end
 
 function CA.GuildMemberAdded(eventCode, guildId, DisplayName)
@@ -1436,45 +1394,6 @@ end
 
 function CA.RegisterCustomStrings()
     if CA.SV.EnableCustomStrings then
-        -- Group String Replacements
-        SafeAddString(SI_GROUPINVITERESPONSE0, GetString(SI_LUIE_CA_GROUPINVITERESPONSE0), 2)
-        SafeAddString(SI_GROUPINVITERESPONSE1, GetString(SI_LUIE_CA_GROUPINVITERESPONSE1), 3)
-        SafeAddString(SI_GROUPINVITERESPONSE2, GetString(SI_LUIE_CA_GROUPINVITERESPONSE2), 3)
-        SafeAddString(SI_GROUPINVITERESPONSE3, GetString(SI_LUIE_CA_GROUPINVITERESPONSE3), 2)
-        SafeAddString(SI_GROUPINVITERESPONSE4, GetString(SI_LUIE_CA_GROUPINVITERESPONSE4), 3)
-        SafeAddString(SI_GROUPINVITERESPONSE5, GetString(SI_LUIE_CA_GROUPINVITERESPONSE5), 3)
-        SafeAddString(SI_GROUPINVITERESPONSE8, GetString(SI_LUIE_CA_GROUPINVITERESPONSE8), 2)
-        SafeAddString(SI_GROUPINVITERESPONSE9, GetString(SI_LUIE_CA_GROUPINVITERESPONSE9), 2)
-        SafeAddString(SI_GROUPINVITERESPONSE10, GetString(SI_LUIE_CA_GROUPINVITERESPONSE10), 1)
-        SafeAddString(SI_GROUPINVITERESPONSE13, GetString(SI_LUIE_CA_GROUPINVITERESPONSE13), 1)
-        SafeAddString(SI_GROUPINVITERESPONSE14, GetString(SI_LUIE_CA_GROUPINVITERESPONSE14), 1)
-        SafeAddString(SI_GROUPINVITERESPONSE15, GetString(SI_LUIE_CA_GROUPINVITERESPONSE15), 1)
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GROUP, GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE_ALT), 1)
-        SafeAddString(SI_GROUP_INVITE_MESSAGE, GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE_ALT), 2)
-        SafeAddString(SI_GROUPLEAVEREASON1, GetString(SI_LUIE_CA_GROUP_GROUPLEAVEREASON1), 3)
-        SafeAddString(SI_GROUPLEAVEREASON2, GetString(SI_LUIE_CA_GROUP_MEMBER_DISBAND_MSG), 1)
-        SafeAddString(SI_LUIE_CA_GROUP_INVITE_MESSAGE, GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE_ALT), 1)
-        SafeAddString(SI_LUIE_CA_GROUP_LEADER_CHANGED, GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_ALT), 1)
-        SafeAddString(SI_LUIE_CA_GROUP_MEMBER_JOIN, GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_ALT), 1)
-        SafeAddString(SI_LUIE_CA_GROUP_MEMBER_KICKED, GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_ALT), 1)
-        SafeAddString(SI_LUIE_CA_GROUP_MEMBER_LEAVE, GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_ALT), 1)
-        SafeAddString(SI_GROUP_NOTIFICATION_GROUP_LEADER_CHANGED, GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_ALT), 1)
-        -- Trial String Replacement
-        -- Group Finder String Replacements
-        SafeAddString(SI_GROUPING_TOOLS_ALERT_LFG_JOINED, GetString(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED), 1)
-        SafeAddString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL, GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL_ALT), 1)
-        SafeAddString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START, GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START_ALT), 1)
-        SafeAddString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED, GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED_ALT), 1)
-        -- Mara String Replacements
-        SafeAddString(SI_PLEDGEOFMARARESULT0, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT0), 1)
-        SafeAddString(SI_PLEDGEOFMARARESULT1, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT1), 1)
-        SafeAddString(SI_PLEDGEOFMARARESULT2, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT2), 1)
-        SafeAddString(SI_PLEDGEOFMARARESULT3, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT3), 2)
-        SafeAddString(SI_PLEDGEOFMARARESULT4, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT4), 2)
-        SafeAddString(SI_PLEDGEOFMARARESULT6, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT6), 1)
-        SafeAddString(SI_PLEDGEOFMARARESULT7, GetString(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT7), 1)
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_RITUAL_OF_MARA, GetString(SI_PLEDGE_OF_MARA_MESSAGE), 1)
-        SafeAddString(SI_PLAYER_TO_PLAYER_OUTGOING_RITUAL_OF_MARA, GetString(SI_PLEDGE_OF_MARA_SENDER_MESSAGE), 1)
         -- Quest Share String Replacements
         SafeAddString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE, GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_ALT), 1)
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_ALT), 3)
@@ -1518,101 +1437,33 @@ function CA.RegisterCustomStrings()
     end
 end
 
-function CA.LFGJoined(eventCode, locationName)
-    
-    -- DEBUG OPTIONS
-    --d("LFG JOINED")
-    --if IsInLFGGroup() then d("We are in an LFG group") else d ("We are not in an LFG group") end
-    
-    if CA.SV.GroupLFG and not g_LFGJoinAntiSpam then
-        printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED), locationName))
-        zo_callLater (function() g_rcUpdateDeclineOverride = false end, 5000)
-        g_lfgDisableGroupEvents = true
-        zo_callLater (function() g_lfgDisableGroupEvents = false end, 2500)
-    end
-    g_joinLFGOverride = true
-    g_LFGJoinAntiSpam = true
-    g_rcUpdateDeclineOverride = true
-end
-
-function CA.LFGLeft(eventCode)
-    g_leaveLFGOverride = true
-end
-
-function CA.CheckLFGStatusJoin()
-    if not g_stopGroupLeaveQueue then
-        if not g_lfgDisableGroupEvents then
-            if IsInLFGGroup() and not g_joinLFGOverride then
-                printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF_LFG))
-            elseif not IsInLFGGroup() and not g_joinLFGOverride then
-                printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF))
-            end
-        end
-        g_joinLFGOverride = false
-    end
-end
-
-function CA.PrintJoinStatusNotSelf(SendString)
-    if not g_stopGroupLeaveQueue then
-        printToChat(SendString)
-    end
-end
-
-function CA.CheckLFGStatusLeave(SendString, WasKicked)
-    if not (g_stopGroupLeaveQueue and g_lfgDisableGroupEvents) then
-        if SendString ~= "" then
-            printToChat(SendString)
-        end
-        if not g_leaveLFGOverride then
-            if WasKicked then
-                printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF))
-            end
-            if GetGroupSize() == 0 then
-                printToChat(GetString(SI_LUIE_CA_GROUP_QUIT))
-            end
-        elseif g_leaveLFGOverride and GetGroupSize() == 0 then
-            printToChat(GetString(SI_LUIE_CA_GROUP_QUIT_LFG))
-        end
-    end
-    g_leaveLFGOverride = false
-end
-
-function CA.GroupFindReplacementNew(eventCode)
-    local activityType, activityIndex = GetLFGFindReplacementNotificationInfo()
-    -- This event sometimes fires when forming a group and will display with Type 0 and Index 1 (Craglorn)
-    local name = GetLFGOption(activityType, activityIndex)
-    if name == "Craglorn" then return end -- TODO: Localize - note can't use numbers here because if Type is nil it also returns as Craglorn
-
-    
-    local function printNameLater(name)
-        printToChat(strformat(GetString(SI_LFG_FIND_REPLACEMENT_TEXT), name))
-    end
-    
-    if CA.SV.GroupLFG then
-        zo_callLater(function() printNameLater(name) end, 100)
-    end
-end
-
-function CA.ActivityComplete(eventCode)
-    printToChat(GetString(SI_ACTIVITY_FINDER_ACTIVITY_COMPLETE_ANNOUNCEMENT_TEXT))
-end
-
+-- EVENT_ACTIVITY_FINDER_STATUS_UPDATE
 function CA.ActivityStatusUpdate(eventCode, status)
     --d("status: " .. status)
     if g_showActivityStatus then
+        local message
         -- If we are NOT queued and were formerly queued, forming group, or in a ready check, display left queue message.
         if status == ACTIVITY_FINDER_STATUS_NONE and (g_savedQueueValue == 1 or g_savedQueueValue == 4) then
-            if CA.SV.GroupLFG then printToChat(GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_END)) end
+                message = (GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_END)) 
         end
         -- If we are queued and previously we were not queued then display a message.
         if status == ACTIVITY_FINDER_STATUS_QUEUED and (g_savedQueueValue == 0 or g_savedQueueValue == 2) then
-            if CA.SV.GroupLFG then printToChat(GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_START)) end
+                message = (GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_START)) 
         end
         -- If we were in the queue and are now in progress without a ready check triggered, we left the queue to find a replacement member so this should be displayed.
         if status == ACTIVITY_FINDER_STATUS_IN_PROGRESS and (g_savedQueueValue == 1) then
-            if CA.SV.GroupLFG then printToChat(GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_END)) end
+                message = (GetString(SI_LUIE_CA_GROUPFINDER_QUEUE_END)) 
         end
-        if g_savedQueueValue == 5 and status == 1 then status = 5 end -- Fixes an error that occurs when joining an LFG instance while already in an LFG group.    
+        if g_savedQueueValue == 5 and status == 1 then status = 5 end -- Fixes an error that occurs when joining an LFG instance while already in an LFG group.  
+
+        if message then
+            if CA.SV.GroupLFGQueueCA then
+                printToChat(message)
+            end
+            if CA.SV.GroupLFGQueueAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
+            end
+        end
     end
 
     if status == 0 then
@@ -1624,65 +1475,28 @@ function CA.ActivityStatusUpdate(eventCode, status)
 
     -- Prevents potential consecutive events from spamming
     if status == 5 and g_savedQueueValue ~= 5 then
-        printToChat(GetString(SI_LFGREADYCHECKCANCELREASON4))
+        message = (GetString(SI_LFGREADYCHECKCANCELREASON4))
+        if message then
+            if CA.SV.GroupLFGCA then
+                printToChat(message)
+            end
+            if CA.SV.GroupLFGAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
+            end
+        end
         g_stopGroupLeaveQueue = true
         g_showRCUpdates = true
         g_LFGJoinAntiSpam = false
         g_showActivityStatus = false
-        zo_callLater(CA.ActivityStatusRefresh, 1000)
-        zo_callLater(CA.ResetGroupLeaveQueue, 1000)
+        zo_callLater(function() g_showActivityStatus = true end, 1000)
+        zo_callLater(function() g_stopGroupLeaveQueue = false end, 1000)
     end
     
     g_savedQueueValue = status
     
 end
 
-function CA.ActivityQueueResult(eventCode, result)
-    if CA.SV.GroupLFG then
-        printToChat(GetString("SI_ACTIVITYQUEUERESULT", result))
-    end   
-    --[[ Old Option just in case this is printing duplicate messages or anything
-        if result == ACTIVITY_QUEUE_RESULT_INCOMPATIBLE_GROUP then
-            printToChat(GetString(SI_ACTIVITYQUEUERESULT9))
-        end
-        if result == ACTIVITY_QUEUE_RESULT_MEMBERS_OFFLINE then
-            printToChat(GetString(SI_ACTIVITYQUEUERESULT14))
-        end
-        if result == ACTIVITY_QUEUE_RESULT_ON_QUEUE_COOLDOWN then
-            printToChat(GetString(SI_ACTIVITYQUEUERESULT12))
-        end
-        if result == ACTIVITY_QUEUE_RESULT_MEMBER_CANCELED_READY_CHECK then
-            printToChat(GetString(SI_ACTIVITYQUEUERESULT19))
-        end
-        if result == ACTIVITY_QUEUE_RESULT_DLC_LOCKED then
-            printToChat(GetString(SI_ACTIVITYQUEUERESULT6))
-        end
-    end
-    ]]--
-
-    g_showRCUpdates = true
-end
-
-function CA.ReadyCheckCancel(eventCode, reason)
-    --d("Ready check cancel")
-
-    if reason ~= LFG_READY_CHECK_CANCEL_REASON_NOT_IN_READY_CHECK and reason ~= LFG_READY_CHECK_CANCEL_REASON_GROUP_FORMED_SUCCESSFULLY then
-        if CA.SV.GroupLFG then printToChat(GetString("SI_LFGREADYCHECKCANCELREASON", reason)) end
-    end
-    
-    -- Sometimes if another player cancels slightly before a player in your group cancels, the "you have been placed in the front of the queue message displays. If this is the case, we want to show queue left for that event."
-    if reason ~= LFG_READY_CHECK_CANCEL_REASON_GROUP_REPLACED_IN_QUEUE then
-        g_showActivityStatus = false
-        zo_callLater(CA.ActivityStatusRefresh, 1000)
-    end
-    
-    g_showRCUpdates = true
-end
-
-function CA.ActivityStatusRefresh()
-    g_showActivityStatus = true
-end
-
+-- EVENT_GROUPING_TOOLS_READY_CHECK_UPDATED
 function CA.ReadyCheckUpdate(eventCode)
     --d("ready check update")
 
@@ -1720,15 +1534,28 @@ function CA.ReadyCheckUpdate(eventCode)
             activityName = GetString(SI_LFGACTIVITY4) -- TODO: Untested
         end
 
+        local message
+        local alertText
         if playerRole ~= 0 then
-            local roleIcon = (strformat("|t16:16:<<1>>|t", GetRoleIcon(playerRole)))
+            local roleIconSmall = zo_strformat("<<1>> ", zo_iconFormat(GetRoleIcon(playerRole), 16, 16)) or ""
+            local roleIconLarge =zo_strformat("<<1>> ", zo_iconFormat(GetRoleIcon(playerRole), "100%", "100%")) or ""
             local roleString = GetString("SI_LFGROLE", playerRole)
-            if CA.SV.GroupLFG then
-                printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE), activityName, roleIcon, roleString ))
+            message = strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE), activityName, roleIconSmall, roleString )
+            alertText = strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE), activityName, roleIconLarge, roleString )
+            if CA.SV.GroupLFGCA then
+                printToChat(message)
+            end
+            if CA.SV.GroupLFGAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertText)
             end
         else
-            if CA.SV.GroupLFG then
-                printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY), activityName))
+            message = strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY), activityName)
+            alertText = strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY), activityName)
+            if CA.SV.GroupLFGCA then
+                printToChat(message)
+            end
+            if CA.SV.GroupLFGAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertText)
             end
         end
     end
@@ -1736,141 +1563,25 @@ function CA.ReadyCheckUpdate(eventCode)
     g_showRCUpdates = false
     
     if not g_showRCUpdates and (tanksAccepted == 0 and tanksPending == 0 and healersAccepted == 0 and healersPending == 0 and dpsAccepted == 0 and dpsPending == 0) and not g_rcUpdateDeclineOverride then
-        if CA.SV.GroupLFG and g_rcSpamPrevention == false then
-            printToChat(GetString(SI_LFGREADYCHECKCANCELREASON3))
+        if g_rcSpamPrevention == false then
+            local message
+            message = (GetString(SI_LFGREADYCHECKCANCELREASON3))
+            if CA.SV.GroupLFGCA then
+                printToChat(message)
+            end
+            if CA.SV.GroupLFGAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
+            end
             g_rcSpamPrevention = true
-            zo_callLater(CA.ResetRCSpamPrevention, 1000)
+            zo_callLater(function() g_rcSpamPrevention = false end, 1000)
             g_showActivityStatus = false
-            zo_callLater(CA.ActivityStatusRefresh, 1000)
+            zo_callLater(function() g_showActivityStatus = true end, 1000)
             g_showRCUpdates = true
         end
     end
     
 end
 
-function CA.ResetGroupLeaveQueue()
-    g_stopGroupLeaveQueue = false
-end
-
-function CA.ResetRCSpamPrevention()
-    g_rcSpamPrevention = false
-end
-
-function CA.VoteFailed( eventCode, failureReason, descriptor)
-    if CA.SV.GroupVote then
-        printToChat(GetString("SI_GROUPELECTIONFAILURE", failureReason))
-    end
-end
-
-function CA.VoteNotify(eventCode)
-    local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
-    if electionType == 2 then -- Ready Check
-        if CA.SV.GroupVote then
-            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_MESSAGE))
-        end
-    end
-
-    if electionType == 3 then -- Vote Kick
-        if CA.SV.GroupVote then
-            local kickMemberName = GetUnitName(targetUnitTag)
-            local kickMemberAccountName = GetUnitDisplayName(targetUnitTag)
-
-            local characterNameLink = ZO_LinkHandler_CreateCharacterLink(kickMemberName)
-            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(kickMemberAccountName)
-            local displayBothString = ( strformat("<<1>><<2>>", kickMemberName, kickMemberAccountName) )
-            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, kickMemberAccountName)
-            if CA.SV.ChatPlayerDisplayOptions == 1 then
-                printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), displayNameLink))
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then
-                printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), characterNameLink))
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then
-                printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), displayBoth))
-            end
-        end
-    end
-end
-
-function CA.VoteResult(eventCode, electionResult, descriptor)
-    local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
-    if descriptor == "[ZO_READY_CHECK]" then
-        if CA.SV.GroupVote then
-            if electionResult == 1 then
-                printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED))
-            end
-            if electionResult == 4 then
-                printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_PASSED))
-            end
-            if electionResult == 5 then
-                printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_FAILED))
-            end
-        end
-    end
-    if descriptor == "[ZO_NONE]" then
-        if CA.SV.GroupVote then
-            local KickCarry
-            local kickMemberName = GetUnitName(targetUnitTag)
-            local kickMemberAccountName = GetUnitDisplayName(targetUnitTag)
-
-            local characterNameLink = ZO_LinkHandler_CreateCharacterLink(kickMemberName)
-            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(kickMemberAccountName)
-            local displayBothString = ( strformat("<<1>><<2>>", kickMemberName, kickMemberAccountName) )
-            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, kickMemberAccountName)
-
-            if CA.SV.ChatPlayerDisplayOptions == 1 then
-                KickCarry = displayNameLink
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then
-                KickCarry = characterNameLink
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then
-                KickCarry = displayBoth
-            end
-
-            if electionResult == 1 then
-                printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL), KickCarry))
-            end
-            if electionResult == 2 then
-                printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL), KickCarry))
-            end
-            if electionResult == 4 then
-                printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED), KickCarry))
-            end
-            if electionResult == 5 then
-                printToChat(strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL), KickCarry))
-            end
-        end
-    end
-end
-
-function CA.VoteRequested(eventCode, descriptor)
-    if CA.SV.GroupVote then
-        if descriptor == "[ZO_READY_CHECK]" then
-            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_REQUESTED))
-        end
-        if descriptor == "[ZO_NONE]" then
-            printToChat(GetString(SI_GROUP_ELECTION_REQUESTED))
-        end
-    end
-end
-
--- Triggers when the player either accepts or declines an invite. We set g_groupJoinFudger to true here, and if the next event is GroupUpdate then it plays a message, if not, the next invite event resets it.
-function CA.GroupInviteRemoved(eventCode)
-    g_groupJoinFudger = true
-end
-
--- Triggers when the group composition changes for a Party going from 2 people to 3+, we use this to display a message to the player joining the group.
-function CA.GroupUpdate(eventCode)
-    if g_groupJoinFudger then
-        zo_callLater(CA.CheckLFGStatusJoin, 100)
-    end
-    g_groupJoinFudger = false
-    local groupSize = GetGroupSize()
-    if groupSize > 1 then
-        g_areWeGrouped = true
-    end
-end
 
 --[[ Would love to be able to use this function but its too buggy for now. Spams every single time someone updates their role, as well as when people join/leave group. If the player joins a large party for the first time then
 this broadcasts the role of every single player in the party. Too bad this doesn't only trigger when someone in group actually updates their role instead.
@@ -1977,200 +1688,8 @@ function CA.GMCS(eventCode, unitTag, isOnline)
 end
 ]]--
 
--- Prints a message to chat when another player sends us a group invite
-function CA.OnGroupInviteReceived(eventCode, inviterName, inviterDisplayName)
-    g_groupJoinFudger = false
-
-    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(inviterName)
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
-    local displayBothString = ( strformat("<<1>><<2>>", inviterName, inviterDisplayName) )
-    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
-
-    if CA.SV.ChatPlayerDisplayOptions == 1 then
-        printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), displayNameLink))
-    end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then
-        printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), characterNameLink))
-    end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then
-        printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), displayBoth))
-    end
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED) -- On receiving a group invite, it fires 2 events, we disable the event handler temporarily for this then re-enable it after.
-    zo_callLater(CA.RefreshGroupInviteEnable, 100)
-end
-
--- Prints a message to chat when invites are declined or failed.
-function CA.OnGroupInviteResponse(eventCode, inviterName, response, inviterDisplayName)
-    
-    local link
-    local nameToUse = ZO_GetPrimaryPlayerName(inviterDisplayName, inviterName)
-                if nameToUse == "" then
-                    nameToUse = ZO_GetSecondaryPlayerName(inviterDisplayName, inviterName)
-                    link = ZO_LinkHandler_CreateDisplayNameLink(nameToUse)
-                else
-                    link = ZO_LinkHandler_CreateCharacterLink(nameToUse)
-                end
-
-    if nameToUse ~= "" then
-        if response ~= 0 and response ~= 1 then
-            printToChat(strformat(GetString("SI_GROUPINVITERESPONSE", response), link)) --or GetString(SI_PLAYER_BUSY)
-        elseif response == 1 and g_playerName ~= inviterName then
-            g_groupFormFudger = true
-            printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF))
-        end
-    end
-end
-
--- Prints a message to chat when the leader of the group is updated
-function CA.OnGroupLeaderUpdate(eventCode, leaderTag)
-    local groupLeaderName = GetUnitName(leaderTag)
-    local groupLeaderAccount = GetUnitDisplayName(leaderTag)
-    
-    -- Just in case we can't get a value (seems to happen sometimes in LFG)
-    if groupLeaderName == "" or groupLeaderName == nil then return end
-
-    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(groupLeaderName)
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(groupLeaderAccount)
-    local displayBothString = ( strformat("<<1>><<2>>", groupLeaderName, groupLeaderAccount) )
-    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, groupLeaderAccount)
-    
-    local displayString
-    local function displayGroupLeaderUpdate()
-        if not g_lfgDisableGroupEvents then
-            printToChat(displayString)
-        end
-    end
-        
-    if g_playerNameFormatted ~= groupLeaderName then -- If another player became the leader
-        if CA.SV.ChatPlayerDisplayOptions == 1 then
-            displayString = (strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), displayNameLink))
-            zo_callLater(displayGroupLeaderUpdate, 100)
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then
-            displayString = (strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), characterNameLink))
-            zo_callLater(displayGroupLeaderUpdate, 100)
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then
-            displayString = (strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), displayBoth))
-            zo_callLater(displayGroupLeaderUpdate, 100)
-        end
-    elseif g_playerNameFormatted == groupLeaderName then -- If the player character became the leader
-        displayString = (GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_SELF))
-        zo_callLater(displayGroupLeaderUpdate, 100)
-    end
-end
-
--- Prints a message to chat when a group member joins
-function CA.OnGroupMemberJoined(eventCode, memberName)
-    g_groupJoinFudger = false
-    local g_partyStack = { }
-    local joinedMemberName = ""
-    local joinedMemberAccountName = ""
-
-    -- Iterate through group member indices to get the relevant UnitTags
-    for i = 1,40 do
-        local memberTag = GetGroupUnitTagByIndex(i)
-        if memberTag == nil then
-            break -- Once we reach a nil value (aka no party member there, stop the loop)
-        end
-        g_partyStack[i] = { memberTag = memberTag }
-    end
-
-    -- Iterate through UnitTags to get the member who just joined
-    for i = 1, #g_partyStack do
-        local unitname = GetRawUnitName(g_partyStack[i].memberTag)
-        if unitname == memberName then
-            joinedMemberName = GetUnitName(g_partyStack[i].memberTag)
-            joinedMemberAccountName = GetUnitDisplayName(g_partyStack[i].memberTag)
-            break -- Break loop once we get the value we need
-        end
-    end
-
-    if joinedMemberName ~= "" and joinedMemberName ~= nil then
-        if g_playerName ~= memberName then
-            -- Can occur if event is before EVENT_PLAYER_ACTIVATED
-            local groupJoinName
-            local characterNameLink = ZO_LinkHandler_CreateCharacterLink(joinedMemberName)
-            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(joinedMemberAccountName)
-            local displayBothString = ( strformat("<<1>><<2>>", joinedMemberName, joinedMemberAccountName) )
-            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, joinedMemberAccountName)
-            if CA.SV.ChatPlayerDisplayOptions == 1 then
-                groupJoinName = displayNameLink
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then
-                groupJoinName = characterNameLink
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then
-                groupJoinName = displayBoth
-            end
-            local SendString = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), groupJoinName))
-            zo_callLater(function() CA.PrintJoinStatusNotSelf(SendString) end, 100)
-        elseif g_playerName == memberName and not g_groupFormFudger then
-            zo_callLater(CA.CheckLFGStatusJoin, 100)
-        end
-    end
-
-    g_partyStack = { }
-    g_groupFormFudger = false
-    g_areWeGrouped = true
-end
-
--- Prints a message to chat when a group member leaves
-function CA.OnGroupMemberLeft(eventCode, memberName, reason, isLocalPlayer, isLeader, memberDisplayName, actionRequiredVote)
-    local memberLeftName
-    local SendString
-    local characterNameLink = ZO_LinkHandler_CreateCharacterLink( gsub(memberName,"%^%a+","") )
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(memberDisplayName)
-    local displayBothString = ( strformat("<<1>><<2>>", gsub(memberName,"%^%a+",""), memberDisplayName) )
-    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, memberDisplayName)
-
-    if CA.SV.ChatPlayerDisplayOptions == 1 then
-        memberLeftName = displayNameLink
-    end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then
-        memberLeftName = characterNameLink
-    end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then
-        memberLeftName = displayBoth
-    end
-
-    if memberName ~= "" and memberName ~= nil then
-        if reason == GROUP_LEAVE_REASON_VOLUNTARY then
-            if g_playerName == memberName then
-                g_areWeGrouped = false
-                SendString = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF), memberLeftName))
-                zo_callLater(function() CA.CheckLFGStatusLeave(SendString, WasKicked) end , 100)
-                g_LFGJoinAntiSpam = false -- Variable for LFG Messages
-            end
-            if g_playerName ~= memberName then
-                SendString = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE), memberLeftName))
-                zo_callLater(function() CA.CheckLFGStatusLeave(SendString, WasKicked) end , 100)
-            end
-        elseif reason == GROUP_LEAVE_REASON_KICKED then
-            if g_playerName == memberName then
-                g_areWeGrouped = false
-                SendString = ("")
-                local WasKicked = true
-                zo_callLater(function() CA.CheckLFGStatusLeave(SendString, WasKicked) end , 100)
-                g_LFGJoinAntiSpam = false -- Variable for LFG Messages
-            end
-            if g_playerName ~= memberName then
-                SendString = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED), memberLeftName))
-                zo_callLater(function() CA.CheckLFGStatusLeave(SendString, WasKicked) end , 100)
-            end
-        elseif reason == GROUP_LEAVE_REASON_DISBAND and g_playerName == memberName then
-            g_areWeGrouped = false
-            SendString = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_DISBAND_MSG), memberLeftName))
-            zo_callLater(function() CA.CheckLFGStatusLeave(SendString, WasKicked) end , 100)
-            g_LFGJoinAntiSpam = false -- Variable for LFG Messages
-        end
-    end
-end
 
 
------- TEMP TODO
-
--- Note, sentvalue here is an additional variable called when certain reasons are pushed through to this function to generate strings.
 function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
 
     local UpOrDown = newValue - oldValue
@@ -2533,18 +2052,6 @@ function CA.CurrencyTVThrottlePrinter()
     g_currencyTVThrottleTotal = 0
 end
 
--- Writ Voucher Change Announcements
-function CA.OnWritVoucherUpdate(eventCode, newWritVouchers, oldWritVouchers, reason)
---[[
-    -- Print a message to chat based off all the values we filled in above
-    if CA.SV.LootCurrencyCombo and UpOrDown < 0 then
-        g_comboString = (strfmt(" → %s%s%s", message, syntax, total))
-    else
-        printToChat(strfmt("%s%s%s", message, syntax, total))
-    end
-    ]]--
-end
-
 local function ResetLockpickBroken()
     g_lockpickBroken = false
 end
@@ -2708,6 +2215,15 @@ function CA.TradeInviteWaiting(eventCode, inviteeCharacterName, inviteeDisplayNa
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then
         printToChat(strformat(GetString(SI_TRADE_INVITE_CONFIRM), displayBoth))
     end
+    
+    --[[
+    if IsIgnored(inviteeDisplayName) then
+        printToChat(GetString(SI_LUIE_IGNORE_ERROR_TRADE))
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, (GetString(SI_LUIE_IGNORE_ERROR_TRADE)))
+        -- Don't play a sound here since Cancel event with play a sound.
+        TradeInviteCancel()
+    end
+    ]]--
 end
 
 -- These 2 functions help us get the name of the person we are trading with regardless of who initiated the trade
@@ -2726,6 +2242,7 @@ function CA.TradeInviteConsidering(eventCode, inviterCharacterName, inviterDispl
     if CA.SV.MiscTrade and CA.SV.ChatPlayerDisplayOptions == 3 then
         printToChat(strformat(GetString(SI_TRADE_INVITE), displayBoth))
     end
+    
 end
 
 function CA.TradeInviteAccepted(eventCode)
@@ -5058,51 +4575,6 @@ function CA.OnPlayerActivated(eventCode, initial)
     end
 end
 
-
-function CA.MaraOffer(eventCode, targetCharacterName, isSender, targetDisplayName)
-    local maraName
-    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(targetCharacterName)
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(targetDisplayName)
-    local displayBothString = ( strformat("<<1>><<2>>", targetCharacterName, targetDisplayName) )
-    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, targetDisplayName)
-
-    if CA.SV.ChatPlayerDisplayOptions == 1 then
-        maraName = displayNameLink
-    end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then
-        maraName = characterNameLink
-    end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then
-        maraName = displayBoth
-    end
-
-    if isSender then
-        printToChat(strformat(GetString(SI_PLAYER_TO_PLAYER_OUTGOING_RITUAL_OF_MARA), maraName))
-    else
-        printToChat(strformat(GetString(SI_PLAYER_TO_PLAYER_INCOMING_RITUAL_OF_MARA), maraName))
-    end
-end
-
-function CA.MaraResult (eventCode, reason, targetCharacterName, targetDisplayName)
-    local maraName
-    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(targetCharacterName)
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(targetDisplayName)
-    local displayBothString = ( strformat("<<1>><<2>>", targetCharacterName, targetDisplayName) )
-    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, targetDisplayName)
-
-    if CA.SV.ChatPlayerDisplayOptions == 1 then
-        maraName = displayNameLink
-    end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then
-        maraName = characterNameLink
-    end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then
-        maraName = displayBoth
-    end
-
-    printToChat(strformat(GetString("SI_PLEDGEOFMARARESULT", reason), maraName))
-end
-
 function CA.StuckBegin(eventCode)
     printToChat(GetString(SI_FIXING_STUCK_TEXT))
 end
@@ -5493,28 +4965,18 @@ function CA.AlertStyleLearned()
         return true
     end
 
-    -- Register Strings here for EVENT_DUEL_INVITE_FAILED
-    -- We use a high version number here to compensate for possible future overrides or other addons potentially overriding these strings
-    SafeAddString(SI_DUELINVITEFAILREASON1, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON1), 5)
-    SafeAddString(SI_DUELINVITEFAILREASON4, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON4), 5)
-    SafeAddString(SI_DUELINVITEFAILREASON5, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON5), 5)
-    SafeAddString(SI_DUELINVITEFAILREASON6, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON6), 5)
-    SafeAddString(SI_DUELINVITEFAILREASON7, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON7), 5)
-    SafeAddString(SI_DUELINVITEFAILREASON8, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON8), 5)
-    SafeAddString(SI_DUELINVITEFAILREASON9, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON9), 5)
-    SafeAddString(SI_DUELINVITEFAILREASON10, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON10), 5)
-    SafeAddString(SI_DUELINVITEFAILREASON12, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON12), 5)
-    SafeAddString(SI_DUELINVITEFAILREASON14, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON14), 5)
-    SafeAddString(SI_DUELINVITEFAILREASON16, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON16), 5)
-    SafeAddString(SI_DUELINVITEFAILREASON18, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON18), 5)
-    SafeAddString(SI_DUELINVITEFAILREASON20, GetString(SI_LUIE_CA_DUEL_INVITE_FAILREASON20), 5)
+    -- Register Strings here for Alert and CSA Handlers
+    
     -- Player to Player replacement strings for Duels
     SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_DUEL, GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), 5)
     SafeAddString(SI_DUEL_INVITE_MESSAGE, GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), 5)
     SafeAddString(SI_PLAYER_TO_PLAYER_INVITE_DUEL, GetString(SI_LUIE_CA_DUEL_INVITE_PLAYER), 5)
-    -- TODO - These are likely a standard error response string
+    -- TODO - These are likely a standard error response string for Duels
     SafeAddString(SI_DUELSTATE1, GetString(SI_LUIE_CA_DUEL_STATE1), 5)
     SafeAddString(SI_DUELSTATE1, GetString(SI_LUIE_CA_DUEL_STATE2), 5)
+    
+    -- Group Player to Player notification replacement
+    SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GROUP, GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), 5)
     
     -- EVENT_DUEL_INVITE_FAILED -- ALERT HANDLER
     local function DuelInviteFailedAlert(reason, targetCharacterName, targetDisplayName)
@@ -5538,9 +5000,9 @@ function CA.AlertStyleLearned()
                 reasonName = displayBoth
             end
             if userFacingName then
-                printToChat(strformat(GetString("SI_DUELINVITEFAILREASON", reason), reasonName))
+                printToChat(strformat(GetString("SI_LUIE_CA_DUEL_INVITE_FAILREASON", reason), reasonName))
             else
-                printToChat(strformat(GetString("SI_DUELINVITEFAILREASON", reason)))
+                printToChat(strformat(GetString("SI_LUIE_CA_DUEL_INVITE_FAILREASON", reason)))
             end
         end
         
@@ -5549,18 +5011,18 @@ function CA.AlertStyleLearned()
             local formattedString
             local displayBothAlert = ( strformat("<<1>><<2>>", targetCharacterName, targetDisplayName) )
             if CA.SV.ChatPlayerDisplayOptions == 1 then
-                formattedString = strformat(GetString("SI_DUELINVITEFAILREASON", reason), targetDisplayName)
+                formattedString = strformat(GetString("SI_LUIE_CA_DUEL_INVITE_FAILREASON", reason), targetDisplayName)
             end
             if CA.SV.ChatPlayerDisplayOptions == 2 then
-                formattedString = strformat(GetString("SI_DUELINVITEFAILREASON", reason), targetCharacterName)
+                formattedString = strformat(GetString("SI_LUIE_CA_DUEL_INVITE_FAILREASON", reason), targetCharacterName)
             end
             if CA.SV.ChatPlayerDisplayOptions == 3 then
-                formattedString = strformat(GetString("SI_DUELINVITEFAILREASON", reason), displayBothAlert)
+                formattedString = strformat(GetString("SI_LUIE_CA_DUEL_INVITE_FAILREASON", reason), displayBothAlert)
             end
             if userFacingName then
                 ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, formattedString)
             else
-                ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, (GetString("SI_DUELINVITEFAILREASON", reason)))
+                ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, (GetString("SI_LUIE_CA_DUEL_INVITE_FAILREASON", reason)))
             end
         end
         
@@ -5609,6 +5071,516 @@ function CA.AlertStyleLearned()
         return true
     end
     
+    -- EVENT_PLEDGE_OF_MARA_RESULT -- ALERT HANDLER
+    local function PledgeOfMaraResultAlert(result, characterName, displayName)
+        -- Replace everything here and move it all into the CSA handler event
+        return true
+    end
+    
+    -- EVENT_GROUP_INVITE_RESPONSE -- ALERT HANDLER
+    local function GroupInviteResponseAlert(characterName, response, displayName)
+        
+        local finalName
+        local finalNameAlert
+        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(characterName)
+        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+        local displayBothString = ( strformat("<<1>><<2>>", characterName, displayName) )
+        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        
+        local nameCheck1 = ZO_GetPrimaryPlayerName(displayName, characterName)
+        local nameCheck2 = ZO_GetSecondaryPlayerName(displayName, characterName)
+        if nameCheck1 == "" then
+            nameToUse = ZO_GetSecondaryPlayerName(displayName, characterName)
+            finalName = displayName
+            finalNameAlert = displayName
+        elseif nameCheck2 == "" then
+            finalName = characterName
+            finalNameAlert = characterName
+        elseif nameCheck1 ~= "" and nameCheck2 ~= "" then
+            if CA.SV.ChatPlayerDisplayOptions == 1 then
+                finalName = displayNameLink
+                finalNameAlert = displayName
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 2 then
+                finalName = characterNameLink
+                finalNameAlert = characterName
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 3 then
+                finalName = displayBoth
+                finalNameAlert = displayBothString
+            end
+        else
+            finalName = ""
+            finalNameAlert = ""
+        end
+        
+        if(response ~= GROUP_INVITE_RESPONSE_ACCEPTED and response ~= GROUP_INVITE_RESPONSE_CONSIDERING_OTHER) then
+            
+            local message
+            local alertMessage
+            
+            if response == GROUP_INVITE_RESPONSE_ALREADY_GROUPED and (g_playerNameFormatted == characterName or g_playerDisplayName == displayName) then
+                message = zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_SELF_INVITE))
+                alertMessage = zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_SELF_INVITE))
+            elseif response == GROUP_INVITE_RESPONSE_ALREADY_GROUPED and (IsPlayerInGroup(characterName) or IsPlayerInGroup(displayName)) then
+                message = GetString(SI_GROUP_ALERT_INVITE_PLAYER_ALREADY_MEMBER)
+                alertMessage = GetString(SI_GROUP_ALERT_INVITE_PLAYER_ALREADY_MEMBER)
+            elseif response == GROUP_INVITE_RESPONSE_IGNORED then
+                message = finalName ~= "" and zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalName) or GetString(SI_PLAYER_BUSY)
+                alertMessage = finalNameAlert ~= "" and zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalNameAlert) or GetString(SI_PLAYER_BUSY)
+            else
+                message = finalName ~= "" and zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalName) or GetString(SI_PLAYER_BUSY)
+                alertMessage = finalNameAlert ~= "" and zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalNameAlert) or GetString(SI_PLAYER_BUSY)
+            end
+
+            if CA.SV.GroupCA or response == GROUP_INVITE_RESPONSE_ALREADY_GROUPED or response == GROUP_INVITE_RESPONSE_IGNORED or response == GROUP_INVITE_RESPONSE_PLAYER_NOT_FOUND then
+                printToChat(message)
+            end
+            if CA.SV.GroupAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
+            end
+            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+            
+        end
+        return true
+        
+    end
+
+    -- EVENT_GROUP_INVITE_ACCEPT_RESPONSE_TIMEOUT -- ALERT HANDLER
+    local function GroupInviteTimeoutAlert()
+        printToChat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_GENERIC_JOIN_FAILURE))
+        if CA.SV.GroupAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_GENERIC_JOIN_FAILURE))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return true
+    end
+
+    -- EVENT_GROUP_NOTIFICATION_MESSAGE -- ALERT HANDLER
+    local function GroupNotificationMessageAlert(groupMessageCode)
+        if groupMessageCode == GROUP_MSG_YOU_ARE_NOT_IN_A_GROUP then
+            printToChat(GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_IN_A_GROUP))
+            if CA.SV.GroupAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_IN_A_GROUP))
+            end
+            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        elseif groupMessageCode == GROUP_MSG_YOU_ARE_NOT_THE_LEADER then
+            printToChat(GetString(SI_GROUP_NOTIFICATION_GROUP_MSG_INVALID_MEMBER))
+            if CA.SV.GroupAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_THE_LEADER))
+            end
+            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        elseif groupMessageCode == GROUP_MSG_INVALID_MEMBER then
+            printToChat(GetString(SI_GROUP_NOTIFICATION_GROUP_MSG_INVALID_MEMBER))
+            if CA.SV.GroupAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_GROUP_NOTIFICATION_GROUP_MSG_INVALID_MEMBER))
+            end
+            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        end
+        return true
+    end
+
+    -- EVENT_GROUP_UPDATE -- ALERT HANDLER
+    local function GroupUpdateAlert()
+        currentGroupLeaderRawName = ""
+        currentGroupLeaderDisplayName = ""
+        
+        if g_groupJoinFudger then
+            zo_callLater(CA.CheckLFGStatusJoin, 100)
+        end
+        g_groupJoinFudger = false
+        local groupSize = GetGroupSize()
+        if groupSize > 1 then
+            g_areWeGrouped = true
+        end
+    end
+
+    -- EVENT_GROUP_MEMBER_LEFT -- ALERT HANDLER
+    local function GroupMemberLeftAlert(characterName, reason, isLocalPlayer, isLeader, displayName, actionRequiredVote)
+        local message = nil
+        local alert = nil
+        local message2 = nil
+        local alert2 = nil
+        local sound = nil
+        
+        local finalName
+        local finalNameAlert
+        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(characterName)
+        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+        local displayBothString = ( strformat("<<1>><<2>>", characterName, displayName) )
+        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        
+        if CA.SV.ChatPlayerDisplayOptions == 1 then
+            finalName = displayNameLink
+            finalNameAlert = displayName
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then
+            finalName = characterNameLink
+            finalNameAlert = characterName
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then
+            finalName = displayBoth
+            finalNameAlert = displayBothString
+        end
+        
+        local hasValidNames = characterNameLink ~= "" and displayNameLink ~= ""
+        local useDefaultReasonText = false
+        if reason == GROUP_LEAVE_REASON_DISBAND then
+            if isLeader and not isLocalPlayer then
+                useDefaultReasonText = true
+            elseif isLeader and isLocalPlayer then
+                message = zo_strformat(SI_LUIE_GROUPDISBANDLEADER)
+                alert = zo_strformat(SI_LUIE_GROUPDISBANDLEADER)
+                g_LFGJoinAntiSpam = false
+                g_areWeGrouped = false
+                zo_callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
+            elseif isLocalPlayer then
+            --
+            g_LFGJoinAntiSpam = false
+            g_areWeGrouped = false
+            zo_callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
+            --
+            end
+
+            sound = SOUNDS.GROUP_DISBAND
+        elseif reason == GROUP_LEAVE_REASON_KICKED then
+            if actionRequiredVote then
+                if isLocalPlayer then
+                    --
+                    g_LFGJoinAntiSpam = false
+                    g_areWeGrouped = false
+                    zo_callLater(function() CA.CheckLFGStatusLeave(true) end , 100)
+                    --
+                    message = zo_strformat(SI_GROUP_ELECTION_KICK_PLAYER_PASSED)
+                    alert = zo_strformat(SI_GROUP_ELECTION_KICK_PLAYER_PASSED)
+                elseif hasValidNames then
+                    --
+                    zo_callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
+                    --
+                    message = zo_strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED, finalName)
+                    alert = zo_strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED, finalNameAlert)
+                    message2 = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED), finalName))
+                    alert2 =  (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED), finalNameAlert))
+                end
+            else
+                if isLocalPlayer then
+                    --
+                    g_LFGJoinAntiSpam = false
+                    g_areWeGrouped = false
+                    zo_callLater(function() CA.CheckLFGStatusLeave(true) end , 100)
+                    --
+                    message = zo_strformat(SI_GROUP_NOTIFICATION_GROUP_SELF_KICKED)
+                    alert = zo_strformat(SI_GROUP_NOTIFICATION_GROUP_SELF_KICKED)
+                else
+                    --
+                    zo_callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
+                    --
+                    useDefaultReasonText = true
+                end
+            end
+
+            sound = SOUNDS.GROUP_KICK
+        elseif reason == GROUP_LEAVE_REASON_VOLUNTARY or reason == GROUP_LEAVE_REASON_LEFT_BATTLEGROUND then
+            if not isLocalPlayer then
+                useDefaultReasonText = true
+                --
+                zo_callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
+                --
+            else
+                --
+                g_LFGJoinAntiSpam = false
+                g_areWeGrouped = false
+                message = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF), finalName))
+                alert = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF), finalNameAlert))
+                zo_callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
+                --
+            end
+
+            sound = SOUNDS.GROUP_LEAVE
+        elseif reason == GROUP_LEAVE_REASON_DESTROYED then
+            --do nothing, we don't want to show additional alerts for this case
+        end
+
+        if useDefaultReasonText and hasValidNames then
+            message = zo_strformat(GetString("SI_LUIE_GROUPLEAVEREASON", reason), finalName)
+            alert = zo_strformat(GetString("SI_LUIE_GROUPLEAVEREASON", reason), finalNameAlert)
+        end
+
+        if isLocalPlayer then
+            currentGroupLeaderRawName = ""
+            currentGroupLeaderDisplayName = ""
+        end
+
+        if message ~= nil then
+            if CA.SV.GroupCA then
+                printToChat(message)
+            end
+            if CA.SV.GroupAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alert)
+            end
+            if sound ~= nil then PlaySound(sound) end
+        end
+        
+        if message2 ~= nil then
+            if CA.SV.GroupCA then
+                printToChat(message2)
+            end
+            if CA.SV.GroupAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alert2)
+            end
+        end
+
+        return true
+    end
+
+    -- EVENT_LEADER_UPDATE -- ALERT HANDLER
+    -- This event only fires if the characterId of the leader has changed (it's a new leader)
+    local function LeaderUpdateAlert(leaderTag)
+        local leaderRawName = GetRawUnitName(leaderTag)
+        local showAlert = leaderRawName ~= "" and currentGroupLeaderRawName ~= ""
+        currentGroupLeaderRawName = leaderRawName
+        currentGroupLeaderDisplayName = GetUnitDisplayName(leaderTag)
+        
+        local displayString
+        local alertString
+        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(currentGroupLeaderRawName)
+        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(currentGroupLeaderDisplayName)
+        local displayBothString = ( strformat("<<1>><<2>>", currentGroupLeaderRawName, currentGroupLeaderDisplayName) )
+        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, currentGroupLeaderDisplayName)
+        
+        if g_playerName ~= currentGroupLeaderRawName then -- If another player became the leader
+            if CA.SV.ChatPlayerDisplayOptions == 1 then
+                displayString = (strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), displayNameLink))
+                alertString = (strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), currentGroupLeaderDisplayName))
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 2 then
+                displayString = (strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), characterNameLink))
+                alertString = (strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), currentGroupLeaderRawName))
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 3 then
+                displayString = (strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), displayBoth))
+                alertString = (strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), displayBothString))
+            end
+        elseif g_playerName == currentGroupLeaderRawName then -- If the player character became the leader
+            displayString = (GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_SELF))
+            alertString = (GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_SELF))
+        end
+
+        if showAlert then
+            if CA.SV.GroupCA then
+                printToChat(displayString)
+            end
+            if CA.SV.GroupAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertString)
+            end
+            PlaySound(SOUNDS.GROUP_PROMOTE)
+        end
+        return true
+    end
+
+    -- EVENT_GROUPING_TOOLS_LFG_JOINED -- ALERT HANDLER
+    local function GroupingToolsLFGJoinedAlert(locationName)
+
+        if not g_LFGJoinAntiSpam then
+            if CA.SV.GroupLFGCA then
+                printToChat(zo_strformat(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED, locationName))
+            end
+            if CA.SV.GroupLFGAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED, locationName))
+            end
+            zo_callLater (function() g_rcUpdateDeclineOverride = false end, 5000)
+            g_lfgDisableGroupEvents = true
+            zo_callLater (function() g_lfgDisableGroupEvents = false end, 2500)
+        end
+        g_joinLFGOverride = true
+        g_LFGJoinAntiSpam = true
+        g_rcUpdateDeclineOverride = true
+        
+        return true
+    end
+
+    -- EVENT_ACTIVITY_QUEUE_RESULT -- ALERT HANDLER
+    local function ActivityQueueResultAlert(result)
+        if result ~= ACTIVITY_QUEUE_RESULT_SUCCESS then
+            if CA.SV.GroupLFGCA then
+                printToChat(GetString("SI_ACTIVITYQUEUERESULT", result))
+            end
+            if CA.SV.GroupLFGAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString("SI_ACTIVITYQUEUERESULT", result))
+            end
+            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        end
+        g_showRCUpdates = true
+        
+        return true
+    end
+    
+    -- EVENT_GROUP_ELECTION_FAILED -- ALERT HANDLER
+    local function GroupElectionFailedAlert(failureType, descriptor)
+        if failureType ~= GROUP_ELECTION_FAILURE_NONE then
+            if CA.SV.GroupVoteCA then
+                printToChat(GetString("SI_GROUPELECTIONFAILURE", failureType))
+            end
+            if CA.SV.GroupVoteAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString("SI_GROUPELECTIONFAILURE", failureType))
+            end
+            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        end
+        return true
+    end
+    
+    -- Variables for EVENT_GROUP_ELECTION_RESULT
+    local GroupElectionResultToSoundId =
+{
+    [GROUP_ELECTION_RESULT_ELECTION_WON] = SOUNDS.GROUP_ELECTION_RESULT_WON,
+    [GROUP_ELECTION_RESULT_ELECTION_LOST] = SOUNDS.GROUP_ELECTION_RESULT_LOST,
+    [GROUP_ELECTION_RESULT_ABANDONED] = SOUNDS.GROUP_ELECTION_RESULT_LOST,
+}
+
+    -- EVENT_GROUP_ELECTION_RESULT -- ALERT HANDLER
+    local function GroupElectionResultAlert(resultType, descriptor)
+        if resultType ~= GROUP_ELECTION_RESULT_IN_PROGRESS and resultType ~= GROUP_ELECTION_RESULT_NOT_APPLICABLE then
+            resultType = ZO_GetSimplifiedGroupElectionResultType(resultType)
+            local alertText
+            local message
+
+            --Try to find override messages based on the descriptor
+            local alertTextOverrideLookup = ZO_GroupElectionResultToAlertTextOverrides[resultType]
+            if alertTextOverrideLookup then
+                message = alertTextOverrideLookup[descriptor]
+                alertText = alertTextOverrideLookup[descriptor]
+            end
+
+            --No override found
+            if not alertText then
+                local electionType, _, _, targetUnitTag = GetGroupElectionInfo()
+                if electionType == GROUP_ELECTION_TYPE_KICK_MEMBER then
+                    if resultType == GROUP_ELECTION_RESULT_ELECTION_LOST then
+                        local kickFinalName
+                        local kickFinalNameAlert
+                        local kickMemberName = GetUnitName(targetUnitTag)
+                        local kickMemberAccountName = GetUnitDisplayName(targetUnitTag)
+                        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(kickMemberName)
+                        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(kickMemberAccountName)
+                        local displayBothString = ( strformat("<<1>><<2>>", kickMemberName, kickMemberAccountName) )
+                        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, kickMemberAccountName)
+
+                        if CA.SV.ChatPlayerDisplayOptions == 1 then
+                            kickFinalName = displayNameLink
+                            kickFinalNameAlert = kickMemberAccountName
+                        end
+                        if CA.SV.ChatPlayerDisplayOptions == 2 then
+                            kickFinalName = characterNameLink
+                            kickFinalNameAlert = kickMemberName
+                        end
+                        if CA.SV.ChatPlayerDisplayOptions == 3 then
+                            kickFinalName = displayBoth
+                            kickFinalNameAlert = displayBothString
+                        end
+                        
+                        message = zo_strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL, kickFinalName)
+                        alertText = zo_strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL, kickFinalNameAlert)
+                    else
+                        --Successful kicks are handled in the GROUP_MEMBER_LEFT alert
+                        return true
+                    end
+                end
+            end
+
+            --No specific behavior found, so just do the generic alert for the result
+            if not alertText then
+                message = GetString("SI_GROUPELECTIONRESULT", resultType)
+                alertText = GetString("SI_GROUPELECTIONRESULT", resultType)
+            end
+
+            if alertText ~= "" then
+                if type(alertText) == "function" then
+                    alertText = alertText()
+                    message = message()
+                end
+                
+                if CA.SV.GroupVoteCA then
+                    printToChat(message)
+                end
+                if CA.SV.GroupVoteAlert then
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertText)
+                end
+                PlaySound(GroupElectionResultToSoundId[resultType])
+            end
+        end
+        return true
+    end
+
+    -- EVENT_GROUP_ELECTION_REQUESTED -- ALERT HANDLER
+    local function GroupElectionRequestedAlert(descriptor)
+        local alertText
+        if descriptor then
+            alertText = ZO_GroupElectionDescriptorToRequestAlertText[descriptor]
+        end
+
+        if not alertText then
+            alertText = ZO_GroupElectionDescriptorToRequestAlertText[ZO_GROUP_ELECTION_DESCRIPTORS.NONE]
+        end
+
+        if CA.SV.GroupVoteCA then
+            printToChat(alertText)
+        end
+        if CA.SV.GroupVoteAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertText)
+        end
+        PlaySound(SOUNDS.GROUP_ELECTION_REQUESTED)
+        return true
+    end
+    
+    -- EVENT_GROUPING_TOOLS_READY_CHECK_CANCELLED -- ALERT HANDLER
+    local function GroupReadyCheckCancelAlert(reason)
+        --[[
+        if reason ~= LFG_READY_CHECK_CANCEL_REASON_NOT_IN_READY_CHECK then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString("SI_LFGREADYCHECKCANCELREASON", reason))
+            d(GetString("SI_LFGREADYCHECKCANCELREASON", reason))
+        end]]--
+        
+        if reason ~= LFG_READY_CHECK_CANCEL_REASON_NOT_IN_READY_CHECK and reason ~= LFG_READY_CHECK_CANCEL_REASON_GROUP_FORMED_SUCCESSFULLY then
+            if CA.SV.GroupLFGCA then
+                printToChat(GetString("SI_LFGREADYCHECKCANCELREASON", reason))
+            end
+            if CA.SV.GroupLFGAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString("SI_LFGREADYCHECKCANCELREASON", reason))
+            end
+        end
+    
+        -- Sometimes if another player cancels slightly before a player in your group cancels, the "you have been placed in the front of the queue message displays. If this is the case, we want to show queue left for that event."
+        if reason ~= LFG_READY_CHECK_CANCEL_REASON_GROUP_REPLACED_IN_QUEUE then
+            g_showActivityStatus = false
+            zo_callLater(function() g_showActivityStatus = true end, 1000)
+        end
+        
+        g_showRCUpdates = true
+    end
+    
+    -- EVENT_GROUP_VETERAN_DIFFICULTY_CHANGED -- ALERT HANDLER
+    local function GroupDifficultyChangeAlert(isVeteranDifficulty)
+        local message
+        local sound
+        if isVeteranDifficulty then
+            message = GetString(SI_DUNGEON_DIFFICULTY_CHANGED_TO_VETERAN)
+            sound = SOUNDS.DUNGEON_DIFFICULTY_VETERAN
+        else
+            message = GetString(SI_DUNGEON_DIFFICULTY_CHANGED_TO_NORMAL)
+            sound = SOUNDS.DUNGEON_DIFFICULTY_NORMAL
+        end
+        
+        if CA.SV.GroupCA then
+            printToChat(message)
+        end
+        if CA.SV.GroupAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
+        end
+        PlaySound(sound)
+        
+        return true
+    end
+    
     ZO_PreHook(handlers, EVENT_LORE_BOOK_ALREADY_KNOWN, AlreadyKnowBookHook)
     ZO_PreHook(handlers, EVENT_RIDING_SKILL_IMPROVEMENT, RidingSkillImprovementAlertHook)
     
@@ -5620,13 +5592,42 @@ function CA.AlertStyleLearned()
     ZO_PreHook(handlers, EVENT_DUEL_INVITE_FAILED, DuelInviteFailedAlert)
     ZO_PreHook(handlers, EVENT_DUEL_INVITE_DECLINED, DuelInviteDeclinedAlert)
     ZO_PreHook(handlers, EVENT_DUEL_INVITE_CANCELED, DuelInviteCanceledAlert)
+    ZO_PreHook(handlers, EVENT_PLEDGE_OF_MARA_RESULT, PledgeOfMaraResultAlert)
     
+    
+    ZO_PreHook(handlers, EVENT_GROUP_INVITE_RESPONSE, GroupInviteResponseAlert)
+    ZO_PreHook(handlers, EVENT_GROUP_INVITE_ACCEPT_RESPONSE_TIMEOUT, GroupInviteTimeoutAlert)
+    ZO_PreHook(handlers, EVENT_GROUP_NOTIFICATION_MESSAGE, GroupNotificationMessageAlert)
+    ZO_PreHook(handlers, EVENT_GROUP_UPDATE, GroupUpdateAlert)
+    ZO_PreHook(handlers, EVENT_GROUP_MEMBER_LEFT, GroupMemberLeftAlert)
+    ZO_PreHook(handlers, EVENT_LEADER_UPDATE, LeaderUpdateAlert)
+    ZO_PreHook(handlers, EVENT_GROUPING_TOOLS_LFG_JOINED, GroupingToolsLFGJoinedAlert)
+    ZO_PreHook(handlers, EVENT_ACTIVITY_QUEUE_RESULT, ActivityQueueResultAlert)
+    
+    ZO_PreHook(handlers, EVENT_GROUP_ELECTION_FAILED, GroupElectionFailedAlert)
+    ZO_PreHook(handlers, EVENT_GROUP_ELECTION_RESULT, GroupElectionResultAlert)
+    ZO_PreHook(handlers, EVENT_GROUP_ELECTION_REQUESTED, GroupElectionRequestedAlert)
+    ZO_PreHook(handlers, EVENT_GROUPING_TOOLS_READY_CHECK_CANCELLED, GroupReadyCheckCancelAlert)
+    ZO_PreHook(handlers, EVENT_GROUP_VETERAN_DIFFICULTY_CHANGED, GroupDifficultyChangeAlert)
+    
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_REMOVED, CA.GroupInviteRemoved)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED, CA.OnGroupMemberJoined)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED, CA.OnGroupInviteReceived)
+    
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_TYPE_CHANGED, CA.OnGroupTypeChanged)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_NOTIFICATION_ADDED, CA.VoteNotify)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_NO_LONGER_LFG, CA.LFGLeft)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_STATUS_UPDATE, CA.ActivityStatusUpdate)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_UPDATED, CA.ReadyCheckUpdate)
+
     
     
     
     
 
 	local csaHandlers = ZO_CenterScreenAnnounce_GetHandlers()
+    
+    local chatHandlers = ZO_ChatSystem_GetEventHandlers()
 
 	local function LoreBookXPHook(categoryIndex, collectionIndex, bookIndex, guildReputationIndex, skillType, skillIndex, rank, previousXP, currentXP)
         if guildReputationIndex > 0 then
@@ -7316,10 +7317,28 @@ function CA.AlertStyleLearned()
 
     -- EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE -- CSA HANDLER
     local function ActivityFinderCompleteHook()
-        local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.LFG_COMPLETE_ANNOUNCEMENT)
-        messageParams:SetText(GetString(SI_ACTIVITY_FINDER_ACTIVITY_COMPLETE_ANNOUNCEMENT_TEXT))
-        messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_ACTIVITY_COMPLETE)
-        return messageParams
+    
+        local message = GetString(SI_ACTIVITY_FINDER_ACTIVITY_COMPLETE_ANNOUNCEMENT_TEXT)
+        if CA.SV.GroupLFGCompleteCA then
+            printToChat(message)
+        end
+        
+        if CA.SV.GroupLFGCompleteCSA then
+            local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.LFG_COMPLETE_ANNOUNCEMENT)
+            messageParams:SetText(message)
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_ACTIVITY_COMPLETE)
+            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        end
+        
+        if CA.SV.GroupLFGCompleteAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
+        end
+        
+        if not CA.SV.GroupLFGCompleteCSA then
+            PlaySound(SOUNDS.LFG_COMPLETE_ANNOUNCEMENT)
+        end
+        
+        return true
     end
     
     -- EVENT_DISPLAY_ANNOUNCEMENT -- CSA HANDLER
@@ -7457,6 +7476,61 @@ function CA.AlertStyleLearned()
         return true
         
     end
+    
+    local function PledgeOfMaraHook(result, characterName, displayName)
+    
+        local maraName
+        local maraLinkName
+        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(characterName)
+        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+        local displayBothString = ( strformat("<<1>><<2>>", characterName, displayName) )
+        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+
+        if CA.SV.ChatPlayerDisplayOptions == 1 then
+            maraName = displayName
+            maraLinkName = displayNameLink
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then
+            maraName = characterName
+            maraLinkName = characterNameLink
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then
+            maraName = displayBothString
+            maraLinkName = displayBoth
+        end
+
+        -- Display CA (Success or Failure)
+        if CA.SV.PledgeOfMaraCA then
+            printToChat(strformat(GetString("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT", result), maraLinkName))
+        end
+        
+        -- Display CSA (Success Only)
+        if CA.SV.PledgeOfMaraCSA then
+            if result == PLEDGE_OF_MARA_RESULT_PLEDGED then
+                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_PLEDGE_OF_MARA_RESULT)
+                messageParams:SetText(GetString(SI_RITUAL_OF_MARA_COMPLETION_ANNOUNCE_LARGE), zo_strformat(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT3, maraName))
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+        end
+        
+        -- Alert (Success or Failure)
+        if CA.SV.PledgeOfMaraAlert then
+            -- If the menu setting to only display Alert on Failure state is toggled, then do not display an Alert on successful Mara Event
+            if result == PLEDGE_OF_MARA_RESULT_PLEDGED and not CA.SV.PledgeOfMaraAlertOnlyFail then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT3, maraName))
+            elseif(result ~= PLEDGE_OF_MARA_RESULT_PLEDGED and result ~= PLEDGE_OF_MARA_RESULT_BEGIN_PLEDGE) then
+                ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, zo_strformat(GetString("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT", result), maraName))
+            end
+        end
+        
+        -- Play alert sound if Alert is disabled (Note: A sound seems to be played from success regardless of the CSA being on/off here)
+        if not CA.SV.PledgeOfMaraAlert and (result ~= PLEDGE_OF_MARA_RESULT_PLEDGED and result ~= PLEDGE_OF_MARA_RESULT_BEGIN_PLEDGE) then
+            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        end
+        
+        return true
+    end
 
     
     -- Unregister the ZOS events for handling Quest Removal/Advanced/Added to replace with our own functions
@@ -7521,31 +7595,735 @@ function CA.AlertStyleLearned()
     ZO_PreHook(csaHandlers, EVENT_BROADCAST, BroadcastHook)
     
     ZO_PreHook(csaHandlers, EVENT_ACHIEVEMENT_AWARDED, AchievementAwardedHook)
+    
+    ZO_PreHook(csaHandlers, EVENT_PLEDGE_OF_MARA_RESULT, PledgeOfMaraHook)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_OFFER, CA.MaraOffer)
+    
+    -- TODO: Allow these to use their default conditions if Saved Variable option for CA is not turned on
+    local function GroupTypeChangedChatHook()
+        return true
+    end
+    
+    local function GroupInviteChatHook()
+        return true
+    end
+    
+    local function GroupMemberLeftChatHook()
+        return true
+    end
+    
+    local function SocialErrorHook()
+        return true
+    end
+    
+    ZO_PreHook(chatHandlers, EVENT_GROUP_TYPE_CHANGED, GroupTypeChangedChatHook)
+    ZO_PreHook(chatHandlers, EVENT_GROUP_INVITE_RESPONSE, GroupInviteChatHook)
+    ZO_PreHook(chatHandlers, EVENT_GROUP_MEMBER_LEFT, GroupMemberLeftChatHook)
+    ZO_PreHook(chatHandlers, EVENT_SOCIAL_ERROR, SocialErrorHook)
+    
+    -- HOOK PLAYER_TO_PLAYER Group Notifications to edit Ignore alert
+    local KEYBOARD_INTERACT_ICONS =
+    {
+        [SI_PLAYER_TO_PLAYER_WHISPER] =
+        {
+            enabledNormal = "EsoUI/Art/HUD/radialIcon_whisper_up.dds",
+            enabledSelected = "EsoUI/Art/HUD/radialIcon_whisper_over.dds",
+            disabledNormal =  "EsoUI/Art/HUD/radialIcon_whisper_disabled.dds",
+            disabledSelected = "EsoUI/Art/HUD/radialIcon_whisper_disabled.dds",
+        },
+        [SI_PLAYER_TO_PLAYER_ADD_GROUP] =
+        {
+            enabledNormal = "EsoUI/Art/HUD/radialIcon_inviteGroup_up.dds",
+            enabledSelected = "EsoUI/Art/HUD/radialIcon_inviteGroup_over.dds",
+            disabledNormal =  "EsoUI/Art/HUD/radialIcon_inviteGroup_disabled.dds",
+            disabledSelected = "EsoUI/Art/HUD/radialIcon_inviteGroup_disabled.dds",
+        },
+        [SI_PLAYER_TO_PLAYER_REMOVE_GROUP] =
+        {
+            enabledNormal = "EsoUI/Art/HUD/radialIcon_removeFromGroup_up.dds",
+            enabledSelected = "EsoUI/Art/HUD/radialIcon_removeFromGroup_over.dds",
+            disabledNormal =  "EsoUI/Art/HUD/radialIcon_removeFromGroup_disabled.dds",
+            disabledSelected = "EsoUI/Art/HUD/radialIcon_removeFromGroup_disabled.dds",
+        },
+        [SI_PLAYER_TO_PLAYER_ADD_FRIEND] =
+        {
+            enabledNormal = "EsoUI/Art/HUD/radialIcon_addFriend_up.dds",
+            enabledSelected = "EsoUI/Art/HUD/radialIcon_addFriend_over.dds",
+            disabledNormal = "EsoUI/Art/HUD/radialIcon_addFriend_disabled.dds",
+            disabledSelected = "EsoUI/Art/HUD/radialIcon_addFriend_disabled.dds",
+        },
+        [SI_CHAT_PLAYER_CONTEXT_REPORT] =
+        {
+            enabledNormal = "EsoUI/Art/HUD/radialIcon_reportPlayer_up.dds",
+            enabledSelected = "EsoUI/Art/HUD/radialIcon_reportPlayer_over.dds",
+        },
+        [SI_PLAYER_TO_PLAYER_INVITE_DUEL] =
+        {
+            enabledNormal = "EsoUI/Art/HUD/radialIcon_duel_up.dds",
+            enabledSelected = "EsoUI/Art/HUD/radialIcon_duel_over.dds",
+            disabledNormal = "EsoUI/Art/HUD/radialIcon_duel_disabled.dds",
+            disabledSelected = "EsoUI/Art/HUD/radialIcon_duel_disabled.dds",
+        },
+        [SI_PLAYER_TO_PLAYER_INVITE_TRADE] =
+        {
+            enabledNormal = "EsoUI/Art/HUD/radialIcon_trade_up.dds",
+            enabledSelected = "EsoUI/Art/HUD/radialIcon_trade_over.dds",
+            disabledNormal = "EsoUI/Art/HUD/radialIcon_trade_disabled.dds",
+            disabledSelected = "EsoUI/Art/HUD/radialIcon_trade_disabled.dds",
+        },
+        [SI_RADIAL_MENU_CANCEL_BUTTON] =
+        {
+            enabledNormal = "EsoUI/Art/HUD/radialIcon_cancel_up.dds",
+            enabledSelected = "EsoUI/Art/HUD/radialIcon_cancel_over.dds",
+        },
+    }
+
+    local GAMEPAD_INTERACT_ICONS =
+    {
+        [SI_PLAYER_TO_PLAYER_WHISPER] =
+        {
+            enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_whisper_down.dds",
+            enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_whisper_down.dds",
+            disabledNormal =  "EsoUI/Art/HUD/Gamepad/gp_radialIcon_whisper_disabled.dds",
+            disabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_whisper_disabled.dds",
+        },
+        [SI_PLAYER_TO_PLAYER_ADD_GROUP] =
+        {
+            enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_inviteGroup_down.dds",
+            enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_inviteGroup_down.dds",
+            disabledNormal =  "EsoUI/Art/HUD/Gamepad/gp_radialIcon_inviteGroup_disabled.dds",
+            disabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_inviteGroup_disabled.dds",
+        },
+        [SI_PLAYER_TO_PLAYER_REMOVE_GROUP] =
+        {
+            enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_removeFromGroup_down.dds",
+            enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_removeFromGroup_down.dds",
+            disabledNormal =  "EsoUI/Art/HUD/Gamepad/gp_radialIcon_removeFromGroup_disabled.dds",
+            disabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_removeFromGroup_disabled.dds",
+        },
+        [SI_PLAYER_TO_PLAYER_ADD_FRIEND] =
+        {
+            enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_addFriend_down.dds",
+            enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_addFriend_down.dds",
+            disabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_addFriend_disabled.dds", 
+            disabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_addFriend_disabled.dds",
+        },
+        [SI_CHAT_PLAYER_CONTEXT_REPORT] =
+        {
+            enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_reportPlayer_down.dds",
+            enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_reportPlayer_down.dds",
+        },
+        [SI_PLAYER_TO_PLAYER_INVITE_DUEL] =
+        {
+            enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_duel_down.dds",
+            enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_duel_down.dds",
+            disabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_duel_disabled.dds",
+            disabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_duel_disabled.dds",
+        },
+        [SI_PLAYER_TO_PLAYER_INVITE_TRADE] =
+        {
+            enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_trade_down.dds",
+            enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_trade_down.dds",
+            disabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_trade_disabled.dds",
+            disabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_trade_disabled.dds",
+        },
+        [SI_RADIAL_MENU_CANCEL_BUTTON] =
+        {
+            enabledNormal = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_cancel_down.dds",
+            enabledSelected = "EsoUI/Art/HUD/Gamepad/gp_radialIcon_cancel_down.dds",
+        },
+    }
+    
+    local function AlertIgnored(SendString)
+        local alertString = IsConsoleUI() and SI_PLAYER_TO_PLAYER_BLOCKED or SendString
+        printToChat(GetString(alertString))
+        if CA.SV.GroupAlert then
+            ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, alertString)
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+    end
+
+    PLAYER_TO_PLAYER.ShowPlayerInteractMenu = function(self, isIgnored)
+        local currentTargetCharacterName = self.currentTargetCharacterName
+        local currentTargetCharacterNameRaw = self.currentTargetCharacterNameRaw
+        local currentTargetDisplayName = self.currentTargetDisplayName
+        local primaryName = ZO_GetPrimaryPlayerName(currentTargetDisplayName, currentTargetCharacterName);
+        local primaryNameInternal = ZO_GetPrimaryPlayerName(currentTargetDisplayName, currentTargetCharacterName, USE_INTERNAL_FORMAT);
+        local formattedPlayerNames = ZO_GetPrimaryPlayerNameWithSecondary(currentTargetDisplayName, currentTargetCharacterName);
+        local platformIcons = IsInGamepadPreferredMode() and GAMEPAD_INTERACT_ICONS or KEYBOARD_INTERACT_ICONS
+        local ENABLED = true
+        local DISABLED = false
+        local ENABLED_IF_NOT_IGNORED = not isIgnored
+    
+        --Gamecard--
+        if IsConsoleUI() then
+            self:AddShowGamerCard(currentTargetDisplayName, currentTargetCharacterName)
+        end
+
+        --Whisper--
+        if IsChatSystemAvailableForCurrentPlatform() then
+            local nameToUse = IsConsoleUI() and currentTargetDisplayName or primaryNameInternal
+            local function WhisperOption() StartChatInput(nil, CHAT_CHANNEL_WHISPER, nameToUse) end
+            local function WhisperIgnore() AlertIgnored(SI_LUIE_IGNORE_ERROR_WHISPER) end
+            local whisperFunction = ENABLED_IF_NOT_IGNORED and WhisperOption or WhisperIgnore
+            self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_WHISPER), platformIcons[SI_PLAYER_TO_PLAYER_WHISPER], ENABLED_IF_NOT_IGNORED, whisperFunction)
+        end
+
+        --Group--
+        local isGroupModificationAvailable = IsGroupModificationAvailable()
+        local groupModicationRequiresVoting = DoesGroupModificationRequireVote()
+        local isSoloOrLeader = IsUnitSoloOrGroupLeader("player")
+
+        local function AlertGroupDisabled()
+            printToChat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE))
+            if CA.SV.GroupAlert then
+                ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE))
+            end
+            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        end
+        
+        local function AlertGroupKickDisabled()
+            printToChat(GetString(SI_LUIE_CA_GROUP_LEADERKICK_ERROR))
+            if CA.SV.GroupAlert then
+                ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_LEADERKICK_ERROR))
+            end
+            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        end
+
+        if IsPlayerInGroup(currentTargetCharacterNameRaw) then
+            local groupKickEnabled = isGroupModificationAvailable and isSoloOrLeader and not groupModicationRequiresVoting or IsInLFGGroup()
+            local lfgKick = IsInLFGGroup()
+            local groupKickFunction = nil
+            if groupKickEnabled then
+                if lfgKick then
+                    groupKickFunction = function() LUIE.SlashVoteKick(currentTargetCharacterName) end
+                else
+                    groupKickFunction = function() GroupKickByName(currentTargetCharacterNameRaw) end
+                end
+            else
+                groupKickFunction = AlertGroupKickDisabled
+            end
+            
+            self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_REMOVE_GROUP), platformIcons[SI_PLAYER_TO_PLAYER_REMOVE_GROUP], groupKickEnabled, groupKickFunction)
+        else
+            local groupInviteEnabled = ENABLED_IF_NOT_IGNORED and isGroupModificationAvailable and isSoloOrLeader
+            local groupInviteFunction = nil
+            if groupInviteEnabled then
+                groupInviteFunction = function()
+                    local NOT_SENT_FROM_CHAT = false
+                    local DISPLAY_INVITED_MESSAGE = true
+                    TryGroupInviteByName(primaryNameInternal, NOT_SENT_FROM_CHAT, DISPLAY_INVITED_MESSAGE)
+                end
+            else
+                if ENABLED_IF_NOT_IGNORED then
+                    groupInviteFunction = AlertGroupDisabled
+                else
+                    local function GroupIgnore() AlertIgnored(SI_LUIE_IGNORE_ERROR_GROUP) end
+                    groupInviteFunction = GroupIgnore
+                end
+            end
+
+            self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_ADD_GROUP), platformIcons[SI_PLAYER_TO_PLAYER_ADD_GROUP], groupInviteEnabled, groupInviteFunction)
+        end
+        
+        --Friend--
+        if IsFriend(currentTargetCharacterNameRaw) then
+            local function AlreadyFriendsWarning() ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, SI_PLAYER_TO_PLAYER_ALREADY_FRIEND) end
+            self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_ADD_FRIEND), platformIcons[SI_PLAYER_TO_PLAYER_ADD_FRIEND], DISABLED, AlreadyFriendsWarning)
+        else
+            local function RequestFriendOption()
+                if IsConsoleUI() then
+                    ZO_ShowConsoleAddFriendDialog(currentTargetCharacterName)
+                else
+                    RequestFriend(currentTargetDisplayName)
+                end
+            end
+            local function FriendIgnore() AlertIgnored(SI_LUIE_IGNORE_ERROR_FRIEND) end
+            self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_ADD_FRIEND), platformIcons[SI_PLAYER_TO_PLAYER_ADD_FRIEND], ENABLED_IF_NOT_IGNORED, ENABLED_IF_NOT_IGNORED and RequestFriendOption or FriendIgnore)
+        end
+
+        --Report--
+        local function ReportCallback()
+            local nameToReport = IsInGamepadPreferredMode() and currentTargetDisplayName or primaryName
+            ZO_HELP_GENERIC_TICKET_SUBMISSION_MANAGER:OpenReportPlayerTicketScene(nameToReport)
+        end
+        self:AddMenuEntry(GetString(SI_CHAT_PLAYER_CONTEXT_REPORT), platformIcons[SI_CHAT_PLAYER_CONTEXT_REPORT], ENABLED, ReportCallback)
+        
+        --Duel--
+        local duelState, partnerCharacterName, partnerDisplayName = GetDuelInfo()
+        if duelState ~= DUEL_STATE_IDLE then
+            local function AlreadyDuelingWarning(duelState, characterName, displayName)
+                return function()
+                    local userFacingPartnerName = ZO_GetPrimaryPlayerNameWithSecondary(displayName, characterName)
+                    local statusString = GetString("SI_DUELSTATE", duelState)
+                    statusString = zo_strformat(statusString, userFacingPartnerName)
+                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, statusString)    
+                end
+            end
+            self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_INVITE_DUEL), platformIcons[SI_PLAYER_TO_PLAYER_INVITE_DUEL], DISABLED, AlreadyDuelingWarning(duelState, partnerCharacterName, partnerDisplayName))
+        else
+            local function DuelInviteOption()
+                ChallengeTargetToDuel(currentTargetCharacterName)
+            end
+            local function DuelIgnore() AlertIgnored(SI_LUIE_IGNORE_ERROR_DUEL) end
+            self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_INVITE_DUEL), platformIcons[SI_PLAYER_TO_PLAYER_INVITE_DUEL], ENABLED_IF_NOT_IGNORED, ENABLED_IF_NOT_IGNORED and DuelInviteOption or DuelIgnore)
+        end
+
+        --Trade--
+        local function TradeInviteOption() TRADE_WINDOW:InitiateTrade(primaryNameInternal) end
+        local function TradeIgnore() AlertIgnored(SI_LUIE_IGNORE_ERROR_TRADE) end
+        local tradeInviteFunction = ENABLED_IF_NOT_IGNORED and TradeInviteOption or TradeIgnore
+        self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_INVITE_TRADE), platformIcons[SI_PLAYER_TO_PLAYER_INVITE_TRADE], ENABLED_IF_NOT_IGNORED, tradeInviteFunction)
+
+        --Cancel--
+        self:AddMenuEntry(GetString(SI_RADIAL_MENU_CANCEL_BUTTON), platformIcons[SI_RADIAL_MENU_CANCEL_BUTTON], ENABLED)
+
+        self:GetRadialMenu():Show()
+    end
+
+    --local INTERACT_TYPE_TRADE_INVITE = 3
+    local INTERACT_TYPE_GROUP_INVITE = 4
+    local INTERACT_TYPE_QUEST_SHARE = 5
+    local INTERACT_TYPE_FRIEND_REQUEST = 6
+    local INTERACT_TYPE_GUILD_INVITE = 7
+    
+    local INCOMING_MESSAGE_TEXT = {
+        [INTERACT_TYPE_GROUP_INVITE] = GetString(SI_LUIE_NOTIFICATION_GROUP_INVITE),
+        [INTERACT_TYPE_QUEST_SHARE] = GetString(SI_LUIE_NOTIFICATION_SHARE_QUEST_INVITE),
+        [INTERACT_TYPE_FRIEND_REQUEST] = GetString(SI_LUIE_NOTIFICATION_FRIEND_INVITE),
+        [INTERACT_TYPE_GUILD_INVITE] = GetString(SI_LUIE_NOTIFICATION_GUILD_INVITE)
+    }
+    
+    local function DisplayNotificationMessage(message, data)
+        local typeString = INCOMING_MESSAGE_TEXT[data.incomingType]
+        if typeString then
+        
+        if CA.SV.GroupCA and data.incomingType == INTERACT_TYPE_GROUP_INVITE then
+            printToChat(zo_strformat(message, typeString))
+        end
+        if CA.SV.GroupAlert and data.incomingType == INTERACT_TYPE_GROUP_INVITE then
+            ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
+        end
+        
+        end
+    end
+    
+    local function NotificationAccepted(data)
+        data.pendingResponse = false
+        if data.acceptCallback then
+            data.acceptCallback()
+            if data.uniqueSounds then
+                PlaySound(data.uniqueSounds.accept)
+            else
+                PlaySound(SOUNDS.DIALOG_ACCEPT)
+            end
+            DisplayNotificationMessage(GetString(SI_NOTIFICATION_ACCEPTED), data)
+        end
+    end
+
+    local function NotificationDeclined(data)
+        data.pendingResponse = false
+        if data.declineCallback then
+            data.declineCallback()
+            if data.uniqueSounds then
+                PlaySound(data.uniqueSounds.decline)
+            else
+                PlaySound(SOUNDS.DIALOG_DECLINE)
+            end
+            DisplayNotificationMessage(GetString(SI_NOTIFICATION_DECLINED), data)
+        end
+    end
+    
+    PLAYER_TO_PLAYER.Accept = function(self, incomingEntry)
+        local index = self:GetIndexFromIncomingQueue(incomingEntry)
+        if index then
+            self:RemoveEntryFromIncomingQueueTable(index)
+            NotificationAccepted(incomingEntry)
+        else
+            self:OnPromptAccepted()
+        end
+    end
+    
+    PLAYER_TO_PLAYER.Decline = function(self, incomingEntry)
+        local index = self:GetIndexFromIncomingQueue(incomingEntry)
+        if index then
+            self:RemoveEntryFromIncomingQueueTable(index)
+            NotificationDeclined(incomingEntry)
+        else
+            self:OnPromptDeclined()
+        end
+    end
+    
+    --With proper timing, both of these events can fire in the same frame, making it possible to be responding but having already cleared the incoming queue
+    PLAYER_TO_PLAYER.OnPromptAccepted = function(self)
+        if(self.responding and #self.incomingQueue > 0) then
+            local incomingEntryToRespondTo = self:RemoveEntryFromIncomingQueueTable(1)
+            NotificationAccepted(incomingEntryToRespondTo)
+        end
+    end
+
+    PLAYER_TO_PLAYER.OnPromptDeclined = function(self)
+        if(self.responding and #self.incomingQueue > 0) then
+            local incomingEntryToRespondTo = self:RemoveEntryFromIncomingQueueTable(1)
+            NotificationDeclined(incomingEntryToRespondTo)
+        end
+    end
 
 end
 
-    -- EVENT_DUEL_STARTED -- EVENT HANDLER
-    function CA.DuelStarted(eventCode)
-        
-        -- Display CA
-        if CA.SV.DuelStartCA then
-            local formattedIcon = zo_iconFormat("EsoUI/Art/HUD/HUD_Countdown_Badge_Dueling.dds", 16, 16)
-            
-            if CA.SV.MiscDuelStartOptions == 1 then
-                printToChat(strformat(GetString(SI_LUIE_CA_DUEL_STARTED_WITH_ICON), formattedIcon))
-            elseif CA.SV.MiscDuelStartOptions == 2 then
-                printToChat(GetString(SI_LUIE_CA_DUEL_STARTED))
-            elseif CA.SV.MiscDuelStartOptions == 3 then
-                printToChat(strformat("<<1>>", formattedIcon))
+-- Called by hooked TryGroupInviteByName function
+local function CompleteGroupInvite(characterOrDisplayName, sentFromChat, displayInvitedMessage)
+    local isLeader = IsUnitGroupLeader("player")
+    local groupSize = GetGroupSize()
+    
+    if isLeader and groupSize == SMALL_GROUP_SIZE_THRESHOLD then
+        ZO_Dialogs_ShowPlatformDialog("LARGE_GROUP_INVITE_WARNING", characterOrDisplayName, { mainTextParams = { SMALL_GROUP_SIZE_THRESHOLD } })
+    else
+        GroupInviteByName(characterOrDisplayName)
+
+        ZO_Menu_SetLastCommandWasFromMenu(not sentFromChat)
+        if displayInvitedMessage then
+            printToChat(zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
+            if CA.SV.GroupAlert then
+                ZO_Alert(ALERT, nil, zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
             end
         end
-        
-        -- Play sound if CSA is not enabled
-        if not CA.SV.DuelStartCSA then
-            PlaySound(SOUNDS.DUEL_START)
+    end
+end
+
+-- HOOK Group Invite function so we can modify CA/Alert here
+TryGroupInviteByName = function(characterOrDisplayName, sentFromChat, displayInvitedMessage)
+    if IsPlayerInGroup(characterOrDisplayName) then
+        printToChat(GetString(SI_GROUP_ALERT_INVITE_PLAYER_ALREADY_MEMBER))
+        if CA.SV.GroupAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, SI_GROUP_ALERT_INVITE_PLAYER_ALREADY_MEMBER)
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
+
+    local isLeader = IsUnitGroupLeader("player")
+    local groupSize = GetGroupSize()
+
+    if not isLeader and groupSize > 0 then
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE))
+        return
+    end
+
+    if IsConsoleUI() then
+        local displayName = characterOrDisplayName
+
+        local function GroupInviteCallback(success)
+            if success then
+                CompleteGroupInvite(displayName, sentFromChat, displayInvitedMessage)
+            end
+        end
+
+        ZO_ConsoleAttemptInteractOrError(GroupInviteCallback, displayName, ZO_PLAYER_CONSOLE_INFO_REQUEST_DONT_BLOCK, ZO_CONSOLE_CAN_COMMUNICATE_ERROR_ALERT, ZO_ID_REQUEST_TYPE_DISPLAY_NAME, displayName)
+    else
+        if IsIgnored(characterOrDisplayName) then
+            printToChat(GetString(SI_LUIE_IGNORE_ERROR_GROUP))
+            if CA.SV.GroupAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, SI_LUIE_IGNORE_ERROR_GROUP)
+            end
+            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+            return
+        end
+
+        CompleteGroupInvite(characterOrDisplayName, sentFromChat, displayInvitedMessage)
+    end    
+end
+
+-- Called on player joining a group to determine if message syntax should show group or LFG group.
+function CA.CheckLFGStatusJoin()
+    if not g_stopGroupLeaveQueue then
+        if not g_lfgDisableGroupEvents then
+            if IsInLFGGroup() and not g_joinLFGOverride then
+                if CA.SV.GroupCA then
+                    printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF_LFG))
+                end
+                if CA.SV.GroupAlert then
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF_LFG))
+                end
+            elseif not IsInLFGGroup() and not g_joinLFGOverride then
+                if CA.SV.GroupCA then
+                    printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF))
+                end
+                if CA.SV.GroupAlert then
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF))
+                end
+            end
+        end
+        g_joinLFGOverride = false
+    end
+end
+
+-- Called when another player joins the group.
+function CA.PrintJoinStatusNotSelf(SendMessage, SendAlert)
+    if not g_stopGroupLeaveQueue then
+        if CA.SV.GroupCA then
+            printToChat(SendMessage)
+        end
+        if CA.SV.GroupAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, SendAlert)
+        end
+    end
+end
+
+-- Called on player leaving a group to determine if message syntax should show group or LFG group.
+function CA.CheckLFGStatusLeave(WasKicked)
+    if not (g_stopGroupLeaveQueue and g_lfgDisableGroupEvents) then
+        if not g_leaveLFGOverride then
+            if WasKicked then
+                if CA.SV.GroupCA then
+                    printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF))
+                end
+                if CA.SV.GroupAlert then
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF))
+                end
+            end
+            if GetGroupSize() == 0 then
+                --printToChat(GetString(SI_LUIE_CA_GROUP_QUIT)) -- TODO: Maybe re-enable later
+            end
+        elseif g_leaveLFGOverride and GetGroupSize() == 0 then
+            if CA.SV.GroupCA then
+                printToChat(GetString(SI_LUIE_CA_GROUP_QUIT_LFG))
+            end
+            if CA.SV.GroupAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_QUIT_LFG))
+            end
+        end
+    end
+    g_leaveLFGOverride = false
+end
+
+-- EVENT_GROUP_INVITE_REMOVED
+function CA.GroupInviteRemoved(eventCode)
+    g_groupJoinFudger = true
+end
+
+-- EVENT_GROUP_INVITE_RECEIVED
+function CA.OnGroupInviteReceived(eventCode, inviterName, inviterDisplayName)
+    g_groupJoinFudger = false
+
+    local message
+    local alertText
+    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(inviterName)
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
+    local displayBothString = ( strformat("<<1>><<2>>", inviterName, inviterDisplayName) )
+    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
+
+    if CA.SV.ChatPlayerDisplayOptions == 1 then
+        message = strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), displayNameLink)
+        alertText = strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), inviterDisplayName)
+    end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then
+        message = strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), characterNameLink)
+        alertText = strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), inviterName)
+    end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then
+        message = strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), displayBoth)
+        alertText = strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), displayBothString)
+    end
+    
+    if CA.SV.GroupCA then
+        printToChat(message)
+    end
+    if CA.SV.GroupAlert then
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertText)
+    end
+end
+
+-- EVENT_GROUP_MEMBER_JOINED
+function CA.OnGroupMemberJoined(eventCode, memberName)
+    g_groupJoinFudger = false
+    local g_partyStack = { }
+    local joinedMemberName = ""
+    local joinedMemberAccountName = ""
+
+    -- Iterate through group member indices to get the relevant UnitTags
+    for i = 1,40 do
+        local memberTag = GetGroupUnitTagByIndex(i)
+        if memberTag == nil then
+            break -- Once we reach a nil value (aka no party member there, stop the loop)
+        end
+        g_partyStack[i] = { memberTag = memberTag }
+    end
+
+    -- Iterate through UnitTags to get the member who just joined
+    for i = 1, #g_partyStack do
+        local unitname = GetRawUnitName(g_partyStack[i].memberTag)
+        if unitname == memberName then
+            joinedMemberName = GetUnitName(g_partyStack[i].memberTag)
+            joinedMemberAccountName = GetUnitDisplayName(g_partyStack[i].memberTag)
+            break -- Break loop once we get the value we need
+        end
+    end
+
+    if joinedMemberName ~= "" and joinedMemberName ~= nil then
+        if g_playerName ~= memberName then
+            -- Can occur if event is before EVENT_PLAYER_ACTIVATED
+            local groupJoinName
+            local groupJoinNameAlert
+            local characterNameLink = ZO_LinkHandler_CreateCharacterLink(joinedMemberName)
+            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(joinedMemberAccountName)
+            local displayBothString = ( strformat("<<1>><<2>>", joinedMemberName, joinedMemberAccountName) )
+            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, joinedMemberAccountName)
+            if CA.SV.ChatPlayerDisplayOptions == 1 then
+                groupJoinName = displayNameLink
+                groupJoinNameAlert = joinedMemberAccountName
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 2 then
+                groupJoinName = characterNameLink
+                groupJoinNameAlert = joinedMemberName
+            end
+            if CA.SV.ChatPlayerDisplayOptions == 3 then
+                groupJoinName = displayBoth
+                groupJoinNameAlert = displayBothString
+            end
+            local SendMessage = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), groupJoinName))
+            local SendAlert = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), groupJoinNameAlert))
+            zo_callLater(function() CA.PrintJoinStatusNotSelf(SendMessage, SendAlert) end, 100)
+        elseif g_playerName == memberName and not g_groupFormFudger then
+            zo_callLater(CA.CheckLFGStatusJoin, 100)
+        end
+    end
+
+    g_partyStack = { }
+    g_groupFormFudger = false
+    g_areWeGrouped = true
+end
+
+-- EVENT_GROUP_TYPE_CHANGED
+function CA.OnGroupTypeChanged(eventCode, largeGroup)
+    local message
+    if largeGroup then
+        message = GetString(SI_CHAT_ANNOUNCEMENT_IN_LARGE_GROUP)
+    else
+        message = GetString(SI_CHAT_ANNOUNCEMENT_IN_SMALL_GROUP)
+    end
+    
+    if CA.SV.GroupCA then
+        printToChat(message)
+    end
+    if CA.SV.GroupAlert then
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
+    end
+end
+
+-- EVENT_GROUP_ELECTION_NOTIFICATION_ADDED
+function CA.VoteNotify(eventCode)
+    local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
+    if electionType == 2 then -- Ready Check
+        if CA.SV.GroupVoteCA then
+            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_MESSAGE))
+        end
+        if CA.SV.GroupVoteAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_GROUP_ELECTION_READY_CHECK_MESSAGE))
+        end
+    end
+
+    if electionType == 3 then -- Vote Kick
+        local message
+        local alertText
+        local kickMemberName = GetUnitName(targetUnitTag)
+        local kickMemberAccountName = GetUnitDisplayName(targetUnitTag)
+        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(kickMemberName)
+        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(kickMemberAccountName)
+        local displayBothString = ( strformat("<<1>><<2>>", kickMemberName, kickMemberAccountName) )
+        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, kickMemberAccountName)
+        if CA.SV.ChatPlayerDisplayOptions == 1 then
+            message = zo_strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), displayNameLink)
+            alertText = zo_strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), kickMemberAccountName)
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then
+            message = zo_strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), characterNameLink)
+            alertText = zo_strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), kickMemberName)
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then
+            message = zo_strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), displayBoth)
+            alertText = zo_strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), displayBothString)
         end
         
-    end      
+        if CA.SV.GroupVoteCA then
+            printToChat(message)
+        end
+        if CA.SV.GroupVoteAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertText)
+        end
+    end
+end
+
+-- EVENT_GROUPING_TOOLS_NO_LONGER_LFG
+function CA.LFGLeft(eventCode)
+    g_leaveLFGOverride = true
+end
+
+-- EVENT_PLEDGE_OF_MARA_OFFER - EVENT HANDLER
+function CA.MaraOffer(eventCode, characterName, isSender, displayName)
+    local maraName
+    local maraLinkName
+    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(characterName)
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+    local displayBothString = ( strformat("<<1>><<2>>", characterName, displayName) )
+    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+
+    if CA.SV.ChatPlayerDisplayOptions == 1 then
+        maraName = displayName
+        maraLinkName = displayNameLink
+    end
+    if CA.SV.ChatPlayerDisplayOptions == 2 then
+        maraName = characterName
+        maraLinkName = characterNameLink
+    end
+    if CA.SV.ChatPlayerDisplayOptions == 3 then
+        maraName = displayBothString
+        maraLinkName = displayBoth
+    end
+
+    -- Display CA
+    if CA.SV.PledgeOfMaraCA then
+        if isSender then
+            printToChat(strformat(GetString(SI_PLEDGE_OF_MARA_SENDER_MESSAGE), maraLinkName))
+        else
+            printToChat(strformat(GetString(SI_PLEDGE_OF_MARA_MESSAGE), maraLinkName))
+        end
+    end
+    
+    -- Display Alert
+    if CA.SV.PledgeOfMaraAlert then
+        local alertString
+        if isSender then
+            alertString = strformat(GetString(SI_PLEDGE_OF_MARA_SENDER_MESSAGE), maraName)
+        else
+            alertString = strformat(GetString(SI_PLEDGE_OF_MARA_MESSAGE), maraName)
+        end
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertString)
+    end
+end
+
+-- EVENT_DUEL_STARTED -- EVENT HANDLER
+function CA.DuelStarted(eventCode)
+    
+    -- Display CA
+    if CA.SV.DuelStartCA then
+        local formattedIcon = zo_iconFormat("EsoUI/Art/HUD/HUD_Countdown_Badge_Dueling.dds", 16, 16)
+        
+        if CA.SV.MiscDuelStartOptions == 1 then
+            printToChat(strformat(GetString(SI_LUIE_CA_DUEL_STARTED_WITH_ICON), formattedIcon))
+        elseif CA.SV.MiscDuelStartOptions == 2 then
+            printToChat(GetString(SI_LUIE_CA_DUEL_STARTED))
+        elseif CA.SV.MiscDuelStartOptions == 3 then
+            printToChat(strformat("<<1>>", formattedIcon))
+        end
+    end
+    
+    -- Play sound if CSA is not enabled
+    if not CA.SV.DuelStartCSA then
+        PlaySound(SOUNDS.DUEL_START)
+    end
+    
+end      
 
 function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previousXP, currentXP)
     if (skillType == SKILL_TYPE_GUILD) then
