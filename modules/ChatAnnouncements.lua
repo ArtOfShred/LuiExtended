@@ -55,9 +55,6 @@ CA.D = {
     CurrencyIcons                 = true,
     DisguiseAlertColor            = { 1, 0, 0, 1 },
     EnableCustomStrings           = true,
-    GroupChatMsg                  = false,
-    GroupLFG                      = false,
-    GroupLFGComplete              = false,
     
     GroupCA                       = true,
     GroupAlert                    = true,
@@ -91,9 +88,10 @@ CA.D = {
     GroupRaidReviveCSA            = true,
     GroupRaidReviveAlert          = false,
     
-    
-    GroupVote                     = false,
+    GuildCA                       = true,
+    GuildAlert                    = true,
     GuildRankDisplayOptions       = 1,
+    
     ItemBracketDisplayOptions     = 1,
     ItemContextMessage            = "",
     ItemContextToggle             = false,
@@ -432,7 +430,6 @@ local g_guildBankCarryItemType    = ""
 local g_guildBankCarryLogPrefix   = ""
 local g_guildBankCarryReceivedBy  = ""
 local g_guildBankCarryStackCount  = 1
-local g_guildJoinFudger           = false
 local g_guildRankData             = {} -- Variable to store local player guild ranks, for guild rank changes.
 local g_isValidLaunder            = false
 local g_itemReceivedIsQuestReward = false -- Variable gets set to true when a quest reward is received, flags in loot function to update the context string.
@@ -679,7 +676,6 @@ function CA.Initialize(enabled)
     -- TODO: also move this
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_SKILL_XP_UPDATE, CA.SkillXPUpdate)
     
-    CA.RegisterHorseEvents()
     CA.RegisterGuildEvents()
     CA.RegisterSocialEvents()
     CA.RegisterCustomStrings()
@@ -814,22 +810,12 @@ function CA.RegisterQuestEvents()
 end
 
 function CA.RegisterGuildEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_MEMBER_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_MEMBER_REMOVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_MEMBER_RANK_CHANGED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_INVITE_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_INVITE_REMOVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_MOTD_CHANGED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_MEMBER_RANK_CHANGED)
     if CA.SV.MiscGuild then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_ADDED, CA.GuildMemberAdded)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_REMOVED, CA.GuildMemberRemoved)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, CA.GuildAddedSelf)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_INVITE_ADDED, CA.GuildInviteAdded)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_INVITE_REMOVED, CA.GuildInviteRemoved)
-        if CA.SV.MiscGuildMOTD then
-            EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MOTD_CHANGED, CA.GuildMOTD)
-        end
         if CA.SV.MiscGuildRank then
             EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_RANK_CHANGED, CA.GuildRank)
         end
@@ -1107,78 +1093,10 @@ function CA.RegisterLootEvents()
     end
 end
 
-function CA.RegisterBagEvents()
-
-end
-
-function CA.RegisterHorseEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT)
-    if CA.SV.MiscHorse then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RIDING_SKILL_IMPROVEMENT, CA.MiscAlertHorse)
-    end
-end
-
-function CA.GuildMemberAdded(eventCode, guildId, DisplayName)
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
-    local guildName = GetGuildName(guildId)
-
-    local guilds = GetNumGuilds()
-    for i = 1,guilds do
-        local id = GetGuildId(i)
-        local name = GetGuildName(id)
-
-        local guildAlliance = GetGuildAlliance(id)
-        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-
-        if guildName == name then
-            printToChat(strformat(GetString(SI_GUILD_ROSTER_ADDED), displayNameLink, guildNameAlliance))
-            break
-        end
-    end
-end
-
-function CA.GuildMemberRemoved(eventCode, guildId, DisplayName, CharacterName)
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
-    local guildName = GetGuildName(guildId)
-
-    local guilds = GetNumGuilds()
-    for i = 1,guilds do
-        local id = GetGuildId(i)
-        local name = GetGuildName(id)
-
-        local guildAlliance = GetGuildAlliance(id)
-        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-
-        if guildName == name then
-            printToChat(strformat(GetString(SI_GUILD_ROSTER_REMOVED), displayNameLink, guildNameAlliance))
-            break
-        end
-    end
-end
-
-function CA.GuildMOTD(eventCode, guildId)
-    local motd = GetGuildMotD(guildId)
-    local guildName = GetGuildName(guildId)
-
-    local guilds = GetNumGuilds()
-    for i = 1,guilds do
-        local id = GetGuildId(i)
-        local name = GetGuildName(id)
-
-        local guildAlliance = GetGuildAlliance(id)
-        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-
-        if guildName == name then
-            printToChat(strformat(GetString(SI_LUIE_CA_GUILD_MOTD_CHANGED), guildNameAlliance, motd))
-            break
-        end
-    end
-end
-
 function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
     local currentRank = g_guildRankData[guildId].rank
-    local hasPermission1 = DoesGuildRankHavePermission(guildId, currentRank, 4)
-    local hasPermission2 = DoesGuildRankHavePermission(guildId, currentRank, 5)
+    local hasPermission1 = DoesGuildRankHavePermission(guildId, currentRank, GUILD_PERMISSION_PROMOTE)
+    local hasPermission2 = DoesGuildRankHavePermission(guildId, currentRank, GUILD_PERMISSION_DEMOTE)
 
     if ((hasPermission1 or hasPermission2) and DisplayName ~= g_playerDisplayName and CA.SV.GuildRankDisplayOptions == 2) or (CA.SV.GuildRankDisplayOptions == 3 and DisplayName ~= g_playerDisplayName) then
         local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
@@ -1194,8 +1112,8 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
 
         local icon = GetGuildRankIconIndex(guildId, newRank)
         local icon = GetGuildRankLargeIcon(icon)
-        local iconSize = 16
-        local rankSyntax = CA.SV.MiscGuildIcon and zo_iconTextFormat(icon, iconSize, iconSize, ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
+        local rankSyntax = CA.SV.MiscGuildIcon and zo_iconTextFormat(icon, 16, 16, ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
+        local rankSyntaxAlert = CA.SV.MiscGuildIcon and zo_iconTextFormat(icon, "100%", "100%", ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
         local guildName = GetGuildName(guildId)
         local guilds = GetNumGuilds()
 
@@ -1205,15 +1123,20 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
 
             local guildAlliance = GetGuildAlliance(id)
             local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+            local guildNameAllianceAlert = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
             if guildName == name then
-                printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED), displayNameLink, guildNameAlliance, rankSyntax))
+                if CA.SV.GuildCA then
+                    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED), displayNameLink, guildNameAlliance, rankSyntax))
+                end
+                if CA.SV.GuildAlert then
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED), DisplayName, guildNameAllianceAlert, rankSyntaxAlert))
+                end
                 break
             end
         end
     end
 
-    -- Cancel out if its not the player being promoted. It would be a little inefficient to index all guild members on initialize for this.
     if DisplayName == g_playerDisplayName then
         local rankName
         local rankNameDefault = GetDefaultGuildRankName(guildId, newRank)
@@ -1226,8 +1149,8 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
 
         local icon = GetGuildRankIconIndex(guildId, newRank)
         local icon = GetGuildRankLargeIcon(icon)
-        local iconSize = 16
-        local rankSyntax = CA.SV.MiscGuildIcon and zo_iconTextFormat(icon, iconSize, iconSize, ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
+        local rankSyntax = CA.SV.MiscGuildIcon and zo_iconTextFormat(icon, 16, 16, ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
+        local rankSyntaxAlert = CA.SV.MiscGuildIcon and zo_iconTextFormat(icon, "100%", "100%", ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
 
         local guildName = GetGuildName(guildId)
 
@@ -1247,15 +1170,22 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
 
             local guildAlliance = GetGuildAlliance(id)
             local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+            local guildNameAllianceAlert = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
             if guildName == name then
-                printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_SELF), changestring, rankSyntax, guildNameAlliance))
+                if CA.SV.GuildCA then
+                    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_SELF), changestring, rankSyntax, guildNameAlliance))
+                end
+                if CA.SV.GuildAlert then
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_SELF), changestring, rankSyntaxAlert, guildNameAllianceAlert))
+                end
                 break
             end
         end
     end
 end
 
+-- EVENT_GUILD_SELF_JOINED_GUILD
 function CA.GuildAddedSelf(eventCode, guildId, guildName)
     local guilds = GetNumGuilds()
     for i = 1,guilds do
@@ -1264,14 +1194,18 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
 
         local guildAlliance = GetGuildAlliance(id)
         local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+        local guildNameAllianceAlert = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
         if guildName == name then
-            printToChat(strformat(GetString(SI_LUIE_CA_GUILD_JOIN_SELF), guildNameAlliance))
+            if CA.SV.GuildCA then
+                printToChat(strformat(GetString(SI_LUIE_CA_GUILD_JOIN_SELF), guildNameAlliance))
+            end
+            if CA.SV.GuildAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_JOIN_SELF), guildNameAllianceAlert))
+            end
             break
         end
     end
-
-    g_guildJoinFudger = true
 
     -- Reindex Guild Ranks
     g_guildRankData = {}
@@ -1285,45 +1219,21 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
     end
 end
 
--- We don't register this event here because its important that it is called before reindexing is applied in LUIE base.
 function CA.GuildRemovedSelf(eventCode, guildId, guildName)
-    local GuildIndexData = LUIE.GuildIndexData
-    for i = 1,5 do
-        local guild = GuildIndexData[i]
-        if guild.name == guildName then
-            local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guild.guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-            printToChat(strformat(GetString(SI_LUIE_CA_GUILD_LEAVE_SELF), guildNameAlliance))
-            break
-        end
-    end
 
-    -- Reindex Guild Ranks
-    g_guildRankData = {}
-    if CA.SV.MiscGuildRank then
-        for i = 1,5 do
-            local guildId = GetGuildId(i)
-            local memberIndex = GetPlayerGuildMemberIndex(guildId)
-            local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
-            g_guildRankData[guildId] = {rank=rankIndex}
-        end
-    end
 end
 
+-- EVENT_GUILD_INVITE_ADDED
 function CA.GuildInviteAdded(eventCode, guildId, guildName, guildAlliance, inviterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
     local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST), displayNameLink, guildNameAlliance))
-end
-
-function CA.GuildInviteRemoved(eventCode, guildId)
-    zo_callLater(CA.GuildInviteFudger, 100)
-end
-
-function CA.GuildInviteFudger()
-    if not g_guildJoinFudger then
-        printToChat(GetString(SI_LUIE_CA_GUILD_INVITE_DECLINED))
+    local guildNameAllianceAlert = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    if CA.SV.GuildCA then
+        printToChat(strformat(GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST), displayNameLink, guildNameAlliance))
     end
-    g_guildJoinFudger = false
+    if CA.SV.GuildAlert then
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST), inviterName, guildNameAllianceAlert))
+    end
 end
 
 function CA.FriendInviteFudger()
@@ -1416,16 +1326,7 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF, GetString(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_OFF), 1)
         SafeAddString(SI_LUIE_CA_FRIENDS_FRIEND_ADDED, GetString(SI_LUIE_CA_FRIENDS_FRIEND_ADDED_ALT), 1)
         SafeAddString(SI_LUIE_CA_FRIENDS_FRIEND_REMOVED, GetString(SI_LUIE_CA_FRIENDS_FRIEND_REMOVED_ALT), 1)
-        SafeAddString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST, GetString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST_ALT), 1)
-        -- Guild Invite String Replacements
-        SafeAddString(SI_GUILD_ROSTER_INVITED_MESSAGE, GetString(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE_ALT), 2)
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST_ALT), 1)
-        SafeAddString(SI_GUILD_INVITE_MESSAGE, GetString(SI_LUIE_CA_GUILD_INVITE_MESSAGE), 3)
-        SafeAddString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST, GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST_ALT), 1)
-        SafeAddString(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, GetString(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE_ALT), 1)
-        SafeAddString(SI_GUILD_ROSTER_ADDED, GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), 2)
-        SafeAddString(SI_GUILD_ROSTER_REMOVED, GetString(SI_LUIE_CA_GUILD_ROSTER_REMOVED), 2)
-        SafeAddString(SI_LUIE_CA_GUILD_RANK_CHANGED, GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_ALT), 1)
+        SafeAddString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST, GetString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST_ALT), 1)  
         -- Mail String Replacements
         SafeAddString(SI_SENDMAILRESULT2, GetString(SI_LUIE_CA_MAIL_SENDMAILRESULT2), 1)
         SafeAddString(SI_SENDMAILRESULT3, GetString(SI_LUIE_CA_MAIL_SENDMAILRESULT3), 1)
@@ -2089,10 +1990,6 @@ end
 
 function CA.MiscAlertLockLocked(eventCode, interactableName)
     printToChat(strformat(GetString(SI_LOCKPICK_NO_KEY_AND_NO_LOCK_PICKS), interactableName))
-end
-
-function CA.MiscAlertHorse(eventCode, ridingSkillType, previous, current, source)
-  
 end
 
 function CA.StorageBag(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
@@ -4698,7 +4595,7 @@ local GUILD_SKILL_ICONS =
 -- Alert Prehooks
 function CA.AlertStyleLearned()
     
-    local handlers = ZO_AlertText_GetHandlers()
+    local alertHandlers = ZO_AlertText_GetHandlers()
     
     --[[
     local original = handlers[alert]
@@ -4725,7 +4622,7 @@ function CA.AlertStyleLearned()
             end
         end
     end
-    ZO_PreHook(handlers, EVENT_STYLE_LEARNED, StyleLearnedHook)
+    ZO_PreHook(alertHandlers, EVENT_STYLE_LEARNED, StyleLearnedHook)
     
     -- TODO: We'll probably hide this event because it's kind of pointless - This will only trigger VERY occasionally when a lorebook is used and doesn't immediately fade away before the player can interact with it again (I guess just when Server lags).
     local function AlreadyKnowBookHook(bookTitle)
@@ -4974,9 +4871,11 @@ function CA.AlertStyleLearned()
     -- TODO - These are likely a standard error response string for Duels
     SafeAddString(SI_DUELSTATE1, GetString(SI_LUIE_CA_DUEL_STATE1), 5)
     SafeAddString(SI_DUELSTATE1, GetString(SI_LUIE_CA_DUEL_STATE2), 5)
-    
     -- Group Player to Player notification replacement
     SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GROUP, GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), 5)
+    -- Guild Invite Player to Player notification replacements
+    SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_GUILD_REQUEST, GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST), 1)
+    SafeAddString(SI_GUILD_INVITE_MESSAGE, GetString(SI_LUIE_CA_GUILD_INVITE_MESSAGE), 3)
     
     -- EVENT_DUEL_INVITE_FAILED -- ALERT HANDLER
     local function DuelInviteFailedAlert(reason, targetCharacterName, targetDisplayName)
@@ -5581,34 +5480,76 @@ function CA.AlertStyleLearned()
         return true
     end
     
-    ZO_PreHook(handlers, EVENT_LORE_BOOK_ALREADY_KNOWN, AlreadyKnowBookHook)
-    ZO_PreHook(handlers, EVENT_RIDING_SKILL_IMPROVEMENT, RidingSkillImprovementAlertHook)
+    -- EVENT_GUILD_SELF_LEFT_GUILD -- ALERT HANDLER
+    local function GuildSelfLeftAlert(guildId, guildName)
+        local GuildIndexData = LUIE.GuildIndexData
+        for i = 1,5 do
+            local guild = GuildIndexData[i]
+            if guild.name == guildName then
+                local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guild.guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+                local guildNameAllianceAlert = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guild.guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+                local messageString = (ShouldDisplaySelfKickedFromGuildAlert(guildId)) and SI_GUILD_SELF_KICKED_FROM_GUILD or SI_LUIE_CA_GUILD_LEAVE_SELF
+                local sound = (ShouldDisplaySelfKickedFromGuildAlert(guildId)) and SOUNDS.GENERAL_ALERT_ERROR or SOUNDS.GUILD_SELF_LEFT
+                if CA.SV.GuildCA then
+                    printToChat(strformat(GetString(messageString), guildNameAlliance))
+                end
+                if CA.SV.GuildAlert then
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(messageString), guildNameAllianceAlert))
+                end
+                PlaySound(sound)
+                break
+            end
+        end
+
+        -- Reindex Guild Ranks
+        g_guildRankData = {}
+        if CA.SV.MiscGuildRank then
+            for i = 1,5 do
+                local guildId = GetGuildId(i)
+                local memberIndex = GetPlayerGuildMemberIndex(guildId)
+                local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
+                g_guildRankData[guildId] = {rank=rankIndex}
+            end
+        end
+        return true
+    end
     
-    ZO_PreHook(handlers, EVENT_LORE_BOOK_LEARNED, LoreBookLearnedAlertHook)
+    -- EVENT_SAVE_GUILD_RANKS_RESPONSE -- ALERT HANDLER
+    local function GuildRanksResponseAlert(guildId, result)
+        if result ~= SOCIAL_RESULT_NO_ERROR then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, GetString("SI_SOCIALACTIONRESULT", result))
+        end
+        return true
+    end
     
-    ZO_PreHook(handlers, EVENT_DUEL_INVITE_RECEIVED, DuelInviteReceivedAlert)
-    ZO_PreHook(handlers, EVENT_DUEL_INVITE_SENT, DuelInviteSentAlert)
-    ZO_PreHook(handlers, EVENT_DUEL_INVITE_ACCEPTED, DuelInviteAcceptedAlert)
-    ZO_PreHook(handlers, EVENT_DUEL_INVITE_FAILED, DuelInviteFailedAlert)
-    ZO_PreHook(handlers, EVENT_DUEL_INVITE_DECLINED, DuelInviteDeclinedAlert)
-    ZO_PreHook(handlers, EVENT_DUEL_INVITE_CANCELED, DuelInviteCanceledAlert)
-    ZO_PreHook(handlers, EVENT_PLEDGE_OF_MARA_RESULT, PledgeOfMaraResultAlert)
+    ZO_PreHook(alertHandlers, EVENT_LORE_BOOK_ALREADY_KNOWN, AlreadyKnowBookHook)
+    ZO_PreHook(alertHandlers, EVENT_RIDING_SKILL_IMPROVEMENT, RidingSkillImprovementAlertHook)
+    
+    ZO_PreHook(alertHandlers, EVENT_LORE_BOOK_LEARNED, LoreBookLearnedAlertHook)
+    
+    ZO_PreHook(alertHandlers, EVENT_DUEL_INVITE_RECEIVED, DuelInviteReceivedAlert)
+    ZO_PreHook(alertHandlers, EVENT_DUEL_INVITE_SENT, DuelInviteSentAlert)
+    ZO_PreHook(alertHandlers, EVENT_DUEL_INVITE_ACCEPTED, DuelInviteAcceptedAlert)
+    ZO_PreHook(alertHandlers, EVENT_DUEL_INVITE_FAILED, DuelInviteFailedAlert)
+    ZO_PreHook(alertHandlers, EVENT_DUEL_INVITE_DECLINED, DuelInviteDeclinedAlert)
+    ZO_PreHook(alertHandlers, EVENT_DUEL_INVITE_CANCELED, DuelInviteCanceledAlert)
+    ZO_PreHook(alertHandlers, EVENT_PLEDGE_OF_MARA_RESULT, PledgeOfMaraResultAlert)
     
     
-    ZO_PreHook(handlers, EVENT_GROUP_INVITE_RESPONSE, GroupInviteResponseAlert)
-    ZO_PreHook(handlers, EVENT_GROUP_INVITE_ACCEPT_RESPONSE_TIMEOUT, GroupInviteTimeoutAlert)
-    ZO_PreHook(handlers, EVENT_GROUP_NOTIFICATION_MESSAGE, GroupNotificationMessageAlert)
-    ZO_PreHook(handlers, EVENT_GROUP_UPDATE, GroupUpdateAlert)
-    ZO_PreHook(handlers, EVENT_GROUP_MEMBER_LEFT, GroupMemberLeftAlert)
-    ZO_PreHook(handlers, EVENT_LEADER_UPDATE, LeaderUpdateAlert)
-    ZO_PreHook(handlers, EVENT_GROUPING_TOOLS_LFG_JOINED, GroupingToolsLFGJoinedAlert)
-    ZO_PreHook(handlers, EVENT_ACTIVITY_QUEUE_RESULT, ActivityQueueResultAlert)
+    ZO_PreHook(alertHandlers, EVENT_GROUP_INVITE_RESPONSE, GroupInviteResponseAlert)
+    ZO_PreHook(alertHandlers, EVENT_GROUP_INVITE_ACCEPT_RESPONSE_TIMEOUT, GroupInviteTimeoutAlert)
+    ZO_PreHook(alertHandlers, EVENT_GROUP_NOTIFICATION_MESSAGE, GroupNotificationMessageAlert)
+    ZO_PreHook(alertHandlers, EVENT_GROUP_UPDATE, GroupUpdateAlert)
+    ZO_PreHook(alertHandlers, EVENT_GROUP_MEMBER_LEFT, GroupMemberLeftAlert)
+    ZO_PreHook(alertHandlers, EVENT_LEADER_UPDATE, LeaderUpdateAlert)
+    ZO_PreHook(alertHandlers, EVENT_GROUPING_TOOLS_LFG_JOINED, GroupingToolsLFGJoinedAlert)
+    ZO_PreHook(alertHandlers, EVENT_ACTIVITY_QUEUE_RESULT, ActivityQueueResultAlert)
     
-    ZO_PreHook(handlers, EVENT_GROUP_ELECTION_FAILED, GroupElectionFailedAlert)
-    ZO_PreHook(handlers, EVENT_GROUP_ELECTION_RESULT, GroupElectionResultAlert)
-    ZO_PreHook(handlers, EVENT_GROUP_ELECTION_REQUESTED, GroupElectionRequestedAlert)
-    ZO_PreHook(handlers, EVENT_GROUPING_TOOLS_READY_CHECK_CANCELLED, GroupReadyCheckCancelAlert)
-    ZO_PreHook(handlers, EVENT_GROUP_VETERAN_DIFFICULTY_CHANGED, GroupDifficultyChangeAlert)
+    ZO_PreHook(alertHandlers, EVENT_GROUP_ELECTION_FAILED, GroupElectionFailedAlert)
+    ZO_PreHook(alertHandlers, EVENT_GROUP_ELECTION_RESULT, GroupElectionResultAlert)
+    ZO_PreHook(alertHandlers, EVENT_GROUP_ELECTION_REQUESTED, GroupElectionRequestedAlert)
+    ZO_PreHook(alertHandlers, EVENT_GROUPING_TOOLS_READY_CHECK_CANCELLED, GroupReadyCheckCancelAlert)
+    ZO_PreHook(alertHandlers, EVENT_GROUP_VETERAN_DIFFICULTY_CHANGED, GroupDifficultyChangeAlert)
     
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_REMOVED, CA.GroupInviteRemoved)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED, CA.OnGroupMemberJoined)
@@ -5619,6 +5560,9 @@ function CA.AlertStyleLearned()
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_NO_LONGER_LFG, CA.LFGLeft)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_STATUS_UPDATE, CA.ActivityStatusUpdate)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_UPDATED, CA.ReadyCheckUpdate)
+    
+    ZO_PreHook(alertHandlers, EVENT_GUILD_SELF_LEFT_GUILD, GuildSelfLeftAlert)
+    ZO_PreHook(alertHandlers, EVENT_SAVE_GUILD_RANKS_RESPONSE, GuildRanksResponseAlert)
 
     
     
@@ -7897,15 +7841,27 @@ function CA.AlertStyleLearned()
     local function DisplayNotificationMessage(message, data)
         local typeString = INCOMING_MESSAGE_TEXT[data.incomingType]
         if typeString then
-        
-        if CA.SV.GroupCA and data.incomingType == INTERACT_TYPE_GROUP_INVITE then
-            printToChat(zo_strformat(message, typeString))
+            -- Group Invite
+            if data.incomingType == INTERACT_TYPE_GROUP_INVITE then
+                if CA.SV.GroupCA then
+                    printToChat(zo_strformat(message, typeString))
+                end
+                if CA.SV.GroupAlert then
+                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
+                end
+            end
+            -- Guild Invite
+            if data.incomingType == INTERACT_TYPE_GUILD_INVITE then
+                if CA.SV.GuildCA then
+                    printToChat(zo_strformat(message, typeString))
+                end
+                if CA.SV.GuildAlert then
+                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
+                end
+            end
+            -- TODO: Add other conditionals here when vars are added
         end
-        if CA.SV.GroupAlert and data.incomingType == INTERACT_TYPE_GROUP_INVITE then
-            ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
-        end
-        
-        end
+       
     end
     
     local function NotificationAccepted(data)
@@ -8031,6 +7987,121 @@ TryGroupInviteByName = function(characterOrDisplayName, sentFromChat, displayInv
         end
 
         CompleteGroupInvite(characterOrDisplayName, sentFromChat, displayInvitedMessage)
+    end    
+end
+
+-- Hook for EVENT_GUILD_MEMBER_ADDED
+GUILD_ROSTER_MANAGER.OnGuildMemberAdded = function(self, guildId, displayName)
+    self:RefreshData()
+    
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+    local guildName = GetGuildName(guildId)
+
+    local guilds = GetNumGuilds()
+    for i = 1,guilds do
+        local id = GetGuildId(i)
+        local name = GetGuildName(id)
+
+        local guildAlliance = GetGuildAlliance(id)
+        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+        local guildNameAllianceAlert = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+
+        if guildName == name then
+            if CA.SV.GuildCA then
+                printToChat(strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayNameLink, guildNameAlliance))
+            end
+            if CA.SV.GuildAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayName, guildNameAllianceAlert))
+            end
+            PlaySound(SOUNDS.GUILD_ROSTER_ADDED)
+            break
+        end
+    end
+    
+end
+
+-- Hook for EVENT_GUILD_MEMBER_REMOVED
+GUILD_ROSTER_MANAGER.OnGuildMemberRemoved = function(self, guildId, rawCharacterName, displayName)
+
+    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+    local guildName = GetGuildName(guildId)
+
+    local guilds = GetNumGuilds()
+    for i = 1,guilds do
+        local id = GetGuildId(i)
+        local name = GetGuildName(id)
+        
+        local guildAlliance = GetGuildAlliance(id)
+        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+        local guildNameAllianceAlert = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+
+        if guildName == name then
+            if CA.SV.GuildCA then
+                printToChat(strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_LEFT), displayNameLink, guildNameAlliance))
+            end
+            if CA.SV.GuildAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_LEFT), displayName, guildNameAllianceAlert))
+            end
+            PlaySound(SOUNDS.GUILD_ROSTER_REMOVED)
+            break
+        end
+    end
+    self:RefreshData()
+    
+end
+
+-- Hook for Guild Invite function used from Guild Menu
+ZO_TryGuildInvite = function(guildId, displayName, sentFromChat)
+
+    if not DoesPlayerHaveGuildPermission(guildId, GUILD_PERMISSION_INVITE) then
+        ZO_AlertEvent(EVENT_SOCIAL_ERROR, SOCIAL_RESULT_NO_INVITE_PERMISSION)
+        return
+    end
+
+    if GetNumGuildMembers(guildId) == MAX_GUILD_MEMBERS then
+        ZO_AlertEvent(EVENT_SOCIAL_ERROR, SOCIAL_RESULT_NO_ROOM)
+        return
+    end
+
+    local guildName = GetGuildName(guildId)
+    local guildAlliance = GetGuildAlliance(guildId)
+    local guildNameAlliance = LUIE.ChatAnnouncements.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    local guildNameAllianceAlert = LUIE.ChatAnnouncements.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    
+    if IsConsoleUI() then
+        local function GuildInviteCallback(success)
+            if success then
+                GuildInvite(guildId, displayName)
+                if CA.SV.GuildCA then
+                    printToChat(zo_strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, UndecorateDisplayName(displayName), guildNameAlliance))
+                end
+                if CA.SV.GuildAlert then
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, UndecorateDisplayName(displayName), guildNameAllianceAlert))
+                end
+            end
+        end
+
+        ZO_ConsoleAttemptInteractOrError(GuildInviteCallback, displayName, ZO_PLAYER_CONSOLE_INFO_REQUEST_DONT_BLOCK, ZO_CONSOLE_CAN_COMMUNICATE_ERROR_ALERT, ZO_ID_REQUEST_TYPE_DISPLAY_NAME, displayName)
+    else
+        -- We can't stop the player from inviting players to guild by Character Name if sent from chat so, might as well not block it. This also makes it consistent with group invites. Can't invite from the radial menu but can use the slash command.
+        if IsIgnored(displayName) and not sentFromChat then
+            if CA.SV.GuildCA then
+                printToChat(GetString(SI_LUIE_IGNORE_ERROR_GUILD))
+            end
+            if CA.SV.GuildAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_IGNORE_ERROR_GUILD))
+            end
+            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+            return
+        end
+
+        GuildInvite(guildId, displayName)
+        if CA.SV.GuildCA then
+            printToChat(zo_strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAlliance))
+        end
+        if CA.SV.GuildAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAllianceAlert))
+        end
     end    
 end
 
