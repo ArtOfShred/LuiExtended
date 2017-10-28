@@ -4344,40 +4344,42 @@ function LUIE_CreateSettings()
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GuildAlert,
                     },
-                    
+
                     {
-                        -- Show Guild Events
-                        type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILD),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILD_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuild end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuild = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.MiscGuild,
-                    },
-                    {
-                        -- Show Guild Events Icons
+                        -- Show Guild Icons
                         type = "checkbox",
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDICONS)),
                         tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDICONS_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildIcon end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildIcon = value end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GuildIcon end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildIcon = value end,
                         width = "full",
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.MiscGuild and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.MiscGuildIcon,
+                        default = LUIE.ChatAnnouncements.D.GuildIcon,
+                    },
+                    
+                    {
+                        -- Show Guild Rank Events CA
+                        type = "checkbox",
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANK)) .. "CA",
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANK_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildRankCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildRankCA = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.MiscGuild and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.MiscGuildRankCA,
                     },
                     {
-                        -- Show Guild Rank Events
+                        -- Show Guild Rank Events Alert
                         type = "checkbox",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANK)),
+                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANK)) .. "Alert",
                         tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANK_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildRank end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildRank = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GuildRankAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildRankAlert = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
                         width = "full",
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.MiscGuild and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.MiscGuildRank,
+                        default = LUIE.ChatAnnouncements.D.GuildRankAlert,
                     },
+                    
                     {
                         -- Show Guild Rank Events Display Options
                         type = "dropdown",
@@ -4390,16 +4392,29 @@ function LUIE_CreateSettings()
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.MiscGuild and LUIE.ChatAnnouncements.SV.MiscGuildRank and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.GuildRankDisplayOptions,
                     },
+                    
                     {
-                        -- Show Guild MOTD Events
+                        -- Show Guild Management CA
                         type = "checkbox",
-                        name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDMOTD)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDMOTD_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildMOTD end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildMOTD = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILD) .. " Management CA",
+                        tooltip = "Display guild management update notifications - Ranks modified, Heraldry updated, GMOTD changed and Guild Info Changed",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GuildManageCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildManageCA = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.MiscGuild and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.MiscGuildMOTD,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GuildManageCA,
+                    },
+                    
+                    {
+                        -- Show Guild Management Alert
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILD) .. " Management ALERT",
+                        tooltip = "Display guild management update notifications - Ranks modified, Heraldry updated, GMOTD changed and Guild Info Changed",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GuildManageAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildManageAlert = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GuildManageAlert,
                     },
                 
                     {

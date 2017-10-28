@@ -90,6 +90,15 @@ CA.D = {
     
     GuildCA                       = true,
     GuildAlert                    = true,
+    
+    GuildRankCA                   = true,
+    GuildRankAlert                = true,
+    
+    GuildManageCA                 = true,
+    GuildManageAlert              = true,
+    
+    GuildIcon                 = false,
+    
     GuildRankDisplayOptions       = 1,
     
     ItemBracketDisplayOptions     = 1,
@@ -137,10 +146,6 @@ CA.D = {
     
     MiscDuelStartOptions          = 1,
     
-    MiscGuild                     = false,
-    MiscGuildIcon                 = false,
-    MiscGuildMOTD                 = false,
-    MiscGuildRank                 = false,
     MiscHorse                     = false,
     MiscLockpick                  = false,
     MiscMail                      = false,
@@ -503,7 +508,6 @@ local SkillGuildColorizeDB
 -- UPDATED CODE (VARIABLES)
 -----------------------------------
 
-
 -- Basic
 local g_queuedMessages              = { } -- Table to hold messages for the 50 ms tick function to print them.
 local g_queuedMessagesCounter       = 1 -- Counter value for queued message printer
@@ -531,6 +535,9 @@ local g_guildSkillThrottle          = 0
 -- Group
 local currentGroupLeaderRawName
 local currentGroupLeaderDisplayName
+
+-- Guild
+local g_selectedGuild = 1 -- Set selected guild to 1 by default, whenever the player reloads their first guild will always be selected
 -----------------------------------
 -- UPDATED CODE (COLORIZE VALUES)
 -----------------------------------
@@ -810,27 +817,138 @@ function CA.RegisterQuestEvents()
 end
 
 function CA.RegisterGuildEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_INVITE_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_MEMBER_RANK_CHANGED)
-    if CA.SV.MiscGuild then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, CA.GuildAddedSelf)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_INVITE_ADDED, CA.GuildInviteAdded)
-        if CA.SV.MiscGuildRank then
-            EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_RANK_CHANGED, CA.GuildRank)
-        end
 
-        -- Index Guild Ranks
-        g_guildRankData = {}
-        if CA.SV.MiscGuildRank then
-            for i = 1,5 do
-                local guildId = GetGuildId(i)
-                local memberIndex = GetPlayerGuildMemberIndex(guildId)
-                local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
-                g_guildRankData[guildId] = {rank=rankIndex}
-            end
+-- Possibly implement conditionals here again in the future
+
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, CA.GuildAddedSelf)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_INVITE_ADDED, CA.GuildInviteAdded)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_RANK_CHANGED, CA.GuildRank)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_HERALDRY_SAVED, CA.GuildHeraldrySaved)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_RANKS_CHANGED, CA.GuildRanksSaved)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_RANK_CHANGED, CA.GuildRankSaved)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_DESCRIPTION_CHANGED, CA.GuildTextChanged)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MOTD_CHANGED, CA.GuildTextChanged)
+    -- Index Guild Ranks
+    g_guildRankData = {}
+    if CA.SV.GuildRankCA or CA.SV.GuildRankAlert then
+        for i = 1,5 do
+            local guildId = GetGuildId(i)
+            local memberIndex = GetPlayerGuildMemberIndex(guildId)
+            local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
+            g_guildRankData[guildId] = {rank=rankIndex}
         end
     end
+    
+end
+
+function CA.GuildHeraldrySaved()
+
+    if CA.SV.CurrencyGoldChange then
+        local type = "LUIE_CURRENCY_HERALDRY"
+        local formattedValue = nil -- Un-needed, we're not going to try to show the total guild bank gold here.
+        local changeColor = CurrencyDownColorize:ToHex()
+        local changeType = ZO_LocalizeDecimalNumber(1000)
+        local currencyTypeColor = CurrencyGoldColorize:ToHex()
+        local currencyIcon = CA.SV.CurrencyIcons and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
+        local currencyName = strformat(CA.SV.CurrencyGoldName, 1000)
+        local currencyTotal = nil
+        local messageTotal = ""
+        local messageChange = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_HERALDRY)
+        CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
+    end
+
+    if g_selectedGuild ~= nil then
+        local id = g_selectedGuild
+        local guildName = GetGuildName(id)
+
+        local guildAlliance = GetGuildAlliance(id)
+        local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+        local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+
+        if CA.SV.GuildManageCA then
+            local finalMessage = strformat(GetString(SI_LUIE_CA_GUILD_HERALDRY_UPDATE), guildNameAlliance)
+            g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "SYSTEM" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        end
+        if CA.SV.GuildManageAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_HERALDRY_UPDATE), guildNameAllianceAlert))
+        end
+    end
+end
+
+function CA.GuildRanksSaved(eventCode, guildId)
+
+    local guildName = GetGuildName(guildId)
+
+    local guildAlliance = GetGuildAlliance(guildId)
+    local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+
+    if CA.SV.GuildManageCA then
+        local finalMessage = strformat(GetString(SI_LUIE_CA_GUILD_RANKS_UPDATE), guildNameAlliance)
+        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "SYSTEM" }
+        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+    end
+    if CA.SV.GuildManageAlert then
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_RANKS_UPDATE), guildNameAllianceAlert))
+    end
+
+end
+
+function CA.GuildRankSaved(eventCode, guildId, rankIndex)
+
+    local rankName
+    local rankNameDefault = GetDefaultGuildRankName(guildId, rankIndex)
+    local rankNameCustom = GetGuildRankCustomName(guildId, rankIndex)
+
+    if rankNameCustom == "" then
+        rankName = rankNameDefault
+    else
+        rankName = rankNameCustom
+    end
+
+    local icon = GetGuildRankIconIndex(guildId, rankIndex)
+    local icon = GetGuildRankLargeIcon(icon)
+    local rankSyntax = CA.SV.GuildIcon and zo_iconTextFormat(icon, 16, 16, ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
+    local rankSyntaxAlert = CA.SV.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
+    local guildName = GetGuildName(guildId)
+    local guildAlliance = GetGuildAlliance(guildId)
+    local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+
+    if CA.SV.GuildManageCA then
+        printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_UPDATE), rankSyntax, guildNameAlliance))
+    end
+    if CA.SV.GuildManageAlert then
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_RANK_UPDATE), rankSyntaxAlert, guildNameAllianceAlert))
+    end
+
+end
+
+function CA.GuildTextChanged(eventCode, guildId)
+
+    local guildName = GetGuildName(guildId)
+
+    local guildAlliance = GetGuildAlliance(guildId)
+    local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    -- Depending on event code set message context.
+    local messageString = eventCode == EVENT_GUILD_DESCRIPTION_CHANGED and SI_LUIE_CA_GUILD_DESCRIPTION_CHANGED or EVENT_GUILD_MOTD_CHANGED and SI_LUIE_CA_GUILD_MOTD_CHANGED or nil
+    
+    if messageString ~= nil then
+        if CA.SV.GuildManageCA then
+            local finalMessage = strformat(GetString(messageString), guildNameAlliance)
+            g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "SYSTEM" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        end
+        if CA.SV.GuildManageAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(messageString), guildNameAllianceAlert))
+        end
+    end
+    
 end
 
 function CA.RegisterDisguiseEvents()
@@ -1112,8 +1230,8 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
 
         local icon = GetGuildRankIconIndex(guildId, newRank)
         local icon = GetGuildRankLargeIcon(icon)
-        local rankSyntax = CA.SV.MiscGuildIcon and zo_iconTextFormat(icon, 16, 16, ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
-        local rankSyntaxAlert = CA.SV.MiscGuildIcon and zo_iconTextFormat(icon, "100%", "100%", ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
+        local rankSyntax = CA.SV.GuildIcon and zo_iconTextFormat(icon, 16, 16, ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
+        local rankSyntaxAlert = CA.SV.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
         local guildName = GetGuildName(guildId)
         local guilds = GetNumGuilds()
 
@@ -1122,14 +1240,14 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
             local name = GetGuildName(id)
 
             local guildAlliance = GetGuildAlliance(id)
-            local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-            local guildNameAllianceAlert = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+            local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+            local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
             if guildName == name then
-                if CA.SV.GuildCA then
+                if CA.SV.GuildRankCA then
                     printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED), displayNameLink, guildNameAlliance, rankSyntax))
                 end
-                if CA.SV.GuildAlert then
+                if CA.SV.GuildRankAlert then
                     ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED), DisplayName, guildNameAllianceAlert, rankSyntaxAlert))
                 end
                 break
@@ -1149,8 +1267,8 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
 
         local icon = GetGuildRankIconIndex(guildId, newRank)
         local icon = GetGuildRankLargeIcon(icon)
-        local rankSyntax = CA.SV.MiscGuildIcon and zo_iconTextFormat(icon, 16, 16, ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
-        local rankSyntaxAlert = CA.SV.MiscGuildIcon and zo_iconTextFormat(icon, "100%", "100%", ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
+        local rankSyntax = CA.SV.GuildIcon and zo_iconTextFormat(icon, 16, 16, ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
+        local rankSyntaxAlert = CA.SV.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
 
         local guildName = GetGuildName(guildId)
 
@@ -1169,14 +1287,14 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
             local name = GetGuildName(id)
 
             local guildAlliance = GetGuildAlliance(id)
-            local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-            local guildNameAllianceAlert = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+            local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+            local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
             if guildName == name then
-                if CA.SV.GuildCA then
+                if CA.SV.GuildRankCA then
                     printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_SELF), changestring, rankSyntax, guildNameAlliance))
                 end
-                if CA.SV.GuildAlert then
+                if CA.SV.GuildRankAlert then
                     ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_SELF), changestring, rankSyntaxAlert, guildNameAllianceAlert))
                 end
                 break
@@ -1193,8 +1311,8 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
         local name = GetGuildName(id)
 
         local guildAlliance = GetGuildAlliance(id)
-        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-        local guildNameAllianceAlert = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+        local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+        local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
         if guildName == name then
             if CA.SV.GuildCA then
@@ -1209,7 +1327,7 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
 
     -- Reindex Guild Ranks
     g_guildRankData = {}
-    if CA.SV.MiscGuildRank then
+    if CA.SV.GuildRankCA or CA.SV.GuildRankAlert then
         for i = 1,5 do
             local guildId = GetGuildId(i)
             local memberIndex = GetPlayerGuildMemberIndex(guildId)
@@ -1226,8 +1344,8 @@ end
 -- EVENT_GUILD_INVITE_ADDED
 function CA.GuildInviteAdded(eventCode, guildId, guildName, guildAlliance, inviterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
-    local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-    local guildNameAllianceAlert = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
     if CA.SV.GuildCA then
         printToChat(strformat(GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST), displayNameLink, guildNameAlliance))
     end
@@ -1834,7 +1952,7 @@ function CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTyp
 
     messageP1 = ("|r|c" .. currencyTypeColor .. currencyIcon .. " " .. changeType .. currencyName .. "|r|c" .. changeColor)
 
-    if currencyTotal then
+    if currencyTotal and type ~= "LUIE_CURRENCY_HERALDRY" then
         messageP2 = ("|r|c" .. currencyTypeColor .. currencyIcon .. " " .. formattedValue .. "|r|c" .. changeColor)
     else
         messageP2 = "|r"
@@ -1856,6 +1974,11 @@ function CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTyp
             return strfmt("|r" .. icon .. "|cFFFFFF" .. bagType .. "|r|c" .. changeColor)
         end
         formattedMessageP1 = (strfmt(messageChange, ResolveStorageType(), messageP1))
+    elseif type == "LUIE_CURRENCY_HERALDRY" then
+        local icon = CA.SV.LootIcons and "|t16:16:LuiExtended/media/unitframes/ca_heraldry.dds|t " or ""
+        local heraldryMessage = strfmt("|r" .. icon .. "|cFFFFFF" .. GetString(SI_LUIE_CA_CURRENCY_NAME_HERALDRY) .. "|r|c" .. changeColor)
+        formattedMessageP1 = (strfmt(messageChange, messageP1, heraldryMessage))
+        
     elseif type == "LUIE_CURRENCY_RIDING_SPEED" or type == "LUIE_CURRENCY_RIDING_CAPACITY" or type == "LUIE_CURRENCY_RIDING_STAMINA" then
         local function ResolveRidingStats()
             -- if somevar then icon = else no
@@ -1879,7 +2002,7 @@ function CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTyp
     end
     local formattedMessageP2 = (strfmt(messageTotal, messageP2))
     local finalMessage
-    if currencyTotal then
+    if currencyTotal and type ~= "LUIE_CURRENCY_HERALDRY" then
         finalMessage = strfmt("|c%s%s|r |c%s%s|r", changeColor, formattedMessageP1, changeColor, formattedMessageP2)
     else
         finalMessage = strfmt("|c%s%s|r", changeColor, formattedMessageP1)
@@ -4646,7 +4769,7 @@ function CA.AlertStyleLearned()
                     type = "LUIE_CURRENCY_RIDING_STAMINA"
                 end
                 local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1) + 250)
-                local changeColor = CurrencyUpColorize:ToHex()
+                local changeColor = CurrencyDownColorize:ToHex()
                 local changeType = ZO_LocalizeDecimalNumber(250)
                 local currencyTypeColor = CurrencyGoldColorize:ToHex()
                 local currencyIcon = CA.SV.CurrencyIcons and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
@@ -5486,8 +5609,8 @@ function CA.AlertStyleLearned()
         for i = 1,5 do
             local guild = GuildIndexData[i]
             if guild.name == guildName then
-                local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guild.guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-                local guildNameAllianceAlert = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guild.guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+                local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guild.guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+                local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guild.guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
                 local messageString = (ShouldDisplaySelfKickedFromGuildAlert(guildId)) and SI_GUILD_SELF_KICKED_FROM_GUILD or SI_LUIE_CA_GUILD_LEAVE_SELF
                 local sound = (ShouldDisplaySelfKickedFromGuildAlert(guildId)) and SOUNDS.GENERAL_ALERT_ERROR or SOUNDS.GUILD_SELF_LEFT
                 if CA.SV.GuildCA then
@@ -5503,7 +5626,7 @@ function CA.AlertStyleLearned()
 
         -- Reindex Guild Ranks
         g_guildRankData = {}
-        if CA.SV.MiscGuildRank then
+        if CA.SV.GuildRankCA or CA.SV.GuildRankAlert then
             for i = 1,5 do
                 local guildId = GetGuildId(i)
                 local memberIndex = GetPlayerGuildMemberIndex(guildId)
@@ -5517,7 +5640,12 @@ function CA.AlertStyleLearned()
     -- EVENT_SAVE_GUILD_RANKS_RESPONSE -- ALERT HANDLER
     local function GuildRanksResponseAlert(guildId, result)
         if result ~= SOCIAL_RESULT_NO_ERROR then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, GetString("SI_SOCIALACTIONRESULT", result))
+            if CA.SV.GuildCA then
+                printToChat(GetString("SI_SOCIALACTIONRESULT", result))
+            elseif CA.SV.GuildAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString("SI_SOCIALACTIONRESULT", result))
+            end
+            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         end
         return true
     end
@@ -8003,8 +8131,8 @@ GUILD_ROSTER_MANAGER.OnGuildMemberAdded = function(self, guildId, displayName)
         local name = GetGuildName(id)
 
         local guildAlliance = GetGuildAlliance(id)
-        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-        local guildNameAllianceAlert = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+        local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+        local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
         if guildName == name then
             if CA.SV.GuildCA then
@@ -8032,8 +8160,8 @@ GUILD_ROSTER_MANAGER.OnGuildMemberRemoved = function(self, guildId, rawCharacter
         local name = GetGuildName(id)
         
         local guildAlliance = GetGuildAlliance(id)
-        local guildNameAlliance = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-        local guildNameAllianceAlert = CA.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+        local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+        local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
 
         if guildName == name then
             if CA.SV.GuildCA then
@@ -8065,8 +8193,8 @@ ZO_TryGuildInvite = function(guildId, displayName, sentFromChat)
 
     local guildName = GetGuildName(guildId)
     local guildAlliance = GetGuildAlliance(guildId)
-    local guildNameAlliance = LUIE.ChatAnnouncements.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-    local guildNameAllianceAlert = LUIE.ChatAnnouncements.SV.MiscGuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    local guildNameAlliance = LUIE.ChatAnnouncements.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    local guildNameAllianceAlert = LUIE.ChatAnnouncements.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
     
     if IsConsoleUI() then
         local function GuildInviteCallback(success)
@@ -8103,6 +8231,47 @@ ZO_TryGuildInvite = function(guildId, displayName, sentFromChat)
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAllianceAlert))
         end
     end    
+end
+
+-- Called when changing guilds in the Guild tab
+GUILD_SHARED_INFO.SetGuildId = function(self, guildId)
+    self.guildId = guildId
+    self:Refresh(guildId)
+    -- Set selected guild for use when resolving Rank/Heraldry updates
+    g_selectedGuild = guildId
+end
+
+-- Called when changing guilds in the Guild tab or leaving/joining a guild
+GUILD_SHARED_INFO.Refresh = function(self, guildId)
+    if(self.guildId and self.guildId == guildId) then
+        local count = GetControl(self.control, "Count")
+        local numGuildMembers, numOnline = GetGuildInfo(guildId)
+
+        count:SetText(zo_strformat(SI_GUILD_NUM_MEMBERS_ONLINE_FORMAT, numOnline, numGuildMembers))
+
+        self.canDepositToBank = DoesGuildHavePrivilege(guildId, GUILD_PRIVILEGE_BANK_DEPOSIT)
+        if(self.canDepositToBank) then
+            self.bankIcon:SetColor(ZO_DEFAULT_ENABLED_COLOR:UnpackRGBA())
+        else
+            self.bankIcon:SetColor(ZO_DEFAULT_DISABLED_COLOR:UnpackRGBA())
+        end
+
+        self.canUseTradingHouse = DoesGuildHavePrivilege(guildId, GUILD_PRIVILEGE_TRADING_HOUSE)
+        if(self.canUseTradingHouse) then
+            self.tradingHouseIcon:SetColor(ZO_DEFAULT_ENABLED_COLOR:UnpackRGBA())
+        else
+            self.tradingHouseIcon:SetColor(ZO_DEFAULT_DISABLED_COLOR:UnpackRGBA())
+        end
+
+        self.canUseHeraldry = DoesGuildHavePrivilege(guildId, GUILD_PRIVILEGE_HERALDRY)
+        if(self.canUseHeraldry) then
+            self.heraldryIcon:SetColor(ZO_DEFAULT_ENABLED_COLOR:UnpackRGBA())
+        else
+            self.heraldryIcon:SetColor(ZO_DEFAULT_DISABLED_COLOR:UnpackRGBA())
+        end
+    end
+    -- Set selected guild for use when resolving Rank/Heraldry updates
+    g_selectedGuild = guildId
 end
 
 -- Called on player joining a group to determine if message syntax should show group or LFG group.
