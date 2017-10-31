@@ -1337,10 +1337,6 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
     end
 end
 
-function CA.GuildRemovedSelf(eventCode, guildId, guildName)
-
-end
-
 -- EVENT_GUILD_INVITE_ADDED
 function CA.GuildInviteAdded(eventCode, guildId, guildName, guildAlliance, inviterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
@@ -1353,6 +1349,10 @@ function CA.GuildInviteAdded(eventCode, guildId, guildName, guildAlliance, invit
         ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST), inviterName, guildNameAllianceAlert))
     end
 end
+
+--------------------------------------
+-- FRIEND/IGNORE MESSAGES ------------
+--------------------------------------
 
 function CA.FriendInviteFudger()
     if not FriendInviteFudger then
@@ -1600,7 +1600,6 @@ function CA.ReadyCheckUpdate(eventCode)
     end
     
 end
-
 
 --[[ Would love to be able to use this function but its too buggy for now. Spams every single time someone updates their role, as well as when people join/leave group. If the player joins a large party for the first time then
 this broadcasts the role of every single player in the party. Too bad this doesn't only trigger when someone in group actually updates their role instead.

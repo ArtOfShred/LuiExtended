@@ -225,7 +225,7 @@ ZO_CreateStringId("SI_LUIE_CA_GUILD_RANK_CHANGED_SELF",                 "You hav
 ZO_CreateStringId("SI_LUIE_CA_GUILD_RANK_DOWN",                         "demoted")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_RANK_UP",                           "promoted")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_ROSTER_ADDED",                      "|cFEFEFE<<1>>|r has joined <<2>>.")
-ZO_CreateStringId("SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE",            "You have invited \"|cFEFEFE<<1>>|r\" to join |cFEFEFE<<2>>|r.")
+ZO_CreateStringId("SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE",            "You have invited \"|cFEFEFE<<1>>|r\" to join <<2>>.")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_ROSTER_LEFT",                       "|cFEFEFE<<1>>|r has left <<2>>.")
 ZO_CreateStringId("SI_LUIE_CA_JUSTICE_CONFISCATED_BOUNTY_ITEMS_MSG",    "Bounty and stolen items confiscated!")
 ZO_CreateStringId("SI_LUIE_CA_JUSTICE_CONFISCATED_MSG",                 "Bounty confiscated!")
