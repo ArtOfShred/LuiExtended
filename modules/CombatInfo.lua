@@ -488,7 +488,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                         g_toggledSlotsRemain[abilityId] = groundDuration*1000 + currentTime
                         CI.ShowCustomToggle(slotNum)
                         if CI.SV.BarShowLabel then
-                            g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", groundDuration - 1) )
+                            g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", groundDuration ) )
                         end
                     end
                 end    
@@ -526,9 +526,9 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                     PlaySound(SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN)
                     g_triggeredSlotsRemain[abilityId] = GetAbilityDuration(abilityId) + GetGameTimeMilliseconds()
                     CI.PlayProcAnimations(g_triggeredSlots[abilityId])
-                    if CI.SV.BarShowLabel then
-                        g_uiProcAnimation[g_triggeredSlots[abilityId]].procLoopTexture.label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", GetAbilityDuration(abilityId)/1000 -1) )
-                    end
+                    --if CI.SV.BarShowLabel then
+                    --    g_uiProcAnimation[g_triggeredSlots[abilityId]].procLoopTexture.label:SetText( "" )
+                    --end
                 end
             end
             
@@ -538,9 +538,9 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                 if CI.SV.ShowToggled then
                     g_toggledSlotsRemain[abilityId] = GetAbilityDuration(abilityId) + GetGameTimeMilliseconds()
                     CI.ShowCustomToggle(g_toggledSlots[abilityId])
-                    if CI.SV.BarShowLabel then
-                        g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", GetAbilityDuration(abilityId)/1000 -1) )
-                    end
+                    --if CI.SV.BarShowLabel then
+                    --    g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( "" )
+                    --end
                 end
             end 
         end
@@ -588,7 +588,7 @@ function CI.OnSlotAbilityUsed(eventCode, slotNum)
                         g_toggledSlotsRemain[ability.id] = g_actionBar[slotNum].duration + currentTime
                         CI.ShowCustomToggle(slotNum)
                         if CI.SV.BarShowLabel then
-                            g_uiCustomToggle[g_toggledSlots[ability.id]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", GetAbilityDuration(ability.id)/1000 -1) )
+                            g_uiCustomToggle[g_toggledSlots[ability.id]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", GetAbilityDuration(ability.id)/1000 ) )
                         end
                     end
                 end
