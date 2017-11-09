@@ -97,9 +97,14 @@ CA.D = {
     GuildManageCA                 = true,
     GuildManageAlert              = true,
     
-    GuildIcon                 = false,
+    GuildIcon                     = false,
     
     GuildRankDisplayOptions       = 1,
+    
+    FriendIgnoreCA                = true,
+    FriendIgnoreAlert             = false,
+    FriendStatusCA                = true,
+    FriendStatusAlert             = false,
     
     ItemBracketDisplayOptions     = 1,
     ItemContextMessage            = "",
@@ -155,8 +160,6 @@ CA.D = {
     PledgeOfMaraAlert             = true,
     PledgeOfMaraAlertOnlyFail     = true,
     
-    
-    MiscSocial                    = false,
     MiscTrade                     = false,
     MiscStuck                     = false,
     Quest                         = false,
@@ -165,7 +168,10 @@ CA.D = {
     QuestPOICompleted             = false,
     QuestPOIDiscovery             = false,
     QuestObjectiveDiscovery       = false,
-    QuestShare                    = true,
+    
+    QuestShareCA                  = true,
+    QuestShareAlert               = false,
+    
     ShowConfiscate                = false,
     ShowCraftUse                  = false,
     ShowDestroy                   = false,
@@ -238,7 +244,6 @@ CA.D = {
     
     QuestLocLong                    = true,
     QuestIcon                       = true,
-    QuestLogFull                    = true,
     QuestLong                       = true,
     
     QuestLocDiscoveryCA             = true,
@@ -411,7 +416,8 @@ CA.D = {
 
 -- CA Local Variable Setup
 local g_tradeDisablePrint         = false -- Toggled on when a trade is completed, causing item updates to be suspended to allow our trade item changes printing to work.
-local g_isLooted                  = false -- This value is false by default, and toggled on only by on_loot_received being triggered. It replaces the [Received] context message in Item updates with [Looted]
+local g_isLooted                  = false -- This value is false by default, and toggled on only by on_loot_received being triggered
+local g_isPickpocketed            = false -- This value is false by default, and toggled on only by on_looted_received being triggered.
 local g_weAreInAStore             = false -- Toggled on when the player opens a store, this sends information to our indexing function to not show changes to inventory and let sell events handle it
 local g_currentDisguise
 local g_disguiseState
@@ -457,7 +463,6 @@ local g_playerName                = nil
 local g_playerNameFormatted       = nil
 local g_postageAmount             = 0
 local g_questIndex                = { }
-local g_QuestShareFudger          = false
 local g_saveMailId                = "" -- If the player takes a mail and cannot loot all the items, the index is cleared. This value will save the ID of the last opened mail and reuse it if the mail still has more items to loot.
 local g_showActivityStatus        = true
 local g_showRCUpdates             = true
@@ -538,6 +543,7 @@ local currentGroupLeaderDisplayName
 
 -- Guild
 local g_selectedGuild = 1 -- Set selected guild to 1 by default, whenever the player reloads their first guild will always be selected
+
 -----------------------------------
 -- UPDATED CODE (COLORIZE VALUES)
 -----------------------------------
@@ -761,7 +767,7 @@ function CA.RegisterColorEvents()
     
     QuestColorLocNameColorize = ZO_ColorDef:New(unpack(CA.SV.QuestColorLocName)):ToHex()
     QuestColorLocDescriptionColorize = ZO_ColorDef:New(unpack(CA.SV.QuestColorLocDescription)):ToHex()
-    QuestColorNameColorize = ZO_ColorDef:New(unpack(CA.SV.QuestColorName)):ToHex()
+    QuestColorNameColorize = ZO_ColorDef:New(unpack(CA.SV.QuestColorName))
     QuestColorDescriptionColorize = ZO_ColorDef:New(unpack(CA.SV.QuestColorDescription)):ToHex()
     
     StorageRidingColorize = ZO_ColorDef:New(unpack(CA.SV.StorageRidingColor))
@@ -770,30 +776,16 @@ function CA.RegisterColorEvents()
 end
 
 function CA.RegisterSocialEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_FRIEND_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_FRIEND_REMOVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_REMOVED)
-    if CA.SV.MiscSocial then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_ADDED, CA.FriendAdded)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_REMOVED, CA.FriendRemoved)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_ADDED, CA.FriendInviteAdded)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_REMOVED, CA.FriendInviteRemoved)
-    end
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_ADDED, CA.FriendAdded)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_REMOVED, CA.FriendRemoved)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_ADDED, CA.FriendInviteAdded)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_IGNORE_ADDED, CA.IgnoreAdded)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_IGNORE_REMOVED, CA.IgnoreRemoved)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_PLAYER_STATUS_CHANGED, CA.FriendPlayerStatus)
 end
 
 function CA.RegisterQuestEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_SHARED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_SHARE_REMOVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_LOG_IS_FULL)
-
-    if CA.SV.QuestShare then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARED, CA.QuestShared)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARE_REMOVED, CA.QuestShareRemoved)
-    end
-    if CA.SV.QuestLogFull then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_LOG_IS_FULL, CA.QuestLogFull)
-    end
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARED, CA.QuestShared)
     
     -- Create a table for quests
     for i = 1, 25 do
@@ -1354,78 +1346,133 @@ end
 -- FRIEND/IGNORE MESSAGES ------------
 --------------------------------------
 
-function CA.FriendInviteFudger()
-    if not FriendInviteFudger then
-        printToChat(GetString(SI_LUIE_CA_FRIENDS_FRIEND_INVITE_DECLINED))
+function CA.FriendAdded(eventCode, displayName)
+    if CA.SV.FriendIgnoreCA then
+        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+        printToChat(strformat(SI_LUIE_CA_FRIENDS_FRIEND_ADDED, displayNameLink))
     end
-    FriendInviteFudger = false
+    if CA.SV.FriendIgnoreAlert then
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_FRIENDS_FRIEND_ADDED, displayName))
+    end
 end
 
-function CA.FriendAdded(eventCode, DisplayName)
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
-    printToChat(strformat(GetString(SI_LUIE_CA_FRIENDS_FRIEND_ADDED), displayNameLink))
-    FriendInviteFudger = true
+function CA.FriendRemoved(eventCode, displayName)
+    if CA.SV.FriendIgnoreCA then
+        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+        printToChat(strformat(SI_LUIE_CA_FRIENDS_FRIEND_REMOVED, displayNameLink))
+    end
+    if CA.SV.FriendIgnoreAlert then
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_FRIENDS_FRIEND_REMOVED, displayName))
+    end
 end
 
-function CA.FriendRemoved(eventCode, DisplayName)
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
-    printToChat(strformat(GetString(SI_LUIE_CA_FRIENDS_FRIEND_REMOVED), displayNameLink))
+function CA.FriendInviteAdded(eventCode, displayName)
+    if CA.SV.FriendIgnoreCA then
+        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+        printToChat(strformat(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST, displayNameLink))
+    end
+    if CA.SV.FriendIgnoreAlert then
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST, displayName))
+    end
 end
 
-function CA.FriendInviteAdded(eventCode, inviterName)
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
-    printToChat(strformat(GetString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST), displayNameLink))
+function CA.IgnoreAdded(eventCode, displayName)
+    if CA.SV.FriendIgnoreCA then
+        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+        printToChat(zo_strformat(SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED, displayNameLink))
+    end
+    if CA.SV.FriendIgnoreAlert then
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED, displayName))
+    end
 end
 
-function CA.FriendInviteRemoved(eventCode, inviterName)
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
-    zo_callLater(CA.FriendInviteFudger, 100)
+function CA.IgnoreRemoved(eventCode, displayName)
+    if CA.SV.FriendIgnoreCA then
+        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+        printToChat(zo_strformat(SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED, displayNameLink))
+    end
+    if CA.SV.FriendIgnoreAlert then
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED, displayName))
+    end
+end
+
+function CA.FriendPlayerStatus(eventCode, displayName, characterName, oldStatus, newStatus)
+    local wasOnline = oldStatus ~= PLAYER_STATUS_OFFLINE
+    local isOnline = newStatus ~= PLAYER_STATUS_OFFLINE
+
+    if wasOnline ~= isOnline then
+        local chatText
+        local alertText
+        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(characterName)
+        if isOnline then
+            if characterName ~= "" then
+                chatText = zo_strformat(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_ON, displayNameLink, characterNameLink)
+                alertText = zo_strformat(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_ON, displayName, characterName)
+            else
+                chatText = zo_strformat(SI_LUIE_CA_FRIENDS_LIST_LOGGED_ON, displayNameLink)
+                alertText = zo_strformat(SI_LUIE_CA_FRIENDS_LIST_LOGGED_ON, displayName)
+            end
+        else
+            if characterName ~= "" then
+                chatText = zo_strformat(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_OFF, displayNameLink, characterNameLink)
+                alertText = zo_strformat(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_OFF, displayName, characterName)
+            else
+                chatText = zo_strformat(SI_LUIE_CA_FRIENDS_LIST_LOGGED_OFF, displayNameLink)
+                alertText = zo_strformat(SI_LUIE_CA_FRIENDS_LIST_LOGGED_OFF, displayName)
+            end
+        end
+        
+        if CA.SV.FriendStatusCA then
+            printToChat(chatText)
+        end
+        if CA.SV.FriendStatusAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertText)
+        end
+    end
 end
 
 function CA.QuestShared (eventCode, questId)
-    local questName, characterName, timeSinceRequestMs, displayName = GetOfferedQuestShareInfo(questId)
-    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(characterName)
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
-    local displayBothString = ( strformat("<<1>><<2>>", characterName, displayName) )
-    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+    if CA.SV.QuestShareCA or CA.SV.QuestShareAlert then
+        local questName, characterName, timeSinceRequestMs, displayName = GetOfferedQuestShareInfo(questId)
+        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(characterName)
+        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+        local displayBothString = ( strformat("<<1>><<2>>", characterName, displayName) )
+        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
 
-    if CA.SV.ChatPlayerDisplayOptions == 1 then
-        printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE), displayNameLink, questName))
+        local message
+        local alertMessage
+        if CA.SV.ChatPlayerDisplayOptions == 1 then
+            message = strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE), displayNameLink, QuestColorNameColorize:Colorize(questName))
+            alertMessage = strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_P2P), displayName, questName)
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 2 then
+            message = strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE), characterNameLink, QuestColorNameColorize:Colorize(questName))
+            alertMessage = strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_P2P), characterName, questName)
+        end
+        if CA.SV.ChatPlayerDisplayOptions == 3 then
+            message = strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE), displayBoth, QuestColorNameColorize:Colorize(questName))
+            alertMessage = strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_P2P), displayBothString, questName)
+        end
+       
+        if CA.SV.QuestShareCA then
+            printToChat(message)
+        end
+        if CA.SV.QuestShareAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
+        end
     end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then
-        printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE), characterNameLink, questName))
-    end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then
-        printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE), displayBoth, questName))
-    end
-end
-
-function CA.QuestShareRemoved(eventCode, questId)
-    zo_callLater(CA.QuestShareMessageHelper, 50)
-end
-
-function CA.QuestLogFull(eventCode)
-    printToChat(GetString(SI_ERROR_QUEST_LOG_FULL))
-end
-
--- Checks to see if quest was accepted 50 ms after share is removed
-function CA.QuestShareMessageHelper()
-    if g_QuestShareFudger == false then
-        printToChat(GetString(SI_LUIE_CA_GROUP_QUEST_SHARE_DECLINED))
-    end
-end
-
--- Reset message state after 100 ms
-function CA.QuestShareMessageReset()
-    g_QuestShareFudger = false
 end
 
 function CA.RegisterCustomStrings()
     if CA.SV.EnableCustomStrings then
+        -- Friend Invite String Replacements
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST, GetString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST), 5)
+        
         -- Quest Share String Replacements
-        SafeAddString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE, GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_ALT), 1)
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_ALT), 3)
-        SafeAddString(SI_QUEST_SHARE_MESSAGE, GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_ALT), 1)
+        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_QUEST_SHARE, GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_P2P), 5)
+        SafeAddString(SI_QUEST_SHARE_MESSAGE, GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_P2P), 5)
+        
         -- Trade String Replacements
         SafeAddString(SI_TRADE_INVITE_CONFIRM, GetString(SI_LUIE_CA_TRADE_INVITE_CONFIRM), 1)
         SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_TRADE, GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), 1)
@@ -1433,23 +1480,10 @@ function CA.RegisterCustomStrings()
         SafeAddString(SI_TRADE_INVITE, GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), 1)
         SafeAddString(SI_TRADE_INVITE_MESSAGE, GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), 1)
         SafeAddString(SI_TRADEACTIONRESULT1, GetString(SI_LUIE_CA_TRADEACTIONRESULT1), 1)
-        -- Friend Invite String Replacements
-        SafeAddString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG, GetString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_ALT), 1)
-        SafeAddString(SI_FRIENDS_LIST_IGNORE_ADDED, GetString(SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED), 1)
-        SafeAddString(SI_FRIENDS_LIST_IGNORE_REMOVED, GetString(SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED), 1)
-        SafeAddString(SI_PLAYER_TO_PLAYER_INCOMING_FRIEND_REQUEST, GetString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST), 1)
-        SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_ON, GetString(SI_LUIE_CA_FRIENDS_LIST_LOGGED_ON), 1)
-        SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_ON, GetString(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_ON), 1)
-        SafeAddString(SI_FRIENDS_LIST_FRIEND_LOGGED_OFF, GetString(SI_LUIE_CA_FRIENDS_LIST_LOGGED_OFF), 1)
-        SafeAddString(SI_FRIENDS_LIST_FRIEND_CHARACTER_LOGGED_OFF, GetString(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_OFF), 1)
-        SafeAddString(SI_LUIE_CA_FRIENDS_FRIEND_ADDED, GetString(SI_LUIE_CA_FRIENDS_FRIEND_ADDED_ALT), 1)
-        SafeAddString(SI_LUIE_CA_FRIENDS_FRIEND_REMOVED, GetString(SI_LUIE_CA_FRIENDS_FRIEND_REMOVED_ALT), 1)
-        SafeAddString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST, GetString(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST_ALT), 1)  
+        
         -- Mail String Replacements
         SafeAddString(SI_SENDMAILRESULT2, GetString(SI_LUIE_CA_MAIL_SENDMAILRESULT2), 1)
         SafeAddString(SI_SENDMAILRESULT3, GetString(SI_LUIE_CA_MAIL_SENDMAILRESULT3), 1)
-        -- Regroup Replacement String
-        SafeAddString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG, GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG_ALT), 1)
         -- Quest String Replacements
         SafeAddString(SI_ERROR_QUEST_LOG_FULL, GetString(SI_LUIE_CA_QUEST_LOG_FULL), 1) -- Add a period. TODO: Remove
 
@@ -3040,8 +3074,16 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
             EVENT_MANAGER:UnregisterForUpdate(moduleName .. "ResetLooted")
         end
         EVENT_MANAGER:RegisterForUpdate(moduleName .. "ResetLooted", 200, ResetIsLooted )
-    else
-        --d("Another dude looted")
+    end
+    
+    if isPickpocketLoot then
+        g_isPickpocketed = true
+        
+        local function ResetIsPickpocketed()
+            g_isPickpocketed = false
+            EVENT_MANAGER:UnregisterForUpdate(moduleName .. "ResetPickpocket")
+        end
+        EVENT_MANAGER:RegisterForUpdate(moduleName .. "ResetPickpocket", 200, ResetIsPickpocketed )
     end
 
     -- If we didn't receive the loot, and we don't have Only Notable loot shown then we ignore the rest of this event and everything is passed to Index functions
@@ -3397,9 +3439,11 @@ function CA.ResolveItemMessage(message, formattedRecipient, color, logPrefix, to
 
     -- Conditions for looted/quest item rewards to adjust string prefix.
     if logPrefix == "" then
-        if g_isLooted and not g_itemReceivedIsQuestReward then
+        if g_isLooted and not g_itemReceivedIsQuestReward and not g_isPickpocketed then
             logPrefix = CA.SV.LootMessageLoot
             -- reset variables that control looted, or at least ZO_CallLater them
+        elseif g_isPickpocketed then
+            logPrefix = CA.SV.LootMessagePickpocket
         else
             logPrefix = CA.SV.LootMessageReceive
         end
@@ -6196,13 +6240,6 @@ function CA.AlertStyleLearned()
         local questJournalObject = SYSTEMS:GetObject("questJournal")
         local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
         
-        -- When a quest is shared if this value is not detected as true then
-        -- TODO: Fix this!
-        if CA.SV.QuestShare then
-            g_QuestShareFudger = true
-            zo_callLater(CA.QuestShareMessageReset, 100)
-        end
-        
         local questType = GetJournalQuestType(journalIndex)
         local instanceDisplayType = GetJournalInstanceDisplayType(journalIndex)
         local questJournalObject = SYSTEMS:GetObject("questJournal")
@@ -6221,9 +6258,9 @@ function CA.AlertStyleLearned()
             local formattedString
 
             if CA.SV.QuestLong then
-                questNameFormatted = (strformat("|c<<1>><<2>>:|r |c<<3>><<4>>|r", QuestColorNameColorize, questName, QuestColorDescriptionColorize, stepText))
+                questNameFormatted = (strformat("|c<<1>><<2>>:|r |c<<3>><<4>>|r", QuestColorNameColorize:ToHex(), questName, QuestColorDescriptionColorize, stepText))
             else
-                questNameFormatted = (strformat("|c<<1>><<2>>|r", QuestColorNameColorize, questName))
+                questNameFormatted = (strformat("|c<<1>><<2>>|r", QuestColorNameColorize:ToHex(), questName))
             end
             if iconTexture and CA.SV.QuestIcon then
                 formattedString = strformat(SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON, zo_iconFormat(iconTexture, 16, 16), questNameFormatted)
@@ -7687,10 +7724,25 @@ function CA.AlertStyleLearned()
         return true
     end
     
+    local function FriendStatusHook()
+        return true
+    end
+    
+    local function IgnoreAddedHook()
+        return true
+    end
+    
+    local function IgnoreRemovedHook()
+        return true
+    end
+    
     ZO_PreHook(chatHandlers, EVENT_GROUP_TYPE_CHANGED, GroupTypeChangedChatHook)
     ZO_PreHook(chatHandlers, EVENT_GROUP_INVITE_RESPONSE, GroupInviteChatHook)
     ZO_PreHook(chatHandlers, EVENT_GROUP_MEMBER_LEFT, GroupMemberLeftChatHook)
     ZO_PreHook(chatHandlers, EVENT_SOCIAL_ERROR, SocialErrorHook)
+    ZO_PreHook(chatHandlers, EVENT_FRIEND_PLAYER_STATUS_CHANGED, FriendStatusHook)
+    ZO_PreHook(chatHandlers, EVENT_IGNORE_ADDED, IgnoreAddedHook)
+    ZO_PreHook(chatHandlers, EVENT_IGNORE_REMOVED, IgnoreRemovedHook)
     
     -- HOOK PLAYER_TO_PLAYER Group Notifications to edit Ignore alert
     local KEYBOARD_INTERACT_ICONS =
@@ -7883,7 +7935,7 @@ function CA.AlertStyleLearned()
                 groupInviteFunction = function()
                     local NOT_SENT_FROM_CHAT = false
                     local DISPLAY_INVITED_MESSAGE = true
-                    TryGroupInviteByName(primaryNameInternal, NOT_SENT_FROM_CHAT, DISPLAY_INVITED_MESSAGE)
+                    TryGroupInviteByName(primaryNameInternal, NOT_SENT_FROM_CHAT, DISPLAY_INVITED_MESSAGE, true)
                 end
             else
                 if ENABLED_IF_NOT_IGNORED then
@@ -7899,7 +7951,13 @@ function CA.AlertStyleLearned()
         
         --Friend--
         if IsFriend(currentTargetCharacterNameRaw) then
-            local function AlreadyFriendsWarning() ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, SI_PLAYER_TO_PLAYER_ALREADY_FRIEND) end
+            local function AlreadyFriendsWarning()
+                printToChat(GetString("SI_SOCIALACTIONRESULT", SOCIAL_RESULT_ACCOUNT_ALREADY_FRIENDS))
+                if CA.SV.FriendIgnoreAlert then
+                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, GetString("SI_SOCIALACTIONRESULT", SOCIAL_RESULT_ACCOUNT_ALREADY_FRIENDS))
+                end
+                PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+            end
             self:AddMenuEntry(GetString(SI_PLAYER_TO_PLAYER_ADD_FRIEND), platformIcons[SI_PLAYER_TO_PLAYER_ADD_FRIEND], DISABLED, AlreadyFriendsWarning)
         else
             local function RequestFriendOption()
@@ -7907,6 +7965,11 @@ function CA.AlertStyleLearned()
                     ZO_ShowConsoleAddFriendDialog(currentTargetCharacterName)
                 else
                     RequestFriend(currentTargetDisplayName)
+                end
+                local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(currentTargetDisplayName)
+                printToChat(strformat(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_LINK, displayNameLink))
+                if CA.SV.FriendIgnoreAlert then
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_LINK, currentTargetDisplayName))
                 end
             end
             local function FriendIgnore() AlertIgnored(SI_LUIE_IGNORE_ERROR_FRIEND) end
@@ -7986,6 +8049,26 @@ function CA.AlertStyleLearned()
                     ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
                 end
             end
+            
+            -- Friend Invite
+            if data.incomingType == INTERACT_TYPE_FRIEND_REQUEST then
+                if CA.SV.FriendIgnoreCA then
+                    printToChat(zo_strformat(message, typeString))
+                end
+                if CA.SV.FriendIgnoreAlert then
+                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
+                end
+            end
+            
+            -- Quest Shared
+            if data.incomingType == INTERACT_TYPE_QUEST_SHARE then
+                if CA.SV.QuestShareCA then
+                    printToChat(zo_strformat(message, typeString))
+                end
+                if CA.SV.QuestShareAlert then
+                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
+                end
+            end
             -- TODO: Add other conditionals here when vars are added
         end
        
@@ -8055,7 +8138,7 @@ function CA.AlertStyleLearned()
 end
 
 -- Called by hooked TryGroupInviteByName function
-local function CompleteGroupInvite(characterOrDisplayName, sentFromChat, displayInvitedMessage)
+local function CompleteGroupInvite(characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
     local isLeader = IsUnitGroupLeader("player")
     local groupSize = GetGroupSize()
     
@@ -8065,7 +8148,13 @@ local function CompleteGroupInvite(characterOrDisplayName, sentFromChat, display
         GroupInviteByName(characterOrDisplayName)
 
         ZO_Menu_SetLastCommandWasFromMenu(not sentFromChat)
-        if displayInvitedMessage then
+        if isMenu then
+            local link = ZO_LinkHandler_CreateCharacterLink(characterOrDisplayName)
+            printToChat(zo_strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MENU), link))
+            if CA.SV.GroupAlert then
+                ZO_Alert(ALERT, nil, zo_strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MENU), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
+            end
+        else
             printToChat(zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
             if CA.SV.GroupAlert then
                 ZO_Alert(ALERT, nil, zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
@@ -8075,7 +8164,7 @@ local function CompleteGroupInvite(characterOrDisplayName, sentFromChat, display
 end
 
 -- HOOK Group Invite function so we can modify CA/Alert here
-TryGroupInviteByName = function(characterOrDisplayName, sentFromChat, displayInvitedMessage)
+TryGroupInviteByName = function(characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
     if IsPlayerInGroup(characterOrDisplayName) then
         printToChat(GetString(SI_GROUP_ALERT_INVITE_PLAYER_ALREADY_MEMBER))
         if CA.SV.GroupAlert then
@@ -8098,7 +8187,7 @@ TryGroupInviteByName = function(characterOrDisplayName, sentFromChat, displayInv
 
         local function GroupInviteCallback(success)
             if success then
-                CompleteGroupInvite(displayName, sentFromChat, displayInvitedMessage)
+                CompleteGroupInvite(displayName, sentFromChat, displayInvitedMessage, isMenu)
             end
         end
 
@@ -8113,7 +8202,7 @@ TryGroupInviteByName = function(characterOrDisplayName, sentFromChat, displayInv
             return
         end
 
-        CompleteGroupInvite(characterOrDisplayName, sentFromChat, displayInvitedMessage)
+        CompleteGroupInvite(characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
     end    
 end
 
@@ -8643,35 +8732,6 @@ function CA.PrintBufferedGuildRep()
     EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedRep")
     g_guildSkillThrottle = 0
 end
-
--- TEMP COPIED FROM NO THANK YOU TO SEE
---[[
-local function BossAlertTextsHook()
-	local handlers = ZO_AlertText_GetHandlers()
-
-	local abilityErrorIds = {
-		[162] = true, --"Flying creatures are immune to snares."
-		[177] = true, --"This target is too powerful for that effect."
-	}
-	local function AbilityEventHook(errorStringId)
-		if SV.boss then
-			return abilityErrorIds[errorStringId]
-		end
-	end
-	ZO_PreHook(handlers, EVENT_ABILITY_REQUIREMENTS_FAIL, AbilityEventHook)
-
-	local actionResults = {
-		[ACTION_RESULT_MISSING_EMPTY_SOUL_GEM] = true, -- "You must have a valid empty soul gem."
-	}
-	local function CombatEventHook(result, isError, ...)
-		if isError and SV.boss then
-			return actionResults[result]
-		end
-	end
-	ZO_PreHook(handlers, EVENT_COMBAT_EVENT, CombatEventHook)
-end
-
-]]--
 
 function CA.PrintQueuedMessages()
     -- TODO: Replace with table.sort function to print. Although POSSIBLY print a few sets and remove them first in order to preserve order.

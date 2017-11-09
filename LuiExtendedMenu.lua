@@ -3937,15 +3937,26 @@ function LUIE_CreateSettings()
                 
                 
                     {
-                        -- Show Quest Share
+                        -- Show Quest Share CA
                         type = "checkbox",
-                        name = strformat("<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE)),
+                        name = strformat("<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE) .. " CA"),
                         tooltip = GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestShare end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestShare = value LUIE.ChatAnnouncements.RegisterQuestEvents() end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestShareCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestShareCA = value LUIE.ChatAnnouncements.RegisterQuestEvents() end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestShare,                   
+                        default = LUIE.ChatAnnouncements.D.QuestShareCA,                   
+                    },
+                    {
+                        -- Show Quest Share Alert
+                        type = "checkbox",
+                        name = strformat("<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE) .. " Alert"),
+                        tooltip = GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestShareAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestShareAlert = value LUIE.ChatAnnouncements.RegisterQuestEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestShareAlert,                   
                     },
                     
                     {
@@ -3958,17 +3969,6 @@ function LUIE_CreateSettings()
                         width = "full",
                         disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Quest) end,
                         default = LUIE.ChatAnnouncements.D.QuestIcon,
-                    },
-                    {
-                        -- Show Quest Log Full
-                        type = "checkbox",
-                        name = strformat("<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_LOGFULL)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_QUEST_LOGFULL_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLogFull end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLogFull = value LUIE.ChatAnnouncements.RegisterQuestEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestLogFull,                   
                     },
                     {
                         -- Show Quest Long String
@@ -4308,17 +4308,51 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_CA_SOCIAL_HEADER),
                 reference = "Chat_Announcements_Options_Social_Announcements_Submenu",
                 controls = {
-                ---
+
                     {
-                        -- Show Friend/Ignore Events
+                        -- Show Friend/Ignore Events CA
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL),
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL) .. " CA",
                         tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscSocial end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscSocial = value LUIE.ChatAnnouncements.RegisterSocialEvents() end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.FriendIgnoreCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.FriendIgnoreCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.MiscSocial,
+                        default = LUIE.ChatAnnouncements.D.FriendIgnoreCA,
+                    },
+                    {
+                        -- Show Friend/Ignore Events Alert
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL) .. " Alert",
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.FriendIgnoreAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.FriendIgnoreAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.FriendIgnoreAlert,
+                    },
+                    
+                    {
+                        -- Friend Online/Offline CA
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL) .. " Online/Offline CA",
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.FriendStatusCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.FriendStatusCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.FriendStatusCA,
+                    },
+                    {
+                        -- Friend Online/Offline Alert
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL) .. " Online/Offline Alert",
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.FriendStatusAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.FriendStatusAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.FriendStatusAlert,
                     },
                     
                     {
@@ -4327,7 +4361,7 @@ function LUIE_CreateSettings()
                         name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILD) .. " CA",
                         tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILD_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GuildCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildCA = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GuildCA,
@@ -4339,7 +4373,7 @@ function LUIE_CreateSettings()
                         name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILD) .. " ALERT",
                         tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILD_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GuildAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildAlert = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GuildAlert,
@@ -4363,7 +4397,7 @@ function LUIE_CreateSettings()
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANK)) .. "CA",
                         tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANK_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildRankCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildRankCA = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildRankCA = value end,
                         width = "full",
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.MiscGuild and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.MiscGuildRankCA,
@@ -4374,7 +4408,7 @@ function LUIE_CreateSettings()
                         name = strformat("\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANK)) .. "Alert",
                         tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANK_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GuildRankAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildRankAlert = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildRankAlert = value end,
                         width = "full",
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.MiscGuild and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.GuildRankAlert,
@@ -4387,7 +4421,7 @@ function LUIE_CreateSettings()
                         tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANKDISPLAY_TP),
                         choices = guildRankDisplayOptions,
                         getFunc = function() return guildRankDisplayOptions[LUIE.ChatAnnouncements.SV.GuildRankDisplayOptions] end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildRankDisplayOptions = guildRankDisplayOptionsKeys[value] LUIE.ChatAnnouncements.RegisterGuildEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildRankDisplayOptions = guildRankDisplayOptionsKeys[value] end,
                         width = "full",
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.MiscGuild and LUIE.ChatAnnouncements.SV.MiscGuildRank and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.GuildRankDisplayOptions,
@@ -4399,7 +4433,7 @@ function LUIE_CreateSettings()
                         name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILD) .. " Management CA",
                         tooltip = "Display guild management update notifications - Ranks modified, Heraldry updated, GMOTD changed and Guild Info Changed",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GuildManageCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildManageCA = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildManageCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GuildManageCA,
@@ -4411,7 +4445,7 @@ function LUIE_CreateSettings()
                         name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILD) .. " Management ALERT",
                         tooltip = "Display guild management update notifications - Ranks modified, Heraldry updated, GMOTD changed and Guild Info Changed",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GuildManageAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildManageAlert = value LUIE.ChatAnnouncements.RegisterGuildEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildManageAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GuildManageAlert,
@@ -5170,7 +5204,7 @@ function LUIE_CreateSettings()
         type = "slider",
         name = "Reposition Player bars - Adjust Vertical Position",
         tooltip = "WOW I NEED TO UPDATE TOOLTIPS",
-        min = -80, max = 200, step = 5,
+        min = -80, max = 300, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.RepositionFramesAdjust end,
         setFunc = function(value) LUIE.UnitFrames.SV.RepositionFramesAdjust = value end,
         width = "full",

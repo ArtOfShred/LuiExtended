@@ -1104,25 +1104,54 @@ function LUIE.SlashGuildKick(option)
     end
 end
 
+-- Hook for request friend so menu option also displays invite message
+local zos_RequestFriend = RequestFriend
+RequestFriend = function(option1, option2) 
+    zos_RequestFriend(option1, option2)
+    local message = zo_strformat(GetString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG), option1)
+    LUIE.PrintToChat(message)
+    if LUIE.ChatAnnouncements.SV.FriendIgnoreAlert then
+        ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, message)
+    end
+end
+    
 function LUIE.SlashFriend(option)
+
     if option == "" then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME))
-        ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, (GetString(SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME)))
+        if LUIE.ChatAnnouncements.SV.FriendIgnoreAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-    LUIE.PrintToChat(zo_strformat(GetString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG), option))
+    
     RequestFriend(option)
+end
+
+-- Hook for request ignore to handle error message if account name is already ignored
+local zos_AddIgnore = AddIgnore
+AddIgnore = function(option)
+    zos_AddIgnore(option)
+    
+    if IsIgnored(option) then -- Only lists account names, unfortunately
+        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE))
+        if LUIE.ChatAnnouncements.SV.FriendIgnoreAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
+
 end
 
 function LUIE.SlashIgnore(option)
     if option == "" then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME))
-        ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME)))
-        return
-    end
-    if IsIgnored(option) then -- Only lists account names, unfortunately
-        LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE))
-        ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE)))
+        if LUIE.ChatAnnouncements.SV.FriendIgnoreAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
     AddIgnore(option)
@@ -1131,7 +1160,10 @@ end
 function LUIE.SlashRemoveFriend(option)
     if option == "" then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME))
-        ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, (GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME)))
+        if LUIE.ChatAnnouncements.SV.FriendIgnoreAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
 
@@ -1162,14 +1194,20 @@ function LUIE.SlashRemoveFriend(option)
         RemoveFriend(finalName)
     else
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME))
-        ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, (GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME)))
+        if LUIE.ChatAnnouncements.SV.FriendIgnoreAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
     end
 end
 
 function LUIE.SlashRemoveIgnore(option)
     if option == "" then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE))
-        ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE)))
+        if LUIE.ChatAnnouncements.SV.FriendIgnoreAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
 
@@ -1197,7 +1235,11 @@ function LUIE.SlashRemoveIgnore(option)
         RemoveIgnore(option)
     else
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE))
-        ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE)))
+        if LUIE.ChatAnnouncements.SV.FriendIgnoreAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
     end
 end
 

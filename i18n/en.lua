@@ -8,8 +8,10 @@ ZO_CreateStringId("SI_BINDING_NAME_LUIE_POST_HEALING_RESULTS",          "Post He
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_DISBAND_FAILED_LFG_ACTIVITY",      "You cannot disband an LFG group.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME",             "You must enter the account or character name of a player to add to friends.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME",      "You must enter the account or online character name of a player to remove from friends.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG",                "You have invited \"<<1>>\" to be your friend.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_ALT",            "You have invited \"|cFEFEFE<<1>>|r\" to be your friend.")
+
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG",                "You have invited \"|cFEFEFE<<1>>|r\" to be your friend.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_LINK",           "You have invited |cFEFEFE<<1>>|r to be your friend.")
+
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA",           "You cannot teleport to your home while in Cyrodiil.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IN_COMBAT",     "You cannot teleport to your home while in combat.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_NOHOME",        "You don't have a primary home set.")
@@ -17,7 +19,7 @@ ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG",          "Telepor
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOGROUP",           "You do not have a group to disband.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOTLEADER",         "You must be the group leader to disband a group.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE",      "That player is already ignored.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME",             "You must enter the account name or character name of a player to add to ignored.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME",             "You must enter the account or character name of a player to add to ignored.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE",      "You must enter the account name of a player to remove from ignored.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOGROUP",              "You must be in a group to attempt to remove a party member.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_SELF",                 "You cannot initiate a vote to kick yourself from the group.")
@@ -32,8 +34,7 @@ ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTINGRP",          "Regroup
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTLEADER",         "Regroup: You must be the group leader to do that.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_PENDING",           "Regroup: A regroup is currently pending, please wait for the current regroup to finish before attempting another.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG",             "Regroup: Reinviting group members:")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG",        "Invited → <<1>>")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG_ALT",    "Invited → |cFFFFFF<<1>>|r") -- When localize option is turned on, this replaces other format.
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG",        "Invited → |cFFFFFF<<1>>|r") -- When localize option is turned on, this replaces other format.
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG",                "Regroup: Group saved! Disbanding...")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG",        "Regroup: No party members were online or eligible for regroup. Group was not disbanded.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG",       "Regroup: Group saved! <<1>> group <<2[member/members]>> <<3[was/were]>> offline, they will not be reinvited.")
@@ -126,19 +127,22 @@ ZO_CreateStringId("SI_LUIE_CA_LOREBOOK_BOOK",                           "Book Di
 ZO_CreateStringId("SI_LUIE_CA_LOREBOOK_ADDED_CSA",                      "<<1>> added to <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_LOREBOOK_ADDED_CA",                       "added to") -- Have to add this extra string for CA, if we try to colorize the whole string with the link, it also colorizes our custom link type.
 
-ZO_CreateStringId("SI_LUIE_CA_FRIENDS_FRIEND_ADDED",                    "<<1>> added to friends.")
-ZO_CreateStringId("SI_LUIE_CA_FRIENDS_FRIEND_ADDED_ALT",                "|cFEFEFE<<1>>|r added to friends.")
-ZO_CreateStringId("SI_LUIE_CA_FRIENDS_FRIEND_INVITE_DECLINED",          "Friend invite declined.")
-ZO_CreateStringId("SI_LUIE_CA_FRIENDS_FRIEND_REMOVED",                  "<<1>> removed from friends.")
-ZO_CreateStringId("SI_LUIE_CA_FRIENDS_FRIEND_REMOVED_ALT",              "|cFEFEFE<<1>>|r removed from friends.")
-ZO_CreateStringId("SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST",         "<<1>> wants to be your friend.")
-ZO_CreateStringId("SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST_ALT",     "|cFEFEFE<<1>>|r wants to be your friend.")
+ZO_CreateStringId("SI_LUIE_CA_FRIENDS_FRIEND_ADDED",                    "|cFEFEFE<<1>>|r added to friends.")
+ZO_CreateStringId("SI_LUIE_CA_FRIENDS_FRIEND_REMOVED",                  "|cFEFEFE<<1>>|r removed from friends.")
+ZO_CreateStringId("SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST",         "|cFEFEFE<<1>>|r wants to be your friend.")
+
+ZO_CreateStringId("SI_LUIE_CA_PLAYER_TO_PLAYER_ALREADY_FRIEND",         "You are already friends with |cFEFEFE<<1>>|r.")
+
+
+ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_LOGGED_OFF",                 "|cFEFEFE<<1>>|r has logged off.")
+ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_LOGGED_ON",                  "|cFEFEFE<<1>>|r has logged on.")
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_OFF",       "|cFEFEFE<<1>>|r has logged off with |cFEFEFE<<2>>|r.")
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_ON",        "|cFEFEFE<<1>>|r has logged on with |cFEFEFE<<2>>|r.")
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED",               "|cFEFEFE<<1>>|r added to ignored.")
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED",             "|cFEFEFE<<1>>|r removed from ignored.")
-ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_LOGGED_OFF",                 "|cFEFEFE<<1>>|r has logged off.")
-ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_LOGGED_ON",                  "|cFEFEFE<<1>>|r has logged on.")
+
+ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_MENU",                       "You have invited |cFEFEFE<<1>>|r to join your group.")
+
 ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE0",                    "Could not find a player named \"|cFEFEFE<<1>>|r\" to invite.")
 ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE1",                    "|cFEFEFE<<1>>|r accepted your group invitation.")
 ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE2",                    "|cFEFEFE<<1>>|r declined your group invitation.")
@@ -181,8 +185,8 @@ ZO_CreateStringId("SI_LUIE_NOTIFICATION_FRIEND_INVITE",                 "Friend 
 ZO_CreateStringId("SI_LUIE_NOTIFICATION_GUILD_INVITE",                  "Guild invitation")
 
 ZO_CreateStringId("SI_LUIE_CA_GROUP_GROUPLEAVEREASON1",                 "<<1>>(<<2>>) has been removed from the group.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE",              "<<1>> wants to share <<2>>.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_ALT",          "|cFEFEFE<<1>>|r wants to share |cFEFEFE<<2>>|r.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE",              "|cFEFEFE<<1>>|r wants to share the quest, <<2>>, with you.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_P2P",          "|cFEFEFE<<1>>|r wants to share the quest, |cFEFEFE<<2>>|r, with you.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_MESSAGE",                    "|cFEFEFE<<1>>|r has invited you to join a group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_LEADER_CHANGED",                    "|cFEFEFE<<1>>|r is now the group leader!")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_LEADER_CHANGED_SELF",               "You are now the group leader!")
@@ -190,9 +194,8 @@ ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_DISBAND_MSG",                "The gro
 ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_JOIN",                       "|cFEFEFE<<1>>|r has joined the group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF",                  "You have joined a group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_KICKED",                     "|cFEFEFE<<1>>|r has been removed from the group.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_LEAVE",                     "|cFEFEFE<<1>>|r has left the group.")
+ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_LEAVE",                      "|cFEFEFE<<1>>|r has left the group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF",                 "You have left the group.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_QUEST_SHARE_DECLINED",              "Shared quest declined.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_QUIT",                              "You are no longer in a group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_QUIT_LFG",                          "You are no longer in an LFG group.")
 
@@ -359,6 +362,7 @@ ZO_CreateStringId("SI_LUIE_CA_PREFIX_MESSAGE_WITHDREW",                 "Withdre
 ZO_CreateStringId("SI_LUIE_CA_QUEST_ABANDONED",                         "Abandoned: <<1>>")
 ZO_CreateStringId("SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON",               "Abandoned: <<1>> <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_QUEST_DISCOVER",                          "Discovered: <<1>>")
+
 ZO_CreateStringId("SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON",                  "Started: <<1>> <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON",                "Completed: <<1>> <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_QUEST_LOG_FULL",                          "Your quest log is full.")
