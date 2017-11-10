@@ -128,6 +128,9 @@ CA.D = {
     LootShowTrait                 = true,
     LootTrade                     = true,
     LootVendor                    = true,
+    LootVendorCurrency            = true,
+    LootVendorTotalCurrency       = false,
+    LootVendorTotalItems          = false,
     MiscBags                      = false,
     MiscConfiscate                = false,
     MiscDisguise                  = true,
@@ -152,7 +155,8 @@ CA.D = {
     MiscDuelStartOptions          = 1,
     
     MiscHorse                     = false,
-    MiscLockpick                  = false,
+    LockpickCA                    = true,
+    LockpickAlert                 = false,
     MiscMail                      = false,
     
     PledgeOfMaraCA                = false,
@@ -389,8 +393,12 @@ CA.D = {
     LootMessageTradeOut             = GetString(SI_LUIE_CA_LOOT_MESSAGE_TRADEOUT),
     LootMessageDeposit              = GetString(SI_LUIE_CA_LOOT_MESSAGE_DEPOSIT),
     LootMessageWithdraw             = GetString(SI_LUIE_CA_LOOT_MESSAGE_WITHDRAW),
-    LootMessageSell                 = GetString(SI_LUIE_CA_LOOT_MESSAGE_SELL),
-    LootMessageBuy                  = GetString(SI_LUIE_CA_LOOT_MESSAGE_BUY),
+    LootMessageSellNoV              = GetString(SI_LUIE_CA_LOOT_MESSAGE_SELL),
+    LootMessageBuyNoV               = GetString(SI_LUIE_CA_LOOT_MESSAGE_BUY),
+    LootMessageBuybackNoV           = GetString(SI_LUIE_CA_LOOT_MESSAGE_BUYBACK),
+    LootMessageSell                 = GetString(SI_LUIE_CA_LOOT_MESSAGE_SELL_VALUE),
+    LootMessageBuy                  = GetString(SI_LUIE_CA_LOOT_MESSAGE_BUY_VALUE),
+    LootMessageBuyback              = GetString(SI_LUIE_CA_LOOT_MESSAGE_BUYBACK_VALUE),
     LootMessagePickpocket           = GetString(SI_LUIE_CA_LOOT_MESSAGE_PICKPOCKET),
     LootMessageLaunder              = GetString(SI_LUIE_CA_LOOT_MESSAGE_LAUNDER),
     LootMessageConfiscate           = GetString(SI_LUIE_CA_LOOT_MESSAGE_CONFISCATE),
@@ -415,6 +423,8 @@ CA.D = {
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 -- CA Local Variable Setup
+local g_savedPurchase             = {}
+
 local g_tradeDisablePrint         = false -- Toggled on when a trade is completed, causing item updates to be suspended to allow our trade item changes printing to work.
 local g_isLooted                  = false -- This value is false by default, and toggled on only by on_loot_received being triggered
 local g_isPickpocketed            = false -- This value is false by default, and toggled on only by on_looted_received being triggered.
@@ -736,6 +746,12 @@ function CA.Initialize(enabled)
 
 end
 
+---------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
+-- EVENT HANDLER AND COLOR REGISTRATION -----------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
 function CA.RegisterColorEvents()
     CurrencyColorize = ZO_ColorDef:New(unpack(CA.SV.CurrencyColor))
     CurrencyUpColorize = ZO_ColorDef:New(unpack(CA.SV.CurrencyColorUp))
@@ -831,6 +847,260 @@ function CA.RegisterGuildEvents()
         end
     end
     
+end
+
+function CA.RegisterAchievementsEvent()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACHIEVEMENT_UPDATED)
+    if CA.SV.AchievementUpdateCA or CA.SV.AchievementUpdateAlert then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACHIEVEMENT_UPDATED, CA.OnAchievementUpdated)
+    end
+end
+
+function CA.RegisterXPEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN)
+    if CA.SV.Experience or CA.SV.ExperienceLevelUp then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN, CA.OnExperienceGain)
+    end
+    if CA.SV.ShowSkillPoints then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_SKILL_POINTS_CHANGED, CA.SkillPointsChanged)
+    end
+end
+
+function CA.RegisterStuckEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_BEGIN)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_ERROR_ALREADY_IN_PROGRESS)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_ERROR_INVALID_LOCATION)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_ERROR_IN_COMBAT)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_ERROR_ON_COOLDOWN)
+    if CA.SV.MiscStuck then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_BEGIN, CA.StuckBegin)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_ERROR_ALREADY_IN_PROGRESS, CA.StuckAlreadyInProgress)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_ERROR_INVALID_LOCATION, CA.StuckInvalidLocation)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_ERROR_IN_COMBAT, CA.StuckInCombat)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_ERROR_ON_COOLDOWN, CA.StuckOnCooldown)
+    end
+end
+
+function CA.RegisterGoldEvents()
+
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CARRIED_CURRENCY_UPDATE, CA.OnCurrencyUpdate)
+
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MONEY_UPDATE)
+     -- Only register this event if the menu setting is true
+    if CA.SV.MiscMail or CA.SV.LootMail or CA.SV.CurrencyGoldChange then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, CA.OnMailAttach)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, CA.OnMailAttachRemove)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, CA.OnMailCloseBox)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED, CA.OnMailFail)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS, CA.OnMailSuccess)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED, CA.MailMoneyChanged)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED, CA.MailCODChanged)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_REMOVED, CA.MailRemoved)
+    end
+end
+
+function CA.RegisterMailEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_READABLE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_TAKE_ATTACHED_ITEM_SUCCESS)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_OPEN_MAILBOX)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_REMOVED)
+    if CA.SV.MiscMail or CA.SV.LootMail then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_READABLE, CA.OnMailReadable)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_TAKE_ATTACHED_ITEM_SUCCESS, CA.OnMailTakeAttachedItem)
+    end
+    if CA.SV.MiscMail or CA.SV.LootMail or CA.SV.CurrencyGoldChange then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, CA.OnMailAttach)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, CA.OnMailAttachRemove)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED, CA.OnMailFail)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS, CA.OnMailSuccess)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED, CA.MailMoneyChanged)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED, CA.MailCODChanged)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_REMOVED, CA.MailRemoved)
+    end
+    if CA.SV.Loot or CA.SV.MiscMail or CA.SV.LootMail or CA.SV.CurrencyGoldChange then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_OPEN_MAILBOX, CA.OnMailOpenBox)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, CA.OnMailCloseBox)
+    end
+end
+
+function CA.RegisterLootEvents()
+
+    -- NON CONDITIONAL EVENTS
+    
+    -- LOCKPICK
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_BROKE, CA.MiscAlertLockBroke)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS, CA.MiscAlertLockSuccess)
+
+    --
+    
+    -- LOOT RECEIVED
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOOT_RECEIVED)
+    -- QUEST REWARD CONTEXT
+    -- INDEX
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    -- VENDOR
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_BUYBACK_RECEIPT)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_BUY_RECEIPT)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_SELL_RECEIPT)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_FENCE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_STORE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_STORE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT)
+    -- BANK
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_BANK)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_BANK)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_GUILD_BANK)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_GUILD_BANK)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_REMOVED)
+    -- TRADE
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_SUCCEEDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_FAILED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ELEVATION_FAILED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_ADD_FAILED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_CANCELED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_FAILED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED)
+    -- CRAFT
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CRAFTING_STATION_INTERACT, CA.CraftingOpen)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_END_CRAFTING_STATION_INTERACT, CA.CraftingClose)
+    -- JUSTICE/DESTROY
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED)
+    -- LOOT FAILED
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_COMPLETE_ATTEMPT_FAILED_INVENTORY_FULL)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_IS_FULL)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED)
+
+    -- LOOT RECEIVED
+    if CA.SV.Loot then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_RECEIVED, CA.OnLootReceived)
+    end
+    -- INDEX
+    if CA.SV.Loot or CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise or CA.SV.ShowLockpickBreak then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
+        g_equippedStacks = {}
+        g_inventoryStacks = {}
+        CA.IndexEquipped()
+        CA.IndexInventory()
+    end
+    -- VENDOR
+    if CA.SV.LootVendor then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BUYBACK_RECEIPT, CA.OnBuybackItem)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BUY_RECEIPT, CA.OnBuyItem)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_SELL_RECEIPT, CA.OnSellItem)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT, CA.FenceSuccess)
+    end
+    if CA.SV.Loot or CA.SV.LootVendor then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_FENCE, CA.FenceOpen)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_STORE, CA.StoreOpen)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_STORE, CA.StoreClose)
+    end
+    -- BANK
+    if CA.SV.LootBank then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_ADDED, CA.GuildBankItemAdded)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_REMOVED, CA.GuildBankItemRemoved)
+    end
+    if CA.SV.Loot or CA.SV.LootBank then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_BANK, CA.BankOpen)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_BANK, CA.BankClose)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_GUILD_BANK, CA.GuildBankOpen)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_GUILD_BANK, CA.GuildBankClose)
+    end
+    -- TRADE
+    if CA.SV.MiscTrade or CA.SV.LootTrade or CA.SV.Loot then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_SUCCEEDED, CA.OnTradeSuccess)
+    end
+    if CA.SV.MiscTrade and not CA.SV.LootTrade then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING, CA.TradeInviteWaiting)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING, CA.TradeInviteConsidering)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED, CA.TradeInviteAccepted)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_FAILED, CA.TradeInviteFailed)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ELEVATION_FAILED, CA.TradeElevationFailed)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_ADD_FAILED, CA.TradeItemAddFailed)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_CANCELED, CA.TradeCancel)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_FAILED, CA.TradeFail)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED, CA.TradeInviteCancel)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED, CA.TradeInviteDecline)
+    elseif CA.SV.LootTrade then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED, CA.OnTradeAdded)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED, CA.OnTradeRemoved)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING, CA.TradeInviteWaiting)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING, CA.TradeInviteConsidering)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED, CA.TradeInviteAccepted)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_FAILED, CA.TradeInviteFailed)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ELEVATION_FAILED, CA.TradeElevationFailed)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_ADD_FAILED, CA.TradeItemAddFailed)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_CANCELED, CA.TradeCancel)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_FAILED, CA.TradeFail)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED, CA.TradeInviteCancel)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED, CA.TradeInviteDecline)
+    end
+    -- CRAFT
+    if CA.SV.Loot or CA.SV.LootCraft then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CRAFTING_STATION_INTERACT, CA.CraftingOpen)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_END_CRAFTING_STATION_INTERACT, CA.CraftingClose)
+    end
+    -- JUSTICE/DESTROY
+    if CA.SV.ShowDestroy then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED, CA.DestroyItem)
+    end
+    if CA.SV.Loot or CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.MiscConfiscate or CA.SV.ShowDisguise then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED, CA.JusticeStealRemove)
+    end
+    
+    if CA.SV.ShowLootFail then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_COMPLETE_ATTEMPT_FAILED_INVENTORY_FULL, CA.InventoryFullQuest)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_IS_FULL, CA.InventoryFull)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED, CA.LootItemFailed)
+    end
+end
+
+function CA.RegisterDisguiseEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED)
+    if CA.SV.MiscDisguise then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, CA.OnPlayerActivated)
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, CA.DisguiseState )
+        EVENT_MANAGER:AddFilterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
+        g_currentDisguise = GetItemId(0, 10) or 0 -- Get the currently equipped disguise itemId if any
+        g_disguiseState = GetUnitDisguiseState("player") -- Get current player disguise state
+        if g_disguiseState > 0 then
+            g_disguiseState = 1 -- Simplify all the various states into a basic 0 = false, 1 = true value
+            zo_callLater(CA.DisplayDisguiseOnLoad, 50)
+        end
+    end
+end
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+function CA.DisplayDisguiseOnLoad()
+    if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then
+        printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))
+    end
+    if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then
+        local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT)
+        messageParams:SetText(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))
+        messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COUNTDOWN)
+        CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+    end
 end
 
 function CA.GuildHeraldrySaved()
@@ -941,266 +1211,6 @@ function CA.GuildTextChanged(eventCode, guildId)
         end
     end
     
-end
-
-function CA.RegisterDisguiseEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED)
-    if CA.SV.MiscDisguise then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, CA.OnPlayerActivated)
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, CA.DisguiseState )
-        EVENT_MANAGER:AddFilterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
-        g_currentDisguise = GetItemId(0, 10) or 0 -- Get the currently equipped disguise itemId if any
-        g_disguiseState = GetUnitDisguiseState("player") -- Get current player disguise state
-        if g_disguiseState > 0 then
-            g_disguiseState = 1 -- Simplify all the various states into a basic 0 = false, 1 = true value
-            zo_callLater(CA.DisplayDisguiseOnLoad, 50)
-        end
-    end
-end
-
-function CA.DisplayDisguiseOnLoad()
-    if CA.SV.MiscDisguiseOption == 1 or CA.SV.MiscDisguiseOption == 3 then
-        printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))
-    end
-    if CA.SV.MiscDisguiseOption == 2 or CA.SV.MiscDisguiseOption == 3 then
-        local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT)
-        messageParams:SetText(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))
-        messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COUNTDOWN)
-        CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
-    end
-end
-
-function CA.RegisterAchievementsEvent()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACHIEVEMENT_UPDATED)
-    if CA.SV.AchievementUpdateCA or CA.SV.AchievementUpdateAlert then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACHIEVEMENT_UPDATED, CA.OnAchievementUpdated)
-    end
-end
-
-function CA.RegisterXPEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN)
-    if CA.SV.Experience or CA.SV.ExperienceLevelUp then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN, CA.OnExperienceGain)
-    end
-    if CA.SV.ShowSkillPoints then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_SKILL_POINTS_CHANGED, CA.SkillPointsChanged)
-    end
-end
-
-function CA.RegisterStuckEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_BEGIN)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_ERROR_ALREADY_IN_PROGRESS)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_ERROR_INVALID_LOCATION)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_ERROR_IN_COMBAT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_ERROR_ON_COOLDOWN)
-    if CA.SV.MiscStuck then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_BEGIN, CA.StuckBegin)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_ERROR_ALREADY_IN_PROGRESS, CA.StuckAlreadyInProgress)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_ERROR_INVALID_LOCATION, CA.StuckInvalidLocation)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_ERROR_IN_COMBAT, CA.StuckInCombat)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_ERROR_ON_COOLDOWN, CA.StuckOnCooldown)
-    end
-end
-
-function CA.RegisterGroupEvents()
-
-end
-
-function CA.RegisterGoldEvents()
-
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CARRIED_CURRENCY_UPDATE, CA.OnCurrencyUpdate)
-
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MONEY_UPDATE)
-     -- Only register this event if the menu setting is true
-    if CA.SV.MiscMail or CA.SV.LootMail or CA.SV.CurrencyGoldChange then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, CA.OnMailAttach)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, CA.OnMailAttachRemove)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, CA.OnMailCloseBox)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED, CA.OnMailFail)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS, CA.OnMailSuccess)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED, CA.MailMoneyChanged)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED, CA.MailCODChanged)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_REMOVED, CA.MailRemoved)
-    end
-end
-
-function CA.RegisterMailEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_READABLE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_TAKE_ATTACHED_ITEM_SUCCESS)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_OPEN_MAILBOX)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_REMOVED)
-    if CA.SV.MiscMail or CA.SV.LootMail then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_READABLE, CA.OnMailReadable)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_TAKE_ATTACHED_ITEM_SUCCESS, CA.OnMailTakeAttachedItem)
-    end
-    if CA.SV.MiscMail or CA.SV.LootMail or CA.SV.CurrencyGoldChange then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, CA.OnMailAttach)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, CA.OnMailAttachRemove)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_FAILED, CA.OnMailFail)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS, CA.OnMailSuccess)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED, CA.MailMoneyChanged)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED, CA.MailCODChanged)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_REMOVED, CA.MailRemoved)
-    end
-    if CA.SV.Loot or CA.SV.MiscMail or CA.SV.LootMail or CA.SV.CurrencyGoldChange then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_OPEN_MAILBOX, CA.OnMailOpenBox)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, CA.OnMailCloseBox)
-    end
-end
-
-function CA.RegisterLootEvents()
-    -- LOOT RECEIVED
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOOT_RECEIVED)
-    -- QUEST REWARD CONTEXT
-    -- INDEX
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-    -- VENDOR
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_BUYBACK_RECEIPT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_BUY_RECEIPT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_SELL_RECEIPT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_FENCE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_STORE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_STORE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT)
-    -- BANK
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_BANK)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_BANK)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_GUILD_BANK)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_GUILD_BANK)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_REMOVED)
-    -- TRADE
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_SUCCEEDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_FAILED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ELEVATION_FAILED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_ADD_FAILED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_CANCELED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_FAILED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED)
-    -- CRAFT
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CRAFTING_STATION_INTERACT, CA.CraftingOpen)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_END_CRAFTING_STATION_INTERACT, CA.CraftingClose)
-    -- JUSTICE/DESTROY
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED)
-    -- LOCKPICK
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOCKPICK_BROKE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INTERACTABLE_IMPOSSIBLE_TO_PICK)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INTERACTABLE_LOCKED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOCKPICK_FAILED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS)
-    -- LOOT FAILED
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_COMPLETE_ATTEMPT_FAILED_INVENTORY_FULL)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_IS_FULL)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED)
-
-    -- LOOT RECEIVED
-    if CA.SV.Loot then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_RECEIVED, CA.OnLootReceived)
-    end
-    -- INDEX
-    if CA.SV.Loot or CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.ShowDisguise or CA.SV.ShowLockpickBreak then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
-        g_equippedStacks = {}
-        g_inventoryStacks = {}
-        CA.IndexEquipped()
-        CA.IndexInventory()
-    end
-    -- VENDOR
-    if CA.SV.LootVendor then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BUYBACK_RECEIPT, CA.OnBuybackItem)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BUY_RECEIPT, CA.OnBuyItem)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_SELL_RECEIPT, CA.OnSellItem)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT, CA.FenceSuccess)
-    end
-    if CA.SV.Loot or CA.SV.LootVendor then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_FENCE, CA.FenceOpen)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_STORE, CA.StoreOpen)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_STORE, CA.StoreClose)
-    end
-    -- BANK
-    if CA.SV.LootBank then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_ADDED, CA.GuildBankItemAdded)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_REMOVED, CA.GuildBankItemRemoved)
-    end
-    if CA.SV.Loot or CA.SV.LootBank then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_BANK, CA.BankOpen)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_BANK, CA.BankClose)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_GUILD_BANK, CA.GuildBankOpen)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_GUILD_BANK, CA.GuildBankClose)
-    end
-    -- TRADE
-    if CA.SV.MiscTrade or CA.SV.LootTrade or CA.SV.Loot then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_SUCCEEDED, CA.OnTradeSuccess)
-    end
-    if CA.SV.MiscTrade and not CA.SV.LootTrade then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING, CA.TradeInviteWaiting)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING, CA.TradeInviteConsidering)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED, CA.TradeInviteAccepted)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_FAILED, CA.TradeInviteFailed)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ELEVATION_FAILED, CA.TradeElevationFailed)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_ADD_FAILED, CA.TradeItemAddFailed)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_CANCELED, CA.TradeCancel)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_FAILED, CA.TradeFail)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED, CA.TradeInviteCancel)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED, CA.TradeInviteDecline)
-    elseif CA.SV.LootTrade then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED, CA.OnTradeAdded)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED, CA.OnTradeRemoved)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_WAITING, CA.TradeInviteWaiting)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CONSIDERING, CA.TradeInviteConsidering)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED, CA.TradeInviteAccepted)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_FAILED, CA.TradeInviteFailed)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ELEVATION_FAILED, CA.TradeElevationFailed)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_ADD_FAILED, CA.TradeItemAddFailed)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_CANCELED, CA.TradeCancel)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_FAILED, CA.TradeFail)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_CANCELED, CA.TradeInviteCancel)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_DECLINED, CA.TradeInviteDecline)
-    end
-    -- CRAFT
-    if CA.SV.Loot or CA.SV.LootCraft then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CRAFTING_STATION_INTERACT, CA.CraftingOpen)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_END_CRAFTING_STATION_INTERACT, CA.CraftingClose)
-    end
-    -- JUSTICE/DESTROY
-    if CA.SV.ShowDestroy then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED, CA.DestroyItem)
-    end
-    if CA.SV.Loot or CA.SV.ShowDestroy or CA.SV.ShowConfiscate or CA.SV.MiscConfiscate or CA.SV.ShowDisguise then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED, CA.JusticeStealRemove)
-    end
-    -- LOCKPICK
-    if CA.SV.ShowLockpickBreak then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_BROKE, CA.MiscAlertLockBroke)
-    end
-    if CA.SV.MiscLockpick then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INTERACTABLE_IMPOSSIBLE_TO_PICK, CA.MiscAlertLockImpossible)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INTERACTABLE_LOCKED, CA.MiscAlertLockLocked)
-    end
-    if CA.SV.MiscLockpick or CA.SV.ShowLockpickBreak then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_FAILED, CA.MiscAlertLockFailed)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS, CA.MiscAlertLockSuccess)
-    end
-    if CA.SV.ShowLootFail then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_COMPLETE_ATTEMPT_FAILED_INVENTORY_FULL, CA.InventoryFullQuest)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_IS_FULL, CA.InventoryFull)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED, CA.LootItemFailed)
-    end
 end
 
 function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
@@ -1341,10 +1351,6 @@ function CA.GuildInviteAdded(eventCode, guildId, guildName, guildAlliance, invit
         ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST), inviterName, guildNameAllianceAlert))
     end
 end
-
---------------------------------------
--- FRIEND/IGNORE MESSAGES ------------
---------------------------------------
 
 function CA.FriendAdded(eventCode, displayName)
     if CA.SV.FriendIgnoreCA then
@@ -1740,10 +1746,7 @@ function CA.GMCS(eventCode, unitTag, isOnline)
 end
 ]]--
 
-
-
 function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
-
     local UpOrDown = newValue - oldValue
     --[[ DEBUG
     d("currency: " .. currency)
@@ -1880,13 +1883,28 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         end
         changeType = ZO_LocalizeDecimalNumber(oldValue - newValue)
     end
-
+    
     -- Determine syntax based on reason
     -- Sell/Buy from a Merchant
     if reason == 1 and UpOrDown > 0 then
         messageChange = CA.SV.CurrencyMessageReceive
+        if CA.SV.LootVendorCurrency then
+            g_savedPurchase = { changeType=changeType, formattedValue=formattedValue, currencyTypeColor=currencyTypeColor, currencyIcon=currencyIcon, currencyName=currencyName, currencyTotal=currencyTotal, messageTotal=messageTotal}
+            return
+        end
     elseif reason == 1 and UpOrDown < 0 then
         messageChange = CA.SV.CurrencyMessageSpend
+        if CA.SV.LootVendorCurrency then
+            g_savedPurchase = { changeType=changeType, formattedValue=formattedValue, currencyTypeColor=currencyTypeColor, currencyIcon=currencyIcon, currencyName=currencyName, currencyTotal=currencyTotal, messageTotal=messageTotal}
+            return
+        end
+    -- Buyback (64)
+    elseif reason == 64 then
+        messageChange = CA.SV.CurrencyMessageSpend
+        if CA.SV.LootVendorCurrency then
+            g_savedPurchase = { changeType=changeType, formattedValue=formattedValue, currencyTypeColor=currencyTypeColor, currencyIcon=currencyIcon, currencyName=currencyName, currencyTotal=currencyTotal, messageTotal=messageTotal}
+            return
+        end
     -- Receive/Give Money in a Trade (Likely consolidate this later)
     elseif reason == 3 and UpOrDown > 0 then
         messageChange = CA.SV.CurrencyMessageTradeIn
@@ -1904,8 +1922,8 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         messageChange = CA.SV.CurrencyMessageStorage
         type = "LUIE_CURRENCY_BANK"
     -- Spend - NPC Conversation (5), Wayshrine (19), Repairs (29), AH Listing Fee (33), Respec Skills (44), Respec Attributes (45),
-    -- Unstuck (48), Edit Guild Heraldry (49), Buy Guild Tabard (50), Respec Morphs (55), Pay Fence (56), Launder (60), Champion Respec (61), Buyback (64)
-    elseif reason == 5 or reason == 19 or reason == 29 or reason == 33 or reason == 44 or reason == 45 or reason == 48 or reason == 49 or reason == 50 or reason == 55 or reason == 56 or reason == 60 or reason == 61 or reason == 64 then
+    -- Unstuck (48), Edit Guild Heraldry (49), Buy Guild Tabard (50), Respec Morphs (55), Pay Fence (56), Launder (60), Champion Respec (61)
+    elseif reason == 5 or reason == 19 or reason == 29 or reason == 33 or reason == 44 or reason == 45 or reason == 48 or reason == 49 or reason == 50 or reason == 55 or reason == 56 or reason == 60 or reason == 61 then
         messageChange = CA.SV.CurrencyMessageSpend
     -- Keep Reward (14), Keep Repair (40), PVP Resurrect (41)
     elseif reason == 14 or reason == 40 or reason == 41 then
@@ -1978,7 +1996,7 @@ end
 
 -- Printer function receives values from currency update or from other functions that display currency updates.
 -- Type here refers to an LUIE_CURRENCY_TYPE
-function CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
+function CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type, carriedItem, carriedItemTotal)
 
     local messageP1                                                     -- First part of message - Change
     local messageP2                                                     -- Second part of the message (if enabled) - Total
@@ -2010,8 +2028,7 @@ function CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTyp
     elseif type == "LUIE_CURRENCY_HERALDRY" then
         local icon = CA.SV.LootIcons and "|t16:16:LuiExtended/media/unitframes/ca_heraldry.dds|t " or ""
         local heraldryMessage = strfmt("|r" .. icon .. "|cFFFFFF" .. GetString(SI_LUIE_CA_CURRENCY_NAME_HERALDRY) .. "|r|c" .. changeColor)
-        formattedMessageP1 = (strfmt(messageChange, messageP1, heraldryMessage))
-        
+        formattedMessageP1 = (strfmt(messageChange, messageP1, heraldryMessage)) 
     elseif type == "LUIE_CURRENCY_RIDING_SPEED" or type == "LUIE_CURRENCY_RIDING_CAPACITY" or type == "LUIE_CURRENCY_RIDING_STAMINA" then
         local function ResolveRidingStats()
             -- if somevar then icon = else no
@@ -2030,15 +2047,27 @@ function CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTyp
             return strfmt("|r" .. icon .. "|cFFFFFF" .. skillType .. "|r|c" .. changeColor)
         end
         formattedMessageP1 = (strfmt(messageChange, ResolveRidingStats(), messageP1))
+        
+    elseif type == "LUIE_CURRENCY_VENDOR" then
+        item = strfmt("|r" .. carriedItem .. "|c" .. changeColor)
+        formattedMessageP1 = (strfmt(messageChange, item, messageP1))   
     else
         formattedMessageP1 = (strfmt(messageChange, messageP1))
     end
     local formattedMessageP2 = (strfmt(messageTotal, messageP2))
     local finalMessage
-    if currencyTotal and type ~= "LUIE_CURRENCY_HERALDRY" then
-        finalMessage = strfmt("|c%s%s|r |c%s%s|r", changeColor, formattedMessageP1, changeColor, formattedMessageP2)
+    if currencyTotal and type ~= "LUIE_CURRENCY_HERALDRY" and type ~= "LUIE_CURRENCY_VENDOR" or (type == "LUIE_CURRENCY_VENDOR" and CA.SV.LootVendorTotalCurrency) then
+        if type == "LUIE_CURRENCY_VENDOR" then
+            finalMessage = strfmt("|c%s%s|r%s |c%s%s|r", changeColor, formattedMessageP1, carriedItemTotal, changeColor, formattedMessageP2)
+        else
+            finalMessage = strfmt("|c%s%s|r |c%s%s|r", changeColor, formattedMessageP1, changeColor, formattedMessageP2)
+        end
     else
-        finalMessage = strfmt("|c%s%s|r", changeColor, formattedMessageP1)
+        if type == "LUIE_CURRENCY_VENDOR" then
+            finalMessage = strfmt("|c%s%s|r%s", changeColor, formattedMessageP1, carriedItemTotal)
+        else
+            finalMessage = strfmt("|c%s%s|r", changeColor, formattedMessageP1)
+        end
     end
     
     -- If this value is being sent from the Throttle Printer, do not throttle the printout of the value
@@ -2109,43 +2138,20 @@ function CA.CurrencyTVThrottlePrinter()
     g_currencyTVThrottleTotal = 0
 end
 
-local function ResetLockpickBroken()
-    g_lockpickBroken = false
-end
-
 function CA.MiscAlertLockBroke(eventCode, inactivityLengthMs)
-    if CA.SV.ShowLockpickBreak then
-        g_lockpickBroken = true
-        zo_callLater(ResetLockpickBroken, 200)
-    end
-end
-
-function CA.MiscAlertLockFailed(eventCode)
-    if CA.SV.MiscLockpick then
-        printToChat(GetString(SI_LUIE_CA_LOCKPICK_FAILED))
-    end
-    if CA.SV.ShowLockpickBreak then
-        g_lockpickBroken = true
-        zo_callLater(ResetLockpickBroken, 200)
-    end
+    g_lockpickBroken = true
+    zo_callLater (function() g_lockpickBroken = false end, 200)
 end
 
 function CA.MiscAlertLockSuccess(eventCode)
-    if CA.SV.MiscLockpick then
+    if CA.SV.LockpickCA then
         printToChat(GetString(SI_LUIE_CA_LOCKPICK_SUCCESS))
     end
-    if CA.SV.ShowLockpickBreak then
-        g_lockpickBroken = true
-        zo_callLater(ResetLockpickBroken, 200)
+    if CA.SV.LockpickAlert then
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_LOCKPICK_SUCCESS))
     end
-end
-
-function CA.MiscAlertLockImpossible(eventCode, interactableName)
-    printToChat(strformat(GetString(SI_LOCKPICK_IMPOSSIBLE_LOCK), interactableName))
-end
-
-function CA.MiscAlertLockLocked(eventCode, interactableName)
-    printToChat(strformat(GetString(SI_LOCKPICK_NO_KEY_AND_NO_LOCK_PICKS), interactableName))
+    g_lockpickBroken = true
+    zo_callLater (function() g_lockpickBroken = false end, 200)
 end
 
 function CA.StorageBag(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
@@ -2181,57 +2187,99 @@ function CA.StorageBank(eventCode, previousCapacity, currentCapacity, previousUp
 end
 
 function CA.OnBuybackItem(eventCode, itemName, quantity, money, itemSound)
-    local icon
+    local changeColor = CurrencyDownColorize:ToHex()
     local itemIcon,_,_,_,_ = GetItemLinkInfo(itemName)
-    icon = itemIcon
-
-    icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
-
-    local logPrefix = GetString(SI_ITEMFILTERTYPE8)
-    if CA.SV.ItemContextToggle then
-        logPrefix = ( CA.SV.ItemContextMessage )
+    local icon = itemIcon
+    local formattedIcon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
+    local type = "LUIE_CURRENCY_VENDOR"
+    local messageChange = (money ~= 0 and CA.SV.LootVendorCurrency) and CA.SV.LootMessageBuyback or CA.SV.LootMessageBuybackNoV
+    local itemCount = quantity > 1 and (" |cFFFFFFx" .. quantity .. "|r") or "" 
+    local carriedItem = ( formattedIcon .. itemName:gsub("^|H0", "|H1", 1) ..  itemCount )
+    
+    local carriedItemTotal = ""
+    if CA.SV.LootTotal and CA.SV.LootVendorTotalItems then
+        local total1, total2, total3 = GetItemLinkStacks(itemName)
+        local total = total1 + total2 + total3
+        if total > 1 then
+            carriedItemTotal = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, CA.SV.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+        end
     end
-
-    local receivedBy = ""
-    local gainOrLoss = 1
-
-    CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainOrLoss)
+    
+    if money ~= 0 and CA.SV.LootVendorCurrency then
+        CA.CurrencyPrinter(g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type, carriedItem, carriedItemTotal)
+    else
+        local finalMessageP1 = strfmt(carriedItem .. "|r|c" .. changeColor)
+        local finalMessageP2 = strfmt(messageChange, finalMessageP1)
+        local finalMessage = strfmt("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
+        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "CURRENCY" }
+        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+    end
+    g_savedPurchase = { }
 end
 
 function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCurrencyType1, specialCurrencyInfo1, specialCurrencyQuantity1, specialCurrencyType2, specialCurrencyInfo2, specialCurrencyQuantity2, itemSoundCategory)
-    local icon
+    local changeColor = CurrencyDownColorize:ToHex()
     local itemIcon,_,_,_,_ = GetItemLinkInfo(itemName)
-    icon = itemIcon
-
-    icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
-
-    local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_PURCHASED)
-    if CA.SV.ItemContextToggle then
-        logPrefix = ( CA.SV.ItemContextMessage )
+    local icon = itemIcon
+    local formattedIcon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
+    local type = "LUIE_CURRENCY_VENDOR"
+    local messageChange = (money ~= 0 and CA.SV.LootVendorCurrency) and CA.SV.LootMessageBuy or CA.SV.LootMessageBuyNoV
+    local itemCount = quantity > 1 and (" |cFFFFFFx" .. quantity .. "|r") or "" 
+    local carriedItem = ( formattedIcon .. itemName:gsub("^|H0", "|H1", 1) ..  itemCount )
+    
+    local carriedItemTotal = ""
+    if CA.SV.LootTotal and CA.SV.LootVendorTotalItems then
+        local total1, total2, total3 = GetItemLinkStacks(itemName)
+        local total = total1 + total2 + total3
+        if total > 1 then
+            carriedItemTotal = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, CA.SV.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+        end
     end
-
-    local receivedBy = ""
-    local gainOrLoss = 1
-
-    CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainOrLoss)
+    
+    if money ~= 0 and CA.SV.LootVendorCurrency then
+        CA.CurrencyPrinter(g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type, carriedItem, carriedItemTotal)
+    else
+        local finalMessageP1 = strfmt(carriedItem .. "|r|c" .. changeColor)
+        local finalMessageP2 = strfmt(messageChange, finalMessageP1)
+        local finalMessage = strfmt("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
+        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "CURRENCY" }
+        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+    end
+    g_savedPurchase = { }
 end
 
 function CA.OnSellItem(eventCode, itemName, quantity, money)
-    local icon
+    local changeColor = CurrencyUpColorize:ToHex()
     local itemIcon,_,_,_,_ = GetItemLinkInfo(itemName)
-    icon = itemIcon
-
-    icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
-
-    local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_SOLD)
-    if CA.SV.ItemContextToggle then
-        logPrefix = ( CA.SV.ItemContextMessage )
+    local icon = itemIcon
+    local formattedIcon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
+    local type = "LUIE_CURRENCY_VENDOR"
+    local messageChange = (money ~= 0 and CA.SV.LootVendorCurrency) and CA.SV.LootMessageSell or CA.SV.LootMessageSellNoV
+    local itemCount = quantity > 1 and (" |cFFFFFFx" .. quantity .. "|r") or "" 
+    local carriedItem = ( formattedIcon .. itemName:gsub("^|H0", "|H1", 1) ..  itemCount )
+    
+    local carriedItemTotal = ""
+    if CA.SV.LootTotal and CA.SV.LootVendorTotalItems then
+        local total1, total2, total3 = GetItemLinkStacks(itemName)
+        local total = total1 + total2 + total3
+        if total > 1 then
+            carriedItemTotal = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, CA.SV.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+        end
     end
-
-    local receivedBy = ""
-    local gainOrLoss = 2
-
-    CA.LogItem(logPrefix, icon, itemName, itemType, quantity, receivedBy, gainOrLoss)
+    
+    if money ~= 0 and CA.SV.LootVendorCurrency then
+        CA.CurrencyPrinter(g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type, carriedItem, carriedItemTotal)
+    else
+        local finalMessageP1 = strfmt(carriedItem .. "|r|c" .. changeColor)
+        local finalMessageP2 = strfmt(messageChange, finalMessageP1)
+        local finalMessage = strfmt("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
+        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "CURRENCY" }
+        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+    end
+    g_savedPurchase = { }
 end
 
 function CA.PrintMultiLineGain()
@@ -5693,6 +5741,36 @@ function CA.AlertStyleLearned()
         return true
     end
     
+    local function LockpickFailedAlert(result)
+        if CA.SV.LockpickCA then
+            printToChat(GetString(SI_LUIE_CA_LOCKPICK_FAILED))
+        end
+        if CA.SV.LockpickAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_LOCKPICK_FAILED))
+        end
+        g_lockpickBroken = true
+        zo_callLater (function() g_lockpickBroken = false end, 200)
+        return true
+    end
+    
+    local function LockpickLockedAlert(interactableName)
+        printToChat(zo_strformat(SI_LOCKPICK_NO_KEY_AND_NO_LOCK_PICKS, interactableName))
+        if CA.SV.LockpickAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, zo_strformat(SI_LOCKPICK_NO_KEY_AND_NO_LOCK_PICKS, interactableName))
+        end
+        PlaySound(SOUNDS.LOCKPICKING_NO_LOCKPICKS)
+        return true
+    end
+
+    local function LockpickImpossibleAlert(interactableName)
+        printToChat(zo_strformat(SI_LOCKPICK_IMPOSSIBLE_LOCK, interactableName))
+        if CA.SV.LockpickAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, zo_strformat(SI_LOCKPICK_IMPOSSIBLE_LOCK, interactableName))
+        end
+        PlaySound(SOUNDS.LOCKPICKING_NO_LOCKPICKS)
+        return true
+    end
+    
     ZO_PreHook(alertHandlers, EVENT_LORE_BOOK_ALREADY_KNOWN, AlreadyKnowBookHook)
     ZO_PreHook(alertHandlers, EVENT_RIDING_SKILL_IMPROVEMENT, RidingSkillImprovementAlertHook)
     
@@ -5734,6 +5812,10 @@ function CA.AlertStyleLearned()
     
     ZO_PreHook(alertHandlers, EVENT_GUILD_SELF_LEFT_GUILD, GuildSelfLeftAlert)
     ZO_PreHook(alertHandlers, EVENT_SAVE_GUILD_RANKS_RESPONSE, GuildRanksResponseAlert)
+    
+    ZO_PreHook(alertHandlers, EVENT_LOCKPICK_FAILED, LockpickFailedAlert)
+    ZO_PreHook(alertHandlers, EVENT_INTERACTABLE_LOCKED, LockpickLockedAlert)
+    ZO_PreHook(alertHandlers, EVENT_INTERACTABLE_IMPOSSIBLE_TO_PICK, LockpickImpossibleAlert)
 
     
     

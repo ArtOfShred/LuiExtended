@@ -236,8 +236,10 @@ ZO_CreateStringId("SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER",           "Danger!
 ZO_CreateStringId("SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS",       "Danger! You are arousing suspicion!")
 ZO_CreateStringId("SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE",             "You are no longer disguised")
 ZO_CreateStringId("SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED",        "You are now disguised")
+
 ZO_CreateStringId("SI_LUIE_CA_LOCKPICK_FAILED",                         "Lockpick failed!")
 ZO_CreateStringId("SI_LUIE_CA_LOCKPICK_SUCCESS",                        "Lockpick successful!")
+
 ZO_CreateStringId("SI_LUIE_CA_LVL_ANNOUNCE_CP",                         "Champion Level Achieved!")
 ZO_CreateStringId("SI_LUIE_CA_LVL_ANNOUNCE_XP",                         "You have reached")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_PAYMENT_MSG",                    "COD Payment") -- PREFIX MESSAGE
@@ -276,8 +278,8 @@ ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_CONFISCATE",             "A guard
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_PICKPOCKET",             "You pickpocket %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_LOST",                   "You lost %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_EARN",                   "You earn %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_STABLE",                 "You purchase a %s for %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_STORAGE",                "You purchase a %s for %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_STABLE",                 "You purchase %s for %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_STORAGE",                "You purchase %s for %s.")
 
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_HERALDRY",               "You spend %s from your guild bank to update your %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_NAME_HERALDRY",                  "[Guild Heraldry]")
@@ -288,8 +290,12 @@ ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_TRADEIN",                    "You tra
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_TRADEOUT",                   "You receive %s from %s")
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_DEPOSIT",                    "You deposit %s in your bank.")
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_WITHDRAW",                   "You withdraw %s from your bank.")
-ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_SELL",                       "You sell %s for %s.")
-ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_BUY",                        "You purchase %s for %s.")
+ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_SELL",                       "You sell %s.")
+ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_BUY",                        "You purchase %s.")
+ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_BUYBACK",                    "You buyback %s.")
+ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_SELL_VALUE",                 "You sell %s for %s.")
+ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_BUY_VALUE",                  "You purchase %s for %s.")
+ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_BUYBACK_VALUE",              "You buyback %s for %s.")
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_PICKPOCKET",                 "You pickpocket %s.")
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_LAUNDER",                    "You launder %s for %s.")
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_CONFISCATE",                 "A guard has confiscated %s.")
