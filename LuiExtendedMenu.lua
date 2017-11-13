@@ -1900,6 +1900,82 @@ function LUIE_CreateSettings()
                             )) end,
                         default = LUIE.ChatAnnouncements.D.CurrencyMessageTradeOut,
                     },
+                    
+                    {
+                        -- Mail Message (In)
+                        type = "editbox",
+                        name = "Mail Message (Incoming)",
+                        tooltip = "ugh",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageMailIn end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageMailIn = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
+                            (
+                                LUIE.ChatAnnouncements.SV.CurrencyGoldChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyAPShowChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyTVChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyWVChange or
+                                LUIE.SV.ChatAnnouncements_Enable
+                            )) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageMailIn,
+                    },
+                    {
+                        -- Mail Message (Out)
+                        type = "editbox",
+                        name = "Mail Message (Outgoing)",
+                        tooltip = "ugh",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageMailOut end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageMailOut = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
+                            (
+                                LUIE.ChatAnnouncements.SV.CurrencyGoldChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyAPShowChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyTVChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyWVChange or
+                                LUIE.SV.ChatAnnouncements_Enable
+                            )) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageMailOut,
+                    },
+                    {
+                        -- Mail Message (COD Payment)
+                        type = "editbox",
+                        name = "Mail Message (COD Payment)",
+                        tooltip = "ugh",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageMailCOD end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageMailCOD = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
+                            (
+                                LUIE.ChatAnnouncements.SV.CurrencyGoldChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyAPShowChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyTVChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyWVChange or
+                                LUIE.SV.ChatAnnouncements_Enable
+                            )) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageMailCOD,
+                    },
+                    
+                    {
+                        -- Mail Message (Postage)
+                        type = "editbox",
+                        name = "Mail Message (Postage)",
+                        tooltip = "ugh",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessagePostage end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessagePostage = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
+                            (
+                                LUIE.ChatAnnouncements.SV.CurrencyGoldChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyAPShowChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyTVChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyWVChange or
+                                LUIE.SV.ChatAnnouncements_Enable
+                            )) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessagePostage,
+                    },
+                    
+                    
                     {
                         -- Deposit Message
                         type = "editbox",
@@ -2400,6 +2476,29 @@ function LUIE_CreateSettings()
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.LootMessageTradeOut,
                     },
+                    {
+                        -- Loot Message (MailIn)
+                        type = "editbox",
+                        name = "Loot MailIn",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageMailIn end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageMailIn = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageMailIn,
+                    },
+                    {
+                        -- Loot Message (MailOut)
+                        type = "editbox",
+                        name = "Loot MailOut",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageMailOut end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageMailOut = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageMailOut,
+                    },
+                    
                     {
                         -- Loot Message (Deposit)
                         type = "editbox",
@@ -4537,21 +4636,33 @@ function LUIE_CreateSettings()
                     {
                         -- Show Trade Events
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWTRADE),
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWTRADE) .. " CA",
                         tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWTRADE),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscTrade end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscTrade = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.TradeCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.TradeCA = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.MiscTrade,
+                        default = LUIE.ChatAnnouncements.D.TradeCA,
                     },
+                    {
+                        -- Show Trade Events
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWTRADE) .. " ALERT",
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWTRADE),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.TradeAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.TradeAlert = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.TradeAlert,
+                    },
+                    
                     {
                         -- Show Duel Events (CA)
                         type = "checkbox",
                         name = "Show Duel Events - CA",
                         tooltip = "TODO",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.DuelCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelCA = value LUIE.ChatAnnouncements.RegisterDuelEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.DuelCA,
@@ -4562,7 +4673,7 @@ function LUIE_CreateSettings()
                         name = "Show Duel Events - Alert",
                         tooltip = "TODO",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.DuelAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelAlert = value LUIE.ChatAnnouncements.RegisterDuelEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.DuelAlert,
@@ -4575,7 +4686,7 @@ function LUIE_CreateSettings()
                         name = "Show Duel Boundary - CA",
                         tooltip = "Note that this only shows on a few events",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.DuelBoundaryCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelBoundaryCA = value LUIE.ChatAnnouncements.RegisterDuelEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelBoundaryCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.DuelBoundaryCA,
@@ -4586,7 +4697,7 @@ function LUIE_CreateSettings()
                         name = "Show Duel Boundary - CSA",
                         tooltip = "Note that this only shows on a few events",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.DuelBoundaryCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelBoundaryCSA = value LUIE.ChatAnnouncements.RegisterDuelEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelBoundaryCSA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.DuelBoundaryCSA,
@@ -4597,7 +4708,7 @@ function LUIE_CreateSettings()
                         name = "Show Duel Boundary - Alert",
                         tooltip = "Note that this only shows on a few events",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.DuelBoundaryAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelBoundaryAlert = value LUIE.ChatAnnouncements.RegisterDuelEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelBoundaryAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.DuelBoundaryAlert,
@@ -4609,7 +4720,7 @@ function LUIE_CreateSettings()
                         name = "Show Duel Won - CA",
                         tooltip = "Note that this only shows on a few events",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.DuelWonCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelWonCA = value LUIE.ChatAnnouncements.RegisterDuelEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelWonCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.DuelWonCA,
@@ -4620,7 +4731,7 @@ function LUIE_CreateSettings()
                         name = "Show Duel Won - CSA",
                         tooltip = "Note that this only shows on a few events",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.DuelWonCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelWonCSA = value LUIE.ChatAnnouncements.RegisterDuelEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelWonCSA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.DuelWonCSA,
@@ -4631,7 +4742,7 @@ function LUIE_CreateSettings()
                         name = "Show Duel Won - Alert",
                         tooltip = "Note that this only shows on a few events",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.DuelWonAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelWonAlert = value LUIE.ChatAnnouncements.RegisterDuelEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelWonAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.DuelWonAlert,
@@ -4644,7 +4755,7 @@ function LUIE_CreateSettings()
                         name = "Show Duel Start - CA",
                         tooltip = "Note that this only shows on a few events",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.DuelStartCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelStartCA = value LUIE.ChatAnnouncements.RegisterDuelEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelStartCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.DuelStartCA,
@@ -4655,7 +4766,7 @@ function LUIE_CreateSettings()
                         name = "Show Duel Start - CSA",
                         tooltip = "Note that this only shows on a few events",
                         getFunc = function() return LUIE.ChatAnnouncements.SV.DuelStartCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelStartCSA = value LUIE.ChatAnnouncements.RegisterDuelEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelStartCSA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.DuelStartCSA,
@@ -4999,15 +5110,26 @@ function LUIE_CreateSettings()
                 reference = "Chat_Announcements_Options_Misc_Announcements_Submenu",
                 controls = {
                     {
-                        -- Show Mail Events
+                        -- Mail (CA)
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL),
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL) .. " CA",
                         tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscMail end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscMail = value LUIE.ChatAnnouncements.RegisterMailEvents() end,
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.MailCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MailCA = value LUIE.ChatAnnouncements.RegisterMailEvents() end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.MiscMail,
+                        default = LUIE.ChatAnnouncements.D.MailCA,
+                    },
+                    {
+                        -- Mail (ALERT)
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL) .. " ALERT",
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.MailAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MailAlert = value LUIE.ChatAnnouncements.RegisterMailEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.MailAlert,
                     },
                     
                     {

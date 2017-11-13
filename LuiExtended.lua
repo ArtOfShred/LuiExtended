@@ -1105,13 +1105,16 @@ function LUIE.SlashGuildKick(option)
 end
 
 -- Hook for request friend so menu option also displays invite message
+-- Menu is true if this request is sent from the Player to Player interaction menu
 local zos_RequestFriend = RequestFriend
-RequestFriend = function(option1, option2) 
+RequestFriend = function(option1, option2, menu) 
     zos_RequestFriend(option1, option2)
-    local message = zo_strformat(GetString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG), option1)
-    LUIE.PrintToChat(message)
-    if LUIE.ChatAnnouncements.SV.FriendIgnoreAlert then
-        ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, message)
+    if not menu then
+        local message = zo_strformat(GetString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG), option1)
+        LUIE.PrintToChat(message)
+        if LUIE.ChatAnnouncements.SV.FriendIgnoreAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, message)
+        end
     end
 end
     
@@ -1246,7 +1249,10 @@ end
 function LUIE.SlashTrade(option)
     if option == "" then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME))
-        ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, (GetString(SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME)))
+        if LUIE.ChatAnnouncements.SV.TradeAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, (GetString(SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
     

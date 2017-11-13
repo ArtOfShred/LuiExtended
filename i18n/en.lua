@@ -69,7 +69,7 @@ ZO_CreateStringId("SI_LUIE_CA_CURRENCY_WRIT_VOUCHER",                   " <<1[Wr
 
 ZO_CreateStringId("SI_LUIE_CA_DEBUG_MSG_CURRENCY",                      "Currency Change Reason <<1>> Triggered - Please post on the LUI Extended comments section on ESOUI.com describing what caused this message. Thanks!")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_ACCEPTED",                    "Duel challenge accepted.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_CANCELED",                    "Duel challenge cancelled.")
+ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_CANCELED",                    "Duel challenge canceled.")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_DECLINED",                    "Duel challenge declined.")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON1",                 "|cFEFEFE<<1>>|r is not available to duel.")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON2",                 GetString(SI_DUELINVITEFAILREASON2))
@@ -242,19 +242,16 @@ ZO_CreateStringId("SI_LUIE_CA_LOCKPICK_SUCCESS",                        "Lockpic
 
 ZO_CreateStringId("SI_LUIE_CA_LVL_ANNOUNCE_CP",                         "Champion Level Achieved!")
 ZO_CreateStringId("SI_LUIE_CA_LVL_ANNOUNCE_XP",                         "You have reached")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_PAYMENT_MSG",                    "COD Payment") -- PREFIX MESSAGE
-ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_PAYMENT_SENT",                   "COD payment sent!")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_PAYMENT_SENT_VAR",               "COD payment of <<1>> gold sent!")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_SENT",                           "COD sent with <<1>> attachments!")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_COD_SENT_VAR",                       "COD sent for <<1>> gold with <<2>> attachment<<3>>!")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_SUCCESS",                       "Mail sent!")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_ATTACHMENT",                    "Mail sent with <<1>> attachment<<2>>")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_GOLD_MSG",                      "Mail sent with gold!")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_VAR_GOLD_MSG",                  "Mail sent with <<1>> gold!")
+
 ZO_CreateStringId("SI_LUIE_CA_MAIL_DELETED_MSG",                        "Mail deleted!")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_ATTACHMENT",                "Received mail with <<1>> attachment<<2>>")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_GOLD_MSG",                  "Received mail with gold.")
-ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_VAR_GOLD_MSG",              "Received mail with <<1>> gold.")
+
+ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED",                           "Mail received.")
+ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_COD",                       "COD payment sent!")
+
+ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT",                               "Mail sent!")
+ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_COD",                           "COD sent!")
+
+
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENDMAILRESULT2",                    "Unknown player.") -- Fixing missing periods on default strings
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENDMAILRESULT3",                    "Recipient's Inbox is full.") -- Fixing missing periods on default strings
 
@@ -272,6 +269,10 @@ ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_RECEIVE",                "You rec
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_SPEND",                  "You spend %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN",                "You receive %s from %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TRADEOUT",               "You trade %s to %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_MAILIN",                 "You recieve mail with %s from %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_MAILOUT",                "You mail %s to %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_MAILCOD",                "You send a COD payment of %s to %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_POSTAGE",                "You pay %s in postage.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSIT",                "You deposit %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAW",               "You withdraw %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_CONFISCATE",             "A guard confiscates %s.")
@@ -286,8 +287,10 @@ ZO_CreateStringId("SI_LUIE_CA_CURRENCY_NAME_HERALDRY",                  "[Guild 
 
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_LOOT",                       "You loot %s.")
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_RECEIVE",                    "You receive %s.")
-ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_TRADEIN",                    "You trade %s to %s.")
-ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_TRADEOUT",                   "You receive %s from %s")
+ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_TRADEIN",                    "You receive %s from %s")
+ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_TRADEOUT",                   "You trade %s to %s")
+ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_MAILIN",                     "You recieve mail with %s from %s.")
+ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_MAILOUT",                    "You mail %s to %s.")
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_DEPOSIT",                    "You deposit %s in your bank.")
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_WITHDRAW",                   "You withdraw %s from your bank.")
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_SELL",                       "You sell %s.")
@@ -373,8 +376,34 @@ ZO_CreateStringId("SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON",                  "Started
 ZO_CreateStringId("SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON",                "Completed: <<1>> <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_QUEST_LOG_FULL",                          "Your quest log is full.")
 
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT1",                      "|cFEFEFE<<1>>|r is ignoring you. You cannot initiate a trade.")
-ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_ACCEPTED",                   "Trade invite accepted.")
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT0",                     GetString(SI_TRADEACTIONRESULT0))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT1",                     "|cFEFEFE<<1>>|r is ignoring you. You cannot initiate a trade.")
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT2",                     GetString(SI_TRADEACTIONRESULT2))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT3",                     GetString(SI_TRADEACTIONRESULT3))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT4",                     GetString(SI_TRADEACTIONRESULT4))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT5",                     GetString(SI_TRADEACTIONRESULT5))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT6",                     GetString(SI_TRADEACTIONRESULT6))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT8",                     GetString(SI_TRADEACTIONRESULT8))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT9",                     GetString(SI_TRADEACTIONRESULT9))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT12",                    GetString(SI_TRADEACTIONRESULT12))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT13",                    GetString(SI_TRADEACTIONRESULT13))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT14",                    GetString(SI_TRADEACTIONRESULT14))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT41",                    GetString(SI_TRADEACTIONRESULT41))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT42",                    GetString(SI_TRADEACTIONRESULT42))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT43",                    GetString(SI_TRADEACTIONRESULT43))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT44",                    GetString(SI_TRADEACTIONRESULT44))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT45",                    GetString(SI_TRADEACTIONRESULT45))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT46",                    GetString(SI_TRADEACTIONRESULT46))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT62",                    GetString(SI_TRADEACTIONRESULT62))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT63",                    GetString(SI_TRADEACTIONRESULT63))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT64",                    GetString(SI_TRADEACTIONRESULT64))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT65",                    "You are already trading|cFEFEFE<<1>>|r.")
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT66",                    GetString(SI_TRADEACTIONRESULT66))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT80",                    GetString(SI_TRADEACTIONRESULT80))
+
+ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_ACCEPTED",                   "Trade invitation accepted.")
+ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_DECLINED",                   "Trade invitation declined.")
+ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_CANCELED",                   "Trade invitation canceled.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_CONFIRM",                    "You have invited |cFEFEFE<<1>>|r to trade.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MESSAGE",                    "|cFEFEFE<<1>>|r has invited you to trade.")
 
@@ -806,7 +835,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWSOCIAL_TP",                  "Prints 
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWSTUCK",                      "Show /Stuck Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWSTUCK_TP",                   "Prints a message in chat for results of the /stuck function.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWTRADE",                      "Show Trade Event Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWTRADE_TP",                   "Prints a notification to chat for trade invitations, cancellation, and success.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWTRADE_TP",                   "Prints a notification to chat for trade invitations, cancelation, and success.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP",                "Determines the method used to display player names in Chat Announcements where applicable.\nDefault: Character Name")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_HEADER",                        "Quest/POI Announcements")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POIDISCOVERY",                  "Show POI Discovery")
