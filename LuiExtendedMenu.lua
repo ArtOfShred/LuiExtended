@@ -2012,6 +2012,7 @@ function LUIE_CreateSettings()
                             )) end,
                         default = LUIE.ChatAnnouncements.D.CurrencyMessageWithdrew,
                     },
+                    
                     {
                         -- Confiscate Message
                         type = "editbox",
@@ -2030,6 +2031,27 @@ function LUIE_CreateSettings()
                             )) end,
                         default = LUIE.ChatAnnouncements.D.CurrencyMessageConfiscate,
                     },
+                    
+                    
+                    {
+                        -- Steal
+                        type = "editbox",
+                        name = "Steal Message",
+                        tooltip = "ugh",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageSteal end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageSteal = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
+                            (
+                                LUIE.ChatAnnouncements.SV.CurrencyGoldChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyAPShowChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyTVChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyWVChange or
+                                LUIE.SV.ChatAnnouncements_Enable
+                            )) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageSteal,
+                    },
+                    
                     {
                         -- Pickpocket Message
                         type = "editbox",
@@ -2521,6 +2543,31 @@ function LUIE_CreateSettings()
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.LootMessageWithdraw,
                     },
+                    
+                    {
+                        -- Loot Message (Steal)
+                        type = "editbox",
+                        name = "Loot Sell",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageSteal end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageSteal = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageSteal,
+                    },
+                    
+                    {
+                        -- Loot Message (Fence)
+                        type = "editbox",
+                        name = "Loot Sell",
+                        tooltip = "TODO",
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageFence end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageFence = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageFence,
+                    },
+                    
                     {
                         -- Loot Message (Sell)
                         type = "editbox",

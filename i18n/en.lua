@@ -251,9 +251,11 @@ ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_COD",                       "COD pay
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT",                               "Mail sent!")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_COD",                           "COD sent!")
 
+ZO_CreateStringId("SI_LUIE_CA_MAIL_ERROR_NO_COD_VALUE",                 "You must set the Cash on Delivery amount.")
 
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENDMAILRESULT2",                    "Unknown player.") -- Fixing missing periods on default strings
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENDMAILRESULT3",                    "Recipient's Inbox is full.") -- Fixing missing periods on default strings
+
 
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT0",                "|cFEFEFE<<1>>|r is too busy to pledge with.")
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT1",                "You can't join in the Ritual of Mara with a player who is dead.")
@@ -267,9 +269,10 @@ ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT7",                "You are
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_LOOT",                   "You loot %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_RECEIVE",                "You receive %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_SPEND",                  "You spend %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_STEAL",                  "You steal %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN",                "You receive %s from %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TRADEOUT",               "You trade %s to %s.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_MAILIN",                 "You recieve mail with %s from %s.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_MAILIN",                 "You receive mail with %s from %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_MAILOUT",                "You mail %s to %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_MAILCOD",                "You send a COD payment of %s to %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_POSTAGE",                "You pay %s in postage.")
@@ -289,10 +292,12 @@ ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_LOOT",                       "You loo
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_RECEIVE",                    "You receive %s.")
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_TRADEIN",                    "You receive %s from %s")
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_TRADEOUT",                   "You trade %s to %s")
-ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_MAILIN",                     "You recieve mail with %s from %s.")
+ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_MAILIN",                     "You receive mail with %s from %s.")
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_MAILOUT",                    "You mail %s to %s.")
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_DEPOSIT",                    "You deposit %s in your bank.")
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_WITHDRAW",                   "You withdraw %s from your bank.")
+ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_STEAL",                      "You steal %s.")
+ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_FENCE",                      "You fence %s for %s.")
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_SELL",                       "You sell %s.")
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_BUY",                        "You purchase %s.")
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_BUYBACK",                    "You buyback %s.")
@@ -740,7 +745,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWCONFISCATED_TP",             "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWCRAFT",                      "Show Craft")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_MATERIALS",            "Show Materials consumed when crafting")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_MATERIALS_TP",         "Toggles whether or not the materials used by a crafting pattern will report to chat.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_TP",                   "Display items recieved, lost, or upgraded from crafting.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_TP",                   "Display items received, lost, or upgraded from crafting.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWDESTROYED",                  "Show Destroyed Items")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWDESTROYED_TP",               "Will show when an item is destroyed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWDISGUISE",                   "Show Disguise equip/unequip message")
