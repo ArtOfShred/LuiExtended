@@ -1249,7 +1249,7 @@ end
 function LUIE.SlashTrade(option)
     if option == "" then
         LUIE.PrintToChat(GetString(SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME))
-        if LUIE.ChatAnnouncements.SV.TradeAlert then
+        if LUIE.ChatAnnouncements.SV.NotificationTradeAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, (GetString(SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
