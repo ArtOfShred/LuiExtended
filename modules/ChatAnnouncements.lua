@@ -1905,7 +1905,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         messageChange = CA.SV.CurrencyMessageReceive
     -- Sell to Fence (63)
     elseif reason == 63 then
-        messageChange = CA.SV.CurrencyMessageFence
+        messageChange = CA.SV.CurrencyMessageReceive
         if CA.SV.LootVendorCurrency then
             g_savedPurchase.changeType=changeType
             g_savedPurchase.formattedValue=formattedValue
