@@ -3291,7 +3291,8 @@ function LUIE_CreateSettings()
                         width = "full",
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.ExperienceThrottle,
-                    },                    
+                    },   
+                    
                     {
                     type = "header",
                     name = GetString(SI_LUIE_LAM_CA_EXP_HEADER_SKILL_POINTS),
@@ -3735,11 +3736,18 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_HEADER),
                 reference = "Chat_Announcements_Options_Collectible_Announcements_Submenu",
                 controls = {
+                
+                    {
+                    type = "header",
+                    name = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_COL_HEADER),
+                    width = "full,"
+                    },
+                
                     {
                         -- Show Collectibles Unlocked CA
                         type = "checkbox",
-                        name = "Show Collectible Unlocked CA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.CollectibleCA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CollectibleCA = value end,
                         width = "full",
@@ -3749,8 +3757,8 @@ function LUIE_CreateSettings()
                     {
                         -- Show Collectibles Unlocked CSA
                         type = "checkbox",
-                        name = "Show Collectible Unlocked CSA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.CollectibleCSA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CollectibleCSA = value end,
                         width = "full",
@@ -3760,37 +3768,15 @@ function LUIE_CreateSettings()
                     {
                         -- Show Collectibles Unlocked Alert
                         type = "checkbox",
-                        name = "Show Collectible Unlocked Alert",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.CollectibleAlert end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CollectibleAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.CollectibleAlert,
                     },
-                    {
-                        -- Collectible Bracket Options
-                        type = "dropdown",
-                        name = "Col Bracket",
-                        choices = bracketOptions5,
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET_TP),
-                        getFunc = function() return bracketOptions5[LUIE.ChatAnnouncements.SV.CollectibleBracket] end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CollectibleBracket = bracketOptions5Keys[value] end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.CollectibleBracket
-                    },
-                    {
-                        -- Collectible Category
-                        type = "checkbox",
-                        name = "Show Collectible Category",
-                        tooltip = "TODO",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.CollectibleCategory end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CollectibleCategory = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.CollectibleCategory,
-                    },
+                    
                     {
                         -- Collectible Icon
                         type = "checkbox",
@@ -3799,20 +3785,10 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.CollectibleIcon end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.CollectibleIcon = value end,
                         width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CollectibleCA or LUIE.ChatAnnouncements.SV.CollectibleCSA or LUIE.ChatAnnouncements.SV.CollectibleAlert and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.CollectibleIcon,
                     },
-                    {
-                        -- Collectible Message Prefix
-                        type = "editbox",
-                        name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.CollectiblePrefix end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CollectiblePrefix = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.CollectiblePrefix,
-                    },
+                    
                     {
                         -- Collectible Color 1
                         type = "colorpicker",
@@ -3820,7 +3796,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.CollectibleColor1) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.CollectibleColor1 = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CollectibleCA or LUIE.ChatAnnouncements.SV.CollectibleCSA or LUIE.ChatAnnouncements.SV.CollectibleAlert and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = {r=LUIE.ChatAnnouncements.D.CollectibleColor1[1], g=LUIE.ChatAnnouncements.D.CollectibleColor1[2], b=LUIE.ChatAnnouncements.D.CollectibleColor1[3]}
                     },
                     {
@@ -3830,152 +3806,134 @@ function LUIE_CreateSettings()
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.CollectibleColor2) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.CollectibleColor2 = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CollectibleCA or LUIE.ChatAnnouncements.SV.CollectibleCSA or LUIE.ChatAnnouncements.SV.CollectibleAlert and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = {r=LUIE.ChatAnnouncements.D.CollectibleColor2[1], g=LUIE.ChatAnnouncements.D.CollectibleColor2[2], b=LUIE.ChatAnnouncements.D.CollectibleColor2[3]}
                     },
-                    
                     {
-                    type = "divider",
-                    width = "full",
-                    alpha = 1,
+                        -- Collectible Message Prefix
+                        type = "editbox",
+                        name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CollectiblePrefix end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CollectiblePrefix = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CollectibleCA or LUIE.ChatAnnouncements.SV.CollectibleCSA or LUIE.ChatAnnouncements.SV.CollectibleAlert and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.CollectiblePrefix,
+                    },
+                    {
+                        -- Collectible Bracket Options
+                        type = "dropdown",
+                        name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_BRACKET)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_BRACKET_TP),
+                        choices = bracketOptions5,
+                        getFunc = function() return bracketOptions5[LUIE.ChatAnnouncements.SV.CollectibleBracket] end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CollectibleBracket = bracketOptions5Keys[value] end,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CollectibleCA or LUIE.ChatAnnouncements.SV.CollectibleCSA or LUIE.ChatAnnouncements.SV.CollectibleAlert and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.CollectibleBracket
+                    },
+                    {
+                        -- Collectible Category
+                        type = "checkbox",
+                        name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_COLLECTIBLE_CATEGORY)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_CATEGORY_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CollectibleCategory end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CollectibleCategory = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.CollectibleCA or LUIE.ChatAnnouncements.SV.CollectibleCSA or LUIE.ChatAnnouncements.SV.CollectibleAlert and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.CollectibleCategory,
                     },
                     
                     {
-                        -- Show Lorebooks Unlocked
+                    type = "header",
+                    name = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_LORE_HEADER),
+                    width = "full,"
+                    },
+                    
+                    {
+                        -- Show Lorebooks (CA)
                         type = "checkbox",
-                        name = "Show Lorebooks CA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCA = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.LorebookCA,
                     },
                     {
-                        -- Show Lorebooks Unlocked
+                        -- Show Lorebooks (CSA)
                         type = "checkbox",
-                        name = "Show Lorebooks CSA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCSA = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCSA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.LorebookCSA,
                     },
                     {
-                        -- Show Lorebooks Unlocked
+                        -- Show Lorebooks (Alert)
                         type = "checkbox",
-                        name = "Show Lorebooks Alert",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookAlert = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.LorebookAlert,
                     },
                     
                     {
-                        -- Show Lorebook Collection Complete
+                        -- Show Lorebook Collection Complete (CA)
                         type = "checkbox",
-                        name = "Show Collection Complete CA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookCollectionCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCollectionCA = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCollectionCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.LorebookCollectionCA,
                     },
                     {
-                        -- Show Lorebook Collection Complete
+                        -- Show Lorebook Collection Complete (CSA)
                         type = "checkbox",
-                        name = "Show Collection Complete CSA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookCollectionCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCollectionCSA = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCollectionCSA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.LorebookCollectionCSA,
                     },
                     {
-                        -- Show Lorebook Collection Complete
+                        -- Show Lorebook Collection Complete (Alert)
                         type = "checkbox",
-                        name = "Show Collection Complete Alert",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_LOREBOOK_COLLECTION_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookCollectionAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCollectionAlert = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCollectionAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.LorebookCollectionAlert,
                     },
                     
-                    
-                    {
-                        -- Lorebooks Bracket Options
-                        type = "dropdown",
-                        name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET)),
-                        choices = bracketOptions5,
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET_TP),
-                        getFunc = function() return bracketOptions5[LUIE.ChatAnnouncements.SV.LorebookBracket] end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookBracket = bracketOptions5Keys[value] end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.LorebookBracket
-                    },
-                    {
-                        -- Lorebooks Prefix 1
-                        type = "editbox",
-                        name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX1)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX1_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookPrefix1 end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookPrefix1 = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.LorebookPrefix1,
-                    },
-                    {
-                        -- Lorebooks Prefix 2
-                        type = "editbox",
-                        name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX2)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX2_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookPrefix2 end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookPrefix2 = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.LorebookPrefix2,
-                    },
-                    {
-                        -- Lorebooks Collection Prefix
-                        type = "editbox",
-                        name = "Lorebook Collection Prefix",
-                        tooltip = "TODO",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookCollectionPrefix end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCollectionPrefix = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.LorebookCollectionPrefix,
-                    },
-                    --[[
-                    {
-                        -- Lorebooks Prefix 3
-                        type = "editbox",
-                        name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX3)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX3_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookPrefix3 end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookPrefix3 = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.LorebookPrefix3,
-                    },
-                    ]]--
                     {
                         -- Lorebooks Icon
                         type = "checkbox",
                         name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_ICON)),
                         tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_ICON_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookIcon end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookIcon = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookIcon = value end,
                         width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        disabled = function() return not (
+                        LUIE.ChatAnnouncements.SV.LorebookCA or
+                        LUIE.ChatAnnouncements.SV.LorebookCSA or
+                        LUIE.ChatAnnouncements.SV.LorebookAlert or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionCA or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionCSA or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionAlert and
+                        LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.LorebookIcon,
                     },
                     {
@@ -3985,7 +3943,14 @@ function LUIE_CreateSettings()
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.LorebookColor1) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.LorebookColor1 = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        disabled = function() return not (
+                        LUIE.ChatAnnouncements.SV.LorebookCA or
+                        LUIE.ChatAnnouncements.SV.LorebookCSA or
+                        LUIE.ChatAnnouncements.SV.LorebookAlert or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionCA or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionCSA or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionAlert and
+                        LUIE.SV.ChatAnnouncements_Enable) end,
                         default = {r=LUIE.ChatAnnouncements.D.LorebookColor1[1], g=LUIE.ChatAnnouncements.D.LorebookColor1[2], b=LUIE.ChatAnnouncements.D.LorebookColor1[3]}
                     },
                     {
@@ -3995,8 +3960,106 @@ function LUIE_CreateSettings()
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.LorebookColor2) end,
                         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.LorebookColor2 = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        disabled = function() return not (
+                        LUIE.ChatAnnouncements.SV.LorebookCA or
+                        LUIE.ChatAnnouncements.SV.LorebookCSA or
+                        LUIE.ChatAnnouncements.SV.LorebookAlert or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionCA or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionCSA or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionAlert and
+                        LUIE.SV.ChatAnnouncements_Enable) end,
                         default = {r=LUIE.ChatAnnouncements.D.LorebookColor2[1], g=LUIE.ChatAnnouncements.D.LorebookColor2[2], b=LUIE.ChatAnnouncements.D.LorebookColor2[3]}
+                    },
+                    {
+                        -- Lorebooks Prefix 1
+                        type = "editbox",
+                        name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX1)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX1_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookPrefix1 end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookPrefix1 = value end,
+                        width = "full",
+                        disabled = function() return not (
+                        LUIE.ChatAnnouncements.SV.LorebookCA or
+                        LUIE.ChatAnnouncements.SV.LorebookCSA or
+                        LUIE.ChatAnnouncements.SV.LorebookAlert or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionCA or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionCSA or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionAlert and
+                        LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.LorebookPrefix1,
+                    },
+                    {
+                        -- Lorebooks Prefix 2
+                        type = "editbox",
+                        name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX2)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX2_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookPrefix2 end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookPrefix2 = value end,
+                        width = "full",
+                        disabled = function() return not (
+                        LUIE.ChatAnnouncements.SV.LorebookCA or
+                        LUIE.ChatAnnouncements.SV.LorebookCSA or
+                        LUIE.ChatAnnouncements.SV.LorebookAlert or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionCA or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionCSA or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionAlert and
+                        LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.LorebookPrefix2,
+                    },
+                    {
+                        -- Lorebooks Collection Prefix
+                        type = "editbox",
+                        name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX_COLLECTION)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_PREFIX_COLLECTION_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookCollectionPrefix end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCollectionPrefix = value end,
+                        width = "full",
+                        disabled = function() return not (
+                        LUIE.ChatAnnouncements.SV.LorebookCA or
+                        LUIE.ChatAnnouncements.SV.LorebookCSA or
+                        LUIE.ChatAnnouncements.SV.LorebookAlert or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionCA or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionCSA or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionAlert and
+                        LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.LorebookCollectionPrefix,
+                    },
+                    {
+                        -- Lorebooks Bracket Options
+                        type = "dropdown",
+                        name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET)),
+                        choices = bracketOptions5,
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET_TP),
+                        getFunc = function() return bracketOptions5[LUIE.ChatAnnouncements.SV.LorebookBracket] end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookBracket = bracketOptions5Keys[value] end,
+                        width = "full",
+                        disabled = function() return not (
+                        LUIE.ChatAnnouncements.SV.LorebookCA or
+                        LUIE.ChatAnnouncements.SV.LorebookCSA or
+                        LUIE.ChatAnnouncements.SV.LorebookAlert or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionCA or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionCSA or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionAlert and
+                        LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.LorebookBracket
+                    },
+                    {
+                        -- Lorebooks Category
+                        type = "checkbox",
+                        name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookCategory end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCategory = value end,
+                        width = "full",
+                        disabled = function() return not (
+                        LUIE.ChatAnnouncements.SV.LorebookCA or
+                        LUIE.ChatAnnouncements.SV.LorebookCSA or
+                        LUIE.ChatAnnouncements.SV.LorebookAlert or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionCA or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionCSA or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionAlert and
+                        LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.LorebookCategory,
                     },
                     {
                         -- Show hidden books
@@ -4004,47 +4067,18 @@ function LUIE_CreateSettings()
                         name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE)),
                         tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookShowHidden end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookShowHidden = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookShowHidden = value end,
                         width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        disabled = function() return not (
+                        LUIE.ChatAnnouncements.SV.LorebookCA or
+                        LUIE.ChatAnnouncements.SV.LorebookCSA or
+                        LUIE.ChatAnnouncements.SV.LorebookAlert or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionCA or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionCSA or
+                        LUIE.ChatAnnouncements.SV.LorebookCollectionAlert and
+                        LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.LorebookShowHidden,
                     },
-                    {
-                        -- Lorebooks Category
-                        type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookCategory end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookCategory = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.LorebookCategory,
-                    },
-                    
-                    --[[
-                    {
-                        -- Lorebooks Category Completion
-                        type = "checkbox",
-                        name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_NUMBER)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_NUMBER_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookNumber end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookNumber = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.LorebookNumber,
-                    },
-                    {
-                        -- Lorebooks Category Completion Color
-                        type = "checkbox",
-                        name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_COLOR)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_COLOR_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.LorebookNumberColor end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LorebookNumberColor = value LUIE.ChatAnnouncements.RegisterCollectibleEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.LorebookNumberColor,
-                    },
-                    ]]--
                     
                 },
             }
@@ -4057,8 +4091,8 @@ function LUIE_CreateSettings()
                     {
                         -- SHOW ACHIEVEMENT UPDATE CA
                         type = "checkbox",
-                        name = "SHOW ACHIEVEMENT UPDATE CA",
-                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_ENABLEPROGRESS_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_UPDATE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementUpdateCA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementUpdateCA = value LUIE.ChatAnnouncements.RegisterAchievementsEvent() end,
                         width = "full",
@@ -4068,8 +4102,8 @@ function LUIE_CreateSettings()
                     {
                         -- SHOW ACHIEVEMENT UPDATE ALERT
                         type = "checkbox",
-                        name = "SHOW ACHIEVEMENT UPDATE ALERT",
-                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_ENABLEPROGRESS_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_UPDATE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementUpdateAlert end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementUpdateAlert = value LUIE.ChatAnnouncements.RegisterAchievementsEvent() end,
                         width = "full",
@@ -4077,15 +4111,15 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.AchievementUpdateAlert,
                     },
                     {
-                        -- Context Name for Achievement Progress
-                        type = "editbox",
-                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ACHIEVE_PROGMSG)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_PROGMSG_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementProgressMsg end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementProgressMsg = value end,
+                        -- Show Detailed Achievement Info
+                        type = "checkbox",
+                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementDetails end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementDetails = value end,
                         width = "full",
-                        default = LUIE.ChatAnnouncements.D.AchievementProgressMsg,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.AchievementDetails,
                     },
                     {
                         -- Achievements Step Size
@@ -4096,15 +4130,15 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementStep end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementStep = value end,
                         width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.AchievementStep,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
                     },
                     
                     {
                         -- Enable Achievement Complete CA
                         type = "checkbox",
-                        name = "ACHIEVEMENT COMPLETE CA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCompleteCA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCompleteCA = value LUIE.ChatAnnouncements.RegisterAchievementsEvent() end,
                         width = "full",
@@ -4114,8 +4148,8 @@ function LUIE_CreateSettings()
                     {
                         -- Enable Achievement Complete CSA
                         type = "checkbox",
-                        name = "ACHIEVEMENT COMPLETE CSA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCompleteCSA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCompleteCSA = value LUIE.ChatAnnouncements.RegisterAchievementsEvent() end,
                         width = "full",
@@ -4125,25 +4159,13 @@ function LUIE_CreateSettings()
                     {
                         -- Enable Achievement Complete Alert
                         type = "checkbox",
-                        name = "ACHIEVEMENT COMPLETE Alert",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCompleteAlert end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCompleteAlert = value LUIE.ChatAnnouncements.RegisterAchievementsEvent() end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.AchievementCompleteAlert,
-                    },
-                    
-                    {
-                        -- Context Name for Achievement Completion
-                        type = "editbox",
-                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETEMSG)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETEMSG_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCompleteMsg end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCompleteMsg = value end,
-                        width = "full",
-                        default = LUIE.ChatAnnouncements.D.AchievementCompleteMsg,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert) ) end,
                     },
                     {
                         -- Show 100% Completion on complete event
@@ -4153,37 +4175,9 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCompPercentage end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCompPercentage = value end,
                         width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.AchievementCompPercentage,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert) ) end,
                     },
-                    {
-                    type = "divider",
-                    width = "full",
-                    alpha = 1,
-                    },
-                    {
-                        -- Achievement Message Color
-                        type = "colorpicker",
-                        name = GetString(SI_LUIE_LAM_CA_ACHIEVE_COLOR),
-                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_COLOR_TP),
-                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.AchievementColor1) end,
-                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.AchievementColor1 = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
-                        width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
-                        default = {r=LUIE.ChatAnnouncements.D.AchievementColor1[1], g=LUIE.ChatAnnouncements.D.AchievementColor1[2], b=LUIE.ChatAnnouncements.D.AchievementColor1[3]}
-                    },
-                    {
-                        -- Achievement Message Color
-                        type = "colorpicker",
-                        name = GetString(SI_LUIE_LAM_CA_ACHIEVE_COLOR),
-                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_COLOR_TP),
-                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.AchievementColor2) end,
-                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.AchievementColor2 = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
-                        width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
-                        default = {r=LUIE.ChatAnnouncements.D.AchievementColor2[1], g=LUIE.ChatAnnouncements.D.AchievementColor2[2], b=LUIE.ChatAnnouncements.D.AchievementColor2[3]}
-                    },
-                    
                     {
                         -- Show Achievement Icon
                         type = "checkbox",
@@ -4192,8 +4186,50 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementIcon end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementIcon = value end,
                         width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.AchievementIcon,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
+                    },
+                    {
+                        -- Achievement Message Color
+                        type = "colorpicker",
+                        name = GetString(SI_LUIE_LAM_CA_ACHIEVE_COLOR1),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.AchievementColor1) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.AchievementColor1 = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = {r=LUIE.ChatAnnouncements.D.AchievementColor1[1], g=LUIE.ChatAnnouncements.D.AchievementColor1[2], b=LUIE.ChatAnnouncements.D.AchievementColor1[3]}
+                    },
+                    {
+                        -- Achievement Message Color
+                        type = "colorpicker",
+                        name = GetString(SI_LUIE_LAM_CA_ACHIEVE_COLOR2),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.AchievementColor2) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.AchievementColor2 = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = {r=LUIE.ChatAnnouncements.D.AchievementColor2[1], g=LUIE.ChatAnnouncements.D.AchievementColor2[2], b=LUIE.ChatAnnouncements.D.AchievementColor2[3]}
+                    },
+                    {
+                        -- Context Name for Achievement Progress
+                        type = "editbox",
+                        name = GetString(SI_LUIE_LAM_CA_ACHIEVE_PROGMSG),
+                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_PROGMSG_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementProgressMsg end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementProgressMsg = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.AchievementProgressMsg,
+                    },
+                    {
+                        -- Context Name for Achievement Completion
+                        type = "editbox",
+                        name = GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETEMSG),
+                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_COMPLETEMSG_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCompleteMsg end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCompleteMsg = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.AchievementCompleteMsg,
                     },
                     {
                         -- Show Achievement Category
@@ -4203,8 +4239,8 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory = value end,
                         width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.AchievementCategory,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
                     },
                     {
                         -- Show Achievement Subcategory
@@ -4214,45 +4250,33 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementSubcategory end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementSubcategory = value end,
                         width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.AchievementSubcategory,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.AchievementCategory and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
+                    },
+                    
+                    {
+                        -- Prefix Bracket
+                        type = "dropdown",
+                        name = GetString(SI_LUIE_LAM_CA_ACHIEVE_BRACKET),
+                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_BRACKET_TP),
+                        choices = bracketOptions5,
+                        getFunc = function() return bracketOptions5[LUIE.ChatAnnouncements.SV.AchievementBracketOptions] end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementBracketOptions = bracketOptions5Keys[value] end,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.AchievementBracketOptions
                     },
                     {
                         -- Category & Subcategory Bracket Options
                         type = "dropdown",
-                        name = strformat("\t\t\t\t\t<<1>>",GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORYBRACKET)),
-                        choices = bracketOptions4,
+                        name = GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORYBRACKET),
                         tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORYBRACKET_TP),
+                        choices = bracketOptions4,
                         getFunc = function() return bracketOptions4[LUIE.ChatAnnouncements.SV.AchievementCatBracketOptions] end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCatBracketOptions = bracketOptions4Keys[value] end,
                         width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.AchievementCategory and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AchievementCategory or LUIE.ChatAnnouncements.SV.AchievementSubcategory) or not (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.AchievementCatBracketOptions
-                    },
-                    
-                    {
-                        -- Bracket Options
-                        type = "dropdown",
-                        name = "BRACKET OPTIONS",
-                        choices = bracketOptions5,
-                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORYBRACKET_TP),
-                        getFunc = function() return bracketOptions5[LUIE.ChatAnnouncements.SV.AchievementBracketOptions] end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementBracketOptions = bracketOptions5Keys[value] end,
-                        width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
-                        default = LUIE.ChatAnnouncements.D.AchievementBracketOptions
-                    },
-                   
-                    {
-                        -- Show Detailed Achievement Info
-                        type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO),
-                        tooltip = GetString(SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementDetails end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementDetails = value end,
-                        width = "full",
-                        default = LUIE.ChatAnnouncements.D.AchievementDetails,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
                     },
                     {
                         -- Color Achievement Progress
@@ -4262,14 +4286,16 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementColorProgress end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementColorProgress = value end,
                         width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.AchievementColorProgress,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.AchievementUpdateAlert) ) end,
                     },
+                   
                     {
-                    type = "divider",
-                    width = "full",
-                    alpha = 1,
+                    type = "header",
+                    name = GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_HEADER),
+                    width = "half"
                     },
+                    
                     {
                         -- Enables achievements tracking in %s category
                         type = "checkbox",
@@ -4391,17 +4417,7 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.AchievementCategory11,
                         disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
                     },
-                    --[[{
-                        -- Enables achievements tracking in %s category
-                        type = "checkbox",
-                        name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY), GetAchievementCategoryInfo(12)),
-                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP), GetAchievementCategoryInfo(12)),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.AchievementCategory12 end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory12 = value end,
-                        width = "full",
-                        default = LUIE.ChatAnnouncements.D.AchievementCategory12,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
-                    },]]
+                    
                 },
             }
                 -- CA Quest Announcements Submenu

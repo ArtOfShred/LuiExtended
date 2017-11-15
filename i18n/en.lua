@@ -552,79 +552,6 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP",            "Format 
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_UNLOCKWINDOW",                      "Unlock Buffs window")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_UNLOCKWINDOW_TP",                   "Unlock for dragging window with buffs icons. This will only unlock areas unaffected by previous option (if it is enabled).")
 
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO",                  "Show Detailed Achievement Info")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO_TP",               "Displays each subcategory required for achievement completion and progress in each subcategory.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_ENABLEPROGRESS",              "Enable Achievements Tracking (Progress)")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_ENABLEPROGRESS_TP",           "Displays a customizable message when progress is made toward an achievement.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_ENABLECOMPLETE",              "Enable Achievements Tracking (Completion)")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_ENABLECOMPLETE_TP",           "Displays a customizable message when an achievement is completed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_PROGMSG",                     "Prefix for Achievement Progress")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_PROGMSG_TP",                  "Prefix for achievement progress messages.\nDefault: \"[Achievement Updated]\"")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COMPLETEMSG",                 "Prefix for Achievement Completion")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COMPLETEMSG_TP",              "Prefix for achievement completion messages.\nDefault: \"[Achievement Completed]\"")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COLOR",                       "Achievement Message Color")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COLOR_TP",                    "Sets the display color for achievement messages.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COLORPROGRESS",               "Color Achievement Progress")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COLORPROGRESS_TP",            "Enables color change for achievement progress based off completion.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_ICON",                        "Show Achievement Icon")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_ICON_TP",                     "Display the relevant icon for an achievement on messages.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COMPLETEPERCENT",             "Display % on Achievement Completion")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COMPLETEPERCENT_TP",          "Adds a (100%) indicator to achievement completion messages to match progress syntax.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_SHOWCATEGORY",                "Show Achievement Category")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_SHOWCATEGORY_TP",             "Display the primary category of an achievement.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_SHOWSUBCATEGORY",             "Show Achievement Subcategory")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_SHOWSUBCATEGORY_TP",          "Display the subcategory of an achievement.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_CATEGORYBRACKET",             "Category & Subcategory Bracket Options")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_CATEGORYBRACKET_TP",          "Choose the type of brackets for the achievement category display.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_CATEGORY",                    "Track \'<<1>>\' Achievements")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP",                 "Enables achievements tracking in <<1>> category.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_HEADER",                      "Achievements Announcements")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_STEPSIZE",                    "Progress Step Size, %")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_STEPSIZE_TP",                 "Display achievement update information every #% to completion. Setting this value to 0 will print achievement information on every update event.")
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_HEADER",                  "Collectible/Lorebooks Announcements")
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE",                  "Show Collectibles Unlocked")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE_TP",               "Display a message in chat when a collectible is added or unlocked.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX",           "Collectible Prefix Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX_TP",        "Enter the message that will display before the name of the collectible unlocked.\nDefault: \"Collection Updated:\"")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ICON",                    "Show Collectible Icon")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ICON_TP",                 "Display an icon for the relevant collectible unlocked.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_ONE",               "Collectible Message Color (Part 1)")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_TWO",               "Collectible Message Color (Part 2)")
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_ENABLE",                     "Show Lorebooks Discovered")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP",                  "Display a message in chat when a lorebook is discovered.")
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX1",                    "Lorebook Discovered Prefix Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX1_TP",                 "Choose the format for the prefix message displayed when a Lorebook is discovered.\nDefault: \"Lorebook Discovered:\"")
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX2",                    "Crafting Motif Prefix Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX2_TP",                 "Choose the format for the prefix message displayed when a Crafting Motif is discovered.\nDefault: \"Motif Learned:\"")
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX3",                    "Book Prefix Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX3_TP",                 "Choose the format for the prefix message displayed when a book is discovered.\nDefault: \"Book Discovered:\"")
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLOR1",                     "Message Pt1 Color")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLOR2",                     "Message Pt2 Color")
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE",                 "Show Books even without Eidetic Memory")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE_TP",              "Show standard books unlocked even without Eidetic Memory.")
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_ICON",                       "Show Lorebook Icon")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_ICON_TP",                    "Display an icon for the relevant lorebook unlocked.")
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_CATEGORY",                   "Show Collection Category")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_TP",                "Displays the relevant category of a lorebook collected.")
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET",           "Bracket Settings for Category Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET_TP",        "Allows you to customize the format of the Brackets present on Context Specific Category Messages.")
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_NUMBER",            "Display Completion Statistics")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_NUMBER_TP",         "Displays the x/x number of lorebooks collected in the relevant category")
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_COLOR",             "Color Completion by %")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_COLOR_TP",          "Colors the completion message based off the % of books collected in a category.")
 
 
 ZO_CreateStringId("SI_LUIE_LAM_CA_SHARED_CA",                           "a Chat Announcement")
@@ -901,8 +828,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_EXPERIENCE_LEVELUP_COLOR",            "Level U
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HEADER_RESPEC",                   "Respec Notifications")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_RESPEC",                          "Display Respec Notification - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_RESPEC_TP",                       "Display <<1>> when you redistribute Champion Points and when you relearn attributes, skill points, or morphs.")
-
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HEADER_EXPERIENCEGAIN",           "Experience Points")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWEXPGAIN",                     "Display Experience Gain")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWEXPGAIN_TP",                  "Print a message to chat when Experience Points are earned.")
@@ -934,7 +859,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_COLOR1",                   "Skyshar
 ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_COLOR2",                   "Skill Points Message Color")
 -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_PARTIALPREFIX",            "Skyshard Absorbed Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_PARTIALPREFIX_TP",         "When a Skyshard is absorbed this context message will be displayed.\nDefault: Skyshard Absorbed")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_PARTIALPREFIX_TP",         "When a Skyshard is absorbed this prefix message will be displayed.\nDefault: Skyshard Absorbed")
 ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_PARTIALBRACKET",           "Skyshard Separator Bracket")
 ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_PARTIALBRACKET_TP",        "When a Skyshard is absorbed this bracket will encompass the prefix message when skill points (or partial skill points) are earned.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_UPDATEDPARTIAL",           "Display Partial Skill Points")
@@ -950,7 +875,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_SKILL_LINE_ICON",                     "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_SKILL_LINE_ICON_TP",                  "Display the relevant icon for unlocked Skill Lines.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_SKILL_LINE_COLOR",                    "Skill/Ability Progression Message Color")
 -- TODO: Add Tooltip with finalized color value
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HEADER_GUILDREP",                 "Guild Reputation")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_ICON",                       "Display Guild Icon")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_ICON_TP",                    "Display the relevant guild icon when Guild Reputation is earned.")
@@ -960,7 +884,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_MESSAGEFORMAT",              "Guild R
 ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_MESSAGEFORMAT_TP",           "Message format for Guild Reputation earned.\nDefault: You earn %s")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_MESSAGENAME",                "Guild Reputation Points Name")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_MESSAGENAME_TP",             "Name to use for Guild Reputation.\nDefault: <<1[reputation/reputation]>>")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_FG",                         "Display Fighters Guild Reputation")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_FG_TP",                      "Display Guild Reputation earned with the Fighters Guild.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_FG_COLOR",                   "Fighters Guild Color")
@@ -982,6 +905,92 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_DB_TP",                      "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_DB_COLOR",                   "Dark Brotherhood Color")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_ALERT",                      "Display Guild Reputation Alert")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_ALERT_TP",                   "When enabled, display a basic alert for any Guilds that are selected above indicating reputation has increased. ")
+
+-- Collectibles/Lorebooks Menu
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_HEADER",                  "Collectible/Lorebooks Announcements")
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_COL_HEADER",              "Collectibles")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE",                  "Display Collectible Unlocked - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE_TP",               "Display <<1>> when a  Collectible is unlocked.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ICON",                    "Display Collectible Icon")
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ICON_TP",                 "Display an icon for the relevant Collectible unlocked.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_ONE",               "Collectible Prefix Message Color")
+-- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_TWO",               "Collectible Message Color")
+-- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX",           "Collectible Prefix Message")
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX_TP",        "Enter the prefix message that will display before the Collectible unlocked.\nDefault: Collection Updated")
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_BRACKET",                 "Collectible Prefix Bracket")
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_BRACKET_TP",              "This bracket will encompass the prefix message when a Collectible is unlocked.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_CATEGORY",                "Display Collectible Category")
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_CATEGORY_TP",             "Append the Collectible unlocked message with the category it was added to.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_LORE_HEADER",             "Lorebooks")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_ENABLE",                     "Display Lorebook Discovery - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_ENABLE_TP",                  "Display <<1>> when a Lorebook is discovered.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLLECTION",                 "Display Lore Collection Complete - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLLECTION_TP",              "Display <<1>> when a collection of Lorebooks is complete.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_ICON",                       "Display Lorebook Icon")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_ICON_TP",                    "Display an icon for the relevant Lorebook unlocked.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLOR1",                     "Lorebook Prefix Message Color")
+-- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLOR2",                     "Lorebook Message Color")
+-- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX1",                    "Lorebook Prefix Message")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX1_TP",                 "Enter the prefix message displayed when a Lorebook is discovered.\nDefault: Lorebook Discovered")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX2",                    "Book Prefix Message")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX2_TP",                 "Enter the prefix message displayed when a book is discovered.\nDefault: Book Discovered")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX_COLLECTION",          "Lore Collection Prefix Message")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX_COLLECTION_TP",       "Enter the prefix message that will display before completed Lore Collection notifications.\nDefault: Collection Completed")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET",           "Lorebook Prefix Bracket")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_BRACKET_TP",        "This bracket will encompass the prefix message when a Lorebook is unlocked.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_CATEGORY",                   "Display Collection Category")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_CATEGORY_TP",                "Display the relevant category of a Lorebook unlocked.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE",                 "Display Books without Eidetic Memory")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_NOSHOWHIDE_TP",              "Display standard books unlocked even without Eidetic Memory unlocked.")
+
+-- Achievements Menu
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_HEADER",                      "Achievements Announcements")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_UPDATE",                      "Display Achievement Update - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_UPDATE_TP",                   "Display <<1>> when progress is made toward the completion of an Achievement.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COMPLETE",                    "Display Achievement Completion - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COMPLETE_TP",                 "Display <<1>> when an Achievement is unlocked.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO",                  "Display Detailed Achievement Info")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_DETAILINFO_TP",               "Displays each subcategory required for Achievement completion and progress in each subcategory.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COLORPROGRESS",               "Color Achievement Progress")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COLORPROGRESS_TP",            "Enables color change for Achievement progress based off completion.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_STEPSIZE",                    "Progress Step Size %")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_STEPSIZE_TP",                 "Display Achievement update information every #% to completion. Setting this value to 0 will print Achievement information on every update event.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COMPLETEPERCENT",             "Display % on Achievement Completion")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COMPLETEPERCENT_TP",          "Adds a (100%) indicator to achievement completion messages to match progress syntax.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_ICON",                        "Display Achievement Icon")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_ICON_TP",                     "Display the relevant icon for an Achievement on progress or completion.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COLOR1",                      "Achievement Prefix Message Color")
+-- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COLOR2",                      "Achievement Message Color")
+-- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_PROGMSG",                     "Achievement Progress Prefix Message")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_PROGMSG_TP",                  "Prefix for Achievement progress messages.\nDefault: Achievement Updated")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COMPLETEMSG",                 "Achievement Completion Prefix Message")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COMPLETEMSG_TP",              "Prefix for Achievement completion messages.\nDefault: Achievement Unlocked")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_SHOWCATEGORY",                "Display Achievement Category")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_SHOWCATEGORY_TP",             "Display the primary category of an Achievement.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_SHOWSUBCATEGORY",             "Display Achievement Subcategory")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_SHOWSUBCATEGORY_TP",          "Display the subcategory of an Achievement.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_BRACKET",                     "Achievement Prefix Bracket")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_BRACKET_TP",                  "This bracket will encompass the prefix message when an Achievement is updated or unlocked.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_CATEGORYBRACKET",             "Achievement Category Bracket")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_CATEGORYBRACKET_TP",          "This bracket will encompass the category and subcategory when an Achievement is updated or unlocked.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_HEADER",             "Tracking Options")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_CATEGORY",                    "Track \'<<1>>\' Achievements")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP",                 "Enables tracking for Achievements in the <<1>> category.")
+
+-- Quest Menu
+
+
+
+
+
+
 
 ZO_CreateStringId("SI_LUIE_LAM_CA_HEADER",                              "Chat Announcements Options")
 ZO_CreateStringId("SI_LUIE_LAM_CA_DESCRIPTION",                         "Displays announcements in chat for various events - with many customizable settings.")
