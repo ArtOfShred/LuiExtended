@@ -2068,6 +2068,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         return
     end
     
+    effectName = zo_strformat("<<C:1>>", effectName)
     local unbreakable = 0
    
     if E.EffectOverride[abilityId] then

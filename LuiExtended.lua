@@ -424,7 +424,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     effectsRow.effectType = effectType
                     effectsRow.time:SetHidden(true)
                     effectsRow.sortOrder = sortOrder
-                    effectsRow.tooltipTitle = displayName
+                    effectsRow.tooltipTitle = zo_strformat(SI_ABILITY_TOOLTIP_NAME, displayName)
                     effectsRow.effectId = effectId
                     effectsRow.isArtificial = true
 
@@ -443,7 +443,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                         local effectsRow = effectsRowPool:AcquireObject()
                         effectsRow.name:SetText(zo_strformat(SI_ABILITY_TOOLTIP_NAME, buffName))
                         effectsRow.icon:SetTexture(iconFile)
-                        effectsRow.tooltipTitle = buffName
+                        effectsRow.tooltipTitle = zo_strformat(SI_ABILITY_TOOLTIP_NAME, buffName)
                         effectsRow.tooltipText = (tooltipText)
                         local duration = startTime - endTime
                         effectsRow.time:SetHidden(duration == 0)
