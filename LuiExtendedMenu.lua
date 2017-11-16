@@ -4305,7 +4305,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory1 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory1,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                     },
                     {
                         -- Enables achievements tracking in %s category
@@ -4316,7 +4316,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory2 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory2,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                     },
                     {
                         -- Enables achievements tracking in %s category
@@ -4327,7 +4327,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory3 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory3,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                     },
                     {
                         -- Enables achievements tracking in %s category
@@ -4338,7 +4338,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory4 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory4,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                     },
                     {
                         -- Enables achievements tracking in %s category
@@ -4349,7 +4349,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory5 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory5,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                     },
                     {
                         -- Enables achievements tracking in %s category
@@ -4360,7 +4360,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory6 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory6,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                     },
                     {
                         -- Enables achievements tracking in %s category
@@ -4371,7 +4371,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory7 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory7,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                     },
                     {
                         -- Enables achievements tracking in %s category
@@ -4382,7 +4382,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory8 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory8,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                     },
                     {
                         -- Enables achievements tracking in %s category
@@ -4393,7 +4393,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory9 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory9,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                     },
                     {
                         -- Enables achievements tracking in %s category
@@ -4404,7 +4404,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory10 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory10,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                     },
                     {
                         -- Enables achievements tracking in %s category
@@ -4415,7 +4415,7 @@ function LUIE_CreateSettings()
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.AchievementCategory11 = value end,
                         width = "full",
                         default = LUIE.ChatAnnouncements.D.AchievementCategory11,
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.AchievementsProgress or LUIE.ChatAnnouncements.SV.AchievementsComplete)) end,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                     },
                     
                 },
@@ -4428,58 +4428,10 @@ function LUIE_CreateSettings()
                 controls = {
                 
                     {
-                        -- Location Color
-                        type = "colorpicker",
-                        name = "Location Name Color",
-                        tooltip = "Choose the color to use for the name of a Location (Discovery) when displayed in a chat.",
-                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.QuestColorLocName) end,
-                        setFunc = function(r,g,b,a) LUIE.ChatAnnouncements.SV.QuestColorLocName={r,g,b} LUIE.ChatAnnouncements.RegisterColorEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = { r=LUIE.ChatAnnouncements.D.QuestColorLocName[1], g=LUIE.ChatAnnouncements.D.QuestColorLocName[2], b=LUIE.ChatAnnouncements.D.QuestColorLocName[3] },
-                    },
-                    {
-                        -- Location Description Color
-                        type = "colorpicker",
-                        name = "Location Description Color",
-                        tooltip = "Choose the color to use for the description text following a Location.",
-                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.QuestColorLocDescription) end,
-                        setFunc = function(r,g,b,a) LUIE.ChatAnnouncements.SV.QuestColorLocDescription={r,g,b} LUIE.ChatAnnouncements.RegisterColorEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = { r=LUIE.ChatAnnouncements.D.QuestColorLocDescription[1], g=LUIE.ChatAnnouncements.D.QuestColorLocDescription[2], b=LUIE.ChatAnnouncements.D.QuestColorLocDescription[3] },
-                    },
-                    {
-                        -- Quest Color
-                        type = "colorpicker",
-                        name = "Quest Name Color",
-                        tooltip = "Choose the color to use for the name of a Location (Discovery) when displayed in a chat.",
-                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.QuestColorName) end,
-                        setFunc = function(r,g,b,a) LUIE.ChatAnnouncements.SV.QuestColorName={r,g,b} LUIE.ChatAnnouncements.RegisterColorEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = { r=LUIE.ChatAnnouncements.D.QuestColorName[1], g=LUIE.ChatAnnouncements.D.QuestColorName[2], b=LUIE.ChatAnnouncements.D.QuestColorName[3] },
-                    },
-                    {
-                        -- Quest Description Color
-                        type = "colorpicker",
-                        name = "Quest Description Color",
-                        tooltip = "Choose the color to use for the description text following a quest or Location.",
-                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.QuestColorDescription) end,
-                        setFunc = function(r,g,b,a) LUIE.ChatAnnouncements.SV.QuestColorDescription={r,g,b} LUIE.ChatAnnouncements.RegisterColorEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = { r=LUIE.ChatAnnouncements.D.QuestColorDescription[1], g=LUIE.ChatAnnouncements.D.QuestColorDescription[2], b=LUIE.ChatAnnouncements.D.QuestColorDescription[3] },
-                    },
-                    
-                    
-                
-                
-                    {
                         -- Show Quest Share CA
                         type = "checkbox",
-                        name = strformat("<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE) .. " CA"),
-                        tooltip = GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.QuestShareCA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestShareCA = value end,
                         width = "full",
@@ -4489,15 +4441,311 @@ function LUIE_CreateSettings()
                     {
                         -- Show Quest Share Alert
                         type = "checkbox",
-                        name = strformat("<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE) .. " Alert"),
-                        tooltip = GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.QuestShareAlert end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestShareAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.QuestShareAlert,                   
                     },
-                    
+                    {
+                        -- Show Location Discovery (CA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLocDiscoveryCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLocDiscoveryCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestLocDiscoveryCA,                   
+                    },
+                    {
+                        -- Show Location Discovery (CSA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLocDiscoveryCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLocDiscoveryCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestLocDiscoveryCSA,                   
+                    },
+                    {
+                        -- Show Location Discovery (Alert)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLocDiscoveryAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLocDiscoveryAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestLocDiscoveryAlert,                   
+                    },
+                    {
+                        -- Show Location Objective (CA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLocObjectiveCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLocObjectiveCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestLocObjectiveCA,                   
+                    },
+                    {
+                        -- Show Location Objective (CSA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLocObjectiveCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLocObjectiveCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestLocObjectiveCSA,                   
+                    },
+                    {
+                        -- Show Location Objective (Alert)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLocObjectiveAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLocObjectiveAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestLocObjectiveAlert,                   
+                    },
+                    {
+                        -- Show Location Complete (CA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLocCompleteCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLocCompleteCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestLocCompleteCA,                   
+                    },
+                    {
+                        -- Show Location Complete (CSA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLocCompleteCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLocCompleteCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestLocCompleteCSA,                   
+                    },
+                    {
+                        -- Show Location Complete (Alert)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_POI_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLocCompleteAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLocCompleteAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestLocCompleteAlert,                   
+                    },
+                    {
+                        -- Show Quest Accept (CA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestAcceptCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestAcceptCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestAcceptCA,                   
+                    },
+                    {
+                        -- Show Quest Accept (CSA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestAcceptCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestAcceptCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestAcceptCSA,                   
+                    },
+                    {
+                        -- Show Quest Accept (Alert)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ACCEPT_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestAcceptAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestAcceptAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestAcceptAlert,                   
+                    },
+                    {
+                        -- Show Quest Complete (CA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestCompleteCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestCompleteCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestCompleteCA,                   
+                    },
+                    {
+                        -- Show Quest Complete (CSA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestCompleteCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestCompleteCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestCompleteCSA,                   
+                    },
+                    {
+                        -- Show Quest Complete (Alert)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestCompleteAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestCompleteAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestCompleteAlert,                   
+                    },
+                    {
+                        -- Show Quest Abandon (CA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestAbandonCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestAbandonCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestAbandonCA,                   
+                    },
+                    {
+                        -- Show Quest Abandon (CSA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestAbandonCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestAbandonCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestAbandonCSA,                   
+                    },
+                    {
+                        -- Show Quest Abandon (Alert)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_ABANDON_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestAbandonAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestAbandonAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestAbandonAlert,                   
+                    },
+                    {
+                        -- Show Quest Failure (CA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestFailCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestFailCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestFailCA,                   
+                    },
+                    {
+                        -- Show Quest Failure (CSA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestFailCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestFailCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestFailCSA,                   
+                    },
+                    {
+                        -- Show Quest Failure (Alert)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestFailAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestFailAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestFailAlert,                   
+                    },
+                    {
+                        -- Show Quest Objective Updates (CA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestObjUpdateCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestObjUpdateCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestObjUpdateCA,                   
+                    },
+                    {
+                        -- Show Quest Objective Updates (CSA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestObjUpdateCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestObjUpdateCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestObjUpdateCSA,                   
+                    },
+                    {
+                        -- Show Quest Objective Updates (Alert)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestObjUpdateAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestObjUpdateAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestObjUpdateAlert,                   
+                    },
+                    {
+                        -- Show Quest Objective Complete (CA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestObjCompleteCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestObjCompleteCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestObjCompleteCA,                   
+                    },
+                    {
+                        -- Show Quest Objective Complete (CSA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestObjCompleteCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestObjCompleteCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestObjCompleteCSA,                   
+                    },
+                    {
+                        -- Show Quest Objective Complete (Alert)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestObjCompleteAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestObjCompleteAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.QuestObjCompleteAlert,                   
+                    },
                     {
                         -- Show Quest Icon
                         type = "checkbox",
@@ -4506,8 +4754,48 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.QuestIcon end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestIcon = value end,
                         width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Quest) end,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.QuestIcon,
+                    },
+                    {
+                        -- Location Color
+                        type = "colorpicker",
+                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_COLOR1)),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.QuestColorLocName) end,
+                        setFunc = function(r,g,b,a) LUIE.ChatAnnouncements.SV.QuestColorLocName={r,g,b} LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = { r=LUIE.ChatAnnouncements.D.QuestColorLocName[1], g=LUIE.ChatAnnouncements.D.QuestColorLocName[2], b=LUIE.ChatAnnouncements.D.QuestColorLocName[3] },
+                    },
+                    {
+                        -- Location Description Color
+                        type = "colorpicker",
+                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_COLOR2)),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.QuestColorLocDescription) end,
+                        setFunc = function(r,g,b,a) LUIE.ChatAnnouncements.SV.QuestColorLocDescription={r,g,b} LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = { r=LUIE.ChatAnnouncements.D.QuestColorLocDescription[1], g=LUIE.ChatAnnouncements.D.QuestColorLocDescription[2], b=LUIE.ChatAnnouncements.D.QuestColorLocDescription[3] },
+                    },
+                    {
+                        -- Quest Color
+                        type = "colorpicker",
+                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_COLOR3)),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.QuestColorName) end,
+                        setFunc = function(r,g,b,a) LUIE.ChatAnnouncements.SV.QuestColorName={r,g,b} LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = { r=LUIE.ChatAnnouncements.D.QuestColorName[1], g=LUIE.ChatAnnouncements.D.QuestColorName[2], b=LUIE.ChatAnnouncements.D.QuestColorName[3] },
+                    },
+                    {
+                        -- Quest Description Color
+                        type = "colorpicker",
+                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_COLOR4)),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.QuestColorDescription) end,
+                        setFunc = function(r,g,b,a) LUIE.ChatAnnouncements.SV.QuestColorDescription={r,g,b} LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = { r=LUIE.ChatAnnouncements.D.QuestColorDescription[1], g=LUIE.ChatAnnouncements.D.QuestColorDescription[2], b=LUIE.ChatAnnouncements.D.QuestColorDescription[3] },
                     },
                     {
                         -- Show Quest Long String
@@ -4517,7 +4805,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLong end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLong = value end,
                         width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Quest) end,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.QuestLong,                   
                     },
                     {
@@ -4528,316 +4816,10 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLocLong end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLocLong = value end,
                         width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.QuestPOICompleted) end,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.QuestLocLong,                   
                     },
                     
-                    {
-                        -- Show Location Discovery (CA)
-                        type = "checkbox",
-                        name = "Show Location Discovery (Chat Announcement)",
-                        tooltip = "Display a Chat Announcement for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLocDiscoveryCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLocDiscoveryCA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestLocDiscoveryCA,                   
-                    },
-                    {
-                        -- Show Location Discovery (CSA)
-                        type = "checkbox",
-                        name = "Show Location Discovery (Center Screen Announcement)",
-                        tooltip = "Display a Center Screen Announcement for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLocDiscoveryCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLocDiscoveryCSA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestLocDiscoveryCSA,                   
-                    },
-                    {
-                        -- Show Location Discovery (Alert)
-                        type = "checkbox",
-                        name = "Show Location Discovery (Alert)",
-                        tooltip = "Display an Alert for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLocDiscoveryAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLocDiscoveryAlert = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestLocDiscoveryAlert,                   
-                    },
-                    
-                    {
-                        -- Show Location Objective (CA)
-                        type = "checkbox",
-                        name = "Show Location Objective (Chat Announcement)",
-                        tooltip = "Display a Chat Announcement for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLocObjectiveCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLocObjectiveCA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestLocObjectiveCA,                   
-                    },
-                    {
-                        -- Show Location Objective (CSA)
-                        type = "checkbox",
-                        name = "Show Location Objective(Center Screen Announcement)",
-                        tooltip = "Display a Center Screen Announcement for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLocObjectiveCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLocObjectiveCSA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestLocObjectiveCSA,                   
-                    },
-                    {
-                        -- Show Location Objective (Alert)
-                        type = "checkbox",
-                        name = "Show Location Objective (Alert)",
-                        tooltip = "Display an Alert for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLocObjectiveAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLocObjectiveAlert = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestLocObjectiveAlert,                   
-                    },
-                    
-                    {
-                        -- Show Location Complete (CA)
-                        type = "checkbox",
-                        name = "Show Location Completion (Chat Announcement)",
-                        tooltip = "Display a Chat Announcement for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLocCompleteCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLocCompleteCA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestLocCompleteCA,                   
-                    },
-                    {
-                        -- Show Location Complete (CSA)
-                        type = "checkbox",
-                        name = "Show Location Completion (Center Screen Announcement)",
-                        tooltip = "Display a Center Screen Announcement for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLocCompleteCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLocCompleteCSA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestLocCompleteCSA,                   
-                    },
-                    {
-                        -- Show Location Complete (Alert)
-                        type = "checkbox",
-                        name = "Show Location Completion (Alert)",
-                        tooltip = "Display an Alert for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestLocCompleteAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestLocCompleteAlert = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestLocCompleteAlert,                   
-                    },
-                    
-                    {
-                        -- Show Quest Accept (CA)
-                        type = "checkbox",
-                        name = "Show Quest Accept (Chat Announcement)",
-                        tooltip = "Display a Chat Announcement for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestAcceptCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestAcceptCA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestAcceptCA,                   
-                    },
-                    {
-                        -- Show Quest Accept (CSA)
-                        type = "checkbox",
-                        name = "Show Quest Accept (Center Screen Announcement)",
-                        tooltip = "Display a Center Screen Announcement for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestAcceptCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestAcceptCSA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestAcceptCSA,                   
-                    },
-                    {
-                        -- Show Quest Accept (Alert)
-                        type = "checkbox",
-                        name = "Show Quest Accept (Alert)",
-                        tooltip = "Display an Alert for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestAcceptAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestAcceptAlert = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestAcceptAlert,                   
-                    },
-                    
-                    {
-                        -- Show Quest Complete (CA)
-                        type = "checkbox",
-                        name = "Show Quest Complete (Chat Announcement)",
-                        tooltip = "Display a Chat Announcement for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestCompleteCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestCompleteCA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestCompleteCA,                   
-                    },
-                    {
-                        -- Show Quest Complete (CSA)
-                        type = "checkbox",
-                        name = "Show Quest Complete (Center Screen Announcement)",
-                        tooltip = "Display a Center Screen Announcement for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestCompleteCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestCompleteCSA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestCompleteCSA,                   
-                    },
-                    {
-                        -- Show Quest Complete (Alert)
-                        type = "checkbox",
-                        name = "Show Quest Complete (Alert)",
-                        tooltip = "Display an Alert for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestCompleteAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestCompleteAlert = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestCompleteAlert,                   
-                    },
-                    
-                    {
-                        -- Show Quest Abandon (CA)
-                        type = "checkbox",
-                        name = "Show Quest Abandon (Chat Announcement)",
-                        tooltip = "Display a Chat Announcement for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestAbandonCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestAbandonCA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestAbandonCA,                   
-                    },
-                    {
-                        -- Show Quest Abandon (CSA)
-                        type = "checkbox",
-                        name = "Show Quest Abandon (Center Screen Announcement)",
-                        tooltip = "Display a Center Screen Announcement for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestAbandonCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestAbandonCSA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestAbandonCSA,                   
-                    },
-                    {
-                        -- Show Quest Abandon (Alert)
-                        type = "checkbox",
-                        name = "Show Quest Abandon (Alert)",
-                        tooltip = "Display an Alert for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestAbandonAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestAbandonAlert = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestAbandonAlert,                   
-                    },
-                    
-                    {
-                        -- Show Quest Failure (CA)
-                        type = "checkbox",
-                        name = "Show Quest Failure (Chat Announcement)",
-                        tooltip = "Display a Chat Announcement for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestFailCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestFailCA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestFailCA,                   
-                    },
-                    {
-                        -- Show Quest Failure (CSA)
-                        type = "checkbox",
-                        name = "Show Quest Failure (Center Screen Announcement)",
-                        tooltip = "Display a Center Screen Announcement for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestFailCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestFailCSA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestFailCSA,                   
-                    },
-                    {
-                        -- Show Quest Failure (Alert)
-                        type = "checkbox",
-                        name = "Show Quest Failure (Alert)",
-                        tooltip = "Display an Alert for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestFailAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestFailAlert = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestFailAlert,                   
-                    },
-                    
-                    
-                    {
-                        -- Show Quest Objective Updates (CA)
-                        type = "checkbox",
-                        name = "Show Quest Objective Complete (Chat Announcement)",
-                        tooltip = "Display a Chat Announcement for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestObjCompleteCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestObjCompleteCA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestObjCompleteCA,                   
-                    },
-                    {
-                        -- Show Quest Objective Updates (CSA)
-                        type = "checkbox",
-                        name = "Show Quest Objective Complete (Center Screen Announcement)",
-                        tooltip = "Display a Center Screen Announcement for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestObjCompleteCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestObjCompleteCSA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestObjCompleteCSA,                   
-                    },
-                    {
-                        -- Show Quest Objective Updates (Alert)
-                        type = "checkbox",
-                        name = "Show Quest Objective Complete (Alert)",
-                        tooltip = "Display an Alert for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestObjCompleteAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestObjCompleteAlert = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestObjCompleteAlert,                   
-                    },
-                    
-                    {
-                        -- Show Quest Objective Updates (CA)
-                        type = "checkbox",
-                        name = "Show Quest Objective Updates (Chat Announcement)",
-                        tooltip = "Display a Chat Announcement for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestObjUpdateCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestObjUpdateCA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestObjUpdateCA,                   
-                    },
-                    {
-                        -- Show Quest Objective Updates (CSA)
-                        type = "checkbox",
-                        name = "Show Quest Objective Updates (Center Screen Announcement)",
-                        tooltip = "Display a Center Screen Announcement for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestObjUpdateCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestObjUpdateCSA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestObjUpdateCSA,                   
-                    },
-                    {
-                        -- Show Quest Objective Updates (Alert)
-                        type = "checkbox",
-                        name = "Show Quest Objective Updates (Alert)",
-                        tooltip = "Display an Alert for FILLINHERE",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.QuestObjUpdateAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.QuestObjUpdateAlert = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.QuestObjUpdateAlert,                   
-                    },
                 },
             }
                 
@@ -4847,12 +4829,18 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_CA_SOCIAL_HEADER),
                 reference = "Chat_Announcements_Options_Social_Announcements_Submenu",
                 controls = {
-
+                    
+                    {
+                    type = "header",
+                    name = GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_HEADER),
+                    width = "full"
+                    },
+                    
                     {
                         -- Show Friend/Ignore Events CA
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL) .. " CA",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.FriendIgnoreCA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.FriendIgnoreCA = value end,
                         width = "full",
@@ -4862,8 +4850,8 @@ function LUIE_CreateSettings()
                     {
                         -- Show Friend/Ignore Events Alert
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL) .. " Alert",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.FriendIgnoreAlert end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.FriendIgnoreAlert = value end,
                         width = "full",
@@ -4874,8 +4862,8 @@ function LUIE_CreateSettings()
                     {
                         -- Friend Online/Offline CA
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL) .. " Online/Offline CA",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.FriendStatusCA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.FriendStatusCA = value end,
                         width = "full",
@@ -4885,8 +4873,8 @@ function LUIE_CreateSettings()
                     {
                         -- Friend Online/Offline Alert
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL) .. " Online/Offline Alert",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWSOCIAL_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.FriendStatusAlert end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.FriendStatusAlert = value end,
                         width = "full",
@@ -4895,108 +4883,121 @@ function LUIE_CreateSettings()
                     },
                     
                     {
+                    type = "header",
+                    name = GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_HEADER),
+                    width = "full"
+                    },
+                    
+                    {
                         -- Show Guild Events CA
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILD) .. " CA",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILD_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GuildCA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GuildCA,
                     },
-                    
                     {
                         -- Show Guild Events Alert
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILD) .. " ALERT",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILD_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GuildAlert end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GuildAlert,
                     },
-
-                    {
-                        -- Show Guild Icons
-                        type = "checkbox",
-                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDICONS)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDICONS_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.GuildIcon end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildIcon = value end,
-                        width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.MiscGuild and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.GuildIcon,
-                    },
-                    
                     {
                         -- Show Guild Rank Events CA
                         type = "checkbox",
-                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANK)) .. "CA",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANK_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscGuildRankCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscGuildRankCA = value end,
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GuildRankCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildRankCA = value end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.MiscGuild and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.MiscGuildRankCA,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GuildRankCA,
                     },
                     {
                         -- Show Guild Rank Events Alert
                         type = "checkbox",
-                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANK)) .. "Alert",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANK_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GuildRankAlert end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildRankAlert = value end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.MiscGuild and LUIE.SV.ChatAnnouncements_Enable) end,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GuildRankAlert,
                     },
-                    
                     {
                         -- Show Guild Rank Events Display Options
                         type = "dropdown",
-                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANKDISPLAY)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILDRANKDISPLAY_TP),
+                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANKOPTIONS)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_RANKOPTIONS_TP),
                         choices = guildRankDisplayOptions,
                         getFunc = function() return guildRankDisplayOptions[LUIE.ChatAnnouncements.SV.GuildRankDisplayOptions] end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildRankDisplayOptions = guildRankDisplayOptionsKeys[value] end,
                         width = "full",
-                        disabled = function() return not (LUIE.ChatAnnouncements.SV.MiscGuild and LUIE.ChatAnnouncements.SV.MiscGuildRank and LUIE.SV.ChatAnnouncements_Enable) end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.GuildRankCA or LUIE.ChatAnnouncements.SV.GuildRankAlert and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.GuildRankDisplayOptions,
                     },
-                    
                     {
                         -- Show Guild Management CA
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILD) .. " Management CA",
-                        tooltip = "Display guild management update notifications - Ranks modified, Heraldry updated, GMOTD changed and Guild Info Changed",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GuildManageCA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildManageCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GuildManageCA,
                     },
-                    
                     {
                         -- Show Guild Management Alert
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWGUILD) .. " Management ALERT",
-                        tooltip = "Display guild management update notifications - Ranks modified, Heraldry updated, GMOTD changed and Guild Info Changed",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GuildManageAlert end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildManageAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GuildManageAlert,
                     },
+                    {
+                        -- Show Guild Icons
+                        type = "checkbox",
+                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ICONS)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_SOCIAL_GUILD_ICONS_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GuildIcon end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GuildIcon = value end,
+                        width = "full",
+                        disabled = function() return not (
+                        LUIE.ChatAnnouncements.SV.GuildCA or
+                        LUIE.ChatAnnouncements.SV.GuildAlert or
+                        LUIE.ChatAnnouncements.SV.GuildRankCA or
+                        LUIE.ChatAnnouncements.SV.GuildRankAlert or
+                        LUIE.ChatAnnouncements.SV.GuildManageCA or
+                        LUIE.ChatAnnouncements.SV.GuildManageAlert and
+                        LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = LUIE.ChatAnnouncements.D.GuildIcon,
+                    },
+                    
+                    {
+                    type = "header",
+                    name = GetString(SI_LUIE_LAM_CA_SOCIAL_TRADE_HEADER),
+                    width = "full"
+                    },
                 
                     {
                         -- Show Trade Events
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWTRADE) .. " CA",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWTRADE),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_TRADE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_TRADE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.NotificationTradeCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.NotificationTradeCA = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.NotificationTradeCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.NotificationTradeCA,
@@ -5004,20 +5005,26 @@ function LUIE_CreateSettings()
                     {
                         -- Show Trade Events
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWTRADE) .. " ALERT",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWTRADE),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_TRADE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_TRADE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.NotificationTradeAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.NotificationTradeAlert = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.NotificationTradeAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.NotificationTradeAlert,
                     },
                     
                     {
+                    type = "header",
+                    name = GetString(SI_LUIE_LAM_CA_SOCIAL_DUEL_HEADER),
+                    width = "full"
+                    },
+                    
+                    {
                         -- Show Duel Events (CA)
                         type = "checkbox",
-                        name = "Show Duel Events - CA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUEL), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUEL_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.DuelCA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelCA = value end,
                         width = "full",
@@ -5027,90 +5034,19 @@ function LUIE_CreateSettings()
                     {
                         -- Show Duel Events (Alert)
                         type = "checkbox",
-                        name = "Show Duel Events - Alert",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUEL), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUEL_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.DuelAlert end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.DuelAlert,
                     },
-                    
-                    
-                    {
-                        -- Duel Boundary CA
-                        type = "checkbox",
-                        name = "Show Duel Boundary - CA",
-                        tooltip = "Note that this only shows on a few events",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.DuelBoundaryCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelBoundaryCA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.DuelBoundaryCA,
-                    },
-                    {
-                        -- Duel Boundary CSA
-                        type = "checkbox",
-                        name = "Show Duel Boundary - CSA",
-                        tooltip = "Note that this only shows on a few events",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.DuelBoundaryCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelBoundaryCSA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.DuelBoundaryCSA,
-                    },
-                    {
-                        -- Duel Boundary Alert
-                        type = "checkbox",
-                        name = "Show Duel Boundary - Alert",
-                        tooltip = "Note that this only shows on a few events",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.DuelBoundaryAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelBoundaryAlert = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.DuelBoundaryAlert,
-                    },
-                    
-                    {
-                        -- Duel Won CA
-                        type = "checkbox",
-                        name = "Show Duel Won - CA",
-                        tooltip = "Note that this only shows on a few events",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.DuelWonCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelWonCA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.DuelWonCA,
-                    },
-                    {
-                        -- Duel Won CSA
-                        type = "checkbox",
-                        name = "Show Duel Won - CSA",
-                        tooltip = "Note that this only shows on a few events",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.DuelWonCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelWonCSA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.DuelWonCSA,
-                    },
-                    {
-                        -- Duel Won Alert
-                        type = "checkbox",
-                        name = "Show Duel Won - Alert",
-                        tooltip = "Note that this only shows on a few events",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.DuelWonAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelWonAlert = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.DuelWonAlert,
-                    },
-                    
-                    
                     {
                         -- Duel Start CA
                         type = "checkbox",
-                        name = "Show Duel Start - CA",
-                        tooltip = "Note that this only shows on a few events",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.DuelStartCA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelStartCA = value end,
                         width = "full",
@@ -5120,32 +5056,115 @@ function LUIE_CreateSettings()
                     {
                         -- Duel Start CSA
                         type = "checkbox",
-                        name = "Show Duel Start - CSA",
-                        tooltip = "Note that this only shows on a few events",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART_TPCSA), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.DuelStartCSA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelStartCSA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.DuelStartCSA,
                     },
-                    
+                    {
+                        -- Duel Start Alert
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.DuelStartAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelStartAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.DuelStartAlert,
+                    },
                     {
                         -- Duel Start Options
                         type = "dropdown",
-                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_DUELSTART)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_DUELSTART_TP),
+                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART_OPTION)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_SOCIAL_DUELSTART_OPTION_TP),
                         choices = duelStartOptions,
                         getFunc = function() return duelStartOptions[LUIE.ChatAnnouncements.SV.DuelStartOptions] end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelStartOptions = duelStartOptionsKeys[value] end,
                         width = "full",
                         default = duelStartOptions[1],
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and ( LUIE.ChatAnnouncements.SV.DuelStartCA or LUIE.ChatAnnouncements.SV.DuelStartCSA) ) end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.DuelStartCA or LUIE.ChatAnnouncements.SV.DuelStartCSA or LUIE.ChatAnnouncements.SV.DuelStartAlert and LUIE.SV.ChatAnnouncements_Enable) end,
                     },
+                    {
+                        -- Duel Won CA
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.DuelWonCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelWonCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.DuelWonCA,
+                    },
+                    {
+                        -- Duel Won CSA
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.DuelWonCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelWonCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.DuelWonCSA,
+                    },
+                    {
+                        -- Duel Won Alert
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.DuelWonAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelWonAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.DuelWonAlert,
+                    },
+                    {
+                        -- Duel Boundary CA
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.DuelBoundaryCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelBoundaryCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.DuelBoundaryCA,
+                    },
+                    {
+                        -- Duel Boundary CSA
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.DuelBoundaryCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelBoundaryCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.DuelBoundaryCSA,
+                    },
+                    {
+                        -- Duel Boundary Alert
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.DuelBoundaryAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DuelBoundaryAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.DuelBoundaryAlert,
+                    },
+                    
+                    {
+                    type = "header",
+                    name = GetString(SI_LUIE_LAM_CA_SOCIAL_MARA_HEADER),
+                    width = "full"
+                    },
+                    
                     {
                         -- Show Pledge of Mara CA
                         type = "checkbox",
-                        name = "Show Pledge of Mara CA",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_MARA_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.PledgeOfMaraCA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.PledgeOfMaraCA = value end,
                         width = "full",
@@ -5155,8 +5174,8 @@ function LUIE_CreateSettings()
                     {
                         -- Show Pledge of Mara CSA
                         type = "checkbox",
-                        name = "Show Pledge of Mara CSA",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_MARA_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.PledgeOfMaraCSA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.PledgeOfMaraCSA = value end,
                         width = "full",
@@ -5166,27 +5185,26 @@ function LUIE_CreateSettings()
                     {
                         -- Show Pledge of Mara Alert
                         type = "checkbox",
-                        name = "Show Pledge of Mara Alert",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_MARA_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_MARA_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.PledgeOfMaraAlert end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.PledgeOfMaraAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.PledgeOfMaraAlert,
                     },
-                    
                     {
-                        -- Show Pledge of Mara Alert
+                        -- Pledge of Mara (Alert Only on Failure)
                         type = "checkbox",
-                        name = "Only Show Pledge of Mara Alert if failed to complete",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_MARA_TP),
+                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_MARA_ALERT)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_MARA_ALERT_TP),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.PledgeOfMaraAlertOnlyFail end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.PledgeOfMaraAlertOnlyFail = value end,
                         width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable and not (LUIE.ChatAnnouncements.SV.PledgeOfMaraCA or LUIE.ChatAnnouncements.SV.PledgeOfMaraCSA or LUIE.ChatAnnouncements.SV.PledgeOfMaraAlert) end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.PledgeOfMaraAlert and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.PledgeOfMaraAlertOnlyFail,
                     },
-                ---
+                    
                 },
             }
                 -- CA Group Announcements Submenu
@@ -5197,10 +5215,16 @@ function LUIE_CreateSettings()
                 controls = {
                     
                     {
+                    type = "header",
+                    name = GetString(SI_LUIE_LAM_CA_GROUP_BASE_HEADER),
+                    width = "full"
+                    },
+                    
+                    {
                         -- Show Group CA
                         type = "checkbox",
-                        name = "Show Group CA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_BASE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupCA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupCA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
                         width = "full",
@@ -5210,13 +5234,19 @@ function LUIE_CreateSettings()
                     {
                         -- Show Group Alert
                         type = "checkbox",
-                        name = "Show Group Alert",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_BASE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupAlert end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupAlert = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupAlert,
+                    },
+                    
+                    {
+                    type = "header",
+                    name = GetString(SI_LUIE_LAM_CA_GROUP_LFG_HEADER),
+                    width = "full"
                     },
                     
                     {

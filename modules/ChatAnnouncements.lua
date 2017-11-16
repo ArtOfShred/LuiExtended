@@ -161,6 +161,7 @@ CA.D = {
     DuelWonAlert                  = false,
     DuelStartCA                   = false,
     DuelStartCSA                  = true,
+    DuelStartAlert                = false,
     DuelStartOptions              = 1,
     
     -- Pledge of Mara
@@ -8911,15 +8912,23 @@ end
 function CA.DuelStarted(eventCode)
     
     -- Display CA
-    if CA.SV.DuelStartCA then
+    if CA.SV.DuelStartCA or CA.SV.DuelStartAlert then
+        local message
         local formattedIcon = zo_iconFormat("EsoUI/Art/HUD/HUD_Countdown_Badge_Dueling.dds", 16, 16)
-        
         if CA.SV.DuelStartOptions == 1 then
-            printToChat(strformat(GetString(SI_LUIE_CA_DUEL_STARTED_WITH_ICON), formattedIcon))
+            message = strformat(GetString(SI_LUIE_CA_DUEL_STARTED_WITH_ICON), formattedIcon)
         elseif CA.SV.DuelStartOptions == 2 then
-            printToChat(GetString(SI_LUIE_CA_DUEL_STARTED))
+            message = GetString(SI_LUIE_CA_DUEL_STARTED)
         elseif CA.SV.DuelStartOptions == 3 then
-            printToChat(strformat("<<1>>", formattedIcon))
+            message = strformat("<<1>>", formattedIcon)
+        end
+    
+        if CA.Sv.DuelStartCA then
+            printToChat(message)
+        end
+        
+        if CA.SV.DuelStartAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
         end
     end
     

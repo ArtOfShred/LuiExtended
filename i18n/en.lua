@@ -985,8 +985,82 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_CATEGORY",                    "Track \
 ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP",                 "Enables tracking for Achievements in the <<1>> category.")
 
 -- Quest Menu
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_HEADER",                        "Quest/POI Announcements")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE",                "Display Shared Quests - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP",             "Display <<1>> when another player shares a quest with you.")
 
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY",            "Display Location Discovery - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY_TP",         "Display <<1>> when a location on the map is discovered.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE",                 "Display POI Objective - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE_TP",              "Display <<1>> when a quest is accepted with an associated map POI.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POI_COMPLETE",                  "Display POI Complete - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POI_COMPLETE_TP",               "Display <<1>> when a quest is completed with an associated map POI.")
 
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_ACCEPT",                        "Display Quest Accepted - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_ACCEPT_TP",                     "Display <<1>> when a quest is accepted.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_COMPLETE",                      "Display Quest Completed - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_COMPLETE_TP",                   "Display <<1>> when a quest is completed.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_ABANDON",                       "Display Quest Abandoned - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_ABANDON_TP",                    "Display <<1>> when a quest is abandoned.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE",             "Display Quest Objective Failure - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_OBJECTIVE_FAILURE_TP",          "Display <<1>> when a quest failure state is triggered.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE",              "Display Quest Objective Updates - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_OBJECTIVE_UPDATE_TP",           "Display <<1>> when a new quest objective is added.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE",            "Display Quest Objective Completion - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_OBJECTIVE_COMPLETE_TP",         "Display <<1>> when a quest objective is completed.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTICON",                 "Display Quest Difficulty Icon")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTICON_TP",              "Display an icon relevant to the difficulty and type of quest.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG",                 "Display Detailed Quest Description")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG_TP",              "When toggled on, accepting a quest will display the Journal Entry details of the quest.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG",        "Display Detailed POI Description")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG_TP",     "When toggled on, accepting/completing a quest with an associated map POI will display the full description.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_COLOR1",                        "POI Name Color")
+-- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_COLOR2",                        "POI Description Color")
+-- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_COLOR3",                        "Quest Name Color")
+-- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_COLOR4",                        "Quest Description Color")
+-- TODO: Add Tooltip with finalized color value
+
+-- Social Menu
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_HEADER",                       "Social/Guild Announcements")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_FRIENDS_HEADER",               "Friends/Ignored List")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_FRIENDS",                      "Display Friends/Ignored Requests - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_FRIENDS_TP",                   "Display <<1>> for friend invites, Friends list changes, and Ignored list changes.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF",                "Display Friends List Log On/Off - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_FRIENDS_ONOFF_TP",             "Display <<1>> when a player on your Friends list logs on or off.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_HEADER",                 "Guild Notifications")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD",                        "Display Guild Invite/Leave/Join - <<1>> ")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_TP",                     "Display <<1>> for Guild invitations and Join/Leave notifications.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK",                   "Display Guild Rank Changes - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_RANK_TP",                "Display <<1>> for Guild Rank changes. Options are determined by the dropdown menu below.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_RANKOPTIONS",            "Guild Rank Display Options")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_RANKOPTIONS_TP",         "Choose the method in which Guild Rank changes will be reported.\nDefault: Self Only")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN",                  "Display Guild Administration - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN_TP",               "Display <<1>> when the Guild MOTD or Background Information is updated, rank data is updated, or Heraldry is updated.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_ICONS",                  "Display Guild Icons")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_ICONS_TP",               "Displays the faction or Guild Rank icon for guild messages.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_TRADE_HEADER",                 "Trade Notifications")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_TRADE",                        "Display Trade Notifications - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_TRADE_TP",                     "Display <<1>> for trade invitations, cancelation, and success.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUEL_HEADER",                  "Duel Notifications")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUEL",                         "Display Duel Challenges - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUEL_TP",                      "Display <<1>> for duel challenges and declined challenges.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUELSTART",                    "Display Duel Start Notification - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUELSTART_TP",                 "Display <<1>> when a duel begins.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUELSTART_TPCSA",              "Display <<1>> when a duel begins. Center Screen Announcement also displays a countdown")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUELSTART_OPTION",             "Duel Start Notification Format (CA/Alert Only)")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUELSTART_OPTION_TP",          "Choose the format for the message that is displayed when the countdown ends and the duel is started.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE",                 "Display Duel End Notification - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUELCOMPLETE_TP",              "Display <<1>> when a duel ends.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY",                 "Display Duel Boundary Warning - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_DUELBOUNDARY_TP",              "Display <<1>> when you are close to the Duel Boundary.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_MARA_HEADER",                  "Pledge of Mara Notifications")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_MARA",                           "Display Pledge of Mara - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_MARA_TP",                        "Display <<1>> for Pledge of Mara events.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_MARA_ALERT",                     "Only Display Alert on Failure")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_MARA_ALERT_TP",                  "When enabled, an Alert will only be displayed if the Pledge of Mara fails. This emulates the behavior of the default UI settings.")
 
 
 
@@ -999,20 +1073,9 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_ENABLE_TP",                           "Print m
 
 
 
-
-
-
-
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_DUEL",                           "Show Duel Event Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_DUEL_TP",                        "Print a notification to chat for duel invites and events.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_DUELSTART",                      "CA - Duel Start Notification Type")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_DUELSTART_TP",                   "Choose the message that is displayed when the countdown ends and the duel is started.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_HEADER",                         "Miscellaneous Announcements")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_INVENTORYFULL",                  "Display inventory is full notification")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_INVENTORYFULL_TP",               "Display a message in chat when attempting to loot/craft an item and your inventory is full.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_MARA",                           "Show Pledge of Mara Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_MARA_TP",                        "Print a notification to chat Pledge of Mara events.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG",                    "Show Bag/Bank Upgrade Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP",                 "Print a notification to chat when bag or bank space upgrades are purchased ingame or through the crown store.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE",               "Show Disguise Status Change Messages")
@@ -1024,13 +1087,8 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE_TP",            "Print a
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEOPTION",         "Disguise Notification Option")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEOPTION_TP",      "Choose whether disguise status effects and alerts will display as a Chat Announcement, Center Screen Notification, or both.")
 
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUP",                      "Show Group Event Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUP_TP",                   "Print a notification to chat for group invites and group composition changes.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPVOTE",                  "Show Group Vote Notifications")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPVOTE_TP",               "Display a notification in chat when a ready check or votekick is initiated.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPLFG",                   "Show LFG Event Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPLFG_TP",                "Print a notification to chat entering or leaving an LFG queue or forming an LFG group.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPLFGCOMPLETE",           "Show LFG Completion Message")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPLFGCOMPLETE_TP",        "Print a notification to chat when an LFG activity is completed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAID",                  "Show Trial - Status Notifications")
@@ -1044,16 +1102,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDBESTSCORE_TP",      "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDREVIVE",            "Show Trial - Vitality Bonus Loss")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDREVIVE_TP",         "Display a chat notification when Vitality Bonus is decreased.")
 
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGUILD",                      "Show Guild Event Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGUILDICONS",                 "Show Guild Icons")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGUILDICONS_TP",              "Displays the faction icon or guild rank icon for guild messages.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGUILDMOTD",                  "Show Guild MOTD Message Changes")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGUILDMOTD_TP",               "Print a notifcation to chat when the MOTD for one of your guilds is updated.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGUILDRANK",                  "Show Guild Rank Changes")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGUILDRANKDISPLAY",           "Guild Rank Changes Display Options")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGUILDRANKDISPLAY_TP",        "Choose the method in which guild rank changes will be reported.\nDefault: \"Self Only\"")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGUILDRANK_TP",               "Prints a notification to chat for player guild rank changes. Options are determined by the dropdown menu below.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGUILD_TP",                   "Prints a notification to chat for friend invites, friend list changes, and ignore list changes.\nNOTE: If you are using \"No, thank you!\" by Ayantir, I suggest setting Guild Roster Alerts to either default or completely hidden. Redirecting to chat will result in duplicate messages.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWJUSTICE",                    "Show Justice Confiscation Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWJUSTICE_TP",                 "Print a notification to chat when items or gold are confiscated by a guard through dialogue or player death.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK",                   "Show Lockpick Failure/Success Messages")
@@ -1062,39 +1110,36 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWMAIL",                       "Show Ma
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP",                    "Prints a notification to chat when mail is accepted, deleted, or sent.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING",                     "Show Riding Skill Upgrade Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP",                  "Print a notification to chat when riding upgrades are purchased or Crown Riding Skill books are used.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWSOCIAL",                     "Show Friend/Ignore Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWSOCIAL_TP",                  "Prints a notification to chat for friend invites, friend list changes, and ignore list changes.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWSTUCK",                      "Show /Stuck Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWSTUCK_TP",                   "Prints a message in chat for results of the /stuck function.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWTRADE",                      "Show Trade Event Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWTRADE_TP",                   "Prints a notification to chat for trade invitations, cancelation, and success.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP",                "Determines the method used to display player names in Chat Announcements where applicable.\nDefault: Character Name")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_HEADER",                        "Quest/POI Announcements")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POIDISCOVERY",                  "Show POI Discovery")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POIDISCOVERY_TP",               "Displays a message in chat when a point of interest is discovered.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POICOMPLETED",                  "Show POI Completion")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POICOMPLETED_TP",               "Displays a message in chat when a point of interest is completed. The most common type of completion is Dolmens and Quests.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_OBJECTIVEDISCOVERY",            "Show Quest POI Objective")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_OBJECTIVEDISCOVERY_TP",         "Displays a message in chat when a quest with an associated POI is accepted. This will display the overall objective to complete the POI.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUEST",                     "Show Quest Accepted/Abandoned/Completed")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUEST_TP",                  "Prints a notification to chat when a quest is accepted, abandoned, or completed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTCSA",                  "Show Quest Abandon CSA")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTCSA_TP",               "Displays a Center Screen Announcement when a quest is abandoned. This option is independent and intended to match the default Center Screen Announcements for Accepting/Completing a quest.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE",                "Show Shared Quest Notifications")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP",             "Prints a notification to chat when another player shares a quest with you.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTFAILURE",              "Show Quest FAILURE Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTFAILURE_TP",           "Prints a notification to chat when a quest is failed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTICON",                 "Show Quest Context Icon")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTICON_TP",              "Display an icon relevant to the difficulty and type of quest.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_LOGFULL",                       "Show Quest Log Full")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_LOGFULL_TP",                    "Prints a notification to chat when a your quest log is full and you attempt to accept a quest.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG",                 "Show Detailed Quest Description")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG_TP",              "When toggled on, accepting a quest will display the Journal Entry details of the quest in the announcement.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG",        "Show Detailed POI Completion Description")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG_TP",     "When toggled on, completing a quest with an associated POI will display the long completion description.")
 
-ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_HEADER",                       "Social/Guild Announcements")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_HEADER",                        "Group Announcements/LFG Announcements")
+
+
+
+-- Group Menu
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_HEADER",                        "Group/LFG/Trial Announcements")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_BASE_HEADER",                   "Group Notifications")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_BASE",                          "Display Group Notifications - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_BASE_TP",                       "Display <<1>> for group invites and group composition changes.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFG_HEADER",                    "LFG Notifications")
+
+
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGREADY",                      "Display LFG Ready Notifications - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGREADY_TP",                   "Display <<1>> when an LFG group is formed or activity is joined.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGQUEUE",                      "Display LFG Queue Status - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGQUEUE_TP",                   "Display <<1>> when entering or exiting the queue for an LFG activity.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGVOTE",                       "Display LFG Vote/Ready Check - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGVOTE_TP",                    "Display <<1>> for group votes and ready checks.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE",                   "Display LFG Activity Completed - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE_TP",                "Display <<1>> when a Group Finder activity is completed.")
+
+
+
+
+
+
 
 ZO_CreateStringId("SI_LUIE_LAM_CI_HEADER",                              "Combat Info Options")
 ZO_CreateStringId("SI_LUIE_LAM_CI_HIDEPERCENTWHENFULL",                 "Hide percent label when full")
