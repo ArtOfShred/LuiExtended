@@ -30,8 +30,6 @@ function LUIE_CreateSettings()
     local guildRankDisplayOptionsKeys   = { ["Self Only"] = 1, ["Self + All w/ Permissions"] = 2, ["Display All Rank Changes"] = 3 }
     local rotationOptions               = { "Horizontal", "Vertical" }
     local rotationOptionsKeys           = { ["Horizontal"] = 1, ["Vertical"] = 2 }
-    local disguiseNotifyOptions         = { "Chat Announcement", "Center Screen Notification", "Both" }
-    local disguiseNotifyOptionsKeys     = { ["Chat Announcement"] = 1, ["Center Screen Notification"] = 2, ["Both"] = 3 }
     local duelStartOptions              = { "Message + Icon", "Message Only", "Icon Only" }
     local duelStartOptionsKeys          = { ["Message + Icon"] = 1, ["Message Only"] = 2, ["Icon Only"] = 3 }
 
@@ -2484,13 +2482,13 @@ function LUIE_CreateSettings()
                     {
                         -- Show Confiscated Items
                         type = "checkbox",
-                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_SHOWCONFISCATED)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWCONFISCATED_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.ShowConfiscate end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowConfiscate = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
+                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_LOOT_LootConfiscateD)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_LootConfiscateD_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootConfiscate end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootConfiscate = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
                         width = "full",
                         disabled = function() return not (LUIE.ChatAnnouncements.SV.Loot and LUIE.SV.ChatAnnouncements_Enable) end,
-                        default = LUIE.ChatAnnouncements.D.ShowConfiscate,
+                        default = LUIE.ChatAnnouncements.D.LootConfiscate,
                     },
                     {
                         -- Show Destroyed Items
@@ -5226,7 +5224,7 @@ function LUIE_CreateSettings()
                         name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_BASE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
                         tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupCA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupCA,
@@ -5237,7 +5235,7 @@ function LUIE_CreateSettings()
                         name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_BASE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
                         tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupAlert = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupAlert,
@@ -5252,10 +5250,10 @@ function LUIE_CreateSettings()
                     {
                         -- Show Group LFG CA
                         type = "checkbox",
-                        name = "Show Group LFG - CA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGREADY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGREADY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupLFGCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGCA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupLFGCA,
@@ -5263,10 +5261,10 @@ function LUIE_CreateSettings()
                     {
                         -- Show Group LFG Alert
                         type = "checkbox",
-                        name = "Show Group LFG - Alert",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGREADY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGREADY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupLFGAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGAlert = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupLFGAlert,
@@ -5275,10 +5273,10 @@ function LUIE_CreateSettings()
                     {
                         -- Show Group LFG CA
                         type = "checkbox",
-                        name = "Show Group LFG Queue - CA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGQUEUE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGQUEUE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupLFGQueueCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGQueueCA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGQueueCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupLFGQueueCA,
@@ -5286,10 +5284,10 @@ function LUIE_CreateSettings()
                     {
                         -- Show Group LFG Alert
                         type = "checkbox",
-                        name = "Show Group LFG Queue - Alert",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGQUEUE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGQUEUE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupLFGQueueAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGQueueAlert = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGQueueAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupLFGQueueAlert,
@@ -5298,10 +5296,10 @@ function LUIE_CreateSettings()
                     {
                         -- Show Group Vote CA
                         type = "checkbox",
-                        name = "Show Group Vote - CA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGVOTE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGVOTE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupVoteCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupVoteCA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupVoteCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupVoteCA,
@@ -5309,10 +5307,10 @@ function LUIE_CreateSettings()
                     {
                         -- Show Group Vote Alert
                         type = "checkbox",
-                        name = "Show Group Vote - Alert",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGVOTE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGVOTE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupVoteAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupVoteAlert = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupVoteAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupVoteAlert,
@@ -5321,10 +5319,10 @@ function LUIE_CreateSettings()
                     {
                         -- Show LFG Activity Completed CA
                         type = "checkbox",
-                        name = "Show Group LFG - Activity Complete CA",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPLFGCOMPLETE_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupLFGCompleteCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGCompleteCA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGCompleteCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupLFGCompleteCA,
@@ -5332,10 +5330,10 @@ function LUIE_CreateSettings()
                     {
                         -- Show LFG Activity Completed CSA
                         type = "checkbox",
-                        name = "Show Group LFG - Activity Complete CSA",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPLFGCOMPLETE_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupLFGCompleteCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGCompleteCSA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGCompleteCSA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupLFGCompleteCSA,
@@ -5343,22 +5341,28 @@ function LUIE_CreateSettings()
                     {
                         -- Show LFG Activity Completed Alert
                         type = "checkbox",
-                        name = "Show Group LFG - Activity Complete Alert",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWGROUPLFGCOMPLETE_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupLFGCompleteAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGCompleteAlert = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupLFGCompleteAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupLFGCompleteAlert,
                     },
                     
                     {
+                    type = "header",
+                    name = GetString(SI_LUIE_LAM_CA_GROUP_RAID_HEADER),
+                    width = "full"
+                    },
+                    
+                    {
                         -- Raid Announcements CA
                         type = "checkbox",
-                        name = "Show Raid Messages CA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidCA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupRaidCA,
@@ -5366,21 +5370,21 @@ function LUIE_CreateSettings()
                     {
                         -- Raid Announcements CSA
                         type = "checkbox",
-                        name = "Show Raid Messages CSA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidCSA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidCSA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupRaidCSA,
                     },
                     {
-                        -- Raid Announcements CA
+                        -- Raid Announcements Alert
                         type = "checkbox",
-                        name = "Show Raid Messages Alert",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BASE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidAlert = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupRaidAlert,
@@ -5389,10 +5393,10 @@ function LUIE_CreateSettings()
                     {
                         -- Raid Score CA
                         type = "checkbox",
-                        name = "Show Raid Score Update CA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidScoreCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidScoreCA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidScoreCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupRaidScoreCA,
@@ -5400,21 +5404,21 @@ function LUIE_CreateSettings()
                     {
                         -- Raid Score CSA
                         type = "checkbox",
-                        name = "Show Raid Score Update CSA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidScoreCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidScoreCSA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidScoreCSA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupRaidScoreCSA,
                     },
                     {
-                        -- Raid Score CA
+                        -- Raid Score Alert
                         type = "checkbox",
-                        name = "Show Raid Score Update Alert",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_SCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidScoreAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidScoreAlert = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidScoreAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupRaidScoreAlert,
@@ -5423,10 +5427,10 @@ function LUIE_CreateSettings()
                     {
                         -- Raid Best Score CA
                         type = "checkbox",
-                        name = "Show Raid Best Score CA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidBestScoreCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidBestScoreCA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidBestScoreCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupRaidBestScoreCA,
@@ -5434,21 +5438,21 @@ function LUIE_CreateSettings()
                     {
                         -- Raid Best Score CSA
                         type = "checkbox",
-                        name = "Show Raid Best Score CSA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidBestScoreCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidBestScoreCSA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidBestScoreCSA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupRaidBestScoreCSA,
                     },
                     {
-                        -- Raid Best Score CA
+                        -- Raid Best Score Alert
                         type = "checkbox",
-                        name = "Show Raid Best Score Alert",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidBestScoreAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidBestScoreAlert = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidBestScoreAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupRaidBestScoreAlert,
@@ -5457,10 +5461,10 @@ function LUIE_CreateSettings()
                     {
                         -- Raid Revive Counter CA
                         type = "checkbox",
-                        name = "Show Raid Revive Counter CA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidReviveCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidReviveCA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidReviveCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupRaidReviveCA,
@@ -5468,21 +5472,21 @@ function LUIE_CreateSettings()
                     {
                         -- Raid Revive Counter CSA
                         type = "checkbox",
-                        name = "Show Raid Revive Counter CSA",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidReviveCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidReviveCSA = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidReviveCSA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupRaidReviveCSA,
                     },
                     {
-                        -- Raid Revive Counter CA
+                        -- Raid Revive Counter Alert
                         type = "checkbox",
-                        name = "Show Raid Revive Counter Alert",
-                        tooltip = "TODO",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_REVIVE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidReviveAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidReviveAlert = value LUIE.ChatAnnouncements.RegisterGroupEvents() end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidReviveAlert = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.GroupRaidReviveAlert,
@@ -5496,11 +5500,48 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_CA_MISC_HEADER),
                 reference = "Chat_Announcements_Options_Misc_Announcements_Submenu",
                 controls = {
+                
+                
+                    {
+                        -- Display Group Area Message (CA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.NotificationGroupAreaCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.NotificationGroupAreaCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.NotificationGroupAreaCA,
+                    },
+                    {
+                        -- Display Group Area Message (CSA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.NotificationGroupAreaCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.NotificationGroupAreaCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.NotificationGroupAreaCSA,
+                    },
+                    {
+                        -- Display Group Area Message (Alert)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_GROUPAREA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.NotificationGroupAreaAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.NotificationGroupAreaAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.NotificationGroupAreaAlert,
+                    },
+                    
+                
                     {
                         -- Mail (CA)
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL) .. " CA",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.NotificationMailCA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.NotificationMailCA = value LUIE.ChatAnnouncements.RegisterMailEvents() end,
                         width = "full",
@@ -5510,8 +5551,8 @@ function LUIE_CreateSettings()
                     {
                         -- Mail (ALERT)
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL) .. " ALERT",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.NotificationMailAlert end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.NotificationMailAlert = value LUIE.ChatAnnouncements.RegisterMailEvents() end,
                         width = "full",
@@ -5520,100 +5561,10 @@ function LUIE_CreateSettings()
                     },
                     
                     {
-                        -- Mount Upgrade Message Color
-                        type = "colorpicker",
-                        name = "Bag/Bank Upgrade Message Color",
-                        tooltip = "TODO",
-                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.StorageRidingColor) end,
-                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.StorageRidingColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = {r=LUIE.ChatAnnouncements.D.StorageRidingColor[1], g=LUIE.ChatAnnouncements.D.StorageRidingColor[2], b=LUIE.ChatAnnouncements.D.StorageRidingColor[3]}
-                    },
-                    {
-                        -- Show Mount Upgrade (CA)
-                        type = "checkbox",
-                        name = "Show Mount Upgrade CA",
-                        tooltip = "Show Mount Upgrade",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.StorageRidingCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.StorageRidingCA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.StorageRidingCA,
-                    },
-                    {
-                        -- Show Mount Upgrade (CSA)
-                        type = "checkbox",
-                        name = "Show Mount Upgrade CSA",
-                        tooltip = "Show Mount Upgrade",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.StorageRidingCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.StorageRidingCSA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.StorageRidingCSA,
-                    },
-                    {
-                        -- Show Mount Upgrade (Alert)
-                        type = "checkbox",
-                        name = "Show Mount Upgrade Alert",
-                        tooltip = "Show Mount Upgrade",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.StorageRidingAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.StorageRidingAlert = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.StorageRidingAlert,
-                    },
-                    
-                    {
-                        -- Bag/Bank Upgrade Message Color
-                        type = "colorpicker",
-                        name = "Bag/Bank Upgrade Message Color",
-                        tooltip = "TODO",
-                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.StorageBagColor) end,
-                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.StorageBagColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = {r=LUIE.ChatAnnouncements.D.StorageBagColor[1], g=LUIE.ChatAnnouncements.D.StorageBagColor[2], b=LUIE.ChatAnnouncements.D.StorageBagColor[3]}
-                    },
-                    {
-                        -- Show Bag/Bank Upgrade (CA)
-                        type = "checkbox",
-                        name = "Show Bag/Bank Upgrade CA",
-                        tooltip = "Show Bag/Bank Upgrade",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.StorageBagCA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.StorageBagCA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.StorageBagCA,
-                    },
-                    {
-                        -- Show Bag/Bank Upgrade (CSA)
-                        type = "checkbox",
-                        name = "Show Bag/Bank Upgrade CSA",
-                        tooltip = "Show Bag/Bank Upgrade",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.StorageBagCSA end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.StorageBagCSA = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.StorageBagCSA,
-                    },
-                    {
-                        -- Show Bag/Bank Upgrade (Alert)
-                        type = "checkbox",
-                        name = "Show Bag/Bank Upgrade Alert",
-                        tooltip = "Show Bag/Bank Upgrade",
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.StorageBagAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.StorageBagAlert = value end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.StorageBagAlert,
-                    },
-
-                    {
                         -- Show Lockpick Events CA
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK) .. " CA",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.NotificationLockpickCA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.NotificationLockpickCA = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
                         width = "full",
@@ -5623,20 +5574,19 @@ function LUIE_CreateSettings()
                     {
                         -- Show Lockpick Events Akert
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK) .. " Alert",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.NotificationLockpickAlert end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.NotificationLockpickAlert = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.NotificationLockpickAlert,
                     },
-                    
                     {
                         -- Show Justice Confiscate (CA)
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE) .. " CA",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.NotificationConfiscateCA end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.NotificationConfiscateCA = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
                         width = "full",
@@ -5647,8 +5597,8 @@ function LUIE_CreateSettings()
                     {
                         -- Show Justice Confiscate (Alert)
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE) .. " ALERT",
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE_TP),
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWJUSTICE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
                         getFunc = function() return LUIE.ChatAnnouncements.SV.NotificationConfiscateAlert end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.NotificationConfiscateAlert = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
                         width = "full",
@@ -5656,41 +5606,165 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.NotificationConfiscateAlert,
                     },
                     
+                    
                     {
-                        -- Show Disguise Events
+                        -- Show Bag/Bank Upgrade (CA)
                         type = "checkbox",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.Disguise end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.Disguise = value LUIE.ChatAnnouncements.RegisterDisguiseEvents() end,
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.StorageBagCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.StorageBagCA = value end,
                         width = "full",
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.Disguise,
+                        default = LUIE.ChatAnnouncements.D.StorageBagCA,
                     },
                     {
-                        -- Disguise Event Type
-                        type = "dropdown",
-                        name = GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEOPTION),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEOPTION_TP),
-                        choices = disguiseNotifyOptions,
-                        getFunc = function() return disguiseNotifyOptions[LUIE.ChatAnnouncements.SV.DisguiseOption] end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DisguiseOption = disguiseNotifyOptionsKeys[value] end,
+                        -- Show Bag/Bank Upgrade (CSA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.StorageBagCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.StorageBagCSA = value end,
                         width = "full",
-                        default = disguiseNotifyOptions[3],
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Disguise) end,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.StorageBagCSA,
+                    },
+                    {
+                        -- Show Bag/Bank Upgrade (Alert)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.StorageBagAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.StorageBagAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.StorageBagAlert,
+                    },
+                    {
+                        -- Bag/Bank Upgrade Message Color
+                        type = "colorpicker",
+                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_COLOR)),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.StorageBagColor) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.StorageBagColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.StorageBagCA or LUIE.ChatAnnouncements.SV.StorageBagCSA or LUIE.ChatAnnouncements.SV.StorageBagAlert and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = {r=LUIE.ChatAnnouncements.D.StorageBagColor[1], g=LUIE.ChatAnnouncements.D.StorageBagColor[2], b=LUIE.ChatAnnouncements.D.StorageBagColor[3]}
+                    },
+                    {
+                        -- Show Mount Upgrade (CA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.StorageRidingCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.StorageRidingCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.StorageRidingCA,
+                    },
+                    {
+                        -- Show Mount Upgrade (CSA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.StorageRidingCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.StorageRidingCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.StorageRidingCSA,
+                    },
+                    {
+                        -- Show Mount Upgrade (Alert)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.StorageRidingAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.StorageRidingAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.StorageRidingAlert,
+                    },
+                    {
+                        -- Mount Upgrade Message Color
+                        type = "colorpicker",
+                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWRIDING_COLOR)),
+                        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.StorageRidingColor) end,
+                        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.StorageRidingColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                        width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.StorageRidingCA or LUIE.ChatAnnouncements.SV.StorageRidingCSA or LUIE.ChatAnnouncements.SV.StorageRidingAlert and LUIE.SV.ChatAnnouncements_Enable) end,
+                        default = {r=LUIE.ChatAnnouncements.D.StorageRidingColor[1], g=LUIE.ChatAnnouncements.D.StorageRidingColor[2], b=LUIE.ChatAnnouncements.D.StorageRidingColor[3]}
+                    },
+                    
+                    
+                    
+                    
+                    {
+                        -- Show Disguise Events (CA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.DisguiseCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DisguiseCA = value LUIE.ChatAnnouncements.RegisterDisguiseEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.DisguiseCA,
+                    },
+                    {
+                        -- Show Disguise Events (CSA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.DisguiseCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DisguiseCSA = value LUIE.ChatAnnouncements.RegisterDisguiseEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.DisguiseCSA,
+                    },
+                    {
+                        -- Show Disguise Events (Alert)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.DisguiseAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DisguiseAlert = value LUIE.ChatAnnouncements.RegisterDisguiseEvents() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.DisguiseAlert,
                     },
                     
                     {
-                        -- Show Disguise Alerts
+                        -- Show Disguise Warning (CA)
                         type = "checkbox",
-                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.DisguiseAlert end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DisguiseAlert = value end,
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.DisguiseWarnCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DisguiseWarnCA = value end,
                         width = "full",
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Disguise) end,
-                        default = LUIE.ChatAnnouncements.D.DisguiseAlert,
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.DisguiseWarnCA,
                     },
+                    {
+                        -- Show Disguise Warning (CSA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.DisguiseWarnCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DisguiseWarnCSA = value end,
+                        width = "full",
+                       disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.DisguiseWarnCSA,
+                    },
+                    {
+                        -- Show Disguise Warning (Alert)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.DisguiseWarnAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.DisguiseWarnAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.DisguiseWarnAlert,
+                    },
+                    
                     {
                         -- Disguise Alert Color
                         type = "colorpicker",
@@ -5699,30 +5773,8 @@ function LUIE_CreateSettings()
                         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.DisguiseAlertColor) end,
                         setFunc = function(r,g,b,a) LUIE.ChatAnnouncements.SV.DisguiseAlertColor={r,g,b} LUIE.ChatAnnouncements.RegisterColorEvents() end,
                         width = "full",
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.DisguiseWarnCA or LUIE.ChatAnnouncements.SV.DisguiseWarnCSA or LUIE.ChatAnnouncements.SV.DisguiseWarnAlert and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = { r=LUIE.ChatAnnouncements.D.DisguiseAlertColor[1], g=LUIE.ChatAnnouncements.D.DisguiseAlertColor[2], b=LUIE.ChatAnnouncements.D.DisguiseAlertColor[3] },
-                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Disguise and LUIE.ChatAnnouncements.SV.DisguiseAlert) end,
-                    },
-                    {
-                        -- Show /Stuck Alerts
-                        type = "checkbox",
-                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_SHOWSTUCK)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_SHOWSTUCK_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.MiscStuck end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.MiscStuck = value LUIE.ChatAnnouncements.RegisterStuckEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.MiscStuck,
-                    },
-                    {
-                         -- Show Inventory Full
-                        type = "checkbox",
-                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_MISC_INVENTORYFULL)),
-                        tooltip = GetString(SI_LUIE_LAM_CA_MISC_INVENTORYFULL_TP),
-                        getFunc = function() return LUIE.ChatAnnouncements.SV.ShowLootFail end,
-                        setFunc = function(value) LUIE.ChatAnnouncements.SV.ShowLootFail = value LUIE.ChatAnnouncements.RegisterLootEvents() end,
-                        width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                        default = LUIE.ChatAnnouncements.D.ShowLootFail,                   
                     },
                 },
             }

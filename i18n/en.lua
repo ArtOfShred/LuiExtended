@@ -366,30 +366,30 @@ ZO_CreateStringId("SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON",                  "Started
 ZO_CreateStringId("SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON",                "Completed: <<1>> <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_QUEST_LOG_FULL",                          "Your quest log is full.")
 
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT0",                     GetString(SI_TRADEACTIONRESULT0))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT1",                     "|cFEFEFE<<1>>|r is ignoring you. You cannot initiate a trade.")
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT2",                     GetString(SI_TRADEACTIONRESULT2))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT3",                     GetString(SI_TRADEACTIONRESULT3))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT4",                     GetString(SI_TRADEACTIONRESULT4))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT5",                     GetString(SI_TRADEACTIONRESULT5))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT6",                     GetString(SI_TRADEACTIONRESULT6))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT8",                     GetString(SI_TRADEACTIONRESULT8))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT9",                     GetString(SI_TRADEACTIONRESULT9))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT12",                    GetString(SI_TRADEACTIONRESULT12))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT13",                    GetString(SI_TRADEACTIONRESULT13))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT14",                    GetString(SI_TRADEACTIONRESULT14))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT41",                    GetString(SI_TRADEACTIONRESULT41))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT42",                    GetString(SI_TRADEACTIONRESULT42))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT43",                    GetString(SI_TRADEACTIONRESULT43))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT44",                    GetString(SI_TRADEACTIONRESULT44))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT45",                    GetString(SI_TRADEACTIONRESULT45))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT46",                    GetString(SI_TRADEACTIONRESULT46))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT62",                    GetString(SI_TRADEACTIONRESULT62))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT63",                    GetString(SI_TRADEACTIONRESULT63))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT64",                    GetString(SI_TRADEACTIONRESULT64))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT65",                    "You are already trading|cFEFEFE<<1>>|r.")
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT66",                    GetString(SI_TRADEACTIONRESULT66))
-ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT80",                    GetString(SI_TRADEACTIONRESULT80))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT0",                      GetString(SI_TRADEACTIONRESULT0))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT1",                      "|cFEFEFE<<1>>|r is ignoring you. You cannot initiate a trade.")
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT2",                      GetString(SI_TRADEACTIONRESULT2))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT3",                      GetString(SI_TRADEACTIONRESULT3))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT4",                      GetString(SI_TRADEACTIONRESULT4))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT5",                      GetString(SI_TRADEACTIONRESULT5))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT6",                      GetString(SI_TRADEACTIONRESULT6))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT8",                      GetString(SI_TRADEACTIONRESULT8))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT9",                      GetString(SI_TRADEACTIONRESULT9))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT12",                     GetString(SI_TRADEACTIONRESULT12))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT13",                     GetString(SI_TRADEACTIONRESULT13))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT14",                     GetString(SI_TRADEACTIONRESULT14))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT41",                     GetString(SI_TRADEACTIONRESULT41))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT42",                     GetString(SI_TRADEACTIONRESULT42))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT43",                     GetString(SI_TRADEACTIONRESULT43))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT44",                     GetString(SI_TRADEACTIONRESULT44))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT45",                     GetString(SI_TRADEACTIONRESULT45))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT46",                     GetString(SI_TRADEACTIONRESULT46))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT62",                     GetString(SI_TRADEACTIONRESULT62))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT63",                     GetString(SI_TRADEACTIONRESULT63))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT64",                     GetString(SI_TRADEACTIONRESULT64))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT65",                     "You are already trading|cFEFEFE<<1>>|r.")
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT66",                     GetString(SI_TRADEACTIONRESULT66))
+ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT80",                     GetString(SI_TRADEACTIONRESULT80))
 
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_ACCEPTED",                   "Trade invitation accepted.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_DECLINED",                   "Trade invitation declined.")
@@ -397,10 +397,23 @@ ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_CANCELED",                   "Trade i
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_CONFIRM",                    "You have invited |cFEFEFE<<1>>|r to trade.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MESSAGE",                    "|cFEFEFE<<1>>|r has invited you to trade.")
 
+-- Entering/Leaving Group Area Notifications used by EVENT_DISPLAY_ANNOUNCEMENT. These don't appear to have any strings in localizegeneratedstrings.lua, so we check for the Default (_D) here and replace the CSA with (_C) to remove the punctuation.
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D",       "Entering Group Area.")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D",       "Leaving Group Area.")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C",       "Entering Group Area")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_C",       "Leaving Group Area")
+
 -- UnitFrames.lua
 ZO_CreateStringId("SI_LUIE_UF_ERROR_FONT",                              "LUIE_CustomFrames: There was a problem with selecting required font. Falling back to game default.")
 
 -- LuiExtendedSettings.lua
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- BASE SETTINGS -- LAM --
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ZO_CreateStringId("SI_LUIE_LAM_COMPATIBILITY_WARNING",                  "Disable this option if you are having compatibility issues with other addons.")
 ZO_CreateStringId("SI_LUIE_LAM_FONT",                                   "Font")
 ZO_CreateStringId("SI_LUIE_LAM_FONT_SIZE",                              "Font Size")
@@ -432,6 +445,11 @@ ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_IGNORE",                       "'/ignor
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND",                 "'/unfriend' 'name' Remove a player from friends.\n\t\t\t\t\tAlternate options: '/removefriend'")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE",                 "'/unignore' 'name' Remove a player from ignored.\n\t\t\t\t\tAlternate options: '/removeignore'")
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- BUFFS & DEBUFFS -- LAM --
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ZO_CreateStringId("SI_LUIE_LAM_STARTUPMSG",                             "Disable startup message")
 ZO_CreateStringId("SI_LUIE_LAM_STARTUPMSG_TP",                          "This setting will disable the startup message.")
@@ -552,8 +570,20 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP",            "Format 
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_UNLOCKWINDOW",                      "Unlock Buffs window")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_UNLOCKWINDOW_TP",                   "Unlock for dragging window with buffs icons. This will only unlock areas unaffected by previous option (if it is enabled).")
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- CHAT ANNOUNCEMENTS -- LAM --
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+-- Base Settings
+ZO_CreateStringId("SI_LUIE_LAM_CA_HEADER",                              "Chat Announcements Options")
+ZO_CreateStringId("SI_LUIE_LAM_CA_DESCRIPTION",                         "Displays announcements in chat for various events - with many customizable settings.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ENABLE",                              "Enable Chat Announcements Module")
+ZO_CreateStringId("SI_LUIE_LAM_CA_ENABLE_TP",                           "Print messages to chat for various events.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP",                "Determines the method used to display player names in Chat Announcements where applicable.\nDefault: Character Name")
 
+-- Shared Menu Strings
 ZO_CreateStringId("SI_LUIE_LAM_CA_SHARED_CA",                           "a Chat Announcement")
 ZO_CreateStringId("SI_LUIE_LAM_CA_SHARED_CA_SHORT",                     "CA")
 ZO_CreateStringId("SI_LUIE_LAM_CA_SHARED_CSA",                          "a Center Screen Announcement")
@@ -714,8 +744,8 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_HIDEANNOYINGITEMS_TP",           "Don't d
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_HIDEANNOYINGITEMS_WARNING",      "This prevents chat spam in large groups.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_HIDETRASH",                      "Hide Trash Quality Items")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_HIDETRASH_TP",                   "Don't display trash quality items looted.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWCONFISCATED",                "Display Item Loss - Confiscated Items")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWCONFISCATED_TP",             "Display a message when items are confiscated by a guard.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_LootConfiscateD",                "Display Item Loss - Confiscated Items")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_LootConfiscateD_TP",             "Display a message when items are confiscated by a guard.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_LOOTSHOWDESTROYED",              "Display Item Loss - Destroyed Items")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_LOOTSHOWDESTROYED_TP",           "Display a message when an item is destroyed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_LOOTSHOWLOCKPICK",               "Display Item Loss - Lockpick Break")
@@ -1062,70 +1092,12 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_MARA_TP",                        "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_MARA_ALERT",                     "Only Display Alert on Failure")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_MARA_ALERT_TP",                  "When enabled, an Alert will only be displayed if the Pledge of Mara fails. This emulates the behavior of the default UI settings.")
 
-
-
-
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_HEADER",                              "Chat Announcements Options")
-ZO_CreateStringId("SI_LUIE_LAM_CA_DESCRIPTION",                         "Displays announcements in chat for various events - with many customizable settings.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ENABLE",                              "Enable Chat Announcements Module")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ENABLE_TP",                           "Print messages to chat for various events.")
-
-
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_HEADER",                         "Miscellaneous Announcements")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_INVENTORYFULL",                  "Display inventory is full notification")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_INVENTORYFULL_TP",               "Display a message in chat when attempting to loot/craft an item and your inventory is full.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG",                    "Show Bag/Bank Upgrade Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP",                 "Print a notification to chat when bag or bank space upgrades are purchased ingame or through the crown store.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE",               "Show Disguise Status Change Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT",          "Show Disguise Alert Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP",       "Print a notification to chat when near a sentry or performing suspicious activity while disguised.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR",     "Disguise Alert Message Color")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR_TP",  "Change the color of the center screen warning displayed when near a sentry or performing suspicious activity while disguised.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE_TP",            "Print a notification to chat when entering a relevant area and becoming disguised or revealed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEOPTION",         "Disguise Notification Option")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEOPTION_TP",      "Choose whether disguise status effects and alerts will display as a Chat Announcement, Center Screen Notification, or both.")
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPVOTE",                  "Show Group Vote Notifications")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPVOTE_TP",               "Display a notification in chat when a ready check or votekick is initiated.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPLFGCOMPLETE",           "Show LFG Completion Message")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPLFGCOMPLETE_TP",        "Print a notification to chat when an LFG activity is completed.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAID",                  "Show Trial - Status Notifications")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAID_TP",               "Display chat notifications when a Trial is started, failed, or completed.")
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDSCORE",             "Show Trial - Score Update")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDSCORE_TP",          "Display a chat notification when your score in a Trial is increased.")
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDBESTSCORE",         "Show Trial - New High Score")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDBESTSCORE_TP",      "Display a chat notification when a new high score is achieved on trial completion.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDREVIVE",            "Show Trial - Vitality Bonus Loss")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWGROUPRAIDREVIVE_TP",         "Display a chat notification when Vitality Bonus is decreased.")
-
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWJUSTICE",                    "Show Justice Confiscation Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWJUSTICE_TP",                 "Print a notification to chat when items or gold are confiscated by a guard through dialogue or player death.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK",                   "Show Lockpick Failure/Success Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK_TP",                "Print a notification to chat when for failed or successful lockpick attempts.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWMAIL",                       "Show Mail Event Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP",                    "Prints a notification to chat when mail is accepted, deleted, or sent.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING",                     "Show Riding Skill Upgrade Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP",                  "Print a notification to chat when riding upgrades are purchased or Crown Riding Skill books are used.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWSTUCK",                      "Show /Stuck Messages")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWSTUCK_TP",                   "Prints a message in chat for results of the /stuck function.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP",                "Determines the method used to display player names in Chat Announcements where applicable.\nDefault: Character Name")
-
-
-
-
 -- Group Menu
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_HEADER",                        "Group/LFG/Trial Announcements")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_BASE_HEADER",                   "Group Notifications")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_BASE",                          "Display Group Notifications - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_BASE_TP",                       "Display <<1>> for group invites and group composition changes.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFG_HEADER",                    "LFG Notifications")
-
-
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGREADY",                      "Display LFG Ready Notifications - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGREADY_TP",                   "Display <<1>> when an LFG group is formed or activity is joined.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGQUEUE",                      "Display LFG Queue Status - <<1>>")
@@ -1134,12 +1106,47 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGVOTE",                       "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGVOTE_TP",                    "Display <<1>> for group votes and ready checks.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE",                   "Display LFG Activity Completed - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE_TP",                "Display <<1>> when a Group Finder activity is completed.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_HEADER",                   "Raid Notifications")
 
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_BASE",                     "Display Raid Status Notifications - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_BASE_TP",                  "Display <<1>> when a Trial is started, failed, or completed.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_SCORE",                    "Display Score Updates - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_SCORE_TP",                 "Display <<1>> when your score in a Trial changes.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE",                "Display New Best Score - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE_TP",             "Display <<1>> when a new high score is achieved on trial completion.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_REVIVE",                   "Display Vitality Bonus Loss - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_REVIVE_TP",                "Display <<1>> when Vitality Bonus is decreased.")
 
+-- Misc Menu
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_GROUPAREA",                      "Display Entering/Leaving Group Area - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_GROUPAREA_TP",                   "Display <<1>> when entering or leaving a Group Area.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_HEADER",                         "Miscellaneous Announcements")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK",                   "Display Lockpicking Notifications - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK_TP",                "Display <<1>> on successful or failed lockpick attempts as well as when you attempt to pick a lock and it's impossible or you have no lock picks.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWMAIL",                       "Display Mail Notifications")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP",                    "Display <<1>> when mail is accepted, deleted, or sent.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWJUSTICE",                    "Display Justice Notifications - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWJUSTICE_TP",                 "Display <<1>> when items or gold are confiscated by a guard.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG",                    "Display Bag/Bank Space Upgrade - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP",                 "Display <<1>> when bag or bank space upgrades are purchased ingame or through the crown store.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_COLOR",              "Bag/Bank Space Message Color")
+-- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING",                     "Display Riding Skill Upgrade - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP",                  "Display <<1>> when riding upgrades are purchased or Crown Riding Skill books are used.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING_COLOR",               "Riding Skill Message Color")
+-- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE",               "Display Disguise Status - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE_TP",            "Display <<1>> when entering or exiting a relevant area and becoming disguised or revealed.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT",          "Display Detection Warning - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT_TP",       "Display <<1>> when near a sentry or performing suspicious activity while disguised.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR",     "Detection Warning CSA Color")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR_TP",  "Change the color of the Center Screen Announcement displayed when near a sentry or performing suspicious activity while disguised.")
 
-
-
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- COMBAT INFO -- LAM --
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ZO_CreateStringId("SI_LUIE_LAM_CI_HEADER",                              "Combat Info Options")
 ZO_CreateStringId("SI_LUIE_LAM_CI_HIDEPERCENTWHENFULL",                 "Hide percent label when full")
@@ -1152,6 +1159,12 @@ ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWULTIGENTEXTURE",                  "Show Ul
 ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWULTIGENTEXTURE_TP",               "Display special texture under Ultimate skill button when in-combat ultimate generation is detected.")
 ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWULTIMATEVALUE",                   "Show current Ultimate value")
 ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWULTIMATEVALUE_TP",                "Display current ultimate ability resource level above ultimate skill slot.")
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- INFO PANEL -- LAM --
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ZO_CreateStringId("SI_LUIE_LAM_PNL_DISABLECOLORSRO",                    "Disable colours on read-only values")
 ZO_CreateStringId("SI_LUIE_LAM_PNL_DISABLECOLORSRO_TP",                 "Disable value-dependent colour of the information label for items that you don't have direct control: Currently this includes FPS and Latency labels.")
@@ -1174,6 +1187,13 @@ ZO_CreateStringId("SI_LUIE_LAM_PNL_SHOWPANEL_TP",                       "Info mi
 ZO_CreateStringId("SI_LUIE_LAM_PNL_SHOWSOULGEMS",                       "Show Soul Gems")
 ZO_CreateStringId("SI_LUIE_LAM_PNL_UNLOCKPANEL",                        "Unlock panel")
 ZO_CreateStringId("SI_LUIE_LAM_PNL_UNLOCKPANEL_TP",                     "Allow mouse dragging for Info Panel.")
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- UNITFRAMES -- LAM --
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_FONT_SIZE_TP",                "Font Size to be used on all labels on the default unit frames bars.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_FONT_TP",                     "Font to display all labels on default frames.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_DFRAMES_GROUPSMALL",                  "Default Small GROUP Frame")

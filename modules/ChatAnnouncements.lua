@@ -19,11 +19,7 @@ CA.Enabled = false
 
 CA.D = {
 
-    -- TODO: Remove
-    MiscStuck                     = false,
-    ShowLootFail                  = false, -- Replace with error alert_handler hooks
-    -- TODO: Remove (need to remove conditionals in event handler registration)
-    ShowConfiscate                = true,
+    -- TODO: ShowLootFail         = false, -- Replace with error alert_handler hooks
 
     -- Base Options
     ChatPlayerDisplayOptions      = 2,
@@ -107,7 +103,6 @@ CA.D = {
     LootTotal                     = false,
     LootTotalString               = GetString(SI_LUIE_CA_DEFAULTVARS_CURRENCYTOTALMESSAGE),
     LootCraft                     = true,
-    LootCurrencyCombo             = false,
     LootGroup                     = true,
     LootIcons                     = true,
     LootMail                      = true,
@@ -116,6 +111,7 @@ CA.D = {
     LootShowArmorType             = false,
     LootShowStyle                 = false,
     LootShowTrait                 = true,
+    LootConfiscate                = true,
     LootTrade                     = true,
     LootVendor                    = true,
     LootVendorCurrency            = true,
@@ -143,10 +139,17 @@ CA.D = {
     NotificationRespecCSA         = true,
     NotificationRespecAlert       = false,
     
+    NotificationGroupAreaCA       = false,
+    NotificationGroupAreaCSA      = true,
+    NotificationGroupAreaAlert    = false,
+    
     -- Disguise
-    Disguise                      = true,
-    DisguiseAlert                 = true,
-    DisguiseOption                = 3,
+    DisguiseCA                    = false,
+    DisguiseCSA                   = true,
+    DisguiseAlert                 = false,
+    DisguiseWarnCA                = false,
+    DisguiseWarnCSA               = true,
+    DisguiseWarnAlert             = false,
     DisguiseAlertColor            = { 1, 0, 0, 1 },
     
     -- Duel
@@ -425,6 +428,7 @@ CA.D = {
 local g_playerName                  = nil
 local g_playerNameFormatted         = nil
 local g_playerDisplayName           = nil
+local g_activatedFirstLoad          = true
 
 -- Message Printer
 local g_queuedMessages              = { }           -- Table to hold messages for the 50 ms tick function to print them.
@@ -700,7 +704,6 @@ function CA.Initialize(enabled)
     CA.RegisterSocialEvents()
     CA.RegisterDisguiseEvents()
     CA.RegisterColorEvents()
-    CA.RegisterStuckEvents()
     CA.RegisterQuestEvents()
     
     --
@@ -861,21 +864,6 @@ function CA.RegisterXPEvents()
     end
 end
 
-function CA.RegisterStuckEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_BEGIN)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_ERROR_ALREADY_IN_PROGRESS)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_ERROR_INVALID_LOCATION)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_ERROR_IN_COMBAT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_STUCK_ERROR_ON_COOLDOWN)
-    if CA.SV.MiscStuck then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_BEGIN, CA.StuckBegin)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_ERROR_ALREADY_IN_PROGRESS, CA.StuckAlreadyInProgress)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_ERROR_INVALID_LOCATION, CA.StuckInvalidLocation)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_ERROR_IN_COMBAT, CA.StuckInCombat)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_STUCK_ERROR_ON_COOLDOWN, CA.StuckOnCooldown)
-    end
-end
-
 function CA.RegisterGoldEvents()
 
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CARRIED_CURRENCY_UPDATE, CA.OnCurrencyUpdate)
@@ -1009,11 +997,11 @@ function CA.RegisterLootEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED, CA.JusticeStealRemove)
     end
     
-    if CA.SV.ShowLootFail then
+    --[[if CA.SV.ShowLootFail then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_COMPLETE_ATTEMPT_FAILED_INVENTORY_FULL, CA.InventoryFullQuest)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_IS_FULL, CA.InventoryFull)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED, CA.LootItemFailed)
-    end
+    end]]
 end
 
 function CA.RegisterDisguiseEvents()
@@ -1024,10 +1012,14 @@ function CA.RegisterDisguiseEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, CA.DisguiseState )
         EVENT_MANAGER:AddFilterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
         g_currentDisguise = GetItemId(0, 10) or 0 -- Get the currently equipped disguise itemId if any
-        g_disguiseState = GetUnitDisguiseState("player") -- Get current player disguise state
-        if g_disguiseState > 0 then
-            g_disguiseState = 1 -- Simplify all the various states into a basic 0 = false, 1 = true value
-            zo_callLater(CA.DisplayDisguiseOnLoad, 50)
+        if g_activatedFirstLoad then
+            g_disguiseState = 0
+            g_activatedFirstLoad = false
+        else
+            g_disguiseState = GetUnitDisguiseState("player") -- Get current player disguise state
+            if g_disguiseState > 0 then
+                g_disguiseState = 1 -- Simplify all the various states into a basic 0 = false, 1 = true value
+            end
         end
     end
 end
@@ -1037,18 +1029,6 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------
-
-function CA.DisplayDisguiseOnLoad()
-    if CA.SV.DisguiseOption == 1 or CA.SV.DisguiseOption == 3 then
-        printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))
-    end
-    if CA.SV.DisguiseOption == 2 or CA.SV.DisguiseOption == 3 then
-        local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT)
-        messageParams:SetText(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))
-        messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COUNTDOWN)
-        CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
-    end
-end
 
 function CA.GuildHeraldrySaved()
 
@@ -4383,7 +4363,7 @@ function CA.JusticeRemovePrint()
     g_itemsConfiscated = true
     
     -- PART 1 -- INVENTORY
-    if CA.SV.ShowConfiscate then
+    if CA.SV.LootConfiscate then
         local bagsize = GetBagSize(1)
 
         for i = 0,bagsize do
@@ -4405,7 +4385,7 @@ function CA.JusticeRemovePrint()
                     local receivedBy = ""
                     local gainOrLoss = CA.SV.CurrencyContextColor and 2 or 4
                     local logPrefix = CA.SV.CurrencyMessageConfiscate
-                    if CA.SV.ShowConfiscate then
+                    if CA.SV.LootConfiscate then
                         CA.ItemPrinter(inventoryitem.icon, inventoryitem.stack, inventoryitem.itemType, inventoryitem.itemId, inventoryitem.itemLink, receivedBy, logPrefix, gainOrLoss, false)
                     end
                 end
@@ -4458,7 +4438,7 @@ function CA.JusticeRemovePrint()
                     local receivedBy = ""
                     local gainOrLoss = CA.SV.CurrencyContextColor and 2 or 4
                     local logPrefix = CA.SV.CurrencyMessageConfiscate
-                    if CA.SV.ShowConfiscate then
+                    if CA.SV.LootConfiscate then
                         CA.ItemPrinter(inventoryitem.icon, inventoryitem.stack, inventoryitem.itemType, inventoryitem.itemId, inventoryitem.itemLink, receivedBy, logPrefix, gainOrLoss, false)
                     end
                 end
@@ -4474,27 +4454,40 @@ function CA.JusticeRemovePrint()
 end
 
 function CA.DisguiseState(eventCode, unitTag, disguiseState)
-    if CA.SV.DisguiseAlert and disguiseState == DISGUISE_STATE_DANGER then
-        if CA.SV.DisguiseOption == 1 or CA.SV.DisguiseOption == 3 then
+    if disguiseState == DISGUISE_STATE_DANGER then
+        if CA.SV.DisguiseWarnCA then
             printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER))
         end
-        if CA.SV.DisguiseOption == 2 or CA.SV.DisguiseOption == 3 then
+        if CA.SV.DisguiseWarnCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_MAJOR_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED)
             messageParams:SetText(DisguiseAlertColorize:Colorize(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER)))
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COUNTDOWN)
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
+        if CA.SV.DisguiseWarnAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DANGER))
+        end
+        
+        if (CA.SV.DisguiseWarnCA or CA.SV.DisguiseWarnAlert) and not CA.SV.DisguiseWarnCSA then
+            PlaySound(SOUNDS.GROUP_ELECTION_REQUESTED)
+        end
     end
 
-    if CA.SV.DisguiseAlert and disguiseState == DISGUISE_STATE_SUSPICIOUS then
-        if CA.SV.DisguiseOption == 1 or CA.SV.DisguiseOption == 3 then
+    if disguiseState == DISGUISE_STATE_SUSPICIOUS then
+        if CA.SV.DisguiseWarnCA then
             printToChat(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS))
         end
-        if CA.SV.DisguiseOption == 2 or CA.SV.DisguiseOption == 3 then
+        if CA.SV.DisguiseWarnCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_MAJOR_TEXT, SOUNDS.GROUP_ELECTION_REQUESTED)
             messageParams:SetText(DisguiseAlertColorize:Colorize(GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS)))
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COUNTDOWN)
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        end
+        if CA.SV.DisguiseWarnAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS))
+        end
+        if (CA.SV.DisguiseWarnCA or CA.SV.DisguiseWarnAlert) and not CA.SV.DisguiseWarnCSA then
+            PlaySound(SOUNDS.GROUP_ELECTION_REQUESTED)
         end
     end
 
@@ -4504,12 +4497,16 @@ function CA.DisguiseState(eventCode, unitTag, disguiseState)
     end
 
     if g_disguiseState == 1 and (disguiseState == DISGUISE_STATE_NONE) then
-        if CA.SV.DisguiseOption == 1 or CA.SV.DisguiseOption == 3 then
-            printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description))
+        local message = strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description)
+        if CA.SV.DisguiseCA then
+            printToChat(message)
         end
-        if CA.SV.DisguiseOption == 2 or CA.SV.DisguiseOption == 3 then
+        if CA.SV.DisguiseAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
+        end
+        if CA.SV.DisguiseCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT)
-            messageParams:SetText(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description))
+            messageParams:SetText(message)
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COUNTDOWN)
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
@@ -4517,12 +4514,16 @@ function CA.DisguiseState(eventCode, unitTag, disguiseState)
 
     if g_disguiseState == 0 and ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
         g_currentDisguise = GetItemId(0, 10) or 0
-        if CA.SV.DisguiseOption == 1 or CA.SV.DisguiseOption == 3 then
-            printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))
+        local message = strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description)
+        if CA.SV.DisguiseCA then
+            printToChat(message)
         end
-        if CA.SV.DisguiseOption == 2 or CA.SV.DisguiseOption == 3 then
+        if CA.SV.DisguiseAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
+        end
+        if CA.SV.DisguiseCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT)
-            messageParams:SetText(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))
+            messageParams:SetText(message)
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COUNTDOWN)
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
@@ -4536,7 +4537,7 @@ function CA.DisguiseState(eventCode, unitTag, disguiseState)
 end
 
 function CA.OnPlayerActivated(eventCode, initial)
-    -- Displays disguise status change when zoning, if enabled
+    
     if g_disguiseState == 0 then
         g_disguiseState = GetUnitDisguiseState("player")
         if g_disguiseState == 0 then
@@ -4544,12 +4545,16 @@ function CA.OnPlayerActivated(eventCode, initial)
         elseif g_disguiseState ~= 0 then
             g_disguiseState = 1
             g_currentDisguise = GetItemId(0, 10) or 0
-            if CA.SV.DisguiseOption == 1 or CA.SV.DisguiseOption == 3 then
-                printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))
+            local message = strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description)
+            if CA.SV.DisguiseCA then
+                printToChat(message)
             end
-            if CA.SV.DisguiseOption == 2 or CA.SV.DisguiseOption == 3 then
+            if CA.SV.DisguiseAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
+            end
+            if CA.SV.DisguiseCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT)
-                messageParams:SetText(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description))
+                messageParams:SetText(message)
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COUNTDOWN)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
@@ -4558,12 +4563,16 @@ function CA.OnPlayerActivated(eventCode, initial)
     elseif g_disguiseState == 1 then
         g_disguiseState = GetUnitDisguiseState("player")
         if g_disguiseState == 0 then
-            if CA.SV.DisguiseOption == 1 or CA.SV.DisguiseOption == 3 then
-                printToChat(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description))
+            local message = strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description)
+            if CA.SV.DisguiseCA then
+                printToChat(message)
             end
-            if CA.SV.DisguiseOption == 2 or CA.SV.DisguiseOption == 3 then
+            if CA.SV.DisguiseAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
+            end
+            if CA.SV.DisguiseCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT)
-                messageParams:SetText(strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description))
+                messageParams:SetText(message)
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COUNTDOWN)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
@@ -4576,28 +4585,17 @@ function CA.OnPlayerActivated(eventCode, initial)
     end
 end
 
-function CA.StuckBegin(eventCode)
-    printToChat(GetString(SI_FIXING_STUCK_TEXT))
-end
-
-function CA.StuckAlreadyInProgress(eventCode)
-    printToChat(GetString(SI_STUCK_ERROR_ALREADY_IN_PROGRESS))
-end
-
-function CA.StuckInvalidLocation(eventCode)
-    printToChat(GetString(SI_INVALID_STUCK_LOCATION))
-end
-
-function CA.StuckInCombat(eventCode)
-    printToChat(GetString(SI_STUCK_ERROR_IN_COMBAT))
-end
-
+--[[ STUCK REFERENCE
 function CA.StuckOnCooldown(eventCode)
     local cooldownText = ZO_FormatTime(GetStuckCooldown(), TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_TWELVE_HOUR)
     local cooldownRemainingText = ZO_FormatTimeMilliseconds(GetTimeUntilStuckAvailable(), TIME_FORMAT_STYLE_COLONS, TIME_FORMAT_PRECISION_TWELVE_HOUR)
     printToChat(strformat(GetString(SI_STUCK_ERROR_ON_COOLDOWN), cooldownText, cooldownRemainingText ))
 end
+]]
 
+-- TODO: Replace/Remove
+
+--[[
 function CA.InventoryFullQuest(eventCode)
     printToChat(GetString(SI_INVENTORY_ERROR_INVENTORY_FULL))
 end
@@ -4625,7 +4623,7 @@ function CA.LootItemFailed(eventCode, reason, itemName)
 
     zo_callLater(ReactivateLootItemFailed, 100)
 end
-
+]]
 
 -------------------------------------------------------------------------
 -- UPDATED CODE
@@ -5808,10 +5806,10 @@ function CA.AlertStyleLearned()
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         
         EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-        if CA.SV.Loot or CA.SV.LootShowDestroy or CA.SV.ShowConfiscate or CA.SV.LootShowDisguise or CA.SV.LootShowLockpick then
+        if CA.SV.Loot or CA.SV.LootShowDisguise then
             EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
         end
-        if not (CA.SV.Loot or CA.SV.LootShowDestroy or CA.SV.ShowConfiscate or CA.SV.LootShowDisguise or CA.SV.LootShowLockpick) then
+        if not (CA.SV.Loot or CA.SV.LootShowDisguise) then
             g_inventoryStacks = {}
         end
         
@@ -5846,10 +5844,10 @@ function CA.AlertStyleLearned()
         
         
         EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
-        if CA.SV.Loot or CA.SV.LootShowDestroy or CA.SV.ShowConfiscate or CA.SV.LootShowDisguise or CA.SV.LootShowLockpick then
+        if CA.SV.Loot or CA.SV.LootShowDisguise then
             EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
         end
-        if not (CA.SV.Loot or CA.SV.LootShowDestroy or CA.SV.ShowConfiscate or CA.SV.LootShowDisguise or CA.SV.LootShowLockpick) then
+        if not (CA.SV.Loot or CA.SV.LootShowDisguise) then
             g_inventoryStacks = {}
         end
         
@@ -7682,22 +7680,54 @@ function CA.AlertStyleLearned()
     
     local overrideDisplayAnnouncementTitle = {
     
-    [GetString(SI_SKILLS_FORCE_RESPEC_TITLE)] = { ca = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS) .. ".", csa = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS) },
-    [GetString(SI_ATTRIBUTE_FORCE_RESPEC_TITLE)] = { ca = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES) .. ".", csa = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES) },
+    [GetString(SI_SKILLS_FORCE_RESPEC_TITLE)] = { ca = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS) .. ".", csa = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS), announceType = "RESPEC" },
+    [GetString(SI_ATTRIBUTE_FORCE_RESPEC_TITLE)] = { ca = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES) .. ".", csa = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES), announceType = "RESPEC" },
+    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C), announceType = "GROUPAREA" },
+    }
     
+    local overrideDisplayAnnouncementDescription = {
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_C), announceType = "GROUPAREA" },
     }
     
     -- EVENT_DISPLAY_ANNOUNCEMENT -- CSA HANDLER
     local function DisplayAnnouncementHook(title, description)
         
         -- TEMPORARY DEBUG
-        if title ~= "" and not overrideDisplayAnnouncementTitle[title] then
+        if (title ~= "" and not overrideDisplayAnnouncementTitle[title]) or (description ~= "" and not overrideDisplayAnnouncementDescription[description]) then
             d("EVENT_DISPLAY_ANNOUNCEMENT")
             d("TEMPORARY: Please let me know where you see this message, and the context or notification ")
         end
         
+        local flagCA
+        local flagCSA
+        local flagAlert
+        
+        -- Resolve whether flags are true
+        -- Temporary double conditional here until we resolve all Display Announcement types
+        if (title ~= "" and overrideDisplayAnnouncementTitle[title]) or (description ~= "" and overrideDisplayAnnouncementDescription[description]) then
+            local reference
+            if title ~= "" and overrideDisplayAnnouncementTitle[title] then reference = overrideDisplayAnnouncementTitle[title].announceType end
+            if description ~= "" and overrideDisplayAnnouncementDescription[description] then reference = overrideDisplayAnnouncementDescription[description].announceType end
+            if reference == "RESPEC" then
+                flagCA = CA.SV.NotificationRespecCA and true or false
+                flagCSA = CA.SV.NotificationRespecCSA and true or false
+                flagAlert = CA.SV.NotificationRespecAlert and true or false
+            elseif reference == "GROUPAREA" then
+                flagCA = CA.SV.NotificationGroupAreaCA and true or false
+                flagCSA = CA.SV.NotificationGroupAreaCSA and true or false
+                flagAlert = CA.SV.NotificationGroupAreaAlert and true or false
+            end
+        else
+            -- Temporary until we gather data on all events - if there are any display announcements in addition to Respec/Group Area Notifications then conditionals will be added to support them, but for now, only display default CSA.
+            flagCA = false
+            flagCSA = true
+            flagAlert = false
+        end
+        
         local titleCA
         local titleCSA
+        local descriptionCA
+        local descriptionCSA
         -- Replace message text when needed
         if title ~= "" and overrideDisplayAnnouncementTitle[title] then
             titleCA = overrideDisplayAnnouncementTitle[title].ca
@@ -7705,6 +7735,14 @@ function CA.AlertStyleLearned()
         elseif title ~= "" then
             titleCA = title
             titleCSA = title
+        end
+        
+        if description ~= "" and overrideDisplayAnnouncementDescription[description] then
+            descriptionCA = overrideDisplayAnnouncementDescription[description].ca
+            descriptionCSA = overrideDisplayAnnouncementDescription[description].csa
+        elseif description ~= "" then
+            descriptionCA = title
+            descriptionCSA = title
         end
         
         local messageParams
@@ -7717,32 +7755,38 @@ function CA.AlertStyleLearned()
             messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
         end
         
-        -- CA
-        if title ~= "" and description ~= "" then
-            printToChat(titleCA)
-            printToChat(description)
-        elseif title ~= "" then
-            printToChat(titleCA)
-        elseif description ~= "" then
-            printToChat(description)
-        end
-      
-        
-        -- CSA
-        if messageParams then
-            messageParams:SetText(titleCSA, description)
-            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_DISPLAY_ANNOUNCEMENT)
-            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        if flagCA then
+            if title ~= "" and description ~= "" then
+                printToChat(titleCA)
+                printToChat(descriptionCA)
+            elseif title ~= "" then
+                printToChat(titleCA)
+            elseif description ~= "" then
+                printToChat(descriptionCA)
+            end
         end
         
-        -- ALERT
-        if title ~= "" and description ~= "" then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, titleCA)
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, description)
-        elseif title ~= "" then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, titleCA)
-        elseif description ~= "" then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, description)
+        if flagCSA then
+            if messageParams then
+                messageParams:SetText(titleCSA, descriptionCSA)
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_DISPLAY_ANNOUNCEMENT)
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+        end
+        
+        if flagAlert then
+            if title ~= "" and description ~= "" then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, titleCA)
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, descriptionCA)
+            elseif title ~= "" then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, titleCA)
+            elseif description ~= "" then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, descriptionCA)
+            end
+        end
+        
+        if (flagCA or flagAlert) and not flagCSA then
+            PlaySound(SOUNDS.DISPLAY_ANNOUNCEMENT)
         end
         
         return true
