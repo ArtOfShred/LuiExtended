@@ -5796,7 +5796,7 @@ function CA.AlertStyleLearned()
     end
 
     -- EVENT_TRADE_CANCELED
-    local function NotificationTradeCanceledAlert()
+    local function TradeCanceledAlert()
         if CA.SV.NotificationTradeCA then
             printToChat(GetString(SI_TRADE_CANCELED))
         end
@@ -5926,7 +5926,7 @@ function CA.AlertStyleLearned()
     ZO_PreHook(alertHandlers, EVENT_TRADE_INVITE_WAITING, TradeInviteWaitingAlert)
     ZO_PreHook(alertHandlers, EVENT_TRADE_INVITE_DECLINED, TradeInviteDeclinedAlert)
     ZO_PreHook(alertHandlers, EVENT_TRADE_INVITE_CANCELED, TradeInviteCanceledAlert)
-    ZO_PreHook(alertHandlers, EVENT_TRADE_CANCELED, NotificationTradeCAnceledAlert)
+    ZO_PreHook(alertHandlers, EVENT_TRADE_CANCELED, TradeCanceledAlert)
     ZO_PreHook(alertHandlers, EVENT_TRADE_FAILED, TradeFailedAlert)
     ZO_PreHook(alertHandlers, EVENT_TRADE_SUCCEEDED, TradeSucceededAlert)
     ZO_PreHook(alertHandlers, EVENT_MAIL_SEND_FAILED, MailSendFailedAlert)
