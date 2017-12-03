@@ -85,10 +85,10 @@ UF.D = {
     CustomColourHealer               = { 117/255, 077/255, 135/255 },
     CustomColourTank                 = { 133/255, 018/255, 013/255 },
     
-    CustomColourDragonknight         = { 128/255, 62/255, 22/255 },
-    CustomColourNightblade           = { 167/255, 15/255, 15/255 },
+    CustomColourDragonknight         = { 255/255, 126/255, 63/255 },
+    CustomColourNightblade           = { 255/255, 51/255, 49/255 },
     CustomColourSorcerer             = { 75/255, 83/255, 247/255 },
-    CustomColourTemplar              = { 255/255, 232/255, 125/255 },
+    CustomColourTemplar              = { 255/255, 255/255, 99/255 },
     CustomColourWarden               = { 136/255, 245/255, 125/255 },
     
     CustomShieldBarSeparate          = false,

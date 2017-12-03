@@ -109,7 +109,7 @@ ZO_CreateStringId("SI_LUIE_CA_DUEL_STATE2",                             "You are
 ZO_CreateStringId("SI_LUIE_CHAMPION_POINT_TYPE",                        "<<1>><<2>> <<3>> <<1[Point/Points]>>")
 
 ZO_CreateStringId("SI_LUIE_CA_EXPERIENCE_MESSAGE",                      "You earn %s.")
-ZO_CreateStringId("SI_LUIE_CA_EXPERIENCE_NAME",                         "experience points")
+ZO_CreateStringId("SI_LUIE_CA_EXPERIENCE_NAME",                         "experience <<1[point/points]>>")
 
 -- COLLECTIBLES
 ZO_CreateStringId("SI_LUIE_CA_COLLECTIBLE",                             "Collection Updated")
@@ -350,6 +350,7 @@ ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP",                "Total A
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTV",                "Total TV: %s")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALWV",                "Total Vouchers: %s")
 
+ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_TOTAL",                      "New Total:")
 
 ZO_CreateStringId("SI_LUIE_CA_SKILL_LINE_ADDED",                        "Skill line gained: <<1>><<2>>")
 ZO_CreateStringId("SI_LUIE_CA_ABILITY_RANK_UP",                         "<<1>> Increased to Rank <<R:2>>")
@@ -754,10 +755,10 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWVENDOR",                     "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWVENDOR_TP",                  "Print a message to chat when items are purchased or sold at a vendor.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_MERGE",                   "Merge Currency & Loot Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_MERGE_TP",                "Combine the individual item purchase message and currency change message into one line.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALITEMS",              "Display Total Items on transactions")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALITEMS_TP",           "Toggle the display of the total count of items on a vendor transaction.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALCURRENCY",           "Display Total Currency on ransactions")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALCURRENCY_TP",        "Toggle the display of the total currency on a vendor transaction.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALITEMS",              "Display Total Items on Transactions")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALITEMS_TP",           "Toggle the display of the total count of items on a vendor transaction. Requires Total Items Suffix option to be enabled.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALCURRENCY",           "Display Total Currency on Transactions")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALCURRENCY_TP",        "Toggle the display of the total currency on a vendor transaction. Requires Total Currency of relevant type to be enabled.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWBANK",                       "Display Items - Banking")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWBANK_TP",                    "Print a message to chat when items are deposited or withdrawn from a bank or guild bank.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWCRAFT",                      "Display Items - Crafting")
@@ -866,7 +867,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_SHOWEXPICON_TP",                  "Toggle 
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_MESSAGE",                         "Experience Gain Message Format")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_MESSAGE_TP",                      "Message format for experience gain.\nDefault: You earn %s.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_NAME",                            "Experience Points Name")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_NAME_TP",                         "Name to use for Experience Points.\nDefault: experience points")
+ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_NAME_TP",                         "Name to use for Experience Points.\nDefault: experience <<1[point/points]>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXPERIENCE_COLORMESSAGE",             "Experience Gain Message Color")
 -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXPERIENCE_COLORNAME",                "Experience Points Name Color")
@@ -1123,7 +1124,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_GROUPAREA_TP",                   "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_HEADER",                         "Miscellaneous Announcements")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK",                   "Display Lockpicking Notifications - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK_TP",                "Display <<1>> on successful or failed lockpick attempts as well as when you attempt to pick a lock and it's impossible or you have no lock picks.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWMAIL",                       "Display Mail Notifications")
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWMAIL",                       "Display Mail Notifications - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWMAIL_TP",                    "Display <<1>> when mail is accepted, deleted, or sent.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWJUSTICE",                    "Display Justice Notifications - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWJUSTICE_TP",                 "Display <<1>> when items or gold are confiscated by a guard.")

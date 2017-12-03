@@ -1422,12 +1422,12 @@ function LUIE_CreateSettings()
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         -- Notification Color
         type = "colorpicker",
-        name = "Notification Color",
+        name = "Notification Color (Unimplemented)",
         tooltip = "This message will be used to colorize various generic notification messages that are not Social/Guild related or error messages.",
         getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.NotificationColor) end,
         setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.NotificationColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
         width = "full",
-        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+        disabled = function() return not LUIE.TodoLater end,
         default = {r=LUIE.ChatAnnouncements.D.NotificationColor[1], g=LUIE.ChatAnnouncements.D.NotificationColor[2], b=LUIE.ChatAnnouncements.D.NotificationColor[3]}
     }
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
@@ -2417,7 +2417,7 @@ function LUIE_CreateSettings()
                         getFunc = function() return LUIE.ChatAnnouncements.SV.LootTotalString end,
                         setFunc = function(value) LUIE.ChatAnnouncements.SV.LootTotalString = value end,
                         width = "full",
-                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        disabled = function() return not (LUIE.ChatAnnouncements.SV.LootTotal and LUIE.SV.ChatAnnouncements_Enable) end,
                         default = LUIE.ChatAnnouncements.D.LootTotalString,
                     },
                     

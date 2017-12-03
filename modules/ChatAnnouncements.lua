@@ -37,30 +37,35 @@ CA.D = {
     AchievementCategory9          = true,
     AchievementCategory10         = true,
     AchievementCategory11         = true,
-    --AchievementCategory12        = true,
+    --AchievementCategory12       = true,
     AchievementProgressMsg        = GetString(SI_LUIE_CA_ACHIEVEMENT_PROGRESS_MSG),
     AchievementCompleteMsg        = GetString(SI_ACHIEVEMENT_AWARDED_CENTER_SCREEN),
     AchievementColorProgress      = true,
-    AchievementColor1             = { 0.25, 0.5, 1, 1 },
-    AchievementColor2             = { 0.25, 0.5, 1, 1 },
-    AchievementCompPercentage    = false,
+    AchievementColor1             = { .75, .75, .75, 1 },
+    AchievementColor2             = { .75, .75, .75, 1 },
+    AchievementCompPercentage     = false,
     AchievementUpdateCA           = false,
     AchievementUpdateAlert        = false,
-    AchievementIcon              = true,
-    AchievementCategory          = true,
-    AchievementSubcategory       = true,
-    AchievementDetails           = true,
-    AchievementBracketOptions    = 4,
-    AchievementCatBracketOptions = 2,
-    AchievementStep              = 10,
+    
+    AchievementCompleteCA         = true,
+    AchievementCompleteCSA        = true,
+    AchievementCompleteAlert      = false,
+    
+    AchievementIcon               = true,
+    AchievementCategory           = true,
+    AchievementSubcategory        = true,
+    AchievementDetails            = true,
+    AchievementBracketOptions     = 4,
+    AchievementCatBracketOptions  = 2,
+    AchievementStep               = 10,
     
     -- Group
     GroupCA                       = true,
-    GroupAlert                    = true,
+    GroupAlert                    = false,
     GroupLFGCA                    = true,
-    GroupLFGAlert                 = true,
+    GroupLFGAlert                 = false,
     GroupLFGQueueCA               = true,
-    GroupLFGQueueAlert            = true,
+    GroupLFGQueueAlert            = false,
     GroupLFGCompleteCA            = false,
     GroupLFGCompleteCSA           = true,
     GroupLFGCompleteAlert         = false,
@@ -81,12 +86,12 @@ CA.D = {
     
     -- Guild
     GuildCA                       = true,
-    GuildAlert                    = true,
+    GuildAlert                    = false,
     GuildRankCA                   = true,
-    GuildRankAlert                = true,
-    GuildManageCA                 = true,
-    GuildManageAlert              = true,
-    GuildIcon                     = false,
+    GuildRankAlert                = false,
+    GuildManageCA                 = false,
+    GuildManageAlert              = false,
+    GuildIcon                     = true,
     GuildRankDisplayOptions       = 1,
     
     -- Friend
@@ -101,7 +106,7 @@ CA.D = {
     LootBank                      = true,
     LootBlacklist                 = false,
     LootTotal                     = false,
-    LootTotalString               = GetString(SI_LUIE_CA_DEFAULTVARS_CURRENCYTOTALMESSAGE),
+    LootTotalString               = GetString(SI_LUIE_CA_LOOT_MESSAGE_TOTAL),
     LootCraft                     = true,
     LootGroup                     = true,
     LootIcons                     = true,
@@ -110,7 +115,7 @@ CA.D = {
     LootOnlyNotable               = false,
     LootShowArmorType             = false,
     LootShowStyle                 = false,
-    LootShowTrait                 = true,
+    LootShowTrait                 = false,
     LootConfiscate                = true,
     LootTrade                     = true,
     LootVendor                    = true,
@@ -118,12 +123,12 @@ CA.D = {
     LootVendorTotalCurrency       = false,
     LootVendorTotalItems          = false,
     LootShowCraftUse              = false,
-    LootShowDestroy               = false,
-    LootShowDisguise              = false,
-    LootShowLockpick              = false,
+    LootShowDestroy               = true,
+    LootShowDisguise              = true,
+    LootShowLockpick              = true,
     
     -- Notifications
-    NotificationConfiscateCA      = false,
+    NotificationConfiscateCA      = true,
     NotificationConfiscateAlert   = false,
     
     NotificationLockpickCA        = true,
@@ -133,7 +138,7 @@ CA.D = {
     NotificationMailAlert         = false,
     
     NotificationTradeCA           = true,
-    NotificationTradeAlert        = true,
+    NotificationTradeAlert        = false,
     
     NotificationRespecCA          = true,
     NotificationRespecCSA         = true,
@@ -153,9 +158,8 @@ CA.D = {
     DisguiseAlertColor            = { 1, 0, 0, 1 },
     
     -- Duel
-    DuelCA                        = false,
-    DuelCSA                       = true,
-    DuelAlert                     = true,
+    DuelCA                        = true,
+    DuelAlert                     = false,
     DuelBoundaryCA                = false,
     DuelBoundaryCSA               = true,
     DuelBoundaryAlert             = false,
@@ -168,21 +172,21 @@ CA.D = {
     DuelStartOptions              = 1,
     
     -- Pledge of Mara
-    PledgeOfMaraCA                = false,
+    PledgeOfMaraCA                = true,
     PledgeOfMaraCSA               = true,
-    PledgeOfMaraAlert             = true,
+    PledgeOfMaraAlert             = false,
     PledgeOfMaraAlertOnlyFail     = true,
 
     -- Storage / Riding Upgrades
-    StorageRidingColor            = { 1, 1, 1, 1 },
+    StorageRidingColor            = { .75, .75, .75, 1 },
     StorageRidingCA               = true,
     StorageRidingCSA              = true,
-    StorageRidingAlert            = true,
+    StorageRidingAlert            = false,
     
-    StorageBagColor               = { 1, 1, 1, 1 },
+    StorageBagColor               = { .75, .75, .75, 1 },
     StorageBagCA                  = true,
     StorageBagCSA                 = true,
-    StorageBagAlert               = true,
+    StorageBagAlert               = false,
     
     -- Collectible
     CollectibleCA                 = true,
@@ -191,8 +195,8 @@ CA.D = {
     CollectibleBracket            = 4,
     CollectiblePrefix             = GetString(SI_LUIE_CA_COLLECTIBLE),
     CollectibleIcon               = true,
-    CollectibleColor1             = { 0, .5, 1, 1 },
-    CollectibleColor2             = { 1, 1, 1, 1 },
+    CollectibleColor1             = { .75, .75, .75, 1 },
+    CollectibleColor2             = { .75, .75, .75, 1 },
     CollectibleCategory           = true,
     
     -- Lorebook
@@ -206,20 +210,20 @@ CA.D = {
     LorebookPrefix1               = GetString(SI_LORE_LIBRARY_ANNOUNCE_BOOK_LEARNED),
     LorebookPrefix2               = GetString(SI_LUIE_CA_LOREBOOK_BOOK),
     LorebookBracket               = 4, -- Bracket Options
-    LorebookColor1                = { 0, .5, 1, 1 }, -- Lorebook Message Color 1
-    LorebookColor2                = { 1, 1, 1, 1 }, -- Lorebook Message Color 2
-    LorebookIcon                  = false, -- Display an icon for Lorebook CA
+    LorebookColor1                = { .75, .75, .75, 1 }, -- Lorebook Message Color 1
+    LorebookColor2                = { .75, .75, .75, 1 }, -- Lorebook Message Color 2
+    LorebookIcon                  = true, -- Display an icon for Lorebook CA
     LorebookShowHidden            = false, -- Display books even when they are hidden in the journal menu
-    LorebookCategory              = false, -- Display "added to X category" message
+    LorebookCategory              = true, -- Display "added to X category" message
 
     -- QUEST
     QuestShareCA                  = true,
     QuestShareAlert               = false,
     
     QuestColorLocName               = { 1, 1, 1, 1 },
-    QuestColorLocDescription        = { 1, 1, 0, 1 },
+    QuestColorLocDescription        = { .75, .75, .75, 1 },
     QuestColorName                  = { 1, 0.647058, 0, 1 },
-    QuestColorDescription           = { 1, 1, 0, 1 },
+    QuestColorDescription           = { .75, .75, .75, 1 },
     
     QuestLocLong                    = true,
     QuestIcon                       = true,
@@ -261,10 +265,10 @@ CA.D = {
     ExperienceLevelUpCA             = true,
     ExperienceLevelUpCSA            = true,
     ExperienceLevelUpAlert          = false,
-    ExperienceLevelUpCSAExpand      = false,
+    ExperienceLevelUpCSAExpand      = true,
     ExperienceLevelUpIcon           = true,
     ExperienceLevelColorByLevel     = true,
-    ExperienceLevelUpColor          = { 1, 1, 1, 1 },
+    ExperienceLevelUpColor          = { .75, .75, .75, 1 },
     
     Experience                      = true,
     ExperienceIcon                  = true,
@@ -273,8 +277,8 @@ CA.D = {
     ExperienceHideCombat            = false,
     ExperienceFilter                = 0,
     ExperienceThrottle              = 0,
-    ExperienceColorMessage          = { 1, 1, 1, 1 },
-    ExperienceColorName             = { 1, 1, 1, 1 },
+    ExperienceColorMessage          = { .75, .75, .75, 1 },
+    ExperienceColorName             = { .75, .75, .75, 1 },
     
     -- SKILL POINT
     SkillPointCA                    = true,
@@ -282,9 +286,9 @@ CA.D = {
     SkillPointAlert                 = false,
     SkillPointSkyshardMsg           = GetString(SI_SKYSHARD_GAINED),
     SkillPointBracket               = 4,
-    ShowSkillPointsPartial          = false,
-    SkillPointColor1                = { 0, 1, 1, 1 },
-    SkillPointColor2                = { 1, 1, 1, 1 },
+    ShowSkillPointsPartial          = true,
+    SkillPointColor1                = { .75, .75, .75, 1 },
+    SkillPointColor2                = { .75, .75, .75, 1 },
     
     SkillLineUnlockCA               = true,
     SkillLineUnlockCSA              = true,
@@ -296,17 +300,17 @@ CA.D = {
     SkillAbilityCSA                 = true,
     SkillAbilityAlert               = false,
     SkillLineIcon                   = true,
-    SkillLineColor                  = { .75, .75, .75, 1},
+    SkillLineColor                  = { .75, .75, .75, 1 },
     
-    SkillGuildFighters              = false,
-    SkillGuildMages                 = false,
-    SkillGuildUndaunted             = false,
-    SkillGuildThieves               = false,
-    SkillGuildDarkBrotherhood       = false,
+    SkillGuildFighters              = true,
+    SkillGuildMages                 = true,
+    SkillGuildUndaunted             = true,
+    SkillGuildThieves               = true,
+    SkillGuildDarkBrotherhood       = true,
     SkillGuildIcon                  = true,
     SkillGuildMsg                   = GetString(SI_LUIE_CA_SKILL_GUILD_MSG),
     SkillGuildRepName               = GetString(SI_LUIE_CA_SKILL_GUILD_REPUTATION),
-    SkillGuildColor                 = { .75, .75, .75, 1},
+    SkillGuildColor                 = { .75, .75, .75, 1 },
     SkillGuildColorFG               = { .75, .37, 0, 1},
     SkillGuildColorMG               = { 0, .52, .75, 1},
     SkillGuildColorUD               = { .58, .75, 0, 1},
@@ -321,11 +325,11 @@ CA.D = {
     CurrencyAPColor                 = { 0.164706, 0.862745, 0.133333, 1 },
     CurrencyAPFilter                = 0,
     CurrencyAPName                  = GetString(SI_LUIE_CA_CURRENCY_ALLIANCE_POINT),
-    CurrencyIcon                   = true,
+    CurrencyIcon                    = true,
     CurrencyAPShowChange            = true,
-    CurrencyAPShowTotal             = true,
+    CurrencyAPShowTotal             = false,
     CurrencyAPThrottle              = 0,
-    CurrencyColor                   = { 1, 1, 1, 1},
+    CurrencyColor                   = { .75, .75, .75, 1 },
     CurrencyColorDown               = { 0.7, 0, 0, 1 },
     CurrencyColorUp                 = { 0.043137, 0.380392, 0.043137, 1 },
     CurrencyContextColor            = true,
@@ -334,7 +338,7 @@ CA.D = {
     CurrencyGoldFilter              = 0,
     CurrencyGoldHideAH              = false,
     CurrencyGoldName                = GetString(SI_LUIE_CA_CURRENCY_GOLD),
-    CurrencyGoldShowTotal           = true,
+    CurrencyGoldShowTotal           = false,
     CurrencyGoldThrottle            = true,
     CurrencyMessageConfiscate       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_CONFISCATE),
     CurrencyMessageDeposit          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSIT),
@@ -343,7 +347,7 @@ CA.D = {
     CurrencyMessageLoot             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LOOT),
     CurrencyMessageSteal            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_STEAL),
     CurrencyMessageLost             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LOST),
-    CurrencyMessagePickPocket       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_PICKPOCKET),
+    CurrencyMessagePickpocket       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_PICKPOCKET),
     CurrencyMessageReceive          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_RECEIVE),
     CurrencyMessageSpend            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_SPEND),
     CurrencyMessageTotalAP          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP),
@@ -375,12 +379,12 @@ CA.D = {
     CurrencyTVColor                 = { 0.368627, 0.643137, 1, 1 },
     CurrencyTVFilter                = 0,
     CurrencyTVName                  = GetString(SI_LUIE_CA_CURRENCY_TELVAR_STONE),
-    CurrencyTVShowTotal             = true,
+    CurrencyTVShowTotal             = false,
     CurrencyTVThrottle              = 0,
     CurrencyWVChange                = true,
     CurrencyWVColor                 = { 1, 1, 1, 1 },
     CurrencyWVName                  = GetString(SI_LUIE_CA_CURRENCY_WRIT_VOUCHER),
-    CurrencyWVShowTotal             = true,
+    CurrencyWVShowTotal             = false,
     
     -- LOOT
     LootMessageLoot                 = GetString(SI_LUIE_CA_LOOT_MESSAGE_LOOT),
@@ -408,7 +412,7 @@ CA.D = {
     LootMessageCraft                = GetString(SI_LUIE_CA_LOOT_MESSAGE_CRAFT),
     LootMessageExtract              = GetString(SI_LUIE_CA_LOOT_MESSAGE_EXTRACT),
     LootMessageUpgrade              = GetString(SI_LUIE_CA_LOOT_MESSAGE_UPGRADE),
-    LootMessageUpgradeFail          = GetString(SI_LUIE_CA_LOOT_MESSAGE_UPGRADEFAIL),
+    LootMessageUpgradeFail          = GetString(SI_LUIE_CA_LOOT_MESSAGE_UPGRADE_FAIL),
     LootMessageRefine               = GetString(SI_LUIE_CA_LOOT_MESSAGE_REFINE),
     LootMessageDeconstruct          = GetString(SI_LUIE_CA_LOOT_MESSAGE_DECONSTRUCT),
     LootMessageResearch             = GetString(SI_LUIE_CA_LOOT_MESSAGE_RESEARCH),
@@ -2533,7 +2537,8 @@ end
 
 function CA.PrintExperienceGain(change)
     local icon = CA.SV.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t ") or ""
-    local messageP1 = ("|r|c" .. ExperienceNameColorize .. icon .. ZO_LocalizeDecimalNumber(change) .. " " .. CA.SV.ExperienceName .. "|r|c" .. ExperienceMessageColorize)
+    local xpName = strformat(CA.SV.ExperienceName, change)
+    local messageP1 = ("|r|c" .. ExperienceNameColorize .. icon .. ZO_LocalizeDecimalNumber(change) .. " " .. xpName .. "|r|c" .. ExperienceMessageColorize)
     local formattedMessageP1 = (strfmt(CA.SV.ExperienceMessage, messageP1))
     local finalMessage = strfmt("|c%s%s|r", ExperienceMessageColorize, formattedMessageP1)
 
