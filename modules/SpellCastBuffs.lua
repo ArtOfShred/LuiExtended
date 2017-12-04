@@ -90,6 +90,8 @@ SCB.D = {
     ShowGallop                       = true,
     ShowResurrectionImmunity         = true,
     ShowRecall                       = true,
+    HidePlayerBuffs                  = false,
+    HidePlayerDebuffs                = false,
     HideTargetBuffs                  = false,
     HideTargetDebuffs                = false,
     HideGroundEffects                = false,
@@ -2055,6 +2057,12 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         
     end
     
+    if SCB.SV.HidePlayerBuffs and effectType == 1 and unitTag == "player" then
+        return
+    end
+    if SCB.SV.HidePlayerDebuffs and effectType == 2 and unitTag == "player" then
+        return
+    end
     if SCB.SV.HideTargetBuffs and effectType == 1 and unitTag ~= "player" then
         return
     end

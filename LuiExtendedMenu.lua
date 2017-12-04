@@ -593,14 +593,14 @@ function LUIE_CreateSettings()
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "header",
-        name = GetString(SI_LUIE_LAM_CI_HEADER_BARHIGHLIGHT),
+        name = GetString(SI_LUIE_LAM_CI_HEADER_BAR),
         width = "full",
     }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         -- Highlight Ability Bar Icon for Active Procs
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONPROC),
-        tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONPROC_TP),
+        name = GetString(SI_LUIE_LAM_CI_BAR_PROC),
+        tooltip = GetString(SI_LUIE_LAM_CI_BAR_PROC_TP),
         getFunc = function() return LUIE.CombatInfo.SV.ShowTriggered end,
         setFunc = function(value) LUIE.CombatInfo.SV.ShowTriggered = value LUIE.CombatInfo.OnSlotsFullUpdate() end,
         width = "full",
@@ -610,8 +610,8 @@ function LUIE_CreateSettings()
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         -- Highlight Ability Bar Icon for Active Effects
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONEFFECT),
-        tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONEFFECT_TP),
+        name = GetString(SI_LUIE_LAM_CI_BAR_EFFECT),
+        tooltip = GetString(SI_LUIE_LAM_CI_BAR_EFFECT_TP),
         getFunc = function() return LUIE.CombatInfo.SV.ShowToggled end,
         setFunc = function(value) LUIE.CombatInfo.SV.ShowToggled = value LUIE.CombatInfo.OnSlotsFullUpdate() end,
         width = "full",
@@ -621,8 +621,8 @@ function LUIE_CreateSettings()
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         -- SHOW LABEL ON BAR HIGHLIGHT
         type = "checkbox",
-        name = "SHOW LABEL FOR BAR HIGHLIGHT",
-        tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_BARICONEFFECT_TP),
+        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_LABEL)),
+        tooltip = GetString(SI_LUIE_LAM_CI_BAR_LABEL_TP),
         getFunc = function() return LUIE.CombatInfo.SV.BarShowLabel end,
         setFunc = function(value) LUIE.CombatInfo.SV.BarShowLabel = value LUIE.CombatInfo.ResetBarLabel() end,
         width = "full",
@@ -632,7 +632,8 @@ function LUIE_CreateSettings()
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "slider",
-        name = "BAR LABEL POSITION",
+        name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
+        tooltip = GetString(SI_LUIE_LAM_CI_SHARED_POSITION_TP),
         min = -72, max = 40, step = 2,
         getFunc = function() return LUIE.CombatInfo.SV.BarLabelPosition end,
         setFunc = function(value) LUIE.CombatInfo.SV.BarLabelPosition = value LUIE.CombatInfo.ResetBarLabel() end,
@@ -643,8 +644,8 @@ function LUIE_CreateSettings()
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "dropdown",
-        name = "BAR FONT FACE",
-        tooltip = GetString(SI_LUIE_LAM_BUFF_FONTS_TP),
+        name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
+        tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONT_TP),
         choices = FontsList,
         sort = "name-up",
         getFunc = function() return LUIE.CombatInfo.SV.BarFontFace end,
@@ -655,8 +656,8 @@ function LUIE_CreateSettings()
     }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "slider",
-        name = "BAR FONT SIZE",
-        tooltip = GetString(SI_LUIE_LAM_BUFF_FONTS_SIZE_TP),
+        name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
+        tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSIZE_TP),
         min = 10, max = 30, step = 1,
         getFunc = function() return LUIE.CombatInfo.SV.BarFontSize end,
         setFunc = function(value) LUIE.CombatInfo.SV.BarFontSize = value LUIE.CombatInfo.ApplyFont() end,
@@ -666,7 +667,8 @@ function LUIE_CreateSettings()
     }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "dropdown",
-        name = "BAR FONT STYLE",
+        name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
+        tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSTYLE_TP),
         choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
         sort = "name-up",
         getFunc = function() return LUIE.CombatInfo.SV.BarFontStyle end,
@@ -678,7 +680,7 @@ function LUIE_CreateSettings()
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS),
+        name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
         tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
         getFunc = function() return LUIE.CombatInfo.SV.BarMiilis end,
         setFunc = function(value) LUIE.CombatInfo.SV.BarMiilis = value end,
@@ -689,14 +691,14 @@ function LUIE_CreateSettings()
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "header",
-        name = GetString(SI_LUIE_LAM_CI_HEADER_POTIONCD),
+        name = GetString(SI_LUIE_LAM_CI_HEADER_POTION),
         width = "full",
     }
     -- Show Cooldowns (Potion Only when I get finished) -- TODO
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = "Show Potion Cooldown Timer",
-        tooltip = "TODO",
+        name = GetString(SI_LUIE_LAM_CI_POTION),
+        tooltip = GetString(SI_LUIE_LAM_CI_POTION_TP),
         getFunc = function() return LUIE.CombatInfo.SV.PotionTimerShow end,
         setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerShow = value end,
         width = "full",
@@ -706,7 +708,8 @@ function LUIE_CreateSettings()
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "slider",
-        name = "Potion Cooldown Timer Label Position",
+        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
+        tooltip = GetString(SI_LUIE_LAM_CI_SHARED_POSITION_TP),
         min = -72, max = 40, step = 2,
         getFunc = function() return LUIE.CombatInfo.SV.PotionTimerLabelPosition end,
         setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerLabelPosition = value LUIE.CombatInfo.ResetPotionTimerLabel() end,
@@ -717,8 +720,8 @@ function LUIE_CreateSettings()
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "dropdown",
-        name = "POTION TIMER FONT FACE",
-        tooltip = GetString(SI_LUIE_LAM_BUFF_FONTS_TP),
+        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
+        tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONT_TP),
         choices = FontsList,
         sort = "name-up",
         getFunc = function() return LUIE.CombatInfo.SV.PotionTimerFontFace end,
@@ -729,8 +732,8 @@ function LUIE_CreateSettings()
     }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "slider",
-        name = "POTION TIMER FONT SIZE",
-        tooltip = GetString(SI_LUIE_LAM_BUFF_FONTS_SIZE_TP),
+        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
+        tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSIZE_TP),
         min = 10, max = 30, step = 1,
         getFunc = function() return LUIE.CombatInfo.SV.PotionTimerFontSize end,
         setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerFontSize = value LUIE.CombatInfo.ApplyFont() end,
@@ -740,7 +743,8 @@ function LUIE_CreateSettings()
     }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "dropdown",
-        name = "POTION TIMER FONT STYLE",
+        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
+        tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSTYLE_TP),
         choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
         sort = "name-up",
         getFunc = function() return LUIE.CombatInfo.SV.PotionTimerFontStyle end,
@@ -752,8 +756,8 @@ function LUIE_CreateSettings()
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = "POTION TIMER COLOR LABEL?",
-        tooltip = "TODO",
+        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_POTION_COLOR)),
+        tooltip = GetString(SI_LUIE_LAM_CI_POTION_COLOR_TP),
         getFunc = function() return LUIE.CombatInfo.SV.PotionTimerColor end,
         setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerColor = value end,
         width = "full",
@@ -763,7 +767,7 @@ function LUIE_CreateSettings()
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS),
+        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
         tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
         getFunc = function() return LUIE.CombatInfo.SV.PotionTimerMiilis end,
         setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerMiilis = value end,
@@ -796,41 +800,11 @@ function LUIE_CreateSettings()
         func = function() ReloadUI("ingame") end,
         width = "full",
     }
-    -- CA Header
-    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-        type = "header",
-        name = GetString(SI_LUIE_LAM_CI_COMMON_HEADER),
-        width = "full",
-    }
+            -- SCB Header
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF_TP),
-                getFunc = function() return LUIE.SpellCastBuffs.SV.HideTargetBuffs end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.HideTargetBuffs = value end,
+                type = "header",
+                name = GetString(SI_LUIE_LAM_BUFF_HEADER_POSITION),
                 width = "full",
-                default = LUIE.SpellCastBuffs.D.HideTargetBuffs,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF_TP),
-                getFunc = function() return LUIE.SpellCastBuffs.SV.HideTargetDebuffs end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.HideTargetDebuffs = value end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.HideTargetDebuffs,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF_TP),
-                getFunc = function() return LUIE.SpellCastBuffs.SV.HideGroundEffects end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.HideGroundEffects = value end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.SV.HideGroundEffects,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             }
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
@@ -864,13 +838,65 @@ function LUIE_CreateSettings()
                 width = "half",
             }
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERBUFF)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERBUFF_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.HidePlayerBuffs end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.HidePlayerBuffs = value end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.HidePlayerBuffs,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            }
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERDEBUFF)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERDEBUFF_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.HidePlayerDebuffs end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.HidePlayerDebuffs = value end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.HidePlayerDebuffs,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            }
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.HideTargetBuffs end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.HideTargetBuffs = value end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.HideTargetBuffs,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            }
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.HideTargetDebuffs end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.HideTargetDebuffs = value end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.HideTargetDebuffs,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            }
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.HideGroundEffects end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.HideGroundEffects = value end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.SV.HideGroundEffects,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            }
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "header",
-                name = GetString(SI_LUIE_LAM_BUFF_ICONOPTIONS),
+                name = GetString(SI_LUIE_LAM_BUFF_ICON_HEADER),
                 width = "full",
             }
+            -- Buff Icon Size
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "slider",
                 name = GetString(SI_LUIE_LAM_BUFF_ICONSIZE),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_ICONSIZE_TP),
                 min = 30, max = 60, step = 2,
                 getFunc = function() return LUIE.SpellCastBuffs.SV.IconSize end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IconSize = value LUIE.SpellCastBuffs.Reset() end,
@@ -878,16 +904,90 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.IconSize,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             }
+            -- Buff Show Remaining Time Label
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_SHOWREMAINTIMELABEL),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWREMAINTIMELABEL_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.RemainingText end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.RemainingText = value LUIE.SpellCastBuffs.Reset() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.RemainingText,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            }
+            -- Buff Label Position
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "slider",
-                name = "BUFF LABEL POSITION",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LABEL_POSITION_TP),
                 min = -64, max = 64, step = 2,
                 getFunc = function() return LUIE.SpellCastBuffs.SV.LabelPosition end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.LabelPosition = value LUIE.SpellCastBuffs.Reset() end,
                 width = "full",
                 default = LUIE.SpellCastBuffs.D.LabelPosition,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+                disabled = function() return not (LUIE.SpellCastBuffs.SV.RemainingText and LUIE.SV.SpellCastBuff_Enable) end,
             }
+            -- Buff Label Font
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "dropdown",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_FONT_TP),
+                choices = FontsList,
+                sort = "name-up",
+                getFunc = function() return LUIE.SpellCastBuffs.SV.BuffFontFace end,
+                setFunc = function(var) LUIE.SpellCastBuffs.SV.BuffFontFace = var LUIE.SpellCastBuffs.ApplyFont() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.BuffFontFace,
+                disabled = function() return not (LUIE.SpellCastBuffs.SV.RemainingText and LUIE.SV.SpellCastBuff_Enable) end,
+            }
+            -- Buff Font Size
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "slider",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_FONTSIZE_TP),
+                min = 10, max = 30, step = 1,
+                getFunc = function() return LUIE.SpellCastBuffs.SV.BuffFontSize end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.BuffFontSize = value LUIE.SpellCastBuffs.ApplyFont() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.BuffFontSize,
+                disabled = function() return not (LUIE.SpellCastBuffs.SV.RemainingText and LUIE.SV.SpellCastBuff_Enable) end,
+            }
+            -- Buff Font Style
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "dropdown",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_FONTSTYLE_TP),
+                choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
+                sort = "name-up",
+                getFunc = function() return LUIE.SpellCastBuffs.SV.BuffFontStyle end,
+                setFunc = function(var) LUIE.SpellCastBuffs.SV.BuffFontStyle = var LUIE.SpellCastBuffs.ApplyFont() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.BuffFontStyle,
+                disabled = function() return not (LUIE.SpellCastBuffs.SV.RemainingText and LUIE.SV.SpellCastBuff_Enable) end,
+            }
+            -- Buff Colored Label
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_POTION_COLOR)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LABELCOLOR_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.RemainingTextColoured end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.RemainingTextColoured = value LUIE.SpellCastBuffs.Reset() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.RemainingTextColoured,
+                disabled = function() return not (LUIE.SpellCastBuffs.SV.RemainingText and LUIE.SV.SpellCastBuff_Enable) end,
+            }
+            -- Buff Show Seconds Fractions
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.RemainingTextMillis end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.RemainingTextMillis = value end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.RemainingTextMillis,
+                disabled = function() return not (LUIE.SpellCastBuffs.SV.RemainingText and LUIE.SV.SpellCastBuff_Enable) end,
+            }            
+            -- Buff Alignment
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_BUFF_HORIZONTICONALIGN),
@@ -899,9 +999,11 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.Alignment,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             }
+            -- Buff Sort Direction
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_BUFF_DESCENDINGSORT),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_DESCENDINGSORT_TP),
                 choices = {"Left to Right", "Right to Left"},
                 getFunc = function() return LUIE.SpellCastBuffs.SV.SortDirection end,
                 setFunc = LUIE.SpellCastBuffs.SetSortDirection,
@@ -909,6 +1011,7 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.SortDirection,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             }
+            -- Buff Glow Icon Border
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_GLOWICONBORDER),
@@ -919,16 +1022,18 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.GlowIcons,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             }
+            -- Buff Show Border Cooldown
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_SHOWBOARDERCOOLDOWN),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWBOARDERCOOLDOWN_TP),
+                name = GetString(SI_LUIE_LAM_BUFF_SHOWBORDERCOOLDOWN),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWBORDERCOOLDOWN_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.RemainingCooldown end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.RemainingCooldown = value LUIE.SpellCastBuffs.Reset() end,
                 width = "full",
                 default = LUIE.SpellCastBuffs.D.RemainingCooldown,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             }
+            -- Buff Fade Expiring Icon
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_FADEEXPIREICON),
@@ -938,70 +1043,6 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SpellCastBuffs.D.FadeOutIcons,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_SHOWREMAINTIMELABEL),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWREMAINTIMELABEL_TP),
-                getFunc = function() return LUIE.SpellCastBuffs.SV.RemainingText end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.RemainingText = value LUIE.SpellCastBuffs.Reset() end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.RemainingText,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                type = "dropdown",
-                name = GetString(SI_LUIE_LAM_FONT),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_FONTS_TP),
-                choices = FontsList,
-                sort = "name-up",
-                getFunc = function() return LUIE.SpellCastBuffs.SV.BuffFontFace end,
-                setFunc = function(var) LUIE.SpellCastBuffs.SV.BuffFontFace = var LUIE.SpellCastBuffs.ApplyFont() end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.BuffFontFace,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.RemainingText ) end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                type = "slider",
-                name = GetString(SI_LUIE_LAM_FONT_SIZE),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_FONTS_SIZE_TP),
-                min = 10, max = 30, step = 1,
-                getFunc = function() return LUIE.SpellCastBuffs.SV.BuffFontSize end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.BuffFontSize = value LUIE.SpellCastBuffs.ApplyFont() end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.BuffFontSize,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.RemainingText ) end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                type = "dropdown",
-                name = GetString(SI_LUIE_LAM_FONT_STYLE),
-                choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
-                sort = "name-up",
-                getFunc = function() return LUIE.SpellCastBuffs.SV.BuffFontStyle end,
-                setFunc = function(var) LUIE.SpellCastBuffs.SV.BuffFontStyle = var LUIE.SpellCastBuffs.ApplyFont() end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.BuffFontStyle,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.RemainingText ) end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_COLOUREDTIMELABEL),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_COLOUREDTIMELABE_TP),
-                getFunc = function() return LUIE.SpellCastBuffs.SV.RemainingTextColoured end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.RemainingTextColoured = value LUIE.SpellCastBuffs.Reset() end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.RemainingTextColoured,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.RemainingText ) end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
-                getFunc = function() return LUIE.SpellCastBuffs.SV.RemainingTextMillis end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.RemainingTextMillis = value end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.RemainingTextMillis,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.RemainingText ) end,
             }
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "header",
@@ -1028,6 +1069,67 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.LongTermEffects_Target,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             }
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                -- Seperate control for player effects
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.LongTermEffectsSeparate end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.LongTermEffectsSeparate = value LUIE.SpellCastBuffs.Reset() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.LongTermEffectsSeparate,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffects_Player ) end,
+            }
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                -- Container orientation
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER_TP),
+                choices = rotationOptions,
+                getFunc = function() return rotationOptions[LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment] end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment = rotationOptionsKeys[value] LUIE.SpellCastBuffs.Reset() end,
+                width = "full",
+                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                default = rotationOptions[2],
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffects_Player and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparate ) end,
+            }
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                -- Vertical Long Term Icons Alignment
+                type = "dropdown",
+                name = "VERTICAL LONG TERM ALIGNMENT",
+                tooltip = "TODO",
+                choices = { "Top", "Middle", "Bottom" },
+                getFunc = function() return LUIE.SpellCastBuffs.SV.AlignmentLongVert end,
+                setFunc = LUIE.SpellCastBuffs.SetIconsAlignmentLongVert,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.AlignmentLongVert,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffects_Player and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparate and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 2 ) end,
+            }
+            
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                -- Horizontal Long Term Icons Alignment
+                type = "dropdown",
+                name = "HORIZONTAL LONG TERM ALIGNMENT",
+                tooltip = "TODO",
+                choices = { "Left", "Centered", "Right" },
+                getFunc = function() return LUIE.SpellCastBuffs.SV.AlignmentLongHorz end,
+                setFunc = LUIE.SpellCastBuffs.SetIconsAlignmentLongHorz,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.AlignmentLongHorz,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffects_Player and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparate and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 1) end,
+            }
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                -- LONG TERM REVERSE SORT ORDER
+                type = "checkbox",
+                name = "REVERSE LONG TERM BUFF SORT ORDER",
+                tooltip = "TODO",
+                getFunc = function() return LUIE.SpellCastBuffs.SV.LongTermEffectsReverse end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.LongTermEffectsReverse = value LUIE.SpellCastBuffs.Reset() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.LongTermEffectsReverse,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffects_Player ) end,
+            }
+            
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSPLAYER),
@@ -1197,66 +1299,6 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = not LUIE.SpellCastBuffs.D.IgnoreMount,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- Seperate control for player effects
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SEPCTRL_TP),
-                getFunc = function() return LUIE.SpellCastBuffs.SV.LongTermEffectsSeparate end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.LongTermEffectsSeparate = value LUIE.SpellCastBuffs.Reset() end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.LongTermEffectsSeparate,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffects_Player ) end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- Container orientation
-                type = "dropdown",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER_TP),
-                choices = rotationOptions,
-                getFunc = function() return rotationOptions[LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment] end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment = rotationOptionsKeys[value] LUIE.SpellCastBuffs.Reset() end,
-                width = "full",
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-                default = rotationOptions[2],
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffects_Player and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparate ) end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- Vertical Long Term Icons Alignment
-                type = "dropdown",
-                name = "VERTICAL LONG TERM ALIGNMENT",
-                tooltip = "TODO",
-                choices = { "Top", "Middle", "Bottom" },
-                getFunc = function() return LUIE.SpellCastBuffs.SV.AlignmentLongVert end,
-                setFunc = LUIE.SpellCastBuffs.SetIconsAlignmentLongVert,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.AlignmentLongVert,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 2) end,
-            }
-            
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- Horizontal Long Term Icons Alignment
-                type = "dropdown",
-                name = "HORIZONTAL LONG TERM ALIGNMENT",
-                tooltip = "TODO",
-                choices = { "Left", "Centered", "Right" },
-                getFunc = function() return LUIE.SpellCastBuffs.SV.AlignmentLongHorz end,
-                setFunc = LUIE.SpellCastBuffs.SetIconsAlignmentLongHorz,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.AlignmentLongHorz,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 1) end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- LONG TERM REVERSE SORT ORDER
-                type = "checkbox",
-                name = "REVERSE LONG TERM BUFF SORT ORDER",
-                tooltip = "TODO",
-                getFunc = function() return LUIE.SpellCastBuffs.SV.LongTermEffectsReverse end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.LongTermEffectsReverse = value LUIE.SpellCastBuffs.Reset() end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.LongTermEffectsReverse,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffects_Player ) end,
             }
             
             

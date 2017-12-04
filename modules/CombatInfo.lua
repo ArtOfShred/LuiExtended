@@ -19,7 +19,7 @@ CI.Enabled  = false
 CI.D = {
     
     GlobalShow                       = true,
-    GlobalPotion                     = true,
+    GlobalPotion                     = false,
     GlobalFlash                      = true,
     GlobalDesat                      = false,
     GlobalLabelColor                 = false,
@@ -35,15 +35,15 @@ CI.D = {
     BarLabelPosition                 = -20,
     BarFontFace                      = "Univers 67",
     BarFontStyle                     = "outline",
-    BarFontSize                      = 17,
+    BarFontSize                      = 18,
     BarMiilis                        = true,
     
-    PotionTimerShow                  = false,
+    PotionTimerShow                  = true,
     PotionTimerLabelPosition         = 0,
     PotionTimerFontFace              = "Univers 67",
     PotionTimerFontStyle             = "outline",
     PotionTimerFontSize              = 20,
-    PotionTimerColor                 = false,
+    PotionTimerColor                 = true,
     PotionTimerMillis                = true,
 }
 CI.SV       = nil
