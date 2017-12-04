@@ -461,10 +461,10 @@ local g_currencyTVThrottleTotal     = 0             -- Held value for TV throttl
 -- Loot (Crafting)
 local g_smithing                    = {}            -- Table for smithing mode
 local g_enchanting                  = {}            -- Table for enchanting mode
-local g_enchant_prefix_pos          = { }           -- Prefix Table for Enchanting
-local g_enchant_prefix_neg          = { }           -- Prefix Table for Enchanting
-local g_enchant_smithing_pos        = { }           -- Prefix Table for Smithing
-local g_enchant_smithing_neg        = { }           -- Prefix Table for Smithing
+local g_enchant_prefix_pos          = {}
+local g_enchant_prefix_neg          = {}
+local g_smithing_prefix_pos         = {}
+local g_smithing_prefix_neg         = {}
 local g_itemCounterGain             = 0             -- Counter value for items created via crafting
 local g_itemStringGain              = ""            -- Counter value for items created via crafting
 local g_itemCounterLoss             = 0             -- Counter value for items removed via crafting
@@ -661,7 +661,6 @@ local g_blacklistIDs = {
     [64729]  = true,    -- Mercenary Motif
 }
 
-
 function CA.Initialize(enabled)
     -- Load settings
     CA.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "ChatAnnouncements", CA.D )
@@ -713,40 +712,6 @@ function CA.Initialize(enabled)
     --
     CA.AlertStyleLearned()
     
-    -- Crafting Mode Syntax (Enchanting - Item Gain)
-    g_enchant_prefix_pos = {
-        [1] = CA.SV.LootMessageCraft,
-        [2] = CA.SV.LootMessageReceive,
-        [3] = CA.SV.LootMessageCraft,
-    }
-
-    -- Crafting Mode Syntax (Enchanting - Item Loss)
-    g_enchant_prefix_neg = {
-        [1] = CA.SV.LootMessageUse,
-        [2] = CA.SV.LootMessageExtract,
-        [3] = CA.SV.LootMessageUse,
-    }
-
-    -- Crafting Mode Syntax (Blacksmithing - Item Gain)
-    g_smithing_prefix_pos = {
-        [1] = CA.SV.LootMessageReceive,
-        [2] = CA.SV.LootMessageCraft,
-        [3] = CA.SV.LootMessageReceive,
-        [4] = CA.SV.LootMessageUpgrade,
-        [5] = "",
-        [6] = CA.SV.LootMessageCraft,
-    }
-
-    -- Crafting Mode Syntax (Blacksmithing - Item Loss)
-    g_smithing_prefix_neg = {
-        [1] = CA.SV.LootMessageRefine,
-        [2] = CA.SV.LootMessageUse,
-        [3] = CA.SV.LootMessageDeconstruct,
-        [4] = CA.SV.LootMessageUpgradeFail,
-        [5] = CA.SV.LootMessageResearch,
-        [6] = CA.SV.LootMessageUse,
-    }
-
 end
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -3201,8 +3166,8 @@ end
 -- Simple posthook into ZOS crafting mode functions, based off MultiCraft, thanks Ayantir!
 function CA.CraftModeOverrides()
     -- Set mode on Smithing Station interaction
-	local zos_Smithing = SMITHING.SetMode
-	SMITHING.SetMode = function(...)
+	local zos_Smithing = ZO_Smithing.SetMode
+	ZO_Smithing.SetMode = function(...)
 		zos_Smithing(...)
         if GetCraftingInteractionType() == CRAFTING_TYPE_SMITHNG then
             mode = g_smithing:GetMode()
@@ -3215,8 +3180,8 @@ function CA.CraftModeOverrides()
 	end
 
     -- Set mode on Enchanting Station interaction
-    local zos_Enchanting = ENCHANTING.SetEnchantingMode
-	ENCHANTING.SetEnchantingMode = function(...)
+    local zos_Enchanting = ZO_Enchanting.SetEnchantingMode
+	ZO_Enchanting.SetEnchantingMode = function(...)
 		zos_Enchanting(...)
         if GetCraftingInteractionType() == CRAFTING_TYPE_ENCHANTING then
             mode = g_enchanting:GetMode() 
@@ -3229,6 +3194,40 @@ function CA.CraftModeOverrides()
 	end
 
     -- NOTE: Alchemy and provisioning don't matter, as the only options are to craft and use materials.
+    
+    -- Crafting Mode Syntax (Enchanting - Item Gain)
+    g_enchant_prefix_pos = {
+        [1] = CA.SV.LootMessageCraft,
+        [2] = CA.SV.LootMessageReceive,
+        [3] = CA.SV.LootMessageCraft,
+    }
+
+    -- Crafting Mode Syntax (Enchanting - Item Loss)
+    g_enchant_prefix_neg = {
+        [1] = CA.SV.LootMessageUse,
+        [2] = CA.SV.LootMessageExtract,
+        [3] = CA.SV.LootMessageUse,
+    }
+
+    -- Crafting Mode Syntax (Blacksmithing - Item Gain)
+    g_smithing_prefix_pos = {
+        [1] = CA.SV.LootMessageReceive,
+        [2] = CA.SV.LootMessageCraft,
+        [3] = CA.SV.LootMessageReceive,
+        [4] = CA.SV.LootMessageUpgrade,
+        [5] = "",
+        [6] = CA.SV.LootMessageCraft,
+    }
+
+    -- Crafting Mode Syntax (Blacksmithing - Item Loss)
+    g_smithing_prefix_neg = {
+        [1] = CA.SV.LootMessageRefine,
+        [2] = CA.SV.LootMessageUse,
+        [3] = CA.SV.LootMessageDeconstruct,
+        [4] = CA.SV.LootMessageUpgradeFail,
+        [5] = CA.SV.LootMessageResearch,
+        [6] = CA.SV.LootMessageUse,
+    }
 end
 
     

@@ -448,7 +448,7 @@ ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE",                 "'/unign
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--- BUFFS & DEBUFFS -- LAM --
+-- LAM MODULE ON/OFF --
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -461,15 +461,21 @@ ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMP_TP",                           "Prepend
 ZO_CreateStringId("SI_LUIE_LAM_UF",                                     "Unit Frames")
 ZO_CreateStringId("SI_LUIE_LAM_CA",                                     "Chat Announce")
 ZO_CreateStringId("SI_LUIE_LAM_CI",                                     "Combat Info")
-ZO_CreateStringId("SI_LUIE_LAM_BUFFS_DESCRIPTION",                      "Enables buff and debuff display for effects on the player and target. Also has options for various other enhancements.")
 ZO_CreateStringId("SI_LUIE_LAM_CI_DESCRIPTION",                         "Allows display of ultimate value on bars, effect tracker on bars, as well as cooldown tracking for quick slot items and GCD display for action bars.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFFS_DESCRIPTION",                      "Enables buff and debuff display for effects on the player and target. Also has options for various other enhancements.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFFSDEBUFFS",                           "Buffs & Debuffs")
 ZO_CreateStringId("SI_LUIE_LAM_NAMEDISPLAYMETHOD",                      "Player Name Display Method")
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- BUFFS & DEBUFFS -- LAM --
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_COLOUREDTIMELABEL",                 "Coloured time label")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_COLOUREDTIMELABE_TP",               "Set the colour of text label same as icon border or keep it white.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_DESCENDINGSORT",                    "Descending sort direction")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK",                "Enable Buffs & Debuffs Module")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK_TP",             "Track and show various effects applied to Player and Target units.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_FADEEXPIREICON",                    "Fade out expiring icon")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_FADEEXPIREICON_TP",                 "When Buff is about to expire, make an icon transparent.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_FONTS_SIZE_TP",                     "Font Size to be used on buff text labels.")
@@ -567,7 +573,7 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWBOARDERCOOLDOWN_TP",            "Show bo
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWREMAINTIMELABEL",               "Display remaining time label")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWREMAINTIMELABEL_TP",            "Show text label with number of seconds left until the buff expire.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS",               "Show second fractions")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP",            "Format remaining text labes as \"12.3\" or keep only seconds \"12\".")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP",            "Format remaining text labels as \"12.3\" or keep only seconds \"12\".")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_UNLOCKWINDOW",                      "Unlock Buffs window")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_UNLOCKWINDOW_TP",                   "Unlock for dragging window with buffs icons. This will only unlock areas unaffected by previous option (if it is enabled).")
 
@@ -581,7 +587,6 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_UNLOCKWINDOW_TP",                   "Unlock 
 ZO_CreateStringId("SI_LUIE_LAM_CA_HEADER",                              "Chat Announcements Options")
 ZO_CreateStringId("SI_LUIE_LAM_CA_DESCRIPTION",                         "Displays announcements in chat for various events - with many customizable settings.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_ENABLE",                              "Enable Chat Announcements Module")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ENABLE_TP",                           "Print messages to chat for various events.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP",                "Determines the method used to display player names in Chat Announcements where applicable.\nDefault: Character Name")
 
 -- Shared Menu Strings
@@ -1150,16 +1155,34 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR_TP",  "Change 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ZO_CreateStringId("SI_LUIE_LAM_CI_HEADER",                              "Combat Info Options")
-ZO_CreateStringId("SI_LUIE_LAM_CI_HIDEPERCENTWHENFULL",                 "Hide percent label when full")
-ZO_CreateStringId("SI_LUIE_LAM_CI_HIDEPERCENTWHENFULL_TP",              "Remove percentage label from ultimate slot when ability becomes ready.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWCOOLDOWNS",                       "Show CoolDowns")
-ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWCOOLDOWNS_TP",                    "Show cooldown timers for active abilities.")
 ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWCOMBATINFO",                      "Enable Combat Info")
-ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWCOMBATINFO_TP",                   "Displays various floating text for damage done, healing received, experience and alliance points gain.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWULTIGENTEXTURE",                  "Show Ultimate Generation texture")
-ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWULTIGENTEXTURE_TP",               "Display special texture under Ultimate skill button when in-combat ultimate generation is detected.")
-ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWULTIMATEVALUE",                   "Show current Ultimate value")
-ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWULTIMATEVALUE_TP",                "Display current ultimate ability resource level above ultimate skill slot.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CI_HEADER_GCD",                          "Global Cooldown Options")
+ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_SHOW",                            "Display Global Cooldown on Action Bars")
+ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_SHOW_TP",                         "Dislay an animation on ability bar slots while on the global cooldown.")
+ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_QUICK",                           "Display GCD for Potions")
+ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_QUICK_TP",                        "Also display the global cooldown animation on the quickslot for potions and items that are not subject to the global cooldown.")
+ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_FLASH",                           "Display Ready Flash")
+ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_FLASH_TP",                        "Display a flash animation on each ability slot on the bar when the global cooldown is finished.")
+ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_DESAT",                           "Desaturate Icons")
+ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_DESAT_TP",                        "Desaturate ability icons while on the global cooldown.")
+ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_COLOR",                           "Color Slot Label # Red")
+ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_COLOR_TP",                        "While on global cooldown, colorize the ability button numeric labels red.")
+ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_ANIMATION",                       "GCD Animation Method")
+ZO_CreateStringId("SI_LUIE_LAM_CI_GCD_ANIMATION_TP",                    "Choose the animation type for tracking the global cooldown.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CI_HEADER_ULTIMATE",                     "Ultimate Tracking Options")
+ZO_CreateStringId("SI_LUIE_LAM_CI_ULTIMATE_SHOW",                       "Display Current Ultimate Value")
+ZO_CreateStringId("SI_LUIE_LAM_CI_ULTIMATE_SHOW_TP",                    "Display current ultimate value and percentage toward completion.")
+ZO_CreateStringId("SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL",                   "Hide Label When Full")
+ZO_CreateStringId("SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL_TP",                "Remove percentage label from ultimate slot when ability becomes ready.")
+ZO_CreateStringId("SI_LUIE_LAM_CI_ULTIMATE_TEXTURE",                    "Display Ultimate Generation Texture")
+ZO_CreateStringId("SI_LUIE_LAM_CI_ULTIMATE_TEXTURE_TP",                 "Display special texture under ultimate ability slot when in-combat ultimate generation is detected.")
+
+
+ZO_CreateStringId("SI_LUIE_LAM_CI_HEADER_BARHIGHLIGHT",                 "Bar Ability Highlight Options")
+ZO_CreateStringId("SI_LUIE_LAM_CI_HEADER_POTIONCD",                     "Potion Cooldown Timer Options")
+
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

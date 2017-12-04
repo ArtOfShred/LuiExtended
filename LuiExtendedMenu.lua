@@ -155,7 +155,6 @@ function LUIE_CreateSettings()
     optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_CI_SHOWCOMBATINFO),
-        tooltip = GetString(SI_LUIE_LAM_CI_SHOWCOMBATINFO_TP),
         getFunc = function() return LUIE.SV.CombatInfo_Enabled end,
         setFunc = function(value) LUIE.SV.CombatInfo_Enabled = value end,
         width = "full",
@@ -172,7 +171,6 @@ function LUIE_CreateSettings()
     optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK),
-        tooltip = GetString(SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK_TP),
         getFunc = function() return LUIE.SV.SpellCastBuff_Enable end,
         setFunc = function(value) LUIE.SV.SpellCastBuff_Enable = value end,
         width = "full",
@@ -189,7 +187,6 @@ function LUIE_CreateSettings()
     optionsData[#optionsData +1] = {
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_CA_ENABLE),
-        tooltip = GetString(SI_LUIE_LAM_CA_ENABLE_TP),
         getFunc = function() return LUIE.SV.ChatAnnouncements_Enable end,
         setFunc = function(value) LUIE.SV.ChatAnnouncements_Enable = value end,
         width = "full",
@@ -486,65 +483,69 @@ function LUIE_CreateSettings()
     -- Combat Info Options
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "header",
-        name = "Global Cooldown Options",
+        name = GetString(SI_LUIE_LAM_CI_HEADER_GCD),
         width = "full",
     }
-    
+    -- Show GCD on Action Bars
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = "Show Global Cooldown on Action Bars",
-        tooltip = "TODO",
+        name = GetString(SI_LUIE_LAM_CI_GCD_SHOW),
+        tooltip = GetString(SI_LUIE_LAM_CI_GCD_SHOW_TP),
         getFunc = function() return LUIE.CombatInfo.SV.GlobalShow end,
         setFunc = function(value) LUIE.CombatInfo.SV.GlobalShow = value end,
         width = "full",
         default = LUIE.CombatInfo.D.GlobalShow,
         disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
     }
+    -- Show GCD on Quickslot
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = "Global Cooldown - Show on Quickslot",
-        tooltip = "TODO",
+        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_QUICK)),
+        tooltip = GetString(SI_LUIE_LAM_CI_GCD_QUICK_TP),
         getFunc = function() return LUIE.CombatInfo.SV.GlobalPotion end,
         setFunc = function(value) LUIE.CombatInfo.SV.GlobalPotion = value end,
         width = "full",
         default = LUIE.CombatInfo.D.GlobalPotion,
         disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShow) end,
     }
-    
+    -- Show GCD Ready Flash
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = "Global Cooldown - Show Ready Flash",
-        tooltip = "TODO",
+        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_FLASH)),
+        tooltip = GetString(SI_LUIE_LAM_CI_GCD_FLASH_TP),
         getFunc = function() return LUIE.CombatInfo.SV.GlobalFlash end,
         setFunc = function(value) LUIE.CombatInfo.SV.GlobalFlash = value end,
         width = "full",
         default = LUIE.CombatInfo.D.GlobalFlash,
         disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShow) end,
     }
+    -- GCD - Desaturate Icons on GCD
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = "Global Cooldown - Desaturate Icons on GCD",
-        tooltip = "TODO",
+        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_DESAT)),
+        tooltip = GetString(SI_LUIE_LAM_CI_GCD_DESAT_TP),
         getFunc = function() return LUIE.CombatInfo.SV.GlobalDesat end,
         setFunc = function(value) LUIE.CombatInfo.SV.GlobalDesat = value end,
         width = "full",
         default = LUIE.CombatInfo.D.GlobalDesat,
         disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShow) end,
     }
+    -- GCD - Color Slot Label Red
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = "Global Cooldown - Color Slot Label Red",
-        tooltip = "TODO",
+        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_COLOR)),
+        tooltip = GetString(SI_LUIE_LAM_CI_GCD_COLOR_TP),
         getFunc = function() return LUIE.CombatInfo.SV.GlobalLabelColor end,
         setFunc = function(value) LUIE.CombatInfo.SV.GlobalLabelColor = value end,
         width = "full",
         default = LUIE.CombatInfo.D.GlobalLabelColor,
         disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShow) end,
     }
+    -- GCD - Animation Method
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "dropdown",
-        name = "Global Cooldown - Choose cooldown animation method",
-        tooltip = "TODO",
+        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_ANIMATION)),
+        tooltip = GetString(SI_LUIE_LAM_CI_GCD_ANIMATION_TP),
         choices = globalMethodOptions,
         getFunc = function() return globalMethodOptions[LUIE.CombatInfo.SV.GlobalMethod] end,
         setFunc = function(value) LUIE.CombatInfo.SV.GlobalMethod = globalMethodOptionsKeys[value] end,
@@ -556,13 +557,13 @@ function LUIE_CreateSettings()
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "header",
-        name = "Ultimate Tracking Options",
+        name = GetString(SI_LUIE_LAM_CI_HEADER_ULTIMATE),
         width = "full",
     }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_CI_SHOWULTIMATEVALUE),
-        tooltip = GetString(SI_LUIE_LAM_CI_SHOWULTIMATEVALUE_TP),
+        name = GetString(SI_LUIE_LAM_CI_ULTIMATE_SHOW),
+        tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_SHOW_TP),
         getFunc = function() return LUIE.CombatInfo.SV.UltimateEnabled end,
         setFunc = function(value) LUIE.CombatInfo.SV.UltimateEnabled = value LUIE.CombatInfo.RegisterCombatInfo() LUIE.CombatInfo.OnSlotsFullUpdate(nil) end,
         width = "full",
@@ -571,8 +572,8 @@ function LUIE_CreateSettings()
     }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_CI_HIDEPERCENTWHENFULL),
-        tooltip = GetString(SI_LUIE_LAM_CI_HIDEPERCENTWHENFULL_TP),
+        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL)),
+        tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL_TP),
         getFunc = function() return LUIE.CombatInfo.SV.UltimateHideFull end,
         setFunc = function(value) LUIE.CombatInfo.SV.UltimateHideFull = value LUIE.CombatInfo.OnSlotsFullUpdate(nil) end,
         width = "full",
@@ -581,8 +582,8 @@ function LUIE_CreateSettings()
     }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_CI_SHOWULTIGENTEXTURE),
-        tooltip = GetString(SI_LUIE_LAM_CI_SHOWULTIGENTEXTURE_TP),
+        name = GetString(SI_LUIE_LAM_CI_ULTIMATE_TEXTURE),
+        tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_TEXTURE_TP),
         getFunc = function() return LUIE.CombatInfo.SV.UltimateGeneration end,
         setFunc = function(value) LUIE.CombatInfo.SV.UltimateGeneration = value end,
         width = "full",
@@ -592,7 +593,7 @@ function LUIE_CreateSettings()
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "header",
-        name = "Bar Ability Highlight Options",
+        name = GetString(SI_LUIE_LAM_CI_HEADER_BARHIGHLIGHT),
         width = "full",
     }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
@@ -688,7 +689,7 @@ function LUIE_CreateSettings()
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "header",
-        name = "Potion Cooldown Timer Options",
+        name = GetString(SI_LUIE_LAM_CI_HEADER_POTIONCD),
         width = "full",
     }
     -- Show Cooldowns (Potion Only when I get finished) -- TODO
