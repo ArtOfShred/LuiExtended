@@ -42,7 +42,7 @@ CI.D = {
     PotionTimerLabelPosition         = 0,
     PotionTimerFontFace              = "Univers 67",
     PotionTimerFontStyle             = "outline",
-    PotionTimerFontSize              = 20,
+    PotionTimerFontSize              = 18,
     PotionTimerColor                 = true,
     PotionTimerMillis                = true,
 }

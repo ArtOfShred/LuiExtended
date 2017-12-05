@@ -89,21 +89,28 @@ E.IsToggle = {
     [A.Toggled_Stalwart_Guard]              = true, -- Stalwart Guard (Support)
 }
 
--- TODO: TEMPORARY
+-- TODO: TEMPORARY - Need to update with variants and make sure all these id's are correct.
 -- Vampire / Lycantropy
-E.IsVampLycan = {
-    [40359] = true, -- Fed on ally
-    [40525] = true, -- Bit an ally
-    [33090] = true, -- Dark Stalker
-    [33095] = true, -- Supernatural Recovery
+E.IsVamp = {
     [35771] = true, -- Stage 1 Vampirism
     [35996] = true, -- Stage 2 Vampirism
     [35783] = true, -- Stage 3 Vampirism
     [35792] = true, -- Stage 4 Vampirism
-    [40360] = true, -- Vampirism
+}
+
+E.IsLycan = {
     [35658] = true, -- Lycanthrophy
-    [14271] = true, -- Call of the Pack
-    [31068] = true, -- Sanies Lupinus
+}
+
+E.IsVampLycanDisease = {
+    [40360] = true, -- Vampirism
+    --[31068] = true, -- Sanies Lupinus
+    [40521] = true, -- Sanies Lupinus
+}
+
+E.IsVampLycanBite = {
+    [40359] = true, -- Fed on ally
+    [40525] = true, -- Bit an ally
 }
 
 -- Mundus passives
@@ -123,6 +130,7 @@ E.IsBoon = {
     [13985] = true, -- The Tower
 }
 
+-- Currently hidden since update 14
 E.IsBattleSpirit = {
     [12033] = true, -- Battle Spirit
 }
@@ -151,7 +159,12 @@ E.IsCyrodiil = {
 }
 
 E.IsSoulSummons = {
-    [43752] = true,
+    [43752] = true, -- Soul Summons
+}
+
+E.IsSetICD = {
+    [90938] = true, -- Immortal Warrior
+    [90939] = true, -- Eternal Warrior
 }
 
 -- List of abilities that have to be purged when first damage is recorded

@@ -59,8 +59,14 @@ SCB.D = {
     LongTermEffects_Target           = true,
     IgnoreMundusPlayer               = false,
     IgnoreMundusTarget               = false,
-    IgnoreVampLycanPlayer            = false,
-    IgnoreVampLycanTarget            = false,
+    IgnoreVampPlayer                 = false,
+    IgnoreVampTarget                 = false,
+    IgnoreLycanPlayer                = false,
+    IgnoreLycanTarget                = false,
+    IgnoreDiseasePlayer              = false,
+    IgnoreDiseaseTarget              = false,
+    IgnoreBitePlayer                 = false,
+    IgnoreBiteTarget                 = false,
     IgnoreCyrodiilPlayer             = false,
     IgnoreCyrodiilTarget             = false,
     IgnoreBattleSpiritPlayer         = false,
@@ -69,6 +75,8 @@ SCB.D = {
     IgnoreEsoPlusTarget              = true,
     IgnoreSoulSummonsPlayer          = false,
     IgnoreSoulSummonsTarget          = false,
+    IgnoreSetICDPlayer               = false,
+    IgnoreSetICDTarget               = false,
     IgnoreDisguise                   = false,
     IgnoreCostume                    = true,
     IgnoreHat                        = true,
@@ -2942,7 +2950,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
             buff:SetHidden(false)
             if not remain then
                 buff.label:SetText( E.IsToggle[effect.name] and "T" or nil )
-                -- buff.label:SetText( E.IsToggle[effect.name] and "T" or E.IsVampStage(effect) and ("Fuck" .. E.IsVampStage(effect)) or nil ) -- Deprecated
+                -- buff.label:SetText( E.IsToggle[effect.name] and "T" or E.IsVampStage(effect) and (E.IsVampStage(effect)) or nil ) -- Deprecated
             end
         end
 
@@ -3230,14 +3238,43 @@ function SCB.UpdateContextHideList()
             hideTargetEffects[k] = v
         end
     end
-
-    if SCB.SV.IgnoreVampLycanPlayer then
-        for k, v in pairs(E.IsVampLycan) do
+    if SCB.SV.IgnoreVampPlayer then
+        for k, v in pairs(E.IsVamp) do
             hidePlayerEffects[k] = v
         end
     end
-    if SCB.SV.IgnoreVampLycanTarget then
-        for k, v in pairs(E.IsVampLycan) do
+    if SCB.SV.IgnoreVampTarget then
+        for k, v in pairs(E.IsVamp) do
+            hideTargetEffects[k] = v
+        end
+    end
+    if SCB.SV.IgnoreLycanPlayer then
+        for k, v in pairs(E.IsLycan) do
+            hidePlayerEffects[k] = v
+        end
+    end
+    if SCB.SV.IgnoreLycanTarget then
+        for k, v in pairs(E.IsLycan) do
+            hideTargetEffects[k] = v
+        end
+    end
+    if SCB.SV.IgnoreDiseasePlayer then
+        for k, v in pairs(E.IsVampLycanDisease) do
+            hidePlayerEffects[k] = v
+        end
+    end
+    if SCB.SV.IgnoreDiseaseTarget then
+        for k, v in pairs(E.IsVampLycanDisease) do
+            hideTargetEffects[k] = v
+        end
+    end
+    if SCB.SV.IgnoreBitePlayer then
+        for k, v in pairs(E.IsVampLycanBite) do
+            hidePlayerEffects[k] = v
+        end
+    end
+    if SCB.SV.IgnoreBiteTarget then
+        for k, v in pairs(E.IsVampLycanBite) do
             hideTargetEffects[k] = v
         end
     end
@@ -3267,14 +3304,21 @@ function SCB.UpdateContextHideList()
             hideTargetEffects[k] = v
         end
     end
-    
+    if SCB.SV.IgnoreSetICDPlayer then
+        for k, v in pairs(E.IsSetICD) do
+            hidePlayerEffects[k] = v
+        end
+    end
+    if SCB.SV.IgnoreSetICDTarget then
+        for k, v in pairs(E.IsSetICD) do
+            hideTargetEffects[k] = v
+        end
+    end
+
     -- TODO:
     -- Add block here
     -- Add food here?
-    -- Separate Vamp/Lycan just in case (vampire stage is arguably more important than WW passives)
-    -- Possibly allow player to insert values into this table manually
-
-    --if SCB.SV.ShowBlockPlayer then -- Currently we use ability_type to hide/show this, maybe add here later when I can determine NPC block abilities
-    --if SCB.SV.ShowBlockTarget then
+    -- if SCB.SV.ShowBlockPlayer then -- Currently we use ability_type to hide/show this, maybe add here later when I can determine NPC block abilities
+    -- if SCB.SV.ShowBlockTarget then
 
 end

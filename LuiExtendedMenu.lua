@@ -769,10 +769,10 @@ function LUIE_CreateSettings()
         type = "checkbox",
         name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
         tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.PotionTimerMiilis end,
-        setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerMiilis = value end,
+        getFunc = function() return LUIE.CombatInfo.SV.PotionTimerMillis end,
+        setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerMillis = value end,
         width = "full",
-        default = LUIE.CombatInfo.D.PotionTimerMiilis,
+        default = LUIE.CombatInfo.D.PotionTimerMillis,
         disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.PotionTimerShow ) end,
     }
 
@@ -1083,7 +1083,7 @@ function LUIE_CreateSettings()
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 -- Container orientation
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER),
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER_TP),
                 choices = rotationOptions,
                 getFunc = function() return rotationOptions[LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment] end,
@@ -1096,8 +1096,8 @@ function LUIE_CreateSettings()
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 -- Vertical Long Term Icons Alignment
                 type = "dropdown",
-                name = "VERTICAL LONG TERM ALIGNMENT",
-                tooltip = "TODO",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_VERT)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VERT_TP),
                 choices = { "Top", "Middle", "Bottom" },
                 getFunc = function() return LUIE.SpellCastBuffs.SV.AlignmentLongVert end,
                 setFunc = LUIE.SpellCastBuffs.SetIconsAlignmentLongVert,
@@ -1109,8 +1109,8 @@ function LUIE_CreateSettings()
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 -- Horizontal Long Term Icons Alignment
                 type = "dropdown",
-                name = "HORIZONTAL LONG TERM ALIGNMENT",
-                tooltip = "TODO",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_HORIZ)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_HORIZ_TP),
                 choices = { "Left", "Centered", "Right" },
                 getFunc = function() return LUIE.SpellCastBuffs.SV.AlignmentLongHorz end,
                 setFunc = LUIE.SpellCastBuffs.SetIconsAlignmentLongHorz,
@@ -1121,15 +1121,65 @@ function LUIE_CreateSettings()
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 -- LONG TERM REVERSE SORT ORDER
                 type = "checkbox",
-                name = "REVERSE LONG TERM BUFF SORT ORDER",
-                tooltip = "TODO",
+                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_REVERSE_ORDER)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_REVERSE_ORDER_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.LongTermEffectsReverse end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.LongTermEffectsReverse = value LUIE.SpellCastBuffs.Reset() end,
                 width = "full",
                 default = LUIE.SpellCastBuffs.D.LongTermEffectsReverse,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffects_Player ) end,
             }
-            
+            -- Long Term Effects Filters
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "header",
+                name = GetString(SI_LUIE_LAM_BUFF_FILTER_LONG_HEADER),
+                width = "full",
+            }
+            -- Long Term - Disguises
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreDisguise end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreDisguise = not value LUIE.SpellCastBuffs.OnPlayerActivated() end,
+                width = "full",
+                default = not LUIE.SpellCastBuffs.D.IgnoreDisguise,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
+            }
+            -- Long Term - Assistants
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ASSISTANT),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ASSISTANT_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreAssistant end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreAssistant = not value LUIE.SpellCastBuffs.OnPlayerActivated() end,
+                width = "full",
+                default = not LUIE.SpellCastBuffs.D.IgnoreAssistant,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
+            }
+            -- Long Term - Pets
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnorePet end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnorePet = not value LUIE.SpellCastBuffs.OnPlayerActivated() end,
+                width = "full",
+                default = not LUIE.SpellCastBuffs.D.IgnorePet,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
+            }
+            -- Long Term - Mounts
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreMount end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreMount = not value LUIE.SpellCastBuffs.OnPlayerActivated() end,
+                width = "full",
+                default = not LUIE.SpellCastBuffs.D.IgnoreMount,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
+            }
+            -- Long Term - Mundus - Player
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSPLAYER),
@@ -1140,6 +1190,7 @@ function LUIE_CreateSettings()
                 default = not LUIE.SpellCastBuffs.D.IgnoreMundusPlayer,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             }
+            -- Long Term - Mundus - Target
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSTARGET),
@@ -1150,46 +1201,95 @@ function LUIE_CreateSettings()
                 default = not LUIE.SpellCastBuffs.D.IgnoreMundusTarget,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             }
+            -- Long Term - Vamp Stage - Player
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPPLAYER_TP),
-                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreVampLycanPlayer end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreVampLycanPlayer = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects() end,
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGEPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGEPLAYER_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreVampPlayer end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreVampPlayer = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
-                default = not LUIE.SpellCastBuffs.D.IgnoreVampLycanPlayer,
+                default = not LUIE.SpellCastBuffs.D.IgnoreVampPlayer,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             }
+            -- Long Term - Vamp Stage - Target
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPTARGET_TP),
-                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreVampLycanTarget end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreVampLycanTarget = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects() end,
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGETARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGETARGET_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreVampTarget end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreVampTarget = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
-                default = not LUIE.SpellCastBuffs.D.IgnoreVampLycanTarget,
+                default = not LUIE.SpellCastBuffs.D.IgnoreVampTarget,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             }
+            -- Long Term - Lycanthrophy - Player
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROPLAYER),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROPLAYER_TP),
-                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreCyrodiilPlayer end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreCyrodiilPlayer = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects() end,
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_LYCANPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_LYCANPLAYER_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreLycanPlayer end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreLycanPlayer = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
-                default = not LUIE.SpellCastBuffs.D.IgnoreCyrodiilPlayer,
+                default = not LUIE.SpellCastBuffs.D.IgnoreLycanPlayer,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             }
-             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+            -- Long Term - Lycanthrophy - Target
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROTARGET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROTARGET_TP),
-                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreCyrodiilTarget end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreCyrodiilTarget = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects() end,
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_LYCANTARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_LYCANTARGET_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreLycanTarget end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreLycanTarget = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
-                default = not LUIE.SpellCastBuffs.D.IgnoreCyrodiilTarget,
+                default = not LUIE.SpellCastBuffs.D.IgnoreLycanTarget,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             }
+            -- Long Term - Bite Disease - Player
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWPLAYER_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreDiseasePlayer end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreDiseasePlayer = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects() end,
+                width = "full",
+                default = not LUIE.SpellCastBuffs.D.IgnoreDiseasePlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
+            }
+            -- Long Term - Bite Disease - Target
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWTARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VAMPWWTARGET_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreDiseaseTarget end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreDiseaseTarget = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects() end,
+                width = "full",
+                default = not LUIE.SpellCastBuffs.D.IgnoreDiseaseTarget,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
+            }
+            -- Long Term - Bite Timers - Player
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BITEPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BITEPLAYER_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreBitePlayer end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreBitePlayer = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects() end,
+                width = "full",
+                default = not LUIE.SpellCastBuffs.D.IgnoreBitePlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
+            }
+            -- Long Term - Bite Timers - Target
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BITETARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BITETARGET_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreBiteTarget end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreBiteTarget = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects() end,
+                width = "full",
+                default = not LUIE.SpellCastBuffs.D.IgnoreBiteTarget,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
+            }
+            -- Long Term - Battle Spirit - Player
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITPLAYER),
@@ -1200,6 +1300,7 @@ function LUIE_CreateSettings()
                 default = not LUIE.SpellCastBuffs.D.IgnoreBattleSpiritPlayer,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             }
+            -- Long Term - Battle Spirit - Target
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_BSPIRITTARGET),
@@ -1210,8 +1311,30 @@ function LUIE_CreateSettings()
                 default = not LUIE.SpellCastBuffs.D.IgnoreBattleSpiritTarget,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             }
+            -- Long Term - Cyrodiil - Player
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- Ignore ESO Plus - Player
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROPLAYER_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreCyrodiilPlayer end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreCyrodiilPlayer = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects() end,
+                width = "full",
+                default = not LUIE.SpellCastBuffs.D.IgnoreCyrodiilPlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
+            }
+            -- Long Term - Crodiil - Target
+             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROTARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CYROTARGET_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreCyrodiilTarget end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreCyrodiilTarget = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects() end,
+                width = "full",
+                default = not LUIE.SpellCastBuffs.D.IgnoreCyrodiilTarget,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
+            }
+            -- Long Term - ESO Plus - Player
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSPLAYER),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSPLAYER_TP),
@@ -1221,8 +1344,8 @@ function LUIE_CreateSettings()
                 default = not LUIE.SpellCastBuffs.D.IgnoreEsoPlusPlayer,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             }
+            -- Long Term - ESO Plus - Target
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- Ignore ESO Plus - Target
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSTARGET),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ESOPLUSTARGET_TP),
@@ -1232,83 +1355,100 @@ function LUIE_CreateSettings()
                 default = not LUIE.SpellCastBuffs.D.IgnoreEsoPlusTarget,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             }
-            
+            -- Long Term - Soul Summons - Player
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- Ignore Soul Summons - Player
                 type = "checkbox",
-                name = "IGNORE SOUL SUMMONS - PLAYER",
-                tooltip = "TODO",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSPLAYER_TP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreSoulSummonsPlayer end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreSoulSummonsPlayer = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
                 default = not LUIE.SpellCastBuffs.D.IgnoreSoulSummonsPlayer,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             }
+            -- Long Term - Soul Summons - Target
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- Ignore Soul Summons - Target
                 type = "checkbox",
-                name = "IGNORE SOUL SUMMONS - TARGET",
-                tooltip = "TODO",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSTARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SOULSUMMONSTARGET_TP),
                 getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreSoulSummonsTarget end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreSoulSummonsTarget = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
                 default = not LUIE.SpellCastBuffs.D.IgnoreSoulSummonsTarget,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             }
-
+            -- Long Term - Set ICD - Player
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- Show Disguises
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_DISGUISE_TP),
-                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreDisguise end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreDisguise = not value LUIE.SpellCastBuffs.OnPlayerActivated() end,
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDPLAYER_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreSetICDPlayer end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreSetICDPlayer = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
-                default = not LUIE.SpellCastBuffs.D.IgnoreDisguise,
+                default = not LUIE.SpellCastBuffs.D.IgnoreSetICDPlayer,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             }
+            -- Long Term - Set ICD - Target
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- Show Assistants
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ASSISTANT),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_ASSISTANT_TP),
-                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreAssistant end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreAssistant = not value LUIE.SpellCastBuffs.OnPlayerActivated() end,
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDTARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_SETICDTARGET_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreSetICDTarget end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreSetICDTarget = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
-                default = not LUIE.SpellCastBuffs.D.IgnoreAssistant,
+                default = not LUIE.SpellCastBuffs.D.IgnoreSetICDTarget,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             }
+            -- Short-Term Effect Filters
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- Show Pets
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET_TP),
-                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnorePet end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnorePet = not value LUIE.SpellCastBuffs.OnPlayerActivated() end,
-                width = "full",
-                default = not LUIE.SpellCastBuffs.D.IgnorePet,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- Show Mounts
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_MOUNT_TP),
-                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreMount end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreMount = not value LUIE.SpellCastBuffs.OnPlayerActivated() end,
-                width = "full",
-                default = not LUIE.SpellCastBuffs.D.IgnoreMount,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
-            }
-            
-            
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- SpellCastBuffs Miscellaneous
                 type = "header",
-                name = GetString(SI_PLAYER_MENU_MISC),
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_HEADER),
                 width = "full",
             }
-
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                -- Show Sprint Icon
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ShowSprint end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowSprint = value end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ShowSprint,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            }
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                -- Show Gallop Icon
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ShowGallop end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowGallop = value end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ShowGallop,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            }
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                -- Show Rezz Immunity Icon
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWREZZ),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWREZZ_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ShowResurrectionImmunity end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowResurrectionImmunity = value end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ShowResurrectionImmunity,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            }
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                -- Show Recall Cooldown Icon
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWRECALL),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWRECALL_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ShowRecall end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowRecall = value LUIE.SpellCastBuffs.ReloadEffects() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ShowRecall,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            }
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 -- Show Block Player Icon
                 type = "checkbox",
@@ -1373,50 +1513,6 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.DisguiseStateTarget = value LUIE.SpellCastBuffs.ReloadEffects("reticleover") end,
                 width = "full",
                 default = LUIE.SpellCastBuffs.D.DisguiseStateTarget,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- Show Sprint Icon
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWSPRINT_TP),
-                getFunc = function() return LUIE.SpellCastBuffs.SV.ShowSprint end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowSprint = value end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.ShowSprint,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- Show Gallop Icon
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWGALLOP_TP),
-                getFunc = function() return LUIE.SpellCastBuffs.SV.ShowGallop end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowGallop = value end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.ShowGallop,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- Show Rezz Immunity Icon
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWREZZ),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWREZZ_TP),
-                getFunc = function() return LUIE.SpellCastBuffs.SV.ShowResurrectionImmunity end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowResurrectionImmunity = value end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.ShowResurrectionImmunity,
-                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            }
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                -- Show Recall Cooldown Icon
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWRECALL),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_MISC_SHOWRECALL_TP),
-                getFunc = function() return LUIE.SpellCastBuffs.SV.ShowRecall end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowRecall = value LUIE.SpellCastBuffs.ReloadEffects() end,
-                width = "full",
-                default = LUIE.SpellCastBuffs.D.ShowRecall,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             }
     
@@ -5914,29 +6010,15 @@ function LUIE_CreateSettings()
     -- Reposition frames adjust Y Coordinates
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Reposition Player bars - Adjust Vertical Position",
-        tooltip = "WOW I NEED TO UPDATE TOOLTIPS",
-        min = -80, max = 300, step = 5,
+        name = GetString(SI_LUIE_LAM_UF_DFRAMES_VERT),
+        tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_VERT_TP),
+        min = -150, max = 300, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.RepositionFramesAdjust end,
         setFunc = function(value) LUIE.UnitFrames.SV.RepositionFramesAdjust = value end,
         width = "full",
         default = LUIE.UnitFrames.D.RepositionFramesAdjust,
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.RepositionFrames) end,
-    }
-    
-    
-    -- Format label text
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UF_DFRAMES_LABEL),
-        tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_LABEL_TP),
-        choices = formatOptions,
-        getFunc = function() return LUIE.UnitFrames.SV.Format end,
-        setFunc = function(var) LUIE.UnitFrames.SV.Format = var end,
-        width = "full",
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-        default = LUIE.UnitFrames.D.Format,
     }
     -- Out-of-Combat bars transparency
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -5961,6 +6043,18 @@ function LUIE_CreateSettings()
         width = "full",
         default = LUIE.UnitFrames.D.DefaultIncTransparency,
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+    }
+    -- Format label text
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "dropdown",
+        name = GetString(SI_LUIE_LAM_UF_DFRAMES_LABEL),
+        tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_LABEL_TP),
+        choices = formatOptions,
+        getFunc = function() return LUIE.UnitFrames.SV.Format end,
+        setFunc = function(var) LUIE.UnitFrames.SV.Format = var end,
+        width = "full",
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+        default = LUIE.UnitFrames.D.Format,
     }
     -- DefaultFrames Font
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -5991,6 +6085,7 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = GetString(SI_LUIE_LAM_FONT_STYLE),
+        tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_FONT_STYLE_TP),
         choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
         sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.DefaultFontStyle end,
@@ -6007,6 +6102,17 @@ function LUIE_CreateSettings()
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.DefaultTextColour={r,g,b} LUIE.UnitFrames.DefaultFramesApplyColour() end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.DefaultTextColour[1], g=LUIE.UnitFrames.D.DefaultTextColour[2], b=LUIE.UnitFrames.D.DefaultTextColour[3] },
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+    }
+    -- Color target name by reaction
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_UF_TARGET_COLOR_REACTION),
+        tooltip = GetString(SI_LUIE_LAM_UF_TARGET_COLOR_REACTION_TP),
+        getFunc = function() return LUIE.UnitFrames.SV.TargetColourByReaction end,
+        setFunc = LUIE.UnitFrames.TargetColourByReaction,
+        width = "full",
+        default = LUIE.UnitFrames.D.TargetColourByReaction,
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     -- Target class icon
@@ -6029,17 +6135,6 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.TargetShowFriend = value end,
         width = "full",
         default = LUIE.UnitFrames.D.TargetShowFriend,
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-    }
-    -- Colour target name by reaction
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_TARGET_COLOR_REACTION),
-        tooltip = GetString(SI_LUIE_LAM_UF_TARGET_COLOR_REACTION_TP),
-        getFunc = function() return LUIE.UnitFrames.SV.TargetColourByReaction end,
-        setFunc = LUIE.UnitFrames.TargetColourByReaction,
-        width = "full",
-        default = LUIE.UnitFrames.D.TargetColourByReaction,
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     -- Custom Unit Frames Header
@@ -6109,6 +6204,7 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
         name = GetString(SI_LUIE_LAM_FONT_STYLE),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FONT_STYLE_TP),
         choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
         sort = "name-up",
         getFunc = function() return LUIE.UnitFrames.SV.CustomFontStyle end,
@@ -6130,133 +6226,11 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
         default = LUIE.UnitFrames.D.CustomTexture,
     }
-    -- Custom Unit Frames Health Bar Colour
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "colorpicker",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_HEALTH),
-        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourHealth) end,
-        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourHealth={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
-        width = "full",
-        default = { r=LUIE.UnitFrames.D.CustomColourHealth[1], g=LUIE.UnitFrames.D.CustomColourHealth[2], b=LUIE.UnitFrames.D.CustomColourHealth[3] },
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-    }
-    -- Custom Unit Frames Shield Bar Colour
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "colorpicker",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_SHIELD),
-        getFunc = function() return LUIE.UnitFrames.SV.CustomColourShield[1], LUIE.UnitFrames.SV.CustomColourShield[2], LUIE.UnitFrames.SV.CustomColourShield[3]  end,
-        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourShield={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
-        width = "full",
-        default = { r=LUIE.UnitFrames.D.CustomColourShield[1], g=LUIE.UnitFrames.D.CustomColourShield[2], b=LUIE.UnitFrames.D.CustomColourShield[3] },
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-    }
-    -- Custom Unit Frames Magicka Bar Colour
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "colorpicker",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_MAGICKA),
-        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourMagicka) end,
-        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourMagicka={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
-        width = "full",
-        default = { r=LUIE.UnitFrames.D.CustomColourMagicka[1], g=LUIE.UnitFrames.D.CustomColourMagicka[2], b=LUIE.UnitFrames.D.CustomColourMagicka[3] },
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-    }
-    -- Custom Unit Frames Stamina Bar Colour
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "colorpicker",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_STAMINA),
-        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourStamina) end,
-        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourStamina={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
-        width = "full",
-        default = { r=LUIE.UnitFrames.D.CustomColourStamina[1], g=LUIE.UnitFrames.D.CustomColourStamina[2], b=LUIE.UnitFrames.D.CustomColourStamina[3] },
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-    }
-    -- Custom Unit Frames DPS Role Colour
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "colorpicker",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_DPS),
-        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourDPS) end,
-        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourDPS={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
-        width = "full",
-        default = { r=LUIE.UnitFrames.D.CustomColourDPS[1], g=LUIE.UnitFrames.D.CustomColourDPS[2], b=LUIE.UnitFrames.D.CustomColourDPS[3] },
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) and (LUIE.UnitFrames.SV.ColorRoleGroup or LUIE.UnitFrames.SV.ColorRoleRaid) ) end,
-    }
-    -- Custom Unit Frames Healer Role Colour
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "colorpicker",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_HEALER),
-        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourHealer) end,
-        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourHealer={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
-        width = "full",
-        default = { r=LUIE.UnitFrames.D.CustomColourHealer[1], g=LUIE.UnitFrames.D.CustomColourHealer[2], b=LUIE.UnitFrames.D.CustomColourHealer[3] },
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) and (LUIE.UnitFrames.SV.ColorRoleGroup or LUIE.UnitFrames.SV.ColorRoleRaid) ) end,
-    }
-    -- Custom Unit Frames Tank Role Colour
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "colorpicker",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_TANK),
-        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourTank) end,
-        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourTank={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
-        width = "full",
-        default = { r=LUIE.UnitFrames.D.CustomColourTank[1], g=LUIE.UnitFrames.D.CustomColourTank[2], b=LUIE.UnitFrames.D.CustomColourTank[3] },
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) and (LUIE.UnitFrames.SV.ColorRoleGroup or LUIE.UnitFrames.SV.ColorRoleRaid) ) end,
-    }
-    
-    -- Custom Unit Frames Dragonknight Role Colour
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "colorpicker",
-        name = "DK COLOR",
-        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourDragonknight) end,
-        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourDragonknight={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
-        width = "full",
-        default = { r=LUIE.UnitFrames.D.CustomColourDragonknight[1], g=LUIE.UnitFrames.D.CustomColourDragonknight[2], b=LUIE.UnitFrames.D.CustomColourDragonknight[3] },
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) and (LUIE.UnitFrames.SV.ColorClassGroup or LUIE.UnitFrames.SV.ColorClassRaid) ) end,
-    }
-    -- Custom Unit Frames Nightblade Role Colour
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "colorpicker",
-        name = "NB COLOR",
-        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourNightblade) end,
-        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourNightblade={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
-        width = "full",
-        default = { r=LUIE.UnitFrames.D.CustomColourNightblade[1], g=LUIE.UnitFrames.D.CustomColourNightblade[2], b=LUIE.UnitFrames.D.CustomColourNightblade[3] },
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) and (LUIE.UnitFrames.SV.ColorClassGroup or LUIE.UnitFrames.SV.ColorClassRaid) ) end,
-    }
-    -- Custom Unit Frames Sorcerer Role Colour
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "colorpicker",
-        name = "SORC COLOR",
-        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourSorcerer) end,
-        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourSorcerer={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
-        width = "full",
-        default = { r=LUIE.UnitFrames.D.CustomColourSorcerer[1], g=LUIE.UnitFrames.D.CustomColourSorcerer[2], b=LUIE.UnitFrames.D.CustomColourSorcerer[3] },
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) and (LUIE.UnitFrames.SV.ColorClassGroup or LUIE.UnitFrames.SV.ColorClassRaid) ) end,
-    }
-    -- Custom Unit Frames Templar Role Colour
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "colorpicker",
-        name = "TEMP COLOR",
-        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourTemplar) end,
-        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourTemplar={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
-        width = "full",
-        default = { r=LUIE.UnitFrames.D.CustomColourTemplar[1], g=LUIE.UnitFrames.D.CustomColourTemplar[2], b=LUIE.UnitFrames.D.CustomColourTemplar[3] },
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) and (LUIE.UnitFrames.SV.ColorClassGroup or LUIE.UnitFrames.SV.ColorClassRaid) ) end,
-    }
-    -- Custom Unit Frames Warden Role Colour
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "colorpicker",
-        name = "WARDEN COLOR",
-        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourWarden) end,
-        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourWarden={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
-        width = "full",
-        default = { r=LUIE.UnitFrames.D.CustomColourWarden[1], g=LUIE.UnitFrames.D.CustomColourWarden[2], b=LUIE.UnitFrames.D.CustomColourWarden[3] },
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and (LUIE.UnitFrames.SV.CustomFramesGroup or LUIE.UnitFrames.SV.CustomFramesRaid) and (LUIE.UnitFrames.SV.ColorClassGroup or LUIE.UnitFrames.SV.ColorClassRaid) ) end,
-    }
-    
     -- Custom Unit Frames Separate Shield Bar
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE),
-        tooltip = strformat(GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_TP), GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_NOTE)),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_TP),
         getFunc = function() return LUIE.UnitFrames.SV.CustomShieldBarSeparate end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomShieldBarSeparate = value end,
         width = "full",
@@ -6268,6 +6242,7 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
         name = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_HEIGHT),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_HEIGHT_TP),
         min = 4, max = 12, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.CustomShieldBarHeight end,
         setFunc = function(value) LUIE.UnitFrames.SV.CustomShieldBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() LUIE.UnitFrames.CustomFramesApplyLayoutGroup() end,
@@ -6302,13 +6277,140 @@ function LUIE_CreateSettings()
     -- Champion Points Effective
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = "Choose Champion Point Display Method",
-        tooltip = "HI DAD",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_CHAMPION),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_CHAMPION_TP),
         choices = championOptions,
         getFunc = function() return LUIE.UnitFrames.SV.ChampionOptions end,
         setFunc = function(var) LUIE.UnitFrames.SV.ChampionOptions = var LUIE.UnitFrames.OnPlayerActivated() end,
         width = "full",
         default = LUIE.UnitFrames.D.ChampionOptions,
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+    }
+    
+    -- Custom Unit Frame Color Options
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "header",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_HEADER),
+        width = "full",
+    }
+    -- Custom Unit Frames Health Bar Color
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "colorpicker",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_HEALTH),
+        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourHealth) end,
+        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourHealth={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
+        width = "full",
+        default = { r=LUIE.UnitFrames.D.CustomColourHealth[1], g=LUIE.UnitFrames.D.CustomColourHealth[2], b=LUIE.UnitFrames.D.CustomColourHealth[3] },
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+    }
+    -- Custom Unit Frames Shield Bar Color
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "colorpicker",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_SHIELD),
+        getFunc = function() return LUIE.UnitFrames.SV.CustomColourShield[1], LUIE.UnitFrames.SV.CustomColourShield[2], LUIE.UnitFrames.SV.CustomColourShield[3]  end,
+        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourShield={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
+        width = "full",
+        default = { r=LUIE.UnitFrames.D.CustomColourShield[1], g=LUIE.UnitFrames.D.CustomColourShield[2], b=LUIE.UnitFrames.D.CustomColourShield[3] },
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+    }
+    -- Custom Unit Frames Magicka Bar Color
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "colorpicker",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_MAGICKA),
+        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourMagicka) end,
+        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourMagicka={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
+        width = "full",
+        default = { r=LUIE.UnitFrames.D.CustomColourMagicka[1], g=LUIE.UnitFrames.D.CustomColourMagicka[2], b=LUIE.UnitFrames.D.CustomColourMagicka[3] },
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+    }
+    -- Custom Unit Frames Stamina Bar Color
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "colorpicker",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_STAMINA),
+        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourStamina) end,
+        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourStamina={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
+        width = "full",
+        default = { r=LUIE.UnitFrames.D.CustomColourStamina[1], g=LUIE.UnitFrames.D.CustomColourStamina[2], b=LUIE.UnitFrames.D.CustomColourStamina[3] },
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+    }
+    -- Custom Unit Frames DPS Role Color
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "colorpicker",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_DPS),
+        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourDPS) end,
+        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourDPS={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
+        width = "full",
+        default = { r=LUIE.UnitFrames.D.CustomColourDPS[1], g=LUIE.UnitFrames.D.CustomColourDPS[2], b=LUIE.UnitFrames.D.CustomColourDPS[3] },
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+    }
+    -- Custom Unit Frames Healer Role Color
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "colorpicker",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_HEALER),
+        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourHealer) end,
+        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourHealer={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
+        width = "full",
+        default = { r=LUIE.UnitFrames.D.CustomColourHealer[1], g=LUIE.UnitFrames.D.CustomColourHealer[2], b=LUIE.UnitFrames.D.CustomColourHealer[3] },
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+    }
+    -- Custom Unit Frames Tank Role Color
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "colorpicker",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_TANK),
+        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourTank) end,
+        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourTank={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
+        width = "full",
+        default = { r=LUIE.UnitFrames.D.CustomColourTank[1], g=LUIE.UnitFrames.D.CustomColourTank[2], b=LUIE.UnitFrames.D.CustomColourTank[3] },
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+    }
+    -- Custom Unit Frames Dragonknight Role Color
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "colorpicker",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_DK),
+        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourDragonknight) end,
+        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourDragonknight={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
+        width = "full",
+        default = { r=LUIE.UnitFrames.D.CustomColourDragonknight[1], g=LUIE.UnitFrames.D.CustomColourDragonknight[2], b=LUIE.UnitFrames.D.CustomColourDragonknight[3] },
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+    }
+    -- Custom Unit Frames Nightblade Role Color
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "colorpicker",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_NB),
+        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourNightblade) end,
+        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourNightblade={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
+        width = "full",
+        default = { r=LUIE.UnitFrames.D.CustomColourNightblade[1], g=LUIE.UnitFrames.D.CustomColourNightblade[2], b=LUIE.UnitFrames.D.CustomColourNightblade[3] },
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+    }
+    -- Custom Unit Frames Sorcerer Role Color
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "colorpicker",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_SORC),
+        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourSorcerer) end,
+        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourSorcerer={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
+        width = "full",
+        default = { r=LUIE.UnitFrames.D.CustomColourSorcerer[1], g=LUIE.UnitFrames.D.CustomColourSorcerer[2], b=LUIE.UnitFrames.D.CustomColourSorcerer[3] },
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+    }
+    -- Custom Unit Frames Templar Role Color
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "colorpicker",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_TEMP),
+        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourTemplar) end,
+        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourTemplar={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
+        width = "full",
+        default = { r=LUIE.UnitFrames.D.CustomColourTemplar[1], g=LUIE.UnitFrames.D.CustomColourTemplar[2], b=LUIE.UnitFrames.D.CustomColourTemplar[3] },
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+    }
+    -- Custom Unit Frames Warden Role Color
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "colorpicker",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_WARD),
+        getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourWarden) end,
+        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourWarden={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
+        width = "full",
+        default = { r=LUIE.UnitFrames.D.CustomColourWarden[1], g=LUIE.UnitFrames.D.CustomColourWarden[2], b=LUIE.UnitFrames.D.CustomColourWarden[3] },
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     
@@ -6341,6 +6443,30 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.CustomFramesTarget,
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+    }
+    -- Custom Unit Frames format left label
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "dropdown",
+        name = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_LEFT),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_LEFT_TP),
+        choices = formatOptions,
+        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatOnePT end,
+        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatOnePT = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
+        width = "full",
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+        default = LUIE.UnitFrames.D.CustomFormatOnePT,
+    }
+    -- Custom Unit Frames format right label
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "dropdown",
+        name = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_RIGHT),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_RIGHT_TP),
+        choices = formatOptions,
+        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatTwoPT end,
+        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatTwoPT = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
+        width = "full",
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+        default = LUIE.UnitFrames.D.CustomFormatTwoPT,
     }
     -- Player Bars Width
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -6386,30 +6512,6 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.PlayerBarHeightStamina,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
-    -- Custom Unit Frames format left label
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_LEFT),
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_LEFT_TP),
-        choices = formatOptions,
-        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatOnePT end,
-        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatOnePT = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
-        width = "full",
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-        default = LUIE.UnitFrames.D.CustomFormatOnePT,
-    }
-    -- Custom Unit Frames format right label
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_RIGHT),
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_RIGHT_TP),
-        choices = formatOptions,
-        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatTwoPT end,
-        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatTwoPT = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
-        width = "full",
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-        default = LUIE.UnitFrames.D.CustomFormatTwoPT,
-    }
     -- Hide Player Magicka Bar Label
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
@@ -6425,7 +6527,7 @@ function LUIE_CreateSettings()
     -- Hide Player Magicka Bar
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR),
+        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR)),
         tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR_TP),
         getFunc = function() return LUIE.UnitFrames.SV.HideBarMagicka end,
         setFunc = function(value) LUIE.UnitFrames.SV.HideBarMagicka = value end,
@@ -6449,7 +6551,7 @@ function LUIE_CreateSettings()
     -- Hide Player Stamina Bar
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR),
+        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR)),
         tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR_TP),
         getFunc = function() return LUIE.UnitFrames.SV.HideBarStamina end,
         setFunc = function(value) LUIE.UnitFrames.SV.HideBarStamina = value end,
@@ -6457,6 +6559,41 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.HideBarStamina,
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.HideLabelStamina ) end,
+    }
+    -- Out-of-Combat frame opacity
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "slider",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_OOCPACITY),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_OOCPACITY_TP),
+        min = 0, max = 100, step = 5,
+        getFunc = function() return LUIE.UnitFrames.SV.PlayerOocAlpha end,
+        setFunc = function(value) LUIE.UnitFrames.SV.PlayerOocAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.PlayerOocAlpha,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
+    }
+    -- In-Combat frame opacity
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "slider",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_ICPACITY),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_ICPACITY_TP),
+        min = 0, max = 100, step = 5,
+        getFunc = function() return LUIE.UnitFrames.SV.PlayerIncAlpha end,
+        setFunc = function(value) LUIE.UnitFrames.SV.PlayerIncAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.PlayerIncAlpha,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
+    }
+    -- HIDE BUFFS OOC - PLAYER
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_BuFFS_PLAYER),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_BuFFS_PLAYER_TP),
+        getFunc = function() return LUIE.UnitFrames.SV.HideBuffsPlayerOoc end,
+        setFunc = function(value) LUIE.UnitFrames.SV.HideBuffsPlayerOoc = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.HideBuffsPlayerOoc,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
     -- Spacing between Player Bars
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -6478,28 +6615,6 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableYourname = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
         width = "full",
         default = LUIE.UnitFrames.D.PlayerEnableYourname,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
-    }
-    
-    -- Display self name on Player Frame
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = "DISPLAY TITLE ON TARGET FRAME",
-        tooltip = "TODO",
-        getFunc = function() return LUIE.UnitFrames.SV.TargetEnableTitle end,
-        setFunc = function(value) LUIE.UnitFrames.SV.TargetEnableTitle = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
-        width = "full",
-        default = LUIE.UnitFrames.D.TargetEnableTitle,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
-    }
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = "DISPLAY AVA RANK ON TARGET FRAME",
-        tooltip = "TODO",
-        getFunc = function() return LUIE.UnitFrames.SV.TargetEnableRank end,
-        setFunc = function(value) LUIE.UnitFrames.SV.TargetEnableRank = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
-        width = "full",
-        default = LUIE.UnitFrames.D.TargetEnableRank,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
     }
     -- Display Mount/Siege/Werewolf Bar
@@ -6527,127 +6642,13 @@ function LUIE_CreateSettings()
     -- Champion XP Bar Point-Type Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR),
+        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR)),
         tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR_TP),
         getFunc = function() return LUIE.UnitFrames.SV.PlayerChampionColour end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerChampionColour = value LUIE.UnitFrames.OnChampionPointGained() end,
         width = "full",
         default = LUIE.UnitFrames.D.PlayerChampionColour,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.PlayerEnableAltbarXP ) end,
-    }
-    -- Display Armor stat change
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = "Player/Target - Display Armor Stat Change",
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ARMORCHANGE_TP),
-        getFunc = function() return LUIE.UnitFrames.SV.PlayerEnableArmor end,
-        setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableArmor = value end,
-        width = "full",
-        default = LUIE.UnitFrames.D.PlayerEnableArmor,
-        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
-    }
-    --Display Power stat change
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = "Player/Target - Display Power Stat Change",
-        tooltip = "Display glow border when unit has its power changed.",
-        getFunc = function() return LUIE.UnitFrames.SV.PlayerEnablePower end,
-        setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnablePower = value end,
-        width = "full",
-        default = LUIE.UnitFrames.D.PlayerEnablePower,
-        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
-    }
-    -- Custom Unit Frames Display HoT / DoT Animations
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = "Player / Target - Display HoT/DoT Regen Arrows",
-        tooltip = "TODO",
-        getFunc = function() return LUIE.UnitFrames.SV.PlayerEnableRegen end,
-        setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableRegen = value end,
-        width = "full",
-        default = LUIE.UnitFrames.D.PlayerEnableRegen,
-        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-    }
-    -- Out-of-Combat frame opacity
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "slider",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OOCPACITY),
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OOCPACITY_TP),
-        min = 0, max = 100, step = 5,
-        getFunc = function() return LUIE.UnitFrames.SV.PlayerOocAlpha end,
-        setFunc = function(value) LUIE.UnitFrames.SV.PlayerOocAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
-        width = "full",
-        default = LUIE.UnitFrames.D.PlayerOocAlpha,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
-    }
-    -- In-Combat frame opacity
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "slider",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ICPACITY),
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ICPACITY_TP),
-        min = 0, max = 100, step = 5,
-        getFunc = function() return LUIE.UnitFrames.SV.PlayerIncAlpha end,
-        setFunc = function(value) LUIE.UnitFrames.SV.PlayerIncAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
-        width = "full",
-        default = LUIE.UnitFrames.D.PlayerIncAlpha,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
-    }
-    -- Out-of-Combat frame opacity
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "slider",
-        name = "TARGET OOC OPAC",
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OOCPACITY_TP),
-        min = 0, max = 100, step = 5,
-        getFunc = function() return LUIE.UnitFrames.SV.TargetOocAlpha end,
-        setFunc = function(value) LUIE.UnitFrames.SV.TargetOocAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
-        width = "full",
-        default = LUIE.UnitFrames.D.TargetOocAlpha,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
-    }
-    -- In-Combat frame opacity
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "slider",
-        name = "TARGET IN COMBAT OPAC",
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ICPACITY_TP),
-        min = 0, max = 100, step = 5,
-        getFunc = function() return LUIE.UnitFrames.SV.TargetIncAlpha end,
-        setFunc = function(value) LUIE.UnitFrames.SV.TargetIncAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
-        width = "full",
-        default = LUIE.UnitFrames.D.TargetIncAlpha,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
-    }
-    -- Treat Missing Power as In-Combat
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_MISSPOWERCOMBAT),
-        getFunc = function() return LUIE.UnitFrames.SV.CustomOocAlphaPower end,
-        setFunc = function(value) LUIE.UnitFrames.SV.CustomOocAlphaPower = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
-        width = "full",
-        default = LUIE.UnitFrames.D.CustomOocAlphaPower,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
-    }
-    -- HIDE BUFFS OOC - PLAYER
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = "HIDE ANCHORED BUFFS (PLAYER) OUT OF COMBAT",
-        getFunc = function() return LUIE.UnitFrames.SV.HideBuffsPlayerOoc end,
-        setFunc = function(value) LUIE.UnitFrames.SV.HideBuffsPlayerOoc = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
-        width = "full",
-        default = LUIE.UnitFrames.D.HideBuffsPlayerOoc,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
-    }
-    -- HIDE BUFFS OOC - TARGET
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = "HIDE ANCHORED BUFFS (TARGET) OUT OF COMBAT",
-        getFunc = function() return LUIE.UnitFrames.SV.HideBuffsTargetOoc end,
-        setFunc = function(value) LUIE.UnitFrames.SV.HideBuffsTargetOoc = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
-        width = "full",
-        default = LUIE.UnitFrames.D.HideBuffsTargetOoc,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
     -- Target Bars Width
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -6670,6 +6671,41 @@ function LUIE_CreateSettings()
         width = "full",
         default = LUIE.UnitFrames.D.TargetBarHeight,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesTarget ) end,
+    }
+    -- Out-of-Combat frame opacity
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "slider",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_OOCPACITY),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_OOCPACITY_TP),
+        min = 0, max = 100, step = 5,
+        getFunc = function() return LUIE.UnitFrames.SV.TargetOocAlpha end,
+        setFunc = function(value) LUIE.UnitFrames.SV.TargetOocAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.TargetOocAlpha,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
+    }
+    -- In-Combat frame opacity
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "slider",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_OOCPACITY),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_ICPACITY_TP),
+        min = 0, max = 100, step = 5,
+        getFunc = function() return LUIE.UnitFrames.SV.TargetIncAlpha end,
+        setFunc = function(value) LUIE.UnitFrames.SV.TargetIncAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.TargetIncAlpha,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
+    }
+    -- HIDE BUFFS OOC - TARGET
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_BuFFS_TARGET),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_BuFFS_TARGET_TP),
+        getFunc = function() return LUIE.UnitFrames.SV.HideBuffsTargetOoc end,
+        setFunc = function(value) LUIE.UnitFrames.SV.HideBuffsTargetOoc = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.HideBuffsTargetOoc,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
     -- Display Target class label
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -6706,6 +6742,75 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.TargetEnableSkull,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesTarget ) end,
     }
+    -- Display title on target frame
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TITLE),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TITLE_TP),
+        getFunc = function() return LUIE.UnitFrames.SV.TargetEnableTitle end,
+        setFunc = function(value) LUIE.UnitFrames.SV.TargetEnableTitle = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.TargetEnableTitle,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
+    }
+    -- Display rank on target frame
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_RANK),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_RANK_TP),
+        getFunc = function() return LUIE.UnitFrames.SV.TargetEnableRank end,
+        setFunc = function(value) LUIE.UnitFrames.SV.TargetEnableRank = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.TargetEnableRank,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
+    }
+    -- Display Armor stat change
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_ARMOR), GetString(SI_LUIE_LAM_UF_SHARED_PT)),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHARED_ARMOR_TP),
+        getFunc = function() return LUIE.UnitFrames.SV.PlayerEnableArmor end,
+        setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableArmor = value end,
+        width = "full",
+        default = LUIE.UnitFrames.D.PlayerEnableArmor,
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
+    }
+    --Display Power stat change
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_POWER), GetString(SI_LUIE_LAM_UF_SHARED_PT)),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHARED_POWER_TP),
+        getFunc = function() return LUIE.UnitFrames.SV.PlayerEnablePower end,
+        setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnablePower = value end,
+        width = "full",
+        default = LUIE.UnitFrames.D.PlayerEnablePower,
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
+    }
+    -- Custom Unit Frames Display HoT / DoT Animations
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_REGEN), GetString(SI_LUIE_LAM_UF_SHARED_PT)),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHARED_REGEN_TP),
+        getFunc = function() return LUIE.UnitFrames.SV.PlayerEnableRegen end,
+        setFunc = function(value) LUIE.UnitFrames.SV.PlayerEnableRegen = value end,
+        width = "full",
+        default = LUIE.UnitFrames.D.PlayerEnableRegen,
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+    }
+    -- Treat Missing Power as In-Combat
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_MISSPOWERCOMBAT),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_MISSPOWERCOMBAT_TP),
+        getFunc = function() return LUIE.UnitFrames.SV.CustomOocAlphaPower end,
+        setFunc = function(value) LUIE.UnitFrames.SV.CustomOocAlphaPower = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.CustomOocAlphaPower,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
+    }
     -- Custom Unit Frames (Group)
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "header",
@@ -6724,15 +6829,29 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
-    -- Include Player in Group Frame
+    -- Custom Unit Frames format left label
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESG_INCPLAYERS),
-        getFunc = function() return not LUIE.UnitFrames.SV.GroupExcludePlayer end,
-        setFunc = function(value) LUIE.UnitFrames.SV.GroupExcludePlayer = (not value) LUIE.UnitFrames.CustomFramesGroupUpdate() end,
+        type = "dropdown",
+        name = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_LEFT),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_LEFT_TP),
+        choices = formatOptions,
+        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatOneGroup end,
+        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatOneGroup = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
         width = "full",
-        default = not LUIE.UnitFrames.D.GroupExcludePlayer,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
+        default = LUIE.UnitFrames.D.CustomFormatOneGroup,
+    }
+    -- Custom Unit Frames format right label
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "dropdown",
+        name = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_RIGHT),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_RIGHT_TP),
+        choices = formatOptions,
+        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatTwoGroup end,
+        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatTwoGroup = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
+        width = "full",
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
+        default = LUIE.UnitFrames.D.CustomFormatTwoGroup,
     }
     -- Group Bars Width
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
@@ -6756,32 +6875,18 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.GroupBarHeight,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
     }
-    
-    -- Custom Unit Frames format left label
+    -- Group / Raid ALPHA
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "dropdown",
-        name = "GROUP FRAMES LABEL ONE",
-        tooltip = "TODO",
-        choices = formatOptions,
-        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatOneGroup end,
-        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatOneGroup = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
+        type = "slider",
+        name = GetString(SI_LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY_TP),
+        min = 0, max = 100, step = 5,
+        getFunc = function() return LUIE.UnitFrames.SV.GroupAlpha end,
+        setFunc = function(value) LUIE.UnitFrames.SV.GroupAlpha = value LUIE.UnitFrames.CustomFramesGroupAlpha() end,
         width = "full",
+        default = LUIE.UnitFrames.D.GroupAlpha,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
-        default = LUIE.UnitFrames.D.CustomFormatOneGroup,
     }
-    -- Custom Unit Frames format right label
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "dropdown",
-        name = "GROUP FRAMES LABEL TWO",
-        tooltip = "TODO",
-        choices = formatOptions,
-        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatTwoGroup end,
-        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatTwoGroup = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
-        width = "full",
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
-        default = LUIE.UnitFrames.D.CustomFormatTwoGroup,
-    }
-    
     -- Spacing between Group Bars
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
@@ -6791,6 +6896,17 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.GroupBarSpacing = value LUIE.UnitFrames.CustomFramesApplyLayoutGroup() end,
         width = "full",
         default = LUIE.UnitFrames.D.GroupBarSpacing,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
+    }
+    -- Include Player in Group Frame
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESG_INCPLAYER),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESG_INCPLAYER_TP),
+        getFunc = function() return not LUIE.UnitFrames.SV.GroupExcludePlayer end,
+        setFunc = function(value) LUIE.UnitFrames.SV.GroupExcludePlayer = (not value) LUIE.UnitFrames.CustomFramesGroupUpdate() end,
+        width = "full",
+        default = not LUIE.UnitFrames.D.GroupExcludePlayer,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
     }
     -- Show Role Icon on Group Frames
@@ -6819,33 +6935,19 @@ function LUIE_CreateSettings()
     -- Custom Unit Frames Group Color Class
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "COLOR GROUP FRAMES BY CLASS",
-        tooltip = "TODO",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYCLASS),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_GFRAMESBYCLASS_TP),
         getFunc = function() return LUIE.UnitFrames.SV.ColorClassGroup end,
         setFunc = function(value) LUIE.UnitFrames.SV.ColorClassGroup = value LUIE.UnitFrames.CustomFramesApplyColours(true) end,
         width = "full",
         default = LUIE.UnitFrames.D.ColorClassGroup,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
     }
-    
-        -- Out-of-Combat frame opacity
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "slider",
-        name = "Group / Raid ALPHA (Shared Setting",
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OOCPACITY_TP),
-        min = 0, max = 100, step = 5,
-        getFunc = function() return LUIE.UnitFrames.SV.GroupAlpha end,
-        setFunc = function(value) LUIE.UnitFrames.SV.GroupAlpha = value LUIE.UnitFrames.CustomFramesGroupAlpha() end,
-        width = "full",
-        default = LUIE.UnitFrames.D.GroupAlpha,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
-    }
-    
     -- Display Armor stat change
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Group - Display Armor Stat Change",
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ARMORCHANGE_TP),
+        name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_ARMOR), GetString(SI_LUIE_LAM_UF_SHARED_GROUP)),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHARED_ARMOR_TP),
         getFunc = function() return LUIE.UnitFrames.SV.GroupEnableArmor end,
         setFunc = function(value) LUIE.UnitFrames.SV.GroupEnableArmor = value end,
         width = "full",
@@ -6856,8 +6958,8 @@ function LUIE_CreateSettings()
     --Display Power stat change
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Group - Display Power Stat Change",
-        tooltip = "Display glow border when unit has its power changed.",
+        name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_POWER), GetString(SI_LUIE_LAM_UF_SHARED_GROUP)),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHARED_POWER_TP),
         getFunc = function() return LUIE.UnitFrames.SV.GroupEnablePower end,
         setFunc = function(value) LUIE.UnitFrames.SV.GroupEnablePower = value end,
         width = "full",
@@ -6868,8 +6970,8 @@ function LUIE_CreateSettings()
     -- Display Regen Arrows
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Group - Display HoT/DoT Regen Arrows",
-        tooltip = "TODO",
+        name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_REGEN), GetString(SI_LUIE_LAM_UF_SHARED_GROUP)),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHARED_REGEN_TP),
         getFunc = function() return LUIE.UnitFrames.SV.GroupEnableRegen end,
         setFunc = function(value) LUIE.UnitFrames.SV.GroupEnableRegen = value end,
         width = "full",
@@ -6896,6 +6998,18 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Raid HP Bar Format
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "dropdown",
+        name = GetString(SI_LUIE_LAM_UF_SHARED_LABEL),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_TP),
+        choices = formatOptions,
+        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatRaid end,
+        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatRaid = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
+        width = "full",
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
+        default = LUIE.UnitFrames.D.CustomFormatRaid,
+    }
     -- Raid Bars Width
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
@@ -6918,33 +7032,18 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.RaidBarHeight,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
     }
-    -- Raid HP Bar Format
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_LEFT),
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FORMATTXT_LEFT_TP),
-        choices = formatOptions,
-        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatRaid end,
-        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatRaid = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
-        width = "full",
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
-        default = LUIE.UnitFrames.D.CustomFormatRaid,
-    }
-    
-    -- Raid Name Clip
+    -- Group / Raid ALPHA
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESR_NAMECLIP),
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_NAMECLIP_TP),
-        min = 0, max = 200, step = 1,
-        getFunc = function() return LUIE.UnitFrames.SV.RaidNameClip end,
-        setFunc = function(value) LUIE.UnitFrames.SV.RaidNameClip = value LUIE.UnitFrames.CustomFramesApplyLayoutRaid() end,
+        name = GetString(SI_LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHARED_GROUPRAID_OPACITY_TP),
+        min = 0, max = 100, step = 5,
+        getFunc = function() return LUIE.UnitFrames.SV.GroupAlpha end,
+        setFunc = function(value) LUIE.UnitFrames.SV.GroupAlpha = value LUIE.UnitFrames.CustomFramesGroupAlpha() end,
         width = "full",
-        default = LUIE.UnitFrames.D.RaidNameClip,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
-    }  
-    
-    
+        default = LUIE.UnitFrames.D.GroupAlpha,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesGroup ) end,
+    }
     -- Raid Frame Layout
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
@@ -6958,17 +7057,6 @@ function LUIE_CreateSettings()
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
         default = LUIE.UnitFrames.D.RaidLayout,
     }
-    --[[Sort Raid Frame
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = "Sort Raid Frame",
-        tooltip = "Perform alphabetic sort of members in raid-size group. This is a default UI behaviour. If for any reason you prefer to have raid members sorted according to internal game numbering, you can switch off this option.",
-        getFunc = function() return LUIE.UnitFrames.SV.RaidSort end,
-        setFunc = function(value) LUIE.UnitFrames.SV.RaidSort = value LUIE.UnitFrames.CustomFramesGroupUpdate() end,
-        width = "full",
-        default = LUIE.UnitFrames.D.RaidSort,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
-    } ]]--
     -- Add Spacer for every 4 members
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
@@ -6980,35 +7068,23 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.RaidSpacers,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
     }
-    --[[
-    -- Show Role Icon on Raid Frames
+    -- Raid Name Clip
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESR_ROLEICON),
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_ROLEICON_TP),
-        getFunc = function() return LUIE.UnitFrames.SV.RoleIconRaid end,
-        setFunc = function(value) LUIE.UnitFrames.SV.RoleIconRaid  = value LUIE.UnitFrames.CustomFramesApplyLayoutRaid() end,
+        type = "slider",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESR_NAMECLIP),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_NAMECLIP_TP),
+        min = 0, max = 200, step = 1,
+        getFunc = function() return LUIE.UnitFrames.SV.RaidNameClip end,
+        setFunc = function(value) LUIE.UnitFrames.SV.RaidNameClip = value LUIE.UnitFrames.CustomFramesApplyLayoutRaid() end,
         width = "full",
-        default = LUIE.UnitFrames.D.RoleIconRaid,
+        default = LUIE.UnitFrames.D.RaidNameClip,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
-    }
-    -- Show Class Icon on Raid Frames
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = "SHOW CLASS ICON ON RAID FRAMES",
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_ROLEICON_TP),
-        getFunc = function() return LUIE.UnitFrames.SV.ClassIconRaid end,
-        setFunc = function(value) LUIE.UnitFrames.SV.ClassIconRaid  = value LUIE.UnitFrames.CustomFramesApplyLayoutRaid() end,
-        width = "full",
-        default = LUIE.UnitFrames.D.ClassIconRaid,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
-    }
-    ]]--
+    }  
     -- Class / Role Icon on Raid Frames Setting
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
-        name = "RAID ICON OPTIONS",
-        tooltip = "RAID ICON OPTIONS TOOLTIP",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESR_ROLEICON),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_ROLEICON_TP),
         choices = raidIconOptions,
         getFunc = function() return raidIconOptions[LUIE.UnitFrames.SV.RaidIconOptions] end,
         setFunc = function(value) LUIE.UnitFrames.SV.RaidIconOptions = raidIconOptionsKeys[value] LUIE.UnitFrames.CustomFramesApplyLayoutRaid() end,
@@ -7017,7 +7093,6 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.RaidIconOptions,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
     }
-    
     -- Custom Unit Frames Raid Color Player Role
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
@@ -7029,37 +7104,22 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.ColorRoleRaid,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
     }
-    
-    -- Custom Unit Frames Raid Color Player Role
+    -- Custom Unit Frames Raid Color Player Class
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "COLOR RAID BY CLASS COLOR",
-        tooltip = "TODO",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYCLASS),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_RFRAMESBYCLASS_TP),
         getFunc = function() return LUIE.UnitFrames.SV.ColorClassRaid end,
         setFunc = function(value) LUIE.UnitFrames.SV.ColorClassRaid = value LUIE.UnitFrames.CustomFramesApplyColours(true) end,
         width = "full",
         default = LUIE.UnitFrames.D.ColorClassRaid,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
     }
-    
-            -- Out-of-Combat frame opacity
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "slider",
-        name = "Group / Raid ALPHA (Shared Setting",
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OOCPACITY_TP),
-        min = 0, max = 100, step = 5,
-        getFunc = function() return LUIE.UnitFrames.SV.GroupAlpha end,
-        setFunc = function(value) LUIE.UnitFrames.SV.GroupAlpha = value LUIE.UnitFrames.CustomFramesGroupAlpha() end,
-        width = "full",
-        default = LUIE.UnitFrames.D.GroupAlpha,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
-    }
-    
     -- Display Armor stat change
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Raid - Display Armor Stat Change",
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ARMORCHANGE_TP),
+        name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_ARMOR), GetString(SI_LUIE_LAM_UF_SHARED_RAID)),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHARED_ARMOR_TP),
         getFunc = function() return LUIE.UnitFrames.SV.RaidEnableArmor end,
         setFunc = function(value) LUIE.UnitFrames.SV.RaidEnableArmor = value end,
         width = "full",
@@ -7070,8 +7130,8 @@ function LUIE_CreateSettings()
     -- Display Power stat change
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Raid - Display Power Stat Change",
-        tooltip = "Display glow border when unit has its power changed.",
+        name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_POWER), GetString(SI_LUIE_LAM_UF_SHARED_RAID)),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHARED_POWER_TP),
         getFunc = function() return LUIE.UnitFrames.SV.RaidEnablePower end,
         setFunc = function(value) LUIE.UnitFrames.SV.RaidEnablePower = value end,
         width = "full",
@@ -7082,8 +7142,8 @@ function LUIE_CreateSettings()
     -- Display Regen Arrows
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Raid - Display HoT/DoT Regen Arrows",
-        tooltip = "TODO",
+        name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_REGEN), GetString(SI_LUIE_LAM_UF_SHARED_RAID)),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHARED_REGEN_TP),
         getFunc = function() return LUIE.UnitFrames.SV.RaidEnableRegen end,
         setFunc = function(value) LUIE.UnitFrames.SV.RaidEnableRegen = value end,
         width = "full",
@@ -7111,10 +7171,22 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
+    -- Boss HP Bar Format
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "dropdown",
+        name = GetString(SI_LUIE_LAM_UF_SHARED_LABEL),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHARED_LABEL_TP),
+        choices = formatOptions,
+        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatBoss end,
+        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatBoss = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
+        width = "full",
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesBosses ) end,
+        default = LUIE.UnitFrames.D.CustomFormatBoss,
+    }
     -- Boss Bars Width
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "BOSS BAR WIDTH",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESB_WIDTH),
         min = 100, max = 500, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.BossBarWidth end,
         setFunc = function(value) LUIE.UnitFrames.SV.BossBarWidth = value LUIE.UnitFrames.CustomFramesApplyLayoutBosses() end,
@@ -7125,7 +7197,7 @@ function LUIE_CreateSettings()
     -- Boss Bars Height
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "BOSS BAR HEIGHT",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESB_HEIGHT),
         min = 20, max = 70, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.BossBarHeight end,
         setFunc = function(value) LUIE.UnitFrames.SV.BossBarHeight = value LUIE.UnitFrames.CustomFramesApplyLayoutBosses() end,
@@ -7133,24 +7205,11 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.BossBarHeight,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesBosses ) end,
     }
-    -- Boss HP Bar Format
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "dropdown",
-        name = "BOSS HP LABEL FORMAT",
-        tooltip = "TODO",
-        choices = formatOptions,
-        getFunc = function() return LUIE.UnitFrames.SV.CustomFormatBoss end,
-        setFunc = function(var) LUIE.UnitFrames.SV.CustomFormatBoss = var LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
-        width = "full",
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesBosses ) end,
-        default = LUIE.UnitFrames.D.CustomFormatBoss,
-    }
-    
     -- Out-of-Combat frame opacity
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "BOSS OOC OPAC",
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OOCPACITY_TP),
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESB_OPACITYOOC),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESB_OPACITYOOC_TP),
         min = 0, max = 100, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.BossOocAlpha end,
         setFunc = function(value) LUIE.UnitFrames.SV.BossOocAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
@@ -7161,8 +7220,8 @@ function LUIE_CreateSettings()
     -- In-Combat frame opacity
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "Boss IN COMBAT OPAC",
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ICPACITY_TP),
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESB_OPACITYIC),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESB_OPACITYIC_TP),
         min = 0, max = 100, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.BossIncAlpha end,
         setFunc = function(value) LUIE.UnitFrames.SV.BossIncAlpha = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
@@ -7170,12 +7229,11 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.BossIncAlpha,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesBosses ) end,
     }
-    
     -- Display Armor stat change
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Boss - Display Armor Stat Change",
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_ARMORCHANGE_TP),
+        name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_ARMOR), GetString(SI_LUIE_LAM_UF_SHARED_BOSS)),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHARED_ARMOR_TP),
         getFunc = function() return LUIE.UnitFrames.SV.BossEnableArmor end,
         setFunc = function(value) LUIE.UnitFrames.SV.BossEnableArmor = value end,
         width = "full",
@@ -7186,8 +7244,8 @@ function LUIE_CreateSettings()
     -- Display Power stat change
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Boss - Display Power Stat Change",
-        tooltip = "Display glow border when unit has its power changed.",
+        name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_POWER), GetString(SI_LUIE_LAM_UF_SHARED_BOSS)),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHARED_POWER_TP),
         getFunc = function() return LUIE.UnitFrames.SV.BossEnablePower end,
         setFunc = function(value) LUIE.UnitFrames.SV.BossEnablePower = value end,
         width = "full",
@@ -7198,8 +7256,8 @@ function LUIE_CreateSettings()
     -- Display Regen Arrows
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = "Boss - Display HoT/DoT Regen Arrows",
-        tooltip = "TODO",
+        name = strformat(GetString(SI_LUIE_LAM_UF_SHARED_REGEN), GetString(SI_LUIE_LAM_UF_SHARED_BOSS)),
+        tooltip = GetString(SI_LUIE_LAM_UF_SHARED_REGEN_TP),
         getFunc = function() return LUIE.UnitFrames.SV.BossEnableRegen end,
         setFunc = function(value) LUIE.UnitFrames.SV.BossEnableRegen = value end,
         width = "full",
@@ -7321,26 +7379,13 @@ function LUIE_CreateSettings()
     -- Interactible Reticle Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = GetString(SI_LUIE_LAM_UF_COMMON_RETICLECOLORINTERACT),
+        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_COMMON_RETICLECOLORINTERACT)),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.ReticleColour_Interact) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.ReticleColour_Interact={r,g,b} end,
         width = "full",
         default = { r=LUIE.UnitFrames.D.ReticleColour_Interact[1], g=LUIE.UnitFrames.D.ReticleColour_Interact[2], b=LUIE.UnitFrames.D.ReticleColour_Interact[3] },
         disabled = function() return not (LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.ReticleColourByReaction) end,
     }
-    --[[Font Style
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "dropdown",
-        name = "Font Style",
-        choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
-        sort = "name-up",
-        getFunc = function() return LUIE.SpellCastBuffs.SV.BuffFontStyle end,
-        setFunc = function(var) LUIE.SpellCastBuffs.SV.BuffFontStyle = var LUIE.SpellCastBuffs.ApplyFont() end,
-        width = "full",
-        default = LUIE.SpellCastBuffs.D.BuffFontStyle,
-        disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.RemainingText ) end,
-    }
-    ]]--
 
     LAM2:RegisterAddonPanel('LUIEAddonOptions', panelData)
     LAM2:RegisterOptionControls('LUIEAddonOptions', optionsData)

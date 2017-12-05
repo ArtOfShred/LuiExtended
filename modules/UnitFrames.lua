@@ -84,13 +84,11 @@ UF.D = {
     CustomColourDPS                  = { 130/255, 99/255, 65/255 },
     CustomColourHealer               = { 117/255, 077/255, 135/255 },
     CustomColourTank                 = { 133/255, 018/255, 013/255 },
-    
     CustomColourDragonknight         = { 255/255, 126/255, 63/255 },
     CustomColourNightblade           = { 255/255, 51/255, 49/255 },
     CustomColourSorcerer             = { 75/255, 83/255, 247/255 },
     CustomColourTemplar              = { 255/255, 255/255, 99/255 },
     CustomColourWarden               = { 136/255, 245/255, 125/255 },
-    
     CustomShieldBarSeparate          = false,
     CustomShieldBarHeight            = 10,
     CustomShieldBarFull              = false,
@@ -126,7 +124,6 @@ UF.D = {
     BossEnableArmor                  = false,
     BossEnablePower                  = false,
     BossEnableRegen                  = false,
-    
     TargetEnableClass                = false,
     TargetEnableRank                 = true,
     TargetEnableTitle                = true,
@@ -146,7 +143,6 @@ UF.D = {
     ColorRoleRaid                    = true,
     ColorClassGroup                  = false,
     ColorClassRaid                   = false,
-    --RaidSort                       = true,
     RaidSpacers                      = false,
     CustomFramesBosses               = true,
     AvaCustFramesTarget              = false,
@@ -162,7 +158,7 @@ UF.D = {
     ReticleColourByReaction          = false,
     DisplayOptions                   = 2,
     ExecutePercentage                = 20,
-    RaidIconOptions                  = 4,
+    RaidIconOptions                  = 2,
     ChampionOptions                  = "Show Above Cap",
     RepositionFramesAdjust           = 0,
 }
