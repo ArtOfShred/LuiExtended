@@ -2747,6 +2747,29 @@ function LUIE_CreateSettings()
                     },
                     
                     {
+                        -- Show Quest Loot (Add)
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWQUESTADD),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWQUESTADD_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootQuestAdd end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootQuestAdd = value LUIE.ChatAnnouncements.RegisterLootEvents() LUIE.ChatAnnouncements.AddQuestItemsToIndex() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootQuestAdd,
+                    },
+                    {
+                        -- Show Quest Loot (Remove)
+                        type = "checkbox",
+                        name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWQUESTREM),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_SHOWQUESTREM_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootQuestRemove end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootQuestRemove = value LUIE.ChatAnnouncements.RegisterLootEvents() LUIE.ChatAnnouncements.AddQuestItemsToIndex() end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootQuestRemove,
+                    },
+                    
+                    {
                         -- Show Vendor Inventory Changes
                         type = "checkbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_SHOWVENDOR),

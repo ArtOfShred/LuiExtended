@@ -134,6 +134,8 @@ CA.D = {
     LootShowDestroy               = true,
     LootShowDisguise              = true,
     LootShowLockpick              = true,
+    LootQuestAdd                  = true,
+    LootQuestRemove               = false,
     
     -- Notifications
     NotificationConfiscateCA      = true,
@@ -925,9 +927,6 @@ function CA.RegisterLootEvents()
     -- LOCKPICK
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_BROKE, CA.MiscAlertLockBroke)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS, CA.MiscAlertLockSuccess)
-
-    --
-    
     -- LOOT RECEIVED
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOOT_RECEIVED)
     -- QUEST REWARD CONTEXT
@@ -960,8 +959,12 @@ function CA.RegisterLootEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED)
 
     -- LOOT RECEIVED
-    if CA.SV.Loot then
+    if CA.SV.Loot or CA.SV.LootQuestAdd or CA.SV.LootQuestRemove then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_RECEIVED, CA.OnLootReceived)
+    end
+    -- QUEST LOOT
+    if CA.SV.LootQuestAdd or CA.SV.LootQuestRemove then
+        CA.AddQuestItemsToIndex()
     end
     -- INDEX
     if CA.SV.Loot or CA.SV.LootShowDisguise then
@@ -2920,11 +2923,214 @@ function CA.GetItemLinkFromItemId(itemId)
     return ZO_LinkHandler_CreateLink(strformat("<<t:1>>", name), nil, ITEM_LINK_TYPE,itemId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 end
 
-function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound, lootType, lootedBySelf, isPickpocketLoot, questItemIcon, itemId)
+local questItemIndex = { }
 
-    g_comboString = ""
-    if lootedBySelf then
-        --d("Loot Received (Self)")
+function CA.AddQuestItemsToIndex()
+
+    questItemIndex = { }
+
+    local function AddQuests(questIndex)
+    
+        local inventory = PLAYER_INVENTORY.inventories[INVENTORY_QUEST_ITEM]
+        local itemTable = inventory.slots[questIndex]
+        if itemTable then
+            --remove all quest items from search
+            for i = 1, #itemTable do
+                local itemId = itemTable[i].questItemId
+                local stackCount = itemTable[i].stackCount
+                local icon = itemTable[i].iconFile
+                questItemIndex[itemId] = { stack = stackCount, counter = 0, icon = icon }
+            end
+        end
+    end
+    
+    for questIndex = 1, MAX_JOURNAL_QUESTS do
+        AddQuests(questIndex)
+    end
+    
+end
+
+function CA.ResolveQuestItemChange()
+
+    for itemId, _ in pairs(questItemIndex) do
+    
+        local countChange = nil
+        local newValue = questItemIndex[itemId].stack + questItemIndex[itemId].counter
+        
+        -- Only if the value changes
+        if newValue > questItemIndex[itemId].stack or newValue < questItemIndex[itemId].stack then
+        
+            local icon = questItemIndex[itemId].icon
+            local formattedIcon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
+            local itemLink = strfmt("|H1:quest_item:" .. itemId .. "|h|h")
+            
+            
+            local color
+            local logPrefix
+            local total = questItemIndex[itemId].stack + questItemIndex[itemId].counter
+            local totalString
+            
+            local formattedMessageP1
+            local formattedMessageP2
+            local finalMessage
+        
+            -- Higher
+            if newValue > questItemIndex[itemId].stack then
+                countChange = newValue - questItemIndex[itemId].stack
+                
+                if CA.SV.LootQuestAdd then 
+                    if CA.SV.CurrencyContextColor then
+                        color = CurrencyUpColorize:ToHex()
+                    else
+                        color = CurrencyColorize:ToHex()
+                    end
+                    
+                    if g_isLooted and not g_itemReceivedIsQuestReward and not g_isPickpocketed and not g_isStolen then
+                        logPrefix = CA.SV.LootMessageLoot
+                        -- reset variables that control looted, or at least ZO_CallLater them
+                    elseif g_isPickpocketed then
+                        logPrefix = CA.SV.LootMessagePickpocket
+                    elseif g_isStolen and not g_isPickpocketed then
+                        logPrefix = CA.SV.LootMessageSteal
+                    else
+                        logPrefix = CA.SV.LootMessageReceive
+                    end
+                    
+                    local quantity = countChange > 1 and (" |cFFFFFFx" .. countChange .. "|r") or ""
+                    
+                    formattedMessageP1 = ("|r" .. formattedIcon .. itemLink .. quantity .. "|c" .. color)
+                    formattedMessageP2 = strfmt(logPrefix, formattedMessageP1)
+                    
+                    if CA.SV.LootTotal and total > 1 then
+                        totalString = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", color, CA.SV.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+                    else
+                        totalString = ""
+                    end
+                    
+                    finalMessage = strfmt("|c%s%s|r%s", color, formattedMessageP2, totalString)
+                    d(finalMessage)
+                end
+            
+            end
+            
+            -- Lower
+            if newValue < questItemIndex[itemId].stack then
+                countChange = newValue + questItemIndex[itemId].counter
+                
+                if CA.SV.LootQuestRemove then 
+                    if CA.SV.CurrencyContextColor then
+                        color = CurrencyDownColorize:ToHex()
+                    else
+                        color = CurrencyColorize:ToHex()
+                    end
+                    
+                    logPrefix = CA.SV.LootMessageDestroy
+                    local quantity = countChange < 1 and (" |cFFFFFFx" .. (countChange * -1) .. "|r") or ""
+                    
+                    formattedMessageP1 = ("|r" .. formattedIcon .. itemLink .. quantity .. "|c" .. color)
+                    formattedMessageP2 = strfmt(logPrefix, formattedMessageP1)
+                    
+                    if CA.SV.LootTotal and total > 1 then
+                        totalString = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", color, CA.SV.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+                    else
+                        totalString = ""
+                    end
+                    
+                    finalMessage = strfmt("|c%s%s|r%s", color, formattedMessageP2, totalString)
+                    
+                    d(finalMessage)
+                end
+            end
+        end
+        
+        -- If count changed, update it
+        if countChange then 
+            
+            questItemIndex[itemId].stack = newValue
+            questItemIndex[itemId].counter = 0
+            --d("New Stack Value = " .. questItemIndex[itemId].stack)
+            
+            if questItemIndex[itemId].stack < 1 then
+                questItemIndex[itemId] = nil
+                --d("Item reached 0 or below stacks, removing")
+            end
+        end
+        
+    end
+    
+end
+
+local function DisplayQuestItem(itemId, stackCount, icon, reset)
+
+    if not questItemIndex[itemId] then
+        questItemIndex[itemId] = { stack = 0, counter = 0, icon = icon }
+        --d("New item created with 0 stack")
+    end
+    
+    if reset then
+        --d(itemId .. " - Decrement by: " .. stackCount)
+        questItemIndex[itemId].counter = questItemIndex[itemId].counter - stackCount
+    else
+        --d(itemId .. " - Increment by: " .. stackCount)
+        questItemIndex[itemId].counter = questItemIndex[itemId].counter + stackCount
+    end
+
+    g_queuedMessages[g_queuedMessagesCounter] = { message = "", type = "QUESTLOOT" }
+    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+    
+end
+
+PLAYER_INVENTORY.AddQuestItem = function(self, questItem, searchType)
+    local inventory = self.inventories[INVENTORY_QUEST_ITEM]
+
+    questItem.inventory = inventory
+    --store all tools and items in a subtable under the questIndex for faster access
+    local questIndex = questItem.questIndex
+    if not inventory.slots[questIndex] then
+        inventory.slots[questIndex] = {}
+    end
+    table.insert(inventory.slots[questIndex], questItem)
+
+    local index = #inventory.slots[questIndex]
+
+    if(searchType == SEARCH_TYPE_QUEST_ITEM) then
+        questItem.searchData = {type = SEARCH_TYPE_QUEST_ITEM, questIndex = questIndex, stepIndex = questItem.stepIndex, conditionIndex = questItem.conditionIndex, index = index }
+    else
+        questItem.searchData = {type = SEARCH_TYPE_QUEST_TOOL, questIndex = questIndex, toolIndex = questItem.toolIndex, index = index }
+    end
+    
+    inventory.stringSearch:Insert(questItem.searchData)
+    -- Display Item if set to display
+    if CA.SV.LootQuestAdd or CA.SV.LootQuestRemove then
+        DisplayQuestItem(questItem.questItemId, questItem.stackCount, questItem.iconFile, false)
+    end
+end
+
+PLAYER_INVENTORY.ResetQuest = function(self, questIndex)
+    local inventory = self.inventories[INVENTORY_QUEST_ITEM]
+    local itemTable = inventory.slots[questIndex]
+    if itemTable then
+        --remove all quest items from search
+        for i = 1, #itemTable do
+            inventory.stringSearch:Remove(itemTable.searchData)
+            -- Display Item if set to display
+            if CA.SV.LootQuestAdd or CA.SV.LootQuestRemove then
+                local itemId = itemTable[i].questItemId
+                local stackCount = itemTable[i].stackCount
+                local icon = itemTable[i].iconFile
+                DisplayQuestItem(itemId, stackCount, icon, true)
+            end
+        end
+    end
+
+    inventory.slots[questIndex] = nil
+end
+
+function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound, lootType, lootedBySelf, isPickpocketLoot, questItemIcon, itemId, isStolen)
+
+    -- If the player loots an item
+    if not isPickpocketLoot and lootedBySelf then
         g_isLooted = true
         
         local function ResetIsLooted()
@@ -2934,7 +3140,8 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
         EVENT_MANAGER:RegisterForUpdate(moduleName .. "ResetLooted", 200, ResetIsLooted )
     end
     
-    if isPickpocketLoot then
+    -- If the player pickpockets an item
+    if isPickpocketLoot and lootedBySelf then
         g_isPickpocketed = true
         
         local function ResetIsPickpocketed()
@@ -2943,11 +3150,8 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
         end
         EVENT_MANAGER:RegisterForUpdate(moduleName .. "ResetPickpocket", 200, ResetIsPickpocketed )
     end
-       
-    -- If we didn't receive the loot, and we don't have Only Notable loot shown then we ignore the rest of this event and everything is passed to Index functions
-    if lootedBySelf and lootType ~= LOOT_TYPE_QUEST_ITEM then
-        return
-    end
+
+    -- Return right now if we don't have group loot set to display
     if not CA.SV.LootGroup then
         return
     end
@@ -8952,7 +9156,9 @@ function CA.PrintQueuedMessages()
     -- Display the rest
     for i=1, #g_queuedMessages do
         if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type ~= "QUEST" and g_queuedMessages[i].type ~= "EXPERIENCE" and g_queuedMessages[i].type ~= "ACHIEVEMENT" and g_queuedMessages[i].type ~= "QUEST_POI" then
-            if g_queuedMessages[i].type == "LOOT" then
+            if g_queuedMessages[i].type == "QUESTLOOT" then
+                CA.ResolveQuestItemChange()
+            elseif g_queuedMessages[i].type == "LOOT" then
                 CA.ResolveItemMessage(g_queuedMessages[i].message, g_queuedMessages[i].formattedRecipient, g_queuedMessages[i].color, g_queuedMessages[i].logPrefix, g_queuedMessages[i].totalString)
             else
                 printToChat(g_queuedMessages[i].message)

@@ -793,6 +793,12 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_LOOTSHOWLOCKPICK",               "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_LOOTSHOWLOCKPICK_TP",            "Display a message when a lockpick is broken from attempting to pick or forcing a lock open.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWVENDOR",                     "Display Items - Vendor Transactions")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWVENDOR_TP",                  "Print a message to chat when items are purchased or sold at a vendor.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWQUESTADD",                   "Display Quest Items Looted")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWQUESTADD_TP",                "Display a message when a quest item is looted or received.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWQUESTREM",                   "Display Quest Items Removed")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWQUESTREM_TP",                "Display a message when a quest item is used or removed.")
+
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_MERGE",                   "Merge Currency & Loot Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_MERGE_TP",                "Combine the individual item purchase message and currency change message into one line.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALITEMS",              "Display Total Items on Transactions")
