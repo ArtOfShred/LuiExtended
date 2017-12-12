@@ -25,6 +25,12 @@ CA.D = {
     ChatPlayerDisplayOptions      = 2,
     NotificationColor             = { .75, .75, .75, 1 },
     
+    BracketOptionCharacter        = 2,
+    BracketOptionItem             = 2,
+    BracketOptionLorebook         = 2,
+    BracketOptionCollectible      = 2,
+    BracketOptionAchievement      = 2,
+    
     -- Achievement
     AchievementCategory1          = true,
     AchievementCategory2          = true,
@@ -42,7 +48,7 @@ CA.D = {
     AchievementCompleteMsg        = GetString(SI_ACHIEVEMENT_AWARDED_CENTER_SCREEN),
     AchievementColorProgress      = true,
     AchievementColor1             = { .75, .75, .75, 1 },
-    AchievementColor2             = { .75, .75, .75, 1 },
+    AchievementColor2             = { 1, 1, 1, 1 },
     AchievementCompPercentage     = false,
     AchievementUpdateCA           = false,
     AchievementUpdateAlert        = false,
@@ -92,6 +98,8 @@ CA.D = {
     GuildManageCA                 = false,
     GuildManageAlert              = false,
     GuildIcon                     = true,
+    GuildAllianceColor            = true,
+    GuildColor                    = { 1, 1, 1, 1 },
     GuildRankDisplayOptions       = 1,
     
     -- Friend
@@ -179,6 +187,7 @@ CA.D = {
 
     -- Storage / Riding Upgrades
     StorageRidingColor            = { .75, .75, .75, 1 },
+    StorageRidingBookColor        = { .75, .75, .75, 1 },
     StorageRidingCA               = true,
     StorageRidingCSA              = true,
     StorageRidingAlert            = false,
@@ -531,6 +540,9 @@ local g_tradeTarget                 = ""            -- Saves name of target play
 -- Basic
 local NotificationColorize
 
+-- Guild
+local GuildColorize
+
 -- Currency
 local CurrencyColorize
 local CurrencyUpColorize
@@ -581,6 +593,7 @@ local QuestColorQuestDescriptionColorize
 
 -- Storage
 local StorageRidingColorize
+local StorageRidingBookColorize
 local StorageBagColorize
 
 ------------------------------------------------
@@ -623,6 +636,25 @@ local bracket4 = {
 }
 
 ------------------------------------------------
+-- LINK BRACKET OPTIONS ------------------------
+------------------------------------------------
+
+local linkBrackets = {
+    [1] = LINK_STYLE_DEFAULT,
+    [2] = LINK_STYLE_BRACKETS,
+}
+
+local linkBracket1 = {
+    [1] = "",
+    [2] = "[",
+}
+
+local linkBracket2 = {
+    [1] = "",
+    [2] = "]",
+}
+
+------------------------------------------------
 -- ITEM BLACKLIST ------------------------------
 ------------------------------------------------
 
@@ -659,6 +691,14 @@ local g_blacklistIDs = {
     [64727]  = true,    -- Mercenary Motif
     [64728]  = true,    -- Mercenary Motif
     [64729]  = true,    -- Mercenary Motif
+}
+
+local guildAllianceColors = {
+
+[1] = ZO_ColorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_ALDMERI_DOMINION)),
+[2] = ZO_ColorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_DAGGERFALL_COVENANT)),
+[3] = ZO_ColorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_EBONHEART_PACT)),
+
 }
 
 function CA.Initialize(enabled)
@@ -710,7 +750,7 @@ function CA.Initialize(enabled)
     CA.RegisterQuestEvents()
     
     --
-    CA.AlertStyleLearned()
+    CA.HookFunction()
     
 end
 
@@ -755,9 +795,12 @@ function CA.RegisterColorEvents()
     QuestColorQuestDescriptionColorize = ZO_ColorDef:New(unpack(CA.SV.QuestColorDescription)):ToHex()
     
     StorageRidingColorize = ZO_ColorDef:New(unpack(CA.SV.StorageRidingColor))
+    StorageRidingBookColorize = ZO_ColorDef:New(unpack(CA.SV.StorageRidingBookColor))
     StorageBagColorize = ZO_ColorDef:New(unpack(CA.SV.StorageBagColor))
     
     NotificationColorize = ZO_ColorDef:New(unpack(CA.SV.NotificationColor))
+    
+    GuildColorize = ZO_ColorDef:New(unpack(CA.SV.GuildColor))
     
 end
 
@@ -999,6 +1042,51 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
+-- Called by most functions that use character or display name to resolve LINK display method.
+function CA.ResolveNameLink(characterName, displayName)
+
+    local nameLink
+
+    if CA.SV.ChatPlayerDisplayOptions == 1 then
+        if CA.SV.BracketOptionCharacter == 1 then
+            nameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(characterName, nil, CHARACTER_LINK_TYPE, characterName)
+        else
+            nameLink = ZO_LinkHandler_CreateLink(characterName, nil, CHARACTER_LINK_TYPE, characterName)
+        end
+    elseif CA.SV.ChatPlayerDisplayOptions == 2 then
+        if CA.SV.BracketOptionCharacter == 1 then
+            nameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        else
+            nameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        end
+    elseif CA.SV.ChatPlayerDisplayOptions == 3 then
+        local displayBothString = strformat("<<1>><<2>>", characterName, displayName)
+        if CA.SV.BracketOptionCharacter == 1 then
+            nameLink = ZO_LinkHandler_CreateLinkWithBrackets(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        else
+            nameLink = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        end
+    end
+    
+    return nameLink
+end
+
+-- Called by most functions that use character or display name to resolve NON-LINK display method (mostly used for alerts).
+function CA.ResolveNameNoLink(characterName, displayName)
+    
+    local nameLink
+    if CA.SV.ChatPlayerDisplayOptions == 1 then
+        nameLink = characterName
+    elseif CA.SV.ChatPlayerDisplayOptions == 2 then
+        nameLink = displayName
+    elseif CA.SV.ChatPlayerDisplayOptions == 3 then
+        nameLink = strformat("<<1>><<2>>", characterName, displayName)
+    end
+    
+    return nameLink
+
+end
+
 function CA.GuildHeraldrySaved()
 
     if CA.SV.CurrencyGoldChange then
@@ -1020,8 +1108,9 @@ function CA.GuildHeraldrySaved()
         local guildName = GetGuildName(id)
 
         local guildAlliance = GetGuildAlliance(id)
-        local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-        local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+        local guildColor = CA.SV.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+        local guildNameAlliance = CA.SV.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+        local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
         if CA.SV.GuildManageCA then
             local finalMessage = strformat(GetString(SI_LUIE_CA_GUILD_HERALDRY_UPDATE), guildNameAlliance)
@@ -1040,8 +1129,9 @@ function CA.GuildRanksSaved(eventCode, guildId)
     local guildName = GetGuildName(guildId)
 
     local guildAlliance = GetGuildAlliance(guildId)
-    local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-    local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    local guildColor = CA.SV.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+    local guildNameAlliance = CA.SV.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+    local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
     if CA.SV.GuildManageCA then
         local finalMessage = strformat(GetString(SI_LUIE_CA_GUILD_RANKS_UPDATE), guildNameAlliance)
@@ -1069,12 +1159,13 @@ function CA.GuildRankSaved(eventCode, guildId, rankIndex)
 
     local icon = GetGuildRankIconIndex(guildId, rankIndex)
     local icon = GetGuildRankLargeIcon(icon)
-    local rankSyntax = CA.SV.GuildIcon and zo_iconTextFormat(icon, 16, 16, ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
-    local rankSyntaxAlert = CA.SV.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
     local guildName = GetGuildName(guildId)
     local guildAlliance = GetGuildAlliance(guildId)
-    local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-    local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    local guildColor = CA.SV.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+    local guildNameAlliance = CA.SV.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+    local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+    local rankSyntax = CA.SV.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
+    local rankSyntaxAlert = CA.SV.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankName) or rankName
 
     if CA.SV.GuildManageCA then
         printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_UPDATE), rankSyntax, guildNameAlliance))
@@ -1090,8 +1181,9 @@ function CA.GuildTextChanged(eventCode, guildId)
     local guildName = GetGuildName(guildId)
 
     local guildAlliance = GetGuildAlliance(guildId)
-    local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-    local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    local guildColor = CA.SV.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+    local guildNameAlliance = CA.SV.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+    local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
     -- Depending on event code set message context.
     local messageString = eventCode == EVENT_GUILD_DESCRIPTION_CHANGED and SI_LUIE_CA_GUILD_DESCRIPTION_CHANGED or EVENT_GUILD_MOTD_CHANGED and SI_LUIE_CA_GUILD_MOTD_CHANGED or nil
     
@@ -1128,8 +1220,6 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
 
         local icon = GetGuildRankIconIndex(guildId, newRank)
         local icon = GetGuildRankLargeIcon(icon)
-        local rankSyntax = CA.SV.GuildIcon and zo_iconTextFormat(icon, 16, 16, ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
-        local rankSyntaxAlert = CA.SV.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
         local guildName = GetGuildName(guildId)
         local guilds = GetNumGuilds()
 
@@ -1138,8 +1228,11 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
             local name = GetGuildName(id)
 
             local guildAlliance = GetGuildAlliance(id)
-            local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-            local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+            local guildColor = CA.SV.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+            local guildNameAlliance = CA.SV.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+            local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+            local rankSyntax = CA.SV.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
+            local rankSyntaxAlert = CA.SV.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankName) or rankName
 
             if guildName == name then
                 if CA.SV.GuildRankCA then
@@ -1165,8 +1258,6 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
 
         local icon = GetGuildRankIconIndex(guildId, newRank)
         local icon = GetGuildRankLargeIcon(icon)
-        local rankSyntax = CA.SV.GuildIcon and zo_iconTextFormat(icon, 16, 16, ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
-        local rankSyntaxAlert = CA.SV.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", ZO_SELECTED_TEXT:Colorize(rankName)) or (ZO_SELECTED_TEXT:Colorize(rankName))
 
         local guildName = GetGuildName(guildId)
 
@@ -1185,8 +1276,11 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
             local name = GetGuildName(id)
 
             local guildAlliance = GetGuildAlliance(id)
-            local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-            local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+            local guildColor = CA.SV.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+            local guildNameAlliance = CA.SV.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+            local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+            local rankSyntax = CA.SV.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
+            local rankSyntaxAlert = CA.SV.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankName) or rankName
 
             if guildName == name then
                 if CA.SV.GuildRankCA then
@@ -1209,8 +1303,9 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
         local name = GetGuildName(id)
 
         local guildAlliance = GetGuildAlliance(id)
-        local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-        local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+        local guildColor = CA.SV.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+        local guildNameAlliance = CA.SV.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+        local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
         if guildName == name then
             if CA.SV.GuildCA then
@@ -1238,8 +1333,9 @@ end
 -- EVENT_GUILD_INVITE_ADDED
 function CA.GuildInviteAdded(eventCode, guildId, guildName, guildAlliance, inviterName)
     local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
-    local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-    local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    local guildColor = CA.SV.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+    local guildNameAlliance = CA.SV.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+    local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
     if CA.SV.GuildCA then
         printToChat(strformat(GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST), displayNameLink, guildNameAlliance))
     end
@@ -1337,25 +1433,11 @@ end
 function CA.QuestShared (eventCode, questId)
     if CA.SV.QuestShareCA or CA.SV.QuestShareAlert then
         local questName, characterName, timeSinceRequestMs, displayName = GetOfferedQuestShareInfo(questId)
-        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(characterName)
-        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
-        local displayBothString = ( strformat("<<1>><<2>>", characterName, displayName) )
-        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        
+        local finalName = CA.ResolveNameLink(characterName, displayName)
 
-        local message
-        local alertMessage
-        if CA.SV.ChatPlayerDisplayOptions == 1 then
-            message = strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE), displayNameLink, QuestColorQuestNameColorize:Colorize(questName))
-            alertMessage = strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_P2P), displayName, questName)
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then
-            message = strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE), characterNameLink, QuestColorQuestNameColorize:Colorize(questName))
-            alertMessage = strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_P2P), characterName, questName)
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then
-            message = strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE), displayBoth, QuestColorQuestNameColorize:Colorize(questName))
-            alertMessage = strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_P2P), displayBothString, questName)
-        end
+        local message = strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE), finalName, QuestColorQuestNameColorize:Colorize(questName))
+        local alertMessage = strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_P2P), finalName, questName)
        
         if CA.SV.QuestShareCA then
             printToChat(message)
@@ -2019,11 +2101,11 @@ function CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTyp
             local bagType
             local icon
             if type == "LUIE_CURRENCY_BAG" then
-                bagType = GetString(SI_LUIE_CA_STORAGE_BAGTYPE1)
+                bagType = strfmt(linkBracket1[CA.SV.BracketOptionItem] .. GetString(SI_LUIE_CA_STORAGE_BAGTYPE1) .. linkBracket2[CA.SV.BracketOptionItem])
                 icon = CA.SV.LootIcons and "|t16:16:/esoui/art/icons/store_upgrade_bag.dds|t " or ""
             end
             if type == "LUIE_CURRENCY_BANK" then
-                bagType = GetString(SI_LUIE_CA_STORAGE_BAGTYPE2)
+                bagType = strfmt(linkBracket1[CA.SV.BracketOptionItem] .. GetString(SI_LUIE_CA_STORAGE_BAGTYPE2) .. linkBracket2[CA.SV.BracketOptionItem])
                 icon = CA.SV.LootIcons and "|t16:16:/esoui/art/icons/store_upgrade_bank.dds|t " or ""
             end
             return strfmt("|r" .. icon .. "|cFFFFFF" .. bagType .. "|r|c" .. changeColor)
@@ -2031,7 +2113,7 @@ function CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTyp
         formattedMessageP1 = (strfmt(messageChange, ResolveStorageType(), messageP1))
     elseif type == "LUIE_CURRENCY_HERALDRY" then
         local icon = CA.SV.LootIcons and "|t16:16:LuiExtended/media/unitframes/ca_heraldry.dds|t " or ""
-        local heraldryMessage = strfmt("|r" .. icon .. "|cFFFFFF" .. GetString(SI_LUIE_CA_CURRENCY_NAME_HERALDRY) .. "|r|c" .. changeColor)
+        local heraldryMessage = strfmt("|r" .. icon .. "|cFFFFFF" .. linkBracket1[CA.SV.BracketOptionItem] .. GetString(SI_LUIE_CA_CURRENCY_NAME_HERALDRY) .. linkBracket2[CA.SV.BracketOptionItem] .. "|r|c" .. changeColor)
         formattedMessageP1 = (strfmt(messageChange, messageP1, heraldryMessage)) 
     elseif type == "LUIE_CURRENCY_RIDING_SPEED" or type == "LUIE_CURRENCY_RIDING_CAPACITY" or type == "LUIE_CURRENCY_RIDING_STAMINA" then
         local function ResolveRidingStats()
@@ -2039,13 +2121,13 @@ function CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTyp
             local skillType
             local icon
             if type == "LUIE_CURRENCY_RIDING_SPEED" then
-                skillType = GetString(SI_LUIE_CA_STORAGE_RIDINGTYPE1)
+                skillType = strfmt(linkBracket1[CA.SV.BracketOptionItem] .. GetString(SI_LUIE_CA_STORAGE_RIDINGTYPE1) .. linkBracket2[CA.SV.BracketOptionItem])
                 icon = CA.SV.LootIcons and "|t16:16:/esoui/art/mounts/ridingskill_speed.dds|t " or ""
             elseif type == "LUIE_CURRENCY_RIDING_CAPACITY" then
-                skillType = GetString(SI_LUIE_CA_STORAGE_RIDINGTYPE2)
+                skillType = strfmt(linkBracket1[CA.SV.BracketOptionItem] .. GetString(SI_LUIE_CA_STORAGE_RIDINGTYPE2) .. linkBracket2[CA.SV.BracketOptionItem])
                 icon = CA.SV.LootIcons and "|t16:16:/esoui/art/mounts/ridingskill_capacity.dds|t " or ""
             elseif type == "LUIE_CURRENCY_RIDING_STAMINA" then
-                skillType = GetString(SI_LUIE_CA_STORAGE_RIDINGTYPE3)
+                skillType = strfmt(linkBracket1[CA.SV.BracketOptionItem] .. GetString(SI_LUIE_CA_STORAGE_RIDINGTYPE3) .. linkBracket2[CA.SV.BracketOptionItem])
                 icon = CA.SV.LootIcons and "|t16:16:/esoui/art/mounts/ridingskill_stamina.dds|t " or ""
             end
             return strfmt("|r" .. icon .. "|cFFFFFF" .. skillType .. "|r|c" .. changeColor)
@@ -2203,8 +2285,13 @@ function CA.OnBuybackItem(eventCode, itemName, quantity, money, itemSound)
     local formattedIcon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
     local type = "LUIE_CURRENCY_VENDOR"
     local messageChange = (money ~= 0 and CA.SV.LootVendorCurrency) and CA.SV.LootMessageBuyback or CA.SV.LootMessageBuybackNoV
-    local itemCount = quantity > 1 and (" |cFFFFFFx" .. quantity .. "|r") or "" 
-    local carriedItem = ( formattedIcon .. itemName:gsub("^|H0", "|H1", 1) ..  itemCount )
+    local itemCount = quantity > 1 and (" |cFFFFFFx" .. quantity .. "|r") or ""
+    local carriedItem
+    if CA.SV.BracketOptionItem == 1 then
+        carriedItem = ( formattedIcon .. itemName ..  itemCount )
+    else
+        carriedItem = ( formattedIcon .. itemName:gsub("^|H0", "|H1", 1) ..  itemCount )
+    end
     
     local carriedItemTotal = ""
     if CA.SV.LootTotal and CA.SV.LootVendorTotalItems then
@@ -2236,7 +2323,12 @@ function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCu
     local type = "LUIE_CURRENCY_VENDOR"
     local messageChange = (money ~= 0 and CA.SV.LootVendorCurrency) and CA.SV.LootMessageBuy or CA.SV.LootMessageBuyNoV
     local itemCount = quantity > 1 and (" |cFFFFFFx" .. quantity .. "|r") or "" 
-    local carriedItem = ( formattedIcon .. itemName:gsub("^|H0", "|H1", 1) ..  itemCount )
+    local carriedItem
+    if CA.SV.BracketOptionItem == 1 then
+        carriedItem = ( formattedIcon .. itemName ..  itemCount )
+    else
+        carriedItem = ( formattedIcon .. itemName:gsub("^|H0", "|H1", 1) ..  itemCount )
+    end
     
     local carriedItemTotal = ""
     if CA.SV.LootTotal and CA.SV.LootVendorTotalItems then
@@ -2273,7 +2365,12 @@ function CA.OnSellItem(eventCode, itemName, quantity, money)
         messageChange = (money ~= 0 and CA.SV.LootVendorCurrency) and CA.SV.LootMessageSell or CA.SV.LootMessageSellNoV
     end
     local itemCount = quantity > 1 and (" |cFFFFFFx" .. quantity .. "|r") or "" 
-    local carriedItem = ( formattedIcon .. itemName:gsub("^|H0", "|H1", 1) ..  itemCount )
+    local carriedItem
+    if CA.SV.BracketOptionItem == 1 then
+        carriedItem = ( formattedIcon .. itemName ..  itemCount )
+    else
+        carriedItem = ( formattedIcon .. itemName:gsub("^|H0", "|H1", 1) ..  itemCount )
+    end
     
     local carriedItemTotal = ""
     if CA.SV.LootTotal and CA.SV.LootVendorTotalItems then
@@ -2321,28 +2418,21 @@ end
 function CA.OnMailReadable(eventCode, mailId)
     
     local senderDisplayName, senderCharacterName, _, _, _, fromSystem, fromCustomerService, _, _, _, codAmount = GetMailItemInfo ( mailId )
-    
-    
-    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(senderCharacterName)
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(senderDisplayName)
-    local displayBothString = ( strformat("<<1>><<2>>", senderCharacterName, senderDisplayName) )
-    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, senderDisplayName)
 
     -- Use different color if the mail is from System (Hireling Mail, Rewards for the Worthy, etc)
     if fromSystem or fromCustomerService then 
         g_mailTarget = ZO_GAME_REPRESENTATIVE_TEXT:Colorize(senderDisplayName)
     elseif senderDisplayName ~= "" and senderCharacterName ~= "" then
-        if CA.SV.ChatPlayerDisplayOptions == 1 then
-            g_mailTarget = ZO_SELECTED_TEXT:Colorize(displayNameLink)
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then
-            g_mailTarget = ZO_SELECTED_TEXT:Colorize(characterNameLink)
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then
-            g_mailTarget = ZO_SELECTED_TEXT:Colorize(displayBoth)
-        end
+        local finalName = CA.ResolveNameLink(senderCharacterName, senderDisplayName)
+        g_mailTarget = ZO_SELECTED_TEXT:Colorize(finalName)
     else
-        g_mailTarget = ZO_SELECTED_TEXT:Colorize(displayNameLink)
+        local finalName
+        if CA.SV.BracketOptionCharacter == 1 then
+            finalName = ZO_LinkHandler_CreateLinkWithoutBrackets(inviterDisplayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        else
+            finalName = ZO_LinkHandler_CreateLink(inviterDisplayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        end
+        g_mailTarget = ZO_SELECTED_TEXT:Colorize(finalName)
     end
 
     if codAmount > 0 then
@@ -2489,7 +2579,6 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
         end
 
         -- If we gain experience from a non combat source, and our buffer function holds a value, then we need to immediately dump this value before the next XP update is processed.
-        -- TODO: Possibly integrate this XP dump into something else too? Currently this fires after other events like the Wayshrine discovery message so it looks odd still.
         if CA.SV.ExperienceThrottle > 0 and g_xpCombatBufferValue > 0 and (reason ~= 0 and reason ~= 99) then
             EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
             CA.PrintBufferedXP()
@@ -2593,7 +2682,7 @@ function CA.OnAchievementUpdated(eventCode, id)
             return
         end
         
-        local link = strformat(GetAchievementLink(id, LINK_STYLE_BRACKETS))
+        local link = strformat(GetAchievementLink(id, linkBrackets[CA.SV.BracketOptionAchievement]))
         local name = strformat(GetAchievementNameFromLink(link))
         
         if CA.SV.AchievementUpdateCA then
@@ -2671,7 +2760,7 @@ function CA.IndexInventory()
         local icon, stack = GetItemInfo(1, i)
         local itemType = GetItemType(1, i)
         local itemId = GetItemId(1, i)
-        local itemLink = GetItemLink(1, i, LINK_STYLE_BRACKETS)
+        local itemLink = GetItemLink(1, i, linkBrackets[CA.SV.BracketOptionItem])
         if itemLink ~= "" then
             g_inventoryStacks[i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
         end
@@ -2686,7 +2775,7 @@ function CA.IndexEquipped()
         local icon, stack = GetItemInfo(0, i)
         local itemType = GetItemType(0, i)
         local itemId = GetItemId(0, i)
-        local itemLink = GetItemLink(0, i, LINK_STYLE_BRACKETS)
+        local itemLink = GetItemLink(0, i, linkBrackets[CA.SV.BracketOptionItem])
         if itemLink ~= "" then
             g_equippedStacks[i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
         end
@@ -2700,9 +2789,9 @@ function CA.IndexBank()
 
     for i = 0,bagsizebank do
         local icon, stack = GetItemInfo(2, i)
-        local bagitemlink = GetItemLink(2, i, LINK_STYLE_BRACKETS)
+        local bagitemlink = GetItemLink(2, i, linkBrackets[CA.SV.BracketOptionItem])
         local itemId = GetItemId(2, i)
-        local itemLink = GetItemLink(2, i, LINK_STYLE_BRACKETS)
+        local itemLink = GetItemLink(2, i, linkBrackets[CA.SV.BracketOptionItem])
         if bagitemlink ~= "" then
             g_bankStacks[i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
         end
@@ -2710,9 +2799,9 @@ function CA.IndexBank()
     
     for i = 0,bagsizesubbank do
         local icon, stack = GetItemInfo(6, i)
-        local bagitemlink = GetItemLink(6, i, LINK_STYLE_BRACKETS)
+        local bagitemlink = GetItemLink(6, i, linkBrackets[CA.SV.BracketOptionItem])
         local itemId = GetItemId(6, i)
-        local itemLink = GetItemLink(6, i, LINK_STYLE_BRACKETS)
+        local itemLink = GetItemLink(6, i, linkBrackets[CA.SV.BracketOptionItem])
         if bagitemlink ~= "" then
             g_banksubStacks[i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
         end
@@ -3261,7 +3350,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             icon, stack = GetItemInfo(bagId, slotId)
             itemType = GetItemType(bagId, slotId)
             itemId = GetItemId(bagId, slotId)
-            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             g_equippedStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             if CA.SV.LootShowDisguise and slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
                 gainOrLoss = 3
@@ -3271,7 +3360,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             end
         -- EXISTING ITEM    
         elseif g_equippedStacks[slotId] then
-            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             if itemLink == nil or itemLink == "" then
                 -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
                 icon = g_equippedStacks[slotId].icon
@@ -3346,7 +3435,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             icon, stack = GetItemInfo(bagId, slotId)
             itemType = GetItemType(bagId, slotId)
             itemId = GetItemId(bagId, slotId)
-            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             gainOrLoss = CA.SV.CurrencyContextColor and 1 or 3
             if g_inTrade then 
@@ -3367,7 +3456,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             end
         -- EXISTING ITEM    
         elseif g_inventoryStacks[slotId] then
-            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             if itemLink == nil or itemLink == "" then
                 -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
                 icon = g_inventoryStacks[slotId].icon
@@ -3535,14 +3624,14 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             icon, stack = GetItemInfo(bagId, slotId)
             itemType = GetItemType(bagId, slotId)
             itemId = GetItemId(bagId, slotId)
-            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             gainOrLoss = CA.SV.CurrencyContextColor and 1 or 3
             logPrefix = logPrefixPos
             CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
         -- EXISTING ITEM    
         elseif g_inventoryStacks[slotId] then
-            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             if itemLink == nil or itemLink == "" then
                 -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
                 icon = g_inventoryStacks[slotId].icon
@@ -3604,14 +3693,14 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             icon, stack = GetItemInfo(bagId, slotId)
             itemType = GetItemType(bagId, slotId)
             itemId = GetItemId(bagId, slotId)
-            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             g_bankStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             gainOrLoss = CA.SV.CurrencyContextColor and 1 or 3
             logPrefix = logPrefixPos
             CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
         -- EXISTING ITEM    
         elseif g_bankStacks[slotId] then
-            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             if itemLink == nil or itemLink == "" then
                 -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
                 icon = g_bankStacks[slotId].icon
@@ -3673,14 +3762,14 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             icon, stack = GetItemInfo(bagId, slotId)
             itemType = GetItemType(bagId, slotId)
             itemId = GetItemId(bagId, slotId)
-            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             g_banksubStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             gainOrLoss = CA.SV.CurrencyContextColor and 1 or 3
             logPrefix = logPrefixPos
             CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
         -- EXISTING ITEM    
         elseif g_banksubStacks[slotId] then
-            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             if itemLink == nil or itemLink == "" then
                 -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
                 icon = g_banksubStacks[slotId].icon
@@ -3780,7 +3869,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             icon, stack = GetItemInfo(bagId, slotId)
             itemType = GetItemType(bagId, slotId)
             itemId = GetItemId(bagId, slotId)
-            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             gainOrLoss = CA.SV.CurrencyContextColor and 1 or 3
             logPrefix = CA.SV.LootMessageWithdraw
@@ -3789,7 +3878,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             end
         -- EXISTING ITEM    
         elseif g_inventoryStacks[slotId] then
-            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             if itemLink == nil or itemLink == "" then
                 -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
                 icon = g_inventoryStacks[slotId].icon
@@ -3864,7 +3953,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             icon, stack = GetItemInfo(bagId, slotId)
             itemType = GetItemType(bagId, slotId)
             itemId = GetItemId(bagId, slotId)
-            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             g_bankStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             gainOrLoss = CA.SV.CurrencyContextColor and 2 or 4
             logPrefix = CA.SV.LootMessageDeposit
@@ -3873,7 +3962,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             end
         -- EXISTING ITEM    
         elseif g_bankStacks[slotId] then
-            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             if itemLink == nil or itemLink == "" then
                 -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
                 icon = g_bankStacks[slotId].icon
@@ -3948,7 +4037,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             icon, stack = GetItemInfo(bagId, slotId)
             itemType = GetItemType(bagId, slotId)
             itemId = GetItemId(bagId, slotId)
-            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             g_banksubStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             gainOrLoss = CA.SV.CurrencyContextColor and 2 or 4
             logPrefix = CA.SV.LootMessageDeposit
@@ -3957,7 +4046,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             end
         -- EXISTING ITEM    
         elseif g_banksubStacks[slotId] then
-            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             if itemLink == nil or itemLink == "" then
                 -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
                 icon = g_banksubStacks[slotId].icon
@@ -4062,7 +4151,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
             local icon, stack = GetItemInfo(bagId, slotId)
             itemType = GetItemType(bagId, slotId)
             itemId = GetItemId(bagId, slotId)
-            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             gainOrLoss = CA.SV.CurrencyContextColor and 1 or 3
             logPrefix = CA.SV.LootMessageWithdrawGuild
@@ -4077,7 +4166,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
             g_guildBankCarry.itemType = itemType
 
         elseif g_inventoryStacks[slotId] then -- EXISTING ITEM
-            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             if itemLink == nil or itemLink == "" then
                 -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
                 icon = g_inventoryStacks[slotId].icon
@@ -4196,11 +4285,11 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             icon, stack = GetItemInfo(bagId, slotId)
             itemType = GetItemType(bagId, slotId)
             itemId = GetItemId(bagId, slotId)
-            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
         -- EXISTING ITEM    
         elseif g_inventoryStacks[slotId] then
-            itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             if itemLink == nil or itemLink == "" then
                 -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
                 icon = g_inventoryStacks[slotId].icon
@@ -4374,7 +4463,7 @@ function CA.JusticeRemovePrint()
             local icon, stack = GetItemInfo(1, i)
             local itemType = GetItemType(1, i)
             local itemId = GetItemId(1, i)
-            local itemLink = GetItemLink(1, i, LINK_STYLE_BRACKETS)
+            local itemLink = GetItemLink(1, i, linkBrackets[CA.SV.BracketOptionItem])
             
             if itemLink ~= "" then
                 g_JusticeStacks[i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
@@ -4427,7 +4516,7 @@ function CA.JusticeRemovePrint()
             local icon, stack = GetItemInfo(0, i)
             local itemType = GetItemType(0, i)
             local itemId = GetItemId(0, i)
-            local itemLink = GetItemLink(0, i, LINK_STYLE_BRACKETS)
+            local itemLink = GetItemLink(0, i, linkBrackets[CA.SV.BracketOptionItem])
             
             if itemLink ~= "" then
                 g_JusticeStacks[i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
@@ -4699,22 +4788,12 @@ local GUILD_SKILL_ICONS =
 
 
 -- Alert Prehooks
-function CA.AlertStyleLearned()
+function CA.HookFunction()
     
     local alertHandlers = ZO_AlertText_GetHandlers()
-    
-    --[[
-    local original = handlers[alert]
-    handlers[alert] = function(styleIndex, chapterIndex, isDefaultRacialStyle, ...)
-            d(styleIndex)
-            d(chapterIndex)
-            printToChat("Is this thing on?")
-            
-            return original(styleIndex, chapterIndex, isDefaultRacialStyle, ...)
-    end
-    ]]--
-    
+
     -- Style book learned
+    --[[
     local function StyleLearnedHook(styleIndex, chapterIndex, isDefaultRacialStyle)
         if not isDefaultRacialStyle then
             local itemStyle = select(5, GetSmithingStyleItemInfo(styleIndex))
@@ -4729,11 +4808,13 @@ function CA.AlertStyleLearned()
         end
     end
     ZO_PreHook(alertHandlers, EVENT_STYLE_LEARNED, StyleLearnedHook)
+    ]]--
     
     -- TODO: We'll probably hide this event because it's kind of pointless - This will only trigger VERY occasionally when a lorebook is used and doesn't immediately fade away before the player can interact with it again (I guess just when Server lags).
     local function AlreadyKnowBookHook(bookTitle)
-        printToChat(strformat(SI_LORE_LIBRARY_ALREADY_KNOW_BOOK, bookTitle))
-        return ERROR, strformat(SI_LORE_LIBRARY_ALREADY_KNOW_BOOK, bookTitle)
+        --printToChat(strformat(SI_LORE_LIBRARY_ALREADY_KNOW_BOOK, bookTitle))
+        --return ERROR, strformat(SI_LORE_LIBRARY_ALREADY_KNOW_BOOK, bookTitle)
+        return true
     end
     
     local function RidingSkillImprovementAlertHook(ridingSkill, previous, current, source)
@@ -4801,8 +4882,15 @@ function CA.AlertStyleLearned()
             if not hidden or CA.SV.LorebookShowHidden then
                 
                 local title, icon = GetLoreBookInfo(categoryIndex, collectionIndex, bookIndex)
-                local bookName = strfmt("[%s]", title)
-                local bookLink = strfmt("|H1:LINK_TYPE_LUIBOOK:%s:%s:%s|h%s|h", categoryIndex, collectionIndex, bookIndex, bookName)
+                local bookName
+                local bookLink
+                if CA.SV.BracketOptionLorebook == 1 then
+                    bookName = strfmt("%s", title)
+                    bookLink = strfmt("|H0:LINK_TYPE_LUIBOOK:%s:%s:%s|h%s|h", categoryIndex, collectionIndex, bookIndex, bookName)
+                else
+                    bookName = strfmt("[%s]", title)
+                    bookLink = strfmt("|H1:LINK_TYPE_LUIBOOK:%s:%s:%s|h%s|h", categoryIndex, collectionIndex, bookIndex, bookName)
+                end
                 
                 local stringPrefix
                 local csaPrefix
@@ -4873,35 +4961,14 @@ function CA.AlertStyleLearned()
         
         -- Display CA
         if CA.SV.DuelCA then
-            local characterNameLink = ZO_LinkHandler_CreateCharacterLink(inviterCharacterName)
-            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
-            local displayBothString = ( strformat("<<1>><<2>>", inviterCharacterName, inviterDisplayName) )
-            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
-
-            if CA.SV.ChatPlayerDisplayOptions == 1 then
-                printToChat(strformat(GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), displayNameLink))
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then
-                printToChat(strformat(GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), characterNameLink))
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then
-                printToChat(strformat(GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), displayBoth))
-            end
+            local finalName = CA.ResolveNameLink(inviterCharacterName, inviterDisplayName)
+            printToChat(strformat(GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), finalName))
         end
         
         -- Display Alert
         if CA.SV.DuelAlert then
-            local formattedString
-            local displayBothAlert = ( strformat("<<1>><<2>>", inviterCharacterName, inviterDisplayName) )
-            if CA.SV.ChatPlayerDisplayOptions == 1 then
-                formattedString = strformat(GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), inviterDisplayName)
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then
-                formattedString = strformat(GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), inviterCharacterName)
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then
-                formattedString = strformat(GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), displayBothAlert)
-            end
+            local finalAlertName = CA.ResolveNameNoLink(inviterCharacterName, inviterDisplayName)
+            local formattedString = strformat(GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), finalAlertName)
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, formattedString)
         end
         
@@ -4934,35 +5001,14 @@ function CA.AlertStyleLearned()
     
         -- Display CA
         if CA.SV.DuelCA then
-            local characterNameLink = ZO_LinkHandler_CreateCharacterLink(inviteeCharacterName)
-            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviteeDisplayName)
-            local displayBothString = ( strformat("<<1>><<2>>", inviteeCharacterName, inviteeDisplayName) )
-            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviteeDisplayName)
-
-            if CA.SV.ChatPlayerDisplayOptions == 1 then
-                printToChat(strformat(GetString(SI_LUIE_CA_DUEL_INVITE_SENT), displayNameLink))
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then
-                printToChat(strformat(GetString(SI_LUIE_CA_DUEL_INVITE_SENT), characterNameLink))
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then
-                printToChat(strformat(GetString(SI_LUIE_CA_DUEL_INVITE_SENT), displayBoth))
-            end
+            local finalName = CA.ResolveNameLink(inviteeCharacterName, inviteeDisplayName)
+            printToChat(strformat(GetString(SI_LUIE_CA_DUEL_INVITE_SENT), finalName))
         end
         
         -- Display Alert
         if CA.SV.DuelAlert then
-            local formattedString
-            local displayBothAlert = ( strformat("<<1>><<2>>", inviteeCharacterName, inviteeDisplayName) )
-            if CA.SV.ChatPlayerDisplayOptions == 1 then
-                formattedString = strformat(GetString(SI_LUIE_CA_DUEL_INVITE_SENT), inviteeDisplayName)
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then
-                formattedString = strformat(GetString(SI_LUIE_CA_DUEL_INVITE_SENT), inviteeCharacterName)
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then
-                formattedString = strformat(GetString(SI_LUIE_CA_DUEL_INVITE_SENT), displayBothAlert)
-            end
+            local finalAlertName = CA.ResolveNameNoLink(inviteeCharacterName, inviteeDisplayName)
+            local formattedString = strformat(GetString(SI_LUIE_CA_DUEL_INVITE_SENT), finalAlertName)
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, formattedString)
         end
         return true
@@ -5001,22 +5047,9 @@ function CA.AlertStyleLearned()
         -- Display CA
         if CA.SV.DuelCA then
             local reasonName
-            local characterNameLink = ZO_LinkHandler_CreateCharacterLink(targetCharacterName)
-            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(targetDisplayName)
-            local displayBothString = ( strformat("<<1>><<2>>", targetCharacterName, targetDisplayName) )
-            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, targetDisplayName)
-
-            if CA.SV.ChatPlayerDisplayOptions == 1 then
-                reasonName = displayNameLink
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then
-                reasonName = characterNameLink
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then
-                reasonName = displayBoth
-            end
+            local finalName = CA.ResolveNameLink(targetDisplayName, targetCharacterName)
             if userFacingName then
-                printToChat(strformat(GetString("SI_LUIE_CA_DUEL_INVITE_FAILREASON", reason), reasonName))
+                printToChat(strformat(GetString("SI_LUIE_CA_DUEL_INVITE_FAILREASON", reason), finalName))
             else
                 printToChat(strformat(GetString("SI_LUIE_CA_DUEL_INVITE_FAILREASON", reason)))
             end
@@ -5024,17 +5057,8 @@ function CA.AlertStyleLearned()
         
         -- Display Alert
         if CA.SV.DuelAlert then
-            local formattedString
-            local displayBothAlert = ( strformat("<<1>><<2>>", targetCharacterName, targetDisplayName) )
-            if CA.SV.ChatPlayerDisplayOptions == 1 then
-                formattedString = strformat(GetString("SI_LUIE_CA_DUEL_INVITE_FAILREASON", reason), targetDisplayName)
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then
-                formattedString = strformat(GetString("SI_LUIE_CA_DUEL_INVITE_FAILREASON", reason), targetCharacterName)
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then
-                formattedString = strformat(GetString("SI_LUIE_CA_DUEL_INVITE_FAILREASON", reason), displayBothAlert)
-            end
+            local finalAlertName = CA.ResolveNameNoLink(targetDisplayName, targetCharacterName)
+            local formattedString = strformat(GetString("SI_LUIE_CA_DUEL_INVITE_FAILREASON", reason), finalAlertName)
             if userFacingName then
                 ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, formattedString)
             else
@@ -5097,37 +5121,23 @@ function CA.AlertStyleLearned()
     local function GroupInviteResponseAlert(characterName, response, displayName)
         
         local finalName
-        local finalNameAlert
-        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(characterName)
-        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
-        local displayBothString = ( strformat("<<1>><<2>>", characterName, displayName) )
-        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        local finalAlertName
         
         local nameCheck1 = ZO_GetPrimaryPlayerName(displayName, characterName)
         local nameCheck2 = ZO_GetSecondaryPlayerName(displayName, characterName)
+        
         if nameCheck1 == "" then
-            nameToUse = ZO_GetSecondaryPlayerName(displayName, characterName)
             finalName = displayName
-            finalNameAlert = displayName
+            finalAlertName = displayName
         elseif nameCheck2 == "" then
             finalName = characterName
-            finalNameAlert = characterName
+            finalAlertName = characterName
         elseif nameCheck1 ~= "" and nameCheck2 ~= "" then
-            if CA.SV.ChatPlayerDisplayOptions == 1 then
-                finalName = displayNameLink
-                finalNameAlert = displayName
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then
-                finalName = characterNameLink
-                finalNameAlert = characterName
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then
-                finalName = displayBoth
-                finalNameAlert = displayBothString
-            end
+            finalName = CA.ResolveNameLink(characterName, displayName)
+            finalAlertName = CA.ResolveNameNoLink(characterName, displayName)
         else
             finalName = ""
-            finalNameAlert = ""
+            finalAlertName = ""
         end
         
         if(response ~= GROUP_INVITE_RESPONSE_ACCEPTED and response ~= GROUP_INVITE_RESPONSE_CONSIDERING_OTHER) then
@@ -5143,10 +5153,10 @@ function CA.AlertStyleLearned()
                 alertMessage = GetString(SI_GROUP_ALERT_INVITE_PLAYER_ALREADY_MEMBER)
             elseif response == GROUP_INVITE_RESPONSE_IGNORED then
                 message = finalName ~= "" and zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalName) or GetString(SI_PLAYER_BUSY)
-                alertMessage = finalNameAlert ~= "" and zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalNameAlert) or GetString(SI_PLAYER_BUSY)
+                alertMessage = finalAlertName ~= "" and zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalAlertName) or GetString(SI_PLAYER_BUSY)
             else
                 message = finalName ~= "" and zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalName) or GetString(SI_PLAYER_BUSY)
-                alertMessage = finalNameAlert ~= "" and zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalNameAlert) or GetString(SI_PLAYER_BUSY)
+                alertMessage = finalAlertName ~= "" and zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalAlertName) or GetString(SI_PLAYER_BUSY)
             end
 
             if CA.SV.GroupCA or response == GROUP_INVITE_RESPONSE_ALREADY_GROUPED or response == GROUP_INVITE_RESPONSE_IGNORED or response == GROUP_INVITE_RESPONSE_PLAYER_NOT_FOUND then
@@ -5215,25 +5225,13 @@ function CA.AlertStyleLearned()
         local alert2 = nil
         local sound = nil
         
-        local finalName
-        local finalNameAlert
+        local finalName = CA.ResolveNameLink(characterName, displayName)
+        local finalAlertName = CA.ResolveNameNoLink(characterName, displayName)
+        
+        -- Used to check for valid links
         local characterNameLink = ZO_LinkHandler_CreateCharacterLink(characterName)
         local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
-        local displayBothString = ( strformat("<<1>><<2>>", characterName, displayName) )
-        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
-        
-        if CA.SV.ChatPlayerDisplayOptions == 1 then
-            finalName = displayNameLink
-            finalNameAlert = displayName
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then
-            finalName = characterNameLink
-            finalNameAlert = characterName
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then
-            finalName = displayBoth
-            finalNameAlert = displayBothString
-        end
+
         
         local hasValidNames = characterNameLink ~= "" and displayNameLink ~= ""
         local useDefaultReasonText = false
@@ -5267,9 +5265,9 @@ function CA.AlertStyleLearned()
                     zo_callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
                     --
                     message = zo_strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED, finalName)
-                    alert = zo_strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED, finalNameAlert)
+                    alert = zo_strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED, finalAlertName)
                     message2 = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED), finalName))
-                    alert2 =  (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED), finalNameAlert))
+                    alert2 =  (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED), finalAlertName))
                 end
             else
                 if isLocalPlayer then
@@ -5298,7 +5296,7 @@ function CA.AlertStyleLearned()
                 --
                 g_LFGJoinAntiSpam = false
                 message = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF), finalName))
-                alert = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF), finalNameAlert))
+                alert = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF), finalAlertName))
                 zo_callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
                 --
             end
@@ -5310,7 +5308,7 @@ function CA.AlertStyleLearned()
 
         if useDefaultReasonText and hasValidNames then
             message = zo_strformat(GetString("SI_LUIE_GROUPLEAVEREASON", reason), finalName)
-            alert = zo_strformat(GetString("SI_LUIE_GROUPLEAVEREASON", reason), finalNameAlert)
+            alert = zo_strformat(GetString("SI_LUIE_GROUPLEAVEREASON", reason), finalAlertName)
         end
 
         if isLocalPlayer then
@@ -5350,24 +5348,12 @@ function CA.AlertStyleLearned()
         
         local displayString
         local alertString
-        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(currentGroupLeaderRawName)
-        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(currentGroupLeaderDisplayName)
-        local displayBothString = ( strformat("<<1>><<2>>", currentGroupLeaderRawName, currentGroupLeaderDisplayName) )
-        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, currentGroupLeaderDisplayName)
-        
+        local finalName = CA.ResolveNameLink(currentGroupLeaderRawName, currentGroupLeaderDisplayName)
+        local finalAlertName = CA.ResolveNameNoLink(currentGroupLeaderRawName, currentGroupLeaderDisplayName)
+
         if g_playerName ~= currentGroupLeaderRawName then -- If another player became the leader
-            if CA.SV.ChatPlayerDisplayOptions == 1 then
-                displayString = (strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), displayNameLink))
-                alertString = (strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), currentGroupLeaderDisplayName))
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then
-                displayString = (strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), characterNameLink))
-                alertString = (strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), currentGroupLeaderRawName))
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then
-                displayString = (strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), displayBoth))
-                alertString = (strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), displayBothString))
-            end
+            displayString = (strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), finalName))
+            alertString = (strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), finalAlertName))
         elseif g_playerName == currentGroupLeaderRawName then -- If the player character became the leader
             displayString = (GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_SELF))
             alertString = (GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_SELF))
@@ -5463,30 +5449,14 @@ function CA.AlertStyleLearned()
                 local electionType, _, _, targetUnitTag = GetGroupElectionInfo()
                 if electionType == GROUP_ELECTION_TYPE_KICK_MEMBER then
                     if resultType == GROUP_ELECTION_RESULT_ELECTION_LOST then
-                        local kickFinalName
-                        local kickFinalNameAlert
                         local kickMemberName = GetUnitName(targetUnitTag)
                         local kickMemberAccountName = GetUnitDisplayName(targetUnitTag)
-                        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(kickMemberName)
-                        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(kickMemberAccountName)
-                        local displayBothString = ( strformat("<<1>><<2>>", kickMemberName, kickMemberAccountName) )
-                        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, kickMemberAccountName)
 
-                        if CA.SV.ChatPlayerDisplayOptions == 1 then
-                            kickFinalName = displayNameLink
-                            kickFinalNameAlert = kickMemberAccountName
-                        end
-                        if CA.SV.ChatPlayerDisplayOptions == 2 then
-                            kickFinalName = characterNameLink
-                            kickFinalNameAlert = kickMemberName
-                        end
-                        if CA.SV.ChatPlayerDisplayOptions == 3 then
-                            kickFinalName = displayBoth
-                            kickFinalNameAlert = displayBothString
-                        end
+                        local kickFinalName = CA.ResolveNameLink(kickMemberName, kickMemberAccountName)
+                        local kickfinalAlertName = CA.ResolveNameNoLink(kickMemberName, kickMemberAccountName)
                         
                         message = zo_strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL, kickFinalName)
-                        alertText = zo_strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL, kickFinalNameAlert)
+                        alertText = zo_strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL, kickfinalAlertName)
                     else
                         --Successful kicks are handled in the GROUP_MEMBER_LEFT alert
                         return true
@@ -5594,8 +5564,9 @@ function CA.AlertStyleLearned()
         for i = 1,5 do
             local guild = GuildIndexData[i]
             if guild.name == guildName then
-                local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guild.guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-                local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guild.guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+                local guildColor = CA.SV.GuildAllianceColor and GetAllianceColor(guild.guildAlliance) or GuildColorize
+                local guildNameAlliance = CA.SV.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guild.guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+                local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guild.guildAlliance), "100%", "100%", guildName) or guildName
                 local messageString = (ShouldDisplaySelfKickedFromGuildAlert(guildId)) and SI_GUILD_SELF_KICKED_FROM_GUILD or SI_LUIE_CA_GUILD_LEAVE_SELF
                 local sound = (ShouldDisplaySelfKickedFromGuildAlert(guildId)) and SOUNDS.GENERAL_ALERT_ERROR or SOUNDS.GUILD_SELF_LEFT
                 if CA.SV.GuildCA then
@@ -5668,32 +5639,15 @@ function CA.AlertStyleLearned()
     -- EVENT_TRADE_INVITE_FAILED
     local function TradeInviteFailedAlert(errorReason, inviteeCharacterName, inviteeDisplayName)
         if CA.SV.NotificationTradeCA or CA.SV.NotificationTradeAlert then
-            local chatName
-            local alertName
-            local characterNameLink = ZO_LinkHandler_CreateCharacterLink( gsub(inviteeCharacterName,"%^%a+","") )
-            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviteeDisplayName)
-            local displayBothString = ( strformat("<<1>><<2>>", gsub(inviteeCharacterName,"%^%a+",""), inviteeDisplayName) )
-            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviteeDisplayName)
-
-            if CA.SV.ChatPlayerDisplayOptions == 1 then
-                chatName = displayNameLink
-                alertName = inviteeDisplayName
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then
-                chatName = characterNameLink
-                alertName = inviteeCharacterName
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then
-                chatName = displayBoth
-                alertName = displayBothString
-            end
+            local finalName = CA.ResolveNameLink(inviteeCharacterName, inviteeDisplayName)
+            local finalAlertName = CA.ResolveNameNoLink(inviteeCharacterName, inviteeDisplayName)
 
             if CA.SV.NotificationTradeCA then
-                printToChat(strformat(GetString("SI_LUIE_CA_TRADEACTIONRESULT", errorReason), chatName))
+                printToChat(strformat(GetString("SI_LUIE_CA_TRADEACTIONRESULT", errorReason), finalName))
             end
             
             if CA.SV.NotificationTradeAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString("SI_LUIE_CA_TRADEACTIONRESULT", errorReason), alertName))
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString("SI_LUIE_CA_TRADEACTIONRESULT", errorReason), finalAlertName))
             end
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
@@ -5704,33 +5658,15 @@ function CA.AlertStyleLearned()
     -- EVENT_TRADE_INVITE_CONSIDERING
     local function TradeInviteConsideringAlert(inviterCharacterName, inviterDisplayName)
         if CA.SV.NotificationTradeCA or CA.SV.NotificationTradeAlert then
-            local chatName
-            local alertName
-            local characterNameLink = ZO_LinkHandler_CreateCharacterLink( gsub(inviterCharacterName,"%^%a+","") )
-            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
-            local displayBothString = ( strformat("<<1><<<2>>", gsub(inviterCharacterName,"%^%a+",""), inviterDisplayName) )
-            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
-            if CA.SV.ChatPlayerDisplayOptions == 1 then
-                chatName = displayNameLink
-                alertName = inviterDisplayName
-                g_tradeTarget = ZO_SELECTED_TEXT:Colorize(displayNameLink)
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then
-                chatName = characterNameLink
-                alertName = inviterCharacterName
-                g_tradeTarget = ZO_SELECTED_TEXT:Colorize(characterNameLink)
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then
-                chatName = displayBoth
-                alertName = displayBothString
-                g_tradeTarget = ZO_SELECTED_TEXT:Colorize(displayBot)
-            end
+            local finalName = CA.ResolveNameLink(inviterCharacterName, inviterDisplayName)
+            local finalAlertName = CA.ResolveNameNoLink(inviterCharacterName, inviterDisplayName)
+            g_tradeTarget = ZO_SELECTED_TEXT:Colorize(finalName)
             
             if CA.SV.NotificationTradeCA then
-                printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), chatName))
+                printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), finalName))
             end
             if CA.SV.NotificationTradeAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), alertName))
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), finalAlertName))
             end
         end
        return true
@@ -5740,33 +5676,15 @@ function CA.AlertStyleLearned()
     local function TradeInviteWaitingAlert(inviteeCharacterName, inviteeDisplayName)
     
         if CA.SV.NotificationTradeCA or CA.SV.NotificationTradeAlert then
-            local chatName
-            local alertName
-            local characterNameLink = ZO_LinkHandler_CreateCharacterLink( gsub(inviteeCharacterName,"%^%a+","") )
-            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviteeDisplayName)
-            local displayBothString = ( strformat("<<1>><<2>>", gsub(inviteeCharacterName,"%^%a+",""), inviteeDisplayName) )
-            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviteeDisplayName)
-            if CA.SV.ChatPlayerDisplayOptions == 1 then
-                chatName = displayNameLink
-                alertName = inviteeDisplayName
-                g_tradeTarget = ZO_SELECTED_TEXT:Colorize(displayNameLink)
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then
-                chatName = characterNameLink
-                alertName = inviteeCharacterName
-                g_tradeTarget = ZO_SELECTED_TEXT:Colorize(characterNameLink)
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then
-                chatName = displayBoth
-                alertName = displayBothString
-                g_tradeTarget = ZO_SELECTED_TEXT:Colorize(displayBoth)
-            end
+            local finalName = CA.ResolveNameLink(inviteeCharacterName, inviteeDisplayName)
+            local finalAlertName = CA.ResolveNameNoLink(inviteeCharacterName, inviteeDisplayName)
+            g_tradeTarget = ZO_SELECTED_TEXT:Colorize(finalName)
             
             if CA.SV.NotificationTradeCA then
-                printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_CONFIRM), chatName))
+                printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_CONFIRM), finalName))
             end
             if CA.SV.NotificationTradeAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_TRADE_INVITE_CONFIRM), alertName))
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_TRADE_INVITE_CONFIRM), finalAlertName))
             end
 
         end
@@ -5949,8 +5867,15 @@ function CA.AlertStyleLearned()
         
             local collectionName, _, numKnownBooks, totalBooks, hidden = GetLoreCollectionInfo(categoryIndex, collectionIndex)
             local title, icon = GetLoreBookInfo(categoryIndex, collectionIndex, bookIndex)
-            local bookName = strfmt("[%s]", title)
-            local bookLink = strfmt("|H1:LINK_TYPE_LUIBOOK:%s:%s:%s|h%s|h", categoryIndex, collectionIndex, bookIndex, bookName)
+            local bookName
+            local bookLink
+            if CA.SV.BracketOptionLorebook == 1 then
+                bookName = strfmt("%s", title)
+                bookLink = strfmt("|H0:LINK_TYPE_LUIBOOK:%s:%s:%s|h%s|h", categoryIndex, collectionIndex, bookIndex, bookName)
+            else
+                bookName = strfmt("[%s]", title)
+                bookLink = strfmt("|H1:LINK_TYPE_LUIBOOK:%s:%s:%s|h%s|h", categoryIndex, collectionIndex, bookIndex, bookName)
+            end
             
             local stringPrefix
             local csaPrefix
@@ -6366,7 +6291,7 @@ function CA.AlertStyleLearned()
             local displayedCategory = subcategoryName and subcategoryName or categoryName
 
             if CA.SV.CollectibleCA then
-                local link = GetCollectibleLink(collectibleId, LINK_STYLE_BRACKETS)
+                local link = GetCollectibleLink(collectibleId, linkBrackets[CA.SV.BracketOptionCollectible])
                 local formattedIcon = CA.SV.CollectibleIcon and strfmt("|t16:16:%s|t ", iconFile) or ""
             
                 local string1
@@ -6435,6 +6360,10 @@ function CA.AlertStyleLearned()
     end 
     
     local function QuestAddedHook(journalIndex, questName, objectiveName)
+    
+        EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
+        CA.PrintBufferedXP()
+    
         local questType = GetJournalQuestType(journalIndex)
         local instanceDisplayType = GetJournalInstanceDisplayType(journalIndex)
         local questJournalObject = SYSTEMS:GetObject("questJournal")
@@ -6463,9 +6392,9 @@ function CA.AlertStyleLearned()
                 questNameFormatted = (strformat("|c<<1>><<2>>|r", QuestColorQuestNameColorize:ToHex(), questName))
             end
             if iconTexture and CA.SV.QuestIcon then
-                formattedString = strformat(SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON, zo_iconFormat(iconTexture, 16, 16), questNameFormatted)
+                formattedString = strfmt(GetString(SI_LUIE_CA_QUEST_ACCEPT) .. zo_iconFormat(iconTexture, 16, 16) .. " " .. questNameFormatted)
             else
-                formattedString = strformat(SI_NOTIFYTEXT_QUEST_ACCEPT, questNameFormatted)
+                formattedString = strfmt("%s%s", GetString(SI_LUIE_CA_QUEST_ACCEPT), questNameFormatted)
             end
         
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
@@ -6486,7 +6415,7 @@ function CA.AlertStyleLearned()
         
         if CA.SV.QuestAcceptAlert then
             local alertString
-            if iconTexture then
+            if iconTexture and CA.SV.QuestIcon then
                 alertString = zo_strformat(SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
             else
                 alertString = zo_strformat(SI_NOTIFYTEXT_QUEST_ACCEPT, questName)
@@ -6503,6 +6432,9 @@ function CA.AlertStyleLearned()
     end
     
     local function QuestCompleteHook(questName, level, previousExperience, currentExperience, championPoints, questType, instanceDisplayType)
+        
+        EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
+        CA.PrintBufferedXP()
         
         local function ResetQuestRewardStatus()
             g_itemReceivedIsQuestReward = false
@@ -6527,7 +6459,7 @@ function CA.AlertStyleLearned()
         
         if CA.SV.QuestCompleteAlert then
             local alertString
-            if iconTexture then
+            if iconTexture and CA.SV.QuestIcon then
                 alertString = zo_strformat(SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
             else
                 alertString = zo_strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questName)
@@ -6739,6 +6671,7 @@ function CA.AlertStyleLearned()
     end
 
     local function OnQuestRemoved(eventId, isCompleted, journalIndex, questName, zoneIndex, poiIndex)
+    
         if not isCompleted then
             if CA.SV.QuestAbandonCA or CA.SV.QuestAbandonCSA or CA.SV.QuestAbandonAlert then
             
@@ -6766,7 +6699,7 @@ function CA.AlertStyleLearned()
 
                 if CA.SV.QuestAbandonCSA then
                     local formattedString
-                    if iconTexture and CA.SV.QuestIcon then
+                    if iconTexture then
                         formattedString = strformat(SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
                     else
                         formattedString = strformat(SI_LUIE_CA_QUEST_ABANDONED, questName)
@@ -6858,6 +6791,10 @@ function CA.AlertStyleLearned()
     end
     
     local function DiscoveryExperienceHook(subzoneName, level, previousExperience, currentExperience, championPoints)
+    
+        EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
+        CA.PrintBufferedXP()
+        
         if CA.SV.QuestLocDiscoveryCA then
             local nameFormatted = (strformat("|c<<1>><<2>>|r", QuestColorLocNameColorize, subzoneName))
             local formattedString = strformat(SI_LUIE_CA_QUEST_DISCOVER, nameFormatted)
@@ -6885,12 +6822,14 @@ function CA.AlertStyleLearned()
         if not CA.SV.QuestLocDiscoveryCSA then
             PlaySound(SOUNDS.OBJECTIVE_DISCOVERED)
         end
-        
         return true
-        
     end
 
     local function PoiDiscoveredHook(zoneIndex, poiIndex)
+    
+        EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
+        CA.PrintBufferedXP()
+    
         local name, _, startDescription = GetPOIInfo(zoneIndex, poiIndex)
         
         if CA.SV.QuestLocObjectiveCA then
@@ -6911,9 +6850,7 @@ function CA.AlertStyleLearned()
         if CA.SV.QuestLocObjectiveAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_NOTIFYTEXT_OBJECTIVE_DISCOVERED, name), startDescription)
         end
-        
         return true
-        
     end
     
     local XP_GAIN_SHOW_REASONS =
@@ -7116,18 +7053,30 @@ function CA.AlertStyleLearned()
                     local learnString = GetString(SI_LUIE_CA_STORAGE_LEARN)
                     
                     if ridingSkill == 1 then
-                        bookString = "|H1:item:64700:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+                        if CA.SV.BracketOptionItem == 1 then
+                            bookString = "|H0:item:64700:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+                        else
+                            bookString = "|H1:item:64700:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+                        end
                         icon = "|t16:16:/esoui/art/icons/store_ridinglessons_speed.dds|t "
                     elseif ridingSkill == 2 then
-                        bookString = "|H1:item:64702:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+                        if CA.SV.BracketOptionItem == 1 then
+                            bookString = "|H0:item:64702:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+                        else
+                            bookString = "|H1:item:64702:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+                        end
                         icon = "|t16:16:/esoui/art/icons/store_ridinglessons_capacity.dds|t "
                     elseif ridingSkill == 3 then
-                        bookString = "|H1:item:64701:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+                        if CA.SV.BracketOptionItem == 1 then
+                            bookString = "|H0:item:64701:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+                        else
+                            bookString = "|H1:item:64701:1:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0|h|h"
+                        end
                         icon = "|t16:16:/esoui/art/icons/store_ridinglessons_stamina.dds|t "
                     end
                     
                     local messageP1 = CA.SV.LootIcons and (icon .. bookString) or (bookString)
-                    local finalMessage = strfmt("|cFFFFFF" .. learnString, messageP1, value .. ".|r")
+                    local finalMessage = strfmt(StorageRidingBookColorize:Colorize(learnString), messageP1) .. ZO_SELECTED_TEXT:Colorize(" x" .. value)
                 
                     
                     g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "STORAGE" }
@@ -7182,7 +7131,7 @@ function CA.AlertStyleLearned()
         
         if CA.SV.ExperienceLevelUpCA then
             local formattedIcon = CA.SV.ExperienceLevelUpIcon and zo_strformat("<<1>> ", zo_iconFormatInheritColor(icon, 16, 16)) or ""
-            local formattedString = ExperienceLevelUpColorize:Colorize(zo_strformat("<<1>>!", GetString(SI_CHAMPION_ANNOUNCEMENT_UNLOCKED, formattedIcon)))
+            local formattedString = ExperienceLevelUpColorize:Colorize(zo_strformat("<<1>>!", GetString(SI_CHAMPION_ANNOUNCEMENT_UNLOCKED), formattedIcon))
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
@@ -7196,16 +7145,20 @@ function CA.AlertStyleLearned()
                 if wasChampionSystemUnlocked then
                     local championPoints = GetPlayerChampionPointsEarned()
                     local currentChampionXP = GetPlayerChampionXP()
-                    local barParams = CENTER_SCREEN_ANNOUNCE:CreateBarParams(PPB_CP, championPoints, currentChampionXP, currentChampionXP)
-                    barParams:SetShowNoGain(true)
-                    messageParams:SetBarParams(barParams)
+                    if not LUIE.SV.HideXPBar then
+                        local barParams = CENTER_SCREEN_ANNOUNCE:CreateBarParams(PPB_CP, championPoints, currentChampionXP, currentChampionXP)
+                        barParams:SetShowNoGain(true)
+                        messageParams:SetBarParams(barParams)
+                    end
                 else
                     local totalChampionPoints = GetPlayerChampionPointsEarned()
                     local championXPGained = 0;
                     for i = 0, (totalChampionPoints - 1) do
                         championXPGained = championXPGained + GetNumChampionXPInChampionPoint(i)
                     end
-                    messageParams:SetBarParams(CENTER_SCREEN_ANNOUNCE:CreateBarParams(PPB_CP, 0, 0, championXPGained))
+                    if not LUIE.SV.HideXPBar then
+                        messageParams:SetBarParams(CENTER_SCREEN_ANNOUNCE:CreateBarParams(PPB_CP, 0, 0, championXPGained))
+                    end
                     messageParams:SetLifespanMS(12000)
                 end
             end
@@ -7239,7 +7192,7 @@ function CA.AlertStyleLearned()
         end
         
         if CA.SV.ExperienceLevelUpCA then
-            local formattedString = ExperienceLevelUpColorize:Colorize(zo_strformat("<<1>>:", GetString(SI_CHAMPION_POINT_EARNED, pointDelta)))
+            local formattedString = ExperienceLevelUpColorize:Colorize(zo_strformat(SI_CHAMPION_POINT_EARNED, pointDelta) .. ": ")
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
@@ -7343,8 +7296,6 @@ function CA.AlertStyleLearned()
         
         -- Setup result format, name, and result sound
         local resultString = wasLocalPlayersResult and GetString("SI_LUIE_CA_DUEL_SELF_RESULT", result) or GetString("SI_LUIE_CA_DUEL_RESULT", result)
-        local characterName = opponentCharacterName
-        local displayName = opponentDisplayName
 
         local localPlayerWonDuel = (result == DUEL_RESULT_WON and wasLocalPlayersResult) or (result == DUEL_RESULT_FORFEIT and not wasLocalPlayersResult)
         local localPlayerForfeitDuel = (result == DUEL_RESULT_FORFEIT and wasLocalPlayersResult)
@@ -7355,45 +7306,26 @@ function CA.AlertStyleLearned()
             resultSound = SOUNDS.DUEL_FORFEIT
         end
         
-        -- Setup string if we have both names set to display
-        local displayBothString = ( strformat("<<1>><<2>>", characterName, displayName) )
         -- Display CA
         if CA.SV.DuelWonCA then
-            local characterNameLink = ZO_LinkHandler_CreateCharacterLink(characterName)
-            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
-            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+            local finalName = CA.ResolveNameLink(opponentCharacterName, opponentDisplayName)
             local resultChatString
             if wasLocalPlayersResult then
                 resultChatString = resultString
             else
-                if CA.SV.ChatPlayerDisplayOptions == 1 then
-                    resultChatString = zo_strformat(resultString, displayNameLink)
-                end
-                if CA.SV.ChatPlayerDisplayOptions == 2 then
-                    resultChatString = zo_strformat(resultString, characterNameLink)
-                end
-                if CA.SV.ChatPlayerDisplayOptions == 3 then
-                    resultChatString = zo_strformat(resultString, displayBoth)
-                end
+                resultChatString = zo_strformat(resultString, finalName)
             end
             printToChat(resultChatString)
         end
         
         if CA.SV.DuelWonCSA or CA.SV.DuelWonAlert then
             -- Setup String for CSA/Alert
+            local finalAlertName = CA.ResolveNameNoLink(opponentCharacterName, opponentDisplayName)
             local resultCSAString
             if wasLocalPlayersResult then
                 resultCSAString = resultString
             else
-                if CA.SV.ChatPlayerDisplayOptions == 1 then
-                    resultCSAString = zo_strformat(resultString, displayName)
-                end
-                if CA.SV.ChatPlayerDisplayOptions == 2 then
-                    resultCSAString = zo_strformat(resultString, characterName)
-                end
-                if CA.SV.ChatPlayerDisplayOptions == 3 then
-                    resultCSAString = zo_strformat(resultString, displayBothString)
-                end
+                resultCSAString = zo_strformat(resultString, finalAlertName)
             end
                 
             -- Display CSA
@@ -7849,7 +7781,7 @@ function CA.AlertStyleLearned()
     
         if CA.SV.AchievementCompleteCA then
             
-            link = strformat(GetAchievementLink(id, LINK_STYLE_BRACKETS))
+            link = strformat(GetAchievementLink(id, linkBrackets[CA.SV.BracketOptionAchievement]))
             local catName = GetAchievementCategoryInfo(topLevelIndex)
             local subcatName = categoryIndex ~= nil and GetAchievementSubCategoryInfo(topLevelIndex, categoryIndex) or "General"
             local _, _, _, icon = GetAchievementInfo(id)
@@ -7889,49 +7821,34 @@ function CA.AlertStyleLearned()
     end
     
     local function PledgeOfMaraHook(result, characterName, displayName)
-    
-        local maraName
-        local maraLinkName
-        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(characterName)
-        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
-        local displayBothString = ( strformat("<<1>><<2>>", characterName, displayName) )
-        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
-
-        if CA.SV.ChatPlayerDisplayOptions == 1 then
-            maraName = displayName
-            maraLinkName = displayNameLink
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then
-            maraName = characterName
-            maraLinkName = characterNameLink
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then
-            maraName = displayBothString
-            maraLinkName = displayBoth
-        end
 
         -- Display CA (Success or Failure)
         if CA.SV.PledgeOfMaraCA then
-            printToChat(strformat(GetString("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT", result), maraLinkName))
+            local finalName = CA.ResolveNameLink(characterName, displayName)
+            printToChat(strformat(GetString("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT", result), finalName))
         end
         
-        -- Display CSA (Success Only)
-        if CA.SV.PledgeOfMaraCSA then
-            if result == PLEDGE_OF_MARA_RESULT_PLEDGED then
-                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
-                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_PLEDGE_OF_MARA_RESULT)
-                messageParams:SetText(GetString(SI_RITUAL_OF_MARA_COMPLETION_ANNOUNCE_LARGE), zo_strformat(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT3, maraName))
-                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+        if CA.SV.PledgeOfMaraAlert or CA.SV.PledgeOfMaraCSA then
+            local finalAlertName = CA.ResolveNameNoLink(characterName, displayName)
+        
+            -- Display CSA (Success Only)
+            if CA.SV.PledgeOfMaraCSA then
+                if result == PLEDGE_OF_MARA_RESULT_PLEDGED then
+                    local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
+                    messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_PLEDGE_OF_MARA_RESULT)
+                    messageParams:SetText(GetString(SI_RITUAL_OF_MARA_COMPLETION_ANNOUNCE_LARGE), zo_strformat(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT3, finalAlertName))
+                    CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+                end
             end
-        end
-        
-        -- Alert (Success or Failure)
-        if CA.SV.PledgeOfMaraAlert then
-            -- If the menu setting to only display Alert on Failure state is toggled, then do not display an Alert on successful Mara Event
-            if result == PLEDGE_OF_MARA_RESULT_PLEDGED and not CA.SV.PledgeOfMaraAlertOnlyFail then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT3, maraName))
-            elseif(result ~= PLEDGE_OF_MARA_RESULT_PLEDGED and result ~= PLEDGE_OF_MARA_RESULT_BEGIN_PLEDGE) then
-                ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, zo_strformat(GetString("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT", result), maraName))
+            
+            -- Alert (Success or Failure)
+            if CA.SV.PledgeOfMaraAlert then
+                -- If the menu setting to only display Alert on Failure state is toggled, then do not display an Alert on successful Mara Event
+                if result == PLEDGE_OF_MARA_RESULT_PLEDGED and not CA.SV.PledgeOfMaraAlertOnlyFail then
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT3, finalAlertName))
+                elseif(result ~= PLEDGE_OF_MARA_RESULT_PLEDGED and result ~= PLEDGE_OF_MARA_RESULT_BEGIN_PLEDGE) then
+                    ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, zo_strformat(GetString("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT", result), finalAlertName))
+                end
             end
         end
         
@@ -8527,12 +8444,13 @@ GUILD_ROSTER_MANAGER.OnGuildMemberAdded = function(self, guildId, displayName)
     for i = 1,guilds do
         local id = GetGuildId(i)
         local name = GetGuildName(id)
-
-        local guildAlliance = GetGuildAlliance(id)
-        local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-        local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-
+        
         if guildName == name then
+            local guildAlliance = GetGuildAlliance(id)
+            local guildColor = CA.SV.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+            local guildNameAlliance = CA.SV.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+            local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+
             if CA.SV.GuildCA then
                 printToChat(strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayNameLink, guildNameAlliance))
             end
@@ -8557,11 +8475,12 @@ GUILD_ROSTER_MANAGER.OnGuildMemberRemoved = function(self, guildId, rawCharacter
         local id = GetGuildId(i)
         local name = GetGuildName(id)
         
-        local guildAlliance = GetGuildAlliance(id)
-        local guildNameAlliance = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-        local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-
         if guildName == name then
+            local guildAlliance = GetGuildAlliance(id)
+            local guildColor = CA.SV.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+            local guildNameAlliance = CA.SV.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+            local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+            
             if CA.SV.GuildCA then
                 printToChat(strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_LEFT), displayNameLink, guildNameAlliance))
             end
@@ -8591,8 +8510,9 @@ ZO_TryGuildInvite = function(guildId, displayName, sentFromChat)
 
     local guildName = GetGuildName(guildId)
     local guildAlliance = GetGuildAlliance(guildId)
-    local guildNameAlliance = LUIE.ChatAnnouncements.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), 16, 16, ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
-    local guildNameAllianceAlert = LUIE.ChatAnnouncements.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", ZO_SELECTED_TEXT:Colorize(guildName)) or (ZO_SELECTED_TEXT:Colorize(guildName))
+    local guildColor = CA.SV.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+    local guildNameAlliance = CA.SV.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+    local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
     
     if IsConsoleUI() then
         local function GuildInviteCallback(success)
@@ -8761,31 +8681,15 @@ end
 -- EVENT_GROUP_INVITE_RECEIVED
 function CA.OnGroupInviteReceived(eventCode, inviterName, inviterDisplayName)
     g_groupJoinFudger = false
-
-    local message
-    local alertText
-    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(inviterName)
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterDisplayName)
-    local displayBothString = ( strformat("<<1>><<2>>", inviterName, inviterDisplayName) )
-    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, inviterDisplayName)
-
-    if CA.SV.ChatPlayerDisplayOptions == 1 then
-        message = strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), displayNameLink)
-        alertText = strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), inviterDisplayName)
-    end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then
-        message = strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), characterNameLink)
-        alertText = strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), inviterName)
-    end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then
-        message = strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), displayBoth)
-        alertText = strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), displayBothString)
-    end
     
     if CA.SV.GroupCA then
+        local finalName = CA.ResolveNameLink(inviterName, inviterDisplayName)
+        local message = strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), finalName)
         printToChat(message)
     end
     if CA.SV.GroupAlert then
+        local finalAlertName = CA.ResolveNameNoLink(inviterName, inviterDisplayName)
+        local alertText = strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), finalAlertName)
         ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertText)
     end
 end
@@ -8819,26 +8723,10 @@ function CA.OnGroupMemberJoined(eventCode, memberName)
     if joinedMemberName ~= "" and joinedMemberName ~= nil then
         if g_playerName ~= memberName then
             -- Can occur if event is before EVENT_PLAYER_ACTIVATED
-            local groupJoinName
-            local groupJoinNameAlert
-            local characterNameLink = ZO_LinkHandler_CreateCharacterLink(joinedMemberName)
-            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(joinedMemberAccountName)
-            local displayBothString = ( strformat("<<1>><<2>>", joinedMemberName, joinedMemberAccountName) )
-            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, joinedMemberAccountName)
-            if CA.SV.ChatPlayerDisplayOptions == 1 then
-                groupJoinName = displayNameLink
-                groupJoinNameAlert = joinedMemberAccountName
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 2 then
-                groupJoinName = characterNameLink
-                groupJoinNameAlert = joinedMemberName
-            end
-            if CA.SV.ChatPlayerDisplayOptions == 3 then
-                groupJoinName = displayBoth
-                groupJoinNameAlert = displayBothString
-            end
-            local SendMessage = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), groupJoinName))
-            local SendAlert = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), groupJoinNameAlert))
+            local finalName = CA.ResolveNameLink(joinedMemberName, joinedMemberAccountName)
+            local finalAlertName = CA.ResolveNameNoLink(joinedMemberName, joinedMemberAccountName)
+            local SendMessage = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), finalName))
+            local SendAlert = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), finalAlertName))
             zo_callLater(function() CA.PrintJoinStatusNotSelf(SendMessage, SendAlert) end, 100)
         elseif g_playerName == memberName then
             zo_callLater(CA.CheckLFGStatusJoin, 100)
@@ -8878,31 +8766,18 @@ function CA.VoteNotify(eventCode)
     end
 
     if electionType == 3 then -- Vote Kick
-        local message
-        local alertText
+
         local kickMemberName = GetUnitName(targetUnitTag)
         local kickMemberAccountName = GetUnitDisplayName(targetUnitTag)
-        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(kickMemberName)
-        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(kickMemberAccountName)
-        local displayBothString = ( strformat("<<1>><<2>>", kickMemberName, kickMemberAccountName) )
-        local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, kickMemberAccountName)
-        if CA.SV.ChatPlayerDisplayOptions == 1 then
-            message = zo_strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), displayNameLink)
-            alertText = zo_strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), kickMemberAccountName)
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 2 then
-            message = zo_strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), characterNameLink)
-            alertText = zo_strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), kickMemberName)
-        end
-        if CA.SV.ChatPlayerDisplayOptions == 3 then
-            message = zo_strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), displayBoth)
-            alertText = zo_strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), displayBothString)
-        end
         
         if CA.SV.GroupVoteCA then
+            local finalName = CA.ResolveNameLink(kickMemberName, kickMemberAccountName)
+            local message = zo_strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), finalName)
             printToChat(message)
         end
         if CA.SV.GroupVoteAlert then
+            local finalAlertName = CA.ResolveNameNoLink(kickMemberName, kickMemberAccountName)
+            local alertText = zo_strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), finalAlertName)
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertText)
         end
     end
@@ -8915,42 +8790,25 @@ end
 
 -- EVENT_PLEDGE_OF_MARA_OFFER - EVENT HANDLER
 function CA.MaraOffer(eventCode, characterName, isSender, displayName)
-    local maraName
-    local maraLinkName
-    local characterNameLink = ZO_LinkHandler_CreateCharacterLink(characterName)
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
-    local displayBothString = ( strformat("<<1>><<2>>", characterName, displayName) )
-    local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
-
-    if CA.SV.ChatPlayerDisplayOptions == 1 then
-        maraName = displayName
-        maraLinkName = displayNameLink
-    end
-    if CA.SV.ChatPlayerDisplayOptions == 2 then
-        maraName = characterName
-        maraLinkName = characterNameLink
-    end
-    if CA.SV.ChatPlayerDisplayOptions == 3 then
-        maraName = displayBothString
-        maraLinkName = displayBoth
-    end
 
     -- Display CA
     if CA.SV.PledgeOfMaraCA then
+        local finalName = CA.ResolveNameLink(characterName, displayName)
         if isSender then
-            printToChat(strformat(GetString(SI_PLEDGE_OF_MARA_SENDER_MESSAGE), maraLinkName))
+            printToChat(strformat(GetString(SI_PLEDGE_OF_MARA_SENDER_MESSAGE), finalName))
         else
-            printToChat(strformat(GetString(SI_PLEDGE_OF_MARA_MESSAGE), maraLinkName))
+            printToChat(strformat(GetString(SI_PLEDGE_OF_MARA_MESSAGE), finalName))
         end
     end
     
     -- Display Alert
     if CA.SV.PledgeOfMaraAlert then
+        local finalAlertName = CA.ResolveNameNoLink(characterName, displayName)
         local alertString
         if isSender then
-            alertString = strformat(GetString(SI_PLEDGE_OF_MARA_SENDER_MESSAGE), maraName)
+            alertString = strformat(GetString(SI_PLEDGE_OF_MARA_SENDER_MESSAGE), finalAlertName)
         else
-            alertString = strformat(GetString(SI_PLEDGE_OF_MARA_MESSAGE), maraName)
+            alertString = strformat(GetString(SI_PLEDGE_OF_MARA_MESSAGE), finalAlertName)
         end
         ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertString)
     end

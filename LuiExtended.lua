@@ -16,6 +16,7 @@ LUIE.D = {
     UnitFrames_Enabled          = true,
     InfoPanel_Enabled           = true,
     CombatInfo_Enabled          = true,
+    CombatText_Enabled          = true,
     SpellCastBuff_Enable        = true,
     ChatAnnouncements_Enable    = true,
     DamageMeter_Enable          = false,
@@ -151,6 +152,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     -- Initialize this addon modules according to user preferences
     LUIE.ChatAnnouncements.Initialize( LUIE.SV.ChatAnnouncements_Enable )
     LUIE.CombatInfo.Initialize( LUIE.SV.CombatInfo_Enabled )
+    LUIE.CombatText.Initialize ( LUIE.SV.CombatText_Enabled )
     LUIE.InfoPanel.Initialize( LUIE.SV.InfoPanel_Enabled )
     LUIE.UnitFrames.Initialize( LUIE.SV.UnitFrames_Enabled )
     LUIE.SpellCastBuffs.Initialize( LUIE.SV.SpellCastBuff_Enable )

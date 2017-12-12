@@ -878,6 +878,9 @@ E.EffectOverride = {
     [72819] = { icon = 'LuiExtended/media/icons/consumables/consumable_orzorga_tripe_trifle_pocket.dds', name = 'Orzorga\'s Tripe Trifle Pocket' }, -- Orzorga's Tripe Trifle Pocket
     [72822] = { icon = 'LuiExtended/media/icons/consumables/consumable_orzorga_blood_price_pie.dds', name = 'Orzorga\'s Blood Price Pie' }, -- Orzorga's Blood Price Pie
     [72824] = { icon = 'LuiExtended/media/icons/consumables/consumable_orzorga_bear_haunch.dds', name = 'Orzorga\'s Smoked Bear Haunch' }, -- Orzorga's Smoked Bear Haunch
+    
+    [100502] = { icon = 'LuiExtended/media/icons/consumables/consumable_deregulated_mushroom_stew.dds' }, -- Deregulated Mushroom Stew
+    [100498] = { icon = 'LuiExtended/media/icons/consumables/consumable_clockwork_citrus_filet.dds' }, -- Clockwork Citrus Filet
 
     -- Crafted Drink
     [61322] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_green.dds', name = 'Increase Health Recovery' }, -- Health Drink
@@ -898,6 +901,8 @@ E.EffectOverride = {
     [61350] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_purple.dds', name = 'Increase All Primary Stat Recovery' }, -- Triple Drink
     [72816] = { icon = 'LuiExtended/media/icons/consumables/consumable_orzorga_red_frothgar.dds', name = 'Orzorga\'s Red Frothgar' }, -- Orzorga's Red Frothgar
     [61354] = { hide = true }, -- Well Fed: Magicka Regen
+    [100488] = { icon = 'LuiExtended/media/icons/consumables/consumable_spring-loaded_infusion.dds' }, -- Spring-Loaded Infusion
+    [100490] = { hide = true }, -- Magicka Consumable
 
     -- Crafted Seasonal Food
     [84681] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_crisp_and_crunchy_pumpkin.dds', name = 'Crisp and Crunchy Pumpkin Snack Skewer' }, -- Crisp and Crunchy Pumpkin Snack Skewer
@@ -1024,6 +1029,10 @@ E.EffectOverride = {
     
     [97273] = { icon = 'LuiExtended/media/icons/mementos/memento_crows_calling.dds', name = 'Crow\'s Calling', unbreakable = 1 }, -- TROPHY Death Crate Mem 1 (Crow's Calling)
     [98378] = { hide = true }, -- Murderous Strike (Murderous Strike)
+    
+    [99318] = { icon = 'LuiExtended/media/icons/mementos/memento_fiery_orb.dds', name = 'Fiery Orb', unbreakable = 1 }, -- TROPHY Flame Crate Mem 1 (Fiery Orb)
+    [99319] = { icon = 'LuiExtended/media/icons/mementos/memento_flame_pixie.dds', name = 'Flame Pixie', unbreakable = 1 }, -- Flame Crate Memento 2 (Flame Pixie)
+    [99320] = { icon = 'LuiExtended/media/icons/mementos/memento_flame_eruption.dds', name = 'Flame Eruption', unbreakable = 1 }, -- TROPHY Flame Crate Mem 3 (Flame Eruption)
 
     -- Assistants
     [77645] = { hide = true }, -- Stealth (Pirharri the Smuggler)
@@ -4410,6 +4419,10 @@ E.FakePlayerBuffs = {
     
     [97273] = { icon = 'LuiExtended/media/icons/mementos/memento_crows_calling.dds', name = 'Crow\'s Calling', duration = 9000 }, -- TROPHY Death Crate Mem 1 (Crow's Calling)
     [97274] = { icon = 'LuiExtended/media/icons/mementos/memento_swarm_of_crows.dds', name = 'Swarm of Crows', duration = 180000 }, -- Swarm of Crows (Swarm of Crows)
+    
+    [99318] = { icon = 'LuiExtended/media/icons/mementos/memento_fiery_orb.dds', name = 'Fiery Orb', unbreakable = 1, duration = 9000 }, -- TROPHY Flame Crate Mem 1 (Fiery Orb)
+    [99319] = { icon = 'LuiExtended/media/icons/mementos/memento_flame_pixie.dds', name = 'Flame Pixie', unbreakable = 1, duration = 8000 }, -- Flame Crate Memento 2 (Flame Pixie)
+    [99320] = { icon = 'LuiExtended/media/icons/mementos/memento_flame_eruption.dds', name = 'Flame Eruption', unbreakable = 1, duration = 2000 }, -- TROPHY Flame Crate Mem 3 (Flame Eruption)
     
     -- Set Items
     [59573] = { icon = 'esoui/art/icons/ability_buff_major_vitality.dds', name = 'Major Vitality', duration = 510 }, -- Major Vitality (Malubeth)
