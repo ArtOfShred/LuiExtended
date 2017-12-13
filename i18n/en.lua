@@ -912,7 +912,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_MESSAGE_DESTROY",                "Destroy
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_MESSAGE_DESTROY_TP",             "Default: You destroy %s.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_MESSAGE_LOCKPICK",               "Lockpick Broken")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_MESSAGE_LOCKPICK_TP",            "Default: Your %s breaks.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_MESSAGE_REMOVE",                 "Quest Item - Removed.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_MESSAGE_REMOVE",                 "Quest Item - Removed")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_MESSAGE_REMOVE_TP",              "Default: Removed %s.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_MESSAGE_GROUP",                  "Group Member Loot")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_MESSAGE_GROUP_TP",               "Default: %s loots %s.")
