@@ -436,6 +436,7 @@ CA.D = {
     LootMessageDestroy              = GetString(SI_LUIE_CA_LOOT_MESSAGE_DESTROY),
     LootMessageLockpick             = GetString(SI_LUIE_CA_LOOT_MESSAGE_LOCKPICK),
     LootMessageRemove               = GetString(SI_LUIE_CA_LOOT_MESSAGE_REMOVE),
+    LootMessageGroup                = GetString(SI_LUIE_CA_LOOT_MESSAGE_GROUP),
     
     LootMessageDisguiseEquip        = GetString(SI_LUIE_CA_LOOT_MESSAGE_DISGUISE_EQUIP),
     LootMessageDisguiseRemove       = GetString(SI_LUIE_CA_LOOT_MESSAGE_DISGUISE_REMOVE),
@@ -3222,7 +3223,7 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
         
         local icon = GetItemLinkIcon(itemLink)
         local gainOrLoss = CA.SV.CurrencyContextColor and 1 or 3
-        local logPrefix = "%s loots %s."
+        local logPrefix = CA.SV.LootMessageGroup
         
         local recipient = ZO_SELECTED_TEXT:Colorize(g_groupLootIndex[zo_strformat(SI_UNIT_NAME,receivedBy)])
         

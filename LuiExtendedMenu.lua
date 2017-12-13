@@ -3242,6 +3242,17 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.LootMessageRemove,
                     },
                     {
+                        -- Loot Message Group
+                        type = "editbox",
+                        name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_GROUP),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_GROUP_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageGroup end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageGroup = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageGroup,
+                    },
+                    {
                         -- Loot Message (Disguise Equip)
                         type = "editbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_DISGUISE_EQUIP),
