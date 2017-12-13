@@ -5794,6 +5794,74 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.GroupRaidReviveAlert,
                     },
                     
+                    {
+                        -- Arena Notifications (CA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidArenaCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidArenaCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupRaidArenaCA,
+                    },
+                    {
+                        -- Arena Notifications (CSA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidArenaCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidArenaCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupRaidArenaCSA,
+                    },
+                    {
+                        -- Arena Notifications (Alert)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidArenaAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidArenaAlert  = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupRaidArenaAlert,
+                    },
+                    
+                    {
+                        -- Arena Round Notifications (CA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidArenaRoundCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidArenaRoundCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupRaidArenaRoundCA,
+                    },
+                    {
+                        -- Arena Round Notifications (CSA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidArenaRoundCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidArenaRoundCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupRaidArenaRoundCSA,
+                    },
+                    {
+                        -- Arena Round Notifications (Alert)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.GroupRaidArenaRoundAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.GroupRaidArenaRoundAlert  = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.GroupRaidArenaRoundAlert,
+                    },
+                    
                 },
             }
                 -- CA Miscellaneous Announcements Submenu

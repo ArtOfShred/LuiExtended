@@ -406,6 +406,37 @@ ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D",       "Leaving
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C",       "Entering Group Area")
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_C",       "Leaving Group Area")
 
+-- VMA Notifications used by EVENT_DISPLAY_ANNOUNCEMENT
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM",          "Maelstrom Arena")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM_CA",       "Maelstrom Arena: ")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE1",          "Vale of the Surreal")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE2",          "Seht's Balcony")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE3",          "Drome of Toxic Shock")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE4",          "Seht's Flywheel")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE5",          "Rink of Frozen Blood")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE6",          "Spiral Shadows")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE7",          "Vault of Umbrage")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE8",          "Igneous Cistern")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE9",          "Theater of Despair")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1",          "Round 1")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1_CA",       "Round 1!")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2",          "Round 2")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2_CA",       "Round 2!")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3",          "Round 3")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3_CA",       "Round 3!")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4",          "Round 4")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4_CA",       "Round 4!")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5",          "Round 5")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5_CA",       "Round 5!")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF",          "Final Round")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF_CA",       "Final Round!")
+
+-- DSA Notifications used by EVENT_DISPLAY_ANNOUNCEMENT
+
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA",                "Dragonstar Arena")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_CA",             "Dragonstar Arena: ")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC",           "The arena will begin in 30 seconds!")
+
 -- UnitFrames.lua
 ZO_CreateStringId("SI_LUIE_UF_ERROR_FONT",                              "LUIE_CustomFrames: There was a problem with selecting required font. Falling back to game default.")
 
@@ -1172,6 +1203,12 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE",                "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE_TP",             "Display <<1>> when a new high score is achieved on trial completion.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_REVIVE",                   "Display Vitality Bonus Loss - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_REVIVE_TP",                "Display <<1>> when Vitality Bonus is decreased.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_ARENA",                    "Display DSA/Maelstrom Arena Stage - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP",                 "Display <<1>> when a new stage begins in Dragonstar or Maelstrom Arena.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND",              "Display Maelstrom Arena Round - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP",           "Display <<1>> when a new round begins in Maelstrom Arena.")
 
 -- Misc Menu
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_GROUPAREA",                      "Display Entering/Leaving Group Area - <<1>>")

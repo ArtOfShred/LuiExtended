@@ -89,6 +89,12 @@ CA.D = {
     GroupRaidReviveCA             = false,
     GroupRaidReviveCSA            = true,
     GroupRaidReviveAlert          = false,
+    GroupRaidArenaCA              = false,
+    GroupRaidArenaCSA             = true,
+    GroupRaidArenaAlert           = false,
+    GroupRaidArenaRoundCA         = false,
+    GroupRaidArenaRoundCSA        = true,
+    GroupRaidArenaRoundAlert      = false,
     
     -- Guild
     GuildCA                       = true,
@@ -2962,7 +2968,13 @@ function CA.ResolveQuestItemChange()
         
             local icon = questItemIndex[itemId].icon
             local formattedIcon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
-            local itemLink = strfmt("|H1:quest_item:" .. itemId .. "|h|h")
+            
+            local itemlink
+            if CA.SV.BracketOptionItem == 1 then
+                itemLink = strfmt("|H0:quest_item:" .. itemId .. "|h|h")
+            else
+                itemLink = strfmt("|H1:quest_item:" .. itemId .. "|h|h")
+            end
             
             
             local color
@@ -7817,11 +7829,31 @@ function CA.HookFunction()
     
     [GetString(SI_SKILLS_FORCE_RESPEC_TITLE)] = { ca = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS) .. ".", csa = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS), announceType = "RESPEC" },
     [GetString(SI_ATTRIBUTE_FORCE_RESPEC_TITLE)] = { ca = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES) .. ".", csa = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES), announceType = "RESPEC" },
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C), announceType = "GROUPAREA" },
+    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C), announceType = "GROUPAREA" }, -- Entering Group Area.
+    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM), announceType = "ARENA"}, -- Maelstrom Arena
+    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1), announceType = "ROUND" }, -- Round 1
+    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2), announceType = "ROUND" }, -- Round 2
+    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3), announceType = "ROUND" }, -- Round 3
+    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4), announceType = "ROUND" }, -- Round 4
+    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5), announceType = "ROUND" }, -- Round 5
+    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF), announceType = "ROUND" }, -- Final Round
+    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA), announceType = "ARENA" }, -- Dragonstar Arena
+    
     }
     
     local overrideDisplayAnnouncementDescription = {
-        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_C), announceType = "GROUPAREA" },
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_C), announceType = "GROUPAREA" }, -- Leaving Group Area.
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE1)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE1), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE1), announceType = "ARENA" }, -- Vale of the Surreal
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE2)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE2), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE2), announceType = "ARENA" }, -- Seht's Balcony
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE3)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE3), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE3), announceType = "ARENA" }, -- Drome of Toxic Shock
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE4)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE4), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE4), announceType = "ARENA" }, -- Seht's Flywheel
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE5)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE5), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE5), announceType = "ARENA" }, -- Rink of Frozen Blood
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE6)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE6), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE6), announceType = "ARENA" }, -- Spiral Shadows
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE7)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE7), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE7), announceType = "ARENA" }, -- Vault of Umbrage
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE8)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE8), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE8), announceType = "ARENA" }, -- Igneous Cistern
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE9)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE9), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE9), announceType = "ARENA" }, -- Theater of Despair
+        
+        [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC), announceType = "ARENA" }, -- The arena will begin in 30 seconds!
     }
     
     -- EVENT_DISPLAY_ANNOUNCEMENT -- CSA HANDLER
@@ -7831,6 +7863,10 @@ function CA.HookFunction()
         if (title ~= "" and not overrideDisplayAnnouncementTitle[title]) or (description ~= "" and not overrideDisplayAnnouncementDescription[description]) then
             d("EVENT_DISPLAY_ANNOUNCEMENT")
             d("TEMPORARY: Please let me know where you see this message, and the context or notification ")
+            
+            d("title: " .. title)
+            d("description: " .. description)
+            
         end
         
         local flagCA
@@ -7851,6 +7887,14 @@ function CA.HookFunction()
                 flagCA = CA.SV.NotificationGroupAreaCA and true or false
                 flagCSA = CA.SV.NotificationGroupAreaCSA and true or false
                 flagAlert = CA.SV.NotificationGroupAreaAlert and true or false
+            elseif reference == "ARENA" then
+                flagCA = CA.SV.GroupRaidArenaCA and true or false
+                flagCSA = CA.SV.GroupRaidArenaCSA and true or false
+                flagAlert = CA.SV.GroupRaidArenaAlert and true or false
+            elseif reference == "ROUND" then
+                flagCA = CA.SV.GroupRaidArenaRoundCA and true or false
+                flagCSA = CA.SV.GroupRaidArenaRoundCSA and true or false
+                flagAlert = CA.SV.GroupRaidArenaRoundAlert and true or false
             end
         else
             -- Temporary until we gather data on all events - if there are any display announcements in addition to Respec/Group Area Notifications then conditionals will be added to support them, but for now, only display default CSA.
@@ -7892,8 +7936,7 @@ function CA.HookFunction()
         
         if flagCA then
             if title ~= "" and description ~= "" then
-                printToChat(titleCA)
-                printToChat(descriptionCA)
+                printToChat(titleCA .. descriptionCA)
             elseif title ~= "" then
                 printToChat(titleCA)
             elseif description ~= "" then
@@ -7911,8 +7954,7 @@ function CA.HookFunction()
         
         if flagAlert then
             if title ~= "" and description ~= "" then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, titleCA)
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, descriptionCA)
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, (titleCA .. descriptionCA) )
             elseif title ~= "" then
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, titleCA)
             elseif description ~= "" then
