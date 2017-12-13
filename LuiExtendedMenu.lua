@@ -3231,6 +3231,17 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.LootMessageLockpick,
                     },
                     {
+                        -- Loot Message Removed (Quest)
+                        type = "editbox",
+                        name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_REMOVE),
+                        tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_REMOVE_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.LootMessageRemove end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.LootMessageRemove = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.LootMessageRemove,
+                    },
+                    {
                         -- Loot Message (Disguise Equip)
                         type = "editbox",
                         name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_DISGUISE_EQUIP),

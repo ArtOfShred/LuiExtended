@@ -1322,6 +1322,7 @@ function UF.OnPlayerActivated(eventCode)
     UF.OnBossesChanged()
 
     UF.OnPlayerCombatState(EVENT_PLAYER_COMBAT_STATE, IsUnitInCombat("player") )
+    UF.CustomFramesGroupAlpha()
     UF.CustomFramesSetupAlternative()
 
     -- Apply bar colors here, has to be after player init to get group roles

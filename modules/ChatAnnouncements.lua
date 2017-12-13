@@ -429,6 +429,7 @@ CA.D = {
     LootMessageResearch             = GetString(SI_LUIE_CA_LOOT_MESSAGE_RESEARCH),
     LootMessageDestroy              = GetString(SI_LUIE_CA_LOOT_MESSAGE_DESTROY),
     LootMessageLockpick             = GetString(SI_LUIE_CA_LOOT_MESSAGE_LOCKPICK),
+    LootMessageRemove               = GetString(SI_LUIE_CA_LOOT_MESSAGE_REMOVE),
     
     LootMessageDisguiseEquip        = GetString(SI_LUIE_CA_LOOT_MESSAGE_DISGUISE_EQUIP),
     LootMessageDisguiseRemove       = GetString(SI_LUIE_CA_LOOT_MESSAGE_DISGUISE_REMOVE),
@@ -2951,7 +2952,6 @@ function CA.AddQuestItemsToIndex()
 end
 
 function CA.ResolveQuestItemChange()
-
     for itemId, _ in pairs(questItemIndex) do
     
         local countChange = nil
@@ -2973,6 +2973,35 @@ function CA.ResolveQuestItemChange()
             local formattedMessageP1
             local formattedMessageP2
             local finalMessage
+        
+            -- Lower
+            if newValue < questItemIndex[itemId].stack then
+                countChange = newValue + questItemIndex[itemId].counter
+                
+                if CA.SV.LootQuestRemove then 
+                    if CA.SV.CurrencyContextColor then
+                        color = CurrencyDownColorize:ToHex()
+                    else
+                        color = CurrencyColorize:ToHex()
+                    end
+                    
+                    logPrefix = CA.SV.LootMessageRemove
+                    local quantity = (countChange * -1) < 1 and (" |cFFFFFFx" .. (countChange * -1) .. "|r") or ""
+                    
+                    formattedMessageP1 = ("|r" .. formattedIcon .. itemLink .. quantity .. "|c" .. color)
+                    formattedMessageP2 = strfmt(logPrefix, formattedMessageP1)
+                    
+                    if CA.SV.LootTotal and total > 1 then
+                        totalString = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", color, CA.SV.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+                    else
+                        totalString = ""
+                    end
+                    
+                    finalMessage = strfmt("|c%s%s|r%s", color, formattedMessageP2, totalString)
+                    
+                    d(finalMessage)
+                end
+            end
         
             -- Higher
             if newValue > questItemIndex[itemId].stack then
@@ -3010,54 +3039,20 @@ function CA.ResolveQuestItemChange()
                     finalMessage = strfmt("|c%s%s|r%s", color, formattedMessageP2, totalString)
                     d(finalMessage)
                 end
-            
-            end
-            
-            -- Lower
-            if newValue < questItemIndex[itemId].stack then
-                countChange = newValue + questItemIndex[itemId].counter
-                
-                if CA.SV.LootQuestRemove then 
-                    if CA.SV.CurrencyContextColor then
-                        color = CurrencyDownColorize:ToHex()
-                    else
-                        color = CurrencyColorize:ToHex()
-                    end
-                    
-                    logPrefix = CA.SV.LootMessageDestroy
-                    local quantity = countChange < 1 and (" |cFFFFFFx" .. (countChange * -1) .. "|r") or ""
-                    
-                    formattedMessageP1 = ("|r" .. formattedIcon .. itemLink .. quantity .. "|c" .. color)
-                    formattedMessageP2 = strfmt(logPrefix, formattedMessageP1)
-                    
-                    if CA.SV.LootTotal and total > 1 then
-                        totalString = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", color, CA.SV.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
-                    else
-                        totalString = ""
-                    end
-                    
-                    finalMessage = strfmt("|c%s%s|r%s", color, formattedMessageP2, totalString)
-                    
-                    d(finalMessage)
-                end
             end
         end
         
         -- If count changed, update it
         if countChange then 
-            
             questItemIndex[itemId].stack = newValue
             questItemIndex[itemId].counter = 0
             --d("New Stack Value = " .. questItemIndex[itemId].stack)
-            
             if questItemIndex[itemId].stack < 1 then
                 questItemIndex[itemId] = nil
                 --d("Item reached 0 or below stacks, removing")
             end
         end
-        
     end
-    
 end
 
 local function DisplayQuestItem(itemId, stackCount, icon, reset)
@@ -9156,7 +9151,9 @@ function CA.PrintQueuedMessages()
     -- Display the rest
     for i=1, #g_queuedMessages do
         if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type ~= "QUEST" and g_queuedMessages[i].type ~= "EXPERIENCE" and g_queuedMessages[i].type ~= "ACHIEVEMENT" and g_queuedMessages[i].type ~= "QUEST_POI" then
-            if g_queuedMessages[i].type == "QUESTLOOT" then
+            if g_queuedMessages[i].type == "CURRENCY" then
+                printToChat(g_queuedMessages[i].message)
+            elseif g_queuedMessages[i].type == "QUESTLOOT" then
                 CA.ResolveQuestItemChange()
             elseif g_queuedMessages[i].type == "LOOT" then
                 CA.ResolveItemMessage(g_queuedMessages[i].message, g_queuedMessages[i].formattedRecipient, g_queuedMessages[i].color, g_queuedMessages[i].logPrefix, g_queuedMessages[i].totalString)
