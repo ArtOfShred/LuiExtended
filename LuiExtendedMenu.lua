@@ -9349,7 +9349,7 @@ function LUIE_CreateSettings()
                     name = L.animationTest,
                     tooltip = L.tooltipAnimationTest,
                     func = function()
-                        CALLBACK_MANAGER:FireCallbacks(CombatCloudConstants.eventType.COMBAT, CombatCloudConstants.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), L.animationTest, 41567, DAMAGE_TYPE_PHYSICAL, true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                        CALLBACK_MANAGER:FireCallbacks(CombatCloudConstants.eventType.COMBAT, CombatCloudConstants.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), L.animationTest, 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
                     end,
                 },
             },
