@@ -1423,13 +1423,9 @@ end
 function SCB.InitializeDisguise()
     g_effectsList.player1["DisguiseType"] = nil
     if g_currentDisguise ~= 0 and not SCB.SV.IgnoreDisguise then
-        -- Hide from display if we have a costume or polymorph and the disguise is a guild tabard
-        if g_currentDisguise == 55262 and (GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) > 0 or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME) > 0) then
-            return
-        end
 
-        -- Don't show Monk's Disguise since it already has an aura
-        if g_currentDisguise == 79332 then
+        -- Don't show Monk's Disguise since it already has an aura, and don't show Guild Tabard
+        if g_currentDisguise == 79332 or g_currentDisguise == 55262 then
             return
         end
 
@@ -1454,12 +1450,10 @@ function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory
             return
         elseif g_currentDisguise ~= 0 and not SCB.SV.IgnoreDisguise then
 
-            -- Hide from display if we have a costume or polymorph and the disguise is a guild tabard
-            if g_currentDisguise == 55262 and (GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_POLYMORPH) > 0 or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COSTUME) > 0) then
+            -- Don't show Monk's Disguise since it already has an aura, and don't show Guild Tabard
+            if g_currentDisguise == 79332 or g_currentDisguise == 55262 then
                 return
             end
-
-            if g_currentDisguise == 79332 then return end -- Don't show Monk's Disguise since it already has an aura
 
             local name = E.DisguiseIcons[g_currentDisguise].name
             local icon = E.DisguiseIcons[g_currentDisguise].icon

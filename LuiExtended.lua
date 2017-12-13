@@ -695,19 +695,8 @@ function LUIE.SlashRegroup()
             local groupMemberString
             local groupMemberName = GetUnitName(memberTag)
             local groupMemberAccountName = GetUnitDisplayName(memberTag)
-            local characterNameLink = ZO_LinkHandler_CreateCharacterLink(groupMemberName)
-            local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(groupMemberAccountName)
-            local displayBothString = ( zo_strformat("<<1>><<2>>", groupMemberName, groupMemberAccountName) )
-            local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, groupMemberAccountName)
-            if LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions == 1 then
-                memberLink = displayNameLink
-            end
-            if LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions == 2 then
-                memberLink = characterNameLink
-            end
-            if LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions == 3 then
-                memberLink = displayBoth
-            end
+            local memberLink = LUIE.ChatAnnouncements.ResolveNameLink(groupMemberName, groupMemberAccountName)
+            
             -- Place inside counter incremented index, this way if we have offline members in the group we still index everything in an ordered integer list.
             g_regroupStacks[index] = { memberLink = memberLink, memberName = groupMemberName }
             index = index + 1

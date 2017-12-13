@@ -336,7 +336,6 @@ E.DisguiseIcons = {
     [71789] = { name = 'Castle Kvatch Sentinel Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', description = 'as a Castle Kvatch sentinel.' }, -- NO ICON (Not sure it exists)
     --[79332] = { name = 'Monk\'s Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_monks_disguise.dds', description = 'as a monk.' }, -- HAS AN AURA SO NOT NECESSARY (Note - we make an exception to HIDE this itemId to prevent errors)
     [79505] = { name = 'Sentinel Guard Disguise', icon = 'LuiExtended/media/icons/disguises/disguise_generic.dds', description = 'as a Sentinel Guard.' }, -- NO ICON (Not sure it exists)
-    [55262] = { name = 'Guild Tabard', icon = 'LuiExtended/media/icons/disguises/disguise_guild_tabard.dds' },
     [94209] = { name = 'Scarlet Judge\'s Regalia', icon = 'LuiExtended/media/icons/disguises/disguise_scarlet_judges_regalia.dds', description = 'as The Scarlet Judge.' }, -- NOT SURE IF ICON YET
 }
 

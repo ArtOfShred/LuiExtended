@@ -467,6 +467,7 @@ local g_weAreInAStore               = false         -- Toggled on when the playe
 local g_weAreInAFence               = false         -- Toggled on when the player opens a fence.
 local g_itemWasDestroyed            = false         -- Tracker for item being destroyed
 local g_lockpickBroken              = false         -- Tracker for lockpick being broken
+local g_groupLootIndex              = {}            -- Table to hold group member names for group loot display.
 
 -- Currency Throttle
 local g_currencyGoldThrottleValue   = 0             -- Held value for gold throttle (counter)
@@ -756,9 +757,8 @@ function CA.Initialize(enabled)
     CA.RegisterSocialEvents()
     CA.RegisterDisguiseEvents()
     CA.RegisterColorEvents()
-    CA.RegisterQuestEvents()
+    CA.RegisterQuestEvents() 
     
-    --
     CA.HookFunction()
     
 end
@@ -1059,20 +1059,20 @@ function CA.ResolveNameLink(characterName, displayName)
 
     if CA.SV.ChatPlayerDisplayOptions == 1 then
         if CA.SV.BracketOptionCharacter == 1 then
-            nameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(characterName, nil, CHARACTER_LINK_TYPE, characterName)
-        else
-            nameLink = ZO_LinkHandler_CreateLink(characterName, nil, CHARACTER_LINK_TYPE, characterName)
-        end
-    elseif CA.SV.ChatPlayerDisplayOptions == 2 then
-        if CA.SV.BracketOptionCharacter == 1 then
             nameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
         else
             nameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
         end
+    elseif CA.SV.ChatPlayerDisplayOptions == 2 then
+        if CA.SV.BracketOptionCharacter == 1 then
+            nameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(characterName, nil, CHARACTER_LINK_TYPE, characterName)
+        else
+            nameLink = ZO_LinkHandler_CreateLink(characterName, nil, CHARACTER_LINK_TYPE, characterName)
+        end
     elseif CA.SV.ChatPlayerDisplayOptions == 3 then
         local displayBothString = strformat("<<1>><<2>>", characterName, displayName)
         if CA.SV.BracketOptionCharacter == 1 then
-            nameLink = ZO_LinkHandler_CreateLinkWithBrackets(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+            nameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
         else
             nameLink = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, displayName)
         end
@@ -1217,7 +1217,12 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
     local hasPermission2 = DoesGuildRankHavePermission(guildId, currentRank, GUILD_PERMISSION_DEMOTE)
 
     if ((hasPermission1 or hasPermission2) and DisplayName ~= g_playerDisplayName and CA.SV.GuildRankDisplayOptions == 2) or (CA.SV.GuildRankDisplayOptions == 3 and DisplayName ~= g_playerDisplayName) then
-        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(DisplayName)
+        local displayNameLink
+        if CA.SV.BracketOptionCharacter == 1 then
+            displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(DisplayName, nil, DISPLAY_NAME_LINK_TYPE, DisplayName)
+        else
+            displayNameLink = ZO_LinkHandler_CreateLink(DisplayName, nil, DISPLAY_NAME_LINK_TYPE, DisplayName)
+        end
         local rankName
         local rankNameDefault = GetDefaultGuildRankName(guildId, newRank)
         local rankNameCustom = GetGuildRankCustomName(guildId, newRank)
@@ -1342,7 +1347,12 @@ end
 
 -- EVENT_GUILD_INVITE_ADDED
 function CA.GuildInviteAdded(eventCode, guildId, guildName, guildAlliance, inviterName)
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(inviterName)
+    local displayNameLink
+    if CA.SV.BracketOptionCharacter == 1 then
+        displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(inviterName, nil, DISPLAY_NAME_LINK_TYPE, inviterName)
+    else
+        displayNameLink = ZO_LinkHandler_CreateLink(inviterName, nil, DISPLAY_NAME_LINK_TYPE, inviterName)
+    end
     local guildColor = CA.SV.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
     local guildNameAlliance = CA.SV.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
     local guildNameAllianceAlert = CA.SV.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
@@ -1356,7 +1366,12 @@ end
 
 function CA.FriendAdded(eventCode, displayName)
     if CA.SV.FriendIgnoreCA then
-        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+        local displayNameLink
+        if CA.SV.BracketOptionCharacter == 1 then
+            displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        else
+            displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        end
         printToChat(strformat(SI_LUIE_CA_FRIENDS_FRIEND_ADDED, displayNameLink))
     end
     if CA.SV.FriendIgnoreAlert then
@@ -1366,7 +1381,12 @@ end
 
 function CA.FriendRemoved(eventCode, displayName)
     if CA.SV.FriendIgnoreCA then
-        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+        local displayNameLink
+        if CA.SV.BracketOptionCharacter == 1 then
+            displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        else
+            displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        end
         printToChat(strformat(SI_LUIE_CA_FRIENDS_FRIEND_REMOVED, displayNameLink))
     end
     if CA.SV.FriendIgnoreAlert then
@@ -1376,7 +1396,12 @@ end
 
 function CA.FriendInviteAdded(eventCode, displayName)
     if CA.SV.FriendIgnoreCA then
-        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+        local displayNameLink
+        if CA.SV.BracketOptionCharacter == 1 then
+            displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        else
+            displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        end
         printToChat(strformat(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST, displayNameLink))
     end
     if CA.SV.FriendIgnoreAlert then
@@ -1386,7 +1411,12 @@ end
 
 function CA.IgnoreAdded(eventCode, displayName)
     if CA.SV.FriendIgnoreCA then
-        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+        local displayNameLink
+        if CA.SV.BracketOptionCharacter == 1 then
+            displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        else
+            displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        end
         printToChat(zo_strformat(SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED, displayNameLink))
     end
     if CA.SV.FriendIgnoreAlert then
@@ -1396,7 +1426,12 @@ end
 
 function CA.IgnoreRemoved(eventCode, displayName)
     if CA.SV.FriendIgnoreCA then
-        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+        local displayNameLink
+        if CA.SV.BracketOptionCharacter == 1 then
+            displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        else
+            displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+        end
         printToChat(zo_strformat(SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED, displayNameLink))
     end
     if CA.SV.FriendIgnoreAlert then
@@ -1411,8 +1446,15 @@ function CA.FriendPlayerStatus(eventCode, displayName, characterName, oldStatus,
     if wasOnline ~= isOnline then
         local chatText
         local alertText
-        local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
-        local characterNameLink = ZO_LinkHandler_CreateCharacterLink(characterName)
+        local displayNameLink
+        local characterNameLink
+        if CA.SV.BracketOptionCharacter == 1 then
+            displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+            characterNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(characterName, nil, CHARACTER_LINK_TYPE, characterName)
+        else
+            displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+            characterNameLink = ZO_LinkHandler_CreateLink(characterName, nil, CHARACTER_LINK_TYPE, characterName)
+        end
         if isOnline then
             if characterName ~= "" then
                 chatText = zo_strformat(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_ON, displayNameLink, characterNameLink)
@@ -1440,7 +1482,7 @@ function CA.FriendPlayerStatus(eventCode, displayName, characterName, oldStatus,
     end
 end
 
-function CA.QuestShared (eventCode, questId)
+function CA.QuestShared(eventCode, questId)
     if CA.SV.QuestShareCA or CA.SV.QuestShareAlert then
         local questName, characterName, timeSinceRequestMs, displayName = GetOfferedQuestShareInfo(questId)
         
@@ -2519,9 +2561,17 @@ MAIL_SEND.Send = function(self)
         local nameLink
         -- Here we look for @ character in the sent mail, if the player send to an account then we want the link to be an account name link, otherwise, it's a character name link.
         if string.match(mailTarget, "@") == "@" then
-            nameLink = ZO_LinkHandler_CreateDisplayNameLink(mailTarget)
+            if CA.SV.BracketOptionCharacter == 1 then
+                nameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(mailTarget, nil, DISPLAY_NAME_LINK_TYPE, mailTarget)
+            else
+                nameLink = ZO_LinkHandler_CreateLink(mailTarget, nil, DISPLAY_NAME_LINK_TYPE, mailTarget)
+            end
         else
-            nameLink = ZO_LinkHandler_CreateCharacterLink(mailTarget)
+            if CA.SV.BracketOptionCharacter == 1 then
+                nameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(mailTarget, nil, CHARACTER_LINK_TYPE, mailTarget)
+            else
+                nameLink = ZO_LinkHandler_CreateLink(mailTarget, nil, CHARACTER_LINK_TYPE, mailTarget)
+            end
         end
         
         g_mailTarget = ZO_SELECTED_TEXT:Colorize(nameLink)
@@ -3163,74 +3213,26 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
         return
     end
 
-    --[[
-    
-    local icon
-    -- fix Icon for missing quest items
-    if lootType == LOOT_TYPE_QUEST_ITEM then
-        icon = questItemIcon
-    elseif lootType == LOOT_TYPE_COLLECTIBLE then
-        local collectibleId = GetCollectibleIdFromLink(itemLink)
-        local _,_,collectibleIcon = GetCollectibleInfo(collectibleId)
-        icon = collectibleIcon
-    else
-        -- Get Icon
-        local itemIcon,_,_,_,_ = GetItemLinkInfo(itemLink)
-        icon = itemIcon
-    end
-    
-    -- Create Icon string if icon exists and corresponding setting is ON
-    icon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
+    -- Group loot handling
+    if not lootedBySelf then
 
-    local itemType, specializedItemType = GetItemLinkItemType(itemLink)
-    local itemQuality = GetItemLinkQuality(itemLink)
-    local itemIsSet = GetItemLinkSetInfo(itemLink)
-
-    -- Workaround for a ZOS bug: Daedric Embers are not flagged in-game as key fragments
-    if (itemId == 69059) then
-        specializedItemType = SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT
+        local itemType = GetItemLinkItemType(itemLink)
+        -- Check filter and if this item isn't included bail out now
+        if not CA.ItemFilter(itemType, itemId, itemLink) then return end
+        
+        local icon = GetItemLinkIcon(itemLink)
+        local gainOrLoss = CA.SV.CurrencyContextColor and 1 or 3
+        local logPrefix = "%s loots %s."
+        
+        local recipient = ZO_SELECTED_TEXT:Colorize(g_groupLootIndex[zo_strformat(SI_UNIT_NAME,receivedBy)])
+        
+        CA.ItemPrinter(icon, quantity, itemType, itemId, itemLink, recipient, logPrefix, gainOrLoss, false, true)
+        
     end
 
-    local itemIsKeyFragment = (itemType == ITEMTYPE_TROPHY) and (specializedItemType == SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT)
-    local itemIsSpecial = (itemType == ITEMTYPE_TROPHY and not itemIsKeyFragment) or (itemType == ITEMTYPE_COLLECTIBLE) or IsItemLinkConsumable(itemLink)
-
-    -- Check for Blacklisted loot
-    if ( CA.SV.LootBlacklist and g_blacklistIDs[itemId] ) then
-        return
-    end
-
-    -- Set prefix based on Looted/Pickpocket/Received
-    local logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_LOOTED)
-    if ( isPickpocketLoot ) then
-        logPrefix = GetString(SI_GAMECAMERAACTIONTYPE21)
-    end
-    if ( receivedBy == nil ) then
-        logPrefix = GetString(SI_MAIL_INBOX_RECEIVED_COLUMN)
-    end
-    if CA.SV.ItemContextToggle then
-        logPrefix = ( CA.SV.ItemContextMessage )
-    end
-
-    local gainOrLoss = CA.SV.CurrencyContextColor and 1 or 3
-
-    if ( (lootType ~= LOOT_TYPE_ITEM and lootType ~= LOOT_TYPE_COLLECTIBLE) or
-         (itemType == ITEMTYPE_CONTAINER) or -- Don't show containers for group members
-         (itemQuality == ITEM_QUALITY_ARCANE and itemType == ITEMTYPE_RACIAL_STYLE_MOTIF) ) then -- Don't show blue motifs for group members
-        return
-    end
-    if ( (itemIsSet) or
-         (itemQuality >= ITEM_QUALITY_ARCANE and itemIsSpecial) or
-         (itemQuality >= ITEM_QUALITY_ARTIFACT and not itemIsKeyFragment) or
-         (lootType == LOOT_TYPE_COLLECTIBLE) or
-         (g_notableIDs[itemId]) ) then
-
-        CA.LogItem( logPrefix, icon, itemLink, itemType, quantity, self and "" or receivedBy, gainOrLoss )
-    end
-    
-    ]]--
 end
 
--- If filter is true, we run the item through this function to determine if we should display it. Filter only gets set to true for relevant loot functions, mail, trade, stores, etc don't apply the filter.
+-- If filter is true, we run the item through this function to determine if we should display it. Filter only gets set to true for group loot and relevant loot functions. Mail, trade, stores, etc don't apply the filter.
 function CA.ItemFilter(itemType, itemId, itemLink)
 
     if ( CA.SV.LootBlacklist and g_blacklistIDs[itemId] ) then
@@ -3297,7 +3299,7 @@ local LUIE_EXCLUDE_STYLES = {
 
 }
 
-function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter)
+function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot)
 
     if filter then 
         -- If filter returns false then bail out right now, we're not displaying this item.
@@ -3325,15 +3327,6 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
         -- Don't display yourself
         formattedRecipient = ""
     else
-        -- Create a character link to make it easier to contact the recipient
-        -- TODO edit this to be a standard character link instead
-        --[[formattedRecipient = strfmt(
-            "%s |c%06X|H0:character:%s|h%s|h|r",
-            arrowPointer,
-            HashString(receivedBy) % 0x1000000, -- Use the hash of the name for the color so that is random, but consistent
-            receivedBy,
-            receivedBy:gsub("%^%a+$", "", 1)
-        )]]--
         formattedRecipient = receivedBy
     end
     
@@ -3363,7 +3356,7 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
     and strfmt(" |cFFFFFF(%s)|r", unformattedStyle) or ""
     
     local formattedTotal = ""
-    if CA.SV.LootTotal and receivedBy ~= "LUIE_INVENTORY_UPDATE_DISGUISE" then
+    if CA.SV.LootTotal and receivedBy ~= "LUIE_INVENTORY_UPDATE_DISGUISE" and not groupLoot then
         local total1, total2, total3 = GetItemLinkStacks(itemLink)
         local total = total1 + total2 + total3
         if total > 1 then
@@ -3387,7 +3380,7 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
         if g_itemCounterGain == 0 then g_itemCounterGain = g_queuedMessagesCounter end
         if g_queuedMessagesCounter -1 == g_itemCounterGain then g_queuedMessagesCounter = g_itemCounterGain end
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-        g_queuedMessages[g_itemCounterGain] = { message=g_itemStringGain, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString="" }
+        g_queuedMessages[g_itemCounterGain] = { message=g_itemStringGain, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString= "", groupLoot=groupLoot }
         EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
     elseif receivedBy == "CRAFT" and (gainOrLoss == 2 or gainOrLoss == 4) and logPrefix ~= CA.SV.LootMessageUpgradeFail then
         local itemString2 = itemString
@@ -3400,11 +3393,11 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
         if g_itemCounterLoss == 0 then g_itemCounterLoss = g_queuedMessagesCounter end
         if g_queuedMessagesCounter -1 == g_itemCounterLoss then g_queuedMessagesCounter = g_itemCounterLoss end
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-        g_queuedMessages[g_itemCounterLoss] = { message=g_itemStringLoss, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString=""}
+        g_queuedMessages[g_itemCounterLoss] = { message=g_itemStringLoss, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString= "", groupLoot=groupLoot }
         EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
     else
         local totalString = formattedTotal
-        g_queuedMessages[g_queuedMessagesCounter] = { message=itemString, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString=totalString }
+        g_queuedMessages[g_queuedMessagesCounter] = { message=itemString, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString=totalString, groupLoot=groupLoot }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
     end
@@ -3412,7 +3405,7 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
 end
 
 -- Simple function combines our strings or modifies the prefix if RECEIEVED instead of looted
-function CA.ResolveItemMessage(message, formattedRecipient, color, logPrefix, totalString)
+function CA.ResolveItemMessage(message, formattedRecipient, color, logPrefix, totalString, groupLoot)
 
     -- Conditions for looted/quest item rewards to adjust string prefix.
     if logPrefix == "" then
@@ -3431,21 +3424,29 @@ function CA.ResolveItemMessage(message, formattedRecipient, color, logPrefix, to
     local formattedMessageP1
     local formattedMessageP2
     
-    -- Adds additional string for previous variant of an item when an item is upgraded.
-    if logPrefix == CA.SV.LootMessageUpgrade and g_oldItem ~= nil and g_oldItem.itemLink ~= "" then
-        local formattedIcon = (CA.SV.LootIcons and g_oldItem.icon ~= "") and zo_strformat("<<1>> ", zo_iconFormat(g_oldItem.icon, 16, 16)) or ""
-        local formattedMessageUpgrade = ("|r" .. formattedIcon .. g_oldItem.itemLink .. "|c" .. color)
-        formattedMessageP1 = ("|r" .. message .. "|c" .. color)
-        formattedMessageP2 = strfmt(logPrefix, formattedMessageUpgrade, formattedMessageP1)
-        g_oldItem = { }
+    -- Handle non group loot messages
+    if not groupLoot then
+        -- Adds additional string for previous variant of an item when an item is upgraded.
+        if logPrefix == CA.SV.LootMessageUpgrade and g_oldItem ~= nil and g_oldItem.itemLink ~= "" then
+            local formattedIcon = (CA.SV.LootIcons and g_oldItem.icon ~= "") and zo_strformat("<<1>> ", zo_iconFormat(g_oldItem.icon, 16, 16)) or ""
+            local formattedMessageUpgrade = ("|r" .. formattedIcon .. g_oldItem.itemLink .. "|c" .. color)
+            formattedMessageP1 = ("|r" .. message .. "|c" .. color)
+            formattedMessageP2 = strfmt(logPrefix, formattedMessageUpgrade, formattedMessageP1)
+            g_oldItem = { }
+        else
+            formattedMessageP1 = ("|r" .. message .. "|c" .. color)
+            if formattedRecipient == "" then
+                formattedMessageP2 = strfmt(logPrefix, formattedMessageP1)
+            else
+                local recipient = ("|r" .. formattedRecipient .. "|c" .. color)
+                formattedMessageP2 = strfmt(logPrefix, formattedMessageP1, recipient)
+            end
+        end
+    -- Handle group loot messages
     else
         formattedMessageP1 = ("|r" .. message .. "|c" .. color)
-        if formattedRecipient == "" then
-            formattedMessageP2 = strfmt(logPrefix, formattedMessageP1)
-        else
-            local recipient = ("|r" .. formattedRecipient .. "|c" .. color)
-            formattedMessageP2 = strfmt(logPrefix, formattedMessageP1, recipient)
-        end
+        local recipient = ("|r" .. formattedRecipient .. "|c" .. color)
+        formattedMessageP2 = strfmt(logPrefix, recipient, formattedMessageP1)
     end
 
     local finalMessage = strfmt("|c%s%s|r%s", color, formattedMessageP2, totalString)
@@ -4841,6 +4842,9 @@ function CA.DisguiseState(eventCode, unitTag, disguiseState)
 end
 
 function CA.OnPlayerActivated(eventCode, initial)
+
+        -- Index members for Group Loot
+    CA.IndexGroupLoot()   
     
     if g_disguiseState == 0 then
         g_disguiseState = GetUnitDisguiseState("player")
@@ -5442,7 +5446,6 @@ function CA.HookFunction()
         -- Used to check for valid links
         local characterNameLink = ZO_LinkHandler_CreateCharacterLink(characterName)
         local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
-
         
         local hasValidNames = characterNameLink ~= "" and displayNameLink ~= ""
         local useDefaultReasonText = false
@@ -8427,7 +8430,12 @@ function CA.HookFunction()
                 else
                     RequestFriend(currentTargetDisplayName, nil, true)
                 end
-                local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(currentTargetDisplayName)
+                local displayNameLink 
+                if CA.SV.BracketOptionCharacter == 1 then
+                    displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(currentTargetDisplayName, nil, DISPLAY_NAME_LINK_TYPE, currentTargetDisplayName)
+                else
+                    displayNameLink = ZO_LinkHandler_CreateLink(currentTargetDisplayName, nil, DISPLAY_NAME_LINK_TYPE, currentTargetDisplayName)
+                end
                 printToChat(strformat(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_LINK, displayNameLink))
                 if CA.SV.FriendIgnoreAlert then
                     ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_LINK, currentTargetDisplayName))
@@ -8617,7 +8625,12 @@ local function CompleteGroupInvite(characterOrDisplayName, sentFromChat, display
 
         ZO_Menu_SetLastCommandWasFromMenu(not sentFromChat)
         if isMenu then
-            local link = ZO_LinkHandler_CreateCharacterLink(characterOrDisplayName)
+            local link
+            if CA.SV.BracketOptionCharacter == 1 then
+                link = ZO_LinkHandler_CreateLinkWithoutBrackets(characterOrDisplayName, nil, CHARACTER_LINK_TYPE, characterOrDisplayName)
+            else
+                link = ZO_LinkHandler_CreateLink(characterOrDisplayName, nil, CHARACTER_LINK_TYPE, characterOrDisplayName)
+            end
             printToChat(zo_strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MENU), link))
             if CA.SV.GroupAlert then
                 ZO_Alert(ALERT, nil, zo_strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MENU), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
@@ -8678,7 +8691,13 @@ end
 GUILD_ROSTER_MANAGER.OnGuildMemberAdded = function(self, guildId, displayName)
     self:RefreshData()
     
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+    local displayNameLink 
+    if CA.SV.BracketOptionCharacter == 1 then
+        displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+    else
+        displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+    end
+    
     local guildName = GetGuildName(guildId)
 
     local guilds = GetNumGuilds()
@@ -8708,7 +8727,13 @@ end
 -- Hook for EVENT_GUILD_MEMBER_REMOVED
 GUILD_ROSTER_MANAGER.OnGuildMemberRemoved = function(self, guildId, rawCharacterName, displayName)
 
-    local displayNameLink = ZO_LinkHandler_CreateDisplayNameLink(displayName)
+    local displayNameLink 
+    if CA.SV.BracketOptionCharacter == 1 then
+        displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+    else
+        displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+    end
+
     local guildName = GetGuildName(guildId)
 
     local guilds = GetNumGuilds()
@@ -8935,8 +8960,21 @@ function CA.OnGroupInviteReceived(eventCode, inviterName, inviterDisplayName)
     end
 end
 
+function CA.IndexGroupLoot()
+    local groupSize = GetGroupSize()
+    for i=1, groupSize do
+        local characterName = GetUnitName('group'..i)
+        local displayName = GetUnitDisplayName('group'..i)
+        g_groupLootIndex[characterName] = CA.ResolveNameLink(characterName, displayName)
+    end
+end
+
 -- EVENT_GROUP_MEMBER_JOINED
 function CA.OnGroupMemberJoined(eventCode, memberName)
+
+    -- Update index for Group Loot
+    CA.IndexGroupLoot()
+
     g_groupJoinFudger = false
     local g_partyStack = { }
     local joinedMemberName = ""
@@ -9198,7 +9236,7 @@ function CA.PrintQueuedMessages()
             elseif g_queuedMessages[i].type == "QUESTLOOT" then
                 CA.ResolveQuestItemChange()
             elseif g_queuedMessages[i].type == "LOOT" then
-                CA.ResolveItemMessage(g_queuedMessages[i].message, g_queuedMessages[i].formattedRecipient, g_queuedMessages[i].color, g_queuedMessages[i].logPrefix, g_queuedMessages[i].totalString)
+                CA.ResolveItemMessage(g_queuedMessages[i].message, g_queuedMessages[i].formattedRecipient, g_queuedMessages[i].color, g_queuedMessages[i].logPrefix, g_queuedMessages[i].totalString, g_queuedMessages[i].groupLoot )
             else
                 printToChat(g_queuedMessages[i].message)
             end
