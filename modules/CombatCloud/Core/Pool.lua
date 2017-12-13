@@ -40,17 +40,17 @@ function CombatCloud_Pool:CreateNewAnimation()
 
     if (self.poolType == poolTypes.ANIMATION_CLOUD) then
         anim:Alpha(nil, 0, 1, 50)
-        anim:Alpha(nil, 1, 0, 1000, 1000, slowFast)
+        anim:Alpha(nil, 1, 0, 500, 1500, slowFast)
 
     elseif (self.poolType == poolTypes.ANIMATION_CLOUD_CRITICAL) then
         anim:Alpha(nil, 0, 1, 50)
         anim:Scale(nil, 1.5, 1, 150, 0, slowFast)
-        anim:Alpha(nil, 1, 0, 1000, 1500, slowFast)
+        anim:Alpha(nil, 1, 0, 500, 1500, slowFast)
 
     elseif (self.poolType == poolTypes.ANIMATION_CLOUD_FIREWORKS) then
         anim:Alpha(nil, 0, 1, 50)
         anim:Move('move', 0, 0, 250, 0, fastSlow) -- x and y is set before the animation is played
-        anim:Alpha('fadeOut', 1, 0, 500, 2000, slowFast)
+        anim:Alpha('fadeOut', 1, 0, 500, 1500, slowFast)
 
     elseif (self.poolType == poolTypes.ANIMATION_SCROLL) then
         anim:Alpha(nil, 0, 1, 50)
@@ -85,25 +85,25 @@ function CombatCloud_Pool:CreateNewAnimation()
 
     elseif (self.poolType == poolTypes.ANIMATION_ELLIPSE_X) then
         anim:Alpha(nil, 0, 1, 50)
-        anim:Move('scrollX', 0, 0, 3500, 0, easeOutIn)
-        anim:Alpha('fadeOut', 1, 0, 500, 2500, slowFast)
+        anim:Move('scrollX', 0, 0, 2500, 0, easeOutIn)
+        anim:Alpha('fadeOut', 1, 0, 500, 1800, slowFast)
 
     elseif (self.poolType == poolTypes.ANIMATION_ELLIPSE_Y) then
         anim:Alpha(nil, 0, 1, 50)
-        anim:Move('scrollY', 0, 0, 3500) --for delay and easying function will be used defaults (0, ZO_LinearEase)  
-        anim:Alpha('fadeOut', 1, 0, 500, 2500, slowFast)
+        anim:Move('scrollY', 0, 0, 2500) --for delay and easying function will be used defaults (0, ZO_LinearEase)  
+        anim:Alpha('fadeOut', 1, 0, 500, 1800, slowFast)
 
     elseif (self.poolType == poolTypes.ANIMATION_ELLIPSE_X_CRIT) then
         anim:Alpha(nil, 0, 1, 50)
         anim:Scale(nil, 1.5, 1, 150, 0, slowFast)
-        anim:Move('scrollX', 0, 0, 3500, 0, easeOutIn)
-        anim:Alpha('fadeOut', 1, 0, 500, 2500, slowFast)
+        anim:Move('scrollX', 0, 0, 2500, 0, easeOutIn)
+        anim:Alpha('fadeOut', 1, 0, 500, 1800, slowFast)
 
     elseif (self.poolType == poolTypes.ANIMATION_ELLIPSE_Y_CRIT) then
         anim:Alpha(nil, 0, 1, 50)
         anim:Scale(nil, 1.5, 1, 150, 0, slowFast)
-        anim:Move('scrollY', 0, 0, 3500)
-        anim:Alpha('fadeOut', 1, 0, 500, 2500, slowFast)
+        anim:Move('scrollY', 0, 0, 2500)
+        anim:Alpha('fadeOut', 1, 0, 500, 1800, slowFast)
 
     end
 

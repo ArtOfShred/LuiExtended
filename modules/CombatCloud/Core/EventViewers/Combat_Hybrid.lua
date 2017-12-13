@@ -58,7 +58,8 @@ function CombatCloud_CombatHybridEventViewer:View(combatType, powerType, value, 
 	
     local textFormat, fontSize, textColor = self:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     if (hits > 1 and S.toggles.showThrottleTrailer) then value = format('%d (%d)', value, hits) end
-	
+	if (combatType == C.combatType.INCOMING) and (S.toggles.incomingDamageOverride) and (isDamage or isDamageCritical) then textColor = S.colors.incomingDamageOverride end
+    
     self:PrepareLabel(control.label, fontSize, textColor, self:FormatString(textFormat, { text = LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name or abilityName, value = value, powerType = powerType, damageType = damageType }))
     self:ControlLayout(control, abilityId, combatType, sourceName)
 
@@ -76,7 +77,7 @@ function CombatCloud_CombatHybridEventViewer:View(combatType, powerType, value, 
     end
 
     local w, h = panel:GetDimensions()
-    local radiusW, radiusH = w / 2, h / 2
+    local radiusW, radiusH = w / 4, h / 4
     local offsetX, offsetY = 0, 0
 	
     if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) then offsetX = random(-radiusW, radiusW)
@@ -89,7 +90,7 @@ function CombatCloud_CombatHybridEventViewer:View(combatType, powerType, value, 
 
         if (offsetY < 75 and self:IsOverlapping(control, self.activeControls[combatType])) then
             control:ClearAnchors()
-            offsetY = select(6, self.lastControl[combatType]:GetAnchor(0)) + fontSize
+            offsetY = select(6, self.lastControl[combatType]:GetAnchor(0)) + (fontSize * 1.5)
             control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
         end
     else
@@ -98,7 +99,7 @@ function CombatCloud_CombatHybridEventViewer:View(combatType, powerType, value, 
 
         if (offsetY > -75 and self:IsOverlapping(control, self.activeControls[combatType])) then
             control:ClearAnchors()
-            offsetY = select(6, self.lastControl[combatType]:GetAnchor(0)) - fontSize
+            offsetY = select(6, self.lastControl[combatType]:GetAnchor(0)) - (fontSize * 1.5)
             control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
         end
     end
@@ -112,7 +113,7 @@ function CombatCloud_CombatHybridEventViewer:View(combatType, powerType, value, 
 
     local animation, animationPoolKey = self.poolManager:GetPoolObject(animationPoolType)
 
-    local targetY = h + 50
+    local targetY = h + 250
     if (point == TOP) then targetY = -targetY end
     animation:GetStepByName('scroll'):SetDeltaOffsetY(targetY)
 

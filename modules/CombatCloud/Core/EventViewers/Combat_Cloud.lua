@@ -55,7 +55,7 @@ function CombatCloud_CombatCloudEventViewer:View(combatType, powerType, value, a
     local panel = CombatCloud_Outgoing
     if (combatType == C.combatType.INCOMING) then panel = CombatCloud_Incoming end
     local w, h = panel:GetDimensions()
-    local radiusW, radiusH = w/2, h/2
+    local radiusW, radiusH = w/2, h*2
     local offsetX, offsetY = nil, nil
 
     if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) then
@@ -79,6 +79,8 @@ function CombatCloud_CombatCloudEventViewer:View(combatType, powerType, value, a
     -- Label setup in the correct order that the game handles damage
     local textFormat, fontSize, textColor = self:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     if (hits > 1 and S.toggles.showThrottleTrailer) then value = format('%d (%d)', value, hits) end
+    if (combatType == C.combatType.INCOMING) and (S.toggles.incomingDamageOverride) and (isDamage or isDamageCritical) then textColor = S.colors.incomingDamageOverride end
+    
     self:PrepareLabel(control.label, fontSize, textColor, self:FormatString(textFormat, { text = LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name or abilityName, value = value, powerType = powerType, damageType = damageType }))
     self:ControlLayout(control, abilityId, combatType, sourceName)
 

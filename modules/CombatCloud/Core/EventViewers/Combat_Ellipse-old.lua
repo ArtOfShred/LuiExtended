@@ -10,8 +10,8 @@ function CombatCloud_CombatEllipseEventViewer:New(...)
     local obj = CombatCloud_EventViewer:New(...)
     obj:RegisterCallback(C.eventType.COMBAT, function(...) self:OnEvent(...) end)
     self.eventBuffer = {}
-    self.activeControls = { [C.combatType.OUTGOING] = {}, [C.combatType.INCOMING] = {} }
-    self.lastControl = {}
+    self.lastTime = { [C.combatType.OUTGOING] = 0, [C.combatType.INCOMING] = 0 }
+    self.timeToNext = { [C.combatType.OUTGOING] = 0, [C.combatType.INCOMING] = 0 }
     return obj
 end
 
@@ -35,6 +35,11 @@ function CombatCloud_CombatEllipseEventViewer:OnEvent(combatType, powerType, val
 			elseif (isHealingCritical) then throttleTime = T.healingcritical
             elseif (isHot) then throttleTime = T.hot
 			elseif (isHotCritical) then throttleTime = T.hotcritical end
+            local timeRemaining = self.lastTime[combatType] + self.timeToNext[combatType] - GetGameTimeMilliseconds()  
+            if timeRemaining > throttleTime then
+                throttleTime = timeRemaining
+            end
+            self.timeToNext[combatType] = self.timeToNext[combatType] - throttleTime
             callLater(function() self:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted) end, throttleTime)
         else
             self.eventBuffer[eventKey].value = self.eventBuffer[eventKey].value + value
@@ -58,11 +63,10 @@ function CombatCloud_CombatEllipseEventViewer:View(combatType, powerType, value,
 
     local textFormat, fontSize, textColor = self:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     if (hits > 1 and S.toggles.showThrottleTrailer) then value = format('%d (%d)', value, hits) end
-    if (combatType == C.combatType.INCOMING) and (S.toggles.incomingDamageOverride) and (isDamage or isDamageCritical) then textColor = S.colors.incomingDamageOverride end
+
     self:PrepareLabel(control.label, fontSize, textColor, self:FormatString(textFormat, { text = abilityName, value = value, powerType = powerType, damageType = damageType }))
     self:ControlLayout(control, abilityId, combatType, sourceName)
 
-    -- Control setup
     local panel, point, relativePoint = CombatCloud_Outgoing, BOTTOMRIGHT, TOPRIGHT
     if (combatType == C.combatType.INCOMING) then
         panel = CombatCloud_Incoming
@@ -106,31 +110,7 @@ function CombatCloud_CombatEllipseEventViewer:View(combatType, powerType, value,
 
     local w, h = panel:GetDimensions()
     control:SetAnchor(point, panel, relativePoint, offsetX * w, offsetY * h)
-    
-    if (point == TOPRIGHT) then
-        if (self.lastControl[combatType] == nil) then offsetY = -25 else offsetY = max(-25, select(6, self.lastControl[combatType]:GetAnchor(0))) end
-        control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
 
-        if (offsetY < 75 and self:IsOverlapping(control, self.activeControls[combatType])) then
-            control:ClearAnchors()
-            offsetY = select(6, self.lastControl[combatType]:GetAnchor(0)) + (fontSize * 1.5)
-            control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
-        end
-    else
-        if (self.lastControl[combatType] == nil) then offsetY = 25 else offsetY = min(25, select(6, self.lastControl[combatType]:GetAnchor(0))) end
-        control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
-
-        if (offsetY > -75 and self:IsOverlapping(control, self.activeControls[combatType])) then
-            control:ClearAnchors()
-            offsetY = select(6, self.lastControl[combatType]:GetAnchor(0)) - (fontSize * 1.5)
-            control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
-        end
-    end
-    
-    self.activeControls[combatType][control:GetName()] = control
-    self.lastControl[combatType] = control
-
-    -- Animation Setup
     local animationXPoolType, animationYPoolType
     if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) then
         animationXPoolType = poolTypes.ANIMATION_ELLIPSE_X_CRIT
@@ -141,23 +121,25 @@ function CombatCloud_CombatEllipseEventViewer:View(combatType, powerType, value,
     end
 
     local animationX, animationXPoolKey = self.poolManager:GetPoolObject(animationXPoolType)
-    animationX:GetStepByName('scrollX'):SetDeltaOffsetX(targetX * (w * .35) )
+    animationX:GetStepByName('scrollX'):SetDeltaOffsetX(targetX * w)
     animationX:Apply(control.icon)
     animationX:Play()
 
     local animationY, animationYPoolKey = self.poolManager:GetPoolObject(animationYPoolType)
-    local verticalOffset = (targetY * h + 500)
-    if (point == TOPRIGHT) then verticalOffset = -verticalOffset end
-    animationY:GetStepByName('scrollY'):SetDeltaOffsetY(verticalOffset)
+    animationY:GetStepByName('scrollY'):SetDeltaOffsetY(targetY * h)
     animationY:Apply(control)
     animationY:Play()
+
+    --info for throttling, critical damage and heals are excluded
+    if (S.toggles.throttleCriticals) or (not (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical)) then
+        self.lastTime[combatType] = GetGameTimeMilliseconds()
+        self.timeToNext[combatType] = self.timeToNext[combatType] + (animationY:GetDuration() * (fontSize + 4) / h) 
+    end 
     
     -- Add items back into pool after use
     callLater(function()
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationXPoolType, animationXPoolKey)
         self.poolManager:ReleasePoolObject(animationYPoolType, animationYPoolKey)
-        self.activeControls[combatType][control:GetName()] = nil
-        if (self.lastControl[combatType] == control) then self.lastControl[combatType] = nil end
     end, animationY:GetDuration())
 end
