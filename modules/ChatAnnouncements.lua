@@ -500,8 +500,8 @@ local g_mailCOD                     = 0             -- Tracks COD amount
 local g_postageAmount               = 0             -- Tracks Postage amount
 local g_mailCODPresent              = false         -- Tracks whether the currently opened mail has a COD value present. On receiving items from the mail this will modify the message displayed.
 local g_inMail                      = false         -- Toggled on when looting mail to prevent notable item display from hiding items acquired.
-local g_mailTarget                  = ""            -- Target of mail being sent
-local g_mailStacksOut               = { }           -- Table for storing items to be mailed out 
+local g_mailTarget                  = ""            -- Target of mail being sent.
+local g_mailStacksOut               = { }           -- Table for storing items to be mailed out.
 
 -- Disguise
 local g_currentDisguise             = nil           -- Holds current disguise itemId
@@ -544,6 +544,8 @@ local g_questIndex                  = { }           -- Index of all current ques
 
 -- Trade
 local g_tradeTarget                 = ""            -- Saves name of target player being traded with.
+local g_tradeStacksIn               = { }           -- Table for storing items to be traded in.
+local g_tradeStacksOut              = { }           -- Table for storing items to be traded out.
 
 ------------------------------------------------
 -- COLORIZE VALUES -----------------------------
@@ -961,6 +963,9 @@ function CA.RegisterLootEvents()
     -- CRAFT
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CRAFTING_STATION_INTERACT, CA.CraftingOpen)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_END_CRAFTING_STATION_INTERACT, CA.CraftingClose)
+    -- TRADE
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED)
     -- JUSTICE/DESTROY
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED)
@@ -1007,6 +1012,10 @@ function CA.RegisterLootEvents()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_BANK, CA.BankClose)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_GUILD_BANK, CA.GuildBankOpen)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_GUILD_BANK, CA.GuildBankClose)
+    end
+    if CA.SV.LootTrade then
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED, CA.OnTradeAdded)
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED, CA.OnTradeRemoved)
     end
     -- TRADE
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED, CA.TradeInviteAccepted)
@@ -2522,7 +2531,7 @@ function CA.OnMailAttach(eventCode, attachmentSlot)
     local bagId, slotId, icon, stack = GetQueuedItemAttachmentInfo(attachmentSlot)
     local itemId = GetItemId(bagId, slotId)
     local itemLink = GetMailQueuedAttachmentLink(attachmentSlot, LINK_STYLE_DEFAULT)
-    local itemType = GetItemLinkItemType(mailitemlink)
+    local itemType = GetItemLinkItemType(itemLink)
     g_mailStacksOut[mailIndex] = {icon = icon, stack = stack, itemId = itemId, itemLink = itemLink, itemType = itemType}
 end
 
@@ -3675,18 +3684,13 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             gainOrLoss = CA.SV.CurrencyContextColor and 1 or 3
-            if g_inTrade then 
-                logPrefix = CA.SV.LootMessageTradeIn
-            elseif g_inMail then
+            if g_inMail then
                 logPrefix = CA.SV.LootMessageMailIn
             else
                 logPrefix = ""
             end
             if not g_weAreInAStore and CA.SV.Loot and isNewItem and not g_inTrade and not g_inMail then
                 CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
-            end
-            if g_inTrade and isNewItem then
-                CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
             end
             if g_inMail and isNewItem then
                 CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
@@ -3713,18 +3717,13 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             -- STACK COUNT INCREMENTED UP
             if stackCountChange > 0 then
                 gainOrLoss = CA.SV.CurrencyContextColor and 1 or 3
-                if g_inTrade then 
-                    logPrefix = CA.SV.LootMessageTradeIn
-                elseif g_inMail then
+                if g_inMail then
                     logPrefix = CA.SV.LootMessageMailIn
                 else
                     logPrefix = ""
                 end
                 if not g_weAreInAStore and CA.SV.Loot and isNewItem and not g_inTrade and not g_inMail then
                     CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
-                end
-                if g_inTrade and isNewItem then
-                    CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
                 end
                 if g_inMail and isNewItem then
                     CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
@@ -3742,11 +3741,6 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                     gainOrLoss = CA.SV.CurrencyContextColor and 2 or 4
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
-                if g_inTrade and not g_itemWasDestroyed then
-                    gainOrLoss = CA.SV.CurrencyContextColor and 2 or 4
-                    logPrefix = CA.SV.LootMessageTradeOut
-                    CA.ItemPrinter(icon, change, itemType, itemId, itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
-                end
             end
             
             if removed then
@@ -3762,9 +3756,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
     if bagId == BAG_VIRTUAL then
         local gainOrLoss = CA.SV.CurrencyContextColor and 1 or 3
         local logPrefix
-        if g_inTrade then 
-            logPrefix = CA.SV.LootMessageTradeIn
-        elseif g_inMail then
+        if g_inMail then
             logPrefix = CA.SV.LootMessageMailIn
         else
             logPrefix = ""
@@ -3777,9 +3769,6 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
         
         if not g_weAreInAStore and CA.SV.Loot and isNewItem and not g_inTrade and not g_inMail then
             CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
-        end
-        if g_inTrade and isNewItem then
-            CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
         end
         if g_inMail and isNewItem then
             CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
@@ -5937,6 +5926,8 @@ function CA.HookFunction()
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         g_tradeTarget = ""
+        g_tradeStacksIn = {}
+        g_tradeStacksOut = {}
         return true
     end
 
@@ -5950,6 +5941,8 @@ function CA.HookFunction()
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         g_tradeTarget = ""
+        g_tradeStacksIn = {}
+        g_tradeStacksOut = {}
         return true
     end
 
@@ -5972,6 +5965,8 @@ function CA.HookFunction()
         end
         
         g_tradeTarget = ""
+        g_tradeStacksIn = {}
+        g_tradeStacksOut = {}
         g_inTrade = false
         return true
     end
@@ -6000,7 +5995,27 @@ function CA.HookFunction()
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         
+        if CA.SV.LootTrade then
+            for indexOut = 1,5 do
+                if g_tradeStacksOut[indexOut] ~= nil then
+                    local gainOrLoss = CA.SV.CurrencyContextColor and 2 or 4
+                    local logPrefix = CA.SV.LootMessageTradeOut
+                    local item = g_tradeStacksOut[indexOut]
+                    CA.ItemPrinter(item.icon, item.stack, item.itemType, item.itemId, item.itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
+                end
+            end
+            
+            for indexIn = 1,5 do
+                if g_tradeStacksIn[indexIn] ~= nil then
+                    local gainOrLoss = CA.SV.CurrencyContextColor and 1 or 3
+                    local logPrefix = CA.SV.LootMessageTradeIn
+                    local item = g_tradeStacksIn[indexIn]
+                    CA.ItemPrinter(item.icon, item.stack, item.itemType, item.itemId, item.itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
+                end
+            end
+        end
         
+
         EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
         if CA.SV.Loot or CA.SV.LootShowDisguise then
             EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
@@ -6008,8 +6023,10 @@ function CA.HookFunction()
         if not (CA.SV.Loot or CA.SV.LootShowDisguise) then
             g_inventoryStacks = {}
         end
-        
+
         g_tradeTarget = ""
+        g_tradeStacksIn = {}
+        g_tradeStacksOut = { }
         g_inTrade = false
         return true
     end
@@ -8896,6 +8913,38 @@ function CA.TradeInviteAccepted(eventCode)
     end
     g_inTrade = true
     
+end
+
+-- Adds items to index if they are added in a trade
+function CA.OnTradeAdded(eventCode, who, tradeIndex, itemSoundCategory)
+
+    local index = tradeIndex
+    local name, icon, stack = GetTradeItemInfo(who, tradeIndex)
+    local bagId, slotId = GetTradeItemBagAndSlot(who, tradeIndex)
+    local itemId = GetItemId(bagId, slotId)
+    local itemLink = GetTradeItemLink(who, tradeIndex, LINK_STYLE_DEFAULT)
+    local itemType = GetItemLinkItemType(itemLink)
+    
+    d(itemId)
+    d(itemLink)
+    d(itemType)
+
+    if who == 0 then
+        g_tradeStacksOut[index] = {icon = icon, stack = stack, itemId = itemId, itemLink = itemLink, itemType = itemType}
+    else
+        g_tradeStacksIn[index] = {icon = icon, stack = stack, itemId = itemId, itemLink = itemLink, itemType = itemType}
+    end
+end
+
+-- Removes items from index if they are removed from the trade
+function CA.OnTradeRemoved(eventCode, who, tradeIndex, itemSoundCategory)
+
+    local indexOut = tradeIndex
+    if who == 0 then
+        g_tradeStacksOut[indexOut] = nil
+    else
+        g_tradeStacksIn[indexOut] = nil
+    end
 end
 
 -- Called on player joining a group to determine if message syntax should show group or LFG group.

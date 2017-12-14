@@ -5953,7 +5953,7 @@ function LUIE_CreateSettings()
                         default = LUIE.ChatAnnouncements.D.NotificationLockpickCA,
                     },
                     {
-                        -- Show Lockpick Events Akert
+                        -- Show Lockpick Events Alert
                         type = "checkbox",
                         name = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
                         tooltip = strformat(GetString(SI_LUIE_LAM_CA_MISC_SHOWLOCKPICK_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
