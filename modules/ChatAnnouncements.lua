@@ -1135,7 +1135,7 @@ function CA.GuildHeraldrySaved()
 
         if CA.SV.GuildManageCA then
             local finalMessage = strformat(GetString(SI_LUIE_CA_GUILD_HERALDRY_UPDATE), guildNameAlliance)
-            g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "SYSTEM" }
+            g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
@@ -1156,7 +1156,7 @@ function CA.GuildRanksSaved(eventCode, guildId)
 
     if CA.SV.GuildManageCA then
         local finalMessage = strformat(GetString(SI_LUIE_CA_GUILD_RANKS_UPDATE), guildNameAlliance)
-        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "SYSTEM" }
+        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION" }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
     end
@@ -1211,7 +1211,7 @@ function CA.GuildTextChanged(eventCode, guildId)
     if messageString ~= nil then
         if CA.SV.GuildManageCA then
             local finalMessage = strformat(GetString(messageString), guildNameAlliance)
-            g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "SYSTEM" }
+            g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
@@ -2230,7 +2230,8 @@ function CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTyp
         printToChat(finalMessage)
     -- Otherwise sent to our Print Queued Messages function to be processed on a 50 ms delay.
     else
-        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "CURRENCY" }
+        local resolveType = type == "LUIE_CURRENCY_POSTAGE" and "CURRENCY POSTAGE" or "CURRENCY"
+        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = resolveType }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
     end
@@ -2300,7 +2301,11 @@ end
 
 function CA.MiscAlertLockSuccess(eventCode)
     if CA.SV.NotificationLockpickCA then
-        printToChat(GetString(SI_LUIE_CA_LOCKPICK_SUCCESS))
+        local message = GetString(SI_LUIE_CA_LOCKPICK_SUCCESS)
+        g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "NOTIFICATION" }
+        g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        
     end
     if CA.SV.NotificationLockpickAlert then
         ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_LOCKPICK_SUCCESS))
@@ -2313,7 +2318,7 @@ function CA.StorageBag(eventCode, previousCapacity, currentCapacity, previousUpg
     if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
         if CA.SV.StorageBagCA then
             local formattedString = StorageBagColorize:Colorize(zo_strformat(SI_INVENTORY_BAG_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "STORAGE" }
+            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
@@ -2329,7 +2334,7 @@ function CA.StorageBank(eventCode, previousCapacity, currentCapacity, previousUp
     if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
         if CA.SV.StorageBagCA then
             local formattedString = StorageBagColorize:Colorize(zo_strformat(SI_INVENTORY_BANK_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "STORAGE" }
+            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
@@ -2470,7 +2475,10 @@ end
 function CA.MailRemoved(eventCode)
     if CA.SV.NotificationMailCA or CA.SV.NotificationMailAlert then
         if CA.SV.NotificationMailCA then
-            printToChat(GetString(SI_LUIE_CA_MAIL_DELETED_MSG))
+            local message = GetString(SI_LUIE_CA_MAIL_DELETED_MSG)
+            g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "NOTIFICATION" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
         if CA.SV.NotificationMailAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_MAIL_DELETED_MSG))
@@ -2514,7 +2522,9 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
             mailString = GetString(SI_LUIE_CA_MAIL_RECEIVED)
         end
         if CA.SV.NotificationMailCA then
-            printToChat(mailString)
+            g_queuedMessages[g_queuedMessagesCounter] = { message = mailString, type = "NOTIFICATION" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
         if CA.SV.NotificationMailAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, mailString)
@@ -2625,7 +2635,9 @@ function CA.OnMailSuccess(eventCode)
             mailString = GetString(SI_LUIE_CA_MAIL_SENT)
         end
         if CA.SV.NotificationMailCA then
-            printToChat(mailString)
+            g_queuedMessages[g_queuedMessagesCounter] = { message = mailString, type = "NOTIFICATION" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
         if CA.SV.NotificationMailAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, mailString)
@@ -2707,11 +2719,6 @@ end
 -- Helper function to return color (without |c prefix) according to current percentage
 local function AchievementPctToColour(pct)
     return pct == 1 and "71DE73" or pct < 0.33 and "F27C7C" or pct < 0.66 and "EDE858" or "CCF048"
-end
-
--- Printer function for achievement CA
-function CA.PrintAchievementDetails(stringpart1, stringpart2, stringpart3, stringpart4)
-    printToChat( strfmt("%s%s%s%s", stringpart1, stringpart2, stringpart3, stringpart4))
 end
 
 function CA.OnAchievementUpdated(eventCode, id)
@@ -2819,7 +2826,11 @@ function CA.OnAchievementUpdated(eventCode, id)
                     stringpart4 = " " .. table.concat(cmpInfo, AchievementColorize2:Colorize(", ")) .. ""
                 end
             end
-            zo_callLater(function() CA.PrintAchievementDetails(stringpart1, stringpart2, stringpart3, stringpart4) end, 100)
+            local finalString = strfmt("%s%s%s%s", stringpart1, stringpart2, stringpart3, stringpart4)
+            g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "ACHIEVEMENT" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            
         end
         
         if CA.SV.AchievementUpdateAlert then
@@ -4664,7 +4675,9 @@ function CA.JusticeDisplayConfiscate()
         end
         
         if CA.SV.NotificationConfiscateCA then
-            printToChat(ConfiscateMessage)
+            g_queuedMessages[g_queuedMessagesCounter] = { message = ConfiscateMessage, type = "NOTIFICATION" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         else
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, ConfiscateMessage)
         end
@@ -5070,7 +5083,7 @@ function CA.HookFunction()
                 CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
                 
                 local formattedString = StorageRidingColorize:Colorize(zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
-                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "STORAGE" }
+                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
@@ -5147,7 +5160,7 @@ function CA.HookFunction()
                     end
                 
                     local finalMessage = strformat("<<1>><<2>><<3>><<4>>", stringPart1, formattedIcon, bookLink, stringPart2)
-                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "LOREBOOK" }
+                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                     EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
@@ -5833,7 +5846,10 @@ function CA.HookFunction()
     
     local function LockpickFailedAlert(result)
         if CA.SV.NotificationLockpickCA then
-            printToChat(GetString(SI_LUIE_CA_LOCKPICK_FAILED))
+            local message = GetString(SI_LUIE_CA_LOCKPICK_FAILED)
+            g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "NOTIFICATION" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
         if CA.SV.NotificationLockpickAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_LOCKPICK_FAILED))
@@ -5988,7 +6004,10 @@ function CA.HookFunction()
     -- EVENT_TRADE_SUCCEEDED
     local function TradeSucceededAlert()
         if CA.SV.NotificationTradeCA then
-            printToChat(GetString(SI_TRADE_COMPLETE))
+            local message = GetString(SI_TRADE_COMPLETE)
+            g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "NOTIFICATION" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
         if CA.SV.NotificationTradeAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_TRADE_COMPLETE))
@@ -6159,7 +6178,7 @@ function CA.HookFunction()
                 end
             
                 local finalMessage = strformat("<<1>><<2>><<3>><<4>>", stringPart1, formattedIcon, bookLink, stringPart2)
-                g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "LOREBOOK" }
+                g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
@@ -6222,7 +6241,7 @@ function CA.HookFunction()
                     end
                     
                     local finalMessage = strformat("<<1>><<2>><<3>>", stringPart1, formattedIcon, stringPart2)
-                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "LOREBOOK" }
+                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                     EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
@@ -6274,7 +6293,7 @@ function CA.HookFunction()
                     end
                     
                     local finalMessage = strformat("<<1>><<2>><<3>>", stringPart1, formattedIcon, stringPart2)
-                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "LOREBOOK" }
+                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                     EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
@@ -6392,7 +6411,7 @@ function CA.HookFunction()
         if CA.SV.SkillLineUnlockCA then
             local formattedIcon = CA.SV.SkillLineIcon and zo_strformat("<<1>> ", zo_iconFormatInheritColor(icon, 16, 16)) or ""
             local formattedString = SkillLineColorize:Colorize(zo_strformat(SI_LUIE_CA_SKILL_LINE_ADDED, formattedIcon, lineName))
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL" }
+            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL GAIN" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             
@@ -6402,7 +6421,7 @@ function CA.HookFunction()
         if CA.SV.SkillLineUnlockCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.SKILL_LINE_ADDED)
             local formattedIcon = zo_iconFormat(icon, 32, 32)
-            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_LINE_ADDED)
+            messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_PARTIAL_GAINED)
             messageParams:SetText(zo_strformat(SI_SKILL_LINE_ADDED, formattedIcon, lineName))
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
@@ -6559,7 +6578,10 @@ function CA.HookFunction()
                 else
                     string2 = link
                 end
-                printToChat(strformat("<<1>><<2>><<3>>", string1, formattedIcon, string2))
+                finalString = strformat("<<1>><<2>><<3>>", string1, formattedIcon, string2)
+                g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
+                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
             
             if CA.SV.CollectibleCSA then
@@ -6593,7 +6615,10 @@ function CA.HookFunction()
                     string1 = ""
                 end
                 local string2 = CollectibleColorize2:Colorize(strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked) .. ".")
-                printToChat(strformat("<<1>><<2>>", string1, string2))
+                finalString = strformat("<<1>><<2>>", string1, string2)
+                g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
+                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
         
             if CA.SV.CollectibleCSA then
@@ -7172,7 +7197,7 @@ function CA.HookFunction()
                 else
                     formattedString = strformat("<<1>><<2>> <<3>><<4>>", ExperienceLevelUpColorize:Colorize(GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP)), icon, CurrentLevelFormatted, ExperienceLevelUpColorize:Colorize("!"))
                 end
-                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
+                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
@@ -7332,13 +7357,13 @@ function CA.HookFunction()
                     local finalMessage = strfmt(StorageRidingBookColorize:Colorize(learnString), messageP1) .. ZO_SELECTED_TEXT:Colorize(" x" .. value)
                 
                     
-                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "STORAGE" }
+                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "MESSAGE" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                     EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 -----
             
                 local formattedString = StorageRidingColorize:Colorize(zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
-                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "STORAGE" }
+                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
@@ -7385,7 +7410,7 @@ function CA.HookFunction()
         if CA.SV.ExperienceLevelUpCA then
             local formattedIcon = CA.SV.ExperienceLevelUpIcon and zo_strformat("<<1>> ", zo_iconFormatInheritColor(icon, 16, 16)) or ""
             local formattedString = ExperienceLevelUpColorize:Colorize(zo_strformat("<<1>>!", GetString(SI_CHAMPION_ANNOUNCEMENT_UNLOCKED), formattedIcon))
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
+            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
@@ -7446,7 +7471,7 @@ function CA.HookFunction()
         
         if CA.SV.ExperienceLevelUpCA then
             local formattedString = ExperienceLevelUpColorize:Colorize(zo_strformat(SI_CHAMPION_POINT_EARNED, pointDelta) .. ": ")
-            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
+            g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
@@ -7464,7 +7489,7 @@ function CA.HookFunction()
                         formattedString = ExperienceLevelUpColorize:Colorize(strformat(SI_LUIE_CHAMPION_POINT_TYPE, amount, formattedIcon, constellationGroupName))
                     end
                     if CA.SV.ExperienceLevelUpCA then
-                        g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
+                        g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
                         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                         EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                     end
@@ -8087,10 +8112,12 @@ function CA.HookFunction()
             else
                 stringpart3 = ""
             end
-            local stringpart4 = ""
+
+            local finalString = strfmt("%s%s%s", stringpart1, stringpart2, stringpart3)
+            g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "ACHIEVEMENT" }
+            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             
-            -- TODO: Replace with Chat Printer function!!!
-            zo_callLater(function() CA.PrintAchievementDetails(stringpart1, stringpart2, stringpart3, stringpart4) end, 100)
         end
         
         -- Display Alert
@@ -9278,6 +9305,13 @@ end
 function CA.PrintQueuedMessages()
     -- TODO: Replace with table.sort function to print. Although POSSIBLY print a few sets and remove them first in order to preserve order.
 
+    -- Resolve notification messages first
+    for i=1, #g_queuedMessages do
+        if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type == "NOTIFICATION" then
+            printToChat(g_queuedMessages[i].message)
+        end
+    end
+    
     -- Resolve achievement update messages first
     for i=1, #g_queuedMessages do
         if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type == "ACHIEVEMENT" then
@@ -9298,19 +9332,67 @@ function CA.PrintQueuedMessages()
             printToChat(g_queuedMessages[i].message)
         end
     end
+    
+    -- Level Up Notifications
+    for i=1, #g_queuedMessages do
+        if g_queuedMessages[i].type == "EXPERIENCE LEVEL" then
+            printToChat(g_queuedMessages[i].message)
+        end
+    end
+    
+    -- Skill Gain
+    for i=1, #g_queuedMessages do
+        if g_queuedMessages[i].type == "SKILL GAIN" then
+            printToChat(g_queuedMessages[i].message)
+        end
+    end
+    
+    -- Skill
+    for i=1, #g_queuedMessages do
+        if g_queuedMessages[i].type == "SKILL" then
+            printToChat(g_queuedMessages[i].message)
+        end
+    end
 
+    -- Postage
+    for i=1, #g_queuedMessages do
+        if g_queuedMessages[i].type == "CURRENCY POSTAGE" then
+            printToChat(g_queuedMessages[i].message)
+        end
+    end
+    
+    -- Currency
+    for i=1, #g_queuedMessages do
+        if g_queuedMessages[i].type == "CURRENCY" then
+            printToChat(g_queuedMessages[i].message)
+        end
+    end
+    
+    -- Quest Items
+    for i=1, #g_queuedMessages do
+        if g_queuedMessages[i].type == "QUESTLOOT" then
+            CA.ResolveQuestItemChange()
+        end
+    end
+    
+    -- Loot
+    for i=1, #g_queuedMessages do
+        if g_queuedMessages[i].type == "LOOT" then
+            CA.ResolveItemMessage(g_queuedMessages[i].message, g_queuedMessages[i].formattedRecipient, g_queuedMessages[i].color, g_queuedMessages[i].logPrefix, g_queuedMessages[i].totalString, g_queuedMessages[i].groupLoot )
+        end
+    end
+    
+    -- Collectible
+    for i=1, #g_queuedMessages do
+        if g_queuedMessages[i].type == "COLLECTIBLE" then
+            printToChat(g_queuedMessages[i].message)
+        end
+    end
+    
     -- Display the rest
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type ~= "QUEST" and g_queuedMessages[i].type ~= "EXPERIENCE" and g_queuedMessages[i].type ~= "ACHIEVEMENT" and g_queuedMessages[i].type ~= "QUEST_POI" then
-            if g_queuedMessages[i].type == "CURRENCY" then
-                printToChat(g_queuedMessages[i].message)
-            elseif g_queuedMessages[i].type == "QUESTLOOT" then
-                CA.ResolveQuestItemChange()
-            elseif g_queuedMessages[i].type == "LOOT" then
-                CA.ResolveItemMessage(g_queuedMessages[i].message, g_queuedMessages[i].formattedRecipient, g_queuedMessages[i].color, g_queuedMessages[i].logPrefix, g_queuedMessages[i].totalString, g_queuedMessages[i].groupLoot )
-            else
-                printToChat(g_queuedMessages[i].message)
-            end
+        if g_queuedMessages[i].type == "MESSAGE" then
+            printToChat(g_queuedMessages[i].message)
         end
     end
     
