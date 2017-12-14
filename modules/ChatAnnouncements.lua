@@ -3250,7 +3250,7 @@ function CA.ItemFilter(itemType, itemId, itemLink)
     end
     
     local itemIsKeyFragment = (itemType == ITEMTYPE_TROPHY) and (specializedItemType == SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT)
-    local itemIsSpecial = (itemType == ITEMTYPE_TROPHY and not itemIsKeyFragment) or (itemType == ITEMTYPE_COLLECTIBLE) or IsItemLinkConsumable(item)
+    local itemIsSpecial = (itemType == ITEMTYPE_TROPHY and not itemIsKeyFragment) or (itemType == ITEMTYPE_COLLECTIBLE) or IsItemLinkConsumable(itemLink)
     
     if CA.SV.LootOnlyNotable then
         -- Notable items are: any set items, any purple+ items, blue+ special items (e.g., treasure maps)
