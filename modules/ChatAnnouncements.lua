@@ -4121,7 +4121,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                 gainOrLoss = CA.SV.CurrencyContextColor and 1 or 3
                 logPrefix = CA.SV.LootMessageWithdraw
                 if InventoryOn then
-                    CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
+                    CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
                 end
             -- STACK COUNT INCREMENTED DOWN
             elseif stackCountChange < 0 then
@@ -4347,7 +4347,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             stack = stackCountChange
         end
         
-        CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
+        CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
     end
     
     g_itemWasDestroyed = false
