@@ -3021,8 +3021,13 @@ end
 
 -- Helper function for Craft Bag
 function CA.GetItemLinkFromItemId(itemId)
+
     local name = GetItemLinkName(ZO_LinkHandler_CreateLink("Test Trash", nil, ITEM_LINK_TYPE,itemId, 1, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 10000, 0))
-    return ZO_LinkHandler_CreateLink(strformat("<<t:1>>", name), nil, ITEM_LINK_TYPE,itemId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    if CA.SV.BracketOptionItem == 1 then
+        return ZO_LinkHandler_CreateLinkWithoutBrackets(strformat("<<t:1>>", name), nil, ITEM_LINK_TYPE,itemId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    else
+        return ZO_LinkHandler_CreateLink(strformat("<<t:1>>", name), nil, ITEM_LINK_TYPE,itemId, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    end
 end
 
 local questItemIndex = { }
@@ -6444,7 +6449,7 @@ function CA.HookFunction()
         if atMorph then
             if CA.SV.SkillAbilityCA then
                 formattedString = SkillLineColorize:Colorize(zo_strformat(SI_MORPH_AVAILABLE_ANNOUNCEMENT, name) .. ".")
-                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL" }
+                g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL MORPH" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
@@ -6501,7 +6506,7 @@ function CA.HookFunction()
                 
                 if CA.SV.SkillLineCA then
                     local formattedString = SkillLineColorize:Colorize(zo_strformat(SI_SKILL_RANK_UP, lineName, rank) .. ".")
-                    g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL" }
+                    g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL LINE" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                     EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
@@ -9343,6 +9348,20 @@ function CA.PrintQueuedMessages()
     -- Skill Gain
     for i=1, #g_queuedMessages do
         if g_queuedMessages[i].type == "SKILL GAIN" then
+            printToChat(g_queuedMessages[i].message)
+        end
+    end
+    
+    -- Skill Morph
+    for i=1, #g_queuedMessages do
+        if g_queuedMessages[i].type == "SKILL MORPH" then
+            printToChat(g_queuedMessages[i].message)
+        end
+    end
+    
+    -- Skill Line
+    for i=1, #g_queuedMessages do
+        if g_queuedMessages[i].type == "SKILL LINE" then
             printToChat(g_queuedMessages[i].message)
         end
     end

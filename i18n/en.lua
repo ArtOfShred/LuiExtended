@@ -355,7 +355,7 @@ ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALWV",                "Total V
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_TOTAL",                      "New Total:")
 
 ZO_CreateStringId("SI_LUIE_CA_SKILL_LINE_ADDED",                        "Skill line gained: <<1>><<2>>")
-ZO_CreateStringId("SI_LUIE_CA_ABILITY_RANK_UP",                         "<<1>> Increased to Rank <<R:2>>")
+ZO_CreateStringId("SI_LUIE_CA_ABILITY_RANK_UP",                         "<<1>> increased to Rank <<R:2>>")
 
 ZO_CreateStringId("SI_LUIE_CA_SKILL_GUILD_MSG",                         "You earn %s.")
 ZO_CreateStringId("SI_LUIE_CA_SKILL_GUILD_REPUTATION",                  "<<1[reputation/reputation]>>")
