@@ -754,6 +754,8 @@ function CA.Initialize(enabled)
     -- TODO: also move this
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_SKILL_XP_UPDATE, CA.SkillXPUpdate)
     
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, CA.OnPlayerActivated)
+    
     CA.RegisterGuildEvents()
     CA.RegisterSocialEvents()
     CA.RegisterDisguiseEvents()
@@ -1029,9 +1031,7 @@ end
 
 function CA.RegisterDisguiseEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED)
     if CA.SV.Disguise then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, CA.OnPlayerActivated)
         EVENT_MANAGER:RegisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, CA.DisguiseState )
         EVENT_MANAGER:AddFilterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
         g_currentDisguise = GetItemId(0, 10) or 0 -- Get the currently equipped disguise itemId if any
@@ -1087,9 +1087,9 @@ function CA.ResolveNameNoLink(characterName, displayName)
     
     local nameLink
     if CA.SV.ChatPlayerDisplayOptions == 1 then
-        nameLink = characterName
-    elseif CA.SV.ChatPlayerDisplayOptions == 2 then
         nameLink = displayName
+    elseif CA.SV.ChatPlayerDisplayOptions == 2 then
+        nameLink = characterName
     elseif CA.SV.ChatPlayerDisplayOptions == 3 then
         nameLink = strformat("<<1>><<2>>", characterName, displayName)
     end
@@ -3219,13 +3219,13 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
 
         local itemType = GetItemLinkItemType(itemLink)
         -- Check filter and if this item isn't included bail out now
-        if not CA.ItemFilter(itemType, itemId, itemLink) then return end
+        if not CA.ItemFilter(itemType, itemId, itemLink, true) then return end
         
         local icon = GetItemLinkIcon(itemLink)
         local gainOrLoss = CA.SV.CurrencyContextColor and 1 or 3
         local logPrefix = CA.SV.LootMessageGroup
         
-        local recipient = ZO_SELECTED_TEXT:Colorize(g_groupLootIndex[zo_strformat(SI_UNIT_NAME,receivedBy)])
+        local recipient = ZO_SELECTED_TEXT:Colorize(g_groupLootIndex[zo_strformat(SI_UNIT_NAME, receivedBy)])
         
         CA.ItemPrinter(icon, quantity, itemType, itemId, itemLink, recipient, logPrefix, gainOrLoss, false, true)
         
@@ -3234,7 +3234,7 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
 end
 
 -- If filter is true, we run the item through this function to determine if we should display it. Filter only gets set to true for group loot and relevant loot functions. Mail, trade, stores, etc don't apply the filter.
-function CA.ItemFilter(itemType, itemId, itemLink)
+function CA.ItemFilter(itemType, itemId, itemLink, groupLoot)
 
     if ( CA.SV.LootBlacklist and g_blacklistIDs[itemId] ) then
         return false
@@ -3242,7 +3242,7 @@ function CA.ItemFilter(itemType, itemId, itemLink)
     
     local _, specializedItemType = GetItemLinkItemType(itemLink)
     local itemQuality = GetItemLinkQuality(itemLink)
-    local itemIsSet = GetItemLinkSetInfo(itemId)
+    local itemIsSet = GetItemLinkSetInfo(itemLink)
     
     -- TODO: Not sure if still needed
     if (itemId == 69059) then
@@ -3252,7 +3252,7 @@ function CA.ItemFilter(itemType, itemId, itemLink)
     local itemIsKeyFragment = (itemType == ITEMTYPE_TROPHY) and (specializedItemType == SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT)
     local itemIsSpecial = (itemType == ITEMTYPE_TROPHY and not itemIsKeyFragment) or (itemType == ITEMTYPE_COLLECTIBLE) or IsItemLinkConsumable(itemLink)
     
-    if CA.SV.LootOnlyNotable then
+    if CA.SV.LootOnlyNotable or groupLoot then
         -- Notable items are: any set items, any purple+ items, blue+ special items (e.g., treasure maps)
         if ( (itemIsSet) or
              (itemQuality >= ITEM_QUALITY_ARCANE and itemIsSpecial) or
@@ -3304,7 +3304,7 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
 
     if filter then 
         -- If filter returns false then bail out right now, we're not displaying this item.
-        if not CA.ItemFilter(itemType, itemId, itemLink) then return end
+        if not CA.ItemFilter(itemType, itemId, itemLink, false) then return end
     end
     
     local formattedIcon = (CA.SV.LootIcons and icon ~= "") and zo_strformat("<<1>> ", zo_iconFormat(icon, 16, 16)) or ""
@@ -3661,7 +3661,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             if not g_weAreInAStore and CA.SV.Loot and isNewItem and not g_inTrade and not g_inMail then
                 CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
             end
-            if g_inTrade then
+            if g_inTrade and isNewItem then
                 CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
             end
             if g_inMail then
@@ -3699,7 +3699,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                 if not g_weAreInAStore and CA.SV.Loot and isNewItem and not g_inTrade and not g_inMail then
                     CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
                 end
-                if g_inTrade then
+                if g_inTrade and isNewItem then
                     CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
                 end
                 if g_inMail then
@@ -3759,7 +3759,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
         if not g_weAreInAStore and CA.SV.Loot and isNewItem and not g_inTrade and not g_inMail then
             CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
         end
-        if g_inTrade then
+        if g_inTrade and isNewItem then
             CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
         end
         if g_inMail then
@@ -4844,52 +4844,54 @@ end
 
 function CA.OnPlayerActivated(eventCode, initial)
 
-        -- Index members for Group Loot
-    CA.IndexGroupLoot()   
+    -- Index members for Group Loot
+    CA.IndexGroupLoot()
     
-    if g_disguiseState == 0 then
-        g_disguiseState = GetUnitDisguiseState("player")
+    if CA.SV.Disguise then
         if g_disguiseState == 0 then
-            return
-        elseif g_disguiseState ~= 0 then
-            g_disguiseState = 1
-            g_currentDisguise = GetItemId(0, 10) or 0
-            local message = strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description)
-            if CA.SV.DisguiseCA then
-                printToChat(message)
+            g_disguiseState = GetUnitDisguiseState("player")
+            if g_disguiseState == 0 then
+                return
+            elseif g_disguiseState ~= 0 then
+                g_disguiseState = 1
+                g_currentDisguise = GetItemId(0, 10) or 0
+                local message = strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED), E.DisguiseIcons[g_currentDisguise].description)
+                if CA.SV.DisguiseCA then
+                    printToChat(message)
+                end
+                if CA.SV.DisguiseAlert then
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
+                end
+                if CA.SV.DisguiseCSA then
+                    local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT)
+                    messageParams:SetText(message)
+                    messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COUNTDOWN)
+                    CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+                end
+                return
             end
-            if CA.SV.DisguiseAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
+        elseif g_disguiseState == 1 then
+            g_disguiseState = GetUnitDisguiseState("player")
+            if g_disguiseState == 0 then
+                local message = strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description)
+                if CA.SV.DisguiseCA then
+                    printToChat(message)
+                end
+                if CA.SV.DisguiseAlert then
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
+                end
+                if CA.SV.DisguiseCSA then
+                    local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT)
+                    messageParams:SetText(message)
+                    messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COUNTDOWN)
+                    CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+                end
+                return
+            elseif g_disguiseState ~= 0 then
+                g_disguiseState = 1
+                g_currentDisguise = GetItemId(0, 10) or 0
+                return
             end
-            if CA.SV.DisguiseCSA then
-                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT)
-                messageParams:SetText(message)
-                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COUNTDOWN)
-                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
-            end
-            return
-        end
-    elseif g_disguiseState == 1 then
-        g_disguiseState = GetUnitDisguiseState("player")
-        if g_disguiseState == 0 then
-            local message = strformat("<<1>> <<2>>", GetString(SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE), E.DisguiseIcons[g_currentDisguise].description)
-            if CA.SV.DisguiseCA then
-                printToChat(message)
-            end
-            if CA.SV.DisguiseAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
-            end
-            if CA.SV.DisguiseCSA then
-                local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT)
-                messageParams:SetText(message)
-                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COUNTDOWN)
-                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
-            end
-            return
-        elseif g_disguiseState ~= 0 then
-            g_disguiseState = 1
-            g_currentDisguise = GetItemId(0, 10) or 0
-            return
         end
     end
 end
@@ -5875,7 +5877,7 @@ function CA.HookFunction()
         if CA.SV.NotificationTradeCA or CA.SV.NotificationTradeAlert then
             local finalName = CA.ResolveNameLink(inviterCharacterName, inviterDisplayName)
             local finalAlertName = CA.ResolveNameNoLink(inviterCharacterName, inviterDisplayName)
-            g_tradeTarget = ZO_SELECTED_TEXT:Colorize(finalName)
+            g_tradeTarget = ZO_SELECTED_TEXT:Colorize(zo_strformat(SI_UNIT_NAME, finalName))
             
             if CA.SV.NotificationTradeCA then
                 printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), finalName))
@@ -5893,7 +5895,7 @@ function CA.HookFunction()
         if CA.SV.NotificationTradeCA or CA.SV.NotificationTradeAlert then
             local finalName = CA.ResolveNameLink(inviteeCharacterName, inviteeDisplayName)
             local finalAlertName = CA.ResolveNameNoLink(inviteeCharacterName, inviteeDisplayName)
-            g_tradeTarget = ZO_SELECTED_TEXT:Colorize(finalName)
+            g_tradeTarget = ZO_SELECTED_TEXT:Colorize(zo_strformat(SI_UNIT_NAME, finalName))
             
             if CA.SV.NotificationTradeCA then
                 printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_CONFIRM), finalName))
