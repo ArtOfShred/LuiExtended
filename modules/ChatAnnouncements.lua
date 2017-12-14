@@ -5023,13 +5023,12 @@ local GUILD_SKILL_SHOW_SOUNDS =
 local GUILD_SKILL_ICONS =
 {
 
-    [1] = "esoui/art/icons/mapkey/mapkey_fightersguild.dds",
-    [2] = "esoui/art/icons/mapkey/mapkey_magesguild.dds",
-    [3] = "esoui/art/icons/mapkey/mapkey_undaunted.dds",
-    [4] = "esoui/art/icons/mapkey/mapkey_thievesguild.dds",
-    [5] = "esoui/art/icons/mapkey/mapkey_darkbrotherhood.dds",
+    [45] = "esoui/art/icons/mapkey/mapkey_fightersguild.dds",
+    [44] = "esoui/art/icons/mapkey/mapkey_magesguild.dds",
+    [55] = "esoui/art/icons/mapkey/mapkey_undaunted.dds",
+    [117] = "esoui/art/icons/mapkey/mapkey_thievesguild.dds",
+    [118] = "esoui/art/icons/mapkey/mapkey_darkbrotherhood.dds",
 }
-
 
 -- Alert Prehooks
 function CA.HookFunction()
@@ -9229,22 +9228,24 @@ end
 
 function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previousXP, currentXP)
     if (skillType == SKILL_TYPE_GUILD) then
+    
+        local lineName, _, _, lineId = GetSkillLineInfo(skillType, skillIndex) 
 
         -- Bail out early if a certain type is not set to be displayed
-        if skillIndex == 1 and not CA.SV.SkillGuildFighters then
+        if lineId == 45 and not CA.SV.SkillGuildFighters then
             return
-        elseif skillIndex == 2 and not CA.SV.SkillGuildMages then
+        elseif lineId == 44 and not CA.SV.SkillGuildMages then
            return
-        elseif skillIndex == 3 and not CA.SV.SkillGuildUndaunted then
+        elseif lineId == 55 and not CA.SV.SkillGuildUndaunted then
            return
-        elseif skillIndex == 4 and not CA.SV.SkillGuildThieves then
+        elseif lineId == 117 and not CA.SV.SkillGuildThieves then
            return
-        elseif skillIndex == 5 and not CA.SV.SkillGuildDarkBrotherhood then
+        elseif lineId == 118 and not CA.SV.SkillGuildDarkBrotherhood then
            return
         end
         
         local change = currentXP - previousXP
-        local lineName = GetSkillLineInfo(skillType, skillIndex)
+        local priority
         
         if CA.SV.SkillGuildAlert then
             local text = zo_strformat(GetString(SI_LUIE_CA_SKILL_GUILD_ALERT), lineName)
@@ -9252,7 +9253,9 @@ function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previo
         end
         
         -- Bail out or save value if Throttle/Threshold conditions are met
-        if skillIndex == 1 and CA.SV.SkillGuildFighters then
+        if lineId == 45 then
+            priority = "EXPERIENCE LEVEL"
+            -- FG rep is either a quest reward (10) or kills (1 & 5)
             -- Only throttle values 5 or lower (FG Dailies give +10 skill)
             if CA.SV.SkillGuildThrottle > 0 and change <= 5 then
                 g_guildSkillThrottle = g_guildSkillThrottle + change
@@ -9267,41 +9270,56 @@ function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previo
             end
         end
         
-        CA.PrintGuildRep(change, lineName, skillIndex)
+        if lineId == 44 then
+            -- Mages Guild rep is either a quest reward (10), book discovered (5), collection discovered (20)
+            if change == 10 then
+                priority = "EXPERIENCE LEVEL" 
+            else
+                priority = "MESSAGE"
+            end
+        end
+        
+        if lineId == 5 or lineId == 117 or lineId == 118 then
+            -- Other guilds are usually either a quest reward or achievement reward
+            priority = "EXPERIENCE LEVEL"
+        end
+        
+        CA.PrintGuildRep(change, lineName, lineId, priority)
 
      end
 end
 
-function CA.PrintGuildRep(change, lineName, skillIndex)
+function CA.PrintGuildRep(change, lineName, lineId, priority)
     -- TODO: Move this (not sure where to since putting it in the base function makes it populate before colors are defined)
     local GUILD_SKILL_COLOR_TABLE =
     {
-        [1] = SkillGuildColorizeFG,
-        [2] = SkillGuildColorizeMG,
-        [3] = SkillGuildColorizeUD,
-        [4] = SkillGuildColorizeTG,
-        [5] = SkillGuildColorizeDB,
+        [45] = SkillGuildColorizeFG,
+        [44] = SkillGuildColorizeMG,
+        [55] = SkillGuildColorizeUD,
+        [117] = SkillGuildColorizeTG,
+        [118] = SkillGuildColorizeDB,
     }
     
-    local icon = zo_iconFormatInheritColor(GUILD_SKILL_ICONS[skillIndex], 16, 16)
+    local icon = zo_iconFormatInheritColor(GUILD_SKILL_ICONS[lineId], 16, 16)
     local formattedIcon = CA.SV.SkillGuildIcon and (icon .. " ") or ""
     
     local guildString = zo_strformat(CA.SV.SkillGuildRepName, change)
-    local colorize = GUILD_SKILL_COLOR_TABLE[skillIndex]
+    local colorize = GUILD_SKILL_COLOR_TABLE[lineId]
     local messageP1 = ("|r|c" .. colorize .. formattedIcon .. change .. " " .. lineName .. " " .. guildString .. "|r|c" .. SkillGuildColorize)
     local formattedMessageP1 = (strfmt(CA.SV.SkillGuildMsg, messageP1))
     local finalMessage = strfmt("|c%s%s|r", SkillGuildColorize, formattedMessageP1)
     
-    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "SKILL" }
+    -- We set this to skill gain, so as to avoid creating an entire additional chat message category (we want it to show after XP but before any other skill gains or level up so we place it on top of the level up priority).
+    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = priority }
     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
     EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
 end
 
 function CA.PrintBufferedGuildRep()
     if (g_guildSkillThrottle > 0 and g_guildSkillThrottle > CA.SV.SkillGuildThreshold) then
-        local skillIndex = 1
-        local lineName = GetSkillLineInfo(SKILL_TYPE_GUILD, skillIndex)
-        CA.PrintGuildRep(g_guildSkillThrottle, lineName, skillIndex)
+        local lineId = 45
+        local lineName = GetSkillLineInfo(SKILL_TYPE_GUILD, lineId)
+        CA.PrintGuildRep(g_guildSkillThrottle, lineName, lineId)
     end
     EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedRep")
     g_guildSkillThrottle = 0
