@@ -501,6 +501,7 @@ local g_postageAmount               = 0             -- Tracks Postage amount
 local g_mailCODPresent              = false         -- Tracks whether the currently opened mail has a COD value present. On receiving items from the mail this will modify the message displayed.
 local g_inMail                      = false         -- Toggled on when looting mail to prevent notable item display from hiding items acquired.
 local g_mailTarget                  = ""            -- Target of mail being sent
+local g_mailStacksOut               = { }           -- Table for storing items to be mailed out 
 
 -- Disguise
 local g_currentDisguise             = nil           -- Holds current disguise itemId
@@ -2516,11 +2517,21 @@ end
 
 function CA.OnMailAttach(eventCode, attachmentSlot)
     g_postageAmount = GetQueuedMailPostage()
+    
+    local mailIndex = attachmentSlot
+    local bagId, slotId, icon, stack = GetQueuedItemAttachmentInfo(attachmentSlot)
+    local itemId = GetItemId(bagId, slotId)
+    local itemLink = GetMailQueuedAttachmentLink(attachmentSlot, LINK_STYLE_DEFAULT)
+    local itemType = GetItemLinkItemType(mailitemlink)
+    g_mailStacksOut[mailIndex] = {icon = icon, stack = stack, itemId = itemId, itemLink = itemLink, itemType = itemType}
 end
 
 -- Removes items from index if they are removed from the trade
 function CA.OnMailAttachRemove(eventCode, attachmentSlot)
     g_postageAmount = GetQueuedMailPostage()
+    
+    local mailIndex = attachmentSlot
+    g_mailStacksOut[mailIndex] = nil
 end
 
 function CA.OnMailOpenBox(eventCode)
@@ -2542,6 +2553,7 @@ function CA.OnMailCloseBox(eventCode)
         g_inventoryStacks = {}
     end
     g_inMail = false
+    g_mailStacksOut = {}
 end
 
 -- Hook MAIL_SEND.Send to get name of player we send to.
@@ -2610,9 +2622,21 @@ function CA.OnMailSuccess(eventCode)
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, mailString)
         end
     end
+    
+    if CA.SV.LootMail then
+        for mailIndex = 1,6 do -- Have to iterate through all 6 possible mail attachments, otherwise nil values will bump later items off the list potentially.
+            if g_mailStacksOut[mailIndex] ~= nil then
+                local gainOrLoss = CA.SV.CurrencyContextColor and 2 or 4
+                local logPrefix = CA.SV.LootMessageMailOut
+                local item = g_mailStacksOut[mailIndex]
+                CA.ItemPrinter(item.icon, item.stack, item.itemType, item.itemId, item.itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
+            end
+        end
+    end    
         
     g_mailCOD = 0
     g_postageAmount = 0
+    g_mailStacksOut = {}
 end
 
 function CA.OnExperienceGain(eventCode, reason, level, previousExperience, currentExperience, championPoints)
@@ -3664,7 +3688,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             if g_inTrade and isNewItem then
                 CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
             end
-            if g_inMail then
+            if g_inMail and isNewItem then
                 CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
             end
         -- EXISTING ITEM    
@@ -3702,7 +3726,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                 if g_inTrade and isNewItem then
                     CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
                 end
-                if g_inMail then
+                if g_inMail and isNewItem then
                     CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
                 end
             -- STACK COUNT INCREMENTED DOWN
@@ -3722,11 +3746,6 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                     gainOrLoss = CA.SV.CurrencyContextColor and 2 or 4
                     logPrefix = CA.SV.LootMessageTradeOut
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
-                end
-                if g_inMail and not g_itemWasDestroyed then
-                    gainOrLoss = CA.SV.CurrencyContextColor and 2 or 4
-                    logPrefix = CA.SV.LootMessageMailOut
-                    CA.ItemPrinter(icon, change, itemType, itemId, itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
                 end
             end
             
@@ -3762,7 +3781,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
         if g_inTrade and isNewItem then
             CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
         end
-        if g_inMail then
+        if g_inMail and isNewItem then
             CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
         end
     end
