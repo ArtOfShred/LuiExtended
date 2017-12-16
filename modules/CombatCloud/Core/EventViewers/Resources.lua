@@ -24,26 +24,26 @@ function CombatCloud_ResourceEventViewer:OnEvent(resourceType, value)
     if (resourceType == resourceTypes.LOW_HEALTH) then
         color = S.colors.lowHealth
         size = S.fontSizes.resource
-        text = self:FormatString(S.formats.resource, { value = value, text = L.lowHealth })
+        text = self:FormatString(S.formats.resource, { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_LOW_HEALTH) })
     --Low Magicka
     elseif (resourceType == resourceTypes.LOW_MAGICKA) then
         color = S.colors.lowMagicka
         size = S.fontSizes.resource
-        text = self:FormatString(S.formats.resource, { value = value, text = L.lowMagicka })
+        text = self:FormatString(S.formats.resource, { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_LOW_MAGICKA) })
     --Low Stamina
     elseif (resourceType == resourceTypes.LOW_STAMINA) then
         color = S.colors.lowStamina
         size = S.fontSizes.resource
-        text = self:FormatString(S.formats.resource, { value = value, text = L.lowStamina })
+        text = self:FormatString(S.formats.resource, { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_LOW_STAMINA) })
     --Ultimate Ready
     elseif (resourceType == resourceTypes.ULTIMATE) then
         color = S.colors.ultimateReady
         size = S.fontSizes.resource
-        text = self:FormatString(S.formats.ultimateReady, { value = value, text = L.ultimateReady })
+        text = self:FormatString(S.formats.ultimateReady, { text = GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY) })
     elseif (resourceType == resourceTypes.POTION) then
         color = S.colors.potionReady
         size = S.fontSizes.resource
-        text = self:FormatString(S.formats.potionReady, { value = value, text = L.potionReady })
+        text = self:FormatString(S.formats.potionReady, { text = GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY) })
     end
 
     self:PrepareLabel(control.label, size, color, text)

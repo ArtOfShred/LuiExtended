@@ -30,6 +30,20 @@ function CombatCloud_EventViewer:FormatString(inputFormat, params)
     end)
 end
 
+function CombatCloud_EventViewer:FormatAlertString(inputFormat, params)
+    return gsub(inputFormat, '%%.', function(x)
+        if (x == '%n') then
+            return params.source or ''
+        elseif (x == '%t') then
+            return params.ability or ''
+        elseif (x == '%i') then
+            return params.icon or ''
+        else
+            return x
+        end
+    end)
+end
+
 function CombatCloud_EventViewer:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     local S = LUIE.CombatText.SV
 

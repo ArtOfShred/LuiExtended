@@ -44,22 +44,64 @@ function CombatCloud_CombatEventListener:EffectChanged(...)
             refireDelay[abilityId] = true
             callLater(function() refireDelay[abilityId] = nil end, AlertT[abilityId].refire) --buffer by X time
         end
-    
-        if (S.toggles.showAlertBlock) and AlertT[abilityId].block == true then
-            if AlertT[abilityId].bs then 
-                self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCKSTAGGER, effectName, formattedIcon, unitName)
-            else
-                self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCK, effectName, formattedIcon, unitName)
+        
+        if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId.interrupt] then
+        
+            -- Filter by priority
+            if S.toggles.mitigationDungeon and not IsUnitInDungeon("player") or not S.toggles.mitigationDungeon then
+                if AlertT[abilityId].priority == 3 and not S.toggles.mitigationRank3 then return end
+                if AlertT[abilityId].priority == 2 and not S.toggles.mitigationRank2 then return end
+                if AlertT[abilityId].priority == 1 and not S.toggles.mitigationRank1 then return end
             end
-        end
-        if (S.toggles.showAlertDodge) and AlertT[abilityId].dodge == true then
-            self:TriggerEvent(C.eventType.ALERT, C.alertType.DODGE, effectName, formattedIcon, unitName)
-        end
-        if (S.toggles.showAlertDodge) and AlertT[abilityId].avoid == true then
-            self:TriggerEvent(C.eventType.ALERT, C.alertType.AVOID, effectName, formattedIcon, unitName)
-        end
-        if (S.toggles.showAlertInterrupt) and AlertT[abilityId].interrupt == true then
-            self:TriggerEvent(C.eventType.ALERT, C.alertType.INTERRUPT, effectName, formattedIcon, unitName)
+            
+            local block
+            local blockstagger
+            local dodge
+            local avoid
+            local interrupt
+            
+            if AlertT[abilityId].notDirect then 
+                isDirect = false
+            else 
+                isDirect = true
+            end
+        
+            if AlertT[abilityId].block and (S.toggles.showAlertBlock) == true then
+                if AlertT[abilityId].bs then
+                    blockstagger = true
+                else
+                    block = true
+                end
+            end
+            if AlertT[abilityId].dodge and (S.toggles.showAlertDodge) == true then
+                dodge = true
+            end
+            if AlertT[abilityId].avoid and (S.toggles.showAlertDodge) == true then
+                avoid = true
+            end
+            if AlertT[abilityId].interrupt and (S.toggles.showAlertInterrupt) == true then
+                interrupt = true
+            end
+            
+            if S.toggles.mitigationType == "Single Line" then
+                self:TriggerEvent(C.eventType.ALERT, C.alertType.SHARED, effectName, formattedIcon, unitName, isDirect, block, blockstagger, dodge, avoid, interrupt)
+            elseif S.toggles.mitigationType == "Multiple Lines" then
+                if block and not blockstagger then
+                    self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCK, effectName, formattedIcon, unitName, isDirect)
+                end
+                if blockstagger then
+                    self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCKSTAGGER, effectName, formattedIcon, unitName, isDirect)
+                end
+                if dodge then
+                    self:TriggerEvent(C.eventType.ALERT, C.alertType.DODGE, effectName, formattedIcon, unitName, isDirect)
+                end
+                if avoid then
+                    self:TriggerEvent(C.eventType.ALERT, C.alertType.AVOID, effectName, formattedIcon, unitName, isDirect)
+                end
+                if interrupt then
+                    self:TriggerEvent(C.eventType.ALERT, C.alertType.INTERRUPT, effectName, formattedIcon, unitName, isDirect)
+                end
+            end
         end
     end
 end
@@ -202,25 +244,67 @@ function CombatCloud_CombatEventListener:OnEvent(...)
             refireDelay[abilityId] = true
             callLater(function() refireDelay[abilityId] = nil end, AlertT[abilityId].refire) --buffer by X time
         end
-    
-        if (S.toggles.showAlertBlock) and AlertT[abilityId].block == true then
-            if AlertT[abilityId].bs then 
-                self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCKSTAGGER, abilityName, formattedIcon, sourceName)
-            else
-                self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCK, abilityName, formattedIcon, sourceName)
+
+        if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId.interrupt] then
+        
+            -- Filter by priority
+            if S.toggles.mitigationDungeon and not IsUnitInDungeon("player") or not S.toggles.mitigationDungeon then
+                if AlertT[abilityId].priority == 3 and not S.toggles.mitigationRank3 then return end
+                if AlertT[abilityId].priority == 2 and not S.toggles.mitigationRank2 then return end
+                if AlertT[abilityId].priority == 1 and not S.toggles.mitigationRank1 then return end
+            end
+        
+            local isDirect
+            local block
+            local blockstagger
+            local dodge
+            local avoid
+            local interrupt
+            
+            if AlertT[abilityId].notDirect then 
+                isDirect = false
+            else 
+                isDirect = true
+            end
+        
+            if AlertT[abilityId].block and (S.toggles.showAlertBlock) == true then
+                if AlertT[abilityId].bs then
+                    blockstagger = true
+                else
+                    block = true
+                end
+            end
+            if AlertT[abilityId].dodge and (S.toggles.showAlertDodge) == true then
+                dodge = true
+            end
+            if AlertT[abilityId].avoid and (S.toggles.showAlertAvoid) == true then
+                avoid = true
+            end
+            if AlertT[abilityId].interrupt and (S.toggles.showAlertInterrupt) == true then
+                interrupt = true
+            end
+            
+            if S.toggles.mitigationType == "Single Line" then
+                self:TriggerEvent(C.eventType.ALERT, C.alertType.SHARED, abilityName, formattedIcon, sourceName, isDirect, block, blockstagger, dodge, avoid, interrupt)
+            elseif S.toggles.mitigationType == "Multiple Lines" then
+                if block and not blockstagger then
+                    self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCK, abilityName, formattedIcon, sourceName, isDirect)
+                end
+                if blockstagger then
+                    self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCKSTAGGER, abilityName, formattedIcon, sourceName, isDirect)
+                end
+                if dodge then
+                    self:TriggerEvent(C.eventType.ALERT, C.alertType.DODGE, abilityName, formattedIcon, sourceName, isDirect)
+                end
+                if avoid then
+                    self:TriggerEvent(C.eventType.ALERT, C.alertType.AVOID, abilityName, formattedIcon, sourceName, isDirect)
+                end
+                if interrupt then
+                    self:TriggerEvent(C.eventType.ALERT, C.alertType.INTERRUPT, abilityName, formattedIcon, sourceName, isDirect)
+                end
             end
         end
-        if (S.toggles.showAlertDodge) and AlertT[abilityId].dodge == true then
-            self:TriggerEvent(C.eventType.ALERT, C.alertType.DODGE, abilityName, formattedIcon, sourceName)
-        end
-        if (S.toggles.showAlertDodge) and AlertT[abilityId].avoid == true then
-            self:TriggerEvent(C.eventType.ALERT, C.alertType.AVOID, abilityName, formattedIcon, sourceName)
-        end
-        if (S.toggles.showAlertInterrupt) and AlertT[abilityId].interrupt == true then
-            self:TriggerEvent(C.eventType.ALERT, C.alertType.INTERRUPT, abilityName, formattedIcon, sourceName)
-        end
     end
-    
     --[[ EXPLOIT ALERT (IF WE NEED TO ADD TO ANY OFF-BALANCE)
     if LUIE.Effects.CombatAlertExploit[abilityId] and targetName ~= nil and targetName ~= "" and (C.isPlayer[sourceType]) and resultType == ACTION_RESULT_OFFBALANCE then
         if (S.toggles.showAlertExploit) then
@@ -228,7 +312,6 @@ function CombatCloud_CombatEventListener:OnEvent(...)
         end
     end
     ]]--
-    
 end
 
 ---------------------------------------------------------------------------------------------------------------------------------------

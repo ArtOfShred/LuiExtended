@@ -441,6 +441,25 @@ ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC",           "The are
 -- UnitFrames.lua
 ZO_CreateStringId("SI_LUIE_UF_ERROR_FONT",                              "LUIE_CustomFrames: There was a problem with selecting required font. Falling back to game default.")
 
+-- Combat Text
+ZO_CreateStringId("SI_LUIE_CT_COMBAT_IN_DEFAULT",                       "Entered Combat")
+ZO_CreateStringId("SI_LUIE_CT_COMBAT_OUT_DEFAULT",                      "Left Combat")
+ZO_CreateStringId("SI_LUIE_CT_CLEANSE_DEFAULT",                         "CLEANSE")
+ZO_CreateStringId("SI_LUIE_CT_BLOCK_DEFAULT",                           "BLOCK")
+ZO_CreateStringId("SI_LUIE_CT_BLOCKSTAGGER_DEFAULT",                    "*BLOCK*")
+ZO_CreateStringId("SI_LUIE_CT_DODGE_DEFAULT",                           "DODGE")
+ZO_CreateStringId("SI_LUIE_CT_AVOID_DEFAULT",                           "AVOID")
+ZO_CreateStringId("SI_LUIE_CT_INTERRUPT_DEFAULT",                       "INTERRUPT")
+ZO_CreateStringId("SI_LUIE_CT_EXPLOIT_DEFAULT",                         "EXPLOIT")
+ZO_CreateStringId("SI_LUIE_CT_EXECUTE_DEFAULT",                         "EXECUTE")
+ZO_CreateStringId("SI_LUIE_CT_MISS_DEFAULT",                            "Missed %t")
+ZO_CreateStringId("SI_LUIE_CT_IMMUNE_DEFAULT",                          "Immune %t")
+ZO_CreateStringId("SI_LUIE_CT_PARRIED_DEFAULT",                         "Parried %t")
+ZO_CreateStringId("SI_LUIE_CT_REFLECTED_DEFAULT",                       "Reflected %t")
+ZO_CreateStringId("SI_LUIE_CT_DODGED_DEFAULT",                          "Dodged %t")
+ZO_CreateStringId("SI_LUIE_CT_INTERRUPTED_DEFAULT",                     "Interrupted")
+ZO_CreateStringId("SI_LUIE_CT_MITIGATION_SUFFIX_DEFAULT",               " incoming! ")
+
 -- LuiExtendedSettings.lua
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1530,12 +1549,397 @@ ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_RETICLECOLOR",                 "Apply S
 ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_RETICLECOLOR_TP",              "Change the color of the reticle according to unit reaction.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_RETICLECOLORINTERACT",         "Interactible Reticle Color")
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- COMBAT TEXT -- LAM --
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
+-- Base Options
 ZO_CreateStringId("SI_LUIE_LAM_CT",                                     "Combat Text")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_SHOWCOMBATTEXT",                      "Enable Combat Text (Combat Cloud)")
 ZO_CreateStringId("SI_LUIE_LAM_CT_DESCRIPTION",                         "Display Combat Cloud combat text, with damage/healing values, and various alerts.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_UNLOCK",                              "Unlock")
+ZO_CreateStringId("SI_LUIE_LAM_CT_UNLOCK_TP",                           "Unlock the panels to move them.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_IC_ONLY",                             "In Combat Only")
+ZO_CreateStringId("SI_LUIE_LAM_CT_IC_ONLY_TP",                          "Only display incoming and outgoing numbers when in combat.")
+
+-- CT (Shared)
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_DAMAGE",                       "Damage")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_DAMAGE_CRITICAL",              "Damage (Critical)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_HEALING",                      "Healing")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_HEALING_CRITICAL",             "Healing (Critical)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_DOT",                          "Damage over Time")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_DOT_CRITICAL",                 "Damage over Time (Critical)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_HOT",                          "Healing over Time")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_HOT_CRITICAL",                 "Healing over Time (Critical)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_GAIN_LOSS",                    "Resource Gain/Drain")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ENERGIZE",                     "Resource Gain")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ENERGIZE_ULTIMATE",            "Ultimate Gain")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_DRAIN",                        "Resource Drain")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_MITIGATION",                   "Mitigation")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_MISS",                         "Missed")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_IMMUNE",                       "Immune")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_PARRIED",                      "Parried")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_REFLECTED",                    "Reflected")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_DAMAGE_SHIELD",                "Damage Shielded")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_DODGED",                       "Dodged")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_BLOCKED",                      "Blocked")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_INTERRUPTED",                  "Interrupted")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_CROWD_CONTROL",                "Crowd Control")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_DISORIENTED",                  "Disoriented")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_FEARED",                       "Feared")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_OFF_BALANCE",                  "Off-Balance")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_SILENCED",                     "Silenced")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_STUNNED",                      "Stunned")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_COMBAT_STATE",                 "Combat State")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_COMBAT_IN",                    "In Combat")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_COMBAT_OUT",                   "Out of Combat")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ALERT",                        "Active Combat Alerts")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK",                  "Block")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK_S",                "Block (Stagger)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ALERT_DODGE",                  "Dodge")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ALERT_AVOID",                  "Avoid")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ALERT_INTERRUPT",              "Interrupt")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ALERT_CLEANSE",                "Cleanse")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ALERT_EXPLOIT",                "Off-Balance Exploit")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ALERT_EXECUTE",                "Execute")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_POINTS",                       "Experience, Champion, and Alliance Points")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_POINTS_ALLIANCE",              "Alliance Points")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_POINTS_EXPERIENCE",            "Experience Points")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_POINTS_CHAMPION",              "Champion Experience")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_RESOURCE",                     "Resources")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_LOW_HEALTH",                   "Low Health")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_LOW_MAGICKA",                  "Low Magicka")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_LOW_STAMINA",                  "Low Stamina")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY",               "Ultimate Ready")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_POTION_READY",                 "Potion Ready")
+
+-- CT (Incoming)
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_HEADER",                     "Toggle Options (Incoming)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_DAMAGE_HEAL_HEADER",         "Incoming Damage & Healing")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_MITIGATION",                 "Incoming Mitigation")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_CROWD_CONTROL",              "Incoming Crowd Control")
+
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_DAMAGE_TP",                  "Show incoming direct damage.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_DOT_TP",                     "Show incoming damage over time.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_HEALING_TP",                 "Show incoming direct healing.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_HOT_TP",                     "Show incoming healing over time.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_ENERGIZE_TP",                "Show incoming magicka/stamina gain.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_ENERGIZE_ULTIMATE_TP",       "Show incoming ultimate gain.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_DRAIN_TP",                   "Show incoming magicka/stamina loss.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_MISS_TP",                    "Show incoming attacks that miss.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_IMMUNE_TP",                  "Show incoming attacks that you are immune to.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_PARRIED_TP",                 "Show incoming attacks that are parried.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_REFLECTED_TP",               "Show incoming attacks that are reflected.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_DAMAGE_SHIELD_TP",           "Show incoming damage absorbed by a shield.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_DODGED_TP",                  "Show incoming dodged attacks.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_BLOCKED_TP",                 "Show incoming blocked attacks.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_INTERRUPTED_TP",             "Show when you are interrupted by an enemy.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_DISORIENTED_TP",             "Show when you are disoriented.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_FEARED_TP",                  "Show when you are feared.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_OFF_BALANCE_TP",             "Show when you are off-balance.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_SILENCED_TP",                "Show when you are silenced.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_STUNNED_TP",                 "Show when you are stunned.")
+
+-- CT (Outgoing)
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_HEADER",                     "Toggle Options (Outgoing)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_DAMAGE_HEAL_HEADER",         "Outgoing Damage & Healing")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_MITIGATION",                 "Outgoing Mitigation")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_CROWD_CONTROL",              "Outgoing Crowd Control")
+
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_DAMAGE_TP",                  "Show outgoing direct damage.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_DOT_TP",                     "Show outgoing damage over time.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_HEALING_TP",                 "Show outgoing direct healing.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_HOT_TP",                     "Show outgoing healing over time.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_ENERGIZE_TP",                "Show outgoing magicka/stamina gain.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_ENERGIZE_ULTIMATE_TP",       "Show outgoing ultimate gain.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_DRAIN_TP",                   "Show outgoing magicka/stamina drain.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_MISS_TP",                    "Show outgoing attacks that you miss.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_IMMUNE_TP",                  "Show outgoing attacks that the enemy is immune to.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_PARRIED_TP",                 "Show outgoing attacks that are parried.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_REFLECTED_TP",               "Show outgoing attacks that are reflected.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_DAMAGE_SHIELD_TP",           "Show outgoing damage absorbed by a shield.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_DODGED_TP",                  "Show outgoing attacks that are dodged.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_BLOCKED_TP",                 "Show outgoing attacks that are blocked.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_INTERRUPTED_TP",             "Show when you interrupt an enemy.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_DISORIENTED_TP",             "Show when you disorient an enemy.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_FEARED_TP",                  "Show when you fear an enemy.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_OFF_BALANCE_TP",             "Show when you set an enemy off-balance.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_SILENCED_TP",                "Show when you silence an enemy.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_STUNNED_TP",                 "Show when you stun an enemy.")
+
+-- CT (Notifications)
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION",                        "Toggle Options (Notifications)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_STATE",           "Combat State")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERTS",                 "Active Combat Alerts")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERTS_DESC",            "Set Active Combat Tips to Always Show in the Interface options to display Alerts correctly.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_POINTS",                 "Points")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_RESOURCES",              "Resources")
+
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_IN_TP",           "Display a notification when engaging in combat.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_OUT_TP",          "Display a notification when exiting combat.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION",             "Display Advanced Notifications for Attacks")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_TP",          "Display advanced notifications for attacks that can be blocked, dodged, avoided, or interrupted.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_DESCRIPTION", "\t\t\t\t\tUse the following formatting characters to modify the mitigation alerts:\n\t\t\t\t\t%n Source Name\n\t\t\t\t\t%t Ability Name\n\t\t\t\t\t%i - Ability Icon")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD",      "Alert Method")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD_TP",   "Choose whether to display mitigation alerts as a single line or in multiple lines. If using the single line option notifications will be colored based on the most effective form of mitigation.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT",      "Mitigation Alert Format")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_TP",   "Choose the format to display mitigation alerts.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX",                 "Add Suffix for Direct Attacks")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX_TP",              "Add the following suffix onto the message for attacks that are DIRECTLY targeting you. This will not display for static area of effect attacks or enemy healing abilites. Add a leading blank space here.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_RANK3",                  "Display Alerts for Normal NPC Abilities")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_RANK3_TP",               "Enable to display alerts for abilites used by standard NPCs.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_RANK2",                  "Display Alerts for Elite/Quest NPC Abilities")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_RANK2_TP",               "Enable to display alerts for abilites specific to Elite or Quest NPCs. Examples include the NPC variant of Dragonknight Standard and Soul Tether.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_RANK1",                  "Display Alerts for Boss/Trial NPC Abilities")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_RANK1_TP",               "Enable to display alerts specific to boss and trial NPCs.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON",                "ALWAYS Display Alerts in Dungeons")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON_TP",             "Enable to always display alerts if you are in a dungeon. This option is ideal if you don't want to see normal NPC abilities outside of dungeons, but you want to be aware of significantly scaled up variants cast by NPC's inside a dungeon or trial.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERT_CLEANSE_TP",       "Show an alert when a damage over time effect can be cleansed.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERT_BLOCK_TP",         "Show an alert for incoming attacks that can be mitigated by blocking.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXPLOIT_TP",       "Show an alert when a target is off-balance.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERT_INTERRUPT_TP",     "Show an alert when you can interrupt an enemy ability.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DODGE_TP",         "Show an alert for incoming attacks that can be mitigated by dodging.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERT_AVOID_TP",         "Show an alert for incoming attacks that should be mitigating by avoidance.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXECUTE_TP",       "Show an alert when a target is in execute range.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD",      "Execute Threshold")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD_TP",   "The threshold at which the execute alert will trigger.\nDefault: 20%")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY",      "Execute Frequency")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY_TP",   "The frequency between execute alerts triggered for the same target.\nDefault: 8")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS",            "Hide Ingame Tips")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS_TP",         "Hide the default Active Combat Tips window.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_POINTS_ALLIANCE_TP",     "Show Alliance Points earned.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_POINTS_EXPERIENCE_TP",   "Show Experience Points earned.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_POINTS_CHAMPION_TP",     "Show Champion Experience earned.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_LOW_HEALTH_TP",          "Show a warning when Health is below the desired threshold.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_LOW_MAGICKA_TP",         "Show a warning when Magicka is below the desired threshold.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_LOW_STAMINA_TP",         "Show a warning when Stamina is below the desired threshold.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ULTIMATE_READY_TP",      "Show a notification when your ultimate ability is available for use.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_POTION_READY_TP",        "Show a notification when a potion comes off cooldown.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_WARNING_SOUND",          "Play Warning Sound")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_WARNING_SOUND_TP",       "Play a sound when resources fall below the desired threshold.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH",         "Warning Threshold (Health)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH_TP",      "Threshold for Low Health warning.\nDefault: 35%")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA",        "Warning Threshold (Magicka)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA_TP",     "Threshold for Low Magicka warning.\nDefault: 35%")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA",        "Warning Threshold (Stamina)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA_TP",     "Threshold for Low Stamina warning.\nDefault: 35%")
+
+-- CT (Font)
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_HEADER",                         "Font Format Options")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_FACE",                           "Font Face")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_FACE_TP",                        "Choose a font face.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_OUTLINE",                        "Font Outline")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_OUTLINE_TP",                     "Choose a font outline.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_TEST",                           "Test Font")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_TEST_TP",                        "Generate a test combat event to test the chosen font.")
+
+-- CT (Font Combat)
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_HEADER",                  "Font Size (Combat)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_DAMAGE_TP",               "Font size for direct damage.\nDefault: 32")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_DAMAGE_CRITICAL_TP",      "Font size for direct critical damage.\nDefault: 32")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_HEALING_TP",              "Font size for direct healing.\nDefault: 32")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_HEALING_CRITICAL_TP",     "Font size for direct critical healing.\nDefault: 32")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_DOT_TP",                  "Font size for damage over time.\nDefault: 26")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_DOT_CRITICAL_TP",         "Font size for critical damage over time.\nDefault: 26")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_HOT_TP",                  "Font size for healing over time.\nDefault: 26")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_HOT_CRITICAL_TP",         "Font size for critical healing over time.\nDefault: 26")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_GAIN_LOSS_TP",            "Font size for resource gain and drain.\nDefault: 32")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_MITIGATION_TP",           "Font size for mitigated damage.\nDefault: 32")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_COMBAT_CROWD_CONTROL_TP",        "Font size for crowd control warnings.\nDefault: 32")
+
+-- CT (Font Notifications)
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_NOTIFICATION_HEADER",            "Font Size (Notifications)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_NOTIFICATION_COMBAT_STATE_TP",   "Font size of message displayed when entering or exiting combat.\nDefault: 24")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_NOTIFICATION_ALERT_TP",          "Font size of active combat alerts.\nDefault: 32")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_NOTIFICATION_POINTS_TP",         "Font size of points earned\nDefault: 24")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FONT_NOTIFICATION_RESOURCE_TP",       "Font size of resource warnings.\nDefault: 32")
+
+-- CT (Color Options)
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_HEADER",                 "Color Options (Combat)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_HEALING_HEADER",  "Damage & Healing")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_MITIGATION_HEADER",      "Mitigation")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_CROWD_CONTROL_HEADER",   "Crowd Control")
+
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_NONE",            "None")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_NONE_TP",         "Set a color for damage with no type.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_GENERIC",         "Generic")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_GENERIC_TP",      "Set a color for Generic damage.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_PHYSICAL",        "Physical")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_PHYSICAL_TP",     "Set a color for Physical damage.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_FIRE",            "Fire")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_FIRE_TP",         "Set a color for Fire damage.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHOCK",           "Shock")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHOCK_TP",        "Set a color for Shock damage.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OBLIVION",        "Oblivion")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OBLIVION_TP",     "Set a color for Oblivion damage.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_COLD",            "Cold")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_COLD_TP",         "Set a color for Cold damage.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_EARTH",           "Earth")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_EARTH_TP",        "Set a color for Earth damage.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_MAGIC",           "Magic")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_MAGIC_TP",        "Set a color for Magic damage.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DROWN",           "Drown")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DROWN_TP",        "Set a color for Drowning damage.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DISEASE",         "Disease")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DISEASE_TP",      "Set a color for Disease damage.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_POISON",          "Poison")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_POISON_TP",       "Set a color for Poison damage.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_TP",             "Set a color for all healing.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_MAGICKA",       "Resource Gain (Magicka)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_MAGICKA_TP",    "Set a color for magicka gain.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_STAMINA",       "Resource Gain (Stamina)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_STAMINA_TP",    "Set a color for stamina gain.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_ULTIMATE",      "Resource Gain (Ultimate)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_ULTIMATE_TP",   "Set a color for ultimate gain.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_MAGICKA",          "Resource Drain (Magicka)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_MAGICKA_TP",       "Set a color for magicka drain.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_STAMINA",          "Resource Drain (Stamina)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_STAMINA_TP",       "Set a color for stamina drain.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OVERRIDE",        "Override Critical Damage")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OVERRIDE_TP",     "Use a set color for all critical damage.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_DAMAGE_COLOR",      "Critical Damage Color")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_DAMAGE_COLOR_TP",   "Set a color for critical damage.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_OVERRIDE",       "Override Critical Healing")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_OVERRIDE_TP",    "Use a set color for all critical healing.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_HEALING_COLOR",     "Critical Healing Color")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_HEALING_COLOR_TP",  "Set a color for critical damage.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_OVERRIDE",      "Override Incoming Damage")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_OVERRIDE_TP",   "Use a set color for all incoming damage (overrides critical damage as well).")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_COLOR",         "Incoming Damage Color")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_COLOR_TP",      "Set a color for incoming damage.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_MISS_TP",                "Set a color for missed attacks.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_IMMUNE_TP",              "Set a color for immunity to attacks.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_PARRIED_TP",             "Set a color for parried attacks.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_REFLETCED_TP",           "Set a color for reflected attacks.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHIELD_TP",       "Set a color for damage absorbed by a shield.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DODGED_TP",              "Set a color for dodged attacks.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_BLOCKED_TP",             "Set a color for blocked attacks.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_INTERRUPTED_TP",         "Set a color for interrupted attacks.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DISORIENTED_TP",         "Set a color for notifications displayed when Disoriented.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_FEARED_TP",              "Set a color for notifications displayed when Feared.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_OFF_BALANCE_TP",         "Set a color for notifications displayed when Off-Balance.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_SILENCED_TP",            "Set a color for notifications displayed when Silenced.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_STUNNED_TP",             "Set a color for notifications displayed when Stunned.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_HEADER",           "Color Options (Notifications)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_HEADER",    "Combat State")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ALERT_HEADER",     "Active Combat Alerts")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POINT_HEADER",     "Points")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_RESOURCE_HEADER",  "Resources")
+
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_IN_TP",     "Set a color for notifications when engaging in combat.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_OUT_TP",    "Set a color for notifications when exiting combat.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CLEANSE_TP",       "Set a color for cleanse alerts.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BLOCK_TP",         "Set a color for block alerts.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPLOIT_TP",       "Set a color for exploit alerts.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_INTERRUPT_TP",     "Set a color for interrupt alerts.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DODGE_TP",         "Set a color for dodge alerts.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_AVOID_TP",         "Set a color for avoidance alerts.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXECUTE_TP",       "Set a color for execute alerts.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ALLIANCE_TP",      "Set a color for Alliance Points earned.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPERIENCE_TP",    "Set a color for Experience Points earned.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CHAMPION_TP",      "Set a color for Champion Experience earned.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_HEALTH_TP",    "Set a color for Low Health warnings.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_MAGICKA_TP",   "Set a color for Low Magicka warnings.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_STAMINA_TP",   "Set a color for Low Stamina warnings.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ULTIMATE_TP",      "Set a color for notifications when your ultimate ability is available for use.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POTION_TP",        "Set a color for notifications when a potion comes off cooldown.")
+
+-- CT (Format Options)
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_DESCRIPTION",                  "Allows to change the text output. Write any text you want or enter a variable for special outputs\n %t Ability name, localized name\n %a Amount, value\n %r Power type, resource")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_HEADER",                "Format Options (Combat)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_HEALING_HEADER", "Damage & Healing")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_MITIGATION_HEADER",     "Mitigation")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_CROWD_CONTROL_HEADER",  "Crowd Control")
+
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_TP",             "Text format for direct damage numbers.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_CRITICAL_TP",    "Text format for direct critical damage numbers.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_HEALING_TP",            "Text format for direct healing numbers.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_HEALING_CRITICAL_TP",   "Text format for direct critical healing numbers.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DOT_TP",                "Text format for damage over time numbers.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DOT_CRITICAL_TP",       "Text format for critical damage over time numbers.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_HOT_TP",                "Text format for healing over time numbers.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_HOT_CRITICAL_TP",       "Text format for critical healing over time numbers.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_ENERGIZE_TP",           "Text format for magicka/stamina gain.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_ENERGIZE_ULTIMATE_TP",  "Text format for ultimate gain.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DRAIN_TP",              "Text format for magicka/stamina drain.")
+
+
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_MISS_TP",               "Text format for missed attacks.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_IMMUNE_TP",             "Text format for immunity to attacks.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_PARRIED_TP",            "Text format for parried attacks.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_REFLECTED_TP",          "Text format for reflected attacks.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_SHIELD_TP",      "Text format for damage absorbed by a shield.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DODGED_TP",             "Text format for dodged attacks.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_BLOCKED_TP",            "Text format for blocked attacks.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_INTERRUPTED_TP",        "Text format for interrupted attacks.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DISORIENTED_TP",        "Text format for notifications when Disoriented.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_FEARED_TP",             "Text format for notifications when Feared.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_OFF_BALANCE_TP",        "Text format for notifications when set Off-Balance.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_SILENCED_TP",           "Text format for notifications when Silenced.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_STUNNED_TP",            "Text format for notifications when Stunned.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_HEADER",          "Format Options (Notifications)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_STATE_HEADER",          "Combat State")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_ALERT_HEADER",                 "Active Combat Alerts")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_POINTS_HEADER",                "Points")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_RESOURCES_HEADER",             "Resources")
+
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_IN_TP",    "Text format for notifications when engaging in combat.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_OUT_TP",   "Text format for notifications when exiting combat.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_CLEANSE_TP",      "Text format for cleanse alerts.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_BLOCK_TP",        "Text format for block alerts.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_BLOCK_S_TP",      "Text format for block alerts when an enemy will be staggered.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXPLOIT_TP",      "Text format for exploit alerts.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_INTERRUPT_TP",    "Text format for interrupt alerts.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_DODGE_TP",        "Text format for dodge alerts.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_AVOID_TP",        "Text format for avoidance alerts.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXECUTE_TP",      "Text format for execute alerts.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_ALLIANCE_TP",     "Text format for Alliance Points earned.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_EXPERIENCE_TP",   "Text format for Experience Points earned.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_CHAMPION_TP",     "Text format for Champion Experience earned.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_RESOURCE_TP",     "Text format for warnings when low on resources.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_ULTIMATE_TP",     "Text format for notifcations when your ultimate ability is available for use.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_POTION_TP",       "Text format for notifcations when your potion comes off cooldown.")
+
+-- CT (Animation Options)
+ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_HEADER",                    "Animation Options")
+ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_TYPE",                      "Animation Type")
+ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_TYPE_TP",                   "Select the animation type to use.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_DIRECTION_OUT",             "Outgoing Direction")
+ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_DIRECTION_OUT_TP",          "Set the movement direction for outgoing text.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_DIRECTION_IN",              "Incoming Direction")
+ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_DIRECTION_IN_TP",           "Set the movement direction for incoming text.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_ICON_OUT",                  "Outgoing Icon Position")
+ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_ICON_OUT_TP",               "Set the icon position for outgoing text.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_ICON_IN",                   "Incoming Icon Position")
+ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_ICON_IN_TP",                "Set the icon position for incoming text.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_TEST",                      "Test Animation")
+ZO_CreateStringId("SI_LUIE_LAM_CT_ANIMATION_TEST_TP",                   "Test the animation of incoming & outgoing text.")
+
+-- CT (Throttle Options)
+ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_HEADER",                     "Throttle Options")
+ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_DESCRIPTION",                "Accumulates multiple hits into one. Use the slider to adjust the time frame in milliseconds. Critical hits are not throttled unless the relevant option below is enabled.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_DAMAGE_TP",                  "Set the throttle duration in ms for damage numbers.\nDefault: 200 ms")
+ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_HEALING_TP",                 "Set the throttle duration in ms for healing numbers.\nDefault: 200 ms")
+ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_DOT_TP",                     "Set the throttle duration in ms for damage over time numbers.\nDefault: 200 ms")
+ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_HOT_TP",                     "Set the throttle duration in ms for healing over time numbers.\nDefault: 200 ms")
+ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_CRITICAL",                   "Throttle Critical Hits")
+ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_CRITICAL_TP",                "Enable throttle for critical hits.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_TRAILER",                    "Show Throttle Trailer")
+ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_TRAILER_TP",                 "Enable Throttle Trailer.")
 
 CombatCloudLocalization = {
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -1548,396 +1952,4 @@ CombatCloudLocalization = {
         CombatCloud_Alert                   = "Alerts",
         CombatCloud_Resource                = "Resources"
     },
----------------------------------------------------------------------------------------------------------------------------------------
-    --//MAIN//--
----------------------------------------------------------------------------------------------------------------------------------------
-        combatCloudOptions                  = "Combat Cloud Options",
-        unlock                              = "Unlock",
-        unlockTooltip                       = "Unlock the panels to move them.",
----------------------------------------------------------------------------------------------------------------------------------------
-    --//TOGGLE OPTIONS//--
----------------------------------------------------------------------------------------------------------------------------------------
-    --Headers
-        buttonToggleIncoming                = "Toggle Options [Incoming]",
-        buttonToggleOutgoing                = "Toggle Options [Outgoing]",
-        buttonToggleNotification            = "Toggle Options [Notifications]",
-        headerToggleIncomingDamageHealing   = "Incoming Damage & Healing Toggles",
-        headerToggleIncomingMitigation      = "Incoming Mitigation Toggles",
-        headerToggleIncomingCrowdControl    = "Incoming Crowd Control Toggles",
-        headerToggleOutgoingDamageHealing   = "Outgoing Damage & Healing Toggles",
-        headerToggleOutgoingMitigation      = "Outgoing Mitigation Toggles",
-        headerToggleOutgoingCrowdControl    = "Outgoing Crowd Control Toggles",
-        headerToggleCombatState             = "Combat State Toggles",
-        headerToggleAlert                   = "Active Combat Alert Toggles",
-        headerTogglePoint                   = "Point Toggles",
-        headerToggleResource                = "Resource Toggles",
-        descriptionAlert                    = "Set Active Combat Tips to Always Show in the Interface options",
-    --General
-        inCombatOnly                        = "In Combat Only",
-    --Combat State
-        combatState                         = "Combat State",
-        inCombat                            = "In Combat",
-        outCombat                           = "Out Of Combat",
-    --Damage & Healing
-        damage                              = "Damage",
-		damagecritical						= "Critical Damage",
-        healing                             = "Healing",
-		healingcritical						= "Critical Healing",
-        energize                            = "Energize",
-        ultimateEnergize                    = "Ultimate energize",
-        drain                               = "Drain",
-        dot                                 = "Damage over time",
-		dotcritical							= "Critical Damage over time",
-        hot                                 = "Healing over time",
-		hotcritical							= "Critical Healing over time",
-		critical							= "Throttle Critical Hits",
-    --Mitigation
-        mitigation                          = "Mitigation",
-        miss                                = "Missed",
-        immune                              = "Immune",
-        parried                             = "Parried",
-        reflected                           = "Reflected",
-        damageShield                        = "Damage Shielded",
-        dodged                              = "Dodged",
-        blocked                             = "Blocked",
-        interrupted                         = "Interrupted",
-    --Crowd Control
-        crowdControl                        = "Crowd Control",
-        disoriented                         = "Disoriented",
-        feared                              = "Feared",
-        offBalanced                         = "Off Balanced",
-        silenced                            = "Silenced",
-        stunned                             = "Stunned",
-    --Alerts
-        alert                               = "Active Combat Alerts",
-        alertCleanse                        = "Cleanse Now",
-        alertBlock                          = "Block Now",
-        alertExploit                        = "Exploit Now",
-        alertInterrupt                      = "Interrupt Now",
-        alertDodge                          = "Dodge Now",
-        alertExecute                        = "Execute Now",
-        executeThreshold                    = "Execute Threshold",
-        executeFrequency                    = "Execute Frequency",
-        ingameTips                          = "Hide ingame tips",
-    --Points
-        point                               = "AP, XP & CP Points",
-        pointsAlliance                      = "Alliance Points",
-        pointsExperience                    = "Experience Points",
-        pointsChampion                       = "Champion Points",
-    --Resources
-        resource                            = "Resources",
-        formatResource                      = "Low Resources",
-        lowHealth                           = "Low Health",
-        lowMagicka                          = "Low Magicka",
-        lowStamina                          = "Low Stamina",
-        ultimateReady                       = "Ultimate Ready",
-        potionReady                         = "Potion Ready",
-        warningSound                        = "Warning Sound",
-        warningThresholdHealth              = "Warning Threshold Health",
-        warningThresholdMagicka             = "Warning Threshold Magicka",
-        warningThresholdStamina             = "Warning Threshold Stamina",
-    --Tooltips General
-        tooltipInCombatOnly                 = "Will only display incoming and outgoing numbers when in combat",
-    --Tooltips Incoming
-        --Damage & Healing
-        tooltipIncomingDamage               = "Show incoming damage",
-        tooltipIncomingHealing              = "Show incoming direct healing",
-        tooltipIncomingEnergize             = "Show incoming magicka/stamina return",
-        tooltipIncomingUltimateEnergize     = "Show incoming ultimate return",
-        tooltipIncomingDrain                = "Show incoming magicka/stamina loss",
-        tooltipIncomingDot                  = "Show incoming 'damage over time'",
-        tooltipIncomingHot                  = "Show incoming 'healing over time'",
-        --Mitigation
-        tooltipIncomingMiss                 = "Show missed enemy attacks",
-        tooltipIncomingImmune               = "Show immunity to enemy attacks",
-        tooltipIncomingParried              = "Show parried attacks",
-        tooltipIncomingReflected            = "Show reflected attacks (incoming only)",
-        tooltipIncomingDamageShield         = "Show damage shield absorbs",
-        tooltipIncomingDodge                = "Show dodged attacks",
-        tooltipIncomingBlocked              = "Show blocked attacks",
-        tooltipIncomingInterrupted          = "Show interrupted attacks",
-        --Crowd Control
-        tooltipIncomingDisoriented          = "Show whether you are disoriented",
-        tooltipIncomingFeared               = "Show whether you are feared",
-        tooltipIncomingOffBalanced          = "Show whether you are off balanced",
-        tooltipIncomingSilenced             = "Show whether you are silenced",
-        tooltipIncomingStunned              = "Show whether you are stunned",
-    --Tooltips Outgoing
-        --Damage & Healing
-        tooltipOutgoingDamage               = "Show outgoing damage",
-        tooltipOutgoingHealing              = "Show outgoing direct healing",
-        tooltipOutgoingEnergize             = "Show outgoing magicka/stamina return",
-        tooltipOutgoingUltimateEnergize     = "Show outgoing ultimate return",
-        tooltipOutgoingDrain                = "Show outgoing magicka/stamina loss",
-        tooltipOutgoingDot                  = "Show outgoing 'damage over time'",
-        tooltipOutgoingHot                  = "Show outgoing 'healing over time'",
-        --Mitigation
-        tooltipOutgoingMiss                 = "Show your missed attacks on the enemy",
-        tooltipOutgoingImmune               = "Show whether the enemy was immune to the attack",
-        tooltipOutgoingParried              = "Show whether the enemy parried the attack",
-        tooltipOutgoingReflected            = "Show whether the enemy reflected the attack",
-        tooltipOutgoingDamageShield         = "Show whether the enemy absorbed the attack",
-        tooltipOutgoingDodge                = "Show whether the enemy dodged the attack",
-        tooltipOutgoingBlocked              = "Show whether the enemy blocked the attack",
-        tooltipOutgoingInterrupted          = "Show whether the enemy interrupted the attack",
-        --Crowd Control
-        tooltipOutgoingDisoriented          = "Show whether you disoriented the enemy",
-        tooltipOutgoingFeared               = "Show whether you feared the enemy",
-        tooltipOutgoingOffBalanced          = "Show whether you made the enemy off balanced",
-        tooltipOutgoingSilenced             = "Show whether you silenced the enemy",
-        tooltipOutgoingStunned              = "Show whether you stunned the enemy",
-    --Tooltips Combat State
-        tooltipInCombat                     = "Will display a message upon entering combat",
-        tooltipOutCombat                    = "Will display a message upon exiting combat",
-    --Tooltips Alerts
-        tooltipAlertsCleanse                = "Show alerts when you need to cleanse",
-        tooltipAlertsBlock                  = "Show alerts when you can block a special attack",
-        tooltipAlertsExploit                = "Show alerts when you can exploit the target",
-        tooltipAlertsInterrupt              = "Show alerts when you can interrupt a special attack",
-        tooltipAlertsDodge                  = "Show alerts when you can dodge a special attack",
-        tooltipAlertsExecute                = "Show alerts when target has low health",
-        tooltipExecuteThreshold             = "The threshold at which the execute alert will trigger. Default will display alert at 20% of target's health.",
-        tooltipExecuteFrequency             = "The frequency how often will be execute alert triggered for the same target. Default is 8 seconds.",
-        tooltipIngameTips                   = "Hide default Active Combat Tips window",
-    --Tooltips Points
-        tooltipPointsAlliance               = "Show accumulated Alliance Points",
-        tooltipPointsExperience             = "Show accumulated Experience Points",
-        tooltipPointsChampion                = "Show accumulated Champion Points",
-    --Tooltips Resources
-        tooltipLowHealth                    = "Show Health warning when below desired threshold",
-        tooltipLowMagicka                   = "Show Magicka warning when below desired threshold",
-        tooltipLowStamina                   = "Show Stamina warning when below desired threshold",
-        tooltipUltimateReady                = "Show a notification when Ultimate becomes available",
-        tooltipPotionReady                  = "Show a notification when Potion is ready for use",
-        tooltipWarningSound                 = "Play a sound when resources fall below the desired threshold",
-        tooltipWarningThresholdHealth       = "The threshold at which the warnings will trigger. Default will display a warning at 35%",
-        tooltipWarningThresholdMagicka      = "The threshold at which the warnings will trigger. Default will display a warning at 35%",
-        tooltipWarningThresholdStamina      = "The threshold at which the warnings will trigger. Default will display a warning at 35%",
----------------------------------------------------------------------------------------------------------------------------------------
-    --//FONT OPTIONS//--
----------------------------------------------------------------------------------------------------------------------------------------
-    --Headers
-        buttonFont                          = "Font Options",
-        buttonFontCombat                    = "Font Sizes [Combat]",
-        buttonFontNotification              = "Font Sizes [Notifications]",
-    --General Fonts
-        fontFace                            = "Font Face",
-        fontOutline                         = "Font Outline",
-        fontTest                            = "Test Font",
-        gainLoss                            = "Energize & Drain",
-    --Tooltips Fonts
-        tooltipFontFace                     = "Pick a font face",
-        tooltipFontOutline                  = "Pick a font outline",
-        tooltipFontTest                     = "Generate numbers to test out the chosen font",
-    --Tooltips Fonts Combat
-        tooltipFontDamage                   = "Font size of damage, default 26",
-		tooltipFontDamageCritical           = "Font size of critical damage, default 26",
-        tooltipFontHealing                  = "Font size of direct heals and energize, default 26",
-		tooltipFontHealingCritical          = "Font size of critical direct heals and energize, default 26",
-		tooptipFontDot						= "Font size of DoTs, default 18",
-		tooltipFontDotCritical				= "Font size of critical DoTs, default 18",
-		tooltipFontHot						= "Font size of HoTs, default 18",
-		tooltipFontHotCritical				= "Font size of critical HoTs, default 18",
-        tooltipFontGainLoss                 = "Font size of energize and drain, default 18",
-        tooltipFontMitigation               = "Font size of mitigation, default 30",
-        tooltipFontCrowdControl             = "Font size of crowd control warnings, default 36",
-    --Tooltips Fonts Combat State, Alerts, Points, Resources
-        tooltipFontCombatState              = "Font size of message when entering or exiting combat, default 32",
-        tooltipFontAlert                    = "Font size of active combat alerts, default 48",
-        tooltipFontPoint                    = "Font size of accumulated points, default 32",
-        tooltipFontResource                 = "Font size of resource warnings, default 48",
----------------------------------------------------------------------------------------------------------------------------------------
-    --//COLOR OPTIONS//--
----------------------------------------------------------------------------------------------------------------------------------------
-    --Headers
-        buttonColorCombat                   = "Color Options [Combat]",
-        buttonColorNotification             = "Color Options [Notifications]",
-        headerColorDamageHealing            = "Damage & Healing Colors",
-        headerColorMitigation               = "Mitigation Colors",
-        headerColorCrowdControl             = "Crowd Control Colors",
-        headerColorCombatState              = "Combat State Colors",
-        headerColorAlert                    = "Active Combat Alert Colors",
-        headerColorPoint                    = "Point Colors",
-        headerColorResource                 = "Resource Colors",
-    --Damage & Healing
-        energizeMagicka                     = "Energize (Magicka)",
-        energizeStamina                     = "Energize (Stamina)",
-        energizeUltimate                    = "Energize (Ultimate)",
-        drainMagicka                        = "Drain (Magicka)",
-        drainStamina                        = "Drain (Stamina)",
-        colorCriticalDamage                 = "Override Critical Damage",
-        colorCriticalHealing                = "Override Critical Healing",
-		colorIncomingDamage                 = "Override Incoming Damage",
-        colorCriticalDamageOverride         = "Critical Damage Color",
-        colorCriticalHealingOverride        = "Critical Healing Color",
-		colorIncomingDamageOverride         = "Incoming Damage Color",
-        damageType = {
-            [DAMAGE_TYPE_NONE]              = "None",
-            [DAMAGE_TYPE_GENERIC]           = "Generic",
-            [DAMAGE_TYPE_PHYSICAL]          = "Physical",
-            [DAMAGE_TYPE_FIRE]              = "Fire",
-            [DAMAGE_TYPE_SHOCK]             = "Shock",
-            [DAMAGE_TYPE_OBLIVION]          = "Oblivion",
-            [DAMAGE_TYPE_COLD]              = "Cold",
-            [DAMAGE_TYPE_EARTH]             = "Earth",
-            [DAMAGE_TYPE_MAGIC]             = "Magic",
-            [DAMAGE_TYPE_DROWN]             = "Drown",
-            [DAMAGE_TYPE_DISEASE]           = "Disease",
-            [DAMAGE_TYPE_POISON]            = "Poison",
-        },
-    --Tooltips damage & healing
-        tooltipColorHealing                 = "Set a color for all healing",
-        tooltipColorEnergizeMagicka         = "Set a color for magicka return",
-        tooltipColorEnergizeStamina         = "Set a color for stamina return",
-        tooltipColorEnergizeUltimate        = "Set a color for ultimate return",
-        tooltipColorDrainMagicka            = "Set a color for magicka loss",
-        tooltipColorDrainStamina            = "Set a color for stamina loss",
-        tooltipColorCriticalDamage          = "Use a set color for critical damage.",
-        tooltipColorCriticalHealing         = "Use a set color for critical healing.",
-		tooltipColorIncomingDamage          = "Use a sec color for incoming damage.",
-        tooltipCriticalDamageOverride       = "Set a color for critical damage override",
-        tooltipCriticalHealingOverride      = "Set a color for incoming healing override",
-		tooltipIncomingDamageOverride       = "Set a color for incoming damage override",
-        tooltipDamageType = {
-            [DAMAGE_TYPE_NONE]              = "Set a color for damage with no type",
-            [DAMAGE_TYPE_GENERIC]           = "Set a color for Generic damage",
-            [DAMAGE_TYPE_PHYSICAL]          = "Set a color for Physical damage",
-            [DAMAGE_TYPE_FIRE]              = "Set a color for Fire damage",
-            [DAMAGE_TYPE_SHOCK]             = "Set a color for Shock damage",
-            [DAMAGE_TYPE_OBLIVION]          = "Set a color for Oblivion damage",
-            [DAMAGE_TYPE_COLD]              = "Set a color for Cold damage",
-            [DAMAGE_TYPE_EARTH]             = "Set a color for Earth damage",
-            [DAMAGE_TYPE_MAGIC]             = "Set a color for Magic damage",
-            [DAMAGE_TYPE_DROWN]             = "Set a color for Drowning damage",
-            [DAMAGE_TYPE_DISEASE]           = "Set a color for Disease damage",
-            [DAMAGE_TYPE_POISON]            = "Set a color for Poison damage",
-        },
-    --Tooltips Mitigation
-        tooltipColorMiss                    = "Set a color for missed attacks",
-        tooltipColorImmune                  = "Set a color for immunity to attacks",
-        tooltipColorParried                 = "Set a color for parried attacks",
-        tooltipColorReflected               = "Set a color for reflected attacks",
-        tooltipColorDamageShield            = "Set a color for damage shield absorbs",
-        tooltipColorDodge                   = "Set a color for dodged attacks",
-        tooltipColorBlocked                 = "Set a color for blocked attacks",
-        tooltipColorInterrupted             = "Set a color for interrupted attacks",
-    --Tooltips Crowd Control
-        tooltipColorDisoriented             = "Set a color for notifications when disoriented",
-        tooltipColorFeared                  = "Set a color for notifications when feared",
-        tooltipColorOffBalanced             = "Set a color for notifications when off balance",
-        tooltipColorSilenced                = "Set a color for notifications when silenced",
-        tooltipColorStunned                 = "Set a color for notifications when stunned",
-    --Tooltips Alerts
-        tooltipColorAlertsCleanse           = "Set a color for cleanse alerts",
-        tooltipColorAlertsBlock             = "Set a color for block alerts",
-        tooltipColorAlertsExploit           = "Set a color for exploit alerts",
-        tooltipColorAlertsInterrupt         = "Set a color for interrupt alerts",
-        tooltipColorAlertsDodge             = "Set a color for dodge alerts",
-        tooltipColorAlertsExecute           = "Set a color for execute alerts",
-    --Tooltips Points
-        tooltipColorPointsAlliance          = "Set a color for accumulated Alliance Points",
-        tooltipColorPointsExperience        = "Set a color for accumulated Experience Points",
-        tooltipColorPointsChampion           = "Set a color for accumulated Champion Points",
-    --Tooltips Resources
-        tooltipColorLowHealth               = "Set a color for low Health warnings",
-        tooltipColorLowMagicka              = "Set a color for low Magicka warnings",
-        tooltipColorLowStamina              = "Set a color for low Stamina warnings",
-        tooltipColorUltimateReady           = "Set a color for notifications when Ultimate is available",
-        tooltipColorPotionReady             = "Set a color for notifications when Potion is ready for use",
-    --Tooltips Combat State
-        tooltipColorInCombat                = "Set a color for notifications when entering combat",
-        tooltipColorOutCombat               = "Set a color for notifications when exiting combat",
----------------------------------------------------------------------------------------------------------------------------------------
-    --//FORMAT OPTIONS//--
----------------------------------------------------------------------------------------------------------------------------------------
-    --Headers
-        descriptionFormat                   = "Allows to change the text output. Write any text you want or enter a variable for special outputs\n %t Ability name, localized name\n %a Amount, value\n %r Power type, resource",
-        buttonFormatCombat                  = "Format Options [Combat]",
-        buttonFormatNotification            = "Format Options [Notifications]",
-        headerFormatDamageHealing           = "Damage & Healing Text Formats",
-        headerFormatMitigation              = "Mitigation Text Formats",
-        headerFormatCrowdControl            = "Crowd Control Text Formats",
-        headerFormatCombatState             = "Combat State Formats",
-        headerFormatAlert                   = "Active Combat Alert Formats",
-        headerFormatPoint                   = "Point Text Formats",
-        headerFormatResource                = "Resource Text Formats",
-    --Tooltips Damage & Healing
-        tooltipFormatDamage                 = "Text format for damage numbers",
-		tooltipFormatDamageCritical         = "Text format for critical damage numbers",
-        tooltipFormatHealing                = "Text format for direct healing numbers",
-		tooltipFormatHealingCritical        = "Text format for critical direct healing numbers",
-        tooltipFormatEnergize               = "Text format for magicka/stamina return",
-        tooltipFormatUltimateEnergize       = "Text format for ultimate return",
-        tooltipFormatDrain                  = "Text format for magicka/stamina loss",
-        tooltipFormatDot                    = "Text format for 'damage over time' numbers",
-		tooltipFormatDotCritical            = "Text format for critical 'damage over time' numbers",
-        tooltipFormatHot                    = "Text format for 'heal over time' numbers",
-		tooltipFormatHotCritical            = "Text format for critical 'heal over time' numbers",
-    --Tooltips Mitigation
-        tooltipFormatMiss                   = "Text format for missed attacks",
-        tooltipFormatImmune                 = "Text format for immunity to attacks",
-        tooltipFormatParried                = "Text format for parried attacks",
-        tooltipFormatReflected              = "Text format for reflected attacks",
-        tooltipFormatDamageShield           = "Text format for damage shield absorbs",
-        tooltipFormatDodged                 = "Text format for dodged attacks",
-        tooltipFormatBlocked                = "Text format for blocked attacks",
-        tooltipFormatInterrupted            = "Text format for interrupted attacks",
-    --Tooltips Crowd Control
-        tooltipFormatDisoriented            = "Text format for notifications when disoriented",
-        tooltipFormatFeared                 = "Text format for notifications when feared",
-        tooltipFormatOffBalanced            = "Text format for notifications when off balanced",
-        tooltipFormatSilenced               = "Text format for notifications when silenced",
-        tooltipFormatStunned                = "Text format for notifications when stunned",
-    --Tooltips Alerts
-        tooltipFormatAlertsCleanse          = "Text format for cleanse alerts",
-        tooltipFormatAlertsBlock            = "Text format for block alerts",
-        tooltipFormatAlertsExploit          = "Text format for exploit alerts",
-        tooltipFormatAlertsInterrupt        = "Text format for interrupt alerts",
-        tooltipFormatAlertsDodge            = "Text format for dodge alerts",
-        tooltipFormatAlertsExecute          = "Text format for execute alerts",
-    --Tooltips Points
-        tooltipFormatPointsAlliance         = "Text format for accumulated Alliance Points",
-        tooltipFormatPointsExperience       = "Text format for accumulated Experience Points",
-        tooltipFormatPointsChampion          = "Text format for accumulated Champion Points",
-    --Tooltips Resources
-        tooltipFormatResource               = "Text format for warnings when low on resources",
-        tooltipFormatUltimateReady          = "Text format for notifications when your Ultimate is available",
-        tooltipFormatPotionReady            = "Text format for notifications when Potion is ready for use",
-    --Tooltips Combat State
-        tooltipFormatInCombat               = "Text format for notifications when entering combat",
-        tooltipFormatOutCombat              = "Text format for notifications when exiting combat",
----------------------------------------------------------------------------------------------------------------------------------------
-    --//ANIMATION OPTIONS//--
----------------------------------------------------------------------------------------------------------------------------------------
-    --Headers
-        buttonAnimation                     = "Animation Options",
-    --General
-        animationType                       = "Animation type",
-        outgoingDirection                   = "Outgoing direction",
-        incomingDirection                   = "Incoming direction",
-        animationTest                       = "Test Animation",
-        outgoingIcon                        = "Outgoing icon position",
-        incomingIcon                        = "Incoming icon position",
-    --Tooltips
-        tooltipAnimationType                = "Select Animation Type",
-        tooltipAnimationIncomingDirection   = "Set the direction of incoming damage",
-        tooltipAnimationOutgoingDirection   = "Set the direction of outgoing damage",
-        tooltipAnimationTest                = "Test the animations of incoming & outgoing damage",
-        tooltipAnimationOutgoingIcon        = "Set the icons position of outgoing events",
-        tooltipAnimationIncomingIcon        = "Set the icons position of incoming events",
----------------------------------------------------------------------------------------------------------------------------------------
-    --//THROTTLE OPTIONS//--
----------------------------------------------------------------------------------------------------------------------------------------
-    --Headers
-        buttonThrottle                      = "Throttle Options",
-    --General
-        descriptionThrottle                 = "Accumulates multiple hits into one. Use the slider to adjust the time frame in milliseconds. Critical hits are never throttled.\n",
-        showThrottleTrailer                 = "Show throttle trailer",
-    --Tooltips
-        tooltipThrottleDamage               = "Set the throttle for damage numbers",
-        tooltipThrottleHealing              = "Set the throttle for healing numbers",
-        tooltipThrottleDot                  = "Set the throttle for 'damage over time' numbers",
-        tooltipThrottleHot                  = "Set the throttle for 'heal over time' numbers",
-        tooltipThrottleTrailer              = "Enable throttle trailer",
-		tooltipThrottleCritical             = "Enable throttle for critical hits",
 }

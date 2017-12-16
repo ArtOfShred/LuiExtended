@@ -65,7 +65,7 @@ CombatCloudAlertTable = {
     
     [12459] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Winter's Reach (Frost Mage)
     
-    [35151] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true}, -- Spell Absorption (Spirit Mage)
+    [35151] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true}, -- Spell Absorption (Spirit Mage)
     
     [14370] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, auradetect = true}, -- Void (Time Bomb Mage) 
     
@@ -73,13 +73,13 @@ CombatCloudAlertTable = {
     [37129] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3}, -- Ice Cage (Battlemage)
     [44216] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2}, -- Negate Magic (Battlemage - Elite)
     
-    [13397] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true}, -- Empower Undead (Necromancer)
+    [13397] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true}, -- Empower Undead (Necromancer)
     [14350] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3}, -- Aspect of Terror (Fear Mage)
     
     [35387] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Defiled Grave (Bonelord)
     
-    [57534] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true}, -- Focused Healing (Healer)
-    [44328] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 2, auradetect = true}, -- Rite of Passage (Healer)
+    [57534] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true}, -- Focused Healing (Healer)
+    [44328] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 2, auradetect = true, notDirect = true}, -- Rite of Passage (Healer)
     
     [38118] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, skipcheck = true}, -- Caltrops  (Faction NPCs)
     
@@ -114,7 +114,7 @@ CombatCloudAlertTable = {
     
     [5240] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Lash (Giant Snake)
     [5242] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Kiss of Poison (Giant Snake)
-    [5244] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true}, -- Shed Skin (Giant Snake)
+    [5244] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true}, -- Shed Skin (Giant Snake)
     
     [5363] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Chomp (Kagouti)
     

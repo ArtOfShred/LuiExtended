@@ -50,6 +50,7 @@ CombatCloudConstants = {
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//MITIGATION//--
 ---------------------------------------------------------------------------------------------------------------------------------------
+    mitigationType                          = { "Single Line", "Multiple Lines" },
     isMiss = {
         [ACTION_RESULT_MISS]                = true,
     },
@@ -111,13 +112,15 @@ CombatCloudConstants = {
         RESOURCE                    = "COMBATCLOUD_EVENT_RESOURCE",
     },
     alertType = {
-        CLEANSE                     = "COMBATCLOUD_ALERT_TYPE_CLEANSE",
         BLOCK                       = "COMBATCLOUD_ALERT_TYPE_BLOCK",
-        BLOCKSTAGGER                = "COMBATCLOUD_ALERT_TYPE_BLOCKSTAGGER",
-        EXPLOIT                     = "COMBATCLOUD_ALERT_TYPE_EXPLOIT",
-        INTERRUPT                   = "COMBATCLOUD_ALERT_TYPE_INTERRUPT",
+        BLOCKSTAGGER                = "COMBATCLOUD_ALERT_TYPE_BLOCKSTAGGER",  
         DODGE                       = "COMBATCLOUD_ALERT_TYPE_DODGE",
+        AVOID                       = "COMBATCLOUD_ALERT_TYPE_AVOID",
+        INTERRUPT                   = "COMBATCLOUD_ALERT_TYPE_INTERRUPT",
+        CLEANSE                     = "COMBATCLOUD_ALERT_TYPE_CLEANSE",
+        EXPLOIT                     = "COMBATCLOUD_ALERT_TYPE_EXPLOIT",
         EXECUTE                     = "COMBATCLOUD_ALERT_TYPE_EXECUTE",
+        SHARED                      = "COMBATCLOUD_ALERT_TYPE_SHARED",
     },
     combatType = {
         INCOMING                    = "COMBATCLOUD_COMBAT_TYPE_INCOMING",
@@ -133,7 +136,7 @@ CombatCloudConstants = {
     pointType = {
         ALLIANCE_POINTS             = "COMBATCLOUD_POINT_TYPE_ALLIANCE_POINTS",
         EXPERIENCE_POINTS           = "COMBATCLOUD_POINT_TYPE_EXPERIENCE_POINTS",
-        CHAMPION_POINTS              = "COMBATCLOUD_POINT_TYPE_CHAMPION_POINTS",
+        CHAMPION_POINTS             = "COMBATCLOUD_POINT_TYPE_CHAMPION_POINTS",
         IN_COMBAT                   = "COMBATCLOUD_POINT_TYPE_IN_COMBAT",
         OUT_COMBAT                  = "COMBATCLOUD_POINT_TYPE_OUT_COMBAT",
     },

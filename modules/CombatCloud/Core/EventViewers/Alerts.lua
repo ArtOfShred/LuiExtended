@@ -13,52 +13,125 @@ function CombatCloud_AlertEventViewer:New(...)
     return obj
 end
 
-function CombatCloud_AlertEventViewer:OnEvent(alertType, abilityName, abilityIcon, sourceName)
+function CombatCloud_AlertEventViewer:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, block, blockstagger, dodge, avoid, interrupt)
     local S = LUIE.CombatText.SV
 
     --Label setup
     local control, controlPoolKey = self.poolManager:GetPoolObject(poolTypes.CONTROL)
 
     local size, color, text
+    
+    -- First we handle Cleanse/Execute/Exploit because these messages are always individual
+    
     --Cleanse
     if (alertType == alertTypes.CLEANSE) then
         color = S.colors.alertCleanse
         size = S.fontSizes.alert
-        text = zo_strformat("<<1>> <<2>> CLEANSE", abilityIcon, abilityName)
-    --BLOCK
-    elseif (alertType == alertTypes.BLOCK) then
-        color = S.colors.alertBlock
-        size = S.fontSizes.alert
-        text = zo_strformat("<<1>> <<2>> BLOCK", abilityIcon, abilityName)
-    elseif (alertType == alertTypes.BLOCKSTAGGER) then
-        color = S.colors.alertBlock
-        size = S.fontSizes.alert
-        text = zo_strformat("<<1>> <<2>> ***BLOCK", abilityIcon, abilityName)
-    --EXPLOIT
-    elseif (alertType == alertTypes.EXPLOIT) then
-        color = S.colors.alertExploit
-        size = S.fontSizes.alert
-        text = self:FormatString(S.formats.alertExploit, { value = value, text = L.alertExploit })
-    --INTERRUPT
-    elseif (alertType == alertTypes.INTERRUPT) then
-        color = S.colors.alertInterrupt
-        size = S.fontSizes.alert
-        text = zo_strformat("<<1>> <<2>> INTERRUPT", abilityIcon, abilityName)
-    --DODGE
-    elseif (alertType == alertTypes.DODGE) then
-        color = S.colors.alertDodge
-        size = S.fontSizes.alert
-        text = zo_strformat("<<1>> <<2>> DODGE", abilityIcon, abilityName)
+        text = zo_strformat("<<1>> <<2>> - <<3>>", abilityIcon, abilityName, S.formats.alertCleanse)
     --EXECUTE
     elseif (alertType == alertTypes.EXECUTE) then
         color = S.colors.alertExecute
         size = S.fontSizes.alert
-        text = self:FormatString(S.formats.alertExecute, { value = value, text = L.alertExecute })
-    -- AVOID
-    elseif (alertType == alertTypes.AVOID) then
+        text = S.formats.alertExecute
+    --EXPLOIT
+    elseif (alertType == alertTypes.EXPLOIT) then
+        color = S.colors.alertExploit
+        size = S.fontSizes.alert
+        text = S.formats.alertExploit
+    elseif (alertType == alertTypes.SHARED) then
+
+        size = S.fontSizes.alert
+        
+        local spacer = " - "
+        local stringBlock
+        local stringDodge
+        local stringAvoid
+        local stringInterrupt
+        
+        -- Quickly set only one of these to true for priority color formatting.
+        -- PRIORITY: INTERRUPT > BLOCK STAGGER > DODGE > BLOCK > AVOID
+        if blockstagger then block = false end
+        
+        if avoid then
+            stringAvoid = (S.formats.alertAvoid .. spacer)
+            color = S.colors.alertAvoid
+        else
+            stringAvoid = ""
+        end
+        
+        if block then
+            stringBlock = (S.formats.alertBlock .. spacer)
+            color = S.colors.alertBlock
+        end
+        
+        if dodge then
+            stringDodge = (S.formats.alertDodge .. spacer)
+            color = S.colors.alertDodge
+        else
+            stringDodge = ""
+        end
+        
+        if blockstagger then
+            stringBlock = (S.formats.alertBlockStagger .. spacer)
+            color = S.colors.alertBlock
+        end
+        
+        if interrupt then
+            stringInterrupt = (S.formats.alertInterrupt .. spacer)
+            color = S.colors.alertInterrupt
+        else
+            stringInterrupt = ""
+        end
+        
+        if not block and not blockstagger then
+            stringBlock = ""
+        end
+        
+        local stringPart1 = self:FormatAlertString(S.toggles.mitigationFormat, { source = sourceName, ability = abilityName, icon = abilityIcon })
+        local stringPart2 = isDirect and S.toggles.mitigationSuffix or ""
+        local stringPart3 = string.format("%s%s%s%s%s", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt)
+        
+        text = zo_strformat("<<1>><<2>><<3>>", stringPart1, stringPart2, stringPart3)
+    --BLOCK
+    elseif (alertType == alertTypes.BLOCK) then
+        color = S.colors.alertBlock
+        size = S.fontSizes.alert
+        local stringPart1 = self:FormatAlertString(S.toggles.mitigationFormat, { source = sourceName, ability = abilityName, icon = abilityIcon })
+        local stringPart2 = isDirect and S.toggles.mitigationSuffix or ""
+        local stringPart3 = S.formats.alertBlock
+        text = zo_strformat("<<1>><<2>> <<3>>", stringPart1, stringPart2, stringPart3)
+    -- BLOCK STAGGER
+    elseif (alertType == alertTypes.BLOCKSTAGGER) then
+        color = S.colors.alertBlock
+        size = S.fontSizes.alert
+        local stringPart1 = self:FormatAlertString(S.toggles.mitigationFormat, { source = sourceName, ability = abilityName, icon = abilityIcon })
+        local stringPart2 = isDirect and S.toggles.mitigationSuffix or ""
+        local stringPart3 = S.formats.alertBlockStagger
+        text = zo_strformat("<<1>><<2>> <<3>>", stringPart1, stringPart2, stringPart3)
+    --INTERRUPT
+    elseif (alertType == alertTypes.INTERRUPT) then
+        color = S.colors.alertInterrupt
+        size = S.fontSizes.alert
+        local stringPart1 = self:FormatAlertString(S.toggles.mitigationFormat, { source = sourceName, ability = abilityName, icon = abilityIcon })
+        local stringPart2 = isDirect and S.toggles.mitigationSuffix or ""
+        local stringPart3 = S.formats.alertInterrupt
+        text = zo_strformat("<<1>><<2>> <<3>>", stringPart1, stringPart2, stringPart3)
+    --DODGE
+    elseif (alertType == alertTypes.DODGE) then
         color = S.colors.alertDodge
         size = S.fontSizes.alert
-        text = zo_strformat("<<1>> <<2>> AVOID", abilityIcon, abilityName)
+        local stringPart1 = self:FormatAlertString(S.toggles.mitigationFormat, { source = sourceName, ability = abilityName, icon = abilityIcon })
+        local stringPart2 = isDirect and S.toggles.mitigationSuffix or ""
+        local stringPart3 = S.formats.alertDodge
+        text = zo_strformat("<<1>><<2>> <<3>>", stringPart1, stringPart2, stringPart3)
+    -- AVOID
+    elseif (alertType == alertTypes.AVOID) then
+        color = S.colors.alertAvoid
+        size = S.fontSizes.alert
+        local stringPart1 = self:FormatAlertString(S.toggles.mitigationFormat, { source = sourceName, ability = abilityName, icon = abilityIcon })
+        local stringPart2 = isDirect and S.toggles.mitigationSuffix or ""
+        local stringPart3 = S.formats.alertAvoid
+        text = zo_strformat("<<1>><<2>> <<3>>", stringPart1, stringPart2, stringPart3)
     end
 
     self:PrepareLabel(control.label, size, color, text)

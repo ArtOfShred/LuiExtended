@@ -25,27 +25,27 @@ function CombatCloud_CrowdControlEventViewer:OnEvent(crowdControlType, combatTyp
     if (crowdControlType == crowdControlTypes.DISORIENTED) then
         color = S.colors.disoriented
         size = S.fontSizes.crowdControl
-        text = self:FormatString(S.formats.disoriented, { text = L.disoriented })
+        text = self:FormatString(S.formats.disoriented, { text = GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED) })
     --Feared
     elseif (crowdControlType == crowdControlTypes.FEARED) then
         color = S.colors.feared
         size = S.fontSizes.crowdControl
-        text = self:FormatString(S.formats.feared, { text = L.feared })
+        text = self:FormatString(S.formats.feared, { text = GetString(SI_LUIE_LAM_CT_SHARED_FEARED) })
     --Off Balanced
     elseif (crowdControlType == crowdControlTypes.OFFBALANCED) then
         color = S.colors.offBalanced
         size = S.fontSizes.crowdControl
-        text = self:FormatString(S.formats.offBalanced, { text = L.offBalanced })
+        text = self:FormatString(S.formats.offBalanced, { text = GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE) })
     --Silenced
     elseif (crowdControlType == crowdControlTypes.SILENCED) then
         color = S.colors.silenced
         size = S.fontSizes.crowdControl
-        text = self:FormatString(S.formats.silenced, { text = L.silenced })
+        text = self:FormatString(S.formats.silenced, { text = GetString(SI_LUIE_LAM_CT_SHARED_SILENCED) })
     --Stunned
     elseif (crowdControlType == crowdControlTypes.STUNNED) then
         color = S.colors.stunned
         size = S.fontSizes.crowdControl
-        text = self:FormatString(S.formats.stunned, { text = L.stunned })
+        text = self:FormatString(S.formats.stunned, { text = GetString(SI_LUIE_LAM_CT_SHARED_STUNNED) })
     end
 
     self:PrepareLabel(control.label, size, color, text)

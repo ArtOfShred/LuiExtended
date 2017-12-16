@@ -121,11 +121,22 @@ CT.D = {
         showOutCombat               = true,
     ----------------------------------
     --Alerts
-        showAlertCleanse            = true,
+        showAlertMitigation         = true,
+        mitigationType              = "Single Line",
+        mitigationFormat            = "%t %i", -- %i %t
+        mitigationSuffix            = GetString(SI_LUIE_CT_MITIGATION_SUFFIX_DEFAULT), -- "incoming! "
+        mitigationRank3             = true,
+        mitigationRank2             = true,
+        mitigationRank1             = true,
+        mitigationDungeon           = true,
+    
         showAlertBlock              = true,
-        showAlertExploit            = true,
         showAlertInterrupt          = true,
         showAlertDodge              = true,
+        showAlertAvoid              = true,
+        
+        showAlertCleanse            = true,
+        showAlertExploit            = true,
         showAlertExecute            = false,
         hideIngameTips              = true,
     ----------------------------------
@@ -167,20 +178,19 @@ CT.D = {
 		damagecritical 				= 32,
         healing                     = 32,
 		healingcritical				= 32,
-        dot                         = 32,
-		dotcritical 				= 32,
-        hot	              		    = 32,
-		hotcritical				    = 32,
+        dot                         = 26,
+		dotcritical 				= 26,
+        hot	              		    = 26,
+		hotcritical				    = 26,
         gainLoss                    = 32,
-        critical                    = 32,
         mitigation                  = 32,
-        crowdControl                = 24,
+        crowdControl                = 26,
     ----------------------------------
     --Combat State, Points, Alerts & Resources
         combatState                 = 24,
         alert                       = 32,
         point                       = 24,
-        resource                    = 40,
+        resource                    = 32,
     },
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//COLOR DEFAULTS//--
@@ -238,6 +248,7 @@ CT.D = {
         alertExploit                = { 1, 1, 1, 1 },
         alertInterrupt              = { 1, 1, 1, 1 },
         alertDodge                  = { 1, 1, 50/255, 1 },
+        alertAvoid                  = { 1, 1, 50/255, 1 },
         alertExecute                = { 1, 1, 1, 1 },
     ----------------------------------
     --Points
@@ -270,43 +281,45 @@ CT.D = {
 		hotcritical                 = "%t %a!",
     ----------------------------------
     --Mitigation
-        miss                        = "Missed %t",
-        immune                      = "Immune %t",
-        parried                     = "Parried %t",
-        reflected                   = "Reflected %t",
+        miss                        = GetString(SI_LUIE_CT_MISS_DEFAULT),
+        immune                      = GetString(SI_LUIE_CT_IMMUNE_DEFAULT),
+        parried                     = GetString(SI_LUIE_CT_PARRIED_DEFAULT),
+        reflected                   = GetString(SI_LUIE_CT_REFLECTED_DEFAULT),
         damageShield                = "(%a) %t",
-        dodged                      = "Dodged %t",
+        dodged                      = GetString(SI_LUIE_CT_DODGED_DEFAULT),
         blocked                     = "*%t %a",
-        interrupted                 = "Interrupted",
+        interrupted                 = GetString(SI_LUIE_CT_INTERRUPTED_DEFAULT),
     ----------------------------------
     --Crowd Control
-        disoriented                 = "%t",
-        feared                      = "%t",
-        offBalanced                 = "%t",
-        silenced                    = "%t",
-        stunned                     = "%t",
+        disoriented                 = GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED),
+        feared                      = GetString(SI_LUIE_LAM_CT_SHARED_FEARED),
+        offBalanced                 = GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE),
+        silenced                    = GetString(SI_LUIE_LAM_CT_SHARED_SILENCED),
+        stunned                     = GetString(SI_LUIE_LAM_CT_SHARED_STUNNED),
     ----------------------------------
     --Combat State
-        inCombat                    = "Entered Combat",
-        outCombat                   = "Left Combat",
+        inCombat                    = GetString(SI_LUIE_CT_COMBAT_IN_DEFAULT),
+        outCombat                   = GetString(SI_LUIE_CT_COMBAT_OUT_DEFAULT),
     ----------------------------------
     --Alerts
-        alertCleanse                = "CLEANSE",
-        alertBlock                  = "BLOCK",
-        alertExploit                = "EXPLOIT",
-        alertInterrupt              = "INTERRUPT",
-        alertDodge                  = "DODGE",
-        alertExecute                = "EXECUTE",
+        alertCleanse                = GetString(SI_LUIE_CT_CLEANSE_DEFAULT),
+        alertBlock                  = GetString(SI_LUIE_CT_BLOCK_DEFAULT),
+        alertBlockStagger           = GetString(SI_LUIE_CT_BLOCKSTAGGER_DEFAULT),
+        alertExploit                = GetString(SI_LUIE_CT_EXPLOIT_DEFAULT),
+        alertInterrupt              = GetString(SI_LUIE_CT_INTERRUPT_DEFAULT),
+        alertDodge                  = GetString(SI_LUIE_CT_DODGE_DEFAULT),
+        alertAvoid                  = GetString(SI_LUIE_CT_AVOID_DEFAULT),
+        alertExecute                = GetString(SI_LUIE_CT_EXECUTE_DEFAULT),
     ----------------------------------
     --Points
         pointsAlliance              = "%a AP",
         pointsExperience            = "%a XP",
-        pointsChampion               = "%a CP",
+        pointsChampion              = "%a XP",
     ----------------------------------
     --Resources
         resource                    = "%t! (%a)",
-        ultimateReady               = "%t!",
-        potionReady                 = "%t!",
+        ultimateReady               = GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY),
+        potionReady                 = GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY),
     },
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//ANIMATION DEFAULTS//--
@@ -408,11 +421,7 @@ function CT.Initialize( enabled )
     --Hide ingame active combat tips
     ZO_ActiveCombatTips:SetHidden(LUIE.CombatText.SV.toggles.hideIngameTips)
 
-    if (LUIE.CombatText.SV.toggles.showAlertCleanse or
-        LUIE.CombatText.SV.toggles.showAlertBlock or
-        LUIE.CombatText.SV.toggles.showAlertExploit or
-        LUIE.CombatText.SV.toggles.showAlertInterrupt or
-        LUIE.CombatText.SV.toggles.showAlertDodge) then
+    if LUIE.CombatText.SV.toggles.showAlertMitigation then 
         SetSetting(SETTING_TYPE_ACTIVE_COMBAT_TIP, 0, ACT_SETTING_ALWAYS)
     end
 

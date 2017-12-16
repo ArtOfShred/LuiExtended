@@ -26,26 +26,26 @@ function CombatCloud_PointEventViewer:OnEvent(pointType, value)
     if (pointType == pointTypes.ALLIANCE_POINTS) then
         color = S.colors.pointsAlliance
         size = S.fontSizes.point
-        text = self:FormatString(S.formats.pointsAlliance, { value = value, text = L.pointsAlliance })
+        text = self:FormatString(S.formats.pointsAlliance, { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_ALLIANCE) })
     elseif (pointType == pointTypes.EXPERIENCE_POINTS) then
         color = S.colors.pointsExperience
         size = S.fontSizes.point
-        text = self:FormatString(S.formats.pointsExperience, { value = value, text = L.pointsExperience })
+        text = self:FormatString(S.formats.pointsExperience, { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_EXPERIENCE) })
     elseif (pointType == pointTypes.CHAMPION_POINTS) then
         color = S.colors.pointsChampion
         size = S.fontSizes.point
-        text = self:FormatString(S.formats.pointsChampion, { value = value, text = L.pointsChampion })
+        text = self:FormatString(S.formats.pointsChampion, { value = value, text = GetString(SI_LUIE_LAM_CT_SHARED_POINTS_CHAMPION) })
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//COMBAT STATE//--
 ---------------------------------------------------------------------------------------------------------------------------------------
     elseif (pointType == pointTypes.IN_COMBAT) then
         color = S.colors.inCombat
         size = S.fontSizes.combatState
-        text = self:FormatString(S.formats.inCombat, { value = value, text = L.inCombat })
+        text = self:FormatString(S.formats.inCombat, { value = value, text = GetString(SI_LUIE_CT_COMBAT_IN_DEFAULT) })
     elseif (pointType == pointTypes.OUT_COMBAT) then
         color = S.colors.outCombat
         size = S.fontSizes.combatState
-        text = self:FormatString(S.formats.outCombat, { value = value, text = L.outCombat })
+        text = self:FormatString(S.formats.outCombat, { value = value, text = GetString(SI_LUIE_CT_COMBAT_OUT_DEFAULT) })
     end
 
     self:PrepareLabel(control.label, size, color, text)
