@@ -45,7 +45,7 @@ function CombatCloud_CombatEventListener:EffectChanged(...)
             callLater(function() refireDelay[abilityId] = nil end, AlertT[abilityId].refire) --buffer by X time
         end
         
-        if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId.interrupt] then
+        if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt then
         
             -- Filter by priority
             if S.toggles.mitigationDungeon and not IsUnitInDungeon("player") or not S.toggles.mitigationDungeon then
@@ -245,7 +245,7 @@ function CombatCloud_CombatEventListener:OnEvent(...)
             callLater(function() refireDelay[abilityId] = nil end, AlertT[abilityId].refire) --buffer by X time
         end
 
-        if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId.interrupt] then
+        if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt then
         
             -- Filter by priority
             if S.toggles.mitigationDungeon and not IsUnitInDungeon("player") or not S.toggles.mitigationDungeon then
