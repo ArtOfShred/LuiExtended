@@ -677,6 +677,7 @@ function LUIE_CreateSettings()
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "dropdown",
+        scrollable = true,
         name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
         tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONT_TP),
         choices = FontsList,
@@ -753,6 +754,7 @@ function LUIE_CreateSettings()
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "dropdown",
+        scrollable = true,
         name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
         tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONT_TP),
         choices = FontsList,
@@ -963,6 +965,7 @@ function LUIE_CreateSettings()
             -- Buff Label Font
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "dropdown",
+                scrollable = true,
                 name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_FONT_TP),
                 choices = FontsList,
@@ -6311,6 +6314,7 @@ function LUIE_CreateSettings()
     -- DefaultFrames Font
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
+        scrollable = true,
         name = GetString(SI_LUIE_LAM_FONT),
         tooltip = GetString(SI_LUIE_LAM_UF_DFRAMES_FONT_TP),
         choices = FontsList,
@@ -6418,6 +6422,7 @@ function LUIE_CreateSettings()
     -- Custom Unit Frames Font
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
+        scrollable = true,
         name = GetString(SI_LUIE_LAM_FONT),
         tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_FONT_TP),
         choices = FontsList,
@@ -6468,6 +6473,7 @@ function LUIE_CreateSettings()
     -- Custom Unit Frames Texture
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "dropdown",
+        scrollable = true,
         name = GetString(SI_LUIE_LAM_UF_CFRAMES_TEXTURE),
         tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_TEXTURE_TP),
         choices = StatusbarTexturesList,
@@ -8385,6 +8391,7 @@ function LUIE_CreateSettings()
         controls = {
                 {--FONT FACE DROPDOWN
                     type    = "dropdown",
+                    scrollable = true,
                     name    = GetString(SI_LUIE_LAM_CT_FONT_FACE),
                     tooltip = GetString(SI_LUIE_LAM_CT_FONT_FACE_TP),
                     choices = FontsList,
