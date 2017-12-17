@@ -172,7 +172,7 @@ function CI.Initialize( enabled )
         elseif ( isKeyboardUltimateSlot and self.costFailureOnly and not isShowingCooldown ) then
             usable = true
         -- Fix to grey out potions
-        elseif ( IsSlotItemConsumable(slotnum) and not self.useFailure and not isShowingCooldown ) or ( IsSlotItemConsumable(slotnum) and not CI.SV.GlobalPotion ) then
+        elseif IsSlotItemConsumable(slotnum) and duration <= 1000 and not self.useFailure then
 			usable = true
 		end
         if usable ~= self.usable or isGamepad ~= self.isGamepad then
@@ -197,7 +197,7 @@ function CI.Initialize( enabled )
 
         if showCooldown then
             -- For items with a long CD we need to be sure not to hide the countdown radial timer, so if the duration is the 1 sec GCD, then we don't turn off the cooldown animation.
-            if not ( IsSlotItemConsumable(slotnum) and duration < 5000 and not CI.SV.GlobalPotion ) then
+            if not IsSlotItemConsumable(slotnum) or duration > 1000 or CI.SV.GlobalPotion then
                 self.cooldown:StartCooldown(remain, duration, CooldownMethod[CI.SV.GlobalMethod], nil, NO_LEADING_EDGE)
                 if self.cooldownCompleteAnim.animation then
                     self.cooldownCompleteAnim.animation:GetTimeline():PlayInstantlyToStart()
@@ -225,7 +225,7 @@ function CI.Initialize( enabled )
             if CI.SV.GlobalFlash then
                 if self.showingCooldown then
                     -- Stop flash from appearing on potion/ultimate if toggled off.
-                    if not ( IsSlotItemConsumable(slotnum) and duration < 5000 and not CI.SV.GlobalPotion ) then
+                    if not IsSlotItemConsumable(slotnum) or duration > 1000 or CI.SV.GlobalPotion then
                         -- This ability was in a non-global cooldown, and now the cooldown is over...play animation and sound
                         if options ~= FORCE_SUPPRESS_COOLDOWN_SOUND then
                             PlaySound(SOUNDS.ABILITY_READY)

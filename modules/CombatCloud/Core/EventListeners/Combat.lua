@@ -28,6 +28,8 @@ function CombatCloud_CombatEventListener:EffectChanged(...)
     local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
     
     if AlertT[abilityId] and AlertT[abilityId].auradetect and not refireDelay[abilityId] then
+    
+        effectName = zo_strformat("<<C:1>>", effectName)
         
         if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then effectName = LUIE.Effects.EffectOverride[abilityId].name end
         
@@ -109,6 +111,7 @@ end
 function CombatCloud_CombatEventListener:OnEvent(...)
     local resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId = ...
     local S, combatType, togglesInOut = LUIE.CombatText.SV, nil, nil
+    abilityName = zo_strformat("<<C:1>>", abilityName)
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//INCOMING OUTGOING DIRECION//--
 ---------------------------------------------------------------------------------------------------------------------------------------
