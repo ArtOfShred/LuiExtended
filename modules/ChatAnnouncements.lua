@@ -4551,6 +4551,11 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
                     local type = "LUIE_CURRENCY_VENDOR"
                     local messageChange = CA.SV.LootMessageLaunder
                     
+                    local parts = {ZO_LinkHandler_ParseLink(itemLink)}
+                    parts[22] = "1"
+                    parts = table.concat(parts, ":"):sub(2, -1)
+                    itemLink = zo_strformat("|H<<1>>|h|h", parts)
+                    
                     local formattedIcon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
                     local itemCount = stack > 1 and (" |cFFFFFFx" .. stack .. "|r") or "" 
                     local carriedItem = ( formattedIcon .. itemLink ..  itemCount )
@@ -4589,6 +4594,11 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
                     local changeColor = CA.SV.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
                     local type = "LUIE_CURRENCY_VENDOR"
                     local messageChange = CA.SV.LootMessageLaunder
+
+                    local parts = {ZO_LinkHandler_ParseLink(itemLink)}
+                    parts[22] = "1"
+                    parts = table.concat(parts, ":"):sub(2, -1)
+                    itemLink = zo_strformat("|H<<1>>|h|h", parts)
                     
                     local formattedIcon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
                     local itemCount = stack > 1 and (" |cFFFFFFx" .. stack .. "|r") or "" 
@@ -4623,7 +4633,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
     if bagId == BAG_VIRTUAL then
         local gainOrLoss = CA.SV.CurrencyContextColor and 1 or 3
         local logPrefix = CA.SV.LootMessageLaunder
-        local itemLink = CA.GetItemLinkFromItemId(slotId)
+        local itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
         local icon = GetItemLinkInfo(itemLink)
         local itemType = GetItemLinkItemType(itemLink) 
         local itemId = slotId
@@ -4633,6 +4643,11 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             local changeColor = CA.SV.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
             local type = "LUIE_CURRENCY_VENDOR"
             local messageChange = CA.SV.LootMessageLaunder
+            
+            local parts = {ZO_LinkHandler_ParseLink(itemLink)}
+            parts[22] = "1"
+            parts = table.concat(parts, ":"):sub(2, -1)
+            itemLink = zo_strformat("|H<<1>>|h|h", parts)
             
             local formattedIcon = ( CA.SV.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
             local itemCount = stackCountChange > 1 and (" |cFFFFFFx" .. stackCountChange .. "|r") or "" 
