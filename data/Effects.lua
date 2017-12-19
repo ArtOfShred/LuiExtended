@@ -109,8 +109,8 @@ E.IsVampLycanDisease = {
 }
 
 E.IsVampLycanBite = {
-    [40359] = true, -- Fed on ally
-    [40525] = true, -- Bit an ally
+    [40359] = true, -- Fed on ally (Vampire)
+    [40525] = true, -- Bit an ally (Werewolf)
 }
 
 -- Mundus passives
@@ -2342,8 +2342,9 @@ E.EffectOverride = {
     [40349] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual.dds', name = 'Blood Ritual' }, -- Feed (Blood Ritual - Rank 1)
     [40351] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual.dds', name = 'Blood Ritual' }, -- Feed (Blood Ritual - Rank 1)
     [40353] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = 'Blood Ritual' }, -- Uber Attack (Blood Ritual - Rank 1)
-    [40360] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_noxiphilic_sanguivoria.dds', name = 'Noxiphilic Sanguivoria' }, -- Vampirism (Blood Ritual - Rank 1)
-    [40359] = { hide = true }, -- Fed on ally (Blood Ritual - Rank 1)
+    
+    [40359] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual.dds', name = 'Blood Ritual Cooldown' }, -- Fed on Ally (Blood Ritual)
+    [40360] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_noxiphilic_sanguivoria.dds', name = 'Noxiphilic Sanguivoria' }, -- Vampirism (Blood Ritual)
 
     -- Werewolf
     
@@ -2357,6 +2358,11 @@ E.EffectOverride = {
     [32494] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackheavy.dds' }, -- Heavy Attack
     [60773] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackrestore.dds', name = 'Heavy Attack' }, -- Stamina Return
     [33209] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Devour - Rank 1)
+    
+    [40525] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_bloodmoon.dds', name = 'Bloodmoon Cooldown' }, -- Bit an Ally (Blood Moon)
+    [40521] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds' }, -- Sanies Lupinus (Blood Moon)
+    
+    
 
     ----------------------------------------------------------------
     -- PLAYER PASSIVES GUILDS --------------------------------------

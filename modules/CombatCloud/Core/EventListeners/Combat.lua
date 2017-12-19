@@ -16,10 +16,17 @@ local isWarned = {
 
 function CombatCloud_CombatEventListener:New()
     local obj = CombatCloud_EventListener:New()
+    obj:RegisterForEvent(EVENT_PLAYER_ACTIVATED, function () self:OnPlayerActivated() end)
     obj:RegisterForEvent(EVENT_COMBAT_EVENT, function(...) self:OnEvent(...) end)
     obj:RegisterForEvent(EVENT_PLAYER_COMBAT_STATE, function() self:CombatState() end)
     obj:RegisterForEvent(EVENT_EFFECT_CHANGED, function(...) self:EffectChanged(...) end)
     return obj
+end
+
+function CombatCloud_CombatEventListener:OnPlayerActivated()
+
+    if IsUnitInCombat("player") then isWarned.combat = true end
+
 end
 
 function CombatCloud_CombatEventListener:EffectChanged(...)

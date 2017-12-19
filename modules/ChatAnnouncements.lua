@@ -737,6 +737,9 @@ function CA.Initialize(enabled)
     if IsInLFGGroup() then
         g_LFGJoinAntiSpam = true
     end
+    
+    -- Index members for Group Loot
+    CA.IndexGroupLoot()
 
     -- Posthook Crafting Interface (Keyboard)
     CA.CraftModeOverrides()
@@ -3276,8 +3279,6 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
         
         local recipient = ZO_SELECTED_TEXT:Colorize(g_groupLootIndex[zo_strformat(SI_UNIT_NAME, receivedBy)])
         
-        CA.ItemPrinter(icon, quantity, itemType, itemId, itemLink, recipient, logPrefix, gainOrLoss, false, true)
-        
     end
 
 end
@@ -4884,9 +4885,6 @@ function CA.DisguiseState(eventCode, unitTag, disguiseState)
 end
 
 function CA.OnPlayerActivated(eventCode, initial)
-
-    -- Index members for Group Loot
-    CA.IndexGroupLoot()
     
     if CA.SV.Disguise then
         if g_disguiseState == 0 then

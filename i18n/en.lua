@@ -597,7 +597,7 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSTARGET",             "Show Mu
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_MUNDUSTARGET_TP",          "Set whether Mundus Stone boons are shown on target.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGEPLAYER",          "Show Vampirism Stage on Player")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGEPLAYER_TP",       "Set whether to show the Vampirism stage buff on player.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGETARGET",          "Show Vampirism Stage on Player")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGETARGET",          "Show Vampirism Stage on Target")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_VAMPSTAGETARGET_TP",       "Set whether to show the Vampirism stage buff on target.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_LYCANPLAYER",              "Show Lycanthrophy on Player")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_LONGTERM_LYCANPLAYER_TP",           "Set whether to show the Lycanthrophy buff on player.")

@@ -1850,9 +1850,9 @@ function UF.UpdateStaticControls( unitFrame )
         end
             unitFrame.name:SetWidth(width)
         end
-        if unitFrame.isPlayer and ( GetUnitName( unitFrame.unitTag ) ~= playerName ) and UF.SV.DisplayOptions == 3 then
+        if unitFrame.isPlayer and UF.SV.DisplayOptions == 3 then
             unitFrame.name:SetText( GetUnitName( unitFrame.unitTag ) .." ".. GetUnitDisplayName (unitFrame.unitTag) )
-        elseif unitFrame.isPlayer and (GetUnitName (unitFrame.unitTag) ~= playerName ) and UF.SV.DisplayOptions == 1 then
+        elseif unitFrame.isPlayer and UF.SV.DisplayOptions == 1 then
             unitFrame.name:SetText( GetUnitDisplayName (unitFrame.unitTag) )
         else
             unitFrame.name:SetText( GetUnitName( unitFrame.unitTag ) )
