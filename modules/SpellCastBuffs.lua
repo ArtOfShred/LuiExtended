@@ -2573,12 +2573,13 @@ function SCB.ReloadEffects(unitTag)
         local recallRemain, _ = GetRecallCooldown()
         if recallRemain > 0 then
             local currentTime = GetGameTimeMilliseconds()
-            g_effectsList["player1"][ g_recallEffectName ] = {
-                        target="player", type=1,
+            g_effectsList["player2"][ g_recallEffectName ] = {
+                        target="player", type=BUFF_EFFECT_TYPE_DEBUFF,
                         name=g_recallEffectName, icon=g_recallIconFilename,
                         dur=recallRemain, starts=currentTime, ends=currentTime+recallRemain,
-                        forced = "long",
-                        restart=true, iconNum=0 }
+                        forced = "short",
+                        restart=true, iconNum=0,
+                        unbreakable=1 }
         end
     end
     
@@ -3026,6 +3027,8 @@ function SCB.updateIcons( currentTime, sortedList, container )
             end
         end
         if effect.restart and buff.cd ~= nil then
+            -- Modify recall cooldown to always display as if the full CD was 10 minutes.
+            if effect.name == g_recallEffectName then effect.dur = 600000 end
             if remain == nil or effect.dur == nil or effect.dur == 0 then
                 buff.cd:StartCooldown(0, 0, CD_TYPE_RADIAL, CD_TIME_TYPE_TIME_REMAINING, false )
             else
