@@ -118,6 +118,8 @@ local g_triggeredSlotsRemain = {}
 local g_toggledSlots         = {}
 local g_toggledSlotsRemain   = {}
 
+local g_currentDuelTarget    = nil
+
 local g_lastCast             = 0
 local g_lastTarget           = nil
 local g_effectsList          = { player1 = {}, player2 = {}, reticleover1 = {}, reticleover2 = {}, ground = {} }
@@ -1418,6 +1420,27 @@ function SCB.Initialize( enabled )
 
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, SCB.DisguiseItem)
     EVENT_MANAGER:AddFilterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, REGISTER_FILTER_BAG_ID, BAG_WORN )
+    
+    -- Duel (For resolving Target battle spirit status)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, SCB.DuelStart)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_FINISHED, SCB.DuelEnd)
+end
+
+function SCB.DuelStart()
+    
+    local duelState, characterName = GetDuelInfo()
+    if duelState == 3 and not SCB.SV.IgnoreBattleSpiritTarget then
+        g_currentDuelTarget = strformat(SI_UNIT_NAME, characterName)
+        SCB.ReloadEffects("reticleover")
+    end
+
+end
+
+function SCB.DuelEnd()
+
+    g_currentDuelTarget = nil
+    SCB.ReloadEffects("reticleover")
+
 end
 
 function SCB.InitializeDisguise()
@@ -2558,8 +2581,46 @@ function SCB.ReloadEffects(unitTag)
                         restart=true, iconNum=0 }
         end
     end
+    
+    -- Add Battle Spirit icon to player in Cyrodiil (Artifical effect Id adds it for Battlegrounds)
+    if unitTag =="player" and IsInAvAZone() and not SCB.SV.IgnoreBattleSpiritPlayer then
+        g_effectsList.player1[ "Battle Spirit" ] =
+            {
+            target ="player", type=1,
+            name="Battle Spirit", icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
+            dur=0, starts=1, ends=nil,
+            forced = "long",
+            restart=true, iconNum=0
+            }
+    end
+    
+    -- Add Battle Spirit icon to target in Cyrodiil or Battlegrounds
+    if unitTag == "reticleover" and ( IsInAvAZone() or IsActiveWorldBattleground() or GetUnitName(unitTag) == g_currentDuelTarget ) and IsUnitPlayer("reticleover") and not SCB.SV.IgnoreBattleSpiritTarget then
+        g_effectsList.reticleover1[ "Battle Spirit" ] =
+            {
+            target ="player", type=1,
+            name="Battle Spirit", icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
+            dur=0, starts=1, ends=nil,
+            forced = "short",
+            restart=true, iconNum=0
+            }
+    end
 
     if unitTag == "reticleover" then
+    
+        if not SCB.SV.IgnoreBattleSpiritTarget then
+            if ( ( IsInAvAZone() or IsActiveWorldBattleground() ) and IsUnitPlayer("reticleover") ) or GetUnitName(unitTag) == g_currentDuelTarget then
+                g_effectsList.reticleover1[ "Battle Spirit" ] =
+                {
+                target ="player", type=1,
+                name="Battle Spirit", icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
+                dur=0, starts=1, ends=nil,
+                forced = "short",
+                restart=true, iconNum=0
+                }
+            end
+        end
+            
         if SCB.SV.StealthStateTarget then
             local stealthState = GetUnitStealthState ("reticleover")
             if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) and IsUnitPlayer("reticleover") then
@@ -3102,6 +3163,23 @@ function SCB.OnPlayerActivated(eventCode)
     end
 
     SCB.ReloadEffects( "player" )
+    
+    local duelState, characterName = GetDuelInfo()
+    if duelState == 3 and not SCB.SV.IgnoreBattleSpiritTarget then
+        g_currentDuelTarget = strformat(SI_UNIT_NAME, characterName)
+        SCB.ReloadEffects("reticleover")
+    end
+    
+    if IsInAvAZone() and not SCB.SV.IgnoreBattleSpiritPlayer then
+        g_effectsList.player1[ "Battle Spirit" ] =
+            {
+            target ="player", type=1,
+            name="Battle Spirit", icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
+            dur=0, starts=1, ends=nil,
+            forced = "long",
+            restart=true, iconNum=0
+            }
+    end
 
     if SCB.SV.DisguiseStatePlayer then
         local disguiseState = GetUnitDisguiseState ("player")

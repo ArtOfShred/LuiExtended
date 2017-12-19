@@ -7656,6 +7656,7 @@ function CA.HookFunction()
             messageParams:SetLifespanMS(displayTime)
             messageParams:SetIconData("EsoUI/Art/HUD/HUD_Countdown_Badge_Dueling.dds")
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COUNTDOWN)
+            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
         return true
     end
@@ -9223,7 +9224,7 @@ function CA.DuelStarted(eventCode)
             message = strformat("<<1>>", formattedIcon)
         end
     
-        if CA.Sv.DuelStartCA then
+        if CA.SV.DuelStartCA then
             printToChat(message)
         end
         

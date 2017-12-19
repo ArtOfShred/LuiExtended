@@ -413,13 +413,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                 --Artificial effects--
                 for effectId in ZO_GetNextActiveArtificialEffectIdIter do
                     local displayName, iconFile, effectType, sortOrder = GetArtificialEffectInfo(effectId)
-                    
-                    if effectId == 0 then
-                        displayName = "Dueling"
-                        iconFile = "/esoui/art/icons/achievement_dueling_002.dds"
-                    end
-                        
-                    
+
                     local effectsRow = effectsRowPool:AcquireObject()
                     effectsRow.name:SetText(zo_strformat(SI_ABILITY_TOOLTIP_NAME, displayName))
                     effectsRow.icon:SetTexture(iconFile)

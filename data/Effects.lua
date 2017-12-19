@@ -163,6 +163,7 @@ E.IsSoulSummons = {
 }
 
 E.IsSetICD = {
+    [90936] = true, -- Phoenix
     [90938] = true, -- Immortal Warrior
     [90939] = true, -- Eternal Warrior
 }
@@ -593,7 +594,7 @@ E.EffectForcedName = {
 -- Using a separate chart for ZOS Artificial Effects just in case this is significantly expanded at any point
 E.ArtificialEffectOverride = {
 
-    [0] = { icon = 'esoui/art/icons/achievement_dueling_002.dds', name = 'Dueling' }, -- Battle Spirit (Duel)
+    [0] = { icon = 'esoui/art/icons/artificialeffect_battle-spirit.dds' }, -- Battle Spirit (Duel)
     [2] = { icon = 'esoui/art/icons/artificialeffect_battle-spirit.dds' }, -- Battle Spirit (BG)
 
 }
@@ -1484,7 +1485,7 @@ E.EffectOverride = {
     [50978] = { icon = 'esoui/art/icons/achievement_update11_dungeons_001.dds' }, -- Berserking Warrior (Advancing Yokeda)
     
     [90937] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior.dds', unbreakable = 1 }, -- Immortal Warrior (Immortal Yokeda)
-    [90938] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior.dds', name = "Immortal Warrior Cooldown" }, -- Immortal Warrior (Immortal Yokeda)
+    [90938] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior_icd.dds', name = "Immortal Warrior Cooldown" }, -- Immortal Warrior (Immortal Yokeda)
     
     [86907] = { icon = 'LuiExtended/media/icons/abilities/ability_set_defending_warrior.dds' }, -- Defending Warrior (Resilient Yokeda)
     [50992] = { icon = 'LuiExtended/media/icons/abilities/ability_set_defending_warrior.dds' }, -- Defending Warrior (Resilient Yokeda)
@@ -1492,7 +1493,7 @@ E.EffectOverride = {
     [76618] = { icon = 'LuiExtended/media/icons/abilities/ability_buff_minor_aegis.dds' }, -- Minor Aegis (Eternal Yokeda)
     [90940] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior.dds', unbreakable = 1 }, -- Eternal Warrior (Eternal Yokeda)
     [61437] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior.dds' }, -- Eternal Warrior (Eternal Yokeda)
-    [90939] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior.dds', name = "Eternal Warrior Cooldown" }, -- Eternal Warrior (Eternal Yokeda)
+    [90939] = { icon = 'LuiExtended/media/icons/abilities/ability_set_immortal_warrior_icd.dds', name = "Eternal Warrior Cooldown" }, -- Eternal Warrior (Eternal Yokeda)
     
     -- Trial Sets (Aetherian Archive)
     
@@ -1549,7 +1550,7 @@ E.EffectOverride = {
     [65706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_meritorious_service.dds' }, -- Meritorious Service (of Meritorious Service)
     
     [90935] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds', unbreakable = 1 }, -- Phoenix (of the Phoenix)
-    [90936] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds', name = "Phoenix Cooldown" }, -- Phoenix (of the Phoenix)
+    [90936] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix_icd.dds', name = "Phoenix Cooldown" }, -- Phoenix (of the Phoenix)
     [68940] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds' }, -- Phoenix (of the Phoenix)
     [70405] = { icon = 'LuiExtended/media/icons/abilities/ability_set_phoenix.dds' }, -- Phoenix (of the Phoenix)
     
@@ -2322,7 +2323,7 @@ E.EffectOverride = {
     
     [39269] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_summons.dds' }, -- Soul Summons
     [45590] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_summons.dds' }, -- Soul Summons
-    [43752] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_summons.dds', name = 'Soul Summons Cooldown' }, -- Soul Summons
+    [43752] = { icon = 'LuiExtended/media/icons/abilities/ability_otherclass_soul_summons_icd.dds', name = 'Soul Summons Cooldown' }, -- Soul Summons
     
     [39263] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_lock.dds' }, -- Soul Lock
     [39264] = { hide = true }, -- Soul Trap (Soul Lock - Rank 1)
@@ -2343,7 +2344,7 @@ E.EffectOverride = {
     [40351] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual.dds', name = 'Blood Ritual' }, -- Feed (Blood Ritual - Rank 1)
     [40353] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = 'Blood Ritual' }, -- Uber Attack (Blood Ritual - Rank 1)
     
-    [40359] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual.dds', name = 'Blood Ritual Cooldown' }, -- Fed on Ally (Blood Ritual)
+    [40359] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual_icd.dds', name = 'Blood Ritual Cooldown' }, -- Fed on Ally (Blood Ritual)
     [40360] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_noxiphilic_sanguivoria.dds', name = 'Noxiphilic Sanguivoria' }, -- Vampirism (Blood Ritual)
 
     -- Werewolf
@@ -2359,7 +2360,7 @@ E.EffectOverride = {
     [60773] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_attackrestore.dds', name = 'Heavy Attack' }, -- Stamina Return
     [33209] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_devour.dds' }, -- Devour (Devour - Rank 1)
     
-    [40525] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_bloodmoon.dds', name = 'Bloodmoon Cooldown' }, -- Bit an Ally (Blood Moon)
+    [40525] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_bloodmoon_icd.dds', name = 'Bloodmoon Cooldown' }, -- Bit an Ally (Blood Moon)
     [40521] = { icon = 'LuiExtended/media/icons/abilities/ability_werewolf_sanies_lupinus.dds' }, -- Sanies Lupinus (Blood Moon)
     
     
