@@ -2573,11 +2573,11 @@ function SCB.ReloadEffects(unitTag)
         local recallRemain, _ = GetRecallCooldown()
         if recallRemain > 0 then
             local currentTime = GetGameTimeMilliseconds()
-            g_effectsList["player2"][ g_recallEffectName ] = {
-                        target="player", type=BUFF_EFFECT_TYPE_DEBUFF,
+            g_effectsList["player1"][ g_recallEffectName ] = {
+                        target="player", type=1,
                         name=g_recallEffectName, icon=g_recallIconFilename,
                         dur=recallRemain, starts=currentTime, ends=currentTime+recallRemain,
-                        forced = "short",
+                        forced = "long",
                         restart=true, iconNum=0,
                         unbreakable=1 }
         end

@@ -607,7 +607,7 @@ E.TooltipOverride = {
 E.EffectOverride = {
 
     -- MISC START
-    [51392] = { type = BUFF_EFFECT_TYPE_DEBUFF }, -- Bolt Escape Fatigue
+    [51392] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Bolt Escape Fatigue
 
     ----------------------------------------------------------------
     -- POTIONS -----------------------------------------------------
@@ -1658,7 +1658,7 @@ E.EffectOverride = {
 
     -- Player Basic
     [29721] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_roll_dodge.dds' }, -- Immobilize Immunity
-    [69143] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_dodge_fatigue.dds', type = BUFF_EFFECT_TYPE_DEBUFF }, -- Dodge Fatigue
+    [69143] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_dodge_fatigue.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Dodge Fatigue
     --[20309] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hidden.dds' }, -- Hidden (Reserved here if it ever becomes visible)
     [20301] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_hidden.dds', name = 'Crouch' }, -- Crouch Drain
     [26245] = { icon = 'esoui/art/icons/achievement_darkbrotherhood_018.dds', name = 'Crouch Stun' }, -- Slam Stun (Stun from crouch attack)
