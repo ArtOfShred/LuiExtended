@@ -196,7 +196,6 @@ ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF",                  "You hav
 ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_KICKED",                     "|cFEFEFE<<1>>|r has been removed from the group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_LEAVE",                      "|cFEFEFE<<1>>|r has left the group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF",                 "You have left the group.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_QUIT",                              "You are no longer in a group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_QUIT_LFG",                          "You are no longer in an LFG group.")
 
 ZO_CreateStringId("SI_LUIE_GROUPLEAVEREASON0",                          "|cFEFEFE<<1>>|r has left the group.")
@@ -354,7 +353,7 @@ ZO_CreateStringId("SI_LUIE_CA_STORAGE_BANK_UPGRADE",                    "Your ba
 ZO_CreateStringId("SI_LUIE_CA_STORAGE_BAGTYPE1",                        "Backpack Upgrade")
 ZO_CreateStringId("SI_LUIE_CA_STORAGE_BAGTYPE2",                        "Bank Space Upgrade")
 
-ZO_CreateStringId("SI_LUIE_CA_STORAGE_LEARN",                           "You learn %s")
+ZO_CreateStringId("SI_LUIE_CA_STORAGE_LEARN",                           "You learn %s.")
 
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGOLD",              "Total Gold: %s")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP",                "Total AP: %s")

@@ -19,8 +19,6 @@ CA.Enabled = false
 
 CA.D = {
 
-    -- TODO: ShowLootFail         = false, -- Replace with error alert_handler hooks
-
     -- Base Options
     ChatPlayerDisplayOptions      = 2,
     --NotificationColor             = { .75, .75, .75, 1 },
@@ -1836,12 +1834,9 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
     local messageTotal                                                  -- Set to a string value based on the currency type.
     local type
     
-    -- Resolve Currency Type (TODO: Use CURRENCY_TYPE when implemented rather than # values)
-    if currency == 1 then -- Gold
+    if currency == CURT_MONEY then -- Gold
         -- Send change info to the throttle printer and end function now if we throttle gold from loot.
         if CA.SV.Currency.CurrencyGoldThrottle and (reason == 0 or reason == 13) then
-            -- TODO: Register Event here instead
-            EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedGold")
             -- NOTE: Unlike other throttle events, we used zo_callLater here because we have to make the call immediately (if some of the gold is looted after items, the message will appear after the loot if we don't use zo_callLater instead of a RegisterForUpdate)
             zo_callLater( CA.CurrencyGoldThrottlePrinter, 50 )
             g_currencyGoldThrottleValue = g_currencyGoldThrottleValue + UpOrDown
@@ -1862,8 +1857,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         currencyTotal = CA.SV.Currency.CurrencyGoldShowTotal
         messageTotal = CA.SV.Currency.CurrencyMessageTotalGold
 
-    elseif currency == 2 then -- Alliance Points
-        -- TODO -- We need to find all Alliance Point gain values so we can determine what keep rewards, etc are and print those out immediately! (and also reset the throttle with those)
+    elseif currency == CURT_ALLIANCE_POINTS then -- Alliance Points
         -- Send change info to the throttle printer and end function now if we throttle Alliance Points Gained
         if CA.SV.Currency.CurrencyAPThrottle > 0 and reason == 13 then
             EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedAP")
@@ -1891,7 +1885,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         currencyTotal = CA.SV.Currency.CurrencyAPShowTotal
         messageTotal = CA.SV.Currency.CurrencyMessageTotalAP
 
-    elseif currency == 3 then -- TelVar Stones
+    elseif currency == CURT_TELVAR_STONES then -- TelVar Stones
     
         -- Send change info to the throttle printer and end function now if we throttle Tel Var Gained
         if CA.SV.Currency.CurrencyTVThrottle > 0 and (reason == 0 or reason == 65) then
@@ -1920,7 +1914,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         currencyTotal = CA.SV.Currency.CurrencyTVShowTotal
         messageTotal = CA.SV.Currency.CurrencyMessageTotalTV
 
-    elseif currency == 4 then -- Writ Vouchers
+    elseif currency == CURT_WRIT_VOUCHERS then -- Writ Vouchers
         currencyTypeColor = CurrencyWVColorize:ToHex()
         currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_writvoucher.dds|t" or ""
         currencyName = strformat(CA.SV.Currency.CurrencyWVName, UpOrDown)
@@ -2115,7 +2109,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         messageChange = CA.SV.Currency.CurrencyMessageSteal
     -- Looted (13)
     elseif reason == 13 then
-        if currency == 2 then
+        if currency == CURT_ALLIANCE_POINTS then
             messageChange = CA.SV.Currency.CurrencyMessageEarn
         else
             messageChange = CA.SV.Currency.CurrencyMessageLoot
@@ -2126,7 +2120,6 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
 
     -- ==============================================================================
     -- DEBUG EVENTS WE DON'T KNOW YET
-    -- TODO -- Need to add support for AP messages here. Also, in the case of AP gain we also need to adjust looted to earned if the reason code ends up being 0
     elseif reason == 6 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 15 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- Keep Upgrade
     elseif reason == 16 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
@@ -3307,11 +3300,6 @@ function CA.ItemFilter(itemType, itemId, itemLink, groupLoot)
     local itemQuality = GetItemLinkQuality(itemLink)
     local itemIsSet = GetItemLinkSetInfo(itemLink)
     
-    -- TODO: Not sure if still needed
-    if (itemId == 69059) then
-        specializedItemType = SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT
-    end
-    
     local itemIsKeyFragment = (itemType == ITEMTYPE_TROPHY) and (specializedItemType == SPECIALIZED_ITEMTYPE_TROPHY_KEY_FRAGMENT)
     local itemIsSpecial = (itemType == ITEMTYPE_TROPHY and not itemIsKeyFragment) or (itemType == ITEMTYPE_COLLECTIBLE) or IsItemLinkConsumable(itemLink)
     
@@ -3333,35 +3321,6 @@ function CA.ItemFilter(itemType, itemId, itemLink, groupLoot)
     end
     
 end
-
--- TODO: Make this work
-local LUIE_EXCLUDE_STYLES = {
-
-    ITEMTYPE_ADDITIVE = true,
-    ITEMTYPE_ARMOR_BOOSTER = true,
-    ITEMTYPE_ARMOR_TRAIT = true,
-    ITEMTYPE_BLACKSMITHING_BOOSTER = true,
-    ITEMTYPE_BLACKSMITHING_MATERIAL = true,
-    ITEMTYPE_CLOTHIER_BOOSTER = true,
-    ITEMTYPE_CLOTHIER_MATERIAL = true,
-    ITEMTYPE_ENCHANTING_RUNE_ASPECT = true,
-    ITEMTYPE_ENCHANTING_RUNE_ESSENCE = true,
-    ITEMTYPE_ENCHANTING_RUNE_POTENCY = true,
-    ITEMTYPE_ENCHANTMENT_BOOSTER = true,
-    ITEMTYPE_INGREDIENT = true,
-    ITEMTYPE_POISON_BASE = true,
-    ITEMTYPE_POTION_BASE = true,
-    ITEMTYPE_REAGENT = true,
-    ITEMTYPE_STYLE_MATERIAL = true,
-    ITEMTYPE_WEAPON_BOOSTER = true,
-    ITEMTYPE_WEAPON_TRAIT = true,
-    ITEMTYPE_WOODWORKING_BOOSTER = true,
-    ITEMTYPE_WOODWORKING_MATERIAL = true,
-    ITEMTYPE_GLYPH_ARMOR = true,
-    ITEMTYPE_GLYPH_JEWELRY = true,
-    ITEMTYPE_GLYPH_WEAPON  = true,
-
-}
 
 function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot)
 
@@ -3387,7 +3346,7 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
     local formattedArmorType
     local formattedStyle
     
-    if (receivedBy == "" or receivedBy == "CRAFT" or receivedBy == "LUIE_INVENTORY_UPDATE_DISGUISE") then
+    if (receivedBy == "" or receivedBy == "LUIE_RECEIVE_CRAFT" or receivedBy == "LUIE_INVENTORY_UPDATE_DISGUISE") then
         -- Don't display yourself
         formattedRecipient = ""
     else
@@ -3431,7 +3390,7 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
     local itemString = strfmt("%s%s%s%s%s%s", formattedIcon, itemLink, formattedQuantity, formattedArmorType, formattedTrait, formattedStyle)
     
     -- Printer function, seperate handling for listed entires (from crafting) or simple function that sends a message over to the printer.
-    if receivedBy == "CRAFT" and (gainOrLoss == 1 or gainOrLoss == 3) and logPrefix ~= CA.SV.Inventory.LootMessageUpgradeFail then
+    if receivedBy == "LUIE_RECEIVE_CRAFT" and (gainOrLoss == 1 or gainOrLoss == 3) and logPrefix ~= CA.SV.Inventory.LootMessageUpgradeFail then
         local itemString2 = itemString
         
         if g_itemStringGain ~= "" then
@@ -3446,7 +3405,7 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         g_queuedMessages[g_itemCounterGain] = { message=g_itemStringGain, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString= "", groupLoot=groupLoot }
         EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
-    elseif receivedBy == "CRAFT" and (gainOrLoss == 2 or gainOrLoss == 4) and logPrefix ~= CA.SV.Inventory.LootMessageUpgradeFail then
+    elseif receivedBy == "LUIE_RECEIVE_CRAFT" and (gainOrLoss == 2 or gainOrLoss == 4) and logPrefix ~= CA.SV.Inventory.LootMessageUpgradeFail then
         local itemString2 = itemString
         if g_itemStringLoss ~= "" then
             g_itemStringLoss = strfmt("%s|c%s,|r %s", g_itemStringLoss, color, itemString2)
@@ -3661,15 +3620,12 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                     logPrefix = CA.SV.Inventory.LootMessageDisguiseEquip
                     CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
-            -- STACK COUNT INCREMENTED UP
-            elseif stackCountChange > 0 then
-                -- TODO: Remove, nothing to do here!
             -- STACK COUNT INCREMENTED DOWN
             elseif stackCountChange < 0 then
                 local change = stackCountChange * -1
                 if g_itemWasDestroyed and CA.SV.Inventory.LootShowDestroy then
                     gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                    logPrefix = GetString(SI_LUIE_CA_PREFIX_MESSAGE_DESTROYED)
+                    logPrefix = CA.SV.Inventory.LootMessageDestroy
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
                 if CA.SV.Inventory.LootShowDisguise and not g_itemWasDestroyed and slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
@@ -3835,14 +3791,16 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             or itemType == ITEMTYPE_WEAPON_BOOSTER
             or itemType == ITEMTYPE_WEAPON_TRAIT
             or itemType == ITEMTYPE_WOODWORKING_BOOSTER
-            or itemType == ITEMTYPE_WOODWORKING_MATERIAL then
+            or itemType == ITEMTYPE_WOODWORKING_MATERIAL 
+			or itemType == ITEMTYPE_GLYPH_ARMOR
+			or itemType == ITEMTYPE_GLYPH_JEWELRY
+			or itemType == ITEMTYPE_GLYPH_WEAPON then
                 return true
             end
         end
     end
     
-    -- TODO: Edit this string to be something more complex, otherwise if for some reason a player was named Craft and looted something it would cause problems.
-    local receivedBy = "CRAFT" -- This keyword tells our item printer to print the items in a list separated by commas, to conserve space for the display of crafting mats consumed.
+    local receivedBy = "LUIE_RECEIVE_CRAFT" -- This keyword tells our item printer to print the items in a list separated by commas, to conserve space for the display of crafting mats consumed.
     local logPrefixPos = CA.SV.Inventory.LootMessageCraft
     local logPrefixNeg = CA.SV.Inventory.LootMessageUse
 
@@ -3901,7 +3859,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             
             -- STACK COUNT CHANGE = 0 (UPGRADE)
             if stackCountChange == 0 then
-                g_oldItem = { itemLink=g_inventoryStacks[slotId].itemLink, icon=icon } -- Sends over to LogItem to do an upgrade string! (TODO: Needs update!)
+                g_oldItem = { itemLink=g_inventoryStacks[slotId].itemLink, icon=icon }
                 gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
                 logPrefix = logPrefixPos
                 CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
@@ -3970,7 +3928,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             
             -- STACK COUNT CHANGE = 0 (UPGRADE)
             if stackCountChange == 0 then
-                g_oldItem = { itemLink=g_bankStacks[slotId].itemLink, icon=icon } -- Sends over to LogItem to do an upgrade string! (TODO: Needs update!)
+                g_oldItem = { itemLink=g_bankStacks[slotId].itemLink, icon=icon }
                 gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
                 logPrefix = logPrefixPos
                 CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
@@ -4039,7 +3997,7 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             
             -- STACK COUNT CHANGE = 0 (UPGRADE)
             if stackCountChange == 0 then
-                g_oldItem = { itemLink=g_banksubStacks[slotId].itemLink, icon=icon } -- Sends over to LogItem to do an upgrade string! (TODO: Needs update!)
+                g_oldItem = { itemLink=g_banksubStacks[slotId].itemLink, icon=icon }
                 gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
                 logPrefix = logPrefixPos
                 CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
@@ -5079,10 +5037,8 @@ function CA.HookFunction()
     ZO_PreHook(alertHandlers, EVENT_STYLE_LEARNED, StyleLearnedHook)
     ]]--
     
-    -- TODO: We'll probably hide this event because it's kind of pointless - This will only trigger VERY occasionally when a lorebook is used and doesn't immediately fade away before the player can interact with it again (I guess just when Server lags).
+	-- Hide this alert because its really pretty much pointless. Only time I've ever seen it trigger is when the server lagged.
     local function AlreadyKnowBookHook(bookTitle)
-        --printToChat(strformat(SI_LORE_LIBRARY_ALREADY_KNOW_BOOK, bookTitle))
-        --return ERROR, strformat(SI_LORE_LIBRARY_ALREADY_KNOW_BOOK, bookTitle)
         return true
     end
     
@@ -5090,28 +5046,28 @@ function CA.HookFunction()
         
         if source == RIDING_TRAIN_SOURCE_STABLES then
             -- If we purchased from the stables, display a currency announcement if relevant
+			if CA.SV.Currency.CurrencyGoldChange then
+				local type
+				if ridingSkill == 1 then
+					type = "LUIE_CURRENCY_RIDING_SPEED"
+				elseif ridingSkill == 2 then
+					type = "LUIE_CURRENCY_RIDING_CAPACITY"
+				elseif ridingSkill == 3 then
+					type = "LUIE_CURRENCY_RIDING_STAMINA"
+				end
+				local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1) + 250)
+				local changeColor = CA.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
+				local changeType = ZO_LocalizeDecimalNumber(250)
+				local currencyTypeColor = CurrencyGoldColorize:ToHex()
+				local currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
+				local currencyName = strformat(CA.SV.Currency.CurrencyGoldName, 250)
+				local currencyTotal = CA.SV.Currency.CurrencyGoldShowTotal
+				local messageTotal = CA.SV.Currency.CurrencyMessageTotalGold
+				local messageChange = CA.SV.Currency.CurrencyMessageStable
+				CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
+			end
+			
             if CA.SV.Notify.StorageRidingCA then
-                -- TODO: Currency conditional here!!!!
-            
-                local type
-                if ridingSkill == 1 then
-                    type = "LUIE_CURRENCY_RIDING_SPEED"
-                elseif ridingSkill == 2 then
-                    type = "LUIE_CURRENCY_RIDING_CAPACITY"
-                elseif ridingSkill == 3 then
-                    type = "LUIE_CURRENCY_RIDING_STAMINA"
-                end
-                local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1) + 250)
-                local changeColor = CA.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
-                local changeType = ZO_LocalizeDecimalNumber(250)
-                local currencyTypeColor = CurrencyGoldColorize:ToHex()
-                local currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
-                local currencyName = strformat(CA.SV.Currency.CurrencyGoldName, 250)
-                local currencyTotal = CA.SV.Currency.CurrencyGoldShowTotal
-                local messageTotal = CA.SV.Currency.CurrencyMessageTotalGold
-                local messageChange = CA.SV.Currency.CurrencyMessageStable
-                CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
-                
                 local formattedString = StorageRidingColorize:Colorize(zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
@@ -7353,7 +7309,8 @@ function CA.HookFunction()
         if source == RIDING_TRAIN_SOURCE_ITEM then 
             if CA.SV.Notify.StorageRidingCA then
             
-                -- TODO: if CA.SV.Inventory.Loot or whatever
+                -- TODO: Switch to using Recipe/Learn variable in the future
+				if CA.SV.Inventory.Loot then
                     local icon
                     local bookString
                     local value = current - previous
@@ -7381,15 +7338,19 @@ function CA.HookFunction()
                         end
                         icon = "|t16:16:/esoui/art/icons/store_ridinglessons_stamina.dds|t "
                     end
+					
+					local formattedColor = StorageRidingBookColorize:ToHex()
                     
                     local messageP1 = CA.SV.Inventory.LootIcons and (icon .. bookString) or (bookString)
-                    local finalMessage = strfmt(StorageRidingBookColorize:Colorize(learnString), messageP1) .. ZO_SELECTED_TEXT:Colorize(" x" .. value)
+					local formattedString = (messageP1 .. "|r|cFFFFFF x" .. value .. "|r|c" .. formattedColor)
+                    local messageP2 = strfmt(learnString, formattedString )
+					local finalMessage = strfmt("|c%s%s|r", formattedColor, messageP2)
                 
                     
                     g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "MESSAGE" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                     EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
-                -----
+				end
             
                 local formattedString = StorageRidingColorize:Colorize(zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
@@ -9052,9 +9013,6 @@ function CA.CheckLFGStatusLeave(WasKicked)
                     ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF))
                 end
             end
-            if GetGroupSize() == 0 then
-                --printToChat(GetString(SI_LUIE_CA_GROUP_QUIT)) -- TODO: Maybe re-enable later
-            end
         elseif g_leaveLFGOverride and GetGroupSize() == 0 then
             if CA.SV.Group.GroupCA then
                 printToChat(GetString(SI_LUIE_CA_GROUP_QUIT_LFG))
@@ -9352,7 +9310,6 @@ function CA.PrintBufferedGuildRep()
 end
 
 function CA.PrintQueuedMessages()
-    -- TODO: Replace with table.sort function to print. Although POSSIBLY print a few sets and remove them first in order to preserve order.
 
     -- Resolve notification messages first
     for i=1, #g_queuedMessages do

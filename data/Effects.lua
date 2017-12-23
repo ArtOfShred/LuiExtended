@@ -489,6 +489,8 @@ E.EffectOverrideByName = {
 E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ONLY!!!)
     
     -- Player - Basic
+	[20301] = true, -- Crouch Drain
+	[15356] = true, -- Sprint Drain
     [55400] = true, -- Magicka Restore
     [55401] = true, -- Magicka Restore
     [45982] = true, -- Bash Stun
