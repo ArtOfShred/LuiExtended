@@ -107,7 +107,7 @@ function LUIE_CreateSettings()
         author = LUIE.author,
         version = LUIE.version,
         website = "http://www.esoui.com/downloads/info818-LuiExtended.html",
-        slashCommand = "/luiframes",
+        slashCommand = "/luiuf",
         registerForRefresh = true,
         registerForDefaults = true,
     }
@@ -131,7 +131,7 @@ function LUIE_CreateSettings()
         author = LUIE.author,
         version = LUIE.version,
         website = "http://www.esoui.com/downloads/info818-LuiExtended.html",
-        slashCommand = "/luici",
+        slashCommand = "/luict",
         registerForRefresh = true,
         registerForDefaults = true,
     }
@@ -452,6 +452,26 @@ function LUIE_CreateSettings()
         name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER),
         width = "full",
     }
+	
+	optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = "/Home Results - Show Alert (Temp Setting)",
+        tooltip = "Display an alert when the /home command is used.\nNote: This setting will be deprecated in the future when Social Errors Events are implemented in Chat Announcements.",
+        getFunc = function() return LUIE.SV.TempAlertHome end,
+        setFunc = function(value) LUIE.SV.TempAlertHome = value end,
+        width = "full",
+        default = LUIE.D.TempAlertHome,
+    }
+	optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = "/Campaign Results - Show Alert (Temp Setting)",
+        tooltip = "Display an alert when the /campaign command is used.\NNote: This setting will be deprecated in the future when Campaign Queue Events are implemented in Chat Announcements.",
+        getFunc = function() return LUIE.SV.TempAlertCampaign end,
+        setFunc = function(value) LUIE.SV.TempAlertCampaign = value end,
+        width = "full",
+        default = LUIE.D.TempAlertCampaign,
+    }
+	
     -- Slash Commands description
     optionsData[#optionsData + 1] = {
         type = "description",

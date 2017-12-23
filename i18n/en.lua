@@ -5,6 +5,12 @@ ZO_CreateStringId("SI_BINDING_NAME_LUIE_POST_DAMAGE_RESULTS",           "Post Da
 ZO_CreateStringId("SI_BINDING_NAME_LUIE_POST_HEALING_RESULTS",          "Post Healing Results")
 
 -- LuiExtended.lua
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE",					"Queueing for <<1>>...")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG",           	"You cannot queue for a campaign while in a battleground.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED",      "The campaign name you entered is not your home or guest campaign.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NONAME",           "You must enter the name of your home or guest campaign to queue into.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN",    "The campaign name you entered is not a valid.")
+
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_DISBAND_FAILED_LFG_ACTIVITY",      "You cannot disband an LFG group.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME",             "You must enter the account or character name of a player to add to friends.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME",      "You must enter the account or online character name of a player to remove from friends.")
@@ -13,9 +19,11 @@ ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG",                "You hav
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_LINK",           "You have invited |cFEFEFE<<1>>|r to be your friend.")
 
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA",           "You cannot teleport to your home while in Cyrodiil.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_BG",            "You cannot teleport to your home while in a battleground.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IN_COMBAT",     "You cannot teleport to your home while in combat.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_NOHOME",        "You don't have a primary home set.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG",          "Teleporting to primary home...")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_DISBAND_FAILED_BG",           		"You cannot disband the group while in a battleground.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOGROUP",           "You do not have a group to disband.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOTLEADER",         "You must be the group leader to disband a group.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE",      "That player is already ignored.")
@@ -29,21 +37,21 @@ ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK", "You mus
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE",   "You must enter a valid guild number to leave.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME",          "Could not find target player to remove from the group.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME_GUILD",    "Could not find target player to remove from the guild.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_BG",       			"Regroup: You cannot initiate a regroup while in a battleground.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_LFGACTIVITY",       "Regroup: You cannot initiate a regroup while in an LFG group.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTINGRP",          "Regroup: You must be in a group to do that.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTLEADER",         "Regroup: You must be the group leader to do that.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTINGRP",          "Regroup: You must be in a group to initiate a regroup.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTLEADER",         "Regroup: You must be the group leader to initiate a regroup.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_PENDING",           "Regroup: A regroup is currently pending, please wait for the current regroup to finish before attempting another.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG",             "Regroup: Reinviting group members:")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG",        "Invited → |cFFFFFF<<1>>|r") -- When localize option is turned on, this replaces other format.
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG",             "Regroup: Reinviting group members...")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG",        "Invited → |cFFFFFF<<1>>|r")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG",                "Regroup: Group saved! Disbanding...")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG",        "Regroup: No party members were online or eligible for regroup. Group was not disbanded.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG",       "Regroup: Group saved! <<1>> group <<2[member/members]>> <<3[was/were]>> offline, they will not be reinvited.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME",              "You must enter the name of a player to trade with.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFG",           "You must be in an LFG group to do that.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK",       "You must be in an LFG group to initiate a vote to remove a party member.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_BG",       		"You cannot initiate a vote to remove a party member in a battleground.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NONAME",           "You must enter the account or character name of a party member to initiate a vote to remove.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGNQ_FAILED_NONAME",          "You must enter the name of the campaign to join.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGNQ_FAILED_WRONCAMPAIGN",    "The Campaign you entered is not a valid Campaign.")
 
 -- InfoPanel.lua
 ZO_CreateStringId("SI_LUIE_PNL_FEEDNOW",                                "Feed Now")
