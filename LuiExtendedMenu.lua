@@ -2601,6 +2601,24 @@ function LUIE_CreateSettings()
                             )) end,
                         default = LUIE.ChatAnnouncements.D.CurrencyMessageSkills,
                     },
+					{
+                        -- Campaign Message
+                        type = "editbox",
+                        name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CAMPAIGN),
+                        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CAMPAIGN_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.CurrencyMessageCampaign end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.CurrencyMessageCampaign = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
+                            (
+                                LUIE.ChatAnnouncements.SV.CurrencyGoldChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyAPShowChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyTVChange or
+                                LUIE.ChatAnnouncements.SV.CurrencyWVChange or
+                                LUIE.SV.ChatAnnouncements_Enable
+                            )) end,
+                        default = LUIE.ChatAnnouncements.D.CurrencyMessageCampaign,
+                    },
                     
                 },
             }

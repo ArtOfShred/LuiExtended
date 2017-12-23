@@ -391,6 +391,7 @@ CA.D = {
     CurrencyMessageTrader           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADER),
     CurrencyMessageRepair           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_REPAIR),
     CurrencyMessageListing          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LISTING),
+	CurrencyMessageCampaign			= GetString(SI_LUIE_CA_CURRENCY_MESSAGE_CAMPAIGN),
     
     CurrencyTVChange                = true,
     CurrencyTVColor                 = { 0.368627, 0.643137, 1, 1 },
@@ -2023,6 +2024,11 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
     -- Spend - NPC Conversation (5), Edit Guild Heraldry (49), Buy Guild Tabard (50)
     elseif reason == 5 or reason == 49 or reason == 50 then
         messageChange = CA.SV.CurrencyMessageSpend
+	-- Battleground (12)
+	elseif reason == 12 and UpOrDown < 0 then
+		messageChange = CA.SV.CurrencyMessageCampaign
+	elseif reason == 12 and UpOrDown > 0 then
+		messageChange = CA.SV.CurrencyMessageEarn
     -- Wayshrine (19)
     elseif reason == 19 then
         messageChange = CA.SV.CurrencyMessageWayshrine
@@ -2114,7 +2120,6 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
     -- DEBUG EVENTS WE DON'T KNOW YET
     -- TODO -- Need to add support for AP messages here. Also, in the case of AP gain we also need to adjust looted to earned if the reason code ends up being 0
     elseif reason == 6 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 12 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 15 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- Keep Upgrade
     elseif reason == 16 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 18 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)

@@ -297,6 +297,7 @@ ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_ATTRIBUTES",             "You mak
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_CHAMPION",               "You pay a fee of %s to redistribute your Champion Points.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_SKILLS",                 "You make a donation of %s to redistribute your Skill Points.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_MORPHS",                 "You make a donation of %s to redistribute your Skill Morphs.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_CAMPAIGN",               "You spend %s to reset your home campaign.")
 
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_NOTIFY_CHAMPION",                "Champion Points redistributed")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES",              "Attribute Points reset")
@@ -819,6 +820,8 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MORPHS",             "Respec 
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MORPHS_TP",          "Default: You make a donation of %s to redistribute your Skill Morphs.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SKILLS",             "Respec - Skill Points")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SKILLS_TP",          "Default: You make a donation of %s to redistribute your Skill Points.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CAMPAIGN",			"Cyrodiil - Reset Home Campaign")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CAMPAIGN_TP",		"Default: You spend %s to reset your home campaign.")
 
 -- LOOT MENU
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_HEADER",                         "Loot Announcements")
