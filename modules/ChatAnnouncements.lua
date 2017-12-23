@@ -3101,7 +3101,7 @@ function CA.ResolveQuestItemChange()
                     end
                     
                     logPrefix = CA.SV.LootMessageRemove
-                    local quantity = (countChange * -1) < 1 and (" |cFFFFFFx" .. (countChange * -1) .. "|r") or ""
+                    local quantity = (countChange * -1) > 1 and (" |cFFFFFFx" .. (countChange * -1) .. "|r") or ""
                     
                     formattedMessageP1 = ("|r" .. formattedIcon .. itemLink .. quantity .. "|c" .. color)
                     formattedMessageP2 = strfmt(logPrefix, formattedMessageP1)
@@ -6560,7 +6560,6 @@ function CA.HookFunction()
         
     end
     
-    local COLLECTIBLE_EMERGENCY_BACKGROUND = "EsoUI/Art/Guild/guildRanks_iconFrame_selected.dds"
     local function CollectibleUnlockedHook(collectibleId, justUnlocked)
         if not justUnlocked then
             return
@@ -6604,7 +6603,7 @@ function CA.HookFunction()
             if CA.SV.CollectibleCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
                 messageParams:SetText(csaPrefix, zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, displayedCategory))
-                messageParams:SetIconData(iconFile, COLLECTIBLE_EMERGENCY_BACKGROUND)
+                messageParams:SetIconData(iconFile, "EsoUI/Art/Achievements/achievements_iconBG.dds")
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SINGLE_COLLECTIBLE_UPDATED)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end

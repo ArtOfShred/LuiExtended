@@ -970,9 +970,9 @@ E.EffectOverride = {
     [86794] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_festival_mints.dds', name = 'High Hrothgar Festival Mints' }, -- Very Cold (High Hrothgar Festival Mints)
     [86740] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_festival_grog.dds', name = 'Sailor\'s Warning Festival Grog' }, -- Very Drunk (Sailor's Warning Festival Grog)
     
-    [85355] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_jugglers_torch.dds', name = 'Fire-Breather\'s Oil Bun', unbreakable = 1 }, -- Flame Juggling (Consumable Version)
-    [85354] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_jugglers_knife.dds', name = 'Disposable Juggling Knives', unbreakable = 1 }, -- Dagger Juggling (Consumable Verison)
-    [85353] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_swallowable_sword.dds', name = 'Disposable Swallower\'s Sword', unbreakable = 1 }, -- Sword Swallowing (Consumable Version)
+    [85355] = {icon = 'LuiExtended/media/icons/mementos/memento_fire-breathers_torches.dds', unbreakable = 1 }, -- Flame Juggling (Consumable Version)
+    [85354] = {icon = 'LuiExtended/media/icons/mementos/memento_jugglers_knives.dds.dds', unbreakable = 1 }, -- Dagger Juggling (Consumable Verison)
+    [85353] = {icon = 'LuiExtended/media/icons/mementos/memento_sword-swallowers_blade.dds', unbreakable = 1 }, -- Sword Swallowing (Consumable Version)
 
     -- Base Mementos
     [26829] = { icon = 'LuiExtended/media/icons/mementos/memento_almalexias_enchanted_lantern.dds', name = 'Almalexia\'s Enchanted Lantern' }, -- Light of the Tribunal (Almalexia's Enchanted Lantern)
@@ -1013,10 +1013,10 @@ E.EffectOverride = {
     [87998] = { hide = true }, -- Anniversary Cake (2nd Annual Jubilee Cake)
     [77123] = { icon = 'LuiExtended/media/icons/mementos/memento_event_jubilee_cake.dds', name = '2nd Annual Jubilee Cake' }, -- 2017 Anniversary EXP Buff (2nd Annual Jubilee Cake)
     [84369] = { icon = 'LuiExtended/media/icons/abilities/ability_event_witchmothers_brew.dds' }, -- Witchmother's Brew (Witchmother's Whistle)
-    [86774] = { icon = 'LuiExtended/media/icons/mementos/memento_event_mud_ball.dds', name = 'Mud Ball' }, -- Mudball (Mud Ball Pouch)
-    [86777] = { icon = 'LuiExtended/media/icons/mementos/memento_event_mud_ball.dds', name = 'Mud Ball' }, -- Mudball (Mud Ball Pouch)
-    [86775] = { icon = 'LuiExtended/media/icons/mementos/memento_event_mud_ball.dds', name = 'Mud Ball' }, -- Covered in Mud (Mud Ball Pouch)
-    [86779] = { icon = 'LuiExtended/media/icons/mementos/memento_event_mud_ball.dds', name = 'Mud Ball', hide = true }, -- Covered in Mud (Mud Ball Pouch)
+    [86774] = { icon = 'esoui/art/icons/achievement_newlifefestival_001.dds', name = 'Mud Ball' }, -- Mudball (Mud Ball Pouch)
+    [86779] = { hide = true }, -- Covered in Mud (Mud Ball Pouch)
+	
+	[91449] = { icon = 'LuiExtended/media/icons/abilities/ability_event_bredas_magnificent_mead.dds' }, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
 
     -- Crown Store Mementos
     [85344] = { icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_aura.dds', name = 'Storm Atronach Aura' }, -- Atronach Aura (Storm Atronach Aura)
@@ -1038,16 +1038,16 @@ E.EffectOverride = {
     [77645] = { hide = true }, -- Stealth (Pirharri the Smuggler)
     
     -- Seasonal Quests (New Life Festival)
-    [84125] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', unbreakable = 1 }, -- Breton Male Dance (Lava Foot Stomp)
-    [84126] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', unbreakable = 1 }, -- Breton Female Dance (Lava Foot Stomp)
-    [84127] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', unbreakable = 1 }, -- Dunmer Male Dance (Lava Foot Stomp)
-    [84128] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', unbreakable = 1 }, -- Dunmer Female Dance (Lava Foot Stomp)
-    [84130] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', unbreakable = 1 }, -- Altmer Male Dance (Lava Foot Stomp)
-    [84131] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', unbreakable = 1 }, -- Altmer Female Dance (Lava Foot Stomp)
-    [84133] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', unbreakable = 1 }, -- Nord Dance (Lava Foot Stomp)
-    [84528] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_jugglers_torch.dds', name = 'Torch Juggling', unbreakable = 1 }, -- Flame Juggling (Castle Charm Challenge)
-    [84506] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_jugglers_knife.dds', unbreakable = 1 }, -- Dagger Juggling (Castle Charm Challenge)
-    [84533] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_swallowable_sword.dds', unbreakable = 1 }, -- Sword Swallowing (Castle Charm Challenge)
+    [84125] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', unbreakable = 1 }, -- Breton Male Dance (Lava Foot Stomp)
+    [84126] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', unbreakable = 1 }, -- Breton Female Dance (Lava Foot Stomp)
+    [84127] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', unbreakable = 1 }, -- Dunmer Male Dance (Lava Foot Stomp)
+    [84128] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', unbreakable = 1 }, -- Dunmer Female Dance (Lava Foot Stomp)
+    [84130] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', unbreakable = 1 }, -- Altmer Male Dance (Lava Foot Stomp)
+    [84131] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', unbreakable = 1 }, -- Altmer Female Dance (Lava Foot Stomp)
+    [84133] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', unbreakable = 1 }, -- Nord Dance (Lava Foot Stomp)
+    [84528] = {icon = 'LuiExtended/media/icons/abilities/ability_event_torch_juggling.dds', unbreakable = 1 }, -- Flame Juggling (Castle Charm Challenge)
+    [84506] = {icon = 'LuiExtended/media/icons/abilities/ability_event_knife_juggling.dds', unbreakable = 1 }, -- Dagger Juggling (Castle Charm Challenge)
+    [84533] = {icon = 'LuiExtended/media/icons/abilities/ability_event_sword_swallowing.dds', unbreakable = 1 }, -- Sword Swallowing (Castle Charm Challenge)
     [84847] = {icon = 'LuiExtended/media/icons/abilities/ability_event_celebratory_belch.dds', unbreakable = 1 }, -- Celebratory Belch (Stonetooth Bash)
 
     ----------------------------------------------------------------
@@ -3815,14 +3815,10 @@ E.EffectOverride = {
 
     -- Seasonal Quests
     [86075] = { icon = 'LuiExtended/media/icons/abilities/ability_event_bredas_magnificent_mead.dds' }, -- Breda's Magnificent Mead (Breda's Magnificent Mead)
-    [83523] = { icon = 'LuiExtended/media/icons/abilities/ability_event_freezing.dds' }, -- Freezing (Snow Bear Plunge)
+    [83523] = { icon = 'LuiExtended/media/icons/abilities/ability_event_freezing.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Freezing (Snow Bear Plunge)
     [83522] = { icon = 'LuiExtended/media/icons/abilities/ability_event_warm.dds' }, -- Warm (Snow Bear Plunge)
-    [84330] = { icon = 'LuiExtended/media/icons/mementos/memento_event_mud_ball.dds', name = 'Mud Ball' }, -- Mudball (Mud Ball Merriment)
-    [84378] = { icon = 'LuiExtended/media/icons/mementos/memento_event_mud_ball.dds', name = 'Mud Ball' }, -- Mudball (Mud Ball Merriment)
-    [84335] = { icon = 'LuiExtended/media/icons/mementos/memento_event_mud_ball.dds', name = 'Mud Ball' }, -- Covered in Mud (Mud Ball Merriment)
-    [85639] = { icon = 'LuiExtended/media/icons/mementos/memento_event_mud_ball.dds', name = 'Mud Ball', hide = true }, -- Covered in Mud (Mud Ball Merriment)
-    [85351] = { icon = 'LuiExtended/media/icons/mementos/memento_event_mud_ball.dds', name = 'Mud Ball' }, -- Self-Serve Mudbath (Mud Ball Merriment) (Seems to be unusued - added just in case)
-    [85352] = { icon = 'LuiExtended/media/icons/mementos/memento_event_mud_ball.dds', name = 'Mud Ball', hide = true }, -- Covered in Mud (Mud Ball Merriment) (Seems to be unusued - added just in case)
+    [84330] = { icon = 'esoui/art/icons/achievement_newlifefestival_001.dds', name = 'Mud Ball' }, -- Mudball (Mud Ball Merriment)
+    [85639] = { hide = true }, -- Covered in Mud (Mud Ball Merriment)
 
     [91369] = { icon = 'LuiExtended/media/icons/abilities/ability_event_steamy_spring_pie.dds', name = 'The Pie of Misrule' }, -- Jester's Experience Boost Pie (The Pie of Misrule)
     
@@ -4398,9 +4394,9 @@ E.FakeExternalDebuffs = {
 E.FakePlayerBuffs = {
 
     -- Misc Consumables
-    [85355] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_jugglers_torch.dds', name = 'Fire-Breather\'s Oil Bun', duration = 12000}, -- Flame Juggling (Consumable Version)
-    [85354] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_jugglers_knife.dds', name = 'Disposable Juggling Knives', duration = 12000}, -- Dagger Juggling (Consumable Verison)
-    [85353] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_swallowable_sword.dds', name = 'Disposable Swallower\'s Sword', duration = 12000}, -- Sword Swallowing (Consumable Version)
+    [85355] = {icon = 'LuiExtended/media/icons/mementos/memento_fire-breathers_torches.dds', name = 'Fire-Breather\'s Torches', duration = 12000}, -- Flame Juggling (Consumable Version)
+    [85354] = {icon = 'LuiExtended/media/icons/mementos/memento_jugglers_knives.dds', name = 'Juggler\'s Knives', duration = 12000}, -- Dagger Juggling (Consumable Verison)
+    [85353] = {icon = 'LuiExtended/media/icons/mementos/memento_sword-swallowers_blade.dds', name = 'Sword-Swallower\'s Blade', duration = 12000}, -- Sword Swallowing (Consumable Version)
 
     -- Base Mementos
     [41988] = {icon = 'LuiExtended/media/icons/mementos/memento_bonesnap_binding_stone.dds', name = 'Bonesnap Binding Stone', duration = 10000}, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
@@ -4452,9 +4448,9 @@ E.FakePlayerBuffs = {
     [84130] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Altmer Male Dance (Lava Foot Stomp)
     [84131] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Altmer Female Dance (Lava Foot Stomp)
     [84133] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Nord Dance (Lava Foot Stomp)
-    [84528] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_jugglers_torch.dds', name = 'Torch Juggling', duration = 12000}, -- Flame Juggling (Castle Charm Challenge)
-    [84506] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_jugglers_knife.dds', name = 'Dagger Juggling', duration = 12000}, -- Dagger Juggling (Castle Charm Challenge)
-    [84533] = {icon = 'LuiExtended/media/icons/consumables/consumable_event_swallowable_sword.dds', name = 'Sword Swallowing', duration = 12000}, -- Sword Swallowing (Castle Charm Challenge)
+    [84528] = {icon = 'LuiExtended/media/icons/abilities/ability_event_torch_juggling.dds', name = 'Torch Juggling', duration = 12000}, -- Flame Juggling (Castle Charm Challenge)
+    [84506] = {icon = 'LuiExtended/media/icons/abilities/ability_event_knife_juggling.dds', name = 'Dagger Juggling', duration = 12000}, -- Dagger Juggling (Castle Charm Challenge)
+    [84533] = {icon = 'LuiExtended/media/icons/abilities/ability_event_sword_swallowing.dds', name = 'Sword Swallowing', duration = 12000}, -- Sword Swallowing (Castle Charm Challenge)
     [84847] = {icon = 'LuiExtended/media/icons/abilities/ability_event_celebratory_belch.dds', name = 'Celebratory Belch', duration = 5000}, -- Celebratory Belch (Stonetooth Bash)
 
     -- QUEST RELATED (CRAGLORN)
