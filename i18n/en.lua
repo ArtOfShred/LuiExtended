@@ -482,27 +482,32 @@ ZO_CreateStringId("SI_LUIE_LAM_FONT",                                   "Font")
 ZO_CreateStringId("SI_LUIE_LAM_FONT_SIZE",                              "Font Size")
 ZO_CreateStringId("SI_LUIE_LAM_FONT_STYLE",                             "Font Style")
 ZO_CreateStringId("SI_LUIE_LAM_GENERIC_WARNING",                        "Compatibility option!")
-ZO_CreateStringId("SI_LUIE_LAM_LUIPRINTTOCHAT",                         "Use LUIE print to chat function")
+ZO_CreateStringId("SI_LUIE_LAM_LUIPRINTTOCHAT",                         "Use LUIE Print to Chat Function")
 ZO_CreateStringId("SI_LUIE_LAM_LUIPRINTTOCHAT_TP",                      "Enable this if you are having issues with printed Chat Announcements. Enabling this will prevent other chat addons like PChat from interfering with messages displayed by LUIE, and allow you to prepend messages with a timestamp similiar to pChat.")
-ZO_CreateStringId("SI_LUIE_LAM_RELOADUI",                               "This will reload the UI.")
+ZO_CreateStringId("SI_LUIE_LAM_RELOADUI",                       		"Reload UI")
+ZO_CreateStringId("SI_LUIE_LAM_RELOADUI_BUTTON",                        "This will reload the UI.")
 ZO_CreateStringId("SI_LUIE_LAM_RELOADUI_WARNING",                       "Will need to reload the UI.")
-ZO_CreateStringId("SI_LUIE_LAM_RESETPOSITION",                          "Reset position")
+ZO_CreateStringId("SI_LUIE_LAM_RESETPOSITION",                          "Reset Position")
+
+ZO_CreateStringId("SI_LUIE_LAM_HIDE_EXPERIENCE_BAR",					"Hide Experience Bar Pop-up")
+ZO_CreateStringId("SI_LUIE_LAM_HIDE_EXPERIENCE_BAR_TP",					"When gaining experience from Discovery, Boss Kills, or Skill Line updates, the XP bar will no longer popup. Useful if you have a custom UI element in that corner of the screen and don't want it to be overlapped.")
 
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER",                        "LUIE Slash Commands Overview")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER_GENERAL",                "General Commands:")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER_GENERAL",                "|c00FFFFGeneral Commands:|r")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_TRADE",                        "'/trade' 'name' Invites a player to trade with you.")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_HOME",                         "'/home' Ports the user to their primary home.")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER_GROUP",                  "Group Commands:")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REGROUP",                      "'/regroup' Saves your current party configuration, disbands the group and reinvites them after 5 seconds. This command does not work in LFG.")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_CAMPAIGN",                     "'/campaign' 'name' Queue for the entered campaign name if it your Home or Guest campaign.")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER_GROUP",                  "|c00FFFFGroup Commands:|r")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REGROUP",                      "'/regroup' Saves your current party configuration, disbands the group and reinvites them after 5 seconds.")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_LEAVE",                        "'/leave' Leaves the current group.\n\t\t\t\t\tAlternate options: '/leavegroup'")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_DISBAND",                      "'/disband' Disbands the current group if you are group leader.")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_KICK",                         "'/kick' 'name' Kicks a member from the current group if you are group leader.\n\t\t\t\t\tAlternate options: '/remove', '/groupkick', '/groupremove'")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_KICK",                         "'/kick' 'name' Kicks a member from the current group if you are group leader.\n\t\t\t\t\tNote: Does not replace the /kick emote.\n\t\t\t\t\tAlternate options: '/remove', '/groupkick', '/groupremove'")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_VOTEKICK",                     "/votekick' 'name' Initiates a vote to kick a member from your current LFG group.\n\t\t\t\t\tAlternate options: '/voteremove'")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER_GUILD",                  "Guild Commands:")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER_GUILD",                  "|c00FFFFGuild Commands:|r")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_GUILDINVITE",                  "'/guildinvite' '#' 'name' Invites a player to one of your guilds based on their order in your Guild Menu.\n\t\t\t\t\tAlternate options: /'ginvite'")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_GUILDKICK",                    "'/guildkick' '#' 'name' Kicks a player from one of your guilds if you have permissions to do so.\n\t\t\t\t\tAlternate options: '/gkick'")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_GUILDQUIT",                    "'/guildquit' '#' Leave one of your guilds based on their order in your Guild Menu.\n\t\t\t\t\tAlternate options: '/gquit', '/guildleave', '/gleave'")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER_SOCIAL",                 "Social Commands:")          
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER_SOCIAL",                 "|c00FFFFSocial Commands:|r")          
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_FRIEND",                       "'/friend' 'name' Invite a player to be friends.\n\t\t\t\t\tAlternate options: '/addfriend'")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_IGNORE",                       "'/ignore' 'name' Add a player to ignored.\n\t\t\t\t\t\tAlternate options: '/addignore'")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND",                 "'/unfriend' 'name' Remove a player from friends.\n\t\t\t\t\tAlternate options: '/removefriend'")
@@ -514,10 +519,10 @@ ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE",                 "'/unign
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-ZO_CreateStringId("SI_LUIE_LAM_STARTUPMSG",                             "Disable startup message")
+ZO_CreateStringId("SI_LUIE_LAM_STARTUPMSG",                             "Disable Startup Message")
 ZO_CreateStringId("SI_LUIE_LAM_STARTUPMSG_TP",                          "This setting will disable the startup message.")
 ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMP",                              "Include Timestamp")
-ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMPFORMAT",                        "Timestamp format")
+ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMPFORMAT",                        "Timestamp Format")
 ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMPFORMAT_TP",                     "FORMAT:\nHH: hours (24)\nhh: hours (12)\nH: hour (24, no leading 0)\nh: hour (12, no leading 0)\nA: AM/PM\na: am/pm\nm: minutes\ns: seconds")
 ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMP_TP",                           "Prepend printed text with current time label.")
 ZO_CreateStringId("SI_LUIE_LAM_UF",                                     "Unit Frames")
@@ -1320,6 +1325,8 @@ ZO_CreateStringId("SI_LUIE_LAM_CI_POTION_COLOR_TP",                     "Color t
 -- INFO PANEL -- LAM --
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ZO_CreateStringId("SI_LUIE_LAM_PNL_DESCRIPTION",						"Displays a panel with potentially useful information on it such as Latency, Time, FPS, Durability and Weapon Charge, etc...")
 
 ZO_CreateStringId("SI_LUIE_LAM_PNL_DISABLECOLORSRO",                    "Disable colours on read-only values")
 ZO_CreateStringId("SI_LUIE_LAM_PNL_DISABLECOLORSRO_TP",                 "Disable value-dependent colour of the information label for items that you don't have direct control: Currently this includes FPS and Latency labels.")

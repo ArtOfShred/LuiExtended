@@ -146,8 +146,8 @@ function LUIE_CreateSettings()
     -- ReloadUI Button
     optionsData[#optionsData + 1] = {
         type = "button",
-        name = "Reload UI",
-        tooltip = GetString(SI_LUIE_LAM_RELOADUI),
+        name = GetString(SI_LUIE_LAM_RELOADUI),
+        tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
         func = function() ReloadUI("ingame") end,
         width = "full",
     }
@@ -241,9 +241,9 @@ function LUIE_CreateSettings()
                 
             
             {
-                -- TEMP DESCRIPTION INFO PANEL (NO LOCALIZATION NEEDED)
+                -- InfoPanel Header
                 type = "description",
-                text = "Displays a small panel with potentially important information on it. This feature may be significantly overhauled in the future.",
+                text = GetString(SI_LUIE_LAM_PNL_DESCRIPTION),
             },
             {
                 -- Show InfoPanel
@@ -407,7 +407,7 @@ function LUIE_CreateSettings()
     -- Include Timestamp
     optionsData[#optionsData + 1] = {
         type = "checkbox",
-        name = strformat("\t\t<<1>>", GetString(SI_LUIE_LAM_TIMESTAMP)),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_TIMESTAMP)),
         tooltip = GetString(SI_LUIE_LAM_TIMESTAMP_TP),
         getFunc = function() return LUIE.SV.TimeStamp end,
         setFunc = function(value) LUIE.SV.TimeStamp = value end,
@@ -418,7 +418,7 @@ function LUIE_CreateSettings()
     -- Timestamp Format
     optionsData[#optionsData + 1] = {
         type = "editbox",
-        name = strformat("\t\t<<1>>", GetString(SI_LUIE_LAM_TIMESTAMPFORMAT)),
+        name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_TIMESTAMPFORMAT)),
         tooltip = GetString(SI_LUIE_LAM_TIMESTAMPFORMAT_TP),
         getFunc = function() return LUIE.SV.TimeStampFormat end,
         setFunc = function(value) LUIE.SV.TimeStampFormat = value end,
@@ -439,8 +439,8 @@ function LUIE_CreateSettings()
     -- Toggle XP Bar popup
     optionsData[#optionsData + 1] = {
         type = "checkbox",
-        name = "Hide XP Bar Popup",
-        tooltip = "When gaining experience from Discovery, Boss Kills, or Skill Line updates, the XP bar will no longer popup. Useful if you have a custom UI element in that corner of the screen and don't want it to be overlapped.",
+        name = GetString(SI_LUIE_LAM_HIDE_EXPERIENCE_BAR),
+        tooltip = GetString(SI_LUIE_LAM_HIDE_EXPERIENCE_BAR_TP),
         getFunc = function() return LUIE.SV.HideXPBar end,
         setFunc = function(value) LUIE.SV.HideXPBar = value end,
         width = "full",
@@ -475,10 +475,11 @@ function LUIE_CreateSettings()
     -- Slash Commands description
     optionsData[#optionsData + 1] = {
         type = "description",
-        text = strformat("<<1>>\n<<2>>\n<<3>>",
+        text = strformat("<<1>>\n<<2>>\n<<3>>\n<<4>>",
                GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GENERAL),
                GetString(SI_LUIE_LAM_SLASHCMDS_TRADE),
-               GetString(SI_LUIE_LAM_SLASHCMDS_HOME)),
+               GetString(SI_LUIE_LAM_SLASHCMDS_HOME),
+               GetString(SI_LUIE_LAM_SLASHCMDS_CAMPAIGN)),
     }
     optionsData[#optionsData + 1] = {
         type = "description",
@@ -528,8 +529,8 @@ function LUIE_CreateSettings()
     -- ReloadUI Button
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "button",
-        name = "Reload UI",
-        tooltip = GetString(SI_LUIE_LAM_RELOADUI),
+        name = GetString(SI_LUIE_LAM_RELOADUI),
+        tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
         func = function() ReloadUI("ingame") end,
         width = "full",
     }
@@ -850,8 +851,8 @@ function LUIE_CreateSettings()
     -- ReloadUI Button
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "button",
-        name = "Reload UI",
-        tooltip = GetString(SI_LUIE_LAM_RELOADUI),
+        name = GetString(SI_LUIE_LAM_RELOADUI),
+        tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
         func = function() ReloadUI("ingame") end,
         width = "full",
     }
@@ -1591,8 +1592,8 @@ function LUIE_CreateSettings()
     -- ReloadUI Button
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "button",
-        name = "Reload UI",
-        tooltip = GetString(SI_LUIE_LAM_RELOADUI),
+        name = GetString(SI_LUIE_LAM_RELOADUI),
+        tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
         func = function() ReloadUI("ingame") end,
         width = "full",
     }
@@ -1614,6 +1615,7 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
         default = chatNameDisplayOptions[2],
     }
+	--[[
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         -- Notification Color
         type = "colorpicker",
@@ -1625,6 +1627,7 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.TodoLater end,
         default = {r=LUIE.ChatAnnouncements.D.NotificationColor[1], g=LUIE.ChatAnnouncements.D.NotificationColor[2], b=LUIE.ChatAnnouncements.D.NotificationColor[3]}
     }
+	]]--
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         -- Currency/Loot Message Color
         type = "colorpicker",
@@ -6229,8 +6232,8 @@ function LUIE_CreateSettings()
     -- ReloadUI Button
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "button",
-        name = "Reload UI",
-        tooltip = GetString(SI_LUIE_LAM_RELOADUI),
+        name = GetString(SI_LUIE_LAM_RELOADUI),
+        tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
         func = function() ReloadUI("ingame") end,
         width = "full",
     }
@@ -7705,8 +7708,8 @@ function LUIE_CreateSettings()
     -- ReloadUI Button
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type = "button",
-        name = "Reload UI",
-        tooltip = GetString(SI_LUIE_LAM_RELOADUI),
+        name = GetString(SI_LUIE_LAM_RELOADUI),
+        tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
         func = function() ReloadUI("ingame") end,
         width = "full",
     }

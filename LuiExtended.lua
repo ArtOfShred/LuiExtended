@@ -1512,7 +1512,7 @@ SLASH_COMMANDS["/removefriend"] = LUIE.SlashRemoveFriend
 SLASH_COMMANDS["/unignore"]     = LUIE.SlashRemoveIgnore
 SLASH_COMMANDS["/removeignore"] = LUIE.SlashRemoveIgnore
 SLASH_COMMANDS["/campaign"]     = LUIE.SlashCampaignQ
-SLASH_COMMANDS["/invite"] = LUIE.SlashInvite
+SLASH_COMMANDS["/invite"] 		= LUIE.SlashInvite
 
 -- Hook initialization
 EVENT_MANAGER:RegisterForEvent(LUIE.name, EVENT_ADD_ON_LOADED, LUIE_OnAddOnLoaded)
