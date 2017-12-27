@@ -527,8 +527,8 @@ ZO_CreateStringId("SI_LUIE_LAM_RELOADUI_BUTTON",                        "This wi
 ZO_CreateStringId("SI_LUIE_LAM_RELOADUI_WARNING",                       "Will need to reload the UI.")
 ZO_CreateStringId("SI_LUIE_LAM_RESETPOSITION",                          "Reset Position")
 
-ZO_CreateStringId("SI_LUIE_LAM_HIDE_EXPERIENCE_BAR",					"Hide Experience Bar Pop-up")
-ZO_CreateStringId("SI_LUIE_LAM_HIDE_EXPERIENCE_BAR_TP",					"When gaining experience from Discovery, Boss Kills, or Skill Line updates, the XP bar will no longer popup. Useful if you have a custom UI element in that corner of the screen and don't want it to be overlapped.")
+ZO_CreateStringId("SI_LUIE_LAM_HIDE_EXPERIENCE_BAR",					"Hide Experience/Skill Progress Bar Pop-up")
+ZO_CreateStringId("SI_LUIE_LAM_HIDE_EXPERIENCE_BAR_TP",					"When gaining experience from Quests, POI Discovery, Boss Kills, or Skill Line updates, the XP bar will no longer popup. Useful if you have a custom UI element in that corner of the screen and don't want it to be overlapped.")
 
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER",                        "LUIE Slash Commands Overview")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER_GENERAL",                "|c00FFFFGeneral Commands:|r")

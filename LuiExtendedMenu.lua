@@ -1214,17 +1214,6 @@ function LUIE_CreateSettings()
                 default = not LUIE.SpellCastBuffs.D.IgnoreAssistant,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             }
-            -- Long Term - Pets
-            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET_TP),
-                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnorePet end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnorePet = not value LUIE.SpellCastBuffs.OnPlayerActivated() end,
-                width = "full",
-                default = not LUIE.SpellCastBuffs.D.IgnorePet,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
-            }
             -- Long Term - Mounts
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
@@ -1234,6 +1223,17 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreMount = not value LUIE.SpellCastBuffs.OnPlayerActivated() end,
                 width = "full",
                 default = not LUIE.SpellCastBuffs.D.IgnoreMount,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
+            }
+			-- Long Term - Pets
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_PET_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnorePet end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnorePet = not value LUIE.SpellCastBuffs.OnPlayerActivated() end,
+                width = "full",
+                default = not LUIE.SpellCastBuffs.D.IgnorePet,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             }
             -- Long Term - Mundus - Player
