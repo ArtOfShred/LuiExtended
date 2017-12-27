@@ -222,6 +222,10 @@ CA.D = {
 		QuestLocDiscoveryCA             = true,
 		QuestLocDiscoveryCSA            = true,
 		QuestLocDiscoveryAlert          = false,
+		QuestICDiscoveryCA				= false,
+		QuestICDiscoveryCSA				= true,
+		QuestICDiscoveryAlert			= false,
+		QuestICDescription				= true,
 		QuestLocObjectiveCA             = true,
 		QuestLocObjectiveCSA            = true,
 		QuestLocObjectiveAlert          = false,
@@ -547,6 +551,7 @@ local g_guildRankData               = {}            -- Variable to store local p
 local g_achievementLastPercentage   = {}            -- Here we will store last displayed percentage for achievement
 
 -- Quest
+local g_stopDisplaySpam				= false			-- Toggled on to stop spam display of EVENT_DISPLAY_ANNOUNCEMENTS from IC zone transitions.
 local g_questIndex                  = { }           -- Index of all current quests. Allows us to read the index so that all quest notifications can use the difficulty icon.
 
 -- Trade
@@ -2030,7 +2035,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
 	elseif reason == 12 and UpOrDown < 0 then
 		messageChange = CA.SV.Currency.CurrencyMessageCampaign
 	elseif reason == 12 and UpOrDown > 0 then
-		messageChange = CA.SV.Currency.CurrencyMessageEarn
+		messageChange = CA.SV.Currency.CurrencyMessageReceive
     -- Wayshrine (19)
     elseif reason == 19 then
         messageChange = CA.SV.Currency.CurrencyMessageWayshrine
@@ -7896,6 +7901,19 @@ function CA.HookFunction()
     [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5), announceType = "ROUND" }, -- Round 5
     [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF), announceType = "ROUND" }, -- Final Round
     [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA), announceType = "ARENA" }, -- Dragonstar Arena
+	
+	[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE1)] = { number = 1 }, -- IC (DC 1)
+	[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE2)] = { number = 2 }, -- IC (DC 2)
+	[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE3)] = { number = 3 }, -- IC (DC 3)
+	[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE4)] = { number = 4 }, -- IC (DC 4)
+	[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE5)] = { number = 5 }, -- IC (AD 1)
+	[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE6)] = { number = 6 }, -- IC (AD 2)
+	[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE7)] = { number = 7 }, -- IC (AD 3)
+	[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE8)] = { number = 8 }, -- IC (AD 4)
+	[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE9)] = { number = 9 }, -- IC (EP 1)
+	[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE10)] = { number = 10 }, -- IC (EP 2)
+	[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE11)] = { number = 11 }, -- IC (EP 3)
+	[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE12)] = { number = 12 }, -- IC (EP 4)
     
     }
     
@@ -7910,9 +7928,93 @@ function CA.HookFunction()
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE7)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE7), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE7), announceType = "ARENA" }, -- Vault of Umbrage
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE8)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE8), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE8), announceType = "ARENA" }, -- Igneous Cistern
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE9)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE9), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE9), announceType = "ARENA" }, -- Theater of Despair
-        
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC), announceType = "ARENA" }, -- The arena will begin in 30 seconds!
+		
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC1)] = { number = 1 }, -- IC (DC 1)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC2)] = { number = 2 }, -- IC (DC 2)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC3)] = { number = 3 }, -- IC (DC 3)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC4)] = { number = 4 }, -- IC (DC 4)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC5)] = { number = 5 }, -- IC (AD 1)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC6)] = { number = 6 }, -- IC (AD 2)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC7)] = { number = 7 }, -- IC (AD 3)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC8)] = { number = 8 }, -- IC (AD 4)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC9)] = { number = 9 }, -- IC (EP 1)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC10)] = { number = 10 }, -- IC (EP 2)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC11)] = { number = 11 }, -- IC (EP 3)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC12)] = { number = 12 }, -- IC (EP 4)
     }
+	
+	local function DisplayAnnouncementIC(number)
+		-- Don't print the message if display spam is turned off
+		if g_stopDisplaySpam == true then return end
+		
+		-- Stop messages from spamming if the player bounces around the same trigger multiple times
+		if g_stopDisplaySpam == false then
+			g_stopDisplaySpam = true
+			zo_callLater(function() g_stopDisplaySpam = false end, 5000)
+		end
+	
+		local flagCA = CA.SV.Quest.QuestICDiscoveryCA and true or false
+        local flagCSA = CA.SV.Quest.QuestICDiscoveryCSA and true or false
+        local flagAlert = CA.SV.Quest.QuestICDiscoveryAlert and true or false
+		
+		-- Setup Strings
+		local titleString = number == 8 and GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE8_EDIT) or GetString("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE", number)
+		local descriptionString = GetString("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC", number)
+		local formatLine1 = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_PREFIX)
+		local formatLine2 = GetString("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_", number)
+	
+		-- Setup final strings to display
+		local titleCA = CA.SV.Quest.QuestICDescription and strfmt("%s|c%s%s: |r", formatLine1, QuestColorLocNameColorize, formatLine2 ) or strfmt("%s|c%s%s|r", formatLine1, QuestColorLocNameColorize, formatLine2 )
+		local titleAlert = titleCA
+		local titleCSA = titleString
+		local descriptionCA = CA.SV.Quest.QuestICDescription and strfmt("|c%s%s|r", QuestColorLocDescriptionColorize, descriptionString) or ""
+		local descriptionAlert = CA.SV.Quest.QuestICDescription and descriptionString or ""
+		local descriptionCSA = descriptionString
+
+        local messageParams
+        local message
+        if title ~= "" and description ~= "" then
+            messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
+        elseif title ~= "" then
+            messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
+        elseif description ~= "" then
+            messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
+        end
+        
+        if flagCA then
+            if title ~= "" and description ~= "" then
+                printToChat(titleCA .. descriptionCA)
+            elseif title ~= "" then
+                printToChat(titleCA)
+            elseif description ~= "" then
+                printToChat(descriptionCA)
+            end
+        end
+        
+        if flagCSA then
+            if messageParams then
+                messageParams:SetText(titleCSA, descriptionCSA)
+                messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_DISPLAY_ANNOUNCEMENT)
+                CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+            end
+        end
+        
+        if flagAlert then
+            if title ~= "" and description ~= "" then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, (titleAlert .. descriptionAlert) )
+            elseif title ~= "" then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, titleAlert)
+            elseif description ~= "" then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, descriptionAlert)
+            end
+        end
+        
+        if (flagCA or flagAlert) and not flagCSA then
+            PlaySound(SOUNDS.DISPLAY_ANNOUNCEMENT)
+        end
+	
+	end
     
     -- EVENT_DISPLAY_ANNOUNCEMENT -- CSA HANDLER
     local function DisplayAnnouncementHook(title, description)
@@ -7935,6 +8037,11 @@ function CA.HookFunction()
         -- Temporary double conditional here until we resolve all Display Announcement types
         if (title ~= "" and overrideDisplayAnnouncementTitle[title]) or (description ~= "" and overrideDisplayAnnouncementDescription[description]) then
             local reference
+			-- If this is an IC announcement then pass it over to the IC Announcement handler to display
+			if (title ~= "" and overrideDisplayAnnouncementTitle[title] and overrideDisplayAnnouncementTitle[title].number) or (description ~= "" and overrideDisplayAnnouncementDescription[description] and overrideDisplayAnnouncementDescription[description].number) then
+				DisplayAnnouncementIC(overrideDisplayAnnouncementTitle[title].number)
+				return 
+			end
             if title ~= "" and overrideDisplayAnnouncementTitle[title] then reference = overrideDisplayAnnouncementTitle[title].announceType end
             if description ~= "" and overrideDisplayAnnouncementDescription[description] then reference = overrideDisplayAnnouncementDescription[description].announceType end
             if reference == "RESPEC" then
@@ -7965,22 +8072,23 @@ function CA.HookFunction()
         local titleCSA
         local descriptionCA
         local descriptionCSA
-        -- Replace message text when needed
-        if title ~= "" and overrideDisplayAnnouncementTitle[title] then
-            titleCA = overrideDisplayAnnouncementTitle[title].ca
-            titleCSA = overrideDisplayAnnouncementTitle[title].csa
-        elseif title ~= "" then
-            titleCA = title
-            titleCSA = title
-        end
-        
-        if description ~= "" and overrideDisplayAnnouncementDescription[description] then
-            descriptionCA = overrideDisplayAnnouncementDescription[description].ca
-            descriptionCSA = overrideDisplayAnnouncementDescription[description].csa
-        elseif description ~= "" then
-            descriptionCA = title
-            descriptionCSA = title
-        end
+		
+		-- Replace message text when needed
+		if title ~= "" and overrideDisplayAnnouncementTitle[title] then
+			titleCA = overrideDisplayAnnouncementTitle[title].ca
+			titleCSA = overrideDisplayAnnouncementTitle[title].csa
+		elseif title ~= "" then
+			titleCA = title
+			titleCSA = title
+		end
+		
+		if description ~= "" and overrideDisplayAnnouncementDescription[description] then
+			descriptionCA = overrideDisplayAnnouncementDescription[description].ca
+			descriptionCSA = overrideDisplayAnnouncementDescription[description].csa
+		elseif description ~= "" then
+			descriptionCA = title
+			descriptionCSA = title
+		end
         
         local messageParams
         local message

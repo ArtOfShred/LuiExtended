@@ -4802,6 +4802,51 @@ function LUIE_CreateSettings()
                         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                         default = LUIE.ChatAnnouncements.D.Quest.QuestLocDiscoveryAlert,                   
                     },
+					{
+                        -- IC DISPLAY ANNOUNCEMENT (CA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.Quest.QuestICDiscoveryCA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.Quest.QuestICDiscoveryCA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.Quest.QuestICDiscoveryCA,                   
+                    },
+                    {
+                        -- IC DISPLAY ANNOUNCEMENT (CSA)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.Quest.QuestICDiscoveryCSA end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.Quest.QuestICDiscoveryCSA = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.Quest.QuestICDiscoveryCSA,                   
+                    },
+                    {
+                        -- IC DISPLAY ANNOUNCEMENT (Alert)
+                        type = "checkbox",
+                        name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+                        tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.Quest.QuestICDiscoveryAlert end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.Quest.QuestICDiscoveryAlert = value end,
+                        width = "full",
+                        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                        default = LUIE.ChatAnnouncements.D.Quest.QuestICDiscoveryAlert,                   
+                    },
+					
+					{
+                        -- IC DISPLAY DESCRIPTION
+                        type = "checkbox",
+                        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION)),
+                        tooltip = GetString(SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION_TP),
+                        getFunc = function() return LUIE.ChatAnnouncements.SV.Quest.QuestICDescription end,
+                        setFunc = function(value) LUIE.ChatAnnouncements.SV.Quest.QuestICDescription = value end,
+                        width = "full",
+                        disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.Quest.QuestICDiscoveryCA or LUIE.ChatAnnouncements.SV.Quest.QuestICDiscoveryCSA or LUIE.ChatAnnouncements.SV.Quest.QuestICDiscoveryAlert) ) end,
+                        default = LUIE.ChatAnnouncements.D.Quest.QuestICDiscoveryAlert,                   
+                    },
                     {
                         -- Show Location Objective (CA)
                         type = "checkbox",

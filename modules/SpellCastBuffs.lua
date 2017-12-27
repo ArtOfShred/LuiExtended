@@ -2257,7 +2257,7 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
     end
         
     -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by target)
-    if E.FakeExternalBuffs[abilityId] ~= nil and targetType == COMBAT_UNIT_TYPE_PLAYER then
+    if E.FakeExternalBuffs[abilityId] ~= nil and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
         if E.FakeExternalBuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
         g_effectsList.player1[ abilityId ] = nil
         iconName = E.FakeExternalBuffs[abilityId].icon
@@ -2279,7 +2279,7 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
     end
 
     -- Creates fake debuff icons for debuffs without an aura - These refresh on reapplication/removal (Applied on player by target)
-    if E.FakeExternalDebuffs[abilityId] ~= nil and targetType == COMBAT_UNIT_TYPE_PLAYER then
+    if E.FakeExternalDebuffs[abilityId] ~= nil and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
         if E.FakeExternalDebuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
         g_effectsList.player2[ abilityId ] = nil
         iconName = E.FakeExternalDebuffs[abilityId].icon
@@ -2301,7 +2301,7 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
     end
 
     -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by player)
-    if E.FakePlayerBuffs[abilityId] ~= nil and sourceType == COMBAT_UNIT_TYPE_PLAYER then
+    if E.FakePlayerBuffs[abilityId] ~= nil and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
         if E.FakePlayerBuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
         g_effectsList.player1[ abilityId ] = nil
         if abilityId == 973 and not SCB.SV.ShowSprint then
@@ -2340,7 +2340,7 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
     end
     
     -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on target by player)
-    if E.FakePlayerExternalBuffs[abilityId] and sourceType == COMBAT_UNIT_TYPE_PLAYER then
+    if E.FakePlayerExternalBuffs[abilityId] and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
         if E.FakePlayerExternalBuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
         g_effectsList.reticleover1[ abilityId ] = nil
         if not DoesUnitExist("reticleover") then return end
@@ -2371,7 +2371,7 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
     end
 
     -- Creates fake debuff icons for debuffs without an aura - These refresh on reapplication/removal (Applied on target by player)
-    if E.FakePlayerDebuffs[abilityId] ~= nil and sourceType == COMBAT_UNIT_TYPE_PLAYER then
+    if E.FakePlayerDebuffs[abilityId] ~= nil and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
         if E.FakePlayerDebuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
         g_effectsList.reticleover2[ abilityId ] = nil
         if not DoesUnitExist("reticleover") then end
@@ -2413,7 +2413,7 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
         end
     end
     
-    if E.FakeFlippedBuffs[abilityId] ~= nil and targetType == COMBAT_UNIT_TYPE_PLAYER then
+    if E.FakeFlippedBuffs[abilityId] ~= nil and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
         if E.FakeFlippedBuffs[abilityId].norefresh == true and (result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_FADED) then return end
         g_effectsList.reticleover1[ abilityId ] = nil
         iconName = E.FakeFlippedBuffs[abilityId].icon

@@ -441,10 +441,49 @@ ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF",          "Final R
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF_CA",       "Final Round!")
 
 -- DSA Notifications used by EVENT_DISPLAY_ANNOUNCEMENT
-
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA",                "Dragonstar Arena")
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_CA",             "Dragonstar Arena: ")
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC",           "The arena will begin in 30 seconds!")
+
+-- Imperial City Notifications used by EVENT_DISPLAY_ANNOUNCEMENT
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_PREFIX",	"Entered: ")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE1",			"Entered: Battle Gates")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_1",		"Battle Gates")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE2",			"Entered: Nocere Oblitus")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_2",		"Nocere Oblitus")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE3",			"Entered: Bloodworks")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_3",		"Bloodworks")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE4",			"Entered: Wavering Veil")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_4",		"Wavering Veil")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE5",			"Entered: Training Grounds")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_5",		"Training Grounds")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE6",			"Entered: Lost Tombs")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_6",		"Lost Tombs")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE7",			"Entered: The Hatchery")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_7",		"The Hatchery")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE8",			"Entered: Weavers Nest")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE8_EDIT",		"Entered: Weaver\'s Nest")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_8",		"Weaver's Nest")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE9",			"Entered: Buried Artifact")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_9",		"Buried Artifact")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE10",			"Entered: Betrayer\'s Catacombs")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_10",		"Betrayer\'s Catacombs")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE11",			"Entered: Feeding Pits")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_11",		"Feeding Pits")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE12",			"Entered: Alessian Tombs")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_12",		"Alessian Tombs")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC1",			"Gati has discovered a new route to the realms of Oblivion.")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC2",			"The cruel wards of Zamachar nurture only the strongest foes.")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC3",			"A clan of vampiric Orcs lurk in the shadows.")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC4",			"The barriers between Mundus and Oblivion grow thin.")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC5",			"The merciless Hzu-Hakan trains his savage Clannfear.")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC6",			"The corpse of long-dead Emperor Leovic has been found.")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC7",			"General Kryozote oversees the breeding of vile creatures.")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC8",			"The Weaver ensnares anyone foolish enough to enter her web.")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC9",			"Xivkyn lord Wadracki searches for a long forgotten power.")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC10",			"Xivkyn lord Ebral rallies his army of the undead.")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC11",			"General Nazenaechar makes use of fallen Imperial citizens.")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC12",			"Restless spirits of the dead are driven by forces unseen.")
 
 -- UnitFrames.lua
 ZO_CreateStringId("SI_LUIE_UF_ERROR_FONT",                              "LUIE_CustomFrames: There was a problem with selecting required font. Falling back to game default.")
@@ -1139,6 +1178,13 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP",             "Display
 
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY",            "Display Location Discovery - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY_TP",         "Display <<1>> when a location on the map is discovered.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY",            		"Display Imperial City Area Messages - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP",         		"Display <<1>> when entering a new area of the Imperial City Sewers.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION",            	"Display Imperial City Area Description")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION_TP",         	"Display the description text when entering a new area of the Imperial City Sewers.")
+
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE",                 "Display POI Objective - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE_TP",              "Display <<1>> when a quest is accepted with an associated map POI.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POI_COMPLETE",                  "Display POI Complete - <<1>>")
