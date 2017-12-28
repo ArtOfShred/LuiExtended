@@ -147,7 +147,7 @@ function CombatCloud_CombatEllipseEventViewer:View(combatType, powerType, value,
     animationX:Play()
 
     local animationY, animationYPoolKey = self.poolManager:GetPoolObject(animationYPoolType)
-    local verticalOffset = (targetY * h + 450)
+    local verticalOffset = (targetY * h + 550)
     if (point == TOPRIGHT) then verticalOffset = -verticalOffset end
     animationY:GetStepByName('scrollY'):SetDeltaOffsetY(verticalOffset)
     animationY:Apply(control)
