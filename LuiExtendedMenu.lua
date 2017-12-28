@@ -4,9 +4,7 @@ local strformat = zo_strformat
 function LUIE_CreateSettings()
     -- Load LibAddonMenu
     local LAM2  = LibStub("LibAddonMenu-2.0")
-    local LMP           = LibStub("LibMediaProvider-1.0")
-    local L             = CombatCloudLocalization
-    local D             = LUIE.CombatText.D
+    local LMP   = LibStub("LibMediaProvider-1.0")
 
     local l_BuffsMovingEnabled  = false -- Helper local flag
     local FontsList             = {}
@@ -36,19 +34,12 @@ function LUIE_CreateSettings()
     local rotationOptionsKeys           = { ["Horizontal"] = 1, ["Vertical"] = 2 }
     local duelStartOptions              = { "Message + Icon", "Message Only", "Icon Only" }
     local duelStartOptionsKeys          = { ["Message + Icon"] = 1, ["Message Only"] = 2, ["Icon Only"] = 3 }
-
     local raidIconOptions               = { "No Icons", "Class Icons Only", "Role Icons Only", "Class Icon in PVP, Role in PVE", "Class Icon in PVE, Role in PVP" }
     local raidIconOptionsKeys           = { ["No Icons"] = 1 , ["Class Icons Only"] = 2, ["Role Icons Only"] = 3, ["Class Icon in PVP, Role in PVE"] = 4, ["Class Icon in PVE, Role in PVP"] = 5 }
-    
     local globalMethodOptions           = { "Ascending", "Descending", "Radial" }
 	local globalMethodOptionsKeys = { ["Ascending"] = 1, ["Descending"] = 2, ["Radial"] = 3 }
     
-    local championOptions = {
-    
-    "Show Above Cap",
-    "Limit to Cap",
-    
-    }
+    local championOptions = { "Show Above Cap", "Limit to Cap", }
     
     local formatOptions = {
         "Nothing",
@@ -7781,7 +7772,7 @@ function LUIE_CreateSettings()
         tooltip = GetString(SI_LUIE_LAM_CT_IC_ONLY_TP),
         getFunc = function() return LUIE.CombatText.SV.toggles.inCombatOnly end,
         setFunc = function(v) LUIE.CombatText.SV.toggles.inCombatOnly = v end,
-        default = D.toggles.inCombatOnly,
+        default = LUIE.CombatText.D.toggles.inCombatOnly,
     }
     
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -7803,7 +7794,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DAMAGE_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showDamage end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showDamage = v end,
-                    default = D.toggles.incoming.showDamage,
+                    default = LUIE.CombatText.D.toggles.incoming.showDamage,
                 },
                 {--HEALING
                     type    = "checkbox",
@@ -7811,7 +7802,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_HEALING_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showHealing end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showHealing = v end,
-                    default = D.toggles.incoming.showHealing,
+                    default = LUIE.CombatText.D.toggles.incoming.showHealing,
                 },
                 {--ENERGIZE
                     type    = "checkbox",
@@ -7819,7 +7810,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_ENERGIZE_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showEnergize end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showEnergize = v end,
-                    default = D.toggles.incoming.showEnergize,
+                    default = LUIE.CombatText.D.toggles.incoming.showEnergize,
                 },
                 {--ULTIMATE ENERGIZE
                     type    = "checkbox",
@@ -7827,7 +7818,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_ENERGIZE_ULTIMATE_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showUltimateEnergize end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showUltimateEnergize = v end,
-                    default = D.toggles.incoming.showUltimateEnergize,
+                    default = LUIE.CombatText.D.toggles.incoming.showUltimateEnergize,
                 },
                 {--DRAIN
                     type    = "checkbox",
@@ -7835,7 +7826,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DRAIN_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showDrain end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showDrain = v end,
-                    default = D.toggles.incoming.showDrain,
+                    default = LUIE.CombatText.D.toggles.incoming.showDrain,
                 },
                 {--DOT
                     type    = "checkbox",
@@ -7843,7 +7834,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DOT_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showDot end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showDot = v end,
-                    default = D.toggles.incoming.showDot,
+                    default = LUIE.CombatText.D.toggles.incoming.showDot,
                 },
                 {--HOT
                     type    = "checkbox",
@@ -7851,7 +7842,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_HOT_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showHot end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showHot = v end,
-                    default = D.toggles.incoming.showHot,
+                    default = LUIE.CombatText.D.toggles.incoming.showHot,
                 },
         --INCOMING MITIGATION
             {
@@ -7864,7 +7855,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_MISS_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showMiss end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showMiss = v end,
-                    default = D.toggles.incoming.showMiss
+                    default = LUIE.CombatText.D.toggles.incoming.showMiss
                 },
                 {--IMMUNE
                     type    = "checkbox",
@@ -7872,7 +7863,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_IMMUNE_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showImmune end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showImmune = v end,
-                    default = D.toggles.incoming.showImmune,
+                    default = LUIE.CombatText.D.toggles.incoming.showImmune,
                 },
                 {--PARRIED
                     type    = "checkbox",
@@ -7880,7 +7871,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_PARRIED_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showParried end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showParried = v end,
-                    default = D.toggles.incoming.showParried,
+                    default = LUIE.CombatText.D.toggles.incoming.showParried,
                 },
                 {--REFLECT
                     type    = "checkbox",
@@ -7888,7 +7879,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_REFLECTED_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showReflected end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showReflected = v end,
-                    default = D.toggles.incoming.showReflected,
+                    default = LUIE.CombatText.D.toggles.incoming.showReflected,
                 },
                 {--DAMAGESHIELD
                     type    = "checkbox",
@@ -7896,7 +7887,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DAMAGE_SHIELD_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showDamageShield end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showDamageShield = v end,
-                    default = D.toggles.incoming.showDamageShield,
+                    default = LUIE.CombatText.D.toggles.incoming.showDamageShield,
                 },
                 {--DODGE
                     type    = "checkbox",
@@ -7904,7 +7895,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DODGED_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showDodged end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showDodged = v end,
-                    default = D.toggles.incoming.showDodged,
+                    default = LUIE.CombatText.D.toggles.incoming.showDodged,
                 },
                 {--BLOCK
                     type    = "checkbox",
@@ -7912,7 +7903,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_BLOCKED_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showBlocked end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showBlocked = v end,
-                    default = D.toggles.incoming.showBlocked,
+                    default = LUIE.CombatText.D.toggles.incoming.showBlocked,
                 },
                 {--INTERRUPT
                     type    = "checkbox",
@@ -7920,7 +7911,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_INTERRUPTED_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showInterrupted end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showInterrupted = v end,
-                    default = D.toggles.incoming.showInterrupted,
+                    default = LUIE.CombatText.D.toggles.incoming.showInterrupted,
                 },
         --INCOMING CROWD CONTROL
             {
@@ -7933,7 +7924,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_DISORIENTED_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showDisoriented end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showDisoriented = v end,
-                    default = D.toggles.incoming.showDisoriented,
+                    default = LUIE.CombatText.D.toggles.incoming.showDisoriented,
                 },
                 {--FEARED
                     type    = "checkbox",
@@ -7941,7 +7932,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_FEARED_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showFeared end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showFeared = v end,
-                    default = D.toggles.incoming.showFeared,
+                    default = LUIE.CombatText.D.toggles.incoming.showFeared,
                 },
                 {--OFF BALANCED
                     type    = "checkbox",
@@ -7949,7 +7940,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_OFF_BALANCE_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showOffBalanced end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showOffBalanced = v end,
-                    default = D.toggles.incoming.showOffBalanced,
+                    default = LUIE.CombatText.D.toggles.incoming.showOffBalanced,
                 },
                 {--SILENCED
                     type    = "checkbox",
@@ -7957,7 +7948,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_SILENCED_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showSilenced end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showSilenced = v end,
-                    default = D.toggles.incoming.showSilenced,
+                    default = LUIE.CombatText.D.toggles.incoming.showSilenced,
                 },
                 {--STUNNED
                     type    = "checkbox",
@@ -7965,7 +7956,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_INCOMING_STUNNED_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incoming.showStunned end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showStunned = v end,
-                    default = D.toggles.incoming.showStunned,
+                    default = LUIE.CombatText.D.toggles.incoming.showStunned,
                 },
             },
         }
@@ -7984,7 +7975,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DAMAGE_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showDamage end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showDamage = v end,
-                    default = D.toggles.outgoing.showDamage,
+                    default = LUIE.CombatText.D.toggles.outgoing.showDamage,
                 },
                 {--DOT
                     type    = "checkbox",
@@ -7992,7 +7983,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DOT_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showDot end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showDot = v end,
-                    default = D.toggles.outgoing.showDot,
+                    default = LUIE.CombatText.D.toggles.outgoing.showDot,
                 },
                 {--HEALING
                     type    = "checkbox",
@@ -8000,7 +7991,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_HEALING_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showHealing end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showHealing = v end,
-                    default = D.toggles.outgoing.showHealing,
+                    default = LUIE.CombatText.D.toggles.outgoing.showHealing,
                 },
                 {--HOT
                     type    = "checkbox",
@@ -8008,7 +7999,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_HOT_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showHot end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showHot = v end,
-                    default = D.toggles.outgoing.showHot,
+                    default = LUIE.CombatText.D.toggles.outgoing.showHot,
                 },
                 {--ENERGIZE
                     type    = "checkbox",
@@ -8016,7 +8007,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_ENERGIZE_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showEnergize end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showEnergize = v end,
-                    default = D.toggles.outgoing.showEnergize,
+                    default = LUIE.CombatText.D.toggles.outgoing.showEnergize,
                 },
                 {--ULTIMATE ENERGIZE
                     type    = "checkbox",
@@ -8024,7 +8015,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_ENERGIZE_ULTIMATE_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showUltimateEnergize end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showUltimateEnergize = v end,
-                    default = D.toggles.outgoing.showUltimateEnergize,
+                    default = LUIE.CombatText.D.toggles.outgoing.showUltimateEnergize,
                 },
                 {--DRAIN
                     type    = "checkbox",
@@ -8032,7 +8023,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DRAIN_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showDrain end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showDrain = v end,
-                    default = D.toggles.outgoing.showDrain,
+                    default = LUIE.CombatText.D.toggles.outgoing.showDrain,
                 },
         --OUTGOING MITIGATION
             {
@@ -8045,7 +8036,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_MISS_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showMiss end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showMiss = v end,
-                    default = D.toggles.outgoing.showMiss,
+                    default = LUIE.CombatText.D.toggles.outgoing.showMiss,
                 },
                 {--IMMUNE
                     type    = "checkbox",
@@ -8053,7 +8044,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_IMMUNE_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showImmune end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showImmune = v end,
-                    default = D.toggles.outgoing.showImmune,
+                    default = LUIE.CombatText.D.toggles.outgoing.showImmune,
                 },
                 {--PARRIED
                     type    = "checkbox",
@@ -8061,7 +8052,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_PARRIED_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showParried end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showParried = v end,
-                    default = D.toggles.outgoing.showParried,
+                    default = LUIE.CombatText.D.toggles.outgoing.showParried,
                 },
                 {--DAMAGESHIELD
                     type    = "checkbox",
@@ -8069,7 +8060,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DAMAGE_SHIELD_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showDamageShield end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showDamageShield = v end,
-                    default = D.toggles.outgoing.showDamageShield,
+                    default = LUIE.CombatText.D.toggles.outgoing.showDamageShield,
                 },
                 {--DODGE
                     type    = "checkbox",
@@ -8077,7 +8068,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DODGED_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showDodged end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showDodged = v end,
-                    default = D.toggles.outgoing.showDodged,
+                    default = LUIE.CombatText.D.toggles.outgoing.showDodged,
                 },
                 {--BLOCK
                     type    = "checkbox",
@@ -8085,7 +8076,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_BLOCKED_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showBlocked end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showBlocked = v end,
-                    default = D.toggles.outgoing.showBlocked,
+                    default = LUIE.CombatText.D.toggles.outgoing.showBlocked,
                 },
                 {--INTERRUPT
                     type    = "checkbox",
@@ -8093,7 +8084,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_INTERRUPTED_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showInterrupted end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showInterrupted = v end,
-                    default = D.toggles.outgoing.showInterrupted,
+                    default = LUIE.CombatText.D.toggles.outgoing.showInterrupted,
                 },
         --OUTGOING CROWD CONTROL
             {
@@ -8106,7 +8097,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_DISORIENTED_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showDisoriented end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showDisoriented = v end,
-                    default = D.toggles.outgoing.showDisoriented,
+                    default = LUIE.CombatText.D.toggles.outgoing.showDisoriented,
                 },
                 {--FEARED
                     type    = "checkbox",
@@ -8114,7 +8105,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_FEARED_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showFeared end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showFeared = v end,
-                    default = D.toggles.outgoing.showFeared,
+                    default = LUIE.CombatText.D.toggles.outgoing.showFeared,
                 },
                 {--OFF BALANCED
                     type    = "checkbox",
@@ -8122,7 +8113,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_OFF_BALANCE_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showOffBalanced end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showOffBalanced = v end,
-                    default = D.toggles.outgoing.showOffBalanced,
+                    default = LUIE.CombatText.D.toggles.outgoing.showOffBalanced,
                 },
                 {--SILENCED
                     type    = "checkbox",
@@ -8130,7 +8121,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_SILENCED_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showSilenced end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showSilenced = v end,
-                    default = D.toggles.outgoing.showSilenced,
+                    default = LUIE.CombatText.D.toggles.outgoing.showSilenced,
                 },
                 {--STUNNED
                     type    = "checkbox",
@@ -8138,7 +8129,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_STUNNED_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showStunned end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showStunned = v end,
-                    default = D.toggles.outgoing.showStunned,
+                    default = LUIE.CombatText.D.toggles.outgoing.showStunned,
                 },
             },
         }
@@ -8157,7 +8148,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_IN_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.showInCombat end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showInCombat = v end,
-                    default = D.toggles.showInCombat,
+                    default = LUIE.CombatText.D.toggles.showInCombat,
                 },
                 {--OUT OF COMBAT
                     type    = "checkbox",
@@ -8165,7 +8156,7 @@ function LUIE_CreateSettings()
                     tooltip =GetString(SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_OUT_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.showOutCombat end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showOutCombat = v end,
-                    default = D.toggles.showOutCombat,
+                    default = LUIE.CombatText.D.toggles.showOutCombat,
                 },
         --TOGGLE ALERTS
             {
@@ -8182,7 +8173,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_CLEANSE_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.showAlertCleanse end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertCleanse = v end,
-                    default = D.toggles.showAlertCleanse,
+                    default = LUIE.CombatText.D.toggles.showAlertCleanse,
                 },
                 {--EXPLOIT
                     type    = "checkbox",
@@ -8190,7 +8181,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXPLOIT_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.showAlertExploit end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertExploit = v end,
-                    default = D.toggles.showAlertExploit,
+                    default = LUIE.CombatText.D.toggles.showAlertExploit,
                 },
                 {--EXECUTE
                     type    = "checkbox",
@@ -8198,7 +8189,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXECUTE_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.showAlertExecute end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertExecute = v end,
-                    default = D.toggles.showAlertExecute,
+                    default = LUIE.CombatText.D.toggles.showAlertExecute,
                 },
                 {--EXECUTE THRESHOLD SLIDER
                     type    = "slider",
@@ -8209,7 +8200,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.executeThreshold end,
                     setFunc = function(v) LUIE.CombatText.SV.executeThreshold = v end,
                     disabled = function() return not LUIE.CombatText.SV.toggles.showAlertExecute end,
-                    default = D.executeThreshold,
+                    default = LUIE.CombatText.D.executeThreshold,
                 },
                 {--EXECUTE FREQUENCY SLIDER
                     type    = "slider",
@@ -8220,7 +8211,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.executeFrequency end,
                     setFunc = function(v) LUIE.CombatText.SV.executeFrequency = v end,
                     disabled = function() return not LUIE.CombatText.SV.toggles.showAlertExecute end,
-                    default = D.executeFrequency,
+                    default = LUIE.CombatText.D.executeFrequency,
                 },
                 {--HIDE INGAME TIPS
                     type    = "checkbox",
@@ -8228,7 +8219,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.hideIngameTips end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.hideIngameTips = v; ZO_ActiveCombatTips:SetHidden(v) end,
-                    default = D.toggles.hideIngameTips,
+                    default = LUIE.CombatText.D.toggles.hideIngameTips,
                 },
                 {--MITIGATION ALERTS
                     type    = "checkbox",
@@ -8236,7 +8227,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.showAlertMitigation end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertMitigation = v end,
-                    default = D.toggles.showAlertMitigation,
+                    default = LUIE.CombatText.D.toggles.showAlertMitigation,
                 },
                 
                 {
@@ -8248,11 +8239,11 @@ function LUIE_CreateSettings()
                     type    = "dropdown",
                     name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD)),
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD_TP),
-                    choices = CombatCloudConstants.mitigationType,
+                    choices = LUIE.CombatTextConstants.mitigationType,
                     getFunc = function() return LUIE.CombatText.SV.toggles.mitigationType end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationType = v end,
                     disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                    default = D.toggles.mitigationType,
+                    default = LUIE.CombatText.D.toggles.mitigationType,
                 },
                 
                 {--MITIGATION FORMAT
@@ -8262,7 +8253,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.toggles.mitigationFormat end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationFormat = v end,
                     disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                    default = D.toggles.mitigationFormat,
+                    default = LUIE.CombatText.D.toggles.mitigationFormat,
                 },
                 
                 {--MITIGATION SUFFIX
@@ -8272,7 +8263,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.toggles.mitigationSuffix end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationSuffix = v end,
                     disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                    default = D.toggles.mitigationSuffix,
+                    default = LUIE.CombatText.D.toggles.mitigationSuffix,
                 },
                 
                 {--MITIGATION RANK 3
@@ -8282,7 +8273,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.toggles.mitigationRank3 end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationRank3 = v end,
                     disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                    default = D.toggles.mitigationRank3,
+                    default = LUIE.CombatText.D.toggles.mitigationRank3,
                 },
                 {--MITIGATION RANK 2
                     type    = "checkbox",
@@ -8291,7 +8282,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.toggles.mitigationRank2 end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationRank2 = v end,
                     disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                    default = D.toggles.mitigationRank2,
+                    default = LUIE.CombatText.D.toggles.mitigationRank2,
                 },
                 {--MITIGATION RANK 1
                     type    = "checkbox",
@@ -8300,7 +8291,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.toggles.mitigationRank1 end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationRank1 = v end,
                     disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                    default = D.toggles.mitigationRank1,
+                    default = LUIE.CombatText.D.toggles.mitigationRank1,
                 },
                 {--MITIGATION DUNGEON
                     type    = "checkbox",
@@ -8309,7 +8300,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.toggles.mitigationDungeon end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationDungeon = v end,
                     disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                    default = D.toggles.mitigationDungeon,
+                    default = LUIE.CombatText.D.toggles.mitigationDungeon,
                 },
                 
                 {--BLOCK
@@ -8319,7 +8310,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.toggles.showAlertBlock end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertBlock = v end,
                     disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                    default = D.toggles.showAlertBlock,
+                    default = LUIE.CombatText.D.toggles.showAlertBlock,
                 },
                 {--DODGE
                     type    = "checkbox",
@@ -8328,7 +8319,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.toggles.showAlertDodge end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertDodge = v end,
                     disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                    default = D.toggles.showAlertDodge,
+                    default = LUIE.CombatText.D.toggles.showAlertDodge,
                 },
                 {--AVOID
                     type    = "checkbox",
@@ -8337,7 +8328,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.toggles.showAlertAvoid end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertAvoid = v end,
                     disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                    default = D.toggles.showAlertAvoid,
+                    default = LUIE.CombatText.D.toggles.showAlertAvoid,
                 },
                 {--INTERRUPT
                     type    = "checkbox",
@@ -8346,7 +8337,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.toggles.showAlertInterrupt end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertInterrupt = v end,
                     disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
-                    default = D.toggles.showAlertInterrupt,
+                    default = LUIE.CombatText.D.toggles.showAlertInterrupt,
                 },
         --TOGGLE POINTS
             {
@@ -8359,7 +8350,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POINTS_ALLIANCE_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.showPointsAlliance end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showPointsAlliance = v end,
-                    default = D.toggles.showPointsAlliance,
+                    default = LUIE.CombatText.D.toggles.showPointsAlliance,
                 },
                 {--EXPERIENCE POINTS
                     type    = "checkbox",
@@ -8367,7 +8358,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POINTS_EXPERIENCE_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.showPointsExperience end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showPointsExperience = v end,
-                    default = D.toggles.showPointsExperience,
+                    default = LUIE.CombatText.D.toggles.showPointsExperience,
                 },
                 {--CHAMPION POINTS
                     type    = "checkbox",
@@ -8375,7 +8366,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POINTS_CHAMPION_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.showPointsChampion end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showPointsChampion = v end,
-                    default = D.toggles.showPointsChampion,
+                    default = LUIE.CombatText.D.toggles.showPointsChampion,
                 },
             {
                 type = "header",
@@ -8387,7 +8378,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_LOW_HEALTH_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.showLowHealth end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showLowHealth = v end,
-                    default = D.toggles.showLowHealth,
+                    default = LUIE.CombatText.D.toggles.showLowHealth,
                 },
                 {--LOW HEALTH WARNING THRESHOLD SLIDER
                     type    = "slider",
@@ -8399,7 +8390,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.healthThreshold end,
                     setFunc = function(threshold) LUIE.CombatText.SV.healthThreshold = threshold end,
                     disabled = function() return not LUIE.CombatText.SV.toggles.showLowHealth end,
-                    default = D.healthThreshold,
+                    default = LUIE.CombatText.D.healthThreshold,
                 },
                 {--LOW MAGICKA
                     type    = "checkbox",
@@ -8407,7 +8398,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_LOW_MAGICKA_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.showLowMagicka end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showLowMagicka = v end,
-                    default = D.toggles.showLowMagicka,
+                    default = LUIE.CombatText.D.toggles.showLowMagicka,
                 },
                 {--LOW MAGICKA WARNING THRESHOLD SLIDER
                     type    = "slider",
@@ -8419,7 +8410,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.magickaThreshold end,
                     setFunc = function(threshold) LUIE.CombatText.SV.magickaThreshold = threshold end,
                     disabled = function() return not LUIE.CombatText.SV.toggles.showLowMagicka end,
-                    default = D.magickaThreshold,
+                    default = LUIE.CombatText.D.magickaThreshold,
                 },
                 {--LOW STAMINA
                     type    = "checkbox",
@@ -8427,7 +8418,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_LOW_STAMINA_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.showLowStamina end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showLowStamina = v end,
-                    default = D.toggles.showLowStamina,
+                    default = LUIE.CombatText.D.toggles.showLowStamina,
                 },
                 {--LOW STAMINA WARNING THRESHOLD SLIDER
                     type    = "slider",
@@ -8439,7 +8430,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.staminaThreshold end,
                     setFunc = function(threshold) LUIE.CombatText.SV.staminaThreshold = threshold end,
                     disabled = function() return not LUIE.CombatText.SV.toggles.showLowStamina end,
-                    default = D.staminaThreshold,
+                    default = LUIE.CombatText.D.staminaThreshold,
                 },
                 {--WARNING SOUND
                     type    = "checkbox",
@@ -8448,7 +8439,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.toggles.warningSound end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.warningSound = v end,
                     disabled = function() return not (LUIE.CombatText.SV.toggles.showLowHealth or LUIE.CombatText.SV.toggles.showLowMagicka or LUIE.CombatText.SV.toggles.showLowStamina) end,
-                    default = D.toggles.warningSound,
+                    default = LUIE.CombatText.D.toggles.warningSound,
                 },
                 {--ULTIMATE READY
                     type    = "checkbox",
@@ -8456,7 +8447,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ULTIMATE_READY_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.showUltimate end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showUltimate = v end,
-                    default = D.toggles.showUltimate,
+                    default = LUIE.CombatText.D.toggles.showUltimate,
                 },
                 {--POTION READY
                     type    = "checkbox",
@@ -8464,7 +8455,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_POTION_READY_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.showPotionReady end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showPotionReady = v end,
-                    default = D.toggles.showPotionReady,
+                    default = LUIE.CombatText.D.toggles.showPotionReady,
                 },
             },
         }
@@ -8488,13 +8479,13 @@ function LUIE_CreateSettings()
                             _G[k .. "_Label"]:SetFont(LMP:Fetch(LMP.MediaType.FONT, LUIE.CombatText.SV.fontFace) .. "|26|" .. LUIE.CombatText.SV.fontOutline)
                         end
                     end,
-                    default = D.fontFace
+                    default = LUIE.CombatText.D.fontFace
                 },
                 {--FONT OUTLINE DROPDOWN
                     type    = "dropdown",
                     name    = GetString(SI_LUIE_LAM_CT_FONT_OUTLINE),
                     tooltip = GetString(SI_LUIE_LAM_CT_FONT_OUTLINE_TP),
-                    choices = CombatCloudConstants.outlineType,
+                    choices = LUIE.CombatTextConstants.outlineType,
                     getFunc = function() return LUIE.CombatText.SV.fontOutline end,
                     setFunc = function(outline)
                         LUIE.CombatText.SV.fontOutline = outline
@@ -8502,14 +8493,14 @@ function LUIE_CreateSettings()
                             _G[k .. "_Label"]:SetFont(LMP:Fetch(LMP.MediaType.FONT, LUIE.CombatText.SV.fontFace) .. "|26|" .. LUIE.CombatText.SV.fontOutline)
                         end
                     end,
-                    default = D.fontOutline
+                    default = LUIE.CombatText.D.fontOutline
                 },
                 {--TEST FONT BUTTON
                     type = "button",
                     name    = GetString(SI_LUIE_LAM_CT_FONT_TEST),
                     tooltip = GetString(SI_LUIE_LAM_CT_FONT_TEST_TP),
                     func = function()
-                        CALLBACK_MANAGER:FireCallbacks(CombatCloudConstants.eventType.COMBAT, CombatCloudConstants.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                        CALLBACK_MANAGER:FireCallbacks(LUIE.CombatTextConstants.eventType.COMBAT, LUIE.CombatTextConstants.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
                     end,
                 },
             },
@@ -8530,7 +8521,7 @@ function LUIE_CreateSettings()
                     step    = 1,
                     getFunc = function() return LUIE.CombatText.SV.fontSizes.damage end,
                     setFunc = function(size) LUIE.CombatText.SV.fontSizes.damage = size end,
-                    default = D.fontSizes.damage,
+                    default = LUIE.CombatText.D.fontSizes.damage,
                 },
 				{--DAMAGE CRITICAL
                     type    = "slider",
@@ -8541,7 +8532,7 @@ function LUIE_CreateSettings()
                     step    = 1,
                     getFunc = function() return LUIE.CombatText.SV.fontSizes.damagecritical end,
                     setFunc = function(size) LUIE.CombatText.SV.fontSizes.damagecritical = size end,
-                    default = D.fontSizes.damagecritical,
+                    default = LUIE.CombatText.D.fontSizes.damagecritical,
                 },
                 {--HEALING
                     type    = "slider",
@@ -8552,7 +8543,7 @@ function LUIE_CreateSettings()
                     step    = 1,
                     getFunc = function() return LUIE.CombatText.SV.fontSizes.healing end,
                     setFunc = function(size) LUIE.CombatText.SV.fontSizes.healing = size end,
-                    default = D.fontSizes.healing,
+                    default = LUIE.CombatText.D.fontSizes.healing,
                 },
 				{--HEALING CRITICAL
                     type    = "slider",
@@ -8563,7 +8554,7 @@ function LUIE_CreateSettings()
                     step    = 1,
                     getFunc = function() return LUIE.CombatText.SV.fontSizes.healingcritical end,
                     setFunc = function(size) LUIE.CombatText.SV.fontSizes.healingcritical = size end,
-                    default = D.fontSizes.healingcritical,
+                    default = LUIE.CombatText.D.fontSizes.healingcritical,
                 },
                 {--DOT
                     type    = "slider",
@@ -8574,7 +8565,7 @@ function LUIE_CreateSettings()
                     step    = 1,
                     getFunc = function() return LUIE.CombatText.SV.fontSizes.dot end,
                     setFunc = function(size) LUIE.CombatText.SV.fontSizes.dot = size end,
-                    default = D.fontSizes.dot,
+                    default = LUIE.CombatText.D.fontSizes.dot,
                 },
 				{--DOT CRITICAL
                     type    = "slider",
@@ -8585,7 +8576,7 @@ function LUIE_CreateSettings()
                     step    = 1,
                     getFunc = function() return LUIE.CombatText.SV.fontSizes.dotcritical end,
                     setFunc = function(size) LUIE.CombatText.SV.fontSizes.dotcritical = size end,
-                    default = D.fontSizes.dotcritical,
+                    default = LUIE.CombatText.D.fontSizes.dotcritical,
                 },
 				{--HOT
                     type    = "slider",
@@ -8596,7 +8587,7 @@ function LUIE_CreateSettings()
                     step    = 1,
                     getFunc = function() return LUIE.CombatText.SV.fontSizes.hot end,
                     setFunc = function(size) LUIE.CombatText.SV.fontSizes.hot = size end,
-                    default = D.fontSizes.hot,
+                    default = LUIE.CombatText.D.fontSizes.hot,
                 },
 				{--HOT CRITICAL
                     type    = "slider",
@@ -8607,7 +8598,7 @@ function LUIE_CreateSettings()
                     step    = 1,
                     getFunc = function() return LUIE.CombatText.SV.fontSizes.hotcritical end,
                     setFunc = function(size) LUIE.CombatText.SV.fontSizes.hotcritical = size end,
-                    default = D.fontSizes.hotcritical,
+                    default = LUIE.CombatText.D.fontSizes.hotcritical,
                 },
                 {--Gain Loss
                     type    = "slider",
@@ -8618,7 +8609,7 @@ function LUIE_CreateSettings()
                     step    = 1,
                     getFunc = function() return LUIE.CombatText.SV.fontSizes.gainLoss end,
                     setFunc = function(size) LUIE.CombatText.SV.fontSizes.gainLoss = size end,
-                    default = D.fontSizes.gainLoss,
+                    default = LUIE.CombatText.D.fontSizes.gainLoss,
                 },
                 {--MITIGATION
                     type    = "slider",
@@ -8629,7 +8620,7 @@ function LUIE_CreateSettings()
                     step    = 1,
                     getFunc = function() return LUIE.CombatText.SV.fontSizes.mitigation end,
                     setFunc = function(size) LUIE.CombatText.SV.fontSizes.mitigation = size end,
-                    default = D.fontSizes.mitigation,
+                    default = LUIE.CombatText.D.fontSizes.mitigation,
                 },
                 {--CROWD CONTROL
                     type    = "slider",
@@ -8640,7 +8631,7 @@ function LUIE_CreateSettings()
                     step    = 1,
                     getFunc = function() return LUIE.CombatText.SV.fontSizes.crowdControl end,
                     setFunc = function(size) LUIE.CombatText.SV.fontSizes.crowdControl = size end,
-                    default = D.fontSizes.crowdControl,
+                    default = LUIE.CombatText.D.fontSizes.crowdControl,
                 },
             },
         }
@@ -8657,7 +8648,7 @@ function LUIE_CreateSettings()
                     step    = 1,
                     getFunc = function() return LUIE.CombatText.SV.fontSizes.combatState end,
                     setFunc = function(size) LUIE.CombatText.SV.fontSizes.combatState = size end,
-                    default = D.fontSizes.combatState,
+                    default = LUIE.CombatText.D.fontSizes.combatState,
                 },
                 {--ALERTS
                     type     = "slider",
@@ -8668,7 +8659,7 @@ function LUIE_CreateSettings()
                     step    = 1,
                     getFunc = function() return LUIE.CombatText.SV.fontSizes.alert end,
                     setFunc = function(size) LUIE.CombatText.SV.fontSizes.alert = size end,
-                    default = D.fontSizes.alert,
+                    default = LUIE.CombatText.D.fontSizes.alert,
                 },
                 {--POINTS
                     type     = "slider",
@@ -8679,7 +8670,7 @@ function LUIE_CreateSettings()
                     step    = 1,
                     getFunc = function() return LUIE.CombatText.SV.fontSizes.point end,
                     setFunc = function(size) LUIE.CombatText.SV.fontSizes.point = size end,
-                    default = D.fontSizes.point,
+                    default = LUIE.CombatText.D.fontSizes.point,
                 },
                 {--RESOURCES
                     type    = "slider",
@@ -8690,7 +8681,7 @@ function LUIE_CreateSettings()
                     step    = 1,
                     getFunc = function() return LUIE.CombatText.SV.fontSizes.resource end,
                     setFunc = function(size) LUIE.CombatText.SV.fontSizes.resource = size end,
-                    default = D.fontSizes.resource,
+                    default = LUIE.CombatText.D.fontSizes.resource,
                 },
             },
         }
@@ -8712,7 +8703,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_NONE_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.damage[0]) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.damage[0] = { r, g, b, a } end,
-                    default = {r=D.colors.damage[0][1], g=D.colors.damage[0][2], b=D.colors.damage[0][3]}
+                    default = {r=LUIE.CombatText.D.colors.damage[0][1], g=LUIE.CombatText.D.colors.damage[0][2], b=LUIE.CombatText.D.colors.damage[0][3]}
                 },
                 {--GENERIC
                     type    = "colorpicker",
@@ -8720,7 +8711,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_GENERIC_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.damage[1]) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.damage[1] = { r, g, b, a } end,
-                    default = {r=D.colors.damage[1][1], g=D.colors.damage[1][2], b=D.colors.damage[1][3]}
+                    default = {r=LUIE.CombatText.D.colors.damage[1][1], g=LUIE.CombatText.D.colors.damage[1][2], b=LUIE.CombatText.D.colors.damage[1][3]}
                 },
                 {--PHYSICAL
                     type    = "colorpicker",
@@ -8728,7 +8719,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_PHYSICAL_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.damage[2]) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.damage[2] = { r, g, b, a } end,
-                    default = {r=D.colors.damage[2][1], g=D.colors.damage[2][2], b=D.colors.damage[2][3]}
+                    default = {r=LUIE.CombatText.D.colors.damage[2][1], g=LUIE.CombatText.D.colors.damage[2][2], b=LUIE.CombatText.D.colors.damage[2][3]}
                 },
                 {--FIRE
                     type    = "colorpicker",
@@ -8736,7 +8727,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_FIRE_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.damage[3]) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.damage[3] = { r, g, b, a } end,
-                    default = {r=D.colors.damage[3][1], g=D.colors.damage[3][2], b=D.colors.damage[3][3]}
+                    default = {r=LUIE.CombatText.D.colors.damage[3][1], g=LUIE.CombatText.D.colors.damage[3][2], b=LUIE.CombatText.D.colors.damage[3][3]}
                 },
                 {--SHOCK
                     type    = "colorpicker",
@@ -8744,7 +8735,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHOCK_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.damage[4]) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.damage[4] = { r, g, b, a } end,
-                    default = {r=D.colors.damage[4][1], g=D.colors.damage[4][2], b=D.colors.damage[4][3]}
+                    default = {r=LUIE.CombatText.D.colors.damage[4][1], g=LUIE.CombatText.D.colors.damage[4][2], b=LUIE.CombatText.D.colors.damage[4][3]}
                 },
                 {--OBLIVION
                     type    = "colorpicker",
@@ -8752,7 +8743,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OBLIVION_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.damage[5]) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.damage[5] = { r, g, b, a } end,
-                    default = {r=D.colors.damage[5][1], g=D.colors.damage[5][2], b=D.colors.damage[5][3]}
+                    default = {r=LUIE.CombatText.D.colors.damage[5][1], g=LUIE.CombatText.D.colors.damage[5][2], b=LUIE.CombatText.D.colors.damage[5][3]}
                 },
                 {--COLD
                     type    = "colorpicker",
@@ -8760,7 +8751,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_COLD_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.damage[6]) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.damage[6] = { r, g, b, a } end,
-                    default = {r=D.colors.damage[6][1], g=D.colors.damage[6][2], b=D.colors.damage[6][3]}
+                    default = {r=LUIE.CombatText.D.colors.damage[6][1], g=LUIE.CombatText.D.colors.damage[6][2], b=LUIE.CombatText.D.colors.damage[6][3]}
                 },
                 {--EARTH
                     type     = "colorpicker",
@@ -8768,7 +8759,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_EARTH_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.damage[7]) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.damage[7] = { r, g, b, a } end,
-                    default = {r=D.colors.damage[7][1], g=D.colors.damage[7][2], b=D.colors.damage[7][3]}
+                    default = {r=LUIE.CombatText.D.colors.damage[7][1], g=LUIE.CombatText.D.colors.damage[7][2], b=LUIE.CombatText.D.colors.damage[7][3]}
                 },
                 {--MAGIC
                     type    = "colorpicker",
@@ -8776,7 +8767,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_MAGIC_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.damage[8]) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.damage[8] = { r, g, b, a } end,
-                    default = {r=D.colors.damage[8][1], g=D.colors.damage[8][2], b=D.colors.damage[8][3]}
+                    default = {r=LUIE.CombatText.D.colors.damage[8][1], g=LUIE.CombatText.D.colors.damage[8][2], b=LUIE.CombatText.D.colors.damage[8][3]}
                 },
                 {--DROWN
                     type    = "colorpicker",
@@ -8784,7 +8775,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DROWN_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.damage[9]) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.damage[9] = { r, g, b, a } end,
-                    default = {r=D.colors.damage[9][1], g=D.colors.damage[9][2], b=D.colors.damage[9][3]}
+                    default = {r=LUIE.CombatText.D.colors.damage[9][1], g=LUIE.CombatText.D.colors.damage[9][2], b=LUIE.CombatText.D.colors.damage[9][3]}
                 },
                 {--DISEASE
                     type    = "colorpicker",
@@ -8792,7 +8783,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_DISEASE_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.damage[10]) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.damage[10] = { r, g, b, a } end,
-                    default = {r=D.colors.damage[10][1], g=D.colors.damage[10][2], b=D.colors.damage[10][3]}
+                    default = {r=LUIE.CombatText.D.colors.damage[10][1], g=LUIE.CombatText.D.colors.damage[10][2], b=LUIE.CombatText.D.colors.damage[10][3]}
                 },
                 {--POISON
                     type    = "colorpicker",
@@ -8800,7 +8791,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_POISON_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.damage[11]) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.damage[11] = { r, g, b, a } end,
-                    default = {r=D.colors.damage[11][1], g=D.colors.damage[11][2], b=D.colors.damage[11][3]}
+                    default = {r=LUIE.CombatText.D.colors.damage[11][1], g=LUIE.CombatText.D.colors.damage[11][2], b=LUIE.CombatText.D.colors.damage[11][3]}
                 },
                 {--HEALING
                     type    = "colorpicker",
@@ -8808,7 +8799,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.healing) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.healing = { r, g, b, a } end,
-                    default = {r=D.colors.healing[1], g=D.colors.healing[2], b=D.colors.healing[3]}
+                    default = {r=LUIE.CombatText.D.colors.healing[1], g=LUIE.CombatText.D.colors.healing[2], b=LUIE.CombatText.D.colors.healing[3]}
                 },
                 {--ENERGIZE MAGICKA
                     type    = "colorpicker",
@@ -8816,7 +8807,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_MAGICKA_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.energizeMagicka) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.energizeMagicka = { r, g, b, a } end,
-                    default = {r=D.colors.energizeMagicka[1], g=D.colors.energizeMagicka[2], b=D.colors.energizeMagicka[3]}
+                    default = {r=LUIE.CombatText.D.colors.energizeMagicka[1], g=LUIE.CombatText.D.colors.energizeMagicka[2], b=LUIE.CombatText.D.colors.energizeMagicka[3]}
                 },
                 {--ENERGIZE STAMINA
                     type    = "colorpicker",
@@ -8824,7 +8815,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_STAMINA_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.energizeStamina) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.energizeStamina = { r, g, b, a } end,
-                    default = {r=D.colors.energizeStamina[1], g=D.colors.energizeStamina[2], b=D.colors.energizeStamina[3]}
+                    default = {r=LUIE.CombatText.D.colors.energizeStamina[1], g=LUIE.CombatText.D.colors.energizeStamina[2], b=LUIE.CombatText.D.colors.energizeStamina[3]}
                 },
                 {--ENERGIZE ULTIMATE
                     type    = "colorpicker",
@@ -8832,7 +8823,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_ENERGIZE_ULTIMATE_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.energizeUltimate) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.energizeUltimate = { r, g, b, a } end,
-                    default = {r=D.colors.energizeUltimate[1], g=D.colors.energizeUltimate[2], b=D.colors.energizeUltimate[3]}
+                    default = {r=LUIE.CombatText.D.colors.energizeUltimate[1], g=LUIE.CombatText.D.colors.energizeUltimate[2], b=LUIE.CombatText.D.colors.energizeUltimate[3]}
                 },
                 {--DRAIN MAGICKA
                     type    = "colorpicker",
@@ -8840,7 +8831,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_MAGICKA_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.drainMagicka) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.drainMagicka = { r, g, b, a } end,
-                    default = {r=D.colors.drainMagicka[1], g=D.colors.drainMagicka[2], b=D.colors.drainMagicka[3]}
+                    default = {r=LUIE.CombatText.D.colors.drainMagicka[1], g=LUIE.CombatText.D.colors.drainMagicka[2], b=LUIE.CombatText.D.colors.drainMagicka[3]}
                 },
                 {--DRAIN STAMINA
                     type    = "colorpicker",
@@ -8848,7 +8839,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DRAIN_STAMINA_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.drainStamina) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.drainStamina = { r, g, b, a } end,
-                    default = {r=D.colors.drainStamina[1], g=D.colors.drainStamina[2], b=D.colors.drainStamina[3]}
+                    default = {r=LUIE.CombatText.D.colors.drainStamina[1], g=LUIE.CombatText.D.colors.drainStamina[2], b=LUIE.CombatText.D.colors.drainStamina[3]}
                 },
                 {--CHECKBOX CRITICAL DAMAGE OVERRIDE
                     type    = "checkbox",
@@ -8856,7 +8847,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_OVERRIDE_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.criticalDamageOverride end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.criticalDamageOverride = v end,
-                    default = D.toggles.criticalDamageOverride,
+                    default = LUIE.CombatText.D.toggles.criticalDamageOverride,
                 },
                 {--COLOR CRITICAL DAMAGE OVERRIDE
                     type    = "colorpicker",
@@ -8864,7 +8855,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_DAMAGE_COLOR_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.criticalDamageOverride) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.criticalDamageOverride = { r, g, b, a } end,
-                    default = {r=D.colors.criticalDamageOverride[1], g=D.colors.criticalDamageOverride[2], b=D.colors.criticalDamageOverride[3]}
+                    default = {r=LUIE.CombatText.D.colors.criticalDamageOverride[1], g=LUIE.CombatText.D.colors.criticalDamageOverride[2], b=LUIE.CombatText.D.colors.criticalDamageOverride[3]}
                 },
                 {--CHECKBOX CRITICAL HEALING OVERRIDE
                     type    = "checkbox",
@@ -8872,7 +8863,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_HEALING_OVERRIDE_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.criticalHealingOverride end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.criticalHealingOverride = v end,
-                    default = D.toggles.criticalHealingOverride
+                    default = LUIE.CombatText.D.toggles.criticalHealingOverride
                 },
                 {--COLOR CRITICAL HEALING OVERRIDE
                     type    = "colorpicker",
@@ -8880,7 +8871,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_CRIT_HEALING_COLOR_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.criticalHealingOverride) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.criticalHealingOverride = { r, g, b, a } end,
-                    default = {r=D.colors.criticalHealingOverride[1], g=D.colors.criticalHealingOverride[2], b=D.colors.criticalHealingOverride[3]}
+                    default = {r=LUIE.CombatText.D.colors.criticalHealingOverride[1], g=LUIE.CombatText.D.colors.criticalHealingOverride[2], b=LUIE.CombatText.D.colors.criticalHealingOverride[3]}
                 },
 				{--CHECKBOX INCOMING DAMAGE OVERRIDE
                     type    = "checkbox",
@@ -8888,7 +8879,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_OVERRIDE_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.incomingDamageOverride end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.incomingDamageOverride = v end,
-                    default = D.toggles.incomingDamageOverride
+                    default = LUIE.CombatText.D.toggles.incomingDamageOverride
                 },
                 {--COLOR INCOMING DAMAGE OVERRIDE
                     type    = "colorpicker",
@@ -8896,7 +8887,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_COLOR_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.incomingDamageOverride) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.incomingDamageOverride = { r, g, b, a } end,
-                    default = {r=D.colors.incomingDamageOverride[1], g=D.colors.incomingDamageOverride[2], b=D.colors.incomingDamageOverride[3]}
+                    default = {r=LUIE.CombatText.D.colors.incomingDamageOverride[1], g=LUIE.CombatText.D.colors.incomingDamageOverride[2], b=LUIE.CombatText.D.colors.incomingDamageOverride[3]}
                 },
         --COLOR MITIGATION
             {
@@ -8909,7 +8900,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_MISS_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.miss) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.miss = { r, g, b, a } end,
-                    default = {r=D.colors.miss[1], g=D.colors.miss[2], b=D.colors.miss[3]}
+                    default = {r=LUIE.CombatText.D.colors.miss[1], g=LUIE.CombatText.D.colors.miss[2], b=LUIE.CombatText.D.colors.miss[3]}
                 },
                 {--IMMUNE
                     type    = "colorpicker",
@@ -8917,7 +8908,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_IMMUNE_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.immune) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.immune = { r, g, b, a } end,
-                    default = {r=D.colors.immune[1], g=D.colors.immune[2], b=D.colors.immune[3]}
+                    default = {r=LUIE.CombatText.D.colors.immune[1], g=LUIE.CombatText.D.colors.immune[2], b=LUIE.CombatText.D.colors.immune[3]}
                 },
                 {--PARRIED
                     type    = "colorpicker",
@@ -8925,7 +8916,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_PARRIED_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.parried) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.parried = { r, g, b, a } end,
-                    default = {r=D.colors.parried[1], g=D.colors.parried[2], b=D.colors.parried[3]}
+                    default = {r=LUIE.CombatText.D.colors.parried[1], g=LUIE.CombatText.D.colors.parried[2], b=LUIE.CombatText.D.colors.parried[3]}
                 },
                 {--REFLECTED
                     type    = "colorpicker",
@@ -8933,7 +8924,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_REFLETCED_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.reflected) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.reflected = { r, g, b, a } end,
-                    default = {r=D.colors.reflected[1], g=D.colors.reflected[2], b=D.colors.reflected[3]}
+                    default = {r=LUIE.CombatText.D.colors.reflected[1], g=LUIE.CombatText.D.colors.reflected[2], b=LUIE.CombatText.D.colors.reflected[3]}
                 },
                 {--DAMAGESHIELD
                     type    = "colorpicker",
@@ -8941,7 +8932,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHIELD_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.damageShield) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.damageShield = { r, g, b, a } end,
-                    default = {r=D.colors.damageShield[1], g=D.colors.damageShield[2], b=D.colors.damageShield[3]}
+                    default = {r=LUIE.CombatText.D.colors.damageShield[1], g=LUIE.CombatText.D.colors.damageShield[2], b=LUIE.CombatText.D.colors.damageShield[3]}
                 },
                 {--DODGE
                     type    = "colorpicker",
@@ -8949,7 +8940,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DODGED_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.dodged) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.dodged = { r, g, b, a } end,
-                    default = {r=D.colors.dodged[1], g=D.colors.dodged[2], b=D.colors.dodged[3]}
+                    default = {r=LUIE.CombatText.D.colors.dodged[1], g=LUIE.CombatText.D.colors.dodged[2], b=LUIE.CombatText.D.colors.dodged[3]}
                 },
                 {--BLOCKED
                     type    = "colorpicker",
@@ -8957,7 +8948,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_BLOCKED_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.blocked) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.blocked = { r, g, b, a } end,
-                    default = {r=D.colors.blocked[1], g=D.colors.blocked[2], b=D.colors.blocked[3]}
+                    default = {r=LUIE.CombatText.D.colors.blocked[1], g=LUIE.CombatText.D.colors.blocked[2], b=LUIE.CombatText.D.colors.blocked[3]}
                 },
                 {--INTERRUPTED
                     type    = "colorpicker",
@@ -8965,7 +8956,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_INTERRUPTED_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.interrupted) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.interrupted = { r, g, b, a } end,
-                    default = {r=D.colors.interrupted[1], g=D.colors.interrupted[2], b=D.colors.interrupted[3]}
+                    default = {r=LUIE.CombatText.D.colors.interrupted[1], g=LUIE.CombatText.D.colors.interrupted[2], b=LUIE.CombatText.D.colors.interrupted[3]}
                 },
         --COLOR CROWD CONTROL
             {
@@ -8978,7 +8969,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_DISORIENTED_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.disoriented) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.disoriented = { r, g, b, a } end,
-                    default = {r=D.colors.disoriented[1], g=D.colors.disoriented[2], b=D.colors.disoriented[3]}
+                    default = {r=LUIE.CombatText.D.colors.disoriented[1], g=LUIE.CombatText.D.colors.disoriented[2], b=LUIE.CombatText.D.colors.disoriented[3]}
                 },
                 {--FEARED
                     type    = "colorpicker",
@@ -8986,7 +8977,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_FEARED_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.feared) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.feared = { r, g, b, a } end,
-                    default = {r=D.colors.feared[1], g=D.colors.feared[2], b=D.colors.feared[3]}
+                    default = {r=LUIE.CombatText.D.colors.feared[1], g=LUIE.CombatText.D.colors.feared[2], b=LUIE.CombatText.D.colors.feared[3]}
                 },
                 {--OFFBALANCED
                     type    = "colorpicker",
@@ -8994,7 +8985,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_OFF_BALANCE_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.offBalanced) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.offBalanced = { r, g, b, a } end,
-                    default = {r=D.colors.offBalanced[1], g=D.colors.offBalanced[2], b=D.colors.offBalanced[3]}
+                    default = {r=LUIE.CombatText.D.colors.offBalanced[1], g=LUIE.CombatText.D.colors.offBalanced[2], b=LUIE.CombatText.D.colors.offBalanced[3]}
                 },
                 {--SILENCED
                     type    = "colorpicker",
@@ -9002,7 +8993,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_SILENCED_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.silenced) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.silenced = { r, g, b, a } end,
-                    default = {r=D.colors.silenced[1], g=D.colors.silenced[2], b=D.colors.silenced[3]}
+                    default = {r=LUIE.CombatText.D.colors.silenced[1], g=LUIE.CombatText.D.colors.silenced[2], b=LUIE.CombatText.D.colors.silenced[3]}
                 },
                 {--STUNNED
                     type    = "colorpicker",
@@ -9010,7 +9001,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_COMBAT_STUNNED_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.stunned) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.stunned = { r, g, b, a } end,
-                    default = {r=D.colors.stunned[1], g=D.colors.stunned[2], b=D.colors.stunned[3]}
+                    default = {r=LUIE.CombatText.D.colors.stunned[1], g=LUIE.CombatText.D.colors.stunned[2], b=LUIE.CombatText.D.colors.stunned[3]}
                 },
             },
         }
@@ -9029,7 +9020,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_IN_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.inCombat) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.inCombat = { r, g, b, a } end,
-                    default = {r=D.colors.inCombat[1], g=D.colors.inCombat[2], b=D.colors.inCombat[3]}
+                    default = {r=LUIE.CombatText.D.colors.inCombat[1], g=LUIE.CombatText.D.colors.inCombat[2], b=LUIE.CombatText.D.colors.inCombat[3]}
                 },
                 {--OUT COMBAT
                     type    = "colorpicker",
@@ -9037,7 +9028,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_OUT_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.outCombat) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.outCombat = { r, g, b, a } end,
-                    default = {r=D.colors.outCombat[1], g=D.colors.outCombat[2], b=D.colors.outCombat[3]}
+                    default = {r=LUIE.CombatText.D.colors.outCombat[1], g=LUIE.CombatText.D.colors.outCombat[2], b=LUIE.CombatText.D.colors.outCombat[3]}
                 },
         --COLOR ALERTS
             {
@@ -9050,7 +9041,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BLOCK_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertBlock) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertBlock = { r, g, b, a } end,
-                    default = {r=D.colors.alertBlock[1], g=D.colors.alertBlock[2], b=D.colors.alertBlock[3]}
+                    default = {r=LUIE.CombatText.D.colors.alertBlock[1], g=LUIE.CombatText.D.colors.alertBlock[2], b=LUIE.CombatText.D.colors.alertBlock[3]}
                 },
                 {--DODGE
                     type    = "colorpicker",
@@ -9058,7 +9049,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DODGE_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertDodge) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertDodge = { r, g, b, a } end,
-                    default = {r=D.colors.alertDodge[1], g=D.colors.alertDodge[2], b=D.colors.alertDodge[3]}
+                    default = {r=LUIE.CombatText.D.colors.alertDodge[1], g=LUIE.CombatText.D.colors.alertDodge[2], b=LUIE.CombatText.D.colors.alertDodge[3]}
                 },
                 {--AVOID
                     type    = "colorpicker",
@@ -9066,7 +9057,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_AVOID_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertAvoid) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertAvoid = { r, g, b, a } end,
-                    default = {r=D.colors.alertAvoid[1], g=D.colors.alertAvoid[2], b=D.colors.alertAvoid[3]}
+                    default = {r=LUIE.CombatText.D.colors.alertAvoid[1], g=LUIE.CombatText.D.colors.alertAvoid[2], b=LUIE.CombatText.D.colors.alertAvoid[3]}
                 },
                 {--INTERRUPT
                     type    = "colorpicker",
@@ -9074,7 +9065,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_INTERRUPT_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertInterrupt) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertInterrupt = { r, g, b, a } end,
-                    default = {r=D.colors.alertInterrupt[1], g=D.colors.alertInterrupt[2], b=D.colors.alertInterrupt[3]}
+                    default = {r=LUIE.CombatText.D.colors.alertInterrupt[1], g=LUIE.CombatText.D.colors.alertInterrupt[2], b=LUIE.CombatText.D.colors.alertInterrupt[3]}
                 },
                 {--EXPLOIT
                     type    = "colorpicker",
@@ -9082,7 +9073,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPLOIT_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertExploit) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertExploit = { r, g, b, a } end,
-                    default = {r=D.colors.alertExploit[1], g=D.colors.alertExploit[2], b=D.colors.alertExploit[3]}
+                    default = {r=LUIE.CombatText.D.colors.alertExploit[1], g=LUIE.CombatText.D.colors.alertExploit[2], b=LUIE.CombatText.D.colors.alertExploit[3]}
                 },
                 {--CLEANSE
                     type    = "colorpicker",
@@ -9090,7 +9081,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CLEANSE_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertCleanse) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertCleanse = { r, g, b, a } end,
-                    default = {r=D.colors.alertCleanse[1], g=D.colors.alertCleanse[2], b=D.colors.alertCleanse[3]}
+                    default = {r=LUIE.CombatText.D.colors.alertCleanse[1], g=LUIE.CombatText.D.colors.alertCleanse[2], b=LUIE.CombatText.D.colors.alertCleanse[3]}
                 },
                 {--EXECUTE
                     type    = "colorpicker",
@@ -9098,7 +9089,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXECUTE_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertExecute) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertExecute = { r, g, b, a } end,
-                    default = {r=D.colors.alertExecute[1], g=D.colors.alertExecute[2], b=D.colors.alertExecute[3]}
+                    default = {r=LUIE.CombatText.D.colors.alertExecute[1], g=LUIE.CombatText.D.colors.alertExecute[2], b=LUIE.CombatText.D.colors.alertExecute[3]}
                 },
         --COLOR POINTS
             {
@@ -9111,7 +9102,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ALLIANCE_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.pointsAlliance) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.pointsAlliance = { r, g, b, a } end,
-                    default = {r=D.colors.pointsAlliance[1], g=D.colors.pointsAlliance[2], b=D.colors.pointsAlliance[3]}
+                    default = {r=LUIE.CombatText.D.colors.pointsAlliance[1], g=LUIE.CombatText.D.colors.pointsAlliance[2], b=LUIE.CombatText.D.colors.pointsAlliance[3]}
                 },
                 {--EXPERIENCE POINTS
                     type    = "colorpicker",
@@ -9119,7 +9110,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPERIENCE_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.pointsExperience) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.pointsExperience = { r, g, b, a } end,
-                    default = {r=D.colors.pointsExperience[1], g=D.colors.pointsExperience[2], b=D.colors.pointsExperience[3]}
+                    default = {r=LUIE.CombatText.D.colors.pointsExperience[1], g=LUIE.CombatText.D.colors.pointsExperience[2], b=LUIE.CombatText.D.colors.pointsExperience[3]}
                 },
                 {--CHAMPION POINTS
                     type    = "colorpicker",
@@ -9127,7 +9118,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CHAMPION_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.pointsChampion) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.pointsChampion = { r, g, b, a } end,
-                    default = {r=D.colors.pointsChampion[1], g=D.colors.pointsChampion[2], b=D.colors.pointsChampion[3]}
+                    default = {r=LUIE.CombatText.D.colors.pointsChampion[1], g=LUIE.CombatText.D.colors.pointsChampion[2], b=LUIE.CombatText.D.colors.pointsChampion[3]}
                 },
         --COLOR RESOURCES
             {
@@ -9140,7 +9131,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_HEALTH_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.lowHealth) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.lowHealth = { r, g, b, a } end,
-                    default = {r=D.colors.lowHealth[1], g=D.colors.lowHealth[2], b=D.colors.lowHealth[3]}
+                    default = {r=LUIE.CombatText.D.colors.lowHealth[1], g=LUIE.CombatText.D.colors.lowHealth[2], b=LUIE.CombatText.D.colors.lowHealth[3]}
                 },
                 {--LOW MAGICKA
                     type    = "colorpicker",
@@ -9148,7 +9139,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_MAGICKA_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.lowMagicka) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.lowMagicka = { r, g, b, a } end,
-                    default = {r=D.colors.lowMagicka[1], g=D.colors.lowMagicka[2], b=D.colors.lowMagicka[3]}
+                    default = {r=LUIE.CombatText.D.colors.lowMagicka[1], g=LUIE.CombatText.D.colors.lowMagicka[2], b=LUIE.CombatText.D.colors.lowMagicka[3]}
                 },
                 {--LOW STAMINA
                     type    = "colorpicker",
@@ -9156,7 +9147,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_STAMINA_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.lowStamina) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.lowStamina = { r, g, b, a } end,
-                    default = {r=D.colors.lowStamina[1], g=D.colors.lowStamina[2], b=D.colors.lowStamina[3]}
+                    default = {r=LUIE.CombatText.D.colors.lowStamina[1], g=LUIE.CombatText.D.colors.lowStamina[2], b=LUIE.CombatText.D.colors.lowStamina[3]}
                 },
                 {--ULTIMATE READY
                     type    = "colorpicker",
@@ -9164,7 +9155,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ULTIMATE_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.ultimateReady) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.ultimateReady = { r, g, b, a } end,
-                    default = {r=D.colors.ultimateReady[1], g=D.colors.ultimateReady[2], b=D.colors.ultimateReady[3]}
+                    default = {r=LUIE.CombatText.D.colors.ultimateReady[1], g=LUIE.CombatText.D.colors.ultimateReady[2], b=LUIE.CombatText.D.colors.ultimateReady[3]}
                 },
                 {--POTION READY
                     type    = "colorpicker",
@@ -9172,7 +9163,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POTION_TP),
                     getFunc = function() return unpack(LUIE.CombatText.SV.colors.potionReady) end,
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.potionReady = { r, g, b, a } end,
-                    default = {r=D.colors.potionReady[1], g=D.colors.potionReady[2], b=D.colors.potionReady[3]}
+                    default = {r=LUIE.CombatText.D.colors.potionReady[1], g=LUIE.CombatText.D.colors.potionReady[2], b=LUIE.CombatText.D.colors.potionReady[3]}
                 },
             },
         }
@@ -9199,7 +9190,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.damage end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.damage = v end,
                     isMultiline = false,
-                    default = D.formats.damage,
+                    default = LUIE.CombatText.D.formats.damage,
                 },
 				{--DAMAGE CRITICAL
                     type    = "editbox",
@@ -9208,7 +9199,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.damagecritical end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.damagecritical = v end,
                     isMultiline = false,
-                    default = D.formats.damagecritical,
+                    default = LUIE.CombatText.D.formats.damagecritical,
                 },
                 {--HEALING
                     type    = "editbox",
@@ -9217,7 +9208,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.healing end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.healing = v end,
                     isMultiline = false,
-                    default = D.formats.healing,
+                    default = LUIE.CombatText.D.formats.healing,
                 },
 				{--HEALING CRITICAL
                     type    = "editbox",
@@ -9226,7 +9217,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.healingcritical end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.healingcritical = v end,
                     isMultiline = false,
-                    default = D.formats.healingcritical,
+                    default = LUIE.CombatText.D.formats.healingcritical,
                 },
                 {--ENERGIZE
                     type    = "editbox",
@@ -9235,7 +9226,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.energize end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.energize = v end,
                     isMultiline = false,
-                    default = D.formats.energize,
+                    default = LUIE.CombatText.D.formats.energize,
                 },
                 {-- ULTIMATE ENERGIZE
                     type    = "editbox",
@@ -9244,7 +9235,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.ultimateEnergize end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.ultimateEnergize = v end,
                     isMultiline = false,
-                    default = D.formats.ultimateEnergize,
+                    default = LUIE.CombatText.D.formats.ultimateEnergize,
                 },
                 {--DRAIN
                     type    = "editbox",
@@ -9253,7 +9244,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.drain end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.drain = v end,
                     isMultiline = false,
-                    default = D.formats.drain,
+                    default = LUIE.CombatText.D.formats.drain,
                 },
                 {--DOT
                     type    = "editbox",
@@ -9262,7 +9253,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.dot end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.dot = v end,
                     isMultiline = false,
-                    default = D.formats.dot,
+                    default = LUIE.CombatText.D.formats.dot,
                 },
 				{--DOT CRITICAL
                     type    = "editbox",
@@ -9271,7 +9262,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.dotcritical end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.dotcritical = v end,
                     isMultiline = false,
-                    default = D.formats.dotcritical,
+                    default = LUIE.CombatText.D.formats.dotcritical,
                 },
                 {--HOT
                     type    = "editbox",
@@ -9280,7 +9271,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.hot end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.hot = v end,
                     isMultiline = false,
-                    default = D.formats.hot,
+                    default = LUIE.CombatText.D.formats.hot,
                 },
 				{--HOT CRITICAL
                     type    = "editbox",
@@ -9289,7 +9280,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.hotcritical end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.hotcritical = v end,
                     isMultiline = false,
-                    default = D.formats.hotcritical,
+                    default = LUIE.CombatText.D.formats.hotcritical,
                 },
         --FORMATS MITIGATION
             {
@@ -9303,7 +9294,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.miss end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.miss = v end,
                     isMultiline = false,
-                    default = D.formats.miss,
+                    default = LUIE.CombatText.D.formats.miss,
                 },
                 {--IMMUNE
                     type    = "editbox",
@@ -9312,7 +9303,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.immune end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.immune = v end,
                     isMultiline = false,
-                    default = D.formats.immune,
+                    default = LUIE.CombatText.D.formats.immune,
                 },
                 {--PARRIED
                     type    = "editbox",
@@ -9321,7 +9312,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.parried end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.parried = v end,
                     isMultiline = false,
-                    default = D.formats.parried,
+                    default = LUIE.CombatText.D.formats.parried,
                 },
                 {--REFLECTED
                     type    = "editbox",
@@ -9330,7 +9321,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.reflected end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.reflected = v end,
                     isMultiline = false,
-                    default = D.formats.reflected,
+                    default = LUIE.CombatText.D.formats.reflected,
                 },
                 {--DAMAGE SHIELD
                     type    = "editbox",
@@ -9339,7 +9330,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.damageShield end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.damageShield = v end,
                     isMultiline = false,
-                    default = D.formats.damageShield,
+                    default = LUIE.CombatText.D.formats.damageShield,
                 },
                 {--DODGED
                     type    = "editbox",
@@ -9348,7 +9339,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.dodged end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.dodged = v end,
                     isMultiline = false,
-                    default = D.formats.dodged,
+                    default = LUIE.CombatText.D.formats.dodged,
                 },
                 {--BLOCKED
                     type    = "editbox",
@@ -9357,7 +9348,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.blocked end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.blocked = v end,
                     isMultiline = false,
-                    default = D.formats.blocked,
+                    default = LUIE.CombatText.D.formats.blocked,
                 },
                 {--INTERRUPTED
                     type    = "editbox",
@@ -9366,7 +9357,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.interrupted end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.interrupted = v end,
                     isMultiline = false,
-                    default = D.formats.interrupted,
+                    default = LUIE.CombatText.D.formats.interrupted,
                 },
         --FORMATS CROWD CONTROL
             {
@@ -9380,7 +9371,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.disoriented end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.disoriented = v end,
                     isMultiline = false,
-                    default = D.formats.disoriented,
+                    default = LUIE.CombatText.D.formats.disoriented,
                 },
                 {--FEARED
                     type    = "editbox",
@@ -9389,7 +9380,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.feared end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.feared = v end,
                     isMultiline = false,
-                    default = D.formats.feared,
+                    default = LUIE.CombatText.D.formats.feared,
                 },
                 {--OFFBALANCED
                     type    = "editbox",
@@ -9398,7 +9389,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.offBalanced end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.offBalanced = v end,
                     isMultiline = false,
-                    default = D.formats.offBalanced,
+                    default = LUIE.CombatText.D.formats.offBalanced,
                 },
                 {--SILENCED
                     type    = "editbox",
@@ -9407,7 +9398,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.silenced end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.silenced = v end,
                     isMultiline = false,
-                    default = D.formats.silenced,
+                    default = LUIE.CombatText.D.formats.silenced,
                 },
                 {--STUNNED
                     type    = "editbox",
@@ -9416,7 +9407,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.stunned end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.stunned = v end,
                     isMultiline = false,
-                    default = D.formats.stunned,
+                    default = LUIE.CombatText.D.formats.stunned,
                 },
             },
         }
@@ -9440,7 +9431,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.inCombat end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.inCombat = v end,
                     isMultiline = false,
-                    default = D.formats.inCombat,
+                    default = LUIE.CombatText.D.formats.inCombat,
                 },
                 {--OUT COMBAT
                     type    = "editbox",
@@ -9449,7 +9440,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.outCombat end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.outCombat = v end,
                     isMultiline = false,
-                    default = D.formats.outCombat,
+                    default = LUIE.CombatText.D.formats.outCombat,
                 },
         --FORMATS ALERTS
             {
@@ -9463,7 +9454,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.alertCleanse end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.alertCleanse = v end,
                     isMultiline = false,
-                    default = D.formats.alertCleanse,
+                    default = LUIE.CombatText.D.formats.alertCleanse,
                 },
                 {--BLOCK
                     type    = "editbox",
@@ -9472,7 +9463,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.alertBlock end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.alertBlock = v end,
                     isMultiline = false,
-                    default = D.formats.alertBlock,
+                    default = LUIE.CombatText.D.formats.alertBlock,
                 },
                 {--BLOCK
                     type    = "editbox",
@@ -9481,7 +9472,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.alertBlockStagger end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.alertBlockStagger = v end,
                     isMultiline = false,
-                    default = D.formats.alertBlockStagger,
+                    default = LUIE.CombatText.D.formats.alertBlockStagger,
                 },
                 {--EXPLOIT
                     type    = "editbox",
@@ -9490,7 +9481,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.alertExploit end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.alertExploit = v end,
                     isMultiline = false,
-                    default = D.formats.alertExploit,
+                    default = LUIE.CombatText.D.formats.alertExploit,
                 },
                 {--INTERRUPT
                     type    = "editbox",
@@ -9499,7 +9490,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.alertInterrupt end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.alertInterrupt = v end,
                     isMultiline = false,
-                    default = D.formats.alertInterrupt,
+                    default = LUIE.CombatText.D.formats.alertInterrupt,
                 },
                 {--DODGE
                     type    = "editbox",
@@ -9508,7 +9499,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.alertDodge end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.alertDodge = v end,
                     isMultiline = false,
-                    default = D.formats.alertDodge,
+                    default = LUIE.CombatText.D.formats.alertDodge,
                 },
                 {--AVOID
                     type    = "editbox",
@@ -9517,7 +9508,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.alertAvoid end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.alertAvoid = v end,
                     isMultiline = false,
-                    default = D.formats.alertAvoid,
+                    default = LUIE.CombatText.D.formats.alertAvoid,
                 },
                 {--EXECUTE
                     type    = "editbox",
@@ -9526,7 +9517,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.alertExecute end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.alertExecute = v end,
                     isMultiline = false,
-                    default = D.formats.alertExecute,
+                    default = LUIE.CombatText.D.formats.alertExecute,
                 },
         --FORMATS POINTS
             {
@@ -9540,7 +9531,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.pointsAlliance end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.pointsAlliance = v end,
                     isMultiline = false,
-                    default = D.formats.pointsAlliance,
+                    default = LUIE.CombatText.D.formats.pointsAlliance,
                 },
                 {--EXPERIENCE POINTS
                     type    = "editbox",
@@ -9549,7 +9540,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.pointsExperience end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.pointsExperience = v end,
                     isMultiline = false,
-                    default = D.formats.pointsExperience,
+                    default = LUIE.CombatText.D.formats.pointsExperience,
                 },
                 {--CHAMPION POINTS
                     type    = "editbox",
@@ -9558,7 +9549,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.pointsChampion end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.pointsChampion = v end,
                     isMultiline = false,
-                    default = D.formats.pointsChampion,
+                    default = LUIE.CombatText.D.formats.pointsChampion,
                 },
         --FORMATS RESOURCES
             {
@@ -9572,7 +9563,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.resource end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.resource = v end,
                     isMultiline = false,
-                    default = D.formats.resource,
+                    default = LUIE.CombatText.D.formats.resource,
                 },
                 {--ULTIMATE READY
                     type    = "editbox",
@@ -9581,7 +9572,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.ultimateReady end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.ultimateReady = v end,
                     isMultiline = false,
-                    default = D.formats.ultimateReady,
+                    default = LUIE.CombatText.D.formats.ultimateReady,
                 },
                 {--ULTIMATE READY
                     type    = "editbox",
@@ -9590,7 +9581,7 @@ function LUIE_CreateSettings()
                     getFunc = function() return LUIE.CombatText.SV.formats.potionReady end,
                     setFunc = function(v) LUIE.CombatText.SV.formats.potionReady = v end,
                     isMultiline = false,
-                    default = D.formats.potionReady,
+                    default = LUIE.CombatText.D.formats.potionReady,
                 },
             },
         }
@@ -9605,54 +9596,54 @@ function LUIE_CreateSettings()
                     type    = "dropdown",
                     name    = GetString(SI_LUIE_LAM_CT_ANIMATION_TYPE),
                     tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_TYPE_TP),
-                    choices = CombatCloudConstants.animationType,
+                    choices = LUIE.CombatTextConstants.animationType,
                     getFunc = function() return LUIE.CombatText.SV.animation.animationType end,
                     setFunc = function(v) LUIE.CombatText.SV.animation.animationType = v end,
-                    default = D.animation.animationType,
+                    default = LUIE.CombatText.D.animation.animationType,
                 },
                 {--INCOMING DIRECTION
                     type    = "dropdown",
                     name    = GetString(SI_LUIE_LAM_CT_ANIMATION_DIRECTION_IN),
                     tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_DIRECTION_IN_TP),
-                    choices = CombatCloudConstants.directionType,
+                    choices = LUIE.CombatTextConstants.directionType,
                     getFunc = function() return LUIE.CombatText.SV.animation.incoming.directionType end,
                     setFunc = function(v) LUIE.CombatText.SV.animation.incoming.directionType = v end,
-                    default = D.animation.incoming.directionType,
+                    default = LUIE.CombatText.D.animation.incoming.directionType,
                 },
                 {--INCOMING ICON POSITION
                     type    = "dropdown",
                     name    = GetString(SI_LUIE_LAM_CT_ANIMATION_ICON_IN),
                     tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_ICON_IN_TP),
-                    choices = CombatCloudConstants.iconSide,
+                    choices = LUIE.CombatTextConstants.iconSide,
                     getFunc = function() return LUIE.CombatText.SV.animation.incomingIcon end,
                     setFunc = function(v) LUIE.CombatText.SV.animation.incomingIcon = v end,
-                    default = D.animation.incomingIcon,
+                    default = LUIE.CombatText.D.animation.incomingIcon,
                 },
                 {--OUTGOING DIRECTION
                     type    = "dropdown",
                     name    = GetString(SI_LUIE_LAM_CT_ANIMATION_DIRECTION_OUT),
                     tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_DIRECTION_OUT_TP),
-                    choices = CombatCloudConstants.directionType,
+                    choices = LUIE.CombatTextConstants.directionType,
                     getFunc = function() return LUIE.CombatText.SV.animation.outgoing.directionType end,
                     setFunc = function(v) LUIE.CombatText.SV.animation.outgoing.directionType = v end,
-                    default = D.animation.outgoing.directionType,
+                    default = LUIE.CombatText.D.animation.outgoing.directionType,
                 },
                 {--OUTGOING ICON POSITION
                     type    = "dropdown",
                     name    = GetString(SI_LUIE_LAM_CT_ANIMATION_ICON_OUT),
                     tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_ICON_OUT_TP),
-                    choices = CombatCloudConstants.iconSide,
+                    choices = LUIE.CombatTextConstants.iconSide,
                     getFunc = function() return LUIE.CombatText.SV.animation.outgoingIcon end,
                     setFunc = function(v) LUIE.CombatText.SV.animation.outgoingIcon = v end,
-                    default = D.animation.outgoingIcon,
+                    default = LUIE.CombatText.D.animation.outgoingIcon,
                 },
                 {--TEST BUTTON
                     type = "button",
                     name = GetString(SI_LUIE_LAM_CT_ANIMATION_TEST),
                     tooltip = GetString(SI_LUIE_LAM_CT_ANIMATION_TEST_TP),
                     func = function()
-                        CALLBACK_MANAGER:FireCallbacks(CombatCloudConstants.eventType.COMBAT, CombatCloudConstants.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
-                        CALLBACK_MANAGER:FireCallbacks(CombatCloudConstants.eventType.COMBAT, CombatCloudConstants.combatType.OUTGOING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                        CALLBACK_MANAGER:FireCallbacks(LUIE.CombatTextConstants.eventType.COMBAT, LUIE.CombatTextConstants.combatType.INCOMING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
+                        CALLBACK_MANAGER:FireCallbacks(LUIE.CombatTextConstants.eventType.COMBAT, LUIE.CombatTextConstants.combatType.OUTGOING, POWERTYPE_STAMINA, math.random(7, 777), GetString(SI_LUIE_LAM_CT_ANIMATION_TEST), 41567, DAMAGE_TYPE_PHYSICAL, "Test", true, false, false, false, false, false, false, false, false, false, false, false, false, false)
                     end,
                 },
             },
@@ -9677,7 +9668,7 @@ function LUIE_CreateSettings()
                     step    = 50,
                     getFunc = function() return LUIE.CombatText.SV.throttles.damage end,
                     setFunc = function(v) LUIE.CombatText.SV.throttles.damage = v end,
-                    default = D.throttles.damage,
+                    default = LUIE.CombatText.D.throttles.damage,
                 },
                 {--DOT
                     type    = "slider",
@@ -9688,7 +9679,7 @@ function LUIE_CreateSettings()
                     step    = 50,
                     getFunc = function() return LUIE.CombatText.SV.throttles.dot end,
                     setFunc = function(v) LUIE.CombatText.SV.throttles.dot = v end,
-                    default = D.throttles.dot,
+                    default = LUIE.CombatText.D.throttles.dot,
                 },
                 {--HEALING
                     type    = "slider",
@@ -9699,7 +9690,7 @@ function LUIE_CreateSettings()
                     step    = 50,
                     getFunc = function() return LUIE.CombatText.SV.throttles.healing end,
                     setFunc = function(v) LUIE.CombatText.SV.throttles.healing = v end,
-                    default = D.throttles.healing,
+                    default = LUIE.CombatText.D.throttles.healing,
                 },
                 {--HOT
                     type    = "slider",
@@ -9710,7 +9701,7 @@ function LUIE_CreateSettings()
                     step    = 50,
                     getFunc = function() return LUIE.CombatText.SV.throttles.hot end,
                     setFunc = function(v) LUIE.CombatText.SV.throttles.hot = v end,
-                    default = D.throttles.hot,
+                    default = LUIE.CombatText.D.throttles.hot,
                 },
                 {--THROTTLE TRAILER
                     type    = "checkbox",
@@ -9718,7 +9709,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_THROTTLE_TRAILER_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.showThrottleTrailer end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showThrottleTrailer = v end,
-                    default = D.toggles.showThrottleTrailer,
+                    default = LUIE.CombatText.D.toggles.showThrottleTrailer,
                 },
                 {--CRITS
                     type    = "checkbox",
@@ -9726,7 +9717,7 @@ function LUIE_CreateSettings()
                     tooltip = GetString(SI_LUIE_LAM_CT_THROTTLE_CRITICAL_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.showThrottleTrailer end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.throttleCriticals = v end,
-                    default = D.toggles.throttleCriticals,
+                    default = LUIE.CombatText.D.toggles.throttleCriticals,
                 },
             },
         }

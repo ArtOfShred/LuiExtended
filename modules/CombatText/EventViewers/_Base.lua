@@ -1,20 +1,21 @@
-CombatCloud_EventViewer = ZO_Object:Subclass()
+LUIE.CombatTextEventViewer = ZO_Object:Subclass()
+local CTV = LUIE.CombatTextEventViewer
 
 local gsub, format = string.gsub, string.format
 local callbackManager = CALLBACK_MANAGER
-local C = CombatCloudConstants
+local C = LUIE.CombatTextConstants
 
-CombatCloud_EventViewer.resourceNames = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_COMBATMECHANICTYPE', k); return t[k] end})
-CombatCloud_EventViewer.damageTypes = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_DAMAGETYPE', k); return t[k] end})
+CTV.resourceNames = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_COMBATMECHANICTYPE', k); return t[k] end})
+CTV.damageTypes = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_DAMAGETYPE', k); return t[k] end})
 
-function CombatCloud_EventViewer:New(poolManager, LMP)
+function CTV:New(poolManager, LMP)
     local obj = ZO_Object:New(self)
     self.poolManager = poolManager
     self.LMP = LMP
     return obj
 end
 
-function CombatCloud_EventViewer:FormatString(inputFormat, params)
+function CTV:FormatString(inputFormat, params)
     return gsub(inputFormat, '%%.', function(x)
         if (x == '%t') then
             return params.text or ''
@@ -30,7 +31,7 @@ function CombatCloud_EventViewer:FormatString(inputFormat, params)
     end)
 end
 
-function CombatCloud_EventViewer:FormatAlertString(inputFormat, params)
+function CTV:FormatAlertString(inputFormat, params)
     return gsub(inputFormat, '%%.', function(x)
         if (x == '%n') then
             return params.source or ''
@@ -44,7 +45,7 @@ function CombatCloud_EventViewer:FormatAlertString(inputFormat, params)
     end)
 end
 
-function CombatCloud_EventViewer:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
+function CTV:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     local S = LUIE.CombatText.SV
 
     local textFormat = S.formats.damage
@@ -148,7 +149,7 @@ function CombatCloud_EventViewer:GetTextAtributes(powerType, damageType, isDamag
     return textFormat, fontSize, textColor
 end
 
-function CombatCloud_EventViewer:ControlLayout(control, abilityId, combatType, sourceName)
+function CTV:ControlLayout(control, abilityId, combatType, sourceName)
     local width, height = control.label:GetTextDimensions()
 
     if abilityId then
@@ -201,17 +202,17 @@ function CombatCloud_EventViewer:ControlLayout(control, abilityId, combatType, s
     end
 end
 
-function CombatCloud_EventViewer:RegisterCallback(eventType, func)
+function CTV:RegisterCallback(eventType, func)
     callbackManager:RegisterCallback(eventType, function(...) func(...) end)
 end
 
-function CombatCloud_EventViewer:PrepareLabel(label, fontSize, color, text)
+function CTV:PrepareLabel(label, fontSize, color, text)
     label:SetText(text)
     label:SetColor(unpack(color))
     label:SetFont(format('%s|%d|%s', self.LMP:Fetch('font', LUIE.CombatText.SV.fontFace), fontSize, LUIE.CombatText.SV.fontOutline))
 end
 
-function CombatCloud_EventViewer:IsOverlapping(control, activeControls)
+function CTV:IsOverlapping(control, activeControls)
     local p = 5 -- Substract some padding
 
     local left, top, right, bottom = control:GetScreenRect()

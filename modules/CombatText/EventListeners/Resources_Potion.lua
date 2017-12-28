@@ -1,8 +1,9 @@
-CombatCloud_ResourcesPotionEventListener = CombatCloud_EventListener:Subclass()
+LUIE.CombatTextResourcesPotionEventListener = LUIE.CombatTextEventListener:Subclass()
+local CTL = LUIE.CombatTextResourcesPotionEventListener
 local callLater = zo_callLater
 
-function CombatCloud_ResourcesPotionEventListener:New()
-    local C = CombatCloudConstants
+function CTL:New()
+    local C = LUIE.CombatTextConstants
     local t = LUIE.CombatText.SV.toggles
     local actionButton = ZO_ActionBar_GetButton(ACTION_BAR_FIRST_UTILITY_BAR_SLOT + 1)
     local UpdateCooldown_Orig = actionButton.UpdateCooldown

@@ -15,7 +15,7 @@ CT.D = {
 ---------------------------------------------------------------------------------------------------------------------------------------
     panels = {
     --Outgoing
-        CombatCloud_Outgoing = {
+        CombatText_Outgoing = {
             point                   = CENTER,
             relativePoint           = CENTER,
             offsetX                 = 450,
@@ -23,7 +23,7 @@ CT.D = {
             dimensions              = { 400, 100 },
         },
     --Incoming
-        CombatCloud_Incoming = {
+        CombatText_Incoming = {
             point                   = CENTER,
             relativePoint           = CENTER,
             offsetX                 = -450,
@@ -31,7 +31,7 @@ CT.D = {
             dimensions              = { 400, 100 },
         },
     --Alerts
-        CombatCloud_Alert = {
+        CombatText_Alert = {
             point                   = CENTER,
             relativePoint           = CENTER,
             offsetX                 = 0,
@@ -39,7 +39,7 @@ CT.D = {
             dimensions              = { 400, 100 },
         },
     --Points
-        CombatCloud_Point = {
+        CombatText_Point = {
             point                   = CENTER,
             relativePoint           = CENTER,
             offsetX                 = 0,
@@ -47,7 +47,7 @@ CT.D = {
             dimensions              = { 400, 100 },
         },
     --Resources
-        CombatCloud_Resource = {
+        CombatText_Resource = {
             point                   = CENTER,
             relativePoint           = CENTER,
             offsetX                 = 0,
@@ -378,45 +378,45 @@ function CT.Initialize( enabled )
     for k, s in pairs (LUIE.CombatText.SV.panels) do
         if _G[k] ~= nil then
             _G[k]:ClearAnchors()
-            _G[k]:SetAnchor(s.point, CombatCloud, s.relativePoint, s.offsetX, s.offsetY)
+            _G[k]:SetAnchor(s.point, CombatText, s.relativePoint, s.offsetX, s.offsetY)
             _G[k]:SetDimensions(unpack(s.dimensions))
             _G[k]:SetHandler('OnMouseUp', SavePosition)
             _G[k .. '_Label']:SetFont(LMP:Fetch('font', LUIE.CombatText.SV.fontFace) .. '|26|' .. LUIE.CombatText.SV.fontOutline)
-            _G[k .. '_Label']:SetText(CombatCloudLocalization.panelTitles[k])
+            _G[k .. '_Label']:SetText(CombatTextLocalization.panelTitles[k])
         else
             LUIE.CombatText.SV.panels[k] = nil
         end
     end
 
     --Allow mouse resizing of panels
-    CombatCloud_Incoming:SetResizeHandleSize(MOUSE_CURSOR_RESIZE_NS)
-    CombatCloud_Outgoing:SetResizeHandleSize(MOUSE_CURSOR_RESIZE_NS)
+    CombatText_Incoming:SetResizeHandleSize(MOUSE_CURSOR_RESIZE_NS)
+    CombatText_Outgoing:SetResizeHandleSize(MOUSE_CURSOR_RESIZE_NS)
 
     --Pool Manager
-    local poolManager = CombatCloud_PoolManager:New()
-    for _, v in pairs(CombatCloudConstants.poolType) do -- Create a pool for each type
-        poolManager:RegisterPool(v, CombatCloud_Pool:New(v))
+    local poolManager = LUIE.CombatTextPoolManager:New()
+    for _, v in pairs(LUIE.CombatTextConstants.poolType) do -- Create a pool for each type
+        poolManager:RegisterPool(v, LUIE.CombatTextPool:New(v))
     end
 
     --Event Listeners
-    CombatCloud_CombatEventListener:New()
-    CombatCloud_AlertEventListener:New()
-    CombatCloud_PointsAllianceEventListener:New()
-    CombatCloud_PointsExperienceEventListener:New()
-    CombatCloud_PointsChampionEventListener:New()
-    CombatCloud_ResourcesPowerEventListener:New()
-    CombatCloud_ResourcesUltimateEventListener:New()
-    CombatCloud_ResourcesPotionEventListener:New()
+    LUIE.CombatTextCombatEventListener:New()
+    LUIE.CombatTextAlertEventListener:New()
+    LUIE.CombatTextPointsAllianceEventListener:New()
+    LUIE.CombatTextPointsExperienceEventListener:New()
+    LUIE.CombatTextPointsChampionEventListener:New()
+    LUIE.CombatTextResourcesPowerEventListener:New()
+    LUIE.CombatTextResourcesUltimateEventListener:New()
+    LUIE.CombatTextResourcesPotionEventListener:New()
 
     --Event Viewers
-    CombatCloud_CombatCloudEventViewer:New(poolManager, LMP)
-    CombatCloud_CombatHybridEventViewer:New(poolManager, LMP)
-    CombatCloud_CombatScrollEventViewer:New(poolManager, LMP)
-    CombatCloud_CombatEllipseEventViewer:New(poolManager, LMP)
-    CombatCloud_AlertEventViewer:New(poolManager, LMP)
-    CombatCloud_CrowdControlEventViewer:New(poolManager, LMP)
-    CombatCloud_PointEventViewer:New(poolManager, LMP)
-    CombatCloud_ResourceEventViewer:New(poolManager, LMP)
+    LUIE.CombatTextCombatCloudEventViewer:New(poolManager, LMP)
+    LUIE.CombatTextCombatHybridEventViewer:New(poolManager, LMP)
+    LUIE.CombatTextCombatScrollEventViewer:New(poolManager, LMP)
+    LUIE.CombatTextCombatEllipseEventViewer:New(poolManager, LMP)
+    LUIE.CombatTextAlertViewer:New(poolManager, LMP)
+    LUIE.CombatTextCrowdControlEventViewer:New(poolManager, LMP)
+    LUIE.CombatTextPointEventViewer:New(poolManager, LMP)
+    LUIE.CombatTextResourceEventViewer:New(poolManager, LMP)
 
     --Hide ingame active combat tips
     ZO_ActiveCombatTips:SetHidden(LUIE.CombatText.SV.toggles.hideIngameTips)

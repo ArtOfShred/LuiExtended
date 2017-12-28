@@ -1,4 +1,5 @@
-CombatCloud_Animation = ZO_Object:Subclass()
+LUIE.CombatTextAnimation = ZO_Object:Subclass()
+local CTA = LUIE.CombatTextAnimation
 
 local ANIMATION_MANAGER = ANIMATION_MANAGER
 local ANIMATION_ALPHA = ANIMATION_ALPHA
@@ -6,7 +7,7 @@ local ANIMATION_SCALE = ANIMATION_SCALE
 local ANIMATION_TRANSLATE = ANIMATION_TRANSLATE
 local linearEase = ZO_LinearEase
 
-function CombatCloud_Animation:New()
+function CTA:New()
     local obj = ZO_Object:New(self)
     obj.timeline = ANIMATION_MANAGER:CreateTimeline()
     obj.timeline:SetPlaybackType(0, 0)
@@ -14,31 +15,31 @@ function CombatCloud_Animation:New()
     return obj
 end
 
-function CombatCloud_Animation:Apply(control)
+function CTA:Apply(control)
     self.timeline:ApplyAllAnimationsToControl(control)
 end
 
-function CombatCloud_Animation:Stop()
+function CTA:Stop()
     self.timeline:Stop()
 end
 
-function CombatCloud_Animation:SetProgress(progress)
+function CTA:SetProgress(progress)
     self.timeline:SetProgress(progress)
 end
 
-function CombatCloud_Animation:Play()
+function CTA:Play()
     self.timeline:PlayFromStart()
 end
 
-function CombatCloud_Animation:PlayForward()
+function CTA:PlayForward()
     self.timeline:PlayForward()
 end
 
-function CombatCloud_Animation:PlayInstantlyToEnd()
+function CTA:PlayInstantlyToEnd()
     self.timeline:PlayInstantlyToEnd()
 end
 
-function CombatCloud_Animation:Alpha(stepName, startAlpha, endAlpha, duration, delay, easingFunc)
+function CTA:Alpha(stepName, startAlpha, endAlpha, duration, delay, easingFunc)
     local step = self.timeline:InsertAnimation(ANIMATION_ALPHA, nil, delay or 0)
     step:SetAlphaValues(startAlpha, endAlpha)
     step:SetDuration(duration)
@@ -47,7 +48,7 @@ function CombatCloud_Animation:Alpha(stepName, startAlpha, endAlpha, duration, d
     return step
 end
 
-function CombatCloud_Animation:Scale(stepName, startScale, endScale, duration, delay, easingFunc)
+function CTA:Scale(stepName, startScale, endScale, duration, delay, easingFunc)
     local step = self.timeline:InsertAnimation(ANIMATION_SCALE, nil, delay or 0)
     step:SetScaleValues(startScale, endScale)
     step:SetDuration(duration)
@@ -56,7 +57,7 @@ function CombatCloud_Animation:Scale(stepName, startScale, endScale, duration, d
     return step
 end
 
-function CombatCloud_Animation:Move(stepName, offsetX, offsetY, duration, delay, easingFunc)
+function CTA:Move(stepName, offsetX, offsetY, duration, delay, easingFunc)
     local step = self.timeline:InsertAnimation(ANIMATION_TRANSLATE, nil, delay or 0)
     step:SetTranslateDeltas(offsetX, offsetY)
     step:SetDuration(duration)
@@ -65,36 +66,36 @@ function CombatCloud_Animation:Move(stepName, offsetX, offsetY, duration, delay,
     return step
 end
 
-function CombatCloud_Animation:InsertCallback(func, delay)
+function CTA:InsertCallback(func, delay)
     self.timeline:InsertCallback(func, delay)
 end
 
-function CombatCloud_Animation:ClearCallbacks()
+function CTA:ClearCallbacks()
     self.timeline:ClearAllCallbacks()
 end
 
-function CombatCloud_Animation:GetStep(i)
+function CTA:GetStep(i)
     return self.timeline:GetAnimation(i)
 end
 
-function CombatCloud_Animation:GetStepByName(stepName)
+function CTA:GetStepByName(stepName)
     if (stepName ~= nil and stepName ~= '') then
         return self.namedSteps[stepName]
     end
 end
 
-function CombatCloud_Animation:GetLastStep()
+function CTA:GetLastStep()
     return self.timeline:GetLastAnimation()
 end
 
-function CombatCloud_Animation:SetStepDelay(step, delay)
+function CTA:SetStepDelay(step, delay)
     return self.timeline:SetAnimationOffset(step, delay)
 end
 
-function CombatCloud_Animation:GetDuration()
+function CTA:GetDuration()
     return self.timeline:GetDuration()
 end
 
-function CombatCloud_Animation:GetProgress()
+function CTA:GetProgress()
     return self.timeline:GetProgress()
 end

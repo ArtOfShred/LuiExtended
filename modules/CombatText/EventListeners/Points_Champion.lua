@@ -1,9 +1,10 @@
-CombatCloud_PointsChampionEventListener = CombatCloud_EventListener:Subclass()
+LUIE.CombatTextPointsChampionEventListener = LUIE.CombatTextEventListener:Subclass()
+local CTL = LUIE.CombatTextPointsChampionEventListener
 
 local callLater = zo_callLater
 
-function CombatCloud_PointsChampionEventListener:New()
-    local obj = CombatCloud_EventListener:New()
+function CTL:New()
+    local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_CHAMPION_POINT_UPDATE, function(...) self:OnEvent(...) end, REGISTER_FILTER_UNIT_TAG, 'player')
     self.gain = 0
     self.timeoutActive = false
@@ -15,7 +16,7 @@ function CombatCloud_PointsChampionEventListener:New()
     return obj
 end
 
-function CombatCloud_PointsChampionEventListener:OnEvent(unit, currentPoints, maxPoints, reason)
+function CTL:OnEvent(unit, currentPoints, maxPoints, reason)
     if (LUIE.CombatText.SV.toggles.showPointsChampion and not self.hasMaxCP) then
 
         local currentVR = GetUnitChampionPoints('player')
@@ -37,7 +38,7 @@ function CombatCloud_PointsChampionEventListener:OnEvent(unit, currentPoints, ma
         if (self.gain > 0 and not self.timeoutActive) then
             self.timeoutActive = true
             callLater(function()
-                self:TriggerEvent(CombatCloudConstants.eventType.POINT, CombatCloudConstants.pointType.CHAMPION_POINTS, self.gain)
+                self:TriggerEvent(LUIE.CombatTextConstants.eventType.POINT, LUIE.CombatTextConstants.pointType.CHAMPION_POINTS, self.gain)
                 self.gain = 0
                 self.timeoutActive = false
             end, 500)

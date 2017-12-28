@@ -1,9 +1,10 @@
-CombatCloud_PointsExperienceEventListener = CombatCloud_EventListener:Subclass()
+LUIE.CombatTextPointsExperienceEventListener = LUIE.CombatTextEventListener:Subclass()
+local CTL = LUIE.CombatTextPointsExperienceEventListener
 
 local callLater = zo_callLater
 
-function CombatCloud_PointsExperienceEventListener:New()
-    local obj = CombatCloud_EventListener:New()
+function CTL:New()
+    local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_EXPERIENCE_UPDATE, function(...) self:OnEvent(...) end, REGISTER_FILTER_UNIT_TAG, 'player')
     self.gain = 0
     self.timeoutActive = false
@@ -20,7 +21,7 @@ function CombatCloud_PointsExperienceEventListener:New()
     return obj
 end
 
-function CombatCloud_PointsExperienceEventListener:OnEvent(unit, currentXp, maxXp)
+function CTL:OnEvent(unit, currentXp, maxXp)
     if LUIE.CombatText.SV.toggles.showPointsExperience then
 
         self.isChampion = IsUnitChampion('player')
@@ -50,7 +51,7 @@ function CombatCloud_PointsExperienceEventListener:OnEvent(unit, currentXp, maxX
         if (self.gain > 0 and not self.timeoutActive) then
             self.timeoutActive = true
             callLater(function()
-                self:TriggerEvent(CombatCloudConstants.eventType.POINT, CombatCloudConstants.pointType.EXPERIENCE_POINTS, self.gain)
+                self:TriggerEvent(LUIE.CombatTextConstants.eventType.POINT, LUIE.CombatTextConstants.pointType.EXPERIENCE_POINTS, self.gain)
                 self.gain = 0
                 self.timeoutActive = false
             end, 500)

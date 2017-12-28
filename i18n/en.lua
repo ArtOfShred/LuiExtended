@@ -2004,15 +2004,15 @@ ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_CRITICAL_TP",                "Enable 
 ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_TRAILER",                    "Show Throttle Trailer")
 ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_TRAILER_TP",                 "Enable Throttle Trailer.")
 
-CombatCloudLocalization = {
+CombatTextLocalization = {
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//PANEL TITLES//--
 ---------------------------------------------------------------------------------------------------------------------------------------
     panelTitles = {
-        CombatCloud_Outgoing                = "Outgoing",
-        CombatCloud_Incoming                = "Incoming",
-        CombatCloud_Point                   = "Points",
-        CombatCloud_Alert                   = "Alerts",
-        CombatCloud_Resource                = "Resources"
+        CombatText_Outgoing                = "Outgoing",
+        CombatText_Incoming                = "Incoming",
+        CombatText_Point                   = "Points",
+        CombatText_Alert                   = "Alerts",
+        CombatText_Resource                = "Resources"
     },
 }

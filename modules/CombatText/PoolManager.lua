@@ -1,24 +1,25 @@
-CombatCloud_PoolManager = ZO_Object:Subclass()
+LUIE.CombatTextPoolManager = ZO_Object:Subclass()
+local CTPM = LUIE.CombatTextPoolManager
 
-function CombatCloud_PoolManager:New()
+function CTPM:New()
     local obj = ZO_Object:New(self)
     self.pools = {}
     return obj
 end
 
-function CombatCloud_PoolManager:RegisterPool(poolType, pool)
+function CTPM:RegisterPool(poolType, pool)
     self.pools[poolType] = pool
 end
 
-function CombatCloud_PoolManager:GetPoolObject(poolType)
+function CTPM:GetPoolObject(poolType)
     return self.pools[poolType]:AcquireObject()
 end
 
-function CombatCloud_PoolManager:ReleasePoolObject(poolType, objectKey)
+function CTPM:ReleasePoolObject(poolType, objectKey)
     self.pools[poolType]:ReleaseObject(objectKey)
 end
 
-function CombatCloud_PoolManager:TotalFree()
+function CTPM:TotalFree()
     local count = 0
     for k, _ in pairs(self.pools) do
         count = count + self.pools[k]:GetFreeObjectCount()
@@ -26,7 +27,7 @@ function CombatCloud_PoolManager:TotalFree()
     return count
 end
 
-function CombatCloud_PoolManager:TotalInUse()
+function CTPM:TotalInUse()
     local count = 0
     for k, _ in pairs(self.pools) do
         count = count + self.pools[k]:GetActiveObjectCount()

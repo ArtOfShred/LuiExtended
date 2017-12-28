@@ -1,4 +1,4 @@
-CombatCloudAlertTable = {
+LUIE.AlertTable = {
 
 -- PRIORITY NOTES:
     -- 1 = VMA/Trial/Dungeon

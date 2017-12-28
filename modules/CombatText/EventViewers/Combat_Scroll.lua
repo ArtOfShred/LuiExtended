@@ -1,19 +1,23 @@
-CombatCloud_CombatCloudEventViewer = CombatCloud_EventViewer:Subclass()
+LUIE.CombatTextCombatScrollEventViewer = LUIE.CombatTextEventViewer:Subclass()
+local CTV = LUIE.CombatTextCombatScrollEventViewer
 
-local random, sqrt, format, tostring = math.random, math.sqrt, string.format, tostring
+local random, sqrt, min, max = math.random, math.sqrt, math.min, math.max
+local format, tostring = string.format, tostring
 local callLater = zo_callLater
-local C = CombatCloudConstants
+local C = LUIE.CombatTextConstants
 local poolTypes = C.poolType
 
-function CombatCloud_CombatCloudEventViewer:New(...)
-    local obj = CombatCloud_EventViewer:New(...)
+function CTV:New(...)
+    local obj = LUIE.CombatTextEventViewer:New(...)
     obj:RegisterCallback(C.eventType.COMBAT, function(...) self:OnEvent(...) end)
     self.eventBuffer = {}
+    self.activeControls = { [C.combatType.OUTGOING] = {}, [C.combatType.INCOMING] = {} }
+    self.lastControl = {}
     return obj
 end
 
-function CombatCloud_CombatCloudEventViewer:OnEvent(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
-    if (LUIE.CombatText.SV.animation.animationType ~= 'cloud') then return end
+function CTV:OnEvent(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
+    if (LUIE.CombatText.SV.animation.animationType ~= 'scroll') then return end
 
     local T = LUIE.CombatText.SV.throttles
 
@@ -40,7 +44,7 @@ function CombatCloud_CombatCloudEventViewer:OnEvent(combatType, powerType, value
     end
 end
 
-function CombatCloud_CombatCloudEventViewer:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
+function CTV:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     if not self.eventBuffer[eventKey] then return end
     local value = self.eventBuffer[eventKey].value
     local hits = self.eventBuffer[eventKey].hits
@@ -48,53 +52,67 @@ function CombatCloud_CombatCloudEventViewer:ViewFromEventBuffer(combatType, powe
     self:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, hits)
 end
 
-function CombatCloud_CombatCloudEventViewer:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, hits)
+function CTV:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, hits)
     local S = LUIE.CombatText.SV
-
-    -- Control setup
-    local panel = CombatCloud_Outgoing
-    if (combatType == C.combatType.INCOMING) then panel = CombatCloud_Incoming end
-    local w, h = panel:GetDimensions()
-    local radiusW, radiusH = w/2, h*2
-    local offsetX, offsetY = nil, nil
-
-    if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) then
-        offsetX, offsetY = random(-radiusW * .5, radiusW * .5), random(-radiusH * .5, radiusH * .5)
-    elseif (isDot or isHot) then -- http://www.mathopenref.com/coordgeneralellipse.html
-        offsetX = random(-radiusW * .95, radiusW * .95) -- Make radiusW a bit smaller to avoid horizontal animations
-        offsetY = sqrt((radiusH) ^ 2 * (1 - (offsetX ^ 2 / (radiusW) ^ 2)))
-        if (combatType == C.combatType.OUTGOING) then offsetY = -offsetY end
-    elseif (isDamage or isHealing or isEnergize or isDrain or isDamageShield or isBlocked) then
-        offsetX, offsetY = random(-radiusW, radiusW), random(-radiusH * .5, radiusH)
-    end
 
     local control, controlPoolKey = self.poolManager:GetPoolObject(poolTypes.CONTROL)
 
-    if (isDot or isHot) then
-        control:SetAnchor(CENTER, panel, CENTER, 0, 0) -- Offsets are set in animation, not here
-    else
-        control:SetAnchor(CENTER, panel, CENTER, offsetX, offsetY)
-    end
-
-    -- Label setup in the correct order that the game handles damage
     local textFormat, fontSize, textColor = self:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     if (hits > 1 and S.toggles.showThrottleTrailer) then value = format('%d (%d)', value, hits) end
     if (combatType == C.combatType.INCOMING) and (S.toggles.incomingDamageOverride) and (isDamage or isDamageCritical) then textColor = S.colors.incomingDamageOverride end
     
-    self:PrepareLabel(control.label, fontSize, textColor, self:FormatString(textFormat, { text = LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name or abilityName, value = value, powerType = powerType, damageType = damageType }))
+	self:PrepareLabel(control.label, fontSize, textColor, self:FormatString(textFormat, { text = LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name or abilityName, value = value, powerType = powerType, damageType = damageType }))
     self:ControlLayout(control, abilityId, combatType, sourceName)
 
+    -- Control setup
+    local panel, point, relativePoint = CombatText_Outgoing, TOP, BOTTOM
+    if (combatType == C.combatType.INCOMING) then
+        panel = CombatText_Incoming
+        if (S.animation.incoming.directionType == 'down') then
+            point, relativePoint = BOTTOM, TOP
+        end
+    else
+        if (S.animation.outgoing.directionType == 'down') then
+            point, relativePoint = BOTTOM, TOP
+        end
+    end
+
+    local w, h = panel:GetDimensions()
+    local radiusW, radiusH = w / 2, h / 2
+    local offsetX, offsetY = 0, 0
+
+    if (point == TOP) then
+        if (self.lastControl[combatType] == nil) then offsetY = -25 else offsetY = max(-25, select(6, self.lastControl[combatType]:GetAnchor(0))) end
+        control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
+
+        if (offsetY < 75 and self:IsOverlapping(control, self.activeControls[combatType])) then
+            control:ClearAnchors()
+            offsetY = select(6, self.lastControl[combatType]:GetAnchor(0)) + (fontSize * 1.5)
+            control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
+        end
+    else
+        if (self.lastControl[combatType] == nil) then offsetY = 25 else offsetY = min(25, select(6, self.lastControl[combatType]:GetAnchor(0))) end
+        control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
+
+        if (offsetY > -75 and self:IsOverlapping(control, self.activeControls[combatType])) then
+            control:ClearAnchors()
+            offsetY = select(6, self.lastControl[combatType]:GetAnchor(0)) - (fontSize * 1.5)
+            control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
+        end
+    end
+
+    self.activeControls[combatType][control:GetName()] = control
+    self.lastControl[combatType] = control
+
     -- Animation setup
-    local animationPoolType = poolTypes.ANIMATION_CLOUD
-    if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) then animationPoolType = poolTypes.ANIMATION_CLOUD_CRITICAL
-    elseif (isDot or isHot) then animationPoolType = poolTypes.ANIMATION_CLOUD_FIREWORKS end
+    local animationPoolType = poolTypes.ANIMATION_SCROLL
+    if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) then animationPoolType = poolTypes.ANIMATION_SCROLL_CRITICAL end
+
     local animation, animationPoolKey = self.poolManager:GetPoolObject(animationPoolType)
 
-    if (animationPoolType == poolTypes.ANIMATION_CLOUD_FIREWORKS) then
-        local moveStep = animation:GetStepByName('move')
-        moveStep:SetDeltaOffsetX(offsetX)
-        moveStep:SetDeltaOffsetY(offsetY)
-    end
+    local targetY = h + 250
+    if (point == TOP) then targetY = -targetY end
+    animation:GetStepByName('scroll'):SetDeltaOffsetY(targetY)
 
     animation:Apply(control)
     animation:Play()
@@ -103,5 +121,7 @@ function CombatCloud_CombatCloudEventViewer:View(combatType, powerType, value, a
     callLater(function()
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)
         self.poolManager:ReleasePoolObject(animationPoolType, animationPoolKey)
+        self.activeControls[combatType][control:GetName()] = nil
+        if (self.lastControl[combatType] == control) then self.lastControl[combatType] = nil end
     end, animation:GetDuration())
 end

@@ -1,19 +1,19 @@
-CombatCloud_AlertEventViewer = CombatCloud_EventViewer:Subclass()
-
-local L = CombatCloudLocalization
+LUIE.CombatTextAlertViewer = LUIE.CombatTextEventViewer:Subclass()
+local CTV = LUIE.CombatTextAlertViewer
+local L = CombatTextLocalization
 local callLater = zo_callLater
-local poolTypes = CombatCloudConstants.poolType
-local alertTypes = CombatCloudConstants.alertType
+local poolTypes = LUIE.CombatTextConstants.poolType
+local alertTypes = LUIE.CombatTextConstants.alertType
 
-function CombatCloud_AlertEventViewer:New(...)
-    local obj = CombatCloud_EventViewer:New(...)
-    obj:RegisterCallback(CombatCloudConstants.eventType.ALERT, function(...) self:OnEvent(...) end)
+function CTV:New(...)
+    local obj = LUIE.CombatTextEventViewer:New(...)
+    obj:RegisterCallback(LUIE.CombatTextConstants.eventType.ALERT, function(...) self:OnEvent(...) end)
     self.locationOffset = 0  -- Simple way to avoid overlapping. When number of active notes is back to 0, the offset is also reset
     self.activeAlerts = 0
     return obj
 end
 
-function CombatCloud_AlertEventViewer:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, block, blockstagger, dodge, avoid, interrupt)
+function CTV:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, block, blockstagger, dodge, avoid, interrupt)
     local S = LUIE.CombatText.SV
 
     --Label setup
@@ -138,7 +138,7 @@ function CombatCloud_AlertEventViewer:OnEvent(alertType, abilityName, abilityIco
     self:ControlLayout(control)
 
     --Control setup
-    control:SetAnchor(CENTER, CombatCloud_Alert, TOP, 0, self.locationOffset * (S.fontSizes.alert + 5))
+    control:SetAnchor(CENTER, CombatText_Alert, TOP, 0, self.locationOffset * (S.fontSizes.alert + 5))
     self.locationOffset = self.locationOffset + 1
     self.activeAlerts = self.activeAlerts + 1
 

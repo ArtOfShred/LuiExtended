@@ -1,15 +1,16 @@
-CombatCloud_AlertEventListener = CombatCloud_EventListener:Subclass()
-local C = CombatCloudConstants
+LUIE.CombatTextAlertEventListener = LUIE.CombatTextEventListener:Subclass()
+local CTL = LUIE.CombatTextAlertEventListener
+local C = LUIE.CombatTextConstants
 local callLater = zo_callLater
 local exploitRefireDelay = false
 
-function CombatCloud_AlertEventListener:New()
-    local obj = CombatCloud_EventListener:New()
+function CTL:New()
+    local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_DISPLAY_ACTIVE_COMBAT_TIP, function(...) self:OnEvent(...) end)
     return obj
 end
 
-function CombatCloud_AlertEventListener:OnEvent(tipId)
+function CTL:OnEvent(tipId)
     local S = LUIE.CombatText.SV
     local alert = tipId
 

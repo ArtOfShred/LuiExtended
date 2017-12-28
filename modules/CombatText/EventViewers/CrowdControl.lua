@@ -1,20 +1,21 @@
-CombatCloud_CrowdControlEventViewer = CombatCloud_EventViewer:Subclass()
+LUIE.CombatTextCrowdControlEventViewer = LUIE.CombatTextEventViewer:Subclass()
+local CTV = LUIE.CombatTextCrowdControlEventViewer
 
 local callLater = zo_callLater
-local C = CombatCloudConstants
-local L = CombatCloudLocalization
-local poolTypes = CombatCloudConstants.poolType
-local crowdControlTypes = CombatCloudConstants.crowdControlType
+local C = LUIE.CombatTextConstants
+local L = CombatTextLocalization
+local poolTypes = LUIE.CombatTextConstants.poolType
+local crowdControlTypes = LUIE.CombatTextConstants.crowdControlType
 
-function CombatCloud_CrowdControlEventViewer:New(...)
-    local obj = CombatCloud_EventViewer:New(...)
-    obj:RegisterCallback(CombatCloudConstants.eventType.CROWDCONTROL, function(...) self:OnEvent(...) end)
+function CTV:New(...)
+    local obj = LUIE.CombatTextEventViewer:New(...)
+    obj:RegisterCallback(LUIE.CombatTextConstants.eventType.CROWDCONTROL, function(...) self:OnEvent(...) end)
     self.locationOffset = { [C.combatType.OUTGOING] = 0, [C.combatType.INCOMING] = 0 }
     self.activeCrowdControls = { [C.combatType.OUTGOING] = 0, [C.combatType.INCOMING] = 0 }
     return obj
 end
 
-function CombatCloud_CrowdControlEventViewer:OnEvent(crowdControlType, combatType)
+function CTV:OnEvent(crowdControlType, combatType)
     local S = LUIE.CombatText.SV
 
     --Label setup
@@ -52,9 +53,9 @@ function CombatCloud_CrowdControlEventViewer:OnEvent(crowdControlType, combatTyp
     self:ControlLayout(control)
 
     --Control setup
-    local panel, point, relativePoint = CombatCloud_Outgoing, TOP, BOTTOM
+    local panel, point, relativePoint = CombatText_Outgoing, TOP, BOTTOM
     if (combatType == C.combatType.INCOMING) then
-        panel = CombatCloud_Incoming
+        panel = CombatText_Incoming
         if (S.animation.incoming.directionType == 'down') then
             point, relativePoint = BOTTOM, TOP
         end

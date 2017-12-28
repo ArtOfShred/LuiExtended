@@ -1,18 +1,19 @@
-CombatCloud_ResourcesPowerEventListener = CombatCloud_EventListener:Subclass()
+LUIE.CombatTextResourcesPowerEventListener = LUIE.CombatTextEventListener:Subclass()
+local CTL = LUIE.CombatTextResourcesPowerEventListener
 
-function CombatCloud_ResourcesPowerEventListener:New()
-    local obj = CombatCloud_EventListener:New()
+function CTL:New()
+    local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_POWER_UPDATE, function(...) self:OnEvent(...) end)
     self.powerInfo = {
-        [POWERTYPE_HEALTH]  = { wasWarned = false, resourceType = CombatCloudConstants.resourceType.LOW_HEALTH },
-        [POWERTYPE_STAMINA] = { wasWarned = false, resourceType = CombatCloudConstants.resourceType.LOW_STAMINA },
-        [POWERTYPE_MAGICKA] = { wasWarned = false, resourceType = CombatCloudConstants.resourceType.LOW_MAGICKA }
+        [POWERTYPE_HEALTH]  = { wasWarned = false, resourceType = LUIE.CombatTextConstants.resourceType.LOW_HEALTH },
+        [POWERTYPE_STAMINA] = { wasWarned = false, resourceType = LUIE.CombatTextConstants.resourceType.LOW_STAMINA },
+        [POWERTYPE_MAGICKA] = { wasWarned = false, resourceType = LUIE.CombatTextConstants.resourceType.LOW_MAGICKA }
     }
     self.executeAlerts = {}
     return obj
 end
 
-function CombatCloud_ResourcesPowerEventListener:OnEvent(unit, powerPoolIndex, powerType, power, powerMax)
+function CTL:OnEvent(unit, powerPoolIndex, powerType, power, powerMax)
     if (unit == 'player' and self.powerInfo[powerType] ~= nil) then
         local t = LUIE.CombatText.SV.toggles
         local threshold
@@ -34,7 +35,7 @@ function CombatCloud_ResourcesPowerEventListener:OnEvent(unit, powerPoolIndex, p
 
         -- Check if we need to show the warning, else clear the warning
         if (percent < threshold and not self.powerInfo[powerType].wasWarned) then
-            self:TriggerEvent(CombatCloudConstants.eventType.RESOURCE, self.powerInfo[powerType].resourceType, power)
+            self:TriggerEvent(LUIE.CombatTextConstants.eventType.RESOURCE, self.powerInfo[powerType].resourceType, power)
             self.powerInfo[powerType].wasWarned = true
         elseif (percent > threshold + 10) then -- Add 10 to create some sort of buffer, else the warning can fire more than once depending on the power regen of the player
             self.powerInfo[powerType].wasWarned = false
@@ -51,7 +52,7 @@ function CombatCloud_ResourcesPowerEventListener:OnEvent(unit, powerPoolIndex, p
 
         if percent <= threshold then
             if now - alertTime > alertFrequency then
-                self:TriggerEvent(CombatCloudConstants.eventType.ALERT, CombatCloudConstants.alertType.EXECUTE, zo_round(percent))
+                self:TriggerEvent(LUIE.CombatTextConstants.eventType.ALERT, LUIE.CombatTextConstants.alertType.EXECUTE, zo_round(percent))
                 self.executeAlerts[unitName] = now
             end
         else

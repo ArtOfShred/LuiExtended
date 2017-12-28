@@ -1,13 +1,14 @@
-CombatCloud_CombatEllipseEventViewer = CombatCloud_EventViewer:Subclass()
+LUIE.CombatTextCombatEllipseEventViewer = LUIE.CombatTextEventViewer:Subclass()
+local CTV = LUIE.CombatTextCombatEllipseEventViewer
 
 local random, sqrt, min, max = math.random, math.sqrt, math.min, math.max
 local format, tostring = string.format, tostring
 local callLater = zo_callLater
-local C = CombatCloudConstants
+local C = LUIE.CombatTextConstants
 local poolTypes = C.poolType
 
-function CombatCloud_CombatEllipseEventViewer:New(...)
-    local obj = CombatCloud_EventViewer:New(...)
+function CTV:New(...)
+    local obj = LUIE.CombatTextEventViewer:New(...)
     obj:RegisterCallback(C.eventType.COMBAT, function(...) self:OnEvent(...) end)
     self.eventBuffer = {}
     self.activeControls = { [C.combatType.OUTGOING] = {}, [C.combatType.INCOMING] = {} }
@@ -15,7 +16,7 @@ function CombatCloud_CombatEllipseEventViewer:New(...)
     return obj
 end
 
-function CombatCloud_CombatEllipseEventViewer:OnEvent(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
+function CTV:OnEvent(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     if (LUIE.CombatText.SV.animation.animationType ~= 'ellipse') then return end
 
     local T = LUIE.CombatText.SV.throttles
@@ -43,7 +44,7 @@ function CombatCloud_CombatEllipseEventViewer:OnEvent(combatType, powerType, val
     end
 end
 
-function CombatCloud_CombatEllipseEventViewer:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
+function CTV:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     if not self.eventBuffer[eventKey] then return end
     local value = self.eventBuffer[eventKey].value
     local hits = self.eventBuffer[eventKey].hits
@@ -51,7 +52,7 @@ function CombatCloud_CombatEllipseEventViewer:ViewFromEventBuffer(combatType, po
     self:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, hits)
 end
 
-function CombatCloud_CombatEllipseEventViewer:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, hits)
+function CTV:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, hits)
     local S = LUIE.CombatText.SV
 
     local control, controlPoolKey = self.poolManager:GetPoolObject(poolTypes.CONTROL)
@@ -64,9 +65,9 @@ function CombatCloud_CombatEllipseEventViewer:View(combatType, powerType, value,
     self:ControlLayout(control, abilityId, combatType, sourceName)
 
     -- Control setup
-    local panel, point, relativePoint = CombatCloud_Outgoing, BOTTOMRIGHT, TOPRIGHT
+    local panel, point, relativePoint = CombatText_Outgoing, BOTTOMRIGHT, TOPRIGHT
     if (combatType == C.combatType.INCOMING) then
-        panel = CombatCloud_Incoming
+        panel = CombatText_Incoming
         if (S.animation.incoming.directionType == 'up') then
             point, relativePoint = TOPRIGHT, BOTTOMRIGHT
         end

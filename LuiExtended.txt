@@ -68,6 +68,8 @@ i18n\$(language).lua
 data\AbilityTables.lua
 data\Effects.lua
 data\DeathRecap.lua
+data\CombatTextConstants.lua
+data\AlertTable.lua
 
 modules\ChatAnnouncements.lua
 modules\CombatInfo.lua
@@ -76,32 +78,30 @@ modules\InfoPanel.lua
 modules\UnitFrames.lua
 modules\SpellCastBuffs.lua
 
-modules\CombatCloud.xml
-modules\CombatCloud\Constants.lua
-modules\CombatCloud\AlertTable.lua
+modules\CombatText.xml
 
-modules\CombatCloud\Core\Animation.lua
-modules\CombatCloud\Core\Pool.lua
-modules\CombatCloud\Core\PoolManager.lua
+modules\CombatText\Animation.lua
+modules\CombatText\Pool.lua
+modules\CombatText\PoolManager.lua
 
-modules\CombatCloud\Core\EventListeners\_Base.lua
-modules\CombatCloud\Core\EventListeners\Alerts.lua
-modules\CombatCloud\Core\EventListeners\Combat.lua
-modules\CombatCloud\Core\EventListeners\Points_Alliance.lua
-modules\CombatCloud\Core\EventListeners\Points_Experience.lua
-modules\CombatCloud\Core\EventListeners\Points_Champion.lua
-modules\CombatCloud\Core\EventListeners\Resources_Potion.lua
-modules\CombatCloud\Core\EventListeners\Resources_Power.lua
-modules\CombatCloud\Core\EventListeners\Resources_Ultimate.lua
+modules\CombatText\EventListeners\_Base.lua
+modules\CombatText\EventListeners\Alerts.lua
+modules\CombatText\EventListeners\Combat.lua
+modules\CombatText\EventListeners\Points_Alliance.lua
+modules\CombatText\EventListeners\Points_Experience.lua
+modules\CombatText\EventListeners\Points_Champion.lua
+modules\CombatText\EventListeners\Resources_Potion.lua
+modules\CombatText\EventListeners\Resources_Power.lua
+modules\CombatText\EventListeners\Resources_Ultimate.lua
 
-modules\CombatCloud\Core\EventViewers\_Base.lua
-modules\CombatCloud\Core\EventViewers\Combat_Cloud.lua
-modules\CombatCloud\Core\EventViewers\Combat_Hybrid.lua
-modules\CombatCloud\Core\EventViewers\Combat_Ellipse.lua
-modules\CombatCloud\Core\EventViewers\Combat_Scroll.lua
-modules\CombatCloud\Core\EventViewers\Alerts.lua
-modules\CombatCloud\Core\EventViewers\CrowdControl.lua
-modules\CombatCloud\Core\EventViewers\Points.lua
-modules\CombatCloud\Core\EventViewers\Resources.lua
+modules\CombatText\EventViewers\_Base.lua
+modules\CombatText\EventViewers\Combat_Cloud.lua
+modules\CombatText\EventViewers\Combat_Hybrid.lua
+modules\CombatText\EventViewers\Combat_Ellipse.lua
+modules\CombatText\EventViewers\Combat_Scroll.lua
+modules\CombatText\EventViewers\Alerts.lua
+modules\CombatText\EventViewers\CrowdControl.lua
+modules\CombatText\EventViewers\Points.lua
+modules\CombatText\EventViewers\Resources.lua
 
-modules\CombatCloud.lua
+modules\CombatText.lua

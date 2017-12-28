@@ -1,19 +1,20 @@
-CombatCloud_PointEventViewer = CombatCloud_EventViewer:Subclass()
+LUIE.CombatTextPointEventViewer = LUIE.CombatTextEventViewer:Subclass()
+local CTV = LUIE.CombatTextPointEventViewer
 
 local callLater = zo_callLater
-local L = CombatCloudLocalization
-local poolTypes = CombatCloudConstants.poolType
-local pointTypes = CombatCloudConstants.pointType
+local L = CombatTextLocalization
+local poolTypes = LUIE.CombatTextConstants.poolType
+local pointTypes = LUIE.CombatTextConstants.pointType
 
-function CombatCloud_PointEventViewer:New(...)
-    local obj = CombatCloud_EventViewer:New(...)
-    obj:RegisterCallback(CombatCloudConstants.eventType.POINT, function(...) self:OnEvent(...) end)
+function CTV:New(...)
+    local obj = LUIE.CombatTextEventViewer:New(...)
+    obj:RegisterCallback(LUIE.CombatTextConstants.eventType.POINT, function(...) self:OnEvent(...) end)
     self.locationOffset = 0  -- Simple way to avoid overlapping. When number of active notes is back to 0, the offset is also reset
     self.activePoints = 0
     return obj
 end
 
-function CombatCloud_PointEventViewer:OnEvent(pointType, value)
+function CTV:OnEvent(pointType, value)
     local S = LUIE.CombatText.SV
 
     --Label setup
@@ -52,7 +53,7 @@ function CombatCloud_PointEventViewer:OnEvent(pointType, value)
     self:ControlLayout(control)
 
     --Control setup
-    control:SetAnchor(CENTER, CombatCloud_Point, TOP, 0, self.locationOffset * (S.fontSizes.point + 5))
+    control:SetAnchor(CENTER, CombatText_Point, TOP, 0, self.locationOffset * (S.fontSizes.point + 5))
     self.locationOffset = self.locationOffset + 1
     self.activePoints = self.activePoints + 1
 

@@ -1,4 +1,5 @@
-CombatCloud_Pool = ZO_ObjectPool:Subclass()
+LUIE.CombatTextPool = ZO_ObjectPool:Subclass()
+local CTP = LUIE.CombatTextPool
 
 local fastSlow = ZO_GenerateCubicBezierEase(.3, .9, .7, 1)
 local slowFast = ZO_GenerateCubicBezierEase(.63, .1, .83, .69)
@@ -8,9 +9,9 @@ local easeOutIn = function(progress)
     return zo_sqrt(1 - ((1 - progress) ^ 2))
 end 
 
-local poolTypes = CombatCloudConstants.poolType
+local poolTypes = LUIE.CombatTextConstants.poolType
 
-function CombatCloud_Pool:New(poolType)
+function CTP:New(poolType)
     local obj
     if poolType == poolTypes.CONTROL then 
         obj = ZO_ObjectPool:New(self.CreateNewControl, self.ResetControl)
@@ -21,22 +22,22 @@ function CombatCloud_Pool:New(poolType)
     return obj
 end
 
-function CombatCloud_Pool:CreateNewControl()
-    local control = CreateControlFromVirtual('CombatCloud_Virtual_Instance', CombatCloud, 'CombatCloud_Virtual', self:GetNextControlId())
+function CTP:CreateNewControl()
+    local control = CreateControlFromVirtual('CombatText_Virtual_Instance', CombatText, 'CombatText_Virtual', self:GetNextControlId())
     control.label = control:GetNamedChild('_Amount')
     control.icon  = control:GetNamedChild('_Icon')  
     return control 
 end
 
-function CombatCloud_Pool.ResetControl(control)
+function CTP.ResetControl(control)
     control:ClearAnchors()
     control.label:ClearAnchors()
     control.icon:ClearAnchors()
     control.icon:SetHidden(true)
 end
 
-function CombatCloud_Pool:CreateNewAnimation()
-    local anim = CombatCloud_Animation:New()
+function CTP:CreateNewAnimation()
+    local anim = LUIE.CombatTextAnimation:New()
 
     if (self.poolType == poolTypes.ANIMATION_CLOUD) then
         anim:Alpha(nil, 0, 1, 50)

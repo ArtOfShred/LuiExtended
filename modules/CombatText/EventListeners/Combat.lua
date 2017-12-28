@@ -1,6 +1,7 @@
-CombatCloud_CombatEventListener = CombatCloud_EventListener:Subclass()
-local C = CombatCloudConstants
-local AlertT = CombatCloudAlertTable
+LUIE.CombatTextCombatEventListener = LUIE.CombatTextEventListener:Subclass()
+local CTL = LUIE.CombatTextCombatEventListener
+local C = LUIE.CombatTextConstants
+local AlertT = LUIE.AlertTable
 local callLater = zo_callLater
 local refireDelay = { }
 
@@ -14,8 +15,8 @@ local isWarned = {
     stunned         = false,
 }
 
-function CombatCloud_CombatEventListener:New()
-    local obj = CombatCloud_EventListener:New()
+function CTL:New()
+    local obj = LUIE.CombatTextEventListener:New()
     obj:RegisterForEvent(EVENT_PLAYER_ACTIVATED, function () self:OnPlayerActivated() end)
     obj:RegisterForEvent(EVENT_COMBAT_EVENT, function(...) self:OnEvent(...) end)
     obj:RegisterForEvent(EVENT_PLAYER_COMBAT_STATE, function() self:CombatState() end)
@@ -23,13 +24,13 @@ function CombatCloud_CombatEventListener:New()
     return obj
 end
 
-function CombatCloud_CombatEventListener:OnPlayerActivated()
+function CTL:OnPlayerActivated()
 
     if IsUnitInCombat("player") then isWarned.combat = true end
 
 end
 
-function CombatCloud_CombatEventListener:EffectChanged(...)
+function CTL:EffectChanged(...)
     local changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer = ...
     local S, combatType, togglesInOut = LUIE.CombatText.SV, nil, nil
     local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
@@ -115,7 +116,7 @@ function CombatCloud_CombatEventListener:EffectChanged(...)
     end
 end
 
-function CombatCloud_CombatEventListener:OnEvent(...)
+function CTL:OnEvent(...)
     local resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId = ...
     local S, combatType, togglesInOut = LUIE.CombatText.SV, nil, nil
     abilityName = zo_strformat("<<C:1>>", abilityName)
@@ -327,7 +328,7 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//COMBAT STATE EVENTS & TRIGGERS//--
 ---------------------------------------------------------------------------------------------------------------------------------------
-function CombatCloud_CombatEventListener:CombatState(inCombat)
+function CTL:CombatState(inCombat)
     local S = LUIE.CombatText.SV
 
     if not isWarned.combat then

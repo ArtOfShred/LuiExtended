@@ -1,19 +1,20 @@
-CombatCloud_ResourceEventViewer = CombatCloud_EventViewer:Subclass()
+LUIE.CombatTextResourceEventViewer = LUIE.CombatTextEventViewer:Subclass()
+local CTV = LUIE.CombatTextResourceEventViewer
 
-local L = CombatCloudLocalization
+local L = CombatTextLocalization
 local callLater = zo_callLater
-local poolTypes = CombatCloudConstants.poolType
-local resourceTypes = CombatCloudConstants.resourceType
+local poolTypes = LUIE.CombatTextConstants.poolType
+local resourceTypes = LUIE.CombatTextConstants.resourceType
 
-function CombatCloud_ResourceEventViewer:New(...)
-    local obj = CombatCloud_EventViewer:New(...)
-    obj:RegisterCallback(CombatCloudConstants.eventType.RESOURCE, function(...) self:OnEvent(...) end)
+function CTV:New(...)
+    local obj = LUIE.CombatTextEventViewer:New(...)
+    obj:RegisterCallback(LUIE.CombatTextConstants.eventType.RESOURCE, function(...) self:OnEvent(...) end)
     self.locationOffset = 0 -- Simple way to avoid overlapping. When number of active notes is back to 0, the offset is also reset
     self.activeResources = 0
     return obj
 end
 
-function CombatCloud_ResourceEventViewer:OnEvent(resourceType, value)
+function CTV:OnEvent(resourceType, value)
     local S = LUIE.CombatText.SV
 
     --Label setup
@@ -50,7 +51,7 @@ function CombatCloud_ResourceEventViewer:OnEvent(resourceType, value)
     self:ControlLayout(control)
 
     --Control setup
-    control:SetAnchor(CENTER, CombatCloud_Resource, TOP, 0, self.locationOffset * (S.fontSizes.resource + 5))
+    control:SetAnchor(CENTER, CombatText_Resource, TOP, 0, self.locationOffset * (S.fontSizes.resource + 5))
     self.locationOffset = self.locationOffset + 1
     self.activeResources = self.activeResources + 1
 
