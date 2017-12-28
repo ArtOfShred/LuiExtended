@@ -19,7 +19,7 @@ CT.D = {
             point                   = CENTER,
             relativePoint           = CENTER,
             offsetX                 = 450,
-            offsetY                 = -250,
+            offsetY                 = -220,
             dimensions              = { 400, 100 },
         },
     --Incoming
@@ -27,7 +27,7 @@ CT.D = {
             point                   = CENTER,
             relativePoint           = CENTER,
             offsetX                 = -450,
-            offsetY                 = -250,
+            offsetY                 = -220,
             dimensions              = { 400, 100 },
         },
     --Alerts
