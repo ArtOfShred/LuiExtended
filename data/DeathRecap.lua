@@ -28,16 +28,16 @@ DR.DeathRecapPlayerBasic = {
     ['Soul Shatter'] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_shatter.dds' }, -- Soul Shatter
     
     -- GLYPHS
-    ['Life Drain'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_health.dds', name = 'Life Drain Enchantment' }, -- Glyph of Absorb Health
-    ['Absorb Magicka'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_magicka.dds', name = 'Absorb Magicka Enchantment' }, -- Glyph of Absorb Magicka
-    ['Absorb Stamina'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_stamina.dds', name = 'Absorb Stamina Enchantment' }, -- Glyph of Absorb Stamina
-    ['Damage Health'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_decrease_health.dds', name = 'Decrease Health Enchantment' }, -- Glyph of Decrease Health
-    ['Fiery Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_flame.dds', name = 'Fiery Weapon Enchantment' }, -- Glyph of Flame
-    ['Befouled Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_foulness.dds', name = 'Befouled Weapon Enchantment' }, -- Glyph of Foulness
-    ['Frozen Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_frost.dds', name = 'Frozen Weapon Enchantment' }, -- Glyph of Frost
-    ['Poisoned Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_poison.dds', name = 'Poisoned Weapon Enchantment' }, -- Glyph of Poison
-    ['Prismatic Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_prismatic.dds', name = 'Prismatic Weapon Enchantment' }, -- Glyph of Prismatic Onslaught
-    ['Charged Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_shock.dds', name = 'Charged Weapon Enchantment' }, -- Glyph of Shock
+    ['Life Drain'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_health.dds' }, -- Glyph of Absorb Health
+    ['Absorb Magicka'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_magicka.dds' }, -- Glyph of Absorb Magicka
+    ['Absorb Stamina'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_stamina.dds' }, -- Glyph of Absorb Stamina
+    ['Damage Health'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_decrease_health.dds', name = 'Decrease Health' }, -- Glyph of Decrease Health
+    ['Fiery Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_flame.dds' }, -- Glyph of Flame
+    ['Befouled Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_foulness.dds' }, -- Glyph of Foulness
+    ['Frozen Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_frost.dds' }, -- Glyph of Frost
+    ['Poisoned Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_poison.dds' }, -- Glyph of Poison
+    ['Prismatic Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_prismatic.dds' }, -- Glyph of Prismatic Onslaught
+    ['Charged Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_shock.dds' }, -- Glyph of Shock
     
     -- STATUS EFFECTS
     ['Burning'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_burning.dds' }, -- Burning (Fire Status Effect)

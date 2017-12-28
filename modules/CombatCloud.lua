@@ -18,16 +18,16 @@ CT.D = {
         CombatCloud_Outgoing = {
             point                   = CENTER,
             relativePoint           = CENTER,
-            offsetX                 = 400,
-            offsetY                 = -200,
+            offsetX                 = 450,
+            offsetY                 = -250,
             dimensions              = { 400, 100 },
         },
     --Incoming
         CombatCloud_Incoming = {
             point                   = CENTER,
             relativePoint           = CENTER,
-            offsetX                 = -400,
-            offsetY                 = -200,
+            offsetX                 = -450,
+            offsetY                 = -250,
             dimensions              = { 400, 100 },
         },
     --Alerts
@@ -325,7 +325,7 @@ CT.D = {
     --//ANIMATION DEFAULTS//--
 ---------------------------------------------------------------------------------------------------------------------------------------
     animation = {
-        animationType               = "scroll",
+        animationType               = "ellipse",
         outgoingIcon                = "left",
         incomingIcon                = "right",
         outgoing = {

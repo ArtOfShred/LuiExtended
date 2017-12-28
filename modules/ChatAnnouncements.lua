@@ -7164,7 +7164,10 @@ function CA.HookFunction()
         -- Level up notification
         local levelSize = GetNumExperiencePointsInLevel(level)
         if levelSize ~= nil and currentExperience >= levelSize then
-        
+			
+			EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
+            CA.PrintBufferedXP()
+		
             local CurrentLevel = level + 1
             if CA.SV.XP.ExperienceLevelUpCA then
                 local icon
@@ -7453,6 +7456,11 @@ function CA.HookFunction()
     end
 
     local function ChampionPointGainedHook(pointDelta)
+	
+		-- Print throttled XP value
+		EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
+		CA.PrintBufferedXP()
+	
         -- adding one so that we are starting from the first gained point instead of the starting champion points
         local endingPoints = GetPlayerChampionPointsEarned()
         local startingPoints = endingPoints - pointDelta + 1
