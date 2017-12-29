@@ -611,7 +611,7 @@ function CI.OnSlotUpdated(eventCode, slotNum)
     -- Handle slot update for action bars
     --d( strfmt("%d: %s(%d)", slotNum, GetSlotName(slotNum), GetSlotBoundId(slotNum) ) )
     -- Look only for action bar slots
-    if slotNum < 3 or slotNum > 8 then
+    if slotNum < 3 or slotNum > 7 then
         return
     end
 
