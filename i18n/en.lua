@@ -2016,3 +2016,16 @@ CombatTextLocalization = {
         CombatText_Resource                = "Resources"
     },
 }
+-- ---------------------------------------------------
+-- ABILITY NAME OVERRIDE LOCALIZATION ----------------
+-- ---------------------------------------------------
+
+--ZO_CreateStringId("SI_LUIE_SKILL_SKILLNAME",							"")
+ZO_CreateStringId("SI_LUIE_SKILL_CROUCH_STUN",							"Crouch Stun")
+ZO_CreateStringId("SI_LUIE_SKILL_FALL_DAMAGE",							"Fall Damage")
+ZO_CreateStringId("SI_LUIE_SKILL_ABSORBING_SKYSHARD",					"Absorbing Skyshard")
+ZO_CreateStringId("SI_LUIE_SKILL_RECEIVING_BOON",						"Receiving Boon")
+ZO_CreateStringId("SI_LUIE_SKILL_MOUNT_SPRINT",							"Gallop")
+ZO_CreateStringId("SI_LUIE_SKILL_BLOCK_STUN",							"Block Stun")
+ZO_CreateStringId("SI_LUIE_SKILL_AYLEID_WELL",							"Ayleid Well")
+ZO_CreateStringId("SI_LUIE_SKILL_ANCHOR_DROP",							"Anchor Drop")

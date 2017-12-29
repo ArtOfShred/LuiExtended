@@ -3,6 +3,52 @@
 local A = {}
 
 -- ---------------------------------------------------
+-- INNATE ABILITIES ----------------------------------
+-- ---------------------------------------------------
+
+-- Player Basic
+A.Innate_Crouch						= 20306	-- Crouch
+A.Innate_Crouch_Stun				= GetString(SI_LUIE_SKILL_CROUCH_STUN) -- Crouch Stun
+A.Innate_Disguised                  = 23553 -- Disguised
+A.Innate_Hidden                     = 20309	-- Hidden
+A.Innate_Sprint						= 973	-- Sprint
+A.Innate_Block						= 14890 -- Block
+A.Innate_Block_Stun					= GetString(SI_LUIE_SKILL_BLOCK_STUN) -- Block Stun
+A.Innate_Bash						= 21970 -- Bash
+A.Innate_Gallop               		= GetString(SI_LUIE_SKILL_MOUNT_SPRINT) -- Gallop
+A.Innate_Fall_Damage				= GetString(SI_LUIE_SKILL_FALL_DAMAGE) -- Fall Damage
+A.Innate_Absorbing_Skyshard			= GetString(SI_LUIE_SKILL_ABSORBING_SKYSHARD) -- Absorbing Skyshard
+A.Innate_Receiving_Boon				= GetString(SI_LUIE_SKILL_RECEIVING_BOON) -- Receiving Boon
+A.Innate_Ayleid_Well				= GetString(SI_LUIE_SKILL_AYLEID_WELL) -- Ayleid Well
+A.Innate_CC_Immunity                = 38117 -- CC Immunity
+A.Innate_Stagger					= 1834 -- Stagger
+
+-- World
+A.Innate_Drop_Anchor				= 86717 -- Drop Anchor
+A.Innate_Anchor_Drop				= GetString(SI_LUIE_SKILL_ANCHOR_DROP) -- Anchor Drop
+A.Innate_Power_of_the_Daedra		= 46690 -- Power of the Daedra
+
+-- Weapon Attacks
+A.Skill_Light_Attack                = 23604 -- Light Attack
+A.Skill_Medium_Attack				= 39097 -- Medium Attack
+A.Skill_Heavy_Attack                = 18431 -- Heavy Attack
+A.Skill_Heavy_Attack_Dual_Wield     = 16420 -- Heavy Attack (Dual Wield)
+A.Skill_Heavy_Attack_Werewolf       = 32480 -- Heavy Attack Werewolf
+A.Skill_Heavy_Attack_Shock			= 18396 -- Heavy Attack (Shock)
+
+-- ---------------------------------------------------
+-- CHAMPION ABILITIES --------------------------------
+-- ---------------------------------------------------
+
+A.Champion_Vengeance				= 63151
+
+-- ---------------------------------------------------
+-- NPC BASIC -----------------------------------------
+-- ---------------------------------------------------
+
+A.Skill_Hamstring					= 70068 -- Hamstring
+
+-- ---------------------------------------------------
 -- WEAPONS -------------------------------------------
 -- ---------------------------------------------------
 
@@ -165,7 +211,7 @@ A.Skill_Circle_of_Protection     = 35737
 A.Skill_Turn_Undead              = 40181
 A.Skill_Ring_of_Preservation     = 40169
 A.Skill_Trap_Beast               = 35750
-A.Skill_Rearming_Tra             = 42747
+A.Skill_Rearming_Trap            = 42747
 A.Skill_Lightweight_Beast_Trap   = 40372
 
 -- MAGES GUILD --------------
@@ -508,11 +554,6 @@ A.Skill_Restoring_Focus          = 22237
 -- TOGGLED EFFECTS -----------------------------------
 -- ---------------------------------------------------
 
-A.Toggled_Hidden                    = 20309 -- Hidden (Innate)
-A.Toggled_Disguised                 = GetString(SI_DISGUISE_DISGUISED)
-A.Toggled_Brace_Generic             = 14890 -- Block (Innate)
-A.Toggled_Sprint                    = 973   -- Sprint (Innate)
-A.Toggled_Mount_Sprint              = "Gallop" -- Mount Sprint (Generic) (Innate) -- NOTE: Renamed to Gallop in fake buffs
 A.Toggled_Leeching_Strikes          = 36908 -- Leeching Strikes (Nightblade)
 A.Toggled_Unstable_Familiar         = 23304 -- Summon Unstable Familiar (Sorcerer)
 A.Toggled_Unstable_Clannfear        = 23319 -- Summon Unstable Clannfear (Sorcerer)
@@ -631,13 +672,6 @@ A.Equip_Para_Bellum                 = 71193
 -- OTHER EFFECTS -------------------------------------
 -- ---------------------------------------------------
 
-A.Effect_Hidden                     = 20309
-A.Effect_CC_Immunity                = 38117
-A.Skill_Light_Attack                = 7880
-A.Skill_Heavy_Attack                = 7095
-A.Skill_Heavy_Attack_Dual_Wield     = 16420
-A.Skill_Heavy_Attack_Bow            = 16691
-A.Skill_Heavy_Attack_Werewolf       = 32480
 A.Skill_Overload_Light_Attack       = 24792
 A.Skill_Overload_Heavy_Attack       = 24794
 A.Skill_Familiar_Melee              = 27850

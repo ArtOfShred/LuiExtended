@@ -3,12 +3,13 @@
 LUIE.DeathRecap = {}
 
 local DR = LUIE.DeathRecap
+local A = LUIE.GetAbility()
 
 -- Player ability death recaps, these all use Name + Icon detection for replacement
 DR.DeathRecapPlayerBasic = {
     
     -- BASIC
-    ['Bash'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_bash.dds' }, -- Bash (Innate)
+    [A.Innate_Bash] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_bash.dds' }, -- Bash (Innate)
     
     -- CHAMPION
     ['Riposte'] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_riposte.dds'}, -- Riposte (Champion)
@@ -185,7 +186,7 @@ DR.DeathRecapPlayerPet = {
 DR.DeathRecapBasicOverride = {
 
     -- PLAYER BASIC
-    ['Fall Damage'] =           { icon = 'LuiExtended/media/icons/abilities/ability_innate_fall_snare.dds' }, -- Fall Snare
+    [A.Innate_Fall_Damage] =           { icon = 'LuiExtended/media/icons/abilities/ability_innate_fall_snare.dds' }, -- Fall Snare
     
     -- STATUS EFFECTS
     ['Burning'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_burning.dds' }, -- Burning (Fire Status Effect)
@@ -195,7 +196,7 @@ DR.DeathRecapBasicOverride = {
     ['Concussion'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_concussion.dds' }, -- Concussion (Shock Status Effect)
     
     -- WORLD EVENTS
-    ['Drop Anchor'] =           { icon = 'LuiExtended/media/icons/abilities/ability_innate_anchor_drop.dds', name = 'Anchor Drop' }, -- Drop Anchor
+    [A.Innate_Drop_Anchor] =           { icon = 'LuiExtended/media/icons/abilities/ability_innate_anchor_drop.dds', name = 'Anchor Drop' }, -- Drop Anchor
 
     -- JUSTICE NPCS
     ['Heavy Blow'] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_heavy_blow.dds', name = 'Heavy Blow' }, -- Heavy Blow (Justice Guard)

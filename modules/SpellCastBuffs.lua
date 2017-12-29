@@ -154,9 +154,9 @@ local g_longVertAlign = MIDDLE
 local g_horizSortInvert = false
 
 -- Some optimization
-local strHidden     =   A.Effect_Hidden
-local strBossImmunity = A.Effect_CC_Immunity
-local strDisguise   =   GetString(SI_DISGUISE_DISGUISED)
+local strHidden     =   A.Innate_Hidden
+local strBossImmunity = A.Innate_CC_Immunity
+local strDisguise   =   A.Innate_Disguised
 local strMounted    =   GetString(SI_LUIE_SCB_MOUNTED)
 local iconMounted   =   "LuiExtended/media/icons/mounts/mount_palomino_horse.dds"
 
@@ -329,10 +329,12 @@ local Effects = {
     -----------------------------------
 
     -- Fighter Guild
-    --[A.Skill_Trap_Beast]          = { 0, 28.8, 3.5, false }, -- FIXME: check duration on r4, add other 2 skills
-    [A.Skill_Circle_of_Protection]  = { true, false, false, nil },
-    [A.Skill_Turn_Undead]           = { true, false, false, nil },
-    [A.Skill_Ring_of_Preservation]  = { true, false, false, nil },
+    [A.Skill_Trap_Beast]          		= { false, false, 60, 1.5 },
+    [A.Skill_Rearming_Trap]         	= { false, false, 60, 1.5 },
+    [A.Skill_Lightweight_Beast_Trap]	= { false, false, 60, 1.5 },
+    [A.Skill_Circle_of_Protection]  	= { true, false, false, nil },
+    [A.Skill_Turn_Undead]           	= { true, false, false, nil },
+    [A.Skill_Ring_of_Preservation]  	= { true, false, false, nil },
 
     -- Mages Guild
     [A.Skill_Meteor]                = { false, false, 11.8, 0 },
@@ -1452,7 +1454,7 @@ function SCB.InitializeDisguise()
             return
         end
 
-        local name = E.DisguiseIcons[g_currentDisguise].name
+        local name = GetItemName(0, 10)
         local icon = E.DisguiseIcons[g_currentDisguise].icon
         g_effectsList.player1["DisguiseType"] = {
             target="player", type=1,
@@ -1478,7 +1480,7 @@ function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory
                 return
             end
 
-            local name = E.DisguiseIcons[g_currentDisguise].name
+            local name = GetItemName(0, 10)
             local icon = E.DisguiseIcons[g_currentDisguise].icon
             g_effectsList.player1["DisguiseType"] =
                 {
@@ -2234,12 +2236,12 @@ end
 -- List of all damage results for analysis in following function
  -- This also includes SHIELDED result that is not included in CI module
 local IsResultDamage = {
-    [ACTION_RESULT_DAMAGE]          = true,
-    [ACTION_RESULT_BLOCKED_DAMAGE]  = true,
-    [ACTION_RESULT_DAMAGE_SHIELDED] = true,
-    [ACTION_RESULT_CRITICAL_DAMAGE] = true,
-    [ACTION_RESULT_DOT_TICK]        = true,
-    [ACTION_RESULT_DOT_TICK_CRITICAL]= true,
+    [ACTION_RESULT_DAMAGE]          	= true,
+    [ACTION_RESULT_BLOCKED_DAMAGE]  	= true,
+    [ACTION_RESULT_DAMAGE_SHIELDED] 	= true,
+    [ACTION_RESULT_CRITICAL_DAMAGE] 	= true,
+    [ACTION_RESULT_DOT_TICK]        	= true,
+    [ACTION_RESULT_DOT_TICK_CRITICAL]	= true,
 }
 
 --[[
@@ -2255,10 +2257,12 @@ function SCB.OnCombatEvent( eventCode, result, isError, abilityName, abilityGrap
     end
 
     -- Try to remove effect like Ground Runes and Traps
-    if E.IsGroundMine[abilityName] and IsResultDamage[result]
-        and ( targetType == COMBAT_UNIT_TYPE_NONE or targetType == COMBAT_UNIT_TYPE_OTHER)
-        then
-        g_effectsList.ground[ abilityName ] = nil
+    if E.IsGroundMine[abilityName] and IsResultDamage[result] and ( targetType == COMBAT_UNIT_TYPE_NONE or targetType == COMBAT_UNIT_TYPE_OTHER) then
+		for k, v in pairs(g_effectsList.ground) do
+			if v.name == abilityName then 
+				g_effectsList.ground[ k ] = nil
+			end
+		end
     end
     
     local unbreakable = 0
