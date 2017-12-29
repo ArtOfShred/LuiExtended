@@ -1,4 +1,4 @@
-local strformat = zo_strformat
+local strformat	= zo_strformat
 
 -- Create Settings Menu
 function LUIE_CreateSettings()
@@ -545,7 +545,7 @@ function LUIE_CreateSettings()
     -- Show GCD on Quickslot
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_QUICK)),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_QUICK)),
         tooltip = GetString(SI_LUIE_LAM_CI_GCD_QUICK_TP),
         getFunc = function() return LUIE.CombatInfo.SV.GlobalPotion end,
         setFunc = function(value) LUIE.CombatInfo.SV.GlobalPotion = value end,
@@ -556,7 +556,7 @@ function LUIE_CreateSettings()
     -- Show GCD Ready Flash
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_FLASH)),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_FLASH)),
         tooltip = GetString(SI_LUIE_LAM_CI_GCD_FLASH_TP),
         getFunc = function() return LUIE.CombatInfo.SV.GlobalFlash end,
         setFunc = function(value) LUIE.CombatInfo.SV.GlobalFlash = value end,
@@ -567,7 +567,7 @@ function LUIE_CreateSettings()
     -- GCD - Desaturate Icons on GCD
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_DESAT)),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_DESAT)),
         tooltip = GetString(SI_LUIE_LAM_CI_GCD_DESAT_TP),
         getFunc = function() return LUIE.CombatInfo.SV.GlobalDesat end,
         setFunc = function(value) LUIE.CombatInfo.SV.GlobalDesat = value end,
@@ -578,7 +578,7 @@ function LUIE_CreateSettings()
     -- GCD - Color Slot Label Red
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_COLOR)),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_COLOR)),
         tooltip = GetString(SI_LUIE_LAM_CI_GCD_COLOR_TP),
         getFunc = function() return LUIE.CombatInfo.SV.GlobalLabelColor end,
         setFunc = function(value) LUIE.CombatInfo.SV.GlobalLabelColor = value end,
@@ -589,7 +589,7 @@ function LUIE_CreateSettings()
     -- GCD - Animation Method
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "dropdown",
-        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_ANIMATION)),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_ANIMATION)),
         tooltip = GetString(SI_LUIE_LAM_CI_GCD_ANIMATION_TP),
         choices = globalMethodOptions,
         getFunc = function() return globalMethodOptions[LUIE.CombatInfo.SV.GlobalMethod] end,
@@ -617,7 +617,7 @@ function LUIE_CreateSettings()
     }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL)),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL)),
         tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL_TP),
         getFunc = function() return LUIE.CombatInfo.SV.UltimateHideFull end,
         setFunc = function(value) LUIE.CombatInfo.SV.UltimateHideFull = value LUIE.CombatInfo.OnSlotsFullUpdate(nil) end,
@@ -666,7 +666,7 @@ function LUIE_CreateSettings()
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         -- SHOW LABEL ON BAR HIGHLIGHT
         type = "checkbox",
-        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_LABEL)),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_LABEL)),
         tooltip = GetString(SI_LUIE_LAM_CI_BAR_LABEL_TP),
         getFunc = function() return LUIE.CombatInfo.SV.BarShowLabel end,
         setFunc = function(value) LUIE.CombatInfo.SV.BarShowLabel = value LUIE.CombatInfo.ResetBarLabel() end,
@@ -677,7 +677,7 @@ function LUIE_CreateSettings()
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "slider",
-        name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
+        name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
         tooltip = GetString(SI_LUIE_LAM_CI_SHARED_POSITION_TP),
         min = -72, max = 40, step = 2,
         getFunc = function() return LUIE.CombatInfo.SV.BarLabelPosition end,
@@ -690,7 +690,7 @@ function LUIE_CreateSettings()
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "dropdown",
         scrollable = true,
-        name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
+        name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
         tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONT_TP),
         choices = FontsList,
         sort = "name-up",
@@ -702,7 +702,7 @@ function LUIE_CreateSettings()
     }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "slider",
-        name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
+        name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
         tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSIZE_TP),
         min = 10, max = 30, step = 1,
         getFunc = function() return LUIE.CombatInfo.SV.BarFontSize end,
@@ -713,7 +713,7 @@ function LUIE_CreateSettings()
     }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "dropdown",
-        name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
+        name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
         tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSTYLE_TP),
         choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
         sort = "name-up",
@@ -726,7 +726,7 @@ function LUIE_CreateSettings()
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = zo_strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
+        name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
         tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
         getFunc = function() return LUIE.CombatInfo.SV.BarMiilis end,
         setFunc = function(value) LUIE.CombatInfo.SV.BarMiilis = value end,
@@ -754,7 +754,7 @@ function LUIE_CreateSettings()
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "slider",
-        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
         tooltip = GetString(SI_LUIE_LAM_CI_SHARED_POSITION_TP),
         min = -72, max = 40, step = 2,
         getFunc = function() return LUIE.CombatInfo.SV.PotionTimerLabelPosition end,
@@ -767,7 +767,7 @@ function LUIE_CreateSettings()
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "dropdown",
         scrollable = true,
-        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
         tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONT_TP),
         choices = FontsList,
         sort = "name-up",
@@ -779,7 +779,7 @@ function LUIE_CreateSettings()
     }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "slider",
-        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
         tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSIZE_TP),
         min = 10, max = 30, step = 1,
         getFunc = function() return LUIE.CombatInfo.SV.PotionTimerFontSize end,
@@ -790,7 +790,7 @@ function LUIE_CreateSettings()
     }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "dropdown",
-        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
         tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSTYLE_TP),
         choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
         sort = "name-up",
@@ -803,7 +803,7 @@ function LUIE_CreateSettings()
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_POTION_COLOR)),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_POTION_COLOR)),
         tooltip = GetString(SI_LUIE_LAM_CI_POTION_COLOR_TP),
         getFunc = function() return LUIE.CombatInfo.SV.PotionTimerColor end,
         setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerColor = value end,
@@ -814,7 +814,7 @@ function LUIE_CreateSettings()
     
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
         tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
         getFunc = function() return LUIE.CombatInfo.SV.PotionTimerMillis end,
         setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerMillis = value end,
@@ -886,7 +886,7 @@ function LUIE_CreateSettings()
             }
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERBUFF)),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERBUFF_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.HidePlayerBuffs end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HidePlayerBuffs = value end,
@@ -896,7 +896,7 @@ function LUIE_CreateSettings()
             }
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERDEBUFF)),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERDEBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERDEBUFF_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.HidePlayerDebuffs end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HidePlayerDebuffs = value end,
@@ -906,7 +906,7 @@ function LUIE_CreateSettings()
             }
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF)),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.HideTargetBuffs end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HideTargetBuffs = value end,
@@ -916,7 +916,7 @@ function LUIE_CreateSettings()
             }
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF)),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.HideTargetDebuffs end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HideTargetDebuffs = value end,
@@ -926,7 +926,7 @@ function LUIE_CreateSettings()
             }
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF)),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.HideGroundEffects end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HideGroundEffects = value end,
@@ -965,7 +965,7 @@ function LUIE_CreateSettings()
             -- Buff Label Position
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_LABEL_POSITION_TP),
                 min = -64, max = 64, step = 2,
                 getFunc = function() return LUIE.SpellCastBuffs.SV.LabelPosition end,
@@ -978,7 +978,7 @@ function LUIE_CreateSettings()
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "dropdown",
                 scrollable = true,
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_FONT_TP),
                 choices = FontsList,
                 sort = "name-up",
@@ -991,7 +991,7 @@ function LUIE_CreateSettings()
             -- Buff Font Size
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "slider",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_FONTSIZE_TP),
                 min = 10, max = 30, step = 1,
                 getFunc = function() return LUIE.SpellCastBuffs.SV.BuffFontSize end,
@@ -1003,7 +1003,7 @@ function LUIE_CreateSettings()
             -- Buff Font Style
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_FONTSTYLE_TP),
                 choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
                 sort = "name-up",
@@ -1016,7 +1016,7 @@ function LUIE_CreateSettings()
             -- Buff Colored Label
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_POTION_COLOR)),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_POTION_COLOR)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_LABELCOLOR_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.RemainingTextColoured end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.RemainingTextColoured = value LUIE.SpellCastBuffs.Reset() end,
@@ -1027,7 +1027,7 @@ function LUIE_CreateSettings()
             -- Buff Show Seconds Fractions
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.RemainingTextMillis end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.RemainingTextMillis = value end,
@@ -1131,7 +1131,7 @@ function LUIE_CreateSettings()
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 -- Container orientation
                 type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER)),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_CONTAINER_TP),
                 choices = rotationOptions,
                 getFunc = function() return rotationOptions[LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment] end,
@@ -1144,7 +1144,7 @@ function LUIE_CreateSettings()
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 -- Vertical Long Term Icons Alignment
                 type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_VERT)),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_VERT)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VERT_TP),
                 choices = { "Top", "Middle", "Bottom" },
                 getFunc = function() return LUIE.SpellCastBuffs.SV.AlignmentLongVert end,
@@ -1157,7 +1157,7 @@ function LUIE_CreateSettings()
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 -- Horizontal Long Term Icons Alignment
                 type = "dropdown",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_HORIZ)),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_HORIZ)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_HORIZ_TP),
                 choices = { "Left", "Centered", "Right" },
                 getFunc = function() return LUIE.SpellCastBuffs.SV.AlignmentLongHorz end,
@@ -1169,7 +1169,7 @@ function LUIE_CreateSettings()
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 -- LONG TERM REVERSE SORT ORDER
                 type = "checkbox",
-                name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_REVERSE_ORDER)),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_REVERSE_ORDER)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_REVERSE_ORDER_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.LongTermEffectsReverse end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.LongTermEffectsReverse = value LUIE.SpellCastBuffs.Reset() end,
@@ -6862,7 +6862,7 @@ function LUIE_CreateSettings()
     -- Hide Player Magicka Bar
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR)),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR)),
         tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR_TP),
         getFunc = function() return LUIE.UnitFrames.SV.HideBarMagicka end,
         setFunc = function(value) LUIE.UnitFrames.SV.HideBarMagicka = value end,
@@ -6886,7 +6886,7 @@ function LUIE_CreateSettings()
     -- Hide Player Stamina Bar
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR)),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR)),
         tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR_TP),
         getFunc = function() return LUIE.UnitFrames.SV.HideBarStamina end,
         setFunc = function(value) LUIE.UnitFrames.SV.HideBarStamina = value end,
@@ -6977,7 +6977,7 @@ function LUIE_CreateSettings()
     -- Champion XP Bar Point-Type Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "checkbox",
-        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR)),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR)),
         tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_XPCPBARCOLOR_TP),
         getFunc = function() return LUIE.UnitFrames.SV.PlayerChampionColour end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerChampionColour = value LUIE.UnitFrames.OnChampionPointGained() end,
@@ -7714,7 +7714,7 @@ function LUIE_CreateSettings()
     -- Interactible Reticle Colour
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
-        name = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_COMMON_RETICLECOLORINTERACT)),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_COMMON_RETICLECOLORINTERACT)),
         getFunc = function() return unpack(LUIE.UnitFrames.SV.ReticleColour_Interact) end,
         setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.ReticleColour_Interact={r,g,b} end,
         width = "full",
@@ -8193,7 +8193,7 @@ function LUIE_CreateSettings()
                 },
                 {--EXECUTE THRESHOLD SLIDER
                     type    = "slider",
-                    name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD)),
+                    name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD)),
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFIACTION_EXECUTE_THRESHOLD_TP),
                     min     = 10,
                     max     = 50,
@@ -8204,7 +8204,7 @@ function LUIE_CreateSettings()
                 },
                 {--EXECUTE FREQUENCY SLIDER
                     type    = "slider",
-                    name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY)),
+                    name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY)),
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY_TP),
                     min     = 1,
                     max     = 20,
@@ -8237,7 +8237,7 @@ function LUIE_CreateSettings()
                 
                 {--MITIGATION FORMAT
                     type    = "dropdown",
-                    name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD)),
+                    name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD)),
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD_TP),
                     choices = LUIE.CombatTextConstants.mitigationType,
                     getFunc = function() return LUIE.CombatText.SV.toggles.mitigationType end,
@@ -8248,7 +8248,7 @@ function LUIE_CreateSettings()
                 
                 {--MITIGATION FORMAT
                     type    = "editbox",
-                    name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT)),
+                    name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT)),
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.mitigationFormat end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationFormat = v end,
@@ -8258,7 +8258,7 @@ function LUIE_CreateSettings()
                 
                 {--MITIGATION SUFFIX
                     type    = "editbox",
-                    name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX)),
+                    name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX)),
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.mitigationSuffix end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationSuffix = v end,
@@ -8268,7 +8268,7 @@ function LUIE_CreateSettings()
                 
                 {--MITIGATION RANK 3
                     type    = "checkbox",
-                    name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK3)),
+                    name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK3)),
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK3_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.mitigationRank3 end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationRank3 = v end,
@@ -8277,7 +8277,7 @@ function LUIE_CreateSettings()
                 },
                 {--MITIGATION RANK 2
                     type    = "checkbox",
-                    name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK2)),
+                    name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK2)),
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK2_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.mitigationRank2 end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationRank2 = v end,
@@ -8286,7 +8286,7 @@ function LUIE_CreateSettings()
                 },
                 {--MITIGATION RANK 1
                     type    = "checkbox",
-                    name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK1)),
+                    name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK1)),
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK1_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.mitigationRank1 end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationRank1 = v end,
@@ -8295,7 +8295,7 @@ function LUIE_CreateSettings()
                 },
                 {--MITIGATION DUNGEON
                     type    = "checkbox",
-                    name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON)),
+                    name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON)),
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.mitigationDungeon end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationDungeon = v end,
@@ -8305,7 +8305,7 @@ function LUIE_CreateSettings()
                 
                 {--BLOCK
                     type    = "checkbox",
-                    name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK)),
+                    name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_ALERT_BLOCK)),
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_BLOCK_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.showAlertBlock end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertBlock = v end,
@@ -8314,7 +8314,7 @@ function LUIE_CreateSettings()
                 },
                 {--DODGE
                     type    = "checkbox",
-                    name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DODGE)),
+                    name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DODGE)),
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DODGE_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.showAlertDodge end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertDodge = v end,
@@ -8323,7 +8323,7 @@ function LUIE_CreateSettings()
                 },
                 {--AVOID
                     type    = "checkbox",
-                    name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_ALERT_AVOID)),
+                    name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_ALERT_AVOID)),
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_AVOID_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.showAlertAvoid end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertAvoid = v end,
@@ -8332,7 +8332,7 @@ function LUIE_CreateSettings()
                 },
                 {--INTERRUPT
                     type    = "checkbox",
-                    name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_ALERT_INTERRUPT)),
+                    name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_ALERT_INTERRUPT)),
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_INTERRUPT_TP),
                     getFunc = function() return LUIE.CombatText.SV.toggles.showAlertInterrupt end,
                     setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertInterrupt = v end,
@@ -8382,7 +8382,7 @@ function LUIE_CreateSettings()
                 },
                 {--LOW HEALTH WARNING THRESHOLD SLIDER
                     type    = "slider",
-                    name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH)),
+                    name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH)),
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH_TP),
                     min     = 15,
                     max     = 50,
@@ -8402,7 +8402,7 @@ function LUIE_CreateSettings()
                 },
                 {--LOW MAGICKA WARNING THRESHOLD SLIDER
                     type    = "slider",
-                    name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA)),
+                    name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA)),
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_MAGICKA_TP),
                     min     = 15,
                     max     = 50,
@@ -8422,7 +8422,7 @@ function LUIE_CreateSettings()
                 },
                 {--LOW STAMINA WARNING THRESHOLD SLIDER
                     type    = "slider",
-                    name    = zo_strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA)),
+                    name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA)),
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_WARNING_STAMINA_TP),
                     min     = 15,
                     max     = 50,

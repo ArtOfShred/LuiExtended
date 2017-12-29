@@ -7,11 +7,9 @@ local CI            = LUIE.CombatInfo
 local UI            = LUIE.UI
 local E             = LUIE.Effects
 local A             = LUIE.GetAbility()
-local printToChat   = LUIE.PrintToChat
---local DelayBuffer   = LUIE.DelayBuffer
-local strfmt        = string.format
-local strformat     = zo_strformat
-
+local strfmt		= string.format
+local strformat	    = zo_strformat
+local pairs 		= pairs
 
 local moduleName    = LUIE.name .. "_CombatInfo"
 
@@ -404,7 +402,7 @@ function CI.ApplyFont()
     -- Setup Bar Font
     local barFontName = LUIE.Fonts[CI.SV.BarFontFace]
         if not barFontName or barFontName == "" then
-        printToChat(GetString(SI_LUIE_SCB_ERROR_FONT))
+        LUIE.PrintToChat(GetString(SI_LUIE_SCB_ERROR_FONT))
         barfontName = "$(MEDIUM_FONT)"
     end
     
@@ -424,7 +422,7 @@ function CI.ApplyFont()
     -- Setup Potion Timer Font
     local potionFontName = LUIE.Fonts[CI.SV.PotionTimerFontFace]
         if not potionFontName or potionFontName == "" then
-        printToChat(GetString(SI_LUIE_SCB_ERROR_FONT))
+        LUIE.PrintToChat(GetString(SI_LUIE_SCB_ERROR_FONT))
         potionFontName = "$(MEDIUM_FONT)"
     end
     

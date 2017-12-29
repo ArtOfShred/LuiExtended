@@ -6,9 +6,10 @@ LUIE.ChatAnnouncements = {}
 local CA             = LUIE.ChatAnnouncements
 local E              = LUIE.Effects
 local printToChat    = LUIE.PrintToChat
-local strfmt         = string.format
-local strformat      = zo_strformat
-local gsub           = string.gsub
+local strfmt		 = string.format
+local strformat	     = zo_strformat
+local gsub			 = gsub
+local pairs 		 = pairs
 
 local moduleName     = LUIE.name .. "_ChatAnnouncements"
 CA.Enabled = false
@@ -461,7 +462,7 @@ CA.D = {
 -- Basic
 local g_playerName                  = nil
 local g_playerNameFormatted         = nil
-local g_playerDisplayName           = nil
+local g_playerDisplayNameFormatted  = nil
 local g_activatedFirstLoad          = true
 
 -- Message Printer
@@ -741,7 +742,7 @@ function CA.Initialize(enabled)
     -- Read current player name and get current group leader
     g_playerName = GetRawUnitName("player")
     g_playerNameFormatted = strformat(SI_UNIT_NAME, GetUnitName("player"))
-    g_playerDisplayName = strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
+    g_playerDisplayNameFormatted = strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
     currentGroupLeaderRawName = GetRawUnitName(GetGroupLeaderUnitTag())
     currentGroupLeaderDisplayName = GetUnitDisplayName(GetGroupLeaderUnitTag())
     
@@ -1145,7 +1146,7 @@ function CA.GuildHeraldrySaved()
 
         local guildAlliance = GetGuildAlliance(id)
         local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-        local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+        local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
         local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
         if CA.SV.Social.GuildManageCA then
@@ -1166,7 +1167,7 @@ function CA.GuildRanksSaved(eventCode, guildId)
 
     local guildAlliance = GetGuildAlliance(guildId)
     local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
     local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
     if CA.SV.Social.GuildManageCA then
@@ -1198,9 +1199,9 @@ function CA.GuildRankSaved(eventCode, guildId, rankIndex)
     local guildName = GetGuildName(guildId)
     local guildAlliance = GetGuildAlliance(guildId)
     local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
     local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
-    local rankSyntax = CA.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
+    local rankSyntax = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
     local rankSyntaxAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankName) or rankName
 
     if CA.SV.Social.GuildManageCA then
@@ -1218,7 +1219,7 @@ function CA.GuildTextChanged(eventCode, guildId)
 
     local guildAlliance = GetGuildAlliance(guildId)
     local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
     local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
     -- Depending on event code set message context.
     local messageString = eventCode == EVENT_GUILD_DESCRIPTION_CHANGED and SI_LUIE_CA_GUILD_DESCRIPTION_CHANGED or EVENT_GUILD_MOTD_CHANGED and SI_LUIE_CA_GUILD_MOTD_CHANGED or nil
@@ -1242,7 +1243,7 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
     local hasPermission1 = DoesGuildRankHavePermission(guildId, currentRank, GUILD_PERMISSION_PROMOTE)
     local hasPermission2 = DoesGuildRankHavePermission(guildId, currentRank, GUILD_PERMISSION_DEMOTE)
 
-    if ((hasPermission1 or hasPermission2) and DisplayName ~= g_playerDisplayName and CA.SV.Social.GuildRankDisplayOptions == 2) or (CA.SV.Social.GuildRankDisplayOptions == 3 and DisplayName ~= g_playerDisplayName) then
+    if ((hasPermission1 or hasPermission2) and DisplayName ~= g_playerDisplayNameFormatted and CA.SV.Social.GuildRankDisplayOptions == 2) or (CA.SV.Social.GuildRankDisplayOptions == 3 and DisplayName ~= g_playerDisplayNameFormatted) then
         local displayNameLink
         if CA.SV.BracketOptionCharacter == 1 then
             displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(DisplayName, nil, DISPLAY_NAME_LINK_TYPE, DisplayName)
@@ -1270,9 +1271,9 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
 
             local guildAlliance = GetGuildAlliance(id)
             local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-            local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+            local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
             local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
-            local rankSyntax = CA.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
+            local rankSyntax = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
             local rankSyntaxAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankName) or rankName
 
             if guildName == name then
@@ -1287,7 +1288,7 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
         end
     end
 
-    if DisplayName == g_playerDisplayName then
+    if DisplayName == g_playerDisplayNameFormatted then
         local rankName
         local rankNameDefault = GetDefaultGuildRankName(guildId, newRank)
         local rankNameCustom = GetGuildRankCustomName(guildId, newRank)
@@ -1318,9 +1319,9 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
 
             local guildAlliance = GetGuildAlliance(id)
             local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-            local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+            local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
             local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
-            local rankSyntax = CA.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
+            local rankSyntax = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
             local rankSyntaxAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankName) or rankName
 
             if guildName == name then
@@ -1345,7 +1346,7 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
 
         local guildAlliance = GetGuildAlliance(id)
         local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-        local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+        local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
         local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
         if guildName == name then
@@ -1380,7 +1381,7 @@ function CA.GuildInviteAdded(eventCode, guildId, guildName, guildAlliance, invit
         displayNameLink = ZO_LinkHandler_CreateLink(inviterName, nil, DISPLAY_NAME_LINK_TYPE, inviterName)
     end
     local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
     local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
     if CA.SV.Social.GuildCA then
         printToChat(strformat(GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST), displayNameLink, guildNameAlliance))
@@ -1443,10 +1444,10 @@ function CA.IgnoreAdded(eventCode, displayName)
         else
             displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
         end
-        printToChat(zo_strformat(SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED, displayNameLink))
+        printToChat(strformat(SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED, displayNameLink))
     end
     if CA.SV.Social.FriendIgnoreAlert then
-        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED, displayName))
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED, displayName))
     end
 end
 
@@ -1458,10 +1459,10 @@ function CA.IgnoreRemoved(eventCode, displayName)
         else
             displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
         end
-        printToChat(zo_strformat(SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED, displayNameLink))
+        printToChat(strformat(SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED, displayNameLink))
     end
     if CA.SV.Social.FriendIgnoreAlert then
-        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED, displayName))
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED, displayName))
     end
 end
 
@@ -1483,19 +1484,19 @@ function CA.FriendPlayerStatus(eventCode, displayName, characterName, oldStatus,
         end
         if isOnline then
             if characterName ~= "" then
-                chatText = zo_strformat(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_ON, displayNameLink, characterNameLink)
-                alertText = zo_strformat(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_ON, displayName, characterName)
+                chatText = strformat(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_ON, displayNameLink, characterNameLink)
+                alertText = strformat(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_ON, displayName, characterName)
             else
-                chatText = zo_strformat(SI_LUIE_CA_FRIENDS_LIST_LOGGED_ON, displayNameLink)
-                alertText = zo_strformat(SI_LUIE_CA_FRIENDS_LIST_LOGGED_ON, displayName)
+                chatText = strformat(SI_LUIE_CA_FRIENDS_LIST_LOGGED_ON, displayNameLink)
+                alertText = strformat(SI_LUIE_CA_FRIENDS_LIST_LOGGED_ON, displayName)
             end
         else
             if characterName ~= "" then
-                chatText = zo_strformat(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_OFF, displayNameLink, characterNameLink)
-                alertText = zo_strformat(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_OFF, displayName, characterName)
+                chatText = strformat(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_OFF, displayNameLink, characterNameLink)
+                alertText = strformat(SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_OFF, displayName, characterName)
             else
-                chatText = zo_strformat(SI_LUIE_CA_FRIENDS_LIST_LOGGED_OFF, displayNameLink)
-                alertText = zo_strformat(SI_LUIE_CA_FRIENDS_LIST_LOGGED_OFF, displayName)
+                chatText = strformat(SI_LUIE_CA_FRIENDS_LIST_LOGGED_OFF, displayNameLink)
+                alertText = strformat(SI_LUIE_CA_FRIENDS_LIST_LOGGED_OFF, displayName)
             end
         end
         
@@ -1626,8 +1627,8 @@ function CA.ReadyCheckUpdate(eventCode)
         local message
         local alertText
         if playerRole ~= 0 then
-            local roleIconSmall = zo_strformat("<<1>> ", zo_iconFormat(GetRoleIcon(playerRole), 16, 16)) or ""
-            local roleIconLarge =zo_strformat("<<1>> ", zo_iconFormat(GetRoleIcon(playerRole), "100%", "100%")) or ""
+            local roleIconSmall = strformat("<<1>> ", zo_iconFormat(GetRoleIcon(playerRole), 16, 16)) or ""
+            local roleIconLarge =strformat("<<1>> ", zo_iconFormat(GetRoleIcon(playerRole), "100%", "100%")) or ""
             local roleString = GetString("SI_LFGROLE", playerRole)
             message = strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE), activityName, roleIconSmall, roleString )
             alertText = strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE), activityName, roleIconLarge, roleString )
@@ -2331,14 +2332,14 @@ end
 function CA.StorageBag(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
     if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
         if CA.SV.Notify.StorageBagCA then
-            local formattedString = StorageBagColorize:Colorize(zo_strformat(SI_INVENTORY_BAG_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
+            local formattedString = StorageBagColorize:Colorize(strformat(SI_INVENTORY_BAG_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
 
         if CA.SV.Notify.StorageBagAlert then
-            local text = zo_strformat(SI_LUIE_CA_STORAGE_BAG_UPGRADE)
+            local text = strformat(SI_LUIE_CA_STORAGE_BAG_UPGRADE)
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
         end
     end
@@ -2347,14 +2348,14 @@ end
 function CA.StorageBank(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
     if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
         if CA.SV.Notify.StorageBagCA then
-            local formattedString = StorageBagColorize:Colorize(zo_strformat(SI_INVENTORY_BANK_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
+            local formattedString = StorageBagColorize:Colorize(strformat(SI_INVENTORY_BANK_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
 
         if CA.SV.Notify.StorageBagAlert then
-            local text = zo_strformat(SI_LUIE_CA_STORAGE_BANK_UPGRADE)
+            local text = strformat(SI_LUIE_CA_STORAGE_BANK_UPGRADE)
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
         end
     end
@@ -2848,7 +2849,7 @@ function CA.OnAchievementUpdated(eventCode, id)
         end
         
         if CA.SV.Achievement.AchievementUpdateAlert then
-            local alertMessage = zo_strformat("<<1>>: <<2>>", CA.SV.Achievement.AchievementProgressMsg, name)
+            local alertMessage = strformat("<<1>>: <<2>>", CA.SV.Achievement.AchievementProgressMsg, name)
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
         end
         
@@ -3288,7 +3289,7 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
         local gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
         local logPrefix = CA.SV.Inventory.LootMessageGroup
         
-        local recipient = ZO_SELECTED_TEXT:Colorize(g_groupLootIndex[zo_strformat(SI_UNIT_NAME, receivedBy)])
+        local recipient = ZO_SELECTED_TEXT:Colorize(g_groupLootIndex[strformat(SI_UNIT_NAME, receivedBy)])
         
     end
 
@@ -3334,7 +3335,7 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
         if not CA.ItemFilter(itemType, itemId, itemLink, false) then return end
     end
     
-    local formattedIcon = (CA.SV.Inventory.LootIcons and icon ~= "") and zo_strformat("<<1>> ", zo_iconFormat(icon, 16, 16)) or ""
+    local formattedIcon = (CA.SV.Inventory.LootIcons and icon ~= "") and strformat("<<1>> ", zo_iconFormat(icon, 16, 16)) or ""
     local color
     if gainOrLoss == 1 then
         color = CurrencyUpColorize:ToHex()
@@ -3456,7 +3457,7 @@ function CA.ResolveItemMessage(message, formattedRecipient, color, logPrefix, to
     if not groupLoot then
         -- Adds additional string for previous variant of an item when an item is upgraded.
         if logPrefix == CA.SV.Inventory.LootMessageUpgrade and g_oldItem ~= nil and g_oldItem.itemLink ~= "" then
-            local formattedIcon = (CA.SV.Inventory.LootIcons and g_oldItem.icon ~= "") and zo_strformat("<<1>> ", zo_iconFormat(g_oldItem.icon, 16, 16)) or ""
+            local formattedIcon = (CA.SV.Inventory.LootIcons and g_oldItem.icon ~= "") and strformat("<<1>> ", zo_iconFormat(g_oldItem.icon, 16, 16)) or ""
             local formattedMessageUpgrade = ("|r" .. formattedIcon .. g_oldItem.itemLink .. "|c" .. color)
             formattedMessageP1 = ("|r" .. message .. "|c" .. color)
             formattedMessageP2 = strfmt(logPrefix, formattedMessageUpgrade, formattedMessageP1)
@@ -4531,7 +4532,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
                     local parts = {ZO_LinkHandler_ParseLink(itemLink)}
                     parts[22] = "1"
                     parts = table.concat(parts, ":"):sub(2, -1)
-                    itemLink = zo_strformat("|H<<1>>|h|h", parts)
+                    itemLink = strformat("|H<<1>>|h|h", parts)
                     
                     local formattedIcon = ( CA.SV.Inventory.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
                     local itemCount = stack > 1 and (" |cFFFFFFx" .. stack .. "|r") or "" 
@@ -4575,7 +4576,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
                     local parts = {ZO_LinkHandler_ParseLink(itemLink)}
                     parts[22] = "1"
                     parts = table.concat(parts, ":"):sub(2, -1)
-                    itemLink = zo_strformat("|H<<1>>|h|h", parts)
+                    itemLink = strformat("|H<<1>>|h|h", parts)
                     
                     local formattedIcon = ( CA.SV.Inventory.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
                     local itemCount = stack > 1 and (" |cFFFFFFx" .. stack .. "|r") or "" 
@@ -4624,7 +4625,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             local parts = {ZO_LinkHandler_ParseLink(itemLink)}
             parts[22] = "1"
             parts = table.concat(parts, ":"):sub(2, -1)
-            itemLink = zo_strformat("|H<<1>>|h|h", parts)
+            itemLink = strformat("|H<<1>>|h|h", parts)
             
             local formattedIcon = ( CA.SV.Inventory.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
             local itemCount = stackCountChange > 1 and (" |cFFFFFFx" .. stackCountChange .. "|r") or "" 
@@ -5073,7 +5074,7 @@ function CA.HookFunction()
 			end
 			
             if CA.SV.Notify.StorageRidingCA then
-                local formattedString = StorageRidingColorize:Colorize(zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
+                local formattedString = StorageRidingColorize:Colorize(strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
@@ -5081,7 +5082,7 @@ function CA.HookFunction()
             
             if CA.SV.Notify.StorageRidingCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
-                messageParams:SetText(GetString(SI_RIDING_SKILL_ANNOUCEMENT_BANNER), zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
+                messageParams:SetText(GetString(SI_RIDING_SKILL_ANNOUCEMENT_BANNER), strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RIDING_SKILL_IMPROVEMENT)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
@@ -5091,9 +5092,9 @@ function CA.HookFunction()
         if CA.SV.Notify.StorageRidingAlert then
             local text
             if source == RIDING_TRAIN_SOURCE_ITEM then
-                text = zo_strformat(SI_RIDING_SKILL_IMPROVEMENT_ALERT, GetString("SI_RIDINGTRAINTYPE", ridingSkill))
+                text = strformat(SI_RIDING_SKILL_IMPROVEMENT_ALERT, GetString("SI_RIDINGTRAINTYPE", ridingSkill))
             else
-                text = zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current)
+                text = strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current)
             end
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
         end
@@ -5375,18 +5376,18 @@ function CA.HookFunction()
             local message
             local alertMessage
             
-            if response == GROUP_INVITE_RESPONSE_ALREADY_GROUPED and (g_playerNameFormatted == characterName or g_playerDisplayName == displayName) then
-                message = zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_SELF_INVITE))
-                alertMessage = zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_SELF_INVITE))
+            if response == GROUP_INVITE_RESPONSE_ALREADY_GROUPED and (g_playerNameFormatted == characterName or g_playerDisplayNameFormatted == displayName) then
+                message = strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_SELF_INVITE))
+                alertMessage = strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_SELF_INVITE))
             elseif response == GROUP_INVITE_RESPONSE_ALREADY_GROUPED and (IsPlayerInGroup(characterName) or IsPlayerInGroup(displayName)) then
                 message = GetString(SI_GROUP_ALERT_INVITE_PLAYER_ALREADY_MEMBER)
                 alertMessage = GetString(SI_GROUP_ALERT_INVITE_PLAYER_ALREADY_MEMBER)
             elseif response == GROUP_INVITE_RESPONSE_IGNORED then
-                message = finalName ~= "" and zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalName) or GetString(SI_PLAYER_BUSY)
-                alertMessage = finalAlertName ~= "" and zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalAlertName) or GetString(SI_PLAYER_BUSY)
+                message = finalName ~= "" and strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalName) or GetString(SI_PLAYER_BUSY)
+                alertMessage = finalAlertName ~= "" and strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalAlertName) or GetString(SI_PLAYER_BUSY)
             else
-                message = finalName ~= "" and zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalName) or GetString(SI_PLAYER_BUSY)
-                alertMessage = finalAlertName ~= "" and zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalAlertName) or GetString(SI_PLAYER_BUSY)
+                message = finalName ~= "" and strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalName) or GetString(SI_PLAYER_BUSY)
+                alertMessage = finalAlertName ~= "" and strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalAlertName) or GetString(SI_PLAYER_BUSY)
             end
 
             if CA.SV.Group.GroupCA or response == GROUP_INVITE_RESPONSE_ALREADY_GROUPED or response == GROUP_INVITE_RESPONSE_IGNORED or response == GROUP_INVITE_RESPONSE_PLAYER_NOT_FOUND then
@@ -5468,8 +5469,8 @@ function CA.HookFunction()
             if isLeader and not isLocalPlayer then
                 useDefaultReasonText = true
             elseif isLeader and isLocalPlayer then
-                message = zo_strformat(SI_LUIE_GROUPDISBANDLEADER)
-                alert = zo_strformat(SI_LUIE_GROUPDISBANDLEADER)
+                message = strformat(SI_LUIE_GROUPDISBANDLEADER)
+                alert = strformat(SI_LUIE_GROUPDISBANDLEADER)
                 g_LFGJoinAntiSpam = false
                 zo_callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
             elseif isLocalPlayer then
@@ -5487,14 +5488,14 @@ function CA.HookFunction()
                     g_LFGJoinAntiSpam = false
                     zo_callLater(function() CA.CheckLFGStatusLeave(true) end , 100)
                     --
-                    message = zo_strformat(SI_GROUP_ELECTION_KICK_PLAYER_PASSED)
-                    alert = zo_strformat(SI_GROUP_ELECTION_KICK_PLAYER_PASSED)
+                    message = strformat(SI_GROUP_ELECTION_KICK_PLAYER_PASSED)
+                    alert = strformat(SI_GROUP_ELECTION_KICK_PLAYER_PASSED)
                 elseif hasValidNames then
                     --
                     zo_callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
                     --
-                    message = zo_strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED, finalName)
-                    alert = zo_strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED, finalAlertName)
+                    message = strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED, finalName)
+                    alert = strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED, finalAlertName)
                     message2 = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED), finalName))
                     alert2 =  (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED), finalAlertName))
                 end
@@ -5504,8 +5505,8 @@ function CA.HookFunction()
                     g_LFGJoinAntiSpam = false
                     zo_callLater(function() CA.CheckLFGStatusLeave(true) end , 100)
                     --
-                    message = zo_strformat(SI_GROUP_NOTIFICATION_GROUP_SELF_KICKED)
-                    alert = zo_strformat(SI_GROUP_NOTIFICATION_GROUP_SELF_KICKED)
+                    message = strformat(SI_GROUP_NOTIFICATION_GROUP_SELF_KICKED)
+                    alert = strformat(SI_GROUP_NOTIFICATION_GROUP_SELF_KICKED)
                 else
                     --
                     zo_callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
@@ -5536,8 +5537,8 @@ function CA.HookFunction()
         end
 
         if useDefaultReasonText and hasValidNames then
-            message = zo_strformat(GetString("SI_LUIE_GROUPLEAVEREASON", reason), finalName)
-            alert = zo_strformat(GetString("SI_LUIE_GROUPLEAVEREASON", reason), finalAlertName)
+            message = strformat(GetString("SI_LUIE_GROUPLEAVEREASON", reason), finalName)
+            alert = strformat(GetString("SI_LUIE_GROUPLEAVEREASON", reason), finalAlertName)
         end
 
         if isLocalPlayer then
@@ -5605,10 +5606,10 @@ function CA.HookFunction()
 
         if not g_LFGJoinAntiSpam then
             if CA.SV.Group.GroupLFGCA then
-                printToChat(zo_strformat(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED, locationName))
+                printToChat(strformat(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED, locationName))
             end
             if CA.SV.Group.GroupLFGAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED, locationName))
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED, locationName))
             end
             zo_callLater (function() g_rcUpdateDeclineOverride = false end, 5000)
             g_lfgDisableGroupEvents = true
@@ -5684,8 +5685,8 @@ function CA.HookFunction()
                         local kickFinalName = CA.ResolveNameLink(kickMemberName, kickMemberAccountName)
                         local kickfinalAlertName = CA.ResolveNameNoLink(kickMemberName, kickMemberAccountName)
                         
-                        message = zo_strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL, kickFinalName)
-                        alertText = zo_strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL, kickfinalAlertName)
+                        message = strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL, kickFinalName)
+                        alertText = strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL, kickfinalAlertName)
                     else
                         --Successful kicks are handled in the GROUP_MEMBER_LEFT alert
                         return true
@@ -5794,7 +5795,7 @@ function CA.HookFunction()
             local guild = GuildIndexData[i]
             if guild.name == guildName then
                 local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guild.guildAlliance) or GuildColorize
-                local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guild.guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+                local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guild.guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
                 local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guild.guildAlliance), "100%", "100%", guildName) or guildName
                 local messageString = (ShouldDisplaySelfKickedFromGuildAlert(guildId)) and SI_GUILD_SELF_KICKED_FROM_GUILD or SI_LUIE_CA_GUILD_LEAVE_SELF
                 local sound = (ShouldDisplaySelfKickedFromGuildAlert(guildId)) and SOUNDS.GENERAL_ALERT_ERROR or SOUNDS.GUILD_SELF_LEFT
@@ -5851,18 +5852,18 @@ function CA.HookFunction()
     end
     
     local function LockpickLockedAlert(interactableName)
-        printToChat(zo_strformat(SI_LOCKPICK_NO_KEY_AND_NO_LOCK_PICKS, interactableName))
+        printToChat(strformat(SI_LOCKPICK_NO_KEY_AND_NO_LOCK_PICKS, interactableName))
         if CA.SV.Notify.NotificationLockpickAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, zo_strformat(SI_LOCKPICK_NO_KEY_AND_NO_LOCK_PICKS, interactableName))
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, strformat(SI_LOCKPICK_NO_KEY_AND_NO_LOCK_PICKS, interactableName))
         end
         PlaySound(SOUNDS.LOCKPICKING_NO_LOCKPICKS)
         return true
     end
 
     local function LockpickImpossibleAlert(interactableName)
-        printToChat(zo_strformat(SI_LOCKPICK_IMPOSSIBLE_LOCK, interactableName))
+        printToChat(strformat(SI_LOCKPICK_IMPOSSIBLE_LOCK, interactableName))
         if CA.SV.Notify.NotificationLockpickAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, zo_strformat(SI_LOCKPICK_IMPOSSIBLE_LOCK, interactableName))
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, strformat(SI_LOCKPICK_IMPOSSIBLE_LOCK, interactableName))
         end
         PlaySound(SOUNDS.LOCKPICKING_NO_LOCKPICKS)
         return true
@@ -5892,7 +5893,7 @@ function CA.HookFunction()
         if CA.SV.Notify.NotificationTradeCA or CA.SV.Notify.NotificationTradeAlert then
             local finalName = CA.ResolveNameLink(inviterCharacterName, inviterDisplayName)
             local finalAlertName = CA.ResolveNameNoLink(inviterCharacterName, inviterDisplayName)
-            g_tradeTarget = ZO_SELECTED_TEXT:Colorize(zo_strformat(SI_UNIT_NAME, finalName))
+            g_tradeTarget = ZO_SELECTED_TEXT:Colorize(strformat(SI_UNIT_NAME, finalName))
             
             if CA.SV.Notify.NotificationTradeCA then
                 printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), finalName))
@@ -5910,7 +5911,7 @@ function CA.HookFunction()
         if CA.SV.Notify.NotificationTradeCA or CA.SV.Notify.NotificationTradeAlert then
             local finalName = CA.ResolveNameLink(inviteeCharacterName, inviteeDisplayName)
             local finalAlertName = CA.ResolveNameNoLink(inviteeCharacterName, inviteeDisplayName)
-            g_tradeTarget = ZO_SELECTED_TEXT:Colorize(zo_strformat(SI_UNIT_NAME, finalName))
+            g_tradeTarget = ZO_SELECTED_TEXT:Colorize(strformat(SI_UNIT_NAME, finalName))
             
             if CA.SV.Notify.NotificationTradeCA then
                 printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_CONFIRM), finalName))
@@ -6226,7 +6227,7 @@ function CA.HookFunction()
                         formattedIcon = CA.SV.Lorebook.LorebookIcon and ("|t16:16:" .. textureName .. "|t ") or ""
                     end
                     if CA.SV.Lorebook.LorebookCategory then
-                        stringPart2 = LorebookColorize2:Colorize(zo_strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
+                        stringPart2 = LorebookColorize2:Colorize(strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
                     else
                         stringPart2 = ""
                     end
@@ -6239,14 +6240,14 @@ function CA.HookFunction()
                 
                 if CA.SV.Lorebook.LorebookCollectionCSA then
                     local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.BOOK_COLLECTION_COMPLETED)
-                    messageParams:SetText(csaPrefix, zo_strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
+                    messageParams:SetText(csaPrefix, strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
                     messageParams:SetIconData(textureName)
                     messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_LORE_COLLECTION_COMPLETED)
                     CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                 end
                 
                 if CA.SV.Lorebook.LorebookCollectionAlert then
-                   local text = zo_strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName)
+                   local text = strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName)
                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
                 end
                 if not CA.SV.Lorebook.LorebookCSA then
@@ -6275,10 +6276,10 @@ function CA.HookFunction()
                         stringPart1 = ""
                     end
                     if textureName ~= "" and textureName ~= nil then
-                        formattedIcon = CA.SV.Lorebook.LorebookIcon and zo_strformat("<<1>> ", zo_iconFormatInheritColor(textureName, 16, 16)) or ""
+                        formattedIcon = CA.SV.Lorebook.LorebookIcon and strformat("<<1>> ", zo_iconFormatInheritColor(textureName, 16, 16)) or ""
                     end
                     if CA.SV.Lorebook.LorebookCategory then
-                        stringPart2 = LorebookColorize2:Colorize(zo_strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
+                        stringPart2 = LorebookColorize2:Colorize(strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
                     else
                         stringPart2 = ""
                     end
@@ -6296,14 +6297,14 @@ function CA.HookFunction()
                         local rankStartXP, nextRankStartXP = GetSkillLineRankXPExtents(skillType, skillIndex, rank)
                         messageParams:SetBarParams(CENTER_SCREEN_ANNOUNCE:CreateBarParams(barType, rank, previousXP - rankStartXP, currentXP - rankStartXP))
                     end
-                    messageParams:SetText(csaPrefix, zo_strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
+                    messageParams:SetText(csaPrefix, strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
                     messageParams:SetIconData(textureName)
                     messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_LORE_COLLECTION_COMPLETED_SKILL_EXPERIENCE)
                     CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                 end
                 
                 if CA.SV.Lorebook.LorebookCollectionAlert then
-                   local text = zo_strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName)
+                   local text = strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName)
                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
                 end
                 if not CA.SV.Lorebook.LorebookCSA then
@@ -6333,22 +6334,22 @@ function CA.HookFunction()
                     return
                 end
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_GAINED)
-                messageParams:SetText(csaPrefix, zo_strformat(SI_SKILL_POINT_GAINED, newPoints - oldPoints))
-                text = zo_strformat(SI_SKILL_POINT_GAINED, newPoints - oldPoints)
-                finalText = zo_strformat("<<1>> (3/3)", csaPrefix)
+                messageParams:SetText(csaPrefix, strformat(SI_SKILL_POINT_GAINED, newPoints - oldPoints))
+                text = strformat(SI_SKILL_POINT_GAINED, newPoints - oldPoints)
+                finalText = strformat("<<1>> (3/3)", csaPrefix)
                 
                 if stringPrefix ~= "" then
                     stringPart1 = SkillPointColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Skills.SkillPointBracket], stringPrefix, bracket2[CA.SV.Skills.SkillPointBracket]))
                 else
                     stringPart1 = ""
                 end
-                stringPart2 = SkillPointColorize2:Colorize(zo_strformat(SI_SKILL_POINT_GAINED, newPoints - oldPoints))
+                stringPart2 = SkillPointColorize2:Colorize(strformat(SI_SKILL_POINT_GAINED, newPoints - oldPoints))
                 finalMessage = strformat("<<1>><<2>>.", stringPart1, stringPart2)
             else
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_PARTIAL_GAINED)
-                messageParams:SetText(csaPrefix, zo_strformat(SI_SKYSHARD_GAINED_POINTS, newPartialPoints, NUM_PARTIAL_SKILL_POINTS_FOR_FULL))
+                messageParams:SetText(csaPrefix, strformat(SI_SKYSHARD_GAINED_POINTS, newPartialPoints, NUM_PARTIAL_SKILL_POINTS_FOR_FULL))
                 textPart1 = (stringPrefix .. ": ")
-                finalText = zo_strformat("<<1>> (<<2>>/3)", csaPrefix, newPoints-oldPoints)
+                finalText = strformat("<<1>> (<<2>>/3)", csaPrefix, newPoints-oldPoints)
                 
                 if stringPrefix ~= "" then
                     if CA.SV.Skills.SkillPointsPartial then
@@ -6360,7 +6361,7 @@ function CA.HookFunction()
                     stringPart1 = ""
                 end
                 if CA.SV.Skills.SkillPointsPartial then
-                    stringPart2 = SkillPointColorize2:Colorize(zo_strformat(SI_SKYSHARD_GAINED_POINTS, newPartialPoints, NUM_PARTIAL_SKILL_POINTS_FOR_FULL))
+                    stringPart2 = SkillPointColorize2:Colorize(strformat(SI_SKYSHARD_GAINED_POINTS, newPartialPoints, NUM_PARTIAL_SKILL_POINTS_FOR_FULL))
                 else
                     stringPart2 = ""
                 end
@@ -6369,10 +6370,10 @@ function CA.HookFunction()
         elseif newPoints > oldPoints then
             sound = SOUNDS.SKILL_GAINED
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_GAINED)
-            messageParams:SetText(zo_strformat(SI_SKILL_POINT_GAINED, newPoints - oldPoints))
+            messageParams:SetText(strformat(SI_SKILL_POINT_GAINED, newPoints - oldPoints))
             
-            finalMessage = SkillPointColorize2:Colorize(zo_strformat(SI_SKILL_POINT_GAINED, newPoints - oldPoints) .. ".")
-            finalText = zo_strformat(SI_SKILL_POINT_GAINED, newPoints - oldPoints) .. "."
+            finalMessage = SkillPointColorize2:Colorize(strformat(SI_SKILL_POINT_GAINED, newPoints - oldPoints) .. ".")
+            finalText = strformat(SI_SKILL_POINT_GAINED, newPoints - oldPoints) .. "."
         end
         
         if CA.SV.Skills.SkillPointCA then
@@ -6400,8 +6401,8 @@ function CA.HookFunction()
         local icon = select(4, ZO_Skills_GetIconsForSkillType(skillType))
         
         if CA.SV.Skills.SkillLineUnlockCA then
-            local formattedIcon = CA.SV.Skills.SkillLineIcon and zo_strformat("<<1>> ", zo_iconFormatInheritColor(icon, 16, 16)) or ""
-            local formattedString = SkillLineColorize:Colorize(zo_strformat(SI_LUIE_CA_SKILL_LINE_ADDED, formattedIcon, lineName))
+            local formattedIcon = CA.SV.Skills.SkillLineIcon and strformat("<<1>> ", zo_iconFormatInheritColor(icon, 16, 16)) or ""
+            local formattedString = SkillLineColorize:Colorize(strformat(SI_LUIE_CA_SKILL_LINE_ADDED, formattedIcon, lineName))
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL GAIN" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
@@ -6413,13 +6414,13 @@ function CA.HookFunction()
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.SKILL_LINE_ADDED)
             local formattedIcon = zo_iconFormat(icon, 32, 32)
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_PARTIAL_GAINED)
-            messageParams:SetText(zo_strformat(SI_SKILL_LINE_ADDED, formattedIcon, lineName))
+            messageParams:SetText(strformat(SI_SKILL_LINE_ADDED, formattedIcon, lineName))
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
         
         if CA.SV.Skills.SkillLineUnlockAlert then
             local formattedIcon = zo_iconFormat(icon, "75%", "75%")
-            local text = zo_strformat(SI_SKILL_LINE_ADDED, formattedIcon, lineName)
+            local text = strformat(SI_SKILL_LINE_ADDED, formattedIcon, lineName)
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
         end
         if not CA.SV.Skills.SkillLineUnlockCSA then
@@ -6434,7 +6435,7 @@ function CA.HookFunction()
         
         if atMorph then
             if CA.SV.Skills.SkillAbilityCA then
-                formattedString = SkillLineColorize:Colorize(zo_strformat(SI_MORPH_AVAILABLE_ANNOUNCEMENT, name) .. ".")
+                formattedString = SkillLineColorize:Colorize(strformat(SI_MORPH_AVAILABLE_ANNOUNCEMENT, name) .. ".")
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL MORPH" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
@@ -6443,12 +6444,12 @@ function CA.HookFunction()
             if CA.SV.Skills.SkillAbilityCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.ABILITY_MORPH_AVAILABLE)
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_ABILITY_PROGRESSION_RANK_MORPH)
-                messageParams:SetText(zo_strformat(SI_MORPH_AVAILABLE_ANNOUNCEMENT, name))
+                messageParams:SetText(strformat(SI_MORPH_AVAILABLE_ANNOUNCEMENT, name))
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
             
             if CA.SV.Skills.SkillAbilityAlert then
-                local text = zo_strformat(SI_MORPH_AVAILABLE_ANNOUNCEMENT, name) .. "."
+                local text = strformat(SI_MORPH_AVAILABLE_ANNOUNCEMENT, name) .. "."
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
             end
             
@@ -6457,7 +6458,7 @@ function CA.HookFunction()
             end   
         else
             if CA.SV.Skills.SkillAbilityCA then
-                formattedString = SkillLineColorize:Colorize(zo_strformat(SI_LUIE_CA_ABILITY_RANK_UP, name, rank) .. ".")
+                formattedString = SkillLineColorize:Colorize(strformat(SI_LUIE_CA_ABILITY_RANK_UP, name, rank) .. ".")
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
@@ -6466,12 +6467,12 @@ function CA.HookFunction()
             if CA.SV.Skills.SkillAbilityCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.ABILITY_RANK_UP)
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_ABILITY_PROGRESSION_RANK_UPDATE)
-                messageParams:SetText(zo_strformat(SI_LUIE_CA_ABILITY_RANK_UP, name, rank))
+                messageParams:SetText(strformat(SI_LUIE_CA_ABILITY_RANK_UP, name, rank))
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
             
             if CA.SV.Skills.SkillAbilityAlert then
-                local text = zo_strformat(SI_LUIE_CA_ABILITY_RANK_UP, name, rank) .. "."
+                local text = strformat(SI_LUIE_CA_ABILITY_RANK_UP, name, rank) .. "."
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
             end
             
@@ -6491,7 +6492,7 @@ function CA.HookFunction()
             if discovered then
                 
                 if CA.SV.Skills.SkillLineCA then
-                    local formattedString = SkillLineColorize:Colorize(zo_strformat(SI_SKILL_RANK_UP, lineName, rank) .. ".")
+                    local formattedString = SkillLineColorize:Colorize(strformat(SI_SKILL_RANK_UP, lineName, rank) .. ".")
                     g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL LINE" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                     EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
@@ -6499,13 +6500,13 @@ function CA.HookFunction()
                 
                 if CA.SV.Skills.SkillLineCSA then
                     local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.SKILL_LINE_LEVELED_UP)
-                    messageParams:SetText(zo_strformat(SI_SKILL_RANK_UP, lineName, rank))
+                    messageParams:SetText(strformat(SI_SKILL_RANK_UP, lineName, rank))
                     messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_RANK_UPDATE)
                     CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                 end
                 
                 if CA.SV.Skills.SkillLineAlert then
-                    local formattedText = zo_strformat(SI_SKILL_RANK_UP, lineName, rank) .. "."
+                    local formattedText = strformat(SI_SKILL_RANK_UP, lineName, rank) .. "."
                     ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, formattedText)
                 end
                 
@@ -6576,14 +6577,14 @@ function CA.HookFunction()
             
             if CA.SV.Collectible.CollectibleCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
-                messageParams:SetText(csaPrefix, zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, displayedCategory))
+                messageParams:SetText(csaPrefix, strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, displayedCategory))
                 messageParams:SetIconData(iconFile, "EsoUI/Art/Achievements/achievements_iconBG.dds")
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SINGLE_COLLECTIBLE_UPDATED)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
             
             if CA.SV.Collectible.CollectibleAlert then
-                local text = zo_strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, displayedCategory .. ".")
+                local text = strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, displayedCategory .. ".")
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
             end
             
@@ -6613,13 +6614,13 @@ function CA.HookFunction()
         
             if CA.SV.Collectible.CollectibleCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
-                messageParams:SetText(csaPrefix, zo_strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked))
+                messageParams:SetText(csaPrefix, strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked))
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COLLECTIBLES_UPDATED)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
             
             if CA.SV.Collectible.CollectibleAlert then
-                local text = zo_strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked) .. "."
+                local text = strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked) .. "."
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
             end
             
@@ -6673,9 +6674,9 @@ function CA.HookFunction()
         if CA.SV.Quest.QuestAcceptCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.QUEST_ACCEPTED)
             if iconTexture then
-                messageParams:SetText(zo_strformat(SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName))
+                messageParams:SetText(strformat(SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName))
             else
-                messageParams:SetText(zo_strformat(SI_NOTIFYTEXT_QUEST_ACCEPT, questName))
+                messageParams:SetText(strformat(SI_NOTIFYTEXT_QUEST_ACCEPT, questName))
             end
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_ADDED)
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
@@ -6684,9 +6685,9 @@ function CA.HookFunction()
         if CA.SV.Quest.QuestAcceptAlert then
             local alertString
             if iconTexture and CA.SV.Quest.QuestIcon then
-                alertString = zo_strformat(SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
+                alertString = strformat(SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
             else
-                alertString = zo_strformat(SI_NOTIFYTEXT_QUEST_ACCEPT, questName)
+                alertString = strformat(SI_NOTIFYTEXT_QUEST_ACCEPT, questName)
             end
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertString)
         end
@@ -6714,9 +6715,9 @@ function CA.HookFunction()
         if CA.SV.Quest.QuestCompleteCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.QUEST_COMPLETED)
             if iconTexture then
-                messageParams:SetText(zo_strformat(SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName))
+                messageParams:SetText(strformat(SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName))
             else
-                messageParams:SetText(zo_strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questName))
+                messageParams:SetText(strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questName))
             end
             if not LUIE.SV.HideXPBar then
                 messageParams:SetBarParams(GetRelevantBarParams(level, previousExperience, currentExperience, championPoints))
@@ -6728,9 +6729,9 @@ function CA.HookFunction()
         if CA.SV.Quest.QuestCompleteAlert then
             local alertString
             if iconTexture and CA.SV.Quest.QuestIcon then
-                alertString = zo_strformat(SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
+                alertString = strformat(SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
             else
-                alertString = zo_strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questName)
+                alertString = strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questName)
             end
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertString)
         end
@@ -6782,7 +6783,7 @@ function CA.HookFunction()
         formattedText = strformat(SI_NOTIFYTEXT_OBJECTIVE_COMPLETE, nameFormatted)
         
         if CA.SV.Quest.QuestCompleteAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_NOTIFYTEXT_OBJECTIVE_COMPLETE, name))
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_NOTIFYTEXT_OBJECTIVE_COMPLETE, name))
         end
         
         if CA.SV.Quest.QuestCompleteCSA then
@@ -6790,7 +6791,7 @@ function CA.HookFunction()
             if not LUIE.SV.HideXPBar then
                 messageParams:SetBarParams(GetRelevantBarParams(level, previousExperience, currentExperience, championPoints))
             end
-            messageParams:SetText(zo_strformat(SI_NOTIFYTEXT_OBJECTIVE_COMPLETE, name), finishedDescription)
+            messageParams:SetText(strformat(SI_NOTIFYTEXT_OBJECTIVE_COMPLETE, name), finishedDescription)
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_OBJECTIVE_COMPLETED)
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
@@ -6828,44 +6829,44 @@ function CA.HookFunction()
         end
 
         if isConditionComplete and conditionType == QUEST_CONDITION_TYPE_GIVE_ITEM then
-             messageParams:SetText(zo_strformat(SI_TRACKED_QUEST_STEP_DONE, conditionText))
-             alertMessage = zo_strformat(SI_TRACKED_QUEST_STEP_DONE, conditionText)
-             formattedMessage = zo_strformat(SI_TRACKED_QUEST_STEP_DONE, conditionText)
+             messageParams:SetText(strformat(SI_TRACKED_QUEST_STEP_DONE, conditionText))
+             alertMessage = strformat(SI_TRACKED_QUEST_STEP_DONE, conditionText)
+             formattedMessage = strformat(SI_TRACKED_QUEST_STEP_DONE, conditionText)
              type = 1
         elseif stepOverrideText == "" then
             if isFailCondition then
                 if conditionMax > 1 then
-                    messageParams:SetText(zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL, conditionText, newConditionVal, conditionMax))
-                    alertMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL, conditionText, newConditionVal, conditionMax)
-                    formattedMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL, conditionText, newConditionVal, conditionMax)
+                    messageParams:SetText(strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL, conditionText, newConditionVal, conditionMax))
+                    alertMessage = strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL, conditionText, newConditionVal, conditionMax)
+                    formattedMessage = strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL, conditionText, newConditionVal, conditionMax)
                 else
-                   messageParams:SetText(zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, conditionText))
-                   alertMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, conditionText)
-                   formattedMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, conditionText)
+                   messageParams:SetText(strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, conditionText))
+                   alertMessage = strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, conditionText)
+                   formattedMessage = strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, conditionText)
                 end
                 type = 2
             else
                 if conditionMax > 1 and newConditionVal < conditionMax then
-                    messageParams:SetText(zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE, conditionText, newConditionVal, conditionMax))
-                    alertMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE, conditionText, newConditionVal, conditionMax)
-                    formattedMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE, conditionText, newConditionVal, conditionMax)
+                    messageParams:SetText(strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE, conditionText, newConditionVal, conditionMax))
+                    alertMessage = strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE, conditionText, newConditionVal, conditionMax)
+                    formattedMessage = strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE, conditionText, newConditionVal, conditionMax)
                 else
-                    messageParams:SetText(zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, conditionText))
-                    alertMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, conditionText)
-                    formattedMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, conditionText)
+                    messageParams:SetText(strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, conditionText))
+                    alertMessage = strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, conditionText)
+                    formattedMessage = strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, conditionText)
                 end
                 type = 1
             end
         else
             if isFailCondition then
-                messageParams:SetText(zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, stepOverrideText))
-                alertMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, stepOverrideText)
-                formattedMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, stepOverrideText)
+                messageParams:SetText(strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, stepOverrideText))
+                alertMessage = strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, stepOverrideText)
+                formattedMessage = strformat(SI_ALERTTEXT_QUEST_CONDITION_FAIL_NO_COUNT, stepOverrideText)
                 type = 2
             else
-                messageParams:SetText(zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, stepOverrideText))
-                alertMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, stepOverrideText)
-                formattedMessage = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, stepOverrideText)
+                messageParams:SetText(strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, stepOverrideText))
+                alertMessage = strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, stepOverrideText)
+                formattedMessage = strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, stepOverrideText)
                 type = 1
             end
         end
@@ -6913,7 +6914,7 @@ function CA.HookFunction()
         if text ~= "" then
             
             local message = strformat ("|c<<1>><<2>>|r", QuestColorQuestDescriptionColorize, text)
-            local formattedString = zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, message)
+            local formattedString = strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, message)
             
             if CA.SV.Quest.QuestObjCompleteCA then
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
@@ -6923,7 +6924,7 @@ function CA.HookFunction()
             
             if CA.SV.Quest.QuestObjCompleteCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.QUEST_OBJECTIVE_COMPLETE)
-                messageParams:SetText(zo_strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, text))
+                messageParams:SetText(strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, text))
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_OPTIONAL_STEP_ADVANCED)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
@@ -7078,13 +7079,13 @@ function CA.HookFunction()
                     messageParams:SetBarParams(GetRelevantBarParams(level, previousExperience, currentExperience, championPoints))
                 end
             end
-            messageParams:SetText(zo_strformat(SI_LUIE_CA_QUEST_DISCOVER, subzoneName))
+            messageParams:SetText(strformat(SI_LUIE_CA_QUEST_DISCOVER, subzoneName))
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_DISCOVERY_EXPERIENCE)
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
         
         if CA.SV.Quest.QuestLocDiscoveryAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_QUEST_DISCOVER, subzoneName))
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_QUEST_DISCOVER, subzoneName))
         end
         
         if not CA.SV.Quest.QuestLocDiscoveryCSA then
@@ -7110,13 +7111,13 @@ function CA.HookFunction()
         
         if CA.SV.Quest.QuestLocObjectiveCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.OBJECTIVE_ACCEPTED)
-            messageParams:SetText(zo_strformat(SI_NOTIFYTEXT_OBJECTIVE_DISCOVERED, name), startDescription)
+            messageParams:SetText(strformat(SI_NOTIFYTEXT_OBJECTIVE_DISCOVERED, name), startDescription)
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_POI_DISCOVERED)
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
         
         if CA.SV.Quest.QuestLocObjectiveAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_NOTIFYTEXT_OBJECTIVE_DISCOVERED, name), startDescription)
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_NOTIFYTEXT_OBJECTIVE_DISCOVERED, name), startDescription)
         end
         return true
     end
@@ -7199,8 +7200,8 @@ function CA.HookFunction()
                 local iconCSA = (" " .. zo_iconFormat("LuiExtended/media/unitframes/unitframes_level_up.dds", "100%", "100%")) or ""
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.LEVEL_UP)
                 if CA.SV.XP.ExperienceLevelUpCSAExpand then
-                    local levelUpExpanded = zo_strformat("<<1>><<2>> <<3>> <<4>>", GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), iconCSA, GetString(SI_GAMEPAD_QUEST_JOURNAL_QUEST_LEVEL), CurrentLevel)
-                    messageParams:SetText(zo_strformat(SI_LEVEL_UP_NOTIFICATION), levelUpExpanded)
+                    local levelUpExpanded = strformat("<<1>><<2>> <<3>> <<4>>", GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), iconCSA, GetString(SI_GAMEPAD_QUEST_JOURNAL_QUEST_LEVEL), CurrentLevel)
+                    messageParams:SetText(strformat(SI_LEVEL_UP_NOTIFICATION), levelUpExpanded)
                 else
                     messageParams:SetText(GetString(SI_LEVEL_UP_NOTIFICATION))
                 end
@@ -7215,7 +7216,7 @@ function CA.HookFunction()
             
             if CA.SV.XP.ExperienceLevelUpAlert then
                 local iconAlert = CA.SV.XP.ExperienceLevelUpIcon and (" " .. zo_iconFormat("LuiExtended/media/unitframes/unitframes_level_up.dds", "75%", "75%")) or ""
-                local text = zo_strformat("<<1>><<2>> <<3>> <<4>>!", GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), iconAlert, GetString(SI_GAMEPAD_QUEST_JOURNAL_QUEST_LEVEL), CurrentLevel)
+                local text = strformat("<<1>><<2>> <<3>> <<4>>!", GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), iconAlert, GetString(SI_GAMEPAD_QUEST_JOURNAL_QUEST_LEVEL), CurrentLevel)
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
             end
             
@@ -7243,7 +7244,7 @@ function CA.HookFunction()
             
             if CA.SV.XP.ExperienceEnlightenedCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.ENLIGHTENED_STATE_GAINED)
-                messageParams:SetText(zo_strformat(SI_ENLIGHTENED_STATE_GAINED_HEADER), zo_strformat(SI_ENLIGHTENED_STATE_GAINED_DESCRIPTION))
+                messageParams:SetText(strformat(SI_ENLIGHTENED_STATE_GAINED_HEADER), strformat(SI_ENLIGHTENED_STATE_GAINED_DESCRIPTION))
                 if not LUIE.SV.HideXPBar then
                     local barParams = GetCurrentChampionPointsBarParams()
                     messageParams:SetBarParams(barParams)
@@ -7281,7 +7282,7 @@ function CA.HookFunction()
                 if not LUIE.SV.HideXPBar then
                     messageParams:SetBarParams(GetCurrentChampionPointsBarParams())
                 end
-                messageParams:SetText(zo_strformat(SI_ENLIGHTENED_STATE_LOST_HEADER))
+                messageParams:SetText(strformat(SI_ENLIGHTENED_STATE_LOST_HEADER))
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_ENLIGHTENMENT_LOST)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
@@ -7360,7 +7361,7 @@ function CA.HookFunction()
                     EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
 				end
             
-                local formattedString = StorageRidingColorize:Colorize(zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
+                local formattedString = StorageRidingColorize:Colorize(strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
@@ -7368,7 +7369,7 @@ function CA.HookFunction()
         
             if CA.SV.Notify.StorageRidingCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
-                messageParams:SetText(GetString(SI_RIDING_SKILL_ANNOUCEMENT_BANNER), zo_strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
+                messageParams:SetText(GetString(SI_RIDING_SKILL_ANNOUCEMENT_BANNER), strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RIDING_SKILL_IMPROVEMENT)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
@@ -7381,7 +7382,7 @@ function CA.HookFunction()
         if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
             if CA.SV.Notify.StorageBagCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
-                messageParams:SetText(GetString(SI_INVENTORY_BAG_UPGRADE_ANOUNCEMENT_TITLE), zo_strformat(SI_INVENTORY_BAG_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
+                messageParams:SetText(GetString(SI_INVENTORY_BAG_UPGRADE_ANOUNCEMENT_TITLE), strformat(SI_INVENTORY_BAG_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_BAG_CAPACITY_CHANGED)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
@@ -7393,7 +7394,7 @@ function CA.HookFunction()
         if previousCapacity > 0 and previousCapacity ~= currentCapacity and previousUpgrade ~= currentUpgrade then
             if CA.SV.Notify.StorageBagCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
-                messageParams:SetText(GetString(SI_INVENTORY_BANK_UPGRADE_ANOUNCEMENT_TITLE), zo_strformat(SI_INVENTORY_BANK_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
+                messageParams:SetText(GetString(SI_INVENTORY_BANK_UPGRADE_ANOUNCEMENT_TITLE), strformat(SI_INVENTORY_BANK_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_BANK_CAPACITY_CHANGED)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
@@ -7406,8 +7407,8 @@ function CA.HookFunction()
         local icon = GetChampionPointsIcon()
         
         if CA.SV.XP.ExperienceLevelUpCA then
-            local formattedIcon = CA.SV.XP.ExperienceLevelUpIcon and zo_strformat("<<1>> ", zo_iconFormatInheritColor(icon, 16, 16)) or ""
-            local formattedString = ExperienceLevelUpColorize:Colorize(zo_strformat("<<1>>!", GetString(SI_CHAMPION_ANNOUNCEMENT_UNLOCKED), formattedIcon))
+            local formattedIcon = CA.SV.XP.ExperienceLevelUpIcon and strformat("<<1>> ", zo_iconFormatInheritColor(icon, 16, 16)) or ""
+            local formattedString = ExperienceLevelUpColorize:Colorize(strformat("<<1>>!", GetString(SI_CHAMPION_ANNOUNCEMENT_UNLOCKED), formattedIcon))
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
@@ -7415,8 +7416,8 @@ function CA.HookFunction()
         
         if CA.SV.XP.ExperienceLevelUpCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.CHAMPION_POINT_GAINED)
-            local formattedIcon = zo_strformat("<<1>> ", zo_iconFormat(icon, "100%", "100%"))
-            messageParams:SetText(zo_strformat(SI_CHAMPION_ANNOUNCEMENT_UNLOCKED, formattedIcon))
+            local formattedIcon = strformat("<<1>> ", zo_iconFormat(icon, "100%", "100%"))
+            messageParams:SetText(strformat(SI_CHAMPION_ANNOUNCEMENT_UNLOCKED, formattedIcon))
             if not LUIE.SV.HideXPBar then
                 if wasChampionSystemUnlocked then
                     local championPoints = GetPlayerChampionPointsEarned()
@@ -7443,8 +7444,8 @@ function CA.HookFunction()
         end
         
         if CA.SV.XP.ExperienceLevelUpAlert then
-            local formattedIcon = CA.SV.XP.ExperienceLevelUpIcon and zo_strformat("<<1>> ", zo_iconFormat(icon, "75%", "75%")) or ""
-            local text = zo_strformat("<<1>>!", GetString(SI_CHAMPION_ANNOUNCEMENT_UNLOCKED, formattedIcon))
+            local formattedIcon = CA.SV.XP.ExperienceLevelUpIcon and strformat("<<1>> ", zo_iconFormat(icon, "75%", "75%")) or ""
+            local text = strformat("<<1>>!", GetString(SI_CHAMPION_ANNOUNCEMENT_UNLOCKED, formattedIcon))
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
         end
         
@@ -7473,7 +7474,7 @@ function CA.HookFunction()
         end
         
         if CA.SV.XP.ExperienceLevelUpCA then
-            local formattedString = ExperienceLevelUpColorize:Colorize(zo_strformat(SI_CHAMPION_POINT_EARNED, pointDelta) .. ": ")
+            local formattedString = ExperienceLevelUpColorize:Colorize(strformat(SI_CHAMPION_POINT_EARNED, pointDelta) .. ": ")
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
@@ -7497,7 +7498,7 @@ function CA.HookFunction()
                         EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                     end
                     if CA.SV.XP.ExperienceLevelUpCSA then
-                        secondLine = secondLine .. zo_strformat(SI_CHAMPION_POINT_TYPE, amount, icon, constellationGroupName) .. "\n"
+                        secondLine = secondLine .. strformat(SI_CHAMPION_POINT_TYPE, amount, icon, constellationGroupName) .. "\n"
                     end
                 end
             end
@@ -7505,14 +7506,14 @@ function CA.HookFunction()
         
         if CA.SV.XP.ExperienceLevelUpCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.CHAMPION_POINT_GAINED)
-            messageParams:SetText(zo_strformat(SI_CHAMPION_POINT_EARNED, pointDelta), secondLine)
+            messageParams:SetText(strformat(SI_CHAMPION_POINT_EARNED, pointDelta), secondLine)
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_CHAMPION_POINT_GAINED)
             messageParams:MarkSuppressIconFrame()
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
         
         if CA.SV.XP.ExperienceLevelUpAlert then
-            local text = zo_strformat("<<1>>!", GetString(SI_CHAMPION_POINT_EARNED, pointDelta))
+            local text = strformat("<<1>>!", GetString(SI_CHAMPION_POINT_EARNED, pointDelta))
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
         end
         
@@ -7594,7 +7595,7 @@ function CA.HookFunction()
             if wasLocalPlayersResult then
                 resultChatString = resultString
             else
-                resultChatString = zo_strformat(resultString, finalName)
+                resultChatString = strformat(resultString, finalName)
             end
             printToChat(resultChatString)
         end
@@ -7606,7 +7607,7 @@ function CA.HookFunction()
             if wasLocalPlayersResult then
                 resultCSAString = resultString
             else
-                resultCSAString = zo_strformat(resultString, finalAlertName)
+                resultCSAString = strformat(resultString, finalAlertName)
             end
                 
             -- Display CSA
@@ -7659,14 +7660,14 @@ function CA.HookFunction()
         -- Display CSA
         if CA.SV.Group.GroupRaidCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.RAID_TRIAL_STARTED)
-            messageParams:SetText(zo_strformat(SI_LUIE_CA_GROUP_TRIAL_STARTED, raidName))
+            messageParams:SetText(strformat(SI_LUIE_CA_GROUP_TRIAL_STARTED, raidName))
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RAID_TRIAL)
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
         
         -- Display Alert
         if CA.SV.Group.GroupRaidAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_GROUP_TRIAL_STARTED, raidName) )
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_GROUP_TRIAL_STARTED, raidName) )
         end
         
         -- Play sound if CSA is not enabled
@@ -7709,8 +7710,8 @@ function CA.HookFunction()
 
         -- Display CSA
         if CA.SV.Group.GroupRaidCSA then
-            messageParams:SetEndOfRaidData({ score, formattedTime, wasUnderTargetTime, vitalityBonus, zo_strformat(SI_REVIVE_COUNTER_REVIVES_USED, currentCount, maxCount) })
-            messageParams:SetText(zo_strformat(SI_TRIAL_COMPLETED_LARGE, raidName))
+            messageParams:SetEndOfRaidData({ score, formattedTime, wasUnderTargetTime, vitalityBonus, strformat(SI_REVIVE_COUNTER_REVIVES_USED, currentCount, maxCount) })
+            messageParams:SetText(strformat(SI_TRIAL_COMPLETED_LARGE, raidName))
             messageParams:SetLifespanMS(TRIAL_COMPLETE_LIFESPAN_MS)
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RAID_TRIAL)
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
@@ -7718,7 +7719,7 @@ function CA.HookFunction()
         
         -- Display Alert
         if CA.SV.Group.GroupRaidAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_TRIAL_COMPLETED_LARGE, raidName) )
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_TRIAL_COMPLETED_LARGE, raidName) )
         end
         
         -- Play sound if CSA is not enabled
@@ -7740,14 +7741,14 @@ function CA.HookFunction()
         -- Display CSA
         if CA.SV.Group.GroupRaidCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.RAID_TRIAL_FAILED)
-            messageParams:SetText(zo_strformat(SI_LUIE_CA_GROUP_TRIAL_FAILED, raidName))
+            messageParams:SetText(strformat(SI_LUIE_CA_GROUP_TRIAL_FAILED, raidName))
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RAID_TRIAL)
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
         
         -- Display Alert
         if CA.SV.Group.GroupRaidAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_GROUP_TRIAL_FAILED, raidName) )
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_GROUP_TRIAL_FAILED, raidName) )
         end
         
         -- Play sound if CSA is not enabled
@@ -7770,14 +7771,14 @@ function CA.HookFunction()
         -- Display CSA
         if CA.SV.Group.GroupRaidBestScoreCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.RAID_TRIAL_NEW_BEST)
-            messageParams:SetText(zo_strformat(isWeekly and SI_TRIAL_NEW_BEST_SCORE_WEEKLY or SI_TRIAL_NEW_BEST_SCORE_LIFETIME, raidName))
+            messageParams:SetText(strformat(isWeekly and SI_TRIAL_NEW_BEST_SCORE_WEEKLY or SI_TRIAL_NEW_BEST_SCORE_LIFETIME, raidName))
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RAID_TRIAL)
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
         
         -- Display Alert
         if CA.SV.Group.GroupRaidBestScoreAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(isWeekly and SI_TRIAL_NEW_BEST_SCORE_WEEKLY or SI_TRIAL_NEW_BEST_SCORE_LIFETIME, raidName) )
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(isWeekly and SI_TRIAL_NEW_BEST_SCORE_WEEKLY or SI_TRIAL_NEW_BEST_SCORE_LIFETIME, raidName) )
         end
         
         -- Play sound ONLY if normal score is not set to display, otherwise the audio will overlap
@@ -7801,7 +7802,7 @@ function CA.HookFunction()
             if CA.SV.Group.GroupRaidReviveCSA then
                 local iconCSA = zo_iconFormat("EsoUI/Art/Trials/VitalityDepletion.dds", "100%", "100%")
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.RAID_TRIAL_COUNTER_UPDATE)
-                messageParams:SetText(zo_strformat(SI_LUIE_CA_GROUP_REVIVE_COUNTER_UPDATED, iconCSA))
+                messageParams:SetText(strformat(SI_LUIE_CA_GROUP_REVIVE_COUNTER_UPDATED, iconCSA))
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RAID_TRIAL)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
@@ -7851,7 +7852,7 @@ function CA.HookFunction()
             if CA.SV.Group.GroupRaidScoreCSA then
                 local iconCSA = zo_iconFormat(reasonAssets.icon, "100%", "100%")
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, reasonAssets.soundId)
-                messageParams:SetText(zo_strformat(SI_LUIE_CA_GROUP_TRIAL_SCORE_UPDATED, iconCSA, scoreAmount))
+                messageParams:SetText(strformat(SI_LUIE_CA_GROUP_TRIAL_SCORE_UPDATED, iconCSA, scoreAmount))
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RAID_TRIAL)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
@@ -8148,11 +8149,11 @@ function CA.HookFunction()
         d("EVENT_BROADCAST")
     
         -- CA
-        printToChat(string.format("|cffff00%s|r", message))
+        printToChat(strfmt("|cffff00%s|r", message))
     
         -- CSA
         local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.MESSAGE_BROADCAST)
-        messageParams:SetText(string.format("|cffff00%s|r", message))
+        messageParams:SetText(strfmt("|cffff00%s|r", message))
         messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SYSTEM_BROADCAST)
         CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         
@@ -8169,7 +8170,7 @@ function CA.HookFunction()
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.ACHIEVEMENT_AWARDED)
             local icon = select(4, GetAchievementInfo(id))
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_ACHIEVEMENT_AWARDED)
-            messageParams:SetText(CA.SV.Achievement.AchievementCompleteMsg, zo_strformat(name))
+            messageParams:SetText(CA.SV.Achievement.AchievementCompleteMsg, strformat(name))
             messageParams:SetIconData(icon, "EsoUI/Art/Achievements/achievements_iconBG.dds")
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
@@ -8229,7 +8230,7 @@ function CA.HookFunction()
         
         -- Display Alert
         if CA.SV.Achievement.AchievementCompleteAlert then
-            local alertMessage = zo_strformat("<<1>>: <<2>>", CA.SV.Achievement.AchievementCompleteMsg, name)
+            local alertMessage = strformat("<<1>>: <<2>>", CA.SV.Achievement.AchievementCompleteMsg, name)
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
         end
         
@@ -8253,7 +8254,7 @@ function CA.HookFunction()
                 if result == PLEDGE_OF_MARA_RESULT_PLEDGED then
                     local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT)
                     messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_PLEDGE_OF_MARA_RESULT)
-                    messageParams:SetText(GetString(SI_RITUAL_OF_MARA_COMPLETION_ANNOUNCE_LARGE), zo_strformat(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT3, finalAlertName))
+                    messageParams:SetText(GetString(SI_RITUAL_OF_MARA_COMPLETION_ANNOUNCE_LARGE), strformat(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT3, finalAlertName))
                     CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                 end
             end
@@ -8262,9 +8263,9 @@ function CA.HookFunction()
             if CA.SV.Social.PledgeOfMaraAlert then
                 -- If the menu setting to only display Alert on Failure state is toggled, then do not display an Alert on successful Mara Event
                 if result == PLEDGE_OF_MARA_RESULT_PLEDGED and not CA.SV.Social.PledgeOfMaraAlertOnlyFail then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT3, finalAlertName))
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_MARA_PLEDGEOFMARARESULT3, finalAlertName))
                 elseif(result ~= PLEDGE_OF_MARA_RESULT_PLEDGED and result ~= PLEDGE_OF_MARA_RESULT_BEGIN_PLEDGE) then
-                    ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, zo_strformat(GetString("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT", result), finalAlertName))
+                    ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, strformat(GetString("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT", result), finalAlertName))
                 end
             end
         end
@@ -8632,7 +8633,7 @@ function CA.HookFunction()
                 return function()
                     local userFacingPartnerName = ZO_GetPrimaryPlayerNameWithSecondary(displayName, characterName)
                     local statusString = GetString("SI_DUELSTATE", duelState)
-                    statusString = zo_strformat(statusString, userFacingPartnerName)
+                    statusString = strformat(statusString, userFacingPartnerName)
                     ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, statusString)    
                 end
             end
@@ -8677,46 +8678,46 @@ function CA.HookFunction()
             -- Group Invite
             if data.incomingType == INTERACT_TYPE_GROUP_INVITE then
                 if CA.SV.Group.GroupCA then
-                    printToChat(zo_strformat(message, typeString))
+                    printToChat(strformat(message, typeString))
                 end
                 if CA.SV.Group.GroupAlert then
-                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
+                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, strformat(message, typeString))
                 end
             end
             -- Guild Invite
             if data.incomingType == INTERACT_TYPE_GUILD_INVITE then
                 if CA.SV.Social.GuildCA then
-                    printToChat(zo_strformat(message, typeString))
+                    printToChat(strformat(message, typeString))
                 end
                 if CA.SV.Social.GuildAlert then
-                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
+                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, strformat(message, typeString))
                 end
             end
             
             -- Friend Invite
             if data.incomingType == INTERACT_TYPE_FRIEND_REQUEST then
                 if CA.SV.Social.FriendIgnoreCA then
-                    printToChat(zo_strformat(message, typeString))
+                    printToChat(strformat(message, typeString))
                 end
                 if CA.SV.Social.FriendIgnoreAlert then
-                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
+                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, strformat(message, typeString))
                 end
             end
             
             -- Quest Shared
             if data.incomingType == INTERACT_TYPE_QUEST_SHARE then
                 if CA.SV.Quest.QuestShareCA then
-                    printToChat(zo_strformat(message, typeString))
+                    printToChat(strformat(message, typeString))
                 end
                 if CA.SV.Quest.QuestShareAlert then
-                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
+                    ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, strformat(message, typeString))
                 end
             end
             
             --[[
             if data.incomingType == INTERACT_TYPE_TRADE_INVITE then
-                printToChat(zo_strformat(message, typeString))
-                ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(message, typeString))
+                printToChat(strformat(message, typeString))
+                ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, strformat(message, typeString))
             end
             ]]--
         end
@@ -8804,14 +8805,14 @@ local function CompleteGroupInvite(characterOrDisplayName, sentFromChat, display
             else
                 link = ZO_LinkHandler_CreateLink(characterOrDisplayName, nil, CHARACTER_LINK_TYPE, characterOrDisplayName)
             end
-            printToChat(zo_strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MENU), link))
+            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MENU), link))
             if CA.SV.Group.GroupAlert then
-                ZO_Alert(ALERT, nil, zo_strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MENU), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
+                ZO_Alert(ALERT, nil, strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MENU), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
             end
         else
-            printToChat(zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
+            printToChat(strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
             if CA.SV.Group.GroupAlert then
-                ZO_Alert(ALERT, nil, zo_strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
+                ZO_Alert(ALERT, nil, strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
             end
         end
     end
@@ -8881,7 +8882,7 @@ GUILD_ROSTER_MANAGER.OnGuildMemberAdded = function(self, guildId, displayName)
         if guildName == name then
             local guildAlliance = GetGuildAlliance(id)
             local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-            local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+            local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
             local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
             if CA.SV.Social.GuildCA then
@@ -8917,7 +8918,7 @@ GUILD_ROSTER_MANAGER.OnGuildMemberRemoved = function(self, guildId, rawCharacter
         if guildName == name then
             local guildAlliance = GetGuildAlliance(id)
             local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-            local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+            local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
             local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
             
             if CA.SV.Social.GuildCA then
@@ -8950,7 +8951,7 @@ ZO_TryGuildInvite = function(guildId, displayName, sentFromChat)
     local guildName = GetGuildName(guildId)
     local guildAlliance = GetGuildAlliance(guildId)
     local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(zo_strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
     local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
     
     if IsConsoleUI() then
@@ -8958,10 +8959,10 @@ ZO_TryGuildInvite = function(guildId, displayName, sentFromChat)
             if success then
                 GuildInvite(guildId, displayName)
                 if CA.SV.Social.GuildCA then
-                    printToChat(zo_strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, UndecorateDisplayName(displayName), guildNameAlliance))
+                    printToChat(strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, UndecorateDisplayName(displayName), guildNameAlliance))
                 end
                 if CA.SV.Social.GuildAlert then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, UndecorateDisplayName(displayName), guildNameAllianceAlert))
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, UndecorateDisplayName(displayName), guildNameAllianceAlert))
                 end
             end
         end
@@ -8982,10 +8983,10 @@ ZO_TryGuildInvite = function(guildId, displayName, sentFromChat)
 
         GuildInvite(guildId, displayName)
         if CA.SV.Social.GuildCA then
-            printToChat(zo_strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAlliance))
+            printToChat(strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAlliance))
         end
         if CA.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, zo_strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAllianceAlert))
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAllianceAlert))
         end
     end    
 end
@@ -9004,7 +9005,7 @@ GUILD_SHARED_INFO.Refresh = function(self, guildId)
         local count = GetControl(self.control, "Count")
         local numGuildMembers, numOnline = GetGuildInfo(guildId)
 
-        count:SetText(zo_strformat(SI_GUILD_NUM_MEMBERS_ONLINE_FORMAT, numOnline, numGuildMembers))
+        count:SetText(strformat(SI_GUILD_NUM_MEMBERS_ONLINE_FORMAT, numOnline, numGuildMembers))
 
         self.canDepositToBank = DoesGuildHavePrivilege(guildId, GUILD_PRIVILEGE_BANK_DEPOSIT)
         if(self.canDepositToBank) then
@@ -9253,12 +9254,12 @@ function CA.VoteNotify(eventCode)
         
         if CA.SV.Group.GroupVoteCA then
             local finalName = CA.ResolveNameLink(kickMemberName, kickMemberAccountName)
-            local message = zo_strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), finalName)
+            local message = strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), finalName)
             printToChat(message)
         end
         if CA.SV.Group.GroupVoteAlert then
             local finalAlertName = CA.ResolveNameNoLink(kickMemberName, kickMemberAccountName)
-            local alertText = zo_strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), finalAlertName)
+            local alertText = strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), finalAlertName)
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertText)
         end
     end
@@ -9348,7 +9349,7 @@ function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previo
         local priority
         
         if CA.SV.Skills.SkillGuildAlert then
-            local text = zo_strformat(GetString(SI_LUIE_CA_SKILL_GUILD_ALERT), lineName)
+            local text = strformat(GetString(SI_LUIE_CA_SKILL_GUILD_ALERT), lineName)
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
         end
         
@@ -9403,7 +9404,7 @@ function CA.PrintGuildRep(change, lineName, lineId, priority)
     local icon = zo_iconFormatInheritColor(GUILD_SKILL_ICONS[lineId], 16, 16)
     local formattedIcon = CA.SV.Skills.SkillGuildIcon and (icon .. " ") or ""
     
-    local guildString = zo_strformat(CA.SV.Skills.SkillGuildRepName, change)
+    local guildString = strformat(CA.SV.Skills.SkillGuildRepName, change)
     local colorize = GUILD_SKILL_COLOR_TABLE[lineId]
     local messageP1 = ("|r|c" .. colorize .. formattedIcon .. change .. " " .. lineName .. " " .. guildString .. "|r|c" .. SkillGuildColorize)
     local formattedMessageP1 = (strfmt(CA.SV.Skills.SkillGuildMsg, messageP1))

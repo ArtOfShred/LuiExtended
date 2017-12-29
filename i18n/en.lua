@@ -63,10 +63,6 @@ ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS",              "Player 
 ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS",      "Player Long Term Effects")
 ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS",                "Target Buffs")
 ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS",              "Target Debuffs")
-ZO_CreateStringId("SI_LUIE_SCB_RECALLCOOLDOWN",                         "Recall Penalty")
-ZO_CreateStringId("SI_LUIE_SCB_PET",                                    "Vanity Pet")
-ZO_CreateStringId("SI_LUIE_SCB_MOUNTED",                                "Mounted")
-ZO_CreateStringId("SI_LUIE_SCB_REZZIMMUNITY",                           "Resurrection Immunity")
 ZO_CreateStringId("SI_LUIE_SCB_ERROR_FONT",                             "LUIE_SpellCastBuffs: There was a problem with selecting required font. Falling back to game default.")
 
 -- ChatAnnouncements.lua
@@ -2021,6 +2017,10 @@ CombatTextLocalization = {
 -- ---------------------------------------------------
 
 --ZO_CreateStringId("SI_LUIE_SKILL_SKILLNAME",							"")
+ZO_CreateStringId("SI_LUIE_SKILL_RECALL_PENALTY",						"Recall Penalty")
+ZO_CreateStringId("SI_LUIE_SKILL_VANITY_PET",                           "Vanity Pet")
+ZO_CreateStringId("SI_LUIE_SKILL_MOUNTED",                              "Mounted")
+ZO_CreateStringId("SI_LUIE_SKILL_RESURRECTION_IMMUNITY",                "Resurrection Immunity")
 ZO_CreateStringId("SI_LUIE_SKILL_CROUCH_STUN",							"Crouch Stun")
 ZO_CreateStringId("SI_LUIE_SKILL_FALL_DAMAGE",							"Fall Damage")
 ZO_CreateStringId("SI_LUIE_SKILL_ABSORBING_SKYSHARD",					"Absorbing Skyshard")

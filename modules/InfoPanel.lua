@@ -5,8 +5,8 @@ LUIE.InfoPanel = {}
 -- Performance Enhancement
 local PNL           = LUIE.InfoPanel
 local UI            = LUIE.UI
-local DelayBuffer   = LUIE.DelayBuffer
-local strfmt        = string.format
+local strfmt		= string.format
+local pairs 		= pairs
 
 local moduleName    = LUIE.name .. "_InfoPanel"
 
@@ -368,7 +368,7 @@ end
 -- Fake Component callback function used by main module
 function fakeControl.SetHidden(self, hidden)
     -- update not more then once every 5 second
-    if not hidden and DelayBuffer( "InfoPanelFakeControl", 5000 ) then
+    if not hidden and LUIE.DelayBuffer( "InfoPanelFakeControl", 5000 ) then
         PNL.OnUpdate60()
     end
 end

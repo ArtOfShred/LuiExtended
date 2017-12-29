@@ -6,6 +6,12 @@ local A = {}
 -- INNATE ABILITIES ----------------------------------
 -- ---------------------------------------------------
 
+-- Simulated Auras
+A.Innate_Recall_Penalty				= GetString(SI_LUIE_SKILL_RECALL_PENALTY) -- Recall Penalty
+A.Innate_Vanity_Pet					= GetString(SI_LUIE_SKILL_VANITY_PET) -- Vanity Pet
+A.Innate_Mounted					= GetString(SI_LUIE_SKILL_MOUNTED) -- Mounted
+A.Innate_Resurrection_Immunity		= GetString(SI_LUIE_SKILL_RESURRECTION_IMMUNITY) -- Resurrection Immunity
+
 -- Player Basic
 A.Innate_Crouch						= 20306	-- Crouch
 A.Innate_Crouch_Stun				= GetString(SI_LUIE_SKILL_CROUCH_STUN) -- Crouch Stun
