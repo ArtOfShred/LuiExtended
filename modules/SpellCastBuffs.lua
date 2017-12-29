@@ -1882,6 +1882,10 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
     buff.label:SetAnchor(TOPLEFT, buff, LEFT, -g_padding, -SCB.SV.LabelPosition)
     buff.label:SetAnchor(BOTTOMRIGHT, buff, BOTTOMRIGHT, g_padding, -2)
     buff.label:SetHidden( not SCB.SV.RemainingText )
+	buff.stack:SetAnchor(CENTER, buff, BOTTOMLEFT, 0, 0)
+	buff.stack:SetAnchor(CENTER, buff, TOPRIGHT, -g_padding * 3, g_padding * 3)
+	buff.stack:SetHidden( true )
+	
     if buff.cd ~= nil then
         buff.cd:SetHidden(     not SCB.SV.RemainingCooldown )
         buff.iconbg:SetHidden( not SCB.SV.RemainingCooldown ) -- We do not need black icon background when there is no Cooldown control present
@@ -1950,6 +1954,10 @@ function SCB.CreateSingleIcon(container, AnchorItem)
     buff.label = UI.Label( buff, nil, nil, nil, g_buffsFont, nil, false )
     buff.label:SetAnchor(TOPLEFT, buff, LEFT, -g_padding, -SCB.SV.LabelPosition)
     buff.label:SetAnchor(BOTTOMRIGHT, buff, BOTTOMRIGHT, g_padding, -2)
+	-- Stack label
+	buff.stack = UI.Label( buff, nil, nil, nil, g_buffsFont, nil, false )
+	buff.stack:SetAnchor(CENTER, buff, BOTTOMLEFT, 0, 0)
+	buff.stack:SetAnchor(CENTER, buff, TOPRIGHT, -g_padding * 3, g_padding * 3)
     -- Cooldown circular control
     if buff.iconbg ~= nil then
         buff.cd = WINDOW_MANAGER:CreateControl(nil, buff, CT_COOLDOWN)
@@ -1987,6 +1995,7 @@ function SCB.SetSingleIconBuffType(buff, buffType, unbreakable)
 
     buff.frame:SetTexture("/esoui/art/actionbar/" .. contextType .. "_frame.dds")
     buff.label:SetColor( unpack( SCB.SV.RemainingTextColoured and colour or {1,1,1,1} ) )
+	buff.stack:SetColor( unpack( SCB.SV.RemainingTextColoured and colour or {1,1,1,1} ) )
     if buff.cd ~= nil then
         buff.cd:SetFillColor( unpack(colour) )
     end
@@ -2184,6 +2193,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                     dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
                     forced=forcedType,
                     restart=true, iconNum=0,
+					stack = stackCount,
                     unbreakable=unbreakable }
            
         -- Create a fake container for certain major/minor buffs
@@ -2194,6 +2204,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                     dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
                     forced=forcedType,
                     restart=true, iconNum=0,
+					stack = stackCount,
                     unbreakable=unbreakable }
         end
     end
@@ -3056,6 +3067,13 @@ function SCB.updateIcons( currentTime, sortedList, container )
                 -- buff.label:SetText( E.IsToggle[effect.name] and "T" or E.IsVampStage(effect) and (E.IsVampStage(effect)) or nil ) -- Deprecated
             end
         end
+		
+		if effect.stack and effect.stack > 1 then
+			buff.stack:SetText( strfmt("%s", effect.stack) )
+			buff.stack:SetHidden(false)
+		else
+			buff.stack:SetHidden(true)
+		end
 
         -- For update remaining text. For temporary effects this is not very efficient, but we have not much such effects
         if remain then
