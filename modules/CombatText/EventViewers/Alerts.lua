@@ -141,6 +141,10 @@ function CTV:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, 
     control:SetAnchor(CENTER, CombatText_Alert, TOP, 0, self.locationOffset * (S.fontSizes.alert + 5))
     self.locationOffset = self.locationOffset + 1
     self.activeAlerts = self.activeAlerts + 1
+	-- Move back up if we hit 5 alerts active at once.
+	if self.locationOffset == 5 then 
+		self.locationOffset = 0 
+	end
 
     --Get animation
     local animationPoolType = poolTypes.ANIMATION_ALERT
