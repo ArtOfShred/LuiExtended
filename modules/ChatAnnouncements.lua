@@ -210,7 +210,7 @@ CA.D = {
 	},
 
     -- QUEST
-	Quest = {
+	Quests = {
 		QuestShareCA                    = true,
 		QuestShareAlert                 = false,
 		QuestColorLocName               = { 1, 1, 1, 1 },
@@ -820,10 +820,10 @@ function CA.RegisterColorEvents()
     SkillGuildColorizeTG = ZO_ColorDef:New(unpack(CA.SV.Skills.SkillGuildColorTG)):ToHex()
     SkillGuildColorizeDB = ZO_ColorDef:New(unpack(CA.SV.Skills.SkillGuildColorDB)):ToHex()
     
-    QuestColorLocNameColorize = ZO_ColorDef:New(unpack(CA.SV.Quest.QuestColorLocName)):ToHex()
-    QuestColorLocDescriptionColorize = ZO_ColorDef:New(unpack(CA.SV.Quest.QuestColorLocDescription)):ToHex()
-    QuestColorQuestNameColorize = ZO_ColorDef:New(unpack(CA.SV.Quest.QuestColorName))
-    QuestColorQuestDescriptionColorize = ZO_ColorDef:New(unpack(CA.SV.Quest.QuestColorDescription)):ToHex()
+    QuestColorLocNameColorize = ZO_ColorDef:New(unpack(CA.SV.Quests.QuestColorLocName)):ToHex()
+    QuestColorLocDescriptionColorize = ZO_ColorDef:New(unpack(CA.SV.Quests.QuestColorLocDescription)):ToHex()
+    QuestColorQuestNameColorize = ZO_ColorDef:New(unpack(CA.SV.Quests.QuestColorName))
+    QuestColorQuestDescriptionColorize = ZO_ColorDef:New(unpack(CA.SV.Quests.QuestColorDescription)):ToHex()
     
     StorageRidingColorize = ZO_ColorDef:New(unpack(CA.SV.Notify.StorageRidingColor))
     StorageRidingBookColorize = ZO_ColorDef:New(unpack(CA.SV.Notify.StorageRidingBookColor))
@@ -1510,7 +1510,7 @@ function CA.FriendPlayerStatus(eventCode, displayName, characterName, oldStatus,
 end
 
 function CA.QuestShared(eventCode, questId)
-    if CA.SV.Quest.QuestShareCA or CA.SV.Quest.QuestShareAlert then
+    if CA.SV.Quests.QuestShareCA or CA.SV.Quests.QuestShareAlert then
         local questName, characterName, timeSinceRequestMs, displayName = GetOfferedQuestShareInfo(questId)
         
         local finalName = CA.ResolveNameLink(characterName, displayName)
@@ -1518,10 +1518,10 @@ function CA.QuestShared(eventCode, questId)
         local message = strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE), finalName, QuestColorQuestNameColorize:Colorize(questName))
         local alertMessage = strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_P2P), finalName, questName)
        
-        if CA.SV.Quest.QuestShareCA then
+        if CA.SV.Quests.QuestShareCA then
             printToChat(message)
         end
-        if CA.SV.Quest.QuestShareAlert then
+        if CA.SV.Quests.QuestShareAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
         end
     end
@@ -6650,17 +6650,17 @@ function CA.HookFunction()
                 instanceDisplayType = instanceDisplayType
             }
         
-        if CA.SV.Quest.QuestAcceptCA then
+        if CA.SV.Quests.QuestAcceptCA then
             local questNameFormatted
             local stepText = GetJournalQuestStepInfo(journalIndex, 1)
             local formattedString
 
-            if CA.SV.Quest.QuestLong then
+            if CA.SV.Quests.QuestLong then
                 questNameFormatted = (strformat("|c<<1>><<2>>:|r |c<<3>><<4>>|r", QuestColorQuestNameColorize:ToHex(), questName, QuestColorQuestDescriptionColorize, stepText))
             else
                 questNameFormatted = (strformat("|c<<1>><<2>>|r", QuestColorQuestNameColorize:ToHex(), questName))
             end
-            if iconTexture and CA.SV.Quest.QuestIcon then
+            if iconTexture and CA.SV.Quests.QuestIcon then
                 formattedString = strfmt(GetString(SI_LUIE_CA_QUEST_ACCEPT) .. zo_iconFormat(iconTexture, 16, 16) .. " " .. questNameFormatted)
             else
                 formattedString = strfmt("%s%s", GetString(SI_LUIE_CA_QUEST_ACCEPT), questNameFormatted)
@@ -6671,7 +6671,7 @@ function CA.HookFunction()
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
         
-        if CA.SV.Quest.QuestAcceptCSA then
+        if CA.SV.Quests.QuestAcceptCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.QUEST_ACCEPTED)
             if iconTexture then
                 messageParams:SetText(strformat(SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName))
@@ -6682,9 +6682,9 @@ function CA.HookFunction()
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
         
-        if CA.SV.Quest.QuestAcceptAlert then
+        if CA.SV.Quests.QuestAcceptAlert then
             local alertString
-            if iconTexture and CA.SV.Quest.QuestIcon then
+            if iconTexture and CA.SV.Quests.QuestIcon then
                 alertString = strformat(SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
             else
                 alertString = strformat(SI_NOTIFYTEXT_QUEST_ACCEPT, questName)
@@ -6693,7 +6693,7 @@ function CA.HookFunction()
         end
         
         -- If we don't have either CSA or Alert on (then we want to play a sound here)
-        if not CA.SV.Quest.QuestAcceptCSA then
+        if not CA.SV.Quests.QuestAcceptCSA then
             PlaySound(SOUNDS.QUEST_ACCEPTED)
         end
         return true
@@ -6712,7 +6712,7 @@ function CA.HookFunction()
         local questJournalObject = SYSTEMS:GetObject("questJournal")
         local iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
         
-        if CA.SV.Quest.QuestCompleteCSA then
+        if CA.SV.Quests.QuestCompleteCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.QUEST_COMPLETED)
             if iconTexture then
                 messageParams:SetText(strformat(SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName))
@@ -6726,9 +6726,9 @@ function CA.HookFunction()
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
         
-        if CA.SV.Quest.QuestCompleteAlert then
+        if CA.SV.Quests.QuestCompleteAlert then
             local alertString
-            if iconTexture and CA.SV.Quest.QuestIcon then
+            if iconTexture and CA.SV.Quests.QuestIcon then
                 alertString = strformat(SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
             else
                 alertString = strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questName)
@@ -6736,10 +6736,10 @@ function CA.HookFunction()
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertString)
         end
         
-        if CA.SV.Quest.QuestCompleteCA then
+        if CA.SV.Quests.QuestCompleteCA then
             local questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
             local formattedString
-            if iconTexture and CA.SV.Quest.QuestIcon then
+            if iconTexture and CA.SV.Quests.QuestIcon then
                 formattedString = strformat(SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, 16, 16), questNameFormatted)
             else
                 formattedString = strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questNameFormatted)
@@ -6756,7 +6756,7 @@ function CA.HookFunction()
         end
         
         -- If we don't have either CSA or Alert on (then we want to play a sound here)
-        if not CA.SV.Quest.QuestCompleteCSA then
+        if not CA.SV.Quests.QuestCompleteCSA then
             PlaySound(SOUNDS.QUEST_COMPLETED)
         end
         
@@ -6775,18 +6775,18 @@ function CA.HookFunction()
         local nameFormatted
         local formattedText
 
-        if CA.SV.Quest.QuestLocLong and finishedDescription ~= "" then
+        if CA.SV.Quests.QuestLocLong and finishedDescription ~= "" then
             nameFormatted = (strformat("|c<<1>><<2>>:|r |c<<3>><<4>>|r", QuestColorLocNameColorize, name, QuestColorLocDescriptionColorize, finishedDescription))
         else
             nameFormatted = (strformat("|c<<1>><<2>>|r", QuestColorLocNameColorize, name))
         end
         formattedText = strformat(SI_NOTIFYTEXT_OBJECTIVE_COMPLETE, nameFormatted)
         
-        if CA.SV.Quest.QuestCompleteAlert then
+        if CA.SV.Quests.QuestCompleteAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_NOTIFYTEXT_OBJECTIVE_COMPLETE, name))
         end
         
-        if CA.SV.Quest.QuestCompleteCSA then
+        if CA.SV.Quests.QuestCompleteCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.OBJECTIVE_COMPLETED)
             if not LUIE.SV.HideXPBar then
                 messageParams:SetBarParams(GetRelevantBarParams(level, previousExperience, currentExperience, championPoints))
@@ -6796,7 +6796,7 @@ function CA.HookFunction()
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
         
-        if CA.SV.Quest.QuestCompleteCA then
+        if CA.SV.Quests.QuestCompleteCA then
             -- This event double fires on quest completion, if an equivalent message is already detected in queue, then abort!
             for i = 1, #g_queuedMessages do
                 if g_queuedMessages[i].message == formattedText then
@@ -6874,35 +6874,35 @@ function CA.HookFunction()
         messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_CONDITION_COUNTER_CHANGED)
         
         if type == 1 then
-            if CA.SV.Quest.QuestObjCompleteCA then
+            if CA.SV.Quests.QuestObjCompleteCA then
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedMessage, type = "QUEST" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
-            if CA.SV.Quest.QuestObjCompleteCSA then
+            if CA.SV.Quests.QuestObjCompleteCSA then
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
-            if CA.SV.Quest.QuestObjCompleteAlert then
+            if CA.SV.Quests.QuestObjCompleteAlert then
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
             end
-            if not CA.SV.Quest.QuestObjCompleteCSA then
+            if not CA.SV.Quests.QuestObjCompleteCSA then
                 PlaySound(sound)
             end
         end
         
         if type == 2 then
-            if CA.SV.Quest.QuestFailCA then
+            if CA.SV.Quests.QuestFailCA then
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedMessage, type = "QUEST" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
-            if CA.SV.Quest.QuestFailCSA then
+            if CA.SV.Quests.QuestFailCSA then
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
-            if CA.SV.Quest.QuestFailAlert then
+            if CA.SV.Quests.QuestFailAlert then
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
             end
-            if not CA.SV.Quest.QuestFailCSA then
+            if not CA.SV.Quests.QuestFailCSA then
                 PlaySound(sound)
             end
         end
@@ -6916,23 +6916,23 @@ function CA.HookFunction()
             local message = strformat ("|c<<1>><<2>>|r", QuestColorQuestDescriptionColorize, text)
             local formattedString = strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, message)
             
-            if CA.SV.Quest.QuestObjCompleteCA then
+            if CA.SV.Quests.QuestObjCompleteCA then
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
             
-            if CA.SV.Quest.QuestObjCompleteCSA then
+            if CA.SV.Quests.QuestObjCompleteCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.QUEST_OBJECTIVE_COMPLETE)
                 messageParams:SetText(strformat(SI_ALERTTEXT_QUEST_CONDITION_UPDATE_NO_COUNT, text))
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_OPTIONAL_STEP_ADVANCED)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
             
-            if CA.SV.Quest.QuestObjCompleteAlert then
+            if CA.SV.Quests.QuestObjCompleteAlert then
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, formattedString)
             end
-            if not CA.SV.Quest.QuestObjCompleteCSA then
+            if not CA.SV.Quests.QuestObjCompleteCSA then
                 PlaySound(SOUNDS.QUEST_OBJECTIVE_COMPLETE)
             end
         end
@@ -6942,7 +6942,7 @@ function CA.HookFunction()
     local function OnQuestRemoved(eventId, isCompleted, journalIndex, questName, zoneIndex, poiIndex)
     
         if not isCompleted then
-            if CA.SV.Quest.QuestAbandonCA or CA.SV.Quest.QuestAbandonCSA or CA.SV.Quest.QuestAbandonAlert then
+            if CA.SV.Quests.QuestAbandonCA or CA.SV.Quests.QuestAbandonCSA or CA.SV.Quests.QuestAbandonAlert then
             
                 local iconTexture
                 
@@ -6953,10 +6953,10 @@ function CA.HookFunction()
                     iconTexture = questJournalObject:GetIconTexture(questType, instanceDisplayType)
                 end
             
-                if CA.SV.Quest.QuestAbandonCA then
+                if CA.SV.Quests.QuestAbandonCA then
                     local questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
                     local formattedString
-                    if iconTexture and CA.SV.Quest.QuestIcon then
+                    if iconTexture and CA.SV.Quests.QuestIcon then
                         formattedString = strformat(SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON, zo_iconFormat(iconTexture, 16, 16), questNameFormatted)
                     else
                         formattedString = strformat(SI_LUIE_CA_QUEST_ABANDONED, questNameFormatted)
@@ -6966,7 +6966,7 @@ function CA.HookFunction()
                     EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
 
-                if CA.SV.Quest.QuestAbandonCSA then
+                if CA.SV.Quests.QuestAbandonCSA then
                     local formattedString
                     if iconTexture then
                         formattedString = strformat(SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
@@ -6979,9 +6979,9 @@ function CA.HookFunction()
                     CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                 end
                 
-                if CA.SV.Quest.QuestAbandonAlert then
+                if CA.SV.Quests.QuestAbandonAlert then
                     local formattedString
-                    if iconTexture and CA.SV.Quest.QuestIcon then
+                    if iconTexture and CA.SV.Quests.QuestIcon then
                         formattedString = strformat(SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
                     else
                         formattedString = strformat(SI_LUIE_CA_QUEST_ABANDONED, questName)
@@ -6990,7 +6990,7 @@ function CA.HookFunction()
                 end
                     
             end
-            if not CA.SV.Quest.QuestAbandonCSA then
+            if not CA.SV.Quests.QuestAbandonCSA then
                 PlaySound(SOUNDS.QUEST_ABANDONED)
             end
         end
@@ -7009,19 +7009,19 @@ function CA.HookFunction()
 
             if visibility == nil or visibility == QUEST_STEP_VISIBILITY_OPTIONAL then
                 if stepOverrideText ~= "" then
-                    if CA.SV.Quest.QuestObjUpdateCA then
+                    if CA.SV.Quests.QuestObjUpdateCA then
                         g_queuedMessages[g_queuedMessagesCounter] = { message = stepOverrideText, type = "QUEST" }
                         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                         EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                     end
-                    if CA.SV.Quest.QuestObjUpdateCSA then
+                    if CA.SV.Quests.QuestObjUpdateCSA then
                         local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, sound)
                         messageParams:SetText(stepOverrideText)
                         messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_OPTIONAL_STEP_ADVANCED)
                         CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                         sound = nil -- no longer needed, we played it once
                     end
-                    if CA.SV.Quest.QuestObjUpdateAlert then
+                    if CA.SV.Quests.QuestObjUpdateAlert then
                         ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, stepOverrideText)
                     end
                 else
@@ -7029,26 +7029,26 @@ function CA.HookFunction()
                         local conditionText, curCount, maxCount, isFailCondition, isConditionComplete, _, isVisible  = GetJournalQuestConditionInfo(questIndex, stepIndex, conditionIndex)
 
                         if not (isFailCondition or isConditionComplete) and isVisible then
-                            if CA.SV.Quest.QuestObjUpdateCA then
+                            if CA.SV.Quests.QuestObjUpdateCA then
                                 g_queuedMessages[g_queuedMessagesCounter] = { message = conditionText, type = "QUEST" }
                                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                                 EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                             end
-                            if CA.SV.Quest.QuestObjUpdateCSA then
+                            if CA.SV.Quests.QuestObjUpdateCSA then
                                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, sound)
                                 messageParams:SetText(conditionText)
                                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_QUEST_OPTIONAL_STEP_ADVANCED)
                                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                                 sound = nil -- no longer needed, we played it once
                             end
-                            if CA.SV.Quest.QuestObjUpdateAlert then
+                            if CA.SV.Quests.QuestObjUpdateAlert then
                                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, conditionText)
                             end
                         end
                     end
                 end
                 -- We send soundOverride = true from OnQuestAdded in order to stop the sound from spamming if CSA isn't on and a quest is accepted.
-                if not CA.SV.Quest.QuestObjUpdateCSA and not soundOverride then
+                if not CA.SV.Quests.QuestObjUpdateCSA and not soundOverride then
                     PlaySound(SOUNDS.QUEST_OBJECTIVE_STARTED)
                 end
             end
@@ -7064,7 +7064,7 @@ function CA.HookFunction()
         EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
         CA.PrintBufferedXP()
         
-        if CA.SV.Quest.QuestLocDiscoveryCA then
+        if CA.SV.Quests.QuestLocDiscoveryCA then
             local nameFormatted = (strformat("|c<<1>><<2>>|r", QuestColorLocNameColorize, subzoneName))
             local formattedString = strformat(SI_LUIE_CA_QUEST_DISCOVER, nameFormatted)
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
@@ -7072,7 +7072,7 @@ function CA.HookFunction()
             EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
         
-        if CA.SV.Quest.QuestLocDiscoveryCSA and not INTERACT_WINDOW:IsShowingInteraction() then
+        if CA.SV.Quests.QuestLocDiscoveryCSA and not INTERACT_WINDOW:IsShowingInteraction() then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.OBJECTIVE_DISCOVERED)
             if currentExperience > previousExperience then
                 if not LUIE.SV.HideXPBar then
@@ -7084,11 +7084,11 @@ function CA.HookFunction()
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
         
-        if CA.SV.Quest.QuestLocDiscoveryAlert then
+        if CA.SV.Quests.QuestLocDiscoveryAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_QUEST_DISCOVER, subzoneName))
         end
         
-        if not CA.SV.Quest.QuestLocDiscoveryCSA then
+        if not CA.SV.Quests.QuestLocDiscoveryCSA then
             PlaySound(SOUNDS.OBJECTIVE_DISCOVERED)
         end
         return true
@@ -7101,7 +7101,7 @@ function CA.HookFunction()
     
         local name, _, startDescription = GetPOIInfo(zoneIndex, poiIndex)
         
-        if CA.SV.Quest.QuestLocObjectiveCA then
+        if CA.SV.Quests.QuestLocObjectiveCA then
             local formattedString = (strformat("|c<<1>><<2>>:|r |c<<3>><<4>>|r", QuestColorLocNameColorize, name, QuestColorLocDescriptionColorize, startDescription))
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST_POI" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
@@ -7109,14 +7109,14 @@ function CA.HookFunction()
             
         end
         
-        if CA.SV.Quest.QuestLocObjectiveCSA then
+        if CA.SV.Quests.QuestLocObjectiveCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.OBJECTIVE_ACCEPTED)
             messageParams:SetText(strformat(SI_NOTIFYTEXT_OBJECTIVE_DISCOVERED, name), startDescription)
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_POI_DISCOVERED)
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
         
-        if CA.SV.Quest.QuestLocObjectiveAlert then
+        if CA.SV.Quests.QuestLocObjectiveAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_NOTIFYTEXT_OBJECTIVE_DISCOVERED, name), startDescription)
         end
         return true
@@ -7963,9 +7963,9 @@ function CA.HookFunction()
 			zo_callLater(function() g_stopDisplaySpam = false end, 5000)
 		end
 	
-		local flagCA = CA.SV.Quest.QuestICDiscoveryCA and true or false
-        local flagCSA = CA.SV.Quest.QuestICDiscoveryCSA and true or false
-        local flagAlert = CA.SV.Quest.QuestICDiscoveryAlert and true or false
+		local flagCA = CA.SV.Quests.QuestICDiscoveryCA and true or false
+        local flagCSA = CA.SV.Quests.QuestICDiscoveryCSA and true or false
+        local flagAlert = CA.SV.Quests.QuestICDiscoveryAlert and true or false
 		
 		-- Setup Strings
 		local titleString = number == 8 and GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE8_EDIT) or GetString("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE", number)
@@ -7974,11 +7974,11 @@ function CA.HookFunction()
 		local formatLine2 = GetString("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_", number)
 	
 		-- Setup final strings to display
-		local titleCA = CA.SV.Quest.QuestICDescription and strfmt("%s|c%s%s: |r", formatLine1, QuestColorLocNameColorize, formatLine2 ) or strfmt("%s|c%s%s|r", formatLine1, QuestColorLocNameColorize, formatLine2 )
+		local titleCA = CA.SV.Quests.QuestICDescription and strfmt("%s|c%s%s: |r", formatLine1, QuestColorLocNameColorize, formatLine2 ) or strfmt("%s|c%s%s|r", formatLine1, QuestColorLocNameColorize, formatLine2 )
 		local titleAlert = titleCA
 		local titleCSA = titleString
-		local descriptionCA = CA.SV.Quest.QuestICDescription and strfmt("|c%s%s|r", QuestColorLocDescriptionColorize, descriptionString) or ""
-		local descriptionAlert = CA.SV.Quest.QuestICDescription and descriptionString or ""
+		local descriptionCA = CA.SV.Quests.QuestICDescription and strfmt("|c%s%s|r", QuestColorLocDescriptionColorize, descriptionString) or ""
+		local descriptionAlert = CA.SV.Quests.QuestICDescription and descriptionString or ""
 		local descriptionCSA = descriptionString
 
         local messageParams
@@ -8706,10 +8706,10 @@ function CA.HookFunction()
             
             -- Quest Shared
             if data.incomingType == INTERACT_TYPE_QUEST_SHARE then
-                if CA.SV.Quest.QuestShareCA then
+                if CA.SV.Quests.QuestShareCA then
                     printToChat(strformat(message, typeString))
                 end
-                if CA.SV.Quest.QuestShareAlert then
+                if CA.SV.Quests.QuestShareAlert then
                     ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, strformat(message, typeString))
                 end
             end

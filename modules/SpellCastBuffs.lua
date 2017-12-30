@@ -3305,7 +3305,7 @@ function SCB.OnVibration(eventCode, duration, coarseMotor, fineMotor, leftTrigge
         SCB.NewEffects( {
             id = 999999,
             name = A.Innate_Resurrection_Immunity,
-            icon = "LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds",
+            icon = 'LuiExtended/media/icons/abilities/ability_innate_resurrection_immunity.dds',
             effects = {10000, 0, 0, 0}
         } )
     else
