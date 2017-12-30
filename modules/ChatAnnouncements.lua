@@ -178,7 +178,7 @@ CA.D = {
 	},
     
     -- COLLECTIBLES
-	Collectible = {
+	Collectibles = {
 		CollectibleCA                 = true,
 		CollectibleCSA                = true,
 		CollectibleAlert              = false,
@@ -191,7 +191,7 @@ CA.D = {
 	},
     
     -- LOREBOOKS
-	Lorebook = {
+	Lorebooks = {
 		LorebookCA                    = true, -- Display a CA for Lorebooks
 		LorebookCSA                   = true, -- Display a CSA for Lorebooks
 		LorebookAlert                 = false, -- Display a ZO_Alert for Lorebooks
@@ -795,8 +795,8 @@ function CA.RegisterColorEvents()
     CurrencyColorize = ZO_ColorDef:New(unpack(CA.SV.Currency.CurrencyColor))
     CurrencyUpColorize = ZO_ColorDef:New(unpack(CA.SV.Currency.CurrencyColorUp))
     CurrencyDownColorize = ZO_ColorDef:New(unpack(CA.SV.Currency.CurrencyColorDown))
-    CollectibleColorize1 = ZO_ColorDef:New(unpack(CA.SV.Collectible.CollectibleColor1))
-    CollectibleColorize2 = ZO_ColorDef:New(unpack(CA.SV.Collectible.CollectibleColor2))
+    CollectibleColorize1 = ZO_ColorDef:New(unpack(CA.SV.Collectibles.CollectibleColor1))
+    CollectibleColorize2 = ZO_ColorDef:New(unpack(CA.SV.Collectibles.CollectibleColor2))
     CurrencyGoldColorize = ZO_ColorDef:New(unpack(CA.SV.Currency.CurrencyGoldColor))
     CurrencyAPColorize = ZO_ColorDef:New(unpack(CA.SV.Currency.CurrencyAPColor))
     CurrencyTVColorize = ZO_ColorDef:New(unpack(CA.SV.Currency.CurrencyTVColor))
@@ -804,8 +804,8 @@ function CA.RegisterColorEvents()
     DisguiseAlertColorize = ZO_ColorDef:New(unpack(CA.SV.Notify.DisguiseAlertColor))
     AchievementColorize1 = ZO_ColorDef:New(unpack(CA.SV.Achievement.AchievementColor1))
     AchievementColorize2 = ZO_ColorDef:New(unpack(CA.SV.Achievement.AchievementColor2))
-    LorebookColorize1 = ZO_ColorDef:New(unpack(CA.SV.Lorebook.LorebookColor1))
-    LorebookColorize2 = ZO_ColorDef:New(unpack(CA.SV.Lorebook.LorebookColor2))
+    LorebookColorize1 = ZO_ColorDef:New(unpack(CA.SV.Lorebooks.LorebookColor1))
+    LorebookColorize2 = ZO_ColorDef:New(unpack(CA.SV.Lorebooks.LorebookColor2))
     ExperienceMessageColorize = ZO_ColorDef:New(unpack(CA.SV.XP.ExperienceColorMessage)):ToHex()
     ExperienceNameColorize = ZO_ColorDef:New(unpack(CA.SV.XP.ExperienceColorName)):ToHex()
     ExperienceLevelUpColorize = ZO_ColorDef:New(unpack(CA.SV.XP.ExperienceLevelUpColor))
@@ -5110,7 +5110,7 @@ function CA.HookFunction()
             
             local collectionName, _, numKnownBooks, totalBooks, hidden = GetLoreCollectionInfo(categoryIndex, collectionIndex)
             
-            if not hidden or CA.SV.Lorebook.LorebookShowHidden then
+            if not hidden or CA.SV.Lorebooks.LorebookShowHidden then
                 
                 local title, icon = GetLoreBookInfo(categoryIndex, collectionIndex, bookIndex)
                 local bookName
@@ -5127,25 +5127,25 @@ function CA.HookFunction()
                 local csaPrefix
                 if categoryIndex == 1 then 
                     -- Is a lore book
-                    stringPrefix = CA.SV.Lorebook.LorebookPrefix1
+                    stringPrefix = CA.SV.Lorebooks.LorebookPrefix1
                     csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_LORE_LIBRARY_ANNOUNCE_BOOK_LEARNED)
                 else
                     -- Is a normal book
-                    stringPrefix = CA.SV.Lorebook.LorebookPrefix2
+                    stringPrefix = CA.SV.Lorebooks.LorebookPrefix2
                     csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_LUIE_CA_LOREBOOK_BOOK)
                 end
                 
                 -- Chat Announcement
-                if CA.SV.Lorebook.LorebookCA then
-                    local formattedIcon = CA.SV.Lorebook.LorebookIcon and ("|t16:16:" .. icon .. "|t ") or ""
+                if CA.SV.Lorebooks.LorebookCA then
+                    local formattedIcon = CA.SV.Lorebooks.LorebookIcon and ("|t16:16:" .. icon .. "|t ") or ""
                     local stringPart1
                     local stringPart2
                     if stringPrefix ~= "" then 
-                        stringPart1 = LorebookColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Lorebook.LorebookBracket], stringPrefix, bracket2[CA.SV.Lorebook.LorebookBracket]))
+                        stringPart1 = LorebookColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Lorebooks.LorebookBracket], stringPrefix, bracket2[CA.SV.Lorebooks.LorebookBracket]))
                     else
                         stringPart1 = ""
                     end
-                    if CA.SV.Lorebook.LorebookCategory then
+                    if CA.SV.Lorebooks.LorebookCategory then
                         stringPart2 = collectionName ~= "" and LorebookColorize2:Colorize(strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), collectionName)) or LorebookColorize2:Colorize(strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY)))
                     else
                         stringPart2 = ""
@@ -5158,13 +5158,13 @@ function CA.HookFunction()
                 end
                 
                 -- Alert Announcement
-                if CA.SV.Lorebook.LorebookAlert then
+                if CA.SV.Lorebooks.LorebookAlert then
                     local text = collectionName ~= "" and strformat("<<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), collectionName) or strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY))
                     ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat("<<1>> <<2>>", title, text))
                 end
                 
                 -- Center Screen Announcement 
-                if CA.SV.Lorebook.LorebookCSA then
+                if CA.SV.Lorebooks.LorebookCSA then
                     local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.BOOK_ACQUIRED)
                     if collectionName ~= "" then
                         messageParams:SetText(csaPrefix, strformat(SI_LUIE_CA_LOREBOOK_ADDED_CSA, title, collectionName))
@@ -5175,7 +5175,7 @@ function CA.HookFunction()
                     messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_LORE_BOOK_LEARNED)
                     CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                 end
-                if not CA.SV.Lorebook.LorebookCSA then
+                if not CA.SV.Lorebooks.LorebookCSA then
                     PlaySound(SOUNDS.BOOK_ACQUIRED)
                 end
             end
@@ -6145,25 +6145,25 @@ function CA.HookFunction()
             local csaPrefix
             if categoryIndex == 1 then 
                 -- Is a lore book
-                stringPrefix = CA.SV.Lorebook.LorebookPrefix1
+                stringPrefix = CA.SV.Lorebooks.LorebookPrefix1
                 csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_LORE_LIBRARY_ANNOUNCE_BOOK_LEARNED)
             else
                 -- Is a normal book
-                stringPrefix = CA.SV.Lorebook.LorebookPrefix2
+                stringPrefix = CA.SV.Lorebooks.LorebookPrefix2
                 csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_LUIE_CA_LOREBOOK_BOOK)
             end
             
             -- Chat Announcement
-            if CA.SV.Lorebook.LorebookCA then
-                local formattedIcon = CA.SV.Lorebook.LorebookIcon and ("|t16:16:" .. icon .. "|t ") or ""
+            if CA.SV.Lorebooks.LorebookCA then
+                local formattedIcon = CA.SV.Lorebooks.LorebookIcon and ("|t16:16:" .. icon .. "|t ") or ""
                 local stringPart1
                 local stringPart2
                 if stringPrefix ~= "" then 
-                    stringPart1 = LorebookColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Lorebook.LorebookBracket], stringPrefix, bracket2[CA.SV.Lorebook.LorebookBracket]))
+                    stringPart1 = LorebookColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Lorebooks.LorebookBracket], stringPrefix, bracket2[CA.SV.Lorebooks.LorebookBracket]))
                 else
                     stringPart1 = ""
                 end
-                if CA.SV.Lorebook.LorebookCategory then
+                if CA.SV.Lorebooks.LorebookCategory then
                     stringPart2 = collectionName ~= "" and LorebookColorize2:Colorize(strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), collectionName)) or LorebookColorize2:Colorize(strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY)))
                 else
                     stringPart2 = ""
@@ -6176,13 +6176,13 @@ function CA.HookFunction()
             end
             
             -- Alert Announcement
-            if CA.SV.Lorebook.LorebookAlert then
+            if CA.SV.Lorebooks.LorebookAlert then
                 local text = collectionName ~= "" and strformat("<<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), collectionName) or strformat(" <<1>> <<2>>.", GetString(SI_LUIE_CA_LOREBOOK_ADDED_CA), GetString(SI_WINDOW_TITLE_LORE_LIBRARY))
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat("<<1>> <<2>>", title, text))
             end
             
             -- Center Screen Announcement
-            if CA.SV.Lorebook.LorebookCSA then
+            if CA.SV.Lorebooks.LorebookCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.BOOK_ACQUIRED)
                 if not LUIE.SV.HideXPBar then
                     local barType = PLAYER_PROGRESS_BAR:GetBarType(PPB_CLASS_SKILL, skillType, skillIndex)
@@ -6198,7 +6198,7 @@ function CA.HookFunction()
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_LORE_BOOK_LEARNED_SKILL_EXPERIENCE)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
-            if not CA.SV.Lorebook.LorebookCSA then
+            if not CA.SV.Lorebooks.LorebookCSA then
                 PlaySound(SOUNDS.BOOK_ACQUIRED)
             end
         end
@@ -6210,23 +6210,23 @@ function CA.HookFunction()
             -- Only fire this message if we're not part of the guild or at max level within the guild.
             -- TODO: Fix, this condition doesn't work
             local collectionName, description, numKnownBooks, totalBooks, hidden , textureName = GetLoreCollectionInfo(categoryIndex, collectionIndex)
-            local stringPrefix = CA.SV.Lorebook.LorebookCollectionPrefix
+            local stringPrefix = CA.SV.Lorebooks.LorebookCollectionPrefix
             local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_LORE_LIBRARY_COLLECTION_COMPLETED_LARGE)
-            if not hidden or CA.SV.Lorebook.LorebookShowHidden then
+            if not hidden or CA.SV.Lorebooks.LorebookShowHidden then
                 
-                if CA.SV.Lorebook.LorebookCollectionCA then
+                if CA.SV.Lorebooks.LorebookCollectionCA then
                     local formattedIcon
                     local stringPart1
                     local stringPart2
                     if stringPrefix ~= "" then
-                        stringPart1 = LorebookColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Lorebook.LorebookBracket], stringPrefix, bracket2[CA.SV.Lorebook.LorebookBracket]))
+                        stringPart1 = LorebookColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Lorebooks.LorebookBracket], stringPrefix, bracket2[CA.SV.Lorebooks.LorebookBracket]))
                     else
                         stringPart1 = ""
                     end
                     if textureName ~= "" and textureName ~= nil then
-                        formattedIcon = CA.SV.Lorebook.LorebookIcon and ("|t16:16:" .. textureName .. "|t ") or ""
+                        formattedIcon = CA.SV.Lorebooks.LorebookIcon and ("|t16:16:" .. textureName .. "|t ") or ""
                     end
-                    if CA.SV.Lorebook.LorebookCategory then
+                    if CA.SV.Lorebooks.LorebookCategory then
                         stringPart2 = LorebookColorize2:Colorize(strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
                     else
                         stringPart2 = ""
@@ -6238,7 +6238,7 @@ function CA.HookFunction()
                     EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
                 
-                if CA.SV.Lorebook.LorebookCollectionCSA then
+                if CA.SV.Lorebooks.LorebookCollectionCSA then
                     local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.BOOK_COLLECTION_COMPLETED)
                     messageParams:SetText(csaPrefix, strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
                     messageParams:SetIconData(textureName)
@@ -6246,11 +6246,11 @@ function CA.HookFunction()
                     CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                 end
                 
-                if CA.SV.Lorebook.LorebookCollectionAlert then
+                if CA.SV.Lorebooks.LorebookCollectionAlert then
                    local text = strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName)
                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
                 end
-                if not CA.SV.Lorebook.LorebookCSA then
+                if not CA.SV.Lorebooks.LorebookCSA then
                     PlaySound(SOUNDS.BOOK_COLLECTION_COMPLETED)
                 end
                 
@@ -6262,23 +6262,23 @@ function CA.HookFunction()
     local function LoreCollectionXPHook(categoryIndex, collectionIndex, guildReputationIndex, skillType, skillIndex, rank, previousXP, currentXP)
         if guildReputationIndex > 0 then
             local collectionName, description, numKnownBooks, totalBooks, hidden, textureName = GetLoreCollectionInfo(categoryIndex, collectionIndex)
-            local stringPrefix = CA.SV.Lorebook.LorebookCollectionPrefix
+            local stringPrefix = CA.SV.Lorebooks.LorebookCollectionPrefix
             local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_LORE_LIBRARY_COLLECTION_COMPLETED_LARGE)
-            if not hidden or CA.SV.Lorebook.LorebookShowHidden then
+            if not hidden or CA.SV.Lorebooks.LorebookShowHidden then
             
-                if CA.SV.Lorebook.LorebookCollectionCA then
+                if CA.SV.Lorebooks.LorebookCollectionCA then
                     local formattedIcon
                     local stringPart1
                     local stringPart2
                     if stringPrefix ~= "" then
-                        stringPart1 = LorebookColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Lorebook.LorebookBracket], stringPrefix, bracket2[CA.SV.Lorebook.LorebookBracket]))
+                        stringPart1 = LorebookColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Lorebooks.LorebookBracket], stringPrefix, bracket2[CA.SV.Lorebooks.LorebookBracket]))
                     else
                         stringPart1 = ""
                     end
                     if textureName ~= "" and textureName ~= nil then
-                        formattedIcon = CA.SV.Lorebook.LorebookIcon and strformat("<<1>> ", zo_iconFormatInheritColor(textureName, 16, 16)) or ""
+                        formattedIcon = CA.SV.Lorebooks.LorebookIcon and strformat("<<1>> ", zo_iconFormatInheritColor(textureName, 16, 16)) or ""
                     end
-                    if CA.SV.Lorebook.LorebookCategory then
+                    if CA.SV.Lorebooks.LorebookCategory then
                         stringPart2 = LorebookColorize2:Colorize(strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
                     else
                         stringPart2 = ""
@@ -6290,7 +6290,7 @@ function CA.HookFunction()
                     EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
             
-                if CA.SV.Lorebook.LorebookCollectionCSA then
+                if CA.SV.Lorebooks.LorebookCollectionCSA then
                     local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.BOOK_COLLECTION_COMPLETED)
                     if not LUIE.SV.HideXPBar then
                         local barType = PLAYER_PROGRESS_BAR:GetBarType(PPB_CLASS_SKILL, skillType, skillIndex)
@@ -6303,11 +6303,11 @@ function CA.HookFunction()
                     CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
                 end
                 
-                if CA.SV.Lorebook.LorebookCollectionAlert then
+                if CA.SV.Lorebooks.LorebookCollectionAlert then
                    local text = strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName)
                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
                 end
-                if not CA.SV.Lorebook.LorebookCSA then
+                if not CA.SV.Lorebooks.LorebookCSA then
                     PlaySound(SOUNDS.BOOK_COLLECTION_COMPLETED)
                 end
                 
@@ -6540,7 +6540,7 @@ function CA.HookFunction()
             return
         end
         
-        local stringPrefix = CA.SV.Collectible.CollectiblePrefix
+        local stringPrefix = CA.SV.Collectibles.CollectiblePrefix
         local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_TITLE)
         
         local collectibleName, _, iconFile = GetCollectibleInfo(collectibleId)
@@ -6553,18 +6553,18 @@ function CA.HookFunction()
             local subcategoryName = subcategoryIndex and GetCollectibleSubCategoryInfo(categoryIndex, subcategoryIndex) or nil
             local displayedCategory = subcategoryName and subcategoryName or categoryName
 
-            if CA.SV.Collectible.CollectibleCA then
+            if CA.SV.Collectibles.CollectibleCA then
                 local link = GetCollectibleLink(collectibleId, linkBrackets[CA.SV.BracketOptionCollectible])
-                local formattedIcon = CA.SV.Collectible.CollectibleIcon and strfmt("|t16:16:%s|t ", iconFile) or ""
+                local formattedIcon = CA.SV.Collectibles.CollectibleIcon and strfmt("|t16:16:%s|t ", iconFile) or ""
             
                 local string1
                 if stringPrefix ~= "" then 
-                    string1 = CollectibleColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Collectible.CollectibleBracket], stringPrefix, bracket2[CA.SV.Collectible.CollectibleBracket]))
+                    string1 = CollectibleColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Collectibles.CollectibleBracket], stringPrefix, bracket2[CA.SV.Collectibles.CollectibleBracket]))
                 else
                     string1 = ""
                 end
                 local string2
-                if CA.SV.Collectible.CollectibleCategory then
+                if CA.SV.Collectibles.CollectibleCategory then
                     string2 = CollectibleColorize2:Colorize(strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, link, displayedCategory) .. ".")
                 else
                     string2 = link
@@ -6575,7 +6575,7 @@ function CA.HookFunction()
                 EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
             
-            if CA.SV.Collectible.CollectibleCSA then
+            if CA.SV.Collectibles.CollectibleCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
                 messageParams:SetText(csaPrefix, strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, displayedCategory))
                 messageParams:SetIconData(iconFile, "EsoUI/Art/Achievements/achievements_iconBG.dds")
@@ -6583,7 +6583,7 @@ function CA.HookFunction()
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
             
-            if CA.SV.Collectible.CollectibleAlert then
+            if CA.SV.Collectibles.CollectibleAlert then
                 local text = strformat(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_BODY, collectibleName, displayedCategory .. ".")
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
             end
@@ -6595,13 +6595,13 @@ function CA.HookFunction()
     local function CollectiblesUnlockedHook(numJustUnlocked)
         if numJustUnlocked > 0 then
         
-            local stringPrefix = CA.SV.Collectible.CollectiblePrefix
+            local stringPrefix = CA.SV.Collectibles.CollectiblePrefix
             local csaPrefix = stringPrefix ~= "" and stringPrefix or GetString(SI_COLLECTIONS_UPDATED_ANNOUNCEMENT_TITLE)
             
-            if CA.SV.Collectible.CollectibleCA then
+            if CA.SV.Collectibles.CollectibleCA then
                 local string1
                 if stringPrefix ~= "" then 
-                    string1 = CollectibleColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Collectible.CollectibleBracket], stringPrefix, bracket2[CA.SV.Collectible.CollectibleBracket]))
+                    string1 = CollectibleColorize1:Colorize(strformat("<<1>><<2>><<3>> ", bracket1[CA.SV.Collectibles.CollectibleBracket], stringPrefix, bracket2[CA.SV.Collectibles.CollectibleBracket]))
                 else
                     string1 = ""
                 end
@@ -6612,14 +6612,14 @@ function CA.HookFunction()
                 EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
         
-            if CA.SV.Collectible.CollectibleCSA then
+            if CA.SV.Collectibles.CollectibleCSA then
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.COLLECTIBLE_UNLOCKED)
                 messageParams:SetText(csaPrefix, strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked))
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_COLLECTIBLES_UPDATED)
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
             end
             
-            if CA.SV.Collectible.CollectibleAlert then
+            if CA.SV.Collectibles.CollectibleAlert then
                 local text = strformat(SI_COLLECTIBLES_UPDATED_ANNOUNCEMENT_BODY, numJustUnlocked) .. "."
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, text)
             end
