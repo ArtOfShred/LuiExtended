@@ -123,7 +123,7 @@ CT.D = {
     --Alerts
         showAlertMitigation         = true,
         mitigationType              = "Single Line",
-        mitigationFormat            = "%t %i", -- %i %t
+        mitigationFormat            = "%t %i",
         mitigationSuffix            = GetString(SI_LUIE_CT_MITIGATION_SUFFIX_DEFAULT), -- "incoming! "
         mitigationRank3             = true,
         mitigationRank2             = true,

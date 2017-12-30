@@ -22,6 +22,7 @@ A.Innate_Block						= 14890 -- Block
 A.Innate_Block_Stun					= GetString(SI_LUIE_SKILL_BLOCK_STUN) -- Block Stun
 A.Innate_Bash						= 21970 -- Bash
 A.Innate_Gallop               		= GetString(SI_LUIE_SKILL_MOUNT_SPRINT) -- Gallop
+A.Innate_Hard_Dismount				= 42514
 A.Innate_Fall_Damage				= GetString(SI_LUIE_SKILL_FALL_DAMAGE) -- Fall Damage
 A.Innate_Absorbing_Skyshard			= GetString(SI_LUIE_SKILL_ABSORBING_SKYSHARD) -- Absorbing Skyshard
 A.Innate_Receiving_Boon				= GetString(SI_LUIE_SKILL_RECEIVING_BOON) -- Receiving Boon

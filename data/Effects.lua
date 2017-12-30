@@ -4295,7 +4295,6 @@ E.FakeExternalDebuffs = {
     [63194] = { icon = 'esoui/art/icons/ability_dragonknight_013.dds', name = 'Stonefist', duration = 6000 }, -- Flame Shard (Justice Guard 2H)
     
     -- Standard NPC Abilities
-    [42514] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', name = 'Hard Dismount', duration = 2000}, -- Hard Dismount (Player knocked off horse)
     [29401] = {icon = 'esoui/art/icons/ability_1handed_005.dds', name = 'Power Bash', duration = 3000}, --Power Bash (NPC Disorient)
     [14926] = {icon = 'esoui/art/icons/ability_warrior_011.dds', name ='Focused Charge', duration = 2000}, -- Charge (Human NPC)
     [63822] = {icon = 'esoui/art/icons/ability_nightblade_008.dds', name = 'Teleport Strike', duration = 1500}, -- Teleport Strike (Nightblade)
@@ -4471,6 +4470,9 @@ E.FakePlayerDebuffs = { -- Fake debuffs applied onto a target by the player
 -- We use this for debuffs applied on the player or on a target that don't need to check for a removal condition
 -- Useful for effects like staggers where there is no way to break out of them for the short duration they are applied
 E.FakeStagger = {
+
+	-- Player Basic
+	[42514] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_hard_dismount.dds', name = A.Innate_Hard_Dismount, duration = 2000}, -- Hard Dismount (Player knocked off horse)
 
     -- Destruction Staff
     [48009] = {icon = 'esoui/art/icons/ability_debuff_stagger.dds', name = A.Innate_Stagger, duration = 433}, -- Stagger (Crushing Shock - Rank 1)

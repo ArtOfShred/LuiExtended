@@ -2129,6 +2129,8 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     end
         
     local forcedType = E.EffectForcedType[abilityId] or E.EffectForcedName[effectName]
+	
+	if unitTag == "reticleover" and abilityId == 92428 and not IsUnitPlayer('reticleover') then return end 
 
     -- Where the new icon will go into
     local context = unitTag .. effectType
