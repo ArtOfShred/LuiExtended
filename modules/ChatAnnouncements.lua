@@ -9433,14 +9433,7 @@ function CA.PrintQueuedMessages()
         if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type == "NOTIFICATION" then
             printToChat(g_queuedMessages[i].message)
         end
-    end
-    
-    -- Resolve achievement update messages first
-    for i=1, #g_queuedMessages do
-        if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type == "ACHIEVEMENT" then
-            printToChat(g_queuedMessages[i].message)
-        end
-    end
+    end   
     
     -- Resolve quest POI added
     for i=1, #g_queuedMessages do
@@ -9522,6 +9515,13 @@ function CA.PrintQueuedMessages()
     -- Collectible
     for i=1, #g_queuedMessages do
         if g_queuedMessages[i].type == "COLLECTIBLE" then
+            printToChat(g_queuedMessages[i].message)
+        end
+    end
+	
+	-- Resolve achievement update messages second to last
+    for i=1, #g_queuedMessages do
+        if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type == "ACHIEVEMENT" then
             printToChat(g_queuedMessages[i].message)
         end
     end
