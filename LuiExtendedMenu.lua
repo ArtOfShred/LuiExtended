@@ -8054,6 +8054,14 @@ function LUIE_CreateSettings()
                     setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showParried = v end,
                     default = LUIE.CombatText.D.toggles.outgoing.showParried,
                 },
+				{--REFLECT
+                    type    = "checkbox",
+                    name    = GetString(SI_LUIE_LAM_CT_SHARED_REFLECTED),
+                    tooltip = GetString(SI_LUIE_LAM_CT_OUTGOING_REFLECTED_TP),
+                    getFunc = function() return LUIE.CombatText.SV.toggles.outgoing.showReflected end,
+                    setFunc = function(v) LUIE.CombatText.SV.toggles.outgoing.showReflected = v end,
+                    default = LUIE.CombatText.D.toggles.outgoing.showReflected,
+                },
                 {--DAMAGESHIELD
                     type    = "checkbox",
                     name    = GetString(SI_LUIE_LAM_CT_SHARED_DAMAGE_SHIELD),
@@ -8235,7 +8243,7 @@ function LUIE_CreateSettings()
                     text = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_DESCRIPTION),
                 },
                 
-                {--MITIGATION FORMAT
+                {--MITIGATION METHOD
                     type    = "dropdown",
                     name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD)),
                     tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD_TP),
@@ -8264,6 +8272,16 @@ function LUIE_CreateSettings()
                     setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationSuffix = v end,
                     disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
                     default = LUIE.CombatText.D.toggles.mitigationSuffix,
+                },
+				
+				{--MITIGATION AURA
+                    type    = "checkbox",
+                    name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_AURA)),
+                    tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_AURA_TP),
+                    getFunc = function() return LUIE.CombatText.SV.toggles.mitigationAura end,
+                    setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationAura = v end,
+                    disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                    default = LUIE.CombatText.D.toggles.mitigationAura,
                 },
                 
                 {--MITIGATION RANK 3

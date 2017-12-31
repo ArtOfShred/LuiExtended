@@ -53,7 +53,7 @@ function CTV:OnEvent(pointType, value)
     self:ControlLayout(control)
 
     --Control setup
-    control:SetAnchor(CENTER, CombatText_Point, TOP, 0, self.locationOffset * (S.fontSizes.point + 5))
+    control:SetAnchor(CENTER, LUIE_CombatText_Point, TOP, 0, self.locationOffset * (S.fontSizes.point + 5))
     self.locationOffset = self.locationOffset + 1
     self.activePoints = self.activePoints + 1
 

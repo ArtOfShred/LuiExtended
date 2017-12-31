@@ -23,7 +23,7 @@ function CTP:New(poolType)
 end
 
 function CTP:CreateNewControl()
-    local control = CreateControlFromVirtual('CombatText_Virtual_Instance', CombatText, 'CombatText_Virtual', self:GetNextControlId())
+    local control = CreateControlFromVirtual('LUIE_CombatText_Virtual_Instance', LUIE_CombatText, 'LUIE_CombatText_Virtual', self:GetNextControlId())
     control.label = control:GetNamedChild('_Amount')
     control.icon  = control:GetNamedChild('_Icon')  
     return control 

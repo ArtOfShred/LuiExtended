@@ -1748,6 +1748,8 @@ ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT",      "Mitigat
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_TP",   "Choose the format to display mitigation alerts.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX",                 "Add Suffix for Direct Attacks")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX_TP",              "Add the following suffix onto the message for attacks that are DIRECTLY targeting you. This will not display for static area of effect attacks or enemy healing abilites. Add a leading blank space here.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_AURA",                   "Display Alerts for Nearby NPC Events")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_AURA_TP",                "Many abilities that don't directly target the player can't be detected to provide a warning (such as a nearby NPC casting a healing ability). This option allows the Alert component to also detect auras and provide more information. However this can result in alerts being displayed for NPCs that are out of range of the player. Note that these events will still always be displayed in Dungeons.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_RANK3",                  "Display Alerts for Normal NPC Abilities")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_RANK3_TP",               "Enable to display alerts for abilites used by standard NPCs.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_RANK2",                  "Display Alerts for Elite/Quest NPC Abilities")
@@ -2005,11 +2007,11 @@ CombatTextLocalization = {
     --//PANEL TITLES//--
 ---------------------------------------------------------------------------------------------------------------------------------------
     panelTitles = {
-        CombatText_Outgoing                = "Outgoing",
-        CombatText_Incoming                = "Incoming",
-        CombatText_Point                   = "Points",
-        CombatText_Alert                   = "Alerts",
-        CombatText_Resource                = "Resources"
+        LUIE_CombatText_Outgoing                = "Outgoing",
+        LUIE_CombatText_Incoming                = "Incoming",
+        LUIE_CombatText_Point                   = "Points",
+        LUIE_CombatText_Alert                   = "Alerts",
+        LUIE_CombatText_Resource                = "Resources"
     },
 }
 -- ---------------------------------------------------

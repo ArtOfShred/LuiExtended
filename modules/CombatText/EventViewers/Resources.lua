@@ -51,7 +51,7 @@ function CTV:OnEvent(resourceType, value)
     self:ControlLayout(control)
 
     --Control setup
-    control:SetAnchor(CENTER, CombatText_Resource, TOP, 0, self.locationOffset * (S.fontSizes.resource + 5))
+    control:SetAnchor(CENTER, LUIE_CombatText_Resource, TOP, 0, self.locationOffset * (S.fontSizes.resource + 5))
     self.locationOffset = self.locationOffset + 1
     self.activeResources = self.activeResources + 1
 	if self.locationOffset == 4 then 

@@ -138,7 +138,7 @@ function CTV:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, 
     self:ControlLayout(control)
 
     --Control setup
-    control:SetAnchor(CENTER, CombatText_Alert, TOP, 0, self.locationOffset * (S.fontSizes.alert + 5))
+    control:SetAnchor(CENTER, LUIE_CombatText_Alert, TOP, 0, self.locationOffset * (S.fontSizes.alert + 5))
     self.locationOffset = self.locationOffset + 1
     self.activeAlerts = self.activeAlerts + 1
 	-- Move back up if we hit 5 alerts active at once.

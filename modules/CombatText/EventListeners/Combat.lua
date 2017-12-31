@@ -35,7 +35,7 @@ function CTL:EffectChanged(...)
     local S, combatType, togglesInOut = LUIE.CombatText.SV, nil, nil
     local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
     
-    if AlertT[abilityId] and AlertT[abilityId].auradetect and not refireDelay[abilityId] then
+    if S.toggles.showAlertMitigation and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) and AlertT[abilityId] and AlertT[abilityId].auradetect and not refireDelay[abilityId] then
     
         effectName = zo_strformat("<<C:1>>", effectName)
         
@@ -118,7 +118,10 @@ end
 
 function CTL:OnEvent(...)
     local resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId = ...
-    local S, combatType, togglesInOut = LUIE.CombatText.SV, nil, nil
+	
+	if not (C.isPlayer[targetType] or C.isPlayer[sourceType]) then return end
+	
+	local S, combatType, togglesInOut = LUIE.CombatText.SV, nil, nil
     abilityName = zo_strformat("<<C:1>>", abilityName)
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//INCOMING OUTGOING DIRECION//--
@@ -156,7 +159,7 @@ function CTL:OnEvent(...)
        (isDodged and togglesInOut.showDodged) or
        (isMiss and togglesInOut.showMiss) or
        (isImmune and togglesInOut.showImmune) or
-       (isReflected and S.toggles.outgoing.showReflected) or --If incoming is allowed, it will display whenever you cast reflect spells but with just outgoing it displays whenever incoming damage is reflected
+       (isReflected and togglesInOut.showReflected) or
        (isDamageShield and togglesInOut.showDamageShield) or
        (isParried and togglesInOut.showParried) or
        (isBlocked and togglesInOut.showBlocked) or
@@ -238,7 +241,7 @@ function CTL:OnEvent(...)
     end
     
     -- NEW ALERTS
-    if AlertT[abilityId] and sourceName ~= nil and sourceName ~= "" and (C.isPlayer[targetType]) and (resultType == ACTION_RESULT_BEGIN or resultType == ACTION_RESULT_BEGIN_CHANNEL or AlertT[abilityId].skipcheck) and not refireDelay[abilityId] then
+    if S.toggles.showAlertMitigation and AlertT[abilityId] and sourceName ~= nil and sourceName ~= "" and (C.isPlayer[targetType]) and (resultType == ACTION_RESULT_BEGIN or resultType == ACTION_RESULT_BEGIN_CHANNEL or AlertT[abilityId].skipcheck) and not refireDelay[abilityId] then
         if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then abilityName = LUIE.Effects.EffectOverride[abilityId].name end
         local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
         

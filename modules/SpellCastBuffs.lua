@@ -166,6 +166,36 @@ local function HasFailure( slotIndex )
     return false
 end
 
+
+--[[
+-- Simple linear tweening - no easing, no acceleration
+local function LinearTween(t, b, c, d)
+    return c*t/d + b
+end
+
+-- Quadratic easing in - accelerating from zero velocity
+local function EaseInQuad(t, b, c, d)
+    t = t / d
+    return c*t*t + b
+end
+]]
+
+-- Quadratic easing out - decelerating to zero velocity
+local function EaseOutQuad(t, b, c, d)
+    t = t / d
+    return -c * t*(t-2) + b
+end
+
+--[[
+-- Quadratic easing in/out - acceleration until halfway, then deceleration
+local function EaseInOutQuad(t, b, c, d)
+    t = t / (d/2);
+    if (t < 1) then return c/2*t*t + b end
+    t = t - 1
+    return -c/2 * (t*(t-2) - 1) + b
+end
+]]--
+
 --[[----------------------------------------------------------
     ACTIVE BUFF EFFECTS
     * Get a custom buff/debuff effect when the player casts a spell
@@ -1363,10 +1393,15 @@ function SCB.Initialize( enabled )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_ABILITY_USED,  SCB.OnSlotAbilityUsed )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, SCB.OnEffectChanged )
 
-    EVENT_MANAGER:RegisterForEvent(moduleName .. "player",          EVENT_COMBAT_EVENT, SCB.OnCombatEvent )
-    EVENT_MANAGER:RegisterForEvent(moduleName .. "reticleover",     EVENT_COMBAT_EVENT, SCB.OnCombatEvent )
-    EVENT_MANAGER:AddFilterForEvent(moduleName .. "player",         EVENT_COMBAT_EVENT, REGISTER_FILTER_UNIT_TAG, "player" )
-    EVENT_MANAGER:AddFilterForEvent(moduleName .. "reticleover",    EVENT_COMBAT_EVENT, REGISTER_FILTER_UNIT_TAG, "reticleover" )
+	--[[ TODO: Update 
+    EVENT_MANAGER:RegisterForEvent("LUIE_Event1", EVENT_COMBAT_EVENT, SCB.OnCombatEvent )
+    EVENT_MANAGER:RegisterForEvent("LUIE_Event2", EVENT_COMBAT_EVENT, SCB.OnCombatEvent )
+    EVENT_MANAGER:RegisterForEvent("LUIE_Event3", EVENT_COMBAT_EVENT, SCB.OnCombatEvent )
+    EVENT_MANAGER:AddFilterForEvent("LUIE_Event1", EVENT_COMBAT_EVENT, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false)
+	EVENT_MANAGER:AddFilterForEvent("LUIE_Event2", EVENT_COMBAT_EVENT, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER_PET, REGISTER_FILTER_IS_ERROR, false)
+    EVENT_MANAGER:AddFilterForEvent("LUIE_Event3", EVENT_COMBAT_EVENT, REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false)
+	]]--
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_COMBAT_EVENT, SCB.OnCombatEvent )
     EVENT_MANAGER:AddFilterForEvent(moduleName, EVENT_COMBAT_EVENT, REGISTER_FILTER_IS_ERROR, false )
 
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED,  SCB.OnDeath )
@@ -3059,7 +3094,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
         -- Now possibly fade out expiring icon
         if SCB.SV.FadeOutIcons and remain ~= nil and remain < 2000 then
             --buff:SetAlpha( 0.05 + remain/2106 )
-            buff:SetAlpha(E.easeOutQuad(remain, 0, 1, 2000))
+            buff:SetAlpha(EaseOutQuad(remain, 0, 1, 2000))
         end
     end
 

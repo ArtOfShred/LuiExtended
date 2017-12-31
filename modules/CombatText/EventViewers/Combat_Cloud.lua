@@ -53,8 +53,8 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
     local S = LUIE.CombatText.SV
 
     -- Control setup
-    local panel = CombatText_Outgoing
-    if (combatType == C.combatType.INCOMING) then panel = CombatText_Incoming end
+    local panel = LUIE_CombatText_Outgoing
+    if (combatType == C.combatType.INCOMING) then panel = LUIE_CombatText_Incoming end
     local w, h = panel:GetDimensions()
     local radiusW, radiusH = w/2, h*2
     local offsetX, offsetY = nil, nil

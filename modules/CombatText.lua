@@ -15,7 +15,7 @@ CT.D = {
 ---------------------------------------------------------------------------------------------------------------------------------------
     panels = {
     --Outgoing
-        CombatText_Outgoing = {
+        LUIE_CombatText_Outgoing = {
             point                   = CENTER,
             relativePoint           = CENTER,
             offsetX                 = 450,
@@ -23,7 +23,7 @@ CT.D = {
             dimensions              = { 400, 100 },
         },
     --Incoming
-        CombatText_Incoming = {
+        LUIE_CombatText_Incoming = {
             point                   = CENTER,
             relativePoint           = CENTER,
             offsetX                 = -450,
@@ -31,7 +31,7 @@ CT.D = {
             dimensions              = { 400, 100 },
         },
     --Alerts
-        CombatText_Alert = {
+        LUIE_CombatText_Alert = {
             point                   = CENTER,
             relativePoint           = CENTER,
             offsetX                 = 0,
@@ -39,7 +39,7 @@ CT.D = {
             dimensions              = { 400, 100 },
         },
     --Points
-        CombatText_Point = {
+        LUIE_CombatText_Point = {
             point                   = CENTER,
             relativePoint           = CENTER,
             offsetX                 = 0,
@@ -47,7 +47,7 @@ CT.D = {
             dimensions              = { 400, 100 },
         },
     --Resources
-        CombatText_Resource = {
+        LUIE_CombatText_Resource = {
             point                   = CENTER,
             relativePoint           = CENTER,
             offsetX                 = 0,
@@ -125,6 +125,7 @@ CT.D = {
         mitigationType              = "Single Line",
         mitigationFormat            = "%t %i",
         mitigationSuffix            = GetString(SI_LUIE_CT_MITIGATION_SUFFIX_DEFAULT), -- "incoming! "
+        mitigationAura              = false,
         mitigationRank3             = true,
         mitigationRank2             = true,
         mitigationRank1             = true,
@@ -389,8 +390,8 @@ function CT.Initialize( enabled )
     end
 
     --Allow mouse resizing of panels
-    CombatText_Incoming:SetResizeHandleSize(MOUSE_CURSOR_RESIZE_NS)
-    CombatText_Outgoing:SetResizeHandleSize(MOUSE_CURSOR_RESIZE_NS)
+    LUIE_CombatText_Incoming:SetResizeHandleSize(MOUSE_CURSOR_RESIZE_NS)
+    LUIE_CombatText_Outgoing:SetResizeHandleSize(MOUSE_CURSOR_RESIZE_NS)
 
     --Pool Manager
     local poolManager = LUIE.CombatTextPoolManager:New()

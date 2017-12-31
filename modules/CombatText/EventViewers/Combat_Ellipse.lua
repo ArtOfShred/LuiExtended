@@ -65,9 +65,9 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
     self:ControlLayout(control, abilityId, combatType, sourceName)
 
     -- Control setup
-    local panel, point, relativePoint = CombatText_Outgoing, BOTTOMRIGHT, TOPRIGHT
+    local panel, point, relativePoint = LUIE_CombatText_Outgoing, BOTTOMRIGHT, TOPRIGHT
     if (combatType == C.combatType.INCOMING) then
-        panel = CombatText_Incoming
+        panel = LUIE_CombatText_Incoming
         if (S.animation.incoming.directionType == 'up') then
             point, relativePoint = TOPRIGHT, BOTTOMRIGHT
         end

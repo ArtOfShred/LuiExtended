@@ -882,14 +882,12 @@ function CA.RegisterGuildEvents()
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MOTD_CHANGED, CA.GuildTextChanged)
     -- Index Guild Ranks
     g_guildRankData = {}
-    if CA.SV.Social.GuildRankCA or CA.SV.Social.GuildRankAlert then
-        for i = 1,5 do
-            local guildId = GetGuildId(i)
-            local memberIndex = GetPlayerGuildMemberIndex(guildId)
-            local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
-            g_guildRankData[guildId] = {rank=rankIndex}
-        end
-    end
+	for i = 1,5 do
+		local guildId = GetGuildId(i)
+		local memberIndex = GetPlayerGuildMemberIndex(guildId)
+		local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
+		g_guildRankData[guildId] = rankIndex
+	end
     
 end
 
@@ -1239,7 +1237,7 @@ function CA.GuildTextChanged(eventCode, guildId)
 end
 
 function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
-    local currentRank = g_guildRankData[guildId].rank
+    local currentRank = g_guildRankData[guildId]
     local hasPermission1 = DoesGuildRankHavePermission(guildId, currentRank, GUILD_PERMISSION_PROMOTE)
     local hasPermission2 = DoesGuildRankHavePermission(guildId, currentRank, GUILD_PERMISSION_DEMOTE)
 
@@ -1310,7 +1308,7 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
             changestring = GetString(SI_LUIE_CA_GUILD_RANK_DOWN)
         end
 
-        g_guildRankData[guildId].rank = newRank
+        g_guildRankData[guildId] = newRank
 
         local guilds = GetNumGuilds()
         for i = 1,guilds do
@@ -1362,14 +1360,12 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
 
     -- Reindex Guild Ranks
     g_guildRankData = {}
-    if CA.SV.Social.GuildRankCA or CA.SV.Social.GuildRankAlert then
-        for i = 1,5 do
-            local guildId = GetGuildId(i)
-            local memberIndex = GetPlayerGuildMemberIndex(guildId)
-            local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
-            g_guildRankData[guildId] = {rank=rankIndex}
-        end
-    end
+	for i = 1,5 do
+		local guildId = GetGuildId(i)
+		local memberIndex = GetPlayerGuildMemberIndex(guildId)
+		local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
+		g_guildRankData[guildId] = rankIndex
+	end
 end
 
 -- EVENT_GUILD_INVITE_ADDED
@@ -1842,6 +1838,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
     
     if currency == CURT_MONEY then -- Gold
         -- Send change info to the throttle printer and end function now if we throttle gold from loot.
+		if not CA.SV.Currency.CurrencyGoldChange then return end
         if CA.SV.Currency.CurrencyGoldThrottle and (reason == 0 or reason == 13) then
             -- NOTE: Unlike other throttle events, we used zo_callLater here because we have to make the call immediately (if some of the gold is looted after items, the message will appear after the loot if we don't use zo_callLater instead of a RegisterForUpdate)
             zo_callLater( CA.CurrencyGoldThrottlePrinter, 50 )
@@ -1864,6 +1861,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         messageTotal = CA.SV.Currency.CurrencyMessageTotalGold
 
     elseif currency == CURT_ALLIANCE_POINTS then -- Alliance Points
+		if not CA.SV.Currency.CurrencyAPShowChange then return end
         -- Send change info to the throttle printer and end function now if we throttle Alliance Points Gained
         if CA.SV.Currency.CurrencyAPThrottle > 0 and reason == 13 then
             EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedAP")
@@ -1892,7 +1890,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         messageTotal = CA.SV.Currency.CurrencyMessageTotalAP
 
     elseif currency == CURT_TELVAR_STONES then -- TelVar Stones
-    
+		if not CA.SV.Currency.CurrencyTVChange then return end
         -- Send change info to the throttle printer and end function now if we throttle Tel Var Gained
         if CA.SV.Currency.CurrencyTVThrottle > 0 and (reason == 0 or reason == 65) then
             EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedTV")
@@ -1921,12 +1919,12 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         messageTotal = CA.SV.Currency.CurrencyMessageTotalTV
 
     elseif currency == CURT_WRIT_VOUCHERS then -- Writ Vouchers
+		if not CA.SV.Currency.CurrencyWVChange then return end
         currencyTypeColor = CurrencyWVColorize:ToHex()
         currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_writvoucher.dds|t" or ""
         currencyName = strformat(CA.SV.Currency.CurrencyWVName, UpOrDown)
         currencyTotal = CA.SV.Currency.CurrencyWVShowTotal
         messageTotal = CA.SV.Currency.CurrencyMessageTotalWV
-        
     else -- If for some reason there is no currency type, end the function now
         return
     end
@@ -2590,41 +2588,6 @@ function CA.OnMailCloseBox(eventCode)
     g_mailStacksOut = {}
 end
 
--- Hook MAIL_SEND.Send to get name of player we send to.
-MAIL_SEND.Send = function(self)
-    WINDOW_MANAGER:SetFocusByName("")
-    if not self.sendMoneyMode and GetQueuedCOD() == 0 then
-        if CA.SV.Notify.NotificationMailCA then
-            printToChat(GetString(SI_LUIE_CA_MAIL_ERROR_NO_COD_VALUE))
-        end
-        if CA.SV.Notify.NotificationMailAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_CA_MAIL_ERROR_NO_COD_VALUE))
-        end
-        PlaySound(SOUNDS.NEGATIVE_CLICK)
-    else
-        SendMail(self.to:GetText(), self.subject:GetText(), self.body:GetText())
-        
-        local mailTarget = self.to:GetText()
-        local nameLink
-        -- Here we look for @ character in the sent mail, if the player send to an account then we want the link to be an account name link, otherwise, it's a character name link.
-        if string.match(mailTarget, "@") == "@" then
-            if CA.SV.BracketOptionCharacter == 1 then
-                nameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(mailTarget, nil, DISPLAY_NAME_LINK_TYPE, mailTarget)
-            else
-                nameLink = ZO_LinkHandler_CreateLink(mailTarget, nil, DISPLAY_NAME_LINK_TYPE, mailTarget)
-            end
-        else
-            if CA.SV.BracketOptionCharacter == 1 then
-                nameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(mailTarget, nil, CHARACTER_LINK_TYPE, mailTarget)
-            else
-                nameLink = ZO_LinkHandler_CreateLink(mailTarget, nil, CHARACTER_LINK_TYPE, mailTarget)
-            end
-        end
-        
-        g_mailTarget = ZO_SELECTED_TEXT:Colorize(nameLink)
-    end
-end
-
 -- Sends results of the trade to the Item Log print function and clears variables so they are reset for next trade interactions
 function CA.OnMailSuccess(eventCode)
 
@@ -3201,52 +3164,6 @@ local function DisplayQuestItem(itemId, stackCount, icon, reset)
     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
     EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
     
-end
-
-PLAYER_INVENTORY.AddQuestItem = function(self, questItem, searchType)
-    local inventory = self.inventories[INVENTORY_QUEST_ITEM]
-
-    questItem.inventory = inventory
-    --store all tools and items in a subtable under the questIndex for faster access
-    local questIndex = questItem.questIndex
-    if not inventory.slots[questIndex] then
-        inventory.slots[questIndex] = {}
-    end
-    table.insert(inventory.slots[questIndex], questItem)
-
-    local index = #inventory.slots[questIndex]
-
-    if(searchType == SEARCH_TYPE_QUEST_ITEM) then
-        questItem.searchData = {type = SEARCH_TYPE_QUEST_ITEM, questIndex = questIndex, stepIndex = questItem.stepIndex, conditionIndex = questItem.conditionIndex, index = index }
-    else
-        questItem.searchData = {type = SEARCH_TYPE_QUEST_TOOL, questIndex = questIndex, toolIndex = questItem.toolIndex, index = index }
-    end
-    
-    inventory.stringSearch:Insert(questItem.searchData)
-    -- Display Item if set to display
-    if CA.SV.Inventory.LootQuestAdd or CA.SV.Inventory.LootQuestRemove then
-        DisplayQuestItem(questItem.questItemId, questItem.stackCount, questItem.iconFile, false)
-    end
-end
-
-PLAYER_INVENTORY.ResetQuest = function(self, questIndex)
-    local inventory = self.inventories[INVENTORY_QUEST_ITEM]
-    local itemTable = inventory.slots[questIndex]
-    if itemTable then
-        --remove all quest items from search
-        for i = 1, #itemTable do
-            inventory.stringSearch:Remove(itemTable.searchData)
-            -- Display Item if set to display
-            if CA.SV.Inventory.LootQuestAdd or CA.SV.Inventory.LootQuestRemove then
-                local itemId = itemTable[i].questItemId
-                local stackCount = itemTable[i].stackCount
-                local icon = itemTable[i].iconFile
-                DisplayQuestItem(itemId, stackCount, icon, true)
-            end
-        end
-    end
-
-    inventory.slots[questIndex] = nil
 end
 
 function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound, lootType, lootedBySelf, isPickpocketLoot, questItemIcon, itemId, isStolen)
@@ -5812,14 +5729,12 @@ function CA.HookFunction()
 
         -- Reindex Guild Ranks
         g_guildRankData = {}
-        if CA.SV.Social.GuildRankCA or CA.SV.Social.GuildRankAlert then
-            for i = 1,5 do
-                local guildId = GetGuildId(i)
-                local memberIndex = GetPlayerGuildMemberIndex(guildId)
-                local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
-                g_guildRankData[guildId] = {rank=rankIndex}
-            end
-        end
+		for i = 1,5 do
+			local guildId = GetGuildId(i)
+			local memberIndex = GetPlayerGuildMemberIndex(guildId)
+			local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
+			g_guildRankData[guildId] = rankIndex
+		end
         return true
     end
     
@@ -8784,7 +8699,302 @@ function CA.HookFunction()
             NotificationDeclined(incomingEntryToRespondTo)
         end
     end
+	
+	-- Hook MAIL_SEND.Send to get name of player we send to.
+	MAIL_SEND.Send = function(self)
+		WINDOW_MANAGER:SetFocusByName("")
+		if not self.sendMoneyMode and GetQueuedCOD() == 0 then
+			if CA.SV.Notify.NotificationMailCA then
+				printToChat(GetString(SI_LUIE_CA_MAIL_ERROR_NO_COD_VALUE))
+			end
+			if CA.SV.Notify.NotificationMailAlert then
+				ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_CA_MAIL_ERROR_NO_COD_VALUE))
+			end
+			PlaySound(SOUNDS.NEGATIVE_CLICK)
+		else
+			SendMail(self.to:GetText(), self.subject:GetText(), self.body:GetText())
+			
+			local mailTarget = self.to:GetText()
+			local nameLink
+			-- Here we look for @ character in the sent mail, if the player send to an account then we want the link to be an account name link, otherwise, it's a character name link.
+			if string.match(mailTarget, "@") == "@" then
+				if CA.SV.BracketOptionCharacter == 1 then
+					nameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(mailTarget, nil, DISPLAY_NAME_LINK_TYPE, mailTarget)
+				else
+					nameLink = ZO_LinkHandler_CreateLink(mailTarget, nil, DISPLAY_NAME_LINK_TYPE, mailTarget)
+				end
+			else
+				if CA.SV.BracketOptionCharacter == 1 then
+					nameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(mailTarget, nil, CHARACTER_LINK_TYPE, mailTarget)
+				else
+					nameLink = ZO_LinkHandler_CreateLink(mailTarget, nil, CHARACTER_LINK_TYPE, mailTarget)
+				end
+			end
+			
+			g_mailTarget = ZO_SELECTED_TEXT:Colorize(nameLink)
+		end
+	end
 
+	PLAYER_INVENTORY.AddQuestItem = function(self, questItem, searchType)
+		local inventory = self.inventories[INVENTORY_QUEST_ITEM]
+
+		questItem.inventory = inventory
+		--store all tools and items in a subtable under the questIndex for faster access
+		local questIndex = questItem.questIndex
+		if not inventory.slots[questIndex] then
+			inventory.slots[questIndex] = {}
+		end
+		table.insert(inventory.slots[questIndex], questItem)
+
+		local index = #inventory.slots[questIndex]
+
+		if(searchType == SEARCH_TYPE_QUEST_ITEM) then
+			questItem.searchData = {type = SEARCH_TYPE_QUEST_ITEM, questIndex = questIndex, stepIndex = questItem.stepIndex, conditionIndex = questItem.conditionIndex, index = index }
+		else
+			questItem.searchData = {type = SEARCH_TYPE_QUEST_TOOL, questIndex = questIndex, toolIndex = questItem.toolIndex, index = index }
+		end
+		
+		inventory.stringSearch:Insert(questItem.searchData)
+		-- Display Item if set to display
+		if CA.SV.Inventory.LootQuestAdd or CA.SV.Inventory.LootQuestRemove then
+			DisplayQuestItem(questItem.questItemId, questItem.stackCount, questItem.iconFile, false)
+		end
+	end
+
+	PLAYER_INVENTORY.ResetQuest = function(self, questIndex)
+		local inventory = self.inventories[INVENTORY_QUEST_ITEM]
+		local itemTable = inventory.slots[questIndex]
+		if itemTable then
+			--remove all quest items from search
+			for i = 1, #itemTable do
+				inventory.stringSearch:Remove(itemTable.searchData)
+				-- Display Item if set to display
+				if CA.SV.Inventory.LootQuestAdd or CA.SV.Inventory.LootQuestRemove then
+					local itemId = itemTable[i].questItemId
+					local stackCount = itemTable[i].stackCount
+					local icon = itemTable[i].iconFile
+					DisplayQuestItem(itemId, stackCount, icon, true)
+				end
+			end
+		end
+
+		inventory.slots[questIndex] = nil
+	end
+
+	-- HOOK Group Invite function so we can modify CA/Alert here
+	TryGroupInviteByName = function(characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
+		if IsPlayerInGroup(characterOrDisplayName) then
+			printToChat(GetString(SI_GROUP_ALERT_INVITE_PLAYER_ALREADY_MEMBER))
+			if CA.SV.Group.GroupAlert then
+				ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, SI_GROUP_ALERT_INVITE_PLAYER_ALREADY_MEMBER)
+			end
+			PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+			return
+		end
+
+		local isLeader = IsUnitGroupLeader("player")
+		local groupSize = GetGroupSize()
+
+		if not isLeader and groupSize > 0 then
+			ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE))
+			return
+		end
+
+		if IsConsoleUI() then
+			local displayName = characterOrDisplayName
+
+			local function GroupInviteCallback(success)
+				if success then
+					CompleteGroupInvite(displayName, sentFromChat, displayInvitedMessage, isMenu)
+				end
+			end
+
+			ZO_ConsoleAttemptInteractOrError(GroupInviteCallback, displayName, ZO_PLAYER_CONSOLE_INFO_REQUEST_DONT_BLOCK, ZO_CONSOLE_CAN_COMMUNICATE_ERROR_ALERT, ZO_ID_REQUEST_TYPE_DISPLAY_NAME, displayName)
+		else
+			if IsIgnored(characterOrDisplayName) then
+				printToChat(GetString(SI_LUIE_IGNORE_ERROR_GROUP))
+				if CA.SV.Group.GroupAlert then
+					ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, SI_LUIE_IGNORE_ERROR_GROUP)
+				end
+				PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+				return
+			end
+
+			CompleteGroupInvite(characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
+		end    
+	end
+
+	-- Hook for EVENT_GUILD_MEMBER_ADDED
+	GUILD_ROSTER_MANAGER.OnGuildMemberAdded = function(self, guildId, displayName)
+		self:RefreshData()
+		
+		local displayNameLink 
+		if CA.SV.BracketOptionCharacter == 1 then
+			displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+		else
+			displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+		end
+		
+		local guildName = GetGuildName(guildId)
+
+		local guilds = GetNumGuilds()
+		for i = 1,guilds do
+			local id = GetGuildId(i)
+			local name = GetGuildName(id)
+			
+			if guildName == name then
+				local guildAlliance = GetGuildAlliance(id)
+				local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+				local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+				local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+
+				if CA.SV.Social.GuildCA then
+					printToChat(strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayNameLink, guildNameAlliance))
+				end
+				if CA.SV.Social.GuildAlert then
+					ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayName, guildNameAllianceAlert))
+				end
+				PlaySound(SOUNDS.GUILD_ROSTER_ADDED)
+				break
+			end
+		end
+		
+	end
+
+	-- Hook for EVENT_GUILD_MEMBER_REMOVED
+	GUILD_ROSTER_MANAGER.OnGuildMemberRemoved = function(self, guildId, rawCharacterName, displayName)
+
+		local displayNameLink 
+		if CA.SV.BracketOptionCharacter == 1 then
+			displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+		else
+			displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+		end
+
+		local guildName = GetGuildName(guildId)
+
+		local guilds = GetNumGuilds()
+		for i = 1,guilds do
+			local id = GetGuildId(i)
+			local name = GetGuildName(id)
+			
+			if guildName == name then
+				local guildAlliance = GetGuildAlliance(id)
+				local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+				local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+				local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+				
+				if CA.SV.Social.GuildCA then
+					printToChat(strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_LEFT), displayNameLink, guildNameAlliance))
+				end
+				if CA.SV.Social.GuildAlert then
+					ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_LEFT), displayName, guildNameAllianceAlert))
+				end
+				PlaySound(SOUNDS.GUILD_ROSTER_REMOVED)
+				break
+			end
+		end
+		self:RefreshData()
+		
+	end
+
+	-- Hook for Guild Invite function used from Guild Menu
+	ZO_TryGuildInvite = function(guildId, displayName, sentFromChat)
+
+		if not DoesPlayerHaveGuildPermission(guildId, GUILD_PERMISSION_INVITE) then
+			ZO_AlertEvent(EVENT_SOCIAL_ERROR, SOCIAL_RESULT_NO_INVITE_PERMISSION)
+			return
+		end
+
+		if GetNumGuildMembers(guildId) == MAX_GUILD_MEMBERS then
+			ZO_AlertEvent(EVENT_SOCIAL_ERROR, SOCIAL_RESULT_NO_ROOM)
+			return
+		end
+
+		local guildName = GetGuildName(guildId)
+		local guildAlliance = GetGuildAlliance(guildId)
+		local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
+		local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+		local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+		
+		if IsConsoleUI() then
+			local function GuildInviteCallback(success)
+				if success then
+					GuildInvite(guildId, displayName)
+					if CA.SV.Social.GuildCA then
+						printToChat(strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, UndecorateDisplayName(displayName), guildNameAlliance))
+					end
+					if CA.SV.Social.GuildAlert then
+						ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, UndecorateDisplayName(displayName), guildNameAllianceAlert))
+					end
+				end
+			end
+
+			ZO_ConsoleAttemptInteractOrError(GuildInviteCallback, displayName, ZO_PLAYER_CONSOLE_INFO_REQUEST_DONT_BLOCK, ZO_CONSOLE_CAN_COMMUNICATE_ERROR_ALERT, ZO_ID_REQUEST_TYPE_DISPLAY_NAME, displayName)
+		else
+			-- We can't stop the player from inviting players to guild by Character Name if sent from chat so, might as well not block it. This also makes it consistent with group invites. Can't invite from the radial menu but can use the slash command.
+			if IsIgnored(displayName) and not sentFromChat then
+				if CA.SV.Social.GuildCA then
+					printToChat(GetString(SI_LUIE_IGNORE_ERROR_GUILD))
+				end
+				if CA.SV.Social.GuildAlert then
+					ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_IGNORE_ERROR_GUILD))
+				end
+				PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+				return
+			end
+
+			GuildInvite(guildId, displayName)
+			if CA.SV.Social.GuildCA then
+				printToChat(strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAlliance))
+			end
+			if CA.SV.Social.GuildAlert then
+				ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAllianceAlert))
+			end
+		end    
+	end
+
+	-- Called when changing guilds in the Guild tab
+	GUILD_SHARED_INFO.SetGuildId = function(self, guildId)
+		self.guildId = guildId
+		self:Refresh(guildId)
+		-- Set selected guild for use when resolving Rank/Heraldry updates
+		g_selectedGuild = guildId
+	end
+
+	-- Called when changing guilds in the Guild tab or leaving/joining a guild
+	GUILD_SHARED_INFO.Refresh = function(self, guildId)
+		if(self.guildId and self.guildId == guildId) then
+			local count = GetControl(self.control, "Count")
+			local numGuildMembers, numOnline = GetGuildInfo(guildId)
+
+			count:SetText(strformat(SI_GUILD_NUM_MEMBERS_ONLINE_FORMAT, numOnline, numGuildMembers))
+
+			self.canDepositToBank = DoesGuildHavePrivilege(guildId, GUILD_PRIVILEGE_BANK_DEPOSIT)
+			if(self.canDepositToBank) then
+				self.bankIcon:SetColor(ZO_DEFAULT_ENABLED_COLOR:UnpackRGBA())
+			else
+				self.bankIcon:SetColor(ZO_DEFAULT_DISABLED_COLOR:UnpackRGBA())
+			end
+
+			self.canUseTradingHouse = DoesGuildHavePrivilege(guildId, GUILD_PRIVILEGE_TRADING_HOUSE)
+			if(self.canUseTradingHouse) then
+				self.tradingHouseIcon:SetColor(ZO_DEFAULT_ENABLED_COLOR:UnpackRGBA())
+			else
+				self.tradingHouseIcon:SetColor(ZO_DEFAULT_DISABLED_COLOR:UnpackRGBA())
+			end
+
+			self.canUseHeraldry = DoesGuildHavePrivilege(guildId, GUILD_PRIVILEGE_HERALDRY)
+			if(self.canUseHeraldry) then
+				self.heraldryIcon:SetColor(ZO_DEFAULT_ENABLED_COLOR:UnpackRGBA())
+			else
+				self.heraldryIcon:SetColor(ZO_DEFAULT_DISABLED_COLOR:UnpackRGBA())
+			end
+		end
+		-- Set selected guild for use when resolving Rank/Heraldry updates
+		g_selectedGuild = guildId
+	end
+	
 end
 
 -- Called by hooked TryGroupInviteByName function
@@ -8816,220 +9026,6 @@ local function CompleteGroupInvite(characterOrDisplayName, sentFromChat, display
             end
         end
     end
-end
-
--- HOOK Group Invite function so we can modify CA/Alert here
-TryGroupInviteByName = function(characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
-    if IsPlayerInGroup(characterOrDisplayName) then
-        printToChat(GetString(SI_GROUP_ALERT_INVITE_PLAYER_ALREADY_MEMBER))
-        if CA.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, SI_GROUP_ALERT_INVITE_PLAYER_ALREADY_MEMBER)
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    local isLeader = IsUnitGroupLeader("player")
-    local groupSize = GetGroupSize()
-
-    if not isLeader and groupSize > 0 then
-        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE))
-        return
-    end
-
-    if IsConsoleUI() then
-        local displayName = characterOrDisplayName
-
-        local function GroupInviteCallback(success)
-            if success then
-                CompleteGroupInvite(displayName, sentFromChat, displayInvitedMessage, isMenu)
-            end
-        end
-
-        ZO_ConsoleAttemptInteractOrError(GroupInviteCallback, displayName, ZO_PLAYER_CONSOLE_INFO_REQUEST_DONT_BLOCK, ZO_CONSOLE_CAN_COMMUNICATE_ERROR_ALERT, ZO_ID_REQUEST_TYPE_DISPLAY_NAME, displayName)
-    else
-        if IsIgnored(characterOrDisplayName) then
-            printToChat(GetString(SI_LUIE_IGNORE_ERROR_GROUP))
-            if CA.SV.Group.GroupAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, SI_LUIE_IGNORE_ERROR_GROUP)
-            end
-            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-            return
-        end
-
-        CompleteGroupInvite(characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
-    end    
-end
-
--- Hook for EVENT_GUILD_MEMBER_ADDED
-GUILD_ROSTER_MANAGER.OnGuildMemberAdded = function(self, guildId, displayName)
-    self:RefreshData()
-    
-    local displayNameLink 
-    if CA.SV.BracketOptionCharacter == 1 then
-        displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
-    else
-        displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
-    end
-    
-    local guildName = GetGuildName(guildId)
-
-    local guilds = GetNumGuilds()
-    for i = 1,guilds do
-        local id = GetGuildId(i)
-        local name = GetGuildName(id)
-        
-        if guildName == name then
-            local guildAlliance = GetGuildAlliance(id)
-            local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-            local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
-            local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
-
-            if CA.SV.Social.GuildCA then
-                printToChat(strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayNameLink, guildNameAlliance))
-            end
-            if CA.SV.Social.GuildAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayName, guildNameAllianceAlert))
-            end
-            PlaySound(SOUNDS.GUILD_ROSTER_ADDED)
-            break
-        end
-    end
-    
-end
-
--- Hook for EVENT_GUILD_MEMBER_REMOVED
-GUILD_ROSTER_MANAGER.OnGuildMemberRemoved = function(self, guildId, rawCharacterName, displayName)
-
-    local displayNameLink 
-    if CA.SV.BracketOptionCharacter == 1 then
-        displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
-    else
-        displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
-    end
-
-    local guildName = GetGuildName(guildId)
-
-    local guilds = GetNumGuilds()
-    for i = 1,guilds do
-        local id = GetGuildId(i)
-        local name = GetGuildName(id)
-        
-        if guildName == name then
-            local guildAlliance = GetGuildAlliance(id)
-            local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-            local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
-            local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
-            
-            if CA.SV.Social.GuildCA then
-                printToChat(strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_LEFT), displayNameLink, guildNameAlliance))
-            end
-            if CA.SV.Social.GuildAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_LEFT), displayName, guildNameAllianceAlert))
-            end
-            PlaySound(SOUNDS.GUILD_ROSTER_REMOVED)
-            break
-        end
-    end
-    self:RefreshData()
-    
-end
-
--- Hook for Guild Invite function used from Guild Menu
-ZO_TryGuildInvite = function(guildId, displayName, sentFromChat)
-
-    if not DoesPlayerHaveGuildPermission(guildId, GUILD_PERMISSION_INVITE) then
-        ZO_AlertEvent(EVENT_SOCIAL_ERROR, SOCIAL_RESULT_NO_INVITE_PERMISSION)
-        return
-    end
-
-    if GetNumGuildMembers(guildId) == MAX_GUILD_MEMBERS then
-        ZO_AlertEvent(EVENT_SOCIAL_ERROR, SOCIAL_RESULT_NO_ROOM)
-        return
-    end
-
-    local guildName = GetGuildName(guildId)
-    local guildAlliance = GetGuildAlliance(guildId)
-    local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
-    local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
-    
-    if IsConsoleUI() then
-        local function GuildInviteCallback(success)
-            if success then
-                GuildInvite(guildId, displayName)
-                if CA.SV.Social.GuildCA then
-                    printToChat(strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, UndecorateDisplayName(displayName), guildNameAlliance))
-                end
-                if CA.SV.Social.GuildAlert then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, UndecorateDisplayName(displayName), guildNameAllianceAlert))
-                end
-            end
-        end
-
-        ZO_ConsoleAttemptInteractOrError(GuildInviteCallback, displayName, ZO_PLAYER_CONSOLE_INFO_REQUEST_DONT_BLOCK, ZO_CONSOLE_CAN_COMMUNICATE_ERROR_ALERT, ZO_ID_REQUEST_TYPE_DISPLAY_NAME, displayName)
-    else
-        -- We can't stop the player from inviting players to guild by Character Name if sent from chat so, might as well not block it. This also makes it consistent with group invites. Can't invite from the radial menu but can use the slash command.
-        if IsIgnored(displayName) and not sentFromChat then
-            if CA.SV.Social.GuildCA then
-                printToChat(GetString(SI_LUIE_IGNORE_ERROR_GUILD))
-            end
-            if CA.SV.Social.GuildAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_IGNORE_ERROR_GUILD))
-            end
-            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-            return
-        end
-
-        GuildInvite(guildId, displayName)
-        if CA.SV.Social.GuildCA then
-            printToChat(strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAlliance))
-        end
-        if CA.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAllianceAlert))
-        end
-    end    
-end
-
--- Called when changing guilds in the Guild tab
-GUILD_SHARED_INFO.SetGuildId = function(self, guildId)
-    self.guildId = guildId
-    self:Refresh(guildId)
-    -- Set selected guild for use when resolving Rank/Heraldry updates
-    g_selectedGuild = guildId
-end
-
--- Called when changing guilds in the Guild tab or leaving/joining a guild
-GUILD_SHARED_INFO.Refresh = function(self, guildId)
-    if(self.guildId and self.guildId == guildId) then
-        local count = GetControl(self.control, "Count")
-        local numGuildMembers, numOnline = GetGuildInfo(guildId)
-
-        count:SetText(strformat(SI_GUILD_NUM_MEMBERS_ONLINE_FORMAT, numOnline, numGuildMembers))
-
-        self.canDepositToBank = DoesGuildHavePrivilege(guildId, GUILD_PRIVILEGE_BANK_DEPOSIT)
-        if(self.canDepositToBank) then
-            self.bankIcon:SetColor(ZO_DEFAULT_ENABLED_COLOR:UnpackRGBA())
-        else
-            self.bankIcon:SetColor(ZO_DEFAULT_DISABLED_COLOR:UnpackRGBA())
-        end
-
-        self.canUseTradingHouse = DoesGuildHavePrivilege(guildId, GUILD_PRIVILEGE_TRADING_HOUSE)
-        if(self.canUseTradingHouse) then
-            self.tradingHouseIcon:SetColor(ZO_DEFAULT_ENABLED_COLOR:UnpackRGBA())
-        else
-            self.tradingHouseIcon:SetColor(ZO_DEFAULT_DISABLED_COLOR:UnpackRGBA())
-        end
-
-        self.canUseHeraldry = DoesGuildHavePrivilege(guildId, GUILD_PRIVILEGE_HERALDRY)
-        if(self.canUseHeraldry) then
-            self.heraldryIcon:SetColor(ZO_DEFAULT_ENABLED_COLOR:UnpackRGBA())
-        else
-            self.heraldryIcon:SetColor(ZO_DEFAULT_DISABLED_COLOR:UnpackRGBA())
-        end
-    end
-    -- Set selected guild for use when resolving Rank/Heraldry updates
-    g_selectedGuild = guildId
 end
 
 function CA.TradeInviteAccepted(eventCode)
