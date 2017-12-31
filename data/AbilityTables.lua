@@ -44,10 +44,40 @@ A.Skill_Heavy_Attack_Werewolf       = 32480 -- Heavy Attack Werewolf
 A.Skill_Heavy_Attack_Shock			= 18396 -- Heavy Attack (Shock)
 
 -- ---------------------------------------------------
+-- COMSUMABLES & ITEMS -------------------------------
+-- ---------------------------------------------------
+
+-- Glyphs
+A.Item_Glyph_of_Absorb_Health		= 28919
+A.Item_Glyph_of_Absorb_Magicka		= 46743
+A.Item_Glyph_of_Absorb_Stamina		= 46746
+A.Item_Glyph_of_Crushing			= GetString(SI_LUIE_SKILL_GLYPH_CRUSHING)
+A.Item_Glyph_of_Damage_Health		= 46749
+A.Item_Glyph_of_Decrease_Health		= GetString(SI_LUIE_SKILL_GLYPH_DECREASE_HEALTH)
+A.Item_Glyph_of_Flame				= 17895
+A.Item_Glyph_of_Foulness			= 17904
+A.Item_Glyph_of_Frost				= 17897
+A.Item_Glyph_of_Hardening			= GetString(SI_LUIE_SKILL_GLYPH_HARDENING)
+A.Item_Glyph_of_Poison				= 17902
+A.Item_Glyph_of_Prismatic_Onslaught	= 40337
+A.Item_Glyph_of_Shock				= 17899
+A.Item_Glyph_of_Weakening			= GetString(SI_LUIE_SKILL_GLYPH_WEAKENING)
+A.Item_Glyph_of_Weapon_Damage		= GetString(SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE)
+
+-- Elemental Status Effects & Procs
+A.Proc_Burning						= 18084
+A.Proc_Diseased						= 21925
+A.Proc_Chill						= 21481
+A.Proc_Chilled						= 7145
+A.Proc_Poisoned						= 21929
+A.Proc_Concussion					= 21487
+
+-- ---------------------------------------------------
 -- CHAMPION ABILITIES --------------------------------
 -- ---------------------------------------------------
 
-A.Champion_Vengeance				= 63151
+A.Champion_Vengeance_Charge			= GetString(SI_LUIE_SKILL_VENGEANCE_CHARGE) -- Vengeance Counter
+A.Champion_Riposte					= 60230
 
 -- ---------------------------------------------------
 -- NPC BASIC -----------------------------------------

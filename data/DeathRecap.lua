@@ -12,7 +12,7 @@ DR.DeathRecapPlayerBasic = {
     [A.Innate_Bash] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_bash.dds' }, -- Bash (Innate)
     
     -- CHAMPION
-    ['Riposte'] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_riposte.dds'}, -- Riposte (Champion)
+    [A.Champion_Riposte] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_riposte.dds'}, -- Riposte (Champion)
     
     -- WEAPON ATTACKS
     ['Heavy Attack (Dual Wield)'] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds', name = 'Heavy Attack'}, -- Heavy Attack (Melee)
@@ -29,23 +29,23 @@ DR.DeathRecapPlayerBasic = {
     ['Soul Shatter'] = { icon = 'LuiExtended/media/icons/abilities/passive_otherclass_soul_shatter.dds' }, -- Soul Shatter
     
     -- GLYPHS
-    ['Life Drain'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_health.dds' }, -- Glyph of Absorb Health
-    ['Absorb Magicka'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_magicka.dds' }, -- Glyph of Absorb Magicka
-    ['Absorb Stamina'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_stamina.dds' }, -- Glyph of Absorb Stamina
-    ['Damage Health'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_decrease_health.dds', name = 'Decrease Health' }, -- Glyph of Decrease Health
-    ['Fiery Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_flame.dds' }, -- Glyph of Flame
-    ['Befouled Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_foulness.dds' }, -- Glyph of Foulness
-    ['Frozen Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_frost.dds' }, -- Glyph of Frost
-    ['Poisoned Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_poison.dds' }, -- Glyph of Poison
-    ['Prismatic Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_prismatic.dds' }, -- Glyph of Prismatic Onslaught
-    ['Charged Weapon'] = { icon = 'LuiExtended/media/icons/glyphs/glyph_shock.dds' }, -- Glyph of Shock
+    [A.Item_Glyph_of_Absorb_Health] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_health.dds' }, -- Glyph of Absorb Health
+    [A.Item_Glyph_of_Absorb_Magicka] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_magicka.dds' }, -- Glyph of Absorb Magicka
+    [A.Item_Glyph_of_Absorb_Stamina] = { icon = 'LuiExtended/media/icons/glyphs/glyph_absorb_stamina.dds' }, -- Glyph of Absorb Stamina
+    [A.Item_Glyph_of_Damage_Health] = { icon = 'LuiExtended/media/icons/glyphs/glyph_decrease_health.dds', name = A.Item_Glyph_of_Decrease_Health }, -- Glyph of Decrease Health
+    [A.Item_Glyph_of_Flame] = { icon = 'LuiExtended/media/icons/glyphs/glyph_flame.dds' }, -- Glyph of Flame
+    [A.Item_Glyph_of_Foulness] = { icon = 'LuiExtended/media/icons/glyphs/glyph_foulness.dds' }, -- Glyph of Foulness
+    [A.Item_Glyph_of_Frost] = { icon = 'LuiExtended/media/icons/glyphs/glyph_frost.dds' }, -- Glyph of Frost
+    [A.Item_Glyph_of_Poison] = { icon = 'LuiExtended/media/icons/glyphs/glyph_poison.dds' }, -- Glyph of Poison
+    [A.Item_Glyph_of_Prismatic_Onslaught] = { icon = 'LuiExtended/media/icons/glyphs/glyph_prismatic.dds' }, -- Glyph of Prismatic Onslaught
+    [A.Item_Glyph_of_Shock] = { icon = 'LuiExtended/media/icons/glyphs/glyph_shock.dds' }, -- Glyph of Shock
     
     -- STATUS EFFECTS
-    ['Burning'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_burning.dds' }, -- Burning (Fire Status Effect)
-    ['Diseased'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_diseased.dds' }, -- Diseased (Disease Status Effect)
-    ['Chill'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_chill.dds', name = 'Chilled' }, -- Chill (Frost Status Effect)
-    ['Poisoned'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_poisoned.dds' }, -- Poisoned (Poison Status Effect)
-    ['Concussion'] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_concussion.dds' }, -- Concussion (Shock Status Effect)
+    [A.Proc_Burning] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_burning.dds' }, -- Burning (Fire Status Effect)
+    [A.Proc_Diseased] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_diseased.dds' }, -- Diseased (Disease Status Effect)
+    [A.Proc_Chill] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_chill.dds', name = A.Proc_Chilled }, -- Chill (Frost Status Effect)
+    [A.Proc_Poisoned] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_poisoned.dds' }, -- Poisoned (Poison Status Effect)
+    [A.Proc_Concussion] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_concussion.dds' }, -- Concussion (Shock Status Effect)
     
     -- WEAPON SETS
     ['Merciless Charge'] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_merciless_charge.dds' }, -- Merciless Charge (Maelstrom 2H)
