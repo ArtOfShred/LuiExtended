@@ -2384,8 +2384,11 @@ function CA.OnBuybackItem(eventCode, itemName, quantity, money, itemSound)
     end
     
     if money ~= 0 and CA.SV.Inventory.LootVendorCurrency then
-        CA.CurrencyPrinter(g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type, carriedItem, carriedItemTotal)
-    else
+		-- Stop messages from printing if for some reason the currency event never triggers
+		if g_savedPurchase.formattedValue then
+			CA.CurrencyPrinter(g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type, carriedItem, carriedItemTotal)
+		end
+	else
         local finalMessageP1 = strfmt(carriedItem .. "|r|c" .. changeColor)
         local finalMessageP2 = strfmt(messageChange, finalMessageP1)
         local finalMessage = strfmt("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
@@ -2421,8 +2424,11 @@ function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCu
     end
     
     if money ~= 0 and CA.SV.Inventory.LootVendorCurrency then
-        CA.CurrencyPrinter(g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type, carriedItem, carriedItemTotal)
-    else
+		-- Stop messages from printing if for some reason the currency event never triggers
+		if g_savedPurchase.formattedValue then
+			CA.CurrencyPrinter(g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type, carriedItem, carriedItemTotal)
+		end
+	else
         local finalMessageP1 = strfmt(carriedItem .. "|r|c" .. changeColor)
         local finalMessageP2 = strfmt(messageChange, finalMessageP1)
         local finalMessage = strfmt("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
@@ -2434,6 +2440,7 @@ function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCu
 end
 
 function CA.OnSellItem(eventCode, itemName, quantity, money)
+
     local changeColor = CA.SV.Currency.CurrencyContextColor and CurrencyUpColorize:ToHex() or CurrencyColorize:ToHex()
     local itemIcon,_,_,_,_ = GetItemLinkInfo(itemName)
     local icon = itemIcon
@@ -2463,7 +2470,10 @@ function CA.OnSellItem(eventCode, itemName, quantity, money)
     end
     
     if money ~= 0 and CA.SV.Inventory.LootVendorCurrency then
-        CA.CurrencyPrinter(g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type, carriedItem, carriedItemTotal)
+		-- Stop messages from printing if for some reason the currency event never triggers
+		if g_savedPurchase.formattedValue then
+			CA.CurrencyPrinter(g_savedPurchase.formattedValue, changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, messageChange, g_savedPurchase.messageTotal, type, carriedItem, carriedItemTotal)
+		end
     else
         local finalMessageP1 = strfmt(carriedItem .. "|r|c" .. changeColor)
         local finalMessageP2 = strfmt(messageChange, finalMessageP1)
@@ -8781,6 +8791,37 @@ function CA.HookFunction()
 		inventory.slots[questIndex] = nil
 	end
 
+	-- Called by hooked TryGroupInviteByName function
+	local function CompleteGroupInvite(characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
+		local isLeader = IsUnitGroupLeader("player")
+		local groupSize = GetGroupSize()
+		
+		if isLeader and groupSize == SMALL_GROUP_SIZE_THRESHOLD then
+			ZO_Dialogs_ShowPlatformDialog("LARGE_GROUP_INVITE_WARNING", characterOrDisplayName, { mainTextParams = { SMALL_GROUP_SIZE_THRESHOLD } })
+		else
+			GroupInviteByName(characterOrDisplayName)
+
+			ZO_Menu_SetLastCommandWasFromMenu(not sentFromChat)
+			if isMenu then
+				local link
+				if CA.SV.BracketOptionCharacter == 1 then
+					link = ZO_LinkHandler_CreateLinkWithoutBrackets(characterOrDisplayName, nil, CHARACTER_LINK_TYPE, characterOrDisplayName)
+				else
+					link = ZO_LinkHandler_CreateLink(characterOrDisplayName, nil, CHARACTER_LINK_TYPE, characterOrDisplayName)
+				end
+				printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MENU), link))
+				if CA.SV.Group.GroupAlert then
+					ZO_Alert(ALERT, nil, strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MENU), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
+				end
+			else
+				printToChat(strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
+				if CA.SV.Group.GroupAlert then
+					ZO_Alert(ALERT, nil, strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
+				end
+			end
+		end
+	end
+	
 	-- HOOK Group Invite function so we can modify CA/Alert here
 	TryGroupInviteByName = function(characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
 		if IsPlayerInGroup(characterOrDisplayName) then
@@ -8995,37 +9036,6 @@ function CA.HookFunction()
 		g_selectedGuild = guildId
 	end
 	
-end
-
--- Called by hooked TryGroupInviteByName function
-local function CompleteGroupInvite(characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
-    local isLeader = IsUnitGroupLeader("player")
-    local groupSize = GetGroupSize()
-    
-    if isLeader and groupSize == SMALL_GROUP_SIZE_THRESHOLD then
-        ZO_Dialogs_ShowPlatformDialog("LARGE_GROUP_INVITE_WARNING", characterOrDisplayName, { mainTextParams = { SMALL_GROUP_SIZE_THRESHOLD } })
-    else
-        GroupInviteByName(characterOrDisplayName)
-
-        ZO_Menu_SetLastCommandWasFromMenu(not sentFromChat)
-        if isMenu then
-            local link
-            if CA.SV.BracketOptionCharacter == 1 then
-                link = ZO_LinkHandler_CreateLinkWithoutBrackets(characterOrDisplayName, nil, CHARACTER_LINK_TYPE, characterOrDisplayName)
-            else
-                link = ZO_LinkHandler_CreateLink(characterOrDisplayName, nil, CHARACTER_LINK_TYPE, characterOrDisplayName)
-            end
-            printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MENU), link))
-            if CA.SV.Group.GroupAlert then
-                ZO_Alert(ALERT, nil, strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MENU), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
-            end
-        else
-            printToChat(strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
-            if CA.SV.Group.GroupAlert then
-                ZO_Alert(ALERT, nil, strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
-            end
-        end
-    end
 end
 
 function CA.TradeInviteAccepted(eventCode)
