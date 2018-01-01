@@ -3218,6 +3218,8 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
         
         local recipient = ZO_SELECTED_TEXT:Colorize(g_groupLootIndex[strformat(SI_UNIT_NAME, receivedBy)])
         
+		CA.ItemPrinter(icon, quantity, itemType, itemId, itemLink, recipient, logPrefix, gainOrLoss, false, true)
+		
     end
 
 end
