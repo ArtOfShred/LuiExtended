@@ -1016,8 +1016,8 @@ local function CreateCustomFrames()
 
     -- Set proper anchors according to user preferences
     UF.CustomFramesApplyLayoutPlayer()
-    UF.CustomFramesApplyLayoutGroup()
-    UF.CustomFramesApplyLayoutRaid()
+    UF.CustomFramesApplyLayoutGroup(true)
+    UF.CustomFramesApplyLayoutRaid(true)
     UF.CustomFramesApplyLayoutBosses()
     -- Set positions of tlws using saved values or default ones
     UF.CustomFramesSetPositions()
@@ -1050,7 +1050,7 @@ function UF.Initialize( enabled )
         UF.SV.DefaultIncTransparency = UF.D.DefaultIncTransparency
     end
 
-    -- If User does not want the InfoPanel then exit right here
+    -- If User does not want the UnitFrames then exit right here
     if not enabled then
         return
     end
@@ -1071,7 +1071,7 @@ function UF.Initialize( enabled )
     -- Query for player alliance for future use
     g_playerAlliance = GetUnitAlliance( "player" )
 
-    -- For Sorcerer players we will change Target label colour on 20% instead of 25%
+    -- Get execute threshold percentage
     g_targetThreshold = UF.SV.ExecutePercentage
 
     CreateDefaultFrames()
@@ -2240,8 +2240,8 @@ function UF.OnGroupMemberRoleChange(eventCode, unitTag, dps, healer, tank)
     if UF.CustomFrames[unitTag] then
         if (UF.SV.ColorRoleGroup or UF.SV.ColorRoleRaid) then UF.CustomFramesApplyColoursSingle(unitTag) end
         UF.ReloadValues(unitTag)
-        UF.CustomFramesApplyLayoutGroup()
-        UF.CustomFramesApplyLayoutRaid()
+        UF.CustomFramesApplyLayoutGroup(false)
+        UF.CustomFramesApplyLayoutRaid(false)
     end
 end
 
@@ -2279,8 +2279,8 @@ end
 
 -- Runs on the EVENT_LEADER_UPDATE listener.
 function UF.OnLeaderUpdate(eventCode, leaderTag)
-    UF.CustomFramesApplyLayoutGroup()
-    UF.CustomFramesApplyLayoutRaid()
+    UF.CustomFramesApplyLayoutGroup(false)
+    UF.CustomFramesApplyLayoutRaid(false)
 end
 
 -- This function is used to setup alternative bar for player
@@ -3300,7 +3300,7 @@ function UF.CustomFramesApplyLayoutPlayer()
 end
 
 -- Set dimensions of custom group frame and anchors or raid group members
-function UF.CustomFramesApplyLayoutGroup()
+function UF.CustomFramesApplyLayoutGroup(unhide)
     if not UF.CustomFrames.SmallGroup1 then
         return
     end
@@ -3365,11 +3365,11 @@ function UF.CustomFramesApplyLayoutGroup()
         ghb.labelTwo:SetDimensions(UF.SV.GroupBarWidth-50, UF.SV.GroupBarHeight-2)
     end
 
-    group:SetHidden( false )
+    if unhide then group:SetHidden( false ) end
 end
 
 -- Set dimensions of custom raid frame and anchors or raid group members
-function UF.CustomFramesApplyLayoutRaid()
+function UF.CustomFramesApplyLayoutRaid(unhide)
     if not UF.CustomFrames.RaidGroup1 then
         return
     end
@@ -3514,7 +3514,7 @@ function UF.CustomFramesApplyLayoutRaid()
         
     end
 
-    raid:SetHidden( false )
+    if unhide then raid:SetHidden( false ) end
 end
 
 -- Set dimensions of custom raid frame and anchors or raid group members
