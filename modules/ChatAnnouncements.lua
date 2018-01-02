@@ -2086,10 +2086,10 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
     elseif reason == 31 then
         if CA.SV.Currency.CurrencyGoldHideAH then return end
         messageChange = CA.SV.Currency.CurrencyMessageSpend
-    -- Desposit in Bank (42)
+    -- Deposit in Bank (42)
     elseif reason == 42 then
         messageChange = CA.SV.Currency.CurrencyMessageDeposit
-    -- Desposit in Guild Bank (51)
+    -- Deposit in Guild Bank (51)
     elseif reason == 51 then
         messageChange = CA.SV.Currency.CurrencyMessageDepositGuild
     -- Withdraw from Bank (43)
@@ -4056,7 +4056,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                 end
                 if InventoryOn and not g_itemWasDestroyed then
                     gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                    logPrefix = CA.SV.Inventory.LootMessageDesposit
+                    logPrefix = CA.SV.Inventory.LootMessageDeposit
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
             end
@@ -5279,7 +5279,7 @@ function CA.HookFunction()
     
     -- EVENT_GROUP_INVITE_RESPONSE -- ALERT HANDLER
     local function GroupInviteResponseAlert(characterName, response, displayName)
-        
+		
         local finalName
         local finalAlertName
         
@@ -5301,7 +5301,6 @@ function CA.HookFunction()
         end
         
         if(response ~= GROUP_INVITE_RESPONSE_ACCEPTED and response ~= GROUP_INVITE_RESPONSE_CONSIDERING_OTHER) then
-            
             local message
             local alertMessage
             
@@ -5315,8 +5314,8 @@ function CA.HookFunction()
                 message = finalName ~= "" and strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalName) or GetString(SI_PLAYER_BUSY)
                 alertMessage = finalAlertName ~= "" and strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalAlertName) or GetString(SI_PLAYER_BUSY)
             else
-                message = finalName ~= "" and strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalName) or GetString(SI_PLAYER_BUSY)
-                alertMessage = finalAlertName ~= "" and strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalAlertName) or GetString(SI_PLAYER_BUSY)
+                message = finalName ~= "" and strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalName) or characterName ~= "" and strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), characterName) or GetString(SI_PLAYER_BUSY)
+                alertMessage = finalAlertName ~= "" and strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), finalAlertName) or characterName ~= "" and strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", response), characterName) or GetString(SI_PLAYER_BUSY)
             end
 
             if CA.SV.Group.GroupCA or response == GROUP_INVITE_RESPONSE_ALREADY_GROUPED or response == GROUP_INVITE_RESPONSE_IGNORED or response == GROUP_INVITE_RESPONSE_PLAYER_NOT_FOUND then
@@ -7954,15 +7953,32 @@ function CA.HookFunction()
     
     -- EVENT_DISPLAY_ANNOUNCEMENT -- CSA HANDLER
     local function DisplayAnnouncementHook(title, description)
-        
-        -- TEMPORARY DEBUG
-        if (title ~= "" and not overrideDisplayAnnouncementTitle[title]) or (description ~= "" and not overrideDisplayAnnouncementDescription[description]) then
-            d("EVENT_DISPLAY_ANNOUNCEMENT")
+		
+		--[[d("EVENT_DISPLAY_ANNOUNCEMENT")
             d("TEMPORARY: Please let me know where you see this message, and the context or notification ")
             
             d("title: " .. title)
             d("description: " .. description)
-            
+		]]--
+		
+		-- Let unfiltered messages pass through the normal function
+        if (title ~= "" and not overrideDisplayAnnouncementTitle[title]) or (description ~= "" and not overrideDisplayAnnouncementDescription[description]) then
+			-- Use default behavior if not in the override table
+			local messageParams
+			if title ~= "" and description ~= "" then
+				messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
+			elseif title ~= "" then
+				messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
+			elseif description ~= "" then
+				messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.DISPLAY_ANNOUNCEMENT)
+			end
+
+			if messageParams then
+				messageParams:SetText(title, description)
+				messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_DISPLAY_ANNOUNCEMENT)
+			end
+			CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+			return true  
         end
         
         local flagCA
@@ -7997,11 +8013,6 @@ function CA.HookFunction()
                 flagCSA = CA.SV.Group.GroupRaidArenaRoundCSA and true or false
                 flagAlert = CA.SV.Group.GroupRaidArenaRoundAlert and true or false
             end
-        else
-            -- Temporary until we gather data on all events - if there are any display announcements in addition to Respec/Group Area Notifications then conditionals will be added to support them, but for now, only display default CSA.
-            flagCA = false
-            flagCSA = true
-            flagAlert = false
         end
         
         local titleCA
