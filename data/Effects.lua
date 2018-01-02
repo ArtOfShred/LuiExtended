@@ -4526,14 +4526,6 @@ E.FakeStagger = {
     
 }
 
-E.FakeSelfAura = {
-    -- Nothing here yet
-}
-
-E.FakeFlippedBuffs = {
-
-}
-
 E.FakeDuplicate = {
 
     -- Dragonknight 
