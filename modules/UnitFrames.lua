@@ -362,69 +362,68 @@ local function CreateCustomFrames()
     -- Create Custom unit frames
     if UF.SV.CustomFramesPlayer then
         -- Player Frame
-        UF.CustomFrames.player = {
-			local playerTlw = UI.TopLevel( nil, nil )
-			playerTlw.customPositionAttr = "CustomFramesPlayerFramePos"
-			playerTlw.preview = LUIE.UI.Backdrop( playerTlw, "fill", nil, nil, nil, true )
-			local player = UI.Control( playerTlw, {TOPLEFT,TOPLEFT}, nil, false )
-			local topInfo = UI.Control( player, {BOTTOM,TOP,0,-3}, nil, false )
-			local botInfo = UI.Control( player, {TOP,BOTTOM,0,2}, nil, false )
-			local phb = LUIE.UI.Backdrop( player, {TOP,TOP,0,0}, nil, nil, nil, false )
-			phb:SetDrawLayer(DL_BACKDROP)
-			phb:SetDrawLevel(1)
-			local pmb = LUIE.UI.Backdrop( player, nil, nil, nil, nil, false )
-			pmb:SetDrawLayer(DL_BACKDROP)
-			pmb:SetDrawLevel(1)
-			local psb = LUIE.UI.Backdrop( player, nil, nil, nil, nil, false )
-			psb:SetDrawLayer(DL_BACKDROP)
-			psb:SetDrawLevel(1)
-			local alt = LUIE.UI.Backdrop( botInfo, {RIGHT,RIGHT}, nil, nil , {0,0,0,1}, false )
-			local pli = UI.Texture( topInfo, nil, {20,20}, nil, nil, false )
+		local playerTlw = UI.TopLevel( nil, nil )
+		playerTlw.customPositionAttr = "CustomFramesPlayerFramePos"
+		playerTlw.preview = LUIE.UI.Backdrop( playerTlw, "fill", nil, nil, nil, true )
+		local player = UI.Control( playerTlw, {TOPLEFT,TOPLEFT}, nil, false )
+		local topInfo = UI.Control( player, {BOTTOM,TOP,0,-3}, nil, false )
+		local botInfo = UI.Control( player, {TOP,BOTTOM,0,2}, nil, false )
+		local phb = LUIE.UI.Backdrop( player, {TOP,TOP,0,0}, nil, nil, nil, false )
+		phb:SetDrawLayer(DL_BACKDROP)
+		phb:SetDrawLevel(1)
+		local pmb = LUIE.UI.Backdrop( player, nil, nil, nil, nil, false )
+		pmb:SetDrawLayer(DL_BACKDROP)
+		pmb:SetDrawLevel(1)
+		local psb = LUIE.UI.Backdrop( player, nil, nil, nil, nil, false )
+		psb:SetDrawLayer(DL_BACKDROP)
+		psb:SetDrawLevel(1)
+		local alt = LUIE.UI.Backdrop( botInfo, {RIGHT,RIGHT}, nil, nil , {0,0,0,1}, false )
+		local pli = UI.Texture( topInfo, nil, {20,20}, nil, nil, false )
 
-			local fragment = ZO_HUDFadeSceneFragment:New(playerTlw, 0, 0)
+		local fragment = ZO_HUDFadeSceneFragment:New(playerTlw, 0, 0)
 
-			SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
-			SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
-			SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
-			
-			-- Collect all together
-			UF.CustomFrames.player = {
-				["unitTag"]     = "player",
-				["tlw"]         = playerTlw,
-				["control"]     = player,
-				[POWERTYPE_HEALTH] = {
-					["backdrop"]= phb,
-					["labelOne"]= UI.Label( phb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
-					["labelTwo"]= UI.Label( phb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
-					["bar"]     = UI.StatusBar( phb, nil, nil, nil, false ),
-					["shield"]  = UI.StatusBar( phb, nil, nil, nil, true ),
-				},
-				[POWERTYPE_MAGICKA] = {
-					["backdrop"]= pmb,
-					["labelOne"]= UI.Label( pmb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
-					["labelTwo"]= UI.Label( pmb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
-					["bar"]     = UI.StatusBar( pmb, nil, nil, nil, false ),
-				},
-				[POWERTYPE_STAMINA] = {
-					["backdrop"]= psb,
-					["labelOne"]= UI.Label( psb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
-					["labelTwo"]= UI.Label( psb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
-					["bar"]     = UI.StatusBar( psb, nil, nil, nil, false ),
-				},
-				["alternative"] = {
-					["backdrop"]= alt,
-					["bar"]     = UI.StatusBar( alt, nil, nil, nil, false ),
-					["icon"]    = UI.Texture( alt, {RIGHT,LEFT,-2,0}, {20,20}, nil, nil, false ),
-				},
-				["topInfo"]     = topInfo,
-				["name"]        = UI.Label( topInfo, {BOTTOMLEFT,BOTTOMLEFT}, nil, {0,4}, nil, "Player Name", false ),
-				["levelIcon"]   = pli,
-				["level"]       = UI.Label( topInfo, {LEFT,RIGHT,1,0,pli}, nil, {0,1}, nil, "level", false ),
-				["classIcon"]   = UI.Texture( topInfo, {RIGHT,RIGHT,-1,0}, {22,22}, nil, nil, false ),
-				["botInfo"]     = botInfo,
-				["buffs"]       = UI.Control( playerTlw, nil, nil, false ),
-				["debuffs"]     = UI.Control( playerTlw, {BOTTOM,TOP,0,-2,topInfo}, nil, false ),
-			}
+		SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
+		SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
+		SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+		
+		-- Collect all together
+		UF.CustomFrames.player = {
+			["unitTag"]     = "player",
+			["tlw"]         = playerTlw,
+			["control"]     = player,
+			[POWERTYPE_HEALTH] = {
+				["backdrop"]= phb,
+				["labelOne"]= UI.Label( phb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
+				["labelTwo"]= UI.Label( phb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
+				["bar"]     = UI.StatusBar( phb, nil, nil, nil, false ),
+				["shield"]  = UI.StatusBar( phb, nil, nil, nil, true ),
+			},
+			[POWERTYPE_MAGICKA] = {
+				["backdrop"]= pmb,
+				["labelOne"]= UI.Label( pmb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
+				["labelTwo"]= UI.Label( pmb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
+				["bar"]     = UI.StatusBar( pmb, nil, nil, nil, false ),
+			},
+			[POWERTYPE_STAMINA] = {
+				["backdrop"]= psb,
+				["labelOne"]= UI.Label( psb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
+				["labelTwo"]= UI.Label( psb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
+				["bar"]     = UI.StatusBar( psb, nil, nil, nil, false ),
+			},
+			["alternative"] = {
+				["backdrop"]= alt,
+				["bar"]     = UI.StatusBar( alt, nil, nil, nil, false ),
+				["icon"]    = UI.Texture( alt, {RIGHT,LEFT,-2,0}, {20,20}, nil, nil, false ),
+			},
+			["topInfo"]     = topInfo,
+			["name"]        = UI.Label( topInfo, {BOTTOMLEFT,BOTTOMLEFT}, nil, {0,4}, nil, "Player Name", false ),
+			["levelIcon"]   = pli,
+			["level"]       = UI.Label( topInfo, {LEFT,RIGHT,1,0,pli}, nil, {0,1}, nil, "level", false ),
+			["classIcon"]   = UI.Texture( topInfo, {RIGHT,RIGHT,-1,0}, {22,22}, nil, nil, false ),
+			["botInfo"]     = botInfo,
+			["buffs"]       = UI.Control( playerTlw, nil, nil, false ),
+			["debuffs"]     = UI.Control( playerTlw, {BOTTOM,TOP,0,-2,topInfo}, nil, false ),
+		}
 
         -- If Stamina Label is hidden in menu options, hide the stamina bar labels
         if UF.SV.HideLabelStamina then

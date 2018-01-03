@@ -291,12 +291,13 @@ function CI.RegisterCombatInfo()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE )
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED )
     if CI.SV.UltimateEnabled == true then
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "player", EVENT_COMBAT_EVENT, CI.OnCombatEvent )
-        EVENT_MANAGER:AddFilterForEvent(moduleName .. "player", EVENT_COMBAT_EVENT, REGISTER_FILTER_UNIT_TAG, "player")
-        EVENT_MANAGER:AddFilterForEvent(moduleName, EVENT_COMBAT_EVENT, REGISTER_FILTER_IS_ERROR, false )
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent1", EVENT_COMBAT_EVENT, CI.OnCombatEvent )
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent2", EVENT_COMBAT_EVENT, CI.OnCombatEvent )
+        EVENT_MANAGER:AddFilterForEvent(moduleName .. "_LUIE_CI_CombatEvent1", REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false, REGISTER_FILTER_COMBAT_RESULT, ACTION_RESULT_BLOCKED_DAMAGE)
+        EVENT_MANAGER:AddFilterForEvent(moduleName .. "_LUIE_CI_CombatEvent2", REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false)
         
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "player", EVENT_POWER_UPDATE, CI.OnPowerUpdatePlayer)
-        EVENT_MANAGER:AddFilterForEvent(moduleName .. "player", EVENT_POWER_UPDATE, REGISTER_FILTER_UNIT_TAG, "player" )
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "_LUIE_CI_PowerUpdate", EVENT_POWER_UPDATE, CI.OnPowerUpdatePlayer)
+        EVENT_MANAGER:AddFilterForEvent(moduleName .. "_LUIE_CI_PowerUpdate", EVENT_POWER_UPDATE, REGISTER_FILTER_UNIT_TAG, "player" )
         
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE, CI.OnSlotsFullUpdate)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED, CI.OnSlotUpdated)
@@ -548,8 +549,6 @@ end
 
 -- Listens to EVENT_COMBAT_EVENT
 function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
-    -- Ignore error events
-    if isError then return end
 
     -- Manually track Ultimate generation -- same as in CI module
     if CI.SV.UltimateGeneration and uiUltimate.NotFull and (
