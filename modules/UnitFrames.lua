@@ -159,6 +159,11 @@ UF.D = {
     RaidIconOptions                  = 2,
     ChampionOptions                  = "Show Above Cap",
     RepositionFramesAdjust           = 0,
+	PlayerFrameOptions			     = 1,
+	AdjustStaminaHPos			     = 200,
+	AdjustStaminaVPos			     = 0,
+	AdjustMagickaHPos			     = 200,
+	AdjustMagickaVPos			     = 0,
 }
 UF.SV = nil
 
@@ -357,68 +362,69 @@ local function CreateCustomFrames()
     -- Create Custom unit frames
     if UF.SV.CustomFramesPlayer then
         -- Player Frame
-        local playerTlw = UI.TopLevel( nil, nil )
-        playerTlw.customPositionAttr = "CustomFramesPlayerFramePos"
-        playerTlw.preview = LUIE.UI.Backdrop( playerTlw, "fill", nil, nil, nil, true )
-        local player = UI.Control( playerTlw, {TOPLEFT,TOPLEFT}, nil, false )
-        local topInfo = UI.Control( player, {BOTTOM,TOP,0,-3}, nil, false )
-        local botInfo = UI.Control( player, {TOP,BOTTOM,0,2}, nil, false )
-        local phb = LUIE.UI.Backdrop( player, {TOP,TOP,0,0}, nil, nil, nil, false )
-        phb:SetDrawLayer(DL_BACKDROP)
-        phb:SetDrawLevel(1)
-        local pmb = LUIE.UI.Backdrop( player, nil, nil, nil, nil, false )
-        pmb:SetDrawLayer(DL_BACKDROP)
-        pmb:SetDrawLevel(1)
-        local psb = LUIE.UI.Backdrop( player, nil, nil, nil, nil, false )
-        psb:SetDrawLayer(DL_BACKDROP)
-        psb:SetDrawLevel(1)
-        local alt = LUIE.UI.Backdrop( botInfo, {RIGHT,RIGHT}, nil, nil , {0,0,0,1}, false )
-        local pli = UI.Texture( topInfo, nil, {20,20}, nil, nil, false )
-
-        local fragment = ZO_HUDFadeSceneFragment:New(playerTlw, 0, 0)
-
-		SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
-		SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
-		SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
-        
-        -- Collect all together
         UF.CustomFrames.player = {
-            ["unitTag"]     = "player",
-            ["tlw"]         = playerTlw,
-            ["control"]     = player,
-            [POWERTYPE_HEALTH] = {
-                ["backdrop"]= phb,
-                ["labelOne"]= UI.Label( phb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
-                ["labelTwo"]= UI.Label( phb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
-                ["bar"]     = UI.StatusBar( phb, nil, nil, nil, false ),
-                ["shield"]  = UI.StatusBar( phb, nil, nil, nil, true ),
-            },
-            [POWERTYPE_MAGICKA] = {
-                ["backdrop"]= pmb,
-                ["labelOne"]= UI.Label( pmb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
-                ["labelTwo"]= UI.Label( pmb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
-                ["bar"]     = UI.StatusBar( pmb, nil, nil, nil, false ),
-            },
-            [POWERTYPE_STAMINA] = {
-                ["backdrop"]= psb,
-                ["labelOne"]= UI.Label( psb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
-                ["labelTwo"]= UI.Label( psb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
-                ["bar"]     = UI.StatusBar( psb, nil, nil, nil, false ),
-            },
-            ["alternative"] = {
-                ["backdrop"]= alt,
-                ["bar"]     = UI.StatusBar( alt, nil, nil, nil, false ),
-                ["icon"]    = UI.Texture( alt, {RIGHT,LEFT,-2,0}, {20,20}, nil, nil, false ),
-            },
-            ["topInfo"]     = topInfo,
-            ["name"]        = UI.Label( topInfo, {BOTTOMLEFT,BOTTOMLEFT}, nil, {0,4}, nil, "Player Name", false ),
-            ["levelIcon"]   = pli,
-            ["level"]       = UI.Label( topInfo, {LEFT,RIGHT,1,0,pli}, nil, {0,1}, nil, "level", false ),
-            ["classIcon"]   = UI.Texture( topInfo, {RIGHT,RIGHT,-1,0}, {22,22}, nil, nil, false ),
-            ["botInfo"]     = botInfo,
-            ["buffs"]       = UI.Control( playerTlw, nil, nil, false ),
-            ["debuffs"]     = UI.Control( playerTlw, {BOTTOM,TOP,0,-2,topInfo}, nil, false ),
-        }
+			local playerTlw = UI.TopLevel( nil, nil )
+			playerTlw.customPositionAttr = "CustomFramesPlayerFramePos"
+			playerTlw.preview = LUIE.UI.Backdrop( playerTlw, "fill", nil, nil, nil, true )
+			local player = UI.Control( playerTlw, {TOPLEFT,TOPLEFT}, nil, false )
+			local topInfo = UI.Control( player, {BOTTOM,TOP,0,-3}, nil, false )
+			local botInfo = UI.Control( player, {TOP,BOTTOM,0,2}, nil, false )
+			local phb = LUIE.UI.Backdrop( player, {TOP,TOP,0,0}, nil, nil, nil, false )
+			phb:SetDrawLayer(DL_BACKDROP)
+			phb:SetDrawLevel(1)
+			local pmb = LUIE.UI.Backdrop( player, nil, nil, nil, nil, false )
+			pmb:SetDrawLayer(DL_BACKDROP)
+			pmb:SetDrawLevel(1)
+			local psb = LUIE.UI.Backdrop( player, nil, nil, nil, nil, false )
+			psb:SetDrawLayer(DL_BACKDROP)
+			psb:SetDrawLevel(1)
+			local alt = LUIE.UI.Backdrop( botInfo, {RIGHT,RIGHT}, nil, nil , {0,0,0,1}, false )
+			local pli = UI.Texture( topInfo, nil, {20,20}, nil, nil, false )
+
+			local fragment = ZO_HUDFadeSceneFragment:New(playerTlw, 0, 0)
+
+			SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
+			SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
+			SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+			
+			-- Collect all together
+			UF.CustomFrames.player = {
+				["unitTag"]     = "player",
+				["tlw"]         = playerTlw,
+				["control"]     = player,
+				[POWERTYPE_HEALTH] = {
+					["backdrop"]= phb,
+					["labelOne"]= UI.Label( phb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
+					["labelTwo"]= UI.Label( phb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
+					["bar"]     = UI.StatusBar( phb, nil, nil, nil, false ),
+					["shield"]  = UI.StatusBar( phb, nil, nil, nil, true ),
+				},
+				[POWERTYPE_MAGICKA] = {
+					["backdrop"]= pmb,
+					["labelOne"]= UI.Label( pmb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
+					["labelTwo"]= UI.Label( pmb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
+					["bar"]     = UI.StatusBar( pmb, nil, nil, nil, false ),
+				},
+				[POWERTYPE_STAMINA] = {
+					["backdrop"]= psb,
+					["labelOne"]= UI.Label( psb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
+					["labelTwo"]= UI.Label( psb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
+					["bar"]     = UI.StatusBar( psb, nil, nil, nil, false ),
+				},
+				["alternative"] = {
+					["backdrop"]= alt,
+					["bar"]     = UI.StatusBar( alt, nil, nil, nil, false ),
+					["icon"]    = UI.Texture( alt, {RIGHT,LEFT,-2,0}, {20,20}, nil, nil, false ),
+				},
+				["topInfo"]     = topInfo,
+				["name"]        = UI.Label( topInfo, {BOTTOMLEFT,BOTTOMLEFT}, nil, {0,4}, nil, "Player Name", false ),
+				["levelIcon"]   = pli,
+				["level"]       = UI.Label( topInfo, {LEFT,RIGHT,1,0,pli}, nil, {0,1}, nil, "level", false ),
+				["classIcon"]   = UI.Texture( topInfo, {RIGHT,RIGHT,-1,0}, {22,22}, nil, nil, false ),
+				["botInfo"]     = botInfo,
+				["buffs"]       = UI.Control( playerTlw, nil, nil, false ),
+				["debuffs"]     = UI.Control( playerTlw, {BOTTOM,TOP,0,-2,topInfo}, nil, false ),
+			}
 
         -- If Stamina Label is hidden in menu options, hide the stamina bar labels
         if UF.SV.HideLabelStamina then
@@ -3141,83 +3147,142 @@ function UF.CustomFramesApplyLayoutPlayer()
         local psb = player[POWERTYPE_STAMINA] -- Not a backdrop
         local alt = player.alternative        -- Not a backdrop
 
-        if not UF.SV.HideBarMagicka and not UF.SV.HideBarStamina then
-            player.tlw:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth + UF.SV.PlayerBarHeightMagicka + UF.SV.PlayerBarHeightStamina + 2*UF.SV.PlayerBarSpacing + (phb.shieldbackdrop and UF.SV.CustomShieldBarHeight or 0) )
-            player.control:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth + UF.SV.PlayerBarHeightMagicka + UF.SV.PlayerBarHeightStamina + 2*UF.SV.PlayerBarSpacing + (phb.shieldbackdrop and UF.SV.CustomShieldBarHeight or 0) )
-        elseif UF.SV.HideBarMagicka and not UF.SV.HideBarStamina then
-            player.tlw:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth + UF.SV.PlayerBarHeightStamina + UF.SV.PlayerBarSpacing + (phb.shieldbackdrop and UF.SV.CustomShieldBarHeight or 0) )
-            player.control:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth + UF.SV.PlayerBarHeightStamina + UF.SV.PlayerBarSpacing + (phb.shieldbackdrop and UF.SV.CustomShieldBarHeight or 0) )
-        elseif UF.SV.HideBarStamina and not UF.SV.HideBarMagicka then
-            player.tlw:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth + UF.SV.PlayerBarHeightMagicka + UF.SV.PlayerBarSpacing + (phb.shieldbackdrop and UF.SV.CustomShieldBarHeight or 0) )
-            player.control:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth + UF.SV.PlayerBarHeightMagicka + UF.SV.PlayerBarSpacing + (phb.shieldbackdrop and UF.SV.CustomShieldBarHeight or 0) )
-        else
-            player.tlw:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth + (phb.shieldbackdrop and UF.SV.CustomShieldBarHeight or 0) )
-            player.control:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth + (phb.shieldbackdrop and UF.SV.CustomShieldBarHeight or 0) )
-        end
+		if UF.SV.PlayerFrameOptions == 1 then
+			if not UF.SV.HideBarMagicka and not UF.SV.HideBarStamina then
+				player.tlw:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth + UF.SV.PlayerBarHeightMagicka + UF.SV.PlayerBarHeightStamina + 2*UF.SV.PlayerBarSpacing + (phb.shieldbackdrop and UF.SV.CustomShieldBarHeight or 0) )
+				player.control:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth + UF.SV.PlayerBarHeightMagicka + UF.SV.PlayerBarHeightStamina + 2*UF.SV.PlayerBarSpacing + (phb.shieldbackdrop and UF.SV.CustomShieldBarHeight or 0) )
+			elseif UF.SV.HideBarMagicka and not UF.SV.HideBarStamina then
+				player.tlw:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth + UF.SV.PlayerBarHeightStamina + UF.SV.PlayerBarSpacing + (phb.shieldbackdrop and UF.SV.CustomShieldBarHeight or 0) )
+				player.control:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth + UF.SV.PlayerBarHeightStamina + UF.SV.PlayerBarSpacing + (phb.shieldbackdrop and UF.SV.CustomShieldBarHeight or 0) )
+			elseif UF.SV.HideBarStamina and not UF.SV.HideBarMagicka then
+				player.tlw:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth + UF.SV.PlayerBarHeightMagicka + UF.SV.PlayerBarSpacing + (phb.shieldbackdrop and UF.SV.CustomShieldBarHeight or 0) )
+				player.control:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth + UF.SV.PlayerBarHeightMagicka + UF.SV.PlayerBarSpacing + (phb.shieldbackdrop and UF.SV.CustomShieldBarHeight or 0) )
+			else
+				player.tlw:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth + (phb.shieldbackdrop and UF.SV.CustomShieldBarHeight or 0) )
+				player.control:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth + (phb.shieldbackdrop and UF.SV.CustomShieldBarHeight or 0) )
+			end
 
-        player.topInfo:SetWidth( UF.SV.PlayerBarWidth )
-        player.botInfo:SetWidth( UF.SV.PlayerBarWidth )
+			player.topInfo:SetWidth( UF.SV.PlayerBarWidth )
+			player.botInfo:SetWidth( UF.SV.PlayerBarWidth )
 
-        player.name:SetWidth( UF.SV.PlayerBarWidth-90 )
-        player.buffs:SetWidth( UF.SV.PlayerBarWidth )
-        player.debuffs:SetWidth( UF.SV.PlayerBarWidth )
+			player.name:SetWidth( UF.SV.PlayerBarWidth-90 )
+			player.buffs:SetWidth( UF.SV.PlayerBarWidth )
+			player.debuffs:SetWidth( UF.SV.PlayerBarWidth )
 
-        player.levelIcon:ClearAnchors()
-        player.levelIcon:SetAnchor( LEFT, player.topInfo, LEFT, player.name:GetTextWidth()+1, 0 )
+			player.levelIcon:ClearAnchors()
+			player.levelIcon:SetAnchor( LEFT, player.topInfo, LEFT, player.name:GetTextWidth()+1, 0 )
 
-        player.name:SetHidden( not UF.SV.PlayerEnableYourname )
-        player.level:SetHidden( not UF.SV.PlayerEnableYourname )
-        player.levelIcon:SetHidden( not UF.SV.PlayerEnableYourname )
-        player.classIcon:SetHidden( not UF.SV.PlayerEnableYourname )
+			player.name:SetHidden( not UF.SV.PlayerEnableYourname )
+			player.level:SetHidden( not UF.SV.PlayerEnableYourname )
+			player.levelIcon:SetHidden( not UF.SV.PlayerEnableYourname )
+			player.classIcon:SetHidden( not UF.SV.PlayerEnableYourname )
 
-        local altW = math.ceil(UF.SV.PlayerBarWidth * 2/3)
+			local altW = math.ceil(UF.SV.PlayerBarWidth * 2/3)
 
-        phb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth )
+			phb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth )
 
-        pmb.backdrop:ClearAnchors()
-        if not UF.SV.HideBarMagicka then
-            if phb.shieldbackdrop then
-                phb.shieldbackdrop:ClearAnchors()
-                phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
-                phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
-                pmb.backdrop:SetAnchor( TOP, phb.shieldbackdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
-            else
-                pmb.backdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
-            end
-            pmb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightMagicka )
-        else
-            if phb.shieldbackdrop then
-                phb.shieldbackdrop:ClearAnchors()
-                phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
-                phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
-            end
-        end
+			pmb.backdrop:ClearAnchors()
+			if not UF.SV.HideBarMagicka then
+				if phb.shieldbackdrop then
+					phb.shieldbackdrop:ClearAnchors()
+					phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
+					phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
+					pmb.backdrop:SetAnchor( TOP, phb.shieldbackdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
+				else
+					pmb.backdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
+				end
+				pmb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightMagicka )
+			else
+				if phb.shieldbackdrop then
+					phb.shieldbackdrop:ClearAnchors()
+					phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
+					phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
+				end
+			end
 
-        psb.backdrop:ClearAnchors()
-        if not UF.SV.HideBarStamina then
-            if not UF.SV.HideBarMagicka then
-                psb.backdrop:SetAnchor( TOP, pmb.backdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
-            else
-                if phb.shieldbackdrop then
-                    psb.backdrop:SetAnchor( TOP, phb.shieldbackdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
-                else
-                    psb.backdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
-                end
-            end
-            psb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightStamina )
-        end
-        alt.backdrop:SetWidth( altW )
+			psb.backdrop:ClearAnchors()
+			if not UF.SV.HideBarStamina then
+				if not UF.SV.HideBarMagicka then
+					psb.backdrop:SetAnchor( TOP, pmb.backdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
+				else
+					if phb.shieldbackdrop then
+						psb.backdrop:SetAnchor( TOP, phb.shieldbackdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
+					else
+						psb.backdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, UF.SV.PlayerBarSpacing )
+					end
+				end
+				psb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightStamina )
+			end
+			alt.backdrop:SetWidth( altW )
 
-        phb.labelOne:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightHealth-2 )
-        phb.labelTwo:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightHealth-2 )
-        if not UF.SV.HideLabelMagicka then
-            pmb.labelOne:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightMagicka-2 )
-            pmb.labelTwo:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightMagicka-2 )
-        end
-        if not UF.SV.HideLabelStamina then
-            psb.labelOne:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightStamina-2 )
-            psb.labelTwo:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightStamina-2 )
-        end
+			phb.labelOne:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightHealth-2 )
+			phb.labelTwo:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightHealth-2 )
+			if not UF.SV.HideLabelMagicka then
+				pmb.labelOne:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightMagicka-2 )
+				pmb.labelTwo:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightMagicka-2 )
+			end
+			if not UF.SV.HideLabelStamina then
+				psb.labelOne:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightStamina-2 )
+				psb.labelTwo:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightStamina-2 )
+			end
+		else
+			player.tlw:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth + (phb.shieldbackdrop and UF.SV.CustomShieldBarHeight or 0) )
+			player.control:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth + (phb.shieldbackdrop and UF.SV.CustomShieldBarHeight or 0) )
+
+			player.topInfo:SetWidth( UF.SV.PlayerBarWidth )
+			player.botInfo:SetWidth( UF.SV.PlayerBarWidth )
+
+			player.name:SetWidth( UF.SV.PlayerBarWidth-90 )
+			player.buffs:SetWidth( 1000 )
+			player.debuffs:SetWidth( 1000 )
+
+			player.levelIcon:ClearAnchors()
+			player.levelIcon:SetAnchor( LEFT, player.topInfo, LEFT, player.name:GetTextWidth()+1, 0 )
+
+			player.name:SetHidden( not UF.SV.PlayerEnableYourname )
+			player.level:SetHidden( not UF.SV.PlayerEnableYourname )
+			player.levelIcon:SetHidden( not UF.SV.PlayerEnableYourname )
+			player.classIcon:SetHidden( not UF.SV.PlayerEnableYourname )
+			
+			local altW = math.ceil(UF.SV.PlayerBarWidth * 2/3)
+
+			phb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightHealth )
+
+			pmb.backdrop:ClearAnchors()
+			if not UF.SV.HideBarMagicka then
+				if phb.shieldbackdrop then
+					phb.shieldbackdrop:ClearAnchors()
+					phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
+					phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
+				end
+				pmb.backdrop:SetAnchor( RIGHT, phb.backdrop, LEFT, -UF.SV.AdjustMagickaHPos,  UF.SV.AdjustMagickaVPos )
+				pmb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightMagicka )
+			else
+				if phb.shieldbackdrop then
+					phb.shieldbackdrop:ClearAnchors()
+					phb.shieldbackdrop:SetAnchor( TOP, phb.backdrop, BOTTOM, 0, 0 )
+					phb.shieldbackdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.CustomShieldBarHeight )
+				end
+			end
+
+			psb.backdrop:ClearAnchors()
+			if not UF.SV.HideBarStamina then
+				psb.backdrop:SetAnchor( LEFT, phb.backdrop, RIGHT, UF.SV.AdjustStaminaHPos,  UF.SV.AdjustStaminaVPos )
+				psb.backdrop:SetDimensions( UF.SV.PlayerBarWidth, UF.SV.PlayerBarHeightStamina )
+			end
+			alt.backdrop:SetWidth( altW )
+
+			phb.labelOne:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightHealth-2 )
+			phb.labelTwo:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightHealth-2 )
+			if not UF.SV.HideLabelMagicka then
+				pmb.labelOne:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightMagicka-2 )
+				pmb.labelTwo:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightMagicka-2 )
+			end
+			if not UF.SV.HideLabelStamina then
+				psb.labelOne:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightStamina-2 )
+				psb.labelTwo:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightStamina-2 )
+			end
+		end
         player.tlw:SetHidden(false)
     end
 
@@ -3234,8 +3299,13 @@ function UF.CustomFramesApplyLayoutPlayer()
 
         target.name:SetWidth( UF.SV.TargetBarWidth-50 )
         target.title:SetWidth( UF.SV.TargetBarWidth-50 )
-        target.buffs:SetWidth( UF.SV.TargetBarWidth )
-        target.debuffs:SetWidth( UF.SV.TargetBarWidth )
+		if UF.SV.PlayerFrameOptions == 1 then
+			target.buffs:SetWidth( UF.SV.TargetBarWidth )
+			target.debuffs:SetWidth( UF.SV.TargetBarWidth )
+		else
+			target.buffs:SetWidth( 1000 )
+			target.debuffs:SetWidth( 1000 )
+		end
         
         target.title:SetHidden( not UF.SV.TargetEnableTitle )
         target.avaRank:SetHidden( not UF.SV.TargetEnableRank )

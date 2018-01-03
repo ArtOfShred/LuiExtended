@@ -38,6 +38,8 @@ function LUIE_CreateSettings()
     local raidIconOptionsKeys           = { ["No Icons"] = 1 , ["Class Icons Only"] = 2, ["Role Icons Only"] = 3, ["Class Icon in PVP, Role in PVE"] = 4, ["Class Icon in PVE, Role in PVP"] = 5 }
     local globalMethodOptions           = { "Ascending", "Descending", "Radial" }
 	local globalMethodOptionsKeys = { ["Ascending"] = 1, ["Descending"] = 2, ["Radial"] = 3 }
+	local playerFrameOptions = { "Vertical Stacked Frames", "Separated Horizontal Frames" }
+	local playerFrameOptionsKeys = { ["Vertical Stacked Frames"] = 1, ["Separated Horizontal Frames"] = 2 }
     
     local championOptions = { "Show Above Cap", "Limit to Cap", }
     
@@ -6930,6 +6932,66 @@ function LUIE_CreateSettings()
         default = LUIE.UnitFrames.D.HideBuffsPlayerOoc,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
+	
+	-- Choose method
+	optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+		type = "dropdown",
+        name = "Changing to the 2nd method will center the player frame and set the target frame to the top of the screen.",
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_ROLEICON_TP),
+        choices = playerFrameOptions,
+        getFunc = function() return playerFrameOptions[LUIE.UnitFrames.SV.PlayerFrameOptions] end,
+        setFunc = function(value) LUIE.UnitFrames.SV.PlayerFrameOptions = playerFrameOptionsKeys[value] end,
+        width = "full",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        default = LUIE.UnitFrames.D.PlayerFrameOptions,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
+    }
+	
+	-- Position Adjust
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "slider",
+        name = "STAMINA H ADJUST",
+        min = 0, max = 500, step = 5,
+        getFunc = function() return LUIE.UnitFrames.SV.AdjustStaminaHPos end,
+        setFunc = function(value) LUIE.UnitFrames.SV.AdjustStaminaHPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.AdjustStaminaHPos,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.PlayerFrameOptions == 2 ) end,
+    }
+	-- Position Adjust
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "slider",
+        name = "STAMINA V ADJUST",
+        min = -250, max = 250, step = 5,
+        getFunc = function() return LUIE.UnitFrames.SV.AdjustStaminaVPos end,
+        setFunc = function(value) LUIE.UnitFrames.SV.AdjustStaminaVPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.AdjustStaminaVPos,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.PlayerFrameOptions == 2 ) end,
+    }
+	-- Position Adjust
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "slider",
+        name = "MAGICKA H ADJUST",
+        min = 0, max = 500, step = 5,
+        getFunc = function() return LUIE.UnitFrames.SV.AdjustMagickaHPos end,
+        setFunc = function(value) LUIE.UnitFrames.SV.AdjustMagickaHPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.AdjustMagickaHPos,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.PlayerFrameOptions == 2 ) end,
+    }
+	-- Position Adjust
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "slider",
+        name = "MAGICKA V ADJUST",
+        min = -250, max = 250, step = 5,
+        getFunc = function() return LUIE.UnitFrames.SV.AdjustMagickaVPos end,
+        setFunc = function(value) LUIE.UnitFrames.SV.AdjustMagickaVPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
+        width = "full",
+        default = LUIE.UnitFrames.D.AdjustMagickaVPos,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.PlayerFrameOptions == 2 ) end,
+    }
+	
     -- Spacing between Player Bars
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
@@ -6939,7 +7001,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarSpacing = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
         width = "full",
         default = LUIE.UnitFrames.D.PlayerBarSpacing,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.PlayerFrameOptions == 1 ) end,
     }
     -- Display self name on Player Frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
