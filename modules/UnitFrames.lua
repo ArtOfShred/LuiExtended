@@ -213,30 +213,62 @@ local CHAMPION_ATTRIBUTE_HUD_ICONS = {
 }
 
 -- Default Regen/degen animation used on default group frames and custom frames
-local function CreateRegenAnimation(parent, anchors, dims, alpha, degen)
+local function CreateRegenAnimation(parent, anchors, dims, alpha, number)
     if #dims ~= 2 then
         dims = { parent:GetDimensions() }
     end
-
+	
+	local updateDims = { dims[2] * 1.9, dims[2] * .85 }
+	
     -- Create regen control
     local control
-    if degen then
-        control = UI.Texture(parent, anchors, dims, "/LuiExtended/media/unitframes/degen.dds", 2, true)
-    else
-        control = UI.Texture(parent, anchors, dims, "/LuiExtended/media/unitframes/regen.dds", 2, true)
+	local offsetX
+	local distance
+    if number == "degen1" then
+        control = UI.Texture(parent, anchors, updateDims, "/LuiExtended/media/unitframes/regenleft.dds", 2, true)
+		distance = -dims[1] * .35
+		offsetX = dims[1] * .425
+    elseif number == "degen2" then
+        control = UI.Texture(parent, anchors, updateDims, "/LuiExtended/media/unitframes/regenright.dds", 2, true)
+		distance = dims[1] * .35
+		offsetX = -dims[1] * .425
+	elseif number == "regen1" then
+        control = UI.Texture(parent, anchors, updateDims, "/LuiExtended/media/unitframes/regenright.dds", 2, true)
+		distance = dims[1] * .35
+		offsetX = dims[1] * .075
+	elseif number == "regen2" then
+        control = UI.Texture(parent, anchors, updateDims, "/LuiExtended/media/unitframes/regenleft.dds", 2, true)
+		distance = -dims[1] * .35
+		offsetX = -dims[1] * .075
     end
     if alpha then
         control:SetAlpha(alpha)
     end
-    -- Create animation
-    local animation, timeline = CreateSimpleAnimation(ANIMATION_TEXTURE, control)
-    animation:SetImageData(1, 32)
-    animation:SetFramerate(32)
-    animation:SetDuration(1000)
-    timeline:SetPlaybackType(ANIMATION_PLAYBACK_LOOP, LOOP_INDEFINITELY)
-    
-    control.animation = animation
-    control.timeline = timeline
+
+	local isValidAnchor, point, relativeTo, relativePoint, _, offsetY = control:GetAnchor()
+
+	-- Create an horizontal sliding animation
+	local animation, timeline = CreateSimpleAnimation(ANIMATION_TRANSLATE,control,0)
+	animation:SetTranslateOffsets(offsetX, offsetY, offsetX + distance, offsetY )
+	animation:SetDuration(1000)
+
+	-- Fade alpha coming in
+	local fadeIn = timeline:InsertAnimation(ANIMATION_ALPHA,control,0)
+	fadeIn:SetAlphaValues(0,.75)
+	fadeIn:SetDuration(250)
+	fadeIn:SetEasingFunction(ZO_EaseOutQuadratic)     
+
+	-- Fade alpha going out
+	local fadeOut = timeline:InsertAnimation(ANIMATION_ALPHA,control,750)
+	fadeOut:SetAlphaValues(.75,0)
+	fadeOut:SetDuration(250)
+	fadeIn:SetEasingFunction(ZO_EaseOutQuadratic)
+	
+	timeline:SetPlaybackType(ANIMATION_PLAYBACK_LOOP, LOOP_INDEFINITELY)
+	control.animation = animation
+	control.timeline = timeline
+	
+	control.timeline:PlayFromStart()
 
     return control
 end
@@ -767,8 +799,10 @@ local function CreateCustomFrames()
                             size2 = UF.SV.AvaTargetBarHeight
                         end
                         if size1 ~= nil and size2 ~= nil then
-                            UF.CustomFrames[unitTag][powerType].regen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, false )
-                            UF.CustomFrames[unitTag][powerType].degen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, true )
+                            UF.CustomFrames[unitTag][powerType].regen1 = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, "regen1" )
+                            UF.CustomFrames[unitTag][powerType].regen2 = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, "regen2" )
+                            UF.CustomFrames[unitTag][powerType].degen1 = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, "degen1" )
+                            UF.CustomFrames[unitTag][powerType].degen2 = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, "degen2" )
                         end
                     end
                 end
@@ -786,8 +820,10 @@ local function CreateCustomFrames()
                         local size1 = UF.SV.GroupBarWidth
                         local size2 = UF.SV.GroupBarHeight
                         if size1 ~= nil and size2 ~= nil then
-                            UF.CustomFrames[unitTag][powerType].regen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .4) }, 0.55, false )
-                            UF.CustomFrames[unitTag][powerType].degen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .4) }, 0.55, true )
+                            UF.CustomFrames[unitTag][powerType].regen1 = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .4) }, 0.55, "regen1" )
+                            UF.CustomFrames[unitTag][powerType].regen2 = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .4) }, 0.55, "regen2" )
+                            UF.CustomFrames[unitTag][powerType].degen1 = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .4) }, 0.55, "degen1" )
+                            UF.CustomFrames[unitTag][powerType].degen2 = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .4) }, 0.55, "degen2" )
                         end
                     end
                 end
@@ -805,8 +841,10 @@ local function CreateCustomFrames()
                         local size1 = UF.SV.RaidBarWidth
                         local size2 = UF.SV.RaidBarHeight
                         if size1 ~= nil and size2 ~= nil then
-                            UF.CustomFrames[unitTag][powerType].regen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, false )
-                            UF.CustomFrames[unitTag][powerType].degen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, true )
+                            UF.CustomFrames[unitTag][powerType].regen1 = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, "regen1" )
+                            UF.CustomFrames[unitTag][powerType].regen2 = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, "regen2" )
+                            UF.CustomFrames[unitTag][powerType].degen1 = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, "degen1" )
+                            UF.CustomFrames[unitTag][powerType].degen2 = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, "degen2" )
                         end
                     end
                 end
@@ -824,8 +862,10 @@ local function CreateCustomFrames()
                         local size1 = UF.SV.BossBarWidth
                         local size2 = UF.SV.BossBarHeight
                         if size1 ~= nil and size2 ~= nil then
-                            UF.CustomFrames[unitTag][powerType].regen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, false )
-                            UF.CustomFrames[unitTag][powerType].degen = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, true )
+                            UF.CustomFrames[unitTag][powerType].regen1 = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, "regen1" )
+                            UF.CustomFrames[unitTag][powerType].regen2 = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, "regen2" )
+                            UF.CustomFrames[unitTag][powerType].degen1 = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, "degen1" )
+                            UF.CustomFrames[unitTag][powerType].degen2 = CreateRegenAnimation( backdrop, {CENTER,CENTER,0,0}, { size1 - 4, size2 -(size2 * .3) }, 0.55, "degen2" )
                         end
                     end
                 end
@@ -2089,16 +2129,22 @@ function UF.UpdateRegen(unitTag, statType, attributeType, powerType )
 
     -- Here we assume, that every unitTag entry in tables has POWERTYPE_HEALTH key
     if g_DefaultFrames[unitTag] and g_DefaultFrames[unitTag][powerType] then
-        UF.DisplayRegen( g_DefaultFrames[unitTag][powerType].regen, value > 0 )
-        UF.DisplayRegen( g_DefaultFrames[unitTag][powerType].degen, value < 0 )
+        UF.DisplayRegen( g_DefaultFrames[unitTag][powerType].regen1, value > 0 )
+        UF.DisplayRegen( g_DefaultFrames[unitTag][powerType].regen2, value > 0 )
+        UF.DisplayRegen( g_DefaultFrames[unitTag][powerType].degen1, value < 0 )
+        UF.DisplayRegen( g_DefaultFrames[unitTag][powerType].degen2, value < 0 )
     end
     if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag][powerType] then
-        UF.DisplayRegen( UF.CustomFrames[unitTag][powerType].regen, value > 0 )
-        UF.DisplayRegen( UF.CustomFrames[unitTag][powerType].degen, value < 0 )
+        UF.DisplayRegen( UF.CustomFrames[unitTag][powerType].regen1, value > 0 )
+        UF.DisplayRegen( UF.CustomFrames[unitTag][powerType].regen2, value > 0 )
+        UF.DisplayRegen( UF.CustomFrames[unitTag][powerType].degen1, value < 0 )
+        UF.DisplayRegen( UF.CustomFrames[unitTag][powerType].degen2, value < 0 )
     end
     if g_AvaCustFrames[unitTag] and g_AvaCustFrames[unitTag][powerType] then
-        UF.DisplayRegen( g_AvaCustFrames[unitTag][powerType].regen, value > 0 )
-        UF.DisplayRegen( g_AvaCustFrames[unitTag][powerType].degen, value < 0 )
+        UF.DisplayRegen( g_AvaCustFrames[unitTag][powerType].regen1, value > 0 )
+        UF.DisplayRegen( g_AvaCustFrames[unitTag][powerType].regen2, value > 0 )
+        UF.DisplayRegen( g_AvaCustFrames[unitTag][powerType].degen1, value < 0 )
+        UF.DisplayRegen( g_AvaCustFrames[unitTag][powerType].degen2, value < 0 )
     end
 end
 
@@ -2266,8 +2312,10 @@ function UF.OnDeath(eventCode, unitTag, isDead)
     if isDead and UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag][POWERTYPE_HEALTH] then
         local thb = UF.CustomFrames[unitTag][POWERTYPE_HEALTH] -- not a backdrop
         -- 1. Regen/degen
-        UF.DisplayRegen( thb.regen, false )
-        UF.DisplayRegen( thb.degen, false )
+        UF.DisplayRegen( thb.regen1, false )
+        UF.DisplayRegen( thb.regen2, false )
+        UF.DisplayRegen( thb.degen1, false )
+        UF.DisplayRegen( thb.degen2, false )
         -- 2. Stats
         if thb.stat then
             for _, statControls in pairs( thb.stat ) do

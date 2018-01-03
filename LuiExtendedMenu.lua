@@ -6936,7 +6936,7 @@ function LUIE_CreateSettings()
 	-- Choose method
 	optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
 		type = "dropdown",
-        name = "Changing to the 2nd method will center the player frame and set the target frame to the top of the screen.",
+        name = "WIP: Player Frame Display Method",
         tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_ROLEICON_TP),
         choices = playerFrameOptions,
         getFunc = function() return playerFrameOptions[LUIE.UnitFrames.SV.PlayerFrameOptions] end,
@@ -6950,7 +6950,7 @@ function LUIE_CreateSettings()
 	-- Position Adjust
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "STAMINA H ADJUST",
+        name = "WIP: STAMINA H ADJUST",
         min = 0, max = 500, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.AdjustStaminaHPos end,
         setFunc = function(value) LUIE.UnitFrames.SV.AdjustStaminaHPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -6961,7 +6961,7 @@ function LUIE_CreateSettings()
 	-- Position Adjust
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "STAMINA V ADJUST",
+        name = "WIP: STAMINA V ADJUST",
         min = -250, max = 250, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.AdjustStaminaVPos end,
         setFunc = function(value) LUIE.UnitFrames.SV.AdjustStaminaVPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -6972,7 +6972,7 @@ function LUIE_CreateSettings()
 	-- Position Adjust
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "MAGICKA H ADJUST",
+        name = "WIP: MAGICKA H ADJUST",
         min = 0, max = 500, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.AdjustMagickaHPos end,
         setFunc = function(value) LUIE.UnitFrames.SV.AdjustMagickaHPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -6983,7 +6983,7 @@ function LUIE_CreateSettings()
 	-- Position Adjust
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "MAGICKA V ADJUST",
+        name = "WIP: MAGICKA V ADJUST",
         min = -250, max = 250, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.AdjustMagickaVPos end,
         setFunc = function(value) LUIE.UnitFrames.SV.AdjustMagickaVPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,

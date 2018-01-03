@@ -1,6 +1,6 @@
 ﻿## Title: |cE12000L|cFFFFB0ui E|rxtended|
 ## Author: ArtOfShred, psypanda, Upularity & SpellBuilder
-## Version: 5.2.3
+## Version: 5.2.4
 ## APIVersion: 100021
 ## Description: Provides UnitFrames, InfoPanel, CombatEvents, Buffs Tracking, Damage Meter and Chat Announcements.
 ## OptionalDependsOn: LibStub LibAddonMenu-2.0 LibMediaProvider-1.0
