@@ -1820,7 +1820,7 @@ function SCB.Reset()
         uiTlw.player2.firstAnchor = { TOPLEFT, TOP }
         uiTlw.player2.maxIcons = math.floor(  (uiTlw.player2:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
 
-        uiTlw.player1:SetHeight( SCB.SV.IconSize * 2)
+        uiTlw.player1:SetHeight( SCB.SV.IconSize)
         uiTlw.player1.firstAnchor = { TOPLEFT, TOP }
         uiTlw.player1.maxIcons = math.floor(  (uiTlw.player1:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
     end
@@ -1834,7 +1834,7 @@ function SCB.Reset()
         uiTlw.target2.firstAnchor = { TOPLEFT, TOP }
         uiTlw.target2.maxIcons = math.floor(  (uiTlw.target2:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
 
-        uiTlw.target1:SetHeight( SCB.SV.IconSize * 2)
+        uiTlw.target1:SetHeight( SCB.SV.IconSize)
         uiTlw.target1.firstAnchor = { TOPLEFT, TOP }
         uiTlw.target1.maxIcons = math.floor(  (uiTlw.target1:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
     end

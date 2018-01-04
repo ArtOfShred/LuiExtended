@@ -490,6 +490,15 @@ local function CreateCustomFrames()
         thb:SetDrawLevel(1)
         local tli = UI.Texture( topInfo, nil, {20,20}, nil, nil, false )
         local ari = UI.Texture( botInfo, {RIGHT,RIGHT,-1,0}, {20,20}, nil, nil, false )
+		local buffs
+		local debuffs
+		if UF.SV.PlayerFrameOptions == 1 then
+			buffs = UI.Control( targetTlw, {TOP,BOTTOM,0,2,buffAnchor}, nil, false )
+			debuffs = UI.Control( targetTlw, {BOTTOM,TOP,0,-2,topInfo}, nil, false )
+		else
+			buffs = UI.Control( targetTlw, {BOTTOM,TOP,0,-2,topInfo}, nil, false )
+			debuffs = UI.Control( targetTlw, {TOP,BOTTOM,0,2,buffAnchor}, nil, false )
+		end
         
         local fragment = ZO_HUDFadeSceneFragment:New(targetTlw, 0, 0)
 
@@ -525,8 +534,8 @@ local function CreateCustomFrames()
             ["avaRank"]     = UI.Label( botInfo, {RIGHT,LEFT,-1,0,ari}, nil, {2,3}, nil, "ava", false ),
             ["dead"]        = UI.Label( thb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "Status", true ),
             ["skull"]       = UI.Texture( target, {RIGHT,LEFT,-8,0}, nil, "LuiExtended/media/unitframes/unitframes_execute.dds", nil, true ),
-            ["buffs"]       = UI.Control( targetTlw, {TOP,BOTTOM,0,2,buffAnchor}, nil, false ),
-            ["debuffs"]     = UI.Control( targetTlw, {BOTTOM,TOP,0,-2,topInfo}, nil, false ),
+            ["buffs"]       = buffs,
+            ["debuffs"]     = debuffs,
         }
         UF.CustomFrames.reticleover.className:SetDrawLayer( DL_BACKGROUND )
     end
@@ -1986,13 +1995,23 @@ function UF.UpdateStaticControls( unitFrame )
     
     -- Reanchor buffs if title changes
     if unitFrame.buffs then
-        if (not UF.SV.TargetEnableRank and not UF.SV.TargetEnableTitle) or savedTitle == "" then
-            unitFrame.buffs:ClearAnchors()
-            unitFrame.buffs:SetAnchor( TOP, unitFrame.control, BOTTOM, 0, 5 )
-        else
-            unitFrame.buffs:ClearAnchors()
-            unitFrame.buffs:SetAnchor( TOP, unitFrame.buffAnchor, BOTTOM, 0, 5 )
-        end
+		if UF.PlayerFrameOptions ~= 1 and unitFrame.unitTag == "reticleover" then
+			if (not UF.SV.TargetEnableRank and not UF.SV.TargetEnableTitle) or savedTitle == "" then
+				unitFrame.debuffs:ClearAnchors()
+				unitFrame.debuffs:SetAnchor( TOP, unitFrame.control, BOTTOM, 0, 5 )
+			else
+				unitFrame.debuffs:ClearAnchors()
+				unitFrame.debuffs:SetAnchor( TOP, unitFrame.buffAnchor, BOTTOM, 0, 5 )
+			end
+		else
+			if (not UF.SV.TargetEnableRank and not UF.SV.TargetEnableTitle) or savedTitle == "" then
+				unitFrame.buffs:ClearAnchors()
+				unitFrame.buffs:SetAnchor( TOP, unitFrame.control, BOTTOM, 0, 5 )
+			else
+				unitFrame.buffs:ClearAnchors()
+				unitFrame.buffs:SetAnchor( TOP, unitFrame.buffAnchor, BOTTOM, 0, 5 )
+			end
+		end
     end
 
     -- If unitFrame has dead/offline indicator, then query its state and act accordingly
@@ -3507,6 +3526,8 @@ function UF.CustomFramesApplyLayoutPlayer()
 		else
 			target.buffs:SetWidth( 1000 )
 			target.debuffs:SetWidth( 1000 )
+			target.buffs:SetHeight ( 64 )
+			target.debuffs:SetHeight ( 64 )
 		end
         
         target.title:SetHidden( not UF.SV.TargetEnableTitle )
@@ -3520,8 +3541,13 @@ function UF.CustomFramesApplyLayoutPlayer()
             enable = true
         end
         
-        target.buffs:ClearAnchors()
-        target.buffs:SetAnchor( TOP, not enable and target.control or target.buffAnchor, BOTTOM, 0, 5 )
+		if UF.SV.PlayerFrameOptions == 1 then
+			target.buffs:ClearAnchors()
+			target.buffs:SetAnchor( TOP, not enable and target.control or target.buffAnchor, BOTTOM, 0, 5 )
+		else
+			target.debuffs:ClearAnchors()
+			target.debuffs:SetAnchor( TOP, not enable and target.control or target.buffAnchor, BOTTOM, 0, 5 )
+		end
 
         target.levelIcon:ClearAnchors()
         target.levelIcon:SetAnchor( LEFT, target.topInfo, LEFT, target.name:GetTextWidth()+1, 0 )
