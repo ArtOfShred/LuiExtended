@@ -1184,10 +1184,10 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY",            "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY_TP",         "Display <<1>> when a location on the map is discovered.")
 
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY",            		"Display Imperial City Area Messages - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP",         		"Display <<1>> when entering a new area of the Imperial City Sewers. This option uses POI Name Color from Quest/POI Announcements.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP",         		"Display <<1>> when entering a new area of the Imperial City Sewers.\nNote: This option uses POI Name Color from Quest/POI Announcements.")
 
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION",            	"Display Imperial City Area Description")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION_TP",         	"Display the description text when entering a new area of the Imperial City Sewers. This option uses the POI Description Color from Quest/POI Announcements.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION_TP",         	"Display the description text when entering a new area of the Imperial City Sewers.\nNote: This option uses the POI Description Color from Quest/POI Announcements.")
 
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE",                 "Display POI Objective - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE_TP",              "Display <<1>> when a quest is accepted with an associated map POI.")
@@ -1291,11 +1291,18 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE_TP",             "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_REVIVE",                   "Display Vitality Bonus Loss - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_REVIVE_TP",                "Display <<1>> when Vitality Bonus is decreased.")
 
+ZO_CreateStringId("SI_LUIE_LAM_CA_DISPLAY_HEADER",						"Display Announcements")
+ZO_CreateStringId("SI_LUIE_LAM_CA_DISPLAY_DESCRIPTION",					"Display Announcements are various messages displayed under certain conditions, these range from broad to very specific categories, and thus fall under their own section for Announcements.")
+
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_ARENA",                    "Display DSA/Maelstrom Arena Stage - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP",                 "Display <<1>> when a new stage begins in Dragonstar or Maelstrom Arena.")
 
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND",              "Display Maelstrom Arena Round - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP",           "Display <<1>> when a new round begins in Maelstrom Arena.")
+
+-- Display Announcements
+ZO_CreateStringId("SI_LUIE_LAM_CA_DISPLAY_CRAGLORN",					"Display Craglorn Buffs - <<1>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP",					"Display <<1>> when you gain a buff from completing a World Boss event in Craglorn.")
 
 -- Misc Menu
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_GROUPAREA",                      "Display Entering/Leaving Group Area - <<1>>")

@@ -5679,14 +5679,13 @@ function LUIE_CreateSettings()
 		-- CA Display Announcements Submenu
 		optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
 		type = "submenu",
-		name = "DISPLAY ANNOUNCEMENTS",
-		reference = "Chat_Announcements_Options_Display_Announcements_Submenu",
+		name = GetString(SI_LUIE_LAM_CA_DISPLAY_HEADER),
 		controls = {
 		
 			-- Display Announcements description
 			{
 				type = "description",
-				text = "Display Announcements are various messages displayed under certain conditions, these range from broad to very specific categories, and thus fall under their own section for Announcements.",
+				text = GetString(SI_LUIE_LAM_CA_DISPLAY_DESCRIPTION),
 			},
 			
 			 {
@@ -5869,6 +5868,40 @@ function LUIE_CreateSettings()
 				width = "full",
 				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.Quests.QuestICDiscoveryCA or LUIE.ChatAnnouncements.SV.Quests.QuestICDiscoveryCSA or LUIE.ChatAnnouncements.SV.Quests.QuestICDiscoveryAlert) ) end,
 				default = LUIE.ChatAnnouncements.D.Quests.QuestICDiscoveryAlert,                   
+			},
+			
+			{
+				-- CRAGLORN BUFF (CA)
+				type = "checkbox",
+				name = strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
+				tooltip = strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Quests.QuestCraglornBuffCA end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestCraglornBuffCA = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.Quests.QuestCraglornBuffCA,                   
+			},
+			{
+				-- CRAGLORN BUFF (CSA)
+				type = "checkbox",
+				name = strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
+				tooltip = strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Quests.QuestCraglornBuffCSA end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestCraglornBuffCSA = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.Quests.QuestCraglornBuffCSA,                   
+			},
+			{
+				-- CRAGLORN BUFF (ALERT)
+				type = "checkbox",
+				name = strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
+				tooltip = strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Quests.QuestCraglornBuffAlert end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestCraglornBuffAlert = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.Quests.QuestCraglornBuffAlert,                   
 			},
 			
 		},

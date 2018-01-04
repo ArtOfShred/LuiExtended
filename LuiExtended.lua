@@ -360,7 +360,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     end
     
     -- HOOK SUPPORT FOR OTHER ADDONS (ICON)
-    LUIE.GetAbilityIcon = GetAbilityIcon
+    LUIE.GetAbilityIcon = GetAbilityIcon -- Used only for PTS testing
     local zos_GetAbilityIcon = GetAbilityIcon
     GetAbilityIcon = function(abilityId)
         local icon = zos_GetAbilityIcon(abilityId)
@@ -369,7 +369,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     end
     
     -- HOOK SUPPORT FOR OTHER ADDONS (NAME)
-    LUIE.GetAbilityName = GetAbilityName
+    LUIE.GetAbilityName = GetAbilityName -- Used only for PTS testing
     local zos_GetAbilityName = GetAbilityName
     GetAbilityName = function(abilityId)
         local abilityName = zos_GetAbilityName(abilityId)
@@ -378,7 +378,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     end
     
     -- HOOK SUPPORT FOR OTHER ADDONS (ARTIFICIAL EFFECT IDS)
-    LUIE.GetArtificialEffectInfo = GetArtificialEffectInfo
+    LUIE.GetArtificialEffectInfo = GetArtificialEffectInfo -- Used only for PTS testing
     local zos_GetArtificialEffectInfo = GetArtificialEffectInfo
     GetArtificialEffectInfo = function(artificialEffectId)
         local displayName, iconFile, effectType, sortOrder, timeStarted, timeEnding = zos_GetArtificialEffectInfo(artificialEffectId)
@@ -477,6 +477,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         end
            
        container:RegisterForEvent(EVENT_EFFECT_CHANGED, UpdateEffects)
+	   --container:AddFilterForEvent(EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "player")
        container:RegisterForEvent(EVENT_EFFECTS_FULL_UPDATE, UpdateEffects)
        container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_ADDED, UpdateEffects)
        container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_REMOVED, UpdateEffects)

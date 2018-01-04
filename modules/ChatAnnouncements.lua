@@ -227,6 +227,9 @@ CA.D = {
 		QuestICDiscoveryCSA				= true,
 		QuestICDiscoveryAlert			= false,
 		QuestICDescription				= true,
+		QuestCraglornBuffCA				= false,
+		QuestCraglornBuffCSA			= true,
+		QuestCraglornBuffAlert			= false,
 		QuestLocObjectiveCA             = true,
 		QuestLocObjectiveCSA            = true,
 		QuestLocObjectiveAlert          = false,
@@ -8030,9 +8033,9 @@ function CA.HookFunction()
                 flagCSA = CA.SV.Group.GroupRaidArenaRoundCSA and true or false
                 flagAlert = CA.SV.Group.GroupRaidArenaRoundAlert and true or false
 			elseif reference == "CRAGLORN" then
-                flagCA = true
-                flagCSA = true
-                flagAlert = true
+                flagCA = CA.SV.Quests.QuestCraglornBuffCA and true or false
+                flagCSA = CA.SV.Quests.QuestCraglornBuffCSA and true or false
+                flagAlert = CA.SV.Quests.QuestCraglornBuffAlert and true or false
             end
         end
         
