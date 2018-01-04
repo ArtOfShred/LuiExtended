@@ -2472,16 +2472,20 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
     UF.CustomFrames.player.botInfo:SetHidden( hidden )
     UF.CustomFrames.player.buffAnchor:SetHidden( hidden )
     UF.CustomFrames.player.buffs:ClearAnchors()
-    UF.CustomFrames.player.buffs:SetAnchor( TOP, hidden and UF.CustomFrames.player.control or UF.CustomFrames.player.buffAnchor, BOTTOM, 0, 5 )
+	if UF.SV.PlayerFrameOptions == 3 then
+		UF.CustomFrames.player.buffs:SetAnchor( TOP, hidden and UF.CustomFrames.player.control or UF.CustomFrames.player.buffAnchor, BOTTOM, 0, 5 + UF.SV.PlayerBarHeightStamina + UF.SV.PlayerBarSpacing )
+	else
+		UF.CustomFrames.player.buffs:SetAnchor( TOP, hidden and UF.CustomFrames.player.control or UF.CustomFrames.player.buffAnchor, BOTTOM, 0, 5 )
+	end
 	if right then
-		UF.CustomFrames.player.botInfo:SetAnchor(CENTER, psb.backdrop, CENTER, 0, UF.SV.PlayerBarHeightStamina + 2)
+		UF.CustomFrames.player.botInfo:SetAnchor(CENTER, psb.backdrop, CENTER, 0, UF.SV.PlayerBarHeightStamina )
 		alt.backdrop:ClearAnchors()
 		alt.backdrop:SetAnchor( LEFT, UF.CustomFrames.player.botInfo, LEFT, padding + 5, 0)
 		alt.backdrop:SetWidth(altW)
 		alt.icon:ClearAnchors()
 		alt.icon:SetAnchor (RIGHT, alt.backdrop, LEFT,-2,0)
 	elseif left then
-		UF.CustomFrames.player.botInfo:SetAnchor(CENTER, pmb.backdrop, CENTER, 0, UF.SV.PlayerBarHeightMagicka + 2)
+		UF.CustomFrames.player.botInfo:SetAnchor(CENTER, pmb.backdrop, CENTER, 0, UF.SV.PlayerBarHeightMagicka )
 		alt.backdrop:ClearAnchors()
 		alt.backdrop:SetAnchor( RIGHT, UF.CustomFrames.player.botInfo, RIGHT, -padding - 5, 0)
 		alt.backdrop:SetWidth(altW)
@@ -2490,14 +2494,14 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
 		--alt.icon:ClearAnchors()
 	elseif recenter then
 		if UF.SV.PlayerFrameOptions == 2 then	
-			UF.CustomFrames.player.botInfo:SetAnchor(CENTER, phb.backdrop, CENTER, 0, UF.SV.PlayerBarHeightHealth + 2)
+			UF.CustomFrames.player.botInfo:SetAnchor(CENTER, phb.backdrop, CENTER, 0, UF.SV.PlayerBarHeightHealth )
 			alt.backdrop:ClearAnchors()
 			alt.backdrop:SetAnchor( CENTER, UF.CustomFrames.player.botInfo, CENTER, padding * .5 +1, 0)
 			alt.backdrop:SetWidth(altW)
 			alt.icon:ClearAnchors()
 			alt.icon:SetAnchor (RIGHT, alt.backdrop, LEFT,-2,0)
 		elseif UF.SV.PlayerFrameOptions == 3 then
-			UF.CustomFrames.player.botInfo:SetAnchor(CENTER, psb.backdrop, LEFT, 0, UF.SV.PlayerBarHeightStamina + 2)
+			UF.CustomFrames.player.botInfo:SetAnchor(CENTER, psb.backdrop, LEFT, 0, UF.SV.PlayerBarHeightStamina )
 			alt.backdrop:ClearAnchors()
 			alt.backdrop:SetAnchor( CENTER, UF.CustomFrames.player.botInfo, CENTER, padding * .5 +1, 0)
 			alt.backdrop:SetWidth(altW)

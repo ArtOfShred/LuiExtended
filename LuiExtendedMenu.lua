@@ -6937,12 +6937,12 @@ function LUIE_CreateSettings()
 	optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
 		type = "dropdown",
         name = "WIP: Player Frame Display Method",
-        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_ROLEICON_TP),
+        tooltip = "WARNING: RESETS YOUR FRAME POSITIONS",
         choices = playerFrameOptions,
         getFunc = function() return playerFrameOptions[LUIE.UnitFrames.SV.PlayerFrameOptions] end,
-        setFunc = function(value) LUIE.UnitFrames.SV.PlayerFrameOptions = playerFrameOptionsKeys[value] LUIE.UnitFrames.CustomFramesResetPosition() LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
+        setFunc = function(value) LUIE.UnitFrames.SV.PlayerFrameOptions = playerFrameOptionsKeys[value] LUIE.UnitFrames.CustomFramesResetPosition() LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() LUIE.UnitFrames.CustomFramesSetupAlternative() LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
         width = "full",
-        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        warning = "WARNING: RESETS YOUR FRAME POSITIONS",
         default = LUIE.UnitFrames.D.PlayerFrameOptions,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
@@ -6950,7 +6950,7 @@ function LUIE_CreateSettings()
 	-- Position Adjust
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "WIP: STAMINA H ADJUST",
+        name = "WIP: Stamina Bar Horizontal Pos Adjust",
         min = 0, max = 500, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.AdjustStaminaHPos end,
         setFunc = function(value) LUIE.UnitFrames.SV.AdjustStaminaHPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -6961,7 +6961,7 @@ function LUIE_CreateSettings()
 	-- Position Adjust
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "WIP: STAMINA V ADJUST",
+        name = "WIP: Stamina Bar Vertical Pos Adjust",
         min = -250, max = 250, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.AdjustStaminaVPos end,
         setFunc = function(value) LUIE.UnitFrames.SV.AdjustStaminaVPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -6972,7 +6972,7 @@ function LUIE_CreateSettings()
 	-- Position Adjust
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "WIP: MAGICKA H ADJUST",
+        name = "WIP: Magicka Bar Horizontal Pos Adjust",
         min = 0, max = 500, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.AdjustMagickaHPos end,
         setFunc = function(value) LUIE.UnitFrames.SV.AdjustMagickaHPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -6983,7 +6983,7 @@ function LUIE_CreateSettings()
 	-- Position Adjust
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "WIP: MAGICKA V ADJUST",
+        name = "WIP: Magicka Bar Vertical Pos Adjust",
         min = -250, max = 250, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.AdjustMagickaVPos end,
         setFunc = function(value) LUIE.UnitFrames.SV.AdjustMagickaVPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -7001,7 +7001,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarSpacing = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
         width = "full",
         default = LUIE.UnitFrames.D.PlayerBarSpacing,
-        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.PlayerFrameOptions == 1 ) end,
+        disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and ( LUIE.UnitFrames.SV.PlayerFrameOptions == 1 or LUIE.UnitFrames.SV.PlayerFrameOptions == 3 ) ) end,
     }
     -- Display self name on Player Frame
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
