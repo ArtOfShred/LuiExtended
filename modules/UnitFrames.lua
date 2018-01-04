@@ -1995,7 +1995,7 @@ function UF.UpdateStaticControls( unitFrame )
     
     -- Reanchor buffs if title changes
     if unitFrame.buffs then
-		if UF.PlayerFrameOptions ~= 1 and unitFrame.unitTag == "reticleover" then
+		if UF.SV.PlayerFrameOptions ~= 1 and unitFrame.unitTag == "reticleover" then
 			if (not UF.SV.TargetEnableRank and not UF.SV.TargetEnableTitle) or savedTitle == "" then
 				unitFrame.debuffs:ClearAnchors()
 				unitFrame.debuffs:SetAnchor( TOP, unitFrame.control, BOTTOM, 0, 5 )
@@ -2030,6 +2030,28 @@ function UF.UpdateStaticControls( unitFrame )
     if "group" == string.sub(unitFrame.unitTag, 0, 5) and unitFrame.control then
         unitFrame.control:SetAlpha( IsUnitInGroupSupportRange(unitFrame.unitTag) and ( UF.SV.GroupAlpha * 0.01) or ( UF.SV.GroupAlpha * 0.01) / 2 )
     end
+end
+
+function UF.MenuUpdatePlayerFrameOptions(option)
+
+	local reticleover = UF.CustomFrames.reticleover
+
+	if option == 1 then
+		reticleover.buffs:ClearAnchors()
+		reticleover.debuffs:ClearAnchors()
+		reticleover.buffs:SetAnchor(TOP, reticleover.buffAnchor, BOTTOM, 0, 2)
+		reticleover.debuffs:SetAnchor(BOTTOM, reticleover.topInfo, TOP, 0, -2)
+	else
+		reticleover.buffs:ClearAnchors()
+		reticleover.debuffs:ClearAnchors()
+		reticleover.buffs:SetAnchor(BOTTOM, reticleover.topInfo, TOP, 0, -2)
+		reticleover.debuffs:SetAnchor(TOP, reticleover.buffAnchor, BOTTOM, 0, 2)
+	end
+
+	LUIE.UnitFrames.CustomFramesResetPosition()
+	LUIE.UnitFrames.CustomFramesSetupAlternative()
+	LUIE.UnitFrames.CustomFramesApplyLayoutPlayer()
+
 end
 
 -- Updates single attribute.
@@ -3520,14 +3542,13 @@ function UF.CustomFramesApplyLayoutPlayer()
 
         target.name:SetWidth( UF.SV.TargetBarWidth-50 )
         target.title:SetWidth( UF.SV.TargetBarWidth-50 )
+		
 		if UF.SV.PlayerFrameOptions == 1 then
 			target.buffs:SetWidth( UF.SV.TargetBarWidth )
 			target.debuffs:SetWidth( UF.SV.TargetBarWidth )
 		else
 			target.buffs:SetWidth( 1000 )
 			target.debuffs:SetWidth( 1000 )
-			target.buffs:SetHeight ( 64 )
-			target.debuffs:SetHeight ( 64 )
 		end
         
         target.title:SetHidden( not UF.SV.TargetEnableTitle )

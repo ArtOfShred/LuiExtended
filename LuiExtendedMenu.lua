@@ -6933,16 +6933,16 @@ function LUIE_CreateSettings()
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
 	
-	-- Choose method
+	-- Player Frames Display Method
 	optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
 		type = "dropdown",
-        name = "WIP: Player Frame Display Method",
-        tooltip = "WARNING: RESETS YOUR FRAME POSITIONS",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD_TP),
         choices = playerFrameOptions,
         getFunc = function() return playerFrameOptions[LUIE.UnitFrames.SV.PlayerFrameOptions] end,
-        setFunc = function(value) LUIE.UnitFrames.SV.PlayerFrameOptions = playerFrameOptionsKeys[value] LUIE.UnitFrames.CustomFramesResetPosition() LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() LUIE.UnitFrames.CustomFramesSetupAlternative() LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
+        setFunc = function(value) LUIE.UnitFrames.SV.PlayerFrameOptions = playerFrameOptionsKeys[value] LUIE.UnitFrames.MenuUpdatePlayerFrameOptions(LUIE.UnitFrames.SV.PlayerFrameOptions) end,
         width = "full",
-        warning = "WARNING: RESETS YOUR FRAME POSITIONS",
+        warning = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD_WARN),
         default = LUIE.UnitFrames.D.PlayerFrameOptions,
         disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
     }
@@ -6950,7 +6950,8 @@ function LUIE_CreateSettings()
 	-- Position Adjust
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "WIP: Stamina Bar Horizontal Pos Adjust",
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_HORIZ_ADJUST)),
+		tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_HORIZ_ADJUST_TP),
         min = 0, max = 500, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.AdjustStaminaHPos end,
         setFunc = function(value) LUIE.UnitFrames.SV.AdjustStaminaHPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -6961,7 +6962,8 @@ function LUIE_CreateSettings()
 	-- Position Adjust
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "WIP: Stamina Bar Vertical Pos Adjust",
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_VERT_ADJUST)),
+		tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_VERT_ADJUST_TP),
         min = -250, max = 250, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.AdjustStaminaVPos end,
         setFunc = function(value) LUIE.UnitFrames.SV.AdjustStaminaVPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -6972,7 +6974,8 @@ function LUIE_CreateSettings()
 	-- Position Adjust
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "WIP: Magicka Bar Horizontal Pos Adjust",
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_HORIZ_ADJUST)),
+		tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_HORIZ_ADJUST_TP),
         min = 0, max = 500, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.AdjustMagickaHPos end,
         setFunc = function(value) LUIE.UnitFrames.SV.AdjustMagickaHPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -6983,7 +6986,8 @@ function LUIE_CreateSettings()
 	-- Position Adjust
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = "WIP: Magicka Bar Vertical Pos Adjust",
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_VERT_ADJUST)),
+		tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_VERT_ADJUST_TP),
         min = -250, max = 250, step = 5,
         getFunc = function() return LUIE.UnitFrames.SV.AdjustMagickaVPos end,
         setFunc = function(value) LUIE.UnitFrames.SV.AdjustMagickaVPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
@@ -6995,7 +6999,8 @@ function LUIE_CreateSettings()
     -- Spacing between Player Bars
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "slider",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_SPACING),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_SPACING)),
+		tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_SPACING_TP),
         min = -1, max = 4, step = 1,
         getFunc = function() return LUIE.UnitFrames.SV.PlayerBarSpacing end,
         setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarSpacing = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
