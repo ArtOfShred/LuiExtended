@@ -411,6 +411,14 @@ ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D",       "Leaving
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C",       "Entering Group Area")
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_C",       "Leaving Group Area")
 
+-- CRAGLORN BUFFS
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR",		"Spell Resistance Increased")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR_CA",		"Spell Resistance Increased!")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR",		"Physical Resistance Increased")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR_CA",		"Physical Resistance Increased!")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI",		"Power Increased")
+ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI_CA",		"Power Increased!")
+
 -- VMA Notifications used by EVENT_DISPLAY_ANNOUNCEMENT
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM",          "Maelstrom Arena")
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM_CA",       "Maelstrom Arena: ")
@@ -1176,10 +1184,10 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY",            "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY_TP",         "Display <<1>> when a location on the map is discovered.")
 
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY",            		"Display Imperial City Area Messages - <<1>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP",         		"Display <<1>> when entering a new area of the Imperial City Sewers.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP",         		"Display <<1>> when entering a new area of the Imperial City Sewers. This option uses POI Name Color from Quest/POI Announcements.")
 
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION",            	"Display Imperial City Area Description")
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION_TP",         	"Display the description text when entering a new area of the Imperial City Sewers.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION_TP",         	"Display the description text when entering a new area of the Imperial City Sewers. This option uses the POI Description Color from Quest/POI Announcements.")
 
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE",                 "Display POI Objective - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE_TP",              "Display <<1>> when a quest is accepted with an associated map POI.")
@@ -1400,7 +1408,7 @@ ZO_CreateStringId("SI_LUIE_LAM_PNL_UNLOCKPANEL_TP",                     "Allow m
 -- Base Options
 ZO_CreateStringId("SI_LUIE_LAM_UF_ENABLE",                              "Enable Unit Frames Module")
 ZO_CreateStringId("SI_LUIE_LAM_UF_DESCRIPTION",                         "This allows display of textual attributes information over default UI controls. It also creates custom frames for player and target.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_SHORTNUMBERS",                        "Shorten numbers on all bars")
+ZO_CreateStringId("SI_LUIE_LAM_UF_SHORTNUMBERS",                        "Shorten Numbers on Bars")
 ZO_CreateStringId("SI_LUIE_LAM_UF_SHORTNUMBERS_TP",                     "Replace large numbers like 12,345 with 12.3k on all bars and labels related to unit frames.")
 
 -- Shared Options
@@ -1491,6 +1499,7 @@ ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_WARD",                  "Warden 
 
 -- Player/Target Frames
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_HEADER",                    "Custom Unit Frames (Player & Target)")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_OPTIONS_HEADER",            "Player Frame Display Options")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_PLAYER",             "Enable Custom PLAYER Frame")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_PLAYER_TP",          "Create custom player unit frames.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_TARGET",             "Enable Custom TARGET Frame")
@@ -1610,7 +1619,7 @@ ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_WIDTH",        "PvP Tar
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_HEIGHT",       "PvP Target Bar Height")
 
 -- Common Options
-ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_HEADER",                       "Common options")
+ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_HEADER",                       "Common Options")
 ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_NAMEDISPLAYMETHOD_TP",         "Determines the method used to display other player names on unit frames. This setting does not effect the player frame.\nDefault: Character Name")
 ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_CAPTIONCOLOR",                 "Default Caption Color")
 ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_NPCFONTCOLOR",                 "Friendly NPC Font Color")

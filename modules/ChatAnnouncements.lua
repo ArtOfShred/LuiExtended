@@ -7878,6 +7878,10 @@ function CA.HookFunction()
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE9)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE9), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE9), announceType = "ARENA" }, -- Theater of Despair
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC), announceType = "ARENA" }, -- The arena will begin in 30 seconds!
 		
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR_CA), announceType = "CRAGLORN" }, -- Spell Resistance Increased
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR_CA), announceType = "CRAGLORN" }, -- Physical Resistance Increased
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI_CA), announceType = "CRAGLORN" }, -- Power Increased
+		
 		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC1)] = { number = 1 }, -- IC (DC 1)
 		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC2)] = { number = 2 }, -- IC (DC 2)
 		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC3)] = { number = 3 }, -- IC (DC 3)
@@ -7890,6 +7894,7 @@ function CA.HookFunction()
 		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC10)] = { number = 10 }, -- IC (EP 2)
 		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC11)] = { number = 11 }, -- IC (EP 3)
 		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC12)] = { number = 12 }, -- IC (EP 4)
+		
     }
 	
 	local function DisplayAnnouncementIC(number)
@@ -7967,12 +7972,11 @@ function CA.HookFunction()
     -- EVENT_DISPLAY_ANNOUNCEMENT -- CSA HANDLER
     local function DisplayAnnouncementHook(title, description)
 		
-		--[[d("EVENT_DISPLAY_ANNOUNCEMENT")
-            d("TEMPORARY: Please let me know where you see this message, and the context or notification ")
-            
-            d("title: " .. title)
-            d("description: " .. description)
-		]]--
+		
+		if (title ~= "" and not overrideDisplayAnnouncementTitle[title]) or (description ~= "" and not overrideDisplayAnnouncementDescription[description]) then
+			d("title: " .. title)
+			d("description: " .. description)
+		end
 		
 		-- Let unfiltered messages pass through the normal function
         if (title ~= "" and not overrideDisplayAnnouncementTitle[title]) or (description ~= "" and not overrideDisplayAnnouncementDescription[description]) then
@@ -8025,6 +8029,10 @@ function CA.HookFunction()
                 flagCA = CA.SV.Group.GroupRaidArenaRoundCA and true or false
                 flagCSA = CA.SV.Group.GroupRaidArenaRoundCSA and true or false
                 flagAlert = CA.SV.Group.GroupRaidArenaRoundAlert and true or false
+			elseif reference == "CRAGLORN" then
+                flagCA = true
+                flagCSA = true
+                flagAlert = true
             end
         end
         

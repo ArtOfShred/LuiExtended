@@ -560,6 +560,13 @@ E.TooltipOverride = {
 
 E.EffectOverride = {
 
+	-- TEMP MOVE LATER
+	
+	-- Craglorn buffs
+	[82294] = { icon = 'esoui/art/icons/achievement_craglorn_001.dds' }, -- Magicka Attunement
+	[81894] = { icon = 'esoui/art/icons/achievement_craglorn_002.dds' }, -- Yokudan Might
+	[82499] = { icon = 'esoui/art/icons/achievement_craglorn_003.dds' }, -- Nirncrux Infusion
+
     -- MISC START
     [51392] = { type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Bolt Escape Fatigue
 
