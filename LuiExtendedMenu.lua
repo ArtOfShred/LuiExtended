@@ -38,8 +38,8 @@ function LUIE_CreateSettings()
     local raidIconOptionsKeys           = { ["No Icons"] = 1 , ["Class Icons Only"] = 2, ["Role Icons Only"] = 3, ["Class Icon in PVP, Role in PVE"] = 4, ["Class Icon in PVE, Role in PVP"] = 5 }
     local globalMethodOptions           = { "Ascending", "Descending", "Radial" }
 	local globalMethodOptionsKeys = { ["Ascending"] = 1, ["Descending"] = 2, ["Radial"] = 3 }
-	local playerFrameOptions = { "Vertical Stacked Frames", "Separated Horizontal Frames" }
-	local playerFrameOptionsKeys = { ["Vertical Stacked Frames"] = 1, ["Separated Horizontal Frames"] = 2 }
+	local playerFrameOptions = { "Vertical Stacked Frames", "Separated Horizontal Frames", "Pyramid" }
+	local playerFrameOptionsKeys = { ["Vertical Stacked Frames"] = 1, ["Separated Horizontal Frames"] = 2, ["Pyramid"] = 3 }
     
     local championOptions = { "Show Above Cap", "Limit to Cap", }
     
@@ -6940,7 +6940,7 @@ function LUIE_CreateSettings()
         tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_ROLEICON_TP),
         choices = playerFrameOptions,
         getFunc = function() return playerFrameOptions[LUIE.UnitFrames.SV.PlayerFrameOptions] end,
-        setFunc = function(value) LUIE.UnitFrames.SV.PlayerFrameOptions = playerFrameOptionsKeys[value] end,
+        setFunc = function(value) LUIE.UnitFrames.SV.PlayerFrameOptions = playerFrameOptionsKeys[value] LUIE.UnitFrames.CustomFramesResetPosition() LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
         width = "full",
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.UnitFrames.D.PlayerFrameOptions,
