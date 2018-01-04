@@ -906,9 +906,16 @@ function CA.RegisterXPEvents()
 end
 
 function CA.RegisterGoldEvents()
+	EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CARRIED_CURRENCY_UPDATE)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_REMOVED)
 
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CARRIED_CURRENCY_UPDATE, CA.OnCurrencyUpdate)
-
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, CA.OnMailAttach)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, CA.OnMailAttachRemove)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, CA.OnMailCloseBox)
@@ -2522,9 +2529,9 @@ function CA.OnMailReadable(eventCode, mailId)
     else
         local finalName
         if CA.SV.BracketOptionCharacter == 1 then
-            finalName = ZO_LinkHandler_CreateLinkWithoutBrackets(inviterDisplayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+            finalName = ZO_LinkHandler_CreateLinkWithoutBrackets(senderDisplayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
         else
-            finalName = ZO_LinkHandler_CreateLink(inviterDisplayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+            finalName = ZO_LinkHandler_CreateLink(senderDisplayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
         end
         g_mailTarget = ZO_SELECTED_TEXT:Colorize(finalName)
     end
@@ -2544,17 +2551,18 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
         else
             mailString = GetString(SI_LUIE_CA_MAIL_RECEIVED)
         end
-        if CA.SV.Notify.NotificationMailCA then
-            g_queuedMessages[g_queuedMessagesCounter] = { message = mailString, type = "NOTIFICATION" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
-        end
-        if CA.SV.Notify.NotificationMailAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, mailString)
-        end
+		if mailString then
+			if CA.SV.Notify.NotificationMailCA then
+				g_queuedMessages[g_queuedMessagesCounter] = { message = mailString, type = "NOTIFICATION" }
+				g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+				EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+			end
+			if CA.SV.Notify.NotificationMailAlert then
+				ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, mailString)
+			end
+		end
     end
     
-    g_mailCODPresent = false
 end
 
 function CA.OnMailAttach(eventCode, attachmentSlot)
@@ -2617,19 +2625,23 @@ function CA.OnMailSuccess(eventCode)
     
     if CA.SV.Notify.NotificationMailCA or CA.SV.Notify.NotificationMailAlert then
         local mailString
-        if g_mailCOD > 1 then
-            mailString = GetString(SI_LUIE_CA_MAIL_SENT_COD)
-        else
-            mailString = GetString(SI_LUIE_CA_MAIL_SENT)
-        end
-        if CA.SV.Notify.NotificationMailCA then
-            g_queuedMessages[g_queuedMessagesCounter] = { message = mailString, type = "NOTIFICATION" }
-            g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
-        end
-        if CA.SV.Notify.NotificationMailAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, mailString)
-        end
+		if not g_mailCODPresent then 
+			if g_mailCOD > 1 then
+				mailString = GetString(SI_LUIE_CA_MAIL_SENT_COD)
+			else
+				mailString = GetString(SI_LUIE_CA_MAIL_SENT)
+			end
+		end
+		if mailString then 
+			if CA.SV.Notify.NotificationMailCA then
+				g_queuedMessages[g_queuedMessagesCounter] = { message = mailString, type = "NOTIFICATION" }
+				g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+				EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+			end
+			if CA.SV.Notify.NotificationMailAlert then
+				ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, mailString)
+			end
+		end
     end
     
     if CA.SV.Inventory.LootMail then
@@ -2643,6 +2655,7 @@ function CA.OnMailSuccess(eventCode)
         end
     end    
         
+	g_mailCODPresent = false
     g_mailCOD = 0
     g_postageAmount = 0
     g_mailStacksOut = {}
@@ -8722,6 +8735,48 @@ function CA.HookFunction()
             NotificationDeclined(incomingEntryToRespondTo)
         end
     end
+	
+	-- Required when hooking ZO_MailSend_Gamepad:IsValid()
+	-- Returns whether there is any item attached.
+	local function IsAnyItemAttached(bagId, slotIndex)
+		for i = 1, MAIL_MAX_ATTACHED_ITEMS do
+			local queuedFromBag = GetQueuedItemAttachmentInfo(i)
+			if queuedFromBag ~= 0 then -- Slot is filled.
+				return true
+			end
+		end
+		return false
+	end
+	
+	-- Hook Gamepad mail name function
+	ZO_MailSend_Gamepad.IsMailValid = function(self)
+		local to = self.mailView:GetAddress()
+		if (not to) or (to == "") then
+			return false
+		end
+		
+		local nameLink
+		if string.match(to, "@") == "@" then
+			if CA.SV.BracketOptionCharacter == 1 then
+				nameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(to, nil, DISPLAY_NAME_LINK_TYPE, to)
+			else
+				nameLink = ZO_LinkHandler_CreateLink(to, nil, DISPLAY_NAME_LINK_TYPE, to)
+			end
+		else
+			if CA.SV.BracketOptionCharacter == 1 then
+				nameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(to, nil, CHARACTER_LINK_TYPE, to)
+			else
+				nameLink = ZO_LinkHandler_CreateLink(to, nil, CHARACTER_LINK_TYPE, to)
+			end
+		end
+		g_mailTarget = ZO_SELECTED_TEXT:Colorize(nameLink)
+		
+		local subject = self.mailView:GetSubject()
+		local hasSubject = subject and (subject ~= "")
+		local body = self.mailView:GetBody()
+		local hasBody = body and (body ~= "")
+		return hasSubject or hasBody or (GetQueuedMoneyAttachment() > 0) or IsAnyItemAttached()
+	end
 	
 	-- Hook MAIL_SEND.Send to get name of player we send to.
 	MAIL_SEND.Send = function(self)
