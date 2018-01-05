@@ -455,6 +455,10 @@ CA.D = {
 		LootMessageDisguiseRemove       = GetString(SI_LUIE_CA_LOOT_MESSAGE_DISGUISE_REMOVE),
 		LootMessageDisguiseDestroy      = GetString(SI_LUIE_CA_LOOT_MESSAGE_DISGUISE_DESTROY),
 	},
+	
+	DisplayAnnouncements = {
+		Debug							= false -- Display EVENT_DISPLAY_ANNOUNCEMENT debug messages
+	},
 
 	}
 
@@ -754,8 +758,6 @@ function CA.Initialize(enabled)
         g_LFGJoinAntiSpam = true
     end
     
-    -- Index members for Group Loot
-    CA.IndexGroupLoot()
 
     -- Posthook Crafting Interface (Keyboard)
     CA.CraftModeOverrides()
@@ -785,6 +787,9 @@ function CA.Initialize(enabled)
     CA.RegisterQuestEvents() 
     
     CA.HookFunction()
+	
+	 -- Index members for Group Loot
+	CA.IndexGroupLoot()
     
 end
 
@@ -3232,8 +3237,21 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
         local gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
         local logPrefix = CA.SV.Inventory.LootMessageGroup
         
-        local recipient = ZO_SELECTED_TEXT:Colorize(g_groupLootIndex[strformat(SI_UNIT_NAME, receivedBy)])
-        
+		local formatName = strformat(SI_UNIT_NAME, receivedBy)
+		
+		local recipient
+		if g_groupLootIndex[formatName] then
+			recipient = ZO_SELECTED_TEXT:Colorize(CA.ResolveNameLink( g_groupLootIndex[formatName].characterName, g_groupLootIndex[formatName].displayName ))
+		else
+			local nameLink
+			if CA.SV.BracketOptionCharacter == 1 then
+				nameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(formatName, nil, CHARACTER_LINK_TYPE, formatName)
+			else
+				nameLink = ZO_LinkHandler_CreateLink(formatName, nil, CHARACTER_LINK_TYPE, formatName)
+			end
+			recipient = ZO_SELECTED_TEXT:Colorize(nameLink)
+		end
+
 		CA.ItemPrinter(icon, quantity, itemType, itemId, itemLink, recipient, logPrefix, gainOrLoss, false, true)
 		
     end
@@ -5394,6 +5412,9 @@ function CA.HookFunction()
 
     -- EVENT_GROUP_MEMBER_LEFT -- ALERT HANDLER
     local function GroupMemberLeftAlert(characterName, reason, isLocalPlayer, isLeader, displayName, actionRequiredVote)
+	
+		CA.IndexGroupLoot()
+	
         local message = nil
         local alert = nil
         local message2 = nil
@@ -7976,7 +7997,9 @@ function CA.HookFunction()
     local function DisplayAnnouncementHook(title, description)
 		
 		
-		if (title ~= "" and not overrideDisplayAnnouncementTitle[title]) or (description ~= "" and not overrideDisplayAnnouncementDescription[description]) then
+		if ( (title ~= "" and not overrideDisplayAnnouncementTitle[title]) or (description ~= "" and not overrideDisplayAnnouncementDescription[description]) ) and CA.SV.DisplayAnnouncements.Debug then
+			d("EVENT_DISPLAY_ANNOUNCEMENT")
+			d("If you see this message please post a screenshot and context for the event on the LUI Extended ESOUI page.")
 			d("title: " .. title)
 			d("description: " .. description)
 		end
@@ -9253,7 +9276,7 @@ function CA.IndexGroupLoot()
     for i=1, groupSize do
         local characterName = GetUnitName('group'..i)
         local displayName = GetUnitDisplayName('group'..i)
-        g_groupLootIndex[characterName] = CA.ResolveNameLink(characterName, displayName)
+        g_groupLootIndex[characterName] = { characterName = characterName, displayName = displayName }
     end
 end
 
