@@ -357,9 +357,13 @@ CA.D = {
 		CurrencyMessageTotalTV          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTV),
 		CurrencyMessageTotalWV          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALWV),
 		CurrencyMessageTradeIn          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN),
+		CurrencyMessageTradeInNoName    = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME),
 		CurrencyMessageTradeOut         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEOUT),
+		CurrencyMessageTradeOutNoName   = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEOUT_NO_NAME),
 		CurrencyMessageMailIn           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_MAILIN),
+		CurrencyMessageMailInNoName     = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_MAILIN_NO_NAME),
 		CurrencyMessageMailOut          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_MAILOUT),
+		CurrencyMessageMailOutNoName    = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_MAILOUT_NO_NAME),
 		CurrencyMessageMailCOD          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_MAILCOD),
 		CurrencyMessagePostage          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_POSTAGE),
 		CurrencyMessageWithdraw         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAW),
@@ -421,9 +425,13 @@ CA.D = {
 		LootMessageLoot                 = GetString(SI_LUIE_CA_LOOT_MESSAGE_LOOT),
 		LootMessageReceive              = GetString(SI_LUIE_CA_LOOT_MESSAGE_RECEIVE),
 		LootMessageTradeIn              = GetString(SI_LUIE_CA_LOOT_MESSAGE_TRADEIN),
+		LootMessageTradeInNoName        = GetString(SI_LUIE_CA_LOOT_MESSAGE_TRADEIN_NO_NAME),
 		LootMessageTradeOut             = GetString(SI_LUIE_CA_LOOT_MESSAGE_TRADEOUT),
+		LootMessageTradeOutNoName       = GetString(SI_LUIE_CA_LOOT_MESSAGE_TRADEOUT_NO_NAME),
 		LootMessageMailIn               = GetString(SI_LUIE_CA_LOOT_MESSAGE_MAILIN),
+		LootMessageMailInNoName         = GetString(SI_LUIE_CA_LOOT_MESSAGE_MAILIN_NO_NAME),
 		LootMessageMailOut              = GetString(SI_LUIE_CA_LOOT_MESSAGE_MAILOUT),
+		LootMessageMailOutNoName        = GetString(SI_LUIE_CA_LOOT_MESSAGE_MAILOUT_NO_NAME),
 		LootMessageDeposit              = GetString(SI_LUIE_CA_LOOT_MESSAGE_DEPOSIT),
 		LootMessageDepositGuild         = GetString(SI_LUIE_CA_LOOT_MESSAGE_DEPOSITGUILD),
 		LootMessageWithdraw             = GetString(SI_LUIE_CA_LOOT_MESSAGE_WITHDRAW),
@@ -563,7 +571,7 @@ local g_stopDisplaySpam				= false			-- Toggled on to stop spam display of EVENT
 local g_questIndex                  = { }           -- Index of all current quests. Allows us to read the index so that all quest notifications can use the difficulty icon.
 
 -- Trade
-local g_tradeTarget                 = ""            -- Saves name of target player being traded with.
+local g_tradeTarget                 = ""       -- Saves name of target player being traded with.
 local g_tradeStacksIn               = { }           -- Table for storing items to be traded in.
 local g_tradeStacksOut              = { }           -- Table for storing items to be traded out.
 
@@ -1989,15 +1997,15 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         end
     -- Mail (2)
     elseif reason == 2 and UpOrDown > 0  then
-        messageChange = CA.SV.Currency.CurrencyMessageMailIn
-        type = "LUIE_CURRENCY_MAIL"
+        messageChange = g_mailTarget ~="" and CA.SV.Currency.CurrencyMessageMailIn or CA.SV.Currency.CurrencyMessageMailInNoName
+        if g_mailTarget ~="" then type = "LUIE_CURRENCY_MAIL" end
     elseif reason == 2 and UpOrDown < 0  then
         if g_mailCODPresent then
             messageChange = CA.SV.Currency.CurrencyMessageMailCOD
         else
-            messageChange = CA.SV.Currency.CurrencyMessageMailOut
+            messageChange = g_mailTarget ~="" and CA.SV.Currency.CurrencyMessageMailOut or CA.SV.Currency.CurrencyMessageMailOutNoName
         end
-        type = "LUIE_CURRENCY_MAIL"
+        if g_mailTarget ~="" then type = "LUIE_CURRENCY_MAIL" end
     -- Buyback (64)
     elseif reason == 64 then
         messageChange = CA.SV.Currency.CurrencyMessageSpend
@@ -2013,11 +2021,11 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         end
     -- Receive/Give Money in a Trade (Likely consolidate this later)
     elseif reason == 3 and UpOrDown > 0 then
-        messageChange = CA.SV.Currency.CurrencyMessageTradeIn
-        type = "LUIE_CURRENCY_TRADE"
+        messageChange = g_tradeTarget ~="" and CA.SV.Currency.CurrencyMessageTradeIn or CA.SV.Currency.CurrencyMessageTradeInNoName
+        if g_tradeTarget ~="" then type = "LUIE_CURRENCY_TRADE" end
     elseif reason == 3 and UpOrDown < 0 then
-        messageChange = CA.SV.Currency.CurrencyMessageTradeOut
-        type = "LUIE_CURRENCY_TRADE"
+        messageChange = g_tradeTarget ~="" and CA.SV.Currency.CurrencyMessageTradeOut or CA.SV.Currency.CurrencyMessageTradeOutNoName
+        if g_tradeTarget ~="" then type = "LUIE_CURRENCY_TRADE" end
     -- Receive from Quest Reward (4), Medal (21), AH Refund (32)
     elseif reason == 4 or reason == 21 or reason == 32 then
         messageChange = CA.SV.Currency.CurrencyMessageReceive
@@ -2656,7 +2664,7 @@ function CA.OnMailSuccess(eventCode)
         for mailIndex = 1,6 do -- Have to iterate through all 6 possible mail attachments, otherwise nil values will bump later items off the list potentially.
             if g_mailStacksOut[mailIndex] ~= nil then
                 local gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                local logPrefix = CA.SV.Inventory.LootMessageMailOut
+                local logPrefix = g_mailTarget ~= "" and CA.SV.Inventory.LootMessageMailOut or CA.SV.Inventory.LootMessageMailOutNoName
                 local item = g_mailStacksOut[mailIndex]
                 CA.ItemPrinter(item.icon, item.stack, item.itemType, item.itemId, item.itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
             end
@@ -3315,7 +3323,7 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
     local formattedArmorType
     local formattedStyle
     
-    if (receivedBy == "" or receivedBy == "LUIE_RECEIVE_CRAFT" or receivedBy == "LUIE_INVENTORY_UPDATE_DISGUISE") then
+    if (receivedBy == "" or receivedBy == nil or receivedBy == "LUIE_RECEIVE_CRAFT" or receivedBy == "LUIE_INVENTORY_UPDATE_DISGUISE") then
         -- Don't display yourself
         formattedRecipient = ""
     else
@@ -3640,7 +3648,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
             if g_inMail then
-                logPrefix = CA.SV.Inventory.LootMessageMailIn
+                logPrefix = g_mailTarget ~= "" and CA.SV.Inventory.LootMessageMailIn or CA.SV.Inventory.LootMessageMailInNoName
             else
                 logPrefix = ""
             end
@@ -3673,7 +3681,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             if stackCountChange > 0 then
                 gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
                 if g_inMail then
-                    logPrefix = CA.SV.Inventory.LootMessageMailIn
+                    logPrefix = g_mailTarget ~= "" and CA.SV.Inventory.LootMessageMailIn or CA.SV.Inventory.LootMessageMailInNoName
                 else
                     logPrefix = ""
                 end
@@ -3712,7 +3720,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
         local gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
         local logPrefix
         if g_inMail then
-            logPrefix = CA.SV.Inventory.LootMessageMailIn
+            logPrefix = g_mailTarget ~= "" and CA.SV.Inventory.LootMessageMailIn or CA.SV.Inventory.LootMessageMailInNoName
         else
             logPrefix = ""
         end
@@ -4826,6 +4834,14 @@ end
 
 function CA.OnPlayerActivated(eventCode, initial)
     
+	-- Get current trades if UI is reloaded
+	local characterName, _, displayName = GetTradeInviteInfo()
+	
+	if characterName ~= "" and displayName ~= "" then
+		local tradeName = CA.ResolveNameLink(characterName, displayName)
+        g_tradeTarget = ZO_SELECTED_TEXT:Colorize(strformat(SI_UNIT_NAME, tradeName))
+	end
+	
     if CA.SV.Notify.Disguise then
         if g_disguiseState == 0 then
             g_disguiseState = GetUnitDisguiseState("player")
@@ -5973,7 +5989,7 @@ function CA.HookFunction()
             for indexOut = 1,5 do
                 if g_tradeStacksOut[indexOut] ~= nil then
                     local gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                    local logPrefix = CA.SV.Inventory.LootMessageTradeOut
+                    local logPrefix = g_tradeTarget ~= "" and CA.SV.Inventory.LootMessageTradeOut or CA.SV.Inventory.LootMessageTradeOutNoName
                     local item = g_tradeStacksOut[indexOut]
                     CA.ItemPrinter(item.icon, item.stack, item.itemType, item.itemId, item.itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
                 end
@@ -5982,7 +5998,7 @@ function CA.HookFunction()
             for indexIn = 1,5 do
                 if g_tradeStacksIn[indexIn] ~= nil then
                     local gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
-                    local logPrefix = CA.SV.Inventory.LootMessageTradeIn
+                    local logPrefix = g_tradeTarget ~= "" and CA.SV.Inventory.LootMessageTradeIn or CA.SV.Inventory.LootMessageTradeInNoName
                     local item = g_tradeStacksIn[indexIn]
                     CA.ItemPrinter(item.icon, item.stack, item.itemType, item.itemId, item.itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
                 end
@@ -6011,6 +6027,17 @@ function CA.HookFunction()
             g_postageAmount = GetQueuedMailPostage()
             g_mailCOD = GetQueuedCOD()
         end
+		
+		-- Stop currency messages from printing here
+		if reason == 2 then
+			for i=1, #g_queuedMessages do
+				if g_queuedMessages[i].type == "CURRENCY" then
+					g_queuedMessages[i].type = "GARBAGE"
+				end
+			end
+			EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CARRIED_CURRENCY_UPDATE)
+			zo_callLater(function() EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CARRIED_CURRENCY_UPDATE, CA.OnCurrencyUpdate) end, 500)
+		end
 
         if CA.SV.Notify.NotificationMailCA then
             printToChat(GetString("SI_SENDMAILRESULT", reason))
@@ -6289,8 +6316,10 @@ function CA.HookFunction()
         local finalMessage -- CA
         local finalText -- Alert
         local sound -- All
+		local flagDisplay -- Flag to display a message
         
         if oldPartialPoints ~= newPartialPoints then
+			flagDisplay = true
             sound = SOUNDS.SKYSHARD_GAINED
             if newPartialPoints == 0 then
                 if newPoints <= oldPoints then
@@ -6331,6 +6360,7 @@ function CA.HookFunction()
                 finalMessage = strformat("<<1>><<2>>", stringPart1, stringPart2)
             end
         elseif newPoints > oldPoints then
+			flagDisplay = true
             sound = SOUNDS.SKILL_GAINED
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_GAINED)
             messageParams:SetText(strformat(SI_SKILL_POINT_GAINED, newPoints - oldPoints))
@@ -6339,23 +6369,25 @@ function CA.HookFunction()
             finalText = strformat(SI_SKILL_POINT_GAINED, newPoints - oldPoints) .. "."
         end
         
-        if CA.SV.Skills.SkillPointCA then
-            if finalMessage ~= "" then
-                g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "SKILL" }
-                g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
-            end
-        end
-        if CA.SV.Skills.SkillPointCSA then
-            messageParams:SetSound(sound)
-            CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
-        end
-        if CA.SV.Skills.SkillPointAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, finalText)
-        end
-        if not CA.SV.Skills.SkillPointCSA then
-            PlaySound(Sound)
-        end
+		if flagDisplay then
+			if CA.SV.Skills.SkillPointCA then
+				if finalMessage ~= "" then
+					g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "SKILL" }
+					g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+					EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+				end
+			end
+			if CA.SV.Skills.SkillPointCSA then
+				messageParams:SetSound(sound)
+				CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
+			end
+			if CA.SV.Skills.SkillPointAlert then
+				ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, finalText)
+			end
+			if not CA.SV.Skills.SkillPointCSA then
+				PlaySound(Sound)
+			end
+		end
         return true
     end
 
@@ -9167,10 +9199,6 @@ function CA.OnTradeAdded(eventCode, who, tradeIndex, itemSoundCategory)
     local itemId = GetItemId(bagId, slotId)
     local itemLink = GetTradeItemLink(who, tradeIndex, LINK_STYLE_DEFAULT)
     local itemType = GetItemLinkItemType(itemLink)
-    
-    d(itemId)
-    d(itemLink)
-    d(itemType)
 
     if who == 0 then
         g_tradeStacksOut[index] = {icon = icon, stack = stack, itemId = itemId, itemLink = itemLink, itemType = itemType}

@@ -2159,6 +2159,24 @@ function LUIE_CreateSettings()
 				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageTradeIn,
 			},
 			{
+				-- Trade Message (In)
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTradeInNoName end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTradeInNoName = value end,
+				width = "full",
+				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
+					(
+						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
+						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
+						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
+						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
+						LUIE.SV.ChatAnnouncements_Enable
+					)) end,
+				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageTradeInNoName,
+			},
+			{
 				-- Trade Message (Out)
 				type = "editbox",
 				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT),
@@ -2175,6 +2193,24 @@ function LUIE_CreateSettings()
 						LUIE.SV.ChatAnnouncements_Enable
 					)) end,
 				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageTradeOut,
+			},
+			{
+				-- Trade Message (Out)
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT_NO_NAME),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT_NO_NAME_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTradeOutNoName end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTradeOutNoName = value end,
+				width = "full",
+				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
+					(
+						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
+						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
+						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
+						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
+						LUIE.SV.ChatAnnouncements_Enable
+					)) end,
+				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageTradeOutNoName,
 			},
 			{
 				-- Mail Message (In)
@@ -2195,6 +2231,24 @@ function LUIE_CreateSettings()
 				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageMailIn,
 			},
 			{
+				-- Mail Message (In)
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN_NO_NAME),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN_NO_NAME_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageMailInNoName end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageMailInNoName = value end,
+				width = "full",
+				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
+					(
+						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
+						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
+						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
+						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
+						LUIE.SV.ChatAnnouncements_Enable
+					)) end,
+				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageMailInNoName,
+			},
+			{
 				-- Mail Message (Out)
 				type = "editbox",
 				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT),
@@ -2211,6 +2265,24 @@ function LUIE_CreateSettings()
 						LUIE.SV.ChatAnnouncements_Enable
 					)) end,
 				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageMailOut,
+			},
+			{
+				-- Mail Message (Out)
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT_NO_NAME),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT_NO_NAME_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageMailOutNoName end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageMailOutNoName = value end,
+				width = "full",
+				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
+					(
+						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
+						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
+						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
+						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
+						LUIE.SV.ChatAnnouncements_Enable
+					)) end,
+				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageMailOutNoName,
 			},
 			{
 				-- Mail Message (COD Payment)
@@ -2858,6 +2930,17 @@ function LUIE_CreateSettings()
 				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageTradeIn,
 			},
 			{
+				-- Loot Message (TradeIn)
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_TRADEIN_NO_NAME),
+				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_TRADEIN_NO_NAME_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageTradeInNoName end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageTradeInNoName = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageTradeInNoName,
+			},
+			{
 				-- Loot Message (TradeOut)
 				type = "editbox",
 				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_TRADEOUT),
@@ -2867,6 +2950,17 @@ function LUIE_CreateSettings()
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
 				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageTradeOut,
+			},
+			{
+				-- Loot Message (TradeOut)
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_TRADEOUT_NO_NAME),
+				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_TRADEOUT_NO_NAME_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageTradeOutNoName end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageTradeOutNoName = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageTradeOutNoName,
 			},
 			{
 				-- Loot Message (MailIn)
@@ -2880,6 +2974,17 @@ function LUIE_CreateSettings()
 				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageMailIn,
 			},
 			{
+				-- Loot Message (MailIn)
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_MAILIN_NO_NAME),
+				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_MAILIN_NO_NAME_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageMailInNoName end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageMailInNoName = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageMailInNoName,
+			},
+			{
 				-- Loot Message (MailOut)
 				type = "editbox",
 				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_MAILOUT),
@@ -2889,6 +2994,17 @@ function LUIE_CreateSettings()
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
 				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageMailOut,
+			},
+			{
+				-- Loot Message (MailOut)
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_MAILOUT_NO_NAME),
+				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_MAILOUT_NO_NAME_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageMailOutNoName end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageMailOutNoName = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageMailOutNoName,
 			},
 			
 			{
