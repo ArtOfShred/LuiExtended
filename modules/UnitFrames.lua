@@ -2034,18 +2034,19 @@ end
 
 function UF.MenuUpdatePlayerFrameOptions(option)
 
-	local reticleover = UF.CustomFrames.reticleover
-
-	if option == 1 then
-		reticleover.buffs:ClearAnchors()
-		reticleover.debuffs:ClearAnchors()
-		reticleover.buffs:SetAnchor(TOP, reticleover.buffAnchor, BOTTOM, 0, 2)
-		reticleover.debuffs:SetAnchor(BOTTOM, reticleover.topInfo, TOP, 0, -2)
-	else
-		reticleover.buffs:ClearAnchors()
-		reticleover.debuffs:ClearAnchors()
-		reticleover.buffs:SetAnchor(BOTTOM, reticleover.topInfo, TOP, 0, -2)
-		reticleover.debuffs:SetAnchor(TOP, reticleover.buffAnchor, BOTTOM, 0, 2)
+	if UF.CustomFrames.reticleover then
+		local reticleover = UF.CustomFrames.reticleover
+		if option == 1 then
+			reticleover.buffs:ClearAnchors()
+			reticleover.debuffs:ClearAnchors()
+			reticleover.buffs:SetAnchor(TOP, reticleover.buffAnchor, BOTTOM, 0, 2)
+			reticleover.debuffs:SetAnchor(BOTTOM, reticleover.topInfo, TOP, 0, -2)
+		else
+			reticleover.buffs:ClearAnchors()
+			reticleover.debuffs:ClearAnchors()
+			reticleover.buffs:SetAnchor(BOTTOM, reticleover.topInfo, TOP, 0, -2)
+			reticleover.debuffs:SetAnchor(TOP, reticleover.buffAnchor, BOTTOM, 0, 2)
+		end
 	end
 
 	LUIE.UnitFrames.CustomFramesResetPosition()
