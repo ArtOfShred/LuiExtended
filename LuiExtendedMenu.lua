@@ -6915,7 +6915,7 @@ function LUIE_CreateSettings()
 			},
 		},
     }
-    -- Custom Unit Frames (Player, Target)
+    -- Custom Unit Frames (Player Frame Options)
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OPTIONS_HEADER),
@@ -6994,6 +6994,55 @@ function LUIE_CreateSettings()
 				width = "full",
 				default = LUIE.UnitFrames.D.PlayerBarSpacing,
 				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and ( LUIE.UnitFrames.SV.PlayerFrameOptions == 1 or LUIE.UnitFrames.SV.PlayerFrameOptions == 3 ) ) end,
+			},
+			
+			-- Hide Player Magicka Bar Label
+			{
+				type = "checkbox",
+				name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL),
+				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL_TP),
+				getFunc = function() return LUIE.UnitFrames.SV.HideLabelMagicka end,
+				setFunc = function(value) LUIE.UnitFrames.SV.HideLabelMagicka = value LUIE.UnitFrames.SV.HideBarMagicka = false end,
+				width = "full",
+				default = LUIE.UnitFrames.D.HideLabelMagicka,
+				warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
+			},
+			-- Hide Player Magicka Bar
+			{
+				type = "checkbox",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR)),
+				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR_TP),
+				getFunc = function() return LUIE.UnitFrames.SV.HideBarMagicka end,
+				setFunc = function(value) LUIE.UnitFrames.SV.HideBarMagicka = value end,
+				width = "full",
+				default = LUIE.UnitFrames.D.HideBarMagicka,
+				warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.HideLabelMagicka ) end,
+			},
+			-- Hide Player Stamina Bar Label
+			{
+				type = "checkbox",
+				name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL),
+				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL_TP),
+				getFunc = function() return LUIE.UnitFrames.SV.HideLabelStamina end,
+				setFunc = function(value) LUIE.UnitFrames.SV.HideLabelStamina = value LUIE.UnitFrames.SV.HideBarStamina = false end,
+				width = "full",
+				default = LUIE.UnitFrames.D.HideLabelStamina,
+				warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
+			},
+			-- Hide Player Stamina Bar
+			{
+				type = "checkbox",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR)),
+				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR_TP),
+				getFunc = function() return LUIE.UnitFrames.SV.HideBarStamina end,
+				setFunc = function(value) LUIE.UnitFrames.SV.HideBarStamina = value end,
+				width = "full",
+				default = LUIE.UnitFrames.D.HideBarStamina,
+				warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.HideLabelStamina ) end,
 			},
 		},
 	}
@@ -7093,54 +7142,6 @@ function LUIE_CreateSettings()
 				width = "full",
 				default = LUIE.UnitFrames.D.PlayerBarHeightStamina,
 				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
-			},
-			-- Hide Player Magicka Bar Label
-			{
-				type = "checkbox",
-				name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL),
-				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL_TP),
-				getFunc = function() return LUIE.UnitFrames.SV.HideLabelMagicka end,
-				setFunc = function(value) LUIE.UnitFrames.SV.HideLabelMagicka = value LUIE.UnitFrames.SV.HideBarMagicka = false end,
-				width = "full",
-				default = LUIE.UnitFrames.D.HideLabelMagicka,
-				warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
-			},
-			-- Hide Player Magicka Bar
-			{
-				type = "checkbox",
-				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR)),
-				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR_TP),
-				getFunc = function() return LUIE.UnitFrames.SV.HideBarMagicka end,
-				setFunc = function(value) LUIE.UnitFrames.SV.HideBarMagicka = value end,
-				width = "full",
-				default = LUIE.UnitFrames.D.HideBarMagicka,
-				warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.HideLabelMagicka ) end,
-			},
-			-- Hide Player Stamina Bar Label
-			{
-				type = "checkbox",
-				name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL),
-				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL_TP),
-				getFunc = function() return LUIE.UnitFrames.SV.HideLabelStamina end,
-				setFunc = function(value) LUIE.UnitFrames.SV.HideLabelStamina = value LUIE.UnitFrames.SV.HideBarStamina = false end,
-				width = "full",
-				default = LUIE.UnitFrames.D.HideLabelStamina,
-				warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
-			},
-			-- Hide Player Stamina Bar
-			{
-				type = "checkbox",
-				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR)),
-				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR_TP),
-				getFunc = function() return LUIE.UnitFrames.SV.HideBarStamina end,
-				setFunc = function(value) LUIE.UnitFrames.SV.HideBarStamina = value end,
-				width = "full",
-				default = LUIE.UnitFrames.D.HideBarStamina,
-				warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.HideLabelStamina ) end,
 			},
 			-- Out-of-Combat frame opacity
 			{
