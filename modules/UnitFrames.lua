@@ -549,6 +549,7 @@ local function CreateCustomFrames()
         local target = UI.Control( targetTlw, {TOPLEFT,TOPLEFT}, nil, false )
         local topInfo = UI.Control( target, {BOTTOM,TOP,0,-3}, nil, false )
         local botInfo = UI.Control( target, {TOP,BOTTOM,0,2}, nil, false )
+		local buffAnchor = UI.Control( target, {TOP,BOTTOM,0,2}, nil, false )
         local thb = LUIE.UI.Backdrop(target, {TOP,TOP,0,0}, nil, nil, nil, false )
         thb:SetDrawLayer(DL_BACKDROP)
         thb:SetDrawLevel(1)
@@ -583,6 +584,7 @@ local function CreateCustomFrames()
             ["classIcon"]   = UI.Texture( topInfo, {LEFT,LEFT}, {20,20}, nil, nil, false ),
             ["avaRankIcon"] = UI.Texture( topInfo, {RIGHT,RIGHT}, {20,20}, nil, nil, false ),
             ["botInfo"]     = botInfo,
+			["buffAnchor"]	= buffAnchor,
             ["className"]   = cn,
             ["title"]       = UI.Label( botInfo, {TOP,BOTTOM,0,0,cn}, nil, {1,3}, nil, "<Title>", false ),
             ["avaRank"]     = UI.Label( botInfo, {TOPRIGHT,TOPRIGHT}, nil, {2,3}, nil, "ava", false ),
