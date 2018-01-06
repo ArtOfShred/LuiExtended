@@ -6915,137 +6915,6 @@ function LUIE_CreateSettings()
 			},
 		},
     }
-    -- Custom Unit Frames (Player Frame Options)
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "submenu",
-        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OPTIONS_HEADER),
-        controls = {
-			-- Player Frames Display Method
-			{
-				type = "dropdown",
-				name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD),
-				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD_TP),
-				choices = playerFrameOptions,
-				getFunc = function() return playerFrameOptions[LUIE.UnitFrames.SV.PlayerFrameOptions] end,
-				setFunc = function(value) LUIE.UnitFrames.SV.PlayerFrameOptions = playerFrameOptionsKeys[value] LUIE.UnitFrames.MenuUpdatePlayerFrameOptions(LUIE.UnitFrames.SV.PlayerFrameOptions) end,
-				width = "full",
-				warning = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD_WARN),
-				default = LUIE.UnitFrames.D.PlayerFrameOptions,
-				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
-			},
-			
-			-- Position Adjust
-			{
-				type = "slider",
-				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_HORIZ_ADJUST)),
-				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_HORIZ_ADJUST_TP),
-				min = 0, max = 500, step = 5,
-				getFunc = function() return LUIE.UnitFrames.SV.AdjustStaminaHPos end,
-				setFunc = function(value) LUIE.UnitFrames.SV.AdjustStaminaHPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
-				width = "full",
-				default = LUIE.UnitFrames.D.AdjustStaminaHPos,
-				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.PlayerFrameOptions == 2 ) end,
-			},
-			-- Position Adjust
-			{
-				type = "slider",
-				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_VERT_ADJUST)),
-				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_VERT_ADJUST_TP),
-				min = -250, max = 250, step = 5,
-				getFunc = function() return LUIE.UnitFrames.SV.AdjustStaminaVPos end,
-				setFunc = function(value) LUIE.UnitFrames.SV.AdjustStaminaVPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
-				width = "full",
-				default = LUIE.UnitFrames.D.AdjustStaminaVPos,
-				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.PlayerFrameOptions == 2 ) end,
-			},
-			-- Position Adjust
-			{
-				type = "slider",
-				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_HORIZ_ADJUST)),
-				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_HORIZ_ADJUST_TP),
-				min = 0, max = 500, step = 5,
-				getFunc = function() return LUIE.UnitFrames.SV.AdjustMagickaHPos end,
-				setFunc = function(value) LUIE.UnitFrames.SV.AdjustMagickaHPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
-				width = "full",
-				default = LUIE.UnitFrames.D.AdjustMagickaHPos,
-				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.PlayerFrameOptions == 2 ) end,
-			},
-			-- Position Adjust
-			{
-				type = "slider",
-				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_VERT_ADJUST)),
-				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_VERT_ADJUST_TP),
-				min = -250, max = 250, step = 5,
-				getFunc = function() return LUIE.UnitFrames.SV.AdjustMagickaVPos end,
-				setFunc = function(value) LUIE.UnitFrames.SV.AdjustMagickaVPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
-				width = "full",
-				default = LUIE.UnitFrames.D.AdjustMagickaVPos,
-				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.PlayerFrameOptions == 2 ) end,
-			},
-			
-			-- Spacing between Player Bars
-			{
-				type = "slider",
-				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_SPACING)),
-				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_SPACING_TP),
-				min = -1, max = 4, step = 1,
-				getFunc = function() return LUIE.UnitFrames.SV.PlayerBarSpacing end,
-				setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarSpacing = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
-				width = "full",
-				default = LUIE.UnitFrames.D.PlayerBarSpacing,
-				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and ( LUIE.UnitFrames.SV.PlayerFrameOptions == 1 or LUIE.UnitFrames.SV.PlayerFrameOptions == 3 ) ) end,
-			},
-			
-			-- Hide Player Magicka Bar Label
-			{
-				type = "checkbox",
-				name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL),
-				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL_TP),
-				getFunc = function() return LUIE.UnitFrames.SV.HideLabelMagicka end,
-				setFunc = function(value) LUIE.UnitFrames.SV.HideLabelMagicka = value LUIE.UnitFrames.SV.HideBarMagicka = false end,
-				width = "full",
-				default = LUIE.UnitFrames.D.HideLabelMagicka,
-				warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
-			},
-			-- Hide Player Magicka Bar
-			{
-				type = "checkbox",
-				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR)),
-				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR_TP),
-				getFunc = function() return LUIE.UnitFrames.SV.HideBarMagicka end,
-				setFunc = function(value) LUIE.UnitFrames.SV.HideBarMagicka = value end,
-				width = "full",
-				default = LUIE.UnitFrames.D.HideBarMagicka,
-				warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.HideLabelMagicka ) end,
-			},
-			-- Hide Player Stamina Bar Label
-			{
-				type = "checkbox",
-				name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL),
-				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL_TP),
-				getFunc = function() return LUIE.UnitFrames.SV.HideLabelStamina end,
-				setFunc = function(value) LUIE.UnitFrames.SV.HideLabelStamina = value LUIE.UnitFrames.SV.HideBarStamina = false end,
-				width = "full",
-				default = LUIE.UnitFrames.D.HideLabelStamina,
-				warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
-			},
-			-- Hide Player Stamina Bar
-			{
-				type = "checkbox",
-				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR)),
-				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR_TP),
-				getFunc = function() return LUIE.UnitFrames.SV.HideBarStamina end,
-				setFunc = function(value) LUIE.UnitFrames.SV.HideBarStamina = value end,
-				width = "full",
-				default = LUIE.UnitFrames.D.HideBarStamina,
-				warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.HideLabelStamina ) end,
-			},
-		},
-	}
 	-- Custom Unit Frames (Player, Target)
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
@@ -7385,7 +7254,138 @@ function LUIE_CreateSettings()
 			},
 		},
 	}
-    -- Custom Unit Frames (Group)
+    -- Custom Unit Frames (Player Frame Options)
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OPTIONS_HEADER),
+        controls = {
+			-- Player Frames Display Method
+			{
+				type = "dropdown",
+				name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD),
+				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD_TP),
+				choices = playerFrameOptions,
+				getFunc = function() return playerFrameOptions[LUIE.UnitFrames.SV.PlayerFrameOptions] end,
+				setFunc = function(value) LUIE.UnitFrames.SV.PlayerFrameOptions = playerFrameOptionsKeys[value] LUIE.UnitFrames.MenuUpdatePlayerFrameOptions(LUIE.UnitFrames.SV.PlayerFrameOptions) end,
+				width = "full",
+				warning = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_METHOD_WARN),
+				default = LUIE.UnitFrames.D.PlayerFrameOptions,
+				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
+			},
+			
+			-- Position Adjust
+			{
+				type = "slider",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_HORIZ_ADJUST)),
+				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_HORIZ_ADJUST_TP),
+				min = 0, max = 500, step = 5,
+				getFunc = function() return LUIE.UnitFrames.SV.AdjustStaminaHPos end,
+				setFunc = function(value) LUIE.UnitFrames.SV.AdjustStaminaHPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
+				width = "full",
+				default = LUIE.UnitFrames.D.AdjustStaminaHPos,
+				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.PlayerFrameOptions == 2 ) end,
+			},
+			-- Position Adjust
+			{
+				type = "slider",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_VERT_ADJUST)),
+				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_S_VERT_ADJUST_TP),
+				min = -250, max = 250, step = 5,
+				getFunc = function() return LUIE.UnitFrames.SV.AdjustStaminaVPos end,
+				setFunc = function(value) LUIE.UnitFrames.SV.AdjustStaminaVPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
+				width = "full",
+				default = LUIE.UnitFrames.D.AdjustStaminaVPos,
+				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.PlayerFrameOptions == 2 ) end,
+			},
+			-- Position Adjust
+			{
+				type = "slider",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_HORIZ_ADJUST)),
+				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_HORIZ_ADJUST_TP),
+				min = 0, max = 500, step = 5,
+				getFunc = function() return LUIE.UnitFrames.SV.AdjustMagickaHPos end,
+				setFunc = function(value) LUIE.UnitFrames.SV.AdjustMagickaHPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
+				width = "full",
+				default = LUIE.UnitFrames.D.AdjustMagickaHPos,
+				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.PlayerFrameOptions == 2 ) end,
+			},
+			-- Position Adjust
+			{
+				type = "slider",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_VERT_ADJUST)),
+				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_M_VERT_ADJUST_TP),
+				min = -250, max = 250, step = 5,
+				getFunc = function() return LUIE.UnitFrames.SV.AdjustMagickaVPos end,
+				setFunc = function(value) LUIE.UnitFrames.SV.AdjustMagickaVPos = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
+				width = "full",
+				default = LUIE.UnitFrames.D.AdjustMagickaVPos,
+				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.PlayerFrameOptions == 2 ) end,
+			},
+			
+			-- Spacing between Player Bars
+			{
+				type = "slider",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_SPACING)),
+				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_SPACING_TP),
+				min = -1, max = 4, step = 1,
+				getFunc = function() return LUIE.UnitFrames.SV.PlayerBarSpacing end,
+				setFunc = function(value) LUIE.UnitFrames.SV.PlayerBarSpacing = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer() end,
+				width = "full",
+				default = LUIE.UnitFrames.D.PlayerBarSpacing,
+				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and ( LUIE.UnitFrames.SV.PlayerFrameOptions == 1 or LUIE.UnitFrames.SV.PlayerFrameOptions == 3 ) ) end,
+			},
+			
+			-- Hide Player Magicka Bar Label
+			{
+				type = "checkbox",
+				name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL),
+				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL_TP),
+				getFunc = function() return LUIE.UnitFrames.SV.HideLabelMagicka end,
+				setFunc = function(value) LUIE.UnitFrames.SV.HideLabelMagicka = value LUIE.UnitFrames.SV.HideBarMagicka = false end,
+				width = "full",
+				default = LUIE.UnitFrames.D.HideLabelMagicka,
+				warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
+			},
+			-- Hide Player Magicka Bar
+			{
+				type = "checkbox",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR)),
+				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR_TP),
+				getFunc = function() return LUIE.UnitFrames.SV.HideBarMagicka end,
+				setFunc = function(value) LUIE.UnitFrames.SV.HideBarMagicka = value end,
+				width = "full",
+				default = LUIE.UnitFrames.D.HideBarMagicka,
+				warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.HideLabelMagicka ) end,
+			},
+			-- Hide Player Stamina Bar Label
+			{
+				type = "checkbox",
+				name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL),
+				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL_TP),
+				getFunc = function() return LUIE.UnitFrames.SV.HideLabelStamina end,
+				setFunc = function(value) LUIE.UnitFrames.SV.HideLabelStamina = value LUIE.UnitFrames.SV.HideBarStamina = false end,
+				width = "full",
+				default = LUIE.UnitFrames.D.HideLabelStamina,
+				warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
+			},
+			-- Hide Player Stamina Bar
+			{
+				type = "checkbox",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR)),
+				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR_TP),
+				getFunc = function() return LUIE.UnitFrames.SV.HideBarStamina end,
+				setFunc = function(value) LUIE.UnitFrames.SV.HideBarStamina = value end,
+				width = "full",
+				default = LUIE.UnitFrames.D.HideBarStamina,
+				warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.HideLabelStamina ) end,
+			},
+		},
+	}
+	-- Custom Unit Frames (Group)
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_UF_CFRAMESG_HEADER),

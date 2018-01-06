@@ -1531,7 +1531,7 @@ ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_WARD",                  "Warden 
 
 -- Player/Target Frames
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_HEADER",                    "Custom Unit Frames (Player & Target)")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_OPTIONS_HEADER",            "Player Frame Display Options")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_OPTIONS_HEADER",            "Additional Player Frame Display Options")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_PLAYER",             "Enable Custom PLAYER Frame")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_PLAYER_TP",          "Create custom player unit frames.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_ENABLE_TARGET",             "Enable Custom TARGET Frame")
