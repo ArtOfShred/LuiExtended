@@ -16,7 +16,7 @@ local moduleName    = LUIE.name .. "_CombatInfo"
 CI.Enabled  = false
 CI.D = {
     
-    GlobalShow                       = true,
+    GlobalShowGCD                    = false,
     GlobalPotion                     = false,
     GlobalFlash                      = true,
     GlobalDesat                      = false,
@@ -188,7 +188,7 @@ function CI.Initialize( enabled )
         local isInCooldown = duration > 0
         local slotType = GetSlotType(slotnum)
         local showGlobalCooldownForCollectible = global and slotType == ACTION_TYPE_COLLECTIBLE and globalSlotType == ACTION_TYPE_COLLECTIBLE
-        local showCooldown = isInCooldown and (CI.SV.GlobalShow or not global or showGlobalCooldownForCollectible)
+        local showCooldown = isInCooldown and (CI.SV.GlobalShowGCD or not global or showGlobalCooldownForCollectible)
         self.cooldown:SetHidden(not showCooldown)
 
         local updateChromaQuickslot = slotType ~= ACTION_TYPE_ABILITY and ZO_RZCHROMA_EFFECTS
@@ -224,11 +224,6 @@ function CI.Initialize( enabled )
                 if self.showingCooldown then
                     -- Stop flash from appearing on potion/ultimate if toggled off.
                     if not IsSlotItemConsumable(slotnum) or duration > 1000 or CI.SV.GlobalPotion then
-                        -- This ability was in a non-global cooldown, and now the cooldown is over...play animation and sound
-                        if options ~= FORCE_SUPPRESS_COOLDOWN_SOUND then
-                            PlaySound(SOUNDS.ABILITY_READY)
-                        end
-
                         self.cooldownCompleteAnim.animation = self.cooldownCompleteAnim.animation or CreateSimpleAnimation(ANIMATION_TEXTURE, self.cooldownCompleteAnim)
                         local anim = self.cooldownCompleteAnim.animation
 

@@ -538,10 +538,11 @@ function LUIE_CreateSettings()
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_CI_GCD_SHOW),
         tooltip = GetString(SI_LUIE_LAM_CI_GCD_SHOW_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.GlobalShow end,
-        setFunc = function(value) LUIE.CombatInfo.SV.GlobalShow = value end,
+        getFunc = function() return LUIE.CombatInfo.SV.GlobalShowGCD end,
+        setFunc = function(value) LUIE.CombatInfo.SV.GlobalShowGCD = value end,
         width = "full",
-        default = LUIE.CombatInfo.D.GlobalShow,
+		warning = GetString(SI_LUIE_LAM_CI_GCD_SHOW_WARN),
+        default = LUIE.CombatInfo.D.GlobalShowGCD,
         disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
     }
     -- Show GCD on Quickslot
@@ -553,7 +554,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.CombatInfo.SV.GlobalPotion = value end,
         width = "full",
         default = LUIE.CombatInfo.D.GlobalPotion,
-        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShow) end,
+        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShowGCD) end,
     }
     -- Show GCD Ready Flash
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
@@ -564,7 +565,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.CombatInfo.SV.GlobalFlash = value end,
         width = "full",
         default = LUIE.CombatInfo.D.GlobalFlash,
-        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShow) end,
+        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShowGCD) end,
     }
     -- GCD - Desaturate Icons on GCD
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
@@ -575,7 +576,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.CombatInfo.SV.GlobalDesat = value end,
         width = "full",
         default = LUIE.CombatInfo.D.GlobalDesat,
-        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShow) end,
+        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShowGCD) end,
     }
     -- GCD - Color Slot Label Red
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
@@ -586,7 +587,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.CombatInfo.SV.GlobalLabelColor = value end,
         width = "full",
         default = LUIE.CombatInfo.D.GlobalLabelColor,
-        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShow) end,
+        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShowGCD) end,
     }
     -- GCD - Animation Method
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
@@ -598,7 +599,7 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.CombatInfo.SV.GlobalMethod = globalMethodOptionsKeys[value] end,
         width = "full",
         default = LUIE.CombatInfo.D.GlobalMethod,
-        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShow) end,
+        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShowGCD) end,
     }
 
     
@@ -5804,7 +5805,19 @@ function LUIE_CreateSettings()
 				text = GetString(SI_LUIE_LAM_CA_DISPLAY_DESCRIPTION),
 			},
 			
-			 {
+			{
+				-- Display Announcement DEBUG
+				type = "checkbox",
+				name = "*** Show Display Announcement Debug Message ***",
+				tooltip = "Display a debug message when a Display Announcement that has not yet been added to LUIE is triggered. Enable this option if you'd like to help out with the addon by posting the messages you receive from this event. Do not enable if you are not using the English client.",
+				getFunc = function() return LUIE.ChatAnnouncements.SV.DisplayAnnouncements.Debug end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.DisplayAnnouncements.Debug = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.DisplayAnnouncements.Debug,
+			},
+			
+			{
 				-- Respec Notification (CA)
 				type = "checkbox",
 				name = strformat(GetString(SI_LUIE_LAM_CA_EXP_RESPEC), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
