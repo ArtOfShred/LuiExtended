@@ -27,7 +27,10 @@ PNL.SV            = nil
 PNL.panelUnlocked = false
 
 -- UI elements
-local g_infoPanelFont = "/LuiExtended/media/fonts/ProFontWindows.ttf|9|soft-shadow-thin"
+local infoPanelFontFace = "/EsoUI/Common/Fonts/Univers67.otf"
+local infoPanelFontSize = 16
+local infoPanelFontStyle = "soft-shadow-thin"
+local g_infoPanelFont = strfmt( "%s|%d|%s", infoPanelFontFace, infoPanelFontSize, infoPanelFontStyle )
 
 local uiPanel  = nil
 local uiTopRow = nil
@@ -38,8 +41,8 @@ local uiTrophy = {}
 
 local uiLatency = {
     color = {
-        [1] = { ping = 50, color = colors.WHITE },
-        [2] = { ping = 99, color = colors.YELLOW },
+        [1] = { ping = 100, color = colors.GREEN },
+        [2] = { ping = 200, color = colors.YELLOW },
         [3] = {            color = colors.RED },
     },
 }
@@ -47,7 +50,7 @@ local uiLatency = {
 local uiFps = {
     color = {
         [1] = { fps = 25, color = colors.RED },
-        [2] = { fps = 55, color = colors.YELLOW },
+        [2] = { fps = 40, color = colors.YELLOW },
         [3] = {           color = colors.GREEN },
     },
 }
@@ -67,15 +70,15 @@ local uiArmour = {
 
 local uiWeapons = {
     color = {
-        [1] = { charges = 5,  color = colors.RED },
-        [2] = { charges = 33, color = colors.YELLOW },
+        [1] = { charges = 10,  color = colors.RED },
+        [2] = { charges = 25, color = colors.YELLOW },
         [3] = {               color = colors.WHITE },
     },
 }
 
 local uiBags = {
     color = {
-        [1] = { fill = 50, color = colors.WHITE },
+        [1] = { fill = 70, color = colors.WHITE },
         [2] = { fill = 90, color = colors.YELLOW },
         [3] = {            color = colors.RED },
     },
@@ -113,22 +116,22 @@ local function CreateUIControls()
     uiTroRow = UI.Control( uiPanel, {TOP,BOTTOM,0,2}, {300,20}, false )
     --uiTroRow.bg = UI.Backdrop( uiTroRow, "fill", nil, nil, nil, false )
 
-    uiLatency.control = UI.Control( uiTopRow, nil, {80,20}, false )
+    uiLatency.control = UI.Control( uiTopRow, nil, {75,20}, false )
     uiLatency.icon = UI.Texture( uiLatency.control, {LEFT,LEFT}, {24,24}, "/esoui/art/campaign/campaignbrowser_hipop.dds", nil, false )
     uiLatency.label = UI.Label( uiLatency.control, {LEFT,RIGHT,0,0,uiLatency.icon}, {56,20}, {0,1}, g_infoPanelFont, "11999 ms", false )
     --uiLatency.bg = UI.Backdrop( uiLatency.control, "fill", nil, nil, nil, false )
 
+	uiFps.label = UI.Label( uiTopRow, nil, {50,20}, {1,1}, g_infoPanelFont, "999 fps", false )
+    uiFps.control = uiFps.label
+    --uiFps.bg = UI.Backdrop( uiFps.control, "fill", nil, nil, nil, false )
+	
     uiClock.label = UI.Label( uiTopRow, nil, {60,20}, {1,1}, g_infoPanelFont, "88:88:88", false )
     uiClock.control = uiClock.label
     --uiClock.bg = UI.Backdrop( uiClock.control, "fill", nil, nil, nil, false )
 
-    uiFps.label = UI.Label( uiTopRow, nil, {66,20}, {1,1}, g_infoPanelFont, "999.9 fps", false )
-    uiFps.control = uiFps.label
-    --uiFps.bg = UI.Backdrop( uiFps.control, "fill", nil, nil, nil, false )
-
     uiGems.control = UI.Control( uiTopRow, nil, {48,20}, false )
     uiGems.icon = UI.Texture( uiGems.control, {LEFT,LEFT}, {16,16}, nil, nil, false )
-    uiGems.label = UI.Label( uiGems.control, {LEFT,RIGHT,0,0,uiGems.icon}, {32,20}, {0,1}, g_infoPanelFont, "8/88", false )
+    uiGems.label = UI.Label( uiGems.control, {LEFT,RIGHT,2,0,uiGems.icon}, {32,20}, {0,1}, g_infoPanelFont, "8/88", false )
     --uiGems.bg = UI.Backdrop( uiGems.control, "fill", nil, nil, nil, false )
 
     uiFeedTimer.control = UI.Control( uiBotRow, nil, {84,20}, false )
@@ -193,17 +196,6 @@ function PNL.RearrangePanel()
         anchor = uiLatency.control
     end
 
-    -- Time
-    if PNL.SV.HideClock then
-        uiClock.control:SetHidden(true)
-    else
-        uiClock.control:ClearAnchors()
-        uiClock.control:SetAnchor( LEFT, anchor or uiTopRow, ( anchor == nil ) and LEFT or RIGHT, 0, 0 )
-        uiClock.control:SetHidden(false)
-        size = size + uiClock.control:GetWidth()
-        anchor = uiClock.control
-    end
-
     -- FPS
     if PNL.SV.HideFPS then
         uiFps.control:SetHidden(true)
@@ -213,6 +205,17 @@ function PNL.RearrangePanel()
         uiFps.control:SetHidden(false)
         size = size + uiFps.control:GetWidth()
         anchor = uiFps.control
+    end
+	
+	-- Time
+    if PNL.SV.HideClock then
+        uiClock.control:SetHidden(true)
+    else
+        uiClock.control:ClearAnchors()
+        uiClock.control:SetAnchor( LEFT, anchor or uiTopRow, ( anchor == nil ) and LEFT or RIGHT, 0, 0 )
+        uiClock.control:SetHidden(false)
+        size = size + uiClock.control:GetWidth()
+        anchor = uiClock.control
     end
 
     -- Soulgems
@@ -457,7 +460,7 @@ function PNL.OnUpdate01()
             end
         end
     end
-    uiFps.label:SetText( strfmt( "%.1f fps", fps ) )
+    uiFps.label:SetText( strfmt( "%d fps", fps ) )
     uiFps.label:SetColor( color.r, color.g, color.b, 1 )
 end
 
