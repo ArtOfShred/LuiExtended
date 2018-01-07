@@ -3466,28 +3466,11 @@ end
 
 -- Simple posthook into ZOS crafting mode functions, based off MultiCraft, thanks Ayantir!
 function CA.CraftModeOverrides()
-    -- Set mode on Smithing Station interaction
-	local zos_Smithing = ZO_Smithing.SetMode
-	ZO_Smithing.SetMode = function(...)
-		zos_Smithing(...)
-        if GetCraftingInteractionType() == CRAFTING_TYPE_SMITHNG then
-            mode = g_smithing:GetMode()
-        end
-	end
 
     -- Get SMITHING mode
 	g_smithing.GetMode = function()
 		return SMITHING.mode
 	end
-
-    -- Set mode on Enchanting Station interaction
-    local zos_Enchanting = ZO_Enchanting.SetEnchantingMode
-	ZO_Enchanting.SetEnchantingMode = function(...)
-		zos_Enchanting(...)
-        if GetCraftingInteractionType() == CRAFTING_TYPE_ENCHANTING then
-            mode = g_enchanting:GetMode() 
-        end
-    end
 
     -- Get ENCHANTING mode
     g_enchanting.GetMode = function()
