@@ -61,10 +61,9 @@ local uiFeedTimer = {
 
 local uiArmour = {
     color = {
-        [1] = { dura = 50, color = colors.RED,    iconcolour = colors.RED },
-        [2] = { dura = 80, color = colors.YELLOW, iconcolour = colors.YELLOW },
-        [2] = { dura = 95, color = colors.GREEN,  iconcolour = colors.WHITE },
-        [3] = {            color = colors.WHITE,  iconcolour = colors.WHITE },
+        [1] = { dura = 25, color = colors.RED,    iconcolour = colors.WHITE },
+        [2] = { dura = 50, color = colors.YELLOW, iconcolour = colors.WHITE },
+        [3] = { 		   color = colors.GREEN,  iconcolour = colors.WHITE },
     },
 }
 
@@ -410,7 +409,7 @@ function PNL.DoBagUpdate()
     -- Update soulgems
     local myLevel = GetUnitEffectiveLevel("player")
     local _, icon, emptyCount = GetSoulGemInfo(SOUL_GEM_TYPE_EMPTY, myLevel, true);
-    local _, iconF, fullCount = GetSoulGemInfo(SOUL_GEM_TYPE_FILLED, myLevel, true);
+    local _, iconF, fullCount = GetSoulGemInfo(SOUL_GEM_TYPE_FILLED, GetUnitEffectiveLevel("player"), true);
     emptyCount = math.min( emptyCount, 99 )
     fullCount = math.min( fullCount, 9999 )
     local fullText = ( fullCount > 0 ) and ( "|c00FF00"..fullCount.."|r" ) or "|cFF00000|r"
