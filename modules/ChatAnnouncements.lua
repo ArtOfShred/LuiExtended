@@ -342,45 +342,6 @@ CA.D = {
 		CurrencyGoldName                = GetString(SI_LUIE_CA_CURRENCY_GOLD),
 		CurrencyGoldShowTotal           = false,
 		CurrencyGoldThrottle            = true,
-		CurrencyMessageConfiscate       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_CONFISCATE),
-		CurrencyMessageDeposit          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSIT),
-		CurrencyMessageDepositGuild     = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSITGUILD),
-		CurrencyMessageEarn             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_EARN),
-		CurrencyMessageLoot             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LOOT),
-		CurrencyMessageSteal            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_STEAL),
-		CurrencyMessageLost             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LOST),
-		CurrencyMessagePickpocket       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_PICKPOCKET),
-		CurrencyMessageReceive          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_RECEIVE),
-		CurrencyMessageSpend            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_SPEND),
-		CurrencyMessageTotalAP          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP),
-		CurrencyMessageTotalGold        = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGOLD),
-		CurrencyMessageTotalTV          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTV),
-		CurrencyMessageTotalWV          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALWV),
-		CurrencyMessageTradeIn          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN),
-		CurrencyMessageTradeInNoName    = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME),
-		CurrencyMessageTradeOut         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEOUT),
-		CurrencyMessageTradeOutNoName   = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEOUT_NO_NAME),
-		CurrencyMessageMailIn           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_MAILIN),
-		CurrencyMessageMailInNoName     = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_MAILIN_NO_NAME),
-		CurrencyMessageMailOut          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_MAILOUT),
-		CurrencyMessageMailOutNoName    = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_MAILOUT_NO_NAME),
-		CurrencyMessageMailCOD          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_MAILCOD),
-		CurrencyMessagePostage          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_POSTAGE),
-		CurrencyMessageWithdraw         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAW),
-		CurrencyMessageWithdrawGuild    = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAWGUILD),
-		CurrencyMessageStable           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_STABLE),
-		CurrencyMessageStorage          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_STORAGE),
-		CurrencyMessageWayshrine        = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_WAYSHRINE),
-		CurrencyMessageUnstuck          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_UNSTUCK),
-		CurrencyMessageChampion         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_CHAMPION),
-		CurrencyMessageAttributes       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_ATTRIBUTES),
-		CurrencyMessageSkills           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_SKILLS),
-		CurrencyMessageMorphs           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_MORPHS),
-		CurrencyMessageBounty           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_BOUNTY),
-		CurrencyMessageTrader           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADER),
-		CurrencyMessageRepair           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_REPAIR),
-		CurrencyMessageListing          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LISTING),
-		CurrencyMessageCampaign			= GetString(SI_LUIE_CA_CURRENCY_MESSAGE_CAMPAIGN),
 		
 		CurrencyTVChange                = true,
 		CurrencyTVColor                 = { 0.368627, 0.643137, 1, 1 },
@@ -422,53 +383,82 @@ CA.D = {
 		LootShowLockpick              = true,
 		LootQuestAdd                  = true,
 		LootQuestRemove               = false,
-		LootMessageLoot                 = GetString(SI_LUIE_CA_LOOT_MESSAGE_LOOT),
-		LootMessageReceive              = GetString(SI_LUIE_CA_LOOT_MESSAGE_RECEIVE),
-		LootMessageTradeIn              = GetString(SI_LUIE_CA_LOOT_MESSAGE_TRADEIN),
-		LootMessageTradeInNoName        = GetString(SI_LUIE_CA_LOOT_MESSAGE_TRADEIN_NO_NAME),
-		LootMessageTradeOut             = GetString(SI_LUIE_CA_LOOT_MESSAGE_TRADEOUT),
-		LootMessageTradeOutNoName       = GetString(SI_LUIE_CA_LOOT_MESSAGE_TRADEOUT_NO_NAME),
-		LootMessageMailIn               = GetString(SI_LUIE_CA_LOOT_MESSAGE_MAILIN),
-		LootMessageMailInNoName         = GetString(SI_LUIE_CA_LOOT_MESSAGE_MAILIN_NO_NAME),
-		LootMessageMailOut              = GetString(SI_LUIE_CA_LOOT_MESSAGE_MAILOUT),
-		LootMessageMailOutNoName        = GetString(SI_LUIE_CA_LOOT_MESSAGE_MAILOUT_NO_NAME),
-		LootMessageDeposit              = GetString(SI_LUIE_CA_LOOT_MESSAGE_DEPOSIT),
-		LootMessageDepositGuild         = GetString(SI_LUIE_CA_LOOT_MESSAGE_DEPOSITGUILD),
-		LootMessageWithdraw             = GetString(SI_LUIE_CA_LOOT_MESSAGE_WITHDRAW),
-		LootMessageWithdrawGuild        = GetString(SI_LUIE_CA_LOOT_MESSAGE_WITHDRAWGUILD),
-		LootMessageSteal                = GetString(SI_LUIE_CA_LOOT_MESSAGE_STEAL),
-		LootMessageFence                = GetString(SI_LUIE_CA_LOOT_MESSAGE_FENCE),
-		LootMessageSellNoV              = GetString(SI_LUIE_CA_LOOT_MESSAGE_SELL),
-		LootMessageBuyNoV               = GetString(SI_LUIE_CA_LOOT_MESSAGE_BUY),
-		LootMessageBuybackNoV           = GetString(SI_LUIE_CA_LOOT_MESSAGE_BUYBACK),
-		LootMessageSell                 = GetString(SI_LUIE_CA_LOOT_MESSAGE_SELL_VALUE),
-		LootMessageBuy                  = GetString(SI_LUIE_CA_LOOT_MESSAGE_BUY_VALUE),
-		LootMessageBuyback              = GetString(SI_LUIE_CA_LOOT_MESSAGE_BUYBACK_VALUE),
-		LootMessagePickpocket           = GetString(SI_LUIE_CA_LOOT_MESSAGE_PICKPOCKET),
-		LootMessageLaunder              = GetString(SI_LUIE_CA_LOOT_MESSAGE_LAUNDER),
-		LootMessageConfiscate           = GetString(SI_LUIE_CA_LOOT_MESSAGE_CONFISCATE),
-		LootMessageUse                  = GetString(SI_LUIE_CA_LOOT_MESSAGE_USE),
-		LootMessageCraft                = GetString(SI_LUIE_CA_LOOT_MESSAGE_CRAFT),
-		LootMessageExtract              = GetString(SI_LUIE_CA_LOOT_MESSAGE_EXTRACT),
-		LootMessageUpgrade              = GetString(SI_LUIE_CA_LOOT_MESSAGE_UPGRADE),
-		LootMessageUpgradeFail          = GetString(SI_LUIE_CA_LOOT_MESSAGE_UPGRADE_FAIL),
-		LootMessageRefine               = GetString(SI_LUIE_CA_LOOT_MESSAGE_REFINE),
-		LootMessageDeconstruct          = GetString(SI_LUIE_CA_LOOT_MESSAGE_DECONSTRUCT),
-		LootMessageResearch             = GetString(SI_LUIE_CA_LOOT_MESSAGE_RESEARCH),
-		LootMessageDestroy              = GetString(SI_LUIE_CA_LOOT_MESSAGE_DESTROY),
-		LootMessageLockpick             = GetString(SI_LUIE_CA_LOOT_MESSAGE_LOCKPICK),
-		LootMessageRemove               = GetString(SI_LUIE_CA_LOOT_MESSAGE_REMOVE),
-		LootMessageGroup                = GetString(SI_LUIE_CA_LOOT_MESSAGE_GROUP),
-		LootMessageDisguiseEquip        = GetString(SI_LUIE_CA_LOOT_MESSAGE_DISGUISE_EQUIP),
-		LootMessageDisguiseRemove       = GetString(SI_LUIE_CA_LOOT_MESSAGE_DISGUISE_REMOVE),
-		LootMessageDisguiseDestroy      = GetString(SI_LUIE_CA_LOOT_MESSAGE_DISGUISE_DESTROY),
+	},
+	
+	ContextMessages = {
+		CurrencyMessageConfiscate       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_CONFISCATE),
+		CurrencyMessageDeposit          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSIT),
+		CurrencyMessageDepositGuild     = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSITGUILD),
+		CurrencyMessageEarn             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_EARN),
+		CurrencyMessageLoot             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LOOT),
+		CurrencyMessageSteal            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_STEAL),
+		CurrencyMessageLost             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LOST),
+		CurrencyMessagePickpocket       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_PICKPOCKET),
+		CurrencyMessageReceive          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_RECEIVE),
+		CurrencyMessageSpend            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_SPEND),
+		CurrencyMessageTotalAP          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP),
+		CurrencyMessageTotalGold        = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGOLD),
+		CurrencyMessageTotalTV          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTV),
+		CurrencyMessageTotalWV          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALWV),
+		CurrencyMessageTradeIn          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN),
+		CurrencyMessageTradeInNoName    = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME),
+		CurrencyMessageTradeOut         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEOUT),
+		CurrencyMessageTradeOutNoName   = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEOUT_NO_NAME),
+		CurrencyMessageMailIn           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_MAILIN),
+		CurrencyMessageMailInNoName     = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_MAILIN_NO_NAME),
+		CurrencyMessageMailOut          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_MAILOUT),
+		CurrencyMessageMailOutNoName    = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_MAILOUT_NO_NAME),
+		CurrencyMessageMailCOD          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_MAILCOD),
+		CurrencyMessagePostage          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_POSTAGE),
+		CurrencyMessageWithdraw         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAW),
+		CurrencyMessageWithdrawGuild    = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAWGUILD),
+		CurrencyMessageStable           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_STABLE),
+		CurrencyMessageStorage          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_STORAGE),
+		CurrencyMessageWayshrine        = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_WAYSHRINE),
+		CurrencyMessageUnstuck          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_UNSTUCK),
+		CurrencyMessageChampion         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_CHAMPION),
+		CurrencyMessageAttributes       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_ATTRIBUTES),
+		CurrencyMessageSkills           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_SKILLS),
+		CurrencyMessageMorphs           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_MORPHS),
+		CurrencyMessageBounty           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_BOUNTY),
+		CurrencyMessageTrader           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADER),
+		CurrencyMessageRepair           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_REPAIR),
+		CurrencyMessageListing          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LISTING),
+		CurrencyMessageCampaign			= GetString(SI_LUIE_CA_CURRENCY_MESSAGE_CAMPAIGN),
+		CurrencyMessageFence            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_FENCE_VALUE),
+		CurrencyMessageFenceNoV         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_FENCE),
+		CurrencyMessageSellNoV          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_SELL),
+		CurrencyMessageBuyNoV           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_BUY),
+		CurrencyMessageBuybackNoV       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_BUYBACK),
+		CurrencyMessageSell             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_SELL_VALUE),
+		CurrencyMessageBuy              = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_BUY_VALUE),
+		CurrencyMessageBuyback          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_BUYBACK_VALUE),
+		CurrencyMessagePickpocket       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_PICKPOCKET),
+		CurrencyMessageLaunder          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LAUNDER_VALUE),
+		CurrencyMessageLaunderNoV       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LAUNDER),
+		CurrencyMessageConfiscate       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_CONFISCATE),
+		CurrencyMessageUse              = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_USE),
+		CurrencyMessageCraft            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_CRAFT),
+		CurrencyMessageExtract          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_EXTRACT),
+		CurrencyMessageUpgrade          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_UPGRADE),
+		CurrencyMessageUpgradeFail      = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_UPGRADE_FAIL),
+		CurrencyMessageRefine           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_REFINE),
+		CurrencyMessageDeconstruct      = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DECONSTRUCT),
+		CurrencyMessageResearch         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_RESEARCH),
+		CurrencyMessageDestroy          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DESTROY),
+		CurrencyMessageLockpick         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LOCKPICK),
+		CurrencyMessageRemove           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_REMOVE),
+		CurrencyMessageGroup            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_GROUP),
+		CurrencyMessageDisguiseEquip    = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP),
+		CurrencyMessageDisguiseRemove   = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE),
+		CurrencyMessageDisguiseDestroy  = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY),
 	},
 	
 	DisplayAnnouncements = {
 		Debug							= false -- Display EVENT_DISPLAY_ANNOUNCEMENT debug messages
 	},
 
-	}
+}
 
 ------------------------------------------------
 -- LOCAL (GLOBAL) VARIABLE SETUP ---------------
@@ -485,7 +475,8 @@ local g_queuedMessages              = { }           -- Table to hold messages fo
 local g_queuedMessagesCounter       = 1             -- Counter value for queued message printer
 
 -- Loot/Currency
-local g_savedPurchase               = {}
+local g_savedPurchase               = { }
+local g_savedLaunder				= { }
 local g_isLooted                    = false         -- Toggled on to modify loot notification to "looted."
 local g_isPickpocketed              = false         -- Toggled on to modify loot notification to "pickpocketed."
 local g_isStolen                    = false         -- Toggled on to modify loot notification to "stolen."
@@ -1972,7 +1963,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
     -- Determine syntax based on reason
     -- Sell/Buy from a Merchant
     if reason == 1 and UpOrDown > 0 then
-        messageChange = CA.SV.Currency.CurrencyMessageReceive
+        messageChange = CA.SV.ContextMessages.CurrencyMessageReceive
         if CA.SV.Inventory.LootVendorCurrency then
             g_savedPurchase.changeType=changeType
             g_savedPurchase.formattedValue=formattedValue
@@ -1984,7 +1975,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
             return
         end
     elseif reason == 1 and UpOrDown < 0 then
-        messageChange = CA.SV.Currency.CurrencyMessageSpend
+        messageChange = CA.SV.ContextMessages.CurrencyMessageSpend
         if CA.SV.Inventory.LootVendorCurrency then
             g_savedPurchase.changeType=changeType
             g_savedPurchase.formattedValue=formattedValue
@@ -1997,18 +1988,18 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         end
     -- Mail (2)
     elseif reason == 2 and UpOrDown > 0  then
-        messageChange = g_mailTarget ~="" and CA.SV.Currency.CurrencyMessageMailIn or CA.SV.Currency.CurrencyMessageMailInNoName
+        messageChange = g_mailTarget ~="" and CA.SV.ContextMessages.CurrencyMessageMailIn or CA.SV.ContextMessages.CurrencyMessageMailInNoName
         if g_mailTarget ~="" then type = "LUIE_CURRENCY_MAIL" end
     elseif reason == 2 and UpOrDown < 0  then
         if g_mailCODPresent then
-            messageChange = CA.SV.Currency.CurrencyMessageMailCOD
+            messageChange = CA.SV.ContextMessages.CurrencyMessageMailCOD
         else
-            messageChange = g_mailTarget ~="" and CA.SV.Currency.CurrencyMessageMailOut or CA.SV.Currency.CurrencyMessageMailOutNoName
+            messageChange = g_mailTarget ~="" and CA.SV.ContextMessages.CurrencyMessageMailOut or CA.SV.ContextMessages.CurrencyMessageMailOutNoName
         end
         if g_mailTarget ~="" then type = "LUIE_CURRENCY_MAIL" end
     -- Buyback (64)
     elseif reason == 64 then
-        messageChange = CA.SV.Currency.CurrencyMessageSpend
+        messageChange = CA.SV.ContextMessages.CurrencyMessageSpend
         if CA.SV.Inventory.LootVendorCurrency then
             g_savedPurchase.changeType=changeType
             g_savedPurchase.formattedValue=formattedValue
@@ -2021,17 +2012,17 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         end
     -- Receive/Give Money in a Trade (Likely consolidate this later)
     elseif reason == 3 and UpOrDown > 0 then
-        messageChange = g_tradeTarget ~="" and CA.SV.Currency.CurrencyMessageTradeIn or CA.SV.Currency.CurrencyMessageTradeInNoName
+        messageChange = g_tradeTarget ~="" and CA.SV.ContextMessages.CurrencyMessageTradeIn or CA.SV.ContextMessages.CurrencyMessageTradeInNoName
         if g_tradeTarget ~="" then type = "LUIE_CURRENCY_TRADE" end
     elseif reason == 3 and UpOrDown < 0 then
-        messageChange = g_tradeTarget ~="" and CA.SV.Currency.CurrencyMessageTradeOut or CA.SV.Currency.CurrencyMessageTradeOutNoName
+        messageChange = g_tradeTarget ~="" and CA.SV.ContextMessages.CurrencyMessageTradeOut or CA.SV.ContextMessages.CurrencyMessageTradeOutNoName
         if g_tradeTarget ~="" then type = "LUIE_CURRENCY_TRADE" end
     -- Receive from Quest Reward (4), Medal (21), AH Refund (32)
     elseif reason == 4 or reason == 21 or reason == 32 then
-        messageChange = CA.SV.Currency.CurrencyMessageReceive
+        messageChange = CA.SV.ContextMessages.CurrencyMessageReceive
     -- Sell to Fence (63)
     elseif reason == 63 then
-        messageChange = CA.SV.Currency.CurrencyMessageReceive
+        messageChange = CA.SV.ContextMessages.CurrencyMessageReceive
         if CA.SV.Inventory.LootVendorCurrency then
             g_savedPurchase.changeType=changeType
             g_savedPurchase.formattedValue=formattedValue
@@ -2044,55 +2035,57 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         end
     -- Bag Space (8)
     elseif reason == 8 then
-        messageChange = CA.SV.Currency.CurrencyMessageStorage
+        messageChange = CA.SV.ContextMessages.CurrencyMessageStorage
         type = "LUIE_CURRENCY_BAG"
     -- Bank Space (9)
     elseif reason == 9 then
-        messageChange = CA.SV.Currency.CurrencyMessageStorage
+        messageChange = CA.SV.ContextMessages.CurrencyMessageStorage
         type = "LUIE_CURRENCY_BANK"
     -- Spend - NPC Conversation (5), Edit Guild Heraldry (49), Buy Guild Tabard (50)
     elseif reason == 5 or reason == 49 or reason == 50 then
-        messageChange = CA.SV.Currency.CurrencyMessageSpend
+        messageChange = CA.SV.ContextMessages.CurrencyMessageSpend
 	-- Battleground (12)
 	elseif reason == 12 and UpOrDown < 0 then
-		messageChange = CA.SV.Currency.CurrencyMessageCampaign
+		messageChange = CA.SV.ContextMessages.CurrencyMessageCampaign
 	elseif reason == 12 and UpOrDown > 0 then
-		messageChange = CA.SV.Currency.CurrencyMessageReceive
+		messageChange = CA.SV.ContextMessages.CurrencyMessageReceive
     -- Wayshrine (19)
     elseif reason == 19 then
-        messageChange = CA.SV.Currency.CurrencyMessageWayshrine
+        messageChange = CA.SV.ContextMessages.CurrencyMessageWayshrine
     -- Repairs (29)
     elseif reason == 29 then
-        messageChange = CA.SV.Currency.CurrencyMessageRepair
+        messageChange = CA.SV.ContextMessages.CurrencyMessageRepair
     -- Listing Fee (33)
     elseif reason == 33 then
-        messageChange = CA.SV.Currency.CurrencyMessageListing
+        messageChange = CA.SV.ContextMessages.CurrencyMessageListing
     -- Respec Skills (44)
     elseif reason == 44 then
         CA.PointRespecDisplay(RESPEC_TYPE_SKILLS)
-        messageChange = CA.SV.Currency.CurrencyMessageSkills
+        messageChange = CA.SV.ContextMessages.CurrencyMessageSkills
     -- Respec Attributes (45)
     elseif reason == 45 then
         CA.PointRespecDisplay(RESPEC_TYPE_ATTRIBUTES)
-        messageChange = CA.SV.Currency.CurrencyMessageAttributes
+        messageChange = CA.SV.ContextMessages.CurrencyMessageAttributes
     -- Unstuck (48)
     elseif reason == 48 then
-        messageChange = CA.SV.Currency.CurrencyMessageUnstuck
+        messageChange = CA.SV.ContextMessages.CurrencyMessageUnstuck
     -- Respec Morphs (55)
     elseif reason == 55 then
         CA.PointRespecDisplay(RESPEC_TYPE_MORPHS)
-        messageChange = CA.SV.Currency.CurrencyMessageMorphs
+        messageChange = CA.SV.ContextMessages.CurrencyMessageMorphs
     -- Pay Fence (56)
     elseif reason == 56 then
-        messageChange = CA.SV.Currency.CurrencyMessageBounty
+        messageChange = CA.SV.ContextMessages.CurrencyMessageBounty
     -- Champion Point Respec (61)
     elseif reason == 61 then
         CA.PointRespecDisplay(RESPEC_TYPE_CHAMPION)
-        messageChange = CA.SV.Currency.CurrencyMessageChampion
+        messageChange = CA.SV.ContextMessages.CurrencyMessageChampion
     --  Launder (60)
     elseif reason == 60 then
-         messageChange = CA.SV.Currency.CurrencyMessageSpend
-        if CA.SV.Inventory.LootVendorCurrency then
+        messageChange = CA.SV.ContextMessages.CurrencyMessageSpend
+		if not CA.SV.Inventory.LootVendorCurrency then
+			messageChange = CA.SV.ContextMessages.CurrencyMessageSpend
+        else
             g_savedPurchase.changeType=changeType
             g_savedPurchase.formattedValue=formattedValue
             g_savedPurchase.currencyTypeColor=currencyTypeColor
@@ -2104,46 +2097,46 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         end
     -- Keep Reward (14), Keep Repair (40), PVP Resurrect (41)
     elseif reason == 14 or reason == 40 or reason == 41 then
-        messageChange = CA.SV.Currency.CurrencyMessageEarn
+        messageChange = CA.SV.ContextMessages.CurrencyMessageEarn
     -- Buy on AH (31)
     elseif reason == 31 then
         if CA.SV.Currency.CurrencyGoldHideAH then return end
-        messageChange = CA.SV.Currency.CurrencyMessageSpend
+        messageChange = CA.SV.ContextMessages.CurrencyMessageSpend
     -- Deposit in Bank (42)
     elseif reason == 42 then
-        messageChange = CA.SV.Currency.CurrencyMessageDeposit
+        messageChange = CA.SV.ContextMessages.CurrencyMessageDeposit
     -- Deposit in Guild Bank (51)
     elseif reason == 51 then
-        messageChange = CA.SV.Currency.CurrencyMessageDepositGuild
+        messageChange = CA.SV.ContextMessages.CurrencyMessageDepositGuild
     -- Withdraw from Bank (43)
     elseif reason == 43 then
-        messageChange = CA.SV.Currency.CurrencyMessageWithdraw
+        messageChange = CA.SV.ContextMessages.CurrencyMessageWithdraw
     -- Withdraw from Guild Bank (52)
     elseif reason == 52 then
-        messageChange = CA.SV.Currency.CurrencyMessageWithdrawGuild
+        messageChange = CA.SV.ContextMessages.CurrencyMessageWithdrawGuild
     -- Confiscated -- Pay to Guard (47), Killed by Guard (57)
     elseif reason == 47 or reason == 57 then
-        messageChange = CA.SV.Currency.CurrencyMessageConfiscate
+        messageChange = CA.SV.ContextMessages.CurrencyMessageConfiscate
         zo_callLater(CA.JusticeDisplayConfiscate, 50)
     -- Pickpocketed (59)
     elseif reason == 59 then
-        messageChange = CA.SV.Currency.CurrencyMessagePickpocket
+        messageChange = CA.SV.ContextMessages.CurrencyMessagePickpocket
     -- Looted - From Chest (0), Looted from Player/NPC (65)
     elseif reason == 0 or reason == 65 then
-        messageChange = CA.SV.Currency.CurrencyMessageLoot
+        messageChange = CA.SV.ContextMessages.CurrencyMessageLoot
     -- Looted - Stolen Gold (62)
     elseif reason == 62 then
-        messageChange = CA.SV.Currency.CurrencyMessageSteal
+        messageChange = CA.SV.ContextMessages.CurrencyMessageSteal
     -- Looted (13)
     elseif reason == 13 then
         if currency == CURT_ALLIANCE_POINTS then
-            messageChange = CA.SV.Currency.CurrencyMessageEarn
+            messageChange = CA.SV.ContextMessages.CurrencyMessageEarn
         else
-            messageChange = CA.SV.Currency.CurrencyMessageLoot
+            messageChange = CA.SV.ContextMessages.CurrencyMessageLoot
         end
     -- Died to Player/NPC (67)
     elseif reason == 67 then
-        messageChange = CA.SV.Currency.CurrencyMessageLost
+        messageChange = CA.SV.ContextMessages.CurrencyMessageLost
 
     -- ==============================================================================
     -- DEBUG EVENTS WE DON'T KNOW YET
@@ -2172,7 +2165,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
     -- END DEBUG EVENTS
     -- ==============================================================================
     -- If none of these returned true, then we must have just looted the gold (Potentially a few currency change events I missed too may have to adjust later)
-    else messageChange = CA.SV.Currency.CurrencyMessageLoot end
+    else messageChange = CA.SV.ContextMessages.CurrencyMessageLoot end
     
     -- Send relevant values over to the currency printer
     CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
@@ -2284,7 +2277,7 @@ function CA.CurrencyGoldThrottlePrinter()
         local currencyName = strformat(CA.SV.Currency.CurrencyGoldName, g_currencyGoldThrottleValue)
         local currencyTotal = CA.SV.Currency.CurrencyGoldShowTotal
         local messageTotal = CA.SV.Currency.CurrencyMessageTotalGold
-        local messageChange = CA.SV.Currency.CurrencyMessageLoot
+        local messageChange = CA.SV.ContextMessages.CurrencyMessageLoot
         local type = "LUIE_CURRENCY_THROTTLE"
         CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
@@ -2302,7 +2295,7 @@ function CA.CurrencyAPThrottlePrinter()
         local currencyName = strformat(CA.SV.Currency.CurrencyAPName, g_currencyAPThrottleValue)
         local currencyTotal = CA.SV.Currency.CurrencyAPShowTotal
         local messageTotal = CA.SV.Currency.CurrencyMessageTotalAP
-        local messageChange = CA.SV.Currency.CurrencyMessageEarn
+        local messageChange = CA.SV.ContextMessages.CurrencyMessageEarn
         local type = "LUIE_CURRENCY_THROTTLE"
         CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
@@ -2321,7 +2314,7 @@ function CA.CurrencyTVThrottlePrinter()
         local currencyName = strformat(CA.SV.Currency.CurrencyTVName, g_currencyTVThrottleValue)
         local currencyTotal = CA.SV.Currency.CurrencyTVShowTotal
         local messageTotal = CA.SV.Currency.CurrencyMessageTotalTV
-        local messageChange = CA.SV.Currency.CurrencyMessageEarn
+        local messageChange = CA.SV.ContextMessages.CurrencyMessageEarn
         local type = "LUIE_CURRENCY_THROTTLE"
         CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
@@ -2388,7 +2381,7 @@ function CA.OnBuybackItem(eventCode, itemName, quantity, money, itemSound)
     local icon = itemIcon
     local formattedIcon = ( CA.SV.Inventory.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
     local type = "LUIE_CURRENCY_VENDOR"
-    local messageChange = (money ~= 0 and CA.SV.Inventory.LootVendorCurrency) and CA.SV.Inventory.LootMessageBuyback or CA.SV.Inventory.LootMessageBuybackNoV
+    local messageChange = (money ~= 0 and CA.SV.Inventory.LootVendorCurrency) and CA.SV.ContextMessages.CurrencyMessageBuyback or CA.SV.ContextMessages.CurrencyMessageBuybackNoV
     local itemCount = quantity > 1 and (" |cFFFFFFx" .. quantity .. "|r") or ""
     local carriedItem
     if CA.SV.BracketOptionItem == 1 then
@@ -2428,7 +2421,7 @@ function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCu
     local icon = itemIcon
     local formattedIcon = ( CA.SV.Inventory.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
     local type = "LUIE_CURRENCY_VENDOR"
-    local messageChange = (money ~= 0 and CA.SV.Inventory.LootVendorCurrency) and CA.SV.Inventory.LootMessageBuy or CA.SV.Inventory.LootMessageBuyNoV
+    local messageChange = (money ~= 0 and CA.SV.Inventory.LootVendorCurrency) and CA.SV.ContextMessages.CurrencyMessageBuy or CA.SV.ContextMessages.CurrencyMessageBuyNoV
     local itemCount = quantity > 1 and (" |cFFFFFFx" .. quantity .. "|r") or "" 
     local carriedItem
     if CA.SV.BracketOptionItem == 1 then
@@ -2471,9 +2464,9 @@ function CA.OnSellItem(eventCode, itemName, quantity, money)
     local type = "LUIE_CURRENCY_VENDOR"
     local messageChange
     if g_weAreInAFence then
-        messageChange = CA.SV.Inventory.LootMessageFence
+        messageChange = (money ~= 0 and CA.SV.Inventory.LootVendorCurrency) and CA.SV.ContextMessages.CurrencyMessageFence or CA.SV.ContextMessages.CurrencyMessageFenceNoV
     else
-        messageChange = (money ~= 0 and CA.SV.Inventory.LootVendorCurrency) and CA.SV.Inventory.LootMessageSell or CA.SV.Inventory.LootMessageSellNoV
+        messageChange = (money ~= 0 and CA.SV.Inventory.LootVendorCurrency) and CA.SV.ContextMessages.CurrencyMessageSell or CA.SV.ContextMessages.CurrencyMessageSellNoV
     end
     local itemCount = quantity > 1 and (" |cFFFFFFx" .. quantity .. "|r") or "" 
     local carriedItem
@@ -2635,7 +2628,7 @@ function CA.OnMailSuccess(eventCode)
         local currencyName = strformat(CA.SV.Currency.CurrencyGoldName, g_postageAmount)
         local currencyTotal = CA.SV.Currency.CurrencyGoldShowTotal
         local messageTotal = CA.SV.Currency.CurrencyMessageTotalGold
-        local messageChange = CA.SV.Currency.CurrencyMessagePostage
+        local messageChange = CA.SV.ContextMessages.CurrencyMessagePostage
         CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
     
@@ -2664,7 +2657,7 @@ function CA.OnMailSuccess(eventCode)
         for mailIndex = 1,6 do -- Have to iterate through all 6 possible mail attachments, otherwise nil values will bump later items off the list potentially.
             if g_mailStacksOut[mailIndex] ~= nil then
                 local gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                local logPrefix = g_mailTarget ~= "" and CA.SV.Inventory.LootMessageMailOut or CA.SV.Inventory.LootMessageMailOutNoName
+                local logPrefix = g_mailTarget ~= "" and CA.SV.ContextMessages.CurrencyMessageMailOut or CA.SV.ContextMessages.CurrencyMessageMailOutNoName
                 local item = g_mailStacksOut[mailIndex]
                 CA.ItemPrinter(item.icon, item.stack, item.itemType, item.itemId, item.itemLink, g_mailTarget, logPrefix, gainOrLoss, false)
             end
@@ -3026,8 +3019,13 @@ end
 
 function CA.FenceSuccess(eventCode, result)
     if result == 1 then
-        CA.CurrencyPrinter(g_savedPurchase.formattedValue, g_savedPurchase.changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, g_savedPurchase.messageChange, g_savedPurchase.messageTotal, g_savedPurchase.type, g_savedPurchase.carriedItem, g_savedPurchase.carriedItemTotal)
-        g_savedPurchase = { }
+		if CA.SV.Inventory.LootVendorCurrency then
+			CA.CurrencyPrinter(g_savedPurchase.formattedValue, g_savedPurchase.changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, g_savedPurchase.messageChange, g_savedPurchase.messageTotal, g_savedPurchase.type, g_savedPurchase.carriedItem, g_savedPurchase.carriedItemTotal)
+        else
+			CA.ItemPrinter(g_savedLaunder.icon, g_savedLaunder.stack, g_savedLaunder.itemType, g_savedLaunder.itemId, g_savedLaunder.itemLink, "", g_savedLaunder.logPrefix, g_savedLaunder.gainOrLoss, false)
+		end
+		g_savedLaunder = { }
+		g_savedPurchase = { }
     end
 end
 
@@ -3114,7 +3112,7 @@ function CA.ResolveQuestItemChange()
                         color = CurrencyColorize:ToHex()
                     end
                     
-                    logPrefix = CA.SV.Inventory.LootMessageRemove
+                    logPrefix = CA.SV.ContextMessages.CurrencyMessageRemove
                     local quantity = (countChange * -1) > 1 and (" |cFFFFFFx" .. (countChange * -1) .. "|r") or ""
                     
                     formattedMessageP1 = ("|r" .. formattedIcon .. itemLink .. quantity .. "|c" .. color)
@@ -3144,14 +3142,14 @@ function CA.ResolveQuestItemChange()
                     end
                     
                     if g_isLooted and not g_itemReceivedIsQuestReward and not g_isPickpocketed and not g_isStolen then
-                        logPrefix = CA.SV.Inventory.LootMessageLoot
+                        logPrefix = CA.SV.ContextMessages.CurrencyMessageLoot
                         -- reset variables that control looted, or at least ZO_CallLater them
                     elseif g_isPickpocketed then
-                        logPrefix = CA.SV.Inventory.LootMessagePickpocket
+                        logPrefix = CA.SV.ContextMessages.CurrencyMessagePickpocket
                     elseif g_isStolen and not g_isPickpocketed then
-                        logPrefix = CA.SV.Inventory.LootMessageSteal
+                        logPrefix = CA.SV.ContextMessages.CurrencyMessageSteal
                     else
-                        logPrefix = CA.SV.Inventory.LootMessageReceive
+                        logPrefix = CA.SV.ContextMessages.CurrencyMessageReceive
                     end
                     
                     local quantity = countChange > 1 and (" |cFFFFFFx" .. countChange .. "|r") or ""
@@ -3243,7 +3241,7 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
         
         local icon = GetItemLinkIcon(itemLink)
         local gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
-        local logPrefix = CA.SV.Inventory.LootMessageGroup
+        local logPrefix = CA.SV.ContextMessages.CurrencyMessageGroup
         
 		local formatName = strformat(SI_UNIT_NAME, receivedBy)
 		
@@ -3337,10 +3335,10 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
     end
     
     local armorType = GetItemLinkArmorType(itemLink) -- Get Armor Type of item
-    formattedArmorType = (CA.SV.Inventory.LootShowArmorType and armorType ~= ARMORTYPE_NONE and logPrefix ~= CA.SV.Inventory.LootMessageUpgrade ) and strfmt(" |cFFFFFF(%s)|r", GetString("SI_ARMORTYPE", armorType)) or ""
+    formattedArmorType = (CA.SV.Inventory.LootShowArmorType and armorType ~= ARMORTYPE_NONE and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgrade ) and strfmt(" |cFFFFFF(%s)|r", GetString("SI_ARMORTYPE", armorType)) or ""
     
     local traitType = GetItemLinkTraitInfo(itemLink) -- Get Trait type of item
-    formattedTrait = (CA.SV.Inventory.LootShowTrait and traitType ~= ITEM_TRAIT_TYPE_NONE and itemType ~= ITEMTYPE_ARMOR_TRAIT and itemType ~= ITEMTYPE_WEAPON_TRAIT and logPrefix ~= CA.SV.Inventory.LootMessageUpgrade ) and strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMTRAITTYPE", traitType)) or ""
+    formattedTrait = (CA.SV.Inventory.LootShowTrait and traitType ~= ITEM_TRAIT_TYPE_NONE and itemType ~= ITEMTYPE_ARMOR_TRAIT and itemType ~= ITEMTYPE_WEAPON_TRAIT and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgrade ) and strfmt(" |cFFFFFF(%s)|r", GetString("SI_ITEMTRAITTYPE", traitType)) or ""
     
     local styleType = GetItemLinkItemStyle(itemLink) -- Get Style of the item
     local unformattedStyle = strformat("<<1>>", GetItemStyleName(styleType))
@@ -3352,7 +3350,7 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
         and itemType ~= ITEMTYPE_GLYPH_ARMOR 
         and itemType ~= ITEMTYPE_GLYPH_JEWELRY 
         and itemType ~= ITEMTYPE_GLYPH_WEAPON 
-        and logPrefix ~= CA.SV.Inventory.LootMessageUpgrade )
+        and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgrade )
     and strfmt(" |cFFFFFF(%s)|r", unformattedStyle) or ""
     
     local formattedTotal = ""
@@ -3367,7 +3365,7 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
     local itemString = strfmt("%s%s%s%s%s%s", formattedIcon, itemLink, formattedQuantity, formattedArmorType, formattedTrait, formattedStyle)
     
     -- Printer function, seperate handling for listed entires (from crafting) or simple function that sends a message over to the printer.
-    if receivedBy == "LUIE_RECEIVE_CRAFT" and (gainOrLoss == 1 or gainOrLoss == 3) and logPrefix ~= CA.SV.Inventory.LootMessageUpgradeFail then
+    if receivedBy == "LUIE_RECEIVE_CRAFT" and (gainOrLoss == 1 or gainOrLoss == 3) and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgradeFail then
         local itemString2 = itemString
         
         if g_itemStringGain ~= "" then
@@ -3382,7 +3380,7 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         g_queuedMessages[g_itemCounterGain] = { message=g_itemStringGain, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString= "", groupLoot=groupLoot }
         EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
-    elseif receivedBy == "LUIE_RECEIVE_CRAFT" and (gainOrLoss == 2 or gainOrLoss == 4) and logPrefix ~= CA.SV.Inventory.LootMessageUpgradeFail then
+    elseif receivedBy == "LUIE_RECEIVE_CRAFT" and (gainOrLoss == 2 or gainOrLoss == 4) and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgradeFail then
         local itemString2 = itemString
         if g_itemStringLoss ~= "" then
             g_itemStringLoss = strfmt("%s|c%s,|r %s", g_itemStringLoss, color, itemString2)
@@ -3410,14 +3408,14 @@ function CA.ResolveItemMessage(message, formattedRecipient, color, logPrefix, to
     -- Conditions for looted/quest item rewards to adjust string prefix.
     if logPrefix == "" then
         if g_isLooted and not g_itemReceivedIsQuestReward and not g_isPickpocketed and not g_isStolen then
-            logPrefix = CA.SV.Inventory.LootMessageLoot
+            logPrefix = CA.SV.ContextMessages.CurrencyMessageLoot
             -- reset variables that control looted, or at least ZO_CallLater them
         elseif g_isPickpocketed then
-            logPrefix = CA.SV.Inventory.LootMessagePickpocket
+            logPrefix = CA.SV.ContextMessages.CurrencyMessagePickpocket
         elseif g_isStolen and not g_isPickpocketed then
-            logPrefix = CA.SV.Inventory.LootMessageSteal
+            logPrefix = CA.SV.ContextMessages.CurrencyMessageSteal
         else
-            logPrefix = CA.SV.Inventory.LootMessageReceive
+            logPrefix = CA.SV.ContextMessages.CurrencyMessageReceive
         end
     end
     
@@ -3427,7 +3425,7 @@ function CA.ResolveItemMessage(message, formattedRecipient, color, logPrefix, to
     -- Handle non group loot messages
     if not groupLoot then
         -- Adds additional string for previous variant of an item when an item is upgraded.
-        if logPrefix == CA.SV.Inventory.LootMessageUpgrade and g_oldItem ~= nil and g_oldItem.itemLink ~= "" then
+        if logPrefix == CA.SV.ContextMessages.CurrencyMessageUpgrade and g_oldItem ~= nil and g_oldItem.itemLink ~= "" then
             local formattedIcon = (CA.SV.Inventory.LootIcons and g_oldItem.icon ~= "") and strformat("<<1>> ", zo_iconFormat(g_oldItem.icon, 16, 16)) or ""
             local formattedMessageUpgrade = ("|r" .. formattedIcon .. g_oldItem.itemLink .. "|c" .. color)
             formattedMessageP1 = ("|r" .. message .. "|c" .. color)
@@ -3481,36 +3479,36 @@ function CA.CraftModeOverrides()
     
     -- Crafting Mode Syntax (Enchanting - Item Gain)
     g_enchant_prefix_pos = {
-        [1] = CA.SV.Inventory.LootMessageCraft,
-        [2] = CA.SV.Inventory.LootMessageReceive,
-        [3] = CA.SV.Inventory.LootMessageCraft,
+        [1] = CA.SV.ContextMessages.CurrencyMessageCraft,
+        [2] = CA.SV.ContextMessages.CurrencyMessageReceive,
+        [3] = CA.SV.ContextMessages.CurrencyMessageCraft,
     }
 
     -- Crafting Mode Syntax (Enchanting - Item Loss)
     g_enchant_prefix_neg = {
-        [1] = CA.SV.Inventory.LootMessageUse,
-        [2] = CA.SV.Inventory.LootMessageExtract,
-        [3] = CA.SV.Inventory.LootMessageUse,
+        [1] = CA.SV.ContextMessages.CurrencyMessageUse,
+        [2] = CA.SV.ContextMessages.CurrencyMessageExtract,
+        [3] = CA.SV.ContextMessages.CurrencyMessageUse,
     }
 
     -- Crafting Mode Syntax (Blacksmithing - Item Gain)
     g_smithing_prefix_pos = {
-        [1] = CA.SV.Inventory.LootMessageReceive,
-        [2] = CA.SV.Inventory.LootMessageCraft,
-        [3] = CA.SV.Inventory.LootMessageReceive,
-        [4] = CA.SV.Inventory.LootMessageUpgrade,
+        [1] = CA.SV.ContextMessages.CurrencyMessageReceive,
+        [2] = CA.SV.ContextMessages.CurrencyMessageCraft,
+        [3] = CA.SV.ContextMessages.CurrencyMessageReceive,
+        [4] = CA.SV.ContextMessages.CurrencyMessageUpgrade,
         [5] = "",
-        [6] = CA.SV.Inventory.LootMessageCraft,
+        [6] = CA.SV.ContextMessages.CurrencyMessageCraft,
     }
 
     -- Crafting Mode Syntax (Blacksmithing - Item Loss)
     g_smithing_prefix_neg = {
-        [1] = CA.SV.Inventory.LootMessageRefine,
-        [2] = CA.SV.Inventory.LootMessageUse,
-        [3] = CA.SV.Inventory.LootMessageDeconstruct,
-        [4] = CA.SV.Inventory.LootMessageUpgradeFail,
-        [5] = CA.SV.Inventory.LootMessageResearch,
-        [6] = CA.SV.Inventory.LootMessageUse,
+        [1] = CA.SV.ContextMessages.CurrencyMessageRefine,
+        [2] = CA.SV.ContextMessages.CurrencyMessageUse,
+        [3] = CA.SV.ContextMessages.CurrencyMessageDeconstruct,
+        [4] = CA.SV.ContextMessages.CurrencyMessageUpgradeFail,
+        [5] = CA.SV.ContextMessages.CurrencyMessageResearch,
+        [6] = CA.SV.ContextMessages.CurrencyMessageUse,
     }
 end
 
@@ -3550,7 +3548,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             if CA.SV.Inventory.LootShowDisguise and slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
                 gainOrLoss = 3
                 receivedBy = "LUIE_INVENTORY_UPDATE_DISGUISE"
-                logPrefix = CA.SV.Inventory.LootMessageDisguiseEquip
+                logPrefix = CA.SV.ContextMessages.CurrencyMessageDisguiseEquip
                 CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
             end
         -- EXISTING ITEM    
@@ -3577,7 +3575,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                 if CA.SV.Inventory.LootShowDisguise and slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
                     gainOrLoss = 3
                     receivedBy = "LUIE_INVENTORY_UPDATE_DISGUISE"
-                    logPrefix = CA.SV.Inventory.LootMessageDisguiseEquip
+                    logPrefix = CA.SV.ContextMessages.CurrencyMessageDisguiseEquip
                     CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
             -- STACK COUNT INCREMENTED DOWN
@@ -3585,16 +3583,16 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                 local change = stackCountChange * -1
                 if g_itemWasDestroyed and CA.SV.Inventory.LootShowDestroy then
                     gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                    logPrefix = CA.SV.Inventory.LootMessageDestroy
+                    logPrefix = CA.SV.ContextMessages.CurrencyMessageDestroy
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
                 if CA.SV.Inventory.LootShowDisguise and not g_itemWasDestroyed and slotId == 10 and (itemType == ITEMTYPE_COSTUME or itemType == ITEMTYPE_DISGUISE) then
                     if IsUnitInCombat("player") then
-                        logPrefix = CA.SV.Inventory.LootMessageDisguiseDestroy
+                        logPrefix = CA.SV.ContextMessages.CurrencyMessageDisguiseDestroy
                         receivedBy = "LUIE_INVENTORY_UPDATE_DISGUISE"
                         gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
                     else
-                        logPrefix = CA.SV.Inventory.LootMessageDisguiseRemove
+                        logPrefix = CA.SV.ContextMessages.CurrencyMessageDisguiseRemove
                         receivedBy = "LUIE_INVENTORY_UPDATE_DISGUISE"
                         gainOrLoss = 3
                     end
@@ -3631,7 +3629,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
             if g_inMail then
-                logPrefix = g_mailTarget ~= "" and CA.SV.Inventory.LootMessageMailIn or CA.SV.Inventory.LootMessageMailInNoName
+                logPrefix = g_mailTarget ~= "" and CA.SV.ContextMessages.CurrencyMessageMailIn or CA.SV.ContextMessages.CurrencyMessageMailInNoName
             else
                 logPrefix = ""
             end
@@ -3664,7 +3662,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
             if stackCountChange > 0 then
                 gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
                 if g_inMail then
-                    logPrefix = g_mailTarget ~= "" and CA.SV.Inventory.LootMessageMailIn or CA.SV.Inventory.LootMessageMailInNoName
+                    logPrefix = g_mailTarget ~= "" and CA.SV.ContextMessages.CurrencyMessageMailIn or CA.SV.ContextMessages.CurrencyMessageMailInNoName
                 else
                     logPrefix = ""
                 end
@@ -3679,11 +3677,11 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
                 local change = stackCountChange * -1
                 if g_itemWasDestroyed and CA.SV.Inventory.LootShowDestroy then
                     gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                    logPrefix = CA.SV.Inventory.LootMessageDestroy
+                    logPrefix = CA.SV.ContextMessages.CurrencyMessageDestroy
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
                 if CA.SV.Inventory.LootShowLockpick and g_lockpickBroken then
-                    logPrefix = CA.SV.Inventory.LootMessageLockpick
+                    logPrefix = CA.SV.ContextMessages.CurrencyMessageLockpick
                     gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
@@ -3703,7 +3701,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
         local gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
         local logPrefix
         if g_inMail then
-            logPrefix = g_mailTarget ~= "" and CA.SV.Inventory.LootMessageMailIn or CA.SV.Inventory.LootMessageMailInNoName
+            logPrefix = g_mailTarget ~= "" and CA.SV.ContextMessages.CurrencyMessageMailIn or CA.SV.ContextMessages.CurrencyMessageMailInNoName
         else
             logPrefix = ""
         end
@@ -3761,8 +3759,8 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
     end
     
     local receivedBy = "LUIE_RECEIVE_CRAFT" -- This keyword tells our item printer to print the items in a list separated by commas, to conserve space for the display of crafting mats consumed.
-    local logPrefixPos = CA.SV.Inventory.LootMessageCraft
-    local logPrefixNeg = CA.SV.Inventory.LootMessageUse
+    local logPrefixPos = CA.SV.ContextMessages.CurrencyMessageCraft
+    local logPrefixNeg = CA.SV.ContextMessages.CurrencyMessageUse
 
     -- Get string values from our crafting hook function
     if GetCraftingInteractionType() == CRAFTING_TYPE_ENCHANTING then
@@ -3775,8 +3773,8 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
     end
     
     -- If the hook function didn't return a string value (for example because the player was in Gamepad mode), then we use a default override.
-    if logPrefixPos == nil then logPrefixPos = CA.SV.Inventory.LootMessageCraft end
-    if logPrefixNeg == nil then logPrefixNeg = CA.SV.Inventory.LootMessageDeconstruct end
+    if logPrefixPos == nil then logPrefixPos = CA.SV.ContextMessages.CurrencyMessageCraft end
+    if logPrefixNeg == nil then logPrefixNeg = CA.SV.ContextMessages.CurrencyMessageDeconstruct end
     
     if bagId == BAG_BACKPACK then
     
@@ -3832,8 +3830,8 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             elseif stackCountChange < 0 then
                 local change = stackCountChange * -1
                 gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                logPrefix = ResolveCraftingUsed(itemType) and CA.SV.Inventory.LootMessageUse or logPrefixNeg
-                if logPrefix ~= CA.SV.Inventory.LootMessageUse or CA.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
+                logPrefix = ResolveCraftingUsed(itemType) and CA.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
+                if logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUse or CA.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
             end
@@ -3901,8 +3899,8 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             elseif stackCountChange < 0 then
                 local change = stackCountChange * -1
                 gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                logPrefix = ResolveCraftingUsed(itemType) and CA.SV.Inventory.LootMessageUse or logPrefixNeg
-                if logPrefix ~= CA.SV.Inventory.LootMessageUse or CA.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
+                logPrefix = ResolveCraftingUsed(itemType) and CA.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
+                if logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUse or CA.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
             end
@@ -3970,8 +3968,8 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
             elseif stackCountChange < 0 then
                 local change = stackCountChange * -1
                 gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                logPrefix = ResolveCraftingUsed(itemType) and CA.SV.Inventory.LootMessageUse or logPrefixNeg
-                if logPrefix ~= CA.SV.Inventory.LootMessageUse or CA.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
+                logPrefix = ResolveCraftingUsed(itemType) and CA.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
+                if logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUse or CA.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
             end
@@ -3998,17 +3996,17 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
 
         if stackCountChange > 0 then
             gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
-            logPrefix = ResolveCraftingUsed(itemType) and CA.SV.Inventory.LootMessageReceive or logPrefixPos
+            logPrefix = ResolveCraftingUsed(itemType) and CA.SV.ContextMessages.CurrencyMessageReceive or logPrefixPos
             change = stackCountChange
         end
         
         if stackCountChange < 0 then
             gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-            logPrefix = ResolveCraftingUsed(itemType) and CA.SV.Inventory.LootMessageUse or logPrefixNeg
+            logPrefix = ResolveCraftingUsed(itemType) and CA.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
             change = stackCountChange * -1
         end
 
-        if logPrefix ~= CA.SV.Inventory.LootMessageUse or CA.SV.Inventory.LootShowCraftUse then
+        if logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUse or CA.SV.Inventory.LootShowCraftUse then
             CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
         end
     end
@@ -4041,7 +4039,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
-            logPrefix = CA.SV.Inventory.LootMessageWithdraw
+            logPrefix = CA.SV.ContextMessages.CurrencyMessageWithdraw
             if InventoryOn then
                 CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
             end
@@ -4067,7 +4065,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             -- STACK COUNT INCREMENTED UP
             if stackCountChange > 0 then
                 gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
-                logPrefix = CA.SV.Inventory.LootMessageWithdraw
+                logPrefix = CA.SV.ContextMessages.CurrencyMessageWithdraw
                 if InventoryOn then
                     CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
                 end
@@ -4076,12 +4074,12 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                 local change = stackCountChange * -1
                 if g_itemWasDestroyed and CA.SV.Inventory.LootShowDestroy then
                     gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                    logPrefix = CA.SV.Inventory.LootMessageDestroy
+                    logPrefix = CA.SV.ContextMessages.CurrencyMessageDestroy
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
                 if InventoryOn and not g_itemWasDestroyed then
                     gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                    logPrefix = CA.SV.Inventory.LootMessageDeposit
+                    logPrefix = CA.SV.ContextMessages.CurrencyMessageDeposit
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
             end
@@ -4125,7 +4123,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             g_bankStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-            logPrefix = CA.SV.Inventory.LootMessageDeposit
+            logPrefix = CA.SV.ContextMessages.CurrencyMessageDeposit
             if BankOn then
                 CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
             end
@@ -4151,7 +4149,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             -- STACK COUNT INCREMENTED UP
             if stackCountChange > 0 then
                 gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                logPrefix = CA.SV.Inventory.LootMessageDeposit
+                logPrefix = CA.SV.ContextMessages.CurrencyMessageDeposit
                 if BankOn then
                     CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
                 end
@@ -4160,12 +4158,12 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                 local change = stackCountChange * -1
                 if g_itemWasDestroyed and CA.SV.Inventory.LootShowDestroy then
                     gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                    logPrefix = CA.SV.Inventory.LootMessageDestroy
+                    logPrefix = CA.SV.ContextMessages.CurrencyMessageDestroy
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
                 if BankOn and not g_itemWasDestroyed then
                     gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                    logPrefix = CA.SV.Inventory.LootMessageDeposit
+                    logPrefix = CA.SV.ContextMessages.CurrencyMessageDeposit
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
             end
@@ -4209,7 +4207,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             g_banksubStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-            logPrefix = CA.SV.Inventory.LootMessageDeposit
+            logPrefix = CA.SV.ContextMessages.CurrencyMessageDeposit
             if BankOn then
                 CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
             end
@@ -4235,7 +4233,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             -- STACK COUNT INCREMENTED UP
             if stackCountChange > 0 then
                 gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                logPrefix = CA.SV.Inventory.LootMessageDeposit
+                logPrefix = CA.SV.ContextMessages.CurrencyMessageDeposit
                 if BankOn then
                     CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
                 end
@@ -4244,12 +4242,12 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                 local change = stackCountChange * -1
                 if g_itemWasDestroyed and CA.SV.Inventory.LootShowDestroy then
                     gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                    logPrefix = CA.SV.Inventory.LootMessageDestroy
+                    logPrefix = CA.SV.ContextMessages.CurrencyMessageDestroy
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
                 if BankOn and not g_itemWasDestroyed then
                     gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                    logPrefix = CA.SV.Inventory.LootMessageDeposit
+                    logPrefix = CA.SV.ContextMessages.CurrencyMessageDeposit
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
             end
@@ -4287,11 +4285,11 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
         
         if stackCountChange < 1 then
             gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-            logPrefix = CA.SV.Inventory.LootMessageDeposit
+            logPrefix = CA.SV.ContextMessages.CurrencyMessageDeposit
             stack = stackCountChange * -1
         else
             gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
-            logPrefix = CA.SV.Inventory.LootMessageWithdraw
+            logPrefix = CA.SV.ContextMessages.CurrencyMessageWithdraw
             stack = stackCountChange
         end
         
@@ -4323,7 +4321,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
             itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
-            logPrefix = CA.SV.Inventory.LootMessageWithdrawGuild
+            logPrefix = CA.SV.ContextMessages.CurrencyMessageWithdrawGuild
             g_guildBankCarry = { }
             g_guildBankCarry.icon = icon
             g_guildBankCarry.stack = stack
@@ -4354,7 +4352,7 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
 
             if stackCountChange > 0 then -- STACK COUNT INCREMENTED UP
                 gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
-                logPrefix = CA.SV.Inventory.LootMessageWithdrawGuild
+                logPrefix = CA.SV.ContextMessages.CurrencyMessageWithdrawGuild
                 g_guildBankCarry = { }
                 g_guildBankCarry.icon = icon
                 g_guildBankCarry.stack = stack
@@ -4368,12 +4366,12 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
                 local change = stackCountChange * -1
                 if g_itemWasDestroyed and CA.SV.Inventory.LootShowDestroy then
                     gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                    logPrefix = CA.SV.Inventory.LootMessageDestroy
+                    logPrefix = CA.SV.ContextMessages.CurrencyMessageDestroy
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
                 if not g_itemWasDestroyed then
                     gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                    logPrefix = CA.SV.Inventory.LootMessageDepositGuild
+                    logPrefix = CA.SV.ContextMessages.CurrencyMessageDepositGuild
                     g_guildBankCarry = { }
                     g_guildBankCarry.icon = icon
                     g_guildBankCarry.stack = stack
@@ -4410,11 +4408,11 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
         
         if stackCountChange < 1 then
             gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-            logPrefix = CA.SV.Inventory.LootMessageDepositGuild
+            logPrefix = CA.SV.ContextMessages.CurrencyMessageDepositGuild
             stack = stackCountChange * -1
         else
             gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
-            logPrefix = CA.SV.Inventory.LootMessageWithdrawGuild
+            logPrefix = CA.SV.ContextMessages.CurrencyMessageWithdrawGuild
             stack = stackCountChange
         end
 
@@ -4477,11 +4475,10 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
             
             if stackCountChange == 0 then
                 gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
-                logPrefix = CA.SV.Inventory.LootMessageLaunder
+                logPrefix = CA.SV.Inventory.LootVendorCurrency and CA.SV.ContextMessages.CurrencyMessageLaunder or CA.SV.ContextMessages.CurrencyMessageLaunderNoV
                 if not g_weAreInAStore and CA.SV.Inventory.Loot then
                     local changeColor = CA.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
                     local type = "LUIE_CURRENCY_VENDOR"
-                    local messageChange = CA.SV.Inventory.LootMessageLaunder
                     
                     local parts = {ZO_LinkHandler_ParseLink(itemLink)}
                     parts[22] = "1"
@@ -4499,17 +4496,21 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
                             carriedItemTotal = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, CA.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
                         end
                     end
-                    
-                    g_savedPurchase.changeColor = changeColor
-                    g_savedPurchase.messageChange = messageChange
-                    g_savedPurchase.type = type
-                    g_savedPurchase.carriedItem = carriedItem
-                    g_savedPurchase.carriedItemTotal = carriedItemTotal
+					
+					if CA.SV.Inventory.LootVendorCurrency then
+						g_savedPurchase.changeColor = changeColor
+						g_savedPurchase.messageChange = logPrefix
+						g_savedPurchase.type = type
+						g_savedPurchase.carriedItem = carriedItem
+						g_savedPurchase.carriedItemTotal = carriedItemTotal
+					else
+						g_savedLaunder = { icon = icon, stack = 0, itemType = itemType, itemId = itemId, itemLink = itemLink, logPrefix = logPrefix, gainOrLoss = gainOrLoss }
+					end
                 end
             -- STACK COUNT INCREMENTED UP
             elseif stackCountChange > 0 then
                 gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
-                logPrefix = CA.SV.Inventory.LootMessageLaunder
+                logPrefix = CA.SV.Inventory.LootVendorCurrency and CA.SV.ContextMessages.CurrencyMessageLaunder or CA.SV.ContextMessages.CurrencyMessageLaunderNoV
                 if not g_weAreInAStore and CA.SV.Inventory.Loot then
                     --CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
                 end
@@ -4518,14 +4519,13 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
                 local change = stackCountChange * -1
                 if g_itemWasDestroyed and CA.SV.Inventory.LootShowDestroy then
                     gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                    logPrefix = CA.SV.Inventory.LootMessageDestroy
+                    logPrefix = CA.SV.ContextMessages.CurrencyMessageDestroy
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 else
                     gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
-                    logPrefix = CA.SV.Inventory.LootMessageLaunder
+                    logPrefix = CA.SV.Inventory.LootVendorCurrency and CA.SV.ContextMessages.CurrencyMessageLaunder or CA.SV.ContextMessages.CurrencyMessageLaunderNoV
                     local changeColor = CA.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
                     local type = "LUIE_CURRENCY_VENDOR"
-                    local messageChange = CA.SV.Inventory.LootMessageLaunder
 
                     local parts = {ZO_LinkHandler_ParseLink(itemLink)}
                     parts[22] = "1"
@@ -4543,12 +4543,16 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
                             carriedItemTotal = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, CA.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
                         end
                     end
-                    
-                    g_savedPurchase.changeColor = changeColor
-                    g_savedPurchase.messageChange = messageChange
-                    g_savedPurchase.type = type
-                    g_savedPurchase.carriedItem = carriedItem
-                    g_savedPurchase.carriedItemTotal = carriedItemTotal
+					
+                    if CA.SV.Inventory.LootVendorCurrency then
+						g_savedPurchase.changeColor = changeColor
+						g_savedPurchase.messageChange = logPrefix
+						g_savedPurchase.type = type
+						g_savedPurchase.carriedItem = carriedItem
+						g_savedPurchase.carriedItemTotal = carriedItemTotal
+					else
+						g_savedLaunder = { icon = icon, stack = change, itemType = itemType, itemId = itemId, itemLink = itemLink, logPrefix = logPrefix, gainOrLoss = gainOrLoss }
+					end
                 end
             end
             
@@ -4564,7 +4568,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
     
     if bagId == BAG_VIRTUAL then
         local gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
-        local logPrefix = CA.SV.Inventory.LootMessageLaunder
+        local logPrefix = CA.SV.Inventory.LootVendorCurrency and CA.SV.ContextMessages.CurrencyMessageLaunder or CA.SV.ContextMessages.CurrencyMessageLaunderNoV
         local itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
         local icon = GetItemLinkInfo(itemLink)
         local itemType = GetItemLinkItemType(itemLink) 
@@ -4572,9 +4576,9 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
         local itemQuality = GetItemLinkQuality(itemLink)
         
         if not g_weAreInAStore and CA.SV.Inventory.Loot then
+			local change = stackCountChange > 0 and stackCountChange or stackCountChange*-1
             local changeColor = CA.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
             local type = "LUIE_CURRENCY_VENDOR"
-            local messageChange = CA.SV.Inventory.LootMessageLaunder
             
             local parts = {ZO_LinkHandler_ParseLink(itemLink)}
             parts[22] = "1"
@@ -4593,11 +4597,15 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
                 end
             end
             
-            g_savedPurchase.changeColor = changeColor
-            g_savedPurchase.messageChange = messageChange
-            g_savedPurchase.type = type
-            g_savedPurchase.carriedItem = carriedItem
-            g_savedPurchase.carriedItemTotal = carriedItemTotal
+			if CA.SV.Inventory.LootVendorCurrency then
+				g_savedPurchase.changeColor = changeColor
+				g_savedPurchase.messageChange = logPrefix
+				g_savedPurchase.type = type
+				g_savedPurchase.carriedItem = carriedItem
+				g_savedPurchase.carriedItemTotal = carriedItemTotal
+			else
+				g_savedLaunder = { icon = icon, stack = change, itemType = itemType, itemId = itemId, itemLink = itemLink, logPrefix = logPrefix, gainOrLoss = gainOrLoss }
+			end
         end
     end
     
@@ -4663,7 +4671,7 @@ function CA.JusticeRemovePrint()
                 if justiceitem == nil then
                     local receivedBy = ""
                     local gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                    local logPrefix = CA.SV.Currency.CurrencyMessageConfiscate
+                    local logPrefix = CA.SV.ContextMessages.CurrencyMessageConfiscate
                     if CA.SV.Inventory.LootConfiscate then
                         CA.ItemPrinter(inventoryitem.icon, inventoryitem.stack, inventoryitem.itemType, inventoryitem.itemId, inventoryitem.itemLink, receivedBy, logPrefix, gainOrLoss, false)
                     end
@@ -4716,7 +4724,7 @@ function CA.JusticeRemovePrint()
                 if justiceitem == nil then
                     local receivedBy = ""
                     local gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                    local logPrefix = CA.SV.Currency.CurrencyMessageConfiscate
+                    local logPrefix = CA.SV.ContextMessages.CurrencyMessageConfiscate
                     if CA.SV.Inventory.LootConfiscate then
                         CA.ItemPrinter(inventoryitem.icon, inventoryitem.stack, inventoryitem.itemType, inventoryitem.itemId, inventoryitem.itemLink, receivedBy, logPrefix, gainOrLoss, false)
                     end
@@ -5031,7 +5039,7 @@ function CA.HookFunction()
 				local currencyName = strformat(CA.SV.Currency.CurrencyGoldName, 250)
 				local currencyTotal = CA.SV.Currency.CurrencyGoldShowTotal
 				local messageTotal = CA.SV.Currency.CurrencyMessageTotalGold
-				local messageChange = CA.SV.Currency.CurrencyMessageStable
+				local messageChange = CA.SV.ContextMessages.CurrencyMessageStable
 				CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
 			end
 			
@@ -5972,7 +5980,7 @@ function CA.HookFunction()
             for indexOut = 1,5 do
                 if g_tradeStacksOut[indexOut] ~= nil then
                     local gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                    local logPrefix = g_tradeTarget ~= "" and CA.SV.Inventory.LootMessageTradeOut or CA.SV.Inventory.LootMessageTradeOutNoName
+                    local logPrefix = g_tradeTarget ~= "" and CA.SV.ContextMessages.CurrencyMessageTradeOut or CA.SV.ContextMessages.CurrencyMessageTradeOutNoName
                     local item = g_tradeStacksOut[indexOut]
                     CA.ItemPrinter(item.icon, item.stack, item.itemType, item.itemId, item.itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
                 end
@@ -5981,7 +5989,7 @@ function CA.HookFunction()
             for indexIn = 1,5 do
                 if g_tradeStacksIn[indexIn] ~= nil then
                     local gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
-                    local logPrefix = g_tradeTarget ~= "" and CA.SV.Inventory.LootMessageTradeIn or CA.SV.Inventory.LootMessageTradeInNoName
+                    local logPrefix = g_tradeTarget ~= "" and CA.SV.ContextMessages.CurrencyMessageTradeIn or CA.SV.ContextMessages.CurrencyMessageTradeInNoName
                     local item = g_tradeStacksIn[indexIn]
                     CA.ItemPrinter(item.icon, item.stack, item.itemType, item.itemId, item.itemLink, g_tradeTarget, logPrefix, gainOrLoss, false)
                 end

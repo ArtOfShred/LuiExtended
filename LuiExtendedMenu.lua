@@ -1917,645 +1917,7 @@ function LUIE_CreateSettings()
 				width = "full",
 				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange and LUIE.ChatAnnouncements.SV.Currency.CurrencyWVShowTotal) end,
 				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageTotalWV,
-			},
-
-			{
-			type = "header",
-			name = GetString(SI_LUIE_LAM_CA_CURRENCY_CONTEXT),
-			width = "half",
-			},
-			
-			{
-				-- Receive Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RECEIVE),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RECEIVE_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageReceive end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageReceive = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageReceive,
-			},
-			{
-				-- Loot Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOOT),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOOT_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageLoot end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageLoot = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageLoot,
-			},
-			{
-				-- Earned Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EARN),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EARN_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageEarn end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageEarn = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageEarn,
-			},
-			{
-				-- Spend Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SPEND),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SPEND_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageSpend end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageSpend = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageSpend,
-			},
-			{
-				-- Lost Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOST),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOST_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageLost end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageLost = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageLost,
-			},
-			{
-				-- Steal
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STEAL),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STEAL_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageSteal end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageSteal = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageSteal,
-			},
-			{
-				-- Pickpocket Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_PICKPOCKET),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_PICKPOCKET_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessagePickpocket end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessagePickpocket = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessagePickpocket,
-			},
-			{
-				-- Bounty Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BOUNTY),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BOUNTY_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageBounty end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageBounty = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageBounty,
-			},
-			{
-				-- Confiscate Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CONFISCATE),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CONFISCATE_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageConfiscate end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageConfiscate = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageConfiscate,
-			},
-			{
-				-- Repair Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REPAIR),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REPAIR_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageRepair end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageRepair = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageRepair,
-			},
-			{
-				-- Trader Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADER),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADER_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTrader end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTrader = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageTrader,
-			},
-			{
-				-- Listing Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LISTING),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LISTING_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageListing end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageListing = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageListing,
-			},
-			{
-				-- Trade Message (In)
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTradeIn end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTradeIn = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageTradeIn,
-			},
-			{
-				-- Trade Message (In)
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTradeInNoName end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTradeInNoName = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageTradeInNoName,
-			},
-			{
-				-- Trade Message (Out)
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTradeOut end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTradeOut = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageTradeOut,
-			},
-			{
-				-- Trade Message (Out)
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT_NO_NAME),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT_NO_NAME_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTradeOutNoName end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTradeOutNoName = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageTradeOutNoName,
-			},
-			{
-				-- Mail Message (In)
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageMailIn end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageMailIn = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageMailIn,
-			},
-			{
-				-- Mail Message (In)
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN_NO_NAME),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN_NO_NAME_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageMailInNoName end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageMailInNoName = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageMailInNoName,
-			},
-			{
-				-- Mail Message (Out)
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageMailOut end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageMailOut = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageMailOut,
-			},
-			{
-				-- Mail Message (Out)
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT_NO_NAME),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT_NO_NAME_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageMailOutNoName end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageMailOutNoName = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageMailOutNoName,
-			},
-			{
-				-- Mail Message (COD Payment)
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILCOD),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILCOD_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageMailCOD end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageMailCOD = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageMailCOD,
-			},
-			{
-				-- Mail Message (Postage)
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_POSTAGE),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_POSTAGE_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessagePostage end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessagePostage = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessagePostage,
-			},
-			{
-				-- Deposit Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSIT),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSIT_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageDeposit end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageDeposit = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageDeposit,
-			},
-			{
-				-- Withdraw Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAW),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAW_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageWithdraw end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageWithdraw = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageWithdraw,
-			},
-			{
-				-- Deposit Guild Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSITGUILD),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSITGUILD_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageDepositGuild end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageDepositGuild = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageDepositGuild,
-			},
-			{
-				-- Withdraw Guild Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAWGUILD),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAWGUILD_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageWithdrawGuild end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageWithdrawGuild = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageWithdrawGuild,
-			},
-			{
-				-- Stable Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STABLE),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STABLE_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageStable end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageStable = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageStable,
-			},
-			{
-				-- Storage Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STORAGE),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STORAGE_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageStorage end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageStorage = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageStorage,
-			},
-			{
-				-- Wayshrine Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WAYSHRINE),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WAYSHRINE_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageWayshrine end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageWayshrine = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageWayshrine,
-			},
-			{
-				-- Unstuck Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UNSTUCK),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UNSTUCK_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageUnstuck end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageUnstuck = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageUnstuck,
-			},
-			{
-				-- Attributes Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_ATTRIBUTES),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_ATTRIBUTES_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageAttributes end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageAttributes = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageAttributes,
-			},
-			{
-				-- Champion Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CHAMPION),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CHAMPION_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageChampion end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageChampion = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageChampion,
-			},
-			{
-				-- Morphs Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MORPHS),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MORPHS_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageMorphs end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageMorphs = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageMorphs,
-			},
-			{
-				-- Skills Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SKILLS),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SKILLS_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageSkills end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageSkills = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageSkills,
-			},
-			{
-				-- Campaign Message
-				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CAMPAIGN),
-				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CAMPAIGN_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageCampaign end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageCampaign = value end,
-				width = "full",
-				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and
-					(
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyTVChange or
-						LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange or
-						LUIE.SV.ChatAnnouncements_Enable
-					)) end,
-				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageCampaign,
-			},
-			
+			},			
 		},
 	}
 		-- CA Loot Announcements Options Submenu
@@ -2776,7 +2138,7 @@ function LUIE_CreateSettings()
 				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootVendorTotalItems end,
 				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootVendorTotalItems = value end,
 				width = "full",
-				disabled = function() return not (LUIE.ChatAnnouncements.SV.Inventory.LootVendor and LUIE.ChatAnnouncements.SV.Inventory.LootTotal and LUIE.ChatAnnouncements.SV.Inventory.LootVendorCurrency and LUIE.SV.ChatAnnouncements_Enable) end,
+				disabled = function() return not (LUIE.ChatAnnouncements.SV.Inventory.LootVendor and LUIE.ChatAnnouncements.SV.Inventory.LootVendorCurrency and LUIE.SV.ChatAnnouncements_Enable) end,
 				default = LUIE.ChatAnnouncements.D.Inventory.LootVendorTotalItems,
 			},
 			{
@@ -2787,7 +2149,7 @@ function LUIE_CreateSettings()
 				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootVendorTotalCurrency end,
 				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootVendorTotalCurrency = value end,
 				width = "full",
-				disabled = function() return not (LUIE.ChatAnnouncements.SV.Inventory.LootVendor and LUIE.ChatAnnouncements.SV.Currency.CurrencyGoldShowTotal and LUIE.ChatAnnouncements.SV.Currency.CurrencyAPShowTotal and LUIE.ChatAnnouncements.SV.Currency.CurrencyTVShowTotal and LUIE.ChatAnnouncements.SV.Currency.CurrencyWVShowTotal and LUIE.ChatAnnouncements.SV.Inventory.LootVendorCurrency and LUIE.SV.ChatAnnouncements_Enable) end,
+				disabled = function() return not (LUIE.ChatAnnouncements.SV.Inventory.LootVendor and LUIE.ChatAnnouncements.SV.Inventory.LootVendorCurrency and LUIE.SV.ChatAnnouncements_Enable) end,
 				default = LUIE.ChatAnnouncements.D.Inventory.LootVendorTotalCurrency,
 			},
 			{
@@ -2856,455 +2218,692 @@ function LUIE_CreateSettings()
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
 				default = LUIE.ChatAnnouncements.D.Inventory.LootShowDisguise,
 			},
+		},
+	}		
+			-- CA Context Submenu
+			optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
+			type = "submenu",
+			name = GetString(SI_LUIE_LAM_CA_CURRENCY_CONTEXT_MENU),
+			controls = {
+			
+			{
+				-- Currency/Loot Message Color
+				type = "colorpicker",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_COLOR),
+				getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.Currency.CurrencyColor) end,
+				setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.Currency.CurrencyColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable or LUIE.ChatAnnouncements.SV.Currency.CurrencyContextColor end,
+				default = {r=LUIE.ChatAnnouncements.D.Currency.CurrencyColor[1], g=LUIE.ChatAnnouncements.D.Currency.CurrencyColor[2], b=LUIE.ChatAnnouncements.D.Currency.CurrencyColor[3]}
+			},
+			{
+				-- Use Context Color for Currency/Loot Messages
+				type = "checkbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_COLOR_CONTEXT),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_COLOR_CONTEXT_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyContextColor end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyContextColor = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.Currency.CurrencyContextColor,
+			},
+			{
+				-- Positive Change Color
+				type = "colorpicker",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_COLORUP)),
+				getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.Currency.CurrencyColorUp) end,
+				setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.Currency.CurrencyColorUp = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+				width = "full",
+				disabled = function() return not (LUIE.ChatAnnouncements.SV.Currency.CurrencyContextColor and LUIE.SV.ChatAnnouncements_Enable) end,
+				default = {r=LUIE.ChatAnnouncements.D.Currency.CurrencyColorUp[1], g=LUIE.ChatAnnouncements.D.Currency.CurrencyColorUp[2], b=LUIE.ChatAnnouncements.D.Currency.CurrencyColorUp[3]}
+			},
+			{
+				-- Negative Change Color
+				type = "colorpicker",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_COLORDOWN)),
+				getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.Currency.CurrencyColorDown) end,
+				setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.Currency.CurrencyColorDown = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+				width = "full",
+				disabled = function() return not (LUIE.ChatAnnouncements.SV.Currency.CurrencyContextColor and LUIE.SV.ChatAnnouncements_Enable) end,
+				default = {r=LUIE.ChatAnnouncements.D.Currency.CurrencyColorDown[1], g=LUIE.ChatAnnouncements.D.Currency.CurrencyColorDown[2], b=LUIE.ChatAnnouncements.D.Currency.CurrencyColorDown[3]}
+			},
 			
 			{
 			type = "header",
-			name = GetString(SI_LUIE_LAM_CA_CURRENCY_CONTEXT),
+			name = GetString(SI_LUIE_LAM_CA_CURRENCY_CONTEXT_HEADER),
 			width = "half",
 			},
-
 			{
 				-- Loot Message (Loot)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_LOOT),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_LOOT_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageLoot end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageLoot = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOOT),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOOT_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageLoot end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageLoot = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageLoot,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageLoot,
 			},
 			{
 				-- Loot Message (Receive)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_RECEIVE),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_RECEIVE_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageReceive end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageReceive = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RECEIVE),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RECEIVE_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageReceive = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageReceive,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageReceive,
+			},
+			{
+				-- Earned Message
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EARN),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EARN_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageEarn end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageEarn = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageEarn,
 			},
 			{
 				-- Loot Message (Steal)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_STEAL),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_STEAL_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageSteal end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageSteal = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STEAL),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STEAL_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageSteal end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageSteal = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageSteal,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageSteal,
 			},
 			{
 				-- Loot Message (Pickpocket)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_PICKPOCKET),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_PICKPOCKET_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessagePickpocket end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessagePickpocket = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_PICKPOCKET),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_PICKPOCKET_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessagePickpocket end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessagePickpocket = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessagePickpocket,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessagePickpocket,
 			},
 			{
 				-- Loot Message (Confiscate)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_CONFISCATE),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_CONFISCATE_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageConfiscate end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageConfiscate = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CONFISCATE),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CONFISCATE_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageConfiscate end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageConfiscate = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageConfiscate,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageConfiscate,
 			},
 			
 			{
 				-- Loot Message (TradeIn)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_TRADEIN),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_TRADEIN_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageTradeIn end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageTradeIn = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageTradeIn end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageTradeIn = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageTradeIn,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageTradeIn,
 			},
 			{
 				-- Loot Message (TradeIn)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_TRADEIN_NO_NAME),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_TRADEIN_NO_NAME_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageTradeInNoName end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageTradeInNoName = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageTradeInNoName end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageTradeInNoName = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageTradeInNoName,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageTradeInNoName,
 			},
 			{
 				-- Loot Message (TradeOut)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_TRADEOUT),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_TRADEOUT_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageTradeOut end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageTradeOut = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageTradeOut end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageTradeOut = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageTradeOut,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageTradeOut,
 			},
 			{
 				-- Loot Message (TradeOut)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_TRADEOUT_NO_NAME),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_TRADEOUT_NO_NAME_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageTradeOutNoName end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageTradeOutNoName = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT_NO_NAME),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADEOUT_NO_NAME_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageTradeOutNoName end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageTradeOutNoName = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageTradeOutNoName,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageTradeOutNoName,
 			},
 			{
 				-- Loot Message (MailIn)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_MAILIN),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_MAILIN_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageMailIn end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageMailIn = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailIn end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailIn = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageMailIn,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageMailIn,
 			},
 			{
 				-- Loot Message (MailIn)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_MAILIN_NO_NAME),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_MAILIN_NO_NAME_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageMailInNoName end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageMailInNoName = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN_NO_NAME),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILIN_NO_NAME_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailInNoName end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailInNoName = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageMailInNoName,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageMailInNoName,
 			},
 			{
 				-- Loot Message (MailOut)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_MAILOUT),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_MAILOUT_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageMailOut end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageMailOut = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOut end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOut = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageMailOut,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageMailOut,
 			},
 			{
 				-- Loot Message (MailOut)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_MAILOUT_NO_NAME),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_MAILOUT_NO_NAME_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageMailOutNoName end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageMailOutNoName = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT_NO_NAME),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MAILOUT_NO_NAME_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOutNoName end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageMailOutNoName = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageMailOutNoName,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageMailOutNoName,
 			},
 			
 			{
 				-- Loot Message (Deposit)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_DEPOSIT),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_DEPOSIT_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageDeposit end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageDeposit = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSIT),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSIT_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeposit = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageDeposit,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageDeposit,
 			},
 			{
 				-- Loot Message (Withdraw)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_WITHDRAW),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_WITHDRAW_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageWithdraw end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageWithdraw = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAW),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAW_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdraw end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdraw = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageWithdraw,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageWithdraw,
 			},
 			
 			{
 				-- Loot Message (Deposit Guild)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_DEPOSITGUILD),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_DEPOSITGUILD_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageDepositGuild end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageDepositGuild  = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSITGUILD),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSITGUILD_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageDepositGuild end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageDepositGuild  = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageDepositGuild ,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageDepositGuild ,
 			},
 			{
 				-- Loot Message (Withdraw Guild)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_WITHDRAWGUILD),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_WITHDRAWGUILD_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageWithdrawGuild  end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageWithdrawGuild  = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAWGUILD),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAWGUILD_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdrawGuild  end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageWithdrawGuild  = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageWithdrawGuild ,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageWithdrawGuild ,
 			},
+			{
+				-- Lost Message
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOST),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOST_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageLost end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageLost = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageLost,
+			},
+			{
+				-- Bounty Message
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BOUNTY),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BOUNTY_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageBounty end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageBounty = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageBounty,
+			},
+
+			{
+				-- Repair Message
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REPAIR),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REPAIR_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageRepair end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageRepair = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageRepair,
+			},
+			{
+				-- Trader Message
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADER),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_TRADER_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageTrader end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageTrader = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageTrader,
+			},
+			{
+				-- Listing Message
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LISTING),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LISTING_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageListing end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageListing = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageListing,
+			},
+			
 			{
 				-- Loot Message (Buy)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_BUY_VALUE),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_BUY_VALUE_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageBuy end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageBuy = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUY_VALUE),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUY_VALUE_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageBuy end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageBuy = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageBuy,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageBuy,
 			},                    
 			{
 				-- Loot Message (Buy) No Value
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_BUY),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_BUY_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageBuyNoV end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageBuyNoV = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUY),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUY_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageBuyNoV end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageBuyNoV = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageBuyNoV,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageBuyNoV,
 			},
 			{
 				-- Loot Message (Buyback)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_BUYBACK_VALUE),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_BUYBACK_VALUE_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageBuyback end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageBuyback = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUYBACK_VALUE),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUYBACK_VALUE_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageBuyback end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageBuyback = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageBuyback,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageBuyback,
 			},
 			{
 				-- Loot Message (Buyback) No Value
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_BUYBACK),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_BUYBACK_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageBuybackNoV end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageBuybackNoV = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUYBACK),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUYBACK_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageBuybackNoV end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageBuybackNoV = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageBuybackNoV,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageBuybackNoV,
 			},
 			{
 				-- Loot Message (Sell)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_SELL_VALUE),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_SELL_VALUE_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageSell end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageSell = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL_VALUE),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL_VALUE_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageSell end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageSell = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageSell,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageSell,
 			},
 			{
 				-- Loot Message (Sell) No Value
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_SELL),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_SELL_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageSellNoV end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageSellNoV = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageSellNoV end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageSellNoV = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageSellNoV,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageSellNoV,
 			},
 			{
 				-- Loot Message (Fence)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_FENCE),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_FENCE_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageFence end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageFence = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE_VALUE),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE_VALUE_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageFence end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageFence = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageFence,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageFence,
+			},
+			{
+				-- Loot Message (Fence)
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageFenceNoV end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageFenceNoV = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageFenceNoV,
 			},
 			{
 				-- Loot Message (Launder)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_LAUNDER),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_LAUNDER_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageLaunder end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageLaunder = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER_VALUE),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER_VALUE_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageLaunder end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageLaunder = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageLaunder,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageLaunder,
+			},
+			{
+				-- Loot Message (Launder)
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageLaunderNoV end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageLaunderNoV = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageLaunderNoV,
+			},
+			{
+				-- Stable Message
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STABLE),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STABLE_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageStable end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageStable = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageStable,
+			},
+			{
+				-- Storage Message
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STORAGE),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_STORAGE_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageStorage end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageStorage = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageStorage,
+			},
+			{
+				-- Wayshrine Message
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WAYSHRINE),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WAYSHRINE_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageWayshrine end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageWayshrine = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageWayshrine,
+			},
+			{
+				-- Unstuck Message
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UNSTUCK),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UNSTUCK_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageUnstuck end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageUnstuck = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageUnstuck,
+			},
+			{
+				-- Attributes Message
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_ATTRIBUTES),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_ATTRIBUTES_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageAttributes end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageAttributes = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageAttributes,
+			},
+			{
+				-- Champion Message
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CHAMPION),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CHAMPION_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageChampion end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageChampion = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageChampion,
+			},
+			{
+				-- Morphs Message
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MORPHS),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_MORPHS_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageMorphs end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageMorphs = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageMorphs,
+			},
+			{
+				-- Skills Message
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SKILLS),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SKILLS_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageSkills end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageSkills = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageSkills,
+			},
+			{
+				-- Campaign Message
+				type = "editbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CAMPAIGN),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CAMPAIGN_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageCampaign end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageCampaign = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageCampaign,
 			},
 			{
 				-- Loot Message (Use)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_USE),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_USE_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageUse end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageUse = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_USE),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_USE_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageUse = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageUse,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageUse,
 			},
 			{
 				-- Loot Message (Craft)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_CRAFT),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_CRAFT_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageCraft end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageCraft = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CRAFT),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CRAFT_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageCraft end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageCraft = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageCraft,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageCraft,
 			},
 			{
 				-- Loot Message (Extract)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_EXTRACT),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_EXTRACT_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageExtract end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageExtract = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EXTRACT),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EXTRACT_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageExtract end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageExtract = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageExtract,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageExtract,
 			},
 			{
 				-- Loot Message (Upgrade)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_UPGRADE),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_UPGRADE_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageUpgrade end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageUpgrade = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgrade end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgrade = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageUpgrade,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageUpgrade,
 			},
 			{
 				-- Loot Message (Upgrade)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_UPGRADE_FAIL),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_UPGRADE_FAIL_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageUpgradeFail end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageUpgradeFail = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE_FAIL),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE_FAIL_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgradeFail end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageUpgradeFail = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageUpgradeFail,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageUpgradeFail,
 			},                         
 			{
 				-- Loot Message (Refine)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_REFINE),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_REFINE_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageRefine end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageRefine = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REFINE),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REFINE_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageRefine end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageRefine = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageRefine,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageRefine,
 			},  
 			{
 				-- Loot Message (Deconstruct)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_DECONSTRUCT),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_DECONSTRUCT_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageDeconstruct end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageDeconstruct = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DECONSTRUCT),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DECONSTRUCT_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeconstruct end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageDeconstruct = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageDeconstruct,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageDeconstruct,
 			},  
 			{
 				-- Loot Message (Research)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_RESEARCH),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_RESEARCH_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageResearch end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageResearch = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RESEARCH),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RESEARCH_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageResearch end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageResearch = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageResearch,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageResearch,
 			},  
 			{
 				-- Loot Message (Destroy)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_DESTROY),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_DESTROY_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageDestroy end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageDestroy = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DESTROY),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DESTROY_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageDestroy end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageDestroy = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageDestroy,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageDestroy,
 			},  
 			{
 				-- Loot Message (Lockpick)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_LOCKPICK),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_LOCKPICK_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageLockpick end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageLockpick = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOCKPICK),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOCKPICK_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageLockpick end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageLockpick = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageLockpick,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageLockpick,
 			},
 			{
 				-- Loot Message Removed (Quest)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_REMOVE),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_REMOVE_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageRemove end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageRemove = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REMOVE),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REMOVE_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageRemove end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageRemove = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageRemove,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageRemove,
 			},
 			{
 				-- Loot Message Group
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_GROUP),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_GROUP_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageGroup end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageGroup = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_GROUP),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_GROUP_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageGroup end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageGroup = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageGroup,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageGroup,
 			},
 			{
 				-- Loot Message (Disguise Equip)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_DISGUISE_EQUIP),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_DISGUISE_EQUIP_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageDisguiseEquip end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageDisguiseEquip = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageDisguiseEquip end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageDisguiseEquip = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageDisguiseEquip,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageDisguiseEquip,
 			},     
 			{
 				-- Loot Message (Disguise Remove)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_DISGUISE_REMOVE),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_DISGUISE_REMOVE_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageDisguiseRemove end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageDisguiseRemove = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageDisguiseRemove end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageDisguiseRemove = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageDisguiseRemove,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageDisguiseRemove,
 			},     
 			{
 				-- Loot Message (Disguise Destroy)
 				type = "editbox",
-				name = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_DISGUISE_DESTROY),
-				tooltip = GetString(SI_LUIE_LAM_CA_LOOT_MESSAGE_DISGUISE_DESTROY_TP),
-				getFunc = function() return LUIE.ChatAnnouncements.SV.Inventory.LootMessageDisguiseDestroy end,
-				setFunc = function(value) LUIE.ChatAnnouncements.SV.Inventory.LootMessageDisguiseDestroy = value end,
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageDisguiseDestroy end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.ContextMessages.CurrencyMessageDisguiseDestroy = value end,
 				width = "full",
 				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-				default = LUIE.ChatAnnouncements.D.Inventory.LootMessageDisguiseDestroy,
+				default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageDisguiseDestroy,
 			},     
 			
 			
@@ -6323,49 +5922,7 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.TodoLater end,
         default = {r=LUIE.ChatAnnouncements.D.Notify.NotificationColor[1], g=LUIE.ChatAnnouncements.D.Notify.NotificationColor[2], b=LUIE.ChatAnnouncements.D.Notify.NotificationColor[3]}
     }
-	]]--
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
-        -- Currency/Loot Message Color
-        type = "colorpicker",
-        name = GetString(SI_LUIE_LAM_CA_CURRENCY_COLOR),
-        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.Currency.CurrencyColor) end,
-        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.Currency.CurrencyColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
-        width = "full",
-        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable or LUIE.ChatAnnouncements.SV.Currency.CurrencyContextColor end,
-        default = {r=LUIE.ChatAnnouncements.D.Currency.CurrencyColor[1], g=LUIE.ChatAnnouncements.D.Currency.CurrencyColor[2], b=LUIE.ChatAnnouncements.D.Currency.CurrencyColor[3]}
-    }
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
-        -- Use Context Color for Currency/Loot Messages
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_CA_CURRENCY_COLOR_CONTEXT),
-        tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_COLOR_CONTEXT_TP),
-        getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyContextColor end,
-        setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyContextColor = value end,
-        width = "full",
-        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-        default = LUIE.ChatAnnouncements.D.Currency.CurrencyContextColor,
-    }
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
-        -- Positive Change Color
-        type = "colorpicker",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_COLORUP)),
-        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.Currency.CurrencyColorUp) end,
-        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.Currency.CurrencyColorUp = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
-        width = "full",
-        disabled = function() return not (LUIE.ChatAnnouncements.SV.Currency.CurrencyContextColor and LUIE.SV.ChatAnnouncements_Enable) end,
-        default = {r=LUIE.ChatAnnouncements.D.Currency.CurrencyColorUp[1], g=LUIE.ChatAnnouncements.D.Currency.CurrencyColorUp[2], b=LUIE.ChatAnnouncements.D.Currency.CurrencyColorUp[3]}
-    }
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
-        -- Negative Change Color
-        type = "colorpicker",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_COLORDOWN)),
-        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.Currency.CurrencyColorDown) end,
-        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.Currency.CurrencyColorDown = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
-        width = "full",
-        disabled = function() return not (LUIE.ChatAnnouncements.SV.Currency.CurrencyContextColor and LUIE.SV.ChatAnnouncements_Enable) end,
-        default = {r=LUIE.ChatAnnouncements.D.Currency.CurrencyColorDown[1], g=LUIE.ChatAnnouncements.D.Currency.CurrencyColorDown[2], b=LUIE.ChatAnnouncements.D.Currency.CurrencyColorDown[3]}
-    }
-    
+	]]--    
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         -- Character Name Bracket
         type = "dropdown",
