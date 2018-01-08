@@ -349,10 +349,34 @@ CA.D = {
 		CurrencyTVName                  = GetString(SI_LUIE_CA_CURRENCY_TELVAR_STONE),
 		CurrencyTVShowTotal             = false,
 		CurrencyTVThrottle              = 0,
+		
 		CurrencyWVChange                = true,
 		CurrencyWVColor                 = { 1, 1, 1, 1 },
 		CurrencyWVName                  = GetString(SI_LUIE_CA_CURRENCY_WRIT_VOUCHER),
 		CurrencyWVShowTotal             = false,
+		
+		CurrencyTransmuteChange         = true,
+		CurrencyTransmuteColor          = { 1, 1, 1, 1 },
+		CurrencyTransmuteName           = GetString(SI_LUIE_CA_CURRENCY_TRANSMUTE_CRYSTAL),
+		CurrencyTransmuteShowTotal      = false,
+		
+		CurrencyCrownsChange            = false,
+		CurrencyCrownsColor             = { 1, 1, 1, 1 },
+		CurrencyCrownsName              = GetString(SI_LUIE_CA_CURRENCY_CROWN),
+		CurrencyCrownsShowTotal         = false,
+		
+		CurrencyCrownGemsChange         = false,
+		CurrencyCrownGemsColor          = { 160/255, 46/255, 247/255, 1 },
+		CurrencyCrownGemsName           = GetString(SI_LUIE_CA_CURRENCY_CROWN_GEM),
+		CurrencyCrownGemsShowTotal      = false,
+		
+		CurrencyMessageTotalAP          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP),
+		CurrencyMessageTotalGold        = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGOLD),
+		CurrencyMessageTotalTV          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTV),
+		CurrencyMessageTotalWV          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALWV),
+		CurrencyMessageTotalTransmute   = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTRANSMUTE),
+		CurrencyMessageTotalCrowns      = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALCROWNS),
+		CurrencyMessageTotalCrownGems   = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGEMS),
 	},
     
     -- LOOT
@@ -396,10 +420,6 @@ CA.D = {
 		CurrencyMessagePickpocket       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_PICKPOCKET),
 		CurrencyMessageReceive          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_RECEIVE),
 		CurrencyMessageSpend            = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_SPEND),
-		CurrencyMessageTotalAP          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP),
-		CurrencyMessageTotalGold        = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGOLD),
-		CurrencyMessageTotalTV          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTV),
-		CurrencyMessageTotalWV          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALWV),
 		CurrencyMessageTradeIn          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN),
 		CurrencyMessageTradeInNoName    = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEIN_NO_NAME),
 		CurrencyMessageTradeOut         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TRADEOUT),
@@ -584,6 +604,9 @@ local CurrencyGoldColorize
 local CurrencyAPColorize
 local CurrencyTVColorize
 local CurrencyWVColorize
+local CurrencyTransmuteColorize
+local CurrencyCrownsColorize
+local CurrencyCrownGemsColorize
 
 -- Disguise
 local DisguiseAlertColorize
@@ -808,6 +831,9 @@ function CA.RegisterColorEvents()
     CurrencyAPColorize = ZO_ColorDef:New(unpack(CA.SV.Currency.CurrencyAPColor))
     CurrencyTVColorize = ZO_ColorDef:New(unpack(CA.SV.Currency.CurrencyTVColor))
     CurrencyWVColorize = ZO_ColorDef:New(unpack(CA.SV.Currency.CurrencyWVColor))
+    CurrencyTransmuteColorize = ZO_ColorDef:New(unpack(CA.SV.Currency.CurrencyTransmuteColor))
+    CurrencyCrownsColorize = ZO_ColorDef:New(unpack(CA.SV.Currency.CurrencyCrownsColor))
+    CurrencyCrownGemsColorize = ZO_ColorDef:New(unpack(CA.SV.Currency.CurrencyCrownGemsColor))
     DisguiseAlertColorize = ZO_ColorDef:New(unpack(CA.SV.Notify.DisguiseAlertColor))
     AchievementColorize1 = ZO_ColorDef:New(unpack(CA.SV.Achievement.AchievementColor1))
     AchievementColorize2 = ZO_ColorDef:New(unpack(CA.SV.Achievement.AchievementColor2))
@@ -913,7 +939,7 @@ function CA.RegisterXPEvents()
 end
 
 function CA.RegisterGoldEvents()
-	EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CARRIED_CURRENCY_UPDATE)
+	EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CURRENCY_UPDATE)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX)
@@ -922,7 +948,7 @@ function CA.RegisterGoldEvents()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_REMOVED)
 
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CARRIED_CURRENCY_UPDATE, CA.OnCurrencyUpdate)
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CURRENCY_UPDATE, CA.OnCurrencyUpdate)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, CA.OnMailAttach)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, CA.OnMailAttachRemove)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, CA.OnMailCloseBox)
@@ -1824,7 +1850,9 @@ end
 
     
 
-function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
+function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, oldValue, reason)
+	if (currencyLocation ~= CURRENCY_LOCATION_CHARACTER and currencyLocation ~= CURRENCY_LOCATION_ACCOUNT) then return end
+
     local UpOrDown = newValue - oldValue
     
     --[[ DEBUG
@@ -1939,6 +1967,30 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
         currencyName = strformat(CA.SV.Currency.CurrencyWVName, UpOrDown)
         currencyTotal = CA.SV.Currency.CurrencyWVShowTotal
         messageTotal = CA.SV.Currency.CurrencyMessageTotalWV
+	elseif currency == CURT_CHAOTIC_CREATIA then -- Transmute Crystals
+		d(reason)
+		if not CA.SV.Currency.CurrencyTransmuteChange then return end
+        currencyTypeColor = CurrencyTransmuteColorize:ToHex()
+        currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_seedcrystal_16.dds|t" or ""
+        currencyName = strformat(CA.SV.Currency.CurrencyTransmuteName, UpOrDown)
+        currencyTotal = CA.SV.Currency.CurrencyTransmuteShowTotal
+        messageTotal = CA.SV.Currency.CurrencyMessageTotalTransmute
+	elseif currency == CURT_CROWNS then -- Crowns
+		d(reason)
+		if not CA.SV.Currency.CurrencyCrownsChange then return end
+        currencyTypeColor = CurrencyCrownsColorize:ToHex()
+        currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_crown.dds|t" or ""
+        currencyName = strformat(CA.SV.Currency.CurrencyCrownsName, UpOrDown)
+        currencyTotal = CA.SV.Currency.CurrencyCrownsShowTotal
+        messageTotal = CA.SV.Currency.CurrencyMessageTotalCrowns
+	elseif currency == CURT_CROWN_GEMS then -- Crown Gems
+		d(reason)
+		if not CA.SV.Currency.CurrencyCrownGemsChange then return end
+        currencyTypeColor = CurrencyCrownGemsColorize:ToHex()
+        currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_crown_gems.dds|t" or ""
+        currencyName = strformat(CA.SV.Currency.CurrencyCrownGemsName, UpOrDown)
+        currencyTotal = CA.SV.Currency.CurrencyCrownGemsShowTotal
+        messageTotal = CA.SV.Currency.CurrencyMessageTotalCrownGems
     else -- If for some reason there is no currency type, end the function now
         return
     end
@@ -2147,7 +2199,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, newValue, oldValue, reason)
     elseif reason == 20 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 22 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 23 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 24 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
+    elseif reason == 24 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- Craft (Transmute)
     elseif reason == 25 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 26 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 27 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
@@ -6026,8 +6078,8 @@ function CA.HookFunction()
 					g_queuedMessages[i].type = "GARBAGE"
 				end
 			end
-			EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CARRIED_CURRENCY_UPDATE)
-			zo_callLater(function() EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CARRIED_CURRENCY_UPDATE, CA.OnCurrencyUpdate) end, 500)
+			EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CURRENCY_UPDATE)
+			zo_callLater(function() EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CURRENCY_UPDATE, CA.OnCurrencyUpdate) end, 500)
 		end
 
         if CA.SV.Notify.NotificationMailCA then

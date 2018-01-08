@@ -1917,7 +1917,172 @@ function LUIE_CreateSettings()
 				width = "full",
 				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange and LUIE.ChatAnnouncements.SV.Currency.CurrencyWVShowTotal) end,
 				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageTotalWV,
-			},			
+			},
+
+			{
+				-- Show Transmute Crystals
+				type = "checkbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyTransmuteChange end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyTransmuteChange = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.Currency.CurrencyTransmuteChange,
+			},
+			{
+				-- Show Transmute Crystals Color
+				type = "colorpicker",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERCOLOR)),
+				getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.Currency.CurrencyTransmuteColor) end,
+				setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.Currency.CurrencyTransmuteColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+				width = "full",
+				disabled = function() return not (LUIE.ChatAnnouncements.SV.Currency.CurrencyTransmuteChange and LUIE.SV.ChatAnnouncements_Enable) end,
+				default = {r=LUIE.ChatAnnouncements.D.Currency.CurrencyTransmuteColor[1], g=LUIE.ChatAnnouncements.D.Currency.CurrencyTransmuteColor[2], b=LUIE.ChatAnnouncements.D.Currency.CurrencyTransmuteColor[3]}
+			},
+			{
+				-- Show Transmute Crystals Name
+				type = "editbox",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME)),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyTransmuteName end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyTransmuteName = value end,
+				width = "full",
+				disabled = function() return not (LUIE.ChatAnnouncements.SV.Currency.CurrencyTransmuteChange and LUIE.SV.ChatAnnouncements_Enable) end,
+				default = LUIE.ChatAnnouncements.D.Currency.CurrencyTransmuteName,
+			},
+			{
+				-- Show Transmute Crystals Total
+				type = "checkbox",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL)),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyTransmuteShowTotal end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyTransmuteShowTotal = value end,
+				width = "full",
+				disabled = function() return not (LUIE.ChatAnnouncements.SV.Currency.CurrencyTransmuteChange and LUIE.SV.ChatAnnouncements_Enable) end,
+				default = LUIE.ChatAnnouncements.D.Currency.CurrencyTransmuteShowTotal,
+			},
+			{
+				-- Total Currency Message (Transmute Crystals)
+				type = "editbox",
+				name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG)),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTotalTransmute end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTotalTransmute = value end,
+				width = "full",
+				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Currency.CurrencyTransmuteChange and LUIE.ChatAnnouncements.SV.Currency.CurrencyTransmuteShowTotal) end,
+				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageTotalTransmute,
+			},
+			
+			{
+				-- Show Crowns
+				type = "checkbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownsChange end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownsChange = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.Currency.CurrencyCrownsChange,
+			},
+			{
+				-- Show Crowns Color
+				type = "colorpicker",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERCOLOR)),
+				getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownsColor) end,
+				setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownsColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+				width = "full",
+				disabled = function() return not (LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownsChange and LUIE.SV.ChatAnnouncements_Enable) end,
+				default = {r=LUIE.ChatAnnouncements.D.Currency.CurrencyCrownsColor[1], g=LUIE.ChatAnnouncements.D.Currency.CurrencyCrownsColor[2], b=LUIE.ChatAnnouncements.D.Currency.CurrencyCrownsColor[3]}
+			},
+			{
+				-- Show Crowns Name
+				type = "editbox",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME)),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownsName end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownsName = value end,
+				width = "full",
+				disabled = function() return not (LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownsChange and LUIE.SV.ChatAnnouncements_Enable) end,
+				default = LUIE.ChatAnnouncements.D.Currency.CurrencyCrownsName,
+			},
+			{
+				-- Show Crowns Total
+				type = "checkbox",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL)),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownsShowTotal end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownsShowTotal = value end,
+				width = "full",
+				disabled = function() return not (LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownsChange and LUIE.SV.ChatAnnouncements_Enable) end,
+				default = LUIE.ChatAnnouncements.D.Currency.CurrencyCrownsShowTotal,
+			},
+			{
+				-- Total Currency Message (Crowns)
+				type = "editbox",
+				name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG)),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTotalCrowns end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTotalCrowns = value end,
+				width = "full",
+				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownsChange and LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownsShowTotal) end,
+				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageTotalCrowns,
+			},
+			
+			{
+				-- Show Crown Gems
+				type = "checkbox",
+				name = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownGemsChange end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownGemsChange = value end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.Currency.CurrencyCrownGemsChange,
+			},
+			{
+				-- Show Crown Gems Color
+				type = "colorpicker",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERCOLOR)),
+				getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownGemsColor) end,
+				setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownGemsColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+				width = "full",
+				disabled = function() return not (LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownGemsChange and LUIE.SV.ChatAnnouncements_Enable) end,
+				default = {r=LUIE.ChatAnnouncements.D.Currency.CurrencyCrownGemsColor[1], g=LUIE.ChatAnnouncements.D.Currency.CurrencyCrownGemsColor[2], b=LUIE.ChatAnnouncements.D.Currency.CurrencyCrownGemsColor[3]}
+			},
+			{
+				-- Show Crown Gems Name
+				type = "editbox",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME)),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownGemsName end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownGemsName = value end,
+				width = "full",
+				disabled = function() return not (LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownGemsChange and LUIE.SV.ChatAnnouncements_Enable) end,
+				default = LUIE.ChatAnnouncements.D.Currency.CurrencyCrownGemsName,
+			},
+			{
+				-- Show Crown Gems Total
+				type = "checkbox",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL)),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownGemsShowTotal end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownGemsShowTotal = value end,
+				width = "full",
+				disabled = function() return not (LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownGemsChange and LUIE.SV.ChatAnnouncements_Enable) end,
+				default = LUIE.ChatAnnouncements.D.Currency.CurrencyCrownGemsShowTotal,
+			},
+			{
+				-- Total Currency Message (Crown Gems)
+				type = "editbox",
+				name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG)),
+				tooltip = GetString(SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG_TP),
+				getFunc = function() return LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTotalCrownGems end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.Currency.CurrencyMessageTotalCrownGems = value end,
+				width = "full",
+				disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownGemsChange and LUIE.ChatAnnouncements.SV.Currency.CurrencyCrownGemsShowTotal) end,
+				default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageTotalCrownGems,
+			},
 		},
 	}
 		-- CA Loot Announcements Options Submenu

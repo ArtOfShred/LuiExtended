@@ -70,6 +70,9 @@ ZO_CreateStringId("SI_LUIE_CA_CURRENCY_GOLD",                           " <<1[Go
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_ALLIANCE_POINT",                 " <<1[Alliance Point/Alliance Points]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_TELVAR_STONE",                   " <<1[Tel Var Stone/Tel Var Stones]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_WRIT_VOUCHER",                   " <<1[Writ Voucher/Writ Vouchers]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_TRANSMUTE_CRYSTAL",              " <<1[Transmute Crystal/Transmute Crystals]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_CROWN",                   		" <<1[Crown/Crowns]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_CROWN_GEM",                   	" <<1[Crown Gem/Crown Gems]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
 
 ZO_CreateStringId("SI_LUIE_CA_DEBUG_MSG_CURRENCY",                      "Currency Change Reason <<1>> Triggered - Please post on the LUI Extended comments section on ESOUI.com describing what caused this message. Thanks!")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_ACCEPTED",                    "Duel challenge accepted.")
@@ -348,6 +351,9 @@ ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGOLD",              "Total G
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP",                "Total AP: %s")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTV",                "Total TV: %s")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALWV",                "Total Vouchers: %s")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTRANSMUTE",         "Total Transmute Crystals: %s")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALCROWNS",            "Total Crowns: %s")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGEMS",              "Total Crown Gems: %s")
 
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_TOTAL",                  	"New Total:")
 
