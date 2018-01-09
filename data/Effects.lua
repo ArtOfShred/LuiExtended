@@ -372,7 +372,7 @@ E.EffectOverrideByName = {
                 
     -- HUMAN NPCS
     [29521] =   {
-                ['Aura of Protection'] = { hide = true } -- Aura of Protection (Aura of Protection)
+                ['Aura of Protection'] = { hide = true } -- Aura of Protection (Aura of Protection) -- Hides this buff only on the Goblin Aura of Protection to prevent duplicate display
                 },
                 
     -- ANIMALS
@@ -532,8 +532,8 @@ E.EffectForcedType = { --Force a change to the type buff container
     [86976] = "short", -- Spriggan Aura (Wild Hunt Leaf-Dance Aura)
     [86978] = "short", -- Grand Spriggan Aura (Floral Swirl Aura)
     
-    [97900] = "short", -- Domihaus (Domihaus) 
-    [97896] = "short", -- Domihaus (Domihaus) 
+    [97900] = "short", -- Domihaus (Domihaus)
+    [97896] = "short", -- Domihaus (Domihaus)
     
     [59586] = "short", -- Lord Warden (Lord Warden)
     

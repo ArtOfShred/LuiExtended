@@ -339,6 +339,7 @@ CA.D = {
 		CurrencyGoldColor               = { 1, 1, 0.2, 1 },
 		CurrencyGoldFilter              = 0,
 		CurrencyGoldHideAH              = false,
+		CurrencyGoldHideListingAH       = false,
 		CurrencyGoldName                = GetString(SI_LUIE_CA_CURRENCY_GOLD),
 		CurrencyGoldShowTotal           = false,
 		CurrencyGoldThrottle            = true,
@@ -366,9 +367,14 @@ CA.D = {
 		CurrencyCrownsShowTotal         = false,
 		
 		CurrencyCrownGemsChange         = false,
-		CurrencyCrownGemsColor          = { 160/255, 46/255, 247/255, 1 },
+		CurrencyCrownGemsColor          = { 244/255, 56/255, 247/255, 1 },
 		CurrencyCrownGemsName           = GetString(SI_LUIE_CA_CURRENCY_CROWN_GEM),
 		CurrencyCrownGemsShowTotal      = false,
+		
+		CurrencyOutfitTokenChange       = true,
+		CurrencyOutfitTokenColor        = { 181/255, 243/255, 156/255, 1 },
+		CurrencyOutfitTokenName         = GetString(SI_LUIE_CA_CURRENCY_OUTFIT_TOKENS),
+		CurrencyOutfitTokenShowTotal    = false,
 		
 		CurrencyMessageTotalAP          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP),
 		CurrencyMessageTotalGold        = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGOLD),
@@ -377,6 +383,7 @@ CA.D = {
 		CurrencyMessageTotalTransmute   = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTRANSMUTE),
 		CurrencyMessageTotalCrowns      = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALCROWNS),
 		CurrencyMessageTotalCrownGems   = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGEMS),
+		CurrencyMessageTotalOutfitToken = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALOUTFITTOKENS),
 	},
     
     -- LOOT
@@ -412,6 +419,7 @@ CA.D = {
 	ContextMessages = {
 		CurrencyMessageConfiscate       = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_CONFISCATE),
 		CurrencyMessageDeposit          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSIT),
+		CurrencyMessageDepositStorage   = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSITSTORAGE),
 		CurrencyMessageDepositGuild     = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSITGUILD),
 		CurrencyMessageEarn             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_EARN),
 		CurrencyMessageLoot             = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_LOOT),
@@ -431,6 +439,7 @@ CA.D = {
 		CurrencyMessageMailCOD          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_MAILCOD),
 		CurrencyMessagePostage          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_POSTAGE),
 		CurrencyMessageWithdraw         = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAW),
+		CurrencyMessageWithdrawStorage  = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAWSTORAGE),
 		CurrencyMessageWithdrawGuild    = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAWGUILD),
 		CurrencyMessageStable           = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_STABLE),
 		CurrencyMessageStorage          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_STORAGE),
@@ -546,8 +555,10 @@ local g_currentDisguise             = nil           -- Holds current disguise it
 local g_disguiseState               = nil           -- Holds current disguise state
 
 -- Indexing
+local g_bankBag						
 local g_bankStacks                  = {}            -- Bank Inventory Index 
 local g_banksubStacks               = {}            -- Subscriber Bank Inventory Index
+local g_houseBags					= {}			-- House Storage Index
 local g_equippedStacks              = {}            -- Equipped Items Index
 local g_inventoryStacks             = {}            -- Inventory Index
 local g_JusticeStacks               = {}            -- Justice Items Index (only filled as a comparison table when items are confiscated)
@@ -1848,9 +1859,10 @@ function CA.PointRespecDisplay(respecType)
     
 end
 
-    
+    --ZO_LocalizeDecimalNumber
 
 function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, oldValue, reason)
+
 	if (currencyLocation ~= CURRENCY_LOCATION_CHARACTER and currencyLocation ~= CURRENCY_LOCATION_ACCOUNT) then return end
 
     local UpOrDown = newValue - oldValue
@@ -1867,7 +1879,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
         return
     end
     
-    local formattedValue = ZO_LocalizeDecimalNumber(newValue)
+    local formattedValue = newValue
     local changeColor                                                   -- Gets the value from CurrencyUpColorize or CurrencyDownColorize to color strings
     local changeType                                                    -- Amount of currency gained or lost
     local currencyTypeColor                                             -- Determines color to use for colorization of currency based off currency type.
@@ -1967,8 +1979,14 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
         currencyName = strformat(CA.SV.Currency.CurrencyWVName, UpOrDown)
         currencyTotal = CA.SV.Currency.CurrencyWVShowTotal
         messageTotal = CA.SV.Currency.CurrencyMessageTotalWV
+	elseif currency == CURT_STYLE_STONES then -- Outfit Tokens
+		if not CA.SV.Currency.CurrencyOutfitTokenChange then return end
+        currencyTypeColor = CurrencyOutfitTokenColorize:ToHex()
+        currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_magesguild.dds|t" or ""
+        currencyName = strformat(CA.SV.Currency.CurrencyOutfitTokenName, UpOrDown)
+        currencyTotal = CA.SV.Currency.CurrencyOutfitTokenShowTotal
+        messageTotal = CA.SV.Currency.CurrencyMessageTotalOutfitToken
 	elseif currency == CURT_CHAOTIC_CREATIA then -- Transmute Crystals
-		d(reason)
 		if not CA.SV.Currency.CurrencyTransmuteChange then return end
         currencyTypeColor = CurrencyTransmuteColorize:ToHex()
         currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_seedcrystal_16.dds|t" or ""
@@ -1976,7 +1994,6 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
         currencyTotal = CA.SV.Currency.CurrencyTransmuteShowTotal
         messageTotal = CA.SV.Currency.CurrencyMessageTotalTransmute
 	elseif currency == CURT_CROWNS then -- Crowns
-		d(reason)
 		if not CA.SV.Currency.CurrencyCrownsChange then return end
         currencyTypeColor = CurrencyCrownsColorize:ToHex()
         currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_crown.dds|t" or ""
@@ -1984,7 +2001,6 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
         currencyTotal = CA.SV.Currency.CurrencyCrownsShowTotal
         messageTotal = CA.SV.Currency.CurrencyMessageTotalCrowns
 	elseif currency == CURT_CROWN_GEMS then -- Crown Gems
-		d(reason)
 		if not CA.SV.Currency.CurrencyCrownGemsChange then return end
         currencyTypeColor = CurrencyCrownGemsColorize:ToHex()
         currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_crown_gems.dds|t" or ""
@@ -2104,11 +2120,15 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
     -- Wayshrine (19)
     elseif reason == 19 then
         messageChange = CA.SV.ContextMessages.CurrencyMessageWayshrine
+	-- Craft (24)
+	elseif reason == 24 then
+		messageChange = CA.SV.ContextMessages.CurrencyMessageUse
     -- Repairs (29)
     elseif reason == 29 then
         messageChange = CA.SV.ContextMessages.CurrencyMessageRepair
     -- Listing Fee (33)
     elseif reason == 33 then
+		if CA.SV.Currency.CurrencyGoldHideListingAH then return end
         messageChange = CA.SV.ContextMessages.CurrencyMessageListing
     -- Respec Skills (44)
     elseif reason == 44 then
@@ -2189,6 +2209,12 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
     -- Died to Player/NPC (67)
     elseif reason == 67 then
         messageChange = CA.SV.ContextMessages.CurrencyMessageLost
+	-- Crown Crate Duplicate (69), Item Converted To Gems (70), Crowns Purchased (73)
+	elseif reason == 69 or reason == 70 or reason == 73 then
+		messageChange = CA.SV.ContextMessages.CurrencyMessageReceive
+	-- Purchased with Gems (71), Purchased with Crowns (72)
+	elseif reason == 71 or reason == 72 then
+		messageChange = CA.SV.ContextMessages.CurrencyMessageSpend
 
     -- ==============================================================================
     -- DEBUG EVENTS WE DON'T KNOW YET
@@ -2199,7 +2225,6 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
     elseif reason == 20 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 22 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 23 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 24 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason) -- Craft (Transmute)
     elseif reason == 25 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 26 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 27 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
@@ -2976,6 +3001,39 @@ function CA.IndexBank()
     
 end
 
+local HouseBags = {
+	[1] = BAG_HOUSE_BANK_ONE,
+	[2] = BAG_HOUSE_BANK_TWO,
+	[3] = BAG_HOUSE_BANK_THREE,
+	[4] = BAG_HOUSE_BANK_FOUR,
+	[5] = BAG_HOUSE_BANK_FIVE,
+	[6] = BAG_HOUSE_BANK_SIX,
+	[7] = BAG_HOUSE_BANK_SEVEN,
+	[8] = BAG_HOUSE_BANK_EIGHT,
+	[9] = BAG_HOUSE_BANK_NINE,
+	[10] = BAG_HOUSE_BANK_TEN,
+}
+
+function CA.IndexHouseBags()
+	
+	for bagIndex = 1, 10 do
+		local bag = HouseBags[bagIndex]
+		local bagsize = GetBagSize(bag)
+		g_houseBags[bag] = { }
+		
+		for i = 0, bagsize do
+			local icon, stack = GetItemInfo(bag, i)
+			local bagitemlink = GetItemLink(bag, i, linkBrackets[CA.SV.BracketOptionItem])
+			local itemId = GetItemId(bag, i)
+			local itemLink = GetItemLink(bag, i, linkBrackets[CA.SV.BracketOptionItem])
+			if bagitemlink ~= "" then
+				g_houseBags[bag][i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
+			end
+		end
+	end
+	
+end
+
 function CA.CraftingOpen(eventCode, craftSkill, sameStation)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if CA.SV.Inventory.LootCraft then
@@ -3000,16 +3058,19 @@ function CA.CraftingClose(eventCode, craftSkill)
     g_banksubStacks = {}
 end
 
-function CA.BankOpen(eventCode)
+function CA.BankOpen(eventCode, bankBag)
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if CA.SV.Inventory.LootBank then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateBank)
         g_inventoryStacks = {}
         g_bankStacks = {}
         g_banksubStacks = {}
+		g_houseBags = {}
         CA.IndexInventory() -- Index Inventory
         CA.IndexBank() -- Index Bank
+		CA.IndexHouseBags() -- Index House Bags
     end
+	g_bankBag = bankBag > 6 and 2 or 1
 end
 
 function CA.BankClose(eventCode)
@@ -3022,6 +3083,7 @@ function CA.BankClose(eventCode)
     end
     g_bankStacks = {}
     g_banksubStacks = {}
+	g_houseBags = {}
 end
 
 function CA.GuildBankOpen(eventCode)
@@ -4091,9 +4153,9 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
             g_inventoryStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
             gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
-            logPrefix = CA.SV.ContextMessages.CurrencyMessageWithdraw
+            logPrefix = g_bankBag == 1 and CA.SV.ContextMessages.CurrencyMessageWithdraw or CA.SV.ContextMessages.CurrencyMessageWithdrawStorage
             if InventoryOn then
-                CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
+                CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
             end
         -- EXISTING ITEM    
         elseif g_inventoryStacks[slotId] then
@@ -4117,9 +4179,9 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             -- STACK COUNT INCREMENTED UP
             if stackCountChange > 0 then
                 gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
-                logPrefix = CA.SV.ContextMessages.CurrencyMessageWithdraw
+                logPrefix = g_bankBag == 1 and CA.SV.ContextMessages.CurrencyMessageWithdraw or CA.SV.ContextMessages.CurrencyMessageWithdrawStorage
                 if InventoryOn then
-                    CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
+                    CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
             -- STACK COUNT INCREMENTED DOWN
             elseif stackCountChange < 0 then
@@ -4131,7 +4193,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                 end
                 if InventoryOn and not g_itemWasDestroyed then
                     gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-                    logPrefix = CA.SV.ContextMessages.CurrencyMessageDeposit
+                    logPrefix = g_bankBag == 1 and CA.SV.ContextMessages.CurrencyMessageDeposit or CA.SV.ContextMessages.CurrencyMessageDepositStorage
                     CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
             end
@@ -4177,7 +4239,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
             logPrefix = CA.SV.ContextMessages.CurrencyMessageDeposit
             if BankOn then
-                CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
+                CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
             end
         -- EXISTING ITEM    
         elseif g_bankStacks[slotId] then
@@ -4203,7 +4265,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                 gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
                 logPrefix = CA.SV.ContextMessages.CurrencyMessageDeposit
                 if BankOn then
-                    CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
+                    CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
             -- STACK COUNT INCREMENTED DOWN
             elseif stackCountChange < 0 then
@@ -4240,7 +4302,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             
         end
     end
-    
+	
     if bagId == BAG_SUBSCRIBER_BANK then
     
         local gainOrLoss
@@ -4261,7 +4323,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
             gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
             logPrefix = CA.SV.ContextMessages.CurrencyMessageDeposit
             if BankOn then
-                CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
+                CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
             end
         -- EXISTING ITEM    
         elseif g_banksubStacks[slotId] then
@@ -4287,7 +4349,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                 gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
                 logPrefix = CA.SV.ContextMessages.CurrencyMessageDeposit
                 if BankOn then
-                    CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
+                    CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
                 end
             -- STACK COUNT INCREMENTED DOWN
             elseif stackCountChange < 0 then
@@ -4325,6 +4387,90 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
         end
     end
     
+	if bagId > 6 and bagId < 16 then
+    
+        local gainOrLoss
+        local logPrefix
+        local icon
+        local stack
+        local itemType
+        local itemId
+        local itemLink
+        local removed
+        -- NEW ITEM
+        if not g_houseBags[bagId][slotId] then
+            icon, stack = GetItemInfo(bagId, slotId)
+            itemType = GetItemType(bagId, slotId)
+            itemId = GetItemId(bagId, slotId)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
+            g_houseBags[bagId][slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
+            gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
+            logPrefix = CA.SV.ContextMessages.CurrencyMessageDepositStorage
+            if BankOn then
+                CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+            end
+        -- EXISTING ITEM    
+        elseif g_houseBags[bagId][slotId] then
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
+            if itemLink == nil or itemLink == "" then
+                -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
+                icon = g_houseBags[bagId][slotId].icon
+                stack = g_houseBags[bagId][slotId].stack
+                itemType = g_houseBags[bagId][slotId].itemType
+                itemId = g_houseBags[bagId][slotId].itemId
+                itemLink = g_houseBags[bagId][slotId].itemLink
+                removed = true
+            else
+                -- If we get a value for itemLink, then we want to use bag info to fill in the blanks
+                icon, stack = GetItemInfo(bagId, slotId)
+                itemType = GetItemType(bagId, slotId)
+                itemId = GetItemId(bagId, slotId)
+                removed = false
+            end
+            
+            -- STACK COUNT INCREMENTED UP
+            if stackCountChange > 0 then
+                gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
+                logPrefix = CA.SV.ContextMessages.CurrencyMessageDepositStorage
+                if BankOn then
+                    CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+            -- STACK COUNT INCREMENTED DOWN
+            elseif stackCountChange < 0 then
+                local change = stackCountChange * -1
+                if g_itemWasDestroyed and CA.SV.Inventory.LootShowDestroy then
+                    gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
+                    logPrefix = CA.SV.ContextMessages.CurrencyMessageDestroy
+                    CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+                if BankOn and not g_itemWasDestroyed then
+                    gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
+                    logPrefix = CA.SV.ContextMessages.CurrencyMessageDepositStorage
+                    CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+            end
+            
+            if removed then
+                if g_houseBags[bagId][slotId] then 
+                    g_houseBags[bagId][slotId] = nil
+                end
+            else
+                g_houseBags[bagId][slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
+            end
+            
+            if not g_itemWasDestroyed then
+                InventoryOn = true
+            end
+            if not g_itemWasDestroyed then
+                BankOn = false
+            end
+            if not g_itemWasDestroyed then
+                zo_callLater(CA.BankFixer, 50)
+            end
+            
+        end
+    end
+	
     if bagId == BAG_VIRTUAL then
         local gainOrLoss
         local stack
@@ -4337,15 +4483,15 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
         
         if stackCountChange < 1 then
             gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
-            logPrefix = CA.SV.ContextMessages.CurrencyMessageDeposit
+            logPrefix = g_bankBag == 1 and CA.SV.ContextMessages.CurrencyMessageDeposit or CA.SV.ContextMessages.CurrencyMessageDepositStorage
             stack = stackCountChange * -1
         else
             gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
-            logPrefix = CA.SV.ContextMessages.CurrencyMessageWithdraw
+            logPrefix = g_bankBag == 1 and CA.SV.ContextMessages.CurrencyMessageWithdraw or CA.SV.ContextMessages.CurrencyMessageWithdrawStorage
             stack = stackCountChange
         end
         
-        CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, true)
+        CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
     end
     
     g_itemWasDestroyed = false
@@ -8418,8 +8564,12 @@ function CA.HookFunction()
         return true
     end
     
-    local function SocialErrorHook()
-        return true
+	-- TODO: Conditionals based off EVENT_SOCIAL_ERROR HOOK LATER
+    local function SocialErrorHook(error)
+		if(not IsSocialErrorIgnoreResponse(error) and ShouldShowSocialErrorInChat(error)) then
+            printToChat(zo_strformat(GetString("SI_SOCIALACTIONRESULT", error)))
+        end
+		return true
     end
     
     local function FriendStatusHook()

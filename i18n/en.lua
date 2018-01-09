@@ -73,6 +73,7 @@ ZO_CreateStringId("SI_LUIE_CA_CURRENCY_WRIT_VOUCHER",                   " <<1[Wr
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_TRANSMUTE_CRYSTAL",              " <<1[Transmute Crystal/Transmute Crystals]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_CROWN",                   		" <<1[Crown/Crowns]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_CROWN_GEM",                   	" <<1[Crown Gem/Crown Gems]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_OUTFIT_TOKENS",                  " <<1[Outfit Change Token/Outfit Change Tokens]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
 
 ZO_CreateStringId("SI_LUIE_CA_DEBUG_MSG_CURRENCY",                      "Currency Change Reason <<1>> Triggered - Please post on the LUI Extended comments section on ESOUI.com describing what caused this message. Thanks!")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_ACCEPTED",                    "Duel challenge accepted.")
@@ -288,9 +289,11 @@ ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_MAILOUT_NO_NAME",        "You mai
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_MAILCOD",                "You send a COD payment of %s to %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_POSTAGE",                "You pay %s in postage.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSIT",                "You deposit %s in your bank.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSITSTORAGE",         "You deposit %s in storage.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSITGUILD",           "You deposit %s in the guild bank.")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAWSTORAGE",        "You withdraw %s from storage.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAW",               "You withdraw %s from your bank.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_WITHDRAWGUILD",          "You withdraw %s from the guild bank.")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DEPOSITGUILD",           "You deposit %s in the guild bank.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_WAYSHRINE",              "Wayshrine fee of %s charged.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_UNSTUCK",                "Unstuck fee of %s charged.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_STABLE",                 "You purchase %s for %s.")
@@ -351,9 +354,10 @@ ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGOLD",              "Total G
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP",                "Total AP: %s")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTV",                "Total TV: %s")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALWV",                "Total Vouchers: %s")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTRANSMUTE",         "Total Transmute Crystals: %s")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTRANSMUTE",         "Total Crystals: %s")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALCROWNS",            "Total Crowns: %s")
-ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGEMS",              "Total Crown Gems: %s")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGEMS",              "Total Gems: %s")
+ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALOUTFITTOKENS",      "Total Tokens: %s")
 
 ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_TOTAL",                  	"New Total:")
 
@@ -765,8 +769,10 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDTHRESHOLD",              "Gold (L
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDTHRESHOLD_TP",           "Gold looted below this value will not be displayed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDTHROTTLE",               "Combine gold looted from multiple sources")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDTHROTTLE_TP",            "When toggled on, gold looted from a group of bodies will combine into one value instead of showing individual values.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT",            "Hide gold spent on Guild Trader Purchases")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TP",         "Toggle this option to hide the display of gold spent on Guild Trader purchases.\nThis is a useful if you are using an addon like Awesome Guild Store to announce trader purchases.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHLIST",             "Hide Guild Trader Listing Fee")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHLIST_TP",          "Toggle this option to hide the display of the fee charged when listing items on a Guild Trader.\nThis is a useful if you are using an addon like Awesome Guild Store.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT",            "Hide Guild Trader Purchases")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TP",         "Toggle this option to hide the display of gold spent on Guild Trader purchases.\nThis is a useful if you are using an addon like Awesome Guild Store.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAP",                     "Display Alliance Point Changes")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAP_TP",                  "Print a context sensitive notification to chat when Alliance Points are earned or spent.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPCOLOR",                "Alliance Points Color")
@@ -805,6 +811,52 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL",           "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL_TP",        "Show total amount of Writ Vouchers after change is displayed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG",                "Total Writ Vouchers Syntax")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG_TP",             "Choose the syntax for the Total Writ Vouchers message.\nDefault: Total Vouchers: %s")
+
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTE",              "Display Transmute Crystal Changes")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTE_TP",           "Print a context sensitive notification to chat when Transmute Crystals are rewarded or spent.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTECOLOR",         "Transmute Crystals Color")
+-- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTENAME",          "Transmute Crystals Name")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTENAME_TP",       "Name to display for Transmute Crystals.\nDefault: <<1[Transmute Crystal/Transmute Crystals]>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTETOTAL",         "Display Total Transmute Crystals Suffix")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTETOTAL_TP",      "Show total amount of Transmute Crystals after change is displayed.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG",       	"Total Transmute Crystals Syntax")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG_TP",      "Choose the syntax for the Total Transmute Crystals message.\nDefault: Total Crystals: %s")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNS",                 "Display Crown Changes")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNS_TP",              "Print a context sensitive notification to chat when Crowns are rewarded or spent.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSCOLOR",            "Crowns Color")
+-- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSNAME",             "Crowns Name")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSNAME_TP",          "Name to display for Crowns.\nDefault: <<1[Crown/Crowns]>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSTOTAL",            "Display Total Crowns Suffix")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSTOTAL_TP",         "Show total amount of Crowns after change is displayed.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CROWNSTOTAL_MSG",            "Total Crowns Syntax")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CROWNSTOTAL_MSG_TP",         "Choose the syntax for the Total Crowns message.\nDefault: Total Crowns: %s")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMS",              "Display Crown Gem Changes")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMS_TP",           "Print a context sensitive notification to chat when Crown Gems are rewarded or spent.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSCOLOR",         "Crown Gems Color")
+-- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSNAME",          "Crown Gems Name")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSNAME_TP",       "Name to display for Crown Gems.\nDefault: <<1[Crown Gem/Crown Gems]>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSTOTAL",         "Display Total Crown Gems Suffix")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSTOTAL_TP",      "Show total amount of Crown Gems after change is displayed.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CROWNGEMSTOTAL_MSG",         "Total Crown Gems Syntax")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CROWNGEMSTOTAL_MSG_TP",      "Choose the syntax for the Total Crown Gems message.\nDefault: Total Gems: %s")
+
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENS",              	"Display Outfit Style Token Changes")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENS_TP",           	"Print a context sensitive notification to chat when Outfit Style Tokens are rewarded or spent.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSCOLOR",         	"Outfit Style Tokens Color")
+-- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSNAME",          	"Outfit Style Tokens Name")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSNAME_TP",       	"Name to display for Outfit Style Tokens.\nDefault: <<1[Outfit Style Token/Outfit Style Tokens]>>")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSTOTAL",         	"Display Total Outfit Style Tokens Suffix")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSTOTAL_TP",      	"Show total amount of Outfit Style Tokens after change is displayed.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_TOKENSTOTAL_MSG",         	"Total Outfit Style Tokens Syntax")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_TOKENSTOTAL_MSG_TP",      	"Choose the syntax for the Total Outfit Style Tokens message.\nDefault: Total Tokens: %s")
+
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CONTEXT_MENU",               "Shared Currency/Loot Options")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CONTEXT_HEADER",             "Context Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RECEIVE",            "Receive")
@@ -857,6 +909,10 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAW",           "Bank - 
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAW_TP",        "Default: You withdraw %s from your bank.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSITGUILD",       "Guild Bank - Deposit")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSITGUILD_TP",    "Default: You deposit %s in the guild bank.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSITSTORAGE",     "Chest Storage - Deposit")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DEPOSITSTORAGE_TP",  "Default: You deposit %s in storage.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAWSTORAGE",    "Chest Storage - Withdraw")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAWSTORAGE_TP", "Default: You withdraw %s from storage.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAWGUILD",      "Guild Bank - Withdraw")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WITHDRAWGUILD_TP",   "Default: You withdraw %s from the guild bank.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_WAYSHRINE",          "Wayshrine Fee")
@@ -973,7 +1029,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALITEMS",              "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALITEMS_TP",           "Toggle the display of the total count of items on a vendor transaction.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALCURRENCY",           "Display Total Currency on Transactions")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALCURRENCY_TP",        "Toggle the display of the total currency on a vendor transaction.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWBANK",                       "Display Items - Banking")
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWBANK",                       "Display Items - Banking & Storage")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWBANK_TP",                    "Print a message to chat when items are deposited or withdrawn from a bank or guild bank.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWCRAFT",                      "Display Items - Crafting")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWCRAFT_TP",                   "Print a message to chat when items are received, lost, or upgraded from crafting.")
