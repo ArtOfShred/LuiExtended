@@ -610,12 +610,22 @@ function LUIE_CreateSettings()
     }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_CI_ULTIMATE_SHOW),
-        tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_SHOW_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.UltimateEnabled end,
-        setFunc = function(value) LUIE.CombatInfo.SV.UltimateEnabled = value LUIE.CombatInfo.RegisterCombatInfo() LUIE.CombatInfo.OnSlotsFullUpdate(nil) end,
+        name = GetString(SI_LUIE_LAM_CI_ULTIMATE_SHOW_VAL),
+        tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_SHOW_VAL_TP),
+        getFunc = function() return LUIE.CombatInfo.SV.UltimateLabelEnabled end,
+        setFunc = function(value) LUIE.CombatInfo.SV.UltimateLabelEnabled = value LUIE.CombatInfo.RegisterCombatInfo() LUIE.CombatInfo.OnSlotsFullUpdate() end,
         width = "full",
-        default = LUIE.CombatInfo.D.UltimateEnabled,
+        default = LUIE.CombatInfo.D.UltimateLabelEnabled,
+        disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+    }
+	optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_CI_ULTIMATE_SHOW_PCT),
+        tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_SHOW_PCT_TP),
+        getFunc = function() return LUIE.CombatInfo.SV.UltimatePctEnabled end,
+        setFunc = function(value) LUIE.CombatInfo.SV.UltimatePctEnabled = value LUIE.CombatInfo.RegisterCombatInfo() LUIE.CombatInfo.OnSlotsFullUpdate() end,
+        width = "full",
+        default = LUIE.CombatInfo.D.UltimatePctEnabled,
         disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
     }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
@@ -623,10 +633,10 @@ function LUIE_CreateSettings()
         name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL)),
         tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL_TP),
         getFunc = function() return LUIE.CombatInfo.SV.UltimateHideFull end,
-        setFunc = function(value) LUIE.CombatInfo.SV.UltimateHideFull = value LUIE.CombatInfo.OnSlotsFullUpdate(nil) end,
+        setFunc = function(value) LUIE.CombatInfo.SV.UltimateHideFull = value LUIE.CombatInfo.OnSlotsFullUpdate() end,
         width = "full",
         default = LUIE.CombatInfo.D.UltimateHideFull,
-        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.UltimateEnabled ) end,
+        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.UltimatePctEnabled ) end,
     }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "checkbox",
@@ -665,6 +675,17 @@ function LUIE_CreateSettings()
         width = "full",
         default = LUIE.CombatInfo.D.ShowToggled,
         disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+    }
+	optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
+        -- Show Toggled Ultimate
+        type = "checkbox",
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_ULTIMATE)),
+        tooltip = GetString(SI_LUIE_LAM_CI_BAR_ULTIMATE_TP),
+        getFunc = function() return LUIE.CombatInfo.SV.ShowToggledUltimate end,
+        setFunc = function(value) LUIE.CombatInfo.SV.ShowToggledUltimate = value LUIE.CombatInfo.OnSlotsFullUpdate() end,
+        width = "full",
+        default = LUIE.CombatInfo.D.ShowToggledUltimate,
+        disabled = function() return not (LUIE.CombatInfo.SV.ShowToggled and LUIE.SV.CombatInfo_Enabled) end,
     }
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         -- SHOW LABEL ON BAR HIGHLIGHT
