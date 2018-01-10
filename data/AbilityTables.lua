@@ -3,6 +3,12 @@
 local A = {}
 
 -- ---------------------------------------------------
+-- MAJOR/MINOR DEBUFFS & DEBUFFS ---------------------
+-- ---------------------------------------------------
+
+A.Minor_Maim = 61856
+
+-- ---------------------------------------------------
 -- INNATE ABILITIES ----------------------------------
 -- ---------------------------------------------------
 
@@ -71,6 +77,52 @@ A.Proc_Chill						= 21481
 A.Proc_Chilled						= 7145
 A.Proc_Poisoned						= 21929
 A.Proc_Concussion					= 21487
+
+-- POTIONS
+A.Potion_Invisiblity				= 3668
+A.Potion_Ravage_Health				= 46111
+A.Potion_Restore_Health				= 45221
+A.Potion_Restore_Magicka			= 45223
+A.Potion_Restore_Stamina			= 45225
+
+A.Poison_Creeping_Drain_Health		= 79701
+A.Poison_Lingering_Restore_Health	= 79702
+A.Poison_Stealth_Draining_Poison	= GetString(SI_LUIE_SKILL_POISON_STEALTH_DRAIN)
+A.Poison_Conspicuous_Poison			= GetString(SI_LUIE_SKILL_POISON_CONSPICUOUS)
+
+A.Food_Magicka_Stamina_Increase		= 61294
+A.Food_Health_Stamina_Increase		= 61255
+A.Food_Health_Magicka_Increase		= 61257
+A.Food_Orzorgas_Tripe_Trifle_Pocket	= GetString(SI_LUIE_SKILL_FOOD_ORZORGA_POCKET)
+A.Food_Orzorgas_Blood_Price_Pie	    = GetString(SI_LUIE_SKILL_FOOD_ORZORGA_PIE)
+A.Food_Orzorgas_Smoked_Bear_Haunch	= GetString(SI_LUIE_SKILL_FOOD_ORZORGA_HAUNCH)
+A.Food_Pumpkin_Snack_Skewer			= GetString(SI_LUIE_SKILL_FOOD_SNACK_SKEWER)
+A.Food_Frosted_Brains				= GetString(SI_LUIE_SKILL_FOOD_FROSTED_BRAINS) 
+A.Food_Jagga_Drenched_Mud_Ball		= GetString(SI_LUIE_SKILL_FOOD_MUD_BALL)
+A.Food_Lava_Foot_Soup				= GetString(SI_LUIE_SKILL_FOOD_LAVA_FOOT)
+A.Food_Crown_Crate_Meal				= GetString(SI_LUIE_SKILL_FOOD_CROWN_CRATE_FOOD)
+A.Food_Crown_Meal					= GetString(SI_LUIE_SKILL_FOOD_CROWN_FOOD)
+A.Food_Crown_Combat_Mystics_Stew	= GetString(SI_LUIE_SKILL_FOOD_CROWN_STEW)
+A.Food_Crown_Vigorous_Ragout		= GetString(SI_LUIE_SKILL_FOOD_CROWN_RAGOUT)
+A.Drink_Health_Recovery				= 61322
+A.Drink_Magicka_Recovery			= 61325
+A.Drink_Stamina_Recovery			= 61328
+A.Drink_Magicka_Stamina_Recovery	= 61345
+A.Drink_Health_Stamina_Recovery		= 61340
+A.Drink_Health_Magicka_Recovery		= 61335
+A.Drink_Primary_Stat_Recovery		= 61350
+A.Drink_Increase					= GetString(SI_LUIE_SKILL_DRINK_INCREASE)
+A.Drink_Orzorgas_Red_Frothgar		= GetString(SI_LUIE_SKILL_DRINK_ORZORGA_FROTHGAR)
+A.Drink_Bowl_of_Peeled_Eyeballs		= GetString(SI_LUIE_SKILL_DRINK_PEELED_EYEBALLS)
+A.Drink_Ghastly_Eye_Bowl			= GetString(SI_LUIE_SKILL_DRINK_GHASTLY_EYE_BOWL)
+A.Drink_Bergama_Warning_Fire		= GetString(SI_LUIE_SKILL_DRINK_WARNING_FIRE)
+A.Drink_Betnikh_Twice_Spiked_Ale	= GetString(SI_LUIE_SKILL_DRINK_BETNIKH_ALE)
+A.Drink_Hissmir_Fish_Eye_Rye		= GetString(SI_LUIE_SKILL_DRINK_FISH_EYE)
+A.Drink_Snow_Bear_Glow_Wine			= GetString(SI_LUIE_SKILL_DRINK_GLOW_WINE)
+A.Drink_Crown_Crate_Drink			= GetString(SI_LUIE_SKILL_DRINK_CROWN_CRATE_DRINK)
+A.Drink_Crown_Drink					= GetString(SI_LUIE_SKILL_DRINK_CROWN_DRINK)
+A.Drink_Crown_Stout_Magic_Liqueur	= GetString(SI_LUIE_SKILL_DRINK_CROWN_LIQUEUR)
+A.Drink_Crown_Vigorous_Tincture		= GetString(SI_LUIE_SKILL_DRINK_CROWN_TINCTURE)
 
 -- ---------------------------------------------------
 -- CHAMPION ABILITIES --------------------------------

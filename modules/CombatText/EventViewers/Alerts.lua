@@ -47,6 +47,7 @@ function CTV:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, 
         local stringDodge
         local stringAvoid
         local stringInterrupt
+		color = S.colors.alertBlock
         
         -- Quickly set only one of these to true for priority color formatting.
         -- PRIORITY: INTERRUPT > BLOCK STAGGER > DODGE > BLOCK > AVOID

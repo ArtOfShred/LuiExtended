@@ -1859,8 +1859,6 @@ function CA.PointRespecDisplay(respecType)
     
 end
 
-    --ZO_LocalizeDecimalNumber
-
 function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, oldValue, reason)
 
 	if (currencyLocation ~= CURRENCY_LOCATION_CHARACTER and currencyLocation ~= CURRENCY_LOCATION_ACCOUNT) then return end
@@ -1879,7 +1877,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
         return
     end
     
-    local formattedValue = newValue
+    local formattedValue = newValue --ZO_LocalizeDecimalNumber
     local changeColor                                                   -- Gets the value from CurrencyUpColorize or CurrencyDownColorize to color strings
     local changeType                                                    -- Amount of currency gained or lost
     local currencyTypeColor                                             -- Determines color to use for colorization of currency based off currency type.
@@ -2018,14 +2016,14 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
         else
             changeColor = CurrencyColorize:ToHex()
         end
-        changeType = ZO_LocalizeDecimalNumber(newValue - oldValue + g_postageAmount)
+        changeType = (newValue - oldValue + g_postageAmount) -- ZO_LocalizeDecimalNumber
     elseif UpOrDown < 0 then
         if CA.SV.Currency.CurrencyContextColor then
             changeColor = CurrencyDownColorize:ToHex()
         else
             changeColor = CurrencyColorize:ToHex()
         end
-        changeType = ZO_LocalizeDecimalNumber(oldValue - newValue - g_postageAmount)
+        changeType = (oldValue - newValue - g_postageAmount) -- ZO_LocalizeDecimalNumber
     end
     
     -- Determine syntax based on reason
@@ -2346,9 +2344,9 @@ end
 
 function CA.CurrencyGoldThrottlePrinter()
     if g_currencyGoldThrottleValue > 0 and g_currencyGoldThrottleValue > CA.SV.Currency.CurrencyGoldFilter then
-        local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
+        local formattedValue = (GetCarriedCurrencyAmount(1)) -- ZO_LocalizeDecimalNumber
         local changeColor = CA.SV.Currency.CurrencyContextColor and CurrencyUpColorize:ToHex() or CurrencyColorize:ToHex()
-        local changeType = ZO_LocalizeDecimalNumber(g_currencyGoldThrottleValue)
+        local changeType = (g_currencyGoldThrottleValue) -- ZO_LocalizeDecimalNumber
         local currencyTypeColor = CurrencyGoldColorize:ToHex()
         local currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
         local currencyName = strformat(CA.SV.Currency.CurrencyGoldName, g_currencyGoldThrottleValue)
@@ -2785,7 +2783,7 @@ end
 function CA.PrintExperienceGain(change)
     local icon = CA.SV.XP.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t ") or ""
     local xpName = strformat(CA.SV.XP.ExperienceName, change)
-    local messageP1 = ("|r|c" .. ExperienceNameColorize .. icon .. ZO_LocalizeDecimalNumber(change) .. " " .. xpName .. "|r|c" .. ExperienceMessageColorize)
+    local messageP1 = ("|r|c" .. ExperienceNameColorize .. icon .. change .. " " .. xpName .. "|r|c" .. ExperienceMessageColorize) --ZO_LocalizeDecimalNumber on change
     local formattedMessageP1 = (strfmt(CA.SV.XP.ExperienceMessage, messageP1))
     local finalMessage = strfmt("|c%s%s|r", ExperienceMessageColorize, formattedMessageP1)
 

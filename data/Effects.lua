@@ -194,6 +194,7 @@ E.DebuffDisplayOverrideId = {
 }
 
 -- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY NAME
+-- TODO: LOCALIZE THIS
 E.DebuffDisplayOverrideName = {
     ['Major Breach']                    = true,
     ['Major Cowardice']                 = true,
@@ -211,7 +212,7 @@ E.DebuffDisplayOverrideName = {
     ['Minor Enervation']                = true,
     ['Minor Fracture']                  = true,
     ['Minor Hindrance']                 = true,
-    ['Minor Maim']                      = true,
+    [A.Minor_Maim]                      = true,
     ['Minor Mangle']                    = true,
     ['Minor Uncertainty']               = true,
     ['Minor Vulnerability']             = true,
@@ -462,8 +463,6 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     -- Sets
     [32755] = true, -- Nikulas' Heavy Armor (of Nikulas)
     
-    
-    
     ----------------------------
     -- Templar (Aedric Spear)
     ----------------------------
@@ -581,12 +580,12 @@ E.EffectOverride = {
     [45236] = { icon = 'LuiExtended/media/icons/potions/potion_009.dds' }, -- of Detection (Increase Detection)
     [45222] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds' }, -- of Health (Major Fortitude)
     [45239] = { icon = 'LuiExtended/media/icons/potions/potion_008.dds' }, -- of Immovability (Unstoppable)
-    [45237] = { icon = 'LuiExtended/media/icons/potions/potion_011.dds', name = 'Invisibility' }, -- of Invisibility (Vanish)
+    [45237] = { icon = 'LuiExtended/media/icons/potions/potion_011.dds', name = A.Potion_Invisiblity }, -- of Invisibility (Vanish)
     [79705] = { icon = 'LuiExtended/media/icons/potions/potion_014.dds' }, -- of Lingering Health (Lingering Restore Health)
     [45224] = { icon = 'LuiExtended/media/icons/potions/potion_002.dds' }, -- of Magicka (Major Intellect)
     [79712] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds' }, -- of Protection (Minor Protection)
     [46208] = { icon = 'LuiExtended/media/icons/potions/potion_021.dds' }, -- of Ravage Armor (Minor Fracture)
-    [46113] = { icon = 'LuiExtended/media/icons/potions/potion_015.dds', name = 'Ravage Health' }, -- of Ravage Health (Health Potion Poison)
+    [46113] = { icon = 'LuiExtended/media/icons/potions/potion_015.dds', name = A.Potion_Ravage_Health }, -- of Ravage Health (Health Potion Poison)
     [46193] = { icon = 'LuiExtended/media/icons/potions/potion_016.dds' }, -- of Ravage Magicka (Ravage Magicka)
     [47204] = { icon = 'LuiExtended/media/icons/potions/potion_020.dds' }, -- of Ravage Spell Critical (Minor Uncertainty)
     [46202] = { icon = 'LuiExtended/media/icons/potions/potion_020.dds' }, -- of Ravage Spell Power (Minor Cowardice)
@@ -613,12 +612,12 @@ E.EffectOverride = {
     [45458] = { icon = 'LuiExtended/media/icons/potions/potion_009.dds' }, -- of Detection (Increase Detection)
     [63670] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds' }, -- of Health (Major Fortitude)
     [45463] = { icon = 'LuiExtended/media/icons/potions/potion_008.dds' }, -- of Immovability (Unstoppable)
-    [45460] = { icon = 'LuiExtended/media/icons/potions/potion_011.dds', name = 'Invisibility' }, -- of Invisibility (Vanish)
+    [45460] = { icon = 'LuiExtended/media/icons/potions/potion_011.dds', name = A.Potion_Invisiblity }, -- of Invisibility (Vanish)
     [79706] = { icon = 'LuiExtended/media/icons/potions/potion_014.dds' }, -- of Lingering Health (Lingering Restore Health)
     [63676] = { icon = 'LuiExtended/media/icons/potions/potion_002.dds' }, -- of Magicka (Major Intellect)
     [79714] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds' }, -- of Protection (Minor Protection)
     [46250] = { icon = 'LuiExtended/media/icons/potions/potion_021.dds' }, -- of Ravage Armor (Minor Fracture)
-    [46217] = { icon = 'LuiExtended/media/icons/potions/potion_015.dds', name = 'Ravage Health' }, -- of Ravage Health (Health Potion Linger Effect) (Different name than 2 trait)
+    [46217] = { icon = 'LuiExtended/media/icons/potions/potion_015.dds', name = A.Potion_Ravage_Health }, -- of Ravage Health (Health Potion Linger Effect) (Different name than 2 trait)
     [46237] = { icon = 'LuiExtended/media/icons/potions/potion_016.dds' }, -- of Ravage Magicka (Ravage Magicka)
     -- No ... of Ravage Spell Critical
     [46244] = { icon = 'LuiExtended/media/icons/potions/potion_020.dds' }, -- of Ravage Spell Power (Minor Cowardice)
@@ -648,7 +647,7 @@ E.EffectOverride = {
     [72928] = { icon = 'LuiExtended/media/icons/potions/potion_ava_red.dds' }, -- Alliance Health Draught (Major Fortitude)
     [72933] = { icon = 'LuiExtended/media/icons/potions/potion_ava_teal.dds' }, -- Alliance Spell Draught (Major Sorcery)
     [72932] = { icon = 'LuiExtended/media/icons/potions/potion_ava_blue.dds' }, -- Alliance Spell Draught (Major Intellect)
-    [78058] = { icon = 'LuiExtended/media/icons/potions/potion_ava_purple.dds', name = 'Invisibility' }, -- Roguish Stealth Draught (Vanish)
+    [78058] = { icon = 'LuiExtended/media/icons/potions/potion_ava_purple.dds', name = A.Potion_Invisiblity }, -- Roguish Stealth Draught (Vanish)
     [78054] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds' }, -- Roguish Stealth Draught (Major Endurance)
     [78081] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds' }, -- Roguish Escape Draught (Major Expedition)
     [78080] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds' }, -- Roguish Escape Draught (Major Endurance)
@@ -685,7 +684,7 @@ E.EffectOverride = {
     --Crafted Potions (3 Traits)
     [45382] = { icon = 'LuiExtended/media/icons/potions/potion_001.dds' }, -- Restore Health
     [45385] = { icon = 'LuiExtended/media/icons/potions/potion_002.dds' }, -- Restore Magicka
-    [46215] = { icon = 'LuiExtended/media/icons/potions/potion_015.dds', name = 'Ravage Health' }, -- Damage Health
+    [46215] = { icon = 'LuiExtended/media/icons/potions/potion_015.dds', name = A.Potion_Ravage_Health }, -- Damage Health
     [45388] = { icon = 'LuiExtended/media/icons/potions/potion_003.dds' }, -- Restore Stamina
 
     -- Vendor Potions + AVA Potions + Roguish Draughts
@@ -699,13 +698,13 @@ E.EffectOverride = {
     [78079] = { icon = 'LuiExtended/media/icons/potions/potion_ava_green.dds' }, -- Restore Stamina (Roguish Escape Draught)
 
     -- Crown Store Potions
-    [68401] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', name = 'Restore Health' }, -- Restore All Resources (Crown Tri-Restoration Potion)
+    [68401] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', name = A.Potion_Restore_Health }, -- Restore All Resources (Crown Tri-Restoration Potion)
     [68407] = { icon = 'LuiExtended/media/icons/potions/potion_crown_blue.dds' }, -- Restore Magicka (Crown Tri-Restoration Potion)
     [68409] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds' }, -- Restore Stamina (Crown Tri-Restoration Potion)
-    [86682] = { icon = 'LuiExtended/media/icons/potions/potion_crown_blue.dds', name = 'Restore Magicka' }, -- Crown Spellcaster's Elixir (Crown Spellcaster's Elixir)
-    [86696] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', name = 'Restore Health' }, -- Crown Survivor's Elixir (Crown Survivor's Elixir)
-    [86692] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds', name = 'Restore Stamina' }, -- Crown Warrior's Elixir (Crown Warrior's Elixir)
-    [92414] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', name = 'Restore Health' }, -- Crown Survivor's Elixir (Gold Coast Swift Survivor Elixir)
+    [86682] = { icon = 'LuiExtended/media/icons/potions/potion_crown_blue.dds', name = A.Potion_Restore_Magicka }, -- Crown Spellcaster's Elixir (Crown Spellcaster's Elixir)
+    [86696] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', name = A.Potion_Restore_Health }, -- Crown Survivor's Elixir (Crown Survivor's Elixir)
+    [86692] = { icon = 'LuiExtended/media/icons/potions/potion_crown_green.dds', name = A.Potion_Restore_Stamina }, -- Crown Warrior's Elixir (Crown Warrior's Elixir)
+    [92414] = { icon = 'LuiExtended/media/icons/potions/potion_crown_red.dds', name = A.Potion_Restore_Health }, -- Crown Survivor's Elixir (Gold Coast Swift Survivor Elixir)
 
     ----------------------------------------------------------------
     -- POSIONS -----------------------------------------------------
@@ -730,7 +729,7 @@ E.EffectOverride = {
     [79193] = { icon = 'LuiExtended/media/icons/poisons/poison_2_cyan_r.dds' }, -- Minor Cowardice (Sorcery-Draining Poison) DEBUFF
     [79221] = { icon = 'LuiExtended/media/icons/poisons/poison_2_cyan_g.dds' }, -- Minor Sorcery (Sorcery-Draining Poison) BUFF
     [79069] = { icon = 'LuiExtended/media/icons/poisons/poison_1_cyan_r.dds' }, -- Minor Cowardice (Cowardice Poison) DEBUFF
-    [79280] = { icon = 'LuiExtended/media/icons/poisons/poison_2_yellow_r.dds', name = 'Minor Maim' }, -- Drain Weapon Power (Brutality-Draining Poison) DEBUFF
+    [79280] = { icon = 'LuiExtended/media/icons/poisons/poison_2_yellow_r.dds', name = A.Minor_Maim }, -- Drain Weapon Power (Brutality-Draining Poison) DEBUFF
     [79281] = { icon = 'LuiExtended/media/icons/poisons/poison_2_yellow_g.dds' }, -- Minor Brutality (Brutality-Draining Poison) BUFF
     [79083] = { icon = 'LuiExtended/media/icons/poisons/poison_1_yellow_r.dds' }, -- Minor Maim (Maiming Poison) DEBUFF
     [79446] = { icon = 'LuiExtended/media/icons/poisons/poison_1_cyan_r.dds' }, -- Minor Uncertainty (Prophecy-Draining Poison) DEBUFF
@@ -742,13 +741,13 @@ E.EffectOverride = {
     [79457] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_r.dds' }, -- Immobilize (Escapist's Poison) DEBUFF
     [79458] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_g.dds' }, -- Unstoppable (Escapist's Poison) BUFF
     [79122] = { icon = 'LuiExtended/media/icons/poisons/poison_1_red_r.dds' }, -- Immobilize (Entrapping Poison) DEBUFF
-    [79996] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', name = 'Stealth-Draining Poison' }, -- Revealing Poison (Stealth-Draining Poison) DEBUFF
-    [80003] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', name = 'Conspicuous Poison' }, -- Marking Poison (Conspicuous Poison) DEBUFF
+    [79996] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', name = A.Poison_Stealth_Draining_Poison }, -- Revealing Poison (Stealth-Draining Poison) DEBUFF
+    [80003] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', name = A.Poison_Conspicuous_Poison }, -- Marking Poison (Conspicuous Poison) DEBUFF
     [79367] = { icon = 'LuiExtended/media/icons/poisons/poison_2_green_r.dds' }, -- Hindrance (Speed-Draining Poison) DEBUFF
     [79368] = { icon = 'LuiExtended/media/icons/poisons/poison_2_green_g.dds' }, -- Major Expedition (Speed-Draining Poison) BUFF
     [79094] = { icon = 'LuiExtended/media/icons/poisons/poison_1_green_r.dds' }, -- Hindrance (Hindering Poison) DEBUFF
-    [79699] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_r.dds', name = 'Creeping Drain Health'}, -- Drain Health (Gradual Health Drain Poison) DEBUFF
-    [79700] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_g.dds', name = 'Lingering Restore Health' }, -- Restore Health (Gradual Health Drain Poison) BUFF
+    [79699] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_r.dds', name = A.Poison_Creeping_Drain_Health}, -- Drain Health (Gradual Health Drain Poison) DEBUFF
+    [79700] = { icon = 'LuiExtended/media/icons/poisons/poison_2_orange_g.dds', name = A.Poison_Lingering_Restore_Health }, -- Restore Health (Gradual Health Drain Poison) BUFF
     [79707] = { icon = 'LuiExtended/media/icons/poisons/poison_1_orange_r.dds' }, -- Creeping Ravage Health (Gradual Ravage Health Poison) DEBUFF
     [79723] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds' }, -- Minor Vulnerability (Protection-Reversing Poison) DEBUFF
     [79725] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_g.dds' }, -- Minor Protection (Protection-Reversing Poison) BUFF
@@ -788,8 +787,8 @@ E.EffectOverride = {
     [79459] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_r.dds' }, -- Immobilize (Escapist's Poison) DEBUFF
     [79460] = { icon = 'LuiExtended/media/icons/poisons/poison_2_red_g.dds' }, -- Unstoppable (Escapist's Poison) BUFF
     -- No Entrapping
-    [80002] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', name = 'Stealth-Draining Poison' }, -- Revealing Poison (Stealth-Draining Poison) DEBUFF
-    [80004] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', name = 'Conspicuous Poison' }, -- Marking Poison (Conspicuous Poison) DEBUFF
+    [80002] = { icon = 'LuiExtended/media/icons/poisons/poison_2_violet_r.dds', name = A.Poison_Stealth_Draining_Poison }, -- Revealing Poison (Stealth-Draining Poison) DEBUFF
+    [80004] = { icon = 'LuiExtended/media/icons/poisons/poison_1_violet_r.dds', name = A.Poison_Conspicuous_Poison }, -- Marking Poison (Conspicuous Poison) DEBUFF
     [79369] = { icon = 'LuiExtended/media/icons/poisons/poison_2_green_r.dds' }, -- Hindrance (Speed-Draining Poison) DEBUFF
     [79370] = { icon = 'LuiExtended/media/icons/poisons/poison_2_green_g.dds' }, -- Major Expedition (Speed-Draining Poison) BUFF
     [79102] = { icon = 'LuiExtended/media/icons/poisons/poison_1_green_r.dds' }, -- Hindrance (Hindering Poison) DEBUFF
@@ -836,56 +835,56 @@ E.EffectOverride = {
     [61255] = { icon = 'LuiExtended/media/icons/consumables/consumable_food_blue.dds' }, -- Health + Stamina Food
     [61257] = { icon = 'LuiExtended/media/icons/consumables/consumable_food_blue.dds' }, -- Health + Magicka Food
     [61218] = { icon = 'LuiExtended/media/icons/consumables/consumable_food_purple.dds' }, -- Triple Food
-    [72819] = { icon = 'LuiExtended/media/icons/consumables/consumable_orzorga_tripe_trifle_pocket.dds', name = 'Orzorga\'s Tripe Trifle Pocket' }, -- Orzorga's Tripe Trifle Pocket
-    [72822] = { icon = 'LuiExtended/media/icons/consumables/consumable_orzorga_blood_price_pie.dds', name = 'Orzorga\'s Blood Price Pie' }, -- Orzorga's Blood Price Pie
-    [72824] = { icon = 'LuiExtended/media/icons/consumables/consumable_orzorga_bear_haunch.dds', name = 'Orzorga\'s Smoked Bear Haunch' }, -- Orzorga's Smoked Bear Haunch
+    [72819] = { icon = 'LuiExtended/media/icons/consumables/consumable_orzorga_tripe_trifle_pocket.dds', name = A.Food_Orzorgas_Tripe_Trifle_Pocket }, -- Orzorga's Tripe Trifle Pocket
+    [72822] = { icon = 'LuiExtended/media/icons/consumables/consumable_orzorga_blood_price_pie.dds', name = A.Food_Orzorgas_Blood_Price_Pie }, -- Orzorga's Blood Price Pie
+    [72824] = { icon = 'LuiExtended/media/icons/consumables/consumable_orzorga_bear_haunch.dds', name = A.Food_Orzorgas_Smoked_Bear_Haunch }, -- Orzorga's Smoked Bear Haunch
     
     [100502] = { icon = 'LuiExtended/media/icons/consumables/consumable_deregulated_mushroom_stew.dds' }, -- Deregulated Mushroom Stew
     [100498] = { icon = 'LuiExtended/media/icons/consumables/consumable_clockwork_citrus_filet.dds' }, -- Clockwork Citrus Filet
 
     -- Crafted Drink
-    [61322] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_green.dds', name = 'Increase Health Recovery' }, -- Health Drink
+    [61322] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_green.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Health_Recovery) }, -- Health Drink
     [61323] = { hide = true }, -- Well Fed
-    [61325] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_green.dds', name = 'Increase Magicka Recovery' }, -- Magicka Drink
+    [61325] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_green.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Magicka_Recovery) }, -- Magicka Drink
     [61326] = { hide = true }, -- Well Fed
-    [61328] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_green.dds', name = 'Increase Stamina Recovery' }, -- Stamina Drink
+    [61328] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_green.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Stamina_Recovery) }, -- Stamina Drink
     [61329] = { hide = true }, -- Well Fed
-    [61345] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_blue.dds', name = 'Increase Magicka & Stamina Recovery' }, -- Magicka + Stamina Drink
+    [61345] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_blue.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Magicka_Stamina_Recovery) }, -- Magicka + Stamina Drink
     [61346] = { hide = true }, -- Well Fed
     [61348] = { hide = true }, -- Well Fed
-    [61340] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_blue.dds', name = 'Increase Health & Stamina Recovery' }, -- Health + Stamina Drink
+    [61340] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_blue.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Health_Stamina_Recovery) }, -- Health + Stamina Drink
     [61341] = { hide = true }, -- Well Fed
     [61344] = { hide = true }, -- Well Fed
-    [61335] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_blue.dds', name = 'Increase Health & Magicka Recovery' }, -- Health + Magicka Drink
+    [61335] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_blue.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Health_Magicka_Recovery) }, -- Health + Magicka Drink
     [61336] = { hide = true }, -- Well Fed
     [61339] = { hide = true }, -- Well Fed
-    [61350] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_purple.dds', name = 'Increase All Primary Stat Recovery' }, -- Triple Drink
-    [72816] = { icon = 'LuiExtended/media/icons/consumables/consumable_orzorga_red_frothgar.dds', name = 'Orzorga\'s Red Frothgar' }, -- Orzorga's Red Frothgar
+    [61350] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_purple.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Primary_Stat_Recovery) }, -- Triple Drink
+    [72816] = { icon = 'LuiExtended/media/icons/consumables/consumable_orzorga_red_frothgar.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Orzorgas_Red_Frothgar) }, -- Orzorga's Red Frothgar
     [61354] = { hide = true }, -- Well Fed: Magicka Regen
     [100488] = { icon = 'LuiExtended/media/icons/consumables/consumable_spring-loaded_infusion.dds' }, -- Spring-Loaded Infusion
     [100490] = { hide = true }, -- Magicka Consumable
 
     -- Crafted Seasonal Food
-    [84681] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_crisp_and_crunchy_pumpkin.dds', name = 'Crisp and Crunchy Pumpkin Snack Skewer' }, -- Crisp and Crunchy Pumpkin Snack Skewer
+    [84681] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_crisp_and_crunchy_pumpkin.dds', name = A.Food_Pumpkin_Snack_Skewer }, -- Crisp and Crunchy Pumpkin Snack Skewer
     [84709] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_crunchy_spider_skewer.dds' }, -- Crunchy Spider Skewer
-    [84725] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_frosted_brains.dds', name = 'Frosted Brains' }, -- Frosted Brains
+    [84725] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_frosted_brains.dds', name = A.Food_Frosted_Brains }, -- Frosted Brains
     [84678] = { icon = 'LuiExtended/media/icons/consumables/consumable_food_green.dds' }, -- Sweet Sanguine Apples (Generic shared id for other seasonal magicka food)
     [86789] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_alcaire_festival_sword-pie.dds' }, -- Alcaire Festival Sword-Pie
-    [86749] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_jagga-drenched_mud_ball.dds', name = 'Jagga-Drenched \"Mud Ball\"' }, -- Jagga-Drenched "Mud Ball"
-    [86673] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_lava_foot_soup-and-saltrice.dds', name = 'Lava Foot Soup-and-Saltrice' }, -- Lava Foot Soup-and-Saltrice
+    [86749] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_jagga-drenched_mud_ball.dds', name = A.Food_Jagga_Drenched_Mud_Ball }, -- Jagga-Drenched "Mud Ball"
+    [86673] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_lava_foot_soup-and-saltrice.dds', name = A.Food_Lava_Foot_Soup }, -- Lava Foot Soup-and-Saltrice
     [86787] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_rajhins_sugar_claws.dds' }, -- Rajhin's Sugar Claws
     [89955] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_candied_jesters_coins.dds' }, -- Candied Jester's Coins
 
     -- Crafted Seasonal Drink
-    [84700] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_bowl_of_peeled_eyeballs.dds', name = 'Bowl of \"Peeled Eyeballs\"' }, -- Bowl of "Peeled Eyeballs"
+    [84700] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_bowl_of_peeled_eyeballs.dds', name = A.Drink_Bowl_of_Peeled_Eyeballs }, -- Bowl of "Peeled Eyeballs"
     [84735] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_double_bloody_mara.dds' }, -- Double Bloody Mara
-    [84720] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_ghastly_eye_bowl.dds', name = 'Ghastly Eye Bowl' }, -- Ghastly Eye Bowl
+    [84720] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_ghastly_eye_bowl.dds', name = A.Drink_Ghastly_Eye_Bowl }, -- Ghastly Eye Bowl
     [84704] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_witchmothers_party_punch.dds' }, -- Witchmother's Party Punch
     [84731] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_witchmothers_potent_brew.dds' }, -- Witchmother's Potent Brew
-    [86677] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_bergama_warning_fire.dds', name = 'Bergama Warning Fire' }, -- Bergama Warning Fire
-    [86746] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_betnikh_twice-spiked_ale.dds', name = 'Betnikh Twice-Spiked Ale' }, -- Betnikh Twice-Spiked Ale
-    [86559] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_hissmir_fish-eye_rye.dds', name = 'Hissmir Fish-Eye Rye' }, -- Hissmir Fish-Eye Rye
-    [86791] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_snow_bear_glow-wine.dds', name = 'Snow Bear Glow-Wine' }, -- Snow Bear Glow-Wine
+    [86677] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_bergama_warning_fire.dds', name = A.Drink_Bergama_Warning_Fire }, -- Bergama Warning Fire
+    [86746] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_betnikh_twice-spiked_ale.dds', name = A.Drink_Betnikh_Twice_Spiked_Ale }, -- Betnikh Twice-Spiked Ale
+    [86559] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_hissmir_fish-eye_rye.dds', name = A.Drink_Hissmir_Fish_Eye_Rye }, -- Hissmir Fish-Eye Rye
+    [86791] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_snow_bear_glow-wine.dds', name = A.Drink_Snow_Bear_Glow_Wine }, -- Snow Bear Glow-Wine
     [89957] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_dubious_camoran_throne.dds' }, -- Dubious Camoran Throne
     [89971] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_jewels_of_misrule.dds' }, -- Jewels of Misrule
 
@@ -893,27 +892,27 @@ E.EffectOverride = {
     [66551] = { icon = 'LuiExtended/media/icons/consumables/consumable_food_white.dds' }, -- Vendor Health Food
     [66568] = { icon = 'LuiExtended/media/icons/consumables/consumable_food_white.dds' }, -- Vendor Magicka Food
     [66576] = { icon = 'LuiExtended/media/icons/consumables/consumable_food_white.dds' }, -- Vendor Stamina Food
-    [66586] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_white.dds', name = 'Increase Health Recovery' }, -- Vendor Health Drink
-    [66590] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_white.dds', name = 'Increase Magicka Recovery' }, -- Vendor Magicka Drink
-    [66594] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_white.dds', name = 'Increase Stamina Recovery' }, -- Vendor Stamina Drink
+    [66586] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_white.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Health_Recovery) }, -- Vendor Health Drink
+    [66590] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_white.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Magicka_Recovery) }, -- Vendor Magicka Drink
+    [66594] = { icon = 'LuiExtended/media/icons/consumables/consumable_drink_white.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Stamina_Recovery) }, -- Vendor Stamina Drink
 
     -- AVA Food & Drink
-    [72961] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_bar.dds', name = 'Increase Max Magicka & Stamina' }, -- Cyrodilic Field Bar
-    [72956] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_tack.dds', name = 'Increase Max Health & Stamina' }, -- Cyrodilic Field Tack
-    [72959] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_treat.dds', name = 'Increase Max Health & Magicka' }, -- Cyrodilic Field Treat
-    [72971] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_tonic.dds', name = 'Increase Magicka & Stamina Recovery' }, -- Cyrodilic Field Tonic
-    [72965] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_brew.dds', name = 'Increase Health & Stamina Recovery' }, -- Cyrodilic Field Brew
-    [72968] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_tea.dds', name = 'Increase Health & Magicka Recovery' }, -- Cyrodilic Field Tea
+    [72961] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_bar.dds', name = A.Food_Magicka_Stamina_Increase }, -- Cyrodilic Field Bar
+    [72956] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_tack.dds', name = A.Food_Health_Stamina_Increase }, -- Cyrodilic Field Tack
+    [72959] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_treat.dds', name = A.Food_Health_Magicka_Increase }, -- Cyrodilic Field Treat
+    [72971] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_tonic.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Magicka_Stamina_Recovery) }, -- Cyrodilic Field Tonic
+    [72965] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_brew.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Health_Stamina_Recovery) }, -- Cyrodilic Field Brew
+    [72968] = { icon = 'LuiExtended/media/icons/consumables/consumable_ava_field_tea.dds', name = zo_strformat("<<1>> <<2>>", A.Drink_Increase, A.Drink_Health_Magicka_Recovery) }, -- Cyrodilic Field Tea
 
     -- Crown Food & Drink
-    [85484] = { icon = 'LuiExtended/media/icons/consumables/consumable_crown_crate_food.dds', name = 'Crown Crate Fortifying Meal' }, -- Crown Crate Fortifying Meal
-    [68411] = { icon = 'LuiExtended/media/icons/consumables/consumable_crown_food.dds', name = 'Crown Fortifying Meal' }, -- Crown Fortifying Meal
-    [85497] = { icon = 'LuiExtended/media/icons/consumables/consumable_crown_crate_drink.dds', name = 'Crown Crate Refreshing Drink' }, -- Crown Crate Refreshing Drink
-    [68416] = { icon = 'LuiExtended/media/icons/consumables/consumable_crown_drink.dds', name = 'Crown Refreshing Drink' }, -- Crown Refreshing Drink
-    [92435] = { icon = 'LuiExtended/media/icons/consumables/consumable_crowncrate_magickahealth_food.dds', name = 'Crown Combat Mystic\'s Stew'}, -- Crown Combat Mystic's Stew
-    [92474] = { icon = 'LuiExtended/media/icons/consumables/consumable_crowncrate_staminahealth_food.dds', name = 'Crown Vigorous Ragout'}, -- Crown Vigorous Ragout
-    [92433] = { icon = 'LuiExtended/media/icons/consumables/consumable_crowncrate_magickahealth_drink.dds', name = 'Crown Stout Magic Liqueur'}, -- Crown Stout Magic Liqueur
-    [92476] = { icon = 'LuiExtended/media/icons/consumables/consumable_crowncrate_staminahealth_drink.dds', name = 'Crown Vigorous Tincture'}, -- Crown Vigorous Tincture
+    [85484] = { icon = 'LuiExtended/media/icons/consumables/consumable_crown_crate_food.dds', name = A.Food_Crown_Crate_Meal }, -- Crown Crate Fortifying Meal
+    [68411] = { icon = 'LuiExtended/media/icons/consumables/consumable_crown_food.dds', name = A.Food_Crown_Meal }, -- Crown Fortifying Meal
+    [85497] = { icon = 'LuiExtended/media/icons/consumables/consumable_crown_crate_drink.dds', name = A.Drink_Crown_Crate_Drink }, -- Crown Crate Refreshing Drink
+    [68416] = { icon = 'LuiExtended/media/icons/consumables/consumable_crown_drink.dds', name = A.Drink_Crown_Drink }, -- Crown Refreshing Drink
+    [92435] = { icon = 'LuiExtended/media/icons/consumables/consumable_crowncrate_magickahealth_food.dds', name = A.Food_Crown_Combat_Mystics_Stew }, -- Crown Combat Mystic's Stew
+    [92474] = { icon = 'LuiExtended/media/icons/consumables/consumable_crowncrate_staminahealth_food.dds', name = A.Food_Crown_Vigorous_Ragout }, -- Crown Vigorous Ragout
+    [92433] = { icon = 'LuiExtended/media/icons/consumables/consumable_crowncrate_magickahealth_drink.dds', name = A.Drink_Crown_Stout_Magic_Liqueur }, -- Crown Stout Magic Liqueur
+    [92476] = { icon = 'LuiExtended/media/icons/consumables/consumable_crowncrate_staminahealth_drink.dds', name = A.Drink_Crown_Vigorous_Tincture }, -- Crown Vigorous Tincture
 
     -- Experience Bonuses
     [64210] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_psijic_ambrosia.dds', name = 'Psijic Ambrosia' }, -- Psijic Ambrosia

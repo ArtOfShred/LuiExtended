@@ -222,139 +222,33 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     local zos_GetKillingAttackInfo = GetKillingAttackInfo
     
     GetKillingAttackerInfo = function(index)
-        local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
-        local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits = zos_GetKillingAttackInfo(index)
-       -- if LUIE.DeathRecap.DeathRecapSourceOverride[attackerRawName] then
-       --     if LUIE.DeathRecap.DeathRecapSourceOverride[attackerRawName][attackName] then attackerRawName = LUIE.DeathRecap.DeathRecapSourceOverride[attackerRawName][attackName] end
-       -- end
-       
-       -- Override source name (Non-player)
-        if LUIE.DeathRecap.DeathRecapInfoOverride[attackName] and LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName] and not isPlayer then
-            local source
-            if LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName].source then source = LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName].source end
-            if source then attackerRawName = source end
-        end
-        
-        -- Override pet name (Player)
-        if (minionName ~= "" and minionName ~= nil) and LUIE.DeathRecap.DeathRecapPlayerPet[minionName] and isPlayer then
-            if LUIE.DeathRecap.DeathRecapPlayerPet[minionName][attackName] then
-                local source
-                if LUIE.DeathRecap.DeathRecapPlayerPet[minionName][attackName].source then source = LUIE.DeathRecap.DeathRecapPlayerPet[minionName][attackName].source end
-                if source then minionName = source end
-            end
-        end
-        
+		local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
+		local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
+
+		if LUIE.DeathRecap.DeathRecapOverride[abilityId] then attackerRawName = E.DeathRecapOverride[abilityId] end
+		
         return attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName
     end
  
     GetKillingAttackInfo = function(index)
         local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
-        local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits = zos_GetKillingAttackInfo(index)
-        
-        local name
-        local icon
-        attackerRawName = strformat("<<t:1>>", attackerRawName)
-        minionName = strformat("<<t:1>>", minionName)
-        
-        -- Player pet ability overrides
-        if (minionName ~= "" and minionName ~= nil) and LUIE.DeathRecap.DeathRecapPlayerPet[minionName] and isPlayer then
-            if LUIE.DeathRecap.DeathRecapPlayerPet[minionName][attackName] then
-                if LUIE.DeathRecap.DeathRecapPlayerPet[minionName][attackName].name then name = LUIE.DeathRecap.DeathRecapPlayerPet[minionName][attackName].name end
-                if LUIE.DeathRecap.DeathRecapPlayerPet[minionName][attackName].icon then icon = LUIE.DeathRecap.DeathRecapPlayerPet[minionName][attackName].icon end
-                if name then attackName = name end
-                if icon then attackIcon = icon end
-                return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
-            end
-        end
-        
-        -- Player ability overrides (Advanced - checks name + icon)
-        if LUIE.DeathRecap.DeathRecapPlayerAdvanced[attackName] and isPlayer then
-            if LUIE.DeathRecap.DeathRecapPlayerAdvanced[attackName][attackIcon] then
-                if LUIE.DeathRecap.DeathRecapPlayerAdvanced[attackName][attackIcon].name then name = LUIE.DeathRecap.DeathRecapPlayerAdvanced[attackName][attackIcon].name end
-                if LUIE.DeathRecap.DeathRecapPlayerAdvanced[attackName][attackIcon].icon then icon = LUIE.DeathRecap.DeathRecapPlayerAdvanced[attackName][attackIcon].icon end
-                if name then attackName = name end
-                if icon then attackIcon = icon end
-                return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
-            end
-        end
-        
-        -- Player ability overrides (Basic - just checks name)
-        if LUIE.DeathRecap.DeathRecapPlayerBasic[attackName] and isPlayer then
-            if LUIE.DeathRecap.DeathRecapPlayerBasic[attackName].name then name = LUIE.DeathRecap.DeathRecapPlayerBasic[attackName].name end
-            if LUIE.DeathRecap.DeathRecapPlayerBasic[attackName].icon then icon = LUIE.DeathRecap.DeathRecapPlayerBasic[attackName].icon end
-            if name then attackName = name end
-            if icon then attackIcon = icon end
-            return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
-        end
-        
-        -- A few overrides require source, attackname, and ICON as well, this handles those
-        if LUIE.DeathRecap.DeathRecapTripleOverride[attackName] and not isPlayer then
-            if LUIE.DeathRecap.DeathRecapTripleOverride[attackName][attackerRawName] then
-                if LUIE.DeathRecap.DeathRecapTripleOverride[attackName][attackerRawName][attackIcon] then
-                    if LUIE.DeathRecap.DeathRecapTripleOverride[attackName][attackerRawName][attackIcon].name then name = LUIE.DeathRecap.DeathRecapTripleOverride[attackName][attackerRawName][attackIcon].name end
-                    if LUIE.DeathRecap.DeathRecapTripleOverride[attackName][attackerRawName][attackIcon].icon then icon = LUIE.DeathRecap.DeathRecapTripleOverride[attackName][attackerRawName][attackIcon].icon end
-                    if name then attackName = name end
-                    if icon then attackIcon = icon end
-                    return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
-                end
-            elseif LUIE.DeathRecap.DeathRecapTripleOverride[attackName][minionName] then
-                if LUIE.DeathRecap.DeathRecapTripleOverride[attackName][minionName][attackIcon] then
-                    if LUIE.DeathRecap.DeathRecapTripleOverride[attackName][minionName][attackIcon].name then name = LUIE.DeathRecap.DeathRecapTripleOverride[attackName][minionName][attackIcon].name end
-                    if LUIE.DeathRecap.DeathRecapTripleOverride[attackName][minionName][attackIcon].icon then icon = LUIE.DeathRecap.DeathRecapTripleOverride[attackName][minionName][attackIcon].icon end
-                    if name then attackName = name end
-                    if icon then attackIcon = icon end
-                    return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
-                end
-            end
-        end
-        
-        -- Advanced override considering source
-        if LUIE.DeathRecap.DeathRecapInfoOverride[attackName] and not isPlayer then
-            if LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName] then
-                if LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName].name then name = LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName].name end
-                if LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName].icon then icon = LUIE.DeathRecap.DeathRecapInfoOverride[attackName][attackerRawName].icon end
-                if name then attackName = name end
-                if icon then attackIcon = icon end
-                return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
-            elseif LUIE.DeathRecap.DeathRecapInfoOverride[attackName][minionName] then
-                if LUIE.DeathRecap.DeathRecapInfoOverride[attackName][minionName].name then name = LUIE.DeathRecap.DeathRecapInfoOverride[attackName][minionName].name end
-                if LUIE.DeathRecap.DeathRecapInfoOverride[attackName][minionName].icon then icon = LUIE.DeathRecap.DeathRecapInfoOverride[attackName][minionName].icon end
-                if name then attackName = name end
-                if icon then attackIcon = icon end
-                return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
-            end  
-        end
-        
-        -- Advanced override considering icon
-        if LUIE.DeathRecap.DeathRecapIconOverride[attackName] and not isPlayer then
-            if LUIE.DeathRecap.DeathRecapIconOverride[attackName][attackIcon] then
-                if LUIE.DeathRecap.DeathRecapIconOverride[attackName][attackIcon].name then name = LUIE.DeathRecap.DeathRecapIconOverride[attackName][attackIcon].name end
-                if LUIE.DeathRecap.DeathRecapIconOverride[attackName][attackIcon].icon then icon = LUIE.DeathRecap.DeathRecapIconOverride[attackName][attackIcon].icon end
-                if name then attackName = name end
-                if icon then attackIcon = icon end
-                return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
-            end  
-        end
-        
-        -- Basic override by name
-        if LUIE.DeathRecap.DeathRecapBasicOverride[attackName] and not isPlayer then
-            if LUIE.DeathRecap.DeathRecapBasicOverride[attackName].name then name = LUIE.DeathRecap.DeathRecapBasicOverride[attackName].name end
-            if LUIE.DeathRecap.DeathRecapBasicOverride[attackName].icon then icon = LUIE.DeathRecap.DeathRecapBasicOverride[attackName].icon end
-            if name then attackName = name end
-            if icon then attackIcon = icon end
-            return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
-        end
-        
-        -- Override for self inflicted damage
-        if LUIE.DeathRecap.NoSourceOverride[attackName] and attackerRawName == "" then
-            if LUIE.DeathRecap.NoSourceOverride[attackName][attackIcon] then
-                if LUIE.DeathRecap.NoSourceOverride[attackName][attackIcon].name then name = LUIE.DeathRecap.NoSourceOverride[attackName][attackIcon].name end
-                if LUIE.DeathRecap.NoSourceOverride[attackName][attackIcon].icon then icon = LUIE.DeathRecap.NoSourceOverride[attackName][attackIcon].icon end
-                if name then attackName = name end
-                if icon then attackIcon = icon end
-                return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
-            end
-        end
+        local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
+ 
+		if LUIE.Effects.EffectOverride[abilityId] then
+			attackName = LUIE.Effects.EffectOverride[abilityId].name or attackName
+			attackIcon = LUIE.Effects.EffectOverride[abilityId].icon or attackIcon
+		end
+		
+		if LUIE.Effects.EffectOverrideByName[abilityId] then
+			unitName = strformat("<<t:1>>", attackerRawName)
+			if LUIE.Effects.EffectOverrideByName[abilityId][unitName] then
+				if LUIE.Effects.EffectOverrideByName[abilityId][unitName].hide then 
+					return
+				end
+				attackName = LUIE.Effects.EffectOverrideByName[abilityId][unitName].name or attackName
+				attackIcon = LUIE.Effects.EffectOverrideByName[abilityId][unitName].icon or attackIcon
+			end
+		end
         
         return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
     end
