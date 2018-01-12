@@ -224,7 +224,7 @@ E.DebuffDisplayOverrideName = {
 E.EffectGroundDisplay = {
 
     -- Monster Sets
-    [59590] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_bogdan.dds', name = 'Bogdan the Nightflame', buff = true, debuff = false, ground = false }, -- Imperial Prison Item Set (Bogdan the Nightflame)
+    [59590] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_bogdan.dds', name = A.Set_Bogdan_the_Nightflame, buff = true, debuff = false, ground = false }, -- Imperial Prison Item Set (Bogdan the Nightflame)
     [97901] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_stone.dds', buff = true, debuff = false, ground = true }, -- Domihaus (Domihaus) 
     [97882] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_fire.dds', buff = true, debuff = false, ground = true }, -- Domihaus (Domihaus)
     [97855] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_earthgore.dds', buff = true, debuff = false, ground = false }, -- Earthgore (Earthgore)
@@ -915,29 +915,29 @@ E.EffectOverride = {
     [92476] = { icon = 'LuiExtended/media/icons/consumables/consumable_crowncrate_staminahealth_drink.dds', name = A.Drink_Crown_Vigorous_Tincture }, -- Crown Vigorous Tincture
 
     -- Experience Bonuses
-    [64210] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_psijic_ambrosia.dds', name = 'Psijic Ambrosia' }, -- Psijic Ambrosia
-    [89683] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_aetherial_ambrosia.dds', name = 'Aetherial Ambrosia' }, -- Aetherial Ambrosia
-    [88445] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_mythic_aetherial_ambrosia.dds', name = 'Mythic Aetherial Ambrosia' }, -- Mythic Aetherial Ambrosia
-    [66776] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_scroll.dds', name = 'Crown Experience Scroll' }, -- Crown Experience Scroll
-    [85501] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_1.dds', name = 'Crown Crate Experience Scroll' }, -- Crown Crate Experience Scroll
-    [85502] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_2.dds', name = 'Major Crown Crate Experience Scroll' }, -- Major Crown Crate Experience Scroll
-    [85503] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_3.dds', name = 'Grand Crown Crate Experience Scroll' }, -- Grand Crown Crate Experience Scroll
+    [64210] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_psijic_ambrosia.dds', name = A.Experience_Psijic_Ambrosia }, -- Psijic Ambrosia
+    [89683] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_aetherial_ambrosia.dds', name = A.Experience_Aetherial_Ambrosia }, -- Aetherial Ambrosia
+    [88445] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_mythic_aetherial_ambrosia.dds', name = A.Experience_Mythic_Ambrosia }, -- Mythic Aetherial Ambrosia
+    [66776] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_scroll.dds', name = A.Experience_Crown_Scroll }, -- Crown Experience Scroll
+    [85501] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_1.dds', name = A.Experience_Crown_Crate_Scroll_1 }, -- Crown Crate Experience Scroll
+    [85502] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_2.dds', name = A.Experience_Crown_Crate_Scroll_2 }, -- Major Crown Crate Experience Scroll
+    [85503] = { icon = 'LuiExtended/media/icons/consumables/consumable_xp_cratescroll_3.dds', name = A.Experience_Crown_Crate_Scroll_3 }, -- Grand Crown Crate Experience Scroll
 
     -- Other
     [70582] = { hide = true }, -- Roll 1d1000 (Merethic Restorative Resin)
     
     -- Seasonal Misc
-    [86794] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_festival_mints.dds', name = 'High Hrothgar Festival Mints' }, -- Very Cold (High Hrothgar Festival Mints)
-    [86740] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_festival_grog.dds', name = 'Sailor\'s Warning Festival Grog' }, -- Very Drunk (Sailor's Warning Festival Grog)
+    [86794] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_festival_mints.dds', name = A.Consumable_Festival_Mints }, -- Very Cold (High Hrothgar Festival Mints)
+    [86740] = { icon = 'LuiExtended/media/icons/consumables/consumable_event_festival_grog.dds', name = A.Consumable_Sailors_Grog }, -- Very Drunk (Sailor's Warning Festival Grog)
     
     [85355] = {icon = 'LuiExtended/media/icons/mementos/memento_fire-breathers_torches.dds', unbreakable = 1 }, -- Flame Juggling (Consumable Version)
     [85354] = {icon = 'LuiExtended/media/icons/mementos/memento_jugglers_knives.dds.dds', unbreakable = 1 }, -- Dagger Juggling (Consumable Verison)
     [85353] = {icon = 'LuiExtended/media/icons/mementos/memento_sword-swallowers_blade.dds', unbreakable = 1 }, -- Sword Swallowing (Consumable Version)
 
     -- Base Mementos
-    [26829] = { icon = 'LuiExtended/media/icons/mementos/memento_almalexias_enchanted_lantern.dds', name = 'Almalexia\'s Enchanted Lantern' }, -- Light of the Tribunal (Almalexia's Enchanted Lantern)
+    [26829] = { icon = 'LuiExtended/media/icons/mementos/memento_almalexias_enchanted_lantern.dds', name = A.Memento_Almalexias_Lantern }, -- Light of the Tribunal (Almalexia's Enchanted Lantern)
     [41988] = {icon = 'LuiExtended/media/icons/mementos/memento_bonesnap_binding_stone.dds', unbreakable = 1 }, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
-    [39245] = {icon = 'LuiExtended/media/icons/mementos/memento_discourse_amaranthine.dds', name = 'Discourse Amaranthine', unbreakable = 1 }, -- Glimpse of the Forbidden (Discoure Amaranthine)
+    [39245] = {icon = 'LuiExtended/media/icons/mementos/memento_discourse_amaranthine.dds', name = A.Memento_Discourse_Amaranthine, unbreakable = 1 }, -- Glimpse of the Forbidden (Discoure Amaranthine)
     [41950] = { icon = 'LuiExtended/media/icons/mementos/memento_yokudan_totem.dds' }, -- Fetish of Anger (Fetish of Anger)
     [21226] = { icon = 'LuiExtended/media/icons/mementos/memento_finvirs_trinket.dds' }, -- Finvir's Trinket (Finvir's Trinket)
     [43700] = { hide = true }, -- Wand of Finding (Lena's Wand of Finding)
@@ -945,54 +945,54 @@ E.EffectOverride = {
     [43703] = { hide = true }, -- Extracting... (Lena's Wind of Finding)
     [43704] = { hide = true }, -- Extracting... (Lena's Wind of Finding)
     [43701] = { hide = true }, -- Extracting... (Lena's Wind of Finding)
-    [42076] = { icon = 'LuiExtended/media/icons/mementos/memento_mezha-dros_sealing_amulet.dds', name = 'Mezha-dro\'s Sealing Amulet', unbreakable = 1 }, -- Tear (Mezha-dro's Sealing Amulet)
+    [42076] = { icon = 'LuiExtended/media/icons/mementos/memento_mezha-dros_sealing_amulet.dds', name = A.Memento_Sealing_Amulet, unbreakable = 1 }, -- Tear (Mezha-dro's Sealing Amulet)
     [34578] = { icon = 'LuiExtended/media/icons/mementos/memento_nirnroot_wine.dds', unbreakable = 1 }, -- Nirnroot Wine (Nirnroot Wine)
-    [89550] = { icon = 'LuiExtended/media/icons/mementos/memento_twilight_shard.dds', name = 'Twilight Shard', unbreakable = 1 }, -- TROPHY Azura's Light (Twilight Shard)
-    [42053] = { icon = 'LuiExtended/media/icons/mementos/memento_yokudan_totem.dds', name = 'Yokudan Totem', unbreakable = 1 }, -- Yokudan Salute (Yokudan Totem)
+    [89550] = { icon = 'LuiExtended/media/icons/mementos/memento_twilight_shard.dds', name = A.Memento_Twilight_Shard, unbreakable = 1 }, -- TROPHY Azura's Light (Twilight Shard)
+    [42053] = { icon = 'LuiExtended/media/icons/mementos/memento_yokudan_totem.dds', name = A.Memento_Yokudan_Totem, unbreakable = 1 }, -- Yokudan Salute (Yokudan Totem)
     
     [81575] = { hide = true }, -- Event - WitchFest Cauldron (Witchmother's Whistle)
     [16846] = { hide = true }, -- Blackfeather Court Whistle (Blackfeather Court Whistle)
     [25703] = { hide = true }, -- Justal's Falcon (Justal's Falcon)
     
     -- DLC Mementos
-    [79510] = { icon = 'LuiExtended/media/icons/mementos/memento_blade_of_the_blood_oath.dds', name = 'Blade of the Blood Oath', unbreakable = 1 }, -- TROPHY Blood Oath (Blade of the Blood Oath)
+    [79510] = { icon = 'LuiExtended/media/icons/mementos/memento_blade_of_the_blood_oath.dds', name = A.Memento_Blade_of_the_Blood_Oath, unbreakable = 1 }, -- TROPHY Blood Oath (Blade of the Blood Oath)
     [92862] = { hide = true }, -- Dreamers Chime (Ringing Bell)
-    [92863] = { icon = 'LuiExtended/media/icons/mementos/memento_dreamers_chime.dds', name = 'Dreamer\'s Chime', unbreakable = 1 }, -- Dreamers Chime (Stun)
+    [92863] = { icon = 'LuiExtended/media/icons/mementos/memento_dreamers_chime.dds', name = A.Memento_Dreamers_Chime, unbreakable = 1 }, -- Dreamers Chime (Stun)
     
     [77785] = { hide = true }, -- Rain of Coins (Coin of Illusory Riches)
     
-    [74151] = {icon = 'LuiExtended/media/icons/mementos/memento_hidden_pressure_vent.dds', name = 'Hidden Pressure Vent', unbreakable = 1 }, -- Stun (Hidden Pressure Vent)
+    [74151] = {icon = 'LuiExtended/media/icons/mementos/memento_hidden_pressure_vent.dds', name = A.Memento_Hidden_Pressure_Vent, unbreakable = 1 }, -- Stun (Hidden Pressure Vent)
     
     [73685] = { hide = true }, -- Rkindaleft Trophy (Hidden Pressure Vent)
-    [77786] = { icon = 'LuiExtended/media/icons/mementos/memento_coin_of_illusory_riches.dds', name = 'Coin of Illusory Riches', unbreakable = 1 }, -- Stun (Coin of Illusory Riches)
+    [77786] = { icon = 'LuiExtended/media/icons/mementos/memento_coin_of_illusory_riches.dds', name = A.Memento_Coin_of_Illusory_Riches, unbreakable = 1 }, -- Stun (Coin of Illusory Riches)
     [73686] = { hide = true }, -- Old Orsinium Trophy (Malacath's Wrathful Flame)
-    [74232] = { icon = 'LuiExtended/media/icons/mementos/memento_malacaths_wrathful_flame.dds', name = 'Malacath\'s Wrathful Flame', unbreakable = 1 }, -- Stun (Malacath's Wrathful Flame)
+    [74232] = { icon = 'LuiExtended/media/icons/mementos/memento_malacaths_wrathful_flame.dds', name = A.Memento_Malacaths_Wrathful_Flame, unbreakable = 1 }, -- Stun (Malacath's Wrathful Flame)
 
     -- Seasonal Mementos
     [77027] = { hide = true }, -- Anniversary Cake - Forreals (Jubilee Cake)
     [87998] = { hide = true }, -- Anniversary Cake (2nd Annual Jubilee Cake)
-    [77123] = { icon = 'LuiExtended/media/icons/mementos/memento_event_jubilee_cake.dds', name = '2nd Annual Jubilee Cake' }, -- 2017 Anniversary EXP Buff (2nd Annual Jubilee Cake)
+    [77123] = { icon = 'LuiExtended/media/icons/mementos/memento_event_jubilee_cake.dds', name = A.Memento_Jubliee_Cake }, -- 2017 Anniversary EXP Buff (2nd Annual Jubilee Cake)
     [84369] = { icon = 'LuiExtended/media/icons/abilities/ability_event_witchmothers_brew.dds' }, -- Witchmother's Brew (Witchmother's Whistle)
-    [86774] = { icon = 'esoui/art/icons/achievement_newlifefestival_001.dds', name = 'Mud Ball' }, -- Mudball (Mud Ball Pouch)
+    [86774] = { icon = 'esoui/art/icons/achievement_newlifefestival_001.dds', name = A.Memento_Mud_Ball }, -- Mudball (Mud Ball Pouch)
     [86779] = { hide = true }, -- Covered in Mud (Mud Ball Pouch)
 	
 	[91449] = { icon = 'LuiExtended/media/icons/abilities/ability_event_bredas_magnificent_mead.dds' }, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
 
     -- Crown Store Mementos
-    [85344] = { icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_aura.dds', name = 'Storm Atronach Aura' }, -- Atronach Aura (Storm Atronach Aura)
-    [85347] = { icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_juggle.dds', name = 'Storm Orb Juggle', unbreakable = 1 }, -- Storm Orb Juggle (Atronach Juggling)
-    [86976] = { icon = 'LuiExtended/media/icons/mementos/memento_wild_hunt_leaf-dance_aura.dds', name = 'Wild Hunt Leaf-Dance Aura' }, -- Spriggan Aura (Wild Hunt Leaf-Dance Aura)
-    [86978] = { icon = 'LuiExtended/media/icons/mementos/memento_floral_swirl_aura.dds', name = 'Floral Swirl Aura' }, -- Grand Spriggan Aura (Floral Swirl Aura)
+    [85344] = { icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_aura.dds', name = A.Memento_Storm_Atronach_Aura }, -- Atronach Aura (Storm Atronach Aura)
+    [85347] = { icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_juggle.dds', name = A.Memento_Storm_Orb_Juggle, unbreakable = 1 }, -- Storm Orb Juggle (Atronach Juggling)
+    [86976] = { icon = 'LuiExtended/media/icons/mementos/memento_wild_hunt_leaf-dance_aura.dds', name = A.Memento_Wild_Hunt_Aura }, -- Spriggan Aura (Wild Hunt Leaf-Dance Aura)
+    [86978] = { icon = 'LuiExtended/media/icons/mementos/memento_floral_swirl_aura.dds', name = A.Memento_Floral_Swirl_Aura }, -- Grand Spriggan Aura (Floral Swirl Aura)
     
-    [92866] = { icon = 'LuiExtended/media/icons/mementos/memento_dwarven_puzzle_orb.dds', name = 'Dwarven Puzzle Orb' }, -- Dwarven Globe (Dwarven Puzzle Orb)
-    [92867] = { icon = 'LuiExtended/media/icons/mementos/memento_dwarven_tonal_forks.dds', name = 'Dwarven Tonal Forks' }, -- Dwarven Tuning Forks (Dwarven Tonal Forks)
+    [92866] = { icon = 'LuiExtended/media/icons/mementos/memento_dwarven_puzzle_orb.dds', name = A.Memento_Dwarven_Puzzle_Orb }, -- Dwarven Globe (Dwarven Puzzle Orb)
+    [92867] = { icon = 'LuiExtended/media/icons/mementos/memento_dwarven_tonal_forks.dds', name = A.Memento_Dwarven_Tonal_Forks }, -- Dwarven Tuning Forks (Dwarven Tonal Forks)
     
-    [97273] = { icon = 'LuiExtended/media/icons/mementos/memento_crows_calling.dds', name = 'Crow\'s Calling', unbreakable = 1 }, -- TROPHY Death Crate Mem 1 (Crow's Calling)
+    [97273] = { icon = 'LuiExtended/media/icons/mementos/memento_crows_calling.dds', name = A.Memento_Crows_Calling, unbreakable = 1 }, -- TROPHY Death Crate Mem 1 (Crow's Calling)
     [98378] = { hide = true }, -- Murderous Strike (Murderous Strike)
     
-    [99318] = { icon = 'LuiExtended/media/icons/mementos/memento_fiery_orb.dds', name = 'Fiery Orb', unbreakable = 1 }, -- TROPHY Flame Crate Mem 1 (Fiery Orb)
-    [99319] = { icon = 'LuiExtended/media/icons/mementos/memento_flame_pixie.dds', name = 'Flame Pixie', unbreakable = 1 }, -- Flame Crate Memento 2 (Flame Pixie)
-    [99320] = { icon = 'LuiExtended/media/icons/mementos/memento_flame_eruption.dds', name = 'Flame Eruption', unbreakable = 1 }, -- TROPHY Flame Crate Mem 3 (Flame Eruption)
+    [99318] = { icon = 'LuiExtended/media/icons/mementos/memento_fiery_orb.dds', name = A.Memento_Fiery_Orb, unbreakable = 1 }, -- TROPHY Flame Crate Mem 1 (Fiery Orb)
+    [99319] = { icon = 'LuiExtended/media/icons/mementos/memento_flame_pixie.dds', name = A.Memento_Flame_Pixie, unbreakable = 1 }, -- Flame Crate Memento 2 (Flame Pixie)
+    [99320] = { icon = 'LuiExtended/media/icons/mementos/memento_flame_eruption.dds', name = A.Memento_Flame_Eruption, unbreakable = 1 }, -- TROPHY Flame Crate Mem 3 (Flame Eruption)
 
     -- Assistants
     [77645] = { hide = true }, -- Stealth (Pirharri the Smuggler)
@@ -1080,7 +1080,7 @@ E.EffectOverride = {
     [99920] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_defensive_position.dds' }, -- Defensive Position (Perfected) (Perfected Asylum 1H + Shield)
     [99919] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_defensive_position.dds' }, -- Defensive Position (Perfected) (Perfected Asylum 1H + Shield)
     [99582] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_timeless_blessing.dds' }, -- Timeless Blessing (Perfected) (Perfected Asylum Resto Staff)
-    [99989] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_concentrated_force.dds', name = 'Concentrated Force (Perfected)' }, -- Concentrated Force (P) (Asylum Destruction Staff)
+    [99989] = { icon = 'LuiExtended/media/icons/abilities/ability_set_asylum_concentrated_force.dds', name = A.Set_Asylum_Destruction_Staff }, -- Concentrated Force (P) (Asylum Destruction Staff)
     
     -- MAELSTROM WEAPONS
     [99806] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_cruel_flurry.dds' }, -- Cruel Flurry (Maelstrom Dual Wield)
@@ -1099,7 +1099,7 @@ E.EffectOverride = {
     -- MONSTER SETS
     [59517] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds' }, -- Blood Spawn (Blood Spawn)
     [61274] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_blood_spawn.dds' }, -- Blood Spawn (Blood Spawn)
-    [59591] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_bogdan.dds', name = 'Bogdan the Nightflame' }, -- Bogdan Totem (Bogdan the Nightflame)
+    [59591] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_bogdan.dds', name = A.Set_Bogdan_the_Nightflame }, -- Bogdan Totem (Bogdan the Nightflame)
     [81069] = { hide = true }, -- Chokethorn (Chokethorn)
     [81077] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_chokethorn.dds' }, -- Chokethorn (Chokethorn)
     
@@ -3795,7 +3795,7 @@ E.EffectOverride = {
     [86075] = { icon = 'LuiExtended/media/icons/abilities/ability_event_bredas_magnificent_mead.dds' }, -- Breda's Magnificent Mead (Breda's Magnificent Mead)
     [83523] = { icon = 'LuiExtended/media/icons/abilities/ability_event_freezing.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Freezing (Snow Bear Plunge)
     [83522] = { icon = 'LuiExtended/media/icons/abilities/ability_event_warm.dds' }, -- Warm (Snow Bear Plunge)
-    [84330] = { icon = 'esoui/art/icons/achievement_newlifefestival_001.dds', name = 'Mud Ball' }, -- Mudball (Mud Ball Merriment)
+    [84330] = { icon = 'esoui/art/icons/achievement_newlifefestival_001.dds', name = A.Memento_Mud_Ball }, -- Mudball (Mud Ball Merriment)
     [85639] = { hide = true }, -- Covered in Mud (Mud Ball Merriment)
 
     [91369] = { icon = 'LuiExtended/media/icons/abilities/ability_event_steamy_spring_pie.dds', name = 'The Pie of Misrule' }, -- Jester's Experience Boost Pie (The Pie of Misrule)
@@ -4371,43 +4371,43 @@ E.FakeExternalDebuffs = {
 E.FakePlayerBuffs = {
 
     -- Misc Consumables
-    [85355] = {icon = 'LuiExtended/media/icons/mementos/memento_fire-breathers_torches.dds', name = 'Fire-Breather\'s Torches', duration = 12000}, -- Flame Juggling (Consumable Version)
-    [85354] = {icon = 'LuiExtended/media/icons/mementos/memento_jugglers_knives.dds', name = 'Juggler\'s Knives', duration = 12000}, -- Dagger Juggling (Consumable Verison)
-    [85353] = {icon = 'LuiExtended/media/icons/mementos/memento_sword-swallowers_blade.dds', name = 'Sword-Swallower\'s Blade', duration = 12000}, -- Sword Swallowing (Consumable Version)
+    [85355] = {icon = 'LuiExtended/media/icons/mementos/memento_fire-breathers_torches.dds', name = A.Memento_Fire_Breathers_Torches, duration = 12000}, -- Flame Juggling (Consumable Version)
+    [85354] = {icon = 'LuiExtended/media/icons/mementos/memento_jugglers_knives.dds', name = A.Memento_Jugglers_Knives, duration = 12000}, -- Dagger Juggling (Consumable Verison)
+    [85353] = {icon = 'LuiExtended/media/icons/mementos/memento_sword-swallowers_blade.dds', name = A.Memento_Sword_Swallowers_Blade, duration = 12000}, -- Sword Swallowing (Consumable Version)
 
     -- Base Mementos
-    [41988] = {icon = 'LuiExtended/media/icons/mementos/memento_bonesnap_binding_stone.dds', name = 'Bonesnap Binding Stone', duration = 10000}, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
-    [39245] = {icon = 'LuiExtended/media/icons/mementos/memento_discourse_amaranthine.dds', name = 'Discourse Amaranthine', duration = 10000}, -- Glimpse of the Forbidden (Discoure Amaranthine)
-    [42076] = {icon = 'LuiExtended/media/icons/mementos/memento_mezha-dros_sealing_amulet.dds', name = 'Mezha-dro\'s Sealing Amulet', duration = 8000}, -- Tear (Mezha-dro's Sealing Amulet)
-    [34578] = {icon = 'LuiExtended/media/icons/mementos/memento_nirnroot_wine.dds', name = 'Nirnroot Wine', duration = 8000}, -- Nirnroot Wine (Nirnroot Wine)
-    [26339] = {icon = 'LuiExtended/media/icons/mementos/memento_questionable_meat_sack.dds', name = 'Mystery Meat', duration = 5500}, -- Questionable Meat Sack (Questionable Meat Sack)
-    [25369] = {icon = 'LuiExtended/media/icons/mementos/memento_sanguines_goblet.dds', name = 'Sanguine\'s Goblet', duration = 10000}, -- Sanguine's Goblet (Sanguine's Goblet)
-    [89550] = {icon = 'LuiExtended/media/icons/mementos/memento_twilight_shard.dds', name = 'Twilight Shard', duration = 9000 }, -- TROPHY Azura's Light (Twilight Shard)
-    [42008] = {icon = 'LuiExtended/media/icons/mementos/memento_token_of_root_sunder.dds', name = 'Token of Root Sunder', duration = 10000}, -- Blessing of Root Sunder (Token of Root Sunder)
-    [42053] = {icon = 'LuiExtended/media/icons/mementos/memento_yokudan_totem.dds', name = 'Yokudan Totem', duration = 10000}, -- Yokudan Salute (Yokudan Totem)
+    [41988] = {icon = 'LuiExtended/media/icons/mementos/memento_bonesnap_binding_stone.dds', name = A.Memento_Bonesnap_Binding_Stone, duration = 10000}, -- Bonesnap Binding Stone (Bonesnap Binding Stone)
+    [39245] = {icon = 'LuiExtended/media/icons/mementos/memento_discourse_amaranthine.dds', name = A.Memento_Discourse_Amaranthine, duration = 10000}, -- Glimpse of the Forbidden (Discoure Amaranthine)
+    [42076] = {icon = 'LuiExtended/media/icons/mementos/memento_mezha-dros_sealing_amulet.dds', name = A.Memento_Sealing_Amulet, duration = 8000}, -- Tear (Mezha-dro's Sealing Amulet)
+    [34578] = {icon = 'LuiExtended/media/icons/mementos/memento_nirnroot_wine.dds', name = A.Memento_Nirnroot_Wine, duration = 8000}, -- Nirnroot Wine (Nirnroot Wine)
+    [26339] = {icon = 'LuiExtended/media/icons/mementos/memento_questionable_meat_sack.dds', name = A.Memento_Mystery_Meat, duration = 5500}, -- Questionable Meat Sack (Questionable Meat Sack)
+    [25369] = {icon = 'LuiExtended/media/icons/mementos/memento_sanguines_goblet.dds', name = A.Memento_Sanguines_Goblet, duration = 10000}, -- Sanguine's Goblet (Sanguine's Goblet)
+    [89550] = {icon = 'LuiExtended/media/icons/mementos/memento_twilight_shard.dds', name = A.Memento_Twilight_Shard, duration = 9000 }, -- TROPHY Azura's Light (Twilight Shard)
+    [42008] = {icon = 'LuiExtended/media/icons/mementos/memento_token_of_root_sunder.dds', name = A.Memento_Token_of_Root_Sunder, duration = 10000}, -- Blessing of Root Sunder (Token of Root Sunder)
+    [42053] = {icon = 'LuiExtended/media/icons/mementos/memento_yokudan_totem.dds', name = A.Memento_Yokudan_Totem, duration = 10000}, -- Yokudan Salute (Yokudan Totem)
 
     -- DLC Mementos
-    [79510] = {icon = 'LuiExtended/media/icons/mementos/memento_blade_of_the_blood_oath.dds', name = 'Blade of the Blood Oath', duration = 6500}, -- TROPHY Blood Oath (Blade of the Blood Oath)
-    [74151] = {icon = 'LuiExtended/media/icons/mementos/memento_hidden_pressure_vent.dds', name = 'Hidden Pressure Vent', duration = 2500}, -- Stun (Hidden Pressure Vent)
+    [79510] = {icon = 'LuiExtended/media/icons/mementos/memento_blade_of_the_blood_oath.dds', name = A.Memento_Blade_of_the_Blood_Oath, duration = 6500}, -- TROPHY Blood Oath (Blade of the Blood Oath)
+    [74151] = {icon = 'LuiExtended/media/icons/mementos/memento_hidden_pressure_vent.dds', name = A.Memento_Hidden_Pressure_Vent, duration = 2500}, -- Stun (Hidden Pressure Vent)
 
     -- Crown Store Mementos
-    [85349] = {icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_transform.dds', name = 'Storm Atronach Transform', duration = 180000}, -- Storm Atronach Transform (Atronach Transformation)
-    [85347] = {icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_juggle.dds', name = 'Storm Orb Juggle', duration = 12000}, -- Storm Orb Juggle (Atronach Juggling)
-    [86977] = {icon = 'LuiExtended/media/icons/mementos/memento_wild_hunt_transform.dds', name = 'Wild Hunt Transform', duration = 15000}, -- Spriggan Transformation (Wild Hunt Transform)
-    [92868] = {icon = 'LuiExtended/media/icons/mementos/memento_dwemervamidium_mirage.dds', name = 'Dwemervamidium Mirage', duration= 180000}, -- Dwarven Transformation (Dwemervamidium Mirage)
+    [85349] = {icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_transform.dds', name = A.Memento_Storm_Atronach_Transform, duration = 180000}, -- Storm Atronach Transform (Atronach Transformation)
+    [85347] = {icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_juggle.dds', name = A.Memento_Storm_Orb_Juggle, duration = 12000}, -- Storm Orb Juggle (Atronach Juggling)
+    [86977] = {icon = 'LuiExtended/media/icons/mementos/memento_wild_hunt_transform.dds', name = A.Memento_Wild_Hunt_Transform, duration = 180000}, -- Spriggan Transformation (Wild Hunt Transform)
+    [92868] = {icon = 'LuiExtended/media/icons/mementos/memento_dwemervamidium_mirage.dds', name = A.Memento_Dwemervamidium_Mirage, duration= 180000}, -- Dwarven Transformation (Dwemervamidium Mirage)
     
-    [97273] = { icon = 'LuiExtended/media/icons/mementos/memento_crows_calling.dds', name = 'Crow\'s Calling', duration = 9000 }, -- TROPHY Death Crate Mem 1 (Crow's Calling)
-    [97274] = { icon = 'LuiExtended/media/icons/mementos/memento_swarm_of_crows.dds', name = 'Swarm of Crows', duration = 180000 }, -- Swarm of Crows (Swarm of Crows)
+    [97273] = { icon = 'LuiExtended/media/icons/mementos/memento_crows_calling.dds', name = A.Memento_Crows_Calling, duration = 9000 }, -- TROPHY Death Crate Mem 1 (Crow's Calling)
+    [97274] = { icon = 'LuiExtended/media/icons/mementos/memento_swarm_of_crows.dds', name = A.Memento_Swarm_of_Crows, duration = 180000 }, -- Swarm of Crows (Swarm of Crows)
     
-    [99318] = { icon = 'LuiExtended/media/icons/mementos/memento_fiery_orb.dds', name = 'Fiery Orb', unbreakable = 1, duration = 9000 }, -- TROPHY Flame Crate Mem 1 (Fiery Orb)
-    [99319] = { icon = 'LuiExtended/media/icons/mementos/memento_flame_pixie.dds', name = 'Flame Pixie', unbreakable = 1, duration = 8000 }, -- Flame Crate Memento 2 (Flame Pixie)
-    [99320] = { icon = 'LuiExtended/media/icons/mementos/memento_flame_eruption.dds', name = 'Flame Eruption', unbreakable = 1, duration = 2000 }, -- TROPHY Flame Crate Mem 3 (Flame Eruption)
+    [99318] = { icon = 'LuiExtended/media/icons/mementos/memento_fiery_orb.dds', name = A.Memento_Fiery_Orb, unbreakable = 1, duration = 9000 }, -- TROPHY Flame Crate Mem 1 (Fiery Orb)
+    [99319] = { icon = 'LuiExtended/media/icons/mementos/memento_flame_pixie.dds', name = A.Memento_Flame_Pixie, unbreakable = 1, duration = 8000 }, -- Flame Crate Memento 2 (Flame Pixie)
+    [99320] = { icon = 'LuiExtended/media/icons/mementos/memento_flame_eruption.dds', name = A.Memento_Flame_Eruption, unbreakable = 1, duration = 2000 }, -- TROPHY Flame Crate Mem 3 (Flame Eruption)
     
     -- Set Items
     [59573] = { icon = 'esoui/art/icons/ability_buff_major_vitality.dds', name = 'Major Vitality', duration = 510 }, -- Major Vitality (Malubeth)
     [81675] = { icon = 'esoui/art/icons/achievement_housing_038.dds', name = 'Pirate Skeleton', duration = 12000 }, -- Pirate Skeleton
     
-    [71107] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds', name = 'Briareart', duration = 10000 }, -- Briarheart
+    [71107] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds', name = 'Briarheart', duration = 10000 }, -- Briarheart
     
     [97626] = { icon = 'esoui/art/icons/achievement_update11_dungeons_036.dds', name = 'Ironblood', duration = 10000, debuff = true }, -- Ironblood
     

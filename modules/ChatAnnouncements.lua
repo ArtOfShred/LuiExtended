@@ -615,9 +615,11 @@ local CurrencyGoldColorize
 local CurrencyAPColorize
 local CurrencyTVColorize
 local CurrencyWVColorize
+local CurrencyOutfitTokenColorize
 local CurrencyTransmuteColorize
 local CurrencyCrownsColorize
 local CurrencyCrownGemsColorize
+
 
 -- Disguise
 local DisguiseAlertColorize
@@ -842,6 +844,7 @@ function CA.RegisterColorEvents()
     CurrencyAPColorize = ZO_ColorDef:New(unpack(CA.SV.Currency.CurrencyAPColor))
     CurrencyTVColorize = ZO_ColorDef:New(unpack(CA.SV.Currency.CurrencyTVColor))
     CurrencyWVColorize = ZO_ColorDef:New(unpack(CA.SV.Currency.CurrencyWVColor))
+	CurrencyOutfitTokenColorize = ZO_ColorDef:New(unpack(CA.SV.Currency.CurrencyOutfitTokenColor))
     CurrencyTransmuteColorize = ZO_ColorDef:New(unpack(CA.SV.Currency.CurrencyTransmuteColor))
     CurrencyCrownsColorize = ZO_ColorDef:New(unpack(CA.SV.Currency.CurrencyCrownsColor))
     CurrencyCrownGemsColorize = ZO_ColorDef:New(unpack(CA.SV.Currency.CurrencyCrownGemsColor))
@@ -2212,7 +2215,11 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
 		messageChange = CA.SV.ContextMessages.CurrencyMessageReceive
 	-- Purchased with Gems (71), Purchased with Crowns (72)
 	elseif reason == 71 or reason == 72 then
-		messageChange = CA.SV.ContextMessages.CurrencyMessageSpend
+		if currency == CURT_STYLE_STONES then
+			messageChange = CA.SV.ContextMessages.CurrencyMessageReceive
+		else
+			messageChange = CA.SV.ContextMessages.CurrencyMessageSpend
+		end
 
     -- ==============================================================================
     -- DEBUG EVENTS WE DON'T KNOW YET

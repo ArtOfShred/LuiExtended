@@ -2112,14 +2112,11 @@ ZO_CreateStringId("SI_LUIE_SKILL_GLYPH_DECREASE_HEALTH",				"Decrease Health")
 ZO_CreateStringId("SI_LUIE_SKILL_GLYPH_HARDENING",						"Hardening Enchantment")
 ZO_CreateStringId("SI_LUIE_SKILL_GLYPH_WEAKENING",						"Weakening Enchantment")
 ZO_CreateStringId("SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE",					"Weapon Damage Enchantment")
-
 ZO_CreateStringId("SI_LUIE_SKILL_POISON_STEALTH_DRAIN",					"Stealth-Draining Poison")			
 ZO_CreateStringId("SI_LUIE_SKILL_POISON_CONSPICUOUS",					"Conspicuous Poison")
-
 ZO_CreateStringId("SI_LUIE_SKILL_FOOD_ORZORGA_POCKET",					"Orzorga\'s Tripe Trifle Pocket")
 ZO_CreateStringId("SI_LUIE_SKILL_FOOD_ORZORGA_PIE",						"Orzorga\'s Blood Price Pie")
 ZO_CreateStringId("SI_LUIE_SKILL_FOOD_ORZORGA_HAUNCH",					"Orzorga\'s Smoked Bear Haunch")
-
 ZO_CreateStringId("SI_LUIE_SKILL_FOOD_SNACK_SKEWER",					"Crisp and Crunchy Pumpkin Snack Skewer")
 ZO_CreateStringId("SI_LUIE_SKILL_FOOD_FROSTED_BRAINS",					"Frosted Brains")
 ZO_CreateStringId("SI_LUIE_SKILL_FOOD_MUD_BALL",						"Jagga-Drenched \"Mud Ball\"")
@@ -2128,10 +2125,8 @@ ZO_CreateStringId("SI_LUIE_SKILL_FOOD_CROWN_CRATE_FOOD",				"Crown Crate Fortify
 ZO_CreateStringId("SI_LUIE_SKILL_FOOD_CROWN_FOOD",						"Crown Fortifying Meal")
 ZO_CreateStringId("SI_LUIE_SKILL_FOOD_CROWN_STEW",						"Crown Combat Mystic\'s Stew")
 ZO_CreateStringId("SI_LUIE_SKILL_FOOD_CROWN_RAGOUT",					"Crown Vigorous Ragout")
-
 ZO_CreateStringId("SI_LUIE_SKILL_DRINK_INCREASE",						"Increase")
 ZO_CreateStringId("SI_LUIE_SKILL_DRINK_ORZORGA_FROTHGAR",				"Orzorga\'s Red Frothgar")
-
 ZO_CreateStringId("SI_LUIE_SKILL_DRINK_PEELED_EYEBALLS",				"Bowl of \"Peeled Eyeballs\"")
 ZO_CreateStringId("SI_LUIE_SKILL_DRINK_GHASTLY_EYE_BOWL",				"Ghastly Eye Bowl")
 ZO_CreateStringId("SI_LUIE_SKILL_DRINK_WARNING_FIRE",					"Bergama Warning Fire")
@@ -2142,3 +2137,17 @@ ZO_CreateStringId("SI_LUIE_SKILL_DRINK_CROWN_CRATE_DRINK",				"Crown Crate Refre
 ZO_CreateStringId("SI_LUIE_SKILL_DRINK_CROWN_DRINK",					"Crown Refreshing Drink")
 ZO_CreateStringId("SI_LUIE_SKILL_DRINK_CROWN_LIQUEUR",					"Crown Stout Magic Liqueur")
 ZO_CreateStringId("SI_LUIE_SKILL_DRINK_CROWN_TINCTURE",					"Crown Vigorous Tincture")
+
+ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_PSIJIC_AMBROSIA",			"Psijic Ambrosia")
+ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_AETHERIAL_AMBROSIA",		"Aetherial Ambrosia")
+ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_MYTHIC_AMBROSIA",			"Mythic Aetherial Ambrosia")
+ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_CROWN_SCROLL",				"Crown Experience Scroll")
+ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_1",		"Crown Crate Experience Scroll")
+ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_2",		"Major Crown Crate Experience Scroll")
+ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_3",		"Grand Crown Crate Experience Scroll")
+
+ZO_CreateStringId("SI_LUIE_SKILL_CONSUMABLE_FESTIVAL_MINTS", 			"High Hrothgar Festival Mints")
+ZO_CreateStringId("SI_LUIE_SKILL_CONSUMABLE_SAILORS_GROG",				"Sailor\'s Warning Festival Grog")
+ZO_CreateStringId("SI_LUIE_SKILL_COLLECTIBLE_MYSTERY_MEAT",				"Mystery Meat")
+
+ZO_CreateStringId("SI_LUIE_SKILL_SET_BOGDAN_THE_NIGHTFLAME",			"Bogdan the Nightflame")

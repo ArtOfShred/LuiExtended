@@ -124,6 +124,59 @@ A.Drink_Crown_Drink					= GetString(SI_LUIE_SKILL_DRINK_CROWN_DRINK)
 A.Drink_Crown_Stout_Magic_Liqueur	= GetString(SI_LUIE_SKILL_DRINK_CROWN_LIQUEUR)
 A.Drink_Crown_Vigorous_Tincture		= GetString(SI_LUIE_SKILL_DRINK_CROWN_TINCTURE)
 
+A.Experience_Psijic_Ambrosia		= GetString(SI_LUIE_SKILL_EXPERIENCE_PSIJIC_AMBROSIA) -- Psijic Ambrosia
+A.Experience_Aetherial_Ambrosia		= GetString(SI_LUIE_SKILL_EXPERIENCE_AETHERIAL_AMBROSIA) -- Aetherial Ambrosia
+A.Experience_Mythic_Ambrosia		= GetString(SI_LUIE_SKILL_EXPERIENCE_MYTHIC_AMBROSIA) -- Mythic Aetherial Ambrosia
+A.Experience_Crown_Scroll			= GetString(SI_LUIE_SKILL_EXPERIENCE_CROWN_SCROLL) -- Crown Experience Scroll
+A.Experience_Crown_Crate_Scroll_1	= GetString(SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_1) -- Crown Crate Experience Scroll
+A.Experience_Crown_Crate_Scroll_2	= GetString(SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_2) -- Major Crown Crate Experience Scroll
+A.Experience_Crown_Crate_Scroll_3	= GetString(SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_3) -- Grand Crown Crate Experience Scroll
+
+A.Consumable_Festival_Mints			= GetString(SI_LUIE_SKILL_CONSUMABLE_FESTIVAL_MINTS) -- High Hrothgar Festival Mints
+A.Consumable_Sailors_Grog			= GetString(SI_LUIE_SKILL_CONSUMABLE_SAILORS_GROG) -- Sailor's Warning Festival Grog
+
+A.Memento_Almalexias_Lantern		= GetCollectibleName(341)
+A.Memento_Bonesnap_Binding_Stone	= GetCollectibleName(348)
+A.Memento_Nirnroot_Wine				= GetCollectibleName(344)
+A.Memento_Mystery_Meat				= GetString(SI_LUIE_SKILL_COLLECTIBLE_MYSTERY_MEAT)
+A.Memento_Sanguines_Goblet			= GetCollectibleName(338)
+A.Memento_Token_of_Root_Sunder		= GetCollectibleName(349)
+A.Memento_Storm_Atronach_Transform	= GetCollectibleName(596)
+A.Memento_Wild_Hunt_Transform		= GetCollectibleName(759)
+A.Memento_Dwemervamidium_Mirage		= GetCollectibleName(1183)
+A.Memento_Swarm_of_Crows			= GetCollectibleName(1384)
+A.Memento_Fire_Breathers_Torches	= GetCollectibleName(600)
+A.Memento_Jugglers_Knives			= GetCollectibleName(598)
+A.Memento_Sword_Swallowers_Blade	= GetCollectibleName(597)
+A.Memento_Discourse_Amaranthine		= GetCollectibleName(345)
+A.Memento_Sealing_Amulet			= GetCollectibleName(351)
+A.Memento_Twilight_Shard			= GetCollectibleName(1158)
+A.Memento_Yokudan_Totem				= GetCollectibleName(350)
+A.Memento_Blade_of_the_Blood_Oath	= GetCollectibleName(390)
+A.Memento_Dreamers_Chime			= GetCollectibleName(1229)
+A.Memento_Hidden_Pressure_Vent		= GetCollectibleName(354)
+A.Memento_Coin_of_Illusory_Riches	= GetCollectibleName(361)
+A.Memento_Malacaths_Wrathful_Flame	= GetCollectibleName(353)
+A.Memento_Jubliee_Cake				= GetCollectibleName(1109)
+A.Memento_Mud_Ball					= 86749
+A.Memento_Storm_Atronach_Aura		= GetCollectibleName(594)
+A.Memento_Storm_Orb_Juggle			= GetCollectibleName(595)
+A.Memento_Wild_Hunt_Aura			= GetCollectibleName(760)
+A.Memento_Floral_Swirl_Aura			= GetCollectibleName(758)
+A.Memento_Dwarven_Puzzle_Orb		= GetCollectibleName(1181)
+A.Memento_Dwarven_Tonal_Forks		= GetCollectibleName(1182)
+A.Memento_Crows_Calling				= GetCollectibleName(1383)
+A.Memento_Fiery_Orb					= GetCollectibleName(1481)
+A.Memento_Flame_Pixie				= GetCollectibleName(1482)
+A.Memento_Flame_Eruption			= GetCollectibleName(1483)
+
+-- ---------------------------------------------------
+-- ITEM SETS -----------------------------------------
+-- ---------------------------------------------------
+
+A.Set_Asylum_Destruction_Staff		= 99596 -- Concentrated Force (Perfected)
+A.Set_Bogdan_the_Nightflame			= GetString(SI_LUIE_SKILL_SET_BOGDAN_THE_NIGHTFLAME)
+
 -- ---------------------------------------------------
 -- CHAMPION ABILITIES --------------------------------
 -- ---------------------------------------------------
