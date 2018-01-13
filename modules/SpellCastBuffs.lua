@@ -77,6 +77,10 @@ SCB.D = {
     IgnoreSoulSummonsTarget          = false,
     IgnoreSetICDPlayer               = false,
     IgnoreSetICDTarget               = false,
+	IgnoreFoodPlayer				 = false,
+	IgnoreFoodTarget				 = false,
+	IgnoreExperiencePlayer			 = false,
+	IgnoreExperienceTarget			 = false,
     IgnoreDisguise                   = false,
     IgnoreCostume                    = true,
     IgnoreHat                        = true,
@@ -3430,6 +3434,28 @@ function SCB.UpdateContextHideList()
             hideTargetEffects[k] = v
         end
     end
+	
+	if SCB.SV.IgnoreFoodPlayer then
+		for k, v in pairs(E.IsFoodBuff) do
+			hidePlayerEffects[k] = v
+		end
+	end
+	if SCB.SV.IgnoreFoodTarget then
+		for k, v in pairs(E.IsFoodBuff) do
+			hideTargetEffects[k] = v
+		end
+	end
+	
+	if SCB.SV.IgnoreExperiencePlayer then
+		for k, v in pairs(E.IsExperienceBuff) do
+			hidePlayerEffects[k] = v
+		end
+	end
+	if SCB.SV.IgnoreExperienceTarget then
+		for k, v in pairs(E.IsExperienceBuff) do
+			hideTargetEffects[k] = v
+		end
+	end
 
     -- TODO:
     -- Add block here

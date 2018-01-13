@@ -804,7 +804,7 @@ local function CreateCustomFrames()
         for _, baseName in pairs( { 'player', 'reticleover', 'AvaPlayerTarget' } ) do
             local unitTag = baseName
             if UF.CustomFrames[unitTag] then
-                for _, powerType in pairs( {POWERTYPE_HEALTH, POWERTYPE_MAGICKA, POWERTYPE_STAMINA} ) do
+                for _, powerType in pairs( {POWERTYPE_HEALTH} ) do
                     if UF.CustomFrames[unitTag][powerType] then
                         local backdrop = UF.CustomFrames[unitTag][powerType].backdrop
                         local size1

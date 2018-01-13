@@ -117,6 +117,95 @@ E.IsSetICD = {
     [90939] = true, -- Eternal Warrior
 }
 
+E.IsFoodBuff = {
+	-- FOOD BUFF
+	[61259]	= true, -- Health Food
+	[61260]	= true, -- Magicka Food
+	[61261]	= true, -- Stamina Food
+	[61294]	= true, -- Magicka + Stamina Food
+	[61255]	= true, -- Health + Stamina Food
+	[61257]	= true, -- Health + Magicka Food
+	[61218]	= true, -- Triple Food
+	[72819]	= true, -- Orzorga's Tripe Trifle Pocket
+	[72822]	= true, -- Orzorga's Blood Price Pie
+	[72824]	= true, -- Orzorga's Smoked Bear Haunch
+	[100502] = true, -- Deregulated Mushroom Stew
+	[100498] = true, -- Clockwork Citrus Filet
+	[84681]	= true, -- Crisp and Crunchy Pumpkin Skewer
+	[84709]	= true, -- Crunchy Spider Skewer
+	[84725]	= true, -- Frosted Brains
+	[84678]	= true, -- Sweet Sanguine Apples
+	[86798]	= true, -- Alcaire Festival Sword-Pie
+	[86749]	= true, -- Jagga-Drenched "Mud Ball"
+	[86673]	= true, -- Lava Foot Soup-and-Saltrice
+	[86560]	= true, -- Old Aldmeri Orphan Gruel
+	[86787]	= true, -- Rajhin's Sugar Claws
+	[89955]	= true, -- Candied Jester's Coins
+	[89971]	= true, -- Jewels of Misrule
+	[89956]	= true, -- Princess' Delight
+	[66551]	= true, -- Vendor Health Food
+	[66568]	= true, -- Vendor Magicka Food
+	[66576]	= true, -- Vendor Stamina Food
+	[72961]	= true, -- Cyrodilic Field Bar
+	[72956]	= true, -- Cyrodilic Field Tack
+	[72959]	= true, -- Cyrodilic Field Treat
+	[85484]	= true, -- Crown Crate Fortifying Meal
+	[68411]	= true, -- Crown Fortifying Meal
+	[92435]	= true, -- Crown Combat Mystic's Stew
+	[92474]	= true, -- Crown Vigorous Ragout
+	
+	-- DRINK BUFF
+	[61322]	= true, -- Health Drink
+	[61325]	= true, -- Magicka Drink
+	[61328]	= true, -- Stamina Drink
+	[61345]	= true, -- Magicka + Stamina Drink
+	[61340]	= true, -- Health + Stamina Drink
+	[61335]	= true, -- Health + Magicka Drink
+	[61350]	= true, -- Triple Drink
+	[72816]	= true, -- Orzorga's Red Frothgar
+	[100488] = true, -- Spring-Loaded Infusion
+	[84700]	= true, -- Bowl of "Peeled Eyeballs"
+	[84735]	= true, -- Double Bloody Mara
+	[84720]	= true, -- Ghastly Eye Bowl
+	[84704]	= true, -- Witchmother's Party Punch
+	[84731]	= true, -- Witchmother's Potent Brew
+	[86677]	= true, -- Bergama Warning Fire
+	[86746]	= true, -- Betnikh Twice-Spiked Ale
+	[86559]	= true, -- Hissmir Fish-Eye Rye
+	[86791]	= true, -- Snow Bear Glow-Wine
+	[89957]	= true, -- Dubious Camoran Throne
+	[66586]	= true, -- Vendor Health Drink
+	[66590]	= true, -- Vendor Magicka Drink
+	[66594]	= true, -- Vendor Stamina Drink
+	[72971]	= true, -- Cyrodilic Field Tonic
+	[72965]	= true, -- Cyrodilic Field Brew
+	[72968]	= true, -- Cyrodilic Field Tea
+	[85497]	= true, -- Crown Crate Refreshing Drink
+	[68416]	= true, -- Crown Refreshing Drink
+	[92433]	= true, -- Crown Stout Magic Liqueur
+	[92476]	= true, -- Crown Vigorous Tincture
+}
+
+E.IsExperienceBuff = {
+
+	-- CONSUMABLE
+	[64210] = true, -- Psijic Ambrosia
+	[89683] = true, -- Aetherial Ambrosia
+	[88445] = true, -- Mythic Aetherial Ambrosia
+	[66776] = true, -- Crown Experience Scroll
+	[85501] = true, -- Crown Crate Experience Scroll
+	[85502] = true, -- Major Crown Crate Experience Scroll
+	[85503] = true, -- Grand Crown Crate Experience Scroll
+	
+	-- EVENT
+	[77123] = true, -- 2017 Anniversary EXP Buff
+	[84369] = true, -- Witchmother's Brew
+	[86075] = true, -- Breda's Magnificent Mead
+	[91449] = true, -- Breda's Magnificent Mead
+	[92332] = true, -- Pelinal's Ferocity
+	-- TODO: MISSING JESTER XP BOOST
+}
+
 -- TODO: Eventually update position of these in AbilityTables
 -- List of abilities that have to be purged when first damage is recorded
 E.IsGroundMine = {

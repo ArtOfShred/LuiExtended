@@ -1273,6 +1273,53 @@ function LUIE_CreateSettings()
                 default = not LUIE.SpellCastBuffs.D.IgnoreMundusTarget,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
             }
+			
+			-- Long Term - Food & Drink - Player
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_FOODPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_FOODPLAYER_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreFoodPlayer end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreFoodPlayer = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not LUIE.SpellCastBuffs.D.IgnoreFoodPlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
+            }
+            -- Long Term - Food & Drink - Target
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_FOODTARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_FOODTARGET_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreFoodTarget end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreFoodTarget = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects() end,
+                width = "full",
+                default = not LUIE.SpellCastBuffs.D.IgnoreFoodTarget,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
+            }
+			
+			-- Long Term - Experience - Player
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCEPLAYER),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCEPLAYER_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreExperiencePlayer end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreExperiencePlayer = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects("player") end,
+                width = "full",
+                default = not LUIE.SpellCastBuffs.D.IgnoreExperiencePlayer,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
+            }
+            -- Long Term - Experience - Target
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCETARGET),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_EXPERIENCETARGET_TP),
+                getFunc = function() return not LUIE.SpellCastBuffs.SV.IgnoreExperienceTarget end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.IgnoreExperienceTarget = not value LUIE.SpellCastBuffs.UpdateContextHideList() LUIE.SpellCastBuffs.ReloadEffects() end,
+                width = "full",
+                default = not LUIE.SpellCastBuffs.D.IgnoreExperienceTarget,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and ( LUIE.SpellCastBuffs.SV.LongTermEffects_Player or LUIE.SpellCastBuffs.SV.LongTermEffects_Target ) ) end,
+            }
+			
             -- Long Term - Vamp Stage - Player
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
