@@ -169,7 +169,7 @@ UF.D = {
 	CustomColourPlayer = { 178/255, 178/255, 1 },
 	CustomColourFriendly = { 0, 1, 0 },
 	CustomColourHostile = { 1, 0, 0 },
-	CustomColourNeutral = { 210/255, 188/255, 165/255 },
+	CustomColourNeutral = { 150/255, 150/255, 150/255 },
 	CustomColourGuard = { 95/255, 65/255, 54/255 },
 }
 UF.SV = nil
@@ -1686,8 +1686,7 @@ function UF.OnReticleTargetChanged(eventCode)
 			if isGuard then
 				UF.CustomFrames.reticleover[POWERTYPE_HEALTH].labelOne:SetText( " - Invulnerable - " )
 			end
-            UF.CustomFrames.reticleover[POWERTYPE_HEALTH].labelTwo:SetHidden( isCritter or not UF.CustomFrames.reticleover.dead:IsHidden() )
-			UF.CustomFrames.reticleover[POWERTYPE_HEALTH].labelTwo:SetHidden( isGuard or not UF.CustomFrames.reticleover.dead:IsHidden() )
+            UF.CustomFrames.reticleover[POWERTYPE_HEALTH].labelTwo:SetHidden( isCritter or isGuard or not UF.CustomFrames.reticleover.dead:IsHidden() )
             -- Finally show custom target frame
             UF.CustomFrames.reticleover.control:SetHidden( false )
         end

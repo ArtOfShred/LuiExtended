@@ -2620,9 +2620,9 @@ function CA.OnMailReadable(eventCode, mailId)
     else
         local finalName
         if CA.SV.BracketOptionCharacter == 1 then
-            finalName = ZO_LinkHandler_CreateLinkWithoutBrackets(senderDisplayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+            finalName = ZO_LinkHandler_CreateLinkWithoutBrackets(senderDisplayName, nil, DISPLAY_NAME_LINK_TYPE, senderDisplayName)
         else
-            finalName = ZO_LinkHandler_CreateLink(senderDisplayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
+            finalName = ZO_LinkHandler_CreateLink(senderDisplayName, nil, DISPLAY_NAME_LINK_TYPE, senderDisplayName)
         end
         g_mailTarget = ZO_SELECTED_TEXT:Colorize(finalName)
     end
