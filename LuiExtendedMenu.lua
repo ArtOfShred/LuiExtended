@@ -6745,6 +6745,72 @@ function LUIE_CreateSettings()
 				default = { r=LUIE.UnitFrames.D.CustomColourWarden[1], g=LUIE.UnitFrames.D.CustomColourWarden[2], b=LUIE.UnitFrames.D.CustomColourWarden[3] },
 				disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
 			},
+			
+			
+			-- Custom Unit REACTION color
+			{
+				type = "colorpicker",
+				name = "Reaction Color Player",
+				getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourPlayer) end,
+				setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourPlayer={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
+				width = "full",
+				default = { r=LUIE.UnitFrames.D.CustomColourPlayer[1], g=LUIE.UnitFrames.D.CustomColourPlayer[2], b=LUIE.UnitFrames.D.CustomColourPlayer[3] },
+				disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+			},
+			-- Custom Unit REACTION color
+			{
+				type = "colorpicker",
+				name = "Reaction Color Friendly",
+				getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourFriendly) end,
+				setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourFriendly={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
+				width = "full",
+				default = { r=LUIE.UnitFrames.D.CustomColourFriendly[1], g=LUIE.UnitFrames.D.CustomColourFriendly[2], b=LUIE.UnitFrames.D.CustomColourFriendly[3] },
+				disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+			},
+			-- Custom Unit REACTION color
+			{
+				type = "colorpicker",
+				name = "Reaction Color Hostile",
+				getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourHostile) end,
+				setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourHostile={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
+				width = "full",
+				default = { r=LUIE.UnitFrames.D.CustomColourHostile[1], g=LUIE.UnitFrames.D.CustomColourHostile[2], b=LUIE.UnitFrames.D.CustomColourHostile[3] },
+				disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+			},
+			-- Custom Unit REACTION color
+			{
+				type = "colorpicker",
+				name = "Reaction Color Neutral",
+				getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourNeutral) end,
+				setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourNeutral={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
+				width = "full",
+				default = { r=LUIE.UnitFrames.D.CustomColourNeutral[1], g=LUIE.UnitFrames.D.CustomColourNeutral[2], b=LUIE.UnitFrames.D.CustomColourNeutral[3] },
+				disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+			},
+			-- Custom Unit REACTION color
+			{
+				type = "colorpicker",
+				name = "Reaction Color Guard",
+				getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourGuard) end,
+				setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourGuard={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
+				width = "full",
+				default = { r=LUIE.UnitFrames.D.CustomColourGuard[1], g=LUIE.UnitFrames.D.CustomColourGuard[2], b=LUIE.UnitFrames.D.CustomColourGuard[3] },
+				disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+			},
+			
+			-- TEMP: Move Later
+			{
+				type = "checkbox",
+				name = "COLOR TARGET BY REACTION",
+				tooltip = "TODO",
+				getFunc = function() return LUIE.UnitFrames.SV.FrameColorReaction end,
+				setFunc = function(value) LUIE.UnitFrames.SV.FrameColorReaction = value end,
+				width = "full",
+				default = LUIE.UnitFrames.D.FrameColorReaction,
+				warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+				disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+			},
+			
 		},
     }
 	-- Custom Unit Frames (Player, Target)

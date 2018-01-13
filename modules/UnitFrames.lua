@@ -164,6 +164,13 @@ UF.D = {
 	AdjustStaminaVPos			     = 0,
 	AdjustMagickaHPos			     = 200,
 	AdjustMagickaVPos			     = 0,
+	
+	FrameColorReaction = false,
+	CustomColourPlayer = { 178/255, 178/255, 1 },
+	CustomColourFriendly = { 0, 1, 0 },
+	CustomColourHostile = { 1, 0, 0 },
+	CustomColourNeutral = { 210/255, 188/255, 165/255 },
+	CustomColourGuard = { 95/255, 65/255, 54/255 },
 }
 UF.SV = nil
 
@@ -1389,7 +1396,8 @@ end
 -- Runs on the EVENT_POWER_UPDATE listener.
 -- This handler fires every time unit attribute changes.
 function UF.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
-    -- Save Health value for future reference -- do it only for tracked unitTags that were defined on initialization
+	
+	-- Save Health value for future reference -- do it only for tracked unitTags that were defined on initialization
     if powerType == POWERTYPE_HEALTH and g_savedHealth[unitTag] then
         g_savedHealth[unitTag] = { powerValue, powerMax, powerEffectiveMax, g_savedHealth[unitTag][4] or 0 }
     end
@@ -1430,7 +1438,7 @@ function UF.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue,
                 UF.OnWerewolf( eventCode, false )
             end
 
-        -- Otherwise - we need to manually trugger blinking of powerbar
+        -- Otherwise - we need to manually trigger blinking of powerbar
         else
             UF.OnCombatEvent( eventCode, nil, true, nil, nil, nil, nil, COMBAT_UNIT_TYPE_PLAYER, nil, COMBAT_UNIT_TYPE_PLAYER, 0, powerType, nil, false )
         end
@@ -1644,10 +1652,13 @@ function UF.OnReticleTargetChanged(eventCode)
 
         -- Is current target Critter? In Update 6 they all have 9 health
         local isCritter = ( g_savedHealth.reticleover[3] <= 9 )
+		
+		local isGuard = IsUnitInvulnerableGuard("reticleover")
 
         -- Hide custom label on Default Frames for critters.
         if g_DefaultFrames.reticleover[POWERTYPE_HEALTH] then
             g_DefaultFrames.reticleover[POWERTYPE_HEALTH].label:SetHidden( isCritter )
+			g_DefaultFrames.reticleover[POWERTYPE_HEALTH].label:SetHidden( isGuard )
         end
         
         -- Update level display based off our setting for Champion Points
@@ -1672,7 +1683,11 @@ function UF.OnReticleTargetChanged(eventCode)
             if isCritter then
                 UF.CustomFrames.reticleover[POWERTYPE_HEALTH].labelOne:SetText( " - Critter - " )
             end
+			if isGuard then
+				UF.CustomFrames.reticleover[POWERTYPE_HEALTH].labelOne:SetText( " - Invulnerable - " )
+			end
             UF.CustomFrames.reticleover[POWERTYPE_HEALTH].labelTwo:SetHidden( isCritter or not UF.CustomFrames.reticleover.dead:IsHidden() )
+			UF.CustomFrames.reticleover[POWERTYPE_HEALTH].labelTwo:SetHidden( isGuard or not UF.CustomFrames.reticleover.dead:IsHidden() )
             -- Finally show custom target frame
             UF.CustomFrames.reticleover.control:SetHidden( false )
         end
@@ -1692,6 +1707,10 @@ function UF.OnReticleTargetChanged(eventCode)
         if not UF.SV.TargetShowFriend or not g_DefaultFrames.reticleover.isPlayer then
             g_DefaultFrames.reticleover.friendIcon:SetHidden(true)
         end
+		
+		if UF.SV.FrameColorReaction then
+			UF.CustomFramesApplyReactionColor()
+		end
 
     -- Target is invalid: reset stored values to defaults
     else
@@ -2071,17 +2090,20 @@ function UF.UpdateAttribute( attributeFrame, powerValue, powerEffectiveMax, shie
 
     for _, label in pairs( { "label", "labelOne", "labelTwo" } ) do
         if attributeFrame[label] ~= nil then
-            -- Format specific to selected label
-            local fmt = tostring( attributeFrame[label].fmt or UF.SV.Format )
-            local str = fmt:gsub("Percentage", tostring(pct) )
-                :gsub("Max", CommaValue(powerEffectiveMax, UF.SV.ShortenNumbers))
-                :gsub("Current", CommaValue(powerValue, UF.SV.ShortenNumbers))
-                :gsub( "+ Shield", shield and ("+ "..CommaValue(shield, UF.SV.ShortenNumbers)) or "" )
-                :gsub("Nothing", "")
+		
+			if not (attributeFrame == UF.CustomFrames["reticleover"][POWERTYPE_HEALTH] and IsUnitInvulnerableGuard("reticleover") ) then
+				-- Format specific to selected label
+				local fmt = tostring( attributeFrame[label].fmt or UF.SV.Format )
+				local str = fmt:gsub("Percentage", tostring(pct) )
+					:gsub("Max", CommaValue(powerEffectiveMax, UF.SV.ShortenNumbers))
+					:gsub("Current", CommaValue(powerValue, UF.SV.ShortenNumbers))
+					:gsub( "+ Shield", shield and ("+ "..CommaValue(shield, UF.SV.ShortenNumbers)) or "" )
+					:gsub("Nothing", "")
 
-            -- Change text
-            attributeFrame[label]:SetText( str )
-
+				-- Change text
+				attributeFrame[label]:SetText( str )
+			end
+			
             -- And colour it RED if attribute value is lower then threshold
             attributeFrame[label]:SetColor( unpack( ( pct < ( attributeFrame.threshold or g_defaultThreshold ) ) and {1,0.25,0.38} or attributeFrame.colour or {1,1,1} ) )
         end
@@ -3105,11 +3127,59 @@ function UF.CustomFramesApplyColoursSingle(unitTag)
                     thb.backdrop:SetCenterColor( unpack(tank_bg) )
                 end
                 if not (isDps or isHealer or isTank) then
-                    thb.bar:SetColor( unpack(health) )
-                    thb.backdrop:SetCenterColor( unpack(health_bg) )
+					if UF.SV.FrameColorReaction and unitTag == "reticleover" then
+						thb.bar:SetColor( unpack(reactioncolor) )
+						thb.backdrop:SetCenterColor( unpack(reactioncolor_bg) )
+					else
+						thb.bar:SetColor( unpack(health) )
+						thb.backdrop:SetCenterColor( unpack(health_bg) )
+					end
                 end
             end
         end
+end
+
+function UF.CustomFramesApplyReactionColor()
+
+	local reactionColor = {
+		[UNIT_REACTION_PLAYER_ALLY]	= { UF.SV.CustomColourPlayer[1], UF.SV.CustomColourPlayer[2], UF.SV.CustomColourPlayer[3], 0.9 },
+		[UNIT_REACTION_DEFAULT]		= { UF.SV.CustomColourFriendly[1], UF.SV.CustomColourFriendly[2], UF.SV.CustomColourFriendly[3], 0.9 },
+		[UNIT_REACTION_FRIENDLY] 		= { UF.SV.CustomColourFriendly[1], UF.SV.CustomColourFriendly[2], UF.SV.CustomColourFriendly[3], 0.9 },
+		[UNIT_REACTION_NPC_ALLY] 		= { UF.SV.CustomColourFriendly[1], UF.SV.CustomColourFriendly[2], UF.SV.CustomColourFriendly[3], 0.9 },
+		[UNIT_REACTION_HOSTILE]		= { UF.SV.CustomColourHostile[1], UF.SV.CustomColourHostile[2], UF.SV.CustomColourHostile[3], 0.9 },
+		[UNIT_REACTION_NEUTRAL]		= { UF.SV.CustomColourNeutral[1], UF.SV.CustomColourNeutral[2], UF.SV.CustomColourNeutral[3], 0.9 },
+	}
+	
+	local reactionBackground = {
+		[UNIT_REACTION_PLAYER_ALLY]	= { 0.1*UF.SV.CustomColourPlayer[1],   0.1*UF.SV.CustomColourPlayer[2],   0.1*UF.SV.CustomColourPlayer[3], 0.9 },
+		[UNIT_REACTION_DEFAULT]		= { 0.1*UF.SV.CustomColourFriendly[1],   0.1*UF.SV.CustomColourFriendly[2],   0.1*UF.SV.CustomColourFriendly[3], 0.9 },
+		[UNIT_REACTION_FRIENDLY]		= { 0.1*UF.SV.CustomColourFriendly[1],   0.1*UF.SV.CustomColourFriendly[2],   0.1*UF.SV.CustomColourFriendly[3], 0.9 },
+		[UNIT_REACTION_NPC_ALLY]		= { 0.1*UF.SV.CustomColourFriendly[1],   0.1*UF.SV.CustomColourFriendly[2],   0.1*UF.SV.CustomColourFriendly[3], 0.9 },
+		[UNIT_REACTION_HOSTILE]		= { 0.1*UF.SV.CustomColourHostile[1],   0.1*UF.SV.CustomColourHostile[2],   0.1*UF.SV.CustomColourHostile[3], 0.9 },
+		[UNIT_REACTION_NEUTRAL]		= { 0.1*UF.SV.CustomColourNeutral[1],   0.1*UF.SV.CustomColourNeutral[2],   0.1*UF.SV.CustomColourNeutral[3], 0.9 },
+	}
+	
+	if UF.CustomFrames["reticleover"] then
+	
+		local unitFrame = UF.CustomFrames["reticleover"]
+		local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+	
+		local reactioncolor
+		local reactioncolor_bg
+		if IsUnitInvulnerableGuard("reticleover") then
+			reactioncolor = { UF.SV.CustomColourGuard[1], UF.SV.CustomColourGuard[2], UF.SV.CustomColourGuard[3], 0.9 }
+			reactioncolor_bg = { 0.1*UF.SV.CustomColourGuard[1],   0.1*UF.SV.CustomColourGuard[2],   0.1*UF.SV.CustomColourGuard[3], 0.9 }
+		else
+			reactioncolor = reactionColor[GetUnitReaction("reticleover")]
+			reactioncolor_bg = reactionBackground[GetUnitReaction("reticleover")]
+		end
+		
+		thb.bar:SetColor( unpack(reactioncolor) )
+		thb.backdrop:SetCenterColor( unpack(reactioncolor_bg) )
+		
+	end
+	
+
 end
 
 -- Apply selected texture for all known bars on custom unit frames
