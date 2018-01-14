@@ -2201,6 +2201,9 @@ end
 -- Reroutes call for regen/degen animation for given unit.
 -- Called from EVENT_UNIT_ATTRIBUTE_VISUAL_* listeners.
 function UF.UpdateRegen(unitTag, statType, attributeType, powerType )
+	
+	if powerType ~= POWERTYPE_HEALTH then return end
+
     -- Calculate actual value, and fallback to 0 if we call this function with nil parameters  
     local value1 = (GetUnitAttributeVisualizerEffectInfo(unitTag, ATTRIBUTE_VISUAL_INCREASED_REGEN_POWER, statType, attributeType, powerType) or 0)
     local value2 = (GetUnitAttributeVisualizerEffectInfo(unitTag, ATTRIBUTE_VISUAL_DECREASED_REGEN_POWER, statType, attributeType, powerType) or 0)
@@ -2210,22 +2213,22 @@ function UF.UpdateRegen(unitTag, statType, attributeType, powerType )
 
     -- Here we assume, that every unitTag entry in tables has POWERTYPE_HEALTH key
     if g_DefaultFrames[unitTag] and g_DefaultFrames[unitTag][POWERTYPE_HEALTH] then
-        UF.DisplayRegen( g_DefaultFrames[unitTag][powerType].regen1, value > 0 )
-        UF.DisplayRegen( g_DefaultFrames[unitTag][powerType].regen2, value > 0 )
-        UF.DisplayRegen( g_DefaultFrames[unitTag][powerType].degen1, value < 0 )
-        UF.DisplayRegen( g_DefaultFrames[unitTag][powerType].degen2, value < 0 )
+        UF.DisplayRegen( g_DefaultFrames[unitTag][POWERTYPE_HEALTH].regen1, value > 0 )
+        UF.DisplayRegen( g_DefaultFrames[unitTag][POWERTYPE_HEALTH].regen2, value > 0 )
+        UF.DisplayRegen( g_DefaultFrames[unitTag][POWERTYPE_HEALTH].degen1, value < 0 )
+        UF.DisplayRegen( g_DefaultFrames[unitTag][POWERTYPE_HEALTH].degen2, value < 0 )
     end
     if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag][POWERTYPE_HEALTH] then
-        UF.DisplayRegen( UF.CustomFrames[unitTag][powerType].regen1, value > 0 )
-        UF.DisplayRegen( UF.CustomFrames[unitTag][powerType].regen2, value > 0 )
-        UF.DisplayRegen( UF.CustomFrames[unitTag][powerType].degen1, value < 0 )
-        UF.DisplayRegen( UF.CustomFrames[unitTag][powerType].degen2, value < 0 )
+        UF.DisplayRegen( UF.CustomFrames[unitTag][POWERTYPE_HEALTH].regen1, value > 0 )
+        UF.DisplayRegen( UF.CustomFrames[unitTag][POWERTYPE_HEALTH].regen2, value > 0 )
+        UF.DisplayRegen( UF.CustomFrames[unitTag][POWERTYPE_HEALTH].degen1, value < 0 )
+        UF.DisplayRegen( UF.CustomFrames[unitTag][POWERTYPE_HEALTH].degen2, value < 0 )
     end
     if g_AvaCustFrames[unitTag] and g_AvaCustFrames[unitTag][POWERTYPE_HEALTH] then
-        UF.DisplayRegen( g_AvaCustFrames[unitTag][powerType].regen1, value > 0 )
-        UF.DisplayRegen( g_AvaCustFrames[unitTag][powerType].regen2, value > 0 )
-        UF.DisplayRegen( g_AvaCustFrames[unitTag][powerType].degen1, value < 0 )
-        UF.DisplayRegen( g_AvaCustFrames[unitTag][powerType].degen2, value < 0 )
+        UF.DisplayRegen( g_AvaCustFrames[unitTag][POWERTYPE_HEALTH].regen1, value > 0 )
+        UF.DisplayRegen( g_AvaCustFrames[unitTag][POWERTYPE_HEALTH].regen2, value > 0 )
+        UF.DisplayRegen( g_AvaCustFrames[unitTag][POWERTYPE_HEALTH].degen1, value < 0 )
+        UF.DisplayRegen( g_AvaCustFrames[unitTag][POWERTYPE_HEALTH].degen2, value < 0 )
     end
 end
 
