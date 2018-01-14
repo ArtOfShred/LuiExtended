@@ -2087,37 +2087,50 @@ function UF.UpdateAttribute( attributeFrame, powerValue, powerEffectiveMax, shie
     -- Update text values for this attribute. can be on up to 3 different labels
     local shield = ( shield and shield > 0 ) and shield or nil
 
-    for _, label in pairs( { "label", "labelOne", "labelTwo" } ) do
-        if attributeFrame[label] ~= nil then
-		
-			if not (attributeFrame == UF.CustomFrames["reticleover"][POWERTYPE_HEALTH] and IsUnitInvulnerableGuard("reticleover") ) then
-				-- Format specific to selected label
-				local fmt = tostring( attributeFrame[label].fmt or UF.SV.Format )
-				local str = fmt:gsub("Percentage", tostring(pct) )
-					:gsub("Max", CommaValue(powerEffectiveMax, UF.SV.ShortenNumbers))
-					:gsub("Current", CommaValue(powerValue, UF.SV.ShortenNumbers))
-					:gsub( "+ Shield", shield and ("+ "..CommaValue(shield, UF.SV.ShortenNumbers)) or "" )
-					:gsub("Nothing", "")
-
-				-- Change text
-				attributeFrame[label]:SetText( str )
+	if (UF.CustomFrames and UF.CustomFrames["reticleover"] and attributeFrame == UF.CustomFrames["reticleover"][POWERTYPE_HEALTH] and IsUnitInvulnerableGuard("reticleover") ) then
+		if attributeFrame[label] ~= nil then
+			attributeFrame[label]:SetColor( unpack( ( pct < ( attributeFrame.threshold or g_defaultThreshold ) ) and {1,0.25,0.38} or attributeFrame.colour or {1,1,1} ) )
+		end
+		if attributeFrame.bar ~= nil then
+			if UF.SV.CustomSmoothBar then
+				-- Make it twice faster then default UI ones: last argument .085
+				ZO_StatusBar_SmoothTransition(attributeFrame.bar, powerValue, powerEffectiveMax, forceInit, nil, 250)
+			else
+				attributeFrame.bar:SetMinMax(0, powerEffectiveMax)
+				attributeFrame.bar:SetValue( powerValue )
 			end
+		end
+    else
+		for _, label in pairs( { "label", "labelOne", "labelTwo" } ) do
+			if attributeFrame[label] ~= nil then
 			
-            -- And colour it RED if attribute value is lower then threshold
-            attributeFrame[label]:SetColor( unpack( ( pct < ( attributeFrame.threshold or g_defaultThreshold ) ) and {1,0.25,0.38} or attributeFrame.colour or {1,1,1} ) )
-        end
-    end
+					-- Format specific to selected label
+					local fmt = tostring( attributeFrame[label].fmt or UF.SV.Format )
+					local str = fmt:gsub("Percentage", tostring(pct) )
+						:gsub("Max", CommaValue(powerEffectiveMax, UF.SV.ShortenNumbers))
+						:gsub("Current", CommaValue(powerValue, UF.SV.ShortenNumbers))
+						:gsub( "+ Shield", shield and ("+ "..CommaValue(shield, UF.SV.ShortenNumbers)) or "" )
+						:gsub("Nothing", "")
 
-    -- If attribute has also custom statusBar, update its value
-    if attributeFrame.bar ~= nil then
-        if UF.SV.CustomSmoothBar then
-            -- Make it twice faster then default UI ones: last argument .085
-            ZO_StatusBar_SmoothTransition(attributeFrame.bar, powerValue, powerEffectiveMax, forceInit, nil, 250)
-        else
-            attributeFrame.bar:SetMinMax(0, powerEffectiveMax)
-            attributeFrame.bar:SetValue( powerValue )
-        end
-    end
+					-- Change text
+					attributeFrame[label]:SetText( str )
+				
+				-- And colour it RED if attribute value is lower then threshold
+				attributeFrame[label]:SetColor( unpack( ( pct < ( attributeFrame.threshold or g_defaultThreshold ) ) and {1,0.25,0.38} or attributeFrame.colour or {1,1,1} ) )
+			end
+		end
+
+		-- If attribute has also custom statusBar, update its value
+		if attributeFrame.bar ~= nil then
+			if UF.SV.CustomSmoothBar then
+				-- Make it twice faster then default UI ones: last argument .085
+				ZO_StatusBar_SmoothTransition(attributeFrame.bar, powerValue, powerEffectiveMax, forceInit, nil, 250)
+			else
+				attributeFrame.bar:SetMinMax(0, powerEffectiveMax)
+				attributeFrame.bar:SetValue( powerValue )
+			end
+		end
+	end
 end
 
 -- Updates title for unit if changed, and also reanchors buffs or toggles display on/off if the unittag had no title selected previously
@@ -2196,19 +2209,19 @@ function UF.UpdateRegen(unitTag, statType, attributeType, powerType )
     local value = value1 + value2
 
     -- Here we assume, that every unitTag entry in tables has POWERTYPE_HEALTH key
-    if g_DefaultFrames[unitTag] and g_DefaultFrames[unitTag][powerType] then
+    if g_DefaultFrames[unitTag] and g_DefaultFrames[unitTag][POWERTYPE_HEALTH] then
         UF.DisplayRegen( g_DefaultFrames[unitTag][powerType].regen1, value > 0 )
         UF.DisplayRegen( g_DefaultFrames[unitTag][powerType].regen2, value > 0 )
         UF.DisplayRegen( g_DefaultFrames[unitTag][powerType].degen1, value < 0 )
         UF.DisplayRegen( g_DefaultFrames[unitTag][powerType].degen2, value < 0 )
     end
-    if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag][powerType] then
+    if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag][POWERTYPE_HEALTH] then
         UF.DisplayRegen( UF.CustomFrames[unitTag][powerType].regen1, value > 0 )
         UF.DisplayRegen( UF.CustomFrames[unitTag][powerType].regen2, value > 0 )
         UF.DisplayRegen( UF.CustomFrames[unitTag][powerType].degen1, value < 0 )
         UF.DisplayRegen( UF.CustomFrames[unitTag][powerType].degen2, value < 0 )
     end
-    if g_AvaCustFrames[unitTag] and g_AvaCustFrames[unitTag][powerType] then
+    if g_AvaCustFrames[unitTag] and g_AvaCustFrames[unitTag][POWERTYPE_HEALTH] then
         UF.DisplayRegen( g_AvaCustFrames[unitTag][powerType].regen1, value > 0 )
         UF.DisplayRegen( g_AvaCustFrames[unitTag][powerType].regen2, value > 0 )
         UF.DisplayRegen( g_AvaCustFrames[unitTag][powerType].degen1, value < 0 )
