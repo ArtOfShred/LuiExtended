@@ -2018,7 +2018,7 @@ function SCB.ApplyFont()
     -- First try selecting font face
     local fontName = LUIE.Fonts[SCB.SV.BuffFontFace]
     if not fontName or fontName == "" then
-        printToChat(GetString(SI_LUIE_SCB_ERROR_FONT))
+        printToChat(GetString(SI_LUIE_ERROR_FONT))
         fontName = "$(MEDIUM_FONT)"
     end
 

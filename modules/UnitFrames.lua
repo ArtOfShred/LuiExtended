@@ -3316,7 +3316,7 @@ function UF.CustomFramesApplyFont()
     -- First try selecting font face
     local fontName = LUIE.Fonts[UF.SV.CustomFontFace]
     if not fontName or fontName == "" then
-        LUIE.PrintToChat(GetString(SI_LUIE_UF_ERROR_FONT))
+        LUIE.PrintToChat(GetString(SI_LUIE_ERROR_FONT))
         fontName = "$(MEDIUM_FONT)"
     end
 

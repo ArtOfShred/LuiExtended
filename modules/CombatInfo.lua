@@ -403,7 +403,7 @@ function CI.ApplyFont()
     -- Setup Bar Font
     local barFontName = LUIE.Fonts[CI.SV.BarFontFace]
         if not barFontName or barFontName == "" then
-        LUIE.PrintToChat(GetString(SI_LUIE_SCB_ERROR_FONT))
+        LUIE.PrintToChat(GetString(SI_LUIE_ERROR_FONT))
         barfontName = "$(MEDIUM_FONT)"
     end
     
@@ -423,7 +423,7 @@ function CI.ApplyFont()
     -- Setup Potion Timer Font
     local potionFontName = LUIE.Fonts[CI.SV.PotionTimerFontFace]
         if not potionFontName or potionFontName == "" then
-        LUIE.PrintToChat(GetString(SI_LUIE_SCB_ERROR_FONT))
+        LUIE.PrintToChat(GetString(SI_LUIE_ERROR_FONT))
         potionFontName = "$(MEDIUM_FONT)"
     end
     

@@ -6797,7 +6797,7 @@ function LUIE_CreateSettings()
 			-- Custom Unit REACTION color
 			{
 				type = "colorpicker",
-				name = "Reaction Color Player",
+				name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_PLAYER),
 				getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourPlayer) end,
 				setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourPlayer={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
 				width = "full",
@@ -6807,7 +6807,7 @@ function LUIE_CreateSettings()
 			-- Custom Unit REACTION color
 			{
 				type = "colorpicker",
-				name = "Reaction Color Friendly",
+				name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_FRIENDLY),
 				getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourFriendly) end,
 				setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourFriendly={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
 				width = "full",
@@ -6817,7 +6817,7 @@ function LUIE_CreateSettings()
 			-- Custom Unit REACTION color
 			{
 				type = "colorpicker",
-				name = "Reaction Color Hostile",
+				name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_HOSTILE),
 				getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourHostile) end,
 				setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourHostile={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
 				width = "full",
@@ -6827,7 +6827,7 @@ function LUIE_CreateSettings()
 			-- Custom Unit REACTION color
 			{
 				type = "colorpicker",
-				name = "Reaction Color Neutral",
+				name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_NEUTRAL),
 				getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourNeutral) end,
 				setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourNeutral={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
 				width = "full",
@@ -6837,24 +6837,11 @@ function LUIE_CreateSettings()
 			-- Custom Unit REACTION color
 			{
 				type = "colorpicker",
-				name = "Reaction Color Guard",
+				name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_GUARD),
 				getFunc = function() return unpack(LUIE.UnitFrames.SV.CustomColourGuard) end,
 				setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.CustomColourGuard={r,g,b} LUIE.UnitFrames.CustomFramesApplyColours(true) end,
 				width = "full",
 				default = { r=LUIE.UnitFrames.D.CustomColourGuard[1], g=LUIE.UnitFrames.D.CustomColourGuard[2], b=LUIE.UnitFrames.D.CustomColourGuard[3] },
-				disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-			},
-			
-			-- TEMP: Move Later
-			{
-				type = "checkbox",
-				name = "COLOR TARGET BY REACTION",
-				tooltip = "TODO",
-				getFunc = function() return LUIE.UnitFrames.SV.FrameColorReaction end,
-				setFunc = function(value) LUIE.UnitFrames.SV.FrameColorReaction = value end,
-				width = "full",
-				default = LUIE.UnitFrames.D.FrameColorReaction,
-				warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
 				disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
 			},
 			
@@ -7085,14 +7072,27 @@ function LUIE_CreateSettings()
 			-- HIDE BUFFS OOC - TARGET
 			{
 				type = "checkbox",
-				name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_BuFFS_TARGET),
-				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_BuFFS_TARGET_TP),
+				name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_BUFFS_TARGET),
+				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_BUFFS_TARGET_TP),
 				getFunc = function() return LUIE.UnitFrames.SV.HideBuffsTargetOoc end,
 				setFunc = function(value) LUIE.UnitFrames.SV.HideBuffsTargetOoc = value LUIE.UnitFrames.CustomFramesApplyInCombat() end,
 				width = "full",
 				default = LUIE.UnitFrames.D.HideBuffsTargetOoc,
 				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and ( LUIE.UnitFrames.SV.CustomFramesPlayer or LUIE.UnitFrames.SV.CustomFramesTarget ) ) end,
 			},
+			
+			-- COLOR TARGET BY REACTION
+			{
+				type = "checkbox",
+				name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_REACTION_TARGET),
+				tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_REACTION_TARGET_TP),
+				getFunc = function() return LUIE.UnitFrames.SV.FrameColorReaction end,
+				setFunc = function(value) LUIE.UnitFrames.SV.FrameColorReaction = value LUIE.UnitFrames.CustomFramesApplyColours() end,
+				width = "full",
+				default = LUIE.UnitFrames.D.FrameColorReaction,
+				disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesTarget ) end,
+			},
+			
 			-- Display Target class label
 			{
 				type = "checkbox",

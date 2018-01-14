@@ -1,29 +1,23 @@
--- bindings.xml
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_DISPLAY_DAMAGE_METER",          "Display Damage Meter")
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_DISPLAY_DAMAGE_LOG",            "Display Damage Log")
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_POST_DAMAGE_RESULTS",           "Post Damage Results")
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_POST_HEALING_RESULTS",          "Post Healing Results")
+------------------------------------
+-- LuiExtended.lua -----------------
+------------------------------------
 
--- LuiExtended.lua
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE",					"Queueing for <<1>>...")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG",           	"You cannot queue for a campaign while in a battleground.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED",      "The campaign name you entered is not your home or guest campaign.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NONAME",           "You must enter the name of your home or guest campaign to queue into.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN",    "The campaign name you entered is not a valid.")
-
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_DISBAND_FAILED_LFG_ACTIVITY",      "You cannot disband an LFG group.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME",             "You must enter the account or character name of a player to add to friends.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME",      "You must enter the account or online character name of a player to remove from friends.")
-
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG",                "You have invited \"|cFEFEFE<<1>>|r\" to be your friend.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_LINK",           "You have invited |cFEFEFE<<1>>|r to be your friend.")
-
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA",           "You cannot teleport to your home while in Cyrodiil.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_BG",            "You cannot teleport to your home while in a battleground.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IN_COMBAT",     "You cannot teleport to your home while in combat.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_NOHOME",        "You don't have a primary home set.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG",          "Teleporting to primary home...")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_DISBAND_FAILED_BG",           		"You cannot disband the group while in a battleground.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_DISBAND_FAILED_LFG_ACTIVITY",      "You cannot disband an LFG group.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOGROUP",           "You do not have a group to disband.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOTLEADER",         "You must be the group leader to disband a group.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE",      "That player is already ignored.")
@@ -48,24 +42,33 @@ ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG",                "Regroup
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG",        "Regroup: No party members were online or eligible for regroup. Group was not disbanded.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG",       "Regroup: Group saved! <<1>> group <<2[member/members]>> <<3[was/were]>> offline, they will not be reinvited.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME",              "You must enter the name of a player to trade with.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFG",           "You must be in an LFG group to do that.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK",       "You must be in an LFG group to initiate a vote to remove a party member.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_BG",       		"You cannot initiate a vote to remove a party member in a battleground.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NONAME",           "You must enter the account or character name of a party member to initiate a vote to remove.")
+ZO_CreateStringId("SI_LUIE_ERROR_FONT",                             	"LUI Extended: There was a problem with selecting required font. Falling back to game default.")
 
--- InfoPanel.lua
+------------------------------------
+-- InfoPanel.lua -------------------
+------------------------------------
+
 ZO_CreateStringId("SI_LUIE_PNL_FEEDNOW",                                "Feed Now")
 ZO_CreateStringId("SI_LUIE_PNL_MAXED",                                  "Maxed")
 
--- SpellCastBuffs.lua
+------------------------------------
+-- SpellCastBuffs.lua --------------
+------------------------------------
+
 ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS",                "Player Buffs")
 ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS",              "Player Debuffs")
 ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS",      "Player Long Term Effects")
 ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS",                "Target Buffs")
 ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS",              "Target Debuffs")
-ZO_CreateStringId("SI_LUIE_SCB_ERROR_FONT",                             "LUIE_SpellCastBuffs: There was a problem with selecting required font. Falling back to game default.")
 
--- ChatAnnouncements.lua
+------------------------------------
+-- ChatAnnouncements.lua -----------
+------------------------------------
+
+-- Currency
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_GOLD",                           " <<1[Gold/Gold]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_ALLIANCE_POINT",                 " <<1[Alliance Point/Alliance Points]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_TELVAR_STONE",                   " <<1[Tel Var Stone/Tel Var Stones]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
@@ -75,6 +78,7 @@ ZO_CreateStringId("SI_LUIE_CA_CURRENCY_CROWN",                   		" <<1[Crown/C
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_CROWN_GEM",                   	" <<1[Crown Gem/Crown Gems]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_OUTFIT_TOKENS",                  " <<1[Outfit Change Token/Outfit Change Tokens]>>") -- Have to create singular strings here to use to prevent plural quantities from being double s
 
+-- Duel
 ZO_CreateStringId("SI_LUIE_CA_DEBUG_MSG_CURRENCY",                      "Currency Change Reason <<1>> Triggered - Please post on the LUI Extended comments section on ESOUI.com describing what caused this message. Thanks!")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_ACCEPTED",                    "Duel challenge accepted.")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_CANCELED",                    "Duel challenge canceled.")
@@ -114,35 +118,39 @@ ZO_CreateStringId("SI_LUIE_CA_DUEL_STARTED_WITH_ICON",                  "<<1>> D
 ZO_CreateStringId("SI_LUIE_CA_DUEL_STATE1",                             "You are currently waiting for a duel challenge response from |cFEFEFE<<1>>|r.")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_STATE2",                             "You are currently considering a duel challenge from |cFEFEFE<<1>>|r.")
 
-ZO_CreateStringId("SI_LUIE_CHAMPION_POINT_TYPE",                        "<<1>><<2>> <<3>> <<1[Point/Points]>>")
+-- Achievements
+ZO_CreateStringId("SI_LUIE_CA_ACHIEVEMENT_PROGRESS_MSG",                "Achievement Updated")
 
+-- Experience
+ZO_CreateStringId("SI_LUIE_CHAMPION_POINT_TYPE",                        "<<1>><<2>> <<3>> <<1[Point/Points]>>")
 ZO_CreateStringId("SI_LUIE_CA_EXPERIENCE_MESSAGE",                      "You earn %s.")
 ZO_CreateStringId("SI_LUIE_CA_EXPERIENCE_NAME",                         "experience <<1[point/points]>>")
+ZO_CreateStringId("SI_LUIE_CA_LVL_ANNOUNCE_CP",                         "Champion Level Achieved!") -- TODO: Unused
+ZO_CreateStringId("SI_LUIE_CA_LVL_ANNOUNCE_XP",                         "You have reached")
 
--- COLLECTIBLES
+-- Collectibles
 ZO_CreateStringId("SI_LUIE_CA_COLLECTIBLE",                             "Collection Updated")
 
--- LOREBOOKS
+-- Lorebooks
 ZO_CreateStringId("SI_LUIE_CA_LOREBOOK_BOOK",                           "Book Discovered")
 ZO_CreateStringId("SI_LUIE_CA_LOREBOOK_ADDED_CSA",                      "<<1>> added to <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_LOREBOOK_ADDED_CA",                       "added to") -- Have to add this extra string for CA, if we try to colorize the whole string with the link, it also colorizes our custom link type.
 
+-- Social (Friends/Ignored)
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_FRIEND_ADDED",                    "|cFEFEFE<<1>>|r added to friends.")
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_FRIEND_REMOVED",                  "|cFEFEFE<<1>>|r removed from friends.")
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST",         "|cFEFEFE<<1>>|r wants to be your friend.")
-
-ZO_CreateStringId("SI_LUIE_CA_PLAYER_TO_PLAYER_ALREADY_FRIEND",         "You are already friends with |cFEFEFE<<1>>|r.")
-
-
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_LOGGED_OFF",                 "|cFEFEFE<<1>>|r has logged off.")
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_LOGGED_ON",                  "|cFEFEFE<<1>>|r has logged on.")
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_OFF",       "|cFEFEFE<<1>>|r has logged off with |cFEFEFE<<2>>|r.")
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_CHARACTER_LOGGED_ON",        "|cFEFEFE<<1>>|r has logged on with |cFEFEFE<<2>>|r.")
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED",               "|cFEFEFE<<1>>|r added to ignored.")
 ZO_CreateStringId("SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED",             "|cFEFEFE<<1>>|r removed from ignored.")
+ZO_CreateStringId("SI_LUIE_CA_PLAYER_TO_PLAYER_ALREADY_FRIEND",         "You are already friends with |cFEFEFE<<1>>|r.") -- TODO: Unused - This should have a content though?
 
+-- Group (Basic)
 ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_MENU",                       "You have invited |cFEFEFE<<1>>|r to join your group.")
-
+ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_NONAME",                     "You must enter the account or character name of a player to invite to group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE0",                    "Could not find a player named \"|cFEFEFE<<1>>|r\" to invite.")
 ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE1",                    "|cFEFEFE<<1>>|r accepted your group invitation.")
 ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE2",                    "|cFEFEFE<<1>>|r declined your group invitation.")
@@ -159,32 +167,7 @@ ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE12",                   GetStrin
 ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE13",                   "Unable to join |cFEFEFE<<1>>|r. The group is full.")
 ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE14",                   "Unable to join |cFEFEFE<<1>>|r. You are already in a group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUPINVITERESPONSE15",                   "|cFEFEFE<<1>>|r is currently in a battleground.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED",            "You have joined an LFG group for |cFEFEFE<<1>>|r.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL",               "A vote to kick |cFEFEFE<<1>>|r from the group has failed.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED",             "A vote to kick |cFEFEFE<<1>>|r from the group has passed.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_VOTEKICK_START",              "A vote to kick |cFEFEFE<<1>>|r from the group has started.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_QUEUE_END",                   "You are no longer queued in the group finder.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_QUEUE_START",                 "You are now queued in the group finder.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY",        "Your |cFEFEFE<<1>>|r is ready.")
-ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE",   "Your |cFEFEFE<<1>>|r is ready. Your role: |cFEFEFE<<2>> <<3>>|r")
-
-ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_NONAME",                     "You must enter the account or character name of a player to invite to group.")
-
-ZO_CreateStringId("SI_LUIE_IGNORE_ERROR_TRADE",                         "You cannot trade with a player you are ignoring.")
-ZO_CreateStringId("SI_LUIE_IGNORE_ERROR_GROUP",                         "You cannot extend a group invitation to a player you are ignoring.")
-ZO_CreateStringId("SI_LUIE_IGNORE_ERROR_DUEL",                          "You cannot challenge a player you are ignoring to a duel.")
-ZO_CreateStringId("SI_LUIE_IGNORE_ERROR_FRIEND",                        "You cannot add a player you are ignoring as a friend.")
-ZO_CreateStringId("SI_LUIE_IGNORE_ERROR_WHISPER",                       "You cannot whisper a player you are ignoring.")
-ZO_CreateStringId("SI_LUIE_IGNORE_ERROR_GUILD",                         "You cannot extend a guild invitation to a player you are ignoring.")
-
 ZO_CreateStringId("SI_LUIE_CA_GROUP_LEADERKICK_ERROR",                  "You must be the group leader to remove a player from the group.")
-
-ZO_CreateStringId("SI_LUIE_NOTIFICATION_GROUP_INVITE",                  "Group invitation")
-ZO_CreateStringId("SI_LUIE_NOTIFICATION_SHARE_QUEST_INVITE",            "Shared quest")
-ZO_CreateStringId("SI_LUIE_NOTIFICATION_FRIEND_INVITE",                 "Friend invitation")
-ZO_CreateStringId("SI_LUIE_NOTIFICATION_GUILD_INVITE",                  "Guild invitation")
-
-ZO_CreateStringId("SI_LUIE_CA_GROUP_GROUPLEAVEREASON1",                 "<<1>>(<<2>>) has been removed from the group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE",              "|cFEFEFE<<1>>|r wants to share the quest, <<2>>, with you.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_P2P",          "|cFEFEFE<<1>>|r wants to share the quest, |cFEFEFE<<2>>|r, with you.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_INVITE_MESSAGE",                    "|cFEFEFE<<1>>|r has invited you to join a group.")
@@ -194,17 +177,25 @@ ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_DISBAND_MSG",                "The gro
 ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_JOIN",                       "|cFEFEFE<<1>>|r has joined the group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF",                  "You have joined a group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_KICKED",                     "|cFEFEFE<<1>>|r has been removed from the group.")
-ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_LEAVE",                      "|cFEFEFE<<1>>|r has left the group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF",                 "You have left the group.")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_QUIT_LFG",                          "You are no longer in an LFG group.")
-
 ZO_CreateStringId("SI_LUIE_GROUPLEAVEREASON0",                          "|cFEFEFE<<1>>|r has left the group.")
 ZO_CreateStringId("SI_LUIE_GROUPLEAVEREASON1",                          "|cFEFEFE<<1>>|r has been removed from the group.")
 ZO_CreateStringId("SI_LUIE_GROUPLEAVEREASON2",                          "|cFEFEFE<<1>>|r has disbanded the group.")
 ZO_CreateStringId("SI_LUIE_GROUPLEAVEREASON4",                          "|cFEFEFE<<1>>|r has left the battleground.")
-
 ZO_CreateStringId("SI_LUIE_GROUPDISBANDLEADER",                         "You have disbanded the group.")
 
+-- Group (LFG)
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED",            "You have joined an LFG group for |cFEFEFE<<1>>|r.")
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_VOTEKICK_FAIL",               "A vote to kick |cFEFEFE<<1>>|r from the group has failed.")
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED",             "A vote to kick |cFEFEFE<<1>>|r from the group has passed.")
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_VOTEKICK_START",              "A vote to kick |cFEFEFE<<1>>|r from the group has started.")
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_QUEUE_END",                   "You are no longer queued in the group finder.")
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_QUEUE_START",                 "You are now queued in the group finder.")
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY",        "Your |cFEFEFE<<1>>|r is ready.")
+ZO_CreateStringId("SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE",   "Your |cFEFEFE<<1>>|r is ready. Your role: |cFEFEFE<<2>> <<3>>|r")
+
+-- Group (Raid)
 ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_STARTED",                     "Started: <<1>>")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_FAILED",                      "Failed: <<1>>")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_COMPLETED_LARGE",             "Completed: <<1>>")
@@ -212,12 +203,26 @@ ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_SCORETALLY",                  "Final S
 ZO_CreateStringId("SI_LUIE_CA_GROUP_REVIVE_COUNTER_UPDATED",            "<<1>> Vitality Bonus Decreased")
 ZO_CreateStringId("SI_LUIE_CA_GROUP_TRIAL_SCORE_UPDATED",               "<<1>> <<2>> Points Rewarded")
 
+-- Ignore Error Messages
+ZO_CreateStringId("SI_LUIE_IGNORE_ERROR_TRADE",                         "You cannot trade with a player you are ignoring.")
+ZO_CreateStringId("SI_LUIE_IGNORE_ERROR_GROUP",                         "You cannot extend a group invitation to a player you are ignoring.")
+ZO_CreateStringId("SI_LUIE_IGNORE_ERROR_DUEL",                          "You cannot challenge a player you are ignoring to a duel.")
+ZO_CreateStringId("SI_LUIE_IGNORE_ERROR_FRIEND",                        "You cannot add a player you are ignoring as a friend.")
+ZO_CreateStringId("SI_LUIE_IGNORE_ERROR_WHISPER",                       "You cannot whisper a player you are ignoring.")
+ZO_CreateStringId("SI_LUIE_IGNORE_ERROR_GUILD",                         "You cannot extend a guild invitation to a player you are ignoring.")
+
+-- Invitation Notifications
+ZO_CreateStringId("SI_LUIE_NOTIFICATION_GROUP_INVITE",                  "Group invitation")
+ZO_CreateStringId("SI_LUIE_NOTIFICATION_SHARE_QUEST_INVITE",            "Shared quest")
+ZO_CreateStringId("SI_LUIE_NOTIFICATION_FRIEND_INVITE",                 "Friend invitation")
+ZO_CreateStringId("SI_LUIE_NOTIFICATION_GUILD_INVITE",                  "Guild invitation")
+
+-- Guild
 ZO_CreateStringId("SI_LUIE_CA_GUILD_HERALDRY_UPDATE",                   "The heraldry for <<1>> has changed.")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_RANKS_UPDATE",                      "Changes to ranks for <<1>> saved.")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_RANK_UPDATE",                       "Changes to the rank <<1>> for <<2>> saved.")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_MOTD_CHANGED",                      "The message of the day for <<1>> has changed.")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_DESCRIPTION_CHANGED",               "The description for <<1>> has changed.")
-
 ZO_CreateStringId("SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST",            "|cFEFEFE<<1>>|r has invited you to join <<2>>.")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_INVITE_MESSAGE",                    "|cFEFEFE<<3>>|r has invited you to join <<X:1>> |cFEFEFE<<2>>|r.")
 ZO_CreateStringId("SI_LUIE_CA_GUILD_JOIN_SELF",                         "You have joined <<1>>.")
@@ -236,27 +241,21 @@ ZO_CreateStringId("SI_LUIE_CA_JUSTICE_DISGUISE_STATE_SUSPICIOUS",       "Danger!
 ZO_CreateStringId("SI_LUIE_CA_JUSTICE_DISGUISE_STATE_NONE",             "You are no longer disguised")
 ZO_CreateStringId("SI_LUIE_CA_JUSTICE_DISGUISE_STATE_DISGUISED",        "You are now disguised")
 
+-- Lockpick
 ZO_CreateStringId("SI_LUIE_CA_LOCKPICK_FAILED",                         "Lockpick failed!")
 ZO_CreateStringId("SI_LUIE_CA_LOCKPICK_SUCCESS",                        "Lockpick successful!")
 
-ZO_CreateStringId("SI_LUIE_CA_LVL_ANNOUNCE_CP",                         "Champion Level Achieved!")
-ZO_CreateStringId("SI_LUIE_CA_LVL_ANNOUNCE_XP",                         "You have reached")
-
+-- Mail
 ZO_CreateStringId("SI_LUIE_CA_MAIL_DELETED_MSG",                        "Mail deleted!")
-
 ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED",                           "Mail received.")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_RECEIVED_COD",                       "COD payment sent!")
-
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT",                               "Mail sent!")
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENT_COD",                           "COD sent!")
-
 ZO_CreateStringId("SI_LUIE_CA_MAIL_ERROR_NO_COD_VALUE",                 "You must set the Cash on Delivery amount.")
-
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENDMAILRESULT2",                    "Unknown player.") -- Fixing missing periods on default strings
 ZO_CreateStringId("SI_LUIE_CA_MAIL_SENDMAILRESULT3",                    "Recipient's Inbox is full.") -- Fixing missing periods on default strings
 
-ZO_CreateStringId("SI_LUIE_CA_ACHIEVEMENT_PROGRESS_MSG",                "Achievement Updated")
-
+-- Pledge of Mara
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT0",                "|cFEFEFE<<1>>|r is too busy to pledge with.")
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT1",                "You can't join in the Ritual of Mara with a player who is dead.")
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT2",                "Beginning Ritual of Mara with |cFEFEFE<<1>>|r.")
@@ -266,6 +265,7 @@ ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT5",                GetStrin
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT6",                "|cFEFEFE<<1>>|r is not eligible for the Ritual of Mara.")
 ZO_CreateStringId("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT7",                "You are too far away from |cFEFEFE<<1>>|r to perform the Ritual of Mara.")
 
+-- Currency Messages
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_LOOT",                   "You loot %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_RECEIVE",                "You receive %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_STEAL",                  "You steal %s.")
@@ -328,28 +328,15 @@ ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_GROUP",                  "%s loot
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP",         "You equip %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE",        "You unequip %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY",       "Your %s is destroyed.")
-
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_NOTIFY_CHAMPION",                "Champion Points redistributed")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES",              "Attribute Points reset")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS",                  "Skill Points reset")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_NOTIFY_MORPHS",                  "Skill Morphs reset")
-
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_HERALDRY",               "You spend %s from your guild bank to update your %s.")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_NAME_HERALDRY",                  "Guild Heraldry")
 
-
-ZO_CreateStringId("SI_LUIE_CA_STORAGE_RIDINGTYPE1",                     "Riding Speed Upgrade")
-ZO_CreateStringId("SI_LUIE_CA_STORAGE_RIDINGTYPE2",                     "Riding Capacity Upgrade")
-ZO_CreateStringId("SI_LUIE_CA_STORAGE_RIDINGTYPE3",                     "Riding Stamina Upgrade")
-
-ZO_CreateStringId("SI_LUIE_CA_STORAGE_BAG_UPGRADE",                     "Your inventory capacity has increased.")
-ZO_CreateStringId("SI_LUIE_CA_STORAGE_BANK_UPGRADE",                    "Your bank capacity has increased.")
-
-ZO_CreateStringId("SI_LUIE_CA_STORAGE_BAGTYPE1",                        "Backpack Upgrade")
-ZO_CreateStringId("SI_LUIE_CA_STORAGE_BAGTYPE2",                        "Bank Space Upgrade")
-
-ZO_CreateStringId("SI_LUIE_CA_STORAGE_LEARN",                           "You learn %s.")
-
+-- Currency Total Messages
+ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_TOTAL",                  	"New Total:")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGOLD",              "Total Gold: %s")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP",                "Total AP: %s")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTV",                "Total TV: %s")
@@ -359,24 +346,33 @@ ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALCROWNS",            "Total C
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGEMS",              "Total Gems: %s")
 ZO_CreateStringId("SI_LUIE_CA_CURRENCY_MESSAGE_TOTALOUTFITTOKENS",      "Total Tokens: %s")
 
-ZO_CreateStringId("SI_LUIE_CA_LOOT_MESSAGE_TOTAL",                  	"New Total:")
+-- Storage
+ZO_CreateStringId("SI_LUIE_CA_STORAGE_RIDINGTYPE1",                     "Riding Speed Upgrade")
+ZO_CreateStringId("SI_LUIE_CA_STORAGE_RIDINGTYPE2",                     "Riding Capacity Upgrade")
+ZO_CreateStringId("SI_LUIE_CA_STORAGE_RIDINGTYPE3",                     "Riding Stamina Upgrade")
+ZO_CreateStringId("SI_LUIE_CA_STORAGE_BAG_UPGRADE",                     "Your inventory capacity has increased.")
+ZO_CreateStringId("SI_LUIE_CA_STORAGE_BANK_UPGRADE",                    "Your bank capacity has increased.")
+ZO_CreateStringId("SI_LUIE_CA_STORAGE_BAGTYPE1",                        "Backpack Upgrade")
+ZO_CreateStringId("SI_LUIE_CA_STORAGE_BAGTYPE2",                        "Bank Space Upgrade")
+ZO_CreateStringId("SI_LUIE_CA_STORAGE_LEARN",                           "You learn %s.")
 
+-- Skill
 ZO_CreateStringId("SI_LUIE_CA_SKILL_LINE_ADDED",                        "Skill line gained: <<1>><<2>>")
 ZO_CreateStringId("SI_LUIE_CA_ABILITY_RANK_UP",                         "<<1>> increased to Rank <<R:2>>")
-
 ZO_CreateStringId("SI_LUIE_CA_SKILL_GUILD_MSG",                         "You earn %s.")
 ZO_CreateStringId("SI_LUIE_CA_SKILL_GUILD_REPUTATION",                  "<<1[reputation/reputation]>>")
 ZO_CreateStringId("SI_LUIE_CA_SKILL_GUILD_ALERT",                       "Your <<1>> reputation has increased.")
 
+-- Quests
 ZO_CreateStringId("SI_LUIE_CA_QUEST_ABANDONED",                         "Abandoned: <<1>>")
 ZO_CreateStringId("SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON",               "Abandoned: <<1>> <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_QUEST_DISCOVER",                          "Discovered: <<1>>")
-
 ZO_CreateStringId("SI_LUIE_CA_QUEST_ACCEPT",                            "Started: ")
 ZO_CreateStringId("SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON",                  "Started: <<1>> <<2>>")
 ZO_CreateStringId("SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON",                "Completed: <<1>> <<2>>")
-ZO_CreateStringId("SI_LUIE_CA_QUEST_LOG_FULL",                          "Your quest log is full.")
+ZO_CreateStringId("SI_LUIE_CA_QUEST_LOG_FULL",                          "Your quest log is full.") -- TODO: Unused
 
+-- Trade
 ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT0",                      GetString(SI_TRADEACTIONRESULT0))
 ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT1",                      "|cFEFEFE<<1>>|r is ignoring you. You cannot initiate a trade.")
 ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT2",                      GetString(SI_TRADEACTIONRESULT2))
@@ -402,19 +398,20 @@ ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT65",                     "You are
 ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT66",                     GetString(SI_TRADEACTIONRESULT66))
 ZO_CreateStringId("SI_LUIE_CA_TRADEACTIONRESULT80",                     GetString(SI_TRADEACTIONRESULT80))
 
+-- Trade Invite Messages
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_ACCEPTED",                   "Trade invitation accepted.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_DECLINED",                   "Trade invitation declined.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_CANCELED",                   "Trade invitation canceled.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_CONFIRM",                    "You have invited |cFEFEFE<<1>>|r to trade.")
 ZO_CreateStringId("SI_LUIE_CA_TRADE_INVITE_MESSAGE",                    "|cFEFEFE<<1>>|r has invited you to trade.")
 
--- Entering/Leaving Group Area Notifications used by EVENT_DISPLAY_ANNOUNCEMENT. These don't appear to have any strings in localizegeneratedstrings.lua, so we check for the Default (_D) here and replace the CSA with (_C) to remove the punctuation.
+-- EVENT_DISPLAY_ANNOUNCEMENT: Entering/Leaving Group Area
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D",       "Entering Group Area.")
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_D",       "Leaving Group Area.")
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C",       "Entering Group Area")
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPLEAVE_C",       "Leaving Group Area")
 
--- CRAGLORN BUFFS
+-- EVENT_DISPLAY_ANNOUNCEMENT: Craglorn Buffs
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR",		"Spell Resistance Increased")
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR_CA",		"Spell Resistance Increased!")
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR",		"Physical Resistance Increased")
@@ -422,7 +419,7 @@ ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR_CA",		"Physical R
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI",		"Power Increased")
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI_CA",		"Power Increased!")
 
--- VMA Notifications used by EVENT_DISPLAY_ANNOUNCEMENT
+-- EVENT_DISPLAY_ANNOUNCEMENT: Maelstrom Arena
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM",          "Maelstrom Arena")
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM_CA",       "Maelstrom Arena: ")
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE1",          "Vale of the Surreal")
@@ -447,12 +444,12 @@ ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5_CA",       "Round 5
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF",          "Final Round")
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF_CA",       "Final Round!")
 
--- DSA Notifications used by EVENT_DISPLAY_ANNOUNCEMENT
+-- EVENT_DISPLAY_ANNOUNCEMENT: Dragonstar Arena
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA",                "Dragonstar Arena")
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_CA",             "Dragonstar Arena: ")
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC",           "The arena will begin in 30 seconds!")
 
--- Imperial City Notifications used by EVENT_DISPLAY_ANNOUNCEMENT
+-- EVENT_DISPLAY_ANNOUNCEMENT: Imperial City Sewer Zones
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_PREFIX",	"Entered: ")
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE1",			"Entered: Battle Gates")
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE_CA_1",		"Battle Gates")
@@ -492,10 +489,10 @@ ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC10",			"Xivkyn lord Eb
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC11",			"General Nazenaechar makes use of fallen Imperial citizens.")
 ZO_CreateStringId("SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC12",			"Restless spirits of the dead are driven by forces unseen.")
 
--- UnitFrames.lua
-ZO_CreateStringId("SI_LUIE_UF_ERROR_FONT",                              "LUIE_CustomFrames: There was a problem with selecting required font. Falling back to game default.")
+------------------------------------
+-- CombatText.lua ------------------
+------------------------------------
 
--- Combat Text
 ZO_CreateStringId("SI_LUIE_CT_COMBAT_IN_DEFAULT",                       "Entered Combat")
 ZO_CreateStringId("SI_LUIE_CT_COMBAT_OUT_DEFAULT",                      "Left Combat")
 ZO_CreateStringId("SI_LUIE_CT_CLEANSE_DEFAULT",                         "CLEANSE")
@@ -513,8 +510,6 @@ ZO_CreateStringId("SI_LUIE_CT_REFLECTED_DEFAULT",                       "Reflect
 ZO_CreateStringId("SI_LUIE_CT_DODGED_DEFAULT",                          "Dodged %t")
 ZO_CreateStringId("SI_LUIE_CT_INTERRUPTED_DEFAULT",                     "Interrupted")
 ZO_CreateStringId("SI_LUIE_CT_MITIGATION_SUFFIX_DEFAULT",               " incoming! ")
-
--- LuiExtendedSettings.lua
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1559,6 +1554,12 @@ ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_SORC",                  "Sorcere
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_TEMP",                  "Templar Class Color")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_WARD",                  "Warden Class Color")
 
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_PLAYER",        	"Reaction Color - Player")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_FRIENDLY",   	"Reaction Color - Friendly")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_HOSTILE",     	"Reaction Color - Hostile")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_NEUTRAL",    	"Reaction Color - Neutral")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_GUARD",     		"Reaction Color - Guard")
+
 -- Player/Target Frames
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_HEADER",                    "Custom Unit Frames (Player & Target)")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_OPTIONS_HEADER",            "Additional Player Frame Display Options")
@@ -1611,8 +1612,10 @@ ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_TARGET_OOCPACITY",          "Target 
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_TARGET_OOCPACITY_TP",       "Change the transparency of custom target unit frames when out of combat.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_TARGET_ICPACITY",           "Target - Transparency - In-Combat")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_TARGET_ICPACITY_TP",        "Change the transparency of custom target unit frames when engaged in combat.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_BuFFS_TARGET",              "Target - Hide Anchored Buffs Out-of-Combat")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_BuFFS_TARGET_TP",           "When out of combat, hide the buff & debuff frame if they are anchored to the player/target bars.")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_BUFFS_TARGET",              "Target - Hide Anchored Buffs Out-of-Combat")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_BUFFS_TARGET_TP",           "When out of combat, hide the buff & debuff frame if they are anchored to the player/target bars.")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_REACTION_TARGET",           "Target - Use Reaction Color")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_REACTION_TARGET_TP",        "Color the target frame by reaction instead of using the health bar color.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_TARGET_CLASSLABEL",         "Target - Display Class Label")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_TARGET_CLASSLABEL_TP",      "Display text label with target class name on target frame together with class icon.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_EXETHRESHOLD",              "Target - Execute Health % Threshold")
@@ -2019,7 +2022,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_ENERGIZE_TP",           "Text fo
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_ENERGIZE_ULTIMATE_TP",  "Text format for ultimate gain.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DRAIN_TP",              "Text format for magicka/stamina drain.")
 
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_MISS_TP",               "Text format for missed attacks.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_IMMUNE_TP",             "Text format for immunity to attacks.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_PARRIED_TP",            "Text format for parried attacks.")
@@ -2085,6 +2087,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_CRITICAL_TP",                "Enable 
 ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_TRAILER",                    "Show Throttle Trailer")
 ZO_CreateStringId("SI_LUIE_LAM_CT_THROTTLE_TRAILER_TP",                 "Enable Throttle Trailer.")
 
+-- TODO: Switch to StringId's
 CombatTextLocalization = {
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//PANEL TITLES//--
@@ -2097,6 +2100,7 @@ CombatTextLocalization = {
         LUIE_CombatText_Resource                = "Resources"
     },
 }
+
 -- ---------------------------------------------------
 -- ABILITY NAME OVERRIDE LOCALIZATION ----------------
 -- ---------------------------------------------------
