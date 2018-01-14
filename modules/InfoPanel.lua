@@ -409,7 +409,7 @@ function PNL.DoBagUpdate()
     -- Update soulgems
     local myLevel = GetUnitEffectiveLevel("player")
     local _, icon, emptyCount = GetSoulGemInfo(SOUL_GEM_TYPE_EMPTY, myLevel, true);
-    local _, iconF, fullCount = GetSoulGemInfo(SOUL_GEM_TYPE_FILLED, GetUnitEffectiveLevel("player"), true);
+    local _, iconF, fullCount = GetSoulGemInfo(SOUL_GEM_TYPE_FILLED, myLevel, true);
     emptyCount = math.min( emptyCount, 99 )
     fullCount = math.min( fullCount, 9999 )
     local fullText = ( fullCount > 0 ) and ( "|c00FF00"..fullCount.."|r" ) or "|cFF00000|r"
