@@ -2157,9 +2157,20 @@ ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_CROWN_SCROLL",				"Crown Experience 
 ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_1",		"Crown Crate Experience Scroll")
 ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_2",		"Major Crown Crate Experience Scroll")
 ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_3",		"Grand Crown Crate Experience Scroll")
-
 ZO_CreateStringId("SI_LUIE_SKILL_CONSUMABLE_FESTIVAL_MINTS", 			"High Hrothgar Festival Mints")
 ZO_CreateStringId("SI_LUIE_SKILL_CONSUMABLE_SAILORS_GROG",				"Sailor\'s Warning Festival Grog")
 ZO_CreateStringId("SI_LUIE_SKILL_COLLECTIBLE_MYSTERY_MEAT",				"Mystery Meat")
-
 ZO_CreateStringId("SI_LUIE_SKILL_SET_BOGDAN_THE_NIGHTFLAME",			"Bogdan the Nightflame")
+ZO_CreateStringId("SI_LUIE_SKILL_SET_LORD_WARDEN_DUSK",					"Lord Warden Dusk")
+ZO_CreateStringId("SI_LUIE_SKILL_SET_MALUBETH_THE_SCOURGER",			"Malubeth the Scourger")
+ZO_CreateStringId("SI_LUIE_SKILL_SET_TROLL_KING",						"Troll King")
+ZO_CreateStringId("SI_LUIE_SKILL_SET_REDISTRIBUTION",					"Redistribution")
+ZO_CreateStringId("SI_LUIE_SKILL_SET_ICE_FURNACE",						"Ice Furnace")
+ZO_CreateStringId("SI_LUIE_SKILL_SET_COOLDOWN",							"Cooldown") -- Used as suffix for certain abilities internal cooldown
+ZO_CreateStringId("SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE",				"Monk\'s Disguise")
+
+ZO_CreateStringId("SI_LUIE_SKILL_PASSIVE_HEAVY_MAIN_HAND",				"Heavy Attack (Main Hand)")
+ZO_CreateStringId("SI_LUIE_SKILL_PASSIVE_HEAVY_OFF_HAND",				"Heavy Attack (Off Hand)")
+ZO_CreateStringId("SI_LUIE_SKILL_PASSIVE_HEAVY_SHOCK_PULSE",			"Heavy Attack (Shock Pulse)")
+ZO_CreateStringId("SI_LUIE_SKILL_PASSIVE_TRI_FOCUS_SHOCK",				"Tri Focus (Shock)")
+ZO_CreateStringId("SI_LUIE_SKILL_PASSIVE_NOXIPHILIC_SANGUIVORIA",		"Noxiphilic Sanguivoria")

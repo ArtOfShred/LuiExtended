@@ -6,7 +6,13 @@ local A = {}
 -- MAJOR/MINOR DEBUFFS & DEBUFFS ---------------------
 -- ---------------------------------------------------
 
-A.Minor_Maim = 61856
+A.Skill_Minor_Maim 					= 61856
+A.Skill_Major_Evasion				= 90620
+A.Skill_Minor_Defile				= 61726
+A.Skill_Major_Defile				= 38686
+A.Skill_Major_Expedition			= 61840
+
+A.Skill_Off_Balance					= 2727
 
 -- ---------------------------------------------------
 -- INNATE ABILITIES ----------------------------------
@@ -48,6 +54,9 @@ A.Skill_Heavy_Attack                = 18431 -- Heavy Attack
 A.Skill_Heavy_Attack_Dual_Wield     = 16420 -- Heavy Attack (Dual Wield)
 A.Skill_Heavy_Attack_Werewolf       = 32480 -- Heavy Attack Werewolf
 A.Skill_Heavy_Attack_Shock			= 18396 -- Heavy Attack (Shock)
+A.Skill_Heavy_Attack_Main_Hand		= GetString(SI_LUIE_SKILL_PASSIVE_HEAVY_MAIN_HAND)
+A.Skill_Heavy_Attack_Off_Hand		= GetString(SI_LUIE_SKILL_PASSIVE_HEAVY_OFF_HAND)
+A.SKill_Heavy_Attack_Shock_Pulse	= GetString(SI_LUIE_SKILL_PASSIVE_HEAVY_SHOCK_PULSE)
 
 -- ---------------------------------------------------
 -- COMSUMABLES & ITEMS -------------------------------
@@ -176,6 +185,35 @@ A.Memento_Flame_Eruption			= GetCollectibleName(1483)
 
 A.Set_Asylum_Destruction_Staff		= 99596 -- Concentrated Force (Perfected)
 A.Set_Bogdan_the_Nightflame			= GetString(SI_LUIE_SKILL_SET_BOGDAN_THE_NIGHTFLAME)
+A.Set_Lord_Warden_Dusk				= GetString(SI_LUIE_SKILL_SET_LORD_WARDEN_DUSK)
+A.Set_Malubeth_the_Scourger			= GetString(SI_LUIE_SKILL_SET_MALUBETH_THE_SCOURGER)
+A.Set_Maw_of_the_Infernal			= 59507
+A.Set_Nerieneth						= 59592
+A.Set_Shadowrend					= 80989
+A.Set_Spawn_of_Mephala				= 59497
+A.Set_Swarm_Mother					= 80592
+A.Set_Engine_Guardian				= 59521
+A.Set_The_Troll_King				= GetString(SI_LUIE_SKILL_SET_TROLL_KING)
+A.Set_Redistribution				= GetString(SI_LUIE_SKILL_SET_REDISTRIBUTION)
+A.Set_Varens_Legacy					= 79029
+A.Set_Syvarras_Scales				= 75717
+A.Set_Twin_Sisters					= 32828
+A.Set_Way_of_Fire					= 52710
+A.Set_Ice_Furnace					= GetString(SI_LUIE_SKILL_SET_ICE_FURNACE)
+A.Set_Jolting_Arms					= 67077
+A.Set_Hand_of_Mephala				= 84355
+A.Set_Tormentor						= 67282
+A.Set_Immortal_Warrior				= 90938
+A.Set_Eternal_Warrior				= 90939
+A.Set_Destructive_Mage				= 51315
+A.Set_Healing_Mage					= 51442
+A.Set_Vicious_Serpent				= 61440
+A.Set_Roar_of_Alkosh				= 75752
+A.Set_Phoenix						= 90935
+A.Set_Vicecannon_of_Venom			= 79464
+A.Set_Cooldown						= GetString(SI_LUIE_SKILL_SET_COOLDOWN)
+
+A.Disguise_Monks_Disguise			= GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE)
 
 -- ---------------------------------------------------
 -- CHAMPION ABILITIES --------------------------------
@@ -185,10 +223,49 @@ A.Champion_Vengeance_Charge			= GetString(SI_LUIE_SKILL_VENGEANCE_CHARGE) -- Ven
 A.Champion_Riposte					= 60230
 
 -- ---------------------------------------------------
+-- SKILL LINE PASSIVES -------------------------------
+-- ---------------------------------------------------
+
+-- Sorcerer
+A.Passive_Rebate					= 31398
+
+-- Nightblade
+A.Passive_Nightblade				= 36560
+
+-- Templar
+A.Passive_Light_Weaver				= 31760
+
+-- Warden
+A.Passive_Savage_Beast				= 86062
+A.Passive_Natures_Gift				= 93054
+
+-- Weapon
+A.Passive_Heavy_Weapons				= 29375
+A.Passive_Follow_Up					= 29389
+A.Passive_Twin_Blade_and_Blunt		= 30893
+A.Passive_Tri_Focus_Shock			= GetString(SI_LUIE_SKILL_PASSIVE_TRI_FOCUS_SHOCK)
+A.Passive_Destruction_Expert		= 30965
+A.Passive_Soul_Summons				= 39269
+
+A.Passive_Savage_Feeding			= 42054
+A.Passive_Blood_Ritual				= 33091
+A.Passive_Noxiphilic_Sanguivoria	= GetString(SI_LUIE_SKILL_PASSIVE_NOXIPHILIC_SANGUIVORIA)
+A.Passive_Bloodmoon					= 32639
+A.Passive_Undaunted_Command			= 55584
+A.Passive_Red_Diamond				= 36155
+
+-- ---------------------------------------------------
 -- NPC BASIC -----------------------------------------
 -- ---------------------------------------------------
 
 A.Skill_Hamstring					= 70068 -- Hamstring
+
+-- ---------------------------------------------------
+-- NPC ABILITIES -------------------------------------
+-- ---------------------------------------------------
+
+A.Skill_Headbutt				= 54380
+A.Skill_Tail_Spike				= 4799
 
 -- ---------------------------------------------------
 -- WEAPONS -------------------------------------------
@@ -804,11 +881,11 @@ A.Passive_SoulSiphoner              = 36603
 -- EQUIPMENT SETS EFFECTS ----------------------------
 -- ---------------------------------------------------
 
-A.Equip_Torugs_Pact                 = 32759
-A.Equip_Hist_Bark                   = 32781
-A.Equip_Master                      = 61851
-A.Equip_Phoenix                     = 68933
-A.Equip_Para_Bellum                 = 71193
+--A.Equip_Torugs_Pact                 = 32759
+--A.Equip_Hist_Bark                   = 32781
+--A.Equip_Master                      = 61851
+--A.Equip_Phoenix                     = 68933
+--A.Equip_Para_Bellum                 = 71193
 
 -- ---------------------------------------------------
 -- OTHER EFFECTS -------------------------------------
