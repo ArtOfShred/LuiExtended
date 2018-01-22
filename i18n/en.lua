@@ -2174,3 +2174,4 @@ ZO_CreateStringId("SI_LUIE_SKILL_PASSIVE_HEAVY_OFF_HAND",				"Heavy Attack (Off 
 ZO_CreateStringId("SI_LUIE_SKILL_PASSIVE_HEAVY_SHOCK_PULSE",			"Heavy Attack (Shock Pulse)")
 ZO_CreateStringId("SI_LUIE_SKILL_PASSIVE_TRI_FOCUS_SHOCK",				"Tri Focus (Shock)")
 ZO_CreateStringId("SI_LUIE_SKILL_PASSIVE_NOXIPHILIC_SANGUIVORIA",		"Noxiphilic Sanguivoria")
+ZO_CreateStringId("SI_LUIE_SKILL_BOND_WITH_NATURE",						"Bond with Nature")

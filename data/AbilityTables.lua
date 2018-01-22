@@ -11,6 +11,7 @@ A.Skill_Major_Evasion				= 90620
 A.Skill_Minor_Defile				= 61726
 A.Skill_Major_Defile				= 38686
 A.Skill_Major_Expedition			= 61840
+A.Skill_Major_Vitality				= 61275
 
 A.Skill_Off_Balance					= 2727
 
@@ -86,6 +87,12 @@ A.Proc_Chill						= 21481
 A.Proc_Chilled						= 7145
 A.Proc_Poisoned						= 21929
 A.Proc_Concussion					= 21487
+
+A.Proc_Explosion					= 21128
+A.Proc_Venom						= 21930
+A.Proc_Pestilence					= 21928
+A.Proc_Disintegration				= 21493
+A.Proc_Deep_Freeze					= 21483
 
 -- POTIONS
 A.Potion_Invisiblity				= 3668
@@ -211,6 +218,10 @@ A.Set_Vicious_Serpent				= 61440
 A.Set_Roar_of_Alkosh				= 75752
 A.Set_Phoenix						= 90935
 A.Set_Vicecannon_of_Venom			= 79464
+A.Set_Bahrahas_Curse				= 75673
+A.Set_Pirate_Skeleton				= 98421
+A.Set_Briarheart					= 71102
+A.Set_Ironblood						= 97626
 A.Set_Cooldown						= GetString(SI_LUIE_SKILL_SET_COOLDOWN)
 
 A.Disguise_Monks_Disguise			= GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE)
@@ -236,6 +247,7 @@ A.Passive_Nightblade				= 36560
 A.Passive_Light_Weaver				= 31760
 
 -- Warden
+A.Passive_Bond_with_Nature			= GetString(SI_LUIE_SKILL_BOND_WITH_NATURE)
 A.Passive_Savage_Beast				= 86062
 A.Passive_Natures_Gift				= 93054
 

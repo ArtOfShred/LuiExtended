@@ -265,6 +265,7 @@ E.DebuffDisplayOverrideId = {
     -- Player (Sets)
     [51315] = true, -- Destructive Mage (Aether ... of Destruction)
     [60416] = true, -- Sunderflame
+	[93001] = true, -- Mad Tinkerer (Stun from Fabricant)
     
     -- Human NPC's
     [88281] = true, -- Call Ally (Pet Ranger)
@@ -525,6 +526,47 @@ E.EffectOverrideByName = {
     [75818] =   {
                 ['Jackal'] =            { icon = 'LuiExtended/media/icons/abilities/ability_jackal_helljoint.dds' }, -- Helljoint (Wolf)
                 },
+
+}
+
+E.EffectSourceOverride = {
+
+	[71678] = {pet = 'Morkuldin'}, -- Light Attack {Morkuldin}
+	[71679] = {pet = 'Morkuldin'}, -- Cleave {Morkuldin}
+
+    -- TRAPS
+	[92150] = {source = 'Dwarven Furnace'}, -- Fire Trap {Vvardenfell}
+    [89481] = {source = 'Flame Jet Trap'}, -- Flame Jet {Vvardenfell}
+    [88491] = {source = 'Flame Jet Trap'}, -- Searing Flame {Vvardenfell}
+	
+	[88411] = {source = 'Hammer Trap'}, -- Hammer {Vvardenfell}
+	[88405] = {source = 'Hammer Trap'}, -- Hammer {Vvardenfell}
+	[89663] = {source = 'Hammer Trap'}, -- Hammer {Vvardenfell}
+	[89664] = {source = 'Hammer Trap'}, -- Hammer {Vvardenfell}
+
+	[88404] = {source = 'Blade Trap'}, -- Blade {Vvardenfell}
+	[88454] = {source = 'Blade Trap'}, -- Blade {Vvardenfell}
+	[88455] = {source = 'Blade Trap'}, -- Blade {Vvardenfell}
+	
+	
+    [91659] = {source = 'Falling Rocks'}, -- Falling Rocks {Vvardenfell}
+    [92672] = {source = 'Red Mountain'}, -- Pyroclast  {Vvardenfell}
+    [84527] = {source = 'Steam Vent'}, -- Searing Steam {Vvardenfell}
+
+    [62769] = {source = 'Cold Fire Trap'}, -- Coldharbour Flames {MQ Tutorial}
+    [62770] = {source = 'Cold Fire Trap'}, -- Coldharbour Flames {MQ Tutorial}
+    
+  
+    -----------------------------------------------
+    -- VVARDENFELL
+    -----------------------------------------------
+    -- Main Quest
+    [88467] = {source = 'Baar Dau'}, -- Skyfall {Divine Disaster}
+    [87102] = {source = 'Spinning Blade Trap'}, -- Spinning Blade {Divine Restoration}
+    [91969] = {source = 'Spinning Blade Trap'}, -- Spinning Blade {Divine Restoration}
+	[86743] = {source = 'Vapor Cloud'}, -- Accelerated Transposition {Like Blood from a Stone}
+    -- Sidequests
+    [89282] = {source = 'Exploding Spider'}, -- Spider Explosion {A Web of Trouble}
 
 }
 
@@ -1147,7 +1189,7 @@ E.EffectOverride = {
     [68462] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_pestilence.dds' }, -- Pestilence (Disease Vulnerability Proc)
     [68461] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_pestilence.dds' }, -- Pestilence (Disease Vulnerability Proc)
     [68451] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_disintegration.dds' }, -- Disintegration (Lightning Vulnerability Proc)
-    [68455] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_disintegration.dds' }, -- Disintegration (Lightning Vulnerability Proc)
+    [68455] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_disintegration.dds', name = A.Proc_Disintegration }, -- Disintegration (Lightning Vulnerability Proc)
     [68458] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_deep_freeze.dds' }, -- Deep Freeze (Frost Vulnerability Proc)
     [68457] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_deep_freeze.dds' }, -- Deep Freeze (Frost Vulnerability Proc)
     
@@ -1177,7 +1219,6 @@ E.EffectOverride = {
     [100588] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_rampaging_slash.dds' }, -- Rampaging Slash (Maelstrom 1H + Shield)
     [100587] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_rampaging_slash.dds' }, -- Rampaging Slash (Maelstrom 1H + Shield)
     [100589] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_rampaging_slash.dds' }, -- Rampaging Slash (Maelstrom 1H + Shield)
-    [99876] = { hide = true}, -- Crushing Wall (Maelstrom Destro Staff)
     [99887] = { icon = 'LuiExtended/media/icons/abilities/ability_set_maelstrom_precise_regeneration.dds' }, -- Precise Regeneration (Maelstrom Resto Staff)
     
     -- MASTER WEAPONS
@@ -1368,6 +1409,7 @@ E.EffectOverride = {
     [93307] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_torpor.dds' }, -- Defiler
     [93305] = { icon = 'LuiExtended/media/icons/abilities/ability_hunger_torpor.dds' }, -- Defiler
     [93326] = { hide = true }, -- Defiler
+    [100704] = { hide = true }, -- Defiler
     
     [34875] = { icon = 'LuiExtended/media/icons/abilities/ability_set_night_terror.dds' }, -- Night Terror (of Night Terror)
     
@@ -1481,7 +1523,7 @@ E.EffectOverride = {
     [70297] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_melee.dds' }, -- Storm Master (Storm Master's)
     [70298] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_melee.dds' }, -- Storm Master (Storm Master's)
     
-    [49220] = { hide = true }, -- Extra Dodge (of the Crusader)
+    [49220] = { hide = true }, -- Extra dodge (of the Crusader)
     
     [67334] = { icon = 'LuiExtended/media/icons/abilities/ability_set_essence_thief.dds' }, -- Essence Thief (of the Essence Thief)
     [70284] = { icon = 'LuiExtended/media/icons/abilities/ability_set_essence_thief.dds' }, -- Essence Thief (of the Essence Thief)
@@ -1749,8 +1791,7 @@ E.EffectOverride = {
     [45982] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds' }, -- Bash Stun (Stun from bashing cast when NPC is pinned against an obstacle)
 	
 	-- Off-Balance Exploit
-	[20172] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_off-balance_exploit.dds' }, -- Off-Balance Exploit
-	[18793] = { hide = true }, -- Off-Balance Exploit
+	[16825] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_off-balance_exploit.dds' }, -- Off-Balance Exploit
 	
 	-- Break Free
     [16566] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds' }, -- CC Immunity
@@ -2068,9 +2109,11 @@ E.EffectOverride = {
     ----------------------------------------------------------------
     
     -- Animal Companions
-    [88986] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_bond_with_nature.dds' }, -- Bond With Nature (Bond With Nature - Rank 1)
+    [86064] = { name = A.Passive_Bond_with_Nature }, -- Bond With Nature (Bond With Nature - Rank 1)
+    [88986] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_bond_with_nature.dds', name = A.Passive_Bond_with_Nature }, -- Bond With Nature (Bond With Nature - Rank 1)
+	[86065] = { name = A.Passive_Bond_with_Nature }, -- Bond With Nature (Bond With Nature - Rank 2)
+	[88988] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_bond_with_nature.dds', name = A.Passive_Bond_with_Nature }, -- Bond With Nature (Bond With Nature - Rank 2)
     [88512] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_savage_beast.dds', name = A.Passive_Savage_Beast }, -- Savage Beast Ultimate (Savage Beast - Rank 1)
-    [88988] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_bond_with_nature.dds' }, -- Bond With Nature (Bond With Nature - Rank 1)
     [88513] = { icon = 'LuiExtended/media/icons/abilities/ability_warden_savage_beast.dds', name = A.Passive_Savage_Beast }, -- Transfer (Savage Beast - Rank 2)
 
     -- Green Balance
@@ -2403,10 +2446,12 @@ E.EffectOverride = {
     [35783] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_3.dds' }, -- Stage 3 Vampirism (Vampire General)
     [35792] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_4.dds' }, -- Stage 4 Vampirism (Vampire General)
     [33177] = { icon = 'esoui/art/icons/ability_vampire_002.dds' }, -- Feed
+	
     [33182] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Passive_Savage_Feeding }, -- Uber Attack (Savage Feeding - Rank 1)
-    [33183] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Skill_Off_Balance }, -- Off-Balance Self (Savage Feeding - Rank 2)
-    [46047] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Passive_Savage_Feeding }, -- Uber Attack (Savage Feeding - Rank 1)
+    [33183] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Skill_Off_Balance }, -- Off-Balance Self (Savage Feeding - Rank 1)
+    [46047] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Passive_Savage_Feeding }, -- Uber Attack (Savage Feeding - Rank 2)
     [46046] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Skill_Off_Balance }, -- Off-Balance Self (Savage Feeding - Rank 2)
+	
     [40349] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual.dds', name = A.Passive_Blood_Ritual }, -- Feed (Blood Ritual - Rank 1)
     [40351] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_blood_ritual.dds', name = A.Passive_Blood_Ritual }, -- Feed (Blood Ritual - Rank 1)
     [40353] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Passive_Blood_Ritual }, -- Uber Attack (Blood Ritual - Rank 1)
@@ -2667,9 +2712,9 @@ E.EffectOverride = {
     [63702] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds' }, -- Resourceful (Resourceful - Rank 3)
     [63703] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds' }, -- Resourceful (Resourceful - Rank 3)
 
-    [36214] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds', name = A.Passive_Red_Diamond }, -- Star of the West (Red Diamond - Rank 1)
-    [45292] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds', name = A.Passive_Red_Diamond }, -- Star of the West (Red Diamond - Rank 2)
-    [45294] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds', name = A.Passive_Red_Diamond }, -- Star of the West (Red Diamond - Rank 3)
+    [36214] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 1)
+    [45292] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 2)
+    [45294] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_red_diamond.dds' }, -- Red Diamond (Red Diamond - Rank 3)
 
     -- TRAPS
     [88480] = { hide = true }, -- Trap Triggerer (Various)
@@ -4367,12 +4412,9 @@ E.FakeExternalBuffs = {
 
  -- Fake Debuffs applied onto the player by NPCs or Events (Hostile)
 E.FakeExternalDebuffs = {
-
-    -- Player
-    [18396] = {icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_lightning_attackheavy.dds', name = 'Heavy Attack (Shock)', duration = 1800, norefresh = true}, -- Heavy Attack (Shock)
     
     -- Item Sets
-    [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = 'Bahraha\'s Curse', duration = 0 }, -- Bahraha's Curse
+    [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = A.Set_Bahrahas_Curse, duration = 1000 }, -- Bahraha's Curse
 
     -- Traps
     [29602] = {icon = 'esoui/art/icons/ability_debuff_stun.dds', name = 'Falling Rocks', duration = 2000}, -- Falling Rocks (Tripwire)
@@ -4493,12 +4535,12 @@ E.FakePlayerBuffs = {
     [99320] = { icon = 'LuiExtended/media/icons/mementos/memento_flame_eruption.dds', name = A.Memento_Flame_Eruption, unbreakable = 1, duration = 2000 }, -- TROPHY Flame Crate Mem 3 (Flame Eruption)
     
     -- Set Items
-    [59573] = { icon = 'esoui/art/icons/ability_buff_major_vitality.dds', name = 'Major Vitality', duration = 510 }, -- Major Vitality (Malubeth)
-    [81675] = { icon = 'esoui/art/icons/achievement_housing_038.dds', name = 'Pirate Skeleton', duration = 12000 }, -- Pirate Skeleton
+    [59573] = { icon = 'esoui/art/icons/ability_buff_major_vitality.dds', name = A.Skill_Major_Vitality, duration = 510 }, -- Major Vitality (Malubeth)
+    [81675] = { icon = 'esoui/art/icons/achievement_housing_038.dds', name = A.Set_Pirate_Skeleton, duration = 12000 }, -- Pirate Skeleton
     
-    [71107] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds', name = 'Briarheart', duration = 10000 }, -- Briarheart
+    [71107] = { icon = 'LuiExtended/media/icons/abilities/ability_set_briarheart.dds', name = A.Set_Briarheart, duration = 10000 }, -- Briarheart
     
-    [97626] = { icon = 'esoui/art/icons/achievement_update11_dungeons_036.dds', name = 'Ironblood', duration = 10000, debuff = true }, -- Ironblood
+    [97626] = { icon = 'esoui/art/icons/achievement_update11_dungeons_036.dds', name = A.Set_Ironblood, duration = 10000, debuff = true }, -- Ironblood
     
     -- Player (Basic)
     [973] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_sprint.dds', name = A.Innate_Sprint, duration = 0}, -- Sprint
@@ -4534,12 +4576,6 @@ E.FakePlayerExternalBuffs = {
 
 E.FakePlayerDebuffs = { -- Fake debuffs applied onto a target by the player
 
-    ----------------------------------------------------------------
-    -- PLAYER BASIC ------------------------------------------------
-    ----------------------------------------------------------------
-    
-    [18396] = {icon = 'LuiExtended/media/icons/abilities/ability_destructionstaff_lightning_attackheavy.dds', name = 'Heavy Attack (Shock)', duration = 1800, norefresh = true}, -- Heavy Attack (Shock)
-
     -- JUSTICE NPCS
     [63194] = { icon = 'esoui/art/icons/ability_dragonknight_013.dds', name = 'Stonefist', duration = 6000 }, -- Flame Shard (Justice Guard 2H) -- If the player reflects
     
@@ -4550,17 +4586,17 @@ E.FakePlayerDebuffs = { -- Fake debuffs applied onto a target by the player
     [86309] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = A.Innate_Block_Stun, duration = 3000}, -- Stun (Player blocks NPC charged attack)
     [86312] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = A.Innate_Block_Stun, duration = 3000}, -- Stun (Player blocks Ogrim Body Slam)
     [74483] = {icon = 'esoui/art/icons/ability_dragonknight_005.dds', name = 'Fiery Grip', duration = 1000}, -- Fiery Grip (Sentinel) (TG DLC) -- If the player reflects
-    [21480] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_explosion.dds', name = 'Explosion', duration = 3000}, -- Explosion (Fire Vulnerability Proc)
-    [68464] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_venom.dds', name = 'Venom', duration = 3000}, -- Venom (Poison Vulnerability Proc)
-    [68461] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_pestilence.dds', name = 'Pestilence', duration = 3000}, -- Pestilence (Disease Vulnerability Proc)
-    [68455] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_disintegration.dds', name = 'Disintegration', duration = 3000}, -- Disintegration (Lightning Vulnerability Proc)
-    [68457] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_deep_freeze.dds', name = 'Deep Freeze', duration = 3000}, -- Deep Freeze (Frost Vulnerability Proc)
+    [21480] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_explosion.dds', name = A.Proc_Explosion, duration = 3000}, -- Explosion (Fire Vulnerability Proc)
+    [68464] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_venom.dds', name = A.Proc_Venom, duration = 3000}, -- Venom (Poison Vulnerability Proc)
+    [68461] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_pestilence.dds', name = A.Proc_Pestilence, duration = 3000}, -- Pestilence (Disease Vulnerability Proc)
+    [68455] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_disintegration.dds', name = A.Proc_Disintegration, duration = 3000}, -- Disintegration (Lightning Vulnerability Proc)
+    [68457] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_deep_freeze.dds', name = A.Proc_Deep_Freeze, duration = 3000}, -- Deep Freeze (Frost Vulnerability Proc)
     
     -- Dragonknight (Flame Lash)
     [70745] = {icon = 'esoui/art/icons/ability_warrior_025.dds', name = 'Power Lash', duration = 2000}, -- Off-Balance Exploit (Flame Lash - Rank 1)
     
     -- Item Sets
-    [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = 'Bahraha\'s Curse', duration = 0 }, -- Bahraha's Curse
+    [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = A.Set_Bahrahas_Curse, duration = 1000 }, -- Bahraha's Curse
     
 }
 
@@ -4645,6 +4681,6 @@ E.FakeDuplicate = {
 
     -- Human NPC's
     [53987] = { icon = 'esoui/art/icons/ability_buff_minor_sorcery.dds', name = 'Minor Sorcery' }, -- Rally (Vosh Rakh Devoted)
-    [65235] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity}, -- Enrage (Vosh Rakh Devoted)
+    [65235] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity}, -- Enrage (Vosh Rakh Devoted)
     
 }

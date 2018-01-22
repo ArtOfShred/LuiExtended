@@ -184,6 +184,9 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
             slot.icon:SetTexture(LUIE.Effects.EffectOverride[abilityId].icon)
             slot.iconFile = LUIE.Effects.EffectOverride[abilityId].icon
         end
+		if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then
+			ability.name = LUIE.Effects.EffectOverride[abilityId].name
+		end
     end
 
     local zos_GetSkillAbilityInfo = GetSkillAbilityInfo
@@ -192,6 +195,9 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex)
         if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then
             texture = LUIE.Effects.EffectOverride[abilityId].icon
+        end
+		if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then
+            name = LUIE.Effects.EffectOverride[abilityId].name
         end
         return name, texture, earnedRank, passive, ultimate, purchased, progressionIndex
     end
@@ -202,6 +208,9 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex)
         if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then
             texture = LUIE.Effects.EffectOverride[abilityId].icon
+        end
+		if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then
+            name = LUIE.Effects.EffectOverride[abilityId].name
         end
         return name, texture, earnedRank
     end
@@ -217,7 +226,6 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     end
     
     -- Death Recap enhancements:
-    
     local zos_GetKillingAttackerInfo = GetKillingAttackerInfo
     local zos_GetKillingAttackInfo = GetKillingAttackInfo
     
@@ -225,7 +233,10 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 		local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
 		local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
 
-		if LUIE.DeathRecap.DeathRecapOverride[abilityId] then attackerRawName = E.DeathRecapOverride[abilityId] end
+		if LUIE.Effects.EffectSourceOverride[abilityId] then 
+			if LUIE.Effects.EffectSourceOverride[abilityId].source then attackerRawName = LUIE.Effects.EffectSourceOverride[abilityId].source end
+			if LUIE.Effects.EffectSourceOverride[abilityId].pet then minionName = LUIE.Effects.EffectSourceOverride[abilityId].pet end
+		end
 		
         return attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName
     end
