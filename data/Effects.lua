@@ -259,13 +259,19 @@ E.AbilityIcon = {
 }
 
 -- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY ID
+-- TODO: Make sure to add all Synergy effects here
 E.DebuffDisplayOverrideId = {
+
+	-- Basic (Shared)
     [2727] = true, -- Off-Balance (Generic)
     
     -- Player (Sets)
     [51315] = true, -- Destructive Mage (Aether ... of Destruction)
     [60416] = true, -- Sunderflame
 	[93001] = true, -- Mad Tinkerer (Stun from Fabricant)
+	
+	-- Class
+	[31562] = true, -- Supernova (Nova Synergy)
     
     -- Human NPC's
     [88281] = true, -- Call Ally (Pet Ranger)
@@ -288,7 +294,7 @@ E.DebuffDisplayOverrideId = {
 E.DebuffDisplayOverrideName = {
     ['Major Breach']                    = true,
     ['Major Cowardice']                 = true,
-    [A.Skill_Major_Defile]                    = true,
+    [A.Skill_Major_Defile]              = true,
     ['Major Enervation']                = true,
     ['Major Fracture']                  = true,
     ['Major Hindrance']                 = true,
@@ -298,11 +304,11 @@ E.DebuffDisplayOverrideName = {
     ['Major Vulnerability']             = true,
     ['Minor Breach']                    = true,
     ['Minor Cowardice']                 = true,
-    [A.Skill_Minor_Defile]                    = true,
+    [A.Skill_Minor_Defile]              = true,
     ['Minor Enervation']                = true,
     ['Minor Fracture']                  = true,
     ['Minor Hindrance']                 = true,
-    [A.Skill_Minor_Maim]                      = true,
+    [A.Skill_Minor_Maim]                = true,
     ['Minor Mangle']                    = true,
     ['Minor Uncertainty']               = true,
     ['Minor Vulnerability']             = true,
@@ -323,13 +329,12 @@ E.EffectGroundDisplay = {
     [59587] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds', name = A.Set_Lord_Warden_Dusk, buff = true, debuff = false, ground = false }, -- Lord Warden (Lord Warden)
     [59568] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds', name = A.Set_Malubeth_the_Scourger, buff = true, debuff = false, ground = false }, -- Scourge Harvest (Malubeth)
     [59508] = { icon = 'esoui/art/icons/achievement_ic_020.dds', name = A.Set_Maw_of_the_Infernal, buff = true, debuff = false, ground = false }, -- Banished Cells Item Set (Maw of the Infernal)
-    
     [81036] = { icon = 'LuiExtended/media/icons/abilities/ability_dwarven_spider_heal.dds', buff = true, debuff = false, ground = false }, -- Sentinel of Rkugamz
-    
-    
     [80954] = { icon = 'esoui/art/icons/achievement_ic_017.dds', name = A.Set_Shadowrend, buff = true, debuff = false, ground = false }, -- Shadowrend Summon (Shadowrend) 
     [59497] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', buff = false, debuff = false, ground = true }, -- Spawn of Mephala (Spawn of Mephala)   
     [80523] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_stormfist.dds', buff = false, debuff = false, ground = true }, -- Stormfist (Stormfist)
+	[102093] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds', buff = false, debuff = false, ground = true }, -- Thurvokun
+	[102136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_zaan.dds', buff = true, debuff = false, ground = false }, -- Zaan
     
     -- Crafted Sets
     [71671] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds', buff = true, debuff = false, ground = false }, -- Morkuldin (Morkuldin)
@@ -339,9 +344,120 @@ E.EffectGroundDisplay = {
     
     -- Dungeon Sets
     [97538] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds', buff = true, debuff = false, ground = false }, -- Draugr's Rest
+	[102106] = { icon = 'LuiExtended/media/icons/abilities/ability_set_plague_slinger.dds', name = A.Set_Plague_Slinger, buff = false, debuff = false, ground = true }, -- Skeever Corpse
     [97908] = { icon = 'esoui/art/icons/achievement_wrothgar_044.dds', buff = true, debuff = false, ground = true }, -- Hagraven's Garden (Hagraven's)
     [67205] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds', buff = false, debuff = false, ground = true }, -- Leeching Plate (of Leeching)
     [84354] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_spawn_of_mephala.dds', buff = false, debuff = false, ground = true }, -- Hand of Mephala (of Mephala's Hand)
+	
+	---------------------------
+	-- Class Abilities --------
+	---------------------------
+	
+	-- Templar
+	[21976] = { buff = false, debuff = false, ground = true }, -- Nova
+		
+	---------------------------
+	-- Destro Staff -----------
+	---------------------------
+	
+	-- Wall of Elements
+	[28807] = { buff = false, debuff = false, ground = true }, -- Wall of Fire (Wall of Elements - Rank 1)
+	[28854] = { buff = false, debuff = false, ground = true }, -- Wall of Storms (Wall of Elements - Rank 1)
+	[28849] = { buff = false, debuff = false, ground = true }, -- Wall of Frost (Wall of Elements - Rank 1)
+	[41628] = { buff = false, debuff = false, ground = true }, -- Wall of Fire (Wall of Elements - Rank 2)
+	[41637] = { buff = false, debuff = false, ground = true }, -- Wall of Storms (Wall of Elements - Rank 2)
+	[41632] = { buff = false, debuff = false, ground = true }, -- Wall of Frost (Wall of Elements - Rank 2)
+	[41643] = { buff = false, debuff = false, ground = true }, -- Wall of Fire (Wall of Elements - Rank 3)
+	[41652] = { buff = false, debuff = false, ground = true }, -- Wall of Storms (Wall of Elements - Rank 3)
+	[41647] = { buff = false, debuff = false, ground = true }, -- Wall of Frost (Wall of Elements - Rank 3)
+	[41659] = { buff = false, debuff = false, ground = true }, -- Wall of Fire (Wall of Elements - Rank 4)
+	[41668] = { buff = false, debuff = false, ground = true }, -- Wall of Storms (Wall of Elements - Rank 4)
+	[41663] = { buff = false, debuff = false, ground = true }, -- Wall of Frost (Wall of Elements - Rank 4)
+	
+	-- Unstable Wall of Elements
+	[39053] = { buff = false, debuff = false, ground = true }, -- Unstable Wall of Fire (Unstable Wall of Elements - Rank 1)
+	[39073] = { buff = false, debuff = false, ground = true }, -- Unstable Wall of Storms (Unstable Wall of Elements - Rank 1)
+	[39067] = { buff = false, debuff = false, ground = true }, -- Unstable Wall of Frost (Unstable Wall of Elements - Rank 1)
+	
+	-- Elemental Blockade
+	[39012] = { buff = false, debuff = false, ground = true }, -- Blockade of Fire (Elemental Blockade - Rank 1)
+	[39018] = { buff = false, debuff = false, ground = true }, -- Blockade of Storms (Elemental Blockade - Rank 1)
+	[39028] = { buff = false, debuff = false, ground = true }, -- Blockade of Frost (Elemental Blockade - Rank 1)
+	
+	---------------------------
+	-- Resto Staff ------------
+	---------------------------
+	
+	[28385] = { buff = true, debuff = false, ground = false }, -- Grand Healing (Grand Healing - Rank 1)
+	[41244] = { buff = true, debuff = false, ground = false }, -- Grand Healing (Grand Healing - Rank 2)
+	[41246] = { buff = true, debuff = false, ground = false }, -- Grand Healing (Grand Healing - Rank 3)
+	[41248] = { buff = true, debuff = false, ground = false }, -- Grand Healing (Grand Healing - Rank 4)
+	
+	[40058] = { buff = true, debuff = false, ground = false }, -- Illustrious Healing (Illustrious Healing - Rank 1)
+	
+	[40060] = { buff = true, debuff = false, ground = false }, -- Healing Springs (Healing Springs - Rank 1)
+
+}
+
+E.BarHighlightOverride = {
+
+	-- newId = replace ID
+	-- showFakeAura = Trigger this event when the ability is pressed rather than on EVENT_EFFECT_CHANGED
+	-- secondary = If menu option disabled, do not show this highlight
+	
+	---------------------------
+	-- Templar ----------------
+	---------------------------
+	
+	-- Aedric Spear
+	[26792] = { newId = 26795, secondary = true }, -- Biting Jabs (Rank 1) - Major Savagery
+	
+	[22138] = { newId = 62593 }, -- Radial Sweep (Radial Sweep - Rank 1)
+
+	-- Dawn's Wrath
+	[21726] = { newId = 21728 }, -- Sun Fire (Rank 1)
+	[24160] = { newId = 24162 }, -- Sun Fire (Rank 2)
+	[24167] = { newId = 24170 }, -- Sun Fire (Rank 3)
+	[24171] = { newId = 24173 }, -- Sun Fire (Rank 4)
+	
+	[21729] = { newId = 21731 }, -- Vampire's Bane (Rank 1)
+	
+	[21732] = { newId = 21734 }, -- Reflective Light (Rank 1)
+	
+	[21752] = { newId = 21976 }, -- Nova (Rank 1)
+	
+	-- Restoring Light
+	[22253] = { newId = 35632, secondary = true }, -- Honor the Dead (Rank 1)
+	
+	[22223] = { showFakeAura = true }, -- Rite of Passage
+	
+	---------------------------
+	-- Destro Staff -----------
+	---------------------------
+	
+	-- Wall of Elements
+	[28807] = { effectOnly = true }, -- Wall of Fire (Wall of Elements - Rank 1)
+	[28854] = { effectOnly = true }, -- Wall of Storms (Wall of Elements - Rank 1)
+	[28849] = { effectOnly = true }, -- Wall of Frost (Wall of Elements - Rank 1)
+	[41628] = { effectOnly = true }, -- Wall of Fire (Wall of Elements - Rank 2)
+	[41637] = { effectOnly = true }, -- Wall of Storms (Wall of Elements - Rank 2)
+	[41632] = { effectOnly = true }, -- Wall of Frost (Wall of Elements - Rank 2)
+	[41643] = { effectOnly = true }, -- Wall of Fire (Wall of Elements - Rank 3)
+	[41652] = { effectOnly = true }, -- Wall of Storms (Wall of Elements - Rank 3)
+	[41647] = { effectOnly = true }, -- Wall of Frost (Wall of Elements - Rank 3)
+	[41659] = { effectOnly = true }, -- Wall of Fire (Wall of Elements - Rank 4)
+	[41668] = { effectOnly = true }, -- Wall of Storms (Wall of Elements - Rank 4)
+	[41663] = { effectOnly = true }, -- Wall of Frost (Wall of Elements - Rank 4)
+	
+	-- Unstable Wall of Elements
+	[39053] = { effectOnly = true }, -- Unstable Wall of Fire (Unstable Wall of Elements - Rank 1)
+	[39073] = { effectOnly = true }, -- Unstable Wall of Storms (Unstable Wall of Elements - Rank 1)
+	[39067] = { effectOnly = true }, -- Unstable Wall of Frost (Unstable Wall of Elements - Rank 1)
+	
+	-- Elemental Blockade
+	[39012] = { effectOnly = true }, -- Blockade of Fire (Elemental Blockade - Rank 1)
+	[39018] = { effectOnly = true }, -- Blockade of Storms (Elemental Blockade - Rank 1)
+	[39028] = { effectOnly = true }, -- Blockade of Frost (Elemental Blockade - Rank 1)
 
 }
 
@@ -595,24 +711,18 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     [32755] = true, -- Nikulas' Heavy Armor (of Nikulas)
     
     ----------------------------
-    -- Templar (Aedric Spear)
-    ----------------------------
-    
-    -- Piercing Javelin
-    [26162] = true, -- Piercing Javelin (Piercing Javelin - Rank 1)
-    [26972] = true, -- Piercing Javelin (Piercing Javelin - Rank 2)
-    [26974] = true, -- Piercing Javelin (Piercing Javelin - Rank 3)
-    [26976] = true, -- Piercing Javelin (Piercing Javelin - Rank 4)
-    
-    -- Aurora Javelin
-    [26801] = true, -- Aurora Javelin (Aurora Javelin - Rank 1)
-    
-    -- Binding Javelin
-    [26805] = true, -- Binding Javelin (Binding Javelin - Rank 1)
-    
-    ----------------------------
     -- Destruction Staff
     ----------------------------
+	
+	[68719] = true, -- Frozen (Wall of Elements - All Ranks)
+	[62928] = true, -- Wall of Frost (Wall of Elements - Rank 1)
+	[62933] = true, -- Wall of Frost (Wall of Elements - Rank 2)
+	[62938] = true, -- Wall of Frost (Wall of Elements - Rank 3)
+	[62943] = true, -- Wall of Frost (Wall of Elements - Rank 4)
+	
+	[39068] = true, -- Unstable Wall of Frost (Unstable Wall of Elements - Rank 1)
+	
+	[62948] = true, -- Blockade of Frost (Elemental Blockade - Rank 1)
     
     [38172] = true, -- Stun After Knockback Movement (Destructive Touch - Rank 1) -- Fire
     [62661] = true, -- Stun After Knockback Movement (Destructive Touch - Rank 2) -- Fire
@@ -1306,6 +1416,8 @@ E.EffectOverride = {
     [59543] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_engine_guardian_health.dds', name = A.Set_Engine_Guardian }, -- Engine Guardian Health
     
     [80504] = { icon = 'LuiExtended/media/icons/abilities/ability_troll_regeneration.dds', name = A.Set_The_Troll_King }, -- The Troll King
+	
+	[102094] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_thurvokun.dds' }, -- Thurvokun
     
     [80865] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds' }, -- Tremorscale
     [80866] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_tremorscale.dds' }, -- Tremorscale
@@ -1314,6 +1426,8 @@ E.EffectOverride = {
     [61273] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_valkyn_skoria.dds' }, -- Valkyn Skoria
     
     [80490] = { icon = 'esoui/art/icons/achievement_update11_dungeons_035.dds' }, -- Velidreth
+	
+	[102136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_zaan.dds' }, -- Zaan
     
     -- CRAFTED SETS
     [34502] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ashen_grip.dds' }, -- Ashen Grip
@@ -1470,6 +1584,11 @@ E.EffectOverride = {
     -- Dungeon Sets (Light)
     
     [61459] = { icon = 'LuiExtended/media/icons/abilities/ability_set_burning_spellweave.dds' }, -- Burning Spellweave
+	
+	[102027] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_ranged.dds', hide = true }, -- Caluurion's Legacy (Fire)
+	[102032] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_frost_ranged.dds', hide = true }, -- Caluurion's Legacy (Frost)
+	[102033] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_ranged.dds', hide = true }, -- Caluurion's Legacy (Disease)
+	[102034] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_ranged.dds', hide = true }, -- Caluurion's Legacy (Shock)
     
     [97539] = { icon = 'LuiExtended/media/icons/abilities/ability_set_draugrs_rest.dds' }, -- Draugr's Rest
     
@@ -1512,6 +1631,8 @@ E.EffectOverride = {
     
     [97716] = { icon = 'LuiExtended/media/icons/abilities/ability_set_pillar_of_nirn.dds' }, -- Pillar of Nirn
     [97743] = { icon = 'LuiExtended/media/icons/abilities/ability_set_pillar_of_nirn.dds' }, -- Pillar of Nirn
+	
+	[102113] = { icon = 'LuiExtended/media/icons/abilities/ability_set_plague_slinger.dds'} , -- Plague Slinger
     
     [67141] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_melee.dds'}, -- Sheer Venom
     
@@ -1533,10 +1654,14 @@ E.EffectOverride = {
     
     [33691] = { icon = 'LuiExtended/media/icons/abilities/ability_set_vipers_sting.dds' }, -- Viper's Sting
     
+	[101970] = { icon = 'LuiExtended/media/icons/abilities/ability_set_invigoration.dds' }, -- Trappings of Invigoration
+	
     [84350] = { icon = 'esoui/art/icons/achievement_update11_dungeons_035.dds' }, -- Widowmaker
     
     -- Dungeon Sets (Heavy
     
+	[102023] = { icon = 'LuiExtended/media/icons/abilities/ability_set_curse_of_doylemish.dds' }, -- Curse of Doylemish
+	
     [34527] = { name = A.Skill_Major_Defile }, -- Durok's Bane Major Defile (of Durok's Bane)
     
     [47362] = { icon = 'LuiExtended/media/icons/abilities/ability_set_ebon.dds' }, -- Ebon Armory (Ebon)
@@ -1614,9 +1739,9 @@ E.EffectOverride = {
     [75804] = { icon = 'LuiExtended/media/icons/abilities/ability_set_moondancer_shadow.dds' }, -- Shadow Blessing (Moondancer)
     
     [98102] = { icon = 'esoui/art/icons/achievement_vvardenfel_060.dds' }, -- Minor Slayer (of Alkosh)
-    [75752] = { icon = 'esoui/art/icons/achievement_026.dds' }, -- Roar of Alkosh (of Alkosh)
-    [75753] = { icon = 'esoui/art/icons/achievement_026.dds', name = A.Set_Roar_of_Alkosh }, -- Line Breaker (of Alkosh)
-    [76667] = { icon = 'esoui/art/icons/achievement_026.dds' }, -- Roar of Alkosh (of Alkosh)
+    [75752] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds' }, -- Roar of Alkosh (of Alkosh)
+    [75753] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds', name = A.Set_Roar_of_Alkosh }, -- Line Breaker (of Alkosh)
+    [76667] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds' }, -- Roar of Alkosh (of Alkosh)
     
     [75815] = { icon = 'LuiExtended/media/icons/abilities/ability_set_lunar_bastion.dds', duration = 0 }, -- Lunar Bastion (of the Lunar Bastion)
     
@@ -1744,6 +1869,7 @@ E.EffectOverride = {
 	
 	-- The Ritual
     [98307] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_opportunist.dds' }, -- Opportunist
+    [100408] = { icon = 'LuiExtended/media/icons/abilities/ability_champion_mage_opportunist.dds' }, -- Opportunist
 
     ----------------------------------------------------------------
     -- PLAYER ABILITIES - BASIC ------------------------------------
@@ -1805,7 +1931,7 @@ E.EffectOverride = {
     
     -- Basic Attacks
 	[16593] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_melee_snare.dds' }, -- Melee Snare
-    [48532] = { hide = true }, -- Charge Snare
+    [48532] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_melee_snare.dds', hide = true }, -- Charge Snare
 	
 	-- Taunt Effects
 	[38254] = { icon = 'esoui/art/icons/ability_warrior_010.dds' }, -- Taunt
@@ -2063,10 +2189,10 @@ E.EffectOverride = {
     ----------------------------------------------------------------
     
     -- Puncturing Sweep
-    [55183] = { icon = 'esoui/art/icons/ability_templar_reckless_attacks.dds', name = 'Puncturing Sweep' }, -- Puncturing Sweep Heal (Puncturing Sweep - Rank 1)
+    [55183] = { icon = 'esoui/art/icons/ability_templar_reckless_attacks.dds', name = A.Skill_Puncturing_Sweep }, -- Puncturing Sweep Heal (Puncturing Sweep - Rank 1)
     
     -- Aurora Javelin
-    [37414] = { name = 'Aurora Javelin' }, -- Piercing Javelin (Aurora Javelin - Rank 1)
+    [37414] = { name = A.Skill_Aurora_Javelin }, -- Piercing Javelin (Aurora Javelin - Rank 1)
     
     -- Sun Fire
     [21727] = { icon = 'esoui/art/icons/ability_templar_sun_fire.dds' }, -- Sun Fire (Sun Fire - Rank 1)
@@ -2078,28 +2204,23 @@ E.EffectOverride = {
     [21730] = { icon = 'esoui/art/icons/ability_templar_vampire_bane.dds' }, -- Vampire's Bane (Vampire's Bane - Rank 1)
     
     -- Reflective Light
-    [21733] = { icon = 'esoui/art/icons/ability_templar_vampire_bane.dds' }, -- Reflective Light (Reflective Light - Rank 1)
-    
-    -- Nova
-    [31537] = { hide = true }, -- Supernova (Nova - All Ranks)
-    [31540] = { icon = 'esoui/art/icons/ability_healer_013.dds' }, -- Supernova (Nova - All Ranks)
+    [21733] = { icon = 'esoui/art/icons/ability_templar_reflective_light.dds' }, -- Reflective Light (Reflective Light - Rank 1)
+	
+	-- Nova
+	[21754] = { name = A.Skill_Major_Maim, duration = 0 }, -- Nova (Nova - Rank 1)
     
     -- Breath of Life
-    [22256] = { hide = true }, -- Breath of Life (Breath of Life - Rank 1)
     [44391] = { icon = 'esoui/art/icons/ability_templar_breath_of_life.dds' }, -- Breath of Life (Breath of Life - Rank 1)
     
     -- Healing Ritual
-    [22307] = { icon = 'esoui/art/icons/ability_templar_healing_ritual.dds', hide = true }, -- Healing Ritual (Healing Ritual - Rank 1)
-    [27335] = { icon = 'esoui/art/icons/ability_templar_healing_ritual.dds', hide = true }, -- Healing Ritual (Healing Ritual - Rank 2)
-    [27341] = { icon = 'esoui/art/icons/ability_templar_healing_ritual.dds', hide = true }, -- Healing Ritual (Healing Ritual - Rank 3)
-    [27343] = { icon = 'esoui/art/icons/ability_templar_healing_ritual.dds', hide = true }, -- Healing Ritual (Healing Ritual - Rank 4)
+    [22307] = { icon = 'esoui/art/icons/ability_templar_healing_ritual.dds' }, -- Healing Ritual (Healing Ritual - Rank 1)
+    [27335] = { icon = 'esoui/art/icons/ability_templar_healing_ritual.dds' }, -- Healing Ritual (Healing Ritual - Rank 2)
+    [27341] = { icon = 'esoui/art/icons/ability_templar_healing_ritual.dds' }, -- Healing Ritual (Healing Ritual - Rank 3)
+    [27343] = { icon = 'esoui/art/icons/ability_templar_healing_ritual.dds' }, -- Healing Ritual (Healing Ritual - Rank 4)
     
     -- Ritual of Rebirth
-    [22331] = { icon = 'esoui/art/icons/ability_templar_ritual_of_rebirth.dds', hide = true }, -- Ritual of Rebirth (Ritual of Rebirth - Rank 1)
+    [22331] = { icon = 'esoui/art/icons/ability_templar_ritual_of_rebirth.dds' }, -- Ritual of Rebirth (Ritual of Rebirth - Rank 1)
     [88456] = { icon = 'esoui/art/icons/ability_templar_ritual_of_rebirth.dds' }, -- Ritual of Rebirth (Ritual of Rebirth - Rank 1)
-    
-    -- Hasty Prayer
-    [22318] = { hide = true }, -- Hasty Prayer (Hasty Prayer - Rank 1)
     
     -- Rite of Passage
     [22225] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds' }, -- Rite of Passage (Rite of Passage - Rank 1)
@@ -2293,31 +2414,32 @@ E.EffectOverride = {
     -----------------------------------------
     
     -- Crushing Shock
-    [48009] = { icon = 'esoui/art/icons/ability_destructionstaff_001a.dds', name = 'Crushing Shock' }, -- Stagger (Crushing Shock - Rank 1)
-    [48011] = { name = 'Crushing Shock' }, -- Uber Attack (Crushing Shock - Rank 1)
+	[48010] = { icon = '' }, -- Force Shock (Destruction) -- Displays when interrupting a stun immune target with Crushing Shock
+    [48009] = { icon = 'esoui/art/icons/ability_destructionstaff_001a.dds', name = A.Skill_Crushing_Shock }, -- Stagger (Crushing Shock - Rank 1)
+    [48011] = { name = A.Skill_Crushing_Shock }, -- Uber Attack (Crushing Shock - Rank 1)
     
     -- Force Pulse
     [48016] = { icon = 'esoui/art/icons/ability_destructionstaff_001b.dds' }, -- Force Pulse (Force Pulse - Rank 1)
     
     -- Wall of Elements
     [68719] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds' }, -- Frozen (Wall of Elements - All Ranks) -- Frost
-    [62928] = { name = 'Wall of Frost' }, -- Wall of Frost Snare (Wall of Elements - Rank 1) -- Frost
-    [62933] = { name = 'Wall of Frost' }, -- Unstable Wall of Frost (Wall of Elements - Rank 2) -- Frost
-    [62938] = { name = 'Wall of Frost' }, -- Unstable Wall of Frost (Wall of Elements - Rank 3) -- Frost
-    [62943] = { name = 'Wall of Frost' }, -- Unstable Wall of Frost (Wall of Elements - Rank 4) -- Frost
-    
-    [62968] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Wall of Storms (Wall of Elements - Rank 1) -- Lightning
-    [62973] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Wall of Storms (Wall of Elements - Rank 2) -- Lightning
-    [62978] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Wall of Storms (Wall of Elements - Rank 3) -- Lightning
-    [62983] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Wall of Storms (Wall of Elements - Rank 4) -- Lightning
+	
+	[62968] = { name = A.Skill_Off_Balance }, -- Off Balance (Wall of Elements - Rank 1) -- Lightning
+	[62928] = { duration = 0 }, -- Wall of Frost (Wall of Elements - Rank 1) -- Frost
+	[62973] = { name = A.Skill_Off_Balance }, -- Off Balance (Wall of Elements - Rank 2) -- Lightning
+	[62933] = { duration = 0 }, -- Wall of Frost (Wall of Elements - Rank 2) -- Frost
+	[62978] = { name = A.Skill_Off_Balance }, -- Off Balance (Wall of Elements - Rank 3) -- Lightning
+	[62938] = { duration = 0 }, -- Wall of Frost (Wall of Elements - Rank 3) -- Frost
+    [62983] = { name = A.Skill_Off_Balance }, -- Off Balance (Wall of Elements - Rank 4) -- Lightning
+	[62943] = { duration = 0 }, -- Wall of Frost (Wall of Elements - Rank 4) -- Frost
     
     -- Unstable Wall of Elements
     [39077] = { name = A.Skill_Off_Balance }, -- Unstable Wall of Storms (Unstable Wall of Elements - Rank 1) -- Lightning
-    
+	[39068] = { duration = 0 }, -- Unstable Wall of Frost (Unstable Wall of Elements - Rank 1) -- Frost
     
     -- Elemental Blockade
-    [62988] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Blockade of Storms (Elemental Blockade - Rank 1) -- Lightning
-    [62948] = { name = 'Blockade of Frost' }, -- Unstable Wall of Frost (Elemental Blockade - Rank 1) -- Frost
+    [62988] = { name = A.Skill_Off_Balance }, -- Blockade of Storms (Elemental Blockade - Rank 1) -- Lightning
+	[62948] = { duration = 0 }, -- Blockade of Frost (Elemental Blockade - Rank 1) -- Frost
     
     -- Destructive Touch
     [62648] = { name = 'Flame Touch' }, -- Fire Touch (Destructive Touch - Rank 1) -- Fire
@@ -2394,6 +2516,11 @@ E.EffectOverride = {
     [41245] = { icon = 'esoui/art/icons/ability_restorationstaff_004.dds' }, -- Grand Healing (Grand Healing - Rank 2)
     [41247] = { icon = 'esoui/art/icons/ability_restorationstaff_004.dds' }, -- Grand Healing (Grand Healing - Rank 3)
     [41249] = { icon = 'esoui/art/icons/ability_restorationstaff_004.dds' }, -- Grand Healing (Grand Healing - Rank 4)
+	
+	[40059] = { icon = 'esoui/art/icons/ability_restorationstaff_004b.dds' }, -- Illustrious Healing (Illustrious Healing - Rank 1)
+	
+	[40061] = { icon = 'esoui/art/icons/ability_restorationstaff_004a.dds' }, -- Healing Springs (Healing Springs - Rank 1)
+	[40062] = { icon = 'esoui/art/icons/ability_restorationstaff_004a.dds' }, -- Healing Springs (Healing Springs - Rank 1) 
     
     -- Blessing of Protection
     [37243] = { hide = true }, -- Blessing of Protection (Blessing of Protection - Rank 1)
@@ -2694,13 +2821,13 @@ E.EffectOverride = {
     [50906] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_tough.dds' }, -- Tough
     [50907] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_tough.dds' }, -- Tough
     
-    [36155] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_red_diamond.dds', hide = true }, -- Red Diamond
-    [45291] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_red_diamond.dds', hide = true }, -- Red Diamond
-    [45293] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_red_diamond.dds', hide = true }, -- Red Diamond
+    [36155] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_red_diamond.dds' }, -- Red Diamond
+    [45291] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_red_diamond.dds' }, -- Red Diamond
+    [45293] = { icon = 'LuiExtended/media/icons/abilities/passive_racial_red_diamond.dds' }, -- Red Diamond
     
-    [36548] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_adrenaline_rush.dds', hide = true }, -- Adrenaline Rush (Adrenaline Rush - Rank 1)
-    [45314] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_adrenaline_rush.dds', hide = true }, -- Adrenaline Rush (Adrenaline Rush - Rank 2)
-    [45316] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_adrenaline_rush.dds', hide = true }, -- Adrenaline Rush (Adrenaline Rush - Rank 3)
+    [36548] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_adrenaline_rush.dds' }, -- Adrenaline Rush (Adrenaline Rush - Rank 1)
+    [45314] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_adrenaline_rush.dds' }, -- Adrenaline Rush (Adrenaline Rush - Rank 2)
+    [45316] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_adrenaline_rush.dds' }, -- Adrenaline Rush (Adrenaline Rush - Rank 3)
 
     [63694] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds' }, -- Resourceful (Resourceful - Rank 1)
     [63695] = { icon = 'LuiExtended/media/icons/abilities/ability_racial_resourceful.dds' }, -- Resourceful (Resourceful - Rank 1)
@@ -4049,7 +4176,7 @@ E.EffectOverride = {
     [66397] = { icon = 'esoui/art/icons/ability_healer_027.dds' }, -- Avalian's Speed (The Anger of a King)
     [66399] = { icon = 'esoui/art/icons/ability_warrior_012.dds' }, -- Usunok's Strength (The Anger of a King)
     [66415] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds', name = 'Gust' }, -- Uppercut Stun (The Anger of a King)
-    [53291] = { icon = 'esoui/art/icons/ability_destructionstaff_001a.dds', name = 'Crushing Shock' }, -- Uber Attack (The Anger of a King - Talviah Aliaria)
+    [53291] = { icon = 'esoui/art/icons/ability_destructionstaff_001a.dds', name = A.Skill_Crushing_Shock }, -- Uber Attack (The Anger of a King - Talviah Aliaria)
     [53302] = { icon = 'esoui/art/icons/ability_destructionstaff_008.dds', name = 'Minor Mangle' }, -- Icy Pulsar (The Anger of a King - Talviah Aliaria)
     [64430] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds' }, -- Royal Bash (Blood on a King's Hands)
     [66988] = { type = BUFF_EFFECT_TYPE_DEBUFF }, -- Tear Down the Mountain (Blood on a King's Hands)
@@ -4548,6 +4675,10 @@ E.FakePlayerBuffs = {
     [32346] = {icon = 'esoui/art/icons/ability_mage_050.dds', name = A.Innate_Absorbing_Skyshard, duration = 5800}, -- Skyshard Collect
     [14031] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mundus_use.dds', name = A.Innate_Receiving_Boon, duration = 5000}, -- Mundus Use
 
+	-- Class
+	[22223] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = 'Rite of Passage', duration = 4000}, -- Rite of Passage
+	
+	
     -- Seasonal Quests (New Life Festival)
     [84125] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Breton Male Dance (Lava Foot Stomp)
     [84126] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Breton Female Dance (Lava Foot Stomp)

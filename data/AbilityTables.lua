@@ -7,6 +7,7 @@ local A = {}
 -- ---------------------------------------------------
 
 A.Skill_Minor_Maim 					= 61856
+A.Skill_Major_Maim 					= 92041
 A.Skill_Major_Evasion				= 90620
 A.Skill_Minor_Defile				= 61726
 A.Skill_Major_Defile				= 38686
@@ -206,6 +207,7 @@ A.Set_Varens_Legacy					= 79029
 A.Set_Syvarras_Scales				= 75717
 A.Set_Twin_Sisters					= 32828
 A.Set_Way_of_Fire					= 52710
+A.Set_Plague_Slinger				= 102113
 A.Set_Ice_Furnace					= GetString(SI_LUIE_SKILL_SET_ICE_FURNACE)
 A.Set_Jolting_Arms					= 67077
 A.Set_Hand_of_Mephala				= 84355
@@ -265,6 +267,20 @@ A.Passive_Noxiphilic_Sanguivoria	= GetString(SI_LUIE_SKILL_PASSIVE_NOXIPHILIC_SA
 A.Passive_Bloodmoon					= 32639
 A.Passive_Undaunted_Command			= 55584
 A.Passive_Red_Diamond				= 36155
+
+-- ---------------------------------------------------
+-- CLASS SKILLS --------------------------------------
+-- ---------------------------------------------------
+
+-- Templar
+A.Skill_Puncturing_Sweep 			= 26797
+A.Skill_Aurora_Javelin				= 26800
+
+-- ---------------------------------------------------
+-- WEAPON SKILLS -------------------------------------
+-- ---------------------------------------------------
+
+A.Skill_Crushing_Shock				= 46348
 
 -- ---------------------------------------------------
 -- NPC BASIC -----------------------------------------

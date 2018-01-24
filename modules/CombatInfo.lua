@@ -520,12 +520,12 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
         end
     else
         -- Also create visual enhancements from skill bar
-        if unitTag == "player" then
+        if castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
             -- start any proc animation associated with this effect
             if abilityType == ABILITY_TYPE_BONUS and g_triggeredSlots[abilityId] then
                 if CI.SV.ShowTriggered then
                     PlaySound(SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN)
-                    g_triggeredSlotsRemain[abilityId] = GetAbilityDuration(abilityId) + GetGameTimeMilliseconds()
+                    g_triggeredSlotsRemain[abilityId] = ((endTime - beginTime) * 1000) + GetGameTimeMilliseconds()
                     CI.PlayProcAnimations(g_triggeredSlots[abilityId])
                     if CI.SV.BarShowLabel then
                         g_uiProcAnimation[g_triggeredSlots[abilityId]].procLoopTexture.label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (GetAbilityDuration(abilityId)/1000) or (GetAbilityDuration(abilityId)/1000) - 1 ))
@@ -537,7 +537,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
             if g_toggledSlots[abilityId] then
                 local currentTime = GetGameTimeMilliseconds()
                 if CI.SV.ShowToggled then
-                    g_toggledSlotsRemain[abilityId] = GetAbilityDuration(abilityId) + GetGameTimeMilliseconds()
+                    g_toggledSlotsRemain[abilityId] = ((endTime - beginTime) * 1000) + GetGameTimeMilliseconds()
                     CI.ShowCustomToggle(g_toggledSlots[abilityId])
                     --if CI.SV.BarShowLabel then
                     --    g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( "" )
@@ -573,6 +573,7 @@ function CI.OnSlotAbilityUsed(eventCode, slotNum)
     local ability = g_actionBar[slotNum]
 
     if ability then -- Only proceed if this button is being watched
+	if not ability.showFakeAura then return end -- Bail out if this effect isn't on the override table for non-auras EVENT_EFFECT_CHANGED
         -- Get the time
 
         -- Avoid failure and button mashing
@@ -653,6 +654,8 @@ function CI.OnSlotUpdated(eventCode, slotNum)
 
     -- Get the slotted ability ID
     local ability_id = GetSlotBoundId(slotNum)
+	local showFakeAura = (E.BarHighlightOverride[ability_id] and E.BarHighlightOverride[ability_id].showFakeAura)
+	if E.BarHighlightOverride[ability_id] and E.BarHighlightOverride[ability_id].newId then ability_id = E.BarHighlightOverride[ability_id].newId end
     local abilityName = E.EffectOverride[ability_id] and E.EffectOverride[ability_id].name or GetAbilityName(ability_id) -- GetSlotName(slotNum)
     local duration = GetAbilityDuration(ability_id)
 
@@ -661,7 +664,8 @@ function CI.OnSlotUpdated(eventCode, slotNum)
         name    = abilityName,
         ground  = ( GetAbilityTargetDescription(ability_id) == "Ground" ),
         duration = duration,
-        slotNum=slotNum
+        slotNum=slotNum,
+		showFakeAura = showFakeAura
     }
 
     -- Check if currently this ability is in proc state
