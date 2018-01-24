@@ -66,6 +66,7 @@ local g_lastCast = 0
 local g_pendingGroundAbility = nil
 local g_barFont
 local g_potionFont
+local g_barOverrideCI		 = {} -- Table for storing abilityId's from E.BarHighlightOverride that should show as an aura.
 
 -- Quickslot
 local uiQuickSlot   = {
@@ -303,6 +304,21 @@ function CI.RegisterCombatInfo()
 	if CI.SV.ShowTriggered or CI.SV.ShowToggled then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED, CI.OnDeath)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, CI.OnEffectChanged)
+		
+		-- Grab any aura's from the list that have on EVENT_COMBAT_EVENT AURA support
+		for abilityId, value in pairs (E.BarHighlightOverride) do
+			if value.showFakeAura == true then
+				g_barOverrideCI[abilityId] = true
+			end
+		end
+		local counter = 0
+		for abilityId, _ in pairs (g_barOverrideCI) do
+			counter = counter + 1
+			local eventName = (moduleName .. "LUIE_CI_CombatEventBar" .. counter)
+			EVENT_MANAGER:RegisterForEvent(eventName, EVENT_COMBAT_EVENT, CI.OnCombatEventBar)
+			-- Register filter for specific abilityId's in table only, and filter for source = player, no errors
+			EVENT_MANAGER:AddFilterForEvent(eventName, EVENT_COMBAT_EVENT, REGISTER_FILTER_ABILITY_ID, abilityId, REGISTER_FILTER_IS_ERROR, false )
+		end
 	end
 end
 
@@ -564,17 +580,45 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
 
 end
 
+function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
+
+	-- If the source/target isn't the player then bail out now.
+	if sourceType ~= COMBAT_UNIT_TYPE_PLAYER and targetType ~= COMBAT_UNIT_TYPE_PLAYER then return end
+	
+	if result == ACTION_RESULT_BEGIN then
+		local currentTime = GetGameTimeMilliseconds()
+
+		if g_toggledSlots[abilityId] then
+			if CI.SV.ShowToggled then
+				g_toggledSlotsRemain[abilityId] = GetAbilityDuration(abilityId) + currentTime
+				CI.ShowCustomToggle(g_toggledSlots[abilityId])
+				if CI.SV.BarShowLabel then
+					g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (GetAbilityDuration(abilityId)/1000) or (GetAbilityDuration(abilityId)/1000) - 1 ))
+				end
+				if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetHidden( true ) end
+			end
+		end
+	elseif result == ACTION_RESULT_EFFECT_FADED then
+		if g_toggledSlotsRemain[abilityId] then 
+			if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
+				g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
+				if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then uiUltimate.LabelPct:SetHidden( false ) end
+			end
+			g_toggledSlotsRemain[abilityId] = nil
+		end
+	end
+
+end
+
 function CI.OnSlotAbilityUsed(eventCode, slotNum)
     -- Clear stored ground-target ability
     g_pendingGroundAbility = nil
 
-    -- Get the used ability
+    -- Get the used ability & time
     local currentTime = GetGameTimeMilliseconds()
     local ability = g_actionBar[slotNum]
 
     if ability then -- Only proceed if this button is being watched
-	if not ability.showFakeAura then return end -- Bail out if this effect isn't on the override table for non-auras EVENT_EFFECT_CHANGED
-        -- Get the time
 
         -- Avoid failure and button mashing
         if not HasFailure( slotNum ) and ( currentTime > g_lastCast + 250 ) then
@@ -583,24 +627,11 @@ function CI.OnSlotAbilityUsed(eventCode, slotNum)
             if ability.ground then
                 g_pendingGroundAbility = ability
             else
-                if g_toggledSlots[ability.id] then
-                    if CI.SV.ShowToggled then
-                        g_toggledSlotsRemain[ability.id] = g_actionBar[slotNum].duration + currentTime
-                        CI.ShowCustomToggle(slotNum)
-                        if CI.SV.BarShowLabel then
-                            g_uiCustomToggle[g_toggledSlots[ability.id]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (GetAbilityDuration(ability.id)/1000) or (GetAbilityDuration(ability.id)/1000) - 1 ))
-                        end
-						if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetHidden( true ) end
-                    end
-                end
-
                 -- Flag the last cast time
                 g_lastCast = currentTime
             end
         end
- 
     end
-    
 end
 
 function CI.OnSlotUpdated(eventCode, slotNum)

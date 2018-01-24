@@ -461,6 +461,7 @@ E.BarHighlightOverride = {
 
 }
 
+
 E.DisguiseIcons = {
     [2571]  = { icon = 'LuiExtended/media/icons/disguises/disguise_midnight_union_disguise.dds', description = 'as a Midnight Union thief.' },
     [27266] = { icon = 'LuiExtended/media/icons/disguises/disguise_vanguard_uniform.dds', description = 'as a soldier in Tanval\'s Vanguard.' },
