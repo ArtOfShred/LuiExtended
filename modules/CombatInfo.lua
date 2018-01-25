@@ -553,11 +553,11 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
             if g_toggledSlots[abilityId] then
                 local currentTime = GetGameTimeMilliseconds()
                 if CI.SV.ShowToggled then
-                    g_toggledSlotsRemain[abilityId] = ((endTime - beginTime) * 1000) + GetGameTimeMilliseconds()
+					g_toggledSlotsRemain[abilityId] = ((endTime - beginTime) * 1000) + GetGameTimeMilliseconds()
                     CI.ShowCustomToggle(g_toggledSlots[abilityId])
-                    --if CI.SV.BarShowLabel then
-                    --    g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( "" )
-                    --end
+				    --if CI.SV.BarShowLabel then
+					--	g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and ((endTime - beginTime)/1000) or ((endTime - beginTime)/1000) - 1 ))
+					--end
                 end
             end 
         end
