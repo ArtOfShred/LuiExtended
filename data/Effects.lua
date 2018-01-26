@@ -354,7 +354,9 @@ E.EffectGroundDisplay = {
 	---------------------------
 	
 	-- Templar
-	[21976] = { buff = false, debuff = false, ground = true }, -- Nova
+	[21976] = { buff = false, debuff = false, ground = true }, -- Nova (Nova - Rank 1)
+	[24048] = { buff = false, debuff = false, ground = true }, -- Nova (Nova - Rank 2)
+	[24059] = { buff = false, debuff = false, ground = true }, -- Nova (Nova - Rank 3)
 		
 	---------------------------
 	-- Destro Staff -----------
@@ -399,68 +401,94 @@ E.EffectGroundDisplay = {
 
 }
 
+-- This will create an effect on the player or target when X skill is detected as active. SCB creates the buff by the name listed here, this way if 3 or 4 effects all need to display for 1 ability, it will only show the one aura.
+E.EffectCreateSkillAura = {
+
+-- Resto Staff
+[37247] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection }, -- Minor Resolve (Blessing of Protection - Rank 1)
+[62619] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection }, -- Minor Ward (Blessing of Protection - Rank 1)
+
+[62620] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection }, -- Minor Resolve (Blessing of Protection - Rank 2)
+[62621] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection }, -- Minor Ward (Blessing of Protection - Rank 2)
+
+[62622] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection }, -- Minor Resolve (Blessing of Protection - Rank 3)
+[62623] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection }, -- Minor Ward (Blessing of Protection - Rank 3)
+
+[62624] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection }, -- Minor Resolve (Blessing of Protection - Rank 4)
+[62625] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection }, -- Minor Ward (Blessing of Protection - Rank 4)
+
+}
+
 E.BarHighlightOverride = {
 
 	-- newId = replace ID
-	-- showFakeAura = Trigger this event when the ability is pressed rather than on EVENT_EFFECT_CHANGED
+	-- showFakeAura = Trigger this event when the ability is pressed rather than on EVENT_EFFECT_CHANGED (Stops effect changes from displaying as well)
 	-- secondary = If menu option disabled, do not show this highlight
+	-- noRemove = don't remove effect on fading
+	-- duration = override duration
 	
 	---------------------------
 	-- Templar ----------------
 	---------------------------
 	
 	-- Aedric Spear
-	[26792] = { newId = 26795, secondary = true }, -- Biting Jabs (Rank 1) - Major Savagery
+	[26792] = { showFakeAura = true, duration = 8000, noRemove = true, secondary = true }, -- Major Savagery (Biting Jabs - Rank 1)
 	
 	[22138] = { newId = 62593 }, -- Radial Sweep (Radial Sweep - Rank 1)
+	[23782] = { newId = 62594 }, -- Radial Sweep (Radial Sweep - Rank 2)
 
 	-- Dawn's Wrath
-	[21726] = { newId = 21728 }, -- Sun Fire (Rank 1)
-	[24160] = { newId = 24162 }, -- Sun Fire (Rank 2)
-	[24167] = { newId = 24170 }, -- Sun Fire (Rank 3)
-	[24171] = { newId = 24173 }, -- Sun Fire (Rank 4)
+	[21726] = { newId = 21728 }, -- Sun Fire (Sun Fire - Rank 1)
+	[24160] = { newId = 24162 }, -- Sun Fire (Sun Fire - Rank 2)
+	[24167] = { newId = 24170 }, -- Sun Fire (Sun Fire - Rank 3)
+	[24171] = { newId = 24173 }, -- Sun Fire (Sun Fire - Rank 4)
 	
-	[21729] = { newId = 21731 }, -- Vampire's Bane (Rank 1)
+	[21729] = { newId = 21731 }, -- Vampire's Bane (Vampire's Bane - Rank 1)
 	
-	[21732] = { newId = 21734 }, -- Reflective Light (Rank 1)
+	[21732] = { newId = 21734 }, -- Reflective Light (Reflective Light - Rank 1)
 	
-	[21752] = { newId = 21976 }, -- Nova (Rank 1)
+	[21752] = { newId = 21976 }, -- Nova (Nova - Rank 1)
+	[24044] = { newId = 24048 }, -- Nova (Nova - Rank 2)
+	[24052] = { newId = 24059 }, -- Nova (Nova - Rank 3)
 	
 	-- Restoring Light
-	[22253] = { newId = 35632, secondary = true }, -- Honor the Dead (Rank 1)
+	[22253] = { newId = 35632, secondary = true, noRemove = true }, -- Honor the Dead (Honor the Dead - Rank 1)
 	
-	[22223] = { showFakeAura = true }, -- Rite of Passage
+	[22223] = { showFakeAura = true }, -- Rite of Passage (Right of Passage - Rank 1)
+	[27388] = { showFakeAura = true }, -- Rite of Passage (Right of Passage - Rank 2)
+	[27392] = { showFakeAura = true }, -- Rite of Passage (Right of Passage - Rank 3)
 	
 	---------------------------
 	-- Destro Staff -----------
 	---------------------------
+
+	-- Destructive Touch
+	[29073] = { newId = 62648 }, -- Flame Touch (Destructive Touch - Rank 1)
+	[29089] = { newId = 62722 }, -- Shock Touch (Destructive Touch - Rank 1)
+	[29078] = { newId = 62692 }, -- Frost Touch (Destructive Touch - Rank 1)
 	
-	-- Wall of Elements
-	[28807] = { effectOnly = true }, -- Wall of Fire (Wall of Elements - Rank 1)
-	[28854] = { effectOnly = true }, -- Wall of Storms (Wall of Elements - Rank 1)
-	[28849] = { effectOnly = true }, -- Wall of Frost (Wall of Elements - Rank 1)
-	[41628] = { effectOnly = true }, -- Wall of Fire (Wall of Elements - Rank 2)
-	[41637] = { effectOnly = true }, -- Wall of Storms (Wall of Elements - Rank 2)
-	[41632] = { effectOnly = true }, -- Wall of Frost (Wall of Elements - Rank 2)
-	[41643] = { effectOnly = true }, -- Wall of Fire (Wall of Elements - Rank 3)
-	[41652] = { effectOnly = true }, -- Wall of Storms (Wall of Elements - Rank 3)
-	[41647] = { effectOnly = true }, -- Wall of Frost (Wall of Elements - Rank 3)
-	[41659] = { effectOnly = true }, -- Wall of Fire (Wall of Elements - Rank 4)
-	[41668] = { effectOnly = true }, -- Wall of Storms (Wall of Elements - Rank 4)
-	[41663] = { effectOnly = true }, -- Wall of Frost (Wall of Elements - Rank 4)
+	[40948] = { newId = 62659 }, -- Flame Touch (Destructive Touch - Rank 2)
+	[40953] = { newId = 62727 }, -- Shock Touch (Destructive Touch - Rank 2)
+	[40950] = { newId = 62695 }, -- Frost Touch (Destructive Touch - Rank 2)
 	
-	-- Unstable Wall of Elements
-	[39053] = { effectOnly = true }, -- Unstable Wall of Fire (Unstable Wall of Elements - Rank 1)
-	[39073] = { effectOnly = true }, -- Unstable Wall of Storms (Unstable Wall of Elements - Rank 1)
-	[39067] = { effectOnly = true }, -- Unstable Wall of Frost (Unstable Wall of Elements - Rank 1)
+	[40957] = { newId = 62662 }, -- Flame Touch (Destructive Touch - Rank 3)
+	[40962] = { newId = 62729 }, -- Shock Touch (Destructive Touch - Rank 3)
+	[40959] = { newId = 62698 }, -- Frost Touch (Destructive Touch - Rank 3)
 	
-	-- Elemental Blockade
-	[39012] = { effectOnly = true }, -- Blockade of Fire (Elemental Blockade - Rank 1)
-	[39018] = { effectOnly = true }, -- Blockade of Storms (Elemental Blockade - Rank 1)
-	[39028] = { effectOnly = true }, -- Blockade of Frost (Elemental Blockade - Rank 1)
+	[40965] = { newId = 62665 }, -- Flame Touch (Destructive Touch - Rank 4)
+	[40970] = { newId = 62731 }, -- Shock Touch (Destructive Touch - Rank 4)
+	[40967] = { newId = 62701 }, -- Frost Touch (Destructive Touch - Rank 4)
+	
+	---------------------------
+	-- Resto Staff ------------
+	---------------------------
+	
+	[37243] = { showFakeAura = true, duration = 8000, noRemove = true }, -- Blessing of Protection (Blessing of Protection - Rank 1)
+	[41139] = { showFakeAura = true, duration = 8000, noRemove = true }, -- Blessing of Protection (Blessing of Protection - Rank 2)
+	[41145] = { showFakeAura = true, duration = 8000, noRemove = true }, -- Blessing of Protection (Blessing of Protection - Rank 3)
+	[41151] = { showFakeAura = true, duration = 8000, noRemove = true }, -- Blessing of Protection (Blessing of Protection - Rank 4)
 
 }
-
 
 E.DisguiseIcons = {
     [2571]  = { icon = 'LuiExtended/media/icons/disguises/disguise_midnight_union_disguise.dds', description = 'as a Midnight Union thief.' },
@@ -724,16 +752,7 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
 	[39068] = true, -- Unstable Wall of Frost (Unstable Wall of Elements - Rank 1)
 	
 	[62948] = true, -- Blockade of Frost (Elemental Blockade - Rank 1)
-    
-    [38172] = true, -- Stun After Knockback Movement (Destructive Touch - Rank 1) -- Fire
-    [62661] = true, -- Stun After Knockback Movement (Destructive Touch - Rank 2) -- Fire
-    [62664] = true, -- Stun After Knockback Movement (Destructive Touch - Rank 3) -- Fire
-    [62667] = true, -- Stun After Knockback Movement (Destructive Touch - Rank 4) -- Fire
-    
-    [38987] = true, -- Stun After Knockback Movement (Destructive Clench - Rank 1) -- Fire
-    
-    [38946] = true, -- Stun After Knockback Movement (Destructive Reach - Rank 1) -- Fire
-    
+	
     -- MAIN QUEST
     [61648] = true, -- Replenish Stamina (Tutorial - Child of Bones)
     
@@ -2209,6 +2228,8 @@ E.EffectOverride = {
 	
 	-- Nova
 	[21754] = { name = A.Skill_Major_Maim, duration = 0 }, -- Nova (Nova - Rank 1)
+	[24045] = { name = A.Skill_Major_Maim, duration = 0 }, -- Nova (Nova - Rank 2)
+	[24056] = { name = A.Skill_Major_Maim, duration = 0 }, -- Nova (Nova - Rank 3)
     
     -- Breath of Life
     [44391] = { icon = 'esoui/art/icons/ability_templar_breath_of_life.dds' }, -- Breath of Life (Breath of Life - Rank 1)
@@ -2225,6 +2246,8 @@ E.EffectOverride = {
     
     -- Rite of Passage
     [22225] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds' }, -- Rite of Passage (Rite of Passage - Rank 1)
+    [27390] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds' }, -- Rite of Passage (Rite of Passage - Rank 2)
+    [27394] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds' }, -- Rite of Passage (Rite of Passage - Rank 3)
     
     ----------------------------------------------------------------
     -- WARDEN PASSIVE ABILITIES ------------------------------------
@@ -2442,37 +2465,40 @@ E.EffectOverride = {
     [62988] = { name = A.Skill_Off_Balance }, -- Blockade of Storms (Elemental Blockade - Rank 1) -- Lightning
 	[62948] = { duration = 0 }, -- Blockade of Frost (Elemental Blockade - Rank 1) -- Frost
     
-    -- Destructive Touch
-    [62648] = { name = 'Flame Touch' }, -- Fire Touch (Destructive Touch - Rank 1) -- Fire
-    [38172] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = 'Flame Touch' }, -- Stun After Knockback Movement (Destructive Touch - Rank 1) -- Fire
-    [29075] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = 'Flame Touch' }, -- Fire Touch (destruction) (Destructive Touch - Rank 1) -- Fire
-    [30450] = { name = 'Frost Touch' }, -- Deep Freeze (Destructive Touch - Rank 1) -- Frost
-    [62659] = { name = 'Flame Touch' }, -- Fire Touch (Destructive Touch - Rank 2) -- Fire
-    [62661] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = 'Flame Touch' }, -- Stun After Knockback Movement (Destructive Touch - Rank 2) -- Fire
-    [62660] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = 'Flame Touch' }, -- Fire Touch (destruction) (Destructive Touch - Rank 2) -- Fire
-    [62693] = { name = 'Frost Touch' }, -- Deep Freeze (Destructive Touch - Rank 2) -- Frost
-    [62662] = { name = 'Flame Touch' }, -- Fire Touch (Destructive Touch - Rank 3) -- Fire
-    [62664] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = 'Flame Touch' }, -- Stun After Knockback Movement (Destructive Touch - Rank 3) -- Fire
-    [62663] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = 'Flame Touch' }, -- Fire Touch (destruction) (Destructive Touch - Rank 3) -- Fire
-    [62696] = { name = 'Frost Touch' }, -- Deep Freeze (Destructive Touch - Rank 3) -- Frost
-    [62665] = { name = 'Flame Touch' }, -- Fire Touch (Destructive Touch - Rank 4) -- Fire
-    [62667] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = 'Flame Touch' }, -- Stun After Knockback Movement (Destructive Touch - Rank 4) -- Fire
-    [62666] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = 'Flame Touch' }, -- Fire Touch (destruction) (Destructive Touch - Rank 4) -- Fire
-    [62699] = { name = 'Frost Touch' }, -- Deep Freeze (Destructive Touch - Rank 4) -- Frost
-    
-    [29073] = { hide = true }, -- Flame Touch (Destructive Touch - Rank 1) -- Fire
-    [29089] = { hide = true }, -- Shock Touch (Destructive Touch - Rank 1) -- Shock
-    [29078] = { hide = true }, -- Frost Touch (Destructive Touch - Rank 1) -- Frost
-    [40948] = { hide = true }, -- Flame Touch (Destructive Touch - Rank 2) -- Fire
-    [40953] = { hide = true }, -- Shock Touch (Destructive Touch - Rank 2) -- Shock
+	-- Destructive Touch
+	[29073] = { hide = true }, -- Flame Touch (Destructive Touch - Rank 1) -- Fire
+	[62648] = { name = A.Skill_Flame_Touch }, -- Fire Touch (Destructive Touch - Rank 1) -- Fire
+	[38172] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = A.Skill_Flame_Touch }, -- Stun After Knockback Movement (Destructive Touch - Rank 1) -- Fire
+	[29075] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = A.Skill_Flame_Touch }, -- Fire Touch (destruction) (Destructive Touch - Rank 1) -- Fire
+	[29089] = { hide = true }, -- Shock Touch (Destructive Touch - Rank 1) -- Fire
+	[29078] = { hide = true }, -- Frost Touch (Destructive Touch - Rank 1) -- Fire
+	[30450] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', name = A.Skill_Frozen }, -- Frost Touch (Destructive Touch - Rank 1) -- Fire
+	
+	[40948] = { hide = true }, -- Flame Touch (Destructive Touch - Rank 2) -- Fire
+	[62659] = { name = A.Skill_Flame_Touch }, -- Fire Touch (Destructive Touch - Rank 2) -- Fire
+	[62661] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = A.Skill_Flame_Touch  }, -- Stun After Knockback Movement (Destructive Touch - Rank 2) -- Fire
+    [62660] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = A.Skill_Flame_Touch  }, -- Fire Touch (destruction) (Destructive Touch - Rank 2) -- Fire
+	[40953] = { hide = true }, -- Shock Touch (Destructive Touch - Rank 2) -- Shock
     [40950] = { hide = true }, -- Frost Touch (Destructive Touch - Rank 2) -- Frost
-    [40957] = { hide = true }, -- Flame Touch (Destructive Touch - Rank 3) -- Fire
-    [40962] = { hide = true }, -- Shock Touch (Destructive Touch - Rank 3) -- Shock
+	[62693] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', name = A.Skill_Frozen }, -- Deep Freeze (Destructive Touch - Rank 2) -- Frost
+	
+	[40957] = { hide = true }, -- Flame Touch (Destructive Touch - Rank 3) -- Fire
+    [62662] = { name = A.Skill_Flame_Touch }, -- Fire Touch (Destructive Touch - Rank 3) -- Fire
+    [62664] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = A.Skill_Flame_Touch }, -- Stun After Knockback Movement (Destructive Touch - Rank 3) -- Fire
+    [62663] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = A.Skill_Flame_Touch }, -- Fire Touch (destruction) (Destructive Touch - Rank 3) -- Fire
+	[40962] = { hide = true }, -- Shock Touch (Destructive Touch - Rank 3) -- Shock
     [40959] = { hide = true }, -- Frost Touch (Destructive Touch - Rank 3) -- Frost
-    [40965] = { hide = true }, -- Flame Touch (Destructive Touch - Rank 4) -- Fire
-    [40970] = { hide = true }, -- Shock Touch (Destructive Touch - Rank 4) -- Shock
+    [62696] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', name = A.Skill_Frozen }, -- Deep Freeze  (Destructive Touch - Rank 3) -- Frost
+	
+	[40965] = { hide = true }, -- Flame Touch (Destructive Touch - Rank 4) -- Fire
+    [62665] = { name = A.Skill_Flame_Touch }, -- Fire Touch (Destructive Touch - Rank 4) -- Fire
+    [62667] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = A.Skill_Flame_Touch }, -- Stun After Knockback Movement (Destructive Touch - Rank 4) -- Fire
+    [62666] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = A.Skill_Flame_Touch }, -- Fire Touch (destruction) (Destructive Touch - Rank 4) -- Fire
+	[40970] = { hide = true }, -- Shock Touch (Destructive Touch - Rank 4) -- Shock
     [40967] = { hide = true }, -- Frost Touch (Destructive Touch - Rank 4) -- Frost
-    
+    [62699] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', name = A.Skill_Frozen }, -- Deep Freeze  (Destructive Touch - Rank 4) -- Frost
+	
+	--[[
     -- Destructive Clench
     [62668] = { name = 'Flame Clench' }, -- Fire Clench (Destructive Clench - Rank 1) -- Fire
     [38987] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = 'Flame Clench' }, -- Stun After Knockback Movement (Destructive Clench - Rank 1) -- Fire
@@ -2494,6 +2520,7 @@ E.EffectOverride = {
     [38944] = { hide = true }, -- Flame Reach (Destructive Reach - Rank 1) -- Fire
     [38978] = { hide = true }, -- Shock Reach (Destructive Reach - Rank 1) -- Shock
     [38970] = { hide = true }, -- Frost Reach (Destructive Reach - Rank 1) -- Frost
+	]]--
     
     -- Weakness to Elements
     [53881] = { icon = 'esoui/art/icons/ability_debuff_major_breach.dds', name = 'Major Breach' }, -- Major Spell Shatter (Weakness to Elements - Rank 1)
@@ -2525,6 +2552,9 @@ E.EffectOverride = {
     
     -- Blessing of Protection
     [37243] = { hide = true }, -- Blessing of Protection (Blessing of Protection - Rank 1)
+    [41139] = { hide = true }, -- Blessing of Protection (Blessing of Protection - Rank 2)
+    [41145] = { hide = true }, -- Blessing of Protection (Blessing of Protection - Rank 3)
+    [41151] = { hide = true }, -- Blessing of Protection (Blessing of Protection - Rank 4)
 
     ----------------------------------------------------------------
     -- PLAYER PASSIVES ARMOR ---------------------------------------
@@ -4677,7 +4707,9 @@ E.FakePlayerBuffs = {
     [14031] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mundus_use.dds', name = A.Innate_Receiving_Boon, duration = 5000}, -- Mundus Use
 
 	-- Class
-	[22223] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = 'Rite of Passage', duration = 4000}, -- Rite of Passage
+	[22223] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = 'Rite of Passage', duration = 4000}, -- Rite of Passage (Rite of Passage - Rank 1)
+	[27388] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = 'Rite of Passage', duration = 4000}, -- Rite of Passage (Rite of Passage - Rank 2)
+	[27392] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = 'Rite of Passage', duration = 4000}, -- Rite of Passage (Rite of Passage - Rank 3)
 	
 	
     -- Seasonal Quests (New Life Festival)

@@ -280,7 +280,13 @@ A.Skill_Aurora_Javelin				= 26800
 -- WEAPON SKILLS -------------------------------------
 -- ---------------------------------------------------
 
+-- Restoration Staff
+A.Skill_Blessing_of_Protection   	= 37243
+
+-- Destruction Staff
 A.Skill_Crushing_Shock				= 46348
+A.Skill_Flame_Touch					= 29073
+A.Skill_Frozen						= 68719
 
 -- ---------------------------------------------------
 -- NPC BASIC -----------------------------------------
@@ -411,7 +417,6 @@ A.Skill_Illustrious_Healing      = 40058
 A.Skill_Regeneration             = 28536
 A.Skill_Mutagen                  = 40079
 A.Skill_Rapid_Regeneration       = 40076
-A.Skill_Blessing_Of_Protection   = 37243
 A.Skill_Blessing_Of_Restoration  = 40103
 A.Skill_Combat_Prayer            = 40094
 A.Skill_Steadfast_Ward           = 31639

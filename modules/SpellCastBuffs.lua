@@ -1322,11 +1322,11 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 					stack = stackCount,
                     unbreakable=unbreakable }
            
-        -- Create a fake container for certain major/minor buffs
-        if E.FakeDuplicate[ abilityId ] then
-                g_effectsList[context][ E.FakeDuplicate[abilityId].name ] = {
+		--EffectCreateSkillAura
+        if E.EffectCreateSkillAura[ abilityId ] then
+                g_effectsList[context][ E.EffectCreateSkillAura[abilityId].name ] = {
                     target=unitTag, type=effectType,
-                    name=E.FakeDuplicate[abilityId].name, icon=E.FakeDuplicate[abilityId].icon,
+                    name=E.EffectCreateSkillAura[abilityId].name, icon=E.EffectCreateSkillAura[abilityId].icon,
                     dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
                     forced=forcedType,
                     restart=true, iconNum=0,
