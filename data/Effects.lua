@@ -272,6 +272,7 @@ E.DebuffDisplayOverrideId = {
 	
 	-- Class
 	[31562] = true, -- Supernova (Nova Synergy)
+	[34443] = true, -- Gravity Crush (Solar Prison Synergy)
     
     -- Human NPC's
     [88281] = true, -- Call Ally (Pet Ranger)
@@ -357,6 +358,11 @@ E.EffectGroundDisplay = {
 	[21976] = { buff = false, debuff = false, ground = true }, -- Nova (Nova - Rank 1)
 	[24048] = { buff = false, debuff = false, ground = true }, -- Nova (Nova - Rank 2)
 	[24059] = { buff = false, debuff = false, ground = true }, -- Nova (Nova - Rank 3)
+	[24067] = { buff = false, debuff = false, ground = true }, -- Nova (Nova - Rank 4)
+	
+	[22003] = { buff = false, debuff = false, ground = true }, -- Solar Prison (Solar Prison - Rank 1)
+	
+	[22001] = { buff = false, debuff = false, ground = true }, -- Solar Disturbance (Solar Disturbance - Rank 1)
 		
 	---------------------------
 	-- Destro Staff -----------
@@ -404,18 +410,40 @@ E.EffectGroundDisplay = {
 -- This will create an effect on the player or target when X skill is detected as active. SCB creates the buff by the name listed here, this way if 3 or 4 effects all need to display for 1 ability, it will only show the one aura.
 E.EffectCreateSkillAura = {
 
+-- icon, name
+-- removeOnEnd -- Remove this aura when one of these effects ends.
+
+-- Templar
+[26213] = { icon = 'esoui/art/icons/ability_templar_restoring_sigil.dds', name = A.Skill_Restoring_Aura, removeOnEnd = true }, -- Minor Fortitude (Restoring Aura - All Ranks)
+[26216] = { icon = 'esoui/art/icons/ability_templar_restoring_sigil.dds', name = A.Skill_Restoring_Aura, removeOnEnd = true }, -- Minor Intellect (Restoring Aura - All Ranks)
+[26215] = { icon = 'esoui/art/icons/ability_templar_restoring_sigil.dds', name = A.Skill_Restoring_Aura, removeOnEnd = true }, -- Minor Endurance (Restoring Aura - All Ranks)
+
+-- Destro Staff
+[53881] = { icon = 'esoui/art/icons/ability_destructionstaff_011.dds', name = A.Skill_Weakness_to_Elements, removeOnEnd = true }, -- Major Breach (Weakness to Elements - Rank 1)
+[62772] = { icon = 'esoui/art/icons/ability_destructionstaff_011.dds', name = A.Skill_Weakness_to_Elements, removeOnEnd = true }, -- Major Breach (Weakness to Elements - Rank 2)
+[62773] = { icon = 'esoui/art/icons/ability_destructionstaff_011.dds', name = A.Skill_Weakness_to_Elements, removeOnEnd = true }, -- Major Breach (Weakness to Elements - Rank 3)
+[62774] = { icon = 'esoui/art/icons/ability_destructionstaff_011.dds', name = A.Skill_Weakness_to_Elements, removeOnEnd = true }, -- Major Breach (Weakness to Elements - Rank 4)
+
+[62775] = { icon = 'esoui/art/icons/ability_destructionstaff_011b.dds', name = A.Skill_Elemental_Susceptibility, removeOnEnd = true }, -- Major Breach (Elemental Susceptibility - Rank 1)
+
+[62787] = { icon = 'esoui/art/icons/ability_destructionstaff_011b.dds', name = A.Skill_Elemental_Drain, removeOnEnd = true }, -- Major Breach (Elemental Drain - Rank 1)
+
 -- Resto Staff
 [37247] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection }, -- Minor Resolve (Blessing of Protection - Rank 1)
 [62619] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection }, -- Minor Ward (Blessing of Protection - Rank 1)
-
 [62620] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection }, -- Minor Resolve (Blessing of Protection - Rank 2)
 [62621] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection }, -- Minor Ward (Blessing of Protection - Rank 2)
-
 [62622] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection }, -- Minor Resolve (Blessing of Protection - Rank 3)
 [62623] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection }, -- Minor Ward (Blessing of Protection - Rank 3)
-
 [62624] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection }, -- Minor Resolve (Blessing of Protection - Rank 4)
 [62625] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection }, -- Minor Ward (Blessing of Protection - Rank 4)
+
+[62626] = { icon = 'esoui/art/icons/ability_restorationstaff_003_a.dds', name = A.Skill_Blessing_of_Restoration }, -- Minor Resolve (Blessing of Restoration - Rank 1)
+[62627] = { icon = 'esoui/art/icons/ability_restorationstaff_003_a.dds', name = A.Skill_Blessing_of_Restoration }, -- Minor Ward (Blessing of Restoration - Rank 1)
+
+[62634] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer }, -- Minor Resolve (Combat Prayer - Rank 1)
+[62635] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer }, -- Minor Ward (Combat Prayer - Rank 1)
+[62636] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer }, -- Minor Berserk (Combat Prayer - Rank 1)
 
 }
 
@@ -436,6 +464,12 @@ E.BarHighlightOverride = {
 	
 	[22138] = { newId = 62593 }, -- Radial Sweep (Radial Sweep - Rank 1)
 	[23782] = { newId = 62594 }, -- Radial Sweep (Radial Sweep - Rank 2)
+	[23783] = { newId = 62595 }, -- Radial Sweep (Radial Sweep - Rank 3)
+	[23784] = { newId = 62596 }, -- Radial Sweep (Radial Sweep - Rank 4)
+	
+	[22144] = { newId = 55214 }, -- Empowering Sweep (Empowering Sweep - Rank 1)
+	
+	[22139] = { newId = 62607 }, -- Crescent Sweep (Crescent Sweep - Rank 1)
 
 	-- Dawn's Wrath
 	[21726] = { newId = 21728 }, -- Sun Fire (Sun Fire - Rank 1)
@@ -450,13 +484,30 @@ E.BarHighlightOverride = {
 	[21752] = { newId = 21976 }, -- Nova (Nova - Rank 1)
 	[24044] = { newId = 24048 }, -- Nova (Nova - Rank 2)
 	[24052] = { newId = 24059 }, -- Nova (Nova - Rank 3)
+	[24063] = { newId = 24067 }, -- Nova (Nova - Rank 4)
+	
+	[21755] = { newId = 22003 }, -- Solar Prison (Solar Prison - Rank 1)
+	
+	[21758] = { newId = 22001 }, -- Solar Disturbance (Solar Disturbance - Rank 1)
 	
 	-- Restoring Light
 	[22253] = { newId = 35632, secondary = true, noRemove = true }, -- Honor the Dead (Honor the Dead - Rank 1)
 	
+	[26209] = { newId = 26220 }, -- Restoring Aura (Restoring Aura - Rank 1)
+	[26995] = { newId = 26999 }, -- Restoring Aura (Restoring Aura - Rank 2)
+	[27001] = { newId = 27005 }, -- Restoring Aura (Restoring Aura - Rank 3)
+	[27007] = { newId = 27011 }, -- Restoring Aura (Restoring Aura - Rank 4)
+	
+	[26807] = { newId = 26809 }, -- Radiant Aura (Radiant Aura - Rank 1)
+	
 	[22223] = { showFakeAura = true }, -- Rite of Passage (Right of Passage - Rank 1)
 	[27388] = { showFakeAura = true }, -- Rite of Passage (Right of Passage - Rank 2)
 	[27392] = { showFakeAura = true }, -- Rite of Passage (Right of Passage - Rank 3)
+	[27396] = { showFakeAura = true }, -- Rite of Passage (Right of Passage - Rank 4)
+	
+	[22229] = { showFakeAura = true }, -- Remembrance (Remembrance - Rank 1)
+	
+	[22226] = { showFakeAura = true}, -- Practiced Incantation (Practiced Incantation - Rank 1)
 	
 	---------------------------
 	-- Destro Staff -----------
@@ -479,6 +530,25 @@ E.BarHighlightOverride = {
 	[40970] = { newId = 62731 }, -- Shock Touch (Destructive Touch - Rank 4)
 	[40967] = { newId = 62701 }, -- Frost Touch (Destructive Touch - Rank 4)
 	
+	-- Destructive Clench
+	[38985] = { newId = 62668 }, -- Flame Clench (Destructive Clench - Rank 1)
+	[38993] = { newId = 62733 }, -- Shock Clench (Destructive Clench - Rank 1)
+	[38989] = { newId = 62702 }, -- Frost Clench (Destructive Clench - Rank 1)
+	
+	-- Destructive Reach
+	[38944] = { newId = 62682 }, -- Flame Reach (Destructive Reach - Rank 1)
+	[38978] = { newId = 62745 }, -- Shock Reach (Destructive Reach - Rank 1)
+	[38970] = { newId = 62712 }, -- Frost Reach (Destructive Reach - Rank 1)
+	
+	[29173] = { newId = 53881 }, -- Weakness to Elements (Weakness to Elements - Rank 1)
+	[41544] = { newId = 62772 }, -- Weakness to Elements (Weakness to Elements - Rank 2)
+	[41546] = { newId = 62773 }, -- Weakness to Elements (Weakness to Elements - Rank 3)
+	[41548] = { newId = 62774 }, -- Weakness to Elements (Weakness to Elements - Rank 4)
+	
+	[39089] = { newId = 62775 }, -- Elemental Susceptibility (Elemental Susceptibility - Rank 1)
+	
+	[39095] = { newId = 62787 }, -- Elemental Drain (Elemental Drain - Rank 1)
+	
 	---------------------------
 	-- Resto Staff ------------
 	---------------------------
@@ -487,6 +557,10 @@ E.BarHighlightOverride = {
 	[41139] = { showFakeAura = true, duration = 8000, noRemove = true }, -- Blessing of Protection (Blessing of Protection - Rank 2)
 	[41145] = { showFakeAura = true, duration = 8000, noRemove = true }, -- Blessing of Protection (Blessing of Protection - Rank 3)
 	[41151] = { showFakeAura = true, duration = 8000, noRemove = true }, -- Blessing of Protection (Blessing of Protection - Rank 4)
+	
+	[40103] = { showFakeAura = true, duration = 15000, noRemove = true }, -- Blessing of Restoration (Blessing of Restoration - Rank 1)
+	
+	[40094] = { showFakeAura = true, duration = 8000, noRemove = true }, -- Combat Prayer (Combat Prayer - Rank 1)
 
 }
 
@@ -738,6 +812,12 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     
     -- Sets
     [32755] = true, -- Nikulas' Heavy Armor (of Nikulas)
+	
+	----------------------------
+    -- Templar
+    ----------------------------
+	
+	[24307] = true, -- Solar Disturbance Snare (Solar Disturbance - Rank 1)
     
     ----------------------------
     -- Destruction Staff
@@ -2210,10 +2290,45 @@ E.EffectOverride = {
     
     -- Puncturing Sweep
     [55183] = { icon = 'esoui/art/icons/ability_templar_reckless_attacks.dds', name = A.Skill_Puncturing_Sweep }, -- Puncturing Sweep Heal (Puncturing Sweep - Rank 1)
+    [55222] = { icon = 'esoui/art/icons/ability_templar_reckless_attacks.dds', name = A.Skill_Puncturing_Sweep }, -- Puncturing Sweep Heal (Puncturing Sweep - Rank 2)
     
     -- Aurora Javelin
     [37414] = { name = A.Skill_Aurora_Javelin }, -- Piercing Javelin (Aurora Javelin - Rank 1)
+	
+	-- Focused Charge
+	[26508] = { icon = '' }, -- Charge (Focused Charge - Rank 1) -- Hide for Interrupt notification on Combat Text
+	[49204] = { icon = 'esoui/art/icons/ability_templar_focused_charge.dds' }, -- Focused Charge (Focused Charge - Rank 1)
+	[49205] = { icon = 'esoui/art/icons/ability_templar_focused_charge.dds' }, -- Focused Charge (Focused Charge - Rank 1)
+	
+	[26510] = { icon = '' }, -- Charge (Focused Charge - Rank 2) -- Hide for Interrupt notification on Combat Text
+	[49206] = { icon = 'esoui/art/icons/ability_templar_focused_charge.dds' }, -- Focused Charge (Focused Charge - Rank 2)
+	[49207] = { icon = 'esoui/art/icons/ability_templar_focused_charge.dds' }, -- Focused Charge (Focused Charge - Rank 2)
+	
+	[26512] = { icon = '' }, -- Charge (Focused Charge - Rank 3) -- Hide for Interrupt notification on Combat Text
+	[49208] = { icon = 'esoui/art/icons/ability_templar_focused_charge.dds' }, -- Focused Charge (Focused Charge - Rank 3)
+	[49209] = { icon = 'esoui/art/icons/ability_templar_focused_charge.dds' }, -- Focused Charge (Focused Charge - Rank 3)
+	
+	[26513] = { icon = '' }, -- Charge (Focused Charge - Rank 4) -- Hide for Interrupt notification on Combat Text
+	[49210] = { icon = 'esoui/art/icons/ability_templar_focused_charge.dds' }, -- Focused Charge (Focused Charge - Rank 4)
+	[49211] = { icon = 'esoui/art/icons/ability_templar_focused_charge.dds' }, -- Focused Charge (Focused Charge - Rank 4)
+	
+	-- Explosive Charge
+	[26522] = { hide = true, icon = '' }, -- Charge (Explosive Charge - Rank 1)
+	[49213] = { icon = 'esoui/art/icons/ability_templar_double_tipped_charge.dds' }, -- Explosive Charge (Explosive Charge - Rank 1)
+	
+	-- Toppling Charge
+	[26518] = { icon = '' }, -- Charge (Toppling Charge - Rank 1)
+	[44422] = { name = A.Skill_Off_Balance }, -- Toppling Charge (Toppling Charge - Rank 1)
     
+	-- Empowering Sweep
+	[22147] = { hide = true }, -- Empowering Sweep (Empowering Sweep - Rank 1)
+	[62599] = { name = A.Skill_Empowering_Sweep }, -- Radial Sweep (Empowering Sweep - Rank 1)
+	[62598] = { name = A.Skill_Empowering_Sweep }, -- Radial Sweep (Empowering Sweep - Rank 1)
+	
+	-- Crescent Sweep
+	[62607] = { icon = 'esoui/art/icons/ability_templar_crescent_sweep.dds', name = A.Skill_Crescent_Sweep }, -- Radial Sweep (Crescent Sweep - Rank 1)
+	[62606] = { icon = 'esoui/art/icons/ability_templar_crescent_sweep.dds', name = A.Skill_Crescent_Sweep }, -- Radial Sweep (Crescent Sweep - Rank 1)
+	
     -- Sun Fire
     [21727] = { icon = 'esoui/art/icons/ability_templar_sun_fire.dds' }, -- Sun Fire (Sun Fire - Rank 1)
     [24161] = { icon = 'esoui/art/icons/ability_templar_sun_fire.dds' }, -- Sun Fire (Sun Fire - Rank 2)
@@ -2226,10 +2341,22 @@ E.EffectOverride = {
     -- Reflective Light
     [21733] = { icon = 'esoui/art/icons/ability_templar_reflective_light.dds' }, -- Reflective Light (Reflective Light - Rank 1)
 	
+	-- Purifying Light
+	[68581] = { name = A.Skill_Purifying_Light, icon = 'esoui/art/icons/ability_templar_purifying_light.dds', unbreakable = 1, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Purifying Light Tick (Purifying Light - Rank 1)
+	[21908] = { icon = 'esoui/art/icons/ability_templar_purifying_light.dds' }, -- Purifying Light (Purifying Light - Rank 1)
+	
 	-- Nova
 	[21754] = { name = A.Skill_Major_Maim, duration = 0 }, -- Nova (Nova - Rank 1)
 	[24045] = { name = A.Skill_Major_Maim, duration = 0 }, -- Nova (Nova - Rank 2)
 	[24056] = { name = A.Skill_Major_Maim, duration = 0 }, -- Nova (Nova - Rank 3)
+	[24064] = { name = A.Skill_Major_Maim, duration = 0 }, -- Nova (Nova - Rank 4)
+	
+	-- Solar Prison
+	[21757] = { name = A.Skill_Major_Maim, duration = 0 }, -- Solar Prison (Solar Prison - Rank 1)
+	
+	-- Solar Disturbance
+	[21760] = { name = A.Skill_Major_Maim, duration = 0 }, -- Solar Disturbance (Solar Disturbance - Rank 1)
+	[24307] = { icon = 'esoui/art/icons/ability_templar_solar_disturbance.dds', name = A.Skill_Solar_Disturbance }, -- Solar Disturbance Snare (Solar Disturbance - Rank 1)
     
     -- Breath of Life
     [44391] = { icon = 'esoui/art/icons/ability_templar_breath_of_life.dds' }, -- Breath of Life (Breath of Life - Rank 1)
@@ -2244,10 +2371,37 @@ E.EffectOverride = {
     [22331] = { icon = 'esoui/art/icons/ability_templar_ritual_of_rebirth.dds' }, -- Ritual of Rebirth (Ritual of Rebirth - Rank 1)
     [88456] = { icon = 'esoui/art/icons/ability_templar_ritual_of_rebirth.dds' }, -- Ritual of Rebirth (Ritual of Rebirth - Rank 1)
     
+	-- Restoring Aura
+	[26213] = { consolidate = true }, -- Minor Fortitude (Restoring Aura - All Ranks)
+	[26216] = { consolidate = true }, -- Minor Intellect (Restoring Aura - All Ranks)
+	[26215] = { consolidate = true }, -- Minor Endurance (Restoring Aura - All Ranks)
+	[26220] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Restoring Aura - Rank 1)
+	[88472] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Restoring Aura - Rank 1)
+	[26999] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Restoring Aura - Rank 2)
+	[88479] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Restoring Aura - Rank 2)
+	[27005] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Restoring Aura - Rank 3)
+	[88482] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Restoring Aura - Rank 3)
+	[27011] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Restoring Aura - Rank 4)
+	[88484] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Restoring Aura - Rank 4)
+	
+	-- Radiant Aura
+	[26809] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Radiant Aura - Rank 1)
+	[88486] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Radiant Aura - Rank 1)
+	
+	-- Repentance
+	[34366] = { hide = true }, -- Repentance (Repentance - Rank 1)
+	[26823] = { icon = 'esoui/art/icons/ability_templar_persistant_sigil.dds', name = A.Skill_Repentance }, -- Repentance Magicka Restore (Repentance - Rank 1)
+	[26824] = { icon = 'esoui/art/icons/ability_templar_persistant_sigil.dds', name = A.Skill_Repentance }, -- Repentance Heal (Repentance - Rank 1)
+	
     -- Rite of Passage
     [22225] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds' }, -- Rite of Passage (Rite of Passage - Rank 1)
     [27390] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds' }, -- Rite of Passage (Rite of Passage - Rank 2)
     [27394] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds' }, -- Rite of Passage (Rite of Passage - Rank 3)
+    [27398] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds' }, -- Rite of Passage (Rite of Passage - Rank 4)
+	
+	[22231] = { icon = 'esoui/art/icons/ability_templar_remembrance.dds' }, -- Remembrance (Remembrance - Rank 1)
+	
+	[22228] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds' }, -- Practiced Incantation (Practiced Incantation - Rank 1)
     
     ----------------------------------------------------------------
     -- WARDEN PASSIVE ABILITIES ------------------------------------
@@ -2498,41 +2652,25 @@ E.EffectOverride = {
     [40967] = { hide = true }, -- Frost Touch (Destructive Touch - Rank 4) -- Frost
     [62699] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', name = A.Skill_Frozen }, -- Deep Freeze  (Destructive Touch - Rank 4) -- Frost
 	
-	--[[
-    -- Destructive Clench
-    [62668] = { name = 'Flame Clench' }, -- Fire Clench (Destructive Clench - Rank 1) -- Fire
-    [38987] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = 'Flame Clench' }, -- Stun After Knockback Movement (Destructive Clench - Rank 1) -- Fire
-    [38986] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = 'Flame Clench' }, -- Fire Touch (destruction) (Destructive Clench - Rank 1) -- Fire
-    [68635] = { name = 'Shock Clench' }, -- Shock Touch (Destructive Clench - Rank 1) -- Shock
-    [62734] = { name = 'Shock Clench' }, -- Shock Clench Explosion (Destructive Clench - Rank 1) -- Shock
-    [38990] = { name = 'Frost Clench' }, -- Deep Freeze (Destructive Clench - Rank 1) -- Frost
-    
-    [38985] = { hide = true }, -- Flame Clench (Destructive Clench - Rank 1) -- Fire
-    [38993] = { hide = true }, -- Shock Clench (Destructive Clench - Rank 1) -- Shock
-    [38989] = { hide = true }, -- Frost Clench (Destructive Clench - Rank 1) -- Frost
-    
-    -- Destructive Reach
-    [38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = 'Flame Reach' }, -- Stun After Knockback Movement (Destructive Reach - Rank 1) -- Fire
-    [38945] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = 'Flame Reach' }, -- Flame Reach (destruction) (Destructive Reach - Rank 1) -- Fire
-    [68574] = { name = 'Shock Reach' }, -- Shock Touch (Destructive Reach - Rank 1) -- Fire
-    [38971] = { name = 'Frost Reach' }, -- Frost Grip (Destructive Reach - Rank 1) -- Frost
-    
-    [38944] = { hide = true }, -- Flame Reach (Destructive Reach - Rank 1) -- Fire
-    [38978] = { hide = true }, -- Shock Reach (Destructive Reach - Rank 1) -- Shock
-    [38970] = { hide = true }, -- Frost Reach (Destructive Reach - Rank 1) -- Frost
-	]]--
-    
-    -- Weakness to Elements
-    [53881] = { icon = 'esoui/art/icons/ability_debuff_major_breach.dds', name = 'Major Breach' }, -- Major Spell Shatter (Weakness to Elements - Rank 1)
-    [62772] = { icon = 'esoui/art/icons/ability_debuff_major_breach.dds', name = 'Major Breach' }, -- Major Spell Shatter (Weakness to Elements - Rank 2)
-    [62773] = { icon = 'esoui/art/icons/ability_debuff_major_breach.dds', name = 'Major Breach' }, -- Major Spell Shatter (Weakness to Elements - Rank 3)
-    [62774] = { icon = 'esoui/art/icons/ability_debuff_major_breach.dds', name = 'Major Breach' }, -- Major Spell Shatter (Weakness to Elements - Rank 4)
-    
-    -- Elemental Susceptibility
-    [62775] = { icon = 'esoui/art/icons/ability_debuff_major_breach.dds', name = 'Major Breach' }, -- Major Spell Shatter (Elemental Susceptibility - Rank 1)
+	[38985] = { hide = true }, -- Flame Clench (Destructive Clench - Rank 1) -- Fire
+	[62668] = { name = A.Skill_Flame_Clench }, -- Fire Clench (Destructive Clench - Rank 1) -- Fire
+    [38987] = { icon = 'esoui/art/icons/ability_destructionstaff_007_a.dds', name = A.Skill_Flame_Clench }, -- Stun After Knockback Movement (Destructive Clench - Rank 1) -- Fire
+    [38986] = { icon = 'esoui/art/icons/ability_destructionstaff_007_a.dds', name = A.Skill_Flame_Clench }, -- Fire Touch (destruction) (Destructive Clench - Rank 1) -- Fire
+	[38993] = { hide = true }, -- Shock Clench (Destructive Clench - Rank 1) -- Shock
+    [68635] = { name = A.Skill_Shock_Clench }, -- Shock Touch (Destructive Clench - Rank 1) -- Shock
+    [62734] = { name = A.Skill_Shock_Clench }, -- Shock Clench Explosion (Destructive Clench - Rank 1) -- Shock
+	[38989] = { hide = true }, -- Frost Clench (Destructive Clench - Rank 1) -- Frost
+    [38990] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', name = A.Skill_Frozen }, -- Deep Freeze (Destructive Clench - Rank 1) -- Frost
+	
+	[38944] = { hide = true }, -- Flame Reach (Destructive Reach - Rank 1) -- Fire
+	[38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach }, -- Stun After Knockback Movement (Destructive Reach - Rank 1) -- Fire
+    [38945] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach }, -- Flame Reach (destruction) (Destructive Reach - Rank 1) -- Fire
+	[38978] = { hide = true }, -- Shock Reach (Destructive Reach - Rank 1) -- Shock
+	[68574] = { name = A.Skill_Shock_Reach }, -- Shock Touch (Destructive Reach - Rank 1) -- Shock
+	[38970] = { hide = true }, -- Frost Reach (Destructive Reach - Rank 1) -- Frost
+	[38971] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', name = A.Skill_Frozen }, -- Frost Grip (Destructive Reach - Rank 1) -- Frost
     
     -- Elemental Drain
-    [62787] = { icon = 'esoui/art/icons/ability_debuff_major_breach.dds', name = 'Major Breach' }, -- Major Spell Shatter (Elemental Drain - Rank 1)
     [39099] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Elemental Drain - Rank 1)
     
     -----------------------------------------
@@ -2545,16 +2683,41 @@ E.EffectOverride = {
     [41247] = { icon = 'esoui/art/icons/ability_restorationstaff_004.dds' }, -- Grand Healing (Grand Healing - Rank 3)
     [41249] = { icon = 'esoui/art/icons/ability_restorationstaff_004.dds' }, -- Grand Healing (Grand Healing - Rank 4)
 	
+	-- Illustrious Healing
 	[40059] = { icon = 'esoui/art/icons/ability_restorationstaff_004b.dds' }, -- Illustrious Healing (Illustrious Healing - Rank 1)
 	
+	-- Healing Springs
 	[40061] = { icon = 'esoui/art/icons/ability_restorationstaff_004a.dds' }, -- Healing Springs (Healing Springs - Rank 1)
 	[40062] = { icon = 'esoui/art/icons/ability_restorationstaff_004a.dds' }, -- Healing Springs (Healing Springs - Rank 1) 
-    
+	
     -- Blessing of Protection
     [37243] = { hide = true }, -- Blessing of Protection (Blessing of Protection - Rank 1)
+	[37247] = { consolidate = true }, -- Minor Resolve (Blessing of Protection - Rank 1)
+	[62619] = { consolidate = true }, -- Minor Ward (Blessing of Protection - Rank 1)
     [41139] = { hide = true }, -- Blessing of Protection (Blessing of Protection - Rank 2)
+	[62620] = { consolidate = true }, -- Minor Resolve (Blessing of Protection - Rank 2)
+	[62621] = { consolidate = true }, -- Minor Ward (Blessing of Protection - Rank 2)
     [41145] = { hide = true }, -- Blessing of Protection (Blessing of Protection - Rank 3)
+	[62622] = { consolidate = true }, -- Minor Resolve (Blessing of Protection - Rank 3)
+	[62623] = { consolidate = true }, -- Minor Ward (Blessing of Protection - Rank 3)
     [41151] = { hide = true }, -- Blessing of Protection (Blessing of Protection - Rank 4)
+	[62624] = { consolidate = true }, -- Minor Resolve (Blessing of Protection - Rank 4)
+	[62625] = { consolidate = true }, -- Minor Ward (Blessing of Protection - Rank 4)
+	
+	-- Blessing of Restoration
+	[40103] = { hide = true, name = A.Skill_Blessing_of_Restoration }, -- Blessing of Restoration (Blessing of Restoration - Rank 1)
+	[62626] = { consolidate = true }, -- Minor Resolve (Blessing of Restoration - Rank 1)
+	[62627] = { consolidate = true }, -- Minor Ward (Blessing of Restoration - Rank 1)
+	
+	-- Combat Prayer
+	[40094] = { hide = true }, -- Combat Prayer (Combat Prayer - Rank 1)
+	[62634] = { consolidate = true }, -- Minor Resolve (Combat Prayer - Rank 1)
+	[62635] = { consolidate = true }, -- Minor Ward (Combat Prayer - Rank 1)
+	[62636] = { consolidate = true }, -- Minor Berserk (Combat Prayer - Rank 1)
+	
+	-- Healing Ward
+	[49068] = { icon = 'esoui/art/icons/ability_restorationstaff_001_a.dds', name = A.Skill_Healing_Ward }, -- Grand Healing (Healing Ward - Rank 1)
+	[40128] = { icon = 'esoui/art/icons/ability_restorationstaff_001_a.dds', hide = true }, -- Healing Ward (Healing Ward - Rank 1)
 
     ----------------------------------------------------------------
     -- PLAYER PASSIVES ARMOR ---------------------------------------
@@ -4572,7 +4735,7 @@ E.FakeExternalBuffs = {
 E.FakeExternalDebuffs = {
     
     -- Item Sets
-    [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = A.Set_Bahrahas_Curse, duration = 1000 }, -- Bahraha's Curse
+    [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = A.Set_Bahrahas_Curse, duration = 0 }, -- Bahraha's Curse
 
     -- Traps
     [29602] = {icon = 'esoui/art/icons/ability_debuff_stun.dds', name = 'Falling Rocks', duration = 2000}, -- Falling Rocks (Tripwire)
@@ -4707,10 +4870,14 @@ E.FakePlayerBuffs = {
     [14031] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mundus_use.dds', name = A.Innate_Receiving_Boon, duration = 5000}, -- Mundus Use
 
 	-- Class
-	[22223] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = 'Rite of Passage', duration = 4000}, -- Rite of Passage (Rite of Passage - Rank 1)
-	[27388] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = 'Rite of Passage', duration = 4000}, -- Rite of Passage (Rite of Passage - Rank 2)
-	[27392] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = 'Rite of Passage', duration = 4000}, -- Rite of Passage (Rite of Passage - Rank 3)
+	[22223] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = A.Skill_Rite_Of_Passage, duration = 4000}, -- Rite of Passage (Rite of Passage - Rank 1)
+	[27388] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = A.Skill_Rite_Of_Passage, duration = 4000}, -- Rite of Passage (Rite of Passage - Rank 2)
+	[27392] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = A.Skill_Rite_Of_Passage, duration = 4000}, -- Rite of Passage (Rite of Passage - Rank 3)
+	[27396] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = A.Skill_Rite_Of_Passage, duration = 4000}, -- Rite of Passage (Rite of Passage - Rank 4)
 	
+	[22229] = { icon = 'esoui/art/icons/ability_templar_remembrance.dds', name = A.Skill_Remembrance, duration = 4000 }, -- Remembrance (Remembrance - Rank 1)
+	
+	[22226] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds', name = A.Skill_Practiced_Incantation, duration = 6000 }, -- Practiced Incantation (Practiced Incantation - Rank 1)
 	
     -- Seasonal Quests (New Life Festival)
     [84125] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Breton Male Dance (Lava Foot Stomp)

@@ -1295,9 +1295,12 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 
     if changeType == EFFECT_RESULT_FADED then -- delete Effect
         g_effectsList[context][effectSlot] = nil
-        if E.FakeDuplicate[ abilityId ] then
+        --[[if E.FakeDuplicate[ abilityId ] then
             g_effectsList[context][ E.FakeDuplicate[abilityId].name ] = nil
-        end
+        end]]--
+		if E.EffectCreateSkillAura[ abilityId ] and E.EffectCreateSkillAura [ abilityId ].removeOnEnd then
+			g_effectsList[context][ E.EffectCreateSkillAura[abilityId].name ] = nil
+		end
         
     -- Create Effect
     else

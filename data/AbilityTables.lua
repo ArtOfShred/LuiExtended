@@ -275,6 +275,17 @@ A.Passive_Red_Diamond				= 36155
 -- Templar
 A.Skill_Puncturing_Sweep 			= 26797
 A.Skill_Aurora_Javelin				= 26800
+A.Skill_Empowering_Sweep         	= 22144
+A.Skill_Crescent_Sweep           	= 22139
+
+A.Skill_Purifying_Light          	= 21765
+A.Skill_Solar_Disturbance        	= 21758
+
+A.Skill_Restoring_Aura           	= 26209
+A.Skill_Repentance					= 26821
+A.Skill_Rite_Of_Passage          	= 22223
+A.Skill_Remembrance              	= 22229
+A.Skill_Practiced_Incantation    	= 22226
 
 -- ---------------------------------------------------
 -- WEAPON SKILLS -------------------------------------
@@ -282,11 +293,21 @@ A.Skill_Aurora_Javelin				= 26800
 
 -- Restoration Staff
 A.Skill_Blessing_of_Protection   	= 37243
+A.Skill_Blessing_of_Restoration 	= GetString(SI_LUIE_SKILL_BLESSING_OF_RESTORATION)
+A.Skill_Combat_Prayer				= 40094
+A.Skill_Healing_Ward             	= 40126
 
 -- Destruction Staff
 A.Skill_Crushing_Shock				= 46348
 A.Skill_Flame_Touch					= 29073
 A.Skill_Frozen						= 68719
+A.Skill_Flame_Clench				= 38985
+A.Skill_Shock_Clench				= 38993
+A.Skill_Flame_Reach					= 38944
+A.Skill_Shock_Reach					= 38978
+A.Skill_Weakness_to_Elements     	= 29173
+A.Skill_Elemental_Susceptibility 	= 39089
+A.Skill_Elemental_Drain          	= 39095
 
 -- ---------------------------------------------------
 -- NPC BASIC -----------------------------------------
@@ -395,9 +416,6 @@ A.Skill_Blockade_of_Fire         = 39012
 A.Skill_Blockade_of_Frost        = 39028
 A.Skill_Blockade_of_Storms       = 39018
 A.Skill_Blockade_of_Cinders      = 50236
-A.Skill_Weakness_To_Elements     = 29173
-A.Skill_Elemental_Drain          = 39095
-A.Skill_Elemental_Susceptibility = 39089
 A.Skill_Elemental_Ring           = 39143
 A.Skill_Fire_Ring                = 39145
 A.Skill_Frost_Ring               = 39146
@@ -417,10 +435,7 @@ A.Skill_Illustrious_Healing      = 40058
 A.Skill_Regeneration             = 28536
 A.Skill_Mutagen                  = 40079
 A.Skill_Rapid_Regeneration       = 40076
-A.Skill_Blessing_Of_Restoration  = 40103
-A.Skill_Combat_Prayer            = 40094
 A.Skill_Steadfast_Ward           = 31639
-A.Skill_Healing_Ward             = 40126
 A.Skill_Ward_Ally                = 40130
 A.Skill_Force_Siphon             = 31531
 A.Skill_Quick_Siphon             = 40116
@@ -753,8 +768,6 @@ A.Skill_Sap_Essence              = 36891
 
 -- AEDRIC SPEAR -------------
 A.Skill_Radial_Sweep             = 22138
-A.Skill_Empowering_Sweep         = 22144
-A.Skill_Crescent_Sweep           = 22139
 A.Skill_Biting_Jabs              = 26792
 A.Skill_Binding_Javelin          = 26804
 A.Skill_Focused_Charge           = 22149
@@ -770,7 +783,6 @@ A.Skill_Blazing_Shield           = 22180
 -- DAWNS WRATH --------------
 A.Skill_Nova                     = 21976
 A.Skill_Solar_Prison             = 21755
-A.Skill_Solar_Disturbance        = 21758
 A.Skill_Sun_Fire                 = 21726
 A.Skill_Vampires_Bane            = 21729
 A.Skill_Reflective_Light         = 21732
@@ -778,7 +790,6 @@ A.Skill_Solar_Flare              = 22057
 A.Skill_Dark_Flare               = 22110
 A.Skill_Solar_Barrage            = 22095
 A.Skill_Backlash                 = 21761
-A.Skill_Purifying_Light          = 21765
 A.Skill_Power_of_the_Light       = 21763
 A.Skill_Eclipse                  = 21776
 A.Skill_Total_Dark               = 22006
@@ -788,13 +799,8 @@ A.Skill_Radiant_Glory            = 63044
 A.Skill_Radiant_Oppresion        = 63046
 
 -- RESTORING LIGHT ----------
-A.Skill_Rite_Of_Passage          = 22223
-A.Skill_Remembrance              = 22229
-A.Skill_Practiced_Incantation    = 22226
 A.Skill_Honor_The_Dead           = 22253
 A.Skill_Lingering_Ritual         = 22314
-A.Skill_Restoring_Aura           = 26209
-A.Skill_Radiant_Aura             = 26807
 A.Skill_Cleansing_Ritual         = 22265
 A.Skill_Extended_Ritual          = 22262
 A.Skill_Purifying_Ritual         = 22259
