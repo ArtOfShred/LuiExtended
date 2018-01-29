@@ -355,15 +355,26 @@ E.EffectGroundDisplay = {
 	---------------------------
 	
 	-- Templar
+	
+	[95933] = { icon = 'esoui/art/icons/ability_templar_sun_strike.dds', buff = false, debuff = false, ground = true }, -- Spear Shards (Spear Shards - Rank 1)
+	[95936] = { icon = 'esoui/art/icons/ability_templar_sun_strike.dds', buff = false, debuff = false, ground = true }, -- Spear Shards (Spear Shards - Rank 2)
+	[95939] = { icon = 'esoui/art/icons/ability_templar_sun_strike.dds', buff = false, debuff = false, ground = true }, -- Spear Shards (Spear Shards - Rank 3)
+	[95942] = { icon = 'esoui/art/icons/ability_templar_sun_strike.dds', buff = false, debuff = false, ground = true }, -- Spear Shards (Spear Shards - Rank 4)
+	
 	[21976] = { buff = false, debuff = false, ground = true }, -- Nova (Nova - Rank 1)
 	[24048] = { buff = false, debuff = false, ground = true }, -- Nova (Nova - Rank 2)
 	[24059] = { buff = false, debuff = false, ground = true }, -- Nova (Nova - Rank 3)
 	[24067] = { buff = false, debuff = false, ground = true }, -- Nova (Nova - Rank 4)
 	
 	[22003] = { buff = false, debuff = false, ground = true }, -- Solar Prison (Solar Prison - Rank 1)
+	[24293] = { buff = false, debuff = false, ground = true }, -- Solar Prison (Solar Prison - Rank 2)
 	
 	[22001] = { buff = false, debuff = false, ground = true }, -- Solar Disturbance (Solar Disturbance - Rank 1)
-		
+	
+	[80540] = { icon = 'esoui/art/icons/ability_templar_cleansing_ritual.dds', buff = true, debuff = false, ground = false }, -- Cleansing Ritual (Cleansing Ritual - Rank 1)
+	[80541] = { icon = 'esoui/art/icons/ability_templar_cleansing_ritual.dds', buff = true, debuff = false, ground = false }, -- Cleansing Ritual (Cleansing Ritual - Rank 2)
+	[80543] = { icon = 'esoui/art/icons/ability_templar_cleansing_ritual.dds', buff = true, debuff = false, ground = false }, -- Cleansing Ritual (Cleansing Ritual - Rank 3)
+	[80546] = { icon = 'esoui/art/icons/ability_templar_cleansing_ritual.dds', buff = true, debuff = false, ground = false }, -- Cleansing Ritual (Cleansing Ritual - Rank 4)
 	---------------------------
 	-- Destro Staff -----------
 	---------------------------
@@ -391,6 +402,14 @@ E.EffectGroundDisplay = {
 	[39012] = { buff = false, debuff = false, ground = true }, -- Blockade of Fire (Elemental Blockade - Rank 1)
 	[39018] = { buff = false, debuff = false, ground = true }, -- Blockade of Storms (Elemental Blockade - Rank 1)
 	[39028] = { buff = false, debuff = false, ground = true }, -- Blockade of Frost (Elemental Blockade - Rank 1)
+	
+	[41739] = { buff = false, debuff = false, ground = true }, -- Blockade of Fire (Elemental Blockade - Rank 2)
+	[41748] = { buff = false, debuff = false, ground = true }, -- Blockade of Storms (Elemental Blockade - Rank 2)
+	[41743] = { buff = false, debuff = false, ground = true }, -- Blockade of Frost (Elemental Blockade - Rank 2)
+	
+	[41755] = { buff = false, debuff = false, ground = true }, -- Blockade of Fire (Elemental Blockade - Rank 3)
+	[41757] = { buff = false, debuff = false, ground = true }, -- Blockade of Storms (Elemental Blockade - Rank 3)
+	[41756] = { buff = false, debuff = false, ground = true }, -- Blockade of Frost (Elemental Blockade - Rank 3)
 	
 	---------------------------
 	-- Resto Staff ------------
@@ -467,7 +486,13 @@ E.BarHighlightOverride = {
 	[23783] = { newId = 62595 }, -- Radial Sweep (Radial Sweep - Rank 3)
 	[23784] = { newId = 62596 }, -- Radial Sweep (Radial Sweep - Rank 4)
 	
+	[26188] = { newId = 95933 }, -- Spear Shards (Spear Shards - Rank 1)
+	[27046] = { newId = 95936 }, -- Spear Shards (Spear Shards - Rank 2)
+	[27059] = { newId = 95939 }, -- Spear Shards (Spear Shards - Rank 3)
+	[27090] = { newId = 95942 }, -- Spear Shards (Spear Shards - Rank 4)
+	
 	[22144] = { newId = 55214 }, -- Empowering Sweep (Empowering Sweep - Rank 1)
+	[23792] = { newId = 55750 }, -- Empowering Sweep (Empowering Sweep - Rank 2)
 	
 	[22139] = { newId = 62607 }, -- Crescent Sweep (Crescent Sweep - Rank 1)
 
@@ -487,6 +512,7 @@ E.BarHighlightOverride = {
 	[24063] = { newId = 24067 }, -- Nova (Nova - Rank 4)
 	
 	[21755] = { newId = 22003 }, -- Solar Prison (Solar Prison - Rank 1)
+	[24288] = { newId = 24293 }, -- Solar Prison (Solar Prison - Rank 2)
 	
 	[21758] = { newId = 22001 }, -- Solar Disturbance (Solar Disturbance - Rank 1)
 	
@@ -499,6 +525,12 @@ E.BarHighlightOverride = {
 	[27007] = { newId = 27011 }, -- Restoring Aura (Restoring Aura - Rank 4)
 	
 	[26807] = { newId = 26809 }, -- Radiant Aura (Radiant Aura - Rank 1)
+	[27013] = { newId = 27020 }, -- Radiant Aura (Radiant Aura - Rank 2)
+	
+	[22265] = { newId = 80540 }, -- Cleansing Ritual (Cleansing Ritual - Rank 1)
+	[27243] = { newId = 80541 }, -- Cleansing Ritual (Cleansing Ritual - Rank 2)
+	[27249] = { newId = 80543 }, -- Cleansing Ritual (Cleansing Ritual - Rank 3)
+	[27255] = { newId = 80546 }, -- Cleansing Ritual (Cleansing Ritual - Rank 4)
 	
 	[22223] = { showFakeAura = true }, -- Rite of Passage (Right of Passage - Rank 1)
 	[27388] = { showFakeAura = true }, -- Rite of Passage (Right of Passage - Rank 2)
@@ -832,6 +864,8 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
 	[39068] = true, -- Unstable Wall of Frost (Unstable Wall of Elements - Rank 1)
 	
 	[62948] = true, -- Blockade of Frost (Elemental Blockade - Rank 1)
+	[62953] = true, -- Blockade of Frost (Elemental Blockade - Rank 2)
+	[62958] = true, -- Blockade of Frost (Elemental Blockade - Rank 3)
 	
     -- MAIN QUEST
     [61648] = true, -- Replenish Stamina (Tutorial - Child of Bones)
@@ -2291,6 +2325,7 @@ E.EffectOverride = {
     -- Puncturing Sweep
     [55183] = { icon = 'esoui/art/icons/ability_templar_reckless_attacks.dds', name = A.Skill_Puncturing_Sweep }, -- Puncturing Sweep Heal (Puncturing Sweep - Rank 1)
     [55222] = { icon = 'esoui/art/icons/ability_templar_reckless_attacks.dds', name = A.Skill_Puncturing_Sweep }, -- Puncturing Sweep Heal (Puncturing Sweep - Rank 2)
+    [55224] = { icon = 'esoui/art/icons/ability_templar_reckless_attacks.dds', name = A.Skill_Puncturing_Sweep }, -- Puncturing Sweep Heal (Puncturing Sweep - Rank 3)
     
     -- Aurora Javelin
     [37414] = { name = A.Skill_Aurora_Javelin }, -- Piercing Javelin (Aurora Javelin - Rank 1)
@@ -2319,11 +2354,20 @@ E.EffectOverride = {
 	-- Toppling Charge
 	[26518] = { icon = '' }, -- Charge (Toppling Charge - Rank 1)
 	[44422] = { name = A.Skill_Off_Balance }, -- Toppling Charge (Toppling Charge - Rank 1)
+	
+	[95931] = { icon = 'esoui/art/icons/ability_templar_sun_strike.dds' }, -- Spear Shards (Spear Shards - Rank 1)
+	[95934] = { icon = 'esoui/art/icons/ability_templar_sun_strike.dds' }, -- Spear Shards (Spear Shards - Rank 2)
+	[95937] = { icon = 'esoui/art/icons/ability_templar_sun_strike.dds' }, -- Spear Shards (Spear Shards - Rank 3)
+	[95940] = { icon = 'esoui/art/icons/ability_templar_sun_strike.dds' }, -- Spear Shards (Spear Shards - Rank 4)
     
 	-- Empowering Sweep
 	[22147] = { hide = true }, -- Empowering Sweep (Empowering Sweep - Rank 1)
 	[62599] = { name = A.Skill_Empowering_Sweep }, -- Radial Sweep (Empowering Sweep - Rank 1)
 	[62598] = { name = A.Skill_Empowering_Sweep }, -- Radial Sweep (Empowering Sweep - Rank 1)
+	
+	[23795] = { hide = true }, -- Empowering Sweep (Empowering Sweep - Rank 2)
+	[62601] = { name = A.Skill_Empowering_Sweep }, -- Radial Sweep (Empowering Sweep - Rank 2)
+	[62600] = { name = A.Skill_Empowering_Sweep }, -- Radial Sweep (Empowering Sweep - Rank 2)
 	
 	-- Crescent Sweep
 	[62607] = { icon = 'esoui/art/icons/ability_templar_crescent_sweep.dds', name = A.Skill_Crescent_Sweep }, -- Radial Sweep (Crescent Sweep - Rank 1)
@@ -2353,6 +2397,7 @@ E.EffectOverride = {
 	
 	-- Solar Prison
 	[21757] = { name = A.Skill_Major_Maim, duration = 0 }, -- Solar Prison (Solar Prison - Rank 1)
+	[24289] = { name = A.Skill_Major_Maim, duration = 0 }, -- Solar Prison (Solar Prison - Rank 2)
 	
 	-- Solar Disturbance
 	[21760] = { name = A.Skill_Major_Maim, duration = 0 }, -- Solar Disturbance (Solar Disturbance - Rank 1)
@@ -2387,11 +2432,21 @@ E.EffectOverride = {
 	-- Radiant Aura
 	[26809] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Radiant Aura - Rank 1)
 	[88486] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Radiant Aura - Rank 1)
+	[27020] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Radiant Aura - Rank 2)
+	[88487] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Radiant Aura - Rank 2)
 	
 	-- Repentance
 	[34366] = { hide = true }, -- Repentance (Repentance - Rank 1)
 	[26823] = { icon = 'esoui/art/icons/ability_templar_persistant_sigil.dds', name = A.Skill_Repentance }, -- Repentance Magicka Restore (Repentance - Rank 1)
 	[26824] = { icon = 'esoui/art/icons/ability_templar_persistant_sigil.dds', name = A.Skill_Repentance }, -- Repentance Heal (Repentance - Rank 1)
+	
+	-- Cleansing Ritual
+	[44013] = { icon = 'esoui/art/icons/ability_templar_cleansing_ritual.dds' }, -- Purify (Cleansing Ritual - All Ranks)
+	
+	[26286] = { name = A.Skill_Cleansing_Ritual }, -- Healing Ritual (Cleansing Ritual - Rank 1)
+	[27245] = { name = A.Skill_Cleansing_Ritual }, -- Healing Ritual (Cleansing Ritual - Rank 2)
+	[27250] = { name = A.Skill_Cleansing_Ritual }, -- Healing Ritual (Cleansing Ritual - Rank 3)
+	[27256] = { name = A.Skill_Cleansing_Ritual }, -- Healing Ritual (Cleansing Ritual - Rank 4)
 	
     -- Rite of Passage
     [22225] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds' }, -- Rite of Passage (Rite of Passage - Rank 1)
@@ -2618,6 +2673,12 @@ E.EffectOverride = {
     -- Elemental Blockade
     [62988] = { name = A.Skill_Off_Balance }, -- Blockade of Storms (Elemental Blockade - Rank 1) -- Lightning
 	[62948] = { duration = 0 }, -- Blockade of Frost (Elemental Blockade - Rank 1) -- Frost
+	
+	[62993] = { name = A.Skill_Off_Balance }, -- Blockade of Storms (Elemental Blockade - Rank 2) -- Lightning
+	[62953] = { duration = 0 }, -- Blockade of Frost (Elemental Blockade - Rank 2) -- Frost
+	
+	[62998] = { name = A.Skill_Off_Balance }, -- Blockade of Storms (Elemental Blockade - Rank 3) -- Lightning
+	[62958] = { icon = 'esoui/art/icons/ability_destructionstaff_002b.dds', duration = 0 }, -- Blockade of Frost (Elemental Blockade - Rank 3) -- Frost
     
 	-- Destructive Touch
 	[29073] = { hide = true }, -- Flame Touch (Destructive Touch - Rank 1) -- Fire
@@ -2718,6 +2779,12 @@ E.EffectOverride = {
 	-- Healing Ward
 	[49068] = { icon = 'esoui/art/icons/ability_restorationstaff_001_a.dds', name = A.Skill_Healing_Ward }, -- Grand Healing (Healing Ward - Rank 1)
 	[40128] = { icon = 'esoui/art/icons/ability_restorationstaff_001_a.dds', hide = true }, -- Healing Ward (Healing Ward - Rank 1)
+	
+	[49069] = { icon = 'esoui/art/icons/ability_restorationstaff_001_a.dds', name = A.Skill_Healing_Ward }, -- Grand Healing (Healing Ward - Rank 2)
+	[41314] = { icon = 'esoui/art/icons/ability_restorationstaff_001_a.dds', hide = true }, -- Healing Ward (Healing Ward - Rank 2)
+	
+	[49071] = { icon = 'esoui/art/icons/ability_restorationstaff_001_a.dds', name = A.Skill_Healing_Ward }, -- Grand Healing (Healing Ward - Rank 3
+	[41318] = { icon = 'esoui/art/icons/ability_restorationstaff_001_a.dds', hide = true }, -- Healing Ward (Healing Ward - Rank 3)
 
     ----------------------------------------------------------------
     -- PLAYER PASSIVES ARMOR ---------------------------------------

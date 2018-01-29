@@ -2171,6 +2171,9 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
     -- Keep Reward (14), Keep Repair (40), PVP Resurrect (41)
     elseif reason == 14 or reason == 40 or reason == 41 then
         messageChange = CA.SV.ContextMessages.CurrencyMessageEarn
+	-- Reward (27)
+	elseif reason == 27 then
+		messageChange = CA.SV.ContextMessages.CurrencyMessageReceive
     -- Buy on AH (31)
     elseif reason == 31 then
         if CA.SV.Currency.CurrencyGoldHideAH then return end
@@ -2232,7 +2235,6 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
     elseif reason == 23 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 25 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 26 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
-    elseif reason == 27 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 30 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 34 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)
     elseif reason == 36 then messageChange = strformat(GetString(SI_LUIE_CA_DEBUG_MSG_CURRENCY), reason)

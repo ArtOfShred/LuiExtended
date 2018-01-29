@@ -283,6 +283,7 @@ A.Skill_Solar_Disturbance        	= 21758
 
 A.Skill_Restoring_Aura           	= 26209
 A.Skill_Repentance					= 26821
+A.Skill_Cleansing_Ritual         	= 22265
 A.Skill_Rite_Of_Passage          	= 22223
 A.Skill_Remembrance              	= 22229
 A.Skill_Practiced_Incantation    	= 22226
@@ -801,7 +802,6 @@ A.Skill_Radiant_Oppresion        = 63046
 -- RESTORING LIGHT ----------
 A.Skill_Honor_The_Dead           = 22253
 A.Skill_Lingering_Ritual         = 22314
-A.Skill_Cleansing_Ritual         = 22265
 A.Skill_Extended_Ritual          = 22262
 A.Skill_Purifying_Ritual         = 22259
 A.Skill_Rune_Focus               = 22234
