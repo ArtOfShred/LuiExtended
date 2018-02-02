@@ -298,9 +298,9 @@ local Effects = {
     --[A.Skill_Cleansing_Ritual]              = { true, false, false, nil },
     --[A.Skill_Extended_Ritual]               = { true, false, false, nil },
     --[A.Skill_Purifying_Ritual]              = { true, false, true, nil },
-    [A.Skill_Rune_Focus]                    = { true, false, false, nil },
-    [A.Skill_Channeled_Focus]               = { true, false, false, nil },
-    [A.Skill_Restoring_Focus]               = { true, false, false, nil },
+    --[A.Skill_Rune_Focus]                    = { true, false, false, nil },
+    --[A.Skill_Channeled_Focus]               = { true, false, false, nil },
+    --[A.Skill_Restoring_Focus]               = { true, false, false, nil },
     
     -----------------------------------
     -- WARDEN

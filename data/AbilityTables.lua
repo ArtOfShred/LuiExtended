@@ -13,6 +13,7 @@ A.Skill_Minor_Defile				= 61726
 A.Skill_Major_Defile				= 38686
 A.Skill_Major_Expedition			= 61840
 A.Skill_Major_Vitality				= 61275
+A.Skill_Minor_Magickasteal			= 40114
 
 A.Skill_Off_Balance					= 2727
 
@@ -279,11 +280,17 @@ A.Skill_Empowering_Sweep         	= 22144
 A.Skill_Crescent_Sweep           	= 22139
 
 A.Skill_Purifying_Light          	= 21765
+A.Skill_Radiant_Glory            	= 63044
 A.Skill_Solar_Disturbance        	= 21758
 
 A.Skill_Restoring_Aura           	= 26209
 A.Skill_Repentance					= 26821
 A.Skill_Cleansing_Ritual         	= 22265
+
+--A.Skill_Rune_Focus                  = 22234
+A.Skill_Channeled_Focus             = 22240
+A.Skill_Restoring_Focus             = 22237
+
 A.Skill_Rite_Of_Passage          	= 22223
 A.Skill_Remembrance              	= 22229
 A.Skill_Practiced_Incantation    	= 22226
@@ -297,18 +304,29 @@ A.Skill_Blessing_of_Protection   	= 37243
 A.Skill_Blessing_of_Restoration 	= GetString(SI_LUIE_SKILL_BLESSING_OF_RESTORATION)
 A.Skill_Combat_Prayer				= 40094
 A.Skill_Healing_Ward             	= 40126
+A.Skill_Force_Siphon             	= 31531
+A.Skill_Siphon_Spirit            	= 40109
+A.Skill_Quick_Siphon             	= 40116
 
 -- Destruction Staff
 A.Skill_Crushing_Shock				= 46348
+--A.Skill_Wall_of_Frost            	= 28849
+--A.Skill_Unstable_Wall_of_Frost   	= 39067
+--A.Skill_Blockade_of_Frost        	= 39028
 A.Skill_Flame_Touch					= 29073
+A.Skill_Frost_Touch              	= 29078
 A.Skill_Frozen						= 68719
 A.Skill_Flame_Clench				= 38985
 A.Skill_Shock_Clench				= 38993
+A.Skill_Frost_Clench             	= 38989
 A.Skill_Flame_Reach					= 38944
+A.Skill_Frost_Reach              	= 38970
 A.Skill_Shock_Reach					= 38978
 A.Skill_Weakness_to_Elements     	= 29173
 A.Skill_Elemental_Susceptibility 	= 39089
 A.Skill_Elemental_Drain          	= 39095
+A.Skill_Shock_Pulsar				= 89844
+
 
 -- ---------------------------------------------------
 -- NPC BASIC -----------------------------------------
@@ -392,29 +410,24 @@ A.Skill_Lethal_Arrow             = 38685
 -- DESTRUCTION STAFF --------
 A.Skill_Destructive_Touch        = 29091
 A.Skill_Shock_Touch              = 40970
-A.Skill_Frost_Touch              = 40967
 A.Skill_Flame_Touch              = 40965
 A.Skill_Destructive_Clench       = 38984
 A.Skill_Shock_Clench             = 41016
-A.Skill_Frost_Clench             = 41013
 A.Skill_Flame_Clench             = 38985
 A.Skill_Destructive_Reach        = 38937
 A.Skill_Shock_Reach              = 38978
-A.Skill_Frost_Reach              = 38970
+
 A.Skill_Flame_Reach              = 38944
 A.Skill_Wall_of_Elements         = 28858
 A.Skill_Wall_of_Fire             = 28807
-A.Skill_Wall_of_Frost            = 28849
 A.Skill_Wall_of_Storms           = 28854
 A.Skill_Wall_of_Cinders          = 50228
 A.Skill_Unstable_Wall_of_Elements = 39052
 A.Skill_Unstable_Wall_of_Fire    = 39053
-A.Skill_Unstable_Wall_of_Frost   = 39067
 A.Skill_Unstable_Wall_of_Storms  = 39073
 A.Skill_Unstable_Wall_of_Cinders = 50240
 A.Skill_Elemental_Blockade       = 39011
 A.Skill_Blockade_of_Fire         = 39012
-A.Skill_Blockade_of_Frost        = 39028
 A.Skill_Blockade_of_Storms       = 39018
 A.Skill_Blockade_of_Cinders      = 50236
 A.Skill_Elemental_Ring           = 39143
@@ -438,9 +451,6 @@ A.Skill_Mutagen                  = 40079
 A.Skill_Rapid_Regeneration       = 40076
 A.Skill_Steadfast_Ward           = 31639
 A.Skill_Ward_Ally                = 40130
-A.Skill_Force_Siphon             = 31531
-A.Skill_Quick_Siphon             = 40116
-A.Skill_Siphon_Spirit            = 40109
 
 -- ---------------------------------------------------
 -- ARMOUR --------------------------------------------
@@ -796,7 +806,6 @@ A.Skill_Eclipse                  = 21776
 A.Skill_Total_Dark               = 22006
 A.Skill_Unstable_Core            = 22004
 A.Skill_Radiant_Destruction      = 63029
-A.Skill_Radiant_Glory            = 63044
 A.Skill_Radiant_Oppresion        = 63046
 
 -- RESTORING LIGHT ----------
@@ -804,9 +813,6 @@ A.Skill_Honor_The_Dead           = 22253
 A.Skill_Lingering_Ritual         = 22314
 A.Skill_Extended_Ritual          = 22262
 A.Skill_Purifying_Ritual         = 22259
-A.Skill_Rune_Focus               = 22234
-A.Skill_Channeled_Focus          = 22240
-A.Skill_Restoring_Focus          = 22237
 
 -- ---------------------------------------------------
 -- TOGGLED EFFECTS -----------------------------------
