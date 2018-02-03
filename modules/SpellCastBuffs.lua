@@ -1392,10 +1392,10 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
 	
     if E.EffectOverride[abilityId] then
         unbreakable = E.EffectOverride[abilityId].unbreakable or 0
-		stack = E.EffectOverride[abilityId].stack or 1
+		stack = E.EffectOverride[abilityId].stack or 0
 	else
 		unbreakable = 0
-		stack = 1
+		stack = 0
     end
 	
 	-- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by target)
@@ -1529,10 +1529,10 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
 	
     if E.EffectOverride[abilityId] then
         unbreakable = E.EffectOverride[abilityId].unbreakable or 0
-		stack = E.EffectOverride[abilityId].stack or 1
+		stack = E.EffectOverride[abilityId].stack or 0
 	else
 		unbreakable = 0
-		stack = 1
+		stack = 0
     end
 	
 	-- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on target by player)
@@ -2167,7 +2167,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
             end
         end
 		
-		if effect.stack and effect.stack > 1 then
+		if effect.stack and effect.stack > 0 then
 			buff.stack:SetText( strfmt("%s", effect.stack) )
 			buff.stack:SetHidden(false)
 		else
