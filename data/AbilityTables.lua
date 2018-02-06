@@ -288,8 +288,7 @@ A.Skill_Solar_Disturbance        	= 21758
 A.Skill_Restoring_Aura           	= 26209
 A.Skill_Repentance					= 26821
 A.Skill_Cleansing_Ritual         	= 22265
-
---A.Skill_Rune_Focus                  = 22234
+A.Skill_Rune_Focus                  = 22234
 A.Skill_Channeled_Focus             = 22240
 A.Skill_Restoring_Focus             = 22237
 

@@ -535,17 +535,17 @@ E.EffectCreateSkillAura = {
 [26216] = { icon = 'esoui/art/icons/ability_templar_restoring_sigil.dds', name = A.Skill_Restoring_Aura, removeOnEnd = true }, -- Minor Intellect (Restoring Aura - All Ranks)
 [26215] = { icon = 'esoui/art/icons/ability_templar_restoring_sigil.dds', name = A.Skill_Restoring_Aura, removeOnEnd = true }, -- Minor Endurance (Restoring Aura - All Ranks)
 
---[22236] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus }, -- Major Resolve (Rune Focus - Rank 1)
---[44820] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus }, -- Major Ward (Rune Focus - Rank 1)
---[44822] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus }, -- Major Resolve (Rune Focus - Rank 2)
---[44821] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus }, -- Major Ward (Rune Focus - Rank 2)
---[44824] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus }, -- Major Resolve (Rune Focus - Rank 3)
---[44823] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus }, -- Major Ward (Rune Focus - Rank 3)
---[44826] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus }, -- Major Resolve (Rune Focus - Rank 4)
---[44825] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus }, -- Major Ward (Rune Focus - Rank 4)
+[22236] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus }, -- Major Resolve (Rune Focus - Rank 1)
+[44820] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus }, -- Major Ward (Rune Focus - Rank 1)
+[44822] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus }, -- Major Resolve (Rune Focus - Rank 2)
+[44821] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus }, -- Major Ward (Rune Focus - Rank 2)
+[44824] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus }, -- Major Resolve (Rune Focus - Rank 3)
+[44823] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus }, -- Major Ward (Rune Focus - Rank 3)
+[44826] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus }, -- Major Resolve (Rune Focus - Rank 4)
+[44825] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus }, -- Major Ward (Rune Focus - Rank 4)
 
-[44826] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus }, -- Major Resolve (Channeled Focus - Rank 1)
-[44825] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus }, -- Major Ward (Channeled Focus - Rank 1)
+[44828] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus }, -- Major Resolve (Channeled Focus - Rank 1)
+[44827] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus }, -- Major Ward (Channeled Focus - Rank 1)
 
 [44830] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus }, -- Major Resolve (Channeled Focus - Rank 2)
 [44829] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus }, -- Major Ward (Channeled Focus - Rank 2)
@@ -672,6 +672,9 @@ E.BarHighlightOverride = {
 	
 	-- Aedric Spear
 	[26792] = { duration = 8000, showFakeAura = true, secondary = true, noRemove = true }, -- Major Savagery (Biting Jabs - Rank 1)
+	[27189] = { duration = 8000, showFakeAura = true, secondary = true, noRemove = true }, -- Major Savagery (Biting Jabs - Rank 2)
+	[27193] = { duration = 8000, showFakeAura = true, secondary = true, noRemove = true }, -- Major Savagery (Biting Jabs - Rank 3)
+	[27197] = { duration = 8000, showFakeAura = true, secondary = true, noRemove = true }, -- Major Savagery (Biting Jabs - Rank 4)
 	
 	[26188] = { newId = 95933 }, -- Spear Shards (Spear Shards - Rank 1)
 	[27046] = { newId = 95936 }, -- Spear Shards (Spear Shards - Rank 2)
@@ -697,6 +700,11 @@ E.BarHighlightOverride = {
 	[27506] = { newId = 27509 }, -- Radiant Ward (Radiant Ward - Rank 2)
 	[27510] = { newId = 27513 }, -- Radiant Ward (Radiant Ward - Rank 3)
 	[27514] = { newId = 27517 }, -- Radiant Ward (Radiant Ward - Rank 4)
+	
+	[22180] = { newId = 49091 }, -- Blazing Shield (Blazing Shield - Rank 1)
+	[27520] = { newId = 49093 }, -- Blazing Shield (Blazing Shield - Rank 2)
+	[27526] = { newId = 49095 }, -- Blazing Shield (Blazing Shield - Rank 3)
+	[27530] = { newId = 49097 }, -- Blazing Shield (Blazing Shield - Rank 4)
 	
 	[22138] = { newId = 62593 }, -- Radial Sweep (Radial Sweep - Rank 1)
 	[23782] = { newId = 62594 }, -- Radial Sweep (Radial Sweep - Rank 2)
@@ -2686,6 +2694,15 @@ E.EffectOverride = {
 	-- Toppling Charge
 	[26518] = { icon = '' }, -- Charge (Toppling Charge - Rank 1)
 	[44422] = { name = A.Skill_Off_Balance }, -- Toppling Charge (Toppling Charge - Rank 1)
+
+	[26519] = { icon = '' }, -- Charge (Toppling Charge - Rank 2)
+	[44423] = { name = A.Skill_Off_Balance }, -- Toppling Charge (Toppling Charge - Rank 2)
+	
+	[26520] = { icon = '' }, -- Charge (Toppling Charge - Rank 3)
+	[44424] = { name = A.Skill_Off_Balance }, -- Toppling Charge (Toppling Charge - Rank 3)
+	
+	[26521] = { icon = '' }, -- Charge (Toppling Charge - Rank 4)
+	[44425] = { name = A.Skill_Off_Balance }, -- Toppling Charge (Toppling Charge - Rank 4)
 	
 	[95931] = { icon = 'esoui/art/icons/ability_templar_sun_strike.dds' }, -- Spear Shards (Spear Shards - Rank 1)
 	[95934] = { icon = 'esoui/art/icons/ability_templar_sun_strike.dds' }, -- Spear Shards (Spear Shards - Rank 2)
@@ -2706,6 +2723,19 @@ E.EffectOverride = {
 	[27507] = { hide = true }, -- Sun Shield Hit Bonus (Radiant Ward - Rank 2)
 	[27511] = { hide = true }, -- Sun Shield Hit Bonus (Radiant Ward - Rank 3)
 	[27515] = { hide = true }, -- Sun Shield Hit Bonus (Radiant Ward - Rank 4)
+	
+	[49090] = { hide = true }, -- Sun Shield Hit Bonus (Blazing Shield - Rank 1)
+	[22184] = { hide = true }, -- Blazing Shield (Blazing Shield - Rank 1)
+	[22181] = { hide = true }, -- Blazing Shield (Blazing Shield - Rank 1)
+	
+	[49092] = { hide = true }, -- Sun Shield Hit Bonus (Blazing Shield - Rank 2)
+	[27521] = { hide = true }, -- Blazing Shield (Blazing Shield - Rank 2)
+	
+	[49094] = { hide = true }, -- Sun Shield Hit Bonus (Blazing Shield - Rank 3)
+	[27527] = { hide = true }, -- Blazing Shield (Blazing Shield - Rank 3)
+	
+	[49096] = { hide = true }, -- Sun Shield Hit Bonus (Blazing Shield - Rank 4)
+	[27531] = { hide = true }, -- Blazing Shield (Blazing Shield - Rank 4)
     
 	-- Empowering Sweep
 	[22147] = { hide = true }, -- Empowering Sweep (Empowering Sweep - Rank 1)
@@ -2903,13 +2933,10 @@ E.EffectOverride = {
 	
 	[26298] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds' }, -- Ritual of Retribution (Ritual of Retribution - Rank 1)
 	[80172] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds' }, -- Ritual of Retribution (Ritual of Retribution - Rank 1)
-	
 	[27262] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds' }, -- Ritual of Retribution (Ritual of Retribution - Rank 2)
 	[80174] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds' }, -- Ritual of Retribution (Ritual of Retribution - Rank 2)
-	
 	[27270] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds' }, -- Ritual of Retribution (Ritual of Retribution - Rank 3)
 	[80175] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds' }, -- Ritual of Retribution (Ritual of Retribution - Rank 3)
-	
 	[27276] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds' }, -- Ritual of Retribution (Ritual of Retribution - Rank 4)
 	[80176] = { icon = 'esoui/art/icons/ability_templar_purifying_ritual.dds' }, -- Ritual of Retribution (Ritual of Retribution - Rank 4)
 	
@@ -2918,9 +2945,19 @@ E.EffectOverride = {
 	[27289] = { icon = 'esoui/art/icons/ability_templar_extended_ritual.dds' }, -- Extended Ritual (Extended Ritual - Rank 3)
 	[27296] = { icon = 'esoui/art/icons/ability_templar_extended_ritual.dds' }, -- Extended Ritual (Extended Ritual - Rank 4)
 	
+	-- Rune Focus
+	[22236] = { consolidate = true }, -- Major Resolve (Rune Focus - Rank 1)
+	[44820] = { consolidate = true }, -- Major Ward (Rune Focus - Rank 1)
+	[44822] = { consolidate = true }, -- Major Resolve (Rune Focus - Rank 2)
+	[44821] = { consolidate = true }, -- Major Ward (Rune Focus - Rank 2)
+	[44824] = { consolidate = true }, -- Major Resolve (Rune Focus - Rank 3)
+	[44823] = { consolidate = true }, -- Major Ward (Rune Focus - Rank 3)
+	[44826] = { consolidate = true }, -- Major Resolve (Rune Focus - Rank 4)
+	[44825] = { consolidate = true }, -- Major Ward (Rune Focus - Rank 4)
+	
 	-- Channeled Focus
-	[44826] = { consolidate = true }, -- Major Resolve (Channeled Focus - Rank 1)
-	[44825] = { consolidate = true }, -- Major Ward (Channeled Focus - Rank 1)
+	[44828] = { consolidate = true }, -- Major Resolve (Channeled Focus - Rank 1)
+	[44827] = { consolidate = true }, -- Major Ward (Channeled Focus - Rank 1)
 	[37009] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds' },  -- Channeled Focus (Channeled Focus - Rank 1)
 	
 	[44830] = { consolidate = true }, -- Major Resolve (Channeled Focus - Rank 2)
@@ -2935,6 +2972,7 @@ E.EffectOverride = {
 	[44833] = { consolidate = true }, -- Major Ward (Channeled Focus - Rank 4)
 	[37025] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds' },  -- Channeled Focus (Channeled Focus - Rank 4)
 	
+	-- Restoring Focus
 	[44836] = { consolidate = true }, -- Major Resolve (Restoring Focus - Rank 1)
 	[44835] = { consolidate = true }, -- Major Ward (Restoring Focus - Rank 1)
 	[37027] = { consolidate = true }, -- Minor Vitality (Restoring Focus - Rank 1)
