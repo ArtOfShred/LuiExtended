@@ -280,7 +280,9 @@ A.Skill_Empowering_Sweep         	= 22144
 A.Skill_Crescent_Sweep           	= 22139
 
 A.Skill_Purifying_Light          	= 21765
+A.Skill_Unstable_Core            	= 22004
 A.Skill_Radiant_Glory            	= 63044
+A.Skill_Radiant_Oppression       	= 63046
 A.Skill_Solar_Disturbance        	= 21758
 
 A.Skill_Restoring_Aura           	= 26209
@@ -804,9 +806,7 @@ A.Skill_Backlash                 = 21761
 A.Skill_Power_of_the_Light       = 21763
 A.Skill_Eclipse                  = 21776
 A.Skill_Total_Dark               = 22006
-A.Skill_Unstable_Core            = 22004
 A.Skill_Radiant_Destruction      = 63029
-A.Skill_Radiant_Oppresion        = 63046
 
 -- RESTORING LIGHT ----------
 A.Skill_Honor_The_Dead           = 22253

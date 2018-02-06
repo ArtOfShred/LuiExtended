@@ -1149,6 +1149,9 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     -- Templar
     ----------------------------
 	
+	[100211] =  true, -- Eclipse Trigger (Unstable Core - Rank 1)
+	[100213] =  true, -- Eclipse Trigger (Unstable Core - Rank 2)
+	
 	[24307] = true, -- Solar Disturbance Snare (Solar Disturbance - Rank 1)
 	[24309] = true, -- Solar Disturbance Snare (Solar Disturbance - Rank 2)
 	[24315] = true, -- Solar Disturbance Snare (Solar Disturbance - Rank 3)
@@ -2776,6 +2779,9 @@ E.EffectOverride = {
 	[63098] = { icon = 'esoui/art/icons/ability_templar_total_dark.dds' }, -- Total Dark (Total Dark - Rank 4)
 	[68757] = { icon = 'esoui/art/icons/ability_templar_total_dark.dds' }, -- Total Dark (Total Dark - Rank 4)
 	
+	[100210] = { icon = 'esoui/art/icons/ability_templar_unstable_core.dds', name = A.Skill_Unstable_Core }, -- Eclipse (Unstable Core - Rank 1)
+	[100212] = { icon = 'esoui/art/icons/ability_templar_unstable_core.dds', name = A.Skill_Unstable_Core }, -- Eclipse (Unstable Core - Rank 2)
+	
 	[69118] = { icon = 'esoui/art/icons/ability_templar_under_exposure.dds', name = A.Skill_Radiant_Glory }, -- Radiant Glory Heal (Radiant Glory - Rank 1)
 	[63956] = { icon = 'esoui/art/icons/ability_templar_under_exposure.dds', name = A.Skill_Radiant_Glory }, -- Radiant Destruction (Radiant Glory - Rank 1)
 	
@@ -2787,6 +2793,9 @@ E.EffectOverride = {
 	
 	[69121] = { icon = 'esoui/art/icons/ability_templar_under_exposure.dds', name = A.Skill_Radiant_Glory }, -- Radiant Glory Heal (Radiant Glory - Rank 4)
 	[63960] = { icon = 'esoui/art/icons/ability_templar_under_exposure.dds', name = A.Skill_Radiant_Glory }, -- Radiant Destruction (Radiant Glory - Rank 4)
+	
+	[63961] = { icon = 'esoui/art/icons/ability_templar_stendarr_aura.dds', name = A.Skill_Radiant_Oppression }, -- Radiant Destruction (Radiant Oppression - Rank 1)
+	[63962] = { icon = 'esoui/art/icons/ability_templar_stendarr_aura.dds', name = A.Skill_Radiant_Oppression }, -- Radiant Destruction (Radiant Oppression - Rank 2)
 	
 	-- Nova
 	[21754] = { name = A.Skill_Major_Maim, duration = 0 }, -- Nova (Nova - Rank 1)
@@ -2815,6 +2824,7 @@ E.EffectOverride = {
     
     -- Breath of Life
     [44391] = { icon = 'esoui/art/icons/ability_templar_breath_of_life.dds' }, -- Breath of Life (Breath of Life - Rank 1)
+    [44392] = { icon = 'esoui/art/icons/ability_templar_breath_of_life.dds' }, -- Breath of Life (Breath of Life - Rank 2)
     
     -- Healing Ritual
     [22307] = { icon = 'esoui/art/icons/ability_templar_healing_ritual.dds' }, -- Healing Ritual (Healing Ritual - Rank 1)
@@ -2825,6 +2835,9 @@ E.EffectOverride = {
     -- Ritual of Rebirth
     [22331] = { icon = 'esoui/art/icons/ability_templar_ritual_of_rebirth.dds' }, -- Ritual of Rebirth (Ritual of Rebirth - Rank 1)
     [88456] = { icon = 'esoui/art/icons/ability_templar_ritual_of_rebirth.dds' }, -- Ritual of Rebirth (Ritual of Rebirth - Rank 1)
+	
+	[27348] = { icon = 'esoui/art/icons/ability_templar_ritual_of_rebirth.dds' }, -- Ritual of Rebirth (Ritual of Rebirth - Rank 2)
+    [88457] = { icon = 'esoui/art/icons/ability_templar_ritual_of_rebirth.dds' }, -- Ritual of Rebirth (Ritual of Rebirth - Rank 2)
     
 	-- Restoring Aura
 	[26213] = { consolidate = true }, -- Minor Fortitude (Restoring Aura - All Ranks)
