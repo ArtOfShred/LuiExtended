@@ -70,6 +70,7 @@ local g_barOverrideCI		 = {} -- Table for storing abilityId's from E.BarHighligh
 local g_barFakeAura			 = {} -- Table for storing abilityId's that only display a fakeaura (Created on initialization)
 local g_barDurationOverride	 = {} -- Table for storing abilitiyId's that ignore ending event (Created on initialization)
 local g_barNoRemove			 = {} -- Table of abilities we don't remove from bar highlight (Created on initialization)
+local g_potionUsed			 = false -- Toggled on when a potion is used to prevent OnSlotsFullUpdate from updating timers.
 
 -- Quickslot
 local uiQuickSlot   = {
@@ -297,6 +298,7 @@ function CI.RegisterCombatInfo()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE )
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE )
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED )
+	EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED)
     if CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled then
         EVENT_MANAGER:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent1", EVENT_COMBAT_EVENT, CI.OnCombatEvent )
         EVENT_MANAGER:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent2", EVENT_COMBAT_EVENT, CI.OnCombatEvent )
@@ -313,6 +315,7 @@ function CI.RegisterCombatInfo()
 	if CI.SV.ShowTriggered or CI.SV.ShowToggled then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED, CI.OnDeath)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, CI.OnEffectChanged)
+		EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED, CI.InventoryItemUsed)
 		
 		-- Grab any aura's from the list that have on EVENT_COMBAT_EVENT AURA support
 		for abilityId, value in pairs (E.BarHighlightOverride) do
@@ -527,7 +530,9 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
 
 	-- If we're displaying a fake bar highlight then bail out here (sometimes we need a fake aura that doesn't end to simulate effects that can be overwritten, such as Major/Minor buffs. Technically we don't want to stop the
 	-- highlight of the original ability since we can only track one buff per slot and overwriting the buff with a longer duration buff shouldn't throw the player off by making the glow disappear earlier.
-	if g_barFakeAura[abilityId] then return end
+	if g_barFakeAura[abilityId] then
+		return
+	end
 
     if castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
         if g_pendingGroundAbility and g_pendingGroundAbility.id == abilityId and changeType == EFFECT_RESULT_GAINED then
@@ -596,9 +601,9 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                 if CI.SV.ShowToggled then
 					g_toggledSlotsRemain[abilityId] = ((endTime - beginTime) * 1000) + GetGameTimeMilliseconds()
                     CI.ShowCustomToggle(g_toggledSlots[abilityId])
-				    --if CI.SV.BarShowLabel then
-					--	g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and ((endTime - beginTime)/1000) or ((endTime - beginTime)/1000) - 1 ))
-					--end
+				    if CI.SV.BarShowLabel then
+						g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (CI.GetAbilityDuration(abilityId)/1000) or (CI.GetAbilityDuration(abilityId)/1000) - 1 ))
+					end
                 end
             end 
         end
@@ -803,7 +808,15 @@ function CI.UpdateUltimateLabel(eventCode)
     end
 end
 
+function CI.InventoryItemUsed()
+
+	g_potionUsed = true
+	zo_callLater(function() g_potionUsed = false end, 200)
+
+end
+
 function CI.OnSlotsFullUpdate(eventCode, isHotbarSwap)
+
     -- Handle ultimate label first
     CI.UpdateUltimateLabel(eventCode)
     
@@ -812,6 +825,9 @@ function CI.OnSlotsFullUpdate(eventCode, isHotbarSwap)
         g_pendingGroundAbility = nil
     end
 
+	-- Don't update bars if this full update event was from using an inventory item
+	if g_potionUsed == true then return end
+	
     -- Update action bar skills
     g_actionBar = {}
     for i = 3, 8 do

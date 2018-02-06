@@ -270,8 +270,6 @@ local Effects = {
     -- NIGHTBLADE
     -----------------------------------
 
-    -- Assassination
-
     -- Shadow
     [A.Skill_Consuming_Darkness]        = { false, false, true, nil },
     [A.Skill_Bolstering_Darkness]       = { false, false, true, nil },
@@ -282,32 +280,6 @@ local Effects = {
     [A.Skill_Summon_Shade]              = { true, false, false, nil },
     [A.Skill_Dark_Shades]               = { true, false, false, nil },
     [A.Skill_Shadow_Image]              = { true, false, false, nil },
-
-    -- Siphoning
-
-    -----------------------------------
-    -- TEMPLAR
-    -----------------------------------
-
-    -- Aedric Spear
-    --[A.Skill_Spear_Shards]                  = { false, false, true, 1 },
-    --[A.Skill_Luminous_Shards]               = { false, false, true, 1 }, -- This seems roughly accurate, trying to time it with the disorient, depends on latency
-    --[A.Skill_Blazing_Spear]                 = { false, false, true, 1 }, -- Possibly Hide later
-
-    -- Restoring Light
-    --[A.Skill_Cleansing_Ritual]              = { true, false, false, nil },
-    --[A.Skill_Extended_Ritual]               = { true, false, false, nil },
-    --[A.Skill_Purifying_Ritual]              = { true, false, true, nil },
-    --[A.Skill_Rune_Focus]                    = { true, false, false, nil },
-    --[A.Skill_Channeled_Focus]               = { true, false, false, nil },
-    --[A.Skill_Restoring_Focus]               = { true, false, false, nil },
-    
-    -----------------------------------
-    -- WARDEN
-    -----------------------------------
-    
-    -- Green Balance
-    --
 
     -----------------------------------
     -- GUILDS

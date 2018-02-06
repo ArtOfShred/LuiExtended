@@ -671,7 +671,7 @@ E.BarHighlightOverride = {
 	---------------------------
 	
 	-- Aedric Spear
-	[26792] = { showFakeAura = true, duration = 8000, secondary = true }, -- Major Savagery (Biting Jabs - Rank 1)
+	[26792] = { duration = 8000, showFakeAura = true, secondary = true, noRemove = true }, -- Major Savagery (Biting Jabs - Rank 1)
 	
 	[26188] = { newId = 95933 }, -- Spear Shards (Spear Shards - Rank 1)
 	[27046] = { newId = 95936 }, -- Spear Shards (Spear Shards - Rank 2)
@@ -785,10 +785,10 @@ E.BarHighlightOverride = {
 	[27407] = { showFakeAura = true }, -- Remembrance (Remembrance - Rank 3)
 	[27413] = { showFakeAura = true }, -- Remembrance (Remembrance - Rank 4)
 	
-	[22226] = { showFakeAura = true}, -- Practiced Incantation (Practiced Incantation - Rank 1)
-	[27419] = { showFakeAura = true}, -- Practiced Incantation (Practiced Incantation - Rank 2)
-	[27423] = { showFakeAura = true}, -- Practiced Incantation (Practiced Incantation - Rank 3)
-	[27427] = { showFakeAura = true}, -- Practiced Incantation (Practiced Incantation - Rank 4)
+	[22226] = { showFakeAura = true }, -- Practiced Incantation (Practiced Incantation - Rank 1)
+	[27419] = { showFakeAura = true }, -- Practiced Incantation (Practiced Incantation - Rank 2)
+	[27423] = { showFakeAura = true }, -- Practiced Incantation (Practiced Incantation - Rank 3)
+	[27427] = { showFakeAura = true }, -- Practiced Incantation (Practiced Incantation - Rank 4)
 	
 	---------------------------
 	-- Destro Staff -----------
@@ -864,20 +864,20 @@ E.BarHighlightOverride = {
 	-- Resto Staff ------------
 	---------------------------
 	
-	[37243] = { showFakeAura = true, duration = 8000, noRemove = true }, -- Blessing of Protection (Blessing of Protection - Rank 1)
-	[41139] = { showFakeAura = true, duration = 8000, noRemove = true }, -- Blessing of Protection (Blessing of Protection - Rank 2)
-	[41145] = { showFakeAura = true, duration = 8000, noRemove = true }, -- Blessing of Protection (Blessing of Protection - Rank 3)
-	[41151] = { showFakeAura = true, duration = 8000, noRemove = true }, -- Blessing of Protection (Blessing of Protection - Rank 4)
+	[37243] = { showFakeAura = true, noRemove = true }, -- Blessing of Protection (Blessing of Protection - Rank 1)
+	[41139] = { showFakeAura = true, noRemove = true }, -- Blessing of Protection (Blessing of Protection - Rank 2)
+	[41145] = { showFakeAura = true, noRemove = true }, -- Blessing of Protection (Blessing of Protection - Rank 3)
+	[41151] = { showFakeAura = true, noRemove = true }, -- Blessing of Protection (Blessing of Protection - Rank 4)
 	
-	[40103] = { showFakeAura = true, duration = 15000, noRemove = true }, -- Blessing of Restoration (Blessing of Restoration - Rank 1)
-	[41157] = { showFakeAura = true, duration = 15000, noRemove = true }, -- Blessing of Restoration (Blessing of Restoration - Rank 2)
-	[41163] = { showFakeAura = true, duration = 15000, noRemove = true }, -- Blessing of Restoration (Blessing of Restoration - Rank 3)
-	[41169] = { showFakeAura = true, duration = 15000, noRemove = true }, -- Blessing of Restoration (Blessing of Restoration - Rank 4)
+	[40103] = { showFakeAura = true, noRemove = true }, -- Blessing of Restoration (Blessing of Restoration - Rank 1)
+	[41157] = { showFakeAura = true, noRemove = true }, -- Blessing of Restoration (Blessing of Restoration - Rank 2)
+	[41163] = { showFakeAura = true, noRemove = true }, -- Blessing of Restoration (Blessing of Restoration - Rank 3)
+	[41169] = { showFakeAura = true, noRemove = true }, -- Blessing of Restoration (Blessing of Restoration - Rank 4)
 	
-	[40094] = { showFakeAura = true, duration = 8000, noRemove = true }, -- Combat Prayer (Combat Prayer - Rank 1)
-	[41175] = { showFakeAura = true, duration = 8000, noRemove = true }, -- Combat Prayer (Combat Prayer - Rank 2)
-	[41182] = { showFakeAura = true, duration = 8000, noRemove = true }, -- Combat Prayer (Combat Prayer - Rank 3)
-	[41189] = { showFakeAura = true, duration = 8000, noRemove = true }, -- Combat Prayer (Combat Prayer - Rank 4)
+	[40094] = { showFakeAura = true, noRemove = true }, -- Combat Prayer (Combat Prayer - Rank 1)
+	[41175] = { showFakeAura = true, noRemove = true }, -- Combat Prayer (Combat Prayer - Rank 2)
+	[41182] = { showFakeAura = true, noRemove = true }, -- Combat Prayer (Combat Prayer - Rank 3)
+	[41189] = { showFakeAura = true, noRemove = true }, -- Combat Prayer (Combat Prayer - Rank 4)
 	
 	[31531] = { newId = 88565 }, -- Force Siphon (Force Siphon - Rank 1)
 	[41199] = { newId = 88568 }, -- Force Siphon (Force Siphon - Rank 2)
@@ -1151,6 +1151,8 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
 	
 	[100211] =  true, -- Eclipse Trigger (Unstable Core - Rank 1)
 	[100213] =  true, -- Eclipse Trigger (Unstable Core - Rank 2)
+	[100215] =  true, -- Eclipse Trigger (Unstable Core - Rank 3)
+	[100217] =  true, -- Eclipse Trigger (Unstable Core - Rank 4)
 	
 	[24307] = true, -- Solar Disturbance Snare (Solar Disturbance - Rank 1)
 	[24309] = true, -- Solar Disturbance Snare (Solar Disturbance - Rank 2)
@@ -2781,6 +2783,8 @@ E.EffectOverride = {
 	
 	[100210] = { icon = 'esoui/art/icons/ability_templar_unstable_core.dds', name = A.Skill_Unstable_Core }, -- Eclipse (Unstable Core - Rank 1)
 	[100212] = { icon = 'esoui/art/icons/ability_templar_unstable_core.dds', name = A.Skill_Unstable_Core }, -- Eclipse (Unstable Core - Rank 2)
+	[100214] = { icon = 'esoui/art/icons/ability_templar_unstable_core.dds', name = A.Skill_Unstable_Core }, -- Eclipse (Unstable Core - Rank 3)
+	[100216] = { icon = 'esoui/art/icons/ability_templar_unstable_core.dds', name = A.Skill_Unstable_Core }, -- Eclipse (Unstable Core - Rank 4)
 	
 	[69118] = { icon = 'esoui/art/icons/ability_templar_under_exposure.dds', name = A.Skill_Radiant_Glory }, -- Radiant Glory Heal (Radiant Glory - Rank 1)
 	[63956] = { icon = 'esoui/art/icons/ability_templar_under_exposure.dds', name = A.Skill_Radiant_Glory }, -- Radiant Destruction (Radiant Glory - Rank 1)
@@ -2796,6 +2800,8 @@ E.EffectOverride = {
 	
 	[63961] = { icon = 'esoui/art/icons/ability_templar_stendarr_aura.dds', name = A.Skill_Radiant_Oppression }, -- Radiant Destruction (Radiant Oppression - Rank 1)
 	[63962] = { icon = 'esoui/art/icons/ability_templar_stendarr_aura.dds', name = A.Skill_Radiant_Oppression }, -- Radiant Destruction (Radiant Oppression - Rank 2)
+	[63963] = { icon = 'esoui/art/icons/ability_templar_stendarr_aura.dds', name = A.Skill_Radiant_Oppression }, -- Radiant Destruction (Radiant Oppression - Rank 3)
+	[63964] = { icon = 'esoui/art/icons/ability_templar_stendarr_aura.dds', name = A.Skill_Radiant_Oppression }, -- Radiant Destruction (Radiant Oppression - Rank 4)
 	
 	-- Nova
 	[21754] = { name = A.Skill_Major_Maim, duration = 0 }, -- Nova (Nova - Rank 1)
@@ -2825,6 +2831,8 @@ E.EffectOverride = {
     -- Breath of Life
     [44391] = { icon = 'esoui/art/icons/ability_templar_breath_of_life.dds' }, -- Breath of Life (Breath of Life - Rank 1)
     [44392] = { icon = 'esoui/art/icons/ability_templar_breath_of_life.dds' }, -- Breath of Life (Breath of Life - Rank 2)
+    [44393] = { icon = 'esoui/art/icons/ability_templar_breath_of_life.dds' }, -- Breath of Life (Breath of Life - Rank 3)
+    [44394] = { icon = 'esoui/art/icons/ability_templar_breath_of_life.dds' }, -- Breath of Life (Breath of Life - Rank 4)
     
     -- Healing Ritual
     [22307] = { icon = 'esoui/art/icons/ability_templar_healing_ritual.dds' }, -- Healing Ritual (Healing Ritual - Rank 1)
@@ -2838,6 +2846,12 @@ E.EffectOverride = {
 	
 	[27348] = { icon = 'esoui/art/icons/ability_templar_ritual_of_rebirth.dds' }, -- Ritual of Rebirth (Ritual of Rebirth - Rank 2)
     [88457] = { icon = 'esoui/art/icons/ability_templar_ritual_of_rebirth.dds' }, -- Ritual of Rebirth (Ritual of Rebirth - Rank 2)
+	
+	[27351] = { icon = 'esoui/art/icons/ability_templar_ritual_of_rebirth.dds' }, -- Ritual of Rebirth (Ritual of Rebirth - Rank 3)
+    [88458] = { icon = 'esoui/art/icons/ability_templar_ritual_of_rebirth.dds' }, -- Ritual of Rebirth (Ritual of Rebirth - Rank 3)
+	
+	[27354] = { icon = 'esoui/art/icons/ability_templar_ritual_of_rebirth.dds' }, -- Ritual of Rebirth (Ritual of Rebirth - Rank 4)
+    [88459] = { icon = 'esoui/art/icons/ability_templar_ritual_of_rebirth.dds' }, -- Ritual of Rebirth (Ritual of Rebirth - Rank 4)
     
 	-- Restoring Aura
 	[26213] = { consolidate = true }, -- Minor Fortitude (Restoring Aura - All Ranks)
