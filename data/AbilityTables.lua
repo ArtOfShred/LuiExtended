@@ -328,6 +328,17 @@ A.Skill_Elemental_Susceptibility 	= 39089
 A.Skill_Elemental_Drain          	= 39095
 A.Skill_Shock_Pulsar				= 89844
 
+-- ---------------------------------------------------
+-- GUILD SKILLS --------------------------------------
+-- ---------------------------------------------------
+
+A.Skill_Circle_of_Protection     = 35737
+A.Skill_Turn_Undead              = 40181
+A.Skill_Ring_of_Preservation     = 40169
+
+A.Skill_Trap_Beast               = 35750
+A.Skill_Rearming_Trap            = 40382
+A.Skill_Lightweight_Beast_Trap   = 40372
 
 -- ---------------------------------------------------
 -- NPC BASIC -----------------------------------------
@@ -486,12 +497,6 @@ A.Skill_Silver_Leash             = 40336
 A.Skill_Expert_Hunter            = 35762
 A.Skill_Evil_Hunter              = 40194
 A.Skill_Camouflaged_Hunter       = 40195
-A.Skill_Circle_of_Protection     = 35737
-A.Skill_Turn_Undead              = 40181
-A.Skill_Ring_of_Preservation     = 40169
-A.Skill_Trap_Beast               = 35750
-A.Skill_Rearming_Trap            = 42747
-A.Skill_Lightweight_Beast_Trap   = 40372
 
 -- MAGES GUILD --------------
 A.Skill_Meteor                   = 16536

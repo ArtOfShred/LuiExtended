@@ -286,12 +286,12 @@ local Effects = {
     -----------------------------------
 
     -- Fighter Guild
-    [A.Skill_Trap_Beast]          		= { false, false, 60, 1.5 },
-    [A.Skill_Rearming_Trap]         	= { false, false, 60, 1.5 },
-    [A.Skill_Lightweight_Beast_Trap]	= { false, false, 60, 1.5 },
-    [A.Skill_Circle_of_Protection]  	= { true, false, false, nil },
-    [A.Skill_Turn_Undead]           	= { true, false, false, nil },
-    [A.Skill_Ring_of_Preservation]  	= { true, false, false, nil },
+    --[A.Skill_Trap_Beast]          		= { false, false, 60, 1.5 },
+    --[A.Skill_Rearming_Trap]         	= { false, false, 60, 1.5 },
+    --[A.Skill_Lightweight_Beast_Trap]	= { false, false, 60, 1.5 },
+    --[A.Skill_Circle_of_Protection]  	= { true, false, false, nil },
+    --[A.Skill_Turn_Undead]           	= { true, false, false, nil },
+    --[A.Skill_Ring_of_Preservation]  	= { true, false, false, nil },
 
     -- Mages Guild
     [A.Skill_Meteor]                = { false, false, 11.8, 0 },
@@ -1170,6 +1170,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                 groundType[3] = { info = E.EffectGroundDisplay[abilityId].ground, context = "ground", type = BUFF_EFFECT_TYPE_DEBUFF }
                 iconName = E.EffectGroundDisplay[abilityId].icon or iconName
                 effectName = E.EffectGroundDisplay[abilityId].name or effectName
+				stackCount = E.EffectGroundDisplay[abilityId].stack or stackCount
                 
                 for i = 1, 3 do
                     if groundType[i].info == true then
@@ -1179,7 +1180,8 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                             dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
                             forced=nil,
                             restart=true, iconNum=0,
-                            unbreakable=0 }
+                            unbreakable=0,
+							stack = stackCount }
                     end
                 end
             end
@@ -1215,6 +1217,15 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         iconName = E.EffectOverride[abilityId].icon or E.AbilityIcon[effectName or ""] or iconName
         effectName = E.EffectOverride[abilityId].name or effectName
         unbreakable = E.EffectOverride[abilityId].unbreakable or 0
+		-- Destroy other effects of the same type if we don't want to show duplicates at all.
+		if E.EffectOverride[abilityId].noDuplicate then
+			for k, v in pairs(g_effectsList.player1) do
+				-- Only remove the lower duration effects that were cast previously.
+				if v.id == abilityId and v.ends < (1000*endTime) then 
+					g_effectsList.player1[ k ] = nil
+				end
+			end
+		end
     end
     
     if E.EffectOverrideByName[abilityId] then
@@ -1253,7 +1264,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         return
     end
         
-    local forcedType = E.EffectForcedType[abilityId] or E.EffectForcedName[effectName]
+    local forcedType = E.EffectOverride[abilityId] and E.EffectOverride[abilityId].forcedContainer or nil
 	
 	if unitTag == "reticleover" and abilityId == 92428 and not IsUnitPlayer('reticleover') then return end 
 
@@ -1354,6 +1365,9 @@ local IsResultDamage = {
 function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
  
 	if not (E.FakeExternalBuffs[abilityId] or E.FakeExternalDebuffs[abilityId] or E.FakePlayerBuffs[abilityId] or E.FakeStagger[abilityId]) then return end
+	
+	-- If the action result isn't a starting/ending event then we ignore it.
+	if result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_GAINED and result ~= ACTION_RESULT_EFFECT_GAINED_DURATION and result ~= ACTION_RESULT_EFFECT_FADED then return end
  
 	local unbreakable
 	local stack
@@ -1483,7 +1497,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
 	
 	if not (E.IsGroundMine[abilityName] or E.FakePlayerExternalBuffs[abilityId] or E.FakePlayerDebuffs[abilityId] or E.FakeStagger[abilityId]) then return end
 	
-	-- Try to remove effect like Ground Runes and Traps
+	-- Try to remove effect like Ground Runes and Traps (we check this before we filter for other result types)
     if E.IsGroundMine[abilityName] and IsResultDamage[result] and ( targetType == COMBAT_UNIT_TYPE_NONE or targetType == COMBAT_UNIT_TYPE_OTHER) then
 		for k, v in pairs(g_effectsList.ground) do
 			if v.name == abilityName then 
@@ -1491,7 +1505,10 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
 			end
 		end
     end
-    
+	
+	-- If the action result isn't a starting/ending event then we ignore it.
+	if result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_GAINED and result ~= ACTION_RESULT_EFFECT_GAINED_DURATION and result ~= ACTION_RESULT_EFFECT_FADED then return end
+	
     local unbreakable
 	local stack
 	local iconName
@@ -1567,7 +1584,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
 				forced = "short",
 				restart=true, iconNum=0,
 				unbreakable=unbreakable,
-				savedName = targetName }
+				savedName = strformat(SI_UNIT_NAME, targetName) }
 			else
 				g_effectsList.saved[ abilityId ] = {
 				type=effectType,
@@ -1576,7 +1593,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
 				forced = "short",
 				restart=true, iconNum=0,
 				unbreakable=unbreakable,
-				savedName = targetName }
+				savedName = strformat(SI_UNIT_NAME, targetName) }
 			end
         end
     end
@@ -1604,7 +1621,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
 				forced = "short",
 				restart=true, iconNum=0,
 				unbreakable=unbreakable,
-				savedName = targetName }
+				savedName = strformat(SI_UNIT_NAME, targetName) }
 			else
 				g_effectsList.saved[ abilityId ] = {
 				type=BUFF_EFFECT_TYPE_DEBUFF,
@@ -1613,7 +1630,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
 				forced = "short",
 				restart=true, iconNum=0,
 				unbreakable=unbreakable,
-				savedName = targetName }
+				savedName = strformat(SI_UNIT_NAME, targetName) }
 			end
         end
     end

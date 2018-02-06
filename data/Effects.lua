@@ -521,6 +521,24 @@ E.EffectGroundDisplay = {
 	[41261] = { buff = true, debuff = false, ground = false }, -- Healing Springs (Healing Springs - Rank 3)
 	[41265] = { buff = true, debuff = false, ground = false }, -- Healing Springs (Healing Springs - Rank 4)
 
+	---------------------------
+	-- Fighter's Guild --------
+	---------------------------
+	
+	[35737] = { buff = true, debuff = false, ground = false }, -- Circle of Protection (Circle of Protection - Rank 1)
+	[42501] = { buff = true, debuff = false, ground = false }, -- Circle of Protection (Circle of Protection - Rank 2)
+	[42506] = { buff = true, debuff = false, ground = false }, -- Circle of Protection (Circle of Protection - Rank 3)
+	[42509] = { buff = true, debuff = false, ground = false }, -- Circle of Protection (Circle of Protection - Rank 4)
+	
+	[40181] = { buff = true, debuff = false, ground = false }, -- Turn Undead (Turn Undead - Rank 1)
+	
+	[35750] = { buff = false, debuff = false, ground = true }, -- Trap Beast (Trap Beast - Rank 1)
+	[42706] = { buff = false, debuff = false, ground = true }, -- Trap Beast (Trap Beast - Rank 2)
+	[42713] = { buff = false, debuff = false, ground = true }, -- Trap Beast (Trap Beast - Rank 3)
+	[42720] = { buff = false, debuff = false, ground = true }, -- Trap Beast (Trap Beast - Rank 4)
+	
+	[40382] = { buff = false, debuff = false, ground = true }, -- Rearming Trap (Rearming Trap - Rank 1)
+	
 }
 
 -- This will create an effect on the player or target when X skill is detected as active. SCB creates the buff by the name listed here, this way if 3 or 4 effects all need to display for 1 ability, it will only show the one aura.
@@ -530,7 +548,6 @@ E.EffectCreateSkillAura = {
 -- removeOnEnd -- Remove this aura when one of these effects ends.
 
 -- Templar
-
 [26213] = { icon = 'esoui/art/icons/ability_templar_restoring_sigil.dds', name = A.Skill_Restoring_Aura, removeOnEnd = true }, -- Minor Fortitude (Restoring Aura - All Ranks)
 [26216] = { icon = 'esoui/art/icons/ability_templar_restoring_sigil.dds', name = A.Skill_Restoring_Aura, removeOnEnd = true }, -- Minor Intellect (Restoring Aura - All Ranks)
 [26215] = { icon = 'esoui/art/icons/ability_templar_restoring_sigil.dds', name = A.Skill_Restoring_Aura, removeOnEnd = true }, -- Minor Endurance (Restoring Aura - All Ranks)
@@ -655,6 +672,22 @@ E.EffectCreateSkillAura = {
 [88625] = { icon = 'esoui/art/icons/ability_restorationstaff_005_b.dds', name = A.Skill_Quick_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Quick Siphon - Rank 2)
 [88628] = { icon = 'esoui/art/icons/ability_restorationstaff_005_b.dds', name = A.Skill_Quick_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Quick Siphon - Rank 3)
 [88634] = { icon = 'esoui/art/icons/ability_restorationstaff_005_b.dds', name = A.Skill_Quick_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Quick Siphon - Rank 4)
+
+-- Fighter's Guild
+[80271] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Circle of Protection - Rank 1)
+[35739] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Protection (Circle of Protection - Rank 1)
+
+[80272] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Circle of Protection - Rank 2)
+[42503] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Protection (Circle of Protection - Rank 2)
+
+[80274] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Circle of Protection - Rank 3)
+[42507] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Protection (Circle of Protection - Rank 3)
+
+[80275] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Circle of Protection - Rank 4)
+[42509] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Protection (Circle of Protection - Rank 4)
+
+[80276] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Turn Undead - Rank 1)
+[40185] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Protection (Turn Undead - Rank 1)
 
 }
 
@@ -901,7 +934,36 @@ E.BarHighlightOverride = {
 	[41230] = { newId = 88625 }, -- Quick Siphon (Quick Siphon - Rank 2)
 	[41234] = { newId = 88628 }, -- Quick Siphon (Quick Siphon - Rank 3)
 	[41239] = { newId = 88634 }, -- Quick Siphon (Quick Siphon - Rank 4)
+	
+	---------------------------
+	-- Medium Armor -----------
+	---------------------------
+	
+	[29556] = { newId = 63015 }, -- Evasion (Evasion - Rank 1)
+	[41124] = { newId = 63016 }, -- Evasion (Evasion - Rank 2)
+	[41125] = { newId = 63017 }, -- Evasion (Evasion - Rank 3)
+	[41126] = { newId = 63018 }, -- Evasion (Evasion - Rank 4)
+	
+	[39195] = { newId = 63019 }, -- Shuffle (Shuffle - Rank 1)
 
+	---------------------------
+	-- Fighter's Guild --------
+	---------------------------
+	
+	[35750] = { newId = 68595, showFakeAura = true }, -- Trap Beast (Trap Beast - Rank 1)
+	[42706] = { newId = 68596, showFakeAura = true }, -- Trap Beast (Trap Beast - Rank 2)
+	[42713] = { newId = 68597, showFakeAura = true }, -- Trap Beast (Trap Beast - Rank 3)
+	[42720] = { newId = 68598, showFakeAura = true }, -- Trap Beast (Trap Beast - Rank 4)
+	
+	[40382] = { newId = 68632, showFakeAura = true }, -- Rearming Trap (Rearming Trap - Rank 1)
+	
+	[35713] = { newId = 62305 }, -- Dawnbreaker (Dawnbreaker - Rank 1)
+	[42554] = { newId = 62307 }, -- Dawnbreaker (Dawnbreaker - Rank 2)
+	[42560] = { newId = 62308 }, -- Dawnbreaker (Dawnbreaker - Rank 3)
+	[42566] = { newId = 62309 }, -- Dawnbreaker (Dawnbreaker - Rank 4)
+	
+	[40161] = { newId = 62310 }, -- Flawless Dawnbreaker (Flawless Dawnbreaker - Rank 1)
+	
 }
 
 E.DisguiseIcons = {
@@ -1222,30 +1284,6 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     
 }
 
-E.EffectForcedType = { --Force a change to the type buff container
-
-    [14890] = "short", -- Block
-    [23284] = "short", -- Not sure, I believe this is Guard projectile intercept.
-    [64197] = "short", -- Sanctuary Cyrodiil passive is considered unlimited duration, but the effect is only while the player is in the area. Should show up under short buffs.
-    [54119] = "short", -- Remembrance (The Anger of a King)
-    [83522] = "short", -- Freezing (Snow Bear Plunge)
-    [85344] = "short", -- Atronach Aura (Storm Atronach Aura)
-    [86976] = "short", -- Spriggan Aura (Wild Hunt Leaf-Dance Aura)
-    [86978] = "short", -- Grand Spriggan Aura (Floral Swirl Aura)
-    
-    [97900] = "short", -- Domihaus (Domihaus)
-    [97896] = "short", -- Domihaus (Domihaus)
-    
-    [59586] = "short", -- Lord Warden (Lord Warden)
-    
-    [75815] = "short", -- Lunar Bastion (of the Lunar Bastion)
-    
-}
-
-E.EffectForcedName = {
-    -- Nothing here yet
-}
-
 -- Using a separate chart for ZOS Artificial Effects just in case this is significantly expanded at any point
 E.ArtificialEffectOverride = {
 
@@ -1262,6 +1300,9 @@ E.TooltipOverride = {
 E.EffectOverride = {
 
 	-- TEMP MOVE LATER
+	[23284] = { forcedContainer = 'short' }, -- Not sure, I believe this is Guard projectile intercept.
+	[64197] = { forcedContainer = 'short' }, -- Sanctuary Cyrodiil passive is considered unlimited duration, but the effect is only while the player is in the area. Should show up under short buffs.
+    [54119] = { forcedContainer = 'short' }, -- Remembrance (The Anger of a King)
 	
 	-- Craglorn buffs
 	[82294] = { icon = 'esoui/art/icons/achievement_craglorn_001.dds' }, -- Magicka Attunement
@@ -1681,10 +1722,10 @@ E.EffectOverride = {
 	[91449] = { icon = 'LuiExtended/media/icons/abilities/ability_event_bredas_magnificent_mead.dds' }, -- Breda's Magnificent Mead (Breda's Bottomless Mead Mug)
 
     -- Crown Store Mementos
-    [85344] = { icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_aura.dds', name = A.Memento_Storm_Atronach_Aura }, -- Atronach Aura (Storm Atronach Aura)
+    [85344] = { icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_aura.dds', name = A.Memento_Storm_Atronach_Aura, forcedContainer = 'short' }, -- Atronach Aura (Storm Atronach Aura)
     [85347] = { icon = 'LuiExtended/media/icons/mementos/memento_storm_atronach_juggle.dds', name = A.Memento_Storm_Orb_Juggle, unbreakable = 1 }, -- Storm Orb Juggle (Atronach Juggling)
-    [86976] = { icon = 'LuiExtended/media/icons/mementos/memento_wild_hunt_leaf-dance_aura.dds', name = A.Memento_Wild_Hunt_Aura }, -- Spriggan Aura (Wild Hunt Leaf-Dance Aura)
-    [86978] = { icon = 'LuiExtended/media/icons/mementos/memento_floral_swirl_aura.dds', name = A.Memento_Floral_Swirl_Aura }, -- Grand Spriggan Aura (Floral Swirl Aura)
+    [86976] = { icon = 'LuiExtended/media/icons/mementos/memento_wild_hunt_leaf-dance_aura.dds', name = A.Memento_Wild_Hunt_Aura, forcedContainer = 'short' }, -- Spriggan Aura (Wild Hunt Leaf-Dance Aura)
+    [86978] = { icon = 'LuiExtended/media/icons/mementos/memento_floral_swirl_aura.dds', name = A.Memento_Floral_Swirl_Aura, forcedContainer = 'short' }, -- Grand Spriggan Aura (Floral Swirl Aura)
     
     [92866] = { icon = 'LuiExtended/media/icons/mementos/memento_dwarven_puzzle_orb.dds', name = A.Memento_Dwarven_Puzzle_Orb }, -- Dwarven Globe (Dwarven Puzzle Orb)
     [92867] = { icon = 'LuiExtended/media/icons/mementos/memento_dwarven_tonal_forks.dds', name = A.Memento_Dwarven_Tonal_Forks }, -- Dwarven Tuning Forks (Dwarven Tonal Forks)
@@ -1804,9 +1845,9 @@ E.EffectOverride = {
     [81069] = { hide = true }, -- Chokethorn (Chokethorn)
     [81077] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_chokethorn.dds' }, -- Chokethorn (Chokethorn)
     
-    [97900] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_stone.dds' }, -- Domihaus (Domihaus) 
+    [97900] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_stone.dds', forcedContainer = 'short' }, -- Domihaus (Domihaus) 
     [97899] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_stone.dds' }, -- Domihaus (Domihaus) 
-    [97896] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_fire.dds' }, -- Domihaus (Domihaus) 
+    [97896] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_fire.dds', forcedContainer = 'short' }, -- Domihaus (Domihaus) 
     [97883] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_fire.dds' }, -- Domihaus (Domihaus)
     
     [97857] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_earthgore.dds' }, -- Earthgore (Earthgore)
@@ -1826,7 +1867,7 @@ E.EffectOverride = {
     [80566] = { hide = true }, -- Kra'gh (Kra'gh)
     [80565] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_kragh.dds' }, -- Kra'gh (Kra'gh)
     
-    [59586] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds', name = A.Set_Lord_Warden_Dusk, duration = 0 }, -- Lord Warden (Lord Warden)
+    [59586] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_lord_warden.dds', name = A.Set_Lord_Warden_Dusk, duration = 0, forcedContainer = 'short' }, -- Lord Warden (Lord Warden)
     
     [59568] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds', name = A.Set_Malubeth_the_Scourger }, -- Scourge Harvest (Malubeth)
     [59573] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_malubeth.dds', name = A.Set_Malubeth_the_Scourger }, -- Scourge Harvest (Malubeth)
@@ -2204,7 +2245,7 @@ E.EffectOverride = {
     [75753] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds', name = A.Set_Roar_of_Alkosh }, -- Line Breaker (of Alkosh)
     [76667] = { icon = 'LuiExtended/media/icons/abilities/ability_set_alkosh.dds' }, -- Roar of Alkosh (of Alkosh)
     
-    [75815] = { icon = 'LuiExtended/media/icons/abilities/ability_set_lunar_bastion.dds', duration = 0 }, -- Lunar Bastion (of the Lunar Bastion)
+    [75815] = { icon = 'LuiExtended/media/icons/abilities/ability_set_lunar_bastion.dds', duration = 0, forcedContainer = 'short' }, -- Lunar Bastion (of the Lunar Bastion)
     
     [75770] = { icon = 'LuiExtended/media/icons/abilities/ability_set_twilight_remedy.dds' }, -- Twilight Remedy (of Twilight Remedy)
     
@@ -2364,7 +2405,7 @@ E.EffectOverride = {
     --[33439] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_mount_sprint.dds', name = A.Innate_Gallop }, -- Mount Sprint (Generic) (Resevered here if it ever becomes visible)
 	
 	-- Block
-	[14890] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds' }, -- Block
+	[14890] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', forcedContainer = 'short' }, -- Block
     [16270] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', name = A.Innate_Block }, -- Brace Cost
     [88724] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block.dds', name = A.Innate_Block }, -- Brace Cost
     [86310] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_block_stun.dds', name = A.Innate_Block_Stun, hide = true }, -- Stagger (Player blocks NPC charged attack)
@@ -3008,6 +3049,39 @@ E.EffectOverride = {
 	[27421] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds' }, -- Practiced Incantation (Practiced Incantation - Rank 2)
 	[27425] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds' }, -- Practiced Incantation (Practiced Incantation - Rank 3)
 	[27429] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds' }, -- Practiced Incantation (Practiced Incantation - Rank 4)
+	
+	----------------------------------------------------------------
+    -- ARMOR ACTIVE ABILITIES --------------------------------------
+    ----------------------------------------------------------------
+	
+	[39196] = { noDuplicate = true }, -- Shuffle (Shuffle - Rank 1)
+	
+	----------------------------------------------------------------
+    -- FIGHTER'S GUILD ACTIVE ABILITIES ----------------------------
+    ----------------------------------------------------------------
+	
+	[80271] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Circle of Protection - Rank 1)
+	[35739] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Circle of Protection - Rank 1)
+	
+	[80272] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Circle of Protection - Rank 2)
+	[42503] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Circle of Protection - Rank 2)
+	
+	[80274] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Circle of Protection - Rank 3)
+	[42507] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Circle of Protection - Rank 3)
+	
+	[80275] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Circle of Protection - Rank 4)
+	[42511] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Circle of Protection - Rank 4)
+	
+	[80276] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Turn Undead - Rank 1)
+	[40185] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Turn Undead - Rank 1)
+	
+	[35753] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Trap Beast (Trap Beast - Rank 1)
+	[42710] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Trap Beast (Trap Beast - Rank 2)
+	[42717] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Trap Beast (Trap Beast - Rank 3)
+	[42724] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Trap Beast (Trap Beast - Rank 4)
+	
+	[40384] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Rearming Trap (Rearming Trap - Rank 1)
+	[40391] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Rearming Trap (Rearming Trap - Rank 1)
     
     ----------------------------------------------------------------
     -- WARDEN PASSIVE ABILITIES ------------------------------------
@@ -5012,7 +5086,7 @@ E.EffectOverride = {
     -- Seasonal Quests
     [86075] = { icon = 'LuiExtended/media/icons/abilities/ability_event_bredas_magnificent_mead.dds' }, -- Breda's Magnificent Mead (Breda's Magnificent Mead)
     [83523] = { icon = 'LuiExtended/media/icons/abilities/ability_event_freezing.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Freezing (Snow Bear Plunge)
-    [83522] = { icon = 'LuiExtended/media/icons/abilities/ability_event_warm.dds' }, -- Warm (Snow Bear Plunge)
+    [83522] = { icon = 'LuiExtended/media/icons/abilities/ability_event_warm.dds', forcedContainer = 'short' }, -- Warm (Snow Bear Plunge)
     [84330] = { icon = 'esoui/art/icons/achievement_newlifefestival_001.dds', name = A.Memento_Mud_Ball }, -- Mudball (Mud Ball Merriment)
     [85639] = { hide = true }, -- Covered in Mud (Mud Ball Merriment)
 
@@ -5503,6 +5577,14 @@ E.FakeExternalDebuffs = {
 	[62686] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach - Rank 3) -- Fire
 	[62689] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach - Rank 4) -- Fire
 	
+	-- Fighter's Guild
+	[35756] = { icon = 'esoui/art/icons/ability_fightersguild_004.dds', name = A.Skill_Trap_Beast, duration = 6000 }, -- Trap Beast (Trap Beast - Rank 1)
+	[42711] = { icon = 'esoui/art/icons/ability_fightersguild_004.dds', name = A.Skill_Trap_Beast, duration = 6000 }, -- Trap Beast (Trap Beast - Rank 2)
+	[42718] = { icon = 'esoui/art/icons/ability_fightersguild_004.dds', name = A.Skill_Trap_Beast, duration = 6000 }, -- Trap Beast (Trap Beast - Rank 3)
+	[42725] = { icon = 'esoui/art/icons/ability_fightersguild_004.dds', name = A.Skill_Trap_Beast, duration = 6000 }, -- Trap Beast (Trap Beast - Rank 4)
+	
+	[40385] = { icon = 'esoui/art/icons/ability_fightersguild_004_a.dds', name = A.Skill_Rearming_Trap, duration = 6000 }, -- Rearming Trap (Rearming Trap - Rank 1)
+	
     -- Item Sets
     [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = A.Set_Bahrahas_Curse, duration = 0 }, -- Bahraha's Curse
 
@@ -5703,9 +5785,17 @@ E.FakePlayerDebuffs = { -- Fake debuffs applied onto a target by the player
 	[62686] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach - Rank 3) -- Fire
 	[62689] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach - Rank 4) -- Fire
 	
+	-- Fighter's Guild
+	[35756] = { icon = 'esoui/art/icons/ability_fightersguild_004.dds', name = A.Skill_Trap_Beast, duration = 6000 }, -- Trap Beast (Trap Beast - Rank 1)
+	[42711] = { icon = 'esoui/art/icons/ability_fightersguild_004.dds', name = A.Skill_Trap_Beast, duration = 6000 }, -- Trap Beast (Trap Beast - Rank 2)
+	[42718] = { icon = 'esoui/art/icons/ability_fightersguild_004.dds', name = A.Skill_Trap_Beast, duration = 6000 }, -- Trap Beast (Trap Beast - Rank 3)
+	[42725] = { icon = 'esoui/art/icons/ability_fightersguild_004.dds', name = A.Skill_Trap_Beast, duration = 6000 }, -- Trap Beast (Trap Beast - Rank 4)
+	
+	[40385] = { icon = 'esoui/art/icons/ability_fightersguild_004_a.dds', name = A.Skill_Rearming_Trap, duration = 6000 }, -- Rearming Trap (Rearming Trap - Rank 1)
+	
     -- Dragonknight (Flame Lash)
     [70745] = {icon = 'esoui/art/icons/ability_warrior_025.dds', name = 'Power Lash', duration = 2000}, -- Off-Balance Exploit (Flame Lash - Rank 1)
-    
+	
     -- Item Sets
     [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = A.Set_Bahrahas_Curse, duration = 1000 }, -- Bahraha's Curse
     

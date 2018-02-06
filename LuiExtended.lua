@@ -340,15 +340,62 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     table.insert(effectsRows, effectsRow)
                         
                 end
-
+				
+				local counter = 1
+				local trackBuffs = { }
                 for i = 1, GetNumBuffs("player") do
                     local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId = GetUnitBuffInfo("player", i)
                     
+					trackBuffs[counter] = {
+						buffName = buffName,
+						startTime = startTime,
+						endTime = endTime,
+						buffSlot = buffSlot,
+						stackCount = stackCount,
+						iconFile = iconFile,
+						buffType = buffType,
+						effectType = effectType,
+						abilityType = abilityType,
+						statusEffectType = statusEffectType,
+						abilityId = abilityId
+					}
+					counter = counter + 1
+				end
+				
+				-- Heavy handed - but functional way to mark duplicate abilities to not display (Duplicate shuffle auras, etc) by only displaying the one with the latest end time.
+				for i = 1, #trackBuffs do
+					local compareId = trackBuffs[i].abilityId
+					local compareTime = trackBuffs[i].endTime
+					-- Only re-iterate and compare if this ability is on the override table, this way we avoid as much of this double loop as possible.
+					if LUIE.Effects.EffectOverride[compareId] and LUIE.Effects.EffectOverride[compareId].noDuplicate then
+						for k, v in pairs(trackBuffs) do
+							-- Only remove the lower duration effects that were cast previously.
+							if v.abilityId == compareId and v.endTime < compareTime then
+								v.markForRemove = true
+							end
+						end
+					end
+				end			
+				
+				for i = 1, #trackBuffs do
+					local buffName = trackBuffs[i].buffName
+					local startTime =  trackBuffs[i].startTime
+					local endTime =  trackBuffs[i].endTime
+					local buffSlot =  trackBuffs[i].buffSlot
+					local stackCount =  trackBuffs[i].stackCount
+					local iconFile =  trackBuffs[i].iconFile
+					local buffType =  trackBuffs[i].buffType
+					local effectType =  trackBuffs[i].effectType
+					local abilityType =  trackBuffs[i].abilityType
+					local statusEffectType =  trackBuffs[i].statusEffectType
+					local abilityId =  trackBuffs[i].abilityId
+					local markForRemove = trackBuffs[i].markForRemove or false
+					
                     local tooltipText = GetAbilityEffectDescription(buffSlot)
                     --if LUIE.Effects.TooltipOverride[abilityId] then tooltipText = LUIE.Effects.TooltipOverride[abilityId] end
                     -- Have to trim trailing spaces on the end of tooltips
                     if tooltipText ~= "" then tooltipText = string.match(tooltipText, ".*%S") end
-                    if buffSlot > 0 and buffName ~= "" and not (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide) then
+                    if buffSlot > 0 and buffName ~= "" and not (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide) and not markForRemove then
                         local effectsRow = effectsRowPool:AcquireObject()
                         effectsRow.name:SetText(strformat(SI_ABILITY_TOOLTIP_NAME, buffName))
                         effectsRow.icon:SetTexture(iconFile)
