@@ -1908,7 +1908,7 @@ function UF.UpdateStaticControls( unitFrame )
     -- If unitFrame has unit name label control
     if unitFrame.name ~= nil then
         -- Update max width of label
-        local playerName = strformat(SI_UNIT_NAME, GetUnitName("player"))
+        local playerName = LUIE.PlayerNameFormatted
         -- Only apply this formatting to non-group frames
         if unitFrame.name:GetParent() == unitFrame.topInfo and unitFrame.unitTag == "reticleover" then
             local width = unitFrame.topInfo:GetWidth()

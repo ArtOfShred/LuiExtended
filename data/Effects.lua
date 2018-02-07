@@ -5650,7 +5650,7 @@ E.EffectOverride = {
 -- Fake Buffs applied onto the player by NPCs or Events (Friendly)
 E.FakeExternalBuffs = {
     
-    [48345] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds', name = 'Focused Healing', duration = 4000, norefresh = true }, -- Focused Healing (The Prophet)
+    [48345] = { icon = 'LuiExtended/media/icons/abilities/ability_templar_focused_healing.dds', name = 'Focused Healing', duration = 4000 }, -- Focused Healing (The Prophet)
     
 }
 

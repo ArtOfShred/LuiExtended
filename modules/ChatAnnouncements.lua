@@ -372,7 +372,7 @@ CA.D = {
 		CurrencyCrownGemsShowTotal      = false,
 		
 		CurrencyOutfitTokenChange       = true,
-		CurrencyOutfitTokenColor        = { 181/255, 243/255, 156/255, 1 },
+		CurrencyOutfitTokenColor        = { 255/255, 225/255, 125/255, 1 },
 		CurrencyOutfitTokenName         = GetString(SI_LUIE_CA_CURRENCY_OUTFIT_TOKENS),
 		CurrencyOutfitTokenShowTotal    = false,
 		
@@ -494,9 +494,6 @@ CA.D = {
 ------------------------------------------------
 
 -- Basic
-local g_playerName                  = nil
-local g_playerNameFormatted         = nil
-local g_playerDisplayNameFormatted  = nil
 local g_activatedFirstLoad          = true
 
 -- Message Printer
@@ -541,6 +538,7 @@ local g_oldItem                     = { }           -- Saved old item for crafti
 -- Experience
 local g_xpCombatBufferValue         = 0             -- Buffered XP Value
 local g_guildSkillThrottle          = 0             -- Buffered Fighter's Guild Reputation Value
+local g_guildSkillThrottleLine		= nil			-- Grab the name for Fighter's Guild reputation (since index isn't always the same) to pass over to Buffered Printer Function
 
 -- Mail
 local g_mailCOD                     = 0             -- Tracks COD amount
@@ -583,6 +581,7 @@ local g_rcUpdateDeclineOverride     = false         -- Variable set to true for 
 
 -- Guild
 local g_selectedGuild               = 1             -- Set selected guild to 1 by default, whenever the player reloads their first guild will always be selected
+local g_pendingHeraldryCost			= 0				-- Pending cost of heraldry change used to modify currency messages.
 local g_guildRankData               = {}            -- Variable to store local player guild ranks, for guild rank changes.
 
 -- Achievements
@@ -781,10 +780,7 @@ function CA.Initialize(enabled)
 
     CA.Enabled = true
 
-    -- Read current player name and get current group leader
-    g_playerName = GetRawUnitName("player")
-    g_playerNameFormatted = strformat(SI_UNIT_NAME, GetUnitName("player"))
-    g_playerDisplayNameFormatted = strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
+    -- Get current group leader
     currentGroupLeaderRawName = GetRawUnitName(GetGroupLeaderUnitTag())
     currentGroupLeaderDisplayName = GetUnitDisplayName(GetGroupLeaderUnitTag())
     
@@ -1179,13 +1175,14 @@ end
 function CA.GuildHeraldrySaved()
 
     if CA.SV.Currency.CurrencyGoldChange then
+		local value = g_pendingHeraldryCost > 0 and g_pendingHeraldryCost or 1000
         local type = "LUIE_CURRENCY_HERALDRY"
         local formattedValue = nil -- Un-needed, we're not going to try to show the total guild bank gold here.
         local changeColor = CA.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
-        local changeType = ZO_LocalizeDecimalNumber(1000)
+        local changeType = ZO_LocalizeDecimalNumber(value)
         local currencyTypeColor = CurrencyGoldColorize:ToHex()
         local currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
-        local currencyName = strformat(CA.SV.Currency.CurrencyGoldName, 1000)
+        local currencyName = strformat(CA.SV.Currency.CurrencyGoldName, value)
         local currencyTotal = nil
         local messageTotal = ""
         local messageChange = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_HERALDRY)
@@ -1295,7 +1292,7 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
     local hasPermission1 = DoesGuildRankHavePermission(guildId, currentRank, GUILD_PERMISSION_PROMOTE)
     local hasPermission2 = DoesGuildRankHavePermission(guildId, currentRank, GUILD_PERMISSION_DEMOTE)
 
-    if ((hasPermission1 or hasPermission2) and DisplayName ~= g_playerDisplayNameFormatted and CA.SV.Social.GuildRankDisplayOptions == 2) or (CA.SV.Social.GuildRankDisplayOptions == 3 and DisplayName ~= g_playerDisplayNameFormatted) then
+    if ((hasPermission1 or hasPermission2) and DisplayName ~= LUIE.PlayerDisplayName and CA.SV.Social.GuildRankDisplayOptions == 2) or (CA.SV.Social.GuildRankDisplayOptions == 3 and DisplayName ~= LUIE.PlayerDisplayName) then
         local displayNameLink
         if CA.SV.BracketOptionCharacter == 1 then
             displayNameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(DisplayName, nil, DISPLAY_NAME_LINK_TYPE, DisplayName)
@@ -1340,7 +1337,7 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
         end
     end
 
-    if DisplayName == g_playerDisplayNameFormatted then
+    if DisplayName == LUIE.PlayerDisplayName then
         local rankName
         local rankNameDefault = GetDefaultGuildRankName(guildId, newRank)
         local rankNameCustom = GetGuildRankCustomName(guildId, newRank)
@@ -1773,7 +1770,7 @@ local message = ""
         message = (strformat("<<1>>, <<2>>, <<3>>", rolestring1, rolestring2, rolestring3) )
     end
 
-    if updatedRoleName ~= g_playerNameFormatted then
+    if updatedRoleName ~= LUIE.PlayerNameFormatted then
         if CA.SV.ChatPlayerDisplayOptions == 1 then
             printToChat(strformat("|cFEFEFE<<1>>|r has updated their role: <<2>>", displayNameLink, message) )
         end
@@ -1803,7 +1800,7 @@ function CA.GMCS(eventCode, unitTag, isOnline)
     local displayBoth = ZO_LinkHandler_CreateLink(displayBothString, nil, DISPLAY_NAME_LINK_TYPE, onlineRoleDisplayName)
 
 
-    if not isOnline and onlineRoleName ~=g_playerNameFormatted then
+    if not isOnline and onlineRoleName ~=LUIE.PlayerNameFormatted then
         if CA.SV.ChatPlayerDisplayOptions == 1 then
             printToChat(strformat("|cFEFEFE<<1>>|r has disconnected.", displayNameLink) )
         end
@@ -1813,7 +1810,7 @@ function CA.GMCS(eventCode, unitTag, isOnline)
         if CA.SV.ChatPlayerDisplayOptions == 3 then
             printToChat(strformat("|cFEFEFE<<1>>|r has disconnected.", displayBoth) )
         end
-    elseif isOnline and onlineRoleName ~=g_playerNameFormatted then
+    elseif isOnline and onlineRoleName ~=LUIE.PlayerNameFormatted then
         if CA.SV.ChatPlayerDisplayOptions == 1 then
             printToChat(strformat("|cFEFEFE<<1>>|r has reconnected.", displayNameLink) )
         end
@@ -1983,7 +1980,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
 	elseif currency == CURT_STYLE_STONES then -- Outfit Tokens
 		if not CA.SV.Currency.CurrencyOutfitTokenChange then return end
         currencyTypeColor = CurrencyOutfitTokenColorize:ToHex()
-        currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_magesguild.dds|t" or ""
+        currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/token_clothing_16.dds|t" or ""
         currencyName = strformat(CA.SV.Currency.CurrencyOutfitTokenName, UpOrDown)
         currencyTotal = CA.SV.Currency.CurrencyOutfitTokenShowTotal
         messageTotal = CA.SV.Currency.CurrencyMessageTotalOutfitToken
@@ -2499,9 +2496,24 @@ function CA.OnBuybackItem(eventCode, itemName, quantity, money, itemSound)
     g_savedPurchase = { }
 end
 
+isCollectibleHorse = {
+	[GetCollectibleInfo(3)] = 3,
+	[GetCollectibleInfo(4)] = 4,
+	[GetCollectibleInfo(5)] = 5,
+}
+
 function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCurrencyType1, specialCurrencyInfo1, specialCurrencyQuantity1, specialCurrencyType2, specialCurrencyInfo2, specialCurrencyQuantity2, itemSoundCategory)
+
+	local itemIcon
+	if isCollectibleHorse[itemName] then
+		local id = isCollectibleHorse[itemName]
+		itemName = GetCollectibleLink(id, linkBrackets[CA.SV.BracketOptionItem])
+		_, _, itemIcon = GetCollectibleInfo(id)
+	else
+		itemIcon,_,_,_,_ = GetItemLinkInfo(itemName)
+	end
+
     local changeColor = CA.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
-    local itemIcon,_,_,_,_ = GetItemLinkInfo(itemName)
     local icon = itemIcon
     local formattedIcon = ( CA.SV.Inventory.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
     local type = "LUIE_CURRENCY_VENDOR"
@@ -2664,7 +2676,7 @@ function CA.OnMailAttach(eventCode, attachmentSlot)
     local mailIndex = attachmentSlot
     local bagId, slotId, icon, stack = GetQueuedItemAttachmentInfo(attachmentSlot)
     local itemId = GetItemId(bagId, slotId)
-    local itemLink = GetMailQueuedAttachmentLink(attachmentSlot, LINK_STYLE_DEFAULT)
+    local itemLink = GetMailQueuedAttachmentLink(attachmentSlot, linkBrackets[CA.SV.BracketOptionItem])
     local itemType = GetItemLinkItemType(itemLink)
     g_mailStacksOut[mailIndex] = {icon = icon, stack = stack, itemId = itemId, itemLink = itemLink, itemType = itemType}
 end
@@ -3897,6 +3909,76 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
     if logPrefixPos == nil then logPrefixPos = CA.SV.ContextMessages.CurrencyMessageCraft end
     if logPrefixNeg == nil then logPrefixNeg = CA.SV.ContextMessages.CurrencyMessageDeconstruct end
     
+	if bagId == BAG_WORN then
+	
+        local gainOrLoss
+        local logPrefix
+        local icon
+        local stack
+        local itemType
+        local itemId
+        local itemLink
+        local removed
+        -- NEW ITEM
+        if not g_equippedStacks[slotId] then
+            icon, stack = GetItemInfo(bagId, slotId)
+            itemType = GetItemType(bagId, slotId)
+            itemId = GetItemId(bagId, slotId)
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
+            g_equippedStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
+            gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
+            logPrefix = logPrefixPos
+            CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+        -- EXISTING ITEM    
+        elseif g_equippedStacks[slotId] then
+            itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
+            if itemLink == nil or itemLink == "" then
+                -- If we get a nil or blank item link, the item was destroyed and we need to use the saved value here to fill in the blanks
+                icon = g_equippedStacks[slotId].icon
+                stack = g_equippedStacks[slotId].stack
+                itemType = g_equippedStacks[slotId].itemType
+                itemId = g_equippedStacks[slotId].itemId
+                itemLink = g_equippedStacks[slotId].itemLink
+                removed = true
+            else
+                -- If we get a value for itemLink, then we want to use bag info to fill in the blanks
+                icon, stack = GetItemInfo(bagId, slotId)
+                itemType = GetItemType(bagId, slotId)
+                itemId = GetItemId(bagId, slotId)
+                removed = false
+            end
+            
+            -- STACK COUNT CHANGE = 0 (UPGRADE)
+            if stackCountChange == 0 then
+                g_oldItem = { itemLink=g_equippedStacks[slotId].itemLink, icon=icon }
+                gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
+                logPrefix = logPrefixPos
+                CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+            -- STACK COUNT INCREMENTED UP
+            elseif stackCountChange > 0 then
+                gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
+                logPrefix = logPrefixPos
+                CA.ItemPrinter(icon, stackCountChange, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+            -- STACK COUNT INCREMENTED DOWN
+            elseif stackCountChange < 0 then
+                local change = stackCountChange * -1
+                gainOrLoss = CA.SV.Currency.CurrencyContextColor and 2 or 4
+                logPrefix = ResolveCraftingUsed(itemType) and CA.SV.ContextMessages.CurrencyMessageUse or logPrefixNeg
+                if logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUse or CA.SV.Inventory.LootShowCraftUse then -- If the logprefix isn't (used) then this is a deconstructed message, otherwise only display if used item display is enabled.
+                    CA.ItemPrinter(icon, change, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, false)
+                end
+            end
+            
+            if removed then
+                if g_equippedStacks[slotId] then 
+                    g_equippedStacks[slotId] = nil
+                end
+            else
+                g_equippedStacks[slotId] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
+            end
+        end
+	end
+	
     if bagId == BAG_BACKPACK then
     
         local gainOrLoss
@@ -4774,7 +4856,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
     if bagId == BAG_VIRTUAL then
         local gainOrLoss = CA.SV.Currency.CurrencyContextColor and 1 or 3
         local logPrefix = CA.SV.Inventory.LootVendorCurrency and CA.SV.ContextMessages.CurrencyMessageLaunder or CA.SV.ContextMessages.CurrencyMessageLaunderNoV
-        local itemLink = GetItemLink(bagId, slotId, LINK_STYLE_BRACKETS)
+        local itemLink = GetItemLink(bagId, slotId, linkBrackets[CA.SV.BracketOptionItem])
         local icon = GetItemLinkInfo(itemLink)
         local itemType = GetItemLinkItemType(itemLink) 
         local itemId = slotId
@@ -5550,7 +5632,7 @@ function CA.HookFunction()
             local message
             local alertMessage
             
-            if response == GROUP_INVITE_RESPONSE_ALREADY_GROUPED and (g_playerNameFormatted == characterName or g_playerDisplayNameFormatted == displayName) then
+            if response == GROUP_INVITE_RESPONSE_ALREADY_GROUPED and (LUIE.PlayerNameFormatted == characterName or LUIE.PlayerDisplayName == displayName) then
                 message = strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_SELF_INVITE))
                 alertMessage = strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_SELF_INVITE))
             elseif response == GROUP_INVITE_RESPONSE_ALREADY_GROUPED and (IsPlayerInGroup(characterName) or IsPlayerInGroup(displayName)) then
@@ -5761,10 +5843,10 @@ function CA.HookFunction()
         local finalName = CA.ResolveNameLink(currentGroupLeaderRawName, currentGroupLeaderDisplayName)
         local finalAlertName = CA.ResolveNameNoLink(currentGroupLeaderRawName, currentGroupLeaderDisplayName)
 
-        if g_playerName ~= currentGroupLeaderRawName then -- If another player became the leader
+        if LUIE.PlayerNameRaw ~= currentGroupLeaderRawName then -- If another player became the leader
             displayString = (strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), finalName))
             alertString = (strformat(GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED), finalAlertName))
-        elseif g_playerName == currentGroupLeaderRawName then -- If the player character became the leader
+        elseif LUIE.PlayerNameRaw == currentGroupLeaderRawName then -- If the player character became the leader
             displayString = (GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_SELF))
             alertString = (GetString(SI_LUIE_CA_GROUP_LEADER_CHANGED_SELF))
         end
@@ -9279,11 +9361,13 @@ function CA.HookFunction()
 	-- Hook for Guild Invite function used from Guild Menu
 	ZO_TryGuildInvite = function(guildId, displayName, sentFromChat)
 
+		-- TODO: Update when more alerts are added to CA
 		if not DoesPlayerHaveGuildPermission(guildId, GUILD_PERMISSION_INVITE) then
 			ZO_AlertEvent(EVENT_SOCIAL_ERROR, SOCIAL_RESULT_NO_INVITE_PERMISSION)
 			return
 		end
-
+		
+		-- TODO: Update when more alerts are added to CA
 		if GetNumGuildMembers(guildId) == MAX_GUILD_MEMBERS then
 			ZO_AlertEvent(EVENT_SOCIAL_ERROR, SOCIAL_RESULT_NO_ROOM)
 			return
@@ -9373,6 +9457,29 @@ function CA.HookFunction()
 		g_selectedGuild = guildId
 	end
 	
+	-- Used to pull the cost of guild Heraldry change
+	ZO_GuildHeraldryManager_Shared.AttemptSaveAndExit = function(self, showBaseScene)
+    local blocked = false
+
+    if HasPendingHeraldryChanges() then
+        self:SetPendingExit(true)
+        if not IsCreatingHeraldryForFirstTime() then
+            local pendingCost = GetPendingHeraldryCost()
+			-- Pull Heraldry Cost to currency function to use
+			g_pendingHeraldryCost = pendingCost
+            local heraldryFunds = GetHeraldryGuildBankedMoney()
+            if heraldryFunds and pendingCost <= heraldryFunds then
+                self:ConfirmHeraldryApplyChanges()
+                blocked = true
+            end
+        end
+    end
+
+    if not blocked then
+        self:ConfirmExit(showBaseScene)
+    end
+end
+	
 end
 
 function CA.TradeInviteAccepted(eventCode)
@@ -9400,7 +9507,7 @@ function CA.OnTradeAdded(eventCode, who, tradeIndex, itemSoundCategory)
     local name, icon, stack = GetTradeItemInfo(who, tradeIndex)
     local bagId, slotId = GetTradeItemBagAndSlot(who, tradeIndex)
     local itemId = GetItemId(bagId, slotId)
-    local itemLink = GetTradeItemLink(who, tradeIndex, LINK_STYLE_DEFAULT)
+    local itemLink = GetTradeItemLink(who, tradeIndex, linkBrackets[CA.SV.BracketOptionItem])
     local itemType = GetItemLinkItemType(itemLink)
 
     if who == 0 then
@@ -9542,14 +9649,14 @@ function CA.OnGroupMemberJoined(eventCode, memberName)
     end
 
     if joinedMemberName ~= "" and joinedMemberName ~= nil then
-        if g_playerName ~= memberName then
+        if LUIE.PlayerNameRaw ~= memberName then
             -- Can occur if event is before EVENT_PLAYER_ACTIVATED
             local finalName = CA.ResolveNameLink(joinedMemberName, joinedMemberAccountName)
             local finalAlertName = CA.ResolveNameNoLink(joinedMemberName, joinedMemberAccountName)
             local SendMessage = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), finalName))
             local SendAlert = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), finalAlertName))
             zo_callLater(function() CA.PrintJoinStatusNotSelf(SendMessage, SendAlert) end, 100)
-        elseif g_playerName == memberName then
+        elseif LUIE.PlayerNameRaw == memberName then
             zo_callLater(CA.CheckLFGStatusJoin, 100)
         end
     end
@@ -9668,7 +9775,7 @@ end
 
 function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previousXP, currentXP)
     if (skillType == SKILL_TYPE_GUILD) then
-    
+	
         local lineName, _, _, lineId = GetSkillLineInfo(skillType, skillIndex) 
 
         -- Bail out early if a certain type is not set to be displayed
@@ -9699,6 +9806,7 @@ function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previo
             -- Only throttle values 5 or lower (FG Dailies give +10 skill)
             if CA.SV.Skills.SkillGuildThrottle > 0 and change <= 5 then
                 g_guildSkillThrottle = g_guildSkillThrottle + change
+				g_guildSkillThrottleLine = lineName
                 EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedRep")
                 EVENT_MANAGER:RegisterForUpdate(moduleName .. "BufferedRep", CA.SV.Skills.SkillGuildThrottle, CA.PrintBufferedGuildRep )
                 return
@@ -9758,11 +9866,12 @@ end
 function CA.PrintBufferedGuildRep()
     if (g_guildSkillThrottle > 0 and g_guildSkillThrottle > CA.SV.Skills.SkillGuildThreshold) then
         local lineId = 45
-        local lineName = GetSkillLineInfo(SKILL_TYPE_GUILD, lineId)
-        CA.PrintGuildRep(g_guildSkillThrottle, lineName, lineId)
+        local lineName = g_guildSkillThrottleLine
+        CA.PrintGuildRep(g_guildSkillThrottle, lineName, lineId, "EXPERIENCE LEVEL")
     end
     EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedRep")
     g_guildSkillThrottle = 0
+	g_guildSkillThrottleLine = ""
 end
 
 function CA.PrintQueuedMessages()

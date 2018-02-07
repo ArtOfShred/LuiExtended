@@ -156,6 +156,10 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
     -- Load saved variables
     LUIE_LoadSavedVars()
+	
+	LUIE.PlayerNameRaw = GetRawUnitName("player")
+	LUIE.PlayerNameFormatted = strformat(SI_UNIT_NAME, GetUnitName("player"))
+	LUIE.PlayerDisplayName = strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
 
     -- Initialize this addon modules according to user preferences
     LUIE.ChatAnnouncements.Initialize( LUIE.SV.ChatAnnouncements_Enable )
@@ -173,25 +177,10 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
     -- Keep track of guilds for the /ginvite commands
     LUIE.InitGuildData()
-    
-    local zos_IconSetup = SKILLS_WINDOW.SetupAbilityEntry
-    SKILLS_WINDOW.SetupAbilityEntry = function(self, ability, data)
-        zos_IconSetup(self, ability, data)
-        
-        local abilityId = GetSkillAbilityId(data.skillType, data.lineIndex, data.abilityIndex)
-        local slot = ability.slot
-        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then
-            slot.icon:SetTexture(LUIE.Effects.EffectOverride[abilityId].icon)
-            slot.iconFile = LUIE.Effects.EffectOverride[abilityId].icon
-        end
-		if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then
-			ability.name = LUIE.Effects.EffectOverride[abilityId].name
-		end
-    end
 
     local zos_GetSkillAbilityInfo = GetSkillAbilityInfo
     GetSkillAbilityInfo = function(skillType, skillIndex, abilityIndex)
-        local name, texture, earnedRank, passive, ultimate, purchased, progressionIndex = zos_GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
+        local name, texture, earnedRank, passive, ultimate, purchased, progressionIndex, rankIndex = zos_GetSkillAbilityInfo(skillType, skillIndex, abilityIndex)
         local abilityId = GetSkillAbilityId(skillType, skillIndex, abilityIndex)
         if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then
             texture = LUIE.Effects.EffectOverride[abilityId].icon
@@ -199,7 +188,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 		if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then
             name = LUIE.Effects.EffectOverride[abilityId].name
         end
-        return name, texture, earnedRank, passive, ultimate, purchased, progressionIndex
+        return name, texture, earnedRank, passive, ultimate, purchased, progressionIndex, rankIndex
     end
 
     local zos_GetSkillAbilityNextUpgradeInfo = GetSkillAbilityNextUpgradeInfo
@@ -455,12 +444,61 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         end
         control.animation:PlayForward()
     end
+
+	-- Hook skills advisor and use this variable to refresh the abilityData on time on initialization. We don't want to reload any more after that.
+	local firstRun = true
+	
+	-- Overwrite skills advisor ability data function
+	ZO_SKILLS_ADVISOR_SINGLETON.FillInAbilityData = function(self, abilityData, skillBuildId, skillBuildAbilityIndex)
+		local skillType, lineIndex, abilityIndex, isActive, skillBuildMorphChoice, skillBuildRankIndex = GetSkillBuildEntryInfo(skillBuildId, skillBuildAbilityIndex)
+		local _, _, earnedRank, _, ultimate, purchased, progressionIndex, rankIndex = GetSkillAbilityInfo(skillType, lineIndex, abilityIndex)
+		local _, lineRank = GetSkillLineInfo(skillType, lineIndex)
+		local abilityId, rankNeeded = GetSpecificSkillAbilityInfo(skillType, lineIndex, abilityIndex, skillBuildMorphChoice, skillBuildRankIndex)
+		local _, _, nextUpgradeEarnedRank = GetSkillAbilityNextUpgradeInfo(skillType, lineIndex, abilityIndex)
+		local currentMorphChoice
+		local atMorph = false
+		if progressionIndex then
+			currentMorphChoice = select(2, GetAbilityProgressionInfo(progressionIndex)) 
+			atMorph = select(4, GetAbilityProgressionXPInfo(progressionIndex))
+		end
+
+			-- This data is expensive to get, and won't change when the ID is the same.
+		if abilityData.abilityId ~= abilityId or firstRun then
+			local rawName = GetAbilityName(abilityId)
+			local icon = GetAbilityIcon(abilityId)
+
+			local plainName = zo_strformat(SI_ABILITY_NAME, rawName)
+			abilityData.name = isActive and plainName or zo_strformat(SI_ABILITY_NAME_AND_RANK, rawName, skillBuildRankIndex)
+			abilityData.plainName = plainName
+			abilityData.icon = icon
+		end
+		
+		abilityData.abilityId = abilityId
+		abilityData.skillType = skillType
+		abilityData.lineIndex = lineIndex
+		abilityData.abilityIndex = abilityIndex
+		abilityData.earnedRank = earnedRank
+		abilityData.nextUpgradeEarnedRank = nextUpgradeEarnedRank
+		abilityData.rankIndex = rankIndex
+		abilityData.passive = not isActive
+		abilityData.ultimate = ultimate
+		abilityData.purchased = purchased
+		abilityData.progressionIndex = progressionIndex
+		abilityData.lineRank = lineRank
+		abilityData.atMorph = atMorph
+		abilityData.morph = currentMorphChoice
+		abilityData.skillBuildMorphChoice = skillBuildMorphChoice
+		abilityData.skillBuildRankIndex = skillBuildRankIndex
+		abilityData.rankNeeded = rankNeeded
+	end
     
+	ZO_SKILLS_ADVISOR_SINGLETON:UpdateSkillBuildData()
+	
+	firstRun = false
+	
 end
 
 local delayBuffer       = {}
-local playerName        = GetUnitName("player")
-local playerAccountName = GetUnitDisplayName("player")
 local g_regroupStacks   = {}
 local PendingRegroup    = false
 
@@ -742,7 +780,7 @@ function LUIE.RegroupInvite()
     for i = 1, #g_regroupStacks do
         local member = g_regroupStacks[i]
         -- Don't invite self and offline members
-        if member.memberName ~= playerName then
+        if member.memberName ~= LUIE.PlayerNameFormatted then
             GroupInviteByName(member.memberName)
             printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberLink))
 			if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
@@ -859,8 +897,8 @@ function LUIE.SlashGroupKick(option)
     local kickedMemberName
     local kickedAccountName
     local compareName = string.lower(option)
-    local comparePlayerName = string.lower(playerName)
-    local comparePlayerAccount = string.lower(playerAccountName)
+    local comparePlayerName = string.lower(LUIE.PlayerNameFormatted)
+    local comparePlayerAccount = string.lower(PlayerDisplayName)
     local unitToKick
 
     for i = 1,24 do
@@ -1319,7 +1357,7 @@ function LUIE.SlashVoteKick(option)
     local kickedAccountName
     local compareName = string.lower(option)
     local comparePlayerName = string.lower(playerName)
-    local comparePlayerAccount = string.lower(playerAccountName)
+    local comparePlayerAccount = string.lower(PlayerDisplayName)
     local unitToKick = ""
 
     for i = 1,24 do
