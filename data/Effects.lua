@@ -206,8 +206,8 @@ E.IsExperienceBuff = {
 	-- TODO: MISSING JESTER XP BOOST
 }
 
--- TODO: Eventually update position of these in AbilityTables
 -- List of abilities that have to be purged when first damage is recorded
+-- TODO: Remove this method in SCB and update to use the two tables below instead!!!
 E.IsGroundMine = {
     [A.Skill_Daedric_Mines]     		= true,
     [A.Skill_Daedric_Minefield] 		= true,
@@ -218,6 +218,41 @@ E.IsGroundMine = {
     [A.Skill_Trap_Beast]       			= true,
 	[A.Skill_Rearming_Trap]         	= true,
     [A.Skill_Lightweight_Beast_Trap]	= true,
+}
+
+E.IsGroundMineAura = {
+
+[35750] = true, -- Trap Beast (Trap Beast - Rank 1)
+[42706] = true, -- Trap Beast (Trap Beast - Rank 2)
+[42713] = true, -- Trap Beast (Trap Beast - Rank 3)
+[42720] = true, -- Trap Beast (Trap Beast - Rank 4)
+
+[40382] = true, -- Rearming Trap (Rearming Trap - Rank 1)
+[42727] = true, -- Rearming Trap (Rearming Trap - Rank 2)
+[42737] = true, -- Rearming Trap (Rearming Trap - Rank 3)
+[42747] = true, -- Rearming Trap (Rearming Trap - Rank 4)
+
+}
+
+E.IsGroundMineDamage = {
+
+[35754] = true, -- Trap Beast (Trap Beast - Rank 1)
+[42712] = true, -- Trap Beast (Trap Beast - Rank 2)
+[42719] = true, -- Trap Beast (Trap Beast - Rank 3)
+[42726] = true, -- Trap Beast (Trap Beast - Rank 4)
+
+[40389] = true, -- Rearming Trap (Rank 1)
+[40392] = true, -- Rearming Trap (Rank 1)
+
+[42731] = true, -- Rearming Trap (Rank 2)
+[42736] = true, -- Rearming Trap (Rank 2)
+
+[42741] = true, -- Rearming Trap (Rank 3)
+[42746] = true, -- Rearming Trap (Rank 3)
+
+[42751] = true, -- Rearming Trap (Rank 4)
+[42756] = true, -- Rearming Trap (Rank 4)
+
 }
 
 -- Taunts -- TODO: Unused
@@ -531,13 +566,19 @@ E.EffectGroundDisplay = {
 	[42509] = { buff = true, debuff = false, ground = false }, -- Circle of Protection (Circle of Protection - Rank 4)
 	
 	[40181] = { buff = true, debuff = false, ground = false }, -- Turn Undead (Turn Undead - Rank 1)
+	[42515] = { buff = true, debuff = false, ground = false }, -- Turn Undead (Turn Undead - Rank 2)
+	[42522] = { buff = true, debuff = false, ground = false }, -- Turn Undead (Turn Undead - Rank 3)
+	[42529] = { buff = true, debuff = false, ground = false }, -- Turn Undead (Turn Undead - Rank 4)
 	
-	[35750] = { buff = false, debuff = false, ground = true }, -- Trap Beast (Trap Beast - Rank 1)
-	[42706] = { buff = false, debuff = false, ground = true }, -- Trap Beast (Trap Beast - Rank 2)
-	[42713] = { buff = false, debuff = false, ground = true }, -- Trap Beast (Trap Beast - Rank 3)
-	[42720] = { buff = false, debuff = false, ground = true }, -- Trap Beast (Trap Beast - Rank 4)
+	[35750] = { buff = false, debuff = false, ground = true, stack = 1 }, -- Trap Beast (Trap Beast - Rank 1)
+	[42706] = { buff = false, debuff = false, ground = true, stack = 1 }, -- Trap Beast (Trap Beast - Rank 2)
+	[42713] = { buff = false, debuff = false, ground = true, stack = 1 }, -- Trap Beast (Trap Beast - Rank 3)
+	[42720] = { buff = false, debuff = false, ground = true, stack = 1 }, -- Trap Beast (Trap Beast - Rank 4)
 	
-	[40382] = { buff = false, debuff = false, ground = true }, -- Rearming Trap (Rearming Trap - Rank 1)
+	[40382] = { buff = false, debuff = false, ground = true, stack = 2 }, -- Rearming Trap (Rearming Trap - Rank 1)
+	[42727] = { buff = false, debuff = false, ground = true, stack = 2 }, -- Rearming Trap (Rearming Trap - Rank 2)
+	[42737] = { buff = false, debuff = false, ground = true, stack = 2 }, -- Rearming Trap (Rearming Trap - Rank 3)
+	[42747] = { buff = false, debuff = false, ground = true, stack = 2 }, -- Rearming Trap (Rearming Trap - Rank 4)
 	
 }
 
@@ -688,6 +729,15 @@ E.EffectCreateSkillAura = {
 
 [80276] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Turn Undead - Rank 1)
 [40185] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Protection (Turn Undead - Rank 1)
+
+[80278] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Turn Undead - Rank 2)
+[42517] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Protection (Turn Undead - Rank 2)
+
+[80279] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Turn Undead - Rank 3)
+[42524] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Protection (Turn Undead - Rank 3)
+
+[80280] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Turn Undead - Rank 4)
+[42531] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Protection (Turn Undead - Rank 4)
 
 }
 
@@ -945,6 +995,9 @@ E.BarHighlightOverride = {
 	[41126] = { newId = 63018 }, -- Evasion (Evasion - Rank 4)
 	
 	[39195] = { newId = 63019 }, -- Shuffle (Shuffle - Rank 1)
+	[41127] = { newId = 63023 }, -- Shuffle (Shuffle - Rank 2)
+	[41129] = { newId = 63026 }, -- Shuffle (Shuffle - Rank 3)
+	[41131] = { newId = 63028 }, -- Shuffle (Shuffle - Rank 4)
 
 	---------------------------
 	-- Fighter's Guild --------
@@ -956,6 +1009,9 @@ E.BarHighlightOverride = {
 	[42720] = { newId = 68598, showFakeAura = true }, -- Trap Beast (Trap Beast - Rank 4)
 	
 	[40382] = { newId = 68632, showFakeAura = true }, -- Rearming Trap (Rearming Trap - Rank 1)
+	[42727] = { newId = 68636, showFakeAura = true }, -- Rearming Trap (Rearming Trap - Rank 2)
+	[42737] = { newId = 68638, showFakeAura = true }, -- Rearming Trap (Rearming Trap - Rank 3)
+	[42747] = { newId = 68640, showFakeAura = true }, -- Rearming Trap (Rearming Trap - Rank 4)
 	
 	[35713] = { newId = 62305 }, -- Dawnbreaker (Dawnbreaker - Rank 1)
 	[42554] = { newId = 62307 }, -- Dawnbreaker (Dawnbreaker - Rank 2)
@@ -963,6 +1019,9 @@ E.BarHighlightOverride = {
 	[42566] = { newId = 62309 }, -- Dawnbreaker (Dawnbreaker - Rank 4)
 	
 	[40161] = { newId = 62310 }, -- Flawless Dawnbreaker (Flawless Dawnbreaker - Rank 1)
+	[42575] = { newId = 62311 }, -- Flawless Dawnbreaker (Flawless Dawnbreaker - Rank 2)
+	[42581] = { newId = 62312 }, -- Flawless Dawnbreaker (Flawless Dawnbreaker - Rank 3)
+	[42586] = { newId = 62313 }, -- Flawless Dawnbreaker (Flawless Dawnbreaker - Rank 4)
 	
 }
 
@@ -3056,6 +3115,15 @@ E.EffectOverride = {
 	
 	[39196] = { noDuplicate = true }, -- Shuffle (Shuffle - Rank 1)
 	
+	[64581] = { hide = true }, -- Shuffle (Shuffle - Rank 2)
+	[63022] = { noDuplicate = true }, -- Shuffle (Shuffle - Rank 2)
+	
+	[64582] = { hide = true }, -- Shuffle (Shuffle - Rank 3)
+	[63025] = { noDuplicate = true }, -- Shuffle (Shuffle - Rank 3)
+	
+	[64583] = { hide = true }, -- Shuffle (Shuffle - Rank 4)
+	[63027] = { noDuplicate = true }, -- Shuffle (Shuffle - Rank 4)
+	
 	----------------------------------------------------------------
     -- FIGHTER'S GUILD ACTIVE ABILITIES ----------------------------
     ----------------------------------------------------------------
@@ -3075,6 +3143,15 @@ E.EffectOverride = {
 	[80276] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Turn Undead - Rank 1)
 	[40185] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Turn Undead - Rank 1)
 	
+	[80278] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Turn Undead - Rank 2)
+	[42517] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Turn Undead - Rank 2)
+	
+	[80279] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Turn Undead - Rank 3)
+	[42524] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Turn Undead - Rank 3)
+	
+	[80280] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Turn Undead - Rank 4)
+	[42531] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Turn Undead - Rank 4)
+	
 	[35753] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Trap Beast (Trap Beast - Rank 1)
 	[42710] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Trap Beast (Trap Beast - Rank 2)
 	[42717] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Trap Beast (Trap Beast - Rank 3)
@@ -3082,6 +3159,15 @@ E.EffectOverride = {
 	
 	[40384] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Rearming Trap (Rearming Trap - Rank 1)
 	[40391] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Rearming Trap (Rearming Trap - Rank 1)
+	
+	[42732] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Rearming Trap (Rearming Trap - Rank 2)
+	[42730] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Rearming Trap (Rearming Trap - Rank 2)
+	
+	[42742] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Rearming Trap (Rearming Trap - Rank 3)
+	[42740] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Rearming Trap (Rearming Trap - Rank 3)
+	
+	[42752] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Rearming Trap (Rearming Trap - Rank 4)
+	[42750] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Rearming Trap (Rearming Trap - Rank 4)
     
     ----------------------------------------------------------------
     -- WARDEN PASSIVE ABILITIES ------------------------------------
@@ -5584,6 +5670,9 @@ E.FakeExternalDebuffs = {
 	[42725] = { icon = 'esoui/art/icons/ability_fightersguild_004.dds', name = A.Skill_Trap_Beast, duration = 6000 }, -- Trap Beast (Trap Beast - Rank 4)
 	
 	[40385] = { icon = 'esoui/art/icons/ability_fightersguild_004_a.dds', name = A.Skill_Rearming_Trap, duration = 6000 }, -- Rearming Trap (Rearming Trap - Rank 1)
+	[42734] = { icon = 'esoui/art/icons/ability_fightersguild_004_a.dds', name = A.Skill_Rearming_Trap, duration = 6000 }, -- Rearming Trap (Rearming Trap - Rank 2)
+	[42744] = { icon = 'esoui/art/icons/ability_fightersguild_004_a.dds', name = A.Skill_Rearming_Trap, duration = 6000 }, -- Rearming Trap (Rearming Trap - Rank 3)
+	[42754] = { icon = 'esoui/art/icons/ability_fightersguild_004_a.dds', name = A.Skill_Rearming_Trap, duration = 6000 }, -- Rearming Trap (Rearming Trap - Rank 4)
 	
     -- Item Sets
     [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = A.Set_Bahrahas_Curse, duration = 0 }, -- Bahraha's Curse
@@ -5792,6 +5881,9 @@ E.FakePlayerDebuffs = { -- Fake debuffs applied onto a target by the player
 	[42725] = { icon = 'esoui/art/icons/ability_fightersguild_004.dds', name = A.Skill_Trap_Beast, duration = 6000 }, -- Trap Beast (Trap Beast - Rank 4)
 	
 	[40385] = { icon = 'esoui/art/icons/ability_fightersguild_004_a.dds', name = A.Skill_Rearming_Trap, duration = 6000 }, -- Rearming Trap (Rearming Trap - Rank 1)
+	[42734] = { icon = 'esoui/art/icons/ability_fightersguild_004_a.dds', name = A.Skill_Rearming_Trap, duration = 6000 }, -- Rearming Trap (Rearming Trap - Rank 2)
+	[42744] = { icon = 'esoui/art/icons/ability_fightersguild_004_a.dds', name = A.Skill_Rearming_Trap, duration = 6000 }, -- Rearming Trap (Rearming Trap - Rank 3)
+	[42754] = { icon = 'esoui/art/icons/ability_fightersguild_004_a.dds', name = A.Skill_Rearming_Trap, duration = 6000 }, -- Rearming Trap (Rearming Trap - Rank 4)
 	
     -- Dragonknight (Flame Lash)
     [70745] = {icon = 'esoui/art/icons/ability_warrior_025.dds', name = 'Power Lash', duration = 2000}, -- Off-Balance Exploit (Flame Lash - Rank 1)

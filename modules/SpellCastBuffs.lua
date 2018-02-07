@@ -1498,10 +1498,33 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
 	if not (E.IsGroundMine[abilityName] or E.FakePlayerExternalBuffs[abilityId] or E.FakePlayerDebuffs[abilityId] or E.FakeStagger[abilityId]) then return end
 	
 	-- Try to remove effect like Ground Runes and Traps (we check this before we filter for other result types)
-    if E.IsGroundMine[abilityName] and IsResultDamage[result] and ( targetType == COMBAT_UNIT_TYPE_NONE or targetType == COMBAT_UNIT_TYPE_OTHER) then
+    if E.IsGroundMineDamage[abilityId] and IsResultDamage[result] and ( targetType == COMBAT_UNIT_TYPE_NONE or targetType == COMBAT_UNIT_TYPE_OTHER) then
 		for k, v in pairs(g_effectsList.ground) do
-			if v.name == abilityName then 
-				g_effectsList.ground[ k ] = nil
+			-- Check if we have a buff up a mine, if we do also compare the names to make sure they are equivalent. This prevents removing Daedric Mines with Rearming Trap for example.
+			if v.abilityId == E.IsGroundMineAura[abilityId] and v.name == abilityName then
+				if v.stack == 0 then
+					g_effectsList.ground[ k ] = nil
+				else
+					-- Decrement stack counter
+					v.stack = v.stack - 1
+					-- Remove if all stacks are removed
+					if v.stack == 0 then 
+						g_effectsList.ground[ k ] = nil
+					end
+					-- For rearming trap, once the initial damage triggers - reset the duration of the aura for the 2nd trap to be 37.5 seconds.
+					if abilityName == A.Skill_Rearming_Trap and v.stack == 1 then
+						local currentTime = GetGameTimeMilliseconds()
+						local durationModifier
+						if (abilityId == 42741 or abilityId == 42746) then 
+							durationModifier = 37500
+						else
+							durationModifier = 43500
+						end
+						v.dur = durationModifier
+						v.starts = currentTime
+						v.ends = currentTime + durationModifier
+					end
+				end
 			end
 		end
     end
