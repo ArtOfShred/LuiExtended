@@ -7,9 +7,9 @@ local CI            = LUIE.CombatInfo
 local UI            = LUIE.UI
 local E             = LUIE.Effects
 local A             = LUIE.GetAbility()
-local strfmt		= string.format
-local strformat	    = zo_strformat
-local pairs 		= pairs
+local strfmt        = string.format
+local strformat     = zo_strformat
+local pairs         = pairs
 
 local moduleName    = LUIE.name .. "_CombatInfo"
 
@@ -30,7 +30,7 @@ CI.D = {
     
     ShowTriggered                    = true,
     ShowToggled                      = true,
-	ShowToggledUltimate				 = false,
+    ShowToggledUltimate              = false,
     BarShowLabel                     = true,
     BarLabelPosition                 = -20,
     BarFontFace                      = "Univers 67",
@@ -66,11 +66,11 @@ local g_lastCast = 0
 local g_pendingGroundAbility = nil
 local g_barFont
 local g_potionFont
-local g_barOverrideCI		 = {} -- Table for storing abilityId's from E.BarHighlightOverride that should show as an aura (Created on initialization)
-local g_barFakeAura			 = {} -- Table for storing abilityId's that only display a fakeaura (Created on initialization)
-local g_barDurationOverride	 = {} -- Table for storing abilitiyId's that ignore ending event (Created on initialization)
-local g_barNoRemove			 = {} -- Table of abilities we don't remove from bar highlight (Created on initialization)
-local g_potionUsed			 = false -- Toggled on when a potion is used to prevent OnSlotsFullUpdate from updating timers.
+local g_barOverrideCI        = {} -- Table for storing abilityId's from E.BarHighlightOverride that should show as an aura (Created on initialization)
+local g_barFakeAura          = {} -- Table for storing abilityId's that only display a fakeaura (Created on initialization)
+local g_barDurationOverride  = {} -- Table for storing abilitiyId's that ignore ending event (Created on initialization)
+local g_barNoRemove          = {} -- Table of abilities we don't remove from bar highlight (Created on initialization)
+local g_potionUsed           = false -- Toggled on when a potion is used to prevent OnSlotsFullUpdate from updating timers.
 
 -- Quickslot
 local uiQuickSlot   = {
@@ -178,8 +178,8 @@ function CI.Initialize( enabled )
             usable = true
         -- Fix to grey out potions
         elseif IsSlotItemConsumable(slotnum) and duration <= 1000 and not self.useFailure then
-			usable = true
-		end
+            usable = true
+        end
         if usable ~= self.usable or isGamepad ~= self.isGamepad then
             self.usable = usable
             self.isGamepad = isGamepad
@@ -285,8 +285,8 @@ end
 
 -- Helper function to get override ability duration.
 function CI.GetAbilityDuration(abilityId)
-	local duration = g_barDurationOverride[abilityId] or GetAbilityDuration(abilityId)
-	return duration
+    local duration = g_barDurationOverride[abilityId] or GetAbilityDuration(abilityId)
+    return duration
 end
 
 -- Clear and then (maybe) re-register event listeners for Combat/Power/Slot Updates
@@ -298,7 +298,7 @@ function CI.RegisterCombatInfo()
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE )
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE )
     EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED )
-	EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED)
+    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED)
     if CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled then
         EVENT_MANAGER:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent1", EVENT_COMBAT_EVENT, CI.OnCombatEvent )
         EVENT_MANAGER:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent2", EVENT_COMBAT_EVENT, CI.OnCombatEvent )
@@ -306,57 +306,57 @@ function CI.RegisterCombatInfo()
         EVENT_MANAGER:AddFilterForEvent(moduleName .. "_LUIE_CI_CombatEvent2", REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false)
         EVENT_MANAGER:RegisterForEvent(moduleName .. "_LUIE_CI_PowerUpdate", EVENT_POWER_UPDATE, CI.OnPowerUpdatePlayer)
         EVENT_MANAGER:AddFilterForEvent(moduleName .. "_LUIE_CI_PowerUpdate", EVENT_POWER_UPDATE, REGISTER_FILTER_UNIT_TAG, "player" )
-	end
-	if CI.SV.ShowTriggered or CI.SV.ShowToggled or CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled then
+    end
+    if CI.SV.ShowTriggered or CI.SV.ShowToggled or CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE, CI.OnSlotsFullUpdate)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED, CI.OnSlotUpdated)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_ABILITY_USED, CI.OnSlotAbilityUsed)
-	end
-	if CI.SV.ShowTriggered or CI.SV.ShowToggled then
+    end
+    if CI.SV.ShowTriggered or CI.SV.ShowToggled then
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED, CI.OnDeath)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, CI.OnEffectChanged)
-		EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED, CI.InventoryItemUsed)
-		
-		-- Grab any aura's from the list that have on EVENT_COMBAT_EVENT AURA support
-		for abilityId, value in pairs (E.BarHighlightOverride) do
-			if value.showFakeAura == true then
-				if value.newId then
-					g_barOverrideCI[value.newId] = true
-					if value.duration then
-						g_barDurationOverride[value.newId] = value.duration
-					end
-					if value.noRemove then
-						g_barNoRemove[value.newId] = true
-					end
-				else
-					g_barOverrideCI[abilityId] = true
-					if value.duration then
-						g_barDurationOverride[abilityId] = value.duration
-					end
-					if value.noRemove then
-						g_barNoRemove[abilityId] = true
-					end
-				end
-				g_barFakeAura[abilityId] = true
-			else
-				if value.noRemove then
-					if value.newId then
-						g_barNoRemove[value.newId] = true
-					else
-						g_barNoRemove[abilityId] = true
-					end
-				end
-			end
-		end
-		local counter = 0
-		for abilityId, _ in pairs (g_barOverrideCI) do
-			counter = counter + 1
-			local eventName = (moduleName .. "LUIE_CI_CombatEventBar" .. counter)
-			EVENT_MANAGER:RegisterForEvent(eventName, EVENT_COMBAT_EVENT, CI.OnCombatEventBar)
-			-- Register filter for specific abilityId's in table only, and filter for source = player, no errors
-			EVENT_MANAGER:AddFilterForEvent(eventName, EVENT_COMBAT_EVENT, REGISTER_FILTER_ABILITY_ID, abilityId, REGISTER_FILTER_IS_ERROR, false )
-		end
-	end
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED, CI.InventoryItemUsed)
+        
+        -- Grab any aura's from the list that have on EVENT_COMBAT_EVENT AURA support
+        for abilityId, value in pairs (E.BarHighlightOverride) do
+            if value.showFakeAura == true then
+                if value.newId then
+                    g_barOverrideCI[value.newId] = true
+                    if value.duration then
+                        g_barDurationOverride[value.newId] = value.duration
+                    end
+                    if value.noRemove then
+                        g_barNoRemove[value.newId] = true
+                    end
+                else
+                    g_barOverrideCI[abilityId] = true
+                    if value.duration then
+                        g_barDurationOverride[abilityId] = value.duration
+                    end
+                    if value.noRemove then
+                        g_barNoRemove[abilityId] = true
+                    end
+                end
+                g_barFakeAura[abilityId] = true
+            else
+                if value.noRemove then
+                    if value.newId then
+                        g_barNoRemove[value.newId] = true
+                    else
+                        g_barNoRemove[abilityId] = true
+                    end
+                end
+            end
+        end
+        local counter = 0
+        for abilityId, _ in pairs (g_barOverrideCI) do
+            counter = counter + 1
+            local eventName = (moduleName .. "LUIE_CI_CombatEventBar" .. counter)
+            EVENT_MANAGER:RegisterForEvent(eventName, EVENT_COMBAT_EVENT, CI.OnCombatEventBar)
+            -- Register filter for specific abilityId's in table only, and filter for source = player, no errors
+            EVENT_MANAGER:AddFilterForEvent(eventName, EVENT_COMBAT_EVENT, REGISTER_FILTER_ABILITY_ID, abilityId, REGISTER_FILTER_IS_ERROR, false )
+        end
+    end
 end
 
 -- Used to populate abilities icons after the user has logged on
@@ -400,7 +400,7 @@ function CI.OnUpdate(currentTime)
         if remain <= 0 then
             if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] then
                 g_uiCustomToggle[g_toggledSlots[k]]:SetHidden(true)
-				if g_toggledSlots[k] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then uiUltimate.LabelPct:SetHidden( false ) end
+                if g_toggledSlots[k] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then uiUltimate.LabelPct:SetHidden( false ) end
             end
             g_toggledSlotsRemain[k] = nil
         end
@@ -410,7 +410,7 @@ function CI.OnUpdate(currentTime)
             if CI.SV.BarShowLabel then
                 g_uiCustomToggle[g_toggledSlots[k]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
             end
-			if g_toggledSlots[k] == 8 and CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetHidden( true ) end
+            if g_toggledSlots[k] == 8 and CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetHidden( true ) end
         end
     end
 
@@ -528,11 +528,11 @@ end
 
 function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
 
-	-- If we're displaying a fake bar highlight then bail out here (sometimes we need a fake aura that doesn't end to simulate effects that can be overwritten, such as Major/Minor buffs. Technically we don't want to stop the
-	-- highlight of the original ability since we can only track one buff per slot and overwriting the buff with a longer duration buff shouldn't throw the player off by making the glow disappear earlier.
-	if g_barFakeAura[abilityId] then
-		return
-	end
+    -- If we're displaying a fake bar highlight then bail out here (sometimes we need a fake aura that doesn't end to simulate effects that can be overwritten, such as Major/Minor buffs. Technically we don't want to stop the
+    -- highlight of the original ability since we can only track one buff per slot and overwriting the buff with a longer duration buff shouldn't throw the player off by making the glow disappear earlier.
+    if g_barFakeAura[abilityId] then
+        return
+    end
 
     if castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
         if g_pendingGroundAbility and g_pendingGroundAbility.id == abilityId and changeType == EFFECT_RESULT_GAINED then
@@ -548,7 +548,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                         if CI.SV.BarShowLabel then
                             g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and groundDuration or groundDuration - 1 ))
                         end
-						if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetHidden( true ) end
+                        if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetHidden( true ) end
                     end
                 end    
             end 
@@ -558,9 +558,9 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
     end
     
     if changeType == EFFECT_RESULT_FADED then -- delete Effect
-	
-		-- Ignore fading event if override is true
-		if g_barNoRemove[abilityId] then return end
+    
+        -- Ignore fading event if override is true
+        if g_barNoRemove[abilityId] then return end
     
         if unitTag == "player" then
             -- Stop any proc animation associated with this effect
@@ -575,7 +575,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
             if g_toggledSlotsRemain[abilityId] then
                 if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
                     g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
-					if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then uiUltimate.LabelPct:SetHidden( false ) end
+                    if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then uiUltimate.LabelPct:SetHidden( false ) end
                 end
                 g_toggledSlotsRemain[abilityId] = nil
             end
@@ -599,11 +599,11 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
             if g_toggledSlots[abilityId] then
                 local currentTime = GetGameTimeMilliseconds()
                 if CI.SV.ShowToggled then
-					g_toggledSlotsRemain[abilityId] = ((endTime - beginTime) * 1000) + GetGameTimeMilliseconds()
+                    g_toggledSlotsRemain[abilityId] = ((endTime - beginTime) * 1000) + GetGameTimeMilliseconds()
                     CI.ShowCustomToggle(g_toggledSlots[abilityId])
-				    if CI.SV.BarShowLabel then
-						g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (CI.GetAbilityDuration(abilityId)/1000) or (CI.GetAbilityDuration(abilityId)/1000) - 1 ))
-					end
+                    if CI.SV.BarShowLabel then
+                        g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (CI.GetAbilityDuration(abilityId)/1000) or (CI.GetAbilityDuration(abilityId)/1000) - 1 ))
+                    end
                 end
             end 
         end
@@ -628,34 +628,34 @@ end
 
 function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
 
-	-- If the source/target isn't the player then bail out now.
-	if sourceType ~= COMBAT_UNIT_TYPE_PLAYER and targetType ~= COMBAT_UNIT_TYPE_PLAYER then return end
-	
-	if result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED then
-		local currentTime = GetGameTimeMilliseconds()
+    -- If the source/target isn't the player then bail out now.
+    if sourceType ~= COMBAT_UNIT_TYPE_PLAYER and targetType ~= COMBAT_UNIT_TYPE_PLAYER then return end
+    
+    if result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED then
+        local currentTime = GetGameTimeMilliseconds()
 
-		if g_toggledSlots[abilityId] then
-			if CI.SV.ShowToggled then
-				g_toggledSlotsRemain[abilityId] = CI.GetAbilityDuration(abilityId) + currentTime
-				CI.ShowCustomToggle(g_toggledSlots[abilityId])
-				if CI.SV.BarShowLabel then
-					g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (CI.GetAbilityDuration(abilityId)/1000) or (CI.GetAbilityDuration(abilityId)/1000) - 1 ))
-				end
-				if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetHidden( true ) end
-			end
-		end
-	elseif result == ACTION_RESULT_EFFECT_FADED then
-		-- Ignore fading event if override is true
-		if g_barNoRemove[abilityId] then return end
-	
-		if g_toggledSlotsRemain[abilityId] then 
-			if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
-				g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
-				if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then uiUltimate.LabelPct:SetHidden( false ) end
-			end
-			g_toggledSlotsRemain[abilityId] = nil
-		end
-	end
+        if g_toggledSlots[abilityId] then
+            if CI.SV.ShowToggled then
+                g_toggledSlotsRemain[abilityId] = CI.GetAbilityDuration(abilityId) + currentTime
+                CI.ShowCustomToggle(g_toggledSlots[abilityId])
+                if CI.SV.BarShowLabel then
+                    g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (CI.GetAbilityDuration(abilityId)/1000) or (CI.GetAbilityDuration(abilityId)/1000) - 1 ))
+                end
+                if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetHidden( true ) end
+            end
+        end
+    elseif result == ACTION_RESULT_EFFECT_FADED then
+        -- Ignore fading event if override is true
+        if g_barNoRemove[abilityId] then return end
+    
+        if g_toggledSlotsRemain[abilityId] then 
+            if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
+                g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
+                if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then uiUltimate.LabelPct:SetHidden( false ) end
+            end
+            g_toggledSlotsRemain[abilityId] = nil
+        end
+    end
 
 end
 
@@ -692,15 +692,15 @@ function CI.OnSlotUpdated(eventCode, slotNum)
     -- Handle slot update for action bars
     --d( strfmt("%d: %s(%d)", slotNum, GetSlotName(slotNum), GetSlotBoundId(slotNum) ) )
     -- Look only for action bar slots
-	if CI.SV.ShowToggledUltimate then
-		if slotNum < 3 or slotNum > 8 then
-			return
-		end
+    if CI.SV.ShowToggledUltimate then
+        if slotNum < 3 or slotNum > 8 then
+            return
+        end
     else
-		if slotNum < 3 or slotNum > 7 then
-			return
-		end
-	end
+        if slotNum < 3 or slotNum > 7 then
+            return
+        end
+    end
 
     -- Remove saved triggered proc information
     for abilityId, slot in pairs(g_triggeredSlots) do
@@ -734,8 +734,8 @@ function CI.OnSlotUpdated(eventCode, slotNum)
 
     -- Get the slotted ability ID
     local ability_id = GetSlotBoundId(slotNum)
-	local showFakeAura = (E.BarHighlightOverride[ability_id] and E.BarHighlightOverride[ability_id].showFakeAura)
-	if E.BarHighlightOverride[ability_id] and E.BarHighlightOverride[ability_id].newId then ability_id = E.BarHighlightOverride[ability_id].newId end
+    local showFakeAura = (E.BarHighlightOverride[ability_id] and E.BarHighlightOverride[ability_id].showFakeAura)
+    if E.BarHighlightOverride[ability_id] and E.BarHighlightOverride[ability_id].newId then ability_id = E.BarHighlightOverride[ability_id].newId end
     local abilityName = E.EffectOverride[ability_id] and E.EffectOverride[ability_id].name or GetAbilityName(ability_id) -- GetSlotName(slotNum)
     local duration = CI.GetAbilityDuration(ability_id)
 
@@ -745,7 +745,7 @@ function CI.OnSlotUpdated(eventCode, slotNum)
         ground  = ( GetAbilityTargetDescription(ability_id) == "Ground" ),
         duration = duration,
         slotNum=slotNum,
-		showFakeAura = showFakeAura
+        showFakeAura = showFakeAura
     }
 
     -- Check if currently this ability is in proc state
@@ -775,7 +775,7 @@ function CI.OnSlotUpdated(eventCode, slotNum)
                 if CI.SV.BarShowLabel then
                     g_uiCustomToggle[slotNum].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (CI.GetAbilityDuration(ability_id)/1000) or (CI.GetAbilityDuration(ability_id)/1000) - 1 ))
                 end
-				if slotNum == 8 and CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetHidden( true ) end
+                if slotNum == 8 and CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetHidden( true ) end
             end
         end
     end  
@@ -786,7 +786,7 @@ function CI.UpdateUltimateLabel(eventCode)
 
     -- Handle ultimate label first
     local setHiddenLabel = not ( CI.SV.UltimateLabelEnabled and IsSlotUsed( g_ultimateSlot ) )
-	local setHiddenPct = not ( CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) )
+    local setHiddenPct = not ( CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) )
     
     uiUltimate.LabelVal:SetHidden( setHiddenLabel )
     if setHiddenPct then
@@ -810,8 +810,8 @@ end
 
 function CI.InventoryItemUsed()
 
-	g_potionUsed = true
-	zo_callLater(function() g_potionUsed = false end, 200)
+    g_potionUsed = true
+    zo_callLater(function() g_potionUsed = false end, 200)
 
 end
 
@@ -825,9 +825,9 @@ function CI.OnSlotsFullUpdate(eventCode, isHotbarSwap)
         g_pendingGroundAbility = nil
     end
 
-	-- Don't update bars if this full update event was from using an inventory item
-	if g_potionUsed == true then return end
-	
+    -- Don't update bars if this full update event was from using an inventory item
+    if g_potionUsed == true then return end
+    
     -- Update action bar skills
     g_actionBar = {}
     for i = 3, 8 do
@@ -880,7 +880,7 @@ function CI.OnDeath(eventCode, unitTag, isDead)
         for slotNum = 3, 8 do
             if g_uiCustomToggle[slotNum] then
                 g_uiCustomToggle[slotNum]:SetHidden(true)
-				if slotNum == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then uiUltimate.LabelPct:SetHidden( false ) end
+                if slotNum == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then uiUltimate.LabelPct:SetHidden( false ) end
             end
         end
     end
@@ -938,21 +938,21 @@ function CI.OnPowerUpdatePlayer( eventCode , unitTag, powerIndex, powerType, pow
             if CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetText( pct .. "%") end
             if pct < 100  then
                 if CI.SV.UltimatePctEnabled then 
-					local setHidden = false
-					if (CI.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden() ) then setHidden = true end
-					uiUltimate.LabelPct:SetHidden(setHidden) 
-				end
-				if CI.SV.UltimateLabelEnabled then 
-					for i = #(uiUltimate.pctColours), 1, -1 do
-						if pct < uiUltimate.pctColours[i].pct then
-							uiUltimate.LabelVal:SetColor( unpack( uiUltimate.pctColours[i].colour ) )
-							break
-						end
-					end
-				end
+                    local setHidden = false
+                    if (CI.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden() ) then setHidden = true end
+                    uiUltimate.LabelPct:SetHidden(setHidden) 
+                end
+                if CI.SV.UltimateLabelEnabled then 
+                    for i = #(uiUltimate.pctColours), 1, -1 do
+                        if pct < uiUltimate.pctColours[i].pct then
+                            uiUltimate.LabelVal:SetColor( unpack( uiUltimate.pctColours[i].colour ) )
+                            break
+                        end
+                    end
+                end
             else
-				local setHidden = false
-				if (CI.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden() ) or CI.SV.UltimateHideFull then setHidden = true end
+                local setHidden = false
+                if (CI.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden() ) or CI.SV.UltimateHideFull then setHidden = true end
                 if CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetHidden( setHidden ) end
                 if CI.SV.UltimateLabelEnabled then uiUltimate.LabelVal:SetColor( unpack(uiUltimate.colour) ) end
             end

@@ -6,13 +6,13 @@ LUIE.CombatTextConstants = {
         [ACTION_RESULT_DAMAGE]              = true,
         [ACTION_RESULT_FALL_DAMAGE]         = true,
     },
-	isDamageCritical = {
-		[ACTION_RESULT_CRITICAL_DAMAGE]     = true,
-	},
+    isDamageCritical = {
+        [ACTION_RESULT_CRITICAL_DAMAGE]     = true,
+    },
     isHealing = {
         [ACTION_RESULT_HEAL]                = true,
     },
-	isHealingCritical = {
+    isHealingCritical = {
         [ACTION_RESULT_CRITICAL_HEAL]       = true,
     },
     isEnergize = {
@@ -24,13 +24,13 @@ LUIE.CombatTextConstants = {
     isDot = {
         [ACTION_RESULT_DOT_TICK]            = true,
     },
-	isDotCritical = {
+    isDotCritical = {
         [ACTION_RESULT_DOT_TICK_CRITICAL]   = true,
     },
     isHot = {
         [ACTION_RESULT_HOT_TICK]            = true,
     },
-	isHotCritical = {
+    isHotCritical = {
         [ACTION_RESULT_HOT_TICK_CRITICAL]   = true,
     },
     damageType = {

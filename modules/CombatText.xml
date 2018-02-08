@@ -70,8 +70,8 @@
             <Controls>
                 <Label name="$(parent)_Amount" />
                 <Texture name="$(parent)_Icon" hidden="true" />
-				<!--Backdrop for debugging purposes-->
-				<!--Backdrop name="$(parent)_Backdrop" inherits="ZO_DefaultBackdrop" alpha="0.3" hidden="false" /-->
+                <!--Backdrop for debugging purposes-->
+                <!--Backdrop name="$(parent)_Backdrop" inherits="ZO_DefaultBackdrop" alpha="0.3" hidden="false" /-->
             </Controls>
         </Control>
     </Controls>

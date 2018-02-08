@@ -5,8 +5,8 @@ LUIE.InfoPanel = {}
 -- Performance Enhancement
 local PNL           = LUIE.InfoPanel
 local UI            = LUIE.UI
-local strfmt		= string.format
-local pairs 		= pairs
+local strfmt        = string.format
+local pairs         = pairs
 
 local moduleName    = LUIE.name .. "_InfoPanel"
 
@@ -63,7 +63,7 @@ local uiArmour = {
     color = {
         [1] = { dura = 25, color = colors.RED,    iconcolour = colors.WHITE },
         [2] = { dura = 50, color = colors.YELLOW, iconcolour = colors.WHITE },
-        [3] = { 		   color = colors.GREEN,  iconcolour = colors.WHITE },
+        [3] = {            color = colors.GREEN,  iconcolour = colors.WHITE },
     },
 }
 
@@ -120,10 +120,10 @@ local function CreateUIControls()
     uiLatency.label = UI.Label( uiLatency.control, {LEFT,RIGHT,0,0,uiLatency.icon}, {56,20}, {0,1}, g_infoPanelFont, "11999 ms", false )
     --uiLatency.bg = UI.Backdrop( uiLatency.control, "fill", nil, nil, nil, false )
 
-	uiFps.label = UI.Label( uiTopRow, nil, {50,20}, {1,1}, g_infoPanelFont, "999 fps", false )
+    uiFps.label = UI.Label( uiTopRow, nil, {50,20}, {1,1}, g_infoPanelFont, "999 fps", false )
     uiFps.control = uiFps.label
     --uiFps.bg = UI.Backdrop( uiFps.control, "fill", nil, nil, nil, false )
-	
+    
     uiClock.label = UI.Label( uiTopRow, nil, {60,20}, {1,1}, g_infoPanelFont, "88:88:88", false )
     uiClock.control = uiClock.label
     --uiClock.bg = UI.Backdrop( uiClock.control, "fill", nil, nil, nil, false )
@@ -205,8 +205,8 @@ function PNL.RearrangePanel()
         size = size + uiFps.control:GetWidth()
         anchor = uiFps.control
     end
-	
-	-- Time
+    
+    -- Time
     if PNL.SV.HideClock then
         uiClock.control:SetHidden(true)
     else

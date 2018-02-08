@@ -157,7 +157,7 @@ CT.D = {
     --Colors
         criticalDamageOverride      = false,
         criticalHealingOverride     = false,
-		incomingDamageOverride		= false,
+        incomingDamageOverride      = false,
     },
 ---------------------------------------------------------------------------------------------------------------------------------------
     --//OTHER DEFAULTS//--
@@ -176,13 +176,13 @@ CT.D = {
     fontSizes = {
     --Combat
         damage                      = 32,
-		damagecritical 				= 32,
+        damagecritical              = 32,
         healing                     = 32,
-		healingcritical				= 32,
+        healingcritical             = 32,
         dot                         = 26,
-		dotcritical 				= 26,
-        hot	              		    = 26,
-		hotcritical				    = 26,
+        dotcritical                 = 26,
+        hot                         = 26,
+        hotcritical                 = 26,
         gainLoss                    = 32,
         mitigation                  = 32,
         crowdControl                = 26,
@@ -220,7 +220,7 @@ CT.D = {
         drainStamina                = { 192/255, 1, 0, 1 },
         criticalDamageOverride      = { 247/255, 244/255, 153/255, 1 },
         criticalHealingOverride     = { 0, 192/255, 0, 1 },
-		incomingDamageOverride		= { 1, 0, 0, 1 },
+        incomingDamageOverride      = { 1, 0, 0, 1 },
     ----------------------------------
     --Mitigation
         miss                        = { 1, 1, 1, 1 },
@@ -270,16 +270,16 @@ CT.D = {
     formats = {
     --Damage & Healing
         damage                      = "%t %a",
-		damagecritical				= "%t %a!",
+        damagecritical              = "%t %a!",
         healing                     = "%t %a",
-		healingcritical             = "%t %a!",
+        healingcritical             = "%t %a!",
         energize                    = "+%a %t",
         ultimateEnergize            = "+%a %t",
         drain                       = "-%a %t",
         dot                         = "%t %a",
-		dotcritical					= "%t %a!",
+        dotcritical                 = "%t %a!",
         hot                         = "%t %a",
-		hotcritical                 = "%t %a!",
+        hotcritical                 = "%t %a!",
     ----------------------------------
     --Mitigation
         miss                        = GetString(SI_LUIE_CT_MISS_DEFAULT),

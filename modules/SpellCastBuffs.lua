@@ -9,9 +9,9 @@ local UI            = LUIE.UI
 local E             = LUIE.Effects
 local A             = LUIE.GetAbility()
 local printToChat   = LUIE.PrintToChat
-local strfmt		= string.format
-local strformat	    = zo_strformat
-local pairs 		= pairs
+local strfmt        = string.format
+local strformat     = zo_strformat
+local pairs         = pairs
 
 local moduleName    = LUIE.name .. "_SpellCastBuffs"
 
@@ -75,10 +75,10 @@ SCB.D = {
     IgnoreSoulSummonsTarget          = false,
     IgnoreSetICDPlayer               = false,
     IgnoreSetICDTarget               = false,
-	IgnoreFoodPlayer				 = false,
-	IgnoreFoodTarget				 = false,
-	IgnoreExperiencePlayer			 = false,
-	IgnoreExperienceTarget			 = false,
+    IgnoreFoodPlayer                 = false,
+    IgnoreFoodTarget                 = false,
+    IgnoreExperiencePlayer           = false,
+    IgnoreExperienceTarget           = false,
     IgnoreDisguise                   = false,
     IgnoreCostume                    = true,
     IgnoreHat                        = true,
@@ -284,12 +284,12 @@ local Effects = {
     -----------------------------------
 
     -- Fighter Guild
-    --[A.Skill_Trap_Beast]          		= { false, false, 60, 1.5 },
-    --[A.Skill_Rearming_Trap]         	= { false, false, 60, 1.5 },
-    --[A.Skill_Lightweight_Beast_Trap]	= { false, false, 60, 1.5 },
-    --[A.Skill_Circle_of_Protection]  	= { true, false, false, nil },
-    --[A.Skill_Turn_Undead]           	= { true, false, false, nil },
-    --[A.Skill_Ring_of_Preservation]  	= { true, false, false, nil },
+    --[A.Skill_Trap_Beast]                  = { false, false, 60, 1.5 },
+    --[A.Skill_Rearming_Trap]           = { false, false, 60, 1.5 },
+    --[A.Skill_Lightweight_Beast_Trap]  = { false, false, 60, 1.5 },
+    --[A.Skill_Circle_of_Protection]    = { true, false, false, nil },
+    --[A.Skill_Turn_Undead]             = { true, false, false, nil },
+    --[A.Skill_Ring_of_Preservation]    = { true, false, false, nil },
 
     -- Mages Guild
     [A.Skill_Meteor]                = { false, false, 11.8, 0 },
@@ -372,12 +372,12 @@ function SCB.Initialize( enabled )
         local fragment1 = ZO_HUDFadeSceneFragment:New(uiTlw.playerb, 0, 0)
         local fragment2 = ZO_HUDFadeSceneFragment:New(uiTlw.playerd, 0, 0)
 
-		SCENE_MANAGER:GetScene("hud"):AddFragment( fragment1 )
-		SCENE_MANAGER:GetScene("hud"):AddFragment( fragment2 )
-		SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment1 )
-		SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment2 )
-		SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment1 )
-		SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment2 )
+        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment1 )
+        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment2 )
+        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment1 )
+        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment2 )
+        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment1 )
+        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment2 )
         
     end
 
@@ -405,12 +405,12 @@ function SCB.Initialize( enabled )
         local fragment1 = ZO_HUDFadeSceneFragment:New(uiTlw.targetb, 0, 0)
         local fragment2 = ZO_HUDFadeSceneFragment:New(uiTlw.targetd, 0, 0)
 
-		SCENE_MANAGER:GetScene("hud"):AddFragment( fragment1 )
-		SCENE_MANAGER:GetScene("hud"):AddFragment( fragment2 )
-		SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment1 )
-		SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment2 )
-		SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment1 )
-		SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment2 )
+        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment1 )
+        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment2 )
+        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment1 )
+        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment2 )
+        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment1 )
+        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment2 )
     end
 
     -- Separate container for players long buffs
@@ -437,9 +437,9 @@ function SCB.Initialize( enabled )
         
         local fragment = ZO_HUDFadeSceneFragment:New(uiTlw.player_long, 0, 0)
 
-		SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
-		SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
-		SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
+        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
+        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
     else
         containerRouting.player_long = containerRouting.player1
     end
@@ -487,7 +487,7 @@ function SCB.Initialize( enabled )
     EVENT_MANAGER:RegisterForEvent("LUIE_Event2", EVENT_COMBAT_EVENT, SCB.OnCombatEventOut )
     EVENT_MANAGER:RegisterForEvent("LUIE_Event3", EVENT_COMBAT_EVENT, SCB.OnCombatEventOut )
     EVENT_MANAGER:AddFilterForEvent("LUIE_Event1", EVENT_COMBAT_EVENT, REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false) -- Target -> Player
-	EVENT_MANAGER:AddFilterForEvent("LUIE_Event2", EVENT_COMBAT_EVENT, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false) -- Player -> Target
+    EVENT_MANAGER:AddFilterForEvent("LUIE_Event2", EVENT_COMBAT_EVENT, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false) -- Player -> Target
     EVENT_MANAGER:AddFilterForEvent("LUIE_Event3", EVENT_COMBAT_EVENT, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER_PET, REGISTER_FILTER_IS_ERROR, false) -- Player Pet -> Target
     --EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_COMBAT_EVENT, SCB.OnCombatEvent )
     --EVENT_MANAGER:AddFilterForEvent(moduleName, EVENT_COMBAT_EVENT, REGISTER_FILTER_IS_ERROR, false )
@@ -525,7 +525,7 @@ function SCB.Initialize( enabled )
     -- Duel (For resolving Target battle spirit status)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, SCB.DuelStart)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_FINISHED, SCB.DuelEnd)
-	
+    
 end
 
 function SCB.DuelStart()
@@ -977,10 +977,10 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
     buff.label:SetAnchor(TOPLEFT, buff, LEFT, -g_padding, -SCB.SV.LabelPosition)
     buff.label:SetAnchor(BOTTOMRIGHT, buff, BOTTOMRIGHT, g_padding, -2)
     buff.label:SetHidden( not SCB.SV.RemainingText )
-	buff.stack:SetAnchor(CENTER, buff, BOTTOMLEFT, 0, 0)
-	buff.stack:SetAnchor(CENTER, buff, TOPRIGHT, -g_padding * 3, g_padding * 3)
-	buff.stack:SetHidden( true )
-	
+    buff.stack:SetAnchor(CENTER, buff, BOTTOMLEFT, 0, 0)
+    buff.stack:SetAnchor(CENTER, buff, TOPRIGHT, -g_padding * 3, g_padding * 3)
+    buff.stack:SetHidden( true )
+    
     if buff.cd ~= nil then
         buff.cd:SetHidden(     not SCB.SV.RemainingCooldown )
         buff.iconbg:SetHidden( not SCB.SV.RemainingCooldown ) -- We do not need black icon background when there is no Cooldown control present
@@ -1049,10 +1049,10 @@ function SCB.CreateSingleIcon(container, AnchorItem)
     buff.label = UI.Label( buff, nil, nil, nil, g_buffsFont, nil, false )
     buff.label:SetAnchor(TOPLEFT, buff, LEFT, -g_padding, -SCB.SV.LabelPosition)
     buff.label:SetAnchor(BOTTOMRIGHT, buff, BOTTOMRIGHT, g_padding, -2)
-	-- Stack label
-	buff.stack = UI.Label( buff, nil, nil, nil, g_buffsFont, nil, false )
-	buff.stack:SetAnchor(CENTER, buff, BOTTOMLEFT, 0, 0)
-	buff.stack:SetAnchor(CENTER, buff, TOPRIGHT, -g_padding * 3, g_padding * 3)
+    -- Stack label
+    buff.stack = UI.Label( buff, nil, nil, nil, g_buffsFont, nil, false )
+    buff.stack:SetAnchor(CENTER, buff, BOTTOMLEFT, 0, 0)
+    buff.stack:SetAnchor(CENTER, buff, TOPRIGHT, -g_padding * 3, g_padding * 3)
     -- Cooldown circular control
     if buff.iconbg ~= nil then
         buff.cd = WINDOW_MANAGER:CreateControl(nil, buff, CT_COOLDOWN)
@@ -1090,7 +1090,7 @@ function SCB.SetSingleIconBuffType(buff, buffType, unbreakable)
 
     buff.frame:SetTexture("/esoui/art/actionbar/" .. contextType .. "_frame.dds")
     buff.label:SetColor( unpack( SCB.SV.RemainingTextColoured and colour or {1,1,1,1} ) )
-	buff.stack:SetColor( unpack( SCB.SV.RemainingTextColoured and colour or {1,1,1,1} ) )
+    buff.stack:SetColor( unpack( SCB.SV.RemainingTextColoured and colour or {1,1,1,1} ) )
     if buff.cd ~= nil then
         buff.cd:SetFillColor( unpack(colour) )
     end
@@ -1169,7 +1169,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                 groundType[3] = { info = E.EffectGroundDisplay[abilityId].ground, context = "ground", type = BUFF_EFFECT_TYPE_DEBUFF }
                 iconName = E.EffectGroundDisplay[abilityId].icon or iconName
                 effectName = E.EffectGroundDisplay[abilityId].name or effectName
-				stackCount = E.EffectGroundDisplay[abilityId].stack or stackCount
+                stackCount = E.EffectGroundDisplay[abilityId].stack or stackCount
                 
                 for i = 1, 3 do
                     if groundType[i].info == true then
@@ -1180,7 +1180,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                             forced=nil,
                             restart=true, iconNum=0,
                             unbreakable=0,
-							stack = stackCount }
+                            stack = stackCount }
                     end
                 end
             end
@@ -1216,15 +1216,15 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         iconName = E.EffectOverride[abilityId].icon or E.AbilityIcon[effectName or ""] or iconName
         effectName = E.EffectOverride[abilityId].name or effectName
         unbreakable = E.EffectOverride[abilityId].unbreakable or 0
-		-- Destroy other effects of the same type if we don't want to show duplicates at all.
-		if E.EffectOverride[abilityId].noDuplicate then
-			for k, v in pairs(g_effectsList.player1) do
-				-- Only remove the lower duration effects that were cast previously.
-				if v.id == abilityId and v.ends < (1000*endTime) then 
-					g_effectsList.player1[ k ] = nil
-				end
-			end
-		end
+        -- Destroy other effects of the same type if we don't want to show duplicates at all.
+        if E.EffectOverride[abilityId].noDuplicate then
+            for k, v in pairs(g_effectsList.player1) do
+                -- Only remove the lower duration effects that were cast previously.
+                if v.id == abilityId and v.ends < (1000*endTime) then 
+                    g_effectsList.player1[ k ] = nil
+                end
+            end
+        end
     end
     
     if E.EffectOverrideByName[abilityId] then
@@ -1264,8 +1264,8 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     end
         
     local forcedType = E.EffectOverride[abilityId] and E.EffectOverride[abilityId].forcedContainer or nil
-	
-	if unitTag == "reticleover" and abilityId == 92428 and not IsUnitPlayer('reticleover') then return end 
+    
+    if unitTag == "reticleover" and abilityId == 92428 and not IsUnitPlayer('reticleover') then return end 
 
     -- Where the new icon will go into
     local context = unitTag .. effectType
@@ -1280,9 +1280,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         --[[if E.FakeDuplicate[ abilityId ] then
             g_effectsList[context][ E.FakeDuplicate[abilityId].name ] = nil
         end]]--
-		if E.EffectCreateSkillAura[ abilityId ] and E.EffectCreateSkillAura [ abilityId ].removeOnEnd then
-			g_effectsList[context][ E.EffectCreateSkillAura[abilityId].name ] = nil
-		end
+        if E.EffectCreateSkillAura[ abilityId ] and E.EffectCreateSkillAura [ abilityId ].removeOnEnd then
+            g_effectsList[context][ E.EffectCreateSkillAura[abilityId].name ] = nil
+        end
         
     -- Create Effect
     else
@@ -1304,10 +1304,10 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                     dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
                     forced=forcedType,
                     restart=true, iconNum=0,
-					stack = stackCount,
+                    stack = stackCount,
                     unbreakable=unbreakable }
            
-		--EffectCreateSkillAura
+        --EffectCreateSkillAura
         if E.EffectCreateSkillAura[ abilityId ] then
                 g_effectsList[context][ E.EffectCreateSkillAura[abilityId].name ] = {
                     target=unitTag, type=effectType,
@@ -1315,7 +1315,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                     dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
                     forced=forcedType,
                     restart=true, iconNum=0,
-					stack = stackCount,
+                    stack = stackCount,
                     unbreakable=unbreakable }
         end
     end
@@ -1345,12 +1345,12 @@ end
 -- List of all damage results for analysis in following function
  -- This also includes SHIELDED result that is not included in CI module
 local IsResultDamage = {
-    [ACTION_RESULT_DAMAGE]          	= true,
-    [ACTION_RESULT_BLOCKED_DAMAGE]  	= true,
-    [ACTION_RESULT_DAMAGE_SHIELDED] 	= true,
-    [ACTION_RESULT_CRITICAL_DAMAGE] 	= true,
-    [ACTION_RESULT_DOT_TICK]        	= true,
-    [ACTION_RESULT_DOT_TICK_CRITICAL]	= true,
+    [ACTION_RESULT_DAMAGE]              = true,
+    [ACTION_RESULT_BLOCKED_DAMAGE]      = true,
+    [ACTION_RESULT_DAMAGE_SHIELDED]     = true,
+    [ACTION_RESULT_CRITICAL_DAMAGE]     = true,
+    [ACTION_RESULT_DOT_TICK]            = true,
+    [ACTION_RESULT_DOT_TICK_CRITICAL]   = true,
 }
 
 --[[
@@ -1363,27 +1363,27 @@ local IsResultDamage = {
  -- Combat Event (Target = Player)
 function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
  
-	if not (E.FakeExternalBuffs[abilityId] or E.FakeExternalDebuffs[abilityId] or E.FakePlayerBuffs[abilityId] or E.FakeStagger[abilityId]) then return end
-	
-	-- If the action result isn't a starting/ending event then we ignore it.
-	if result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_GAINED and result ~= ACTION_RESULT_EFFECT_GAINED_DURATION and result ~= ACTION_RESULT_EFFECT_FADED then return end
+    if not (E.FakeExternalBuffs[abilityId] or E.FakeExternalDebuffs[abilityId] or E.FakePlayerBuffs[abilityId] or E.FakeStagger[abilityId]) then return end
+    
+    -- If the action result isn't a starting/ending event then we ignore it.
+    if result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_GAINED and result ~= ACTION_RESULT_EFFECT_GAINED_DURATION and result ~= ACTION_RESULT_EFFECT_FADED then return end
  
-	local unbreakable
-	local stack
-	local iconName
-	local effectName
-	local duration
-	local effectType
-	
+    local unbreakable
+    local stack
+    local iconName
+    local effectName
+    local duration
+    local effectType
+    
     if E.EffectOverride[abilityId] then
         unbreakable = E.EffectOverride[abilityId].unbreakable or 0
-		stack = E.EffectOverride[abilityId].stack or 0
-	else
-		unbreakable = 0
-		stack = 0
+        stack = E.EffectOverride[abilityId].stack or 0
+    else
+        unbreakable = 0
+        stack = 0
     end
-	
-	-- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by target)
+    
+    -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by target)
     if E.FakeExternalBuffs[abilityId] and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
         g_effectsList.player1[ abilityId ] = nil
         iconName = E.FakeExternalBuffs[abilityId].icon
@@ -1403,8 +1403,8 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
             unbreakable=unbreakable }
         end
     end
-	
-	-- Creates fake debuff icons for debuffs without an aura - These refresh on reapplication/removal (Applied on player by target)
+    
+    -- Creates fake debuff icons for debuffs without an aura - These refresh on reapplication/removal (Applied on player by target)
     if E.FakeExternalDebuffs[abilityId] and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
         g_effectsList.player2[ abilityId ] = nil
         iconName = E.FakeExternalDebuffs[abilityId].icon
@@ -1424,8 +1424,8 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
             unbreakable=unbreakable }
         end
     end
-	
-	-- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by player)
+    
+    -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by player)
     if E.FakePlayerBuffs[abilityId] and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
         g_effectsList.player1[ abilityId ] = nil
         if abilityId == 973 and not SCB.SV.ShowSprint then
@@ -1462,8 +1462,8 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
             end
         end
     end
-	
-	    -- Simulates fake debuff icons for stagger effects - works for both (target -> player) and (player -> target) - DOES NOT REFRESH - Only expiration condition is the timer
+    
+        -- Simulates fake debuff icons for stagger effects - works for both (target -> player) and (player -> target) - DOES NOT REFRESH - Only expiration condition is the timer
     if E.FakeStagger[abilityId] then
         iconName = E.FakeStagger[abilityId].icon
         effectName = E.FakeStagger[abilityId].name
@@ -1483,60 +1483,60 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
             unbreakable=unbreakable }
         end
     end
-	
+    
 end
 
  -- Combat Event (Source = Player)
 function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
-	if targetType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER_PET then return end
-	
-	if not (E.IsGroundMine[abilityName] or E.FakePlayerExternalBuffs[abilityId] or E.FakePlayerDebuffs[abilityId] or E.FakeStagger[abilityId]) then return end
-	
-	-- Try to remove effect like Ground Runes and Traps (we check this before we filter for other result types)
+    if targetType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER_PET then return end
+    
+    if not (E.IsGroundMine[abilityName] or E.FakePlayerExternalBuffs[abilityId] or E.FakePlayerDebuffs[abilityId] or E.FakeStagger[abilityId]) then return end
+    
+    -- Try to remove effect like Ground Runes and Traps (we check this before we filter for other result types)
     if E.IsGroundMineDamage[abilityId] and IsResultDamage[result] and ( targetType == COMBAT_UNIT_TYPE_NONE or targetType == COMBAT_UNIT_TYPE_OTHER) then
-		for k, v in pairs(g_effectsList.ground) do
-			-- Check if we have a buff up a mine, if we do also compare the names to make sure they are equivalent. This prevents removing Daedric Mines with Rearming Trap for example.
-			if v.abilityId == E.IsGroundMineAura[abilityId] and v.name == abilityName then
-				if v.stack == 0 then
-					g_effectsList.ground[ k ] = nil
-				else
-					-- Decrement stack counter
-					v.stack = v.stack - 1
-					-- Remove if all stacks are removed
-					if v.stack == 0 then 
-						g_effectsList.ground[ k ] = nil
-					end
-					-- For rearming trap, once the initial damage triggers - reset the duration of the aura for the 2nd trap to be 37.5 seconds.
-					if abilityName == A.Skill_Rearming_Trap and v.stack == 1 then
-						local currentTime = GetGameTimeMilliseconds()
-						v.dur = 37500
-						v.starts = currentTime
-						v.ends = currentTime + 37500
-					end
-				end
-			end
-		end
+        for k, v in pairs(g_effectsList.ground) do
+            -- Check if we have a buff up a mine, if we do also compare the names to make sure they are equivalent. This prevents removing Daedric Mines with Rearming Trap for example.
+            if v.abilityId == E.IsGroundMineAura[abilityId] and v.name == abilityName then
+                if v.stack == 0 then
+                    g_effectsList.ground[ k ] = nil
+                else
+                    -- Decrement stack counter
+                    v.stack = v.stack - 1
+                    -- Remove if all stacks are removed
+                    if v.stack == 0 then 
+                        g_effectsList.ground[ k ] = nil
+                    end
+                    -- For rearming trap, once the initial damage triggers - reset the duration of the aura for the 2nd trap to be 37.5 seconds.
+                    if abilityName == A.Skill_Rearming_Trap and v.stack == 1 then
+                        local currentTime = GetGameTimeMilliseconds()
+                        v.dur = 37500
+                        v.starts = currentTime
+                        v.ends = currentTime + 37500
+                    end
+                end
+            end
+        end
     end
-	
-	-- If the action result isn't a starting/ending event then we ignore it.
-	if result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_GAINED and result ~= ACTION_RESULT_EFFECT_GAINED_DURATION and result ~= ACTION_RESULT_EFFECT_FADED then return end
-	
+    
+    -- If the action result isn't a starting/ending event then we ignore it.
+    if result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_GAINED and result ~= ACTION_RESULT_EFFECT_GAINED_DURATION and result ~= ACTION_RESULT_EFFECT_FADED then return end
+    
     local unbreakable
-	local stack
-	local iconName
-	local effectName
-	local duration
-	local effectType
-	
+    local stack
+    local iconName
+    local effectName
+    local duration
+    local effectType
+    
     if E.EffectOverride[abilityId] then
         unbreakable = E.EffectOverride[abilityId].unbreakable or 0
-		stack = E.EffectOverride[abilityId].stack or 0
-	else
-		unbreakable = 0
-		stack = 0
+        stack = E.EffectOverride[abilityId].stack or 0
+    else
+        unbreakable = 0
+        stack = 0
     end
-	
-	-- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on target by player)
+    
+    -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on target by player)
     if E.FakePlayerExternalBuffs[abilityId] and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
         g_effectsList.reticleover1[ abilityId ] = nil
         if not DoesUnitExist("reticleover") then return end
@@ -1556,17 +1556,17 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
             if SCB.SV.HideTargetBuffs then
                 return
             end
-			g_effectsList.reticleover1[ abilityId ] = {
-			type=effectType,
-			id=abilityId, name=effectName, icon=iconName,
-			dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-			forced = "short",
-			restart=true, iconNum=0,
-			unbreakable=unbreakable }
+            g_effectsList.reticleover1[ abilityId ] = {
+            type=effectType,
+            id=abilityId, name=effectName, icon=iconName,
+            dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+            forced = "short",
+            restart=true, iconNum=0,
+            unbreakable=unbreakable }
         end
     end
-	
-	-- Creates fake debuff icons for debuffs without an aura - These refresh on reapplication/removal (Applied on target by player)
+    
+    -- Creates fake debuff icons for debuffs without an aura - These refresh on reapplication/removal (Applied on target by player)
     if E.FakePlayerDebuffs[abilityId] and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
         g_effectsList.reticleover2[ abilityId ] = nil
         if not DoesUnitExist("reticleover") then end
@@ -1586,29 +1586,29 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
             if SCB.SV.HideTargetDebuffs then
                 return
             end
-			if unitName == target then
-				g_effectsList.ground[ abilityId ] = {
-				type=effectType,
-				id=abilityId, name=effectName, icon=iconName,
-				dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-				forced = "short",
-				restart=true, iconNum=0,
-				unbreakable=unbreakable,
-				savedName = strformat(SI_UNIT_NAME, targetName) }
-			else
-				g_effectsList.saved[ abilityId ] = {
-				type=effectType,
-				id=abilityId, name=effectName, icon=iconName,
-				dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-				forced = "short",
-				restart=true, iconNum=0,
-				unbreakable=unbreakable,
-				savedName = strformat(SI_UNIT_NAME, targetName) }
-			end
+            if unitName == target then
+                g_effectsList.ground[ abilityId ] = {
+                type=effectType,
+                id=abilityId, name=effectName, icon=iconName,
+                dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+                forced = "short",
+                restart=true, iconNum=0,
+                unbreakable=unbreakable,
+                savedName = strformat(SI_UNIT_NAME, targetName) }
+            else
+                g_effectsList.saved[ abilityId ] = {
+                type=effectType,
+                id=abilityId, name=effectName, icon=iconName,
+                dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+                forced = "short",
+                restart=true, iconNum=0,
+                unbreakable=unbreakable,
+                savedName = strformat(SI_UNIT_NAME, targetName) }
+            end
         end
     end
-	
-	-- Simulates fake debuff icons for stagger effects - works for both (target -> player) and (player -> target) - DOES NOT REFRESH - Only expiration condition is the timer
+    
+    -- Simulates fake debuff icons for stagger effects - works for both (target -> player) and (player -> target) - DOES NOT REFRESH - Only expiration condition is the timer
     if E.FakeStagger[abilityId] then
         iconName = E.FakeStagger[abilityId].icon
         effectName = E.FakeStagger[abilityId].name
@@ -1622,28 +1622,28 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
             if SCB.SV.HideTargetDebuffs then
                 return
             end
-			if unitName == target then
-				g_effectsList.ground[ abilityId ] = {
-				type=BUFF_EFFECT_TYPE_DEBUFF,
-				id=abilityId, name=effectName, icon=iconName,
-				dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-				forced = "short",
-				restart=true, iconNum=0,
-				unbreakable=unbreakable,
-				savedName = strformat(SI_UNIT_NAME, targetName) }
-			else
-				g_effectsList.saved[ abilityId ] = {
-				type=BUFF_EFFECT_TYPE_DEBUFF,
-				id=abilityId, name=effectName, icon=iconName,
-				dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-				forced = "short",
-				restart=true, iconNum=0,
-				unbreakable=unbreakable,
-				savedName = strformat(SI_UNIT_NAME, targetName) }
-			end
+            if unitName == target then
+                g_effectsList.ground[ abilityId ] = {
+                type=BUFF_EFFECT_TYPE_DEBUFF,
+                id=abilityId, name=effectName, icon=iconName,
+                dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+                forced = "short",
+                restart=true, iconNum=0,
+                unbreakable=unbreakable,
+                savedName = strformat(SI_UNIT_NAME, targetName) }
+            else
+                g_effectsList.saved[ abilityId ] = {
+                type=BUFF_EFFECT_TYPE_DEBUFF,
+                id=abilityId, name=effectName, icon=iconName,
+                dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+                forced = "short",
+                restart=true, iconNum=0,
+                unbreakable=unbreakable,
+                savedName = strformat(SI_UNIT_NAME, targetName) }
+            end
         end
     end
-	
+    
 end
 
 -- Runs on the EVENT_UNIT_DEATH_STATE_CHANGED listener.
@@ -1752,29 +1752,29 @@ function SCB.ReloadEffects(unitTag)
     end
 
     if unitTag == "reticleover" then
-	
-		for _, effectsList in pairs( {g_effectsList.ground, g_effectsList.saved} ) do
-			--local container = containerRouting[context]
+    
+        for _, effectsList in pairs( {g_effectsList.ground, g_effectsList.saved} ) do
+            --local container = containerRouting[context]
 
-			for k, v in pairs(effectsList) do
-			
-				if v.savedName ~= nil then
-					local UnitName = strformat(SI_UNIT_NAME, GetUnitName(unitTag))
-					if UnitName == v.savedName then
-						if g_effectsList.saved[k] then
-							g_effectsList.ground[k] = g_effectsList.saved[k]
-							g_effectsList.ground[k].iconNum = 0
-							g_effectsList.saved[k] = nil
-						end
-					else
-						if g_effectsList.ground[k] then 
-							g_effectsList.saved[k] = g_effectsList.ground[k]
-							g_effectsList.ground[k] = nil
-						end
-					end
-				end
-			end
-		end
+            for k, v in pairs(effectsList) do
+            
+                if v.savedName ~= nil then
+                    local UnitName = strformat(SI_UNIT_NAME, GetUnitName(unitTag))
+                    if UnitName == v.savedName then
+                        if g_effectsList.saved[k] then
+                            g_effectsList.ground[k] = g_effectsList.saved[k]
+                            g_effectsList.ground[k].iconNum = 0
+                            g_effectsList.saved[k] = nil
+                        end
+                    else
+                        if g_effectsList.ground[k] then 
+                            g_effectsList.saved[k] = g_effectsList.ground[k]
+                            g_effectsList.ground[k] = nil
+                        end
+                    end
+                end
+            end
+        end
     
         if not SCB.SV.IgnoreBattleSpiritTarget then
             if ( ( IsInAvAZone() or IsActiveWorldBattleground() ) and IsUnitPlayer("reticleover") ) or GetUnitName(unitTag) == g_currentDuelTarget then
@@ -2164,13 +2164,13 @@ function SCB.updateIcons( currentTime, sortedList, container )
                 -- buff.label:SetText( E.IsToggle[effect.name] and "T" or E.IsVampStage(effect) and (E.IsVampStage(effect)) or nil ) -- Deprecated
             end
         end
-		
-		if effect.stack and effect.stack > 0 then
-			buff.stack:SetText( strfmt("%s", effect.stack) )
-			buff.stack:SetHidden(false)
-		else
-			buff.stack:SetHidden(true)
-		end
+        
+        if effect.stack and effect.stack > 0 then
+            buff.stack:SetText( strfmt("%s", effect.stack) )
+            buff.stack:SetHidden(false)
+        else
+            buff.stack:SetHidden(true)
+        end
 
         -- For update remaining text. For temporary effects this is not very efficient, but we have not much such effects
         if remain then
@@ -2324,7 +2324,7 @@ function SCB.OnPlayerActivated(eventCode)
 
     if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0
     or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 then
-		zo_callLater(function() SCB.CollectibleBuff( eventCode, 0, true) end, 50)
+        zo_callLater(function() SCB.CollectibleBuff( eventCode, 0, true) end, 50)
     end
 
     SCB.ReloadEffects( "player" )
@@ -2551,28 +2551,28 @@ function SCB.UpdateContextHideList()
             hideTargetEffects[k] = v
         end
     end
-	
-	if SCB.SV.IgnoreFoodPlayer then
-		for k, v in pairs(E.IsFoodBuff) do
-			hidePlayerEffects[k] = v
-		end
-	end
-	if SCB.SV.IgnoreFoodTarget then
-		for k, v in pairs(E.IsFoodBuff) do
-			hideTargetEffects[k] = v
-		end
-	end
-	
-	if SCB.SV.IgnoreExperiencePlayer then
-		for k, v in pairs(E.IsExperienceBuff) do
-			hidePlayerEffects[k] = v
-		end
-	end
-	if SCB.SV.IgnoreExperienceTarget then
-		for k, v in pairs(E.IsExperienceBuff) do
-			hideTargetEffects[k] = v
-		end
-	end
+    
+    if SCB.SV.IgnoreFoodPlayer then
+        for k, v in pairs(E.IsFoodBuff) do
+            hidePlayerEffects[k] = v
+        end
+    end
+    if SCB.SV.IgnoreFoodTarget then
+        for k, v in pairs(E.IsFoodBuff) do
+            hideTargetEffects[k] = v
+        end
+    end
+    
+    if SCB.SV.IgnoreExperiencePlayer then
+        for k, v in pairs(E.IsExperienceBuff) do
+            hidePlayerEffects[k] = v
+        end
+    end
+    if SCB.SV.IgnoreExperienceTarget then
+        for k, v in pairs(E.IsExperienceBuff) do
+            hideTargetEffects[k] = v
+        end
+    end
 
     -- TODO:
     -- Add block here

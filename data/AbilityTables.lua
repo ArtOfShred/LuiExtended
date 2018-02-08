@@ -6,352 +6,354 @@ local A = {}
 -- MAJOR/MINOR DEBUFFS & DEBUFFS ---------------------
 -- ---------------------------------------------------
 
-A.Skill_Minor_Maim 					= 61856
-A.Skill_Major_Maim 					= 92041
-A.Skill_Major_Evasion				= 90620
-A.Skill_Minor_Defile				= 61726
-A.Skill_Major_Defile				= 38686
-A.Skill_Major_Expedition			= 61840
-A.Skill_Major_Vitality				= 61275
-A.Skill_Minor_Magickasteal			= 40114
+A.Skill_Minor_Maim                  = 61856
+A.Skill_Major_Maim                  = 92041
+A.Skill_Major_Evasion               = 90620
+A.Skill_Minor_Defile                = 61726
+A.Skill_Major_Defile                = 38686
+A.Skill_Major_Expedition            = 61840
+A.Skill_Major_Vitality              = 61275
+A.Skill_Minor_Magickasteal          = 40114
 
-A.Skill_Off_Balance					= 2727
+A.Skill_Off_Balance                 = 2727
 
 -- ---------------------------------------------------
 -- INNATE ABILITIES ----------------------------------
 -- ---------------------------------------------------
 
 -- Simulated Auras
-A.Innate_Recall_Penalty				= GetString(SI_LUIE_SKILL_RECALL_PENALTY) -- Recall Penalty
-A.Innate_Vanity_Pet					= GetString(SI_LUIE_SKILL_VANITY_PET) -- Vanity Pet
-A.Innate_Mounted					= GetString(SI_LUIE_SKILL_MOUNTED) -- Mounted
-A.Innate_Resurrection_Immunity		= GetString(SI_LUIE_SKILL_RESURRECTION_IMMUNITY) -- Resurrection Immunity
+A.Innate_Recall_Penalty             = GetString(SI_LUIE_SKILL_RECALL_PENALTY) -- Recall Penalty
+A.Innate_Vanity_Pet                 = GetString(SI_LUIE_SKILL_VANITY_PET) -- Vanity Pet
+A.Innate_Mounted                    = GetString(SI_LUIE_SKILL_MOUNTED) -- Mounted
+A.Innate_Resurrection_Immunity      = GetString(SI_LUIE_SKILL_RESURRECTION_IMMUNITY) -- Resurrection Immunity
 
 -- Player Basic
-A.Innate_Crouch						= 20306	-- Crouch
-A.Innate_Crouch_Stun				= GetString(SI_LUIE_SKILL_CROUCH_STUN) -- Crouch Stun
+A.Innate_Crouch                     = 20306 -- Crouch
+A.Innate_Crouch_Stun                = GetString(SI_LUIE_SKILL_CROUCH_STUN) -- Crouch Stun
 A.Innate_Disguised                  = 23553 -- Disguised
-A.Innate_Hidden                     = 20309	-- Hidden
-A.Innate_Sprint						= 973	-- Sprint
-A.Innate_Block						= 14890 -- Block
-A.Innate_Block_Stun					= GetString(SI_LUIE_SKILL_BLOCK_STUN) -- Block Stun
-A.Innate_Bash						= 21970 -- Bash
-A.Innate_Gallop               		= GetString(SI_LUIE_SKILL_MOUNT_SPRINT) -- Gallop
-A.Innate_Hard_Dismount				= 42514
-A.Innate_Fall_Damage				= GetString(SI_LUIE_SKILL_FALL_DAMAGE) -- Fall Damage
-A.Innate_Absorbing_Skyshard			= GetString(SI_LUIE_SKILL_ABSORBING_SKYSHARD) -- Absorbing Skyshard
-A.Innate_Receiving_Boon				= GetString(SI_LUIE_SKILL_RECEIVING_BOON) -- Receiving Boon
-A.Innate_Ayleid_Well				= GetString(SI_LUIE_SKILL_AYLEID_WELL) -- Ayleid Well
+A.Innate_Hidden                     = 20309 -- Hidden
+A.Innate_Sprint                     = 973   -- Sprint
+A.Innate_Block                      = 14890 -- Block
+A.Innate_Block_Stun                 = GetString(SI_LUIE_SKILL_BLOCK_STUN) -- Block Stun
+A.Innate_Bash                       = 21970 -- Bash
+A.Innate_Gallop                     = GetString(SI_LUIE_SKILL_MOUNT_SPRINT) -- Gallop
+A.Innate_Hard_Dismount              = 42514
+A.Innate_Fall_Damage                = GetString(SI_LUIE_SKILL_FALL_DAMAGE) -- Fall Damage
+A.Innate_Absorbing_Skyshard         = GetString(SI_LUIE_SKILL_ABSORBING_SKYSHARD) -- Absorbing Skyshard
+A.Innate_Receiving_Boon             = GetString(SI_LUIE_SKILL_RECEIVING_BOON) -- Receiving Boon
+A.Innate_Ayleid_Well                = GetString(SI_LUIE_SKILL_AYLEID_WELL) -- Ayleid Well
 A.Innate_CC_Immunity                = 38117 -- CC Immunity
-A.Innate_Stagger					= 1834 -- Stagger
+A.Innate_Stagger                    = 1834 -- Stagger
 
 -- World
-A.Innate_Drop_Anchor				= 86717 -- Drop Anchor
-A.Innate_Anchor_Drop				= GetString(SI_LUIE_SKILL_ANCHOR_DROP) -- Anchor Drop
-A.Innate_Power_of_the_Daedra		= 46690 -- Power of the Daedra
+A.Innate_Drop_Anchor                = 86717 -- Drop Anchor
+A.Innate_Anchor_Drop                = GetString(SI_LUIE_SKILL_ANCHOR_DROP) -- Anchor Drop
+A.Innate_Power_of_the_Daedra        = 46690 -- Power of the Daedra
 
 -- Weapon Attacks
 A.Skill_Light_Attack                = 23604 -- Light Attack
-A.Skill_Medium_Attack				= 39097 -- Medium Attack
+A.Skill_Medium_Attack               = 39097 -- Medium Attack
 A.Skill_Heavy_Attack                = 18431 -- Heavy Attack
 A.Skill_Heavy_Attack_Dual_Wield     = 16420 -- Heavy Attack (Dual Wield)
 A.Skill_Heavy_Attack_Werewolf       = 32480 -- Heavy Attack Werewolf
-A.Skill_Heavy_Attack_Shock			= 18396 -- Heavy Attack (Shock)
-A.Skill_Heavy_Attack_Main_Hand		= GetString(SI_LUIE_SKILL_PASSIVE_HEAVY_MAIN_HAND)
-A.Skill_Heavy_Attack_Off_Hand		= GetString(SI_LUIE_SKILL_PASSIVE_HEAVY_OFF_HAND)
-A.SKill_Heavy_Attack_Shock_Pulse	= GetString(SI_LUIE_SKILL_PASSIVE_HEAVY_SHOCK_PULSE)
+A.Skill_Heavy_Attack_Shock          = 18396 -- Heavy Attack (Shock)
+A.Skill_Heavy_Attack_Main_Hand      = GetString(SI_LUIE_SKILL_PASSIVE_HEAVY_MAIN_HAND)
+A.Skill_Heavy_Attack_Off_Hand       = GetString(SI_LUIE_SKILL_PASSIVE_HEAVY_OFF_HAND)
+A.SKill_Heavy_Attack_Shock_Pulse    = GetString(SI_LUIE_SKILL_PASSIVE_HEAVY_SHOCK_PULSE)
 
 -- ---------------------------------------------------
 -- COMSUMABLES & ITEMS -------------------------------
 -- ---------------------------------------------------
 
 -- Glyphs
-A.Item_Glyph_of_Absorb_Health		= 28919
-A.Item_Glyph_of_Absorb_Magicka		= 46743
-A.Item_Glyph_of_Absorb_Stamina		= 46746
-A.Item_Glyph_of_Crushing			= GetString(SI_LUIE_SKILL_GLYPH_CRUSHING)
-A.Item_Glyph_of_Damage_Health		= 46749
-A.Item_Glyph_of_Decrease_Health		= GetString(SI_LUIE_SKILL_GLYPH_DECREASE_HEALTH)
-A.Item_Glyph_of_Flame				= 17895
-A.Item_Glyph_of_Foulness			= 17904
-A.Item_Glyph_of_Frost				= 17897
-A.Item_Glyph_of_Hardening			= GetString(SI_LUIE_SKILL_GLYPH_HARDENING)
-A.Item_Glyph_of_Poison				= 17902
-A.Item_Glyph_of_Prismatic_Onslaught	= 40337
-A.Item_Glyph_of_Shock				= 17899
-A.Item_Glyph_of_Weakening			= GetString(SI_LUIE_SKILL_GLYPH_WEAKENING)
-A.Item_Glyph_of_Weapon_Damage		= GetString(SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE)
+A.Item_Glyph_of_Absorb_Health       = 28919
+A.Item_Glyph_of_Absorb_Magicka      = 46743
+A.Item_Glyph_of_Absorb_Stamina      = 46746
+A.Item_Glyph_of_Crushing            = GetString(SI_LUIE_SKILL_GLYPH_CRUSHING)
+A.Item_Glyph_of_Damage_Health       = 46749
+A.Item_Glyph_of_Decrease_Health     = GetString(SI_LUIE_SKILL_GLYPH_DECREASE_HEALTH)
+A.Item_Glyph_of_Flame               = 17895
+A.Item_Glyph_of_Foulness            = 17904
+A.Item_Glyph_of_Frost               = 17897
+A.Item_Glyph_of_Hardening           = GetString(SI_LUIE_SKILL_GLYPH_HARDENING)
+A.Item_Glyph_of_Poison              = 17902
+A.Item_Glyph_of_Prismatic_Onslaught = 40337
+A.Item_Glyph_of_Shock               = 17899
+A.Item_Glyph_of_Weakening           = GetString(SI_LUIE_SKILL_GLYPH_WEAKENING)
+A.Item_Glyph_of_Weapon_Damage       = GetString(SI_LUIE_SKILL_GLYPH_WEAPON_DAMAGE)
 
 -- Elemental Status Effects & Procs
-A.Proc_Burning						= 18084
-A.Proc_Diseased						= 21925
-A.Proc_Chill						= 21481
-A.Proc_Chilled						= 7145
-A.Proc_Poisoned						= 21929
-A.Proc_Concussion					= 21487
+A.Proc_Burning                      = 18084
+A.Proc_Diseased                     = 21925
+A.Proc_Chill                        = 21481
+A.Proc_Chilled                      = 7145
+A.Proc_Poisoned                     = 21929
+A.Proc_Concussion                   = 21487
 
-A.Proc_Explosion					= 21128
-A.Proc_Venom						= 21930
-A.Proc_Pestilence					= 21928
-A.Proc_Disintegration				= 21493
-A.Proc_Deep_Freeze					= 21483
+A.Proc_Explosion                    = 21128
+A.Proc_Venom                        = 21930
+A.Proc_Pestilence                   = 21928
+A.Proc_Disintegration               = 21493
+A.Proc_Deep_Freeze                  = 21483
 
 -- POTIONS
-A.Potion_Invisiblity				= 3668
-A.Potion_Ravage_Health				= 46111
-A.Potion_Restore_Health				= 45221
-A.Potion_Restore_Magicka			= 45223
-A.Potion_Restore_Stamina			= 45225
+A.Potion_Invisiblity                = 3668
+A.Potion_Ravage_Health              = 46111
+A.Potion_Restore_Health             = 45221
+A.Potion_Restore_Magicka            = 45223
+A.Potion_Restore_Stamina            = 45225
 
-A.Poison_Creeping_Drain_Health		= 79701
-A.Poison_Lingering_Restore_Health	= 79702
-A.Poison_Stealth_Draining_Poison	= GetString(SI_LUIE_SKILL_POISON_STEALTH_DRAIN)
-A.Poison_Conspicuous_Poison			= GetString(SI_LUIE_SKILL_POISON_CONSPICUOUS)
+A.Poison_Creeping_Drain_Health      = 79701
+A.Poison_Lingering_Restore_Health   = 79702
+A.Poison_Stealth_Draining_Poison    = GetString(SI_LUIE_SKILL_POISON_STEALTH_DRAIN)
+A.Poison_Conspicuous_Poison         = GetString(SI_LUIE_SKILL_POISON_CONSPICUOUS)
 
-A.Food_Magicka_Stamina_Increase		= 61294
-A.Food_Health_Stamina_Increase		= 61255
-A.Food_Health_Magicka_Increase		= 61257
-A.Food_Orzorgas_Tripe_Trifle_Pocket	= GetString(SI_LUIE_SKILL_FOOD_ORZORGA_POCKET)
-A.Food_Orzorgas_Blood_Price_Pie	    = GetString(SI_LUIE_SKILL_FOOD_ORZORGA_PIE)
-A.Food_Orzorgas_Smoked_Bear_Haunch	= GetString(SI_LUIE_SKILL_FOOD_ORZORGA_HAUNCH)
-A.Food_Pumpkin_Snack_Skewer			= GetString(SI_LUIE_SKILL_FOOD_SNACK_SKEWER)
-A.Food_Frosted_Brains				= GetString(SI_LUIE_SKILL_FOOD_FROSTED_BRAINS) 
-A.Food_Jagga_Drenched_Mud_Ball		= GetString(SI_LUIE_SKILL_FOOD_MUD_BALL)
-A.Food_Lava_Foot_Soup				= GetString(SI_LUIE_SKILL_FOOD_LAVA_FOOT)
-A.Food_Crown_Crate_Meal				= GetString(SI_LUIE_SKILL_FOOD_CROWN_CRATE_FOOD)
-A.Food_Crown_Meal					= GetString(SI_LUIE_SKILL_FOOD_CROWN_FOOD)
-A.Food_Crown_Combat_Mystics_Stew	= GetString(SI_LUIE_SKILL_FOOD_CROWN_STEW)
-A.Food_Crown_Vigorous_Ragout		= GetString(SI_LUIE_SKILL_FOOD_CROWN_RAGOUT)
-A.Drink_Health_Recovery				= 61322
-A.Drink_Magicka_Recovery			= 61325
-A.Drink_Stamina_Recovery			= 61328
-A.Drink_Magicka_Stamina_Recovery	= 61345
-A.Drink_Health_Stamina_Recovery		= 61340
-A.Drink_Health_Magicka_Recovery		= 61335
-A.Drink_Primary_Stat_Recovery		= 61350
-A.Drink_Increase					= GetString(SI_LUIE_SKILL_DRINK_INCREASE)
-A.Drink_Orzorgas_Red_Frothgar		= GetString(SI_LUIE_SKILL_DRINK_ORZORGA_FROTHGAR)
-A.Drink_Bowl_of_Peeled_Eyeballs		= GetString(SI_LUIE_SKILL_DRINK_PEELED_EYEBALLS)
-A.Drink_Ghastly_Eye_Bowl			= GetString(SI_LUIE_SKILL_DRINK_GHASTLY_EYE_BOWL)
-A.Drink_Bergama_Warning_Fire		= GetString(SI_LUIE_SKILL_DRINK_WARNING_FIRE)
-A.Drink_Betnikh_Twice_Spiked_Ale	= GetString(SI_LUIE_SKILL_DRINK_BETNIKH_ALE)
-A.Drink_Hissmir_Fish_Eye_Rye		= GetString(SI_LUIE_SKILL_DRINK_FISH_EYE)
-A.Drink_Snow_Bear_Glow_Wine			= GetString(SI_LUIE_SKILL_DRINK_GLOW_WINE)
-A.Drink_Crown_Crate_Drink			= GetString(SI_LUIE_SKILL_DRINK_CROWN_CRATE_DRINK)
-A.Drink_Crown_Drink					= GetString(SI_LUIE_SKILL_DRINK_CROWN_DRINK)
-A.Drink_Crown_Stout_Magic_Liqueur	= GetString(SI_LUIE_SKILL_DRINK_CROWN_LIQUEUR)
-A.Drink_Crown_Vigorous_Tincture		= GetString(SI_LUIE_SKILL_DRINK_CROWN_TINCTURE)
+A.Food_Magicka_Stamina_Increase     = 61294
+A.Food_Health_Stamina_Increase      = 61255
+A.Food_Health_Magicka_Increase      = 61257
+A.Food_Orzorgas_Tripe_Trifle_Pocket = GetString(SI_LUIE_SKILL_FOOD_ORZORGA_POCKET)
+A.Food_Orzorgas_Blood_Price_Pie     = GetString(SI_LUIE_SKILL_FOOD_ORZORGA_PIE)
+A.Food_Orzorgas_Smoked_Bear_Haunch  = GetString(SI_LUIE_SKILL_FOOD_ORZORGA_HAUNCH)
+A.Food_Pumpkin_Snack_Skewer         = GetString(SI_LUIE_SKILL_FOOD_SNACK_SKEWER)
+A.Food_Frosted_Brains               = GetString(SI_LUIE_SKILL_FOOD_FROSTED_BRAINS) 
+A.Food_Jagga_Drenched_Mud_Ball      = GetString(SI_LUIE_SKILL_FOOD_MUD_BALL)
+A.Food_Lava_Foot_Soup               = GetString(SI_LUIE_SKILL_FOOD_LAVA_FOOT)
+A.Food_Crown_Crate_Meal             = GetString(SI_LUIE_SKILL_FOOD_CROWN_CRATE_FOOD)
+A.Food_Crown_Meal                   = GetString(SI_LUIE_SKILL_FOOD_CROWN_FOOD)
+A.Food_Crown_Combat_Mystics_Stew    = GetString(SI_LUIE_SKILL_FOOD_CROWN_STEW)
+A.Food_Crown_Vigorous_Ragout        = GetString(SI_LUIE_SKILL_FOOD_CROWN_RAGOUT)
+A.Drink_Health_Recovery             = 61322
+A.Drink_Magicka_Recovery            = 61325
+A.Drink_Stamina_Recovery            = 61328
+A.Drink_Magicka_Stamina_Recovery    = 61345
+A.Drink_Health_Stamina_Recovery     = 61340
+A.Drink_Health_Magicka_Recovery     = 61335
+A.Drink_Primary_Stat_Recovery       = 61350
+A.Drink_Increase                    = GetString(SI_LUIE_SKILL_DRINK_INCREASE)
+A.Drink_Orzorgas_Red_Frothgar       = GetString(SI_LUIE_SKILL_DRINK_ORZORGA_FROTHGAR)
+A.Drink_Bowl_of_Peeled_Eyeballs     = GetString(SI_LUIE_SKILL_DRINK_PEELED_EYEBALLS)
+A.Drink_Ghastly_Eye_Bowl            = GetString(SI_LUIE_SKILL_DRINK_GHASTLY_EYE_BOWL)
+A.Drink_Bergama_Warning_Fire        = GetString(SI_LUIE_SKILL_DRINK_WARNING_FIRE)
+A.Drink_Betnikh_Twice_Spiked_Ale    = GetString(SI_LUIE_SKILL_DRINK_BETNIKH_ALE)
+A.Drink_Hissmir_Fish_Eye_Rye        = GetString(SI_LUIE_SKILL_DRINK_FISH_EYE)
+A.Drink_Snow_Bear_Glow_Wine         = GetString(SI_LUIE_SKILL_DRINK_GLOW_WINE)
+A.Drink_Crown_Crate_Drink           = GetString(SI_LUIE_SKILL_DRINK_CROWN_CRATE_DRINK)
+A.Drink_Crown_Drink                 = GetString(SI_LUIE_SKILL_DRINK_CROWN_DRINK)
+A.Drink_Crown_Stout_Magic_Liqueur   = GetString(SI_LUIE_SKILL_DRINK_CROWN_LIQUEUR)
+A.Drink_Crown_Vigorous_Tincture     = GetString(SI_LUIE_SKILL_DRINK_CROWN_TINCTURE)
 
-A.Experience_Psijic_Ambrosia		= GetString(SI_LUIE_SKILL_EXPERIENCE_PSIJIC_AMBROSIA) -- Psijic Ambrosia
-A.Experience_Aetherial_Ambrosia		= GetString(SI_LUIE_SKILL_EXPERIENCE_AETHERIAL_AMBROSIA) -- Aetherial Ambrosia
-A.Experience_Mythic_Ambrosia		= GetString(SI_LUIE_SKILL_EXPERIENCE_MYTHIC_AMBROSIA) -- Mythic Aetherial Ambrosia
-A.Experience_Crown_Scroll			= GetString(SI_LUIE_SKILL_EXPERIENCE_CROWN_SCROLL) -- Crown Experience Scroll
-A.Experience_Crown_Crate_Scroll_1	= GetString(SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_1) -- Crown Crate Experience Scroll
-A.Experience_Crown_Crate_Scroll_2	= GetString(SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_2) -- Major Crown Crate Experience Scroll
-A.Experience_Crown_Crate_Scroll_3	= GetString(SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_3) -- Grand Crown Crate Experience Scroll
+A.Experience_Psijic_Ambrosia        = GetString(SI_LUIE_SKILL_EXPERIENCE_PSIJIC_AMBROSIA) -- Psijic Ambrosia
+A.Experience_Aetherial_Ambrosia     = GetString(SI_LUIE_SKILL_EXPERIENCE_AETHERIAL_AMBROSIA) -- Aetherial Ambrosia
+A.Experience_Mythic_Ambrosia        = GetString(SI_LUIE_SKILL_EXPERIENCE_MYTHIC_AMBROSIA) -- Mythic Aetherial Ambrosia
+A.Experience_Crown_Scroll           = GetString(SI_LUIE_SKILL_EXPERIENCE_CROWN_SCROLL) -- Crown Experience Scroll
+A.Experience_Crown_Crate_Scroll_1   = GetString(SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_1) -- Crown Crate Experience Scroll
+A.Experience_Crown_Crate_Scroll_2   = GetString(SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_2) -- Major Crown Crate Experience Scroll
+A.Experience_Crown_Crate_Scroll_3   = GetString(SI_LUIE_SKILL_EXPERIENCE_CROWN_CRATE_SCROLL_3) -- Grand Crown Crate Experience Scroll
 
-A.Consumable_Festival_Mints			= GetString(SI_LUIE_SKILL_CONSUMABLE_FESTIVAL_MINTS) -- High Hrothgar Festival Mints
-A.Consumable_Sailors_Grog			= GetString(SI_LUIE_SKILL_CONSUMABLE_SAILORS_GROG) -- Sailor's Warning Festival Grog
+A.Consumable_Festival_Mints         = GetString(SI_LUIE_SKILL_CONSUMABLE_FESTIVAL_MINTS) -- High Hrothgar Festival Mints
+A.Consumable_Sailors_Grog           = GetString(SI_LUIE_SKILL_CONSUMABLE_SAILORS_GROG) -- Sailor's Warning Festival Grog
 
-A.Memento_Almalexias_Lantern		= GetCollectibleName(341)
-A.Memento_Bonesnap_Binding_Stone	= GetCollectibleName(348)
-A.Memento_Nirnroot_Wine				= GetCollectibleName(344)
-A.Memento_Mystery_Meat				= GetString(SI_LUIE_SKILL_COLLECTIBLE_MYSTERY_MEAT)
-A.Memento_Sanguines_Goblet			= GetCollectibleName(338)
-A.Memento_Token_of_Root_Sunder		= GetCollectibleName(349)
-A.Memento_Storm_Atronach_Transform	= GetCollectibleName(596)
-A.Memento_Wild_Hunt_Transform		= GetCollectibleName(759)
-A.Memento_Dwemervamidium_Mirage		= GetCollectibleName(1183)
-A.Memento_Swarm_of_Crows			= GetCollectibleName(1384)
-A.Memento_Fire_Breathers_Torches	= GetCollectibleName(600)
-A.Memento_Jugglers_Knives			= GetCollectibleName(598)
-A.Memento_Sword_Swallowers_Blade	= GetCollectibleName(597)
-A.Memento_Discourse_Amaranthine		= GetCollectibleName(345)
-A.Memento_Sealing_Amulet			= GetCollectibleName(351)
-A.Memento_Twilight_Shard			= GetCollectibleName(1158)
-A.Memento_Yokudan_Totem				= GetCollectibleName(350)
-A.Memento_Blade_of_the_Blood_Oath	= GetCollectibleName(390)
-A.Memento_Dreamers_Chime			= GetCollectibleName(1229)
-A.Memento_Hidden_Pressure_Vent		= GetCollectibleName(354)
-A.Memento_Coin_of_Illusory_Riches	= GetCollectibleName(361)
-A.Memento_Malacaths_Wrathful_Flame	= GetCollectibleName(353)
-A.Memento_Jubliee_Cake				= GetCollectibleName(1109)
-A.Memento_Mud_Ball					= 86749
-A.Memento_Storm_Atronach_Aura		= GetCollectibleName(594)
-A.Memento_Storm_Orb_Juggle			= GetCollectibleName(595)
-A.Memento_Wild_Hunt_Aura			= GetCollectibleName(760)
-A.Memento_Floral_Swirl_Aura			= GetCollectibleName(758)
-A.Memento_Dwarven_Puzzle_Orb		= GetCollectibleName(1181)
-A.Memento_Dwarven_Tonal_Forks		= GetCollectibleName(1182)
-A.Memento_Crows_Calling				= GetCollectibleName(1383)
-A.Memento_Fiery_Orb					= GetCollectibleName(1481)
-A.Memento_Flame_Pixie				= GetCollectibleName(1482)
-A.Memento_Flame_Eruption			= GetCollectibleName(1483)
+A.Memento_Almalexias_Lantern        = GetCollectibleName(341)
+A.Memento_Bonesnap_Binding_Stone    = GetCollectibleName(348)
+A.Memento_Nirnroot_Wine             = GetCollectibleName(344)
+A.Memento_Mystery_Meat              = GetString(SI_LUIE_SKILL_COLLECTIBLE_MYSTERY_MEAT)
+A.Memento_Sanguines_Goblet          = GetCollectibleName(338)
+A.Memento_Token_of_Root_Sunder      = GetCollectibleName(349)
+A.Memento_Storm_Atronach_Transform  = GetCollectibleName(596)
+A.Memento_Wild_Hunt_Transform       = GetCollectibleName(759)
+A.Memento_Dwemervamidium_Mirage     = GetCollectibleName(1183)
+A.Memento_Swarm_of_Crows            = GetCollectibleName(1384)
+A.Memento_Fire_Breathers_Torches    = GetCollectibleName(600)
+A.Memento_Jugglers_Knives           = GetCollectibleName(598)
+A.Memento_Sword_Swallowers_Blade    = GetCollectibleName(597)
+A.Memento_Discourse_Amaranthine     = GetCollectibleName(345)
+A.Memento_Sealing_Amulet            = GetCollectibleName(351)
+A.Memento_Twilight_Shard            = GetCollectibleName(1158)
+A.Memento_Yokudan_Totem             = GetCollectibleName(350)
+A.Memento_Blade_of_the_Blood_Oath   = GetCollectibleName(390)
+A.Memento_Dreamers_Chime            = GetCollectibleName(1229)
+A.Memento_Hidden_Pressure_Vent      = GetCollectibleName(354)
+A.Memento_Coin_of_Illusory_Riches   = GetCollectibleName(361)
+A.Memento_Malacaths_Wrathful_Flame  = GetCollectibleName(353)
+A.Memento_Jubliee_Cake              = GetCollectibleName(1109)
+A.Memento_Mud_Ball                  = 86749
+A.Memento_Storm_Atronach_Aura       = GetCollectibleName(594)
+A.Memento_Storm_Orb_Juggle          = GetCollectibleName(595)
+A.Memento_Wild_Hunt_Aura            = GetCollectibleName(760)
+A.Memento_Floral_Swirl_Aura         = GetCollectibleName(758)
+A.Memento_Dwarven_Puzzle_Orb        = GetCollectibleName(1181)
+A.Memento_Dwarven_Tonal_Forks       = GetCollectibleName(1182)
+A.Memento_Crows_Calling             = GetCollectibleName(1383)
+A.Memento_Fiery_Orb                 = GetCollectibleName(1481)
+A.Memento_Flame_Pixie               = GetCollectibleName(1482)
+A.Memento_Flame_Eruption            = GetCollectibleName(1483)
 
 -- ---------------------------------------------------
 -- ITEM SETS -----------------------------------------
 -- ---------------------------------------------------
 
-A.Set_Asylum_Destruction_Staff		= 99596 -- Concentrated Force (Perfected)
-A.Set_Bogdan_the_Nightflame			= GetString(SI_LUIE_SKILL_SET_BOGDAN_THE_NIGHTFLAME)
-A.Set_Lord_Warden_Dusk				= GetString(SI_LUIE_SKILL_SET_LORD_WARDEN_DUSK)
-A.Set_Malubeth_the_Scourger			= GetString(SI_LUIE_SKILL_SET_MALUBETH_THE_SCOURGER)
-A.Set_Maw_of_the_Infernal			= 59507
-A.Set_Nerieneth						= 59592
-A.Set_Shadowrend					= 80989
-A.Set_Spawn_of_Mephala				= 59497
-A.Set_Swarm_Mother					= 80592
-A.Set_Engine_Guardian				= 59521
-A.Set_The_Troll_King				= GetString(SI_LUIE_SKILL_SET_TROLL_KING)
-A.Set_Redistribution				= GetString(SI_LUIE_SKILL_SET_REDISTRIBUTION)
-A.Set_Varens_Legacy					= 79029
-A.Set_Syvarras_Scales				= 75717
-A.Set_Twin_Sisters					= 32828
-A.Set_Way_of_Fire					= 52710
-A.Set_Plague_Slinger				= 102113
-A.Set_Ice_Furnace					= GetString(SI_LUIE_SKILL_SET_ICE_FURNACE)
-A.Set_Jolting_Arms					= 67077
-A.Set_Hand_of_Mephala				= 84355
-A.Set_Tormentor						= 67282
-A.Set_Immortal_Warrior				= 90938
-A.Set_Eternal_Warrior				= 90939
-A.Set_Destructive_Mage				= 51315
-A.Set_Healing_Mage					= 51442
-A.Set_Vicious_Serpent				= 61440
-A.Set_Roar_of_Alkosh				= 75752
-A.Set_Phoenix						= 90935
-A.Set_Vicecannon_of_Venom			= 79464
-A.Set_Bahrahas_Curse				= 75673
-A.Set_Pirate_Skeleton				= 98421
-A.Set_Briarheart					= 71102
-A.Set_Ironblood						= 97626
-A.Set_Cooldown						= GetString(SI_LUIE_SKILL_SET_COOLDOWN)
+A.Set_Asylum_Destruction_Staff      = 99596 -- Concentrated Force (Perfected)
+A.Set_Bogdan_the_Nightflame         = GetString(SI_LUIE_SKILL_SET_BOGDAN_THE_NIGHTFLAME)
+A.Set_Lord_Warden_Dusk              = GetString(SI_LUIE_SKILL_SET_LORD_WARDEN_DUSK)
+A.Set_Malubeth_the_Scourger         = GetString(SI_LUIE_SKILL_SET_MALUBETH_THE_SCOURGER)
+A.Set_Maw_of_the_Infernal           = 59507
+A.Set_Nerieneth                     = 59592
+A.Set_Shadowrend                    = 80989
+A.Set_Spawn_of_Mephala              = 59497
+A.Set_Swarm_Mother                  = 80592
+A.Set_Engine_Guardian               = 59521
+A.Set_The_Troll_King                = GetString(SI_LUIE_SKILL_SET_TROLL_KING)
+A.Set_Redistribution                = GetString(SI_LUIE_SKILL_SET_REDISTRIBUTION)
+A.Set_Varens_Legacy                 = 79029
+A.Set_Syvarras_Scales               = 75717
+A.Set_Twin_Sisters                  = 32828
+A.Set_Way_of_Fire                   = 52710
+A.Set_Plague_Slinger                = 102113
+A.Set_Ice_Furnace                   = GetString(SI_LUIE_SKILL_SET_ICE_FURNACE)
+A.Set_Jolting_Arms                  = 67077
+A.Set_Hand_of_Mephala               = 84355
+A.Set_Tormentor                     = 67282
+A.Set_Immortal_Warrior              = 90938
+A.Set_Eternal_Warrior               = 90939
+A.Set_Destructive_Mage              = 51315
+A.Set_Healing_Mage                  = 51442
+A.Set_Vicious_Serpent               = 61440
+A.Set_Roar_of_Alkosh                = 75752
+A.Set_Phoenix                       = 90935
+A.Set_Vicecannon_of_Venom           = 79464
+A.Set_Bahrahas_Curse                = 75673
+A.Set_Pirate_Skeleton               = 98421
+A.Set_Briarheart                    = 71102
+A.Set_Ironblood                     = 97626
+A.Set_Cooldown                      = GetString(SI_LUIE_SKILL_SET_COOLDOWN)
 
-A.Disguise_Monks_Disguise			= GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE)
+A.Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE)
 
 -- ---------------------------------------------------
 -- CHAMPION ABILITIES --------------------------------
 -- ---------------------------------------------------
 
-A.Champion_Vengeance_Charge			= GetString(SI_LUIE_SKILL_VENGEANCE_CHARGE) -- Vengeance Counter
-A.Champion_Riposte					= 60230
+A.Champion_Vengeance_Charge         = GetString(SI_LUIE_SKILL_VENGEANCE_CHARGE) -- Vengeance Counter
+A.Champion_Riposte                  = 60230
 
 -- ---------------------------------------------------
 -- SKILL LINE PASSIVES -------------------------------
 -- ---------------------------------------------------
 
 -- Sorcerer
-A.Passive_Rebate					= 31398
+A.Passive_Rebate                    = 31398
 
 -- Nightblade
-A.Passive_Nightblade				= 36560
+A.Passive_Nightblade                = 36560
 
 -- Templar
-A.Passive_Light_Weaver				= 31760
+A.Passive_Light_Weaver              = 31760
 
 -- Warden
-A.Passive_Bond_with_Nature			= GetString(SI_LUIE_SKILL_BOND_WITH_NATURE)
-A.Passive_Savage_Beast				= 86062
-A.Passive_Natures_Gift				= 93054
+A.Passive_Bond_with_Nature          = GetString(SI_LUIE_SKILL_BOND_WITH_NATURE)
+A.Passive_Savage_Beast              = 86062
+A.Passive_Natures_Gift              = 93054
 
 -- Weapon
-A.Passive_Heavy_Weapons				= 29375
-A.Passive_Follow_Up					= 29389
-A.Passive_Twin_Blade_and_Blunt		= 30893
-A.Passive_Tri_Focus_Shock			= GetString(SI_LUIE_SKILL_PASSIVE_TRI_FOCUS_SHOCK)
-A.Passive_Destruction_Expert		= 30965
-A.Passive_Soul_Summons				= 39269
+A.Passive_Heavy_Weapons             = 29375
+A.Passive_Follow_Up                 = 29389
+A.Passive_Twin_Blade_and_Blunt      = 30893
+A.Passive_Tri_Focus_Shock           = GetString(SI_LUIE_SKILL_PASSIVE_TRI_FOCUS_SHOCK)
+A.Passive_Destruction_Expert        = 30965
+A.Passive_Soul_Summons              = 39269
 
-A.Passive_Savage_Feeding			= 42054
-A.Passive_Blood_Ritual				= 33091
-A.Passive_Noxiphilic_Sanguivoria	= GetString(SI_LUIE_SKILL_PASSIVE_NOXIPHILIC_SANGUIVORIA)
-A.Passive_Bloodmoon					= 32639
-A.Passive_Undaunted_Command			= 55584
-A.Passive_Red_Diamond				= 36155
+A.Passive_Savage_Feeding            = 42054
+A.Passive_Blood_Ritual              = 33091
+A.Passive_Noxiphilic_Sanguivoria    = GetString(SI_LUIE_SKILL_PASSIVE_NOXIPHILIC_SANGUIVORIA)
+A.Passive_Bloodmoon                 = 32639
+A.Passive_Undaunted_Command         = 55584
+A.Passive_Red_Diamond               = 36155
 
 -- ---------------------------------------------------
 -- CLASS SKILLS --------------------------------------
 -- ---------------------------------------------------
 
 -- Templar
-A.Skill_Puncturing_Sweep 			= 26797
-A.Skill_Aurora_Javelin				= 26800
-A.Skill_Empowering_Sweep         	= 22144
-A.Skill_Crescent_Sweep           	= 22139
+A.Skill_Puncturing_Sweep            = 26797
+A.Skill_Aurora_Javelin              = 26800
+A.Skill_Empowering_Sweep            = 22144
+A.Skill_Crescent_Sweep              = 22139
 
-A.Skill_Purifying_Light          	= 21765
-A.Skill_Unstable_Core            	= 22004
-A.Skill_Radiant_Glory            	= 63044
-A.Skill_Radiant_Oppression       	= 63046
-A.Skill_Solar_Disturbance        	= 21758
+A.Skill_Purifying_Light             = 21765
+A.Skill_Unstable_Core               = 22004
+A.Skill_Radiant_Glory               = 63044
+A.Skill_Radiant_Oppression          = 63046
+A.Skill_Solar_Disturbance           = 21758
 
-A.Skill_Restoring_Aura           	= 26209
-A.Skill_Repentance					= 26821
-A.Skill_Cleansing_Ritual         	= 22265
+A.Skill_Restoring_Aura              = 26209
+A.Skill_Repentance                  = 26821
+A.Skill_Cleansing_Ritual            = 22265
 A.Skill_Rune_Focus                  = 22234
 A.Skill_Channeled_Focus             = 22240
 A.Skill_Restoring_Focus             = 22237
 
-A.Skill_Rite_Of_Passage          	= 22223
-A.Skill_Remembrance              	= 22229
-A.Skill_Practiced_Incantation    	= 22226
+A.Skill_Rite_Of_Passage             = 22223
+A.Skill_Remembrance                 = 22229
+A.Skill_Practiced_Incantation       = 22226
 
 -- ---------------------------------------------------
 -- WEAPON SKILLS -------------------------------------
 -- ---------------------------------------------------
 
 -- Restoration Staff
-A.Skill_Blessing_of_Protection   	= 37243
-A.Skill_Blessing_of_Restoration 	= GetString(SI_LUIE_SKILL_BLESSING_OF_RESTORATION)
-A.Skill_Combat_Prayer				= 40094
-A.Skill_Healing_Ward             	= 40126
-A.Skill_Force_Siphon             	= 31531
-A.Skill_Siphon_Spirit            	= 40109
-A.Skill_Quick_Siphon             	= 40116
+A.Skill_Blessing_of_Protection      = 37243
+A.Skill_Blessing_of_Restoration     = GetString(SI_LUIE_SKILL_BLESSING_OF_RESTORATION)
+A.Skill_Combat_Prayer               = 40094
+A.Skill_Healing_Ward                = 40126
+A.Skill_Force_Siphon                = 31531
+A.Skill_Siphon_Spirit               = 40109
+A.Skill_Quick_Siphon                = 40116
 
 -- Destruction Staff
-A.Skill_Crushing_Shock				= 46348
---A.Skill_Wall_of_Frost            	= 28849
---A.Skill_Unstable_Wall_of_Frost   	= 39067
---A.Skill_Blockade_of_Frost        	= 39028
-A.Skill_Flame_Touch					= 29073
-A.Skill_Frost_Touch              	= 29078
-A.Skill_Frozen						= 68719
-A.Skill_Flame_Clench				= 38985
-A.Skill_Shock_Clench				= 38993
-A.Skill_Frost_Clench             	= 38989
-A.Skill_Flame_Reach					= 38944
-A.Skill_Frost_Reach              	= 38970
-A.Skill_Shock_Reach					= 38978
-A.Skill_Weakness_to_Elements     	= 29173
-A.Skill_Elemental_Susceptibility 	= 39089
-A.Skill_Elemental_Drain          	= 39095
-A.Skill_Shock_Pulsar				= 89844
+A.Skill_Crushing_Shock              = 46348
+--A.Skill_Wall_of_Frost             = 28849
+--A.Skill_Unstable_Wall_of_Frost    = 39067
+--A.Skill_Blockade_of_Frost         = 39028
+A.Skill_Flame_Touch                 = 29073
+A.Skill_Frost_Touch                 = 29078
+A.Skill_Frozen                      = 68719
+A.Skill_Flame_Clench                = 38985
+A.Skill_Shock_Clench                = 38993
+A.Skill_Frost_Clench                = 38989
+A.Skill_Flame_Reach                 = 38944
+A.Skill_Frost_Reach                 = 38970
+A.Skill_Shock_Reach                 = 38978
+A.Skill_Weakness_to_Elements        = 29173
+A.Skill_Elemental_Susceptibility    = 39089
+A.Skill_Elemental_Drain             = 39095
+A.Skill_Shock_Pulsar                = 89844
 
 -- ---------------------------------------------------
 -- GUILD SKILLS --------------------------------------
 -- ---------------------------------------------------
 
-A.Skill_Circle_of_Protection     = 35737
-A.Skill_Turn_Undead              = 40181
-A.Skill_Ring_of_Preservation     = 40169
+A.Skill_Silver_Leash                = 40336
 
-A.Skill_Trap_Beast               = 35750
-A.Skill_Rearming_Trap            = 40382
-A.Skill_Lightweight_Beast_Trap   = 40372
+A.Skill_Circle_of_Protection        = 35737
+A.Skill_Turn_Undead                 = 40181
+A.Skill_Ring_of_Preservation        = 40169
+
+A.Skill_Trap_Beast                  = 35750
+A.Skill_Rearming_Trap               = 40382
+A.Skill_Lightweight_Beast_Trap      = 40372
 
 -- ---------------------------------------------------
 -- NPC BASIC -----------------------------------------
 -- ---------------------------------------------------
 
-A.Skill_Hamstring					= 70068 -- Hamstring
+A.Skill_Hamstring                   = 70068 -- Hamstring
 
 -- ---------------------------------------------------
 -- NPC ABILITIES -------------------------------------
 -- ---------------------------------------------------
 
-A.Skill_Headbutt				= 54380
-A.Skill_Tail_Spike				= 4799
+A.Skill_Headbutt                = 54380
+A.Skill_Tail_Spike              = 4799
 
 -- ---------------------------------------------------
 -- WEAPONS -------------------------------------------
@@ -493,7 +495,6 @@ A.Skill_Dawnbreaker_of_Smiting   = 40158
 A.Skill_Flawless_Dawnbreaker     = 40161
 A.Skill_Silver_Bolts             = 35721
 A.Skill_Silver_Shards            = 40300
-A.Skill_Silver_Leash             = 40336
 A.Skill_Expert_Hunter            = 35762
 A.Skill_Evil_Hunter              = 40194
 A.Skill_Camouflaged_Hunter       = 40195

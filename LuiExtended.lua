@@ -12,10 +12,10 @@ LUIE.SVVer       = 2
 LUIE.SVName      = "LUIESV"
 
 -- Performance Enhancement
-local strfmt		= string.format
-local strformat	    = zo_strformat
-local gsub 			= gsub
-local pairs 		= pairs
+local strfmt        = string.format
+local strformat     = zo_strformat
+local gsub          = gsub
+local pairs         = pairs
 
 -- Default Settings
 LUIE.D = {
@@ -31,8 +31,8 @@ LUIE.D = {
     TimeStampFormat             = "HH:m:s",
     StartupInfo                 = false,
     HideXPBar                   = false,
-	TempAlertHome				= false,
-	TempAlertCampaign			= false,
+    TempAlertHome               = false,
+    TempAlertCampaign           = false,
 }
 
 -- Global fonts table to use in other parts of this addon
@@ -156,10 +156,10 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
     -- Load saved variables
     LUIE_LoadSavedVars()
-	
-	LUIE.PlayerNameRaw = GetRawUnitName("player")
-	LUIE.PlayerNameFormatted = strformat(SI_UNIT_NAME, GetUnitName("player"))
-	LUIE.PlayerDisplayName = strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
+    
+    LUIE.PlayerNameRaw = GetRawUnitName("player")
+    LUIE.PlayerNameFormatted = strformat(SI_UNIT_NAME, GetUnitName("player"))
+    LUIE.PlayerDisplayName = strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
 
     -- Initialize this addon modules according to user preferences
     LUIE.ChatAnnouncements.Initialize( LUIE.SV.ChatAnnouncements_Enable )
@@ -185,7 +185,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then
             texture = LUIE.Effects.EffectOverride[abilityId].icon
         end
-		if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then
+        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then
             name = LUIE.Effects.EffectOverride[abilityId].name
         end
         return name, texture, earnedRank, passive, ultimate, purchased, progressionIndex, rankIndex
@@ -198,7 +198,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then
             texture = LUIE.Effects.EffectOverride[abilityId].icon
         end
-		if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then
+        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then
             name = LUIE.Effects.EffectOverride[abilityId].name
         end
         return name, texture, earnedRank
@@ -219,14 +219,14 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     local zos_GetKillingAttackInfo = GetKillingAttackInfo
     
     GetKillingAttackerInfo = function(index)
-		local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
-		local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
+        local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
+        local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
 
-		if LUIE.Effects.EffectSourceOverride[abilityId] then 
-			if LUIE.Effects.EffectSourceOverride[abilityId].source then attackerRawName = LUIE.Effects.EffectSourceOverride[abilityId].source end
-			if LUIE.Effects.EffectSourceOverride[abilityId].pet then minionName = LUIE.Effects.EffectSourceOverride[abilityId].pet end
-		end
-		
+        if LUIE.Effects.EffectSourceOverride[abilityId] then 
+            if LUIE.Effects.EffectSourceOverride[abilityId].source then attackerRawName = LUIE.Effects.EffectSourceOverride[abilityId].source end
+            if LUIE.Effects.EffectSourceOverride[abilityId].pet then minionName = LUIE.Effects.EffectSourceOverride[abilityId].pet end
+        end
+        
         return attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName
     end
  
@@ -234,21 +234,21 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
         local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
  
-		if LUIE.Effects.EffectOverride[abilityId] then
-			attackName = LUIE.Effects.EffectOverride[abilityId].name or attackName
-			attackIcon = LUIE.Effects.EffectOverride[abilityId].icon or attackIcon
-		end
-		
-		if LUIE.Effects.EffectOverrideByName[abilityId] then
-			unitName = strformat("<<t:1>>", attackerRawName)
-			if LUIE.Effects.EffectOverrideByName[abilityId][unitName] then
-				if LUIE.Effects.EffectOverrideByName[abilityId][unitName].hide then 
-					return
-				end
-				attackName = LUIE.Effects.EffectOverrideByName[abilityId][unitName].name or attackName
-				attackIcon = LUIE.Effects.EffectOverrideByName[abilityId][unitName].icon or attackIcon
-			end
-		end
+        if LUIE.Effects.EffectOverride[abilityId] then
+            attackName = LUIE.Effects.EffectOverride[abilityId].name or attackName
+            attackIcon = LUIE.Effects.EffectOverride[abilityId].icon or attackIcon
+        end
+        
+        if LUIE.Effects.EffectOverrideByName[abilityId] then
+            unitName = strformat("<<t:1>>", attackerRawName)
+            if LUIE.Effects.EffectOverrideByName[abilityId][unitName] then
+                if LUIE.Effects.EffectOverrideByName[abilityId][unitName].hide then 
+                    return
+                end
+                attackName = LUIE.Effects.EffectOverrideByName[abilityId][unitName].name or attackName
+                attackIcon = LUIE.Effects.EffectOverrideByName[abilityId][unitName].icon or attackIcon
+            end
+        end
         
         return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
     end
@@ -329,57 +329,57 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     table.insert(effectsRows, effectsRow)
                         
                 end
-				
-				local counter = 1
-				local trackBuffs = { }
+                
+                local counter = 1
+                local trackBuffs = { }
                 for i = 1, GetNumBuffs("player") do
                     local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId = GetUnitBuffInfo("player", i)
                     
-					trackBuffs[counter] = {
-						buffName = buffName,
-						startTime = startTime,
-						endTime = endTime,
-						buffSlot = buffSlot,
-						stackCount = stackCount,
-						iconFile = iconFile,
-						buffType = buffType,
-						effectType = effectType,
-						abilityType = abilityType,
-						statusEffectType = statusEffectType,
-						abilityId = abilityId
-					}
-					counter = counter + 1
-				end
-				
-				-- Heavy handed - but functional way to mark duplicate abilities to not display (Duplicate shuffle auras, etc) by only displaying the one with the latest end time.
-				for i = 1, #trackBuffs do
-					local compareId = trackBuffs[i].abilityId
-					local compareTime = trackBuffs[i].endTime
-					-- Only re-iterate and compare if this ability is on the override table, this way we avoid as much of this double loop as possible.
-					if LUIE.Effects.EffectOverride[compareId] and LUIE.Effects.EffectOverride[compareId].noDuplicate then
-						for k, v in pairs(trackBuffs) do
-							-- Only remove the lower duration effects that were cast previously.
-							if v.abilityId == compareId and v.endTime < compareTime then
-								v.markForRemove = true
-							end
-						end
-					end
-				end			
-				
-				for i = 1, #trackBuffs do
-					local buffName = trackBuffs[i].buffName
-					local startTime =  trackBuffs[i].startTime
-					local endTime =  trackBuffs[i].endTime
-					local buffSlot =  trackBuffs[i].buffSlot
-					local stackCount =  trackBuffs[i].stackCount
-					local iconFile =  trackBuffs[i].iconFile
-					local buffType =  trackBuffs[i].buffType
-					local effectType =  trackBuffs[i].effectType
-					local abilityType =  trackBuffs[i].abilityType
-					local statusEffectType =  trackBuffs[i].statusEffectType
-					local abilityId =  trackBuffs[i].abilityId
-					local markForRemove = trackBuffs[i].markForRemove or false
-					
+                    trackBuffs[counter] = {
+                        buffName = buffName,
+                        startTime = startTime,
+                        endTime = endTime,
+                        buffSlot = buffSlot,
+                        stackCount = stackCount,
+                        iconFile = iconFile,
+                        buffType = buffType,
+                        effectType = effectType,
+                        abilityType = abilityType,
+                        statusEffectType = statusEffectType,
+                        abilityId = abilityId
+                    }
+                    counter = counter + 1
+                end
+                
+                -- Heavy handed - but functional way to mark duplicate abilities to not display (Duplicate shuffle auras, etc) by only displaying the one with the latest end time.
+                for i = 1, #trackBuffs do
+                    local compareId = trackBuffs[i].abilityId
+                    local compareTime = trackBuffs[i].endTime
+                    -- Only re-iterate and compare if this ability is on the override table, this way we avoid as much of this double loop as possible.
+                    if LUIE.Effects.EffectOverride[compareId] and LUIE.Effects.EffectOverride[compareId].noDuplicate then
+                        for k, v in pairs(trackBuffs) do
+                            -- Only remove the lower duration effects that were cast previously.
+                            if v.abilityId == compareId and v.endTime < compareTime then
+                                v.markForRemove = true
+                            end
+                        end
+                    end
+                end         
+                
+                for i = 1, #trackBuffs do
+                    local buffName = trackBuffs[i].buffName
+                    local startTime =  trackBuffs[i].startTime
+                    local endTime =  trackBuffs[i].endTime
+                    local buffSlot =  trackBuffs[i].buffSlot
+                    local stackCount =  trackBuffs[i].stackCount
+                    local iconFile =  trackBuffs[i].iconFile
+                    local buffType =  trackBuffs[i].buffType
+                    local effectType =  trackBuffs[i].effectType
+                    local abilityType =  trackBuffs[i].abilityType
+                    local statusEffectType =  trackBuffs[i].statusEffectType
+                    local abilityId =  trackBuffs[i].abilityId
+                    local markForRemove = trackBuffs[i].markForRemove or false
+                    
                     local tooltipText = GetAbilityEffectDescription(buffSlot)
                     --if LUIE.Effects.TooltipOverride[abilityId] then tooltipText = LUIE.Effects.TooltipOverride[abilityId] end
                     -- Have to trim trailing spaces on the end of tooltips
@@ -418,7 +418,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         end
            
        container:RegisterForEvent(EVENT_EFFECT_CHANGED, UpdateEffects)
-	   --container:AddFilterForEvent(EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "player")
+       --container:AddFilterForEvent(EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "player")
        container:RegisterForEvent(EVENT_EFFECTS_FULL_UPDATE, UpdateEffects)
        container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_ADDED, UpdateEffects)
        container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_REMOVED, UpdateEffects)
@@ -445,57 +445,57 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         control.animation:PlayForward()
     end
 
-	-- Hook skills advisor and use this variable to refresh the abilityData on time on initialization. We don't want to reload any more after that.
-	local firstRun = true
-	
-	-- Overwrite skills advisor ability data function
-	ZO_SKILLS_ADVISOR_SINGLETON.FillInAbilityData = function(self, abilityData, skillBuildId, skillBuildAbilityIndex)
-		local skillType, lineIndex, abilityIndex, isActive, skillBuildMorphChoice, skillBuildRankIndex = GetSkillBuildEntryInfo(skillBuildId, skillBuildAbilityIndex)
-		local _, _, earnedRank, _, ultimate, purchased, progressionIndex, rankIndex = GetSkillAbilityInfo(skillType, lineIndex, abilityIndex)
-		local _, lineRank = GetSkillLineInfo(skillType, lineIndex)
-		local abilityId, rankNeeded = GetSpecificSkillAbilityInfo(skillType, lineIndex, abilityIndex, skillBuildMorphChoice, skillBuildRankIndex)
-		local _, _, nextUpgradeEarnedRank = GetSkillAbilityNextUpgradeInfo(skillType, lineIndex, abilityIndex)
-		local currentMorphChoice
-		local atMorph = false
-		if progressionIndex then
-			currentMorphChoice = select(2, GetAbilityProgressionInfo(progressionIndex)) 
-			atMorph = select(4, GetAbilityProgressionXPInfo(progressionIndex))
-		end
-
-			-- This data is expensive to get, and won't change when the ID is the same.
-		if abilityData.abilityId ~= abilityId or firstRun then
-			local rawName = GetAbilityName(abilityId)
-			local icon = GetAbilityIcon(abilityId)
-
-			local plainName = zo_strformat(SI_ABILITY_NAME, rawName)
-			abilityData.name = isActive and plainName or zo_strformat(SI_ABILITY_NAME_AND_RANK, rawName, skillBuildRankIndex)
-			abilityData.plainName = plainName
-			abilityData.icon = icon
-		end
-		
-		abilityData.abilityId = abilityId
-		abilityData.skillType = skillType
-		abilityData.lineIndex = lineIndex
-		abilityData.abilityIndex = abilityIndex
-		abilityData.earnedRank = earnedRank
-		abilityData.nextUpgradeEarnedRank = nextUpgradeEarnedRank
-		abilityData.rankIndex = rankIndex
-		abilityData.passive = not isActive
-		abilityData.ultimate = ultimate
-		abilityData.purchased = purchased
-		abilityData.progressionIndex = progressionIndex
-		abilityData.lineRank = lineRank
-		abilityData.atMorph = atMorph
-		abilityData.morph = currentMorphChoice
-		abilityData.skillBuildMorphChoice = skillBuildMorphChoice
-		abilityData.skillBuildRankIndex = skillBuildRankIndex
-		abilityData.rankNeeded = rankNeeded
-	end
+    -- Hook skills advisor and use this variable to refresh the abilityData on time on initialization. We don't want to reload any more after that.
+    local firstRun = true
     
-	ZO_SKILLS_ADVISOR_SINGLETON:UpdateSkillBuildData()
-	
-	firstRun = false
-	
+    -- Overwrite skills advisor ability data function
+    ZO_SKILLS_ADVISOR_SINGLETON.FillInAbilityData = function(self, abilityData, skillBuildId, skillBuildAbilityIndex)
+        local skillType, lineIndex, abilityIndex, isActive, skillBuildMorphChoice, skillBuildRankIndex = GetSkillBuildEntryInfo(skillBuildId, skillBuildAbilityIndex)
+        local _, _, earnedRank, _, ultimate, purchased, progressionIndex, rankIndex = GetSkillAbilityInfo(skillType, lineIndex, abilityIndex)
+        local _, lineRank = GetSkillLineInfo(skillType, lineIndex)
+        local abilityId, rankNeeded = GetSpecificSkillAbilityInfo(skillType, lineIndex, abilityIndex, skillBuildMorphChoice, skillBuildRankIndex)
+        local _, _, nextUpgradeEarnedRank = GetSkillAbilityNextUpgradeInfo(skillType, lineIndex, abilityIndex)
+        local currentMorphChoice
+        local atMorph = false
+        if progressionIndex then
+            currentMorphChoice = select(2, GetAbilityProgressionInfo(progressionIndex)) 
+            atMorph = select(4, GetAbilityProgressionXPInfo(progressionIndex))
+        end
+
+            -- This data is expensive to get, and won't change when the ID is the same.
+        if abilityData.abilityId ~= abilityId or firstRun then
+            local rawName = GetAbilityName(abilityId)
+            local icon = GetAbilityIcon(abilityId)
+
+            local plainName = zo_strformat(SI_ABILITY_NAME, rawName)
+            abilityData.name = isActive and plainName or zo_strformat(SI_ABILITY_NAME_AND_RANK, rawName, skillBuildRankIndex)
+            abilityData.plainName = plainName
+            abilityData.icon = icon
+        end
+        
+        abilityData.abilityId = abilityId
+        abilityData.skillType = skillType
+        abilityData.lineIndex = lineIndex
+        abilityData.abilityIndex = abilityIndex
+        abilityData.earnedRank = earnedRank
+        abilityData.nextUpgradeEarnedRank = nextUpgradeEarnedRank
+        abilityData.rankIndex = rankIndex
+        abilityData.passive = not isActive
+        abilityData.ultimate = ultimate
+        abilityData.purchased = purchased
+        abilityData.progressionIndex = progressionIndex
+        abilityData.lineRank = lineRank
+        abilityData.atMorph = atMorph
+        abilityData.morph = currentMorphChoice
+        abilityData.skillBuildMorphChoice = skillBuildMorphChoice
+        abilityData.skillBuildRankIndex = skillBuildRankIndex
+        abilityData.rankNeeded = rankNeeded
+    end
+    
+    ZO_SKILLS_ADVISOR_SINGLETON:UpdateSkillBuildData()
+    
+    firstRun = false
+    
 end
 
 local delayBuffer       = {}
@@ -633,43 +633,43 @@ function LUIE.SlashHome()
 
     if IsUnitInCombat("player") then
         printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IN_COMBAT))
-		if LUIE.SV.TempAlertHome then
-			ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IN_COMBAT)))
-		end
-		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        if LUIE.SV.TempAlertHome then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IN_COMBAT)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
 
     if IsPlayerInAvAWorld() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA))
-		if LUIE.SV.TempAlertHome then
-			ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA)))
-		end
-		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        if LUIE.SV.TempAlertHome then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-	
-	if IsActiveWorldBattleground() then
-	    printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_BG))
-		if LUIE.SV.TempAlertHome then
-			ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_BG)))
-		end
-		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+    
+    if IsActiveWorldBattleground() then
+        printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_BG))
+        if LUIE.SV.TempAlertHome then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_BG)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
 
     if primaryHouse == 0 then
         printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_NOHOME))
-		if LUIE.SV.TempAlertHome then
-			ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_NOHOME)))
-		end
-		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        if LUIE.SV.TempAlertHome then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_NOHOME)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
     else
         RequestJumpToHouse(primaryHouse)
         printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG))
-		if LUIE.SV.TempAlertHome then
-			ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG)))
-		end
+        if LUIE.SV.TempAlertHome then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG)))
+        end
     end
 
 end
@@ -679,46 +679,46 @@ function LUIE.SlashRegroup()
     -- Check for pending regroup
     if PendingRegroup then
         printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_PENDING))
-		if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-			ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_PENDING)))
-		end
-		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_PENDING)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
     -- Check to make sure player is in a group
     if groupSize <= 1 then
         printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTINGRP))
-		if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-			ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTINGRP)))
-		end
-		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTINGRP)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-	-- Check to make sure we're not in a battleground
-	if IsActiveWorldBattleground() then
-	    printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_BG))
-		if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-			ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_BG)))
-		end
-		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+    -- Check to make sure we're not in a battleground
+    if IsActiveWorldBattleground() then
+        printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_BG))
+        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_BG)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-	-- Check to make sure we're not in LFG
+    -- Check to make sure we're not in LFG
     if IsInLFGGroup() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_LFGACTIVITY))
-		if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-			ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_LFGACTIVITY)))
-		end
-		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_LFGACTIVITY)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
     -- Check to make sure player is the leader
     if not IsUnitGroupLeader("player") then
         printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTLEADER))
-		if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-			ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTLEADER)))
-		end
-		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTLEADER)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
 
@@ -734,7 +734,7 @@ function LUIE.SlashRegroup()
             local groupMemberName = GetUnitName(memberTag)
             local groupMemberAccountName = GetUnitDisplayName(memberTag)
             local memberLink = LUIE.ChatAnnouncements.ResolveNameLink(groupMemberName, groupMemberAccountName)
-			local memberNoLink = LUIE.ChatAnnouncements.ResolveNameNoLink(groupMemberName, groupMemberAccountName)
+            local memberNoLink = LUIE.ChatAnnouncements.ResolveNameNoLink(groupMemberName, groupMemberAccountName)
             
             -- Place inside counter incremented index, this way if we have offline members in the group we still index everything in an ordered integer list.
             g_regroupStacks[index] = { memberLink = memberLink, memberName = groupMemberName }
@@ -749,24 +749,24 @@ function LUIE.SlashRegroup()
     if flagOffline > 0 then 
         if #g_regroupStacks > 1 then
             printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG), flagOffline, flagOffline, flagOffline))
-			if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-				ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG), flagOffline, flagOffline, flagOffline) )
-			end
+            if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG), flagOffline, flagOffline, flagOffline) )
+            end
             GroupDisband()
             zo_callLater(LUIE.RegroupInvite, 5000)
         else
             printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG))
-			if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-				ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG) )
-			end
+            if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG) )
+            end
             PendingRegroup = false -- Allow Regroup command to be used again
             g_regroupStacks = {} -- Allow index to be used again.
         end
     else
         printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG))
-		if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-			ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG) )
-		end
+        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG) )
+        end
         GroupDisband()
         zo_callLater(LUIE.RegroupInvite, 5000)
     end
@@ -774,18 +774,18 @@ end
 
 function LUIE.RegroupInvite()
     printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG))
-	if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-		ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG) )
-	end
+    if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG) )
+    end
     for i = 1, #g_regroupStacks do
         local member = g_regroupStacks[i]
         -- Don't invite self and offline members
         if member.memberName ~= LUIE.PlayerNameFormatted then
             GroupInviteByName(member.memberName)
             printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberLink))
-			if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-				ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberNoLink) )
-			end
+            if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberNoLink) )
+            end
         end
     end
 
@@ -812,9 +812,9 @@ function LUIE.SlashDisband()
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-	-- Check to make sure player is not in a BG
-	if IsActiveWorldBattleground() then
-	    printToChat(GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_BG))
+    -- Check to make sure player is not in a BG
+    if IsActiveWorldBattleground() then
+        printToChat(GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_BG))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_BG)))
         end
@@ -1176,29 +1176,29 @@ end
 -- Menu is true if this request is sent from the Player to Player interaction menu
 local zos_RequestFriend = RequestFriend
 RequestFriend = function(option1, option2, menu) 
-	zos_RequestFriend(option1, option2)
-	if not menu then
-		local message = strformat(GetString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG), option1)
-		printToChat(message)
-		if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-			ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, message)
-		end
-	end
+    zos_RequestFriend(option1, option2)
+    if not menu then
+        local message = strformat(GetString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG), option1)
+        printToChat(message)
+        if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, message)
+        end
+    end
 end
 
 -- Hook for request ignore to handle error message if account name is already ignored
 local zos_AddIgnore = AddIgnore
 AddIgnore = function(option)
-	zos_AddIgnore(option)
-	
-	if IsIgnored(option) then -- Only lists account names, unfortunately
-		printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE))
-		if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-			ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE)))
-		end
-		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-		return
-	end
+    zos_AddIgnore(option)
+    
+    if IsIgnored(option) then -- Only lists account names, unfortunately
+        printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE))
+        if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
 
 end
 
@@ -1324,9 +1324,9 @@ function LUIE.SlashVoteKick(option)
         return
     end
 
-	-- Check to make sure we're not in a battleground
-	if IsActiveWorldBattleground() then
-	    printToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_BG))
+    -- Check to make sure we're not in a battleground
+    if IsActiveWorldBattleground() then
+        printToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_BG))
         if LUIE.ChatAnnouncements.SV.Group.GroupLFGAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_BG)))
         end
@@ -1403,53 +1403,53 @@ function LUIE.SlashCampaignQ(option)
 
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NONAME))
-		if LUIE.SV.TempAlertCampaign then
-			ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NONAME) )
-		end
-		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        if LUIE.SV.TempAlertCampaign then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NONAME) )
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-	
-	if IsActiveWorldBattleground() then
-		printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG))
-		if LUIE.SV.TempAlertCampaign then
-			ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG) )
-		end
-		PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-		return
-	end
-	
-	-- Compare names to campaigns available, join the campaign and bail out of the function if it is available.
-	for i = 1, 100 do
-		local compareName = string.lower(GetCampaignName(i))
-		local option = string.lower(option)
-		if compareName == option then
-			local campaignName
-			campaignName = GetCampaignName(i)
-			
-			if GetAssignedCampaignId() == i or GetGuestCampaignId() == i then 
-				QueueForCampaign (i)
-				printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName))
-				if LUIE.SV.TempAlertCampaign then
-					ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName) )
-				end
-				return
-			else
-				printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED))
-				if LUIE.SV.TempAlertCampaign then
-					ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED) )
-				end
-				PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-				return
-			end
-		end
-	end
-	
-	printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN))
-	if LUIE.SV.TempAlertCampaign then
-		ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN) )
-	end
-	PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+    
+    if IsActiveWorldBattleground() then
+        printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG))
+        if LUIE.SV.TempAlertCampaign then
+            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG) )
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
+    
+    -- Compare names to campaigns available, join the campaign and bail out of the function if it is available.
+    for i = 1, 100 do
+        local compareName = string.lower(GetCampaignName(i))
+        local option = string.lower(option)
+        if compareName == option then
+            local campaignName
+            campaignName = GetCampaignName(i)
+            
+            if GetAssignedCampaignId() == i or GetGuestCampaignId() == i then 
+                QueueForCampaign (i)
+                printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName))
+                if LUIE.SV.TempAlertCampaign then
+                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName) )
+                end
+                return
+            else
+                printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED))
+                if LUIE.SV.TempAlertCampaign then
+                    ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED) )
+                end
+                PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+                return
+            end
+        end
+    end
+    
+    printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN))
+    if LUIE.SV.TempAlertCampaign then
+        ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN) )
+    end
+    PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
 
 end
 
@@ -1512,7 +1512,7 @@ SLASH_COMMANDS["/removefriend"] = LUIE.SlashRemoveFriend
 SLASH_COMMANDS["/unignore"]     = LUIE.SlashRemoveIgnore
 SLASH_COMMANDS["/removeignore"] = LUIE.SlashRemoveIgnore
 SLASH_COMMANDS["/campaign"]     = LUIE.SlashCampaignQ
-SLASH_COMMANDS["/invite"] 		= LUIE.SlashInvite
+SLASH_COMMANDS["/invite"]       = LUIE.SlashInvite
 
 -- Hook initialization
 EVENT_MANAGER:RegisterForEvent(LUIE.name, EVENT_ADD_ON_LOADED, LUIE_OnAddOnLoaded)
