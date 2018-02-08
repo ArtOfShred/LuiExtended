@@ -93,9 +93,15 @@ local uiUltimate = {
 }
 
 local IsAbilityProc = {
+
+    [A.Skill_Tighten]               = true,
+
     [A.Trigger_Assassins_Will]      = true,
     [A.Trigger_Assassins_Scourge]   = true,
     [A.Trigger_Power_Lash]          = true,
+    
+	--[L.Trigger_Deadly_Throw]		= true,
+    
 }
 
 local HasAbilityProc = {
@@ -753,7 +759,6 @@ function CI.OnSlotUpdated(eventCode, slotNum)
     if IsAbilityProc[abilityName] then
         if CI.SV.ShowTriggered then
             CI.PlayProcAnimations(slotNum)
-            -- TODO
         end
     elseif proc then
         g_triggeredSlots[proc] = slotNum

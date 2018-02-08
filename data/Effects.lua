@@ -1126,6 +1126,12 @@ E.SynergyNameOverride = {
     
 }
 
+E.BarNameOverride = {
+
+    [A.Skill_Tighten] = 'LuiExtended/media/icons/abilities/ability_fightersguild_silver_leash.dds', -- Tighten (Silver Leash - Rank 1)
+
+}
+
 E.EffectOverrideByName = {
     -- TUTORIAL
     

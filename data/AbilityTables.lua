@@ -333,6 +333,7 @@ A.Skill_Shock_Pulsar                = 89844
 -- ---------------------------------------------------
 
 A.Skill_Silver_Leash                = 40336
+A.Skill_Tighten                     = 40342
 
 A.Skill_Circle_of_Protection        = 35737
 A.Skill_Turn_Undead                 = 40181

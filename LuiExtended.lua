@@ -496,6 +496,61 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     
     firstRun = false
     
+    local ACTION_BUTTON_BGS = {ability = "EsoUI/Art/ActionBar/abilityInset.dds", item = "EsoUI/Art/ActionBar/quickslotBG.dds"}
+    local ACTION_BUTTON_BORDERS = {normal = "EsoUI/Art/ActionBar/abilityFrame64_up.dds", mouseDown = "EsoUI/Art/ActionBar/abilityFrame64_down.dds"}
+    
+    local function SetupActionSlot(slotObject, slotId)
+        local slotIcon = GetSlotTexture(slotId)
+        
+        -- Added function - Replace icons if needed
+        local slotName = GetSlotName(slotId)
+        if LUIE.Effects.BarNameOverride[slotName] then slotIcon = LUIE.Effects.BarNameOverride[slotName] end
+
+        slotObject.slot:SetHidden(false)
+        slotObject.hasAction = true
+
+        local isGamepad = IsInGamepadPreferredMode()
+        ZO_ActionSlot_SetupSlot(slotObject.icon, slotObject.button, slotIcon, isGamepad and "" or ACTION_BUTTON_BORDERS.normal, isGamepad and "" or ACTION_BUTTON_BORDERS.mouseDown, slotObject.cooldownIcon)
+        slotObject:UpdateState()
+    end
+
+    local function SetupActionSlotWithBg(slotObject, slotId)
+        SetupActionSlot(slotObject, slotId)
+        slotObject.bg:SetTexture(ACTION_BUTTON_BGS.ability)
+    end
+
+    local function SetupAbilitySlot(slotObject, slotId)
+        SetupActionSlotWithBg(slotObject, slotId)
+
+        if slotId == ACTION_BAR_ULTIMATE_SLOT_INDEX + 1 then
+            slotObject:RefreshUltimateNumberVisibility()
+        else
+            slotObject:ClearCount()
+        end
+    end
+
+    local function SetupItemSlot(slotObject, slotId)
+        SetupActionSlotWithBg(slotObject, slotId)
+        slotObject:SetupCount()
+    end
+
+    local function SetupSiegeActionSlot(slotObject, slotId)
+        SetupActionSlot(slotObject, slotId)
+    end
+
+    local function SetupCollectibleActionSlot(slotObject, slotId)
+        SetupActionSlotWithBg(slotObject, slotId)
+        slotObject:ClearCount()
+    end
+
+    SetupSlotHandlers =
+    {
+        [ACTION_TYPE_ABILITY]       = SetupAbilitySlot,
+        [ACTION_TYPE_ITEM]          = SetupItemSlot,
+        [ACTION_TYPE_SIEGE_ACTION]  = SetupSiegeActionSlot,
+        [ACTION_TYPE_COLLECTIBLE]   = SetupCollectibleActionSlot,
+    }
+    
 end
 
 local delayBuffer       = {}
