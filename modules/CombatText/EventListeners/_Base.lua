@@ -25,7 +25,7 @@ function CTL:RegisterForEvent(event, func, ...)
 end
 
 function CTL:RegisterForUpdate(name, timer, func, ...)
-	eventManager:RegisterForUpdate('LUIE_CombatText_EVENT_' .. name .. '_' .. eventPostfix, timer, func)
+    eventManager:RegisterForUpdate('LUIE_CombatText_EVENT_' .. name .. '_' .. eventPostfix, timer, func)
 end
 
 function CTL:TriggerEvent(...)

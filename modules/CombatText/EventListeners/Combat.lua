@@ -120,9 +120,9 @@ end
 
 function CTL:OnCombatIn(...)
     local resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId = ...
-	
-	local S = LUIE.CombatText.SV
-	local combatType, togglesInOut = C.combatType.INCOMING, S.toggles.incoming
+    
+    local S = LUIE.CombatText.SV
+    local combatType, togglesInOut = C.combatType.INCOMING, S.toggles.incoming
     abilityName = zo_strformat("<<C:1>>", abilityName)
     
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -156,13 +156,13 @@ function CTL:OnCombatIn(...)
        (isBlocked and togglesInOut.showBlocked) or
        (isInterrupted and togglesInOut.showInterrupted) or
        (isDot and togglesInOut.showDot and hitValue > 0) or
-	   (isDotCritical and togglesInOut.showDot and hitValue > 0) or
+       (isDotCritical and togglesInOut.showDot and hitValue > 0) or
        (isHot and togglesInOut.showHot and hitValue > 0) or
-	   (isHotCritical and togglesInOut.showHot and hitValue > 0) or
+       (isHotCritical and togglesInOut.showHot and hitValue > 0) or
        (isHealing and togglesInOut.showHealing and hitValue > 0) or
-	   (isHealingCritical and togglesInOut.showHealing and hitValue > 0) or
+       (isHealingCritical and togglesInOut.showHealing and hitValue > 0) or
        (isDamage and togglesInOut.showDamage and hitValue > 0) or
-	   (isDamageCritical and togglesInOut.showDamage and hitValue > 0) or
+       (isDamageCritical and togglesInOut.showDamage and hitValue > 0) or
        (isEnergize and togglesInOut.showEnergize and (powerType == POWERTYPE_MAGICKA or powerType == POWERTYPE_STAMINA)) or
        (isEnergize and togglesInOut.showUltimateEnergize and powerType == POWERTYPE_ULTIMATE) or
        (isDrain and togglesInOut.showDrain and (powerType == POWERTYPE_MAGICKA or powerType == POWERTYPE_STAMINA)) then
@@ -233,83 +233,83 @@ function CTL:OnCombatIn(...)
     
     -- NEW ALERTS
     if S.toggles.showAlertMitigation and AlertT[abilityId] then
-		if sourceName ~= nil and sourceName ~= "" and (resultType == ACTION_RESULT_BEGIN or resultType == ACTION_RESULT_BEGIN_CHANNEL or AlertT[abilityId].skipcheck) and not refireDelay[abilityId] then
-			if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then abilityName = LUIE.Effects.EffectOverride[abilityId].name end
-			local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
-			
-			if resultType == ACTION_RESULT_EFFECT_FADED then return end
-			
-			if LUIE.Effects.EffectOverrideByName[abilityId] then
-				sourceName = zo_strformat("<<t:1>>", sourceName)
-				if LUIE.Effects.EffectOverrideByName[abilityId][sourceName] and LUIE.Effects.EffectOverrideByName[abilityId][sourceName].icon then
-					formattedIcon = zo_iconFormat(LUIE.Effects.EffectOverrideByName[abilityId][sourceName].icon, 32, 32)
-				end
-			end
-			
-			if AlertT[abilityId].refire then
-				refireDelay[abilityId] = true
-				callLater(function() refireDelay[abilityId] = nil end, AlertT[abilityId].refire) --buffer by X time
-			end
+        if sourceName ~= nil and sourceName ~= "" and (resultType == ACTION_RESULT_BEGIN or resultType == ACTION_RESULT_BEGIN_CHANNEL or AlertT[abilityId].skipcheck) and not refireDelay[abilityId] then
+            if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then abilityName = LUIE.Effects.EffectOverride[abilityId].name end
+            local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
+            
+            if resultType == ACTION_RESULT_EFFECT_FADED then return end
+            
+            if LUIE.Effects.EffectOverrideByName[abilityId] then
+                sourceName = zo_strformat("<<t:1>>", sourceName)
+                if LUIE.Effects.EffectOverrideByName[abilityId][sourceName] and LUIE.Effects.EffectOverrideByName[abilityId][sourceName].icon then
+                    formattedIcon = zo_iconFormat(LUIE.Effects.EffectOverrideByName[abilityId][sourceName].icon, 32, 32)
+                end
+            end
+            
+            if AlertT[abilityId].refire then
+                refireDelay[abilityId] = true
+                callLater(function() refireDelay[abilityId] = nil end, AlertT[abilityId].refire) --buffer by X time
+            end
 
-			if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt then
-			
-				-- Filter by priority
-				if S.toggles.mitigationDungeon and not IsUnitInDungeon("player") or not S.toggles.mitigationDungeon then
-					if AlertT[abilityId].priority == 3 and not S.toggles.mitigationRank3 then return end
-					if AlertT[abilityId].priority == 2 and not S.toggles.mitigationRank2 then return end
-					if AlertT[abilityId].priority == 1 and not S.toggles.mitigationRank1 then return end
-				end
-			
-				local isDirect
-				local block
-				local blockstagger
-				local dodge
-				local avoid
-				local interrupt
-				
-				if AlertT[abilityId].notDirect then 
-					isDirect = false
-				else 
-					isDirect = true
-				end
-			
-				if AlertT[abilityId].block and (S.toggles.showAlertBlock) == true then
-					if AlertT[abilityId].bs then
-						blockstagger = true
-					else
-						block = true
-					end
-				end
-				if AlertT[abilityId].dodge and (S.toggles.showAlertDodge) == true then
-					dodge = true
-				end
-				if AlertT[abilityId].avoid and (S.toggles.showAlertAvoid) == true then
-					avoid = true
-				end
-				if AlertT[abilityId].interrupt and (S.toggles.showAlertInterrupt) == true then
-					interrupt = true
-				end
-				
-				if S.toggles.mitigationType == "Single Line" then
-					self:TriggerEvent(C.eventType.ALERT, C.alertType.SHARED, abilityName, formattedIcon, sourceName, isDirect, block, blockstagger, dodge, avoid, interrupt)
-				elseif S.toggles.mitigationType == "Multiple Lines" then
-					if block and not blockstagger then
-						self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCK, abilityName, formattedIcon, sourceName, isDirect)
-					end
-					if blockstagger then
-						self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCKSTAGGER, abilityName, formattedIcon, sourceName, isDirect)
-					end
-					if dodge then
-						self:TriggerEvent(C.eventType.ALERT, C.alertType.DODGE, abilityName, formattedIcon, sourceName, isDirect)
-					end
-					if avoid then
-						self:TriggerEvent(C.eventType.ALERT, C.alertType.AVOID, abilityName, formattedIcon, sourceName, isDirect)
-					end
-					if interrupt then
-						self:TriggerEvent(C.eventType.ALERT, C.alertType.INTERRUPT, abilityName, formattedIcon, sourceName, isDirect)
-					end
-				end
-			end
+            if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt then
+            
+                -- Filter by priority
+                if S.toggles.mitigationDungeon and not IsUnitInDungeon("player") or not S.toggles.mitigationDungeon then
+                    if AlertT[abilityId].priority == 3 and not S.toggles.mitigationRank3 then return end
+                    if AlertT[abilityId].priority == 2 and not S.toggles.mitigationRank2 then return end
+                    if AlertT[abilityId].priority == 1 and not S.toggles.mitigationRank1 then return end
+                end
+            
+                local isDirect
+                local block
+                local blockstagger
+                local dodge
+                local avoid
+                local interrupt
+                
+                if AlertT[abilityId].notDirect then 
+                    isDirect = false
+                else 
+                    isDirect = true
+                end
+            
+                if AlertT[abilityId].block and (S.toggles.showAlertBlock) == true then
+                    if AlertT[abilityId].bs then
+                        blockstagger = true
+                    else
+                        block = true
+                    end
+                end
+                if AlertT[abilityId].dodge and (S.toggles.showAlertDodge) == true then
+                    dodge = true
+                end
+                if AlertT[abilityId].avoid and (S.toggles.showAlertAvoid) == true then
+                    avoid = true
+                end
+                if AlertT[abilityId].interrupt and (S.toggles.showAlertInterrupt) == true then
+                    interrupt = true
+                end
+                
+                if S.toggles.mitigationType == "Single Line" then
+                    self:TriggerEvent(C.eventType.ALERT, C.alertType.SHARED, abilityName, formattedIcon, sourceName, isDirect, block, blockstagger, dodge, avoid, interrupt)
+                elseif S.toggles.mitigationType == "Multiple Lines" then
+                    if block and not blockstagger then
+                        self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCK, abilityName, formattedIcon, sourceName, isDirect)
+                    end
+                    if blockstagger then
+                        self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCKSTAGGER, abilityName, formattedIcon, sourceName, isDirect)
+                    end
+                    if dodge then
+                        self:TriggerEvent(C.eventType.ALERT, C.alertType.DODGE, abilityName, formattedIcon, sourceName, isDirect)
+                    end
+                    if avoid then
+                        self:TriggerEvent(C.eventType.ALERT, C.alertType.AVOID, abilityName, formattedIcon, sourceName, isDirect)
+                    end
+                    if interrupt then
+                        self:TriggerEvent(C.eventType.ALERT, C.alertType.INTERRUPT, abilityName, formattedIcon, sourceName, isDirect)
+                    end
+                end
+            end
         end
     end
     --[[ EXPLOIT ALERT (IF WE NEED TO ADD TO ANY OFF-BALANCE)
@@ -323,12 +323,12 @@ end
 
 function CTL:OnCombatOut(...)
     local resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId = ...
-	
-	-- Don't display duplicate messages for events sourced from the player that target the player
-	if targetType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER_PET then return end
-	
-	local S = LUIE.CombatText.SV
-	local combatType, togglesInOut = C.combatType.OUTGOING, S.toggles.outgoing
+    
+    -- Don't display duplicate messages for events sourced from the player that target the player
+    if targetType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER_PET then return end
+    
+    local S = LUIE.CombatText.SV
+    local combatType, togglesInOut = C.combatType.OUTGOING, S.toggles.outgoing
     abilityName = zo_strformat("<<C:1>>", abilityName)
     
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -362,13 +362,13 @@ function CTL:OnCombatOut(...)
        (isBlocked and togglesInOut.showBlocked) or
        (isInterrupted and togglesInOut.showInterrupted) or
        (isDot and togglesInOut.showDot and hitValue > 0) or
-	   (isDotCritical and togglesInOut.showDot and hitValue > 0) or
+       (isDotCritical and togglesInOut.showDot and hitValue > 0) or
        (isHot and togglesInOut.showHot and hitValue > 0) or
-	   (isHotCritical and togglesInOut.showHot and hitValue > 0) or
+       (isHotCritical and togglesInOut.showHot and hitValue > 0) or
        (isHealing and togglesInOut.showHealing and hitValue > 0) or
-	   (isHealingCritical and togglesInOut.showHealing and hitValue > 0) or
+       (isHealingCritical and togglesInOut.showHealing and hitValue > 0) or
        (isDamage and togglesInOut.showDamage and hitValue > 0) or
-	   (isDamageCritical and togglesInOut.showDamage and hitValue > 0) or
+       (isDamageCritical and togglesInOut.showDamage and hitValue > 0) or
        (isEnergize and togglesInOut.showEnergize and (powerType == POWERTYPE_MAGICKA or powerType == POWERTYPE_STAMINA)) or
        (isEnergize and togglesInOut.showUltimateEnergize and powerType == POWERTYPE_ULTIMATE) or
        (isDrain and togglesInOut.showDrain and (powerType == POWERTYPE_MAGICKA or powerType == POWERTYPE_STAMINA)) then
@@ -436,7 +436,7 @@ function CTL:OnCombatOut(...)
                 callLater(function() isWarned.stunned = false end, 1000) end --1 second buffer
         end
     end
-	
+    
 end
 
 ---------------------------------------------------------------------------------------------------------------------------------------

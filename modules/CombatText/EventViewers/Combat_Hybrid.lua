@@ -29,13 +29,13 @@ function CTV:OnEvent(combatType, powerType, value, abilityName, abilityId, damag
             self.eventBuffer[eventKey] = { value = value, hits = 1 }
             local throttleTime = 0
             if (isDamage) then throttleTime = T.damage
-			elseif (isDamageCritical) then throttleTime = T.damagecritical
+            elseif (isDamageCritical) then throttleTime = T.damagecritical
             elseif (isDot) then throttleTime = T.dot
-			elseif (isDotCritical) then throttleTime = T.dotcritical
+            elseif (isDotCritical) then throttleTime = T.dotcritical
             elseif (isHealing) then throttleTime = T.healing
-			elseif (isHealingCritical) then throttleTime = T.healingcritical
+            elseif (isHealingCritical) then throttleTime = T.healingcritical
             elseif (isHot) then throttleTime = T.hot
-			elseif (isHotCritical) then throttleTime = T.hotcritical end
+            elseif (isHotCritical) then throttleTime = T.hotcritical end
             callLater(function() self:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted) end, throttleTime)
         else
             self.eventBuffer[eventKey].value = self.eventBuffer[eventKey].value + value
@@ -56,10 +56,10 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
     local S = LUIE.CombatText.SV
 
     local control, controlPoolKey = self.poolManager:GetPoolObject(poolTypes.CONTROL)
-	
+    
     local textFormat, fontSize, textColor = self:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     if (hits > 1 and S.toggles.showThrottleTrailer) then value = format('%d (%d)', value, hits) end
-	if (combatType == C.combatType.INCOMING) and (S.toggles.incomingDamageOverride) and (isDamage or isDamageCritical) then textColor = S.colors.incomingDamageOverride end
+    if (combatType == C.combatType.INCOMING) and (S.toggles.incomingDamageOverride) and (isDamage or isDamageCritical) then textColor = S.colors.incomingDamageOverride end
     
     self:PrepareLabel(control.label, fontSize, textColor, self:FormatString(textFormat, { text = LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name or abilityName, value = value, powerType = powerType, damageType = damageType }))
     self:ControlLayout(control, abilityId, combatType, sourceName)
@@ -80,11 +80,11 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
     local w, h = panel:GetDimensions()
     local radiusW, radiusH = w / 4, h / 4
     local offsetX, offsetY = 0, 0
-	
+    
     if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) then offsetX = random(-radiusW, radiusW)
     elseif (isDot or isHot) then offsetX = random(-radiusW, radiusW)
     elseif (isDamage or isHealing or isEnergize or isDrain or isDamageShield or isBlocked) then offsetX = random(-radiusW, radiusW) end
-	
+    
     if (point == TOP) then
         if (self.lastControl[combatType] == nil) then offsetY = -25 else offsetY = max(-25, select(6, self.lastControl[combatType]:GetAnchor(0))) end
         control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
@@ -107,8 +107,8 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
 
     self.activeControls[combatType][control:GetName()] = control
     self.lastControl[combatType] = control
-	
-	-- Animation setup
+    
+    -- Animation setup
     local animationPoolType = poolTypes.ANIMATION_SCROLL
     if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) then animationPoolType = poolTypes.ANIMATION_SCROLL_CRITICAL end
 

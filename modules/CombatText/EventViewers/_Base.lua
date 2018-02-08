@@ -51,7 +51,7 @@ function CTV:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical,
     local textFormat = S.formats.damage
     local fontSize = S.fontSizes.damage
     local textColor = S.colors.damage[damageType]
-	
+    
     if (isDodged) then
         textFormat = S.formats.dodged
         fontSize = S.fontSizes.mitigation
@@ -94,10 +94,10 @@ function CTV:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical,
         textFormat = S.formats.healing
         fontSize = S.fontSizes.healing
         textColor = S.colors.healing
-	elseif (isHealingCritical) then
-		textFormat = S.formats.healingcritical
+    elseif (isHealingCritical) then
+        textFormat = S.formats.healingcritical
         fontSize = S.fontSizes.healingcritical
-		if S.toggles.criticalHealingOverride then
+        if S.toggles.criticalHealingOverride then
                 textColor = S.colors.criticalHealingOverride
         else
                 textColor = S.colors.healing
@@ -126,17 +126,17 @@ function CTV:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical,
     elseif (isDot) then
         textFormat = S.formats.dot
         fontSize = S.fontSizes.dot
-	elseif (isDotCritical) then
+    elseif (isDotCritical) then
         textFormat = S.formats.dotcritical
         fontSize = S.fontSizes.dotcritical
-		if S.toggles.criticalDamageOverride then
+        if S.toggles.criticalDamageOverride then
             textColor = S.colors.criticalDamageOverride
         end
     elseif (isHot) then
         textFormat = S.formats.hot
         fontSize = S.fontSizes.hot
         textColor = S.colors.healing
-	elseif (isHotCritical) then
+    elseif (isHotCritical) then
         textFormat = S.formats.hotcritical
         fontSize = S.fontSizes.hotcritical
         if S.toggles.criticalHealingOverride then
@@ -154,7 +154,7 @@ function CTV:ControlLayout(control, abilityId, combatType, sourceName)
 
     if abilityId then
         local iconPath = LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon or GetAbilityIcon(abilityId)
-		
+        
         if LUIE.Effects.EffectOverrideByName[abilityId] then
             sourceName = zo_strformat("<<t:1>>", sourceName)
             if LUIE.Effects.EffectOverrideByName[abilityId][sourceName] and LUIE.Effects.EffectOverrideByName[abilityId][sourceName].icon then
@@ -172,12 +172,12 @@ function CTV:ControlLayout(control, abilityId, combatType, sourceName)
             else
                 iconSide = 'none'
             end
-			
+            
             if iconSide == 'none' then
-				control.icon:SetAnchor(CENTER, control, CENTER, 0, 0)
-				control.label:SetAnchor(CENTER, control.icon, CENTER, 0, 0)
-				control:SetDimensions(width, height)
-			else
+                control.icon:SetAnchor(CENTER, control, CENTER, 0, 0)
+                control.label:SetAnchor(CENTER, control.icon, CENTER, 0, 0)
+                control:SetDimensions(width, height)
+            else
                 if iconSide == 'left' then
                     control.icon:SetAnchor(LEFT, control, LEFT, 0, 0)
                     control.label:SetAnchor(LEFT, control.icon, RIGHT, 8, 0)

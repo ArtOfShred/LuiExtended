@@ -29,13 +29,13 @@ function CTV:OnEvent(combatType, powerType, value, abilityName, abilityId, damag
             self.eventBuffer[eventKey] = { value = value, hits = 1 }
             local throttleTime = 0
             if (isDamage) then throttleTime = T.damage
-			elseif (isDamageCritical) then throttleTime = T.damagecritical
+            elseif (isDamageCritical) then throttleTime = T.damagecritical
             elseif (isDot) then throttleTime = T.dot
-			elseif (isDotCritical) then throttleTime = T.dotcritical
+            elseif (isDotCritical) then throttleTime = T.dotcritical
             elseif (isHealing) then throttleTime = T.healing
-			elseif (isHealingCritical) then throttleTime = T.healingcritical
+            elseif (isHealingCritical) then throttleTime = T.healingcritical
             elseif (isHot) then throttleTime = T.hot
-			elseif (isHotCritical) then throttleTime = T.hotcritical end
+            elseif (isHotCritical) then throttleTime = T.hotcritical end
             callLater(function() self:ViewFromEventBuffer(combatType, powerType, eventKey, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted) end, throttleTime)
         else
             self.eventBuffer[eventKey].value = self.eventBuffer[eventKey].value + value
@@ -61,7 +61,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
     if (hits > 1 and S.toggles.showThrottleTrailer) then value = format('%d (%d)', value, hits) end
     if (combatType == C.combatType.INCOMING) and (S.toggles.incomingDamageOverride) and (isDamage or isDamageCritical) then textColor = S.colors.incomingDamageOverride end
     
-	self:PrepareLabel(control.label, fontSize, textColor, self:FormatString(textFormat, { text = LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name or abilityName, value = value, powerType = powerType, damageType = damageType }))
+    self:PrepareLabel(control.label, fontSize, textColor, self:FormatString(textFormat, { text = LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name or abilityName, value = value, powerType = powerType, damageType = damageType }))
     self:ControlLayout(control, abilityId, combatType, sourceName)
 
     -- Control setup
