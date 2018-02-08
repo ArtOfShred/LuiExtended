@@ -154,7 +154,9 @@ UF.D = {
     Target_Neutral_UseDefaultColour  = true,
     ReticleColour_Interact           = { 1, 1, 0 },
     ReticleColourByReaction          = false,
-    DisplayOptions                   = 2,
+    DisplayOptionsPlayer             = 2,
+    DisplayOptionsTarget             = 2,
+    DisplayOptionsGroupRaid          = 2,
     ExecutePercentage                = 20,
     RaidIconOptions                  = 2,
     ChampionOptions                  = "Show Above Cap",
@@ -1081,7 +1083,7 @@ local function CreateCustomFrames()
     end
 
     -- Set proper anchors according to user preferences
-    UF.CustomFramesApplyLayoutPlayer()
+    UF.CustomFramesApplyLayoutPlayer(true)
     UF.CustomFramesApplyLayoutGroup(true)
     UF.CustomFramesApplyLayoutRaid(true)
     UF.CustomFramesApplyLayoutBosses()
@@ -1839,6 +1841,17 @@ function UF.UpdateStaticControls( unitFrame )
     if unitFrame == nil then
         return
     end
+    
+    -- Get the unitTag to determine the method of name display
+    local DisplayOption
+    if unitFrame.unitTag == "player" then 
+        DisplayOption = UF.SV.DisplayOptionsPlayer
+    elseif unitFrame.unitTag == "reticleover" then
+        DisplayOption = UF.SV.DisplayOptionsTarget
+    else
+        DisplayOption = UF.SV.DisplayOptionsGroupRaid
+    end
+    
 
     unitFrame.isPlayer  = IsUnitPlayer( unitFrame.unitTag )
     unitFrame.isChampion = IsUnitChampion( unitFrame.unitTag )
@@ -1925,9 +1938,9 @@ function UF.UpdateStaticControls( unitFrame )
         end
             unitFrame.name:SetWidth(width)
         end
-        if unitFrame.isPlayer and UF.SV.DisplayOptions == 3 then
+        if unitFrame.isPlayer and DisplayOption == 3 then
             unitFrame.name:SetText( GetUnitName( unitFrame.unitTag ) .." ".. GetUnitDisplayName (unitFrame.unitTag) )
-        elseif unitFrame.isPlayer and UF.SV.DisplayOptions == 1 then
+        elseif unitFrame.isPlayer and DisplayOption == 1 then
             unitFrame.name:SetText( GetUnitDisplayName (unitFrame.unitTag) )
         else
             unitFrame.name:SetText( GetUnitName( unitFrame.unitTag ) )
@@ -3433,7 +3446,7 @@ function UF.CustomFramesApplyFont()
 end
 
 -- Set dimensions of custom group frame and anchors or raid group members
-function UF.CustomFramesApplyLayoutPlayer()
+function UF.CustomFramesApplyLayoutPlayer(unhide)
     -- Player frame
     if UF.CustomFrames.player then
         local player = UF.CustomFrames.player
@@ -3648,7 +3661,7 @@ function UF.CustomFramesApplyLayoutPlayer()
                 psb.labelTwo:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightStamina-2 )
             end
         end
-        player.tlw:SetHidden(false)
+        if unhide then player.tlw:SetHidden( false ) end
     end
 
     -- Target frame
@@ -3708,8 +3721,10 @@ function UF.CustomFramesApplyLayoutPlayer()
         thb.labelOne:SetDimensions( UF.SV.TargetBarWidth-50, UF.SV.TargetBarHeight-2 )
         thb.labelTwo:SetDimensions( UF.SV.TargetBarWidth-50, UF.SV.TargetBarHeight-2 )
 
-        target.tlw:SetHidden(false)
-        target.control:SetHidden(false)
+        if unhide then
+            target.tlw:SetHidden(false)
+            target.control:SetHidden(false)
+        end
     end
 
     -- Another Target frame (for PvP)
@@ -3737,8 +3752,10 @@ function UF.CustomFramesApplyLayoutPlayer()
         thb.labelOne:SetHeight( UF.SV.AvaTargetBarHeight-2 )
         thb.labelTwo:SetHeight( UF.SV.AvaTargetBarHeight-2 )
 
-        target.tlw:SetHidden(false)
-        target.control:SetHidden(false)
+        if unhide then
+            target.tlw:SetHidden(false)
+            target.control:SetHidden(false)
+        end
     end
 end
 
@@ -4056,6 +4073,46 @@ function UF.CustomFramesGroupAlpha()
         end
     end
 end
+
+-- Reload Names from Menu function call
+function UF.CustomFramesReloadControlsMenu()
+    UF.UpdateStaticControls( g_DefaultFrames["player"] )
+    UF.UpdateStaticControls( UF.CustomFrames["player"] )
+    UF.UpdateStaticControls( g_AvaCustFrames["player"] )
+    
+    UF.UpdateStaticControls( g_DefaultFrames["reticleover"] )
+    UF.UpdateStaticControls( UF.CustomFrames["reticleover"] )
+    UF.UpdateStaticControls( g_AvaCustFrames["reticleover"] )
+
+    for i = 1, 4 do
+        local unitTag = "group" .. i
+        UF.UpdateStaticControls( g_DefaultFrames[unitTag] )
+        UF.UpdateStaticControls( UF.CustomFrames[unitTag] )
+        UF.UpdateStaticControls( g_AvaCustFrames[unitTag] )
+    end
+    
+    UF.CustomFramesApplyLayoutPlayer(false)
+    UF.CustomFramesApplyLayoutGroup(false)
+    UF.CustomFramesApplyLayoutRaid(false)
+    
+end
+
+function UF.CustomFramesReloadExecuteMenu()
+
+g_targetThreshold = UF.SV.ExecutePercentage
+
+    
+    if UF.CustomFrames["reticleover"] and UF.CustomFrames["reticleover"][POWERTYPE_HEALTH] then UF.CustomFrames["reticleover"][POWERTYPE_HEALTH].threshold = g_targetThreshold end
+    if g_AvaCustFrames["reticleover"] and g_AvaCustFrames["reticleover"][POWERTYPE_HEALTH] then g_AvaCustFrames["reticleover"][POWERTYPE_HEALTH].threshold = g_targetThreshold end
+    
+    -- Boss Frames
+    for i = 1, 6 do
+        local unitTag = "boss" .. i
+        if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag][POWERTYPE_HEALTH] then UF.CustomFrames[unitTag][POWERTYPE_HEALTH].threshold = g_targetThreshold end
+    end
+
+end
+    
 
 --[[----------------------------------------------------------
  * DEBUG FUNCTIONS

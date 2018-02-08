@@ -1685,7 +1685,12 @@ ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPVP_TARGETFRAME_HEIGHT",       "PvP Tar
 
 -- Common Options
 ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_HEADER",                       "Common Options")
-ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_NAMEDISPLAYMETHOD_TP",         "Determines the method used to display other player names on unit frames. This setting does not effect the player frame.\nDefault: Character Name")
+ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER",           "Player Name Display Method (Player)")
+ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER_TP",        "Determines the method used to display your name on the player frame.\nDefault: Character Name")
+ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_TARGET",           "Player Name Display Method (Target)")
+ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_TARGET_TP",        "Determines the method used to display other player names on target unit frames.\nDefault: Character Name")
+ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID",        "Player Name Display Method (Group/Raid)")
+ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID_TP",     "Determines the method used to display other player names on group and raid unit frames.\nDefault: Character Name")
 ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_CAPTIONCOLOR",                 "Default Caption Color")
 ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_NPCFONTCOLOR",                 "Friendly NPC Font Color")
 ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_PLAYERFONTCOLOR",              "Friendly Player Font Color")
