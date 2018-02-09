@@ -1218,10 +1218,12 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         unbreakable = E.EffectOverride[abilityId].unbreakable or 0
         -- Destroy other effects of the same type if we don't want to show duplicates at all.
         if E.EffectOverride[abilityId].noDuplicate then
-            for k, v in pairs(g_effectsList.player1) do
-                -- Only remove the lower duration effects that were cast previously.
-                if v.id == abilityId and v.ends < (1000*endTime) then 
-                    g_effectsList.player1[ k ] = nil
+            for context, effectsList in pairs( g_effectsList ) do
+                for k, v in pairs(effectsList) do
+                    -- Only remove the lower duration effects that were cast previously.
+                    if v.id == abilityId and v.ends < (1000*endTime) then
+                        g_effectsList[context][ k ] = nil
+                    end
                 end
             end
         end
@@ -1493,7 +1495,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
     if not (E.IsGroundMine[abilityName] or E.FakePlayerExternalBuffs[abilityId] or E.FakePlayerDebuffs[abilityId] or E.FakeStagger[abilityId]) then return end
     
     -- Try to remove effect like Ground Runes and Traps (we check this before we filter for other result types)
-    if E.IsGroundMineDamage[abilityId] and IsResultDamage[result] and ( targetType == COMBAT_UNIT_TYPE_NONE or targetType == COMBAT_UNIT_TYPE_OTHER) then
+    if E.IsGroundMineDamage[abilityId] and IsResultDamage[result] and ( targetType == COMBAT_UNIT_TYPE_NONE or targetType == COMBAT_UNIT_TYPE_OTHER or targetType == COMBAT_UNIT_TYPE_GROUP) then
         for k, v in pairs(g_effectsList.ground) do
             -- Check if we have a buff up a mine, if we do also compare the names to make sure they are equivalent. This prevents removing Daedric Mines with Rearming Trap for example.
             if v.abilityId == E.IsGroundMineAura[abilityId] and v.name == abilityName then

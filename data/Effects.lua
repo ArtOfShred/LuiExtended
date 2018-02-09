@@ -232,6 +232,11 @@ E.IsGroundMineAura = {
 [42737] = true, -- Rearming Trap (Rearming Trap - Rank 3)
 [42747] = true, -- Rearming Trap (Rearming Trap - Rank 4)
 
+[40372] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+[42757] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 2)
+[42764] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 3)
+[42771] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 4)
+
 }
 
 E.IsGroundMineDamage = {
@@ -252,6 +257,11 @@ E.IsGroundMineDamage = {
 
 [42751] = true, -- Rearming Trap (Rank 4)
 [42756] = true, -- Rearming Trap (Rank 4)
+
+[40376] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+[42761] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 2)
+[42768] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 3)
+[42775] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 4)
 
 }
 
@@ -561,14 +571,19 @@ E.EffectGroundDisplay = {
     ---------------------------
     
     [35737] = { buff = true, debuff = false, ground = false }, -- Circle of Protection (Circle of Protection - Rank 1)
-    [42501] = { buff = true, debuff = false, ground = false }, -- Circle of Protection (Circle of Protection - Rank 2)
-    [42506] = { buff = true, debuff = false, ground = false }, -- Circle of Protection (Circle of Protection - Rank 3)
-    [42509] = { buff = true, debuff = false, ground = false }, -- Circle of Protection (Circle of Protection - Rank 4)
+    --[42501] = { buff = true, debuff = false, ground = false }, -- Circle of Protection (Circle of Protection - Rank 2) -- DISABLED WHILE BUGGED
+    --[42505] = { buff = true, debuff = false, ground = false }, -- Circle of Protection (Circle of Protection - Rank 3) -- DISABLED WHILE BUGGED
+    --[42509] = { buff = true, debuff = false, ground = false }, -- Circle of Protection (Circle of Protection - Rank 4) -- DISABLED WHILE BUGGED
     
     [40181] = { buff = true, debuff = false, ground = false }, -- Turn Undead (Turn Undead - Rank 1)
-    [42515] = { buff = true, debuff = false, ground = false }, -- Turn Undead (Turn Undead - Rank 2)
-    [42522] = { buff = true, debuff = false, ground = false }, -- Turn Undead (Turn Undead - Rank 3)
-    [42529] = { buff = true, debuff = false, ground = false }, -- Turn Undead (Turn Undead - Rank 4)
+    --[42515] = { buff = true, debuff = false, ground = false }, -- Turn Undead (Turn Undead - Rank 2) -- DISABLED WHILE BUGGED
+    --[42522] = { buff = true, debuff = false, ground = false }, -- Turn Undead (Turn Undead - Rank 3) -- DISABLED WHILE BUGGED
+    --[42529] = { buff = true, debuff = false, ground = false }, -- Turn Undead (Turn Undead - Rank 4) -- DISABLED WHILE BUGGED
+    
+    [40169] = { buff = true, debuff = false, ground = false }, -- Ring of Preservation (Ring of Preservation - Rank 1)
+    --[42537] = { buff = true, debuff = false, ground = false }, -- Ring of Preservation (Ring of Preservation - Rank 2) -- DISABLED WHILE BUGGED
+    --[42542] = { buff = true, debuff = false, ground = false }, -- Ring of Preservation (Ring of Preservation - Rank 3) -- DISABLED WHILE BUGGED
+    --[42548] = { buff = true, debuff = false, ground = false }, -- Ring of Preservation (Ring of Preservation - Rank 4) -- DISABLED WHILE BUGGED
     
     [35750] = { buff = false, debuff = false, ground = true, stack = 1 }, -- Trap Beast (Trap Beast - Rank 1)
     [42706] = { buff = false, debuff = false, ground = true, stack = 1 }, -- Trap Beast (Trap Beast - Rank 2)
@@ -579,6 +594,11 @@ E.EffectGroundDisplay = {
     [42727] = { buff = false, debuff = false, ground = true, stack = 2 }, -- Rearming Trap (Rearming Trap - Rank 2)
     [42737] = { buff = false, debuff = false, ground = true, stack = 2 }, -- Rearming Trap (Rearming Trap - Rank 3)
     [42747] = { buff = false, debuff = false, ground = true, stack = 2 }, -- Rearming Trap (Rearming Trap - Rank 4)
+    
+    [40372] = { buff = false, debuff = false, ground = true, stack = 1 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+    [42757] = { buff = false, debuff = false, ground = true, stack = 1 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 2)
+    [42764] = { buff = false, debuff = false, ground = true, stack = 1 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 3)
+    [42771] = { buff = false, debuff = false, ground = true, stack = 1 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 4)
     
 }
 
@@ -738,6 +758,18 @@ E.EffectCreateSkillAura = {
 
 [80280] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Turn Undead - Rank 4)
 [42531] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Protection (Turn Undead - Rank 4)
+
+[80284] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, removeOnEnd = true }, -- Minor Endurance (Ring of Preservation - Rank 1)
+[40171] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, removeOnEnd = true }, -- Minor Protection (Ring of Preservation - Rank 1)
+
+[80285] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, removeOnEnd = true }, -- Minor Endurance (Ring of Preservation - Rank 2)
+[42538] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, removeOnEnd = true }, -- Minor Protection (Ring of Preservation - Rank 2)
+
+[80286] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, removeOnEnd = true }, -- Minor Endurance (Ring of Preservation - Rank 3)
+[42544] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, removeOnEnd = true }, -- Minor Protection (Ring of Preservation - Rank 3)
+
+[80287] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, removeOnEnd = true }, -- Minor Endurance (Ring of Preservation - Rank 4)
+[42550] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, removeOnEnd = true }, -- Minor Protection (Ring of Preservation - Rank 4)
 
 }
 
@@ -989,19 +1021,42 @@ E.BarHighlightOverride = {
     -- Medium Armor -----------
     ---------------------------
     
-    [29556] = { newId = 63015 }, -- Evasion (Evasion - Rank 1)
-    [41124] = { newId = 63016 }, -- Evasion (Evasion - Rank 2)
-    [41125] = { newId = 63017 }, -- Evasion (Evasion - Rank 3)
-    [41126] = { newId = 63018 }, -- Evasion (Evasion - Rank 4)
+    [29556] = { newId = 63015, showFakeAura = true, noRemove = true }, -- Evasion (Evasion - Rank 1)
+    [41124] = { newId = 63016, showFakeAura = true, noRemove = true }, -- Evasion (Evasion - Rank 2)
+    [41125] = { newId = 63017, showFakeAura = true, noRemove = true }, -- Evasion (Evasion - Rank 3)
+    [41126] = { newId = 63018, showFakeAura = true, noRemove = true }, -- Evasion (Evasion - Rank 4)
     
-    [39195] = { newId = 63019 }, -- Shuffle (Shuffle - Rank 1)
-    [41127] = { newId = 63023 }, -- Shuffle (Shuffle - Rank 2)
-    [41129] = { newId = 63026 }, -- Shuffle (Shuffle - Rank 3)
-    [41131] = { newId = 63028 }, -- Shuffle (Shuffle - Rank 4)
+    [39195] = { newId = 63019, showFakeAura = true, noRemove = true }, -- Shuffle (Shuffle - Rank 1)
+    [41127] = { newId = 63023, showFakeAura = true, noRemove = true }, -- Shuffle (Shuffle - Rank 2)
+    [41129] = { newId = 63026, showFakeAura = true, noRemove = true }, -- Shuffle (Shuffle - Rank 3)
+    [41131] = { newId = 63028, showFakeAura = true, noRemove = true }, -- Shuffle (Shuffle - Rank 4)
+    
+    [39192] = { newId = 63030, showFakeAura = true, noRemove = true }, -- Major Evasion (Elude - Rank 1)
+    [41133] = { newId = 63036, showFakeAura = true, noRemove = true }, -- Major Evasion (Elude - Rank 2)
+    [41135] = { newId = 63040, showFakeAura = true, noRemove = true }, -- Major Evasion (Elude - Rank 3)
+    [41137] = { newId = 63042, showFakeAura = true, noRemove = true }, -- Major Evasion (Elude - Rank 4)
 
     ---------------------------
     -- Fighter's Guild --------
     ---------------------------
+    
+    [40342] = { newId = 40345 }, -- Tighten (Silver Leash - Rank 1)
+    [42682] = { newId = 42684 }, -- Tighten (Silver Leash - Rank 2)
+    [42692] = { newId = 42694 }, -- Tighten (Silver Leash - Rank 3)
+    [42701] = { newId = 42703 }, -- Tighten (Silver Leash - Rank 4)
+    
+    
+    [42501] = { newId = 42502, showFakeAura = true, noRemove = true, duration = 18000 }, -- Circle of Protection (Circle of Protection - Rank 2)
+    [42505] = { newId = 42506, showFakeAura = true, noRemove = true, duration = 19000 }, -- Circle of Protection (Circle of Protection - Rank 3)
+    [42509] = { newId = 42510, showFakeAura = true, noRemove = true, duration = 20000 }, -- Circle of Protection (Circle of Protection - Rank 4)
+    
+    [42515] = { newId = 42516, showFakeAura = true, noRemove = true, duration = 24000 }, -- Turn Undead (Turn Undead - Rank 2)
+    [42522] = { newId = 42523, showFakeAura = true, noRemove = true, duration = 24000 }, -- Turn Undead (Turn Undead - Rank 3)
+    [42529] = { newId = 42530, showFakeAura = true, noRemove = true, duration = 24000 }, -- Turn Undead (Turn Undead - Rank 4)
+    
+    [42536] = { newId = 42537, showFakeAura = true, noRemove = true, duration = 20000 }, -- Ring of Preservation (Ring of Preservation - Rank 2)
+    [42542] = { newId = 42543, showFakeAura = true, noRemove = true, duration = 20000 }, -- Ring of Preservation (Ring of Preservation - Rank 3)
+    [42548] = { newId = 42549, showFakeAura = true, noRemove = true, duration = 20000 }, -- Ring of Preservation (Ring of Preservation - Rank 4)
     
     [35750] = { newId = 68595, showFakeAura = true }, -- Trap Beast (Trap Beast - Rank 1)
     [42706] = { newId = 68596, showFakeAura = true }, -- Trap Beast (Trap Beast - Rank 2)
@@ -1013,6 +1068,11 @@ E.BarHighlightOverride = {
     [42737] = { newId = 68638, showFakeAura = true }, -- Rearming Trap (Rearming Trap - Rank 3)
     [42747] = { newId = 68640, showFakeAura = true }, -- Rearming Trap (Rearming Trap - Rank 4)
     
+    [40372] = { newId = 68628, showFakeAura = true }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+    [42757] = { newId = 68629, showFakeAura = true }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 2)
+    [42764] = { newId = 68630, showFakeAura = true }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 3)
+    [42771] = { newId = 68631, showFakeAura = true }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 4)
+    
     [35713] = { newId = 62305 }, -- Dawnbreaker (Dawnbreaker - Rank 1)
     [42554] = { newId = 62307 }, -- Dawnbreaker (Dawnbreaker - Rank 2)
     [42560] = { newId = 62308 }, -- Dawnbreaker (Dawnbreaker - Rank 3)
@@ -1022,6 +1082,11 @@ E.BarHighlightOverride = {
     [42575] = { newId = 62311 }, -- Flawless Dawnbreaker (Flawless Dawnbreaker - Rank 2)
     [42581] = { newId = 62312 }, -- Flawless Dawnbreaker (Flawless Dawnbreaker - Rank 3)
     [42586] = { newId = 62313 }, -- Flawless Dawnbreaker (Flawless Dawnbreaker - Rank 4)
+    
+    [40158] = { newId = 62314 }, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 1)
+    [42592] = { newId = 62315 }, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 2)
+    [42595] = { newId = 62316 }, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 3)
+    [42598] = { newId = 62317 }, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 4)
     
 }
 
@@ -1128,7 +1193,7 @@ E.SynergyNameOverride = {
 
 E.BarNameOverride = {
 
-    [A.Skill_Tighten] = 'LuiExtended/media/icons/abilities/ability_fightersguild_silver_leash.dds', -- Tighten (Silver Leash - Rank 1)
+    [A.Skill_Tighten] = 'LuiExtended/media/icons/abilities/ability_fightersguild_silver_leash.dds', -- Tighten (Silver Leash)
 
 }
 
@@ -1363,6 +1428,16 @@ E.TooltipOverride = {
 }
 
 E.EffectOverride = {
+
+    -- Override the display information for various effect auras:
+    -- icon = Change Icon
+    -- name = Change Name
+    -- hide = Hide this aura from appearing
+    -- type = 1 or BUFF_EFFECT_TYPE_DEBUFF
+    -- duration = modify the duration display of this effect. ONLY NEGATIVE VALUES supported. This will subject x seconds from the duration of the effect. Can also set to 0 to display the buff for an unlimited amount of time until an action result of fade occurs.
+    -- unbreakable = flag this aura as unremoveable and change border color to grey for debuffs or cyan for buffs
+    -- forcedContainer = 'short' or 'long' - Forces a buff to appear in one of these containers
+    -- consolidate = If the menu option to consolidate buffs is enabled, these auras will be hidden.
 
     -- TEMP MOVE LATER
     [23284] = { forcedContainer = 'short' }, -- Not sure, I believe this is Guard projectile intercept.
@@ -3139,6 +3214,21 @@ E.EffectOverride = {
     [40342] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_silver_leash.dds' }, -- Tighten (Silver Leash - Rank 1)
     [40344] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_silver_leash.dds' }, -- Tighten (Silver Leash - Rank 1)
     
+    [42681] = { icon = 'esoui/art/icons/ability_fightersguild_003_b.dds', name = A.Skill_Silver_Leash }, -- Silver Bolts (Silver Leash - Rank 2)
+    [42680] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_silver_leash.dds', unbreakable = 1, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Silver Leash (Silver Leash - Rank 2)
+    [42682] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_silver_leash.dds' }, -- Tighten (Silver Leash - Rank 2)
+    [42683] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_silver_leash.dds' }, -- Tighten (Silver Leash - Rank 2)
+    
+    [42690] = { icon = 'esoui/art/icons/ability_fightersguild_003_b.dds', name = A.Skill_Silver_Leash }, -- Silver Bolts (Silver Leash - Rank 3)
+    [42689] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_silver_leash.dds', unbreakable = 1, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Silver Leash (Silver Leash - Rank 3)
+    [42692] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_silver_leash.dds' }, -- Tighten (Silver Leash - Rank 3)
+    [42693] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_silver_leash.dds' }, -- Tighten (Silver Leash - Rank 3)
+    
+    [42699] = { icon = 'esoui/art/icons/ability_fightersguild_003_b.dds', name = A.Skill_Silver_Leash }, -- Silver Bolts (Silver Leash - Rank 4)
+    [42698] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_silver_leash.dds', unbreakable = 1, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Silver Leash (Silver Leash - Rank 4)
+    [42701] = { hide = true, icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_silver_leash.dds' }, -- Tighten (Silver Leash - Rank 4)
+    [42702] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_silver_leash.dds' }, -- Tighten (Silver Leash - Rank 4)
+    
     [80271] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Circle of Protection - Rank 1)
     [35739] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Circle of Protection - Rank 1)
     
@@ -3163,6 +3253,22 @@ E.EffectOverride = {
     [80280] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Turn Undead - Rank 4)
     [42531] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Turn Undead - Rank 4)
     
+    [80284] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Ring of Preservation - Rank 1)
+    [40171] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Ring of Preservation - Rank 1)
+    
+    [80285] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Ring of Preservation - Rank 2)
+    [42538] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Ring of Preservation - Rank 2)
+    
+    [80286] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Ring of Preservation - Rank 3)
+    [42544] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Ring of Preservation - Rank 3)
+    
+    [80287] = { forcedContainer = 'short', consolidate = true }, -- Minor Endurance (Ring of Preservation - Rank 4)
+    [42550] = { forcedContainer = 'short', consolidate = true }, -- Minor Protection (Ring of Preservation - Rank 4)
+    
+    [81508] = { icon = 'esoui/art/icons/ability_buff_minor_berserk.dds' }, -- Minor Berserk (Camouflaged Hunter - Rank 2)
+    [81511] = { icon = 'esoui/art/icons/ability_buff_minor_berserk.dds' }, -- Minor Berserk (Camouflaged Hunter - Rank 3)
+    [81514] = { icon = 'esoui/art/icons/ability_buff_minor_berserk.dds' }, -- Minor Berserk (Camouflaged Hunter - Rank 4)
+    
     [35753] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Trap Beast (Trap Beast - Rank 1)
     [42710] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Trap Beast (Trap Beast - Rank 2)
     [42717] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Trap Beast (Trap Beast - Rank 3)
@@ -3179,6 +3285,11 @@ E.EffectOverride = {
     
     [42752] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Rearming Trap (Rearming Trap - Rank 4)
     [42750] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Rearming Trap (Rearming Trap - Rank 4)
+    
+    [40374] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+    [42759] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 2)
+    [42766] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 3)
+    [42773] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 4)
     
     ----------------------------------------------------------------
     -- WARDEN PASSIVE ABILITIES ------------------------------------
@@ -5685,6 +5796,11 @@ E.FakeExternalDebuffs = {
     [42744] = { icon = 'esoui/art/icons/ability_fightersguild_004_a.dds', name = A.Skill_Rearming_Trap, duration = 6000 }, -- Rearming Trap (Rearming Trap - Rank 3)
     [42754] = { icon = 'esoui/art/icons/ability_fightersguild_004_a.dds', name = A.Skill_Rearming_Trap, duration = 6000 }, -- Rearming Trap (Rearming Trap - Rank 4)
     
+    [40375] = { icon = 'esoui/art/icons/ability_fightersguild_004_b.dds', name = A.Skill_Lightweight_Beast_Trap, duration = 6000 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+    [42760] = { icon = 'esoui/art/icons/ability_fightersguild_004_b.dds', name = A.Skill_Lightweight_Beast_Trap, duration = 6000 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 2)
+    [42767] = { icon = 'esoui/art/icons/ability_fightersguild_004_b.dds', name = A.Skill_Lightweight_Beast_Trap, duration = 6000 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 3)
+    [42774] = { icon = 'esoui/art/icons/ability_fightersguild_004_b.dds', name = A.Skill_Lightweight_Beast_Trap, duration = 6000 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 4)
+    
     -- Item Sets
     [75706] = { icon = 'LuiExtended/media/icons/abilities/ability_set_bahrahas_curse.dds', name = A.Set_Bahrahas_Curse, duration = 0 }, -- Bahraha's Curse
 
@@ -5819,7 +5935,11 @@ E.FakePlayerBuffs = {
     [32346] = {icon = 'esoui/art/icons/ability_mage_050.dds', name = A.Innate_Absorbing_Skyshard, duration = 5800}, -- Skyshard Collect
     [14031] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_mundus_use.dds', name = A.Innate_Receiving_Boon, duration = 5000}, -- Mundus Use
 
-    -- Class
+    -----------------
+    -- Class --------
+    -----------------
+    
+    -- Templar
     [22223] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = A.Skill_Rite_Of_Passage, duration = 4000}, -- Rite of Passage (Rite of Passage - Rank 1)
     [27388] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = A.Skill_Rite_Of_Passage, duration = 4000}, -- Rite of Passage (Rite of Passage - Rank 2)
     [27392] = { icon = 'esoui/art/icons/ability_templar_rite_of_passage.dds', name = A.Skill_Rite_Of_Passage, duration = 4000}, -- Rite of Passage (Rite of Passage - Rank 3)
@@ -5834,6 +5954,19 @@ E.FakePlayerBuffs = {
     [27419] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds', name = A.Skill_Practiced_Incantation, duration = 6000 }, -- Practiced Incantation (Practiced Incantation - Rank 2)
     [27423] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds', name = A.Skill_Practiced_Incantation, duration = 6000 }, -- Practiced Incantation (Practiced Incantation - Rank 3)
     [27427] = { icon = 'esoui/art/icons/ability_templar_practiced_incantation.dds', name = A.Skill_Practiced_Incantation, duration = 6000 }, -- Practiced Incantation (Practiced Incantation - Rank 4)
+    
+    -- Fighter's Guild
+    [42502] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, duration = 18000 }, -- Circle of Protection (Circle of Protection - Rank 2)
+    [42506] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, duration = 19000 }, -- Circle of Protection (Circle of Protection - Rank 3)
+    [42510] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, duration = 20000 }, -- Circle of Protection (Circle of Protection - Rank 4)
+    
+    [42516] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, duration = 24000 }, -- Turn Undead (Turn Undead - Rank 2)
+    [42523] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, duration = 24000 }, -- Turn Undead (Turn Undead - Rank 3)
+    [42530] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, duration = 24000 }, -- Turn Undead (Turn Undead - Rank 4)
+    
+    [42537] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, duration = 20000 }, -- Ring of Preservation (Ring of Preservation - Rank 2)
+    [42543] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, duration = 20000 }, -- Ring of Preservation (Ring of Preservation - Rank 3)
+    [42549] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, duration = 20000 }, -- Ring of Preservation (Ring of Preservation - Rank 4)
     
     -- Seasonal Quests (New Life Festival)
     [84125] = {icon = 'LuiExtended/media/icons/abilities/ability_event_lava_foot_stomp.dds', name = 'Lava Foot Stomp', duration = 10000}, -- Breton Male Dance (Lava Foot Stomp)
@@ -5895,6 +6028,11 @@ E.FakePlayerDebuffs = { -- Fake debuffs applied onto a target by the player
     [42734] = { icon = 'esoui/art/icons/ability_fightersguild_004_a.dds', name = A.Skill_Rearming_Trap, duration = 6000 }, -- Rearming Trap (Rearming Trap - Rank 2)
     [42744] = { icon = 'esoui/art/icons/ability_fightersguild_004_a.dds', name = A.Skill_Rearming_Trap, duration = 6000 }, -- Rearming Trap (Rearming Trap - Rank 3)
     [42754] = { icon = 'esoui/art/icons/ability_fightersguild_004_a.dds', name = A.Skill_Rearming_Trap, duration = 6000 }, -- Rearming Trap (Rearming Trap - Rank 4)
+    
+    [40375] = { icon = 'esoui/art/icons/ability_fightersguild_004_b.dds', name = A.Skill_Lightweight_Beast_Trap, duration = 6000 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+    [42760] = { icon = 'esoui/art/icons/ability_fightersguild_004_b.dds', name = A.Skill_Lightweight_Beast_Trap, duration = 6000 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 2)
+    [42767] = { icon = 'esoui/art/icons/ability_fightersguild_004_b.dds', name = A.Skill_Lightweight_Beast_Trap, duration = 6000 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 3)
+    [42774] = { icon = 'esoui/art/icons/ability_fightersguild_004_b.dds', name = A.Skill_Lightweight_Beast_Trap, duration = 6000 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 4)
     
     -- Dragonknight (Flame Lash)
     [70745] = {icon = 'esoui/art/icons/ability_warrior_025.dds', name = 'Power Lash', duration = 2000}, -- Off-Balance Exploit (Flame Lash - Rank 1)

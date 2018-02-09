@@ -637,7 +637,7 @@ function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGr
     -- If the source/target isn't the player then bail out now.
     if sourceType ~= COMBAT_UNIT_TYPE_PLAYER and targetType ~= COMBAT_UNIT_TYPE_PLAYER then return end
     
-    if result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED then
+    if result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED or result == ACTION_RESULT_EFFECT_GAINED_DURATION then
         local currentTime = GetGameTimeMilliseconds()
 
         if g_toggledSlots[abilityId] then
