@@ -285,14 +285,6 @@ local Effects = {
     -- GUILDS
     -----------------------------------
 
-    -- Fighter Guild
-    --[A.Skill_Trap_Beast]                  = { false, false, 60, 1.5 },
-    --[A.Skill_Rearming_Trap]           = { false, false, 60, 1.5 },
-    --[A.Skill_Lightweight_Beast_Trap]  = { false, false, 60, 1.5 },
-    --[A.Skill_Circle_of_Protection]    = { true, false, false, nil },
-    --[A.Skill_Turn_Undead]             = { true, false, false, nil },
-    --[A.Skill_Ring_of_Preservation]    = { true, false, false, nil },
-
     -- Mages Guild
     [A.Skill_Meteor]                = { false, false, 11.8, 0 },
     [A.Skill_Ice_Comet]             = { false, false, 11.8, 0 },    -- Might need some work on timer
@@ -320,9 +312,6 @@ local Effects = {
     -----------------------------------
 
     -- AVA Assault
-    [A.Skill_Vigor]               = { 5, false, false, 0 },
-    [A.Skill_Echoing_Vigor]       = { 5, false, false, 0 },
-    [A.Skill_Resolving_Vigor]     = { 5, false, false, 0 },
     [A.Skill_Caltrops]              = { false, false, true, nil },
     [A.Skill_Anti_Cavalry_Caltrops] = { false, false, true, nil },
     [A.Skill_Razor_Caltrops]        = { false, false, true, nil },
@@ -1738,18 +1727,6 @@ function SCB.ReloadEffects(unitTag)
         end
     end
     
-    -- Add Battle Spirit icon to player in Cyrodiil (Artifical effect Id adds it for Battlegrounds)
-    if unitTag =="player" and IsInAvAZone() and not SCB.SV.IgnoreBattleSpiritPlayer then
-        g_effectsList.player1[ "Battle Spirit" ] =
-            {
-            target ="player", type=1,
-            name="Battle Spirit", icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
-            dur=0, starts=1, ends=nil,
-            forced = "long",
-            restart=true, iconNum=0
-            }
-    end
-    
     -- Add Battle Spirit icon to target in Cyrodiil or Battlegrounds
     if unitTag == "reticleover" and ( IsInAvAZone() or IsActiveWorldBattleground() or GetUnitName(unitTag) == g_currentDuelTarget ) and IsUnitPlayer("reticleover") and not SCB.SV.IgnoreBattleSpiritTarget then
         g_effectsList.reticleover1[ "Battle Spirit" ] =
@@ -2344,17 +2321,6 @@ function SCB.OnPlayerActivated(eventCode)
     if duelState == 3 and not SCB.SV.IgnoreBattleSpiritTarget then
         g_currentDuelTarget = strformat(SI_UNIT_NAME, characterName)
         SCB.ReloadEffects("reticleover")
-    end
-    
-    if IsInAvAZone() and not SCB.SV.IgnoreBattleSpiritPlayer then
-        g_effectsList.player1[ "Battle Spirit" ] =
-            {
-            target ="player", type=1,
-            name="Battle Spirit", icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
-            dur=0, starts=1, ends=nil,
-            forced = "long",
-            restart=true, iconNum=0
-            }
     end
 
     if SCB.SV.DisguiseStatePlayer then

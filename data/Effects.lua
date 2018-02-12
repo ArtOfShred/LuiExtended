@@ -81,11 +81,6 @@ E.IsBoon = {
     [13985] = true, -- The Tower
 }
 
--- Currently hidden since update 14
-E.IsBattleSpirit = {
-    [12033] = true, -- Battle Spirit
-}
-
 -- TODO: TEMPORARY
 -- Cyrodiil passives
 E.IsCyrodiil = {
@@ -5159,7 +5154,6 @@ E.EffectOverride = {
     [24869] = { icon = 'LuiExtended/media/icons/abilities/ability_icewraith_blood_in_the_water.dds', name = 'Assault' }, -- Blood in the Water (Ice Wraith)
     
     -- CYRODIIL
-    [12033] = { icon = 'esoui/art/icons/artificialeffect_battle-spirit.dds' }, -- Battle Spirit
 
     [47717] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attacklight.dds' }, -- Quick Strike (Cyrodiil Guard T1)
     [46830] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_bleeding_strike.dds' }, -- Bleeding Strike (Cyrodiil Guard T2)
