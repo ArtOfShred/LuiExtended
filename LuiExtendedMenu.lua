@@ -958,6 +958,29 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.SV.HideGroundEffects,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             }
+            
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.AddExtraBuffs end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.AddExtraBuffs = value LUIE.SpellCastBuffs.ReloadEffects() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.SV.AddExtraBuffs,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            }
+            
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_CONSOLIDATE)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_CONSOLIDATE_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.Consolidate end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.Consolidate = value LUIE.SpellCastBuffs.ReloadEffects() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.SV.Consolidate,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            }
+            
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "header",
                 name = GetString(SI_LUIE_LAM_BUFF_ICON_HEADER),

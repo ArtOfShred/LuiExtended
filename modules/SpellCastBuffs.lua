@@ -105,6 +105,8 @@ SCB.D = {
     HideTargetBuffs                  = false,
     HideTargetDebuffs                = false,
     HideGroundEffects                = false,
+    AddExtraBuffs                    = true,
+    Consolidate                      = false,
 }
 SCB.SV = nil
 
@@ -1188,6 +1190,15 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         
     end
     
+    if E.EffectOverride[abilityId] then
+        effectType = E.EffectOverride[abilityId].type or effectType
+    end
+    
+    -- Track only effects on self or target debuffs
+    if unitTag ~= "player" and unitTag ~= "reticleover" then
+        return
+    end
+    
     if SCB.SV.HidePlayerBuffs and effectType == 1 and unitTag == "player" then
         return
     end
@@ -1201,18 +1212,12 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         return
     end
     --d(strfmt("OnEffectChanged %d: %s[%s] / %d/%d/%d [%s-%d] %d", changeType, effectName, unitTag, effectType, abilityType, statusEffectType, unitName, unitId, abilityId ))
-
-    -- Track only effects on self or target debuffs
-    if unitTag ~= "player" and unitTag ~= "reticleover" then
-        return
-    end
     
     effectName = strformat("<<C:1>>", effectName)
     local unbreakable = 0
    
     if E.EffectOverride[abilityId] then
         if E.EffectOverride[abilityId].hide == true then return end
-        effectType = E.EffectOverride[abilityId].type or effectType
         iconName = E.EffectOverride[abilityId].icon or E.AbilityIcon[effectName or ""] or iconName
         effectName = E.EffectOverride[abilityId].name or effectName
         unbreakable = E.EffectOverride[abilityId].unbreakable or 0
@@ -1298,28 +1303,32 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
             end
             endTime = endTime - E.EffectOverride[abilityId].duration
         end
-
-        -- Buffs are created based on their ability ID, this allows buffs with the same display name to show up.
-        g_effectsList[context][ effectSlot ] = {
-                    target=unitTag, type=effectType,
-                    id=abilityId, name=effectName, icon=iconName,
-                    dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
-                    forced=forcedType,
-                    restart=true, iconNum=0,
-                    stack = stackCount,
-                    unbreakable=unbreakable }
-           
+        
         --EffectCreateSkillAura
-        if E.EffectCreateSkillAura[ abilityId ] then
-                g_effectsList[context][ E.EffectCreateSkillAura[abilityId].name ] = {
-                    target=unitTag, type=effectType,
-                    name=E.EffectCreateSkillAura[abilityId].name, icon=E.EffectCreateSkillAura[abilityId].icon,
-                    dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
-                    forced=forcedType,
-                    restart=true, iconNum=0,
-                    stack = stackCount,
-                    unbreakable=unbreakable }
+        if ( E.EffectCreateSkillAura[ abilityId ] and SCB.SV.AddExtraBuffs ) or ( E.EffectCreateSkillAura[ abilityId ] and E.EffectCreateSkillAura[ abilityId ].consolidate and SCB.SV.Consolidate ) then
+            g_effectsList[context][ E.EffectCreateSkillAura[abilityId].name ] = {
+                target=unitTag, type=effectType,
+                name=E.EffectCreateSkillAura[abilityId].name, icon=E.EffectCreateSkillAura[abilityId].icon,
+                dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
+                forced=forcedType,
+                restart=true, iconNum=0,
+                stack = stackCount,
+                unbreakable=unbreakable 
+            }
         end
+        
+        if E.EffectOverride[abilityId] and E.EffectOverride[abilityId].consolidate and SCB.SV.Consolidate then return end
+
+        -- Buffs are created based on their effectSlot, this allows multiple buffs/debuffs of the same type to appear.
+        g_effectsList[context][ effectSlot ] = {
+            target=unitTag, type=effectType,
+            id=abilityId, name=effectName, icon=iconName,
+            dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
+            forced=forcedType,
+            restart=true, iconNum=0,
+            stack = stackCount,
+            unbreakable=unbreakable 
+        }
     end
 end
 

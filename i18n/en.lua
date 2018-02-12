@@ -597,6 +597,12 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF",                  "Hide TA
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF_TP",               "Prevents debuffs on your target from displaying.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF",              "Hide GROUND Buffs and Debuffs")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF_TP",           "Prevents ground targeted effects from displaying.")
+
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS",                   "Display Extra Buffs (WIP)")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS_TP",                "Display extra icons for some buffs that normally do not have tracking. Examples include Dragon Blood or Restoring Focus.\nThis feature is WIP and currently only works for: Templar Skills, Destruction Staff, Restoration Staff, Fighter\'s Guild")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_CONSOLIDATE",                       "Consolidate Major/Minor Auras (WIP)")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_CONSOLIDATE_TP",                    "Consolidate major/minor auras for abilities with multiple effects into one icon: Dragon Blood, Combat Prayer, Restoring Focus, etc... \nThis feature is WIP and currently only works for: Templar Skills, Destruction Staff, Restoration Staff, Fighter\'s Guild")
+
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_ICON_HEADER",                       "Icon Options")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_ICONSIZE",                          "Buff Icon Size")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_ICONSIZE_TP",                       "Choose the size for buff icons.")

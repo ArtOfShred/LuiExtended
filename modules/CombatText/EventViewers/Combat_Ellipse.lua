@@ -84,7 +84,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
         offsetY, targetY, targetX = 0.2, 0.8, -0.8
     end
 
-    if (point == TOPRIGHT) then
+    if (point == TOPRIGHT or point == TOPLEFT) then
         offsetY, targetY = -offsetY, -targetY
     end
 
@@ -109,7 +109,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
     local w, h = panel:GetDimensions()
     control:SetAnchor(point, panel, relativePoint, offsetX * w, offsetY * h)
     
-    if (point == TOPRIGHT) then
+    if (point == TOPRIGHT or point == TOPLEFT) then
         if (self.lastControl[combatType] == nil) then offsetY = -25 else offsetY = max(-25, select(6, self.lastControl[combatType]:GetAnchor(0))) end
         control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
 
@@ -149,7 +149,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
 
     local animationY, animationYPoolKey = self.poolManager:GetPoolObject(animationYPoolType)
     local verticalOffset = (targetY * h + 550)
-    if (point == TOPRIGHT) then verticalOffset = -verticalOffset end
+    if (point == TOPRIGHT or point == TOPLEFT) then verticalOffset = -verticalOffset end
     animationY:GetStepByName('scrollY'):SetDeltaOffsetY(verticalOffset)
     animationY:Apply(control)
     animationY:Play()
