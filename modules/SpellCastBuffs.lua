@@ -1497,21 +1497,23 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
         for k, v in pairs(g_effectsList.ground) do
             -- Check if we have a buff up a mine, if we do also compare the names to make sure they are equivalent. This prevents removing Daedric Mines with Rearming Trap for example.
             if v.abilityId == E.IsGroundMineAura[abilityId] and v.name == abilityName then
-                if v.stack == 0 then
-                    g_effectsList.ground[ k ] = nil
-                else
-                    -- Decrement stack counter
-                    v.stack = v.stack - 1
-                    -- Remove if all stacks are removed
-                    if v.stack == 0 then 
+                if v.stack then
+                    if v.stack == 0 then
                         g_effectsList.ground[ k ] = nil
-                    end
-                    -- For rearming trap, once the initial damage triggers - reset the duration of the aura for the 2nd trap to be 37.5 seconds.
-                    if abilityName == A.Skill_Rearming_Trap and v.stack == 1 then
-                        local currentTime = GetGameTimeMilliseconds()
-                        v.dur = 37500
-                        v.starts = currentTime
-                        v.ends = currentTime + 37500
+                    else
+                        -- Decrement stack counter
+                        v.stack = v.stack - 1
+                        -- Remove if all stacks are removed
+                        if v.stack == 0 then 
+                            g_effectsList.ground[ k ] = nil
+                        end
+                        -- For rearming trap, once the initial damage triggers - reset the duration of the aura for the 2nd trap to be 37.5 seconds.
+                        if abilityName == A.Skill_Rearming_Trap and v.stack == 1 then
+                            local currentTime = GetGameTimeMilliseconds()
+                            v.dur = 37500
+                            v.starts = currentTime
+                            v.ends = currentTime + 37500
+                        end
                     end
                 end
             end
