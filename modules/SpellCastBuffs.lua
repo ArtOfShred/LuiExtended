@@ -1351,6 +1351,7 @@ local IsResultDamage = {
     [ACTION_RESULT_CRITICAL_DAMAGE]     = true,
     [ACTION_RESULT_DOT_TICK]            = true,
     [ACTION_RESULT_DOT_TICK_CRITICAL]   = true,
+    [ACTION_RESULT_DODGED]              = true,
 }
 
 --[[
