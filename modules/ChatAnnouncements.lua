@@ -7976,22 +7976,22 @@ function CA.HookFunction()
         -- Display CA
         if CA.SV.Group.GroupRaidCA then
             local formattedName = strformat("|cFEFEFE<<1>>|r", raidName)
-            local VitalityCounterString = strformat("<<1>> <<2>>/<<3>>", zo_iconFormatInheritColor("esoui/art/trials/vitalitydepletion.dds", 16, 16), currentCount, maxCount )
-            local FinalScore = ZO_DEFAULT_ENABLED_COLOR:Colorize(score)
+            local vitalityCounterString = strformat("<<1>> <<2>>/<<3>>", zo_iconFormatInheritColor("esoui/art/trials/vitalitydepletion.dds", 16, 16), currentCount, maxCount )
+            local finalScore = ZO_DEFAULT_ENABLED_COLOR:Colorize(score)
             vitalityBonus = ZO_DEFAULT_ENABLED_COLOR:Colorize(vitalityBonus)
             if currentCount == 0 then
-                VitalityCounterString = ZO_DISABLED_TEXT:Colorize(VitalityCounterString)
+                vitalityCounterString = ZO_DISABLED_TEXT:Colorize(vitalityCounterString)
             else
-                VitalityCounterString = ZO_DEFAULT_ENABLED_COLOR:Colorize(VitalityCounterString)
+                vitalityCounterString = ZO_DEFAULT_ENABLED_COLOR:Colorize(vitalityCounterString)
             end
             if wasUnderTargetTime then
-                formattedTime = ZO_DEFAULT_ENABLED_COLOR:Colorize(formattedtime)
+                formattedTime = ZO_DEFAULT_ENABLED_COLOR:Colorize(formattedTime)
             else
-                formattedTime = ZO_ERROR_COLOR:Colorize(formattedtime)
+                formattedTime = ZO_ERROR_COLOR:Colorize(formattedTime)
             end
             
             printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_COMPLETED_LARGE, formattedName))
-            printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_SCORETALLY, FinalScore, formattedTime, vitalityBonus, VitalityCounterString))
+            printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_SCORETALLY, finalScore, formattedTime, vitalityBonus, vitalityCounterString))
         end
 
         -- Display CSA

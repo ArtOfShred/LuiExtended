@@ -4,7 +4,7 @@
 
 
 --Register LAM with LibStub
-local MAJOR, MINOR = "LibAddonMenu-2.0", 24
+local MAJOR, MINOR = "LibAddonMenu-2.0", 25
 local lam, oldminor = LibStub:NewLibrary(MAJOR, MINOR)
 if not lam then return end --the same or newer version of this lib is already loaded into memory
 
@@ -441,7 +441,7 @@ local function ScrollDataIntoView(list, data)
 
     local scrollMin, scrollMax = list.scrollbar:GetMinMax()
     local scrollTop = list.scrollbar:GetValue()
-    local controlHeight = list.controlHeight
+    local controlHeight = list.uniformControlHeight or list.controlHeight
     local targetMin = controlHeight * (targetIndex - 1) - 64
     -- subtracting 64 ain't arbitrary, it's the maximum fading height
     -- (libraries/zo_templates/scrolltemplates.lua/UpdateScrollFade)
@@ -494,6 +494,7 @@ local function PopulateAddonList(addonList, filter)
     local entryList = ZO_ScrollList_GetDataList(addonList)
     local numEntries = 0
     local selectedData = nil
+    local selectionIsFinal = false
 
     ZO_ScrollList_Clear(addonList)
 
@@ -505,8 +506,14 @@ local function PopulateAddonList(addonList, filter)
             entryList[numEntries] = dataEntry
             -- select the first panel passing the filter, or the currently
             -- shown panel, but only if it passes the filter as well
-            if selectedData == nil or data.panel == lam.currentAddonPanel then
-                selectedData = data
+            if selectedData == nil or data.panel == lam.pendingAddonPanel or data.panel == lam.currentAddonPanel then
+                if not selectionIsFinal then
+                    selectedData = data
+                end
+                if data.panel == lam.pendingAddonPanel then
+                    lam.pendingAddonPanel = nil
+                    selectionIsFinal = true
+                end
             end
         else
             data.sortIndex = nil
@@ -600,6 +607,7 @@ function lam:OpenToPanel(panel)
         if addonData.panel == panel then
             selectedData = addonData
             ScrollDataIntoView(addonList, selectedData)
+            lam.pendingAddonPanel = addonData.panel
             break
         end
     end
