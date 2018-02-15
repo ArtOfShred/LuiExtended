@@ -1210,6 +1210,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         iconName = E.EffectOverride[abilityId].icon or E.AbilityIcon[effectName or ""] or iconName
         effectName = E.EffectOverride[abilityId].name or effectName
         unbreakable = E.EffectOverride[abilityId].unbreakable or 0
+		stackCount = E.EffectOverride[abilityId].stack or stackCount
         -- Destroy other effects of the same type if we don't want to show duplicates at all.
         if E.EffectOverride[abilityId].noDuplicate then
             for context, effectsList in pairs( g_effectsList ) do

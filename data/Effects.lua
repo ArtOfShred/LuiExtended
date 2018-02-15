@@ -1339,6 +1339,15 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     
     -- Sets
     [32755] = true, -- Nikulas' Heavy Armor (of Nikulas)
+	
+	----------------------------
+	-- Passives
+	----------------------------
+	
+	-- Templar
+	[80195] = true, -- Sacred Ground (Sacred Ground - All Ranks) - Rune Focus
+	[80230] = true, -- Sacred Ground (Sacred Ground - All Ranks) - Cleansing Ritual
+	[80261] = true, -- Sacred Ground (Sacred Ground - All Ranks) - Rite of Passage
     
     ----------------------------
     -- Templar
@@ -3802,10 +3811,10 @@ E.EffectOverride = {
     [45582] = { hide = true }, -- Soul Trap (Soul Lock - Rank 2)
 
     -- Vampire
-    [35771] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_1.dds' }, -- Stage 1 Vampirism (Vampire General)
-    [35776] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_2.dds' }, -- Stage 2 Vampirism (Vampire General)
-    [35783] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_3.dds' }, -- Stage 3 Vampirism (Vampire General)
-    [35792] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_4.dds' }, -- Stage 4 Vampirism (Vampire General)
+    [35771] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_1.dds', stack = 1 }, -- Stage 1 Vampirism (Vampire General)
+    [35776] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_2.dds', stack = 2 }, -- Stage 2 Vampirism (Vampire General)
+    [35783] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_3.dds', stack = 3 }, -- Stage 3 Vampirism (Vampire General)
+    [35792] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_vampirism_stage_4.dds', stack = 4 }, -- Stage 4 Vampirism (Vampire General)
     [33177] = { icon = 'esoui/art/icons/ability_vampire_002.dds' }, -- Feed
     
     [33182] = { icon = 'LuiExtended/media/icons/abilities/ability_vampire_savage_feeding.dds', name = A.Passive_Savage_Feeding }, -- Uber Attack (Savage Feeding - Rank 1)
