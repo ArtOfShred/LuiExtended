@@ -1657,6 +1657,38 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.DisguiseStateTarget,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             }
+            
+            -- Debug Options
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "header",
+                name = "Debug Options",
+                width = "full",
+            }
+            
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                -- Show Gallop Icon
+                type = "checkbox",
+                name = "Show Debug for Combat Events",
+                tooltip = "Display debug information for combat events - used for development.",
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ShowDebugCombat end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowDebugCombat = value LUIE.SpellCastBuffs.RegisterDebugEvents() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ShowDebugCombat,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            }
+            
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                -- Show Gallop Icon
+                type = "checkbox",
+                name = "Show Debug for Effect Change Events",
+                tooltip = "Display debug information for effect change events - used for development.",
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ShowDebugEffect end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowDebugEffect = value LUIE.SpellCastBuffs.RegisterDebugEvents() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ShowDebugEffect,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            }
+            
     
     -- Enable Chat Announcements module
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {

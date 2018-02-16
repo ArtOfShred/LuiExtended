@@ -107,6 +107,8 @@ SCB.D = {
     HideGroundEffects                = false,
     AddExtraBuffs                    = true,
     Consolidate                      = false,
+    ShowDebugCombat                  = false,
+    ShowDebugEffect                  = false,
 }
 SCB.SV = nil
 
@@ -517,6 +519,77 @@ function SCB.Initialize( enabled )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, SCB.DuelStart)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_FINISHED, SCB.DuelEnd)
     
+    -- Always show debug effects on development account
+    if GetDisplayName() == "@ArtOfShredLegacy" then
+        SCB.SV.ShowDebugCombat = true
+        SCB.SV.ShowDebugEffect = true
+    end
+    SCB.RegisterDebugEvents()
+    
+end
+
+function SCB.RegisterDebugEvents()
+    EVENT_MANAGER:UnregisterForEvent(moduleName .. "LUIE_DEBUG_COMBAT", EVENT_COMBAT_EVENT)
+    EVENT_MANAGER:UnregisterForEvent(moduleName .. "LUIE_DEBUG_EFFECT", EVENT_EFFECT_CHANGED)
+    if SCB.SV.ShowDebugCombat then
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "LUIE_DEBUG_COMBAT", EVENT_COMBAT_EVENT, SCB.EventCombatDebug)
+    end
+    if SCB.SV.ShowDebugEffect then
+        EVENT_MANAGER:RegisterForEvent(moduleName .. "LUIE_DEBUG_EFFECT", EVENT_EFFECT_CHANGED, SCB.EventEffectDebug)
+    end
+end
+
+-- Debug Display for Combat Events
+function SCB.EventCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
+
+    -- Don't display if this aura is already added to the filter
+    if debugAuras[abilityId] then return end
+        
+    local source = zo_strformat("<<t:1>>",sourceName)
+    local target = zo_strformat("<<t:1>>",targetName)
+    local ability = zo_strformat("<<t:1>>",abilityName)
+    local duration = GetAbilityDuration(abilityId)
+    local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
+    local showacasttime = ""
+    local showachantime = ""
+    if channeled then
+        showachantime = (" [Chan] " .. channelTime)
+    end
+    if castTime ~= 0 then
+        showacasttime = (" [Cast] " .. castTime)
+    end
+    if source == LUIE.PlayerNameFormatted then source = "Player" end
+    if target == LUIE.PlayerNameFormatted then target = "Player" end
+    if source == "" and target == "" then 
+        ability = LUIE.GetAbilityName(abilityId) 
+        source = "NIL"
+        target = "NIL"
+    end
+    d("["..abilityId.."] "..ability..": [S] "..source.." --> [T] "..target .. " [Dur] " .. duration .. showachantime .. showacasttime)
+
+end
+
+-- Debug Display for Effect Events
+function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
+
+    if debugAuras[abilityId] then return end
+    
+    unitName = zo_strformat("<<t:1>>", unitName)
+    if unitName == LUIE.PlayerNameFormatted then unitName = "Player" end
+    
+    if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide then
+        d("|c00E200[" ..abilityId .. "] " .. effectName.. ": AURA HIDDEN BY LUI|r")
+        return
+    end
+    
+    if changeType == 1 then
+        d("|c00E200Gained:|r [" .. abilityId .. "] " ..effectName .. ": [Tag] ".. unitName .. " [Dur] " .. (endTime-beginTime) * 1000 )
+    elseif changeType == 2 then
+        d("|c00E200Faded:|r [" .. abilityId .. "] " .. effectName .. ": [Tag] " .. unitName) 
+    else
+        d("|c00E200Refreshed:|r (" .. changeType.. ") [" .. abilityId .. "] " .. effectName .. ": [Tag] " .. unitName " [Dur] " .. (endTime-beginTime) * 1000 )
+    end
+
 end
 
 function SCB.DuelStart()

@@ -67,6 +67,7 @@ data\AbilityTables.lua
 data\Effects.lua
 data\CombatTextConstants.lua
 data\AlertTable.lua
+data\DebugTable.lua
 
 modules\ChatAnnouncements.lua
 modules\CombatInfo.lua
