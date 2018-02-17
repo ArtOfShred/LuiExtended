@@ -582,12 +582,14 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
         return
     end
     
+    local duration = (endTime - beginTime) * 1000
+    
     if changeType == 1 then
-        d("|c00E200Gained:|r [" .. abilityId .. "] " ..effectName .. ": [Tag] ".. unitName .. " [Dur] " .. (endTime-beginTime) * 1000 )
+        d("|c00E200Gained:|r [" .. abilityId .. "] " ..effectName .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
     elseif changeType == 2 then
         d("|c00E200Faded:|r [" .. abilityId .. "] " .. effectName .. ": [Tag] " .. unitName) 
     else
-        d("|c00E200Refreshed:|r (" .. changeType.. ") [" .. abilityId .. "] " .. effectName .. ": [Tag] " .. unitName " [Dur] " .. (endTime-beginTime) * 1000 )
+        d("|c00E200Refreshed:|r (" .. changeType .. ") [" .. abilityId .. "] " ..effectName .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
     end
 
 end

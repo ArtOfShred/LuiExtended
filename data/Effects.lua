@@ -777,6 +777,13 @@ E.BarHighlightOverride = {
     -- duration = override duration
     
     ---------------------------
+    -- Dragonknight -----------
+    ---------------------------
+    
+    -- Earthen Heart
+    [31816] = { duration = 15000, showFakeAura = true, secondary = true, noRemove = true }, -- Minor Resolve (Stone Giant - Rank 1)
+    
+    ---------------------------
     -- Templar ----------------
     ---------------------------
     
@@ -1188,6 +1195,10 @@ E.SynergyNameOverride = {
 
 E.BarNameOverride = {
 
+    -- Dragonknight
+    [A.Skill_Power_Lash] = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds', -- Power Lash (Flame Lash)
+
+    -- Fighter's Guild
     [A.Skill_Tighten] = 'LuiExtended/media/icons/abilities/ability_fightersguild_silver_leash.dds', -- Tighten (Silver Leash)
 
 }
@@ -2643,16 +2654,53 @@ E.EffectOverride = {
     ----------------------------------------------------------------
     
     -- Lava Whip
-    [23808] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Off Balance (Lava Whip - Rank 1)
-    [20804] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Off Balance (Lava Whip - Rank 2)
-    [23810] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Off Balance (Lava Whip - Rank 3)
-    [23812] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Off Balance (Lava Whip - Rank 4)
+    [23808] = { name = A.Skill_Off_Balance }, -- Off Balance (Lava Whip - Rank 1)
+    [20804] = { name = A.Skill_Off_Balance }, -- Off Balance (Lava Whip - Rank 2)
+    [23810] = { name = A.Skill_Off_Balance }, -- Off Balance (Lava Whip - Rank 3)
+    [23812] = { name = A.Skill_Off_Balance }, -- Off Balance (Lava Whip - Rank 4)
     
     -- Molten Whip
-    [20806] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Off Balance (Molten Whip - Rank 1)
+    [20806] = { name = A.Skill_Off_Balance }, -- Off Balance (Molten Whip - Rank 1)
     
     -- Flame Lash
-    [34117] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds', name = A.Skill_Off_Balance }, -- Off Balance (Flame Lash - Rank 1)
+    [34117] = { name = A.Skill_Off_Balance }, -- Off Balance (Flame Lash - Rank 1)
+    [20824] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds' }, -- Power Lash (Flame Lash - Rank 1)
+    [70742] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds', name = A.Skill_Power_Lash }, -- Off-Balance Exploit (Flame Lash - Rank 1)
+    [23105] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds' }, -- Power Lash (Flame Lash - Rank 1)
+    
+    -- Spiked Armor
+    [61815] = { consolidate = true }, -- Major Resolve (Spiked Armor - Rank 1)
+    [61816] = { consolidate = true }, -- Major Ward (Spiked Armor - Rank 1)
+    [20320] = { name = A.Skill_Spiked_Armor }, -- Spiked Armor Damage Return (Spiked Armor - Rank 1)
+    
+    [61820] = { consolidate = true }, -- Major Resolve (Spiked Armor - Rank 2)
+    [61821] = { consolidate = true }, -- Major Ward (Spiked Armor - Rank 2)
+    [23823] = { name = A.Skill_Spiked_Armor }, -- Spiked Armor Damage Return (Spiked Armor - Rank 2)
+    
+    [61823] = { consolidate = true }, -- Major Resolve (Spiked Armor - Rank 3)
+    [61824] = { consolidate = true }, -- Major Ward (Spiked Armor - Rank 3)
+    [23826] = { name = A.Skill_Spiked_Armor }, -- Spiked Armor Damage Return (Spiked Armor - Rank 3)
+    
+    [61825] = { consolidate = true }, -- Major Resolve (Spiked Armor - Rank 4)
+    [61826] = { consolidate = true }, -- Major Ward (Spiked Armor - Rank 4)
+    [23829] = { name = A.Skill_Spiked_Armor }, -- Spiked Armor Damage Return (Spiked Armor - Rank 4)
+    
+    -- Hardened Armor
+    [61827] = { consolidate = true }, -- Major Resolve (Hardened Armor - Rank 1)
+    [61828] = { consolidate = true }, -- Major Ward (Hardened Armor - Rank 1)
+    [20329] = { name = A.Skill_Hardened_Armor }, -- Hardened Armor Damage Return (Hardened Armor - Rank 1)
+    
+    -- Volatile Armor
+    [61836] = { consolidate = true }, -- Major Resolve (Volatile Armor - Rank 1)
+    [61837] = { consolidate = true }, -- Major Ward (Volatile Armor - Rank 1)
+    [20324] = { name = A.Skill_Volatile_Armor }, -- Volatile Armor Damage Return (Volatile Armor - Rank 1)
+    
+    -- Obsidian Shard
+    [68763] = { icon = 'esoui/art/icons/ability_dragonknight_013_b.dds', hide = true }, -- Obsidian Shard (Obsidian Shard - Rank 1)
+    
+    --[[
+    
+    -- Flame Lash
     [23105] = { icon = 'esoui/art/icons/ability_warrior_025.dds' }, -- Power Lash (Power Lash - Rank 1)
     [70745] = { icon = 'esoui/art/icons/ability_warrior_025.dds', name = 'Power Lash' }, -- Off-Balance Exploit (Power Lash - Rank 1)
     
@@ -2684,18 +2732,6 @@ E.EffectOverride = {
     [32949] = { icon = 'esoui/art/icons/ability_debuff_major_defile.dds', name = A.Skill_Major_Defile }, -- Standard of Might (Standard of Might - Rank 1)
     [32950] = { hide = true }, -- Standard of Might (Standard of Might - Rank 1)
     
-    -- Spiked Armor
-    [20320] = { name = 'Spiked Armor' }, -- Spiked Armor Damage Return (Spiked Armor - Rank 1)
-    [23823] = { name = 'Spiked Armor' }, -- Spiked Armor Damage Return (Spiked Armor - Rank 2)
-    [23826] = { name = 'Spiked Armor' }, -- Spiked Armor Damage Return (Spiked Armor - Rank 3)
-    [23829] = { name = 'Spiked Armor' }, -- Spiked Armor Damage Return (Spiked Armor - Rank 4)
-    
-    -- Hardened Armor
-    [20329] = { name = 'Hardened Armor' }, -- Hardened Armor Damage Return (Hardened Armor - Rank 1)
-    
-    -- Volatile Armor
-    [20324] = { name = 'Volatile Armor' }, -- Volatile Armor Damage Return (Volatile Armor - Rank 1)
-    
     -- Dark Talons
     [32976] = { hide = true }, -- Impale Grant Ability (Dark Talons - Rank 1)
     [33238] = { hide = true }, -- Impale Grant Ability (Dark Talons - Rank 2)
@@ -2720,12 +2756,11 @@ E.EffectOverride = {
     
     -- Coagulating Blood
     [32733] = { hide = true }, -- Coagulating Blood Bonus Heal (Coagulating Blood - Rank 1)
-    
-    -- Obsidian Shard
-    [68763] = { icon = 'esoui/art/icons/ability_dragonknight_013_b.dds', hide = true }, -- Obsidian Shard (Obsidian Shard - Rank 1)
 
     -- Corrosive Armor
     [17881] = { hide = true }, -- Corrosive Armor (Corrosive Armor - Rank 1)
+    
+    ]]
     
     ----------------------------------------------------------------
     -- SORCERER PASSIVES -------------------------------------------
@@ -5781,6 +5816,9 @@ E.FakeExternalBuffs = {
 
  -- Fake Debuffs applied onto the player by NPCs or Events (Hostile)
 E.FakeExternalDebuffs = {
+
+    -- Dragonknight
+    [70742]  = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds', name = A.Skill_Power_Lash, duration = 2000 }, -- Off-Balance Exploit (Flame Lash - Rank 1)
     
     -- Destruction Staff
     [38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach - Rank 1) -- Fire
@@ -6014,6 +6052,9 @@ E.FakePlayerDebuffs = { -- Fake debuffs applied onto a target by the player
     [68461] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_pestilence.dds', name = A.Proc_Pestilence, duration = 3000}, -- Pestilence (Disease Vulnerability Proc)
     [68455] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_disintegration.dds', name = A.Proc_Disintegration, duration = 3000}, -- Disintegration (Lightning Vulnerability Proc)
     [68457] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_proc_deep_freeze.dds', name = A.Proc_Deep_Freeze, duration = 3000}, -- Deep Freeze (Frost Vulnerability Proc)
+    
+    -- Dragonknight
+    [70742]  = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds', name = A.Skill_Power_Lash, duration = 2000 }, -- Off-Balance Exploit (Flame Lash - Rank 1)
     
     -- Destruction Staff
     [38946] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach, duration = 1800 }, -- Stun After Knockback Movement (Destructive Reach - Rank 1) -- Fire

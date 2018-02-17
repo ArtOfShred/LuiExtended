@@ -273,6 +273,14 @@ A.Passive_Red_Diamond               = 36155
 -- CLASS SKILLS --------------------------------------
 -- ---------------------------------------------------
 
+-- Dragonknight
+
+A.Skill_Power_Lash                  = 20824
+
+A.Skill_Spiked_Armor                = 20319
+A.Skill_Hardened_Armor              = 20328
+A.Skill_Volatile_Armor              = 20323
+
 -- Templar
 A.Skill_Puncturing_Sweep            = 26797
 A.Skill_Aurora_Javelin              = 26800
@@ -616,20 +624,12 @@ A.Skill_Burning_Embers           = 20660
 A.Skill_Fiery_Breath             = 20917
 A.Skill_Noxious_Breath           = 20944
 A.Skill_Engulfing_Flames         = 20930
-A.Skill_Lava_Whip                = 20803
-A.Skill_Molten_Whip              = 20805
-A.Skill_Flame_Lash               = 20816
-A.Effect_Flame_Lash_Heal         = 23105
-A.Skill_Power_Lash               = 20824
 A.Skill_Inferno                  = 25954
 A.Skill_Flames_Of_Oblivion       = 32853
 A.Skill_Cauterize                = 32881
 
 -- DRACONIC POWER -----------
 A.Skill_Ferocious_Leap           = 32715
-A.Skill_Spiked_Armor             = 20319
-A.Skill_Volatile_Armor           = 20323
-A.Skill_Hardened_Armor           = 20328
 A.Skill_Dark_Talons              = 20245
 A.Skill_Burning_Talons           = 20252
 A.Skill_Choking_Talons           = 20251
@@ -899,7 +899,6 @@ A.Trigger_Might_of_the_Guild        = 43561
 A.Trigger_Crystal_Fragments_Proc    = 46327 --64159
 A.Trigger_Assassins_Will            = 61907
 A.Trigger_Assassins_Scourge         = 61932
-A.Trigger_Power_Lash                = 23903
 
 -- ---------------------------------------------------
 -- MUNDUS STONES -------------------------------------

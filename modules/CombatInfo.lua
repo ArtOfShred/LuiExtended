@@ -95,10 +95,10 @@ local uiUltimate = {
 local IsAbilityProc = {
 
     [A.Skill_Tighten]               = true,
+    [A.Skill_Power_Lash]            = true,
 
     [A.Trigger_Assassins_Will]      = true,
     [A.Trigger_Assassins_Scourge]   = true,
-    [A.Trigger_Power_Lash]          = true,
     
 	--[L.Trigger_Deadly_Throw]		= true,
     
