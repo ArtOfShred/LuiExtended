@@ -281,6 +281,10 @@ A.Skill_Spiked_Armor                = 20319
 A.Skill_Hardened_Armor              = 20328
 A.Skill_Volatile_Armor              = 20323
 
+A.Skill_Molten_Weapons              = 29043
+--A.Skill_Igneous_Weapons             = 31874
+--A.Skill_Molten_Armaments            = 31888
+
 -- Templar
 A.Skill_Puncturing_Sweep            = 26797
 A.Skill_Aurora_Javelin              = 26800
@@ -650,9 +654,6 @@ A.Skill_Corrosive_Armor          = 17878
 A.Skill_Stonefist                = 29032
 A.Skill_Obsidian_Shard           = 31820
 A.Skill_Stone_Giant              = 31816
-A.Skill_Molten_Weapons           = 29043
-A.Skill_Igneous_Weapons          = 31874
-A.Skill_Molten_Armaments         = 31888
 A.Skill_Obsidian_Shield          = 29071
 A.Skill_Fragmented_Shield        = 32673
 A.Skill_Igneous_Shield           = 29224

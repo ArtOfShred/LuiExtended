@@ -603,6 +603,9 @@ E.EffectCreateSkillAura = {
 -- icon, name
 -- removeOnEnd -- Remove this aura when one of these effects ends.
 
+-- Dragonknight
+[92507] = {icon = 'esoui/art/icons/ability_dragonknight_015.dds', name = A.Skill_Molten_Weapons, removeOnEnd = true }, -- Major Sorcery (Molten Weapons - Rank 1)
+
 -- Templar
 [26213] = { icon = 'esoui/art/icons/ability_templar_restoring_sigil.dds', name = A.Skill_Restoring_Aura, removeOnEnd = true, consolidate = true }, -- Minor Fortitude (Restoring Aura - All Ranks)
 [26216] = { icon = 'esoui/art/icons/ability_templar_restoring_sigil.dds', name = A.Skill_Restoring_Aura, removeOnEnd = true, consolidate = true }, -- Minor Intellect (Restoring Aura - All Ranks)
@@ -780,8 +783,16 @@ E.BarHighlightOverride = {
     -- Dragonknight -----------
     ---------------------------
     
+    -- Ardent Flame
+    [20657] = { newId = 44363 }, -- Searing Strike (Searing Strike - Rank 1)
+    [23882] = { newId = 44366 }, -- Searing Strike (Searing Strike - Rank 2)
+    [23884] = { newId = 44367 }, -- Searing Strike (Searing Strike - Rank 3)
+    [23886] = { newId = 44368 }, -- Searing Strike (Searing Strike - Rank 4)
+    
     -- Earthen Heart
     [31816] = { duration = 15000, showFakeAura = true, secondary = true, noRemove = true }, -- Minor Resolve (Stone Giant - Rank 1)
+    
+    [29043] = { newId = 92507 }, -- Molten Weapons (Molten Weapons - Rank 1)
     
     ---------------------------
     -- Templar ----------------
@@ -2731,19 +2742,6 @@ E.EffectOverride = {
     
     [32949] = { icon = 'esoui/art/icons/ability_debuff_major_defile.dds', name = A.Skill_Major_Defile }, -- Standard of Might (Standard of Might - Rank 1)
     [32950] = { hide = true }, -- Standard of Might (Standard of Might - Rank 1)
-    
-    -- Dark Talons
-    [32976] = { hide = true }, -- Impale Grant Ability (Dark Talons - Rank 1)
-    [33238] = { hide = true }, -- Impale Grant Ability (Dark Talons - Rank 2)
-    [33240] = { hide = true }, -- Impale Grant Ability (Dark Talons - Rank 3)
-    [33242] = { hide = true }, -- Impale Grant Ability (Dark Talons - Rank 4)
-    
-    -- Burning Talons
-    [20253] = { icon = 'esoui/art/icons/ability_dragonknight_010_b.dds' }, -- Burning Talons (Burning Talons - Rank 1)
-    [33244] = { hide = true }, -- Impale Grant Ability (Burning Talons - Rank 1)
-    
-    -- Choking Talons
-    [33252] = { hide = true }, -- Impale Grant Ability (Choking Talons - Rank 1)
 
     -- Dragon Blood
     [29010] = { icon = 'esoui/art/icons/ability_dragonknight_011.dds' }, -- Dragon Blood (Dragon Blood - Rank 1)
@@ -6148,11 +6146,8 @@ E.FakeStagger = {
 
 E.FakeDuplicate = {
 
-    -- Dragonknight 
+    -- Dragonknight
     --[29043] = {icon = 'esoui/art/icons/ability_dragonknight_015.dds', name = 'Molten Weapons'}, -- Molten Weapons (Molten Weapons - Rank 1)
-    --[32151] = {icon = 'esoui/art/icons/ability_dragonknight_015.dds', name = 'Molten Weapons'}, -- Molten Weapons (Molten Weapons - Rank 2)
-    --[32154] = {icon = 'esoui/art/icons/ability_dragonknight_015.dds', name = 'Molten Weapons'}, -- Molten Weapons (Molten Weapons - Rank 3)
-    --[32156] = {icon = 'esoui/art/icons/ability_dragonknight_015.dds', name = 'Molten Weapons'}, -- Molten Weapons (Molten Weapons - Rank 4)
     
     --[31874] = {icon = 'esoui/art/icons/ability_dragonknight_015_a.dds', name = 'Igneous Weapons'}, -- Igneous Weapons (Igneous Weapons - Rank 1
     
