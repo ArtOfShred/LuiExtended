@@ -394,6 +394,9 @@ E.EffectGroundDisplay = {
     -- Class Abilities --------
     ---------------------------
     
+    -- Dragonknight
+    [28988] = { buff = false, debuff = false, ground = true }, -- Dragonknight Standard (Dragonknight Standard - Rank 1)
+    
     -- Templar
     
     [95933] = { icon = 'esoui/art/icons/ability_templar_sun_strike.dds', buff = false, debuff = false, ground = true }, -- Spear Shards (Spear Shards - Rank 1)
@@ -604,7 +607,6 @@ E.EffectCreateSkillAura = {
 -- removeOnEnd -- Remove this aura when one of these effects ends.
 
 -- Dragonknight
-[92507] = {icon = 'esoui/art/icons/ability_dragonknight_015.dds', name = A.Skill_Molten_Weapons, removeOnEnd = true }, -- Major Sorcery (Molten Weapons - Rank 1)
 
 -- Templar
 [26213] = { icon = 'esoui/art/icons/ability_templar_restoring_sigil.dds', name = A.Skill_Restoring_Aura, removeOnEnd = true, consolidate = true }, -- Minor Fortitude (Restoring Aura - All Ranks)
@@ -789,10 +791,31 @@ E.BarHighlightOverride = {
     [23884] = { newId = 44367 }, -- Searing Strike (Searing Strike - Rank 3)
     [23886] = { newId = 44368 }, -- Searing Strike (Searing Strike - Rank 4)
     
+    [20668] = { newId = 44369 }, -- Venomous Claw (Venomous Claw - Rank 1)
+    
+    [20660] = { newId = 44373 }, -- Burning Embers (Burning Embers - Rank 1)
+    
+    -- Draconic Power
+    [20245] = { newId = 20527 }, -- Dark Talons (Dark Talons - Rank 1)
+    [32105] = { newId = 32107 }, -- Dark Talons (Dark Talons - Rank 2)
+    [32180] = { newId = 32110 }, -- Dark Talons (Dark Talons - Rank 3)
+    [32111] = { newId = 32113 }, -- Dark Talons (Dark Talons - Rank 4)
+    
+    [20252] = { newId = 31898 }, -- Burning Talons (Burning Talons - Rank 1)
+    
+    [20251] = { newId = 20528 }, -- Choking Talons (Choking Talons - Rank 1)
+    
     -- Earthen Heart
     [31816] = { duration = 15000, showFakeAura = true, secondary = true, noRemove = true }, -- Minor Resolve (Stone Giant - Rank 1)
     
-    [29043] = { newId = 92507 }, -- Molten Weapons (Molten Weapons - Rank 1)
+    [29043] = { newId = 92507, duration = 27000, showFakeAura = true, noRemove = true }, -- Molten Weapons (Molten Weapons - Rank 1)
+    [32151] = { newId = 92509, duration = 28000, showFakeAura = true, noRemove = true }, -- Molten Weapons (Molten Weapons - Rank 2)
+    [32154] = { newId = 92510, duration = 29000, showFakeAura = true, noRemove = true }, -- Molten Weapons (Molten Weapons - Rank 3)
+    [32156] = { newId = 92511, duration = 30000, showFakeAura = true, noRemove = true }, -- Molten Weapons (Molten Weapons - Rank 4)
+    
+    [31874] = { newId = 92503, duration = 30000, showFakeAura = true, noRemove = true }, -- Major Sorcery (Molten Weapons - Rank 1)
+    
+    [31888] = { newId = 76537 }, -- Molten Armaments (Molten Armaments - Rank 1)
     
     ---------------------------
     -- Templar ----------------
@@ -2679,6 +2702,9 @@ E.EffectOverride = {
     [70742] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds', name = A.Skill_Power_Lash }, -- Off-Balance Exploit (Flame Lash - Rank 1)
     [23105] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds' }, -- Power Lash (Flame Lash - Rank 1)
     
+    -- Dragonknight Standard
+    [29230] = { duration = 0 }, -- Major Defile (Dragonknight Standard - Rank 1)
+    
     -- Spiked Armor
     [61815] = { consolidate = true }, -- Major Resolve (Spiked Armor - Rank 1)
     [61816] = { consolidate = true }, -- Major Ward (Spiked Armor - Rank 1)
@@ -2706,21 +2732,18 @@ E.EffectOverride = {
     [61837] = { consolidate = true }, -- Major Ward (Volatile Armor - Rank 1)
     [20324] = { name = A.Skill_Volatile_Armor }, -- Volatile Armor Damage Return (Volatile Armor - Rank 1)
     
-    -- Obsidian Shard
-    [68763] = { icon = 'esoui/art/icons/ability_dragonknight_013_b.dds', hide = true }, -- Obsidian Shard (Obsidian Shard - Rank 1)
-    
-    --[[
-    
-    -- Flame Lash
-    [23105] = { icon = 'esoui/art/icons/ability_warrior_025.dds' }, -- Power Lash (Power Lash - Rank 1)
-    [70745] = { icon = 'esoui/art/icons/ability_warrior_025.dds', name = 'Power Lash' }, -- Off-Balance Exploit (Power Lash - Rank 1)
+    [20253] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_snare_fire.dds' }, -- Burning Talons (Burning Talons - Rank 1)
     
     -- Dragon Leap
-    [18032] = { icon = 'esoui/art/icons/ability_dragonknight_009.dds', name = 'Dragon Leap' }, -- Stun (Dragon Leap - All Ranks)
     [29016] = { icon = 'esoui/art/icons/ability_dragonknight_009.dds' }, -- Dragon Leap (Dragon Leap - Rank 1)
     [33654] = { icon = 'esoui/art/icons/ability_dragonknight_009.dds' }, -- Dragon Leap (Dragon Leap - Rank 2)
     [33657] = { icon = 'esoui/art/icons/ability_dragonknight_009.dds' }, -- Dragon Leap (Dragon Leap - Rank 3)
     [33660] = { icon = 'esoui/art/icons/ability_dragonknight_009.dds' }, -- Dragon Leap (Dragon Leap - Rank 4)
+    
+    -- Obsidian Shard
+    [68763] = { icon = 'esoui/art/icons/ability_dragonknight_013_b.dds', hide = true }, -- Obsidian Shard (Obsidian Shard - Rank 1)
+    
+    --[[
     
     -- Dragonknight Standard
     [36075] = { icon = 'esoui/art/icons/ability_mage_023.dds', hide = true }, -- Shackle (Dragonknight Standard - All Ranks)
@@ -6147,9 +6170,6 @@ E.FakeStagger = {
 E.FakeDuplicate = {
 
     -- Dragonknight
-    --[29043] = {icon = 'esoui/art/icons/ability_dragonknight_015.dds', name = 'Molten Weapons'}, -- Molten Weapons (Molten Weapons - Rank 1)
-    
-    --[31874] = {icon = 'esoui/art/icons/ability_dragonknight_015_a.dds', name = 'Igneous Weapons'}, -- Igneous Weapons (Igneous Weapons - Rank 1
     
     [29011] = {icon = 'esoui/art/icons/ability_dragonknight_011.dds', name = 'Dragon Blood'}, -- Dragon Blood (Dragon Blood - Rank 1)
     [61871] = {icon = 'esoui/art/icons/ability_dragonknight_011.dds', name = 'Dragon Blood'}, -- Dragon Blood (Dragon Blood - Rank 2)
