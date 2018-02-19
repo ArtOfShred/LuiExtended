@@ -277,6 +277,8 @@ A.Passive_Red_Diamond               = 36155
 
 A.Skill_Power_Lash                  = 20824
 
+A.Skill_Shackle                     = 32905
+
 A.Skill_Spiked_Armor                = 20319
 A.Skill_Hardened_Armor              = 20328
 A.Skill_Volatile_Armor              = 20323

@@ -2169,13 +2169,11 @@ debugAuras                  = {
             --[20930] = true, -- Engulfing Flames (Engulfing Flames - Rank 1)
             --[31104] = true, -- Engulfing Flames (Engulfing Flames - Rank 1)
             
-            --[67717] = true, -- Purify (Dragonknight Standard - All Ranks)
-            --[32910] = true, -- Shackle (Dragonknight Standard - All Ranks)
-            --[36073] = true, -- Shackle (Dragonknight Standard - All Ranks)
-            --[35958] = true, -- Shackle (Dragonknight Standard - All Ranks)
-            --[35960] = true, -- Shackle (Dragonknight Standard - All Ranks)
-            --[36075] = true, -- Shackle (Dragonknight Standard - All Ranks)
-            --[76705] = true, -- Immune (Dragonknight Standard - All Ranks)
+            [67717] = true, -- Shackle Synergy Cooldown (Dragonknight Standard - All Ranks)
+            [98438] = true, -- Shackle Damage (Dragonknight Standard - All Ranks)
+            [98447] = true, -- Shackle Snare (Dragonknight Standard - All Ranks)
+            [98437] = true, -- Shackle Area Effect (Dragonknight Standard - All Ranks)
+            [98448] = true, -- Shackle Immune FX (Dragonknight Standard - All Ranks)
             
             [28988] = true, -- Dragonknight Standard (Dragonknight Standard - Rank 1)
             [28995] = true, -- Dragonknight Standard (Dragonknight Standard - Rank 1)

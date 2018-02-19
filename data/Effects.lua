@@ -310,7 +310,14 @@ E.DebuffDisplayOverrideId = {
     [60416] = true, -- Sunderflame
     [93001] = true, -- Mad Tinkerer (Stun from Fabricant)
     
+    -----------------
     -- Class
+    ------------------
+    
+    -- Dragonknight
+    [98447] = true, -- Shackle Snare (Dragonknight Standard Synergy)
+    
+    -- Templar
     [31562] = true, -- Supernova (Nova Synergy)
     [34443] = true, -- Gravity Crush (Solar Prison Synergy)
     
@@ -2703,6 +2710,9 @@ E.EffectOverride = {
     [23105] = { icon = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds' }, -- Power Lash (Flame Lash - Rank 1)
     
     -- Dragonknight Standard
+    [98438] = { name = A.Skill_Shackle }, -- Shackle Damage (Dragonknight Standard - All Ranks)
+    [98447] = { name = A.Skill_Shackle }, -- Shackle Snare (Dragonknight Standard - All Ranks)
+    
     [29230] = { duration = 0 }, -- Major Defile (Dragonknight Standard - Rank 1)
     
     -- Spiked Armor
