@@ -29,7 +29,9 @@ LUIE.AlertTable = {
     [62409] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1500 }, -- Fiery Wind (Justice Mage NPC)
     [62472] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Stab (Justice Dagger NPC)
     
-    [52471] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, refire = 2000 }, -- Nullify (Estate Spellbreaker)
+    [78265] = { power = true, priority = 2 }, -- Alarm (Estate Marshal) (DB DLC)
+    
+    [52471] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, refire = 2000 }, -- Nullify (Estate Spellbreaker) (DB DLC)
     
     --------------------------------------------------
     -- STANDARD NPC'S --------------------------------
@@ -96,6 +98,9 @@ LUIE.AlertTable = {
     [57534] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true}, -- Focused Healing (Healer)
     [44328] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 2, auradetect = true, notDirect = true}, -- Rite of Passage (Healer)
     
+    [29520] = { destroy = true, auradetect = true, priority = 2 }, -- Aura of Protection (Shaman)
+    
+    [68866] = { power = true, auradetect = true, refire = 1000, priority = 2 }, -- War Horn (Faction NPC)
     [43644] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, auradetect = true }, -- Barrier [monster synergy]  (Faction NPCs)
     
     [70070] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Heavy Strike (Winterborn Warrior)
@@ -105,12 +110,18 @@ LUIE.AlertTable = {
     [55909] = { block = false, dodge = true, avoid = false, interrupt = true, priority = 3}, -- Grasping Vines (Winterborn Mage)
     [64704] = { block = true, dodge = false, avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1500 }, -- Flames (Winterborn Mage)
     
+    [65235] = { power = true, auradetect = true, priority = 2, refire = 1000 }, -- Enrage (Vosh Rakh Devoted)
     [53987] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, notDirect = true }, -- Rally (Vosh Rakh Devoted)
     [54027] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, refire = 1600}, -- Divine Leap (Vosh Rakh Devoted)
+    
+    [51000] = { power = true, auradetect = true, priority = 2, refire = 1000 }, -- Cleave Stance (Dremora Caitiff) (Craglorn)
+    
+    [72725] = { power = true, auradetect = true, priority = 2, refire = 1000 }, -- Fool Me Once (Sentinel) (TG DLC)
     
     [76089] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3}, -- Snipe (Archer) (TG DLC)
     --[72220] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Snipe (Archer) (TG DLC) -- This is cast from stealth - so for the time being, maybe hide.
     
+    [77472] = { power = true, auradetect = true, priority = 2, refire = 1000 }, -- Til Death (Bodyguard) (DB DLC)
     [77554] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, notDirect = true }, -- Shard Shield (Bodyguard) (DB DLC)
     [77473] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Shield Charge (Bodyguard) (DB DLC)
     

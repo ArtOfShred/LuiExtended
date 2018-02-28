@@ -229,6 +229,7 @@ A.Set_Pirate_Skeleton               = 98421
 A.Set_Briarheart                    = 71102
 A.Set_Ironblood                     = 97626
 A.Set_Cooldown                      = GetString(SI_LUIE_SKILL_SET_COOLDOWN)
+A.Set_Eternal_Hunt                  = 75927
 
 A.Disguise_Monks_Disguise           = GetString(SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE)
 

@@ -215,10 +215,15 @@ E.IsGroundMine = {
     [A.Skill_Trap_Beast]                = true,
     [A.Skill_Rearming_Trap]             = true,
     [A.Skill_Lightweight_Beast_Trap]    = true,
+    [A.Set_Eternal_Hunt]                = true,
 }
 
 E.IsGroundMineAura = {
 
+-- Sets
+[75930] = true, -- Deadric Mines (Eternal Hunt)
+
+-- Fighter's Guild
 [35750] = true, -- Trap Beast (Trap Beast - Rank 1)
 [42706] = true, -- Trap Beast (Trap Beast - Rank 2)
 [42713] = true, -- Trap Beast (Trap Beast - Rank 3)
@@ -238,6 +243,10 @@ E.IsGroundMineAura = {
 
 E.IsGroundMineDamage = {
 
+-- Sets
+[75929] = true, -- Eternal Hunt
+
+-- Fighter's Guild
 [35754] = true, -- Trap Beast (Trap Beast - Rank 1)
 [42712] = true, -- Trap Beast (Trap Beast - Rank 2)
 [42719] = true, -- Trap Beast (Trap Beast - Rank 3)
@@ -245,13 +254,10 @@ E.IsGroundMineDamage = {
 
 [40389] = true, -- Rearming Trap (Rank 1)
 [40392] = true, -- Rearming Trap (Rank 1)
-
 [42731] = true, -- Rearming Trap (Rank 2)
 [42736] = true, -- Rearming Trap (Rank 2)
-
 [42741] = true, -- Rearming Trap (Rank 3)
 [42746] = true, -- Rearming Trap (Rank 3)
-
 [42751] = true, -- Rearming Trap (Rank 4)
 [42756] = true, -- Rearming Trap (Rank 4)
 
@@ -382,6 +388,7 @@ E.EffectGroundDisplay = {
     [102136] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_zaan.dds', buff = true, debuff = false, ground = false }, -- Zaan
     
     -- Crafted Sets
+    [75930] = { icon = 'LuiExtended/media/icons/abilities/ability_set_eternal_hunt.dds', name = A.Set_Eternal_Hunt, buff = false, debuff = false, ground = true, stack = 1 }, -- Daedric Mines (Eternal Hunt) 
     [71671] = { icon = 'LuiExtended/media/icons/abilities/ability_set_morkuldin_light_attack.dds', buff = true, debuff = false, ground = false }, -- Morkuldin (Morkuldin)
     
     -- Overland Sets
@@ -2782,7 +2789,7 @@ E.EffectOverride = {
     [61837] = { consolidate = true }, -- Major Ward (Volatile Armor - Rank 1)
     [20324] = { name = A.Skill_Volatile_Armor }, -- Volatile Armor Damage Return (Volatile Armor - Rank 1)
     
-    [20253] = { hide = true }, -- Burning Talons (Burning Talons - Rank 1)
+    [20253] = { hideReduce = true }, -- Burning Talons (Burning Talons - Rank 1)
     
     -- Dragon Leap
     [29016] = { icon = 'esoui/art/icons/ability_dragonknight_009.dds' }, -- Dragon Leap (Dragon Leap - Rank 1)
@@ -3360,27 +3367,23 @@ E.EffectOverride = {
     [81511] = { icon = 'esoui/art/icons/ability_buff_minor_berserk.dds' }, -- Minor Berserk (Camouflaged Hunter - Rank 3)
     [81514] = { icon = 'esoui/art/icons/ability_buff_minor_berserk.dds' }, -- Minor Berserk (Camouflaged Hunter - Rank 4)
     
-    [35753] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Trap Beast (Trap Beast - Rank 1)
-    [42710] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Trap Beast (Trap Beast - Rank 2)
-    [42717] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Trap Beast (Trap Beast - Rank 3)
-    [42724] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Trap Beast (Trap Beast - Rank 4)
+    [35753] = { hideReduce = true }, -- Trap Beast (Trap Beast - Rank 1)
+    [42710] = { hideReduce = true }, -- Trap Beast (Trap Beast - Rank 2)
+    [42717] = { hideReduce = true }, -- Trap Beast (Trap Beast - Rank 3)
+    [42724] = { hideReduce = true }, -- Trap Beast (Trap Beast - Rank 4)
+    [40384] = { hideReduce = true }, -- Rearming Trap (Rearming Trap - Rank 1)
+    [40391] = { hideReduce = true }, -- Rearming Trap (Rearming Trap - Rank 1)
+    [42732] = { hideReduce = true }, -- Rearming Trap (Rearming Trap - Rank 2)
+    [42730] = { hideReduce = true }, -- Rearming Trap (Rearming Trap - Rank 2)
+    [42742] = { hideReduce = true }, -- Rearming Trap (Rearming Trap - Rank 3)
+    [42740] = { hideReduce = true }, -- Rearming Trap (Rearming Trap - Rank 3)
+    [42752] = { hideReduce = true }, -- Rearming Trap (Rearming Trap - Rank 4)
+    [42750] = { hideReduce = true }, -- Rearming Trap (Rearming Trap - Rank 4)
     
-    [40384] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Rearming Trap (Rearming Trap - Rank 1)
-    [40391] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Rearming Trap (Rearming Trap - Rank 1)
-    
-    [42732] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Rearming Trap (Rearming Trap - Rank 2)
-    [42730] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Rearming Trap (Rearming Trap - Rank 2)
-    
-    [42742] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Rearming Trap (Rearming Trap - Rank 3)
-    [42740] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Rearming Trap (Rearming Trap - Rank 3)
-    
-    [42752] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Rearming Trap (Rearming Trap - Rank 4)
-    [42750] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Rearming Trap (Rearming Trap - Rank 4)
-    
-    [40374] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
-    [42759] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 2)
-    [42766] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 3)
-    [42773] = { icon = 'LuiExtended/media/icons/abilities/ability_fightersguild_root.dds' }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 4)
+    [40374] = { hideReduce = true }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+    [42759] = { hideReduce = true }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 2)
+    [42766] = { hideReduce = true }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 3)
+    [42773] = { hideReduce = true }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 4)
     
     ----------------------------------------------------------------
     -- WARDEN PASSIVE ABILITIES ------------------------------------
@@ -3601,7 +3604,7 @@ E.EffectOverride = {
     [48983] = { icon = 'esoui/art/icons/ability_destructionstaff_001b.dds' }, -- Force Pulse (Force Pulse - Rank 4)
     
     -- Wall of Elements
-    [68719] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds' }, -- Frozen (Wall of Elements - All Ranks) -- Frost
+    [68719] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_root_frost.dds' }, -- Frozen (Wall of Elements - All Ranks) -- Frost
     
     [62968] = { name = A.Skill_Off_Balance }, -- Off Balance (Wall of Elements - Rank 1) -- Lightning
     [62928] = { duration = 0 }, -- Wall of Frost (Wall of Elements - Rank 1) -- Frost
@@ -3645,7 +3648,7 @@ E.EffectOverride = {
     [29075] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = A.Skill_Flame_Touch }, -- Fire Touch (destruction) (Destructive Touch - Rank 1) -- Fire
     [29089] = { hide = true }, -- Shock Touch (Destructive Touch - Rank 1) -- Fire
     [29078] = { hide = true }, -- Frost Touch (Destructive Touch - Rank 1) -- Fire
-    [30450] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', name = A.Skill_Frost_Touch }, -- Frost Touch (Destructive Touch - Rank 1) -- Fire
+    [30450] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_root_frost.dds', name = A.Skill_Frost_Touch }, -- Frost Touch (Destructive Touch - Rank 1) -- Fire
     
     [40948] = { hide = true }, -- Flame Touch (Destructive Touch - Rank 2) -- Fire
     [62659] = { name = A.Skill_Flame_Touch }, -- Fire Touch (Destructive Touch - Rank 2) -- Fire
@@ -3653,7 +3656,7 @@ E.EffectOverride = {
     [62660] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = A.Skill_Flame_Touch  }, -- Fire Touch (destruction) (Destructive Touch - Rank 2) -- Fire
     [40953] = { hide = true }, -- Shock Touch (Destructive Touch - Rank 2) -- Shock
     [40950] = { hide = true }, -- Frost Touch (Destructive Touch - Rank 2) -- Frost
-    [62693] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', name = A.Skill_Frost_Touch }, -- Deep Freeze (Destructive Touch - Rank 2) -- Frost
+    [62693] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_root_frost.dds', name = A.Skill_Frost_Touch }, -- Deep Freeze (Destructive Touch - Rank 2) -- Frost
     
     [40957] = { hide = true }, -- Flame Touch (Destructive Touch - Rank 3) -- Fire
     [62662] = { name = A.Skill_Flame_Touch }, -- Fire Touch (Destructive Touch - Rank 3) -- Fire
@@ -3661,7 +3664,7 @@ E.EffectOverride = {
     [62663] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = A.Skill_Flame_Touch }, -- Fire Touch (destruction) (Destructive Touch - Rank 3) -- Fire
     [40962] = { hide = true }, -- Shock Touch (Destructive Touch - Rank 3) -- Shock
     [40959] = { hide = true }, -- Frost Touch (Destructive Touch - Rank 3) -- Frost
-    [62696] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', name = A.Skill_Frost_Touch }, -- Deep Freeze  (Destructive Touch - Rank 3) -- Frost
+    [62696] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_root_frost.dds', name = A.Skill_Frost_Touch }, -- Deep Freeze  (Destructive Touch - Rank 3) -- Frost
     
     [40965] = { hide = true }, -- Flame Touch (Destructive Touch - Rank 4) -- Fire
     [62665] = { name = A.Skill_Flame_Touch }, -- Fire Touch (Destructive Touch - Rank 4) -- Fire
@@ -3669,7 +3672,7 @@ E.EffectOverride = {
     [62666] = { icon = 'esoui/art/icons/ability_destructionstaff_007.dds', name = A.Skill_Flame_Touch }, -- Fire Touch (destruction) (Destructive Touch - Rank 4) -- Fire
     [40970] = { hide = true }, -- Shock Touch (Destructive Touch - Rank 4) -- Shock
     [40967] = { hide = true }, -- Frost Touch (Destructive Touch - Rank 4) -- Frost
-    [62699] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', name = A.Skill_Frost_Touch }, -- Deep Freeze  (Destructive Touch - Rank 4) -- Frost
+    [62699] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_root_frost.dds', name = A.Skill_Frost_Touch }, -- Deep Freeze  (Destructive Touch - Rank 4) -- Frost
     
     -- Destructive Clench
     [38985] = { hide = true }, -- Flame Clench (Destructive Clench - Rank 1) -- Fire
@@ -3680,7 +3683,7 @@ E.EffectOverride = {
     [68635] = { name = A.Skill_Shock_Clench }, -- Shock Touch (Destructive Clench - Rank 1) -- Shock
     [62734] = { name = A.Skill_Shock_Clench }, -- Shock Clench Explosion (Destructive Clench - Rank 1) -- Shock
     [38989] = { hide = true }, -- Frost Clench (Destructive Clench - Rank 1) -- Frost
-    [38990] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', name = A.Skill_Frost_Clench }, -- Deep Freeze (Destructive Clench - Rank 1) -- Frost
+    [38990] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_root_frost.dds', name = A.Skill_Frost_Clench }, -- Deep Freeze (Destructive Clench - Rank 1) -- Frost
     
     [62671] = { name = A.Skill_Flame_Clench }, -- Fire Clench (Destructive Clench - Rank 2) -- Fire
     [62673] = { icon = 'esoui/art/icons/ability_destructionstaff_007_a.dds', name = A.Skill_Flame_Clench }, -- Stun After Knockback Movement (Destructive Clench - Rank 2) -- Fire
@@ -3688,7 +3691,7 @@ E.EffectOverride = {
     [62735] = { name = A.Skill_Off_Balance }, -- Shock Clench (Destructive Clench - Rank 2) -- Shock
     [68637] = { name = A.Skill_Shock_Clench }, -- Shock Touch (Destructive Clench - Rank 2) -- Shock
     [62737] = { name = A.Skill_Shock_Clench, hide = true }, -- Shock Clench Explosion (Destructive Clench - Rank 2) -- Shock
-    [62703] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', name = A.Skill_Frost_Clench }, -- Deep Freeze (Destructive Clench - Rank 2) -- Frost
+    [62703] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_root_frost.dds', name = A.Skill_Frost_Clench }, -- Deep Freeze (Destructive Clench - Rank 2) -- Frost
     
     [62675] = { name = A.Skill_Flame_Clench }, -- Fire Clench (Destructive Clench - Rank 3) -- Fire
     [62677] = { icon = 'esoui/art/icons/ability_destructionstaff_007_a.dds', name = A.Skill_Flame_Clench }, -- Stun After Knockback Movement (Destructive Clench - Rank 3) -- Fire
@@ -3696,14 +3699,14 @@ E.EffectOverride = {
     [62738] = { name = A.Skill_Off_Balance }, -- Shock Clench (Destructive Clench - Rank 3) -- Shock
     [68639] = { name = A.Skill_Shock_Clench }, -- Shock Touch (Destructive Clench - Rank 3) -- Shock
     [62740] = { name = A.Skill_Shock_Clench, hide = true }, -- Shock Clench Explosion (Destructive Clench - Rank 3) -- Shock
-    [62706] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', name = A.Skill_Frost_Clench }, -- Deep Freeze (Destructive Clench - Rank 3) -- Frost
+    [62706] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_root_frost.dds', name = A.Skill_Frost_Clench }, -- Deep Freeze (Destructive Clench - Rank 3) -- Frost
     
     [62679] = { name = A.Skill_Flame_Clench }, -- Fire Clench (Destructive Clench - Rank 4) -- Fire
     [62681] = { icon = 'esoui/art/icons/ability_destructionstaff_007_a.dds', name = A.Skill_Flame_Clench }, -- Stun After Knockback Movement (Destructive Clench - Rank 4) -- Fire
     [62680] = { icon = 'esoui/art/icons/ability_destructionstaff_007_a.dds', name = A.Skill_Flame_Clench }, -- Fire Touch (Destruction) (Destructive Clench - Rank 4) -- Fire
     [68634] = { name = A.Skill_Shock_Clench }, -- Shock Touch (Destructive Clench - Rank 4) -- Shock
     [62743] = { name = A.Skill_Shock_Clench, hide = true }, -- Shock Clench Explosion (Destructive Clench - Rank 4) -- Shock
-    [62709] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', name = A.Skill_Frost_Clench}, -- Deep Freeze (Destructive Clench - Rank 4) -- Frost
+    [62709] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_root_frost.dds', name = A.Skill_Frost_Clench}, -- Deep Freeze (Destructive Clench - Rank 4) -- Frost
     
     -- Destructive Reach
     [38944] = { hide = true }, -- Flame Reach (Destructive Reach - Rank 1) -- Fire
@@ -3712,22 +3715,22 @@ E.EffectOverride = {
     [38978] = { hide = true }, -- Shock Reach (Destructive Reach - Rank 1) -- Shock
     [68574] = { name = A.Skill_Shock_Reach }, -- Shock Touch (Destructive Reach - Rank 1) -- Shock
     [38970] = { hide = true }, -- Frost Reach (Destructive Reach - Rank 1) -- Frost
-    [38971] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', name = A.Skill_Frost_Reach }, -- Frost Grip (Destructive Reach - Rank 1) -- Frost
+    [38971] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_root_frost.dds', name = A.Skill_Frost_Reach }, -- Frost Grip (Destructive Reach - Rank 1) -- Frost
     
     [62683] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach }, -- Stun After Knockback Movement (Destructive Reach - Rank 2) -- Fire
     [62684] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach }, -- Flame Reach (destruction) (Destructive Reach - Rank 2) -- Fire
     [68575] = { name = A.Skill_Shock_Reach }, -- Shock Touch (Destructive Reach - Rank 2) -- Shock
-    [62713] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', name = A.Skill_Frost_Reach }, -- Frost Grip (Destructive Reach - Rank 2) -- Frost
+    [62713] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_root_frost.dds', name = A.Skill_Frost_Reach }, -- Frost Grip (Destructive Reach - Rank 2) -- Frost
     
     [62686] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach }, -- Stun After Knockback Movement (Destructive Reach - Rank 3) -- Fire
     [62687] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach }, -- Flame Reach (destruction) (Destructive Reach - Rank 3) -- Fire
     [68576] = { name = A.Skill_Shock_Reach }, -- Shock Touch (Destructive Reach - Rank 3) -- Shock
-    [62716] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', name = A.Skill_Frost_Reach }, -- Frost Grip (Destructive Reach - Rank 3) -- Frost
+    [62716] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_root_frost.dds', name = A.Skill_Frost_Reach }, -- Frost Grip (Destructive Reach - Rank 3) -- Frost
     
     [62689] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach }, -- Stun After Knockback Movement (Destructive Reach - Rank 4) -- Fire
     [62690] = { icon = 'esoui/art/icons/ability_destructionstaff_007_b.dds', name = A.Skill_Flame_Reach }, -- Flame Reach (destruction) (Destructive Reach - Rank 4) -- Fire
     [68577] = { name = A.Skill_Shock_Reach }, -- Shock Touch (Destructive Reach - Rank 4) -- Shock
-    [62719] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_snare_frost.dds', name = A.Skill_Frost_Reach }, -- Frost Grip (Destructive Reach - Rank 4) -- Frost
+    [62719] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_root_frost.dds', name = A.Skill_Frost_Reach }, -- Frost Grip (Destructive Reach - Rank 4) -- Frost
     
     -- Elemental Drain
     [39099] = { icon = 'esoui/art/icons/ability_buff_minor_magickasteal.dds' }, -- Minor Magickasteal (Elemental Drain - Rank 1)
@@ -4300,7 +4303,7 @@ E.EffectOverride = {
     [62407] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_fire_ranged.dds', hide = true }, -- Fiery Touch (Justice Mage)
     [63828] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_fire_ranged.dds' }, -- Fiery Touch (Justice Mage)
     
-    [78265] = { hide = true }, -- Alarm (Estate Marshal - DB)
+    [78265] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_alarm.dds', hide = true }, -- Alarm (Estate Marshal - DB)
     [78266] = { hide = true }, -- Alarm (Estate Marshal - DB)
     
     [52471] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_nullify.dds', hide = true }, -- Nullify (Estate Spellbreaker - DB)
@@ -4379,7 +4382,7 @@ E.EffectOverride = {
     [14096] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds' }, -- Heavy Attack (Footsoldier)
     [28499] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_throw_dagger.dds', hide = true }, -- Throw Dagger (Footsoldier)
     [28502] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_throw_dagger.dds' }, -- Throw Dagger (Footsoldier)
-    [28504] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_throw_dagger.dds', hide = true }, -- Throw Dagger (Footsoldier)
+    [28504] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_throw_dagger.dds', hideReduce = true }, -- Throw Dagger (Footsoldier)
 
     [29400] = { icon = 'esoui/art/icons/ability_1handed_005.dds' }, -- Power Bash (Guard)
     [29401] = { icon = 'esoui/art/icons/ability_1handed_005.dds' }, -- Power Bash (Guard)

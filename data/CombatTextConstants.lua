@@ -120,6 +120,8 @@ LUIE.CombatTextConstants = {
         CLEANSE                     = "LUIE_LUIE_CombatText_Alert_TYPE_CLEANSE",
         EXPLOIT                     = "LUIE_LUIE_CombatText_Alert_TYPE_EXPLOIT",
         EXECUTE                     = "LUIE_LUIE_CombatText_Alert_TYPE_EXECUTE",
+        DESTROY                     = "LUIE_LUIE_CombatText_Alert_TYPE_DESTROY",
+        POWER                       = "LUIE_LUIE_CombatText_Alert_TYPE_POWER",
         SHARED                      = "LUIE_LUIE_CombatText_Alert_TYPE_SHARED",
     },
     combatType = {

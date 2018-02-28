@@ -124,6 +124,8 @@ CT.D = {
         showAlertMitigation         = true,
         mitigationType              = "Single Line",
         mitigationFormat            = "%t %i",
+        mitigationFormatPower       = GetString(SI_LUIE_CT_MITIGATION_FORMAT_POWER),
+        mitigationFormatDestroy     = GetString(SI_LUIE_CT_MITIGATION_FORMAT_DESTROY),
         mitigationSuffix            = GetString(SI_LUIE_CT_MITIGATION_SUFFIX_DEFAULT), -- "incoming! "
         mitigationAura              = false,
         mitigationRank3             = true,
@@ -135,6 +137,8 @@ CT.D = {
         showAlertInterrupt          = true,
         showAlertDodge              = true,
         showAlertAvoid              = true,
+        showAlertPower              = true,
+        showAlertDestroy            = true,
         
         showAlertCleanse            = true,
         showAlertExploit            = true,
@@ -251,6 +255,8 @@ CT.D = {
         alertDodge                  = { 1, 1, 50/255, 1 },
         alertAvoid                  = { 1, 1, 50/255, 1 },
         alertExecute                = { 1, 1, 1, 1 },
+        alertPower                  = { 1, 1, 1, 1 },
+        alertDestroy                = { 1, 1, 1, 1 },
     ----------------------------------
     --Points
         pointsAlliance              = { 0.235294, 0.784314, 0.313725, 1 },  --RGB(60, 200, 80)
@@ -311,6 +317,8 @@ CT.D = {
         alertDodge                  = GetString(SI_LUIE_CT_DODGE_DEFAULT),
         alertAvoid                  = GetString(SI_LUIE_CT_AVOID_DEFAULT),
         alertExecute                = GetString(SI_LUIE_CT_EXECUTE_DEFAULT),
+        alertPower                  = GetString(SI_LUIE_CT_POWER_DEFAULT),
+        alertDestroy                = GetString(SI_LUIE_CT_DESTROY_DEFAULT),
     ----------------------------------
     --Points
         pointsAlliance              = "%a AP",

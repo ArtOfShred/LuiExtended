@@ -133,6 +133,20 @@ function CTV:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, 
         local stringPart2 = isDirect and S.toggles.mitigationSuffix or ""
         local stringPart3 = S.formats.alertAvoid
         text = zo_strformat("<<1>><<2>> <<3>>", stringPart1, stringPart2, stringPart3)
+    -- POWER
+    elseif (alertType == alertTypes.POWER) then
+        color = S.colors.alertPower
+        size = S.fontSizes.alert
+        local stringPart1 = self:FormatAlertString(S.toggles.mitigationFormatPower, { source = sourceName, ability = abilityName, icon = abilityIcon })
+        local stringPart2 = S.formats.alertPower
+        text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
+    -- DESTROY
+    elseif (alertType == alertTypes.DESTROY) then
+        color = S.colors.alertDestroy
+        size = S.fontSizes.alert
+        local stringPart1 = self:FormatAlertString(S.toggles.mitigationFormatDestroy, { source = sourceName, ability = abilityName, icon = abilityIcon })
+        local stringPart2 = S.formats.alertDestroy
+        text = zo_strformat("<<1>> <<2>>", stringPart1, stringPart2)
     end
 
     self:PrepareLabel(control.label, size, color, text)

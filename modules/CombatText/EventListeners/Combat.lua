@@ -64,7 +64,7 @@ function CTL:EffectChanged(...)
             callLater(function() refireDelay[abilityId] = nil end, AlertT[abilityId].refire) --buffer by X time
         end
         
-        if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt then
+        if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt or AlertT[abilityId].power or AlertT[abilityId].destroy then
         
             -- Filter by priority
             if S.toggles.mitigationDungeon and not IsUnitInDungeon("player") or not S.toggles.mitigationDungeon then
@@ -78,6 +78,8 @@ function CTL:EffectChanged(...)
             local dodge
             local avoid
             local interrupt
+            local power
+            local destroy
             
             if AlertT[abilityId].notDirect then 
                 isDirect = false
@@ -101,10 +103,16 @@ function CTL:EffectChanged(...)
             if AlertT[abilityId].interrupt and (S.toggles.showAlertInterrupt) == true then
                 interrupt = true
             end
+            if AlertT[abilityId].power and (S.toggles.showAlertPower) == true then
+                power = true
+            end
+            if AlertT[abilityId].destroy and (S.toggles.showAlertDestroy) == true then
+                destroy = true
+            end
             
-            if S.toggles.mitigationType == "Single Line" then
+            if S.toggles.mitigationType == "Single Line" and not ( power == true or destroy == true ) then
                 self:TriggerEvent(C.eventType.ALERT, C.alertType.SHARED, effectName, formattedIcon, unitName, isDirect, block, blockstagger, dodge, avoid, interrupt)
-            elseif S.toggles.mitigationType == "Multiple Lines" then
+            elseif S.toggles.mitigationType == "Multiple Lines" or (power == true or destroy == true) then
                 if block and not blockstagger then
                     self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCK, effectName, formattedIcon, unitName, isDirect)
                 end
@@ -119,6 +127,12 @@ function CTL:EffectChanged(...)
                 end
                 if interrupt then
                     self:TriggerEvent(C.eventType.ALERT, C.alertType.INTERRUPT, effectName, formattedIcon, unitName, isDirect)
+                end
+                if power then
+                    self:TriggerEvent(C.eventType.ALERT, C.alertType.POWER, effectName, formattedIcon, unitName, isDirect)
+                end
+                if destroy then
+                    self:TriggerEvent(C.eventType.ALERT, C.alertType.DESTROY, effectName, formattedIcon, unitName, isDirect)
                 end
             end
         end
@@ -258,7 +272,7 @@ function CTL:OnCombatIn(...)
                 callLater(function() refireDelay[abilityId] = nil end, AlertT[abilityId].refire) --buffer by X time
             end
 
-            if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt then
+            if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt or AlertT[abilityId].power or AlertT[abilityId].destroy then
             
                 -- Filter by priority
                 if S.toggles.mitigationDungeon and not IsUnitInDungeon("player") or not S.toggles.mitigationDungeon then
@@ -273,6 +287,8 @@ function CTL:OnCombatIn(...)
                 local dodge
                 local avoid
                 local interrupt
+                local power
+                local destroy
                 
                 if AlertT[abilityId].notDirect then 
                     isDirect = false
@@ -296,10 +312,16 @@ function CTL:OnCombatIn(...)
                 if AlertT[abilityId].interrupt and (S.toggles.showAlertInterrupt) == true then
                     interrupt = true
                 end
+                if AlertT[abilityId].power and (S.toggles.showAlertPower) == true then
+                    power = true
+                end
+                if AlertT[abilityId].destroy and (S.toggles.showAlertDestroy) == true then
+                    destroy = true
+                end
                 
-                if S.toggles.mitigationType == "Single Line" then
+                if S.toggles.mitigationType == "Single Line" and not ( power == true or destroy == true ) then
                     self:TriggerEvent(C.eventType.ALERT, C.alertType.SHARED, abilityName, formattedIcon, sourceName, isDirect, block, blockstagger, dodge, avoid, interrupt)
-                elseif S.toggles.mitigationType == "Multiple Lines" then
+                elseif S.toggles.mitigationType == "Multiple Lines" or (power == true or destroy == true) then
                     if block and not blockstagger then
                         self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCK, abilityName, formattedIcon, sourceName, isDirect)
                     end
@@ -314,6 +336,12 @@ function CTL:OnCombatIn(...)
                     end
                     if interrupt then
                         self:TriggerEvent(C.eventType.ALERT, C.alertType.INTERRUPT, abilityName, formattedIcon, sourceName, isDirect)
+                    end
+                    if power then
+                        self:TriggerEvent(C.eventType.ALERT, C.alertType.POWER, abilityName, formattedIcon, sourceName, isDirect)
+                    end
+                    if destroy then
+                        self:TriggerEvent(C.eventType.ALERT, C.alertType.DESTROY, abilityName, formattedIcon, sourceName, isDirect)
                     end
                 end
             end
@@ -474,7 +502,7 @@ function CTL:OnCombatAlert(...)
                 callLater(function() refireDelay[abilityId] = nil end, AlertT[abilityId].refire) --buffer by X time
             end
 
-            if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt then
+            if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt or AlertT[abilityId].power or AlertT[abilityId].destroy then
             
                 -- Filter by priority
                 if S.toggles.mitigationDungeon and not IsUnitInDungeon("player") or not S.toggles.mitigationDungeon then
@@ -489,6 +517,8 @@ function CTL:OnCombatAlert(...)
                 local dodge
                 local avoid
                 local interrupt
+                local power
+                local destroy
                 
                 if AlertT[abilityId].notDirect then 
                     isDirect = false
@@ -512,10 +542,16 @@ function CTL:OnCombatAlert(...)
                 if AlertT[abilityId].interrupt and (S.toggles.showAlertInterrupt) == true then
                     interrupt = true
                 end
+                if AlertT[abilityId].power and (S.toggles.showAlertPower) == true then
+                    power = true
+                end
+                if AlertT[abilityId].destroy and (S.toggles.showAlertDestroy) == true then
+                    destroy = true
+                end
                 
-                if S.toggles.mitigationType == "Single Line" then
+                if S.toggles.mitigationType == "Single Line" and not ( power == true or destroy == true ) then
                     self:TriggerEvent(C.eventType.ALERT, C.alertType.SHARED, abilityName, formattedIcon, sourceName, isDirect, block, blockstagger, dodge, avoid, interrupt)
-                elseif S.toggles.mitigationType == "Multiple Lines" then
+                elseif S.toggles.mitigationType == "Multiple Lines" or (power == true or destroy == true) then
                     if block and not blockstagger then
                         self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCK, abilityName, formattedIcon, sourceName, isDirect)
                     end
@@ -530,6 +566,12 @@ function CTL:OnCombatAlert(...)
                     end
                     if interrupt then
                         self:TriggerEvent(C.eventType.ALERT, C.alertType.INTERRUPT, abilityName, formattedIcon, sourceName, isDirect)
+                    end
+                    if power then
+                        self:TriggerEvent(C.eventType.ALERT, C.alertType.POWER, abilityName, formattedIcon, sourceName, isDirect)
+                    end
+                    if destroy then
+                        self:TriggerEvent(C.eventType.ALERT, C.alertType.DESTROY, abilityName, formattedIcon, sourceName, isDirect)
                     end
                 end
             end

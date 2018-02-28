@@ -109,6 +109,7 @@ SCB.D = {
     Consolidate                      = false,
     ShowDebugCombat                  = false,
     ShowDebugEffect                  = false,
+    HideReduce                       = true,
 }
 SCB.SV = nil
 
@@ -1283,6 +1284,7 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
    
     if E.EffectOverride[abilityId] then
         if E.EffectOverride[abilityId].hide == true then return end
+        if E.EffectOverride[abilityId].hideReduce == true and SCB.SV.HideReduce then return end
         iconName = E.EffectOverride[abilityId].icon or E.AbilityIcon[effectName or ""] or iconName
         effectName = E.EffectOverride[abilityId].name or effectName
         unbreakable = E.EffectOverride[abilityId].unbreakable or 0

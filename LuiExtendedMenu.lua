@@ -958,7 +958,7 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.SV.HideGroundEffects,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             }
-            
+            -- ADD EXTRA
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
                 name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS)),
@@ -969,7 +969,7 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.SV.AddExtraBuffs,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             }
-            
+            -- CONSOLIDATE
             optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
                 type = "checkbox",
                 name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_CONSOLIDATE)),
@@ -978,6 +978,17 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.Consolidate = value LUIE.SpellCastBuffs.ReloadEffects() end,
                 width = "full",
                 default = LUIE.SpellCastBuffs.SV.Consolidate,
+                disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+            }
+            -- REDUCE
+            optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+                type = "checkbox",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_REDUCE)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_REDUCE_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.HideReduce end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.HideReduce = value LUIE.SpellCastBuffs.ReloadEffects() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.SV.HideReduce,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             }
             
@@ -8629,6 +8640,45 @@ function LUIE_CreateSettings()
                     disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
                     default = LUIE.CombatText.D.toggles.showAlertInterrupt,
                 },
+                {--POWER
+                    type    = "checkbox",
+                    name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_ALERT_POWER)),
+                    tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_POWER_TP),
+                    getFunc = function() return LUIE.CombatText.SV.toggles.showAlertPower end,
+                    setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertPower = v end,
+                    disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                    default = LUIE.CombatText.D.toggles.showAlertPower,
+                },
+                {--MITIGATION FORMAT POWER
+                    type    = "editbox",
+                    name    = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P)),
+                    tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P_TP),
+                    getFunc = function() return LUIE.CombatText.SV.toggles.mitigationFormatPower end,
+                    setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationFormatPower = v end,
+                    disabled = function() return not (LUIE.CombatText.SV.toggles.showAlertMitigation and LUIE.CombatText.SV.toggles.showAlertPower) end,
+                    default = LUIE.CombatText.D.toggles.mitigationFormatPower,
+                },
+                
+                {--DESTROY
+                    type    = "checkbox",
+                    name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY)),
+                    tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_ALERT_DESTROY_TP),
+                    getFunc = function() return LUIE.CombatText.SV.toggles.showAlertDestroy end,
+                    setFunc = function(v) LUIE.CombatText.SV.toggles.showAlertDestroy = v end,
+                    disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
+                    default = LUIE.CombatText.D.toggles.showAlertDestroy,
+                },
+                {--MITIGATION FORMAT DESTROY
+                    type    = "editbox",
+                    name    = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D)),
+                    tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_D_TP),
+                    getFunc = function() return LUIE.CombatText.SV.toggles.mitigationFormatDestroy end,
+                    setFunc = function(v) LUIE.CombatText.SV.toggles.mitigationFormatDestroy = v end,
+                    disabled = function() return not (LUIE.CombatText.SV.toggles.showAlertMitigation and LUIE.CombatText.SV.toggles.showAlertDestroy) end,
+                    default = LUIE.CombatText.D.toggles.mitigationFormatDestroy,
+                },
+                
+                
         --TOGGLE POINTS
             {
                 type = "header",
@@ -9381,6 +9431,23 @@ function LUIE_CreateSettings()
                     setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertExecute = { r, g, b, a } end,
                     default = {r=LUIE.CombatText.D.colors.alertExecute[1], g=LUIE.CombatText.D.colors.alertExecute[2], b=LUIE.CombatText.D.colors.alertExecute[3]}
                 },
+                {--POWER
+                    type    = "colorpicker",
+                    name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_POWER),
+                    tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POWER_TP),
+                    getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertPower) end,
+                    setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertPower = { r, g, b, a } end,
+                    default = {r=LUIE.CombatText.D.colors.alertPower[1], g=LUIE.CombatText.D.colors.alertPower[2], b=LUIE.CombatText.D.colors.alertPower[3]}
+                },
+                {--DESTROY
+                    type    = "colorpicker",
+                    name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY),
+                    tooltip = GetString(SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DESTROY_TP),
+                    getFunc = function() return unpack(LUIE.CombatText.SV.colors.alertDestroy) end,
+                    setFunc = function(r, g, b, a) LUIE.CombatText.SV.colors.alertDestroy = { r, g, b, a } end,
+                    default = {r=LUIE.CombatText.D.colors.alertDestroy[1], g=LUIE.CombatText.D.colors.alertDestroy[2], b=LUIE.CombatText.D.colors.alertDestroy[3]}
+                },
+                
         --COLOR POINTS
             {
                 type = "header",
@@ -9809,6 +9876,25 @@ function LUIE_CreateSettings()
                     isMultiline = false,
                     default = LUIE.CombatText.D.formats.alertExecute,
                 },
+                {--POWER
+                    type    = "editbox",
+                    name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_POWER),
+                    tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_POWER_TP),
+                    getFunc = function() return LUIE.CombatText.SV.formats.alertPower end,
+                    setFunc = function(v) LUIE.CombatText.SV.formats.alertPower = v end,
+                    isMultiline = false,
+                    default = LUIE.CombatText.D.formats.alertPower,
+                },
+                {--DESTROY
+                    type    = "editbox",
+                    name    = GetString(SI_LUIE_LAM_CT_SHARED_ALERT_DESTROY),
+                    tooltip = GetString(SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_DESTROY_TP),
+                    getFunc = function() return LUIE.CombatText.SV.formats.alertDestroy end,
+                    setFunc = function(v) LUIE.CombatText.SV.formats.alertDestroy = v end,
+                    isMultiline = false,
+                    default = LUIE.CombatText.D.formats.alertDestroy,
+                },
+                
         --FORMATS POINTS
             {
                 type = "header",
