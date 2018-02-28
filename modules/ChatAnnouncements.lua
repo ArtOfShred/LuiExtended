@@ -3151,11 +3151,15 @@ function CA.StoreClose(eventCode)
 end
 
 function CA.FenceSuccess(eventCode, result)
-    if result == 1 then
+    if result == ITEM_LAUNDER_RESULT_SUCCESS then
         if CA.SV.Inventory.LootVendorCurrency then
-            CA.CurrencyPrinter(g_savedPurchase.formattedValue, g_savedPurchase.changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, g_savedPurchase.messageChange, g_savedPurchase.messageTotal, g_savedPurchase.type, g_savedPurchase.carriedItem, g_savedPurchase.carriedItemTotal)
+            if g_savedPurchase.formattedValue ~= nil and g_savedPurchase.formattedValue ~= "" then
+                CA.CurrencyPrinter(g_savedPurchase.formattedValue, g_savedPurchase.changeColor, g_savedPurchase.changeType, g_savedPurchase.currencyTypeColor, g_savedPurchase.currencyIcon, g_savedPurchase.currencyName, g_savedPurchase.currencyTotal, g_savedPurchase.messageChange, g_savedPurchase.messageTotal, g_savedPurchase.type, g_savedPurchase.carriedItem, g_savedPurchase.carriedItemTotal)
+            end
         else
-            CA.ItemPrinter(g_savedLaunder.icon, g_savedLaunder.stack, g_savedLaunder.itemType, g_savedLaunder.itemId, g_savedLaunder.itemLink, "", g_savedLaunder.logPrefix, g_savedLaunder.gainOrLoss, false)
+            if g_savedLaunder.itemId ~= nil and g_savedLaunder.itemId ~= "" then
+                CA.ItemPrinter(g_savedLaunder.icon, g_savedLaunder.stack, g_savedLaunder.itemType, g_savedLaunder.itemId, g_savedLaunder.itemLink, "", g_savedLaunder.logPrefix, g_savedLaunder.gainOrLoss, false)
+            end
         end
         g_savedLaunder = { }
         g_savedPurchase = { }
@@ -3259,7 +3263,9 @@ function CA.ResolveQuestItemChange()
                     
                     finalMessage = strfmt("|c%s%s|r%s", color, formattedMessageP2, totalString)
                     
-                    d(finalMessage)
+                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT REMOVE" }
+                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 25, CA.PrintQueuedMessages )
                 end
             end
         
@@ -3297,7 +3303,10 @@ function CA.ResolveQuestItemChange()
                     end
                     
                     finalMessage = strfmt("|c%s%s|r%s", color, formattedMessageP2, totalString)
-                    d(finalMessage)
+                    
+                    g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT ADD" }
+                    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
+                    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 25, CA.PrintQueuedMessages )
                 end
             end
         end
@@ -3313,6 +3322,9 @@ function CA.ResolveQuestItemChange()
             end
         end
     end
+    
+    EVENT_MANAGER:UnregisterForUpdate(moduleName .. "QuestItemUpdater")
+    
 end
 
 local function DisplayQuestItem(itemId, stackCount, icon, reset)
@@ -3329,10 +3341,9 @@ local function DisplayQuestItem(itemId, stackCount, icon, reset)
         --d(itemId .. " - Increment by: " .. stackCount)
         questItemIndex[itemId].counter = questItemIndex[itemId].counter + stackCount
     end
-
-    g_queuedMessages[g_queuedMessagesCounter] = { message = "", type = "QUESTLOOT" }
-    g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+    
+    
+    EVENT_MANAGER:RegisterForUpdate(moduleName .. "QuestItemUpdater", 25, CA.ResolveQuestItemChange )
     
 end
 
@@ -9956,10 +9967,17 @@ function CA.PrintQueuedMessages()
         end
     end
     
-    -- Quest Items
+    -- Quest Items (Remove)
     for i=1, #g_queuedMessages do
-        if g_queuedMessages[i].type == "QUESTLOOT" then
-            CA.ResolveQuestItemChange()
+        if g_queuedMessages[i].type == "QUEST LOOT REMOVE" then
+            printToChat(g_queuedMessages[i].message)
+        end
+    end
+    
+    -- Quest Items (ADD)
+    for i=1, #g_queuedMessages do
+        if g_queuedMessages[i].type == "QUEST LOOT ADD" then
+            printToChat(g_queuedMessages[i].message)
         end
     end
     

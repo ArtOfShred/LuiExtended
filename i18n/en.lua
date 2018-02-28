@@ -2186,3 +2186,25 @@ ZO_CreateStringId("SI_LUIE_SKILL_PASSIVE_NOXIPHILIC_SANGUIVORIA",       "Noxiphi
 ZO_CreateStringId("SI_LUIE_SKILL_BOND_WITH_NATURE",                     "Bond with Nature")
 
 ZO_CreateStringId("SI_LUIE_SKILL_BLESSING_OF_RESTORATION",              "Blessing of Restoration")
+
+
+
+-- NPC Skills
+ZO_CreateStringId("SI_LUIE_SKILL_SHIELD_RUSH",                          "Shield Rush")
+ZO_CreateStringId("SI_LUIE_SKILL_BLITZ",                                "Blitz")
+ZO_CreateStringId("SI_LUIE_SKILL_BARRELING_CHARGE",                     "Barreling Charge")
+ZO_CreateStringId("SI_LUIE_SKILL_ZOOM",                                 "Zoom")
+ZO_CreateStringId("SI_LUIE_SKILL_PLOW",                                 "Plow")
+ZO_CreateStringId("SI_LUIE_SKILL_ICE_BARRIER_CHILL",                    "Ice Barrier Chill")
+ZO_CreateStringId("SI_LUIE_SKILL_DEFENSIVE_WARD",                       "Defensive Ward")
+ZO_CreateStringId("SI_LUIE_SKILL_GREAT_CLEAVE",                         "Great Cleave")
+ZO_CreateStringId("SI_LUIE_SKILL_INSPIRE",                              "Inspire")
+ZO_CreateStringId("SI_LUIE_SKILL_HIDE_IN_SHADOWS",                      "Hide in Shadows")
+ZO_CreateStringId("SI_LUIE_SKILL_SHADOWY_BARRIER",                      "Shadowy Barrier")
+ZO_CreateStringId("SI_LUIE_SKILL_MIGHTY_CHARGE",                        "Mighty Charge")
+ZO_CreateStringId("SI_LUIE_SKILL_DETECTION",                            "Detection")
+ZO_CreateStringId("SI_LUIE_SKILL_IMPROVED_SHOCK_TORRENT",               "Improved Shock Torrent")
+ZO_CreateStringId("SI_LUIE_SKILL_SIEGE_BARRIER",                        "Siege Barrier")
+ZO_CreateStringId("SI_LUIE_SKILL_PUNCTURING_CHAINS",                    "Puncturing Chains")
+ZO_CreateStringId("SI_LUIE_SKILL_IMPROVED_VOLLEY",                      "Improved Volley")
+ZO_CreateStringId("SI_LUIE_SKILL_FIRE_TORRENT",                         "Fire Torrent")

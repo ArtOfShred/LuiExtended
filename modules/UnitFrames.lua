@@ -2101,8 +2101,10 @@ function UF.UpdateAttribute( attributeFrame, powerValue, powerEffectiveMax, shie
     local shield = ( shield and shield > 0 ) and shield or nil
 
     if (UF.CustomFrames and UF.CustomFrames["reticleover"] and attributeFrame == UF.CustomFrames["reticleover"][POWERTYPE_HEALTH] and IsUnitInvulnerableGuard("reticleover") ) then
-        if attributeFrame[label] ~= nil then
-            attributeFrame[label]:SetColor( unpack( ( pct < ( attributeFrame.threshold or g_defaultThreshold ) ) and {1,0.25,0.38} or attributeFrame.colour or {1,1,1} ) )
+        for _, label in pairs( { "label", "labelOne", "labelTwo" } ) do
+            if attributeFrame[label] ~= nil then
+                attributeFrame[label]:SetColor( unpack( attributeFrame.colour or {1,1,1} ) )
+            end
         end
         if attributeFrame.bar ~= nil then
             if UF.SV.CustomSmoothBar then

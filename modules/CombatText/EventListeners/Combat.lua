@@ -23,6 +23,13 @@ function CTL:New()
     obj:RegisterForEvent(EVENT_COMBAT_EVENT, function(...) self:OnCombatOut(...) end, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER_PET) -- Player Pet -> Target
     obj:RegisterForEvent(EVENT_PLAYER_COMBAT_STATE, function() self:CombatState() end)
     obj:RegisterForEvent(EVENT_EFFECT_CHANGED, function(...) self:EffectChanged(...) end)
+    
+    for abilityId, data in pairs (AlertT) do
+        if data.eventdetect == true then
+            obj:RegisterForEvent(EVENT_COMBAT_EVENT, function(...) self:OnCombatAlert(...) end, REGISTER_FILTER_ABILITY_ID, abilityId, REGISTER_FILTER_IS_ERROR, false)
+        end
+    end
+    
     return obj
 end
 
@@ -434,6 +441,98 @@ function CTL:OnCombatOut(...)
                 self:TriggerEvent(C.eventType.CROWDCONTROL, C.crowdControlType.STUNNED, combatType)
                 isWarned.stunned = true
                 callLater(function() isWarned.stunned = false end, 1000) end --1 second buffer
+        end
+    end
+    
+end
+
+function CTL:OnCombatAlert(...)
+
+    local resultType, isError, abilityName, abilityGraphic, abilityAction_slotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId = ...
+    
+    local S = LUIE.CombatText.SV
+    local combatType, togglesInOut = C.combatType.INCOMING, S.toggles.incoming
+    abilityName = zo_strformat("<<C:1>>", GetAbilityName(abilityId))
+    abilityGraphic = GetAbilityIcon(abilityId)
+    
+    -- NEW ALERTS
+    if S.toggles.showAlertMitigation and (S.toggles.mitigationAura or IsUnitInDungeon("player") ) and not refireDelay[abilityId] then
+        if (resultType == ACTION_RESULT_BEGIN or resultType == ACTION_RESULT_BEGIN_CHANNEL or AlertT[abilityId].skipcheck) and not refireDelay[abilityId] then
+            if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then abilityName = LUIE.Effects.EffectOverride[abilityId].name end
+            local formattedIcon = zo_iconFormat(GetAbilityIcon(abilityId), 32, 32)
+            
+            if resultType == ACTION_RESULT_EFFECT_FADED then return end
+            
+            if LUIE.Effects.EffectOverrideByName[abilityId] then
+                if LUIE.Effects.EffectOverrideByName[abilityId][sourceName] and LUIE.Effects.EffectOverrideByName[abilityId][sourceName].icon then
+                    formattedIcon = zo_iconFormat(LUIE.Effects.EffectOverrideByName[abilityId][sourceName].icon, 32, 32)
+                end
+            end
+            
+            if AlertT[abilityId].refire then
+                refireDelay[abilityId] = true
+                callLater(function() refireDelay[abilityId] = nil end, AlertT[abilityId].refire) --buffer by X time
+            end
+
+            if AlertT[abilityId].block or AlertT[abilityId].dodge or AlertT[abilityId].avoid or AlertT[abilityId].interrupt then
+            
+                -- Filter by priority
+                if S.toggles.mitigationDungeon and not IsUnitInDungeon("player") or not S.toggles.mitigationDungeon then
+                    if AlertT[abilityId].priority == 3 and not S.toggles.mitigationRank3 then return end
+                    if AlertT[abilityId].priority == 2 and not S.toggles.mitigationRank2 then return end
+                    if AlertT[abilityId].priority == 1 and not S.toggles.mitigationRank1 then return end
+                end
+            
+                local isDirect
+                local block
+                local blockstagger
+                local dodge
+                local avoid
+                local interrupt
+                
+                if AlertT[abilityId].notDirect then 
+                    isDirect = false
+                else 
+                    isDirect = true
+                end
+            
+                if AlertT[abilityId].block and (S.toggles.showAlertBlock) == true then
+                    if AlertT[abilityId].bs then
+                        blockstagger = true
+                    else
+                        block = true
+                    end
+                end
+                if AlertT[abilityId].dodge and (S.toggles.showAlertDodge) == true then
+                    dodge = true
+                end
+                if AlertT[abilityId].avoid and (S.toggles.showAlertAvoid) == true then
+                    avoid = true
+                end
+                if AlertT[abilityId].interrupt and (S.toggles.showAlertInterrupt) == true then
+                    interrupt = true
+                end
+                
+                if S.toggles.mitigationType == "Single Line" then
+                    self:TriggerEvent(C.eventType.ALERT, C.alertType.SHARED, abilityName, formattedIcon, sourceName, isDirect, block, blockstagger, dodge, avoid, interrupt)
+                elseif S.toggles.mitigationType == "Multiple Lines" then
+                    if block and not blockstagger then
+                        self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCK, abilityName, formattedIcon, sourceName, isDirect)
+                    end
+                    if blockstagger then
+                        self:TriggerEvent(C.eventType.ALERT, C.alertType.BLOCKSTAGGER, abilityName, formattedIcon, sourceName, isDirect)
+                    end
+                    if dodge then
+                        self:TriggerEvent(C.eventType.ALERT, C.alertType.DODGE, abilityName, formattedIcon, sourceName, isDirect)
+                    end
+                    if avoid then
+                        self:TriggerEvent(C.eventType.ALERT, C.alertType.AVOID, abilityName, formattedIcon, sourceName, isDirect)
+                    end
+                    if interrupt then
+                        self:TriggerEvent(C.eventType.ALERT, C.alertType.INTERRUPT, abilityName, formattedIcon, sourceName, isDirect)
+                    end
+                end
+            end
         end
     end
     

@@ -14,8 +14,11 @@ A.Skill_Major_Defile                = 38686
 A.Skill_Major_Expedition            = 61840
 A.Skill_Major_Vitality              = 61275
 A.Skill_Minor_Magickasteal          = 40114
+A.Skill_Minor_Sorcery               = 62799
+A.Skill_Minor_Brutality             = 61798
 
 A.Skill_Off_Balance                 = 2727
+A.Skill_Off_Balace_Immunity         = 102771
 
 -- ---------------------------------------------------
 -- INNATE ABILITIES ----------------------------------
@@ -278,10 +281,24 @@ A.Passive_Red_Diamond               = 36155
 A.Skill_Power_Lash                  = 20824
 
 A.Skill_Shackle                     = 32905
+A.Skill_Standard_of_Might           = 32947
+
 
 A.Skill_Spiked_Armor                = 20319
 A.Skill_Hardened_Armor              = 20328
 A.Skill_Volatile_Armor              = 20323
+
+
+A.Skill_Dragon_Blood                = 29004 -- TODO: Move + check if best ID to use later
+A.Skill_Fiery_Grip                  = 20492 -- TODO: Move + check if best ID to use later
+A.Skill_Stonefist                   = 29032 -- TODO: Move + check if best ID to use later
+
+-- Nightblade
+A.Skill_Siphoning_Strikes           = 33319 -- TODO: Check if this is the best ID to use later
+
+-- Sorcerer
+A.Skill_Crystal_Shard               = 43714 -- TODO: Check if this is the best ID to use later
+A.Skill_Crystal_Blast               = 46331 -- TODO: Check if this is the best ID to use later
 
 -- Templar
 A.Skill_Puncturing_Sweep            = 26797
@@ -305,6 +322,9 @@ A.Skill_Restoring_Focus             = 22237
 A.Skill_Rite_Of_Passage             = 22223
 A.Skill_Remembrance                 = 22229
 A.Skill_Practiced_Incantation       = 22226
+
+-- Warden
+A.Skill_Feral_Guardian              = 85982 -- TODO: Check if this is the best ID to use later
 
 -- ---------------------------------------------------
 -- WEAPON SKILLS -------------------------------------
@@ -338,20 +358,40 @@ A.Skill_Elemental_Susceptibility    = 39089
 A.Skill_Elemental_Drain             = 39095
 A.Skill_Shock_Pulsar                = 89844
 
+-- One Hand & Shield
+A.Skill_Shield_Charge               = 28719 -- TODO: Check is best ID to use
+A.Skill_Power_Bash                  = 28365 -- TODO: Check is best ID to use
+
+-- Two-Handed
+A.Skill_Uppercut                    = 28279 -- TODO: Check is best ID to use
+A.Skill_Dizzying_Swing              = 38814 -- TODO: Check is best ID to use
+A.Skill_Stampede                    = 21055 -- TODO: Check is best ID to use
+
+-- Dual Wield
+A.Skill_Twin_Slashes                = 28379 -- TODO: Check is best ID to use
+
 -- ---------------------------------------------------
 -- GUILD SKILLS --------------------------------------
 -- ---------------------------------------------------
 
+-- Fighters Guild
 A.Skill_Silver_Leash                = 40336
 A.Skill_Tighten                     = 40342
-
 A.Skill_Circle_of_Protection        = 35737
 A.Skill_Turn_Undead                 = 40181
 A.Skill_Ring_of_Preservation        = 40169
-
 A.Skill_Trap_Beast                  = 35750
 A.Skill_Rearming_Trap               = 40382
 A.Skill_Lightweight_Beast_Trap      = 40372
+
+-- Mages Guild
+A.Skill_Magelight                   = 30920 -- TODO: Check is best ID to use
+
+-- ---------------------------------------------------
+-- ALLIANCE WAR --------------------------------------
+-- ---------------------------------------------------
+
+A.Skill_Caltrops                    = 33376 -- TODO: Check is best ID to use
 
 -- ---------------------------------------------------
 -- NPC BASIC -----------------------------------------
@@ -363,8 +403,72 @@ A.Skill_Hamstring                   = 70068 -- Hamstring
 -- NPC ABILITIES -------------------------------------
 -- ---------------------------------------------------
 
-A.Skill_Headbutt                = 54380
-A.Skill_Tail_Spike              = 4799
+A.Skill_Oil_Drenched                = 10650
+A.Skill_Shield_Rush                 = GetString(SI_LUIE_SKILL_SHIELD_RUSH)
+A.Skill_Knockback                   = 77905
+A.Skill_Weakness                    = 8705
+A.Skill_Ice_Barrier_Chill           = GetString(SI_LUIE_SKILL_ICE_BARRIER_CHILL)
+A.Skill_Vanish                      = 24687
+A.Skill_Bone_Cage                   = 35387
+A.Skill_Defensive_Ward              = GetString(SI_LUIE_SKILL_DEFENSIVE_WARD)
+A.Skill_Great_Cleave                = GetString(SI_LUIE_SKILL_GREAT_CLEAVE)
+A.Skill_Retaliation                 = 65033
+A.Skill_Divine_Leap                 = 54027
+A.Skill_Inspire                     = GetString(SI_LUIE_SKILL_INSPIRE)
+A.Skill_Hide_in_Shadows             = GetString(SI_LUIE_SKILL_HIDE_IN_SHADOWS)
+A.Skill_Recovering                  = 4197
+A.Skill_Lunge                       = 78664
+A.Skill_Clobber                     = 24671
+A.Skill_Shadowy_Barrier             = GetString(SI_LUIE_SKILL_SHADOWY_BARRIER)
+
+A.Skill_Cage_Talons                 = 63168
+A.Skill_Heavy_Blow                  = 63157
+A.Skill_Mighty_Charge               = GetString(SI_LUIE_SKILL_MIGHTY_CHARGE)
+A.Skill_Throw_Dagger                = 28499
+A.Skill_Detection                   = GetString(SI_LUIE_SKILL_DETECTION)
+
+A.Skill_Shock_Torrent               = 46726
+A.Skill_Improved_Shock_Torrent      = GetString(SI_LUIE_SKILL_IMPROVED_SHOCK_TORRENT)
+A.Skill_Steal_Essence               = 2786
+A.Skill_Lasting_Storm               = 46818
+A.Skill_Bleeding_Strike             = 46830
+A.Skill_Telekinetic_Prison          = 21636
+A.Skill_Shattering_Prison           = 46905
+A.Skill_Siege_Barrier               = GetString(SI_LUIE_SKILL_SIEGE_BARRIER)
+A.Skill_Fire_Torrent                = GetString(SI_LUIE_SKILL_FIRE_TORRENT)
+A.Skill_Improved_Fire_Torrent       = 46990
+A.Skill_Extended_Chains             = 35113
+A.Skill_Puncturing_Chains           = GetString(SI_LUIE_SKILL_PUNCTURING_CHAINS)
+A.Skill_Improved_Volley             = GetString(SI_LUIE_SKILL_IMPROVED_VOLLEY)
+
+A.Skill_Bite                        = 17957
+A.Skill_Swipe                       = 2850
+
+A.Skill_Rush                        = 14380
+
+A.Skill_Vigorus_Swipes              = 75634
+
+A.Skill_Barreling_Charge            = GetString(SI_LUIE_SKILL_BARRELING_CHARGE)
+
+A.Skill_Blitz                       = GetString(SI_LUIE_SKILL_BLITZ)
+
+A.Skill_Inject_Larva                = 9229
+A.Skill_Zoom                        = GetString(SI_LUIE_SKILL_ZOOM)
+A.Skill_Plow                        = GetString(SI_LUIE_SKILL_PLOW)
+
+A.Skill_Assault                     = 4304
+
+-- Flesh Colossus
+A.Skill_Tremor                      = 67123
+A.Skill_Pin                         = 65709
+A.Skill_Sweep                       = 67872
+A.Skill_Enrage                      = 71696
+
+A.Skill_Headbutt                    = 54380
+A.Skill_Tail_Spike                  = 4799
+
+A.Skill_Body_Slam                   = 24689
+
 
 -- ---------------------------------------------------
 -- WEAPONS -------------------------------------------
@@ -374,9 +478,6 @@ A.Skill_Tail_Spike              = 4799
 A.Skill_Cleave                   = 20919
 A.Skill_Brawler                  = 38754
 A.Skill_Carve                    = 38745
-A.Skill_Stampede                 = 21055
-A.Skill_Uppercut                 = 28279
-A.Skill_Dizzying_Swing           = 38814
 A.Skill_Wrecking_Blow            = 38807
 A.Skill_Momentum                 = 28297
 A.Skill_Forward_Momentum         = 38794
@@ -392,15 +493,12 @@ A.Skill_Deep_Slash               = 38268
 A.Skill_Absorb_Magic             = 41380
 A.Skill_Defensive_Stance         = 38312
 A.Skill_Defensive_Posture        = 41351
-A.Skill_Shield_Charge            = 28719
 A.Skill_Invasion                 = 38405
 A.Skill_Shielded_Assault         = 38401
-A.Skill_Power_Bash               = 28365
 A.Skill_Power_Slam               = 38452
 A.Skill_Reverberating_Bash       = 38455
 
 -- DUAL WEILD ---------------
-A.Skill_Twin_Slashes             = 28379
 A.Effect_Twin_Slashes_Bleed      = 29293
 A.Skill_Blood_Craze              = 38845
 A.Effect_Blood_Craze_Bleed       = 38848
@@ -514,7 +612,6 @@ A.Skill_Camouflaged_Hunter       = 40195
 A.Skill_Meteor                   = 16536
 A.Skill_Ice_Comet                = 40489
 A.Skill_Shooting_Star            = 40493
-A.Skill_Magelight                = 30920
 A.Skill_Inner_Light              = 40478
 A.Skill_Radiant_Magelight        = 40483
 A.Skill_Entropy                  = 28567
@@ -588,7 +685,6 @@ A.Skill_Retreating_Maneuver      = 40211
 A.Skill_Vigor                    = 61503
 A.Skill_Echoing_Vigor            = 61505
 A.Skill_Resolving_Vigor          = 61507
-A.Skill_Caltrops                 = 33376
 A.Skill_Anti_Cavalry_Caltrops    = 40255
 A.Skill_Razor_Caltrops           = 40242
 A.Skill_Magicka_Detonation       = 61487
@@ -616,9 +712,6 @@ A.Skill_Efficient_Purge          = 40232
 A.Skill_Dragonknight_Standard    = 28988
 A.Skill_Shifting_Standard        = 32958
 A.Skill_Shift_Standard           = 32963
-A.Skill_Standard_of_Might        = 32947
-A.Skill_Fiery_Grip               = 20492
-A.Skill_Extended_Chains          = 20496
 A.Skill_Unrelenting_Chains       = 20499
 A.Skill_Searing_Strike           = 20657
 A.Skill_Venmous_Claw             = 20668
@@ -635,7 +728,6 @@ A.Skill_Ferocious_Leap           = 32715
 A.Skill_Dark_Talons              = 20245
 A.Skill_Burning_Talons           = 20252
 A.Skill_Choking_Talons           = 20251
-A.Skill_Dragon_Blood             = 29004
 A.Skill_Green_Dragon_Blood       = 32744
 A.Skill_Coagulating_Blood        = 32722
 A.Skill_Reflective_Scale         = 21007
@@ -649,7 +741,6 @@ A.Skill_Draw_Essence             = 32785
 A.Skill_Magma_Armor              = 15957
 A.Skill_Magma_Shell              = 17874
 A.Skill_Corrosive_Armor          = 17878
-A.Skill_Stonefist                = 29032
 A.Skill_Obsidian_Shard           = 31820
 A.Skill_Stone_Giant              = 31816
 A.Skill_Obsidian_Shield          = 29071
@@ -683,8 +774,6 @@ A.Skill_Hardened_Ward            = 29489
 A.Skill_Negate_Magic             = 27706
 A.Skill_Absorption_Field         = 28348
 A.Skill_Suppression_Field        = 28341
-A.Skill_Crystal_Shard            = 43714
-A.Skill_Crystal_Blast            = 46331
 A.Skill_Crystal_Fragments        = 46324
 A.Skill_Encase                   = 28025
 A.Skill_Restraining_Prison       = 28311
@@ -823,7 +912,6 @@ A.Skill_Purifying_Ritual         = 22259
 -- TOGGLED EFFECTS -----------------------------------
 -- ---------------------------------------------------
 
-A.Toggled_Leeching_Strikes          = 36908 -- Leeching Strikes (Nightblade)
 A.Toggled_Unstable_Familiar         = 23304 -- Summon Unstable Familiar (Sorcerer)
 A.Toggled_Unstable_Clannfear        = 23319 -- Summon Unstable Clannfear (Sorcerer)
 A.Toggled_Volatile_Familiar         = 23316 -- Summon Volatile Familiar (Sorcerer)

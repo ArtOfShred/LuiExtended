@@ -6,7 +6,8 @@ LUIE.AlertTable = {
     -- 3 = Normal NPC
     
     -- bs = true -- Add indicator for Block Stagger to effect
-    -- auradetect = true -- Detect aura application rather than using targetting info
+    -- auradetect = true -- Detect aura application rather than using targeting info
+    -- eventdetect = true -- Detect combat event application rather than using targeting info
     -- refire = "x" -- refire duration
     -- skipcheck = true -- display on any event fired rather than just event started
     
@@ -25,13 +26,23 @@ LUIE.AlertTable = {
     
     [74862] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 2, bs = false}, -- Teleport Trap (Mage Guard)
     
+    [62409] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1500 }, -- Fiery Wind (Justice Mage NPC)
     [62472] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Stab (Justice Dagger NPC)
+    
+    [52471] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, refire = 2000 }, -- Nullify (Estate Spellbreaker)
     
     --------------------------------------------------
     -- STANDARD NPC'S --------------------------------
     --------------------------------------------------
     
+    -- Synergy
+    [10805] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, eventdetect = true }, -- Ignite (Synergy)
+    
+    
+    -- Abilities
     [29378] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Uppercut (Ravager)
+    
+    [28408] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true}, -- Whirlwind (Skirmisher)
     
     [37108] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3}, -- Arrow Spray (Archer)
     [28628] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Volley (Archer)
@@ -49,7 +60,11 @@ LUIE.AlertTable = {
     [29510] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3 }, -- Thunder Hammer (Thundermaul)
     [17867] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3 }, -- Shock Aura (Thundermaul)
     
+    [81215] = { block = true, dodge = false, avoid = false, interrupt = true, priority = 2 }, -- Shock Aura (Thundermaul - Boss)
+    [81217] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2 }, -- Thunder Hammer (Thundermaul)
+    
     [36470] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Veiled Strike (Nightblade)
+    [44345] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true }, -- Soul Tether (Nightblade)
     
     [34742] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 3}, -- Fiery Breath (Dragonknight)
     [34646] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Lava Whip (Dragonknight)
@@ -70,10 +85,10 @@ LUIE.AlertTable = {
     [14370] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, auradetect = true}, -- Void (Time Bomb Mage) 
     
     [37087] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Lightning Onslaught (Battlemage)
-    [37129] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3}, -- Ice Cage (Battlemage)
+    [37129] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2}, -- Ice Cage (Battlemage)
     [44216] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2}, -- Negate Magic (Battlemage - Elite)
     
-    [13397] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true}, -- Empower Undead (Necromancer)
+    [13397] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, notDirect = true, refire = 1000}, -- Empower Undead (Necromancer)
     [14350] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3}, -- Aspect of Terror (Fear Mage)
     
     [35387] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Defiled Grave (Bonelord)
@@ -81,21 +96,52 @@ LUIE.AlertTable = {
     [57534] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true}, -- Focused Healing (Healer)
     [44328] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 2, auradetect = true, notDirect = true}, -- Rite of Passage (Healer)
     
-    [38118] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, skipcheck = true}, -- Caltrops  (Faction NPCs)
+    [43644] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, auradetect = true }, -- Barrier [monster synergy]  (Faction NPCs)
     
     [70070] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Heavy Strike (Winterborn Warrior)
     [64980] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3 }, -- Javelin (Winterborn Warrior)
     [65033] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, skipcheck = true }, -- Retaliation (Winterborn Warrior)
     
     [55909] = { block = false, dodge = true, avoid = false, interrupt = true, priority = 3}, -- Grasping Vines (Winterborn Mage)
-    [64704] = { block = true, dodge = false, avoid = true, interrupt = true, priority = 3, auradetect = true }, -- Flames (Winterborn Mage)
+    [64704] = { block = true, dodge = false, avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 1500 }, -- Flames (Winterborn Mage)
     
+    [53987] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, notDirect = true }, -- Rally (Vosh Rakh Devoted)
     [54027] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, refire = 1600}, -- Divine Leap (Vosh Rakh Devoted)
     
     [76089] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3}, -- Snipe (Archer) (TG DLC)
-    [72220] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Snipe (Archer) (TG DLC)
+    --[72220] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Snipe (Archer) (TG DLC) -- This is cast from stealth - so for the time being, maybe hide.
     
+    [77554] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true, notDirect = true }, -- Shard Shield (Bodyguard) (DB DLC)
     [77473] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Shield Charge (Bodyguard) (DB DLC)
+    
+    [77089] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3}, -- Basilisk Powder (Tracker) (Morrowind)
+    [77087] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3}, -- Basilisk Powder (Tracker) (Morrowind)
+    [77019] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Pin (Tracker) (Morrowind)
+    [78432] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, refire = 1500}, -- Lunge (Tracker) (Morrowind)
+    
+    [88371] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3}, -- Dive (Beastcaller) (Morrowind)
+    [88394] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3}, -- Gore (Beastcaller) (Morrowind)
+    
+    [87901] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3}, -- Bombard (Arbalest) (Morrowind)
+    [87422] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3}, -- Chilled Ground (Arbalest) (Morrowind)
+    [87713] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true}, -- Quakeshot (Arbalest) (Morrowind)
+    
+    [85359] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Reverse Slash (Drudge)
+    
+    [87064] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3}, -- Volcanic Debris (Fire-Binder) (Morrowind)
+    [88845] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, notDirect = true, auradetect = true }, -- Empower Atronach (Fire-Binder) (Morrowind)
+    
+    [76621] = { block = true, dodge = false, avoid = true, interrupt = true, priority = 3 }, -- Shadeway (Voidbringer) (Morrowind)
+    [76619] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true }, -- Pool of Shadow (Voidbringer) (Morrowind)
+    [76979] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, auradetect = true }, -- Shadowy Duplicate (Voidbringer) (Morrowind)
+    
+    [88327] = { block = true, dodge = false, avoid = true, interrupt = true, priority = 3 }, -- Shadeway (Skaafin Masquer) (Morrowind)
+    [88325] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true }, -- Pool of Shadow (Skaafin Masquer) (Morrowind)
+    [88348] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, auradetect = true }, -- Shadowy Duplicate (Skaafin Masquer) (Morrowind)
+    
+    [84818] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, notDirect = true, auradetect = true }, -- Fiendish Healing (Skaafin Witchling) (Morrowind)
+    
+    [84835] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true }, -- Broken Pact (Skaafin) (Morrowind)
     
     -- ANIMALS
     [4416] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Savage Blows (Bear)
@@ -116,6 +162,7 @@ LUIE.AlertTable = {
     [5242] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Kiss of Poison (Giant Snake)
     [5244] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true}, -- Shed Skin (Giant Snake)
     
+    [14819] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, auradetect = true}, -- Charge (Kagouti)
     [5363] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Chomp (Kagouti)
     
     [7161] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Double Strike (Lion)
@@ -184,13 +231,19 @@ LUIE.AlertTable = {
     [50023] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, refire = 600}, -- Lightning Rod (Air Atronach)
     
     
+    -- FLESH COLOSSUS (100% GOOD)
+    [67870] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2 }, -- Tremor AOE (Flesh Colossus)
+    [66869] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2 }, -- Pin (Flesh Colossus)
+    [67872] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2 }, -- Sweep (Flesh Colossus)
+    [76139] = { block = true, dodge = true, interrupt = false, priority = 2, auradetect = true }, -- Stumble Forward (Flesh Colossus)
     
-    [14819] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, auradetect = true}, -- Charge (Clannfear)
-    
+    [8205] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true}, -- Regeneration (Ogrim)
     [48553] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, auradetect = true}, -- Focused Charge (Ogrim)
     
+    
     -- MONSTERS
-    [48549] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, auradetect = true}, -- Focused Charge (Ogrim)
+    [43809] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, auradetect = true}, -- Shard Burst (Ice Wraith)
+    [48549] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, auradetect = true}, -- Focused Charge (Ice Wraith)
     
     --------------------------------------------------
     -- MAIN QUEST ------------------------------------
@@ -230,7 +283,6 @@ LUIE.AlertTable = {
     -- Delves/Public Dungeons/World
     [88427] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, auradetect = true}, -- Charge (Kwama Worker - Matus-Akin Egg Mine)
     
-    [85359] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Reverse Slash (Drudge)
     [87276] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Chomp (Kagouti Whelp)
     
     [86983] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 2}, -- Succubus Touch (Echoes of a Fallen House)
@@ -242,6 +294,7 @@ LUIE.AlertTable = {
     [86570] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Shield Charge (Nchuleftingth - Renduril the Hammer)
     [90597] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 2}, -- Overcharge Expulsion
 }
+
 
 --[[
 
