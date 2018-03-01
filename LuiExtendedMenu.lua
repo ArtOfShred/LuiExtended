@@ -8536,7 +8536,15 @@ function LUIE_CreateSettings()
                     disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
                     default = LUIE.CombatText.D.toggles.mitigationType,
                 },
-                
+                {--HIDE MITIGATION GROUPED ALERTS
+                    type    = "checkbox",
+                    name    = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE)),
+                    tooltip = GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE_TP),
+                    getFunc = function() return LUIE.CombatText.SV.toggles.hideMitigation end,
+                    setFunc = function(v) LUIE.CombatText.SV.toggles.hideMitigation = v end,
+                    disabled = function() return not (LUIE.CombatText.SV.toggles.showAlertMitigation and LUIE.CombatText.SV.toggles.mitigationType == "Single Line") end,
+                    default = LUIE.CombatText.D.toggles.hideMitigation,
+                },
                 {--MITIGATION FORMAT
                     type    = "editbox",
                     name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT)),
@@ -8546,7 +8554,6 @@ function LUIE_CreateSettings()
                     disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
                     default = LUIE.CombatText.D.toggles.mitigationFormat,
                 },
-                
                 {--MITIGATION SUFFIX
                     type    = "editbox",
                     name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_SUFFIX)),
@@ -8556,7 +8563,6 @@ function LUIE_CreateSettings()
                     disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
                     default = LUIE.CombatText.D.toggles.mitigationSuffix,
                 },
-                
                 {--MITIGATION AURA
                     type    = "checkbox",
                     name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_AURA)),
@@ -8566,7 +8572,6 @@ function LUIE_CreateSettings()
                     disabled = function() return not LUIE.CombatText.SV.toggles.showAlertMitigation end,
                     default = LUIE.CombatText.D.toggles.mitigationAura,
                 },
-                
                 {--MITIGATION RANK 3
                     type    = "checkbox",
                     name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CT_NOTIFICATION_RANK3)),

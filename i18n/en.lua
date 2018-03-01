@@ -1847,6 +1847,8 @@ ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_TP",          "Display
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_DESCRIPTION", "\t\t\t\t\tUse the following formatting characters to modify the mitigation alerts:\n\t\t\t\t\t%n Source Name\n\t\t\t\t\t%t Ability Name\n\t\t\t\t\t%i - Ability Icon")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD",      "Alert Method")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_METHOD_TP",   "Choose whether to display mitigation alerts as a single line or in multiple lines. If using the single line option notifications will be colored based on the most effective form of mitigation.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE",        "Don't Display Mitigation Suggestions")
+ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_HIDE_TP",     "When using single line alerts - enabling this option will hide the BLOCK/DODGE/AVOID/INTERRUPT etc alerts and only display the incoming ability.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT",      "Mitigation Alert Format")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_TP",   "Choose the format to display mitigation alerts.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_FORMAT_P",    "Important Buff Alert Format")

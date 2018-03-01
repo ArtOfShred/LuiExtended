@@ -53,44 +53,46 @@ function CTV:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, 
         -- PRIORITY: INTERRUPT > BLOCK STAGGER > DODGE > BLOCK > AVOID
         if blockstagger then block = false end
         
-        if avoid then
-            stringAvoid = (S.formats.alertAvoid .. spacer)
-            color = S.colors.alertAvoid
-        else
-            stringAvoid = ""
-        end
-        
-        if block then
-            stringBlock = (S.formats.alertBlock .. spacer)
-            color = S.colors.alertBlock
-        end
-        
-        if dodge then
-            stringDodge = (S.formats.alertDodge .. spacer)
-            color = S.colors.alertDodge
-        else
-            stringDodge = ""
-        end
-        
-        if blockstagger then
-            stringBlock = (S.formats.alertBlockStagger .. spacer)
-            color = S.colors.alertBlock
-        end
-        
-        if interrupt then
-            stringInterrupt = (S.formats.alertInterrupt .. spacer)
-            color = S.colors.alertInterrupt
-        else
-            stringInterrupt = ""
-        end
-        
-        if not block and not blockstagger then
-            stringBlock = ""
-        end
+		if not S.toggles.hideMitigation then
+			if avoid then
+				stringAvoid = (S.formats.alertAvoid .. spacer)
+				color = S.colors.alertAvoid
+			else
+				stringAvoid = ""
+			end
+			
+			if block then
+				stringBlock = (S.formats.alertBlock .. spacer)
+				color = S.colors.alertBlock
+			end
+			
+			if dodge then
+				stringDodge = (S.formats.alertDodge .. spacer)
+				color = S.colors.alertDodge
+			else
+				stringDodge = ""
+			end
+			
+			if blockstagger then
+				stringBlock = (S.formats.alertBlockStagger .. spacer)
+				color = S.colors.alertBlock
+			end
+			
+			if interrupt then
+				stringInterrupt = (S.formats.alertInterrupt .. spacer)
+				color = S.colors.alertInterrupt
+			else
+				stringInterrupt = ""
+			end
+			
+			if not block and not blockstagger then
+				stringBlock = ""
+			end
+		end
         
         local stringPart1 = self:FormatAlertString(S.toggles.mitigationFormat, { source = sourceName, ability = abilityName, icon = abilityIcon })
         local stringPart2 = isDirect and S.toggles.mitigationSuffix or ""
-        local stringPart3 = string.format("%s%s%s%s%s", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt)
+        local stringPart3 = S.toggles.hideMitigation and "" or string.format("%s%s%s%s%s", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt)
         
         text = zo_strformat("<<1>><<2>><<3>>", stringPart1, stringPart2, stringPart3)
     --BLOCK

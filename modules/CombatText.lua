@@ -123,6 +123,7 @@ CT.D = {
     --Alerts
         showAlertMitigation         = true,
         mitigationType              = "Single Line",
+        hideMitigation              = true,
         mitigationFormat            = "%t %i",
         mitigationFormatPower       = GetString(SI_LUIE_CT_MITIGATION_FORMAT_POWER),
         mitigationFormatDestroy     = GetString(SI_LUIE_CT_MITIGATION_FORMAT_DESTROY),
