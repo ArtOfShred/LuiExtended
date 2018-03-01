@@ -73,6 +73,8 @@ function CTL:EffectChanged(...)
                 if AlertT[abilityId].priority == 1 and not S.toggles.mitigationRank1 then return end
             end
             
+            if changeType == EFFECT_RESULT_UPDATED and AlertT[abilityId].ignoreRefresh then return end
+            
             local block
             local blockstagger
             local dodge

@@ -1267,88 +1267,76 @@ E.BarNameOverride = {
 E.EffectOverrideByName = {
     -- TUTORIAL
     
-    [1718] =    {
+    [1718] =    { -- Attack (CH + Vvardenfell Tutorial)
                 ['Naryu Virian'] = { icon = 'LuiExtended/media/icons/abilities/ability_unarmed_attacklight.dds' } -- Attack (Tutorial)
                 },
                 
     -- JUSTICE NPCS
-    [37087] =   { 
+    [37087] =   { -- Lightning Onslaught (Battlemage)
                 ['Estate Spellbreaker'] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_onslaught.dds' }, -- Lightning Onslaught (Battlemage)
                 },
-    [37156] =   { 
+    [37156] =   { -- Lightning Onslaught (Battlemage)
                 ['Estate Spellbreaker'] = { icon = 'LuiExtended/media/icons/abilities/ability_sorcerer_lightning_onslaught.dds' }, -- Lightning Onslaught (Battlemage)
                 },
                 
     -- HUMAN NPCS
-    [29521] =   {
+    [29521] =   { -- Aura of Protection (Shaman)
                 ['Aura of Protection'] = { hide = true } -- Aura of Protection (Aura of Protection) -- Hides this buff only on the Goblin Aura of Protection to prevent duplicate display
                 },
                 
-    [86704] =   {
+    [86704] =   { -- Chop (Peasant)
                 ['Hleran Noble'] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_peasant_dagger_light.dds' }, -- Chop (Hleran Noble)
                 },
-    [86705] =   {
+    [86705] =   { -- Lop (Peasant)
                 ['Hleran Noble'] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_peasant_dagger_light.dds' }, -- Lop (Hleran Noble)\
                 },
                 
     -- ANIMALS
-    [7170] =    { 
+    [7170] =    { -- Rend (Lion)
                 ['Lion'] = { icon = 'LuiExtended/media/icons/abilities/ability_lion_rend.dds' }, -- Rend (Lion)
                 ['Lioness'] = { icon = 'LuiExtended/media/icons/abilities/ability_lioness_rend.dds' }, -- Rend (Lion)
                 ['Sabre Cat'] = { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_rend.dds' }, -- Rend (Sabre Cat)
                 ['Senche-Tiger'] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
                 },
-    [60630] =   {
+    [60630] =   { -- Rend (Lion)
                 ['Lion'] = { icon = 'LuiExtended/media/icons/abilities/ability_lion_rend.dds' }, -- Rend (Lion)
                 ['Lioness'] = { icon = 'LuiExtended/media/icons/abilities/ability_lioness_rend.dds' }, -- Rend (Lion)
                 ['Sabre Cat'] = { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_rend.dds' }, -- Rend (Sabre Cat)
                 ['Senche-Tiger'] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_rend.dds' }, -- Rend (Senche-Tiger)
                 },
-    [60641] =   {
+    [60641] =   { -- Claw (Lion)
                 ['Sabre Cat'] = { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_claw.dds' }, -- Claw (Sabre Cat)
                 ['Senche-Tiger'] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_claw.dds' }, -- Claw (Senche-Tiger)
                 },
-    [7158] =    {
+    [7158] =    { -- Bite (Lion)
                 ['Lion'] = { icon = 'LuiExtended/media/icons/abilities/ability_lion_bite.dds' }, -- Bite (Lion)
                 ['Lioness'] = { icon = 'LuiExtended/media/icons/abilities/ability_lioness_bite.dds' }, -- Bite (Lion)
                 ['Sabre Cat'] = { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_bite.dds' }, -- Bite (Sabre Cat)
                 ['Senche-Tiger'] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_bite.dds' }, -- Bite (Senche-Tiger)
                 },
-    [7161] =    { 
+    [7161] =    { -- Double Strike (Lion)
                 ['Sabre Cat'] = { icon = 'LuiExtended/media/icons/abilities/ability_sabrecat_double_strike.dds' }, -- Double Strike (Sabre Cat)
                 ['Senche-Tiger'] = { icon = 'LuiExtended/media/icons/abilities/ability_senche_double_strike.dds' }, -- Double Strike (Senche-Tiger)
                 },
-    [14819] =   {
-                ['Kagouti'] =           { icon = 'LuiExtended/media/icons/abilities/ability_kagouti_charge.dds' }, -- Charge (Kagouti)
-                ['Bull Kagouti'] =      { icon = 'LuiExtended/media/icons/abilities/ability_kagouti_charge.dds' }, -- Charge (Kagouti)
-                },
-    [14825] =   {
-                ['Kagouti'] =           { icon = 'LuiExtended/media/icons/abilities/ability_kagouti_charge.dds' }, -- Charge (Kagouti)
-                ['Bull Kagouti'] =      { icon = 'LuiExtended/media/icons/abilities/ability_kagouti_charge.dds' }, -- Charge (Kagouti)
-                },
-    [14828] =   {
-                ['Kagouti'] =           { icon = 'LuiExtended/media/icons/abilities/ability_kagouti_charge.dds' }, -- Charge (Kagouti)
-                ['Bull Kagouti'] =      { icon = 'LuiExtended/media/icons/abilities/ability_kagouti_charge.dds' }, -- Charge (Kagouti)
-                },
-    [5362] =    {
+    [5362] =    { -- Slam (Skeever / Kagouti)
                 ['Kagouti'] = { icon = 'LuiExtended/media/icons/abilities/ability_kagouti_slam.dds' }, -- Slam (Kagouti)
                 ['Bull Kagouti'] = { icon = 'LuiExtended/media/icons/abilities/ability_kagouti_slam.dds' }, -- Slam (Kagouti)
                 
                 ['Daedrat'] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrat_slam.dds' }, -- Slam (Daedrat)
                 },
-    [21904] =   {
+    [21904] =   { -- Rend (Skeever)
                 ['Daedrat'] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrat_rend.dds' }, -- Rend (Daedrat)
                 },
-    [4022] =    {
+    [4022] =    { -- Bite (Wolf)
                 ['Jackal'] =            { icon = 'LuiExtended/media/icons/abilities/ability_jackal_bite.dds' }, -- Bite (Jackal)
                 },
-    [42844] =   {
+    [42844] =   { -- Rotbone (Wolf)
                 ['Jackal'] =            { icon = 'LuiExtended/media/icons/abilities/ability_jackal_rotbone.dds' }, -- Rotbone (Wolf)
                 },
-    [14523] =   {
+    [14523] =   { -- Helljoint (Wolf)
                 ['Jackal'] =            { icon = 'LuiExtended/media/icons/abilities/ability_jackal_helljoint.dds' }, -- Helljoint (Wolf)
                 },
-    [75818] =   {
+    [75818] =   { -- Helljoint (Wolf)
                 ['Jackal'] =            { icon = 'LuiExtended/media/icons/abilities/ability_jackal_helljoint.dds' }, -- Helljoint (Wolf)
                 },
 
@@ -4749,21 +4737,23 @@ E.EffectOverride = {
     [5451] = { icon = 'LuiExtended/media/icons/abilities/ability_alit_bite.dds' }, -- Bite (Alit)
     [5452] = { icon = 'LuiExtended/media/icons/abilities/ability_alit_lacerate.dds' }, -- Lacerate (Alit)
     [84356] = { icon = 'LuiExtended/media/icons/abilities/ability_alit_lacerate.dds' }, -- Lacerate (Alit)
-    [56984] = { icon = 'LuiExtended/media/icons/abilities/ability_alit_lacerate.dds', name = 'Lacerate' }, -- Laceration (Alit)
-    [56983] = { icon = 'LuiExtended/media/icons/abilities/ability_alit_lacerate.dds', name = 'Lacerate' }, -- Laceration (Alit)
+    [56984] = { icon = 'LuiExtended/media/icons/abilities/ability_alit_lacerate.dds', name = A.Skill_Lacerate }, -- Laceration (Alit)
+    [56983] = { icon = 'LuiExtended/media/icons/abilities/ability_alit_lacerate.dds', name = A.Skill_Lacerate }, -- Laceration (Alit)
 
     [4413] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_bite.dds', name = A.Skill_Bite }, -- Swipe (Bear)
+    [4415] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds' }, -- Crushing Swipe (Bear)
     [38772] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds' }, -- Crushing Swipe (Bear)
     [18273] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds' }, -- Crushing Swipe (Bear)
     [4416] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_savage_blows.dds' }, -- Savage Blows (Bear)
     [12380] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_savage_blows.dds' }, -- Savage Blows (Bear)
-    [61594] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_savage_blows.dds', name = 'Savage Blows' }, -- Savage Blows Bleeding (Bear)
+    [61594] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_savage_blows.dds', name = A.Skill_Savage_Blows }, -- Savage Blows Bleeding (Bear)
     
     [70355] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_bite.dds' }, -- Bite (Great Bear)
     [70357] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_lunge.dds' }, -- Lunge (Great Bear)
     [70359] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_lunge.dds' }, -- Lunge (Great Bear)
+    [70366] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds' }, -- Slam (Great Bear)
     [89189] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds' }, -- Slam (Great Bear)
-    [69073] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', name = 'Slam' }, -- Knockdown (Great Bear)
+    [69073] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', name = A.Skill_Slam }, -- Knockdown (Great Bear)
     [70374] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity }, -- Ferocity (Great Bear)
     [70372] = { hide = true }, -- Ferocity (Great Bear)
     [70376] = { hide = true }, -- Ferocity (Great Bear)
@@ -4771,33 +4761,35 @@ E.EffectOverride = {
 
     [4583] = { icon = 'LuiExtended/media/icons/abilities/ability_crocodile_bite.dds' }, -- Bite (Crocodile)
     [9642] = { icon = 'LuiExtended/media/icons/abilities/ability_crocodile_bite.dds' }, -- Bite (Crocodile)
-    [4587] = { icon = 'LuiExtended/media/icons/abilities/ability_crocodile_bite.dds' }, -- Crushing Chomp (Crocodile)
+    [4587] = { icon = 'LuiExtended/media/icons/abilities/ability_crocodile_crushing_chomp.dds' }, -- Crushing Chomp (Crocodile)
     [4591] = { icon = 'LuiExtended/media/icons/abilities/ability_crocodile_sweep.dds' }, -- Sweep (Crocodile)
     [32051] = { icon = 'LuiExtended/media/icons/abilities/ability_crocodile_sweep.dds' }, -- Sweep (Crocodile)
     [4594] = { icon= 'LuiExtended/media/icons/abilities/ability_crocodile_ancient_skin.dds' }, -- Ancient Skin (Crocodile)
 
     [8971] = { icon = 'LuiExtended/media/icons/abilities/ability_duneripper_bite.dds' }, -- Bite (Duneripper)
     [9643] = { icon = 'LuiExtended/media/icons/abilities/ability_duneripper_bite.dds' }, -- Bite (Duneripper)
-    [8972] = { icon = 'LuiExtended/media/icons/abilities/ability_duneripper_bite.dds' }, -- Crushing Chomp (Duneripper)
+    [8972] = { icon = 'LuiExtended/media/icons/abilities/ability_duneripper_crushing_chomp.dds' }, -- Crushing Chomp (Duneripper)
     [8977] = { icon = 'LuiExtended/media/icons/abilities/ability_duneripper_sweep.dds' }, -- Sweep (Duneripper)
     [32461] = { icon = 'LuiExtended/media/icons/abilities/ability_duneripper_sweep.dds' }, -- Sweep (Duneripper)
 
     [7214] = { icon = 'LuiExtended/media/icons/abilities/ability_durzog_bite.dds' }, -- Bite (Durzog)
-    [7221] = { icon = 'LuiExtended/media/icons/abilities/ability_durzog_bite.dds' }, -- Rend (Durzog)
-    [7227] = { icon = 'LuiExtended/media/icons/abilities/ability_durzog_rotbone.dds', name = 'Rip and Tear' },-- Rotbone (Durzog)
-    [16878] = { icon = 'LuiExtended/media/icons/abilities/ability_durzog_rotbone.dds', name = 'Rip and Tear' }, -- Rotbone (Durzog)
+    [7221] = { icon = 'LuiExtended/media/icons/abilities/ability_durzog_rend.dds' }, -- Rend (Durzog)
+    [7227] = { icon = 'LuiExtended/media/icons/abilities/ability_durzog_rotbone.dds', name = A.Skill_Rip_and_Tear },-- Rotbone (Durzog)
+    [16878] = { icon = 'LuiExtended/media/icons/abilities/ability_durzog_rotbone.dds', name = A.Skill_Rip_and_Tear }, -- Rotbone (Durzog)
 
     [6304] = { icon = 'LuiExtended/media/icons/abilities/ability_dreugh_swipe.dds' }, -- Swipe (Dreugh)
     [18002] = { icon = 'LuiExtended/media/icons/abilities/ability_dreugh_slash.dds' }, -- Slash (Dreugh)
     [18003] = { icon = 'LuiExtended/media/icons/abilities/ability_dreugh_slash.dds' }, -- Slash (Dreugh)
     [18005] = { icon = 'LuiExtended/media/icons/abilities/ability_dreugh_slash.dds' }, -- Slash (Dreugh)
     [6308] = { icon = 'LuiExtended/media/icons/abilities/ability_dreugh_shocking_touch.dds' }, -- Shocking Touch (Dreugh)
+    [6328] = { icon = 'LuiExtended/media/icons/abilities/ability_dreugh_shocking_rake.dds' }, -- Shocking Rake (Dreugh)
     [27100] = { icon = 'LuiExtended/media/icons/abilities/ability_dreugh_shocking_rake.dds' }, -- Shocking Rake (Dreugh)
 
     [54374] = { icon = 'LuiExtended/media/icons/abilities/ability_echatere_tusks.dds' }, -- Tusks (Echatere)
     [54375] = { icon = 'LuiExtended/media/icons/abilities/ability_echatere_shockwave.dds' }, -- Shockwave (Echatere)
     [54378] = { icon = 'LuiExtended/media/icons/abilities/ability_echatere_shockwave.dds' }, -- Shockwave (Echatere)
     [68971] = { name = A.Innate_Stagger }, -- Staggered (Echatere - Shockwave)
+    [54380] = { icon = 'LuiExtended/media/icons/abilities/ability_echatere_headbutt.dds' }, -- Headbutt (Echatere)
     [54382] = { icon = 'LuiExtended/media/icons/abilities/ability_echatere_headbutt.dds' }, -- Headbutt (Echatere)
     [54381] = { icon = 'LuiExtended/media/icons/abilities/ability_echatere_headbutt.dds' }, -- Headbutt (Echatere)
 
@@ -4816,9 +4808,11 @@ E.EffectOverride = {
 
     [5440] = { icon = 'LuiExtended/media/icons/abilities/ability_guar_bite.dds' }, -- Bite (Guar)
     [5443] = { icon = 'LuiExtended/media/icons/abilities/ability_guar_headbutt.dds' }, -- Headbutt (Guar)
+    [5441] = { icon = 'LuiExtended/media/icons/abilities/ability_guar_dive.dds' }, -- Dive (Guar)
     [84359] = { icon = 'LuiExtended/media/icons/abilities/ability_guar_dive.dds' }, -- Dive (Guar)
 
     [5363] = { icon = 'LuiExtended/media/icons/abilities/ability_kagouti_chomp.dds' }, -- Chomp (Kagouti)
+    [5926] = { icon = 'LuiExtended/media/icons/abilities/ability_kagouti_toss.dds' }, -- Toss (Kagouti)
     [42889] = { icon = 'LuiExtended/media/icons/abilities/ability_kagouti_toss.dds' }, -- Toss (Kagouti)
     [42888] = { icon = 'LuiExtended/media/icons/abilities/ability_kagouti_toss.dds', hide = true }, -- Toss (Kagouti)
     [18198] = { icon = 'LuiExtended/media/icons/abilities/ability_kagouti_toss.dds' }, -- Toss (Kagouti)
@@ -4858,20 +4852,23 @@ E.EffectOverride = {
 
     [16667] = { icon = 'LuiExtended/media/icons/abilities/ability_netch_slap.dds' }, -- Slap (Netch)
     [16690] = { icon = 'LuiExtended/media/icons/abilities/ability_netch_thrust.dds' }, -- Thrust (Netch)
+    [16697] = { icon = 'LuiExtended/media/icons/abilities/ability_netch_poisonbloom.dds' }, -- Poisonbloom (Netch)
     [16698] = { icon = 'LuiExtended/media/icons/abilities/ability_netch_poisonbloom.dds' }, -- Poisonbloom (Netch)
 
     [7266] = { icon = 'LuiExtended/media/icons/abilities/ability_nix-hound_strike.dds' }, -- Strike (Nix-Hound)
     [13416] = { icon = 'LuiExtended/media/icons/abilities/ability_nix-hound_strike.dds' }, -- Strike (Nix-Hound)
     [7268] = { icon = 'LuiExtended/media/icons/abilities/ability_nix-hound_leech.dds' }, -- Leech (Nix-Hound)
     [12303] = { icon = 'LuiExtended/media/icons/abilities/ability_nix-hound_leech.dds' }, -- Leech (Nix-Hound)
+    [18344] = { hide = true }, -- Leech (Nix-Hound)
+    [7273] = { icon = 'LuiExtended/media/icons/abilities/ability_nix-hound_dampworm.dds' }, -- Dampworm (Nix-Hound)
     [38635] = { icon = 'LuiExtended/media/icons/abilities/ability_nix-hound_dampworm.dds' }, -- Dampworm (Nix-Hound)
     [38640] = { icon = 'LuiExtended/media/icons/abilities/ability_nix-hound_dampworm.dds' }, -- Dampworm (Nix-Hound)
-    [18344] = { hide = true }, -- Leech (Nix-Hound)
 
     [5362] = { icon = 'LuiExtended/media/icons/abilities/ability_skeever_slam.dds' }, -- Slam (Skeever)
     [21904] = { icon = 'LuiExtended/media/icons/abilities/ability_skeever_rend.dds' }, -- Rend (Skeever)
 
     [21947] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_bite.dds' }, -- Bite (Wamasu)
+    [21949] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_sweep.dds' }, -- Sweep (Wamasu)
     [46833] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_sweep.dds' }, -- Sweep (Wamasu)
     [37178] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_sweep.dds' }, -- Sweep (Wamasu)
     [21951] = { icon = 'LuiExtended/media/icons/abilities/ability_wamasu_repulsion_shock.dds', hide = true }, -- Repulsion Shock (Wamasu)
@@ -5119,15 +5116,13 @@ E.EffectOverride = {
 
     -- INSECTS
     [5278] = { icon = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_bite.dds' }, -- Bite (Assassin Beetle)
-    [6137] = { icon = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_laceration.dds', name = 'Lacerate' }, -- Laceration (Assassin Beetle)
-    [51736] = { icon = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_laceration.dds', name = 'Lacerate' }, -- Bleeding (Assassin Beetle)
-    [51735] = { icon = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_laceration.dds', name = 'Lacerate' }, -- Bleeding (Assassin Beetle)
-    
+    [6137] = { icon = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_laceration.dds', name = A.Skill_Lacerate }, -- Laceration (Assassin Beetle)
+    [51736] = { icon = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_laceration.dds', name = A.Skill_Lacerate }, -- Bleeding (Assassin Beetle)
+    [51735] = { icon = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_laceration.dds', name = A.Skill_Lacerate }, -- Bleeding (Assassin Beetle)
     [5268] = { icon = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_collywobbles.dds' }, -- Collywobbles (Assassin Beetle)
     [91789] = { hide = true }, -- Ambush (Assassin Beetle)
     [91791] = { icon = 'LuiExtended/media/icons/abilities/ability_assassinbeetle_feast.dds' }, -- Feast (Assassin Beetle)
-    
-    [13680] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_poison.dds' }, -- Acid Blood (Assassin Beetle)
+    [13680] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_gtaoe.dds' }, -- Acid Blood (Assassin Beetle)
 
     [6754] = { icon = 'LuiExtended/media/icons/abilities/ability_scorpion_pincer.dds' }, -- Pincer (Giant Scorpion)
     [6755] = { icon = 'LuiExtended/media/icons/abilities/ability_scorpion_sting.dds' }, -- Sting (Giant Scorpion)
@@ -5135,17 +5130,19 @@ E.EffectOverride = {
     [6757] = { icon = 'LuiExtended/media/icons/abilities/ability_scorpion_blurred_strike.dds' }, -- Blurred Strike (Giant Scorpion)
     [9040] = { icon = 'LuiExtended/media/icons/abilities/ability_scorpion_blurred_strike.dds' }, -- Blurred Strike (Giant Scorpion)
     [6756] = { icon = 'LuiExtended/media/icons/abilities/ability_scorpion_paralyze.dds' }, -- Paralyze (Giant Scorpion)
-    [12312] = { icon = 'LuiExtended/media/icons/abilities/ability_scorpion_paralyze.dds', name = 'Paralyze' }, -- Snare (Giant Scorpion)
+    [12312] = { icon = 'LuiExtended/media/icons/abilities/ability_scorpion_paralyze.dds', name = A.Skill_Paralyze }, -- Snare (Giant Scorpion)
     [6758] = { icon = 'LuiExtended/media/icons/abilities/ability_scorpion_hardened_carapace.dds' }, -- Hardened Carapace (Giant Scorpion)
 
     [4731] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_bite.dds' }, -- Bite (Giant Spider)
-    [44086] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds', name = 'Poisonous Burst' }, -- Poisonous Burst (Giant Spider)
+    [44086] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds', name = A.Skill_Poisonous_Burst }, -- Poisonous Burst (Giant Spider)
     [5790] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_aoe.dds' }, -- Poisonous Burst (Giant Spider)
     [5685] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_corrosive_bite.dds' }, -- Corrosive Bite (Giant Spider)
+    [8087] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_poison_spray.dds' }, -- Poison Spray (Giant Spider)
     [8088] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_poison_spray.dds' }, -- Poison Spray (Giant Spider)
-    
     [4730] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_ranged.dds' }, -- Spit (Giant Spider)
-    [47318] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', name = 'Web' }, -- Encase (Giant Spider)
+    [4737] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', name = A.Skill_Web }, -- Encase (Giant Spider)
+    [47318] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', name = A.Skill_Web, duration = 0 }, -- Encase (Giant Spider)
+    [13382] = { icon = 'LuiExtended/media/icons/abilities/ability_spider_devour.dds' }, -- Devour (Giant Spider)
 
     [9225] = { icon = 'LuiExtended/media/icons/abilities/ability_wasp_bite.dds' }, -- Bite (Giant Wasp)
     [9226] = { icon = 'LuiExtended/media/icons/abilities/ability_wasp_sting.dds' }, -- Sting (Giant Wasp)
@@ -5176,8 +5173,8 @@ E.EffectOverride = {
     [61388] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_necrotic_explosion.dds', name = 'Necrotic Explosion', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Necrotic Explosion Snare (Hoarvor DLC)
 
     [83977] = { icon = 'LuiExtended/media/icons/abilities/ability_kwamascrib_bite.dds' }, -- Bite (Kwama Scrib)
-    [8272] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_ranged.dds', name = 'Contagion', hide = true }, -- Spit (Kwama Scrib)
-    [47838] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_ranged.dds' }, -- Contagion (Kwama Scrib)
+    [8272] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_ranged.dds', name = A.Skill_Contagion, hide = true }, -- Spit (Kwama Scrib)
+    [47838] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_ranged.dds' }, -- Contagion (Kwama Scrib)
     [42869] = { hide = true }, -- Burrow (Kwama Scrib)
 
     [9287] = { icon = 'LuiExtended/media/icons/abilities/ability_kwamaworker_bite.dds' }, -- Bite (Kwama Worker)
@@ -5197,6 +5194,7 @@ E.EffectOverride = {
     [15011] = { icon = 'LuiExtended/media/icons/abilities/ability_kwamawarrior_swipe.dds' }, -- Swipe -- Kwama Warrior
     [9763] = { icon = 'LuiExtended/media/icons/abilities/ability_kwamawarrior_smash.dds' }, -- Smash -- Kwama Warrior
     [9764] = { icon = 'LuiExtended/media/icons/abilities/ability_kwamawarrior_smash.dds' }, -- Smash -- Kwama Warrior
+    [9769] = { icon = 'LuiExtended/media/icons/abilities/ability_kwamawarrior_excavation.dds' }, -- Excavation -- Kwama Warrior
     [18585] = { hide = true },  -- Excavation -- Kwama Warrior
     [27463] = { icon = 'LuiExtended/media/icons/abilities/ability_kwamawarrior_excavation.dds' }, -- Excavation -- Kwama Warrior
     [49192] = { hide = true }, -- Excavation (Kwama Scrib Summoned) (30 sec passive applied that doesn't have any effect)
@@ -5204,6 +5202,7 @@ E.EffectOverride = {
     [79147] = { hide = true }, -- GEN 3 Hits (Kwama Scrib Summoned)
 
     [6127] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_bite.dds' }, -- Bite (Shalk)
+    [5260] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_fiery_breath.dds', name = A.Skill_Fiery_Breath }, -- Fiery Breath (Shalk)
     [10947] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_fiery_breath.dds' }, -- Fiery Breath (Shalk)
     [5252] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_fire_bite.dds' }, -- Fire Bite (Shalk)
     [6129] = { icon = 'LuiExtended/media/icons/abilities/ability_shalk_fire_bite.dds' }, -- Fire Bite (Shalk)
@@ -5241,7 +5240,7 @@ E.EffectOverride = {
     [73198] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_swarm.dds'}, -- Swarmburst (Kotu Gava Broodmother)
     
     -- MONSTERS
-    [25716] = { icon = 'esoui/art/icons/ability_debuff_stun.dds', name = 'Lacerate' }, -- Stun (Gargoyle)
+    [25716] = { icon = 'esoui/art/icons/ability_debuff_stun.dds', name = A.Skill_Lacerate }, -- Stun (Gargoyle)
     [25714] = { icon = 'esoui/art/icons/ability_mage_026.dds' }, -- Vampiric Touch (Gargoyle)
     [43742] = { icon = 'esoui/art/icons/ability_debuff_knockback.dds' }, -- Obliterate (Giant)
     [32267] = { icon = 'esoui/art/icons/ability_debuff_levitate.dds' }, -- Grapple (Hag)
@@ -5973,7 +5972,6 @@ E.FakeExternalDebuffs = {
     [63094] = { icon = 'esoui/art/icons/ability_1handed_003.dds', name = A.Skill_Shield_Charge, duration = 1500 }, -- Shield Charge (Justice Guard 1H)
     [63260] = { icon = 'esoui/art/icons/ability_2handed_003.dds', name = A.Skill_Mighty_Charge, duration = 1500 }, -- Shield Charge (Justice Guard 2H)
     [63194] = { icon = 'esoui/art/icons/ability_dragonknight_013.dds', name = A.Skill_Stonefist, duration = 6000 }, -- Flame Shard (Justice Guard 2H)
-    
     [63168] = { icon = 'esoui/art/icons/ability_dragonknight_010.dds', name = A.Skill_Cage_Talons, duration = 3500, ignoreBegin = true }, -- Cage Talons (Justice Guard 1H + 2H)
     
     -- Standard NPC Abilities
@@ -5983,7 +5981,7 @@ E.FakeExternalDebuffs = {
     [79930] = {icon = 'esoui/art/icons/ability_rogue_066.dds', name = A.Skill_Lunge, duration = 2500 }, -- Lunge (Tracker) (Morrowind)
 
     -- Animals
-    [69073] = {icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', name = 'Slam', duration = 2000}, -- Knockdown (Bear Orsinium)
+    [69073] = {icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', name = A.Skill_Slam, duration = 2000}, -- Knockdown (Bear Orsinium)
     
     [74336] = { icon = 'LuiExtended/media/icons/abilities/ability_hajmota_bog_burst.dds', name = 'Bog Burst', duration = 2000}, -- Bog Burst (Haj Mota)
 

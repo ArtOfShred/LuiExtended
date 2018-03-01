@@ -2226,3 +2226,4 @@ ZO_CreateStringId("SI_LUIE_SKILL_SIEGE_BARRIER",                        "Siege B
 ZO_CreateStringId("SI_LUIE_SKILL_PUNCTURING_CHAINS",                    "Puncturing Chains")
 ZO_CreateStringId("SI_LUIE_SKILL_IMPROVED_VOLLEY",                      "Improved Volley")
 ZO_CreateStringId("SI_LUIE_SKILL_FIRE_TORRENT",                         "Fire Torrent")
+ZO_CreateStringId("SI_LUIE_SKILL_RIP_AND_TEAR",                         "Rip and Tear")

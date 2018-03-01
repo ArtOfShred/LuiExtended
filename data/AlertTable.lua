@@ -155,16 +155,25 @@ LUIE.AlertTable = {
     [84835] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true }, -- Broken Pact (Skaafin) (Morrowind)
     
     -- ANIMALS
+    [5452] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, eventdetect = true }, -- Lacerate (Alit)
+    
+    [4415] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true}, -- Crushing Swipe (Bear)
     [4416] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Savage Blows (Bear)
     
+    [70366] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true}, -- Slam (Great Bear)
+    
     [4591] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Sweep (Crocodile)
+    [4594] = { power = true, auradetect = true, refire = 1000, priority = 2, ignoreRefresh = true}, -- Ancient Skin (Crocodile)
+    
     [8977] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Sweep (Duneripper)
     
     [7227] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Rotbone (Durzog)
     
     [6308] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Shocking Touch (Dreugh)
+    [6328] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true, refire = 2000 }, -- Shocking Rake (Dreugh)
     
     [54375] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 3}, -- Shockwave (Echatere)
+    [54380] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, eventdetect = true}, -- Headbutt (Echatere)
     
     [4632] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 3}, -- Screech (Giant Bat)
     [4630] = { block = false, dodge = true, avoid = false, interrupt = true, priority = 3, refire = 1500}, -- Draining Bite (Giant Bat)
@@ -173,8 +182,11 @@ LUIE.AlertTable = {
     [5242] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Kiss of Poison (Giant Snake)
     [5244] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true}, -- Shed Skin (Giant Snake)
     
+    [5441] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, eventdetect = true }, -- Dive (Guar)
+    
     [14819] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, auradetect = true}, -- Charge (Kagouti)
     [5363] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Chomp (Kagouti)
+    [5926] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true}, -- Toss (Kagouti)
     
     [7161] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Double Strike (Lion)
     
@@ -185,14 +197,17 @@ LUIE.AlertTable = {
     [4200] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Unforgiving Claws (Mudcrab)
     
     [16690] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Thrust (Netch)
-    [16698] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, skipcheck = true, refire = 7000}, -- Poisonbloom (Netch)
+    [16697] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, eventdetect = true, refire = 2000}, -- Poisonbloom (Netch)
     
     [7268] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, refire = 500}, -- Leech
+    [7273] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true }, -- Dampworm (Nix-Hound)
     
     [21904] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Rend (Skeever)
     
     [21951] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2}, -- Repulsion Shock (Wamasu)
+    [21949] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, eventdetect = true}, -- Sweep (Wamasu)
     [48556] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, auradetect = true}, -- Focused Charge (Wamasu)
+    [22045] = { power = true, auradetect = true, priority = 2, refire = 1000}, --- Static (Wamasu)
     
     [44791] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Rear Kick (Welwa)
     [52417] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Charge (Welwa)
@@ -211,10 +226,13 @@ LUIE.AlertTable = {
     
     [6757] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Blurred Strike (Giant Scorpion)
     [6756] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3 }, -- Paralyze (Giant Scorpion)
+    [6758] = { power = true, auradetect = true, refire = 1000, priority = 2, ignoreRefresh = true}, -- Hardened Carapace (Giant Scorpion)
     
     [44086] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, auradetect = true, refire = 850 }, -- Fire Runes (Giant Spider)
     [5685] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Corrosive Bite (Giant Spider)
-    [8088] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, skipcheck = true, refire = 4100 }, -- Poison Spray (Giant Spider)
+    [8087] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, refire = 1200 }, -- Poison Spray (Giant Spider)
+    [4737] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true }, -- Encase (Giant Spider)
+    [13382] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true }, -- Devour (Giant Spider)
     
     [9226] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Sting (Wasp)
     [48559] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, auradetect = true}, -- Focused Charge (Giant Wasp)
@@ -227,8 +245,11 @@ LUIE.AlertTable = {
     
     [48539] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, auradetect = true}, -- Focused Charge (Kwama Worker)
     
+    [9769] = { block = true, dodge = true, avoid = false, interrupt = false, eventdetect = true }, -- Excavation (Kwama Warrior)
+    
+    [5260] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, refire = 750 }, -- Flamethrower (Shalk)
     [5252] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Fire Bite (Shalk)
-    [5265] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, skipcheck = true, refire = 4100}, -- Burning Ground (Shalk)
+    [5265] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, skipcheck = true, refire = 4100, notDirect = true}, -- Burning Ground (Shalk)
     
     [8429] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, refire = 600}, -- Zap (Thunderbug)
     [26412] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Thunderstrikes (Thunderbug)

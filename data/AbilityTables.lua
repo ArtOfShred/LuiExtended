@@ -293,6 +293,7 @@ A.Skill_Volatile_Armor              = 20323
 A.Skill_Dragon_Blood                = 29004 -- TODO: Move + check if best ID to use later
 A.Skill_Fiery_Grip                  = 20492 -- TODO: Move + check if best ID to use later
 A.Skill_Stonefist                   = 29032 -- TODO: Move + check if best ID to use later
+A.Skill_Fiery_Breath                = 20917 -- TODO: Move + check if best ID to use later
 
 -- Nightblade
 A.Skill_Siphoning_Strikes           = 33319 -- TODO: Check if this is the best ID to use later
@@ -404,6 +405,7 @@ A.Skill_Hamstring                   = 70068 -- Hamstring
 -- NPC ABILITIES -------------------------------------
 -- ---------------------------------------------------
 
+-- Human
 A.Skill_Oil_Drenched                = 10650
 A.Skill_Shield_Rush                 = GetString(SI_LUIE_SKILL_SHIELD_RUSH)
 A.Skill_Knockback                   = 77905
@@ -422,12 +424,14 @@ A.Skill_Lunge                       = 78664
 A.Skill_Clobber                     = 24671
 A.Skill_Shadowy_Barrier             = GetString(SI_LUIE_SKILL_SHADOWY_BARRIER)
 
+-- Justice
 A.Skill_Cage_Talons                 = 63168
 A.Skill_Heavy_Blow                  = 63157
 A.Skill_Mighty_Charge               = GetString(SI_LUIE_SKILL_MIGHTY_CHARGE)
 A.Skill_Throw_Dagger                = 28499
 A.Skill_Detection                   = GetString(SI_LUIE_SKILL_DETECTION)
 
+-- Cyrodiil
 A.Skill_Shock_Torrent               = 46726
 A.Skill_Improved_Shock_Torrent      = GetString(SI_LUIE_SKILL_IMPROVED_SHOCK_TORRENT)
 A.Skill_Steal_Essence               = 2786
@@ -442,20 +446,33 @@ A.Skill_Extended_Chains             = 35113
 A.Skill_Puncturing_Chains           = GetString(SI_LUIE_SKILL_PUNCTURING_CHAINS)
 A.Skill_Improved_Volley             = GetString(SI_LUIE_SKILL_IMPROVED_VOLLEY)
 
+-- Animals
+A.Skill_Lacerate                    = 5452
 A.Skill_Bite                        = 17957
-A.Skill_Swipe                       = 2850
+A.Skill_Savage_Blows                = 4416
+A.Skill_Slam                        = 70366
+A.Skill_Rip_and_Tear                = GetString(SI_LUIE_SKILL_RIP_AND_TEAR)
 
-A.Skill_Rush                        = 14380
+A.Skill_Paralyze                    = 6756 -- Giant Scorpion
 
-A.Skill_Vigorus_Swipes              = 75634
+A.Skill_Swipe                       = 2850 -- Welwa
 
-A.Skill_Barreling_Charge            = GetString(SI_LUIE_SKILL_BARRELING_CHARGE)
+A.Skill_Rush                        = 14380 -- Kagouti
 
-A.Skill_Blitz                       = GetString(SI_LUIE_SKILL_BLITZ)
+A.Skill_Vigorus_Swipes              = 75634 -- Mammoth
 
-A.Skill_Inject_Larva                = 9229
-A.Skill_Zoom                        = GetString(SI_LUIE_SKILL_ZOOM)
-A.Skill_Plow                        = GetString(SI_LUIE_SKILL_PLOW)
+A.Skill_Barreling_Charge            = GetString(SI_LUIE_SKILL_BARRELING_CHARGE) -- Wamasu
+
+A.Skill_Blitz                       = GetString(SI_LUIE_SKILL_BLITZ) -- Welwa
+
+A.Skill_Poisonous_Burst             = 5790
+A.Skill_Web                         = 58521 -- Giant Spider
+
+A.Skill_Inject_Larva                = 9229 -- Giant Wasp
+A.Skill_Zoom                        = GetString(SI_LUIE_SKILL_ZOOM) -- Giant Wasp
+A.Skill_Plow                        = GetString(SI_LUIE_SKILL_PLOW) -- Kwama Worker
+
+A.Skill_Contagion                   = 47838 -- Kwama Scrib
 
 A.Skill_Assault                     = 4304
 
@@ -717,7 +734,6 @@ A.Skill_Unrelenting_Chains       = 20499
 A.Skill_Searing_Strike           = 20657
 A.Skill_Venmous_Claw             = 20668
 A.Skill_Burning_Embers           = 20660
-A.Skill_Fiery_Breath             = 20917
 A.Skill_Noxious_Breath           = 20944
 A.Skill_Engulfing_Flames         = 20930
 A.Skill_Inferno                  = 25954
