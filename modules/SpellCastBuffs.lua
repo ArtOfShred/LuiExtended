@@ -215,11 +215,9 @@ local Effects = {
     --["Imperial Prison Item Set"]    = { 6.0, false, false, nil},
     
     -- Dragonknight
-    --[A.Skill_Dragonknight_Standard]   = { false, false, true, nil }, -- ACCURATE
-    --[A.Skill_Shifting_Standard]     = { false, false, true, nil }, -- ACCURATE
-    --[A.Skill_Shift_Standard]        = { false, false, true, nil }, -- ACCURATE
-    --[A.Skill_Standard_of_Might]     = { true, false, true, nil }, -- ACCURATE
-    
+    [A.Skill_Dragonknight_Standard]   = { false, false, true, nil }, -- ACCURATE
+    [A.Skill_Shifting_Standard]     = { false, false, true, nil }, -- ACCURATE
+    [A.Skill_Standard_of_Might]     = { true, false, true, nil }, -- ACCURATE
     
     -- NEEDS TO BE RESORTED STILL:
 
