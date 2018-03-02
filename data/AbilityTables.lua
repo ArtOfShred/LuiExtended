@@ -399,7 +399,8 @@ A.Skill_Caltrops                    = 33376 -- TODO: Check is best ID to use
 -- NPC BASIC -----------------------------------------
 -- ---------------------------------------------------
 
-A.Skill_Hamstring                   = 70068 -- Hamstring
+A.Skill_Hamstring                   = 70068
+A.Skill_Backstabber                 = 13739
 
 -- ---------------------------------------------------
 -- NPC ABILITIES -------------------------------------
@@ -452,31 +453,34 @@ A.Skill_Bite                        = 17957
 A.Skill_Savage_Blows                = 4416
 A.Skill_Slam                        = 70366
 A.Skill_Rip_and_Tear                = GetString(SI_LUIE_SKILL_RIP_AND_TEAR)
+A.Skill_Rush                        = 14380
+A.Skill_Vigorus_Swipes              = 75634
+A.Skill_Barreling_Charge            = GetString(SI_LUIE_SKILL_BARRELING_CHARGE)
+A.Skill_Swipe                       = 2850
+A.Skill_Blitz                       = GetString(SI_LUIE_SKILL_BLITZ)
+A.Skill_Toxic_Mucus                 = 72793
+A.Skill_Bog_Burst                   = 72796
 
-A.Skill_Paralyze                    = 6756 -- Giant Scorpion
-
-A.Skill_Swipe                       = 2850 -- Welwa
-
-A.Skill_Rush                        = 14380 -- Kagouti
-
-A.Skill_Vigorus_Swipes              = 75634 -- Mammoth
-
-A.Skill_Barreling_Charge            = GetString(SI_LUIE_SKILL_BARRELING_CHARGE) -- Wamasu
-
-A.Skill_Blitz                       = GetString(SI_LUIE_SKILL_BLITZ) -- Welwa
-
+-- Insects
+A.Skill_Paralyze                    = 6756
 A.Skill_Poisonous_Burst             = 5790
-A.Skill_Web                         = 58521 -- Giant Spider
+A.Skill_Web                         = 58521
+A.Skill_Inject_Larva                = 9229
+A.Skill_Zoom                        = GetString(SI_LUIE_SKILL_ZOOM)
+A.Skill_Latch_On                    = 6795
+A.Skill_Vile_Bite                   = 61243
+A.Skill_Infectious_Swarm            = 61360
+A.Skill_Necrotic_Explosion          = 61427
+A.Skill_Contagion                   = 47838
+A.Skill_Plow                        = GetString(SI_LUIE_SKILL_PLOW)
+A.Skill_Zap                         = 8429
+A.Skill_Zap_Pulse                   = GetString(SI_LUIE_SKILL_ZAP_PULSE)
+A.Skill_Leeching_Bite               = GetString(SI_LUIE_SKILL_LEECHING_BITE)
 
-A.Skill_Inject_Larva                = 9229 -- Giant Wasp
-A.Skill_Zoom                        = GetString(SI_LUIE_SKILL_ZOOM) -- Giant Wasp
-A.Skill_Plow                        = GetString(SI_LUIE_SKILL_PLOW) -- Kwama Worker
+-- Monsters
+A.Skill_Assault                     = 4304 -- Ice Wraith
 
-A.Skill_Contagion                   = 47838 -- Kwama Scrib
-
-A.Skill_Assault                     = 4304
-
--- Flesh Colossus
+-- Flesh Colossus (+Daedra Below - Organize later)
 A.Skill_Tremor                      = 67123
 A.Skill_Pin                         = 65709
 A.Skill_Sweep                       = 67872

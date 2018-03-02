@@ -577,8 +577,15 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
     unitName = zo_strformat("<<t:1>>", unitName)
     if unitName == LUIE.PlayerNameFormatted then unitName = "Player" end
     
+    local cmxHIDE
+    if CMX and CMX.CustomAbilityHide and CMX.CustomAbilityHide[abilityId] then
+        cmxHIDE = " + HIDDEN CMX"
+    else
+        cmxHIDE = ""
+    end
+    
     if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide then
-        d("|c00E200[" ..abilityId .. "] " .. effectName.. ": AURA HIDDEN BY LUI|r")
+        d("|c00E200[" ..abilityId .. "] " .. effectName.. ": HIDDEN LUI" .. cmxHIDE .. ": [Tag] ".. unitName .. "|r")
         return
     end
     

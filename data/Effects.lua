@@ -338,6 +338,9 @@ E.DebuffDisplayOverrideId = {
     [29597] = true, -- Combustion (Shaman)
     [29598] = true, -- Off Balance (Shaman)
     
+    -- Insects
+    [61372] = true, -- Infectious Swarm (Necrotic Hoarvor)
+    
 }
 
 -- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY NAME
@@ -4907,8 +4910,8 @@ E.EffectOverride = {
     [76578] = { icon = 'LuiExtended/media/icons/abilities/ability_hajmota_bite.dds' }, -- Bite (Haj Mota)
     [72793] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_ranged.dds', hide = true }, -- Toxic Mucus (Haj Mota)
     [76577] = { hide = true }, -- Toxic Mucous (Haj Mota)
-    [72815] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_ranged.dds', name = 'Toxic Mucus'}, -- Toxic Mucous (Haj Mota)
-    [72794] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_slime.dds', hide = true}, -- Toxic Pool (Haj Mota)
+    [72815] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_ranged.dds', name = A.Skill_Toxic_Mucus }, -- Toxic Mucous (Haj Mota)
+    [72794] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_gtaoe.dds', hide = true}, -- Toxic Pool (Haj Mota)
     [72796] = { icon = 'LuiExtended/media/icons/abilities/ability_hajmota_bog_burst.dds', hide = true}, -- Bog Burst (Haj Mota)
     [72799] = { hide = true }, -- Bog Burst (Haj Mota)
     [76183] = { hide = true }, -- Bog Burst (Haj Mota)
@@ -4916,24 +4919,19 @@ E.EffectOverride = {
     [74336] = { icon = 'LuiExtended/media/icons/abilities/ability_hajmota_bog_burst.dds'}, -- Bog Burst (Haj Mota)
     [74337] = { icon = 'LuiExtended/media/icons/abilities/ability_hajmota_bog_burst.dds'}, -- Bog Burst (Haj Mota)
     [76184] = { hide = true }, -- Bog Burst (Haj Mota)
+    [72789] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds' }, -- Shockwave (Haj Mota)
     [73494] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shockwave.dds', hide = true }, -- Shockwave (Haj Mota)
     
-    [76319] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_backstabber.dds', name = 'Backstabber' }, -- Backstabber (Dire Wolf)
-    
+    [76319] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_backstabber.dds', name = A.Skill_Backstabber }, -- Backstabber (Dire Wolf)
     [80382] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_bite.dds' }, -- Bite (Dire Wolf)
     [80383] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_bite.dds' }, -- Bite (Dire Wolf)
-    
     [76307] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_lunge.dds' }, -- Lunge (Dire Wolf)
     [76308] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_lunge.dds' }, -- Lunge (Dire Wolf)
-    
     [76303] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_nip.dds' }, -- Nip (Dire Wolf)
     [76304] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_nip.dds' }, -- Nip (Dire Wolf)
-    
     [76305] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash.dds' }, -- Gnash (Dire Wolf)
     [76306] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_gnash.dds' }, -- Gnash (Dire Wolf)
-    
     [85656] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_harry.dds' }, -- Harry (Dire Wolf)
-    
     [76312] = { hide = true }, -- Harry (Dire Wolf)
     [76324] = { icon = 'LuiExtended/media/icons/abilities/ability_direwolf_baleful_call.dds' }, -- Baleful Call (Dire Wolf)
     [76322] = { hide = true }, -- Baleful Call (Dire Wolf)
@@ -5163,14 +5161,18 @@ E.EffectOverride = {
     [13585] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_latch_on.dds' }, -- Latch On (Hoarvor)
     
     [61243] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_vile_bite.dds' }, -- Vile Bite (Hoarvor DLC)
-    [69392] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_vile_bite.dds', name = 'Vile Bite' }, -- Vile Bite Poison (Hoarvor DLC)
+    [69392] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_vile_bite.dds', name = A.Skill_Vile_Bite }, -- Vile Bite Poison (Hoarvor DLC)
     [61244] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_fevered_retch.dds' }, -- Fevered Retch (Hoarvor DLC)
     [61245] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_fevered_retch.dds' }, -- Fevered Retch (Hoarvor DLC)
+    [61360] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_infectious_swarm.dds' }, -- Infectious Swarm (Hoarvor DLC)
     [61377] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_infectious_swarm.dds' }, -- Infectious Swarm (Hoarvor DLC)
     [61372] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_infectious_swarm.dds' }, -- Infectious Swarm (Hoarvor DLC)
     [61374] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_infectious_swarm.dds' }, -- Infectious Swarm (Hoarvor DLC)
+    [61376] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_poison.dds', hide = true }, -- Infectious Swarm (Hoarvor DLC)
+    [61375] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_poison.dds', name = A.Skill_Infectious_Swarm }, -- Infectious Swarm (Hoarvor DLC)
+    [61427] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_necrotic_explosion.dds' }, -- Necrotic Explosion (Hoarvor DLC)
     [61249] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_necrotic_explosion.dds', hide = true }, -- Necrotic Explosion (Hoarvor DLC)
-    [61388] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_necrotic_explosion.dds', name = 'Necrotic Explosion', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Necrotic Explosion Snare (Hoarvor DLC)
+    [61388] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_necrotic_explosion.dds', name = A.Skill_Necrotic_Explosion, type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Necrotic Explosion Snare (Hoarvor DLC)
 
     [83977] = { icon = 'LuiExtended/media/icons/abilities/ability_kwamascrib_bite.dds' }, -- Bite (Kwama Scrib)
     [8272] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_ranged.dds', name = A.Skill_Contagion, hide = true }, -- Spit (Kwama Scrib)
@@ -5211,14 +5213,14 @@ E.EffectOverride = {
     [5308] = { icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_thunder_bite.dds' }, -- Thunder Bite (Thunderbug)
     [8429] = { icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_zap.dds' }, -- Zap (Thunderbug)
     [65079] = { icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_zap.dds' }, -- Zap (Thunderbug)
-    [26379] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_pulse.dds', name = 'Zap Pulse' }, -- Zap (Thunderbug)
+    [26379] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_pulse.dds', name = A.Skill_Zap_Pulse }, -- Zap (Thunderbug)
     
     [26382] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_ranged.dds' }, -- Bolt (Thunderbug)
     [26412] = { icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_thunderstrikes.dds' }, -- Thunderstrikes (Thunderbug)
     [34980] = { icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_thunderstrikes.dds' }, -- Thunderstrikes (Thunderbug)
     
-    [73166] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_bite.dds' }, -- Bite (Kotu Gava)
-    [73214] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_bite.dds' }, -- Bite (Kotu Gava)
+    [73166] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_bite.dds', name = A.Skill_Leeching_Bite }, -- Bite (Kotu Gava)
+    [73214] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_bite.dds', name = A.Skill_Leeching_Bite }, -- Bite (Kotu Gava)
     [73215] = { hide = true }, -- Bite (Kotu Gava)
     
     [73184] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_slime_ranged.dds', hide = true }, -- Vile Spit (Kotu Gava Broodmother)
@@ -5229,15 +5231,16 @@ E.EffectOverride = {
     [73174] = { hide = true }, -- Swarm (Kotu Gava Broodmother)
     [73175] = { hide = true }, -- Swarm (Kotu Gava Broodmother)
     [73176] = { hide = true }, -- Swarm (Kotu Gava Broodmother)
-    [76579] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_bite.dds' }, -- Bite (Kotu Gava Spawn)
-    [76580] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_bite.dds' }, -- Bite (Kotu Gava Spawn)
+    [76579] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_bite.dds', name = A.Skill_Leeching_Bite }, -- Bite (Kotu Gava Spawn)
+    [76580] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_bite.dds', name = A.Skill_Leeching_Bite }, -- Bite (Kotu Gava Spawn)
     [76581] = { hide = true }, -- Bite (Kotu Gava Spawn)
+    [73199] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_swarmburst.dds' }, -- Swarmburst (Kotu Gava Broodmother)
     [73200] = { hide = true }, -- Swarmburst (Kotu Gava Broodmother)
     [73195] = { hide = true }, -- Swarmburst (Kotu Gava Spawn)
     [73196] = { hide = true }, -- Swarmburst (Kotu Gava Spawn)
     [73197] = { hide = true }, -- Swarmburst (Kotu Gava Spawn)
-    [73194] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_swarm.dds'}, -- Swarmburst (Kotu Gava Broodmother)
-    [73198] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_swarm.dds'}, -- Swarmburst (Kotu Gava Broodmother)
+    [73194] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_slime_alt.dds' }, -- Swarmburst (Kotu Gava Broodmother)
+    [73198] = { icon = 'LuiExtended/media/icons/abilities/ability_kotugava_swarmburst.dds' }, -- Swarmburst (Kotu Gava Broodmother)
     
     -- MONSTERS
     [25716] = { icon = 'esoui/art/icons/ability_debuff_stun.dds', name = A.Skill_Lacerate }, -- Stun (Gargoyle)
@@ -5983,7 +5986,7 @@ E.FakeExternalDebuffs = {
     -- Animals
     [69073] = {icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', name = A.Skill_Slam, duration = 2000}, -- Knockdown (Bear Orsinium)
     
-    [74336] = { icon = 'LuiExtended/media/icons/abilities/ability_hajmota_bog_burst.dds', name = 'Bog Burst', duration = 2000}, -- Bog Burst (Haj Mota)
+    [74336] = { icon = 'LuiExtended/media/icons/abilities/ability_hajmota_bog_burst.dds', name = A.Skill_Bog_Burst, duration = 2000}, -- Bog Burst (Haj Mota)
 
     -- Daedra
     [50023] = {icon = 'LuiExtended/media/icons/abilities/ability_airatronach_lightning_rod.dds', name = 'Lightning Rod', duration = 4000}, -- Lightning Rod (Air Atronach)
@@ -5993,8 +5996,8 @@ E.FakeExternalDebuffs = {
 
     -- Insects
     [9237] = {icon = 'LuiExtended/media/icons/abilities/ability_wasp_inject_larva.dds', name = A.Skill_Inject_Larva, duration = 10000}, -- Larva Gestation (Giant Wasp)
-    [6795] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_latch_on.dds', name = 'Latch On', duration = 7500 }, -- Latch On (Hoarvor)
-    [8429] = {icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_zap.dds', name = 'Zap', duration = 4000}, -- Zap (Thunderbug)
+    [6795] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_latch_on.dds', name = A.Skill_Latch_On, duration = 7500 }, -- Latch On (Hoarvor)
+    [8429] = {icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_zap.dds', name = A.Skill_Zap, duration = 4000, ignoreBegin = true}, -- Zap (Thunderbug)
 
     -- Monsters
     [48287] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Consuming Omen', duration = 1500}, -- Consuming Omen (Troll - Ranged) (Fake aura to replace bugged aura)
