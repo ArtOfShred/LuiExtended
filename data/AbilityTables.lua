@@ -372,6 +372,9 @@ A.Skill_Stampede                    = 21055 -- TODO: Check is best ID to use
 -- Dual Wield
 A.Skill_Twin_Slashes                = 28379 -- TODO: Check is best ID to use
 
+-- Bow
+A.Skill_Bombard                     = 38705 -- TODO: Check is best ID to use
+
 -- ---------------------------------------------------
 -- GUILD SKILLS --------------------------------------
 -- ---------------------------------------------------
@@ -460,6 +463,8 @@ A.Skill_Swipe                       = 2850
 A.Skill_Blitz                       = GetString(SI_LUIE_SKILL_BLITZ)
 A.Skill_Toxic_Mucus                 = 72793
 A.Skill_Bog_Burst                   = 72796
+A.Skill_Gore                        = 85202
+A.Skill_Bile_Spit                   = 64559
 
 -- Insects
 A.Skill_Paralyze                    = 6756
@@ -476,6 +481,7 @@ A.Skill_Plow                        = GetString(SI_LUIE_SKILL_PLOW)
 A.Skill_Zap                         = 8429
 A.Skill_Zap_Pulse                   = GetString(SI_LUIE_SKILL_ZAP_PULSE)
 A.Skill_Leeching_Bite               = GetString(SI_LUIE_SKILL_LEECHING_BITE)
+A.Skill_Fetcherfly_Colony           = GetString(SI_LUIE_SKILL_FETCHERFLY_COLONY)
 
 -- Monsters
 A.Skill_Assault                     = 4304 -- Ice Wraith
@@ -547,7 +553,6 @@ A.Skill_Draining_Shot            = 38669
 A.Skill_Magnum_Shot              = 38672
 A.Skill_Arrow_Spray              = 31271
 A.Skill_Acid_Spray               = 38701
-A.Skill_Bombard                  = 38705
 A.Skill_Snipe                    = 28882
 A.Skill_Focused_Aim              = 38687
 A.Skill_Lethal_Arrow             = 38685

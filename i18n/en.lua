@@ -2231,3 +2231,4 @@ ZO_CreateStringId("SI_LUIE_SKILL_FIRE_TORRENT",                         "Fire To
 ZO_CreateStringId("SI_LUIE_SKILL_RIP_AND_TEAR",                         "Rip and Tear")
 ZO_CreateStringId("SI_LUIE_SKILL_LEECHING_BITE",                        "Leeching Bite")
 ZO_CreateStringId("SI_LUIE_SKILL_ZAP_PULSE",                            "Zap Pulse")
+ZO_CreateStringId("SI_LUIE_SKILL_FETCHERFLY_COLONY",                    "Fetcherfly Colony")

@@ -222,6 +222,16 @@ LUIE.AlertTable = {
     [76307] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Lunge (Dire Wolf)
     [76324] = { power = true, auradetect = true, priority = 2, refire = 1000}, -- Baleful Call (Dire Wolf)
     
+    [85201] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Bite (Nix-Ox)
+    [85084] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, refire = 750 }, -- Shriek (Nix-Ox)
+    [90765] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, refire = 1000 }, -- Acid Spray (Nix-Ox)
+    [90809] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, refire = 1000 }, -- Acid Spray (Nix-Ox)
+    [85172] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Winnow (Nix-Ox)
+    [85203] = { power = true, auradetect = true, priority = 2, refire = 1000 }, -- Nix-Call (Nix-Ox)
+    
+    [85395] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3 }, -- Dive (Cliff Strider)
+    [85399] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true }, -- Retch (Cliff Strider)
+    
     -- INSECTS
     [6137] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Laceration (Assassin Beetle)
     [5268] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3}, -- Collywobbles (Assassin Beetle)
@@ -260,6 +270,13 @@ LUIE.AlertTable = {
     
     [73172] = { block = false, dodge = true, avoid = false, interrupt = true, priority = 3}, -- Swarm (Kotu Gava)
     [73199] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, skipcheck = true }, -- Swarmburst (Kotu Gava Broodmother)
+    
+    [85645] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Bombard (Fetcherfly Nest)
+    [87126] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, refire = 8000, skipcheck = true }, -- Heat Vents (Fetcherfly Nest)
+    
+    [92078] = { destroy = true, refire = 1000, priority = 2, eventdetect = true, skipcheck = true }, -- Colonize (Fetcherfly Hive Golem)
+    [87062] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Fetcherfly Storm (Fetcherfly Hive Golem)
+    [87030] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Focused Swarm (Fetcherfly Hive Golem)
     
     -- DAEDRA
     [48121] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Heavy Attack (Air Atronach)
