@@ -1200,53 +1200,61 @@ E.AssistantIcons = {
     ['Tythis Andromo, the Banker']  = 'LuiExtended/media/icons/abilities/ability_innate_assistant_tythis.dds',
 }
 
-E.IsBossMob = {
+E.AddNameAura = {
+    
+    -- Name Specific Changes
+    ['Flame Atronach'] = {
+        [1] = { icon = 'LuiExtended/media/icons/abilities/ability_flameatronach_radiance.dds', name = A.Skill_Radiance },
+    },
+    ['Frost Atronach'] = {
+        [1] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_chilling_aura.dds', name = A.Skill_Chilling_Aura },
+    },
 
-    ['War Chief Ozozai'] = true,
-    ['Broodbirther'] = true,
+    ['War Chief Ozozai'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
+    ['Broodbirther'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
     
-    ['Mad Griskild'] = true, -- Quest -- Vvardenfell -- A Web of Troubles
+    ['Mad Griskild'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- A Web of Troubles
     
-    ['Veya Releth'] = true, -- Quest -- Vvardenfell - Family Reunion
+    ['Veya Releth'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell - Family Reunion
     
-    ['Old Rust-Eye'] = true, -- Delve -- Vvardenfell - Khartag Point
+    ['Old Rust-Eye'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Delve -- Vvardenfell - Khartag Point
     
-    ['Cliff Strider Matriarch'] = true, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
-    ['Beckoner Morvayn'] = true, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
-    ['Confessor Dradas'] = true, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
-    ['Coaxer Veran'] = true, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
-    ['Castigator Athin'] = true, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
+    ['Cliff Strider Matriarch'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
+    ['Beckoner Morvayn'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
+    ['Confessor Dradas'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
+    ['Coaxer Veran'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
+    ['Castigator Athin'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
     
     
-    ['Stone-Boiler Omalas'] = true, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
-    ['Brander Releth'] = true, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
-    ['Mountain-Caller Hlaren'] = true, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
-    ['Wakener Maras'] = true, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
-    ['Nevena Nirith'] = true, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
+    ['Stone-Boiler Omalas'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
+    ['Brander Releth'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
+    ['Mountain-Caller Hlaren'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
+    ['Wakener Maras'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
+    ['Nevena Nirith'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
     
-    ['Mud-Tusk'] = true, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth
-    ['Guardian of Bthark'] = true, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth
-    ['Renduril the Hammer'] = true, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth
-    ['Friar Hadelar'] = true, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth
-    ['Steamreaver'] = true, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth
-    ['Artisan Lenarmen'] = true, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth
-    ['Nchulaeon the Eternal'] = true, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth
-    ['Nilarion the Cavalier'] = true, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth 
+    ['Mud-Tusk'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth
+    ['Guardian of Bthark'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth
+    ['Renduril the Hammer'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth
+    ['Friar Hadelar'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth
+    ['Steamreaver'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth
+    ['Artisan Lenarmen'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth
+    ['Nchulaeon the Eternal'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth
+    ['Nilarion the Cavalier'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth 
     
-    ['Curate Erydno'] = true, -- Quest -- Vvardenfell -- Divine Inquires
-    ['Savarak Fels'] = true, -- Quest -- Vvardenfell -- Reclamining Vos
+    ['Curate Erydno'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Divine Inquires
+    ['Savarak Fels'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Reclamining Vos
     
-    ['Th\'krak the Tunnel-King'] = true, -- Delve -- Vvardenfell -- Matus-Akin Egg Mine
-    ['Slavemaster Arenim'] = true, -- Quest -- Vvardenfell -- The Heart of a Telvanni
+    ['Th\'krak the Tunnel-King'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Delve -- Vvardenfell -- Matus-Akin Egg Mine
+    ['Slavemaster Arenim'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- The Heart of a Telvanni
     
-    ['Chodala'] = true, -- Quest -- Vvardenfell -- Divine Intervention
-    ['Clockwork Guardian'] = true, -- Quest -- Vvardenfell -- Divine Restoration
-    ['Jovval Mortal-Bane'] = true, -- Quest -- Vvardenfell -- Divine Restoration
-    ['Clockwork Defense Core'] = true, -- Quest -- Vvardenfell -- Divine Restoration
-    ['Clockwork Mediator'] = true, -- Quest -- Vvardenfell -- Divine Restoration
-    ['Clockwork Mediator Core'] = true, -- Quest -- Vvardenfell -- Divine Restoration
-    ['Clockwork Assembly Core'] = true, -- Quest -- Vvardenfell -- Divine Restoration
-    ['Barbas'] = true, -- Quest -- Vvardenfell -- Divine Restoration
+    ['Chodala'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Divine Intervention
+    ['Clockwork Guardian'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Divine Restoration
+    ['Jovval Mortal-Bane'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Divine Restoration
+    ['Clockwork Defense Core'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Divine Restoration
+    ['Clockwork Mediator'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Divine Restoration
+    ['Clockwork Mediator Core'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Divine Restoration
+    ['Clockwork Assembly Core'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Divine Restoration
+    ['Barbas'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Divine Restoration
     
 }
 
@@ -1460,14 +1468,17 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     
     [87309] = true, -- Icy Rage (Elemental Rage - All Ranks)
     
-    -- NPCS
+    -- Human NPC
     [10648] = true, -- Throw Oil (Synergy)
     [87066] = true, -- Volanic Debris (Fire-Binder)
     
-    -- CYRODIIL NPCS
+    -- CYRODIIL NPC
     [21632] = true, -- Lifesteal (Cryodiil Mage T1)
     [46718] = true, -- Stolen Essence (Cryodiil Mage T2)
     [51893] = true, -- Negate Magic (Cyrodiil Mender T1 + T2)
+    
+    -- DAEDRA NPC
+    [51646] = true, -- Frozen Ground (Frost Atronach)
     
     -- MAIN QUEST
     [61648] = true, -- Replenish Stamina (Tutorial - Child of Bones)
@@ -4983,18 +4994,18 @@ E.EffectOverride = {
     [48121] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_heavy_attack.dds' }, -- Heavy Attack (Air Atronach)
     [48137] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_tornado.dds' }, -- Tornado (Air Atronach)
     [51269] = { hide = true }, -- Air Atronach Flame  (Air Atronach - Frost)
-    [51267] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_empower_frost.dds', name = 'Empower Atronach: Frost' }, -- Air Atronach Flame (Air Atronach - Frost)
+    [51267] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_empower_frost.dds', name = A.Skill_Empower_Atronach_Frost }, -- Air Atronach Flame (Air Atronach - Frost)
     [50021] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_ice_vortex.dds' }, -- Ice Vortex (Air Atronach - Frost)
     [50022] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_ice_vortex.dds', type = BUFF_EFFECT_TYPE_DEBUFF, unbreakable = 1 }, -- Ice Vortex (Air Atronach - Frost)
     [51262] = { hide = true }, -- Air Atronach Flame (Air Atronach - Flame)
-    [51265] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_empower_flame.dds', name = 'Empower Atronach: Flame' }, -- Air Atronach Flame (Air Atronach - Flame)
+    [51265] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_empower_flame.dds', name = A.Skill_Empower_Atronach_Flame }, -- Air Atronach Flame (Air Atronach - Flame)
+    [51281] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_flame_tornado.dds' }, -- Flame Tornado (Air Atronach)
     [51282] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_flame_tornado.dds' }, -- Flame Tornado (Air Atronach)
-    
     [51271] = { hide = true }, -- Air Atronach Flame (Air Atronach - Storm)
-    [51270] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_empower_storm.dds', name = 'Empower Atronach: Storm' }, -- Air Atronach Flame (Air Atronach - Storm)
+    [51270] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_empower_storm.dds', name = A.Skill_Empower_Atronach_Storm }, -- Air Atronach Flame (Air Atronach - Storm)
     [50023] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_lightning_rod.dds' }, -- Lightning Rod (Air Atronach)
     [88902] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_lightning_rod.dds' }, -- Lightning Rod (Air Atronach)
-    [50026] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_pulse.dds', name = 'Lightning Pulse' }, -- Lightning Rod (Air Atronach)
+    [50026] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_shock_pulse.dds', name = A.Skill_Lightning_Pulse }, -- Lightning Rod (Air Atronach)
 
     
 
@@ -5023,8 +5034,10 @@ E.EffectOverride = {
     [18472] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_ranged.dds' }, -- Flare (Flame Atronach)
     [15157] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_ranged.dds' }, -- Flare (Flame Atronach)
     [12254] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_ranged.dds' }, -- Flare (Flame Atronach)
+    [26324] = { icon = 'LuiExtended/media/icons/abilities/ability_flameatronach_lava_geyser.dds' }, -- Lava Geyser (Flame Atronach)
     [26325] = { icon = 'LuiExtended/media/icons/abilities/ability_flameatronach_lava_geyser.dds' }, -- Lava Geyser (Flame Atronach)
     [4491] = { icon = 'LuiExtended/media/icons/abilities/ability_flameatronach_radiance.dds' }, -- Radiance (Flame Atronach)
+    [50216] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_aoe.dds' }, -- Combustion (Flame Atronach)
     [50215] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_fire_aoe.dds' }, -- Combustion (Flame Atronach)
 
     [67870] = { icon = 'LuiExtended/media/icons/abilities/ability_fleshcolossus_tremor.dds', name = A.Skill_Tremor }, -- Tremor AOE (Flesh Colossus)
@@ -5070,12 +5083,14 @@ E.EffectOverride = {
 
     [17069] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_ice_spear.dds' }, -- Ice Spear (Frost Atronach)
     [5009] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_ice_shards.dds' }, -- Ice Shards (Frost Atronach)
-    [33551] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_chilling_aura.dds' }, -- Chilling Aura (Frost Atronach)
+    [33551] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_chilling_aura.dds', internalStack = 0 }, -- Chilling Aura (Frost Atronach)
+    [5017] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_hoarfrost_fist.dds' }, -- Hoarfrost Fist (Frost Atronach)
     [44906] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_hoarfrost_fist.dds' }, -- Hoarfrost Fist (Frost Atronach)
     [44907] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_hoarfrost_fist.dds', hide = true }, -- Hoarfrost Fist (Frost Atronach)
     [44908] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_hoarfrost_fist.dds' }, -- Hoarfrost Fist (Frost Atronach)
+    [33502] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds' }, -- Frozen Ground (Frost Atronach)
     [51645] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds' }, -- Frozen Ground (Frost Atronach)
-    [51646] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds', hide = true }, -- Frozen Ground (Frost Atronach)
+    [51646] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds', internalStack = 0, hide = true }, -- Frozen Ground (Frost Atronach)
 
     [65926] = { icon = 'LuiExtended/media/icons/abilities/ability_grevioustwilight_slash.dds' }, -- Slash (Grevious Twilight)
     [65845] = { icon = 'LuiExtended/media/icons/abilities/ability_grevioustwilight_rend.dds' }, -- Rend (Grevious Twilight)
@@ -5110,11 +5125,12 @@ E.EffectOverride = {
 
     [4858] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_bash.dds' }, -- Bash (Storm Atronach)
     [13898] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_strike.dds' }, -- Strike (Storm Atronach)
+    [35220] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_impending_storm.dds' }, -- Impending Storm (Storm Atronach)
     [35222] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_impending_storm.dds' }, -- Impending Storm (Storm Atronach)
     [4864] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds' }, -- Storm Bound (Storm Atronach)
     [35240] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds' }, -- Storm Bound (Storm Atronach)
     [12287] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds' }, -- Storm Bound (Storm Atronach)
-    [12288] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds' }, -- Storm Bound (Storm Atronach)
+    [12288] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds', hideReduce = true }, -- Storm Bound (Storm Atronach)
     [12286] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds' }, -- Storm Bound (Storm Atronach)
 
     [7095] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds' }, -- Heavy Attack (Xivilai)
@@ -5296,8 +5312,8 @@ E.EffectOverride = {
     [92081] = { hide = true }, -- Colonize (Fetcherfly Hive Golem)
     [87062] = { icon = 'LuiExtended/media/icons/abilities/ability_fetcherflynest_ashen_wind.dds' }, -- Fetcherfly Storm (Fetcherfly Hive Golem)
     [92075] = { icon = 'LuiExtended/media/icons/abilities/ability_fetcherflynest_ashen_wind.dds' }, -- Fetcherfly Storm (Fetcherfly Hive Golem)
-    [87030] = { icon = 'LuiExtended/media/icons/abilities/ability_fetcherflynest_bombard.dds' }, -- Focused Swarm (Fetcherfly Hive Golem)
-    [87031] = { icon = 'LuiExtended/media/icons/abilities/ability_fetcherflynest_bombard.dds' }, -- Focused Swarm (Fetcherfly Hive Golem)
+    [87030] = { icon = 'LuiExtended/media/icons/abilities/ability_fetcherflygolem_focused_swarm.dds' }, -- Focused Swarm (Fetcherfly Hive Golem)
+    [87031] = { icon = 'LuiExtended/media/icons/abilities/ability_fetcherflygolem_focused_swarm.dds' }, -- Focused Swarm (Fetcherfly Hive Golem)
     
     -- MONSTERS
     [25716] = { icon = 'esoui/art/icons/ability_debuff_stun.dds', name = A.Skill_Lacerate }, -- Stun (Gargoyle)
@@ -6042,14 +6058,16 @@ E.FakeExternalDebuffs = {
 
     -- Animals
     [69073] = {icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', name = A.Skill_Slam, duration = 2000}, -- Knockdown (Bear Orsinium)
-    
     [74336] = { icon = 'LuiExtended/media/icons/abilities/ability_hajmota_bog_burst.dds', name = A.Skill_Bog_Burst, duration = 2000}, -- Bog Burst (Haj Mota)
 
     -- Daedra
-    [50023] = {icon = 'LuiExtended/media/icons/abilities/ability_airatronach_lightning_rod.dds', name = 'Lightning Rod', duration = 4000}, -- Lightning Rod (Air Atronach)
+    [50023] = {icon = 'LuiExtended/media/icons/abilities/ability_airatronach_lightning_rod.dds', name = A.Skill_Lightning_Rod, duration = 4000, ignoreBegin = true}, -- Lightning Rod (Air Atronach)
+    [33551] = {icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_chilling_aura.dds', name = A.Skill_Chilling_Aura, duration = 0}, -- Chilling Aura (Frost Atronach) -- TEMPORARY FIX FOR THIS DEBUFF
+    [51646] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds', name = A.Skill_Frozen_Ground, duration = 0}, -- Frozen Ground (Frost Atronach) -- TEMPORARY FIX FOR THIS DEBUFF
+    
     [24700] = {icon = 'LuiExtended/media/icons/abilities/ability_ogrim_body_slam.dds', name = A.Skill_Body_Slam, duration = 2000}, -- Body Slam (Ogrim)
-    [12287] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds', name = 'Storm Bound', duration = 8000}, -- Storm Bound (Storm Atronach) (DOT)
-    [12288] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds', name = 'Storm Bound', duration = 8000}, -- Storm Bound (Storm Atronach) (Snare)
+    [12287] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds', name = A.Skill_Storm_Bound, duration = 8000}, -- Storm Bound (Storm Atronach) (DOT)
+    [12288] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds', name = A.Skill_Storm_Bound, duration = 8000}, -- Storm Bound (Storm Atronach) (Snare)
 
     -- Insects
     [9237] = {icon = 'LuiExtended/media/icons/abilities/ability_wasp_inject_larva.dds', name = A.Skill_Inject_Larva, duration = 10000}, -- Larva Gestation (Giant Wasp)
@@ -6067,8 +6085,8 @@ E.FakeExternalDebuffs = {
     -- CYRODIIL
     [72641] = {icon = 'esoui/art/icons/ability_1handed_005.dds', name = A.Skill_Power_Bash, duration = 2000}, -- Power Bash (Cryodiil Guard T2)
 
-    [55862] = {icon = 'LuiExtended/media/icons/abilities/ability_stormbound.dds', name = 'Storm Bound', duration = 8000}, --Storm Bound --Used by Craglorn Boss Wamasu (DOT)
-    [55863] = {icon = 'LuiExtended/media/icons/abilities/ability_stormbound.dds', name = 'Storm Bound', duration = 8000}, --Storm Bound --Used by Craglorn Boss Wamasu (Snare)
+    [55862] = {icon = 'LuiExtended/media/icons/abilities/ability_stormbound.dds', name = A.Skill_Storm_Bound, duration = 8000}, --Storm Bound --Used by Craglorn Boss Wamasu (DOT)
+    [55863] = {icon = 'LuiExtended/media/icons/abilities/ability_stormbound.dds', name = A.Skill_Storm_Bound, duration = 8000}, --Storm Bound --Used by Craglorn Boss Wamasu (Snare)
 
     ----------------------------------------------------------------
     -- ORSINIUM EVENTS ---------------------------------------------
@@ -6299,8 +6317,6 @@ E.FakeStagger = {
     [35115] = {icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = A.Skill_Extended_Chains, duration = 1000},  -- Pull (Extended Chains) (Cyrodiil Guard T2)
     [47020] = {icon = 'esoui/art/icons/ability_dragonknight_005_a.dds', name = A.Skill_Puncturing_Chains, duration = 1000}, -- Pull (Puncturing Chains) (Cyrodiil Guard T2)
     [52878] = {icon = 'esoui/art/icons/ability_dragonknight_005_b.dds', name = 'Empowering Chains', duration = 433}, -- Pull (Empowering Chains) (Rkindaleft - Sharga the Firestarter)
-    [33551] = {icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_chilling_aura.dds', name = 'Chilling Aura', duration = 1100}, -- Chilling Aura (Frost Atronach) -- TEMPORARY FIX FOR THIS DEBUFF
-    [51646] = {icon = 'LuiExtended/media/icons/abilities/ability_mage_snare_frost.dds', name = 'Frozen Ground', duration = 1000}, -- Frozen Ground (Frost Atronach) -- TEMPORARY FIX FOR THIS DEBUFF
     [48294] = {icon = 'esoui/art/icons/achievement_update11_dungeons_029.dds', name = 'Consuming Omen', duration = 10000}, -- Consuming Omen (Troll - Ranged) -- TEMPORARY FIX FOR THIS DEBUFF (Since it can't be removed by Purge)
     [64322] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Glacial Spikes', duration = 1000}, -- Glacial Spikes (For King and Glory - Urfon Ice-Heart) - TEMP FIX
     [72479] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Glacial Spikes', duration = 1000}, -- Glacial Spikes (For King and Glory - Urfon Ice-Heart) - TEMP FIX

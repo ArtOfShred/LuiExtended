@@ -255,7 +255,7 @@ LUIE.AlertTable = {
     
     [61360] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true }, -- Infectious Swarm (Necrotic Hoarvor)
     [61244] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3}, -- Fevered Retch (Necrotic Hoarvor)
-    [61427] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, skipcheck = true }, -- Necrotic Explosion (Necrotic Hoarvor)
+    [61427] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, skipcheck = true, refire = 1000 }, -- Necrotic Explosion (Necrotic Hoarvor)
     
     [48539] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, auradetect = true}, -- Focused Charge (Kwama Worker)
     
@@ -269,20 +269,30 @@ LUIE.AlertTable = {
     [26412] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Thunderstrikes (Thunderbug)
     
     [73172] = { block = false, dodge = true, avoid = false, interrupt = true, priority = 3}, -- Swarm (Kotu Gava)
-    [73199] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, skipcheck = true }, -- Swarmburst (Kotu Gava Broodmother)
+    [73199] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, skipcheck = true, refire = 1000 }, -- Swarmburst (Kotu Gava Broodmother)
     
     [85645] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Bombard (Fetcherfly Nest)
     [87126] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, refire = 8000, skipcheck = true }, -- Heat Vents (Fetcherfly Nest)
     
     [92078] = { destroy = true, refire = 1000, priority = 2, eventdetect = true, skipcheck = true }, -- Colonize (Fetcherfly Hive Golem)
-    [87062] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Fetcherfly Storm (Fetcherfly Hive Golem)
-    [87030] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Focused Swarm (Fetcherfly Hive Golem)
+    [87062] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 2 }, -- Fetcherfly Storm (Fetcherfly Hive Golem)
+    [87030] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 2 }, -- Focused Swarm (Fetcherfly Hive Golem)
     
     -- DAEDRA
     [48121] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Heavy Attack (Air Atronach)
     [48137] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3}, -- Tornado (Air Atronach)
-    [50021] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3}, -- Ice Vortex (Air Atronach)
-    [50023] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, refire = 600}, -- Lightning Rod (Air Atronach)
+    [51281] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, refire = 1500 }, -- Flame Tornado (Air Atronach)
+    [50021] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Ice Vortex (Air Atronach)
+    [50023] = { block = true, dodge = false, avoid = false, interrupt = true, priority = 3, refire = 1000}, -- Lightning Rod (Air Atronach)
+    
+    [26324] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Lava Geyser (Flame Atronach)
+    [50216] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, skipcheck = true, refire = 1000 }, -- Combustion (Flame Atronach)
+    
+    [5017] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2 }, -- Hoarfrost Fist (Frost Atronach)
+    [33502] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2 }, -- Frozen Ground (Frost Atronach)
+    
+    [35220] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 2, eventdetect = true }, -- Impending Storm (Storm Atronach)
+    [4864] = { block = false, dodge = true, avoid = false, interrupt = false, priority = 2, skipcheck = true }, -- Storm Bound (Storm Atronach)
     
     
     -- FLESH COLOSSUS (100% GOOD)

@@ -483,6 +483,17 @@ A.Skill_Zap_Pulse                   = GetString(SI_LUIE_SKILL_ZAP_PULSE)
 A.Skill_Leeching_Bite               = GetString(SI_LUIE_SKILL_LEECHING_BITE)
 A.Skill_Fetcherfly_Colony           = GetString(SI_LUIE_SKILL_FETCHERFLY_COLONY)
 
+-- Daedra
+A.Skill_Empower_Atronach_Flame      = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME)
+A.Skill_Empower_Atronach_Frost      = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST)
+A.Skill_Empower_Atronach_Storm      = GetString(SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM)
+A.Skill_Lightning_Rod               = 50023
+A.Skill_Lightning_Pulse             = GetString(SI_LUIE_SKILL_LIGHTNING_PULSE)
+A.Skill_Radiance                    = 4891
+A.Skill_Chilling_Aura               = 33549
+A.Skill_Frozen_Ground               = 33502
+A.Skill_Storm_Bound                 = 4864
+
 -- Monsters
 A.Skill_Assault                     = 4304 -- Ice Wraith
 

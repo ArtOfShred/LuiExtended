@@ -2232,3 +2232,7 @@ ZO_CreateStringId("SI_LUIE_SKILL_RIP_AND_TEAR",                         "Rip and
 ZO_CreateStringId("SI_LUIE_SKILL_LEECHING_BITE",                        "Leeching Bite")
 ZO_CreateStringId("SI_LUIE_SKILL_ZAP_PULSE",                            "Zap Pulse")
 ZO_CreateStringId("SI_LUIE_SKILL_FETCHERFLY_COLONY",                    "Fetcherfly Colony")
+ZO_CreateStringId("SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME",               "Empower Atronach: Flame")
+ZO_CreateStringId("SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST",               "Empower Atronach: Frost")
+ZO_CreateStringId("SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM",               "Empower Atronach: Storm")
+ZO_CreateStringId("SI_LUIE_SKILL_LIGHTNING_PULSE",                      "Lightning Pulse")

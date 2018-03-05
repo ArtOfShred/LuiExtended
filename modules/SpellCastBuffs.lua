@@ -518,6 +518,8 @@ function SCB.Initialize( enabled )
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, SCB.DuelStart)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_FINISHED, SCB.DuelEnd)
     
+    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_COMBAT_STATE, SCB.PlayerCombatState)
+    
     -- Always show debug effects on development account
     if GetDisplayName() == "@ArtOfShredLegacy" then
         SCB.SV.ShowDebugCombat = true
@@ -1476,17 +1478,21 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
  
     local unbreakable
     local stack
+    local internalStack
     local iconName
     local effectName
     local duration
     local effectType
     
     if E.EffectOverride[abilityId] then
+        if E.EffectOverride[abilityId].hideReduce and SCB.SV.HideReduce then return end
         unbreakable = E.EffectOverride[abilityId].unbreakable or 0
         stack = E.EffectOverride[abilityId].stack or 0
+        internalStack = E.EffectOverride[abilityId].internalStack or nil
     else
         unbreakable = 0
         stack = 0
+        internalStack = nil
     end
     
     -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by target)
@@ -1514,7 +1520,28 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
     -- Creates fake debuff icons for debuffs without an aura - These refresh on reapplication/removal (Applied on player by target)
     if E.FakeExternalDebuffs[abilityId] and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
         if E.FakeExternalDebuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then return end -- Bail out if we ignore begin events
-        g_effectsList.player2[ abilityId ] = nil
+        
+        if internalStack then
+            if g_effectsList.player2[abilityId] then
+                -- If the aura faded then remove a stack, otherwise add a stack
+                if result == ACTION_RESULT_EFFECT_FADED then
+                    g_effectsList.player2[abilityId].internalStack = g_effectsList.player2[abilityId].internalStack - 1
+                    if g_effectsList.player2[abilityId].internalStack == 0 then
+                        g_effectsList.player2[abilityId] = nil
+                    end
+                else
+                    internalStack = g_effectsList.player2[abilityId].internalStack + 1
+                end
+            else
+                -- Just make sure the aura didn't fade before applying for some reason
+                if result ~= ACTION_RESULT_EFFECT_FADED then
+                    internalStack = internalStack + 1
+                end
+            end
+        else
+            g_effectsList.player2[ abilityId ] = nil
+        end
+        
         iconName = E.FakeExternalDebuffs[abilityId].icon
         effectName = E.FakeExternalDebuffs[abilityId].name
         duration = E.FakeExternalDebuffs[abilityId].duration
@@ -1529,6 +1556,7 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
             dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
             forced = "short",
             restart=true, iconNum=0,
+            internalStack = internalStack,
             unbreakable=unbreakable }
         end
     end
@@ -1641,6 +1669,7 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
     local effectType
     
     if E.EffectOverride[abilityId] then
+        if E.EffectOverride[abilityId].hideReduce and SCB.SV.HideReduce then return end
         unbreakable = E.EffectOverride[abilityId].unbreakable or 0
         stack = E.EffectOverride[abilityId].stack or 0
     else
@@ -1817,13 +1846,15 @@ function SCB.ReloadEffects(unitTag)
     if not SCB.SV.HideTargetBuffs then
         local unitName = GetUnitName(unitTag)
         -- We need to check to make sure the mob is not dead, and also check to make sure the unitTag is not the player (just in case someones name exactly matches that of a boss NPC)
-        if E.IsBossMob[unitName] and GetUnitReaction(unitTag) == UNIT_REACTION_HOSTILE and not (IsUnitDead(unitTag) and unitTag == "player") then
-            g_effectsList.reticleover1[ "Boss CC Immunity" ] = {
-            type=1,
-            name=A.Innate_CC_Immunity, icon="LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds",
-            dur=0, starts=1, ends=nil,
-            forced = "short",
-            restart=true, iconNum=0 }
+        if E.AddNameAura[unitName] and GetUnitReaction(unitTag) == UNIT_REACTION_HOSTILE and not (IsUnitDead(unitTag) and unitTag == "player") and IsUnitInCombat(unitTag) then
+            for k, v in ipairs(E.AddNameAura[unitName]) do
+                g_effectsList.reticleover1[ "Name Specific Buff" .. k ] = {
+                type=1,
+                name= v.name, icon= v.icon,
+                dur=0, starts=1, ends=nil,
+                forced = "short",
+                restart=true, iconNum=0 }
+            end
         end
     end
 
@@ -1938,6 +1969,27 @@ function SCB.ReloadEffects(unitTag)
             end
         end
     end
+end
+
+function SCB.PlayerCombatState(eventCode, inCombat)
+
+    if not SCB.SV.HideTargetBuffs then
+        local unitName = GetUnitName('reticleover')
+        if unitName == nil or unitName == "" then return end
+        
+        -- We need to check to make sure the mob is not dead, and also check to make sure the unitTag is not the player (just in case someones name exactly matches that of a boss NPC)
+        if E.AddNameAura[unitName] and GetUnitReaction('reticleover') == UNIT_REACTION_HOSTILE and not IsUnitDead('reticleover') and IsUnitInCombat('reticleover') then
+            for k, v in ipairs(E.AddNameAura[unitName]) do
+                g_effectsList.reticleover1[ "Name Specific Buff" .. k ] = {
+                type=1,
+                name= v.name, icon= v.icon,
+                dur=0, starts=1, ends=nil,
+                forced = "short",
+                restart=true, iconNum=0 }
+            end
+        end
+    end
+
 end
 
 -- Process new ability buff effects
