@@ -493,6 +493,8 @@ A.Skill_Radiance                    = 4891
 A.Skill_Chilling_Aura               = 33549
 A.Skill_Frozen_Ground               = 33502
 A.Skill_Storm_Bound                 = 4864
+A.Skill_Stomp                       = 91848
+A.Skill_Dusks_Howl                  = 6412
 
 -- Monsters
 A.Skill_Assault                     = 4304 -- Ice Wraith
