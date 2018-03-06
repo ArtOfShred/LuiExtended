@@ -258,7 +258,9 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     local zos_GetAbilityIcon = GetAbilityIcon
     GetAbilityIcon = function(abilityId)
         local icon = zos_GetAbilityIcon(abilityId)
-        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then icon = LUIE.Effects.EffectOverride[abilityId].icon end
+        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then 
+            icon = LUIE.Effects.EffectOverride[abilityId].icon
+        end
         return(icon)
     end
     
@@ -267,7 +269,9 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     local zos_GetAbilityName = GetAbilityName
     GetAbilityName = function(abilityId)
         local abilityName = zos_GetAbilityName(abilityId)
-        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then abilityName = LUIE.Effects.EffectOverride[abilityId].name end
+        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then
+            abilityName = LUIE.Effects.EffectOverride[abilityId].name
+        end
         return(abilityName)
     end
     
@@ -276,15 +280,21 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     local zos_GetArtificialEffectInfo = GetArtificialEffectInfo
     GetArtificialEffectInfo = function(artificialEffectId)
         local displayName, iconFile, effectType, sortOrder, timeStarted, timeEnding = zos_GetArtificialEffectInfo(artificialEffectId)
-        if LUIE.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Effects.ArtificialEffectOverride[artificialEffectId].icon then iconFile = LUIE.Effects.ArtificialEffectOverride[artificialEffectId].icon end
-        if LUIE.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Effects.ArtificialEffectOverride[artificialEffectId].name then displayName = LUIE.Effects.ArtificialEffectOverride[artificialEffectId].name end
+        if LUIE.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Effects.ArtificialEffectOverride[artificialEffectId].icon then
+            iconFile = LUIE.Effects.ArtificialEffectOverride[artificialEffectId].icon
+        end
+        if LUIE.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Effects.ArtificialEffectOverride[artificialEffectId].name then
+            displayName = LUIE.Effects.ArtificialEffectOverride[artificialEffectId].name
+        end
         return displayName, iconFile, effectType, sortOrder, timeStarted, timeEnding
     end
     
     local zos_GetSynergyInfo = GetSynergyInfo
     GetSynergyInfo = function()
         local synergyName, iconFilename = zos_GetSynergyInfo()
-        if LUIE.Effects.SynergyNameOverride[synergyName] then iconFilename = LUIE.Effects.SynergyNameOverride[synergyName] end
+        if LUIE.Effects.SynergyNameOverride[synergyName] then
+            iconFilename = LUIE.Effects.SynergyNameOverride[synergyName]
+        end
         return synergyName, iconFilename
     end
     
@@ -304,127 +314,123 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         end
     end
     
-    STATS.AddLongTermEffects = function(self, container, effectsRowPool)
+    STATS.AddLongTermEffects = function(self, container, effectsRowPool)      
+		local function UpdateEffects(eventCode, changeType, buffSlot, buffName, unitTag, startTime, endTime, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId)
+			if (not unitTag or unitTag == "player") and not container:IsHidden() then
+				effectsRowPool:ReleaseAllObjects()
+					
+				local effectsRows = {}
+
+				--Artificial effects--
+				for effectId in ZO_GetNextActiveArtificialEffectIdIter do
+					local displayName, iconFile, effectType, sortOrder = GetArtificialEffectInfo(effectId)
+					local effectsRow = effectsRowPool:AcquireObject()
+					effectsRow.name:SetText(strformat(SI_ABILITY_TOOLTIP_NAME, displayName))
+					effectsRow.icon:SetTexture(iconFile)
+					effectsRow.effectType = effectType
+					effectsRow.time:SetHidden(true)
+					effectsRow.sortOrder = sortOrder
+					effectsRow.tooltipTitle = strformat(SI_ABILITY_TOOLTIP_NAME, displayName)
+					effectsRow.effectId = effectId
+					effectsRow.isArtificial = true
+
+					table.insert(effectsRows, effectsRow)    
+				end
+					
+				local counter = 1
+				local trackBuffs = { }
+				for i = 1, GetNumBuffs("player") do
+					local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId = GetUnitBuffInfo("player", i)
+						
+					trackBuffs[counter] = {
+						buffName = buffName,
+						startTime = startTime,
+						endTime = endTime,
+						buffSlot = buffSlot,
+						stackCount = stackCount,
+						iconFile = iconFile,
+						buffType = buffType,
+						effectType = effectType,
+						abilityType = abilityType,
+						statusEffectType = statusEffectType,
+						abilityId = abilityId
+					}
+					counter = counter + 1
+				end
+				   
+				-- Heavy handed - but functional way to mark duplicate abilities to not display (Duplicate shuffle auras, etc) by only displaying the one with the latest end time.
+				for i = 1, #trackBuffs do
+					local compareId = trackBuffs[i].abilityId
+					local compareTime = trackBuffs[i].endTime
+					-- Only re-iterate and compare if this ability is on the override table, this way we avoid as much of this double loop as possible.
+					if LUIE.Effects.EffectOverride[compareId] and LUIE.Effects.EffectOverride[compareId].noDuplicate then
+						for k, v in pairs(trackBuffs) do
+							-- Only remove the lower duration effects that were cast previously.
+							if v.abilityId == compareId and v.endTime < compareTime then
+								v.markForRemove = true
+							end
+						end
+					end
+				end         
+					
+				for i = 1, #trackBuffs do
+					local buffName = trackBuffs[i].buffName
+					local startTime =  trackBuffs[i].startTime
+					local endTime =  trackBuffs[i].endTime
+					local buffSlot =  trackBuffs[i].buffSlot
+					local stackCount =  trackBuffs[i].stackCount
+					local iconFile =  trackBuffs[i].iconFile
+					local buffType =  trackBuffs[i].buffType
+					local effectType =  trackBuffs[i].effectType
+					local abilityType =  trackBuffs[i].abilityType
+					local statusEffectType =  trackBuffs[i].statusEffectType
+					local abilityId =  trackBuffs[i].abilityId
+					local markForRemove = trackBuffs[i].markForRemove or false
+						
+					local tooltipText = GetAbilityEffectDescription(buffSlot)
+					--if LUIE.Effects.TooltipOverride[abilityId] then tooltipText = LUIE.Effects.TooltipOverride[abilityId] end
+					-- Have to trim trailing spaces on the end of tooltips
+					if tooltipText ~= "" then 
+						tooltipText = string.match(tooltipText, ".*%S")
+					end
+					if buffSlot > 0 and buffName ~= "" and not (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide) and not markForRemove then
+						local effectsRow = effectsRowPool:AcquireObject()
+						effectsRow.name:SetText(strformat(SI_ABILITY_TOOLTIP_NAME, buffName))
+						effectsRow.icon:SetTexture(iconFile)
+						effectsRow.tooltipTitle = strformat(SI_ABILITY_TOOLTIP_NAME, buffName)
+						effectsRow.tooltipText = (tooltipText)
+						local duration = startTime - endTime
+						effectsRow.time:SetHidden(duration == 0)
+						effectsRow.time.endTime = endTime
+						effectsRow.effectType = effectType
+						effectsRow.buffSlot = buffSlot
+						effectsRow.isArtificial = false
+
+						table.insert(effectsRows, effectsRow)
+					end
+				end
+
+				table.sort(effectsRows, EffectsRowComparator)
+				local prevRow
+				for i, effectsRow in ipairs(effectsRows) do
+					if(prevRow) then
+						effectsRow:SetAnchor(TOPLEFT, prevRow, BOTTOMLEFT)
+					else
+						effectsRow:SetAnchor(TOPLEFT, nil, TOPLEFT, 5, 0)
+					end
+					effectsRow:SetHidden(false)
+					prevRow = effectsRow
+				end
+			end
+		end
            
-        local function UpdateEffects(eventCode, changeType, buffSlot, buffName, unitTag, startTime, endTime, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId)
-            if (not unitTag or unitTag == "player") and not container:IsHidden() then
-                effectsRowPool:ReleaseAllObjects()
-                
-                local effectsRows = {}
-
-                --Artificial effects--
-                for effectId in ZO_GetNextActiveArtificialEffectIdIter do
-                    local displayName, iconFile, effectType, sortOrder = GetArtificialEffectInfo(effectId)
-
-                    local effectsRow = effectsRowPool:AcquireObject()
-                    effectsRow.name:SetText(strformat(SI_ABILITY_TOOLTIP_NAME, displayName))
-                    effectsRow.icon:SetTexture(iconFile)
-                    effectsRow.effectType = effectType
-                    effectsRow.time:SetHidden(true)
-                    effectsRow.sortOrder = sortOrder
-                    effectsRow.tooltipTitle = strformat(SI_ABILITY_TOOLTIP_NAME, displayName)
-                    effectsRow.effectId = effectId
-                    effectsRow.isArtificial = true
-
-                    table.insert(effectsRows, effectsRow)
-                        
-                end
-                
-                local counter = 1
-                local trackBuffs = { }
-                for i = 1, GetNumBuffs("player") do
-                    local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId = GetUnitBuffInfo("player", i)
-                    
-                    trackBuffs[counter] = {
-                        buffName = buffName,
-                        startTime = startTime,
-                        endTime = endTime,
-                        buffSlot = buffSlot,
-                        stackCount = stackCount,
-                        iconFile = iconFile,
-                        buffType = buffType,
-                        effectType = effectType,
-                        abilityType = abilityType,
-                        statusEffectType = statusEffectType,
-                        abilityId = abilityId
-                    }
-                    counter = counter + 1
-                end
-                
-                -- Heavy handed - but functional way to mark duplicate abilities to not display (Duplicate shuffle auras, etc) by only displaying the one with the latest end time.
-                for i = 1, #trackBuffs do
-                    local compareId = trackBuffs[i].abilityId
-                    local compareTime = trackBuffs[i].endTime
-                    -- Only re-iterate and compare if this ability is on the override table, this way we avoid as much of this double loop as possible.
-                    if LUIE.Effects.EffectOverride[compareId] and LUIE.Effects.EffectOverride[compareId].noDuplicate then
-                        for k, v in pairs(trackBuffs) do
-                            -- Only remove the lower duration effects that were cast previously.
-                            if v.abilityId == compareId and v.endTime < compareTime then
-                                v.markForRemove = true
-                            end
-                        end
-                    end
-                end         
-                
-                for i = 1, #trackBuffs do
-                    local buffName = trackBuffs[i].buffName
-                    local startTime =  trackBuffs[i].startTime
-                    local endTime =  trackBuffs[i].endTime
-                    local buffSlot =  trackBuffs[i].buffSlot
-                    local stackCount =  trackBuffs[i].stackCount
-                    local iconFile =  trackBuffs[i].iconFile
-                    local buffType =  trackBuffs[i].buffType
-                    local effectType =  trackBuffs[i].effectType
-                    local abilityType =  trackBuffs[i].abilityType
-                    local statusEffectType =  trackBuffs[i].statusEffectType
-                    local abilityId =  trackBuffs[i].abilityId
-                    local markForRemove = trackBuffs[i].markForRemove or false
-                    
-                    local tooltipText = GetAbilityEffectDescription(buffSlot)
-                    --if LUIE.Effects.TooltipOverride[abilityId] then tooltipText = LUIE.Effects.TooltipOverride[abilityId] end
-                    -- Have to trim trailing spaces on the end of tooltips
-                    if tooltipText ~= "" then tooltipText = string.match(tooltipText, ".*%S") end
-                    if buffSlot > 0 and buffName ~= "" and not (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide) and not markForRemove then
-                        local effectsRow = effectsRowPool:AcquireObject()
-                        effectsRow.name:SetText(strformat(SI_ABILITY_TOOLTIP_NAME, buffName))
-                        effectsRow.icon:SetTexture(iconFile)
-                        effectsRow.tooltipTitle = strformat(SI_ABILITY_TOOLTIP_NAME, buffName)
-                        effectsRow.tooltipText = (tooltipText)
-                        local duration = startTime - endTime
-                        effectsRow.time:SetHidden(duration == 0)
-                        effectsRow.time.endTime = endTime
-                        effectsRow.effectType = effectType
-                        effectsRow.buffSlot = buffSlot
-                        effectsRow.isArtificial = false
-
-                        table.insert(effectsRows, effectsRow)
-                    end
-                end
-
-                table.sort(effectsRows, EffectsRowComparator)
-                local prevRow
-                for i, effectsRow in ipairs(effectsRows) do
-                    if(prevRow) then
-                        effectsRow:SetAnchor(TOPLEFT, prevRow, BOTTOMLEFT)
-                    else
-                        effectsRow:SetAnchor(TOPLEFT, nil, TOPLEFT, 5, 0)
-                    end
-                    effectsRow:SetHidden(false)
-
-                    prevRow = effectsRow
-                end
-
-            end
-        end
-           
-       container:RegisterForEvent(EVENT_EFFECT_CHANGED, UpdateEffects)
-       --container:AddFilterForEvent(EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "player")
-       container:RegisterForEvent(EVENT_EFFECTS_FULL_UPDATE, UpdateEffects)
-       container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_ADDED, UpdateEffects)
-       container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_REMOVED, UpdateEffects)
-       container:SetHandler("OnEffectivelyShown", UpdateEffects)
-       
-    end
+		container:RegisterForEvent(EVENT_EFFECT_CHANGED, UpdateEffects)
+		--container:AddFilterForEvent(EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "player")
+		container:RegisterForEvent(EVENT_EFFECTS_FULL_UPDATE, UpdateEffects)
+		container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_ADDED, UpdateEffects)
+		container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_REMOVED, UpdateEffects)
+		container:SetHandler("OnEffectivelyShown", UpdateEffects)
+	end
     
     ZO_StatsActiveEffect_OnMouseEnter = function(control)
         InitializeTooltip(GameTooltip, control, RIGHT, -15)
@@ -504,7 +510,9 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         
         -- Added function - Replace icons if needed
         local slotName = GetSlotName(slotId)
-        if LUIE.Effects.BarNameOverride[slotName] then slotIcon = LUIE.Effects.BarNameOverride[slotName] end
+        if LUIE.Effects.BarNameOverride[slotName] then
+			slotIcon = LUIE.Effects.BarNameOverride[slotName]
+		end
 
         slotObject.slot:SetHidden(false)
         slotObject.hasAction = true
@@ -543,14 +551,12 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         slotObject:ClearCount()
     end
 
-    SetupSlotHandlers =
-    {
+    SetupSlotHandlers = {
         [ACTION_TYPE_ABILITY]       = SetupAbilitySlot,
         [ACTION_TYPE_ITEM]          = SetupItemSlot,
         [ACTION_TYPE_SIEGE_ACTION]  = SetupSiegeActionSlot,
         [ACTION_TYPE_COLLECTIBLE]   = SetupCollectibleActionSlot,
-    }
-    
+    } 
 end
 
 local delayBuffer       = {}
@@ -726,7 +732,6 @@ function LUIE.SlashHome()
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG)))
         end
     end
-
 end
 
 function LUIE.SlashRegroup()
@@ -1106,7 +1111,7 @@ function LUIE.SlashGuildQuit(guildnumber)
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-
+	
     -- If neither of the above errors were triggered, leave the guild number.
     GuildLeave(guildnumber)
 end
@@ -1214,7 +1219,6 @@ function LUIE.SlashGuildKick(option)
 end
  
 function LUIE.SlashFriend(option)
-
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME))
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
@@ -1223,7 +1227,6 @@ function LUIE.SlashFriend(option)
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-    
     RequestFriend(option)
 end
 
@@ -1254,7 +1257,6 @@ AddIgnore = function(option)
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-
 end
 
 function LUIE.SlashIgnore(option)
@@ -1364,7 +1366,6 @@ function LUIE.SlashTrade(option)
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-    
     TradeInviteByName(option)
 end
 
@@ -1455,7 +1456,6 @@ function LUIE.SlashVoteKick(option)
 end
 
 function LUIE.SlashCampaignQ(option)
-
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NONAME))
         if LUIE.SV.TempAlertCampaign then
@@ -1505,7 +1505,6 @@ function LUIE.SlashCampaignQ(option)
         ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN) )
     end
     PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-
 end
 
 function LUIE.SlashInvite(option)
@@ -1537,7 +1536,6 @@ function LUIE.SlashInvite(option)
 end 
 
 -- Slash Commands
--- Safe commands
 SLASH_COMMANDS["/regroup"]      = LUIE.SlashRegroup
 SLASH_COMMANDS["/disband"]      = LUIE.SlashDisband
 SLASH_COMMANDS["/leave"]        = LUIE.SlashGroupLeave
