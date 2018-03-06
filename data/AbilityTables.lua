@@ -16,7 +16,6 @@ A.Skill_Major_Vitality              = 61275
 A.Skill_Minor_Magickasteal          = 40114
 A.Skill_Minor_Sorcery               = 62799
 A.Skill_Minor_Brutality             = 61798
-
 A.Skill_Off_Balance                 = 2727
 A.Skill_Off_Balace_Immunity         = 102771
 
@@ -92,7 +91,6 @@ A.Proc_Chill                        = 21481
 A.Proc_Chilled                      = 7145
 A.Proc_Poisoned                     = 21929
 A.Proc_Concussion                   = 21487
-
 A.Proc_Explosion                    = 21128
 A.Proc_Venom                        = 21930
 A.Proc_Pestilence                   = 21928
@@ -105,7 +103,6 @@ A.Potion_Ravage_Health              = 46111
 A.Potion_Restore_Health             = 45221
 A.Potion_Restore_Magicka            = 45223
 A.Potion_Restore_Stamina            = 45225
-
 A.Poison_Creeping_Drain_Health      = 79701
 A.Poison_Lingering_Restore_Health   = 79702
 A.Poison_Stealth_Draining_Poison    = GetString(SI_LUIE_SKILL_POISON_STEALTH_DRAIN)
@@ -283,7 +280,6 @@ A.Skill_Power_Lash                  = 20824
 
 A.Skill_Shackle                     = 32905
 A.Skill_Standard_of_Might           = 32947
-
 
 A.Skill_Spiked_Armor                = 20319
 A.Skill_Hardened_Armor              = 20328
@@ -493,6 +489,8 @@ A.Skill_Radiance                    = 4891
 A.Skill_Chilling_Aura               = 33549
 A.Skill_Frozen_Ground               = 33502
 A.Skill_Storm_Bound                 = 4864
+A.Skill_Stomp                       = 91848
+A.Skill_Dusks_Howl                  = 6412
 
 -- Monsters
 A.Skill_Assault                     = 4304 -- Ice Wraith

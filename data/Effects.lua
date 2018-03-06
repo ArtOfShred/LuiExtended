@@ -24,7 +24,6 @@ E.IsToggle = {
     [A.Innate_Gallop]                       = true, -- Mount Sprint (Generic) (Innate) -- NOTE: Renamed to Gallop   
     [A.Skill_Siphoning_Strikes]             = true, -- Siphoning Strikes (Nightblade) -- For 0 duration NPC ability only
     [A.Skill_Magelight]                     = true, -- Magelight (Soulbrander) -- For 0 duration NPC ability only
-    
     [A.Toggled_Unstable_Familiar]           = true, -- Summon Unstable Familiar (Sorcerer)
     [A.Toggled_Unstable_Clannfear]          = true, -- Summon Unstable Clannfear (Sorcerer)
     [A.Toggled_Volatile_Familiar]           = true, -- Summon Volatile Familiar (Sorcerer)
@@ -184,7 +183,6 @@ E.IsFoodBuff = {
 }
 
 E.IsExperienceBuff = {
-
     -- CONSUMABLE
     [64210] = true, -- Psijic Ambrosia
     [89683] = true, -- Aetherial Ambrosia
@@ -219,53 +217,49 @@ E.IsGroundMine = {
 }
 
 E.IsGroundMineAura = {
+	-- Sets
+	[75930] = true, -- Deadric Mines (Eternal Hunt)
 
--- Sets
-[75930] = true, -- Deadric Mines (Eternal Hunt)
+	-- Fighter's Guild
+	[35750] = true, -- Trap Beast (Trap Beast - Rank 1)
+	[42706] = true, -- Trap Beast (Trap Beast - Rank 2)
+	[42713] = true, -- Trap Beast (Trap Beast - Rank 3)
+	[42720] = true, -- Trap Beast (Trap Beast - Rank 4)
 
--- Fighter's Guild
-[35750] = true, -- Trap Beast (Trap Beast - Rank 1)
-[42706] = true, -- Trap Beast (Trap Beast - Rank 2)
-[42713] = true, -- Trap Beast (Trap Beast - Rank 3)
-[42720] = true, -- Trap Beast (Trap Beast - Rank 4)
+	[40382] = true, -- Rearming Trap (Rearming Trap - Rank 1)
+	[42727] = true, -- Rearming Trap (Rearming Trap - Rank 2)
+	[42737] = true, -- Rearming Trap (Rearming Trap - Rank 3)
+	[42747] = true, -- Rearming Trap (Rearming Trap - Rank 4)
 
-[40382] = true, -- Rearming Trap (Rearming Trap - Rank 1)
-[42727] = true, -- Rearming Trap (Rearming Trap - Rank 2)
-[42737] = true, -- Rearming Trap (Rearming Trap - Rank 3)
-[42747] = true, -- Rearming Trap (Rearming Trap - Rank 4)
-
-[40372] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
-[42757] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 2)
-[42764] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 3)
-[42771] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 4)
-
+	[40372] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+	[42757] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 2)
+	[42764] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 3)
+	[42771] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 4)
 }
 
 E.IsGroundMineDamage = {
+	-- Sets
+	[75929] = true, -- Eternal Hunt
 
--- Sets
-[75929] = true, -- Eternal Hunt
+	-- Fighter's Guild
+	[35754] = true, -- Trap Beast (Trap Beast - Rank 1)
+	[42712] = true, -- Trap Beast (Trap Beast - Rank 2)
+	[42719] = true, -- Trap Beast (Trap Beast - Rank 3)
+	[42726] = true, -- Trap Beast (Trap Beast - Rank 4)
 
--- Fighter's Guild
-[35754] = true, -- Trap Beast (Trap Beast - Rank 1)
-[42712] = true, -- Trap Beast (Trap Beast - Rank 2)
-[42719] = true, -- Trap Beast (Trap Beast - Rank 3)
-[42726] = true, -- Trap Beast (Trap Beast - Rank 4)
+	[40389] = true, -- Rearming Trap (Rank 1)
+	[40392] = true, -- Rearming Trap (Rank 1)
+	[42731] = true, -- Rearming Trap (Rank 2)
+	[42736] = true, -- Rearming Trap (Rank 2)
+	[42741] = true, -- Rearming Trap (Rank 3)
+	[42746] = true, -- Rearming Trap (Rank 3)
+	[42751] = true, -- Rearming Trap (Rank 4)
+	[42756] = true, -- Rearming Trap (Rank 4)
 
-[40389] = true, -- Rearming Trap (Rank 1)
-[40392] = true, -- Rearming Trap (Rank 1)
-[42731] = true, -- Rearming Trap (Rank 2)
-[42736] = true, -- Rearming Trap (Rank 2)
-[42741] = true, -- Rearming Trap (Rank 3)
-[42746] = true, -- Rearming Trap (Rank 3)
-[42751] = true, -- Rearming Trap (Rank 4)
-[42756] = true, -- Rearming Trap (Rank 4)
-
-[40376] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
-[42761] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 2)
-[42768] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 3)
-[42775] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 4)
-
+	[40376] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
+	[42761] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 2)
+	[42768] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 3)
+	[42775] = true, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 4)
 }
 
 -- Taunts -- TODO: Unused
@@ -309,7 +303,6 @@ E.AbilityIcon = {
 -- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY ID
 -- TODO: Make sure to add all Synergy effects here
 E.DebuffDisplayOverrideId = {
-
     -- Basic (Shared)
     [2727] = true, -- Off-Balance (Generic)
     
@@ -337,10 +330,10 @@ E.DebuffDisplayOverrideId = {
     [92158] = true, -- Raise the Earth (Beastcaller)
     [29597] = true, -- Combustion (Shaman)
     [29598] = true, -- Off Balance (Shaman)
+    [89301] = true, -- Summon Spiderling (Spider Daedra)
     
     -- Insects
     [61372] = true, -- Infectious Swarm (Necrotic Hoarvor)
-    
 }
 
 -- Filter out Debuffs to always display regardless of whether they are sourced from the player - BY NAME
@@ -372,7 +365,6 @@ E.DebuffDisplayOverrideName = {
 -- Optional: name, icon
 -- Required: buff, debuff, ground = true/false
 E.EffectGroundDisplay = {
-
     -- Monster Sets
     [59590] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_bogdan.dds', name = A.Set_Bogdan_the_Nightflame, buff = true, debuff = false, ground = false }, -- Imperial Prison Item Set (Bogdan the Nightflame)
     [97901] = { icon = 'LuiExtended/media/icons/abilities/ability_set_monster_domihaus_stone.dds', buff = true, debuff = false, ground = true }, -- Domihaus (Domihaus) 
@@ -617,190 +609,186 @@ E.EffectGroundDisplay = {
     [40372] = { buff = false, debuff = false, ground = true, stack = 1 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 1)
     [42757] = { buff = false, debuff = false, ground = true, stack = 1 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 2)
     [42764] = { buff = false, debuff = false, ground = true, stack = 1 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 3)
-    [42771] = { buff = false, debuff = false, ground = true, stack = 1 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 4)
-    
+    [42771] = { buff = false, debuff = false, ground = true, stack = 1 }, -- Lightweight Beast Trap (Lightweight Beast Trap - Rank 4)  
 }
 
 -- This will create an effect on the player or target when X skill is detected as active. SCB creates the buff by the name listed here, this way if 3 or 4 effects all need to display for 1 ability, it will only show the one aura.
 E.EffectCreateSkillAura = {
+	-- icon, name
+	-- removeOnEnd -- Remove this aura when one of these effects ends.
 
--- icon, name
--- removeOnEnd -- Remove this aura when one of these effects ends.
+	-- Dragonknight
 
--- Dragonknight
+	-- Templar
+	[26213] = { icon = 'esoui/art/icons/ability_templar_restoring_sigil.dds', name = A.Skill_Restoring_Aura, removeOnEnd = true, consolidate = true }, -- Minor Fortitude (Restoring Aura - All Ranks)
+	[26216] = { icon = 'esoui/art/icons/ability_templar_restoring_sigil.dds', name = A.Skill_Restoring_Aura, removeOnEnd = true, consolidate = true }, -- Minor Intellect (Restoring Aura - All Ranks)
+	[26215] = { icon = 'esoui/art/icons/ability_templar_restoring_sigil.dds', name = A.Skill_Restoring_Aura, removeOnEnd = true, consolidate = true }, -- Minor Endurance (Restoring Aura - All Ranks)
 
--- Templar
-[26213] = { icon = 'esoui/art/icons/ability_templar_restoring_sigil.dds', name = A.Skill_Restoring_Aura, removeOnEnd = true, consolidate = true }, -- Minor Fortitude (Restoring Aura - All Ranks)
-[26216] = { icon = 'esoui/art/icons/ability_templar_restoring_sigil.dds', name = A.Skill_Restoring_Aura, removeOnEnd = true, consolidate = true }, -- Minor Intellect (Restoring Aura - All Ranks)
-[26215] = { icon = 'esoui/art/icons/ability_templar_restoring_sigil.dds', name = A.Skill_Restoring_Aura, removeOnEnd = true, consolidate = true }, -- Minor Endurance (Restoring Aura - All Ranks)
+	[22236] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus, consolidate = true }, -- Major Resolve (Rune Focus - Rank 1)
+	[44820] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus, consolidate = true }, -- Major Ward (Rune Focus - Rank 1)
+	[44822] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus, consolidate = true }, -- Major Resolve (Rune Focus - Rank 2)
+	[44821] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus, consolidate = true }, -- Major Ward (Rune Focus - Rank 2)
+	[44824] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus, consolidate = true }, -- Major Resolve (Rune Focus - Rank 3)
+	[44823] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus, consolidate = true }, -- Major Ward (Rune Focus - Rank 3)
+	[44826] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus, consolidate = true }, -- Major Resolve (Rune Focus - Rank 4)
+	[44825] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus, consolidate = true }, -- Major Ward (Rune Focus - Rank 4)
 
-[22236] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus, consolidate = true }, -- Major Resolve (Rune Focus - Rank 1)
-[44820] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus, consolidate = true }, -- Major Ward (Rune Focus - Rank 1)
-[44822] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus, consolidate = true }, -- Major Resolve (Rune Focus - Rank 2)
-[44821] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus, consolidate = true }, -- Major Ward (Rune Focus - Rank 2)
-[44824] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus, consolidate = true }, -- Major Resolve (Rune Focus - Rank 3)
-[44823] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus, consolidate = true }, -- Major Ward (Rune Focus - Rank 3)
-[44826] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus, consolidate = true }, -- Major Resolve (Rune Focus - Rank 4)
-[44825] = { icon = 'esoui/art/icons/ability_templar_rune_focus.dds', name = A.Skill_Rune_Focus, consolidate = true }, -- Major Ward (Rune Focus - Rank 4)
+	[44828] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus, consolidate = true }, -- Major Resolve (Channeled Focus - Rank 1)
+	[44827] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus, consolidate = true }, -- Major Ward (Channeled Focus - Rank 1)
 
-[44828] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus, consolidate = true }, -- Major Resolve (Channeled Focus - Rank 1)
-[44827] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus, consolidate = true }, -- Major Ward (Channeled Focus - Rank 1)
+	[44830] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus, consolidate = true }, -- Major Resolve (Channeled Focus - Rank 2)
+	[44829] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus, consolidate = true }, -- Major Ward (Channeled Focus - Rank 2)
 
-[44830] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus, consolidate = true }, -- Major Resolve (Channeled Focus - Rank 2)
-[44829] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus, consolidate = true }, -- Major Ward (Channeled Focus - Rank 2)
+	[44832] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus, consolidate = true }, -- Major Resolve (Channeled Focus - Rank 3)
+	[44831] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus, consolidate = true }, -- Major Ward (Channeled Focus - Rank 3)
 
-[44832] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus, consolidate = true }, -- Major Resolve (Channeled Focus - Rank 3)
-[44831] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus, consolidate = true }, -- Major Ward (Channeled Focus - Rank 3)
+	[44834] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus, consolidate = true }, -- Major Resolve (Channeled Focus - Rank 4)
+	[44833] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus, consolidate = true }, -- Major Ward (Channeled Focus - Rank 4)
 
-[44834] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus, consolidate = true }, -- Major Resolve (Channeled Focus - Rank 4)
-[44833] = { icon = 'esoui/art/icons/ability_templar_channeled_focus.dds', name = A.Skill_Channeled_Focus, consolidate = true }, -- Major Ward (Channeled Focus - Rank 4)
+	[44836] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Major Resolve (Restoring Focus - Rank 1)
+	[44835] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Major Ward (Restoring Focus - Rank 1)
+	[37027] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Vitality (Restoring Focus - Rank 1)
+	[77056] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Protection (Restoring Focus - Rank 1)
 
-[44836] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Major Resolve (Restoring Focus - Rank 1)
-[44835] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Major Ward (Restoring Focus - Rank 1)
-[37027] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Vitality (Restoring Focus - Rank 1)
-[77056] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Protection (Restoring Focus - Rank 1)
+	[44839] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Major Resolve (Restoring Focus - Rank 2)
+	[44838] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Major Ward (Restoring Focus - Rank 2)
+	[37031] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Vitality (Restoring Focus - Rank 2)
+	[77057] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Protection (Restoring Focus - Rank 2)
 
-[44839] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Major Resolve (Restoring Focus - Rank 2)
-[44838] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Major Ward (Restoring Focus - Rank 2)
-[37031] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Vitality (Restoring Focus - Rank 2)
-[77057] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Protection (Restoring Focus - Rank 2)
+	[44841] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Major Resolve (Restoring Focus - Rank 3)
+	[44840] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Major Ward (Restoring Focus - Rank 3)
+	[37032] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Vitality (Restoring Focus - Rank 3)
+	[77058] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Protection (Restoring Focus - Rank 3)
 
-[44841] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Major Resolve (Restoring Focus - Rank 3)
-[44840] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Major Ward (Restoring Focus - Rank 3)
-[37032] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Vitality (Restoring Focus - Rank 3)
-[77058] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Protection (Restoring Focus - Rank 3)
+	[44843] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Major Resolve (Restoring Focus - Rank 4)
+	[44842] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Major Ward (Restoring Focus - Rank 4)
+	[37033] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Vitality (Restoring Focus - Rank 4)
+	[77059] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Protection (Restoring Focus - Rank 4)
 
-[44843] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Major Resolve (Restoring Focus - Rank 4)
-[44842] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Major Ward (Restoring Focus - Rank 4)
-[37033] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Vitality (Restoring Focus - Rank 4)
-[77059] = { icon = 'esoui/art/icons/ability_templar_uninterrupted_focus.dds', name = A.Skill_Restoring_Focus, consolidate = true }, -- Minor Protection (Restoring Focus - Rank 4)
+	-- Destro Staff
+	[53881] = { icon = 'esoui/art/icons/ability_destructionstaff_011.dds', name = A.Skill_Weakness_to_Elements, removeOnEnd = true }, -- Major Breach (Weakness to Elements - Rank 1)
+	[62772] = { icon = 'esoui/art/icons/ability_destructionstaff_011.dds', name = A.Skill_Weakness_to_Elements, removeOnEnd = true }, -- Major Breach (Weakness to Elements - Rank 2)
+	[62773] = { icon = 'esoui/art/icons/ability_destructionstaff_011.dds', name = A.Skill_Weakness_to_Elements, removeOnEnd = true }, -- Major Breach (Weakness to Elements - Rank 3)
+	[62774] = { icon = 'esoui/art/icons/ability_destructionstaff_011.dds', name = A.Skill_Weakness_to_Elements, removeOnEnd = true }, -- Major Breach (Weakness to Elements - Rank 4)
 
--- Destro Staff
-[53881] = { icon = 'esoui/art/icons/ability_destructionstaff_011.dds', name = A.Skill_Weakness_to_Elements, removeOnEnd = true }, -- Major Breach (Weakness to Elements - Rank 1)
-[62772] = { icon = 'esoui/art/icons/ability_destructionstaff_011.dds', name = A.Skill_Weakness_to_Elements, removeOnEnd = true }, -- Major Breach (Weakness to Elements - Rank 2)
-[62773] = { icon = 'esoui/art/icons/ability_destructionstaff_011.dds', name = A.Skill_Weakness_to_Elements, removeOnEnd = true }, -- Major Breach (Weakness to Elements - Rank 3)
-[62774] = { icon = 'esoui/art/icons/ability_destructionstaff_011.dds', name = A.Skill_Weakness_to_Elements, removeOnEnd = true }, -- Major Breach (Weakness to Elements - Rank 4)
+	[62775] = { icon = 'esoui/art/icons/ability_destructionstaff_011b.dds', name = A.Skill_Elemental_Susceptibility, removeOnEnd = true }, -- Major Breach (Elemental Susceptibility - Rank 1)
+	[62780] = { icon = 'esoui/art/icons/ability_destructionstaff_011b.dds', name = A.Skill_Elemental_Susceptibility, removeOnEnd = true }, -- Major Breach (Elemental Susceptibility - Rank 2)
+	[62783] = { icon = 'esoui/art/icons/ability_destructionstaff_011b.dds', name = A.Skill_Elemental_Susceptibility, removeOnEnd = true }, -- Major Breach (Elemental Susceptibility - Rank 3)
+	[62786] = { icon = 'esoui/art/icons/ability_destructionstaff_011b.dds', name = A.Skill_Elemental_Susceptibility, removeOnEnd = true }, -- Major Breach (Elemental Susceptibility - Rank 4)
 
-[62775] = { icon = 'esoui/art/icons/ability_destructionstaff_011b.dds', name = A.Skill_Elemental_Susceptibility, removeOnEnd = true }, -- Major Breach (Elemental Susceptibility - Rank 1)
-[62780] = { icon = 'esoui/art/icons/ability_destructionstaff_011b.dds', name = A.Skill_Elemental_Susceptibility, removeOnEnd = true }, -- Major Breach (Elemental Susceptibility - Rank 2)
-[62783] = { icon = 'esoui/art/icons/ability_destructionstaff_011b.dds', name = A.Skill_Elemental_Susceptibility, removeOnEnd = true }, -- Major Breach (Elemental Susceptibility - Rank 3)
-[62786] = { icon = 'esoui/art/icons/ability_destructionstaff_011b.dds', name = A.Skill_Elemental_Susceptibility, removeOnEnd = true }, -- Major Breach (Elemental Susceptibility - Rank 4)
+	[62787] = { icon = 'esoui/art/icons/ability_destructionstaff_011a.dds', name = A.Skill_Elemental_Drain, removeOnEnd = true }, -- Major Breach (Elemental Drain - Rank 1)
+	[39100] = { icon = 'esoui/art/icons/ability_destructionstaff_011a.dds', name = A.Skill_Elemental_Drain, removeOnEnd = true }, -- Minor Magickasteal (Elemental Drain - Rank 1)
+	[62789] = { icon = 'esoui/art/icons/ability_destructionstaff_011a.dds', name = A.Skill_Elemental_Drain, removeOnEnd = true }, -- Major Breach (Elemental Drain - Rank 2)
+	[62790] = { icon = 'esoui/art/icons/ability_destructionstaff_011a.dds', name = A.Skill_Elemental_Drain, removeOnEnd = true }, -- Minor Magickasteal (Elemental Drain - Rank 2)
+	[62792] = { icon = 'esoui/art/icons/ability_destructionstaff_011a.dds', name = A.Skill_Elemental_Drain, removeOnEnd = true }, -- Major Breach (Elemental Drain - Rank 3)
+	[62793] = { icon = 'esoui/art/icons/ability_destructionstaff_011a.dds', name = A.Skill_Elemental_Drain, removeOnEnd = true }, -- Minor Magickasteal (Elemental Drain - Rank 3)
+	[62795] = { icon = 'esoui/art/icons/ability_destructionstaff_011a.dds', name = A.Skill_Elemental_Drain, removeOnEnd = true }, -- Major Breach (Elemental Drain - Rank 4)
+	[62796] = { icon = 'esoui/art/icons/ability_destructionstaff_011a.dds', name = A.Skill_Elemental_Drain, removeOnEnd = true }, -- Minor Magickasteal (Elemental Drain - Rank 4)
 
-[62787] = { icon = 'esoui/art/icons/ability_destructionstaff_011a.dds', name = A.Skill_Elemental_Drain, removeOnEnd = true }, -- Major Breach (Elemental Drain - Rank 1)
-[39100] = { icon = 'esoui/art/icons/ability_destructionstaff_011a.dds', name = A.Skill_Elemental_Drain, removeOnEnd = true }, -- Minor Magickasteal (Elemental Drain - Rank 1)
-[62789] = { icon = 'esoui/art/icons/ability_destructionstaff_011a.dds', name = A.Skill_Elemental_Drain, removeOnEnd = true }, -- Major Breach (Elemental Drain - Rank 2)
-[62790] = { icon = 'esoui/art/icons/ability_destructionstaff_011a.dds', name = A.Skill_Elemental_Drain, removeOnEnd = true }, -- Minor Magickasteal (Elemental Drain - Rank 2)
-[62792] = { icon = 'esoui/art/icons/ability_destructionstaff_011a.dds', name = A.Skill_Elemental_Drain, removeOnEnd = true }, -- Major Breach (Elemental Drain - Rank 3)
-[62793] = { icon = 'esoui/art/icons/ability_destructionstaff_011a.dds', name = A.Skill_Elemental_Drain, removeOnEnd = true }, -- Minor Magickasteal (Elemental Drain - Rank 3)
-[62795] = { icon = 'esoui/art/icons/ability_destructionstaff_011a.dds', name = A.Skill_Elemental_Drain, removeOnEnd = true }, -- Major Breach (Elemental Drain - Rank 4)
-[62796] = { icon = 'esoui/art/icons/ability_destructionstaff_011a.dds', name = A.Skill_Elemental_Drain, removeOnEnd = true }, -- Minor Magickasteal (Elemental Drain - Rank 4)
+	-- Resto Staff
+	[37247] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection, consolidate = true }, -- Minor Resolve (Blessing of Protection - Rank 1)
+	[62619] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection, consolidate = true }, -- Minor Ward (Blessing of Protection - Rank 1)
+	[62620] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection, consolidate = true }, -- Minor Resolve (Blessing of Protection - Rank 2)
+	[62621] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection, consolidate = true }, -- Minor Ward (Blessing of Protection - Rank 2)
+	[62622] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection, consolidate = true }, -- Minor Resolve (Blessing of Protection - Rank 3)
+	[62623] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection, consolidate = true }, -- Minor Ward (Blessing of Protection - Rank 3)
+	[62624] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection, consolidate = true }, -- Minor Resolve (Blessing of Protection - Rank 4)
+	[62625] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection, consolidate = true }, -- Minor Ward (Blessing of Protection - Rank 4)
 
--- Resto Staff
-[37247] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection, consolidate = true }, -- Minor Resolve (Blessing of Protection - Rank 1)
-[62619] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection, consolidate = true }, -- Minor Ward (Blessing of Protection - Rank 1)
-[62620] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection, consolidate = true }, -- Minor Resolve (Blessing of Protection - Rank 2)
-[62621] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection, consolidate = true }, -- Minor Ward (Blessing of Protection - Rank 2)
-[62622] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection, consolidate = true }, -- Minor Resolve (Blessing of Protection - Rank 3)
-[62623] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection, consolidate = true }, -- Minor Ward (Blessing of Protection - Rank 3)
-[62624] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection, consolidate = true }, -- Minor Resolve (Blessing of Protection - Rank 4)
-[62625] = { icon = 'esoui/art/icons/ability_restorationstaff_003.dds', name = A.Skill_Blessing_of_Protection, consolidate = true }, -- Minor Ward (Blessing of Protection - Rank 4)
+	[62626] = { icon = 'esoui/art/icons/ability_restorationstaff_003_a.dds', name = A.Skill_Blessing_of_Restoration, consolidate = true }, -- Minor Resolve (Blessing of Restoration - Rank 1)
+	[62627] = { icon = 'esoui/art/icons/ability_restorationstaff_003_a.dds', name = A.Skill_Blessing_of_Restoration, consolidate = true }, -- Minor Ward (Blessing of Restoration - Rank 1)
 
-[62626] = { icon = 'esoui/art/icons/ability_restorationstaff_003_a.dds', name = A.Skill_Blessing_of_Restoration, consolidate = true }, -- Minor Resolve (Blessing of Restoration - Rank 1)
-[62627] = { icon = 'esoui/art/icons/ability_restorationstaff_003_a.dds', name = A.Skill_Blessing_of_Restoration, consolidate = true }, -- Minor Ward (Blessing of Restoration - Rank 1)
+	[62628] = { icon = 'esoui/art/icons/ability_restorationstaff_003_a.dds', name = A.Skill_Blessing_of_Restoration, consolidate = true }, -- Minor Resolve (Blessing of Restoration - Rank 2)
+	[62629] = { icon = 'esoui/art/icons/ability_restorationstaff_003_a.dds', name = A.Skill_Blessing_of_Restoration, consolidate = true }, -- Minor Ward (Blessing of Restoration - Rank 2)
 
-[62628] = { icon = 'esoui/art/icons/ability_restorationstaff_003_a.dds', name = A.Skill_Blessing_of_Restoration, consolidate = true }, -- Minor Resolve (Blessing of Restoration - Rank 2)
-[62629] = { icon = 'esoui/art/icons/ability_restorationstaff_003_a.dds', name = A.Skill_Blessing_of_Restoration, consolidate = true }, -- Minor Ward (Blessing of Restoration - Rank 2)
+	[62630] = { icon = 'esoui/art/icons/ability_restorationstaff_003_a.dds', name = A.Skill_Blessing_of_Restoration, consolidate = true }, -- Minor Resolve (Blessing of Restoration - Rank 3)
+	[62631] = { icon = 'esoui/art/icons/ability_restorationstaff_003_a.dds', name = A.Skill_Blessing_of_Restoration, consolidate = true }, -- Minor Ward (Blessing of Restoration - Rank 3)
 
-[62630] = { icon = 'esoui/art/icons/ability_restorationstaff_003_a.dds', name = A.Skill_Blessing_of_Restoration, consolidate = true }, -- Minor Resolve (Blessing of Restoration - Rank 3)
-[62631] = { icon = 'esoui/art/icons/ability_restorationstaff_003_a.dds', name = A.Skill_Blessing_of_Restoration, consolidate = true }, -- Minor Ward (Blessing of Restoration - Rank 3)
+	[62632] = { icon = 'esoui/art/icons/ability_restorationstaff_003_a.dds', name = A.Skill_Blessing_of_Restoration, consolidate = true }, -- Minor Resolve (Blessing of Restoration - Rank 4)
+	[62633] = { icon = 'esoui/art/icons/ability_restorationstaff_003_a.dds', name = A.Skill_Blessing_of_Restoration, consolidate = true }, -- Minor Ward (Blessing of Restoration - Rank 4)
 
-[62632] = { icon = 'esoui/art/icons/ability_restorationstaff_003_a.dds', name = A.Skill_Blessing_of_Restoration, consolidate = true }, -- Minor Resolve (Blessing of Restoration - Rank 4)
-[62633] = { icon = 'esoui/art/icons/ability_restorationstaff_003_a.dds', name = A.Skill_Blessing_of_Restoration, consolidate = true }, -- Minor Ward (Blessing of Restoration - Rank 4)
+	[62634] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Resolve (Combat Prayer - Rank 1)
+	[62635] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Ward (Combat Prayer - Rank 1)
+	[62636] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Berserk (Combat Prayer - Rank 1)
 
-[62634] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Resolve (Combat Prayer - Rank 1)
-[62635] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Ward (Combat Prayer - Rank 1)
-[62636] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Berserk (Combat Prayer - Rank 1)
+	[62637] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Resolve (Combat Prayer - Rank 2)
+	[62638] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Ward (Combat Prayer - Rank 2)
+	[62639] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Berserk (Combat Prayer - Rank 2)
 
-[62637] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Resolve (Combat Prayer - Rank 2)
-[62638] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Ward (Combat Prayer - Rank 2)
-[62639] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Berserk (Combat Prayer - Rank 2)
+	[62640] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Resolve (Combat Prayer - Rank 3)
+	[62641] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Ward (Combat Prayer - Rank 3)
+	[62642] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Berserk (Combat Prayer - Rank 3)
 
-[62640] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Resolve (Combat Prayer - Rank 3)
-[62641] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Ward (Combat Prayer - Rank 3)
-[62642] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Berserk (Combat Prayer - Rank 3)
+	[62643] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Resolve (Combat Prayer - Rank 4)
+	[62644] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Ward (Combat Prayer - Rank 4)
+	[62645] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Berserk (Combat Prayer - Rank 4)
 
-[62643] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Resolve (Combat Prayer - Rank 4)
-[62644] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Ward (Combat Prayer - Rank 4)
-[62645] = { icon = 'esoui/art/icons/ability_restorationstaff_003_b.dds', name = A.Skill_Combat_Prayer, consolidate = true }, -- Minor Berserk (Combat Prayer - Rank 4)
+	[88565] = { icon = 'esoui/art/icons/ability_restorationstaff_005.dds', name = A.Skill_Force_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Force Siphon - Rank 1)
+	[88568] = { icon = 'esoui/art/icons/ability_restorationstaff_005.dds', name = A.Skill_Force_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Force Siphon - Rank 2)
+	[88573] = { icon = 'esoui/art/icons/ability_restorationstaff_005.dds', name = A.Skill_Force_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Force Siphon - Rank 3)
+	[88574] = { icon = 'esoui/art/icons/ability_restorationstaff_005.dds', name = A.Skill_Force_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Force Siphon - Rank 4)
 
-[88565] = { icon = 'esoui/art/icons/ability_restorationstaff_005.dds', name = A.Skill_Force_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Force Siphon - Rank 1)
-[88568] = { icon = 'esoui/art/icons/ability_restorationstaff_005.dds', name = A.Skill_Force_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Force Siphon - Rank 2)
-[88573] = { icon = 'esoui/art/icons/ability_restorationstaff_005.dds', name = A.Skill_Force_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Force Siphon - Rank 3)
-[88574] = { icon = 'esoui/art/icons/ability_restorationstaff_005.dds', name = A.Skill_Force_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Force Siphon - Rank 4)
+	[88575] = { icon = 'esoui/art/icons/ability_restorationstaff_005_a.dds', name = A.Skill_Siphon_Spirit, removeOnEnd = true  }, -- Minor Lifesteal (Siphon Spirit - Rank 1)
+	[88576] = { icon = 'esoui/art/icons/ability_restorationstaff_005_a.dds', name = A.Skill_Siphon_Spirit, removeOnEnd = true  }, -- Minor Lifesteal (Siphon Spirit - Rank 1)
 
-[88575] = { icon = 'esoui/art/icons/ability_restorationstaff_005_a.dds', name = A.Skill_Siphon_Spirit, removeOnEnd = true  }, -- Minor Lifesteal (Siphon Spirit - Rank 1)
-[88576] = { icon = 'esoui/art/icons/ability_restorationstaff_005_a.dds', name = A.Skill_Siphon_Spirit, removeOnEnd = true  }, -- Minor Lifesteal (Siphon Spirit - Rank 1)
+	[88584] = { icon = 'esoui/art/icons/ability_restorationstaff_005_a.dds', name = A.Skill_Siphon_Spirit, removeOnEnd = true  }, -- Minor Lifesteal (Siphon Spirit - Rank 2)
+	[88585] = { icon = 'esoui/art/icons/ability_restorationstaff_005_a.dds', name = A.Skill_Siphon_Spirit, removeOnEnd = true  }, -- Minor Lifesteal (Siphon Spirit - Rank 2)
 
-[88584] = { icon = 'esoui/art/icons/ability_restorationstaff_005_a.dds', name = A.Skill_Siphon_Spirit, removeOnEnd = true  }, -- Minor Lifesteal (Siphon Spirit - Rank 2)
-[88585] = { icon = 'esoui/art/icons/ability_restorationstaff_005_a.dds', name = A.Skill_Siphon_Spirit, removeOnEnd = true  }, -- Minor Lifesteal (Siphon Spirit - Rank 2)
+	[88587] = { icon = 'esoui/art/icons/ability_restorationstaff_005_a.dds', name = A.Skill_Siphon_Spirit, removeOnEnd = true  }, -- Minor Lifesteal (Siphon Spirit - Rank 3)
+	[88588] = { icon = 'esoui/art/icons/ability_restorationstaff_005_a.dds', name = A.Skill_Siphon_Spirit, removeOnEnd = true  }, -- Minor Lifesteal (Siphon Spirit - Rank 3)
 
-[88587] = { icon = 'esoui/art/icons/ability_restorationstaff_005_a.dds', name = A.Skill_Siphon_Spirit, removeOnEnd = true  }, -- Minor Lifesteal (Siphon Spirit - Rank 3)
-[88588] = { icon = 'esoui/art/icons/ability_restorationstaff_005_a.dds', name = A.Skill_Siphon_Spirit, removeOnEnd = true  }, -- Minor Lifesteal (Siphon Spirit - Rank 3)
+	[88604] = { icon = 'esoui/art/icons/ability_restorationstaff_005_a.dds', name = A.Skill_Siphon_Spirit, removeOnEnd = true  }, -- Minor Lifesteal (Siphon Spirit - Rank 4)
+	[88605] = { icon = 'esoui/art/icons/ability_restorationstaff_005_a.dds', name = A.Skill_Siphon_Spirit, removeOnEnd = true  }, -- Minor Lifesteal (Siphon Spirit - Rank 4)
 
-[88604] = { icon = 'esoui/art/icons/ability_restorationstaff_005_a.dds', name = A.Skill_Siphon_Spirit, removeOnEnd = true  }, -- Minor Lifesteal (Siphon Spirit - Rank 4)
-[88605] = { icon = 'esoui/art/icons/ability_restorationstaff_005_a.dds', name = A.Skill_Siphon_Spirit, removeOnEnd = true  }, -- Minor Lifesteal (Siphon Spirit - Rank 4)
+	[88606] = { icon = 'esoui/art/icons/ability_restorationstaff_005_b.dds', name = A.Skill_Quick_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Quick Siphon - Rank 1)
+	[88625] = { icon = 'esoui/art/icons/ability_restorationstaff_005_b.dds', name = A.Skill_Quick_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Quick Siphon - Rank 2)
+	[88628] = { icon = 'esoui/art/icons/ability_restorationstaff_005_b.dds', name = A.Skill_Quick_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Quick Siphon - Rank 3)
+	[88634] = { icon = 'esoui/art/icons/ability_restorationstaff_005_b.dds', name = A.Skill_Quick_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Quick Siphon - Rank 4)
 
-[88606] = { icon = 'esoui/art/icons/ability_restorationstaff_005_b.dds', name = A.Skill_Quick_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Quick Siphon - Rank 1)
-[88625] = { icon = 'esoui/art/icons/ability_restorationstaff_005_b.dds', name = A.Skill_Quick_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Quick Siphon - Rank 2)
-[88628] = { icon = 'esoui/art/icons/ability_restorationstaff_005_b.dds', name = A.Skill_Quick_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Quick Siphon - Rank 3)
-[88634] = { icon = 'esoui/art/icons/ability_restorationstaff_005_b.dds', name = A.Skill_Quick_Siphon, removeOnEnd = true  }, -- Minor Lifesteal (Quick Siphon - Rank 4)
+	-- Fighter's Guild
+	[80271] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Circle of Protection - Rank 1)
+	[35739] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Protection (Circle of Protection - Rank 1)
 
--- Fighter's Guild
-[80271] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Circle of Protection - Rank 1)
-[35739] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Protection (Circle of Protection - Rank 1)
+	[80272] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Circle of Protection - Rank 2)
+	[42503] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Protection (Circle of Protection - Rank 2)
 
-[80272] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Circle of Protection - Rank 2)
-[42503] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Protection (Circle of Protection - Rank 2)
+	[80274] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Circle of Protection - Rank 3)
+	[42507] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Protection (Circle of Protection - Rank 3)
 
-[80274] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Circle of Protection - Rank 3)
-[42507] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Protection (Circle of Protection - Rank 3)
+	[80275] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Circle of Protection - Rank 4)
+	[42509] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Protection (Circle of Protection - Rank 4)
 
-[80275] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Circle of Protection - Rank 4)
-[42509] = { icon = 'esoui/art/icons/ability_fightersguild_001.dds', name = A.Skill_Circle_of_Protection, consolidate = true, removeOnEnd = true }, -- Minor Protection (Circle of Protection - Rank 4)
+	[80276] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Turn Undead - Rank 1)
+	[40185] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Protection (Turn Undead - Rank 1)
 
-[80276] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Turn Undead - Rank 1)
-[40185] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Protection (Turn Undead - Rank 1)
+	[80278] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Turn Undead - Rank 2)
+	[42517] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Protection (Turn Undead - Rank 2)
 
-[80278] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Turn Undead - Rank 2)
-[42517] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Protection (Turn Undead - Rank 2)
+	[80279] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Turn Undead - Rank 3)
+	[42524] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Protection (Turn Undead - Rank 3)
 
-[80279] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Turn Undead - Rank 3)
-[42524] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Protection (Turn Undead - Rank 3)
+	[80280] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Turn Undead - Rank 4)
+	[42531] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Protection (Turn Undead - Rank 4)
 
-[80280] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Turn Undead - Rank 4)
-[42531] = { icon = 'esoui/art/icons/ability_fightersguild_001_a.dds', name = A.Skill_Turn_Undead, consolidate = true, removeOnEnd = true }, -- Minor Protection (Turn Undead - Rank 4)
+	[80284] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Ring of Preservation - Rank 1)
+	[40171] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Protection (Ring of Preservation - Rank 1)
 
-[80284] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Ring of Preservation - Rank 1)
-[40171] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Protection (Ring of Preservation - Rank 1)
+	[80285] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Ring of Preservation - Rank 2)
+	[42538] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Protection (Ring of Preservation - Rank 2)
 
-[80285] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Ring of Preservation - Rank 2)
-[42538] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Protection (Ring of Preservation - Rank 2)
+	[80286] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Ring of Preservation - Rank 3)
+	[42544] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Protection (Ring of Preservation - Rank 3)
 
-[80286] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Ring of Preservation - Rank 3)
-[42544] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Protection (Ring of Preservation - Rank 3)
+	[80287] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Ring of Preservation - Rank 4)
+	[42550] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Protection (Ring of Preservation - Rank 4)
 
-[80287] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Endurance (Ring of Preservation - Rank 4)
-[42550] = { icon = 'esoui/art/icons/ability_fightersguild_001_b.dds', name = A.Skill_Ring_of_Preservation, consolidate = true, removeOnEnd = true }, -- Minor Protection (Ring of Preservation - Rank 4)
+	-- NPC's
+	-- Always Show = show regardless of menu setting
 
--- NPC's
--- Always Show = show regardless of menu setting
-
-[65235] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity, alwaysShow = true}, -- Enrage (Vosh Rakh Devoted)
-
+	[65235] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity, alwaysShow = true}, -- Enrage (Vosh Rakh Devoted)
 }
 
 E.BarHighlightOverride = {
-
     -- newId = replace ID
     -- showFakeAura = Trigger this event when the ability is pressed rather than on EVENT_EFFECT_CHANGED (Stops effect changes from displaying as well)
     -- secondary = If menu option disabled, do not show this highlight
@@ -1153,7 +1141,6 @@ E.BarHighlightOverride = {
     [42592] = { newId = 62315 }, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 2)
     [42595] = { newId = 62316 }, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 3)
     [42598] = { newId = 62317 }, -- Dawnbreaker of Smiting (Dawnbreaker of Smiting - Rank 4)
-    
 }
 
 E.DisguiseIcons = {
@@ -1200,38 +1187,25 @@ E.AssistantIcons = {
     ['Tythis Andromo, the Banker']  = 'LuiExtended/media/icons/abilities/ability_innate_assistant_tythis.dds',
 }
 
-E.AddNameAura = {
-    
+E.AddNameAura = {    
     -- Name Specific Changes
-    ['Flame Atronach'] = {
-        [1] = { icon = 'LuiExtended/media/icons/abilities/ability_flameatronach_radiance.dds', name = A.Skill_Radiance },
-    },
-    ['Frost Atronach'] = {
-        [1] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_chilling_aura.dds', name = A.Skill_Chilling_Aura },
-    },
-
+    ['Flame Atronach'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_flameatronach_radiance.dds', name = A.Skill_Radiance } },
+    ['Frost Atronach'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_chilling_aura.dds', name = A.Skill_Chilling_Aura } },
     ['War Chief Ozozai'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
     ['Broodbirther'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } },
-    
     ['Mad Griskild'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- A Web of Troubles
-    
     ['Veya Releth'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell - Family Reunion
-    
     ['Old Rust-Eye'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Delve -- Vvardenfell - Khartag Point
-    
     ['Cliff Strider Matriarch'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
     ['Beckoner Morvayn'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
     ['Confessor Dradas'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
     ['Coaxer Veran'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
     ['Castigator Athin'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
-    
-    
     ['Stone-Boiler Omalas'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
     ['Brander Releth'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
     ['Mountain-Caller Hlaren'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
     ['Wakener Maras'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
     ['Nevena Nirith'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON - Vvardenfell - The Forgotten Wastes
-    
     ['Mud-Tusk'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth
     ['Guardian of Bthark'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth
     ['Renduril the Hammer'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth
@@ -1240,13 +1214,10 @@ E.AddNameAura = {
     ['Artisan Lenarmen'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth
     ['Nchulaeon the Eternal'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth
     ['Nilarion the Cavalier'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- PUBLIC DUNGEON -- Vvardenfell - Nchuleftingth 
-    
     ['Curate Erydno'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Divine Inquires
     ['Savarak Fels'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Reclamining Vos
-    
     ['Th\'krak the Tunnel-King'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Delve -- Vvardenfell -- Matus-Akin Egg Mine
     ['Slavemaster Arenim'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- The Heart of a Telvanni
-    
     ['Chodala'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Divine Intervention
     ['Clockwork Guardian'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Divine Restoration
     ['Jovval Mortal-Bane'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Divine Restoration
@@ -1254,25 +1225,19 @@ E.AddNameAura = {
     ['Clockwork Mediator'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Divine Restoration
     ['Clockwork Mediator Core'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Divine Restoration
     ['Clockwork Assembly Core'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Divine Restoration
-    ['Barbas'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Divine Restoration
-    
+    ['Barbas'] = { [1] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_cc_immunity.dds', name = A.Innate_CC_Immunity } }, -- Quest -- Vvardenfell -- Divine Restoration 
 }
 
 E.SynergyNameOverride = {
-
     ['Tonal Inverter'] = 'LuiExtended/media/icons/abilities/ability_quest_tonal_inverter.dds', -- Tonal Inverter (Divine Intervention)
-    ['Blade of Woe'] = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds', -- Blade of Woe (Dark Brotherhood)
-    
+    ['Blade of Woe'] = 'LuiExtended/media/icons/abilities/ability_darkbrotherhood_blade_of_woe.dds', -- Blade of Woe (Dark Brotherhood)  
 }
 
 E.BarNameOverride = {
-
     -- Dragonknight
     [A.Skill_Power_Lash] = 'LuiExtended/media/icons/abilities/ability_dragonknight_power_lash.dds', -- Power Lash (Flame Lash)
-
     -- Fighter's Guild
     [A.Skill_Tighten] = 'LuiExtended/media/icons/abilities/ability_fightersguild_silver_leash.dds', -- Tighten (Silver Leash)
-
 }
 
 E.EffectOverrideByName = {
@@ -1350,11 +1315,9 @@ E.EffectOverrideByName = {
     [75818] =   { -- Helljoint (Wolf)
                 ['Jackal'] =            { icon = 'LuiExtended/media/icons/abilities/ability_jackal_helljoint.dds' }, -- Helljoint (Wolf)
                 },
-
 }
 
 E.EffectSourceOverride = {
-
     [71678] = {pet = 'Morkuldin'}, -- Light Attack {Morkuldin}
     [71679] = {pet = 'Morkuldin'}, -- Cleave {Morkuldin}
 
@@ -1362,24 +1325,18 @@ E.EffectSourceOverride = {
     [92150] = {source = 'Dwarven Furnace'}, -- Fire Trap {Vvardenfell}
     [89481] = {source = 'Flame Jet Trap'}, -- Flame Jet {Vvardenfell}
     [88491] = {source = 'Flame Jet Trap'}, -- Searing Flame {Vvardenfell}
-    
     [88411] = {source = 'Hammer Trap'}, -- Hammer {Vvardenfell}
     [88405] = {source = 'Hammer Trap'}, -- Hammer {Vvardenfell}
     [89663] = {source = 'Hammer Trap'}, -- Hammer {Vvardenfell}
     [89664] = {source = 'Hammer Trap'}, -- Hammer {Vvardenfell}
-
     [88404] = {source = 'Blade Trap'}, -- Blade {Vvardenfell}
     [88454] = {source = 'Blade Trap'}, -- Blade {Vvardenfell}
     [88455] = {source = 'Blade Trap'}, -- Blade {Vvardenfell}
-    
-    
     [91659] = {source = 'Falling Rocks'}, -- Falling Rocks {Vvardenfell}
     [92672] = {source = 'Red Mountain'}, -- Pyroclast  {Vvardenfell}
     [84527] = {source = 'Steam Vent'}, -- Searing Steam {Vvardenfell}
-
     [62769] = {source = 'Cold Fire Trap'}, -- Coldharbour Flames {MQ Tutorial}
     [62770] = {source = 'Cold Fire Trap'}, -- Coldharbour Flames {MQ Tutorial}
-    
   
     -----------------------------------------------
     -- VVARDENFELL
@@ -1391,11 +1348,9 @@ E.EffectSourceOverride = {
     [86743] = {source = 'Vapor Cloud'}, -- Accelerated Transposition {Like Blood from a Stone}
     -- Sidequests
     [89282] = {source = 'Exploding Spider'}, -- Spider Explosion {A Web of Trouble}
-
 }
 
-E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ONLY!!!)
-    
+E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ONLY!!!)  
     -- Player - Basic
     [20301] = true, -- Crouch Drain
     [15356] = true, -- Sprint Drain
@@ -1417,15 +1372,15 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     
     -- Sets
     [32755] = true, -- Nikulas' Heavy Armor (of Nikulas)
-	
-	----------------------------
-	-- Passives
-	----------------------------
-	
-	-- Templar
-	[80195] = true, -- Sacred Ground (Sacred Ground - All Ranks) - Rune Focus
-	[80230] = true, -- Sacred Ground (Sacred Ground - All Ranks) - Cleansing Ritual
-	[80261] = true, -- Sacred Ground (Sacred Ground - All Ranks) - Rite of Passage
+    
+    ----------------------------
+    -- Passives
+    ----------------------------
+    
+    -- Templar
+    [80195] = true, -- Sacred Ground (Sacred Ground - All Ranks) - Rune Focus
+    [80230] = true, -- Sacred Ground (Sacred Ground - All Ranks) - Cleansing Ritual
+    [80261] = true, -- Sacred Ground (Sacred Ground - All Ranks) - Rite of Passage
     
     ----------------------------
     -- Templar
@@ -1478,7 +1433,9 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     [51893] = true, -- Negate Magic (Cyrodiil Mender T1 + T2)
     
     -- DAEDRA NPC
+    [35278] = true, -- Soul Flame (Daedric Titan)
     [51646] = true, -- Frozen Ground (Frost Atronach)
+    [6410] = true, -- Tail Clip (Winged Twilight)
     
     -- MAIN QUEST
     [61648] = true, -- Replenish Stamina (Tutorial - Child of Bones)
@@ -1504,16 +1461,13 @@ E.EffectHideOverride = { -- Force hide display of event (USED BY COMBAT CLOUD ON
     [86934] = true, -- Volcanic Debris
     [86938] = true, -- Volcanic Debris
     [92707] = true, -- Volcanic Debris
-    [92704] = true, -- Volcanic Debris
-    
+    [92704] = true, -- Volcanic Debris  
 }
 
 -- Using a separate chart for ZOS Artificial Effects just in case this is significantly expanded at any point
 E.ArtificialEffectOverride = {
-
     [0] = { icon = 'esoui/art/icons/artificialeffect_battle-spirit.dds' }, -- Battle Spirit (Duel)
     [2] = { icon = 'esoui/art/icons/artificialeffect_battle-spirit.dds' }, -- Battle Spirit (BG)
-
 }
 
 -- MAYBE USE LATER
@@ -1522,7 +1476,6 @@ E.TooltipOverride = {
 }
 
 E.EffectOverride = {
-
     -- Override the display information for various effect auras:
     -- icon = Change Icon
     -- name = Change Name
@@ -4983,6 +4936,11 @@ E.EffectOverride = {
     [85420] = { icon = 'LuiExtended/media/icons/abilities/ability_cliffstrider_retch.dds' }, -- Retch (Cliff Strider)
     [85421] = { icon = 'LuiExtended/media/icons/abilities/ability_cliffstrider_retch_aoe.dds' }, -- Retch (Cliff Strider)
     [85448] = { hide = true }, -- Frenzied Feast (Cliff Strider)
+    [85390] = { icon = 'LuiExtended/media/icons/abilities/ability_cliffstrider_slash.dds', hide = true}, -- Slash (Cliff Strider Matriach)
+    [85391] = { icon = 'LuiExtended/media/icons/abilities/ability_cliffstrider_slash.dds' }, -- Slash (Cliff Strider Matriach)
+    [85394] = { icon = 'LuiExtended/media/icons/abilities/ability_cliffstrider_slash.dds' }, -- Slash (Cliff Strider Matriach)
+    [85392] = { icon = 'LuiExtended/media/icons/abilities/ability_cliffstrider_slash.dds', hideReduce = true }, -- Slash (Cliff Strider Matriach)
+    [85393] = { icon = 'LuiExtended/media/icons/abilities/ability_cliffstrider_slash.dds' }, -- Slash (Cliff Strider Matriach)
     
     
     -- DAEDRA
@@ -5018,10 +4976,13 @@ E.EffectOverride = {
 
     [26551] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_strike.dds' }, -- Strike (Daedric Titan)
     [32852] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_ranged.dds' }, -- Scourge Bolt (Daedric Titan)
-    [32696] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_aoe.dds' }, -- Soul Flame (Daedric Titan)
-    [35280] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_aoe.dds' }, -- Soul Flame (Daedric Titan)
-    [73437] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_aoe.dds' }, -- Soul Flame (Daedric Titan)
-    [35278] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_aoe.dds' }, -- Soul Flame (Daedric Titan)
+    
+    [26641] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_soul_flame.dds' }, -- Soul Flame (Daedric Titan)
+    [32696] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_soul_flame.dds' }, -- Soul Flame (Daedric Titan)
+    [35280] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_soul_flame.dds' }, -- Soul Flame (Daedric Titan)
+    [73437] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_gtaoe.dds' }, -- Soul Flame (Daedric Titan)
+    [35278] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_coldfire_gtaoe.dds' }, -- Soul Flame (Daedric Titan)
+    
     [26554] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_wing_gust.dds' }, -- Wing Gust (Daedric Titan)
     [33085] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_wing_gust.dds' }, -- Wing Gust (Daedric Titan)
     [33086] = { icon = 'LuiExtended/media/icons/abilities/ability_daedrictitan_wing_gust.dds' }, -- Wing Gust (Daedric Titan)
@@ -5100,28 +5061,49 @@ E.EffectOverride = {
     [65891] = { icon = 'LuiExtended/media/icons/abilities/ability_grevioustwilight_shadow_strike.dds' }, -- Shadow Strike (Grevious Twilight)
 
     [11076] = { icon = 'esoui/art/icons/ability_mage_029.dds', hide = true }, -- Chasten (Harvester)
+    
+    [11079] = { icon = 'LuiExtended/media/icons/abilities/ability_harvester_black_winter.dds', hide = true }, -- Black Winter (Harvester)
     [26008] = { icon = 'LuiExtended/media/icons/abilities/ability_harvester_black_winter.dds', hide = true }, -- Black Winter (Harvester)
     [74794] = { name = A.Innate_Stagger }, -- Black Winter (Harvester)
+    
     [11083] = { icon = 'LuiExtended/media/icons/abilities/ability_harvester_the_feast.dds' }, -- The Feast (Harvester)
     [26110] = { icon = 'LuiExtended/media/icons/abilities/ability_harvester_the_feast.dds' }, -- The Feast (Harvester)
+    [26017] = { hide = true }, -- Creeping Doom (The Feast)
+    [26018] = { hide = true }, -- Creeping Doom (The Feast)
+    [88070] = { hide = true }, -- Creeping Doom (The Feast)
     [73916] = { hide = true }, -- GEN 2 Hits (Pointless passive applied on the Feast)
 
     [8204] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_strike.dds' }, -- Strike (Ogrim)
     [8205] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_regeneration.dds' }, -- Regeneration (Ogrim)
-    
     [48553] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_body_slam.dds', name = A.Skill_Body_Slam, hide = true },  -- Focused Charge (Ogrim)
     [24693] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_body_slam.dds', hide = true }, -- Body Slam (Ogrim)
     [24700] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_body_slam.dds' }, -- Body Slam (Ogrim)
+    
+    [91848] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_stomp.dds' }, -- Stomp (Ogrim)
+    [91850] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_stomp.dds' }, -- Stomp (Ogrim)
+    [91851] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_stomp.dds' }, -- Stomp (Ogrim)
+    
+    [91855] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boulder_toss.dds' }, -- Boulder Toss (Ogrim)
+    [91874] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boulder_toss.dds' }, -- Boulder Toss (Ogrim)
+    [91871] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_boulder_toss.dds' }, -- Boulder Toss (Ogrim)
 
     [6158] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_fire_ranged.dds' }, -- Flare (Scamp)
+    [6166] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_heat_wave.dds' }, -- Heat Wave (Scamp)
     [6167] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_heat_wave.dds' }, -- Heat Wave (Scamp)
+    [6160] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_rain_of_fire.dds' }, -- Rain of Fire (Scamp)
     [6162] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_rain_of_fire.dds' }, -- Rain of Fire (Scamp)
-
+    
     [8778] = { icon = 'LuiExtended/media/icons/abilities/ability_spiderdaedra_strike.dds' }, -- Strike (Spider Daedra)
     [8808] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_poison_ranged.dds', hide = true }, -- Spit (Spider Daedra)
+    [8779] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_lightning_onslaught.dds' }, -- Lightning Onslaught (Spider Daedra)
     [38658] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_lightning_onslaught.dds' }, -- Lightning Onslaught (Spider Daedra)
+    [8773] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_summon_spiderling.dds' }, -- Summon Spiderling (Spider Daedra)
+    [89303] = { hide = true }, -- Summon Spiderling (Spider Daedra)
+    [89301] = { icon = 'LuiExtended/media/icons/abilities/ability_debuff_weakness.dds', name = A.Skill_Weakness, duration = -120, type = BUFF_EFFECT_TYPE_DEBUFF }, -- Summon Spiderling (Spider Daedra)
+    [89306] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds' }, -- Web (Spider Daedra - Spiderling)
+    [89307] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds', duration = 0 }, -- Web (Spider Daedra - Spiderling)
+    [8782] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_lightning_storm.dds' }, -- Lightning Storm (Spider Daedra)
     [20530] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_lightning_storm.dds' }, -- Lightning Storm (Spider Daedra)
-    [89307] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_web.dds' }, -- Web (Spider Daedra - Spiderling)
 
     [4858] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_bash.dds' }, -- Bash (Storm Atronach)
     [13898] = { icon = 'LuiExtended/media/icons/abilities/ability_stormatronach_strike.dds' }, -- Strike (Storm Atronach)
@@ -5135,11 +5117,13 @@ E.EffectOverride = {
 
     [7095] = { icon = 'LuiExtended/media/icons/abilities/ability_weapon_melee_attackheavy.dds' }, -- Heavy Attack (Xivilai)
     [83072] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_freezing_edge.dds' }, -- Freezing Edge (Xivilai)
-    [49203] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_frozen_weapon.dds' }, -- Frozen Weapon (Xivilai)
-    [88949] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_lightning_onslaught.dds' }, -- Lightning Grasp (Xivilai)
-    [25728] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_hand_of_flame.dds', hide = true }, -- Hand of Flame (Xivilai)
-    [88947] = { hide = true }, -- Lightning Grasp (Xivilai) (Pointless aura)
+    [49203] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_root_frost.dds' }, -- Frozen Weapon (Xivilai)
+    [88947] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shock_pulse.dds' }, -- Lightning Grasp (Xivilai)
+    [88949] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_shock_pulse.dds' }, -- Lightning Grasp (Xivilai)
+    [7100] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_hand_of_flame.dds'}, -- Hand of Flame (Xivilai)
+    [25728] = { icon = 'LuiExtended/media/icons/abilities/ability_mage_hand_of_flame.dds'}, -- Hand of Flame (Xivilai)
 
+    -- MOVE ----------------------------------------------------
     [4652] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_gaze.dds' }, -- Gaze (Watcher)
     [4653] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_shockwave.dds' }, -- Shockwave (Watcher)
     [43817] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_shockwave.dds', name = 'Shockwave' }, -- Shockwave Snare (Watcher)
@@ -5150,9 +5134,11 @@ E.EffectOverride = {
     [14547] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds' }, -- Doom-Truth's Gaze (Watcher)
     [14426] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds' }, -- Doom-Truth's Gaze (Watcher)
     [14546] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds' }, -- Doom-Truth's Gaze (Watcher)
+    -- MOVE ----------------------------------------------------
 
     [12062] = { icon = 'LuiExtended/media/icons/abilities/ability_wingedtwilight_kick.dds' }, -- Kick (Winged Twilight)
     [13690] = { icon = 'LuiExtended/media/icons/abilities/ability_wingedtwilight_kick.dds' }, -- Kick (Winged Twilight)
+    [6410] = { icon = 'LuiExtended/media/icons/abilities/ability_wingedtwilight_tail_clip.dds' }, -- Tail Clip (Winged Twilight)
     [63612] = { icon = 'LuiExtended/media/icons/abilities/ability_wingedtwilight_tail_clip.dds' }, -- Tail Clip (Winged Twilight)
     [6412] = { icon = 'LuiExtended/media/icons/abilities/ability_wingedtwilight_dusks_howl.dds' }, -- Dusk's Howl (Winged Twilight)
 
@@ -5882,12 +5868,6 @@ E.EffectOverride = {
     [86983] = { icon = 'esoui/art/icons/ability_mage_018.dds', type = BUFF_EFFECT_TYPE_DEBUFF}, -- Succubus Touch
     [86984] = { hide = true }, -- Succubus Touch
     
-    [85390] = { hide = true}, -- Slash (Cliff Strider Matriach)
-    [85391] = { icon = 'LuiExtended/media/icons/abilities/ability_cliffstrider_slash.dds' }, -- Slash (Cliff Strider Matriach)
-    [85394] = { icon = 'LuiExtended/media/icons/abilities/ability_cliffstrider_slash.dds' }, -- Slash (Cliff Strider Matriach)
-    [85392] = { icon = 'LuiExtended/media/icons/abilities/ability_cliffstrider_slash.dds' }, -- Slash (Cliff Strider Matriach)
-    [85393] = { icon = 'LuiExtended/media/icons/abilities/ability_cliffstrider_slash.dds' }, -- Slash (Cliff Strider Matriach)
-    
     [86930] = { icon = 'esoui/art/icons/ability_mage_006.dds' }, -- Volcanic Debris
     [86932] = { hide = true}, -- Volcanic Debris
     [90500] = { hide = true}, -- Volcanic Debris
@@ -6051,28 +6031,32 @@ E.FakeExternalDebuffs = {
     [63168] = { icon = 'esoui/art/icons/ability_dragonknight_010.dds', name = A.Skill_Cage_Talons, duration = 3500, ignoreBegin = true }, -- Cage Talons (Justice Guard 1H + 2H)
     
     -- Standard NPC Abilities
-    [29401] = {icon = 'esoui/art/icons/ability_1handed_005.dds', name = A.Skill_Power_Bash, duration = 3000}, --Power Bash (NPC Disorient)
-    [14926] = {icon = 'esoui/art/icons/ability_warrior_011.dds', name = A.Skill_Shield_Rush, duration = 2000}, -- Charge (Human NPC)
-    [10650] = {icon = 'LuiExtended/media/icons/abilities/ability_warrior_oil_drenched.dds', name = A.Skill_Oil_Drenched, duration = 0}, -- Oil Drenched
-    [79930] = {icon = 'esoui/art/icons/ability_rogue_066.dds', name = A.Skill_Lunge, duration = 2500 }, -- Lunge (Tracker) (Morrowind)
+    [29401] = { icon = 'esoui/art/icons/ability_1handed_005.dds', name = A.Skill_Power_Bash, duration = 3000 }, --Power Bash (NPC Disorient)
+    [14926] = { icon = 'esoui/art/icons/ability_warrior_011.dds', name = A.Skill_Shield_Rush, duration = 2000 }, -- Charge (Human NPC)
+    [10650] = { icon = 'LuiExtended/media/icons/abilities/ability_warrior_oil_drenched.dds', name = A.Skill_Oil_Drenched, duration = 0 }, -- Oil Drenched
+    [79930] = { icon = 'esoui/art/icons/ability_rogue_066.dds', name = A.Skill_Lunge, duration = 2500 }, -- Lunge (Tracker) (Morrowind)
 
     -- Animals
-    [69073] = {icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', name = A.Skill_Slam, duration = 2000}, -- Knockdown (Bear Orsinium)
-    [74336] = { icon = 'LuiExtended/media/icons/abilities/ability_hajmota_bog_burst.dds', name = A.Skill_Bog_Burst, duration = 2000}, -- Bog Burst (Haj Mota)
+    [69073] = { icon = 'LuiExtended/media/icons/abilities/ability_bear_crushing_swipe.dds', name = A.Skill_Slam, duration = 2000 }, -- Knockdown (Bear Orsinium)
+    [74336] = { icon = 'LuiExtended/media/icons/abilities/ability_hajmota_bog_burst.dds', name = A.Skill_Bog_Burst, duration = 2000 }, -- Bog Burst (Haj Mota)
 
     -- Daedra
-    [50023] = {icon = 'LuiExtended/media/icons/abilities/ability_airatronach_lightning_rod.dds', name = A.Skill_Lightning_Rod, duration = 4000, ignoreBegin = true}, -- Lightning Rod (Air Atronach)
-    [33551] = {icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_chilling_aura.dds', name = A.Skill_Chilling_Aura, duration = 0}, -- Chilling Aura (Frost Atronach) -- TEMPORARY FIX FOR THIS DEBUFF
-    [51646] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds', name = A.Skill_Frozen_Ground, duration = 0}, -- Frozen Ground (Frost Atronach) -- TEMPORARY FIX FOR THIS DEBUFF
+    [50023] = { icon = 'LuiExtended/media/icons/abilities/ability_airatronach_lightning_rod.dds', name = A.Skill_Lightning_Rod, duration = 4000, ignoreBegin = true }, -- Lightning Rod (Air Atronach)
+    [33551] = { icon = 'LuiExtended/media/icons/abilities/ability_frostatronach_chilling_aura.dds', name = A.Skill_Chilling_Aura, duration = 0 }, -- Chilling Aura (Frost Atronach)
+    [51646] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_snare_frost.dds', name = A.Skill_Frozen_Ground, duration = 0 }, -- Frozen Ground (Frost Atronach)
     
-    [24700] = {icon = 'LuiExtended/media/icons/abilities/ability_ogrim_body_slam.dds', name = A.Skill_Body_Slam, duration = 2000}, -- Body Slam (Ogrim)
-    [12287] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds', name = A.Skill_Storm_Bound, duration = 8000}, -- Storm Bound (Storm Atronach) (DOT)
-    [12288] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds', name = A.Skill_Storm_Bound, duration = 8000}, -- Storm Bound (Storm Atronach) (Snare)
+    [24700] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_body_slam.dds', name = A.Skill_Body_Slam, duration = 2000 }, -- Body Slam (Ogrim)
+    [91851] = { icon = 'LuiExtended/media/icons/abilities/ability_ogrim_stomp.dds', name = A.Skill_Stomp, duration = 2000 }, -- Stomp (Ogrim)
+    
+    [12287] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds', name = A.Skill_Storm_Bound, duration = 8000 }, -- Storm Bound (Storm Atronach) (DOT)
+    [12288] = {icon = 'LuiExtended/media/icons/abilities/ability_innate_storm_bound.dds', name = A.Skill_Storm_Bound, duration = 8000 }, -- Storm Bound (Storm Atronach) (Snare)
+    
+    [6412] = { icon = 'LuiExtended/media/icons/abilities/ability_wingedtwilight_dusks_howl.dds', name = A.Skill_Dusks_Howl, duration = 2000, ignoreBegin = true }, -- Dusk's Howl (Winged Twilight)
 
     -- Insects
-    [9237] = {icon = 'LuiExtended/media/icons/abilities/ability_wasp_inject_larva.dds', name = A.Skill_Inject_Larva, duration = 10000}, -- Larva Gestation (Giant Wasp)
+    [9237] = { icon = 'LuiExtended/media/icons/abilities/ability_wasp_inject_larva.dds', name = A.Skill_Inject_Larva, duration = 10000 }, -- Larva Gestation (Giant Wasp)
     [6795] = { icon = 'LuiExtended/media/icons/abilities/ability_hoarvor_latch_on.dds', name = A.Skill_Latch_On, duration = 7500 }, -- Latch On (Hoarvor)
-    [8429] = {icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_zap.dds', name = A.Skill_Zap, duration = 4000, ignoreBegin = true}, -- Zap (Thunderbug)
+    [8429] = { icon = 'LuiExtended/media/icons/abilities/ability_thunderbug_zap.dds', name = A.Skill_Zap, duration = 4000, ignoreBegin = true }, -- Zap (Thunderbug)
 
     -- Monsters
     [48287] = {icon = 'esoui/art/icons/ability_debuff_snare.dds', name = 'Consuming Omen', duration = 1500}, -- Consuming Omen (Troll - Ranged) (Fake aura to replace bugged aura)

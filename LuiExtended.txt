@@ -14,8 +14,9 @@
 
 ; The MIT License (MIT)
 ;
-; Copyright (c) 2017 @ArtOfShred at ESOUI.COM
-; Copyright (c) 2015-2016, @SpellBuilder and Upularity at ESOUI.COM
+; Copyright (c) 2017 - LuiExtended - ArtOfShred at esoui.com
+; Copyright (c) 2015-2016 - LuiExtended - SpellBuilder and Upularity at esoui.com
+; Copyright (c) 2014 - Combat Cloud - Samantha James
 ;
 ; Permission is hereby granted, free of charge, to any person obtaining a copy
 ; of this software and associated documentation files (the "Software"), to deal
@@ -58,8 +59,9 @@ LuiExtended.lua
 LuiExtendedUI.lua
 LuiExtendedMenu.lua
 
-bindings.xml
-
+xml\bindings.xml
+xml\CombatText.xml
+ 
 i18n\en.lua
 i18n\$(language).lua
 
@@ -75,8 +77,7 @@ modules\DamageMeter.lua
 modules\InfoPanel.lua
 modules\UnitFrames.lua
 modules\SpellCastBuffs.lua
-
-modules\CombatText.xml
+modules\CombatText.lua
 
 modules\CombatText\Animation.lua
 modules\CombatText\Pool.lua
@@ -101,5 +102,3 @@ modules\CombatText\EventViewers\Alerts.lua
 modules\CombatText\EventViewers\CrowdControl.lua
 modules\CombatText\EventViewers\Points.lua
 modules\CombatText\EventViewers\Resources.lua
-
-modules\CombatText.lua

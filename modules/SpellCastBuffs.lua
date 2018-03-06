@@ -370,7 +370,6 @@ function SCB.Initialize( enabled )
         SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment2 )
         SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment1 )
         SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment2 )
-        
     end
 
     if SCB.SV.lockPositionToUnitFrames and LUIE.UnitFrames.CustomFrames.reticleover and LUIE.UnitFrames.CustomFrames.reticleover.buffs and LUIE.UnitFrames.CustomFrames.reticleover.debuffs then
@@ -525,8 +524,7 @@ function SCB.Initialize( enabled )
         SCB.SV.ShowDebugCombat = true
         SCB.SV.ShowDebugEffect = true
     end
-    SCB.RegisterDebugEvents()
-    
+    SCB.RegisterDebugEvents()  
 end
 
 function SCB.RegisterDebugEvents()
@@ -542,7 +540,6 @@ end
 
 -- Debug Display for Combat Events
 function SCB.EventCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
-
     -- Don't display if this aura is already added to the filter
     if debugAuras[abilityId] then return end
         
@@ -568,12 +565,10 @@ function SCB.EventCombatDebug(eventCode, result, isError, abilityName, abilityGr
     end
     
     d("["..abilityId.."] "..ability..": [S] "..source.." --> [T] "..target .. " [D] " .. duration .. showachantime .. showacasttime .. " [R] " .. result)
-
 end
 
 -- Debug Display for Effect Events
 function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
-
     if debugAuras[abilityId] then return end
     
     unitName = zo_strformat("<<t:1>>", unitName)
@@ -600,24 +595,19 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
     else
         d("|c00E200Refreshed:|r (" .. changeType .. ") [" .. abilityId .. "] " ..effectName .. ": [Tag] ".. unitName .. " [Dur] " .. duration )
     end
-
 end
 
-function SCB.DuelStart()
-    
+function SCB.DuelStart()   
     local duelState, characterName = GetDuelInfo()
     if duelState == 3 and not SCB.SV.IgnoreBattleSpiritTarget then
         g_currentDuelTarget = strformat(SI_UNIT_NAME, characterName)
         SCB.ReloadEffects("reticleover")
     end
-
 end
 
 function SCB.DuelEnd()
-
     g_currentDuelTarget = nil
     SCB.ReloadEffects("reticleover")
-
 end
 
 function SCB.InitializeDisguise()
@@ -657,14 +647,13 @@ function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory
 
             local name = GetItemName(0, 10)
             local icon = E.DisguiseIcons[g_currentDisguise].icon
-            g_effectsList.player1["DisguiseType"] =
-                {
-                    target="player", type=1,
-                    name=name, icon=icon,
-                    dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                    forced = "long",
-                    restart=true, iconNum=0
-                }
+            g_effectsList.player1["DisguiseType"] = {
+                target="player", type=1,
+                name=name, icon=icon,
+                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+                forced = "long",
+                restart=true, iconNum=0
+            }
         end
     end
 end
@@ -674,15 +663,13 @@ function SCB.MountStatus(eventCode, mounted)
     g_effectsList.player1["Mount"] = nil
 
     if mounted and not SCB.SV.IgnoreMount then
-
-        g_effectsList.player1["Mount"] =
-            {
-                target="player", type=1,
-                name=A.Innate_Mounted, icon='LuiExtended/media/icons/abilities/ability_innate_mounted.dds',
-                dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                forced = "long",
-                restart=true, iconNum=0
-            }
+        g_effectsList.player1["Mount"] = {
+            target="player", type=1,
+            name=A.Innate_Mounted, icon='LuiExtended/media/icons/abilities/ability_innate_mounted.dds',
+            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+            forced = "long",
+            restart=true, iconNum=0
+        }
     end
 end
 
@@ -696,14 +683,13 @@ function SCB.CollectibleBuff()
     -- PETS
     if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0 and not SCB.SV.IgnorePet and not IsPlayerInAvAWorld() then
         local Collectible = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
-            g_effectsList.player1["PetType"] =
-                {
-                        target="player", type=1,
-                        name=A.Innate_Vanity_Pet, icon='LuiExtended/media/icons/abilities/ability_innate_pet.dds',
-                        dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                        forced = "long",
-                        restart=true, iconNum=0
-                }
+        g_effectsList.player1["PetType"] = {
+            target="player", type=1,
+            name=A.Innate_Vanity_Pet, icon='LuiExtended/media/icons/abilities/ability_innate_pet.dds',
+            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+            forced = "long",
+            restart=true, iconNum=0
+        }
     else
         g_effectsList.player1["PetType"] = nil
     end
@@ -715,18 +701,16 @@ function SCB.CollectibleBuff()
 
         local iconAssistant = E.AssistantIcons[CollectibleName] ~= nil and E.AssistantIcons[CollectibleName] or ''
 
-            g_effectsList.player1["AssistantType"] =
-                {
-                        target="player", type=1,
-                        name=CollectibleName, icon=iconAssistant,
-                        dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
-                        forced = "long",
-                        restart=true, iconNum=0
-                }
+        g_effectsList.player1["AssistantType"] = {
+            target="player", type=1,
+            name=CollectibleName, icon=iconAssistant,
+            dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
+            forced = "long",
+            restart=true, iconNum=0
+        }
     else
         g_effectsList.player1["AssistantType"] = nil
     end
-
 end
 
 -- Sets horizontal alignment of icon. Called from Settings Menu.
@@ -1204,7 +1188,6 @@ function SCB.ApplyFont()
     end
 end
 
-
 --[[
  * Runs on the EVENT_EFFECT_CHANGED listener.
  * This handler fires every long-term effect added or removed:
@@ -1222,7 +1205,6 @@ end
  *   integer statusEffectType
  ]]--
 function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
-    
     if castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
         if g_pendingGroundAbility and g_pendingGroundAbility.id == abilityId and changeType == EFFECT_RESULT_GAINED then
             -- Cast ability
@@ -1255,12 +1237,12 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                             forced=nil,
                             restart=true, iconNum=0,
                             unbreakable=0,
-                            stack = stackCount }
+                            stack = stackCount
+						}
                     end
                 end
             end
         end
-        
     end
     
     if E.EffectOverride[abilityId] then
@@ -1429,23 +1411,22 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 end
 
 function SCB.ArtificialEffectUpdate(eventCode, effectId)
-
     if effectId then g_effectsList.player1[effectId] = nil end
 
     for effectId in ZO_GetNextActiveArtificialEffectIdIter do
-            local displayName, iconFile, effectType, _, startTime = GetArtificialEffectInfo(effectId)
-            --local forcedType = E.EffectForcedType[artificialEffectId]
-            -- Bail out if we don't have Battle Spirit display for the player on
+        local displayName, iconFile, effectType, _, startTime = GetArtificialEffectInfo(effectId)
+        --local forcedType = E.EffectForcedType[artificialEffectId]
+        -- Bail out if we don't have Battle Spirit display for the player on
             
-            if (effectId == 0 or effectId == 2) and SCB.SV.IgnoreBattleSpiritPlayer then return end
+        if (effectId == 0 or effectId == 2) and SCB.SV.IgnoreBattleSpiritPlayer then return end
 
-            g_effectsList.player1[ effectId ] = {
-                target="player", type=effectType,
-                id=effectId, name = displayName, icon = iconFile,
-                dur=0, starts=startTime, ends=nil,
-                --forced = forcedType,
-                restart=true, iconNum=0,
-                }
+        g_effectsList.player1[ effectId ] = {
+            target="player", type=effectType,
+            id=effectId, name = displayName, icon = iconFile,
+            dur=0, starts=startTime, ends=nil,
+            --forced = forcedType,
+            restart=true, iconNum=0,
+        }
     end    
 end
 
@@ -1470,7 +1451,6 @@ local IsResultDamage = {
  
  -- Combat Event (Target = Player)
 function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
- 
     if not (E.FakeExternalBuffs[abilityId] or E.FakeExternalDebuffs[abilityId] or E.FakePlayerBuffs[abilityId] or E.FakeStagger[abilityId]) then return end
     
     -- If the action result isn't a starting/ending event then we ignore it.
@@ -1508,12 +1488,13 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         local target = strformat("<<t:1>>",targetName)
         if source ~= "" and target == LUIE.PlayerNameFormatted then
             g_effectsList.player1[ abilityId ] = {
-            type=1,
-            id=abilityId, name=effectName, icon=iconName,
-            dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-            forced = "short",
-            restart=true, iconNum=0,
-            unbreakable=unbreakable }
+				type=1,
+				id=abilityId, name=effectName, icon=iconName,
+				dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+				forced = "short",
+				restart=true, iconNum=0,
+				unbreakable=unbreakable
+			}
         end
     end
     
@@ -1551,13 +1532,14 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         local target = strformat("<<t:1>>",targetName)
         if source ~= "" and target == LUIE.PlayerNameFormatted then
             g_effectsList.player2[ abilityId ] = {
-            type=BUFF_EFFECT_TYPE_DEBUFF,
-            id=abilityId, name=effectName, icon=iconName,
-            dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-            forced = "short",
-            restart=true, iconNum=0,
-            internalStack = internalStack,
-            unbreakable=unbreakable }
+				type=BUFF_EFFECT_TYPE_DEBUFF,
+				id=abilityId, name=effectName, icon=iconName,
+				dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+				forced = "short",
+				restart=true, iconNum=0,
+				internalStack = internalStack,
+				unbreakable=unbreakable
+			}
         end
     end
     
@@ -1582,20 +1564,22 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         if source == LUIE.PlayerNameFormatted and target == LUIE.PlayerNameFormatted then
             if E.FakePlayerBuffs[abilityId].debuff == true then -- If the "buff" is flagged as a debuff, then display it here instead
                 g_effectsList.player2[ abilityId ] = {
-                type=BUFF_EFFECT_TYPE_DEBUFF,
-                id=abilityId, name=effectName, icon=iconName,
-                dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-                forced = "short",
-                restart=true, iconNum=0,
-                unbreakable=unbreakable }
+					type=BUFF_EFFECT_TYPE_DEBUFF,
+					id=abilityId, name=effectName, icon=iconName,
+					dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+					forced = "short",
+					restart=true, iconNum=0,
+					unbreakable=unbreakable
+				}
             else -- Otherwise, display as a normal buff
                 g_effectsList.player1[ abilityId ] = {
-                type=1,
-                id=abilityId, name=effectName, icon=iconName,
-                dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-                forced = "short",
-                restart=true, iconNum=0,
-                unbreakable=unbreakable }
+					type=1,
+					id=abilityId, name=effectName, icon=iconName,
+					dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+					forced = "short",
+					restart=true, iconNum=0,
+					unbreakable=unbreakable
+				}
             end
         end
     end
@@ -1613,12 +1597,13 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         local unitName = strformat("<<t:1>>", GetUnitName("reticleover") )
         if source ~= "" and target == LUIE.PlayerNameFormatted then
             g_effectsList.player2[ abilityId ] = {
-            type=BUFF_EFFECT_TYPE_DEBUFF,
-            id=abilityId, name=effectName, icon=iconName,
-            dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-            forced = "short",
-            restart=true, iconNum=0,
-            unbreakable=unbreakable }
+				type=BUFF_EFFECT_TYPE_DEBUFF,
+				id=abilityId, name=effectName, icon=iconName,
+				dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+				forced = "short",
+				restart=true, iconNum=0,
+				unbreakable=unbreakable
+			}
         end
     end
     
@@ -1699,12 +1684,13 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
                 return
             end
             g_effectsList.reticleover1[ abilityId ] = {
-            type=effectType,
-            id=abilityId, name=effectName, icon=iconName,
-            dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-            forced = "short",
-            restart=true, iconNum=0,
-            unbreakable=unbreakable }
+				type=effectType,
+				id=abilityId, name=effectName, icon=iconName,
+				dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+				forced = "short",
+				restart=true, iconNum=0,
+				unbreakable=unbreakable
+			}
         end
     end
     
@@ -1731,22 +1717,24 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
             end
             if unitName == target then
                 g_effectsList.ground[ abilityId ] = {
-                type=effectType,
-                id=abilityId, name=effectName, icon=iconName,
-                dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-                forced = "short",
-                restart=true, iconNum=0,
-                unbreakable=unbreakable,
-                savedName = strformat(SI_UNIT_NAME, targetName) }
+					type=effectType,
+					id=abilityId, name=effectName, icon=iconName,
+					dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+					forced = "short",
+					restart=true, iconNum=0,
+					unbreakable=unbreakable,
+					savedName = strformat(SI_UNIT_NAME, targetName)
+				}
             else
                 g_effectsList.saved[ abilityId ] = {
-                type=effectType,
-                id=abilityId, name=effectName, icon=iconName,
-                dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-                forced = "short",
-                restart=true, iconNum=0,
-                unbreakable=unbreakable,
-                savedName = strformat(SI_UNIT_NAME, targetName) }
+					type=effectType,
+					id=abilityId, name=effectName, icon=iconName,
+					dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+					forced = "short",
+					restart=true, iconNum=0,
+					unbreakable=unbreakable,
+					savedName = strformat(SI_UNIT_NAME, targetName)
+				}
             end
         end
     end
@@ -1768,22 +1756,24 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
             end
             if unitName == target then
                 g_effectsList.ground[ abilityId ] = {
-                type=BUFF_EFFECT_TYPE_DEBUFF,
-                id=abilityId, name=effectName, icon=iconName,
-                dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-                forced = "short",
-                restart=true, iconNum=0,
-                unbreakable=unbreakable,
-                savedName = strformat(SI_UNIT_NAME, targetName) }
+					type=BUFF_EFFECT_TYPE_DEBUFF,
+					id=abilityId, name=effectName, icon=iconName,
+					dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+					forced = "short",
+					restart=true, iconNum=0,
+					unbreakable=unbreakable,
+					savedName = strformat(SI_UNIT_NAME, targetName)
+				}
             else
                 g_effectsList.saved[ abilityId ] = {
-                type=BUFF_EFFECT_TYPE_DEBUFF,
-                id=abilityId, name=effectName, icon=iconName,
-                dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
-                forced = "short",
-                restart=true, iconNum=0,
-                unbreakable=unbreakable,
-                savedName = strformat(SI_UNIT_NAME, targetName) }
+					type=BUFF_EFFECT_TYPE_DEBUFF,
+					id=abilityId, name=effectName, icon=iconName,
+					dur=duration, starts=beginTime, ends=(duration > 0) and (endTime) or nil,
+					forced = "short",
+					restart=true, iconNum=0,
+					unbreakable=unbreakable,
+					savedName = strformat(SI_UNIT_NAME, targetName)
+				}
             end
         end
     end
@@ -1849,11 +1839,12 @@ function SCB.ReloadEffects(unitTag)
         if E.AddNameAura[unitName] and GetUnitReaction(unitTag) == UNIT_REACTION_HOSTILE and not (IsUnitDead(unitTag) and unitTag == "player") and IsUnitInCombat(unitTag) then
             for k, v in ipairs(E.AddNameAura[unitName]) do
                 g_effectsList.reticleover1[ "Name Specific Buff" .. k ] = {
-                type=1,
-                name= v.name, icon= v.icon,
-                dur=0, starts=1, ends=nil,
-                forced = "short",
-                restart=true, iconNum=0 }
+					type=1,
+					name= v.name, icon= v.icon,
+					dur=0, starts=1, ends=nil,
+					forced = "short",
+					restart=true, iconNum=0
+				}
             end
         end
     end
@@ -1864,25 +1855,25 @@ function SCB.ReloadEffects(unitTag)
         if recallRemain > 0 then
             local currentTime = GetGameTimeMilliseconds()
             g_effectsList["player1"][ A.Innate_Recall_Penalty ] = {
-                        target="player", type=1,
-                        name=A.Innate_Recall_Penalty, icon='LuiExtended/media/icons/abilities/ability_innate_recall_cooldown.dds',
-                        dur=recallRemain, starts=currentTime, ends=currentTime+recallRemain,
-                        forced = "long",
-                        restart=true, iconNum=0,
-                        unbreakable=1 }
+                target="player", type=1,
+                name=A.Innate_Recall_Penalty, icon='LuiExtended/media/icons/abilities/ability_innate_recall_cooldown.dds',
+                dur=recallRemain, starts=currentTime, ends=currentTime+recallRemain,
+                forced = "long",
+                restart=true, iconNum=0,
+                unbreakable=1
+			}
         end
     end
     
     -- Add Battle Spirit icon to target in Cyrodiil or Battlegrounds
     if unitTag == "reticleover" and ( IsInAvAZone() or IsActiveWorldBattleground() or GetUnitName(unitTag) == g_currentDuelTarget ) and IsUnitPlayer("reticleover") and not SCB.SV.IgnoreBattleSpiritTarget then
-        g_effectsList.reticleover1[ "Battle Spirit" ] =
-            {
+        g_effectsList.reticleover1[ "Battle Spirit" ] = {
             target ="player", type=1,
             name="Battle Spirit", icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
             dur=0, starts=1, ends=nil,
             forced = "short",
             restart=true, iconNum=0
-            }
+        }
     end
 
     if unitTag == "reticleover" then
@@ -1912,13 +1903,12 @@ function SCB.ReloadEffects(unitTag)
     
         if not SCB.SV.IgnoreBattleSpiritTarget then
             if ( ( IsInAvAZone() or IsActiveWorldBattleground() ) and IsUnitPlayer("reticleover") ) or GetUnitName(unitTag) == g_currentDuelTarget then
-                g_effectsList.reticleover1[ "Battle Spirit" ] =
-                {
-                target ="player", type=1,
-                name="Battle Spirit", icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
-                dur=0, starts=1, ends=nil,
-                forced = "short",
-                restart=true, iconNum=0
+                g_effectsList.reticleover1[ "Battle Spirit" ] = {
+					target ="player", type=1,
+					name="Battle Spirit", icon = "esoui/art/icons/artificialeffect_battle-spirit.dds",
+					dur=0, starts=1, ends=nil,
+					forced = "short",
+					restart=true, iconNum=0
                 }
             end
         end
@@ -1926,18 +1916,15 @@ function SCB.ReloadEffects(unitTag)
         if SCB.SV.StealthStateTarget then
             local stealthState = GetUnitStealthState ("reticleover")
             if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
-                g_effectsList.reticleover1[ A.Innate_Hidden ] =
-                {
+                g_effectsList.reticleover1[ A.Innate_Hidden ] = {
                     type=1,
                     name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
                     dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
                     forced = "short",
                     restart=true, iconNum=0
                 }
-            
             elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
-                g_effectsList.reticleover1[ A.Innate_Hidden ] =
-                {
+                g_effectsList.reticleover1[ A.Innate_Hidden ] = {
                     type=1,
                     name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
                     dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
@@ -1955,8 +1942,7 @@ function SCB.ReloadEffects(unitTag)
             --d("Disguise State: " .. disguiseState )
             if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
                 -- Trigger a buff
-                g_effectsList.reticleover1[ A.Innate_Disguised ] =
-                {
+                g_effectsList.reticleover1[ A.Innate_Disguised ] = {
                     type=1,
                     name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
                     dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
@@ -1981,15 +1967,15 @@ function SCB.PlayerCombatState(eventCode, inCombat)
         if E.AddNameAura[unitName] and GetUnitReaction('reticleover') == UNIT_REACTION_HOSTILE and not IsUnitDead('reticleover') and IsUnitInCombat('reticleover') then
             for k, v in ipairs(E.AddNameAura[unitName]) do
                 g_effectsList.reticleover1[ "Name Specific Buff" .. k ] = {
-                type=1,
-                name= v.name, icon= v.icon,
-                dur=0, starts=1, ends=nil,
-                forced = "short",
-                restart=true, iconNum=0 }
+					type=1,
+					name= v.name, icon= v.icon,
+					dur=0, starts=1, ends=nil,
+					forced = "short",
+					restart=true, iconNum=0
+				}
             end
         end
     end
-
 end
 
 -- Process new ability buff effects
@@ -2023,10 +2009,8 @@ function SCB.NewEffects( ability )
                     }
                 end
             end
-
         end
-    end
-    
+    end 
 end
 
 -- Called from EVENT_ACTION_SLOT_ABILITY_USED listener
@@ -2041,7 +2025,6 @@ function SCB.OnSlotAbilityUsed(eventCode, slotNum)
 
     if ability then -- Only proceed if this button is being watched
         -- Get the time
-
         -- Avoid failure and button mashing
         if not HasFailure( slotNum ) and ( currentTime > g_lastCast + 250 ) then
 
@@ -2059,9 +2042,7 @@ function SCB.OnSlotAbilityUsed(eventCode, slotNum)
                 g_lastCast = currentTime
             end
         end
- 
     end
-    
 end
 
 -- Called from EVENT_ACTION_SLOT_UPDATED listener
@@ -2113,9 +2094,8 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
         ground  = ( GetAbilityTargetDescription(ability_id) == "Ground" ),
         effects = effects,
         duration = duration,
-        slotNum=slotNum
+        slotNum = slotNum
     }
-
 end
 
 function SCB.OnSlotsFullUpdate(eventCode, isHotbarSwap)
@@ -2375,8 +2355,7 @@ end
 function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
     if SCB.SV.StealthStatePlayer and unitTag == "player" then
         if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
-            g_effectsList.player1[ A.Innate_Hidden ] =
-            {
+            g_effectsList.player1[ A.Innate_Hidden ] = {
                 type=1,
                 name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
@@ -2385,8 +2364,7 @@ function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
             }
         
         elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
-            g_effectsList.player1[ A.Innate_Hidden ] =
-            {
+            g_effectsList.player1[ A.Innate_Hidden ] = {
                 type=1,
                 name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
@@ -2400,8 +2378,7 @@ function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
 
     if SCB.SV.StealthStateTarget and unitTag == "reticleover" then
         if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
-            g_effectsList.reticleover1[ A.Innate_Hidden ] =
-            {
+            g_effectsList.reticleover1[ A.Innate_Hidden ] = {
                 type=1,
                 name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
@@ -2410,8 +2387,7 @@ function SCB.StealthStateChanged( eventCode , unitTag , stealthState )
             }
         
         elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
-            g_effectsList.reticleover1[ A.Innate_Hidden ] =
-            {
+            g_effectsList.reticleover1[ A.Innate_Hidden ] = {
                 type=1,
                 name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
@@ -2429,8 +2405,7 @@ function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
     if SCB.SV.DisguiseStatePlayer and unitTag == "player" then
         if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
             -- Trigger a buff
-            g_effectsList.player1[ A.Innate_Disguised ] =
-            {
+            g_effectsList.player1[ A.Innate_Disguised ] = {
                 type=1,
                 name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
@@ -2447,8 +2422,7 @@ function SCB.DisguiseStateChanged( eventCode , unitTag , disguiseState )
     if SCB.SV.DisguiseStatePlayer and unitTag == "reticleover" then
         if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
             -- Trigger a buff
-            g_effectsList.reticleover1[ A.Innate_Disguised ] =
-            {
+            g_effectsList.reticleover1[ A.Innate_Disguised ] = {
                 type=1,
                 name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
@@ -2494,8 +2468,7 @@ function SCB.OnPlayerActivated(eventCode)
         local disguiseState = GetUnitDisguiseState ("player")
         if ( disguiseState == DISGUISE_STATE_DISGUISED or disguiseState == DISGUISE_STATE_DANGER or disguiseState == DISGUISE_STATE_SUSPICIOUS or disguiseState == DISGUISE_STATE_DISCOVERED ) then
             -- Trigger a buff
-            g_effectsList.player1[ A.Innate_Disguised ] =
-            {
+            g_effectsList.player1[ A.Innate_Disguised ] = {
                 type=1,
                 name=A.Innate_Disguised, icon="LuiExtended/media/icons/abilities/ability_innate_disguised.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
@@ -2511,8 +2484,7 @@ function SCB.OnPlayerActivated(eventCode)
     if SCB.SV.StealthStatePlayer then
         local stealthState = GetUnitStealthState ("player")
         if ( stealthState == STEALTH_STATE_HIDDEN or stealthState == STEALTH_STATE_HIDDEN_ALMOST_DETECTED) then
-            g_effectsList.player1[ A.Innate_Hidden ] =
-            {
+            g_effectsList.player1[ A.Innate_Hidden ] = {
                 type=1,
                 name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_hidden.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
@@ -2521,8 +2493,7 @@ function SCB.OnPlayerActivated(eventCode)
             }
         
         elseif ( stealthState == STEALTH_STATE_STEALTH or stealthState == STEALTH_STATE_STEALTH_ALMOST_DETECTED ) then
-            g_effectsList.player1[ A.Innate_Hidden ] =
-            {
+            g_effectsList.player1[ A.Innate_Hidden ] = {
                 type=1,
                 name=A.Innate_Hidden, icon="LuiExtended/media/icons/abilities/ability_innate_invisible.dds",
                 dur=0, starts=1, ends=nil, -- ends=nil : last buff in sorting
@@ -2604,7 +2575,6 @@ function SCB.OnVibration(eventCode, duration, coarseMotor, fineMotor, leftTrigge
 end
 
 function SCB.UpdateContextHideList()
-
     hidePlayerEffects = { }
     hideTargetEffects = { }
 
@@ -2723,5 +2693,4 @@ function SCB.UpdateContextHideList()
     -- Add food here?
     -- if SCB.SV.ShowBlockPlayer then -- Currently we use ability_type to hide/show this, maybe add here later when I can determine NPC block abilities
     -- if SCB.SV.ShowBlockTarget then
-
 end

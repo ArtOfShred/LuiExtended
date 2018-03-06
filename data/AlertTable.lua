@@ -231,6 +231,7 @@ LUIE.AlertTable = {
     
     [85395] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3 }, -- Dive (Cliff Strider)
     [85399] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true }, -- Retch (Cliff Strider)
+    [85390] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true, refire = 750 }, -- Slash (Cliff Strider)
     
     -- INSECTS
     [6137] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true}, -- Laceration (Assassin Beetle)
@@ -285,14 +286,36 @@ LUIE.AlertTable = {
     [50021] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Ice Vortex (Air Atronach)
     [50023] = { block = true, dodge = false, avoid = false, interrupt = true, priority = 3, refire = 1000}, -- Lightning Rod (Air Atronach)
     
+    [26641] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2 }, -- Soul Flame (Daedric Titan)
+    [26554] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 2 }, -- Wing Gust (Daedric Titan)
+    
     [26324] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Lava Geyser (Flame Atronach)
     [50216] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, skipcheck = true, refire = 1000 }, -- Combustion (Flame Atronach)
     
     [5017] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2 }, -- Hoarfrost Fist (Frost Atronach)
     [33502] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2 }, -- Frozen Ground (Frost Atronach)
     
+    [11079] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 2, eventdetect = true }, -- Black Winter (Harvester)
+    
+    [91848] = { block = false, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true }, -- Stomp (Ogrim)
+    [91855] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Boulder Toss (Ogrim)
+    
+    [6166] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Heat Wave (Scamp) 
+    [6160] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3, eventdetect = true}, -- Rain of Fire (Scamp) 
+    
+    [8779] = { block = true, dodge = false, avoid = false, interrupt = true, priority = 3, eventdetect = true }, -- Lightning Onslaught (Spider Daedra)
+    [89306] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Web (Spiderling)
+    [8782] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Lightning Storm (Spider Daedra)
+    
     [35220] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 2, eventdetect = true }, -- Impending Storm (Storm Atronach)
     [4864] = { block = false, dodge = true, avoid = false, interrupt = false, priority = 2, skipcheck = true }, -- Storm Bound (Storm Atronach)
+    
+    [7095] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Heavy Attack (Xivilai)
+    [88947] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Lightning Grasp (Xivilai)
+    [7100] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3 }, -- Hand of Flame (Xivilai)
+    
+    [6410] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Tail Clip (Winged Twilight)
+    [6412] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 3 }, -- Dusk's Howl (Winged Twilight)
     
     
     -- FLESH COLOSSUS (100% GOOD)
