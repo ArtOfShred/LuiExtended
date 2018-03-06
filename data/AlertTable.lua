@@ -286,6 +286,9 @@ LUIE.AlertTable = {
     [50021] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3}, -- Ice Vortex (Air Atronach)
     [50023] = { block = true, dodge = false, avoid = false, interrupt = true, priority = 3, refire = 1000}, -- Lightning Rod (Air Atronach)
     
+    [9747] = { block = true, dodge = false, avoid = false, interrupt = true, priority = 3 }, -- Dire Wound (Banekin)
+    [9748] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3 }, -- Envelop (Banekin)
+    
     [26641] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2 }, -- Soul Flame (Daedric Titan)
     [26554] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 2 }, -- Wing Gust (Daedric Titan)
     

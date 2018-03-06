@@ -7533,10 +7533,10 @@ debugAuras                  = {
             [50021] = true, -- Ice Vortex -- Air Atronach
             [50022] = true, -- Ice Vortex -- Air Atronach
             
-            --[9743] = true, -- Entropic Touch -- Banekin
-            --[9747] = true, -- Dire Wound -- Banekin
-            --[9748] = true, -- Envelop -- Banekin
-            --[9749] = true, -- Envelop -- Banekin
+            [9743] = true, -- Entropic Touch -- Banekin
+            [9747] = true, -- Dire Wound -- Banekin
+            [9748] = true, -- Envelop -- Banekin
+            [9749] = true, -- Envelop -- Banekin
             
             --[4798] = true, -- Headbutt -- Clannfear
             --[4799] = true, -- Tail Spike -- Clannfear
