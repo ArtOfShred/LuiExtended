@@ -15,19 +15,16 @@ local moduleName    = LUIE.name .. "_CombatInfo"
 
 CI.Enabled  = false
 CI.D = {
-    
     GlobalShowGCD                    = false,
     GlobalPotion                     = false,
     GlobalFlash                      = true,
     GlobalDesat                      = false,
     GlobalLabelColor                 = false,
     GlobalMethod                     = 3,
-    
     UltimateLabelEnabled             = true,
     UltimatePctEnabled               = true,
     UltimateHideFull                 = true,
     UltimateGeneration               = true,
-    
     ShowTriggered                    = true,
     ShowToggled                      = true,
     ShowToggledUltimate              = false,
@@ -37,7 +34,6 @@ CI.D = {
     BarFontStyle                     = "outline",
     BarFontSize                      = 18,
     BarMiilis                        = true,
-    
     PotionTimerShow                  = true,
     PotionTimerLabelPosition         = 0,
     PotionTimerFontFace              = "Univers 67",
@@ -48,11 +44,11 @@ CI.D = {
 }
 CI.SV       = nil
 
-local g_ultimateCost             = 0
-local g_ultimateCurrent          = 0
-local g_ultimateAbilityName       = ""
-local g_ultimateAbilityId         = 0
-local g_ultimateSlot             = ACTION_BAR_ULTIMATE_SLOT_INDEX + 1
+local g_ultimateCost        = 0
+local g_ultimateCurrent     = 0
+local g_ultimateAbilityName	= ""
+local g_ultimateAbilityId   = 0
+local g_ultimateSlot        = ACTION_BAR_ULTIMATE_SLOT_INDEX + 1
 
 -- Bar Abilities
 local g_uiProcAnimation      = {}
@@ -80,6 +76,7 @@ local uiQuickSlot   = {
         [2] = {remain =  5000, colour = {0.251, 0.941, 0.125}},
     },
 }
+
 -- Ultimate slot
 local uiUltimate = {
     colour  = {0.941, 0.973, .957},
@@ -93,15 +90,11 @@ local uiUltimate = {
 }
 
 local IsAbilityProc = {
-
     [A.Skill_Tighten]               = true,
     [A.Skill_Power_Lash]            = true,
-
     [A.Trigger_Assassins_Will]      = true,
     [A.Trigger_Assassins_Scourge]   = true,
-    
-	--[L.Trigger_Deadly_Throw]		= true,
-    
+    --[L.Trigger_Deadly_Throw]      = true,   
 }
 
 local HasAbilityProc = {
@@ -253,7 +246,6 @@ function CI.Initialize( enabled )
                     end
                 end
             end
-
             self.icon.percentComplete = 1
             self.slot:SetHandler("OnUpdate", nil)
             self.cooldown:ResetCooldown()
@@ -285,8 +277,7 @@ function CI.Initialize( enabled )
 
         self.isGlobalCooldown = global
         self:UpdateUsable()
-    end
-    
+    end 
 end
 
 -- Helper function to get override ability duration.
@@ -377,7 +368,6 @@ end
 
 -- Updates all floating labels. Called every 100ms
 function CI.OnUpdate(currentTime)
-    
     -- Procs
     for k, v in pairs (g_triggeredSlotsRemain) do
         local remain = g_triggeredSlotsRemain[k] - currentTime
@@ -450,7 +440,6 @@ function CI.OnUpdate(currentTime)
             uiUltimate.Texture:SetHidden(true)
         end
     end
-
 end
 
 -- Updates local variable with new font and resets all existing icons
@@ -494,13 +483,11 @@ function CI.ApplyFont()
     -- If QuickSlot is created, and we're updating font from the menu setting, set the font here.
     if uiQuickSlot.label then
         uiQuickSlot.label:SetFont(g_potionFont)
-    end
-    
+    end 
 end
 
 -- Resets bar labels on menu option change
 function CI.ResetBarLabel()
-
     for k, _ in pairs(g_uiProcAnimation) do
         g_uiProcAnimation[k].procLoopTexture.label:SetText("")
     end
@@ -523,17 +510,14 @@ function CI.ResetBarLabel()
     end
 end
 
-function CI.ResetPotionTimerLabel()
-    
+function CI.ResetPotionTimerLabel()   
     local actionButton = ZO_ActionBar_GetButton(9)
     uiQuickSlot.label:ClearAnchors()
     uiQuickSlot.label:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
-    uiQuickSlot.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"), nil, 0, -CI.SV.PotionTimerLabelPosition)
-    
+    uiQuickSlot.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"), nil, 0, -CI.SV.PotionTimerLabelPosition)   
 end
 
 function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
-
     -- If we're displaying a fake bar highlight then bail out here (sometimes we need a fake aura that doesn't end to simulate effects that can be overwritten, such as Major/Minor buffs. Technically we don't want to stop the
     -- highlight of the original ability since we can only track one buff per slot and overwriting the buff with a longer duration buff shouldn't throw the player off by making the glow disappear earlier.
     if g_barFakeAura[abilityId] then
@@ -564,7 +548,6 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
     end
     
     if changeType == EFFECT_RESULT_FADED then -- delete Effect
-    
         -- Ignore fading event if override is true
         if g_barNoRemove[abilityId] then return end
     
@@ -614,12 +597,10 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
             end 
         end
     end
-
 end
 
 -- Listens to EVENT_COMBAT_EVENT
 function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
-
     -- Manually track Ultimate generation -- same as in CI module
     if CI.SV.UltimateGeneration and uiUltimate.NotFull and (
         ( result == ACTION_RESULT_BLOCKED_DAMAGE and targetType == COMBAT_UNIT_TYPE_PLAYER ) or
@@ -629,11 +610,9 @@ function CI.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         uiUltimate.Texture:SetHidden(false)
         uiUltimate.FadeTime = GetGameTimeMilliseconds() + 8000
     end
-
 end
 
 function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
-
     -- If the source/target isn't the player then bail out now.
     if sourceType ~= COMBAT_UNIT_TYPE_PLAYER and targetType ~= COMBAT_UNIT_TYPE_PLAYER then return end
     
@@ -662,7 +641,6 @@ function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGr
             g_toggledSlotsRemain[abilityId] = nil
         end
     end
-
 end
 
 function CI.OnSlotAbilityUsed(eventCode, slotNum)
@@ -690,7 +668,6 @@ function CI.OnSlotAbilityUsed(eventCode, slotNum)
 end
 
 function CI.OnSlotUpdated(eventCode, slotNum)
-
     if slotNum == 8 then
         CI.UpdateUltimateLabel(eventCode)
     end
@@ -783,12 +760,10 @@ function CI.OnSlotUpdated(eventCode, slotNum)
                 if slotNum == 8 and CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetHidden( true ) end
             end
         end
-    end  
-
+    end
 end
 
 function CI.UpdateUltimateLabel(eventCode)
-
     -- Handle ultimate label first
     local setHiddenLabel = not ( CI.SV.UltimateLabelEnabled and IsSlotUsed( g_ultimateSlot ) )
     local setHiddenPct = not ( CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) )
@@ -814,14 +789,11 @@ function CI.UpdateUltimateLabel(eventCode)
 end
 
 function CI.InventoryItemUsed()
-
     g_potionUsed = true
     zo_callLater(function() g_potionUsed = false end, 200)
-
 end
 
 function CI.OnSlotsFullUpdate(eventCode, isHotbarSwap)
-
     -- Handle ultimate label first
     CI.UpdateUltimateLabel(eventCode)
     
@@ -837,8 +809,7 @@ function CI.OnSlotsFullUpdate(eventCode, isHotbarSwap)
     g_actionBar = {}
     for i = 3, 8 do
         CI.OnSlotUpdated(eventCode, i)
-    end
-    
+    end  
 end
 
 function CI.PlayProcAnimations(slotNum)
@@ -926,7 +897,6 @@ function CI.ShowCustomToggle(slotNum)
 end
 
 function CI.OnPowerUpdatePlayer( eventCode , unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax )
-
     if unitTag ~= "player" then return end
     if powerType ~= POWERTYPE_ULTIMATE then return end
     
@@ -963,8 +933,6 @@ function CI.OnPowerUpdatePlayer( eventCode , unitTag, powerIndex, powerType, pow
             end
         end
     end
-
     -- Update stored value
     g_ultimateCurrent = powerValue
 end
-

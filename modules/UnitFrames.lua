@@ -22,19 +22,15 @@ local classIcons = {
 }
 
 local roleIcons = {
-
     [0] = "LuiExtended/media/unitframes/unitframes_class_none.dds",
     [1] = "esoui/art/lfg/lfg_icon_dps.dds",
     [2] = "esoui/art/lfg/lfg_icon_healer.dds",
     [3] = "esoui/art/lfg/lfg_icon_tank.dds",
-
 }
 
 local leaderIcons = {
-
     [0] = "LuiExtended/media/unitframes/unitframes_class_none.dds",
     [1] = "/esoui/art/icons/guildranks/guild_rankicon_misc01.dds",
-
 }
 
 UF.Enabled = false
@@ -165,14 +161,13 @@ UF.D = {
     AdjustStaminaHPos                = 200,
     AdjustStaminaVPos                = 0,
     AdjustMagickaHPos                = 200,
-    AdjustMagickaVPos                = 0,
-    
-    FrameColorReaction = false,
-    CustomColourPlayer = { 178/255, 178/255, 1 },
-    CustomColourFriendly = { 0, 1, 0 },
-    CustomColourHostile = { 1, 0, 0 },
-    CustomColourNeutral = { 150/255, 150/255, 150/255 },
-    CustomColourGuard = { 95/255, 65/255, 54/255 },
+    AdjustMagickaVPos                = 0, 
+    FrameColorReaction 				 = false,
+    CustomColourPlayer 				 = { 178/255, 178/255, 1 },
+    CustomColourFriendly 			 = { 0, 1, 0 },
+    CustomColourHostile 			 = { 1, 0, 0 },
+    CustomColourNeutral 			 = { 150/255, 150/255, 150/255 },
+    CustomColourGuard 				 = { 95/255, 65/255, 54/255 },
 }
 UF.SV = nil
 
@@ -1192,8 +1187,8 @@ function UF.Initialize( enabled )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_REMOVED,        UF.SocialUpdateFrames)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_IGNORE_ADDED,          UF.SocialUpdateFrames)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_IGNORE_REMOVED,        UF.SocialUpdateFrames)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_COMBAT_STATE,   UF.OnPlayerCombatState )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED,    UF.OnWerewolf )
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_COMBAT_STATE,	UF.OnPlayerCombatState )
+        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED,	UF.OnWerewolf )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BEGIN_SIEGE_CONTROL,       UF.OnSiege )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_END_SIEGE_CONTROL,         UF.OnSiege )
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEAVE_RAM_ESCORT,          UF.OnSiege )
@@ -2085,7 +2080,6 @@ function UF.MenuUpdatePlayerFrameOptions(option)
     LUIE.UnitFrames.CustomFramesResetPosition()
     LUIE.UnitFrames.CustomFramesSetupAlternative()
     LUIE.UnitFrames.CustomFramesApplyLayoutPlayer()
-
 end
 
 -- Updates single attribute.
@@ -2152,13 +2146,10 @@ end
 -- Called from EVENT_TITLE_UPDATE
 -- Called from EVENT_RANK_POINT_UPDATE
 function UF.TitleUpdate( eventCode, unitTag )
-
     -- TODO: Doesn't seem to be an event handler for AVA Rank change, would be nice to have one for this purpose.
-
     UF.UpdateStaticControls( g_DefaultFrames[unitTag] )
     UF.UpdateStaticControls( UF.CustomFrames[unitTag] )
     UF.UpdateStaticControls( g_AvaCustFrames[unitTag] )
-
 end
 
 -- Updates shield value for given unit.
@@ -2215,8 +2206,7 @@ end
 
 -- Reroutes call for regen/degen animation for given unit.
 -- Called from EVENT_UNIT_ATTRIBUTE_VISUAL_* listeners.
-function UF.UpdateRegen(unitTag, statType, attributeType, powerType )
-    
+function UF.UpdateRegen(unitTag, statType, attributeType, powerType )   
     if powerType ~= POWERTYPE_HEALTH then return end
 
     -- Calculate actual value, and fallback to 0 if we call this function with nil parameters  
@@ -2298,7 +2288,6 @@ function UF.UpdateStat(unitTag, statType, attributeType, powerType )
         end
     end
 end
-
 
 -- Forces to reload static information on unit frames.
 -- Called from EVENT_LEVEL_UPDATE and EVENT_VETERAN_RANK_UPDATE listeners.
@@ -2885,7 +2874,6 @@ function UF.OnBossesChanged( eventCode )
             UF.CustomFrames[unitTag].control:SetHidden(true)
         end
     end
-
 end
 
 -- Set anchors for all top level windows of CustomFrames
@@ -2929,7 +2917,6 @@ function UF.CustomFramesSetPositions()
             UF.CustomFrames[unitTag].tlw.preview.anchorLabel:SetText( ( savedPos ~= nil and #savedPos == 2 ) and strfmt("%d, %d", savedPos[1], savedPos[2]) or "default" )
         end
     end
-
 end
 
 -- Reset anchors for all top level windows of CustomFrames
@@ -2981,7 +2968,6 @@ function UF.CustomFramesSetMovingState( state )
         -- Target Frame will now always display old information
         UF.CustomFrames.reticleover.canHide = not state
     end
-
 end
 
 -- Apply selected colours for all known bars on custom unit frames
@@ -3114,7 +3100,6 @@ function UF.CustomFramesApplyColours(isMenu)
         UF.CustomFrames.player[POWERTYPE_STAMINA].bar:SetColor( unpack(stamina) )
         UF.CustomFrames.player[POWERTYPE_STAMINA].backdrop:SetCenterColor( unpack(stamina_bg) )
     end
-
 end
 
 function UF.CustomFramesApplyColoursSingle(unitTag)
@@ -3136,41 +3121,39 @@ function UF.CustomFramesApplyColoursSingle(unitTag)
     local healer_bg = { 0.1*UF.SV.CustomColourHealer[1], 0.1*UF.SV.CustomColourHealer[2], 0.1*UF.SV.CustomColourHealer[3], 0.9 }
     local tank_bg   = { 0.1*UF.SV.CustomColourTank[1],   0.1*UF.SV.CustomColourTank[2],   0.1*UF.SV.CustomColourTank[3], 0.9 }
 
-        local groupSize = GetGroupSize()
+    local groupSize = GetGroupSize()
 
-        if (groupSize <= 4 and UF.SV.ColorRoleGroup) or (groupSize > 4 and UF.SV.ColorRoleRaid) then
-            if UF.CustomFrames[unitTag] then
-                local isDps, isHealer, isTank = GetGroupMemberRoles(unitTag)
-
-                local unitFrame = UF.CustomFrames[unitTag]
-                local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
-                if isDps then
-                    thb.bar:SetColor( unpack(dps) )
-                    thb.backdrop:SetCenterColor( unpack(dps_bg) )
-                end
-                if isHealer then
-                    thb.bar:SetColor( unpack(healer) )
-                    thb.backdrop:SetCenterColor( unpack(healer_bg) )
-                end
-                if isTank then
-                    thb.bar:SetColor( unpack(tank) )
-                    thb.backdrop:SetCenterColor( unpack(tank_bg) )
-                end
-                if not (isDps or isHealer or isTank) then
-                    if UF.SV.FrameColorReaction and unitTag == "reticleover" then
-                        thb.bar:SetColor( unpack(reactioncolor) )
-                        thb.backdrop:SetCenterColor( unpack(reactioncolor_bg) )
-                    else
-                        thb.bar:SetColor( unpack(health) )
-                        thb.backdrop:SetCenterColor( unpack(health_bg) )
-                    end
+    if (groupSize <= 4 and UF.SV.ColorRoleGroup) or (groupSize > 4 and UF.SV.ColorRoleRaid) then
+        if UF.CustomFrames[unitTag] then
+            local isDps, isHealer, isTank = GetGroupMemberRoles(unitTag)
+            local unitFrame = UF.CustomFrames[unitTag]
+            local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
+            if isDps then
+                thb.bar:SetColor( unpack(dps) )
+                thb.backdrop:SetCenterColor( unpack(dps_bg) )
+            end
+            if isHealer then
+                thb.bar:SetColor( unpack(healer) )
+                thb.backdrop:SetCenterColor( unpack(healer_bg) )
+            end
+            if isTank then
+                thb.bar:SetColor( unpack(tank) )
+                thb.backdrop:SetCenterColor( unpack(tank_bg) )
+            end
+            if not (isDps or isHealer or isTank) then
+                if UF.SV.FrameColorReaction and unitTag == "reticleover" then
+                    thb.bar:SetColor( unpack(reactioncolor) )
+                    thb.backdrop:SetCenterColor( unpack(reactioncolor_bg) )
+                else
+                    thb.bar:SetColor( unpack(health) )
+                    thb.backdrop:SetCenterColor( unpack(health_bg) )
                 end
             end
         end
+    end
 end
 
 function UF.CustomFramesApplyReactionColor()
-
     local reactionColor = {
         [UNIT_REACTION_PLAYER_ALLY] = { UF.SV.CustomColourPlayer[1], UF.SV.CustomColourPlayer[2], UF.SV.CustomColourPlayer[3], 0.9 },
         [UNIT_REACTION_DEFAULT]     = { UF.SV.CustomColourFriendly[1], UF.SV.CustomColourFriendly[2], UF.SV.CustomColourFriendly[3], 0.9 },
@@ -3206,10 +3189,7 @@ function UF.CustomFramesApplyReactionColor()
         
         thb.bar:SetColor( unpack(reactioncolor) )
         thb.backdrop:SetCenterColor( unpack(reactioncolor_bg) )
-        
     end
-    
-
 end
 
 -- Apply selected texture for all known bars on custom unit frames
@@ -4095,24 +4075,24 @@ function UF.CustomFramesReloadControlsMenu()
     
     UF.CustomFramesApplyLayoutPlayer(false)
     UF.CustomFramesApplyLayoutGroup(false)
-    UF.CustomFramesApplyLayoutRaid(false)
-    
+    UF.CustomFramesApplyLayoutRaid(false) 
 end
 
 function UF.CustomFramesReloadExecuteMenu()
-
 g_targetThreshold = UF.SV.ExecutePercentage
-
     
-    if UF.CustomFrames["reticleover"] and UF.CustomFrames["reticleover"][POWERTYPE_HEALTH] then UF.CustomFrames["reticleover"][POWERTYPE_HEALTH].threshold = g_targetThreshold end
-    if g_AvaCustFrames["reticleover"] and g_AvaCustFrames["reticleover"][POWERTYPE_HEALTH] then g_AvaCustFrames["reticleover"][POWERTYPE_HEALTH].threshold = g_targetThreshold end
+    if UF.CustomFrames["reticleover"] and UF.CustomFrames["reticleover"][POWERTYPE_HEALTH] then
+		UF.CustomFrames["reticleover"][POWERTYPE_HEALTH].threshold = g_targetThreshold
+	end
+    if g_AvaCustFrames["reticleover"] and g_AvaCustFrames["reticleover"][POWERTYPE_HEALTH] then
+		g_AvaCustFrames["reticleover"][POWERTYPE_HEALTH].threshold = g_targetThreshold
+	end
     
     -- Boss Frames
     for i = 1, 6 do
         local unitTag = "boss" .. i
         if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag][POWERTYPE_HEALTH] then UF.CustomFrames[unitTag][POWERTYPE_HEALTH].threshold = g_targetThreshold end
     end
-
 end
     
 

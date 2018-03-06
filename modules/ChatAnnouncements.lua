@@ -19,7 +19,6 @@ CA.Enabled = false
 ------------------------------------------------
 
 CA.D = {
-
     -- Base Options
     ChatPlayerDisplayOptions      = 2,
     --NotificationColor             = { .75, .75, .75, 1 },
@@ -342,40 +341,33 @@ CA.D = {
         CurrencyGoldHideListingAH       = false,
         CurrencyGoldName                = GetString(SI_LUIE_CA_CURRENCY_GOLD),
         CurrencyGoldShowTotal           = false,
-        CurrencyGoldThrottle            = true,
-        
+        CurrencyGoldThrottle            = true,   
         CurrencyTVChange                = true,
         CurrencyTVColor                 = { 0.368627, 0.643137, 1, 1 },
         CurrencyTVFilter                = 0,
         CurrencyTVName                  = GetString(SI_LUIE_CA_CURRENCY_TELVAR_STONE),
         CurrencyTVShowTotal             = false,
-        CurrencyTVThrottle              = 0,
-        
+        CurrencyTVThrottle              = 0, 
         CurrencyWVChange                = true,
         CurrencyWVColor                 = { 1, 1, 1, 1 },
         CurrencyWVName                  = GetString(SI_LUIE_CA_CURRENCY_WRIT_VOUCHER),
         CurrencyWVShowTotal             = false,
-        
         CurrencyTransmuteChange         = true,
         CurrencyTransmuteColor          = { 1, 1, 1, 1 },
         CurrencyTransmuteName           = GetString(SI_LUIE_CA_CURRENCY_TRANSMUTE_CRYSTAL),
         CurrencyTransmuteShowTotal      = false,
-        
         CurrencyCrownsChange            = false,
         CurrencyCrownsColor             = { 1, 1, 1, 1 },
         CurrencyCrownsName              = GetString(SI_LUIE_CA_CURRENCY_CROWN),
         CurrencyCrownsShowTotal         = false,
-        
         CurrencyCrownGemsChange         = false,
         CurrencyCrownGemsColor          = { 244/255, 56/255, 247/255, 1 },
         CurrencyCrownGemsName           = GetString(SI_LUIE_CA_CURRENCY_CROWN_GEM),
         CurrencyCrownGemsShowTotal      = false,
-        
         CurrencyOutfitTokenChange       = true,
         CurrencyOutfitTokenColor        = { 255/255, 225/255, 125/255, 1 },
         CurrencyOutfitTokenName         = GetString(SI_LUIE_CA_CURRENCY_OUTFIT_TOKENS),
         CurrencyOutfitTokenShowTotal    = false,
-        
         CurrencyMessageTotalAP          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALAP),
         CurrencyMessageTotalGold        = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALGOLD),
         CurrencyMessageTotalTV          = GetString(SI_LUIE_CA_CURRENCY_MESSAGE_TOTALTV),
@@ -592,7 +584,7 @@ local g_stopDisplaySpam             = false         -- Toggled on to stop spam d
 local g_questIndex                  = { }           -- Index of all current quests. Allows us to read the index so that all quest notifications can use the difficulty icon.
 
 -- Trade
-local g_tradeTarget                 = ""       -- Saves name of target player being traded with.
+local g_tradeTarget                 = ""       		-- Saves name of target player being traded with.
 local g_tradeStacksIn               = { }           -- Table for storing items to be traded in.
 local g_tradeStacksOut              = { }           -- Table for storing items to be traded out.
 
@@ -692,7 +684,6 @@ local bracket3 = {
     [2] = "(",
     [3] = "- ",
     [4] = "",
-
 }
 
 -- 4 Option Bracket (2)
@@ -762,11 +753,9 @@ local g_blacklistIDs = {
 }
 
 local guildAllianceColors = {
-
-[1] = ZO_ColorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_ALDMERI_DOMINION)),
-[2] = ZO_ColorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_DAGGERFALL_COVENANT)),
-[3] = ZO_ColorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_EBONHEART_PACT)),
-
+	[1] = ZO_ColorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_ALDMERI_DOMINION)),
+	[2] = ZO_ColorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_DAGGERFALL_COVENANT)),
+	[3] = ZO_ColorDef:New(GetInterfaceColor(INTERFACE_COLOR_TYPE_ALLIANCE, ALLIANCE_EBONHEART_PACT)),
 }
 
 function CA.Initialize(enabled)
@@ -855,27 +844,21 @@ function CA.RegisterColorEvents()
     SkillPointColorize1 = ZO_ColorDef:New(unpack(CA.SV.Skills.SkillPointColor1))
     SkillPointColorize2 = ZO_ColorDef:New(unpack(CA.SV.Skills.SkillPointColor2))
     SkillLineColorize = ZO_ColorDef:New(unpack(CA.SV.Skills.SkillLineColor))
-    
     SkillGuildColorize = ZO_ColorDef:New(unpack(CA.SV.Skills.SkillGuildColor)):ToHex()
     SkillGuildColorizeFG = ZO_ColorDef:New(unpack(CA.SV.Skills.SkillGuildColorFG)):ToHex()
     SkillGuildColorizeMG = ZO_ColorDef:New(unpack(CA.SV.Skills.SkillGuildColorMG)):ToHex()
     SkillGuildColorizeUD = ZO_ColorDef:New(unpack(CA.SV.Skills.SkillGuildColorUD)):ToHex()
     SkillGuildColorizeTG = ZO_ColorDef:New(unpack(CA.SV.Skills.SkillGuildColorTG)):ToHex()
     SkillGuildColorizeDB = ZO_ColorDef:New(unpack(CA.SV.Skills.SkillGuildColorDB)):ToHex()
-    
     QuestColorLocNameColorize = ZO_ColorDef:New(unpack(CA.SV.Quests.QuestColorLocName)):ToHex()
     QuestColorLocDescriptionColorize = ZO_ColorDef:New(unpack(CA.SV.Quests.QuestColorLocDescription)):ToHex()
     QuestColorQuestNameColorize = ZO_ColorDef:New(unpack(CA.SV.Quests.QuestColorName))
     QuestColorQuestDescriptionColorize = ZO_ColorDef:New(unpack(CA.SV.Quests.QuestColorDescription)):ToHex()
-    
     StorageRidingColorize = ZO_ColorDef:New(unpack(CA.SV.Notify.StorageRidingColor))
     StorageRidingBookColorize = ZO_ColorDef:New(unpack(CA.SV.Notify.StorageRidingBookColor))
     StorageBagColorize = ZO_ColorDef:New(unpack(CA.SV.Notify.StorageBagColor))
-    
     --NotificationColorize = ZO_ColorDef:New(unpack(CA.SV.Notify.NotificationColor))
-    
-    GuildColorize = ZO_ColorDef:New(unpack(CA.SV.Social.GuildColor))
-    
+    GuildColorize = ZO_ColorDef:New(unpack(CA.SV.Social.GuildColor))  
 end
 
 function CA.RegisterSocialEvents()
@@ -901,20 +884,16 @@ function CA.RegisterQuestEvents()
                 name = GetString(SI_QUEST_JOURNAL_UNKNOWN_QUEST_NAME)
             end
 
-            g_questIndex[name] =
-                {
-                    questType = questType,
-                    instanceDisplayType = instanceDisplayType
-                }
+            g_questIndex[name] = {
+                questType = questType,
+                instanceDisplayType = instanceDisplayType
+            }
         end
     end
-    
 end
 
 function CA.RegisterGuildEvents()
-
 -- Possibly implement conditionals here again in the future
-
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, CA.GuildAddedSelf)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_INVITE_ADDED, CA.GuildInviteAdded)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_RANK_CHANGED, CA.GuildRank)
@@ -931,7 +910,6 @@ function CA.RegisterGuildEvents()
         local _, _, rankIndex = GetGuildMemberInfo(guildId, memberIndex)
         g_guildRankData[guildId] = rankIndex
     end
-    
 end
 
 function CA.RegisterAchievementsEvent()
@@ -998,7 +976,6 @@ function CA.RegisterMailEvents()
 end
 
 function CA.RegisterLootEvents()
-
     -- NON CONDITIONAL EVENTS
     
     -- LOCKPICK
@@ -1129,7 +1106,6 @@ end
 
 -- Called by most functions that use character or display name to resolve LINK display method.
 function CA.ResolveNameLink(characterName, displayName)
-
     local nameLink
 
     if CA.SV.ChatPlayerDisplayOptions == 1 then
@@ -1169,11 +1145,9 @@ function CA.ResolveNameNoLink(characterName, displayName)
     end
     
     return nameLink
-
 end
 
 function CA.GuildHeraldrySaved()
-
     if CA.SV.Currency.CurrencyGoldChange then
         local value = g_pendingHeraldryCost > 0 and g_pendingHeraldryCost or 1000
         local type = "LUIE_CURRENCY_HERALDRY"
@@ -1211,7 +1185,6 @@ function CA.GuildHeraldrySaved()
 end
 
 function CA.GuildRanksSaved(eventCode, guildId)
-
     local guildName = GetGuildName(guildId)
 
     local guildAlliance = GetGuildAlliance(guildId)
@@ -1228,11 +1201,9 @@ function CA.GuildRanksSaved(eventCode, guildId)
     if CA.SV.Social.GuildManageAlert then
         ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_RANKS_UPDATE), guildNameAllianceAlert))
     end
-
 end
 
 function CA.GuildRankSaved(eventCode, guildId, rankIndex)
-
     local rankName
     local rankNameDefault = GetDefaultGuildRankName(guildId, rankIndex)
     local rankNameCustom = GetGuildRankCustomName(guildId, rankIndex)
@@ -1259,11 +1230,9 @@ function CA.GuildRankSaved(eventCode, guildId, rankIndex)
     if CA.SV.Social.GuildManageAlert then
         ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_RANK_UPDATE), rankSyntaxAlert, guildNameAllianceAlert))
     end
-
 end
 
 function CA.GuildTextChanged(eventCode, guildId)
-
     local guildName = GetGuildName(guildId)
 
     local guildAlliance = GetGuildAlliance(guildId)
@@ -1283,8 +1252,7 @@ function CA.GuildTextChanged(eventCode, guildId)
         if CA.SV.Social.GuildManageAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(messageString), guildNameAllianceAlert))
         end
-    end
-    
+    end   
 end
 
 function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
@@ -1629,8 +1597,7 @@ function CA.ActivityStatusUpdate(eventCode, status)
         zo_callLater(function() g_stopGroupLeaveQueue = false end, 1000)
     end
     
-    g_savedQueueValue = status
-    
+    g_savedQueueValue = status   
 end
 
 -- EVENT_GROUPING_TOOLS_READY_CHECK_UPDATED
@@ -1715,8 +1682,7 @@ function CA.ReadyCheckUpdate(eventCode)
             zo_callLater(function() g_showActivityStatus = true end, 1000)
             g_showRCUpdates = true
         end
-    end
-    
+    end 
 end
 
 --[[ Would love to be able to use this function but its too buggy for now. Spams every single time someone updates their role, as well as when people join/leave group. If the player joins a large party for the first time then
@@ -1836,8 +1802,7 @@ local LUIE_AttributeDisplayType = {
     [RESPEC_TYPE_MORPHS] = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_MORPHS),
 }
 
-function CA.PointRespecDisplay(respecType)
-    
+function CA.PointRespecDisplay(respecType)   
     local message = LUIE_AttributeDisplayType[respecType] .. "."
     local messageCSA = LUIE_AttributeDisplayType[respecType]
     
@@ -1855,12 +1820,10 @@ function CA.PointRespecDisplay(respecType)
     
     if CA.SV.Notify.NotificationRespecAlert then
         ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
-    end
-    
+    end 
 end
 
 function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, oldValue, reason)
-
     if (currencyLocation ~= CURRENCY_LOCATION_CHARACTER and currencyLocation ~= CURRENCY_LOCATION_ACCOUNT) then return end
 
     local UpOrDown = newValue - oldValue
@@ -2250,13 +2213,11 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
     
     -- Send relevant values over to the currency printer
     CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
-    
 end
 
 -- Printer function receives values from currency update or from other functions that display currency updates.
 -- Type here refers to an LUIE_CURRENCY_TYPE
 function CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type, carriedItem, carriedItemTotal)
-
     local messageP1                                                     -- First part of message - Change
     local messageP2                                                     -- Second part of the message (if enabled) - Total
 
@@ -2345,7 +2306,6 @@ function CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTyp
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
     end
-
 end
 
 function CA.CurrencyGoldThrottlePrinter()
@@ -2503,7 +2463,6 @@ isCollectibleHorse = {
 }
 
 function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCurrencyType1, specialCurrencyInfo1, specialCurrencyQuantity1, specialCurrencyType2, specialCurrencyInfo2, specialCurrencyQuantity2, itemSoundCategory)
-
     local itemIcon
     if isCollectibleHorse[itemName] then
         local id = isCollectibleHorse[itemName]
@@ -2552,7 +2511,6 @@ function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCu
 end
 
 function CA.OnSellItem(eventCode, itemName, quantity, money)
-
     local changeColor = CA.SV.Currency.CurrencyContextColor and CurrencyUpColorize:ToHex() or CurrencyColorize:ToHex()
     local itemIcon,_,_,_,_ = GetItemLinkInfo(itemName)
     local icon = itemIcon
@@ -2621,8 +2579,7 @@ function CA.MailRemoved(eventCode)
     end
 end
 
-function CA.OnMailReadable(eventCode, mailId)
-    
+function CA.OnMailReadable(eventCode, mailId)   
     local senderDisplayName, senderCharacterName, _, _, _, fromSystem, fromCustomerService, _, _, _, codAmount = GetMailItemInfo ( mailId )
 
     -- Use different color if the mail is from System (Hireling Mail, Rewards for the Worthy, etc)
@@ -2644,11 +2601,9 @@ function CA.OnMailReadable(eventCode, mailId)
     if codAmount > 0 then
         g_mailCODPresent = true
     end
-
 end
 
-function CA.OnMailTakeAttachedItem(eventCode, mailId)
-    
+function CA.OnMailTakeAttachedItem(eventCode, mailId)   
     if CA.SV.Notify.NotificationMailCA or CA.SV.Notify.NotificationMailAlert then
         local mailString
         if g_mailCODPresent then 
@@ -2666,13 +2621,11 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, mailString)
             end
         end
-    end
-    
+    end    
 end
 
 function CA.OnMailAttach(eventCode, attachmentSlot)
-    g_postageAmount = GetQueuedMailPostage()
-    
+    g_postageAmount = GetQueuedMailPostage()   
     local mailIndex = attachmentSlot
     local bagId, slotId, icon, stack = GetQueuedItemAttachmentInfo(attachmentSlot)
     local itemId = GetItemId(bagId, slotId)
@@ -2683,8 +2636,7 @@ end
 
 -- Removes items from index if they are removed from the trade
 function CA.OnMailAttachRemove(eventCode, attachmentSlot)
-    g_postageAmount = GetQueuedMailPostage()
-    
+    g_postageAmount = GetQueuedMailPostage() 
     local mailIndex = attachmentSlot
     g_mailStacksOut[mailIndex] = nil
 end
@@ -2713,7 +2665,6 @@ end
 
 -- Sends results of the trade to the Item Log print function and clears variables so they are reset for next trade interactions
 function CA.OnMailSuccess(eventCode)
-
     if g_postageAmount > 0 then
         local type = "LUIE_CURRENCY_POSTAGE"
         local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
@@ -2767,7 +2718,6 @@ function CA.OnMailSuccess(eventCode)
 end
 
 function CA.OnExperienceGain(eventCode, reason, level, previousExperience, currentExperience, championPoints)
-
     -- d("Experience Gain) previousExperience: " .. previousExperience .. " --- " .. "currentExperience: " .. currentExperience)
     
     if CA.SV.XP.Experience and ( not ( CA.SV.XP.ExperienceHideCombat and reason == 0 ) or not reason == 0 ) then
@@ -2828,7 +2778,6 @@ local function AchievementPctToColour(pct)
 end
 
 function CA.OnAchievementUpdated(eventCode, id)
-
     local topLevelIndex, categoryIndex, achievementIndex = GetCategoryInfoFromAchievementId(id)
 
     -- Bail out if this achievement comes from unwanted category
@@ -3017,7 +2966,6 @@ function CA.IndexBank()
             g_banksubStacks[i] = { icon=icon, stack=stack, itemId=itemId, itemType=itemType, itemLink=itemLink }
         end
     end 
-    
 end
 
 local HouseBags = {
@@ -3033,8 +2981,7 @@ local HouseBags = {
     [10] = BAG_HOUSE_BANK_TEN,
 }
 
-function CA.IndexHouseBags()
-    
+function CA.IndexHouseBags()  
     for bagIndex = 1, 10 do
         local bag = HouseBags[bagIndex]
         local bagsize = GetBagSize(bag)
@@ -3050,7 +2997,6 @@ function CA.IndexHouseBags()
             end
         end
     end
-    
 end
 
 function CA.CraftingOpen(eventCode, craftSkill, sameStation)
@@ -3206,7 +3152,6 @@ function CA.AddQuestItemsToIndex()
     for questIndex = 1, MAX_JOURNAL_QUESTS do
         AddQuests(questIndex)
     end
-    
 end
 
 function CA.ResolveQuestItemChange()
@@ -3328,7 +3273,6 @@ function CA.ResolveQuestItemChange()
 end
 
 local function DisplayQuestItem(itemId, stackCount, icon, reset)
-
     if not questItemIndex[itemId] then
         questItemIndex[itemId] = { stack = 0, counter = 0, icon = icon }
         --d("New item created with 0 stack")
@@ -3341,14 +3285,10 @@ local function DisplayQuestItem(itemId, stackCount, icon, reset)
         --d(itemId .. " - Increment by: " .. stackCount)
         questItemIndex[itemId].counter = questItemIndex[itemId].counter + stackCount
     end
-    
-    
-    EVENT_MANAGER:RegisterForUpdate(moduleName .. "QuestItemUpdater", 25, CA.ResolveQuestItemChange )
-    
+    EVENT_MANAGER:RegisterForUpdate(moduleName .. "QuestItemUpdater", 25, CA.ResolveQuestItemChange ) 
 end
 
 function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound, lootType, lootedBySelf, isPickpocketLoot, questItemIcon, itemId, isStolen)
-
     -- If the player loots an item
     if not isPickpocketLoot and lootedBySelf then
         g_isLooted = true
@@ -3401,16 +3341,12 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
             end
             recipient = ZO_SELECTED_TEXT:Colorize(nameLink)
         end
-
         CA.ItemPrinter(icon, quantity, itemType, itemId, itemLink, recipient, logPrefix, gainOrLoss, false, true)
-        
     end
-
 end
 
 -- If filter is true, we run the item through this function to determine if we should display it. Filter only gets set to true for group loot and relevant loot functions. Mail, trade, stores, etc don't apply the filter.
 function CA.ItemFilter(itemType, itemId, itemLink, groupLoot)
-
     if ( CA.SV.Inventory.LootBlacklist and g_blacklistIDs[itemId] ) then
         return false
     end
@@ -3437,12 +3373,10 @@ function CA.ItemFilter(itemType, itemId, itemLink, groupLoot)
         return false
     else
         return true
-    end
-    
+    end  
 end
 
 function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, logPrefix, gainOrLoss, filter, groupLoot)
-
     if filter then 
         -- If filter returns false then bail out right now, we're not displaying this item.
         if not CA.ItemFilter(itemType, itemId, itemLink, false) then return end
@@ -3543,12 +3477,10 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
     end
-    
 end
 
 -- Simple function combines our strings or modifies the prefix if RECEIEVED instead of looted
 function CA.ResolveItemMessage(message, formattedRecipient, color, logPrefix, totalString, groupLoot)
-
     -- Conditions for looted/quest item rewards to adjust string prefix.
     if logPrefix == "" then
         if g_isLooted and not g_itemReceivedIsQuestReward and not g_isPickpocketed and not g_isStolen then
@@ -3608,7 +3540,6 @@ end
 
 -- Simple posthook into ZOS crafting mode functions, based off MultiCraft, thanks Ayantir!
 function CA.CraftModeOverrides()
-
     -- Get SMITHING mode
     g_smithing.GetMode = function()
         return SMITHING.mode
@@ -3658,7 +3589,6 @@ end
 
     
 function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-
     -- End right now if this is any other reason (durability loss, etc)
     if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then return end
 
@@ -3867,8 +3797,7 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
     g_lockpickBroken = false
 end
 
-function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-    
+function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)   
     -- End right now if this is any other reason (durability loss, etc)
     if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then return end
     
@@ -4230,7 +4159,6 @@ function CA.InventoryUpdateCraft(eventCode, bagId, slotId, isNewItem, itemSoundC
 end
 
 function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-
 -- End right now if this is any other reason (durability loss, etc)
     if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then return end
 
@@ -4599,7 +4527,6 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
 end
 
 function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-
     local receivedBy = ""
     ---------------------------------- INVENTORY ----------------------------------
     if bagId == BAG_BACKPACK then
@@ -4730,7 +4657,6 @@ function CA.InventoryUpdateGuildBank(eventCode, bagId, slotId, isNewItem, itemSo
 end
 
 function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundCategory, inventoryUpdateReason, stackCountChange)
-
     -- End right now if this is any other reason (durability loss, etc)
     if inventoryUpdateReason ~= INVENTORY_UPDATE_REASON_DEFAULT then return end
     
@@ -4918,9 +4844,7 @@ function CA.BankFixer()
 end
 
 function CA.JusticeStealRemove(eventCode)
-
-    zo_callLater(CA.JusticeRemovePrint, 50)
-    
+    zo_callLater(CA.JusticeRemovePrint, 50)  
 end
 
 function CA.JusticeDisplayConfiscate()
@@ -5121,8 +5045,7 @@ function CA.DisguiseState(eventCode, unitTag, disguiseState)
     end
 end
 
-function CA.OnPlayerActivated(eventCode, initial)
-    
+function CA.OnPlayerActivated(eventCode, initial) 
     -- Get current trades if UI is reloaded
     local characterName, _, displayName = GetTradeInviteInfo()
     
@@ -5264,15 +5187,13 @@ end
 
 -- local vars for EVENT_SKILL_XP
 
-local GUILD_SKILL_SHOW_REASONS =
-{
+local GUILD_SKILL_SHOW_REASONS = {
     [PROGRESS_REASON_DARK_ANCHOR_CLOSED] = true,
     [PROGRESS_REASON_DARK_FISSURE_CLOSED] = true,
     [PROGRESS_REASON_BOSS_KILL] = true,
 }
 
-local GUILD_SKILL_SHOW_SOUNDS =
-{
+local GUILD_SKILL_SHOW_SOUNDS = {
     [PROGRESS_REASON_DARK_ANCHOR_CLOSED] = SOUNDS.SKILL_XP_DARK_ANCHOR_CLOSED,
     [PROGRESS_REASON_DARK_FISSURE_CLOSED] = SOUNDS.SKILL_XP_DARK_FISSURE_CLOSED,
     [PROGRESS_REASON_BOSS_KILL] = SOUNDS.SKILL_XP_BOSS_KILLED,
@@ -5290,7 +5211,6 @@ local GUILD_SKILL_ICONS =
 
 -- Alert Prehooks
 function CA.HookFunction()
-    
     local alertHandlers = ZO_AlertText_GetHandlers()
 
     -- Style book learned
@@ -5926,12 +5846,11 @@ function CA.HookFunction()
     end
     
     -- Variables for EVENT_GROUP_ELECTION_RESULT
-    local GroupElectionResultToSoundId =
-{
-    [GROUP_ELECTION_RESULT_ELECTION_WON] = SOUNDS.GROUP_ELECTION_RESULT_WON,
-    [GROUP_ELECTION_RESULT_ELECTION_LOST] = SOUNDS.GROUP_ELECTION_RESULT_LOST,
-    [GROUP_ELECTION_RESULT_ABANDONED] = SOUNDS.GROUP_ELECTION_RESULT_LOST,
-}
+    local GroupElectionResultToSoundId = {
+		[GROUP_ELECTION_RESULT_ELECTION_WON] = SOUNDS.GROUP_ELECTION_RESULT_WON,
+		[GROUP_ELECTION_RESULT_ELECTION_LOST] = SOUNDS.GROUP_ELECTION_RESULT_LOST,
+		[GROUP_ELECTION_RESULT_ABANDONED] = SOUNDS.GROUP_ELECTION_RESULT_LOST,
+	}
 
     -- EVENT_GROUP_ELECTION_RESULT -- ALERT HANDLER
     local function GroupElectionResultAlert(resultType, descriptor)
@@ -6345,9 +6264,7 @@ function CA.HookFunction()
     
     ZO_PreHook(alertHandlers, EVENT_LORE_BOOK_ALREADY_KNOWN, AlreadyKnowBookHook)
     ZO_PreHook(alertHandlers, EVENT_RIDING_SKILL_IMPROVEMENT, RidingSkillImprovementAlertHook)
-    
     ZO_PreHook(alertHandlers, EVENT_LORE_BOOK_LEARNED, LoreBookLearnedAlertHook)
-    
     ZO_PreHook(alertHandlers, EVENT_DUEL_INVITE_RECEIVED, DuelInviteReceivedAlert)
     ZO_PreHook(alertHandlers, EVENT_DUEL_INVITE_SENT, DuelInviteSentAlert)
     ZO_PreHook(alertHandlers, EVENT_DUEL_INVITE_ACCEPTED, DuelInviteAcceptedAlert)
@@ -6355,8 +6272,6 @@ function CA.HookFunction()
     ZO_PreHook(alertHandlers, EVENT_DUEL_INVITE_DECLINED, DuelInviteDeclinedAlert)
     ZO_PreHook(alertHandlers, EVENT_DUEL_INVITE_CANCELED, DuelInviteCanceledAlert)
     ZO_PreHook(alertHandlers, EVENT_PLEDGE_OF_MARA_RESULT, PledgeOfMaraResultAlert)
-    
-    
     ZO_PreHook(alertHandlers, EVENT_GROUP_INVITE_RESPONSE, GroupInviteResponseAlert)
     ZO_PreHook(alertHandlers, EVENT_GROUP_INVITE_ACCEPT_RESPONSE_TIMEOUT, GroupInviteTimeoutAlert)
     ZO_PreHook(alertHandlers, EVENT_GROUP_NOTIFICATION_MESSAGE, GroupNotificationMessageAlert)
@@ -6365,7 +6280,6 @@ function CA.HookFunction()
     ZO_PreHook(alertHandlers, EVENT_LEADER_UPDATE, LeaderUpdateAlert)
     ZO_PreHook(alertHandlers, EVENT_GROUPING_TOOLS_LFG_JOINED, GroupingToolsLFGJoinedAlert)
     ZO_PreHook(alertHandlers, EVENT_ACTIVITY_QUEUE_RESULT, ActivityQueueResultAlert)
-    
     ZO_PreHook(alertHandlers, EVENT_GROUP_ELECTION_FAILED, GroupElectionFailedAlert)
     ZO_PreHook(alertHandlers, EVENT_GROUP_ELECTION_RESULT, GroupElectionResultAlert)
     ZO_PreHook(alertHandlers, EVENT_GROUP_ELECTION_REQUESTED, GroupElectionRequestedAlert)
@@ -6375,7 +6289,6 @@ function CA.HookFunction()
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_REMOVED, CA.GroupInviteRemoved)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED, CA.OnGroupMemberJoined)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED, CA.OnGroupInviteReceived)
-    
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_TYPE_CHANGED, CA.OnGroupTypeChanged)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_NOTIFICATION_ADDED, CA.VoteNotify)
     EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_NO_LONGER_LFG, CA.LFGLeft)
@@ -6384,11 +6297,9 @@ function CA.HookFunction()
     
     ZO_PreHook(alertHandlers, EVENT_GUILD_SELF_LEFT_GUILD, GuildSelfLeftAlert)
     ZO_PreHook(alertHandlers, EVENT_SAVE_GUILD_RANKS_RESPONSE, GuildRanksResponseAlert)
-    
     ZO_PreHook(alertHandlers, EVENT_LOCKPICK_FAILED, LockpickFailedAlert)
     ZO_PreHook(alertHandlers, EVENT_INTERACTABLE_LOCKED, LockpickLockedAlert)
     ZO_PreHook(alertHandlers, EVENT_INTERACTABLE_IMPOSSIBLE_TO_PICK, LockpickImpossibleAlert)
-    
     ZO_PreHook(alertHandlers, EVENT_TRADE_INVITE_FAILED, TradeInviteFailedAlert)
     ZO_PreHook(alertHandlers, EVENT_TRADE_INVITE_CONSIDERING, TradeInviteConsideringAlert)
     ZO_PreHook(alertHandlers, EVENT_TRADE_INVITE_WAITING, TradeInviteWaitingAlert)
@@ -6397,12 +6308,7 @@ function CA.HookFunction()
     ZO_PreHook(alertHandlers, EVENT_TRADE_CANCELED, TradeCanceledAlert)
     ZO_PreHook(alertHandlers, EVENT_TRADE_FAILED, TradeFailedAlert)
     ZO_PreHook(alertHandlers, EVENT_TRADE_SUCCEEDED, TradeSucceededAlert)
-    ZO_PreHook(alertHandlers, EVENT_MAIL_SEND_FAILED, MailSendFailedAlert)
-
-    
-    
-    
-    
+    ZO_PreHook(alertHandlers, EVENT_MAIL_SEND_FAILED, MailSendFailedAlert) 
 
     local csaHandlers = ZO_CenterScreenAnnounce_GetHandlers()
     
@@ -7237,7 +7143,6 @@ function CA.HookFunction()
     end
 
     local function OnQuestRemoved(eventId, isCompleted, journalIndex, questName, zoneIndex, poiIndex)
-    
         if not isCompleted then
             if CA.SV.Quests.QuestAbandonCA or CA.SV.Quests.QuestAbandonCSA or CA.SV.Quests.QuestAbandonAlert then
             
@@ -7296,7 +7201,6 @@ function CA.HookFunction()
 
     -- Quest Advancement displays all the "appropriate" conditions that the player needs to do to advance the current step
     local function OnQuestAdvanced(eventId, questIndex, questName, isPushed, isComplete, mainStepChanged, soundOverride)
-
         if(not mainStepChanged) then return end
         
         local sound = SOUNDS.QUEST_OBJECTIVE_STARTED
@@ -7419,8 +7323,7 @@ function CA.HookFunction()
         return true
     end
     
-    local XP_GAIN_SHOW_REASONS =
-    {
+    local XP_GAIN_SHOW_REASONS = {
         [PROGRESS_REASON_PVP_EMPEROR] = true,
         [PROGRESS_REASON_DUNGEON_CHALLENGE] = true,
         [PROGRESS_REASON_OVERLAND_BOSS_KILL] = true,
@@ -7429,8 +7332,7 @@ function CA.HookFunction()
         [PROGRESS_REASON_LFG_REWARD] = true,
     }
 
-    local XP_GAIN_SHOW_SOUNDS =
-    {
+    local XP_GAIN_SHOW_SOUNDS = {
         [PROGRESS_REASON_OVERLAND_BOSS_KILL] = SOUNDS.OVERLAND_BOSS_KILL,
         [PROGRESS_REASON_LOCK_PICK] = SOUNDS.LOCKPICKING_SUCCESS_CELEBRATION,
     }
@@ -8117,15 +8019,12 @@ function CA.HookFunction()
         return true
     end
 
-    local TRIAL_SCORE_REASON_TO_ASSETS =
-    {
+    local TRIAL_SCORE_REASON_TO_ASSETS = {
         [RAID_POINT_REASON_KILL_MINIBOSS]           = { icon = "EsoUI/Art/Trials/trialPoints_normal.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_NORMAL },
         [RAID_POINT_REASON_KILL_BOSS]               = { icon = "EsoUI/Art/Trials/trialPoints_veryHigh.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_HIGH },
-
         [RAID_POINT_REASON_BONUS_ACTIVITY_LOW]      = { icon = "EsoUI/Art/Trials/trialPoints_veryLow.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_LOW },
         [RAID_POINT_REASON_BONUS_ACTIVITY_MEDIUM]   = { icon = "EsoUI/Art/Trials/trialPoints_low.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_LOW },
         [RAID_POINT_REASON_BONUS_ACTIVITY_HIGH]     = { icon = "EsoUI/Art/Trials/trialPoints_high.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_HIGH },
-
         [RAID_POINT_REASON_SOLO_ARENA_PICKUP_ONE]   = { icon = "EsoUI/Art/Trials/trialPoints_veryLow.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_VERY_LOW },
         [RAID_POINT_REASON_SOLO_ARENA_PICKUP_TWO]   = { icon = "EsoUI/Art/Trials/trialPoints_low.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_LOW },
         [RAID_POINT_REASON_SOLO_ARENA_PICKUP_THREE] = { icon = "EsoUI/Art/Trials/trialPoints_normal.dds", soundId = SOUNDS.RAID_TRIAL_SCORE_ADDED_NORMAL },
@@ -8195,32 +8094,29 @@ function CA.HookFunction()
     end
     
     local overrideDisplayAnnouncementTitle = {
-    
-    [GetString(SI_SKILLS_FORCE_RESPEC_TITLE)] = { ca = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS) .. ".", csa = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS), announceType = "RESPEC" },
-    [GetString(SI_ATTRIBUTE_FORCE_RESPEC_TITLE)] = { ca = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES) .. ".", csa = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES), announceType = "RESPEC" },
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C), announceType = "GROUPAREA" }, -- Entering Group Area.
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM), announceType = "ARENA"}, -- Maelstrom Arena
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1), announceType = "ROUND" }, -- Round 1
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2), announceType = "ROUND" }, -- Round 2
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3), announceType = "ROUND" }, -- Round 3
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4), announceType = "ROUND" }, -- Round 4
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5), announceType = "ROUND" }, -- Round 5
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF), announceType = "ROUND" }, -- Final Round
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA), announceType = "ARENA" }, -- Dragonstar Arena
-    
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE1)] = { number = 1 }, -- IC (DC 1)
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE2)] = { number = 2 }, -- IC (DC 2)
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE3)] = { number = 3 }, -- IC (DC 3)
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE4)] = { number = 4 }, -- IC (DC 4)
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE5)] = { number = 5 }, -- IC (AD 1)
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE6)] = { number = 6 }, -- IC (AD 2)
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE7)] = { number = 7 }, -- IC (AD 3)
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE8)] = { number = 8 }, -- IC (AD 4)
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE9)] = { number = 9 }, -- IC (EP 1)
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE10)] = { number = 10 }, -- IC (EP 2)
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE11)] = { number = 11 }, -- IC (EP 3)
-    [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE12)] = { number = 12 }, -- IC (EP 4)
-    
+		[GetString(SI_SKILLS_FORCE_RESPEC_TITLE)] = { ca = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS) .. ".", csa = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_SKILLS), announceType = "RESPEC" },
+		[GetString(SI_ATTRIBUTE_FORCE_RESPEC_TITLE)] = { ca = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES) .. ".", csa = GetString(SI_LUIE_CA_CURRENCY_NOTIFY_ATTRIBUTES), announceType = "RESPEC" },
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_D), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_GROUPENTER_C), announceType = "GROUPAREA" }, -- Entering Group Area.
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MAELSTROM), announceType = "ARENA"}, -- Maelstrom Arena
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND1), announceType = "ROUND" }, -- Round 1
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND2), announceType = "ROUND" }, -- Round 2
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND3), announceType = "ROUND" }, -- Round 3
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND4), announceType = "ROUND" }, -- Round 4
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUND5), announceType = "ROUND" }, -- Round 5
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_ROUNDF), announceType = "ROUND" }, -- Final Round
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA), announceType = "ARENA" }, -- Dragonstar Arena
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE1)] = { number = 1 }, -- IC (DC 1)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE2)] = { number = 2 }, -- IC (DC 2)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE3)] = { number = 3 }, -- IC (DC 3)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE4)] = { number = 4 }, -- IC (DC 4)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE5)] = { number = 5 }, -- IC (AD 1)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE6)] = { number = 6 }, -- IC (AD 2)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE7)] = { number = 7 }, -- IC (AD 3)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE8)] = { number = 8 }, -- IC (AD 4)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE9)] = { number = 9 }, -- IC (EP 1)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE10)] = { number = 10 }, -- IC (EP 2)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE11)] = { number = 11 }, -- IC (EP 3)
+		[GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_TITLE12)] = { number = 12 }, -- IC (EP 4)
     }
     
     local overrideDisplayAnnouncementDescription = {
@@ -8235,11 +8131,9 @@ function CA.HookFunction()
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE8)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE8), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE8), announceType = "ARENA" }, -- Igneous Cistern
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE9)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE9), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_MA_STAGE9), announceType = "ARENA" }, -- Theater of Despair
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_DSA_DESC), announceType = "ARENA" }, -- The arena will begin in 30 seconds!
-        
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_SR_CA), announceType = "CRAGLORN" }, -- Spell Resistance Increased
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PR_CA), announceType = "CRAGLORN" }, -- Physical Resistance Increased
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI)] = { ca = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI_CA), csa = GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_CRAGLORN_PI_CA), announceType = "CRAGLORN" }, -- Power Increased
-        
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC1)] = { number = 1 }, -- IC (DC 1)
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC2)] = { number = 2 }, -- IC (DC 2)
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC3)] = { number = 3 }, -- IC (DC 3)
@@ -8252,7 +8146,6 @@ function CA.HookFunction()
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC10)] = { number = 10 }, -- IC (EP 2)
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC11)] = { number = 11 }, -- IC (EP 3)
         [GetString(SI_LUIE_CA_DISPLAY_ANNOUNCEMENT_IC_DESC12)] = { number = 12 }, -- IC (EP 4)
-        
     }
     
     local function DisplayAnnouncementIC(number)
@@ -8329,7 +8222,6 @@ function CA.HookFunction()
     
     -- EVENT_DISPLAY_ANNOUNCEMENT -- CSA HANDLER
     local function DisplayAnnouncementHook(title, description)
-        
         
         if ( (title ~= "" and not overrideDisplayAnnouncementTitle[title]) or (description ~= "" and not overrideDisplayAnnouncementDescription[description]) ) and CA.SV.DisplayAnnouncements.Debug then
             d("EVENT_DISPLAY_ANNOUNCEMENT")
@@ -8553,8 +8445,7 @@ function CA.HookFunction()
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
         end
         
-        return true
-        
+        return true   
     end
     
     local function PledgeOfMaraHook(result, characterName, displayName)
@@ -8596,7 +8487,6 @@ function CA.HookFunction()
         
         return true
     end
-
     
     -- Unregister the ZOS events for handling Quest Removal/Advanced/Added to replace with our own functions
     EVENT_MANAGER:UnregisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_REMOVED)
@@ -8607,17 +8497,13 @@ function CA.HookFunction()
     EVENT_MANAGER:RegisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_ADDED, OnQuestAdded)
     
     ZO_PreHook(csaHandlers, EVENT_LORE_BOOK_LEARNED_SKILL_EXPERIENCE, LoreBookXPHook)
-    
     ZO_PreHook(csaHandlers, EVENT_LORE_COLLECTION_COMPLETED, LoreCollectionHook)
     ZO_PreHook(csaHandlers, EVENT_LORE_COLLECTION_COMPLETED_SKILL_EXPERIENCE, LoreCollectionXPHook)
-    
     ZO_PreHook(csaHandlers, EVENT_SKILL_POINTS_CHANGED, SkillPointsChangedHook)
     ZO_PreHook(csaHandlers, EVENT_SKILL_LINE_ADDED, SkillLineAddedHook)
     ZO_PreHook(csaHandlers, EVENT_ABILITY_PROGRESSION_RANK_UPDATE, AbilityProgressionRankHook)
     ZO_PreHook(csaHandlers, EVENT_SKILL_RANK_UPDATE, SkillRankUpdateHook)
-    
     ZO_PreHook(csaHandlers, EVENT_SKILL_XP_UPDATE, SkillXPUpdateHook)
-    
     ZO_PreHook(csaHandlers, EVENT_QUEST_ADDED, QuestAddedHook)
     ZO_PreHook(csaHandlers, EVENT_QUEST_COMPLETE, QuestCompleteHook)
     ZO_PreHook(csaHandlers, EVENT_OBJECTIVE_COMPLETED, ObjectiveCompletedHook)
@@ -8626,27 +8512,21 @@ function CA.HookFunction()
     ZO_PreHook(csaHandlers, EVENT_DISCOVERY_EXPERIENCE, DiscoveryExperienceHook)
     ZO_PreHook(csaHandlers, EVENT_POI_DISCOVERED, PoiDiscoveredHook)
     ZO_PreHook(csaHandlers, EVENT_EXPERIENCE_GAIN, ExperienceGainHook)
-    
     ZO_PreHook(csaHandlers, EVENT_ENLIGHTENED_STATE_GAINED, EnlightenGainHook)
     ZO_PreHook(csaHandlers, EVENT_ENLIGHTENED_STATE_LOST, EnlightenLostHook)
-    
     ZO_PreHook(csaHandlers, EVENT_PLAYER_ACTIVATED, PlayerActivatedHook)
-    
     ZO_PreHook(csaHandlers, EVENT_RIDING_SKILL_IMPROVEMENT, RidingSkillImprovementHook)
-    
     ZO_PreHook(csaHandlers, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, InventoryBagCapacityHook)
     ZO_PreHook(csaHandlers, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, InventoryBankCapacityHook)
-    
     --ZO_PreHook(csaHandlers, EVENT_COLLECTIBLE_UPDATED, CollectibleUnlockedHook)
     --ZO_PreHook(csaHandlers, EVENT_COLLECTIBLES_UPDATED, CollectiblesUnlockedHook)
-    
     ZO_PreHook(csaHandlers, EVENT_CHAMPION_LEVEL_ACHIEVED, ChampionLevelAchievedHook)
     ZO_PreHook(csaHandlers, EVENT_CHAMPION_POINT_GAINED, ChampionPointGainedHook)
-    
     ZO_PreHook(csaHandlers, EVENT_DUEL_NEAR_BOUNDARY, DuelNearBoundaryHook)
     ZO_PreHook(csaHandlers, EVENT_DUEL_FINISHED, DuelFinishedHook)
     ZO_PreHook(csaHandlers, EVENT_DUEL_COUNTDOWN, DuelCountdownHook)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, CA.DuelStarted)
+    
+	EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, CA.DuelStarted)
     
     ZO_PreHook(csaHandlers, EVENT_RAID_TRIAL_STARTED, RaidStartedHook)
     ZO_PreHook(csaHandlers, EVENT_RAID_TRIAL_COMPLETE, RaidCompleteHook)
@@ -8655,14 +8535,12 @@ function CA.HookFunction()
     ZO_PreHook(csaHandlers, EVENT_RAID_REVIVE_COUNTER_UPDATE, RaidReviveCounterHook)
     ZO_PreHook(csaHandlers, EVENT_RAID_TRIAL_SCORE_UPDATE, RaidScoreUpdateHook)
     ZO_PreHook(csaHandlers, EVENT_ACTIVITY_FINDER_ACTIVITY_COMPLETE, ActivityFinderCompleteHook)
-    
     ZO_PreHook(csaHandlers, EVENT_DISPLAY_ANNOUNCEMENT, DisplayAnnouncementHook)
     ZO_PreHook(csaHandlers, EVENT_BROADCAST, BroadcastHook)
-    
     ZO_PreHook(csaHandlers, EVENT_ACHIEVEMENT_AWARDED, AchievementAwardedHook)
-    
     ZO_PreHook(csaHandlers, EVENT_PLEDGE_OF_MARA_RESULT, PledgeOfMaraHook)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_OFFER, CA.MaraOffer)
+    
+	EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_OFFER, CA.MaraOffer)
     
     -- TODO: Allow these to use their default conditions if Saved Variable option for CA is not turned on
     local function GroupTypeChangedChatHook()
@@ -9517,13 +9395,11 @@ function CA.TradeInviteAccepted(eventCode)
         g_inventoryStacks = {}
         CA.IndexInventory() -- Index Inventory
     end
-    g_inTrade = true
-    
+    g_inTrade = true 
 end
 
 -- Adds items to index if they are added in a trade
 function CA.OnTradeAdded(eventCode, who, tradeIndex, itemSoundCategory)
-
     local index = tradeIndex
     local name, icon, stack = GetTradeItemInfo(who, tradeIndex)
     local bagId, slotId = GetTradeItemBagAndSlot(who, tradeIndex)
@@ -9764,8 +9640,7 @@ function CA.MaraOffer(eventCode, characterName, isSender, displayName)
 end
 
 -- EVENT_DUEL_STARTED -- EVENT HANDLER
-function CA.DuelStarted(eventCode)
-    
+function CA.DuelStarted(eventCode)  
     -- Display CA
     if CA.SV.Social.DuelStartCA or CA.SV.Social.DuelStartAlert then
         local message
@@ -9790,8 +9665,7 @@ function CA.DuelStarted(eventCode)
     -- Play sound if CSA is not enabled
     if not CA.SV.Social.DuelStartCSA then
         PlaySound(SOUNDS.DUEL_START)
-    end
-    
+    end 
 end      
 
 function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previousXP, currentXP)
@@ -9852,16 +9726,13 @@ function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previo
             -- Other guilds are usually either a quest reward or achievement reward
             priority = "EXPERIENCE LEVEL"
         end
-        
         CA.PrintGuildRep(change, lineName, lineId, priority)
-
      end
 end
 
 function CA.PrintGuildRep(change, lineName, lineId, priority)
     -- TODO: Move this (not sure where to since putting it in the base function makes it populate before colors are defined)
-    local GUILD_SKILL_COLOR_TABLE =
-    {
+    local GUILD_SKILL_COLOR_TABLE = {
         [45] = SkillGuildColorizeFG,
         [44] = SkillGuildColorizeMG,
         [55] = SkillGuildColorizeUD,
@@ -9896,7 +9767,6 @@ function CA.PrintBufferedGuildRep()
 end
 
 function CA.PrintQueuedMessages()
-
     -- Resolve notification messages first
     for i=1, #g_queuedMessages do
         if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type == "NOTIFICATION" then

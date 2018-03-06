@@ -258,7 +258,9 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     local zos_GetAbilityIcon = GetAbilityIcon
     GetAbilityIcon = function(abilityId)
         local icon = zos_GetAbilityIcon(abilityId)
-        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then icon = LUIE.Effects.EffectOverride[abilityId].icon end
+        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then 
+            icon = LUIE.Effects.EffectOverride[abilityId].icon
+        end
         return(icon)
     end
     
@@ -267,7 +269,9 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     local zos_GetAbilityName = GetAbilityName
     GetAbilityName = function(abilityId)
         local abilityName = zos_GetAbilityName(abilityId)
-        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then abilityName = LUIE.Effects.EffectOverride[abilityId].name end
+        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then
+            abilityName = LUIE.Effects.EffectOverride[abilityId].name
+        end
         return(abilityName)
     end
     
@@ -276,15 +280,21 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     local zos_GetArtificialEffectInfo = GetArtificialEffectInfo
     GetArtificialEffectInfo = function(artificialEffectId)
         local displayName, iconFile, effectType, sortOrder, timeStarted, timeEnding = zos_GetArtificialEffectInfo(artificialEffectId)
-        if LUIE.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Effects.ArtificialEffectOverride[artificialEffectId].icon then iconFile = LUIE.Effects.ArtificialEffectOverride[artificialEffectId].icon end
-        if LUIE.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Effects.ArtificialEffectOverride[artificialEffectId].name then displayName = LUIE.Effects.ArtificialEffectOverride[artificialEffectId].name end
+        if LUIE.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Effects.ArtificialEffectOverride[artificialEffectId].icon then
+            iconFile = LUIE.Effects.ArtificialEffectOverride[artificialEffectId].icon
+        end
+        if LUIE.Effects.ArtificialEffectOverride[artificialEffectId] and LUIE.Effects.ArtificialEffectOverride[artificialEffectId].name then
+            displayName = LUIE.Effects.ArtificialEffectOverride[artificialEffectId].name
+        end
         return displayName, iconFile, effectType, sortOrder, timeStarted, timeEnding
     end
     
     local zos_GetSynergyInfo = GetSynergyInfo
     GetSynergyInfo = function()
         local synergyName, iconFilename = zos_GetSynergyInfo()
-        if LUIE.Effects.SynergyNameOverride[synergyName] then iconFilename = LUIE.Effects.SynergyNameOverride[synergyName] end
+        if LUIE.Effects.SynergyNameOverride[synergyName] then
+            iconFilename = LUIE.Effects.SynergyNameOverride[synergyName]
+        end
         return synergyName, iconFilename
     end
     
@@ -423,7 +433,6 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
        container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_ADDED, UpdateEffects)
        container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_REMOVED, UpdateEffects)
        container:SetHandler("OnEffectivelyShown", UpdateEffects)
-       
     end
     
     ZO_StatsActiveEffect_OnMouseEnter = function(control)
@@ -549,8 +558,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         [ACTION_TYPE_ITEM]          = SetupItemSlot,
         [ACTION_TYPE_SIEGE_ACTION]  = SetupSiegeActionSlot,
         [ACTION_TYPE_COLLECTIBLE]   = SetupCollectibleActionSlot,
-    }
-    
+    } 
 end
 
 local delayBuffer       = {}
@@ -726,7 +734,6 @@ function LUIE.SlashHome()
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG)))
         end
     end
-
 end
 
 function LUIE.SlashRegroup()
@@ -1254,7 +1261,6 @@ AddIgnore = function(option)
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-
 end
 
 function LUIE.SlashIgnore(option)
@@ -1505,7 +1511,6 @@ function LUIE.SlashCampaignQ(option)
         ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN) )
     end
     PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-
 end
 
 function LUIE.SlashInvite(option)

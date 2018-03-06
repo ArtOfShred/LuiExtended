@@ -93,18 +93,18 @@ ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON7",                 "You can
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON8",                 "|cFEFEFE<<1>>|r is not available to duel because they have challenged someone else to a duel.")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON9",                 "|cFEFEFE<<1>>|r is not available to duel because they are considering another duel challenge.")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON10",                "|cFEFEFE<<1>>|r is not available to duel because they are dueling another player.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON11",                 GetString(SI_DUELINVITEFAILREASON11))
+ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON11",                GetString(SI_DUELINVITEFAILREASON11))
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON12",                "|cFEFEFE<<1>>|r is not available to duel because they are dead.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON13",                 GetString(SI_DUELINVITEFAILREASON13))
+ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON13",                GetString(SI_DUELINVITEFAILREASON13))
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON14",                "|cFEFEFE<<1>>|r is not available to duel because they are swimming.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON15",                 GetString(SI_DUELINVITEFAILREASON15))
+ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON15",                GetString(SI_DUELINVITEFAILREASON15))
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON16",                "|cFEFEFE<<1>>|r is not available to duel because they are in combat.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON17",                 GetString(SI_DUELINVITEFAILREASON17))
+ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON17",                GetString(SI_DUELINVITEFAILREASON17))
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON18",                "|cFEFEFE<<1>>|r is not available to duel because they are crafting.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON19",                 GetString(SI_DUELINVITEFAILREASON19))
+ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON19",                GetString(SI_DUELINVITEFAILREASON19))
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON20",                "You cannot challenge a player to duel who has recently declined your duel challenge.")
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON21",                 GetString(SI_DUELINVITEFAILREASON21))
-ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON22",                 GetString(SI_DUELINVITEFAILREASON22))
+ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON21",                GetString(SI_DUELINVITEFAILREASON21))
+ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_FAILREASON22",                GetString(SI_DUELINVITEFAILREASON22))
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_PLAYER",                      "Challenge to Duel")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_RECEIVED",                    "|cFEFEFE<<1>>|r has challenged you to a duel.")
 ZO_CreateStringId("SI_LUIE_CA_DUEL_INVITE_SENT",                        "You have challenged |cFEFEFE<<1>>|r to a duel.")
@@ -532,10 +532,8 @@ ZO_CreateStringId("SI_LUIE_LAM_RELOADUI",                               "Reload 
 ZO_CreateStringId("SI_LUIE_LAM_RELOADUI_BUTTON",                        "This will reload the UI.")
 ZO_CreateStringId("SI_LUIE_LAM_RELOADUI_WARNING",                       "Will need to reload the UI.")
 ZO_CreateStringId("SI_LUIE_LAM_RESETPOSITION",                          "Reset Position")
-
 ZO_CreateStringId("SI_LUIE_LAM_HIDE_EXPERIENCE_BAR",                    "Hide Experience/Skill Progress Bar Pop-up")
 ZO_CreateStringId("SI_LUIE_LAM_HIDE_EXPERIENCE_BAR_TP",                 "When gaining experience from Quests, POI Discovery, Boss Kills, or Skill Line updates, the XP bar will no longer popup. Useful if you have a custom UI element in that corner of the screen and don't want it to be overlapped.")
-
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER",                        "LUIE Slash Commands Overview")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER_GENERAL",                "|c00FFFFGeneral Commands:|r")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_TRADE",                        "'/trade' 'name' Invites a player to trade with you.")
@@ -736,7 +734,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_HEADER",                              "Chat An
 ZO_CreateStringId("SI_LUIE_LAM_CA_DESCRIPTION",                         "Displays announcements in chat for various events - with many customizable settings.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_ENABLE",                              "Enable Chat Announcements Module")
 ZO_CreateStringId("SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP",                "Determines the method used to display player names in Chat Announcements where applicable.\nDefault: Character Name")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_BRACKET_OPTION_CHARACTER",            "Character/Account Name Brackets")
 ZO_CreateStringId("SI_LUIE_LAM_CA_BRACKET_OPTION_CHARACTER_TP",         "Choose whether or not to display [ ] brackets around character and account names.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_BRACKET_OPTION_ITEM",                 "Item Link Brackets")
@@ -824,8 +821,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL",           "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL_TP",        "Show total amount of Writ Vouchers after change is displayed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG",                "Total Writ Vouchers Syntax")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG_TP",             "Choose the syntax for the Total Writ Vouchers message.\nDefault: Total Vouchers: %s")
-
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTE",              "Display Transmute Crystal Changes")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTE_TP",           "Print a context sensitive notification to chat when Transmute Crystals are rewarded or spent.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTECOLOR",         "Transmute Crystals Color")
@@ -836,7 +831,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTETOTAL",         "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTETOTAL_TP",      "Show total amount of Transmute Crystals after change is displayed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG",         "Total Transmute Crystals Syntax")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG_TP",      "Choose the syntax for the Total Transmute Crystals message.\nDefault: Total Crystals: %s")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNS",                 "Display Crown Changes")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNS_TP",              "Print a context sensitive notification to chat when Crowns are rewarded or spent.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSCOLOR",            "Crowns Color")
@@ -847,7 +841,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSTOTAL",            "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSTOTAL_TP",         "Show total amount of Crowns after change is displayed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CROWNSTOTAL_MSG",            "Total Crowns Syntax")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CROWNSTOTAL_MSG_TP",         "Choose the syntax for the Total Crowns message.\nDefault: Total Crowns: %s")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMS",              "Display Crown Gem Changes")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMS_TP",           "Print a context sensitive notification to chat when Crown Gems are rewarded or spent.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSCOLOR",         "Crown Gems Color")
@@ -858,7 +851,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSTOTAL",         "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSTOTAL_TP",      "Show total amount of Crown Gems after change is displayed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CROWNGEMSTOTAL_MSG",         "Total Crown Gems Syntax")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CROWNGEMSTOTAL_MSG_TP",      "Choose the syntax for the Total Crown Gems message.\nDefault: Total Gems: %s")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENS",                 "Display Outfit Style Token Changes")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENS_TP",              "Print a context sensitive notification to chat when Outfit Style Tokens are rewarded or spent.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSCOLOR",            "Outfit Style Tokens Color")
@@ -869,7 +861,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSTOTAL",            "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSTOTAL_TP",         "Show total amount of Outfit Style Tokens after change is displayed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_TOKENSTOTAL_MSG",            "Total Outfit Style Tokens Syntax")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_TOKENSTOTAL_MSG_TP",         "Choose the syntax for the Total Outfit Style Tokens message.\nDefault: Total Tokens: %s")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CONTEXT_MENU",               "Shared Currency/Loot Options")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CONTEXT_HEADER",             "Context Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RECEIVE",            "Receive")
@@ -1030,12 +1021,10 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_LOOTSHOWLOCKPICK",               "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_LOOTSHOWLOCKPICK_TP",            "Display a message when a lockpick is broken from attempting to pick or forcing a lock open.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWVENDOR",                     "Display Items - Vendor Transactions")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWVENDOR_TP",                  "Print a message to chat when items are purchased or sold at a vendor.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWQUESTADD",                   "Display Quest Items Looted")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWQUESTADD_TP",                "Display a message when a quest item is looted or received.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWQUESTREM",                   "Display Quest Items Removed")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_SHOWQUESTREM_TP",                "Display a message when a quest item is used or removed.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_MERGE",                   "Merge Currency & Loot Messages")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_MERGE_TP",                "Combine the individual item purchase message and currency change message into one line.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_VENDOR_TOTALITEMS",              "Display Total Items on Transactions")
@@ -1155,7 +1144,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_ALERT_TP",                   "When en
 -- Collectibles/Lorebooks Menu
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_HEADER",                  "Collectible/Lorebooks Announcements")
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_COL_HEADER",              "Collectibles")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE",                  "Display Collectible Unlocked - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE_TP",               "Display <<1>> when a  Collectible is unlocked.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ICON",                    "Display Collectible Icon")
@@ -1234,21 +1222,16 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_CATEGORY_TP",                 "Enables
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_HEADER",                        "Quest/POI Announcements")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE",                "Display Shared Quests - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTSHARE_TP",             "Display <<1>> when another player shares a quest with you.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY",            "Display Location Discovery - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_LOCATION_DISCOVERY_TP",         "Display <<1>> when a location on the map is discovered.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY",                  "Display Imperial City Area Messages - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP",               "Display <<1>> when entering a new area of the Imperial City Sewers.\nNote: This option uses POI Name Color from Quest/POI Announcements.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION",                "Display Imperial City Area Description")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION_TP",             "Display the description text when entering a new area of the Imperial City Sewers.\nNote: This option uses the POI Description Color from Quest/POI Announcements.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE",                 "Display POI Objective - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POI_OBJECTIVE_TP",              "Display <<1>> when a quest is accepted with an associated map POI.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POI_COMPLETE",                  "Display POI Complete - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_POI_COMPLETE_TP",               "Display <<1>> when a quest is completed with an associated map POI.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_ACCEPT",                        "Display Quest Accepted - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_ACCEPT_TP",                     "Display <<1>> when a quest is accepted.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_COMPLETE",                      "Display Quest Completed - <<1>>")
@@ -1294,12 +1277,9 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN",                  "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_ADMIN_TP",               "Display <<1>> when the Guild MOTD or Background Information is updated, rank data is updated, or Heraldry is updated.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_ICONS",                  "Display Guild Icons")
 ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_ICONS_TP",               "Displays the faction or Guild Rank icon for guild messages.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_COLOR",                  "Guild Name Color")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_COLOR_ALLIANCE",         "Use Alliance Colors for Guild Names")
 ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_GUILD_COLOR_ALLIANCE_TP",      "Use the relevant alliance color for guild names, icons, and ranks in guild messages.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_TRADE_HEADER",                 "Trade Notifications")
 ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_TRADE",                        "Display Trade Notifications - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_TRADE_TP",                     "Display <<1>> for trade invitations, cancelation, and success.")
@@ -1336,7 +1316,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGVOTE_TP",                    "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE",                   "Display LFG Activity Completed - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_LFGCOMPLETE_TP",                "Display <<1>> when a Group Finder activity is completed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_HEADER",                   "Raid Notifications")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_BASE",                     "Display Raid Status Notifications - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_BASE_TP",                  "Display <<1>> when a Trial is started, failed, or completed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_SCORE",                    "Display Score Updates - <<1>>")
@@ -1345,13 +1324,10 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE",                "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_BESTSCORE_TP",             "Display <<1>> when a new high score is achieved on trial completion.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_REVIVE",                   "Display Vitality Bonus Loss - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_REVIVE_TP",                "Display <<1>> when Vitality Bonus is decreased.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_DISPLAY_HEADER",                      "Display Announcements")
 ZO_CreateStringId("SI_LUIE_LAM_CA_DISPLAY_DESCRIPTION",                 "Display Announcements are various messages displayed under certain conditions, these range from broad to very specific categories, and thus fall under their own section for Announcements.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_ARENA",                    "Display DSA/Maelstrom Arena Stage - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_ARENA_TP",                 "Display <<1>> when a new stage begins in Dragonstar or Maelstrom Arena.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND",              "Display Maelstrom Arena Round - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GROUP_RAID_ARENA_ROUND_TP",           "Display <<1>> when a new round begins in Maelstrom Arena.")
 
@@ -1443,7 +1419,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CI_POTION_COLOR_TP",                     "Color t
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ZO_CreateStringId("SI_LUIE_LAM_PNL_DESCRIPTION",                        "Displays a panel with potentially useful information on it such as Latency, Time, FPS, Durability and Weapon Charge, etc...")
-
 ZO_CreateStringId("SI_LUIE_LAM_PNL_DISABLECOLORSRO",                    "Disable colours on read-only values")
 ZO_CreateStringId("SI_LUIE_LAM_PNL_DISABLECOLORSRO_TP",                 "Disable value-dependent colour of the information label for items that you don't have direct control: Currently this includes FPS and Latency labels.")
 ZO_CreateStringId("SI_LUIE_LAM_PNL_ELEMENTS_HEADER",                    "Info Panel elements")
@@ -1563,7 +1538,6 @@ ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_NB",                    "Nightbl
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_SORC",                  "Sorcerer Class Color")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_TEMP",                  "Templar Class Color")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_WARD",                  "Warden Class Color")
-
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_PLAYER",         "Reaction Color - Player")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_FRIENDLY",       "Reaction Color - Friendly")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_COLOR_FILL_R_HOSTILE",        "Reaction Color - Hostile")
@@ -1782,7 +1756,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_HEADER",                     "Toggle 
 ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_DAMAGE_HEAL_HEADER",         "Incoming Damage & Healing")
 ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_MITIGATION",                 "Incoming Mitigation")
 ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_CROWD_CONTROL",              "Incoming Crowd Control")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_DAMAGE_TP",                  "Show incoming direct damage.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_DOT_TP",                     "Show incoming damage over time.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_INCOMING_HEALING_TP",                 "Show incoming direct healing.")
@@ -1809,7 +1782,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_HEADER",                     "Toggle 
 ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_DAMAGE_HEAL_HEADER",         "Outgoing Damage & Healing")
 ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_MITIGATION",                 "Outgoing Mitigation")
 ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_CROWD_CONTROL",              "Outgoing Crowd Control")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_DAMAGE_TP",                  "Show outgoing direct damage.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_DOT_TP",                     "Show outgoing damage over time.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_OUTGOING_HEALING_TP",                 "Show outgoing direct healing.")
@@ -1838,10 +1810,8 @@ ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERTS",                 "Active 
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERTS_DESC",            "Set Active Combat Tips to Always Show in the Interface options to display Alerts correctly.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_POINTS",                 "Points")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_RESOURCES",              "Resources")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_IN_TP",           "Display a notification when engaging in combat.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_COMBAT_OUT_TP",          "Display a notification when exiting combat.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION",             "Display Advanced Notifications for Attacks")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_TP",          "Display advanced notifications for attacks that can be blocked, dodged, avoided, or interrupted.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_MITIGATION_DESCRIPTION", "\t\t\t\t\tUse the following formatting characters to modify the mitigation alerts:\n\t\t\t\t\t%n Source Name\n\t\t\t\t\t%t Ability Name\n\t\t\t\t\t%i - Ability Icon")
@@ -1867,7 +1837,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_RANK1",                  "Display
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_RANK1_TP",               "Enable to display alerts specific to boss and trial NPCs.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON",                "ALWAYS Display Alerts in Dungeons")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_DUNGEON_TP",             "Enable to always display alerts if you are in a dungeon. This option is ideal if you don't want to see normal NPC abilities outside of dungeons, but you want to be aware of significantly scaled up variants cast by NPC's inside a dungeon or trial.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERT_CLEANSE_TP",       "Show an alert when a damage over time effect can be cleansed.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERT_BLOCK_TP",         "Show an alert for incoming attacks that can be mitigated by blocking.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ALERT_EXPLOIT_TP",       "Show an alert when a target is off-balance.")
@@ -1883,7 +1852,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY",      "Execute
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_EXECUTE_FREQUENCY_TP",   "The frequency between execute alerts triggered for the same target.\nDefault: 8")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS",            "Hide Ingame Tips")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_INGAME_TIPS_TP",         "Hide the default Active Combat Tips window.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_POINTS_ALLIANCE_TP",     "Show Alliance Points earned.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_POINTS_EXPERIENCE_TP",   "Show Experience Points earned.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_POINTS_CHAMPION_TP",     "Show Champion Experience earned.")
@@ -1892,7 +1860,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_LOW_MAGICKA_TP",         "Show a 
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_LOW_STAMINA_TP",         "Show a warning when Stamina is below the desired threshold.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_ULTIMATE_READY_TP",      "Show a notification when your ultimate ability is available for use.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_POTION_READY_TP",        "Show a notification when a potion comes off cooldown.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_WARNING_SOUND",          "Play Warning Sound")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_WARNING_SOUND_TP",       "Play a sound when resources fall below the desired threshold.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_NOTIFICATION_WARNING_HEALTH",         "Warning Threshold (Health)")
@@ -1937,7 +1904,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_HEADER",                 "Color O
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_HEALING_HEADER",  "Damage & Healing")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_MITIGATION_HEADER",      "Mitigation")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_CROWD_CONTROL_HEADER",   "Crowd Control")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_NONE",            "None")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_NONE_TP",         "Set a color for damage with no type.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_GENERIC",         "Generic")
@@ -1985,7 +1951,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_OVERRIDE",      "Overrid
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_OVERRIDE_TP",   "Use a set color for all incoming damage (overrides critical damage as well).")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_COLOR",         "Incoming Damage Color")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_INCOMING_COLOR_TP",      "Set a color for incoming damage.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_MISS_TP",                "Set a color for missed attacks.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_IMMUNE_TP",              "Set a color for immunity to attacks.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_PARRIED_TP",             "Set a color for parried attacks.")
@@ -1994,22 +1959,18 @@ ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DAMAGE_SHIELD_TP",       "Set a c
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DODGED_TP",              "Set a color for dodged attacks.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_BLOCKED_TP",             "Set a color for blocked attacks.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_INTERRUPTED_TP",         "Set a color for interrupted attacks.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_DISORIENTED_TP",         "Set a color for notifications displayed when Disoriented.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_FEARED_TP",              "Set a color for notifications displayed when Feared.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_OFF_BALANCE_TP",         "Set a color for notifications displayed when Off-Balance.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_SILENCED_TP",            "Set a color for notifications displayed when Silenced.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_COMBAT_STUNNED_TP",             "Set a color for notifications displayed when Stunned.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_HEADER",           "Color Options (Notifications)")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_HEADER",    "Combat State")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ALERT_HEADER",     "Active Combat Alerts")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POINT_HEADER",     "Points")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_RESOURCE_HEADER",  "Resources")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_IN_TP",     "Set a color for notifications when engaging in combat.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_COMBAT_OUT_TP",    "Set a color for notifications when exiting combat.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CLEANSE_TP",       "Set a color for cleanse alerts.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_BLOCK_TP",         "Set a color for block alerts.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPLOIT_TP",       "Set a color for exploit alerts.")
@@ -2019,11 +1980,9 @@ ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_AVOID_TP",         "Set a c
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXECUTE_TP",       "Set a color for execute alerts.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_POWER_TP",         "Set a color for important buff alerts.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_DESTROY_TP",       "Set a color for priority target alerts.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_ALLIANCE_TP",      "Set a color for Alliance Points earned.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_EXPERIENCE_TP",    "Set a color for Experience Points earned.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_CHAMPION_TP",      "Set a color for Champion Experience earned.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_HEALTH_TP",    "Set a color for Low Health warnings.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_MAGICKA_TP",   "Set a color for Low Magicka warnings.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_COLOR_NOTIFICATION_LOW_STAMINA_TP",   "Set a color for Low Stamina warnings.")
@@ -2036,7 +1995,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_HEADER",                "Format 
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_HEALING_HEADER", "Damage & Healing")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_MITIGATION_HEADER",     "Mitigation")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_CROWD_CONTROL_HEADER",  "Crowd Control")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_TP",             "Text format for direct damage numbers.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_CRITICAL_TP",    "Text format for direct critical damage numbers.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_HEALING_TP",            "Text format for direct healing numbers.")
@@ -2048,7 +2006,6 @@ ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_HOT_CRITICAL_TP",       "Text fo
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_ENERGIZE_TP",           "Text format for magicka/stamina gain.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_ENERGIZE_ULTIMATE_TP",  "Text format for ultimate gain.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DRAIN_TP",              "Text format for magicka/stamina drain.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_MISS_TP",               "Text format for missed attacks.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_IMMUNE_TP",             "Text format for immunity to attacks.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_PARRIED_TP",            "Text format for parried attacks.")
@@ -2057,19 +2014,16 @@ ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DAMAGE_SHIELD_TP",      "Text fo
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DODGED_TP",             "Text format for dodged attacks.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_BLOCKED_TP",            "Text format for blocked attacks.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_INTERRUPTED_TP",        "Text format for interrupted attacks.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_DISORIENTED_TP",        "Text format for notifications when Disoriented.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_FEARED_TP",             "Text format for notifications when Feared.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_OFF_BALANCE_TP",        "Text format for notifications when set Off-Balance.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_SILENCED_TP",           "Text format for notifications when Silenced.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_STUNNED_TP",            "Text format for notifications when Stunned.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_HEADER",          "Format Options (Notifications)")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_COMBAT_STATE_HEADER",          "Combat State")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_ALERT_HEADER",                 "Active Combat Alerts")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_POINTS_HEADER",                "Points")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_RESOURCES_HEADER",             "Resources")
-
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_IN_TP",    "Text format for notifications when engaging in combat.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_COMBAT_OUT_TP",   "Text format for notifications when exiting combat.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_FORMAT_NOTIFICATION_CLEANSE_TP",      "Text format for cleanse alerts.")
@@ -2178,7 +2132,6 @@ ZO_CreateStringId("SI_LUIE_SKILL_DRINK_CROWN_CRATE_DRINK",              "Crown C
 ZO_CreateStringId("SI_LUIE_SKILL_DRINK_CROWN_DRINK",                    "Crown Refreshing Drink")
 ZO_CreateStringId("SI_LUIE_SKILL_DRINK_CROWN_LIQUEUR",                  "Crown Stout Magic Liqueur")
 ZO_CreateStringId("SI_LUIE_SKILL_DRINK_CROWN_TINCTURE",                 "Crown Vigorous Tincture")
-
 ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_PSIJIC_AMBROSIA",           "Psijic Ambrosia")
 ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_AETHERIAL_AMBROSIA",        "Aetherial Ambrosia")
 ZO_CreateStringId("SI_LUIE_SKILL_EXPERIENCE_MYTHIC_AMBROSIA",           "Mythic Aetherial Ambrosia")
@@ -2197,17 +2150,13 @@ ZO_CreateStringId("SI_LUIE_SKILL_SET_REDISTRIBUTION",                   "Redistr
 ZO_CreateStringId("SI_LUIE_SKILL_SET_ICE_FURNACE",                      "Ice Furnace")
 ZO_CreateStringId("SI_LUIE_SKILL_SET_COOLDOWN",                         "Cooldown") -- Used as suffix for certain abilities internal cooldown
 ZO_CreateStringId("SI_LUIE_SKILL_DISGUISE_MONKS_DISGUISE",              "Monk\'s Disguise")
-
 ZO_CreateStringId("SI_LUIE_SKILL_PASSIVE_HEAVY_MAIN_HAND",              "Heavy Attack (Main Hand)")
 ZO_CreateStringId("SI_LUIE_SKILL_PASSIVE_HEAVY_OFF_HAND",               "Heavy Attack (Off Hand)")
 ZO_CreateStringId("SI_LUIE_SKILL_PASSIVE_HEAVY_SHOCK_PULSE",            "Heavy Attack (Shock Pulse)")
 ZO_CreateStringId("SI_LUIE_SKILL_PASSIVE_TRI_FOCUS_SHOCK",              "Tri Focus (Shock)")
 ZO_CreateStringId("SI_LUIE_SKILL_PASSIVE_NOXIPHILIC_SANGUIVORIA",       "Noxiphilic Sanguivoria")
 ZO_CreateStringId("SI_LUIE_SKILL_BOND_WITH_NATURE",                     "Bond with Nature")
-
 ZO_CreateStringId("SI_LUIE_SKILL_BLESSING_OF_RESTORATION",              "Blessing of Restoration")
-
-
 
 -- NPC Skills
 ZO_CreateStringId("SI_LUIE_SKILL_SHIELD_RUSH",                          "Shield Rush")

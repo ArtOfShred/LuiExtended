@@ -58,8 +58,9 @@ LuiExtended.lua
 LuiExtendedUI.lua
 LuiExtendedMenu.lua
 
-bindings.xml
-
+xml\bindings.xml
+xml\CombatText.xml
+ 
 i18n\en.lua
 i18n\$(language).lua
 
@@ -75,8 +76,7 @@ modules\DamageMeter.lua
 modules\InfoPanel.lua
 modules\UnitFrames.lua
 modules\SpellCastBuffs.lua
-
-modules\CombatText.xml
+modules\CombatText.lua
 
 modules\CombatText\Animation.lua
 modules\CombatText\Pool.lua
@@ -101,5 +101,3 @@ modules\CombatText\EventViewers\Alerts.lua
 modules\CombatText\EventViewers\CrowdControl.lua
 modules\CombatText\EventViewers\Points.lua
 modules\CombatText\EventViewers\Resources.lua
-
-modules\CombatText.lua
