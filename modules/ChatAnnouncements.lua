@@ -273,7 +273,7 @@ CA.D = {
         ExperienceName                  = GetString(SI_LUIE_CA_EXPERIENCE_NAME),
         ExperienceHideCombat            = false,
         ExperienceFilter                = 0,
-        ExperienceThrottle              = 0,
+        ExperienceThrottle              = 3500,
         ExperienceColorMessage          = { .75, .75, .75, 1 },
         ExperienceColorName             = { .75, .75, .75, 1 },
     },
