@@ -289,6 +289,9 @@ LUIE.AlertTable = {
     [9747] = { block = true, dodge = false, avoid = false, interrupt = true, priority = 3 }, -- Dire Wound (Banekin)
     [9748] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3 }, -- Envelop (Banekin)
     
+    [4799] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true }, -- Tail Spike (Clannfear)
+    [93745] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Rending Leap (Clannfear)
+    
     [26641] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2 }, -- Soul Flame (Daedric Titan)
     [26554] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 2 }, -- Wing Gust (Daedric Titan)
     

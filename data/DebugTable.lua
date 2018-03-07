@@ -7538,9 +7538,17 @@ debugAuras                  = {
             [9748] = true, -- Envelop -- Banekin
             [9749] = true, -- Envelop -- Banekin
             
-            --[4798] = true, -- Headbutt -- Clannfear
-            --[4799] = true, -- Tail Spike -- Clannfear
-            --[84443] = true, -- Tail Spike -- Clannfear
+            [4798] = true, -- Headbutt -- Clannfear
+            [4799] = true, -- Tail Spike -- Clannfear
+            [84443] = true, -- Tail Spike -- Clannfear
+            [93745] = true, -- Rending Leap -- Clannfear
+            [93746] = true, -- Rending Leap -- Clannfear
+            [94899] = true, -- Rending Leap -- Clannfear
+            [93750] = true, -- Rending Leap -- Clannfear
+            [93748] = true, -- Rending Leap Ranged -- Clannfear
+            [91395] = true, -- Devour -- Clannfear
+            [91398] = true, -- Devour -- Clannfear
+            [91396] = true, -- Devour -- Clannfear
             
             [26551] = true, -- Strike -- Daedric Titan
             [32852] = true, -- Scourge Bolt -- Daedric Titan

@@ -289,13 +289,28 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         return displayName, iconFile, effectType, sortOrder, timeStarted, timeEnding
     end
     
-    local zos_GetSynergyInfo = GetSynergyInfo
-    GetSynergyInfo = function()
-        local synergyName, iconFilename = zos_GetSynergyInfo()
+    ZO_Synergy.OnSynergyAbilityChanged = function(self)
+        local synergyName, iconFilename = GetSynergyInfo()
+
         if LUIE.Effects.SynergyNameOverride[synergyName] then
             iconFilename = LUIE.Effects.SynergyNameOverride[synergyName]
         end
-        return synergyName, iconFilename
+        
+        if synergyName and iconFilename then
+            if self.lastSynergyName ~= synergyName then
+                PlaySound(SOUNDS.ABILITY_SYNERGY_READY)
+
+                self.action:SetText(zo_strformat(SI_USE_SYNERGY, synergyName))
+            end
+            
+            self.icon:SetTexture(iconFilename)
+
+            SHARED_INFORMATION_AREA:SetHidden(self, false)
+        else
+            SHARED_INFORMATION_AREA:SetHidden(self, true)
+        end
+
+        self.lastSynergyName = synergyName
     end
     
     local function EffectsRowComparator(left, right)
