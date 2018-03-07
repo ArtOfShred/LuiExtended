@@ -489,6 +489,7 @@ A.Skill_Headbutt                    = 54380
 A.Skill_Tail_Spike                  = 4799
 A.Skill_Rending_Leap                = 93745
 A.Skill_Radiance                    = 4891
+A.Skill_Unyielding_Mace             = 4817
 A.Skill_Tremor                      = 67123
 A.Skill_Pin                         = 65709
 A.Skill_Sweep                       = 67872

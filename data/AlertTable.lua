@@ -295,14 +295,28 @@ LUIE.AlertTable = {
     [26641] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2 }, -- Soul Flame (Daedric Titan)
     [26554] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 2 }, -- Wing Gust (Daedric Titan)
     
+    [4771] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, refire = 1250 },-- Fiery Breath (Daedroth)
+    [91946] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3 }, -- Ground Tremor (Daedroth)
+    [91937] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3 }, -- Burst of Embers (Daedroth)
+    
     [26324] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Lava Geyser (Flame Atronach)
     [50216] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3, eventdetect = true, skipcheck = true, refire = 1000 }, -- Combustion (Flame Atronach)
     
     [5017] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2 }, -- Hoarfrost Fist (Frost Atronach)
     [33502] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2 }, -- Frozen Ground (Frost Atronach)
     
+    [4829] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3 }, -- Fire Brand (Flesh Atronach)
+    [4817] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Unyielding Mace (Flesh Atronach)
+    
+    [67870] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2 }, -- Tremor AOE (Flesh Colossus)
+    [66869] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2 }, -- Pin (Flesh Colossus)
+    [67872] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2 }, -- Sweep (Flesh Colossus)
+    [76139] = { block = true, dodge = true, interrupt = false, priority = 2, auradetect = true }, -- Stumble Forward (Flesh Colossus)
+    
     [11079] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 2, eventdetect = true }, -- Black Winter (Harvester)
     
+    [8205] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true}, -- Regeneration (Ogrim)
+    [48553] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, auradetect = true}, -- Focused Charge (Ogrim)
     [91848] = { block = false, dodge = true, avoid = false, interrupt = false, priority = 3, eventdetect = true }, -- Stomp (Ogrim)
     [91855] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Boulder Toss (Ogrim)
     
@@ -322,17 +336,6 @@ LUIE.AlertTable = {
     
     [6410] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Tail Clip (Winged Twilight)
     [6412] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 3 }, -- Dusk's Howl (Winged Twilight)
-    
-    
-    -- FLESH COLOSSUS (100% GOOD)
-    [67870] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2 }, -- Tremor AOE (Flesh Colossus)
-    [66869] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2 }, -- Pin (Flesh Colossus)
-    [67872] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2 }, -- Sweep (Flesh Colossus)
-    [76139] = { block = true, dodge = true, interrupt = false, priority = 2, auradetect = true }, -- Stumble Forward (Flesh Colossus)
-    
-    [8205] = { block = false, dodge = false, avoid = false, interrupt = true, priority = 3, auradetect = true, notDirect = true}, -- Regeneration (Ogrim)
-    [48553] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true, auradetect = true}, -- Focused Charge (Ogrim)
-    
     
     -- MONSTERS
     [43809] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, auradetect = true}, -- Shard Burst (Ice Wraith)
