@@ -516,19 +516,7 @@ function LUIE_CreateSettings()
 ----------------------------------------------------------------------------------------------
 -- COMBAT INFO
 ----------------------------------------------------------------------------------------------
-
-    -- Enable CI Module
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_CI_SHOWCOMBATINFO),
-        tooltip = GetString(SI_LUIE_LAM_CI_SHOWCOMBATINFO_TP),
-        getFunc = function() return LUIE.SV.CombatInfo_Enabled end,
-        setFunc = function(value) LUIE.SV.CombatInfo_Enabled = value end,
-        width = "full",
-        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-        default = LUIE.D.CombatInfo_Enabled,
-    }
-    
+ 
     -- CI Description
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "description",
@@ -543,344 +531,323 @@ function LUIE_CreateSettings()
         func = function() ReloadUI("ingame") end,
         width = "full",
     }
-    
-    -- Combat Info Options
+	
+	-- Global Cooldown Options Submenu
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "header",
+        type = "submenu",
         name = GetString(SI_LUIE_LAM_CI_HEADER_GCD),
-        width = "full",
-    }
+        controls = {
+			{
+			    type = "checkbox",
+				name = GetString(SI_LUIE_LAM_CI_GCD_SHOW),
+				tooltip = GetString(SI_LUIE_LAM_CI_GCD_SHOW_TP),
+				getFunc = function() return LUIE.CombatInfo.SV.GlobalShowGCD end,
+				setFunc = function(value) LUIE.CombatInfo.SV.GlobalShowGCD = value end,
+				width = "full",
+				warning = GetString(SI_LUIE_LAM_CI_GCD_SHOW_WARN),
+				default = LUIE.CombatInfo.D.GlobalShowGCD,
+				disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+			},
+			{
+			    type = "checkbox",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_QUICK)),
+				tooltip = GetString(SI_LUIE_LAM_CI_GCD_QUICK_TP),
+				getFunc = function() return LUIE.CombatInfo.SV.GlobalPotion end,
+				setFunc = function(value) LUIE.CombatInfo.SV.GlobalPotion = value end,
+				width = "full",
+				default = LUIE.CombatInfo.D.GlobalPotion,
+				disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShowGCD) end,
+			},
+			{
+				-- Show GCD Ready Flash
+			    type = "checkbox",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_FLASH)),
+				tooltip = GetString(SI_LUIE_LAM_CI_GCD_FLASH_TP),
+				getFunc = function() return LUIE.CombatInfo.SV.GlobalFlash end,
+				setFunc = function(value) LUIE.CombatInfo.SV.GlobalFlash = value end,
+				width = "full",
+				default = LUIE.CombatInfo.D.GlobalFlash,
+				disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShowGCD) end,
+			},
+			{
+				-- GCD - Desaturate Icons on GCD
+			    type = "checkbox",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_DESAT)),
+				tooltip = GetString(SI_LUIE_LAM_CI_GCD_DESAT_TP),
+				getFunc = function() return LUIE.CombatInfo.SV.GlobalDesat end,
+				setFunc = function(value) LUIE.CombatInfo.SV.GlobalDesat = value end,
+				width = "full",
+				default = LUIE.CombatInfo.D.GlobalDesat,
+				disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShowGCD) end,
+			},
+			{
+				-- GCD - Color Slot Label Red
+			    type = "checkbox",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_COLOR)),
+				tooltip = GetString(SI_LUIE_LAM_CI_GCD_COLOR_TP),
+				getFunc = function() return LUIE.CombatInfo.SV.GlobalLabelColor end,
+				setFunc = function(value) LUIE.CombatInfo.SV.GlobalLabelColor = value end,
+				width = "full",
+				default = LUIE.CombatInfo.D.GlobalLabelColor,
+				disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShowGCD) end,	
+			},
+			{
+				-- GCD - Animation Method
+				type = "dropdown",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_ANIMATION)),
+				tooltip = GetString(SI_LUIE_LAM_CI_GCD_ANIMATION_TP),
+				choices = globalMethodOptions,
+				getFunc = function() return globalMethodOptions[LUIE.CombatInfo.SV.GlobalMethod] end,
+				setFunc = function(value) LUIE.CombatInfo.SV.GlobalMethod = globalMethodOptionsKeys[value] end,
+				width = "full",
+				default = LUIE.CombatInfo.D.GlobalMethod,
+				disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShowGCD) end,
+			},
+		},
+	}
     
-    -- Show GCD on Action Bars
+	-- Ultimate Tracking Options Submenu
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_CI_GCD_SHOW),
-        tooltip = GetString(SI_LUIE_LAM_CI_GCD_SHOW_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.GlobalShowGCD end,
-        setFunc = function(value) LUIE.CombatInfo.SV.GlobalShowGCD = value end,
-        width = "full",
-        warning = GetString(SI_LUIE_LAM_CI_GCD_SHOW_WARN),
-        default = LUIE.CombatInfo.D.GlobalShowGCD,
-        disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-    }
-    
-    -- Show GCD on Quickslot
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "checkbox",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_QUICK)),
-        tooltip = GetString(SI_LUIE_LAM_CI_GCD_QUICK_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.GlobalPotion end,
-        setFunc = function(value) LUIE.CombatInfo.SV.GlobalPotion = value end,
-        width = "full",
-        default = LUIE.CombatInfo.D.GlobalPotion,
-        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShowGCD) end,
-    }
-    
-    -- Show GCD Ready Flash
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "checkbox",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_FLASH)),
-        tooltip = GetString(SI_LUIE_LAM_CI_GCD_FLASH_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.GlobalFlash end,
-        setFunc = function(value) LUIE.CombatInfo.SV.GlobalFlash = value end,
-        width = "full",
-        default = LUIE.CombatInfo.D.GlobalFlash,
-        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShowGCD) end,
-    }
-    
-    -- GCD - Desaturate Icons on GCD
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "checkbox",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_DESAT)),
-        tooltip = GetString(SI_LUIE_LAM_CI_GCD_DESAT_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.GlobalDesat end,
-        setFunc = function(value) LUIE.CombatInfo.SV.GlobalDesat = value end,
-        width = "full",
-        default = LUIE.CombatInfo.D.GlobalDesat,
-        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShowGCD) end,
-    }
-    
-    -- GCD - Color Slot Label Red
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "checkbox",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_COLOR)),
-        tooltip = GetString(SI_LUIE_LAM_CI_GCD_COLOR_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.GlobalLabelColor end,
-        setFunc = function(value) LUIE.CombatInfo.SV.GlobalLabelColor = value end,
-        width = "full",
-        default = LUIE.CombatInfo.D.GlobalLabelColor,
-        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShowGCD) end,
-    }
-    
-    -- GCD - Animation Method
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "dropdown",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_GCD_ANIMATION)),
-        tooltip = GetString(SI_LUIE_LAM_CI_GCD_ANIMATION_TP),
-        choices = globalMethodOptions,
-        getFunc = function() return globalMethodOptions[LUIE.CombatInfo.SV.GlobalMethod] end,
-        setFunc = function(value) LUIE.CombatInfo.SV.GlobalMethod = globalMethodOptionsKeys[value] end,
-        width = "full",
-        default = LUIE.CombatInfo.D.GlobalMethod,
-        disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShowGCD) end,
-    }
-    
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "header",
+        type = "submenu",
         name = GetString(SI_LUIE_LAM_CI_HEADER_ULTIMATE),
-        width = "full",
-    }
-    
+        controls = {
+			{
+				type = "checkbox",
+				name = GetString(SI_LUIE_LAM_CI_ULTIMATE_SHOW_VAL),
+				tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_SHOW_VAL_TP),
+				getFunc = function() return LUIE.CombatInfo.SV.UltimateLabelEnabled end,
+				setFunc = function(value) LUIE.CombatInfo.SV.UltimateLabelEnabled = value LUIE.CombatInfo.RegisterCombatInfo() LUIE.CombatInfo.OnSlotsFullUpdate() end,
+				width = "full",
+				default = LUIE.CombatInfo.D.UltimateLabelEnabled,
+				disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+			},
+			{
+				type = "checkbox",
+				name = GetString(SI_LUIE_LAM_CI_ULTIMATE_SHOW_PCT),
+				tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_SHOW_PCT_TP),
+				getFunc = function() return LUIE.CombatInfo.SV.UltimatePctEnabled end,
+				setFunc = function(value) LUIE.CombatInfo.SV.UltimatePctEnabled = value LUIE.CombatInfo.RegisterCombatInfo() LUIE.CombatInfo.OnSlotsFullUpdate() end,
+				width = "full",
+				default = LUIE.CombatInfo.D.UltimatePctEnabled,
+				disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+			},
+			{
+			    type = "checkbox",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL)),
+				tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL_TP),
+				getFunc = function() return LUIE.CombatInfo.SV.UltimateHideFull end,
+				setFunc = function(value) LUIE.CombatInfo.SV.UltimateHideFull = value LUIE.CombatInfo.OnSlotsFullUpdate() end,
+				width = "full",
+				default = LUIE.CombatInfo.D.UltimateHideFull,
+				disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.UltimatePctEnabled ) end,
+			},
+			{
+				type = "checkbox",
+				name = GetString(SI_LUIE_LAM_CI_ULTIMATE_TEXTURE),
+				tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_TEXTURE_TP),
+				getFunc = function() return LUIE.CombatInfo.SV.UltimateGeneration end,
+				setFunc = function(value) LUIE.CombatInfo.SV.UltimateGeneration = value end,
+				width = "full",
+				default = LUIE.CombatInfo.D.UltimateGeneration,
+				disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+			},
+		},
+	}
+
+	-- Bar Ability Highlight Options Submenu
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_CI_ULTIMATE_SHOW_VAL),
-        tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_SHOW_VAL_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.UltimateLabelEnabled end,
-        setFunc = function(value) LUIE.CombatInfo.SV.UltimateLabelEnabled = value LUIE.CombatInfo.RegisterCombatInfo() LUIE.CombatInfo.OnSlotsFullUpdate() end,
-        width = "full",
-        default = LUIE.CombatInfo.D.UltimateLabelEnabled,
-        disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-    }
-    
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_CI_ULTIMATE_SHOW_PCT),
-        tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_SHOW_PCT_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.UltimatePctEnabled end,
-        setFunc = function(value) LUIE.CombatInfo.SV.UltimatePctEnabled = value LUIE.CombatInfo.RegisterCombatInfo() LUIE.CombatInfo.OnSlotsFullUpdate() end,
-        width = "full",
-        default = LUIE.CombatInfo.D.UltimatePctEnabled,
-        disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-    }
-    
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "checkbox",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL)),
-        tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_HIDEFULL_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.UltimateHideFull end,
-        setFunc = function(value) LUIE.CombatInfo.SV.UltimateHideFull = value LUIE.CombatInfo.OnSlotsFullUpdate() end,
-        width = "full",
-        default = LUIE.CombatInfo.D.UltimateHideFull,
-        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.UltimatePctEnabled ) end,
-    }
-    
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_CI_ULTIMATE_TEXTURE),
-        tooltip = GetString(SI_LUIE_LAM_CI_ULTIMATE_TEXTURE_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.UltimateGeneration end,
-        setFunc = function(value) LUIE.CombatInfo.SV.UltimateGeneration = value end,
-        width = "full",
-        default = LUIE.CombatInfo.D.UltimateGeneration,
-        disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-    }
-    
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "header",
+        type = "submenu",
         name = GetString(SI_LUIE_LAM_CI_HEADER_BAR),
-        width = "full",
-    }
-    
-    -- Highlight Ability Bar Icon for Active Procs
+        controls = {
+			{
+				-- Highlight Ability Bar Icon for Active Procs
+			    type = "checkbox",
+				name = GetString(SI_LUIE_LAM_CI_BAR_PROC),
+				tooltip = GetString(SI_LUIE_LAM_CI_BAR_PROC_TP),
+				getFunc = function() return LUIE.CombatInfo.SV.ShowTriggered end,
+				setFunc = function(value) LUIE.CombatInfo.SV.ShowTriggered = value LUIE.CombatInfo.OnSlotsFullUpdate() end,
+				width = "full",
+				default = LUIE.CombatInfo.D.ShowTriggered,
+				disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+			},
+			{
+				-- Highlight Ability Bar Icon for Active Effects
+				type = "checkbox",
+				name = GetString(SI_LUIE_LAM_CI_BAR_EFFECT),
+				tooltip = GetString(SI_LUIE_LAM_CI_BAR_EFFECT_TP),
+				getFunc = function() return LUIE.CombatInfo.SV.ShowToggled end,
+				setFunc = function(value) LUIE.CombatInfo.SV.ShowToggled = value LUIE.CombatInfo.OnSlotsFullUpdate() end,
+				width = "full",
+				default = LUIE.CombatInfo.D.ShowToggled,
+				disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+			},
+			{
+				-- Show Toggled Ultimate
+			    type = "checkbox",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_ULTIMATE)),
+				tooltip = GetString(SI_LUIE_LAM_CI_BAR_ULTIMATE_TP),
+				getFunc = function() return LUIE.CombatInfo.SV.ShowToggledUltimate end,
+				setFunc = function(value) LUIE.CombatInfo.SV.ShowToggledUltimate = value LUIE.CombatInfo.OnSlotsFullUpdate() end,
+				width = "full",
+				default = LUIE.CombatInfo.D.ShowToggledUltimate,
+				disabled = function() return not (LUIE.CombatInfo.SV.ShowToggled and LUIE.SV.CombatInfo_Enabled) end,
+			},
+			{
+				-- Show Label On Bar Highlight
+			    type = "checkbox",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_LABEL)),
+				tooltip = GetString(SI_LUIE_LAM_CI_BAR_LABEL_TP),
+				getFunc = function() return LUIE.CombatInfo.SV.BarShowLabel end,
+				setFunc = function(value) LUIE.CombatInfo.SV.BarShowLabel = value LUIE.CombatInfo.ResetBarLabel() end,
+				width = "full",
+				default = LUIE.CombatInfo.D.BarShowLabel,
+				disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and ( LUIE.CombatInfo.SV.ShowTriggered or LUIE.CombatInfo.SV.ShowToggled) ) end,
+			},
+			{
+			    type = "slider",
+				name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
+				tooltip = GetString(SI_LUIE_LAM_CI_SHARED_POSITION_TP),
+				min = -72, max = 40, step = 2,
+				getFunc = function() return LUIE.CombatInfo.SV.BarLabelPosition end,
+				setFunc = function(value) LUIE.CombatInfo.SV.BarLabelPosition = value LUIE.CombatInfo.ResetBarLabel() end,
+				width = "full",
+				default = LUIE.CombatInfo.D.BarLabelPosition,
+				disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.BarShowLabel and ( LUIE.CombatInfo.SV.ShowTriggered or LUIE.CombatInfo.SV.ShowToggled)) end,
+			},
+			{
+			    type = "dropdown",
+				scrollable = true,
+				name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
+				tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONT_TP),
+				choices = FontsList,
+				sort = "name-up",
+				getFunc = function() return LUIE.CombatInfo.SV.BarFontFace end,
+				setFunc = function(var) LUIE.CombatInfo.SV.BarFontFace = var LUIE.CombatInfo.ApplyFont() end,
+				width = "full",
+				default = LUIE.CombatInfo.D.BarFontFace,
+				disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.BarShowLabel and ( LUIE.CombatInfo.SV.ShowTriggered or LUIE.CombatInfo.SV.ShowToggled)) end,
+			},
+			{
+			    type = "slider",
+				name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
+				tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSIZE_TP),
+				min = 10, max = 30, step = 1,
+				getFunc = function() return LUIE.CombatInfo.SV.BarFontSize end,
+				setFunc = function(value) LUIE.CombatInfo.SV.BarFontSize = value LUIE.CombatInfo.ApplyFont() end,
+				width = "full",
+				default = LUIE.CombatInfo.D.BarFontSize,
+				disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.BarShowLabel and ( LUIE.CombatInfo.SV.ShowTriggered or LUIE.CombatInfo.SV.ShowToggled)) end,
+			},
+			{
+			    type = "dropdown",
+				name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
+				tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSTYLE_TP),
+				choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
+				sort = "name-up",
+				getFunc = function() return LUIE.CombatInfo.SV.BarFontStyle end,
+				setFunc = function(var) LUIE.CombatInfo.SV.BarFontStyle = var LUIE.CombatInfo.ApplyFont() end,
+				width = "full",
+				default = LUIE.CombatInfo.D.BarFontStyle,
+				disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.BarShowLabel and ( LUIE.CombatInfo.SV.ShowTriggered or LUIE.CombatInfo.SV.ShowToggled)) end,
+			},
+			{
+			    type = "checkbox",
+				name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
+				tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
+				getFunc = function() return LUIE.CombatInfo.SV.BarMiilis end,
+				setFunc = function(value) LUIE.CombatInfo.SV.BarMiilis = value end,
+				width = "full",
+				default = LUIE.CombatInfo.D.BarMiilis,
+				disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.BarShowLabel and ( LUIE.CombatInfo.SV.ShowTriggered or LUIE.CombatInfo.SV.ShowToggled)) end,
+			},
+		},
+	}
+
+	-- Quickslot Cooldown Timer Option Submenu
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_CI_BAR_PROC),
-        tooltip = GetString(SI_LUIE_LAM_CI_BAR_PROC_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.ShowTriggered end,
-        setFunc = function(value) LUIE.CombatInfo.SV.ShowTriggered = value LUIE.CombatInfo.OnSlotsFullUpdate() end,
-        width = "full",
-        default = LUIE.CombatInfo.D.ShowTriggered,
-        disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-    }
-    
-    -- Highlight Ability Bar Icon for Active Effects
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_CI_BAR_EFFECT),
-        tooltip = GetString(SI_LUIE_LAM_CI_BAR_EFFECT_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.ShowToggled end,
-        setFunc = function(value) LUIE.CombatInfo.SV.ShowToggled = value LUIE.CombatInfo.OnSlotsFullUpdate() end,
-        width = "full",
-        default = LUIE.CombatInfo.D.ShowToggled,
-        disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-    }
-    
-    -- Show Toggled Ultimate
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "checkbox",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_ULTIMATE)),
-        tooltip = GetString(SI_LUIE_LAM_CI_BAR_ULTIMATE_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.ShowToggledUltimate end,
-        setFunc = function(value) LUIE.CombatInfo.SV.ShowToggledUltimate = value LUIE.CombatInfo.OnSlotsFullUpdate() end,
-        width = "full",
-        default = LUIE.CombatInfo.D.ShowToggledUltimate,
-        disabled = function() return not (LUIE.CombatInfo.SV.ShowToggled and LUIE.SV.CombatInfo_Enabled) end,
-    }
-    
-    -- Show Label On Bar Highlight
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "checkbox",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_LABEL)),
-        tooltip = GetString(SI_LUIE_LAM_CI_BAR_LABEL_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.BarShowLabel end,
-        setFunc = function(value) LUIE.CombatInfo.SV.BarShowLabel = value LUIE.CombatInfo.ResetBarLabel() end,
-        width = "full",
-        default = LUIE.CombatInfo.D.BarShowLabel,
-        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and ( LUIE.CombatInfo.SV.ShowTriggered or LUIE.CombatInfo.SV.ShowToggled) ) end,
-    }
-    
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "slider",
-        name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
-        tooltip = GetString(SI_LUIE_LAM_CI_SHARED_POSITION_TP),
-        min = -72, max = 40, step = 2,
-        getFunc = function() return LUIE.CombatInfo.SV.BarLabelPosition end,
-        setFunc = function(value) LUIE.CombatInfo.SV.BarLabelPosition = value LUIE.CombatInfo.ResetBarLabel() end,
-        width = "full",
-        default = LUIE.CombatInfo.D.BarLabelPosition,
-        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.BarShowLabel and ( LUIE.CombatInfo.SV.ShowTriggered or LUIE.CombatInfo.SV.ShowToggled)) end,
-    }
-    
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "dropdown",
-        scrollable = true,
-        name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
-        tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONT_TP),
-        choices = FontsList,
-        sort = "name-up",
-        getFunc = function() return LUIE.CombatInfo.SV.BarFontFace end,
-        setFunc = function(var) LUIE.CombatInfo.SV.BarFontFace = var LUIE.CombatInfo.ApplyFont() end,
-        width = "full",
-        default = LUIE.CombatInfo.D.BarFontFace,
-        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.BarShowLabel and ( LUIE.CombatInfo.SV.ShowTriggered or LUIE.CombatInfo.SV.ShowToggled)) end,
-    }
-    
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "slider",
-        name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
-        tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSIZE_TP),
-        min = 10, max = 30, step = 1,
-        getFunc = function() return LUIE.CombatInfo.SV.BarFontSize end,
-        setFunc = function(value) LUIE.CombatInfo.SV.BarFontSize = value LUIE.CombatInfo.ApplyFont() end,
-        width = "full",
-        default = LUIE.CombatInfo.D.BarFontSize,
-        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.BarShowLabel and ( LUIE.CombatInfo.SV.ShowTriggered or LUIE.CombatInfo.SV.ShowToggled)) end,
-    }
-    
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "dropdown",
-        name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
-        tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSTYLE_TP),
-        choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
-        sort = "name-up",
-        getFunc = function() return LUIE.CombatInfo.SV.BarFontStyle end,
-        setFunc = function(var) LUIE.CombatInfo.SV.BarFontStyle = var LUIE.CombatInfo.ApplyFont() end,
-        width = "full",
-        default = LUIE.CombatInfo.D.BarFontStyle,
-        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.BarShowLabel and ( LUIE.CombatInfo.SV.ShowTriggered or LUIE.CombatInfo.SV.ShowToggled)) end,
-    }
-    
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "checkbox",
-        name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
-        tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.BarMiilis end,
-        setFunc = function(value) LUIE.CombatInfo.SV.BarMiilis = value end,
-        width = "full",
-        default = LUIE.CombatInfo.D.BarMiilis,
-        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.BarShowLabel and ( LUIE.CombatInfo.SV.ShowTriggered or LUIE.CombatInfo.SV.ShowToggled)) end,
-    }
-    
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "header",
+        type = "submenu",
         name = GetString(SI_LUIE_LAM_CI_HEADER_POTION),
-        width = "full",
-    }
-    
-    -- Show Cooldowns (Potion Only when I get finished) -- TODO
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_CI_POTION),
-        tooltip = GetString(SI_LUIE_LAM_CI_POTION_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.PotionTimerShow end,
-        setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerShow = value end,
-        width = "full",
-        default = LUIE.CombatInfo.D.PotionTimerShow,
-        disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
-    }
-    
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "slider",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
-        tooltip = GetString(SI_LUIE_LAM_CI_SHARED_POSITION_TP),
-        min = -72, max = 40, step = 2,
-        getFunc = function() return LUIE.CombatInfo.SV.PotionTimerLabelPosition end,
-        setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerLabelPosition = value LUIE.CombatInfo.ResetPotionTimerLabel() end,
-        width = "full",
-        default = LUIE.CombatInfo.D.PotionTimerLabelPosition,
-        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.PotionTimerShow ) end,
-    }
-    
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "dropdown",
-        scrollable = true,
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
-        tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONT_TP),
-        choices = FontsList,
-        sort = "name-up",
-        getFunc = function() return LUIE.CombatInfo.SV.PotionTimerFontFace end,
-        setFunc = function(var) LUIE.CombatInfo.SV.PotionTimerFontFace = var LUIE.CombatInfo.ApplyFont() end,
-        width = "full",
-        default = LUIE.CombatInfo.D.PotionTimerFontFace,
-        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.PotionTimerShow ) end,
-    }
-    
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "slider",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
-        tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSIZE_TP),
-        min = 10, max = 30, step = 1,
-        getFunc = function() return LUIE.CombatInfo.SV.PotionTimerFontSize end,
-        setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerFontSize = value LUIE.CombatInfo.ApplyFont() end,
-        width = "full",
-        default = LUIE.CombatInfo.D.PotionTimerFontSize,
-        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.PotionTimerShow ) end,
-    }
-    
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "dropdown",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
-        tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSTYLE_TP),
-        choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
-        sort = "name-up",
-        getFunc = function() return LUIE.CombatInfo.SV.PotionTimerFontStyle end,
-        setFunc = function(var) LUIE.CombatInfo.SV.PotionTimerFontStyle = var LUIE.CombatInfo.ApplyFont() end,
-        width = "full",
-        default = LUIE.CombatInfo.D.PotionTimerFontStyle,
-        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.PotionTimerShow ) end,
-    }
-    
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "checkbox",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_POTION_COLOR)),
-        tooltip = GetString(SI_LUIE_LAM_CI_POTION_COLOR_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.PotionTimerColor end,
-        setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerColor = value end,
-        width = "full",
-        default = LUIE.CombatInfo.D.PotionTimerColor,
-        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.PotionTimerShow ) end,
-    }
-    
-    optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
-        type = "checkbox",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
-        tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
-        getFunc = function() return LUIE.CombatInfo.SV.PotionTimerMillis end,
-        setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerMillis = value end,
-        width = "full",
-        default = LUIE.CombatInfo.D.PotionTimerMillis,
-        disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.PotionTimerShow ) end,
-    }
+        controls = {
+			{
+				-- Show Cooldowns (Potion Only when I get finished) -- TODO
+			    type = "checkbox",
+				name = GetString(SI_LUIE_LAM_CI_POTION),
+				tooltip = GetString(SI_LUIE_LAM_CI_POTION_TP),
+				getFunc = function() return LUIE.CombatInfo.SV.PotionTimerShow end,
+				setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerShow = value end,
+				width = "full",
+				default = LUIE.CombatInfo.D.PotionTimerShow,
+				disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
+			},
+			{
+			    type = "slider",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_SHARED_POSITION)),
+				tooltip = GetString(SI_LUIE_LAM_CI_SHARED_POSITION_TP),
+				min = -72, max = 40, step = 2,
+				getFunc = function() return LUIE.CombatInfo.SV.PotionTimerLabelPosition end,
+				setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerLabelPosition = value LUIE.CombatInfo.ResetPotionTimerLabel() end,
+				width = "full",
+				default = LUIE.CombatInfo.D.PotionTimerLabelPosition,
+				disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.PotionTimerShow ) end,
+			},
+			{
+			    type = "dropdown",
+				scrollable = true,
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT)),
+				tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONT_TP),
+				choices = FontsList,
+				sort = "name-up",
+				getFunc = function() return LUIE.CombatInfo.SV.PotionTimerFontFace end,
+				setFunc = function(var) LUIE.CombatInfo.SV.PotionTimerFontFace = var LUIE.CombatInfo.ApplyFont() end,
+				width = "full",
+				default = LUIE.CombatInfo.D.PotionTimerFontFace,
+				disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.PotionTimerShow ) end,
+			},
+			{
+			    type = "slider",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_SIZE)),
+				tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSIZE_TP),
+				min = 10, max = 30, step = 1,
+				getFunc = function() return LUIE.CombatInfo.SV.PotionTimerFontSize end,
+				setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerFontSize = value LUIE.CombatInfo.ApplyFont() end,
+				width = "full",
+				default = LUIE.CombatInfo.D.PotionTimerFontSize,
+				disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.PotionTimerShow ) end,
+			},
+			{
+			    type = "dropdown",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_FONT_STYLE)),
+				tooltip = GetString(SI_LUIE_LAM_CI_SHARED_FONTSTYLE_TP),
+				choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
+				sort = "name-up",
+				getFunc = function() return LUIE.CombatInfo.SV.PotionTimerFontStyle end,
+				setFunc = function(var) LUIE.CombatInfo.SV.PotionTimerFontStyle = var LUIE.CombatInfo.ApplyFont() end,
+				width = "full",
+				default = LUIE.CombatInfo.D.PotionTimerFontStyle,
+				disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.PotionTimerShow ) end,
+			},
+			{
+			    type = "checkbox",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_POTION_COLOR)),
+				tooltip = GetString(SI_LUIE_LAM_CI_POTION_COLOR_TP),
+				getFunc = function() return LUIE.CombatInfo.SV.PotionTimerColor end,
+				setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerColor = value end,
+				width = "full",
+				default = LUIE.CombatInfo.D.PotionTimerColor,
+				disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.PotionTimerShow ) end,
+			},
+			{
+			    type = "checkbox",
+				name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS)),
+				tooltip = GetString(SI_LUIE_LAM_BUFF_SHOWSECONDFRACTIONS_TP),
+				getFunc = function() return LUIE.CombatInfo.SV.PotionTimerMillis end,
+				setFunc = function(value) LUIE.CombatInfo.SV.PotionTimerMillis = value end,
+				width = "full",
+				default = LUIE.CombatInfo.D.PotionTimerMillis,
+				disabled = function() return not ( LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.PotionTimerShow ) end,
+			},
+		},
+	}
 
 ----------------------------------------------------------------------------------------------
 -- BUFFS AND DEBUFFS
