@@ -1707,18 +1707,6 @@ function LUIE_CreateSettings()
 -- CHAT ANNOUNCEMENTS
 ----------------------------------------------------------------------------------------------
     
-    -- Enable Chat Announcements module
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_CA_ENABLE),
-        tooltip = GetString(SI_LUIE_LAM_CA_ENABLE_TP),
-        getFunc = function() return LUIE.SV.ChatAnnouncements_Enable end,
-        setFunc = function(value) LUIE.SV.ChatAnnouncements_Enable = value end,
-        width = "full",
-        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-        default = LUIE.D.ChatAnnouncements_Enable,
-    }
-    
     -- CA Module Description
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "description",
@@ -6314,17 +6302,6 @@ function LUIE_CreateSettings()
 -- UNIT FRAMES
 ----------------------------------------------------------------------------------------------
 
-    -- Enable Unit Frames module
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_ENABLE),
-        getFunc = function() return LUIE.SV.UnitFrames_Enabled end,
-        setFunc = function(value) LUIE.SV.UnitFrames_Enabled = value end,
-        width = "full",
-        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-        default = LUIE.D.UnitFrames_Enabled,
-    }
-    
     -- Unit Frames module description
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "description",
@@ -7971,18 +7948,7 @@ function LUIE_CreateSettings()
 ----------------------------------------------------------------------------------------------
 -- Combat Text
 ----------------------------------------------------------------------------------------------
- 
-    -- Enable CT Module
-    optionsDataCombatText[#optionsDataCombatText +1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_CT_SHOWCOMBATTEXT),
-        getFunc = function() return LUIE.SV.CombatText_Enabled end,
-        setFunc = function(value) LUIE.SV.CombatText_Enabled = value end,
-        width = "full",
-        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-        default = LUIE.D.CombatText_Enabled,
-    }
-    
+  
     -- CT Description
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type = "description",
