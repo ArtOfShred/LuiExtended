@@ -10,7 +10,23 @@ local moduleName    = LUIE.name .. "_SlashCommands"
 
 SC.Enabled  = false
 SC.D = {
-    -- nothing here yet
+    SlashHome           = true,
+    SlashRegroup        = true,
+    SlashDisband        = true,
+    SlashGroupLeave     = true,
+    SlashKick           = true,
+    SlashGroupKick      = true,
+    SlashGuildInvite    = true,
+    SlashGuildQuit      = true,
+    SlashGuildKick      = true,
+    SlashFriend         = true,
+    SlashIgnore         = true,
+    SlashRemoveFriend   = true,
+    SlashRemoveIgnore   = true,
+    SlashTrade          = true,
+    SlashVoteKick       = true,
+    SlashCampaignQ      = true,
+    SlashInvite         = true,
 }
 SC.SV       = nil
 
