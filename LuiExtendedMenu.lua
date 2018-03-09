@@ -238,7 +238,6 @@ function LUIE_CreateSettings()
     optionsData[#optionsData + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_PNL_HEADER),
-        reference = "Info_Panel_Options_Submenu",
         controls = {
             {
                 -- InfoPanel Header
@@ -1782,7 +1781,6 @@ function LUIE_CreateSettings()
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_CA_CURRENCY_HEADER),
-        reference = "Chat_Announcements_Options_Currency_Announcements_Submenu",
         controls = {
             {
                 -- Show Currency Icons
@@ -2338,7 +2336,6 @@ function LUIE_CreateSettings()
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_CA_LOOT_HEADER),
-        reference = "Chat_Announcements_Options_Loot_Announcements_Submenu",
         controls = {
             {
                 -- Show looted item icons
@@ -2639,7 +2636,6 @@ function LUIE_CreateSettings()
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_CA_CURRENCY_CONTEXT_MENU),
-        reference = "Chat_Announcements_Options_Shared_Currency_Loot_Submenu",
         controls = {        
             {
                 -- Currency/Loot Message Color
@@ -3344,7 +3340,6 @@ function LUIE_CreateSettings()
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_CA_EXP_HEADER),
-        reference = "Chat_Announcements_Options_Experience_Announcements_Submenu",
         controls = {
             {
                 type = "header",
@@ -4013,7 +4008,6 @@ function LUIE_CreateSettings()
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_HEADER),
-        reference = "Chat_Announcements_Options_Collectible_Announcements_Submenu",
         controls = {
             {
                 -- 
@@ -4383,7 +4377,6 @@ function LUIE_CreateSettings()
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_CA_ACHIEVE_HEADER),
-        reference = "Chat_Announcements_Options_Achievements_Announcements_Submenu",
         controls = {
 			{
 				-- Achievement Bracket
@@ -4729,7 +4722,6 @@ function LUIE_CreateSettings()
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_CA_QUEST_HEADER),
-        reference = "Chat_Announcements_Options_Quest_Announcements_Submenu",
         controls = {
             {
                 -- Show Quest Share CA
@@ -5130,7 +5122,6 @@ function LUIE_CreateSettings()
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_CA_SOCIAL_HEADER),
-        reference = "Chat_Announcements_Options_Social_Announcements_Submenu",
         controls = {
             {
                 type = "header",
@@ -5538,7 +5529,6 @@ function LUIE_CreateSettings()
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_CA_GROUP_HEADER),
-        reference = "Chat_Announcements_Options_Group_Announcements_Submenu",
         controls = {
             {
                 type = "header",
@@ -5815,7 +5805,6 @@ function LUIE_CreateSettings()
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_CA_DISPLAY_HEADER),
-        reference = "Chat_Announcements_Options_Display_Announcements_Submenu",
         controls = {
             -- Display Announcements Header
             {
@@ -6049,7 +6038,6 @@ function LUIE_CreateSettings()
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_CA_MISC_HEADER),
-        reference = "Chat_Announcements_Options_Misc_Announcements_Submenu",
         controls = {
             {
                 -- Mail (CA)
@@ -6316,7 +6304,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_UF_DFRAMES_HEADER),
-        reference = "Unit_Frames_Options_Default_Unit_Frames_Submenu",
         controls = {
             {
                 -- Default PLAYER frame
@@ -6504,7 +6491,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_UF_CFRAMES_HEADER),
-        reference = "Unit_Frames_Options_Custom_Unit_Frames_Submenu",
         controls = {
             {
                 -- Custom Unit Frames Unlock
@@ -6657,7 +6643,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_UF_CFRAMES_COLOR_HEADER),
-        reference = "Unit_Frames_Options_Custom_Unit_Frames_Color_Submenu",
         controls = {
             {
                 -- Custom Unit Frames Health Bar Color
@@ -6837,7 +6822,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_HEADER),
-        reference = "Unit_Frames_Options_Custom_Unit_Frames_Player_Target_Submenu",
         controls = {
             {
                 -- Enable LUIE PLAYER frame
@@ -7212,7 +7196,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_OPTIONS_HEADER),
-        reference = "Unit_Frames_Options_Additional_Player_Frame_Display_Submenu",
         controls = {
             {
                 -- Player Frames Display Method
@@ -7342,7 +7325,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_UF_CFRAMESG_HEADER),
-        reference = "Unit_Frames_Options_Custom_Unit_Frames_Group_Submenu",
         controls = {
             {
                 -- Enable This Addon GROUP frames
@@ -7512,7 +7494,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_UF_CFRAMESR_HEADER),
-        reference = "Unit_Frames_Options_Custom_Unit_Frames_Raid_Submenu",
         controls = {
             {
                 -- Enable This Addon RAID frames
@@ -7685,7 +7666,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_UF_CFRAMESB_HEADER),
-        reference = "Unit_Frames_Options_Custom_Unit_Frames_Boss_Submenu",
         controls = {
             {
                 -- Enable This Addon BOSS frames
@@ -7800,7 +7780,6 @@ function LUIE_CreateSettings()
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_UF_CFRAMESPVP_HEADER),
-        reference = "Unit_Frames_Options_Custom_Unit_Frames_Pvp_Target_Submenu",
         controls = {
             {
                 -- Enable additional PvP Target frame
