@@ -581,7 +581,7 @@ ZO_CreateStringId("SI_LUIE_LAM_NAMEDISPLAYMETHOD",                      "Player 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-ZO_CreateStringId("SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK",                "Enable Buffs & Debuffs Module")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK",                "Buffs & Debuffs Module")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_HEADER_POSITION",                   "Position and Display Options")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_HARDLOCK",                          "Hard-Lock Position to Unit Frames")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_HARDLOCK_TP",                       "Hard-Lock position of buff frames to health bar of unit frames (default or custom).")
@@ -730,9 +730,9 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISETARGET_TP",    "Display
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- Base Settings
+ZO_CreateStringId("SI_LUIE_LAM_CA_ENABLE",                              "Chat Announcements Module")
 ZO_CreateStringId("SI_LUIE_LAM_CA_HEADER",                              "Chat Announcements Options")
 ZO_CreateStringId("SI_LUIE_LAM_CA_DESCRIPTION",                         "Displays announcements in chat for various events - with many customizable settings.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ENABLE",                              "Enable Chat Announcements Module")
 ZO_CreateStringId("SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP",                "Determines the method used to display player names in Chat Announcements where applicable.\nDefault: Character Name")
 ZO_CreateStringId("SI_LUIE_LAM_CA_BRACKET_OPTION_CHARACTER",            "Character/Account Name Brackets")
 ZO_CreateStringId("SI_LUIE_LAM_CA_BRACKET_OPTION_CHARACTER_TP",         "Choose whether or not to display [ ] brackets around character and account names.")
@@ -1368,7 +1368,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERTCOLOR_TP",  "Change 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ZO_CreateStringId("SI_LUIE_LAM_CI_HEADER",                              "Combat Info Options")
-ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWCOMBATINFO",                      "Enable Combat Info")
+ZO_CreateStringId("SI_LUIE_LAM_CI_SHOWCOMBATINFO",                      "Combat Info Module")
 ZO_CreateStringId("SI_LUIE_LAM_CI_SHARED_FONT_TP",                      "Choose the font to use for the countdown label.")
 ZO_CreateStringId("SI_LUIE_LAM_CI_SHARED_FONTSIZE_TP",                  "Choose the font size for the countdown label.")
 ZO_CreateStringId("SI_LUIE_LAM_CI_SHARED_FONTSTYLE_TP",                 "Choose the font style for the countdown label.")
@@ -1448,7 +1448,7 @@ ZO_CreateStringId("SI_LUIE_LAM_PNL_UNLOCKPANEL_TP",                     "Allow m
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- Base Options
-ZO_CreateStringId("SI_LUIE_LAM_UF_ENABLE",                              "Enable Unit Frames Module")
+ZO_CreateStringId("SI_LUIE_LAM_UF_ENABLE",                              "Unit Frames Module")
 ZO_CreateStringId("SI_LUIE_LAM_UF_DESCRIPTION",                         "This allows display of textual attributes information over default UI controls. It also creates custom frames for player and target.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_SHORTNUMBERS",                        "Shorten Numbers on Bars")
 ZO_CreateStringId("SI_LUIE_LAM_UF_SHORTNUMBERS_TP",                     "Replace large numbers like 12,345 with 12.3k on all bars and labels related to unit frames.")
@@ -1691,7 +1691,7 @@ ZO_CreateStringId("SI_LUIE_LAM_UF_COMMON_RETICLECOLORINTERACT",         "Interac
 
 -- Base Options
 ZO_CreateStringId("SI_LUIE_LAM_CT",                                     "Combat Text")
-ZO_CreateStringId("SI_LUIE_LAM_CT_SHOWCOMBATTEXT",                      "Enable Combat Text (Combat Cloud)")
+ZO_CreateStringId("SI_LUIE_LAM_CT_SHOWCOMBATTEXT",                      "Combat Text Module")
 ZO_CreateStringId("SI_LUIE_LAM_CT_DESCRIPTION",                         "Display Combat Cloud combat text, with damage/healing values, and various alerts.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_UNLOCK",                              "Unlock")
 ZO_CreateStringId("SI_LUIE_LAM_CT_UNLOCK_TP",                           "Unlock the panels to move them.")
