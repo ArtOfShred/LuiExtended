@@ -417,6 +417,9 @@ function SCB.Initialize( enabled )
 			SCB.SV.prominentdOffsetX = self:GetLeft()
 			SCB.SV.prominentdOffsetY = self:GetTop()
 		end )
+		
+	uiTlw.prominentbuffs.alignVertical = true
+	uiTlw.prominentdebuffs.alignVertical = true
 
 	containerRouting.promb = "prominentbuffs"
 	containerRouting.promd = "prominentdebuffs"
@@ -1184,6 +1187,12 @@ function SCB.CreateSingleIcon(container, AnchorItem)
         buff.cd:SetAnchor( BOTTOMRIGHT, buff, BOTTOMRIGHT, -1, -1 )
         buff.cd:SetDrawLayer(DL_BACKGROUND)
     end
+	
+	if container == "prominentbuffs" or container == "prominentdebuffs" then
+		buff.name = UI.Label( buff, nil, nil, nil, g_buffsFont, nil, false )
+		buff.name:SetAnchor(TOPRIGHT, buff, LEFT, -4, 0)
+		buff.name:SetAnchor(BOTTOMRIGHT, buff, LEFT, -4, 0)
+	end
 
     SCB.ResetSingleIcon(container, buff, AnchorItem)
     return buff
@@ -2322,6 +2331,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
 
         -- Calculate remaining time
         local remain = ( effect.ends ~= nil ) and ( effect.ends - currentTime ) or nil
+		local name = ( effect.name ~= nil) and effect.name or nil
 
         local buff = uiTlw[container].icons[index]
 
@@ -2370,6 +2380,11 @@ function SCB.updateIcons( currentTime, sortedList, container )
                 buff.label:SetText( E.IsToggle[effect.name] and "T" or nil )
                 -- buff.label:SetText( E.IsToggle[effect.name] and "T" or E.IsVampStage(effect) and (E.IsVampStage(effect)) or nil ) -- Deprecated
             end
+			
+			if buff.name then
+				buff.name:SetText(effect.name)
+				buff.name:SetHidden(false)
+			end
         end
         
         if effect.stack and effect.stack > 0 then

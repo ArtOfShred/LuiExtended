@@ -362,8 +362,8 @@ E.DebuffDisplayOverrideName = {
 }
 
 E.ProminentBuffs = { 
-	--['Hurricane'] 						= true,
-	--['Critical Surge']					= true,
+	['Hurricane'] 						= true,
+	['Critical Surge']					= true,
 }
 
 E.ProminentDebuffs = { 
