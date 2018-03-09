@@ -1,5 +1,18 @@
+-- SlashCommands namespace
+LUIE.SlashCommands = {}
+
 -- Performance Enhancement
-local printToChat = LUIE.PrintToChat
+local SC            = LUIE.SlashCommands
+local printToChat   = LUIE.PrintToChat
+local strformat     = zo_strformat
+
+local moduleName    = LUIE.name .. "_SlashCommands"
+
+SC.Enabled  = false
+SC.D = {
+    -- nothing here yet
+}
+SC.SV       = nil
 
 local function SlashHome()
     local primaryHouse = GetHousingPrimaryHouse()

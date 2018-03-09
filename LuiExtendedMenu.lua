@@ -128,12 +128,25 @@ function LUIE_CreateSettings()
         registerForDefaults = true,
     }
 
+    local panelDataSlashCommands = {
+        type = "panel",
+        name = strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_SLASHCMDS)),
+        displayName = strformat(LUIE.name, GetString(SI_LUIE_LAM_SLASHCMDS), GetString(SI_GAME_MENU_SETTINGS)),
+        author = LUIE.author,
+        version = LUIE.version,
+        website = "http://www.esoui.com/downloads/info818-LuiExtended.html",
+        slashCommand = "/luisc",
+        registerForRefresh = true,
+        registerForDefaults = true,
+    }
+    
     local optionsData = {}
     local optionsDataBuffsDebuffs = {}
     local optionsDataChatAnnouncements = {}
     local optionsDataUnitFrames = {}
     local optionsDataCombatInfo = {}
     local optionsDataCombatText = {}
+    local optionsDataSlashCommands = {}
 
     -- ReloadUI Button
     optionsData[#optionsData + 1] = {
@@ -232,6 +245,24 @@ function LUIE_CreateSettings()
         type = "description",
         width = "half",
         text = GetString(SI_LUIE_LAM_CA_DESCRIPTION),
+    } 
+    
+    -- Slash Commands Module
+    optionsData[#optionsData +1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_SLASHCMDS_ENABLE),
+        getFunc = function() return LUIE.SV.SlashCommands_Enable end,
+        setFunc = function(value) LUIE.SV.SlashCommands_Enable = value end,
+        width = "half",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        default = LUIE.D.SlashCommands_Enable,
+    }
+
+    -- Slash Commands Module Description
+    optionsData[#optionsData +1] = {
+        type = "description",
+        width = "half",
+        text = GetString(SI_LUIE_LAM_SLASHCMDS_DESCRIPTION),
     }
 
     -- Info Panel Options Submenu
@@ -450,8 +481,17 @@ function LUIE_CreateSettings()
         default = LUIE.D.StartupInfo,
     }
     
-    -- Slash Commands Overview
-    optionsData[#optionsData + 1] = {
+----------------------------------------------------------------------------------------------
+-- SLASH COMMANDS
+----------------------------------------------------------------------------------------------
+
+    optionsDataSlashCommands[#optionsDataSlashCommands + 1] = {
+        type = "description",
+        text = "Slash Commands description",
+    }
+    
+    -- Slash Commands
+    optionsDataSlashCommands[#optionsDataSlashCommands + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER),
         controls = {
@@ -10260,4 +10300,8 @@ function LUIE_CreateSettings()
         LAM2:RegisterOptionControls('LUIECombatTextOptions', optionsDataCombatText)
     end
     
+    if LUIE.SV.SlashCommands_Enable then
+        LAM2:RegisterAddonPanel('LUIESlashCommandsOptions', panelDataSlashCommands)
+        LAM2:RegisterOptionControls('LUIESlashCommandsOptions', optionsDataSlashCommands)
+    end
 end
