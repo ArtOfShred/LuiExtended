@@ -330,122 +330,122 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     end
     
     STATS.AddLongTermEffects = function(self, container, effectsRowPool)      
-		local function UpdateEffects(eventCode, changeType, buffSlot, buffName, unitTag, startTime, endTime, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId)
-			if (not unitTag or unitTag == "player") and not container:IsHidden() then
-				effectsRowPool:ReleaseAllObjects()
-					
-				local effectsRows = {}
+        local function UpdateEffects(eventCode, changeType, buffSlot, buffName, unitTag, startTime, endTime, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId)
+            if (not unitTag or unitTag == "player") and not container:IsHidden() then
+                effectsRowPool:ReleaseAllObjects()
+                    
+                local effectsRows = {}
 
-				--Artificial effects--
-				for effectId in ZO_GetNextActiveArtificialEffectIdIter do
-					local displayName, iconFile, effectType, sortOrder = GetArtificialEffectInfo(effectId)
-					local effectsRow = effectsRowPool:AcquireObject()
-					effectsRow.name:SetText(strformat(SI_ABILITY_TOOLTIP_NAME, displayName))
-					effectsRow.icon:SetTexture(iconFile)
-					effectsRow.effectType = effectType
-					effectsRow.time:SetHidden(true)
-					effectsRow.sortOrder = sortOrder
-					effectsRow.tooltipTitle = strformat(SI_ABILITY_TOOLTIP_NAME, displayName)
-					effectsRow.effectId = effectId
-					effectsRow.isArtificial = true
+                --Artificial effects--
+                for effectId in ZO_GetNextActiveArtificialEffectIdIter do
+                    local displayName, iconFile, effectType, sortOrder = GetArtificialEffectInfo(effectId)
+                    local effectsRow = effectsRowPool:AcquireObject()
+                    effectsRow.name:SetText(strformat(SI_ABILITY_TOOLTIP_NAME, displayName))
+                    effectsRow.icon:SetTexture(iconFile)
+                    effectsRow.effectType = effectType
+                    effectsRow.time:SetHidden(true)
+                    effectsRow.sortOrder = sortOrder
+                    effectsRow.tooltipTitle = strformat(SI_ABILITY_TOOLTIP_NAME, displayName)
+                    effectsRow.effectId = effectId
+                    effectsRow.isArtificial = true
 
-					table.insert(effectsRows, effectsRow)    
-				end
-					
-				local counter = 1
-				local trackBuffs = { }
-				for i = 1, GetNumBuffs("player") do
-					local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId = GetUnitBuffInfo("player", i)
-						
-					trackBuffs[counter] = {
-						buffName = buffName,
-						startTime = startTime,
-						endTime = endTime,
-						buffSlot = buffSlot,
-						stackCount = stackCount,
-						iconFile = iconFile,
-						buffType = buffType,
-						effectType = effectType,
-						abilityType = abilityType,
-						statusEffectType = statusEffectType,
-						abilityId = abilityId
-					}
-					counter = counter + 1
-				end
-				   
-				-- Heavy handed - but functional way to mark duplicate abilities to not display (Duplicate shuffle auras, etc) by only displaying the one with the latest end time.
-				for i = 1, #trackBuffs do
-					local compareId = trackBuffs[i].abilityId
-					local compareTime = trackBuffs[i].endTime
-					-- Only re-iterate and compare if this ability is on the override table, this way we avoid as much of this double loop as possible.
-					if LUIE.Effects.EffectOverride[compareId] and LUIE.Effects.EffectOverride[compareId].noDuplicate then
-						for k, v in pairs(trackBuffs) do
-							-- Only remove the lower duration effects that were cast previously.
-							if v.abilityId == compareId and v.endTime < compareTime then
-								v.markForRemove = true
-							end
-						end
-					end
-				end         
-					
-				for i = 1, #trackBuffs do
-					local buffName = trackBuffs[i].buffName
-					local startTime =  trackBuffs[i].startTime
-					local endTime =  trackBuffs[i].endTime
-					local buffSlot =  trackBuffs[i].buffSlot
-					local stackCount =  trackBuffs[i].stackCount
-					local iconFile =  trackBuffs[i].iconFile
-					local buffType =  trackBuffs[i].buffType
-					local effectType =  trackBuffs[i].effectType
-					local abilityType =  trackBuffs[i].abilityType
-					local statusEffectType =  trackBuffs[i].statusEffectType
-					local abilityId =  trackBuffs[i].abilityId
-					local markForRemove = trackBuffs[i].markForRemove or false
-						
-					local tooltipText = GetAbilityEffectDescription(buffSlot)
-					--if LUIE.Effects.TooltipOverride[abilityId] then tooltipText = LUIE.Effects.TooltipOverride[abilityId] end
-					-- Have to trim trailing spaces on the end of tooltips
-					if tooltipText ~= "" then 
-						tooltipText = string.match(tooltipText, ".*%S")
-					end
-					if buffSlot > 0 and buffName ~= "" and not (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide) and not markForRemove then
-						local effectsRow = effectsRowPool:AcquireObject()
-						effectsRow.name:SetText(strformat(SI_ABILITY_TOOLTIP_NAME, buffName))
-						effectsRow.icon:SetTexture(iconFile)
-						effectsRow.tooltipTitle = strformat(SI_ABILITY_TOOLTIP_NAME, buffName)
-						effectsRow.tooltipText = (tooltipText)
-						local duration = startTime - endTime
-						effectsRow.time:SetHidden(duration == 0)
-						effectsRow.time.endTime = endTime
-						effectsRow.effectType = effectType
-						effectsRow.buffSlot = buffSlot
-						effectsRow.isArtificial = false
+                    table.insert(effectsRows, effectsRow)    
+                end
+                    
+                local counter = 1
+                local trackBuffs = { }
+                for i = 1, GetNumBuffs("player") do
+                    local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId = GetUnitBuffInfo("player", i)
+                        
+                    trackBuffs[counter] = {
+                        buffName = buffName,
+                        startTime = startTime,
+                        endTime = endTime,
+                        buffSlot = buffSlot,
+                        stackCount = stackCount,
+                        iconFile = iconFile,
+                        buffType = buffType,
+                        effectType = effectType,
+                        abilityType = abilityType,
+                        statusEffectType = statusEffectType,
+                        abilityId = abilityId
+                    }
+                    counter = counter + 1
+                end
+                   
+                -- Heavy handed - but functional way to mark duplicate abilities to not display (Duplicate shuffle auras, etc) by only displaying the one with the latest end time.
+                for i = 1, #trackBuffs do
+                    local compareId = trackBuffs[i].abilityId
+                    local compareTime = trackBuffs[i].endTime
+                    -- Only re-iterate and compare if this ability is on the override table, this way we avoid as much of this double loop as possible.
+                    if LUIE.Effects.EffectOverride[compareId] and LUIE.Effects.EffectOverride[compareId].noDuplicate then
+                        for k, v in pairs(trackBuffs) do
+                            -- Only remove the lower duration effects that were cast previously.
+                            if v.abilityId == compareId and v.endTime < compareTime then
+                                v.markForRemove = true
+                            end
+                        end
+                    end
+                end         
+                    
+                for i = 1, #trackBuffs do
+                    local buffName = trackBuffs[i].buffName
+                    local startTime =  trackBuffs[i].startTime
+                    local endTime =  trackBuffs[i].endTime
+                    local buffSlot =  trackBuffs[i].buffSlot
+                    local stackCount =  trackBuffs[i].stackCount
+                    local iconFile =  trackBuffs[i].iconFile
+                    local buffType =  trackBuffs[i].buffType
+                    local effectType =  trackBuffs[i].effectType
+                    local abilityType =  trackBuffs[i].abilityType
+                    local statusEffectType =  trackBuffs[i].statusEffectType
+                    local abilityId =  trackBuffs[i].abilityId
+                    local markForRemove = trackBuffs[i].markForRemove or false
+                        
+                    local tooltipText = GetAbilityEffectDescription(buffSlot)
+                    --if LUIE.Effects.TooltipOverride[abilityId] then tooltipText = LUIE.Effects.TooltipOverride[abilityId] end
+                    -- Have to trim trailing spaces on the end of tooltips
+                    if tooltipText ~= "" then 
+                        tooltipText = string.match(tooltipText, ".*%S")
+                    end
+                    if buffSlot > 0 and buffName ~= "" and not (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide) and not markForRemove then
+                        local effectsRow = effectsRowPool:AcquireObject()
+                        effectsRow.name:SetText(strformat(SI_ABILITY_TOOLTIP_NAME, buffName))
+                        effectsRow.icon:SetTexture(iconFile)
+                        effectsRow.tooltipTitle = strformat(SI_ABILITY_TOOLTIP_NAME, buffName)
+                        effectsRow.tooltipText = (tooltipText)
+                        local duration = startTime - endTime
+                        effectsRow.time:SetHidden(duration == 0)
+                        effectsRow.time.endTime = endTime
+                        effectsRow.effectType = effectType
+                        effectsRow.buffSlot = buffSlot
+                        effectsRow.isArtificial = false
 
-						table.insert(effectsRows, effectsRow)
-					end
-				end
+                        table.insert(effectsRows, effectsRow)
+                    end
+                end
 
-				table.sort(effectsRows, EffectsRowComparator)
-				local prevRow
-				for i, effectsRow in ipairs(effectsRows) do
-					if(prevRow) then
-						effectsRow:SetAnchor(TOPLEFT, prevRow, BOTTOMLEFT)
-					else
-						effectsRow:SetAnchor(TOPLEFT, nil, TOPLEFT, 5, 0)
-					end
-					effectsRow:SetHidden(false)
-					prevRow = effectsRow
-				end
-			end
-		end
+                table.sort(effectsRows, EffectsRowComparator)
+                local prevRow
+                for i, effectsRow in ipairs(effectsRows) do
+                    if(prevRow) then
+                        effectsRow:SetAnchor(TOPLEFT, prevRow, BOTTOMLEFT)
+                    else
+                        effectsRow:SetAnchor(TOPLEFT, nil, TOPLEFT, 5, 0)
+                    end
+                    effectsRow:SetHidden(false)
+                    prevRow = effectsRow
+                end
+            end
+        end
            
-		container:RegisterForEvent(EVENT_EFFECT_CHANGED, UpdateEffects)
-		--container:AddFilterForEvent(EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "player")
-		container:RegisterForEvent(EVENT_EFFECTS_FULL_UPDATE, UpdateEffects)
-		container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_ADDED, UpdateEffects)
-		container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_REMOVED, UpdateEffects)
-		container:SetHandler("OnEffectivelyShown", UpdateEffects)
-	end
+        container:RegisterForEvent(EVENT_EFFECT_CHANGED, UpdateEffects)
+        --container:AddFilterForEvent(EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "player")
+        container:RegisterForEvent(EVENT_EFFECTS_FULL_UPDATE, UpdateEffects)
+        container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_ADDED, UpdateEffects)
+        container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_REMOVED, UpdateEffects)
+        container:SetHandler("OnEffectivelyShown", UpdateEffects)
+    end
     
     ZO_StatsActiveEffect_OnMouseEnter = function(control)
         InitializeTooltip(GameTooltip, control, RIGHT, -15)
@@ -526,8 +526,8 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         -- Added function - Replace icons if needed
         local slotName = GetSlotName(slotId)
         if LUIE.Effects.BarNameOverride[slotName] then
-			slotIcon = LUIE.Effects.BarNameOverride[slotName]
-		end
+            slotIcon = LUIE.Effects.BarNameOverride[slotName]
+        end
 
         slotObject.slot:SetHidden(false)
         slotObject.hasAction = true
@@ -701,313 +701,6 @@ function LUIE.CommaValue(number, shorten, noncomma)
     return left .. (num:reverse():gsub("(%d%d%d)","%1,"):reverse()) .. right
 end
 
--- Performance Enhancement
-local printToChat = LUIE.PrintToChat
-
-function LUIE.SlashHome()
-    local primaryHouse = GetHousingPrimaryHouse()
-
-    if IsUnitInCombat("player") then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IN_COMBAT))
-        if LUIE.SV.TempAlertHome then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IN_COMBAT)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    if IsPlayerInAvAWorld() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA))
-        if LUIE.SV.TempAlertHome then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    
-    if IsActiveWorldBattleground() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_BG))
-        if LUIE.SV.TempAlertHome then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_BG)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    if primaryHouse == 0 then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_NOHOME))
-        if LUIE.SV.TempAlertHome then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_NOHOME)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-    else
-        RequestJumpToHouse(primaryHouse)
-        printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG))
-        if LUIE.SV.TempAlertHome then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG)))
-        end
-    end
-end
-
-function LUIE.SlashRegroup()
-    local groupSize = GetGroupSize()
-    -- Check for pending regroup
-    if PendingRegroup then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_PENDING))
-        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_PENDING)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    -- Check to make sure player is in a group
-    if groupSize <= 1 then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTINGRP))
-        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTINGRP)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    -- Check to make sure we're not in a battleground
-    if IsActiveWorldBattleground() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_BG))
-        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_BG)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    -- Check to make sure we're not in LFG
-    if IsInLFGGroup() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_LFGACTIVITY))
-        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_LFGACTIVITY)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    -- Check to make sure player is the leader
-    if not IsUnitGroupLeader("player") then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTLEADER))
-        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTLEADER)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    PendingRegroup = true
-    
-    local flagOffline = 0
-    local index = 1
-    for i = 1, groupSize do
-        -- We need to index player here as well
-        local memberTag = GetGroupUnitTagByIndex(i)
-        if IsUnitOnline(memberTag) then
-            local groupMemberString
-            local groupMemberName = GetUnitName(memberTag)
-            local groupMemberAccountName = GetUnitDisplayName(memberTag)
-            local memberLink = LUIE.ChatAnnouncements.ResolveNameLink(groupMemberName, groupMemberAccountName)
-            local memberNoLink = LUIE.ChatAnnouncements.ResolveNameNoLink(groupMemberName, groupMemberAccountName)
-            
-            -- Place inside counter incremented index, this way if we have offline members in the group we still index everything in an ordered integer list.
-            g_regroupStacks[index] = { memberLink = memberLink, memberName = groupMemberName }
-            index = index + 1
-        else
-            flagOffline = flagOffline + 1
-        end
-    end
-    
-    -- Reinvite the group after 5 seconds (give the group interface time to update on server and client end for all group members)
-    -- If the stack counter was less than 1 (just the player eligible for reinvite then regroup won't invite any members.)
-    if flagOffline > 0 then 
-        if #g_regroupStacks > 1 then
-            printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG), flagOffline, flagOffline, flagOffline))
-            if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG), flagOffline, flagOffline, flagOffline) )
-            end
-            GroupDisband()
-            zo_callLater(LUIE.RegroupInvite, 5000)
-        else
-            printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG))
-            if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG) )
-            end
-            PendingRegroup = false -- Allow Regroup command to be used again
-            g_regroupStacks = {} -- Allow index to be used again.
-        end
-    else
-        printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG))
-        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG) )
-        end
-        GroupDisband()
-        zo_callLater(LUIE.RegroupInvite, 5000)
-    end
-end
-
-function LUIE.RegroupInvite()
-    printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG))
-    if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG) )
-    end
-    for i = 1, #g_regroupStacks do
-        local member = g_regroupStacks[i]
-        -- Don't invite self and offline members
-        if member.memberName ~= LUIE.PlayerNameFormatted then
-            GroupInviteByName(member.memberName)
-            printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberLink))
-            if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberNoLink) )
-            end
-        end
-    end
-
-    PendingRegroup = false -- Allow Regroup command to be used again
-    g_regroupStacks = {} -- Allow index to be used again.
-end
-
-function LUIE.SlashDisband()
-    -- Check to make sure player is in a group
-    if GetGroupSize() <= 1 then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOGROUP))
-        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOGROUP)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    -- Check to make sure player is the leader
-    if not IsUnitGroupLeader("player") then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOTLEADER))
-        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOTLEADER)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    -- Check to make sure player is not in a BG
-    if IsActiveWorldBattleground() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_BG))
-        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_BG)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    -- Check to make sure we're not in LFG
-    local isLFG = IsInLFGGroup()
-    if isLFG then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_LFG_ACTIVITY))
-        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_LFG_ACTIVITY)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    GroupDisband()
-end
-
-function LUIE.SlashGroupLeave()
-    -- EVENT_GROUP_NOTIFICATION_MESSAGE hook handles response to this.
-    GroupLeave()
-end
-
--- If the player uses /kick with no option then we need to play the kick emote, otherwise handle everything with the SlashGroupKick function.
-function LUIE.SlashKick(option)
-    if option == "" then
-        PlayEmoteByIndex(109)
-    else
-        LUIE.SlashGroupKick(option)
-    end
-end
-
-function LUIE.SlashGroupKick(option)
-    -- Rather then error out, let the player use /kick and /remove as a substitute for /votekick and /voteremove in LFG
-    if IsInLFGGroup() then
-        if option == "" then
-            printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME))
-            if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME)))
-            end
-            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-            return
-        else
-            LUIE.SlashVoteKick(option)
-            return
-        end
-    end
-
-    -- Check to make sure player is in a group
-    if GetGroupSize() <= 1 then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOGROUP))
-        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOGROUP)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    -- Check to make sure player is the leader
-    if not IsUnitGroupLeader("player") then
-        printToChat(GetString(SI_LUIE_CA_GROUP_LEADERKICK_ERROR))
-        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_CA_GROUP_LEADERKICK_ERROR)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    if option == "" then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME))
-        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    local g_partyKick = { }
-    local kickedMemberName
-    local kickedAccountName
-    local compareName = string.lower(option)
-    local comparePlayerName = string.lower(LUIE.PlayerNameFormatted)
-    local comparePlayerAccount = string.lower(PlayerDisplayName)
-    local unitToKick
-
-    for i = 1,24 do
-        local memberTag = GetGroupUnitTagByIndex(i)
-        -- Once we reach a nil value (aka no party member there, stop the loop)
-        if memberTag == nil then
-            break
-        end
-        kickedMemberName = string.lower(GetUnitName(memberTag))
-        kickedAccountName = string.lower(GetUnitDisplayName(memberTag))
-        g_partyKick[i] = { memberTag=memberTag, kickedMemberName=kickedMemberName, kickedAccountName=kickedAccountName }
-    end
-
-    -- Iterate through UnitTags to get the member who just joined
-    for i = 1,#g_partyKick do
-        local kickcompare = g_partyKick[i]
-        if kickcompare.kickedMemberName == compareName or kickcompare.kickedAccountName == compareName then
-            if kickcompare.kickedMemberName == comparePlayerName or kickcompare.kickedAccountName == comparePlayerAccount then
-                GroupLeave()
-            else
-                unitToKick = kickcompare.memberTag
-                GroupKick(unitToKick)
-            end
-            return
-        end
-    end
-
-    printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME))
-    if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-        ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME)))
-    end
-    PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-end
-
 function LUIE.InitGuildData()
     GuildsIndex = GetNumGuilds()
     LUIE.GuildIndexData = {}
@@ -1040,547 +733,6 @@ function LUIE.GuildRemovedSelf(eventCode, guildId, guildName)
         LUIE.GuildIndexData[i] = {id=id, name=name, guildAlliance=guildAlliance}
     end
 end
-
-function LUIE.SlashGuildInvite(option)
-    -- If no input was entered, display an error and end.
-    if option == "" then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV))
-        if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    -- Parse input
-    local options = {}
-    local searchResult = { string.match(option,"^(%S*)%s*(.-)$") }
-    for i,v in pairs(searchResult) do
-        if (v ~= nil and v ~= "") then
-            options[i] = v
-        end
-    end
-
-    local guildnumber = options[1]
-    local name = options[2]
-
-    -- If no name was entered, display an error and end.
-    if guildnumber == nil or name == nil then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV))
-        if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    if guildnumber == "1" and LUIE.GuildIndexData[1] then
-        guildnumber = LUIE.GuildIndexData[1].id
-    elseif guildnumber == "2" and LUIE.GuildIndexData[2] then
-        guildnumber = LUIE.GuildIndexData[2].id
-    elseif guildnumber == "3" and LUIE.GuildIndexData[3] then
-        guildnumber = LUIE.GuildIndexData[3].id
-    elseif guildnumber == "4" and LUIE.GuildIndexData[4] then
-        guildnumber = LUIE.GuildIndexData[4].id
-    elseif guildnumber == "5" and LUIE.GuildIndexData[5] then
-        guildnumber = LUIE.GuildIndexData[5].id
-    else -- If we enter anything outside of the range of 1-5, display an error and end.
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV))
-        if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV)))
-        end
-            PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    --GuildInvite(guildnumber, name)
-    ZO_TryGuildInvite(guildnumber, name, true)
-end
-
-function LUIE.SlashGuildQuit(guildnumber)
-    if guildnumber == "1" and LUIE.GuildIndexData[1] then
-        guildnumber = LUIE.GuildIndexData[1].id
-    elseif guildnumber == "2" and LUIE.GuildIndexData[2] then
-        guildnumber = LUIE.GuildIndexData[2].id
-    elseif guildnumber == "3" and LUIE.GuildIndexData[3] then
-        guildnumber = LUIE.GuildIndexData[3].id
-    elseif guildnumber == "4" and LUIE.GuildIndexData[4] then
-        guildnumber = LUIE.GuildIndexData[4].id
-    elseif guildnumber == "5" and LUIE.GuildIndexData[5] then
-        guildnumber = LUIE.GuildIndexData[5].id
-    else
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE))
-        if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    -- If we try to leave a guild we don't have display an error and end.
-    if guildnumber == nil then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE))
-        if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-	
-    -- If neither of the above errors were triggered, leave the guild number.
-    GuildLeave(guildnumber)
-end
-
-function LUIE.SlashGuildKick(option)
-    -- If no input was entered, display an error and end.
-    if option == "" then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK))
-        if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    -- Parse input
-    local options = {}
-    local searchResult = { string.match(option,"^(%S*)%s*(.-)$") }
-    for i,v in pairs(searchResult) do
-        if (v ~= nil and v ~= "") then
-            options[i] = v
-        end
-    end
-
-    local guildnumber = options[1]
-    local name = options[2]
-
-    -- If no name was entered, display an error and end.
-    if guildnumber == nil or name == nil then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK))
-        if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    if guildnumber == "1" and LUIE.GuildIndexData[1] then
-        guildnumber = LUIE.GuildIndexData[1].id
-    elseif guildnumber == "2" and LUIE.GuildIndexData[2] then
-        guildnumber = LUIE.GuildIndexData[2].id
-    elseif guildnumber == "3" and LUIE.GuildIndexData[3] then
-        guildnumber = LUIE.GuildIndexData[3].id
-    elseif guildnumber == "4" and LUIE.GuildIndexData[4] then
-        guildnumber = LUIE.GuildIndexData[4].id
-    elseif guildnumber == "5" and LUIE.GuildIndexData[5] then
-        guildnumber = LUIE.GuildIndexData[5].id
-    else -- If we enter anything outside of the range of 1-5, display an error and end.
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK))
-        if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    
-    if not DoesPlayerHaveGuildPermission (guildnumber, GUILD_PERMISSION_REMOVE) then
-        printToChat (GetString(SI_SOCIALACTIONRESULT18))
-        if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_SOCIALACTIONRESULT18)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    -- Index guild members so we can use character name as a kick option
-    local guildNumbers = GetNumGuildMembers(guildnumber)
-    local compareChar = string.lower(name)
-
-    g_guildNamesTable = { }
-
-    for i = 1,guildNumbers do
-        local displayName = GetGuildMemberInfo(guildnumber, i)
-        local _, characterName = GetGuildMemberCharacterInfo(guildnumber, i)
-
-        local compareDisplay = string.lower(displayName)
-        local compareCharacter = string.lower(characterName)
-
-        compareCharacter = string.gsub(compareCharacter,"%^%a+","")
-
-        g_guildNamesTable[i] = { displayName=displayName, characterName=characterName, compareDisplay=compareDisplay, compareCharacter=compareCharacter}
-        --d(compareDisplay .. compareCharacter)
-        --d("comparing vs... " .. compareChar)
-    end
-
-    local finalName = ""
-
-    for i = 1, #g_guildNamesTable do
-        local comparing = g_guildNamesTable[i]
-        if comparing.compareDisplay == compareChar or comparing.compareCharacter == compareChar then
-            finalName = comparing.displayName
-            break
-        end
-    end
-
-    if finalName ~= "" then
-        GuildRemove(guildnumber, finalName)
-    else
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME_GUILD))
-        if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME_GUILD)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-    end
-end
- 
-function LUIE.SlashFriend(option)
-    if option == "" then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME))
-        if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    RequestFriend(option)
-end
-
--- Hook for request friend so menu option also displays invite message
--- Menu is true if this request is sent from the Player to Player interaction menu
-local zos_RequestFriend = RequestFriend
-RequestFriend = function(option1, option2, menu) 
-    zos_RequestFriend(option1, option2)
-    if not menu then
-        local message = strformat(GetString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG), option1)
-        printToChat(message)
-        if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, message)
-        end
-    end
-end
-
--- Hook for request ignore to handle error message if account name is already ignored
-local zos_AddIgnore = AddIgnore
-AddIgnore = function(option)
-    zos_AddIgnore(option)
-    
-    if IsIgnored(option) then -- Only lists account names, unfortunately
-        printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE))
-        if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-end
-
-function LUIE.SlashIgnore(option)
-    if option == "" then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME))
-        if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    AddIgnore(option)
-end
-
-function LUIE.SlashRemoveFriend(option)
-    if option == "" then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME))
-        if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    local compareChar = string.lower(option)
-
-    local friends = GetNumFriends()
-    local g_friendIndex = {}
-    for i = 1,friends do
-        local displayName = GetFriendInfo(i)
-        local _, characterName = GetFriendCharacterInfo(i)
-        local compareDisplay = string.lower(displayName)
-        local compareCharacter = string.lower(characterName)
-        compareCharacter = string.gsub(compareCharacter,"%^%a+","")
-        g_friendIndex[i] = {displayName=displayName, characterName=characterName, compareDisplay=compareDisplay, compareCharacter=compareCharacter}
-    end
-
-    local finalName = ""
-
-    for i = 1, #g_friendIndex do
-        local comparing = g_friendIndex[i]
-        if comparing.compareDisplay == compareChar or comparing.compareCharacter == compareChar then
-            finalName = comparing.displayName
-            break
-        end
-    end
-
-    if finalName ~= "" then
-        RemoveFriend(finalName)
-    else
-        printToChat(GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME))
-        if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-    end
-end
-
-function LUIE.SlashRemoveIgnore(option)
-    if option == "" then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE))
-        if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    local compareChar = string.lower(option)
-
-    local ignore = GetNumIgnored()
-    local g_ignoreIndex = {}
-    for i = 1,ignore do
-        local displayName = GetIgnoredInfo(i)
-        displayName = string.lower(displayName)
-        g_ignoreIndex[i] = {displayName=displayName}
-    end
-
-    local finalName = ""
-
-    for i = 1,#g_ignoreIndex do
-        local comparing = g_ignoreIndex[i]
-        if comparing.displayName == compareChar then
-            finalName = comparing.displayName
-            break
-        end
-    end
-
-    if finalName ~= "" then
-        RemoveIgnore(option)
-    else
-        printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE))
-        if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-end
-
-function LUIE.SlashTrade(option)
-    if option == "" then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME))
-        if LUIE.ChatAnnouncements.SV.Notify.NotificationTradeAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, (GetString(SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    TradeInviteByName(option)
-end
-
-function LUIE.SlashVoteKick(option)
-    -- Check to make sure player is in a group
-    if GetGroupSize() <= 1 then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK))
-        if LUIE.ChatAnnouncements.SV.Group.GroupLFGAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    -- Check to make sure we're not in a battleground
-    if IsActiveWorldBattleground() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_BG))
-        if LUIE.ChatAnnouncements.SV.Group.GroupLFGAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_BG)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    -- Check to make sure we're not in LFG
-    if not IsInLFGGroup() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK))
-        if LUIE.ChatAnnouncements.SV.Group.GroupLFGAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    if option == "" then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NONAME))
-        if LUIE.ChatAnnouncements.SV.Group.GroupLFGAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NONAME)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    local g_partyKick = { }
-    local kickedMemberName
-    local kickedAccountName
-    local compareName = string.lower(option)
-    local comparePlayerName = string.lower(playerName)
-    local comparePlayerAccount = string.lower(PlayerDisplayName)
-    local unitToKick = ""
-
-    for i = 1,24 do
-        local memberTag = GetGroupUnitTagByIndex(i)
-        -- Once we reach a nil value (aka no party member there, stop the loop)
-        if memberTag == nil then
-            break
-        end
-        kickedMemberName = string.lower(GetUnitName(memberTag))
-        kickedAccountName = string.lower(GetUnitDisplayName(memberTag))
-        g_partyKick[i] = { memberTag=memberTag, kickedMemberName=kickedMemberName, kickedAccountName=kickedAccountName }
-    end
-
-    -- Iterate through UnitTags to get the member who just joined
-    for i = 1,#g_partyKick do
-        local kickcompare = g_partyKick[i]
-        if kickcompare.kickedMemberName == compareName or kickcompare.kickedAccountName == compareName then
-            if kickcompare.kickedMemberName == comparePlayerName or kickcompare.kickedAccountName == comparePlayerAccount then
-                unitToKick = kickcompare.memberTag
-                break
-            else
-                unitToKick = kickcompare.memberTag
-                break
-            end
-        end
-    end
-    
-    -- If we try to kick ourself then display an error message.
-    if GetUnitName(unitToKick) == playerName then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_SELF))
-        if LUIE.ChatAnnouncements.SV.Group.GroupLFGAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_SELF)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-
-    BeginGroupElection(GROUP_ELECTION_TYPE_KICK_MEMBER, ZO_GROUP_ELECTION_DESCRIPTORS.NONE, unitToKick)
-    -- EVENT HANDLER takes care of the error messages here.
-end
-
-function LUIE.SlashCampaignQ(option)
-    if option == "" then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NONAME))
-        if LUIE.SV.TempAlertCampaign then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NONAME) )
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    
-    if IsActiveWorldBattleground() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG))
-        if LUIE.SV.TempAlertCampaign then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG) )
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    
-    -- Compare names to campaigns available, join the campaign and bail out of the function if it is available.
-    for i = 1, 100 do
-        local compareName = string.lower(GetCampaignName(i))
-        local option = string.lower(option)
-        if compareName == option then
-            local campaignName
-            campaignName = GetCampaignName(i)
-            
-            if GetAssignedCampaignId() == i or GetGuestCampaignId() == i then 
-                QueueForCampaign (i)
-                printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName))
-                if LUIE.SV.TempAlertCampaign then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName) )
-                end
-                return
-            else
-                printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED))
-                if LUIE.SV.TempAlertCampaign then
-                    ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED) )
-                end
-                PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-                return
-            end
-        end
-    end
-    
-    printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN))
-    if LUIE.SV.TempAlertCampaign then
-        ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN) )
-    end
-    PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-end
-
-function LUIE.SlashInvite(option)
-    local groupSize = GetGroupSize()
-    
-    if groupSize > 1 and not IsUnitGroupLeader("player") then
-        printToChat(strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE)))
-        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    
-    if option == "" then
-        printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_NONAME))
-        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_CA_GROUP_INVITE_NONAME))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    
-    GroupInviteByName(option)
-    printToChat(strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), option))
-    if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), option))
-    end
-end 
-
--- Slash Commands
-SLASH_COMMANDS["/regroup"]      = LUIE.SlashRegroup
-SLASH_COMMANDS["/disband"]      = LUIE.SlashDisband
-SLASH_COMMANDS["/leave"]        = LUIE.SlashGroupLeave
-SLASH_COMMANDS["/leavegroup"]   = LUIE.SlashGroupLeave
-SLASH_COMMANDS["/kick"]         = LUIE.SlashKick
-SLASH_COMMANDS["/remove"]       = LUIE.SlashGroupKick
-SLASH_COMMANDS["/groupkick"]    = LUIE.SlashGroupKick
-SLASH_COMMANDS["/groupremove"]  = LUIE.SlashGroupKick
-SLASH_COMMANDS["/home"]         = LUIE.SlashHome
-SLASH_COMMANDS["/trade"]        = LUIE.SlashTrade
-SLASH_COMMANDS["/votekick"]     = LUIE.SlashVoteKick
-SLASH_COMMANDS["/voteremove"]   = LUIE.SlashVoteKick
-SLASH_COMMANDS["/guildinvite"]  = LUIE.SlashGuildInvite
-SLASH_COMMANDS["/ginvite"]      = LUIE.SlashGuildInvite
-SLASH_COMMANDS["/guildkick"]    = LUIE.SlashGuildKick
-SLASH_COMMANDS["/gkick"]        = LUIE.SlashGuildKick
-SLASH_COMMANDS["/guildquit"]    = LUIE.SlashGuildQuit
-SLASH_COMMANDS["/gquit"]        = LUIE.SlashGuildQuit
-SLASH_COMMANDS["/guildleave"]   = LUIE.SlashGuildQuit
-SLASH_COMMANDS["/gleave"]       = LUIE.SlashGuildQuit
-SLASH_COMMANDS["/addfriend"]    = LUIE.SlashFriend
-SLASH_COMMANDS["/friend"]       = LUIE.SlashFriend
-SLASH_COMMANDS["/addignore"]    = LUIE.SlashIgnore
-SLASH_COMMANDS["/ignore"]       = LUIE.SlashIgnore
-SLASH_COMMANDS["/unfriend"]     = LUIE.SlashRemoveFriend
-SLASH_COMMANDS["/removefriend"] = LUIE.SlashRemoveFriend
-SLASH_COMMANDS["/unignore"]     = LUIE.SlashRemoveIgnore
-SLASH_COMMANDS["/removeignore"] = LUIE.SlashRemoveIgnore
-SLASH_COMMANDS["/campaign"]     = LUIE.SlashCampaignQ
-SLASH_COMMANDS["/invite"]       = LUIE.SlashInvite
 
 -- Hook initialization
 EVENT_MANAGER:RegisterForEvent(LUIE.name, EVENT_ADD_ON_LOADED, LUIE_OnAddOnLoaded)
