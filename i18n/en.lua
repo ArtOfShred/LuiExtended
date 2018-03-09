@@ -63,6 +63,8 @@ ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS",              "Player 
 ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS",      "Player Long Term Effects")
 ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS",                "Target Buffs")
 ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS",              "Target Debuffs")
+ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS",				"Prominent Buffs")
+ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS",			"Prominent Debuffs")
 
 ------------------------------------
 -- ChatAnnouncements.lua -----------
