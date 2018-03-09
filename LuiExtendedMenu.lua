@@ -1708,7 +1708,7 @@ function LUIE_CreateSettings()
 -- CHAT ANNOUNCEMENTS
 ----------------------------------------------------------------------------------------------
     
-    -- CA Module Description
+    -- Chat Announcements Module Description
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "description",
         text = GetString(SI_LUIE_LAM_CA_DESCRIPTION),
@@ -1750,19 +1750,6 @@ function LUIE_CreateSettings()
         width = "full",
         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
         default = LUIE.ChatAnnouncements.D.BracketOptionCharacter,
-    }
-    
-    -- Item Link Bracket
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
-        type = "dropdown",
-        name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_ITEM),
-        tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_ITEM_TP),
-        choices = linkBracketDisplayOptions,
-        getFunc = function() return linkBracketDisplayOptions[LUIE.ChatAnnouncements.SV.BracketOptionItem] end,
-        setFunc = function(value) LUIE.ChatAnnouncements.SV.BracketOptionItem = linkBracketDisplayOptionsKeys[value] end,
-        width = "full",
-        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-        default = LUIE.ChatAnnouncements.D.BracketOptionItem,
     }
     
     -- ReloadUI Button
@@ -2334,6 +2321,18 @@ function LUIE_CreateSettings()
         type = "submenu",
         name = GetString(SI_LUIE_LAM_CA_LOOT_HEADER),
         controls = {
+            {
+                -- Item Link Bracket
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_ITEM),
+                tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_ITEM_TP),
+                choices = linkBracketDisplayOptions,
+                getFunc = function() return linkBracketDisplayOptions[LUIE.ChatAnnouncements.SV.BracketOptionItem] end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.BracketOptionItem = linkBracketDisplayOptionsKeys[value] end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = LUIE.ChatAnnouncements.D.BracketOptionItem,
+            },
             {
                 -- Show looted item icons
                 type = "checkbox",
@@ -4013,18 +4012,6 @@ function LUIE_CreateSettings()
                 width = "full",
             },
             {
-                -- Collectible Bracket
-                type = "dropdown",
-                name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE),
-                tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE_TP),
-                choices = linkBracketDisplayOptions,
-                getFunc = function() return linkBracketDisplayOptions[LUIE.ChatAnnouncements.SV.BracketOptionCollectible] end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.BracketOptionCollectible = linkBracketDisplayOptionsKeys[value] end,
-                width = "full",
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.BracketOptionCollectible,
-            },
-            {
                 -- Show Collectibles Unlocked CA
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
@@ -4067,6 +4054,18 @@ function LUIE_CreateSettings()
                 width = "full",
                 disabled = function() return not (LUIE.ChatAnnouncements.SV.Collectibles.CollectibleCA or LUIE.ChatAnnouncements.SV.Collectibles.CollectibleCSA or LUIE.ChatAnnouncements.SV.Collectibles.CollectibleAlert and LUIE.SV.ChatAnnouncements_Enable) end,
                 default = LUIE.ChatAnnouncements.D.Collectibles.CollectibleIcon,
+            },
+            {
+                -- Collectible Bracket
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE),
+                tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE_TP),
+                choices = linkBracketDisplayOptions,
+                getFunc = function() return linkBracketDisplayOptions[LUIE.ChatAnnouncements.SV.BracketOptionCollectible] end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.BracketOptionCollectible = linkBracketDisplayOptionsKeys[value] end,
+                width = "full",
+                disabled = function() return not (LUIE.ChatAnnouncements.SV.Collectibles.CollectibleCA or LUIE.ChatAnnouncements.SV.Collectibles.CollectibleCSA or LUIE.ChatAnnouncements.SV.Collectibles.CollectibleAlert and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = LUIE.ChatAnnouncements.D.BracketOptionCollectible,
             },
             {
                 -- Collectible Color 1
@@ -4376,18 +4375,6 @@ function LUIE_CreateSettings()
         name = GetString(SI_LUIE_LAM_CA_ACHIEVE_HEADER),
         controls = {
             {
-                -- Achievement Bracket
-                type = "dropdown",
-                name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_ACHIEVEMENT),
-                tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_ACHIEVEMENT_TP),
-                choices = linkBracketDisplayOptions,
-                getFunc = function() return linkBracketDisplayOptions[LUIE.ChatAnnouncements.SV.BracketOptionAchievement] end,
-                setFunc = function(value) LUIE.ChatAnnouncements.SV.BracketOptionAchievement = linkBracketDisplayOptionsKeys[value] end,
-                width = "full",
-                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.BracketOptionAchievement,
-            },
-            {
                 -- Show Achievement Update CA
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_CA_ACHIEVE_UPDATE), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
@@ -4486,6 +4473,18 @@ function LUIE_CreateSettings()
                 width = "full",
                 disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievement.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.Achievement.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.Achievement.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.Achievement.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.Achievement.AchievementUpdateAlert and LUIE.SV.ChatAnnouncements_Enable) end,
                 default = LUIE.ChatAnnouncements.D.Achievement.AchievementIcon,
+            },
+            {
+                -- Achievement Bracket
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_ACHIEVEMENT),
+                tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_ACHIEVEMENT_TP),
+                choices = linkBracketDisplayOptions,
+                getFunc = function() return linkBracketDisplayOptions[LUIE.ChatAnnouncements.SV.BracketOptionAchievement] end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.BracketOptionAchievement = linkBracketDisplayOptionsKeys[value] end,
+                width = "full",
+                disabled = function() return not (LUIE.ChatAnnouncements.SV.Achievement.AchievementCompleteCA or LUIE.ChatAnnouncements.SV.Achievement.AchievementCompleteCSA or LUIE.ChatAnnouncements.SV.Achievement.AchievementCompleteAlert or LUIE.ChatAnnouncements.SV.Achievement.AchievementUpdateCA or LUIE.ChatAnnouncements.SV.Achievement.AchievementUpdateAlert and LUIE.SV.ChatAnnouncements_Enable) end,
+                default = LUIE.ChatAnnouncements.D.BracketOptionAchievement,
             },
             {
                 -- Achievement Message Color
