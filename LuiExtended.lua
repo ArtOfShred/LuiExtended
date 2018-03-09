@@ -4,6 +4,7 @@ LUIE             = {}
 LUIE.name        = "LuiExtended"
 LUIE.author      = "ArtOfShred, psypanda, Upularity & SpellBuilder"
 LUIE.version     = "5.3.2"
+LUIE.website     = "http://www.esoui.com/downloads/info818-LuiExtended.html"
 LUIE.components  = {}
 
 -- Saved variables options
