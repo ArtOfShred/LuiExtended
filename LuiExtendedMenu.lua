@@ -7324,7 +7324,7 @@ function LUIE_CreateSettings()
         name = GetString(SI_LUIE_LAM_UF_CFRAMESG_HEADER),
         controls = {
             {
-                -- Enable This Addon GROUP frames
+                -- Enable Group Frames
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_UF_CFRAMESG_LUIEFRAMESENABLE),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESG_LUIEFRAMESENABLE_TP),
@@ -7334,6 +7334,18 @@ function LUIE_CreateSettings()
                 default = LUIE.UnitFrames.D.CustomFramesGroup,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+            },
+            {
+                -- Player Name Display Method (Group/Raid)
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID),
+                tooltip = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID_TP),
+                choices = nameDisplayOptions,
+                getFunc = function() return nameDisplayOptions[LUIE.UnitFrames.SV.DisplayOptionsGroupRaid] end,
+                setFunc = function(value) LUIE.UnitFrames.SV.DisplayOptionsGroupRaid = nameDisplayOptionsKeys[value] LUIE.UnitFrames.CustomFramesReloadControlsMenu() end,
+                width = "full",
+                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+                default = nameDisplayOptions[2]
             },
             {
                 -- Custom Unit Frames format left label
@@ -7493,7 +7505,7 @@ function LUIE_CreateSettings()
         name = GetString(SI_LUIE_LAM_UF_CFRAMESR_HEADER),
         controls = {
             {
-                -- Enable This Addon RAID frames
+                -- Enable Raid Frames
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_UF_CFRAMESR_LUIEFRAMESENABLE),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESR_LUIEFRAMESENABLE_TP),
@@ -7503,6 +7515,18 @@ function LUIE_CreateSettings()
                 default = LUIE.UnitFrames.D.CustomFramesRaid,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+            },
+            {
+                -- Player Name Display Method (Group/Raid)
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID),
+                tooltip = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID_TP),
+                choices = nameDisplayOptions,
+                getFunc = function() return nameDisplayOptions[LUIE.UnitFrames.SV.DisplayOptionsGroupRaid] end,
+                setFunc = function(value) LUIE.UnitFrames.SV.DisplayOptionsGroupRaid = nameDisplayOptionsKeys[value] LUIE.UnitFrames.CustomFramesReloadControlsMenu() end,
+                width = "full",
+                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+                default = nameDisplayOptions[2]
             },
             {
                 -- Raid HP Bar Format
@@ -7815,103 +7839,84 @@ function LUIE_CreateSettings()
         },
     }
     
-    -- Unit Frames Common Options Header
+    -- Unit Frames - Common Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "header",
+        type = "submenu",
         name = GetString(SI_LUIE_LAM_UF_COMMON_HEADER),
-        width = "full",
-    }
-    
-    -- Shorten numbers
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_SHORTNUMBERS),
-        tooltip = GetString(SI_LUIE_LAM_UF_SHORTNUMBERS_TP),
-        getFunc = function() return LUIE.UnitFrames.SV.ShortenNumbers end,
-        setFunc = function(value) LUIE.UnitFrames.SV.ShortenNumbers = value end,
-        width = "full",
-        default = LUIE.UnitFrames.D.ShortenNumbers,
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-    }
-    
-    -- Player Name Display Method (Group/Raid)
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID),
-        tooltip = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID_TP),
-        choices = nameDisplayOptions,
-        getFunc = function() return nameDisplayOptions[LUIE.UnitFrames.SV.DisplayOptionsGroupRaid] end,
-        setFunc = function(value) LUIE.UnitFrames.SV.DisplayOptionsGroupRaid = nameDisplayOptionsKeys[value] LUIE.UnitFrames.CustomFramesReloadControlsMenu() end,
-        width = "full",
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-        default = nameDisplayOptions[2]
-    }
-    
-    -- Default Caption Color
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "colorpicker",
-        name = GetString(SI_LUIE_LAM_UF_COMMON_CAPTIONCOLOR),
-        getFunc = function() return unpack(LUIE.UnitFrames.SV.Target_FontColour) end,
-        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.Target_FontColour={r,g,b} end,
-        width = "full",
-        default = { r=LUIE.UnitFrames.D.Target_FontColour[1], g=LUIE.UnitFrames.D.Target_FontColour[2], b=LUIE.UnitFrames.D.Target_FontColour[3] },
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-    }
-    
-    -- Friendly NPC Font Color
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "colorpicker",
-        name = GetString(SI_LUIE_LAM_UF_COMMON_NPCFONTCOLOR),
-        getFunc = function() return unpack(LUIE.UnitFrames.SV.Target_FontColour_FriendlyNPC) end,
-        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.Target_FontColour_FriendlyNPC={r,g,b} end,
-        width = "full",
-        default = { r=LUIE.UnitFrames.D.Target_FontColour_FriendlyNPC[1], g=LUIE.UnitFrames.D.Target_FontColour_FriendlyNPC[2], b=LUIE.UnitFrames.D.Target_FontColour_FriendlyNPC[3] },
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-    }
-    
-    -- Friendly Player Font Color
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "colorpicker",
-        name = GetString(SI_LUIE_LAM_UF_COMMON_PLAYERFONTCOLOR),
-        getFunc = function() return unpack(LUIE.UnitFrames.SV.Target_FontColour_FriendlyPlayer) end,
-        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.Target_FontColour_FriendlyPlayer={r,g,b} end,
-        width = "full",
-        default = { r=LUIE.UnitFrames.D.Target_FontColour_FriendlyPlayer[1], g=LUIE.UnitFrames.D.Target_FontColour_FriendlyPlayer[2], b=LUIE.UnitFrames.D.Target_FontColour_FriendlyPlayer[3] },
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-    }
-    
-    -- Hostile Font Color
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "colorpicker",
-        name = GetString(SI_LUIE_LAM_UF_COMMON_HOSTILEFONTCOLOR),
-        getFunc = function() return unpack(LUIE.UnitFrames.SV.Target_FontColour_Hostile) end,
-        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.Target_FontColour_Hostile={r,g,b} end,
-        width = "full",
-        default = { r=LUIE.UnitFrames.D.Target_FontColour_Hostile[1], g=LUIE.UnitFrames.D.Target_FontColour_Hostile[2], b=LUIE.UnitFrames.D.Target_FontColour_Hostile[3] },
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-    }
-    
-    -- Apply same settings to reticle
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_UF_COMMON_RETICLECOLOR),
-        tooltip = GetString(SI_LUIE_LAM_UF_COMMON_RETICLECOLOR_TP),
-        getFunc = function() return LUIE.UnitFrames.SV.ReticleColourByReaction end,
-        setFunc = LUIE.UnitFrames.ReticleColourByReaction,
-        width = "full",
-        default = LUIE.UnitFrames.D.ReticleColourByReaction,
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-    }
-    
-    -- Interactible Reticle Color
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "colorpicker",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_COMMON_RETICLECOLORINTERACT)),
-        getFunc = function() return unpack(LUIE.UnitFrames.SV.ReticleColour_Interact) end,
-        setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.ReticleColour_Interact={r,g,b} end,
-        width = "full",
-        default = { r=LUIE.UnitFrames.D.ReticleColour_Interact[1], g=LUIE.UnitFrames.D.ReticleColour_Interact[2], b=LUIE.UnitFrames.D.ReticleColour_Interact[3] },
-        disabled = function() return not (LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.ReticleColourByReaction) end,
+        controls = {
+            {
+                -- Shorten numbers
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_UF_SHORTNUMBERS),
+                tooltip = GetString(SI_LUIE_LAM_UF_SHORTNUMBERS_TP),
+                getFunc = function() return LUIE.UnitFrames.SV.ShortenNumbers end,
+                setFunc = function(value) LUIE.UnitFrames.SV.ShortenNumbers = value end,
+                width = "full",
+                default = LUIE.UnitFrames.D.ShortenNumbers,
+                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+            },
+            {
+                -- Default Caption Color
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_UF_COMMON_CAPTIONCOLOR),
+                getFunc = function() return unpack(LUIE.UnitFrames.SV.Target_FontColour) end,
+                setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.Target_FontColour={r,g,b} end,
+                width = "full",
+                default = { r=LUIE.UnitFrames.D.Target_FontColour[1], g=LUIE.UnitFrames.D.Target_FontColour[2], b=LUIE.UnitFrames.D.Target_FontColour[3] },
+                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+            },
+            {
+                -- Friendly NPC Font Color
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_UF_COMMON_NPCFONTCOLOR),
+                getFunc = function() return unpack(LUIE.UnitFrames.SV.Target_FontColour_FriendlyNPC) end,
+                setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.Target_FontColour_FriendlyNPC={r,g,b} end,
+                width = "full",
+                default = { r=LUIE.UnitFrames.D.Target_FontColour_FriendlyNPC[1], g=LUIE.UnitFrames.D.Target_FontColour_FriendlyNPC[2], b=LUIE.UnitFrames.D.Target_FontColour_FriendlyNPC[3] },
+                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+            },
+            {
+                -- Friendly Player Font Color
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_UF_COMMON_PLAYERFONTCOLOR),
+                getFunc = function() return unpack(LUIE.UnitFrames.SV.Target_FontColour_FriendlyPlayer) end,
+                setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.Target_FontColour_FriendlyPlayer={r,g,b} end,
+                width = "full",
+                default = { r=LUIE.UnitFrames.D.Target_FontColour_FriendlyPlayer[1], g=LUIE.UnitFrames.D.Target_FontColour_FriendlyPlayer[2], b=LUIE.UnitFrames.D.Target_FontColour_FriendlyPlayer[3] },
+                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+            },
+            {
+                -- Hostile Font Color
+                type = "colorpicker",
+                name = GetString(SI_LUIE_LAM_UF_COMMON_HOSTILEFONTCOLOR),
+                getFunc = function() return unpack(LUIE.UnitFrames.SV.Target_FontColour_Hostile) end,
+                setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.Target_FontColour_Hostile={r,g,b} end,
+                width = "full",
+                default = { r=LUIE.UnitFrames.D.Target_FontColour_Hostile[1], g=LUIE.UnitFrames.D.Target_FontColour_Hostile[2], b=LUIE.UnitFrames.D.Target_FontColour_Hostile[3] },
+                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+            },
+            {
+                -- Apply same settings to reticle
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_UF_COMMON_RETICLECOLOR),
+                tooltip = GetString(SI_LUIE_LAM_UF_COMMON_RETICLECOLOR_TP),
+                getFunc = function() return LUIE.UnitFrames.SV.ReticleColourByReaction end,
+                setFunc = LUIE.UnitFrames.ReticleColourByReaction,
+                width = "full",
+                default = LUIE.UnitFrames.D.ReticleColourByReaction,
+                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+            },
+            {
+                -- Interactible Reticle Color
+                type = "colorpicker",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_COMMON_RETICLECOLORINTERACT)),
+                getFunc = function() return unpack(LUIE.UnitFrames.SV.ReticleColour_Interact) end,
+                setFunc = function(r,g,b,a) LUIE.UnitFrames.SV.ReticleColour_Interact={r,g,b} end,
+                width = "full",
+                default = { r=LUIE.UnitFrames.D.ReticleColour_Interact[1], g=LUIE.UnitFrames.D.ReticleColour_Interact[2], b=LUIE.UnitFrames.D.ReticleColour_Interact[3] },
+                disabled = function() return not (LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.ReticleColourByReaction) end,
+            },
+        },
     }
 
 ----------------------------------------------------------------------------------------------
