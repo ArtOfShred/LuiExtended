@@ -209,8 +209,12 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     local zos_GetUnitBuffInfo = GetUnitBuffInfo
     GetUnitBuffInfo = function(unitTag, buffIndex)
         local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = zos_GetUnitBuffInfo(unitTag, buffIndex)
-        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then buffName = LUIE.Effects.EffectOverride[abilityId].name end
-        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then iconFile = LUIE.Effects.EffectOverride[abilityId].icon end
+        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name then
+            buffName = LUIE.Effects.EffectOverride[abilityId].name
+        end
+        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then
+            iconFile = LUIE.Effects.EffectOverride[abilityId].icon
+        end
     
         return buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer
     
@@ -225,8 +229,12 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
 
         if LUIE.Effects.EffectSourceOverride[abilityId] then 
-            if LUIE.Effects.EffectSourceOverride[abilityId].source then attackerRawName = LUIE.Effects.EffectSourceOverride[abilityId].source end
-            if LUIE.Effects.EffectSourceOverride[abilityId].pet then minionName = LUIE.Effects.EffectSourceOverride[abilityId].pet end
+            if LUIE.Effects.EffectSourceOverride[abilityId].source then
+                attackerRawName = LUIE.Effects.EffectSourceOverride[abilityId].source
+            end
+            if LUIE.Effects.EffectSourceOverride[abilityId].pet then
+                minionName = LUIE.Effects.EffectSourceOverride[abilityId].pet
+            end
         end
         
         return attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName
