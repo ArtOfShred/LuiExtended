@@ -487,9 +487,18 @@ function LUIE_CreateSettings()
 
     optionsDataSlashCommands[#optionsDataSlashCommands + 1] = {
         type = "description",
-        text = "Slash Commands description",
+        text = GetString(SI_LUIE_LAM_SLASHCMDS_DESCRIPTION),
     }
     
+    -- ReloadUI Button
+    optionsDataSlashCommands[#optionsDataSlashCommands + 1] = {
+        type = "button",
+        name = GetString(SI_LUIE_LAM_RELOADUI),
+        tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
+        func = function() ReloadUI("ingame") end,
+        width = "full",
+    }
+
     -- Slash Commands
     optionsDataSlashCommands[#optionsDataSlashCommands + 1] = {
         type = "submenu",
