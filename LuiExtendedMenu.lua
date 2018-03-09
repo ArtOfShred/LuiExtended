@@ -143,14 +143,14 @@ function LUIE_CreateSettings()
         func = function() ReloadUI("ingame") end,
         width = "full",
     }
-    
-    -- Enable Unit Frames module
+	
+    -- Unit Frames Module
     optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_UF_ENABLE),
         getFunc = function() return LUIE.SV.UnitFrames_Enabled end,
         setFunc = function(value) LUIE.SV.UnitFrames_Enabled = value end,
-        width = "full",
+        width = "half",
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.D.UnitFrames_Enabled,
     }
@@ -158,50 +158,53 @@ function LUIE_CreateSettings()
     -- Unit Frames module description
     optionsData[#optionsData + 1] = {
         type = "description",
+		width = "half",
         text = GetString(SI_LUIE_LAM_UF_DESCRIPTION),
     }
     
-    -- Enable CI Module
+    -- Combat Info Module
     optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_CI_SHOWCOMBATINFO),
         getFunc = function() return LUIE.SV.CombatInfo_Enabled end,
         setFunc = function(value) LUIE.SV.CombatInfo_Enabled = value end,
-        width = "full",
+        width = "half",
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.D.CombatInfo_Enabled,
     }
     
-    -- CI Description
+    -- Combat Info Description
     optionsData[#optionsData + 1] = {
         type = "description",
+		width = "half",
         text = GetString(SI_LUIE_LAM_CI_DESCRIPTION),
     }
     
-    -- Enable CT Module
+    -- Combat Text Module
     optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_CT_SHOWCOMBATTEXT),
         getFunc = function() return LUIE.SV.CombatText_Enabled end,
         setFunc = function(value) LUIE.SV.CombatText_Enabled = value end,
-        width = "full",
+        width = "half",
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.D.CombatText_Enabled,
     }
     
-    -- CT Description
+    -- Combat Text Description
     optionsData[#optionsData + 1] = {
         type = "description",
+		width = "half",
         text = GetString(SI_LUIE_LAM_CT_DESCRIPTION),
     }
     
-    -- Enable Buffs & Debuffs Module
+    -- Buffs & Debuffs Module
     optionsData[#optionsData + 1] = {
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_BUFF_ENABLEEFFECTSTRACK),
         getFunc = function() return LUIE.SV.SpellCastBuff_Enable end,
         setFunc = function(value) LUIE.SV.SpellCastBuff_Enable = value end,
-        width = "full",
+        width = "half",
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.D.SpellCastBuff_Enable,
     }
@@ -209,23 +212,25 @@ function LUIE_CreateSettings()
     -- Buffs & Debuffs Description
     optionsData[#optionsData + 1] = {
         type = "description",
+		width = "half",
         text = GetString(SI_LUIE_LAM_BUFFS_DESCRIPTION),
     }
     
-    -- Enable Chat Announcements module
+    -- Chat Announcements Module
     optionsData[#optionsData +1] = {
         type = "checkbox",
         name = GetString(SI_LUIE_LAM_CA_ENABLE),
         getFunc = function() return LUIE.SV.ChatAnnouncements_Enable end,
         setFunc = function(value) LUIE.SV.ChatAnnouncements_Enable = value end,
-        width = "full",
+        width = "half",
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.D.ChatAnnouncements_Enable,
     }
     
-    -- CA Module Description
+    -- Chat Announcements Module Description
     optionsData[#optionsData +1] = {
         type = "description",
+		width = "half",
         text = GetString(SI_LUIE_LAM_CA_DESCRIPTION),
     }
 
@@ -424,17 +429,6 @@ function LUIE_CreateSettings()
         default = LUIE.D.TimeStampFormat,
     }
     
-    -- Startup message options
-    optionsData[#optionsData + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_STARTUPMSG),
-        tooltip = GetString(SI_LUIE_LAM_STARTUPMSG_TP),
-        getFunc = function() return LUIE.SV.StartupInfo end,
-        setFunc = function(value) LUIE.SV.StartupInfo = value end,
-        width = "full",
-        default = LUIE.D.StartupInfo,
-    }
-    
     -- Toggle XP Bar popup
     optionsData[#optionsData + 1] = {
         type = "checkbox",
@@ -445,7 +439,18 @@ function LUIE_CreateSettings()
         width = "full",
         default = LUIE.D.HideXPBar,
     }
-    
+	
+    -- Startup Message Options
+    optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_STARTUPMSG),
+        tooltip = GetString(SI_LUIE_LAM_STARTUPMSG_TP),
+        getFunc = function() return LUIE.SV.StartupInfo end,
+        setFunc = function(value) LUIE.SV.StartupInfo = value end,
+        width = "full",
+        default = LUIE.D.StartupInfo,
+    }
+	
     -- Slash Commands Overview
     optionsData[#optionsData + 1] = {
         type = "header",
@@ -517,7 +522,7 @@ function LUIE_CreateSettings()
 -- COMBAT INFO
 ----------------------------------------------------------------------------------------------
  
-    -- CI Description
+    -- Combat Info Description
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "description",
         text = GetString(SI_LUIE_LAM_CI_DESCRIPTION),
@@ -532,7 +537,7 @@ function LUIE_CreateSettings()
         width = "full",
     }
 	
-	-- Global Cooldown Options Submenu
+	-- Combat Info - Global Cooldown Options Submenu
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_CI_HEADER_GCD),
@@ -606,7 +611,7 @@ function LUIE_CreateSettings()
 		},
 	}
     
-	-- Ultimate Tracking Options Submenu
+	-- Combat Info - Ultimate Tracking Options Submenu
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_CI_HEADER_ULTIMATE),
@@ -654,7 +659,7 @@ function LUIE_CreateSettings()
 		},
 	}
 
-	-- Bar Ability Highlight Options Submenu
+	-- Combat Info - Bar Ability Highlight Options Submenu
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_CI_HEADER_BAR),
@@ -763,7 +768,7 @@ function LUIE_CreateSettings()
 		},
 	}
 
-	-- Quickslot Cooldown Timer Option Submenu
+	-- Combat Info - Quickslot Cooldown Timer Option Submenu
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_CI_HEADER_POTION),
@@ -868,7 +873,7 @@ function LUIE_CreateSettings()
         width = "full",
     }
 
-	-- Position and Display Options Submenu
+	-- Buffs&Debuffs - Position and Display Options Submenu
 	optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_BUFF_HEADER_POSITION),
@@ -990,7 +995,7 @@ function LUIE_CreateSettings()
 		},
 	}
 	
-	-- Icon Options Submenu
+	-- Buffs&Debuffs - Icon Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_BUFF_ICON_HEADER),
@@ -1151,7 +1156,7 @@ function LUIE_CreateSettings()
 		},
     }
 
-	-- Long Term Effects Options Submenu
+	-- Buffs&Debuffs - Long Term Effects Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
 		type = "submenu",
         name = GetString(SI_LUIE_LAM_BUFF_LONGTERM_HEADER),
@@ -1238,7 +1243,7 @@ function LUIE_CreateSettings()
 		},
     }
     
-    -- Long Term Effect Filters Options Submenu
+    -- Buffs&Debuffs - Long Term Effect Filters Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
 		type = "submenu",
         name = GetString(SI_LUIE_LAM_BUFF_FILTER_LONG_HEADER),
@@ -1554,7 +1559,7 @@ function LUIE_CreateSettings()
 		},
     }
 
-	-- Short Therm Effect Filters Options Submenu
+	-- Buffs&Debuffs - Short Therm Effect Filters Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
 		type = "submenu",
         name = GetString(SI_LUIE_LAM_BUFF_MISC_HEADER),
