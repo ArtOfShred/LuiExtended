@@ -1717,6 +1717,57 @@ function LUIE_CreateSettings()
         type = "description",
         text = GetString(SI_LUIE_LAM_CA_DESCRIPTION),
     }
+	
+	-- Player Name Display Method
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
+        type = "dropdown",
+        name = GetString(SI_LUIE_LAM_NAMEDISPLAYMETHOD),
+        tooltip = GetString(SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP),
+        choices = chatNameDisplayOptions,
+        getFunc = function() return chatNameDisplayOptions[LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions] end,
+        setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions = chatNameDisplayOptionsKeys[value] LUIE.ChatAnnouncements.IndexGroupLoot() end,
+        width = "full",
+        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+        default = chatNameDisplayOptions[2],
+    }
+    
+    --[[-- Notification Color
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
+        type = "colorpicker",
+        name = "Notification Color (Unimplemented)",
+        tooltip = "This message will be used to colorize various generic notification messages that are not Social/Guild related or error messages.",
+        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.Notify.NotificationColor) end,
+        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.Notify.NotificationColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+        width = "full",
+        disabled = function() return not LUIE.TodoLater end,
+        default = {r=LUIE.ChatAnnouncements.D.Notify.NotificationColor[1], g=LUIE.ChatAnnouncements.D.Notify.NotificationColor[2], b=LUIE.ChatAnnouncements.D.Notify.NotificationColor[3]}
+    }]]--
+    
+    -- Character Name Bracket
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
+        type = "dropdown",
+        name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_CHARACTER),
+        tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_CHARACTER_TP),
+        choices = linkBracketDisplayOptions,
+        getFunc = function() return linkBracketDisplayOptions[LUIE.ChatAnnouncements.SV.BracketOptionCharacter] end,
+        setFunc = function(value) LUIE.ChatAnnouncements.SV.BracketOptionCharacter = linkBracketDisplayOptionsKeys[value] LUIE.ChatAnnouncements.IndexGroupLoot() end,
+        width = "full",
+        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+        default = LUIE.ChatAnnouncements.D.BracketOptionCharacter,
+    }
+    
+    -- Item Link Bracket
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
+        type = "dropdown",
+        name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_ITEM),
+        tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_ITEM_TP),
+        choices = linkBracketDisplayOptions,
+        getFunc = function() return linkBracketDisplayOptions[LUIE.ChatAnnouncements.SV.BracketOptionItem] end,
+        setFunc = function(value) LUIE.ChatAnnouncements.SV.BracketOptionItem = linkBracketDisplayOptionsKeys[value] end,
+        width = "full",
+        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+        default = LUIE.ChatAnnouncements.D.BracketOptionItem,
+    }
     
     -- ReloadUI Button
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
@@ -3958,7 +4009,7 @@ function LUIE_CreateSettings()
         },
     }
     
-    -- Chat Announcements - Collectible Announcements Options Submenu
+    -- Chat Announcements - Collectible/Lorebooks Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_HEADER),
@@ -3970,6 +4021,18 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_COL_HEADER),
                 width = "full",
             },
+			{
+				-- Collectible Bracket
+			    type = "dropdown",
+				name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE),
+				tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE_TP),
+				choices = linkBracketDisplayOptions,
+				getFunc = function() return linkBracketDisplayOptions[LUIE.ChatAnnouncements.SV.BracketOptionCollectible] end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.BracketOptionCollectible = linkBracketDisplayOptionsKeys[value] end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.BracketOptionCollectible,
+			},
             {
                 -- Show Collectibles Unlocked CA
                 type = "checkbox",
@@ -4073,6 +4136,18 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_LORE_HEADER),
                 width = "full",
             },
+			{
+			    -- Lorebook Bracket
+				type = "dropdown",
+				name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_LOREBOOK),
+				tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_LOREBOOK_TP),
+				choices = linkBracketDisplayOptions,
+				getFunc = function() return linkBracketDisplayOptions[LUIE.ChatAnnouncements.SV.BracketOptionLorebook] end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.BracketOptionLorebook = linkBracketDisplayOptionsKeys[value] end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.BracketOptionLorebook,
+			},
             {
                 -- Show Lorebooks (CA)
                 type = "checkbox",
@@ -4310,6 +4385,18 @@ function LUIE_CreateSettings()
         name = GetString(SI_LUIE_LAM_CA_ACHIEVE_HEADER),
         reference = "Chat_Announcements_Options_Achievements_Announcements_Submenu",
         controls = {
+			{
+				-- Achievement Bracket
+			    type = "dropdown",
+				name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_ACHIEVEMENT),
+				tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_ACHIEVEMENT_TP),
+				choices = linkBracketDisplayOptions,
+				getFunc = function() return linkBracketDisplayOptions[LUIE.ChatAnnouncements.SV.BracketOptionAchievement] end,
+				setFunc = function(value) LUIE.ChatAnnouncements.SV.BracketOptionAchievement = linkBracketDisplayOptionsKeys[value] end,
+				width = "full",
+				disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+				default = LUIE.ChatAnnouncements.D.BracketOptionAchievement,
+			},
             {
                 -- Show Achievement Update CA
                 type = "checkbox",
@@ -6205,103 +6292,6 @@ function LUIE_CreateSettings()
             },
         },
     }
-    
-    -- Chat Announcements Common Options Header
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
-        type = "header",
-        name = GetString(SI_LUIE_LAM_UF_COMMON_HEADER),
-        width = "full",
-    }
-    
-    -- Player Name Display Method
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
-        type = "dropdown",
-        name = GetString(SI_LUIE_LAM_NAMEDISPLAYMETHOD),
-        tooltip = GetString(SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP),
-        choices = chatNameDisplayOptions,
-        getFunc = function() return chatNameDisplayOptions[LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions] end,
-        setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions = chatNameDisplayOptionsKeys[value] LUIE.ChatAnnouncements.IndexGroupLoot() end,
-        width = "full",
-        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-        default = chatNameDisplayOptions[2],
-    }
-    
-    --[[-- Notification Color
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
-        type = "colorpicker",
-        name = "Notification Color (Unimplemented)",
-        tooltip = "This message will be used to colorize various generic notification messages that are not Social/Guild related or error messages.",
-        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.Notify.NotificationColor) end,
-        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.Notify.NotificationColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
-        width = "full",
-        disabled = function() return not LUIE.TodoLater end,
-        default = {r=LUIE.ChatAnnouncements.D.Notify.NotificationColor[1], g=LUIE.ChatAnnouncements.D.Notify.NotificationColor[2], b=LUIE.ChatAnnouncements.D.Notify.NotificationColor[3]}
-    }]]--
-    
-    -- Character Name Bracket
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
-        type = "dropdown",
-        name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_CHARACTER),
-        tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_CHARACTER_TP),
-        choices = linkBracketDisplayOptions,
-        getFunc = function() return linkBracketDisplayOptions[LUIE.ChatAnnouncements.SV.BracketOptionCharacter] end,
-        setFunc = function(value) LUIE.ChatAnnouncements.SV.BracketOptionCharacter = linkBracketDisplayOptionsKeys[value] LUIE.ChatAnnouncements.IndexGroupLoot() end,
-        width = "full",
-        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-        default = LUIE.ChatAnnouncements.D.BracketOptionCharacter,
-    }
-    
-    -- Item Link Bracket
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
-        type = "dropdown",
-        name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_ITEM),
-        tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_ITEM_TP),
-        choices = linkBracketDisplayOptions,
-        getFunc = function() return linkBracketDisplayOptions[LUIE.ChatAnnouncements.SV.BracketOptionItem] end,
-        setFunc = function(value) LUIE.ChatAnnouncements.SV.BracketOptionItem = linkBracketDisplayOptionsKeys[value] end,
-        width = "full",
-        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-        default = LUIE.ChatAnnouncements.D.BracketOptionItem,
-    }
-    
-    -- Lorebook Bracket
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
-        type = "dropdown",
-        name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_LOREBOOK),
-        tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_LOREBOOK_TP),
-        choices = linkBracketDisplayOptions,
-        getFunc = function() return linkBracketDisplayOptions[LUIE.ChatAnnouncements.SV.BracketOptionLorebook] end,
-        setFunc = function(value) LUIE.ChatAnnouncements.SV.BracketOptionLorebook = linkBracketDisplayOptionsKeys[value] end,
-        width = "full",
-        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-        default = LUIE.ChatAnnouncements.D.BracketOptionLorebook,
-    }
-    
-    -- Collectible Bracket
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
-        type = "dropdown",
-        name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE),
-        tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_COLLECTIBLE_TP),
-        choices = linkBracketDisplayOptions,
-        getFunc = function() return linkBracketDisplayOptions[LUIE.ChatAnnouncements.SV.BracketOptionCollectible] end,
-        setFunc = function(value) LUIE.ChatAnnouncements.SV.BracketOptionCollectible = linkBracketDisplayOptionsKeys[value] end,
-        width = "full",
-        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-        default = LUIE.ChatAnnouncements.D.BracketOptionCollectible,
-    }
-    
-    -- Achievement Bracket
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
-        type = "dropdown",
-        name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_ACHIEVEMENT),
-        tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_ACHIEVEMENT_TP),
-        choices = linkBracketDisplayOptions,
-        getFunc = function() return linkBracketDisplayOptions[LUIE.ChatAnnouncements.SV.BracketOptionAchievement] end,
-        setFunc = function(value) LUIE.ChatAnnouncements.SV.BracketOptionAchievement = linkBracketDisplayOptionsKeys[value] end,
-        width = "full",
-        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-        default = LUIE.ChatAnnouncements.D.BracketOptionAchievement,
-    }
 
 ----------------------------------------------------------------------------------------------
 -- UNIT FRAMES
@@ -6873,6 +6863,30 @@ function LUIE_CreateSettings()
                 warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
             },
+			{
+				 -- Player Name Display Method (Player)
+			    type = "dropdown",
+				name = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER),
+				tooltip = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER_TP),
+				choices = nameDisplayOptions,
+				getFunc = function() return nameDisplayOptions[LUIE.UnitFrames.SV.DisplayOptionsPlayer] end,
+				setFunc = function(value) LUIE.UnitFrames.SV.DisplayOptionsPlayer = nameDisplayOptionsKeys[value] LUIE.UnitFrames.CustomFramesReloadControlsMenu() end,
+				width = "full",
+				disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+				default = nameDisplayOptions[2]
+			},
+			{
+			    -- Player Name Display Method (Target)
+				type = "dropdown",
+				name = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_TARGET),
+				tooltip = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_TARGET_TP),
+				choices = nameDisplayOptions,
+				getFunc = function() return nameDisplayOptions[LUIE.UnitFrames.SV.DisplayOptionsTarget] end,
+				setFunc = function(value) LUIE.UnitFrames.SV.DisplayOptionsTarget = nameDisplayOptionsKeys[value] LUIE.UnitFrames.CustomFramesReloadControlsMenu() end,
+				width = "full",
+				disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+				default = nameDisplayOptions[2]
+			},
             {
                 -- Custom Unit Frames format left label
                 type = "dropdown",
@@ -7844,35 +7858,9 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     
-    -- Player Name Display Method (Player)
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER),
-        tooltip = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER_TP),
-        choices = nameDisplayOptions,
-        getFunc = function() return nameDisplayOptions[LUIE.UnitFrames.SV.DisplayOptionsPlayer] end,
-        setFunc = function(value) LUIE.UnitFrames.SV.DisplayOptionsPlayer = nameDisplayOptionsKeys[value] LUIE.UnitFrames.CustomFramesReloadControlsMenu() end,
-        width = "full",
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-        default = nameDisplayOptions[2]
-    }
-    
-    -- Player Name Display Method (Target)
-    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "dropdown",
-        name = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_TARGET),
-        tooltip = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_TARGET_TP),
-        choices = nameDisplayOptions,
-        getFunc = function() return nameDisplayOptions[LUIE.UnitFrames.SV.DisplayOptionsTarget] end,
-        setFunc = function(value) LUIE.UnitFrames.SV.DisplayOptionsTarget = nameDisplayOptionsKeys[value] LUIE.UnitFrames.CustomFramesReloadControlsMenu() end,
-        width = "full",
-        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-        default = nameDisplayOptions[2]
-    }
-    
     -- Player Name Display Method (Group/Raid)
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
-        type = "dropdown",
+		type = "dropdown",
         name = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID),
         tooltip = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID_TP),
         choices = nameDisplayOptions,
@@ -7883,7 +7871,7 @@ function LUIE_CreateSettings()
         default = nameDisplayOptions[2]
     }
     
-    -- Default Caption Colour
+    -- Default Caption Color
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
         name = GetString(SI_LUIE_LAM_UF_COMMON_CAPTIONCOLOR),
@@ -7894,7 +7882,7 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     
-    -- Friendly NPC Font Colour
+    -- Friendly NPC Font Color
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
         name = GetString(SI_LUIE_LAM_UF_COMMON_NPCFONTCOLOR),
@@ -7905,7 +7893,7 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     
-    -- Friendly Player Font Colour
+    -- Friendly Player Font Color
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
         name = GetString(SI_LUIE_LAM_UF_COMMON_PLAYERFONTCOLOR),
@@ -7916,7 +7904,7 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     
-    -- Hostile Font Colour
+    -- Hostile Font Color
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
         name = GetString(SI_LUIE_LAM_UF_COMMON_HOSTILEFONTCOLOR),
@@ -7939,7 +7927,7 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
     }
     
-    -- Interactible Reticle Colour
+    -- Interactible Reticle Color
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "colorpicker",
         name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_COMMON_RETICLECOLORINTERACT)),
