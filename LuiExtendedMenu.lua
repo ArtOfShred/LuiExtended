@@ -452,70 +452,67 @@ function LUIE_CreateSettings()
     
     -- Slash Commands Overview
     optionsData[#optionsData + 1] = {
-        type = "header",
+        type = "submenu",
         name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER),
-        width = "full",
+        controls = {
+            {
+                -- TODO
+                type = "checkbox",
+                name = "/Home Results - Show Alert (Temp Setting)",
+                tooltip = "Display an alert when the /home command is used.\nNote: This setting will be deprecated in the future when Social Errors Events are implemented in Chat Announcements.",
+                getFunc = function() return LUIE.SV.TempAlertHome end,
+                setFunc = function(value) LUIE.SV.TempAlertHome = value end,
+                width = "full",
+                default = LUIE.D.TempAlertHome,
+            },
+            {
+                -- TODO
+                type = "checkbox",
+                name = "/Campaign Results - Show Alert (Temp Setting)",
+                tooltip = "Display an alert when the /campaign command is used.\nNote: This setting will be deprecated in the future when Campaign Queue Events are implemented in Chat Announcements.",
+                getFunc = function() return LUIE.SV.TempAlertCampaign end,
+                setFunc = function(value) LUIE.SV.TempAlertCampaign = value end,
+                width = "full",
+                default = LUIE.D.TempAlertCampaign,
+            },
+            {
+                -- Slash Commands description
+                type = "description",
+                text = strformat("<<1>>\n<<2>>\n<<3>>\n<<4>>",
+                    GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GENERAL),
+                    GetString(SI_LUIE_LAM_SLASHCMDS_TRADE),
+                    GetString(SI_LUIE_LAM_SLASHCMDS_HOME),
+                    GetString(SI_LUIE_LAM_SLASHCMDS_CAMPAIGN)),
+            },
+            {
+                type = "description",
+                text = strformat("<<1>>\n<<2>>\n<<3>>\n<<4>>\n<<5>>\n<<6>>",
+                    GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GROUP),
+                    GetString(SI_LUIE_LAM_SLASHCMDS_REGROUP),
+                    GetString(SI_LUIE_LAM_SLASHCMDS_LEAVE),
+                    GetString(SI_LUIE_LAM_SLASHCMDS_DISBAND),
+                    GetString(SI_LUIE_LAM_SLASHCMDS_KICK),
+                    GetString(SI_LUIE_LAM_SLASHCMDS_VOTEKICK)),
+            },
+            {
+                type = "description",
+                text = strformat("<<1>>\n<<2>>\n<<3>>\n<<4>>",
+                    GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GUILD),
+                    GetString(SI_LUIE_LAM_SLASHCMDS_GUILDINVITE),
+                    GetString(SI_LUIE_LAM_SLASHCMDS_GUILDKICK),
+                    GetString(SI_LUIE_LAM_SLASHCMDS_GUILDQUIT)),
+            },
+            {
+                type = "description",
+                text = strformat("<<1>>\n<<2>>\n<<3>>\n<<4>>\n<<5>>",
+                    GetString(SI_LUIE_LAM_SLASHCMDSHEADER_SOCIAL),
+                    GetString(SI_LUIE_LAM_SLASHCMDS_FRIEND),
+                    GetString(SI_LUIE_LAM_SLASHCMDS_IGNORE),
+                    GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND),
+                    GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE)),
+            },
+        },
     }
-    
-    optionsData[#optionsData + 1] = {
-        type = "checkbox",
-        name = "/Home Results - Show Alert (Temp Setting)",
-        tooltip = "Display an alert when the /home command is used.\nNote: This setting will be deprecated in the future when Social Errors Events are implemented in Chat Announcements.",
-        getFunc = function() return LUIE.SV.TempAlertHome end,
-        setFunc = function(value) LUIE.SV.TempAlertHome = value end,
-        width = "full",
-        default = LUIE.D.TempAlertHome,
-    }
-    
-    optionsData[#optionsData + 1] = {
-        type = "checkbox",
-        name = "/Campaign Results - Show Alert (Temp Setting)",
-        tooltip = "Display an alert when the /campaign command is used.\NNote: This setting will be deprecated in the future when Campaign Queue Events are implemented in Chat Announcements.",
-        getFunc = function() return LUIE.SV.TempAlertCampaign end,
-        setFunc = function(value) LUIE.SV.TempAlertCampaign = value end,
-        width = "full",
-        default = LUIE.D.TempAlertCampaign,
-    }
-    
-    -- Slash Commands description
-    optionsData[#optionsData + 1] = {
-        type = "description",
-        text = strformat("<<1>>\n<<2>>\n<<3>>\n<<4>>",
-               GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GENERAL),
-               GetString(SI_LUIE_LAM_SLASHCMDS_TRADE),
-               GetString(SI_LUIE_LAM_SLASHCMDS_HOME),
-               GetString(SI_LUIE_LAM_SLASHCMDS_CAMPAIGN)),
-    }
-    
-    optionsData[#optionsData + 1] = {
-        type = "description",
-        text = strformat("<<1>>\n<<2>>\n<<3>>\n<<4>>\n<<5>>\n<<6>>",
-               GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GROUP),
-               GetString(SI_LUIE_LAM_SLASHCMDS_REGROUP),
-               GetString(SI_LUIE_LAM_SLASHCMDS_LEAVE),
-               GetString(SI_LUIE_LAM_SLASHCMDS_DISBAND),
-               GetString(SI_LUIE_LAM_SLASHCMDS_KICK),
-               GetString(SI_LUIE_LAM_SLASHCMDS_VOTEKICK)),
-    }
-    
-    optionsData[#optionsData + 1] = {
-        type = "description",
-        text = strformat("<<1>>\n<<2>>\n<<3>>\n<<4>>",
-               GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GUILD),
-               GetString(SI_LUIE_LAM_SLASHCMDS_GUILDINVITE),
-               GetString(SI_LUIE_LAM_SLASHCMDS_GUILDKICK),
-               GetString(SI_LUIE_LAM_SLASHCMDS_GUILDQUIT)),
-    }
-    
-    optionsData[#optionsData + 1] = {
-        type = "description",
-        text = strformat("<<1>>\n<<2>>\n<<3>>\n<<4>>\n<<5>>",
-               GetString(SI_LUIE_LAM_SLASHCMDSHEADER_SOCIAL),
-               GetString(SI_LUIE_LAM_SLASHCMDS_FRIEND),
-               GetString(SI_LUIE_LAM_SLASHCMDS_IGNORE),
-               GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND),
-               GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE)),
-    } 
 
 ----------------------------------------------------------------------------------------------
 -- COMBAT INFO
