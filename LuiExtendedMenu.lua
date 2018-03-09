@@ -1,4 +1,6 @@
+-- Performance Enhancement
 local strformat = zo_strformat
+local pairs = pairs
 
 -- Create Settings Menu
 function LUIE_CreateSettings()
