@@ -46,7 +46,7 @@ CI.SV       = nil
 
 local g_ultimateCost        = 0
 local g_ultimateCurrent     = 0
-local g_ultimateAbilityName	= ""
+local g_ultimateAbilityName = ""
 local g_ultimateAbilityId   = 0
 local g_ultimateSlot        = ACTION_BAR_ULTIMATE_SLOT_INDEX + 1
 

@@ -2,6 +2,11 @@
 -- LuiExtended.lua -----------------
 ------------------------------------
 
+ZO_CreateStringId("SI_LUIE_ERROR_FONT",                                 "LUI Extended: There was a problem with selecting required font. Falling back to game default.")
+
+------------------------------------
+-- SlashCommands.lua ---------------
+------------------------------------
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE",                   "Queueing for <<1>>...")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG",               "You cannot queue for a campaign while in a battleground.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED",      "The campaign name you entered is not your home or guest campaign.")
@@ -45,7 +50,6 @@ ZO_CreateStringId("SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME",              "You mus
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK",       "You must be in an LFG group to initiate a vote to remove a party member.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_BG",               "You cannot initiate a vote to remove a party member in a battleground.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NONAME",           "You must enter the account or character name of a party member to initiate a vote to remove.")
-ZO_CreateStringId("SI_LUIE_ERROR_FONT",                                 "LUI Extended: There was a problem with selecting required font. Falling back to game default.")
 
 ------------------------------------
 -- InfoPanel.lua -------------------
@@ -63,8 +67,8 @@ ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS",              "Player 
 ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS",      "Player Long Term Effects")
 ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS",                "Target Buffs")
 ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS",              "Target Debuffs")
-ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS",				"Prominent Buffs")
-ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS",			"Prominent Debuffs")
+ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS",             "Prominent Buffs")
+ZO_CreateStringId("SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS",           "Prominent Debuffs")
 
 ------------------------------------
 -- ChatAnnouncements.lua -----------
@@ -536,6 +540,35 @@ ZO_CreateStringId("SI_LUIE_LAM_RELOADUI_WARNING",                       "Will ne
 ZO_CreateStringId("SI_LUIE_LAM_RESETPOSITION",                          "Reset Position")
 ZO_CreateStringId("SI_LUIE_LAM_HIDE_EXPERIENCE_BAR",                    "Hide Experience/Skill Progress Bar Pop-up")
 ZO_CreateStringId("SI_LUIE_LAM_HIDE_EXPERIENCE_BAR_TP",                 "When gaining experience from Quests, POI Discovery, Boss Kills, or Skill Line updates, the XP bar will no longer popup. Useful if you have a custom UI element in that corner of the screen and don't want it to be overlapped.")
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- LAM MODULE ON/OFF --
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ZO_CreateStringId("SI_LUIE_LAM_STARTUPMSG",                             "Disable Startup Message")
+ZO_CreateStringId("SI_LUIE_LAM_STARTUPMSG_TP",                          "This setting will disable the startup message.")
+ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMP",                              "Include Timestamp")
+ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMPFORMAT",                        "Timestamp Format")
+ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMPFORMAT_TP",                     "FORMAT:\nHH: hours (24)\nhh: hours (12)\nH: hour (24, no leading 0)\nh: hour (12, no leading 0)\nA: AM/PM\na: am/pm\nm: minutes\ns: seconds")
+ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMP_TP",                           "Prepend printed text with current time label.")
+ZO_CreateStringId("SI_LUIE_LAM_UF",                                     "Unit Frames")
+ZO_CreateStringId("SI_LUIE_LAM_CA",                                     "Chat Announce")
+ZO_CreateStringId("SI_LUIE_LAM_CI",                                     "Combat Info")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS",                              "Slash Commands")
+ZO_CreateStringId("SI_LUIE_LAM_CI_DESCRIPTION",                         "Allows display of ultimate value on bars, effect tracker on bars, as well as cooldown tracking for quick slot items and GCD display for action bars.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFFS_DESCRIPTION",                      "Enables buff and debuff display for effects on the player and target. Also has options for various other enhancements.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFFSDEBUFFS",                           "Buffs & Debuffs")
+ZO_CreateStringId("SI_LUIE_LAM_NAMEDISPLAYMETHOD",                      "Player Name Display Method")
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- SLASH COMMANDS -- LAM --
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_ENABLE",                       "Slash Commands Module")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_DESCRIPTION",                  "WTB Description of slash commands module bla bla bla")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER",                        "LUIE Slash Commands Overview")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER_GENERAL",                "|c00FFFFGeneral Commands:|r")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_TRADE",                        "'/trade' 'name' Invites a player to trade with you.")
@@ -556,26 +589,6 @@ ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_FRIEND",                       "'/frien
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_IGNORE",                       "'/ignore' 'name' Add a player to ignored.\n\t\t\t\t\t\tAlternate options: '/addignore'")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND",                 "'/unfriend' 'name' Remove a player from friends.\n\t\t\t\t\tAlternate options: '/removefriend'")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE",                 "'/unignore' 'name' Remove a player from ignored.\n\t\t\t\t\tAlternate options: '/removeignore'")
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--- LAM MODULE ON/OFF --
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-ZO_CreateStringId("SI_LUIE_LAM_STARTUPMSG",                             "Disable Startup Message")
-ZO_CreateStringId("SI_LUIE_LAM_STARTUPMSG_TP",                          "This setting will disable the startup message.")
-ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMP",                              "Include Timestamp")
-ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMPFORMAT",                        "Timestamp Format")
-ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMPFORMAT_TP",                     "FORMAT:\nHH: hours (24)\nhh: hours (12)\nH: hour (24, no leading 0)\nh: hour (12, no leading 0)\nA: AM/PM\na: am/pm\nm: minutes\ns: seconds")
-ZO_CreateStringId("SI_LUIE_LAM_TIMESTAMP_TP",                           "Prepend printed text with current time label.")
-ZO_CreateStringId("SI_LUIE_LAM_UF",                                     "Unit Frames")
-ZO_CreateStringId("SI_LUIE_LAM_CA",                                     "Chat Announce")
-ZO_CreateStringId("SI_LUIE_LAM_CI",                                     "Combat Info")
-ZO_CreateStringId("SI_LUIE_LAM_CI_DESCRIPTION",                         "Allows display of ultimate value on bars, effect tracker on bars, as well as cooldown tracking for quick slot items and GCD display for action bars.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFFS_DESCRIPTION",                      "Enables buff and debuff display for effects on the player and target. Also has options for various other enhancements.")
-ZO_CreateStringId("SI_LUIE_LAM_BUFFSDEBUFFS",                           "Buffs & Debuffs")
-ZO_CreateStringId("SI_LUIE_LAM_NAMEDISPLAYMETHOD",                      "Player Name Display Method")
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

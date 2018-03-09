@@ -78,6 +78,7 @@ modules\InfoPanel.lua
 modules\UnitFrames.lua
 modules\SpellCastBuffs.lua
 modules\CombatText.lua
+modules\SlashCommands.lua
 
 modules\CombatText\Animation.lua
 modules\CombatText\Pool.lua
