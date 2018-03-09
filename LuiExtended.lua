@@ -26,7 +26,6 @@ LUIE.D = {
     SpellCastBuff_Enable        = true,
     ChatAnnouncements_Enable    = true,
     SlashCommands_Enable        = true,
-    DamageMeter_Enable          = false,
     ChatUseSystem               = false,
     TimeStamp                   = false,
     TimeStampFormat             = "HH:m:s",
