@@ -5952,7 +5952,7 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Group.GroupRaidArenaRoundAlert,
             },
             {
-                -- IC DISPLAY ANNOUNCEMENT (CA)
+                -- Imperial City Display Announcement (CA)
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
                 tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
@@ -5963,7 +5963,7 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Quests.QuestICDiscoveryCA,                   
             },
             {
-                -- IC DISPLAY ANNOUNCEMENT (CSA)
+                -- Imperial City Display Announcement (CSA)
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
                 tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
@@ -5974,7 +5974,7 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Quests.QuestICDiscoveryCSA,                   
             },
             {
-                -- IC DISPLAY ANNOUNCEMENT (Alert)
+                -- Imperial City Display Announcement (Alert)
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
                 tooltip = strformat(GetString(SI_LUIE_LAM_CA_QUEST_IC_DISCOVERY_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
@@ -5985,7 +5985,7 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Quests.QuestICDiscoveryAlert,                   
             },
             {
-                -- IC DISPLAY DESCRIPTION
+                -- Imperial City Display Description
                 type = "checkbox",
                 name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION)),
                 tooltip = GetString(SI_LUIE_LAM_CA_QUEST_IC_DESCRIPTION_TP),
@@ -5996,7 +5996,7 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Quests.QuestICDiscoveryAlert,                   
             },
             {
-                -- CRAGLORN BUFF (CA)
+                -- Craglorn Buff (CA)
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_CA_SHORT)),
                 tooltip = strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CA)),
@@ -6007,7 +6007,7 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Quests.QuestCraglornBuffCA,                   
             },
             {
-                -- CRAGLORN BUFF (CSA)
+                -- Craglorn Buff (CSA)
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_CSA_SHORT)),
                 tooltip = strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_CSA)),
@@ -6018,7 +6018,7 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Quests.QuestCraglornBuffCSA,                   
             },
             {
-                -- CRAGLORN BUFF (ALERT)
+                -- Craglorn Buff (Alert)
                 type = "checkbox",
                 name = strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN), GetString(SI_LUIE_LAM_CA_SHARED_ALERT_SHORT)),
                 tooltip = strformat(GetString(SI_LUIE_LAM_CA_DISPLAY_CRAGLORN_TP), GetString(SI_LUIE_LAM_CA_SHARED_ALERT)),
@@ -7923,7 +7923,7 @@ function LUIE_CreateSettings()
 -- Combat Text
 ----------------------------------------------------------------------------------------------
   
-    -- CT Description
+    -- Combat Text Description
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type = "description",
         text = GetString(SI_LUIE_LAM_CT_DESCRIPTION),
