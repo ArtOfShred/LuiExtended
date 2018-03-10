@@ -499,7 +499,15 @@ A.Skill_Frozen_Ground               = 33502
 A.Skill_Body_Slam                   = 24689
 A.Skill_Stomp                       = 91848
 A.Skill_Storm_Bound                 = 4864
+A.Skill_Shockwave                   = 4653
 A.Skill_Dusks_Howl                  = 6412
+
+-- Undead
+A.Skill_Desecrated_Ground           = 38828
+A.Skill_Colossal_Stomp              = 'Colossal Stomp' -- TODO: LOCALIZE WHEN GITHUB MERGE COMPLETE
+A.Skill_Defiled_Ground              = 22521
+A.Skill_Soul_Rupture                = 73931
+A.Skill_Winters_Reach               = 4337
 
 -- Monsters
 A.Skill_Assault                     = 4304 -- Ice Wraith

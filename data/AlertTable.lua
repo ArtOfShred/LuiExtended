@@ -305,6 +305,9 @@ LUIE.AlertTable = {
     [5017] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2 }, -- Hoarfrost Fist (Frost Atronach)
     [33502] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2 }, -- Frozen Ground (Frost Atronach)
     
+    [50626] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Shadow Strike (Grevious Twilight)
+    [65889] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Shadow Strike (Grevious Twilight)
+    
     [4829] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3 }, -- Fire Brand (Flesh Atronach)
     [4817] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Unyielding Mace (Flesh Atronach)
     
@@ -312,6 +315,7 @@ LUIE.AlertTable = {
     [66869] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2 }, -- Pin (Flesh Colossus)
     [67872] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2 }, -- Sweep (Flesh Colossus)
     [76139] = { block = true, dodge = true, interrupt = false, priority = 2, auradetect = true }, -- Stumble Forward (Flesh Colossus)
+    [67772] = { power = true, priority = 2, auradetect = true }, -- Enraged (Flesh Colossus)
     
     [11079] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 2, eventdetect = true }, -- Black Winter (Harvester)
     
@@ -334,8 +338,32 @@ LUIE.AlertTable = {
     [88947] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 3 }, -- Lightning Grasp (Xivilai)
     [7100] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3 }, -- Hand of Flame (Xivilai)
     
+    [4653] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true }, -- Shockwave (Watcher)
+    [9219] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 2, eventdetect = true, refire = 1750 }, -- Doom-Truth's Gaze (Watcher)
+    [14425] = { block = true, dodge = false, avoid = true, interrupt = false, priority = 2 }, -- Doom-Truth's Gaze (Watcher)
+    
     [6410] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Tail Clip (Winged Twilight)
     [6412] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 3 }, -- Dusk's Howl (Winged Twilight)
+    
+    -- UNDEAD
+    [8569] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, bs = true }, -- Devastating Leap (Bloodfiend)
+    
+    [5050] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 2, eventdetect = true }, -- Bone Saw (Bone Colossus)
+    [17207] = { block = true, dodge = true, avoid = false, interrupt = false, priority = 3, auradetect = true }, -- Necromantic Implosion (Risen Dead)
+    
+    [18514] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3 }, -- Chill Touch (Ghost)
+    [19137] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3 }, -- Haunting Spectre (Ghost)
+    
+    [73925] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 2 }, -- Soul Cage (Lich)
+    
+    [50182] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3 }, -- Consuming Energy (Spellfiend)
+    
+    [68735] = { block = true, dodge = true, avoid = false, interrupt = true, priority = 3 }, -- Vampiric Drain (Vampire)
+    
+    [4337] = { block = false, dodge = false, avoid = true, interrupt = true, priority = 3 }, -- Winter's Reach (Wraith)
+    
+    [2969] = { block = true, dodge = true, avoid = false, interrupt = false, bs = true, priority = 3 }, -- Pound (Zombie)
+    [2960] = { block = true, dodge = false, avoid = false, interrupt = false, priority = 3 }, -- Vomit (Zombie)
     
     -- MONSTERS
     [43809] = { block = false, dodge = false, avoid = true, interrupt = false, priority = 3, auradetect = true}, -- Shard Burst (Ice Wraith)

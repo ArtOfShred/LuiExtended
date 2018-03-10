@@ -7606,48 +7606,48 @@ debugAuras                  = {
             [27326] = true, -- Unyielding Mace -- Flesh Atronach
             [23077] = true, -- Bleeding -- Flesh Atronach
             
-            --[67870] = true, -- Tremor AOE -- Flesh Colossus
-            --[67123] = true, -- Tremor -- Flesh Colossus
-            --[67637] = true, -- Falling Debris Projectile -- Flesh Colossus
-            --[67636] = true, -- Falling Debris -- Flesh Colossus
-            --[67626] = true, -- Debris Target 1 -- Flesh Colossus
-            --[67627] = true, -- Debris Target 2 -- Flesh Colossus
-            --[67628] = true, -- Debris Target 3 -- Flesh Colossus
-            --[67629] = true, -- Debris Target 4 -- Flesh Colossus
-            --[66869] = true, -- Pin -- Flesh Colossus
-            --[67076] = true, -- Self Snare -- Flesh Colossus
-            --[65709] = true, -- Pin -- Flesh Colossus
-            --[49820] = true, -- Stunned -- Flesh Colossus
-            --[65735] = true, -- Maisma Channel -- Flesh Colossus
-            --[50341] = true, -- Miasma Pool -- Flesh Colossus
-            --[65746] = true, -- Miasma Pool -- Flesh Colossus
-            --[53233] = true, -- Miasma Pool -- Flesh Colossus
-            --[67872] = true, -- Sweep -- Flesh Colossus
-            --[68824] = true, -- Sweep -- Flesh Colossus
-            --[68813] = true, -- Sweep Knockbavck -- Flesh Colossus
-            --[67829] = true, -- Sweep Line Origin -- Flesh Colossus
-            --[67831] = true, -- Sweep Line 1 -- Flesh Colossus
-            --[67834] = true, -- Sweep Line 2 -- Flesh Colossus
-            --[67835] = true, -- Sweep Line 3 -- Flesh Colossus
-            --[67842] = true, -- Sweep Shockwave -- Flesh Colossus
-            --[76128] = true, -- Stumble Forward -- Flesh Colossus
-            --[76139] = true, -- Stumble Forward -- Flesh Colossus
-            --[76140] = true, -- Stumble Forward -- Flesh Colossus
-            --[76130] = true, -- Stumble Forward -- Flesh Colossus
-            --[76131] = true, -- Stumble Forward -- Flesh Colossus
-            --[76143] = true, -- Stumble Forward -- Flesh Colossus
-            --[79001] = true, -- Stumble Forward -- Flesh Colossus
-            --[76145] = true, -- Stumble Forward -- Flesh Colossus
-            --[76146] = true, -- Stumble Forward -- Flesh Colossus
-            --[76129] = true, -- Stumble Forward -- Flesh Colossus
-            --[76134] = true, -- Stumble Forward -- Flesh Colossus
-            --[65755] = true, -- Staggered -- Flesh Colossus
-            --[76133] = true, -- Stumble Forward -- Flesh Colossus
-            --[68826] = true, -- Staggered -- Flesh Colossus
-            --[67766] = true, -- Ghastly Bellow -- Flesh Colossus
-            --[67772] = true, -- Enraged -- Flesh Colossus
-            --[49430] = true, -- Smash -- Flesh Colossus
-            --[49429] = true, -- Claw -- Flesh Colossus
+            [67870] = true, -- Tremor AOE -- Flesh Colossus
+            [67123] = true, -- Tremor -- Flesh Colossus
+            [67637] = true, -- Falling Debris Projectile -- Flesh Colossus
+            [67636] = true, -- Falling Debris -- Flesh Colossus
+            [67626] = true, -- Debris Target 1 -- Flesh Colossus
+            [67627] = true, -- Debris Target 2 -- Flesh Colossus
+            [67628] = true, -- Debris Target 3 -- Flesh Colossus
+            [67629] = true, -- Debris Target 4 -- Flesh Colossus
+            [66869] = true, -- Pin -- Flesh Colossus
+            [67076] = true, -- Self Snare -- Flesh Colossus
+            [65709] = true, -- Pin -- Flesh Colossus
+            [49820] = true, -- Stunned -- Flesh Colossus
+            [65735] = true, -- Maisma Channel -- Flesh Colossus
+            [50341] = true, -- Miasma Pool -- Flesh Colossus
+            [65746] = true, -- Miasma Pool -- Flesh Colossus
+            [53233] = true, -- Miasma Pool -- Flesh Colossus
+            [67872] = true, -- Sweep -- Flesh Colossus
+            [68824] = true, -- Sweep -- Flesh Colossus
+            [68813] = true, -- Sweep Knockbavck -- Flesh Colossus
+            [67829] = true, -- Sweep Line Origin -- Flesh Colossus
+            [67831] = true, -- Sweep Line 1 -- Flesh Colossus
+            [67834] = true, -- Sweep Line 2 -- Flesh Colossus
+            [67835] = true, -- Sweep Line 3 -- Flesh Colossus
+            [67842] = true, -- Sweep Shockwave -- Flesh Colossus
+            [76128] = true, -- Stumble Forward -- Flesh Colossus
+            [76139] = true, -- Stumble Forward -- Flesh Colossus
+            [76140] = true, -- Stumble Forward -- Flesh Colossus
+            [76130] = true, -- Stumble Forward -- Flesh Colossus
+            [76131] = true, -- Stumble Forward -- Flesh Colossus
+            [76143] = true, -- Stumble Forward -- Flesh Colossus
+            [79001] = true, -- Stumble Forward -- Flesh Colossus
+            [76145] = true, -- Stumble Forward -- Flesh Colossus
+            [76146] = true, -- Stumble Forward -- Flesh Colossus
+            [76129] = true, -- Stumble Forward -- Flesh Colossus
+            [76134] = true, -- Stumble Forward -- Flesh Colossus
+            [65755] = true, -- Staggered -- Flesh Colossus
+            [76133] = true, -- Stumble Forward -- Flesh Colossus
+            [68826] = true, -- Staggered -- Flesh Colossus
+            [67766] = true, -- Ghastly Bellow -- Flesh Colossus
+            [67772] = true, -- Enraged -- Flesh Colossus
+            [49430] = true, -- Smash -- Flesh Colossus
+            [49429] = true, -- Claw -- Flesh Colossus
             --[65744] = true, -- Staggered -- Flesh Colossus
             
             [17069] = true, -- Ice Spear -- Frost Atronach
@@ -7668,20 +7668,20 @@ debugAuras                  = {
             [51645] = true, -- Frozen Ground -- Frost Atronach
             [51646] = true, -- Frozen Ground -- Frost Atronach
             
-            --[65926] = true, -- Slash -- Grievous Twilight
-            --[65845] = true, -- Rend -- Grievous Twilight
-            --[66643] = true, -- Rend -- Grievous Twilight
-            --[50596] = true, -- Shadow Bolt -- Grievous Twilight
-            --[50626] = true, -- Shadow Strike -- Grievous Twilight
-            --[60792] = true, -- Grevious Root Immune -- Grievous Twilight
-            --[50628] = true, -- Shadow Strike -- Grievous Twilight
-            --[50635] = true, -- Shadow Strike -- Grievous Twilight
-            --[65889] = true, -- Shadow Strike -- Grievous Twilight
-            --[65893] = true, -- Grevious Root Immune -- Grievous Twilight
-            --[65891] = true, -- Shadow Strike -- Grievous Twilight
-            --[65896] = true, -- Shadow Strike -- Grievous Twilight
-            --[50609] = true, -- Blend into Shadows -- Grievous Twilight
-            --[65895] = true, -- Shadow Strike -- Grievous Twilight
+            [65926] = true, -- Slash -- Grievous Twilight
+            [65845] = true, -- Rend -- Grievous Twilight
+            [66643] = true, -- Rend -- Grievous Twilight
+            [50596] = true, -- Shadow Bolt -- Grievous Twilight
+            [50626] = true, -- Shadow Strike -- Grievous Twilight
+            [60792] = true, -- Grevious Root Immune -- Grievous Twilight
+            [50628] = true, -- Shadow Strike -- Grievous Twilight
+            [50635] = true, -- Shadow Strike -- Grievous Twilight
+            [65889] = true, -- Shadow Strike -- Grievous Twilight
+            [65893] = true, -- Grevious Root Immune -- Grievous Twilight
+            [65891] = true, -- Shadow Strike -- Grievous Twilight
+            [65896] = true, -- Shadow Strike -- Grievous Twilight
+            [65895] = true, -- Shadow Strike -- Grievous Twilight
+            [50609] = true, -- Blend into Shadows -- Grievous Twilight
             
             [11076] = true, -- Chasten -- Harvester
             [11079] = true, -- Black Winter -- Harvester
@@ -7785,24 +7785,163 @@ debugAuras                  = {
             [88973] = true, -- Summon Daedra -- Xivilai
             [89232] = true, -- Summon Daedra -- Xivilai
             
-            --[4652] = true, -- Gaze -- Watcher
-            --[4653] = true, -- Shockwave -- Watcher
-            --[43817] = true, -- Shockwave Snare -- Watcher
-            --[53880] = true, -- Shockwave -- Watcher
-            --[9219] = true, -- Doom-Truth's Gaze -- Watcher
-            --[9220] = true, -- Doom-Truth's Gaze -- Watcher
-            --[14518] = true, -- Doom-Truth's Gaze -- Watcher
-            --[14425] = true, -- Doom-Truth's Gaze -- Watcher
-            --[14461] = true, -- Doom-Truth's Gaze -- Watcher
-            --[14547] = true, -- Doom-Truth's Gaze -- Watcher
-            --[14426] = true, -- Doom-Truth's Gaze -- Watcher
-            --[14546] = true, -- Doom-Truth's Gaze -- Watcher
+            [4652] = true, -- Gaze -- Watcher
+            [4653] = true, -- Shockwave -- Watcher
+            [43817] = true, -- Shockwave Snare -- Watcher
+            [95855] = true, -- Shockwave -- Watcher
+            [95856] = true, -- Shockwave -- Watcher
+            [53880] = true, -- Shockwave -- Watcher
+            
+            [9219] = true, -- Doom-Truth's Gaze -- Watcher
+            [95915] = true, -- Doom-Truth's Gaze -- Watcher
+            [95916] = true, -- Doom-Truth's Gaze -- Watcher
+            [95917] = true, -- Doom-Truth's Gaze -- Watcher
+            [95918] = true, -- Doom-Truth's Gaze -- Watcher
+            [95890] = true, -- Doom-Truth's Gaze -- Watcher
+            [9220] = true, -- Doom-Truth's Gaze -- Watcher
+            [14518] = true, -- Doom-Truth's Gaze -- Watcher
+            [14425] = true, -- Doom-Truth's Gaze -- Watcher
+            [14462] = true, -- Doom-Truth's Gaze -- Watcher
+            [14426] = true, -- Doom-Truth's Gaze -- Watcher
+            [14546] = true, -- Doom-Truth's Gaze -- Watcher
             
             [12062] = true, -- Kick -- Winged Twilight
             [13690] = true, -- Kick -- Winged Twilight
             [6410] = true, -- Tail Clip -- Winged Twilight
             [63612] = true, -- Tail Clip -- Winged Twilight
             [6412] = true, -- Dusk's Howl -- Winged Twilight
+            
+            -- UNDEAD
+            
+            [38828] = true, -- Desecrated Ground -- Desecrated Ground
+            [69900] = true, -- Desecrated Ground -- Desecrated Ground
+            [69905] = true, -- Desecrated Ground -- Desecrated Ground
+            [38829] = true, -- Desecrated Ground Bonus -- Desecrated Ground
+            [38832] = true, -- Undead Synergy -- Desecrated Ground
+            [38831] = true, -- Desecrated Ground -- Desecrated Ground
+            [38834] = true, -- Desecrated Ground Snare -- Desecrated Ground
+            [69950] = true, -- Desecrated Ground -- Desecrated Ground
+            
+            [25719] = true, -- Check for Vampire Allies -- Bloodfiend
+            [8550] = true, -- Slash -- Bloodfiend
+            [8551] = true, -- Slash -- Bloodfiend
+            [8564] = true, -- Rending Slash -- Bloodfiend
+            [8554] = true, -- Flurry -- Bloodfiend
+            [9194] = true, -- Flurry -- Bloodfiend
+            [8569] = true, -- Devastating Leap -- Bloodfiend
+            [32023] = true, -- Generic Stagger Enemy -- Bloodfiend
+            [48940] = true, -- Ambush -- Bloodfiend
+            
+            [5028] = true, -- Strike -- Bone Colossus
+            [5050] = true, -- Bone Saw -- Bone Colossus
+            [30590] = true, -- Bone Saw -- Bone Colossus
+            [17206] = true, -- Bone Saw -- Bone Colossus
+            [5030] = true, -- Voice to Wake the Dead -- Bone Colossus
+            [5044] = true, -- Risen Dead -- Bone Colossus
+            [88133] = true, -- Voice to Wake the Dead -- Bone Colossus
+            [5033] = true, -- Voice to Wake the Dead -- Bone Colossus
+            [5035] = true, -- Voice to Wake the Dead -- Bone Colossus
+            [5036] = true, -- Voice to Wake the Dead -- Bone Colossus
+            [17221] = true, -- Slap -- Bone Colossus
+            [17207] = true, -- Necromantic Implosion -- Bone Colossus
+            [88828] = true, -- Necromantic Implosion -- Bone Colossus
+            [89533] = true, -- Necromantic Implosion -- Bone Colossus
+            [49128] = true, -- Necromantic Implosion -- Bone Colossus
+            [88132] = true, -- Voice to Wake the Dead -- Bone Colossus
+            
+            --[72980] = true, -- Singing Strike -- Defiled Aegis
+            --[72981] = true, -- Singing Slice -- Defiled Aegis
+            --[72979] = true, -- Dissonant Blow -- Defiled Aegis
+            --[72995] = true, -- Symphony of Blades -- Defiled Aegis
+            --[72996] = true, -- Symphony of Blades -- Defiled Aegis
+            --[77612] = true, -- Symphony of Blades -- Defiled Aegis
+            
+            --[73020] = true, -- Shattered Harmony -- Defiled Aegis
+            --[76180] = true, -- Shattered Harmony -- Defiled Aegis
+            --[73021] = true, -- Shattered Harmony -- Defiled Aegis
+            --[73025] = true, -- Tomb Guardian -- Defiled Aegis
+            --[73322] = true, -- Shattered Harmony -- Defiled Aegis
+            --[74993] = true, -- Shattered Harmony -- Defiled Aegis
+            
+            [8812] = true, -- Double Strike -- Ghost
+            [8813] = true, -- Double Strike -- Ghost
+            [18514] = true, -- Chill Touch -- Ghost
+            [18515] = true, -- Chill Touch -- Ghost
+            [18766] = true, -- Haunting Spectre -- Ghost
+            [19137] = true, -- Haunting Spectre -- Ghost
+            [19138] = true, -- Haunting Spectre -- Ghost
+            [19140] = true, -- Haunting Spectre -- Ghost
+            
+            [9541] = true, -- Necrotic Spear -- Lich
+            [20756] = true, -- Defiled Ground -- Lich
+            [22521] = true, -- Defiled Ground -- Lich
+            [22523] = true, -- Defiled Ground -- Lich
+            [20812] = true, -- Defiled Ground -- Lich
+            [22525] = true, -- Defiled Ground -- Lich
+            [73925] = true, -- Soul Cage -- Lich
+            [22602] = true, -- Soul Cage -- Lich
+            [73927] = true, -- Soul Cage -- Lich
+            [73928] = true, -- Soul Cage -- Lich
+            [73930] = true, -- Soul Cage -- Lich
+            [73932] = true, -- Soul Cage -- Lich
+            [73933] = true, -- Soul Cage -- Lich
+            [73938] = true, -- Soul Cage -- Lich
+            [73936] = true, -- Soul Cage -- Lich
+            [73935] = true, -- Soul Cage -- Lich
+            [73929] = true, -- Soul Cage -- Lich
+            [73931] = true, -- Soul Rupture -- Lich
+            [73926] = true, -- Soul Cage -- Lich
+            [73937] = true, -- Soul Cage -- Lich
+            [73939] = true, -- Soul Rupture -- Lich
+            [73934] = true, -- Soul Cage -- Lich
+            
+            [49702] = true, -- Entropic Flare -- Spellfiend
+            [50456] = true, -- Entropic Flare -- Spellfiend
+            [50182] = true, -- Consuming Energy -- Spellfiend
+            [50183] = true, -- Consuming Energy -- Spellfiend
+            [52398] = true, -- Consuming Energy -- Spellfiend
+            
+            --[68735] = true, -- Vampiric Drain -- Vampire
+            --[68750] = true, -- Vampiric Drain -- Vampire
+            --[68765] = true, -- Vampiric Drain -- Vampire
+            --[68771] = true, -- Vampiric Drain Heal Dummy -- Vampire
+            --[68772] = true, -- Vampiric Drain -- Vampire
+            
+            --[2849] = true, -- Claw Slash -- Werewolf
+            --[4651] = true, -- Claw Slash -- Werewolf
+            --[2850] = true, -- Swipe -- Werewolf
+            --[2867] = true, -- Crushing Leap -- Werewolf
+            --[45576] = true, -- Generic Stagger Enemy -- Werewolf
+            --[3415] = true, -- Flurry -- Werewolf
+            --[13950] = true, -- Flurry -- Werewolf
+            --[9467] = true, -- Flurry -- Werewolf
+            --[60636] = true, -- Flurry -- Werewolf
+            --[60637] = true, -- Flurry -- Werewolf
+            --[60638] = true, -- Flurry -- Werewolf
+            --[60639] = true, -- Flurry -- Werewolf
+            --[60640] = true, -- Flurry -- Werewolf
+            --[44055] = true, -- Devour -- Werewolf
+            --[44054] = true, -- Devour -- Werewolf
+            --[5785] = true, -- Blood Scent -- Werewolf
+            --[58529] = true, -- Blood Scent -- Werewolf
+            --[27329] = true, -- Houndsman Transform -- Werewolf
+            --[27344] = true, -- Houndsman Regen -- Werewolf
+            --[27345] = true, -- Houndsman Stun -- Werewolf
+            --[27362] = true, -- Houndsman Delay -- Werewolf
+            --[27365] = true, -- MT Houndsman Removal -- Werewolf
+            --[27382] = true, -- MT Houndsman -- Werewolf
+            
+            [4323] = true, -- Ice Bolt -- Wraith
+            [4337] = true, -- Winter's Reach -- Wraith
+            [4346] = true, -- Winter's Reach -- Wraith
+            [43146] = true, -- Winter's Reach -- Wraith
+            
+            [2954] = true, -- Swipe -- Zombie
+            [13972] = true, -- Swipe -- Zombie
+            [63614] = true, -- Swipe -- Zombie
+            [2969] = true, -- Pound -- Zombie
+            [2960] = true, -- Vomit -- Zombie
+            [30347] = true, -- Vomit -- Zombie
             
             -- DWEMER
             
@@ -8293,133 +8432,6 @@ debugAuras                  = {
             [18073] = true, -- Wispmother Surround Clone 2 -- Wispmother
             [18066] = true, -- Wispmother Surround -- Wispmother
             [19069] = true, -- Rain of Wisps -- Wispmother
-            
-            -- UNDEAD
-            
-            [38828] = true, -- Desecrated Ground -- Desecrated Ground
-            [69900] = true, -- Desecrated Ground -- Desecrated Ground
-            [69905] = true, -- Desecrated Ground -- Desecrated Ground
-            [38834] = true, -- Desecrated Ground Snare -- Desecrated Ground
-            [69950] = true, -- Desecrated Ground -- Desecrated Ground
-            [38829] = true, -- Desecrated Ground Bonus -- Desecrated Ground
-            [38831] = true, -- Desecrated Ground -- Desecrated Ground
-            [38832] = true, -- Undead Synergy -- Desecrated Ground
-            
-            [25719] = true, -- Check for Vampire Allies -- Bloodfiend
-            [8569] = true, -- Devastating Leap -- Bloodfiend
-            [32023] = true, -- Generic Stagger Enemy -- Bloodfiend
-            [48940] = true, -- Ambush -- Bloodfiend
-            
-            [5028] = true, -- Strike -- Bone Colossus
-            [5050] = true, -- Bone Saw -- Bone Colossus
-            [30590] = true, -- Bone Saw -- Bone Colossus
-            [17206] = true, -- Bone Saw -- Bone Colossus
-            [5030] = true, -- Voice to Wake the Dead -- Bone Colossus
-            [5044] = true, -- Risen Dead -- Bone Colossus
-            [88133] = true, -- Voice to Wake the Dead -- Bone Colossus
-            [5033] = true, -- Voice to Wake the Dead -- Bone Colossus
-            [5035] = true, -- Voice to Wake the Dead -- Bone Colossus
-            [5036] = true, -- Voice to Wake the Dead -- Bone Colossus
-            [17221] = true, -- Slap -- Bone Colossus
-            [17207] = true, -- Necromantic Implosion -- Bone Colossus
-            [88828] = true, -- Necromantic Implosion -- Bone Colossus
-            [89533] = true, -- Necromantic Implosion -- Bone Colossus
-            [49128] = true, -- Necromantic Implosion -- Bone Colossus
-            [88132] = true, -- Voice to Wake the Dead -- Bone Colossus
-            
-            [8550] = true, -- Slash -- Bone Flayer
-            [8551] = true, -- Slash -- Bone Flayer
-            [8564] = true, -- Rending Slash -- Bone Flayer
-            [8554] = true, -- Flurry -- Bone Flayer
-            [9194] = true, -- Flurry -- Bone Flayer
-            
-            [72980] = true, -- Singing Strike -- Defiled Aegis
-            [72981] = true, -- Singing Slice -- Defiled Aegis
-            [72979] = true, -- Dissonant Blow -- Defiled Aegis
-            [72995] = true, -- Symphony of Blades -- Defiled Aegis
-            [72996] = true, -- Symphony of Blades -- Defiled Aegis
-            [77612] = true, -- Symphony of Blades -- Defiled Aegis
-            
-            [73020] = true, -- Shattered Harmony -- Defiled Aegis
-            [76180] = true, -- Shattered Harmony -- Defiled Aegis
-            [73021] = true, -- Shattered Harmony -- Defiled Aegis
-            [73025] = true, -- Tomb Guardian -- Defiled Aegis
-            [73322] = true, -- Shattered Harmony -- Defiled Aegis
-            [74993] = true, -- Shattered Harmony -- Defiled Aegis
-            
-            [00000] = true, --
-            [00000] = true, --
-            [00000] = true, --
-            
-            [8812] = true, -- Double Strike -- Ghost
-            [8813] = true, -- Double Strike -- Ghost
-            [18514] = true, -- Chill Touch -- Ghost
-            [18515] = true, -- Chill Touch -- Ghost
-            [18766] = true, -- Haunting Spectre -- Ghost
-            [19137] = true, -- Haunting Spectre -- Ghost
-            [19138] = true, -- Haunting Spectre -- Ghost
-            [19140] = true, -- Haunting Spectre -- Ghost
-            
-            [9541] = true, -- Necrotic Spear -- Lich
-            [20756] = true, -- Defiled Ground -- Lich
-            [20812] = true, -- Defiled Ground -- Lich
-            [22525] = true, -- Defiled Ground -- Lich
-            [73925] = true, -- Soul Cage -- Lich
-            [22602] = true, -- Soul Cage -- Lich
-            [73929] = true, -- Soul Cage -- Lich
-            [73931] = true, -- Soul Rupture -- Lich
-            [73926] = true, -- Soul Cage -- Lich
-            [73937] = true, -- Soul Cage -- Lich
-            [73939] = true, -- Soul Rupture -- Lich
-            [73934] = true, -- Soul Cage -- Lich
-            
-            [49702] = true, -- Entropic Flare -- Spellfiend
-            [50456] = true, -- Entropic Flare -- Spellfiend
-            [50182] = true, -- Consuming Energy -- Spellfiend
-            [50183] = true, -- Consuming Energy -- Spellfiend
-            [52398] = true, -- Consuming Energy -- Spellfiend
-            
-            [68735] = true, -- Vampiric Drain -- Vampire
-            [68750] = true, -- Vampiric Drain -- Vampire
-            [68765] = true, -- Vampiric Drain -- Vampire
-            [68771] = true, -- Vampiric Drain Heal Dummy -- Vampire
-            [68772] = true, -- Vampiric Drain -- Vampire
-            
-            [2849] = true, -- Claw Slash -- Werewolf
-            [4651] = true, -- Claw Slash -- Werewolf
-            [2850] = true, -- Swipe -- Werewolf
-            [2867] = true, -- Crushing Leap -- Werewolf
-            [45576] = true, -- Generic Stagger Enemy -- Werewolf
-            [3415] = true, -- Flurry -- Werewolf
-            [13950] = true, -- Flurry -- Werewolf
-            [9467] = true, -- Flurry -- Werewolf
-            [60636] = true, -- Flurry -- Werewolf
-            [60637] = true, -- Flurry -- Werewolf
-            [60638] = true, -- Flurry -- Werewolf
-            [60639] = true, -- Flurry -- Werewolf
-            [60640] = true, -- Flurry -- Werewolf
-            [44055] = true, -- Devour -- Werewolf
-            [44054] = true, -- Devour -- Werewolf
-            [5785] = true, -- Blood Scent -- Werewolf
-            [58529] = true, -- Blood Scent -- Werewolf
-            [27329] = true, -- Houndsman Transform -- Werewolf
-            [27344] = true, -- Houndsman Regen -- Werewolf
-            [27345] = true, -- Houndsman Stun -- Werewolf
-            [27362] = true, -- Houndsman Delay -- Werewolf
-            [27365] = true, -- MT Houndsman Removal -- Werewolf
-            [27382] = true, -- MT Houndsman -- Werewolf
-            
-            [4323] = true, -- Ice Bolt -- Wraith
-            [4337] = true, -- Winter's Reach -- Wraith
-            [4346] = true, -- Winter's Reach -- Wraith
-            [43146] = true, -- Winter's Reach -- Wraith
-            
-            [2954] = true, -- Swipe -- Zombie
-            [13972] = true, -- Swipe -- Zombie
-            [63614] = true, -- Swipe -- Zombie
-            [2969] = true, -- Pound -- Zombie
-            [2960] = true, -- Vomit -- Zombie
-            [30347] = true, -- Vomit -- Zombie
             
             ---------------------------------
             -- MORROWIND DLC NPCS
