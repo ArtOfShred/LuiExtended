@@ -23,15 +23,17 @@ local hidePlayerEffects = { }
 local hideTargetEffects = { }
 
 local windowTitles = {
-    playerb     = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS),
-    playerd     = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS),
-    player1     = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS),
-    player2     = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS),
-    player_long = GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS),
-    targetb     = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS),
-    targetd     = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS),
-    target1     = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS),
-    target2     = GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS),
+    playerb     		= GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS),
+    playerd     		= GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS),
+    player1     		= GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERBUFFS),
+    player2     		= GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERDEBUFFS),
+    player_long 		= GetString(SI_LUIE_SCB_WINDOWTITLE_PLAYERLONGTERMEFFECTS),
+    targetb     		= GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS),
+    targetd     		= GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS),
+    target1     		= GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETBUFFS),
+    target2     		= GetString(SI_LUIE_SCB_WINDOWTITLE_TARGETDEBUFFS),
+	prominentbuffs		= GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTBUFFS),
+	prominentdebuffs	= GetString(SI_LUIE_SCB_WINDOWTITLE_PROMINENTDEBUFFS),
 }
 
 SCB.Enabled = false
@@ -120,7 +122,7 @@ local containerRouting       = {}
 local g_actionBar            = {}  -- TODO: Remove once new ground target effect function is fully implemented.
 local g_lastCast             = 0 -- TODO: Remove once new ground target effect function is fully implemented.
 local g_currentDuelTarget    = nil
-local g_effectsList          = { player1 = {}, player2 = {}, reticleover1 = {}, reticleover2 = {}, ground = {}, saved = {} }
+local g_effectsList          = { player1 = {}, player2 = {}, reticleover1 = {}, reticleover2 = {}, ground = {}, saved = {}, promb = {}, promd = {}, promg = {} }
 local g_pendingGroundAbility = nil
 
 
@@ -403,6 +405,35 @@ function SCB.Initialize( enabled )
         SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment1 )
         SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment2 )
     end
+	
+	-- Setup Prominent Buffs
+	uiTlw.prominentbuffs = UI.TopLevel( nil, nil )
+	uiTlw.prominentbuffs:SetHandler( "OnMoveStop", function(self)
+			SCB.SV.prominentbOffsetX = self:GetLeft()
+			SCB.SV.prominentbOffsetY = self:GetTop()
+		end )
+	uiTlw.prominentdebuffs = UI.TopLevel( nil, nil )
+	uiTlw.prominentdebuffs:SetHandler( "OnMoveStop", function(self)
+			SCB.SV.prominentdOffsetX = self:GetLeft()
+			SCB.SV.prominentdOffsetY = self:GetTop()
+		end )
+		
+	uiTlw.prominentbuffs.alignVertical = true
+	uiTlw.prominentdebuffs.alignVertical = true
+
+	containerRouting.promb = "prominentbuffs"
+	containerRouting.promd = "prominentdebuffs"
+	containerRouting.promg = "prominentdebuffs"
+	
+	local fragmentP1 = ZO_HUDFadeSceneFragment:New(uiTlw.prominentbuffs, 0, 0)
+	local fragmentP2 = ZO_HUDFadeSceneFragment:New(uiTlw.prominentdebuffs, 0, 0)
+
+	SCENE_MANAGER:GetScene("hud"):AddFragment( fragmentP1 )
+	SCENE_MANAGER:GetScene("hud"):AddFragment( fragmentP2 )
+	SCENE_MANAGER:GetScene("hudui"):AddFragment( fragmentP1 )
+	SCENE_MANAGER:GetScene("hudui"):AddFragment( fragmentP2 )
+	SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragmentP1 )
+	SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragmentP2 )
 
     -- Separate container for players long buffs
     if true then
@@ -443,7 +474,7 @@ function SCB.Initialize( enabled )
             -- Create background areas for preview position purposes
             --uiTlw[v].preview = UI.Backdrop( uiTlw[v], "fill", nil, nil, nil, true )
             uiTlw[v].preview = UI.Texture( uiTlw[v], "fill", nil, "/esoui/art/miscellaneous/inset_bg.dds", DL_BACKGROUND, true )
-            uiTlw[v].previewLabel = UI.Label( uiTlw[v].preview, {CENTER,CENTER}, nil, nil, "ZoFontGameMedium", windowTitles[v] .. (SCB.SV.lockPositionToUnitFrames and v ~= "player_long" and " (locked)" or ""), false )
+            uiTlw[v].previewLabel = UI.Label( uiTlw[v].preview, {CENTER,CENTER}, nil, nil, "ZoFontGameMedium", windowTitles[v] .. (SCB.SV.lockPositionToUnitFrames and (v ~= "player_long" and v ~= "prominentbuffs" and v ~= "prominentdebuffs") and " (locked)" or ""), false )
 
             -- create control that will hold the icons
             uiTlw[v].prevIconsCount = 0
@@ -833,6 +864,10 @@ function SCB.ResetTlwPosition()
     SCB.SV.playerVOffsetY = nil
     SCB.SV.playerHOffsetX = nil
     SCB.SV.playerHOffsetY = nil
+	SCB.SV.prominentbOffsetX = nil
+	SCB.SV.prominentbOffsetY = nil
+	SCB.SV.prominentdOffsetX = nil
+	SCB.SV.prominentdOffsetY = nil
     SCB.SetTlwPosition()
 end
 
@@ -894,6 +929,25 @@ function SCB.SetTlwPosition()
             end
         end
     end
+	
+	-- Setup Prominent Buffs Position
+	if uiTlw.prominentbuffs then
+		uiTlw.prominentbuffs:ClearAnchors()
+		if SCB.SV.prominentbOffsetX ~= nil and SCB.SV.prominentbOffsetY ~= nil then
+			uiTlw.prominentbuffs:SetAnchor( CENTER, GuiRoot, CENTER, SCB.SV.prominentbOffsetX, SCB.SV.prominentbOffsetY )
+		else
+			uiTlw.prominentbuffs:SetAnchor( CENTER, GuiRoot, CENTER, -340, -100 )
+		end
+	end
+	
+	if uiTlw.prominentdebuffs then
+		uiTlw.prominentdebuffs:ClearAnchors()
+		if SCB.SV.prominentdOffsetX ~= nil and SCB.SV.prominentdOffsetY ~= nil then
+			uiTlw.prominentdebuffs:SetAnchor( CENTER, GuiRoot, CENTER, SCB.SV.prominentdOffsetX, SCB.SV.prominentdOffsetY )
+		else
+			uiTlw.prominentdebuffs:SetAnchor( CENTER, GuiRoot, CENTER, 340, -100 )
+		end
+	end
 end
 
 -- Unlock windows for moving. Called from Settings Menu.
@@ -922,6 +976,14 @@ function SCB.SetMovingState(state)
     if uiTlw.player_long then
         uiTlw.player_long:SetMouseEnabled( state )
         uiTlw.player_long:SetMovable( state )
+    end
+	if uiTlw.prominentbuffs then
+		uiTlw.prominentbuffs:SetMouseEnabled( state )
+        uiTlw.prominentbuffs:SetMovable( state )
+    end
+	if uiTlw.prominentdebuffs then
+		uiTlw.prominentdebuffs:SetMouseEnabled( state )
+        uiTlw.prominentdebuffs:SetMovable( state )
     end
 
     -- Show/hide preview
@@ -997,6 +1059,12 @@ function SCB.Reset()
             uiTlw.player_long:SetDimensions( 500, SCB.SV.IconSize + 6 )
         end
     end
+	
+	-- Prominent buffs & debuffs
+	if uiTlw.prominentbuffs then
+		uiTlw.prominentbuffs:SetDimensions( SCB.SV.IconSize + 6, 400 )
+		uiTlw.prominentdebuffs:SetDimensions( SCB.SV.IconSize + 6, 400 )
+	end
 
     -- Reset alignment and sort
     SCB.SetIconsAlignment( SCB.SV.Alignment )
@@ -1119,6 +1187,12 @@ function SCB.CreateSingleIcon(container, AnchorItem)
         buff.cd:SetAnchor( BOTTOMRIGHT, buff, BOTTOMRIGHT, -1, -1 )
         buff.cd:SetDrawLayer(DL_BACKGROUND)
     end
+	
+	if container == "prominentbuffs" or container == "prominentdebuffs" then
+		buff.name = UI.Label( buff, nil, nil, nil, g_buffsFont, nil, false )
+		buff.name:SetAnchor(TOPRIGHT, buff, LEFT, -4, 0)
+		buff.name:SetAnchor(BOTTOMRIGHT, buff, LEFT, -4, 0)
+	end
 
     SCB.ResetSingleIcon(container, buff, AnchorItem)
     return buff
@@ -1221,9 +1295,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                 local duration = endTime - beginTime
                 
                 local groundType = { }
-                groundType[1] = { info = E.EffectGroundDisplay[abilityId].buff, context = "player1", type = 1 }
-                groundType[2] = { info = E.EffectGroundDisplay[abilityId].debuff, context = "player2", type = BUFF_EFFECT_TYPE_DEBUFF }
-                groundType[3] = { info = E.EffectGroundDisplay[abilityId].ground, context = "ground", type = BUFF_EFFECT_TYPE_DEBUFF }
+                groundType[1] = { info = E.EffectGroundDisplay[abilityId].buff, context = (E.ProminentBuffs[abilityId] or E.ProminentBuffs[abilityName]) and "promb" or "player1", type = 1 }
+                groundType[2] = { info = E.EffectGroundDisplay[abilityId].debuff, context = (E.ProminentDebuffs[abilityId] or E.ProminentDebuffs[abilityName]) and "promb" or "player2", type = BUFF_EFFECT_TYPE_DEBUFF }
+                groundType[3] = { info = E.EffectGroundDisplay[abilityId].ground, context = (E.ProminentDebuffs[abilityId] or E.ProminentDebuffs[abilityName]) and "promg" or "ground", type = BUFF_EFFECT_TYPE_DEBUFF }
                 iconName = E.EffectGroundDisplay[abilityId].icon or iconName
                 effectName = E.EffectGroundDisplay[abilityId].name or effectName
                 stackCount = E.EffectGroundDisplay[abilityId].stack or stackCount
@@ -1338,7 +1412,14 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     if unitTag == "reticleover" and abilityId == 92428 and not IsUnitPlayer('reticleover') then return end
 
     -- Where the new icon will go into
-    local context = unitTag .. effectType
+    local context
+	if (E.ProminentDebuffs[abilityId] or E.ProminentDebuffs[effectName]) then 
+		context = "promd"
+	elseif (E.ProminentBuffs[abilityId] or E.ProminentBuffs[effectName]) then
+		context = "promb"
+	else
+		context = unitTag .. effectType
+	end
 
     -- Exit here if there is no container to hold this effect
     if not containerRouting[context] then
@@ -2250,6 +2331,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
 
         -- Calculate remaining time
         local remain = ( effect.ends ~= nil ) and ( effect.ends - currentTime ) or nil
+		local name = ( effect.name ~= nil) and effect.name or nil
 
         local buff = uiTlw[container].icons[index]
 
@@ -2298,6 +2380,11 @@ function SCB.updateIcons( currentTime, sortedList, container )
                 buff.label:SetText( E.IsToggle[effect.name] and "T" or nil )
                 -- buff.label:SetText( E.IsToggle[effect.name] and "T" or E.IsVampStage(effect) and (E.IsVampStage(effect)) or nil ) -- Deprecated
             end
+			
+			if buff.name then
+				buff.name:SetText(effect.name)
+				buff.name:SetHidden(false)
+			end
         end
         
         if effect.stack and effect.stack > 0 then

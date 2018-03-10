@@ -2,8 +2,11 @@
 -- CombatText namespace
 LUIE.CombatText     = {}
 
-local LMP = LibStub("LibMediaProvider-1.0")
-local CT  = LUIE.CombatText
+-- Performance Enhancement
+local CT    = LUIE.CombatText
+local LMP   = LibStub("LibMediaProvider-1.0")
+local pairs = pairs
+
 
 local moduleName    = LUIE.name .. "_CombatText"
 

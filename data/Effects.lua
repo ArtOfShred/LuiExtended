@@ -361,6 +361,15 @@ E.DebuffDisplayOverrideName = {
     ['Minor Vulnerability']             = true,
 }
 
+E.ProminentBuffs = { 
+	['Hurricane'] 						= true,
+	['Critical Surge']					= true,
+}
+
+E.ProminentDebuffs = { 
+
+}
+
 -- Adds this aura to a list of fake GROUND auras to display
 -- Optional: name, icon
 -- Required: buff, debuff, ground = true/false
