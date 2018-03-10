@@ -2200,3 +2200,4 @@ ZO_CreateStringId("SI_LUIE_SKILL_EMPOWER_ATRONACH_FLAME",               "Empower
 ZO_CreateStringId("SI_LUIE_SKILL_EMPOWER_ATRONACH_FROST",               "Empower Atronach: Frost")
 ZO_CreateStringId("SI_LUIE_SKILL_EMPOWER_ATRONACH_STORM",               "Empower Atronach: Storm")
 ZO_CreateStringId("SI_LUIE_SKILL_LIGHTNING_PULSE",                      "Lightning Pulse")
+ZO_CreateStringId("SI_LUIE_SKILL_COLOSSAL_STOMP",                       "Colossal Stomp")

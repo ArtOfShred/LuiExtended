@@ -307,6 +307,7 @@ E.DebuffDisplayOverrideId = {
     [2727] = true, -- Off-Balance (Generic)
     
     -- Player (Sets)
+    [34386] = true, -- Night Mother's Gaze
     [51315] = true, -- Destructive Mage (Aether ... of Destruction)
     [60416] = true, -- Sunderflame
     [93001] = true, -- Mad Tinkerer (Stun from Fabricant)
@@ -363,10 +364,12 @@ E.DebuffDisplayOverrideName = {
 
 E.ProminentBuffs = { 
 	['Hurricane'] 						= true,
-	['Critical Surge']					= true,
 }
 
 E.ProminentDebuffs = { 
+
+    ['Critical Surge']					= true,
+    ['Wall of Fire']                    = true,
 
 }
 
@@ -5192,11 +5195,9 @@ E.EffectOverride = {
     [95855] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_shockwave.dds' }, -- Shockwave (Watcher)
     [95856] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_shockwave.dds', hide = true }, -- Shockwave (Watcher)
     [53880] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_shockwave.dds' }, -- Shockwave (Watcher)
-    
     [9219] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds', hide = true }, -- Doom-Truth's Gaze (Watcher)
     [9220] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds' }, -- Doom-Truth's Gaze (Watcher)
     [14518] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds' }, -- Doom-Truth's Gaze (Watcher)
-    
     [14425] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds', hide = true }, -- Doom-Truth's Gaze (Watcher)
     [14426] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds' }, -- Doom-Truth's Gaze (Watcher)
     [14546] = { icon = 'LuiExtended/media/icons/abilities/ability_watcher_doom-truths_gaze.dds' }, -- Doom-Truth's Gaze (Watcher)

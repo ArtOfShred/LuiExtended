@@ -504,7 +504,7 @@ A.Skill_Dusks_Howl                  = 6412
 
 -- Undead
 A.Skill_Desecrated_Ground           = 38828
-A.Skill_Colossal_Stomp              = 'Colossal Stomp' -- TODO: LOCALIZE WHEN GITHUB MERGE COMPLETE
+A.Skill_Colossal_Stomp              = GetString(SI_LUIE_SKILL_COLOSSAL_STOMP)
 A.Skill_Defiled_Ground              = 22521
 A.Skill_Soul_Rupture                = 73931
 A.Skill_Winters_Reach               = 4337

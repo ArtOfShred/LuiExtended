@@ -122,7 +122,7 @@ local containerRouting       = {}
 local g_actionBar            = {}  -- TODO: Remove once new ground target effect function is fully implemented.
 local g_lastCast             = 0 -- TODO: Remove once new ground target effect function is fully implemented.
 local g_currentDuelTarget    = nil
-local g_effectsList          = { player1 = {}, player2 = {}, reticleover1 = {}, reticleover2 = {}, ground = {}, saved = {}, promb = {}, promd = {}, promg = {} }
+local g_effectsList          = { player1 = {}, player2 = {}, reticleover1 = {}, reticleover2 = {}, ground = {}, saved = {}, promb_ground = {}, promb_target = {}, promb_player = {}, promd_ground = {}, promd_target = {}, promd_player = {} }
 local g_pendingGroundAbility = nil
 
 
@@ -421,9 +421,12 @@ function SCB.Initialize( enabled )
 	uiTlw.prominentbuffs.alignVertical = true
 	uiTlw.prominentdebuffs.alignVertical = true
 
-	containerRouting.promb = "prominentbuffs"
-	containerRouting.promd = "prominentdebuffs"
-	containerRouting.promg = "prominentdebuffs"
+	containerRouting.promb_ground = "prominentbuffs"
+	containerRouting.promb_target = "prominentbuffs"
+	containerRouting.promb_player = "prominentbuffs"
+	containerRouting.promd_ground = "prominentdebuffs"
+	containerRouting.promd_target = "prominentdebuffs"
+	containerRouting.promd_player = "prominentdebuffs"
 	
 	local fragmentP1 = ZO_HUDFadeSceneFragment:New(uiTlw.prominentbuffs, 0, 0)
 	local fragmentP2 = ZO_HUDFadeSceneFragment:New(uiTlw.prominentdebuffs, 0, 0)
@@ -1188,10 +1191,16 @@ function SCB.CreateSingleIcon(container, AnchorItem)
         buff.cd:SetDrawLayer(DL_BACKGROUND)
     end
 	
-	if container == "prominentbuffs" or container == "prominentdebuffs" then
+	if container == "prominentbuffs" then
 		buff.name = UI.Label( buff, nil, nil, nil, g_buffsFont, nil, false )
 		buff.name:SetAnchor(TOPRIGHT, buff, LEFT, -4, 0)
 		buff.name:SetAnchor(BOTTOMRIGHT, buff, LEFT, -4, 0)
+	end
+    
+    if container == "prominentdebuffs" then
+    	buff.name = UI.Label( buff, nil, nil, nil, g_buffsFont, nil, false )
+		buff.name:SetAnchor(TOPLEFT, buff, RIGHT, 4, 0)
+		buff.name:SetAnchor(BOTTOMLEFT, buff, RIGHT, 4, 0)
 	end
 
     SCB.ResetSingleIcon(container, buff, AnchorItem)
@@ -1295,16 +1304,26 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                 local duration = endTime - beginTime
                 
                 local groundType = { }
-                groundType[1] = { info = E.EffectGroundDisplay[abilityId].buff, context = (E.ProminentBuffs[abilityId] or E.ProminentBuffs[abilityName]) and "promb" or "player1", type = 1 }
-                groundType[2] = { info = E.EffectGroundDisplay[abilityId].debuff, context = (E.ProminentDebuffs[abilityId] or E.ProminentDebuffs[abilityName]) and "promb" or "player2", type = BUFF_EFFECT_TYPE_DEBUFF }
-                groundType[3] = { info = E.EffectGroundDisplay[abilityId].ground, context = (E.ProminentDebuffs[abilityId] or E.ProminentDebuffs[abilityName]) and "promg" or "ground", type = BUFF_EFFECT_TYPE_DEBUFF }
+                groundType[1] = { info = E.EffectGroundDisplay[abilityId].buff, context = "player1", promB = "promb_player", promD = "promd_player", type = 1 }
+                groundType[2] = { info = E.EffectGroundDisplay[abilityId].debuff, context = "player2", promB = "promb_target", promD = "promd_target", type = BUFF_EFFECT_TYPE_DEBUFF }
+                groundType[3] = { info = E.EffectGroundDisplay[abilityId].ground, context = "ground", promB = "promb_ground", promD = "promd_ground", type = BUFF_EFFECT_TYPE_DEBUFF }
                 iconName = E.EffectGroundDisplay[abilityId].icon or iconName
                 effectName = E.EffectGroundDisplay[abilityId].name or effectName
                 stackCount = E.EffectGroundDisplay[abilityId].stack or stackCount
                 
                 for i = 1, 3 do
                     if groundType[i].info == true then
-                        g_effectsList[groundType[i].context][ abilityId ] = {
+                    
+                        -- Set container context
+                        local context
+                        if (E.ProminentDebuffs[abilityId] or E.ProminentDebuffs[effectName]) then 
+                            context = groundType[i].promD
+                        elseif (E.ProminentBuffs[abilityId] or E.ProminentBuffs[effectName]) then
+                            context = groundType[i].promB
+                        else
+                            context = groundType[i].context
+                        end
+                        g_effectsList[context][ abilityId ] = {
                             target="player", type=groundType[i].type,
                             id=abilityId, name=effectName, icon=iconName,
                             dur=1000*duration, starts=1000*beginTime, ends=(duration > 0) and (1000*endTime) or nil,
@@ -1412,13 +1431,19 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
     if unitTag == "reticleover" and abilityId == 92428 and not IsUnitPlayer('reticleover') then return end
 
     -- Where the new icon will go into
-    local context
+    local context = unitTag .. effectType
 	if (E.ProminentDebuffs[abilityId] or E.ProminentDebuffs[effectName]) then 
-		context = "promd"
+		if context == "player1" then
+            context = "promd_player"
+        elseif context == "reticleover2" then
+            context = "promd_target"
+        end
 	elseif (E.ProminentBuffs[abilityId] or E.ProminentBuffs[effectName]) then
-		context = "promb"
-	else
-		context = unitTag .. effectType
+		if context == "player1" then
+            context = "promb_player"
+        elseif context == "reticleover2" then
+            context = "promb_target"
+        end
 	end
 
     -- Exit here if there is no container to hold this effect
