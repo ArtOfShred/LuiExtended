@@ -738,6 +738,9 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISEPLAYER_TP",    "Display
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISETARGET",       "Show Disguised - Target")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISETARGET_TP",    "Display special buff icon when target is in a relevant area and is actively disguised from enemies.")
 
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_HEADER",                       "Prominent Buffs & Debuffs")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DESCRIPTION",                  "This whitelist allows you to display important buffs and debuffs in separate containers with the addition of a label and progress bar.\n\nEligible Effects: Buffs on Player, Debuffs on Target, Ground Targeted Effects\n\nYou can add buffs and debuffs to EITHER container. For example if you'd like to track the duration of Hurricane with your other dots, you can add Hurricane to the Prominent Debuffs list.")
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- CHAT ANNOUNCEMENTS -- LAM --

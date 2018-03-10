@@ -1606,7 +1606,7 @@ function LUIE_CreateSettings()
         },
     }
 
-    -- Buffs&Debuffs - Short Therm Effect Filters Options Submenu
+    -- Buffs&Debuffs - Short Term Effect Filters Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_BUFF_MISC_HEADER),
@@ -1722,6 +1722,63 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
             },
         },
+    }
+    
+    -- Buffs&Debuffs - Prominent Buffs & Debuffs Options Submenu
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_BUFF_PROM_HEADER),
+        controls = {
+            -- Prominent Buffs & Debuffs Description
+            {
+                type = "description",
+                text = GetString(SI_LUIE_LAM_BUFF_PROM_DESCRIPTION),
+            },
+            
+            --[[
+            (check) ProminentLabel                   = true, -- Enable label
+            (scroll) ProminentLabelFontFace           = "Fontin Regular", -- Sub Option (Label): Font Face
+            (dropdown) ProminentLabelFontStyle          = "outline", -- Sub Option (Label): Font Style
+            (slider) ProminentLabelFontSize           = 16, -- Sub Option (Label): Font Size
+            (check) ProminentProgress                = true, -- Enable Progress Bar
+            (picker) ProminentProgressBuffC1          = { 1, 1, 1 }, -- Sub Option (Progress Bar): Buff Gradient Color 1
+            (picker) ProminentProgressBuffC2          = { 1, 1, 1 }, -- Sub Option (Progress Bar): Buff Gradient Color 2
+            (picker) ProminentProgressDebuffC1        = { 1, 1, 1 }, -- Sub Option (Progress Bar): Debuff Gradient Color 1
+            (picker) ProminentProgressDebuffC2        = { 1, 1, 1 }, -- Sub Option (Progress Bar): Debuff Gradient Color 2
+            
+            -- DONE -- Alignment --
+            -- DONE -- Reverse Sort Order --
+            
+            (dropdown) ProminentBuffLabelDirection      = "Right", -- Label/Progress Bar Direction for Buffs
+            (dropdown) ProminentDebuffLabelDirection    = "Left", -- Label/Progress Bar Direction for Debuff
+            ]]
+            
+            --[[{       -- ProminentAlignment -- default: "Bottom"
+                -- Prominent Buffs Alignment
+                type = "dropdown",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_VERT)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VERT_TP),
+                choices = { "Top", "Middle", "Bottom" },
+                getFunc = function() return LUIE.SpellCastBuffs.SV.AlignmentLongVert end,
+                setFunc = LUIE.SpellCastBuffs.SetIconsAlignmentLongVert,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.AlignmentLongVert,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffects_Player and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparate and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 2 ) end,
+            },]]--
+            
+            {
+                -- Prominent Buffs Reverse Sort Order
+                type = "checkbox",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_REVERSE_ORDER)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_REVERSE_ORDER_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ProminentReverseSort end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.ProminentReverseSort = value LUIE.SpellCastBuffs.Reset() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ProminentReverseSort,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
+            },
+    
+       },
     }
     
     -- Debug Options

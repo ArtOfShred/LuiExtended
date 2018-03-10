@@ -112,6 +112,23 @@ SCB.D = {
     ShowDebugCombat                  = false,
     ShowDebugEffect                  = false,
     HideReduce                       = true,
+    
+    -- PROMINENT BUFFS & DEBUFFS -- Remove comments when implemented
+    ProminentLabel                   = true, -- Enable label
+    ProminentLabelFontFace           = "Fontin Regular", -- Sub Option (Label): Font Face
+    ProminentLabelFontStyle          = "outline", -- Sub Option (Label): Font Style
+    ProminentLabelFontSize           = 16, -- Sub Option (Label): Font Size
+    ProminentProgress                = true, -- Enable Progress Bar
+    ProminentProgressBuffC1          = { 1, 1, 1 }, -- Sub Option (Progress Bar): Buff Gradient Color 1
+    ProminentProgressBuffC2          = { 1, 1, 1 }, -- Sub Option (Progress Bar): Buff Gradient Color 2
+    ProminentProgressDebuffC1        = { 1, 1, 1 }, -- Sub Option (Progress Bar): Debuff Gradient Color 1
+    ProminentProgressDebuffC2        = { 1, 1, 1 }, -- Sub Option (Progress Bar): Debuff Gradient Color 2
+    ProminentAlignment               = "Bottom", -- Sort Order (Align to Top, Center, Bottom)
+    ProminentReverseSort             = false, -- Reverse the buff sorting order (just like Long term effects)
+    ProminentBuffLabelDirection      = "Right", -- Label/Progress Bar Direction for Buffs
+    ProminentDebuffLabelDirection    = "Left", -- Label/Progress Bar Direction for Debuff
+    -- PROMINENT BUFFS & DEBUFFS -- Remove comments when implemented
+    
 }
 SCB.SV = nil
 
