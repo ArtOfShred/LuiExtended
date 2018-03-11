@@ -741,6 +741,35 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISETARGET_TP",    "Display
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_HEADER",                       "Prominent Buffs & Debuffs")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DESCRIPTION",                  "This whitelist allows you to display important buffs and debuffs in separate containers with the addition of a label and progress bar.\n\nEligible Effects: Buffs on Player, Debuffs on Target, Ground Targeted Effects\n\nYou can add buffs and debuffs to EITHER container. For example if you'd like to track the duration of Hurricane with your other dots, you can add Hurricane to the Prominent Debuffs list.")
 
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_LABEL",						"Display Ability Name Label")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_LABEL_TP",						"Toggle the display of a label next to prominent auras with the Ability Name.")
+
+
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_FONTFACE",						"Label Font Face")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_FONTFACE_TP",					"Choose the font face for the prominent auras Ability Name label.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_FONTSTYLE",					"Label Font Style")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_FONTSTYLE_TP",					"Choose the font style for the prominent auras Ability Name label.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_FONTSIZE",						"Label Font Size")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_FONTSIZE_TP",					"Choose the font size for the prominent auras Ability Name label.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR",					"Display Progress Bar")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR_TP",				"Toggle the display of a progress bar next to prominent auras.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_COLORBUFF1",					"Buff Gradient Color (Start)")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_COLORBUFF1_TP",				"Choose the start gradient color for the progress bar for prominent buffs.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_COLORBUFF2",					"Buff Gradient Color (End)")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_COLORBUFF2_TP",				"Choose the end gradient color for the progress bar for prominent buffs.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF1",					"Debuff Gradient Color (Start)")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF1_TP",				"Choose the start gradient color for the progress bar for prominent debuffs.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF2",					"Debuff Gradient Color (End)")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF2_TP",				"Choose the end gradient color for the progress bar for prominent debuffs.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_ALIGNMENT",					"Buff & Debuff Alignment")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_ALIGNMENT_TP",					"Select whether debuffs anchor from the top, bottom, or center of the prominent aura containers.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_REVERSESORT",					"Reverse Sort Order for Prominent Auras")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_REVERSESORT_TP",				"Enable to toggle the ascending/descending direction of buff sorting for prominent aura containers.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFFLABELDIRECTION",			"Label & Progress Bar Orientation (Buffs)")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFFLABELDIRECTION_TP",		"Choose whether to display the Ability Name Label and Progress bar to the left or right of prominent buffs.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION",			"Label & Progress Bar Orientation (Debuffs)")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION_TP",		"Choose whether to display the Ability Name Label and Progress bar to the left or right of prominent debuffs.")
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- CHAT ANNOUNCEMENTS -- LAM --

@@ -1734,43 +1734,168 @@ function LUIE_CreateSettings()
                 type = "description",
                 text = GetString(SI_LUIE_LAM_BUFF_PROM_DESCRIPTION),
             },
-            
-            --[[
-            (check) ProminentLabel                   = true, -- Enable label
-            (scroll) ProminentLabelFontFace           = "Fontin Regular", -- Sub Option (Label): Font Face
-            (dropdown) ProminentLabelFontStyle          = "outline", -- Sub Option (Label): Font Style
-            (slider) ProminentLabelFontSize           = 16, -- Sub Option (Label): Font Size
-            (check) ProminentProgress                = true, -- Enable Progress Bar
-            (picker) ProminentProgressBuffC1          = { 1, 1, 1 }, -- Sub Option (Progress Bar): Buff Gradient Color 1
-            (picker) ProminentProgressBuffC2          = { 1, 1, 1 }, -- Sub Option (Progress Bar): Buff Gradient Color 2
-            (picker) ProminentProgressDebuffC1        = { 1, 1, 1 }, -- Sub Option (Progress Bar): Debuff Gradient Color 1
-            (picker) ProminentProgressDebuffC2        = { 1, 1, 1 }, -- Sub Option (Progress Bar): Debuff Gradient Color 2
-            
-            -- DONE -- Alignment --
-            -- DONE -- Reverse Sort Order --
-            
-            (dropdown) ProminentBuffLabelDirection      = "Right", -- Label/Progress Bar Direction for Buffs
-            (dropdown) ProminentDebuffLabelDirection    = "Left", -- Label/Progress Bar Direction for Debuff
-            ]]
-            
-            --[[{       -- ProminentAlignment -- default: "Bottom"
-                -- Prominent Buffs Alignment
-                type = "dropdown",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_LONGTERM_VERT)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_LONGTERM_VERT_TP),
-                choices = { "Top", "Middle", "Bottom" },
-                getFunc = function() return LUIE.SpellCastBuffs.SV.AlignmentLongVert end,
-                setFunc = LUIE.SpellCastBuffs.SetIconsAlignmentLongVert,
+			
+			{
+                -- Prominent Buffs Label Toggle
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_PROM_LABEL),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_LABEL_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ProminentLabel end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.ProminentLabel = value LUIE.SpellCastBuffs.Reset() end,
                 width = "full",
-                default = LUIE.SpellCastBuffs.D.AlignmentLongVert,
-                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.LongTermEffects_Player and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparate and LUIE.SpellCastBuffs.SV.LongTermEffectsSeparateAlignment == 2 ) end,
-            },]]--
+                default = LUIE.SpellCastBuffs.D.ProminentLabel,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
+            },
+			
+			{
+                -- Prominent Buffs Label Font Face
+                type = "dropdown",
+                scrollable = true,
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_FONTFACE)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_FONTFACE_TP),
+                choices = FontsList,
+                sort = "name-up",
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ProminentLabelFontFace end,
+                setFunc = function(var) LUIE.SpellCastBuffs.SV.ProminentLabelFontFace = var LUIE.SpellCastBuffs.ApplyFont() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ProminentLabelFontFace,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentLabel ) end,
+            },
+			
+            {
+                -- Prominent Buffs Label Font Size
+                type = "slider",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_FONTSIZE)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_FONTSIZE_TP),
+                min = 10, max = 30, step = 1,
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ProminentLabelFontSize end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.ProminentLabelFontSize = value LUIE.SpellCastBuffs.ApplyFont() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ProminentLabelFontSize,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentLabel ) end,
+            },
+			
+            {
+                -- Prominent Buffs Label Font Style
+                type = "dropdown",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_FONTSTYLE)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_FONTSTYLE_TP),
+                choices = { "normal", "outline", "shadow", "soft-shadow-thick", "soft-shadow-thin", "thick-outline" },
+                sort = "name-up",
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ProminentLabelFontStyle end,
+                setFunc = function(var) LUIE.SpellCastBuffs.SV.ProminentLabelFontStyle = var LUIE.SpellCastBuffs.ApplyFont() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ProminentLabelFontStyle,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentLabel ) end,
+            },
+			
+			{
+                -- Prominent Buffs Progress Bar
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR_TP),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ProminentProgress end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.ProminentProgress = value LUIE.SpellCastBuffs.Reset() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ProminentProgress,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
+            },
+			
+			{
+                -- Prominent Buffs Gradient Color 1
+                type    = "colorpicker",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF1)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF1_TP),
+                getFunc = function() return unpack(LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1) end,
+                setFunc = function(r, g, b, a) LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1 = { r, g, b, a } end,
+				width = "half",
+                default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1[3]},
+				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
+            },
+			
+			{
+                -- Prominent Buffs Gradient Color 2
+                type    = "colorpicker",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF2)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF2_TP),
+                getFunc = function() return unpack(LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2) end,
+                setFunc = function(r, g, b, a) LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2 = { r, g, b, a } end,
+				width = "half",
+                default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2[3]},
+				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
+            },
+			
+			{
+                -- Prominent Debuffs Gradient Color 1
+                type    = "colorpicker",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF1)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF1_TP),
+                getFunc = function() return unpack(LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1) end,
+                setFunc = function(r, g, b, a) LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1 = { r, g, b, a } end,
+				width = "half",
+                default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1[3]},
+				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
+            },
+			
+			{
+                -- Prominent Debuffs Gradient Color 2
+                type    = "colorpicker",
+                name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF2)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF2_TP),
+                getFunc = function() return unpack(LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2) end,
+                setFunc = function(r, g, b, a) LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2 = { r, g, b, a } end,
+				width = "half",
+                default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2[3]},
+				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
+            },
+			
+			{
+				-- Prominent Buffs Label/Progress Bar Direction
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_BUFF_PROM_BUFFLABELDIRECTION),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_BUFFLABELDIRECTION_TP),
+                choices = { "Right", "Left" },
+                sort = "name-up",
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ProminentBuffLabelDirection end,
+                setFunc = function(var) LUIE.SpellCastBuffs.SV.ProminentBuffLabelDirection = var end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ProminentBuffLabelDirection,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and (LUIE.SpellCastBuffs.SV.ProminentLabel or LUIE.SpellCastBuffs.SV.ProminentProgress) ) end,
+            },
+			
+			{
+				-- Prominent Deuffs Label/Progress Bar Direction
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION_TP),
+                choices = { "Right", "Left" },
+                sort = "name-up",
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ProminentDebuffLabelDirection end,
+                setFunc = function(var) LUIE.SpellCastBuffs.SV.ProminentDebuffLabelDirection = var end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ProminentDebuffLabelDirection,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and (LUIE.SpellCastBuffs.SV.ProminentLabel or LUIE.SpellCastBuffs.SV.ProminentProgress) ) end,
+            },
+
+            {
+				-- Prominent Buffs Alignment
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_BUFF_PROM_ALIGNMENT),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_ALIGNMENT_TP),
+                choices = { "Top", "Center", "Bottom" },
+                sort = "name-up",
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ProminentAlignment end,
+                setFunc = function(var) LUIE.SpellCastBuffs.SV.ProminentAlignment = var end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ProminentAlignment,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
+            },
             
             {
                 -- Prominent Buffs Reverse Sort Order
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_REVERSE_ORDER)),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_REVERSE_ORDER_TP),
+                name = GetString(SI_LUIE_LAM_BUFF_PROM_REVERSESORT),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_REVERSESORT),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ProminentReverseSort end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.ProminentReverseSort = value LUIE.SpellCastBuffs.Reset() end,
                 width = "full",

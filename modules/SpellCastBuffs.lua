@@ -153,6 +153,7 @@ local g_playerResurectStage = nil
 --local g_buffsFont = "/LuiExtended/media/fonts/fontin_sans_r.otf|16|outline"
 --local g_buffsFont = "$(MEDIUM_FONT)|17|outline"
 local g_buffsFont
+local g_prominentFont
 
 -- Padding distance between icons
 local g_padding = 0
@@ -1209,15 +1210,15 @@ function SCB.CreateSingleIcon(container, AnchorItem)
     end
 	
 	if container == "prominentbuffs" then
-		buff.name = UI.Label( buff, nil, nil, nil, g_buffsFont, nil, false )
-		buff.name:SetAnchor(TOPRIGHT, buff, LEFT, -4, 0)
-		buff.name:SetAnchor(BOTTOMRIGHT, buff, LEFT, -4, 0)
+		buff.name = UI.Label( buff, nil, nil, nil, g_prominentFont, nil, false )
+		buff.name:SetAnchor(TOPRIGHT, buff, TOPLEFT, -4, (SCB.SV.IconSize * .25) - 2 )
+		buff.name:SetAnchor(BOTTOMRIGHT, buff, BOTTOMLEFT, -4, (SCB.SV.IconSize * .25) - 2 )
 	end
     
     if container == "prominentdebuffs" then
-    	buff.name = UI.Label( buff, nil, nil, nil, g_buffsFont, nil, false )
-		buff.name:SetAnchor(TOPLEFT, buff, RIGHT, 4, 0)
-		buff.name:SetAnchor(BOTTOMLEFT, buff, RIGHT, 4, 0)
+    	buff.name = UI.Label( buff, nil, nil, nil, g_prominentFont, nil, false )
+		buff.name:SetAnchor(TOPLEFT, buff, TOPRIGHT, 4, (SCB.SV.IconSize * .25) -2 )
+		buff.name:SetAnchor(BOTTOMLEFT, buff, BOTTOMRIGHT, 4, (SCB.SV.IconSize * .25) -2 )
 	end
 
     SCB.ResetSingleIcon(container, buff, AnchorItem)
@@ -1261,17 +1262,25 @@ function SCB.ApplyFont()
         return
     end
 
-    -- First try selecting font face
+    -- Font setup for standard Buffs & Debuffs
     local fontName = LUIE.Fonts[SCB.SV.BuffFontFace]
     if not fontName or fontName == "" then
         printToChat(GetString(SI_LUIE_ERROR_FONT))
         fontName = "$(MEDIUM_FONT)"
     end
-
     local fontStyle = ( SCB.SV.BuffFontStyle and SCB.SV.BuffFontStyle ~= "" ) and SCB.SV.BuffFontStyle or "outline"
     local fontSize = ( SCB.SV.BuffFontSize and SCB.SV.BuffFontSize > 0 ) and SCB.SV.BuffFontSize or 17
-
     g_buffsFont = fontName .. "|" .. fontSize .. "|" .. fontStyle
+	
+	-- Font Setup for Prominent Buffs & Debuffs
+	local prominentName = LUIE.Fonts[SCB.SV.ProminentLabelFontFace]
+	if not fontName or fontName == "" then
+        printToChat(GetString(SI_LUIE_ERROR_FONT))
+        fontName = "$(MEDIUM_FONT)"
+    end
+	local prominentStyle = ( SCB.SV.ProminentLabelFontStyle and SCB.SV.ProminentLabelFontStyle ~= "" ) and SCB.SV.ProminentLabelFontStyle or "outline"
+    local prominentSize = ( SCB.SV.ProminentLabelFontSize and SCB.SV.ProminentLabelFontSize > 0 ) and SCB.SV.ProminentLabelFontSize or 17
+    g_prominentFont = prominentName .. "|" .. prominentSize .. "|" .. prominentStyle
 
     local needs_reset = {}
     -- And reset sizes of already existing icons
@@ -1281,7 +1290,12 @@ function SCB.ApplyFont()
     for _, container in pairs(containerRouting) do
         if needs_reset[container] then
             for i = 1, #uiTlw[container].icons do
+				-- Set label font
                 uiTlw[container].icons[i].label:SetFont(g_buffsFont)
+				-- Set prominent buff label font
+				if uiTlw[container].icons[i].name then
+					uiTlw[container].icons[i].name:SetFont(g_prominentFont)
+				end
             end
         end
         needs_reset[container] = false
