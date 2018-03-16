@@ -218,7 +218,6 @@ A.Set_Eternal_Warrior               = 90939
 A.Set_Destructive_Mage              = 51315
 A.Set_Healing_Mage                  = 51442
 A.Set_Vicious_Serpent               = 61440
-A.Set_Roar_of_Alkosh                = 75752
 A.Set_Phoenix                       = 90935
 A.Set_Vicecannon_of_Venom           = 79464
 A.Set_Bahrahas_Curse                = 75673
