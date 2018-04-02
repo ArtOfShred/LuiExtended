@@ -2316,18 +2316,30 @@ function SCB.NewEffects( ability )
     -- Try manually tracked effects first
     local effects = ability.effects
     if ( effects ~= nil ) then
+    
+        local groundType = { }
+            groundType[1] = { context = "player1", promB = "promb_player", promD = "promd_player", type = 1 }
+            groundType[2] = { context = "player2", promB = "promb_target", promD = "promd_target", type = BUFF_EFFECT_TYPE_DEBUFF }
+            groundType[3] = { context = "ground", promB = "promb_ground", promD = "promd_ground", type = BUFF_EFFECT_TYPE_DEBUFF }
 
         for i = 1, 3 do
-            local context = abilityRouting[i]
+            local effectContext
+            if (SCB.SV.PromDebuffTable[ability.id] or SCB.SV.PromDebuffTable[ability.name]) then 
+                effectContext = groundType[i].promD
+            elseif (SCB.SV.PromBuffTable[ability.id] or SCB.SV.PromBuffTable[ability.name]) then
+                effectContext = groundType[i].promB
+            else
+                effectContext = groundType[i].context
+            end
             
             if effects[i] and effects[i] > 0 then
                 -- Update or create new effect
-                if g_effectsList[context][ability.id] ~= nil then
-                    g_effectsList[context][ability.id].ends = currentTime + effects[4] + effects[i]
-                    g_effectsList[context][ability.id].restart = true
+                if g_effectsList[effectContext][ability.id] ~= nil then
+                    g_effectsList[effectContext][ability.id].ends = currentTime + effects[4] + effects[i]
+                    g_effectsList[effectContext][ability.id].restart = true
                 else
-                    g_effectsList[context][ability.id] = {
-                        target  = ( i < 3 ) and "player" or "reticleover",
+                    g_effectsList[effectContext][ability.id] = {
+                        target  = effectContext,
                         type    = ( i == 1 ) and 1 or 2,
                         name    = ability.name,
                         icon    = ability.icon,
