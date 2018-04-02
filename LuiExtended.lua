@@ -170,7 +170,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     LUIE.InfoPanel.Initialize( LUIE.SV.InfoPanel_Enabled )
     LUIE.UnitFrames.Initialize( LUIE.SV.UnitFrames_Enabled )
     LUIE.SpellCastBuffs.Initialize( LUIE.SV.SpellCastBuff_Enable )
-    --LUIE.SlashCommands.Initialize( LUIE.SV.SlashCommands_Enable )
+    LUIE.SlashCommands.Initialize( LUIE.SV.SlashCommands_Enable )
 
     -- Create settings menu for our addon
     LUIE_CreateSettings()
