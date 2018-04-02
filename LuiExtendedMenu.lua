@@ -2052,6 +2052,18 @@ function LUIE_CreateSettings()
     -- Debug
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "checkbox",
+        name = "Show AbilityId on Buffs & Debuffs",
+        tooltip = "Toggle the display of AbilityId on buffs and debuffs - useful for adding auras to Prominent Buffs & Debuffs or the Aura Blacklist.",
+        getFunc = function() return LUIE.SpellCastBuffs.SV.ShowDebugAbilityId end,
+        setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowDebugAbilityId = value LUIE.SpellCastBuffs.Reset() end,
+        width = "full",
+        default = LUIE.SpellCastBuffs.D.ShowDebugAbilityId,
+        disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+    }
+    
+    -- Debug
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+        type = "checkbox",
         name = "Show Debug for Combat Events",
         tooltip = "Display debug information for combat events - used for development.",
         getFunc = function() return LUIE.SpellCastBuffs.SV.ShowDebugCombat end,
@@ -2070,6 +2082,18 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowDebugEffect = value LUIE.SpellCastBuffs.RegisterDebugEvents() end,
         width = "full",
         default = LUIE.SpellCastBuffs.D.ShowDebugEffect,
+        disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
+    }
+    
+    -- Debug
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+        type = "checkbox",
+        name = "Filter Debug Events & Effects",
+        tooltip = "Filter out events and effects that have already been processed - used for development.",
+        getFunc = function() return LUIE.SpellCastBuffs.SV.ShowDebugFilter end,
+        setFunc = function(value) LUIE.SpellCastBuffs.SV.ShowDebugFilter = value end,
+        width = "full",
+        default = LUIE.SpellCastBuffs.D.ShowDebugFilter,
         disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
     }
 

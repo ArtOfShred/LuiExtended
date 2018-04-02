@@ -111,6 +111,8 @@ SCB.D = {
     Consolidate                      = false,
     ShowDebugCombat                  = false,
     ShowDebugEffect                  = false,
+    ShowDebugFilter                  = false,
+    ShowDebugAbilityId               = false,
     HideReduce                       = true,
     ProminentLabel                   = true,
     ProminentLabelFontFace           = "Univers 67",
@@ -595,7 +597,7 @@ end
 -- Debug Display for Combat Events
 function SCB.EventCombatDebug(eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId)
     -- Don't display if this aura is already added to the filter
-    if debugAuras[abilityId] then return end
+    if debugAuras[abilityId] and SCB.SV.ShowDebugFilter then return end
         
     local source = zo_strformat("<<t:1>>", sourceName)
     local target = zo_strformat("<<t:1>>", targetName)
@@ -623,7 +625,7 @@ end
 
 -- Debug Display for Effect Events
 function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
-    if debugAuras[abilityId] then return end
+    if debugAuras[abilityId] and SCB.SV.ShowDebugFilter then return end
     
     unitName = zo_strformat("<<t:1>>", unitName)
     if unitName == LUIE.PlayerNameFormatted then unitName = "Player" end
@@ -1224,6 +1226,10 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
         buff.cd:SetHidden(     not SCB.SV.RemainingCooldown )
         buff.iconbg:SetHidden( not SCB.SV.RemainingCooldown ) -- We do not need black icon background when there is no Cooldown control present
     end
+    
+    if buff.abilityId ~= nil then
+        buff.abilityId:SetHidden( not SCB.SV.ShowDebugAbilityId )
+    end
 
     local inset = (SCB.SV.RemainingCooldown and buff.cd ~= nil) and 3 or 1
 
@@ -1362,6 +1368,10 @@ function SCB.CreateSingleIcon(container, AnchorItem, effectType)
     buff.label = UI.Label( buff, nil, nil, nil, g_buffsFont, nil, false )
     buff.label:SetAnchor(TOPLEFT, buff, LEFT, -g_padding, -SCB.SV.LabelPosition)
     buff.label:SetAnchor(BOTTOMRIGHT, buff, BOTTOMRIGHT, g_padding, -2)
+    -- AbilityId Debug label
+    buff.abilityId = UI.Label( buff, nil, nil, nil, g_buffsFont, nil, false )
+    buff.abilityId:SetAnchor(CENTER, buff, CENTER, 0, 0)
+    buff.abilityId:SetAnchor(CENTER, buff, CENTER, 0, 0)
     -- Stack label
     buff.stack = UI.Label( buff, nil, nil, nil, g_buffsFont, nil, false )
     buff.stack:SetAnchor(CENTER, buff, BOTTOMLEFT, 0, 0)
@@ -2340,6 +2350,7 @@ function SCB.NewEffects( ability )
                 else
                     g_effectsList[effectContext][ability.id] = {
                         target  = effectContext,
+                        id      = ability.id,
                         type    = ( i == 1 ) and 1 or 2,
                         name    = ability.name,
                         icon    = ability.icon,
@@ -2689,6 +2700,10 @@ function SCB.updateIcons( currentTime, sortedList, container )
             if not remain then
                 buff.label:SetText( E.IsToggle[effect.name] and "T" or nil )
                 -- buff.label:SetText( E.IsToggle[effect.name] and "T" or E.IsVampStage(effect) and (E.IsVampStage(effect)) or nil ) -- Deprecated
+            end
+            
+            if buff.abilityId and effect.id then
+                buff.abilityId:SetText(effect.id)
             end
 			
 			if buff.name then
