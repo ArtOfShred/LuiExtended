@@ -1038,7 +1038,7 @@ function SCB.SetTlwPosition()
 	if uiTlw.prominentbuffs then
 		uiTlw.prominentbuffs:ClearAnchors()
 		if SCB.SV.prominentbOffsetX ~= nil and SCB.SV.prominentbOffsetY ~= nil then
-			uiTlw.prominentbuffs:SetAnchor( CENTER, GuiRoot, CENTER, SCB.SV.prominentbOffsetX, SCB.SV.prominentbOffsetY )
+			uiTlw.prominentbuffs:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SCB.SV.prominentbOffsetX, SCB.SV.prominentbOffsetY )
 		else
 			uiTlw.prominentbuffs:SetAnchor( CENTER, GuiRoot, CENTER, -340, -100 )
 		end
@@ -1047,7 +1047,7 @@ function SCB.SetTlwPosition()
 	if uiTlw.prominentdebuffs then
 		uiTlw.prominentdebuffs:ClearAnchors()
 		if SCB.SV.prominentdOffsetX ~= nil and SCB.SV.prominentdOffsetY ~= nil then
-			uiTlw.prominentdebuffs:SetAnchor( CENTER, GuiRoot, CENTER, SCB.SV.prominentdOffsetX, SCB.SV.prominentdOffsetY )
+			uiTlw.prominentdebuffs:SetAnchor( TOPLEFT, GuiRoot, TOPLEFT, SCB.SV.prominentdOffsetX, SCB.SV.prominentdOffsetY )
 		else
 			uiTlw.prominentdebuffs:SetAnchor( CENTER, GuiRoot, CENTER, 340, -100 )
 		end
