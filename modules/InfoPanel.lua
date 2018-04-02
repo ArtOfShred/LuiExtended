@@ -37,7 +37,6 @@ local uiTopRow = nil
 local uiBotRow = nil
 local uiClock  = {}
 local uiGems   = {}
-local uiTrophy = {}
 
 local uiLatency = {
     color = {
@@ -83,37 +82,26 @@ local uiBags = {
     },
 }
 
-local uiTrophyIcons = {
-    "/esoui/art/icons/quest_boneshard.dds",
-    "/esoui/art/icons/quest_darkether.dds",
-    "/esoui/art/icons/quest_markofthelegion.dds",
-    "/esoui/art/icons/quest_planararmor.dds",
-    "/esoui/art/icons/quest_tinyclaw.dds",
-    "/esoui/art/icons/quest_tooth.dds",
-}
-
 local function CreateUIControls()
     uiPanel = UI.TopLevel( nil, {240,48})
     --uiPanel.bg = UI.Backdrop( uiPanel, "fill", nil, nil, nil, false )
+
+    local fragment = ZO_HUDFadeSceneFragment:New(uiPanel, 0, 0)
+
+    SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
+    SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
+    SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
 
     uiPanel.div = UI.Texture( uiPanel, nil, nil, "/esoui/art/miscellaneous/horizontaldivider.dds", DL_BACKGROUND, false )
     uiPanel.div:SetAnchor( LEFT, uiPanel, LEFT, -60, 0 )
     uiPanel.div:SetAnchor( RIGHT, uiPanel, RIGHT, 60, 0 )
     uiPanel.div:SetHeight(4)
 
-    uiPanel.div2 = UI.Texture( uiPanel, nil, nil, "/esoui/art/miscellaneous/horizontaldivider.dds", DL_BACKGROUND, false )
-    uiPanel.div2:SetAnchor( LEFT, uiPanel, BOTTOMLEFT, -60, 0 )
-    uiPanel.div2:SetAnchor( RIGHT, uiPanel, BOTTOMRIGHT, 60, 0 )
-    uiPanel.div2:SetHeight(4)
-
     uiTopRow = UI.Control( uiPanel, {TOP,TOP,0,2}, {300,20}, false )
     --uiTopRow.bg = UI.Backdrop( uiTopRow, "fill", nil, nil, nil, false )
 
     uiBotRow = UI.Control( uiPanel, {BOTTOM,BOTTOM,0,-2}, {300,20}, false )
     --uiBotRow.bg = UI.Backdrop( uiBotRow, "fill", nil, nil, nil, false )
-
-    uiTroRow = UI.Control( uiPanel, {TOP,BOTTOM,0,2}, {300,20}, false )
-    --uiTroRow.bg = UI.Backdrop( uiTroRow, "fill", nil, nil, nil, false )
 
     uiLatency.control = UI.Control( uiTopRow, nil, {75,20}, false )
     uiLatency.icon = UI.Texture( uiLatency.control, {LEFT,LEFT}, {24,24}, "/esoui/art/campaign/campaignbrowser_hipop.dds", nil, false )
@@ -133,9 +121,9 @@ local function CreateUIControls()
     uiGems.label = UI.Label( uiGems.control, {LEFT,RIGHT,2,0,uiGems.icon}, {32,20}, {0,1}, g_infoPanelFont, "8/88", false )
     --uiGems.bg = UI.Backdrop( uiGems.control, "fill", nil, nil, nil, false )
 
-    uiFeedTimer.control = UI.Control( uiBotRow, nil, {84,20}, false )
+    uiFeedTimer.control = UI.Control( uiBotRow, nil, {96,20}, false )
     uiFeedTimer.icon = UI.Texture( uiFeedTimer.control, {LEFT,LEFT}, {28,28}, "/esoui/art/mounts/tabicon_mounts_up.dds", nil, false )
-    uiFeedTimer.label = UI.Label( uiFeedTimer.control, {LEFT,RIGHT,0,0,uiFeedTimer.icon}, {56,20}, {0,1}, g_infoPanelFont, GetString(SI_LUIE_PNL_FEEDNOW), false )
+    uiFeedTimer.label = UI.Label( uiFeedTimer.control, {LEFT,RIGHT,0,0,uiFeedTimer.icon}, {68,20}, {0,1}, g_infoPanelFont, GetString(SI_LUIE_PNL_FEEDNOW), false )
     --uiFeedTimer.bg = UI.Backdrop( uiFeedTimer.control, "fill", nil, nil, nil, false )
 
     uiArmour.control = UI.Control( uiBotRow, nil, {55,20}, false )
@@ -154,23 +142,6 @@ local function CreateUIControls()
     uiBags.icon = UI.Texture( uiBags.control, {LEFT,LEFT}, {28,28}, "/esoui/art/inventory/inventory_tabicon_misc_up.dds", nil, false )
     uiBags.label = UI.Label( uiBags.control, {LEFT,RIGHT,0,0,uiBags.icon}, {50,20}, {0,1}, g_infoPanelFont, "888/888", false )
     --uiBags.bg = UI.Backdrop( uiBags.control, "fill", nil, nil, nil, false )
-
-    local trophiesControls = {}
-    for i, iconName in ipairs(uiTrophyIcons) do
-        local control = UI.Control( uiTroRow, nil, {39,20}, false )
-        local icon    = UI.Texture( control, {LEFT,LEFT}, {20,20}, iconName, nil, false )
-        local label   = UI.Label( control, {LEFT,RIGHT,0,0,icon}, nil, {0,1}, g_infoPanelFont, "WWW", false )
-        --label.bg      = UI.Backdrop( control, "fill", nil, nil, nil, false )
-        uiTrophy[iconName] = label
-        trophiesControls[i] = control
-    end
-    -- Manually anchor contols, so that it stays behaves properly on scaling
-    trophiesControls[3]:SetAnchor(RIGHT, uiTroRow, CENTER)
-    trophiesControls[2]:SetAnchor(RIGHT, trophiesControls[3], LEFT)
-    trophiesControls[1]:SetAnchor(RIGHT, trophiesControls[2], LEFT)
-    trophiesControls[4]:SetAnchor(LEFT, uiTroRow, CENTER)
-    trophiesControls[5]:SetAnchor(LEFT, trophiesControls[4], RIGHT)
-    trophiesControls[6]:SetAnchor(LEFT, trophiesControls[5], RIGHT)
 end
 
 -- Rearranges panel elements. Called from Initialize and settings menu.
@@ -238,6 +209,7 @@ function PNL.RearrangePanel()
     -- Feed timer
     if PNL.SV.HideMountFeed or uiFeedTimer.hideLocally then
         uiFeedTimer.control:SetHidden(true)
+        size = size - (uiFeedTimer.control:GetWidth() * .15)
     else
         uiFeedTimer.control:ClearAnchors()
         uiFeedTimer.control:SetAnchor( LEFT, anchor or uiBotRow, ( anchor == nil ) and LEFT or RIGHT, 0, 0 )
@@ -282,18 +254,11 @@ function PNL.RearrangePanel()
     -- Set row size
     uiBotRow:SetWidth( ( size > 0 ) and size or 10 )
 
-    -- Last bottom Trophy row
-    uiPanel.div2:SetHidden(not PNL.SV.ShowTrophy)
-    uiTroRow:SetHidden(not PNL.SV.ShowTrophy)
-    if PNL.SV.ShowTrophy then
-        --TODO
-    end
-
     -- Set size of panel
     uiPanel:SetWidth( math.max( uiTopRow:GetWidth(), uiBotRow:GetWidth(), 39*6 ) )
 
     -- Set scale of panel again
-    PNL.SetScale()
+    uiPanel:SetHidden(false)
 end
 
 function PNL.Initialize( enabled )
@@ -358,15 +323,6 @@ function PNL.SetMovingState( state )
     uiPanel:SetMovable( state )
 end
 
--- Set scale of Info Panel. Called from Settings Menu.
-function PNL.SetScale()
-    if not PNL.Enabled then
-        return
-    end
-    uiPanel:SetScale( PNL.SV.panelScale and PNL.SV.panelScale/100 or 1 )
-    uiPanel:SetHidden(false)
-end
-
 -- Fake Component callback function used by main module
 function fakeControl.SetHidden(self, hidden)
     -- update not more then once every 5 second
@@ -417,30 +373,6 @@ function PNL.DoBagUpdate()
     if icon == "/esoui/art/icons/icon_missing.dds" then icon = "/esoui/art/icons/soulgem_001_empty.dds" end
     uiGems.icon:SetTexture( icon )
     uiGems.label:SetText( ( fullCount > 9 ) and fullText or ( fullText .. "/" .. emptyCount ) )
-
-    -- Scan for trophies
-    if PNL.SV.ShowTrophy then
-        local tro = {}
-        for slotIndex = 0, GetBagSize( BAG_BACKPACK ) - 1 do
-            if GetItemType(BAG_BACKPACK, slotIndex) == ITEMTYPE_TROPHY then
-                local icon, stack = GetItemInfo(BAG_BACKPACK, slotIndex)
-                if uiTrophy[icon] then
-                    tro[icon] = tro[icon] and (tro[icon] + stack) or stack
-                end
-            end
-        end
-        -- Update labels
-        for icon, label in pairs(uiTrophy) do
-            -- DEBUG tro[icon] = 1999
-            local count = tro[icon] and (tro[icon] > 999 and 999 or tro[icon]) or 0
-            label:SetText( count )
-            if count >= 60 then
-                label:SetColor(0,1,0)
-            else
-                label:SetColor(1,1,1)
-            end
-        end
-    end
 end
 
 function PNL.OnUpdate01()
