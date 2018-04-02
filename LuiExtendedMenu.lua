@@ -166,6 +166,18 @@ function LUIE_CreateSettings()
         registerForDefaults = true,
     }
 
+    local panelDataInfoPanel = {
+        type = "panel",
+        name = strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_PNL)),
+        displayName = strformat(LUIE.name, GetString(SI_LUIE_LAM_PNL), GetString(SI_GAME_MENU_SETTINGS)),
+        author = LUIE.author,
+        version = LUIE.version,
+        website = LUIE.website,
+        slashCommand = "/luiip",
+        registerForRefresh = true,
+        registerForDefaults = true,
+    }
+
     local optionsData = {}
     local optionsDataBuffsDebuffs = {}
     local optionsDataChatAnnouncements = {}
@@ -173,6 +185,7 @@ function LUIE_CreateSettings()
     local optionsDataCombatInfo = {}
     local optionsDataCombatText = {}
     local optionsDataSlashCommands = {}
+    local optionsDataInfoPanel = {}
 
     -- ReloadUI Button
     optionsData[#optionsData + 1] = {
@@ -291,27 +304,111 @@ function LUIE_CreateSettings()
         text = GetString(SI_LUIE_LAM_SLASHCMDS_DESCRIPTION),
     }
 
-    -- Info Panel Options Submenu
+    -- Show InfoPanel
+    optionsData[#optionsData +1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_PNL_ENABLE),
+        getFunc = function() return LUIE.SV.InfoPanel_Enabled end,
+        setFunc = function(value) LUIE.SV.InfoPanel_Enabled = value end,
+        width = "half",
+        warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+        default = LUIE.D.SlashCommands_Enable,
+    }
+
+    -- InfoPanel Module Description
+    optionsData[#optionsData +1] = {
+        type = "description",
+        width = "half",
+        text = GetString(SI_LUIE_LAM_PNL_DESCRIPTION),
+    }
+
+    optionsData[#optionsData +1] = {
+    type = "divider",
+    width = "full",
+    alpha = 1
+    }
+
+    -- Use LUI print to chat for messages
     optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_LUIPRINTTOCHAT),
+        tooltip = GetString(SI_LUIE_LAM_LUIPRINTTOCHAT_TP),
+        getFunc = function() return LUIE.SV.ChatUseSystem end,
+        setFunc = function(value) LUIE.SV.ChatUseSystem = value end,
+        width = "full",
+        warning = GetString(SI_LUIE_LAM_GENERIC_WARNING),
+        default = LUIE.D.ChatUseSystem,
+    }
+
+    -- Include Timestamp
+    optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_TIMESTAMP)),
+        tooltip = GetString(SI_LUIE_LAM_TIMESTAMP_TP),
+        getFunc = function() return LUIE.SV.TimeStamp end,
+        setFunc = function(value) LUIE.SV.TimeStamp = value end,
+        width = "full",
+        disabled = function() return not LUIE.SV.ChatUseSystem end,
+        default = LUIE.D.TimeStamp,
+    }
+
+    -- Timestamp Format
+    optionsData[#optionsData + 1] = {
+        type = "editbox",
+        name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_TIMESTAMPFORMAT)),
+        tooltip = GetString(SI_LUIE_LAM_TIMESTAMPFORMAT_TP),
+        getFunc = function() return LUIE.SV.TimeStampFormat end,
+        setFunc = function(value) LUIE.SV.TimeStampFormat = value end,
+        width = "full",
+        disabled = function() return not (LUIE.SV.ChatUseSystem and LUIE.SV.TimeStamp) end,
+        default = LUIE.D.TimeStampFormat,
+    }
+
+    -- Toggle XP Bar popup
+    optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_HIDE_EXPERIENCE_BAR),
+        tooltip = GetString(SI_LUIE_LAM_HIDE_EXPERIENCE_BAR_TP),
+        getFunc = function() return LUIE.SV.HideXPBar end,
+        setFunc = function(value) LUIE.SV.HideXPBar = value end,
+        width = "full",
+        default = LUIE.D.HideXPBar,
+    }
+
+    -- Startup Message Options
+    optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_STARTUPMSG),
+        tooltip = GetString(SI_LUIE_LAM_STARTUPMSG_TP),
+        getFunc = function() return LUIE.SV.StartupInfo end,
+        setFunc = function(value) LUIE.SV.StartupInfo = value end,
+        width = "full",
+        default = LUIE.D.StartupInfo,
+    }
+
+----------------------------------------------------------------------------------------------
+-- INFO PANEL
+----------------------------------------------------------------------------------------------
+
+    optionsDataInfoPanel[#optionsDataInfoPanel + 1] = {
+        type = "description",
+        text = GetString(SI_LUIE_LAM_PNL_DESCRIPTION),
+    }
+
+    -- ReloadUI Button
+    optionsDataInfoPanel[#optionsDataInfoPanel + 1] = {
+        type = "button",
+        name = GetString(SI_LUIE_LAM_RELOADUI),
+        tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
+        func = function() ReloadUI("ingame") end,
+        width = "full",
+    }
+
+    -- Info Panel Options Submenu
+    optionsDataInfoPanel[#optionsDataInfoPanel + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_PNL_HEADER),
         controls = {
-            {
-                -- InfoPanel Header
-                type = "description",
-                text = GetString(SI_LUIE_LAM_PNL_DESCRIPTION),
-            },
-            {
-                -- Show InfoPanel
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_PNL_SHOWPANEL),
-                tooltip = GetString(SI_LUIE_LAM_PNL_SHOWPANEL_TP),
-                getFunc = function() return LUIE.SV.InfoPanel_Enabled end,
-                setFunc = function(value) LUIE.SV.InfoPanel_Enabled = value end,
-                width = "full",
-                warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
-                default = LUIE.D.InfoPanel_Enabled,
-            },
             {
                 -- Unlock InfoPanel
                 type = "checkbox",
@@ -331,18 +428,6 @@ function LUIE_CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_PNL_RESETPOSITION_TP),
                 func = LUIE.InfoPanel.ResetPosition,
                 width = "half",
-            },
-            {
-                -- InfoPanel scale
-                type = "slider",
-                name = GetString(SI_LUIE_LAM_PNL_PANELSCALE),
-                tooltip = GetString(SI_LUIE_LAM_PNL_PANELSCALE_TP),
-                min = 100, max = 300, step = 10,
-                getFunc = function() return LUIE.InfoPanel.SV.panelScale end,
-                setFunc = function(value) LUIE.InfoPanel.SV.panelScale = value LUIE.InfoPanel.SetScale() end,
-                width = "full",
-                default = 100,
-                disabled = function() return not LUIE.SV.InfoPanel_Enabled end,
             },
             {
                 type = "header",
@@ -423,15 +508,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.InfoPanel_Enabled end,
             },
             {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_PNL_SHOWICTROPHYCOUNT),
-                getFunc = function() return LUIE.InfoPanel.SV.ShowTrophy end,
-                setFunc = function(value) LUIE.InfoPanel.SV.ShowTrophy = value LUIE.InfoPanel.RearrangePanel() end,
-                width = "full",
-                default = false,
-                disabled = function() return not LUIE.SV.InfoPanel_Enabled end,
-            },
-            {
                 type = "header",
                 name = GetString(SI_PLAYER_MENU_MISC),
                 width = "full",
@@ -447,64 +523,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.InfoPanel_Enabled end,
             },
         },
-    }
-
-    -- Use LUI print to chat for messages
-    optionsData[#optionsData + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_LUIPRINTTOCHAT),
-        tooltip = GetString(SI_LUIE_LAM_LUIPRINTTOCHAT_TP),
-        getFunc = function() return LUIE.SV.ChatUseSystem end,
-        setFunc = function(value) LUIE.SV.ChatUseSystem = value end,
-        width = "full",
-        warning = GetString(SI_LUIE_LAM_GENERIC_WARNING),
-        default = LUIE.D.ChatUseSystem,
-    }
-
-    -- Include Timestamp
-    optionsData[#optionsData + 1] = {
-        type = "checkbox",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_TIMESTAMP)),
-        tooltip = GetString(SI_LUIE_LAM_TIMESTAMP_TP),
-        getFunc = function() return LUIE.SV.TimeStamp end,
-        setFunc = function(value) LUIE.SV.TimeStamp = value end,
-        width = "full",
-        disabled = function() return not LUIE.SV.ChatUseSystem end,
-        default = LUIE.D.TimeStamp,
-    }
-
-    -- Timestamp Format
-    optionsData[#optionsData + 1] = {
-        type = "editbox",
-        name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_TIMESTAMPFORMAT)),
-        tooltip = GetString(SI_LUIE_LAM_TIMESTAMPFORMAT_TP),
-        getFunc = function() return LUIE.SV.TimeStampFormat end,
-        setFunc = function(value) LUIE.SV.TimeStampFormat = value end,
-        width = "full",
-        disabled = function() return not (LUIE.SV.ChatUseSystem and LUIE.SV.TimeStamp) end,
-        default = LUIE.D.TimeStampFormat,
-    }
-
-    -- Toggle XP Bar popup
-    optionsData[#optionsData + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_HIDE_EXPERIENCE_BAR),
-        tooltip = GetString(SI_LUIE_LAM_HIDE_EXPERIENCE_BAR_TP),
-        getFunc = function() return LUIE.SV.HideXPBar end,
-        setFunc = function(value) LUIE.SV.HideXPBar = value end,
-        width = "full",
-        default = LUIE.D.HideXPBar,
-    }
-
-    -- Startup Message Options
-    optionsData[#optionsData + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_STARTUPMSG),
-        tooltip = GetString(SI_LUIE_LAM_STARTUPMSG_TP),
-        getFunc = function() return LUIE.SV.StartupInfo end,
-        setFunc = function(value) LUIE.SV.StartupInfo = value end,
-        width = "full",
-        default = LUIE.D.StartupInfo,
     }
 
 ----------------------------------------------------------------------------------------------
@@ -10791,4 +10809,10 @@ function LUIE_CreateSettings()
         LAM2:RegisterAddonPanel('LUIESlashCommandsOptions', panelDataSlashCommands)
         LAM2:RegisterOptionControls('LUIESlashCommandsOptions', optionsDataSlashCommands)
     end
+
+    if LUIE.SV.InfoPanel_Enabled then
+        LAM2:RegisterAddonPanel('LUIEInfoPanelOptions', panelDataInfoPanel)
+        LAM2:RegisterOptionControls('LUIEInfoPanelOptions', optionsDataInfoPanel)
+    end
+
 end
