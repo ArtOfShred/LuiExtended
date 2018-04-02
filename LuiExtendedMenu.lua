@@ -44,6 +44,29 @@ function LUIE_CreateSettings()
     local playerFrameOptionsKeys        = { ["Vertical Stacked Frames"] = 1, ["Separated Horizontal Frames"] = 2, ["Pyramid"] = 3 }
     local championOptions               = { "Show Above Cap", "Limit to Cap", }
     
+    -- Create a list of abilityId's / abilityName's to use for Blacklist
+    local function GenerateCustomList(input)
+
+        local options, values = {}, {}
+        
+        local counter = 0
+        for id in pairs(input) do
+            counter = counter + 1
+            -- If the input is a numeric value then we can pull this abilityId's info.
+            if type(id) == "number" then
+                options[counter] = zo_iconFormat(GetAbilityIcon(id), 16, 16) .. " [" .. id .. "] " .. GetAbilityName(id)
+            -- If the input is not numeric then add this as a name only.
+            else
+                options[counter] = id
+            end
+            values[counter] = id
+        end
+        return options, values
+    end
+    
+    local PromBuffs, PromBuffsValues = GenerateCustomList(LUIE.SpellCastBuffs.SV.PromBuffTable)
+    local PromDebuffs, PromDebuffsValues = GenerateCustomList(LUIE.SpellCastBuffs.SV.PromDebuffTable)
+    
     local formatOptions = {
         "Nothing",
         "Current",
@@ -1800,6 +1823,21 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentProgress,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
+            
+            {
+                -- Prominent Buffs Progress Bar Texture
+                type = "dropdown",
+                scrollable = true,
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR_TEXTURE)),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR_TEXTURE_TP),
+                choices = StatusbarTexturesList,
+                sort = "name-up",
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ProminentProgressTexture end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.ProminentProgressTexture = value LUIE.SpellCastBuffs.Reset() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ProminentProgressTexture,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
+            },
 			
 			{
                 -- Prominent Buffs Gradient Color 1
@@ -1807,7 +1845,7 @@ function LUIE_CreateSettings()
                 name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF1)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF1_TP),
                 getFunc = function() return unpack(LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1) end,
-                setFunc = function(r, g, b, a) LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1 = { r, g, b, a } end,
+                setFunc = function(r, g, b, a) LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1 = { r, g, b, a } LUIE.SpellCastBuffs.Reset() end,
 				width = "half",
                 default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1[3]},
 				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
@@ -1819,7 +1857,7 @@ function LUIE_CreateSettings()
                 name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF2)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORBUFF2_TP),
                 getFunc = function() return unpack(LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2) end,
-                setFunc = function(r, g, b, a) LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2 = { r, g, b, a } end,
+                setFunc = function(r, g, b, a) LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2 = { r, g, b, a } LUIE.SpellCastBuffs.Reset() end,
 				width = "half",
                 default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2[3]},
 				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
@@ -1831,7 +1869,7 @@ function LUIE_CreateSettings()
                 name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF1)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF1_TP),
                 getFunc = function() return unpack(LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1) end,
-                setFunc = function(r, g, b, a) LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1 = { r, g, b, a } end,
+                setFunc = function(r, g, b, a) LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1 = { r, g, b, a } LUIE.SpellCastBuffs.Reset() end,
 				width = "half",
                 default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1[3]},
 				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
@@ -1843,7 +1881,7 @@ function LUIE_CreateSettings()
                 name    = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF2)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_COLORDEBUFF2_TP),
                 getFunc = function() return unpack(LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2) end,
-                setFunc = function(r, g, b, a) LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2 = { r, g, b, a } end,
+                setFunc = function(r, g, b, a) LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2 = { r, g, b, a } LUIE.SpellCastBuffs.Reset() end,
 				width = "half",
                 default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2[3]},
 				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
@@ -1857,21 +1895,21 @@ function LUIE_CreateSettings()
                 choices = { "Right", "Left" },
                 sort = "name-up",
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ProminentBuffLabelDirection end,
-                setFunc = function(var) LUIE.SpellCastBuffs.SV.ProminentBuffLabelDirection = var end,
+                setFunc = function(var) LUIE.SpellCastBuffs.SV.ProminentBuffLabelDirection = var LUIE.SpellCastBuffs.Reset() end,
                 width = "full",
                 default = LUIE.SpellCastBuffs.D.ProminentBuffLabelDirection,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and (LUIE.SpellCastBuffs.SV.ProminentLabel or LUIE.SpellCastBuffs.SV.ProminentProgress) ) end,
             },
 			
 			{
-				-- Prominent Deuffs Label/Progress Bar Direction
+				-- Prominent Debuffs Label/Progress Bar Direction
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION_TP),
                 choices = { "Right", "Left" },
                 sort = "name-up",
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ProminentDebuffLabelDirection end,
-                setFunc = function(var) LUIE.SpellCastBuffs.SV.ProminentDebuffLabelDirection = var end,
+                setFunc = function(var) LUIE.SpellCastBuffs.SV.ProminentDebuffLabelDirection = var LUIE.SpellCastBuffs.Reset() end,
                 width = "full",
                 default = LUIE.SpellCastBuffs.D.ProminentDebuffLabelDirection,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and (LUIE.SpellCastBuffs.SV.ProminentLabel or LUIE.SpellCastBuffs.SV.ProminentProgress) ) end,
@@ -1882,10 +1920,10 @@ function LUIE_CreateSettings()
                 type = "dropdown",
                 name = GetString(SI_LUIE_LAM_BUFF_PROM_ALIGNMENT),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_ALIGNMENT_TP),
-                choices = { "Top", "Center", "Bottom" },
+                choices = { "Top", "Middle", "Bottom" },
                 sort = "name-up",
                 getFunc = function() return LUIE.SpellCastBuffs.SV.ProminentAlignment end,
-                setFunc = function(var) LUIE.SpellCastBuffs.SV.ProminentAlignment = var end,
+                setFunc = LUIE.SpellCastBuffs.SetIconsAlignmentProminent,
                 width = "full",
                 default = LUIE.SpellCastBuffs.D.ProminentAlignment,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
@@ -1902,7 +1940,84 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentReverseSort,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-    
+            
+            {
+                type = "description",
+                text = GetString(SI_LUIE_LAM_BUFF_PROM_DIALOGUE_DESCRIPT),
+            },
+            
+            {
+                -- Prominent Buffs List (Add)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_BUFF_PROM_BUFF_ADDLIST),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_BUFF_ADDLIST_TP),
+                getFunc = function() end,
+                setFunc = function(value) LUIE.SpellCastBuffs.AddToCustomList(LUIE.SpellCastBuffs.SV.PromBuffTable, value) LUIE_Prominent_Buffs_List:UpdateChoices(GenerateCustomList(LUIE.SpellCastBuffs.SV.PromBuffTable)) end,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
+                
+            },
+            
+            {
+                -- Prominent Buffs List (Remove)
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_BUFF_PROM_BUFF_REMLIST),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_BUFF_REMLIST_TP),
+                choices = PromBuffs,
+                choicesValues = PromBuffsValues,
+                scrollable = true,
+                sort = "name-up",
+                getFunc = function() end,
+                setFunc = function(value) LUIE.SpellCastBuffs.RemoveFromCustomList(LUIE.SpellCastBuffs.SV.PromBuffTable, value) LUIE_Prominent_Buffs_List:UpdateChoices(GenerateCustomList(LUIE.SpellCastBuffs.SV.PromBuffTable)) end,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
+                reference = "LUIE_Prominent_Buffs_List"
+            },
+            
+            {
+                -- Prominent Debuffs List (Add)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFF_ADDLIST),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFF_ADDLIST_TP),
+                getFunc = function() end,
+                setFunc = function(value) LUIE.SpellCastBuffs.AddToCustomList(LUIE.SpellCastBuffs.SV.PromDebuffTable, value) LUIE_Prominent_Debuffs_List:UpdateChoices(GenerateCustomList(LUIE.SpellCastBuffs.SV.PromDebuffTable)) end,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
+                
+            },
+            
+            {
+                -- Prominent Debuffs List (Remove)
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFF_REMLIST),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFF_REMLIST_TP),
+                choices = PromDebuffs,
+                choicesValues = PromDebuffsValues,
+                scrollable = true,
+                sort = "name-up",
+                getFunc = function() end,
+                setFunc = function(value) LUIE.SpellCastBuffs.RemoveFromCustomList(LUIE.SpellCastBuffs.SV.PromDebuffTable, value) LUIE_Prominent_Debuffs_List:UpdateChoices(GenerateCustomList(LUIE.SpellCastBuffs.SV.PromDebuffTable)) end,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
+                reference = "LUIE_Prominent_Debuffs_List"
+            },
+            
+            
+            --[[
+                        {	type="editbox",
+                    name		=GetString(BUI_Menu_BlackListAdd),
+                    tooltip	=GetString(BUI_Menu_BlackListAddDesc),
+                    getFunc	=function() end,
+                    setFunc	=function(text) BUI.Buffs.AddTo(BUI.Vars.BuffsBlackList,text) BUI_Black_List_Dropdown:UpdateChoices(MakeList(BUI.Vars.BuffsBlackList)) end,
+                    disabled	=function() return not BUI.Vars.EnableBlackList end,
+                },
+                {	type		="dropdown",
+                    name		=GetString(BUI_Menu_BlackListDel),
+                    tooltip	=GetString(BUI_Menu_BlackListDelDesc),
+                    choices	=Black_List,
+                    choicesValues=Black_List_Values,
+                    scrollable	=30,
+                    getFunc	=function() end,
+                    setFunc	=function(value) BUI.Buffs.RemoveFrom(BUI.Vars.BuffsBlackList,value) BUI_Black_List_Dropdown:UpdateChoices(MakeList(BUI.Vars.BuffsBlackList)) end,
+                    disabled	=function() return not BUI.Vars.EnableBlackList end,
+                    reference	="BUI_Black_List_Dropdown"
+            ]]--
        },
     }
     

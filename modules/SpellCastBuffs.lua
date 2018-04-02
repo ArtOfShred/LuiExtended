@@ -113,21 +113,22 @@ SCB.D = {
     ShowDebugEffect                  = false,
     HideReduce                       = true,
     
-    -- PROMINENT BUFFS & DEBUFFS -- Remove comments when implemented
-    ProminentLabel                   = true, -- Enable label
-    ProminentLabelFontFace           = "Fontin Regular", -- Sub Option (Label): Font Face
-    ProminentLabelFontStyle          = "outline", -- Sub Option (Label): Font Style
-    ProminentLabelFontSize           = 16, -- Sub Option (Label): Font Size
-    ProminentProgress                = true, -- Enable Progress Bar
-    ProminentProgressBuffC1          = { 1, 1, 1 }, -- Sub Option (Progress Bar): Buff Gradient Color 1
-    ProminentProgressBuffC2          = { 1, 1, 1 }, -- Sub Option (Progress Bar): Buff Gradient Color 2
-    ProminentProgressDebuffC1        = { 1, 1, 1 }, -- Sub Option (Progress Bar): Debuff Gradient Color 1
-    ProminentProgressDebuffC2        = { 1, 1, 1 }, -- Sub Option (Progress Bar): Debuff Gradient Color 2
-    ProminentAlignment               = "Bottom", -- Sort Order (Align to Top, Center, Bottom)
-    ProminentReverseSort             = false, -- Reverse the buff sorting order (just like Long term effects)
-    ProminentBuffLabelDirection      = "Right", -- Label/Progress Bar Direction for Buffs
-    ProminentDebuffLabelDirection    = "Left", -- Label/Progress Bar Direction for Debuff
-    -- PROMINENT BUFFS & DEBUFFS -- Remove comments when implemented
+    ProminentLabel                   = true,
+    ProminentLabelFontFace           = "Univers 67",
+    ProminentLabelFontStyle          = "outline",
+    ProminentLabelFontSize           = 16,
+    ProminentProgress                = true,
+    ProminentProgressTexture         = "Plain",
+    ProminentProgressBuffC1          = { 0, 1, 0 },
+    ProminentProgressBuffC2          = { 0, .4, 0 },
+    ProminentProgressDebuffC1        = { 1, 0, 0 },
+    ProminentProgressDebuffC2        = { .4, 0, 0 },
+    ProminentAlignment               = "Bottom",
+    ProminentReverseSort             = false,
+    ProminentBuffLabelDirection      = "Left",
+    ProminentDebuffLabelDirection    = "Right",
+    PromBuffTable = {},
+    PromDebuffTable = {},
     
 }
 SCB.SV = nil
@@ -161,6 +162,7 @@ local g_padding = 0
 local g_horizAlign = CENTER
 local g_longHorizAlign = CENTER
 local g_longVertAlign = MIDDLE
+local g_prominentVertAlign = BOTTOM
 local g_horizSortInvert = false
 
 -- Some optimization
@@ -649,6 +651,60 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
     end
 end
 
+function SCB.AddToCustomList(list, input)
+
+    local id=tonumber(input)
+    local listRef = list == SCB.SV.PromBuffTable and "Prominent Buffs." or list == SCB.SV.PromDebuffTable and "Prominent Debuffs." or list == SCB.SV.Blacklist and "Ability Blacklist." or ""
+    if id and id > 0 then
+        local name = GetAbilityName(id)
+        if name ~= nil then
+            local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
+            list[id] = true
+            CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+            LUIE.PrintToChat(icon .. " [" .. id .. "] " .. name .. " added to " .. listRef)
+        else
+            CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+            LUIE.PrintToChat("Could not add [" .. input .. "] to " .. listRef .. " That abilityId does not exist.") 
+        end
+    else
+        if input ~= "" then
+            list[input] = true
+            CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+            LUIE.PrintToChat(input .. " added to " .. listRef)
+        end
+    end
+    
+    SCB.Reset()
+
+end
+
+function SCB.RemoveFromCustomList(list, input)
+
+    local id=tonumber(input)
+    local listRef = list == SCB.SV.PromBuffTable and "Prominent Buffs." or list == SCB.SV.PromDebuffTable and "Prominent Debuffs." or list == SCB.SV.Blacklist and "Ability Blacklist." or ""
+    if id and id > 0 then
+        local name = GetAbilityName(id)
+        if name ~= nil then
+            local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
+            list[id] = nil
+            CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+            LUIE.PrintToChat(icon .. " [" .. id .. "] " .. name .. " removed from " .. listRef)
+        else
+            CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+            LUIE.PrintToChat("Could not remove [" .. input .. "] to " .. listRef .. " That abilityId does not exist.") 
+        end
+    else
+        if input ~= "" then
+            list[input] = nil
+            CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
+            LUIE.PrintToChat(input .. " removed from " .. listRef)
+        end
+    end
+    
+    SCB.Reset()
+
+end
+
 function SCB.DuelStart()   
     local duelState, characterName = GetDuelInfo()
     if duelState == 3 and not SCB.SV.IgnoreBattleSpiritTarget then
@@ -797,6 +853,31 @@ function SCB.SetIconsAlignment( value )
     end
 end
 
+function SCB.SetIconsAlignmentProminent ( value )
+
+    if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
+        value = SCB.D.ProminentAlignment
+    end
+    SCB.SV.ProminentAlignment = value
+    
+    if not SCB.Enabled then
+        return
+    end
+    
+    g_prominentVertAlign = ( value == "Top" ) and TOP or ( value == "Bottom" ) and BOTTOM or CENTER
+    
+    for _, v in pairs(containerRouting) do
+        if uiTlw[v].iconHolder then
+            if v == "prominentbuffs" or v == "prominentdebuffs" then
+                uiTlw[v].iconHolder:ClearAnchors()
+                uiTlw[v].iconHolder:SetAnchor ( g_prominentVertAlign )
+            end
+        end
+    end
+    
+end   
+    
+
 function SCB.SetIconsAlignmentLongVert( value )
     -- Check correctness of argument value
     if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
@@ -808,7 +889,7 @@ function SCB.SetIconsAlignmentLongVert( value )
         return
     end
 
-    g_longVertAlign = ( value == "Top" ) and TOP or ( value == "Bottom" ) and BOTTOM or MIDDLE
+    g_longVertAlign = ( value == "Top" ) and TOP or ( value == "Bottom" ) and BOTTOM or CENTER
 
     for _, v in pairs(containerRouting) do
         if uiTlw[v].iconHolder then
@@ -1091,6 +1172,7 @@ function SCB.Reset()
     SCB.SetIconsAlignment( SCB.SV.Alignment )
     SCB.SetIconsAlignmentLongVert( SCB.SV.AlignmentLongVert )
     SCB.SetIconsAlignmentLongHorz( SCB.SV.AlignmentLongHorz )
+    SCB.SetIconsAlignmentProminent( SCB.SV.ProminentAlignment )
     SCB.SetSortDirection( SCB.SV.SortDirection )
 
     local needs_reset = {}
@@ -1129,6 +1211,15 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
     buff.stack:SetAnchor(CENTER, buff, TOPRIGHT, -g_padding * 3, g_padding * 3)
     buff.stack:SetHidden( true )
     
+    if buff.name ~= nil then
+        buff.name:SetHidden(    not SCB.SV.ProminentLabel )
+    end
+    
+    if buff.bar ~= nil then
+        buff.bar.backdrop:SetHidden(    not SCB.SV.ProminentProgress )
+        buff.bar.bar:SetHidden(         not SCB.SV.ProminentProgress )
+    end
+    
     if buff.cd ~= nil then
         buff.cd:SetHidden(     not SCB.SV.RemainingCooldown )
         buff.iconbg:SetHidden( not SCB.SV.RemainingCooldown ) -- We do not need black icon background when there is no Cooldown control present
@@ -1143,6 +1234,80 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
         buff.iconbg:ClearAnchors()
         buff.iconbg:SetAnchor( TOPLEFT, buff, TOPLEFT, inset, inset)
         buff.iconbg:SetAnchor( BOTTOMRIGHT, buff, BOTTOMRIGHT, -inset, -inset)
+    end
+    
+    if buff.bar then
+        if buff.effectType == 1 then
+            buff.bar.backdrop:SetCenterColor((0.1*SCB.SV.ProminentProgressBuffC2[1]), (0.1*SCB.SV.ProminentProgressBuffC2[2]), (0.1*SCB.SV.ProminentProgressBuffC2[3]), 0.75)
+            buff.bar.bar:SetGradientColors( SCB.SV.ProminentProgressBuffC2[1], SCB.SV.ProminentProgressBuffC2[2], SCB.SV.ProminentProgressBuffC2[3], 1, SCB.SV.ProminentProgressBuffC1[1], SCB.SV.ProminentProgressBuffC1[2], SCB.SV.ProminentProgressBuffC1[3], 1)
+        else
+            buff.bar.backdrop:SetCenterColor((0.1*SCB.SV.ProminentProgressDebuffC2[1]), (0.1*SCB.SV.ProminentProgressDebuffC2[2]), (0.1*SCB.SV.ProminentProgressDebuffC2[3]), 0.75)
+            buff.bar.bar:SetGradientColors( SCB.SV.ProminentProgressDebuffC2[1], SCB.SV.ProminentProgressDebuffC2[2], SCB.SV.ProminentProgressDebuffC2[3], 1, SCB.SV.ProminentProgressDebuffC1[1], SCB.SV.ProminentProgressDebuffC1[2], SCB.SV.ProminentProgressDebuffC1[3], 1)
+        end
+    end
+    
+    if container == "prominentbuffs" then
+        if SCB.SV.ProminentBuffLabelDirection == "Left" then
+            buff.name:ClearAnchors()
+            buff.name:SetAnchor(BOTTOMRIGHT, buff, BOTTOMLEFT, -4, -(SCB.SV.IconSize * .25) +2 )
+            buff.name:SetAnchor(TOPRIGHT, buff, TOPLEFT, -4, -(SCB.SV.IconSize * .25) +2 )
+            
+            buff.bar.backdrop:ClearAnchors()
+            buff.bar.backdrop:SetAnchor(BOTTOMRIGHT, buff, BOTTOMLEFT, -4, 0 )
+            buff.bar.backdrop:SetAnchor(BOTTOMRIGHT, buff, BOTTOMLEFT, -4, 0 )
+            
+            buff.bar.bar:SetTexture(LUIE.StatusbarTextures[SCB.SV.ProminentProgressTexture])
+            buff.bar.bar:SetBarAlignment(BAR_ALIGNMENT_REVERSE)
+            buff.bar.bar:ClearAnchors()
+            buff.bar.bar:SetAnchor(CENTER, buff.bar.backdrop, CENTER, 0, 0)
+            buff.bar.bar:SetAnchor(CENTER, buff.bar.backdrop, CENTER, 0, 0)
+        else
+            buff.name:ClearAnchors()
+            buff.name:SetAnchor(BOTTOMLEFT, buff, BOTTOMRIGHT, 4, -(SCB.SV.IconSize * .25) +2 )
+            buff.name:SetAnchor(TOPLEFT, buff, TOPRIGHT, 4, -(SCB.SV.IconSize * .25) +2 )
+            
+            buff.bar.backdrop:ClearAnchors()
+            buff.bar.backdrop:SetAnchor(BOTTOMLEFT, buff, BOTTOMRIGHT, 4, 0 )
+            buff.bar.backdrop:SetAnchor(BOTTOMLEFT, buff, BOTTOMRIGHT, 4, 0 )
+            
+            buff.bar.bar:SetTexture(LUIE.StatusbarTextures[SCB.SV.ProminentProgressTexture])
+            buff.bar.bar:SetBarAlignment(BAR_ALIGNMENT_NORMAL)
+            buff.bar.bar:ClearAnchors()
+            buff.bar.bar:SetAnchor(CENTER, buff.bar.backdrop, CENTER, 0, 0)
+            buff.bar.bar:SetAnchor(CENTER, buff.bar.backdrop, CENTER, 0, 0)
+        end
+    end
+    
+    if container == "prominentdebuffs" then
+        if SCB.SV.ProminentDebuffLabelDirection == "Right" then
+            buff.name:ClearAnchors()
+            buff.name:SetAnchor(BOTTOMLEFT, buff, BOTTOMRIGHT, 4, -(SCB.SV.IconSize * .25) +2 )
+            buff.name:SetAnchor(TOPLEFT, buff, TOPRIGHT, 4, -(SCB.SV.IconSize * .25) +2 )
+            
+            buff.bar.backdrop:ClearAnchors()
+            buff.bar.backdrop:SetAnchor(BOTTOMLEFT, buff, BOTTOMRIGHT, 4, 0 )
+            buff.bar.backdrop:SetAnchor(BOTTOMLEFT, buff, BOTTOMRIGHT, 4, 0 )
+            
+            buff.bar.bar:SetTexture(LUIE.StatusbarTextures[SCB.SV.ProminentProgressTexture])
+            buff.bar.bar:SetBarAlignment(BAR_ALIGNMENT_NORMAL)
+            buff.bar.bar:ClearAnchors()
+            buff.bar.bar:SetAnchor(CENTER, buff.bar.backdrop, CENTER, 0, 0)
+            buff.bar.bar:SetAnchor(CENTER, buff.bar.backdrop, CENTER, 0, 0)
+        else
+            buff.name:ClearAnchors()
+            buff.name:SetAnchor(BOTTOMRIGHT, buff, BOTTOMLEFT, -4, -(SCB.SV.IconSize * .25) +2 )
+            buff.name:SetAnchor(TOPRIGHT, buff, TOPLEFT, -4, -(SCB.SV.IconSize * .25) +2 )
+            
+            buff.bar.backdrop:ClearAnchors()
+            buff.bar.backdrop:SetAnchor(BOTTOMRIGHT, buff, BOTTOMLEFT, -4, 0 )
+            buff.bar.backdrop:SetAnchor(BOTTOMRIGHT, buff, BOTTOMLEFT, -4, 0 )
+            
+            buff.bar.bar:SetTexture(LUIE.StatusbarTextures[SCB.SV.ProminentProgressTexture])
+            buff.bar.bar:SetBarAlignment(BAR_ALIGNMENT_REVERSE)
+            buff.bar.bar:ClearAnchors()
+            buff.bar.bar:SetAnchor(CENTER, buff.bar.backdrop, CENTER, 0, 0)
+            buff.bar.bar:SetAnchor(CENTER, buff.bar.backdrop, CENTER, 0, 0)
+        end
     end
 
     -- Position all items except first one to the right of it's neighbour
@@ -1170,7 +1335,7 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
     end
 end
 
-function SCB.CreateSingleIcon(container, AnchorItem)
+function SCB.CreateSingleIcon(container, AnchorItem, effectType)
     local buff = UI.Backdrop( uiTlw[container], nil, nil, {0,0,0,0.5}, {0,0,0,1}, false )
 
     -- Enable tooltip
@@ -1210,16 +1375,30 @@ function SCB.CreateSingleIcon(container, AnchorItem)
     end
 	
 	if container == "prominentbuffs" then
-		buff.name = UI.Label( buff, nil, nil, nil, g_prominentFont, nil, false )
-		buff.name:SetAnchor(TOPRIGHT, buff, TOPLEFT, -4, (SCB.SV.IconSize * .25) - 2 )
-		buff.name:SetAnchor(BOTTOMRIGHT, buff, BOTTOMLEFT, -4, (SCB.SV.IconSize * .25) - 2 )
+        buff.effectType = effectType
+        buff.name = UI.Label( buff, nil, nil, nil, g_prominentFont, nil, false )
+        buff.bar = {
+            ["backdrop"] = UI.Backdrop( buff, nil, {154, 16}, nil, nil, false ),
+            ["bar"]     = UI.StatusBar( buff, nil, {150, 12}, nil, false ),
+        }
+        buff.bar.backdrop:SetEdgeTexture("",8,2,2)
+        buff.bar.backdrop:SetDrawLayer(DL_BACKDROP)
+        buff.bar.backdrop:SetDrawLevel(1)
+        buff.bar.bar:SetMinMax(0, 1)
 	end
     
     if container == "prominentdebuffs" then
-    	buff.name = UI.Label( buff, nil, nil, nil, g_prominentFont, nil, false )
-		buff.name:SetAnchor(TOPLEFT, buff, TOPRIGHT, 4, (SCB.SV.IconSize * .25) -2 )
-		buff.name:SetAnchor(BOTTOMLEFT, buff, BOTTOMRIGHT, 4, (SCB.SV.IconSize * .25) -2 )
-	end
+        buff.effectType = effectType
+        buff.name = UI.Label( buff, nil, nil, nil, g_prominentFont, nil, false )
+        buff.bar = {
+            ["backdrop"]= UI.Backdrop( buff, nil, {154, 16}, nil, nil, false ),
+            ["bar"]     = UI.StatusBar( buff, nil, {150, 12}, nil, false ),
+        }
+        buff.bar.backdrop:SetEdgeTexture("",8,2,2)
+        buff.bar.backdrop:SetDrawLayer(DL_BACKDROP)
+        buff.bar.backdrop:SetDrawLevel(1)
+        buff.bar.bar:SetMinMax(0, 1)
+    end
 
     SCB.ResetSingleIcon(container, buff, AnchorItem)
     return buff
@@ -1253,6 +1432,16 @@ function SCB.SetSingleIconBuffType(buff, buffType, unbreakable)
     buff.stack:SetColor( unpack( SCB.SV.RemainingTextColoured and colour or {1,1,1,1} ) )
     if buff.cd ~= nil then
         buff.cd:SetFillColor( unpack(colour) )
+    end
+    
+    if buff.bar then
+        if buffType == 1 then
+            buff.bar.backdrop:SetCenterColor((0.1*SCB.SV.ProminentProgressBuffC2[1]), (0.1*SCB.SV.ProminentProgressBuffC2[2]), (0.1*SCB.SV.ProminentProgressBuffC2[3]), 0.75)
+            buff.bar.bar:SetGradientColors( SCB.SV.ProminentProgressBuffC2[1], SCB.SV.ProminentProgressBuffC2[2], SCB.SV.ProminentProgressBuffC2[3], 1, SCB.SV.ProminentProgressBuffC1[1], SCB.SV.ProminentProgressBuffC1[2], SCB.SV.ProminentProgressBuffC1[3], 1)
+        else
+            buff.bar.backdrop:SetCenterColor((0.1*SCB.SV.ProminentProgressDebuffC2[1]), (0.1*SCB.SV.ProminentProgressDebuffC2[2]), (0.1*SCB.SV.ProminentProgressDebuffC2[3]), 0.75)
+            buff.bar.bar:SetGradientColors( SCB.SV.ProminentProgressDebuffC2[1], SCB.SV.ProminentProgressDebuffC2[2], SCB.SV.ProminentProgressDebuffC2[3], 1, SCB.SV.ProminentProgressDebuffC1[1], SCB.SV.ProminentProgressDebuffC1[2], SCB.SV.ProminentProgressDebuffC1[3], 1)
+        end
     end
 end
 
@@ -1347,9 +1536,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                     
                         -- Set container context
                         local context
-                        if (E.ProminentDebuffs[abilityId] or E.ProminentDebuffs[effectName]) then 
+                        if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then 
                             context = groundType[i].promD
-                        elseif (E.ProminentBuffs[abilityId] or E.ProminentBuffs[effectName]) then
+                        elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) then
                             context = groundType[i].promB
                         else
                             context = groundType[i].context
@@ -1463,13 +1652,13 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 
     -- Where the new icon will go into
     local context = unitTag .. effectType
-	if (E.ProminentDebuffs[abilityId] or E.ProminentDebuffs[effectName]) then 
+	if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then 
 		if context == "player1" then
             context = "promd_player"
         elseif context == "reticleover2" then
             context = "promd_target"
         end
-	elseif (E.ProminentBuffs[abilityId] or E.ProminentBuffs[effectName]) then
+	elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) then
 		if context == "player1" then
             context = "promb_player"
         elseif context == "reticleover2" then
@@ -1955,6 +2144,8 @@ function SCB.ReloadEffects(unitTag)
     -- clear existing
     g_effectsList[unitTag .. 1] = {}
     g_effectsList[unitTag .. 2] = {}
+    g_effectsList["promb_target"] = {}
+    g_effectsList["promd_target"] = {}
 
     -- Fill it again
     --d( "refresh" )
@@ -2270,12 +2461,18 @@ function SCB.OnUpdate(currentTime)
 
     local buffsSorted = {}
     local needs_update = {}
+    local isProminent = {}
     -- And reset sizes of already existing icons
     for _, container in pairs(containerRouting) do
         needs_update[container] = true
         -- Prepare sort container
         if buffsSorted[container] == nil then
             buffsSorted[container] = {}
+        end
+        
+        -- Refresh prominent buff labels on each update tick
+        if container == "prominentbuffs" or container == "prominentdebuffs" then
+            isProminent[container] = true
         end
     end
 
@@ -2305,7 +2502,7 @@ function SCB.OnUpdate(currentTime)
                     -- Show long-term player buffs
                     elseif v.target == "player" and SCB.SV.LongTermEffects_Player then
                         -- Choose container for long-term player buffs
-                        if SCB.SV.LongTermEffectsSeparate then
+                        if SCB.SV.LongTermEffectsSeparate and not (container == "prominentbuffs" or container == "prominentdebuffs") then
                             table.insert(buffsSorted.player_long, v)
                         else
                             table.insert(buffsSorted[container], v)
@@ -2326,7 +2523,44 @@ function SCB.OnUpdate(currentTime)
         end
         needs_update[container] = false
     end
+    for _, container in pairs(containerRouting) do
+        if isProminent then
+            SCB.updateBar( currentTime, buffsSorted[container], container )
+        end
+    end
+    
 end
+
+function SCB.updateBar( currentTime, sortedList, container )
+    
+    local iconsNum = #sortedList
+    local istart, iend, istep
+    
+    if g_horizSortInvert and not uiTlw[container].alignVertical then
+        istart, iend, istep = iconsNum, 1, -1
+    else
+        istart, iend, istep = 1, iconsNum, 1
+    end
+    
+    local index = 0 -- Global icon counter
+    for i = istart, iend, istep do
+        index = index + 1
+        -- Get current buff definition
+        local effect = sortedList[i]
+    
+        local remain = ( effect.ends ~= nil ) and ( effect.ends - currentTime ) or nil
+        local buff = uiTlw[container].icons[index]
+        local auraStarts = effect.starts or nil
+        local auraEnds = effect.ends or nil
+
+        -- If this isn't a permanent duration buff then update the bar on every tick
+        if buff and buff.bar and buff.bar.bar and auraStarts and auraEnds and remain > 0 then
+            buff.bar.bar:SetValue(1 - ((currentTime - auraStarts) / (auraEnds - auraStarts)))
+        end
+    end
+    
+end
+    
 
 function SCB.updateIcons( currentTime, sortedList, container )
     -- Speial workaround for container with player long buffs. We do not need to update it every 100ms, but rather 3 times less often
@@ -2345,6 +2579,12 @@ function SCB.updateIcons( currentTime, sortedList, container )
     local istart, iend, istep
     -- Reverse the order for right aligned icons
     if container == "player_long" and SCB.SV.LongTermEffectsReverse then
+        if g_horizSortInvert and not uiTlw[container].alignVertical then
+            istart, iend, istep = iconsNum, 1, -1
+        else
+            istart, iend, istep = iconsNum, 1, -1
+        end
+    elseif (container == "prominentbuffs" or container == "prominentdebuffs") and SCB.SV.ProminentReverseSort then
         if g_horizSortInvert and not uiTlw[container].alignVertical then
             istart, iend, istep = iconsNum, 1, -1
         else
@@ -2382,7 +2622,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
         index = index + 1
         -- Check if the icon for buff #index exists otherwise create new icon
         if uiTlw[container].icons[index] == nil then
-            uiTlw[container].icons[index] = SCB.CreateSingleIcon(container, uiTlw[container].icons[index-1])
+            uiTlw[container].icons[index] = SCB.CreateSingleIcon(container, uiTlw[container].icons[index-1], effect.type)
         end
 
         -- Calculate remaining time
@@ -2439,8 +2679,8 @@ function SCB.updateIcons( currentTime, sortedList, container )
 			
 			if buff.name then
 				buff.name:SetText(effect.name)
-				buff.name:SetHidden(false)
 			end
+
         end
         
         if effect.stack and effect.stack > 0 then

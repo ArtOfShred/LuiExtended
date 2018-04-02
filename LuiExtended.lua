@@ -86,6 +86,7 @@ LUIE.StatusbarTextures = {
     ["Sand Paper 2"]            = "/LuiExtended/media/unitframes/textures/SandPaperV2.dds",
     ["Shadow"]                  = "/LuiExtended/media/unitframes/textures/Shadow.dds",
     ["Smooth"]                  = "/LuiExtended/media/unitframes/textures/Smooth.dds",
+    ["Plain"]                   = "/LuiExtended/media/unitframes/textures/Plain.dds",
 }
 
 -- Load saved settings

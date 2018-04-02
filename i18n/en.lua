@@ -744,7 +744,6 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DESCRIPTION",                  "This wh
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_LABEL",						"Display Ability Name Label")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_LABEL_TP",						"Toggle the display of a label next to prominent auras with the Ability Name.")
 
-
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_FONTFACE",						"Label Font Face")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_FONTFACE_TP",					"Choose the font face for the prominent auras Ability Name label.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_FONTSTYLE",					"Label Font Style")
@@ -753,6 +752,8 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_FONTSIZE",						"Label Font Size")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_FONTSIZE_TP",					"Choose the font size for the prominent auras Ability Name label.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR",					"Display Progress Bar")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR_TP",				"Toggle the display of a progress bar next to prominent auras.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR_TEXTURE",			"Progress Bar Texture")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_PROGRESSBAR_TEXTURE_TP",		"Choose a texture to use for the prominent aura progress bar.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_COLORBUFF1",					"Buff Gradient Color (Start)")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_COLORBUFF1_TP",				"Choose the start gradient color for the progress bar for prominent buffs.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_COLORBUFF2",					"Buff Gradient Color (End)")
@@ -769,6 +770,16 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFFLABELDIRECTION",			"Label & Progres
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFFLABELDIRECTION_TP",		"Choose whether to display the Ability Name Label and Progress bar to the left or right of prominent buffs.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION",			"Label & Progress Bar Orientation (Debuffs)")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION_TP",		"Choose whether to display the Ability Name Label and Progress bar to the left or right of prominent debuffs.")
+
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DIALOGUE_DESCRIPT",			"Add prominent buffs or debuffs by entering an AbilityId or AbilityName into the input field and pressing enter. Remove prominent buffs or debuffs, by clicking the AbilityId or AbilityName from the dropdown list.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFF_ADDLIST",                 "Add Prominent Buff")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFF_ADDLIST_TP",              "Add an abilityId or abilityName to the Prominent Buffs list.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFF_REMLIST",                 "Remove Prominent Buff")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFF_REMLIST_TP",              "Remove an abilityId or abilityName from the Prominent Buffs list.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFF_ADDLIST",               "Add Prominent Debuff")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFF_ADDLIST_TP",            "Add an abilityId or abilityName to the Prominent Debuffs list.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFF_REMLIST",               "Remove Prominent Debuff")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFF_REMLIST_TP",            "Remove an abilityId or abilityName from the Prominent Debuffs list.")
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
