@@ -66,6 +66,7 @@ function LUIE_CreateSettings()
     
     local PromBuffs, PromBuffsValues = GenerateCustomList(LUIE.SpellCastBuffs.SV.PromBuffTable)
     local PromDebuffs, PromDebuffsValues = GenerateCustomList(LUIE.SpellCastBuffs.SV.PromDebuffTable)
+    local Blacklist, BlackListValues = GenerateCustomList(LUIE.SpellCastBuffs.SV.BlacklistTable)
     
     local formatOptions = {
         "Nothing",
@@ -1998,6 +1999,47 @@ function LUIE_CreateSettings()
                 reference = "LUIE_Prominent_Debuffs_List"
             },
        },
+    }
+    
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_HEADER),
+        controls = {
+        
+        -- Buffs & Debuffs Blacklist Description
+            {
+                type = "description",
+                text = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT),
+            },
+            
+            {
+                -- Buffs & Debuffs Blacklist (Add)
+                type = "editbox",
+                name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST_TP),
+                getFunc = function() end,
+                setFunc = function(value) LUIE.SpellCastBuffs.AddToCustomList(LUIE.SpellCastBuffs.SV.BlacklistTable, value) LUIE_Blacklist:UpdateChoices(GenerateCustomList(LUIE.SpellCastBuffs.SV.BlacklistTable)) end,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
+                
+            },
+            
+            {
+                -- Buffs & Debuffs Blacklist (Remove)
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP),
+                choices = Blacklist,
+                choicesValues = BlacklistValues,
+                scrollable = true,
+                sort = "name-up",
+                getFunc = function() end,
+                setFunc = function(value) LUIE.SpellCastBuffs.RemoveFromCustomList(LUIE.SpellCastBuffs.SV.BlacklistTable, value) LUIE_Blacklist:UpdateChoices(GenerateCustomList(LUIE.SpellCastBuffs.SV.BlacklistTable)) end,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
+                reference = "LUIE_Blacklist"
+            },
+            
+        },
+        
     }
     
     -- Debug Options

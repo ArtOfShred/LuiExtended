@@ -781,6 +781,13 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFF_ADDLIST_TP",            "Add an 
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFF_REMLIST",               "Remove Prominent Debuff")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFF_REMLIST_TP",            "Remove an abilityId or abilityName from the Prominent Debuffs list.")
 
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_BLACKLIST_HEADER",                  "Buff & Debuff Blacklisting")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT",			    "Add buffs or debuffs to the Blacklist by entering an AbilityId or AbilityName into the input field and pressing enter. Remove buffs or debuffs from the Blacklist, by clicking the AbilityId or AbilityName from the dropdown list.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST",                 "Add Buff or Debuff to Blacklist")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST_TP",              "Add an abilityId or abilityName to the aura blacklist.")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST",                 "Remove Buff or Debuff from Blacklist")
+ZO_CreateStringId("SI_LUIE_LAM_BUFF_BLACKLIST_REMLIST_TP",              "Remove an abilityId or abilityName from the aura blacklist.")
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- CHAT ANNOUNCEMENTS -- LAM --

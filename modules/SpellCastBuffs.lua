@@ -654,7 +654,7 @@ end
 function SCB.AddToCustomList(list, input)
 
     local id=tonumber(input)
-    local listRef = list == SCB.SV.PromBuffTable and "Prominent Buffs." or list == SCB.SV.PromDebuffTable and "Prominent Debuffs." or list == SCB.SV.Blacklist and "Ability Blacklist." or ""
+    local listRef = list == SCB.SV.PromBuffTable and "Prominent Buffs." or list == SCB.SV.PromDebuffTable and "Prominent Debuffs." or list == SCB.SV.BlacklistTable and "Aura Blacklist." or ""
     if id and id > 0 then
         local name = GetAbilityName(id)
         if name ~= nil then
@@ -681,7 +681,7 @@ end
 function SCB.RemoveFromCustomList(list, input)
 
     local id=tonumber(input)
-    local listRef = list == SCB.SV.PromBuffTable and "Prominent Buffs." or list == SCB.SV.PromDebuffTable and "Prominent Debuffs." or list == SCB.SV.Blacklist and "Ability Blacklist." or ""
+    local listRef = list == SCB.SV.PromBuffTable and "Prominent Buffs." or list == SCB.SV.PromDebuffTable and "Prominent Debuffs." or list == SCB.SV.BlacklistTable and "Aura Blacklist." or ""
     if id and id > 0 then
         local name = GetAbilityName(id)
         if name ~= nil then
@@ -1620,6 +1620,8 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
             effectName = E.EffectOverrideByName[abilityId][unitName].name or effectName
         end
     end
+    
+    if SCB.SV.BlacklistTable[abilityId] or SCB.SV.BlacklistTable[effectName] then return end
                
     -- If the source of the buff isn't the player or the buff is not on the AbilityId or AbilityName override list then we don't display it
     if unitTag ~= "player" then
