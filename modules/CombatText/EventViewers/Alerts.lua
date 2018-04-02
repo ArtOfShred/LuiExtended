@@ -20,9 +20,9 @@ function CTV:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, 
     local control, controlPoolKey = self.poolManager:GetPoolObject(poolTypes.CONTROL)
 
     local size, color, text
-    
+
     -- First we handle Cleanse/Execute/Exploit because these messages are always individual
-    
+
     --Cleanse
     if (alertType == alertTypes.CLEANSE) then
         color = S.colors.alertCleanse
@@ -41,18 +41,18 @@ function CTV:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, 
     elseif (alertType == alertTypes.SHARED) then
 
         size = S.fontSizes.alert
-        
+
         local spacer = " - "
         local stringBlock
         local stringDodge
         local stringAvoid
         local stringInterrupt
         color = S.colors.alertBlock
-        
+
         -- Quickly set only one of these to true for priority color formatting.
         -- PRIORITY: INTERRUPT > BLOCK STAGGER > DODGE > BLOCK > AVOID
         if blockstagger then block = false end
-        
+
 		if not S.toggles.hideMitigation then
 			if avoid then
 				stringAvoid = (S.formats.alertAvoid .. spacer)
@@ -60,40 +60,40 @@ function CTV:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, 
 			else
 				stringAvoid = ""
 			end
-			
+
 			if block then
 				stringBlock = (S.formats.alertBlock .. spacer)
 				color = S.colors.alertBlock
 			end
-			
+
 			if dodge then
 				stringDodge = (S.formats.alertDodge .. spacer)
 				color = S.colors.alertDodge
 			else
 				stringDodge = ""
 			end
-			
+
 			if blockstagger then
 				stringBlock = (S.formats.alertBlockStagger .. spacer)
 				color = S.colors.alertBlock
 			end
-			
+
 			if interrupt then
 				stringInterrupt = (S.formats.alertInterrupt .. spacer)
 				color = S.colors.alertInterrupt
 			else
 				stringInterrupt = ""
 			end
-			
+
 			if not block and not blockstagger then
 				stringBlock = ""
 			end
 		end
-        
+
         local stringPart1 = self:FormatAlertString(S.toggles.mitigationFormat, { source = sourceName, ability = abilityName, icon = abilityIcon })
         local stringPart2 = isDirect and S.toggles.mitigationSuffix or ""
         local stringPart3 = S.toggles.hideMitigation and "" or string.format("%s%s%s%s%s", spacer, stringBlock, stringDodge, stringAvoid, stringInterrupt)
-        
+
         text = zo_strformat("<<1>><<2>><<3>>", stringPart1, stringPart2, stringPart3)
     --BLOCK
     elseif (alertType == alertTypes.BLOCK) then
@@ -159,8 +159,8 @@ function CTV:OnEvent(alertType, abilityName, abilityIcon, sourceName, isDirect, 
     self.locationOffset = self.locationOffset + 1
     self.activeAlerts = self.activeAlerts + 1
     -- Move back up if we hit 5 alerts active at once.
-    if self.locationOffset == 5 then 
-        self.locationOffset = 0 
+    if self.locationOffset == 5 then
+        self.locationOffset = 0
     end
 
     --Get animation

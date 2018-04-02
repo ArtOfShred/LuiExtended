@@ -60,7 +60,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
     local textFormat, fontSize, textColor = self:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
     if (hits > 1 and S.toggles.showThrottleTrailer) then value = format('%d (%d)', value, hits) end
     if (combatType == C.combatType.INCOMING) and (S.toggles.incomingDamageOverride) and (isDamage or isDamageCritical) then textColor = S.colors.incomingDamageOverride end
-    
+
     self:PrepareLabel(control.label, fontSize, textColor, self:FormatString(textFormat, { text = LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name or abilityName, value = value, powerType = powerType, damageType = damageType }))
     self:ControlLayout(control, abilityId, combatType, sourceName)
 
@@ -108,7 +108,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
 
     local w, h = panel:GetDimensions()
     control:SetAnchor(point, panel, relativePoint, offsetX * w, offsetY * h)
-    
+
     if (point == TOPRIGHT or point == TOPLEFT) then
         if (self.lastControl[combatType] == nil) then offsetY = -25 else offsetY = max(-25, select(6, self.lastControl[combatType]:GetAnchor(0))) end
         control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
@@ -128,7 +128,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
             control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
         end
     end
-    
+
     self.activeControls[combatType][control:GetName()] = control
     self.lastControl[combatType] = control
 
@@ -153,7 +153,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
     animationY:GetStepByName('scrollY'):SetDeltaOffsetY(verticalOffset)
     animationY:Apply(control)
     animationY:Play()
-    
+
     -- Add items back into pool after use
     callLater(function()
         self.poolManager:ReleasePoolObject(poolTypes.CONTROL, controlPoolKey)

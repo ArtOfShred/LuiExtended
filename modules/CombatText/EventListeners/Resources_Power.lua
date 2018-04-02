@@ -17,7 +17,7 @@ function CTL:OnEvent(unit, powerPoolIndex, powerType, power, powerMax)
     if (unit == 'player' and self.powerInfo[powerType] ~= nil) then
         local t = LUIE.CombatText.SV.toggles
         local threshold
-        
+
         if power <= 0 then
             return
         elseif powerType == POWERTYPE_HEALTH then

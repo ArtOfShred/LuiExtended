@@ -113,7 +113,7 @@ LUIE.CombatTextConstants = {
     },
     alertType = {
         BLOCK                       = "LUIE_LUIE_CombatText_Alert_TYPE_BLOCK",
-        BLOCKSTAGGER                = "LUIE_LUIE_CombatText_Alert_TYPE_BLOCKSTAGGER",  
+        BLOCKSTAGGER                = "LUIE_LUIE_CombatText_Alert_TYPE_BLOCKSTAGGER",
         DODGE                       = "LUIE_LUIE_CombatText_Alert_TYPE_DODGE",
         AVOID                       = "LUIE_LUIE_CombatText_Alert_TYPE_AVOID",
         INTERRUPT                   = "LUIE_LUIE_CombatText_Alert_TYPE_INTERRUPT",

@@ -136,14 +136,14 @@ CT.D = {
         mitigationRank2             = true,
         mitigationRank1             = true,
         mitigationDungeon           = true,
-    
+
         showAlertBlock              = true,
         showAlertInterrupt          = true,
         showAlertDodge              = true,
         showAlertAvoid              = true,
         showAlertPower              = true,
         showAlertDestroy            = true,
-        
+
         showAlertCleanse            = true,
         showAlertExploit            = true,
         showAlertExecute            = false,
@@ -207,8 +207,8 @@ CT.D = {
     colors = {
     --Damage & Healing
         damage = {
-            [DAMAGE_TYPE_NONE]      = { 1, 1, 1, 1 },                     
-            [DAMAGE_TYPE_GENERIC]   = { 1, 1, 1, 1 },                     
+            [DAMAGE_TYPE_NONE]      = { 1, 1, 1, 1 },
+            [DAMAGE_TYPE_GENERIC]   = { 1, 1, 1, 1 },
             [DAMAGE_TYPE_PHYSICAL]  = { 200/255, 200/255, 160/255, 1 },
             [DAMAGE_TYPE_FIRE]      = { 1, 100/255, 20/255, 1 },
             [DAMAGE_TYPE_SHOCK]     = { 0, 1, 1, 1 },
@@ -216,14 +216,14 @@ CT.D = {
             [DAMAGE_TYPE_COLD]      = { 35/255, 70/255, 1, 1 },
             [DAMAGE_TYPE_EARTH]     = { 100/255, 75/255, 50/255, 1 },
             [DAMAGE_TYPE_MAGIC]     = { 1, 1, 0, 1 },
-            [DAMAGE_TYPE_DROWN]     = { 35/255, 70/255, 255/255, 1 },      
+            [DAMAGE_TYPE_DROWN]     = { 35/255, 70/255, 255/255, 1 },
             [DAMAGE_TYPE_DISEASE]   = { 25/255, 85/255, 0, 1 },
             [DAMAGE_TYPE_POISON]    = { 0, 1, 127/255, 1 }
             },
         healing                     = { 0, 192/255, 0, 1 },
         energizeMagicka             = { 0, 192/255, 1, 1 },
         energizeStamina             = { 192/255, 1, 0, 1 },
-        energizeUltimate            = { 1, 1, 0, 1 },       
+        energizeUltimate            = { 1, 1, 0, 1 },
         drainMagicka                = { 0, 192/255, 1, 1 },
         drainStamina                = { 192/255, 1, 0, 1 },
         criticalDamageOverride      = { 247/255, 244/255, 153/255, 1 },
@@ -434,7 +434,7 @@ function CT.Initialize( enabled )
     --Hide ingame active combat tips
     ZO_ActiveCombatTips:SetHidden(LUIE.CombatText.SV.toggles.hideIngameTips)
 
-    if LUIE.CombatText.SV.toggles.showAlertMitigation then 
+    if LUIE.CombatText.SV.toggles.showAlertMitigation then
         SetSetting(SETTING_TYPE_ACTIVE_COMBAT_TIP, 0, ACT_SETTING_ALWAYS)
     end
 

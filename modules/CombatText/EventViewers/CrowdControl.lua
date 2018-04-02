@@ -70,7 +70,7 @@ function CTV:OnEvent(crowdControlType, combatType)
     else
         control:SetAnchor(point, panel, relativePoint, 0, self.locationOffset[combatType] * (S.fontSizes.crowdControl + 5))
     end
-    
+
     self.locationOffset[combatType] = self.locationOffset[combatType] + 1
     self.activeCrowdControls[combatType] = self.activeCrowdControls[combatType] + 1
 

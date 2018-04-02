@@ -31,14 +31,14 @@ SC.SV       = nil
 function SC.Initialize( enabled )
 
     SC.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "SlashCommands", SC.D )
-    
+
     if not enabled then
         return
     end
     SC.Enabled = true
-    
+
     SC.RegisterSlashCommands()
-    
+
 end
 
 local function SlashHome()
@@ -61,7 +61,7 @@ local function SlashHome()
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-    
+
     if IsActiveWorldBattleground() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_BG))
         if LUIE.SV.TempAlertHome then
@@ -135,7 +135,7 @@ local function SlashRegroup()
     end
 
     PendingRegroup = true
-    
+
     local flagOffline = 0
     local index = 1
     for i = 1, groupSize do
@@ -147,7 +147,7 @@ local function SlashRegroup()
             local groupMemberAccountName = GetUnitDisplayName(memberTag)
             local memberLink = LUIE.ChatAnnouncements.ResolveNameLink(groupMemberName, groupMemberAccountName)
             local memberNoLink = LUIE.ChatAnnouncements.ResolveNameNoLink(groupMemberName, groupMemberAccountName)
-            
+
             -- Place inside counter incremented index, this way if we have offline members in the group we still index everything in an ordered integer list.
             g_regroupStacks[index] = { memberLink = memberLink, memberName = groupMemberName }
             index = index + 1
@@ -155,10 +155,10 @@ local function SlashRegroup()
             flagOffline = flagOffline + 1
         end
     end
-    
+
     -- Reinvite the group after 5 seconds (give the group interface time to update on server and client end for all group members)
     -- If the stack counter was less than 1 (just the player eligible for reinvite then regroup won't invite any members.)
-    if flagOffline > 0 then 
+    if flagOffline > 0 then
         if #g_regroupStacks > 1 then
             printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG), flagOffline, flagOffline, flagOffline))
             if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
@@ -438,7 +438,7 @@ local function SlashGuildQuit(guildnumber)
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-    
+
     -- If neither of the above errors were triggered, leave the guild number.
     GuildLeave(guildnumber)
 end
@@ -494,7 +494,7 @@ local function SlashGuildKick(option)
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-    
+
     if not DoesPlayerHaveGuildPermission (guildnumber, GUILD_PERMISSION_REMOVE) then
         printToChat (GetString(SI_SOCIALACTIONRESULT18))
         if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
@@ -544,7 +544,7 @@ local function SlashGuildKick(option)
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
     end
 end
- 
+
 local function SlashFriend(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME))
@@ -560,7 +560,7 @@ end
 -- Hook for request friend so menu option also displays invite message
 -- Menu is true if this request is sent from the Player to Player interaction menu
 local zos_RequestFriend = RequestFriend
-RequestFriend = function(option1, option2, menu) 
+RequestFriend = function(option1, option2, menu)
     zos_RequestFriend(option1, option2)
     if not menu then
         local message = strformat(GetString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG), option1)
@@ -575,7 +575,7 @@ end
 local zos_AddIgnore = AddIgnore
 AddIgnore = function(option)
     zos_AddIgnore(option)
-    
+
     if IsIgnored(option) then -- Only lists account names, unfortunately
         printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE))
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
@@ -767,7 +767,7 @@ local function SlashVoteKick(option)
             end
         end
     end
-    
+
     -- If we try to kick ourself then display an error message.
     if GetUnitName(unitToKick) == playerName then
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_SELF))
@@ -791,7 +791,7 @@ local function SlashCampaignQ(option)
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-    
+
     if IsActiveWorldBattleground() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG))
         if LUIE.SV.TempAlertCampaign then
@@ -800,7 +800,7 @@ local function SlashCampaignQ(option)
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-    
+
     -- Compare names to campaigns available, join the campaign and bail out of the function if it is available.
     for i = 1, 100 do
         local compareName = string.lower(GetCampaignName(i))
@@ -808,8 +808,8 @@ local function SlashCampaignQ(option)
         if compareName == option then
             local campaignName
             campaignName = GetCampaignName(i)
-            
-            if GetAssignedCampaignId() == i or GetGuestCampaignId() == i then 
+
+            if GetAssignedCampaignId() == i or GetGuestCampaignId() == i then
                 QueueForCampaign (i)
                 printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName))
                 if LUIE.SV.TempAlertCampaign then
@@ -826,7 +826,7 @@ local function SlashCampaignQ(option)
             end
         end
     end
-    
+
     printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN))
     if LUIE.SV.TempAlertCampaign then
         ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN) )
@@ -836,7 +836,7 @@ end
 
 local function SlashInvite(option)
     local groupSize = GetGroupSize()
-    
+
     if groupSize > 1 and not IsUnitGroupLeader("player") then
         printToChat(strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE)))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
@@ -845,7 +845,7 @@ local function SlashInvite(option)
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-    
+
     if option == "" then
         printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_NONAME))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
@@ -854,7 +854,7 @@ local function SlashInvite(option)
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-    
+
     GroupInviteByName(option)
     printToChat(strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), option))
     if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
@@ -896,25 +896,25 @@ function SC.RegisterSlashCommands()
     SLASH_COMMANDS["/campaign"]     = nil
     SLASH_COMMANDS["/invite"]       = nil
     SLASH_COMMAND_AUTO_COMPLETE:InvalidateSlashCommandCache()
-    
+
     -- Add commands based off menu options
     if SC.SV.SlashHome == true then
         SLASH_COMMANDS["/home"]         = SlashHome
     end
-    
-    if SC.SV.SlashRegroup == true then  
+
+    if SC.SV.SlashRegroup == true then
         SLASH_COMMANDS["/regroup"]      = SlashRegroup
     end
-    
+
     if SC.SV.SlashDisband == true then
         SLASH_COMMANDS["/disband"]      = SlashDisband
     end
-    
+
     if SC.SV.SlashGroupLeave == true then
         SLASH_COMMANDS["/leave"]        = SlashGroupLeave
         SLASH_COMMANDS["/leavegroup"]   = SlashGroupLeave
     end
-    
+
     -- This command is always registered since it is also a default emote
     SLASH_COMMANDS["/kick"]         = SlashKick
     if SC.SV.SlashGroupKick == true then
@@ -926,12 +926,12 @@ function SC.RegisterSlashCommands()
     if SC.SV.SlashTrade == true then
         SLASH_COMMANDS["/trade"]        = SlashTrade
     end
-    
+
     if SC.SV.SlashVoteKick == true then
         SLASH_COMMANDS["/votekick"]     = SlashVoteKick
         SLASH_COMMANDS["/voteremove"]   = SlashVoteKick
     end
-    
+
     if SC.SV.SlashGuildInvite == true then
         SLASH_COMMANDS["/guildinvite"]  = SlashGuildInvite
         SLASH_COMMANDS["/ginvite"]      = SlashGuildInvite
@@ -946,32 +946,32 @@ function SC.RegisterSlashCommands()
         SLASH_COMMANDS["/guildleave"]   = SlashGuildQuit
         SLASH_COMMANDS["/gleave"]       = SlashGuildQuit
     end
-    
+
     if SC.SV.SlashFriend == true then
         SLASH_COMMANDS["/addfriend"]    = SlashFriend
         SLASH_COMMANDS["/friend"]       = SlashFriend
     end
-    
+
     if SC.SV.SlashIgnore == true then
         SLASH_COMMANDS["/addignore"]    = SlashIgnore
         SLASH_COMMANDS["/ignore"]       = SlashIgnore
     end
-    
+
     if SC.SV.SlashRemoveFriend == true then
         SLASH_COMMANDS["/unfriend"]     = SlashRemoveFriend
         SLASH_COMMANDS["/removefriend"] = SlashRemoveFriend
     end
-    
+
     if SC.SV.SlashRemoveIgnore == true then
         SLASH_COMMANDS["/unignore"]     = SlashRemoveIgnore
         SLASH_COMMANDS["/removeignore"] = SlashRemoveIgnore
     end
-    
+
     if SC.SV.SlashCampaignQ == true then
         SLASH_COMMANDS["/campaign"]     = SlashCampaignQ
     end
-    
+
     -- This command is always registered since it is also a default command
     SLASH_COMMANDS["/invite"]       = SlashInvite
-    
+
 end

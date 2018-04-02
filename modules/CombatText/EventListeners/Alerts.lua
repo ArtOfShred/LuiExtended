@@ -38,6 +38,6 @@ function CTL:OnEvent(tipId)
             self:TriggerEvent(C.eventType.ALERT, C.alertType.DODGE, nil)
         end
     end
-    
+
     ]]--
 end

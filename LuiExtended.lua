@@ -158,7 +158,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
     -- Load saved variables
     LUIE_LoadSavedVars()
-    
+
     LUIE.PlayerNameRaw = GetRawUnitName("player")
     LUIE.PlayerNameFormatted = strformat(SI_UNIT_NAME, GetUnitName("player"))
     LUIE.PlayerDisplayName = strformat(SI_UNIT_NAME, GetUnitDisplayName("player"))
@@ -206,7 +206,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         end
         return name, texture, earnedRank
     end
- 
+
     local zos_GetUnitBuffInfo = GetUnitBuffInfo
     GetUnitBuffInfo = function(unitTag, buffIndex)
         local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer = zos_GetUnitBuffInfo(unitTag, buffIndex)
@@ -216,20 +216,20 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then
             iconFile = LUIE.Effects.EffectOverride[abilityId].icon
         end
-    
+
         return buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer
-    
+
     end
-    
+
     -- Death Recap enhancements:
     local zos_GetKillingAttackerInfo = GetKillingAttackerInfo
     local zos_GetKillingAttackInfo = GetKillingAttackInfo
-    
+
     GetKillingAttackerInfo = function(index)
         local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
         local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
 
-        if LUIE.Effects.EffectSourceOverride[abilityId] then 
+        if LUIE.Effects.EffectSourceOverride[abilityId] then
             if LUIE.Effects.EffectSourceOverride[abilityId].source then
                 attackerRawName = LUIE.Effects.EffectSourceOverride[abilityId].source
             end
@@ -237,44 +237,44 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                 minionName = LUIE.Effects.EffectSourceOverride[abilityId].pet
             end
         end
-        
+
         return attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName
     end
- 
+
     GetKillingAttackInfo = function(index)
         local attackerRawName, attackerChampionPoints, attackerLevel, attackerAvARank, isPlayer, isBoss, alliance, minionName, attackerDisplayName = zos_GetKillingAttackerInfo(index)
         local attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits, abilityId = zos_GetKillingAttackInfo(index)
- 
+
         if LUIE.Effects.EffectOverride[abilityId] then
             attackName = LUIE.Effects.EffectOverride[abilityId].name or attackName
             attackIcon = LUIE.Effects.EffectOverride[abilityId].icon or attackIcon
         end
-        
+
         if LUIE.Effects.EffectOverrideByName[abilityId] then
             unitName = strformat("<<t:1>>", attackerRawName)
             if LUIE.Effects.EffectOverrideByName[abilityId][unitName] then
-                if LUIE.Effects.EffectOverrideByName[abilityId][unitName].hide then 
+                if LUIE.Effects.EffectOverrideByName[abilityId][unitName].hide then
                     return
                 end
                 attackName = LUIE.Effects.EffectOverrideByName[abilityId][unitName].name or attackName
                 attackIcon = LUIE.Effects.EffectOverrideByName[abilityId][unitName].icon or attackIcon
             end
         end
-        
+
         return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
     end
-    
+
     -- HOOK SUPPORT FOR OTHER ADDONS (ICON)
     LUIE.GetAbilityIcon = GetAbilityIcon -- Used only for PTS testing
     local zos_GetAbilityIcon = GetAbilityIcon
     GetAbilityIcon = function(abilityId)
         local icon = zos_GetAbilityIcon(abilityId)
-        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then 
+        if LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon then
             icon = LUIE.Effects.EffectOverride[abilityId].icon
         end
         return(icon)
     end
-    
+
     -- HOOK SUPPORT FOR OTHER ADDONS (NAME)
     LUIE.GetAbilityName = GetAbilityName -- Used only for PTS testing
     local zos_GetAbilityName = GetAbilityName
@@ -285,7 +285,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         end
         return(abilityName)
     end
-    
+
     -- HOOK SUPPORT FOR OTHER ADDONS (ARTIFICIAL EFFECT IDS)
     LUIE.GetArtificialEffectInfo = GetArtificialEffectInfo -- Used only for PTS testing
     local zos_GetArtificialEffectInfo = GetArtificialEffectInfo
@@ -299,21 +299,21 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         end
         return displayName, iconFile, effectType, sortOrder, timeStarted, timeEnding
     end
-    
+
     ZO_Synergy.OnSynergyAbilityChanged = function(self)
         local synergyName, iconFilename = GetSynergyInfo()
 
         if LUIE.Effects.SynergyNameOverride[synergyName] then
             iconFilename = LUIE.Effects.SynergyNameOverride[synergyName]
         end
-        
+
         if synergyName and iconFilename then
             if self.lastSynergyName ~= synergyName then
                 PlaySound(SOUNDS.ABILITY_SYNERGY_READY)
 
                 self.action:SetText(zo_strformat(SI_USE_SYNERGY, synergyName))
             end
-            
+
             self.icon:SetTexture(iconFilename)
 
             SHARED_INFORMATION_AREA:SetHidden(self, false)
@@ -323,7 +323,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
         self.lastSynergyName = synergyName
     end
-    
+
     local function EffectsRowComparator(left, right)
         local leftIsArtificial, rightIsArtificial = left.isArtificial, right.isArtificial
         if leftIsArtificial ~= rightIsArtificial then
@@ -339,12 +339,12 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
             end
         end
     end
-    
-    STATS.AddLongTermEffects = function(self, container, effectsRowPool)      
+
+    STATS.AddLongTermEffects = function(self, container, effectsRowPool)
         local function UpdateEffects(eventCode, changeType, buffSlot, buffName, unitTag, startTime, endTime, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId)
             if (not unitTag or unitTag == "player") and not container:IsHidden() then
                 effectsRowPool:ReleaseAllObjects()
-                    
+
                 local effectsRows = {}
 
                 --Artificial effects--
@@ -360,14 +360,14 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     effectsRow.effectId = effectId
                     effectsRow.isArtificial = true
 
-                    table.insert(effectsRows, effectsRow)    
+                    table.insert(effectsRows, effectsRow)
                 end
-                    
+
                 local counter = 1
                 local trackBuffs = { }
                 for i = 1, GetNumBuffs("player") do
                     local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId = GetUnitBuffInfo("player", i)
-                        
+
                     trackBuffs[counter] = {
                         buffName = buffName,
                         startTime = startTime,
@@ -383,7 +383,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     }
                     counter = counter + 1
                 end
-                   
+
                 -- Heavy handed - but functional way to mark duplicate abilities to not display (Duplicate shuffle auras, etc) by only displaying the one with the latest end time.
                 for i = 1, #trackBuffs do
                     local compareId = trackBuffs[i].abilityId
@@ -397,8 +397,8 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                             end
                         end
                     end
-                end         
-                    
+                end
+
                 for i = 1, #trackBuffs do
                     local buffName = trackBuffs[i].buffName
                     local startTime =  trackBuffs[i].startTime
@@ -412,11 +412,11 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     local statusEffectType =  trackBuffs[i].statusEffectType
                     local abilityId =  trackBuffs[i].abilityId
                     local markForRemove = trackBuffs[i].markForRemove or false
-                        
+
                     local tooltipText = GetAbilityEffectDescription(buffSlot)
                     --if LUIE.Effects.TooltipOverride[abilityId] then tooltipText = LUIE.Effects.TooltipOverride[abilityId] end
                     -- Have to trim trailing spaces on the end of tooltips
-                    if tooltipText ~= "" then 
+                    if tooltipText ~= "" then
                         tooltipText = string.match(tooltipText, ".*%S")
                     end
                     if buffSlot > 0 and buffName ~= "" and not (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide) and not markForRemove then
@@ -449,7 +449,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                 end
             end
         end
-           
+
         container:RegisterForEvent(EVENT_EFFECT_CHANGED, UpdateEffects)
         --container:AddFilterForEvent(EVENT_EFFECT_CHANGED, REGISTER_FILTER_UNIT_TAG, "player")
         container:RegisterForEvent(EVENT_EFFECTS_FULL_UPDATE, UpdateEffects)
@@ -457,7 +457,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         container:RegisterForEvent(EVENT_ARTIFICIAL_EFFECT_REMOVED, UpdateEffects)
         container:SetHandler("OnEffectivelyShown", UpdateEffects)
     end
-    
+
     ZO_StatsActiveEffect_OnMouseEnter = function(control)
         InitializeTooltip(GameTooltip, control, RIGHT, -15)
         if control.isArtificial then
@@ -479,7 +479,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
     -- Hook skills advisor and use this variable to refresh the abilityData on time on initialization. We don't want to reload any more after that.
     local firstRun = true
-    
+
     -- Overwrite skills advisor ability data function
     ZO_SKILLS_ADVISOR_SINGLETON.FillInAbilityData = function(self, abilityData, skillBuildId, skillBuildAbilityIndex)
         local skillType, lineIndex, abilityIndex, isActive, skillBuildMorphChoice, skillBuildRankIndex = GetSkillBuildEntryInfo(skillBuildId, skillBuildAbilityIndex)
@@ -490,7 +490,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         local currentMorphChoice
         local atMorph = false
         if progressionIndex then
-            currentMorphChoice = select(2, GetAbilityProgressionInfo(progressionIndex)) 
+            currentMorphChoice = select(2, GetAbilityProgressionInfo(progressionIndex))
             atMorph = select(4, GetAbilityProgressionXPInfo(progressionIndex))
         end
 
@@ -504,7 +504,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
             abilityData.plainName = plainName
             abilityData.icon = icon
         end
-        
+
         abilityData.abilityId = abilityId
         abilityData.skillType = skillType
         abilityData.lineIndex = lineIndex
@@ -523,17 +523,17 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         abilityData.skillBuildRankIndex = skillBuildRankIndex
         abilityData.rankNeeded = rankNeeded
     end
-    
+
     ZO_SKILLS_ADVISOR_SINGLETON:UpdateSkillBuildData()
-    
+
     firstRun = false
-    
+
     local ACTION_BUTTON_BGS = {ability = "EsoUI/Art/ActionBar/abilityInset.dds", item = "EsoUI/Art/ActionBar/quickslotBG.dds"}
     local ACTION_BUTTON_BORDERS = {normal = "EsoUI/Art/ActionBar/abilityFrame64_up.dds", mouseDown = "EsoUI/Art/ActionBar/abilityFrame64_down.dds"}
-    
+
     local function SetupActionSlot(slotObject, slotId)
         local slotIcon = GetSlotTexture(slotId)
-        
+
         -- Added function - Replace icons if needed
         local slotName = GetSlotName(slotId)
         if LUIE.Effects.BarNameOverride[slotName] then
@@ -582,7 +582,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         [ACTION_TYPE_ITEM]          = SetupItemSlot,
         [ACTION_TYPE_SIEGE_ACTION]  = SetupSiegeActionSlot,
         [ACTION_TYPE_COLLECTIBLE]   = SetupCollectibleActionSlot,
-    } 
+    }
 end
 
 local delayBuffer       = {}

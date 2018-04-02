@@ -94,7 +94,7 @@ local IsAbilityProc = {
     [A.Skill_Power_Lash]            = true,
     [A.Trigger_Assassins_Will]      = true,
     [A.Trigger_Assassins_Scourge]   = true,
-    --[L.Trigger_Deadly_Throw]      = true,   
+    --[L.Trigger_Deadly_Throw]      = true,
 }
 
 local HasAbilityProc = {
@@ -141,10 +141,10 @@ function CI.Initialize( enabled )
     -- If User does not want the Combat Info then exit right here
     if not enabled then return end
     CI.Enabled = true
-    
+
     CI.ApplyFont()
 
-    uiQuickSlot.label = UI.Label( ActionButton9, {CENTER,CENTER}, nil, nil, g_potionFont, nil, true )    
+    uiQuickSlot.label = UI.Label( ActionButton9, {CENTER,CENTER}, nil, nil, g_potionFont, nil, true )
     uiQuickSlot.label:SetFont(g_potionFont)
     if CI.SV.PotionTimerColor then
         uiQuickSlot.label:SetColor(unpack(uiQuickSlot.colour))
@@ -154,7 +154,7 @@ function CI.Initialize( enabled )
     uiQuickSlot.label:SetDrawLayer( DL_OVERLAY )
     uiQuickSlot.label:SetDrawTier( DT_HIGH )
     CI.ResetPotionTimerLabel() -- Set the label position
-    
+
     -- Create Ultimate overlay labels
     uiUltimate.LabelVal = UI.Label( ActionButton8, {BOTTOM,TOP,0,-3}, nil, {1,2}, "$(BOLD_FONT)|16|soft-shadow-thick", nil, true )
     uiUltimate.LabelPct = UI.Label( ActionButton8, {CENTER,CENTER}, nil, nil, "$(BOLD_FONT)|20|outline", nil, true )
@@ -187,7 +187,7 @@ function CI.Initialize( enabled )
         local useDesaturation = (isShowingCooldown and CI.SV.GlobalDesat )
         ZO_ActionSlot_SetUnusable(self.icon, not usable, useDesaturation)
     end
-    
+
     ActionButton.UpdateCooldown = function(self, options)
         local slotnum = self:GetSlot()
         local remain, duration, global, globalSlotType = GetSlotCooldownInfo(slotnum)
@@ -277,7 +277,7 @@ function CI.Initialize( enabled )
 
         self.isGlobalCooldown = global
         self:UpdateUsable()
-    end 
+    end
 end
 
 -- Helper function to get override ability duration.
@@ -313,7 +313,7 @@ function CI.RegisterCombatInfo()
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED, CI.OnDeath)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, CI.OnEffectChanged)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED, CI.InventoryItemUsed)
-        
+
         -- Grab any aura's from the list that have on EVENT_COMBAT_EVENT AURA support
         for abilityId, value in pairs (E.BarHighlightOverride) do
             if value.showFakeAura == true then
@@ -371,7 +371,7 @@ function CI.OnUpdate(currentTime)
     -- Procs
     for k, v in pairs (g_triggeredSlotsRemain) do
         local remain = g_triggeredSlotsRemain[k] - currentTime
-        
+
         -- If duration reaches 0 then remove effect
         if remain <= 0 then
             if g_triggeredSlots[k] and g_uiProcAnimation[g_triggeredSlots[k]] then
@@ -379,7 +379,7 @@ function CI.OnUpdate(currentTime)
             end
             g_triggeredSlotsRemain[k] = nil
         end
-        
+
         -- Update Label
         if g_triggeredSlots[k] and g_uiProcAnimation[g_triggeredSlots[k]] and g_triggeredSlotsRemain[k] then
             if CI.SV.BarShowLabel then
@@ -387,11 +387,11 @@ function CI.OnUpdate(currentTime)
             end
         end
     end
-    
+
     -- Ability Highlight
     for k, v in pairs (g_toggledSlotsRemain) do
         local remain = g_toggledSlotsRemain[k] - currentTime
-        
+
         -- If duration reaches 0 then remove effect
         if remain <= 0 then
             if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] then
@@ -400,7 +400,7 @@ function CI.OnUpdate(currentTime)
             end
             g_toggledSlotsRemain[k] = nil
         end
-        
+
         -- Update Label
         if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] and g_toggledSlotsRemain[k] then
             if CI.SV.BarShowLabel then
@@ -417,7 +417,7 @@ function CI.OnUpdate(currentTime)
         -- Don't show unless potion is used - We have to counter for the GCD lockout from casting a spell here
         if ( duration > 5000 ) then
             uiQuickSlot.label:SetHidden( false )
-            uiQuickSlot.label:SetText( strfmt(CI.SV.PotionTimerMiilis and "%.1f" or "%.1d", 0.001*remain ) )            
+            uiQuickSlot.label:SetText( strfmt(CI.SV.PotionTimerMiilis and "%.1f" or "%.1d", 0.001*remain ) )
             for i = #(uiQuickSlot.timeColours), 1, -1 do
                 if remain < uiQuickSlot.timeColours[i].remain then
                     if CI.SV.PotionTimerColor then
@@ -454,36 +454,36 @@ function CI.ApplyFont()
         LUIE.PrintToChat(GetString(SI_LUIE_ERROR_FONT))
         barfontName = "$(MEDIUM_FONT)"
     end
-    
+
     local barFontStyle = ( CI.SV.BarFontStyle and CI.SV.BarFontStyle ~= "" ) and CI.SV.BarFontStyle or "outline"
     local barFontSize = ( CI.SV.BarFontSize and CI.SV.BarFontSize > 0 ) and CI.SV.BarFontSize or 17
-    
+
     g_barFont = barFontName .. "|" .. barFontSize .. "|" .. barFontStyle
-    
+
     for k, _ in pairs(g_uiProcAnimation) do
         g_uiProcAnimation[k].procLoopTexture.label:SetFont(g_barFont)
     end
-    
+
     for k, _ in pairs(g_uiCustomToggle) do
         g_uiCustomToggle[k].label:SetFont(g_barFont)
     end
-    
+
     -- Setup Potion Timer Font
     local potionFontName = LUIE.Fonts[CI.SV.PotionTimerFontFace]
         if not potionFontName or potionFontName == "" then
         LUIE.PrintToChat(GetString(SI_LUIE_ERROR_FONT))
         potionFontName = "$(MEDIUM_FONT)"
     end
-    
+
     local potionFontStyle = ( CI.SV.PotionTimerFontStyle and CI.SV.PotionTimerFontStyle ~= "" ) and CI.SV.PotionTimerFontStyle or "outline"
     local potionFontSize = ( CI.SV.PotionTimerFontSize and CI.SV.PotionTimerFontSize > 0 ) and CI.SV.PotionTimerFontSize or 17
-    
+
     g_potionFont = potionFontName .. "|" .. potionFontSize .. "|" .. potionFontStyle
-    
+
     -- If QuickSlot is created, and we're updating font from the menu setting, set the font here.
     if uiQuickSlot.label then
         uiQuickSlot.label:SetFont(g_potionFont)
-    end 
+    end
 end
 
 -- Resets bar labels on menu option change
@@ -491,11 +491,11 @@ function CI.ResetBarLabel()
     for k, _ in pairs(g_uiProcAnimation) do
         g_uiProcAnimation[k].procLoopTexture.label:SetText("")
     end
-    
+
     for k, _ in pairs(g_uiCustomToggle) do
         g_uiCustomToggle[k].label:SetText("")
     end
-    
+
     for i = 3, 8 do
         local actionButton = ZO_ActionBar_GetButton(i)
         if g_uiCustomToggle[i] then
@@ -510,11 +510,11 @@ function CI.ResetBarLabel()
     end
 end
 
-function CI.ResetPotionTimerLabel()   
+function CI.ResetPotionTimerLabel()
     local actionButton = ZO_ActionBar_GetButton(9)
     uiQuickSlot.label:ClearAnchors()
     uiQuickSlot.label:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
-    uiQuickSlot.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"), nil, 0, -CI.SV.PotionTimerLabelPosition)   
+    uiQuickSlot.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"), nil, 0, -CI.SV.PotionTimerLabelPosition)
 end
 
 function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
@@ -540,17 +540,17 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                         end
                         if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetHidden( true ) end
                     end
-                end    
-            end 
+                end
+            end
             -- Clear the ground target queue
             g_pendingGroundAbility = nil
-        end 
+        end
     end
-    
+
     if changeType == EFFECT_RESULT_FADED then -- delete Effect
         -- Ignore fading event if override is true
         if g_barNoRemove[abilityId] then return end
-    
+
         if unitTag == "player" then
             -- Stop any proc animation associated with this effect
             if abilityType == ABILITY_TYPE_BONUS and g_triggeredSlotsRemain[abilityId] then
@@ -559,7 +559,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                 end
                 g_triggeredSlotsRemain[abilityId] = nil
             end
-            
+
             -- Stop any toggle animation associted with this effect
             if g_toggledSlotsRemain[abilityId] then
                 if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
@@ -583,7 +583,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                     end
                 end
             end
-            
+
             -- Display active effects
             if g_toggledSlots[abilityId] then
                 local currentTime = GetGameTimeMilliseconds()
@@ -594,7 +594,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                         g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (CI.GetAbilityDuration(abilityId)/1000) or (CI.GetAbilityDuration(abilityId)/1000) - 1 ))
                     end
                 end
-            end 
+            end
         end
     end
 end
@@ -615,7 +615,7 @@ end
 function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
     -- If the source/target isn't the player then bail out now.
     if sourceType ~= COMBAT_UNIT_TYPE_PLAYER and targetType ~= COMBAT_UNIT_TYPE_PLAYER then return end
-    
+
     if result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED or result == ACTION_RESULT_EFFECT_GAINED_DURATION then
         local currentTime = GetGameTimeMilliseconds()
 
@@ -632,8 +632,8 @@ function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGr
     elseif result == ACTION_RESULT_EFFECT_FADED then
         -- Ignore fading event if override is true
         if g_barNoRemove[abilityId] then return end
-    
-        if g_toggledSlotsRemain[abilityId] then 
+
+        if g_toggledSlotsRemain[abilityId] then
             if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
                 g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
                 if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then uiUltimate.LabelPct:SetHidden( false ) end
@@ -671,7 +671,7 @@ function CI.OnSlotUpdated(eventCode, slotNum)
     if slotNum == 8 then
         CI.UpdateUltimateLabel(eventCode)
     end
-    
+
     -- Handle slot update for action bars
     --d( strfmt("%d: %s(%d)", slotNum, GetSlotName(slotNum), GetSlotBoundId(slotNum) ) )
     -- Look only for action bar slots
@@ -703,7 +703,7 @@ function CI.OnSlotUpdated(eventCode, slotNum)
             g_toggledSlots[abilityId] = nil
         end
     end
-    
+
     if g_uiCustomToggle[slotNum] then
         --g_uiCustomToggle[slotNum].label:SetText("")
         g_uiCustomToggle[slotNum]:SetHidden(true)
@@ -767,7 +767,7 @@ function CI.UpdateUltimateLabel(eventCode)
     -- Handle ultimate label first
     local setHiddenLabel = not ( CI.SV.UltimateLabelEnabled and IsSlotUsed( g_ultimateSlot ) )
     local setHiddenPct = not ( CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) )
-    
+
     uiUltimate.LabelVal:SetHidden( setHiddenLabel )
     if setHiddenPct then
         uiUltimate.LabelPct:SetHidden( true )
@@ -796,7 +796,7 @@ end
 function CI.OnSlotsFullUpdate(eventCode, isHotbarSwap)
     -- Handle ultimate label first
     CI.UpdateUltimateLabel(eventCode)
-    
+
     -- If the event was triggered by a weapon swap we need to clear ground-target stored ability
     if isHotbarSwap then
         g_pendingGroundAbility = nil
@@ -804,12 +804,12 @@ function CI.OnSlotsFullUpdate(eventCode, isHotbarSwap)
 
     -- Don't update bars if this full update event was from using an inventory item
     if g_potionUsed == true then return end
-    
+
     -- Update action bar skills
     g_actionBar = {}
     for i = 3, 8 do
         CI.OnSlotUpdated(eventCode, i)
-    end  
+    end
 end
 
 function CI.PlayProcAnimations(slotNum)
@@ -822,7 +822,7 @@ function CI.PlayProcAnimations(slotNum)
         procLoopTexture:SetBlendMode(TEX_BLEND_MODE_ADD)
         procLoopTexture:SetDrawLevel(2)
         procLoopTexture:SetHidden(true)
-        
+
         procLoopTexture.label = UI.Label (procLoopTexture, nil, nil, nil, g_barFont, nil, false)
         procLoopTexture.label:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
         procLoopTexture.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"), nil, 0, -CI.SV.BarLabelPosition)
@@ -866,9 +866,9 @@ end
 function CI.ShowCustomToggle(slotNum)
     if not g_uiCustomToggle[slotNum] then
         local actionButton = ZO_ActionBar_GetButton(slotNum)
-        
+
         local toggleFrame = WINDOW_MANAGER:CreateControl("$(parent)Toggle_LUIE", actionButton.slot, CT_TEXTURE)
-        
+
         --toggleFrame.back = UI.Texture( toggleFrame, nil, nil, "/esoui/art/actionbar/actionslot_toggledon.dds")
         toggleFrame:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
         toggleFrame:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"))
@@ -879,7 +879,7 @@ function CI.ShowCustomToggle(slotNum)
         toggleFrame:SetDrawTier(2)
         toggleFrame:SetColor(0.5,1,0.5,1)
         toggleFrame:SetHidden(false)
-        
+
         toggleFrame.label = UI.Label (toggleFrame, nil, nil, nil, g_barFont, nil, false)
         toggleFrame.label:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
         toggleFrame.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"), nil, 0, -CI.SV.BarLabelPosition)
@@ -899,7 +899,7 @@ end
 function CI.OnPowerUpdatePlayer( eventCode , unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax )
     if unitTag ~= "player" then return end
     if powerType ~= POWERTYPE_ULTIMATE then return end
-    
+
     -- flag if ultimate is full - we"ll need it for ultimate generation texture
     uiUltimate.NotFull = ( powerValue < powerMax )
     -- Calculate the percentage to activation old one and current
@@ -912,12 +912,12 @@ function CI.OnPowerUpdatePlayer( eventCode , unitTag, powerIndex, powerType, pow
             if CI.SV.UltimateLabelEnabled then uiUltimate.LabelVal:SetText( powerValue .. "/" .. g_ultimateCost ) end
             if CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetText( pct .. "%") end
             if pct < 100  then
-                if CI.SV.UltimatePctEnabled then 
+                if CI.SV.UltimatePctEnabled then
                     local setHidden = false
                     if (CI.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden() ) then setHidden = true end
-                    uiUltimate.LabelPct:SetHidden(setHidden) 
+                    uiUltimate.LabelPct:SetHidden(setHidden)
                 end
-                if CI.SV.UltimateLabelEnabled then 
+                if CI.SV.UltimateLabelEnabled then
                     for i = #(uiUltimate.pctColours), 1, -1 do
                         if pct < uiUltimate.pctColours[i].pct then
                             uiUltimate.LabelVal:SetColor( unpack( uiUltimate.pctColours[i].colour ) )

@@ -123,7 +123,7 @@ local function CreateUIControls()
     uiFps.label = UI.Label( uiTopRow, nil, {50,20}, {1,1}, g_infoPanelFont, "999 fps", false )
     uiFps.control = uiFps.label
     --uiFps.bg = UI.Backdrop( uiFps.control, "fill", nil, nil, nil, false )
-    
+
     uiClock.label = UI.Label( uiTopRow, nil, {60,20}, {1,1}, g_infoPanelFont, "88:88:88", false )
     uiClock.control = uiClock.label
     --uiClock.bg = UI.Backdrop( uiClock.control, "fill", nil, nil, nil, false )
@@ -205,7 +205,7 @@ function PNL.RearrangePanel()
         size = size + uiFps.control:GetWidth()
         anchor = uiFps.control
     end
-    
+
     -- Time
     if PNL.SV.HideClock then
         uiClock.control:SetHidden(true)

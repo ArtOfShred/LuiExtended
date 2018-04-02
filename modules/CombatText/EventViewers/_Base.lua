@@ -51,7 +51,7 @@ function CTV:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical,
     local textFormat = S.formats.damage
     local fontSize = S.fontSizes.damage
     local textColor = S.colors.damage[damageType]
-    
+
     if (isDodged) then
         textFormat = S.formats.dodged
         fontSize = S.fontSizes.mitigation
@@ -154,14 +154,14 @@ function CTV:ControlLayout(control, abilityId, combatType, sourceName)
 
     if abilityId then
         local iconPath = LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].icon or GetAbilityIcon(abilityId)
-        
+
         if LUIE.Effects.EffectOverrideByName[abilityId] then
             sourceName = zo_strformat("<<t:1>>", sourceName)
             if LUIE.Effects.EffectOverrideByName[abilityId][sourceName] and LUIE.Effects.EffectOverrideByName[abilityId][sourceName].icon then
                 iconPath = LUIE.Effects.EffectOverrideByName[abilityId][sourceName].icon
             end
         end
-        
+
         if iconPath and iconPath ~= '' then
             local S = LUIE.CombatText.SV
             local iconSide
@@ -172,7 +172,7 @@ function CTV:ControlLayout(control, abilityId, combatType, sourceName)
             else
                 iconSide = 'none'
             end
-            
+
             if iconSide == 'none' then
                 control.icon:SetAnchor(CENTER, control, CENTER, 0, 0)
                 control.label:SetAnchor(CENTER, control.icon, CENTER, 0, 0)

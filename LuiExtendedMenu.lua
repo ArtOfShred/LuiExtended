@@ -43,12 +43,12 @@ function LUIE_CreateSettings()
     local playerFrameOptions            = { "Vertical Stacked Frames", "Separated Horizontal Frames", "Pyramid" }
     local playerFrameOptionsKeys        = { ["Vertical Stacked Frames"] = 1, ["Separated Horizontal Frames"] = 2, ["Pyramid"] = 3 }
     local championOptions               = { "Show Above Cap", "Limit to Cap", }
-    
+
     -- Create a list of abilityId's / abilityName's to use for Blacklist
     local function GenerateCustomList(input)
 
         local options, values = {}, {}
-        
+
         local counter = 0
         for id in pairs(input) do
             counter = counter + 1
@@ -63,11 +63,11 @@ function LUIE_CreateSettings()
         end
         return options, values
     end
-    
+
     local PromBuffs, PromBuffsValues = GenerateCustomList(LUIE.SpellCastBuffs.SV.PromBuffTable)
     local PromDebuffs, PromDebuffsValues = GenerateCustomList(LUIE.SpellCastBuffs.SV.PromDebuffTable)
     local Blacklist, BlackListValues = GenerateCustomList(LUIE.SpellCastBuffs.SV.BlacklistTable)
-    
+
     local formatOptions = {
         "Nothing",
         "Current",
@@ -93,7 +93,7 @@ function LUIE_CreateSettings()
         registerForRefresh = true,
         registerForDefaults = true,
     }
-    
+
     local panelDataBuffsDebuffs = {
         type = "panel",
         name = strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_BUFFSDEBUFFS)),
@@ -117,7 +117,7 @@ function LUIE_CreateSettings()
         registerForRefresh = true,
         registerForDefaults = true,
     }
-    
+
     local panelDataUnitFrames = {
         type = "panel",
         name = strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_UF)),
@@ -129,7 +129,7 @@ function LUIE_CreateSettings()
         registerForRefresh = true,
         registerForDefaults = true,
     }
-    
+
     local panelDataCombatInfo = {
         type = "panel",
         name = strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CI)),
@@ -141,7 +141,7 @@ function LUIE_CreateSettings()
         registerForRefresh = true,
         registerForDefaults = true,
     }
-    
+
     local panelDataCombatText = {
         type = "panel",
         name = strformat("<<1>> - <<2>>", LUIE.name, GetString(SI_LUIE_LAM_CT)),
@@ -165,7 +165,7 @@ function LUIE_CreateSettings()
         registerForRefresh = true,
         registerForDefaults = true,
     }
-    
+
     local optionsData = {}
     local optionsDataBuffsDebuffs = {}
     local optionsDataChatAnnouncements = {}
@@ -182,7 +182,7 @@ function LUIE_CreateSettings()
         func = function() ReloadUI("ingame") end,
         width = "full",
     }
-    
+
     -- Unit Frames Module
     optionsData[#optionsData + 1] = {
         type = "checkbox",
@@ -193,14 +193,14 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.D.UnitFrames_Enabled,
     }
-    
+
     -- Unit Frames module description
     optionsData[#optionsData + 1] = {
         type = "description",
         width = "half",
         text = GetString(SI_LUIE_LAM_UF_DESCRIPTION),
     }
-    
+
     -- Combat Info Module
     optionsData[#optionsData + 1] = {
         type = "checkbox",
@@ -211,14 +211,14 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.D.CombatInfo_Enabled,
     }
-    
+
     -- Combat Info Description
     optionsData[#optionsData + 1] = {
         type = "description",
         width = "half",
         text = GetString(SI_LUIE_LAM_CI_DESCRIPTION),
     }
-    
+
     -- Combat Text Module
     optionsData[#optionsData + 1] = {
         type = "checkbox",
@@ -229,14 +229,14 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.D.CombatText_Enabled,
     }
-    
+
     -- Combat Text Description
     optionsData[#optionsData + 1] = {
         type = "description",
         width = "half",
         text = GetString(SI_LUIE_LAM_CT_DESCRIPTION),
     }
-    
+
     -- Buffs & Debuffs Module
     optionsData[#optionsData + 1] = {
         type = "checkbox",
@@ -247,14 +247,14 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.D.SpellCastBuff_Enable,
     }
-    
+
     -- Buffs & Debuffs Description
     optionsData[#optionsData + 1] = {
         type = "description",
         width = "half",
         text = GetString(SI_LUIE_LAM_BUFFS_DESCRIPTION),
     }
-    
+
     -- Chat Announcements Module
     optionsData[#optionsData +1] = {
         type = "checkbox",
@@ -265,14 +265,14 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
         default = LUIE.D.ChatAnnouncements_Enable,
     }
-    
+
     -- Chat Announcements Module Description
     optionsData[#optionsData +1] = {
         type = "description",
         width = "half",
         text = GetString(SI_LUIE_LAM_CA_DESCRIPTION),
-    } 
-    
+    }
+
     -- Slash Commands Module
     optionsData[#optionsData +1] = {
         type = "checkbox",
@@ -460,7 +460,7 @@ function LUIE_CreateSettings()
         warning = GetString(SI_LUIE_LAM_GENERIC_WARNING),
         default = LUIE.D.ChatUseSystem,
     }
-    
+
     -- Include Timestamp
     optionsData[#optionsData + 1] = {
         type = "checkbox",
@@ -472,7 +472,7 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.ChatUseSystem end,
         default = LUIE.D.TimeStamp,
     }
-    
+
     -- Timestamp Format
     optionsData[#optionsData + 1] = {
         type = "editbox",
@@ -484,7 +484,7 @@ function LUIE_CreateSettings()
         disabled = function() return not (LUIE.SV.ChatUseSystem and LUIE.SV.TimeStamp) end,
         default = LUIE.D.TimeStampFormat,
     }
-    
+
     -- Toggle XP Bar popup
     optionsData[#optionsData + 1] = {
         type = "checkbox",
@@ -495,7 +495,7 @@ function LUIE_CreateSettings()
         width = "full",
         default = LUIE.D.HideXPBar,
     }
-    
+
     -- Startup Message Options
     optionsData[#optionsData + 1] = {
         type = "checkbox",
@@ -506,7 +506,7 @@ function LUIE_CreateSettings()
         width = "full",
         default = LUIE.D.StartupInfo,
     }
-    
+
 ----------------------------------------------------------------------------------------------
 -- SLASH COMMANDS
 ----------------------------------------------------------------------------------------------
@@ -515,7 +515,7 @@ function LUIE_CreateSettings()
         type = "description",
         text = GetString(SI_LUIE_LAM_SLASHCMDS_DESCRIPTION),
     }
-    
+
     -- ReloadUI Button
     optionsDataSlashCommands[#optionsDataSlashCommands + 1] = {
         type = "button",
@@ -553,7 +553,7 @@ function LUIE_CreateSettings()
                 name = strformat("<<1>>", GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GENERAL)),
                 width = "full"
             },
-            
+
             {   -- SlashTrade
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_TRADE),
@@ -563,7 +563,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashTrade,
             },
-            
+
             {   -- SlashHome
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_HOME),
@@ -582,13 +582,13 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashCampaignQ,
             },
-            
+
             {   -- Slash Commands (Group Commands)
                 type = "header",
                 name = strformat("<<1>>", GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GROUP)),
                 width = "full"
             },
-            
+
             {   -- SlashRegroup
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_REGROUP),
@@ -598,7 +598,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashRegroup,
             },
-            
+
             {   -- SlashDisband
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_DISBAND),
@@ -608,7 +608,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashDisband,
             },
-            
+
             {   -- SlashGroupLeave
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_LEAVE),
@@ -618,7 +618,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashGroupLeave,
             },
-            
+
             {   -- SlashGroupKick
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_KICK),
@@ -628,7 +628,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashGroupKick,
             },
-            
+
             {   -- SlashVoteKick
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_VOTEKICK),
@@ -638,13 +638,13 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashVoteKick,
             },
-            
+
             {   -- Slash Commands (Guild Commands)
                 type = "header",
                 name = strformat("<<1>>", GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GUILD)),
                 width = "full"
             },
-            
+
             {   -- SlashGuildInvite
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDINVITE),
@@ -654,7 +654,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashGuildInvite,
             },
-            
+
             {   -- SlashGuildQuit
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDQUIT),
@@ -664,7 +664,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashGuildQuit,
             },
-            
+
             {   -- SlashGuildKick
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDKICK),
@@ -674,13 +674,13 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashGuildKick,
             },
-            
+
             {   -- Slash Commands (Social Commands)
                 type = "header",
                 name = strformat("<<1>>", GetString(SI_LUIE_LAM_SLASHCMDSHEADER_SOCIAL)),
                 width = "full"
             },
-            
+
             {   -- SlashFriend
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_FRIEND),
@@ -690,7 +690,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashFriend,
             },
-            
+
             {   -- SlashIgnore
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_IGNORE),
@@ -700,7 +700,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashIgnore,
             },
-            
+
             {   -- SlashRemoveFriend
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND),
@@ -710,7 +710,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashRemoveFriend,
             },
-            
+
             {   -- SlashRemoveIgnore
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE),
@@ -726,13 +726,13 @@ function LUIE_CreateSettings()
 ----------------------------------------------------------------------------------------------
 -- COMBAT INFO
 ----------------------------------------------------------------------------------------------
- 
+
     -- Combat Info Description
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "description",
         text = GetString(SI_LUIE_LAM_CI_DESCRIPTION),
     }
-    
+
     -- ReloadUI Button
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "button",
@@ -741,7 +741,7 @@ function LUIE_CreateSettings()
         func = function() ReloadUI("ingame") end,
         width = "full",
     }
-    
+
     -- Combat Info - Global Cooldown Options Submenu
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "submenu",
@@ -799,7 +799,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.CombatInfo.SV.GlobalLabelColor = value end,
                 width = "full",
                 default = LUIE.CombatInfo.D.GlobalLabelColor,
-                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShowGCD) end, 
+                disabled = function() return not (LUIE.SV.CombatInfo_Enabled and LUIE.CombatInfo.SV.GlobalShowGCD) end,
             },
             {
                 -- GCD - Animation Method
@@ -815,7 +815,7 @@ function LUIE_CreateSettings()
             },
         },
     }
-    
+
     -- Combat Info - Ultimate Tracking Options Submenu
     optionsDataCombatInfo[#optionsDataCombatInfo + 1] = {
         type = "submenu",
@@ -1068,7 +1068,7 @@ function LUIE_CreateSettings()
         type = "description",
         text = GetString(SI_LUIE_LAM_BUFFS_DESCRIPTION),
     }
-    
+
     -- ReloadUI Button
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "button",
@@ -1199,7 +1199,7 @@ function LUIE_CreateSettings()
             },
         },
     }
-    
+
     -- Buffs&Debuffs - Icon Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "submenu",
@@ -1447,7 +1447,7 @@ function LUIE_CreateSettings()
             },
         },
     }
-    
+
     -- Buffs&Debuffs - Long Term Effect Filters Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "submenu",
@@ -1881,7 +1881,7 @@ function LUIE_CreateSettings()
             },
         },
     }
-    
+
     -- Buffs&Debuffs - Prominent Buffs & Debuffs Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "submenu",
@@ -1892,7 +1892,7 @@ function LUIE_CreateSettings()
                 type = "description",
                 text = GetString(SI_LUIE_LAM_BUFF_PROM_DESCRIPTION),
             },
-			
+
 			{
                 -- Prominent Buffs Label Toggle
                 type = "checkbox",
@@ -1904,7 +1904,7 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentLabel,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-			
+
 			{
                 -- Prominent Buffs Label Font Face
                 type = "dropdown",
@@ -1919,7 +1919,7 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentLabelFontFace,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentLabel ) end,
             },
-			
+
             {
                 -- Prominent Buffs Label Font Size
                 type = "slider",
@@ -1932,7 +1932,7 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentLabelFontSize,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentLabel ) end,
             },
-			
+
             {
                 -- Prominent Buffs Label Font Style
                 type = "dropdown",
@@ -1946,7 +1946,7 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentLabelFontStyle,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentLabel ) end,
             },
-			
+
 			{
                 -- Prominent Buffs Progress Bar
                 type = "checkbox",
@@ -1958,7 +1958,7 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentProgress,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-            
+
             {
                 -- Prominent Buffs Progress Bar Texture
                 type = "dropdown",
@@ -1973,7 +1973,7 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentProgressTexture,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
             },
-			
+
 			{
                 -- Prominent Buffs Gradient Color 1
                 type    = "colorpicker",
@@ -1985,7 +1985,7 @@ function LUIE_CreateSettings()
                 default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1[3]},
 				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
             },
-			
+
 			{
                 -- Prominent Buffs Gradient Color 2
                 type    = "colorpicker",
@@ -1997,7 +1997,7 @@ function LUIE_CreateSettings()
                 default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2[3]},
 				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
             },
-			
+
 			{
                 -- Prominent Debuffs Gradient Color 1
                 type    = "colorpicker",
@@ -2009,7 +2009,7 @@ function LUIE_CreateSettings()
                 default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1[3]},
 				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
             },
-			
+
 			{
                 -- Prominent Debuffs Gradient Color 2
                 type    = "colorpicker",
@@ -2021,7 +2021,7 @@ function LUIE_CreateSettings()
                 default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2[3]},
 				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
             },
-			
+
 			{
 				-- Prominent Buffs Label/Progress Bar Direction
                 type = "dropdown",
@@ -2035,7 +2035,7 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentBuffLabelDirection,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and (LUIE.SpellCastBuffs.SV.ProminentLabel or LUIE.SpellCastBuffs.SV.ProminentProgress) ) end,
             },
-			
+
 			{
 				-- Prominent Debuffs Label/Progress Bar Direction
                 type = "dropdown",
@@ -2063,7 +2063,7 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentAlignment,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-            
+
             {
                 -- Prominent Buffs Reverse Sort Order
                 type = "checkbox",
@@ -2075,12 +2075,12 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentReverseSort,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-            
+
             {
                 type = "description",
                 text = GetString(SI_LUIE_LAM_BUFF_PROM_DIALOGUE_DESCRIPT),
             },
-            
+
             {
                 -- Prominent Buffs List (Add)
                 type = "editbox",
@@ -2089,9 +2089,9 @@ function LUIE_CreateSettings()
                 getFunc = function() end,
                 setFunc = function(value) LUIE.SpellCastBuffs.AddToCustomList(LUIE.SpellCastBuffs.SV.PromBuffTable, value) LUIE_Prominent_Buffs_List:UpdateChoices(GenerateCustomList(LUIE.SpellCastBuffs.SV.PromBuffTable)) end,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
-                
+
             },
-            
+
             {
                 -- Prominent Buffs List (Remove)
                 type = "dropdown",
@@ -2106,7 +2106,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
                 reference = "LUIE_Prominent_Buffs_List"
             },
-            
+
             {
                 -- Prominent Debuffs List (Add)
                 type = "editbox",
@@ -2115,9 +2115,9 @@ function LUIE_CreateSettings()
                 getFunc = function() end,
                 setFunc = function(value) LUIE.SpellCastBuffs.AddToCustomList(LUIE.SpellCastBuffs.SV.PromDebuffTable, value) LUIE_Prominent_Debuffs_List:UpdateChoices(GenerateCustomList(LUIE.SpellCastBuffs.SV.PromDebuffTable)) end,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
-                
+
             },
-            
+
             {
                 -- Prominent Debuffs List (Remove)
                 type = "dropdown",
@@ -2134,18 +2134,18 @@ function LUIE_CreateSettings()
             },
        },
     }
-    
+
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_HEADER),
         controls = {
-        
+
         -- Buffs & Debuffs Blacklist Description
             {
                 type = "description",
                 text = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT),
             },
-            
+
             {
                 -- Buffs & Debuffs Blacklist (Add)
                 type = "editbox",
@@ -2154,9 +2154,9 @@ function LUIE_CreateSettings()
                 getFunc = function() end,
                 setFunc = function(value) LUIE.SpellCastBuffs.AddToCustomList(LUIE.SpellCastBuffs.SV.BlacklistTable, value) LUIE_Blacklist:UpdateChoices(GenerateCustomList(LUIE.SpellCastBuffs.SV.BlacklistTable)) end,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
-                
+
             },
-            
+
             {
                 -- Buffs & Debuffs Blacklist (Remove)
                 type = "dropdown",
@@ -2171,18 +2171,18 @@ function LUIE_CreateSettings()
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
                 reference = "LUIE_Blacklist"
             },
-            
+
         },
-        
+
     }
-    
+
     -- Debug Options
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "header",
         name = "Debug Options",
         width = "full",
     }
-    
+
     -- Debug
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "checkbox",
@@ -2194,7 +2194,7 @@ function LUIE_CreateSettings()
         default = LUIE.SpellCastBuffs.D.ShowDebugAbilityId,
         disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
     }
-    
+
     -- Debug
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "checkbox",
@@ -2206,7 +2206,7 @@ function LUIE_CreateSettings()
         default = LUIE.SpellCastBuffs.D.ShowDebugCombat,
         disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
     }
-    
+
     -- Debug
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "checkbox",
@@ -2218,7 +2218,7 @@ function LUIE_CreateSettings()
         default = LUIE.SpellCastBuffs.D.ShowDebugEffect,
         disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
     }
-    
+
     -- Debug
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "checkbox",
@@ -2234,13 +2234,13 @@ function LUIE_CreateSettings()
 ----------------------------------------------------------------------------------------------
 -- CHAT ANNOUNCEMENTS
 ----------------------------------------------------------------------------------------------
-    
+
     -- Chat Announcements Module Description
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "description",
         text = GetString(SI_LUIE_LAM_CA_DESCRIPTION),
     }
-    
+
     -- Player Name Display Method
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "dropdown",
@@ -2253,7 +2253,7 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
         default = chatNameDisplayOptions[2],
     }
-    
+
     --[[-- Notification Color
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "colorpicker",
@@ -2265,7 +2265,7 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.TodoLater end,
         default = {r=LUIE.ChatAnnouncements.D.Notify.NotificationColor[1], g=LUIE.ChatAnnouncements.D.Notify.NotificationColor[2], b=LUIE.ChatAnnouncements.D.Notify.NotificationColor[3]}
     }]]--
-    
+
     -- Character Name Bracket
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "dropdown",
@@ -2278,7 +2278,7 @@ function LUIE_CreateSettings()
         disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
         default = LUIE.ChatAnnouncements.D.BracketOptionCharacter,
     }
-    
+
     -- ReloadUI Button
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "button",
@@ -2623,7 +2623,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and LUIE.ChatAnnouncements.SV.Currency.CurrencyWVChange and LUIE.ChatAnnouncements.SV.Currency.CurrencyWVShowTotal) end,
                 default = LUIE.ChatAnnouncements.D.Currency.CurrencyMessageTotalWV,
             },
-            
+
             {
                 -- Show Outfit Tokens
                 type = "checkbox",
@@ -2842,7 +2842,7 @@ function LUIE_CreateSettings()
             },
         },
     }
-    
+
     -- Chat Announcements - Loot Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
@@ -2926,7 +2926,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not (LUIE.ChatAnnouncements.SV.Inventory.LootTotal and LUIE.SV.ChatAnnouncements_Enable) end,
                 default = LUIE.ChatAnnouncements.D.Inventory.LootTotalString,
             },
-            
+
             {
                 -- Show looted items
                 type = "checkbox",
@@ -2972,7 +2972,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not (LUIE.ChatAnnouncements.SV.Inventory.Loot and LUIE.SV.ChatAnnouncements_Enable) end,
                 default = LUIE.ChatAnnouncements.D.Inventory.LootBlacklist,
             },
-            
+
             {
                 -- Hide Trash Quality Items
                 type = "checkbox",
@@ -2984,7 +2984,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not (LUIE.ChatAnnouncements.SV.Inventory.Loot and LUIE.SV.ChatAnnouncements_Enable) end,
                 default = LUIE.ChatAnnouncements.D.Inventory.LootNotTrash,
             },
-            
+
             {
                 -- Show Confiscated Items
                 type = "checkbox",
@@ -3018,7 +3018,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not (LUIE.ChatAnnouncements.SV.Inventory.Loot and LUIE.SV.ChatAnnouncements_Enable) end,
                 default = LUIE.ChatAnnouncements.D.Inventory.LootShowLockpick,
             },
-            
+
             {
                 -- Show Quest Loot (Add)
                 type = "checkbox",
@@ -3041,7 +3041,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = LUIE.ChatAnnouncements.D.Inventory.LootQuestRemove,
             },
-            
+
             {
                 -- Show Vendor Inventory Changes
                 type = "checkbox",
@@ -3153,13 +3153,13 @@ function LUIE_CreateSettings()
                 default = LUIE.ChatAnnouncements.D.Inventory.LootShowDisguise,
             },
         },
-    }       
-            
+    }
+
     -- Chat Announcements - Shared Currency/Loot Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_CA_CURRENCY_CONTEXT_MENU),
-        controls = {        
+        controls = {
             {
                 -- Currency/Loot Message Color
                 type = "colorpicker",
@@ -3492,7 +3492,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageBuy,
-            },                    
+            },
             {
                 -- Loot Message (Buy) No Value
                 type = "editbox",
@@ -3745,7 +3745,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageUpgradeFail,
-            },                         
+            },
             {
                 -- Loot Message (Refine)
                 type = "editbox",
@@ -3756,7 +3756,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageRefine,
-            },  
+            },
             {
                 -- Loot Message (Deconstruct)
                 type = "editbox",
@@ -3767,7 +3767,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageDeconstruct,
-            },  
+            },
             {
                 -- Loot Message (Research)
                 type = "editbox",
@@ -3778,7 +3778,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageResearch,
-            },  
+            },
             {
                 -- Loot Message (Destroy)
                 type = "editbox",
@@ -3789,7 +3789,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageDestroy,
-            },  
+            },
             {
                 -- Loot Message (Lockpick)
                 type = "editbox",
@@ -3833,7 +3833,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageDisguiseEquip,
-            },     
+            },
             {
                 -- Loot Message (Disguise Remove)
                 type = "editbox",
@@ -3844,7 +3844,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageDisguiseRemove,
-            },     
+            },
             {
                 -- Loot Message (Disguise Destroy)
                 type = "editbox",
@@ -3855,10 +3855,10 @@ function LUIE_CreateSettings()
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = LUIE.ChatAnnouncements.D.ContextMessages.CurrencyMessageDisguiseDestroy,
-            },       
+            },
         },
     }
-        
+
     -- Chat Announcements - Experience Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
@@ -4097,7 +4097,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 disabled = function() return not (LUIE.ChatAnnouncements.SV.XP.Experience and LUIE.SV.ChatAnnouncements_Enable) end,
                 default = LUIE.ChatAnnouncements.D.XP.ExperienceThrottle,
-            },   
+            },
             {
                 -- Skill Points Header
                 type = "header",
@@ -4379,7 +4379,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
                 default = LUIE.ChatAnnouncements.D.Skills.SkillGuildRepName,
-            },  
+            },
             {
                 -- Skill Fighters Guild
                 type = "checkbox",
@@ -4526,14 +4526,14 @@ function LUIE_CreateSettings()
             },
         },
     }
-    
+
     -- Chat Announcements - Collectible/Lorebooks Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_HEADER),
         controls = {
             {
-                -- 
+                --
                 type = "header",
                 name = GetString(SI_LUIE_LAM_CA_COLLECTIBLE_COL_HEADER),
                 width = "full",
@@ -4892,10 +4892,10 @@ function LUIE_CreateSettings()
                 LUIE.SV.ChatAnnouncements_Enable) end,
                 default = LUIE.ChatAnnouncements.D.Lorebooks.LorebookShowHidden,
             },
-            
+
         },
     }
-        
+
     -- Chat Announcements - Achievements Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
@@ -5237,10 +5237,10 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.ChatAnnouncements.D.Achievement.AchievementCategory11,
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-            }, 
+            },
         },
     }
-        
+
     -- Chat Announcements - Quest Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
@@ -5255,7 +5255,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestShareCA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestShareCA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestShareCA,
             },
             {
                 -- Show Quest Share Alert
@@ -5266,7 +5266,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestShareAlert = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestShareAlert,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestShareAlert,
             },
             {
                 -- Show Location Discovery (CA)
@@ -5277,7 +5277,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestLocDiscoveryCA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestLocDiscoveryCA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestLocDiscoveryCA,
             },
             {
                 -- Show Location Discovery (CSA)
@@ -5288,7 +5288,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestLocDiscoveryCSA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestLocDiscoveryCSA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestLocDiscoveryCSA,
             },
             {
                 -- Show Location Discovery (Alert)
@@ -5299,7 +5299,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestLocDiscoveryAlert = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestLocDiscoveryAlert,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestLocDiscoveryAlert,
             },
             {
                 -- Show Location Objective (CA)
@@ -5310,7 +5310,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestLocObjectiveCA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestLocObjectiveCA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestLocObjectiveCA,
             },
             {
                 -- Show Location Objective (CSA)
@@ -5321,7 +5321,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestLocObjectiveCSA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestLocObjectiveCSA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestLocObjectiveCSA,
             },
             {
                 -- Show Location Objective (Alert)
@@ -5332,7 +5332,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestLocObjectiveAlert = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestLocObjectiveAlert,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestLocObjectiveAlert,
             },
             {
                 -- Show Location Complete (CA)
@@ -5343,7 +5343,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestLocCompleteCA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestLocCompleteCA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestLocCompleteCA,
             },
             {
                 -- Show Location Complete (CSA)
@@ -5354,7 +5354,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestLocCompleteCSA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestLocCompleteCSA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestLocCompleteCSA,
             },
             {
                 -- Show Location Complete (Alert)
@@ -5365,7 +5365,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestLocCompleteAlert = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestLocCompleteAlert,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestLocCompleteAlert,
             },
             {
                 -- Show Quest Accept (CA)
@@ -5376,7 +5376,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestAcceptCA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestAcceptCA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestAcceptCA,
             },
             {
                 -- Show Quest Accept (CSA)
@@ -5387,7 +5387,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestAcceptCSA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestAcceptCSA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestAcceptCSA,
             },
             {
                 -- Show Quest Accept (Alert)
@@ -5398,7 +5398,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestAcceptAlert = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestAcceptAlert,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestAcceptAlert,
             },
             {
                 -- Show Quest Complete (CA)
@@ -5409,7 +5409,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestCompleteCA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestCompleteCA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestCompleteCA,
             },
             {
                 -- Show Quest Complete (CSA)
@@ -5420,7 +5420,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestCompleteCSA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestCompleteCSA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestCompleteCSA,
             },
             {
                 -- Show Quest Complete (Alert)
@@ -5431,7 +5431,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestCompleteAlert = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestCompleteAlert,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestCompleteAlert,
             },
             {
                 -- Show Quest Abandon (CA)
@@ -5442,7 +5442,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestAbandonCA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestAbandonCA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestAbandonCA,
             },
             {
                 -- Show Quest Abandon (CSA)
@@ -5453,7 +5453,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestAbandonCSA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestAbandonCSA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestAbandonCSA,
             },
             {
                 -- Show Quest Abandon (Alert)
@@ -5464,7 +5464,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestAbandonAlert = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestAbandonAlert,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestAbandonAlert,
             },
             {
                 -- Show Quest Failure (CA)
@@ -5475,7 +5475,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestFailCA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestFailCA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestFailCA,
             },
             {
                 -- Show Quest Failure (CSA)
@@ -5486,7 +5486,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestFailCSA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestFailCSA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestFailCSA,
             },
             {
                 -- Show Quest Failure (Alert)
@@ -5497,7 +5497,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestFailAlert = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestFailAlert,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestFailAlert,
             },
             {
                 -- Show Quest Objective Updates (CA)
@@ -5508,7 +5508,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestObjUpdateCA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestObjUpdateCA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestObjUpdateCA,
             },
             {
                 -- Show Quest Objective Updates (CSA)
@@ -5519,7 +5519,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestObjUpdateCSA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestObjUpdateCSA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestObjUpdateCSA,
             },
             {
                 -- Show Quest Objective Updates (Alert)
@@ -5530,7 +5530,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestObjUpdateAlert = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestObjUpdateAlert,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestObjUpdateAlert,
             },
             {
                 -- Show Quest Objective Complete (CA)
@@ -5541,7 +5541,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestObjCompleteCA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestObjCompleteCA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestObjCompleteCA,
             },
             {
                 -- Show Quest Objective Complete (CSA)
@@ -5552,7 +5552,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestObjCompleteCSA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestObjCompleteCSA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestObjCompleteCSA,
             },
             {
                 -- Show Quest Objective Complete (Alert)
@@ -5563,7 +5563,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestObjCompleteAlert = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestObjCompleteAlert,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestObjCompleteAlert,
             },
             {
                 -- Show Quest Icon
@@ -5625,7 +5625,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestLong = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestLong,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestLong,
             },
             {
                 -- Show POI Completed Long String
@@ -5636,11 +5636,11 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestLocLong = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestLocLong,                   
-            }, 
+                default = LUIE.ChatAnnouncements.D.Quests.QuestLocLong,
+            },
         },
     }
-        
+
     -- Chat Announcements - Social Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
@@ -5862,7 +5862,7 @@ function LUIE_CreateSettings()
                 type = "header",
                 name = GetString(SI_LUIE_LAM_CA_SOCIAL_DUEL_HEADER),
                 width = "full",
-            }, 
+            },
             {
                 -- Show Duel Events (CA)
                 type = "checkbox",
@@ -6047,7 +6047,7 @@ function LUIE_CreateSettings()
             },
         },
     }
-        
+
     -- Chat Announcements - Group Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
@@ -6323,7 +6323,7 @@ function LUIE_CreateSettings()
             },
         },
     }
-        
+
     -- Chat Announcements - Display Announcements Options Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
@@ -6486,7 +6486,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestICDiscoveryCA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestICDiscoveryCA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestICDiscoveryCA,
             },
             {
                 -- Imperial City Display Announcement (CSA)
@@ -6497,7 +6497,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestICDiscoveryCSA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestICDiscoveryCSA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestICDiscoveryCSA,
             },
             {
                 -- Imperial City Display Announcement (Alert)
@@ -6508,7 +6508,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestICDiscoveryAlert = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestICDiscoveryAlert,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestICDiscoveryAlert,
             },
             {
                 -- Imperial City Display Description
@@ -6519,7 +6519,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestICDescription = value end,
                 width = "full",
                 disabled = function() return not (LUIE.SV.ChatAnnouncements_Enable and (LUIE.ChatAnnouncements.SV.Quests.QuestICDiscoveryCA or LUIE.ChatAnnouncements.SV.Quests.QuestICDiscoveryCSA or LUIE.ChatAnnouncements.SV.Quests.QuestICDiscoveryAlert) ) end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestICDiscoveryAlert,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestICDiscoveryAlert,
             },
             {
                 -- Craglorn Buff (CA)
@@ -6530,7 +6530,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestCraglornBuffCA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestCraglornBuffCA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestCraglornBuffCA,
             },
             {
                 -- Craglorn Buff (CSA)
@@ -6541,7 +6541,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestCraglornBuffCSA = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestCraglornBuffCSA,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestCraglornBuffCSA,
             },
             {
                 -- Craglorn Buff (Alert)
@@ -6552,7 +6552,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.Quests.QuestCraglornBuffAlert = value end,
                 width = "full",
                 disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-                default = LUIE.ChatAnnouncements.D.Quests.QuestCraglornBuffAlert,                   
+                default = LUIE.ChatAnnouncements.D.Quests.QuestCraglornBuffAlert,
             },
         },
     }
@@ -6813,7 +6813,7 @@ function LUIE_CreateSettings()
         type = "description",
         text = GetString(SI_LUIE_LAM_UF_DESCRIPTION),
     }
-    
+
     -- ReloadUI Button
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "button",
@@ -6822,7 +6822,7 @@ function LUIE_CreateSettings()
         func = function() ReloadUI("ingame") end,
         width = "full",
     }
-    
+
     -- Unit Frames - Default Unit Frames Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
@@ -7009,7 +7009,7 @@ function LUIE_CreateSettings()
             },
         },
     }
-    
+
     -- Unit Frames - Custom Unit Frames Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
@@ -7161,7 +7161,7 @@ function LUIE_CreateSettings()
             },
         },
     }
-    
+
     -- Unit Frames - Custom Unit Frame Color Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
@@ -7286,7 +7286,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = { r=LUIE.UnitFrames.D.CustomColourWarden[1], g=LUIE.UnitFrames.D.CustomColourWarden[2], b=LUIE.UnitFrames.D.CustomColourWarden[3] },
                 disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-            },       
+            },
             {
                 -- Custom Unit Reaction color
                 type = "colorpicker",
@@ -7340,7 +7340,7 @@ function LUIE_CreateSettings()
             },
         },
     }
-    
+
     -- Unit Frames - Custom Unit Frames (Player & Target) Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
@@ -7714,7 +7714,7 @@ function LUIE_CreateSettings()
             },
         },
     }
-    
+
     -- Unit Frames - Additional Player Frame Display Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
@@ -7843,7 +7843,7 @@ function LUIE_CreateSettings()
             },
         },
     }
-    
+
     -- Unit Frames - Custom Unit Frames (Group) Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
@@ -8024,7 +8024,7 @@ function LUIE_CreateSettings()
             },
         },
     }
-    
+
     -- Unit Frames - Custom Unit Frames (Raid) Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
@@ -8135,7 +8135,7 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.UnitFrames.D.RaidNameClip,
                 disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesRaid ) end,
-            },  
+            },
             {
                 -- Class / Role Icon on Raid Frames Setting
                 type = "dropdown",
@@ -8208,7 +8208,7 @@ function LUIE_CreateSettings()
             },
         },
     }
-    
+
     -- Unit Frames - Custom Unit Frames (Boss) Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
@@ -8320,9 +8320,9 @@ function LUIE_CreateSettings()
                 warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
                 disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesBosses ) end,
             },
-        },  
+        },
     }
-    
+
     -- Unit Frames - Custom Unit Frames (PvP Target Frame) Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
@@ -8364,7 +8364,7 @@ function LUIE_CreateSettings()
             },
         },
     }
-    
+
     -- Unit Frames - Common Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
@@ -8448,13 +8448,13 @@ function LUIE_CreateSettings()
 ----------------------------------------------------------------------------------------------
 -- Combat Text
 ----------------------------------------------------------------------------------------------
-  
+
     -- Combat Text Description
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type = "description",
         text = GetString(SI_LUIE_LAM_CT_DESCRIPTION),
     }
-    
+
     -- ReloadUI Button
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type = "button",
@@ -8463,7 +8463,7 @@ function LUIE_CreateSettings()
         func = function() ReloadUI("ingame") end,
         width = "full",
     }
-    
+
     -- Unlock Panels
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type    = "checkbox",
@@ -8481,7 +8481,7 @@ function LUIE_CreateSettings()
             end
         end,
     }
-    
+
     -- In Combat Only
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type    = "checkbox",
@@ -8643,7 +8643,7 @@ function LUIE_CreateSettings()
                 setFunc = function(v) LUIE.CombatText.SV.toggles.incoming.showInterrupted = v end,
                 default = LUIE.CombatText.D.toggles.incoming.showInterrupted,
             },
-        
+
             {
                 -- Incoming Crowd Control Header
                 type = "header",
@@ -8697,7 +8697,7 @@ function LUIE_CreateSettings()
             },
         },
     }
-    
+
     -- Combat Text - Toggle Options (Outgoing) Options Submenu
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type = "submenu",
@@ -8902,7 +8902,7 @@ function LUIE_CreateSettings()
             },
         },
     }
-    
+
     -- Combat Text - Toggle Options (Notification) Options Submenu
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type = "submenu",
@@ -9320,7 +9320,7 @@ function LUIE_CreateSettings()
             },
         },
     }
-    
+
     -- Combat Text - Font Format Options Submenu
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type = "submenu",
@@ -10766,27 +10766,27 @@ function LUIE_CreateSettings()
         LAM2:RegisterAddonPanel('LUIEUnitFramesOptions', panelDataUnitFrames)
         LAM2:RegisterOptionControls('LUIEUnitFramesOptions', optionsDataUnitFrames)
     end
-    
+
     if LUIE.SV.ChatAnnouncements_Enable then
         LAM2:RegisterAddonPanel('LUIEChatAnnouncementOptions', panelDataChatAnnouncements)
         LAM2:RegisterOptionControls('LUIEChatAnnouncementOptions', optionsDataChatAnnouncements)
     end
-    
+
     if LUIE.SV.SpellCastBuff_Enable then
         LAM2:RegisterAddonPanel('LUIEBuffsAndDebuffsOptions', panelDataBuffsDebuffs)
         LAM2:RegisterOptionControls('LUIEBuffsAndDebuffsOptions', optionsDataBuffsDebuffs)
     end
-    
+
     if LUIE.SV.CombatInfo_Enabled then
         LAM2:RegisterAddonPanel('LUIECombatInfoOptions', panelDataCombatInfo)
         LAM2:RegisterOptionControls('LUIECombatInfoOptions', optionsDataCombatInfo)
     end
-    
+
     if LUIE.SV.CombatText_Enabled then
         LAM2:RegisterAddonPanel('LUIECombatTextOptions', panelDataCombatText)
         LAM2:RegisterOptionControls('LUIECombatTextOptions', optionsDataCombatText)
     end
-    
+
     if LUIE.SV.SlashCommands_Enable then
         LAM2:RegisterAddonPanel('LUIESlashCommandsOptions', panelDataSlashCommands)
         LAM2:RegisterOptionControls('LUIESlashCommandsOptions', optionsDataSlashCommands)
