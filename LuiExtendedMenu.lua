@@ -1997,27 +1997,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
                 reference = "LUIE_Prominent_Debuffs_List"
             },
-            
-            
-            --[[
-                        {	type="editbox",
-                    name		=GetString(BUI_Menu_BlackListAdd),
-                    tooltip	=GetString(BUI_Menu_BlackListAddDesc),
-                    getFunc	=function() end,
-                    setFunc	=function(text) BUI.Buffs.AddTo(BUI.Vars.BuffsBlackList,text) BUI_Black_List_Dropdown:UpdateChoices(MakeList(BUI.Vars.BuffsBlackList)) end,
-                    disabled	=function() return not BUI.Vars.EnableBlackList end,
-                },
-                {	type		="dropdown",
-                    name		=GetString(BUI_Menu_BlackListDel),
-                    tooltip	=GetString(BUI_Menu_BlackListDelDesc),
-                    choices	=Black_List,
-                    choicesValues=Black_List_Values,
-                    scrollable	=30,
-                    getFunc	=function() end,
-                    setFunc	=function(value) BUI.Buffs.RemoveFrom(BUI.Vars.BuffsBlackList,value) BUI_Black_List_Dropdown:UpdateChoices(MakeList(BUI.Vars.BuffsBlackList)) end,
-                    disabled	=function() return not BUI.Vars.EnableBlackList end,
-                    reference	="BUI_Black_List_Dropdown"
-            ]]--
        },
     }
     

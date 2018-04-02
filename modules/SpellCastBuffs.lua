@@ -112,7 +112,6 @@ SCB.D = {
     ShowDebugCombat                  = false,
     ShowDebugEffect                  = false,
     HideReduce                       = true,
-    
     ProminentLabel                   = true,
     ProminentLabelFontFace           = "Univers 67",
     ProminentLabelFontStyle          = "outline",
@@ -127,8 +126,9 @@ SCB.D = {
     ProminentReverseSort             = false,
     ProminentBuffLabelDirection      = "Left",
     ProminentDebuffLabelDirection    = "Right",
-    PromBuffTable = {},
-    PromDebuffTable = {},
+    PromBuffTable                    = {},
+    PromDebuffTable                  = {},
+    BlacklistTable                   = {},       
     
 }
 SCB.SV = nil
