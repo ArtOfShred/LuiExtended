@@ -2,7 +2,7 @@
 ## Author: ArtOfShred, psypanda, Upularity & SpellBuilder
 ## Version: 5.3.2
 ## APIVersion: 100022
-## Description: Provides UnitFrames, InfoPanel, Combat Text & Info, Buffs Tracking, and Chat Announcements.
+## Description: Provides UnitFrames, InfoPanel, Combat Text & Info, Buffs & Debuff Tracking, Chat Announcements and Slash Commands.
 ## OptionalDependsOn: LibStub LibAddonMenu-2.0 LibMediaProvider-1.0
 ## SavedVariables: LUIESV
 ##
@@ -14,9 +14,9 @@
 
 ; The MIT License (MIT)
 ;
-; Copyright (c) 2017 - LuiExtended - ArtOfShred at esoui.com
-; Copyright (c) 2015-2016 - LuiExtended - SpellBuilder and Upularity at esoui.com
-; Copyright (c) 2014 - Combat Cloud - Samantha James
+; Copyright (c) 2017-2018 - LuiExtended - ArtOfShred <esoui.com>
+; Copyright (c) 2015-2016 - LuiExtended - SpellBuilder and Upularity <esoui.com>
+; Copyright (c) 2014 - CombatCloud - Samantha James
 ;
 ; Permission is hereby granted, free of charge, to any person obtaining a copy
 ; of this software and associated documentation files (the "Software"), to deal
@@ -61,7 +61,7 @@ LuiExtendedMenu.lua
 
 xml\bindings.xml
 xml\CombatText.xml
- 
+
 i18n\en.lua
 i18n\$(language).lua
 
@@ -83,7 +83,6 @@ modules\SlashCommands.lua
 modules\CombatText\Animation.lua
 modules\CombatText\Pool.lua
 modules\CombatText\PoolManager.lua
-
 modules\CombatText\EventListeners\_Base.lua
 modules\CombatText\EventListeners\Alerts.lua
 modules\CombatText\EventListeners\Combat.lua
@@ -93,7 +92,6 @@ modules\CombatText\EventListeners\Points_Champion.lua
 modules\CombatText\EventListeners\Resources_Potion.lua
 modules\CombatText\EventListeners\Resources_Power.lua
 modules\CombatText\EventListeners\Resources_Ultimate.lua
-
 modules\CombatText\EventViewers\_Base.lua
 modules\CombatText\EventViewers\Combat_Cloud.lua
 modules\CombatText\EventViewers\Combat_Hybrid.lua

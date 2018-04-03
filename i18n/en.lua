@@ -753,13 +753,10 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISEPLAYER",       "Show Di
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISEPLAYER_TP",    "Display special buff icon when player is in a relevant area and is actively disguised from enemies.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISETARGET",       "Show Disguised - Target")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_MISC_LOOTSHOWDISGUISETARGET_TP",    "Display special buff icon when target is in a relevant area and is actively disguised from enemies.")
-
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_HEADER",                       "Prominent Buffs & Debuffs")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DESCRIPTION",                  "This whitelist allows you to display important buffs and debuffs in separate containers with the addition of a label and progress bar.\n\nEligible Effects: Buffs on Player, Debuffs on Target, Ground Targeted Effects\n\nYou can add buffs and debuffs to EITHER container. For example if you'd like to track the duration of Hurricane with your other dots, you can add Hurricane to the Prominent Debuffs list.")
-
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_LABEL",						"Display Ability Name Label")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_LABEL_TP",						"Toggle the display of a label next to prominent auras with the Ability Name.")
-
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_FONTFACE",						"Label Font Face")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_FONTFACE_TP",					"Choose the font face for the prominent auras Ability Name label.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_FONTSTYLE",					"Label Font Style")
@@ -786,7 +783,6 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFFLABELDIRECTION",			"Label & Progres
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFFLABELDIRECTION_TP",		"Choose whether to display the Ability Name Label and Progress bar to the left or right of prominent buffs.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION",			"Label & Progress Bar Orientation (Debuffs)")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFFLABELDIRECTION_TP",		"Choose whether to display the Ability Name Label and Progress bar to the left or right of prominent debuffs.")
-
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DIALOGUE_DESCRIPT",			"Add prominent buffs or debuffs by entering an AbilityId or AbilityName into the input field and pressing enter. Remove prominent buffs or debuffs, by clicking the AbilityId or AbilityName from the dropdown list.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFF_ADDLIST",                 "Add Prominent Buff")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_BUFF_ADDLIST_TP",              "Add an abilityId or abilityName to the Prominent Buffs list.")
@@ -796,7 +792,6 @@ ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFF_ADDLIST",               "Add Pro
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFF_ADDLIST_TP",            "Add an abilityId or abilityName to the Prominent Debuffs list.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFF_REMLIST",               "Remove Prominent Debuff")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_PROM_DEBUFF_REMLIST_TP",            "Remove an abilityId or abilityName from the Prominent Debuffs list.")
-
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_BLACKLIST_HEADER",                  "Buff & Debuff Blacklisting")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT",			    "Add buffs or debuffs to the Blacklist by entering an AbilityId or AbilityName into the input field and pressing enter. Remove buffs or debuffs from the Blacklist, by clicking the AbilityId or AbilityName from the dropdown list.")
 ZO_CreateStringId("SI_LUIE_LAM_BUFF_BLACKLIST_ADDLIST",                 "Add Buff or Debuff to Blacklist")
@@ -841,16 +836,12 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWICONS_TP",               "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_COLOR_CONTEXT",              "Use Context Color for Loot & Currency Gain/Loss")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_COLOR_CONTEXT_TP",           "Color the currency/loot message depending on whether currency/loot was gained or lost.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_COLOR",                      "Currency/Loot Message Color")
--- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_COLORDOWN",                  "Currency/Loot Loss Color")
--- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_COLORUP",                    "Currency/Loot Gain Color")
--- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLD",                       "Display Gold Changes")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_COLORDOWN",                  "Currency/Loot Loss Color") -- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_COLORUP",                    "Currency/Loot Gain Color") -- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLD",                       "Display Gold Changes") -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLD_TP",                    "Print a context sensitive notification to chat when gold is gained or lost.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDCOLOR",                  "Gold Color")
--- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDNAME",                   "Gold Name")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDNAME",                   "Gold Name") -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDNAME_TP",                "Name to display for Gold.\nDefault: <<1[Gold/Gold]>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDTOTAL",                  "Display Total Gold Suffix")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_GOLDTOTAL_TP",               "Append the total amount of Gold after change is displayed.")
@@ -866,8 +857,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT",            "Hide Gu
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_HIDEGOLDAHSPENT_TP",         "Toggle this option to hide the display of gold spent on Guild Trader purchases.\nThis is a useful if you are using an addon like Awesome Guild Store.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAP",                     "Display Alliance Point Changes")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAP_TP",                  "Print a context sensitive notification to chat when Alliance Points are earned or spent.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPCOLOR",                "Alliance Points Color")
--- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPCOLOR",                "Alliance Points Color") -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPNAME",                 "Alliance Points Name")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPNAME_TP",              "Name to display for Alliance Points.\nDefault: <<1[Alliance Point/Alliance Points]>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPTOTAL",                "Display Total Alliance Points Suffix")
@@ -880,8 +870,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHROTTLE",             "Allianc
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWAPTHROTTLE_TP",          "Setting this option higher than 0 will throttle the display of Alliance Points earned by X milliseconds.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTV",                     "Display Tel Var Stone Changes")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTV_TP",                  "Print a context sensitive notification to chat when Tel Var Stones are gained or lost.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTVCOLOR",                "Tel Var Stones Color")
--- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTVCOLOR",                "Tel Var Stones Color") -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTVNAME",                 "Tel Var Stones Name")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTVNAME_TP",              "Name to display for Tel Var Stones.\nDefault: <<1[Tel Var Stone/Tel Var Stones]>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTVTOTAL",                "Display Total Tel Var Stones Suffix")
@@ -894,8 +883,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHROTTLE",             "Tel Var
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTVTHROTTLE_TP",          "Setting this option higher than 0 will throttle the display of Tel Var Stones looted by X milliseconds.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER",                "Display Writ Voucher Changes")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHER_TP",             "Print a context sensitive notification to chat when Writ Vouchers are rewarded or spent.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERCOLOR",           "Writ Vouchers Color")
--- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERCOLOR",           "Writ Vouchers Color") -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME",            "Writ Vouchers Name")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERNAME_TP",         "Name to display for Writ Vouchers.\nDefault: <<1[Writ Voucher/Writ Vouchers]>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWVOUCHERTOTAL",           "Display Total Writ Vouchers Suffix")
@@ -904,8 +892,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG",                "Total W
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_WVTOTAL_MSG_TP",             "Choose the syntax for the Total Writ Vouchers message.\nDefault: Total Vouchers: %s")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTE",              "Display Transmute Crystal Changes")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTE_TP",           "Print a context sensitive notification to chat when Transmute Crystals are rewarded or spent.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTECOLOR",         "Transmute Crystals Color")
--- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTECOLOR",         "Transmute Crystals Color") -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTENAME",          "Transmute Crystals Name")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTENAME_TP",       "Name to display for Transmute Crystals.\nDefault: <<1[Transmute Crystal/Transmute Crystals]>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTRANSMUTETOTAL",         "Display Total Transmute Crystals Suffix")
@@ -914,8 +901,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG",         "Total T
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_TRANSMUTETOTAL_MSG_TP",      "Choose the syntax for the Total Transmute Crystals message.\nDefault: Total Crystals: %s")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNS",                 "Display Crown Changes")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNS_TP",              "Print a context sensitive notification to chat when Crowns are rewarded or spent.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSCOLOR",            "Crowns Color")
--- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSCOLOR",            "Crowns Color") -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSNAME",             "Crowns Name")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSNAME_TP",          "Name to display for Crowns.\nDefault: <<1[Crown/Crowns]>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNSTOTAL",            "Display Total Crowns Suffix")
@@ -924,8 +910,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CROWNSTOTAL_MSG",            "Total C
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CROWNSTOTAL_MSG_TP",         "Choose the syntax for the Total Crowns message.\nDefault: Total Crowns: %s")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMS",              "Display Crown Gem Changes")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMS_TP",           "Print a context sensitive notification to chat when Crown Gems are rewarded or spent.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSCOLOR",         "Crown Gems Color")
--- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSCOLOR",         "Crown Gems Color") -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSNAME",          "Crown Gems Name")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSNAME_TP",       "Name to display for Crown Gems.\nDefault: <<1[Crown Gem/Crown Gems]>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWCROWNGEMSTOTAL",         "Display Total Crown Gems Suffix")
@@ -934,8 +919,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CROWNGEMSTOTAL_MSG",         "Total C
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_CROWNGEMSTOTAL_MSG_TP",      "Choose the syntax for the Total Crown Gems message.\nDefault: Total Gems: %s")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENS",                 "Display Outfit Style Token Changes")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENS_TP",              "Print a context sensitive notification to chat when Outfit Style Tokens are rewarded or spent.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSCOLOR",            "Outfit Style Tokens Color")
--- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSCOLOR",            "Outfit Style Tokens Color") -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSNAME",             "Outfit Style Tokens Name")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSNAME_TP",          "Name to display for Outfit Style Tokens.\nDefault: <<1[Outfit Style Token/Outfit Style Tokens]>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_SHOWTOKENSTOTAL",            "Display Total Outfit Style Tokens Suffix")
@@ -1027,47 +1011,47 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUYBACK_TP",         "Default
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUYBACK_VALUE",      "Buyback")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_BUYBACK_VALUE_TP",   "Default: You buyback %s for %s.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL",               "Sell (No Value)")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL_TP",                "Default: You sell %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL_VALUE",             "Sell")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL_VALUE_TP",          "Default: You sell %s for %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE_VALUE",                  "Fence")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE_VALUE_TP",               "Default: You fence %s for %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE",                  "Fence (No Value)")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE_TP",               "Default: You fence %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER_VALUE",                "Launder")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER_VALUE_TP",             "Default: You launder %s for %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER",                "Launder (No Value)")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER_TP",             "Default: You launder %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_USE",                    "Crafting - Use")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_USE_TP",                 "Default: You use %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CRAFT",                  "Crafting - Craft")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CRAFT_TP",               "Default: You craft %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EXTRACT",                "Crafting - Extract")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EXTRACT_TP",             "Default: You extract %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE",                "Crafting - Upgrade (Success)")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE_TP",             "Default: You upgrade %s to %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE_FAIL",           "Crafting - Upgrade (Failure)")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE_FAIL_TP",        "Default: You fail to upgrade %.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REFINE",                 "Crafting - Refine")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REFINE_TP",              "Default: You refine %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DECONSTRUCT",            "Crafting - Deconstruct")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DECONSTRUCT_TP",         "Default: You deconstruct %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RESEARCH",               "Crafting - Research")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RESEARCH_TP",            "Default: You research %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DESTROY",                "Destroyed")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DESTROY_TP",             "Default: You destroy %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOCKPICK",               "Lockpick Broken")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOCKPICK_TP",            "Default: Your %s breaks.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REMOVE",                 "Quest Item - Removed")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REMOVE_TP",              "Default: Removed %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_GROUP",                  "Group Member Loot")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_GROUP_TP",               "Default: %s loots %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP",         "Disguise - Equipped")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP_TP",      "Default: You equip %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE",        "Disguise - Removed")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE_TP",     "Default: You unequip %s.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY",       "Disguise - Destroyed")
-ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY_TP",    "Default: Your %s is destroyed.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL_TP",            "Default: You sell %s.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL_VALUE",         "Sell")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_SELL_VALUE_TP",      "Default: You sell %s for %s.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE_VALUE",        "Fence")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE_VALUE_TP",     "Default: You fence %s for %s.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE",              "Fence (No Value)")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_FENCE_TP",           "Default: You fence %s.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER_VALUE",      "Launder")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER_VALUE_TP",   "Default: You launder %s for %s.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER",            "Launder (No Value)")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LAUNDER_TP",         "Default: You launder %s.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_USE",                "Crafting - Use")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_USE_TP",             "Default: You use %s.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CRAFT",              "Crafting - Craft")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_CRAFT_TP",           "Default: You craft %s.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EXTRACT",            "Crafting - Extract")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_EXTRACT_TP",         "Default: You extract %s.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE",            "Crafting - Upgrade (Success)")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE_TP",         "Default: You upgrade %s to %s.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE_FAIL",       "Crafting - Upgrade (Failure)")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_UPGRADE_FAIL_TP",    "Default: You fail to upgrade %.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REFINE",             "Crafting - Refine")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REFINE_TP",          "Default: You refine %s.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DECONSTRUCT",        "Crafting - Deconstruct")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DECONSTRUCT_TP",     "Default: You deconstruct %s.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RESEARCH",           "Crafting - Research")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_RESEARCH_TP",        "Default: You research %s.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DESTROY",            "Destroyed")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DESTROY_TP",         "Default: You destroy %s.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOCKPICK",           "Lockpick Broken")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_LOCKPICK_TP",        "Default: Your %s breaks.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REMOVE",             "Quest Item - Removed")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_REMOVE_TP",          "Default: Removed %s.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_GROUP",              "Group Member Loot")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_GROUP_TP",           "Default: %s loots %s.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP",     "Disguise - Equipped")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_EQUIP_TP",  "Default: You equip %s.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE",    "Disguise - Removed")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_REMOVE_TP", "Default: You unequip %s.")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY",   "Disguise - Destroyed")
+ZO_CreateStringId("SI_LUIE_LAM_CA_CURRENCY_MESSAGE_DISGUISE_DESTROY_TP","Default: Your %s is destroyed.")
 
 -- LOOT MENU
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOOT_HEADER",                         "Loot Announcements")
@@ -1139,8 +1123,7 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_LVLUPICON",                       "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_LVLUPICON_TP",                    "Toggle the display of the normal level/champion point icon when you level up or earn a Champion point.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT",               "Color Level by Context")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_COLORLVLBYCONTEXT_TP",            "Colors the current level text to match the current level or champion point context color.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXPERIENCE_LEVELUP_COLOR",            "Level Up Message Color")
--- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_EXPERIENCE_LEVELUP_COLOR",            "Level Up Message Color") -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HEADER_RESPEC",                   "Respec Notifications")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_RESPEC",                          "Display Respec Notification - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_RESPEC_TP",                       "Display <<1>> when you redistribute Champion Points and when you relearn attributes, skill points, or morphs.")
@@ -1153,10 +1136,8 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_MESSAGE",                         "Experie
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_MESSAGE_TP",                      "Message format for experience gain.\nDefault: You earn %s.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_NAME",                            "Experience Points Name")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_NAME_TP",                         "Name to use for Experience Points.\nDefault: experience <<1[point/points]>>")
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXPERIENCE_COLORMESSAGE",             "Experience Gain Message Color")
--- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_EXPERIENCE_COLORNAME",                "Experience Points Name Color")
--- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_EXPERIENCE_COLORMESSAGE",             "Experience Gain Message Color") -- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_EXPERIENCE_COLORNAME",                "Experience Points Name Color") -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_EXPGAINCONTEXTNAME",              "Context Name for Experience Gain")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_EXPGAINCONTEXTNAME_TP",           "This option is intended to offer contrast from currency and loot messages since experience gain is not context sensitive.\nDefault: \"[Earned]\"")
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_EXPGAINDISPLAYNAME",              "Display Name for Experience Gain")
@@ -1170,10 +1151,8 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_THROTTLEEXPINCOMBAT_TP",          "Setting
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HEADER_SKILL_POINTS",             "Skill Points")
 ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_UPDATED",                  "Display Skill Points Earned - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_UPDATED_TP",               "Display <<1>>> when a Skill Point is earned from leveling up, quests, or skyshards.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_COLOR1",                   "Skyshard Message Color")
--- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_COLOR2",                   "Skill Points Message Color")
--- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_COLOR1",                   "Skyshard Message Color") -- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_COLOR2",                   "Skill Points Message Color") -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_PARTIALPREFIX",            "Skyshard Absorbed Message")
 ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_PARTIALPREFIX_TP",         "When a Skyshard is absorbed this prefix message will be displayed.\nDefault: Skyshard Absorbed")
 ZO_CreateStringId("SI_LUIE_LAM_CA_SKILLPOINT_PARTIALBRACKET",           "Skyshard Separator Bracket")
@@ -1189,13 +1168,11 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_SKILL_LINE_ABILITY",                  "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_SKILL_LINE_ABILITY_TP",               "Display <<1>> when an Ability levels up.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_SKILL_LINE_ICON",                     "Display Skill Line Icon")
 ZO_CreateStringId("SI_LUIE_LAM_CA_SKILL_LINE_ICON_TP",                  "Display the relevant icon for unlocked Skill Lines.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_SKILL_LINE_COLOR",                    "Skill/Ability Progression Message Color")
--- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_SKILL_LINE_COLOR",                    "Skill/Ability Progression Message Color") -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_EXP_HEADER_GUILDREP",                 "Guild Reputation")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_ICON",                       "Display Guild Icon")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_ICON_TP",                    "Display the relevant guild icon when Guild Reputation is earned.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_MESSAGECOLOR",               "Guild Reputation Message Color")
--- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_MESSAGECOLOR",               "Guild Reputation Message Color") -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_MESSAGEFORMAT",              "Guild Reputation Message Format")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_MESSAGEFORMAT_TP",           "Message format for Guild Reputation earned.\nDefault: You earn %s")
 ZO_CreateStringId("SI_LUIE_LAM_CA_GUILDREP_MESSAGENAME",                "Guild Reputation Points Name")
@@ -1229,10 +1206,8 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE",                  "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ENABLE_TP",               "Display <<1>> when a  Collectible is unlocked.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ICON",                    "Display Collectible Icon")
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_ICON_TP",                 "Display an icon for the relevant Collectible unlocked.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_ONE",               "Collectible Prefix Message Color")
--- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_TWO",               "Collectible Message Color")
--- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_ONE",               "Collectible Prefix Message Color") -- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_COLOR_TWO",               "Collectible Message Color") -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX",           "Collectible Prefix Message")
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_MESSAGEPREFIX_TP",        "Enter the prefix message that will display before the Collectible unlocked.\nDefault: Collection Updated")
 ZO_CreateStringId("SI_LUIE_LAM_CA_COLLECTIBLE_BRACKET",                 "Collectible Prefix Bracket")
@@ -1246,10 +1221,8 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLLECTION",                 "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLLECTION_TP",              "Display <<1>> when a collection of Lorebooks is complete.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_ICON",                       "Display Lorebook Icon")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_ICON_TP",                    "Display an icon for the relevant Lorebook unlocked.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLOR1",                     "Lorebook Prefix Message Color")
--- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLOR2",                     "Lorebook Message Color")
--- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLOR1",                     "Lorebook Prefix Message Color") -- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_COLOR2",                     "Lorebook Message Color") -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX1",                    "Lorebook Prefix Message")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX1_TP",                 "Enter the prefix message displayed when a Lorebook is discovered.\nDefault: Lorebook Discovered")
 ZO_CreateStringId("SI_LUIE_LAM_CA_LOREBOOK_PREFIX2",                    "Book Prefix Message")
@@ -1279,10 +1252,8 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COMPLETEPERCENT",             "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COMPLETEPERCENT_TP",          "Adds a (100%) indicator to achievement completion messages to match progress syntax.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_ICON",                        "Display Achievement Icon")
 ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_ICON_TP",                     "Display the relevant icon for an Achievement on progress or completion.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COLOR1",                      "Achievement Prefix Message Color")
--- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COLOR2",                      "Achievement Message Color")
--- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COLOR1",                      "Achievement Prefix Message Color") -- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COLOR2",                      "Achievement Message Color") -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_PROGMSG",                     "Achievement Progress Prefix Message")
 ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_PROGMSG_TP",                  "Prefix for Achievement progress messages.\nDefault: Achievement Updated")
 ZO_CreateStringId("SI_LUIE_LAM_CA_ACHIEVE_COMPLETEMSG",                 "Achievement Completion Prefix Message")
@@ -1332,13 +1303,9 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTLONG_TP",              "When to
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG",        "Display Detailed POI Description")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_SHOWQUESTOBJECTIVELONG_TP",     "When toggled on, accepting/completing a quest with an associated map POI will display the full description.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_COLOR1",                        "POI Name Color")
--- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_COLOR2",                        "POI Description Color")
--- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_COLOR3",                        "Quest Name Color")
--- TODO: Add Tooltip with finalized color value
-ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_COLOR4",                        "Quest Description Color")
--- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_COLOR2",                        "POI Description Color") -- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_COLOR3",                        "Quest Name Color") -- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_QUEST_COLOR4",                        "Quest Description Color") -- TODO: Add Tooltip with finalized color value
 
 -- Social Menu
 ZO_CreateStringId("SI_LUIE_LAM_CA_SOCIAL_HEADER",                       "Social/Guild Announcements")
@@ -1428,13 +1395,11 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWJUSTICE",                    "Display
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWJUSTICE_TP",                 "Display <<1>> when items or gold are confiscated by a guard.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG",                    "Display Bag/Bank Space Upgrade - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_TP",                 "Display <<1>> when bag or bank space upgrades are purchased ingame or through the crown store.")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_COLOR",              "Bag/Bank Space Message Color")
--- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWBANKBAG_COLOR",              "Bag/Bank Space Message Color") -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING",                     "Display Riding Skill Upgrade - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING_TP",                  "Display <<1>> when riding upgrades are purchased or Crown Riding Skill books are used.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING_COLOR",               "Riding Skill Message Color")
-ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING_COLOR_BOOK",          "Riding Skill (Crown Lesson) Message Color")
--- TODO: Add Tooltip with finalized color value
+ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_SHOWRIDING_COLOR_BOOK",          "Riding Skill (Crown Lesson) Message Color") -- TODO: Add Tooltip with finalized color value
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE",               "Display Disguise Status - <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISE_TP",            "Display <<1>> when entering or exiting a relevant area and becoming disguised or revealed.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_MISC_LOOTSHOWDISGUISEALERT",          "Display Detection Warning - <<1>>")
