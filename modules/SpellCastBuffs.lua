@@ -16,6 +16,7 @@ local mathmin       = math.min
 local tableinsert   = table.insert
 local tablesort     = table.sort
 local unpack        = unpack
+local tonumber      = tonumber
 local pairs         = pairs
 
 local callLater     = zo_callLater
