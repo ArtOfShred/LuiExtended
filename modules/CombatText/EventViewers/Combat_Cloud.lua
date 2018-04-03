@@ -2,8 +2,8 @@ LUIE.CombatTextCombatCloudEventViewer = LUIE.CombatTextEventViewer:Subclass()
 local CTV = LUIE.CombatTextCombatCloudEventViewer
 
 local strfmt     = string.format
-local mathrandom = math.random
-local mathsqrt   = math.sqrt
+local random     = math.random
+local sqrt       = math.sqrt
 local tostring   = tostring
 
 local callLater = zo_callLater
@@ -64,13 +64,13 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
     local offsetX, offsetY = nil, nil
 
     if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) then
-        offsetX, offsetY = mathrandom(-radiusW * .5, radiusW * .5), mathrandom(-radiusH * .5, radiusH * .5)
+        offsetX, offsetY = random(-radiusW * .5, radiusW * .5), random(-radiusH * .5, radiusH * .5)
     elseif (isDot or isHot) then -- http://www.mathopenref.com/coordgeneralellipse.html
-        offsetX = mathrandom(-radiusW * .95, radiusW * .95) -- Make radiusW a bit smaller to avoid horizontal animations
-        offsetY = mathsqrt((radiusH) ^ 2 * (1 - (offsetX ^ 2 / (radiusW) ^ 2)))
+        offsetX = random(-radiusW * .95, radiusW * .95) -- Make radiusW a bit smaller to avoid horizontal animations
+        offsetY = sqrt((radiusH) ^ 2 * (1 - (offsetX ^ 2 / (radiusW) ^ 2)))
         if (combatType == C.combatType.OUTGOING) then offsetY = -offsetY end
     elseif (isDamage or isHealing or isEnergize or isDrain or isDamageShield or isBlocked) then
-        offsetX, offsetY = mathrandom(-radiusW, radiusW), mathrandom(-radiusH * .5, radiusH)
+        offsetX, offsetY = random(-radiusW, radiusW), random(-radiusH * .5, radiusH)
     end
 
     local control, controlPoolKey = self.poolManager:GetPoolObject(poolTypes.CONTROL)

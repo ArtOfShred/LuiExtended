@@ -11,10 +11,10 @@ local A             = LUIE.GetAbility()
 local printToChat   = LUIE.PrintToChat
 local strfmt        = string.format
 local strformat     = zo_strformat
-local mathfloor     = math.floor
-local mathmin       = math.min
-local tableinsert   = table.insert
-local tablesort     = table.sort
+local floor         = math.floor
+local min           = math.min
+local insert        = table.insert
+local sort          = table.sort
 local unpack        = unpack
 local tonumber      = tonumber
 local pairs         = pairs
@@ -1132,7 +1132,7 @@ function SCB.Reset()
     end
 
     -- Update padding between icons
-    g_padding = mathfloor(0.5 + SCB.SV.IconSize / 13)
+    g_padding = floor(0.5 + SCB.SV.IconSize / 13)
 
     -- Set size of top level window
     -- Player
@@ -1142,11 +1142,11 @@ function SCB.Reset()
     else
         uiTlw.player2:SetHeight( SCB.SV.IconSize )
         uiTlw.player2.firstAnchor = { TOPLEFT, TOP }
-        uiTlw.player2.maxIcons = mathfloor(  (uiTlw.player2:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
+        uiTlw.player2.maxIcons = floor(  (uiTlw.player2:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
 
         uiTlw.player1:SetHeight( SCB.SV.IconSize)
         uiTlw.player1.firstAnchor = { TOPLEFT, TOP }
-        uiTlw.player1.maxIcons = mathfloor(  (uiTlw.player1:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
+        uiTlw.player1.maxIcons = floor(  (uiTlw.player1:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
     end
 
     -- Target
@@ -1156,11 +1156,11 @@ function SCB.Reset()
     else
         uiTlw.target2:SetHeight( SCB.SV.IconSize )
         uiTlw.target2.firstAnchor = { TOPLEFT, TOP }
-        uiTlw.target2.maxIcons = mathfloor(  (uiTlw.target2:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
+        uiTlw.target2.maxIcons = floor(  (uiTlw.target2:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
 
         uiTlw.target1:SetHeight( SCB.SV.IconSize)
         uiTlw.target1.firstAnchor = { TOPLEFT, TOP }
-        uiTlw.target1.maxIcons = mathfloor(  (uiTlw.target1:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
+        uiTlw.target1.maxIcons = floor(  (uiTlw.target1:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
     end
 
     -- Player long buffs
@@ -2526,19 +2526,19 @@ function SCB.OnUpdate(currentTime)
                     -- Filter Long-Term effects:
                     -- Always show debuffs and short-term buffs
                     if v.type == 2 or v.forced == "short" or not (v.forced == "long" or v.ends == nil or v.dur == 0 or v.ends-currentTime > 120000) then
-                        tableinsert(buffsSorted[container], v)
+                        insert(buffsSorted[container], v)
 
                     -- Show long-term target buffs in same container
                     elseif v.target == "reticleover" and SCB.SV.LongTermEffects_Target then
-                        tableinsert(buffsSorted[container], v)
+                        insert(buffsSorted[container], v)
 
                     -- Show long-term player buffs
                     elseif v.target == "player" and SCB.SV.LongTermEffects_Player then
                         -- Choose container for long-term player buffs
                         if SCB.SV.LongTermEffectsSeparate and not (container == "prominentbuffs" or container == "prominentdebuffs") then
-                            tableinsert(buffsSorted.player_long, v)
+                            insert(buffsSorted.player_long, v)
                         else
-                            tableinsert(buffsSorted[container], v)
+                            insert(buffsSorted[container], v)
                         end
 
                     end
@@ -2551,7 +2551,7 @@ function SCB.OnUpdate(currentTime)
     -- Sort effects in container and draw them on screen
     for _, container in pairs(containerRouting) do
         if needs_update[container] then
-            tablesort(buffsSorted[container], buffSort)
+            sort(buffsSorted[container], buffSort)
             SCB.updateIcons( currentTime, buffsSorted[container], container )
         end
         needs_update[container] = false
@@ -2674,10 +2674,10 @@ function SCB.updateIcons( currentTime, sortedList, container )
                     leftPadding = g_padding
                 elseif g_horizAlign == RIGHT then
                     anchor = TOPRIGHT
-                    leftPadding = - mathmin(uiTlw[container].maxIcons, iconsNum-uiTlw[container].maxIcons*row) * iconSize - g_padding
+                    leftPadding = - min(uiTlw[container].maxIcons, iconsNum-uiTlw[container].maxIcons*row) * iconSize - g_padding
                 else
                     anchor = TOP
-                    leftPadding = - 0.5 * ( mathmin(uiTlw[container].maxIcons, iconsNum-uiTlw[container].maxIcons*row) * iconSize - g_padding )
+                    leftPadding = - 0.5 * ( min(uiTlw[container].maxIcons, iconsNum-uiTlw[container].maxIcons*row) * iconSize - g_padding )
                 end
 
                 buff:ClearAnchors()
@@ -2730,13 +2730,13 @@ function SCB.updateIcons( currentTime, sortedList, container )
         -- For update remaining text. For temporary effects this is not very efficient, but we have not much such effects
         if remain then
             if remain > 86400000 then -- more then 1 day
-                buff.label:SetText( strfmt("%d d", mathfloor( remain/86400000 )) )
+                buff.label:SetText( strfmt("%d d", floor( remain/86400000 )) )
             elseif remain > 6000000 then -- over 100 minutes - display XXh
-                buff.label:SetText( strfmt("%dh", mathfloor( remain/3600000 )) )
+                buff.label:SetText( strfmt("%dh", floor( remain/3600000 )) )
             elseif remain > 600000 then -- over 10 minutes - display XXm
-                buff.label:SetText( strfmt("%dm", mathfloor( remain/60000 )) )
+                buff.label:SetText( strfmt("%dm", floor( remain/60000 )) )
             elseif remain > 60000 or container == "player_long" then
-                local m = mathfloor( remain/60000 )
+                local m = floor( remain/60000 )
                 local s = remain/1000 - 60*m
                 buff.label:SetText( strfmt("%d:%.2d", m, s) )
             else
