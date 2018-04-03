@@ -9,7 +9,11 @@ local E             = LUIE.Effects
 local A             = LUIE.GetAbility()
 local strfmt        = string.format
 local strformat     = zo_strformat
+local mathfloor     = math.floor
+local unpack        = unpack
 local pairs         = pairs
+
+local callLater     = zo_callLater
 
 local moduleName    = LUIE.name .. "_CombatInfo"
 
@@ -790,7 +794,7 @@ end
 
 function CI.InventoryItemUsed()
     g_potionUsed = true
-    zo_callLater(function() g_potionUsed = false end, 200)
+    callLater(function() g_potionUsed = false end, 200)
 end
 
 function CI.OnSlotsFullUpdate(eventCode, isHotbarSwap)
@@ -903,7 +907,7 @@ function CI.OnPowerUpdatePlayer( eventCode , unitTag, powerIndex, powerType, pow
     -- flag if ultimate is full - we"ll need it for ultimate generation texture
     uiUltimate.NotFull = ( powerValue < powerMax )
     -- Calculate the percentage to activation old one and current
-    local pct = ( g_ultimateCost > 0 ) and math.floor( ( powerValue / g_ultimateCost ) * 100 ) or 0
+    local pct = ( g_ultimateCost > 0 ) and mathfloor( ( powerValue / g_ultimateCost ) * 100 ) or 0
     -- Update the tooltip only when corresponding setting is enabled
     if CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled then
         if IsSlotUsed( g_ultimateSlot ) then

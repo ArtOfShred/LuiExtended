@@ -11,13 +11,20 @@ local A             = LUIE.GetAbility()
 local printToChat   = LUIE.PrintToChat
 local strfmt        = string.format
 local strformat     = zo_strformat
+local mathfloor     = math.floor
+local mathmin       = math.min
+local tableinsert   = table.insert
+local tablesort     = table.sort
+local unpack        = unpack
 local pairs         = pairs
+
+local callLater     = zo_callLater
 
 local moduleName    = LUIE.name .. "_SpellCastBuffs"
 
-local testEffectPrefix = "Test Effect: "
-local testEffectIds = { 999900, 999901, 999902, 999903, 999904 }
-local testEffectList   = { 22, 44, 55, 300, 1800000 }
+local testEffectPrefix  = "Test Effect: "
+local testEffectIds     = { 999900, 999901, 999902, 999903, 999904 }
+local testEffectList    = { 22, 44, 55, 300, 1800000 }
 
 local hidePlayerEffects = { }
 local hideTargetEffects = { }
@@ -655,7 +662,7 @@ end
 
 function SCB.AddToCustomList(list, input)
 
-    local id=tonumber(input)
+    local id = tonumber(input)
     local listRef = list == SCB.SV.PromBuffTable and "Prominent Buffs." or list == SCB.SV.PromDebuffTable and "Prominent Debuffs." or list == SCB.SV.BlacklistTable and "Aura Blacklist." or ""
     if id and id > 0 then
         local name = GetAbilityName(id)
@@ -682,7 +689,7 @@ end
 
 function SCB.RemoveFromCustomList(list, input)
 
-    local id=tonumber(input)
+    local id = tonumber(input)
     local listRef = list == SCB.SV.PromBuffTable and "Prominent Buffs." or list == SCB.SV.PromDebuffTable and "Prominent Debuffs." or list == SCB.SV.BlacklistTable and "Aura Blacklist." or ""
     if id and id > 0 then
         local name = GetAbilityName(id)
@@ -786,7 +793,7 @@ end
 function SCB.CollectibleUsed(eventCode, result, isAttemptingActivation)
     local latency = GetLatency()
     latency = latency + 100
-    zo_callLater (SCB.CollectibleBuff, latency)
+    callLater (SCB.CollectibleBuff, latency)
 end
 
 function SCB.CollectibleBuff()
@@ -1124,7 +1131,7 @@ function SCB.Reset()
     end
 
     -- Update padding between icons
-    g_padding = math.floor(0.5 + SCB.SV.IconSize / 13)
+    g_padding = mathfloor(0.5 + SCB.SV.IconSize / 13)
 
     -- Set size of top level window
     -- Player
@@ -1134,11 +1141,11 @@ function SCB.Reset()
     else
         uiTlw.player2:SetHeight( SCB.SV.IconSize )
         uiTlw.player2.firstAnchor = { TOPLEFT, TOP }
-        uiTlw.player2.maxIcons = math.floor(  (uiTlw.player2:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
+        uiTlw.player2.maxIcons = mathfloor(  (uiTlw.player2:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
 
         uiTlw.player1:SetHeight( SCB.SV.IconSize)
         uiTlw.player1.firstAnchor = { TOPLEFT, TOP }
-        uiTlw.player1.maxIcons = math.floor(  (uiTlw.player1:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
+        uiTlw.player1.maxIcons = mathfloor(  (uiTlw.player1:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
     end
 
     -- Target
@@ -1148,11 +1155,11 @@ function SCB.Reset()
     else
         uiTlw.target2:SetHeight( SCB.SV.IconSize )
         uiTlw.target2.firstAnchor = { TOPLEFT, TOP }
-        uiTlw.target2.maxIcons = math.floor(  (uiTlw.target2:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
+        uiTlw.target2.maxIcons = mathfloor(  (uiTlw.target2:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
 
         uiTlw.target1:SetHeight( SCB.SV.IconSize)
         uiTlw.target1.firstAnchor = { TOPLEFT, TOP }
-        uiTlw.target1.maxIcons = math.floor(  (uiTlw.target1:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
+        uiTlw.target1.maxIcons = mathfloor(  (uiTlw.target1:GetWidth()-4*g_padding) / (SCB.SV.IconSize+g_padding) )
     end
 
     -- Player long buffs
@@ -2518,19 +2525,19 @@ function SCB.OnUpdate(currentTime)
                     -- Filter Long-Term effects:
                     -- Always show debuffs and short-term buffs
                     if v.type == 2 or v.forced == "short" or not (v.forced == "long" or v.ends == nil or v.dur == 0 or v.ends-currentTime > 120000) then
-                        table.insert(buffsSorted[container], v)
+                        tableinsert(buffsSorted[container], v)
 
                     -- Show long-term target buffs in same container
                     elseif v.target == "reticleover" and SCB.SV.LongTermEffects_Target then
-                        table.insert(buffsSorted[container], v)
+                        tableinsert(buffsSorted[container], v)
 
                     -- Show long-term player buffs
                     elseif v.target == "player" and SCB.SV.LongTermEffects_Player then
                         -- Choose container for long-term player buffs
                         if SCB.SV.LongTermEffectsSeparate and not (container == "prominentbuffs" or container == "prominentdebuffs") then
-                            table.insert(buffsSorted.player_long, v)
+                            tableinsert(buffsSorted.player_long, v)
                         else
-                            table.insert(buffsSorted[container], v)
+                            tableinsert(buffsSorted[container], v)
                         end
 
                     end
@@ -2543,7 +2550,7 @@ function SCB.OnUpdate(currentTime)
     -- Sort effects in container and draw them on screen
     for _, container in pairs(containerRouting) do
         if needs_update[container] then
-            table.sort(buffsSorted[container], buffSort)
+            tablesort(buffsSorted[container], buffSort)
             SCB.updateIcons( currentTime, buffsSorted[container], container )
         end
         needs_update[container] = false
@@ -2666,10 +2673,10 @@ function SCB.updateIcons( currentTime, sortedList, container )
                     leftPadding = g_padding
                 elseif g_horizAlign == RIGHT then
                     anchor = TOPRIGHT
-                    leftPadding = - math.min(uiTlw[container].maxIcons, iconsNum-uiTlw[container].maxIcons*row) * iconSize - g_padding
+                    leftPadding = - mathmin(uiTlw[container].maxIcons, iconsNum-uiTlw[container].maxIcons*row) * iconSize - g_padding
                 else
                     anchor = TOP
-                    leftPadding = - 0.5 * ( math.min(uiTlw[container].maxIcons, iconsNum-uiTlw[container].maxIcons*row) * iconSize - g_padding )
+                    leftPadding = - 0.5 * ( mathmin(uiTlw[container].maxIcons, iconsNum-uiTlw[container].maxIcons*row) * iconSize - g_padding )
                 end
 
                 buff:ClearAnchors()
@@ -2722,13 +2729,13 @@ function SCB.updateIcons( currentTime, sortedList, container )
         -- For update remaining text. For temporary effects this is not very efficient, but we have not much such effects
         if remain then
             if remain > 86400000 then -- more then 1 day
-                buff.label:SetText( strfmt("%d d", math.floor( remain/86400000 )) )
+                buff.label:SetText( strfmt("%d d", mathfloor( remain/86400000 )) )
             elseif remain > 6000000 then -- over 100 minutes - display XXh
-                buff.label:SetText( strfmt("%dh", math.floor( remain/3600000 )) )
+                buff.label:SetText( strfmt("%dh", mathfloor( remain/3600000 )) )
             elseif remain > 600000 then -- over 10 minutes - display XXm
-                buff.label:SetText( strfmt("%dm", math.floor( remain/60000 )) )
+                buff.label:SetText( strfmt("%dm", mathfloor( remain/60000 )) )
             elseif remain > 60000 or container == "player_long" then
-                local m = math.floor( remain/60000 )
+                local m = mathfloor( remain/60000 )
                 local s = remain/1000 - 60*m
                 buff.label:SetText( strfmt("%d:%.2d", m, s) )
             else
@@ -2857,15 +2864,15 @@ function SCB.OnPlayerActivated(eventCode)
     g_playerResurectStage = nil
 
     if not SCB.SV.IgnoreMount and IsMounted() then
-        zo_callLater(function() SCB.MountStatus(eventCode, true) end , 50)
+        callLater(function() SCB.MountStatus(eventCode, true) end , 50)
     end
     if not SCB.SV.IgnoreDisguise then
-        zo_callLater(SCB.InitializeDisguise, 50)
+        callLater(SCB.InitializeDisguise, 50)
     end
 
     if GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET) > 0
     or GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT) > 0 then
-        zo_callLater(function() SCB.CollectibleBuff( eventCode, 0, true) end, 50)
+        callLater(function() SCB.CollectibleBuff( eventCode, 0, true) end, 50)
     end
 
     SCB.ReloadEffects( "player" )

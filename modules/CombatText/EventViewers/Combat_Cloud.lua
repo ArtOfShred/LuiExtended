@@ -1,7 +1,11 @@
 LUIE.CombatTextCombatCloudEventViewer = LUIE.CombatTextEventViewer:Subclass()
 local CTV = LUIE.CombatTextCombatCloudEventViewer
 
-local random, sqrt, format, tostring = math.random, math.sqrt, string.format, tostring
+local strfmt     = string.format
+local mathrandom = math.random
+local mathsqrt   = math.sqrt
+local tostring   = tostring
+
 local callLater = zo_callLater
 local C = LUIE.CombatTextConstants
 local poolTypes = C.poolType
@@ -21,7 +25,7 @@ function CTV:OnEvent(combatType, powerType, value, abilityName, abilityId, damag
     if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) and (not LUIE.CombatText.SV.toggles.throttleCriticals) then
         self:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, 1)
     else
-        local eventKey = format('%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s', combatType, powerType, abilityName, abilityId, damageType, sourceName, tostring(isDamage), tostring(isDamageCritical), tostring(isHealing), tostring(isHealingCritical), tostring(isEnergize), tostring(isDrain), tostring(isDot), tostring(isDotCritical), tostring(isHot), tostring(isHotCritical), tostring(isMiss), tostring(isImmune), tostring(isParried), tostring(isReflected), tostring(isDamageShield), tostring(isDodged), tostring(isBlocked), tostring(isInterrupted))
+        local eventKey = strfmt('%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s', combatType, powerType, abilityName, abilityId, damageType, sourceName, tostring(isDamage), tostring(isDamageCritical), tostring(isHealing), tostring(isHealingCritical), tostring(isEnergize), tostring(isDrain), tostring(isDot), tostring(isDotCritical), tostring(isHot), tostring(isHotCritical), tostring(isMiss), tostring(isImmune), tostring(isParried), tostring(isReflected), tostring(isDamageShield), tostring(isDodged), tostring(isBlocked), tostring(isInterrupted))
         if (self.eventBuffer[eventKey] == nil) then
             self.eventBuffer[eventKey] = { value = value, hits = 1 }
             local throttleTime = 0
@@ -60,13 +64,13 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
     local offsetX, offsetY = nil, nil
 
     if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) then
-        offsetX, offsetY = random(-radiusW * .5, radiusW * .5), random(-radiusH * .5, radiusH * .5)
+        offsetX, offsetY = mathrandom(-radiusW * .5, radiusW * .5), mathrandom(-radiusH * .5, radiusH * .5)
     elseif (isDot or isHot) then -- http://www.mathopenref.com/coordgeneralellipse.html
-        offsetX = random(-radiusW * .95, radiusW * .95) -- Make radiusW a bit smaller to avoid horizontal animations
-        offsetY = sqrt((radiusH) ^ 2 * (1 - (offsetX ^ 2 / (radiusW) ^ 2)))
+        offsetX = mathrandom(-radiusW * .95, radiusW * .95) -- Make radiusW a bit smaller to avoid horizontal animations
+        offsetY = mathsqrt((radiusH) ^ 2 * (1 - (offsetX ^ 2 / (radiusW) ^ 2)))
         if (combatType == C.combatType.OUTGOING) then offsetY = -offsetY end
     elseif (isDamage or isHealing or isEnergize or isDrain or isDamageShield or isBlocked) then
-        offsetX, offsetY = random(-radiusW, radiusW), random(-radiusH * .5, radiusH)
+        offsetX, offsetY = mathrandom(-radiusW, radiusW), mathrandom(-radiusH * .5, radiusH)
     end
 
     local control, controlPoolKey = self.poolManager:GetPoolObject(poolTypes.CONTROL)
@@ -79,7 +83,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
 
     -- Label setup in the correct order that the game handles damage
     local textFormat, fontSize, textColor = self:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
-    if (hits > 1 and S.toggles.showThrottleTrailer) then value = format('%d (%d)', value, hits) end
+    if (hits > 1 and S.toggles.showThrottleTrailer) then value = strfmt('%d (%d)', value, hits) end
     if (combatType == C.combatType.INCOMING) and (S.toggles.incomingDamageOverride) and (isDamage or isDamageCritical) then textColor = S.colors.incomingDamageOverride end
 
     self:PrepareLabel(control.label, fontSize, textColor, self:FormatString(textFormat, { text = LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name or abilityName, value = value, powerType = powerType, damageType = damageType }))

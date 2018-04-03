@@ -8,8 +8,15 @@ local E              = LUIE.Effects
 local printToChat    = LUIE.PrintToChat
 local strfmt         = string.format
 local strformat      = zo_strformat
+local strmatch       = string.match
+local tableinsert    = table.insert
+local tableconcat    = table.concat
+local mathfloor      = math.floor
 local gsub           = gsub
+local unpack         = unpack
 local pairs          = pairs
+
+local callLater      = zo_callLater
 
 local moduleName     = LUIE.name .. "_ChatAnnouncements"
 CA.Enabled = false
@@ -1593,8 +1600,8 @@ function CA.ActivityStatusUpdate(eventCode, status)
         g_showRCUpdates = true
         g_LFGJoinAntiSpam = false
         g_showActivityStatus = false
-        zo_callLater(function() g_showActivityStatus = true end, 1000)
-        zo_callLater(function() g_stopGroupLeaveQueue = false end, 1000)
+        callLater(function() g_showActivityStatus = true end, 1000)
+        callLater(function() g_stopGroupLeaveQueue = false end, 1000)
     end
 
     g_savedQueueValue = status
@@ -1677,9 +1684,9 @@ function CA.ReadyCheckUpdate(eventCode)
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, message)
             end
             g_rcSpamPrevention = true
-            zo_callLater(function() g_rcSpamPrevention = false end, 1000)
+            callLater(function() g_rcSpamPrevention = false end, 1000)
             g_showActivityStatus = false
-            zo_callLater(function() g_showActivityStatus = true end, 1000)
+            callLater(function() g_showActivityStatus = true end, 1000)
             g_showRCUpdates = true
         end
     end
@@ -1856,7 +1863,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
         if not CA.SV.Currency.CurrencyGoldChange then return end
         if CA.SV.Currency.CurrencyGoldThrottle and (reason == 0 or reason == 13) then
             -- NOTE: Unlike other throttle events, we used zo_callLater here because we have to make the call immediately (if some of the gold is looted after items, the message will appear after the loot if we don't use zo_callLater instead of a RegisterForUpdate)
-            zo_callLater( CA.CurrencyGoldThrottlePrinter, 50 )
+            callLater( CA.CurrencyGoldThrottlePrinter, 50 )
             g_currencyGoldThrottleValue = g_currencyGoldThrottleValue + UpOrDown
             g_currencyGoldThrottleTotal = GetCarriedCurrencyAmount(1)
             return
@@ -2153,7 +2160,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
     -- Confiscated -- Pay to Guard (47), Killed by Guard (57)
     elseif reason == 47 or reason == 57 then
         messageChange = CA.SV.ContextMessages.CurrencyMessageConfiscate
-        zo_callLater(CA.JusticeDisplayConfiscate, 50)
+        callLater(CA.JusticeDisplayConfiscate, 50)
     -- Pickpocketed (59)
     elseif reason == 59 then
         messageChange = CA.SV.ContextMessages.CurrencyMessagePickpocket
@@ -2366,7 +2373,7 @@ end
 
 function CA.MiscAlertLockBroke(eventCode, inactivityLengthMs)
     g_lockpickBroken = true
-    zo_callLater (function() g_lockpickBroken = false end, 200)
+    callLater (function() g_lockpickBroken = false end, 200)
 end
 
 function CA.MiscAlertLockSuccess(eventCode)
@@ -2381,7 +2388,7 @@ function CA.MiscAlertLockSuccess(eventCode)
         ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_LOCKPICK_SUCCESS))
     end
     g_lockpickBroken = true
-    zo_callLater (function() g_lockpickBroken = false end, 200)
+    callLater (function() g_lockpickBroken = false end, 200)
 end
 
 function CA.StorageBag(eventCode, previousCapacity, currentCapacity, previousUpgrade, currentUpgrade)
@@ -2804,7 +2811,7 @@ function CA.OnAchievementUpdated(eventCode, id)
         for i = 1, numCriteria do
             local name, numCompleted, numRequired = GetAchievementCriterion(id, i)
 
-            table.insert(cmpInfo, { strformat(name), numCompleted, numRequired })
+            tableinsert(cmpInfo, { strformat(name), numCompleted, numRequired })
 
             -- Collect the numbers to calculate the correct percentage
             totalCmp = totalCmp + numCompleted
@@ -2824,7 +2831,7 @@ function CA.OnAchievementUpdated(eventCode, id)
                 showInfo = true
             else
                 -- Achievement step hit
-                local percentage = math.floor( 100 / totalReq * totalCmp )
+                local percentage = mathfloor( 100 / totalReq * totalCmp )
 
                 if percentage > 0 and percentage % CA.SV.Achievement.AchievementStep == 0 and g_achievementLastPercentage[id] ~= percentage then
                     showInfo = true
@@ -2849,7 +2856,7 @@ function CA.OnAchievementUpdated(eventCode, id)
 
             local stringpart1 = AchievementColorize1:Colorize(strfmt("%s%s%s %s%s", bracket1[CA.SV.Achievement.AchievementBracketOptions], CA.SV.Achievement.AchievementProgressMsg, bracket2[CA.SV.Achievement.AchievementBracketOptions], icon, link))
 
-            local stringpart2 = CA.SV.Achievement.AchievementColorProgress and strfmt(" %s|c%s%d%%|r", AchievementColorize2:Colorize("("), AchievementPctToColour(totalCmp/totalReq), math.floor(100*totalCmp/totalReq)) or AchievementColorize2:Colorize(strfmt("%d%%", math.floor(100*totalCmp/totalReq)))
+            local stringpart2 = CA.SV.Achievement.AchievementColorProgress and strfmt(" %s|c%s%d%%|r", AchievementColorize2:Colorize("("), AchievementPctToColour(totalCmp/totalReq), mathfloor(100*totalCmp/totalReq)) or AchievementColorize2:Colorize(strfmt("%d%%", mathfloor(100*totalCmp/totalReq)))
 
             local stringpart3
             if CA.SV.Achievement.AchievementCategory and CA.SV.Achievement.AchievementSubcategory then
@@ -2878,7 +2885,7 @@ function CA.OnAchievementUpdated(eventCode, id)
                             cmpInfo[i] = CA.SV.Achievement.AchievementColorProgress and strfmt( "%s %s|c%s%d|r%s|c71DE73%d|r%s", AchievementColorize2:Colorize(cmpInfo[i][1]), AchievementColorize2:Colorize("("), AchievementPctToColour(pct), cmpInfo[i][2], AchievementColorize2:Colorize("/"), cmpInfo[i][3], AchievementColorize2:Colorize(")") ) or AchievementColorize2:Colorize(strfmt( "%s (%d/%d)", cmpInfo[i][1], cmpInfo[i][2], cmpInfo[i][3] ))
                         end
                     end
-                    stringpart4 = " " .. table.concat(cmpInfo, AchievementColorize2:Colorize(", ")) .. ""
+                    stringpart4 = " " .. tableconcat(cmpInfo, AchievementColorize2:Colorize(", ")) .. ""
                 end
             end
             local finalString = strfmt("%s%s%s%s", stringpart1, stringpart2, stringpart3, stringpart4)
@@ -2898,11 +2905,11 @@ function CA.OnAchievementUpdated(eventCode, id)
 end
 
 function CA.GuildBankItemAdded(eventCode, slotId)
-    zo_callLater(CA.LogGuildBankChange, 50)
+    callLater(CA.LogGuildBankChange, 50)
 end
 
 function CA.GuildBankItemRemoved(eventCode, slotId)
-    zo_callLater(CA.LogGuildBankChange, 50)
+    callLater(CA.LogGuildBankChange, 50)
 end
 
 function CA.LogGuildBankChange()
@@ -4241,7 +4248,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                 InventoryOn = false
             end
             if not g_itemWasDestroyed then
-                zo_callLater(CA.BankFixer, 50)
+                callLater(CA.BankFixer, 50)
             end
 
         end
@@ -4325,7 +4332,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                 BankOn = false
             end
             if not g_itemWasDestroyed then
-                zo_callLater(CA.BankFixer, 50)
+                callLater(CA.BankFixer, 50)
             end
 
         end
@@ -4409,7 +4416,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                 BankOn = false
             end
             if not g_itemWasDestroyed then
-                zo_callLater(CA.BankFixer, 50)
+                callLater(CA.BankFixer, 50)
             end
 
         end
@@ -4493,7 +4500,7 @@ function CA.InventoryUpdateBank(eventCode, bagId, slotId, isNewItem, itemSoundCa
                 BankOn = false
             end
             if not g_itemWasDestroyed then
-                zo_callLater(CA.BankFixer, 50)
+                callLater(CA.BankFixer, 50)
             end
 
         end
@@ -4706,7 +4713,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
 
                     local parts = {ZO_LinkHandler_ParseLink(itemLink)}
                     parts[22] = "1"
-                    parts = table.concat(parts, ":"):sub(2, -1)
+                    parts = tableconcat(parts, ":"):sub(2, -1)
                     itemLink = strformat("|H<<1>>|h|h", parts)
 
                     local formattedIcon = ( CA.SV.Inventory.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
@@ -4753,7 +4760,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
 
                     local parts = {ZO_LinkHandler_ParseLink(itemLink)}
                     parts[22] = "1"
-                    parts = table.concat(parts, ":"):sub(2, -1)
+                    parts = tableconcat(parts, ":"):sub(2, -1)
                     itemLink = strformat("|H<<1>>|h|h", parts)
 
                     local formattedIcon = ( CA.SV.Inventory.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
@@ -4806,7 +4813,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
 
             local parts = {ZO_LinkHandler_ParseLink(itemLink)}
             parts[22] = "1"
-            parts = table.concat(parts, ":"):sub(2, -1)
+            parts = tableconcat(parts, ":"):sub(2, -1)
             itemLink = strformat("|H<<1>>|h|h", parts)
 
             local formattedIcon = ( CA.SV.Inventory.LootIcons and icon and icon ~= "" ) and ("|t16:16:" .. icon .. "|t ") or ""
@@ -4844,7 +4851,7 @@ function CA.BankFixer()
 end
 
 function CA.JusticeStealRemove(eventCode)
-    zo_callLater(CA.JusticeRemovePrint, 50)
+    callLater(CA.JusticeRemovePrint, 50)
 end
 
 function CA.JusticeDisplayConfiscate()
@@ -5127,7 +5134,7 @@ function CA.InventoryFull(eventCode, numSlotsRequested, numSlotsFree)
         end
     end
 
-    zo_callLater(DisplayItemFailed, 100)
+    callLater(DisplayItemFailed, 100)
 end
 
 function CA.LootItemFailed(eventCode, reason, itemName)
@@ -5139,7 +5146,7 @@ function CA.LootItemFailed(eventCode, reason, itemName)
         EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED, CA.LootItemFailed)
     end
 
-    zo_callLater(ReactivateLootItemFailed, 100)
+    callLater(ReactivateLootItemFailed, 100)
 end
 ]]
 
@@ -5630,7 +5637,7 @@ function CA.HookFunction()
         currentGroupLeaderDisplayName = ""
 
         if g_groupJoinFudger then
-            zo_callLater(CA.CheckLFGStatusJoin, 100)
+            callLater(CA.CheckLFGStatusJoin, 100)
         end
         g_groupJoinFudger = false
     end
@@ -5662,11 +5669,11 @@ function CA.HookFunction()
                 message = strformat(SI_LUIE_GROUPDISBANDLEADER)
                 alert = strformat(SI_LUIE_GROUPDISBANDLEADER)
                 g_LFGJoinAntiSpam = false
-                zo_callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
+                callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
             elseif isLocalPlayer then
             --
             g_LFGJoinAntiSpam = false
-            zo_callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
+            callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
             --
             end
 
@@ -5676,13 +5683,13 @@ function CA.HookFunction()
                 if isLocalPlayer then
                     --
                     g_LFGJoinAntiSpam = false
-                    zo_callLater(function() CA.CheckLFGStatusLeave(true) end , 100)
+                    callLater(function() CA.CheckLFGStatusLeave(true) end , 100)
                     --
                     message = strformat(SI_GROUP_ELECTION_KICK_PLAYER_PASSED)
                     alert = strformat(SI_GROUP_ELECTION_KICK_PLAYER_PASSED)
                 elseif hasValidNames then
                     --
-                    zo_callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
+                    callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
                     --
                     message = strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED, finalName)
                     alert = strformat(SI_LUIE_CA_GROUPFINDER_VOTEKICK_PASSED, finalAlertName)
@@ -5693,13 +5700,13 @@ function CA.HookFunction()
                 if isLocalPlayer then
                     --
                     g_LFGJoinAntiSpam = false
-                    zo_callLater(function() CA.CheckLFGStatusLeave(true) end , 100)
+                    callLater(function() CA.CheckLFGStatusLeave(true) end , 100)
                     --
                     message = strformat(SI_GROUP_NOTIFICATION_GROUP_SELF_KICKED)
                     alert = strformat(SI_GROUP_NOTIFICATION_GROUP_SELF_KICKED)
                 else
                     --
-                    zo_callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
+                    callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
                     --
                     useDefaultReasonText = true
                 end
@@ -5710,14 +5717,14 @@ function CA.HookFunction()
             if not isLocalPlayer then
                 useDefaultReasonText = true
                 --
-                zo_callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
+                callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
                 --
             else
                 --
                 g_LFGJoinAntiSpam = false
                 message = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF), finalName))
                 alert = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_LEAVE_SELF), finalAlertName))
-                zo_callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
+                callLater(function() CA.CheckLFGStatusLeave(false) end , 100)
                 --
             end
 
@@ -5804,9 +5811,9 @@ function CA.HookFunction()
             if CA.SV.Group.GroupLFGAlert then
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED, locationName))
             end
-            zo_callLater (function() g_rcUpdateDeclineOverride = false end, 5000)
+            callLater (function() g_rcUpdateDeclineOverride = false end, 5000)
             g_lfgDisableGroupEvents = true
-            zo_callLater (function() g_lfgDisableGroupEvents = false end, 2500)
+            callLater (function() g_lfgDisableGroupEvents = false end, 2500)
         end
         g_joinLFGOverride = true
         g_LFGJoinAntiSpam = true
@@ -5951,7 +5958,7 @@ function CA.HookFunction()
         -- Sometimes if another player cancels slightly before a player in your group cancels, the "you have been placed in the front of the queue message displays. If this is the case, we want to show queue left for that event."
         if reason ~= LFG_READY_CHECK_CANCEL_REASON_GROUP_REPLACED_IN_QUEUE then
             g_showActivityStatus = false
-            zo_callLater(function() g_showActivityStatus = true end, 1000)
+            callLater(function() g_showActivityStatus = true end, 1000)
         end
 
         g_showRCUpdates = true
@@ -6037,7 +6044,7 @@ function CA.HookFunction()
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_LOCKPICK_FAILED))
         end
         g_lockpickBroken = true
-        zo_callLater (function() g_lockpickBroken = false end, 200)
+        callLater (function() g_lockpickBroken = false end, 200)
         return true
     end
 
@@ -6247,7 +6254,7 @@ function CA.HookFunction()
                 end
             end
             EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CURRENCY_UPDATE)
-            zo_callLater(function() EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CURRENCY_UPDATE, CA.OnCurrencyUpdate) end, 500)
+            callLater(function() EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CURRENCY_UPDATE, CA.OnCurrencyUpdate) end, 500)
         end
 
         if CA.SV.Notify.NotificationMailCA then
@@ -6258,7 +6265,7 @@ function CA.HookFunction()
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
 
-        zo_callLater(RestoreMailBackupValues, 50) -- Prevents values from being cleared by failed message (when inbox is full, the currency change fires first regardless and then is refunded)
+        callLater(RestoreMailBackupValues, 50) -- Prevents values from being cleared by failed message (when inbox is full, the currency change fires first regardless and then is refunded)
         return true
     end
 
@@ -6966,7 +6973,7 @@ function CA.HookFunction()
         -- We set this variable to true in order to override the [Looted] message syntax that would be applied to a quest reward normally.
         if CA.SV.Inventory.Loot then
             g_itemReceivedIsQuestReward = true
-            zo_callLater(ResetQuestRewardStatus, 500)
+            callLater(ResetQuestRewardStatus, 500)
         end
 
         return true
@@ -8155,7 +8162,7 @@ function CA.HookFunction()
         -- Stop messages from spamming if the player bounces around the same trigger multiple times
         if g_stopDisplaySpam == false then
             g_stopDisplaySpam = true
-            zo_callLater(function() g_stopDisplaySpam = false end, 5000)
+            callLater(function() g_stopDisplaySpam = false end, 5000)
         end
 
         local flagCA = CA.SV.Quests.QuestICDiscoveryCA and true or false
@@ -9006,7 +9013,7 @@ function CA.HookFunction()
         end
 
         local nameLink
-        if string.match(to, "@") == "@" then
+        if strmatch(to, "@") == "@" then
             if CA.SV.BracketOptionCharacter == 1 then
                 nameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(to, nil, DISPLAY_NAME_LINK_TYPE, to)
             else
@@ -9045,7 +9052,7 @@ function CA.HookFunction()
             local mailTarget = self.to:GetText()
             local nameLink
             -- Here we look for @ character in the sent mail, if the player send to an account then we want the link to be an account name link, otherwise, it's a character name link.
-            if string.match(mailTarget, "@") == "@" then
+            if strmatch(mailTarget, "@") == "@" then
                 if CA.SV.BracketOptionCharacter == 1 then
                     nameLink = ZO_LinkHandler_CreateLinkWithoutBrackets(mailTarget, nil, DISPLAY_NAME_LINK_TYPE, mailTarget)
                 else
@@ -9072,7 +9079,7 @@ function CA.HookFunction()
         if not inventory.slots[questIndex] then
             inventory.slots[questIndex] = {}
         end
-        table.insert(inventory.slots[questIndex], questItem)
+        tableinsert(inventory.slots[questIndex], questItem)
 
         local index = #inventory.slots[questIndex]
 
@@ -9552,9 +9559,9 @@ function CA.OnGroupMemberJoined(eventCode, memberName)
             local finalAlertName = CA.ResolveNameNoLink(joinedMemberName, joinedMemberAccountName)
             local SendMessage = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), finalName))
             local SendAlert = (strformat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN), finalAlertName))
-            zo_callLater(function() CA.PrintJoinStatusNotSelf(SendMessage, SendAlert) end, 100)
+            callLater(function() CA.PrintJoinStatusNotSelf(SendMessage, SendAlert) end, 100)
         elseif LUIE.PlayerNameRaw == memberName then
-            zo_callLater(CA.CheckLFGStatusJoin, 100)
+            callLater(CA.CheckLFGStatusJoin, 100)
         end
     end
 

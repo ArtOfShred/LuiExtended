@@ -1,8 +1,11 @@
 LUIE.CombatTextCombatEllipseEventViewer = LUIE.CombatTextEventViewer:Subclass()
 local CTV = LUIE.CombatTextCombatEllipseEventViewer
 
-local random, sqrt, min, max = math.random, math.sqrt, math.min, math.max
-local format, tostring = string.format, tostring
+local strfmt     = string.format
+local mathmin    = math.min
+local mathmax    = math.max
+local tostring   = tostring
+
 local callLater = zo_callLater
 local C = LUIE.CombatTextConstants
 local poolTypes = C.poolType
@@ -24,7 +27,7 @@ function CTV:OnEvent(combatType, powerType, value, abilityName, abilityId, damag
     if (isDamageCritical or isHealingCritical or isDotCritical or isHotCritical) and (not LUIE.CombatText.SV.toggles.throttleCriticals) then
         self:View(combatType, powerType, value, abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted, 1)
     else
-        local eventKey = format('%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s', combatType, powerType, abilityName, abilityId, damageType, sourceName, tostring(isDamage), tostring(isDamageCritical), tostring(isHealing), tostring(isHealingCritical), tostring(isEnergize), tostring(isDrain), tostring(isDot), tostring(isDotCritical), tostring(isHot), tostring(isHotCritical), tostring(isMiss), tostring(isImmune), tostring(isParried), tostring(isReflected), tostring(isDamageShield), tostring(isDodged), tostring(isBlocked), tostring(isInterrupted))
+        local eventKey = strfmt('%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s', combatType, powerType, abilityName, abilityId, damageType, sourceName, tostring(isDamage), tostring(isDamageCritical), tostring(isHealing), tostring(isHealingCritical), tostring(isEnergize), tostring(isDrain), tostring(isDot), tostring(isDotCritical), tostring(isHot), tostring(isHotCritical), tostring(isMiss), tostring(isImmune), tostring(isParried), tostring(isReflected), tostring(isDamageShield), tostring(isDodged), tostring(isBlocked), tostring(isInterrupted))
         if (self.eventBuffer[eventKey] == nil) then
             self.eventBuffer[eventKey] = { value = value, hits = 1 }
             local throttleTime = 0
@@ -58,7 +61,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
     local control, controlPoolKey = self.poolManager:GetPoolObject(poolTypes.CONTROL)
 
     local textFormat, fontSize, textColor = self:GetTextAtributes(powerType, damageType, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
-    if (hits > 1 and S.toggles.showThrottleTrailer) then value = format('%d (%d)', value, hits) end
+    if (hits > 1 and S.toggles.showThrottleTrailer) then value = strfmt('%d (%d)', value, hits) end
     if (combatType == C.combatType.INCOMING) and (S.toggles.incomingDamageOverride) and (isDamage or isDamageCritical) then textColor = S.colors.incomingDamageOverride end
 
     self:PrepareLabel(control.label, fontSize, textColor, self:FormatString(textFormat, { text = LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].name or abilityName, value = value, powerType = powerType, damageType = damageType }))
@@ -110,7 +113,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
     control:SetAnchor(point, panel, relativePoint, offsetX * w, offsetY * h)
 
     if (point == TOPRIGHT or point == TOPLEFT) then
-        if (self.lastControl[combatType] == nil) then offsetY = -25 else offsetY = max(-25, select(6, self.lastControl[combatType]:GetAnchor(0))) end
+        if (self.lastControl[combatType] == nil) then offsetY = -25 else offsetY = mathmax(-25, select(6, self.lastControl[combatType]:GetAnchor(0))) end
         control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
 
         if (offsetY < 75 and self:IsOverlapping(control, self.activeControls[combatType])) then
@@ -119,7 +122,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
             control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
         end
     else
-        if (self.lastControl[combatType] == nil) then offsetY = 25 else offsetY = min(25, select(6, self.lastControl[combatType]:GetAnchor(0))) end
+        if (self.lastControl[combatType] == nil) then offsetY = 25 else offsetY = mathmin(25, select(6, self.lastControl[combatType]:GetAnchor(0))) end
         control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
 
         if (offsetY > -75 and self:IsOverlapping(control, self.activeControls[combatType])) then
