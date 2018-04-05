@@ -14,16 +14,14 @@ LUIE.SVName      = "LUIESV"
 
 -- Performance Enhancement
 local strfmt        = string.format
-local match         = string.match
+local strmatch      = string.match
 local strformat     = zo_strformat
-local insert        = table.insert
-local sort          = table.sort
+local tableinsert   = table.insert
+local tablesort     = table.sort
 local gsub          = gsub
 local reverse       = reverse
 local tostring      = tostring
 local pairs         = pairs
-
-
 
 -- Default Settings
 LUIE.D = {
@@ -367,7 +365,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     effectsRow.effectId = effectId
                     effectsRow.isArtificial = true
 
-                    insert(effectsRows, effectsRow)
+                    tableinsert(effectsRows, effectsRow)
                 end
 
                 local counter = 1
@@ -424,7 +422,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     --if LUIE.Effects.TooltipOverride[abilityId] then tooltipText = LUIE.Effects.TooltipOverride[abilityId] end
                     -- Have to trim trailing spaces on the end of tooltips
                     if tooltipText ~= "" then
-                        tooltipText = match(tooltipText, ".*%S")
+                        tooltipText = strmatch(tooltipText, ".*%S")
                     end
                     if buffSlot > 0 and buffName ~= "" and not (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide) and not markForRemove then
                         local effectsRow = effectsRowPool:AcquireObject()
@@ -439,11 +437,11 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                         effectsRow.buffSlot = buffSlot
                         effectsRow.isArtificial = false
 
-                        insert(effectsRows, effectsRow)
+                        tableinsert(effectsRows, effectsRow)
                     end
                 end
 
-                sort(effectsRows, EffectsRowComparator)
+                tablesort(effectsRows, EffectsRowComparator)
                 local prevRow
                 for i, effectsRow in ipairs(effectsRows) do
                     if(prevRow) then
@@ -715,7 +713,7 @@ function LUIE.CommaValue(number, shorten, noncomma)
 
     local number = tostring(number)
     -- No shortening was done, so print number with commas
-    local left,num,right = match(number,"^([^%d]*%d)(%d*)(.-)$")
+    local left,num,right = strmatch(number,"^([^%d]*%d)(%d*)(.-)$")
     return left .. (num:reverse():gsub("(%d%d%d)","%1,"):reverse()) .. right
 end
 

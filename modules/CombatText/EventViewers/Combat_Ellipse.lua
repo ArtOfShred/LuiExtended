@@ -2,8 +2,8 @@ LUIE.CombatTextCombatEllipseEventViewer = LUIE.CombatTextEventViewer:Subclass()
 local CTV = LUIE.CombatTextCombatEllipseEventViewer
 
 local strfmt     = string.format
-local min        = math.min
-local max        = math.max
+local mathmin    = math.min
+local mathmax    = math.max
 local tostring   = tostring
 
 local callLater = zo_callLater
@@ -113,7 +113,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
     control:SetAnchor(point, panel, relativePoint, offsetX * w, offsetY * h)
 
     if (point == TOPRIGHT or point == TOPLEFT) then
-        if (self.lastControl[combatType] == nil) then offsetY = -25 else offsetY = max(-25, select(6, self.lastControl[combatType]:GetAnchor(0))) end
+        if (self.lastControl[combatType] == nil) then offsetY = -25 else offsetY = mathmax(-25, select(6, self.lastControl[combatType]:GetAnchor(0))) end
         control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
 
         if (offsetY < 75 and self:IsOverlapping(control, self.activeControls[combatType])) then
@@ -122,7 +122,7 @@ function CTV:View(combatType, powerType, value, abilityName, abilityId, damageTy
             control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
         end
     else
-        if (self.lastControl[combatType] == nil) then offsetY = 25 else offsetY = min(25, select(6, self.lastControl[combatType]:GetAnchor(0))) end
+        if (self.lastControl[combatType] == nil) then offsetY = 25 else offsetY = mathmin(25, select(6, self.lastControl[combatType]:GetAnchor(0))) end
         control:SetAnchor(point, panel, relativePoint, offsetX, offsetY)
 
         if (offsetY > -75 and self:IsOverlapping(control, self.activeControls[combatType])) then
