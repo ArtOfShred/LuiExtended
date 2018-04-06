@@ -82,6 +82,27 @@ local uiBags = {
     },
 }
 
+local delayBuffer = {}
+-- Delay Buffer
+local function DelayBuffer(key, buffer, currentTime)
+    if key == nil then
+        return
+    end
+
+    local buffer = buffer or 10
+    local now    = currentTime or GetFrameTimeMilliseconds()
+
+    if delayBuffer[key] == nil then
+        delayBuffer[key] = now
+        return true -- For first call of DelayBuffer we should return true
+    end
+    local eval = ( now - delayBuffer[key] ) >= buffer
+    if eval then
+        delayBuffer[key] = now
+    end
+    return eval
+end
+
 local function CreateUIControls()
     uiPanel = UI.TopLevel( nil, {240,48})
     --uiPanel.bg = UI.Backdrop( uiPanel, "fill", nil, nil, nil, false )
@@ -326,7 +347,7 @@ end
 -- Fake Component callback function used by main module
 function fakeControl.SetHidden(self, hidden)
     -- update not more then once every 5 second
-    if not hidden and LUIE.DelayBuffer( "InfoPanelFakeControl", 5000 ) then
+    if not hidden and DelayBuffer( "InfoPanelFakeControl", 5000 ) then
         PNL.OnUpdate60()
     end
 end

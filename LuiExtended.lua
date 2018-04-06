@@ -648,28 +648,6 @@ function LUIE.PrintToChat(msg)
     end
 end
 
-local delayBuffer       = {}
-
--- Delay Buffer
-function LUIE.DelayBuffer(key, buffer, currentTime)
-    if key == nil then
-        return
-    end
-
-    local buffer = buffer or 10
-    local now    = currentTime or GetFrameTimeMilliseconds()
-
-    if delayBuffer[key] == nil then
-        delayBuffer[key] = now
-        return true -- For first call of DelayBuffer we should return true
-    end
-    local eval = ( now - delayBuffer[key] ) >= buffer
-    if eval then
-        delayBuffer[key] = now
-    end
-    return eval
-end
-
 -- Returns a formatted number with commas
 -- Function no comma to be added in a later date.
 function LUIE.CommaValue(number, shorten, noncomma)
