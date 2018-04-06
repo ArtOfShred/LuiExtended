@@ -22,6 +22,7 @@ local gsub          = gsub
 local reverse       = reverse
 local tostring      = tostring
 local pairs         = pairs
+local ipairs        = ipairs
 
 -- Default Settings
 LUIE.D = {

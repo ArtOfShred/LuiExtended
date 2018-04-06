@@ -18,6 +18,7 @@ local tablesort     = table.sort
 local unpack        = unpack
 local tonumber      = tonumber
 local pairs         = pairs
+local ipairs        = ipairs
 
 local callLater     = zo_callLater
 

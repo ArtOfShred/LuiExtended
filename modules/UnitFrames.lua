@@ -17,6 +17,7 @@ local mathmin       = math.min
 local mathceil      = math.ceil
 local unpack        = unpack
 local pairs         = pairs
+local ipairs        = ipairs
 
 local callLater     = zo_callLater
 
