@@ -133,8 +133,10 @@ SCB.D = {
     ProminentProgressBuffC2          = { 0, .4, 0 },
     ProminentProgressDebuffC1        = { 1, 0, 0 },
     ProminentProgressDebuffC2        = { .4, 0, 0 },
-    ProminentAlignment               = "Bottom",
-    ProminentReverseSort             = false,
+	ProminentBuffAlignment		     = "Bottom",
+	ProminentDebuffAlignment		 = "Bottom",
+	ProminentBuffReverseSort		 = false,
+	ProminentDebuffReverseSort 		 = false,
     ProminentBuffLabelDirection      = "Left",
     ProminentDebuffLabelDirection    = "Right",
     PromBuffTable                    = {},
@@ -864,12 +866,12 @@ function SCB.SetIconsAlignment( value )
     end
 end
 
-function SCB.SetIconsAlignmentProminent ( value )
+function SCB.SetIconsAlignmentProminentBuff ( value )
 
     if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
-        value = SCB.D.ProminentAlignment
+        value = SCB.D.ProminentBuffAlignment
     end
-    SCB.SV.ProminentAlignment = value
+    SCB.SV.ProminentBuffAlignment = value
 
     if not SCB.Enabled then
         return
@@ -879,7 +881,31 @@ function SCB.SetIconsAlignmentProminent ( value )
 
     for _, v in pairs(containerRouting) do
         if uiTlw[v].iconHolder then
-            if v == "prominentbuffs" or v == "prominentdebuffs" then
+            if v == "prominentbuffs" then
+                uiTlw[v].iconHolder:ClearAnchors()
+                uiTlw[v].iconHolder:SetAnchor ( g_prominentVertAlign )
+            end
+        end
+    end
+
+end
+
+function SCB.SetIconsAlignmentProminentDebuff ( value )
+
+    if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
+        value = SCB.D.ProminentDebuffAlignment
+    end
+    SCB.SV.ProminentDebuffAlignment = value
+
+    if not SCB.Enabled then
+        return
+    end
+
+    g_prominentVertAlign = ( value == "Top" ) and TOP or ( value == "Bottom" ) and BOTTOM or CENTER
+
+    for _, v in pairs(containerRouting) do
+        if uiTlw[v].iconHolder then
+            if v == "prominentdebuffs" then
                 uiTlw[v].iconHolder:ClearAnchors()
                 uiTlw[v].iconHolder:SetAnchor ( g_prominentVertAlign )
             end
@@ -2618,7 +2644,13 @@ function SCB.updateIcons( currentTime, sortedList, container )
         else
             istart, iend, istep = iconsNum, 1, -1
         end
-    elseif (container == "prominentbuffs" or container == "prominentdebuffs") and SCB.SV.ProminentReverseSort then
+    elseif (container == "prominentbuffs"") and SCB.SV.ProminentBuffReverseSort then
+        if g_horizSortInvert and not uiTlw[container].alignVertical then
+            istart, iend, istep = iconsNum, 1, -1
+        else
+            istart, iend, istep = iconsNum, 1, -1
+        end
+	elseif (container == "prominentdebuffs") and SCB.SV.ProminentDebuffReverseSort then
         if g_horizSortInvert and not uiTlw[container].alignVertical then
             istart, iend, istep = iconsNum, 1, -1
         else

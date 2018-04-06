@@ -2074,26 +2074,52 @@ function LUIE_CreateSettings()
             {
 				-- Prominent Buffs Alignment
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_BUFF_PROM_ALIGNMENT),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_ALIGNMENT_TP),
+                name = GetString(SI_LUIE_LAM_BUFF_PROM_BUFFALIGNMENT),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_BUFFALIGNMENT_TP),
                 choices = { "Top", "Middle", "Bottom" },
                 sort = "name-up",
-                getFunc = function() return LUIE.SpellCastBuffs.SV.ProminentAlignment end,
-                setFunc = LUIE.SpellCastBuffs.SetIconsAlignmentProminent,
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ProminentBuffAlignment end,
+                setFunc = LUIE.SpellCastBuffs.SetIconsAlignmentProminentBuff,
                 width = "full",
-                default = LUIE.SpellCastBuffs.D.ProminentAlignment,
+                default = LUIE.SpellCastBuffs.D.ProminentBuffAlignment,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
+            },
+			
+			{
+				-- Prominent Debuffs Alignment
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFFALIGNMENT),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFFALIGNMENT_TP),
+                choices = { "Top", "Middle", "Bottom" },
+                sort = "name-up",
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ProminentDebuffAlignment end,
+                setFunc = LUIE.SpellCastBuffs.SetIconsAlignmentProminentDebuff,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ProminentDebuffAlignment,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
 
             {
                 -- Prominent Buffs Reverse Sort Order
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_PROM_REVERSESORT),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_REVERSESORT),
-                getFunc = function() return LUIE.SpellCastBuffs.SV.ProminentReverseSort end,
-                setFunc = function(value) LUIE.SpellCastBuffs.SV.ProminentReverseSort = value LUIE.SpellCastBuffs.Reset() end,
+                name = GetString(SI_LUIE_LAM_BUFF_PROM_BUFFREVERSESORT),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_BUFFREVERSESORT),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ProminentBuffReverseSort end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.ProminentBuffReverseSort = value LUIE.SpellCastBuffs.Reset() end,
                 width = "full",
-                default = LUIE.SpellCastBuffs.D.ProminentReverseSort,
+                default = LUIE.SpellCastBuffs.D.ProminentBuffReverseSort,
+                disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
+            },
+			
+			{
+                -- Prominent Debuffs Reverse Sort Order
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFFREVERSESORT),
+                tooltip = GetString(SI_LUIE_LAM_BUFF_PROM_DEBUFFREVERSESORT),
+                getFunc = function() return LUIE.SpellCastBuffs.SV.ProminentDebuffReverseSort end,
+                setFunc = function(value) LUIE.SpellCastBuffs.SV.ProminentDebuffReverseSort = value LUIE.SpellCastBuffs.Reset() end,
+                width = "full",
+                default = LUIE.SpellCastBuffs.D.ProminentDebuffReverseSort,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
 
