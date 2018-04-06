@@ -32,6 +32,9 @@ SC.D = {
 }
 SC.SV       = nil
 
+local g_regroupStacks   = {}
+local PendingRegroup    = false
+
 function SC.Initialize( enabled )
 
     SC.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "SlashCommands", SC.D )

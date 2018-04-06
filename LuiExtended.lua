@@ -224,7 +224,6 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         end
 
         return buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer
-
     end
 
     -- Death Recap enhancements:
@@ -321,7 +320,6 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
             end
 
             self.icon:SetTexture(iconFilename)
-
             SHARED_INFORMATION_AREA:SetHidden(self, false)
         else
             SHARED_INFORMATION_AREA:SetHidden(self, true)
@@ -591,10 +589,6 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     }
 end
 
-local delayBuffer       = {}
-local g_regroupStacks   = {}
-local PendingRegroup    = false
-
 -- Return a formatted time
 -- Stolen from pChat, thanks @Ayantir
 function LUIE.CreateTimestamp(timeStr, formatStr)
@@ -653,6 +647,8 @@ function LUIE.PrintToChat(msg)
         CHAT_SYSTEM:AddMessage(msg)
     end
 end
+
+local delayBuffer       = {}
 
 -- Delay Buffer
 function LUIE.DelayBuffer(key, buffer, currentTime)
