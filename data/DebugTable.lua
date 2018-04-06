@@ -1,6 +1,6 @@
 -- List of all abilityId's that have been processed so far
 -- These id's don't show up on the debug event for EVENT_COMBAT_EVENT or EVENT_EFFECT_CHANGED
-debugAuras                  = {
+debugAuras = {
 
 -------------------------------------
 

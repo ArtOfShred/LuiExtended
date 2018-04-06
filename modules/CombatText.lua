@@ -3,9 +3,10 @@
 LUIE.CombatText     = {}
 
 -- Performance Enhancement
-local CT    = LUIE.CombatText
-local LMP   = LibStub("LibMediaProvider-1.0")
-local pairs = pairs
+local CT     = LUIE.CombatText
+local LMP    = LibStub("LibMediaProvider-1.0")
+local unpack = unpack
+local pairs  = pairs
 
 
 local moduleName    = LUIE.name .. "_CombatText"
@@ -219,7 +220,7 @@ CT.D = {
             [DAMAGE_TYPE_DROWN]     = { 35/255, 70/255, 255/255, 1 },
             [DAMAGE_TYPE_DISEASE]   = { 25/255, 85/255, 0, 1 },
             [DAMAGE_TYPE_POISON]    = { 0, 1, 127/255, 1 }
-            },
+        },
         healing                     = { 0, 192/255, 0, 1 },
         energizeMagicka             = { 0, 192/255, 1, 1 },
         energizeStamina             = { 192/255, 1, 0, 1 },
@@ -265,7 +266,7 @@ CT.D = {
     --Points
         pointsAlliance              = { 0.235294, 0.784314, 0.313725, 1 },  --RGB(60, 200, 80)
         pointsExperience            = { 0.588235, 0.705882, 0.862745, 1 },  --RGB(150, 180, 220)
-        pointsChampion               = { 0.784314, 0.784314, 0.627451, 1 },  --RGB(200, 200, 160)
+        pointsChampion              = { 0.784314, 0.784314, 0.627451, 1 },  --RGB(200, 200, 160)
     ----------------------------------
     --Resources
         lowHealth                   = { 0.901961, 0.196078, 0.098039, 1 },  --RGB(230, 50, 25)
@@ -367,14 +368,14 @@ CT.D = {
 CT.SV       = nil
 
 local function SavePosition(panel)
-        local anchor = { panel:GetAnchor(0) }
-        local dimensions = { panel:GetDimensions() }
-        local panelSettings = LUIE.CombatText.SV.panels[panel:GetName()]
-        panelSettings.point = anchor[2]
-        panelSettings.relativePoint = anchor[4]
-        panelSettings.offsetX = anchor[5]
-        panelSettings.offsetY = anchor[6]
-        panelSettings.dimensions = dimensions
+    local anchor = { panel:GetAnchor(0) }
+    local dimensions = { panel:GetDimensions() }
+    local panelSettings = LUIE.CombatText.SV.panels[panel:GetName()]
+    panelSettings.point = anchor[2]
+    panelSettings.relativePoint = anchor[4]
+    panelSettings.offsetX = anchor[5]
+    panelSettings.offsetY = anchor[6]
+    panelSettings.dimensions = dimensions
 end
 
 ---------------------------------------------------------------------------------------------------------------------------------------

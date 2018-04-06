@@ -1,9 +1,12 @@
 LUIE.CombatTextEventViewer = ZO_Object:Subclass()
-local CTV = LUIE.CombatTextEventViewer
 
-local gsub, format = string.gsub, string.format
-local callbackManager = CALLBACK_MANAGER
+local CTV = LUIE.CombatTextEventViewer
 local C = LUIE.CombatTextConstants
+local strfmt = string.format
+local callbackManager = CALLBACK_MANAGER
+local gsub = string.gsub
+local unpack = unpack
+local pairs = pairs
 
 CTV.resourceNames = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_COMBATMECHANICTYPE', k); return t[k] end})
 CTV.damageTypes = setmetatable({}, {__index = function(t, k) t[k] = GetString('SI_DAMAGETYPE', k); return t[k] end})
@@ -209,7 +212,7 @@ end
 function CTV:PrepareLabel(label, fontSize, color, text)
     label:SetText(text)
     label:SetColor(unpack(color))
-    label:SetFont(format('%s|%d|%s', self.LMP:Fetch('font', LUIE.CombatText.SV.fontFace), fontSize, LUIE.CombatText.SV.fontOutline))
+    label:SetFont(strfmt('%s|%d|%s', self.LMP:Fetch('font', LUIE.CombatText.SV.fontFace), fontSize, LUIE.CombatText.SV.fontOutline))
 end
 
 function CTV:IsOverlapping(control, activeControls)

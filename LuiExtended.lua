@@ -14,9 +14,15 @@ LUIE.SVName      = "LUIESV"
 
 -- Performance Enhancement
 local strfmt        = string.format
+local strmatch      = string.match
 local strformat     = zo_strformat
+local tableinsert   = table.insert
+local tablesort     = table.sort
 local gsub          = gsub
+local reverse       = reverse
+local tostring      = tostring
 local pairs         = pairs
+local ipairs        = ipairs
 
 -- Default Settings
 LUIE.D = {
@@ -218,7 +224,6 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         end
 
         return buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer
-
     end
 
     -- Death Recap enhancements:
@@ -315,7 +320,6 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
             end
 
             self.icon:SetTexture(iconFilename)
-
             SHARED_INFORMATION_AREA:SetHidden(self, false)
         else
             SHARED_INFORMATION_AREA:SetHidden(self, true)
@@ -360,7 +364,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     effectsRow.effectId = effectId
                     effectsRow.isArtificial = true
 
-                    table.insert(effectsRows, effectsRow)
+                    tableinsert(effectsRows, effectsRow)
                 end
 
                 local counter = 1
@@ -417,7 +421,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                     --if LUIE.Effects.TooltipOverride[abilityId] then tooltipText = LUIE.Effects.TooltipOverride[abilityId] end
                     -- Have to trim trailing spaces on the end of tooltips
                     if tooltipText ~= "" then
-                        tooltipText = string.match(tooltipText, ".*%S")
+                        tooltipText = strmatch(tooltipText, ".*%S")
                     end
                     if buffSlot > 0 and buffName ~= "" and not (LUIE.Effects.EffectOverride[abilityId] and LUIE.Effects.EffectOverride[abilityId].hide) and not markForRemove then
                         local effectsRow = effectsRowPool:AcquireObject()
@@ -432,11 +436,11 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                         effectsRow.buffSlot = buffSlot
                         effectsRow.isArtificial = false
 
-                        table.insert(effectsRows, effectsRow)
+                        tableinsert(effectsRows, effectsRow)
                     end
                 end
 
-                table.sort(effectsRows, EffectsRowComparator)
+                tablesort(effectsRows, EffectsRowComparator)
                 local prevRow
                 for i, effectsRow in ipairs(effectsRows) do
                     if(prevRow) then
@@ -585,10 +589,6 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     }
 end
 
-local delayBuffer       = {}
-local g_regroupStacks   = {}
-local PendingRegroup    = false
-
 -- Return a formatted time
 -- Stolen from pChat, thanks @Ayantir
 function LUIE.CreateTimestamp(timeStr, formatStr)
@@ -648,26 +648,6 @@ function LUIE.PrintToChat(msg)
     end
 end
 
--- Delay Buffer
-function LUIE.DelayBuffer(key, buffer, currentTime)
-    if key == nil then
-        return
-    end
-
-    local buffer = buffer or 10
-    local now    = currentTime or GetFrameTimeMilliseconds()
-
-    if delayBuffer[key] == nil then
-        delayBuffer[key] = now
-        return true -- For first call of DelayBuffer we should return true
-    end
-    local eval = ( now - delayBuffer[key] ) >= buffer
-    if eval then
-        delayBuffer[key] = now
-    end
-    return eval
-end
-
 -- Returns a formatted number with commas
 -- Function no comma to be added in a later date.
 function LUIE.CommaValue(number, shorten, noncomma)
@@ -708,7 +688,7 @@ function LUIE.CommaValue(number, shorten, noncomma)
 
     local number = tostring(number)
     -- No shortening was done, so print number with commas
-    local left,num,right = string.match(number,"^([^%d]*%d)(%d*)(.-)$")
+    local left,num,right = strmatch(number,"^([^%d]*%d)(%d*)(.-)$")
     return left .. (num:reverse():gsub("(%d%d%d)","%1,"):reverse()) .. right
 end
 

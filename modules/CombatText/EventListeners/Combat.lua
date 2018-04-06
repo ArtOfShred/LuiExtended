@@ -3,6 +3,7 @@ local CTL = LUIE.CombatTextCombatEventListener
 local C = LUIE.CombatTextConstants
 local AlertT = LUIE.AlertTable
 local callLater = zo_callLater
+local pairs = pairs
 local refireDelay = { }
 
 local isWarned = {
