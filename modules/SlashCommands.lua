@@ -10,6 +10,8 @@ local strlower      = string.lower
 local strmatch      = string.match
 local pairs         = pairs
 
+local callLater     = zo_callLater
+
 local moduleName    = LUIE.name .. "_SlashCommands"
 
 SC.Enabled  = false
@@ -36,7 +38,6 @@ local g_regroupStacks   = {}
 local PendingRegroup    = false
 
 function SC.Initialize( enabled )
-
     SC.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "SlashCommands", SC.D )
 
     if not enabled then
@@ -45,7 +46,6 @@ function SC.Initialize( enabled )
     SC.Enabled = true
 
     SC.RegisterSlashCommands()
-
 end
 
 local function SlashHome()
@@ -172,7 +172,7 @@ local function SlashRegroup()
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG), flagOffline, flagOffline, flagOffline) )
             end
             GroupDisband()
-            zo_callLater(LUIE.RegroupInvite, 5000)
+            callLater(RegroupInvite, 5000)
         else
             printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG))
             if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
@@ -187,7 +187,7 @@ local function SlashRegroup()
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG) )
         end
         GroupDisband()
-        zo_callLater(LUIE.RegroupInvite, 5000)
+        callLater(RegroupInvite, 5000)
     end
 end
 
@@ -264,7 +264,7 @@ local function SlashKick(option)
     if option == "" or not SC.SV.SlashGroupKick then
         PlayEmoteByIndex(109)
     else
-        LUIE.SlashGroupKick(option)
+        SlashGroupKick(option)
     end
 end
 
@@ -870,14 +870,13 @@ local function SlashInvite(option)
 end
 
 function SC.RegisterSlashCommands()
-
     -- Clear commands list
     SLASH_COMMANDS["/home"]         = nil
     SLASH_COMMANDS["/regroup"]      = nil
     SLASH_COMMANDS["/disband"]      = nil
     SLASH_COMMANDS["/leave"]        = nil
     SLASH_COMMANDS["/leavegroup"]   = nil
-    SLASH_COMMANDS["/kick"]         = nil
+    SLASH_COMMANDS["/kick"]         = SlashKick -- This command is always registered since it is also a default emote
     SLASH_COMMANDS["/remove"]       = nil
     SLASH_COMMANDS["/groupkick"]    = nil
     SLASH_COMMANDS["/groupremove"]  = nil
@@ -901,84 +900,69 @@ function SC.RegisterSlashCommands()
     SLASH_COMMANDS["/unignore"]     = nil
     SLASH_COMMANDS["/removeignore"] = nil
     SLASH_COMMANDS["/campaign"]     = nil
-    SLASH_COMMANDS["/invite"]       = nil
+    SLASH_COMMANDS["/invite"]       = SlashInvite -- This command is always registered since it is also a default command
+    SLASH_COMMANDS["/banker"]       = nil
+    SLASH_COMMANDS["/merchant"]     = nil
+    SLASH_COMMANDS["/fence"]        = nil
     SLASH_COMMAND_AUTO_COMPLETE:InvalidateSlashCommandCache()
 
     -- Add commands based off menu options
-    if SC.SV.SlashHome == true then
+    if SC.SV.SlashHome then
         SLASH_COMMANDS["/home"]         = SlashHome
     end
-
-    if SC.SV.SlashRegroup == true then
+    if SC.SV.SlashRegroup then
         SLASH_COMMANDS["/regroup"]      = SlashRegroup
     end
-
-    if SC.SV.SlashDisband == true then
+    if SC.SV.SlashDisband then
         SLASH_COMMANDS["/disband"]      = SlashDisband
     end
-
-    if SC.SV.SlashGroupLeave == true then
+    if SC.SV.SlashGroupLeave then
         SLASH_COMMANDS["/leave"]        = SlashGroupLeave
         SLASH_COMMANDS["/leavegroup"]   = SlashGroupLeave
     end
-
-    -- This command is always registered since it is also a default emote
-    SLASH_COMMANDS["/kick"]         = SlashKick
-    if SC.SV.SlashGroupKick == true then
+    if SC.SV.SlashGroupKick then
         SLASH_COMMANDS["/remove"]       = SlashGroupKick
         SLASH_COMMANDS["/groupkick"]    = SlashGroupKick
         SLASH_COMMANDS["/groupremove"]  = SlashGroupKick
     end
-
-    if SC.SV.SlashTrade == true then
+    if SC.SV.SlashTrade then
         SLASH_COMMANDS["/trade"]        = SlashTrade
     end
-
-    if SC.SV.SlashVoteKick == true then
+    if SC.SV.SlashVoteKick then
         SLASH_COMMANDS["/votekick"]     = SlashVoteKick
         SLASH_COMMANDS["/voteremove"]   = SlashVoteKick
     end
-
-    if SC.SV.SlashGuildInvite == true then
+    if SC.SV.SlashGuildInvite then
         SLASH_COMMANDS["/guildinvite"]  = SlashGuildInvite
         SLASH_COMMANDS["/ginvite"]      = SlashGuildInvite
     end
-    if SC.SV.SlashGuildKick == true then
+    if SC.SV.SlashGuildKick then
         SLASH_COMMANDS["/guildkick"]    = SlashGuildKick
         SLASH_COMMANDS["/gkick"]        = SlashGuildKick
     end
-    if SC.SV.SlashGuildQuit == true then
+    if SC.SV.SlashGuildQuit then
         SLASH_COMMANDS["/guildquit"]    = SlashGuildQuit
         SLASH_COMMANDS["/gquit"]        = SlashGuildQuit
         SLASH_COMMANDS["/guildleave"]   = SlashGuildQuit
         SLASH_COMMANDS["/gleave"]       = SlashGuildQuit
     end
-
-    if SC.SV.SlashFriend == true then
+    if SC.SV.SlashFriend then
         SLASH_COMMANDS["/addfriend"]    = SlashFriend
         SLASH_COMMANDS["/friend"]       = SlashFriend
     end
-
-    if SC.SV.SlashIgnore == true then
+    if SC.SV.SlashIgnore then
         SLASH_COMMANDS["/addignore"]    = SlashIgnore
         SLASH_COMMANDS["/ignore"]       = SlashIgnore
     end
-
-    if SC.SV.SlashRemoveFriend == true then
+    if SC.SV.SlashRemoveFriend then
         SLASH_COMMANDS["/unfriend"]     = SlashRemoveFriend
         SLASH_COMMANDS["/removefriend"] = SlashRemoveFriend
     end
-
-    if SC.SV.SlashRemoveIgnore == true then
+    if SC.SV.SlashRemoveIgnore then
         SLASH_COMMANDS["/unignore"]     = SlashRemoveIgnore
         SLASH_COMMANDS["/removeignore"] = SlashRemoveIgnore
     end
-
-    if SC.SV.SlashCampaignQ == true then
+    if SC.SV.SlashCampaignQ then
         SLASH_COMMANDS["/campaign"]     = SlashCampaignQ
     end
-
-    -- This command is always registered since it is also a default command
-    SLASH_COMMANDS["/invite"]       = SlashInvite
-
 end
