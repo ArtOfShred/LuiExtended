@@ -883,7 +883,7 @@ local function SlashMerchant()
 end
 
 local function SlashFence()
-   local FENCE = 300
+   local fence = 300
    UseCollectible(fence)
 end
 
