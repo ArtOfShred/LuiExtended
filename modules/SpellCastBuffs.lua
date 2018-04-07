@@ -1209,7 +1209,7 @@ function SCB.Reset()
     SCB.SetIconsAlignment( SCB.SV.Alignment )
     SCB.SetIconsAlignmentLongVert( SCB.SV.AlignmentLongVert )
     SCB.SetIconsAlignmentLongHorz( SCB.SV.AlignmentLongHorz )
-    SCB.SetIconsAlignmentProminent( SCB.SV.ProminentAlignment )
+    SCB.SetIconsAlignmentProminentBuff( SCB.SV.ProminentBuffAlignment )
     SCB.SetSortDirection( SCB.SV.SortDirection )
 
     local needs_reset = {}
@@ -2644,7 +2644,7 @@ function SCB.updateIcons( currentTime, sortedList, container )
         else
             istart, iend, istep = iconsNum, 1, -1
         end
-    elseif (container == "prominentbuffs"") and SCB.SV.ProminentBuffReverseSort then
+    elseif (container == "prominentbuffs") and SCB.SV.ProminentBuffReverseSort then
         if g_horizSortInvert and not uiTlw[container].alignVertical then
             istart, iend, istep = iconsNum, 1, -1
         else
