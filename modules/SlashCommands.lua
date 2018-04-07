@@ -31,6 +31,9 @@ SC.D = {
     SlashTrade          = true,
     SlashVoteKick       = true,
     SlashCampaignQ      = true,
+    SlashBanker         = true,
+    SlashMerchant       = true,
+    SlashFence          = true,
 }
 SC.SV       = nil
 
@@ -869,6 +872,21 @@ local function SlashInvite(option)
     end
 end
 
+local function SlashBanker()
+   local banker = 267
+   UseCollectible(banker)
+end
+
+local function SlashMerchant()
+   local merchant = 301
+   UseCollectible(merchant)
+end
+
+local function SlashFence()
+   local FENCE = 300
+   UseCollectible(fence)
+end
+
 function SC.RegisterSlashCommands()
     -- Clear commands list
     SLASH_COMMANDS["/home"]         = nil
@@ -964,5 +982,14 @@ function SC.RegisterSlashCommands()
     end
     if SC.SV.SlashCampaignQ then
         SLASH_COMMANDS["/campaign"]     = SlashCampaignQ
+    end
+    if SC.SV.SlashCampaignQ then
+        SLASH_COMMANDS["/banker"]       = SlashBanker
+    end
+    if SC.SV.SlashCampaignQ then
+        SLASH_COMMANDS["/merchant"]     = SlashMerchant
+    end
+    if SC.SV.SlashCampaignQ then
+        SLASH_COMMANDS["/fence"]        = SlashFence
     end
 end
