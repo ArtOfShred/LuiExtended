@@ -401,7 +401,9 @@ function CI.OnUpdate(currentTime)
         if remain <= 0 then
             if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] then
                 g_uiCustomToggle[g_toggledSlots[k]]:SetHidden(true)
-                if g_toggledSlots[k] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then uiUltimate.LabelPct:SetHidden( false ) end
+                if g_toggledSlots[k] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then
+                    uiUltimate.LabelPct:SetHidden( false )
+                end
             end
             g_toggledSlotsRemain[k] = nil
         end
@@ -411,7 +413,9 @@ function CI.OnUpdate(currentTime)
             if CI.SV.BarShowLabel then
                 g_uiCustomToggle[g_toggledSlots[k]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
             end
-            if g_toggledSlots[k] == 8 and CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetHidden( true ) end
+            if g_toggledSlots[k] == 8 and CI.SV.UltimatePctEnabled then
+                uiUltimate.LabelPct:SetHidden( true )
+            end
         end
     end
 
@@ -543,7 +547,9 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                         if CI.SV.BarShowLabel then
                             g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and groundDuration or groundDuration - 1 ))
                         end
-                        if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetHidden( true ) end
+                        if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then
+                            uiUltimate.LabelPct:SetHidden( true )
+                        end
                     end
                 end
             end
@@ -564,12 +570,13 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                 end
                 g_triggeredSlotsRemain[abilityId] = nil
             end
-
             -- Stop any toggle animation associted with this effect
             if g_toggledSlotsRemain[abilityId] then
                 if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
                     g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
-                    if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then uiUltimate.LabelPct:SetHidden( false ) end
+                    if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then
+                        uiUltimate.LabelPct:SetHidden( false )
+                    end
                 end
                 g_toggledSlotsRemain[abilityId] = nil
             end
@@ -588,7 +595,6 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                     end
                 end
             end
-
             -- Display active effects
             if g_toggledSlots[abilityId] then
                 local currentTime = GetGameTimeMilliseconds()
@@ -623,7 +629,6 @@ function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGr
 
     if result == ACTION_RESULT_BEGIN or result == ACTION_RESULT_EFFECT_GAINED or result == ACTION_RESULT_EFFECT_GAINED_DURATION then
         local currentTime = GetGameTimeMilliseconds()
-
         if g_toggledSlots[abilityId] then
             if CI.SV.ShowToggled then
                 g_toggledSlotsRemain[abilityId] = CI.GetAbilityDuration(abilityId) + currentTime
@@ -631,7 +636,9 @@ function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGr
                 if CI.SV.BarShowLabel then
                     g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (CI.GetAbilityDuration(abilityId)/1000) or (CI.GetAbilityDuration(abilityId)/1000) - 1 ))
                 end
-                if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetHidden( true ) end
+                if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then
+                    uiUltimate.LabelPct:SetHidden( true )
+                end
             end
         end
     elseif result == ACTION_RESULT_EFFECT_FADED then
@@ -641,7 +648,9 @@ function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGr
         if g_toggledSlotsRemain[abilityId] then
             if g_toggledSlots[abilityId] and g_uiCustomToggle[g_toggledSlots[abilityId]] then
                 g_uiCustomToggle[g_toggledSlots[abilityId]]:SetHidden(true)
-                if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then uiUltimate.LabelPct:SetHidden( false ) end
+                if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then
+                    uiUltimate.LabelPct:SetHidden( false )
+                end
             end
             g_toggledSlotsRemain[abilityId] = nil
         end
@@ -657,10 +666,8 @@ function CI.OnSlotAbilityUsed(eventCode, slotNum)
     local ability = g_actionBar[slotNum]
 
     if ability then -- Only proceed if this button is being watched
-
         -- Avoid failure and button mashing
         if not HasFailure( slotNum ) and ( currentTime > g_lastCast + 250 ) then
-
             -- Don't process effects immediately for ground-target spells
             if ability.ground then
                 g_pendingGroundAbility = ability
@@ -723,7 +730,9 @@ function CI.OnSlotUpdated(eventCode, slotNum)
     -- Get the slotted ability ID
     local ability_id = GetSlotBoundId(slotNum)
     local showFakeAura = (E.BarHighlightOverride[ability_id] and E.BarHighlightOverride[ability_id].showFakeAura)
-    if E.BarHighlightOverride[ability_id] and E.BarHighlightOverride[ability_id].newId then ability_id = E.BarHighlightOverride[ability_id].newId end
+    if E.BarHighlightOverride[ability_id] and E.BarHighlightOverride[ability_id].newId then
+        ability_id = E.BarHighlightOverride[ability_id].newId
+    end
     local abilityName = E.EffectOverride[ability_id] and E.EffectOverride[ability_id].name or GetAbilityName(ability_id) -- GetSlotName(slotNum)
     local duration = CI.GetAbilityDuration(ability_id)
 
@@ -762,7 +771,9 @@ function CI.OnSlotUpdated(eventCode, slotNum)
                 if CI.SV.BarShowLabel then
                     g_uiCustomToggle[slotNum].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (CI.GetAbilityDuration(ability_id)/1000) or (CI.GetAbilityDuration(ability_id)/1000) - 1 ))
                 end
-                if slotNum == 8 and CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetHidden( true ) end
+                if slotNum == 8 and CI.SV.UltimatePctEnabled then
+                    uiUltimate.LabelPct:SetHidden( true )
+                end
             end
         end
     end
@@ -861,7 +872,9 @@ function CI.OnDeath(eventCode, unitTag, isDead)
         for slotNum = 3, 8 do
             if g_uiCustomToggle[slotNum] then
                 g_uiCustomToggle[slotNum]:SetHidden(true)
-                if slotNum == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then uiUltimate.LabelPct:SetHidden( false ) end
+                if slotNum == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then
+                    uiUltimate.LabelPct:SetHidden( false )
+                end
             end
         end
     end
@@ -914,12 +927,18 @@ function CI.OnPowerUpdatePlayer( eventCode , unitTag, powerIndex, powerType, pow
         if IsSlotUsed( g_ultimateSlot ) then
             -- Values label: Set Value and assign colour
             -- Pct label: show always when less then 100% and possibly if UltimateHideFull is false
-            if CI.SV.UltimateLabelEnabled then uiUltimate.LabelVal:SetText( powerValue .. "/" .. g_ultimateCost ) end
-            if CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetText( pct .. "%") end
+            if CI.SV.UltimateLabelEnabled then
+                uiUltimate.LabelVal:SetText( powerValue .. "/" .. g_ultimateCost )
+            end
+            if CI.SV.UltimatePctEnabled then
+                uiUltimate.LabelPct:SetText( pct .. "%")
+            end
             if pct < 100  then
                 if CI.SV.UltimatePctEnabled then
                     local setHidden = false
-                    if (CI.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden() ) then setHidden = true end
+                    if (CI.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden() ) then
+                        setHidden = true
+                    end
                     uiUltimate.LabelPct:SetHidden(setHidden)
                 end
                 if CI.SV.UltimateLabelEnabled then
@@ -932,9 +951,15 @@ function CI.OnPowerUpdatePlayer( eventCode , unitTag, powerIndex, powerType, pow
                 end
             else
                 local setHidden = false
-                if (CI.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden() ) or CI.SV.UltimateHideFull then setHidden = true end
-                if CI.SV.UltimatePctEnabled then uiUltimate.LabelPct:SetHidden( setHidden ) end
-                if CI.SV.UltimateLabelEnabled then uiUltimate.LabelVal:SetColor( unpack(uiUltimate.colour) ) end
+                if (CI.SV.ShowToggledUltimate and g_uiCustomToggle[8] and not g_uiCustomToggle[8]:IsHidden() ) or CI.SV.UltimateHideFull then
+                    setHidden = true
+                end
+                if CI.SV.UltimatePctEnabled then
+                    uiUltimate.LabelPct:SetHidden( setHidden )
+                end
+                if CI.SV.UltimateLabelEnabled then
+                    uiUltimate.LabelVal:SetColor( unpack(uiUltimate.colour) )
+                end
             end
         end
     end
