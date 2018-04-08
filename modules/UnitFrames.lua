@@ -20,6 +20,7 @@ local pairs         = pairs
 local ipairs        = ipairs
 
 local eventManager  = EVENT_MANAGER
+local sceneManager  = SCENE_MANAGER
 local callLater     = zo_callLater
 
 local moduleName    = LUIE.name .. "_UnitFrames"
@@ -430,9 +431,9 @@ local function CreateCustomFrames()
 
         local fragment = ZO_HUDFadeSceneFragment:New(playerTlw, 0, 0)
 
-        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("hud"):AddFragment( fragment )
+        sceneManager:GetScene("hudui"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBar"):AddFragment( fragment )
 
         -- Collect all together
         UF.CustomFrames.player = {
@@ -518,9 +519,9 @@ local function CreateCustomFrames()
 
         local fragment = ZO_HUDFadeSceneFragment:New(targetTlw, 0, 0)
 
-        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("hud"):AddFragment( fragment )
+        sceneManager:GetScene("hudui"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBar"):AddFragment( fragment )
 
         -- Collect all together
         UF.CustomFrames.reticleover = {
@@ -573,9 +574,9 @@ local function CreateCustomFrames()
 
         local fragment = ZO_HUDFadeSceneFragment:New(targetTlw, 0, 0)
 
-        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("hud"):AddFragment( fragment )
+        sceneManager:GetScene("hudui"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBar"):AddFragment( fragment )
 
         -- Collect all together
         -- Notice, that we put this table into same UF.CustomFrames table.
@@ -625,9 +626,9 @@ local function CreateCustomFrames()
 
         local fragment = ZO_HUDFadeSceneFragment:New(group, 0, 0)
 
-        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("hud"):AddFragment( fragment )
+        sceneManager:GetScene("hudui"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBar"):AddFragment( fragment )
 
         for i = 1, 4 do
             local unitTag = "SmallGroup" .. i
@@ -673,9 +674,9 @@ local function CreateCustomFrames()
 
         local fragment = ZO_HUDFadeSceneFragment:New(raid, 0, 0)
 
-        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("hud"):AddFragment( fragment )
+        sceneManager:GetScene("hudui"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBar"):AddFragment( fragment )
 
         for i = 1, 24 do
             local unitTag = "RaidGroup" .. i
@@ -716,9 +717,9 @@ local function CreateCustomFrames()
 
         local fragment = ZO_HUDFadeSceneFragment:New(bosses, 0, 0)
 
-        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("hud"):AddFragment( fragment )
+        sceneManager:GetScene("hudui"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBar"):AddFragment( fragment )
 
         for i = 1, 6 do
             local unitTag = "boss" .. i

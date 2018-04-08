@@ -9,6 +9,8 @@ local strfmt        = string.format
 local pairs         = pairs
 
 local eventManager  = EVENT_MANAGER
+local sceneManager  = SCENE_MANAGER
+
 local moduleName    = LUIE.name .. "_InfoPanel"
 
 local colors = {
@@ -110,9 +112,9 @@ local function CreateUIControls()
 
     local fragment = ZO_HUDFadeSceneFragment:New(uiPanel, 0, 0)
 
-    SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
-    SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
-    SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+    sceneManager:GetScene("hud"):AddFragment( fragment )
+    sceneManager:GetScene("hudui"):AddFragment( fragment )
+    sceneManager:GetScene("siegeBar"):AddFragment( fragment )
 
     uiPanel.div = UI.Texture( uiPanel, nil, nil, "/esoui/art/miscellaneous/horizontaldivider.dds", DL_BACKGROUND, false )
     uiPanel.div:SetAnchor( LEFT, uiPanel, LEFT, -60, 0 )

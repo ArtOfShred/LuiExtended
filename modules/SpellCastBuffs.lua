@@ -21,6 +21,8 @@ local pairs         = pairs
 local ipairs        = ipairs
 
 local eventManager  = EVENT_MANAGER
+local sceneManager  = SCENE_MANAGER
+
 local callLater     = zo_callLater
 
 local moduleName    = LUIE.name .. "_SpellCastBuffs"
@@ -397,12 +399,12 @@ function SCB.Initialize( enabled )
         local fragment1 = ZO_HUDFadeSceneFragment:New(uiTlw.playerb, 0, 0)
         local fragment2 = ZO_HUDFadeSceneFragment:New(uiTlw.playerd, 0, 0)
 
-        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment1 )
-        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment2 )
-        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment1 )
-        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment2 )
-        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment1 )
-        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment2 )
+        sceneManager:GetScene("hud"):AddFragment( fragment1 )
+        sceneManager:GetScene("hud"):AddFragment( fragment2 )
+        sceneManager:GetScene("hudui"):AddFragment( fragment1 )
+        sceneManager:GetScene("hudui"):AddFragment( fragment2 )
+        sceneManager:GetScene("siegeBar"):AddFragment( fragment1 )
+        sceneManager:GetScene("siegeBar"):AddFragment( fragment2 )
     end
 
     if SCB.SV.lockPositionToUnitFrames and LUIE.UnitFrames.CustomFrames.reticleover and LUIE.UnitFrames.CustomFrames.reticleover.buffs and LUIE.UnitFrames.CustomFrames.reticleover.debuffs then
@@ -429,12 +431,12 @@ function SCB.Initialize( enabled )
         local fragment1 = ZO_HUDFadeSceneFragment:New(uiTlw.targetb, 0, 0)
         local fragment2 = ZO_HUDFadeSceneFragment:New(uiTlw.targetd, 0, 0)
 
-        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment1 )
-        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment2 )
-        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment1 )
-        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment2 )
-        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment1 )
-        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment2 )
+        sceneManager:GetScene("hud"):AddFragment( fragment1 )
+        sceneManager:GetScene("hud"):AddFragment( fragment2 )
+        sceneManager:GetScene("hudui"):AddFragment( fragment1 )
+        sceneManager:GetScene("hudui"):AddFragment( fragment2 )
+        sceneManager:GetScene("siegeBar"):AddFragment( fragment1 )
+        sceneManager:GetScene("siegeBar"):AddFragment( fragment2 )
     end
 
 	-- Setup Prominent Buffs
@@ -462,12 +464,12 @@ function SCB.Initialize( enabled )
 	local fragmentP1 = ZO_HUDFadeSceneFragment:New(uiTlw.prominentbuffs, 0, 0)
 	local fragmentP2 = ZO_HUDFadeSceneFragment:New(uiTlw.prominentdebuffs, 0, 0)
 
-	SCENE_MANAGER:GetScene("hud"):AddFragment( fragmentP1 )
-	SCENE_MANAGER:GetScene("hud"):AddFragment( fragmentP2 )
-	SCENE_MANAGER:GetScene("hudui"):AddFragment( fragmentP1 )
-	SCENE_MANAGER:GetScene("hudui"):AddFragment( fragmentP2 )
-	SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragmentP1 )
-	SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragmentP2 )
+	sceneManager:GetScene("hud"):AddFragment( fragmentP1 )
+	sceneManager:GetScene("hud"):AddFragment( fragmentP2 )
+	sceneManager:GetScene("hudui"):AddFragment( fragmentP1 )
+	sceneManager:GetScene("hudui"):AddFragment( fragmentP2 )
+	sceneManager:GetScene("siegeBar"):AddFragment( fragmentP1 )
+	sceneManager:GetScene("siegeBar"):AddFragment( fragmentP2 )
 
     -- Separate container for players long buffs
     if true then
@@ -493,9 +495,9 @@ function SCB.Initialize( enabled )
 
         local fragment = ZO_HUDFadeSceneFragment:New(uiTlw.player_long, 0, 0)
 
-        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("hud"):AddFragment( fragment )
+        sceneManager:GetScene("hudui"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBar"):AddFragment( fragment )
     else
         containerRouting.player_long = containerRouting.player1
     end
