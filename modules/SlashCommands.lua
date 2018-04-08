@@ -96,6 +96,27 @@ local function SlashHome()
     end
 end
 
+local function RegroupInvite()
+    printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG))
+    if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
+        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG) )
+    end
+    for i = 1, #g_regroupStacks do
+        local member = g_regroupStacks[i]
+        -- Don't invite self and offline members
+        if member.memberName ~= LUIE.PlayerNameFormatted then
+            GroupInviteByName(member.memberName)
+            printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberLink))
+            if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
+                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberNoLink) )
+            end
+        end
+    end
+
+    PendingRegroup = false -- Allow Regroup command to be used again
+    g_regroupStacks = {} -- Allow index to be used again.
+end
+
 local function SlashRegroup()
     local groupSize = GetGroupSize()
     -- Check for pending regroup
@@ -192,27 +213,6 @@ local function SlashRegroup()
         GroupDisband()
         callLater(RegroupInvite, 5000)
     end
-end
-
-local function RegroupInvite()
-    printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG))
-    if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG) )
-    end
-    for i = 1, #g_regroupStacks do
-        local member = g_regroupStacks[i]
-        -- Don't invite self and offline members
-        if member.memberName ~= LUIE.PlayerNameFormatted then
-            GroupInviteByName(member.memberName)
-            printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberLink))
-            if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberNoLink) )
-            end
-        end
-    end
-
-    PendingRegroup = false -- Allow Regroup command to be used again
-    g_regroupStacks = {} -- Allow index to be used again.
 end
 
 local function SlashDisband()
