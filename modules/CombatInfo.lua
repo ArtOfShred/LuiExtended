@@ -13,6 +13,7 @@ local mathfloor     = math.floor
 local unpack        = unpack
 local pairs         = pairs
 
+local eventManager  = EVENT_MANAGER
 local callLater     = zo_callLater
 
 local moduleName    = LUIE.name .. "_CombatInfo"
@@ -292,31 +293,31 @@ end
 
 -- Clear and then (maybe) re-register event listeners for Combat/Power/Slot Updates
 function CI.RegisterCombatInfo()
-    EVENT_MANAGER:RegisterForUpdate(moduleName, 100, CI.OnUpdate )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, CI.OnPlayerActivated )
+    eventManager:RegisterForUpdate(moduleName, 100, CI.OnUpdate )
+    eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, CI.OnPlayerActivated )
 
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_COMBAT_EVENT )
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE )
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE )
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED )
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_COMBAT_EVENT )
+    eventManager:UnregisterForEvent(moduleName, EVENT_POWER_UPDATE )
+    eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE )
+    eventManager:UnregisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED )
+    eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED)
     if CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled then
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent1", EVENT_COMBAT_EVENT, CI.OnCombatEvent )
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent2", EVENT_COMBAT_EVENT, CI.OnCombatEvent )
-        EVENT_MANAGER:AddFilterForEvent(moduleName .. "_LUIE_CI_CombatEvent1", REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false, REGISTER_FILTER_COMBAT_RESULT, ACTION_RESULT_BLOCKED_DAMAGE)
-        EVENT_MANAGER:AddFilterForEvent(moduleName .. "_LUIE_CI_CombatEvent2", REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false)
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "_LUIE_CI_PowerUpdate", EVENT_POWER_UPDATE, CI.OnPowerUpdatePlayer)
-        EVENT_MANAGER:AddFilterForEvent(moduleName .. "_LUIE_CI_PowerUpdate", EVENT_POWER_UPDATE, REGISTER_FILTER_UNIT_TAG, "player" )
+        eventManager:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent1", EVENT_COMBAT_EVENT, CI.OnCombatEvent )
+        eventManager:RegisterForEvent(moduleName .. "_LUIE_CI_CombatEvent2", EVENT_COMBAT_EVENT, CI.OnCombatEvent )
+        eventManager:AddFilterForEvent(moduleName .. "_LUIE_CI_CombatEvent1", REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false, REGISTER_FILTER_COMBAT_RESULT, ACTION_RESULT_BLOCKED_DAMAGE)
+        eventManager:AddFilterForEvent(moduleName .. "_LUIE_CI_CombatEvent2", REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false)
+        eventManager:RegisterForEvent(moduleName .. "_LUIE_CI_PowerUpdate", EVENT_POWER_UPDATE, CI.OnPowerUpdatePlayer)
+        eventManager:AddFilterForEvent(moduleName .. "_LUIE_CI_PowerUpdate", EVENT_POWER_UPDATE, REGISTER_FILTER_UNIT_TAG, "player" )
     end
     if CI.SV.ShowTriggered or CI.SV.ShowToggled or CI.SV.UltimateLabelEnabled or CI.SV.UltimatePctEnabled then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE, CI.OnSlotsFullUpdate)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED, CI.OnSlotUpdated)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_ABILITY_USED, CI.OnSlotAbilityUsed)
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE, CI.OnSlotsFullUpdate)
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED, CI.OnSlotUpdated)
+        eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_ABILITY_USED, CI.OnSlotAbilityUsed)
     end
     if CI.SV.ShowTriggered or CI.SV.ShowToggled then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED, CI.OnDeath)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, CI.OnEffectChanged)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED, CI.InventoryItemUsed)
+        eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED, CI.OnDeath)
+        eventManager:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, CI.OnEffectChanged)
+        eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_USED, CI.InventoryItemUsed)
 
         -- Grab any aura's from the list that have on EVENT_COMBAT_EVENT AURA support
         for abilityId, value in pairs (E.BarHighlightOverride) do
@@ -353,9 +354,9 @@ function CI.RegisterCombatInfo()
         for abilityId, _ in pairs (g_barOverrideCI) do
             counter = counter + 1
             local eventName = (moduleName .. "LUIE_CI_CombatEventBar" .. counter)
-            EVENT_MANAGER:RegisterForEvent(eventName, EVENT_COMBAT_EVENT, CI.OnCombatEventBar)
+            eventManager:RegisterForEvent(eventName, EVENT_COMBAT_EVENT, CI.OnCombatEventBar)
             -- Register filter for specific abilityId's in table only, and filter for source = player, no errors
-            EVENT_MANAGER:AddFilterForEvent(eventName, EVENT_COMBAT_EVENT, REGISTER_FILTER_ABILITY_ID, abilityId, REGISTER_FILTER_IS_ERROR, false )
+            eventManager:AddFilterForEvent(eventName, EVENT_COMBAT_EVENT, REGISTER_FILTER_ABILITY_ID, abilityId, REGISTER_FILTER_IS_ERROR, false )
         end
     end
 end
@@ -363,7 +364,7 @@ end
 -- Used to populate abilities icons after the user has logged on
 function CI.OnPlayerActivated( eventCode )
     -- do not call this function for the second time
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED )
+    eventManager:UnregisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED )
 
     -- Manually trigger event to update stats
     CI.OnSlotsFullUpdate(nil)

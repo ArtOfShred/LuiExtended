@@ -19,6 +19,7 @@ local unpack        = unpack
 local pairs         = pairs
 local ipairs        = ipairs
 
+local eventManager  = EVENT_MANAGER
 local callLater     = zo_callLater
 
 local moduleName    = LUIE.name .. "_UnitFrames"
@@ -396,7 +397,7 @@ local function CreateDefaultFrames()
             frame:UnregisterForEvent(EVENT_POWER_UPDATE)
             frame:UnregisterForEvent(EVENT_INTERFACE_SETTING_CHANGED)
             frame:UnregisterForEvent(EVENT_PLAYER_ACTIVATED)
-            EVENT_MANAGER:UnregisterForUpdate("ZO_PlayerAttribute"..frames[i].."FadeUpdate")
+            eventManager:UnregisterForUpdate("ZO_PlayerAttribute"..frames[i].."FadeUpdate")
             frame:SetHidden(true)
         end
     end
@@ -745,13 +746,13 @@ local function CreateCustomFrames()
 
     -- Callback used to hide anchor coords preview label on movement start
     local tlwOnMoveStart = function(self)
-        EVENT_MANAGER:RegisterForUpdate( moduleName .. "previewMove", 200, function()
+        eventManager:RegisterForUpdate( moduleName .. "previewMove", 200, function()
             self.preview.anchorLabel:SetText(strfmt("%d, %d", self:GetLeft(), self:GetTop()))
         end)
     end
     -- Callback used to save new position of frames
     local tlwOnMoveStop = function(self)
-        EVENT_MANAGER:UnregisterForUpdate( moduleName .. "previewMove" )
+        eventManager:UnregisterForUpdate( moduleName .. "previewMove" )
         UF.SV[self.customPositionAttr] = { self:GetLeft(), self:GetTop() }
     end
 
@@ -1174,58 +1175,58 @@ function UF.Initialize( enabled )
     UF.SetDefaultFramesTransparency()
 
     -- Set event handlers
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, UF.OnPlayerActivated )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_POWER_UPDATE,     UF.OnPowerUpdate )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_ATTRIBUTE_VISUAL_ADDED,   UF.OnVisualizationAdded )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_ATTRIBUTE_VISUAL_REMOVED, UF.OnVisualizationRemoved )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_ATTRIBUTE_VISUAL_UPDATED, UF.OnVisualizationUpdated )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TARGET_CHANGE, UF.OnTargetChange )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED, UF.OnReticleTargetChanged )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DISPOSITION_UPDATE, UF.OnDispositionUpdate )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_CREATED, UF.OnUnitCreated )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEVEL_UPDATE,        UF.OnLevelUpdate )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_UPDATE, UF.OnLevelUpdate )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TITLE_UPDATE,  UF.TitleUpdate )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RANK_POINT_UPDATE,  UF.TitleUpdate )
+    eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, UF.OnPlayerActivated )
+    eventManager:RegisterForEvent(moduleName, EVENT_POWER_UPDATE,     UF.OnPowerUpdate )
+    eventManager:RegisterForEvent(moduleName, EVENT_UNIT_ATTRIBUTE_VISUAL_ADDED,   UF.OnVisualizationAdded )
+    eventManager:RegisterForEvent(moduleName, EVENT_UNIT_ATTRIBUTE_VISUAL_REMOVED, UF.OnVisualizationRemoved )
+    eventManager:RegisterForEvent(moduleName, EVENT_UNIT_ATTRIBUTE_VISUAL_UPDATED, UF.OnVisualizationUpdated )
+    eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGE, UF.OnTargetChange )
+    eventManager:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED, UF.OnReticleTargetChanged )
+    eventManager:RegisterForEvent(moduleName, EVENT_DISPOSITION_UPDATE, UF.OnDispositionUpdate )
+    eventManager:RegisterForEvent(moduleName, EVENT_UNIT_CREATED, UF.OnUnitCreated )
+    eventManager:RegisterForEvent(moduleName, EVENT_LEVEL_UPDATE,        UF.OnLevelUpdate )
+    eventManager:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_UPDATE, UF.OnLevelUpdate )
+    eventManager:RegisterForEvent(moduleName, EVENT_TITLE_UPDATE,  UF.TitleUpdate )
+    eventManager:RegisterForEvent(moduleName, EVENT_RANK_POINT_UPDATE,  UF.TitleUpdate )
 
     -- Next events make sense only for CustomFrames
     if UF.CustomFrames.player or UF.CustomFrames.reticleover or UF.CustomFrames.SmallGroup1 or UF.CustomFrames.RaidGroup1 or UF.CustomFrames.boss1 then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_COMBAT_EVENT,          UF.OnCombatEvent )
-        EVENT_MANAGER:AddFilterForEvent(moduleName, EVENT_COMBAT_EVENT, REGISTER_FILTER_IS_ERROR, true )
+        eventManager:RegisterForEvent(moduleName, EVENT_COMBAT_EVENT,          UF.OnCombatEvent )
+        eventManager:AddFilterForEvent(moduleName, EVENT_COMBAT_EVENT, REGISTER_FILTER_IS_ERROR, true )
 
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_DESTROYED,        UF.OnUnitDestroyed )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_ADDED,          UF.SocialUpdateFrames)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_REMOVED,        UF.SocialUpdateFrames)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_IGNORE_ADDED,          UF.SocialUpdateFrames)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_IGNORE_REMOVED,        UF.SocialUpdateFrames)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_COMBAT_STATE,	UF.OnPlayerCombatState )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED,	UF.OnWerewolf )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BEGIN_SIEGE_CONTROL,       UF.OnSiege )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_END_SIEGE_CONTROL,         UF.OnSiege )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEAVE_RAM_ESCORT,          UF.OnSiege )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MOUNTED_STATE_CHANGED,     UF.OnMount )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EXPERIENCE_UPDATE,         UF.OnXPUpdate )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_GAINED,     UF.OnChampionPointGained )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_SUPPORT_RANGE_UPDATE,    UF.OnGroupSupportRangeUpdate )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_CONNECTED_STATUS, UF.OnGroupMemberConnectedStatus )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_ROLES_CHANGED, UF.OnGroupMemberRoleChange )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_UPDATE, UF.OnGroupMemberChange )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED, UF.OnGroupMemberChange )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT, UF.OnGroupMemberChange )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED,  UF.OnDeath )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEADER_UPDATE,         UF.OnLeaderUpdate )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BOSSES_CHANGED,    UF.OnBossesChanged )
+        eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DESTROYED,        UF.OnUnitDestroyed )
+        eventManager:RegisterForEvent(moduleName, EVENT_FRIEND_ADDED,          UF.SocialUpdateFrames)
+        eventManager:RegisterForEvent(moduleName, EVENT_FRIEND_REMOVED,        UF.SocialUpdateFrames)
+        eventManager:RegisterForEvent(moduleName, EVENT_IGNORE_ADDED,          UF.SocialUpdateFrames)
+        eventManager:RegisterForEvent(moduleName, EVENT_IGNORE_REMOVED,        UF.SocialUpdateFrames)
+        eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_COMBAT_STATE,	UF.OnPlayerCombatState )
+        eventManager:RegisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED,	UF.OnWerewolf )
+        eventManager:RegisterForEvent(moduleName, EVENT_BEGIN_SIEGE_CONTROL,       UF.OnSiege )
+        eventManager:RegisterForEvent(moduleName, EVENT_END_SIEGE_CONTROL,         UF.OnSiege )
+        eventManager:RegisterForEvent(moduleName, EVENT_LEAVE_RAM_ESCORT,          UF.OnSiege )
+        eventManager:RegisterForEvent(moduleName, EVENT_MOUNTED_STATE_CHANGED,     UF.OnMount )
+        eventManager:RegisterForEvent(moduleName, EVENT_EXPERIENCE_UPDATE,         UF.OnXPUpdate )
+        eventManager:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_GAINED,     UF.OnChampionPointGained )
+        eventManager:RegisterForEvent(moduleName, EVENT_GROUP_SUPPORT_RANGE_UPDATE,    UF.OnGroupSupportRangeUpdate )
+        eventManager:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_CONNECTED_STATUS, UF.OnGroupMemberConnectedStatus )
+        eventManager:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_ROLES_CHANGED, UF.OnGroupMemberRoleChange )
+        eventManager:RegisterForEvent(moduleName, EVENT_GROUP_UPDATE, UF.OnGroupMemberChange )
+        eventManager:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED, UF.OnGroupMemberChange )
+        eventManager:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT, UF.OnGroupMemberChange )
+        eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED,  UF.OnDeath )
+        eventManager:RegisterForEvent(moduleName, EVENT_LEADER_UPDATE,         UF.OnLeaderUpdate )
+        eventManager:RegisterForEvent(moduleName, EVENT_BOSSES_CHANGED,    UF.OnBossesChanged )
 
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD,     UF.SocialUpdateFrames)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD,   UF.SocialUpdateFrames)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_ADDED,        UF.SocialUpdateFrames)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_REMOVED,      UF.SocialUpdateFrames)
+        eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD,     UF.SocialUpdateFrames)
+        eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD,   UF.SocialUpdateFrames)
+        eventManager:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_ADDED,        UF.SocialUpdateFrames)
+        eventManager:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_REMOVED,      UF.SocialUpdateFrames)
     end
 
     -- New AvA frames
     if false then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CURRENT_CAMPAIGN_CHANGED, UF.OnCurrentCampaignChanged) -- (integer eventCode, integer newCurrentCampaignId)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CAMPAIGN_EMPEROR_CHANGED, UF.OnCampaignEmperorChanged) -- (integer eventCode, integer campaignId)
+        eventManager:RegisterForEvent(moduleName, EVENT_CURRENT_CAMPAIGN_CHANGED, UF.OnCurrentCampaignChanged) -- (integer eventCode, integer newCurrentCampaignId)
+        eventManager:RegisterForEvent(moduleName, EVENT_CAMPAIGN_EMPEROR_CHANGED, UF.OnCampaignEmperorChanged) -- (integer eventCode, integer campaignId)
     end
 
     g_defaultTargetNameLabel = ZO_TargetUnitFramereticleoverName
@@ -1488,7 +1489,7 @@ function UF.OnUnitCreated(eventCode, unitTag)
         -- We should avoid calling full update on CustomFrames too often
         if not g_PendingUpdate.Group.flag then
             g_PendingUpdate.Group.flag = true
-            EVENT_MANAGER:RegisterForUpdate(g_PendingUpdate.Group.name, g_PendingUpdate.Group.delay, UF.CustomFramesGroupUpdate )
+            eventManager:RegisterForUpdate(g_PendingUpdate.Group.name, g_PendingUpdate.Group.delay, UF.CustomFramesGroupUpdate )
         end
     -- Else we need to manually update this unitTag in g_DefaultFrames
     elseif g_DefaultFrames.SmallGroup then
@@ -1509,7 +1510,7 @@ function UF.OnUnitDestroyed(eventCode, unitTag)
     -- We should avoid calling full update on CustomFrames too often
     if not g_PendingUpdate.Group.flag then
         g_PendingUpdate.Group.flag = true
-        EVENT_MANAGER:RegisterForUpdate(g_PendingUpdate.Group.name, g_PendingUpdate.Group.delay, UF.CustomFramesGroupUpdate )
+        eventManager:RegisterForUpdate(g_PendingUpdate.Group.name, g_PendingUpdate.Group.delay, UF.CustomFramesGroupUpdate )
     end
 end
 
@@ -2345,7 +2346,7 @@ function UF.OnXPUpdate( eventCode, unitTag, currentExp, maxExp, reason )
         -- Query for Veteran and Champion XP not more then once every 5 seconds
         if not g_PendingUpdate.VeteranXP.flag then
             g_PendingUpdate.VeteranXP.flag = true
-            EVENT_MANAGER:RegisterForUpdate( g_PendingUpdate.VeteranXP.name, g_PendingUpdate.VeteranXP.delay, UF.UpdateVeteranXP )
+            eventManager:RegisterForUpdate( g_PendingUpdate.VeteranXP.name, g_PendingUpdate.VeteranXP.delay, UF.UpdateVeteranXP )
         end
     elseif UF.CustomFrames.player.Experience then
         UF.CustomFrames.player.Experience.bar:SetValue( currentExp )
@@ -2355,7 +2356,7 @@ end
 -- Helper function that updates Champion XP bar. Called from event listener with 5 sec delay
 function UF.UpdateVeteranXP()
     -- Unregister update function
-    EVENT_MANAGER:UnregisterForUpdate( g_PendingUpdate.VeteranXP.name )
+    eventManager:UnregisterForUpdate( g_PendingUpdate.VeteranXP.name )
 
     if UF.CustomFrames.player then
         if UF.CustomFrames.player.Experience then
@@ -2686,12 +2687,12 @@ function UF.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         local uniqueId = moduleName .. "_powerError_" .. powerType
         local firstRun = true
 
-        EVENT_MANAGER:RegisterForUpdate(uniqueId, 300, function()
+        eventManager:RegisterForUpdate(uniqueId, 300, function()
             if firstRun then
                 backdrop:SetCenterColor( r, g, b, 0.9 )
                 firstRun = false
             else
-                EVENT_MANAGER:UnregisterForUpdate(uniqueId)
+                eventManager:UnregisterForUpdate(uniqueId)
                 g_powerError[powerType] = false
             end
         end)
@@ -2744,7 +2745,7 @@ function UF.CustomFramesGroupUpdate()
     --d( strfmt("[%s] GroupUpdate", GetTimeString()) )
 
     -- Unregister update function and clear local flag
-    EVENT_MANAGER:UnregisterForUpdate( g_PendingUpdate.Group.name )
+    eventManager:UnregisterForUpdate( g_PendingUpdate.Group.name )
     g_PendingUpdate.Group.flag = false
 
     if ( UF.CustomFrames.SmallGroup1 == nil and UF.CustomFrames.RaidGroup1 == nil ) then

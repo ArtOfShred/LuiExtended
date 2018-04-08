@@ -8,7 +8,6 @@ local LMP    = LibStub("LibMediaProvider-1.0")
 local unpack = unpack
 local pairs  = pairs
 
-
 local moduleName    = LUIE.name .. "_CombatText"
 
 CT.Enabled  = false

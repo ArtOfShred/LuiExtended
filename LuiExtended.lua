@@ -24,6 +24,8 @@ local tostring      = tostring
 local pairs         = pairs
 local ipairs        = ipairs
 
+local eventManager  = EVENT_MANAGER
+
 -- Default Settings
 LUIE.D = {
     UnitFrames_Enabled          = true,
@@ -125,7 +127,7 @@ end
 
 -- Startup Info string
 local function LUIE_LoadScreen()
-    EVENT_MANAGER:UnregisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED)
+    eventManager:UnregisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED)
 
     if not LUIE.SV.StartupInfo then
         LUIE.PrintToChat(strfmt("|cFEFEFE%s by|r |c00C000%s|r |cFEFEFEv%s|r", LUIE.name, LUIE.author, LUIE.version))
@@ -142,12 +144,12 @@ local function LUIE_ToggleVisibility(eventCode, layerIndex, activeLayerIndex)
 end
 
 local function LUIE_RegisterEvents()
-    EVENT_MANAGER:RegisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED, LUIE_LoadScreen)
-    EVENT_MANAGER:RegisterForEvent(LUIE.name, EVENT_ACTION_LAYER_POPPED, LUIE_ToggleVisibility)
-    EVENT_MANAGER:RegisterForEvent(LUIE.name, EVENT_ACTION_LAYER_PUSHED, LUIE_ToggleVisibility)
+    eventManager:RegisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED, LUIE_LoadScreen)
+    eventManager:RegisterForEvent(LUIE.name, EVENT_ACTION_LAYER_POPPED, LUIE_ToggleVisibility)
+    eventManager:RegisterForEvent(LUIE.name, EVENT_ACTION_LAYER_PUSHED, LUIE_ToggleVisibility)
     -- Events registed for Slash Commands
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, LUIE.GuildAddedSelf)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD, LUIE.GuildRemovedSelf)
+    eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, LUIE.GuildAddedSelf)
+    eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD, LUIE.GuildRemovedSelf)
 end
 
 -- LuiExtended Initialization
@@ -157,7 +159,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         return
     end
     -- Once we know it's ours, lets unregister the event listener
-    EVENT_MANAGER:UnregisterForEvent(addonName, eventCode)
+    eventManager:UnregisterForEvent(addonName, eventCode)
 
     -- Load additional media from LMP and other addons
     LUIE_LoadMedia()
@@ -726,4 +728,4 @@ function LUIE.GuildRemovedSelf(eventCode, guildId, guildName)
 end
 
 -- Hook initialization
-EVENT_MANAGER:RegisterForEvent(LUIE.name, EVENT_ADD_ON_LOADED, LUIE_OnAddOnLoaded)
+eventManager:RegisterForEvent(LUIE.name, EVENT_ADD_ON_LOADED, LUIE_OnAddOnLoaded)

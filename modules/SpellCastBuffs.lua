@@ -20,6 +20,7 @@ local tonumber      = tonumber
 local pairs         = pairs
 local ipairs        = ipairs
 
+local eventManager  = EVENT_MANAGER
 local callLater     = zo_callLater
 
 local moduleName    = LUIE.name .. "_SpellCastBuffs"
@@ -529,62 +530,62 @@ function SCB.Initialize( enabled )
     SCB.UpdateContextHideList()
 
     -- Register events
-    EVENT_MANAGER:RegisterForUpdate(moduleName, 100, SCB.OnUpdate )
+    eventManager:RegisterForUpdate(moduleName, 100, SCB.OnUpdate )
 
     -- Target Events
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TARGET_CHANGE,             SCB.OnTargetChange )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED,    SCB.OnReticleTargetChanged )
+    eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGE,             SCB.OnTargetChange )
+    eventManager:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED,    SCB.OnReticleTargetChanged )
 
     -- Buff Events
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE,  SCB.OnSlotsFullUpdate )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED,       SCB.OnSlotUpdated )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_ABILITY_USED,  SCB.OnSlotAbilityUsed )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, SCB.OnEffectChanged )
+    eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOTS_FULL_UPDATE,  SCB.OnSlotsFullUpdate )
+    eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_UPDATED,       SCB.OnSlotUpdated )
+    eventManager:RegisterForEvent(moduleName, EVENT_ACTION_SLOT_ABILITY_USED,  SCB.OnSlotAbilityUsed )
+    eventManager:RegisterForEvent(moduleName, EVENT_EFFECT_CHANGED, SCB.OnEffectChanged )
 
-    EVENT_MANAGER:RegisterForEvent("LUIE_Event1", EVENT_COMBAT_EVENT, SCB.OnCombatEventIn )
-    EVENT_MANAGER:RegisterForEvent("LUIE_Event2", EVENT_COMBAT_EVENT, SCB.OnCombatEventOut )
-    EVENT_MANAGER:RegisterForEvent("LUIE_Event3", EVENT_COMBAT_EVENT, SCB.OnCombatEventOut )
-    EVENT_MANAGER:AddFilterForEvent("LUIE_Event1", EVENT_COMBAT_EVENT, REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false) -- Target -> Player
-    EVENT_MANAGER:AddFilterForEvent("LUIE_Event2", EVENT_COMBAT_EVENT, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false) -- Player -> Target
-    EVENT_MANAGER:AddFilterForEvent("LUIE_Event3", EVENT_COMBAT_EVENT, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER_PET, REGISTER_FILTER_IS_ERROR, false) -- Player Pet -> Target
-    --EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_COMBAT_EVENT, SCB.OnCombatEvent )
-    --EVENT_MANAGER:AddFilterForEvent(moduleName, EVENT_COMBAT_EVENT, REGISTER_FILTER_IS_ERROR, false )
+    eventManager:RegisterForEvent("LUIE_Event1", EVENT_COMBAT_EVENT, SCB.OnCombatEventIn )
+    eventManager:RegisterForEvent("LUIE_Event2", EVENT_COMBAT_EVENT, SCB.OnCombatEventOut )
+    eventManager:RegisterForEvent("LUIE_Event3", EVENT_COMBAT_EVENT, SCB.OnCombatEventOut )
+    eventManager:AddFilterForEvent("LUIE_Event1", EVENT_COMBAT_EVENT, REGISTER_FILTER_TARGET_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false) -- Target -> Player
+    eventManager:AddFilterForEvent("LUIE_Event2", EVENT_COMBAT_EVENT, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER, REGISTER_FILTER_IS_ERROR, false) -- Player -> Target
+    eventManager:AddFilterForEvent("LUIE_Event3", EVENT_COMBAT_EVENT, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER_PET, REGISTER_FILTER_IS_ERROR, false) -- Player Pet -> Target
+    --eventManager:RegisterForEvent(moduleName, EVENT_COMBAT_EVENT, SCB.OnCombatEvent )
+    --eventManager:AddFilterForEvent(moduleName, EVENT_COMBAT_EVENT, REGISTER_FILTER_IS_ERROR, false )
 
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED,  SCB.OnDeath )
+    eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED,  SCB.OnDeath )
 
-    EVENT_MANAGER:RegisterForEvent(moduleName .. "player",          EVENT_STEALTH_STATE_CHANGED, SCB.StealthStateChanged )
-    EVENT_MANAGER:RegisterForEvent(moduleName .. "reticleover",     EVENT_STEALTH_STATE_CHANGED, SCB.StealthStateChanged )
-    EVENT_MANAGER:AddFilterForEvent(moduleName .. "player",         EVENT_STEALTH_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
-    EVENT_MANAGER:AddFilterForEvent(moduleName .. "reticleover",    EVENT_STEALTH_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "reticleover" )
+    eventManager:RegisterForEvent(moduleName .. "player",          EVENT_STEALTH_STATE_CHANGED, SCB.StealthStateChanged )
+    eventManager:RegisterForEvent(moduleName .. "reticleover",     EVENT_STEALTH_STATE_CHANGED, SCB.StealthStateChanged )
+    eventManager:AddFilterForEvent(moduleName .. "player",         EVENT_STEALTH_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
+    eventManager:AddFilterForEvent(moduleName .. "reticleover",    EVENT_STEALTH_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "reticleover" )
 
-    EVENT_MANAGER:RegisterForEvent(moduleName .. "player",          EVENT_DISGUISE_STATE_CHANGED, SCB.DisguiseStateChanged )
-    EVENT_MANAGER:RegisterForEvent(moduleName .. "reticleover",     EVENT_DISGUISE_STATE_CHANGED, SCB.DisguiseStateChanged )
-    EVENT_MANAGER:AddFilterForEvent(moduleName .. "player",         EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
-    EVENT_MANAGER:AddFilterForEvent(moduleName .. "reticleover",    EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "reticleover" )
+    eventManager:RegisterForEvent(moduleName .. "player",          EVENT_DISGUISE_STATE_CHANGED, SCB.DisguiseStateChanged )
+    eventManager:RegisterForEvent(moduleName .. "reticleover",     EVENT_DISGUISE_STATE_CHANGED, SCB.DisguiseStateChanged )
+    eventManager:AddFilterForEvent(moduleName .. "player",         EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
+    eventManager:AddFilterForEvent(moduleName .. "reticleover",    EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "reticleover" )
 
     -- Artificial Effects Handling
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ARTIFICIAL_EFFECT_ADDED, SCB.ArtificialEffectUpdate)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ARTIFICIAL_EFFECT_REMOVED, SCB.ArtificialEffectUpdate)
+    eventManager:RegisterForEvent(moduleName, EVENT_ARTIFICIAL_EFFECT_ADDED, SCB.ArtificialEffectUpdate)
+    eventManager:RegisterForEvent(moduleName, EVENT_ARTIFICIAL_EFFECT_REMOVED, SCB.ArtificialEffectUpdate)
 
     -- Activate, Deactivate player, death, alive.
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED,   SCB.OnPlayerActivated )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_DEACTIVATED, SCB.OnPlayerDeactivated )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_ALIVE, SCB.OnPlayerAlive )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_DEAD,  SCB.OnPlayerDead )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_VIBRATION,    SCB.OnVibration )
+    eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED,   SCB.OnPlayerActivated )
+    eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_DEACTIVATED, SCB.OnPlayerDeactivated )
+    eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ALIVE, SCB.OnPlayerAlive )
+    eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_DEAD,  SCB.OnPlayerDead )
+    eventManager:RegisterForEvent(moduleName, EVENT_VIBRATION,    SCB.OnVibration )
 
     -- Mount
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MOUNTED_STATE_CHANGED, SCB.MountStatus)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_COLLECTIBLE_USE_RESULT, SCB.CollectibleUsed)
+    eventManager:RegisterForEvent(moduleName, EVENT_MOUNTED_STATE_CHANGED, SCB.MountStatus)
+    eventManager:RegisterForEvent(moduleName, EVENT_COLLECTIBLE_USE_RESULT, SCB.CollectibleUsed)
 
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, SCB.DisguiseItem)
-    EVENT_MANAGER:AddFilterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, REGISTER_FILTER_BAG_ID, BAG_WORN )
+    eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, SCB.DisguiseItem)
+    eventManager:AddFilterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, REGISTER_FILTER_BAG_ID, BAG_WORN )
 
     -- Duel (For resolving Target battle spirit status)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, SCB.DuelStart)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_FINISHED, SCB.DuelEnd)
+    eventManager:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, SCB.DuelStart)
+    eventManager:RegisterForEvent(moduleName, EVENT_DUEL_FINISHED, SCB.DuelEnd)
 
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_COMBAT_STATE, SCB.PlayerCombatState)
+    eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_COMBAT_STATE, SCB.PlayerCombatState)
 
     -- Always show debug effects on development account
     if GetDisplayName() == "@ArtOfShredLegacy" then
@@ -595,13 +596,13 @@ function SCB.Initialize( enabled )
 end
 
 function SCB.RegisterDebugEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName .. "LUIE_DEBUG_COMBAT", EVENT_COMBAT_EVENT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName .. "LUIE_DEBUG_EFFECT", EVENT_EFFECT_CHANGED)
+    eventManager:UnregisterForEvent(moduleName .. "LUIE_DEBUG_COMBAT", EVENT_COMBAT_EVENT)
+    eventManager:UnregisterForEvent(moduleName .. "LUIE_DEBUG_EFFECT", EVENT_EFFECT_CHANGED)
     if SCB.SV.ShowDebugCombat then
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "LUIE_DEBUG_COMBAT", EVENT_COMBAT_EVENT, SCB.EventCombatDebug)
+        eventManager:RegisterForEvent(moduleName .. "LUIE_DEBUG_COMBAT", EVENT_COMBAT_EVENT, SCB.EventCombatDebug)
     end
     if SCB.SV.ShowDebugEffect then
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "LUIE_DEBUG_EFFECT", EVENT_EFFECT_CHANGED, SCB.EventEffectDebug)
+        eventManager:RegisterForEvent(moduleName .. "LUIE_DEBUG_EFFECT", EVENT_EFFECT_CHANGED, SCB.EventEffectDebug)
     end
 end
 

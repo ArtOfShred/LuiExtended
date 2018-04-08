@@ -16,7 +16,10 @@ local gsub           = gsub
 local unpack         = unpack
 local pairs          = pairs
 
+local eventManager   = EVENT_MANAGER
 local callLater      = zo_callLater
+
+local localizeDecimalNum = ZO_LocalizeDecimalNumber
 
 local moduleName     = LUIE.name .. "_ChatAnnouncements"
 CA.Enabled = false
@@ -796,16 +799,16 @@ function CA.Initialize(enabled)
     CA.RegisterXPEvents()
     CA.RegisterAchievementsEvent()
     -- TODO: Possibly don't register these unless enabled, I'm not sure -- at least move to better sorted order
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, CA.StorageBag)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, CA.StorageBank)
+    eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_BAG_CAPACITY_CHANGED, CA.StorageBag)
+    eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_BANK_CAPACITY_CHANGED, CA.StorageBank)
     -- TODO: Move these too:
     LINK_HANDLER:RegisterCallback(LINK_HANDLER.LINK_MOUSE_UP_EVENT, LUIE.HandleClickEvent)
     LINK_HANDLER:RegisterCallback(LINK_HANDLER.LINK_CLICKED_EVENT, LUIE.HandleClickEvent)
 
     -- TODO: also move this
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_SKILL_XP_UPDATE, CA.SkillXPUpdate)
+    eventManager:RegisterForEvent(moduleName, EVENT_SKILL_XP_UPDATE, CA.SkillXPUpdate)
 
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, CA.OnPlayerActivated)
+    eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, CA.OnPlayerActivated)
 
     CA.RegisterGuildEvents()
     CA.RegisterSocialEvents()
@@ -869,16 +872,16 @@ function CA.RegisterColorEvents()
 end
 
 function CA.RegisterSocialEvents()
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_ADDED, CA.FriendAdded)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_REMOVED, CA.FriendRemoved)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_ADDED, CA.FriendInviteAdded)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_IGNORE_ADDED, CA.IgnoreAdded)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_IGNORE_REMOVED, CA.IgnoreRemoved)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_PLAYER_STATUS_CHANGED, CA.FriendPlayerStatus)
+    eventManager:RegisterForEvent(moduleName, EVENT_FRIEND_ADDED, CA.FriendAdded)
+    eventManager:RegisterForEvent(moduleName, EVENT_FRIEND_REMOVED, CA.FriendRemoved)
+    eventManager:RegisterForEvent(moduleName, EVENT_INCOMING_FRIEND_INVITE_ADDED, CA.FriendInviteAdded)
+    eventManager:RegisterForEvent(moduleName, EVENT_IGNORE_ADDED, CA.IgnoreAdded)
+    eventManager:RegisterForEvent(moduleName, EVENT_IGNORE_REMOVED, CA.IgnoreRemoved)
+    eventManager:RegisterForEvent(moduleName, EVENT_FRIEND_PLAYER_STATUS_CHANGED, CA.FriendPlayerStatus)
 end
 
 function CA.RegisterQuestEvents()
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_SHARED, CA.QuestShared)
+    eventManager:RegisterForEvent(moduleName, EVENT_QUEST_SHARED, CA.QuestShared)
 
     -- Create a table for quests
     for i = 1, 25 do
@@ -901,14 +904,14 @@ end
 
 function CA.RegisterGuildEvents()
 -- Possibly implement conditionals here again in the future
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, CA.GuildAddedSelf)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_INVITE_ADDED, CA.GuildInviteAdded)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_RANK_CHANGED, CA.GuildRank)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_HERALDRY_SAVED, CA.GuildHeraldrySaved)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_RANKS_CHANGED, CA.GuildRanksSaved)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_RANK_CHANGED, CA.GuildRankSaved)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_DESCRIPTION_CHANGED, CA.GuildTextChanged)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MOTD_CHANGED, CA.GuildTextChanged)
+    eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, CA.GuildAddedSelf)
+    eventManager:RegisterForEvent(moduleName, EVENT_GUILD_INVITE_ADDED, CA.GuildInviteAdded)
+    eventManager:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_RANK_CHANGED, CA.GuildRank)
+    eventManager:RegisterForEvent(moduleName, EVENT_HERALDRY_SAVED, CA.GuildHeraldrySaved)
+    eventManager:RegisterForEvent(moduleName, EVENT_GUILD_RANKS_CHANGED, CA.GuildRanksSaved)
+    eventManager:RegisterForEvent(moduleName, EVENT_GUILD_RANK_CHANGED, CA.GuildRankSaved)
+    eventManager:RegisterForEvent(moduleName, EVENT_GUILD_DESCRIPTION_CHANGED, CA.GuildTextChanged)
+    eventManager:RegisterForEvent(moduleName, EVENT_GUILD_MOTD_CHANGED, CA.GuildTextChanged)
     -- Index Guild Ranks
     g_guildRankData = {}
     for i = 1,5 do
@@ -920,65 +923,65 @@ function CA.RegisterGuildEvents()
 end
 
 function CA.RegisterAchievementsEvent()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ACHIEVEMENT_UPDATED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_ACHIEVEMENT_UPDATED)
     if CA.SV.Achievement.AchievementUpdateCA or CA.SV.Achievement.AchievementUpdateAlert then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACHIEVEMENT_UPDATED, CA.OnAchievementUpdated)
+        eventManager:RegisterForEvent(moduleName, EVENT_ACHIEVEMENT_UPDATED, CA.OnAchievementUpdated)
     end
 end
 
 function CA.RegisterXPEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN)
+    eventManager:UnregisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN)
     if CA.SV.XP.Experience or CA.SV.XP.ExperienceLevelUp then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN, CA.OnExperienceGain)
+        eventManager:RegisterForEvent(moduleName, EVENT_EXPERIENCE_GAIN, CA.OnExperienceGain)
     end
 end
 
 function CA.RegisterGoldEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CURRENCY_UPDATE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_REMOVED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_CURRENCY_UPDATE)
+    eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX)
+    eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS)
+    eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_REMOVED)
 
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CURRENCY_UPDATE, CA.OnCurrencyUpdate)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, CA.OnMailAttach)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, CA.OnMailAttachRemove)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, CA.OnMailCloseBox)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS, CA.OnMailSuccess)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED, CA.MailMoneyChanged)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED, CA.MailCODChanged)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_REMOVED, CA.MailRemoved)
+    eventManager:RegisterForEvent(moduleName, EVENT_CURRENCY_UPDATE, CA.OnCurrencyUpdate)
+    eventManager:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, CA.OnMailAttach)
+    eventManager:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, CA.OnMailAttachRemove)
+    eventManager:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, CA.OnMailCloseBox)
+    eventManager:RegisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS, CA.OnMailSuccess)
+    eventManager:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED, CA.MailMoneyChanged)
+    eventManager:RegisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED, CA.MailCODChanged)
+    eventManager:RegisterForEvent(moduleName, EVENT_MAIL_REMOVED, CA.MailRemoved)
 end
 
 function CA.RegisterMailEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_READABLE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_TAKE_ATTACHED_ITEM_SUCCESS)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_OPEN_MAILBOX)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_MAIL_REMOVED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_READABLE)
+    eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_TAKE_ATTACHED_ITEM_SUCCESS)
+    eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_OPEN_MAILBOX)
+    eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX)
+    eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS)
+    eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_MAIL_REMOVED)
     if CA.SV.MiscMail or CA.SV.Inventory.LootMail then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_READABLE, CA.OnMailReadable)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_TAKE_ATTACHED_ITEM_SUCCESS, CA.OnMailTakeAttachedItem)
+        eventManager:RegisterForEvent(moduleName, EVENT_MAIL_READABLE, CA.OnMailReadable)
+        eventManager:RegisterForEvent(moduleName, EVENT_MAIL_TAKE_ATTACHED_ITEM_SUCCESS, CA.OnMailTakeAttachedItem)
     end
     if CA.SV.MiscMail or CA.SV.Inventory.LootMail or CA.SV.Currency.CurrencyGoldChange then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, CA.OnMailAttach)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, CA.OnMailAttachRemove)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS, CA.OnMailSuccess)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED, CA.MailMoneyChanged)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED, CA.MailCODChanged)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_REMOVED, CA.MailRemoved)
+        eventManager:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_ADDED, CA.OnMailAttach)
+        eventManager:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHMENT_REMOVED, CA.OnMailAttachRemove)
+        eventManager:RegisterForEvent(moduleName, EVENT_MAIL_SEND_SUCCESS, CA.OnMailSuccess)
+        eventManager:RegisterForEvent(moduleName, EVENT_MAIL_ATTACHED_MONEY_CHANGED, CA.MailMoneyChanged)
+        eventManager:RegisterForEvent(moduleName, EVENT_MAIL_COD_CHANGED, CA.MailCODChanged)
+        eventManager:RegisterForEvent(moduleName, EVENT_MAIL_REMOVED, CA.MailRemoved)
     end
     if CA.SV.Inventory.Loot or CA.SV.MiscMail or CA.SV.Inventory.LootMail or CA.SV.Currency.CurrencyGoldChange then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_OPEN_MAILBOX, CA.OnMailOpenBox)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, CA.OnMailCloseBox)
+        eventManager:RegisterForEvent(moduleName, EVENT_MAIL_OPEN_MAILBOX, CA.OnMailOpenBox)
+        eventManager:RegisterForEvent(moduleName, EVENT_MAIL_CLOSE_MAILBOX, CA.OnMailCloseBox)
     end
 end
 
@@ -986,45 +989,45 @@ function CA.RegisterLootEvents()
     -- NON CONDITIONAL EVENTS
 
     -- LOCKPICK
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_BROKE, CA.MiscAlertLockBroke)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS, CA.MiscAlertLockSuccess)
+    eventManager:RegisterForEvent(moduleName, EVENT_LOCKPICK_BROKE, CA.MiscAlertLockBroke)
+    eventManager:RegisterForEvent(moduleName, EVENT_LOCKPICK_SUCCESS, CA.MiscAlertLockSuccess)
     -- LOOT RECEIVED
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOOT_RECEIVED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_LOOT_RECEIVED)
     -- QUEST REWARD CONTEXT
     -- INDEX
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     -- VENDOR
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_BUYBACK_RECEIPT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_BUY_RECEIPT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_SELL_RECEIPT)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_FENCE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_STORE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_STORE)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT)
+    eventManager:UnregisterForEvent(moduleName, EVENT_BUYBACK_RECEIPT)
+    eventManager:UnregisterForEvent(moduleName, EVENT_BUY_RECEIPT)
+    eventManager:UnregisterForEvent(moduleName, EVENT_SELL_RECEIPT)
+    eventManager:UnregisterForEvent(moduleName, EVENT_OPEN_FENCE)
+    eventManager:UnregisterForEvent(moduleName, EVENT_CLOSE_STORE)
+    eventManager:UnregisterForEvent(moduleName, EVENT_OPEN_STORE)
+    eventManager:UnregisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT)
     -- BANK
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_BANK)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_BANK)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_OPEN_GUILD_BANK)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CLOSE_GUILD_BANK)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_REMOVED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_OPEN_BANK)
+    eventManager:UnregisterForEvent(moduleName, EVENT_CLOSE_BANK)
+    eventManager:UnregisterForEvent(moduleName, EVENT_OPEN_GUILD_BANK)
+    eventManager:UnregisterForEvent(moduleName, EVENT_CLOSE_GUILD_BANK)
+    eventManager:UnregisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_ADDED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_REMOVED)
     -- CRAFT
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CRAFTING_STATION_INTERACT, CA.CraftingOpen)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_END_CRAFTING_STATION_INTERACT, CA.CraftingClose)
+    eventManager:UnregisterForEvent(moduleName, EVENT_CRAFTING_STATION_INTERACT, CA.CraftingOpen)
+    eventManager:UnregisterForEvent(moduleName, EVENT_END_CRAFTING_STATION_INTERACT, CA.CraftingClose)
     -- TRADE
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED)
     -- JUSTICE/DESTROY
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED)
     -- LOOT FAILED
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_QUEST_COMPLETE_ATTEMPT_FAILED_INVENTORY_FULL)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_IS_FULL)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_QUEST_COMPLETE_ATTEMPT_FAILED_INVENTORY_FULL)
+    eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_IS_FULL)
+    eventManager:UnregisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED)
 
     -- LOOT RECEIVED
     if CA.SV.Inventory.Loot or CA.SV.Inventory.LootQuestAdd or CA.SV.Inventory.LootQuestRemove then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_RECEIVED, CA.OnLootReceived)
+        eventManager:RegisterForEvent(moduleName, EVENT_LOOT_RECEIVED, CA.OnLootReceived)
     end
     -- QUEST LOOT
     if CA.SV.Inventory.LootQuestAdd or CA.SV.Inventory.LootQuestRemove then
@@ -1032,7 +1035,7 @@ function CA.RegisterLootEvents()
     end
     -- INDEX
     if CA.SV.Inventory.Loot or CA.SV.Inventory.LootShowDisguise then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
+        eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
         g_equippedStacks = {}
         g_inventoryStacks = {}
         CA.IndexEquipped()
@@ -1040,58 +1043,58 @@ function CA.RegisterLootEvents()
     end
     -- VENDOR
     if CA.SV.Inventory.LootVendor then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BUYBACK_RECEIPT, CA.OnBuybackItem)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BUY_RECEIPT, CA.OnBuyItem)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_SELL_RECEIPT, CA.OnSellItem)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT, CA.FenceSuccess)
+        eventManager:RegisterForEvent(moduleName, EVENT_BUYBACK_RECEIPT, CA.OnBuybackItem)
+        eventManager:RegisterForEvent(moduleName, EVENT_BUY_RECEIPT, CA.OnBuyItem)
+        eventManager:RegisterForEvent(moduleName, EVENT_SELL_RECEIPT, CA.OnSellItem)
+        eventManager:RegisterForEvent(moduleName, EVENT_ITEM_LAUNDER_RESULT, CA.FenceSuccess)
     end
     if CA.SV.Inventory.Loot or CA.SV.Inventory.LootVendor then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_FENCE, CA.FenceOpen)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_STORE, CA.StoreOpen)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_STORE, CA.StoreClose)
+        eventManager:RegisterForEvent(moduleName, EVENT_OPEN_FENCE, CA.FenceOpen)
+        eventManager:RegisterForEvent(moduleName, EVENT_OPEN_STORE, CA.StoreOpen)
+        eventManager:RegisterForEvent(moduleName, EVENT_CLOSE_STORE, CA.StoreClose)
     end
     -- BANK
     if CA.SV.Inventory.LootBank then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_ADDED, CA.GuildBankItemAdded)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_REMOVED, CA.GuildBankItemRemoved)
+        eventManager:RegisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_ADDED, CA.GuildBankItemAdded)
+        eventManager:RegisterForEvent(moduleName, EVENT_GUILD_BANK_ITEM_REMOVED, CA.GuildBankItemRemoved)
     end
     if CA.SV.Inventory.Loot or CA.SV.Inventory.LootBank then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_BANK, CA.BankOpen)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_BANK, CA.BankClose)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_OPEN_GUILD_BANK, CA.GuildBankOpen)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CLOSE_GUILD_BANK, CA.GuildBankClose)
+        eventManager:RegisterForEvent(moduleName, EVENT_OPEN_BANK, CA.BankOpen)
+        eventManager:RegisterForEvent(moduleName, EVENT_CLOSE_BANK, CA.BankClose)
+        eventManager:RegisterForEvent(moduleName, EVENT_OPEN_GUILD_BANK, CA.GuildBankOpen)
+        eventManager:RegisterForEvent(moduleName, EVENT_CLOSE_GUILD_BANK, CA.GuildBankClose)
     end
     if CA.SV.Inventory.LootTrade then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED, CA.OnTradeAdded)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED, CA.OnTradeRemoved)
+        eventManager:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_ADDED, CA.OnTradeAdded)
+        eventManager:RegisterForEvent(moduleName, EVENT_TRADE_ITEM_REMOVED, CA.OnTradeRemoved)
     end
     -- TRADE
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED, CA.TradeInviteAccepted)
+    eventManager:RegisterForEvent(moduleName, EVENT_TRADE_INVITE_ACCEPTED, CA.TradeInviteAccepted)
     -- CRAFT
     if CA.SV.Inventory.Loot or CA.SV.Inventory.LootCraft then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CRAFTING_STATION_INTERACT, CA.CraftingOpen)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_END_CRAFTING_STATION_INTERACT, CA.CraftingClose)
+        eventManager:RegisterForEvent(moduleName, EVENT_CRAFTING_STATION_INTERACT, CA.CraftingOpen)
+        eventManager:RegisterForEvent(moduleName, EVENT_END_CRAFTING_STATION_INTERACT, CA.CraftingClose)
     end
     -- JUSTICE/DESTROY
     if CA.SV.Inventory.LootShowDestroy then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED, CA.DestroyItem)
+        eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_ITEM_DESTROYED, CA.DestroyItem)
     end
     if CA.SV.Inventory.Loot or CA.SV.Notify.NotificationConfiscateCA or CA.SV.Notify.NotificationConfiscateAlert or CA.SV.Inventory.LootShowDisguise then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED, CA.JusticeStealRemove)
+        eventManager:RegisterForEvent(moduleName, EVENT_JUSTICE_STOLEN_ITEMS_REMOVED, CA.JusticeStealRemove)
     end
 
     --[[if CA.SV.ShowLootFail then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_QUEST_COMPLETE_ATTEMPT_FAILED_INVENTORY_FULL, CA.InventoryFullQuest)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_IS_FULL, CA.InventoryFull)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED, CA.LootItemFailed)
+        eventManager:RegisterForEvent(moduleName, EVENT_QUEST_COMPLETE_ATTEMPT_FAILED_INVENTORY_FULL, CA.InventoryFullQuest)
+        eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_IS_FULL, CA.InventoryFull)
+        eventManager:RegisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED, CA.LootItemFailed)
     end]]
 end
 
 function CA.RegisterDisguiseEvents()
-    EVENT_MANAGER:UnregisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED)
+    eventManager:UnregisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED)
     if CA.SV.Notify.Disguise then
-        EVENT_MANAGER:RegisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, CA.DisguiseState )
-        EVENT_MANAGER:AddFilterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
+        eventManager:RegisterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, CA.DisguiseState )
+        eventManager:AddFilterForEvent(moduleName .. "player", EVENT_DISGUISE_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player" )
         g_currentDisguise = GetItemId(0, 10) or 0 -- Get the currently equipped disguise itemId if any
         if g_activatedFirstLoad then
             g_disguiseState = 0
@@ -1141,7 +1144,6 @@ end
 
 -- Called by most functions that use character or display name to resolve NON-LINK display method (mostly used for alerts).
 function CA.ResolveNameNoLink(characterName, displayName)
-
     local nameLink
     if CA.SV.ChatPlayerDisplayOptions == 1 then
         nameLink = displayName
@@ -1160,7 +1162,7 @@ function CA.GuildHeraldrySaved()
         local type = "LUIE_CURRENCY_HERALDRY"
         local formattedValue = nil -- Un-needed, we're not going to try to show the total guild bank gold here.
         local changeColor = CA.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
-        local changeType = ZO_LocalizeDecimalNumber(value)
+        local changeType = localizeDecimalNum(value)
         local currencyTypeColor = CurrencyGoldColorize:ToHex()
         local currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
         local currencyName = strformat(CA.SV.Currency.CurrencyGoldName, value)
@@ -1183,7 +1185,7 @@ function CA.GuildHeraldrySaved()
             local finalMessage = strformat(GetString(SI_LUIE_CA_GUILD_HERALDRY_UPDATE), guildNameAlliance)
             g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
         if CA.SV.Social.GuildManageAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_HERALDRY_UPDATE), guildNameAllianceAlert))
@@ -1203,7 +1205,7 @@ function CA.GuildRanksSaved(eventCode, guildId)
         local finalMessage = strformat(GetString(SI_LUIE_CA_GUILD_RANKS_UPDATE), guildNameAlliance)
         g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION" }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
     end
     if CA.SV.Social.GuildManageAlert then
         ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_RANKS_UPDATE), guildNameAllianceAlert))
@@ -1241,7 +1243,6 @@ end
 
 function CA.GuildTextChanged(eventCode, guildId)
     local guildName = GetGuildName(guildId)
-
     local guildAlliance = GetGuildAlliance(guildId)
     local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
     local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
@@ -1254,7 +1255,7 @@ function CA.GuildTextChanged(eventCode, guildId)
             local finalMessage = strformat(GetString(messageString), guildNameAlliance)
             g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
         if CA.SV.Social.GuildManageAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(messageString), guildNameAllianceAlert))
@@ -1847,7 +1848,7 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
         return
     end
 
-    local formattedValue = ZO_LocalizeDecimalNumber(newValue)
+    local formattedValue = localizeDecimalNum(newValue)
     local changeColor                                                   -- Gets the value from CurrencyUpColorize or CurrencyDownColorize to color strings
     local changeType                                                    -- Amount of currency gained or lost
     local currencyTypeColor                                             -- Determines color to use for colorization of currency based off currency type.
@@ -1886,8 +1887,8 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
         if not CA.SV.Currency.CurrencyAPShowChange then return end
         -- Send change info to the throttle printer and end function now if we throttle Alliance Points Gained
         if CA.SV.Currency.CurrencyAPThrottle > 0 and reason == 13 then
-            EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedAP")
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "BufferedAP", CA.SV.Currency.CurrencyAPThrottle, CA.CurrencyAPThrottlePrinter )
+            eventManager:UnregisterForUpdate(moduleName .. "BufferedAP")
+            eventManager:RegisterForUpdate(moduleName .. "BufferedAP", CA.SV.Currency.CurrencyAPThrottle, CA.CurrencyAPThrottlePrinter )
             g_currencyAPThrottleValue = g_currencyAPThrottleValue + UpOrDown
             g_currencyAPThrottleTotal = GetCarriedCurrencyAmount(2)
             return
@@ -1915,8 +1916,8 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
         if not CA.SV.Currency.CurrencyTVChange then return end
         -- Send change info to the throttle printer and end function now if we throttle Tel Var Gained
         if CA.SV.Currency.CurrencyTVThrottle > 0 and (reason == 0 or reason == 65) then
-            EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedTV")
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "BufferedTV", CA.SV.Currency.CurrencyTVThrottle, CA.CurrencyTVThrottlePrinter )
+            eventManager:UnregisterForUpdate(moduleName .. "BufferedTV")
+            eventManager:RegisterForUpdate(moduleName .. "BufferedTV", CA.SV.Currency.CurrencyTVThrottle, CA.CurrencyTVThrottlePrinter )
             g_currencyTVThrottleValue = g_currencyTVThrottleValue + UpOrDown
             g_currencyTVThrottleTotal = GetCarriedCurrencyAmount(3)
             return
@@ -1986,14 +1987,14 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
         else
             changeColor = CurrencyColorize:ToHex()
         end
-        changeType = ZO_LocalizeDecimalNumber(newValue - oldValue + g_postageAmount)
+        changeType = localizeDecimalNum(newValue - oldValue + g_postageAmount)
     elseif UpOrDown < 0 then
         if CA.SV.Currency.CurrencyContextColor then
             changeColor = CurrencyDownColorize:ToHex()
         else
             changeColor = CurrencyColorize:ToHex()
         end
-        changeType = ZO_LocalizeDecimalNumber(oldValue - newValue - g_postageAmount)
+        changeType = localizeDecimalNum(oldValue - newValue - g_postageAmount)
     end
 
     -- Determine syntax based on reason
@@ -2311,15 +2312,15 @@ function CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTyp
         local resolveType = type == "LUIE_CURRENCY_POSTAGE" and "CURRENCY POSTAGE" or "CURRENCY"
         g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = resolveType }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
     end
 end
 
 function CA.CurrencyGoldThrottlePrinter()
     if g_currencyGoldThrottleValue > 0 and g_currencyGoldThrottleValue > CA.SV.Currency.CurrencyGoldFilter then
-        local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
+        local formattedValue = localizeDecimalNum(GetCarriedCurrencyAmount(1))
         local changeColor = CA.SV.Currency.CurrencyContextColor and CurrencyUpColorize:ToHex() or CurrencyColorize:ToHex()
-        local changeType = ZO_LocalizeDecimalNumber(g_currencyGoldThrottleValue)
+        local changeType = localizeDecimalNum(g_currencyGoldThrottleValue)
         local currencyTypeColor = CurrencyGoldColorize:ToHex()
         local currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
         local currencyName = strformat(CA.SV.Currency.CurrencyGoldName, g_currencyGoldThrottleValue)
@@ -2335,9 +2336,9 @@ end
 
 function CA.CurrencyAPThrottlePrinter()
     if g_currencyAPThrottleValue > 0 and g_currencyAPThrottleValue > CA.SV.Currency.CurrencyAPFilter then
-        local formattedValue = ZO_LocalizeDecimalNumber(g_currencyAPThrottleTotal)
+        local formattedValue = localizeDecimalNum(g_currencyAPThrottleTotal)
         local changeColor = CA.SV.Currency.CurrencyContextColor and CurrencyUpColorize:ToHex() or CurrencyColorize:ToHex()
-        local changeType = ZO_LocalizeDecimalNumber(g_currencyAPThrottleValue)
+        local changeType = localizeDecimalNum(g_currencyAPThrottleValue)
         local currencyTypeColor = CurrencyAPColorize:ToHex()
         local currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/alliancepoints.dds|t" or ""
         local currencyName = strformat(CA.SV.Currency.CurrencyAPName, g_currencyAPThrottleValue)
@@ -2347,16 +2348,16 @@ function CA.CurrencyAPThrottlePrinter()
         local type = "LUIE_CURRENCY_THROTTLE"
         CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
-    EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedAP")
+    eventManager:UnregisterForUpdate(moduleName .. "BufferedAP")
     g_currencyAPThrottleValue = 0
     g_currencyAPThrottleTotal = 0
 end
 
 function CA.CurrencyTVThrottlePrinter()
     if g_currencyTVThrottleValue > 0 and g_currencyTVThrottleValue > CA.SV.Currency.CurrencyTVFilter then
-        local formattedValue = ZO_LocalizeDecimalNumber(g_currencyTVThrottleTotal)
+        local formattedValue = localizeDecimalNum(g_currencyTVThrottleTotal)
         local changeColor = CA.SV.Currency.CurrencyContextColor and CurrencyUpColorize:ToHex() or CurrencyColorize:ToHex()
-        local changeType = ZO_LocalizeDecimalNumber(g_currencyTVThrottleValue)
+        local changeType = localizeDecimalNum(g_currencyTVThrottleValue)
         local currencyTypeColor = CurrencyTVColorize:ToHex()
         local currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_telvar.dds|t" or ""
         local currencyName = strformat(CA.SV.Currency.CurrencyTVName, g_currencyTVThrottleValue)
@@ -2366,7 +2367,7 @@ function CA.CurrencyTVThrottlePrinter()
         local type = "LUIE_CURRENCY_THROTTLE"
         CA.CurrencyPrinter(formattedValue, changeColor, changeType, currencyTypeColor, currencyIcon, currencyName, currencyTotal, messageChange, messageTotal, type)
     end
-    EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedTV")
+    eventManager:UnregisterForUpdate(moduleName .. "BufferedTV")
     g_currencyTVThrottleValue = 0
     g_currencyTVThrottleTotal = 0
 end
@@ -2381,7 +2382,7 @@ function CA.MiscAlertLockSuccess(eventCode)
         local message = GetString(SI_LUIE_CA_LOCKPICK_SUCCESS)
         g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "NOTIFICATION" }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
 
     end
     if CA.SV.Notify.NotificationLockpickAlert then
@@ -2397,7 +2398,7 @@ function CA.StorageBag(eventCode, previousCapacity, currentCapacity, previousUpg
             local formattedString = StorageBagColorize:Colorize(strformat(SI_INVENTORY_BAG_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
 
         if CA.SV.Notify.StorageBagAlert then
@@ -2413,7 +2414,7 @@ function CA.StorageBank(eventCode, previousCapacity, currentCapacity, previousUp
             local formattedString = StorageBagColorize:Colorize(strformat(SI_INVENTORY_BANK_UPGRADE_ANOUNCEMENT_DESCRIPTION, previousCapacity, currentCapacity))
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
 
         if CA.SV.Notify.StorageBagAlert then
@@ -2443,7 +2444,7 @@ function CA.OnBuybackItem(eventCode, itemName, quantity, money, itemSound)
         local total1, total2, total3 = GetItemLinkStacks(itemName)
         local total = total1 + total2 + total3
         if total > 1 then
-            carriedItemTotal = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, CA.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+            carriedItemTotal = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, CA.SV.Inventory.LootTotalString, formattedIcon, localizeDecimalNum(total))
         end
     end
 
@@ -2458,7 +2459,7 @@ function CA.OnBuybackItem(eventCode, itemName, quantity, money, itemSound)
         local finalMessage = strfmt("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
         g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "CURRENCY" }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
     end
     g_savedPurchase = { }
 end
@@ -2497,7 +2498,7 @@ function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCu
         local total1, total2, total3 = GetItemLinkStacks(itemName)
         local total = total1 + total2 + total3
         if total > 1 then
-            carriedItemTotal = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, CA.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+            carriedItemTotal = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, CA.SV.Inventory.LootTotalString, formattedIcon, localizeDecimalNum(total))
         end
     end
 
@@ -2512,7 +2513,7 @@ function CA.OnBuyItem(eventCode, itemName, entryType, quantity, money, specialCu
         local finalMessage = strfmt("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
         g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "CURRENCY" }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
     end
     g_savedPurchase = { }
 end
@@ -2542,7 +2543,7 @@ function CA.OnSellItem(eventCode, itemName, quantity, money)
         local total1, total2, total3 = GetItemLinkStacks(itemName)
         local total = total1 + total2 + total3
         if total > 1 then
-            carriedItemTotal = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, CA.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+            carriedItemTotal = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, CA.SV.Inventory.LootTotalString, formattedIcon, localizeDecimalNum(total))
         end
     end
 
@@ -2557,7 +2558,7 @@ function CA.OnSellItem(eventCode, itemName, quantity, money)
         local finalMessage = strfmt("|c%s%s|r%s", changeColor, finalMessageP2, carriedItemTotal)
         g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "CURRENCY" }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
     end
     g_savedPurchase = { }
 end
@@ -2578,7 +2579,7 @@ function CA.MailRemoved(eventCode)
             local message = GetString(SI_LUIE_CA_MAIL_DELETED_MSG)
             g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "NOTIFICATION" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
         if CA.SV.Notify.NotificationMailAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_MAIL_DELETED_MSG))
@@ -2622,7 +2623,7 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
             if CA.SV.Notify.NotificationMailCA then
                 g_queuedMessages[g_queuedMessagesCounter] = { message = mailString, type = "NOTIFICATION" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
             if CA.SV.Notify.NotificationMailAlert then
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, mailString)
@@ -2649,9 +2650,9 @@ function CA.OnMailAttachRemove(eventCode, attachmentSlot)
 end
 
 function CA.OnMailOpenBox(eventCode)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if CA.SV.Inventory.LootMail then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
+        eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
         g_inventoryStacks = {}
         CA.IndexInventory() -- Index Inventory
     end
@@ -2659,9 +2660,9 @@ function CA.OnMailOpenBox(eventCode)
 end
 
 function CA.OnMailCloseBox(eventCode)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if CA.SV.Inventory.Loot or CA.SV.Inventory.LootShowDisguise then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
+        eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
     end
     if not (CA.SV.Inventory.Loot or CA.SV.Inventory.LootShowDisguise) then
         g_inventoryStacks = {}
@@ -2674,9 +2675,9 @@ end
 function CA.OnMailSuccess(eventCode)
     if g_postageAmount > 0 then
         local type = "LUIE_CURRENCY_POSTAGE"
-        local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1))
+        local formattedValue = localizeDecimalNum(GetCarriedCurrencyAmount(1))
         local changeColor = CA.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
-        local changeType = ZO_LocalizeDecimalNumber(g_postageAmount)
+        local changeType = localizeDecimalNum(g_postageAmount)
         local currencyTypeColor = CurrencyGoldColorize:ToHex()
         local currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
         local currencyName = strformat(CA.SV.Currency.CurrencyGoldName, g_postageAmount)
@@ -2699,7 +2700,7 @@ function CA.OnMailSuccess(eventCode)
             if CA.SV.Notify.NotificationMailCA then
                 g_queuedMessages[g_queuedMessagesCounter] = { message = mailString, type = "NOTIFICATION" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
             if CA.SV.Notify.NotificationMailAlert then
                 ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, mailString)
@@ -2735,8 +2736,8 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
         if CA.SV.XP.ExperienceThrottle > 0 and reason == 0 then
             g_xpCombatBufferValue = g_xpCombatBufferValue + change
             -- We unregister the event, then re-register it, this keeps the buffer at a constant X throttle after XP is gained.
-            EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "BufferedXP", CA.SV.XP.ExperienceThrottle, CA.PrintBufferedXP )
+            eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
+            eventManager:RegisterForUpdate(moduleName .. "BufferedXP", CA.SV.XP.ExperienceThrottle, CA.PrintBufferedXP )
             return
         end
 
@@ -2749,7 +2750,7 @@ function CA.OnExperienceGain(eventCode, reason, level, previousExperience, curre
 
         -- If we gain experience from a non combat source, and our buffer function holds a value, then we need to immediately dump this value before the next XP update is processed.
         if CA.SV.XP.ExperienceThrottle > 0 and g_xpCombatBufferValue > 0 and (reason ~= 0 and reason ~= 99) then
-            EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
+            eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
             CA.PrintBufferedXP()
         end
 
@@ -2761,13 +2762,13 @@ end
 function CA.PrintExperienceGain(change)
     local icon = CA.SV.XP.ExperienceIcon and ("|t16:16:/esoui/art/icons/icon_experience.dds|t ") or ""
     local xpName = strformat(CA.SV.XP.ExperienceName, change)
-    local messageP1 = ("|r|c" .. ExperienceNameColorize .. icon .. ZO_LocalizeDecimalNumber(change) .. " " .. xpName .. "|r|c" .. ExperienceMessageColorize)
+    local messageP1 = ("|r|c" .. ExperienceNameColorize .. icon .. localizeDecimalNum(change) .. " " .. xpName .. "|r|c" .. ExperienceMessageColorize)
     local formattedMessageP1 = (strfmt(CA.SV.XP.ExperienceMessage, messageP1))
     local finalMessage = strfmt("|c%s%s|r", ExperienceMessageColorize, formattedMessageP1)
 
     g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "EXPERIENCE" }
     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
 end
 
 function CA.PrintBufferedXP()
@@ -2775,7 +2776,7 @@ function CA.PrintBufferedXP()
         local change = g_xpCombatBufferValue
         CA.PrintExperienceGain(change)
     end
-    EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
+    eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
     g_xpCombatBufferValue = 0
 end
 
@@ -2891,7 +2892,7 @@ function CA.OnAchievementUpdated(eventCode, id)
             local finalString = strfmt("%s%s%s%s", stringpart1, stringpart2, stringpart3, stringpart4)
             g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "ACHIEVEMENT" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
 
         end
 
@@ -3007,9 +3008,9 @@ function CA.IndexHouseBags()
 end
 
 function CA.CraftingOpen(eventCode, craftSkill, sameStation)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if CA.SV.Inventory.LootCraft then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateCraft)
+        eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateCraft)
         g_inventoryStacks = {}
         g_bankStacks = {}
         g_banksubStacks = {}
@@ -3019,9 +3020,9 @@ function CA.CraftingOpen(eventCode, craftSkill, sameStation)
 end
 
 function CA.CraftingClose(eventCode, craftSkill)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if CA.SV.Inventory.Loot or CA.SV.Inventory.LootShowDisguise then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
+        eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
     end
     if not (CA.SV.Inventory.Loot or CA.SV.Inventory.LootShowDisguise) then
         g_inventoryStacks = {}
@@ -3031,9 +3032,9 @@ function CA.CraftingClose(eventCode, craftSkill)
 end
 
 function CA.BankOpen(eventCode, bankBag)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if CA.SV.Inventory.LootBank then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateBank)
+        eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateBank)
         g_inventoryStacks = {}
         g_bankStacks = {}
         g_banksubStacks = {}
@@ -3046,9 +3047,9 @@ function CA.BankOpen(eventCode, bankBag)
 end
 
 function CA.BankClose(eventCode)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if CA.SV.Inventory.Loot or CA.SV.Inventory.LootShowDisguise then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
+        eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
     end
     if not (CA.SV.Inventory.Loot or CA.SV.Inventory.LootShowDisguise) then
         g_inventoryStacks = {}
@@ -3059,18 +3060,18 @@ function CA.BankClose(eventCode)
 end
 
 function CA.GuildBankOpen(eventCode)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if CA.SV.Inventory.LootBank then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateGuildBank)
+        eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateGuildBank)
         g_inventoryStacks = {}
         CA.IndexInventory() -- Index Inventory
     end
 end
 
 function CA.GuildBankClose(eventCode)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if CA.SV.Inventory.Loot or CA.SV.Inventory.LootShowDisguise then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
+        eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
     end
     if not (CA.SV.Inventory.Loot or CA.SV.Inventory.LootShowDisguise) then
         g_inventoryStacks = {}
@@ -3079,9 +3080,9 @@ end
 
 function CA.FenceOpen(eventCode, allowSell, allowLaunder)
     g_weAreInAFence = true
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if CA.SV.Inventory.LootVendor then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateFence)
+        eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdateFence)
         g_inventoryStacks = {}
         CA.IndexInventory() -- Index Inventory
     end
@@ -3092,9 +3093,9 @@ function CA.StoreOpen(eventCode)
 end
 
 function CA.StoreClose(eventCode)
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if CA.SV.Inventory.Loot or CA.SV.Inventory.LootShowDisguise then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
+        eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
     end
     if not (CA.SV.Inventory.Loot or CA.SV.Inventory.LootShowDisguise) then
         g_inventoryStacks = {}
@@ -3208,7 +3209,7 @@ function CA.ResolveQuestItemChange()
                     formattedMessageP2 = strfmt(logPrefix, formattedMessageP1)
 
                     if CA.SV.Inventory.LootTotal and total > 1 then
-                        totalString = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", color, CA.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+                        totalString = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", color, CA.SV.Inventory.LootTotalString, formattedIcon, localizeDecimalNum(total))
                     else
                         totalString = ""
                     end
@@ -3217,7 +3218,7 @@ function CA.ResolveQuestItemChange()
 
                     g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT REMOVE" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 25, CA.PrintQueuedMessages )
+                    eventManager:RegisterForUpdate(moduleName .. "Printer", 25, CA.PrintQueuedMessages )
                 end
             end
 
@@ -3249,7 +3250,7 @@ function CA.ResolveQuestItemChange()
                     formattedMessageP2 = strfmt(logPrefix, formattedMessageP1)
 
                     if CA.SV.Inventory.LootTotal and total > 1 then
-                        totalString = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", color, CA.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+                        totalString = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", color, CA.SV.Inventory.LootTotalString, formattedIcon, localizeDecimalNum(total))
                     else
                         totalString = ""
                     end
@@ -3258,7 +3259,7 @@ function CA.ResolveQuestItemChange()
 
                     g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "QUEST LOOT ADD" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 25, CA.PrintQueuedMessages )
+                    eventManager:RegisterForUpdate(moduleName .. "Printer", 25, CA.PrintQueuedMessages )
                 end
             end
         end
@@ -3275,7 +3276,7 @@ function CA.ResolveQuestItemChange()
         end
     end
 
-    EVENT_MANAGER:UnregisterForUpdate(moduleName .. "QuestItemUpdater")
+    eventManager:UnregisterForUpdate(moduleName .. "QuestItemUpdater")
 
 end
 
@@ -3292,7 +3293,7 @@ local function DisplayQuestItem(itemId, stackCount, icon, reset)
         --d(itemId .. " - Increment by: " .. stackCount)
         questItemIndex[itemId].counter = questItemIndex[itemId].counter + stackCount
     end
-    EVENT_MANAGER:RegisterForUpdate(moduleName .. "QuestItemUpdater", 25, CA.ResolveQuestItemChange )
+    eventManager:RegisterForUpdate(moduleName .. "QuestItemUpdater", 25, CA.ResolveQuestItemChange )
 end
 
 function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound, lootType, lootedBySelf, isPickpocketLoot, questItemIcon, itemId, isStolen)
@@ -3302,9 +3303,9 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
 
         local function ResetIsLooted()
             g_isLooted = false
-            EVENT_MANAGER:UnregisterForUpdate(moduleName .. "ResetLooted")
+            eventManager:UnregisterForUpdate(moduleName .. "ResetLooted")
         end
-        EVENT_MANAGER:RegisterForUpdate(moduleName .. "ResetLooted", 200, ResetIsLooted )
+        eventManager:RegisterForUpdate(moduleName .. "ResetLooted", 200, ResetIsLooted )
     end
 
     -- If the player pickpockets an item
@@ -3313,9 +3314,9 @@ function CA.OnLootReceived(eventCode, receivedBy, itemLink, quantity, itemSound,
 
         local function ResetIsPickpocketed()
             g_isPickpocketed = false
-            EVENT_MANAGER:UnregisterForUpdate(moduleName .. "ResetPickpocket")
+            eventManager:UnregisterForUpdate(moduleName .. "ResetPickpocket")
         end
-        EVENT_MANAGER:RegisterForUpdate(moduleName .. "ResetPickpocket", 200, ResetIsPickpocketed )
+        eventManager:RegisterForUpdate(moduleName .. "ResetPickpocket", 200, ResetIsPickpocketed )
     end
 
     -- Return right now if we don't have group loot set to display
@@ -3443,7 +3444,7 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
         local total1, total2, total3 = GetItemLinkStacks(itemLink)
         local total = total1 + total2 + total3
         if total > 1 then
-            formattedTotal = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", color, CA.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+            formattedTotal = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", color, CA.SV.Inventory.LootTotalString, formattedIcon, localizeDecimalNum(total))
         end
     end
 
@@ -3464,7 +3465,7 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
         if g_queuedMessagesCounter -1 == g_itemCounterGain then g_queuedMessagesCounter = g_itemCounterGain end
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         g_queuedMessages[g_itemCounterGain] = { message=g_itemStringGain, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString= "", groupLoot=groupLoot }
-        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
     elseif receivedBy == "LUIE_RECEIVE_CRAFT" and (gainOrLoss == 2 or gainOrLoss == 4) and logPrefix ~= CA.SV.ContextMessages.CurrencyMessageUpgradeFail then
         local itemString2 = itemString
         if g_itemStringLoss ~= "" then
@@ -3477,12 +3478,12 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
         if g_queuedMessagesCounter -1 == g_itemCounterLoss then g_queuedMessagesCounter = g_itemCounterLoss end
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         g_queuedMessages[g_itemCounterLoss] = { message=g_itemStringLoss, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString= "", groupLoot=groupLoot }
-        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
     else
         local totalString = formattedTotal
         g_queuedMessages[g_queuedMessagesCounter] = { message=itemString, type = "LOOT", formattedRecipient=formattedRecipient, color=color, logPrefix=logPrefix, totalString=totalString, groupLoot=groupLoot }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+        eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
     end
 end
 
@@ -3603,9 +3604,9 @@ function CA.InventoryUpdate(eventCode, bagId, slotId, isNewItem, itemSoundCatego
         g_isStolen = true
         local function ResetIsStolen()
             g_isStolen = false
-            EVENT_MANAGER:UnregisterForUpdate(moduleName .. "ResetStolen")
+            eventManager:UnregisterForUpdate(moduleName .. "ResetStolen")
         end
-        EVENT_MANAGER:RegisterForUpdate(moduleName .. "ResetStolen", 200, ResetIsStolen )
+        eventManager:RegisterForUpdate(moduleName .. "ResetStolen", 200, ResetIsStolen )
     end
 
     local receivedBy = ""
@@ -4724,7 +4725,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
                         local total1, total2, total3 = GetItemLinkStacks(itemLink)
                         local total = total1 + total2 + total3
                         if total > 1 then
-                            carriedItemTotal = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, CA.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+                            carriedItemTotal = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, CA.SV.Inventory.LootTotalString, formattedIcon, localizeDecimalNum(total))
                         end
                     end
 
@@ -4771,7 +4772,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
                         local total1, total2, total3 = GetItemLinkStacks(itemLink)
                         local total = total1 + total2 + total3
                         if total > 1 then
-                            carriedItemTotal = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, CA.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+                            carriedItemTotal = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, CA.SV.Inventory.LootTotalString, formattedIcon, localizeDecimalNum(total))
                         end
                     end
 
@@ -4824,7 +4825,7 @@ function CA.InventoryUpdateFence(eventCode, bagId, slotId, isNewItem, itemSoundC
                 local total1, total2, total3 = GetItemLinkStacks(itemLink)
                 local total = total1 + total2 + total3
                 if total > 1 then
-                    carriedItemTotal = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, CA.SV.Inventory.LootTotalString, formattedIcon, ZO_LocalizeDecimalNumber(total))
+                    carriedItemTotal = strfmt(" |c%s%s|r %s|cFEFEFE%s|r", changeColor, CA.SV.Inventory.LootTotalString, formattedIcon, localizeDecimalNum(total))
                 end
             end
 
@@ -4866,7 +4867,7 @@ function CA.JusticeDisplayConfiscate()
         if CA.SV.Notify.NotificationConfiscateCA then
             g_queuedMessages[g_queuedMessagesCounter] = { message = ConfiscateMessage, type = "NOTIFICATION" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         else
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, ConfiscateMessage)
         end
@@ -5139,11 +5140,11 @@ end
 
 function CA.LootItemFailed(eventCode, reason, itemName)
     -- Stop Spam
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED)
+    eventManager:UnregisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED)
 
     local function ReactivateLootItemFailed()
     printToChat(strformat(GetString("SI_LOOTITEMRESULT", reason), itemName))
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED, CA.LootItemFailed)
+        eventManager:RegisterForEvent(moduleName, EVENT_LOOT_ITEM_FAILED, CA.LootItemFailed)
     end
 
     callLater(ReactivateLootItemFailed, 100)
@@ -5256,9 +5257,9 @@ function CA.HookFunction()
                 elseif ridingSkill == 3 then
                     type = "LUIE_CURRENCY_RIDING_STAMINA"
                 end
-                local formattedValue = ZO_LocalizeDecimalNumber(GetCarriedCurrencyAmount(1) + 250)
+                local formattedValue = localizeDecimalNum(GetCarriedCurrencyAmount(1) + 250)
                 local changeColor = CA.SV.Currency.CurrencyContextColor and CurrencyDownColorize:ToHex() or CurrencyColorize:ToHex()
-                local changeType = ZO_LocalizeDecimalNumber(250)
+                local changeType = localizeDecimalNum(250)
                 local currencyTypeColor = CurrencyGoldColorize:ToHex()
                 local currencyIcon = CA.SV.Currency.CurrencyIcon and "|t16:16:/esoui/art/currency/currency_gold.dds|t" or ""
                 local currencyName = strformat(CA.SV.Currency.CurrencyGoldName, 250)
@@ -5272,7 +5273,7 @@ function CA.HookFunction()
                 local formattedString = StorageRidingColorize:Colorize(strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
 
             if CA.SV.Notify.StorageRidingCSA then
@@ -5349,7 +5350,7 @@ function CA.HookFunction()
                     local finalMessage = strformat("<<1>><<2>><<3>><<4>>", stringPart1, formattedIcon, bookLink, stringPart2)
                     g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
 
                 -- Alert Announcement
@@ -6038,7 +6039,7 @@ function CA.HookFunction()
             local message = GetString(SI_LUIE_CA_LOCKPICK_FAILED)
             g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "NOTIFICATION" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
         if CA.SV.Notify.NotificationLockpickAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_LOCKPICK_FAILED))
@@ -6161,9 +6162,9 @@ function CA.HookFunction()
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
 
-        EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+        eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
         if CA.SV.Inventory.Loot or CA.SV.Inventory.LootShowDisguise then
-            EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
+            eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
         end
         if not (CA.SV.Inventory.Loot or CA.SV.Inventory.LootShowDisguise) then
             g_inventoryStacks = {}
@@ -6196,7 +6197,7 @@ function CA.HookFunction()
             local message = GetString(SI_TRADE_COMPLETE)
             g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "NOTIFICATION" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
         if CA.SV.Notify.NotificationTradeAlert then
             ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_TRADE_COMPLETE))
@@ -6224,9 +6225,9 @@ function CA.HookFunction()
         end
 
 
-        EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+        eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
         if CA.SV.Inventory.Loot or CA.SV.Inventory.LootShowDisguise then
-            EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
+            eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
         end
         if not (CA.SV.Inventory.Loot or CA.SV.Inventory.LootShowDisguise) then
             g_inventoryStacks = {}
@@ -6253,8 +6254,8 @@ function CA.HookFunction()
                     g_queuedMessages[i].type = "GARBAGE"
                 end
             end
-            EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_CURRENCY_UPDATE)
-            callLater(function() EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CURRENCY_UPDATE, CA.OnCurrencyUpdate) end, 500)
+            eventManager:UnregisterForEvent(moduleName, EVENT_CURRENCY_UPDATE)
+            callLater(function() eventManager:RegisterForEvent(moduleName, EVENT_CURRENCY_UPDATE, CA.OnCurrencyUpdate) end, 500)
         end
 
         if CA.SV.Notify.NotificationMailCA then
@@ -6293,14 +6294,14 @@ function CA.HookFunction()
     ZO_PreHook(alertHandlers, EVENT_GROUPING_TOOLS_READY_CHECK_CANCELLED, GroupReadyCheckCancelAlert)
     ZO_PreHook(alertHandlers, EVENT_GROUP_VETERAN_DIFFICULTY_CHANGED, GroupDifficultyChangeAlert)
 
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_REMOVED, CA.GroupInviteRemoved)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED, CA.OnGroupMemberJoined)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED, CA.OnGroupInviteReceived)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_TYPE_CHANGED, CA.OnGroupTypeChanged)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_NOTIFICATION_ADDED, CA.VoteNotify)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_NO_LONGER_LFG, CA.LFGLeft)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_STATUS_UPDATE, CA.ActivityStatusUpdate)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_UPDATED, CA.ReadyCheckUpdate)
+    eventManager:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_REMOVED, CA.GroupInviteRemoved)
+    eventManager:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED, CA.OnGroupMemberJoined)
+    eventManager:RegisterForEvent(moduleName, EVENT_GROUP_INVITE_RECEIVED, CA.OnGroupInviteReceived)
+    eventManager:RegisterForEvent(moduleName, EVENT_GROUP_TYPE_CHANGED, CA.OnGroupTypeChanged)
+    eventManager:RegisterForEvent(moduleName, EVENT_GROUP_ELECTION_NOTIFICATION_ADDED, CA.VoteNotify)
+    eventManager:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_NO_LONGER_LFG, CA.LFGLeft)
+    eventManager:RegisterForEvent(moduleName, EVENT_ACTIVITY_FINDER_STATUS_UPDATE, CA.ActivityStatusUpdate)
+    eventManager:RegisterForEvent(moduleName, EVENT_GROUPING_TOOLS_READY_CHECK_UPDATED, CA.ReadyCheckUpdate)
 
     ZO_PreHook(alertHandlers, EVENT_GUILD_SELF_LEFT_GUILD, GuildSelfLeftAlert)
     ZO_PreHook(alertHandlers, EVENT_SAVE_GUILD_RANKS_RESPONSE, GuildRanksResponseAlert)
@@ -6367,7 +6368,7 @@ function CA.HookFunction()
                 local finalMessage = strformat("<<1>><<2>><<3>><<4>>", stringPart1, formattedIcon, bookLink, stringPart2)
                 g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
 
             -- Alert Announcement
@@ -6430,7 +6431,7 @@ function CA.HookFunction()
                     local finalMessage = strformat("<<1>><<2>><<3>>", stringPart1, formattedIcon, stringPart2)
                     g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
 
                 if CA.SV.Lorebooks.LorebookCollectionCSA then
@@ -6482,7 +6483,7 @@ function CA.HookFunction()
                     local finalMessage = strformat("<<1>><<2>><<3>>", stringPart1, formattedIcon, stringPart2)
                     g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "COLLECTIBLE" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
 
                 if CA.SV.Lorebooks.LorebookCollectionCSA then
@@ -6579,7 +6580,7 @@ function CA.HookFunction()
                 if finalMessage ~= "" then
                     g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "SKILL" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
             end
             if CA.SV.Skills.SkillPointCSA then
@@ -6605,7 +6606,7 @@ function CA.HookFunction()
             local formattedString = SkillLineColorize:Colorize(strformat(SI_LUIE_CA_SKILL_LINE_ADDED, formattedIcon, lineName))
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL GAIN" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
 
         end
 
@@ -6638,7 +6639,7 @@ function CA.HookFunction()
                 formattedString = SkillLineColorize:Colorize(strformat(SI_MORPH_AVAILABLE_ANNOUNCEMENT, name) .. ".")
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL MORPH" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
 
             if CA.SV.Skills.SkillAbilityCSA then
@@ -6661,7 +6662,7 @@ function CA.HookFunction()
                 formattedString = SkillLineColorize:Colorize(strformat(SI_LUIE_CA_ABILITY_RANK_UP, name, rank) .. ".")
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
 
             if CA.SV.Skills.SkillAbilityCSA then
@@ -6695,7 +6696,7 @@ function CA.HookFunction()
                     local formattedString = SkillLineColorize:Colorize(strformat(SI_SKILL_RANK_UP, lineName, rank) .. ".")
                     g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL LINE" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
 
                 if CA.SV.Skills.SkillLineCSA then
@@ -6775,7 +6776,7 @@ function CA.HookFunction()
                     finalString = strformat("<<1>><<2>><<3>>", string1, formattedIcon, string2)
                     g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
 
                 -- Set message params even if CSA is disabled, we just send a dummy event so the callback handler works correctly.
@@ -6817,7 +6818,7 @@ function CA.HookFunction()
                     finalString = strformat("<<1>><<2>>", string1, string2)
                     g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "COLLECTIBLE" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
 
                 -- Set message params even if CSA is disabled, we just send a dummy event so the callback handler works correctly.
@@ -6840,7 +6841,7 @@ function CA.HookFunction()
 
     local function QuestAddedHook(journalIndex, questName, objectiveName)
 
-        EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
+        eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         CA.PrintBufferedXP()
 
         local questType = GetJournalQuestType(journalIndex)
@@ -6878,7 +6879,7 @@ function CA.HookFunction()
 
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
 
         if CA.SV.Quests.QuestAcceptCSA then
@@ -6912,7 +6913,7 @@ function CA.HookFunction()
 
     local function QuestCompleteHook(questName, level, previousExperience, currentExperience, championPoints, questType, instanceDisplayType)
 
-        EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
+        eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         CA.PrintBufferedXP()
 
         local function ResetQuestRewardStatus()
@@ -6962,7 +6963,7 @@ function CA.HookFunction()
             end
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
 
         -- If we don't have either CSA or Alert on (then we want to play a sound here)
@@ -7015,7 +7016,7 @@ function CA.HookFunction()
             end
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedText, type = "QUEST" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
 
         return true
@@ -7087,7 +7088,7 @@ function CA.HookFunction()
             if CA.SV.Quests.QuestObjCompleteCA then
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedMessage, type = "QUEST" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
             if CA.SV.Quests.QuestObjCompleteCSA then
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
@@ -7104,7 +7105,7 @@ function CA.HookFunction()
             if CA.SV.Quests.QuestFailCA then
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedMessage, type = "QUEST" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
             if CA.SV.Quests.QuestFailCSA then
                 CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
@@ -7129,7 +7130,7 @@ function CA.HookFunction()
             if CA.SV.Quests.QuestObjCompleteCA then
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
 
             if CA.SV.Quests.QuestObjCompleteCSA then
@@ -7172,7 +7173,7 @@ function CA.HookFunction()
                     end
                     g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
 
                 if CA.SV.Quests.QuestAbandonCSA then
@@ -7220,7 +7221,7 @@ function CA.HookFunction()
                     if CA.SV.Quests.QuestObjUpdateCA then
                         g_queuedMessages[g_queuedMessagesCounter] = { message = stepOverrideText, type = "QUEST" }
                         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                        eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                     end
                     if CA.SV.Quests.QuestObjUpdateCSA then
                         local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, sound)
@@ -7240,7 +7241,7 @@ function CA.HookFunction()
                             if CA.SV.Quests.QuestObjUpdateCA then
                                 g_queuedMessages[g_queuedMessagesCounter] = { message = conditionText, type = "QUEST" }
                                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                             end
                             if CA.SV.Quests.QuestObjUpdateCSA then
                                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, sound)
@@ -7269,7 +7270,7 @@ function CA.HookFunction()
 
     local function DiscoveryExperienceHook(subzoneName, level, previousExperience, currentExperience, championPoints)
 
-        EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
+        eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         CA.PrintBufferedXP()
 
         if CA.SV.Quests.QuestLocDiscoveryCA then
@@ -7277,7 +7278,7 @@ function CA.HookFunction()
             local formattedString = strformat(SI_LUIE_CA_QUEST_DISCOVER, nameFormatted)
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
 
         if CA.SV.Quests.QuestLocDiscoveryCSA and not INTERACT_WINDOW:IsShowingInteraction() then
@@ -7304,7 +7305,7 @@ function CA.HookFunction()
 
     local function PoiDiscoveredHook(zoneIndex, poiIndex)
 
-        EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
+        eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         CA.PrintBufferedXP()
 
         local name, _, startDescription = GetPOIInfo(zoneIndex, poiIndex)
@@ -7313,7 +7314,7 @@ function CA.HookFunction()
             local formattedString = (strformat("|c<<1>><<2>>:|r |c<<3>><<4>>|r", QuestColorLocNameColorize, name, QuestColorLocDescriptionColorize, startDescription))
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "QUEST_POI" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
 
         end
 
@@ -7372,7 +7373,7 @@ function CA.HookFunction()
         local levelSize = GetNumExperiencePointsInLevel(level)
         if levelSize ~= nil and currentExperience >= levelSize then
 
-            EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
+            eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
             CA.PrintBufferedXP()
 
             local CurrentLevel = level + 1
@@ -7399,7 +7400,7 @@ function CA.HookFunction()
                 end
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
 
             if CA.SV.XP.ExperienceLevelUpCSA then
@@ -7445,7 +7446,7 @@ function CA.HookFunction()
             if CA.SV.XP.ExperienceEnlightenedCA then
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
 
             if CA.SV.XP.ExperienceEnlightenedCSA then
@@ -7480,7 +7481,7 @@ function CA.HookFunction()
             if CA.SV.XP.ExperienceEnlightenedCA then
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
 
             if CA.SV.XP.ExperienceEnlightenedCSA then
@@ -7564,13 +7565,13 @@ function CA.HookFunction()
 
                     g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "MESSAGE" }
                     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                 end
 
                 local formattedString = StorageRidingColorize:Colorize(strformat(SI_RIDING_SKILL_ANNOUCEMENT_SKILL_INCREASE, GetString("SI_RIDINGTRAINTYPE", ridingSkill), previous, current))
                 g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "MESSAGE" }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
 
             if CA.SV.Notify.StorageRidingCSA then
@@ -7617,7 +7618,7 @@ function CA.HookFunction()
             local formattedString = ExperienceLevelUpColorize:Colorize(strformat("<<1>>!", GetString(SI_CHAMPION_ANNOUNCEMENT_UNLOCKED), formattedIcon))
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
 
         if CA.SV.XP.ExperienceLevelUpCSA then
@@ -7665,7 +7666,7 @@ function CA.HookFunction()
     local function ChampionPointGainedHook(pointDelta)
 
         -- Print throttled XP value
-        EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedXP")
+        eventManager:UnregisterForUpdate(moduleName .. "BufferedXP")
         CA.PrintBufferedXP()
 
         -- adding one so that we are starting from the first gained point instead of the starting champion points
@@ -7683,7 +7684,7 @@ function CA.HookFunction()
             local formattedString = ExperienceLevelUpColorize:Colorize(strformat(SI_CHAMPION_POINT_EARNED, pointDelta) .. ": ")
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
 
         local secondLine = ""
@@ -7701,7 +7702,7 @@ function CA.HookFunction()
                     if CA.SV.XP.ExperienceLevelUpCA then
                         g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
                         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-                        EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+                        eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
                     end
                     if CA.SV.XP.ExperienceLevelUpCSA then
                         secondLine = secondLine .. strformat(SI_CHAMPION_POINT_TYPE, amount, icon, constellationGroupName) .. "\n"
@@ -7768,13 +7769,13 @@ function CA.HookFunction()
     local function DuelNearBoundaryHook(isInWarningArea)
         if isInWarningArea then
             local nowEventTime = GetFrameTimeMilliseconds()
-            EVENT_MANAGER:RegisterForUpdate("EVENT_DUEL_NEAR_BOUNDARY_LUIE", DUEL_BOUNDARY_WARNING_UPDATE_TIME_MS, CheckBoundary)
+            eventManager:RegisterForUpdate("EVENT_DUEL_NEAR_BOUNDARY_LUIE", DUEL_BOUNDARY_WARNING_UPDATE_TIME_MS, CheckBoundary)
             if nowEventTime > lastEventTime + DUEL_BOUNDARY_WARNING_UPDATE_TIME_MS then
                 lastEventTime = nowEventTime
                 CheckBoundary()
             end
         else
-            EVENT_MANAGER:UnregisterForUpdate("EVENT_DUEL_NEAR_BOUNDARY_LUIE")
+            eventManager:UnregisterForUpdate("EVENT_DUEL_NEAR_BOUNDARY_LUIE")
         end
         return true
     end
@@ -8442,7 +8443,7 @@ function CA.HookFunction()
             local finalString = strfmt("%s%s%s", stringpart1, stringpart2, stringpart3)
             g_queuedMessages[g_queuedMessagesCounter] = { message = finalString, type = "ACHIEVEMENT" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-            EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+            eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
 
         end
 
@@ -8496,12 +8497,12 @@ function CA.HookFunction()
     end
 
     -- Unregister the ZOS events for handling Quest Removal/Advanced/Added to replace with our own functions
-    EVENT_MANAGER:UnregisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_REMOVED)
-    EVENT_MANAGER:UnregisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_ADVANCED)
-    EVENT_MANAGER:UnregisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_ADDED)
-    EVENT_MANAGER:RegisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_REMOVED, OnQuestRemoved)
-    EVENT_MANAGER:RegisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_ADVANCED, OnQuestAdvanced)
-    EVENT_MANAGER:RegisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_ADDED, OnQuestAdded)
+    eventManager:UnregisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_REMOVED)
+    eventManager:UnregisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_ADVANCED)
+    eventManager:UnregisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_ADDED)
+    eventManager:RegisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_REMOVED, OnQuestRemoved)
+    eventManager:RegisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_ADVANCED, OnQuestAdvanced)
+    eventManager:RegisterForEvent("CSA_MiscellaneousHandlers", EVENT_QUEST_ADDED, OnQuestAdded)
 
     ZO_PreHook(csaHandlers, EVENT_LORE_BOOK_LEARNED_SKILL_EXPERIENCE, LoreBookXPHook)
     ZO_PreHook(csaHandlers, EVENT_LORE_COLLECTION_COMPLETED, LoreCollectionHook)
@@ -8533,7 +8534,7 @@ function CA.HookFunction()
     ZO_PreHook(csaHandlers, EVENT_DUEL_FINISHED, DuelFinishedHook)
     ZO_PreHook(csaHandlers, EVENT_DUEL_COUNTDOWN, DuelCountdownHook)
 
-	EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, CA.DuelStarted)
+	eventManager:RegisterForEvent(moduleName, EVENT_DUEL_STARTED, CA.DuelStarted)
 
     ZO_PreHook(csaHandlers, EVENT_RAID_TRIAL_STARTED, RaidStartedHook)
     ZO_PreHook(csaHandlers, EVENT_RAID_TRIAL_COMPLETE, RaidCompleteHook)
@@ -8547,7 +8548,7 @@ function CA.HookFunction()
     ZO_PreHook(csaHandlers, EVENT_ACHIEVEMENT_AWARDED, AchievementAwardedHook)
     ZO_PreHook(csaHandlers, EVENT_PLEDGE_OF_MARA_RESULT, PledgeOfMaraHook)
 
-	EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_OFFER, CA.MaraOffer)
+	eventManager:RegisterForEvent(moduleName, EVENT_PLEDGE_OF_MARA_OFFER, CA.MaraOffer)
 
     -- TODO: Allow these to use their default conditions if Saved Variable option for CA is not turned on
     local function GroupTypeChangedChatHook()
@@ -9396,9 +9397,9 @@ function CA.TradeInviteAccepted(eventCode)
         ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_TRADE_INVITE_ACCEPTED))
     end
 
-    EVENT_MANAGER:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
+    eventManager:UnregisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE)
     if CA.SV.Inventory.LootTrade then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
+        eventManager:RegisterForEvent(moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, CA.InventoryUpdate)
         g_inventoryStacks = {}
         CA.IndexInventory() -- Index Inventory
     end
@@ -9709,8 +9710,8 @@ function CA.SkillXPUpdate(eventCode, skillType, skillIndex, reason, rank, previo
             if CA.SV.Skills.SkillGuildThrottle > 0 and change <= 5 then
                 g_guildSkillThrottle = g_guildSkillThrottle + change
                 g_guildSkillThrottleLine = lineName
-                EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedRep")
-                EVENT_MANAGER:RegisterForUpdate(moduleName .. "BufferedRep", CA.SV.Skills.SkillGuildThrottle, CA.PrintBufferedGuildRep )
+                eventManager:UnregisterForUpdate(moduleName .. "BufferedRep")
+                eventManager:RegisterForUpdate(moduleName .. "BufferedRep", CA.SV.Skills.SkillGuildThrottle, CA.PrintBufferedGuildRep )
                 return
             end
 
@@ -9759,7 +9760,7 @@ function CA.PrintGuildRep(change, lineName, lineId, priority)
     -- We set this to skill gain, so as to avoid creating an entire additional chat message category (we want it to show after XP but before any other skill gains or level up so we place it on top of the level up priority).
     g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = priority }
     g_queuedMessagesCounter = g_queuedMessagesCounter + 1
-    EVENT_MANAGER:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
+    eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
 end
 
 function CA.PrintBufferedGuildRep()
@@ -9768,7 +9769,7 @@ function CA.PrintBufferedGuildRep()
         local lineName = g_guildSkillThrottleLine
         CA.PrintGuildRep(g_guildSkillThrottle, lineName, lineId, "EXPERIENCE LEVEL")
     end
-    EVENT_MANAGER:UnregisterForUpdate(moduleName .. "BufferedRep")
+    eventManager:UnregisterForUpdate(moduleName .. "BufferedRep")
     g_guildSkillThrottle = 0
     g_guildSkillThrottleLine = ""
 end
@@ -9889,5 +9890,5 @@ function CA.PrintQueuedMessages()
     -- Clear Messages and Unregister Print Event
     g_queuedMessages = { }
     g_queuedMessagesCounter = 1
-    EVENT_MANAGER:UnregisterForUpdate(moduleName .. "Printer")
+    eventManager:UnregisterForUpdate(moduleName .. "Printer")
 end
