@@ -143,7 +143,6 @@ SCB.D = {
     PromBuffTable                    = {},
     PromDebuffTable                  = {},
     BlacklistTable                   = {},
-
 }
 SCB.SV = nil
 
@@ -156,7 +155,6 @@ local g_lastCast             = 0 -- TODO: Remove once new ground target effect f
 local g_currentDuelTarget    = nil
 local g_effectsList          = { player1 = {}, player2 = {}, reticleover1 = {}, reticleover2 = {}, ground = {}, saved = {}, promb_ground = {}, promb_target = {}, promb_player = {}, promd_ground = {}, promd_target = {}, promd_player = {} }
 local g_pendingGroundAbility = nil
-
 
 -- Self resurrection tracking
 local g_playerActive = false
@@ -208,7 +206,6 @@ local function HasFailure( slotIndex )
     end
     return false
 end
-
 
 --[[
 -- Simple linear tweening - no easing, no acceleration
@@ -522,7 +519,6 @@ function SCB.Initialize( enabled )
             end
             -- Create table to store created contols for icons
             uiTlw[v].icons = {}
-
         end
     end
 
@@ -637,7 +633,9 @@ end
 
 -- Debug Display for Effect Events
 function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
-    if debugAuras[abilityId] and SCB.SV.ShowDebugFilter then return end
+    if debugAuras[abilityId] and SCB.SV.ShowDebugFilter then
+        return
+    end
 
     unitName = zo_strformat("<<t:1>>", unitName)
     if unitName == LUIE.PlayerNameFormatted then unitName = "Player" end
@@ -666,7 +664,6 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
 end
 
 function SCB.AddToCustomList(list, input)
-
     local id = tonumber(input)
     local listRef = list == SCB.SV.PromBuffTable and "Prominent Buffs." or list == SCB.SV.PromDebuffTable and "Prominent Debuffs." or list == SCB.SV.BlacklistTable and "Aura Blacklist." or ""
     if id and id > 0 then
@@ -687,13 +684,10 @@ function SCB.AddToCustomList(list, input)
             LUIE.PrintToChat(input .. " added to " .. listRef)
         end
     end
-
     SCB.Reset()
-
 end
 
 function SCB.RemoveFromCustomList(list, input)
-
     local id = tonumber(input)
     local listRef = list == SCB.SV.PromBuffTable and "Prominent Buffs." or list == SCB.SV.PromDebuffTable and "Prominent Debuffs." or list == SCB.SV.BlacklistTable and "Aura Blacklist." or ""
     if id and id > 0 then
@@ -714,9 +708,7 @@ function SCB.RemoveFromCustomList(list, input)
             LUIE.PrintToChat(input .. " removed from " .. listRef)
         end
     end
-
     SCB.Reset()
-
 end
 
 function SCB.DuelStart()
@@ -735,7 +727,6 @@ end
 function SCB.InitializeDisguise()
     g_effectsList.player1["DisguiseType"] = nil
     if g_currentDisguise ~= 0 and not SCB.SV.IgnoreDisguise then
-
         -- Don't show Monk's Disguise since it already has an aura, and don't show Guild Tabard
         if g_currentDisguise == 79332 or g_currentDisguise == 55262 then
             return
@@ -761,7 +752,6 @@ function SCB.DisguiseItem(eventCode, bagId, slotId, isNewItem, itemSoundCategory
         if g_currentDisguise == 0 then
             return
         elseif g_currentDisguise ~= 0 and not SCB.SV.IgnoreDisguise then
-
             -- Don't show Monk's Disguise since it already has an aura, and don't show Guild Tabard
             if g_currentDisguise == 79332 or g_currentDisguise == 55262 then
                 return
@@ -868,7 +858,6 @@ function SCB.SetIconsAlignment( value )
 end
 
 function SCB.SetIconsAlignmentProminentBuff ( value )
-
     if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
         value = SCB.D.ProminentBuffAlignment
     end
@@ -888,11 +877,9 @@ function SCB.SetIconsAlignmentProminentBuff ( value )
             end
         end
     end
-
 end
 
 function SCB.SetIconsAlignmentProminentDebuff ( value )
-
     if value ~= "Top" and value ~= "Middle" and value ~= "Bottom" then
         value = SCB.D.ProminentDebuffAlignment
     end
@@ -912,7 +899,6 @@ function SCB.SetIconsAlignmentProminentDebuff ( value )
             end
         end
     end
-
 end
 
 
@@ -1251,16 +1237,16 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
     buff.stack:SetHidden( true )
 
     if buff.name ~= nil then
-        buff.name:SetHidden(    not SCB.SV.ProminentLabel )
+        buff.name:SetHidden( not SCB.SV.ProminentLabel )
     end
 
     if buff.bar ~= nil then
-        buff.bar.backdrop:SetHidden(    not SCB.SV.ProminentProgress )
-        buff.bar.bar:SetHidden(         not SCB.SV.ProminentProgress )
+        buff.bar.backdrop:SetHidden( not SCB.SV.ProminentProgress )
+        buff.bar.bar:SetHidden( not SCB.SV.ProminentProgress )
     end
 
     if buff.cd ~= nil then
-        buff.cd:SetHidden(     not SCB.SV.RemainingCooldown )
+        buff.cd:SetHidden( not SCB.SV.RemainingCooldown )
         buff.iconbg:SetHidden( not SCB.SV.RemainingCooldown ) -- We do not need black icon background when there is no Cooldown control present
     end
 
@@ -1569,7 +1555,6 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
         if E.EffectGroundDisplay[abilityId] then
             if changeType ~= EFFECT_RESULT_FADED then
                 local duration = endTime - beginTime
-
                 local groundType = { }
                 groundType[1] = { info = E.EffectGroundDisplay[abilityId].buff, context = "player1", promB = "promb_player", promD = "promd_player", type = 1 }
                 groundType[2] = { info = E.EffectGroundDisplay[abilityId].debuff, context = "player2", promB = "promb_target", promD = "promd_target", type = BUFF_EFFECT_TYPE_DEBUFF }
@@ -1580,7 +1565,6 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 
                 for i = 1, 3 do
                     if groundType[i].info == true then
-
                         -- Set container context
                         local context
                         if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then
@@ -1697,7 +1681,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 
     local forcedType = E.EffectOverride[abilityId] and E.EffectOverride[abilityId].forcedContainer or nil
 
-    if unitTag == "reticleover" and abilityId == 92428 and not IsUnitPlayer('reticleover') then return end
+    if unitTag == "reticleover" and abilityId == 92428 and not IsUnitPlayer('reticleover') then
+        return
+    end
 
     -- Where the new icon will go into
     local context = unitTag .. effectType
@@ -1757,7 +1743,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
             end
         end
 
-        if E.EffectOverride[abilityId] and E.EffectOverride[abilityId].consolidate and SCB.SV.Consolidate then return end
+        if E.EffectOverride[abilityId] and E.EffectOverride[abilityId].consolidate and SCB.SV.Consolidate then
+            return
+        end
         -- If this effect doesn't properly display stacks - then add them.
         if E.EffectOverride[abilityId] and E.EffectOverride[abilityId].displayStacks then
             for context, effectsList in pairs( g_effectsList ) do
@@ -1786,7 +1774,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 end
 
 function SCB.ArtificialEffectUpdate(eventCode, effectId)
-    if effectId then g_effectsList.player1[effectId] = nil end
+    if effectId then
+        g_effectsList.player1[effectId] = nil
+    end
 
     for effectId in ZO_GetNextActiveArtificialEffectIdIter do
         local displayName, iconFile, effectType, _, startTime = GetArtificialEffectInfo(effectId)
@@ -1826,10 +1816,14 @@ local IsResultDamage = {
 
  -- Combat Event (Target = Player)
 function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
-    if not (E.FakeExternalBuffs[abilityId] or E.FakeExternalDebuffs[abilityId] or E.FakePlayerBuffs[abilityId] or E.FakeStagger[abilityId]) then return end
+    if not (E.FakeExternalBuffs[abilityId] or E.FakeExternalDebuffs[abilityId] or E.FakePlayerBuffs[abilityId] or E.FakeStagger[abilityId]) then
+        return
+    end
 
     -- If the action result isn't a starting/ending event then we ignore it.
-    if result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_GAINED and result ~= ACTION_RESULT_EFFECT_GAINED_DURATION and result ~= ACTION_RESULT_EFFECT_FADED then return end
+    if result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_GAINED and result ~= ACTION_RESULT_EFFECT_GAINED_DURATION and result ~= ACTION_RESULT_EFFECT_FADED then
+        return
+    end
 
     local unbreakable
     local stack
@@ -1840,7 +1834,9 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
     local effectType
 
     if E.EffectOverride[abilityId] then
-        if E.EffectOverride[abilityId].hideReduce and SCB.SV.HideReduce then return end
+        if E.EffectOverride[abilityId].hideReduce and SCB.SV.HideReduce then
+            return
+        end
         unbreakable = E.EffectOverride[abilityId].unbreakable or 0
         stack = E.EffectOverride[abilityId].stack or 0
         internalStack = E.EffectOverride[abilityId].internalStack or nil
@@ -1852,7 +1848,10 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
 
     -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by target)
     if E.FakeExternalBuffs[abilityId] and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
-        if E.FakeExternalBuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then return end -- Bail out if we ignore begin events
+        -- Bail out if we ignore begin events
+        if E.FakeExternalBuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
+            return
+        end
         g_effectsList.player1[ abilityId ] = nil
         iconName = E.FakeExternalBuffs[abilityId].icon
         effectName = E.FakeExternalBuffs[abilityId].name
@@ -1875,7 +1874,10 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
 
     -- Creates fake debuff icons for debuffs without an aura - These refresh on reapplication/removal (Applied on player by target)
     if E.FakeExternalDebuffs[abilityId] and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
-        if E.FakeExternalDebuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then return end -- Bail out if we ignore begin events
+        -- Bail out if we ignore begin events
+        if E.FakeExternalDebuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
+            return
+        end
 
         if internalStack then
             if g_effectsList.player2[abilityId] then
@@ -1920,7 +1922,10 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
 
     -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on player by player)
     if E.FakePlayerBuffs[abilityId] and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
-        if E.FakePlayerBuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then return end -- Bail out if we ignore begin events
+         -- Bail out if we ignore begin events
+        if E.FakePlayerBuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
+            return
+        end
         g_effectsList.player1[ abilityId ] = nil
         if abilityId == 973 and not SCB.SV.ShowSprint then
             return
@@ -1961,7 +1966,10 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
 
         -- Simulates fake debuff icons for stagger effects - works for both (target -> player) and (player -> target) - DOES NOT REFRESH - Only expiration condition is the timer
     if E.FakeStagger[abilityId] then
-        if E.FakeStagger[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then return end -- Bail out if we ignore begin events
+        -- Bail out if we ignore begin events
+        if E.FakeStagger[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
+            return
+        end
         iconName = E.FakeStagger[abilityId].icon
         effectName = E.FakeStagger[abilityId].name
         duration = E.FakeStagger[abilityId].duration
@@ -1981,14 +1989,17 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
 			}
         end
     end
-
 end
 
  -- Combat Event (Source = Player)
 function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityGraphic, abilityActionSlotType, sourceName, sourceType, targetName, targetType, hitValue, powerType, damageType, log, sourceUnitId, targetUnitId, abilityId )
-    if targetType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER_PET then return end
+    if targetType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER_PET then
+        return
+    end
 
-    if not (E.IsGroundMine[abilityName] or E.FakePlayerExternalBuffs[abilityId] or E.FakePlayerDebuffs[abilityId] or E.FakeStagger[abilityId]) then return end
+    if not (E.IsGroundMine[abilityName] or E.FakePlayerExternalBuffs[abilityId] or E.FakePlayerDebuffs[abilityId] or E.FakeStagger[abilityId]) then
+        return
+    end
 
     -- Try to remove effect like Ground Runes and Traps (we check this before we filter for other result types)
     if E.IsGroundMineDamage[abilityId] and IsResultDamage[result] and ( targetType == COMBAT_UNIT_TYPE_NONE or targetType == COMBAT_UNIT_TYPE_OTHER or targetType == COMBAT_UNIT_TYPE_GROUP) then
@@ -2019,7 +2030,9 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
     end
 
     -- If the action result isn't a starting/ending event then we ignore it.
-    if result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_GAINED and result ~= ACTION_RESULT_EFFECT_GAINED_DURATION and result ~= ACTION_RESULT_EFFECT_FADED then return end
+    if result ~= ACTION_RESULT_BEGIN and result ~= ACTION_RESULT_EFFECT_GAINED and result ~= ACTION_RESULT_EFFECT_GAINED_DURATION and result ~= ACTION_RESULT_EFFECT_FADED then
+        return
+    end
 
     local unbreakable
     local stack
@@ -2039,7 +2052,10 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
 
     -- Creates fake buff icons for buffs without an aura - These refresh on reapplication/removal (Applied on target by player)
     if E.FakePlayerExternalBuffs[abilityId] and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
-        if E.FakePlayerExternalBuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then return end -- Bail out if we ignore begin events
+        -- Bail out if we ignore begin events
+        if E.FakePlayerExternalBuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
+            return
+        end
         g_effectsList.reticleover1[ abilityId ] = nil
         if not DoesUnitExist("reticleover") then return end
         if GetUnitReaction("reticleover") == UNIT_REACTION_HOSTILE then return end
@@ -2071,7 +2087,10 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
 
     -- Creates fake debuff icons for debuffs without an aura - These refresh on reapplication/removal (Applied on target by player)
     if E.FakePlayerDebuffs[abilityId] and (sourceType == COMBAT_UNIT_TYPE_PLAYER or targetType == COMBAT_UNIT_TYPE_PLAYER) then
-        if E.FakePlayerDebuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then return end -- Bail out if we ignore begin events
+        -- Bail out if we ignore begin events
+        if E.FakePlayerDebuffs[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
+            return
+        end
         g_effectsList.reticleover2[ abilityId ] = nil
         if not DoesUnitExist("reticleover") then end
         --if GetUnitReaction("reticleover") ~= UNIT_REACTION_HOSTILE then return end
@@ -2116,7 +2135,10 @@ function SCB.OnCombatEventOut( eventCode, result, isError, abilityName, abilityG
 
     -- Simulates fake debuff icons for stagger effects - works for both (target -> player) and (player -> target) - DOES NOT REFRESH - Only expiration condition is the timer
     if E.FakeStagger[abilityId] then
-        if E.FakeStagger[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then return end -- Bail out if we ignore begin events
+        -- Bail out if we ignore begin events
+        if E.FakeStagger[abilityId].ignoreBegin and result == ACTION_RESULT_BEGIN then
+            return
+        end
         iconName = E.FakeStagger[abilityId].icon
         effectName = E.FakeStagger[abilityId].name
         duration = E.FakeStagger[abilityId].duration
@@ -2166,11 +2188,9 @@ function SCB.OnDeath(eventCode, unitTag, isDead)
     end
 end
 
---[[
- * Runs on the EVENT_TARGET_CHANGE listener.
- * This handler fires every time the someone target changes.
- * This function is needed in case the player teleports via Way Shrine
- ]]--
+-- Runs on the EVENT_TARGET_CHANGE listener.
+-- This handler fires every time the someone target changes.
+-- This function is needed in case the player teleports via Way Shrine
 function SCB.OnTargetChange(eventCode, unitTag)
     if unitTag ~= "player" then
         return
@@ -2186,7 +2206,6 @@ end
 
 -- Used to clear existing LET.effectsList.unitTag and to request game API to fill it again
 function SCB.ReloadEffects(unitTag)
-
     -- If unitTag was not provided, consider it as Player
     local unitTag = unitTag or "player"
 
@@ -2254,12 +2273,9 @@ function SCB.ReloadEffects(unitTag)
     end
 
     if unitTag == "reticleover" then
-
         for _, effectsList in pairs( {g_effectsList.ground, g_effectsList.saved} ) do
             --local container = containerRouting[context]
-
             for k, v in pairs(effectsList) do
-
                 if v.savedName ~= nil then
                     local UnitName = strformat(SI_UNIT_NAME, GetUnitName(unitTag))
                     if UnitName == v.savedName then
@@ -2335,7 +2351,6 @@ function SCB.ReloadEffects(unitTag)
 end
 
 function SCB.PlayerCombatState(eventCode, inCombat)
-
     if not SCB.SV.HideTargetBuffs then
         local unitName = GetUnitName('reticleover')
         if unitName == nil or unitName == "" then return end
@@ -2359,11 +2374,9 @@ end
 function SCB.NewEffects( ability )
     -- Get the time
     local currentTime = GetGameTimeMilliseconds()
-
     -- Try manually tracked effects first
     local effects = ability.effects
     if ( effects ~= nil ) then
-
         local groundType = { }
             groundType[1] = { context = "player1", promB = "promb_player", promD = "promd_player", type = 1 }
             groundType[2] = { context = "player2", promB = "promb_target", promD = "promd_target", type = BUFF_EFFECT_TYPE_DEBUFF }
@@ -2427,7 +2440,6 @@ function SCB.OnSlotAbilityUsed(eventCode, slotNum)
                 if not SCB.SV.HideGroundEffects then
                     SCB.NewEffects( ability )
                 end
-
                 -- Flag the last cast time
                 g_lastCast = currentTime
             end
@@ -2451,7 +2463,6 @@ function SCB.OnSlotUpdated(eventCode, slotNum)
 
     -- Get the slotted ability ID
     local ability_id = GetSlotBoundId(slotNum)
-
     -- Get additional ability information
     local abilityName = E.EffectOverride[ability_id] and E.EffectOverride[ability_id].name or GetAbilityName(ability_id) -- GetSlotName(slotNum)
     -- Localization ^^ here. We will use English name from here onwards.
@@ -2520,7 +2531,6 @@ end
 -- Runs OnUpdate - 100 ms buffer
 function SCB.OnUpdate(currentTime)
     -- local currentTime = GetGameTimeMilliseconds()
-
     local buffsSorted = {}
     local needs_update = {}
     local isProminent = {}
@@ -2541,13 +2551,10 @@ function SCB.OnUpdate(currentTime)
     -- Filter expired events. and build array for sorting
     for context, effectsList in pairs(g_effectsList) do
         local container = containerRouting[context]
-
         for k, v in pairs(effectsList) do
-
             -- Remove effect (that is not permanent and has duration)
             if v.ends ~= nil and v.dur > 0 and v.ends < currentTime then
                 effectsList[k] = nil
-
             -- Or append to correct container
             elseif container then
                 -- Add icons to to-be-sorted list only if effect already started
@@ -2569,11 +2576,9 @@ function SCB.OnUpdate(currentTime)
                         else
                             tableinsert(buffsSorted[container], v)
                         end
-
                     end
                 end
             end
-
         end
     end
 
@@ -2590,11 +2595,9 @@ function SCB.OnUpdate(currentTime)
             SCB.updateBar( currentTime, buffsSorted[container], container )
         end
     end
-
 end
 
 function SCB.updateBar( currentTime, sortedList, container )
-
     local iconsNum = #sortedList
     local istart, iend, istep
 
@@ -2622,7 +2625,6 @@ function SCB.updateBar( currentTime, sortedList, container )
     end
 
 end
-
 
 function SCB.updateIcons( currentTime, sortedList, container )
     -- Speial workaround for container with player long buffs. We do not need to update it every 100ms, but rather 3 times less often
