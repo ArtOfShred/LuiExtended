@@ -13,62 +13,59 @@ local moduleName    = LUIE.name .. "_CombatText"
 CT.Enabled  = false
 CT.D = {
     unlocked = false,
----------------------------------------------------------------------------------------------------------------------------------------
-    --//PANEL DEFAULTS//--
----------------------------------------------------------------------------------------------------------------------------------------
+    -- Panel Defaults
     panels = {
-    --Outgoing
+        -- Outgoing
         LUIE_CombatText_Outgoing = {
             point                   = CENTER,
             relativePoint           = CENTER,
             offsetX                 = 450,
             offsetY                 = -220,
-            dimensions              = { 400, 100 },
+            dimensions              = {400, 100},
         },
-    --Incoming
+        -- Incoming
         LUIE_CombatText_Incoming = {
             point                   = CENTER,
             relativePoint           = CENTER,
             offsetX                 = -450,
             offsetY                 = -220,
-            dimensions              = { 400, 100 },
+            dimensions              = {400, 100},
         },
-    --Alerts
+        -- Alerts
         LUIE_CombatText_Alert = {
             point                   = CENTER,
             relativePoint           = CENTER,
             offsetX                 = 0,
             offsetY                 = 250,
-            dimensions              = { 400, 100 },
+            dimensions              = {400, 100},
         },
-    --Points
+        -- Points
         LUIE_CombatText_Point = {
             point                   = CENTER,
             relativePoint           = CENTER,
             offsetX                 = 0,
             offsetY                 = -300,
-            dimensions              = { 400, 100 },
+            dimensions              = {400, 100},
         },
-    --Resources
+        -- Resources
         LUIE_CombatText_Resource = {
             point                   = CENTER,
             relativePoint           = CENTER,
             offsetX                 = 0,
             offsetY                 = 375,
-            dimensions              = { 400, 100 },
+            dimensions              = {400, 100},
         }
     },
----------------------------------------------------------------------------------------------------------------------------------------
-    --//TOGGLE DEFAULTS//--
----------------------------------------------------------------------------------------------------------------------------------------
-    toggles     = {
-    --General
+    -- Toggle Defaults
+    toggles = {
+        -- General
         inCombatOnly                = false,
         showThrottleTrailer         = true,
         throttleCriticals           = false,
-    ----------------------------------
-        incoming    = {
-    --Damage & Healing
+
+        -- Incoming
+        incoming = {
+            -- Damage & Healing
             showDamage              = true,
             showHealing             = true,
             showEnergize            = true,
@@ -76,7 +73,7 @@ CT.D = {
             showDrain               = true,
             showDot                 = true,
             showHot                 = true,
-    --Mitigation
+            -- Mitigation
             showMiss                = true,
             showImmune              = true,
             showParried             = true,
@@ -85,16 +82,17 @@ CT.D = {
             showDodged              = true,
             showBlocked             = true,
             showInterrupted         = true,
-    --Crowd Control
+            -- Crowd Control
             showDisoriented         = true,
             showFeared              = true,
             showOffBalanced         = true,
             showSilenced            = true,
             showStunned             = true,
         },
-    ----------------------------------
+
+        -- Outgoing
         outgoing    = {
-    --Damage & Healing
+            -- Damage & Healing
             showDamage              = true,
             showHealing             = true,
             showEnergize            = true,
@@ -102,7 +100,7 @@ CT.D = {
             showDrain               = true,
             showDot                 = true,
             showHot                 = true,
-    --Mitigation
+            -- Mitigation
             showMiss                = true,
             showImmune              = true,
             showParried             = true,
@@ -111,19 +109,19 @@ CT.D = {
             showDodged              = true,
             showBlocked             = true,
             showInterrupted         = true,
-    --Crowd Control
+            -- Crowd Control
             showDisoriented         = true,
             showFeared              = true,
             showOffBalanced         = true,
             showSilenced            = true,
             showStunned             = true,
         },
-    ----------------------------------
-    --Combat State
+
+        -- Combat State
         showInCombat                = true,
         showOutCombat               = true,
-    ----------------------------------
-    --Alerts
+
+        --Alerts
         showAlertMitigation         = true,
         mitigationType              = "Single Line",
         hideMitigation              = true,
@@ -148,41 +146,38 @@ CT.D = {
         showAlertExploit            = true,
         showAlertExecute            = false,
         hideIngameTips              = true,
-    ----------------------------------
-    --Points
+
+        -- Points
         showPointsAlliance          = false,
         showPointsExperience        = false,
         showPointsChampion          = false,
-    ----------------------------------
-    --Resources
+
+        -- Resources
         showLowHealth               = false,
         showLowStamina              = false,
         showLowMagicka              = false,
         showUltimate                = true,
         showPotionReady             = true,
         warningSound                = false,
-    ----------------------------------
-    --Colors
+
+        -- Colors
         criticalDamageOverride      = false,
         criticalHealingOverride     = false,
         incomingDamageOverride      = false,
     },
----------------------------------------------------------------------------------------------------------------------------------------
-    --//OTHER DEFAULTS//--
----------------------------------------------------------------------------------------------------------------------------------------
+
+    -- Other defaults
     healthThreshold                 = 35,
     magickaThreshold                = 35,
     staminaThreshold                = 35,
     executeThreshold                = 20,
     executeFrequency                = 8,
----------------------------------------------------------------------------------------------------------------------------------------
-    --//FONT DEFAULTS//--
----------------------------------------------------------------------------------------------------------------------------------------
+
+    -- Font defaults
     fontFace                        = [[Univers 67]],
     fontOutline                     = [[soft-shadow-thick]],
-    ----------------------------------
     fontSizes = {
-    --Combat
+        -- Combat
         damage                      = 32,
         damagecritical              = 32,
         healing                     = 32,
@@ -194,18 +189,16 @@ CT.D = {
         gainLoss                    = 32,
         mitigation                  = 32,
         crowdControl                = 26,
-    ----------------------------------
-    --Combat State, Points, Alerts & Resources
+        -- Combat State, Points, Alerts & Resources
         combatState                 = 24,
         alert                       = 32,
         point                       = 24,
         resource                    = 32,
     },
----------------------------------------------------------------------------------------------------------------------------------------
-    --//COLOR DEFAULTS//--
----------------------------------------------------------------------------------------------------------------------------------------
+
+    -- Color defaults
     colors = {
-    --Damage & Healing
+        -- Damage & Healing
         damage = {
             [DAMAGE_TYPE_NONE]      = { 1, 1, 1, 1 },
             [DAMAGE_TYPE_GENERIC]   = { 1, 1, 1, 1 },
@@ -229,8 +222,8 @@ CT.D = {
         criticalDamageOverride      = { 247/255, 244/255, 153/255, 1 },
         criticalHealingOverride     = { 0, 192/255, 0, 1 },
         incomingDamageOverride      = { 1, 0, 0, 1 },
-    ----------------------------------
-    --Mitigation
+
+        -- Mitigation
         miss                        = { 1, 1, 1, 1 },
         immune                      = { 1, 0, 0, 1 },
         parried                     = { 1, 1, 1, 1 },
@@ -239,19 +232,19 @@ CT.D = {
         dodged                      = { 1, 1, 50/255, 1 },
         blocked                     = { 1, 1, 1, 1 },
         interrupted                 = { 1, 1, 1, 1 },
-    ----------------------------------
-    --Crowd Control
+
+        -- Crowd Control
         disoriented                 = { 1, 1, 1, 1 },
         feared                      = { 1, 1, 1, 1 },
         offBalanced                 = { 1, 1, 1, 1 },
         silenced                    = { 1, 1, 1, 1 },
         stunned                     = { 1, 1, 1, 1 },
-    ----------------------------------
-    --Combat State
+
+        -- Combat State
         inCombat                    = { 1, 1, 1, 1 },
         outCombat                   = { 1, 1, 1, 1 },
-    ----------------------------------
-    --Alerts
+
+        -- Alerts
         alertCleanse                = { 1, 1, 1, 1 },
         alertBlock                  = { 1, 0, 0, 1 },
         alertExploit                = { 1, 1, 1, 1 },
@@ -261,24 +254,22 @@ CT.D = {
         alertExecute                = { 1, 1, 1, 1 },
         alertPower                  = { 1, 1, 1, 1 },
         alertDestroy                = { 1, 1, 1, 1 },
-    ----------------------------------
-    --Points
+
+        -- Points
         pointsAlliance              = { 0.235294, 0.784314, 0.313725, 1 },  --RGB(60, 200, 80)
         pointsExperience            = { 0.588235, 0.705882, 0.862745, 1 },  --RGB(150, 180, 220)
         pointsChampion              = { 0.784314, 0.784314, 0.627451, 1 },  --RGB(200, 200, 160)
-    ----------------------------------
-    --Resources
+
+        -- Resources
         lowHealth                   = { 0.901961, 0.196078, 0.098039, 1 },  --RGB(230, 50, 25)
         lowMagicka                  = { 0.137255, 0.588235, 0.784314, 1 },  --RGB(35, 150, 200)
         lowStamina                  = { 0.235294, 0.784314, 0.313725, 1 },  --RGB(60, 200, 80)
         ultimateReady               = { 0.862745, 1, 0.313725, 1 },         --RGB(220, 255, 80)
         potionReady                 = { 0.470588, 0.156863, 0.745098, 1 },  --RGB(120, 40, 190)
     },
----------------------------------------------------------------------------------------------------------------------------------------
-    --//FORMAT DEFAULTS//--
----------------------------------------------------------------------------------------------------------------------------------------
+    -- Format defaults
     formats = {
-    --Damage & Healing
+        --Damage & Healing
         damage                      = "%t %a",
         damagecritical              = "%t %a!",
         healing                     = "%t %a",
@@ -290,8 +281,8 @@ CT.D = {
         dotcritical                 = "%t %a!",
         hot                         = "%t %a",
         hotcritical                 = "%t %a!",
-    ----------------------------------
-    --Mitigation
+
+        -- Mitigation
         miss                        = GetString(SI_LUIE_CT_MISS_DEFAULT),
         immune                      = GetString(SI_LUIE_CT_IMMUNE_DEFAULT),
         parried                     = GetString(SI_LUIE_CT_PARRIED_DEFAULT),
@@ -300,19 +291,19 @@ CT.D = {
         dodged                      = GetString(SI_LUIE_CT_DODGED_DEFAULT),
         blocked                     = "*%t %a",
         interrupted                 = GetString(SI_LUIE_CT_INTERRUPTED_DEFAULT),
-    ----------------------------------
-    --Crowd Control
+
+        -- Crowd Control
         disoriented                 = GetString(SI_LUIE_LAM_CT_SHARED_DISORIENTED),
         feared                      = GetString(SI_LUIE_LAM_CT_SHARED_FEARED),
         offBalanced                 = GetString(SI_LUIE_LAM_CT_SHARED_OFF_BALANCE),
         silenced                    = GetString(SI_LUIE_LAM_CT_SHARED_SILENCED),
         stunned                     = GetString(SI_LUIE_LAM_CT_SHARED_STUNNED),
-    ----------------------------------
-    --Combat State
+
+        -- Combat State
         inCombat                    = GetString(SI_LUIE_CT_COMBAT_IN_DEFAULT),
         outCombat                   = GetString(SI_LUIE_CT_COMBAT_OUT_DEFAULT),
-    ----------------------------------
-    --Alerts
+
+        -- Alerts
         alertCleanse                = GetString(SI_LUIE_CT_CLEANSE_DEFAULT),
         alertBlock                  = GetString(SI_LUIE_CT_BLOCK_DEFAULT),
         alertBlockStagger           = GetString(SI_LUIE_CT_BLOCKSTAGGER_DEFAULT),
@@ -323,20 +314,19 @@ CT.D = {
         alertExecute                = GetString(SI_LUIE_CT_EXECUTE_DEFAULT),
         alertPower                  = GetString(SI_LUIE_CT_POWER_DEFAULT),
         alertDestroy                = GetString(SI_LUIE_CT_DESTROY_DEFAULT),
-    ----------------------------------
-    --Points
+
+        -- Points
         pointsAlliance              = "%a AP",
         pointsExperience            = "%a XP",
         pointsChampion              = "%a XP",
-    ----------------------------------
-    --Resources
+
+        -- Resources
         resource                    = "%t! (%a)",
         ultimateReady               = GetString(SI_LUIE_LAM_CT_SHARED_ULTIMATE_READY),
         potionReady                 = GetString(SI_LUIE_LAM_CT_SHARED_POTION_READY),
     },
----------------------------------------------------------------------------------------------------------------------------------------
-    --//ANIMATION DEFAULTS//--
----------------------------------------------------------------------------------------------------------------------------------------
+
+    -- Animation defaults
     animation = {
         animationType               = "ellipse",
         outgoingIcon                = "left",
@@ -350,9 +340,8 @@ CT.D = {
             speed                   = 4000,
         }
     },
----------------------------------------------------------------------------------------------------------------------------------------
-    --//THROTTLE DEFAULTS//--
----------------------------------------------------------------------------------------------------------------------------------------
+
+    -- Throttle defaults
     throttles   = {
         damage                      = 200,
         damagecritical              = 200,
@@ -377,17 +366,16 @@ local function SavePosition(panel)
     panelSettings.dimensions = dimensions
 end
 
----------------------------------------------------------------------------------------------------------------------------------------
-    --//ADDON LOADED//--
----------------------------------------------------------------------------------------------------------------------------------------
+-- Module initialization
 function CT.Initialize( enabled )
-
+    -- Load settings
     CT.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "CombatText", CT.D )
 
+    -- If User does not want the Combat Text then exit right here
     if not enabled then return end
     CT.Enabled = true
 
-    --Set panels to player configured settings
+    -- Set panels to player configured settings
     for k, s in pairs (LUIE.CombatText.SV.panels) do
         if _G[k] ~= nil then
             _G[k]:ClearAnchors()
@@ -401,17 +389,17 @@ function CT.Initialize( enabled )
         end
     end
 
-    --Allow mouse resizing of panels
+    -- Allow mouse resizing of panels
     LUIE_CombatText_Incoming:SetResizeHandleSize(MOUSE_CURSOR_RESIZE_NS)
     LUIE_CombatText_Outgoing:SetResizeHandleSize(MOUSE_CURSOR_RESIZE_NS)
 
-    --Pool Manager
+    -- Pool Manager
     local poolManager = LUIE.CombatTextPoolManager:New()
     for _, v in pairs(LUIE.CombatTextConstants.poolType) do -- Create a pool for each type
         poolManager:RegisterPool(v, LUIE.CombatTextPool:New(v))
     end
 
-    --Event Listeners
+    -- Event Listeners
     LUIE.CombatTextCombatEventListener:New()
     LUIE.CombatTextAlertEventListener:New()
     LUIE.CombatTextPointsAllianceEventListener:New()
@@ -421,7 +409,7 @@ function CT.Initialize( enabled )
     LUIE.CombatTextResourcesUltimateEventListener:New()
     LUIE.CombatTextResourcesPotionEventListener:New()
 
-    --Event Viewers
+    -- Event Viewers
     LUIE.CombatTextCombatCloudEventViewer:New(poolManager, LMP)
     LUIE.CombatTextCombatHybridEventViewer:New(poolManager, LMP)
     LUIE.CombatTextCombatScrollEventViewer:New(poolManager, LMP)
@@ -431,11 +419,10 @@ function CT.Initialize( enabled )
     LUIE.CombatTextPointEventViewer:New(poolManager, LMP)
     LUIE.CombatTextResourceEventViewer:New(poolManager, LMP)
 
-    --Hide ingame active combat tips
+    -- Hide ingame active combat tips
     ZO_ActiveCombatTips:SetHidden(LUIE.CombatText.SV.toggles.hideIngameTips)
 
     if LUIE.CombatText.SV.toggles.showAlertMitigation then
         SetSetting(SETTING_TYPE_ACTIVE_COMBAT_TIP, 0, ACT_SETTING_ALWAYS)
     end
-
 end
