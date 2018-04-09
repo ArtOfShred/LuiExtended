@@ -605,6 +605,12 @@ ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND",                 "Enable 
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND_TP",              "'/unfriend' 'name' Remove a player from friends.\n\t\t\t\t\tAlternate options: '/removefriend'")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE",                 "Enable ( /'removeignore' ) Remove Ignored")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE_TP",              "'/unignore' 'name' Remove a player from ignored.\n\t\t\t\t\tAlternate options: '/removeignore'")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_BANKER",                       "Enable ( '/banker' ) Banker")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_BANKER_TP",                    "'/banker' Summon the Banker.")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_MERCHANT",                     "Enable ( '/merchant' ) Merchant")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_MERCHANT_TP",                  "'/merchant' Summon the Merchant.")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_FENCE",                        "Enable ( '/fence' ) Fence")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_FENCE_TP",                     "'/fence' Summon the Fence.")
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -984,13 +984,13 @@ function SC.RegisterSlashCommands()
     if SC.SV.SlashCampaignQ then
         SLASH_COMMANDS["/campaign"]     = SlashCampaignQ
     end
-    if SC.SV.SlashCampaignQ then
+    if SC.SV.SlashBanker then
         SLASH_COMMANDS["/banker"]       = SlashBanker
     end
-    if SC.SV.SlashCampaignQ then
+    if SC.SV.SlashMerchant then
         SLASH_COMMANDS["/merchant"]     = SlashMerchant
     end
-    if SC.SV.SlashCampaignQ then
+    if SC.SV.SlashFence then
         SLASH_COMMANDS["/fence"]        = SlashFence
     end
 end
