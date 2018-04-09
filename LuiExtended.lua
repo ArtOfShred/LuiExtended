@@ -319,7 +319,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
             if self.lastSynergyName ~= synergyName then
                 PlaySound(SOUNDS.ABILITY_SYNERGY_READY)
 
-                self.action:SetText(zo_strformat(SI_USE_SYNERGY, synergyName))
+                self.action:SetText(strformat(SI_USE_SYNERGY, synergyName))
             end
 
             self.icon:SetTexture(iconFilename)
@@ -503,8 +503,8 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
             local rawName = GetAbilityName(abilityId)
             local icon = GetAbilityIcon(abilityId)
 
-            local plainName = zo_strformat(SI_ABILITY_NAME, rawName)
-            abilityData.name = isActive and plainName or zo_strformat(SI_ABILITY_NAME_AND_RANK, rawName, skillBuildRankIndex)
+            local plainName = strformat(SI_ABILITY_NAME, rawName)
+            abilityData.name = isActive and plainName or strformat(SI_ABILITY_NAME_AND_RANK, rawName, skillBuildRankIndex)
             abilityData.plainName = plainName
             abilityData.icon = icon
         end
