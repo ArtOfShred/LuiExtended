@@ -25,6 +25,7 @@ local sceneManager  = SCENE_MANAGER
 local windowManager = WINDOW_MANAGER
 
 local callLater     = zo_callLater
+local iconFormat    = zo_iconFormat
 
 local moduleName    = LUIE.name .. "_SpellCastBuffs"
 
@@ -672,7 +673,7 @@ function SCB.AddToCustomList(list, input)
     if id and id > 0 then
         local name = GetAbilityName(id)
         if name ~= nil then
-            local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
+            local icon = iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = true
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
             LUIE.PrintToChat(icon .. " [" .. id .. "] " .. name .. " added to " .. listRef)
@@ -696,7 +697,7 @@ function SCB.RemoveFromCustomList(list, input)
     if id and id > 0 then
         local name = GetAbilityName(id)
         if name ~= nil then
-            local icon = zo_iconFormat(GetAbilityIcon(id), 16, 16)
+            local icon = iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = nil
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
             LUIE.PrintToChat(icon .. " [" .. id .. "] " .. name .. " removed from " .. listRef)

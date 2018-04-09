@@ -22,6 +22,8 @@ local windowManager  = WINDOW_MANAGER
 local callLater      = zo_callLater
 local alert          = ZO_Alert
 local colorDef       = ZO_ColorDef
+local iconFormat     = zo_iconFormat
+local iconFormatInheritColor = zo_iconFormatInheritColor
 local localizeDecimalNum = ZO_LocalizeDecimalNumber
 
 local moduleName     = LUIE.name .. "_ChatAnnouncements"
@@ -1177,7 +1179,7 @@ function CA.GuildHeraldrySaved()
 
         local guildAlliance = GetGuildAlliance(id)
         local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-        local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+        local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
         local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
         if CA.SV.Social.GuildManageCA then
@@ -1196,7 +1198,7 @@ function CA.GuildRanksSaved(eventCode, guildId)
     local guildName = GetGuildName(guildId)
     local guildAlliance = GetGuildAlliance(guildId)
     local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
     local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
     if CA.SV.Social.GuildManageCA then
@@ -1226,9 +1228,9 @@ function CA.GuildRankSaved(eventCode, guildId, rankIndex)
     local guildName = GetGuildName(guildId)
     local guildAlliance = GetGuildAlliance(guildId)
     local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
     local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
-    local rankSyntax = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
+    local rankSyntax = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
     local rankSyntaxAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankName) or rankName
 
     if CA.SV.Social.GuildManageCA then
@@ -1243,7 +1245,7 @@ function CA.GuildTextChanged(eventCode, guildId)
     local guildName = GetGuildName(guildId)
     local guildAlliance = GetGuildAlliance(guildId)
     local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
     local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
     -- Depending on event code set message context.
     local messageString = eventCode == EVENT_GUILD_DESCRIPTION_CHANGED and SI_LUIE_CA_GUILD_DESCRIPTION_CHANGED or EVENT_GUILD_MOTD_CHANGED and SI_LUIE_CA_GUILD_MOTD_CHANGED or nil
@@ -1294,9 +1296,9 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
 
             local guildAlliance = GetGuildAlliance(id)
             local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-            local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+            local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
             local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
-            local rankSyntax = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
+            local rankSyntax = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
             local rankSyntaxAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankName) or rankName
 
             if guildName == name then
@@ -1342,9 +1344,9 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
 
             local guildAlliance = GetGuildAlliance(id)
             local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-            local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+            local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
             local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
-            local rankSyntax = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
+            local rankSyntax = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
             local rankSyntaxAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankName) or rankName
 
             if guildName == name then
@@ -1369,7 +1371,7 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
 
         local guildAlliance = GetGuildAlliance(id)
         local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-        local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+        local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
         local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
         if guildName == name then
@@ -1402,7 +1404,7 @@ function CA.GuildInviteAdded(eventCode, guildId, guildName, guildAlliance, invit
         displayNameLink = ZO_LinkHandler_CreateLink(inviterName, nil, DISPLAY_NAME_LINK_TYPE, inviterName)
     end
     local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+    local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
     local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
     if CA.SV.Social.GuildCA then
         printToChat(strformat(GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST), displayNameLink, guildNameAlliance))
@@ -1647,8 +1649,8 @@ function CA.ReadyCheckUpdate(eventCode)
         local message
         local alertText
         if playerRole ~= 0 then
-            local roleIconSmall = strformat("<<1>> ", zo_iconFormat(GetRoleIcon(playerRole), 16, 16)) or ""
-            local roleIconLarge =strformat("<<1>> ", zo_iconFormat(GetRoleIcon(playerRole), "100%", "100%")) or ""
+            local roleIconSmall = strformat("<<1>> ", iconFormat(GetRoleIcon(playerRole), 16, 16)) or ""
+            local roleIconLarge =strformat("<<1>> ", iconFormat(GetRoleIcon(playerRole), "100%", "100%")) or ""
             local roleString = GetString("SI_LFGROLE", playerRole)
             message = strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE), activityName, roleIconSmall, roleString )
             alertText = strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE), activityName, roleIconLarge, roleString )
@@ -1861,7 +1863,8 @@ function CA.OnCurrencyUpdate(eventCode, currency, currencyLocation, newValue, ol
         -- Send change info to the throttle printer and end function now if we throttle gold from loot.
         if not CA.SV.Currency.CurrencyGoldChange then return end
         if CA.SV.Currency.CurrencyGoldThrottle and (reason == 0 or reason == 13) then
-            -- NOTE: Unlike other throttle events, we used zo_callLater here because we have to make the call immediately (if some of the gold is looted after items, the message will appear after the loot if we don't use zo_callLater instead of a RegisterForUpdate)
+            -- NOTE: Unlike other throttle events, we used zo_callLater here because we have to make the call immediately
+            --(if some of the gold is looted after items, the message will appear after the loot if we don't use zo_callLater instead of a RegisterForUpdate)
             callLater( CA.CurrencyGoldThrottlePrinter, 50 )
             g_currencyGoldThrottleValue = g_currencyGoldThrottleValue + UpOrDown
             g_currencyGoldThrottleTotal = GetCarriedCurrencyAmount(1)
@@ -3388,7 +3391,7 @@ function CA.ItemPrinter(icon, stack, itemType, itemId, itemLink, receivedBy, log
         if not CA.ItemFilter(itemType, itemId, itemLink, false) then return end
     end
 
-    local formattedIcon = (CA.SV.Inventory.LootIcons and icon ~= "") and strformat("<<1>> ", zo_iconFormat(icon, 16, 16)) or ""
+    local formattedIcon = (CA.SV.Inventory.LootIcons and icon ~= "") and strformat("<<1>> ", iconFormat(icon, 16, 16)) or ""
     local color
     if gainOrLoss == 1 then
         color = CurrencyUpColorize:ToHex()
@@ -3508,7 +3511,7 @@ function CA.ResolveItemMessage(message, formattedRecipient, color, logPrefix, to
     if not groupLoot then
         -- Adds additional string for previous variant of an item when an item is upgraded.
         if logPrefix == CA.SV.ContextMessages.CurrencyMessageUpgrade and g_oldItem ~= nil and g_oldItem.itemLink ~= "" then
-            local formattedIcon = (CA.SV.Inventory.LootIcons and g_oldItem.icon ~= "") and strformat("<<1>> ", zo_iconFormat(g_oldItem.icon, 16, 16)) or ""
+            local formattedIcon = (CA.SV.Inventory.LootIcons and g_oldItem.icon ~= "") and strformat("<<1>> ", iconFormat(g_oldItem.icon, 16, 16)) or ""
             local formattedMessageUpgrade = ("|r" .. formattedIcon .. g_oldItem.itemLink .. "|c" .. color)
             formattedMessageP1 = ("|r" .. message .. "|c" .. color)
             formattedMessageP2 = strfmt(logPrefix, formattedMessageUpgrade, formattedMessageP1)
@@ -5993,7 +5996,7 @@ function CA.HookFunction()
             local guild = GuildIndexData[i]
             if guild.name == guildName then
                 local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guild.guildAlliance) or GuildColorize
-                local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guild.guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+                local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guild.guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
                 local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guild.guildAlliance), "100%", "100%", guildName) or guildName
                 local messageString = (ShouldDisplaySelfKickedFromGuildAlert(guildId)) and SI_GUILD_SELF_KICKED_FROM_GUILD or SI_LUIE_CA_GUILD_LEAVE_SELF
                 local sound = (ShouldDisplaySelfKickedFromGuildAlert(guildId)) and SOUNDS.GENERAL_ALERT_ERROR or SOUNDS.GUILD_SELF_LEFT
@@ -6470,7 +6473,7 @@ function CA.HookFunction()
                         stringPart1 = ""
                     end
                     if textureName ~= "" and textureName ~= nil then
-                        formattedIcon = CA.SV.Lorebooks.LorebookIcon and strformat("<<1>> ", zo_iconFormatInheritColor(textureName, 16, 16)) or ""
+                        formattedIcon = CA.SV.Lorebooks.LorebookIcon and strformat("<<1>> ", iconFormatInheritColor(textureName, 16, 16)) or ""
                     end
                     if CA.SV.Lorebooks.LorebookCategory then
                         stringPart2 = LorebookColorize2:Colorize(strformat(SI_LORE_LIBRARY_COLLECTION_COMPLETED_SMALL, collectionName))
@@ -6600,7 +6603,7 @@ function CA.HookFunction()
         local icon = select(4, ZO_Skills_GetIconsForSkillType(skillType))
 
         if CA.SV.Skills.SkillLineUnlockCA then
-            local formattedIcon = CA.SV.Skills.SkillLineIcon and strformat("<<1>> ", zo_iconFormatInheritColor(icon, 16, 16)) or ""
+            local formattedIcon = CA.SV.Skills.SkillLineIcon and strformat("<<1>> ", iconFormatInheritColor(icon, 16, 16)) or ""
             local formattedString = SkillLineColorize:Colorize(strformat(SI_LUIE_CA_SKILL_LINE_ADDED, formattedIcon, lineName))
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "SKILL GAIN" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
@@ -6608,17 +6611,17 @@ function CA.HookFunction()
 
         end
 
-        local discoverIcon = zo_iconFormat(icon, 32, 32)
+        local discoverIcon = iconFormat(icon, 32, 32)
         if CA.SV.Skills.SkillLineUnlockCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.SKILL_LINE_ADDED)
-            local formattedIcon = zo_iconFormat(icon, 32, 32)
+            local formattedIcon = iconFormat(icon, 32, 32)
             messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_SKILL_POINTS_PARTIAL_GAINED)
             messageParams:SetText(strformat(SI_SKILL_LINE_ADDED, formattedIcon, lineName))
             CENTER_SCREEN_ANNOUNCE:AddMessageWithParams(messageParams)
         end
 
         if CA.SV.Skills.SkillLineUnlockAlert then
-            local formattedIcon = zo_iconFormat(icon, "75%", "75%")
+            local formattedIcon = iconFormat(icon, "75%", "75%")
             local text = strformat(SI_SKILL_LINE_ADDED, formattedIcon, lineName)
             alert(UI_ALERT_CATEGORY_ALERT, nil, text)
         end
@@ -6870,7 +6873,7 @@ function CA.HookFunction()
                 questNameFormatted = (strformat("|c<<1>><<2>>|r", QuestColorQuestNameColorize:ToHex(), questName))
             end
             if iconTexture and CA.SV.Quests.QuestIcon then
-                formattedString = strfmt(GetString(SI_LUIE_CA_QUEST_ACCEPT) .. zo_iconFormat(iconTexture, 16, 16) .. " " .. questNameFormatted)
+                formattedString = strfmt(GetString(SI_LUIE_CA_QUEST_ACCEPT) .. iconFormat(iconTexture, 16, 16) .. " " .. questNameFormatted)
             else
                 formattedString = strfmt("%s%s", GetString(SI_LUIE_CA_QUEST_ACCEPT), questNameFormatted)
             end
@@ -6883,7 +6886,7 @@ function CA.HookFunction()
         if CA.SV.Quests.QuestAcceptCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.QUEST_ACCEPTED)
             if iconTexture then
-                messageParams:SetText(strformat(SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName))
+                messageParams:SetText(strformat(SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON, iconFormat(iconTexture, "75%", "75%"), questName))
             else
                 messageParams:SetText(strformat(SI_NOTIFYTEXT_QUEST_ACCEPT, questName))
             end
@@ -6894,7 +6897,7 @@ function CA.HookFunction()
         if CA.SV.Quests.QuestAcceptAlert then
             local alertString
             if iconTexture and CA.SV.Quests.QuestIcon then
-                alertString = strformat(SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
+                alertString = strformat(SI_LUIE_CA_QUEST_ACCEPT_WITH_ICON, iconFormat(iconTexture, "75%", "75%"), questName)
             else
                 alertString = strformat(SI_NOTIFYTEXT_QUEST_ACCEPT, questName)
             end
@@ -6924,7 +6927,7 @@ function CA.HookFunction()
         if CA.SV.Quests.QuestCompleteCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.QUEST_COMPLETED)
             if iconTexture then
-                messageParams:SetText(strformat(SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName))
+                messageParams:SetText(strformat(SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON, iconFormat(iconTexture, "75%", "75%"), questName))
             else
                 messageParams:SetText(strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questName))
             end
@@ -6938,7 +6941,7 @@ function CA.HookFunction()
         if CA.SV.Quests.QuestCompleteAlert then
             local alertString
             if iconTexture and CA.SV.Quests.QuestIcon then
-                alertString = strformat(SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
+                alertString = strformat(SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON, iconFormat(iconTexture, "75%", "75%"), questName)
             else
                 alertString = strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questName)
             end
@@ -6949,7 +6952,7 @@ function CA.HookFunction()
             local questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
             local formattedString
             if iconTexture and CA.SV.Quests.QuestIcon then
-                formattedString = strformat(SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON, zo_iconFormat(iconTexture, 16, 16), questNameFormatted)
+                formattedString = strformat(SI_LUIE_CA_QUEST_COMPLETE_WITH_ICON, iconFormat(iconTexture, 16, 16), questNameFormatted)
             else
                 formattedString = strformat(SI_NOTIFYTEXT_QUEST_COMPLETE, questNameFormatted)
             end
@@ -7165,7 +7168,7 @@ function CA.HookFunction()
                     local questNameFormatted = (strformat("|cFFA500<<1>>|r", questName))
                     local formattedString
                     if iconTexture and CA.SV.Quests.QuestIcon then
-                        formattedString = strformat(SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON, zo_iconFormat(iconTexture, 16, 16), questNameFormatted)
+                        formattedString = strformat(SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON, iconFormat(iconTexture, 16, 16), questNameFormatted)
                     else
                         formattedString = strformat(SI_LUIE_CA_QUEST_ABANDONED, questNameFormatted)
                     end
@@ -7177,7 +7180,7 @@ function CA.HookFunction()
                 if CA.SV.Quests.QuestAbandonCSA then
                     local formattedString
                     if iconTexture then
-                        formattedString = strformat(SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
+                        formattedString = strformat(SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON, iconFormat(iconTexture, "75%", "75%"), questName)
                     else
                         formattedString = strformat(SI_LUIE_CA_QUEST_ABANDONED, questName)
                     end
@@ -7190,7 +7193,7 @@ function CA.HookFunction()
                 if CA.SV.Quests.QuestAbandonAlert then
                     local formattedString
                     if iconTexture and CA.SV.Quests.QuestIcon then
-                        formattedString = strformat(SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON, zo_iconFormat(iconTexture, "75%", "75%"), questName)
+                        formattedString = strformat(SI_LUIE_CA_QUEST_ABANDONED_WITH_ICON, iconFormat(iconTexture, "75%", "75%"), questName)
                     else
                         formattedString = strformat(SI_LUIE_CA_QUEST_ABANDONED, questName)
                     end
@@ -7378,9 +7381,9 @@ function CA.HookFunction()
             if CA.SV.XP.ExperienceLevelUpCA then
                 local icon
                 if CA.SV.XP.ExperienceLevelColorByLevel then
-                    icon = CA.SV.XP.ExperienceLevelUpIcon and ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(" " .. zo_iconFormatInheritColor("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)) or ""
+                    icon = CA.SV.XP.ExperienceLevelUpIcon and ZO_XP_BAR_GRADIENT_COLORS[2]:Colorize(" " .. iconFormatInheritColor("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)) or ""
                 else
-                    icon = CA.SV.XP.ExperienceLevelUpIcon and (" " .. zo_iconFormat("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)) or ""
+                    icon = CA.SV.XP.ExperienceLevelUpIcon and (" " .. iconFormat("LuiExtended/media/unitframes/unitframes_level_normal.dds", 16, 16)) or ""
                 end
 
                 local CurrentLevelFormatted = ""
@@ -7402,7 +7405,7 @@ function CA.HookFunction()
             end
 
             if CA.SV.XP.ExperienceLevelUpCSA then
-                local iconCSA = (" " .. zo_iconFormat("LuiExtended/media/unitframes/unitframes_level_up.dds", "100%", "100%")) or ""
+                local iconCSA = (" " .. iconFormat("LuiExtended/media/unitframes/unitframes_level_up.dds", "100%", "100%")) or ""
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.LEVEL_UP)
                 if CA.SV.XP.ExperienceLevelUpCSAExpand then
                     local levelUpExpanded = strformat("<<1>><<2>> <<3>> <<4>>", GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), iconCSA, GetString(SI_GAMEPAD_QUEST_JOURNAL_QUEST_LEVEL), CurrentLevel)
@@ -7420,7 +7423,7 @@ function CA.HookFunction()
             end
 
             if CA.SV.XP.ExperienceLevelUpAlert then
-                local iconAlert = CA.SV.XP.ExperienceLevelUpIcon and (" " .. zo_iconFormat("LuiExtended/media/unitframes/unitframes_level_up.dds", "75%", "75%")) or ""
+                local iconAlert = CA.SV.XP.ExperienceLevelUpIcon and (" " .. iconFormat("LuiExtended/media/unitframes/unitframes_level_up.dds", "75%", "75%")) or ""
                 local text = strformat("<<1>><<2>> <<3>> <<4>>!", GetString(SI_LUIE_CA_LVL_ANNOUNCE_XP), iconAlert, GetString(SI_GAMEPAD_QUEST_JOURNAL_QUEST_LEVEL), CurrentLevel)
                 alert(UI_ALERT_CATEGORY_ALERT, nil, text)
             end
@@ -7612,7 +7615,7 @@ function CA.HookFunction()
         local icon = GetChampionPointsIcon()
 
         if CA.SV.XP.ExperienceLevelUpCA then
-            local formattedIcon = CA.SV.XP.ExperienceLevelUpIcon and strformat("<<1>> ", zo_iconFormatInheritColor(icon, 16, 16)) or ""
+            local formattedIcon = CA.SV.XP.ExperienceLevelUpIcon and strformat("<<1>> ", iconFormatInheritColor(icon, 16, 16)) or ""
             local formattedString = ExperienceLevelUpColorize:Colorize(strformat("<<1>>!", GetString(SI_CHAMPION_ANNOUNCEMENT_UNLOCKED), formattedIcon))
             g_queuedMessages[g_queuedMessagesCounter] = { message = formattedString, type = "EXPERIENCE LEVEL" }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
@@ -7621,7 +7624,7 @@ function CA.HookFunction()
 
         if CA.SV.XP.ExperienceLevelUpCSA then
             local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.CHAMPION_POINT_GAINED)
-            local formattedIcon = strformat("<<1>> ", zo_iconFormat(icon, "100%", "100%"))
+            local formattedIcon = strformat("<<1>> ", iconFormat(icon, "100%", "100%"))
             messageParams:SetText(strformat(SI_CHAMPION_ANNOUNCEMENT_UNLOCKED, formattedIcon))
             if not LUIE.SV.HideXPBar then
                 if wasChampionSystemUnlocked then
@@ -7649,7 +7652,7 @@ function CA.HookFunction()
         end
 
         if CA.SV.XP.ExperienceLevelUpAlert then
-            local formattedIcon = CA.SV.XP.ExperienceLevelUpIcon and strformat("<<1>> ", zo_iconFormat(icon, "75%", "75%")) or ""
+            local formattedIcon = CA.SV.XP.ExperienceLevelUpIcon and strformat("<<1>> ", iconFormat(icon, "75%", "75%")) or ""
             local text = strformat("<<1>>!", GetString(SI_CHAMPION_ANNOUNCEMENT_UNLOCKED, formattedIcon))
             alert(UI_ALERT_CATEGORY_ALERT, nil, text)
         end
@@ -7690,7 +7693,7 @@ function CA.HookFunction()
             for pointType,amount in pairs(championPointsByType) do
                 if amount > 0 then
                     local icon = GetChampionPointAttributeHUDIcon(pointType)
-                    local formattedIcon = CA.SV.XP.ExperienceLevelUpIcon and strformat(" <<1>>", zo_iconFormat(icon, 16, 16)) or ""
+                    local formattedIcon = CA.SV.XP.ExperienceLevelUpIcon and strformat(" <<1>>", iconFormat(icon, 16, 16)) or ""
                     local constellationGroupName = ZO_Champion_GetUnformattedConstellationGroupNameFromAttribute(pointType)
                     if CA.SV.XP.ExperienceLevelColorByLevel then
                         formattedString = ZO_CP_BAR_GRADIENT_COLORS[pointType][2]:Colorize(strformat(SI_LUIE_CHAMPION_POINT_TYPE, amount, formattedIcon, constellationGroupName))
@@ -7895,7 +7898,7 @@ function CA.HookFunction()
         -- Display CA
         if CA.SV.Group.GroupRaidCA then
             local formattedName = strformat("|cFEFEFE<<1>>|r", raidName)
-            local vitalityCounterString = strformat("<<1>> <<2>>/<<3>>", zo_iconFormatInheritColor("esoui/art/trials/vitalitydepletion.dds", 16, 16), currentCount, maxCount )
+            local vitalityCounterString = strformat("<<1>> <<2>>/<<3>>", iconFormatInheritColor("esoui/art/trials/vitalitydepletion.dds", 16, 16), currentCount, maxCount )
             local finalScore = ZO_DEFAULT_ENABLED_COLOR:Colorize(score)
             vitalityBonus = ZO_DEFAULT_ENABLED_COLOR:Colorize(vitalityBonus)
             if currentCount == 0 then
@@ -8000,12 +8003,12 @@ function CA.HookFunction()
         end
         if countDelta < 0 then
             if CA.SV.Group.GroupRaidReviveCA then
-                local iconCA = zo_iconFormat("EsoUI/Art/Trials/VitalityDepletion.dds", 16, 16)
+                local iconCA = iconFormat("EsoUI/Art/Trials/VitalityDepletion.dds", 16, 16)
                 printToChat(strformat(SI_LUIE_CA_GROUP_REVIVE_COUNTER_UPDATED, iconCA))
             end
 
             if CA.SV.Group.GroupRaidReviveCSA then
-                local iconCSA = zo_iconFormat("EsoUI/Art/Trials/VitalityDepletion.dds", "100%", "100%")
+                local iconCSA = iconFormat("EsoUI/Art/Trials/VitalityDepletion.dds", "100%", "100%")
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, SOUNDS.RAID_TRIAL_COUNTER_UPDATE)
                 messageParams:SetText(strformat(SI_LUIE_CA_GROUP_REVIVE_COUNTER_UPDATED, iconCSA))
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RAID_TRIAL)
@@ -8013,7 +8016,7 @@ function CA.HookFunction()
             end
 
             if CA.SV.Group.GroupRaidReviveAlert then
-                local iconAlert = zo_iconFormat("EsoUI/Art/Trials/VitalityDepletion.dds", "75%", "75%")
+                local iconAlert = iconFormat("EsoUI/Art/Trials/VitalityDepletion.dds", "75%", "75%")
                 alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_GROUP_REVIVE_COUNTER_UPDATED, iconAlert) )
             end
 
@@ -8046,13 +8049,13 @@ function CA.HookFunction()
 
             -- Display CA
             if CA.SV.Group.GroupRaidScoreCA then
-                local iconCA = zo_iconFormat(reasonAssets.icon, 16, 16)
+                local iconCA = iconFormat(reasonAssets.icon, 16, 16)
                 printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_SCORE_UPDATED, iconCA, scoreAmount))
             end
 
             -- Display CSA
             if CA.SV.Group.GroupRaidScoreCSA then
-                local iconCSA = zo_iconFormat(reasonAssets.icon, "100%", "100%")
+                local iconCSA = iconFormat(reasonAssets.icon, "100%", "100%")
                 local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_LARGE_TEXT, reasonAssets.soundId)
                 messageParams:SetText(strformat(SI_LUIE_CA_GROUP_TRIAL_SCORE_UPDATED, iconCSA, scoreAmount))
                 messageParams:SetCSAType(CENTER_SCREEN_ANNOUNCE_TYPE_RAID_TRIAL)
@@ -8061,7 +8064,7 @@ function CA.HookFunction()
 
             -- Display Alert
             if CA.SV.Group.GroupRaidScoreAlert then
-                local iconAlert = zo_iconFormat(reasonAssets.icon, "75%", "75%")
+                local iconAlert = iconFormat(reasonAssets.icon, "75%", "75%")
                 alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_GROUP_TRIAL_SCORE_UPDATED, iconAlert, scoreAmount) )
             end
 
@@ -9210,7 +9213,7 @@ function CA.HookFunction()
             if guildName == name then
                 local guildAlliance = GetGuildAlliance(id)
                 local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-                local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+                local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
                 local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
                 if CA.SV.Social.GuildCA then
@@ -9246,7 +9249,7 @@ function CA.HookFunction()
             if guildName == name then
                 local guildAlliance = GetGuildAlliance(id)
                 local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-                local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+                local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
                 local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
                 if CA.SV.Social.GuildCA then
@@ -9281,7 +9284,7 @@ function CA.HookFunction()
         local guildName = GetGuildName(guildId)
         local guildAlliance = GetGuildAlliance(guildId)
         local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
-        local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", zo_iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
+        local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
         local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
         if IsConsoleUI() then
@@ -9650,7 +9653,7 @@ function CA.DuelStarted(eventCode)
     -- Display CA
     if CA.SV.Social.DuelStartCA or CA.SV.Social.DuelStartAlert then
         local message
-        local formattedIcon = zo_iconFormat("EsoUI/Art/HUD/HUD_Countdown_Badge_Dueling.dds", 16, 16)
+        local formattedIcon = iconFormat("EsoUI/Art/HUD/HUD_Countdown_Badge_Dueling.dds", 16, 16)
         if CA.SV.Social.DuelStartOptions == 1 then
             message = strformat(GetString(SI_LUIE_CA_DUEL_STARTED_WITH_ICON), formattedIcon)
         elseif CA.SV.Social.DuelStartOptions == 2 then
@@ -9746,7 +9749,7 @@ function CA.PrintGuildRep(change, lineName, lineId, priority)
         [118] = SkillGuildColorizeDB,
     }
 
-    local icon = zo_iconFormatInheritColor(GUILD_SKILL_ICONS[lineId], 16, 16)
+    local icon = iconFormatInheritColor(GUILD_SKILL_ICONS[lineId], 16, 16)
     local formattedIcon = CA.SV.Skills.SkillGuildIcon and (icon .. " ") or ""
 
     local guildString = strformat(CA.SV.Skills.SkillGuildRepName, change)

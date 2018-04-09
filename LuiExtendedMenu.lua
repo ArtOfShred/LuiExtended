@@ -5,6 +5,8 @@ local mathrandom    = math.random
 local unpack        = unpack
 local pairs         = pairs
 
+local iconFormat    = zo_iconFormat
+
 -- Create Settings Menu
 function LUIE_CreateSettings()
     -- Load LibAddonMenu
@@ -55,7 +57,7 @@ function LUIE_CreateSettings()
             counter = counter + 1
             -- If the input is a numeric value then we can pull this abilityId's info.
             if type(id) == "number" then
-                options[counter] = zo_iconFormat(GetAbilityIcon(id), 16, 16) .. " [" .. id .. "] " .. GetAbilityName(id)
+                options[counter] = iconFormat(GetAbilityIcon(id), 16, 16) .. " [" .. id .. "] " .. GetAbilityName(id)
             -- If the input is not numeric then add this as a name only.
             else
                 options[counter] = id
