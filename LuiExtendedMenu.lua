@@ -1927,7 +1927,6 @@ function LUIE_CreateSettings()
                 type = "description",
                 text = GetString(SI_LUIE_LAM_BUFF_PROM_DESCRIPTION),
             },
-
 			{
                 -- Prominent Buffs Label Toggle
                 type = "checkbox",
@@ -1939,7 +1938,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentLabel,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-
 			{
                 -- Prominent Buffs Label Font Face
                 type = "dropdown",
@@ -1954,7 +1952,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentLabelFontFace,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentLabel ) end,
             },
-
             {
                 -- Prominent Buffs Label Font Size
                 type = "slider",
@@ -1967,7 +1964,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentLabelFontSize,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentLabel ) end,
             },
-
             {
                 -- Prominent Buffs Label Font Style
                 type = "dropdown",
@@ -1981,7 +1977,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentLabelFontStyle,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentLabel ) end,
             },
-
 			{
                 -- Prominent Buffs Progress Bar
                 type = "checkbox",
@@ -1993,7 +1988,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentProgress,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-
             {
                 -- Prominent Buffs Progress Bar Texture
                 type = "dropdown",
@@ -2008,7 +2002,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentProgressTexture,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
             },
-
 			{
                 -- Prominent Buffs Gradient Color 1
                 type    = "colorpicker",
@@ -2020,7 +2013,6 @@ function LUIE_CreateSettings()
                 default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1[3]},
 				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
             },
-
 			{
                 -- Prominent Buffs Gradient Color 2
                 type    = "colorpicker",
@@ -2032,7 +2024,6 @@ function LUIE_CreateSettings()
                 default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2[3]},
 				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
             },
-
 			{
                 -- Prominent Debuffs Gradient Color 1
                 type    = "colorpicker",
@@ -2044,7 +2035,6 @@ function LUIE_CreateSettings()
                 default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1[3]},
 				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
             },
-
 			{
                 -- Prominent Debuffs Gradient Color 2
                 type    = "colorpicker",
@@ -2056,7 +2046,6 @@ function LUIE_CreateSettings()
                 default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2[3]},
 				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
             },
-
 			{
 				-- Prominent Buffs Label/Progress Bar Direction
                 type = "dropdown",
@@ -2070,7 +2059,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentBuffLabelDirection,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and (LUIE.SpellCastBuffs.SV.ProminentLabel or LUIE.SpellCastBuffs.SV.ProminentProgress) ) end,
             },
-
 			{
 				-- Prominent Debuffs Label/Progress Bar Direction
                 type = "dropdown",
@@ -2084,7 +2072,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentDebuffLabelDirection,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and (LUIE.SpellCastBuffs.SV.ProminentLabel or LUIE.SpellCastBuffs.SV.ProminentProgress) ) end,
             },
-
             {
 				-- Prominent Buffs Alignment
                 type = "dropdown",
@@ -2098,7 +2085,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentBuffAlignment,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-
 			{
 				-- Prominent Debuffs Alignment
                 type = "dropdown",
@@ -2112,7 +2098,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentDebuffAlignment,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-
             {
                 -- Prominent Buffs Reverse Sort Order
                 type = "checkbox",
@@ -2124,7 +2109,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentBuffReverseSort,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-
 			{
                 -- Prominent Debuffs Reverse Sort Order
                 type = "checkbox",
@@ -2136,12 +2120,10 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentDebuffReverseSort,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-
             {
                 type = "description",
                 text = GetString(SI_LUIE_LAM_BUFF_PROM_DIALOGUE_DESCRIPT),
             },
-
             {
                 -- Prominent Buffs List (Add)
                 type = "editbox",
@@ -2152,7 +2134,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
 
             },
-
             {
                 -- Prominent Buffs List (Remove)
                 type = "dropdown",
@@ -2167,7 +2148,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
                 reference = "LUIE_Prominent_Buffs_List"
             },
-
             {
                 -- Prominent Debuffs List (Add)
                 type = "editbox",
@@ -2178,7 +2158,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
 
             },
-
             {
                 -- Prominent Debuffs List (Remove)
                 type = "dropdown",
@@ -2200,13 +2179,10 @@ function LUIE_CreateSettings()
         type = "submenu",
         name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_HEADER),
         controls = {
-
-        -- Buffs & Debuffs Blacklist Description
-            {
+            {   -- Buffs & Debuffs Blacklist Description
                 type = "description",
                 text = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT),
             },
-
             {
                 -- Buffs & Debuffs Blacklist (Add)
                 type = "editbox",
@@ -2217,7 +2193,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
 
             },
-
             {
                 -- Buffs & Debuffs Blacklist (Remove)
                 type = "dropdown",
@@ -2232,9 +2207,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
                 reference = "LUIE_Blacklist"
             },
-
         },
-
     }
 
     -- Debug Options
