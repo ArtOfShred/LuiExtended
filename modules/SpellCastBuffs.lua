@@ -22,6 +22,7 @@ local ipairs        = ipairs
 
 local eventManager  = EVENT_MANAGER
 local sceneManager  = SCENE_MANAGER
+local windowManager = WINDOW_MANAGER
 
 local callLater     = zo_callLater
 
@@ -1403,7 +1404,7 @@ function SCB.CreateSingleIcon(container, AnchorItem, effectType)
     buff.stack:SetAnchor(CENTER, buff, TOPRIGHT, -g_padding * 3, g_padding * 3)
     -- Cooldown circular control
     if buff.iconbg ~= nil then
-        buff.cd = WINDOW_MANAGER:CreateControl(nil, buff, CT_COOLDOWN)
+        buff.cd = windowManager:CreateControl(nil, buff, CT_COOLDOWN)
         buff.cd:SetAnchor( TOPLEFT, buff, TOPLEFT, 1, 1 )
         buff.cd:SetAnchor( BOTTOMRIGHT, buff, BOTTOMRIGHT, -1, -1 )
         buff.cd:SetDrawLayer(DL_BACKGROUND)

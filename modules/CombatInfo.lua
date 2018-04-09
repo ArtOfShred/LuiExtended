@@ -14,6 +14,8 @@ local unpack        = unpack
 local pairs         = pairs
 
 local eventManager  = EVENT_MANAGER
+local windowManager = WINDOW_MANAGER
+
 local callLater     = zo_callLater
 
 local moduleName    = LUIE.name .. "_CombatInfo"
@@ -831,7 +833,7 @@ end
 function CI.PlayProcAnimations(slotNum)
     if not g_uiProcAnimation[slotNum] then
         local actionButton = ZO_ActionBar_GetButton(slotNum)
-        local procLoopTexture = WINDOW_MANAGER:CreateControl("$(parent)Loop_LUIE", actionButton.slot, CT_TEXTURE)
+        local procLoopTexture = windowManager:CreateControl("$(parent)Loop_LUIE", actionButton.slot, CT_TEXTURE)
         procLoopTexture:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
         procLoopTexture:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"))
         procLoopTexture:SetTexture("/esoui/art/actionbar/abilityhighlight_mage_med.dds")
@@ -885,7 +887,7 @@ function CI.ShowCustomToggle(slotNum)
     if not g_uiCustomToggle[slotNum] then
         local actionButton = ZO_ActionBar_GetButton(slotNum)
 
-        local toggleFrame = WINDOW_MANAGER:CreateControl("$(parent)Toggle_LUIE", actionButton.slot, CT_TEXTURE)
+        local toggleFrame = windowManager:CreateControl("$(parent)Toggle_LUIE", actionButton.slot, CT_TEXTURE)
 
         --toggleFrame.back = UI.Texture( toggleFrame, nil, nil, "/esoui/art/actionbar/actionslot_toggledon.dds")
         toggleFrame:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))

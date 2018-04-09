@@ -17,6 +17,8 @@ local unpack         = unpack
 local pairs          = pairs
 
 local eventManager   = EVENT_MANAGER
+local windowManager  = WINDOW_MANAGER
+
 local callLater      = zo_callLater
 
 local localizeDecimalNum = ZO_LocalizeDecimalNumber
@@ -9038,7 +9040,7 @@ function CA.HookFunction()
 
     -- Hook MAIL_SEND.Send to get name of player we send to.
     MAIL_SEND.Send = function(self)
-        WINDOW_MANAGER:SetFocusByName("")
+        windowManager:SetFocusByName("")
         if not self.sendMoneyMode and GetQueuedCOD() == 0 then
             if CA.SV.Notify.NotificationMailCA then
                 printToChat(GetString(SI_LUIE_CA_MAIL_ERROR_NO_COD_VALUE))
