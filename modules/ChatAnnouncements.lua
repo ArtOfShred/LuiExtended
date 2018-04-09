@@ -23,6 +23,7 @@ local callLater      = zo_callLater
 local alert          = ZO_Alert
 local colorDef       = ZO_ColorDef
 local iconFormat     = zo_iconFormat
+local iconTextFormat = zo_iconTextFormat
 local iconFormatInheritColor = zo_iconFormatInheritColor
 local localizeDecimalNum = ZO_LocalizeDecimalNumber
 
@@ -1180,7 +1181,7 @@ function CA.GuildHeraldrySaved()
         local guildAlliance = GetGuildAlliance(id)
         local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
         local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
-        local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+        local guildNameAllianceAlert = CA.SV.Social.GuildIcon and iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
         if CA.SV.Social.GuildManageCA then
             local finalMessage = strformat(GetString(SI_LUIE_CA_GUILD_HERALDRY_UPDATE), guildNameAlliance)
@@ -1199,7 +1200,7 @@ function CA.GuildRanksSaved(eventCode, guildId)
     local guildAlliance = GetGuildAlliance(guildId)
     local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
     local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
-    local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+    local guildNameAllianceAlert = CA.SV.Social.GuildIcon and iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
     if CA.SV.Social.GuildManageCA then
         local finalMessage = strformat(GetString(SI_LUIE_CA_GUILD_RANKS_UPDATE), guildNameAlliance)
@@ -1229,9 +1230,9 @@ function CA.GuildRankSaved(eventCode, guildId, rankIndex)
     local guildAlliance = GetGuildAlliance(guildId)
     local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
     local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
-    local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+    local guildNameAllianceAlert = CA.SV.Social.GuildIcon and iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
     local rankSyntax = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
-    local rankSyntaxAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankName) or rankName
+    local rankSyntaxAlert = CA.SV.Social.GuildIcon and iconTextFormat(icon, "100%", "100%", rankName) or rankName
 
     if CA.SV.Social.GuildManageCA then
         printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_UPDATE), rankSyntax, guildNameAlliance))
@@ -1246,7 +1247,7 @@ function CA.GuildTextChanged(eventCode, guildId)
     local guildAlliance = GetGuildAlliance(guildId)
     local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
     local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
-    local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+    local guildNameAllianceAlert = CA.SV.Social.GuildIcon and iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
     -- Depending on event code set message context.
     local messageString = eventCode == EVENT_GUILD_DESCRIPTION_CHANGED and SI_LUIE_CA_GUILD_DESCRIPTION_CHANGED or EVENT_GUILD_MOTD_CHANGED and SI_LUIE_CA_GUILD_MOTD_CHANGED or nil
 
@@ -1297,9 +1298,9 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
             local guildAlliance = GetGuildAlliance(id)
             local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
             local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
-            local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+            local guildNameAllianceAlert = CA.SV.Social.GuildIcon and iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
             local rankSyntax = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
-            local rankSyntaxAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankName) or rankName
+            local rankSyntaxAlert = CA.SV.Social.GuildIcon and iconTextFormat(icon, "100%", "100%", rankName) or rankName
 
             if guildName == name then
                 if CA.SV.Social.GuildRankCA then
@@ -1345,9 +1346,9 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
             local guildAlliance = GetGuildAlliance(id)
             local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
             local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
-            local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+            local guildNameAllianceAlert = CA.SV.Social.GuildIcon and iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
             local rankSyntax = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(icon, 16, 16), rankName)) or (guildColor:Colorize(rankName))
-            local rankSyntaxAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(icon, "100%", "100%", rankName) or rankName
+            local rankSyntaxAlert = CA.SV.Social.GuildIcon and iconTextFormat(icon, "100%", "100%", rankName) or rankName
 
             if guildName == name then
                 if CA.SV.Social.GuildRankCA then
@@ -1372,7 +1373,7 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
         local guildAlliance = GetGuildAlliance(id)
         local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
         local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
-        local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+        local guildNameAllianceAlert = CA.SV.Social.GuildIcon and iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
         if guildName == name then
             if CA.SV.Social.GuildCA then
@@ -1405,7 +1406,7 @@ function CA.GuildInviteAdded(eventCode, guildId, guildName, guildAlliance, invit
     end
     local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
     local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
-    local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+    local guildNameAllianceAlert = CA.SV.Social.GuildIcon and iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
     if CA.SV.Social.GuildCA then
         printToChat(strformat(GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST), displayNameLink, guildNameAlliance))
     end
@@ -5997,7 +5998,7 @@ function CA.HookFunction()
             if guild.name == guildName then
                 local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guild.guildAlliance) or GuildColorize
                 local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guild.guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
-                local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guild.guildAlliance), "100%", "100%", guildName) or guildName
+                local guildNameAllianceAlert = CA.SV.Social.GuildIcon and iconTextFormat(GetAllianceBannerIcon(guild.guildAlliance), "100%", "100%", guildName) or guildName
                 local messageString = (ShouldDisplaySelfKickedFromGuildAlert(guildId)) and SI_GUILD_SELF_KICKED_FROM_GUILD or SI_LUIE_CA_GUILD_LEAVE_SELF
                 local sound = (ShouldDisplaySelfKickedFromGuildAlert(guildId)) and SOUNDS.GENERAL_ALERT_ERROR or SOUNDS.GUILD_SELF_LEFT
                 if CA.SV.Social.GuildCA then
@@ -8567,7 +8568,7 @@ function CA.HookFunction()
     -- TODO: Conditionals based off EVENT_SOCIAL_ERROR HOOK LATER
     local function SocialErrorHook(error)
         if(not IsSocialErrorIgnoreResponse(error) and ShouldShowSocialErrorInChat(error)) then
-            printToChat(zo_strformat(GetString("SI_SOCIALACTIONRESULT", error)))
+            printToChat(strformat(GetString("SI_SOCIALACTIONRESULT", error)))
         end
         return true
     end
@@ -9214,7 +9215,7 @@ function CA.HookFunction()
                 local guildAlliance = GetGuildAlliance(id)
                 local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
                 local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
-                local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+                local guildNameAllianceAlert = CA.SV.Social.GuildIcon and iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
                 if CA.SV.Social.GuildCA then
                     printToChat(strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayNameLink, guildNameAlliance))
@@ -9250,7 +9251,7 @@ function CA.HookFunction()
                 local guildAlliance = GetGuildAlliance(id)
                 local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
                 local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
-                local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+                local guildNameAllianceAlert = CA.SV.Social.GuildIcon and iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
                 if CA.SV.Social.GuildCA then
                     printToChat(strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_LEFT), displayNameLink, guildNameAlliance))
@@ -9285,7 +9286,7 @@ function CA.HookFunction()
         local guildAlliance = GetGuildAlliance(guildId)
         local guildColor = CA.SV.Social.GuildAllianceColor and GetAllianceColor(guildAlliance) or GuildColorize
         local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
-        local guildNameAllianceAlert = CA.SV.Social.GuildIcon and zo_iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
+        local guildNameAllianceAlert = CA.SV.Social.GuildIcon and iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
         if IsConsoleUI() then
             local function GuildInviteCallback(success)
