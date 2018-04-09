@@ -551,7 +551,8 @@ function LUIE_CreateSettings()
         type = "submenu",
         name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GENERAL),
         controls = {
-            {   -- SlashTrade
+            {
+                -- SlashTrade
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_TRADE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_TRADE_TP),
@@ -560,7 +561,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashTrade,
             },
-            {   -- SlashHome
+            {
+                -- SlashHome
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_HOME),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_HOME_TP),
@@ -569,7 +571,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashHome,
             },
-            {   -- SlashCampaignQ
+            {
+                -- SlashCampaignQ
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_CAMPAIGN),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_CAMPAIGN_TP),
@@ -578,7 +581,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashCampaignQ,
             },
-            {   -- SlashBanker
+            {
+                -- SlashBanker
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_BANKER),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_BANKER_TP),
@@ -587,7 +591,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashBanker,
             },
-            {   -- SlashMerchant
+            {
+                -- SlashMerchant
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_MERCHANT),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_MERCHANT_TP),
@@ -596,7 +601,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashMerchant,
             },
-            {   -- SlashFence
+            {
+                -- SlashFence
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_FENCE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_FENCE_TP),
@@ -605,7 +611,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashFence,
             },
-            {   -- TODO
+            {
+                -- TODO
                 type = "checkbox",
                 name = "/Home Results - Show Alert (Temp Setting)",
                 tooltip = "Display an alert when the /home command is used.\nNote: This setting will be deprecated in the future when Social Errors Events are implemented in Chat Announcements.",
@@ -614,7 +621,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.D.TempAlertHome,
             },
-            {   -- TODO
+            {
+                -- TODO
                 type = "checkbox",
                 name = "/Campaign Results - Show Alert (Temp Setting)",
                 tooltip = "Display an alert when the /campaign command is used.\nNote: This setting will be deprecated in the future when Campaign Queue Events are implemented in Chat Announcements.",
@@ -631,7 +639,8 @@ function LUIE_CreateSettings()
         type = "submenu",
         name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GROUP),
         controls = {
-            {   -- SlashRegroup
+            {
+                -- SlashRegroup
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_REGROUP),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_REGROUP_TP),
@@ -640,7 +649,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashRegroup,
             },
-            {   -- SlashDisband
+            {
+                -- SlashDisband
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_DISBAND),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_DISBAND_TP),
@@ -649,7 +659,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashDisband,
             },
-            {   -- SlashGroupLeave
+            {
+                -- SlashGroupLeave
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_LEAVE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_LEAVE_TP),
@@ -658,7 +669,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashGroupLeave,
             },
-            {   -- SlashGroupKick
+            {
+                -- SlashGroupKick
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_KICK),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_KICK_TP),
@@ -667,7 +679,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashGroupKick,
             },
-            {   -- SlashVoteKick
+            {
+                -- SlashVoteKick
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_VOTEKICK),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_VOTEKICK_TP),
@@ -684,7 +697,8 @@ function LUIE_CreateSettings()
         type = "submenu",
         name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GUILD),
         controls = {
-            {   -- SlashGuildInvite
+            {
+                -- SlashGuildInvite
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDINVITE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDINVITE_TP),
@@ -693,7 +707,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashGuildInvite,
             },
-            {   -- SlashGuildQuit
+            {
+                -- SlashGuildQuit
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDQUIT),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDQUIT_TP),
@@ -702,7 +717,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashGuildQuit,
             },
-            {   -- SlashGuildKick
+            {
+                -- SlashGuildKick
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDKICK),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDKICK_TP),
@@ -719,7 +735,8 @@ function LUIE_CreateSettings()
         type = "submenu",
         name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER_SOCIAL),
         controls = {
-            {   -- SlashFriend
+            {
+                -- SlashFriend
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_FRIEND),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_FRIEND_TP),
@@ -728,7 +745,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashFriend,
             },
-            {   -- SlashIgnore
+            {
+                -- SlashIgnore
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_IGNORE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_IGNORE_TP),
@@ -737,7 +755,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashIgnore,
             },
-            {   -- SlashRemoveFriend
+            {
+                -- SlashRemoveFriend
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND_TP),
@@ -746,7 +765,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashRemoveFriend,
             },
-            {   -- SlashRemoveIgnore
+            {
+                -- SlashRemoveIgnore
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE_TP),
@@ -1922,8 +1942,8 @@ function LUIE_CreateSettings()
         type = "submenu",
         name = GetString(SI_LUIE_LAM_BUFF_PROM_HEADER),
         controls = {
-            -- Prominent Buffs & Debuffs Description
             {
+                -- Prominent Buffs & Debuffs Description
                 type = "description",
                 text = GetString(SI_LUIE_LAM_BUFF_PROM_DESCRIPTION),
             },
@@ -2179,7 +2199,8 @@ function LUIE_CreateSettings()
         type = "submenu",
         name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_HEADER),
         controls = {
-            {   -- Buffs & Debuffs Blacklist Description
+            {
+                -- Buffs & Debuffs Blacklist Description
                 type = "description",
                 text = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT),
             },
