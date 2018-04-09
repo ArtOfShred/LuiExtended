@@ -8,6 +8,9 @@ local UI            = LUIE.UI
 local strfmt        = string.format
 local pairs         = pairs
 
+local eventManager  = EVENT_MANAGER
+local sceneManager  = SCENE_MANAGER
+
 local moduleName    = LUIE.name .. "_InfoPanel"
 
 local colors = {
@@ -109,9 +112,9 @@ local function CreateUIControls()
 
     local fragment = ZO_HUDFadeSceneFragment:New(uiPanel, 0, 0)
 
-    SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
-    SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
-    SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+    sceneManager:GetScene("hud"):AddFragment( fragment )
+    sceneManager:GetScene("hudui"):AddFragment( fragment )
+    sceneManager:GetScene("siegeBar"):AddFragment( fragment )
 
     uiPanel.div = UI.Texture( uiPanel, nil, nil, "/esoui/art/miscellaneous/horizontaldivider.dds", DL_BACKGROUND, false )
     uiPanel.div:SetAnchor( LEFT, uiPanel, LEFT, -60, 0 )
@@ -318,11 +321,11 @@ function PNL.Initialize( enabled )
     PNL.OnUpdate60()
 
     -- Set event handlers
-    EVENT_MANAGER:RegisterForEvent( moduleName, EVENT_LOOT_RECEIVED,                PNL.OnBagUpdate )
-    EVENT_MANAGER:RegisterForEvent( moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, PNL.OnBagUpdate )
-    EVENT_MANAGER:RegisterForUpdate( moduleName .. "01" , 1000,  PNL.OnUpdate01 )
-    EVENT_MANAGER:RegisterForUpdate( moduleName .. "10" , 10000, PNL.OnUpdate10 )
-    EVENT_MANAGER:RegisterForUpdate( moduleName .. "60" , 60000, PNL.OnUpdate60 )
+    eventManager:RegisterForEvent( moduleName, EVENT_LOOT_RECEIVED,                PNL.OnBagUpdate )
+    eventManager:RegisterForEvent( moduleName, EVENT_INVENTORY_SINGLE_SLOT_UPDATE, PNL.OnBagUpdate )
+    eventManager:RegisterForUpdate( moduleName .. "01" , 1000,  PNL.OnUpdate01 )
+    eventManager:RegisterForUpdate( moduleName .. "10" , 10000, PNL.OnUpdate10 )
+    eventManager:RegisterForUpdate( moduleName .. "60" , 60000, PNL.OnUpdate60 )
 end
 
 function PNL.ResetPosition()
@@ -357,14 +360,14 @@ function PNL.OnBagUpdate()
     -- We shall not execute bags size calculation immediately, but rather set a flag with delay function
     -- This is needed to avoid lockups when the game start flooding us with same event for every bag slot used
     -- While we do not need any good latency, we can afford to update info-panel label with 250ms delay
-    EVENT_MANAGER:RegisterForUpdate(moduleName .. "_PendingBagsUpdate", 250, PNL.DoBagUpdate )
+    eventManager:RegisterForUpdate(moduleName .. "_PendingBagsUpdate", 250, PNL.DoBagUpdate )
 end
 
 -- Performs calculation of empty space in bags
 -- Called with delay by corresponding event listener
 function PNL.DoBagUpdate()
     -- Clear pending event
-    EVENT_MANAGER:UnregisterForUpdate(moduleName .. "_PendingBagsUpdate")
+    eventManager:UnregisterForUpdate(moduleName .. "_PendingBagsUpdate")
 
     -- Update bags
     local bagSize = GetBagSize( BAG_BACKPACK )

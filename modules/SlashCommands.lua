@@ -11,6 +11,7 @@ local strmatch      = string.match
 local pairs         = pairs
 
 local callLater     = zo_callLater
+local callAlert     = ZO_Alert
 
 local moduleName    = LUIE.name .. "_SlashCommands"
 
@@ -53,45 +54,47 @@ end
 
 local function SlashHome()
     local primaryHouse = GetHousingPrimaryHouse()
-
+    -- Check if we are in combat
     if IsUnitInCombat("player") then
         printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IN_COMBAT))
         if LUIE.SV.TempAlertHome then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IN_COMBAT)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_IN_COMBAT)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
 
+    -- Check to make sure we're not in Cyrodiil
     if IsPlayerInAvAWorld() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA))
         if LUIE.SV.TempAlertHome then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-
+    -- Check to make sure we're not in a battleground
     if IsActiveWorldBattleground() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_BG))
         if LUIE.SV.TempAlertHome then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_BG)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_BG)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
 
+    -- Check if user set a primary home
     if primaryHouse == 0 then
         printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_NOHOME))
         if LUIE.SV.TempAlertHome then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_NOHOME)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_NOHOME)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
     else
         RequestJumpToHouse(primaryHouse)
         printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG))
         if LUIE.SV.TempAlertHome then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG)))
+            callAlert(UI_ALERT_CATEGORY_ALERT, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_SUCCESS_MSG)))
         end
     end
 end
@@ -99,7 +102,7 @@ end
 local function RegroupInvite()
     printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG))
     if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG) )
+        callAlert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG) )
     end
     for i = 1, #g_regroupStacks do
         local member = g_regroupStacks[i]
@@ -108,11 +111,10 @@ local function RegroupInvite()
             GroupInviteByName(member.memberName)
             printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberLink))
             if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberNoLink) )
+                callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG), member.memberNoLink) )
             end
         end
     end
-
     PendingRegroup = false -- Allow Regroup command to be used again
     g_regroupStacks = {} -- Allow index to be used again.
 end
@@ -123,7 +125,7 @@ local function SlashRegroup()
     if PendingRegroup then
         printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_PENDING))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_PENDING)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_PENDING)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -132,7 +134,7 @@ local function SlashRegroup()
     if groupSize <= 1 then
         printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTINGRP))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTINGRP)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTINGRP)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -141,7 +143,7 @@ local function SlashRegroup()
     if IsActiveWorldBattleground() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_BG))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_BG)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_BG)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -150,7 +152,7 @@ local function SlashRegroup()
     if IsInLFGGroup() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_LFGACTIVITY))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_LFGACTIVITY)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_LFGACTIVITY)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -159,7 +161,7 @@ local function SlashRegroup()
     if not IsUnitGroupLeader("player") then
         printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTLEADER))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTLEADER)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTLEADER)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -193,14 +195,14 @@ local function SlashRegroup()
         if #g_regroupStacks > 1 then
             printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG), flagOffline, flagOffline, flagOffline))
             if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG), flagOffline, flagOffline, flagOffline) )
+                callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG), flagOffline, flagOffline, flagOffline) )
             end
             GroupDisband()
             callLater(RegroupInvite, 5000)
         else
             printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG))
             if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG) )
+                callAlert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG) )
             end
             PendingRegroup = false -- Allow Regroup command to be used again
             g_regroupStacks = {} -- Allow index to be used again.
@@ -208,7 +210,7 @@ local function SlashRegroup()
     else
         printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG) )
+            callAlert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG) )
         end
         GroupDisband()
         callLater(RegroupInvite, 5000)
@@ -220,7 +222,7 @@ local function SlashDisband()
     if GetGroupSize() <= 1 then
         printToChat(GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOGROUP))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOGROUP)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOGROUP)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -229,7 +231,7 @@ local function SlashDisband()
     if not IsUnitGroupLeader("player") then
         printToChat(GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOTLEADER))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOTLEADER)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOTLEADER)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -238,7 +240,7 @@ local function SlashDisband()
     if IsActiveWorldBattleground() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_BG))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_BG)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_BG)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -248,12 +250,11 @@ local function SlashDisband()
     if isLFG then
         printToChat(GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_LFG_ACTIVITY))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_LFG_ACTIVITY)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_LFG_ACTIVITY)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-
     GroupDisband()
 end
 
@@ -277,7 +278,7 @@ local function SlashGroupKick(option)
         if option == "" then
             printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME))
             if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-                ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME)))
+                callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME)))
             end
             PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
             return
@@ -287,7 +288,7 @@ local function SlashGroupKick(option)
             else
                 printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_LFG))
                 if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-                    ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_LFG)))
+                    callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_LFG)))
                 end
                 PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
             end
@@ -299,7 +300,7 @@ local function SlashGroupKick(option)
     if GetGroupSize() <= 1 then
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOGROUP))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOGROUP)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOGROUP)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -308,7 +309,7 @@ local function SlashGroupKick(option)
     if not IsUnitGroupLeader("player") then
         printToChat(GetString(SI_LUIE_CA_GROUP_LEADERKICK_ERROR))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_CA_GROUP_LEADERKICK_ERROR)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_CA_GROUP_LEADERKICK_ERROR)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -317,7 +318,7 @@ local function SlashGroupKick(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NONAME)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -358,7 +359,7 @@ local function SlashGroupKick(option)
 
     printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME))
     if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-        ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME)))
+        callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME)))
     end
     PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
 end
@@ -368,7 +369,7 @@ local function SlashGuildInvite(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV))
         if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -390,7 +391,7 @@ local function SlashGuildInvite(option)
     if guildnumber == nil or name == nil then
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV))
         if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -409,7 +410,7 @@ local function SlashGuildInvite(option)
     else -- If we enter anything outside of the range of 1-5, display an error and end.
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV))
         if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_INV)))
         end
             PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -433,7 +434,7 @@ local function SlashGuildQuit(guildnumber)
     else
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE))
         if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -443,7 +444,7 @@ local function SlashGuildQuit(guildnumber)
     if guildnumber == nil then
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE))
         if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -458,7 +459,7 @@ local function SlashGuildKick(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK))
         if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -480,7 +481,7 @@ local function SlashGuildKick(option)
     if guildnumber == nil or name == nil then
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK))
         if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -496,10 +497,11 @@ local function SlashGuildKick(option)
         guildnumber = LUIE.GuildIndexData[4].id
     elseif guildnumber == "5" and LUIE.GuildIndexData[5] then
         guildnumber = LUIE.GuildIndexData[5].id
-    else -- If we enter anything outside of the range of 1-5, display an error and end.
+    -- If we enter anything outside of the range of 1-5, display an error and end.
+    else
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK))
         if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -508,7 +510,7 @@ local function SlashGuildKick(option)
     if not DoesPlayerHaveGuildPermission (guildnumber, GUILD_PERMISSION_REMOVE) then
         printToChat (GetString(SI_SOCIALACTIONRESULT18))
         if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_SOCIALACTIONRESULT18)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_SOCIALACTIONRESULT18)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -523,7 +525,6 @@ local function SlashGuildKick(option)
     for i = 1,guildNumbers do
         local displayName = GetGuildMemberInfo(guildnumber, i)
         local _, characterName = GetGuildMemberCharacterInfo(guildnumber, i)
-
         local compareDisplay = strlower(displayName)
         local compareCharacter = strlower(characterName)
 
@@ -549,7 +550,7 @@ local function SlashGuildKick(option)
     else
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME_GUILD))
         if LUIE.ChatAnnouncements.SV.Social.GuildAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME_GUILD)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME_GUILD)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
     end
@@ -559,7 +560,7 @@ local function SlashFriend(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME))
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FRIEND_FAILED_NONAME)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -576,7 +577,7 @@ RequestFriend = function(option1, option2, menu)
         local message = strformat(GetString(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG), option1)
         printToChat(message)
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, message)
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, message)
         end
     end
 end
@@ -589,7 +590,7 @@ AddIgnore = function(option)
     if IsIgnored(option) then -- Only lists account names, unfortunately
         printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE))
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_ALREADYIGNORE)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -600,7 +601,7 @@ local function SlashIgnore(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME))
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -612,14 +613,13 @@ local function SlashRemoveFriend(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME))
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
 
     local compareChar = strlower(option)
-
     local friends = GetNumFriends()
     local g_friendIndex = {}
     for i = 1,friends do
@@ -646,7 +646,7 @@ local function SlashRemoveFriend(option)
     else
         printToChat(GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME))
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FRIEND_REMOVE_FAILED_NONAME)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
     end
@@ -656,14 +656,13 @@ local function SlashRemoveIgnore(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE))
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
 
     local compareChar = strlower(option)
-
     local ignore = GetNumIgnored()
     local g_ignoreIndex = {}
     for i = 1,ignore do
@@ -687,7 +686,7 @@ local function SlashRemoveIgnore(option)
     else
         printToChat(GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE))
         if LUIE.ChatAnnouncements.SV.Social.FriendIgnoreAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_IGNORE_FAILED_NONAME_REMOVE)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -698,7 +697,7 @@ local function SlashTrade(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME))
         if LUIE.ChatAnnouncements.SV.Notify.NotificationTradeAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, (GetString(SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, SOUNDS.GENERAL_ALERT_ERROR, (GetString(SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -711,7 +710,7 @@ local function SlashVoteKick(option)
     if GetGroupSize() <= 1 then
         printToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK))
         if LUIE.ChatAnnouncements.SV.Group.GroupLFGAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -721,7 +720,7 @@ local function SlashVoteKick(option)
     if IsActiveWorldBattleground() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_BG))
         if LUIE.ChatAnnouncements.SV.Group.GroupLFGAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_BG)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_BG)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -730,7 +729,7 @@ local function SlashVoteKick(option)
     if not IsInLFGGroup() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK))
         if LUIE.ChatAnnouncements.SV.Group.GroupLFGAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -739,7 +738,7 @@ local function SlashVoteKick(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NONAME))
         if LUIE.ChatAnnouncements.SV.Group.GroupLFGAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NONAME)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NONAME)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -782,7 +781,7 @@ local function SlashVoteKick(option)
     if GetUnitName(unitToKick) == playerName then
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_SELF))
         if LUIE.ChatAnnouncements.SV.Group.GroupLFGAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_SELF)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_SELF)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -796,7 +795,7 @@ local function SlashCampaignQ(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NONAME))
         if LUIE.SV.TempAlertCampaign then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NONAME) )
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NONAME) )
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -805,7 +804,7 @@ local function SlashCampaignQ(option)
     if IsActiveWorldBattleground() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG))
         if LUIE.SV.TempAlertCampaign then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG) )
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG) )
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -823,13 +822,13 @@ local function SlashCampaignQ(option)
                 QueueForCampaign (i)
                 printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName))
                 if LUIE.SV.TempAlertCampaign then
-                    ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName) )
+                    callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE), campaignName) )
                 end
                 return
             else
                 printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED))
                 if LUIE.SV.TempAlertCampaign then
-                    ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED) )
+                    callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED) )
                 end
                 PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
                 return
@@ -839,7 +838,7 @@ local function SlashCampaignQ(option)
 
     printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN))
     if LUIE.SV.TempAlertCampaign then
-        ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN) )
+        callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_WRONGCAMPAIGN) )
     end
     PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
 end
@@ -850,7 +849,7 @@ local function SlashInvite(option)
     if groupSize > 1 and not IsUnitGroupLeader("player") then
         printToChat(strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE)))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -859,7 +858,7 @@ local function SlashInvite(option)
     if option == "" then
         printToChat(GetString(SI_LUIE_CA_GROUP_INVITE_NONAME))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            ZO_Alert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_CA_GROUP_INVITE_NONAME))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_CA_GROUP_INVITE_NONAME))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -868,23 +867,110 @@ local function SlashInvite(option)
     GroupInviteByName(option)
     printToChat(strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), option))
     if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-        ZO_Alert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), option))
+        callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), option))
     end
 end
 
 local function SlashBanker()
-   local banker = 267
-   UseCollectible(banker)
+    local banker = 267
+    -- Check to make sure we're not in Cyrodiil
+    if IsPlayerInAvAWorld() then
+        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA))
+        if LUIE.SV.TempAlertHome then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
+    -- Check to make sure we're not in a battleground
+    if IsActiveWorldBattleground() then
+        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG))
+        if LUIE.SV.TempAlertHome then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
+    -- Check to make sure that we have the Assistant unlocked
+    if IsCollectibleUnlocked(banker) then
+        -- Summon/Unsummon the Assistant
+        UseCollectible(banker)
+    else
+        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED))
+        if LUIE.SV.TempAlertHome then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
 end
 
 local function SlashMerchant()
-   local merchant = 301
-   UseCollectible(merchant)
+    local merchant = 301
+    -- Check to make sure we're not in Cyrodiil
+    if IsPlayerInAvAWorld() then
+        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA))
+        if LUIE.SV.TempAlertHome then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
+    -- Check to make sure we're not in a battleground
+    if IsActiveWorldBattleground() then
+        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG))
+        if LUIE.SV.TempAlertHome then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
+    -- Check to make sure that we have the Assistant unlocked
+    if IsCollectibleUnlocked(merchant) then
+        -- Summon/Unsummon the Assistant
+        UseCollectible(merchant)
+    else
+        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED))
+        if LUIE.SV.TempAlertHome then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
 end
 
 local function SlashFence()
-   local fence = 300
-   UseCollectible(fence)
+    local fence = 300
+    -- Check to make sure we're not in Cyrodiil
+    if IsPlayerInAvAWorld() then
+        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA))
+        if LUIE.SV.TempAlertHome then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
+    -- Check to make sure we're not in a battleground
+    if IsActiveWorldBattleground() then
+        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG))
+        if LUIE.SV.TempAlertHome then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
+    -- Check to make sure that we have the Assistant unlocked
+    if IsCollectibleUnlocked(fence) then
+        -- Summon/Unsummon the Assistant
+        UseCollectible(fence)
+    else
+        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED))
+        if LUIE.SV.TempAlertHome then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
 end
 
 function SC.RegisterSlashCommands()
@@ -983,13 +1069,13 @@ function SC.RegisterSlashCommands()
     if SC.SV.SlashCampaignQ then
         SLASH_COMMANDS["/campaign"]     = SlashCampaignQ
     end
-    if SC.SV.SlashCampaignQ then
+    if SC.SV.SlashBanker then
         SLASH_COMMANDS["/banker"]       = SlashBanker
     end
-    if SC.SV.SlashCampaignQ then
+    if SC.SV.SlashMerchant then
         SLASH_COMMANDS["/merchant"]     = SlashMerchant
     end
-    if SC.SV.SlashCampaignQ then
+    if SC.SV.SlashFence then
         SLASH_COMMANDS["/fence"]        = SlashFence
     end
 end

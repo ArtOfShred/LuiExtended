@@ -19,6 +19,9 @@ local unpack        = unpack
 local pairs         = pairs
 local ipairs        = ipairs
 
+local eventManager  = EVENT_MANAGER
+local sceneManager  = SCENE_MANAGER
+
 local callLater     = zo_callLater
 
 local moduleName    = LUIE.name .. "_UnitFrames"
@@ -347,11 +350,8 @@ local function CreateDefaultFrames()
         }
     end
     if UF.SV.DefaultFramesTarget then
-        default_controls.reticleover = {
-            [POWERTYPE_HEALTH]  = ZO_TargetUnitFramereticleover,
-        }
-
-    -- g_DefaultFrames.reticleover should be always present to hold target classIcon and friendIcon
+        default_controls.reticleover = { [POWERTYPE_HEALTH]  = ZO_TargetUnitFramereticleover, }
+        -- g_DefaultFrames.reticleover should be always present to hold target classIcon and friendIcon
     else
         g_DefaultFrames.reticleover = { ["unitTag"] = "reticleover" }
     end
@@ -396,7 +396,7 @@ local function CreateDefaultFrames()
             frame:UnregisterForEvent(EVENT_POWER_UPDATE)
             frame:UnregisterForEvent(EVENT_INTERFACE_SETTING_CHANGED)
             frame:UnregisterForEvent(EVENT_PLAYER_ACTIVATED)
-            EVENT_MANAGER:UnregisterForUpdate("ZO_PlayerAttribute"..frames[i].."FadeUpdate")
+            eventManager:UnregisterForUpdate("ZO_PlayerAttribute"..frames[i].."FadeUpdate")
             frame:SetHidden(true)
         end
     end
@@ -429,9 +429,9 @@ local function CreateCustomFrames()
 
         local fragment = ZO_HUDFadeSceneFragment:New(playerTlw, 0, 0)
 
-        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("hud"):AddFragment( fragment )
+        sceneManager:GetScene("hudui"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBar"):AddFragment( fragment )
 
         -- Collect all together
         UF.CustomFrames.player = {
@@ -517,9 +517,9 @@ local function CreateCustomFrames()
 
         local fragment = ZO_HUDFadeSceneFragment:New(targetTlw, 0, 0)
 
-        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("hud"):AddFragment( fragment )
+        sceneManager:GetScene("hudui"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBar"):AddFragment( fragment )
 
         -- Collect all together
         UF.CustomFrames.reticleover = {
@@ -572,9 +572,9 @@ local function CreateCustomFrames()
 
         local fragment = ZO_HUDFadeSceneFragment:New(targetTlw, 0, 0)
 
-        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("hud"):AddFragment( fragment )
+        sceneManager:GetScene("hudui"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBar"):AddFragment( fragment )
 
         -- Collect all together
         -- Notice, that we put this table into same UF.CustomFrames table.
@@ -624,9 +624,9 @@ local function CreateCustomFrames()
 
         local fragment = ZO_HUDFadeSceneFragment:New(group, 0, 0)
 
-        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("hud"):AddFragment( fragment )
+        sceneManager:GetScene("hudui"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBar"):AddFragment( fragment )
 
         for i = 1, 4 do
             local unitTag = "SmallGroup" .. i
@@ -657,7 +657,6 @@ local function CreateCustomFrames()
                 ["dead"]        = UI.Label( ghb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "Status", false ),
                 ["leader"]      = UI.Texture( topInfo, {LEFT,LEFT, -7,0}, {32,32}, nil, 2, false ),
             }
-
         end
     end
 
@@ -672,9 +671,9 @@ local function CreateCustomFrames()
 
         local fragment = ZO_HUDFadeSceneFragment:New(raid, 0, 0)
 
-        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("hud"):AddFragment( fragment )
+        sceneManager:GetScene("hudui"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBar"):AddFragment( fragment )
 
         for i = 1, 24 do
             local unitTag = "RaidGroup" .. i
@@ -700,9 +699,7 @@ local function CreateCustomFrames()
 
             }
             UF.CustomFrames[unitTag][POWERTYPE_HEALTH].label.fmt = "Current (Percentage%)"
-
         end
-
     end
 
     -- Loop through Bosses
@@ -715,9 +712,9 @@ local function CreateCustomFrames()
 
         local fragment = ZO_HUDFadeSceneFragment:New(bosses, 0, 0)
 
-        SCENE_MANAGER:GetScene("hud"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("hudui"):AddFragment( fragment )
-        SCENE_MANAGER:GetScene("siegeBar"):AddFragment( fragment )
+        sceneManager:GetScene("hud"):AddFragment( fragment )
+        sceneManager:GetScene("hudui"):AddFragment( fragment )
+        sceneManager:GetScene("siegeBar"):AddFragment( fragment )
 
         for i = 1, 6 do
             local unitTag = "boss" .. i
@@ -745,13 +742,13 @@ local function CreateCustomFrames()
 
     -- Callback used to hide anchor coords preview label on movement start
     local tlwOnMoveStart = function(self)
-        EVENT_MANAGER:RegisterForUpdate( moduleName .. "previewMove", 200, function()
+        eventManager:RegisterForUpdate( moduleName .. "previewMove", 200, function()
             self.preview.anchorLabel:SetText(strfmt("%d, %d", self:GetLeft(), self:GetTop()))
         end)
     end
     -- Callback used to save new position of frames
     local tlwOnMoveStop = function(self)
-        EVENT_MANAGER:UnregisterForUpdate( moduleName .. "previewMove" )
+        eventManager:UnregisterForUpdate( moduleName .. "previewMove" )
         UF.SV[self.customPositionAttr] = { self:GetLeft(), self:GetTop() }
     end
 
@@ -1067,7 +1064,6 @@ local function CreateCustomFrames()
                     if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat then
                         if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER] then
                             if UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER].inc then
-
                                 -- Create glow animation
                                 local control = UF.CustomFrames[unitTag][POWERTYPE_HEALTH].stat[STAT_POWER].inc
                                 local animation, timeline = CreateSimpleAnimation(ANIMATION_TEXTURE, control)
@@ -1174,58 +1170,58 @@ function UF.Initialize( enabled )
     UF.SetDefaultFramesTransparency()
 
     -- Set event handlers
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, UF.OnPlayerActivated )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_POWER_UPDATE,     UF.OnPowerUpdate )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_ATTRIBUTE_VISUAL_ADDED,   UF.OnVisualizationAdded )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_ATTRIBUTE_VISUAL_REMOVED, UF.OnVisualizationRemoved )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_ATTRIBUTE_VISUAL_UPDATED, UF.OnVisualizationUpdated )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TARGET_CHANGE, UF.OnTargetChange )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED, UF.OnReticleTargetChanged )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_DISPOSITION_UPDATE, UF.OnDispositionUpdate )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_CREATED, UF.OnUnitCreated )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEVEL_UPDATE,        UF.OnLevelUpdate )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_UPDATE, UF.OnLevelUpdate )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_TITLE_UPDATE,  UF.TitleUpdate )
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_RANK_POINT_UPDATE,  UF.TitleUpdate )
+    eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_ACTIVATED, UF.OnPlayerActivated )
+    eventManager:RegisterForEvent(moduleName, EVENT_POWER_UPDATE,     UF.OnPowerUpdate )
+    eventManager:RegisterForEvent(moduleName, EVENT_UNIT_ATTRIBUTE_VISUAL_ADDED,   UF.OnVisualizationAdded )
+    eventManager:RegisterForEvent(moduleName, EVENT_UNIT_ATTRIBUTE_VISUAL_REMOVED, UF.OnVisualizationRemoved )
+    eventManager:RegisterForEvent(moduleName, EVENT_UNIT_ATTRIBUTE_VISUAL_UPDATED, UF.OnVisualizationUpdated )
+    eventManager:RegisterForEvent(moduleName, EVENT_TARGET_CHANGE, UF.OnTargetChange )
+    eventManager:RegisterForEvent(moduleName, EVENT_RETICLE_TARGET_CHANGED, UF.OnReticleTargetChanged )
+    eventManager:RegisterForEvent(moduleName, EVENT_DISPOSITION_UPDATE, UF.OnDispositionUpdate )
+    eventManager:RegisterForEvent(moduleName, EVENT_UNIT_CREATED, UF.OnUnitCreated )
+    eventManager:RegisterForEvent(moduleName, EVENT_LEVEL_UPDATE,        UF.OnLevelUpdate )
+    eventManager:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_UPDATE, UF.OnLevelUpdate )
+    eventManager:RegisterForEvent(moduleName, EVENT_TITLE_UPDATE,  UF.TitleUpdate )
+    eventManager:RegisterForEvent(moduleName, EVENT_RANK_POINT_UPDATE,  UF.TitleUpdate )
 
     -- Next events make sense only for CustomFrames
     if UF.CustomFrames.player or UF.CustomFrames.reticleover or UF.CustomFrames.SmallGroup1 or UF.CustomFrames.RaidGroup1 or UF.CustomFrames.boss1 then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_COMBAT_EVENT,          UF.OnCombatEvent )
-        EVENT_MANAGER:AddFilterForEvent(moduleName, EVENT_COMBAT_EVENT, REGISTER_FILTER_IS_ERROR, true )
+        eventManager:RegisterForEvent(moduleName, EVENT_COMBAT_EVENT,          UF.OnCombatEvent )
+        eventManager:AddFilterForEvent(moduleName, EVENT_COMBAT_EVENT, REGISTER_FILTER_IS_ERROR, true )
 
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_DESTROYED,        UF.OnUnitDestroyed )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_ADDED,          UF.SocialUpdateFrames)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_FRIEND_REMOVED,        UF.SocialUpdateFrames)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_IGNORE_ADDED,          UF.SocialUpdateFrames)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_IGNORE_REMOVED,        UF.SocialUpdateFrames)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_PLAYER_COMBAT_STATE,	UF.OnPlayerCombatState )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED,	UF.OnWerewolf )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BEGIN_SIEGE_CONTROL,       UF.OnSiege )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_END_SIEGE_CONTROL,         UF.OnSiege )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEAVE_RAM_ESCORT,          UF.OnSiege )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_MOUNTED_STATE_CHANGED,     UF.OnMount )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_EXPERIENCE_UPDATE,         UF.OnXPUpdate )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_GAINED,     UF.OnChampionPointGained )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_SUPPORT_RANGE_UPDATE,    UF.OnGroupSupportRangeUpdate )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_CONNECTED_STATUS, UF.OnGroupMemberConnectedStatus )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_ROLES_CHANGED, UF.OnGroupMemberRoleChange )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_UPDATE, UF.OnGroupMemberChange )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED, UF.OnGroupMemberChange )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT, UF.OnGroupMemberChange )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED,  UF.OnDeath )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_LEADER_UPDATE,         UF.OnLeaderUpdate )
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_BOSSES_CHANGED,    UF.OnBossesChanged )
+        eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DESTROYED,        UF.OnUnitDestroyed )
+        eventManager:RegisterForEvent(moduleName, EVENT_FRIEND_ADDED,          UF.SocialUpdateFrames)
+        eventManager:RegisterForEvent(moduleName, EVENT_FRIEND_REMOVED,        UF.SocialUpdateFrames)
+        eventManager:RegisterForEvent(moduleName, EVENT_IGNORE_ADDED,          UF.SocialUpdateFrames)
+        eventManager:RegisterForEvent(moduleName, EVENT_IGNORE_REMOVED,        UF.SocialUpdateFrames)
+        eventManager:RegisterForEvent(moduleName, EVENT_PLAYER_COMBAT_STATE,	UF.OnPlayerCombatState )
+        eventManager:RegisterForEvent(moduleName, EVENT_WEREWOLF_STATE_CHANGED,	UF.OnWerewolf )
+        eventManager:RegisterForEvent(moduleName, EVENT_BEGIN_SIEGE_CONTROL,       UF.OnSiege )
+        eventManager:RegisterForEvent(moduleName, EVENT_END_SIEGE_CONTROL,         UF.OnSiege )
+        eventManager:RegisterForEvent(moduleName, EVENT_LEAVE_RAM_ESCORT,          UF.OnSiege )
+        eventManager:RegisterForEvent(moduleName, EVENT_MOUNTED_STATE_CHANGED,     UF.OnMount )
+        eventManager:RegisterForEvent(moduleName, EVENT_EXPERIENCE_UPDATE,         UF.OnXPUpdate )
+        eventManager:RegisterForEvent(moduleName, EVENT_CHAMPION_POINT_GAINED,     UF.OnChampionPointGained )
+        eventManager:RegisterForEvent(moduleName, EVENT_GROUP_SUPPORT_RANGE_UPDATE,    UF.OnGroupSupportRangeUpdate )
+        eventManager:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_CONNECTED_STATUS, UF.OnGroupMemberConnectedStatus )
+        eventManager:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_ROLES_CHANGED, UF.OnGroupMemberRoleChange )
+        eventManager:RegisterForEvent(moduleName, EVENT_GROUP_UPDATE, UF.OnGroupMemberChange )
+        eventManager:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_JOINED, UF.OnGroupMemberChange )
+        eventManager:RegisterForEvent(moduleName, EVENT_GROUP_MEMBER_LEFT, UF.OnGroupMemberChange )
+        eventManager:RegisterForEvent(moduleName, EVENT_UNIT_DEATH_STATE_CHANGED,  UF.OnDeath )
+        eventManager:RegisterForEvent(moduleName, EVENT_LEADER_UPDATE,         UF.OnLeaderUpdate )
+        eventManager:RegisterForEvent(moduleName, EVENT_BOSSES_CHANGED,    UF.OnBossesChanged )
 
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD,     UF.SocialUpdateFrames)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD,   UF.SocialUpdateFrames)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_ADDED,        UF.SocialUpdateFrames)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_REMOVED,      UF.SocialUpdateFrames)
+        eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD,     UF.SocialUpdateFrames)
+        eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD,   UF.SocialUpdateFrames)
+        eventManager:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_ADDED,        UF.SocialUpdateFrames)
+        eventManager:RegisterForEvent(moduleName, EVENT_GUILD_MEMBER_REMOVED,      UF.SocialUpdateFrames)
     end
 
     -- New AvA frames
     if false then
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CURRENT_CAMPAIGN_CHANGED, UF.OnCurrentCampaignChanged) -- (integer eventCode, integer newCurrentCampaignId)
-        EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_CAMPAIGN_EMPEROR_CHANGED, UF.OnCampaignEmperorChanged) -- (integer eventCode, integer campaignId)
+        eventManager:RegisterForEvent(moduleName, EVENT_CURRENT_CAMPAIGN_CHANGED, UF.OnCurrentCampaignChanged) -- (integer eventCode, integer newCurrentCampaignId)
+        eventManager:RegisterForEvent(moduleName, EVENT_CAMPAIGN_EMPEROR_CHANGED, UF.OnCampaignEmperorChanged) -- (integer eventCode, integer campaignId)
     end
 
     g_defaultTargetNameLabel = ZO_TargetUnitFramereticleoverName
@@ -1233,7 +1229,6 @@ function UF.Initialize( enabled )
     -- Initialize colouring. This is actually needed when user does NOT want those features
     UF.TargetColourByReaction()
     UF.ReticleColourByReaction()
-
 end
 
 -- Sets out-of-combat transparency values for default user-frames
@@ -1285,7 +1280,6 @@ end
 -- Update format for labels on CustomFrames
 function UF.CustomFramesFormatLabels(menu)
     -- Search CustomFrames for attribute bars with correct labels
-
     -- Format Player/Target Labels
     for _, baseName in pairs( { "player", "reticleover" } ) do
         local unitTag = baseName
@@ -1354,7 +1348,6 @@ function UF.CustomFramesFormatLabels(menu)
             UF.ReloadValues(unitTag)
         end
     end
-
 end
 
 -- Runs on the EVENT_PLAYER_ACTIVATED listener.
@@ -1390,9 +1383,7 @@ function UF.OnPlayerActivated(eventCode)
     end
 
     UF.OnReticleTargetChanged(nil)
-
     UF.OnBossesChanged()
-
     UF.OnPlayerCombatState(EVENT_PLAYER_COMBAT_STATE, IsUnitInCombat("player") )
     UF.CustomFramesGroupAlpha()
     UF.CustomFramesSetupAlternative()
@@ -1404,7 +1395,6 @@ end
 -- Runs on the EVENT_POWER_UPDATE listener.
 -- This handler fires every time unit attribute changes.
 function UF.OnPowerUpdate(eventCode, unitTag, powerIndex, powerType, powerValue, powerMax, powerEffectiveMax)
-
     -- Save Health value for future reference -- do it only for tracked unitTags that were defined on initialization
     if powerType == POWERTYPE_HEALTH and g_savedHealth[unitTag] then
         g_savedHealth[unitTag] = { powerValue, powerMax, powerEffectiveMax, g_savedHealth[unitTag][4] or 0 }
@@ -1472,23 +1462,20 @@ end
 -- Used to create DefaultFrames UI controls and request delayed CustomFrames group frame update
 function UF.OnUnitCreated(eventCode, unitTag)
     --d( strfmt("[%s] OnUnitCreated: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
-
     -- Create on-fly UI controls for default UI group member and reread his values
     if g_DefaultFrames.SmallGroup then
         UF.DefaultFramesCreateUnitGroupControls(unitTag)
     end
-
     -- If CustomFrames are used then values for unitTag will be reloaded in delayed full group update
     if UF.CustomFrames.SmallGroup1 ~= nil or UF.CustomFrames.RaidGroup1 ~= nil then
         -- Make sure we do not try to update bars on this unitTag before full group update is complete
         if "group" == strsub(unitTag, 0, 5) then
             UF.CustomFrames[unitTag] = nil
         end
-
         -- We should avoid calling full update on CustomFrames too often
         if not g_PendingUpdate.Group.flag then
             g_PendingUpdate.Group.flag = true
-            EVENT_MANAGER:RegisterForUpdate(g_PendingUpdate.Group.name, g_PendingUpdate.Group.delay, UF.CustomFramesGroupUpdate )
+            eventManager:RegisterForUpdate(g_PendingUpdate.Group.name, g_PendingUpdate.Group.delay, UF.CustomFramesGroupUpdate )
         end
     -- Else we need to manually update this unitTag in g_DefaultFrames
     elseif g_DefaultFrames.SmallGroup then
@@ -1500,16 +1487,14 @@ end
 -- Used to request delayed CustomFrames group frame update
 function UF.OnUnitDestroyed(eventCode, unitTag)
     --d( strfmt("[%s] OnUnitDestroyed: %s (%s)", GetTimeString(), unitTag, GetUnitName(unitTag)) )
-
     -- Make sure we do not try to update bars on this unitTag before full group update is complete
     if "group" == strsub(unitTag, 0, 5) then
         UF.CustomFrames[unitTag] = nil
     end
-
     -- We should avoid calling full update on CustomFrames too often
     if not g_PendingUpdate.Group.flag then
         g_PendingUpdate.Group.flag = true
-        EVENT_MANAGER:RegisterForUpdate(g_PendingUpdate.Group.name, g_PendingUpdate.Group.delay, UF.CustomFramesGroupUpdate )
+        eventManager:RegisterForUpdate(g_PendingUpdate.Group.name, g_PendingUpdate.Group.delay, UF.CustomFramesGroupUpdate )
     end
 end
 
@@ -1660,7 +1645,6 @@ function UF.OnReticleTargetChanged(eventCode)
 
         -- Is current target Critter? In Update 6 they all have 9 health
         local isCritter = ( g_savedHealth.reticleover[3] <= 9 )
-
         local isGuard = IsUnitInvulnerableGuard("reticleover")
 
         -- Hide custom label on Default Frames for critters.
@@ -1832,7 +1816,9 @@ local HIDE_LEVEL_TYPES = {
 
 local function IsGuildMate(unitTag)
     local displayName = GetUnitDisplayName(unitTag)
-    if displayName == playerDisplayName then return end
+    if displayName == playerDisplayName then
+        return
+    end
     for i = 1, GetNumGuilds() do
         local guildId = GetGuildId(i)
         if GetGuildMemberIndexFromDisplayName(guildId, displayName) ~= nil then
@@ -1858,14 +1844,12 @@ function UF.UpdateStaticControls( unitFrame )
         DisplayOption = UF.SV.DisplayOptionsGroupRaid
     end
 
-
     unitFrame.isPlayer  = IsUnitPlayer( unitFrame.unitTag )
     unitFrame.isChampion = IsUnitChampion( unitFrame.unitTag )
     unitFrame.isLevelCap = ( GetUnitChampionPoints( unitFrame.unitTag ) == g_MaxChampionPoint  )
     unitFrame.avaRankValue = GetUnitAvARank( unitFrame.unitTag )
 
     -- First update roleIcon, classIcon and friendIcon, so then we can set maximal length of name label
-
     if unitFrame.roleIcon ~= nil then
         local isDps, isHealer, isTank = GetGroupMemberRoles(unitFrame.unitTag)
         local role = 0
@@ -1877,7 +1861,6 @@ function UF.UpdateStaticControls( unitFrame )
         local unitRole = roleIcons[role]
         unitFrame.roleIcon:SetTexture(unitRole)
     end
-
     -- If unitFrame has unit classIcon control
     if unitFrame.classIcon ~= nil then
         local unitDifficulty = GetUnitDifficulty( unitFrame.unitTag )
@@ -1910,7 +1893,6 @@ function UF.UpdateStaticControls( unitFrame )
             unitFrame.className:SetHidden( not showClass )
         end
     end
-
     -- If unitFrame has unit classIcon control
     if unitFrame.friendIcon ~= nil then
         local isIgnored = unitFrame.isPlayer and IsUnitIgnored( unitFrame.unitTag )
@@ -1923,7 +1905,6 @@ function UF.UpdateStaticControls( unitFrame )
             unitFrame.friendIcon:SetHidden(true)
         end
     end
-
     -- If unitFrame has unit name label control
     if unitFrame.name ~= nil then
         -- Update max width of label
@@ -1952,7 +1933,6 @@ function UF.UpdateStaticControls( unitFrame )
             unitFrame.name:SetText( GetUnitName( unitFrame.unitTag ) )
         end
     end
-
     -- If unitFrame has level label control
     if unitFrame.level ~= nil then
         -- Show level for players and non-friendly NPCs
@@ -1978,7 +1958,6 @@ function UF.UpdateStaticControls( unitFrame )
             unitFrame.level:SetHidden( not showLevel )
         end
     end
-
     local savedTitle
     -- If unitFrame has unit title label control
     if unitFrame.title ~= nil then
@@ -2002,7 +1981,6 @@ function UF.UpdateStaticControls( unitFrame )
 
         if title == "" then savedTitle = "" end
     end
-
     -- If unitFrame has unit AVA rank control
     if unitFrame.avaRank ~= nil then
         if unitFrame.isPlayer then
@@ -2031,7 +2009,6 @@ function UF.UpdateStaticControls( unitFrame )
             unitFrame.avaRankIcon:SetHidden(true)
         end
     end
-
     -- Reanchor buffs if title changes
     if unitFrame.buffs then
         if UF.SV.PlayerFrameOptions ~= 1 and unitFrame.unitTag == "reticleover" then
@@ -2052,7 +2029,6 @@ function UF.UpdateStaticControls( unitFrame )
             end
         end
     end
-
     -- If unitFrame has dead/offline indicator, then query its state and act accordingly
     if unitFrame.dead ~= nil then
         if not IsUnitOnline( unitFrame.unitTag ) then
@@ -2064,7 +2040,6 @@ function UF.UpdateStaticControls( unitFrame )
         end
 
     end
-
     -- Finally set transparency for group frames that has .control field
     if "group" == strsub(unitFrame.unitTag, 0, 5) and unitFrame.control then
         unitFrame.control:SetAlpha( IsUnitInGroupSupportRange(unitFrame.unitTag) and ( UF.SV.GroupAlpha * 0.01) or ( UF.SV.GroupAlpha * 0.01) / 2 )
@@ -2072,7 +2047,6 @@ function UF.UpdateStaticControls( unitFrame )
 end
 
 function UF.MenuUpdatePlayerFrameOptions(option)
-
     if UF.CustomFrames.reticleover then
         local reticleover = UF.CustomFrames.reticleover
         if option == 1 then
@@ -2087,7 +2061,6 @@ function UF.MenuUpdatePlayerFrameOptions(option)
             reticleover.debuffs:SetAnchor(TOP, reticleover.buffAnchor, BOTTOM, 0, 2)
         end
     end
-
     LUIE.UnitFrames.CustomFramesResetPosition()
     LUIE.UnitFrames.CustomFramesSetupAlternative()
     LUIE.UnitFrames.CustomFramesApplyLayoutPlayer()
@@ -2123,18 +2096,15 @@ function UF.UpdateAttribute( attributeFrame, powerValue, powerEffectiveMax, shie
     else
         for _, label in pairs( { "label", "labelOne", "labelTwo" } ) do
             if attributeFrame[label] ~= nil then
-
-                    -- Format specific to selected label
-                    local fmt = tostring( attributeFrame[label].fmt or UF.SV.Format )
-                    local str = fmt:gsub("Percentage", tostring(pct) )
-                        :gsub("Max", CommaValue(powerEffectiveMax, UF.SV.ShortenNumbers))
-                        :gsub("Current", CommaValue(powerValue, UF.SV.ShortenNumbers))
-                        :gsub( "+ Shield", shield and ("+ "..CommaValue(shield, UF.SV.ShortenNumbers)) or "" )
-                        :gsub("Nothing", "")
-
-                    -- Change text
-                    attributeFrame[label]:SetText( str )
-
+                -- Format specific to selected label
+                local fmt = tostring( attributeFrame[label].fmt or UF.SV.Format )
+                local str = fmt:gsub("Percentage", tostring(pct) )
+                    :gsub("Max", CommaValue(powerEffectiveMax, UF.SV.ShortenNumbers))
+                    :gsub("Current", CommaValue(powerValue, UF.SV.ShortenNumbers))
+                    :gsub( "+ Shield", shield and ("+ "..CommaValue(shield, UF.SV.ShortenNumbers)) or "" )
+                    :gsub("Nothing", "")
+                -- Change text
+                attributeFrame[label]:SetText( str )
                 -- And colour it RED if attribute value is lower then threshold
                 attributeFrame[label]:SetColor( unpack( ( pct < ( attributeFrame.threshold or g_defaultThreshold ) ) and {1,0.25,0.38} or attributeFrame.colour or {1,1,1} ) )
             end
@@ -2271,7 +2241,6 @@ end
 -- While this applicable only to custom frames, we do not need to split this function into 2 different ones
 -- Called from EVENT_UNIT_ATTRIBUTE_VISUAL_* listeners.
 function UF.UpdateStat(unitTag, statType, attributeType, powerType )
-
     -- Build a list of UI controls to hold this statType on different UnitFrames lists
     local statControls = {}
 
@@ -2340,12 +2309,11 @@ function UF.OnXPUpdate( eventCode, unitTag, currentExp, maxExp, reason )
     if unitTag ~= "player" or not UF.CustomFrames.player then
         return
     end
-
     if UF.CustomFrames.player.isChampion then
         -- Query for Veteran and Champion XP not more then once every 5 seconds
         if not g_PendingUpdate.VeteranXP.flag then
             g_PendingUpdate.VeteranXP.flag = true
-            EVENT_MANAGER:RegisterForUpdate( g_PendingUpdate.VeteranXP.name, g_PendingUpdate.VeteranXP.delay, UF.UpdateVeteranXP )
+            eventManager:RegisterForUpdate( g_PendingUpdate.VeteranXP.name, g_PendingUpdate.VeteranXP.delay, UF.UpdateVeteranXP )
         end
     elseif UF.CustomFrames.player.Experience then
         UF.CustomFrames.player.Experience.bar:SetValue( currentExp )
@@ -2355,7 +2323,7 @@ end
 -- Helper function that updates Champion XP bar. Called from event listener with 5 sec delay
 function UF.UpdateVeteranXP()
     -- Unregister update function
-    EVENT_MANAGER:UnregisterForUpdate( g_PendingUpdate.VeteranXP.name )
+    eventManager:UnregisterForUpdate( g_PendingUpdate.VeteranXP.name )
 
     if UF.CustomFrames.player then
         if UF.CustomFrames.player.Experience then
@@ -2364,7 +2332,6 @@ function UF.UpdateVeteranXP()
             UF.CustomFrames.player.ChampionXP.bar:SetValue( GetPlayerChampionXP() )
         end
     end
-
     -- Clear local flag
     g_PendingUpdate.VeteranXP.flag = false
 end
@@ -2382,12 +2349,16 @@ function UF.OnGroupMemberConnectedStatus(eventCode, unitTag, isOnline)
     if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag].dead then
         UF.CustomFramesSetDeadLabel( UF.CustomFrames[unitTag], isOnline and nil or strOffline )
     end
-    if isOnline and (UF.SV.ColorRoleGroup or UF.SV.ColorRoleRaid) then UF.CustomFramesApplyColours(false) end
+    if isOnline and (UF.SV.ColorRoleGroup or UF.SV.ColorRoleRaid) then
+        UF.CustomFramesApplyColours(false)
+    end
 end
 
 function UF.OnGroupMemberRoleChange(eventCode, unitTag, dps, healer, tank)
     if UF.CustomFrames[unitTag] then
-        if (UF.SV.ColorRoleGroup or UF.SV.ColorRoleRaid) then UF.CustomFramesApplyColoursSingle(unitTag) end
+        if (UF.SV.ColorRoleGroup or UF.SV.ColorRoleRaid) then
+            UF.CustomFramesApplyColoursSingle(unitTag)
+        end
         UF.ReloadValues(unitTag)
         UF.CustomFramesApplyLayoutGroup(false)
         UF.CustomFramesApplyLayoutRaid(false)
@@ -2435,14 +2406,12 @@ function UF.OnLeaderUpdate(eventCode, leaderTag)
 end
 
 -- This function is used to setup alternative bar for player
--- Priority order:
--- Werewolf -> Siege -> Mount -> ChampionXP / Experience
+-- Priority order: Werewolf -> Siege -> Mount -> ChampionXP / Experience
 local XP_BAR_COLOURS = ZO_XP_BAR_GRADIENT_COLORS[2]
 function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
     if not UF.CustomFrames.player then
         return
     end
-
     -- If any of input parameters are nil, we need to query them
     if isWerewolf == nil then
         isWerewolf = IsWerewolf()
@@ -2478,8 +2447,11 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
 
         UF.OnPowerUpdate(nil, "player", nil, POWERTYPE_WEREWOLF, GetUnitPower("player", POWERTYPE_WEREWOLF))
 
-        if UF.SV.PlayerFrameOptions ~= 1 then left = true else recenter = true end
-
+        if UF.SV.PlayerFrameOptions ~= 1 then
+            left = true
+        else
+            recenter = true
+        end
     elseif UF.SV.PlayerEnableAltbarMSW and isSiege then
         icon    = "LuiExtended/media/unitframes/unitframes_bar_siege.dds"
         center  = { 0.05, 0, 0, 0.9 }
@@ -2494,7 +2466,6 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.OnPowerUpdate(nil, "controlledsiege", nil, POWERTYPE_HEALTH, GetUnitPower("controlledsiege", POWERTYPE_HEALTH))
 
         recenter = true
-
     elseif UF.SV.PlayerEnableAltbarMSW and isMounted then
         icon    = "LuiExtended/media/unitframes/unitframes_bar_mount.dds"
         center  = { 0.1*UF.SV.CustomColourStamina[1], 0.1*UF.SV.CustomColourStamina[2], 0.1*UF.SV.CustomColourStamina[3], 0.9 }
@@ -2508,8 +2479,11 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
 
         UF.OnPowerUpdate(nil, "player", nil, POWERTYPE_MOUNT_STAMINA, GetUnitPower("player", POWERTYPE_MOUNT_STAMINA))
 
-        if UF.SV.PlayerFrameOptions ~= 1 then right = true else recenter = true end
-
+        if UF.SV.PlayerFrameOptions ~= 1 then
+            right = true
+        else
+            recenter = true
+        end
     elseif UF.SV.PlayerEnableAltbarXP and ( UF.CustomFrames.player.isLevelCap or ( UF.CustomFrames.player.isChampion )) then
         UF.CustomFrames.player[POWERTYPE_WEREWOLF] = nil
         UF.CustomFrames.controlledsiege[POWERTYPE_HEALTH] = nil
@@ -2523,7 +2497,6 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.ChampionXP.bar:SetValue( GetPlayerChampionXP() )
 
         recenter = true
-
     elseif UF.SV.PlayerEnableAltbarXP then
         icon    = "LuiExtended/media/unitframes/unitframes_level_normal.dds"
         center  = { 0, 0.1, 0.1, 0.9 }
@@ -2539,7 +2512,6 @@ function UF.CustomFramesSetupAlternative( isWerewolf, isSiege, isMounted )
         UF.CustomFrames.player.Experience.bar:SetValue( UF.CustomFrames.player.isChampion and GetPlayerChampionXP() or GetUnitXP("player") )
 
         recenter = true
-
     -- Otherwise bar should be hidden and no tracking be done
     else
         UF.CustomFrames.player[POWERTYPE_WEREWOLF] = nil
@@ -2686,12 +2658,12 @@ function UF.OnCombatEvent( eventCode, result, isError, abilityName, abilityGraph
         local uniqueId = moduleName .. "_powerError_" .. powerType
         local firstRun = true
 
-        EVENT_MANAGER:RegisterForUpdate(uniqueId, 300, function()
+        eventManager:RegisterForUpdate(uniqueId, 300, function()
             if firstRun then
                 backdrop:SetCenterColor( r, g, b, 0.9 )
                 firstRun = false
             else
-                EVENT_MANAGER:UnregisterForUpdate(uniqueId)
+                eventManager:UnregisterForUpdate(uniqueId)
                 g_powerError[powerType] = false
             end
         end)
@@ -2700,12 +2672,10 @@ end
 
 -- Helper function to update visibility of 'death/offline' label and hide bars and bar labels
 function UF.CustomFramesSetDeadLabel( unitFrame, newValue )
-
     unitFrame.dead:SetHidden( newValue == nil )
     if newValue ~= nil then
         unitFrame.dead:SetText( newValue )
     end
-
     if newValue == "Offline" then
         classIcon = classIcons[0]
         if unitFrame.level ~= nil then
@@ -2721,7 +2691,6 @@ function UF.CustomFramesSetDeadLabel( unitFrame, newValue )
             unitFrame.classIcon:SetTexture(classIcon)
         end
     end
-
     if unitFrame[POWERTYPE_HEALTH] then
         if unitFrame[POWERTYPE_HEALTH].bar ~= nil then
             unitFrame[POWERTYPE_HEALTH].bar:SetHidden( newValue ~= nil )
@@ -2736,7 +2705,6 @@ function UF.CustomFramesSetDeadLabel( unitFrame, newValue )
             unitFrame[POWERTYPE_HEALTH].labelTwo:SetHidden( newValue ~= nil )
         end
     end
-
 end
 
 -- Repopulate group members, but try to update only those, that require it
@@ -2744,7 +2712,7 @@ function UF.CustomFramesGroupUpdate()
     --d( strfmt("[%s] GroupUpdate", GetTimeString()) )
 
     -- Unregister update function and clear local flag
-    EVENT_MANAGER:UnregisterForUpdate( g_PendingUpdate.Group.name )
+    eventManager:UnregisterForUpdate( g_PendingUpdate.Group.name )
     g_PendingUpdate.Group.flag = false
 
     if ( UF.CustomFrames.SmallGroup1 == nil and UF.CustomFrames.RaidGroup1 == nil ) then
@@ -3184,7 +3152,6 @@ function UF.CustomFramesApplyReactionColor()
     }
 
     if UF.CustomFrames["reticleover"] then
-
         local unitFrame = UF.CustomFrames["reticleover"]
         local thb = unitFrame[POWERTYPE_HEALTH] -- not a backdrop
 
@@ -3654,7 +3621,9 @@ function UF.CustomFramesApplyLayoutPlayer(unhide)
                 psb.labelTwo:SetDimensions( UF.SV.PlayerBarWidth-50, UF.SV.PlayerBarHeightStamina-2 )
             end
         end
-        if unhide then player.tlw:SetHidden( false ) end
+        if unhide then
+            player.tlw:SetHidden( false )
+        end
     end
 
     -- Target frame
@@ -3818,7 +3787,9 @@ function UF.CustomFramesApplyLayoutGroup(unhide)
         ghb.labelTwo:SetDimensions(UF.SV.GroupBarWidth-50, UF.SV.GroupBarHeight-2)
     end
 
-    if unhide then group:SetHidden( false ) end
+    if unhide then
+        group:SetHidden( false )
+    end
 end
 
 -- Set dimensions of custom raid frame and anchors or raid group members
@@ -3956,7 +3927,6 @@ function UF.CustomFramesApplyLayoutRaid(unhide)
         end
 
         unitFrame.dead:SetDimensions(UF.SV.RaidBarWidth-50, UF.SV.RaidBarHeight-2)
-
         unitFrame[POWERTYPE_HEALTH].label:SetDimensions(UF.SV.RaidBarWidth-50, UF.SV.RaidBarHeight-2)
 
         if not IsUnitOnline(unitTag) then
@@ -3964,10 +3934,10 @@ function UF.CustomFramesApplyLayoutRaid(unhide)
             unitFrame.name:SetAnchor ( LEFT, rhb, LEFT, 5, 0 )
             unitFrame.classIcon:SetHidden (true)
         end
-
     end
-
-    if unhide then raid:SetHidden( false ) end
+    if unhide then
+        raid:SetHidden( false )
+    end
 end
 
 -- Set dimensions of custom raid frame and anchors or raid group members
@@ -4049,7 +4019,6 @@ function UF.CustomFramesApplyInCombat()
 end
 
 function UF.CustomFramesGroupAlpha()
-
     local alphaGroup = 0.01 * UF.SV.GroupAlpha
 
     for i = 1, 4 do
@@ -4090,7 +4059,7 @@ function UF.CustomFramesReloadControlsMenu()
 end
 
 function UF.CustomFramesReloadExecuteMenu()
-g_targetThreshold = UF.SV.ExecutePercentage
+    g_targetThreshold = UF.SV.ExecutePercentage
 
     if UF.CustomFrames["reticleover"] and UF.CustomFrames["reticleover"][POWERTYPE_HEALTH] then
 		UF.CustomFrames["reticleover"][POWERTYPE_HEALTH].threshold = g_targetThreshold
@@ -4102,7 +4071,9 @@ g_targetThreshold = UF.SV.ExecutePercentage
     -- Boss Frames
     for i = 1, 6 do
         local unitTag = "boss" .. i
-        if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag][POWERTYPE_HEALTH] then UF.CustomFrames[unitTag][POWERTYPE_HEALTH].threshold = g_targetThreshold end
+        if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag][POWERTYPE_HEALTH] then
+            UF.CustomFrames[unitTag][POWERTYPE_HEALTH].threshold = g_targetThreshold
+        end
     end
 end
 

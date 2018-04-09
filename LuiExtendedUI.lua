@@ -4,7 +4,7 @@ LUIE.UI = {}
 
 local unpack = unpack
 
-local wm = WINDOW_MANAGER
+local windowManager = WINDOW_MANAGER
 
 -- A handy chaining function for quickly setting up UI elements
 -- Allows us to reference methods to set properties without calling the specific object
@@ -33,7 +33,7 @@ LUIE.UI.Chain = Chain
 
 -- Creates empty CT_TOPLEVELCONTROL window
 function LUIE.UI.TopLevel( anchors, dims )
-    local tlw = wm:CreateTopLevelWindow()
+    local tlw = windowManager:CreateTopLevelWindow()
     tlw:SetClampedToScreen( true )
     tlw:SetMouseEnabled( false )
     tlw:SetMovable( false )
@@ -54,7 +54,7 @@ end
 function LUIE.UI.Control( parent, anchors, dims, hidden )
     if not parent then return end
 
-    local c = wm:CreateControl(nil, parent, CT_CONTROL)
+    local c = windowManager:CreateControl(nil, parent, CT_CONTROL)
     c:SetHidden( hidden )
 
     if anchors == "fill" then
@@ -76,7 +76,7 @@ end
 function LUIE.UI.Texture( parent, anchors, dims, texture, drawlayer, hidden )
     if not parent then return end
 
-    local t = wm:CreateControl(nil, parent, CT_TEXTURE)
+    local t = windowManager:CreateControl(nil, parent, CT_TEXTURE)
     t:SetHidden( hidden )
 
     if anchors == "fill" then
@@ -109,7 +109,7 @@ function LUIE.UI.Backdrop( parent, anchors, dims, center, edge, hidden )
     local center = ( center ~= nil and #center == 4 ) and center or { 0,0,0,0.4 }
     local edge = ( edge ~= nil and #edge == 4 ) and edge or { 0,0,0,0.6 }
 
-    local bg = wm:CreateControl(nil, parent, CT_BACKDROP)
+    local bg = windowManager:CreateControl(nil, parent, CT_BACKDROP)
 
     bg:SetCenterColor( center[1], center[2], center[3], center[4] )
     bg:SetEdgeColor( edge[1], edge[2], edge[3], edge[4] )
@@ -139,7 +139,7 @@ function LUIE.UI.ChatBackdrop( parent, anchors, dims, color, edge_size, hidden )
     local color = ( color ~= nil and #color == 4 ) and color or { 0,0,0,1 }
     local edge_size = ( edge_size ~= nil and edge_size > 0 ) and edge_size or 16
 
-    local bg = wm:CreateControl(nil, parent, CT_BACKDROP)
+    local bg = windowManager:CreateControl(nil, parent, CT_BACKDROP)
 
     bg:SetCenterColor( color[1], color[2], color[3], color[4] )
     bg:SetEdgeColor( color[1], color[2], color[3], color[4] )
@@ -168,7 +168,7 @@ end
 function LUIE.UI.StatusBar( parent, anchors, dims, color, hidden )
     if not parent then return end
 
-    local sb = wm:CreateControl(nil, parent, CT_STATUSBAR)
+    local sb = windowManager:CreateControl(nil, parent, CT_STATUSBAR)
     sb:SetHidden( hidden )
 
     if anchors == "fill" then
@@ -196,7 +196,7 @@ function LUIE.UI.Label( parent, anchors, dims, align, font, text, hidden )
 
     local align = ( align ~= nil and #align == 2 ) and align or { TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER }
 
-    local label = wm:CreateControl(nil, parent, CT_LABEL)
+    local label = windowManager:CreateControl(nil, parent, CT_LABEL)
 
     label:SetFont( font or 'ZoFontGame' )
     label:SetHorizontalAlignment( align[1] )

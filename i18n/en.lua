@@ -7,6 +7,7 @@ ZO_CreateStringId("SI_LUIE_ERROR_FONT",                                 "LUI Ext
 ------------------------------------
 -- SlashCommands.lua ---------------
 ------------------------------------
+
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_QUEUE",                   "Queueing for <<1>>...")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG",               "You cannot queue for a campaign while in a battleground.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_NOT_ENTERED",      "The campaign name you entered is not your home or guest campaign.")
@@ -49,8 +50,11 @@ ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG",        "Regroup
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG",       "Regroup: Group saved! <<1>> group <<2[member/members]>> <<3[was/were]>> offline, they will not be reinvited.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME",              "You must enter the name of a player to trade with.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK",       "You must be in an LFG group to initiate a vote to remove a party member.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_BG",               "You cannot initiate a vote to remove a party member in a battleground.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NONAME",           "You must enter the account or character name of a party member to initiate a vote to remove.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_BG",               "You cannot initiate a vote to remove a party member in a battleground.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA",             "You cannot summon an assistant in Cyrodiil.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG",              "You cannot summon an assistant in a Battleground.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED",     "You did not unlock this collectible yet.")
 
 ------------------------------------
 -- InfoPanel.lua -------------------
@@ -605,6 +609,12 @@ ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND",                 "Enable 
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND_TP",              "'/unfriend' 'name' Remove a player from friends.\n\t\t\t\t\tAlternate options: '/removefriend'")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE",                 "Enable ( /'removeignore' ) Remove Ignored")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE_TP",              "'/unignore' 'name' Remove a player from ignored.\n\t\t\t\t\tAlternate options: '/removeignore'")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_BANKER",                       "Enable ( '/banker' ) Banker")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_BANKER_TP",                    "'/banker' Summon the Banker.")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_MERCHANT",                     "Enable ( '/merchant' ) Merchant")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_MERCHANT_TP",                  "'/merchant' Summon the Merchant.")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_FENCE",                        "Enable ( '/fence' ) Fence")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_FENCE_TP",                     "'/fence' Summon the Fence.")
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

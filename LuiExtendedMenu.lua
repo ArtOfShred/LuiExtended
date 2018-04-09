@@ -5,6 +5,8 @@ local mathrandom    = math.random
 local unpack        = unpack
 local pairs         = pairs
 
+local iconFormat    = zo_iconFormat
+
 -- Create Settings Menu
 function LUIE_CreateSettings()
     -- Load LibAddonMenu
@@ -49,15 +51,13 @@ function LUIE_CreateSettings()
 
     -- Create a list of abilityId's / abilityName's to use for Blacklist
     local function GenerateCustomList(input)
-
         local options, values = {}, {}
-
         local counter = 0
         for id in pairs(input) do
             counter = counter + 1
             -- If the input is a numeric value then we can pull this abilityId's info.
             if type(id) == "number" then
-                options[counter] = zo_iconFormat(GetAbilityIcon(id), 16, 16) .. " [" .. id .. "] " .. GetAbilityName(id)
+                options[counter] = iconFormat(GetAbilityIcon(id), 16, 16) .. " [" .. id .. "] " .. GetAbilityName(id)
             -- If the input is not numeric then add this as a name only.
             else
                 options[counter] = id
@@ -546,36 +546,13 @@ function LUIE_CreateSettings()
         width = "full",
     }
 
-    -- Slash Commands
+    -- Slash Commands - General Commands Submenu
     optionsDataSlashCommands[#optionsDataSlashCommands + 1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER),
+        name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GENERAL),
         controls = {
-            {   -- TODO
-                type = "checkbox",
-                name = "/Home Results - Show Alert (Temp Setting)",
-                tooltip = "Display an alert when the /home command is used.\nNote: This setting will be deprecated in the future when Social Errors Events are implemented in Chat Announcements.",
-                getFunc = function() return LUIE.SV.TempAlertHome end,
-                setFunc = function(value) LUIE.SV.TempAlertHome = value end,
-                width = "full",
-                default = LUIE.D.TempAlertHome,
-            },
-            {   -- TODO
-                type = "checkbox",
-                name = "/Campaign Results - Show Alert (Temp Setting)",
-                tooltip = "Display an alert when the /campaign command is used.\nNote: This setting will be deprecated in the future when Campaign Queue Events are implemented in Chat Announcements.",
-                getFunc = function() return LUIE.SV.TempAlertCampaign end,
-                setFunc = function(value) LUIE.SV.TempAlertCampaign = value end,
-                width = "full",
-                default = LUIE.D.TempAlertCampaign,
-            },
-            {   -- Slash Commands (General Commands)
-                type = "header",
-                name = strformat("<<1>>", GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GENERAL)),
-                width = "full"
-            },
-
-            {   -- SlashTrade
+            {
+                -- SlashTrade
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_TRADE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_TRADE_TP),
@@ -584,8 +561,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashTrade,
             },
-
-            {   -- SlashHome
+            {
+                -- SlashHome
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_HOME),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_HOME_TP),
@@ -594,7 +571,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashHome,
             },
-            {   -- SlashCampaignQ
+            {
+                -- SlashCampaignQ
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_CAMPAIGN),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_CAMPAIGN_TP),
@@ -603,14 +581,66 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashCampaignQ,
             },
-
-            {   -- Slash Commands (Group Commands)
-                type = "header",
-                name = strformat("<<1>>", GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GROUP)),
-                width = "full"
+            {
+                -- SlashBanker
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_SLASHCMDS_BANKER),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_BANKER_TP),
+                getFunc = function() return LUIE.SlashCommands.SV.SlashBanker end,
+                setFunc = function(value) LUIE.SlashCommands.SV.SlashBanker = value LUIE.SlashCommands.RegisterSlashCommands() end,
+                width = "full",
+                default = LUIE.SlashCommands.D.SlashBanker,
             },
+            {
+                -- SlashMerchant
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_SLASHCMDS_MERCHANT),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_MERCHANT_TP),
+                getFunc = function() return LUIE.SlashCommands.SV.SlashMerchant end,
+                setFunc = function(value) LUIE.SlashCommands.SV.SlashMerchant = value LUIE.SlashCommands.RegisterSlashCommands() end,
+                width = "full",
+                default = LUIE.SlashCommands.D.SlashMerchant,
+            },
+            {
+                -- SlashFence
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_SLASHCMDS_FENCE),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_FENCE_TP),
+                getFunc = function() return LUIE.SlashCommands.SV.SlashFence end,
+                setFunc = function(value) LUIE.SlashCommands.SV.SlashFence = value LUIE.SlashCommands.RegisterSlashCommands() end,
+                width = "full",
+                default = LUIE.SlashCommands.D.SlashFence,
+            },
+            {
+                -- TODO
+                type = "checkbox",
+                name = "/Home Results - Show Alert (Temp Setting)",
+                tooltip = "Display an alert when the /home command is used.\nNote: This setting will be deprecated in the future when Social Errors Events are implemented in Chat Announcements.",
+                getFunc = function() return LUIE.SV.TempAlertHome end,
+                setFunc = function(value) LUIE.SV.TempAlertHome = value end,
+                width = "full",
+                default = LUIE.D.TempAlertHome,
+            },
+            {
+                -- TODO
+                type = "checkbox",
+                name = "/Campaign Results - Show Alert (Temp Setting)",
+                tooltip = "Display an alert when the /campaign command is used.\nNote: This setting will be deprecated in the future when Campaign Queue Events are implemented in Chat Announcements.",
+                getFunc = function() return LUIE.SV.TempAlertCampaign end,
+                setFunc = function(value) LUIE.SV.TempAlertCampaign = value end,
+                width = "full",
+                default = LUIE.D.TempAlertCampaign,
+            },
+        },
+    }
 
-            {   -- SlashRegroup
+    -- Slash Commands - Group Commands Options Submenu
+    optionsDataSlashCommands[#optionsDataSlashCommands + 1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GROUP),
+        controls = {
+            {
+                -- SlashRegroup
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_REGROUP),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_REGROUP_TP),
@@ -619,8 +649,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashRegroup,
             },
-
-            {   -- SlashDisband
+            {
+                -- SlashDisband
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_DISBAND),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_DISBAND_TP),
@@ -629,8 +659,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashDisband,
             },
-
-            {   -- SlashGroupLeave
+            {
+                -- SlashGroupLeave
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_LEAVE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_LEAVE_TP),
@@ -639,8 +669,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashGroupLeave,
             },
-
-            {   -- SlashGroupKick
+            {
+                -- SlashGroupKick
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_KICK),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_KICK_TP),
@@ -649,8 +679,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashGroupKick,
             },
-
-            {   -- SlashVoteKick
+            {
+                -- SlashVoteKick
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_VOTEKICK),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_VOTEKICK_TP),
@@ -659,14 +689,16 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashVoteKick,
             },
+        },
+    }
 
-            {   -- Slash Commands (Guild Commands)
-                type = "header",
-                name = strformat("<<1>>", GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GUILD)),
-                width = "full"
-            },
-
-            {   -- SlashGuildInvite
+    -- Slash Commands - Guild Commands Options Submenu
+    optionsDataSlashCommands[#optionsDataSlashCommands + 1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GUILD),
+        controls = {
+            {
+                -- SlashGuildInvite
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDINVITE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDINVITE_TP),
@@ -675,8 +707,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashGuildInvite,
             },
-
-            {   -- SlashGuildQuit
+            {
+                -- SlashGuildQuit
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDQUIT),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDQUIT_TP),
@@ -685,8 +717,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashGuildQuit,
             },
-
-            {   -- SlashGuildKick
+            {
+                -- SlashGuildKick
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDKICK),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_GUILDKICK_TP),
@@ -695,14 +727,16 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashGuildKick,
             },
+        },
+    }
 
-            {   -- Slash Commands (Social Commands)
-                type = "header",
-                name = strformat("<<1>>", GetString(SI_LUIE_LAM_SLASHCMDSHEADER_SOCIAL)),
-                width = "full"
-            },
-
-            {   -- SlashFriend
+    -- Slash Commands - Social Commands Options Submenu
+    optionsDataSlashCommands[#optionsDataSlashCommands + 1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER_SOCIAL),
+        controls = {
+            {
+                -- SlashFriend
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_FRIEND),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_FRIEND_TP),
@@ -711,8 +745,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashFriend,
             },
-
-            {   -- SlashIgnore
+            {
+                -- SlashIgnore
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_IGNORE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_IGNORE_TP),
@@ -721,8 +755,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashIgnore,
             },
-
-            {   -- SlashRemoveFriend
+            {
+                -- SlashRemoveFriend
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND_TP),
@@ -731,8 +765,8 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.SlashCommands.D.SlashRemoveFriend,
             },
-
-            {   -- SlashRemoveIgnore
+            {
+                -- SlashRemoveIgnore
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE),
                 tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE_TP),
@@ -1908,12 +1942,11 @@ function LUIE_CreateSettings()
         type = "submenu",
         name = GetString(SI_LUIE_LAM_BUFF_PROM_HEADER),
         controls = {
-            -- Prominent Buffs & Debuffs Description
             {
+                -- Prominent Buffs & Debuffs Description
                 type = "description",
                 text = GetString(SI_LUIE_LAM_BUFF_PROM_DESCRIPTION),
             },
-
 			{
                 -- Prominent Buffs Label Toggle
                 type = "checkbox",
@@ -1925,7 +1958,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentLabel,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-
 			{
                 -- Prominent Buffs Label Font Face
                 type = "dropdown",
@@ -1940,7 +1972,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentLabelFontFace,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentLabel ) end,
             },
-
             {
                 -- Prominent Buffs Label Font Size
                 type = "slider",
@@ -1953,7 +1984,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentLabelFontSize,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentLabel ) end,
             },
-
             {
                 -- Prominent Buffs Label Font Style
                 type = "dropdown",
@@ -1967,7 +1997,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentLabelFontStyle,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentLabel ) end,
             },
-
 			{
                 -- Prominent Buffs Progress Bar
                 type = "checkbox",
@@ -1979,7 +2008,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentProgress,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-
             {
                 -- Prominent Buffs Progress Bar Texture
                 type = "dropdown",
@@ -1994,7 +2022,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentProgressTexture,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
             },
-
 			{
                 -- Prominent Buffs Gradient Color 1
                 type    = "colorpicker",
@@ -2006,7 +2033,6 @@ function LUIE_CreateSettings()
                 default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC1[3]},
 				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
             },
-
 			{
                 -- Prominent Buffs Gradient Color 2
                 type    = "colorpicker",
@@ -2018,7 +2044,6 @@ function LUIE_CreateSettings()
                 default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressBuffC2[3]},
 				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
             },
-
 			{
                 -- Prominent Debuffs Gradient Color 1
                 type    = "colorpicker",
@@ -2030,7 +2055,6 @@ function LUIE_CreateSettings()
                 default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC1[3]},
 				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
             },
-
 			{
                 -- Prominent Debuffs Gradient Color 2
                 type    = "colorpicker",
@@ -2042,7 +2066,6 @@ function LUIE_CreateSettings()
                 default = {r=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2[1], g=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2[2], b=LUIE.SpellCastBuffs.SV.ProminentProgressDebuffC2[3]},
 				disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and LUIE.SpellCastBuffs.SV.ProminentProgress ) end,
             },
-
 			{
 				-- Prominent Buffs Label/Progress Bar Direction
                 type = "dropdown",
@@ -2056,7 +2079,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentBuffLabelDirection,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and (LUIE.SpellCastBuffs.SV.ProminentLabel or LUIE.SpellCastBuffs.SV.ProminentProgress) ) end,
             },
-
 			{
 				-- Prominent Debuffs Label/Progress Bar Direction
                 type = "dropdown",
@@ -2070,7 +2092,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentDebuffLabelDirection,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable and (LUIE.SpellCastBuffs.SV.ProminentLabel or LUIE.SpellCastBuffs.SV.ProminentProgress) ) end,
             },
-
             {
 				-- Prominent Buffs Alignment
                 type = "dropdown",
@@ -2084,7 +2105,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentBuffAlignment,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-			
 			{
 				-- Prominent Debuffs Alignment
                 type = "dropdown",
@@ -2098,7 +2118,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentDebuffAlignment,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-
             {
                 -- Prominent Buffs Reverse Sort Order
                 type = "checkbox",
@@ -2110,7 +2129,6 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentBuffReverseSort,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-			
 			{
                 -- Prominent Debuffs Reverse Sort Order
                 type = "checkbox",
@@ -2122,12 +2140,10 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentDebuffReverseSort,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-
             {
                 type = "description",
                 text = GetString(SI_LUIE_LAM_BUFF_PROM_DIALOGUE_DESCRIPT),
             },
-
             {
                 -- Prominent Buffs List (Add)
                 type = "editbox",
@@ -2138,7 +2154,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
 
             },
-
             {
                 -- Prominent Buffs List (Remove)
                 type = "dropdown",
@@ -2153,7 +2168,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
                 reference = "LUIE_Prominent_Buffs_List"
             },
-
             {
                 -- Prominent Debuffs List (Add)
                 type = "editbox",
@@ -2164,7 +2178,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
 
             },
-
             {
                 -- Prominent Debuffs List (Remove)
                 type = "dropdown",
@@ -2186,13 +2199,11 @@ function LUIE_CreateSettings()
         type = "submenu",
         name = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_HEADER),
         controls = {
-
-        -- Buffs & Debuffs Blacklist Description
             {
+                -- Buffs & Debuffs Blacklist Description
                 type = "description",
                 text = GetString(SI_LUIE_LAM_BUFF_BLACKLIST_DESCRIPT),
             },
-
             {
                 -- Buffs & Debuffs Blacklist (Add)
                 type = "editbox",
@@ -2203,7 +2214,6 @@ function LUIE_CreateSettings()
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
 
             },
-
             {
                 -- Buffs & Debuffs Blacklist (Remove)
                 type = "dropdown",
@@ -2218,9 +2228,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
                 reference = "LUIE_Blacklist"
             },
-
         },
-
     }
 
     -- Debug Options
@@ -10843,5 +10851,4 @@ function LUIE_CreateSettings()
         LAM2:RegisterAddonPanel('LUIEInfoPanelOptions', panelDataInfoPanel)
         LAM2:RegisterOptionControls('LUIEInfoPanelOptions', optionsDataInfoPanel)
     end
-
 end

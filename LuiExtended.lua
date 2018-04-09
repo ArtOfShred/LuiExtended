@@ -24,6 +24,8 @@ local tostring      = tostring
 local pairs         = pairs
 local ipairs        = ipairs
 
+local eventManager  = EVENT_MANAGER
+
 -- Default Settings
 LUIE.D = {
     UnitFrames_Enabled          = true,
@@ -125,7 +127,7 @@ end
 
 -- Startup Info string
 local function LUIE_LoadScreen()
-    EVENT_MANAGER:UnregisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED)
+    eventManager:UnregisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED)
 
     if not LUIE.SV.StartupInfo then
         LUIE.PrintToChat(strfmt("|cFEFEFE%s by|r |c00C000%s|r |cFEFEFEv%s|r", LUIE.name, LUIE.author, LUIE.version))
@@ -142,12 +144,13 @@ local function LUIE_ToggleVisibility(eventCode, layerIndex, activeLayerIndex)
 end
 
 local function LUIE_RegisterEvents()
-    EVENT_MANAGER:RegisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED, LUIE_LoadScreen)
-    EVENT_MANAGER:RegisterForEvent(LUIE.name, EVENT_ACTION_LAYER_POPPED, LUIE_ToggleVisibility)
-    EVENT_MANAGER:RegisterForEvent(LUIE.name, EVENT_ACTION_LAYER_PUSHED, LUIE_ToggleVisibility)
-    -- Events registed for Slash Commands
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, LUIE.GuildAddedSelf)
-    EVENT_MANAGER:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD, LUIE.GuildRemovedSelf)
+    eventManager:RegisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED, LUIE_LoadScreen)
+    eventManager:RegisterForEvent(LUIE.name, EVENT_ACTION_LAYER_POPPED, LUIE_ToggleVisibility)
+    eventManager:RegisterForEvent(LUIE.name, EVENT_ACTION_LAYER_PUSHED, LUIE_ToggleVisibility)
+    -- Events registerd for Slash Commands
+    -- TODO: Only register if Slash Commands module loaded
+    eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_JOINED_GUILD, LUIE.GuildAddedSelf)
+    eventManager:RegisterForEvent(moduleName, EVENT_GUILD_SELF_LEFT_GUILD, LUIE.GuildRemovedSelf)
 end
 
 -- LuiExtended Initialization
@@ -157,7 +160,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         return
     end
     -- Once we know it's ours, lets unregister the event listener
-    EVENT_MANAGER:UnregisterForEvent(addonName, eventCode)
+    eventManager:UnregisterForEvent(addonName, eventCode)
 
     -- Load additional media from LMP and other addons
     LUIE_LoadMedia()
@@ -226,7 +229,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         return buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId, canClickOff, castByPlayer
     end
 
-    -- Death Recap enhancements:
+    -- Death Recap enhancements
     local zos_GetKillingAttackerInfo = GetKillingAttackerInfo
     local zos_GetKillingAttackInfo = GetKillingAttackInfo
 
@@ -269,7 +272,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         return attackName, attackDamage, attackIcon, wasKillingBlow, castTimeAgoMS, durationMS, numAttackHits
     end
 
-    -- HOOK SUPPORT FOR OTHER ADDONS (ICON)
+    -- Hook support for other addons (Icon)
     LUIE.GetAbilityIcon = GetAbilityIcon -- Used only for PTS testing
     local zos_GetAbilityIcon = GetAbilityIcon
     GetAbilityIcon = function(abilityId)
@@ -280,7 +283,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         return(icon)
     end
 
-    -- HOOK SUPPORT FOR OTHER ADDONS (NAME)
+    -- Hook support for other addons (Name)
     LUIE.GetAbilityName = GetAbilityName -- Used only for PTS testing
     local zos_GetAbilityName = GetAbilityName
     GetAbilityName = function(abilityId)
@@ -291,7 +294,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         return(abilityName)
     end
 
-    -- HOOK SUPPORT FOR OTHER ADDONS (ARTIFICIAL EFFECT IDS)
+    -- Hook support for other addons (Artificial effect ids)
     LUIE.GetArtificialEffectInfo = GetArtificialEffectInfo -- Used only for PTS testing
     local zos_GetArtificialEffectInfo = GetArtificialEffectInfo
     GetArtificialEffectInfo = function(artificialEffectId)
@@ -316,7 +319,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
             if self.lastSynergyName ~= synergyName then
                 PlaySound(SOUNDS.ABILITY_SYNERGY_READY)
 
-                self.action:SetText(zo_strformat(SI_USE_SYNERGY, synergyName))
+                self.action:SetText(strformat(SI_USE_SYNERGY, synergyName))
             end
 
             self.icon:SetTexture(iconFilename)
@@ -331,14 +334,14 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     local function EffectsRowComparator(left, right)
         local leftIsArtificial, rightIsArtificial = left.isArtificial, right.isArtificial
         if leftIsArtificial ~= rightIsArtificial then
-            --Artificial before real
+            -- Artificial before real
             return leftIsArtificial
         else
             if leftIsArtificial then
-                --Both artificial, use def defined sort order
+                -- Both artificial, use def defined sort order
                 return left.sortOrder < right.sortOrder
             else
-                --Both real, use time
+                -- Both real, use time
                 return left.time.endTime < right.time.endTime
             end
         end
@@ -348,9 +351,7 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
         local function UpdateEffects(eventCode, changeType, buffSlot, buffName, unitTag, startTime, endTime, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId)
             if (not unitTag or unitTag == "player") and not container:IsHidden() then
                 effectsRowPool:ReleaseAllObjects()
-
                 local effectsRows = {}
-
                 --Artificial effects--
                 for effectId in ZO_GetNextActiveArtificialEffectIdIter do
                     local displayName, iconFile, effectType, sortOrder = GetArtificialEffectInfo(effectId)
@@ -371,7 +372,6 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
                 local trackBuffs = { }
                 for i = 1, GetNumBuffs("player") do
                     local buffName, startTime, endTime, buffSlot, stackCount, iconFile, buffType, effectType, abilityType, statusEffectType, abilityId = GetUnitBuffInfo("player", i)
-
                     trackBuffs[counter] = {
                         buffName = buffName,
                         startTime = startTime,
@@ -498,13 +498,13 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
             atMorph = select(4, GetAbilityProgressionXPInfo(progressionIndex))
         end
 
-            -- This data is expensive to get, and won't change when the ID is the same.
+        -- This data is expensive to get, and won't change when the ID is the same.
         if abilityData.abilityId ~= abilityId or firstRun then
             local rawName = GetAbilityName(abilityId)
             local icon = GetAbilityIcon(abilityId)
 
-            local plainName = zo_strformat(SI_ABILITY_NAME, rawName)
-            abilityData.name = isActive and plainName or zo_strformat(SI_ABILITY_NAME_AND_RANK, rawName, skillBuildRankIndex)
+            local plainName = strformat(SI_ABILITY_NAME, rawName)
+            abilityData.name = isActive and plainName or strformat(SI_ABILITY_NAME_AND_RANK, rawName, skillBuildRankIndex)
             abilityData.plainName = plainName
             abilityData.icon = icon
         end
@@ -559,7 +559,6 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
     local function SetupAbilitySlot(slotObject, slotId)
         SetupActionSlotWithBg(slotObject, slotId)
-
         if slotId == ACTION_BAR_ULTIMATE_SLOT_INDEX + 1 then
             slotObject:RefreshUltimateNumberVisibility()
         else
@@ -726,4 +725,4 @@ function LUIE.GuildRemovedSelf(eventCode, guildId, guildName)
 end
 
 -- Hook initialization
-EVENT_MANAGER:RegisterForEvent(LUIE.name, EVENT_ADD_ON_LOADED, LUIE_OnAddOnLoaded)
+eventManager:RegisterForEvent(LUIE.name, EVENT_ADD_ON_LOADED, LUIE_OnAddOnLoaded)
