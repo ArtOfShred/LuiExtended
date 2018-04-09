@@ -66,18 +66,18 @@ local function SlashHome()
 
     -- Check to make sure we're not in Cyrodiil
     if IsPlayerInAvAWorld() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_FAILED_AVA))
+        printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA))
         if LUIE.SV.TempAlertHome then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FAILED_AVA)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_AVA)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
     -- Check to make sure we're not in a battleground
     if IsActiveWorldBattleground() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_FAILED_BG))
+        printToChat(GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_BG))
         if LUIE.SV.TempAlertHome then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FAILED_BG)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_HOME_TRAVEL_FAILED_BG)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -141,9 +141,9 @@ local function SlashRegroup()
     end
     -- Check to make sure we're not in a battleground
     if IsActiveWorldBattleground() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_FAILED_BG))
+        printToChat(GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_BG))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FAILED_BG)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_REGROUP_FAILED_BG)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -238,9 +238,9 @@ local function SlashDisband()
     end
     -- Check to make sure player is not in a BG
     if IsActiveWorldBattleground() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_FAILED_BG))
+        printToChat(GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_BG))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FAILED_BG)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_BG)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -718,9 +718,9 @@ local function SlashVoteKick(option)
 
     -- Check to make sure we're not in a battleground
     if IsActiveWorldBattleground() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_FAILED_BG))
+        printToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_BG))
         if LUIE.ChatAnnouncements.SV.Group.GroupLFGAlert then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FAILED_BG)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_BG)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -802,9 +802,9 @@ local function SlashCampaignQ(option)
     end
 
     if IsActiveWorldBattleground() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_FAILED_BG))
+        printToChat(GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG))
         if LUIE.SV.TempAlertCampaign then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_FAILED_BG) )
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_SLASHCMDS_CAMPAIGN_FAILED_BG) )
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
@@ -875,69 +875,102 @@ local function SlashBanker()
     local banker = 267
     -- Check to make sure we're not in Cyrodiil
     if IsPlayerInAvAWorld() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_FAILED_AVA))
+        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA))
         if LUIE.SV.TempAlertHome then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FAILED_AVA)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
     -- Check to make sure we're not in a battleground
     if IsActiveWorldBattleground() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_FAILED_BG))
+        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG))
         if LUIE.SV.TempAlertHome then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FAILED_BG)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-    UseCollectible(banker)
+    -- Check to make sure that we have the Assistant unlocked
+    if IsCollectibleUnlocked(banker) then
+        -- Summon/Unsummon the Assistant
+        UseCollectible(banker)
+    else
+        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED))
+        if LUIE.SV.TempAlertHome then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
 end
 
 local function SlashMerchant()
     local merchant = 301
     -- Check to make sure we're not in Cyrodiil
     if IsPlayerInAvAWorld() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_FAILED_AVA))
+        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA))
         if LUIE.SV.TempAlertHome then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FAILED_AVA)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
     -- Check to make sure we're not in a battleground
     if IsActiveWorldBattleground() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_FAILED_BG))
+        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG))
         if LUIE.SV.TempAlertHome then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FAILED_BG)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-    UseCollectible(merchant)
+    -- Check to make sure that we have the Assistant unlocked
+    if IsCollectibleUnlocked(merchant) then
+        -- Summon/Unsummon the Assistant
+        UseCollectible(merchant)
+    else
+        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED))
+        if LUIE.SV.TempAlertHome then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
 end
 
 local function SlashFence()
     local fence = 300
     -- Check to make sure we're not in Cyrodiil
     if IsPlayerInAvAWorld() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_FAILED_AVA))
+        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA))
         if LUIE.SV.TempAlertHome then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FAILED_AVA)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
     -- Check to make sure we're not in a battleground
     if IsActiveWorldBattleground() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_FAILED_BG))
+        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG))
         if LUIE.SV.TempAlertHome then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_FAILED_BG)))
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG)))
         end
         PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         return
     end
-    UseCollectible(fence)
+    -- Check to make sure that we have the Assistant unlocked
+    if IsCollectibleUnlocked(fence) then
+        -- Summon/Unsummon the Assistant
+        UseCollectible(fence)
+    else
+        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED))
+        if LUIE.SV.TempAlertHome then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
 end
 
 function SC.RegisterSlashCommands()
