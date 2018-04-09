@@ -610,9 +610,9 @@ function SCB.EventCombatDebug(eventCode, result, isError, abilityName, abilityGr
     -- Don't display if this aura is already added to the filter
     if debugAuras[abilityId] and SCB.SV.ShowDebugFilter then return end
 
-    local source = zo_strformat("<<t:1>>", sourceName)
-    local target = zo_strformat("<<t:1>>", targetName)
-    local ability = zo_strformat("<<t:1>>", abilityName)
+    local source = strformat("<<t:1>>", sourceName)
+    local target = strformat("<<t:1>>", targetName)
+    local ability = strformat("<<t:1>>", abilityName)
     local duration = GetAbilityDuration(abilityId)
     local channeled, castTime, channelTime = GetAbilityCastInfo(abilityId)
     local showacasttime = ""
@@ -640,7 +640,7 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
         return
     end
 
-    unitName = zo_strformat("<<t:1>>", unitName)
+    unitName = strformat("<<t:1>>", unitName)
     if unitName == LUIE.PlayerNameFormatted then unitName = "Player" end
 
     local cmxHIDE
