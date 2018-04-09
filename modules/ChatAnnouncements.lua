@@ -20,7 +20,6 @@ local eventManager   = EVENT_MANAGER
 local windowManager  = WINDOW_MANAGER
 
 local callLater      = zo_callLater
-
 local localizeDecimalNum = ZO_LocalizeDecimalNumber
 
 local moduleName     = LUIE.name .. "_ChatAnnouncements"

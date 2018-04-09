@@ -73,6 +73,7 @@ CT.D = {
             showDrain               = true,
             showDot                 = true,
             showHot                 = true,
+
             -- Mitigation
             showMiss                = true,
             showImmune              = true,
@@ -82,6 +83,7 @@ CT.D = {
             showDodged              = true,
             showBlocked             = true,
             showInterrupted         = true,
+
             -- Crowd Control
             showDisoriented         = true,
             showFeared              = true,
@@ -100,6 +102,7 @@ CT.D = {
             showDrain               = true,
             showDot                 = true,
             showHot                 = true,
+
             -- Mitigation
             showMiss                = true,
             showImmune              = true,
@@ -109,6 +112,7 @@ CT.D = {
             showDodged              = true,
             showBlocked             = true,
             showInterrupted         = true,
+
             -- Crowd Control
             showDisoriented         = true,
             showFeared              = true,
@@ -189,6 +193,7 @@ CT.D = {
         gainLoss                    = 32,
         mitigation                  = 32,
         crowdControl                = 26,
+
         -- Combat State, Points, Alerts & Resources
         combatState                 = 24,
         alert                       = 32,

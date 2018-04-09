@@ -49,9 +49,7 @@ function LUIE_CreateSettings()
 
     -- Create a list of abilityId's / abilityName's to use for Blacklist
     local function GenerateCustomList(input)
-
         local options, values = {}, {}
-
         local counter = 0
         for id in pairs(input) do
             counter = counter + 1
@@ -2084,7 +2082,7 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentBuffAlignment,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-			
+
 			{
 				-- Prominent Debuffs Alignment
                 type = "dropdown",
@@ -2110,7 +2108,7 @@ function LUIE_CreateSettings()
                 default = LUIE.SpellCastBuffs.D.ProminentBuffReverseSort,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
             },
-			
+
 			{
                 -- Prominent Debuffs Reverse Sort Order
                 type = "checkbox",
@@ -10843,5 +10841,4 @@ function LUIE_CreateSettings()
         LAM2:RegisterAddonPanel('LUIEInfoPanelOptions', panelDataInfoPanel)
         LAM2:RegisterOptionControls('LUIEInfoPanelOptions', optionsDataInfoPanel)
     end
-
 end
