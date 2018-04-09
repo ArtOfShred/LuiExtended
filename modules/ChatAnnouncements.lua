@@ -20,7 +20,7 @@ local eventManager   = EVENT_MANAGER
 local windowManager  = WINDOW_MANAGER
 
 local callLater      = zo_callLater
-local acallAlert     = ZO_Alert
+local callAlert      = ZO_Alert
 local colorDef       = ZO_ColorDef
 local iconFormat     = zo_iconFormat
 local iconTextFormat = zo_iconTextFormat
