@@ -676,16 +676,16 @@ function SCB.AddToCustomList(list, input)
             local icon = iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = true
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            LUIE.PrintToChat(icon .. " [" .. id .. "] " .. name .. " added to " .. listRef)
+            printToChat(icon .. " [" .. id .. "] " .. name .. " added to " .. listRef)
         else
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            LUIE.PrintToChat("Could not add [" .. input .. "] to " .. listRef .. " That abilityId does not exist.")
+            printToChat("Could not add [" .. input .. "] to " .. listRef .. " That abilityId does not exist.")
         end
     else
         if input ~= "" then
             list[input] = true
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            LUIE.PrintToChat(input .. " added to " .. listRef)
+            printToChat(input .. " added to " .. listRef)
         end
     end
     SCB.Reset()
@@ -700,16 +700,16 @@ function SCB.RemoveFromCustomList(list, input)
             local icon = iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = nil
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            LUIE.PrintToChat(icon .. " [" .. id .. "] " .. name .. " removed from " .. listRef)
+            printToChat(icon .. " [" .. id .. "] " .. name .. " removed from " .. listRef)
         else
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            LUIE.PrintToChat("Could not remove [" .. input .. "] to " .. listRef .. " That abilityId does not exist.")
+            printToChat("Could not remove [" .. input .. "] to " .. listRef .. " That abilityId does not exist.")
         end
     else
         if input ~= "" then
             list[input] = nil
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            LUIE.PrintToChat(input .. " removed from " .. listRef)
+            printToChat(input .. " removed from " .. listRef)
         end
     end
     SCB.Reset()

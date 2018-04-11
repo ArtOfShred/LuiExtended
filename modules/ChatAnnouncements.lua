@@ -28,12 +28,11 @@ local iconFormatInheritColor = zo_iconFormatInheritColor
 local localizeDecimalNum = ZO_LocalizeDecimalNumber
 
 local moduleName     = LUIE.name .. "_ChatAnnouncements"
-CA.Enabled = false
 
 ------------------------------------------------
 -- DEFAULT VARIABLE SETUP ----------------------
 ------------------------------------------------
-
+CA.Enabled = false
 CA.D = {
     -- Base Options
     ChatPlayerDisplayOptions      = 2,
