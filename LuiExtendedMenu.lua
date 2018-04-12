@@ -640,6 +640,16 @@ function LUIE_CreateSettings()
         name = GetString(SI_LUIE_LAM_SLASHCMDSHEADER_GROUP),
         controls = {
             {
+                -- SlashReadyCheck
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_SLASHCMDS_READYCHECK),
+                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_READYCHECK_TP),
+                getFunc = function() return LUIE.SlashCommands.SV.SlashReadyCheck end,
+                setFunc = function(value) LUIE.SlashCommands.SV.SlashReadyCheck = value LUIE.SlashCommands.RegisterSlashCommands() end,
+                width = "full",
+                default = LUIE.SlashCommands.D.SlashReadyCheck,
+            },
+            {
                 -- SlashRegroup
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_REGROUP),
