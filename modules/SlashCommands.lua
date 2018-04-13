@@ -35,6 +35,7 @@ SC.D = {
     SlashBanker         = true,
     SlashMerchant       = true,
     SlashFence          = true,
+    SlashReadyCheck     = true,
 }
 SC.SV       = nil
 
@@ -218,8 +219,9 @@ local function SlashRegroup()
 end
 
 local function SlashDisband()
+    local groupSize = GetGroupSize()
     -- Check to make sure player is in a group
-    if GetGroupSize() <= 1 then
+    if groupSize <= 1 then
         printToChat(GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOGROUP))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
             callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_DISBAND_FAILED_NOGROUP)))
@@ -273,6 +275,7 @@ local function SlashKick(option)
 end
 
 local function SlashGroupKick(option)
+    local groupSize = GetGroupSize()
     -- Rather then error out, let the player use /kick and /remove as a substitute for /votekick and /voteremove in LFG
     if IsInLFGGroup() then
         if option == "" then
@@ -297,7 +300,7 @@ local function SlashGroupKick(option)
     end
 
     -- Check to make sure player is in a group
-    if GetGroupSize() <= 1 then
+    if groupSize <= 1 then
         printToChat(GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOGROUP))
         if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
             callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOGROUP)))
@@ -706,8 +709,9 @@ local function SlashTrade(option)
 end
 
 local function SlashVoteKick(option)
+    local groupSize = GetGroupSize()
     -- Check to make sure player is in a group
-    if GetGroupSize() <= 1 then
+    if groupSize <= 1 then
         printToChat(GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK))
         if LUIE.ChatAnnouncements.SV.Group.GroupLFGAlert then
             callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK)))
@@ -973,6 +977,21 @@ local function SlashFence()
     end
 end
 
+local function SlashReadyCheck()
+    local groupSize = GetGroupSize()
+    -- Check to make sure player is in a group
+    if groupSize <= 1 then
+        printToChat(GetString(SI_LUIE_SLASHCMDS_READYCHECK_FAILED_NOTINGRP))
+        if LUIE.ChatAnnouncements.SV.Group.GroupAlert then
+            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_READYCHECK_FAILED_NOTINGRP)))
+        end
+        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+        return
+    end
+    -- Send a ready check to group members
+    ZO_SendReadyCheck()
+end
+
 function SC.RegisterSlashCommands()
     -- Clear commands list
     SLASH_COMMANDS["/home"]         = nil
@@ -1008,6 +1027,7 @@ function SC.RegisterSlashCommands()
     SLASH_COMMANDS["/banker"]       = nil
     SLASH_COMMANDS["/merchant"]     = nil
     SLASH_COMMANDS["/fence"]        = nil
+    SLASH_COMMANDS["/ready"]        = nil
     SLASH_COMMAND_AUTO_COMPLETE:InvalidateSlashCommandCache()
 
     -- Add commands based off menu options
@@ -1077,5 +1097,8 @@ function SC.RegisterSlashCommands()
     end
     if SC.SV.SlashFence then
         SLASH_COMMANDS["/fence"]        = SlashFence
+    end
+    if SC.SV.SlashReadyCheck then
+        SLASH_COMMANDS["/ready"]        = SlashReadyCheck
     end
 end

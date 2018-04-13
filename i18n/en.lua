@@ -38,16 +38,16 @@ ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILDACC_KICK", "You mus
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDGUILD_LEAVE",   "You must enter a valid guild number to leave.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME",          "Could not find target player to remove from the group.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME_GUILD",    "Could not find target player to remove from the guild.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_BG",                "Regroup: You cannot initiate a regroup while in a battleground.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_LFGACTIVITY",       "Regroup: You cannot initiate a regroup while in an LFG group.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTINGRP",          "Regroup: You must be in a group to initiate a regroup.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTLEADER",         "Regroup: You must be the group leader to initiate a regroup.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_PENDING",           "Regroup: A regroup is currently pending, please wait for the current regroup to finish before attempting another.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG",             "Regroup: Reinviting group members...")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_BG",                "You cannot initiate a regroup while in a battleground.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_LFGACTIVITY",       "You cannot initiate a regroup while in an LFG group.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTINGRP",          "You must be in a group to initiate a regroup.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_NOTLEADER",         "You must be the group leader to initiate a regroup.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_FAILED_PENDING",           "A regroup is currently pending, please wait for the current regroup to finish before attempting another.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_REINVITE_MSG",             "Reinviting group members...")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_REINVITE_SENT_MSG",        "Invited → |cFFFFFF<<1>>|r")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG",                "Regroup: Group saved! Disbanding...")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG",        "Regroup: No party members were online or eligible for regroup. Group was not disbanded.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG",       "Regroup: Group saved! <<1>> group <<2[member/members]>> <<3[was/were]>> offline, they will not be reinvited.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_MSG",                "Group saved! Disbanding...")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_ALL_OFF_MSG",        "No party members were online or eligible for regroup. Group was not disbanded.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_REGROUP_SAVED_SOME_OFF_MSG",       "Group saved! <<1>> group <<2[member/members]>> <<3[was/were]>> offline, they will not be reinvited.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_TRADE_FAILED_NONAME",              "You must enter the name of a player to trade with.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NOTLFGKICK",       "You must be in an LFG group to initiate a vote to remove a party member.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NONAME",           "You must enter the account or character name of a party member to initiate a vote to remove.")
@@ -55,6 +55,7 @@ ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_BG",               "You can
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA",             "You cannot summon an assistant in Cyrodiil.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG",              "You cannot summon an assistant in a Battleground.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED",     "You did not unlock this collectible yet.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_READYCHECK_FAILED_NOTINGRP",       "You must be in a group to initiate a ready check.")
 
 ------------------------------------
 -- InfoPanel.lua -------------------
@@ -615,6 +616,8 @@ ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_MERCHANT",                     "Enable 
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_MERCHANT_TP",                  "'/merchant' Summon the Merchant.")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_FENCE",                        "Enable ( '/fence' ) Fence")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_FENCE_TP",                     "'/fence' Summon the Fence.")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_READYCHECK",                   "Enable ( '/ready' ) Ready Check")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_READYCHECK_TP",                "Send a 'ready check' dialog to all group members.")
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
