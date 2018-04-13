@@ -305,6 +305,7 @@ E.AbilityIcon = {
 E.DebuffDisplayOverrideId = {
     -- Basic (Shared)
     [2727] = true, -- Off-Balance (Generic)
+    [102771] = true, -- Off Balance Immunity
 
     -- Player (Sets)
     [34386] = true, -- Night Mother's Gaze
@@ -1536,6 +1537,8 @@ E.EffectOverride = {
     [64197] = { forcedContainer = 'short' }, -- Sanctuary Cyrodiil passive is considered unlimited duration, but the effect is only while the player is in the area. Should show up under short buffs.
     [54119] = { forcedContainer = 'short' }, -- Remembrance (The Anger of a King)
 
+    [62097] = { forcedContainer = 'short' }, -- Grim Focus (Nightblade) -- TODO: Move
+
     -- Craglorn buffs
     [82294] = { icon = 'esoui/art/icons/achievement_craglorn_001.dds' }, -- Magicka Attunement
     [81894] = { icon = 'esoui/art/icons/achievement_craglorn_002.dds' }, -- Yokudan Might
@@ -2631,6 +2634,7 @@ E.EffectOverride = {
     [63601] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_eso_plus_member.dds' }, -- ESO Plus Member
     [47270] = { icon = 'esoui/art/icons/achievement_update11_dungeons_017.dds', unbreakable = 1 }, -- Ritual of Mara
     [2727] = { icon = 'esoui/art/icons/ability_debuff_offbalance.dds' }, -- Off-Balance
+    [102771] = { stack = 0, type = 1 }, -- Off Balance Immunity
     [85701] = { hide = true }, -- Dueling Flag
     [21263] = { icon = 'LuiExtended/media/icons/abilities/ability_innate_ayleid_well.dds', name = A.Innate_Ayleid_Well}, -- Ayleid Health Bonus
 

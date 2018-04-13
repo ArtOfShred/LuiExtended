@@ -1691,16 +1691,17 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
 
     -- Where the new icon will go into
     local context = unitTag .. effectType
+
 	if (SCB.SV.PromDebuffTable[abilityId] or SCB.SV.PromDebuffTable[effectName]) then
 		if context == "player1" then
             context = "promd_player"
-        elseif context == "reticleover2" then
+        elseif context == "reticleover2" or abilityId == 102771 then
             context = "promd_target"
         end
 	elseif (SCB.SV.PromBuffTable[abilityId] or SCB.SV.PromBuffTable[effectName]) then
 		if context == "player1" then
             context = "promb_player"
-        elseif context == "reticleover2" then
+        elseif context == "reticleover2" or abilityId == 102771 then
             context = "promb_target"
         end
 	end
@@ -2623,8 +2624,12 @@ function SCB.updateBar( currentTime, sortedList, container )
         local auraEnds = effect.ends or nil
 
         -- If this isn't a permanent duration buff then update the bar on every tick
-        if buff and buff.bar and buff.bar.bar and auraStarts and auraEnds and remain > 0 then
-            buff.bar.bar:SetValue(1 - ((currentTime - auraStarts) / (auraEnds - auraStarts)))
+        if buff and buff.bar and buff.bar.bar then
+            if auraStarts and auraEnds and remain > 0 then
+                buff.bar.bar:SetValue(1 - ((currentTime - auraStarts) / (auraEnds - auraStarts)))
+            else
+                buff.bar.bar:SetValue(1)
+            end
         end
     end
 
