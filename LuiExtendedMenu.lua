@@ -49,6 +49,11 @@ function LUIE_CreateSettings()
     local playerFrameOptionsKeys        = { ["Vertical Stacked Frames"] = 1, ["Separated Horizontal Frames"] = 2, ["Pyramid"] = 3 }
     local championOptions               = { "Show Above Cap", "Limit to Cap", }
 
+    -- Variables for custom generated tables
+    local PromBuffs, PromBuffsValues = {}
+    local PromDebuffs, PromDebuffsValues = {}
+    local Blacklist, BlackListValues = {}
+
     -- Create a list of abilityId's / abilityName's to use for Blacklist
     local function GenerateCustomList(input)
         local options, values = {}, {}
@@ -66,10 +71,6 @@ function LUIE_CreateSettings()
         end
         return options, values
     end
-
-    local PromBuffs, PromBuffsValues = GenerateCustomList(LUIE.SpellCastBuffs.SV.PromBuffTable)
-    local PromDebuffs, PromDebuffsValues = GenerateCustomList(LUIE.SpellCastBuffs.SV.PromDebuffTable)
-    local Blacklist, BlackListValues = GenerateCustomList(LUIE.SpellCastBuffs.SV.BlacklistTable)
 
     local formatOptions = {
         "Nothing",
@@ -2173,7 +2174,7 @@ function LUIE_CreateSettings()
                 choicesValues = PromBuffsValues,
                 scrollable = true,
                 sort = "name-up",
-                getFunc = function() end,
+                getFunc = function() LUIE_Prominent_Buffs_List:UpdateChoices(GenerateCustomList(LUIE.SpellCastBuffs.SV.PromBuffTable)) end,
                 setFunc = function(value) LUIE.SpellCastBuffs.RemoveFromCustomList(LUIE.SpellCastBuffs.SV.PromBuffTable, value) LUIE_Prominent_Buffs_List:UpdateChoices(GenerateCustomList(LUIE.SpellCastBuffs.SV.PromBuffTable)) end,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
                 reference = "LUIE_Prominent_Buffs_List"
@@ -2197,7 +2198,7 @@ function LUIE_CreateSettings()
                 choicesValues = PromDebuffsValues,
                 scrollable = true,
                 sort = "name-up",
-                getFunc = function() end,
+                getFunc = function() LUIE_Prominent_Debuffs_List:UpdateChoices(GenerateCustomList(LUIE.SpellCastBuffs.SV.PromDebuffTable)) end,
                 setFunc = function(value) LUIE.SpellCastBuffs.RemoveFromCustomList(LUIE.SpellCastBuffs.SV.PromDebuffTable, value) LUIE_Prominent_Debuffs_List:UpdateChoices(GenerateCustomList(LUIE.SpellCastBuffs.SV.PromDebuffTable)) end,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
                 reference = "LUIE_Prominent_Debuffs_List"
@@ -2233,7 +2234,7 @@ function LUIE_CreateSettings()
                 choicesValues = BlacklistValues,
                 scrollable = true,
                 sort = "name-up",
-                getFunc = function() end,
+                getFunc = function() LUIE_Blacklist:UpdateChoices(GenerateCustomList(LUIE.SpellCastBuffs.SV.BlacklistTable)) end,
                 setFunc = function(value) LUIE.SpellCastBuffs.RemoveFromCustomList(LUIE.SpellCastBuffs.SV.BlacklistTable, value) LUIE_Blacklist:UpdateChoices(GenerateCustomList(LUIE.SpellCastBuffs.SV.BlacklistTable)) end,
                 disabled = function() return not ( LUIE.SV.SpellCastBuff_Enable ) end,
                 reference = "LUIE_Blacklist"
