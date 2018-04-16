@@ -175,7 +175,7 @@ A.Memento_Dreamers_Chime            = GetCollectibleName(1229)
 A.Memento_Hidden_Pressure_Vent      = GetCollectibleName(354)
 A.Memento_Coin_of_Illusory_Riches   = GetCollectibleName(361)
 A.Memento_Malacaths_Wrathful_Flame  = GetCollectibleName(353)
-A.Memento_Jubliee_Cake              = GetCollectibleName(1109)
+A.Memento_Jubliee_Cake              = 87998
 A.Memento_Mud_Ball                  = 86749
 A.Memento_Storm_Atronach_Aura       = GetCollectibleName(594)
 A.Memento_Storm_Orb_Juggle          = GetCollectibleName(595)
@@ -187,6 +187,9 @@ A.Memento_Crows_Calling             = GetCollectibleName(1383)
 A.Memento_Fiery_Orb                 = GetCollectibleName(1481)
 A.Memento_Flame_Pixie               = GetCollectibleName(1482)
 A.Memento_Flame_Eruption            = GetCollectibleName(1483)
+A.Memento_Frost_Shard               = GetCollectibleName(4707)
+A.Memento_Rune_of_Levitation        = GetCollectibleName(4706)
+A.Memento_Dragon_Summons_Focus      = GetCollectibleName(4708)
 
 -- ---------------------------------------------------
 -- ITEM SETS -----------------------------------------

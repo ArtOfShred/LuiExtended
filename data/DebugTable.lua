@@ -631,7 +631,8 @@ debugAuras = {
             [74232] = true, -- Stun (Malacath's Wrathful Flame)
             [77027] = true, -- Anniversary Cake - Forreals (Jubilee Cake)
             [87998] = true, -- Anniversary Cake (2nd Annual Jubilee Cake)
-            [77123] = true, -- 2017 Anniversary EXP Buff (2nd Annual Jubilee Cake)
+            [102009] = true, -- Anniversary Cake (3rd Annual Jubilee Cake)
+            [77123] = true, -- Anniversary EXP Buff (Any Jubilee Cake)
             [81575] = true, -- Event - WitchFest Cauldron (Witchmother's Whistle)
             [84361] = true, -- Witchmother's Brew (Witchmother's Whistle)
             [84369] = true, -- Witchmother's Brew (Witchmother's Whistle)
@@ -667,6 +668,10 @@ debugAuras = {
             [99318] = true, -- TROPHY Flame Crate Mem 1 (Fiery Orb)
             [99319] = true, -- Flame Crate Memento 2 (Flame Pixie)
             [99320] = true, -- TROPHY Flame Crate Mem 3 (Flame Eruption)
+
+            [101874] = true, -- _CRWN Dragon Priest Mem2 Ice T (Scalecaller Frost Shard)
+            [101877] = true, -- _CRWN Dragon Priest Mem1 Fl/St (Scalecaller Rune of Levitation)
+            [101872] = true, -- _CRWN Dragon Priest Memento 3 (Bone Dragon Summons Focus)
 
             -------------------------------------
             -- PETS --
