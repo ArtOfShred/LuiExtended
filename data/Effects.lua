@@ -311,6 +311,7 @@ E.DebuffDisplayOverrideId = {
     [34386] = true, -- Night Mother's Gaze
     [51315] = true, -- Destructive Mage (Aether ... of Destruction)
     [60416] = true, -- Sunderflame
+    [75753] = true, -- Line Breaker (of Alkosh)
     [93001] = true, -- Mad Tinkerer (Stun from Fabricant)
 
     -----------------
