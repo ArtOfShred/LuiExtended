@@ -2,9 +2,10 @@
 -- LUIE namespace
 LUIE             = {}
 LUIE.name        = "LuiExtended"
-LUIE.author      = "ArtOfShred, psypanda, Upularity & SpellBuilder"
+LUIE.author      = "ArtOfShred, psypanda & SpellBuilder"
 LUIE.version     = "5.3.2"
 LUIE.website     = "http://www.esoui.com/downloads/info818-LuiExtended.html"
+LUIE.github      = "https://github.com/ArtOfShred/LuiExtended"
 LUIE.components  = {}
 
 -- Saved variables options
@@ -21,20 +22,12 @@ local tablesort     = table.sort
 local gsub          = gsub
 local reverse       = reverse
 local tostring      = tostring
-local pairs         = pairs
-local ipairs        = ipairs
+local pairs, ipairs = pairs, ipairs
 
 local eventManager  = EVENT_MANAGER
 
 -- Default Settings
 LUIE.D = {
-    UnitFrames_Enabled          = true,
-    InfoPanel_Enabled           = true,
-    CombatInfo_Enabled          = true,
-    CombatText_Enabled          = true,
-    SpellCastBuff_Enable        = true,
-    ChatAnnouncements_Enable    = true,
-    SlashCommands_Enable        = true,
     ChatUseSystem               = false,
     TimeStamp                   = false,
     TimeStampFormat             = "HH:m:s",
@@ -43,6 +36,15 @@ LUIE.D = {
     TempAlertHome               = false,
     TempAlertCampaign           = false,
     WelcomeVersion              = 0,
+
+    -- Modules
+    UnitFrames_Enabled          = true,
+    InfoPanel_Enabled           = true,
+    CombatInfo_Enabled          = true,
+    CombatText_Enabled          = true,
+    SpellCastBuff_Enable        = true,
+    ChatAnnouncements_Enable    = true,
+    SlashCommands_Enable        = true,
 }
 
 -- Global fonts table to use in other parts of this addon

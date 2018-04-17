@@ -17,8 +17,7 @@ local tableinsert   = table.insert
 local tablesort     = table.sort
 local unpack        = unpack
 local tonumber      = tonumber
-local pairs         = pairs
-local ipairs        = ipairs
+local pairs, ipairs = pairs, ipairs
 
 local eventManager  = EVENT_MANAGER
 local sceneManager  = SCENE_MANAGER
@@ -248,7 +247,6 @@ end
 --]]----------------------------------------------------------
 
 local Effects = {
-
     --["Imperial Prison Item Set"]    = { 6.0, false, false, nil},
 
     -- Dragonknight
@@ -624,8 +622,12 @@ function SCB.EventCombatDebug(eventCode, result, isError, abilityName, abilityGr
     if castTime ~= 0 then
         showacasttime = (" [Cast] " .. castTime)
     end
-    if source == LUIE.PlayerNameFormatted then source = "Player" end
-    if target == LUIE.PlayerNameFormatted then target = "Player" end
+    if source == LUIE.PlayerNameFormatted then
+        source = "Player"
+    end
+    if target == LUIE.PlayerNameFormatted then
+        target = "Player"
+    end
     if source == "" and target == "" then
         ability = LUIE.GetAbilityName(abilityId)
         source = "NIL"
@@ -642,7 +644,9 @@ function SCB.EventEffectDebug(eventCode, changeType, effectSlot, effectName, uni
     end
 
     unitName = strformat("<<t:1>>", unitName)
-    if unitName == LUIE.PlayerNameFormatted then unitName = "Player" end
+    if unitName == LUIE.PlayerNameFormatted then
+        unitName = "Player"
+    end
 
     local cmxHIDE
     if CMX and CMX.CustomAbilityHide and CMX.CustomAbilityHide[abilityId] then
@@ -792,7 +796,7 @@ end
 function SCB.CollectibleUsed(eventCode, result, isAttemptingActivation)
     local latency = GetLatency()
     latency = latency + 100
-    callLater (SCB.CollectibleBuff, latency)
+    callLater(SCB.CollectibleBuff, latency)
 end
 
 function SCB.CollectibleBuff()
@@ -1251,7 +1255,8 @@ function SCB.ResetSingleIcon( container, buff, AnchorItem )
 
     if buff.cd ~= nil then
         buff.cd:SetHidden( not SCB.SV.RemainingCooldown )
-        buff.iconbg:SetHidden( not SCB.SV.RemainingCooldown ) -- We do not need black icon background when there is no Cooldown control present
+        -- We do not need black icon background when there is no Cooldown control present
+        buff.iconbg:SetHidden( not SCB.SV.RemainingCooldown )
     end
 
     if buff.abilityId ~= nil then
@@ -1795,7 +1800,9 @@ function SCB.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unit
                     if v.id == abilityId then
                         stackCount = v.stack + 1
                         -- Stop stacks from going over a certain amount.
-                        if stackCount > E.EffectOverride[abilityId].maxStacks then stackCount = E.EffectOverride[abilityId].maxStacks end
+                        if stackCount > E.EffectOverride[abilityId].maxStacks then
+                            stackCount = E.EffectOverride[abilityId].maxStacks
+                        end
                     end
                 end
             end
@@ -1824,7 +1831,9 @@ function SCB.ArtificialEffectUpdate(eventCode, effectId)
         --local forcedType = E.EffectForcedType[artificialEffectId]
         -- Bail out if we don't have Battle Spirit display for the player on
 
-        if (effectId == 0 or effectId == 2) and SCB.SV.IgnoreBattleSpiritPlayer then return end
+        if (effectId == 0 or effectId == 2) and SCB.SV.IgnoreBattleSpiritPlayer then
+            return
+        end
 
         g_effectsList.player1[ effectId ] = {
             target="player", type=effectType,
@@ -1983,7 +1992,8 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
         local source = strformat("<<t:1>>",sourceName)
         local target = strformat("<<t:1>>",targetName)
         if source == LUIE.PlayerNameFormatted and target == LUIE.PlayerNameFormatted then
-            if E.FakePlayerBuffs[abilityId].debuff == true then -- If the "buff" is flagged as a debuff, then display it here instead
+            -- If the "buff" is flagged as a debuff, then display it here instead
+            if E.FakePlayerBuffs[abilityId].debuff == true then
                 g_effectsList.player2[ abilityId ] = {
 					type=BUFF_EFFECT_TYPE_DEBUFF,
 					id=abilityId, name=effectName, icon=iconName,
@@ -1992,7 +2002,8 @@ function SCB.OnCombatEventIn( eventCode, result, isError, abilityName, abilityGr
 					restart=true, iconNum=0,
 					unbreakable=unbreakable
 				}
-            else -- Otherwise, display as a normal buff
+            -- Otherwise, display as a normal buff
+            else
                 g_effectsList.player1[ abilityId ] = {
 					type=1,
 					id=abilityId, name=effectName, icon=iconName,
@@ -2471,7 +2482,6 @@ function SCB.OnSlotAbilityUsed(eventCode, slotNum)
         -- Get the time
         -- Avoid failure and button mashing
         if not HasFailure( slotNum ) and ( currentTime > g_lastCast + 250 ) then
-
             -- Don't process effects immediately for ground-target spells
             if ability.ground then
                 g_pendingGroundAbility = ability
@@ -2672,7 +2682,7 @@ function SCB.updateBar( currentTime, sortedList, container )
 end
 
 function SCB.updateIcons( currentTime, sortedList, container )
-    -- Speial workaround for container with player long buffs. We do not need to update it every 100ms, but rather 3 times less often
+    -- Special workaround for container with player long buffs. We do not need to update it every 100ms, but rather 3 times less often
     if uiTlw[container].skipUpdate then
         uiTlw[container].skipUpdate = uiTlw[container].skipUpdate + 1
         if uiTlw[container].skipUpdate > 1 then
