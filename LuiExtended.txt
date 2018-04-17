@@ -58,6 +58,7 @@ libs\LibAddonMenu-2.0\controls\divider.lua
 LuiExtended.lua
 LuiExtendedUI.lua
 LuiExtendedMenu.lua
+LuiChangelog.lua
 
 xml\bindings.xml
 xml\CombatText.xml

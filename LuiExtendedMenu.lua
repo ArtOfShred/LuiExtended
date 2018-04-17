@@ -194,10 +194,19 @@ function LUIE_CreateSettings()
     -- ReloadUI Button
     optionsData[#optionsData + 1] = {
         type = "button",
+        name = GetString(SI_LUIE_LAM_CHANGELOG),
+        tooltip = GetString(SI_LUIE_LAM_CHANGELOG_TP),
+        func = function() LUIE_WelcomeScreen(true) end,
+        width = "half",
+    }
+
+    -- ReloadUI Button
+    optionsData[#optionsData + 1] = {
+        type = "button",
         name = GetString(SI_LUIE_LAM_RELOADUI),
         tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
         func = function() ReloadUI("ingame") end,
-        width = "full",
+        width = "half",
     }
 
     -- Unit Frames Module

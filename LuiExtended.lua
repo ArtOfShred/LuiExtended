@@ -42,6 +42,7 @@ LUIE.D = {
     HideXPBar                   = false,
     TempAlertHome               = false,
     TempAlertCampaign           = false,
+    WelcomeVersion              = 0,
 }
 
 -- Global fonts table to use in other parts of this addon
@@ -167,6 +168,9 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
     -- Load saved variables
     LUIE_LoadSavedVars()
+
+    -- Display welcome screen
+    LUIE_WelcomeScreen()
 
     LUIE.PlayerNameRaw = GetRawUnitName("player")
     LUIE.PlayerNameFormatted = strformat(SI_UNIT_NAME, GetUnitName("player"))
