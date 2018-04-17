@@ -53,7 +53,7 @@ function SC.Initialize( enabled )
     SC.RegisterSlashCommands()
 end
 
-local function SlashHome()
+function LUIE.SlashHome()
     local primaryHouse = GetHousingPrimaryHouse()
     -- Check if we are in combat
     if IsUnitInCombat("player") then
@@ -120,7 +120,7 @@ local function RegroupInvite()
     g_regroupStacks = {} -- Allow index to be used again.
 end
 
-local function SlashRegroup()
+function LUIE.SlashRegroup()
     local groupSize = GetGroupSize()
     -- Check for pending regroup
     if PendingRegroup then
@@ -875,7 +875,7 @@ local function SlashInvite(option)
     end
 end
 
-local function SlashBanker()
+function LUIE.SlashBanker()
     local banker = 267
     -- Check to make sure we're not in Cyrodiil
     if IsPlayerInAvAWorld() then
@@ -900,7 +900,7 @@ local function SlashBanker()
         -- Summon/Unsummon the Assistant
         UseCollectible(banker)
     else
-        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED))
+        printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED), GetCollectibleName(267)))
         if LUIE.SV.TempAlertHome then
             callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED)))
         end
@@ -909,7 +909,7 @@ local function SlashBanker()
     end
 end
 
-local function SlashMerchant()
+function LUIE.SlashMerchant()
     local merchant = 301
     -- Check to make sure we're not in Cyrodiil
     if IsPlayerInAvAWorld() then
@@ -934,7 +934,7 @@ local function SlashMerchant()
         -- Summon/Unsummon the Assistant
         UseCollectible(merchant)
     else
-        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED))
+        printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED), GetCollectibleName(301)))
         if LUIE.SV.TempAlertHome then
             callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED)))
         end
@@ -943,7 +943,7 @@ local function SlashMerchant()
     end
 end
 
-local function SlashFence()
+function LUIE.SlashFence()
     local fence = 300
     -- Check to make sure we're not in Cyrodiil
     if IsPlayerInAvAWorld() then
@@ -968,7 +968,7 @@ local function SlashFence()
         -- Summon/Unsummon the Assistant
         UseCollectible(fence)
     else
-        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED))
+        printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED), GetCollectibleName(300)))
         if LUIE.SV.TempAlertHome then
             callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED)))
         end
@@ -977,7 +977,7 @@ local function SlashFence()
     end
 end
 
-local function SlashReadyCheck()
+function LUIE.SlashReadyCheck()
     local groupSize = GetGroupSize()
     -- Check to make sure player is in a group
     if groupSize <= 1 then
@@ -1024,18 +1024,23 @@ function SC.RegisterSlashCommands()
     SLASH_COMMANDS["/removeignore"] = nil
     SLASH_COMMANDS["/campaign"]     = nil
     SLASH_COMMANDS["/invite"]       = SlashInvite -- This command is always registered since it is also a default command
+    SLASH_COMMANDS["/bank"]         = nil
     SLASH_COMMANDS["/banker"]       = nil
+    SLASH_COMMANDS["/sell"]         = nil
     SLASH_COMMANDS["/merchant"]     = nil
+    SLASH_COMMANDS["/vendor"]       = nil
+    SLASH_COMMANDS["/smuggler"]     = nil
     SLASH_COMMANDS["/fence"]        = nil
     SLASH_COMMANDS["/ready"]        = nil
+    SLASH_COMMANDS["/readycheck"]   = nil
     SLASH_COMMAND_AUTO_COMPLETE:InvalidateSlashCommandCache()
 
     -- Add commands based off menu options
     if SC.SV.SlashHome then
-        SLASH_COMMANDS["/home"]         = SlashHome
+        SLASH_COMMANDS["/home"]         = LUIE.SlashHome
     end
     if SC.SV.SlashRegroup then
-        SLASH_COMMANDS["/regroup"]      = SlashRegroup
+        SLASH_COMMANDS["/regroup"]      = LUIE.SlashRegroup
     end
     if SC.SV.SlashDisband then
         SLASH_COMMANDS["/disband"]      = SlashDisband
@@ -1090,15 +1095,20 @@ function SC.RegisterSlashCommands()
         SLASH_COMMANDS["/campaign"]     = SlashCampaignQ
     end
     if SC.SV.SlashBanker then
-        SLASH_COMMANDS["/banker"]       = SlashBanker
+        SLASH_COMMANDS["/bank"]         = LUIE.SlashBanker
+        SLASH_COMMANDS["/banker"]       = LUIE.SlashBanker
     end
     if SC.SV.SlashMerchant then
-        SLASH_COMMANDS["/merchant"]     = SlashMerchant
+        SLASH_COMMANDS["/sell"]         = LUIE.SlashMerchant
+        SLASH_COMMANDS["/merchant"]     = LUIE.SlashMerchant
+        SLASH_COMMANDS["/vendor"]       = LUIE.SlashMerchant
     end
     if SC.SV.SlashFence then
-        SLASH_COMMANDS["/fence"]        = SlashFence
+        SLASH_COMMANDS["/smuggler"]     = LUIE.SlashFence
+        SLASH_COMMANDS["/fence"]        = LUIE.SlashFence
     end
     if SC.SV.SlashReadyCheck then
-        SLASH_COMMANDS["/ready"]        = SlashReadyCheck
+        SLASH_COMMANDS["/ready"]        = LUIE.SlashReadyCheck
+        SLASH_COMMANDS["/readycheck"]   = LUIE.SlashReadyCheck
     end
 end

@@ -595,7 +595,7 @@ function LUIE_CreateSettings()
                 -- SlashBanker
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_BANKER),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_BANKER_TP),
+                tooltip = strformat(GetString(SI_LUIE_LAM_SLASHCMDS_BANKER_TP), GetCollectibleName(267)),
                 getFunc = function() return LUIE.SlashCommands.SV.SlashBanker end,
                 setFunc = function(value) LUIE.SlashCommands.SV.SlashBanker = value LUIE.SlashCommands.RegisterSlashCommands() end,
                 width = "full",
@@ -605,7 +605,7 @@ function LUIE_CreateSettings()
                 -- SlashMerchant
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_MERCHANT),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_MERCHANT_TP),
+                tooltip = strformat(GetString(SI_LUIE_LAM_SLASHCMDS_MERCHANT_TP), GetCollectibleName(301)),
                 getFunc = function() return LUIE.SlashCommands.SV.SlashMerchant end,
                 setFunc = function(value) LUIE.SlashCommands.SV.SlashMerchant = value LUIE.SlashCommands.RegisterSlashCommands() end,
                 width = "full",
@@ -615,7 +615,7 @@ function LUIE_CreateSettings()
                 -- SlashFence
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_SLASHCMDS_FENCE),
-                tooltip = GetString(SI_LUIE_LAM_SLASHCMDS_FENCE_TP),
+                tooltip = strformat(GetString(SI_LUIE_LAM_SLASHCMDS_FENCE_TP), GetCollectibleName(300)),
                 getFunc = function() return LUIE.SlashCommands.SV.SlashFence end,
                 setFunc = function(value) LUIE.SlashCommands.SV.SlashFence = value LUIE.SlashCommands.RegisterSlashCommands() end,
                 width = "full",
@@ -7452,7 +7452,7 @@ function LUIE_CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_PLAYER_TP),
                 choices = nameDisplayOptions,
                 getFunc = function() return nameDisplayOptions[LUIE.UnitFrames.SV.DisplayOptionsPlayer] end,
-                setFunc = function(value) LUIE.UnitFrames.SV.DisplayOptionsPlayer = nameDisplayOptionsKeys[value] LUIE.UnitFrames.CustomFramesReloadControlsMenu() end,
+                setFunc = function(value) LUIE.UnitFrames.SV.DisplayOptionsPlayer = nameDisplayOptionsKeys[value] LUIE.UnitFrames.CustomFramesReloadControlsMenu(true) end,
                 width = "full",
                 disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
                 default = nameDisplayOptions[2]
@@ -7464,7 +7464,7 @@ function LUIE_CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_TARGET_TP),
                 choices = nameDisplayOptions,
                 getFunc = function() return nameDisplayOptions[LUIE.UnitFrames.SV.DisplayOptionsTarget] end,
-                setFunc = function(value) LUIE.UnitFrames.SV.DisplayOptionsTarget = nameDisplayOptionsKeys[value] LUIE.UnitFrames.CustomFramesReloadControlsMenu() end,
+                setFunc = function(value) LUIE.UnitFrames.SV.DisplayOptionsTarget = nameDisplayOptionsKeys[value] LUIE.UnitFrames.CustomFramesReloadControlsMenu(true) end,
                 width = "full",
                 disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
                 default = nameDisplayOptions[2]
@@ -7730,7 +7730,7 @@ function LUIE_CreateSettings()
                 disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
             },
             {
-                -- Display rank on target frame
+                -- Display rank name on target frame
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_RANK),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_RANK_TP),
@@ -7738,6 +7738,29 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.UnitFrames.SV.TargetEnableRank = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer(true) end,
                 width = "full",
                 default = LUIE.UnitFrames.D.TargetEnableRank,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
+            },
+            {
+                -- Prioritize Title or AvA Rank
+                type = 'dropdown',
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMESPT_RANK_TITLE_PRIORITY)),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_RANK_TITLE_PRIORITY_TP),
+                choices = { "AVA Rank", "Title" },
+                getFunc = function() return LUIE.UnitFrames.SV.TargetTitlePriority end,
+                setFunc = function(value) LUIE.UnitFrames.SV.TargetTitlePriority = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer(true) end,
+                width = "full",
+                default = LUIE.UnitFrames.D.TargetTitlePriority,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.TargetEnableRank and LUIE.UnitFrames.SV.TargetEnableTitle) end,
+            },
+            {
+                -- Display rank icon on target frame
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_RANKICON),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMESPT_RANKICON_TP),
+                getFunc = function() return LUIE.UnitFrames.SV.TargetEnableRankIcon end,
+                setFunc = function(value) LUIE.UnitFrames.SV.TargetEnableRankIcon = value LUIE.UnitFrames.CustomFramesApplyLayoutPlayer(true) end,
+                width = "full",
+                default = LUIE.UnitFrames.D.TargetEnableRankIcon,
                 disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
             },
             {
@@ -7943,7 +7966,7 @@ function LUIE_CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID_TP),
                 choices = nameDisplayOptions,
                 getFunc = function() return nameDisplayOptions[LUIE.UnitFrames.SV.DisplayOptionsGroupRaid] end,
-                setFunc = function(value) LUIE.UnitFrames.SV.DisplayOptionsGroupRaid = nameDisplayOptionsKeys[value] LUIE.UnitFrames.CustomFramesReloadControlsMenu() end,
+                setFunc = function(value) LUIE.UnitFrames.SV.DisplayOptionsGroupRaid = nameDisplayOptionsKeys[value] LUIE.UnitFrames.CustomFramesReloadControlsMenu(false, true, true) end,
                 width = "full",
                 disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
                 default = nameDisplayOptions[2]
@@ -8124,7 +8147,7 @@ function LUIE_CreateSettings()
                 tooltip = GetString(SI_LUIE_LAM_UF_COMMON_NAMEDISPLAY_GROUPRAID_TP),
                 choices = nameDisplayOptions,
                 getFunc = function() return nameDisplayOptions[LUIE.UnitFrames.SV.DisplayOptionsGroupRaid] end,
-                setFunc = function(value) LUIE.UnitFrames.SV.DisplayOptionsGroupRaid = nameDisplayOptionsKeys[value] LUIE.UnitFrames.CustomFramesReloadControlsMenu() end,
+                setFunc = function(value) LUIE.UnitFrames.SV.DisplayOptionsGroupRaid = nameDisplayOptionsKeys[value] LUIE.UnitFrames.CustomFramesReloadControlsMenu(false, true, true) end,
                 width = "full",
                 disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
                 default = nameDisplayOptions[2]

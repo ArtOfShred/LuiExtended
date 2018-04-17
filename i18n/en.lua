@@ -5,6 +5,17 @@
 ZO_CreateStringId("SI_LUIE_ERROR_FONT",                                 "LUI Extended: There was a problem with selecting required font. Falling back to game default.")
 
 ------------------------------------
+-- bindings.xml --------------------
+------------------------------------
+
+ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_BANKER", "Summon Banker")
+ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_MERCHANT", "Summon Merchant")
+ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_FENCE", "Summon Fence")
+ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_READY_CHECK", "Initiate Ready Check")
+ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_HOME", "Teleport to Primary Home")
+ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_REGROUP", "Regroup (Disband & Reform)")
+
+------------------------------------
 -- SlashCommands.lua ---------------
 ------------------------------------
 
@@ -54,7 +65,7 @@ ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_NONAME",           "You mus
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_VOTEKICK_FAILED_BG",               "You cannot initiate a vote to remove a party member in a battleground.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA",             "You cannot summon an assistant in Cyrodiil.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG",              "You cannot summon an assistant in a Battleground.")
-ZO_CreateStringId("SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED",     "You did not unlock this collectible yet.")
+ZO_CreateStringId("SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED",     "You have not unlocked <<1>>.")
 ZO_CreateStringId("SI_LUIE_SLASHCMDS_READYCHECK_FAILED_NOTINGRP",       "You must be in a group to initiate a ready check.")
 
 ------------------------------------
@@ -607,20 +618,20 @@ ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_GUILDQUIT_TP",                 "'/guild
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDSHEADER_SOCIAL",                 "Social Commands")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_FRIEND",                       "Enable ( '/friend' ) Add Friend")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_FRIEND_TP",                    "'/friend' 'name' Invite a player to be friends.\n\t\t\t\t\tAlternate options: '/addfriend'")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_IGNORE",                       "Enable ( '/ingore' ) Add Ignored")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_IGNORE",                       "Enable ( '/ignore' ) Add Ignored")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_IGNORE_TP",                    "'/ignore' 'name' Add a player to ignored.\n\t\t\t\t\t\tAlternate options: '/addignore'")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND",                 "Enable ( '/removefriend' ) Remove Friend")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEFRIEND_TP",              "'/unfriend' 'name' Remove a player from friends.\n\t\t\t\t\tAlternate options: '/removefriend'")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE",                 "Enable ( /'removeignore' ) Remove Ignored")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_REMOVEIGNORE_TP",              "'/unignore' 'name' Remove a player from ignored.\n\t\t\t\t\tAlternate options: '/removeignore'")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_BANKER",                       "Enable ( '/banker' ) Banker")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_BANKER_TP",                    "'/banker' Summon the Banker.")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_BANKER_TP",                    "'/banker' Summon <<1>> (If unlocked).\n\t\t\t\t\tAlternate options: '/bank'")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_MERCHANT",                     "Enable ( '/merchant' ) Merchant")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_MERCHANT_TP",                  "'/merchant' Summon the Merchant.")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_MERCHANT_TP",                  "'/merchant' Summon <<1>> (If unlocked).\n\t\t\t\t\tAlternate options: '/sell', '/vendor'")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_FENCE",                        "Enable ( '/fence' ) Fence")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_FENCE_TP",                     "'/fence' Summon the Fence.")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_FENCE_TP",                     "'/fence' Summon <<1>> (If unlocked).\n\t\t\t\t\tAlternate options: '/smuggler'")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_READYCHECK",                   "Enable ( '/ready' ) Ready Check")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_READYCHECK_TP",                "Send a 'ready check' dialog to all group members.")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_READYCHECK_TP",                "Send a 'ready check' dialog to all group members.\n\t\t\t\t\tAlternate options: '/readycheck'")
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1619,11 +1630,11 @@ ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_HP_HIGHT",           "Player 
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_HIGHT",          "Player - Magicka Bar Height")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_HIGHT",         "Player - Stamina Bar Height")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL",        "Hide Magicka Bar Label")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL_TP",     "Hide the attribute values label on the Player Magicka Bar")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOLABEL_TP",     "Hide the attribute values label on the Player Magicka Bar.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR",          "Completely Hide Magicka Bar")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_MAG_NOBAR_TP",       "Completely hide the Player Magicka Bar.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL",       "Hide Stamina Bar Label")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL_TP",    "Hide the attribute values label on the Player Stamina Bar")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOLABEL_TP",    "Hide the attribute values label on the Player Stamina Bar.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR",         "Completely Hide Stamina Bar")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_STAM_NOBAR_TP",      "Completely hide the Player Stamina Bar.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_PLAYER_OOCPACITY",          "Player - Transparency - Out-of-Combat")
@@ -1670,9 +1681,13 @@ ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_EXETHRESHOLD_TP",           "Determi
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_EXETEXTURE",                "Target - Display Skull Execute Texture")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_EXETEXTURE_TP",             "Display Skull texture next to custom target frame for low-health target that should be executed.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_TITLE",                     "Target - Display Title")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_TITLE_TP",                  "Display the title of the target player or NPC.")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_RANK",                      "Target - Display AVA Rank")
-ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_RANK_TP",                   "Display the AVA Rank of a player target.")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_TITLE_TP",                  "Display the Title of a target player or NPC.")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_RANK",                      "Target - Display AVA Rank Name")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_RANK_TP",                   "Display the AVA Rank Name of a target player.")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_RANKICON",                  "Target - Display AVA Rank Number & Icon")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_RANKICON_TP",               "Display the AVA Rank Number & Icon of a player target.")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_RANK_TITLE_PRIORITY",       "Target - Rank/Title Priority")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_RANK_TITLE_PRIORITY_TP",    "Choose whether to prioritize the display of the AVA Rank Name or Title on players.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_MISSPOWERCOMBAT",           "Treat Missing Power as In-Combat")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMESPT_MISSPOWERCOMBAT_TP",        "When any resource pool is used change the frames to use the in combat opacity value as if engaged in combat.")
 

@@ -135,6 +135,8 @@ UF.D = {
     BossEnableRegen                  = false,
     TargetEnableClass                = false,
     TargetEnableRank                 = true,
+    TargetEnableRankIcon             = true,
+    TargetTitlePriority              = "Title",
     TargetEnableTitle                = true,
     TargetEnableSkull                = true,
     CustomFramesGroup                = true,
@@ -194,7 +196,6 @@ local g_DefaultFrames       = {} -- Default Unit Frames are not referenced by ex
 local g_MaxChampionPoint    = GetChampionPointsPlayerProgressionCap() -- Keet this value in local constant
 local g_defaultTargetNameLabel   -- Reference to default UI target name label
 local g_defaultThreshold    = 25
-local g_playerAlliance
 local g_powerError          = {}
 local g_savedHealth         = {}
 local g_statFull            = {}
@@ -1139,9 +1140,6 @@ function UF.Initialize( enabled )
         g_savedHealth["boss" .. i] = {1,1,1,0}
     end
 
-    -- Query for player alliance for future use
-    g_playerAlliance = GetUnitAlliance( "player" )
-
     -- Get execute threshold percentage
     g_targetThreshold = UF.SV.ExecutePercentage
 
@@ -1968,10 +1966,16 @@ function UF.UpdateStaticControls( unitFrame )
         if unitFrame.isPlayer then
             title = GetUnitTitle(unitFrame.unitTag)
             ava = GetAvARankName( GetUnitGender(unitFrame.unitTag) , unitFrame.avaRankValue )
-            if UF.SV.TargetEnableRank then
+            if UF.SV.TargetEnableRank and not UF.SV.TargetEnableTitle then
                 title = (ava ~= "") and ava
             elseif UF.SV.TargetEnableTitle and not UF.SV.TargetEnableRank then
                 title = (title ~= "") and title
+            elseif UF.SV.TargetEnableTitle and UF.SV.TargetEnableRank then
+                if UF.SV.TargetTitlePriority == "Title" then
+                    title = (title ~= "") and title or (ava ~= "") and ava
+                else
+                    title = (ava ~= "") and ava or (title ~= "") and title
+                end
             end
         end
         title = title or ""
@@ -1985,25 +1989,22 @@ function UF.UpdateStaticControls( unitFrame )
     -- If unitFrame has unit AVA rank control
     if unitFrame.avaRank ~= nil then
         if unitFrame.isPlayer then
-            if unitFrame.avaRankValue > 0 then
+            unitFrame.avaRankIcon:SetTexture( GetAvARankIcon( unitFrame.avaRankValue ) )
+            local alliance = GetUnitAlliance( unitFrame.unitTag )
+            local colour = GetAllianceColor( alliance )
+            unitFrame.avaRankIcon:SetColor( colour.r, colour.g, colour.b )
+
+            if unitFrame.unitTag == "reticleover" and UF.SV.TargetEnableRankIcon then
                 unitFrame.avaRank:SetText( tostring( unitFrame.avaRankValue ) )
-                unitFrame.avaRank:SetHidden(false)
+                if unitFrame.avaRankValue > 0 then
+                    unitFrame.avaRank:SetHidden(false)
+                else
+                    unitFrame.avaRank:SetHidden(true)
+                end
+                unitFrame.avaRankIcon:SetHidden(false)
             else
                 unitFrame.avaRank:SetHidden(true)
-            end
-            unitFrame.avaRankIcon:SetTexture( GetAvARankIcon( unitFrame.avaRankValue ) )
-            unitFrame.avaRankIcon:SetHidden(false)
-            local alliance = GetUnitAlliance( unitFrame.unitTag )
-            local colour
-            if g_playerAlliance == alliance then
-                colour = { r=1, g=1, b=1 }
-            else
-                colour = GetAllianceColor( alliance )
-            end
-            unitFrame.avaRankIcon:SetColor( colour.r, colour.g, colour.b )
-            if unitFrame.unitTag == "reticleover" then
-                unitFrame.avaRank:SetHidden( not UF.SV.TargetEnableRank )
-                unitFrame.avaRankIcon:SetHidden( not UF.SV.TargetEnableRank )
+                unitFrame.avaRankIcon:SetHidden(true)
             end
         else
             unitFrame.avaRank:SetHidden(true)
@@ -2013,7 +2014,7 @@ function UF.UpdateStaticControls( unitFrame )
     -- Reanchor buffs if title changes
     if unitFrame.buffs then
         if UF.SV.PlayerFrameOptions ~= 1 and unitFrame.unitTag == "reticleover" then
-            if (not UF.SV.TargetEnableRank and not UF.SV.TargetEnableTitle) or savedTitle == "" then
+            if (not UF.SV.TargetEnableRank and not UF.SV.TargetEnableTitle and not UF.SV.TargetEnableRankIcon) or (savedTitle == "" and not UF.SV.TargetEnableRankIcon and unitFrame.isPlayer) or (savedTitle == "" and not unitFrame.isPlayer) then
                 unitFrame.debuffs:ClearAnchors()
                 unitFrame.debuffs:SetAnchor( TOP, unitFrame.control, BOTTOM, 0, 5 )
             else
@@ -2021,7 +2022,7 @@ function UF.UpdateStaticControls( unitFrame )
                 unitFrame.debuffs:SetAnchor( TOP, unitFrame.buffAnchor, BOTTOM, 0, 5 )
             end
         else
-            if (not UF.SV.TargetEnableRank and not UF.SV.TargetEnableTitle) or savedTitle == "" then
+            if (not UF.SV.TargetEnableRank and not UF.SV.TargetEnableTitle and not UF.SV.TargetEnableRankIcon) or (savedTitle == "" and not UF.SV.TargetEnableRankIcon and unitFrame.isPlayer) or (savedTitle == "" and not unitFrame.isPlayer) then
                 unitFrame.buffs:ClearAnchors()
                 unitFrame.buffs:SetAnchor( TOP, unitFrame.control, BOTTOM, 0, 5 )
             else
@@ -3650,12 +3651,16 @@ function UF.CustomFramesApplyLayoutPlayer(unhide)
             target.debuffs:SetWidth( 1000 )
         end
 
-        target.title:SetHidden( not UF.SV.TargetEnableTitle )
-        target.avaRank:SetHidden( not UF.SV.TargetEnableRank )
-        target.avaRankIcon:SetHidden( not UF.SV.TargetEnableRank )
+        if not UF.SV.TargetEnableTitle and not UF.SV.TargetEnableRank then
+            target.title:SetHidden(true)
+        else
+            target.title:SetHidden(false)
+        end
+        target.avaRank:SetHidden( not UF.SV.TargetEnableRankIcon )
+        target.avaRankIcon:SetHidden( not UF.SV.TargetEnableRankIcon )
 
         local enable
-        if (not UF.SV.TargetEnableTitle and not UF.SV.TargetEnableRank) then
+        if (not UF.SV.TargetEnableTitle and not UF.SV.TargetEnableRank and not UF.SV.TargetEnableRankIcon) then
             enable = false
         else
             enable = true
@@ -4038,7 +4043,7 @@ function UF.CustomFramesGroupAlpha()
 end
 
 -- Reload Names from Menu function call
-function UF.CustomFramesReloadControlsMenu()
+function UF.CustomFramesReloadControlsMenu(player, group, raid)
     UF.UpdateStaticControls( g_DefaultFrames["player"] )
     UF.UpdateStaticControls( UF.CustomFrames["player"] )
     UF.UpdateStaticControls( g_AvaCustFrames["player"] )
@@ -4047,16 +4052,16 @@ function UF.CustomFramesReloadControlsMenu()
     UF.UpdateStaticControls( UF.CustomFrames["reticleover"] )
     UF.UpdateStaticControls( g_AvaCustFrames["reticleover"] )
 
-    for i = 1, 4 do
+    for i = 1, 24 do
         local unitTag = "group" .. i
         UF.UpdateStaticControls( g_DefaultFrames[unitTag] )
         UF.UpdateStaticControls( UF.CustomFrames[unitTag] )
         UF.UpdateStaticControls( g_AvaCustFrames[unitTag] )
     end
 
-    UF.CustomFramesApplyLayoutPlayer(false)
-    UF.CustomFramesApplyLayoutGroup(false)
-    UF.CustomFramesApplyLayoutRaid(false)
+    UF.CustomFramesApplyLayoutPlayer(player)
+    UF.CustomFramesApplyLayoutGroup(group)
+    UF.CustomFramesApplyLayoutRaid(raid)
 end
 
 function UF.CustomFramesReloadExecuteMenu()
