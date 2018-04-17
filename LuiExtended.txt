@@ -38,6 +38,7 @@
 
 libs\LibStub\LibStub.lua
 libs\LibMediaProvider-1.0\LibMediaProvider-1.0.lua
+libs\LibMsgWin-1.0\LibMsgWin-1.0.lua
 
 libs\LibAddonMenu-2.0\LibAddonMenu-2.0.lua
 libs\LibAddonMenu-2.0\controls\panel.lua
@@ -58,7 +59,7 @@ libs\LibAddonMenu-2.0\controls\divider.lua
 LuiExtended.lua
 LuiExtendedUI.lua
 LuiExtendedMenu.lua
-LuiChangelog.lua
+LuiExtendedWelcome.lua
 
 xml\bindings.xml
 xml\CombatText.xml
