@@ -1045,5 +1045,3 @@ function SC.RegisterSlashCommands()
         SLASH_COMMANDS["/readycheck"]   = LUIE.SlashReadyCheck
     end
 end
-
-
