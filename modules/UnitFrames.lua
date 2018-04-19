@@ -17,8 +17,7 @@ local mathfloor     = math.floor
 local mathmin       = math.min
 local mathceil      = math.ceil
 local unpack        = unpack
-local pairs         = pairs
-local ipairs        = ipairs
+local pairs, ipairs = pairs, ipairs
 
 local eventManager  = EVENT_MANAGER
 local sceneManager  = SCENE_MANAGER
