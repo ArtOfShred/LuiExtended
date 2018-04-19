@@ -7178,14 +7178,14 @@ function LUIE_CreateSettings()
                 width = "half",
                 default = false,
                 disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-                resetFunc = LUIE.UnitFrames.CustomFramesResetPosition,
+                resetFunc = LUIE.UnitFrames.CustomFramesResetPosition(false),
             },
             {
                 -- Custom Unit Frames Reset position
                 type = "button",
                 name = GetString(SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT_TP),
-                func = LUIE.UnitFrames.CustomFramesResetPosition,
+                func = LUIE.UnitFrames.CustomFramesResetPosition(false),
                 width = "half",
             },
             {
@@ -7695,6 +7695,42 @@ function LUIE_CreateSettings()
                 disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer and LUIE.UnitFrames.SV.PlayerEnableAltbarXP ) end,
             },
             {
+                -- Custom Unit Frames Low Health Warning
+                type = "slider",
+                name = GetString(SI_LUIE_LAM_UF_LOWRESOURCE_HEALTH),
+                tooltip = GetString(SI_LUIE_LAM_UF_LOWRESOURCE_HEALTH_TP),
+                min = 0, max = 50, step = 1,
+                getFunc = function() return LUIE.UnitFrames.SV.LowResourceHealth end,
+                setFunc = function(value) LUIE.UnitFrames.SV.LowResourceHealth = value LUIE.UnitFrames.CustomFramesReloadLowResourceThreshold() end,
+                width = "full",
+                default = LUIE.UnitFrames.D.LowResourceHealth,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
+            },
+            {
+                -- Custom Unit Frames Low Magicka Warning
+                type = "slider",
+                name = GetString(SI_LUIE_LAM_UF_LOWRESOURCE_MAGICKA),
+                tooltip = GetString(SI_LUIE_LAM_UF_LOWRESOURCE_MAGICKA_TP),
+                min = 0, max = 50, step = 1,
+                getFunc = function() return LUIE.UnitFrames.SV.LowResourceMagicka end,
+                setFunc = function(value) LUIE.UnitFrames.SV.LowResourceMagicka = value LUIE.UnitFrames.CustomFramesReloadLowResourceThreshold() end,
+                width = "full",
+                default = LUIE.UnitFrames.D.LowResourceMagicka,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
+            },
+            {
+                -- Custom Unit Frames Low Stamina Warning
+                type = "slider",
+                name = GetString(SI_LUIE_LAM_UF_LOWRESOURCE_STAMINA),
+                tooltip = GetString(SI_LUIE_LAM_UF_LOWRESOURCE_STAMINA_TP),
+                min = 0, max = 50, step = 1,
+                getFunc = function() return LUIE.UnitFrames.SV.LowResourceStamina end,
+                setFunc = function(value) LUIE.UnitFrames.SV.LowResourceStamina = value LUIE.UnitFrames.CustomFramesReloadLowResourceThreshold() end,
+                width = "full",
+                default = LUIE.UnitFrames.D.LowResourceStamina,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
+            },
+            {
                 -- Target Bars Width
                 type = "slider",
                 name = GetString(SI_LUIE_LAM_UF_CFRAMESPT_TARGET_WIDTH),
@@ -7783,7 +7819,7 @@ function LUIE_CreateSettings()
                 setFunc = function(value) LUIE.UnitFrames.SV.ExecutePercentage = value LUIE.UnitFrames.CustomFramesReloadExecuteMenu() end,
                 width = "full",
                 default = LUIE.UnitFrames.D.ExecutePercentage,
-                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesPlayer ) end,
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and LUIE.UnitFrames.SV.CustomFramesTarget ) end,
             },
             {
                 -- Display Skull Execute Texture

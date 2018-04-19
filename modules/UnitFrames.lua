@@ -184,6 +184,9 @@ UF.D = {
     CustomColourHostile 			 = { 1, 0, 0 },
     CustomColourNeutral 			 = { 150/255, 150/255, 150/255 },
     CustomColourGuard 				 = { 95/255, 65/255, 54/255 },
+    LowResourceHealth                = 25,
+    LowResourceStamina               = 25,
+    LowResourceMagicka               = 25,
 }
 UF.SV = nil
 
@@ -199,6 +202,9 @@ local g_powerError          = {}
 local g_savedHealth         = {}
 local g_statFull            = {}
 local g_targetThreshold
+local g_healthThreshold
+local g_magickaThreshold
+local g_staminaThreshold
 local g_targetUnitFrame          -- Reference to default UI target unit frame
 local playerDisplayName = GetUnitDisplayName("player")
 
@@ -445,18 +451,21 @@ local function CreateCustomFrames()
                 ["labelTwo"]= UI.Label( phb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
                 ["bar"]     = UI.StatusBar( phb, nil, nil, nil, false ),
                 ["shield"]  = UI.StatusBar( phb, nil, nil, nil, true ),
+                ["threshold"] = g_healthThreshold
             },
             [POWERTYPE_MAGICKA] = {
                 ["backdrop"]= pmb,
                 ["labelOne"]= UI.Label( pmb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
                 ["labelTwo"]= UI.Label( pmb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
                 ["bar"]     = UI.StatusBar( pmb, nil, nil, nil, false ),
+                ["threshold"] = g_magickaThreshold
             },
             [POWERTYPE_STAMINA] = {
                 ["backdrop"]= psb,
                 ["labelOne"]= UI.Label( psb, {LEFT,LEFT,5,0}, nil, {0,1}, nil, "xx / yy", false ),
                 ["labelTwo"]= UI.Label( psb, {RIGHT,RIGHT,-5,0}, nil, {2,1}, nil, "zz%", false ),
                 ["bar"]     = UI.StatusBar( psb, nil, nil, nil, false ),
+                ["threshold"] = g_staminaThreshold
             },
             ["alternative"] = {
                 ["backdrop"]= alt,
@@ -1141,6 +1150,10 @@ function UF.Initialize( enabled )
 
     -- Get execute threshold percentage
     g_targetThreshold = UF.SV.ExecutePercentage
+
+    g_healthThreshold = UF.SV.LowResourceHealth
+    g_magickaThreshold = UF.SV.LowResourceStamina
+    g_staminaThreshold = UF.SV.LowResourceMagicka
 
     CreateDefaultFrames()
 
@@ -2062,7 +2075,7 @@ function UF.MenuUpdatePlayerFrameOptions(option)
             reticleover.debuffs:SetAnchor(TOP, reticleover.buffAnchor, BOTTOM, 0, 2)
         end
     end
-    LUIE.UnitFrames.CustomFramesResetPosition()
+    LUIE.UnitFrames.CustomFramesResetPosition(true)
     LUIE.UnitFrames.CustomFramesSetupAlternative()
     LUIE.UnitFrames.CustomFramesApplyLayoutPlayer()
 end
@@ -2900,10 +2913,17 @@ function UF.CustomFramesSetPositions()
 end
 
 -- Reset anchors for all top level windows of CustomFrames
-function UF.CustomFramesResetPosition()
-    for _, unitTag in pairs( { "player", "reticleover", "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget" } ) do
+function UF.CustomFramesResetPosition(playerOnly)
+    for _, unitTag in pairs( { "player", "reticleover" } ) do
         if UF.CustomFrames[unitTag] then
             UF.SV[UF.CustomFrames[unitTag].tlw.customPositionAttr] = nil
+        end
+    end
+    if playerOnly == false then
+        for _, unitTag in pairs( { "SmallGroup1", "RaidGroup1", "boss1", "AvaPlayerTarget" } ) do
+            if UF.CustomFrames[unitTag] then
+                UF.SV[UF.CustomFrames[unitTag].tlw.customPositionAttr] = nil
+            end
         end
     end
     UF.CustomFramesSetPositions()
@@ -4066,6 +4086,9 @@ end
 function UF.CustomFramesReloadExecuteMenu()
     g_targetThreshold = UF.SV.ExecutePercentage
 
+    if g_DefaultFrames.reticleover[POWERTYPE_HEALTH] then
+        g_DefaultFrames.reticleover[POWERTYPE_HEALTH].threshold = g_targetThreshold
+    end
     if UF.CustomFrames["reticleover"] and UF.CustomFrames["reticleover"][POWERTYPE_HEALTH] then
 		UF.CustomFrames["reticleover"][POWERTYPE_HEALTH].threshold = g_targetThreshold
 	end
@@ -4073,7 +4096,6 @@ function UF.CustomFramesReloadExecuteMenu()
 		g_AvaCustFrames["reticleover"][POWERTYPE_HEALTH].threshold = g_targetThreshold
 	end
 
-    -- Boss Frames
     for i = 1, 6 do
         local unitTag = "boss" .. i
         if UF.CustomFrames[unitTag] and UF.CustomFrames[unitTag][POWERTYPE_HEALTH] then
@@ -4082,6 +4104,21 @@ function UF.CustomFramesReloadExecuteMenu()
     end
 end
 
+function UF.CustomFramesReloadLowResourceThreshold()
+    g_healthThreshold = UF.SV.LowResourceHealth
+    g_magickaThreshold = UF.SV.LowResourceStamina
+    g_staminaThreshold = UF.SV.LowResourceMagicka
+
+    if UF.CustomFrames["player"] and UF.CustomFrames["player"][POWERTYPE_HEALTH] then
+        UF.CustomFrames["player"][POWERTYPE_HEALTH].threshold = g_healthThreshold
+    end
+    if UF.CustomFrames["player"] and UF.CustomFrames["player"][POWERTYPE_MAGICKA] then
+        UF.CustomFrames["player"][POWERTYPE_MAGICKA].threshold = g_magickaThreshold
+    end
+    if UF.CustomFrames["player"] and UF.CustomFrames["player"][POWERTYPE_STAMINA] then
+        UF.CustomFrames["player"][POWERTYPE_STAMINA].threshold = g_staminaThreshold
+    end
+end
 
 --[[----------------------------------------------------------
  * DEBUG FUNCTIONS
