@@ -26,16 +26,24 @@ local pairs, ipairs = pairs, ipairs
 
 local eventManager  = EVENT_MANAGER
 
+local colorDef       = ZO_ColorDef
+
+-- Local
+local TimeStampColorize
+
 -- Default Settings
 LUIE.D = {
-    ChatUseSystem               = false,
-    TimeStamp                   = false,
+    --ChatUseSystem               = false,
+    TimeStamp                   = true,
     TimeStampFormat             = "HH:m:s",
+    TimeStampColor              = { 143/255, 143/255, 143/255 },
     StartupInfo                 = false,
     HideXPBar                   = false,
     TempAlertHome               = false,
     TempAlertCampaign           = false,
     WelcomeVersion              = 0,
+    ChatTab                     = { [1] = true, [2] = true, [3] = true, [4] = true, [5] = true },
+    ChatSystemAll               = true,
 
     -- Modules
     UnitFrames_Enabled          = true,
@@ -133,7 +141,7 @@ local function LUIE_LoadScreen()
     eventManager:UnregisterForEvent(LUIE.name, EVENT_PLAYER_ACTIVATED)
 
     if not LUIE.SV.StartupInfo then
-        LUIE.PrintToChat(strfmt("|cFEFEFE%s by|r |c00C000%s|r |cFEFEFEv%s|r", LUIE.name, LUIE.author, LUIE.version))
+        LUIE.PrintToChat(strfmt("|cFEFEFE%s by|r |c00C000%s|r |cFEFEFEv%s|r", LUIE.name, LUIE.author, LUIE.version), true)
     end
 end
 
@@ -170,6 +178,9 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
 
     -- Load saved variables
     LUIE_LoadSavedVars()
+
+    -- Load Timetamp Color
+    LUIE.UpdateTimeStampColor()
 
     -- Display welcome screen
     LUIE_WelcomeScreen()
@@ -594,6 +605,11 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     }
 end
 
+-- Called from the menu and on initialization to update timestamp color when changed.
+function LUIE.UpdateTimeStampColor()
+    TimeStampColorize = colorDef:New(unpack(LUIE.SV.TimeStampColor)):ToHex()
+end
+
 -- Return a formatted time
 -- Stolen from pChat, thanks @Ayantir
 function LUIE.CreateTimestamp(timeStr, formatStr)
@@ -636,20 +652,29 @@ function LUIE.FormatMessage(msg, doTimestamp)
     if doTimestamp then
         local timestring = GetTimeString()
         -- Color Code to match pChat default
-        msg = strfmt("|c8F8F8F[%s]|r %s", LUIE.CreateTimestamp(timestring), msg)
+        msg = strfmt("|c%s[%s]|r %s", TimeStampColorize, LUIE.CreateTimestamp(timestring), msg)
     end
     return msg
 end
 
 -- Easy Print to Chat
-function LUIE.PrintToChat(msg)
-    if LUIE.SV.ChatUseSystem and CHAT_SYSTEM.primaryContainer then
-        local msg = LUIE.FormatMessage(msg or "no message", LUIE.SV.TimeStamp)
-        -- Post as a System message so that it can appear in multiple tabs.
-        CHAT_SYSTEM.primaryContainer:OnChatEvent(nil, msg, CHAT_CATEGORY_SYSTEM)
-    else
-        -- Post as a normal message
-        CHAT_SYSTEM:AddMessage(msg)
+function LUIE.PrintToChat(msg, isSystem)
+    -- If we have system messages sent to display in all windows then just print to all windows at once, otherwise send messages to individual tabs.
+    if CHAT_SYSTEM.primaryContainer then
+        if isSystem and LUIE.SV.ChatSystemAll then
+            local msg = LUIE.FormatMessage(msg or "no message", LUIE.SV.TimeStamp)
+            -- Post as a System message so that it can appear in multiple tabs.
+            CHAT_SYSTEM.primaryContainer:OnChatEvent(nil, msg, CHAT_CATEGORY_SYSTEM)
+        else
+            local chatContainer = CHAT_SYSTEM.primaryContainer
+            for i = 1, #chatContainer.windows do
+                if LUIE.SV.ChatTab[i] == true then
+                    local chatWindow = CHAT_SYSTEM.primaryContainer["windows"][i]
+                    local msg = LUIE.FormatMessage(msg or "no message", LUIE.SV.TimeStamp)
+                    chatContainer:AddEventMessageToWindow(chatWindow, msg, CHAT_CATEGORY_SYSTEM)
+                end
+            end
+        end
     end
 end
 

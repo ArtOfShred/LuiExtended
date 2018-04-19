@@ -27,6 +27,7 @@ function LUIE_WelcomeScreen(menu)
             luiChangeLog:SetAnchor(TOP, GuiRoot, TOP, 0,100)
             luiChangeLog:SetMouseEnabled(false)
             luiChangeLog:SetMovable(false)
+            luiChangeLog:SetDrawLevel(1)
 
             --luiChangeLog:AddText(memes)
             luiChangeLog:AddText(strformat("Welcome to version <<1>> of <<2>> by <<3>>\nPlease take a few minutes to read over the list of changes in this version.\nThis notification will only appear once with each update unless opened manually from the menu.", LUIE.version, LUIE.name, LUIE.author))

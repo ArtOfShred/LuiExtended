@@ -680,16 +680,16 @@ function SCB.AddToCustomList(list, input)
             local icon = iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = true
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(icon .. " [" .. id .. "] " .. name .. " added to " .. listRef)
+            printToChat(icon .. " [" .. id .. "] " .. name .. " added to " .. listRef, true)
         else
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat("Could not add [" .. input .. "] to " .. listRef .. " That abilityId does not exist.")
+            printToChat("Could not add [" .. input .. "] to " .. listRef .. " That abilityId does not exist.", true)
         end
     else
         if input ~= "" then
             list[input] = true
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(input .. " added to " .. listRef)
+            printToChat(input .. " added to " .. listRef, true)
         end
     end
     SCB.Reset()
@@ -704,16 +704,16 @@ function SCB.RemoveFromCustomList(list, input)
             local icon = iconFormat(GetAbilityIcon(id), 16, 16)
             list[id] = nil
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(icon .. " [" .. id .. "] " .. name .. " removed from " .. listRef)
+            printToChat(icon .. " [" .. id .. "] " .. name .. " removed from " .. listRef, true)
         else
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat("Could not remove [" .. input .. "] to " .. listRef .. " That abilityId does not exist.")
+            printToChat("Could not remove [" .. input .. "] to " .. listRef .. " That abilityId does not exist.", true)
         end
     else
         if input ~= "" then
             list[input] = nil
             CHAT_SYSTEM:Maximize() CHAT_SYSTEM.primaryContainer:FadeIn()
-            printToChat(input .. " removed from " .. listRef)
+            printToChat(input .. " removed from " .. listRef, true)
         end
     end
     SCB.Reset()
@@ -1496,7 +1496,7 @@ function SCB.ApplyFont()
     -- Font setup for standard Buffs & Debuffs
     local fontName = LUIE.Fonts[SCB.SV.BuffFontFace]
     if not fontName or fontName == "" then
-        printToChat(GetString(SI_LUIE_ERROR_FONT))
+        printToChat(GetString(SI_LUIE_ERROR_FONT), true)
         fontName = "$(MEDIUM_FONT)"
     end
     local fontStyle = ( SCB.SV.BuffFontStyle and SCB.SV.BuffFontStyle ~= "" ) and SCB.SV.BuffFontStyle or "outline"
@@ -1506,7 +1506,7 @@ function SCB.ApplyFont()
 	-- Font Setup for Prominent Buffs & Debuffs
 	local prominentName = LUIE.Fonts[SCB.SV.ProminentLabelFontFace]
 	if not fontName or fontName == "" then
-        printToChat(GetString(SI_LUIE_ERROR_FONT))
+        printToChat(GetString(SI_LUIE_ERROR_FONT), true)
         fontName = "$(MEDIUM_FONT)"
     end
 	local prominentStyle = ( SCB.SV.ProminentLabelFontStyle and SCB.SV.ProminentLabelFontStyle ~= "" ) and SCB.SV.ProminentLabelFontStyle or "outline"

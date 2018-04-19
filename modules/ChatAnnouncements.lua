@@ -1184,7 +1184,7 @@ function CA.GuildHeraldrySaved()
 
         if CA.SV.Social.GuildManageCA then
             local finalMessage = strformat(GetString(SI_LUIE_CA_GUILD_HERALDRY_UPDATE), guildNameAlliance)
-            g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION" }
+            g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
@@ -1203,7 +1203,7 @@ function CA.GuildRanksSaved(eventCode, guildId)
 
     if CA.SV.Social.GuildManageCA then
         local finalMessage = strformat(GetString(SI_LUIE_CA_GUILD_RANKS_UPDATE), guildNameAlliance)
-        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION" }
+        g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
         g_queuedMessagesCounter = g_queuedMessagesCounter + 1
         eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
     end
@@ -1234,7 +1234,7 @@ function CA.GuildRankSaved(eventCode, guildId, rankIndex)
     local rankSyntaxAlert = CA.SV.Social.GuildIcon and iconTextFormat(icon, "100%", "100%", rankName) or rankName
 
     if CA.SV.Social.GuildManageCA then
-        printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_UPDATE), rankSyntax, guildNameAlliance))
+        printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_UPDATE), rankSyntax, guildNameAlliance), true)
     end
     if CA.SV.Social.GuildManageAlert then
         callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_RANK_UPDATE), rankSyntaxAlert, guildNameAllianceAlert))
@@ -1253,7 +1253,7 @@ function CA.GuildTextChanged(eventCode, guildId)
     if messageString ~= nil then
         if CA.SV.Social.GuildManageCA then
             local finalMessage = strformat(GetString(messageString), guildNameAlliance)
-            g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION" }
+            g_queuedMessages[g_queuedMessagesCounter] = { message = finalMessage, type = "NOTIFICATION", isSystem = true }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
@@ -1303,7 +1303,7 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
 
             if guildName == name then
                 if CA.SV.Social.GuildRankCA then
-                    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED), displayNameLink, guildNameAlliance, rankSyntax))
+                    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED), displayNameLink, guildNameAlliance, rankSyntax), true)
                 end
                 if CA.SV.Social.GuildRankAlert then
                     callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED), DisplayName, guildNameAllianceAlert, rankSyntaxAlert))
@@ -1351,7 +1351,7 @@ function CA.GuildRank(eventCode, guildId, DisplayName, newRank)
 
             if guildName == name then
                 if CA.SV.Social.GuildRankCA then
-                    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_SELF), changestring, rankSyntax, guildNameAlliance))
+                    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_SELF), changestring, rankSyntax, guildNameAlliance), true)
                 end
                 if CA.SV.Social.GuildRankAlert then
                     callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_RANK_CHANGED_SELF), changestring, rankSyntaxAlert, guildNameAllianceAlert))
@@ -1376,7 +1376,7 @@ function CA.GuildAddedSelf(eventCode, guildId, guildName)
 
         if guildName == name then
             if CA.SV.Social.GuildCA then
-                printToChat(strformat(GetString(SI_LUIE_CA_GUILD_JOIN_SELF), guildNameAlliance))
+                printToChat(strformat(GetString(SI_LUIE_CA_GUILD_JOIN_SELF), guildNameAlliance), true)
             end
             if CA.SV.Social.GuildAlert then
                 callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_JOIN_SELF), guildNameAllianceAlert))
@@ -1407,7 +1407,7 @@ function CA.GuildInviteAdded(eventCode, guildId, guildName, guildAlliance, invit
     local guildNameAlliance = CA.SV.Social.GuildIcon and guildColor:Colorize(strformat("<<1>> <<2>>", iconFormatInheritColor(GetAllianceBannerIcon(guildAlliance), 16, 16), guildName)) or (guildColor:Colorize(guildName))
     local guildNameAllianceAlert = CA.SV.Social.GuildIcon and iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
     if CA.SV.Social.GuildCA then
-        printToChat(strformat(GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST), displayNameLink, guildNameAlliance))
+        printToChat(strformat(GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST), displayNameLink, guildNameAlliance), true)
     end
     if CA.SV.Social.GuildAlert then
         callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_INCOMING_GUILD_REQUEST), inviterName, guildNameAllianceAlert))
@@ -1422,7 +1422,7 @@ function CA.FriendAdded(eventCode, displayName)
         else
             displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
         end
-        printToChat(strformat(SI_LUIE_CA_FRIENDS_FRIEND_ADDED, displayNameLink))
+        printToChat(strformat(SI_LUIE_CA_FRIENDS_FRIEND_ADDED, displayNameLink), true)
     end
     if CA.SV.Social.FriendIgnoreAlert then
         callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_FRIENDS_FRIEND_ADDED, displayName))
@@ -1437,7 +1437,7 @@ function CA.FriendRemoved(eventCode, displayName)
         else
             displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
         end
-        printToChat(strformat(SI_LUIE_CA_FRIENDS_FRIEND_REMOVED, displayNameLink))
+        printToChat(strformat(SI_LUIE_CA_FRIENDS_FRIEND_REMOVED, displayNameLink), true)
     end
     if CA.SV.Social.FriendIgnoreAlert then
         callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_FRIENDS_FRIEND_REMOVED, displayName))
@@ -1452,7 +1452,7 @@ function CA.FriendInviteAdded(eventCode, displayName)
         else
             displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
         end
-        printToChat(strformat(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST, displayNameLink))
+        printToChat(strformat(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST, displayNameLink), true)
     end
     if CA.SV.Social.FriendIgnoreAlert then
         callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_FRIENDS_INCOMING_FRIEND_REQUEST, displayName))
@@ -1467,7 +1467,7 @@ function CA.IgnoreAdded(eventCode, displayName)
         else
             displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
         end
-        printToChat(strformat(SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED, displayNameLink))
+        printToChat(strformat(SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED, displayNameLink), true)
     end
     if CA.SV.Social.FriendIgnoreAlert then
         callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_FRIENDS_LIST_IGNORE_ADDED, displayName))
@@ -1482,7 +1482,7 @@ function CA.IgnoreRemoved(eventCode, displayName)
         else
             displayNameLink = ZO_LinkHandler_CreateLink(displayName, nil, DISPLAY_NAME_LINK_TYPE, displayName)
         end
-        printToChat(strformat(SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED, displayNameLink))
+        printToChat(strformat(SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED, displayNameLink), true)
     end
     if CA.SV.Social.FriendIgnoreAlert then
         callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_FRIENDS_LIST_IGNORE_REMOVED, displayName))
@@ -1524,7 +1524,7 @@ function CA.FriendPlayerStatus(eventCode, displayName, characterName, oldStatus,
         end
 
         if CA.SV.Social.FriendStatusCA then
-            printToChat(chatText)
+            printToChat(chatText, true)
         end
         if CA.SV.Social.FriendStatusAlert then
             callAlert(UI_ALERT_CATEGORY_ALERT, nil, alertText)
@@ -1542,7 +1542,7 @@ function CA.QuestShared(eventCode, questId)
         local alertMessage = strformat(GetString(SI_LUIE_CA_GROUP_INCOMING_QUEST_SHARE_P2P), finalName, questName)
 
         if CA.SV.Quests.QuestShareCA then
-            printToChat(message)
+            printToChat(message, true)
         end
         if CA.SV.Quests.QuestShareAlert then
             callAlert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
@@ -1571,7 +1571,7 @@ function CA.ActivityStatusUpdate(eventCode, status)
 
         if message then
             if CA.SV.Group.GroupLFGQueueCA then
-                printToChat(message)
+                printToChat(message, true)
             end
             if CA.SV.Group.GroupLFGQueueAlert then
                 callAlert(UI_ALERT_CATEGORY_ALERT, nil, message)
@@ -1591,7 +1591,7 @@ function CA.ActivityStatusUpdate(eventCode, status)
         message = (GetString(SI_LFGREADYCHECKCANCELREASON4))
         if message then
             if CA.SV.Group.GroupLFGCA then
-                printToChat(message)
+                printToChat(message, true)
             end
             if CA.SV.Group.GroupLFGAlert then
                 callAlert(UI_ALERT_CATEGORY_ALERT, nil, message)
@@ -1655,7 +1655,7 @@ function CA.ReadyCheckUpdate(eventCode)
             message = strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE), activityName, roleIconSmall, roleString )
             alertText = strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY_ROLE), activityName, roleIconLarge, roleString )
             if CA.SV.Group.GroupLFGCA then
-                printToChat(message)
+                printToChat(message, true)
             end
             if CA.SV.Group.GroupLFGAlert then
                 callAlert(UI_ALERT_CATEGORY_ALERT, nil, alertText)
@@ -1664,7 +1664,7 @@ function CA.ReadyCheckUpdate(eventCode)
             message = strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY), activityName)
             alertText = strformat(GetString(SI_LUIE_CA_GROUPFINDER_READY_CHECK_ACTIVITY), activityName)
             if CA.SV.Group.GroupLFGCA then
-                printToChat(message)
+                printToChat(message, true)
             end
             if CA.SV.Group.GroupLFGAlert then
                 callAlert(UI_ALERT_CATEGORY_ALERT, nil, alertText)
@@ -1679,7 +1679,7 @@ function CA.ReadyCheckUpdate(eventCode)
             local message
             message = (GetString(SI_LFGREADYCHECKCANCELREASON3))
             if CA.SV.Group.GroupLFGCA then
-                printToChat(message)
+                printToChat(message, true)
             end
             if CA.SV.Group.GroupLFGAlert then
                 callAlert(UI_ALERT_CATEGORY_ALERT, nil, message)
@@ -1815,7 +1815,7 @@ function CA.PointRespecDisplay(respecType)
     local messageCSA = LUIE_AttributeDisplayType[respecType]
 
     if CA.SV.Notify.NotificationRespecCA then
-        printToChat(message)
+        printToChat(message, true)
     end
 
     if CA.SV.Notify.NotificationRespecCSA then
@@ -2578,7 +2578,7 @@ function CA.MailRemoved(eventCode)
     if CA.SV.Notify.NotificationMailCA or CA.SV.Notify.NotificationMailAlert then
         if CA.SV.Notify.NotificationMailCA then
             local message = GetString(SI_LUIE_CA_MAIL_DELETED_MSG)
-            g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "NOTIFICATION" }
+            g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "NOTIFICATION", isSystem = true }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
@@ -2622,7 +2622,7 @@ function CA.OnMailTakeAttachedItem(eventCode, mailId)
         end
         if mailString then
             if CA.SV.Notify.NotificationMailCA then
-                g_queuedMessages[g_queuedMessagesCounter] = { message = mailString, type = "NOTIFICATION" }
+                g_queuedMessages[g_queuedMessagesCounter] = { message = mailString, type = "NOTIFICATION", isSystem = true }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
@@ -2699,7 +2699,7 @@ function CA.OnMailSuccess(eventCode)
         end
         if mailString then
             if CA.SV.Notify.NotificationMailCA then
-                g_queuedMessages[g_queuedMessagesCounter] = { message = mailString, type = "NOTIFICATION" }
+                g_queuedMessages[g_queuedMessagesCounter] = { message = mailString, type = "NOTIFICATION", isSystem = true }
                 g_queuedMessagesCounter = g_queuedMessagesCounter + 1
                 eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
             end
@@ -4866,7 +4866,7 @@ function CA.JusticeDisplayConfiscate()
         end
 
         if CA.SV.Notify.NotificationConfiscateCA then
-            g_queuedMessages[g_queuedMessagesCounter] = { message = ConfiscateMessage, type = "NOTIFICATION" }
+            g_queuedMessages[g_queuedMessagesCounter] = { message = ConfiscateMessage, type = "NOTIFICATION", isSystem = true }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         else
@@ -5390,7 +5390,7 @@ function CA.HookFunction()
         -- Display CA
         if CA.SV.Social.DuelCA then
             local finalName = CA.ResolveNameLink(inviterCharacterName, inviterDisplayName)
-            printToChat(strformat(GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), finalName))
+            printToChat(strformat(GetString(SI_LUIE_CA_DUEL_INVITE_RECEIVED), finalName), true)
         end
 
         -- Display Alert
@@ -5409,7 +5409,7 @@ function CA.HookFunction()
 
         -- Display CA
         if CA.SV.Social.DuelCA then
-            printToChat(GetString(SI_LUIE_CA_DUEL_INVITE_ACCEPTED))
+            printToChat(GetString(SI_LUIE_CA_DUEL_INVITE_ACCEPTED), true)
         end
 
         -- Display Alert
@@ -5430,7 +5430,7 @@ function CA.HookFunction()
         -- Display CA
         if CA.SV.Social.DuelCA then
             local finalName = CA.ResolveNameLink(inviteeCharacterName, inviteeDisplayName)
-            printToChat(strformat(GetString(SI_LUIE_CA_DUEL_INVITE_SENT), finalName))
+            printToChat(strformat(GetString(SI_LUIE_CA_DUEL_INVITE_SENT), finalName), true)
         end
 
         -- Display Alert
@@ -5477,9 +5477,9 @@ function CA.HookFunction()
             local reasonName
             local finalName = CA.ResolveNameLink(targetDisplayName, targetCharacterName)
             if userFacingName then
-                printToChat(strformat(GetString("SI_LUIE_CA_DUEL_INVITE_FAILREASON", reason), finalName))
+                printToChat(strformat(GetString("SI_LUIE_CA_DUEL_INVITE_FAILREASON", reason), finalName), true)
             else
-                printToChat(strformat(GetString("SI_LUIE_CA_DUEL_INVITE_FAILREASON", reason)))
+                printToChat(strformat(GetString("SI_LUIE_CA_DUEL_INVITE_FAILREASON", reason)), true)
             end
         end
 
@@ -5505,7 +5505,7 @@ function CA.HookFunction()
     local function DuelInviteDeclinedAlert()
         -- Display CA
         if CA.SV.Social.DuelCA then
-            printToChat(GetString(SI_LUIE_CA_DUEL_INVITE_DECLINED))
+            printToChat(GetString(SI_LUIE_CA_DUEL_INVITE_DECLINED), true)
         end
 
         -- Display Alert
@@ -5524,7 +5524,7 @@ function CA.HookFunction()
     local function DuelInviteCanceledAlert()
         -- Display CA
         if CA.SV.Social.DuelCA then
-            printToChat(GetString(SI_LUIE_CA_DUEL_INVITE_CANCELED))
+            printToChat(GetString(SI_LUIE_CA_DUEL_INVITE_CANCELED), true)
         end
 
         -- Display Alert
@@ -5587,7 +5587,7 @@ function CA.HookFunction()
             end
 
             if CA.SV.Group.GroupCA or response == GROUP_INVITE_RESPONSE_ALREADY_GROUPED or response == GROUP_INVITE_RESPONSE_IGNORED or response == GROUP_INVITE_RESPONSE_PLAYER_NOT_FOUND then
-                printToChat(message)
+                printToChat(message, true)
             end
             if CA.SV.Group.GroupAlert then
                 callAlert(UI_ALERT_CATEGORY_ALERT, nil, alertMessage)
@@ -5601,7 +5601,7 @@ function CA.HookFunction()
 
     -- EVENT_GROUP_INVITE_ACCEPT_RESPONSE_TIMEOUT -- ALERT HANDLER
     local function GroupInviteTimeoutAlert()
-        printToChat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_GENERIC_JOIN_FAILURE))
+        printToChat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_GENERIC_JOIN_FAILURE), true)
         if CA.SV.Group.GroupAlert then
             callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_GENERIC_JOIN_FAILURE))
         end
@@ -5612,19 +5612,19 @@ function CA.HookFunction()
     -- EVENT_GROUP_NOTIFICATION_MESSAGE -- ALERT HANDLER
     local function GroupNotificationMessageAlert(groupMessageCode)
         if groupMessageCode == GROUP_MSG_YOU_ARE_NOT_IN_A_GROUP then
-            printToChat(GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_IN_A_GROUP))
+            printToChat(GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_IN_A_GROUP), true)
             if CA.SV.Group.GroupAlert then
                 callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_IN_A_GROUP))
             end
             PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         elseif groupMessageCode == GROUP_MSG_YOU_ARE_NOT_THE_LEADER then
-            printToChat(GetString(SI_GROUP_NOTIFICATION_GROUP_MSG_INVALID_MEMBER))
+            printToChat(GetString(SI_GROUP_NOTIFICATION_GROUP_MSG_INVALID_MEMBER), true)
             if CA.SV.Group.GroupAlert then
                 callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_GROUP_NOTIFICATION_YOU_ARE_NOT_THE_LEADER))
             end
             PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         elseif groupMessageCode == GROUP_MSG_INVALID_MEMBER then
-            printToChat(GetString(SI_GROUP_NOTIFICATION_GROUP_MSG_INVALID_MEMBER))
+            printToChat(GetString(SI_GROUP_NOTIFICATION_GROUP_MSG_INVALID_MEMBER), true)
             if CA.SV.Group.GroupAlert then
                 callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_GROUP_NOTIFICATION_GROUP_MSG_INVALID_MEMBER))
             end
@@ -5747,7 +5747,7 @@ function CA.HookFunction()
 
         if message ~= nil then
             if CA.SV.Group.GroupCA then
-                printToChat(message)
+                printToChat(message, true)
             end
             if CA.SV.Group.GroupAlert then
                 callAlert(UI_ALERT_CATEGORY_ALERT, nil, alert)
@@ -5757,7 +5757,7 @@ function CA.HookFunction()
 
         if message2 ~= nil then
             if CA.SV.Group.GroupCA then
-                printToChat(message2)
+                printToChat(message2, true)
             end
             if CA.SV.Group.GroupAlert then
                 callAlert(UI_ALERT_CATEGORY_ALERT, nil, alert2)
@@ -5793,7 +5793,7 @@ function CA.HookFunction()
 
         if showAlert then
             if CA.SV.Group.GroupCA then
-                printToChat(displayString)
+                printToChat(displayString, true)
             end
             if CA.SV.Group.GroupAlert then
                 callAlert(UI_ALERT_CATEGORY_ALERT, nil, alertString)
@@ -5808,7 +5808,7 @@ function CA.HookFunction()
 
         if not g_LFGJoinAntiSpam then
             if CA.SV.Group.GroupLFGCA then
-                printToChat(strformat(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED, locationName))
+                printToChat(strformat(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED, locationName), true)
             end
             if CA.SV.Group.GroupLFGAlert then
                 callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_GROUPFINDER_ALERT_LFG_JOINED, locationName))
@@ -5828,7 +5828,7 @@ function CA.HookFunction()
     local function ActivityQueueResultAlert(result)
         if result ~= ACTIVITY_QUEUE_RESULT_SUCCESS then
             if CA.SV.Group.GroupLFGCA then
-                printToChat(GetString("SI_ACTIVITYQUEUERESULT", result))
+                printToChat(GetString("SI_ACTIVITYQUEUERESULT", result), true)
             end
             if CA.SV.Group.GroupLFGAlert then
                 callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString("SI_ACTIVITYQUEUERESULT", result))
@@ -5844,7 +5844,7 @@ function CA.HookFunction()
     local function GroupElectionFailedAlert(failureType, descriptor)
         if failureType ~= GROUP_ELECTION_FAILURE_NONE then
             if CA.SV.Group.GroupVoteCA then
-                printToChat(GetString("SI_GROUPELECTIONFAILURE", failureType))
+                printToChat(GetString("SI_GROUPELECTIONFAILURE", failureType), true)
             end
             if CA.SV.Group.GroupVoteAlert then
                 callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString("SI_GROUPELECTIONFAILURE", failureType))
@@ -5908,7 +5908,7 @@ function CA.HookFunction()
                 end
 
                 if CA.SV.Group.GroupVoteCA then
-                    printToChat(message)
+                    printToChat(message, true)
                 end
                 if CA.SV.Group.GroupVoteAlert then
                     callAlert(UI_ALERT_CATEGORY_ALERT, nil, alertText)
@@ -5931,7 +5931,7 @@ function CA.HookFunction()
         end
 
         if CA.SV.Group.GroupVoteCA then
-            printToChat(alertText)
+            printToChat(alertText, true)
         end
         if CA.SV.Group.GroupVoteAlert then
             callAlert(UI_ALERT_CATEGORY_ALERT, nil, alertText)
@@ -5950,7 +5950,7 @@ function CA.HookFunction()
 
         if reason ~= LFG_READY_CHECK_CANCEL_REASON_NOT_IN_READY_CHECK and reason ~= LFG_READY_CHECK_CANCEL_REASON_GROUP_FORMED_SUCCESSFULLY then
             if CA.SV.Group.GroupLFGCA then
-                printToChat(GetString("SI_LFGREADYCHECKCANCELREASON", reason))
+                printToChat(GetString("SI_LFGREADYCHECKCANCELREASON", reason), true)
             end
             if CA.SV.Group.GroupLFGAlert then
                 callAlert(UI_ALERT_CATEGORY_ALERT, nil, GetString("SI_LFGREADYCHECKCANCELREASON", reason))
@@ -5979,7 +5979,7 @@ function CA.HookFunction()
         end
 
         if CA.SV.Group.GroupCA then
-            printToChat(message)
+            printToChat(message, true)
         end
         if CA.SV.Group.GroupAlert then
             callAlert(UI_ALERT_CATEGORY_ALERT, nil, message)
@@ -6001,7 +6001,7 @@ function CA.HookFunction()
                 local messageString = (ShouldDisplaySelfKickedFromGuildAlert(guildId)) and SI_GUILD_SELF_KICKED_FROM_GUILD or SI_LUIE_CA_GUILD_LEAVE_SELF
                 local sound = (ShouldDisplaySelfKickedFromGuildAlert(guildId)) and SOUNDS.GENERAL_ALERT_ERROR or SOUNDS.GUILD_SELF_LEFT
                 if CA.SV.Social.GuildCA then
-                    printToChat(strformat(GetString(messageString), guildNameAlliance))
+                    printToChat(strformat(GetString(messageString), guildNameAlliance), true)
                 end
                 if CA.SV.Social.GuildAlert then
                     callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(messageString), guildNameAllianceAlert))
@@ -6026,7 +6026,7 @@ function CA.HookFunction()
     local function GuildRanksResponseAlert(guildId, result)
         if result ~= SOCIAL_RESULT_NO_ERROR then
             if CA.SV.Social.GuildCA then
-                printToChat(GetString("SI_SOCIALACTIONRESULT", result))
+                printToChat(GetString("SI_SOCIALACTIONRESULT", result), true)
             elseif CA.SV.Social.GuildAlert then
                 callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString("SI_SOCIALACTIONRESULT", result))
             end
@@ -6075,7 +6075,7 @@ function CA.HookFunction()
             local finalAlertName = CA.ResolveNameNoLink(inviteeCharacterName, inviteeDisplayName)
 
             if CA.SV.Notify.NotificationTradeCA then
-                printToChat(strformat(GetString("SI_LUIE_CA_TRADEACTIONRESULT", errorReason), finalName))
+                printToChat(strformat(GetString("SI_LUIE_CA_TRADEACTIONRESULT", errorReason), finalName), true)
             end
 
             if CA.SV.Notify.NotificationTradeAlert then
@@ -6095,7 +6095,7 @@ function CA.HookFunction()
             g_tradeTarget = ZO_SELECTED_TEXT:Colorize(strformat(SI_UNIT_NAME, finalName))
 
             if CA.SV.Notify.NotificationTradeCA then
-                printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), finalName))
+                printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), finalName), true)
             end
             if CA.SV.Notify.NotificationTradeAlert then
                 callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_TRADE_INVITE_MESSAGE), finalAlertName))
@@ -6113,7 +6113,7 @@ function CA.HookFunction()
             g_tradeTarget = ZO_SELECTED_TEXT:Colorize(strformat(SI_UNIT_NAME, finalName))
 
             if CA.SV.Notify.NotificationTradeCA then
-                printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_CONFIRM), finalName))
+                printToChat(strformat(GetString(SI_LUIE_CA_TRADE_INVITE_CONFIRM), finalName), true)
             end
             if CA.SV.Notify.NotificationTradeAlert then
                 callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_TRADE_INVITE_CONFIRM), finalAlertName))
@@ -6126,7 +6126,7 @@ function CA.HookFunction()
     -- EVENT_TRADE_INVITE_DECLINED
     local function TradeInviteDeclinedAlert()
         if CA.SV.Notify.NotificationTradeCA then
-            printToChat(GetString(SI_LUIE_CA_TRADE_INVITE_DECLINED))
+            printToChat(GetString(SI_LUIE_CA_TRADE_INVITE_DECLINED), true)
         end
         if CA.SV.Notify.NotificationTradeAlert then
             callAlert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_TRADE_INVITE_DECLINED))
@@ -6141,7 +6141,7 @@ function CA.HookFunction()
     -- EVENT_TRADE_INVITE_CANCELED
     local function TradeInviteCanceledAlert()
         if CA.SV.Notify.NotificationTradeCA then
-            printToChat(GetString(SI_LUIE_CA_TRADE_INVITE_CANCELED))
+            printToChat(GetString(SI_LUIE_CA_TRADE_INVITE_CANCELED), true)
         end
         if CA.SV.Notify.NotificationTradeAlert then
             callAlert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_TRADE_INVITE_CANCELED))
@@ -6156,7 +6156,7 @@ function CA.HookFunction()
     -- EVENT_TRADE_CANCELED
     local function TradeCanceledAlert()
         if CA.SV.Notify.NotificationTradeCA then
-            printToChat(GetString(SI_TRADE_CANCELED))
+            printToChat(GetString(SI_TRADE_CANCELED), true)
         end
         if CA.SV.Notify.NotificationTradeAlert then
             callAlert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_TRADE_CANCELED))
@@ -6181,7 +6181,7 @@ function CA.HookFunction()
     -- EVENT_TRADE_FAILED
     local function TradeFailedAlert(reason)
         if CA.SV.Notify.NotificationTradeCA then
-            printToChat(GetString("SI_LUIE_CA_TRADEACTIONRESULT", reason))
+            printToChat(GetString("SI_LUIE_CA_TRADEACTIONRESULT", reason), true)
         end
         if CA.SV.Notify.NotificationTradeAlert then
             callAlert(UI_ALERT_CATEGORY_ALERT, nil, GetString("SI_LUIE_CA_TRADEACTIONRESULT", reason))
@@ -6196,7 +6196,7 @@ function CA.HookFunction()
     local function TradeSucceededAlert()
         if CA.SV.Notify.NotificationTradeCA then
             local message = GetString(SI_TRADE_COMPLETE)
-            g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "NOTIFICATION" }
+            g_queuedMessages[g_queuedMessagesCounter] = { message = message, type = "NOTIFICATION", isSystem = true }
             g_queuedMessagesCounter = g_queuedMessagesCounter + 1
             eventManager:RegisterForUpdate(moduleName .. "Printer", 50, CA.PrintQueuedMessages )
         end
@@ -6260,7 +6260,7 @@ function CA.HookFunction()
         end
 
         if CA.SV.Notify.NotificationMailCA then
-            printToChat(GetString("SI_SENDMAILRESULT", reason))
+            printToChat(GetString("SI_SENDMAILRESULT", reason), true)
         end
         if CA.SV.Notify.NotificationMailAlert then
             callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString("SI_SENDMAILRESULT", reason))
@@ -7742,7 +7742,7 @@ function CA.HookFunction()
         if IsNearDuelBoundary() then
             -- Display CA
             if CA.SV.Social.DuelBoundaryCA then
-                printToChat(GetString(SI_LUIE_CA_DUEL_NEAR_BOUNDARY_CSA))
+                printToChat(GetString(SI_LUIE_CA_DUEL_NEAR_BOUNDARY_CSA), true)
             end
 
             -- Display CSA
@@ -7805,7 +7805,7 @@ function CA.HookFunction()
             else
                 resultChatString = strformat(resultString, finalName)
             end
-            printToChat(resultChatString)
+            printToChat(resultChatString, true)
         end
 
         if CA.SV.Social.DuelWonCSA or CA.SV.Social.DuelWonAlert then
@@ -7862,7 +7862,7 @@ function CA.HookFunction()
         -- Display CA
         if CA.SV.Group.GroupRaidCA then
             local formattedName = strformat("|cFEFEFE<<1>>|r", raidName)
-            printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_STARTED, formattedName))
+            printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_STARTED, formattedName), true)
         end
 
         -- Display CSA
@@ -7912,8 +7912,8 @@ function CA.HookFunction()
                 formattedTime = ZO_ERROR_COLOR:Colorize(formattedTime)
             end
 
-            printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_COMPLETED_LARGE, formattedName))
-            printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_SCORETALLY, finalScore, formattedTime, vitalityBonus, vitalityCounterString))
+            printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_COMPLETED_LARGE, formattedName), true)
+            printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_SCORETALLY, finalScore, formattedTime, vitalityBonus, vitalityCounterString), true)
         end
 
         -- Display CSA
@@ -7943,7 +7943,7 @@ function CA.HookFunction()
         -- Display CA
         if CA.SV.Group.GroupRaidCA then
             local formattedName = strformat("|cFEFEFE<<1>>|r", trialName)
-            printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_FAILED, formattedName))
+            printToChat(strformat(SI_LUIE_CA_GROUP_TRIAL_FAILED, formattedName), true)
         end
 
         -- Display CSA
@@ -7973,7 +7973,7 @@ function CA.HookFunction()
         if CA.SV.Group.GroupRaidBestScoreCA then
             local formattedName = strformat("|cFEFEFE<<1>>|r", trialName)
             local formattedString = isWeekly and strformat(SI_TRIAL_NEW_BEST_SCORE_WEEKLY, formattedName) or strformat(SI_TRIAL_NEW_BEST_SCORE_LIFETIME, formattedName)
-            printToChat(formattedString)
+            printToChat(formattedString, true)
         end
 
         -- Display CSA
@@ -8081,7 +8081,7 @@ function CA.HookFunction()
 
         local message = GetString(SI_ACTIVITY_FINDER_ACTIVITY_COMPLETE_ANNOUNCEMENT_TEXT)
         if CA.SV.Group.GroupLFGCompleteCA then
-            printToChat(message)
+            printToChat(message, true)
         end
 
         if CA.SV.Group.GroupLFGCompleteCSA then
@@ -8369,7 +8369,7 @@ function CA.HookFunction()
         d("EVENT_BROADCAST")
 
         -- CA
-        printToChat(strfmt("|cffff00%s|r", message))
+        printToChat(strfmt("|cffff00%s|r", message), true)
 
         -- CSA
         local messageParams = CENTER_SCREEN_ANNOUNCE:CreateMessageParams(CSA_CATEGORY_SMALL_TEXT, SOUNDS.MESSAGE_BROADCAST)
@@ -8462,7 +8462,7 @@ function CA.HookFunction()
         -- Display CA (Success or Failure)
         if CA.SV.Social.PledgeOfMaraCA then
             local finalName = CA.ResolveNameLink(characterName, displayName)
-            printToChat(strformat(GetString("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT", result), finalName))
+            printToChat(strformat(GetString("SI_LUIE_CA_MARA_PLEDGEOFMARARESULT", result), finalName), true)
         end
 
         if CA.SV.Social.PledgeOfMaraAlert or CA.SV.Social.PledgeOfMaraCSA then
@@ -8567,7 +8567,7 @@ function CA.HookFunction()
     -- TODO: Conditionals based off EVENT_SOCIAL_ERROR HOOK LATER
     local function SocialErrorHook(error)
         if(not IsSocialErrorIgnoreResponse(error) and ShouldShowSocialErrorInChat(error)) then
-            printToChat(strformat(GetString("SI_SOCIALACTIONRESULT", error)))
+            printToChat(strformat(GetString("SI_SOCIALACTIONRESULT", error)), true)
         end
         return true
     end
@@ -8707,7 +8707,7 @@ function CA.HookFunction()
 
     local function AlertIgnored(SendString)
         local alertString = IsConsoleUI() and SI_PLAYER_TO_PLAYER_BLOCKED or SendString
-        printToChat(GetString(alertString))
+        printToChat(GetString(alertString), true)
         if CA.SV.Group.GroupAlert then
             ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, alertString)
         end
@@ -8746,7 +8746,7 @@ function CA.HookFunction()
         local isSoloOrLeader = IsUnitSoloOrGroupLeader("player")
 
         local function AlertGroupDisabled()
-            printToChat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE))
+            printToChat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE), true)
             if CA.SV.Group.GroupAlert then
                 ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_ONLY_LEADER_CAN_INVITE))
             end
@@ -8756,7 +8756,7 @@ function CA.HookFunction()
         local function AlertGroupKickDisabled()
             printToChat(GetString(SI_LUIE_CA_GROUP_LEADERKICK_ERROR))
             if CA.SV.Group.GroupAlert then
-                ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_LEADERKICK_ERROR))
+                ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_LEADERKICK_ERROR), true)
             end
             PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
         end
@@ -8800,7 +8800,7 @@ function CA.HookFunction()
         --Friend--
         if IsFriend(currentTargetCharacterNameRaw) then
             local function AlreadyFriendsWarning()
-                printToChat(GetString("SI_SOCIALACTIONRESULT", SOCIAL_RESULT_ACCOUNT_ALREADY_FRIENDS))
+                printToChat(GetString("SI_SOCIALACTIONRESULT", SOCIAL_RESULT_ACCOUNT_ALREADY_FRIENDS), true)
                 if CA.SV.Social.FriendIgnoreAlert then
                     ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, GetString("SI_SOCIALACTIONRESULT", SOCIAL_RESULT_ACCOUNT_ALREADY_FRIENDS))
                 end
@@ -8820,7 +8820,7 @@ function CA.HookFunction()
                 else
                     displayNameLink = ZO_LinkHandler_CreateLink(currentTargetDisplayName, nil, DISPLAY_NAME_LINK_TYPE, currentTargetDisplayName)
                 end
-                printToChat(strformat(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_LINK, displayNameLink))
+                printToChat(strformat(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_LINK, displayNameLink), true)
                 if CA.SV.Social.FriendIgnoreAlert then
                     callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_SLASHCMDS_FRIEND_INVITE_MSG_LINK, currentTargetDisplayName))
                 end
@@ -8888,7 +8888,7 @@ function CA.HookFunction()
             -- Group Invite
             if data.incomingType == INTERACT_TYPE_GROUP_INVITE then
                 if CA.SV.Group.GroupCA then
-                    printToChat(strformat(message, typeString))
+                    printToChat(strformat(message, typeString), true)
                 end
                 if CA.SV.Group.GroupAlert then
                     ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, strformat(message, typeString))
@@ -8897,7 +8897,7 @@ function CA.HookFunction()
             -- Guild Invite
             if data.incomingType == INTERACT_TYPE_GUILD_INVITE then
                 if CA.SV.Social.GuildCA then
-                    printToChat(strformat(message, typeString))
+                    printToChat(strformat(message, typeString), true)
                 end
                 if CA.SV.Social.GuildAlert then
                     ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, strformat(message, typeString))
@@ -8907,7 +8907,7 @@ function CA.HookFunction()
             -- Friend Invite
             if data.incomingType == INTERACT_TYPE_FRIEND_REQUEST then
                 if CA.SV.Social.FriendIgnoreCA then
-                    printToChat(strformat(message, typeString))
+                    printToChat(strformat(message, typeString), true)
                 end
                 if CA.SV.Social.FriendIgnoreAlert then
                     ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, strformat(message, typeString))
@@ -8917,7 +8917,7 @@ function CA.HookFunction()
             -- Quest Shared
             if data.incomingType == INTERACT_TYPE_QUEST_SHARE then
                 if CA.SV.Quests.QuestShareCA then
-                    printToChat(strformat(message, typeString))
+                    printToChat(strformat(message, typeString), true)
                 end
                 if CA.SV.Quests.QuestShareAlert then
                     ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil, strformat(message, typeString))
@@ -9042,7 +9042,7 @@ function CA.HookFunction()
         windowManager:SetFocusByName("")
         if not self.sendMoneyMode and GetQueuedCOD() == 0 then
             if CA.SV.Notify.NotificationMailCA then
-                printToChat(GetString(SI_LUIE_CA_MAIL_ERROR_NO_COD_VALUE))
+                printToChat(GetString(SI_LUIE_CA_MAIL_ERROR_NO_COD_VALUE), true)
             end
             if CA.SV.Notify.NotificationMailAlert then
                 callAlert(UI_ALERT_CATEGORY_ERROR, nil, GetString(SI_LUIE_CA_MAIL_ERROR_NO_COD_VALUE))
@@ -9136,12 +9136,12 @@ function CA.HookFunction()
                 else
                     link = ZO_LinkHandler_CreateLink(characterOrDisplayName, nil, CHARACTER_LINK_TYPE, characterOrDisplayName)
                 end
-                printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MENU), link))
+                printToChat(strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MENU), link), true)
                 if CA.SV.Group.GroupAlert then
                     callAlert(ALERT, nil, strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MENU), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
                 end
             else
-                printToChat(strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
+                printToChat(strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)), true)
                 if CA.SV.Group.GroupAlert then
                     callAlert(ALERT, nil, strformat(GetString("SI_LUIE_CA_GROUPINVITERESPONSE", GROUP_INVITE_RESPONSE_INVITED), ZO_FormatUserFacingCharacterOrDisplayName(characterOrDisplayName)))
                 end
@@ -9152,7 +9152,7 @@ function CA.HookFunction()
     -- HOOK Group Invite function so we can modify CA/Alert here
     TryGroupInviteByName = function(characterOrDisplayName, sentFromChat, displayInvitedMessage, isMenu)
         if IsPlayerInGroup(characterOrDisplayName) then
-            printToChat(GetString(SI_GROUP_ALERT_INVITE_PLAYER_ALREADY_MEMBER))
+            printToChat(GetString(SI_GROUP_ALERT_INVITE_PLAYER_ALREADY_MEMBER), true)
             if CA.SV.Group.GroupAlert then
                 callAlert(UI_ALERT_CATEGORY_ALERT, nil, SI_GROUP_ALERT_INVITE_PLAYER_ALREADY_MEMBER)
             end
@@ -9180,7 +9180,7 @@ function CA.HookFunction()
             ZO_ConsoleAttemptInteractOrError(GroupInviteCallback, displayName, ZO_PLAYER_CONSOLE_INFO_REQUEST_DONT_BLOCK, ZO_CONSOLE_CAN_COMMUNICATE_ERROR_ALERT, ZO_ID_REQUEST_TYPE_DISPLAY_NAME, displayName)
         else
             if IsIgnored(characterOrDisplayName) then
-                printToChat(GetString(SI_LUIE_IGNORE_ERROR_GROUP))
+                printToChat(GetString(SI_LUIE_IGNORE_ERROR_GROUP), true)
                 if CA.SV.Group.GroupAlert then
                     callAlert(UI_ALERT_CATEGORY_ALERT, nil, SI_LUIE_IGNORE_ERROR_GROUP)
                 end
@@ -9217,7 +9217,7 @@ function CA.HookFunction()
                 local guildNameAllianceAlert = CA.SV.Social.GuildIcon and iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
                 if CA.SV.Social.GuildCA then
-                    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayNameLink, guildNameAlliance))
+                    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayNameLink, guildNameAlliance), true)
                 end
                 if CA.SV.Social.GuildAlert then
                     callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_ADDED), displayName, guildNameAllianceAlert))
@@ -9253,7 +9253,7 @@ function CA.HookFunction()
                 local guildNameAllianceAlert = CA.SV.Social.GuildIcon and iconTextFormat(GetAllianceBannerIcon(guildAlliance), "100%", "100%", guildName) or guildName
 
                 if CA.SV.Social.GuildCA then
-                    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_LEFT), displayNameLink, guildNameAlliance))
+                    printToChat(strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_LEFT), displayNameLink, guildNameAlliance), true)
                 end
                 if CA.SV.Social.GuildAlert then
                     callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(GetString(SI_LUIE_CA_GUILD_ROSTER_LEFT), displayName, guildNameAllianceAlert))
@@ -9292,7 +9292,7 @@ function CA.HookFunction()
                 if success then
                     GuildInvite(guildId, displayName)
                     if CA.SV.Social.GuildCA then
-                        printToChat(strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, UndecorateDisplayName(displayName), guildNameAlliance))
+                        printToChat(strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, UndecorateDisplayName(displayName), guildNameAlliance), true)
                     end
                     if CA.SV.Social.GuildAlert then
                         callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, UndecorateDisplayName(displayName), guildNameAllianceAlert))
@@ -9305,7 +9305,7 @@ function CA.HookFunction()
             -- We can't stop the player from inviting players to guild by Character Name if sent from chat so, might as well not block it. This also makes it consistent with group invites. Can't invite from the radial menu but can use the slash command.
             if IsIgnored(displayName) and not sentFromChat then
                 if CA.SV.Social.GuildCA then
-                    printToChat(GetString(SI_LUIE_IGNORE_ERROR_GUILD))
+                    printToChat(GetString(SI_LUIE_IGNORE_ERROR_GUILD), true)
                 end
                 if CA.SV.Social.GuildAlert then
                     callAlert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_IGNORE_ERROR_GUILD))
@@ -9316,7 +9316,7 @@ function CA.HookFunction()
 
             GuildInvite(guildId, displayName)
             if CA.SV.Social.GuildCA then
-                printToChat(strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAlliance))
+                printToChat(strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAlliance), true)
             end
             if CA.SV.Social.GuildAlert then
                 callAlert(UI_ALERT_CATEGORY_ALERT, nil, strformat(SI_LUIE_CA_GUILD_ROSTER_INVITED_MESSAGE, displayName, guildNameAllianceAlert))
@@ -9392,7 +9392,7 @@ end
 
 function CA.TradeInviteAccepted(eventCode)
     if CA.SV.Notify.NotificationTradeCA then
-        printToChat(GetString(SI_LUIE_CA_TRADE_INVITE_ACCEPTED))
+        printToChat(GetString(SI_LUIE_CA_TRADE_INVITE_ACCEPTED), true)
     end
     if CA.SV.Notify.NotificationTradeAlert then
         callAlert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_TRADE_INVITE_ACCEPTED))
@@ -9440,14 +9440,14 @@ function CA.CheckLFGStatusJoin()
         if not g_lfgDisableGroupEvents then
             if IsInLFGGroup() and not g_joinLFGOverride then
                 if CA.SV.Group.GroupCA then
-                    printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF_LFG))
+                    printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF_LFG), true)
                 end
                 if CA.SV.Group.GroupAlert then
                     callAlert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF_LFG))
                 end
             elseif not IsInLFGGroup() and not g_joinLFGOverride then
                 if CA.SV.Group.GroupCA then
-                    printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF))
+                    printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF), true)
                 end
                 if CA.SV.Group.GroupAlert then
                     callAlert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_MEMBER_JOIN_SELF))
@@ -9462,7 +9462,7 @@ end
 function CA.PrintJoinStatusNotSelf(SendMessage, SendAlert)
     if not g_stopGroupLeaveQueue then
         if CA.SV.Group.GroupCA then
-            printToChat(SendMessage)
+            printToChat(SendMessage, true)
         end
         if CA.SV.Group.GroupAlert then
             callAlert(UI_ALERT_CATEGORY_ALERT, nil, SendAlert)
@@ -9476,7 +9476,7 @@ function CA.CheckLFGStatusLeave(WasKicked)
         if not g_leaveLFGOverride then
             if WasKicked then
                 if CA.SV.Group.GroupCA then
-                    printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF))
+                    printToChat(GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF), true)
                 end
                 if CA.SV.Group.GroupAlert then
                     callAlert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_MEMBER_KICKED_SELF))
@@ -9484,7 +9484,7 @@ function CA.CheckLFGStatusLeave(WasKicked)
             end
         elseif g_leaveLFGOverride and GetGroupSize() == 0 then
             if CA.SV.Group.GroupCA then
-                printToChat(GetString(SI_LUIE_CA_GROUP_QUIT_LFG))
+                printToChat(GetString(SI_LUIE_CA_GROUP_QUIT_LFG), true)
             end
             if CA.SV.Group.GroupAlert then
                 callAlert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_LUIE_CA_GROUP_QUIT_LFG))
@@ -9506,7 +9506,7 @@ function CA.OnGroupInviteReceived(eventCode, inviterName, inviterDisplayName)
     if CA.SV.Group.GroupCA then
         local finalName = CA.ResolveNameLink(inviterName, inviterDisplayName)
         local message = strformat(GetString(SI_LUIE_CA_GROUP_INVITE_MESSAGE), finalName)
-        printToChat(message)
+        printToChat(message, true)
     end
     if CA.SV.Group.GroupAlert then
         local finalAlertName = CA.ResolveNameNoLink(inviterName, inviterDisplayName)
@@ -9580,7 +9580,7 @@ function CA.OnGroupTypeChanged(eventCode, largeGroup)
     end
 
     if CA.SV.Group.GroupCA then
-        printToChat(message)
+        printToChat(message, true)
     end
     if CA.SV.Group.GroupAlert then
         callAlert(UI_ALERT_CATEGORY_ALERT, nil, message)
@@ -9592,7 +9592,7 @@ function CA.VoteNotify(eventCode)
     local electionType, timeRemainingSeconds, electionDescriptor, targetUnitTag = GetGroupElectionInfo()
     if electionType == 2 then -- Ready Check
         if CA.SV.Group.GroupVoteCA then
-            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_MESSAGE))
+            printToChat(GetString(SI_GROUP_ELECTION_READY_CHECK_MESSAGE), true)
         end
         if CA.SV.Group.GroupVoteAlert then
             callAlert(UI_ALERT_CATEGORY_ALERT, nil, GetString(SI_GROUP_ELECTION_READY_CHECK_MESSAGE))
@@ -9607,7 +9607,7 @@ function CA.VoteNotify(eventCode)
         if CA.SV.Group.GroupVoteCA then
             local finalName = CA.ResolveNameLink(kickMemberName, kickMemberAccountName)
             local message = strformat(GetString(SI_LUIE_CA_GROUPFINDER_VOTEKICK_START), finalName)
-            printToChat(message)
+            printToChat(message, true)
         end
         if CA.SV.Group.GroupVoteAlert then
             local finalAlertName = CA.ResolveNameNoLink(kickMemberName, kickMemberAccountName)
@@ -9629,9 +9629,9 @@ function CA.MaraOffer(eventCode, characterName, isSender, displayName)
     if CA.SV.Social.PledgeOfMaraCA then
         local finalName = CA.ResolveNameLink(characterName, displayName)
         if isSender then
-            printToChat(strformat(GetString(SI_PLEDGE_OF_MARA_SENDER_MESSAGE), finalName))
+            printToChat(strformat(GetString(SI_PLEDGE_OF_MARA_SENDER_MESSAGE), finalName), true)
         else
-            printToChat(strformat(GetString(SI_PLEDGE_OF_MARA_MESSAGE), finalName))
+            printToChat(strformat(GetString(SI_PLEDGE_OF_MARA_MESSAGE), finalName), true)
         end
     end
 
@@ -9663,7 +9663,7 @@ function CA.DuelStarted(eventCode)
         end
 
         if CA.SV.Social.DuelStartCA then
-            printToChat(message)
+            printToChat(message, true)
         end
 
         if CA.SV.Social.DuelStartAlert then
@@ -9779,7 +9779,13 @@ function CA.PrintQueuedMessages()
     -- Resolve notification messages first
     for i=1, #g_queuedMessages do
         if g_queuedMessages[i] ~= "" and g_queuedMessages[i].type == "NOTIFICATION" then
-            printToChat(g_queuedMessages[i].message)
+            local isSystem
+            if g_queuedMessages[i].isSystem then
+                isSystem = true
+            else
+                isSystem = false
+            end
+            printToChat(g_queuedMessages[i].message, isSystem)
         end
     end
 

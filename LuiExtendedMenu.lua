@@ -341,40 +341,118 @@ function LUIE_CreateSettings()
     alpha = 1
     }
 
-    -- Use LUI print to chat for messages
+    -- Print Chat Announcements & Messages to Tab 1
     optionsData[#optionsData + 1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_LUIPRINTTOCHAT),
+        name = strformat(GetString(SI_LUIE_LAM_CHATTAB), "1"),
+        tooltip = strformat(GetString(SI_LUIE_LAM_CHATTAB_TP), "1"),
+        getFunc = function() return LUIE.SV.ChatTab[1] end,
+        setFunc = function(value) LUIE.SV.ChatTab[1] = value end,
+        width = "full",
+        default = LUIE.D.ChatTab[1],
+    }
+
+    -- Print Chat Announcements & Messages to Tab 2
+    optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = strformat(GetString(SI_LUIE_LAM_CHATTAB), "2"),
+        tooltip = strformat(GetString(SI_LUIE_LAM_CHATTAB_TP), "2"),
+        getFunc = function() return LUIE.SV.ChatTab[2] end,
+        setFunc = function(value) LUIE.SV.ChatTab[2] = value end,
+        width = "full",
+        default = LUIE.D.ChatTab[2],
+    }
+
+    -- Print Chat Announcements & Messages to Tab 3
+    optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = strformat(GetString(SI_LUIE_LAM_CHATTAB), "3"),
+        tooltip = strformat(GetString(SI_LUIE_LAM_CHATTAB_TP), "3"),
+        getFunc = function() return LUIE.SV.ChatTab[3] end,
+        setFunc = function(value) LUIE.SV.ChatTab[3] = value end,
+        width = "full",
+        default = LUIE.D.ChatTab[3],
+    }
+
+    -- Print Chat Announcements & Messages to Tab 4
+    optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = strformat(GetString(SI_LUIE_LAM_CHATTAB), "4"),
+        tooltip = strformat(GetString(SI_LUIE_LAM_CHATTAB_TP), "4"),
+        getFunc = function() return LUIE.SV.ChatTab[4] end,
+        setFunc = function(value) LUIE.SV.ChatTab[4] = value end,
+        width = "full",
+        default = LUIE.D.ChatTab[4],
+    }
+
+    -- Print Chat Announcements & Messages to Tab 5
+    optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = strformat(GetString(SI_LUIE_LAM_CHATTAB), "5"),
+        tooltip = strformat(GetString(SI_LUIE_LAM_CHATTAB_TP), "5"),
+        getFunc = function() return LUIE.SV.ChatTab[5] end,
+        setFunc = function(value) LUIE.SV.ChatTab[5] = value end,
+        width = "full",
+        default = LUIE.D.ChatTab[5],
+    }
+
+    -- Display System & Notifications in all Tabs
+    optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_CHATTABSYSTEMALL),
+        tooltip = GetString(SI_LUIE_LAM_CHATTABSYSTEMALL_TP),
+        getFunc = function() return LUIE.SV.ChatSystemAll end,
+        setFunc = function(value) LUIE.SV.ChatSystemAll = value end,
+        width = "full",
+        default = LUIE.D.ChatSystemAll,
+    }
+
+    -- Use LUI print to chat for messages
+    --[[optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_LUIPRINTTOCHAT)),
         tooltip = GetString(SI_LUIE_LAM_LUIPRINTTOCHAT_TP),
         getFunc = function() return LUIE.SV.ChatUseSystem end,
         setFunc = function(value) LUIE.SV.ChatUseSystem = value end,
         width = "full",
         warning = GetString(SI_LUIE_LAM_GENERIC_WARNING),
+        disabled = function() return not LUIE.SV.ChatSystemAll end,
         default = LUIE.D.ChatUseSystem,
-    }
+    }]]--
 
     -- Include Timestamp
     optionsData[#optionsData + 1] = {
         type = "checkbox",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_TIMESTAMP)),
+        name = GetString(SI_LUIE_LAM_TIMESTAMP),
         tooltip = GetString(SI_LUIE_LAM_TIMESTAMP_TP),
         getFunc = function() return LUIE.SV.TimeStamp end,
         setFunc = function(value) LUIE.SV.TimeStamp = value end,
         width = "full",
-        disabled = function() return not LUIE.SV.ChatUseSystem end,
         default = LUIE.D.TimeStamp,
     }
 
     -- Timestamp Format
     optionsData[#optionsData + 1] = {
         type = "editbox",
-        name = strformat("\t\t\t\t\t\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_TIMESTAMPFORMAT)),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_TIMESTAMPFORMAT)),
         tooltip = GetString(SI_LUIE_LAM_TIMESTAMPFORMAT_TP),
         getFunc = function() return LUIE.SV.TimeStampFormat end,
         setFunc = function(value) LUIE.SV.TimeStampFormat = value end,
         width = "full",
-        disabled = function() return not (LUIE.SV.ChatUseSystem and LUIE.SV.TimeStamp) end,
+        disabled = function() return not LUIE.SV.TimeStamp end,
         default = LUIE.D.TimeStampFormat,
+    }
+
+    -- Timestamp Color
+    optionsData[#optionsData + 1] = {
+        type    = "colorpicker",
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_TIMESTAMPCOLOR)),
+        tooltip = GetString(SI_LUIE_LAM_TIMESTAMPCOLOR_TP),
+        getFunc = function() return unpack(LUIE.SV.TimeStampColor) end,
+        setFunc = function(r, g, b, a) LUIE.SV.TimeStampColor = { r, g, b, a } LUIE.UpdateTimeStampColor() end,
+        width = "full",
+        disabled = function() return not LUIE.SV.TimeStamp end,
+        default = {r=LUIE.SV.TimeStampColor[1], g=LUIE.SV.TimeStampColor[2], b=LUIE.SV.TimeStampColor[3]},
     }
 
     -- Toggle XP Bar popup
