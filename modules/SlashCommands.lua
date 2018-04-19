@@ -875,8 +875,9 @@ local function SlashInvite(option)
     end
 end
 
-function LUIE.SlashBanker()
-    local banker = 267
+-- Summon/Unsummon assistants based on their collectible id
+function LUIE.SlashAssistant(id)
+    local assistant = id
     -- Check to make sure we're not in Cyrodiil
     if IsPlayerInAvAWorld() then
         printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA), true)
@@ -896,79 +897,11 @@ function LUIE.SlashBanker()
         return
     end
     -- Check to make sure that we have the Assistant unlocked
-    if IsCollectibleUnlocked(banker) then
+    if IsCollectibleUnlocked(assistant) then
         -- Summon/Unsummon the Assistant
-        UseCollectible(banker)
+        UseCollectible(assistant)
     else
-        printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED), GetCollectibleName(267)), true)
-        if LUIE.SV.TempAlertHome then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-end
-
-function LUIE.SlashMerchant()
-    local merchant = 301
-    -- Check to make sure we're not in Cyrodiil
-    if IsPlayerInAvAWorld() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA), true)
-        if LUIE.SV.TempAlertHome then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    -- Check to make sure we're not in a battleground
-    if IsActiveWorldBattleground() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG), true)
-        if LUIE.SV.TempAlertHome then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    -- Check to make sure that we have the Assistant unlocked
-    if IsCollectibleUnlocked(merchant) then
-        -- Summon/Unsummon the Assistant
-        UseCollectible(merchant)
-    else
-        printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED), GetCollectibleName(301)), true)
-        if LUIE.SV.TempAlertHome then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-end
-
-function LUIE.SlashFence()
-    local fence = 300
-    -- Check to make sure we're not in Cyrodiil
-    if IsPlayerInAvAWorld() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA), true)
-        if LUIE.SV.TempAlertHome then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_AVA)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    -- Check to make sure we're not in a battleground
-    if IsActiveWorldBattleground() then
-        printToChat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG), true)
-        if LUIE.SV.TempAlertHome then
-            callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_BG)))
-        end
-        PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
-        return
-    end
-    -- Check to make sure that we have the Assistant unlocked
-    if IsCollectibleUnlocked(fence) then
-        -- Summon/Unsummon the Assistant
-        UseCollectible(fence)
-    else
-        printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED), GetCollectibleName(300)), true)
+        printToChat(strformat(GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED), GetCollectibleName(assistant)), true)
         if LUIE.SV.TempAlertHome then
             callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_ASSISTANT_FAILED_NOTUNLOCKED)))
         end
@@ -1095,20 +1028,22 @@ function SC.RegisterSlashCommands()
         SLASH_COMMANDS["/campaign"]     = SlashCampaignQ
     end
     if SC.SV.SlashBanker then
-        SLASH_COMMANDS["/bank"]         = LUIE.SlashBanker
-        SLASH_COMMANDS["/banker"]       = LUIE.SlashBanker
+        SLASH_COMMANDS["/bank"]         = function(...) LUIE.SlashAssistant(267) end
+        SLASH_COMMANDS["/banker"]       = function(...) LUIE.SlashAssistant(267) end
     end
     if SC.SV.SlashMerchant then
-        SLASH_COMMANDS["/sell"]         = LUIE.SlashMerchant
-        SLASH_COMMANDS["/merchant"]     = LUIE.SlashMerchant
-        SLASH_COMMANDS["/vendor"]       = LUIE.SlashMerchant
+        SLASH_COMMANDS["/sell"]         = function(...) LUIE.SlashAssistant(301) end
+        SLASH_COMMANDS["/merchant"]     = function(...) LUIE.SlashAssistant(301) end
+        SLASH_COMMANDS["/vendor"]       = function(...) LUIE.SlashAssistant(301) end
     end
     if SC.SV.SlashFence then
-        SLASH_COMMANDS["/smuggler"]     = LUIE.SlashFence
-        SLASH_COMMANDS["/fence"]        = LUIE.SlashFence
+        SLASH_COMMANDS["/smuggler"]     = function(...) LUIE.SlashAssistant(300) end
+        SLASH_COMMANDS["/fence"]        = function(...) LUIE.SlashAssistant(300) end
     end
     if SC.SV.SlashReadyCheck then
         SLASH_COMMANDS["/ready"]        = LUIE.SlashReadyCheck
         SLASH_COMMANDS["/readycheck"]   = LUIE.SlashReadyCheck
     end
 end
+
+
