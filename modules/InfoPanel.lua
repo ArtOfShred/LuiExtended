@@ -152,11 +152,11 @@ local function CreateUIControls()
 
     uiArmour.control = UI.Control( uiBotRow, nil, {55,20}, false )
     uiArmour.icon = UI.Texture( uiArmour.control, {LEFT,LEFT}, {24,24}, "/esoui/art/progression/progression_indexicon_armor_up.dds", nil, false )
-    uiArmour.label = UI.Label( uiArmour.control, {LEFT,RIGHT,0,0,uiArmour.icon}, {31,20}, {0,1}, g_infoPanelFont, "100%", false )
+    uiArmour.label = UI.Label( uiArmour.control, {LEFT,RIGHT,0,0,uiArmour.icon}, {41,20}, {0,1}, g_infoPanelFont, "100%", false )
     --uiArmour.bg = UI.Backdrop( uiArmour.control, "fill", nil, nil, nil, false )
 
-    uiWeapons.control = UI.Control( uiBotRow, nil, {36,20}, false )
-    uiWeapons.main = UI.Texture( uiWeapons.control, {LEFT,LEFT,-5},  {30,30}, "/esoui/art/progression/icon_1handplusrune.dds", nil, false )
+    uiWeapons.control = UI.Control( uiBotRow, nil, {46,20}, false )
+    uiWeapons.main = UI.Texture( uiWeapons.control, {LEFT,LEFT},  {30,30}, "/esoui/art/progression/icon_1handplusrune.dds", nil, false )
     uiWeapons.swap = UI.Texture( uiWeapons.control, {RIGHT,RIGHT,5}, {30,30}, "/esoui/art/progression/icon_1handplusrune.dds", nil, false )
     uiWeapons.main.slotIndex = EQUIP_SLOT_MAIN_HAND
     uiWeapons.swap.slotIndex = EQUIP_SLOT_BACKUP_MAIN

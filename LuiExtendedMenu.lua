@@ -7178,14 +7178,14 @@ function LUIE_CreateSettings()
                 width = "half",
                 default = false,
                 disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-                resetFunc = LUIE.UnitFrames.CustomFramesResetPosition(false),
+                resetFunc = function() LUIE.UnitFrames.CustomFramesResetPosition(false) end,
             },
             {
                 -- Custom Unit Frames Reset position
                 type = "button",
                 name = GetString(SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT_TP),
-                func = LUIE.UnitFrames.CustomFramesResetPosition(false),
+                func = function() LUIE.UnitFrames.CustomFramesResetPosition(false) end,
                 width = "half",
             },
             {
