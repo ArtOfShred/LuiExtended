@@ -8,12 +8,12 @@ ZO_CreateStringId("SI_LUIE_ERROR_FONT",                                 "LUI Ext
 -- bindings.xml --------------------
 ------------------------------------
 
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_BANKER", "Summon Banker")
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_MERCHANT", "Summon Merchant")
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_FENCE", "Summon Fence")
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_READY_CHECK", "Initiate Ready Check")
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_HOME", "Teleport to Primary Home")
-ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_REGROUP", "Regroup (Disband & Reform)")
+ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_BANKER",                "Summon Banker")
+ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_MERCHANT",              "Summon Merchant")
+ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_FENCE",                 "Summon Fence")
+ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_READY_CHECK",           "Initiate Ready Check")
+ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_HOME",                  "Teleport to Primary Home")
+ZO_CreateStringId("SI_BINDING_NAME_LUIE_COMMAND_REGROUP",               "Regroup (Disband & Reform)")
 
 ------------------------------------
 -- SlashCommands.lua ---------------
@@ -1486,6 +1486,8 @@ ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_EFFECT",                          "Highlig
 ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_EFFECT_TP",                       "Highlights currently active buffs on the ability bar for their active duration.")
 ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_PROC",                            "Highlight Active Procs")
 ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_PROC_TP",                         "Highlights an ability that is in a procced state on the ability bar.")
+ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_SECONDARY",                       "Highlight Active Secondary Effects")
+ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_SECONDARY_TP",                    "Highlights an ability when secondary type effects are active. Examples: Honor the Dead magicka restore buff, Major Savagery from Biting Jabs.")
 ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_ULTIMATE",                        "Highlight Active Ultimate Effects")
 ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_ULTIMATE_TP",                     "Highlights currently active ultimate abilities on the ability bar for their active duration. This will hide the percentage label for the duration of the effect when enabled.")
 ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_LABEL",                           "Display Countdown Label")

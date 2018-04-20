@@ -1045,6 +1045,17 @@ function LUIE_CreateSettings()
                 disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
             },
             {
+                -- Show Toggled Secondary
+                type = "checkbox",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_SECONDARY)),
+                tooltip = GetString(SI_LUIE_LAM_CI_BAR_SECONDARY_TP),
+                getFunc = function() return LUIE.CombatInfo.SV.ShowToggledSecondary end,
+                setFunc = function(value) LUIE.CombatInfo.SV.ShowToggledSecondary = value LUIE.CombatInfo.OnSlotsFullUpdate() end,
+                width = "full",
+                default = LUIE.CombatInfo.D.ShowToggledSecondary,
+                disabled = function() return not (LUIE.CombatInfo.SV.ShowToggled and LUIE.SV.CombatInfo_Enabled) end,
+            },
+            {
                 -- Show Toggled Ultimate
                 type = "checkbox",
                 name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_ULTIMATE)),

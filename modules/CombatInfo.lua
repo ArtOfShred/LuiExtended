@@ -36,6 +36,7 @@ CI.D = {
     ShowTriggered                    = true,
     ShowToggled                      = true,
     ShowToggledUltimate              = false,
+    ShowToggledSecondary             = false,
     BarShowLabel                     = true,
     BarLabelPosition                 = -20,
     BarFontFace                      = "Univers 67",
@@ -413,11 +414,11 @@ function CI.OnUpdate(currentTime)
 
         -- Update Label
         if g_toggledSlots[k] and g_uiCustomToggle[g_toggledSlots[k]] and g_toggledSlotsRemain[k] then
-            if CI.SV.BarShowLabel then
-                g_uiCustomToggle[g_toggledSlots[k]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
-            end
             if g_toggledSlots[k] == 8 and CI.SV.UltimatePctEnabled then
                 uiUltimate.LabelPct:SetHidden( true )
+            end
+            if CI.SV.BarShowLabel then
+                g_uiCustomToggle[g_toggledSlots[k]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
             end
         end
     end
@@ -547,11 +548,11 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                         local groundDuration = endTime - beginTime
                         g_toggledSlotsRemain[abilityId] = groundDuration*1000 + currentTime
                         CI.ShowCustomToggle(slotNum)
-                        if CI.SV.BarShowLabel then
-                            g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and groundDuration or groundDuration - 1 ))
-                        end
                         if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then
                             uiUltimate.LabelPct:SetHidden( true )
+                        end
+                        if CI.SV.BarShowLabel then
+                            g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and groundDuration or groundDuration - 1 ))
                         end
                     end
                 end
@@ -636,11 +637,11 @@ function CI.OnCombatEventBar( eventCode, result, isError, abilityName, abilityGr
             if CI.SV.ShowToggled then
                 g_toggledSlotsRemain[abilityId] = CI.GetAbilityDuration(abilityId) + currentTime
                 CI.ShowCustomToggle(g_toggledSlots[abilityId])
-                if CI.SV.BarShowLabel then
-                    g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (CI.GetAbilityDuration(abilityId)/1000) or (CI.GetAbilityDuration(abilityId)/1000) - 1 ))
-                end
                 if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled then
                     uiUltimate.LabelPct:SetHidden( true )
+                end
+                if CI.SV.BarShowLabel then
+                    g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (CI.GetAbilityDuration(abilityId)/1000) or (CI.GetAbilityDuration(abilityId)/1000) - 1 ))
                 end
             end
         end
@@ -733,6 +734,12 @@ function CI.OnSlotUpdated(eventCode, slotNum)
     -- Get the slotted ability ID
     local ability_id = GetSlotBoundId(slotNum)
     local showFakeAura = (E.BarHighlightOverride[ability_id] and E.BarHighlightOverride[ability_id].showFakeAura)
+
+    -- If secondary effects aren't set to display then don't setup highlight for this slot.
+    if (E.BarHighlightOverride[ability_id] and E.BarHighlightOverride[ability_id].secondary) and not CI.SV.ShowToggledSecondary then
+        return
+    end
+
     if E.BarHighlightOverride[ability_id] and E.BarHighlightOverride[ability_id].newId then
         ability_id = E.BarHighlightOverride[ability_id].newId
     end
@@ -766,16 +773,17 @@ function CI.OnSlotUpdated(eventCode, slotNum)
         end
     end
 
+    -- Check for active duration to display highlight for abilities on bar swap
     if duration > 0 then
         g_toggledSlots[ability_id] = slotNum
         if g_toggledSlotsRemain[ability_id] then
             if CI.SV.ShowToggled then
                 CI.ShowCustomToggle(slotNum)
-                if CI.SV.BarShowLabel then
-                    g_uiCustomToggle[slotNum].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (CI.GetAbilityDuration(ability_id)/1000) or (CI.GetAbilityDuration(ability_id)/1000) - 1 ))
-                end
                 if slotNum == 8 and CI.SV.UltimatePctEnabled then
                     uiUltimate.LabelPct:SetHidden( true )
+                end
+                if CI.SV.BarShowLabel then
+                    g_uiCustomToggle[slotNum].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (CI.GetAbilityDuration(ability_id)/1000) or (CI.GetAbilityDuration(ability_id)/1000) - 1 ))
                 end
             end
         end
