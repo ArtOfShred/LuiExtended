@@ -1800,6 +1800,10 @@ ZO_CreateStringId("SI_LUIE_LAM_CT_UNLOCK",                              "Unlock"
 ZO_CreateStringId("SI_LUIE_LAM_CT_UNLOCK_TP",                           "Unlock the panels to move them.")
 ZO_CreateStringId("SI_LUIE_LAM_CT_IC_ONLY",                             "In Combat Only")
 ZO_CreateStringId("SI_LUIE_LAM_CT_IC_ONLY_TP",                          "Only display incoming and outgoing numbers when in combat.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_TRANSPARENCY",                        "Set Transparency")
+ZO_CreateStringId("SI_LUIE_LAM_CT_TRANSPARENCY_TP",                     "Set an alpha value for combat text.")
+ZO_CreateStringId("SI_LUIE_LAM_CT_ABBREVIATE",                          "Shorten Numbers")
+ZO_CreateStringId("SI_LUIE_LAM_CT_ABBREVIATE_TP",                       "Replace large numbers like 12345 with 12.3k on all combat text labels.")
 
 -- CT (Shared)
 ZO_CreateStringId("SI_LUIE_LAM_CT_SHARED_DAMAGE",                       "Damage")

@@ -8769,44 +8769,42 @@ function LUIE_CreateSettings()
         width = "full",
     }
 
-    -- Unlock Panels
-    optionsDataCombatText[#optionsDataCombatText +1] = {
-        type    = "checkbox",
-        name    = GetString(SI_LUIE_LAM_CT_UNLOCK),
-        tooltip = GetString(SI_LUIE_LAM_CT_UNLOCK_TP),
-        default = LUIE.CombatText.D.unlocked,
-        getFunc = function() return LUIE.CombatText.SV.unlocked end,
-        setFunc = function()
-            LUIE.CombatText.SV.unlocked = not LUIE.CombatText.SV.unlocked
-            for k, _ in pairs (LUIE.CombatText.SV.panels) do
-                _G[k]:SetMouseEnabled(LUIE.CombatText.SV.unlocked)
-                _G[k]:SetMovable(LUIE.CombatText.SV.unlocked)
-                _G[k .. '_Backdrop']:SetHidden(not LUIE.CombatText.SV.unlocked)
-                _G[k .. '_Label']:SetHidden(not LUIE.CombatText.SV.unlocked)
-            end
-        end,
-    }
-
-    -- In Combat Only
-    optionsDataCombatText[#optionsDataCombatText +1] = {
-        type    = "checkbox",
-        name    = GetString(SI_LUIE_LAM_CT_IC_ONLY),
-        tooltip = GetString(SI_LUIE_LAM_CT_IC_ONLY_TP),
-        getFunc = function() return LUIE.CombatText.SV.toggles.inCombatOnly end,
-        setFunc = function(v) LUIE.CombatText.SV.toggles.inCombatOnly = v end,
-        default = LUIE.CombatText.D.toggles.inCombatOnly,
-    }
-
     -- Combat Text - Common Options
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_UF_COMMON_HEADER),
         controls = {
             {
+                -- Unlock Panels
+                type    = "checkbox",
+                name    = GetString(SI_LUIE_LAM_CT_UNLOCK),
+                tooltip = GetString(SI_LUIE_LAM_CT_UNLOCK_TP),
+                default = LUIE.CombatText.D.unlocked,
+                getFunc = function() return LUIE.CombatText.SV.unlocked end,
+                setFunc = function()
+                    LUIE.CombatText.SV.unlocked = not LUIE.CombatText.SV.unlocked
+                    for k, _ in pairs (LUIE.CombatText.SV.panels) do
+                        _G[k]:SetMouseEnabled(LUIE.CombatText.SV.unlocked)
+                        _G[k]:SetMovable(LUIE.CombatText.SV.unlocked)
+                        _G[k .. '_Backdrop']:SetHidden(not LUIE.CombatText.SV.unlocked)
+                        _G[k .. '_Label']:SetHidden(not LUIE.CombatText.SV.unlocked)
+                    end
+                end,
+            },
+            {
+                -- In Combat Only
+                type    = "checkbox",
+                name    = GetString(SI_LUIE_LAM_CT_IC_ONLY),
+                tooltip = GetString(SI_LUIE_LAM_CT_IC_ONLY_TP),
+                getFunc = function() return LUIE.CombatText.SV.toggles.inCombatOnly end,
+                setFunc = function(v) LUIE.CombatText.SV.toggles.inCombatOnly = v end,
+                default = LUIE.CombatText.D.toggles.inCombatOnly,
+            },
+            {
                 -- Transparency
                 type = "slider",
-                name = "Transparency",
-                tooltip = "TT",
+                name = GetString(SI_LUIE_LAM_CT_TRANSPARENCY),
+                tooltip = GetString(SI_LUIE_LAM_CT_TRANSPARENCY_TP),
                 min = 0,
                 max = 100,
                 getFunc = function() return LUIE.CombatText.SV.common.transparencyValue end,
@@ -8816,8 +8814,8 @@ function LUIE_CreateSettings()
             {
                 -- Abbreviate Numbers
                 type = "checkbox",
-                name = "Abbreviate",
-                tooltip = "Abbreviate",
+                name = GetString(SI_LUIE_LAM_CT_ABBREVIATE),
+                tooltip = GetString(SI_LUIE_LAM_CT_ABBREVIATE_TP),
                 getFunc = function() return LUIE.CombatText.SV.common.abbreviateNumbers end,
                 setFunc = function(v) LUIE.CombatText.SV.common.abbreviateNumbers = v end,
                 default = LUIE.CombatText.D.common.abbreviateNumbers,
