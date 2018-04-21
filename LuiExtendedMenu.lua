@@ -8797,6 +8797,34 @@ function LUIE_CreateSettings()
         default = LUIE.CombatText.D.toggles.inCombatOnly,
     }
 
+    -- Combat Text - Common Options
+    optionsDataCombatText[#optionsDataCombatText +1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_UF_COMMON_HEADER),
+        controls = {
+            {
+                -- Transparency
+                type = "slider",
+                name = "Transparency",
+                tooltip = "TT",
+                min = 0,
+                max = 100,
+                getFunc = function() return LUIE.CombatText.SV.common.transparencyValue end,
+                setFunc = function(v) LUIE.CombatText.SV.common.transparencyValue = v end,
+                default = LUIE.CombatText.D.common.transparencyValue,
+            },
+            {
+                -- Abbreviate Numbers
+                type = "checkbox",
+                name = "Abbreviate",
+                tooltip = "Abbreviate",
+                getFunc = function() return LUIE.CombatText.SV.common.abbreviateNumbers end,
+                setFunc = function(v) LUIE.CombatText.SV.common.abbreviateNumbers = v end,
+                default = LUIE.CombatText.D.common.abbreviateNumbers,
+            },
+        },
+    }
+
     -- Combat Text - Toggle Options (Incoming) Options Submenu
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type = "submenu",

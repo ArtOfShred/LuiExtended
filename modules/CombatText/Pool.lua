@@ -85,9 +85,7 @@ function CTP:CreateNewAnimation()
         anim:Alpha(nil, 1, 0, 500, 3000, slowFast)
 
     elseif (self.poolType == poolTypes.ANIMATION_ELLIPSE_X) then
-        anim:Alpha(nil, 0, 1, 50)
         anim:Move('scrollX', 0, 0, 2500, 0, easeOutIn)
-        anim:Alpha('fadeOut', 1, 0, 500, 1800, slowFast)
 
     elseif (self.poolType == poolTypes.ANIMATION_ELLIPSE_Y) then
         anim:Alpha(nil, 0, 1, 50)
@@ -95,10 +93,8 @@ function CTP:CreateNewAnimation()
         anim:Alpha('fadeOut', 1, 0, 500, 1800, slowFast)
 
     elseif (self.poolType == poolTypes.ANIMATION_ELLIPSE_X_CRIT) then
-        anim:Alpha(nil, 0, 1, 50)
         anim:Scale(nil, 1.5, 1, 150, 0, slowFast)
         anim:Move('scrollX', 0, 0, 2500, 0, easeOutIn)
-        anim:Alpha('fadeOut', 1, 0, 500, 1800, slowFast)
 
     elseif (self.poolType == poolTypes.ANIMATION_ELLIPSE_Y_CRIT) then
         anim:Alpha(nil, 0, 1, 50)

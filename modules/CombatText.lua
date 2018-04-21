@@ -56,6 +56,10 @@ CT.D = {
             dimensions              = {400, 100},
         }
     },
+    common = {
+        transparencyValue           = 100,
+        abbreviateNumbers           = false,
+    },
     -- Toggle Defaults
     toggles = {
         -- General

@@ -203,6 +203,7 @@ function CTV:ControlLayout(control, abilityId, combatType, sourceName)
         control.label:SetAnchor(CENTER, control.icon, CENTER, 0, 0)
         control:SetDimensions(width, height)
     end
+    control.icon:SetAlpha(LUIE.CombatText.SV.common.transparencyValue/100)
 end
 
 function CTV:RegisterCallback(eventType, func)
@@ -213,6 +214,7 @@ function CTV:PrepareLabel(label, fontSize, color, text)
     label:SetText(text)
     label:SetColor(unpack(color))
     label:SetFont(strfmt('%s|%d|%s', self.LMP:Fetch('font', LUIE.CombatText.SV.fontFace), fontSize, LUIE.CombatText.SV.fontOutline))
+    label:SetAlpha(LUIE.CombatText.SV.common.transparencyValue/100)
 end
 
 function CTV:IsOverlapping(control, activeControls)
