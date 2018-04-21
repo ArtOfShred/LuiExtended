@@ -8681,7 +8681,7 @@ function LUIE_CreateSettings()
                 name = GetString(SI_LUIE_LAM_UF_SHORTNUMBERS),
                 tooltip = GetString(SI_LUIE_LAM_UF_SHORTNUMBERS_TP),
                 getFunc = function() return LUIE.UnitFrames.SV.ShortenNumbers end,
-                setFunc = function(value) LUIE.UnitFrames.SV.ShortenNumbers = value end,
+                setFunc = function(value) LUIE.UnitFrames.SV.ShortenNumbers = value LUIE.UnitFrames.CustomFramesFormatLabels(true) end,
                 width = "full",
                 default = LUIE.UnitFrames.D.ShortenNumbers,
                 disabled = function() return not LUIE.SV.UnitFrames_Enabled end,

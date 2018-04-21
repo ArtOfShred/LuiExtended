@@ -2,6 +2,7 @@ LUIE.CombatTextCombatEventListener = LUIE.CombatTextEventListener:Subclass()
 local CTL = LUIE.CombatTextCombatEventListener
 local C = LUIE.CombatTextConstants
 local AlertT = LUIE.AlertTable
+local AbbreviateNumber = LUIE.AbbreviateNumber
 local callLater = zo_callLater
 local pairs = pairs
 local refireDelay = { }
@@ -192,7 +193,7 @@ function CTL:OnCombatIn(...)
        (isDrain and togglesInOut.showDrain and (powerType == POWERTYPE_MAGICKA or powerType == POWERTYPE_STAMINA)) then
        if not LUIE.Effects.EffectHideOverride[abilityId] then -- Check if ability is on the hide list
             if (S.toggles.inCombatOnly and isWarned.combat) or (not S.toggles.inCombatOnly) then --Check if 'in combat only' is ticked
-                self:TriggerEvent(C.eventType.COMBAT, combatType, powerType, LUIE.CommaValue(hitValue, S.common.abbreviateNumbers, true), abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
+                self:TriggerEvent(C.eventType.COMBAT, combatType, powerType, LUIE.AbbreviateNumber(hitValue, S.common.abbreviateNumbers), abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
             end
        end
     end
@@ -412,7 +413,7 @@ function CTL:OnCombatOut(...)
        (isDrain and togglesInOut.showDrain and (powerType == POWERTYPE_MAGICKA or powerType == POWERTYPE_STAMINA)) then
        if not LUIE.Effects.EffectHideOverride[abilityId] then -- Check if ability is on the hide list
             if (S.toggles.inCombatOnly and isWarned.combat) or (not S.toggles.inCombatOnly) then --Check if 'in combat only' is ticked
-                self:TriggerEvent(C.eventType.COMBAT, combatType, powerType, LUIE.CommaValue(hitValue, S.common.abbreviateNumbers, true), abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
+                self:TriggerEvent(C.eventType.COMBAT, combatType, powerType, LUIE.AbbreviateNumber(hitValue, S.common.abbreviateNumbers), abilityName, abilityId, damageType, sourceName, isDamage, isDamageCritical, isHealing, isHealingCritical, isEnergize, isDrain, isDot, isDotCritical, isHot, isHotCritical, isMiss, isImmune, isParried, isReflected, isDamageShield, isDodged, isBlocked, isInterrupted)
             end
        end
     end

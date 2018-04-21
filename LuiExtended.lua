@@ -691,7 +691,7 @@ end
 
 -- Returns a formatted number with commas
 -- Function no comma to be added in a later date.
-function LUIE.CommaValue(number, shorten, noncomma)
+function LUIE.AbbreviateNumber(number, shorten, comma)
     if number > 0 and shorten then
         local value
         local suffix
@@ -709,15 +709,18 @@ function LUIE.CommaValue(number, shorten, noncomma)
             value = number
         end
 
-        -- If we could not conver even to "G", return full number with commas
+        -- If we could not conver even to "G", return full number
         if value >= 1000 then
-            value = LUIE.CommaValue(number)
+            if comma then
+                value = ZO_LocalizeDecimalNumber(number)
+                return value
+            else
+                return number
+            end
         elseif value >= 100 or suffix == nil then
             value = strfmt("%d", value)
-        elseif value >= 10 then
-            value = strfmt("%.1f", value)
         else
-            value = strfmt("%.2f", value)
+            value = strfmt("%.1f", value)
         end
 
         if suffix ~= nil then
@@ -727,10 +730,14 @@ function LUIE.CommaValue(number, shorten, noncomma)
         return value
     end
 
-    local number = tostring(number)
-    -- No shortening was done, so print number with commas
-    local left,num,right = strmatch(number,"^([^%d]*%d)(%d*)(.-)$")
-    return left .. (num:reverse():gsub("(%d%d%d)","%1,"):reverse()) .. right
+    -- Add commas if needed
+    if comma then
+        local value = ZO_LocalizeDecimalNumber(number)
+        return value
+    end
+
+    return number
+
 end
 
 function LUIE.InitGuildData()

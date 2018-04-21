@@ -3,28 +3,28 @@
 LUIE.UnitFrames = {}
 
 -- Performance Enhancement
-local UF            = LUIE.UnitFrames
-local UI            = LUIE.UI
-local CommaValue    = LUIE.CommaValue
-local printToChat   = LUIE.PrintToChat
-local strfmt        = string.format
-local strformat     = zo_strformat
-local strsub        = string.sub
-local tableinsert   = table.insert
-local tablesort     = table.sort
-local tableremove   = table.remove
-local mathfloor     = math.floor
-local mathmin       = math.min
-local mathceil      = math.ceil
-local unpack        = unpack
-local pairs, ipairs = pairs, ipairs
+local UF                = LUIE.UnitFrames
+local UI                = LUIE.UI
+local AbbreviateNumber  = LUIE.AbbreviateNumber
+local printToChat       = LUIE.PrintToChat
+local strfmt            = string.format
+local strformat         = zo_strformat
+local strsub            = string.sub
+local tableinsert       = table.insert
+local tablesort         = table.sort
+local tableremove       = table.remove
+local mathfloor         = math.floor
+local mathmin           = math.min
+local mathceil          = math.ceil
+local unpack            = unpack
+local pairs, ipairs     = pairs, ipairs
 
-local eventManager  = EVENT_MANAGER
-local sceneManager  = SCENE_MANAGER
+local eventManager      = EVENT_MANAGER
+local sceneManager      = SCENE_MANAGER
 
-local callLater     = zo_callLater
+local callLater         = zo_callLater
 
-local moduleName    = LUIE.name .. "_UnitFrames"
+local moduleName        = LUIE.name .. "_UnitFrames"
 
 local classIcons = {
     [0] = "/esoui/art/contacts/social_status_offline.dds",
@@ -2113,9 +2113,9 @@ function UF.UpdateAttribute( attributeFrame, powerValue, powerEffectiveMax, shie
                 -- Format specific to selected label
                 local fmt = tostring( attributeFrame[label].fmt or UF.SV.Format )
                 local str = fmt:gsub("Percentage", tostring(pct) )
-                    :gsub("Max", CommaValue(powerEffectiveMax, UF.SV.ShortenNumbers))
-                    :gsub("Current", CommaValue(powerValue, UF.SV.ShortenNumbers))
-                    :gsub( "+ Shield", shield and ("+ "..CommaValue(shield, UF.SV.ShortenNumbers)) or "" )
+                    :gsub("Max", AbbreviateNumber(powerEffectiveMax, UF.SV.ShortenNumbers, true))
+                    :gsub("Current", AbbreviateNumber(powerValue, UF.SV.ShortenNumbers, true))
+                    :gsub( "+ Shield", shield and ("+ "..AbbreviateNumber(shield, UF.SV.ShortenNumbers, true)) or "" )
                     :gsub("Nothing", "")
                 -- Change text
                 attributeFrame[label]:SetText( str )
