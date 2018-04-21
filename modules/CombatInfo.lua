@@ -595,7 +595,8 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                     g_triggeredSlotsRemain[abilityId] = ((endTime - beginTime) * 1000) + GetGameTimeMilliseconds()
                     CI.PlayProcAnimations(g_triggeredSlots[abilityId])
                     if CI.SV.BarShowLabel then
-                        g_uiProcAnimation[g_triggeredSlots[abilityId]].procLoopTexture.label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (CI.GetAbilityDuration(abilityId)/1000) or (CI.GetAbilityDuration(abilityId)/1000) - 1 ))
+                        local remain = g_triggeredSlotsRemain[abilityId] - currentTime
+                        g_uiProcAnimation[g_triggeredSlots[abilityId]].procLoopTexture.label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
                     end
                 end
             end
@@ -605,8 +606,12 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                 if CI.SV.ShowToggled then
                     g_toggledSlotsRemain[abilityId] = ((endTime - beginTime) * 1000) + GetGameTimeMilliseconds()
                     CI.ShowCustomToggle(g_toggledSlots[abilityId])
+                    if CI.SV.UltimatePctEnabled then
+                        uiUltimate.LabelPct:SetHidden( true )
+                    end
                     if CI.SV.BarShowLabel then
-                        g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", CI.SV.BarMiilis and (CI.GetAbilityDuration(abilityId)/1000) or (CI.GetAbilityDuration(abilityId)/1000) - 1 ))
+                        local remain = g_toggledSlotsRemain[abilityId] - currentTime
+                        g_uiCustomToggle[g_toggledSlots[abilityId]].label:SetText( strfmt(CI.SV.BarMiilis and "%.1f" or "%.1d", remain/1000) )
                     end
                 end
             end
