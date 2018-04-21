@@ -33,6 +33,10 @@ CI.D = {
     UltimatePctEnabled               = true,
     UltimateHideFull                 = true,
     UltimateGeneration               = true,
+    UltimateLabelPosition            = -20,
+    UltimateFontFace                 = "Univers 67",
+    UltimateFontStyle                = "outline",
+    UltimateFontSize                 = 18,
     ShowTriggered                    = true,
     ShowToggled                      = true,
     ShowToggledUltimate              = false,
@@ -71,6 +75,7 @@ local g_lastCast = 0
 local g_pendingGroundAbility = nil
 local g_barFont
 local g_potionFont
+local g_ultimateFont
 local g_barOverrideCI        = {} -- Table for storing abilityId's from E.BarHighlightOverride that should show as an aura (Created on initialization)
 local g_barFakeAura          = {} -- Table for storing abilityId's that only display a fakeaura (Created on initialization)
 local g_barDurationOverride  = {} -- Table for storing abilitiyId's that ignore ending event (Created on initialization)
@@ -166,7 +171,11 @@ function CI.Initialize( enabled )
 
     -- Create Ultimate overlay labels
     uiUltimate.LabelVal = UI.Label( ActionButton8, {BOTTOM,TOP,0,-3}, nil, {1,2}, "$(BOLD_FONT)|16|soft-shadow-thick", nil, true )
-    uiUltimate.LabelPct = UI.Label( ActionButton8, {CENTER,CENTER}, nil, nil, "$(BOLD_FONT)|20|outline", nil, true )
+    uiUltimate.LabelPct = UI.Label( ActionButton8, nil, nil, nil, g_ultimateFont, nil, true )
+    local actionButton = ZO_ActionBar_GetButton(8)
+    uiUltimate.LabelPct:SetAnchor(TOPLEFT, actionButton.slot)
+    uiUltimate.LabelPct:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CI.SV.UltimateLabelPosition)
+
     uiUltimate.LabelPct:SetColor( unpack(uiUltimate.colour) )
     -- And buff texture
     uiUltimate.Texture = UI.Texture( ActionButton8, {CENTER,CENTER}, {160,160}, "/esoui/art/crafting/white_burst.dds", DL_BACKGROUND, true )
@@ -497,6 +506,33 @@ function CI.ApplyFont()
     if uiQuickSlot.label then
         uiQuickSlot.label:SetFont(g_potionFont)
     end
+
+    -- Setup Ultimate Font
+    local ultimateFontName = LUIE.Fonts[CI.SV.UltimateFontFace]
+        if not ultimateFontName or ultimateFontName == "" then
+        printToChat(GetString(SI_LUIE_ERROR_FONT), true)
+        ultimateFontName = "$(MEDIUM_FONT)"
+    end
+
+    local ultimateFontStyle = ( CI.SV.UltimateFontStyle and CI.SV.UltimateFontStyle ~= "" ) and CI.SV.UltimateFontStyle or "outline"
+    local ultimateFontSize = ( CI.SV.UltimateFontSize and CI.SV.UltimateFontSize > 0 ) and CI.SV.UltimateFontSize or 17
+
+    g_ultimateFont = ultimateFontName .. "|" .. ultimateFontSize .. "|" .. ultimateFontStyle
+
+    if uiUltimate.LabelPct then
+        uiUltimate.LabelPct:SetFont(g_ultimateFont)
+    end
+
+end
+
+-- Resets the ultimate labels on menu option change
+function CI.ResetUltimateLabel()
+
+    uiUltimate.LabelPct:ClearAnchors()
+    local actionButton = ZO_ActionBar_GetButton(8)
+    uiUltimate.LabelPct:SetAnchor(TOPLEFT, actionButton.slot)
+    uiUltimate.LabelPct:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CI.SV.UltimateLabelPosition)
+
 end
 
 -- Resets bar labels on menu option change
@@ -513,12 +549,12 @@ function CI.ResetBarLabel()
         local actionButton = ZO_ActionBar_GetButton(i)
         if g_uiCustomToggle[i] then
             g_uiCustomToggle[i].label:ClearAnchors()
-            g_uiCustomToggle[i].label:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
-            g_uiCustomToggle[i].label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"), nil, 0, -CI.SV.BarLabelPosition)
+            g_uiCustomToggle[i].label:SetAnchor(TOPLEFT, actionButton.slot)
+            g_uiCustomToggle[i].label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CI.SV.BarLabelPosition)
         elseif g_uiProcAnimation[i] then
             g_uiProcAnimation[i].procLoopTexture.label:ClearAnchors()
-            g_uiProcAnimation[i].procLoopTexture.label:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
-            g_uiProcAnimation[i].procLoopTexture.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"), nil, 0, -CI.SV.BarLabelPosition)
+            g_uiProcAnimation[i].procLoopTexture.label:SetAnchor(TOPLEFT, actionButton.slot)
+            g_uiProcAnimation[i].procLoopTexture.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CI.SV.BarLabelPosition)
         end
     end
 end
@@ -526,8 +562,8 @@ end
 function CI.ResetPotionTimerLabel()
     local actionButton = ZO_ActionBar_GetButton(9)
     uiQuickSlot.label:ClearAnchors()
-    uiQuickSlot.label:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
-    uiQuickSlot.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"), nil, 0, -CI.SV.PotionTimerLabelPosition)
+    uiQuickSlot.label:SetAnchor(TOPLEFT, actionButton.slot)
+    uiQuickSlot.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CI.SV.PotionTimerLabelPosition)
 end
 
 function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitTag, beginTime, endTime, stackCount, iconName, buffType, effectType, abilityType, statusEffectType, unitName, unitId, abilityId, castByPlayer)
@@ -606,7 +642,7 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
                 if CI.SV.ShowToggled then
                     g_toggledSlotsRemain[abilityId] = ((endTime - beginTime) * 1000) + GetGameTimeMilliseconds()
                     CI.ShowCustomToggle(g_toggledSlots[abilityId])
-                    if CI.SV.UltimatePctEnabled then
+                    if g_toggledSlots[abilityId] == 8 and CI.SV.UltimatePctEnabled and IsSlotUsed( g_ultimateSlot ) then
                         uiUltimate.LabelPct:SetHidden( true )
                     end
                     if CI.SV.BarShowLabel then
@@ -856,8 +892,8 @@ function CI.PlayProcAnimations(slotNum)
         procLoopTexture:SetHidden(true)
 
         procLoopTexture.label = UI.Label (procLoopTexture, nil, nil, nil, g_barFont, nil, false)
-        procLoopTexture.label:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
-        procLoopTexture.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"), nil, 0, -CI.SV.BarLabelPosition)
+        procLoopTexture.label:SetAnchor(TOPLEFT, actionButton.slot)
+        procLoopTexture.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CI.SV.BarLabelPosition)
         procLoopTexture.label:SetDrawLayer(DL_COUNT)
         procLoopTexture.label:SetDrawLevel(3)
         procLoopTexture.label:SetDrawTier(3)
@@ -915,8 +951,8 @@ function CI.ShowCustomToggle(slotNum)
         toggleFrame:SetHidden(false)
 
         toggleFrame.label = UI.Label (toggleFrame, nil, nil, nil, g_barFont, nil, false)
-        toggleFrame.label:SetAnchor(TOPLEFT, actionButton.slot:GetNamedChild("FlipCard"))
-        toggleFrame.label:SetAnchor(BOTTOMRIGHT, actionButton.slot:GetNamedChild("FlipCard"), nil, 0, -CI.SV.BarLabelPosition)
+        toggleFrame.label:SetAnchor(TOPLEFT, actionButton.slot)
+        toggleFrame.label:SetAnchor(BOTTOMRIGHT, actionButton.slot, nil, 0, -CI.SV.BarLabelPosition)
         toggleFrame.label:SetDrawLayer(DL_COUNT)
         toggleFrame.label:SetDrawLevel(1)
         toggleFrame.label:SetDrawTier(3)
