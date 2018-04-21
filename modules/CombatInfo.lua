@@ -38,6 +38,8 @@ CI.D = {
     UltimateFontStyle                = "outline",
     UltimateFontSize                 = 18,
     ShowTriggered                    = true,
+    ProcEnableSound                  = true,
+    ProcSoundName                    = "Death Recap Killing Blow",
     ShowToggled                      = true,
     ShowToggledUltimate              = false,
     ShowToggledSecondary             = false,
@@ -76,6 +78,7 @@ local g_pendingGroundAbility = nil
 local g_barFont
 local g_potionFont
 local g_ultimateFont
+local g_g_ProcSound
 local g_barOverrideCI        = {} -- Table for storing abilityId's from E.BarHighlightOverride that should show as an aura (Created on initialization)
 local g_barFakeAura          = {} -- Table for storing abilityId's that only display a fakeaura (Created on initialization)
 local g_barDurationOverride  = {} -- Table for storing abilitiyId's that ignore ending event (Created on initialization)
@@ -157,6 +160,7 @@ function CI.Initialize( enabled )
     CI.Enabled = true
 
     CI.ApplyFont()
+    CI.ApplyProcSound()
 
     uiQuickSlot.label = UI.Label( ActionButton9, {CENTER,CENTER}, nil, nil, g_potionFont, nil, true )
     uiQuickSlot.label:SetFont(g_potionFont)
@@ -472,7 +476,7 @@ function CI.ApplyFont()
 
     -- Setup Bar Font
     local barFontName = LUIE.Fonts[CI.SV.BarFontFace]
-        if not barFontName or barFontName == "" then
+    if not barFontName or barFontName == "" then
         printToChat(GetString(SI_LUIE_ERROR_FONT), true)
         barfontName = "$(MEDIUM_FONT)"
     end
@@ -492,7 +496,7 @@ function CI.ApplyFont()
 
     -- Setup Potion Timer Font
     local potionFontName = LUIE.Fonts[CI.SV.PotionTimerFontFace]
-        if not potionFontName or potionFontName == "" then
+    if not potionFontName or potionFontName == "" then
         printToChat(GetString(SI_LUIE_ERROR_FONT), true)
         potionFontName = "$(MEDIUM_FONT)"
     end
@@ -509,7 +513,7 @@ function CI.ApplyFont()
 
     -- Setup Ultimate Font
     local ultimateFontName = LUIE.Fonts[CI.SV.UltimateFontFace]
-        if not ultimateFontName or ultimateFontName == "" then
+    if not ultimateFontName or ultimateFontName == "" then
         printToChat(GetString(SI_LUIE_ERROR_FONT), true)
         ultimateFontName = "$(MEDIUM_FONT)"
     end
@@ -521,6 +525,22 @@ function CI.ApplyFont()
 
     if uiUltimate.LabelPct then
         uiUltimate.LabelPct:SetFont(g_ultimateFont)
+    end
+
+end
+
+function CI.ApplyProcSound(menu)
+
+    local barProcSound = LUIE.Sounds[CI.SV.ProcSoundName]
+        if not barProcSound or barProcSound == "" then
+        printToChat(GetString(SI_LUIE_ERROR_SOUND), true)
+        barProcSound = "DeathRecap_KillingBlowShown"
+    end
+
+    g_procSound = barProcSound
+
+    if menu then
+        PlaySound(g_procSound)
     end
 
 end
@@ -626,8 +646,13 @@ function CI.OnEffectChanged(eventCode, changeType, effectSlot, effectName, unitT
         if castByPlayer == COMBAT_UNIT_TYPE_PLAYER then
             -- start any proc animation associated with this effect
             if abilityType == ABILITY_TYPE_BONUS and g_triggeredSlots[abilityId] then
+                local currentTime = GetGameTimeMilliseconds()
                 if CI.SV.ShowTriggered then
-                    PlaySound(SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN)
+                    -- Play sound twice so its a little louder.
+                    if CI.SV.ProcEnableSound then
+                        PlaySound(g_procSound)
+                        PlaySound(g_procSound)
+                    end
                     g_triggeredSlotsRemain[abilityId] = ((endTime - beginTime) * 1000) + GetGameTimeMilliseconds()
                     CI.PlayProcAnimations(g_triggeredSlots[abilityId])
                     if CI.SV.BarShowLabel then

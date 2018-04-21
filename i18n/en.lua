@@ -2,7 +2,8 @@
 -- LuiExtended.lua -----------------
 ------------------------------------
 
-ZO_CreateStringId("SI_LUIE_ERROR_FONT",                                 "LUI Extended: There was a problem with selecting required font. Falling back to game default.")
+ZO_CreateStringId("SI_LUIE_ERROR_FONT",                                 "LUI Extended: There was a problem with selecting required font. Falling back to default.")
+ZO_CreateStringId("SI_LUIE_ERROR_SOUND",                                "LUI Extended: There was a problem with selecting required sound. Falling back to default.")
 
 ------------------------------------
 -- bindings.xml --------------------
@@ -1486,6 +1487,13 @@ ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_EFFECT",                          "Highlig
 ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_EFFECT_TP",                       "Highlights currently active buffs on the ability bar for their active duration.")
 ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_PROC",                            "Highlight Active Procs")
 ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_PROC_TP",                         "Highlights an ability that is in a procced state on the ability bar.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_PROCSOUND",                       "Play Sound on Ability Proc")
+ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_PROCSOUND_TP",                    "Play a sound notifcation when an ability procs.")
+
+ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_PROCSOUNDCHOICE",                 "Proc Sound")
+ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_PROCSOUNDCHOICE_TP",              "Choose the sound to play when an ability procs.")
+
 ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_SECONDARY",                       "Highlight Active Secondary Effects")
 ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_SECONDARY_TP",                    "Highlights an ability when secondary type effects are active. Examples: Honor the Dead magicka restore buff, Major Savagery from Biting Jabs.")
 ZO_CreateStringId("SI_LUIE_LAM_CI_BAR_ULTIMATE",                        "Highlight Active Ultimate Effects")

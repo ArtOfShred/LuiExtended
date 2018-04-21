@@ -15,6 +15,7 @@ function LUIE_CreateSettings()
 
     local l_BuffsMovingEnabled  = false -- Helper local flag
     local FontsList             = {}
+    local SoundsList            = {}
     local StatusbarTexturesList = {}
 
     -- Get Fonts
@@ -23,6 +24,9 @@ function LUIE_CreateSettings()
     end
     for key, _ in pairs(LUIE.StatusbarTextures) do
         tableinsert(StatusbarTexturesList, key)
+    end
+    for sound, _ in pairs(LUIE.Sounds) do
+        tableinsert(SoundsList, sound)
     end
 
     local nameDisplayOptions            = { "@UserID", "Character Name", "Character Name @UserID" }
@@ -1083,6 +1087,34 @@ function LUIE_CreateSettings()
                 default = LUIE.CombatInfo.D.ShowTriggered,
                 disabled = function() return not LUIE.SV.CombatInfo_Enabled end,
             },
+
+            {
+                -- Bar Proc Sound
+                type = "checkbox",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_PROCSOUND)),
+                tooltip = GetString(SI_LUIE_LAM_CI_BAR_PROCSOUND_TP),
+                getFunc = function() return LUIE.CombatInfo.SV.ProcEnableSound end,
+                setFunc = function(value) LUIE.CombatInfo.SV.ProcEnableSound = value end,
+                width = "full",
+                default = LUIE.CombatInfo.D.ProcEnableSound,
+                disabled = function() return not (LUIE.CombatInfo.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+            },
+
+            {
+                -- Bar Proc Sound Choice
+                type = "dropdown",
+                scrollable = true,
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CI_BAR_PROCSOUNDCHOICE)),
+                tooltip = GetString(SI_LUIE_LAM_CI_BAR_PROCSOUNDCHOICE_TP),
+                choices = SoundsList,
+                sort = "name-up",
+                getFunc = function() return LUIE.CombatInfo.SV.ProcSoundName end,
+                setFunc = function(value) LUIE.CombatInfo.SV.ProcSoundName = value LUIE.CombatInfo.ApplyProcSound(true) end,
+                width = "full",
+                default = LUIE.CombatInfo.D.ProcSoundName,
+                disabled = function() return not (LUIE.CombatInfo.SV.ShowTriggered and LUIE.SV.CombatInfo_Enabled) end,
+            },
+
             {
                 -- Highlight Ability Bar Icon for Active Effects
                 type = "checkbox",

@@ -89,6 +89,10 @@ LUIE.Fonts = {
     ["Yellowjacket"]            = [[/LuiExtended/media/fonts/yellowjacket.ttf]],
 }
 
+LUIE.Sounds = {
+    ["Death Recap Killing Blow"]  = SOUNDS.DEATH_RECAP_KILLING_BLOW_SHOWN,
+}
+
 LUIE.StatusbarTextures = {
     ["Aluminium"]               = "/LuiExtended/media/unitframes/textures/Aluminium.dds",
     ["Elder Scrolls Gradient"]  = "/LuiExtended/media/unitframes/textures/ElderScrollsGrad.dds",
@@ -134,6 +138,13 @@ local function LUIE_LoadMedia()
             LUIE.StatusbarTextures[s] = LMP:Fetch(LMP.MediaType.STATUSBAR, s)
         end
     end
+
+    for _, a in pairs (LMP:List(LMP.MediaType.SOUND)) do
+        if not LUIE.StatusbarTextures[a] then
+            LUIE.Sounds[a] = LMP:Fetch(LMP.MediaType.SOUND, a)
+        end
+    end
+
 end
 
 -- Startup Info string
