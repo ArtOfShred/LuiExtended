@@ -774,7 +774,12 @@ local guildAllianceColors = {
 
 function CA.Initialize(enabled)
     -- Load settings
-    CA.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "ChatAnnouncements", CA.D )
+    local isCharacterSpecific = LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV
+    if isCharacterSpecific then
+        CA.SV = ZO_SavedVars:New( LUIE.SVName, LUIE.SVVer, "ChatAnnouncements", CA.D )
+    else
+        CA.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "ChatAnnouncements", CA.D )
+    end
 
     -- Disable if setting not toggled on
     if not enabled then

@@ -287,7 +287,12 @@ end
 
 function PNL.Initialize( enabled )
     -- Load settings
-    PNL.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "InfoPanel" )
+    local isCharacterSpecific = LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV
+    if isCharacterSpecific then
+        PNL.SV = ZO_SavedVars:New( LUIE.SVName, LUIE.SVVer, "InfoPanel", PNL.D )
+    else
+        PNL.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "InfoPanel", PNL.D )
+    end
 
     -- If User does not want the InfoPanel then exit right here
     if not enabled then

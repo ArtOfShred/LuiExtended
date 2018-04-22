@@ -378,7 +378,12 @@ end
 -- Module initialization
 function CT.Initialize( enabled )
     -- Load settings
-    CT.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "CombatText", CT.D )
+    local isCharacterSpecific = LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV
+    if isCharacterSpecific then
+        CT.SV = ZO_SavedVars:New( LUIE.SVName, LUIE.SVVer, "CombatText", CT.D )
+    else
+        CT.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "CombatText", CT.D )
+    end
 
     -- If User does not want the Combat Text then exit right here
     if not enabled then return end

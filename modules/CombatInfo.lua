@@ -153,7 +153,12 @@ end
 -- Module initialization
 function CI.Initialize( enabled )
     -- Load settings
-    CI.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "CombatInfo", CI.D )
+    local isCharacterSpecific = LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV
+    if isCharacterSpecific then
+        CI.SV = ZO_SavedVars:New( LUIE.SVName, LUIE.SVVer, "CombatInfo", CI.D )
+    else
+        CI.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "CombatInfo", CI.D )
+    end
 
     -- If User does not want the Combat Info then exit right here
     if not enabled then return end

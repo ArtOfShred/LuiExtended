@@ -43,7 +43,13 @@ local g_regroupStacks   = {}
 local PendingRegroup    = false
 
 function SC.Initialize( enabled )
-    SC.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "SlashCommands", SC.D )
+    -- Load Settings
+    local isCharacterSpecific = LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV
+    if isCharacterSpecific then
+        SC.SV = ZO_SavedVars:New( LUIE.SVName, LUIE.SVVer, "SlashCommands", SC.D )
+    else
+        SC.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "SlashCommands", SC.D )
+    end
 
     if not enabled then
         return

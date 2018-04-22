@@ -15,7 +15,7 @@ function LUIE_WelcomeScreen(menu)
     local versionNumber = LUIE.version
 
     -- If saved version number is less than current version number then display the welcome screen.
-    if (LUIE.SV.WelcomeVersion ~= versionNumber) or menu then
+    if (LUIESV.Default[GetDisplayName()]['$AccountWide'].WelcomeVersion ~= versionNumber) or menu then
 
         -- Only create the window if its the first load or the change log is opened - otherwise there's no reason to bother doing so.
         local luiChangeLog = windowManager:GetControlByName("LUIE_Welcome_Screen")
@@ -74,6 +74,6 @@ function LUIE_WelcomeScreen(menu)
     end
 
     -- Set version to current version.
-    LUIE.SV.WelcomeVersion = LUIE.version
+    LUIESV.Default[GetDisplayName()]['$AccountWide'].WelcomeVersion = LUIE.version
 
 end

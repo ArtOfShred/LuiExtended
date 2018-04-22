@@ -359,7 +359,13 @@ local Effects = {
 -- Initialization
 function SCB.Initialize( enabled )
     -- Load settings
-    SCB.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "SpellCastBuffs", SCB.D )
+    local isCharacterSpecific = LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV
+    if isCharacterSpecific then
+        SCB.SV = ZO_SavedVars:New( LUIE.SVName, LUIE.SVVer, "SpellCastBuffs", SCB.D )
+    else
+        SCB.SV = ZO_SavedVars:NewAccountWide( LUIE.SVName, LUIE.SVVer, "SpellCastBuffs", SCB.D )
+    end
+
     -- Correct read values
     if SCB.SV.IconSize < 30 or SCB.SV.IconSize > 60 then
         SCB.SV.IconSize = SCB.D.IconSize

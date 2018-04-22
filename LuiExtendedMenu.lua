@@ -76,6 +76,96 @@ function LUIE_CreateSettings()
         return options, values
     end
 
+    profileCharacters = {} -- List of character profiles
+    profileQueuedCopy = nil -- Currently queued character copy name for copy button
+
+    -- Generate list of character profiles for Menu function
+    local function GenerateCharacterProfiles()
+        local isCharacterSpecific = LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV -- Pull info from SV for account wide
+        local playerName = GetUnitName('player')
+        local version = LUIE.version
+
+        for accountName, data in pairs(LUIESV.Default) do
+            for profile, vars in pairs(data) do
+                if vars.version == LUIE.SVVer then
+                    if isCharacterSpecific then
+                        -- Add list of other player characters (but not self) to settings to copy. We also add AccountWide here so you can copy from your base settings if desired.
+                        if profile ~= playerName then
+                            table.insert(profileCharacters, profile)
+                        end
+                    else
+                        -- Add list of other player characters to settings to copy. We also add AccountWide here so you can copy from your base settings if desired.
+                        table.insert(profileCharacters, profile)
+                    end
+                end
+            end
+        end
+    end
+
+    -- Borrowed from Srendarr - copies data either to override character's data or creates a new table if no data for that character exists.
+    local function CopyTable(src, dest)
+        if (type(dest) ~= 'table') then
+            dest = {}
+        end
+
+        if (type(src) == 'table') then
+            for k, v in pairs(src) do
+                if (type(v) == 'table') then
+                    CopyTable(v, dest[k])
+                end
+
+                dest[k] = v
+            end
+        end
+    end
+
+    -- Called from Menu by either reset current character or reset account wide settings button.
+    local function DeleteCurrentProfile(account)
+        local deleteProfile
+        if account then
+            deleteProfile = '$AccountWide'
+        else
+            deleteProfile = GetUnitName('player')
+        end
+
+        for accountName, data in pairs(LUIESV.Default) do
+            for profile, vars in pairs(data) do
+                if profile == deleteProfile then
+                    data[profile] = nil
+                    break
+                end
+            end
+        end
+    end
+
+    -- Copy a character profile & replace another.
+    local function CopyCharacterProfile()
+        local isCharacterSpecific = LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV -- Pull info from SV for account wide
+        local copyTarget = isCharacterSpecific and GetUnitName('player') or '$AccountWide'
+        local sourceCharacter, targetCharacter
+
+        for accountName, data in pairs(LUIESV.Default) do
+            for profile, vars in pairs(data) do
+                if profile == profileQueuedCopy then
+                    sourceCharacter = vars
+                end
+                if profile == copyTarget then
+                    targetCharacter = vars
+                end
+            end
+        end
+
+        if not sourceCharacter or not targetCharacter then
+            d("Some shit got fucked up dawg.")
+            return
+        else
+            CopyTable(sourceCharacter, targetCharacter)
+            ReloadUI()
+        end
+    end
+
+    GenerateCharacterProfiles()
+
     local formatOptions = {
         "Nothing",
         "Current",
@@ -195,7 +285,7 @@ function LUIE_CreateSettings()
     local optionsDataSlashCommands = {}
     local optionsDataInfoPanel = {}
 
-    -- ReloadUI Button
+    -- Changelog Button
     optionsData[#optionsData + 1] = {
         type = "button",
         name = GetString(SI_LUIE_LAM_CHANGELOG),
@@ -479,6 +569,81 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.SV.StartupInfo = value end,
         width = "full",
         default = LUIE.D.StartupInfo,
+    }
+
+    -- Character Profile Header
+    optionsData[#optionsData + 1] = {
+        type = "header",
+        name = "Character Profile Settings",
+        width = "full",
+    }
+
+    -- Character Profile Description
+    optionsData[#optionsData + 1] = {
+        type = "description",
+        text = "By default LuiExtended uses Account Wide settings. You can toggle on character specific settings below. Profiles can be copied between characters, and you can reset the current character or overall account settings below. Note that Account Wide settings are preserved if you toggle back from using individual character profiles.",
+        width = "full",
+    }
+
+    -- Use Character Specific Settings Toggle
+    optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = "Enable Character Specific Settings",
+        tooltip = "Switch from using Account Wide settings to using specific character settings.",
+        warning = "This will reload the UI.",
+        getFunc = function() return LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV end,
+        setFunc = function(value) LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV = value ReloadUI() end,
+        width = "full",
+    }
+
+    -- Copy Profile Dropdown
+    optionsData[#optionsData + 1] = {
+        type = "dropdown",
+        scrollable = true,
+        name = "Copy Character Profile",
+        tooltip = "Select another character to copy settings from.",
+        choices = profileCharacters,
+        sort = "name-up",
+        getFunc = function()
+            --if (#profileCharacters >= 1) then
+                --profileQueuedCopy = profileCharacters[1]
+                return profileCharacters
+            --end
+        end,
+        setFunc = function(value) profileQueuedCopy = value end,
+        width = "full",
+        disabled = function() return not LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV end,
+    }
+
+    -- Copy Profile Button
+    optionsData[#optionsData + 1] = {
+        type = "button",
+        name = "Copy Profile",
+        warning = "Warning this will reload the UI.",
+        func = function() CopyCharacterProfile() end,
+        width = "full",
+        disabled = function() return not LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV end,
+    }
+
+    -- Reset Current Character Settings Button
+    optionsData[#optionsData + 1] = {
+        type = "button",
+        name = "Reset Current Character",
+        tooltip = "Reset Current Character profile settings.",
+        warning = "This will reload the UI.",
+        func = function() DeleteCurrentProfile(false) ReloadUI() end,
+        width = "half",
+        disabled = function() return not LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV end,
+    }
+
+    -- Reset Account Wide Settings Button
+    optionsData[#optionsData + 1] = {
+        type = "button",
+        name = "Reset Account Wide",
+        tooltip = "Reset Account Wide profile settings. Note that this will not delete or modify individual character settings.",
+        warning = "This will reload the UI.",
+        width = "half",
+        func = function() DeleteCurrentProfile(true) ReloadUI() end,
     }
 
 ----------------------------------------------------------------------------------------------

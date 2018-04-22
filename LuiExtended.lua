@@ -33,6 +33,7 @@ local TimeStampColorize
 
 -- Default Settings
 LUIE.D = {
+    CharacterSpecificSV         = false,
     --ChatUseSystem               = false,
     TimeStamp                   = true,
     TimeStampFormat             = "HH:m:s",
@@ -116,6 +117,10 @@ LUIE.StatusbarTextures = {
 local function LUIE_LoadSavedVars()
     -- Addon options
     LUIE.SV = ZO_SavedVars:NewAccountWide(LUIE.SVName, LUIE.SVVer, nil, LUIE.D)
+
+    if LUIE.SV.CharacterSpecificSV then
+        LUIE.SV = ZO_SavedVars:New(LUIE.SVName, LUIE.SVVer, nil, LUIE.D)
+    end
 end
 
 -- Load additional fonts and status bar textures from LMP if it is present in environment
