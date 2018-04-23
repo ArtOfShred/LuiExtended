@@ -564,7 +564,6 @@ ZO_CreateStringId("SI_LUIE_LAM_HIDE_EXPERIENCE_BAR_TP",                 "When ga
 
 ZO_CreateStringId("SI_LUIE_LAM_CHANGELOG",                              "Display Changelog")
 ZO_CreateStringId("SI_LUIE_LAM_CHANGELOG_TP",                           "Display a list of changes from the previous version of LUIE.")
-ZO_CreateStringId("SI_LUIE_LAM_CHANGELOG_CLOSE",                        "Close Changelog")
 ZO_CreateStringId("SI_LUIE_LAM_STARTUPMSG",                             "Disable Startup Message")
 ZO_CreateStringId("SI_LUIE_LAM_STARTUPMSG_TP",                          "This setting will disable the startup message.")
 ZO_CreateStringId("SI_LUIE_LAM_UF",                                     "Unit Frames")

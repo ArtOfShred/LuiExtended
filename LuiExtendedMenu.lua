@@ -11,6 +11,7 @@ local iconFormat    = zo_iconFormat
 function LUIE_CreateSettings()
     -- Load LibAddonMenu
     local LAM2  = LibStub("LibAddonMenu-2.0")
+    -- Load LibMediaProvider
     local LMP   = LibStub("LibMediaProvider-1.0")
 
     local l_BuffsMovingEnabled  = false -- Helper local flag
@@ -166,6 +167,7 @@ function LUIE_CreateSettings()
 
     GenerateCharacterProfiles()
 
+    -- TODO: localization
     local formatOptions = {
         "Nothing",
         "Current",
