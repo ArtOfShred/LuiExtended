@@ -1422,7 +1422,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERBUFF)),
+                name = strformat(GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERBUFF_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.HidePlayerBuffs end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HidePlayerBuffs = value end,
@@ -1432,7 +1432,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERDEBUFF)),
+                name = strformat(GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERDEBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERDEBUFF_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.HidePlayerDebuffs end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HidePlayerDebuffs = value end,
@@ -1442,7 +1442,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF)),
+                name = strformat(GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.HideTargetBuffs end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HideTargetBuffs = value end,
@@ -1452,7 +1452,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF)),
+                name = strformat(GetString(SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.HideTargetDebuffs end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HideTargetDebuffs = value end,
@@ -1462,7 +1462,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF)),
+                name = strformat(GetString(SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.HideGroundEffects end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HideGroundEffects = value end,
@@ -1473,7 +1473,7 @@ function LUIE_CreateSettings()
             {
                  -- Add Extra
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS)),
+                name = strformat(GetString(SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.AddExtraBuffs end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.AddExtraBuffs = value LUIE.SpellCastBuffs.ReloadEffects() end,
@@ -1484,7 +1484,7 @@ function LUIE_CreateSettings()
             {
                 -- Consolidate
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_CONSOLIDATE)),
+                name = strformat(GetString(SI_LUIE_LAM_BUFF_CONSOLIDATE)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_CONSOLIDATE_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.Consolidate end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.Consolidate = value LUIE.SpellCastBuffs.ReloadEffects() end,
@@ -1495,7 +1495,7 @@ function LUIE_CreateSettings()
             {
                 -- Reduce
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_REDUCE)),
+                name = strformat(GetString(SI_LUIE_LAM_BUFF_REDUCE)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_REDUCE_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.HideReduce end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HideReduce = value LUIE.SpellCastBuffs.ReloadEffects() end,
