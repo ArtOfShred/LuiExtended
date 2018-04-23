@@ -34,14 +34,21 @@ local moduleName     = LUIE.name .. "_ChatAnnouncements"
 ------------------------------------------------
 CA.Enabled = false
 CA.D = {
-    -- Base Options
+    -- Chat Message Settings
     ChatPlayerDisplayOptions      = 2,
-    -- NotificationColor             = { .75, .75, .75, 1 },
+    --NotificationColor             = { .75, .75, .75, 1 },
     BracketOptionCharacter        = 2,
     BracketOptionItem             = 2,
     BracketOptionLorebook         = 2,
     BracketOptionCollectible      = 2,
     BracketOptionAchievement      = 2,
+    ChatMethod                    = "Print to All Tabs",
+    ChatBypass                    = true,
+    ChatTab                       = { [1] = true, [2] = true, [3] = true, [4] = true, [5] = true },
+    ChatSystemAll                 = true,
+    TimeStamp                     = false,
+    TimeStampFormat               = "HH:m:s",
+    TimeStampColor                = { 143/255, 143/255, 143/255 },
 
     -- Achievements
     Achievement = {

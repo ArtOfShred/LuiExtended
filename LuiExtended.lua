@@ -34,13 +34,6 @@ local TimeStampColorize
 -- Default Settings
 LUIE.D = {
     CharacterSpecificSV         = false,
-    ChatMethod                  = "Print to All Tabs",
-    ChatBypass                  = false,
-    ChatTab                     = { [1] = true, [2] = true, [3] = true, [4] = true, [5] = true },
-    ChatSystemAll               = true,
-    TimeStamp                   = true,
-    TimeStampFormat             = "HH:m:s",
-    TimeStampColor              = { 143/255, 143/255, 143/255 },
     StartupInfo                 = false,
     HideXPBar                   = false,
     TempAlertHome               = false,
