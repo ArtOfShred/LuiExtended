@@ -54,7 +54,7 @@ local fillMessages = {
     [fillCounter=fillCounter+1] = "Fixed an issue where the \"Feed Now\" timer was clipped.",
     [fillCounter=fillCounter+1] = "Fixed an issue where the Armor Durability indicator was clipped.",
     [fillCounter=fillCounter+1] = "Removed outdated Imperial City Trophy Display & Scaling Options.",
-    [fillCounter=fillCounter+1] = ""|",
+    [fillCounter=fillCounter+1] = "|",
     [fillCounter=fillCounter+1] = "Slash Commands",
     [fillCounter=fillCounter+1] = "Slash Commands module has been moved to its own \"LuiExtended - Slash Commands\" settings menu.",
     [fillCounter=fillCounter+1] = "Slash commands can now be enabled or disabled individually.",
