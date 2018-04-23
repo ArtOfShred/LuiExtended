@@ -69,6 +69,7 @@ fillMessages = {
     "• Fixed an issue where changing the Player Frames layout would also reset the position of Group, Raid, Boss, and AvA frames.",
     "|",
     strformat("|c00C000If you have any feedback, bug reports, or other questions about <<1>> please visit ESOUI or Github bla bla bla more text here where to get support and where to submit bugs.|r", LUIE.name),
+    "|",
 }
 
 function LUIE_WelcomeScreen(menu)
@@ -86,7 +87,7 @@ function LUIE_WelcomeScreen(menu)
         if luiChangeLog == nil then
             luiChangeLog = LMW:CreateMsgWindow("LUIE_Welcome_Screen", strformat("<<1>> Changelog", LUIE.name))
 
-            luiChangeLog:SetDimensions(800, math.min(600,GuiRoot:GetHeight()*0.8))
+            luiChangeLog:SetDimensions(900, 700)
             luiChangeLog:ClearAnchors()
             luiChangeLog:SetAnchor(TOP, GuiRoot, TOP, 0,100)
             luiChangeLog:SetMouseEnabled(false)
@@ -105,24 +106,26 @@ function LUIE_WelcomeScreen(menu)
                 self:GetNamedChild("Slider"):SetValue(sliderValue - position)
             end
 ]]--
-            -- Create the close button
+            luiChangeLog.extrabackdrop = windowManager:CreateControl(nil, luiChangeLog, CT_BACKDROP)
+            luiChangeLog.extrabackdrop:SetAnchor(TOPLEFT, luiChangeLog, TOPLEFT, -8, -6)
+            luiChangeLog.extrabackdrop:SetAnchor(BOTTOMRIGHT, luiChangeLog, BOTTOMRIGHT, 4, 4)
+            luiChangeLog.extrabackdrop:SetEdgeTexture("EsoUI/Art/ChatWindow/chat_BG_edge.dds", 256, 256, 32)
+            luiChangeLog.extrabackdrop:SetCenterTexture("EsoUI/Art/ChatWindow/chat_BG_center.dds")
+            luiChangeLog.extrabackdrop:SetInsets(32, 32, -32, -32)
+            luiChangeLog.extrabackdrop:SetDimensionConstraints(200, 150)
 
+            -- Create the close button
             luiChangeLog.button = windowManager:CreateControlFromVirtual(nil, luiChangeLog, "ZO_CloseButton")
             luiChangeLog.button:ClearAnchors()
-            luiChangeLog.button:SetAnchor(TOPRIGHT, tlw, TOPRIGHT, -10, 16)
+            luiChangeLog.button:SetAnchor(TOPRIGHT, luiChangeLog, TOPRIGHT, -12, 14)
             luiChangeLog.button:SetClickSound("Click")
             luiChangeLog.button:SetHandler("OnClicked", function(...) luiChangeLog:SetHidden(true) end)
 
-            --[[
-            luiChangeLog.button = windowManager:CreateControlFromVirtual(nil, luiChangeLog, "ZO_DefaultButton")
-            luiChangeLog.button:SetWidth(200)
-            luiChangeLog.button:SetText(GetString(SI_LUIE_LAM_CHANGELOG_CLOSE))
-            luiChangeLog.button:SetAnchor(BOTTOMRIGHT, tlw, BOTTOMRIGHT, -10, 35)
-            luiChangeLog.button:SetMouseEnabled(true)
-            luiChangeLog.button:SetClickSound("Click")
-            luiChangeLog.button:SetHandler("OnClicked", function(...) luiChangeLog:SetHidden(true) end)
-            ]]--
-
+            -- Adjust default slider bar to look better
+            local slider = windowManager:GetControlByName("LUIE_Welcome_ScreenSlider")
+            slider:SetDimensions(11, 64)
+            slider:SetThumbTexture("EsoUI/Art/ChatWindow/chat_thumb.dds", "EsoUI/Art/ChatWindow/chat_thumb_disabled.dds", nil, 9, 64, nil, nil, 0.3125, nil)
+            slider:SetBackgroundMiddleTexture("esoui/art/chatwindow/chat_bg_center.dds")
         else
            --luiChangeLog:SetSlider(23)
             luiChangeLog:SetHidden(false)
