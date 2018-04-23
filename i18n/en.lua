@@ -849,17 +849,13 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_HEADER",                              "Chat An
 ZO_CreateStringId("SI_LUIE_LAM_CA_DESCRIPTION",                         "Displays announcements in chat for various events - with many customizable settings.")
 
 -- Chat Message Settings
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_CHATHEADER",                          "Chat Message Settings")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD",                   "Player Name Display Method")
 ZO_CreateStringId("SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP",                "Determines the method used to display player names in Chat Announcements where applicable.\nDefault: Character Name")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_CHATTAB",                             "\t\t\t\t\tDisplay Chat Announcements in Chat Tab <<1>>")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CHATTAB_TP",                          "Display Notifications & Chat Announcements in Chat Tab <<1>>.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CHATTABSYSTEMALL",                    "Display System Messages in ALL Tabs")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CHATTABSYSTEMALL_TP",                 "When enabled: System Messages, Social Notifications (Group, Guild, Friends & Ignored List, Trade & Duels), Slash Command Notifications and Error Messages will display in all chat tabs.")
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_BRACKET_OPTION_CHARACTER",            "Character/Account Name Brackets")
 ZO_CreateStringId("SI_LUIE_LAM_CA_BRACKET_OPTION_CHARACTER_TP",         "Choose whether or not to display [ ] brackets around character and account names.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_BRACKET_OPTION_ITEM",                 "Item Link Brackets")
@@ -874,15 +870,12 @@ ZO_CreateStringId("SI_LUIE_LAM_CA_CHATMETHOD",                          "Choose 
 ZO_CreateStringId("SI_LUIE_LAM_CA_CHATMETHOD_TP",                       "Choose whether to print chat messages to all tabs or print to individual tabs.")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CHATBYPASS",                          "Enable pChat Message Saving")
 ZO_CreateStringId("SI_LUIE_LAM_CA_CHATBYPASS_TP",                       "Enabling this will prevent LUIE from adding timestamps to messages and allow pChat or other chat addons to handle chat messages. When using pChat, these messages can be saved and restored on reload.\nNote: This option is only available for messages printed to all tabs as pChat does not yet support messages sent to specific tabs.")
-
-
 ZO_CreateStringId("SI_LUIE_LAM_CA_TIMESTAMP",                           "Include Timestamp")
 ZO_CreateStringId("SI_LUIE_LAM_CA_TIMESTAMPFORMAT",                     "Timestamp Format")
 ZO_CreateStringId("SI_LUIE_LAM_CA_TIMESTAMPFORMAT_TP",                  "FORMAT:\nHH: hours (24)\nhh: hours (12)\nH: hour (24, no leading 0)\nh: hour (12, no leading 0)\nA: AM/PM\na: am/pm\nm: minutes\ns: seconds")
 ZO_CreateStringId("SI_LUIE_LAM_CA_TIMESTAMPCOLOR",                      "Timestamp Color")
 ZO_CreateStringId("SI_LUIE_LAM_CA_TIMESTAMPCOLOR_TP",                   "Color to use for Timestamp.\nDefault: 143/143/143")
 ZO_CreateStringId("SI_LUIE_LAM_CA_TIMESTAMP_TP",                        "Prepend printed text with current time label. This will apply to any messages sent by LUIE & System Messages but not player chat messages. Default color and format matches pChat.")
-
 
 -- Shared Menu Strings
 ZO_CreateStringId("SI_LUIE_LAM_CA_SHARED_CA",                           "a Chat Announcement")
