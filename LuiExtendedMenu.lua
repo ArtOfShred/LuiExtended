@@ -11,6 +11,7 @@ local iconFormat    = zo_iconFormat
 function LUIE_CreateSettings()
     -- Load LibAddonMenu
     local LAM2  = LibStub("LibAddonMenu-2.0")
+    -- Load LibMediaProvider
     local LMP   = LibStub("LibMediaProvider-1.0")
 
     local l_BuffsMovingEnabled  = false -- Helper local flag
@@ -166,6 +167,7 @@ function LUIE_CreateSettings()
 
     GenerateCharacterProfiles()
 
+    -- TODO: localization
     local formatOptions = {
         "Nothing",
         "Current",
@@ -303,6 +305,70 @@ function LUIE_CreateSettings()
         width = "half",
     }
 
+    -- Character Profile Settings Submenu
+    optionsData[#optionsData + 1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_SVPROFILE_HEADER),
+        controls = {
+            {
+                -- Character Profile Description
+                type = "description",
+                text = GetString(SI_LUIE_LAM_SVPROFILE_DESCRIPTION),
+                width = "full",
+            },
+            {
+                -- Use Character Specific Settings Toggle
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_SVPROFILE_SETTINGSTOGGLE),
+                tooltip = GetString(SI_LUIE_LAM_SVPROFILE_SETTINGSTOGGLE_TP),
+                warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
+                getFunc = function() return LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV end,
+                setFunc = function(value) LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV = value ReloadUI() end,
+                width = "full",
+            },
+            {
+                -- Copy Profile Dropdown
+                type = "dropdown",
+                scrollable = true,
+                name = GetString(SI_LUIE_LAM_SVPROFILE_PROFILECOPY),
+                tooltip = GetString(SI_LUIE_LAM_SVPROFILE_PROFILECOPY_TP),
+                choices = profileCharacters,
+                sort = "name-up",
+                getFunc = function() return profileCharacters end,
+                setFunc = function(value) profileQueuedCopy = value end,
+                width = "full",
+            },
+            {
+                -- Copy Profile Button
+                type = "button",
+                name = GetString(SI_LUIE_LAM_SVPROFILE_PROFILECOPYBUTTON),
+                tooltip = GetString(SI_LUIE_LAM_SVPROFILE_PROFILECOPYBUTTON_TP),
+                warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
+                func = function() CopyCharacterProfile() end,
+                width = "full",
+            },
+            {
+                -- Reset Current Character Settings Button
+                type = "button",
+                name = GetString(SI_LUIE_LAM_SVPROFILE_RESETCHAR),
+                tooltip = GetString(SI_LUIE_LAM_SVPROFILE_RESETCHAR_TP),
+                warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
+                func = function() DeleteCurrentProfile(false) ReloadUI() end,
+                width = "half",
+                disabled = function() return not LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV end,
+            },
+            {
+                -- Reset Account Wide Settings Button
+                type = "button",
+                name = GetString(SI_LUIE_LAM_SVPROFILE_RESETACCOUNT),
+                tooltip = GetString(SI_LUIE_LAM_SVPROFILE_RESETACCOUNT_TP),
+                warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
+                width = "half",
+                func = function() DeleteCurrentProfile(true) ReloadUI() end,
+            },
+        },
+    }
+
     -- Modules Header
     optionsData[#optionsData + 1] = {
         type = "header",
@@ -436,146 +502,6 @@ function LUIE_CreateSettings()
         text = GetString(SI_LUIE_LAM_PNL_DESCRIPTION),
     }
 
-    -- Chat Message Settings
-    optionsData[#optionsData + 1] = {
-        type = "header",
-        name = GetString(SI_LUIE_LAM_CHATHEADER),
-        width = "full",
-    }
-
-    -- Choose Chat Print Method
-    optionsData[#optionsData + 1] = {
-    type = "dropdown",
-    name = GetString(SI_LUIE_LAM_CHATMETHOD),
-    tooltip = GetString(SI_LUIE_LAM_CHATMETHOD_TP),
-    choices = { "Print to All Tabs", "Print to Specific Tabs" },
-    getFunc = function() return LUIE.SV.ChatMethod end,
-    setFunc = function(value) LUIE.SV.ChatMethod = value end,
-    width = "full",
-    sort = "name-up",
-    default = LUIE.D.ChatMethod,
-
-    }
-
-    -- Bypass LUIE to use other chat addons
-    optionsData[#optionsData + 1] = {
-        type = "checkbox",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CHATBYPASS)),
-        tooltip = GetString(SI_LUIE_LAM_CHATBYPASS_TP),
-        getFunc = function() return LUIE.SV.ChatBypass end,
-        setFunc = function(value) LUIE.SV.ChatBypass = value end,
-        width = "full",
-        disabled = function() return LUIE.SV.ChatMethod == "Print to Specific Tabs" end,
-        default = LUIE.D.ChatBypass,
-    }
-
-    -- Print Chat Announcements & Messages to Tab 1
-    optionsData[#optionsData + 1] = {
-        type = "checkbox",
-        name = strformat(GetString(SI_LUIE_LAM_CHATTAB), "1"),
-        tooltip = strformat(GetString(SI_LUIE_LAM_CHATTAB_TP), "1"),
-        getFunc = function() return LUIE.SV.ChatTab[1] end,
-        setFunc = function(value) LUIE.SV.ChatTab[1] = value end,
-        width = "full",
-        disabled = function() return LUIE.SV.ChatMethod == "Print to All Tabs" end,
-        default = LUIE.D.ChatTab[1],
-    }
-
-    -- Print Chat Announcements & Messages to Tab 2
-    optionsData[#optionsData + 1] = {
-        type = "checkbox",
-        name = strformat(GetString(SI_LUIE_LAM_CHATTAB), "2"),
-        tooltip = strformat(GetString(SI_LUIE_LAM_CHATTAB_TP), "2"),
-        getFunc = function() return LUIE.SV.ChatTab[2] end,
-        setFunc = function(value) LUIE.SV.ChatTab[2] = value end,
-        width = "full",
-        disabled = function() return LUIE.SV.ChatMethod == "Print to All Tabs" end,
-        default = LUIE.D.ChatTab[2],
-    }
-
-    -- Print Chat Announcements & Messages to Tab 3
-    optionsData[#optionsData + 1] = {
-        type = "checkbox",
-        name = strformat(GetString(SI_LUIE_LAM_CHATTAB), "3"),
-        tooltip = strformat(GetString(SI_LUIE_LAM_CHATTAB_TP), "3"),
-        getFunc = function() return LUIE.SV.ChatTab[3] end,
-        setFunc = function(value) LUIE.SV.ChatTab[3] = value end,
-        width = "full",
-        disabled = function() return LUIE.SV.ChatMethod == "Print to All Tabs" end,
-        default = LUIE.D.ChatTab[3],
-    }
-
-    -- Print Chat Announcements & Messages to Tab 4
-    optionsData[#optionsData + 1] = {
-        type = "checkbox",
-        name = strformat(GetString(SI_LUIE_LAM_CHATTAB), "4"),
-        tooltip = strformat(GetString(SI_LUIE_LAM_CHATTAB_TP), "4"),
-        getFunc = function() return LUIE.SV.ChatTab[4] end,
-        setFunc = function(value) LUIE.SV.ChatTab[4] = value end,
-        width = "full",
-        disabled = function() return LUIE.SV.ChatMethod == "Print to All Tabs" end,
-        default = LUIE.D.ChatTab[4],
-    }
-
-    -- Print Chat Announcements & Messages to Tab 5
-    optionsData[#optionsData + 1] = {
-        type = "checkbox",
-        name = strformat(GetString(SI_LUIE_LAM_CHATTAB), "5"),
-        tooltip = strformat(GetString(SI_LUIE_LAM_CHATTAB_TP), "5"),
-        getFunc = function() return LUIE.SV.ChatTab[5] end,
-        setFunc = function(value) LUIE.SV.ChatTab[5] = value end,
-        width = "full",
-        disabled = function() return LUIE.SV.ChatMethod == "Print to All Tabs" end,
-        default = LUIE.D.ChatTab[5],
-    }
-
-    -- Display System & Notifications in all Tabs
-    optionsData[#optionsData + 1] = {
-        type = "checkbox",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CHATTABSYSTEMALL)),
-        tooltip = GetString(SI_LUIE_LAM_CHATTABSYSTEMALL_TP),
-        getFunc = function() return LUIE.SV.ChatSystemAll end,
-        setFunc = function(value) LUIE.SV.ChatSystemAll = value end,
-        width = "full",
-        disabled = function() return LUIE.SV.ChatMethod == "Print to All Tabs" end,
-        default = LUIE.D.ChatSystemAll,
-    }
-
-    -- Include Timestamp
-    optionsData[#optionsData + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_TIMESTAMP),
-        tooltip = GetString(SI_LUIE_LAM_TIMESTAMP_TP),
-        getFunc = function() return LUIE.SV.TimeStamp end,
-        setFunc = function(value) LUIE.SV.TimeStamp = value end,
-        width = "full",
-        default = LUIE.D.TimeStamp,
-    }
-
-    -- Timestamp Format
-    optionsData[#optionsData + 1] = {
-        type = "editbox",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_TIMESTAMPFORMAT)),
-        tooltip = GetString(SI_LUIE_LAM_TIMESTAMPFORMAT_TP),
-        getFunc = function() return LUIE.SV.TimeStampFormat end,
-        setFunc = function(value) LUIE.SV.TimeStampFormat = value end,
-        width = "full",
-        disabled = function() return not LUIE.SV.TimeStamp end,
-        default = LUIE.D.TimeStampFormat,
-    }
-
-    -- Timestamp Color
-    optionsData[#optionsData + 1] = {
-        type    = "colorpicker",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_TIMESTAMPCOLOR)),
-        tooltip = GetString(SI_LUIE_LAM_TIMESTAMPCOLOR_TP),
-        getFunc = function() return unpack(LUIE.SV.TimeStampColor) end,
-        setFunc = function(r, g, b, a) LUIE.SV.TimeStampColor = { r, g, b, a } LUIE.UpdateTimeStampColor() end,
-        width = "full",
-        disabled = function() return not LUIE.SV.TimeStamp end,
-        default = {r=LUIE.SV.TimeStampColor[1], g=LUIE.SV.TimeStampColor[2], b=LUIE.SV.TimeStampColor[3]},
-    }
-
     -- Misc Settings
     optionsData[#optionsData + 1] = {
         type = "header",
@@ -603,75 +529,6 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.SV.StartupInfo = value end,
         width = "full",
         default = LUIE.D.StartupInfo,
-    }
-
-    -- Character Profile Header
-    optionsData[#optionsData + 1] = {
-        type = "header",
-        name = GetString(SI_LUIE_LAM_SVPROFILE_HEADER),
-        width = "full",
-    }
-
-    -- Character Profile Description
-    optionsData[#optionsData + 1] = {
-        type = "description",
-        text = GetString(SI_LUIE_LAM_SVPROFILE_DESCRIPTION),
-        width = "full",
-    }
-
-    -- Use Character Specific Settings Toggle
-    optionsData[#optionsData + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_SVPROFILE_SETTINGSTOGGLE),
-        tooltip = GetString(SI_LUIE_LAM_SVPROFILE_SETTINGSTOGGLE_TP),
-        warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
-        getFunc = function() return LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV end,
-        setFunc = function(value) LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV = value ReloadUI() end,
-        width = "full",
-    }
-
-    -- Copy Profile Dropdown
-    optionsData[#optionsData + 1] = {
-        type = "dropdown",
-        scrollable = true,
-        name = GetString(SI_LUIE_LAM_SVPROFILE_PROFILECOPY),
-        tooltip = GetString(SI_LUIE_LAM_SVPROFILE_PROFILECOPY_TP),
-        choices = profileCharacters,
-        sort = "name-up",
-        getFunc = function() return profileCharacters end,
-        setFunc = function(value) profileQueuedCopy = value end,
-        width = "full",
-    }
-
-    -- Copy Profile Button
-    optionsData[#optionsData + 1] = {
-        type = "button",
-        name = GetString(SI_LUIE_LAM_SVPROFILE_PROFILECOPYBUTTON),
-        tooltip = GetString(SI_LUIE_LAM_SVPROFILE_PROFILECOPYBUTTON_TP),
-        warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
-        func = function() CopyCharacterProfile() end,
-        width = "full",
-    }
-
-    -- Reset Current Character Settings Button
-    optionsData[#optionsData + 1] = {
-        type = "button",
-        name = GetString(SI_LUIE_LAM_SVPROFILE_RESETCHAR),
-        tooltip = GetString(SI_LUIE_LAM_SVPROFILE_RESETCHAR_TP),
-        warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
-        func = function() DeleteCurrentProfile(false) ReloadUI() end,
-        width = "half",
-        disabled = function() return not LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV end,
-    }
-
-    -- Reset Account Wide Settings Button
-    optionsData[#optionsData + 1] = {
-        type = "button",
-        name = GetString(SI_LUIE_LAM_SVPROFILE_RESETACCOUNT),
-        tooltip = GetString(SI_LUIE_LAM_SVPROFILE_RESETACCOUNT_TP),
-        warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
-        width = "half",
-        func = function() DeleteCurrentProfile(true) ReloadUI() end,
     }
 
 ----------------------------------------------------------------------------------------------
@@ -1517,12 +1374,37 @@ function LUIE_CreateSettings()
         width = "full",
     }
 
+    -- Buffs Window Unlock
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_BUFF_UNLOCKWINDOW),
+        tooltip = GetString(SI_LUIE_LAM_BUFF_UNLOCKWINDOW_TP),
+        getFunc = function() return l_BuffsMovingEnabled end,
+        setFunc = function(value)
+            l_BuffsMovingEnabled = value
+            LUIE.SpellCastBuffs.SetMovingState(value)
+            end,
+        width = "half",
+        default = false,
+        resetFunc = LUIE.SpellCastBuffs.ResetTlwPosition,
+    }
+
+    -- Buffs Window Reset position
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+        type = "button",
+        name = GetString(SI_LUIE_LAM_RESETPOSITION),
+        tooltip = GetString(SI_LUIE_LAM_BUFF_RESETPOSITION_TP),
+        func = LUIE.SpellCastBuffs.ResetTlwPosition,
+        width = "half",
+    }
+
     -- Buffs&Debuffs - Position and Display Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_BUFF_HEADER_POSITION),
         controls = {
             {
+                -- Hard-Lock Position to Unit Frames
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_HARDLOCK),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HARDLOCK_TP),
@@ -1535,27 +1417,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_UNLOCKWINDOW),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_UNLOCKWINDOW_TP),
-                getFunc = function() return l_BuffsMovingEnabled end,
-                setFunc = function(value)
-                    l_BuffsMovingEnabled = value
-                    LUIE.SpellCastBuffs.SetMovingState(value)
-                    end,
-                width = "half",
-                default = false,
-                resetFunc = LUIE.SpellCastBuffs.ResetTlwPosition,
-            },
-            {
-                type = "button",
-                name = GetString(SI_LUIE_LAM_RESETPOSITION),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_RESETPOSITION_TP),
-                func = LUIE.SpellCastBuffs.ResetTlwPosition,
-                width = "half",
-            },
-            {
-                type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERBUFF)),
+                name = strformat(GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERBUFF_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.HidePlayerBuffs end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HidePlayerBuffs = value end,
@@ -1565,7 +1427,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERDEBUFF)),
+                name = strformat(GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERDEBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HIDEPLAYERDEBUFF_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.HidePlayerDebuffs end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HidePlayerDebuffs = value end,
@@ -1575,7 +1437,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF)),
+                name = strformat(GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HIDETARGETBUFF_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.HideTargetBuffs end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HideTargetBuffs = value end,
@@ -1585,7 +1447,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF)),
+                name = strformat(GetString(SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HIDETARGETDEBUFF_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.HideTargetDebuffs end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HideTargetDebuffs = value end,
@@ -1595,7 +1457,7 @@ function LUIE_CreateSettings()
             },
             {
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF)),
+                name = strformat(GetString(SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HIDEGROUNDBUFFDEBUFF_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.HideGroundEffects end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HideGroundEffects = value end,
@@ -1606,7 +1468,7 @@ function LUIE_CreateSettings()
             {
                  -- Add Extra
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS)),
+                name = strformat(GetString(SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_ADD_EXTRA_BUFFS_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.AddExtraBuffs end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.AddExtraBuffs = value LUIE.SpellCastBuffs.ReloadEffects() end,
@@ -1617,7 +1479,7 @@ function LUIE_CreateSettings()
             {
                 -- Consolidate
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_CONSOLIDATE)),
+                name = strformat(GetString(SI_LUIE_LAM_BUFF_CONSOLIDATE)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_CONSOLIDATE_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.Consolidate end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.Consolidate = value LUIE.SpellCastBuffs.ReloadEffects() end,
@@ -1628,7 +1490,7 @@ function LUIE_CreateSettings()
             {
                 -- Reduce
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_BUFF_REDUCE)),
+                name = strformat(GetString(SI_LUIE_LAM_BUFF_REDUCE)),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_REDUCE_TP),
                 getFunc = function() return LUIE.SpellCastBuffs.SV.HideReduce end,
                 setFunc = function(value) LUIE.SpellCastBuffs.SV.HideReduce = value LUIE.SpellCastBuffs.ReloadEffects() end,
@@ -2680,44 +2542,6 @@ function LUIE_CreateSettings()
         text = GetString(SI_LUIE_LAM_CA_DESCRIPTION),
     }
 
-    -- Player Name Display Method
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
-        type = "dropdown",
-        name = GetString(SI_LUIE_LAM_NAMEDISPLAYMETHOD),
-        tooltip = GetString(SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP),
-        choices = chatNameDisplayOptions,
-        getFunc = function() return chatNameDisplayOptions[LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions] end,
-        setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions = chatNameDisplayOptionsKeys[value] LUIE.ChatAnnouncements.IndexGroupLoot() end,
-        width = "full",
-        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-        default = chatNameDisplayOptions[2],
-    }
-
-    --[[-- Notification Color
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
-        type = "colorpicker",
-        name = "Notification Color (Unimplemented)",
-        tooltip = "This message will be used to colorize various generic notification messages that are not Social/Guild related or error messages.",
-        getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.Notify.NotificationColor) end,
-        setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.Notify.NotificationColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
-        width = "full",
-        disabled = function() return not LUIE.TodoLater end,
-        default = {r=LUIE.ChatAnnouncements.D.Notify.NotificationColor[1], g=LUIE.ChatAnnouncements.D.Notify.NotificationColor[2], b=LUIE.ChatAnnouncements.D.Notify.NotificationColor[3]}
-    }]]--
-
-    -- Character Name Bracket
-    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
-        type = "dropdown",
-        name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_CHARACTER),
-        tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_CHARACTER_TP),
-        choices = linkBracketDisplayOptions,
-        getFunc = function() return linkBracketDisplayOptions[LUIE.ChatAnnouncements.SV.BracketOptionCharacter] end,
-        setFunc = function(value) LUIE.ChatAnnouncements.SV.BracketOptionCharacter = linkBracketDisplayOptionsKeys[value] LUIE.ChatAnnouncements.IndexGroupLoot() end,
-        width = "full",
-        disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
-        default = LUIE.ChatAnnouncements.D.BracketOptionCharacter,
-    }
-
     -- ReloadUI Button
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "button",
@@ -2725,6 +2549,170 @@ function LUIE_CreateSettings()
         tooltip = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
         func = function() ReloadUI("ingame") end,
         width = "full",
+    }
+
+    -- Chat Announcements - Chat Message Settings Submenu
+    optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
+        type = "submenu",
+        name = GetString(SI_LUIE_LAM_CA_CHATHEADER),
+        controls = {
+            {
+                -- Player Name Display Method
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD),
+                tooltip = GetString(SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP),
+                choices = chatNameDisplayOptions,
+                getFunc = function() return chatNameDisplayOptions[LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions] end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions = chatNameDisplayOptionsKeys[value] LUIE.ChatAnnouncements.IndexGroupLoot() end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = chatNameDisplayOptions[2],
+            },
+            {
+                -- Character Name Bracket
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_CHARACTER),
+                tooltip = GetString(SI_LUIE_LAM_CA_BRACKET_OPTION_CHARACTER_TP),
+                choices = linkBracketDisplayOptions,
+                getFunc = function() return linkBracketDisplayOptions[LUIE.ChatAnnouncements.SV.BracketOptionCharacter] end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.BracketOptionCharacter = linkBracketDisplayOptionsKeys[value] LUIE.ChatAnnouncements.IndexGroupLoot() end,
+                width = "full",
+                disabled = function() return not LUIE.SV.ChatAnnouncements_Enable end,
+                default = LUIE.ChatAnnouncements.D.BracketOptionCharacter,
+            },
+            --[[{
+                -- Notification Color
+                type = "colorpicker",
+                name = "Notification Color (Unimplemented)",
+                tooltip = "This message will be used to colorize various generic notification messages that are not Social/Guild related or error messages.",
+                getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.Notify.NotificationColor) end,
+                setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.Notify.NotificationColor = { r, g, b, a } LUIE.ChatAnnouncements.RegisterColorEvents() end,
+                width = "full",
+                disabled = function() return not LUIE.TodoLater end,
+                default = {r=LUIE.ChatAnnouncements.D.Notify.NotificationColor[1], g=LUIE.ChatAnnouncements.D.Notify.NotificationColor[2], b=LUIE.ChatAnnouncements.D.Notify.NotificationColor[3]}
+            },]]--
+            {
+                -- Choose Chat Print Method
+                type = "dropdown",
+                name = GetString(SI_LUIE_LAM_CA_CHATMETHOD),
+                tooltip = GetString(SI_LUIE_LAM_CA_CHATMETHOD_TP),
+                choices = { "Print to All Tabs", "Print to Specific Tabs" },
+                getFunc = function() return LUIE.ChatAnnouncements.SV.ChatMethod end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatMethod = value end,
+                width = "full",
+                sort = "name-up",
+                default = LUIE.ChatAnnouncements.D.ChatMethod,
+            },
+            {
+                -- Bypass LUIE to use other chat addons
+                type = "checkbox",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CHATBYPASS)),
+                tooltip = GetString(SI_LUIE_LAM_CA_CHATBYPASS_TP),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.ChatBypass end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatBypass = value end,
+                width = "full",
+                disabled = function() return LUIE.ChatAnnouncements.SV.ChatMethod == "Print to Specific Tabs" end,
+                default = LUIE.ChatAnnouncements.D.ChatBypass,
+            },
+            {
+                -- Print Chat Announcements & Messages to Tab 1
+                type = "checkbox",
+                name = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "1"),
+                tooltip = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "1"),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.ChatTab[1] end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatTab[1] = value end,
+                width = "full",
+                disabled = function() return LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" end,
+                default = LUIE.ChatAnnouncements.D.ChatTab[1],
+            },
+            {
+                -- Print Chat Announcements & Messages to Tab 2
+                type = "checkbox",
+                name = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "2"),
+                tooltip = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "2"),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.ChatTab[2] end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatTab[2] = value end,
+                width = "full",
+                disabled = function() return LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" end,
+                default = LUIE.ChatAnnouncements.D.ChatTab[2],
+            },
+            {
+                -- Print Chat Announcements & Messages to Tab 3
+                type = "checkbox",
+                name = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "3"),
+                tooltip = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "3"),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.ChatTab[3] end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatTab[3] = value end,
+                width = "full",
+                disabled = function() return LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" end,
+                default = LUIE.ChatAnnouncements.D.ChatTab[3],
+            },
+            {
+                -- Print Chat Announcements & Messages to Tab 4
+                type = "checkbox",
+                name = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "4"),
+                tooltip = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "4"),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.ChatTab[4] end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatTab[4] = value end,
+                width = "full",
+                disabled = function() return LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" end,
+                default = LUIE.ChatAnnouncements.D.ChatTab[4],
+            },
+            {
+                -- Print Chat Announcements & Messages to Tab 5
+                type = "checkbox",
+                name = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "5"),
+                tooltip = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "5"),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.ChatTab[5] end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatTab[5] = value end,
+                width = "full",
+                disabled = function() return LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" end,
+                default = LUIE.ChatAnnouncements.D.ChatTab[5],
+            },
+            {
+                -- Display System & Notifications in all Tabs
+                type = "checkbox",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CHATTABSYSTEMALL)),
+                tooltip = GetString(SI_LUIE_LAM_CA_CHATTABSYSTEMALL_TP),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.ChatSystemAll end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatSystemAll = value end,
+                width = "full",
+                disabled = function() return LUIE.ChatAnnouncements.SV.ChatMethod == "Print to All Tabs" end,
+                default = LUIE.ChatAnnouncements.D.ChatSystemAll,
+            },
+            {
+                -- Include Timestamp
+                type = "checkbox",
+                name = GetString(SI_LUIE_LAM_CA_TIMESTAMP),
+                tooltip = GetString(SI_LUIE_LAM_CA_TIMESTAMP_TP),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.TimeStamp end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.TimeStamp = value end,
+                width = "full",
+                default = LUIE.ChatAnnouncements.D.TimeStamp,
+            },
+            {
+                -- Timestamp Format
+                type = "editbox",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_TIMESTAMPFORMAT)),
+                tooltip = GetString(SI_LUIE_LAM_CA_TIMESTAMPFORMAT_TP),
+                getFunc = function() return LUIE.ChatAnnouncements.SV.TimeStampFormat end,
+                setFunc = function(value) LUIE.ChatAnnouncements.SV.TimeStampFormat = value end,
+                width = "full",
+                disabled = function() return not LUIE.ChatAnnouncements.SV.TimeStamp end,
+                default = LUIE.ChatAnnouncements.D.TimeStampFormat,
+            },
+            {
+                -- Timestamp Color
+                type    = "colorpicker",
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_TIMESTAMPCOLOR)),
+                tooltip = GetString(SI_LUIE_LAM_CA_TIMESTAMPCOLOR_TP),
+                getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.TimeStampColor) end,
+                setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.TimeStampColor = { r, g, b, a } LUIE.UpdateTimeStampColor() end,
+                width = "full",
+                disabled = function() return not LUIE.ChatAnnouncements.SV.TimeStamp end,
+                default = {r=LUIE.ChatAnnouncements.SV.TimeStampColor[1], g=LUIE.ChatAnnouncements.SV.TimeStampColor[2], b=LUIE.ChatAnnouncements.SV.TimeStampColor[3]},
+            },
+        },
     }
 
     -- Chat Announcements - Currency Announcements Options Submenu
@@ -7262,6 +7250,28 @@ function LUIE_CreateSettings()
         width = "full",
     }
 
+    -- Custom Unit Frames Unlock
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_UNLOCK),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_UNLOCK_TP),
+        getFunc = function() return LUIE.UnitFrames.CustomFramesMovingState end,
+        setFunc = LUIE.UnitFrames.CustomFramesSetMovingState,
+        width = "half",
+        default = false,
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+        resetFunc = function() LUIE.UnitFrames.CustomFramesResetPosition(false) end,
+    }
+
+    -- Custom Unit Frames Reset position
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "button",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT_TP),
+        func = function() LUIE.UnitFrames.CustomFramesResetPosition(false) end,
+        width = "half",
+    }
+
     -- Unit Frames - Default Unit Frames Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
@@ -7454,26 +7464,6 @@ function LUIE_CreateSettings()
         type = "submenu",
         name = GetString(SI_LUIE_LAM_UF_CFRAMES_HEADER),
         controls = {
-            {
-                -- Custom Unit Frames Unlock
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_UNLOCK),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_UNLOCK_TP),
-                getFunc = function() return LUIE.UnitFrames.CustomFramesMovingState end,
-                setFunc = LUIE.UnitFrames.CustomFramesSetMovingState,
-                width = "half",
-                default = false,
-                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-                resetFunc = function() LUIE.UnitFrames.CustomFramesResetPosition(false) end,
-            },
-            {
-                -- Custom Unit Frames Reset position
-                type = "button",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT_TP),
-                func = function() LUIE.UnitFrames.CustomFramesResetPosition(false) end,
-                width = "half",
-            },
             {
                 -- Custom Unit Frames Font
                 type = "dropdown",
