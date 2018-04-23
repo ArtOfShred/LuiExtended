@@ -290,7 +290,7 @@ function LUIE_CreateSettings()
         type = "button",
         name = GetString(SI_LUIE_LAM_CHANGELOG),
         tooltip = GetString(SI_LUIE_LAM_CHANGELOG_TP),
-        func = function() LUIE_WelcomeScreen(true) end,
+        func = function() LUIE_WelcomeScreen(true) SCENE_MANAGER:ShowBaseScene() end,
         width = "half",
     }
 

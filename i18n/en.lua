@@ -655,7 +655,7 @@ ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_MERCHANT_TP",                  "'/merch
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_FENCE",                        "Enable ( '/fence' ) Fence")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_FENCE_TP",                     "'/fence' Summon <<1>> (If unlocked).\n\t\t\t\t\tAlternate options: '/smuggler'")
 ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_READYCHECK",                   "Enable ( '/ready' ) Ready Check")
-ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_READYCHECK_TP",                "Send a 'ready check' dialog to all group members.\n\t\t\t\t\tAlternate options: '/readycheck'")
+ZO_CreateStringId("SI_LUIE_LAM_SLASHCMDS_READYCHECK_TP",                "Send a 'ready check' dialog to all group members.")
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

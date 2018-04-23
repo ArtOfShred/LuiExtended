@@ -106,13 +106,9 @@ function LUIE_WelcomeScreen(menu)
                 self:GetNamedChild("Slider"):SetValue(sliderValue - position)
             end
 ]]--
-            luiChangeLog.extrabackdrop = windowManager:CreateControl(nil, luiChangeLog, CT_BACKDROP)
+            luiChangeLog.extrabackdrop = LUIE.UI.ChatBackdrop( luiChangeLog, nil, nil, nil, 32, false)
             luiChangeLog.extrabackdrop:SetAnchor(TOPLEFT, luiChangeLog, TOPLEFT, -8, -6)
             luiChangeLog.extrabackdrop:SetAnchor(BOTTOMRIGHT, luiChangeLog, BOTTOMRIGHT, 4, 4)
-            luiChangeLog.extrabackdrop:SetEdgeTexture("EsoUI/Art/ChatWindow/chat_BG_edge.dds", 256, 256, 32)
-            luiChangeLog.extrabackdrop:SetCenterTexture("EsoUI/Art/ChatWindow/chat_BG_center.dds")
-            luiChangeLog.extrabackdrop:SetInsets(32, 32, -32, -32)
-            luiChangeLog.extrabackdrop:SetDimensionConstraints(200, 150)
 
             -- Create the close button
             luiChangeLog.button = windowManager:CreateControlFromVirtual(nil, luiChangeLog, "ZO_CloseButton")
