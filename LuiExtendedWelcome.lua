@@ -87,7 +87,7 @@ function LUIE_WelcomeScreen(menu)
             luiChangeLog:SetDrawLevel(1)
 
             -- Add welcome to new version message
-            strformat("|c00C000Welcome to version <<1>> of <<2>> by <<3>>\nPlease take a few minutes to read over the list of changes in this version.\nThis notification will only appear once with each update unless opened manually from the menu.|r", LUIE.version, LUIE.name, LUIE.author)
+            luiChangeLog:AddText(strformat("|c00C000Welcome to version <<1>> of <<2>> by <<3>>\nPlease take a few minutes to read over the list of changes in this version.\nThis notification will only appear once with each update unless opened manually from the menu.|r", LUIE.version, LUIE.name, LUIE.author))
             luiChangeLog:AddText("|")
 
             -- Add all the changes from fillMessages
