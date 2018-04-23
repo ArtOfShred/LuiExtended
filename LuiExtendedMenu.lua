@@ -1377,12 +1377,37 @@ function LUIE_CreateSettings()
         width = "full",
     }
 
+    -- Buffs Window Unlock
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_BUFF_UNLOCKWINDOW),
+        tooltip = GetString(SI_LUIE_LAM_BUFF_UNLOCKWINDOW_TP),
+        getFunc = function() return l_BuffsMovingEnabled end,
+        setFunc = function(value)
+            l_BuffsMovingEnabled = value
+            LUIE.SpellCastBuffs.SetMovingState(value)
+            end,
+        width = "half",
+        default = false,
+        resetFunc = LUIE.SpellCastBuffs.ResetTlwPosition,
+    }
+
+    -- Buffs Window Reset position
+    optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
+        type = "button",
+        name = GetString(SI_LUIE_LAM_RESETPOSITION),
+        tooltip = GetString(SI_LUIE_LAM_BUFF_RESETPOSITION_TP),
+        func = LUIE.SpellCastBuffs.ResetTlwPosition,
+        width = "half",
+    }
+
     -- Buffs&Debuffs - Position and Display Options Submenu
     optionsDataBuffsDebuffs[#optionsDataBuffsDebuffs + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_BUFF_HEADER_POSITION),
         controls = {
             {
+                -- Hard-Lock Position to Unit Frames
                 type = "checkbox",
                 name = GetString(SI_LUIE_LAM_BUFF_HARDLOCK),
                 tooltip = GetString(SI_LUIE_LAM_BUFF_HARDLOCK_TP),
@@ -1392,26 +1417,6 @@ function LUIE_CreateSettings()
                 warning = GetString(SI_LUIE_LAM_BUFF_HARDLOCK_WARNING),
                 default = LUIE.SpellCastBuffs.D.lockPositionToUnitFrames,
                 disabled = function() return not LUIE.SV.SpellCastBuff_Enable end,
-            },
-            {
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_BUFF_UNLOCKWINDOW),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_UNLOCKWINDOW_TP),
-                getFunc = function() return l_BuffsMovingEnabled end,
-                setFunc = function(value)
-                    l_BuffsMovingEnabled = value
-                    LUIE.SpellCastBuffs.SetMovingState(value)
-                    end,
-                width = "half",
-                default = false,
-                resetFunc = LUIE.SpellCastBuffs.ResetTlwPosition,
-            },
-            {
-                type = "button",
-                name = GetString(SI_LUIE_LAM_RESETPOSITION),
-                tooltip = GetString(SI_LUIE_LAM_BUFF_RESETPOSITION_TP),
-                func = LUIE.SpellCastBuffs.ResetTlwPosition,
-                width = "half",
             },
             {
                 type = "checkbox",
