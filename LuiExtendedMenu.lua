@@ -2552,12 +2552,12 @@ function LUIE_CreateSettings()
     -- Chat Announcements - Chat Message Settings Submenu
     optionsDataChatAnnouncements[#optionsDataChatAnnouncements +1] = {
         type = "submenu",
-        name = GetString(SI_LUIE_LAM_CHATHEADER),
+        name = GetString(SI_LUIE_LAM_CA_CHATHEADER),
         controls = {
             {
                 -- Player Name Display Method
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_NAMEDISPLAYMETHOD),
+                name = GetString(SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD),
                 tooltip = GetString(SI_LUIE_LAM_CA_NAMEDISPLAYMETHOD_TP),
                 choices = chatNameDisplayOptions,
                 getFunc = function() return chatNameDisplayOptions[LUIE.ChatAnnouncements.SV.ChatPlayerDisplayOptions] end,
@@ -2592,8 +2592,8 @@ function LUIE_CreateSettings()
             {
                 -- Choose Chat Print Method
                 type = "dropdown",
-                name = GetString(SI_LUIE_LAM_CHATMETHOD),
-                tooltip = GetString(SI_LUIE_LAM_CHATMETHOD_TP),
+                name = GetString(SI_LUIE_LAM_CA_CHATMETHOD),
+                tooltip = GetString(SI_LUIE_LAM_CA_CHATMETHOD_TP),
                 choices = { "Print to All Tabs", "Print to Specific Tabs" },
                 getFunc = function() return LUIE.ChatAnnouncements.SV.ChatMethod end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatMethod = value end,
@@ -2604,8 +2604,8 @@ function LUIE_CreateSettings()
             {
                 -- Bypass LUIE to use other chat addons
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CHATBYPASS)),
-                tooltip = GetString(SI_LUIE_LAM_CHATBYPASS_TP),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CHATBYPASS)),
+                tooltip = GetString(SI_LUIE_LAM_CA_CHATBYPASS_TP),
                 getFunc = function() return LUIE.ChatAnnouncements.SV.ChatBypass end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatBypass = value end,
                 width = "full",
@@ -2615,8 +2615,8 @@ function LUIE_CreateSettings()
             {
                 -- Print Chat Announcements & Messages to Tab 1
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CHATTAB), "1"),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CHATTAB_TP), "1"),
+                name = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "1"),
+                tooltip = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "1"),
                 getFunc = function() return LUIE.ChatAnnouncements.SV.ChatTab[1] end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatTab[1] = value end,
                 width = "full",
@@ -2626,8 +2626,8 @@ function LUIE_CreateSettings()
             {
                 -- Print Chat Announcements & Messages to Tab 2
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CHATTAB), "2"),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CHATTAB_TP), "2"),
+                name = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "2"),
+                tooltip = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "2"),
                 getFunc = function() return LUIE.ChatAnnouncements.SV.ChatTab[2] end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatTab[2] = value end,
                 width = "full",
@@ -2637,8 +2637,8 @@ function LUIE_CreateSettings()
             {
                 -- Print Chat Announcements & Messages to Tab 3
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CHATTAB), "3"),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CHATTAB_TP), "3"),
+                name = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "3"),
+                tooltip = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "3"),
                 getFunc = function() return LUIE.ChatAnnouncements.SV.ChatTab[3] end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatTab[3] = value end,
                 width = "full",
@@ -2648,8 +2648,8 @@ function LUIE_CreateSettings()
             {
                 -- Print Chat Announcements & Messages to Tab 4
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CHATTAB), "4"),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CHATTAB_TP), "4"),
+                name = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "4"),
+                tooltip = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "4"),
                 getFunc = function() return LUIE.ChatAnnouncements.SV.ChatTab[4] end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatTab[4] = value end,
                 width = "full",
@@ -2659,8 +2659,8 @@ function LUIE_CreateSettings()
             {
                 -- Print Chat Announcements & Messages to Tab 5
                 type = "checkbox",
-                name = strformat(GetString(SI_LUIE_LAM_CHATTAB), "5"),
-                tooltip = strformat(GetString(SI_LUIE_LAM_CHATTAB_TP), "5"),
+                name = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB), "5"),
+                tooltip = strformat(GetString(SI_LUIE_LAM_CA_CHATTAB_TP), "5"),
                 getFunc = function() return LUIE.ChatAnnouncements.SV.ChatTab[5] end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatTab[5] = value end,
                 width = "full",
@@ -2670,8 +2670,8 @@ function LUIE_CreateSettings()
             {
                 -- Display System & Notifications in all Tabs
                 type = "checkbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CHATTABSYSTEMALL)),
-                tooltip = GetString(SI_LUIE_LAM_CHATTABSYSTEMALL_TP),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_CHATTABSYSTEMALL)),
+                tooltip = GetString(SI_LUIE_LAM_CA_CHATTABSYSTEMALL_TP),
                 getFunc = function() return LUIE.ChatAnnouncements.SV.ChatSystemAll end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.ChatSystemAll = value end,
                 width = "full",
@@ -2681,8 +2681,8 @@ function LUIE_CreateSettings()
             {
                 -- Include Timestamp
                 type = "checkbox",
-                name = GetString(SI_LUIE_LAM_TIMESTAMP),
-                tooltip = GetString(SI_LUIE_LAM_TIMESTAMP_TP),
+                name = GetString(SI_LUIE_LAM_CA_TIMESTAMP),
+                tooltip = GetString(SI_LUIE_LAM_CA_TIMESTAMP_TP),
                 getFunc = function() return LUIE.ChatAnnouncements.SV.TimeStamp end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.TimeStamp = value end,
                 width = "full",
@@ -2691,8 +2691,8 @@ function LUIE_CreateSettings()
             {
                 -- Timestamp Format
                 type = "editbox",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_TIMESTAMPFORMAT)),
-                tooltip = GetString(SI_LUIE_LAM_TIMESTAMPFORMAT_TP),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_TIMESTAMPFORMAT)),
+                tooltip = GetString(SI_LUIE_LAM_CA_TIMESTAMPFORMAT_TP),
                 getFunc = function() return LUIE.ChatAnnouncements.SV.TimeStampFormat end,
                 setFunc = function(value) LUIE.ChatAnnouncements.SV.TimeStampFormat = value end,
                 width = "full",
@@ -2702,8 +2702,8 @@ function LUIE_CreateSettings()
             {
                 -- Timestamp Color
                 type    = "colorpicker",
-                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_TIMESTAMPCOLOR)),
-                tooltip = GetString(SI_LUIE_LAM_TIMESTAMPCOLOR_TP),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CA_TIMESTAMPCOLOR)),
+                tooltip = GetString(SI_LUIE_LAM_CA_TIMESTAMPCOLOR_TP),
                 getFunc = function() return unpack(LUIE.ChatAnnouncements.SV.TimeStampColor) end,
                 setFunc = function(r, g, b, a) LUIE.ChatAnnouncements.SV.TimeStampColor = { r, g, b, a } LUIE.UpdateTimeStampColor() end,
                 width = "full",
