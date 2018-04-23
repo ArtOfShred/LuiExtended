@@ -7248,6 +7248,28 @@ function LUIE_CreateSettings()
         width = "full",
     }
 
+    -- Custom Unit Frames Unlock
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_UNLOCK),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_UNLOCK_TP),
+        getFunc = function() return LUIE.UnitFrames.CustomFramesMovingState end,
+        setFunc = LUIE.UnitFrames.CustomFramesSetMovingState,
+        width = "half",
+        default = false,
+        disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
+        resetFunc = function() LUIE.UnitFrames.CustomFramesResetPosition(false) end,
+    }
+
+    -- Custom Unit Frames Reset position
+    optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
+        type = "button",
+        name = GetString(SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT),
+        tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT_TP),
+        func = function() LUIE.UnitFrames.CustomFramesResetPosition(false) end,
+        width = "half",
+    }
+
     -- Unit Frames - Default Unit Frames Options Submenu
     optionsDataUnitFrames[#optionsDataUnitFrames + 1] = {
         type = "submenu",
@@ -7440,26 +7462,6 @@ function LUIE_CreateSettings()
         type = "submenu",
         name = GetString(SI_LUIE_LAM_UF_CFRAMES_HEADER),
         controls = {
-            {
-                -- Custom Unit Frames Unlock
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_UNLOCK),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_UNLOCK_TP),
-                getFunc = function() return LUIE.UnitFrames.CustomFramesMovingState end,
-                setFunc = LUIE.UnitFrames.CustomFramesSetMovingState,
-                width = "half",
-                default = false,
-                disabled = function() return not LUIE.SV.UnitFrames_Enabled end,
-                resetFunc = function() LUIE.UnitFrames.CustomFramesResetPosition(false) end,
-            },
-            {
-                -- Custom Unit Frames Reset position
-                type = "button",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT),
-                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_RESETPOSIT_TP),
-                func = function() LUIE.UnitFrames.CustomFramesResetPosition(false) end,
-                width = "half",
-            },
             {
                 -- Custom Unit Frames Font
                 type = "dropdown",
