@@ -189,9 +189,6 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     -- Load saved variables
     LUIE_LoadSavedVars()
 
-    -- Load Timetamp Color
-    LUIE.UpdateTimeStampColor()
-
     -- Display welcome screen
     LUIE_WelcomeScreen()
 
@@ -207,6 +204,9 @@ local function LUIE_OnAddOnLoaded(eventCode, addonName)
     LUIE.UnitFrames.Initialize( LUIE.SV.UnitFrames_Enabled )
     LUIE.SpellCastBuffs.Initialize( LUIE.SV.SpellCastBuff_Enable )
     LUIE.SlashCommands.Initialize( LUIE.SV.SlashCommands_Enable )
+	
+	-- Load Timetamp Color
+    LUIE.UpdateTimeStampColor()
 
     -- Create settings menu for our addon
     LUIE_CreateSettings()
@@ -617,7 +617,7 @@ end
 
 -- Called from the menu and on initialization to update timestamp color when changed.
 function LUIE.UpdateTimeStampColor()
-    TimeStampColorize = colorDef:New(unpack(LUIE.SV.TimeStampColor)):ToHex()
+    TimeStampColorize = colorDef:New(unpack(LUIE.ChatAnnouncements.SV.TimeStampColor)):ToHex()
 end
 
 -- Return a formatted time
