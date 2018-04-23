@@ -7,7 +7,7 @@ local windowManager = WINDOW_MANAGER
 -- TODO: Create a basic logo to use when the changelog is displayed - may consider attempting to center it and remove ability to expand box size.
 --local memes = zo_iconFormat("LuiExtended/media/changelog/updatenotestemp.dds", 256, 256)
 
-fillMessages = {
+local fillMessages = {
     "|cEEEE00General Components|r",
     "• Implemented an in game changelog that will display on the first load with LUIE enabled when the version number is different than your current version. This changelog can also be viewed from the LUIE addon settings menu.",
     "• Added the option to switch between using ACCOUNT WIDE or CHARACTER SPECIFIC savedVariables settings. Profiles can be copied between characters or deleted from the LUIExtended addon menu.",
