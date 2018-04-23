@@ -303,6 +303,13 @@ function LUIE_CreateSettings()
         width = "half",
     }
 
+    -- Modules Header
+    optionsData[#optionsData + 1] = {
+        type = "header",
+        name = GetString(SI_LUIE_LAM_MODULEHEADER),
+        width = "full",
+    }
+
     -- Unit Frames Module
     optionsData[#optionsData + 1] = {
         type = "checkbox",
@@ -429,10 +436,37 @@ function LUIE_CreateSettings()
         text = GetString(SI_LUIE_LAM_PNL_DESCRIPTION),
     }
 
-    optionsData[#optionsData +1] = {
-    type = "divider",
+    -- Chat Message Settings
+    optionsData[#optionsData + 1] = {
+        type = "header",
+        name = GetString(SI_LUIE_LAM_CHATHEADER),
+        width = "full",
+    }
+
+    -- Choose Chat Print Method
+    optionsData[#optionsData + 1] = {
+    type = "dropdown",
+    name = GetString(SI_LUIE_LAM_CHATMETHOD),
+    tooltip = GetString(SI_LUIE_LAM_CHATMETHOD_TP),
+    choices = { "Print to All Tabs", "Print to Specific Tabs" },
+    getFunc = function() return LUIE.SV.ChatMethod end,
+    setFunc = function(value) LUIE.SV.ChatMethod = value end,
     width = "full",
-    alpha = 1
+    sort = "name-up",
+    default = LUIE.D.ChatMethod,
+
+    }
+
+    -- Bypass LUIE to use other chat addons
+    optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CHATBYPASS)),
+        tooltip = GetString(SI_LUIE_LAM_CHATBYPASS_TP),
+        getFunc = function() return LUIE.SV.ChatBypass end,
+        setFunc = function(value) LUIE.SV.ChatBypass = value end,
+        width = "full",
+        disabled = function() return LUIE.SV.ChatMethod == "Print to Specific Tabs" end,
+        default = LUIE.D.ChatBypass,
     }
 
     -- Print Chat Announcements & Messages to Tab 1
@@ -443,6 +477,7 @@ function LUIE_CreateSettings()
         getFunc = function() return LUIE.SV.ChatTab[1] end,
         setFunc = function(value) LUIE.SV.ChatTab[1] = value end,
         width = "full",
+        disabled = function() return LUIE.SV.ChatMethod == "Print to All Tabs" end,
         default = LUIE.D.ChatTab[1],
     }
 
@@ -454,6 +489,7 @@ function LUIE_CreateSettings()
         getFunc = function() return LUIE.SV.ChatTab[2] end,
         setFunc = function(value) LUIE.SV.ChatTab[2] = value end,
         width = "full",
+        disabled = function() return LUIE.SV.ChatMethod == "Print to All Tabs" end,
         default = LUIE.D.ChatTab[2],
     }
 
@@ -465,6 +501,7 @@ function LUIE_CreateSettings()
         getFunc = function() return LUIE.SV.ChatTab[3] end,
         setFunc = function(value) LUIE.SV.ChatTab[3] = value end,
         width = "full",
+        disabled = function() return LUIE.SV.ChatMethod == "Print to All Tabs" end,
         default = LUIE.D.ChatTab[3],
     }
 
@@ -476,6 +513,7 @@ function LUIE_CreateSettings()
         getFunc = function() return LUIE.SV.ChatTab[4] end,
         setFunc = function(value) LUIE.SV.ChatTab[4] = value end,
         width = "full",
+        disabled = function() return LUIE.SV.ChatMethod == "Print to All Tabs" end,
         default = LUIE.D.ChatTab[4],
     }
 
@@ -487,32 +525,21 @@ function LUIE_CreateSettings()
         getFunc = function() return LUIE.SV.ChatTab[5] end,
         setFunc = function(value) LUIE.SV.ChatTab[5] = value end,
         width = "full",
+        disabled = function() return LUIE.SV.ChatMethod == "Print to All Tabs" end,
         default = LUIE.D.ChatTab[5],
     }
 
     -- Display System & Notifications in all Tabs
     optionsData[#optionsData + 1] = {
         type = "checkbox",
-        name = GetString(SI_LUIE_LAM_CHATTABSYSTEMALL),
+        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_CHATTABSYSTEMALL)),
         tooltip = GetString(SI_LUIE_LAM_CHATTABSYSTEMALL_TP),
         getFunc = function() return LUIE.SV.ChatSystemAll end,
         setFunc = function(value) LUIE.SV.ChatSystemAll = value end,
         width = "full",
+        disabled = function() return LUIE.SV.ChatMethod == "Print to All Tabs" end,
         default = LUIE.D.ChatSystemAll,
     }
-
-    -- Use LUI print to chat for messages
-    --[[optionsData[#optionsData + 1] = {
-        type = "checkbox",
-        name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_LUIPRINTTOCHAT)),
-        tooltip = GetString(SI_LUIE_LAM_LUIPRINTTOCHAT_TP),
-        getFunc = function() return LUIE.SV.ChatUseSystem end,
-        setFunc = function(value) LUIE.SV.ChatUseSystem = value end,
-        width = "full",
-        warning = GetString(SI_LUIE_LAM_GENERIC_WARNING),
-        disabled = function() return not LUIE.SV.ChatSystemAll end,
-        default = LUIE.D.ChatUseSystem,
-    }]]--
 
     -- Include Timestamp
     optionsData[#optionsData + 1] = {
@@ -549,6 +576,13 @@ function LUIE_CreateSettings()
         default = {r=LUIE.SV.TimeStampColor[1], g=LUIE.SV.TimeStampColor[2], b=LUIE.SV.TimeStampColor[3]},
     }
 
+    -- Misc Settings
+    optionsData[#optionsData + 1] = {
+        type = "header",
+        name = GetString(SI_LUIE_LAM_MISCHEADER),
+        width = "full",
+    }
+
     -- Toggle XP Bar popup
     optionsData[#optionsData + 1] = {
         type = "checkbox",
@@ -574,23 +608,23 @@ function LUIE_CreateSettings()
     -- Character Profile Header
     optionsData[#optionsData + 1] = {
         type = "header",
-        name = "Character Profile Settings",
+        name = GetString(SI_LUIE_LAM_SVPROFILE_HEADER),
         width = "full",
     }
 
     -- Character Profile Description
     optionsData[#optionsData + 1] = {
         type = "description",
-        text = "By default LuiExtended uses Account Wide settings. You can toggle on character specific settings below. Profiles can be copied between characters, and you can reset the current character or overall account settings below. Note that Account Wide settings are preserved if you toggle back from using individual character profiles.",
+        text = GetString(SI_LUIE_LAM_SVPROFILE_DESCRIPTION),
         width = "full",
     }
 
     -- Use Character Specific Settings Toggle
     optionsData[#optionsData + 1] = {
         type = "checkbox",
-        name = "Enable Character Specific Settings",
-        tooltip = "Switch from using Account Wide settings to using specific character settings.",
-        warning = "This will reload the UI.",
+        name = GetString(SI_LUIE_LAM_SVPROFILE_SETTINGSTOGGLE),
+        tooltip = GetString(SI_LUIE_LAM_SVPROFILE_SETTINGSTOGGLE_TP),
+        warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
         getFunc = function() return LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV end,
         setFunc = function(value) LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV = value ReloadUI() end,
         width = "full",
@@ -600,37 +634,31 @@ function LUIE_CreateSettings()
     optionsData[#optionsData + 1] = {
         type = "dropdown",
         scrollable = true,
-        name = "Copy Character Profile",
-        tooltip = "Select another character to copy settings from.",
+        name = GetString(SI_LUIE_LAM_SVPROFILE_PROFILECOPY),
+        tooltip = GetString(SI_LUIE_LAM_SVPROFILE_PROFILECOPY_TP),
         choices = profileCharacters,
         sort = "name-up",
-        getFunc = function()
-            --if (#profileCharacters >= 1) then
-                --profileQueuedCopy = profileCharacters[1]
-                return profileCharacters
-            --end
-        end,
+        getFunc = function() return profileCharacters end,
         setFunc = function(value) profileQueuedCopy = value end,
         width = "full",
-        disabled = function() return not LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV end,
     }
 
     -- Copy Profile Button
     optionsData[#optionsData + 1] = {
         type = "button",
-        name = "Copy Profile",
-        warning = "Warning this will reload the UI.",
+        name = GetString(SI_LUIE_LAM_SVPROFILE_PROFILECOPYBUTTON),
+        tooltip = GetString(SI_LUIE_LAM_SVPROFILE_PROFILECOPYBUTTON_TP),
+        warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
         func = function() CopyCharacterProfile() end,
         width = "full",
-        disabled = function() return not LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV end,
     }
 
     -- Reset Current Character Settings Button
     optionsData[#optionsData + 1] = {
         type = "button",
-        name = "Reset Current Character",
-        tooltip = "Reset Current Character profile settings.",
-        warning = "This will reload the UI.",
+        name = GetString(SI_LUIE_LAM_SVPROFILE_RESETCHAR),
+        tooltip = GetString(SI_LUIE_LAM_SVPROFILE_RESETCHAR_TP),
+        warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
         func = function() DeleteCurrentProfile(false) ReloadUI() end,
         width = "half",
         disabled = function() return not LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV end,
@@ -639,9 +667,9 @@ function LUIE_CreateSettings()
     -- Reset Account Wide Settings Button
     optionsData[#optionsData + 1] = {
         type = "button",
-        name = "Reset Account Wide",
-        tooltip = "Reset Account Wide profile settings. Note that this will not delete or modify individual character settings.",
-        warning = "This will reload the UI.",
+        name = GetString(SI_LUIE_LAM_SVPROFILE_RESETACCOUNT),
+        tooltip = GetString(SI_LUIE_LAM_SVPROFILE_RESETACCOUNT_TP),
+        warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
         width = "half",
         func = function() DeleteCurrentProfile(true) ReloadUI() end,
     }

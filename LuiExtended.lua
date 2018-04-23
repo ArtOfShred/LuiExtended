@@ -34,7 +34,10 @@ local TimeStampColorize
 -- Default Settings
 LUIE.D = {
     CharacterSpecificSV         = false,
-    --ChatUseSystem               = false,
+    ChatMethod                  = "Print to All Tabs",
+    ChatBypass                  = false,
+    ChatTab                     = { [1] = true, [2] = true, [3] = true, [4] = true, [5] = true },
+    ChatSystemAll               = true,
     TimeStamp                   = true,
     TimeStampFormat             = "HH:m:s",
     TimeStampColor              = { 143/255, 143/255, 143/255 },
@@ -43,8 +46,6 @@ LUIE.D = {
     TempAlertHome               = false,
     TempAlertCampaign           = false,
     WelcomeVersion              = 0,
-    ChatTab                     = { [1] = true, [2] = true, [3] = true, [4] = true, [5] = true },
-    ChatSystemAll               = true,
 
     -- Modules
     UnitFrames_Enabled          = true,
@@ -675,23 +676,36 @@ end
 
 -- Easy Print to Chat
 function LUIE.PrintToChat(msg, isSystem)
-    -- If we have system messages sent to display in all windows then just print to all windows at once, otherwise send messages to individual tabs.
-    if CHAT_SYSTEM.primaryContainer then
-        if isSystem and LUIE.SV.ChatSystemAll then
+
+    if LUIE.SV.ChatMethod == "Print to All Tabs" then
+        if not LUIE.SV.ChatBypass and CHAT_SYSTEM.primaryContainer then
             local msg = LUIE.FormatMessage(msg or "no message", LUIE.SV.TimeStamp)
-            -- Post as a System message so that it can appear in multiple tabs.
+            -- Add timestamps if bypass is not enabled
             CHAT_SYSTEM.primaryContainer:OnChatEvent(nil, msg, CHAT_CATEGORY_SYSTEM)
         else
-            local chatContainer = CHAT_SYSTEM.primaryContainer
-            for i = 1, #chatContainer.windows do
-                if LUIE.SV.ChatTab[i] == true then
-                    local chatWindow = CHAT_SYSTEM.primaryContainer["windows"][i]
-                    local msg = LUIE.FormatMessage(msg or "no message", LUIE.SV.TimeStamp)
-                    chatContainer:AddEventMessageToWindow(chatWindow, msg, CHAT_CATEGORY_SYSTEM)
+            -- Otherwise send as a normal message and let other addons handle this.
+            CHAT_SYSTEM:AddMessage(msg)
+        end
+    else
+        -- If we have system messages sent to display in all windows then just print to all windows at once, otherwise send messages to individual tabs.
+        if CHAT_SYSTEM.primaryContainer then
+            if isSystem and LUIE.SV.ChatSystemAll then
+                local msg = LUIE.FormatMessage(msg or "no message", LUIE.SV.TimeStamp)
+                -- Post as a System message so that it can appear in multiple tabs.
+                CHAT_SYSTEM.primaryContainer:OnChatEvent(nil, msg, CHAT_CATEGORY_SYSTEM)
+            else
+                local chatContainer = CHAT_SYSTEM.primaryContainer
+                for i = 1, #chatContainer.windows do
+                    if LUIE.SV.ChatTab[i] == true then
+                        local chatWindow = CHAT_SYSTEM.primaryContainer["windows"][i]
+                        local msg = LUIE.FormatMessage(msg or "no message", LUIE.SV.TimeStamp)
+                        chatContainer:AddEventMessageToWindow(chatWindow, msg, CHAT_CATEGORY_SYSTEM)
+                    end
                 end
             end
         end
     end
+
 end
 
 -- Returns a formatted number with commas
