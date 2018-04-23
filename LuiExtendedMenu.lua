@@ -303,6 +303,75 @@ function LUIE_CreateSettings()
         width = "half",
     }
 
+    -- Character Profile Header
+    optionsData[#optionsData + 1] = {
+        type = "header",
+        name = GetString(SI_LUIE_LAM_SVPROFILE_HEADER),
+        width = "full",
+    }
+
+    -- Character Profile Description
+    optionsData[#optionsData + 1] = {
+        type = "description",
+        text = GetString(SI_LUIE_LAM_SVPROFILE_DESCRIPTION),
+        width = "full",
+    }
+
+    -- Use Character Specific Settings Toggle
+    optionsData[#optionsData + 1] = {
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_SVPROFILE_SETTINGSTOGGLE),
+        tooltip = GetString(SI_LUIE_LAM_SVPROFILE_SETTINGSTOGGLE_TP),
+        warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
+        getFunc = function() return LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV end,
+        setFunc = function(value) LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV = value ReloadUI() end,
+        width = "full",
+    }
+
+    -- Copy Profile Dropdown
+    optionsData[#optionsData + 1] = {
+        type = "dropdown",
+        scrollable = true,
+        name = GetString(SI_LUIE_LAM_SVPROFILE_PROFILECOPY),
+        tooltip = GetString(SI_LUIE_LAM_SVPROFILE_PROFILECOPY_TP),
+        choices = profileCharacters,
+        sort = "name-up",
+        getFunc = function() return profileCharacters end,
+        setFunc = function(value) profileQueuedCopy = value end,
+        width = "full",
+    }
+
+    -- Copy Profile Button
+    optionsData[#optionsData + 1] = {
+        type = "button",
+        name = GetString(SI_LUIE_LAM_SVPROFILE_PROFILECOPYBUTTON),
+        tooltip = GetString(SI_LUIE_LAM_SVPROFILE_PROFILECOPYBUTTON_TP),
+        warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
+        func = function() CopyCharacterProfile() end,
+        width = "full",
+    }
+
+    -- Reset Current Character Settings Button
+    optionsData[#optionsData + 1] = {
+        type = "button",
+        name = GetString(SI_LUIE_LAM_SVPROFILE_RESETCHAR),
+        tooltip = GetString(SI_LUIE_LAM_SVPROFILE_RESETCHAR_TP),
+        warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
+        func = function() DeleteCurrentProfile(false) ReloadUI() end,
+        width = "half",
+        disabled = function() return not LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV end,
+    }
+
+    -- Reset Account Wide Settings Button
+    optionsData[#optionsData + 1] = {
+        type = "button",
+        name = GetString(SI_LUIE_LAM_SVPROFILE_RESETACCOUNT),
+        tooltip = GetString(SI_LUIE_LAM_SVPROFILE_RESETACCOUNT_TP),
+        warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
+        width = "half",
+        func = function() DeleteCurrentProfile(true) ReloadUI() end,
+    }
+
     -- Modules Header
     optionsData[#optionsData + 1] = {
         type = "header",
@@ -463,75 +532,6 @@ function LUIE_CreateSettings()
         setFunc = function(value) LUIE.SV.StartupInfo = value end,
         width = "full",
         default = LUIE.D.StartupInfo,
-    }
-
-    -- Character Profile Header
-    optionsData[#optionsData + 1] = {
-        type = "header",
-        name = GetString(SI_LUIE_LAM_SVPROFILE_HEADER),
-        width = "full",
-    }
-
-    -- Character Profile Description
-    optionsData[#optionsData + 1] = {
-        type = "description",
-        text = GetString(SI_LUIE_LAM_SVPROFILE_DESCRIPTION),
-        width = "full",
-    }
-
-    -- Use Character Specific Settings Toggle
-    optionsData[#optionsData + 1] = {
-        type = "checkbox",
-        name = GetString(SI_LUIE_LAM_SVPROFILE_SETTINGSTOGGLE),
-        tooltip = GetString(SI_LUIE_LAM_SVPROFILE_SETTINGSTOGGLE_TP),
-        warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
-        getFunc = function() return LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV end,
-        setFunc = function(value) LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV = value ReloadUI() end,
-        width = "full",
-    }
-
-    -- Copy Profile Dropdown
-    optionsData[#optionsData + 1] = {
-        type = "dropdown",
-        scrollable = true,
-        name = GetString(SI_LUIE_LAM_SVPROFILE_PROFILECOPY),
-        tooltip = GetString(SI_LUIE_LAM_SVPROFILE_PROFILECOPY_TP),
-        choices = profileCharacters,
-        sort = "name-up",
-        getFunc = function() return profileCharacters end,
-        setFunc = function(value) profileQueuedCopy = value end,
-        width = "full",
-    }
-
-    -- Copy Profile Button
-    optionsData[#optionsData + 1] = {
-        type = "button",
-        name = GetString(SI_LUIE_LAM_SVPROFILE_PROFILECOPYBUTTON),
-        tooltip = GetString(SI_LUIE_LAM_SVPROFILE_PROFILECOPYBUTTON_TP),
-        warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
-        func = function() CopyCharacterProfile() end,
-        width = "full",
-    }
-
-    -- Reset Current Character Settings Button
-    optionsData[#optionsData + 1] = {
-        type = "button",
-        name = GetString(SI_LUIE_LAM_SVPROFILE_RESETCHAR),
-        tooltip = GetString(SI_LUIE_LAM_SVPROFILE_RESETCHAR_TP),
-        warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
-        func = function() DeleteCurrentProfile(false) ReloadUI() end,
-        width = "half",
-        disabled = function() return not LUIESV.Default[GetDisplayName()]['$AccountWide'].CharacterSpecificSV end,
-    }
-
-    -- Reset Account Wide Settings Button
-    optionsData[#optionsData + 1] = {
-        type = "button",
-        name = GetString(SI_LUIE_LAM_SVPROFILE_RESETACCOUNT),
-        tooltip = GetString(SI_LUIE_LAM_SVPROFILE_RESETACCOUNT_TP),
-        warning = GetString(SI_LUIE_LAM_RELOADUI_BUTTON),
-        width = "half",
-        func = function() DeleteCurrentProfile(true) ReloadUI() end,
     }
 
 ----------------------------------------------------------------------------------------------
