@@ -14,7 +14,7 @@ local fillMessages = {
     "• Separated Slash Commands & Info Panel modules into their own individual menus.",
     "• Updated and cleaned up various menus to be more intuitive.",
     "• Replaced GetSynergyInfo() hook with ZO_Synergy:OnSynergyAbilityChanged() hook in order to fix compatibility issue with Innocent Blade of Aoe addon by dorrino. This is a better way to hook as only the displayed icon is modified and the original synergy info is preserved.",
-    "• Update Chat Printing options to allow the option to print to individual tabs instead of all tabs. This allows you to have loot, experience, etc notifications only display in one chat tab. Also added a toggle to allow system/notification based messages to bypass this and still appear in all tabs.",
+    "• Chat Printing settings have been moved to Chat Announcements - and updated to allow the option to print to individual tabs instead of all tabs. This allows you to have loot, experience, etc notifications only display in one chat tab. Also added a toggle to allow system/notification based messages to bypass this and still appear in all tabs.",
     "• Added an option to choose the color for timestamps prepended to chat messages.",
     "|",
     "|cEEEE00Buffs & Debuffs|r",

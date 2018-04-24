@@ -549,31 +549,32 @@ function LUIE_CreateSettings()
         width = "full",
     }
 
+    optionsDataInfoPanel[#optionsDataInfoPanel + 1] = {
+        -- Unlock InfoPanel
+        type = "checkbox",
+        name = GetString(SI_LUIE_LAM_PNL_UNLOCKPANEL),
+        tooltip = GetString(SI_LUIE_LAM_PNL_UNLOCKPANEL_TP),
+        getFunc = function() return LUIE.InfoPanel.panelUnlocked end,
+        setFunc = LUIE.InfoPanel.SetMovingState,
+        width = "half",
+        default = false,
+        disabled = function() return not LUIE.SV.InfoPanel_Enabled end,
+        resetFunc = LUIE.InfoPanel.ResetPosition,
+    }
+    optionsDataInfoPanel[#optionsDataInfoPanel + 1] = {
+        -- Reset InfoPanel position
+        type = "button",
+        name = GetString(SI_LUIE_LAM_RESETPOSITION),
+        tooltip = GetString(SI_LUIE_LAM_PNL_RESETPOSITION_TP),
+        func = LUIE.InfoPanel.ResetPosition,
+        width = "half",
+    }
+
     -- Info Panel Options Submenu
     optionsDataInfoPanel[#optionsDataInfoPanel + 1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_PNL_HEADER),
         controls = {
-            {
-                -- Unlock InfoPanel
-                type = "checkbox",
-                name = GetString(SI_LUIE_LAM_PNL_UNLOCKPANEL),
-                tooltip = GetString(SI_LUIE_LAM_PNL_UNLOCKPANEL_TP),
-                getFunc = function() return LUIE.InfoPanel.panelUnlocked end,
-                setFunc = LUIE.InfoPanel.SetMovingState,
-                width = "half",
-                default = false,
-                disabled = function() return not LUIE.SV.InfoPanel_Enabled end,
-                resetFunc = LUIE.InfoPanel.ResetPosition,
-            },
-            {
-                -- Reset InfoPanel position
-                type = "button",
-                name = GetString(SI_LUIE_LAM_RESETPOSITION),
-                tooltip = GetString(SI_LUIE_LAM_PNL_RESETPOSITION_TP),
-                func = LUIE.InfoPanel.ResetPosition,
-                width = "half",
-            },
             {
                 type = "header",
                 name = GetString(SI_LUIE_LAM_PNL_ELEMENTS_HEADER),
@@ -8952,28 +8953,29 @@ function LUIE_CreateSettings()
         width = "full",
     }
 
+    optionsDataCombatText[#optionsDataCombatText +1] = {
+        -- Unlock Panels
+        type    = "checkbox",
+        name    = GetString(SI_LUIE_LAM_CT_UNLOCK),
+        tooltip = GetString(SI_LUIE_LAM_CT_UNLOCK_TP),
+        default = LUIE.CombatText.D.unlocked,
+        getFunc = function() return LUIE.CombatText.SV.unlocked end,
+        setFunc = function()
+            LUIE.CombatText.SV.unlocked = not LUIE.CombatText.SV.unlocked
+            for k, _ in pairs (LUIE.CombatText.SV.panels) do
+                _G[k]:SetMouseEnabled(LUIE.CombatText.SV.unlocked)
+                _G[k]:SetMovable(LUIE.CombatText.SV.unlocked)
+                _G[k .. '_Backdrop']:SetHidden(not LUIE.CombatText.SV.unlocked)
+                _G[k .. '_Label']:SetHidden(not LUIE.CombatText.SV.unlocked)
+            end
+        end,
+    }
+
     -- Combat Text - Common Options
     optionsDataCombatText[#optionsDataCombatText +1] = {
         type = "submenu",
         name = GetString(SI_LUIE_LAM_UF_COMMON_HEADER),
         controls = {
-            {
-                -- Unlock Panels
-                type    = "checkbox",
-                name    = GetString(SI_LUIE_LAM_CT_UNLOCK),
-                tooltip = GetString(SI_LUIE_LAM_CT_UNLOCK_TP),
-                default = LUIE.CombatText.D.unlocked,
-                getFunc = function() return LUIE.CombatText.SV.unlocked end,
-                setFunc = function()
-                    LUIE.CombatText.SV.unlocked = not LUIE.CombatText.SV.unlocked
-                    for k, _ in pairs (LUIE.CombatText.SV.panels) do
-                        _G[k]:SetMouseEnabled(LUIE.CombatText.SV.unlocked)
-                        _G[k]:SetMovable(LUIE.CombatText.SV.unlocked)
-                        _G[k .. '_Backdrop']:SetHidden(not LUIE.CombatText.SV.unlocked)
-                        _G[k .. '_Label']:SetHidden(not LUIE.CombatText.SV.unlocked)
-                    end
-                end,
-            },
             {
                 -- In Combat Only
                 type    = "checkbox",
