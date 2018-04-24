@@ -271,15 +271,6 @@ local function SlashGroupLeave()
     GroupLeave()
 end
 
-local function SlashKick(option)
-    -- If the player uses /kick with no option then we need to play the kick emote, otherwise handle everything with the SlashGroupKick function.
-    if option == "" or not SC.SV.SlashGroupKick then
-        PlayEmoteByIndex(109)
-    else
-        SlashGroupKick(option)
-    end
-end
-
 local function SlashGroupKick(option)
     local groupSize = GetGroupSize()
     -- Rather then error out, let the player use /kick and /remove as a substitute for /votekick and /voteremove in LFG
@@ -371,6 +362,15 @@ local function SlashGroupKick(option)
         callAlert(UI_ALERT_CATEGORY_ERROR, nil, (GetString(SI_LUIE_SLASHCMDS_KICK_FAILED_NOVALIDNAME)))
     end
     PlaySound(SOUNDS.GENERAL_ALERT_ERROR)
+end
+
+local function SlashKick(option)
+    -- If the player uses /kick with no option then we need to play the kick emote, otherwise handle everything with the SlashGroupKick function.
+    if option == "" or not SC.SV.SlashGroupKick then
+        PlayEmoteByIndex(109)
+    else
+        SlashGroupKick(option)
+    end
 end
 
 local function SlashGuildInvite(option)
@@ -971,7 +971,7 @@ function SC.RegisterSlashCommands()
     SLASH_COMMANDS["/smuggler"]     = nil
     SLASH_COMMANDS["/fence"]        = nil
     SLASH_COMMANDS["/ready"]        = nil
-    SLASH_COMMANDS["/readycheck"]   = SlashReadyCheck
+    SLASH_COMMANDS["/readycheck"]   = LUIE.SlashReadyCheck
     SLASH_COMMAND_AUTO_COMPLETE:InvalidateSlashCommandCache()
 
     -- Add commands based off menu options

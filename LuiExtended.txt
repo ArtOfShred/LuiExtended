@@ -3,7 +3,7 @@
 ## Version: 5.3.2
 ## APIVersion: 100022
 ## Description: Provides UnitFrames, InfoPanel, Combat Text & Info, Buffs & Debuff Tracking, Chat Announcements and Slash Commands.
-## OptionalDependsOn: LibStub LibAddonMenu-2.0 LibMediaProvider-1.0
+## OptionalDependsOn: LibStub LibAddonMenu-2.0 LibMediaProvider-1.0 LibMsgWin-1.0
 ## SavedVariables: LUIESV
 ##
 ## This Add-on is not created by, affiliated with or sponsored by ZeniMax Media Inc. or its affiliates.
