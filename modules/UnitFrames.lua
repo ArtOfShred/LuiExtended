@@ -187,6 +187,7 @@ UF.D = {
     LowResourceHealth                = 25,
     LowResourceStamina               = 25,
     LowResourceMagicka               = 25,
+    ShieldAlpha                      = 50,
 }
 UF.SV = nil
 
@@ -3004,7 +3005,7 @@ function UF.CustomFramesApplyColours(isMenu)
 
     -- After colour is applied unhide frames, so player can see changes even from menu
     for _, baseName in pairs( { "player", "reticleover", "boss", "AvaPlayerTarget" } ) do
-        shield[4] = ( UF.SV.CustomShieldBarSeparate and not (baseName == "boss") ) and 0.9 or 0.5
+        shield[4] = ( UF.SV.CustomShieldBarSeparate and not (baseName == "boss") ) and 0.9 or ( UF.SV.ShieldAlpha / 100 )
         for i = 0, 6 do
             local unitTag = (i==0) and baseName or ( baseName .. i )
             if UF.CustomFrames[unitTag] then
@@ -3026,7 +3027,7 @@ function UF.CustomFramesApplyColours(isMenu)
     local groupSize = GetGroupSize()
 
     for _, baseName in pairs( { "SmallGroup", "RaidGroup" } ) do
-        shield[4] = ( UF.SV.CustomShieldBarSeparate and not (baseName == "RaidGroup") ) and 0.9 or 0.5
+        shield[4] = ( UF.SV.CustomShieldBarSeparate and not (baseName == "RaidGroup") ) and 0.9 or ( UF.SV.ShieldAlpha / 100 )
         for i = 1, groupSize do
             local unitTag = baseName .. i
             if UF.CustomFrames[unitTag] then

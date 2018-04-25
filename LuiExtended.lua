@@ -3,7 +3,7 @@
 LUIE             = {}
 LUIE.name        = "LuiExtended"
 LUIE.author      = "ArtOfShred, psypanda & SpellBuilder"
-LUIE.version     = "5.3.2"
+LUIE.version     = "5.3.3"
 LUIE.website     = "http://www.esoui.com/downloads/info818-LuiExtended.html"
 LUIE.github      = "https://github.com/ArtOfShred/LuiExtended"
 LUIE.components  = {}

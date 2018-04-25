@@ -9,12 +9,12 @@ local windowManager = WINDOW_MANAGER
 
 local fillMessages = {
     "|cEEEE00General Components|r",
-    "• Implemented an in game changelog that will display on the first load with LUIE enabled when the version number is different than your current version. This changelog can also be viewed from the LUIE addon settings menu.",
-    "• Added the option to switch between using ACCOUNT WIDE or CHARACTER SPECIFIC savedVariables settings. Profiles can be copied between characters or deleted from the LUIExtended addon menu.",
-    "• Separated Slash Commands & Info Panel modules into their own individual menus.",
+    "• Implemented an ingame changelog that will display on the first load with LuiExtended enabled when the version number is different than your current version. This changelog can also be viewed from the addon settings menu.",
+    "• Added the option to switch between using ACCOUNT WIDE or CHARACTER SPECIFIC savedVariables settings. Profiles can be copied between characters or deleted from the addon settings menu.",
+    "• Separated Slash Commands & Info Panel modules into their own individual component menus.",
     "• Updated and cleaned up various menus to be more intuitive.",
-    "• Replaced GetSynergyInfo() hook with ZO_Synergy:OnSynergyAbilityChanged() hook in order to fix compatibility issue with Innocent Blade of Aoe addon by dorrino. This is a better way to hook as only the displayed icon is modified and the original synergy info is preserved.",
-    "• Chat Printing settings have been moved to Chat Announcements - and updated to allow the option to print to individual tabs instead of all tabs. This allows you to have loot, experience, etc notifications only display in one chat tab. Also added a toggle to allow system/notification based messages to bypass this and still appear in all tabs.",
+    "• Replaced GetSynergyInfo() hook with ZO_Synergy:OnSynergyAbilityChanged() hook in order to fix compatibility issue with Innocent Blade of Aoe addon by dorrino. This is a better way to hook, as only the displayed icon is modified and the original synergy info is preserved.",
+    "• Chat Printing settings have been moved to Chat Announcements - and updated to allow the option to print to individual tabs instead of all tabs. This allows you to have loot, experience, etc notifications only display in one chat tab. Also added a toggle to allow system/notification based messages to bypass this and still appear in all tabs. These settings have been reset to default due to this change.",
     "• Added an option to choose the color for timestamps prepended to chat messages.",
     "|",
     "|cEEEE00Buffs & Debuffs|r",
@@ -59,10 +59,11 @@ local fillMessages = {
     "• Added keybinding options for /banker, /merchant, /fence, /ready, /home & /regroup.",
     "|",
     "|cEEEE00Unit Frames|r",
-    "• Removed a conditional that colored the AvA rank icon of players of the same faction white. The AvA icon for players of the same faction will now display the proper faction color.",
     "• Added an option to display the AVA Icon & Rank Number independently from the Title or AVA Rank Name on Target Frames.",
     "• Added an option to set the priority for AVA Rank vs Title Display on Target Frames.",
     "• Added individual options to choose the Low Resource threshold for HP/Magicka/Stamina labels.",
+    "• Added an option to select the transparency of the shield bar when using the default Overlay mode.",
+    "• Fixed an issue where the AvA rank icon of players of the same faction was colored white. The AvA icon for players of the same faction will now display the proper faction color.",
     "• Fixed an issue on Target Frames where rank 0 \"Citizen\" players would display with a rank number of \"ava.\"",
     "• Fixed an issue where changing the Player Frames layout would also reset the position of Group, Raid, Boss, and AvA frames.",
 }
@@ -97,7 +98,7 @@ function LUIE_WelcomeScreen(menu)
 
             -- Add message about support and bugreports
             luiChangeLog:AddText("|")
-            luiChangeLog:AddText(strformat("|c00C000If you have any feedback, bug reports, or other questions about <<1>> please visit ESOUI or Github bla bla bla more text here where to get support and where to submit bugs.|r", LUIE.name))
+            luiChangeLog:AddText(strformat("|c00C000If you have any feedback, bug reports, or other questions about <<1>> please visit ESOUI (http://www.esoui.com/downloads/fileinfo.php?id=818), GitHub (https://github.com/ArtOfShred/LuiExtended/) or contact ArtOfShred at artofshred@artofshred.net.|r", LUIE.name))
             luiChangeLog:AddText("|")
 
             --[[
@@ -122,14 +123,19 @@ function LUIE_WelcomeScreen(menu)
             luiChangeLog.close:SetHandler("OnClicked", function(...) luiChangeLog:SetHidden(true) end)
 
             -- Adjust default slider bar to look better
-            luiChangeLog.slider = windowManager:GetControlByName("LUIE_Welcome_ScreenSlider")
+            luiChangeLog.slider = luiChangeLog:GetNamedChild("Slider")
             luiChangeLog.slider:SetDimensions(11, 64)
             luiChangeLog.slider:SetThumbTexture("EsoUI/Art/ChatWindow/chat_thumb.dds", "EsoUI/Art/ChatWindow/chat_thumb_disabled.dds", nil, 9, 64, nil, nil, 0.3125, nil)
             luiChangeLog.slider:SetBackgroundMiddleTexture("esoui/art/chatwindow/chat_bg_center.dds")
         else
-            --luiChangeLog:SetSlider(23)
             luiChangeLog:SetHidden(false)
         end
+
+        local buffer = luiChangeLog:GetNamedChild("Buffer")
+        local slider = luiChangeLog:GetNamedChild("Slider")
+        buffer:SetScrollPosition(48)
+        slider:SetValue(buffer:GetNumHistoryLines() - 48)
+
     end
     -- Set version to current version.
     LUIESV.Default[GetDisplayName()]['$AccountWide'].WelcomeVersion = LUIE.version

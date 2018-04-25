@@ -7545,7 +7545,7 @@ function LUIE_CreateSettings()
             {
                 -- Custom Unit Frames Separate Shield Bar Height
                 type = "slider",
-                name = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_HEIGHT),
+                name = strformat("\t\t\t\t\t<<1>>", GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_HEIGHT)),
                 tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_HEIGHT_TP),
                 min = 4, max = 12, step = 1,
                 getFunc = function() return LUIE.UnitFrames.SV.CustomShieldBarHeight end,
@@ -7564,6 +7564,18 @@ function LUIE_CreateSettings()
                 width = "full",
                 default = LUIE.UnitFrames.D.CustomShieldBarFull,
                 warning = GetString(SI_LUIE_LAM_RELOADUI_WARNING),
+                disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and not LUIE.UnitFrames.SV.CustomShieldBarSeparate ) end,
+            },
+            {
+                -- Shield Transparency
+                type = "slider",
+                name = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_ALPHA),
+                tooltip = GetString(SI_LUIE_LAM_UF_CFRAMES_SHIELD_ALPHA_TP),
+                min = 0, max = 100, step = 1,
+                getFunc = function() return LUIE.UnitFrames.SV.ShieldAlpha end,
+                setFunc = function(value) LUIE.UnitFrames.SV.ShieldAlpha = value LUIE.UnitFrames.CustomFramesApplyColours(true) end,
+                width = "full",
+                default = LUIE.UnitFrames.D.ShieldAlpha,
                 disabled = function() return not ( LUIE.SV.UnitFrames_Enabled and not LUIE.UnitFrames.SV.CustomShieldBarSeparate ) end,
             },
             {
@@ -8956,6 +8968,7 @@ function LUIE_CreateSettings()
     optionsDataCombatText[#optionsDataCombatText +1] = {
         -- Unlock Panels
         type    = "checkbox",
+        width = "half",
         name    = GetString(SI_LUIE_LAM_CT_UNLOCK),
         tooltip = GetString(SI_LUIE_LAM_CT_UNLOCK_TP),
         default = LUIE.CombatText.D.unlocked,

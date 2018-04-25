@@ -1624,6 +1624,8 @@ ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_HEIGHT",      "Separat
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_SHIELD_SEPERATE_HEIGHT_TP",   "Choose the height for the shield bar.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_SHIELD_OVERLAY",              "Use Full Height Shield Bar")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_SHIELD_OVERLAY_TP",           "When Shield bar is NOT separate, use full-sized shield bar on top of health bar for Player, Target, and Small Group custom frames instead of default half-height overlay bar.")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_SHIELD_ALPHA",                "Set Shield Transparency (Overlay)")
+ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_SHIELD_ALPHA_TP",             "Set the transparency of the shield bar when the overlay option is enabled.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_SMOOTHBARTRANS",              "Use Smooth Bar Transition")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_SMOOTHBARTRANS_TP",           "Use smooth transition on all bars when value get changed. Disabling this option could improve performance a little.")
 ZO_CreateStringId("SI_LUIE_LAM_UF_CFRAMES_CHAMPION",                    "Champion Point Display Method")
