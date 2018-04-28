@@ -73,7 +73,7 @@ ZO_CreateStringId("SI_LUIE_SLASHCMDS_READYCHECK_FAILED_NOTINGRP",       "You mus
 -- InfoPanel.lua -------------------
 ------------------------------------
 
-ZO_CreateStringId("SI_LUIE_PNL_FEEDNOW",                                "Feed Now")
+ZO_CreateStringId("SI_LUIE_PNL_TRAINNOW",                               "Train Now")
 ZO_CreateStringId("SI_LUIE_PNL_MAXED",                                  "Maxed")
 
 ------------------------------------
